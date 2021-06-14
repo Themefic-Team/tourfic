@@ -1,0 +1,36 @@
+.tf_form-row{
+	.tf_label-row {
+	    margin-bottom: 15px;
+	    display: block;
+        font-size: inherit;
+	}
+}
+
+.tf_form-inner {
+    position: relative;
+	display: flex;
+    align-items: center;
+    padding: 0 10px;
+    background: #fff;
+
+    .icon{
+
+    }
+
+   	input[type='text'],
+   	select {
+   		width: 100%;
+   		background: transparent;
+    	border: 0;
+    	box-shadow: none;
+    	height: 45px;
+        font-size: inherit;
+
+    	&:focus{
+    		background: transparent;
+    		border: 0;
+    		outline: 0;
+    	}
+	}
+}
+

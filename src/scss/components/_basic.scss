@@ -1,0 +1,69 @@
+/*================================
+=            Basic CSS            =
+================================*/
+.tourfic-wrap {
+    font-size: 14px;
+    padding-top: 30px;
+    background-color: #fff;
+	ul {
+	    list-style: none;
+	    margin: 0;
+	    padding: 0;
+
+		li {
+
+		}
+	}
+
+	svg{
+		display: block;
+	}
+
+	p {
+		margin-bottom: 3px;
+	}
+
+}
+
+.tf_container{
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.tf_row {
+    margin: 0 -15px;
+    display: flex;
+    flex-wrap: wrap;
+
+    &.thin{
+    	margin: 0 -10px;
+    }
+}
+
+.tf_content,
+.tf_sidebar{
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.tf_content {
+    width: 75%;
+}
+
+.tf_sidebar{
+	width: 25%;
+}
+
+.tf_content-full{
+	width: 100%;
+}
+
+.tf_col-6 {
+    padding: 0 10px;
+    width: 50%;
+}
+
+.mb-15{
+	margin-bottom: 15px;
+}
+/*=====  End of Basic CSS  ======*/

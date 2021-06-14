@@ -1,0 +1,99 @@
+.tf_room-type {
+    margin-top: 40px;
+}
+
+.tf-room{
+    ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.tf_room-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -10px;
+    margin-right: -10px;
+
+	.tf-room {
+	    width: 50%;
+	    padding: 10px;
+	}
+}
+
+.tf-room-header {
+    background: #0076cd;
+    color: #fff;
+    padding: 10px 15px;
+
+	.last-booked {
+	    font-size: 12px;
+	}
+
+	.tf-room-title {
+
+	}
+}
+
+.tf-room-content-wrap {
+    border: 1px solid #ddd;
+    border-top: 0;
+    padding-bottom: 20px;
+}
+
+.tf-room-content-inner {
+    //padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .tf-room-inner-column{
+    	width: 50%;
+    	padding-left: 10px;
+    	padding-right: 10px;
+    	border-right: 1px solid #ddd;
+    }
+}
+
+.tf-sale-tag {
+    background: #cd2653;
+    display: inline-block;
+    color: #fff;
+    padding: 3px 15px;
+    margin-left: -10px;
+    font-size: 10px;
+}
+
+.img-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.price-per-night {
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+.room-selection-wrap {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.room-submit-wrap {
+    text-align: center;
+}
+
+#room-selection {
+    padding: 6px 12px;
+}
+
+.bed-facilities {
+    margin: 8px 0;
+}
+
+.tf_room-type-head {
+    font-weight: 500;
+    font-size: 16px;
+}

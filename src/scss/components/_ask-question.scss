@@ -1,0 +1,61 @@
+#tf-ask-question {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: transparent;
+}
+
+.tf-aq-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background: #000;
+    opacity: .5;
+}
+
+.tf-aq-outer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 50%;
+    width: 100%;
+    max-width: 428px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 4px;
+    overflow: auto;
+    transform: translateY(-50%);
+    max-height: 95%;
+}
+
+span.close-aq {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 25px;
+    text-align: center;
+    height: 25px;
+    background: #e00d0d;
+    color: #fff;
+    line-height: 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.tf-aq-field {
+    position: relative;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.tf-aq-field input,.tf-aq-field textarea {
+    width: 100%;
+}

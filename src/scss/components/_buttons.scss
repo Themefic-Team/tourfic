@@ -1,0 +1,28 @@
+/*===============================
+=            Buttons            =
+===============================*/
+.tf_button {
+    background: #0071c2;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+    border: 1px solid #0071c2;
+    border-radius: 2px;
+    padding: 20px;
+
+    &:hover{
+    	text-decoration: none;
+    }
+
+
+
+    &.btn-outline {
+        background: #fff;
+        color: #333;
+        border-color: #333;
+    }
+}
+
+/*=====  End of Buttons  ======*/

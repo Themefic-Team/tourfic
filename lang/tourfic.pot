@@ -1,0 +1,474 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Tourfic - Tour / Travel / Trip Booking for WooCommerce\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-03 05:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.5.0; wp-5.6\n"
+"X-Domain: tourfic"
+
+#: admin/inc/tf-field-functions.php:37
+msgid "# Room Title"
+msgstr ""
+
+#: inc/post-type.php:33
+#, php-format
+msgid "%1$s Attributes"
+msgstr ""
+
+#: inc/post-type.php:29
+#, php-format
+msgid "%1$s Image"
+msgstr ""
+
+#: inc/post-type.php:36
+#, php-format
+msgid "%2$s list"
+msgstr ""
+
+#: inc/post-type.php:35
+#, php-format
+msgid "%2$s list navigation"
+msgstr ""
+
+#: inc/shortcodes.php:58
+#, php-format
+msgid "%s properties"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:207
+msgid "Add Gallery Images"
+msgstr ""
+
+#: inc/tourfic-functions.php:471 inc/tourfic-functions.php:507
+msgid "Add Image"
+msgstr ""
+
+#: inc/post-type.php:17
+msgid "Add New"
+msgstr ""
+
+#: inc/post-type.php:18
+#, php-format
+msgid "Add New %1$s"
+msgstr ""
+
+#: inc/post-type.php:142
+msgid "Add new Destinations"
+msgstr ""
+
+#: inc/post-type.php:149
+msgid "Add or remove Destination"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:232
+msgid "Add Property Description"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:243
+msgid "Add Property Informations"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:181
+msgid "Add Room"
+msgstr ""
+
+#: templates/single-tourfic.php:153 admin/inc/tf-custom-fields.php:157
+#: admin/inc/tf-custom-fields.php:240
+msgid "Additional Information"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:185 inc/tf-woocommerce-class.php:232
+msgid "Adults"
+msgstr ""
+
+#: inc/post-type.php:21
+#, php-format
+msgid "All %2$s"
+msgstr ""
+
+#: templates/single-tourfic.php:92
+msgid "All Available Rooms"
+msgstr ""
+
+#: inc/post-type.php:138
+msgid "All Destination"
+msgstr ""
+
+#: inc/post-type.php:155
+msgid "Back to Destination"
+msgstr ""
+
+#. Author of the plugin
+msgid "BootPeople"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:199 inc/tf-woocommerce-class.php:242
+msgid "Check-in Date"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:48
+msgid "Check-in date missing."
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:206 inc/tf-woocommerce-class.php:247
+msgid "Check-out Date"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:51
+msgid "Check-out date missing."
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:192 inc/tf-woocommerce-class.php:237
+msgid "Children"
+msgstr ""
+
+#: inc/post-type.php:150
+msgid "Choose from the most used Destination"
+msgstr ""
+
+#: templates/single-tourfic.php:50
+msgid "Copied!"
+msgstr ""
+
+#: templates/single-tourfic.php:49
+msgid "Copy link"
+msgstr ""
+
+#: inc/options.php:177
+msgid "Custom CSS"
+msgstr ""
+
+#: inc/options.php:164
+msgid "Default is: <code>tourfic</code>"
+msgstr ""
+
+#: templates/single-tourfic.php:152 admin/inc/tf-field-functions.php:71
+msgid "Description"
+msgstr ""
+
+#: inc/post-type.php:135 inc/post-type.php:137 inc/post-type.php:159
+msgid "Destination"
+msgstr ""
+
+#: inc/tourfic-functions.php:467 inc/tourfic-functions.php:496
+msgid "Destination Image"
+msgstr ""
+
+#: inc/post-type.php:154
+msgid "Destination list"
+msgstr ""
+
+#: inc/post-type.php:153
+msgid "Destination list navigation"
+msgstr ""
+
+#: inc/post-type.php:136
+msgid "Destinations"
+msgstr ""
+
+#: inc/post-type.php:19
+#, php-format
+msgid "Edit %1$s"
+msgstr ""
+
+#: inc/post-type.php:139
+msgid "Edit Destinations"
+msgstr ""
+
+#: inc/post-type.php:112 inc/post-type.php:120
+#, php-format
+msgid "Enter %s name here"
+msgstr ""
+
+#: inc/options.php:170
+msgid "Extras"
+msgstr ""
+
+#: inc/options.php:171
+msgid "Extras Options for Advance Useages"
+msgstr ""
+
+#: inc/post-type.php:34
+#, php-format
+msgid "Filter %2$s list"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:218
+msgid "Formatted Location"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:154 admin/inc/tf-custom-fields.php:189
+msgid "Gallery"
+msgstr ""
+
+#: inc/options.php:149
+msgid "General"
+msgstr ""
+
+#: inc/options.php:150
+msgid "General Options"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://psdtowpservice.com"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://psdtowpservice.com/tourfic"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:228
+msgid "Information"
+msgstr ""
+
+#: inc/tourfic-functions.php:36
+msgid "Leave a Review"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:155
+msgid "Location"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:214
+msgid "Location Options"
+msgstr ""
+
+#: inc/post-type.php:20
+#, php-format
+msgid "New %1$s"
+msgstr ""
+
+#: inc/post-type.php:143
+msgid "New Destinations name"
+msgstr ""
+
+#: inc/post-type.php:25
+#, php-format
+msgid "No %2$s found"
+msgstr ""
+
+#: inc/post-type.php:26
+#, php-format
+msgid "No %2$s found in Trash"
+msgstr ""
+
+#: inc/post-type.php:152
+msgid "No Destination"
+msgstr ""
+
+#: inc/post-type.php:151
+msgid "No Destination found"
+msgstr ""
+
+#: inc/options.php:158
+msgid "Page template: <code>Tourfic - Search Result</code> must be selected"
+msgstr ""
+
+#: inc/post-type.php:144
+msgid "Parent Destinations"
+msgstr ""
+
+#: inc/post-type.php:145
+msgid "Parent Destinations:"
+msgstr ""
+
+#: inc/post-type.php:147
+msgid "Popular Destination"
+msgstr ""
+
+#: admin/inc/tf-field-functions.php:80
+msgid "Price"
+msgstr ""
+
+#: inc/tourfic-functions.php:396
+msgid "Price per night as low as"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:156
+msgid "Property Description"
+msgstr ""
+
+#: inc/post-type.php:31
+#, php-format
+msgid "Remove %1$s Image"
+msgstr ""
+
+#: inc/tourfic-functions.php:472 inc/tourfic-functions.php:508
+msgid "Remove Image"
+msgstr ""
+
+#: inc/tourfic-functions.php:37
+msgid "Reply"
+msgstr ""
+
+#: templates/single-tourfic.php:58
+msgid "Reserve"
+msgstr ""
+
+#: templates/single-tourfic.php:154
+msgid "Reviews"
+msgstr ""
+
+#: admin/inc/tf-field-functions.php:57
+msgid "Room Name"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:167
+msgid "Room Options"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:178 inc/tf-woocommerce-class.php:227
+msgid "Room Selected"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:171 inc/tf-woocommerce-class.php:222
+msgid "Room Type"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:153
+msgid "Rooms"
+msgstr ""
+
+#: admin/inc/tf-field-functions.php:88
+msgid "Sale Price"
+msgstr ""
+
+#: inc/layouts.php:115 inc/layouts.php:223 inc/shortcodes.php:326
+msgid "Search"
+msgstr ""
+
+#: inc/post-type.php:24
+#, php-format
+msgid "Search %2$s"
+msgstr ""
+
+#: inc/post-type.php:146
+msgid "Search Destination"
+msgstr ""
+
+#: inc/layouts.php:64
+msgid "See availability"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:54
+msgid "Select Adult(s)."
+msgstr ""
+
+#: inc/options.php:163
+msgid "Select post type slug"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:57
+msgid "Select Room(s)."
+msgstr ""
+
+#: inc/options.php:157
+msgid "Select Search Result Page"
+msgstr ""
+
+#: inc/post-type.php:148
+msgid "Separate Destination with commas"
+msgstr ""
+
+#: inc/post-type.php:30
+#, php-format
+msgid "Set %1$s Image"
+msgstr ""
+
+#: inc/options.php:25 inc/options.php:33 inc/options.php:34
+msgid "Settings"
+msgstr ""
+
+#: templates/single-tourfic.php:36
+msgid "Share on Facebook"
+msgstr ""
+
+#: templates/single-tourfic.php:41
+msgid "Share on Twitter"
+msgstr ""
+
+#: templates/single-tourfic.php:46
+msgid "Share this link"
+msgstr ""
+
+#: admin/inc/tf-field-functions.php:64
+msgid "Short Description"
+msgstr ""
+
+#: inc/post-type.php:16
+#, php-format
+msgctxt "singular tourfic post type name"
+msgid "%1$s"
+msgstr ""
+
+#: inc/tourfic-functions.php:35
+msgid "Submit"
+msgstr ""
+
+#: inc/post-type.php:71
+msgid "Tour"
+msgstr ""
+
+#. Name of the plugin
+msgid "Tourfic - Tour / Travel / Trip Booking for WooCommerce"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:38
+msgid "Tourfic Options"
+msgstr ""
+
+#: inc/post-type.php:28
+msgctxt "tourfic post type menu name"
+msgid "Tourfic"
+msgstr ""
+
+#: inc/post-type.php:15
+#, php-format
+msgctxt "tourfic post type name"
+msgid "%2$s"
+msgstr ""
+
+#: tourfic.php:247
+msgid "Tourfic requires WooCommerce to be activated "
+msgstr ""
+
+#: inc/post-type.php:72
+msgid "Tours"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:60
+msgid "Unknown Error! Please try again."
+msgstr ""
+
+#: inc/post-type.php:141
+msgid "Update Destinations name"
+msgstr ""
+
+#: inc/post-type.php:32
+#, php-format
+msgid "Use as %1$s Image"
+msgstr ""
+
+#: inc/post-type.php:22
+#, php-format
+msgid "View %1$s"
+msgstr ""
+
+#: inc/post-type.php:23
+#, php-format
+msgid "View %2$s"
+msgstr ""
+
+#: inc/post-type.php:140
+msgid "View Destinations"
+msgstr ""
