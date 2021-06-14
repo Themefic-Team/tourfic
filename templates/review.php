@@ -88,7 +88,7 @@ if ( post_password_required() ) {
 						sprintf( // WPCS: XSS OK.
 							/* translators: 1: number of comments */
 							esc_html( _nx( 'Based on %1$s review', 'Based on %1$s reviews', get_comments_number(), 'comments title', 'tourfic' ) ),
-							number_format_i18n( get_comments_number() ),
+							number_format_i18n( get_comments_number() )
 						)
 					);
 

@@ -104,13 +104,15 @@
 }
 
 .recomended_place_info_header {
-    text-align: left;
+    text-align: center;
     padding: 10px 18px;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,.65);
     display: inline-block;
     border-radius: 4px;
-    margin-top: 10px;
-    margin-left: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
 }
 
 .single_recomended_item:hover {
@@ -239,12 +241,13 @@ span.review_num {
 
 .tf_destination-wrap {
     border-left: 0;
+    min-width: 150px;
     width: 25%;
 }
 
 .tf_submit-wrap {
     border-right: 0;
-    background: #0071c2;
+    background: #00698F;
 }
 
 .tf_selectdate-wrap .tf_input-inner,
@@ -279,12 +282,14 @@ span.review_num {
     }
 }
 
-
+.daterangepicker .active.start-date {
+	pointer-events: none;
+}
 
 .tf_destination-wrap .tf_input-inner,
 .tf_selectdate-wrap,
 .tf_selectperson-wrap {
-    padding: 0 7px;
+    padding: 0 15px;
 }
 
 .person-sep {
@@ -334,4 +339,35 @@ span.review_num {
 .tf_submit-wrap button {
     width: 100%;
     height: 100%;
+}
+
+.tf_destination-wrap,
+.tf_selectdate-wrap,
+.tf_selectperson-wrap,
+.tf_submit-wrap {
+    @media screen and (max-width: 767px) {
+        width: 100%;
+        display: block;
+    }
+}
+
+.tf_selectdate-wrap,
+.tf_selectperson-wrap {
+    @media screen and (max-width: 767px) {
+        padding: 20px !important;
+        border-bottom: 1px solid #ccc;
+    }
+}
+
+.tf_destination-wrap{
+    @media screen and (max-width: 767px) {
+        padding: 10px !important;
+        border-bottom: 1px solid #ccc;
+    }
+}
+
+.tf_destination-wrap .tf_input-inner {
+    @media screen and (max-width: 767px) {
+        padding: 0 10px;
+    }
 }

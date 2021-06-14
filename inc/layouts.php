@@ -18,7 +18,7 @@ function tourfic_archive_single() {
 				<div class="tf_property_block_main_row">
 					<div class="tf_item_main_block">
 						<div class="tf-hotel__title-wrap">
-							<a href="<?php the_permalink(); ?>"><h3 class="tourfic_hotel-title"><?php the_title(); ?></h3></a>
+							<a href="<?php echo get_the_permalink().'?destination='.$_GET['destination'].'&adults='.$_GET['adults'].'&children='.$_GET['children'].'&room='.$_GET['room'].'&check-in-date='.$_GET['check-in-date'].'&check-out-date='.$_GET['check-out-date']; ?>"><h3 class="tourfic_hotel-title"><?php the_title(); ?></h3></a>
 						</div>
 						<?php tourfic_map_link(); ?>
 					</div>
@@ -39,25 +39,23 @@ function tourfic_archive_single() {
 						?>
 						<div class="room_details">
 							<div class="featuredRooms">
-								<div class="roomrow_flex">
+                               <div class="prco-ltr-right-align-helper">
+                                    <div class="tf-archive-shortdesc"><?php echo do_shortcode( $short_desc ); ?></div>
+                                </div>
+                                <div class="roomNameInner">
+                                    <div class="room_link">
+                                       <div class="roomrow_flex">
+                                            <div class="roomName_flex">
+                                                <div class="tf-archive-roomname"><strong><?php echo esc_html( $name ); ?></strong> <span class="dash">-</span> <span><?php tourfic_pax( $pax ); ?></span></div>
+                                                <ul class="tf-archive-desc"><?php echo do_shortcode( $desc ); ?></ul>
+                                            </div>
 
-									<div class="roomName_flex">
-										<div class="roomNameInner">
-											<div class="room_link">
-												<div class="tf-archive-roomname"><strong><?php echo esc_html( $name ); ?></strong> <span class="dash">-</span> <span><?php tourfic_pax( $pax ); ?></span></div>
-												<ul class="tf-archive-desc"><?php echo do_shortcode( $desc ); ?></ul>
-												<div class="bui-price-display__value prco-inline-block-maker-helper" aria-hidden="true"><?php echo tourfic_price_html($price, $sale_price); ?></div>
-											</div>
-										</div>
-									</div>
-
-									<div class="roomPrice roomPrice_flex sr_discount">
-										<div class="prco-ltr-right-align-helper">
-											<div class="tf-archive-shortdesc"><?php echo do_shortcode( $short_desc ); ?></div>
-										</div>
-									</div>
-
-								</div>
+                                            <div class="roomPrice roomPrice_flex sr_discount">
+                                                <div class="bui-price-display__value prco-inline-block-maker-helper" aria-hidden="true"><?php echo tourfic_price_html($price, $sale_price); ?></div>
+                                            </div>
+                                        </div>       
+                                    </div>
+                                </div>
 							</div>
 						</div>
 					<?php endforeach; ?>
@@ -65,7 +63,7 @@ function tourfic_archive_single() {
 				<!-- Room details end -->
 
 				<div class="availability-btn-area">
-					<a href="<?php the_permalink(); ?>" class="button tf_button"><?php esc_html_e( 'Book Now', 'tourfic' ); ?></a>
+					<a href="<?php echo get_the_permalink().'?destination='.$_GET['destination'].'&adults='.$_GET['adults'].'&children='.$_GET['children'].'&room='.$_GET['room'].'&check-in-date='.$_GET['check-in-date'].'&check-out-date='.$_GET['check-out-date']; ?>" class="button tf_button"><?php esc_html_e( 'Book Now', 'tourfic' ); ?></a>
 				</div>
 				<?php endif; ?>
 
@@ -109,21 +107,20 @@ function tourfic_item_review_block(){
 	<div class="tf_item_review_block">
 		<div class="reviewFloater reviewFloaterBadge__container">
 		    <div class="sr-review-score">
-		        <a class="sr-review-score__link" href="<?php the_permalink(); ?>" target="_blank">
+		        <a class="sr-review-score__link" href="<?php echo get_the_permalink().'?destination='.$_GET['destination'].'&adults='.$_GET['adults'].'&children='.$_GET['children'].'&room='.$_GET['room'].'&check-in-date='.$_GET['check-in-date'].'&check-out-date='.$_GET['check-out-date']; ?>" target="_blank">
 		            <div class="bui-review-score c-score bui-review-score--end">
 		                <div class="bui-review-score__badge"> <?php _e( tourfic_avg_ratings($tf_overall_rate['review']) ); ?> </div>
 		                <div class="bui-review-score__content">
-		                    <div class="bui-review-score__title"> <?php esc_html_e( 'Review score', 'tourfic' ); ?> </div>
+		                    <div class="bui-review-score__title"> <?php esc_html_e( 'Customer Rating', 'tourfic' ); ?> </div>
 		                    <div class="bui-review-score__text">
 							<?php
 							$comments_title = apply_filters(
 								'tf_comment_form_title',
 								sprintf( // WPCS: XSS OK.
 									/* translators: 1: number of comments */
-									esc_html( _nx( '%1$s review', '%1$s reviews', get_comments_number(), 'comments title', 'tourfic' ) ),
-									number_format_i18n( get_comments_number() ),
-								)
-							);
+									esc_html( _nx( 'Based on %1$s review', 'Based on %1$s reviews', get_comments_number(), 'comments title', 'tourfic' ) ),
+									number_format_i18n( get_comments_number() )
+								));
 
 							echo esc_html( $comments_title );
 							?>
@@ -160,7 +157,7 @@ function tourfic_get_sidebar( $placement = 'single' ){
 
 	<!-- Start Booking widget -->
 	<form class="tf_booking-widget widget" method="get" autocomplete="off" action="<?php echo tourfic_booking_search_action(); ?>">
-		<div class="tf_widget-title"><?php esc_html_e( 'Search', 'tourfic' ); ?></div>
+		<!-- <div class="tf_widget-title"><?php esc_html_e( 'Search', 'tourfic' ); ?></div> -->
 
 		<!-- Start form row -->
 		<?php tourfic_booking_widget_field(
@@ -168,7 +165,7 @@ function tourfic_get_sidebar( $placement = 'single' ){
 				'type' => 'text',
 				'svg_icon' => 'search',
 				'name' => 'destination',
-				'label' => 'Destination/property name:',
+				'label' => 'Enter Your Destination:',
 				'placeholder' => 'Destination',
 				'required' => 'true',
 			)
@@ -237,8 +234,8 @@ function tourfic_get_sidebar( $placement = 'single' ){
 					'type' => 'text',
 					'svg_icon' => 'calendar_today',
 					'name' => 'check-in-out-date',
-					'placeholder' => 'Check-in/Check-out date',
-					'label' => 'Check-in/Check-out date',
+					'placeholder' => 'Check-in/Check-out Date',
+					'label' => 'Check-in & Check-out date',
 					'required' => 'true',
 					'disabled' => 'true',
 				)

@@ -291,7 +291,7 @@ msgid "Price"
 msgstr ""
 
 #: inc/tourfic-functions.php:396
-msgid "Price per night as low as"
+msgid "Price per night"
 msgstr ""
 
 #: admin/inc/tf-custom-fields.php:156

@@ -1,26 +1,24 @@
 <?php
+// don't call the file directly
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
 
 add_action( 'wp_ajax_tf_add_new_room', 'tourfic_add_room_data_action' );
 function tourfic_add_room_data_action(){
 
 	$key = sanitize_text_field( $_POST['key'] );
 
-	ob_start();
-
 	echo tourfic_add_single_room_wrap( array(
 		'key' => $key,
 	) );
-
-	$output = ob_get_clean();
-
-	echo $output;
 
 	die();
 }
 
 // Single room data
 function tourfic_add_single_room_wrap( $args ){
-    $defaults = array (
+    $defaults = array(
         'key' => '',
         'room' => array(),
     );
@@ -55,24 +53,24 @@ function tourfic_add_single_room_wrap( $args ){
 
 				<div class="tf-field-wrap label-left">
 					<div class="tf-label">
-						<label for="tf_room-name-<?php _e( $key ); ?>"><?php esc_html_e( 'Room Name', 'tourfic' ); ?></label>
+						<label for="tf_room-name-<?php echo esc_attr( $key ); ?>"><?php esc_html_e( 'Room Name', 'tourfic' ); ?></label>
 					</div>
-				     <input type="text" name="tf_room[<?php _e( $key ); ?>][name]" class="tf_postbox-title-get tf_room-name" id="tf_room-name-<?php _e( $key ); ?>" value="<?php echo esc_attr( $name ); ?>">
+				     <input type="text" name="tf_room[<?php echo esc_attr( $key ); ?>][name]" class="tf_postbox-title-get tf_room-name" id="tf_room-name-<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $name ); ?>">
 				</div>
 
 				<div class="tf-field-wrap label-left">
 					<div class="tf-label">
-						<label for="tf_room-short_desc-<?php _e( $key ); ?>"><?php esc_html_e( 'Short Description', 'tourfic' ); ?></label>
+						<label for="tf_room-short_desc-<?php echo esc_attr( $key ); ?>"><?php esc_html_e( 'Short Description', 'tourfic' ); ?></label>
 					</div>
-				    <textarea name="tf_room[<?php _e( $key ); ?>][short_desc]" class="tf_room-short_desc" id="tf_room-short_desc-<?php _e( $key ); ?>" rows="5"><?php _e( $short_desc ); ?></textarea>
+				    <textarea name="tf_room[<?php echo esc_attr( $key ); ?>][short_desc]" class="tf_room-short_desc" id="tf_room-short_desc-<?php echo esc_attr( $key ); ?>" rows="5"><?php echo esc_html( $short_desc ); ?></textarea>
 				</div>
 
 				<div class="tf-field-wrap label-left">
 					<div class="tf-label">
-						<label for="tf_room-desc-<?php _e( $key ); ?>"><?php esc_html_e( 'Room Features', 'tourfic' ); ?></label>
+						<label for="tf_room-desc-<?php echo esc_attr( $key ); ?>"><?php esc_html_e( 'Room Features', 'tourfic' ); ?></label>
 					</div>
 					<div class="field-desc">
-					    <textarea name="tf_room[<?php _e( $key ); ?>][desc]" class="tf_room-desc" rows="5" id="tf_room-desc-<?php _e( $key ); ?>"><?php _e( $desc ); ?></textarea>
+					    <textarea name="tf_room[<?php echo esc_attr( $key ); ?>][desc]" class="tf_room-desc" rows="5" id="tf_room-desc-<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $desc ); ?></textarea>
 				    	<p>You can find icon class <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Here</a>. Example Shortcode: <code><?php esc_attr_e( '[tf_list icon="fa-wifi" text="Free Wifi"]' ); ?></code></p></div>
 				</div>
 
@@ -80,60 +78,51 @@ function tourfic_add_single_room_wrap( $args ){
 					<div class="tf-col-6">
 						<div class="tf-field-wrap">
 							<div class="tf-label">
-								<label for="tf_room-price-<?php _e( $key ); ?>"><?php esc_html_e( 'Price', 'tourfic' ); ?></label>
+								<label for="tf_room-price-<?php echo esc_attr( $key ); ?>"><?php esc_html_e( 'Price', 'tourfic' ); ?></label>
 							</div>
-						    <input type="number" step="any" min="0" name="tf_room[<?php _e( $key ); ?>][price]" class="tf_room-price" id="tf_room-price-<?php _e( $key ); ?>" value="<?php echo esc_attr( $price ); ?>">
+						    <input type="number" step="any" min="0" name="tf_room[<?php echo esc_attr( $key ); ?>][price]" class="tf_room-price" id="tf_room-price-<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $price ); ?>">
 						</div>
 					</div>
 					<div class="tf-col-6">
 						<div class="tf-field-wrap">
 							<div class="tf-label">
-								<label for="tf_room-sale_price-<?php _e( $key ); ?>"><?php esc_html_e( 'Sale Price',  'tourfic' ); ?></label>
+								<label for="tf_room-sale_price-<?php echo esc_attr( $key ); ?>"><?php esc_html_e( 'Sale Price',  'tourfic' ); ?></label>
 							</div>
-						    <input type="number" step="any" min="0" name="tf_room[<?php _e( $key ); ?>][sale_price]" class="tf_room-sale_price" id="tf_room-sale-price-<?php _e( $key ); ?>" value="<?php echo esc_attr( $sale_price ); ?>">
+						    <input type="number" step="any" min="0" name="tf_room[<?php echo esc_attr( $key ); ?>][sale_price]" class="tf_room-sale_price" id="tf_room-sale-price-<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $sale_price ); ?>">
 						</div>
 					</div>
 				</div>
 
 				<div class="tf-field-wrap label-left">
 					<div class="tf-label">
-						<label for="tf_room-pax-<?php _e( $key ); ?>"><?php esc_html_e( 'Pax',  'tourfic' ); ?></label>
+						<label for="tf_room-pax-<?php echo esc_attr( $key ); ?>"><?php esc_html_e( 'Pax',  'tourfic' ); ?></label>
 					</div>
-					<input type="number" step="any" min="0" name="tf_room[<?php _e( $key ); ?>][pax]" class="tf_room-pax" id="tf_room-sale-price-<?php _e( $key ); ?>" value="<?php echo esc_attr( $pax ); ?>">
+					<input type="number" step="any" min="0" name="tf_room[<?php echo esc_attr( $key ); ?>][pax]" class="tf_room-pax" id="tf_room-sale-price-<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $pax ); ?>">
 				</div>
 
 			</div>
 		</div>
 	</div>
-
 	<?php
 	$output = ob_get_clean();
-
 	return $output;
-
 }
 
 add_action( 'wp_ajax_tf_add_new_faq', 'tourfic_add_faq_data_action' );
 function tourfic_add_faq_data_action(){
 
 	$key = sanitize_text_field( $_POST['key'] );
-
-	ob_start();
-
+    
 	echo tourfic_add_single_faq( array(
 		'key' => $key,
 	) );
-
-	$output = ob_get_clean();
-
-	echo $output;
-
+    
 	die();
 }
 
 // Single room data
 function tourfic_add_single_faq( $args ){
-    $defaults = array (
+    $defaults = array(
         'key' => '',
         'faq' => '',
     );
@@ -167,16 +156,16 @@ function tourfic_add_single_faq( $args ){
 
 				<div class="tf-field-wrap label-left">
 					<div class="tf-label">
-						<label for="tf_faq-name-<?php _e( $key ); ?>"><?php esc_html_e( 'FAQ Title', 'tourfic' ); ?></label>
+						<label for="tf_faq-name-<?php echo esc_attr( $key ); ?>"><?php esc_html_e( 'FAQ Title', 'tourfic' ); ?></label>
 					</div>
-				     <input type="text" name="tf_faqs[<?php _e( $key ); ?>][name]" class="tf_postbox-title-get tf_faq-name" id="tf_faq-name-<?php _e( $key ); ?>" value="<?php echo esc_attr( $name ); ?>">
+				     <input type="text" name="tf_faqs[<?php echo esc_attr( $key ); ?>][name]" class="tf_postbox-title-get tf_faq-name" id="tf_faq-name-<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $name ); ?>">
 				</div>
 
 				<div class="tf-field-wrap label-left">
 					<div class="tf-label">
-						<label for="tf_faq-desc-<?php _e( $key ); ?>"><?php esc_html_e( 'Description', 'tourfic' ); ?></label>
+						<label for="tf_faq-desc-<?php echo esc_attr( $key ); ?>"><?php esc_html_e( 'Description', 'tourfic' ); ?></label>
 					</div>
-				    <textarea name="tf_faqs[<?php _e( $key ); ?>][desc]" class="tf_faq-desc" rows="5" id="tf_faq-desc-<?php _e( $key ); ?>"><?php _e( $desc ); ?></textarea>
+				    <textarea name="tf_faqs[<?php echo esc_attr( $key ); ?>][desc]" class="tf_faq-desc" rows="5" id="tf_faq-desc-<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $desc ); ?></textarea>
 				</div>
 
 			</div>
@@ -185,8 +174,5 @@ function tourfic_add_single_faq( $args ){
 
 	<?php
 	$output = ob_get_clean();
-
 	return $output;
-
 }
-

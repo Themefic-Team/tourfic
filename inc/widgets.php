@@ -45,11 +45,14 @@ class Tourfic_TourFilter extends WP_Widget {
 
 		$get_terms = get_terms( $taxonomy );
 
+        $destination_name = !empty( $_GET['destination'] ) ? $_GET['destination'] : '';
+
 		echo "<ul class='tf-popular_filter'>";
 		foreach ( $get_terms as $key => $term ) {
 			$name = $term->name;
 			$id = $term->term_id;
-			$count = $show_count ? '<span>'.$term->count.'</span>' : '';
+			$default_count = $term->count;
+			$count = $show_count ? '<span>'.tf_term_count( $term->slug, $destination_name, $default_count ).'</span>' : '';
 
 			echo "<li><label><input type='checkbox' name='tf_filters[]' value='{$id}'/> {$name}</label> {$count}</li>";
 		}
@@ -190,7 +193,7 @@ class Tourfic_Similar_Tours extends WP_Widget {
 	        }
 			?>
 			<div class="ni-buttons">
-				<a href="<?php echo tourfic_booking_search_action(); ?>?destination=<?php _e( $terms[0]->name ); ?>" class="button tf_button btn-outline"><?php esc_html_e( $btn_label ); ?></a>
+				<a href="<?php echo tourfic_booking_search_action().'?destination='.esc_attr( $terms[0]->name ).'&adults='.$_GET['adults'].'&children='.$_GET['children'].'&room='.$_GET['room'].'&check-in-date='.$_GET['check-in-date'].'&check-out-date='.$_GET['check-out-date']; ?>" class="button tf_button btn-outline"><?php esc_html_e( $btn_label ); ?></a>
 			</div>
 		</div>
 		<!-- End similar tour widget -->

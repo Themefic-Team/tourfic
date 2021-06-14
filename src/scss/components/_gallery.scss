@@ -2,3 +2,7 @@
     position: relative;
     overflow: hidden;
 }
+.tf_gallery-wrap .swiper-button-prev,
+.tf_gallery-wrap .swiper-container-rtl .swiper-button-next {
+	background-image: '';
+}

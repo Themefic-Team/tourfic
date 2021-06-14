@@ -9,7 +9,7 @@
   display: block;
   width: 100%;
   min-height: 149px;
-  padding: 16px;
+  padding: 20px;
   margin: 16px 0;
   border: 1px solid #c6c6c6;
   border-radius: 3px;
@@ -90,7 +90,7 @@
   display: inline-block;
   margin: 0 !important;
   padding-right: 2px;
-  color: #07c;
+  color: #00698F;
 }
 .single-tour-wrap:first-child .single-tour-inner {
     margin-top: 0;
@@ -182,7 +182,7 @@
 }
 
 .bui-review-score__badge {
-    background: #003580;
+    background: #00698F;
     color: #fff;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -199,10 +199,9 @@
     -webkit-justify-content: center;
     justify-content: center;
     vertical-align: baseline;
-    border-radius: 6px 6px 6px 0;
-    height: 32px;
-    width: 32px;
-    min-width: 32px;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
 }
 
 .bui-review-score__content {
@@ -282,7 +281,7 @@
 }
 
 .bui-price-display__value {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 24px;
     font-weight: 600;
     color: #383838;
@@ -311,7 +310,8 @@
 
 .tf-archive-shortdesc {
     white-space: break-spaces;
-    line-height: 1.9;
+    line-height: 1.8;
+    margin: 10px 0 15px;
 }
 
 .tf-archive-desc {
@@ -355,7 +355,7 @@
         .single-tour-inner{
             margin: 0;
             height: 100%;
-            padding: 12px;
+            padding: 20px;
         }
 
         .tourfic-single-left {
@@ -406,8 +406,21 @@
             max-width: 100%;
         }
 
-        .roomPrice.roomPrice_flex.sr_discount {
+        /*.roomPrice.roomPrice_flex.sr_discount {
             display: none;
+        }*/
+        
+        .availability-btn-area .tf_button {
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        .roomPrice.roomPrice_flex.sr_discount {
+            text-align: left;
+        }
+        
+        .roomPrice.roomPrice_flex.sr_discount {
+            margin: 10px 0;
         }
     }
 }
@@ -475,4 +488,8 @@
 
 .tf_pax {
     white-space: nowrap;
+}
+
+.tf_room-table {
+    overflow-x: auto;
 }

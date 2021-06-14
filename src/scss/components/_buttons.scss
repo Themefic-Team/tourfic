@@ -2,13 +2,13 @@
 =            Buttons            =
 ===============================*/
 .tf_button {
-    background: #0071c2;
+    background: #00698F;
     color: #fff;
     text-decoration: none;
     display: inline-block;
     text-align: center;
     font-size: 14px;
-    border: 1px solid #0071c2;
+    border: 1px solid #00698F;
     border-radius: 2px;
     padding: 20px;
 
@@ -22,6 +22,31 @@
         background: #fff;
         color: #333;
         border-color: #333;
+    }
+}
+
+.page-template-tf_search-result, .single-tourfic {
+    & .tf_form-row {
+        & .tf_button {
+            padding: 15px 20px;
+            width: 100%;
+        }
+    }
+}
+
+.page-template-tf_search-result {
+    & .single-tour-inner {
+        & .tf_button {
+            padding: 15px 20px;
+        }
+    }
+}
+
+.single-tourfic {
+    & .tf_container {
+        & .tf_button {
+            padding: 15px 20px;
+        }
     }
 }
 

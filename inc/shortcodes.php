@@ -210,7 +210,7 @@ function tourfic_search_shortcode( $atts, $content = null ){
     <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" method="get" autocomplete="off" action="<?php echo tourfic_booking_search_action(); ?>">
 
         <?php if( $title ): ?>
-            <div class="tf_widget-title"><?php esc_html_e( $title ); ?></div>
+            <div class="tf_widget-title"><h2><?php esc_html_e( $title ); ?></h2></div>
         <?php endif; ?>
 
         <?php if( $subtitle ): ?>
@@ -235,46 +235,6 @@ function tourfic_search_shortcode( $atts, $content = null ){
                     ); ?>
                     <!-- End form row -->
                 </div>
-            </div>
-
-            <div class="tf_selectdate-wrap">
-
-                <div class="tf_input-inner">
-                    <span class="tf_date-icon">
-                        <?php echo tourfic_get_svg('calendar_today'); ?>
-                    </span>
-                    <div class="checkin-date-text">Check-in</div>
-                    <div class="date-sep"></div>
-                    <div class="checkout-date-text">Check-out</div>
-                </div>
-
-                <div class="tf_date-wrap-srt screen-reader-text">
-                <!-- Start form row -->
-                <?php tourfic_booking_widget_field(
-                    array(
-                        'type' => 'text',
-                        'svg_icon' => '',
-                        'name' => 'check-in-date',
-                        'placeholder' => 'Check-in date',
-                        'label' => 'Check-in date',
-                        'required' => 'true',
-                        'disabled' => 'true',
-                    )
-                ); ?>
-
-                <?php tourfic_booking_widget_field(
-                    array(
-                        'type' => 'text',
-                        'svg_icon' => '',
-                        'name' => 'check-out-date',
-                        'placeholder' => 'Check-out date',
-                        'required' => 'true',
-                        'disabled' => 'true',
-                        'label' => 'Check-out date',
-                    )
-                ); ?>
-                </div>
-
             </div>
 
             <div class="tf_selectperson-wrap">
@@ -321,6 +281,46 @@ function tourfic_search_shortcode( $atts, $content = null ){
                 </div>
 
             </div>
+            
+            <div class="tf_selectdate-wrap">
+
+                <div class="tf_input-inner">
+                    <span class="tf_date-icon">
+                        <?php echo tourfic_get_svg('calendar_today'); ?>
+                    </span>
+                    <div class="checkin-date-text">Check-in</div>
+                    <div class="date-sep"></div>
+                    <div class="checkout-date-text">Check-out</div>
+                </div>
+
+                <div class="tf_date-wrap-srt screen-reader-text">
+                <!-- Start form row -->
+                <?php tourfic_booking_widget_field(
+                    array(
+                        'type' => 'text',
+                        'svg_icon' => '',
+                        'name' => 'check-in-date',
+                        'placeholder' => 'Check-in date',
+                        'label' => 'Check-in date',
+                        'required' => 'true',
+                        'disabled' => 'true',
+                    )
+                ); ?>
+
+                <?php tourfic_booking_widget_field(
+                    array(
+                        'type' => 'text',
+                        'svg_icon' => '',
+                        'name' => 'check-out-date',
+                        'placeholder' => 'Check-out date',
+                        'required' => 'true',
+                        'disabled' => 'true',
+                        'label' => 'Check-out date',
+                    )
+                ); ?>
+                </div>
+
+            </div>
 
             <div class="tf_submit-wrap">
                 <button class="tf_button tf-submit" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
@@ -360,6 +360,14 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
         $atts
       )
     );
+    
+    if( $search == '' ){
+        //if( isset(get_query_var( 'destination' ))){
+            $search = get_query_var( 'destination' );
+        //}else {
+            //$search = '';
+        //}
+    }
 
     // Propertise args
     $args = array(

@@ -23,8 +23,15 @@
 }
 
 .tf_container {
-  width: 1200px;
   margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.tf_content.tf_content-full {
+  width: 100%;
 }
 
 .tf_row {
@@ -69,13 +76,13 @@
 =            Buttons            =
 ===============================*/
 .tf_button {
-  background: #0071c2;
+  background: #00698F;
   color: #fff;
   text-decoration: none;
   display: inline-block;
   text-align: center;
   font-size: 14px;
-  border: 1px solid #0071c2;
+  border: 1px solid #00698F;
   border-radius: 2px;
   padding: 20px;
 }
@@ -88,6 +95,19 @@
   background: #fff;
   color: #333;
   border-color: #333;
+}
+
+.page-template-tf_search-result .tf_form-row .tf_button, .single-tourfic .tf_form-row .tf_button {
+  padding: 15px 20px;
+  width: 100%;
+}
+
+.page-template-tf_search-result .single-tour-inner .tf_button {
+  padding: 15px 20px;
+}
+
+.single-tourfic .tf_container .tf_button {
+  padding: 15px 20px;
 }
 
 /*=====  End of Buttons  ======*/
@@ -113,8 +133,16 @@
 .tf_map-link {
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: 12px;
   color: #666;
+}
+
+.tf_map-link a {
+  color: #666;
+}
+
+.tf_map-link a:hover {
+  color: #00698F;
 }
 
 .tf_map-link svg {
@@ -288,6 +316,11 @@
 .tf_gallery-wrap {
   position: relative;
   overflow: hidden;
+}
+
+.tf_gallery-wrap .swiper-button-prev,
+.tf_gallery-wrap .swiper-container-rtl .swiper-button-next {
+  background-image: '';
 }
 
 .tf_contents {
@@ -641,7 +674,7 @@ p.comment-form-email {
 }
 
 .price-per-night {
-  font-size: 9px;
+  font-size: 12px;
   white-space: nowrap;
 }
 
@@ -677,7 +710,7 @@ p.comment-form-email {
   position: relative;
   display: flex;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 0 0 10px;
   background: #fff;
 }
 
@@ -698,6 +731,30 @@ p.comment-form-email {
   outline: 0;
 }
 
+#destinationautocomplete-list {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+#destinationautocomplete-list div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+/*when hovering an item:*/
+#destinationautocomplete-list div:hover {
+  background-color: #e9e9e9;
+}
+
 .tf_widget-title {
   font-size: 26px;
   margin-bottom: 10px;
@@ -705,11 +762,12 @@ p.comment-form-email {
 }
 
 .tf_booking-widget {
-  background: #febb02;
-  background: linear-gradient(to bottom, #febb02 0, #febb02 100%);
-  border-color: #cd8900;
+  background: #FA5535;
+  background: linear-gradient(to bottom, #FA5535 0, #FA5535 100%);
+  border-color: #FA5535;
   color: #fff;
   padding: 20px;
+  border-radius: 7px;
 }
 
 .tf_booking-widget.default-form {
@@ -752,11 +810,11 @@ p.comment-form-email {
   margin-top: 12px;
   background: #fff;
   padding: 24px 24px 8px;
-  min-width: 308px;
+  min-width: 250px;
   border-radius: 4px;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
   z-index: 999;
-  width: 370px;
+  width: 100%;
   display: none;
 }
 
@@ -769,17 +827,17 @@ p.comment-form-email {
 
 .acr-dec,
 .acr-inc {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   background-color: #fff;
-  color: #0071c2;
-  border-color: #0071c2;
-  border: 1px solid #0071c2;
-  border-radius: 2px;
+  color: #00698F;
+  border-color: #00698F;
+  border: 1px solid #00698F;
+  border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -796,6 +854,12 @@ p.comment-form-email {
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
+}
+
+.acr-dec:hover,
+.acr-inc:hover {
+  color: #333;
+  border-color: #333;
 }
 
 .acr-select {
@@ -932,13 +996,15 @@ p.comment-form-email {
 }
 
 .recomended_place_info_header {
-  text-align: left;
+  text-align: center;
   padding: 10px 18px;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.65);
   display: inline-block;
   border-radius: 4px;
-  margin-top: 10px;
-  margin-left: 10px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
 }
 
 .single_recomended_item:hover {
@@ -1073,12 +1139,13 @@ span.review_num {
 
 .tf_destination-wrap {
   border-left: 0;
+  min-width: 150px;
   width: 25%;
 }
 
 .tf_submit-wrap {
   border-right: 0;
-  background: #0071c2;
+  background: #00698F;
 }
 
 .tf_selectdate-wrap .tf_input-inner,
@@ -1113,10 +1180,14 @@ span.review_num {
   margin: 0 auto;
 }
 
+.daterangepicker .active.start-date {
+  pointer-events: none;
+}
+
 .tf_destination-wrap .tf_input-inner,
 .tf_selectdate-wrap,
 .tf_selectperson-wrap {
-  padding: 0 7px;
+  padding: 0 15px;
 }
 
 .person-sep {
@@ -1172,6 +1243,37 @@ span.review_num {
 .tf_submit-wrap button {
   width: 100%;
   height: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .tf_destination-wrap,
+  .tf_selectdate-wrap,
+  .tf_selectperson-wrap,
+  .tf_submit-wrap {
+    width: 100%;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .tf_selectdate-wrap,
+  .tf_selectperson-wrap {
+    padding: 20px !important;
+    border-bottom: 1px solid #ccc;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .tf_destination-wrap {
+    padding: 10px !important;
+    border-bottom: 1px solid #ccc;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .tf_destination-wrap .tf_input-inner {
+    padding: 0 10px;
+  }
 }
 
 .share-tour {
@@ -1375,6 +1477,10 @@ span.review_num {
   margin-bottom: 12px;
 }
 
+.tf_gallery-wrap .swiper-button-prev, .tf_gallery-wrap .swiper-container-rtl .swiper-button-next {
+  background-image: none !important;
+}
+
 #tf-ask-question {
   position: fixed;
   top: 0;
@@ -1437,6 +1543,26 @@ span.close-aq {
   width: 100%;
 }
 
+.tourfic-popup-wrapper button.mfp-close {
+  background-color: unset !important;
+  opacity: 1;
+}
+
+.tourfic-popup-wrapper .mfp-figure:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 40px;
+  bottom: 40px;
+  display: block;
+  right: 0;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  box-shadow: unset;
+  background: unset;
+}
+
 /*Archive page*/
 .archive_ajax_result .price-per-night {
   line-height: 1;
@@ -1446,7 +1572,7 @@ span.close-aq {
   display: block;
   width: 100%;
   min-height: 149px;
-  padding: 16px;
+  padding: 20px;
   margin: 16px 0;
   border: 1px solid #c6c6c6;
   border-radius: 3px;
@@ -1496,7 +1622,7 @@ span.close-aq {
   display: inline-block;
   margin: 0 !important;
   padding-right: 2px;
-  color: #07c;
+  color: #00698F;
 }
 
 .single-tour-wrap:first-child .single-tour-inner {
@@ -1553,7 +1679,7 @@ span.close-aq {
 }
 
 .bui-review-score__badge {
-  background: #003580;
+  background: #00698F;
   color: #fff;
   display: flex;
   align-items: center;
@@ -1561,10 +1687,9 @@ span.close-aq {
   font-weight: 500;
   justify-content: center;
   vertical-align: baseline;
-  border-radius: 6px 6px 6px 0;
-  height: 32px;
-  width: 32px;
-  min-width: 32px;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
 }
 
 .bui-review-score__content {
@@ -1645,7 +1770,7 @@ span.close-aq {
 }
 
 .bui-price-display__value {
-  font-size: 16px;
+  font-size: 20px;
   line-height: 24px;
   font-weight: 600;
   color: #383838;
@@ -1674,7 +1799,8 @@ span.close-aq {
 
 .tf-archive-shortdesc {
   white-space: break-spaces;
-  line-height: 1.9;
+  line-height: 1.8;
+  margin: 10px 0 15px;
 }
 
 .tourfic-wrap .tf-archive-desc {
@@ -1704,6 +1830,9 @@ span.close-aq {
   display: flex;
   flex-wrap: wrap;
   margin: 0 -5px;
+  /*.roomPrice.roomPrice_flex.sr_discount {
+            display: none;
+        }*/
 }
 
 .archive_ajax_result.tours-grid .single-tour-wrap {
@@ -1716,7 +1845,7 @@ span.close-aq {
 .archive_ajax_result.tours-grid .single-tour-inner {
   margin: 0;
   height: 100%;
-  padding: 12px;
+  padding: 20px;
 }
 
 .archive_ajax_result.tours-grid .tourfic-single-left {
@@ -1767,8 +1896,17 @@ span.close-aq {
   max-width: 100%;
 }
 
+.archive_ajax_result.tours-grid .availability-btn-area .tf_button {
+  width: 100%;
+  margin-top: 15px;
+}
+
 .archive_ajax_result.tours-grid .roomPrice.roomPrice_flex.sr_discount {
-  display: none;
+  text-align: left;
+}
+
+.archive_ajax_result.tours-grid .roomPrice.roomPrice_flex.sr_discount {
+  margin: 10px 0;
 }
 
 .tf-action-top {
@@ -1829,4 +1967,117 @@ span.close-aq {
 
 .tf_pax {
   white-space: nowrap;
+}
+
+.tf_room-table {
+  overflow-x: auto;
+}
+
+/* Medium devices (0 - 991px) */
+@media (max-width: 991px) {
+  .archive_ajax_result .single-tour-wrap {
+    width: 100% !important;
+    flex: none;
+    margin-bottom: 20px;
+  }
+  .tf_search_result .tf-action-top {
+    display: none;
+  }
+  .archive_ajax_result .tourfic-single-left {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .archive_ajax_result .single-tour-inner {
+    margin: 0;
+    height: 100%;
+    padding: 20px;
+  }
+  .archive_ajax_result tourfic-single-left {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .archive_ajax_result .tourfic-single-right {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .archive_ajax_result .roomrow_flex {
+    padding: 0;
+    flex-wrap: wrap;
+  }
+  .archive_ajax_result .roomName_flex {
+    width: 100%;
+    max-width: 100%;
+  }
+  .archive_ajax_result .tf_item_main_block {
+    max-width: 60% !important;
+  }
+  .tf_item_review_block {
+    max-width: 40%;
+  }
+  .archive_ajax_result .bui-review-score__title {
+    font-size: 14px;
+  }
+  .archive_ajax_result .roomPrice.roomPrice_flex.sr_discount {
+    text-align: left;
+    margin: 10px 0;
+  }
+  .archive_ajax_result .availability-btn-area .tf_button {
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+
+/* Medium devices (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .tf_content {
+    width: 70%;
+  }
+  .tf_sidebar {
+    width: 30%;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 767px) {
+  .recomended_inner {
+    margin-left: -15px;
+    margin-right: -15px;
+    clear: both;
+  }
+  .recomended_inner .single_recomended_item {
+    width: 50%;
+    float: left;
+    margin-right: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .tf_container {
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .tf_content {
+    width: 100%;
+  }
+  .tf_sidebar {
+    width: 100%;
+  }
+  .tf_title-area {
+    display: block;
+  }
+  .tf_title-right {
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 450px) {
+  .recomended_inner .single_recomended_item {
+    width: 100%;
+    float: none;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }

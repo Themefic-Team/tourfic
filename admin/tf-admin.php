@@ -1,4 +1,8 @@
 <?php
+// don't call the file directly
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
 
 /**
  *  Plugin Main Class
@@ -22,7 +26,7 @@ if ( ! class_exists( 'Tourfic_Admin_Init' ) ) :
         /**
          * Admin Action
          */
-        function admin_action() {
+        public function admin_action() {
             require_once( dirname( __FILE__ ) . '/inc/tf-custom-fields.php' );
             require_once( dirname( __FILE__ ) . '/inc/tf-field-functions.php' );
         }
@@ -30,7 +34,7 @@ if ( ! class_exists( 'Tourfic_Admin_Init' ) ) :
         /**
          * Admin scripts
          */
-        function admin_scripts(){
+        public function admin_scripts(){
             $ver = current_time( 'timestamp' );
 
             wp_enqueue_media();

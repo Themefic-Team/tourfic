@@ -1,15 +1,16 @@
 <?php
 /**
- * Plugin Name: Tourfic - Tour / Travel / Trip Booking for WooCommerce
- * Plugin URI: https://themefic.com/tourfic
+ * Plugin Name: Tourfic - Travel Booking Solution for WooCommerce
+ * Plugin URI: https://live.themefic.com/tourfic
  * Github Plugin URI: http://github.com/themefic/tourfic
- * Description:
- * Author: Themefic
+ * Description: Tourfic is the ultimate WordPress travel plugin for hotel booking, tour operator and travel agency websites. It is designed to build your own professional tour operator website or travel agency website where you can efficiently list your hotels and resorts for booking along with receiving payments for each booking. The plugin is fully powered by WooCommerce, thus you can easily manage all your online Booking system along with order system and any payment of WooCommerce. Allow visitors to register account and booking online. 
+ * Author: Themefic 
  * Text Domain: tourfic
  * Domain Path: /lang/
  * Author URI: https://themefic.com
  * Tags:
- * Version: 1.0.42
+ * Version: 1.0.46
+  * WC tested up to: 5.2.2
  */
 
 // don't load directly
@@ -148,18 +149,48 @@ class Tourfic_WordPress_Plugin{
 		wp_register_style( 'font-awesome', plugin_dir_url( __FILE__ ) . 'assets/font-awesome-4.7.0/css/font-awesome.min.css' );
     	wp_enqueue_style( 'font-awesome' );
 
+		wp_enqueue_style('magnific-popup-css', plugin_dir_url( __FILE__ ) . 'assets/css/magnific-popup.css', null, $TOURFIC_VERSION );
+
 		wp_enqueue_style('tourfic-styles', plugin_dir_url( __FILE__ ) . 'assets/css/tourfic-styles.min.css', null, $TOURFIC_VERSION );
+		
+		wp_enqueue_style( 'tourfic-autocomplete', plugin_dir_url( __FILE__ ) . 'assets/css/tourfic-autocomplete.css', null, $TOURFIC_VERSION );
 
 	    wp_enqueue_script( 'slick', plugin_dir_url( __FILE__ ) . 'assets/slick/slick.min.js', array('jquery'), $TOURFIC_VERSION );
 
+        wp_enqueue_script( 'magnific-popup-js', plugin_dir_url( __FILE__ ) . 'assets/js/jquery.magnific-popup.min.js', array('jquery'), $TOURFIC_VERSION );
+        
 	    wp_enqueue_script( 'tourfic-script', plugin_dir_url( __FILE__ ) . 'assets/js/tourfic-script.js', array('jquery'), $TOURFIC_VERSION, true );
 
 		wp_localize_script( 'tourfic-script', 'tf_params',
 			array(
-		        'nonce' => wp_create_nonce( 'tf_ajax_nonce' ),
-		        'ajax_url' => admin_url( 'admin-ajax.php' )
+		        'nonce'         => wp_create_nonce( 'tf_ajax_nonce' ),
+		        'ajax_url'      => admin_url( 'admin-ajax.php' ),
+		        'destinations'  => $this->get_tourfic_destinations(),
 		    )
 	    );
+	}
+	
+	
+	/*
+	* Get tourfic destinations
+	*/
+	
+	public function get_tourfic_destinations(){
+	
+	    $destinations = array();
+	    
+	    $destination_terms = get_terms( array(
+            'taxonomy' => 'destination',
+            'hide_empty' => false
+        ) );
+	    
+	    foreach( $destination_terms as $destination_term ){
+	        
+	        $destinations[] = $destination_term->name;
+	    }
+	    
+	    return $destinations;
+	    
 	}
 
 	/**
@@ -314,3 +345,20 @@ class Tourfic_WordPress_Plugin{
 }
 new Tourfic_WordPress_Plugin;
 endif;
+
+
+
+/*
+* Asign Destination taxonomy template
+*/
+
+add_filter('template_include', 'taxonomy_template');
+function taxonomy_template( $template ){
+
+if( is_tax('destination')){
+    $template = dirname( __FILE__ ) .'/templates/taxonomy-destination.php';
+}  
+
+return $template;
+
+}

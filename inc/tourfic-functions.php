@@ -1,4 +1,49 @@
 <?php
+/*
+* Function: tf_term_count
+* Return number of available terms
+*/
+if( !function_exists('tf_term_count') ){
+    function tf_term_count( $filter, $destination, $default_count ){
+        
+        if( $destination == '' ){
+            return $default_count;
+        }
+        
+        $term_count = array();
+        
+        $args = array(
+            'post_type' => 'tourfic',
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+            'tax_query' => array(
+                'relation' => 'AND',
+                array(
+                    'taxonomy' => 'destination',
+                    'field'    => 'slug',
+                    'terms'    => $destination
+                )
+            )
+        );
+        
+        $loop = new WP_Query( $args );
+                
+        if ( $loop->have_posts() ) :
+            while ( $loop->have_posts() ) : $loop->the_post(); 
+                
+            if( has_term( $filter, 'tf_filters', get_the_ID() ) == true ) {
+                $term_count[] = 'true';
+            }
+        
+            endwhile; 
+        endif;
+        
+        return count($term_count);
+        
+        wp_reset_postdata();
+    }
+}
+
 
 if ( !function_exists('get_field') ) {
 	function get_field( $selector, $post_id = false, $format_value = true ) {
@@ -235,7 +280,10 @@ function tourfic_gallery_slider( $file_list_meta_key = array(), $post_id = null 
 	        <div class="tf_slider-for fl-wrap">
 				<?php foreach ( $files as $attachment_id ) {
 					echo '<div class="slick-slide-item">';
-						echo wp_get_attachment_image( $attachment_id, 'tf_gallery_thumb' );
+						echo '<a href="'.wp_get_attachment_url( $attachment_id, 'tf_gallery_thumb' ).'" class="slick-slide-item-link" >';
+
+							echo wp_get_attachment_image( $attachment_id, 'tf_gallery_thumb' );
+						echo '</a>';
 					echo '</div>';
 				} ?>
 	        </div>
@@ -290,6 +338,19 @@ function tourfic_booking_widget_field( $args ){
 
     //$default_val =  isset( $_POST[$name] ) ? $_POST[$name] : tourfic_getcookie( $name );
     $default_val =  isset( $_GET[$name] ) ? $_GET[$name] : '';
+    
+    if( $name == 'check-in-out-date' ) {
+        
+        if( isset( $_GET['check-in-date'] ) && !empty( $_GET['check-in-date'] ) && isset( $_GET['check-out-date'] ) && !empty( $_GET['check-out-date'] ) ){
+            
+            $default_val = $_GET['check-in-date'];
+            $default_val .= ' - ';
+            $default_val .= $_GET['check-out-date'];
+            
+        }
+        
+    }
+    
     $default = $args['default'] ? sanitize_text_field( $args['default'] ) : $default_val;
 
     if ( !$name ) {
@@ -521,7 +582,7 @@ function tourfic_price_html( $price = null, $sale_price = null ) {
 		<span class="tf-price"><?php echo wc_price( $price ); ?></span>
 	<?php } ?>
 
-	<div class="price-per-night"><?php esc_html_e( 'Price per night as low as', 'tourfic' ); ?></div>
+	<div class="price-per-night"><?php esc_html_e( 'Price per night', 'tourfic' ); ?></div>
 
 	<?php
 	return ob_get_clean();

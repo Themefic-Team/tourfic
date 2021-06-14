@@ -1,8 +1,6 @@
-
 // Utils
 @import 'utils/mixin';
 @import 'utils/variables';
-
 
 // Compontents
 @import 'components/basic';
@@ -20,8 +18,8 @@
 @import 'components/share';
 @import 'components/single-default-style';
 @import 'components/ask-question';
-
+@import 'components/popup';
 // archive
 @import 'components/archive';
-
-
+// Responsive
+@import 'components/responsive';

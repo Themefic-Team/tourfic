@@ -318,9 +318,9 @@
     user-select: none;
     padding: 7px 15px;
     border-radius: 2px;
-    border: 1px solid #0071c2;
+    border: 1px solid #00698F;
     background: #fff;
-    color: #0071c2;
+    color: #00698F;
     font-weight: 400;
     margin-right: 4px;
 }
@@ -339,7 +339,7 @@
 }
 
 #myUL li input:checked + label {
-    background-color: #0071c2;
+    background-color: #00698F;
     color: #fff;
 }
 
@@ -351,4 +351,9 @@
 
 #myUL li input:checked + label i:before {
     content: "\f00d";
+}
+
+.tf-field-wrap .filter-list li .screen-reader-text {
+    position: inherit;
+    top: inherit
 }

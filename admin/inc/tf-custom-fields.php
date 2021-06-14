@@ -108,11 +108,11 @@ class Tourfic_Metabox_Class {
         }
 
         if ( isset( $_POST['additional_information'] ) ) {
-            update_post_meta( $post_id, 'additional_information', sanitize_textarea_field( $_POST['additional_information'] ) );
+            update_post_meta( $post_id, 'additional_information', $_POST['additional_information'] );
         }
 
         if ( isset( $_POST['terms_and_conditions'] ) ) {
-            update_post_meta( $post_id, 'terms_and_conditions', sanitize_textarea_field( $_POST['terms_and_conditions'] ) );
+            update_post_meta( $post_id, 'terms_and_conditions', $_POST['terms_and_conditions'] );
         }
 
         if ( isset( $_POST['send_email_to'] ) ) {
@@ -362,7 +362,7 @@ class Tourfic_Metabox_Class {
 
                             ?>
                         </div>
-
+                        <p><?php printf( esc_html("You can get demo table code from %s", "tourfic"), "<a href='/wp-content/plugins/tourfic/admin/inc/table.txt' target='_blank'>Here</a>" ) ?></p>
                     </div>
 
 				</div>

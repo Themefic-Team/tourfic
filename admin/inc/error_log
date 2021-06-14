@@ -1,0 +1,4 @@
+[30-Mar-2021 01:25:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_admin() in /home/themefic/live.themefic.com/wp-content/plugins/tourfic/admin/inc/tf-custom-fields.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/themefic/live.themefic.com/wp-content/plugins/tourfic/admin/inc/tf-custom-fields.php on line 9

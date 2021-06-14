@@ -1,8 +1,16 @@
 .tf_map-link{
 	display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 12px;
     color: #666;
+    
+    a {
+       color: #666; 
+    }
+    
+    a:hover {
+       color: #00698F; 
+    }
 
     svg{
     	margin-right: 4px;

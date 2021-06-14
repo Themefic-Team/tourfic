@@ -1,0 +1,32 @@
+
+.tf_form-inner .autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.tf_form-inner .autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4;
+  color: #444;
+}
+
+.tf_form-inner .autocomplete-items div:hover {
+  background-color: #e9e9e9; 
+}
+
+.tf_booking-widget .tf_form-row .tf_button {
+    padding: 15px 20px;
+    width: 100%;
+}
+.single-tour-inner .tf_button {
+    padding: 15px 20px;
+}

@@ -25,11 +25,16 @@
 
 }
 
-.tf_container{
-	width: 1200px;
-	margin: 0 auto;
+.tf_container {
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    max-width: 1200px;
+    width: 100%;
 }
-
+.tf_content.tf_content-full {
+    width: 100%;
+}
 .tf_row {
     margin: 0 -15px;
     display: flex;
