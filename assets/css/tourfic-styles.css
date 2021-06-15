@@ -1563,6 +1563,10 @@ span.close-aq {
   background: unset;
 }
 
+.single-tourfic .elementor-lightbox {
+  display: none !important;
+}
+
 /*Archive page*/
 .archive_ajax_result .price-per-night {
   line-height: 1;

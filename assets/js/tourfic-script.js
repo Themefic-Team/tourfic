@@ -221,9 +221,21 @@
                 enabled: true,
                 navigateByImgClick: true,
                 preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-            }
+            },  
+            callbacks: {
+                open: function() {
+                  // Will fire when this exact popup is opened
+                  // this - is Magnific Popup object
+                  
+                  jQuery('#elementor-lightbox-slideshow-single-img').addClass('dialog-type-lightboxjhfsjdfhreuru');
+                },
+                close: function() {
+                  // Will fire when popup is closed
+                }
+                // e.t.c.
+              }
         });
-
+        
         // Ask question
         $(document).on('click', '#tf-ask-question-trigger', function(e){
             e.preventDefault();
@@ -285,6 +297,8 @@
             });
 
         });
+
+        
 
         // Change view
         $(document).on('click', '.change-view', function(e){
@@ -681,3 +695,5 @@ function tourfic_autocomplete(inp, arr) {
 var destinations = tf_params.destinations;
 
 tourfic_autocomplete( document.getElementById("destination"), destinations );
+
+
