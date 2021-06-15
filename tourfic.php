@@ -9,7 +9,7 @@
  * Domain Path: /lang/
  * Author URI: https://themefic.com
  * Tags:
- * Version: 1.0.46
+ * Version: 1.0.47
   * WC tested up to: 5.2.2
  */
 
