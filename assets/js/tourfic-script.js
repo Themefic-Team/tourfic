@@ -19,12 +19,15 @@
             sbn = $('.swiper-button-next');
 
         $('.single-slider-wrapper .tf_slider-for').slick({
+            slide: '.slick-slide-item',
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: false,
             fade: false,
             dots: false,
-            asNavFor: '.tf_slider-nav'
+            centerMode: false,
+            asNavFor: '.tf_slider-nav',
+            variableWidth: true 
         });
 
         $('.single-slider-wrapper .tf_slider-nav').slick({
