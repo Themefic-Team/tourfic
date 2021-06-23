@@ -4,7 +4,7 @@ Tags: wordpress travel, wp travel plugin, wp travel, wordpress travel booking pl
 Requires at least: 4.2
 Tested up to: 5.7.2
 Requires PHP: 5.4
-Stable tag: 1.1.01
+Stable tag: 1.1.1
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -70,6 +70,8 @@ Tourfic was built to help you with your tour booking needs. It comes with a lot 
 * **WooCommerce Support:** Tourfic is fully powered by WooCommerce. You can easily manage all your online Booking system along with order system and any payment of WooCommerce. Allow visitors to register account and booking online.
 
 * **Option Panel:** Tourfic has built in easy-to-use option panel. You can add or remove any options from this panel. You can change post type slug, select search result page, add custom css through this panel.
+
+* **Image Lightbox:** Image Lightbox on Single Tour page.
 
 * **Shortcode Support:** Tourfic comes up with built-in awesome shortcode. With these, you can easily add it's features anywhere on the website you want. Check the shortcode section to find out more.
 
@@ -157,6 +159,19 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 19. Single Tour/Hotel Page (Backend Options)
 
 == Changelog ==
+
+= 1.1.1 - 16/06/2021 =
+
+- Lightbox issue Fixed on Single Tour Gallery
+- Elementor Compatiblity Check
+- Slick Slider Margin Issue Fixed on Single Tour Gallery
+- Astra theme Compatiblity Check
+
+
+= 1.1.0 - 15/06/2021 =
+
+- Added Lightbox on Single Tour Gallery
+- WooCommerce 5.4.1 Compatiblity Check
 
 = 1.0.46 - 27/04/2021 =
 
