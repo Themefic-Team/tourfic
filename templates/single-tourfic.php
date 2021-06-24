@@ -16,7 +16,7 @@ $additional_information = get_field('additional_information') ? get_field('addit
 $share_text = get_the_title();
 $share_link = esc_url( home_url("/?p=").get_the_ID() );
 $location = get_field('formatted_location') ? get_field('formatted_location') : null;
-$features = array();
+$features = get_the_terms( get_the_ID() , array( 'tf_filters') );
 
 $terms_and_conditions = get_post_meta( $post->ID, 'terms_and_conditions', true );
 $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $post->ID, 'tf_faqs', true ) : array();
@@ -110,7 +110,21 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				<?php if( $features ) : ?>
 				<!-- Start features -->
 				<div class="tf_features">
+					<div class="listing-title">
+						<h4><?php esc_html_e( 'Features', 'tourfic' ); ?></h4>
+					</div>
 
+					<div class="tf_feature_list">
+						<?php foreach($features as $feature): ?>
+							<?php $feature_icon = get_term_meta( $feature->term_id, 'filter-taxonomy-image-id', true ); ?>
+                           <div class="single_feature_box">
+                           
+                           	<img src="<?php echo wp_get_attachment_url($feature_icon); ?>" alt="">
+                           	<p class="feature_list_title"><?php echo $feature->name; ?></p>
+                           </div>
+						<?php endforeach; ?>
+
+					</div>
 				</div>
 				<!-- End features -->
 				<?php endif; ?>

@@ -1,0 +1,32 @@
+.tf_features {
+	border-top: 1px solid #0000001a;
+    margin-top: 40px;
+    border-bottom: 1px solid #0000001a;
+    padding-bottom: 36px;
+    padding-top: 25px;
+
+	.feature_list_title {
+	    margin: 0;
+	    padding-left: 8px;
+	    text-transform: capitalize;
+	    letter-spacing: .5px;
+	}
+	.single_feature_box {
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    align-content: center;
+	    margin: 5px;
+	    padding: 6px 9px;
+	    border-radius: 5px;
+	    border: 1px solid #0000002e;
+	    box-shadow: -1px 1px 6px -1px #0000002e;
+	}
+	.tf_feature_list {
+	    display: flex;
+	    align-items: center;
+	    justify-content: flex-start;
+	    flex-wrap: wrap;
+	}
+
+}
