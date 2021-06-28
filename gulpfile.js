@@ -79,7 +79,7 @@ function browserSync(done) {
   });*/
 
   browsersync.init(null, {
-    proxy : "http://localhost/wp/"
+    proxy : "http://localhost:10040/"
   });
 
   done();

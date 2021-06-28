@@ -62,6 +62,8 @@ class Tourfic_WordPress_Plugin{
 		// Image sizes
 		add_filter('after_setup_theme', [ $this, 'image_sizes' ]);
 
+		add_action( 'plugins_loaded', array( $this, 'add_elelmentor_addon' ) );
+
 	}
 
 	public function includes(){
@@ -110,6 +112,7 @@ class Tourfic_WordPress_Plugin{
 		 *	Widgets
 		 */
 		require_once( dirname( __FILE__ ) . '/inc/widgets.php' );
+
 	}
 
 	/**
@@ -246,6 +249,22 @@ class Tourfic_WordPress_Plugin{
 
 	    wp_enqueue_script( 'moment', plugin_dir_url( __FILE__ ) . 'assets/daterangepicker/moment.min.js', array('jquery'), TOURFIC_VERSION, true );
 	    wp_enqueue_script( 'daterangepicker', plugin_dir_url( __FILE__ ) . 'assets/daterangepicker/daterangepicker.js', array('jquery'), TOURFIC_VERSION, true );
+
+
+	}
+
+	/**
+	 * Load elementor.
+	 *
+	 */
+	public function add_elelmentor_addon() {
+
+        // Check if Elementor installed and activated
+		if ( ! did_action( 'elementor/loaded' ) ) {
+			return;
+		}
+		// Once we get here, We have passed all validation checks so we can safely include our plugin
+		require_once( 'inc/elementor-addon/elementor-addon-register.php' );
 
 
 	}
