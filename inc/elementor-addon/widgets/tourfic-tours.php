@@ -84,7 +84,7 @@ class TOURFIC_slider extends Widget_Base {
 	 */
 	protected function _register_controls() {
         
-        
+        /*
 		$this->start_controls_section(
 			'content_section',
 			[
@@ -175,7 +175,7 @@ class TOURFIC_slider extends Widget_Base {
 				],
 			]
 		);
-
+*/
 		$this->end_controls_section();
 
 	}
@@ -189,13 +189,8 @@ class TOURFIC_slider extends Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-        $tf_search_title = $settings['search_title'];
-        $tf_search_subtitle = $settings['search_subtitle'];
-      
 
-
-      
-        echo do_shortcode('[tf_tours title="slider title" subtitle="slider subtitle" count="5" slidesToShow="3" ]');
+        echo do_shortcode('[tf_tours]');
 
 
 	}

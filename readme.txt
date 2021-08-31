@@ -4,7 +4,7 @@ Tags: wordpress travel, wp travel plugin, wp travel, wordpress travel booking pl
 Requires at least: 4.2
 Tested up to: 5.7.2
 Requires PHP: 5.4
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -159,6 +159,14 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 19. Single Tour/Hotel Page (Backend Options)
 
 == Changelog ==
+
+
+= 1.1.3 - 30/06/2021 =
+
+- Elementor Compatiblity Check
+- Elementor extensions added for 
+
+
 
 = 1.1.1 - 16/06/2021 =
 
