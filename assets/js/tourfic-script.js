@@ -398,7 +398,7 @@
             var $this = jQuery(this);
 
             var width = $this.attr('data-width');
-
+/*
             $this.inViewport(function(px) {
                 if( px > 0 ) {
                     $this.css('width', +width+'%');
@@ -406,7 +406,7 @@
                     $this.css('width', '0%');
                 }
             });
-
+*/
         });
 
     });

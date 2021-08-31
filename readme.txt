@@ -1,38 +1,49 @@
-=== Tourfic - Travel Booking Solution for WooCommerce ===
-Contributors: psdtowpservice, themefic, mdshuvo, raihan143, hasanet
-Tags: wordpress travel, wp travel plugin, wp travel, wordpress travel booking plugin, wordpress tour plugin, tour booking plugin wordpress, wordpress travel agency, woocommerce tour booking, woocommerce travel booking plugin, travel tour wordpress, hotel booking, tour booking, tour operator, travel, tour, trip, travel booking, travel agency, wordpress tour, woocommerce tour, woocommerce travel
+=== Travel and Hotel Booking Solution for WooCommerce - Tourfic ===
+Contributors: psdtowpservice, themefic, mdshuvo, raihan143, hasanet, kamrul0424
+Tags: tour booking, tour operator, travel, tour, trip, travel-booking, travel agency, hotel booking, reservation, hotel, booking engine, booking, booking calendar, booking system, calendar, online booking, travel, airbnb, booking.com, homeaway, apartments, villa, hostel, reservation system, travel itinerary, trekking, tour itinerary, travel booking engine, tour accommodation listings, travel destinations, trip book, travel payment, woocommerce tour booking, woocommerce travel booking plugin, woocommerce tour, woocommerce travel, wordpress travel, wp travel plugin, wp travel, wordpress travel booking plugin, wordpress tour plugin, tour booking plugin wordpress, wordpress travel agency, travel tour wordpress, wordpress tour
 Requires at least: 4.2
-Tested up to: 5.7.2
+Tested up to: 5.8
 Requires PHP: 5.4
-Stable tag: 1.1.3
+Stable tag: 1.1.6
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
-Ultimate hotel, tour & travel booking plugin, powered by WooCommerce. Tourfic helps you to create your own online travel agency / travel booking website easily.
+Ultimate hotel, tour & travel booking WooCommerce. Build your own travel agency website like Agoda, Airbnb, Hotels.com, Booking.com
 
 == Description ==
-Tourfic is the ultimate WordPress travel plugin for hotel booking, tour operator and travel agency websites. It is designed to build your own professional tour operator website or travel agency website where you can efficiently list your hotels and resorts for booking along with receiving payments for each booking. 
+
+= The easiest and fastest WooCommerce travel & hotel management by Tourfic | Build Your own travel agency website like Agoda, Airbnb, Booking.com =
+
+👉 Official Demo Link: [Tourfic Live Preview](https://live.themefic.com/tourfic)
+👉 Installation Guide: [Youtube Video](https://youtu.be/emXXlSYAl_Y)
+👉 Installation Guide: [Tourfic Shortcodes](https://themefic.com/docs/tourfic/shortcodes/)
+👉 Join Our FB Community: [Tourfic Facebook Group](https://www.facebook.com/groups/tourfic)
+
+= The ultimate WordPress tour management plugin for hotel booking, tour operator and travel agency websites =
+
+Tourfic is designed to build your own professional tour operator website or travel agency website where you can efficiently list your hotels and resorts for booking along with receiving payments for each booking. 
+
+It is fully powered by WooCommerce, you can easily manage all your online Booking system along with order system and any payment of WooCommerce. Allow visitors to register account and booking online. To be precise, you can easily develop a website similar to Booking.com, Agoda, Hotels.com, Airbnb etc in no time with the help of Tourfic.
 
 > <strong><a href="https://live.themefic.com/tourfic" target="_blank">Check out the demo</a></strong> to see it in action!
 
-It is fully powered by WooCommerce, you can easily manage all your online Booking system along with order system and any payment of WooCommerce. Allow visitors to register account and booking online. To be precise, you can easily develop a website similar to Booking.com, Agoda, Hotels.com, Airbnb etc in no time with the help of Tourfic.
+### How It works:
+
+[youtube https://www.youtube.com/watch?v=emXXlSYAl_Y]
 
 **With Tourfic, You can:**
 - Quickly and easily build a professional website for your tour operator or travel agency;
 - Create your own professional tour operator and travel agency website within 5 minutes, just like Booking.com, Agoda, Hotels.com, Airbnb etc.
 - Build your own online tour business and make money online by selling your tours worldwide with any payment of WooCommerce.
- 
-<strong>Demo Link </strong>
-> <strong><a href="https://live.themefic.com/tourfic" target="_blank">Check out the demo</a></strong> to see it in action!
 
 <hr>
 
 ### Shortcodes:
 
-**Show Destination Grid:**
+= Show Destination Grid =
 <pre class="wp-block-preformatted">[tourfic_destinations]</pre>
 
-**Show Recent Property Slider:**
+= Show Recent Property Slider: =
 <pre class="wp-block-preformatted">[tf_tours]
 Attributes: 
 - title : Title of the section
@@ -48,10 +59,10 @@ Attributes:
 - fullwidth : (true/false) Fulwidth or default container
 </pre>
 
-**Show search results page:**
+= Show search results page: =
 <pre class="wp-block-preformatted">[tf_search_result]</pre>
 
-Want to know all the latest news and be a part of the Tourfic community? Join our <a href="https://www.facebook.com/groups/themefic/" target="_blank">Facebook Community group!</a>
+Want to know all the latest news and be a part of the Tourfic community? Join our <a href="https://www.facebook.com/groups/tourfic" target="_blank">Facebook Community group!</a>
 
 <hr>
 
@@ -59,21 +70,35 @@ Want to know all the latest news and be a part of the Tourfic community? Join ou
 
 Tourfic was built to help you with your tour booking needs. It comes with a lot of features that will help you manage your hotels and resorts easily. Here are the most important features of Tourfic:
 
-* **Add Tour Plans/Hotels/Resorts:** Tourfic is developed focusing to create a travel agency website easily. So, you can add your own tour plan or hotel or resorts through this plugin and have your customer book it. You can add rooms, Gallery, Location, FAQs and Terms & Conditions.
+= Add Tour Plans/Hotels/Resorts =
+
+ Tourfic is developed focusing to create a travel agency website easily. So, you can add your own tour plan or hotel or resorts through this plugin and have your customer book it. You can add rooms, Gallery, Location, FAQs and Terms & Conditions.
+ 
+= Autocomplete search & Auto Suggestions =
+
+Whenever user types a destination on search, they will see autocomplete suggestions.
+
+= Multiple layout =
+
+Search result page has two built-in Preview layouts. List View and Grid View.
+
+= WooCommerce Support =
+
+Tourfic is fully powered by WooCommerce. You can easily manage all your online Booking system along with order system and any payment of WooCommerce. Allow visitors to register account and booking online.
+
+= Option Panel =
+
+Tourfic has built in easy-to-use option panel. You can add or remove any options from this panel. You can change post type slug, select search result page, add custom css through this panel.
+
+= Shortcode Support =
+
+Tourfic comes up with built-in awesome shortcode. With these, you can easily add it's features anywhere on the website you want. Check the shortcode section to find out more.
+
+= Other Features: =
 
 * **Unlimited Tours/Hotels:** You can create unlimited Tours/Hotels with Tourfic.
 
-* **Autocomplete search:** Whenever user types a destination on search, they will see autocomplete suggestions.
-
-* **Multiple layout:** Search result page has two built-in Preview layouts. List View and Grid View.
-
-* **WooCommerce Support:** Tourfic is fully powered by WooCommerce. You can easily manage all your online Booking system along with order system and any payment of WooCommerce. Allow visitors to register account and booking online.
-
-* **Option Panel:** Tourfic has built in easy-to-use option panel. You can add or remove any options from this panel. You can change post type slug, select search result page, add custom css through this panel.
-
 * **Image Lightbox:** Image Lightbox on Single Tour page.
-
-* **Shortcode Support:** Tourfic comes up with built-in awesome shortcode. With these, you can easily add it's features anywhere on the website you want. Check the shortcode section to find out more.
 
 * **Widget Support:** Tourfic comes up with built-in awesome widgets. With these, you can easily add it's features anywhere on the website through widget.
 
@@ -93,7 +118,7 @@ Tourfic was built to help you with your tour booking needs. It comes with a lot 
 
 <strong>Premium Support</strong>
 
-We provide full support on the WordPress.org forums. In addition, please feel free to post questions or bug reports through our <a href="https://www.facebook.com/groups/themefic/" target="_blank">Facebook group</a> or <a href="https://themefic.com/contact/" target="_blank">Our Website</a>.
+We provide full support on the WordPress.org forums. In addition, please feel free to post questions or bug reports through our <a href="https://www.facebook.com/groups/tourfic/" target="_blank">Facebook group</a> or <a href="https://themefic.com/contact/" target="_blank">Our Website</a>.
 
 <strong>Privacy Policy : </strong>
 
@@ -102,6 +127,12 @@ This plugin doesn’t collect/store any user related information.
 <strong>Credits</strong>
 
 The icon and banner used on this plugin are taken from <a href="https://www.iconfinder.com" target="_blank">Iconfinder</a> and <a href="https://www.freepik.com/vectors/nature" target="_blank">Freepik</a>
+
+<strong>Our Other Plugins</strong>
+
+* <a href="https://wordpress.org/plugins/beaf-before-and-after-gallery/">Ultimate Before After Image Slider & Gallery – BEAF</a>
+* <a href="https://wordpress.org/plugins/ultimate-addons-for-contact-form-7/">Ultimate Addons For Contact Form 7</a>
+* <a href="https://wordpress.org/plugins/instantio" target="_blank">Onepage / Direct Checkout for WooCommerce - Instantio</a>
 
 == Installation ==
 
@@ -160,13 +191,33 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Changelog ==
 
+= 1.1.6 - 15/08/2021 =
 
-= 1.1.3 - 30/06/2021 =
+- Compress file size
+- Optimized redux framwork
+- Elementor Pro conflict issue fixed
 
-- Elementor Compatiblity Check
-- Elementor extensions added for 
+= 1.1.5 - 15/08/2021 =
 
+- WooCommerce 5.5.2 Compatiblity Check
 
+= 1.1.4 - 23/07/2021 =
+
+- WordPress 5.8 Compatiblity Check
+- WooCommerce 5.5.1 Compatiblity Check
+
+= 1.1.3 - 27/06/2021 =
+
+- Elementor compatibilty check
+- Elementor tour slider extention added
+- Elementor destination extention added
+- Elementor search extention added
+
+= 1.1.2 - 27/06/2021 =
+
+- Feature List added
+- Feature icon added
+- Hotel features added in the single hotel page
 
 = 1.1.1 - 16/06/2021 =
 
