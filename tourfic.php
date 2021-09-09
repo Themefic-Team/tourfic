@@ -35,6 +35,12 @@ define( 'TOURFIC_ADMIN_URL', TOURFIC_PLUGIN_URL.'admin/' );
 */
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
+require_once(dirname( __FILE__ ) . '/admin/framework/framework.php');
+require_once(dirname( __FILE__ ) . '/admin/framework/settings.php');
+
+
+
+
 /**
  *	Main Class
  *

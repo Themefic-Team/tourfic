@@ -1173,3 +1173,4 @@ function tourfic_wp_dropdown_cats_multiple( $output, $r ) {
 
     return $output;
 }
+
