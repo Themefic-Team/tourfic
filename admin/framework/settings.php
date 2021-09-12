@@ -24,15 +24,38 @@ if( class_exists( 'CSF' ) ) {
   CSF::createSection( $prefix, array(
     'id'    => 'general_tab', 
     'title' =>  __( 'General', 'tourfic' ),
-    'icon'  =>  'dashicons-admin-generic' ,
+    'icon'  =>  'fas fa-rocket' ,
+    'fields' => array(
+      array(
+        'id'      => 'post_type_slug',
+        'type'    => 'text',
+        'title'   => __( 'Select post type slug', 'tourfic' ),
+        'desc'   =>  __( 'Default is: <code>tourfic</code> - <strong>Save 2 times if you change this field for permalink flush</strong>', 'tourfic' )
+      ),
+      array(
+        'id'          => 'single_tour_style',
+        'type'        => 'select',
+        'placeholder' => 'Select a page',
+        'chosen'      => true,
+        'title'       =>  __( 'Select Single Page Template', 'tourfic' ),
+        'desc'        =>  __( 'Page template: <code>Tourfic - Search Result</code> must be selected', 'tourfic' ),
+        'options'  => array(
+          'single-tourfic.php' => 'Style 1',
+          //'single-tourfic-2.php' => 'Style 2',
+      ),
+      'default'  => 'single-tourfic.php',
+      ),
+
+    )
     
   ) );
 
-  //
-  // Create a sub-tab
+
+  // Search tab
   CSF::createSection( $prefix, array(
-    'parent' => 'general_tab', // The slug id of the parent section
-    'title'  => 'Search',
+    'id'    => 'search', 
+    'title'  => __( 'Search', 'tourfic' ),
+    'icon'  =>  'fas fa-search' ,
     'fields' => array(
 
       array(
@@ -46,50 +69,59 @@ if( class_exists( 'CSF' ) ) {
         'options'     =>  'pages',
         
       ),
+      array(
+        'id'          => 'search_relation',
+        'type'        => 'select',
+        'title'       => __( 'Search Result Relation', 'tourfic' ),
+        'desc'        => __( 'Search result relation with search widget and filters. OR means matched any query, AND means matched all query.', 'tourfic' ),
+        'chosen'      => true,
+        'placeholder' => 'Select an option',
+        'options'     => array(
+          'AND' => 'AND',
+          'OR' => 'OR',
+        ),
+        'default'  => 'AND'
+      ),
 
+      array(
+        'id'          => 'filter_relation',
+        'type'        => 'select',
+        'title'       => __( 'Filters Relation', 'tourfic' ),
+        'desc'        => __( 'Search result Filters relation with among filters. OR means matched any filter, AND means matched all filter.', 'tourfic' ),
+        'chosen'      => true,
+        'multiple'    => false,
+        'placeholder' => 'Select an option',
+        'options'     => array(
+          'AND' => 'AND',
+          'OR' => 'OR',
+        ),
+        'default'  => 'OR',
+      ),
     )
   ) );
 
-  //
-  // Create a sub-tab
-  CSF::createSection( $prefix, array(
-    'parent' => 'primary_tab',
-    'title'  => 'Sub Tab 2',
-    'fields' => array(
 
-      // A textarea field
+  // Extra tab
+  CSF::createSection( $prefix, array(
+    'id'    => 'preference', 
+    'title' => 'Preferences',
+    'icon'  =>  'fas fa-asterisk' ,
+    'fields' => array(
       array(
-        'id'    => 'opt-textarea',
-        'type'  => 'textarea',
-        'title' => 'Simple Textarea',
+        'id'       => 'custom-css',
+        'type'     => 'code_editor',
+        'title'    => __( 'Custom CSS', 'tourfic' ),
+        'settings' => array(
+          'theme'  => 'mbo',
+          'mode'   => 'css',
+        ),
+        'default'  => '.element{ color: #ffbc00; }',
       ),
 
     )
   ) );
 
-  //
-  // Create a top-tab
-  CSF::createSection( $prefix, array(
-    'id'    => 'secondry_tab', // Set a unique slug-like ID
-    'title' => 'Secondry Tab',
-  ) );
 
 
-  //
-  // Create a sub-tab
-  CSF::createSection( $prefix, array(
-    'parent' => 'secondry_tab', // The slug id of the parent section
-    'title'  => 'Sub Tab 1',
-    'fields' => array(
-
-      // A switcher field
-      array(
-        'id'    => 'opt-switcher',
-        'type'  => 'switcher',
-        'title' => 'Simple Switcher',
-      ),
-
-    )
-  ) );
 
 }
