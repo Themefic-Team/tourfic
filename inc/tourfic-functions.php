@@ -968,16 +968,7 @@ function tourfic_change_tourfic_post_type_slug( $slug ){
 }
 add_filter( 'tourfic_post_type_slug', 'tourfic_change_tourfic_post_type_slug', 10, 1 );
 
-/**
- * Flush after redux save
- */
-function tourfic_flush_permalink( $value ){
-	flush_rewrite_rules();
-}
-add_action('redux/options/tourfic_opt/saved', 'tourfic_flush_permalink' );
-add_action('redux/options/tourfic_opt/reset', 'tourfic_flush_permalink' );
-add_action('redux/options/tourfic_opt/settings/change', 'tourfic_flush_permalink' );
-add_action('redux/options/tourfic_opt/section/reset', 'tourfic_flush_permalink' );
+
 
 
 /**

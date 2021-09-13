@@ -129,17 +129,6 @@ class Tourfic_WordPress_Plugin{
 		$this->includes();
 		//Internationalization
 		load_plugin_textdomain( 'tourfic', false, TOURFIC_PLUGIN_URL . '/lang/' );
-
-
-		//Redux Framework calling
-		if ( !class_exists( 'ReduxFramework' ) && file_exists( dirname( __FILE__ ) . '/inc/redux-framework/redux-core/framework.php' ) ) {
-		    require_once( dirname( __FILE__ ) . '/inc/redux-framework/redux-core/framework.php' );
-		}
-
-	    // Load the plugin options
-	    if ( class_exists( 'ReduxFramework' ) ) {
-	        require_once dirname( __FILE__ ) . '/inc/options.php';
-	    }
 	}
 
 	// Image sizes
