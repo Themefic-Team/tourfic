@@ -972,7 +972,13 @@ function tourfic_change_tourfic_post_type_slug( $slug ){
 }
 add_filter( 'tourfic_post_type_slug', 'tourfic_change_tourfic_post_type_slug', 10, 1 );
 
-
+/**
+ * Flush after redux save
+ */
+function tourfic_flush_permalink( $value ){
+	flush_rewrite_rules();
+}
+add_action('csf_tourfic_opt_saved', 'tourfic_flush_permalink' );
 
 
 /**
