@@ -51,7 +51,7 @@ function tourfic_destinations_shortcode( $atts, $content = null ){
             ?>
 
             <div class="single_recomended_item">
-                <a href="<?php echo tourfic_booking_search_action(); ?>?destination=<?php _e( $term->slug ); ?>">
+                <a href="<?php echo tourfic_booking_search_action(); ?>?destination=/<?php _e( $term->slug ); ?>">
                   <div class="single_recomended_content" style="background-image: url(<?php echo wp_get_attachment_url( $image_id ); ?>);">
                     <div class="recomended_place_info_header">
                       <h3><?php _e($term->name); ?></h3>
@@ -341,8 +341,8 @@ add_shortcode('tf_search', 'tourfic_search_shortcode');
  * Search Result Shortcode Function
  */
 function tourfic_search_result_shortcode( $atts, $content = null ){
-    global $tourfic_opt;
-    $relation = isset( $tourfic_opt['search_relation'] ) ? esc_attr( $tourfic_opt['search_relation'] ) : "AND";
+
+    $relation = tourfic_opt( 'search_relation', 'AND' );
 
     // Unwanted Slashes Remove
     if ( isset( $_GET ) ) {
@@ -445,9 +445,9 @@ add_shortcode('tf_search_result', 'tourfic_search_result_shortcode');
  * Filter Ajax
  */
 function tourfic_trigger_filter_ajax(){
-    global $tourfic_opt;
-    $relation = isset( $tourfic_opt['search_relation'] ) ? esc_attr( $tourfic_opt['search_relation'] ) : "AND";
-    $filter_relation = isset( $tourfic_opt['filter_relation'] ) ? esc_attr( $tourfic_opt['filter_relation'] ) : "OR";
+
+    $relation = tourfic_opt( 'search_relation', 'AND' );
+    $filter_relation = tourfic_opt( 'filter_relation', 'OR' );
 
     $search = ( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
     $filters = ( $_POST['filters'] ) ? explode(',', sanitize_text_field( $_POST['filters'] )) : null;

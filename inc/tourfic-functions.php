@@ -555,13 +555,17 @@ function tourfic_booking_search_action(){
 
 // Set search reult page
 function tourfic_booking_set_search_result( $url ){
-	global $tourfic_opt;
 
-	if ( isset( $tourfic_opt['search-result-page'] ) ) {
-		$url = get_permalink( $tourfic_opt['search-result-page'] );
+  
+	$search_result_page = tourfic_opt( 'search-result-page' );
+
+	if ( isset( $search_result_page ) ){
+		$url = get_permalink( $search_result_page );
 	}
-
+	
 	return $url;
+
+	
 
 }
 add_filter( 'tf_booking_search_action', 'tourfic_booking_set_search_result' );
@@ -958,10 +962,10 @@ function tourfic_fullwidth_container_end( $fullwidth ){
  * Change Post Type Slug
  */
 function tourfic_change_tourfic_post_type_slug( $slug ){
-	global $tourfic_opt;
-
-	if ( isset( $tourfic_opt['post_type_slug'] ) && $tourfic_opt['post_type_slug'] != "" ) {
-		$slug = esc_attr( $tourfic_opt['post_type_slug'] );
+	
+    $hotel_slug = tourfic_opt( 'post_type_slug' );
+	if ( isset( $hotel_slug ) && $hotel_slug != "" ) {
+		$slug = esc_attr( $hotel_slug );
 	}
 
 	return $slug;
@@ -975,13 +979,13 @@ add_filter( 'tourfic_post_type_slug', 'tourfic_change_tourfic_post_type_slug', 1
  *	Custom CSS function
  */
 function tourfic_custom_css(){
-	global $tourfic_opt;
-
+	
+    $tf_custom_css =  tourfic_opt( 'custom-css' );
 	$output = '';
 
 	//Custom css
-	if ( isset( $tourfic_opt['custom-css'] ) ) {
-		$output .=  $tourfic_opt['custom-css'];
+	if ( isset( $tf_custom_css ) ) {
+		$output .=  $tf_custom_css;
 	}
 
 	wp_add_inline_style( 'tourfic-styles', $output );

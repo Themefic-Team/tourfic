@@ -38,7 +38,12 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 require_once(dirname( __FILE__ ) . '/admin/framework/framework.php');
 require_once(dirname( __FILE__ ) . '/admin/framework/settings.php');
 
-
+if ( ! function_exists( 'tourfic_opt' ) ) {
+	function tourfic_opt( $option = '', $default = null ) {
+	  $options = get_option( 'tourfic_opt' ); // Attention: Set your unique id of the framework
+	  return ( isset( $options[$option] ) ) ? $options[$option] : $default;
+	}
+  }
 
 
 /**
@@ -129,6 +134,7 @@ class Tourfic_WordPress_Plugin{
 		$this->includes();
 		//Internationalization
 		load_plugin_textdomain( 'tourfic', false, TOURFIC_PLUGIN_URL . '/lang/' );
+
 	}
 
 	// Image sizes
@@ -288,8 +294,10 @@ class Tourfic_WordPress_Plugin{
 	// Single Template
 	public function tourfic_single_page_template( $single_template ) {
 		global $post;
-		global $tourfic_opt;
-		$st = isset( $tourfic_opt['single_tour_style'] ) ? $tourfic_opt['single_tour_style'] : 'single-tourfic.php';
+
+		$single_tour_style = tourfic_opt('single_tour_style');
+
+		$st = isset( $single_tour_style ) ? $single_tour_style : 'single-tourfic.php';
 
 		if ( 'tourfic' === $post->post_type ) {
 		    $theme_files = array('single-tourfic.php', 'templates/single-tourfic.php');
