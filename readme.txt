@@ -4,7 +4,7 @@ Tags: tour booking, tour operator, travel, tour, trip, travel-booking, travel ag
 Requires at least: 4.2
 Tested up to: 5.8.1
 Requires PHP: 5.4
-Stable tag: 2.0.0
+Stable tag: 1.2.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -190,6 +190,14 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 19. Single Tour/Hotel Page (Backend Options)
 
 == Changelog ==
+
+= 1.2.0 - 14/09/2021 =
+
+- Removed Redux framwork
+- WordPress 5.8.1 Compatiblity Check
+- WooCommerce 5.6.0 Compatiblity Check
+- Added new option panel
+
 
 = 1.1.6 - 15/08/2021 =
 
