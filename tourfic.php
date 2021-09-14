@@ -9,8 +9,8 @@
  * Domain Path: /lang/
  * Author URI: https://themefic.com
  * Tags:
- * Version: 1.1.6
-  * WC tested up to: 5.5.2
+ * Version: 2.0.0
+  * WC tested up to: 5.6.0
  */
 
 // don't load directly
