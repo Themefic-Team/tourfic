@@ -29,8 +29,14 @@ if( class_exists( 'CSF' ) ) {
       array(
         'id'      => 'post_type_slug',
         'type'    => 'text',
-        'title'   => __( 'Select post type slug', 'tourfic' ),
+        'title'   => __( 'Select slug of Hotel', 'tourfic' ),
         'desc'   =>  __( 'Default is: <code>tourfic</code> - <strong>Save 2 times if you change this field for permalink flush</strong>', 'tourfic' )
+      ),
+      array(
+        'id'      => 'tour_type_slug',
+        'type'    => 'text',
+        'title'   => __( 'Select slug of Tour', 'tourfic' ),
+        'desc'   =>  __( 'Default is: <code>tour</code> - <strong>Save 2 times if you change this field for permalink flush</strong>', 'tourfic' )
       ),
       array(
         'id'          => 'single_tour_style',
@@ -44,6 +50,19 @@ if( class_exists( 'CSF' ) ) {
           //'single-tourfic-2.php' => 'Style 2',
       ),
       'default'  => 'single-tourfic.php',
+      ),
+
+      array(
+        'id'        => 'activated_post_types',
+        'type'      => 'image_select',
+        'title'     => 'Activated Types',
+        'multiple'  => true,
+        'options'   => array(
+          'value-1' => 'http://codestarframework.com/assets/images/placeholder/80x80-2c3e50.gif',
+          'value-2' => 'http://codestarframework.com/assets/images/placeholder/80x80-2c3e50.gif',
+          'value-3' => 'http://codestarframework.com/assets/images/placeholder/80x80-2c3e50.gif',
+        ),
+        'default'   => array( 'value-1', 'value-3' )
       ),
 
     )

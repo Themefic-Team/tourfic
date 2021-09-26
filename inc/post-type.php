@@ -7,9 +7,12 @@
  */
 function tourfic_setup_tourfic_post_types() {
 
-	$archives = defined( 'TOURFIC_DISABLE_ARCHIVE' ) && TOURFIC_DISABLE_ARCHIVE ? false : true;
-	$slug     = defined( 'TOURFIC_SLUG' ) ? TOURFIC_SLUG : apply_filters( 'tourfic_post_type_slug', 'tourfic' );
-	$rewrite  = defined( 'TOURFIC_DISABLE_REWRITE' ) && TOURFIC_DISABLE_REWRITE ? false : array('slug' => $slug, 'with_front' => false);
+	$archives      = defined( 'TOURFIC_DISABLE_ARCHIVE' ) && TOURFIC_DISABLE_ARCHIVE ? false : true;
+	$slug          = defined( 'TOURFIC_SLUG' ) ? TOURFIC_SLUG : apply_filters( 'tourfic_post_type_slug', 'tourfic' );
+	$rewrite       = defined( 'TOURFIC_DISABLE_REWRITE' ) && TOURFIC_DISABLE_REWRITE ? false : array('slug' => $slug, 'with_front' => false);
+	$tour_slug     = defined( 'TOURFIC_TOUR_SLUG' ) ? TOURFIC_TOUR_SLUG : apply_filters( 'tourfic_post_type_tour_slug', 'tour' );
+	$tour_rewrite  = defined( 'TOURFIC_TOUR_DISABLE_REWRITE' ) && TOURFIC_TOUR_DISABLE_REWRITE   ? false : array('slug' => $tour_slug, 'with_front' => false);
+
 
 	$tourfic_labels =  apply_filters( 'tf_tourfic_labels', array(
 		'name'                  => _x( '%2$s', 'tourfic post type name', 'tourfic' ),
@@ -25,7 +28,7 @@ function tourfic_setup_tourfic_post_types() {
 		'not_found'             => __( 'No %2$s found', 'tourfic' ),
 		'not_found_in_trash'    => __( 'No %2$s found in Trash', 'tourfic' ),
 		'parent_item_colon'     => '',
-		'menu_name'             => _x( 'Tourfic', 'tourfic post type menu name', 'tourfic' ),
+		'menu_name'             => _x( 'Hotels', 'tourfic post type menu name', 'tourfic' ),
 		'featured_image'        => __( '%1$s Image', 'tourfic' ),
 		'set_featured_image'    => __( 'Set %1$s Image', 'tourfic' ),
 		'remove_featured_image' => __( 'Remove %1$s Image', 'tourfic' ),
@@ -39,6 +42,38 @@ function tourfic_setup_tourfic_post_types() {
 	foreach ( $tourfic_labels as $key => $value ) {
 		$tourfic_labels[ $key ] = sprintf( $value, tourfic_get_label_singular(), tourfic_get_label_plural() );
 	}
+
+	$tour_labels =  apply_filters( 'tf_tour_labels', array(
+		'name'                  => _x( '%2$s', 'tourfic post type name', 'tourfic' ),
+		'singular_name'         => _x( '%1$s', 'singular tourfic post type name', 'tourfic' ),
+		'add_new'               => __( 'Add New', 'tourfic' ),
+		'add_new_item'          => __( 'Add New %1$s', 'tourfic' ),
+		'edit_item'             => __( 'Edit %1$s', 'tourfic' ),
+		'new_item'              => __( 'New %1$s', 'tourfic' ),
+		'all_items'             => __( 'All %2$s', 'tourfic' ),
+		'view_item'             => __( 'View %1$s', 'tourfic' ),
+		'view_items'             => __( 'View %2$s', 'tourfic' ),
+		'search_items'          => __( 'Search %2$s', 'tourfic' ),
+		'not_found'             => __( 'No %2$s found', 'tourfic' ),
+		'not_found_in_trash'    => __( 'No %2$s found in Trash', 'tourfic' ),
+		'parent_item_colon'     => '',
+		'menu_name'             => _x( 'Tours', 'tourfic post type menu name', 'tourfic' ),
+		'featured_image'        => __( '%1$s Image', 'tourfic' ),
+		'set_featured_image'    => __( 'Set %1$s Image', 'tourfic' ),
+		'remove_featured_image' => __( 'Remove %1$s Image', 'tourfic' ),
+		'use_featured_image'    => __( 'Use as %1$s Image', 'tourfic' ),
+		'attributes'            => __( '%1$s Attributes', 'tourfic' ),
+		'filter_items_list'     => __( 'Filter %2$s list', 'tourfic' ),
+		'items_list_navigation' => __( '%2$s list navigation', 'tourfic' ),
+		'items_list'            => __( '%2$s list', 'tourfic' ),
+	) );
+
+	foreach ( $tour_labels as $key => $value ) {
+		$tour_labels[ $key ] = sprintf( $value, tourfic_get_tour_label_singular(), tourfic_get_tour_label_plural() );
+	}
+
+
+
 
 	$tourfic_args = array(
 		'labels'             => $tourfic_labels,
@@ -55,7 +90,28 @@ function tourfic_setup_tourfic_post_types() {
 		'hierarchical'       => false,
 		'supports'           => apply_filters( 'tf_tourfic_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
 	);
+
+	$tourfic_tour_args = array(
+		'labels'             => $tour_labels,
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'menu_icon'          => 'dashicons-calendar',
+		'rewrite'            => $tour_rewrite,
+		'capability_type'    => 'product',
+		'map_meta_cap'       => true,
+		'has_archive'        => $archives,
+		'hierarchical'       => false,
+		'supports'           => apply_filters( 'tf_tourfic_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
+	);
+
+
+
+
 	register_post_type( 'tourfic', apply_filters( 'tf_tourfic_post_type_args', $tourfic_args ) );
+	register_post_type( 'tours', apply_filters( 'tf_tour_post_type_args',$tourfic_tour_args ) );
 
 }
 add_action( 'init', 'tourfic_setup_tourfic_post_types', 1 );
@@ -68,11 +124,22 @@ add_action( 'init', 'tourfic_setup_tourfic_post_types', 1 );
  */
 function tourfic_get_default_labels() {
 	$defaults = array(
+	   'singular' => __( 'Hotel', 'tourfic' ),
+	   'plural'   => __( 'Hotels','tourfic' )
+	);
+	return apply_filters( 'tourfic_default_hotels_name', $defaults );
+}
+
+
+function tourfic_get_default_tours_labels() {
+	$default_tour = array(
 	   'singular' => __( 'Tour', 'tourfic' ),
 	   'plural'   => __( 'Tours','tourfic' )
 	);
-	return apply_filters( 'tourfic_default_tours_name', $defaults );
+	return apply_filters( 'tourfic_default_tour_name', $default_tour );
 }
+
+
 
 /**
  * Get Singular Label
@@ -87,6 +154,11 @@ function tourfic_get_label_singular( $lowercase = false ) {
 	return ($lowercase) ? strtolower( $defaults['singular'] ) : $defaults['singular'];
 }
 
+
+function tourfic_get_tour_label_singular( $lowercase = false ) {
+	$default_tour =tourfic_get_default_tours_labels();
+	return ($lowercase) ? strtolower($default_tour['singular'] ) : $default_tour['singular'];
+}
 /**
  * Get Plural Label
  *
@@ -96,6 +168,11 @@ function tourfic_get_label_singular( $lowercase = false ) {
 function tourfic_get_label_plural( $lowercase = false ) {
 	$defaults = tourfic_get_default_labels();
 	return ( $lowercase ) ? strtolower( $defaults['plural'] ) : $defaults['plural'];
+}
+
+function tourfic_get_tour_label_plural( $lowercase = false ) {
+	$default_tour = tourfic_get_default_tours_labels();
+	return ( $lowercase ) ? strtolower( $default_tour['plural'] ) : $default_tour['plural'];
 }
 
 /**

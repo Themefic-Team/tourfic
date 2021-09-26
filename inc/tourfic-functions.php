@@ -972,6 +972,18 @@ function tourfic_change_tourfic_post_type_slug( $slug ){
 }
 add_filter( 'tourfic_post_type_slug', 'tourfic_change_tourfic_post_type_slug', 10, 1 );
 
+
+function tourfic_change_tour_post_type_slug($tour_slug ){
+	
+    $tour_slug = tourfic_opt( 'tour_type_slug' );
+	if ( isset( $tour_slug ) && $tour_slug != "" ) {
+		$tour_slug = esc_attr( $tour_slug );
+	}
+
+	return $tour_slug; 
+}
+add_filter( 'tourfic_post_type_tour_slug', 'tourfic_change_tour_post_type_slug', 10, 1 );
+
 /**
  * Flush after redux save
  */
@@ -1064,7 +1076,7 @@ function tourfic_ask_question(){
 		<div class="tf-aq-overlay"></div>
 		<div class="tf-aq-outer">
 			<span class="close-aq">&times;</span>
-			<div class="tf-aq-inner">
+			<div class="tf-aq-inner">   
 				<h4><?php esc_html_e( 'Submit your question', 'tourfic' ); ?></h4>
 				<form id="ask-question" action="" method="post">
 					<div class="tf-aq-field">
