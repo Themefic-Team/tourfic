@@ -37,6 +37,7 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 require_once(dirname( __FILE__ ) . '/admin/framework/framework.php');
 require_once(dirname( __FILE__ ) . '/admin/framework/settings.php');
+require_once(dirname( __FILE__ ) . '/admin/framework/taxonomy-fields.php');
 
 if ( ! function_exists( 'tourfic_opt' ) ) {
 	function tourfic_opt( $option = '', $default = null ) {
