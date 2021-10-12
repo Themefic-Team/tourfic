@@ -9,7 +9,7 @@
  * Domain Path: /lang/
  * Author URI: https://themefic.com
  * Tags:
- * Version: 1.2.0
+ * Version: 1.8.0
   * WC tested up to: 5.6.0
  */
 
@@ -38,6 +38,7 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 require_once(dirname( __FILE__ ) . '/admin/framework/framework.php');
 require_once(dirname( __FILE__ ) . '/admin/framework/settings.php');
 require_once(dirname( __FILE__ ) . '/admin/framework/taxonomy-fields.php');
+require_once(dirname( __FILE__ ) . '/admin/inc/tours/tf-tours-metabox.php');
 
 if ( ! function_exists( 'tourfic_opt' ) ) {
 	function tourfic_opt( $option = '', $default = null ) {

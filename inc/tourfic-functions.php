@@ -322,19 +322,19 @@ function tourfic_booking_widget_field( $args ){
     );
 	$args = wp_parse_args( $args, $defaults );
 
-	$svg_icon     = esc_attr( $args['svg_icon'] );
-	$type     = esc_attr( $args['type'] );
-	$name     = esc_attr( $args['name'] );
-    $class    = esc_attr( $args['class'] );
+	$svg_icon     	= esc_attr( $args['svg_icon'] );
+	$type     		= esc_attr( $args['type'] );
+	$name     		= esc_attr( $args['name'] );
+    $class    		= esc_attr( $args['class'] );
 
-    $id       = $args['id'] ? esc_attr( $args['id'] ) : $name;
-    $required = $args['required'] ? 'required' : '';
+    $id       		= $args['id'] ? esc_attr( $args['id'] ) : $name;
+    $required 		= $args['required'] ? 'required' : '';
 
-    $label = $args['label'] ? "<span class='tf-label'>".$args['label']."</span>" : '';
+    $label 			= $args['label'] ? "<span class='tf-label'>".$args['label']."</span>" : '';
 
-    $disabled = $args['disabled'] ? "onkeypress='return false';" : '';
+    $disabled 		= $args['disabled'] ? "onkeypress='return false';" : '';
 
-    $placeholder = esc_attr( $args['placeholder'] );
+	$placeholder 	= esc_attr( $args['placeholder'] );
 
     //$default_val =  isset( $_POST[$name] ) ? $_POST[$name] : tourfic_getcookie( $name );
     $default_val =  isset( $_GET[$name] ) ? $_GET[$name] : '';

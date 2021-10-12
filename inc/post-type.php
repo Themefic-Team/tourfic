@@ -111,7 +111,7 @@ function tourfic_setup_tourfic_post_types() {
 
 
 	register_post_type( 'tourfic', apply_filters( 'tf_tourfic_post_type_args', $tourfic_args ) );
-	register_post_type( 'tours', apply_filters( 'tf_tour_post_type_args',$tourfic_tour_args ) );
+	register_post_type( 'tf_tours', apply_filters( 'tf_tour_post_type_args',$tourfic_tour_args ) );
 
 }
 add_action( 'init', 'tourfic_setup_tourfic_post_types', 1 );
@@ -347,7 +347,7 @@ function tourfic_register_taxes_destination() {
         'rest_controller_class' => 'WP_REST_Terms_Controller',
         'show_in_quick_edit' => true,
     ];
-    register_taxonomy( 'tour_destination', [ 'tours' ], apply_filters( 'tf_tour_destination_tax_args', $tour_destination_args ) );
+    register_taxonomy( 'tour_destination', [ 'tf_tours' ], apply_filters( 'tf_tour_destination_tax_args', $tour_destination_args ) );
 
 	/**
 	 * Taxonomy: Tours Tag.
@@ -395,7 +395,7 @@ function tourfic_register_taxes_destination() {
 		"rest_controller_class" => "WP_REST_Terms_Controller",
 		"show_in_quick_edit" => false,
 	];
-	register_taxonomy( 'tf_feature', [ 'tours' ], apply_filters( 'tf_features_tax_args', $feature_args ) );
+	register_taxonomy( 'tf_feature', [ 'tf_tours' ], apply_filters( 'tf_features_tax_args', $feature_args ) );
 
 }
 add_action( 'init', 'tourfic_register_taxes_destination' );
