@@ -300,6 +300,7 @@ class Tourfic_WordPress_Plugin{
 		$single_tour_style = tourfic_opt('single_tour_style');
 
 		$st = isset( $single_tour_style ) ? $single_tour_style : 'single-tourfic.php';
+		//$s_tours = isset( $single_tour_style ) ? $single_tour_style : 'single-tf_tours.php';
 
 		if ( 'tourfic' === $post->post_type ) {
 		    $theme_files = array('single-tourfic.php', 'templates/single-tourfic.php');
@@ -308,6 +309,16 @@ class Tourfic_WordPress_Plugin{
 		      	return $exists_in_theme;
 		    } else {
 		      	return dirname( __FILE__ ) . "/templates/{$st}";
+		    }
+		}
+		
+		if ( 'tf_tours' === $post->post_type ) {
+		    $theme_files = array('single-tf_tours.php', 'templates/single-tf_tours.php');
+		    $exists_in_theme = locate_template($theme_files, false);
+		    if ( $exists_in_theme != '' ) {
+		      	return $exists_in_theme;
+		    } else {
+		      	return dirname( __FILE__ ) . "/templates/single-tf_tours.php";
 		    }
 		}
 		return $single_template;

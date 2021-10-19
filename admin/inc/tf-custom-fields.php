@@ -288,7 +288,7 @@ class Tourfic_Metabox_Class {
                             ) );
 
                             $tf_filters_obj_list = get_the_terms( $post->ID, 'tf_filters' );
-                            $selected_terms = wp_list_pluck($tf_filters_obj_list, 'term_id');
+                            $selected_terms = wp_list_pluck( $tf_filters_obj_list, 'term_id' );
 
                             if ( ! empty( $tf_filters ) && ! is_wp_error( $tf_filters ) ){
                                 echo '<ul class="filter-list" id="myUL">';

@@ -11,7 +11,7 @@ if ( class_exists( 'CSF' ) ) {
 
     // Create a metabox
     CSF::createMetabox( $prefix, array(
-        'title'     => 'Tours Setting',
+        'title'     => __( 'Tours Setting','tourfic' ),
         'post_type' => 'tf_tours',
         'context'   => 'advanced',
         'priority'  => 'high',
@@ -19,7 +19,7 @@ if ( class_exists( 'CSF' ) ) {
 
     // Create a section
     CSF::createSection( $prefix, array(
-        'title'  => 'General',
+        'title'  => __( 'General','tourfic' ),
         'fields' => array(
 
             // A text field
@@ -70,7 +70,7 @@ if ( class_exists( 'CSF' ) ) {
 
             array(
                 'id'       => 'location',
-                'type'     => 'text',
+                'type'     => 'map',
                 'title'    => __( 'Tour Location', 'tourfic' ),
                 'subtitle' => __( 'Select tour location', 'tourfic' ),
             ),
@@ -83,35 +83,15 @@ if ( class_exists( 'CSF' ) ) {
 
         ),
     ) );
-
     // Create a section
     CSF::createSection( $prefix, array(
-        'title'  => __( 'Contact Info', 'tourfic' ),
+        'title'  => __( 'Hightlights', 'tourfic' ),
         'fields' => array(
 
             array(
-                'id'       => 'email',
-                'type'     => 'text',
-                'title'    => __( 'Email address', 'tourfic' ),
-                'subtitle' => __( 'Input email address', 'tourfic' ),
-            ),
-            array(
-                'id'       => 'website',
-                'type'     => 'text',
-                'title'    => __( 'Website Url', 'tourfic' ),
-                'subtitle' => __( 'Input website url', 'tourfic' ),
-            ),
-            array(
-                'id'       => 'phone',
-                'type'     => 'text',
-                'title'    => __( 'Phone Number', 'tourfic' ),
-                'subtitle' => __( 'Input Phone Number', 'tourfic' ),
-            ),
-            array(
-                'id'       => 'fax',
-                'type'     => 'text',
-                'title'    => __( 'Fax Number', 'tourfic' ),
-                'subtitle' => __( 'Input Fax Number', 'tourfic' ),
+                'id'       => 'additional_information',
+                'type'     => 'wp_editor',
+                'title'    => __( 'Hightlights', 'tourfic' ),
             ),
 
         ),
@@ -127,6 +107,18 @@ if ( class_exists( 'CSF' ) ) {
                 'type'     => 'text',
                 'title'    => __( 'Tour duration', 'tourfic' ),
                 'subtitle' => __( 'Tour duration eg. 3 days', 'tourfic' ),
+            ),
+            array(
+                'id'       => 'group_size',
+                'type'     => 'text',
+                'title'    => __( 'Group size', 'tourfic' ),
+                'subtitle' => __( 'Group size eg. 10 people', 'tourfic' ),
+            ),
+            array(
+                'id'       => 'language',
+                'type'     => 'text',
+                'title'    => __( 'Languages', 'tourfic' ),
+                'subtitle' => __( 'Input languages seperated by comma(,)', 'tourfic' ),
             ),
             array(
                 'id'       => 'min_days',
@@ -160,11 +152,38 @@ if ( class_exists( 'CSF' ) ) {
                 'title'    => __( 'Maximum person', 'tourfic' ),
                 'subtitle' => __( 'Maximum person to travel', 'tourfic' ),
             ),
+
+        ),
+    ) );
+
+    // Create a section
+    CSF::createSection( $prefix, array(
+        'title'  => __( 'Contact Info', 'tourfic' ),
+        'fields' => array(
+
             array(
-                'id'       => 'date',
-                'type'     => 'date',
-                'title'    => __( 'Maximum person', 'tourfic' ),
-                'subtitle' => __( 'Maximum person to travel', 'tourfic' ),
+                'id'       => 'email',
+                'type'     => 'text',
+                'title'    => __( 'Email address', 'tourfic' ),
+                'subtitle' => __( 'Input email address', 'tourfic' ),
+            ),
+            array(
+                'id'       => 'phone',
+                'type'     => 'text',
+                'title'    => __( 'Phone Number', 'tourfic' ),
+                'subtitle' => __( 'Input Phone Number', 'tourfic' ),
+            ),
+            array(
+                'id'       => 'website',
+                'type'     => 'text',
+                'title'    => __( 'Website Url', 'tourfic' ),
+                'subtitle' => __( 'Input website url', 'tourfic' ),
+            ),
+            array(
+                'id'       => 'fax',
+                'type'     => 'text',
+                'title'    => __( 'Fax Number', 'tourfic' ),
+                'subtitle' => __( 'Input Fax Number', 'tourfic' ),
             ),
 
         ),
@@ -190,7 +209,7 @@ if ( class_exists( 'CSF' ) ) {
         'title'  => __( 'FAQs', 'tourfic' ),
         'fields' => array(
             array(
-                'id'     => 'faq',
+                'id'     => 'faqs',
                 'type'   => 'repeater',
                 'title'  => __( 'FAQs', 'tourfic' ),
                 'fields' => array(
@@ -207,6 +226,17 @@ if ( class_exists( 'CSF' ) ) {
                 ),
             ),
         ),
+    ) );
+
+    CSF::createSection( $prefix, array(
+        'title'  => __( 'Terms & Conditions', 'tourfic' ),
+        'fields' => array(
+            array(
+                'id'     => 'terms_conditions',
+                'type'   => 'wp_editor',
+                'title'  => __( 'Terms & Conditions', 'tourfic' )
+            )
+        )
     ) );
 
 }

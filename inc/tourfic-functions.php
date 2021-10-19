@@ -266,7 +266,7 @@ function tourfic_gallery_slider( $file_list_meta_key = array(), $post_id = null 
 	if ( !$file_list_meta_key ) {
 		return;
 	}
-
+	
 	$post_id = ( $post_id ) ? $post_id : get_the_ID();
 	// Get the list of files
 	$tf_gallery_ids = get_post_meta( $post_id, $file_list_meta_key, 1 );
