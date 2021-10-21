@@ -261,9 +261,9 @@ function tourfic_attach_city_to_author( $author ) {
  * @param  string  $file_list_meta_key The field meta key. ('wiki_test_file_list')
  * @param  string  $img_size           Size of image to show
  */
-function tourfic_gallery_slider( $file_list_meta_key = array(), $post_id = null ) {
+function tourfic_gallery_slider( $file_list_meta_key = null, $post_id = null, $csf_gallery = null ) {
 
-	if ( !$file_list_meta_key ) {
+	if ( !$file_list_meta_key & !$csf_gallery ) {
 		return;
 	}
 	
@@ -272,7 +272,11 @@ function tourfic_gallery_slider( $file_list_meta_key = array(), $post_id = null 
 	$tf_gallery_ids = get_post_meta( $post_id, $file_list_meta_key, 1 );
 
 	// Comma seperated list to array
-	$files = explode(',', $tf_gallery_ids);
+	if( $csf_gallery ){
+		$files = explode( ',',$csf_gallery );
+	}else{
+		$files = explode(',', $tf_gallery_ids);
+	}
 
 	?>
 	<div class="list-single-main-media fl-wrap" id="sec1">

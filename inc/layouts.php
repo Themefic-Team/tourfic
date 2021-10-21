@@ -136,7 +136,8 @@ function tourfic_item_review_block(){
 
 // Map Link
 function tourfic_map_link(){
-	$location = get_field('formatted_location') ? get_field('formatted_location') : null;
+$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+$location = $meta['location']['address'];
 
 	if ( !$location ) {
 		return;

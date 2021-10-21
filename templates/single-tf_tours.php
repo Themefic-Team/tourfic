@@ -13,8 +13,7 @@ $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
 
 $location = $meta['location']['address'];
 $gallery = $meta['tour_gallery'];
-var_dump($gallery);
-die;
+$additional_information = $meta['additional_information'] ? $meta['additional_information'] : null; 
 $tour_duration = $meta['duration'] ? $meta['duration'] : null;
 $group_size = $meta['group_size'] ? $meta['group_size'] : null;
 $language = $meta['language'] ? $meta['language'] : null;
@@ -32,10 +31,8 @@ $faqs = $meta['faqs'] ? $meta['faqs'] : null;
 // Get all rooms
 $tf_room = get_field('tf_room') ? get_field('tf_room') : array();
 $information = get_field('information') ? get_field('information') : null;
-$additional_information = get_field('additional_information') ? get_field('additional_information') : null;
 $share_text = get_the_title();
 $share_link = esc_url( home_url("/?p=").get_the_ID() );
-$location = get_field('formatted_location') ? get_field('formatted_location') : null;
 $features = get_the_terms( get_the_ID() , array( 'tf_filters') );
 
 $terms_and_conditions = $meta['terms_conditions'];
@@ -103,7 +100,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 
 				<!-- Start gallery -->
 				<div class="tf_gallery-wrap">
-					<?php echo tourfic_gallery_slider($meta['tour_gallery']); ?>
+					<?php echo tourfic_gallery_slider(false,$post_id,$gallery); ?>
 				</div>
 				<!-- End gallery-->
 
@@ -271,7 +268,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				<!-- Start TOC Content -->
 				<div class="tf_toc-wrap">
 					<div class="tf_toc-inner">
-						<?php _e( $terms_and_conditions ); ?>
+						<?php _e( $terms_and_conditions,'tourfic' ); ?>
 					</div>
 				</div>
 				<!-- End TOC Content -->

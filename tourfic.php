@@ -349,7 +349,7 @@ class Tourfic_WordPress_Plugin{
 	       return;
 	    }
 
-		if ( 'tourfic' === $post->post_type ) {
+		if ( 'tourfic' === $post->post_type || 'tf_tours' === $post->post_type ) {
 		    $theme_files = array('review.php', 'templates/review.php');
 		    $exists_in_theme = locate_template($theme_files, false);
 		    if ( $exists_in_theme != '' ) {

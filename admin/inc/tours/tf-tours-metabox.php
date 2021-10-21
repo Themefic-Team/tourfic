@@ -206,6 +206,39 @@ if ( class_exists( 'CSF' ) ) {
     ) );
 
     CSF::createSection( $prefix, array(
+        'title'  => __( 'Itinerary', 'tourfic' ),
+        'fields' => array(
+            array(
+                'id'     => 'itinerary',
+                'type'   => 'repeater',
+                'title'  => __( 'Itinerary', 'tourfic' ),
+                'fields' => array(
+                    array(
+                        'id'        => 'time',
+                        'type'      => 'text',
+                        'title'     => __( 'Time or Day', 'tourfic' ),
+                        'subtitle'  => __( 'You can place the tour plan', 'tourfic' ),
+                    ),
+                    array(
+                        'id'           => 'image',
+                        'type'         => 'upload',
+                        'title'        => 'Upload Image',
+                        'library'      => 'image',
+                        'placeholder'  => 'http://',
+                        'button_title' => 'Add Image',
+                        'remove_title' => 'Remove Image',
+                      ),
+                    array(
+                        'id'    => 'desc',
+                        'type'  => 'textarea',
+                        'title' => __( 'Description', 'tourfic' ),
+                    ),
+                ),
+            ),
+        ),
+    ) );
+
+    CSF::createSection( $prefix, array(
         'title'  => __( 'FAQs', 'tourfic' ),
         'fields' => array(
             array(
