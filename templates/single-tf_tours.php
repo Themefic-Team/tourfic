@@ -6,7 +6,6 @@
  */
 
 get_header('tourfic'); ?>
-<h2>Tour Single Page test</h2>
 <?php while ( have_posts() ) : the_post(); ?>
 <?php
 $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
@@ -103,6 +102,43 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					<?php echo tourfic_gallery_slider(false,$post_id,$gallery); ?>
 				</div>
 				<!-- End gallery-->
+				<!--Information section start-->
+				<div class="tf_informations">
+					<?php if( $tour_duration ): ?>
+					<div class="item">
+						<div class="icon">
+							<i class="far fa-clock"></i>
+						</div>
+						<div class="info">
+							<h4 class="title"><?php echo __( 'Duration', 'tourfic' ); ?></h4>
+							<p><?php echo esc_html__( $tour_duration,'tourfic' ) ?></p>
+						</div>
+					</div>
+					<?php endif;?>
+					<?php if( $group_size ): ?>
+					<div class="item">
+						<div class="icon">
+							<i class="far fa-clock"></i>
+						</div>
+						<div class="info">
+							<h4 class="title"><?php echo __( 'Group Size', 'tourfic' ); ?></h4>
+							<p><?php echo esc_html__( $group_size,'tourfic' ) ?></p>
+						</div>
+					</div>
+					<?php endif;?>
+					<?php if( $language ): ?>
+					<div class="item">
+						<div class="icon">
+							<i class="far fa-clock"></i>
+						</div>
+						<div class="info">
+							<h4 class="title"><?php echo __( 'Language', 'tourfic' ); ?></h4>
+							<p><?php echo esc_html__( $language,'tourfic' ) ?></p>
+						</div>
+					</div>
+					<?php endif;?>
+				</div>
+				<!--Information section end-->
 
 				<?php if( $additional_information ): ?>
 				<!-- Start highlights content -->

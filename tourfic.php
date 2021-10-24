@@ -152,8 +152,8 @@ class Tourfic_WordPress_Plugin{
 
 		$TOURFIC_VERSION = current_time('timestamp');
 
-		wp_register_style( 'font-awesome', plugin_dir_url( __FILE__ ) . 'assets/font-awesome-4.7.0/css/font-awesome.min.css' );
-    	wp_enqueue_style( 'font-awesome' );
+		wp_register_style( 'font-awesome-5', plugin_dir_url( __FILE__ ) . 'assets/font-awesome-4.7.0/css/all.min.css' );
+    	wp_enqueue_style( 'font-awesome-5' );
 
 		wp_enqueue_style('magnific-popup-css', plugin_dir_url( __FILE__ ) . 'assets/css/magnific-popup.css', null, $TOURFIC_VERSION );
 
