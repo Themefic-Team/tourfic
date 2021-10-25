@@ -25,7 +25,7 @@ if( class_exists( 'CSF' ) ) {
             'title'        => 'Feature Icon',
             'library'      => 'image',
             'placeholder'  => 'http://',
-            'button_title' => 'Add con',
+            'button_title' => 'Add icon',
             'remove_title' => 'Remove Icon',
           ),
 

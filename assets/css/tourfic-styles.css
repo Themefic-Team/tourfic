@@ -2023,25 +2023,6 @@ span.close-aq {
   overflow-x: auto;
 }
 
-/*Tour Styles*/
-
-.tf_informations .item {
-  display: flex;
-  align-items: center;
-}
-
-.tf_informations .item .icon {
-  font-size: 32px;
-  margin-right: 10px;
-}
-
-.tf_informations {
-  padding: 10px 0px;
-  border-top: 1px solid #00698f;
-  border-bottom: 1px solid #00698f;
-  margin: 20px 0;
-}
-
 /* Medium devices (0 - 991px) */
 @media (max-width: 991px) {
   .archive_ajax_result .single-tour-wrap {

@@ -11,7 +11,7 @@ if ( class_exists( 'CSF' ) ) {
 
     // Create a metabox
     CSF::createMetabox( $prefix, array(
-        'title'     => __( 'Tours Setting','tourfic' ),
+        'title'     => __( 'Tours Setting', 'tourfic' ),
         'post_type' => 'tf_tours',
         'context'   => 'advanced',
         'priority'  => 'high',
@@ -19,7 +19,7 @@ if ( class_exists( 'CSF' ) ) {
 
     // Create a section
     CSF::createSection( $prefix, array(
-        'title'  => __( 'General','tourfic' ),
+        'title'  => __( 'General', 'tourfic' ),
         'fields' => array(
 
             // A text field
@@ -47,6 +47,18 @@ if ( class_exists( 'CSF' ) ) {
                 'options' => array(
                     'instant' => __( 'Default', 'tourfic' ),
                 ),
+            ),
+            array(
+                'id'          => 'tour_feature',
+                'type'        => 'select',
+                'multiple'    => true,
+                'chosen'      => true,
+                'options'     => 'categories',
+                'query_args'    => [
+                    'taxonomy' => 'tf_feature',
+                ],
+                'placeholder' => __( 'Add features', 'tourfic' ),
+                'title'       => __( 'Tour features', 'tourfic' ),
             ),
             array(
                 'id'    => 'tour_gallery',
@@ -89,9 +101,9 @@ if ( class_exists( 'CSF' ) ) {
         'fields' => array(
 
             array(
-                'id'       => 'additional_information',
-                'type'     => 'wp_editor',
-                'title'    => __( 'Hightlights', 'tourfic' ),
+                'id'    => 'additional_information',
+                'type'  => 'wp_editor',
+                'title' => __( 'Hightlights', 'tourfic' ),
             ),
 
         ),
@@ -214,10 +226,10 @@ if ( class_exists( 'CSF' ) ) {
                 'title'  => __( 'Itinerary', 'tourfic' ),
                 'fields' => array(
                     array(
-                        'id'        => 'time',
-                        'type'      => 'text',
-                        'title'     => __( 'Time or Day', 'tourfic' ),
-                        'subtitle'  => __( 'You can place the tour plan', 'tourfic' ),
+                        'id'       => 'time',
+                        'type'     => 'text',
+                        'title'    => __( 'Time or Day', 'tourfic' ),
+                        'subtitle' => __( 'You can place the tour plan', 'tourfic' ),
                     ),
                     array(
                         'id'           => 'image',
@@ -227,7 +239,7 @@ if ( class_exists( 'CSF' ) ) {
                         'placeholder'  => 'http://',
                         'button_title' => 'Add Image',
                         'remove_title' => 'Remove Image',
-                      ),
+                    ),
                     array(
                         'id'    => 'desc',
                         'type'  => 'textarea',
@@ -265,11 +277,11 @@ if ( class_exists( 'CSF' ) ) {
         'title'  => __( 'Terms & Conditions', 'tourfic' ),
         'fields' => array(
             array(
-                'id'     => 'terms_conditions',
-                'type'   => 'wp_editor',
-                'title'  => __( 'Terms & Conditions', 'tourfic' )
-            )
-        )
+                'id'    => 'terms_conditions',
+                'type'  => 'wp_editor',
+                'title' => __( 'Terms & Conditions', 'tourfic' ),
+            ),
+        ),
     ) );
 
 }

@@ -7,111 +7,104 @@
  */
 function tourfic_setup_tourfic_post_types() {
 
-	$archives      = defined( 'TOURFIC_DISABLE_ARCHIVE' ) && TOURFIC_DISABLE_ARCHIVE ? false : true;
-	$slug          = defined( 'TOURFIC_SLUG' ) ? TOURFIC_SLUG : apply_filters( 'tourfic_post_type_slug', 'tourfic' );
-	$rewrite       = defined( 'TOURFIC_DISABLE_REWRITE' ) && TOURFIC_DISABLE_REWRITE ? false : array('slug' => $slug, 'with_front' => false);
-	$tour_slug     = defined( 'TOURFIC_TOUR_SLUG' ) ? TOURFIC_TOUR_SLUG : apply_filters( 'tourfic_post_type_tour_slug', 'tour' );
-	$tour_rewrite  = defined( 'TOURFIC_TOUR_DISABLE_REWRITE' ) && TOURFIC_TOUR_DISABLE_REWRITE   ? false : array('slug' => $tour_slug, 'with_front' => false);
+    $archives = defined( 'TOURFIC_DISABLE_ARCHIVE' ) && TOURFIC_DISABLE_ARCHIVE ? false : true;
+    $slug = defined( 'TOURFIC_SLUG' ) ? TOURFIC_SLUG : apply_filters( 'tourfic_post_type_slug', 'tourfic' );
+    $rewrite = defined( 'TOURFIC_DISABLE_REWRITE' ) && TOURFIC_DISABLE_REWRITE ? false : array( 'slug' => $slug, 'with_front' => false );
+    $tour_slug = defined( 'TOURFIC_TOUR_SLUG' ) ? TOURFIC_TOUR_SLUG : apply_filters( 'tourfic_post_type_tour_slug', 'tour' );
+    $tour_rewrite = defined( 'TOURFIC_TOUR_DISABLE_REWRITE' ) && TOURFIC_TOUR_DISABLE_REWRITE ? false : array( 'slug' => $tour_slug, 'with_front' => false );
 
+    $tourfic_labels = apply_filters( 'tf_tourfic_labels', array(
+        'name'                  => _x( '%2$s', 'tourfic post type name', 'tourfic' ),
+        'singular_name'         => _x( '%1$s', 'singular tourfic post type name', 'tourfic' ),
+        'add_new'               => __( 'Add New', 'tourfic' ),
+        'add_new_item'          => __( 'Add New %1$s', 'tourfic' ),
+        'edit_item'             => __( 'Edit %1$s', 'tourfic' ),
+        'new_item'              => __( 'New %1$s', 'tourfic' ),
+        'all_items'             => __( 'All %2$s', 'tourfic' ),
+        'view_item'             => __( 'View %1$s', 'tourfic' ),
+        'view_items'            => __( 'View %2$s', 'tourfic' ),
+        'search_items'          => __( 'Search %2$s', 'tourfic' ),
+        'not_found'             => __( 'No %2$s found', 'tourfic' ),
+        'not_found_in_trash'    => __( 'No %2$s found in Trash', 'tourfic' ),
+        'parent_item_colon'     => '',
+        'menu_name'             => _x( 'Hotels', 'tourfic post type menu name', 'tourfic' ),
+        'featured_image'        => __( '%1$s Image', 'tourfic' ),
+        'set_featured_image'    => __( 'Set %1$s Image', 'tourfic' ),
+        'remove_featured_image' => __( 'Remove %1$s Image', 'tourfic' ),
+        'use_featured_image'    => __( 'Use as %1$s Image', 'tourfic' ),
+        'attributes'            => __( '%1$s Attributes', 'tourfic' ),
+        'filter_items_list'     => __( 'Filter %2$s list', 'tourfic' ),
+        'items_list_navigation' => __( '%2$s list navigation', 'tourfic' ),
+        'items_list'            => __( '%2$s list', 'tourfic' ),
+    ) );
 
-	$tourfic_labels =  apply_filters( 'tf_tourfic_labels', array(
-		'name'                  => _x( '%2$s', 'tourfic post type name', 'tourfic' ),
-		'singular_name'         => _x( '%1$s', 'singular tourfic post type name', 'tourfic' ),
-		'add_new'               => __( 'Add New', 'tourfic' ),
-		'add_new_item'          => __( 'Add New %1$s', 'tourfic' ),
-		'edit_item'             => __( 'Edit %1$s', 'tourfic' ),
-		'new_item'              => __( 'New %1$s', 'tourfic' ),
-		'all_items'             => __( 'All %2$s', 'tourfic' ),
-		'view_item'             => __( 'View %1$s', 'tourfic' ),
-		'view_items'             => __( 'View %2$s', 'tourfic' ),
-		'search_items'          => __( 'Search %2$s', 'tourfic' ),
-		'not_found'             => __( 'No %2$s found', 'tourfic' ),
-		'not_found_in_trash'    => __( 'No %2$s found in Trash', 'tourfic' ),
-		'parent_item_colon'     => '',
-		'menu_name'             => _x( 'Hotels', 'tourfic post type menu name', 'tourfic' ),
-		'featured_image'        => __( '%1$s Image', 'tourfic' ),
-		'set_featured_image'    => __( 'Set %1$s Image', 'tourfic' ),
-		'remove_featured_image' => __( 'Remove %1$s Image', 'tourfic' ),
-		'use_featured_image'    => __( 'Use as %1$s Image', 'tourfic' ),
-		'attributes'            => __( '%1$s Attributes', 'tourfic' ),
-		'filter_items_list'     => __( 'Filter %2$s list', 'tourfic' ),
-		'items_list_navigation' => __( '%2$s list navigation', 'tourfic' ),
-		'items_list'            => __( '%2$s list', 'tourfic' ),
-	) );
+    foreach ( $tourfic_labels as $key => $value ) {
+        $tourfic_labels[$key] = sprintf( $value, tourfic_get_label_singular(), tourfic_get_label_plural() );
+    }
 
-	foreach ( $tourfic_labels as $key => $value ) {
-		$tourfic_labels[ $key ] = sprintf( $value, tourfic_get_label_singular(), tourfic_get_label_plural() );
-	}
+    $tour_labels = apply_filters( 'tf_tour_labels', array(
+        'name'                  => _x( '%2$s', 'tourfic post type name', 'tourfic' ),
+        'singular_name'         => _x( '%1$s', 'singular tourfic post type name', 'tourfic' ),
+        'add_new'               => __( 'Add New', 'tourfic' ),
+        'add_new_item'          => __( 'Add New %1$s', 'tourfic' ),
+        'edit_item'             => __( 'Edit %1$s', 'tourfic' ),
+        'new_item'              => __( 'New %1$s', 'tourfic' ),
+        'all_items'             => __( 'All %2$s', 'tourfic' ),
+        'view_item'             => __( 'View %1$s', 'tourfic' ),
+        'view_items'            => __( 'View %2$s', 'tourfic' ),
+        'search_items'          => __( 'Search %2$s', 'tourfic' ),
+        'not_found'             => __( 'No %2$s found', 'tourfic' ),
+        'not_found_in_trash'    => __( 'No %2$s found in Trash', 'tourfic' ),
+        'parent_item_colon'     => '',
+        'menu_name'             => _x( 'Tours', 'tourfic post type menu name', 'tourfic' ),
+        'featured_image'        => __( '%1$s Image', 'tourfic' ),
+        'set_featured_image'    => __( 'Set %1$s Image', 'tourfic' ),
+        'remove_featured_image' => __( 'Remove %1$s Image', 'tourfic' ),
+        'use_featured_image'    => __( 'Use as %1$s Image', 'tourfic' ),
+        'attributes'            => __( '%1$s Attributes', 'tourfic' ),
+        'filter_items_list'     => __( 'Filter %2$s list', 'tourfic' ),
+        'items_list_navigation' => __( '%2$s list navigation', 'tourfic' ),
+        'items_list'            => __( '%2$s list', 'tourfic' ),
+    ) );
 
-	$tour_labels =  apply_filters( 'tf_tour_labels', array(
-		'name'                  => _x( '%2$s', 'tourfic post type name', 'tourfic' ),
-		'singular_name'         => _x( '%1$s', 'singular tourfic post type name', 'tourfic' ),
-		'add_new'               => __( 'Add New', 'tourfic' ),
-		'add_new_item'          => __( 'Add New %1$s', 'tourfic' ),
-		'edit_item'             => __( 'Edit %1$s', 'tourfic' ),
-		'new_item'              => __( 'New %1$s', 'tourfic' ),
-		'all_items'             => __( 'All %2$s', 'tourfic' ),
-		'view_item'             => __( 'View %1$s', 'tourfic' ),
-		'view_items'             => __( 'View %2$s', 'tourfic' ),
-		'search_items'          => __( 'Search %2$s', 'tourfic' ),
-		'not_found'             => __( 'No %2$s found', 'tourfic' ),
-		'not_found_in_trash'    => __( 'No %2$s found in Trash', 'tourfic' ),
-		'parent_item_colon'     => '',
-		'menu_name'             => _x( 'Tours', 'tourfic post type menu name', 'tourfic' ),
-		'featured_image'        => __( '%1$s Image', 'tourfic' ),
-		'set_featured_image'    => __( 'Set %1$s Image', 'tourfic' ),
-		'remove_featured_image' => __( 'Remove %1$s Image', 'tourfic' ),
-		'use_featured_image'    => __( 'Use as %1$s Image', 'tourfic' ),
-		'attributes'            => __( '%1$s Attributes', 'tourfic' ),
-		'filter_items_list'     => __( 'Filter %2$s list', 'tourfic' ),
-		'items_list_navigation' => __( '%2$s list navigation', 'tourfic' ),
-		'items_list'            => __( '%2$s list', 'tourfic' ),
-	) );
+    foreach ( $tour_labels as $key => $value ) {
+        $tour_labels[$key] = sprintf( $value, tourfic_get_tour_label_singular(), tourfic_get_tour_label_plural() );
+    }
 
-	foreach ( $tour_labels as $key => $value ) {
-		$tour_labels[ $key ] = sprintf( $value, tourfic_get_tour_label_singular(), tourfic_get_tour_label_plural() );
-	}
+    $tourfic_args = array(
+        'labels'             => $tourfic_labels,
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'menu_icon'          => 'dashicons-calendar',
+        'rewrite'            => $rewrite,
+        'capability_type'    => 'product',
+        'map_meta_cap'       => true,
+        'has_archive'        => $archives,
+        'hierarchical'       => false,
+        'supports'           => apply_filters( 'tf_tourfic_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
+    );
 
+    $tourfic_tour_args = array(
+        'labels'             => $tour_labels,
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'menu_icon'          => 'dashicons-calendar',
+        'rewrite'            => $tour_rewrite,
+        'capability_type'    => 'product',
+        'map_meta_cap'       => true,
+        'has_archive'        => $archives,
+        'hierarchical'       => false,
+        'supports'           => apply_filters( 'tf_tourfic_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
+    );
 
-
-
-	$tourfic_args = array(
-		'labels'             => $tourfic_labels,
-		'public'             => true,
-		'publicly_queryable' => true,
-		'show_ui'            => true,
-		'show_in_menu'       => true,
-		'query_var'          => true,
-		'menu_icon'          => 'dashicons-calendar',
-		'rewrite'            => $rewrite,
-		'capability_type'    => 'product',
-		'map_meta_cap'       => true,
-		'has_archive'        => $archives,
-		'hierarchical'       => false,
-		'supports'           => apply_filters( 'tf_tourfic_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
-	);
-
-	$tourfic_tour_args = array(
-		'labels'             => $tour_labels,
-		'public'             => true,
-		'publicly_queryable' => true,
-		'show_ui'            => true,
-		'show_in_menu'       => true,
-		'query_var'          => true,
-		'menu_icon'          => 'dashicons-calendar',
-		'rewrite'            => $tour_rewrite,
-		'capability_type'    => 'product',
-		'map_meta_cap'       => true,
-		'has_archive'        => $archives,
-		'hierarchical'       => false,
-		'supports'           => apply_filters( 'tf_tourfic_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
-	);
-
-
-
-
-	register_post_type( 'tourfic', apply_filters( 'tf_tourfic_post_type_args', $tourfic_args ) );
-	register_post_type( 'tf_tours', apply_filters( 'tf_tour_post_type_args',$tourfic_tour_args ) );
+    register_post_type( 'tourfic', apply_filters( 'tf_tourfic_post_type_args', $tourfic_args ) );
+    register_post_type( 'tf_tours', apply_filters( 'tf_tour_post_type_args', $tourfic_tour_args ) );
 
 }
 add_action( 'init', 'tourfic_setup_tourfic_post_types', 1 );
@@ -123,23 +116,20 @@ add_action( 'init', 'tourfic_setup_tourfic_post_types', 1 );
  * @return array $defaults Default labels
  */
 function tourfic_get_default_labels() {
-	$defaults = array(
-	   'singular' => __( 'Hotel', 'tourfic' ),
-	   'plural'   => __( 'Hotels','tourfic' )
-	);
-	return apply_filters( 'tourfic_default_hotels_name', $defaults );
+    $defaults = array(
+        'singular' => __( 'Hotel', 'tourfic' ),
+        'plural'   => __( 'Hotels', 'tourfic' ),
+    );
+    return apply_filters( 'tourfic_default_hotels_name', $defaults );
 }
-
 
 function tourfic_get_default_tours_labels() {
-	$default_tour = array(
-	   'singular' => __( 'Tour', 'tourfic' ),
-	   'plural'   => __( 'Tours','tourfic' )
-	);
-	return apply_filters( 'tourfic_default_tour_name', $default_tour );
+    $default_tour = array(
+        'singular' => __( 'Tour', 'tourfic' ),
+        'plural'   => __( 'Tours', 'tourfic' ),
+    );
+    return apply_filters( 'tourfic_default_tour_name', $default_tour );
 }
-
-
 
 /**
  * Get Singular Label
@@ -150,14 +140,13 @@ function tourfic_get_default_tours_labels() {
  * @return string $defaults['singular'] Singular label
  */
 function tourfic_get_label_singular( $lowercase = false ) {
-	$defaults = tourfic_get_default_labels();
-	return ($lowercase) ? strtolower( $defaults['singular'] ) : $defaults['singular'];
+    $defaults = tourfic_get_default_labels();
+    return ( $lowercase ) ? strtolower( $defaults['singular'] ) : $defaults['singular'];
 }
 
-
 function tourfic_get_tour_label_singular( $lowercase = false ) {
-	$default_tour =tourfic_get_default_tours_labels();
-	return ($lowercase) ? strtolower($default_tour['singular'] ) : $default_tour['singular'];
+    $default_tour = tourfic_get_default_tours_labels();
+    return ( $lowercase ) ? strtolower( $default_tour['singular'] ) : $default_tour['singular'];
 }
 /**
  * Get Plural Label
@@ -166,13 +155,13 @@ function tourfic_get_tour_label_singular( $lowercase = false ) {
  * @return string $defaults['plural'] Plural label
  */
 function tourfic_get_label_plural( $lowercase = false ) {
-	$defaults = tourfic_get_default_labels();
-	return ( $lowercase ) ? strtolower( $defaults['plural'] ) : $defaults['plural'];
+    $defaults = tourfic_get_default_labels();
+    return ( $lowercase ) ? strtolower( $defaults['plural'] ) : $defaults['plural'];
 }
 
 function tourfic_get_tour_label_plural( $lowercase = false ) {
-	$default_tour = tourfic_get_default_tours_labels();
-	return ( $lowercase ) ? strtolower( $default_tour['plural'] ) : $default_tour['plural'];
+    $default_tour = tourfic_get_default_tours_labels();
+    return ( $lowercase ) ? strtolower( $default_tour['plural'] ) : $default_tour['plural'];
 }
 
 /**
@@ -183,25 +172,23 @@ function tourfic_get_tour_label_plural( $lowercase = false ) {
  * @return string $title New placeholder text
  */
 function tourfic_change_default_title( $title ) {
-	 // If a frontend plugin uses this filter (check extensions before changing this function)
-	 if ( !is_admin() ) {
-		$label = tourfic_get_label_singular();
-		$title = sprintf( __( 'Enter %s name here', 'tourfic' ), $label );
-		return $title;
-	 }
+    // If a frontend plugin uses this filter (check extensions before changing this function)
+    if ( !is_admin() ) {
+        $label = tourfic_get_label_singular();
+        $title = sprintf( __( 'Enter %s name here', 'tourfic' ), $label );
+        return $title;
+    }
 
-	 $screen = get_current_screen();
+    $screen = get_current_screen();
 
-	 if ( 'tourfic' == $screen->post_type ) {
-		$label = tourfic_get_label_singular();
-		$title = sprintf( __( 'Enter %s name here', 'tourfic' ), $label );
-	 }
+    if ( 'tourfic' == $screen->post_type ) {
+        $label = tourfic_get_label_singular();
+        $title = sprintf( __( 'Enter %s name here', 'tourfic' ), $label );
+    }
 
-	 return $title;
+    return $title;
 }
 add_filter( 'enter_title_here', 'tourfic_change_default_title' );
-
-
 
 /**
  * Taxonomy: Destination.
@@ -209,193 +196,189 @@ add_filter( 'enter_title_here', 'tourfic_change_default_title' );
 function tourfic_register_taxes_destination() {
 
     $labels = [
-        'name' => __( 'Destination', 'tourfic' ),
-        'singular_name' => __( 'Destinations', 'tourfic' ),
-        'menu_name' => __( 'Destination', 'tourfic' ),
-        'all_items' => __( 'All Destination', 'tourfic' ),
-        'edit_item' => __( 'Edit Destinations', 'tourfic' ),
-        'view_item' => __( 'View Destinations', 'tourfic' ),
-        'update_item' => __( 'Update Destinations name', 'tourfic' ),
-        'add_new_item' => __( 'Add new Destinations', 'tourfic' ),
-        'new_item_name' => __( 'New Destinations name', 'tourfic' ),
-        'parent_item' => __( 'Parent Destinations', 'tourfic' ),
-        'parent_item_colon' => __( 'Parent Destinations:', 'tourfic' ),
-        'search_items' => __( 'Search Destination', 'tourfic' ),
-        'popular_items' => __( 'Popular Destination', 'tourfic' ),
+        'name'                       => __( 'Destination', 'tourfic' ),
+        'singular_name'              => __( 'Destinations', 'tourfic' ),
+        'menu_name'                  => __( 'Destination', 'tourfic' ),
+        'all_items'                  => __( 'All Destination', 'tourfic' ),
+        'edit_item'                  => __( 'Edit Destinations', 'tourfic' ),
+        'view_item'                  => __( 'View Destinations', 'tourfic' ),
+        'update_item'                => __( 'Update Destinations name', 'tourfic' ),
+        'add_new_item'               => __( 'Add new Destinations', 'tourfic' ),
+        'new_item_name'              => __( 'New Destinations name', 'tourfic' ),
+        'parent_item'                => __( 'Parent Destinations', 'tourfic' ),
+        'parent_item_colon'          => __( 'Parent Destinations:', 'tourfic' ),
+        'search_items'               => __( 'Search Destination', 'tourfic' ),
+        'popular_items'              => __( 'Popular Destination', 'tourfic' ),
         'separate_items_with_commas' => __( 'Separate Destination with commas', 'tourfic' ),
-        'add_or_remove_items' => __( 'Add or remove Destination', 'tourfic' ),
-        'choose_from_most_used' => __( 'Choose from the most used Destination', 'tourfic' ),
-        'not_found' => __( 'No Destination found', 'tourfic' ),
-        'no_terms' => __( 'No Destination', 'tourfic' ),
-        'items_list_navigation' => __( 'Destination list navigation', 'tourfic' ),
-        'items_list' => __( 'Destination list', 'tourfic' ),
-        'back_to_items' => __( 'Back to Destination', 'tourfic' ),
+        'add_or_remove_items'        => __( 'Add or remove Destination', 'tourfic' ),
+        'choose_from_most_used'      => __( 'Choose from the most used Destination', 'tourfic' ),
+        'not_found'                  => __( 'No Destination found', 'tourfic' ),
+        'no_terms'                   => __( 'No Destination', 'tourfic' ),
+        'items_list_navigation'      => __( 'Destination list navigation', 'tourfic' ),
+        'items_list'                 => __( 'Destination list', 'tourfic' ),
+        'back_to_items'              => __( 'Back to Destination', 'tourfic' ),
     ];
 
     $destination_args = [
-        'label' => __( 'Destination', 'tourfic' ),
-        'labels' => $labels,
-        'public' => true,
-        'publicly_queryable' => true,
-        'hierarchical' => true,
-        'show_ui' => true,
-        'show_in_menu' => true,
-        'show_in_nav_menus' => true,
-        'query_var' => true,
-        'rewrite' => [ 'slug' => 'destination', 'with_front' => true, ],
-        'show_admin_column' => true,
-        'show_in_rest' => true,
-        'rest_base' => 'destination',
+        'label'                 => __( 'Destination', 'tourfic' ),
+        'labels'                => $labels,
+        'public'                => true,
+        'publicly_queryable'    => true,
+        'hierarchical'          => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'show_in_nav_menus'     => true,
+        'query_var'             => true,
+        'rewrite'               => ['slug' => 'destination', 'with_front' => true],
+        'show_admin_column'     => true,
+        'show_in_rest'          => true,
+        'rest_base'             => 'destination',
         'rest_controller_class' => 'WP_REST_Terms_Controller',
-        'show_in_quick_edit' => true,
+        'show_in_quick_edit'    => true,
     ];
-    register_taxonomy( 'destination', [ 'tourfic' ], apply_filters( 'tf_destination_tax_args', $destination_args ) );
+    register_taxonomy( 'destination', ['tourfic'], apply_filters( 'tf_destination_tax_args', $destination_args ) );
 
+    /**
+     * Taxonomy: Filters.
+     */
+    $labels = [
+        "name"                       => __( "Filters", 'tourfic' ),
+        "singular_name"              => __( "Filter", 'tourfic' ),
+        "menu_name"                  => __( "Filters", 'tourfic' ),
+        "all_items"                  => __( "All Filters", 'tourfic' ),
+        "edit_item"                  => __( "Edit Filter", 'tourfic' ),
+        "view_item"                  => __( "View Filter", 'tourfic' ),
+        "update_item"                => __( "Update Filter name", 'tourfic' ),
+        "add_new_item"               => __( "Add new Filter", 'tourfic' ),
+        "new_item_name"              => __( "New Filter name", 'tourfic' ),
+        "parent_item"                => __( "Parent Filter", 'tourfic' ),
+        "parent_item_colon"          => __( "Parent Filter:", 'tourfic' ),
+        "search_items"               => __( "Search Filters", 'tourfic' ),
+        "popular_items"              => __( "Popular Filters", 'tourfic' ),
+        "separate_items_with_commas" => __( "Separate Filters with commas", 'tourfic' ),
+        "add_or_remove_items"        => __( "Add or remove Filters", 'tourfic' ),
+        "choose_from_most_used"      => __( "Choose from the most used Filters", 'tourfic' ),
+        "not_found"                  => __( "No Filters found", 'tourfic' ),
+        "no_terms"                   => __( "No Filters", 'tourfic' ),
+        "items_list_navigation"      => __( "Filters list navigation", 'tourfic' ),
+        "items_list"                 => __( "Filters list", 'tourfic' ),
+        "back_to_items"              => __( "Back to Filters", 'tourfic' ),
+    ];
 
-	/**
-	 * Taxonomy: Filters.
-	 */
-	$labels = [
-		"name" => __( "Filters", 'tourfic' ),
-		"singular_name" => __( "Filter", 'tourfic' ),
-		"menu_name" => __( "Filters", 'tourfic' ),
-		"all_items" => __( "All Filters", 'tourfic' ),
-		"edit_item" => __( "Edit Filter", 'tourfic' ),
-		"view_item" => __( "View Filter", 'tourfic' ),
-		"update_item" => __( "Update Filter name", 'tourfic' ),
-		"add_new_item" => __( "Add new Filter", 'tourfic' ),
-		"new_item_name" => __( "New Filter name", 'tourfic' ),
-		"parent_item" => __( "Parent Filter", 'tourfic' ),
-		"parent_item_colon" => __( "Parent Filter:", 'tourfic' ),
-		"search_items" => __( "Search Filters", 'tourfic' ),
-		"popular_items" => __( "Popular Filters", 'tourfic' ),
-		"separate_items_with_commas" => __( "Separate Filters with commas", 'tourfic' ),
-		"add_or_remove_items" => __( "Add or remove Filters", 'tourfic' ),
-		"choose_from_most_used" => __( "Choose from the most used Filters", 'tourfic' ),
-		"not_found" => __( "No Filters found", 'tourfic' ),
-		"no_terms" => __( "No Filters", 'tourfic' ),
-		"items_list_navigation" => __( "Filters list navigation", 'tourfic' ),
-		"items_list" => __( "Filters list", 'tourfic' ),
-		"back_to_items" => __( "Back to Filters", 'tourfic' ),
-	];
+    $args = [
+        "label"                 => __( "Filters", 'tourfic' ),
+        "labels"                => $labels,
+        "public"                => true,
+        "publicly_queryable"    => false,
+        "hierarchical"          => false,
+        "show_ui"               => true,
+        "show_in_menu"          => true,
+        "show_in_nav_menus"     => true,
+        "show_in_quick_edit"    => true,
+        "meta_box_cb"           => false,
+        "query_var"             => true,
+        "rewrite"               => ['slug' => 'tf_filters', 'with_front' => true],
+        "show_admin_column"     => true,
+        "show_in_rest"          => true,
+        "rest_base"             => "tf_filters",
+        "rest_controller_class" => "WP_REST_Terms_Controller",
+        "show_in_quick_edit"    => false,
+    ];
+    register_taxonomy( 'tf_filters', ['tourfic'], apply_filters( 'tf_filters_tax_args', $args ) );
 
-	$args = [
-		"label" => __( "Filters", 'tourfic' ),
-		"labels" => $labels,
-		"public" => true,
-		"publicly_queryable" => false,
-		"hierarchical" => false,
-		"show_ui" => true,
-		"show_in_menu" => true,
-		"show_in_nav_menus" => true,
-		"show_in_quick_edit" => true,
-    	"meta_box_cb" => false,
-		"query_var" => true,
-		"rewrite" => [ 'slug' => 'tf_filters', 'with_front' => true, ],
-		"show_admin_column" => true,
-		"show_in_rest" => true,
-		"rest_base" => "tf_filters",
-		"rest_controller_class" => "WP_REST_Terms_Controller",
-		"show_in_quick_edit" => false,
-	];
-	register_taxonomy( 'tf_filters', [ 'tourfic' ], apply_filters( 'tf_filters_tax_args', $args ) );
-
-
-
-	/**
-	 * Taxonomy: Tours destination.
-	 */
+    /**
+     * Taxonomy: Tours destination.
+     */
 
     $labels = [
-        'name' => __( 'Destination', 'tourfic' ),
-        'singular_name' => __( 'Destinations', 'tourfic' ),
-        'menu_name' => __( 'Destination', 'tourfic' ),
-        'all_items' => __( 'All Destination', 'tourfic' ),
-        'edit_item' => __( 'Edit Destinations', 'tourfic' ),
-        'view_item' => __( 'View Destinations', 'tourfic' ),
-        'update_item' => __( 'Update Destinations name', 'tourfic' ),
-        'add_new_item' => __( 'Add new Destinations', 'tourfic' ),
-        'new_item_name' => __( 'New Destinations name', 'tourfic' ),
-        'parent_item' => __( 'Parent Destinations', 'tourfic' ),
-        'parent_item_colon' => __( 'Parent Destinations:', 'tourfic' ),
-        'search_items' => __( 'Search Destination', 'tourfic' ),
-        'popular_items' => __( 'Popular Destination', 'tourfic' ),
+        'name'                       => __( 'Destination', 'tourfic' ),
+        'singular_name'              => __( 'Destinations', 'tourfic' ),
+        'menu_name'                  => __( 'Destination', 'tourfic' ),
+        'all_items'                  => __( 'All Destination', 'tourfic' ),
+        'edit_item'                  => __( 'Edit Destinations', 'tourfic' ),
+        'view_item'                  => __( 'View Destinations', 'tourfic' ),
+        'update_item'                => __( 'Update Destinations name', 'tourfic' ),
+        'add_new_item'               => __( 'Add new Destinations', 'tourfic' ),
+        'new_item_name'              => __( 'New Destinations name', 'tourfic' ),
+        'parent_item'                => __( 'Parent Destinations', 'tourfic' ),
+        'parent_item_colon'          => __( 'Parent Destinations:', 'tourfic' ),
+        'search_items'               => __( 'Search Destination', 'tourfic' ),
+        'popular_items'              => __( 'Popular Destination', 'tourfic' ),
         'separate_items_with_commas' => __( 'Separate Destination with commas', 'tourfic' ),
-        'add_or_remove_items' => __( 'Add or remove Destination', 'tourfic' ),
-        'choose_from_most_used' => __( 'Choose from the most used Destination', 'tourfic' ),
-        'not_found' => __( 'No Destination found', 'tourfic' ),
-        'no_terms' => __( 'No Destination', 'tourfic' ),
-        'items_list_navigation' => __( 'Destination list navigation', 'tourfic' ),
-        'items_list' => __( 'Destination list', 'tourfic' ),
-        'back_to_items' => __( 'Back to Destination', 'tourfic' ),
+        'add_or_remove_items'        => __( 'Add or remove Destination', 'tourfic' ),
+        'choose_from_most_used'      => __( 'Choose from the most used Destination', 'tourfic' ),
+        'not_found'                  => __( 'No Destination found', 'tourfic' ),
+        'no_terms'                   => __( 'No Destination', 'tourfic' ),
+        'items_list_navigation'      => __( 'Destination list navigation', 'tourfic' ),
+        'items_list'                 => __( 'Destination list', 'tourfic' ),
+        'back_to_items'              => __( 'Back to Destination', 'tourfic' ),
     ];
 
     $tour_destination_args = [
-        'label' => __( 'Destination', 'tourfic' ),
-        'labels' => $labels,
-        'public' => true,
-        'publicly_queryable' => true,
-        'hierarchical' => true,
-        'show_ui' => true,
-        'show_in_menu' => true,
-        'show_in_nav_menus' => true,
-        'query_var' => true,
-        'rewrite' => [ 'slug' => 'tour_destination', 'with_front' => true, ],
-        'show_admin_column' => true,
-        'show_in_rest' => true,
-        'rest_base' => 'tour_destination',
+        'label'                 => __( 'Destination', 'tourfic' ),
+        'labels'                => $labels,
+        'public'                => true,
+        'publicly_queryable'    => true,
+        'hierarchical'          => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'show_in_nav_menus'     => true,
+        'query_var'             => true,
+        'rewrite'               => ['slug' => 'tour_destination', 'with_front' => true],
+        'show_admin_column'     => true,
+        'show_in_rest'          => true,
+        'rest_base'             => 'tour_destination',
         'rest_controller_class' => 'WP_REST_Terms_Controller',
-        'show_in_quick_edit' => true,
+        'show_in_quick_edit'    => true,
     ];
-    register_taxonomy( 'tour_destination', [ 'tf_tours' ], apply_filters( 'tf_tour_destination_tax_args', $tour_destination_args ) );
+    register_taxonomy( 'tour_destination', ['tf_tours'], apply_filters( 'tf_tour_destination_tax_args', $tour_destination_args ) );
 
-	/**
-	 * Taxonomy: Tours Tag.
-	 */
-	$labels = [
-		"name" => __( "Tour Features", 'tourfic' ),
-		"singular_name" => __( "Tour Feature", 'tourfic' ),
-		"menu_name" => __( "Tour Features", 'tourfic' ),
-		"all_items" => __( "All Features", 'tourfic' ),
-		"edit_item" => __( "Edit Feature", 'tourfic' ),
-		"view_item" => __( "View Features", 'tourfic' ),
-		"update_item" => __( "Update Feature name", 'tourfic' ),
-		"add_new_item" => __( "Add new Feature", 'tourfic' ),
-		"new_item_name" => __( "New Feature name", 'tourfic' ),
-		"parent_item" => __( "Parent Feature", 'tourfic' ),
-		"parent_item_colon" => __( "Parent Feature:", 'tourfic' ),
-		"search_items" => __( "Search Features", 'tourfic' ),
-		"popular_items" => __( "Popular Features", 'tourfic' ),
-		"separate_items_with_commas" => __( "Separate Features with commas", 'tourfic' ),
-		"add_or_remove_items" => __( "Add or remove Features", 'tourfic' ),
-		"choose_from_most_used" => __( "Choose from the most used Features", 'tourfic' ),
-		"not_found" => __( "No Features found", 'tourfic' ),
-		"no_terms" => __( "No Features", 'tourfic' ),
-		"items_list_navigation" => __( "Features list navigation", 'tourfic' ),
-		"items_list" => __( "Features list", 'tourfic' ),
-		"back_to_items" => __( "Back to Features", 'tourfic' ),
-	];
+    /**
+     * Taxonomy: Tours Tag.
+     */
+    $labels = [
+        "name"                       => __( "Tour Features", 'tourfic' ),
+        "singular_name"              => __( "Tour Feature", 'tourfic' ),
+        "menu_name"                  => __( "Tour Features", 'tourfic' ),
+        "all_items"                  => __( "All Features", 'tourfic' ),
+        "edit_item"                  => __( "Edit Feature", 'tourfic' ),
+        "view_item"                  => __( "View Features", 'tourfic' ),
+        "update_item"                => __( "Update Feature name", 'tourfic' ),
+        "add_new_item"               => __( "Add new Feature", 'tourfic' ),
+        "new_item_name"              => __( "New Feature name", 'tourfic' ),
+        "parent_item"                => __( "Parent Feature", 'tourfic' ),
+        "parent_item_colon"          => __( "Parent Feature:", 'tourfic' ),
+        "search_items"               => __( "Search Features", 'tourfic' ),
+        "popular_items"              => __( "Popular Features", 'tourfic' ),
+        "separate_items_with_commas" => __( "Separate Features with commas", 'tourfic' ),
+        "add_or_remove_items"        => __( "Add or remove Features", 'tourfic' ),
+        "choose_from_most_used"      => __( "Choose from the most used Features", 'tourfic' ),
+        "not_found"                  => __( "No Features found", 'tourfic' ),
+        "no_terms"                   => __( "No Features", 'tourfic' ),
+        "items_list_navigation"      => __( "Features list navigation", 'tourfic' ),
+        "items_list"                 => __( "Features list", 'tourfic' ),
+        "back_to_items"              => __( "Back to Features", 'tourfic' ),
+    ];
 
-	$feature_args = [
-		"label" => __( "Tour Features", 'tourfic' ),
-		"labels" => $labels,
-		"public" => true,
-		"publicly_queryable" => false,
-		"hierarchical" => false,
-		"show_ui" => true,
-		"show_in_menu" => true,
-		"show_in_nav_menus" => true,
-		"show_in_quick_edit" => true,
-    	"meta_box_cb" => false,
-		"query_var" => true,
-		"rewrite" => [ 'slug' => 'features', 'with_front' => true, ],
-		"show_admin_column" => true,
-		"show_in_rest" => true,
-		"rest_base" => "tf_features",
-		"rest_controller_class" => "WP_REST_Terms_Controller",
-		"show_in_quick_edit" => false,
-	];
-	register_taxonomy( 'tf_feature', [ 'tf_tours' ], apply_filters( 'tf_features_tax_args', $feature_args ) );
+    $feature_args = [
+        "label"                 => __( "Tour Features", 'tourfic' ),
+        "labels"                => $labels,
+        "public"                => true,
+        "publicly_queryable"    => true,
+        "hierarchical"          => true,
+        "show_ui"               => true,
+        "show_in_menu"          => true,
+        "show_in_nav_menus"     => true,
+        "meta_box_cb"           => false,
+        "query_var"             => true,
+        "rewrite"               => ['slug' => 'tf_feature', 'with_front' => true],
+        "show_admin_column"     => true,
+        "show_in_rest"          => true,
+        "rest_base"             => "tf_feature",
+        "rest_controller_class" => "WP_REST_Terms_Controller",
+        "show_in_quick_edit"    => true,
+    ];
+    register_taxonomy( 'tf_feature', ['tf_tours'], apply_filters( 'tf_features_tax_args', $feature_args ) );
 
 }
 add_action( 'init', 'tourfic_register_taxes_destination' );

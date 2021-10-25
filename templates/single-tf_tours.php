@@ -26,13 +26,15 @@ $phone = $meta['phone'] ? $meta['phone'] : null;
 $website = $meta['website'] ? $meta['website'] : null;
 $fax = $meta['fax'] ? $meta['fax'] : null;
 $faqs = $meta['faqs'] ? $meta['faqs'] : null;
+
+
 //die;
 // Get all rooms
 $tf_room = get_field('tf_room') ? get_field('tf_room') : array();
 $information = get_field('information') ? get_field('information') : null;
 $share_text = get_the_title();
 $share_link = esc_url( home_url("/?p=").get_the_ID() );
-$features = get_the_terms( get_the_ID() , array( 'tf_filters') );
+$feature_meta = $meta['tour_feature'];
 
 $terms_and_conditions = $meta['terms_conditions'];
 $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $post->ID, 'tf_faqs', true ) : array();
@@ -118,7 +120,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					<?php if( $group_size ): ?>
 					<div class="item">
 						<div class="icon">
-							<i class="far fa-clock"></i>
+							<i class="fas fa-users"></i>
 						</div>
 						<div class="info">
 							<h4 class="title"><?php echo __( 'Group Size', 'tourfic' ); ?></h4>
@@ -129,7 +131,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					<?php if( $language ): ?>
 					<div class="item">
 						<div class="icon">
-							<i class="far fa-clock"></i>
+							<i class="fas fa-language"></i>
 						</div>
 						<div class="info">
 							<h4 class="title"><?php echo __( 'Language', 'tourfic' ); ?></h4>
@@ -160,7 +162,8 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				</div>
 				<!-- End content -->
 
-				<?php if( $features ) : ?>
+				
+				<?php if( $feature_meta ) : ?>
 				<!-- Start features -->
 				<div class="tf_features">
 					<div class="listing-title">
@@ -168,12 +171,16 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					</div>
 
 					<div class="tf_feature_list">
-						<?php foreach($features as $feature): ?>
-							<?php $feature_icon = get_term_meta( $feature->term_id, 'filter-taxonomy-image-id', true ); ?>
+						<?php 
+						foreach( $feature_meta as $feature ):
+							$term_meta = get_term_meta($feature, 'feature_meta', true);
+							$term = get_term_by( 'id', $feature, 'tf_feature' );
+						
+						?>
                            <div class="single_feature_box">
                            
-                           	<img src="<?php echo wp_get_attachment_url($feature_icon); ?>" alt="">
-                           	<p class="feature_list_title"><?php echo $feature->name; ?></p>
+                           	<img src="<?php echo $term_meta['fetures_icon']; ?>" alt="">
+                           	<p class="feature_list_title"><?php echo $term->name;  ?></p>
                            </div>
 						<?php endforeach; ?>
 
