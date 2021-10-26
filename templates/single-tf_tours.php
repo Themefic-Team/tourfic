@@ -26,9 +26,9 @@ $phone = $meta['phone'] ? $meta['phone'] : null;
 $website = $meta['website'] ? $meta['website'] : null;
 $fax = $meta['fax'] ? $meta['fax'] : null;
 $faqs = $meta['faqs'] ? $meta['faqs'] : null;
-
-
+$itineraries = $meta['itinerary'] ? $meta['itinerary'] : null;
 //die;
+
 // Get all rooms
 $tf_room = get_field('tf_room') ? get_field('tf_room') : array();
 $information = get_field('information') ? get_field('information') : null;
@@ -101,7 +101,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 
 				<!-- Start gallery -->
 				<div class="tf_gallery-wrap">
-					<?php echo tourfic_gallery_slider(false,$post_id,$gallery); ?>
+					<?php echo tourfic_gallery_slider( false, $post_id, $gallery); ?>
 				</div>
 				<!-- End gallery-->
 				<!--Information section start-->
@@ -148,7 +148,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					<div class="highlights-title">
 						<h4><?php esc_html_e( 'Highlights', 'tourfic' ); ?></h4>
 					</div>
-					<?php _e( $additional_information ); ?>
+					<?php _e( $additional_information, 'tourfic' ); ?>
 				</div>
 				<!-- End highlights content -->
 				<?php endif; ?>
@@ -162,6 +162,29 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				</div>
 				<!-- End content -->
 
+				<?php if( $itineraries ): ?>
+				<!--Iternary start-->
+				<div class="tf-itinerary">
+					<div class="itinerary-title">
+						<h4><?php echo __( 'Itinerary','tourfic' ); ?></h4>
+					</div>
+					<?php foreach( $itineraries as $itinerary ){ ?>
+					<div class="tf-single-itinerary">
+						<div class="itinerary-head">
+							<h5><?php echo esc_html( $itinerary['time'] ) . " " . esc_html( $itinerary['title'] );  ?></h5>
+							<div class="icon">
+								<i class="fa fa-angle-down"></i>
+							</div>
+						</div>
+						<div class="itinerary-content">
+							<img src="<?php echo esc_url( $itinerary['image'] );?>" />
+							<p><?php echo esc_html( $itinerary['desc'] ); ?></p>
+						</div>
+					</div>
+				</div>
+				<?php } ?>
+				<!--Iternary end-->
+				<?php endif; ?>
 				
 				<?php if( $feature_meta ) : ?>
 				<!-- Start features -->
@@ -173,14 +196,13 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					<div class="tf_feature_list">
 						<?php 
 						foreach( $feature_meta as $feature ):
-							$term_meta = get_term_meta($feature, 'feature_meta', true);
+							$term_meta = get_term_meta( $feature, 'feature_meta', true );
 							$term = get_term_by( 'id', $feature, 'tf_feature' );
 						
 						?>
                            <div class="single_feature_box">
-                           
-                           	<img src="<?php echo $term_meta['fetures_icon']; ?>" alt="">
-                           	<p class="feature_list_title"><?php echo $term->name;  ?></p>
+								<img src="<?php echo $term_meta['fetures_icon']; ?>" alt="">
+								<p class="feature_list_title"><?php echo $term->name;  ?></p>
                            </div>
 						<?php endforeach; ?>
 

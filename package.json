@@ -4,7 +4,7 @@
   "description": "=== Tourfic - Travel Booking Solution for WooCommerce ===\r Contributors: psdtowpservice, themefic, mdshuvo, raihan143, hasanet\r Tags: wordpress travel, wp travel plugin, wp travel, wordpress travel booking plugin, wordpress tour plugin, tour booking plugin wordpress, wordpress travel agency, woocommerce tour booking, woocommerce travel booking plugin, travel tour wordpress, hotel booking, tour booking, tour operator, travel, tour, trip, travel booking, travel agency, wordpress tour, woocommerce tour, woocommerce travel\r Requires at least: 4.2\r Tested up to: 5.7.2\r Requires PHP: 5.4\r Stable tag: 1.0.47\r License: GPL-2.0+\r License URI: http://www.gnu.org/licenses/gpl-2.0.txt",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sass": "node-sass -watch src/scss/components -o src/scss"
   },
   "repository": {
     "type": "git",

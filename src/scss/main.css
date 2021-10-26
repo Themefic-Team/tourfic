@@ -2,11 +2,6 @@
 /*================================
 =            Basic CSS            =
 ================================*/
-
-.single_feature_box img {
-  width: 25px;
-}
-
 .tourfic-wrap {
   font-size: 14px;
   padding-top: 30px;
@@ -627,7 +622,7 @@ p.comment-form-email {
   display: none;
 }
 
-/*Tour Styles*/
+/* AH Tour Styles*/
 .tf_informations .item {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -649,6 +644,38 @@ p.comment-form-email {
   margin: 20px 0;
 }
 
+.single_feature_box img {
+  width: 25px;
+}
+
+.icon {
+  float: right;
+}
+
+.itinerary-head h5 {
+  display: inline;
+}
+
+.itinerary-head {
+  cursor: pointer;
+}
+
+.tf-single-itinerary img {
+  width: 30%;
+}
+
+.itinerary-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px 0;
+}
+
+.itinerary-content img {
+  padding-right: 10px;
+}
+
+/*AH css code end */
 .tf_tab-wrap {
   margin-top: 50px;
 }

@@ -54,7 +54,7 @@ if ( class_exists( 'CSF' ) ) {
                 'multiple'    => true,
                 'chosen'      => true,
                 'options'     => 'categories',
-                'query_args'    => [
+                'query_args'  => [
                     'taxonomy' => 'tf_feature',
                 ],
                 'placeholder' => __( 'Add features', 'tourfic' ),
@@ -95,6 +95,7 @@ if ( class_exists( 'CSF' ) ) {
 
         ),
     ) );
+    
     // Create a section
     CSF::createSection( $prefix, array(
         'title'  => __( 'Hightlights', 'tourfic' ),
@@ -131,26 +132,6 @@ if ( class_exists( 'CSF' ) ) {
                 'type'     => 'text',
                 'title'    => __( 'Languages', 'tourfic' ),
                 'subtitle' => __( 'Input languages seperated by comma(,)', 'tourfic' ),
-            ),
-            array(
-                'id'       => 'min_days',
-                'type'     => 'slider',
-                'max'      => '30',
-                'title'    => __( 'Minimum days to book before departure', 'tourfic' ),
-                'subtitle' => __( 'Minimum days to book before departure', 'tourfic' ),
-            ),
-            array(
-                'id'       => 'external_booking',
-                'type'     => 'switcher',
-                'title'    => __( 'Allow external booking', 'tourfic' ),
-                'subtitle' => __( 'Clik to allow external booking', 'tourfic' ),
-            ),
-            array(
-                'id'         => 'external_booking_link',
-                'type'       => 'text',
-                'title'      => __( 'External booking link', 'tourfic' ),
-                'subtitle'   => __( 'Input external booking link', 'tourfic' ),
-                'dependency' => array( 'external_booking', '==', 'true' ),
             ),
             array(
                 'id'       => 'min_people',
@@ -202,6 +183,34 @@ if ( class_exists( 'CSF' ) ) {
     ) );
 
     CSF::createSection( $prefix, array(
+        'title'  => __( 'Tour Extra', 'tourfic' ),
+        'fields' => array(
+            array(
+                'id'     => 'tour_extra',
+                'type'   => 'repeater',
+                'title'  => __( 'Extra service', 'tourfic' ),
+                'fields' => array(
+                    array(
+                        'id'    => 'title',
+                        'type'  => 'text',
+                        'title' => __( 'Title', 'tourfic' ),
+                    ),
+                    array(
+                        'id'    => 'desc',
+                        'type'  => 'textarea',
+                        'title' => __( 'Short description', 'tourfic' ),
+                    ),
+                    array(
+                        'id'    => 'price',
+                        'type'  => 'text',
+                        'title' => __( 'Price', 'tourfic' ),
+                    ),
+                ),
+            ),
+        ),
+    ) );
+
+    CSF::createSection( $prefix, array(
         'title'  => __( 'Availability', 'tourfic' ),
         'fields' => array(
             array(
@@ -213,6 +222,33 @@ if ( class_exists( 'CSF' ) ) {
                 'id'    => 'check_out',
                 'type'  => 'date',
                 'title' => __( 'Check Out', 'tourfic' ),
+            ),
+        ),
+    ) );
+
+    CSF::createSection( $prefix, array(
+        'title'  => __( 'Booking', 'tourfic' ),
+        'fields' => array(
+
+            array(
+                'id'       => 'min_days',
+                'type'     => 'slider',
+                'max'      => '30',
+                'title'    => __( 'Minimum days to book before departure', 'tourfic' ),
+                'subtitle' => __( 'Minimum days to book before departure', 'tourfic' ),
+            ),
+            array(
+                'id'       => 'external_booking',
+                'type'     => 'switcher',
+                'title'    => __( 'Allow external booking', 'tourfic' ),
+                'subtitle' => __( 'Clik to allow external booking', 'tourfic' ),
+            ),
+            array(
+                'id'         => 'external_booking_link',
+                'type'       => 'text',
+                'title'      => __( 'External booking link', 'tourfic' ),
+                'subtitle'   => __( 'Input external booking link', 'tourfic' ),
+                'dependency' => array( 'external_booking', '==', 'true' ),
             ),
         ),
     ) );
@@ -232,6 +268,12 @@ if ( class_exists( 'CSF' ) ) {
                         'subtitle' => __( 'You can place the tour plan', 'tourfic' ),
                     ),
                     array(
+                        'id'       => 'title',
+                        'type'     => 'text',
+                        'title'    => __( 'Title', 'tourfic' ),
+                        'subtitle' => __( 'Input the title here', 'tourfic' ),
+                    ),
+                    array(
                         'id'           => 'image',
                         'type'         => 'upload',
                         'title'        => 'Upload Image',
@@ -244,6 +286,38 @@ if ( class_exists( 'CSF' ) ) {
                         'id'    => 'desc',
                         'type'  => 'textarea',
                         'title' => __( 'Description', 'tourfic' ),
+                    ),
+                ),
+            ),
+        ),
+    ) );
+
+    CSF::createSection( $prefix, array(
+        'title'  => __( 'Exclude/Include', 'tourfic' ),
+        'fields' => array(
+            array(
+                'id'     => 'inc',
+                'type'   => 'repeater',
+                'title'  => __( 'Include', 'tourfic' ),
+                'fields' => array(
+                    array(
+                        'id'       => 'inc',
+                        'type'     => 'text',
+                        'title'    => __( 'Included', 'tourfic' ),
+                        'subtitle' => __( 'Included facilites', 'tourfic' ),
+                    ),
+                ),
+            ),
+            array(
+                'id'     => 'exc',
+                'type'   => 'repeater',
+                'title'  => __( 'Exclude', 'tourfic' ),
+                'fields' => array(
+                    array(
+                        'id'       => 'exc',
+                        'type'     => 'text',
+                        'title'    => __( 'Excluded', 'tourfic' ),
+                        'subtitle' => __( 'Excluded facilites', 'tourfic' ),
                     ),
                 ),
             ),

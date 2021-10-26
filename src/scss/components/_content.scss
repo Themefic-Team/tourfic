@@ -254,7 +254,7 @@ p.comment-form-email {
     }
 }
 
-/*Tour Styles*/
+/* AH Tour Styles*/
 
 .tf_informations .item {
     display: flex;
@@ -273,3 +273,35 @@ p.comment-form-email {
     margin: 20px 0;
   }
   
+.single_feature_box img {
+    width: 25px;
+  }
+  .icon {
+    float: right;
+  }
+  
+  .itinerary-head h5 {
+    display: inline;
+  }
+  
+  .itinerary-head {
+    cursor: pointer;
+  }
+  
+  .tf-single-itinerary img {
+    width: 30%;
+  }
+  
+  .tf-single-itinerary {
+  }
+  
+  .itinerary-content {
+    display: flex;
+    padding: 10px 0;
+  }
+  
+  .itinerary-content img {
+    padding-right: 10px;
+  }
+  
+  /*AH css code end */
