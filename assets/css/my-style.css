@@ -1,0 +1,73 @@
+
+/* AH Tour Styles*/
+
+.tf_informations .item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .tf_informations .item .icon {
+    font-size: 32px;
+    margin-right: 10px;
+  }
+  
+  .tf_informations {
+    padding: 10px 0px;
+    border-top: 1px solid #00698f;
+    border-bottom: 1px solid #00698f;
+    margin: 20px 0;
+  }
+.single_feature_box img {
+    width: 25px;
+  }
+  .icon {
+    float: right;
+  }
+  .itinerary-title h4{
+      text-transform: uppercase;
+      margin-bottom: 15px;
+  }
+  .itinerary-head h5 {
+    display: inline;
+  }
+  
+  .itinerary-head {
+    cursor: pointer;
+    padding: 12px 5px;
+    background: #f7f7f7;
+}
+.itinerary-head span.time {
+    font-weight: bold;
+}
+  .tf-single-itinerary img {
+    width: 30%;
+  }
+  
+  .tf-single-itinerary {
+    border-left: 5px solid #16a76f;
+    padding: 0 5px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+  
+.itinerary-content {
+    display: flex;
+    padding: 10px 0;
+}
+.tf-single-itinerary .itinerary-content img {
+    float: left;
+    padding-right: 10px;
+}
+
+.tf-single-itinerary .icon {
+    transform: rotate(180deg);
+}
+
+
+.tf-single-itinerary.active .icon {
+    transform: rotate(0deg);
+}
+.tf-single-itinerary .itinerary-content {
+    display: none;
+}
+  /*AH css code end */

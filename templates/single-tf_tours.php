@@ -98,7 +98,6 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 		<div class="tf_row">
 			<!-- Start Content -->
 			<div class="tf_content">
-
 				<!-- Start gallery -->
 				<div class="tf_gallery-wrap">
 					<?php echo tourfic_gallery_slider( false, $post_id, $gallery); ?>
@@ -171,7 +170,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					<?php foreach( $itineraries as $itinerary ){ ?>
 					<div class="tf-single-itinerary">
 						<div class="itinerary-head">
-							<h5><?php echo esc_html( $itinerary['time'] ) . " " . esc_html( $itinerary['title'] );  ?></h5>
+							<h5><span class="time"><?php echo esc_html( $itinerary['time'] ) ?></span> <?php echo esc_html( $itinerary['title'] );  ?></h5>
 							<div class="icon">
 								<i class="fa fa-angle-down"></i>
 							</div>
@@ -181,8 +180,8 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 							<p><?php echo esc_html( $itinerary['desc'] ); ?></p>
 						</div>
 					</div>
+					<?php } ?>
 				</div>
-				<?php } ?>
 				<!--Iternary end-->
 				<?php endif; ?>
 				

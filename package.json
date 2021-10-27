@@ -4,7 +4,8 @@
   "description": "=== Tourfic - Travel Booking Solution for WooCommerce ===\r Contributors: psdtowpservice, themefic, mdshuvo, raihan143, hasanet\r Tags: wordpress travel, wp travel plugin, wp travel, wordpress travel booking plugin, wordpress tour plugin, tour booking plugin wordpress, wordpress travel agency, woocommerce tour booking, woocommerce travel booking plugin, travel tour wordpress, hotel booking, tour booking, tour operator, travel, tour, trip, travel booking, travel agency, wordpress tour, woocommerce tour, woocommerce travel\r Requires at least: 4.2\r Tested up to: 5.7.2\r Requires PHP: 5.4\r Stable tag: 1.0.47\r License: GPL-2.0+\r License URI: http://www.gnu.org/licenses/gpl-2.0.txt",
   "main": "gulpfile.js",
   "scripts": {
-    "sass": "node-sass -watch src/scss/components -o src/scss"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "gulp sass"
   },
   "repository": {
     "type": "git",
@@ -14,15 +15,16 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/themefic/tourfic#readme",
   "dependencies": {
-    "all": "0.0.0",
-    "autoprefixer": "^10.2.6",
-    "browser-sync": "^2.26.14",
-    "cssnano": "^5.0.6",
-    "gulp": "^4.0.2",
-    "gulp-postcss": "^9.0.0",
+    "all": "^0.0.0",
+    "autoprefixer": "^10.3.7",
+    "browser-sync": "^2.27.6",
+    "browsersync": "^0.0.1-security",
+    "cssnano": "^5.0.8",
+    "gulp": "^3.9.1",
+    "gulp-postcss": "^9.0.1",
     "gulp-rename": "^2.0.0",
-    "gulp-sass": "^4.1.0",
+    "gulp-sass": "^5.0.0",
     "gulp-sourcemaps": "^3.0.0",
-    "postcss": "^8.3.4"
+    "postcss": "^8.3.11"
   }
 }

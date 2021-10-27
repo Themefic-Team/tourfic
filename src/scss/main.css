@@ -2308,7 +2308,7 @@ span.close-aq {
     height: 100%;
     padding: 20px;
   }
-  .archive_ajax_result tourfic-single-left {
+  .archive_ajax_result .tourfic-single-left {
     width: 100%;
     margin-bottom: 16px;
   }

@@ -160,6 +160,7 @@ class Tourfic_WordPress_Plugin{
 		wp_enqueue_style('tourfic-styles', plugin_dir_url( __FILE__ ) . 'assets/css/tourfic-styles.min.css', null, $TOURFIC_VERSION );
 		
 		wp_enqueue_style( 'tourfic-autocomplete', plugin_dir_url( __FILE__ ) . 'assets/css/tourfic-autocomplete.css', null, $TOURFIC_VERSION );
+		wp_enqueue_style( 'my-style', plugin_dir_url( __FILE__ ) . 'assets/css/my-style.css', null, $TOURFIC_VERSION );
 
 	    wp_enqueue_script( 'slick', plugin_dir_url( __FILE__ ) . 'assets/slick/slick.min.js', array('jquery'), $TOURFIC_VERSION );
 

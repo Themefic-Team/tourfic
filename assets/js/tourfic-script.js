@@ -101,6 +101,10 @@
         $('.faq-head').click(function(e){
             $(this).parent().toggleClass('active').find('.faq-content').slideToggle('fast');
         });
+        //Itinerary accordion
+        $('.itinerary-head').on('click',function(e){
+            $(this).parent().toggleClass('active').find('.itinerary-content').slideToggle('fast');
+        });
 
 
         // Date picker
