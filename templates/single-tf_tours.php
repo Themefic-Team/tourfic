@@ -26,6 +26,8 @@ $phone = $meta['phone'] ? $meta['phone'] : null;
 $website = $meta['website'] ? $meta['website'] : null;
 $fax = $meta['fax'] ? $meta['fax'] : null;
 $faqs = $meta['faqs'] ? $meta['faqs'] : null;
+$inc = $meta['inc'] ? $meta['inc'] : null;
+$exc = $meta['exc'] ? $meta['exc'] : null;
 $itineraries = $meta['itinerary'] ? $meta['itinerary'] : null;
 //die;
 
@@ -209,6 +211,34 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				</div>
 				<!-- End features -->
 				<?php endif; ?>
+				<?php if( $inc || $exc ): ?>			
+				<!-- Start Include/Exlude  -->
+				<div class="inc-exc-section">
+					<div class="inc-exc-title">
+						<h4><?php esc_html_e( 'Included/Excluded', 'tourfic' ); ?></h4>
+					</div>
+					<div class="tf-include">
+						<ul class="items">
+							<?php
+								foreach( $inc as $key => $val ){
+									echo "<li>". $val['inc'] ."</li>";
+								}
+							?>
+						</ul>
+					</div>
+					<div class="tf-exclude">
+						<ul class="items">
+						<?php
+								foreach( $exc as $key => $val ){
+									echo "<li>". $val['exc'] ."</li>";
+								}
+							?>
+						</ul>
+					</div>
+				</div>
+				<!-- End Include/Exlude  -->
+				<?php endif;?>
+			
 
 
 				<?php if( $tf_room ) : ?>
