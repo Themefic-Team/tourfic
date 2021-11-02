@@ -219,20 +219,20 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					</div>
 					<div class="tf-include">
 						<ul class="items">
-							<?php
-								foreach( $inc as $key => $val ){
-									echo "<li>". $val['inc'] ."</li>";
-								}
-							?>
+						<?php
+							foreach( $inc as $key => $val ){
+								echo "<li>". $val['inc'] ."</li>";
+							}
+						?>
 						</ul>
 					</div>
 					<div class="tf-exclude">
 						<ul class="items">
 						<?php
-								foreach( $exc as $key => $val ){
-									echo "<li>". $val['exc'] ."</li>";
-								}
-							?>
+							foreach( $exc as $key => $val ){
+								echo "<li>". $val['exc'] ."</li>";
+							}
+						?>
 						</ul>
 					</div>
 				</div>

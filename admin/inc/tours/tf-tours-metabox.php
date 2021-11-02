@@ -95,7 +95,7 @@ if ( class_exists( 'CSF' ) ) {
 
         ),
     ) );
-    
+
     // Create a section
     CSF::createSection( $prefix, array(
         'title'  => __( 'Hightlights', 'tourfic' ),
@@ -211,17 +211,27 @@ if ( class_exists( 'CSF' ) ) {
     ) );
 
     CSF::createSection( $prefix, array(
-        'title'  => __( 'Availability', 'tourfic' ),
+        'title'  => __( 'Type and Availability', 'tourfic' ),
         'fields' => array(
             array(
-                'id'    => 'check_in',
-                'type'  => 'date',
-                'title' => __( 'Check In', 'tourfic' ),
+                'id'      => 'type',
+                'type'    => 'select',
+                'title'   => __( 'Tour type', 'tourfic' ),
+                'options' => [
+                    'continuous' => __( 'Continuous', 'tourfic' ),
+                    'fixed'      => __( 'Fixed', 'tourfic' ),
+                ],
             ),
             array(
-                'id'    => 'check_out',
-                'type'  => 'date',
-                'title' => __( 'Check Out', 'tourfic' ),
+                'id'    => 'custom_availability',
+                'type'  => 'radio',
+                'title'   => __( 'Custom availability', 'tourfic' ),
+                'inline' => true,
+                'dependency' => array( 'type', '==', 'continuous' ),
+                'options' => [
+                    'yes' => __( 'Yes', 'tourfic' ),
+                    'no'      => __( 'No', 'tourfic' ),
+                ],
             ),
         ),
     ) );
