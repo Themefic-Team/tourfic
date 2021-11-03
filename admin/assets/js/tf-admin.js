@@ -158,6 +158,9 @@ jQuery(function($){
 
         });
 
+        //full calendar init
+        
+
 	});
 
 });

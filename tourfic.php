@@ -237,8 +237,9 @@ class Tourfic_WordPress_Plugin{
 			wp_add_inline_script( 'select2', $output );
 
 		}
-
 		wp_register_style( 'font-awesome', plugin_dir_url( __FILE__ ) . 'assets/font-awesome-4.7.0/css/font-awesome.min.css' );
+		wp_enqueue_style('fullcalendar', plugin_dir_url( __FILE__ ) . 'admin/assets/css/fullcalendar/main.min.css' );
+		wp_enqueue_script('fullcalendar', plugin_dir_url( __FILE__ ) . 'admin/assets/js/fullcalendar/main.min.js' );
 
 
 	}
