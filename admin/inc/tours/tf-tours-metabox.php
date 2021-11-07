@@ -233,6 +233,24 @@ if ( class_exists( 'CSF' ) ) {
                     'no'      => __( 'No', 'tourfic' ),
                 ],
             ),
+            array(
+                'id'    => 'check_in',
+                'type'  => 'date',
+                'title'   => __( 'Check In', 'tourfic' ),
+                'class' => 'check-in',
+            ),
+            array(
+                'id'    => 'check_out',
+                'type'  => 'date',
+                'title'   => __( 'Check Out', 'tourfic' ),
+                'class' => 'check-out',
+
+            ),
+            array(
+                'id'    => 'calendar',
+                'type'  => 'calendar',
+                'title'   => __( 'Availability', 'tourfic' ),
+            ),
         ),
     ) );
 

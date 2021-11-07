@@ -39,6 +39,7 @@ require_once(dirname( __FILE__ ) . '/admin/framework/framework.php');
 require_once(dirname( __FILE__ ) . '/admin/framework/settings.php');
 require_once(dirname( __FILE__ ) . '/admin/framework/taxonomy-fields.php');
 require_once(dirname( __FILE__ ) . '/admin/inc/tours/tf-tours-metabox.php');
+require_once(dirname( __FILE__ ) . '/admin/framework/calendar.php');
 
 if ( ! function_exists( 'tourfic_opt' ) ) {
 	function tourfic_opt( $option = '', $default = null ) {
@@ -238,8 +239,9 @@ class Tourfic_WordPress_Plugin{
 
 		}
 		wp_register_style( 'font-awesome', plugin_dir_url( __FILE__ ) . 'assets/font-awesome-4.7.0/css/font-awesome.min.css' );
-		wp_enqueue_style('fullcalendar', plugin_dir_url( __FILE__ ) . 'admin/assets/css/fullcalendar/main.min.css' );
-		wp_enqueue_script('fullcalendar', plugin_dir_url( __FILE__ ) . 'admin/assets/js/fullcalendar/main.min.js' );
+		wp_enqueue_style( 'fullcalendar', plugin_dir_url( __FILE__ ) . 'admin/assets/css/fullcalendar/main.min.css' );
+		wp_enqueue_script( 'fullcalendar', plugin_dir_url( __FILE__ ) . 'admin/assets/js/fullcalendar/main.js',array( 'jquery' ),false,true );
+		wp_enqueue_script( 'fullcalendar-init', plugin_dir_url( __FILE__ ) . 'admin/assets/js/fullcalendar/calendar.js',array( 'jquery','fullcalendar' ),false,true );
 
 
 	}
