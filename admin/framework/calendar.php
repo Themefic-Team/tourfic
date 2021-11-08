@@ -18,7 +18,7 @@ if ( !class_exists( 'CSF_Field_Calendar' ) ) {
 		public function render() {
 
 			echo $this->field_before();
-			echo '<div id="calendar" name="' . $this->field_name() . '" value="' . $this->value . '"></div>';
+			echo '<div id="calendar" name="' . $this->field_name() . '" '. $this->field_attributes() .' value="' . $this->value . '"></div>';
 
 			echo $this->field_after();
 

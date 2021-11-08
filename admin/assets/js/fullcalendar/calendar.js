@@ -2,17 +2,25 @@ jQuery('document').ready(function($){
 
 
 //document.addEventListener('DOMContentLoaded', function() {
-    
-    var calendarEl = document.getElementById('calendar');
+    var beafwcElement = ['calendar','calendar2'];
+    $.each(beafwcElement,function(i,element){
+   
+
+    var calendarEl = $('.'+element + ' div');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
       selectable: true,
       initialView: 'dayGridMonth',
+      visibleRange: {
+        start: '2020-03-22',
+        end: '2020-03-25'
+      },
       customButtons: {
         reloadButton: {
             text: 'Reload',
             click: function () {
                 calendar.refetchEvents();
+                calendar.render();
             }
         }
     },
@@ -25,16 +33,16 @@ jQuery('document').ready(function($){
         //alert('clicked ' + info.dateStr);
       },
       select: function(info) {
-          console.log(info);
         $('.check-in input').val(info.startStr);
         $('.check-out input').val(info.endStr);
       }
     });
-
+  $('.csf--inline-list input').on('change',function(){
     calendar.render();
+  })
     console.log(calendar);
   //});
-
+})
 });
 
   /**

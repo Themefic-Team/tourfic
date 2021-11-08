@@ -222,35 +222,82 @@ if ( class_exists( 'CSF' ) ) {
                     'fixed'      => __( 'Fixed', 'tourfic' ),
                 ],
             ),
+            //Fixed availability
             array(
-                'id'    => 'custom_availability',
-                'type'  => 'radio',
-                'title'   => __( 'Custom availability', 'tourfic' ),
-                'inline' => true,
-                'dependency' => array( 'type', '==', 'continuous' ),
-                'options' => [
-                    'yes' => __( 'Yes', 'tourfic' ),
-                    'no'      => __( 'No', 'tourfic' ),
-                ],
+                'id'         => 'fixed_availability',
+                'type'       => 'fieldset',
+                'title'      => 'Availability',
+                'dependency' => array( 'type', '==', 'fixed' ),
+                'fields'     => array(
+                    array(
+                        'id'    => 'check_in',
+                        'type'  => 'date',
+                        'title' => __( 'Check In', 'tourfic' ),
+                        'class' => 'check-in',
+                    ),
+                    array(
+                        'id'    => 'check_out',
+                        'type'  => 'date',
+                        'title' => __( 'Check Out', 'tourfic' ),
+                        'class' => 'check-out',
+                    ),
+                    array(
+                        'id'    => 'seat',
+                        'type'  => 'number',
+                        'title' => __( 'Seat limit', 'tourfic' ),
+                    ),
+                ),
             ),
-            array(
-                'id'    => 'check_in',
-                'type'  => 'date',
-                'title'   => __( 'Check In', 'tourfic' ),
-                'class' => 'check-in',
-            ),
-            array(
-                'id'    => 'check_out',
-                'type'  => 'date',
-                'title'   => __( 'Check Out', 'tourfic' ),
-                'class' => 'check-out',
 
-            ),
+            //continuous availability
             array(
-                'id'    => 'calendar',
-                'type'  => 'calendar',
-                'title'   => __( 'Availability', 'tourfic' ),
+                'id'         => 'continuous_availability',
+                'type'       => 'fieldset',
+                'title'      => 'Continuous Availability',
+                'dependency' => array( 'type', '==', 'continuous' ),
+                'fields'     => array(
+                    array(
+                        'id'         => 'custom_availability',
+                        'type'       => 'radio',
+                        'title'      => __( 'Custom availability', 'tourfic' ),
+                        'inline'     => true,
+                        'options'    => [
+                            'yes' => __( 'Yes', 'tourfic' ),
+                            'no'  => __( 'No', 'tourfic' ),
+                        ],
+                    ),
+                    array(
+                        'id'         => 'check_in',
+                        'type'       => 'date',
+                        'title'      => __( 'Check In', 'tourfic' ),
+                        'class'      => 'check-in',
+                        'dependency' => array( 'custom_availability', '==', 'yes' ),
+
+                    ),
+                    array(
+                        'id'         => 'check_out',
+                        'type'       => 'date',
+                        'title'      => __( 'Check Out', 'tourfic' ),
+                        'class'      => 'check-out',
+                        'dependency' => array( 'custom_availability', '==', 'yes' ),
+                    ),
+                    array(
+                        'id'         => 'seat',
+                        'type'       => 'number',
+                        'title'      => __( 'Seat limit', 'tourfic' ),
+                        'dependency' => array( 'custom_availability', '==', 'yes' ),
+                    ),
+                    array(
+                        'id'    => 'continuous_calendar',
+                        'type'  => 'calendar',
+                        'title' => __( 'Availability', 'tourfic' ),
+                        'class' => 'calendar2',
+                        'dependency' => array( 'custom_availability', '==', 'yes' ),
+
+                    ),
+                ),
             ),
+
         ),
     ) );
 
