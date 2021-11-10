@@ -211,7 +211,7 @@ if ( class_exists( 'CSF' ) ) {
     ) );
 
     CSF::createSection( $prefix, array(
-        'title'  => __( 'Type and Availability', 'tourfic' ),
+        'title'  => __( 'Pricing and Availability', 'tourfic' ),
         'fields' => array(
             array(
                 'id'      => 'type',
@@ -244,9 +244,14 @@ if ( class_exists( 'CSF' ) ) {
                         'class' => 'check-out',
                     ),
                     array(
-                        'id'    => 'seat',
+                        'id'    => 'min_seat',
                         'type'  => 'number',
-                        'title' => __( 'Seat limit', 'tourfic' ),
+                        'title' => __( 'Minimum people', 'tourfic' ),
+                    ),
+                    array(
+                        'id'    => 'max_seat',
+                        'type'  => 'number',
+                        'title' => __( 'Maximum people', 'tourfic' ),
                     ),
                     array(
                         'id'    => 'calendar',
@@ -291,9 +296,24 @@ if ( class_exists( 'CSF' ) ) {
                         'class' => 'check-out',
                     ),
                     array(
-                        'id'    => 'seat',
+                        'id'    => 'pricing',
+                        'type'  => 'select',
+                        'title' => __( 'Pricing rule', 'tourfic' ),
+                        'class' => 'pricing',
+                        'options' => [
+                            'person' => __('Person','tourfic'),
+                            'group' => __('Group','tourfic')
+                        ]
+                    ),
+                    array(
+                        'id'    => 'min_seat',
                         'type'  => 'number',
-                        'title' => __( 'Seat limit', 'tourfic' ),
+                        'title' => __( 'Min people', 'tourfic' ),
+                    ),
+                    array(
+                        'id'    => 'max_seat',
+                        'type'  => 'number',
+                        'title' => __( 'Maximum people', 'tourfic' ),
                     ),
                 ),
             ),

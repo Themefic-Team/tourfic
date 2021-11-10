@@ -160,7 +160,7 @@ jQuery(function ($) {
 
     //date validation for continuous availability
     $('.continuous_availability .check-in').find('input').on('change', function () {
-       var $this = $(this);
+      var $this = $(this);
       var beafwc_selected_date = $this.val();
       if (beafwc_selected_date !== "") {
         beafwc_selected_date = new Date(beafwc_selected_date);
