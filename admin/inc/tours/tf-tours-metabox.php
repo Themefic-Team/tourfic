@@ -15,6 +15,7 @@ if ( class_exists( 'CSF' ) ) {
         'post_type' => 'tf_tours',
         'context'   => 'advanced',
         'priority'  => 'high',
+        'theme' => 'light'
     ) );
 
     // Create a section
@@ -211,7 +212,48 @@ if ( class_exists( 'CSF' ) ) {
     ) );
 
     CSF::createSection( $prefix, array(
-        'title'  => __( 'Pricing and Availability', 'tourfic' ),
+        'title'  => __( 'Price Settings', 'tourfic' ),
+        'fields' => array(
+            array(
+                'id'      => 'pricing',
+                'type'    => 'select',
+                'title'   => __( 'Pricing rule', 'tourfic' ),
+                'class'   => 'pricing',
+                'options' => [
+                    'person' => __( 'Person', 'tourfic' ),
+                    'group'  => __( 'Group', 'tourfic' ),
+                ],
+            ),
+            array(
+                'id'    => 'adult',
+                'type'  => 'number',
+                'title' => __( 'Adult Price', 'tourfic' ),
+                'dependency' => array( 'pricing', '==', 'person' ),
+            ),
+            array(
+                'id'    => 'child',
+                'type'  => 'number',
+                'dependency' => array( 'pricing', '==', 'person' ),
+                'title' => __( 'Child price', 'tourfic' ),
+            ),
+            array(
+                'id'    => 'infant',
+                'type'  => 'number',
+                'dependency' => array( 'pricing', '==', 'person' ),
+                'title' => __( 'Infant price', 'tourfic' ),
+            ),            
+            array(
+                'id'    => 'group_price',
+                'type'  => 'number',
+                'dependency' => array( 'pricing', '==', 'group' ),
+                'title' => __( 'Group price', 'tourfic' ),
+            ),
+           
+        ),
+    ) );
+
+    CSF::createSection( $prefix, array(
+        'title'  => __( 'Availability', 'tourfic' ),
         'fields' => array(
             array(
                 'id'      => 'type',
@@ -294,16 +336,6 @@ if ( class_exists( 'CSF' ) ) {
                         'type'  => 'date',
                         'title' => __( 'Check Out', 'tourfic' ),
                         'class' => 'check-out',
-                    ),
-                    array(
-                        'id'    => 'pricing',
-                        'type'  => 'select',
-                        'title' => __( 'Pricing rule', 'tourfic' ),
-                        'class' => 'pricing',
-                        'options' => [
-                            'person' => __('Person','tourfic'),
-                            'group' => __('Group','tourfic')
-                        ]
                     ),
                     array(
                         'id'    => 'min_seat',

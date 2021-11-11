@@ -161,14 +161,14 @@ jQuery(function ($) {
     //date validation for continuous availability
     $('.continuous_availability .check-in').find('input').on('change', function () {
       var $this = $(this);
-      var beafwc_selected_date = $this.val();
-      if (beafwc_selected_date !== "") {
-        beafwc_selected_date = new Date(beafwc_selected_date);
-        beafwc_selected_date = Math.abs(beafwc_selected_date);
+      var tf_selected_date = $this.val();
+      if (tf_selected_date !== "") {
+        tf_selected_date = new Date(tf_selected_date);
+        tf_selected_date = Math.abs(tf_selected_date);
         var prev_date = $this.closest('.csf-repeater-item').prev().find('.check-out input').val();
         prev_date = Math.abs(new Date(prev_date));
-        if (prev_date > beafwc_selected_date)
-        $this.val('');
+        if (prev_date > tf_selected_date)
+        $this.datepicker({  minDate: new Date(prev_date) });
           console.log("Please select newer date from the previous date");
       }
 
