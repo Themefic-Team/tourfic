@@ -205,6 +205,9 @@ if ( class_exists( 'CSF' ) ) {
                         'id'    => 'price',
                         'type'  => 'text',
                         'title' => __( 'Price', 'tourfic' ),
+                        'attributes' => array(
+                            'min' => '0'
+                        ),
                     ),
                 ),
             ),
@@ -218,6 +221,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'      => 'pricing',
                 'type'    => 'select',
                 'title'   => __( 'Pricing rule', 'tourfic' ),
+                'subtitle'   => __( 'Input pricing rule', 'tourfic' ),
                 'class'   => 'pricing',
                 'options' => [
                     'person' => __( 'Person', 'tourfic' ),
@@ -225,28 +229,63 @@ if ( class_exists( 'CSF' ) ) {
                 ],
             ),
             array(
-                'id'    => 'adult',
+                'id'    => 'adult_price',
                 'type'  => 'number',
                 'title' => __( 'Adult Price', 'tourfic' ),
+                'subtitle'   => __( 'Input adult price', 'tourfic' ),
                 'dependency' => array( 'pricing', '==', 'person' ),
+                'attributes' => array(
+                    'min' => '0'
+                ),
             ),
             array(
-                'id'    => 'child',
+                'id'    => 'child_price',
                 'type'  => 'number',
                 'dependency' => array( 'pricing', '==', 'person' ),
                 'title' => __( 'Child price', 'tourfic' ),
+                'subtitle'   => __( 'Input child price', 'tourfic' ),
+                'attributes' => array(
+                    'min' => '0'
+                ),
             ),
             array(
-                'id'    => 'infant',
+                'id'    => 'infant_price',
                 'type'  => 'number',
                 'dependency' => array( 'pricing', '==', 'person' ),
                 'title' => __( 'Infant price', 'tourfic' ),
+                'subtitle'   => __( 'Input infant price', 'tourfic' ),
+                'attributes' => array(
+                    'min' => '0'
+                ),
             ),            
             array(
                 'id'    => 'group_price',
                 'type'  => 'number',
                 'dependency' => array( 'pricing', '==', 'group' ),
                 'title' => __( 'Group price', 'tourfic' ),
+                'subtitle'   => __( 'Input group price', 'tourfic' ),
+                'attributes' => array(
+                    'min' => '0'
+                ),
+            ),            
+            array(
+                'id'    => 'discount_type',
+                'type'  => 'select',
+                'title' => __( 'Discount type', 'tourfic' ),
+                'subtitle'   => __( 'Select discount type Percent or Fixed', 'tourfic' ),
+                'options' => array(
+                    'percent' =>  __( 'Percent', 'tourfic' ),
+                    'fixed' =>  __( 'Fixed', 'tourfic' ),
+                ),
+            ),           
+            array(
+                'id'    => 'discount_price',
+                'type'  => 'number',
+                'title' => __( 'Discount price', 'tourfic' ),
+                'subtitle'   => __( 'Input discount price in number', 'tourfic' ),
+                'attributes' => array(
+                    'min' => '0'
+                ),
             ),
            
         ),
@@ -259,6 +298,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'      => 'type',
                 'type'    => 'select',
                 'title'   => __( 'Tour type', 'tourfic' ),
+                'subtitle'   => __( 'Select availability', 'tourfic' ),
                 'class'   => 'tour-type',
                 'options' => [
                     'continuous' => __( 'Continuous', 'tourfic' ),
@@ -270,6 +310,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'         => 'fixed_availability',
                 'type'       => 'fieldset',
                 'title'      => __( 'Availability', 'tourfic' ),
+                'subtitle'   => __( 'Input your availability', 'tourfic' ),
                 'dependency' => array( 'type', '==', 'fixed' ),
                 'class'      => 'fixed_availability',
                 'fields'     => array(
@@ -277,28 +318,33 @@ if ( class_exists( 'CSF' ) ) {
                         'id'    => 'check_in',
                         'type'  => 'date',
                         'title' => __( 'Check In', 'tourfic' ),
+                        'subtitle'   => __( 'Select check in date', 'tourfic' ),
                         'class' => 'check-in',
                     ),
                     array(
                         'id'    => 'check_out',
                         'type'  => 'date',
                         'title' => __( 'Check Out', 'tourfic' ),
+                        'subtitle'   => __( 'Select check out date', 'tourfic' ),
                         'class' => 'check-out',
                     ),
                     array(
                         'id'    => 'min_seat',
                         'type'  => 'number',
                         'title' => __( 'Minimum people', 'tourfic' ),
+                        'subtitle'   => __( 'Minimum seat number', 'tourfic' ),
                     ),
                     array(
                         'id'    => 'max_seat',
                         'type'  => 'number',
                         'title' => __( 'Maximum people', 'tourfic' ),
+                        'subtitle'   => __( 'Maximum seat number', 'tourfic' ),
                     ),
                     array(
                         'id'    => 'calendar',
                         'type'  => 'calendar',
                         'title' => __( 'Availability', 'tourfic' ),
+                        'subtitle'   => __( 'Select your check in out date', 'tourfic' ),
                     ),
                 ),
             ),

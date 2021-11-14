@@ -48,6 +48,11 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 		<div class="tf_row">
 			<div class="tf_content tf_content-full mb-15">
 
+				<!-- Start gallery -->
+				<div class="tf_gallery-wrap">
+					<?php echo tourfic_gallery_slider( false, $post_id, $gallery); ?>
+				</div>
+				<!-- End gallery-->
 				<!-- Start title area -->
 				<div class="tf_title-area">
 					<h2 class="tf_title"><?php the_title(); ?></h2>
@@ -100,11 +105,6 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 		<div class="tf_row">
 			<!-- Start Content -->
 			<div class="tf_content">
-				<!-- Start gallery -->
-				<div class="tf_gallery-wrap">
-					<?php echo tourfic_gallery_slider( false, $post_id, $gallery); ?>
-				</div>
-				<!-- End gallery-->
 				<!--Information section start-->
 				<div class="tf_informations">
 					<?php if( $tour_duration ): ?>

@@ -20,11 +20,16 @@
     "browser-sync": "^2.27.6",
     "browsersync": "^0.0.1-security",
     "cssnano": "^5.0.8",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-postcss": "^9.0.1",
     "gulp-rename": "^2.0.0",
+    "gulp-require-modules": "^1.1.4",
     "gulp-sass": "^5.0.0",
     "gulp-sourcemaps": "^3.0.0",
-    "postcss": "^8.3.11"
+    "postcss": "^8.3.11",
+    "sass": "^1.43.4"
+  },
+  "bugs": {
+    "url": "https://bitbucket.org/themefic/tourfic/issues"
   }
 }
