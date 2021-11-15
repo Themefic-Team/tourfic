@@ -29,10 +29,22 @@ $faqs = $meta['faqs'] ? $meta['faqs'] : null;
 $inc = $meta['inc'] ? $meta['inc'] : null;
 $exc = $meta['exc'] ? $meta['exc'] : null;
 $itineraries = $meta['itinerary'] ? $meta['itinerary'] : null;
-//die;
+$pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
+$tour_type = $meta['type'] ? $meta['type'] : null;
+if( $pricing_rule == 'group'){
+	$price = $meta['group_price'] ? $meta['group_price'] : null;
+}else{
+	$price = $meta['adult_price'] ? $meta['adult_price'] : null;
+}
+$discount_type = $meta['discount_type'] ? $meta['discount_type'] : null;
+$discounted_price = $meta['discount_price'] ? $meta['discount_price'] : null;
+if($discount_type == 'percent'){
+	$sale_price = number_format($price - (($price / 100)*$discounted_price),1); 
+}elseif($discount_type == 'fixed'){
+	$sale_price = number_format( ($price - $discounted_price),1 );
+}
 
-// Get all rooms
-$tf_room = get_field('tf_room') ? get_field('tf_room') : array();
+
 $information = get_field('information') ? get_field('information') : null;
 $share_text = get_the_title();
 $share_link = esc_url( home_url("/?p=").get_the_ID() );
@@ -47,7 +59,6 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<div class="tf_container">
 		<div class="tf_row">
 			<div class="tf_content tf_content-full mb-15">
-
 				<!-- Start gallery -->
 				<div class="tf_gallery-wrap">
 					<?php echo tourfic_gallery_slider( false, $post_id, $gallery); ?>
@@ -65,12 +76,13 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					
 					<!-- End map link -->
 					<div class="tf_title-right">
-						
+						<div class="tf_price">
+							<h4><?php echo __('Price','tourfic') ?></h4>
+							<?php echo tf_tours_price_html( $price, $sale_price );?>
+						</div>
 					</div>
 				</div>
-				<!-- End title area -->
-
-				
+				<!-- End title area -->	
 			</div>
 		</div>
 
@@ -87,6 +99,17 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 						<div class="info">
 							<h4 class="title"><?php echo __( 'Duration', 'tourfic' ); ?></h4>
 							<p><?php echo esc_html__( $tour_duration,'tourfic' ) ?></p>
+						</div>
+					</div>
+					<?php endif;?>
+					<?php if( $tour_type ): ?>
+					<div class="item">
+						<div class="icon">
+							<i class="fas fa-globe"></i>
+						</div>
+						<div class="info">
+							<h4 class="title"><?php echo __( 'Tour type', 'tourfic' ); ?></h4>
+							<p><?php echo esc_html__( $tour_type,'tourfic' ) ?></p>
 						</div>
 					</div>
 					<?php endif;?>
@@ -210,82 +233,6 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				</div>
 				<!-- End Include/Exlude  -->
 				<?php endif;?>
-			
-
-
-				<?php if( $tf_room ) : ?>
-				<!-- Start Room Type -->
-				<div class="tf_room-type" id="rooms">
-					<div class="listing-title">
-						<h4><?php esc_html_e( 'Availability', 'tourfic' ); ?></h4>
-					</div>
-					<div class="tf_room-table">
-						<table class="availability-table">
-							<thead>
-							    <tr>
-							      <th class="room-type-td"><?php esc_html_e( 'Room Type', 'tourfic' ); ?></th>
-							      <th class="pax-td"><?php esc_html_e( 'Pax', 'tourfic' ); ?></th>
-							      <th class="total-price-td"><?php esc_html_e( 'Total Price', 'tourfic' ); ?></th>
-							      <th class="select-rooms-td"><?php esc_html_e( 'Select Rooms', 'tourfic' ); ?></th>
-							    </tr>
-							</thead>
-							<tbody>
-							<!-- Start Single Room -->
-							<?php foreach ( $tf_room as $key => $room_type ) : ?>
-								<?php
-								// Array to variable
-								extract( $room_type );
-								?>
-								<tr>
-							      <td class="room-type-td">
-							      	<div class="tf-room-type">
-										<div class="tf-room-title"><?php echo esc_html( $name ); ?></div>
-										<div class="bed-facilities"><?php echo $short_desc; ?></div>
-
-										<div class="room-features">
-											<div class="tf-room-title"><?php esc_html_e( 'Room Features', 'tourfic' ); ?></div>
-											<ul class="room-feature-list">
-												<?php echo do_shortcode( $desc ); ?>
-											</ul>
-										</div>
-									</div>
-							      </td>
-							      <td class="pax-td">
-							      	<?php tourfic_pax( $pax ); ?>
-							      </td>
-							      <td class="total-price-td">
-							      	<div class="tf-price-column">
-										<?php echo tourfic_price_html($price, $sale_price); ?>
-									</div>
-							      </td>
-							      <td class="select-rooms-td">
-							      	<form class="tf-room" id="tf_room-id-<?php echo esc_attr( $key ); ?>">
-								      	<div class="room-selection-wrap">
-											<select name="room-selected" id="room-selected">
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-											</select>
-										</div>
-										<div class="room-submit-wrap">
-											<input type="hidden" name="tour_id" value="<?php echo get_the_ID(); ?>">
-											<input type="hidden" name="room_key" value="<?php echo esc_attr( $key ); ?>">
-											<?php tourfic_room_booking_submit_button( 'I\'ll reserve' ); ?>
-										</div>
-										<div class="tf_desc"></div>
-									</form>
-							      </td>
-							    </tr>
-							<?php endforeach; ?>
-							</tbody>
-						</table>
-
-						<?php //ppr( $add_room_type ); ?>
-					</div>
-				</div>
-				<!-- End Room Type -->
-				<?php endif; ?>
 
 				<?php if( $faqs ): ?>
 					<!-- Start highlights content -->
@@ -342,12 +289,6 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 
 			</div>
 			<!-- End Content -->
-
-			<!-- Start Sidebar -->
-			<div class="tf_sidebar">
-				<?php tourfic_get_sidebar( 'single' ); ?>
-			</div>
-			<!-- End Sidebar -->
 		</div>
 	</div>
 	<?php do_action( 'tf_after_container' ); ?>
