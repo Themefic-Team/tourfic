@@ -55,50 +55,22 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				<!-- End gallery-->
 				<!-- Start title area -->
 				<div class="tf_title-area">
-					<h2 class="tf_title"><?php the_title(); ?></h2>
+					<div class="tf_title-left">
+						<h2 class="tf_title"><?php the_title(); ?></h2>
+						<!-- Start map link -->
+						<div class="tf_map-link">
+							<?php tourfic_map_link(); ?>
+						</div>
+					</div>
+					
+					<!-- End map link -->
 					<div class="tf_title-right">
-						<div class="share-tour">
-							<a href="#dropdown_share_center" class="share-toggle" data-toggle="true"><?php echo tourfic_get_svg('share'); ?></a>
-							<div id="dropdown_share_center" class="share-tour-content">
- 								<ul class="tf-dropdown__content">
-									<li>
-									    <a href="http://www.facebook.com/share.php?u=<?php _e( $share_link ); ?>" class="tf-dropdown__item" target="_blank">
-									        <span class="tf-dropdown__item-content"><?php echo tourfic_get_svg('facebook'); ?> <?php esc_html_e( 'Share on Facebook', 'tourfic' ); ?></span>
-									    </a>
-									</li>
-									<li>
-									    <a href="http://twitter.com/share?text=<?php _e( $share_text ); ?>&url=<?php _e( $share_link ); ?>" class="tf-dropdown__item" target="_blank">
-									        <span class="tf-dropdown__item-content"><?php echo tourfic_get_svg('twitter'); ?> <?php esc_html_e( 'Share on Twitter', 'tourfic' ); ?></span>
-									    </a>
-									</li>
-									<li>
-									    <div class="share_center_copy_form tf-dropdown__item" title="Share this link" aria-controls="share_link_button">
-									        <label class="share_center_copy_label" for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
-									        <input type="text" id="share_link_input" class="share_center_url share_center_url_input" value="<?php _e( $share_link ); ?>" readonly>
-									        <button id="share_link_button" class="share_center_copy_cta" tabindex="0" role="button">
-									        	<span class="tf-button__text share_center_copy_message"><?php esc_html_e( 'Copy link', 'tourfic' ); ?></span>
-									            <span class="tf-button__text share_center_copied_message"><?php esc_html_e( 'Copied!', 'tourfic' ); ?></span>
-									        </button>
-									    </div>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="show-on-map">
-							<a href="https://www.google.com/maps/search/<?php _e( $location ); ?>" target="_blank" class="tf_button btn-outline button"><?php esc_html_e( 'Show on map', 'tourfic' ); ?></a>
-						</div>
-						<div class="reserve-button">
-							<a href="#rooms" class="tf_button button"><?php esc_html_e( 'Reserve', 'tourfic' ); ?></a>
-						</div>
+						
 					</div>
 				</div>
 				<!-- End title area -->
 
-				<!-- Start map link -->
-				<div class="tf_map-link">
-					<?php tourfic_map_link(); ?>
-				</div>
-				<!-- End map link -->
+				
 			</div>
 		</div>
 
