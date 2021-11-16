@@ -25,7 +25,8 @@
 .tf_informations .item .icon{
     font-size: 26px;
 }
-  
-.tf_informations .item .icon {
-
-  }
+.tf-ratings {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}

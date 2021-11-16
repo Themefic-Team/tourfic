@@ -37,11 +37,11 @@ if( $pricing_rule == 'group'){
 	$price = $meta['adult_price'] ? $meta['adult_price'] : null;
 }
 $discount_type = $meta['discount_type'] ? $meta['discount_type'] : null;
-$discounted_price = $meta['discount_price'] ? $meta['discount_price'] : null;
-if($discount_type == 'percent'){
-	$sale_price = number_format($price - (($price / 100)*$discounted_price),1); 
-}elseif($discount_type == 'fixed'){
-	$sale_price = number_format( ($price - $discounted_price),1 );
+$discounted_price = $meta['discount_price'] ? $meta['discount_price'] : NULL;
+if( $discount_type == 'percent' ){
+	$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 ); 
+}elseif( $discount_type == 'fixed'){
+	$sale_price = number_format( ( $price - $discounted_price ),1 );
 }
 
 
@@ -73,12 +73,23 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 							<?php tourfic_map_link(); ?>
 						</div>
 					</div>
-					
 					<!-- End map link -->
 					<div class="tf_title-right">
 						<div class="tf_price">
-							<h4><?php echo __('Price','tourfic') ?></h4>
-							<?php echo tf_tours_price_html( $price, $sale_price );?>
+							<span><?php echo __('Price','tourfic') ?></span>
+							<?php echo tf_tours_price_html( $price, $sale_price,$discounted_price );?>
+						</div>
+						<div class="tf-ratings">
+							<div class="star">
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+							</div>
+							<div class="reviews">
+								<span>4.5</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -166,8 +177,9 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					</div>
 					<?php foreach( $itineraries as $itinerary ){ ?>
 					<div class="tf-single-itinerary">
-						<div class="itinerary-head">
-							<h5><span class="time"><?php echo esc_html( $itinerary['time'] ) ?></span> <?php echo esc_html( $itinerary['title'] );  ?></h5>
+						<div class="itinerary-head">							
+							<span class="time"><?php echo esc_html( $itinerary['time'] ) ?></span>
+							<h5> <?php echo esc_html( $itinerary['title'] );  ?></h5>
 							<div class="icon">
 								<i class="fa fa-angle-down"></i>
 							</div>
@@ -209,30 +221,39 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				<?php if( $inc || $exc ): ?>			
 				<!-- Start Include/Exlude  -->
 				<div class="inc-exc-section">
-					<div class="inc-exc-title">
-						<h4><?php esc_html_e( 'Included/Excluded', 'tourfic' ); ?></h4>
-					</div>
-					<div class="tf-include">
-						<ul class="items">
-						<?php
-							foreach( $inc as $key => $val ){
-								echo "<li>". $val['inc'] ."</li>";
-							}
-						?>
-						</ul>
-					</div>
-					<div class="tf-exclude">
-						<ul class="items">
-						<?php
-							foreach( $exc as $key => $val ){
-								echo "<li>". $val['exc'] ."</li>";
-							}
-						?>
-						</ul>
+					<div class="inc-exc-content">
+						<div class="inc-exc-title">
+							<h4><?php esc_html_e( 'Included/Excluded', 'tourfic' ); ?></h4>
+						</div>
+						<div class="tf-include">
+							<ul class="items">
+							<?php
+								foreach( $inc as $key => $val ){
+									echo "<li>". $val['inc'] ."</li>";
+								}
+							?>
+							</ul>
+						</div>
+						<div class="tf-exclude">
+							<ul class="items">
+							<?php
+								foreach( $exc as $key => $val ){
+									echo "<li>". $val['exc'] ."</li>";
+								}
+							?>
+							</ul>
+						</div>
 					</div>
 				</div>
 				<!-- End Include/Exlude  -->
 				<?php endif;?>
+				<!--Start tour map section-->
+				<div class="tf_map_section">
+					<div class="tf_map">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1891144.1036137978!2d90.26962864671933!3d22.21575206911091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka%2C%20Bangladesh!3m2!1d23.810332!2d90.4125181!4m5!1s0x30ae2363dee2d61b%3A0xfb3463713589d312!2sSt.%20Martin&#39;s%20Island%2C%20Bangladesh!3m2!1d20.6237016!2d92.3233948!5e0!3m2!1sen!2sus!4v1637065617200!5m2!1sen!2sus" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+					</div>
+				</div>
+				<!--End tour map section-->
 
 				<?php if( $faqs ): ?>
 					<!-- Start highlights content -->

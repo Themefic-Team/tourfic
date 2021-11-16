@@ -572,14 +572,14 @@ function tourfic_booking_set_search_result( $url ){
 }
 add_filter( 'tf_booking_search_action', 'tourfic_booking_set_search_result' );
 
-// price with html format
-function tf_tours_price_html( $price = null, $sale_price = null ) {
+// Tours price with html format
+function tf_tours_price_html( $price = null, $sale_price = null,$discounted_price = null ) {
 	if ( !$price ) {
 		return;
 	}
 	ob_start();
 	?>
-	<?php if ( $sale_price > 0 ) { ?>
+	<?php if ( $discounted_price > 0 ) { ?>
 		<span class="tf-price"><del><?php echo wc_price( $price ); ?></del></span>
 		<span class="tf-price"><?php echo wc_price( $sale_price ); ?></span>
 	<?php } else { ?>

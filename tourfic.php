@@ -155,6 +155,7 @@ if ( !class_exists( 'Tourfic_WordPress_Plugin' ) ):
             wp_register_style( 'font-awesome-5', plugin_dir_url( __FILE__ ) . 'assets/font-awesome-4.7.0/css/all.min.css' );
             wp_enqueue_style( 'font-awesome-5' );
 
+            wp_enqueue_style( 'rubik', 'https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400&display=swap');
             wp_enqueue_style( 'magnific-popup-css', plugin_dir_url( __FILE__ ) . 'assets/css/magnific-popup.css', null, $TOURFIC_VERSION );
 
             wp_enqueue_style( 'tourfic-styles', plugin_dir_url( __FILE__ ) . 'assets/css/tourfic-styles.min.css', null, $TOURFIC_VERSION );

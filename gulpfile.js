@@ -72,14 +72,14 @@ function watch() {
 // Init BrowserSync.
 function browserSync(done) {
   /*browsersync.init({
-    proxy: 'http://localhost/isobar/', // Change this value to match your local URL.
+    proxy: 'http://localhost/themefic/tf_tours/sant-martin-tour/', // Change this value to match your local URL.
     socket: {
       domain: 'localhost:3000'
     }
   });*/
 
   browsersync.init(null, {
-    proxy : "http://localhost:10040/"
+    proxy : "http://localhost/themefic/tf_tours/sant-martin-tour/"
   });
 
   done();

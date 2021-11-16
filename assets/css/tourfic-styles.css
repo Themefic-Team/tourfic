@@ -25,6 +25,7 @@
   padding-right: 15px;
   max-width: 1200px;
   width: 100%;
+  font-family: "Rubik";
 }
 
 .tf_content.tf_content-full {
@@ -104,6 +105,7 @@
 .tf_title-area {
   display: flex;
   justify-content: space-between;
+  padding: 20px 0;
 }
 
 .tf_title {
@@ -114,12 +116,24 @@
 }
 
 .tf_title-right {
-  display: flex;
-  align-items: center;
+  float: right;
+}
+
+.reviews span {
+  margin-left: 10px;
+  font-size: 18px;
 }
 
 .share-tour {
   margin-right: 14px;
+}
+
+.tf_price {
+  font-size: 20px;
+}
+
+span.tf-price .amount {
+  font-weight: bold;
 }
 
 .tf_map-link {
@@ -350,6 +364,92 @@ a.slick-slide-item-link {
 
 .tf_informations .item .icon {
   font-size: 26px;
+}
+
+.tf-ratings {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.tf-itinerary {
+  padding: 50px 0;
+}
+
+.tf-single-itinerary {
+  padding: 0 5px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.itinerary-head {
+  cursor: pointer;
+  background: #f7f7f7;
+  display: flex;
+  align-items: center;
+}
+
+.tf-single-itinerary span.time {
+  width: 100px;
+  height: 100px;
+  background: #002C66;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #f7f7f7;
+}
+
+.itinerary-title h4 {
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  display: flex;
+}
+
+.itinerary-head h5 {
+  display: flex;
+  font-size: 18px;
+  color: #152B47;
+  width: 80%;
+  justify-content: start;
+  padding-left: 15px;
+}
+
+.itinerary-head span.time {
+  font-weight: bold;
+}
+
+.tf-single-itinerary img {
+  width: 30%;
+}
+
+.itinerary-content {
+  display: flex;
+  padding: 10px 0;
+}
+
+.tf-single-itinerary .itinerary-content img {
+  float: left;
+  padding-right: 10px;
+}
+
+.tf-single-itinerary .icon {
+  transform: rotate(180deg);
+  justify-content: start;
+}
+
+.tf-single-itinerary.active .icon {
+  transform: rotate(0deg);
+  justify-content: end;
+}
+
+.tf-single-itinerary .icon, .tf-single-itinerary.active .icon {
+  display: flex;
+  align-items: center;
+  width: 10%;
+}
+
+.tf-single-itinerary .itinerary-content {
+  display: none;
 }
 
 .tf_tab-wrap {
