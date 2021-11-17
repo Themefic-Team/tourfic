@@ -21,8 +21,22 @@
 // Faq
 .tf-single-faq {
     border-bottom: 1px solid #ddd;
+    background: #FAFCFE;
+    /* Shadow */
+    box-shadow: 0px 2px 10px rgba(2, 51, 110, 0.2);
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 0 10px;
+}
+.tf_contents.faqs h4 {
+    font-size: 36px;
+    color: #002c66;
+    margin-bottom: 30px;
 }
 
+.tf_contents.faqs {
+    padding: 50px 0;
+}
 .faq-content {
     display: none;
     padding-bottom: 20px;
@@ -54,15 +68,15 @@
     font-size: 20px;
 }
 
-.faq-indicator .fa-angle-up {
+.faq-indicator .fa-minus {
     display: none;
 }
 
-.tf-single-faq.active .faq-indicator .fa-angle-up {
+.tf-single-faq.active .faq-indicator .fa-minus {
     display: block;
 }
 
-.tf-single-faq.active .faq-indicator .fa-angle-down {
+.tf-single-faq.active .faq-indicator .fa-plus {
     display: none;
 }
 

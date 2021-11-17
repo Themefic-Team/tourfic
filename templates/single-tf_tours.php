@@ -222,10 +222,10 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				<!-- Start Include/Exlude  -->
 				<div class="inc-exc-section">
 					<div class="inc-exc-content">
-						<div class="inc-exc-title">
-							<h4><?php esc_html_e( 'Included/Excluded', 'tourfic' ); ?></h4>
-						</div>
 						<div class="tf-include">
+							<div class="inc-title">
+								<h4><?php esc_html_e( 'Included', 'tourfic' ); ?></h4>
+							</div>
 							<ul class="items">
 							<?php
 								foreach( $inc as $key => $val ){
@@ -235,6 +235,9 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 							</ul>
 						</div>
 						<div class="tf-exclude">
+							<div class="inc-title">
+								<h4><?php esc_html_e( 'Excluded', 'tourfic' ); ?></h4>
+							</div>
 							<ul class="items">
 							<?php
 								foreach( $exc as $key => $val ){
@@ -261,16 +264,15 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 						<div class="highlights-title">
 							<h4><?php esc_html_e( 'FAQs', 'tourfic' ); ?></h4>
 						</div>
-
 						<div class="tf-faqs">
 						<?php foreach ( $faqs as $key => $faq ): ?>
 							<div class="tf-single-faq">
 								<div class="faq-head">
-									<i class="fa fa-question-circle-o" aria-hidden="true">
+									<i class="far fa-question-circle" aria-hidden="true">
 									</i> <?php esc_html_e( $faq['title'] ); ?>
 									<span class="faq-indicator">
-										<i class="fa fa-angle-up" aria-hidden="true"></i>
-										<i class="fa fa-angle-down" aria-hidden="true"></i>
+										<i class="fas fa-minus" aria-hidden="true"></i>
+										<i class="fas fa-plus" aria-hidden="true"></i>
 									</span>
 								</div>
 								<div class="faq-content"><?php _e( $faq['desc'] ); ?></div>
@@ -280,7 +282,56 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					</div>
 					<!-- End highlights content -->
 				<?php endif; ?>
+				<!-- Start tourbox Content -->
+				<div class="tf-tourbox-section">
+					<div class="tf-tourbox-title">
+						<h4><?php echo __( 'You might also like','tourfic' ) ?></h4>
+						<p><?php echo __('Travel is my life. Since 1999, I’ve been traveling around the world nonstop.
+						If you also love travel, you’re in the right place!
+						','tourfic') ?></p>						
+					</div>
+					<div class="tf-tourbox">
+						<?php
+							$args = array(
+								'post_type' => 'tf_tours',
+								'post_status' => 'publish',
+								'posts_per_page' => 8, 
+								'orderby' => 'title', 
+								'order' => 'ASC', 
+							);
+							$tours = new WP_Query( $args );
+							while($tours->have_posts() ) : $tours->the_post();
 
+						?>
+						<div class="single-tourbox" style="background-image:url(<?php echo get_the_post_thumbnail_url(get_the_ID(),'full') ?>)">
+							<div class="tf-tourbox-info">
+									<div class="left-info">
+										<h3 class="tf-tour-title"><?php the_title(); ?></h3>
+										<p class="tf-location"><?php echo __( 'Indonesia','tourfic' ) ?></p>
+									</div>
+									<div class="right-info">
+										<div class="tf-rating">
+											<div class="star">
+												<span class="fa fa-star checked"></span>
+												<span class="fa fa-star checked"></span>
+												<span class="fa fa-star checked"></span>
+												<span class="fa fa-star"></span>
+												<span class="fa fa-star"></span>
+											</div>
+										</div>
+										<div class="tf-price">
+											<span>$1200</span>
+										</div>
+									</div>
+							</div>
+						</div>
+						<?php 
+							endwhile;
+							wp_reset_postdata(); 
+						?>
+					</div>
+				</div>
+				<!-- end tourbox Content -->
 				<!-- Start Review Content -->
 				<div class="tf_contents reviews">
 					<div class="highlights-title">

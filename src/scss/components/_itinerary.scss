@@ -12,6 +12,7 @@
     display: flex;
     align-items: center;
 }
+
 .tf-single-itinerary span.time {
     width: 100px;
     height: 100px;
@@ -23,7 +24,6 @@
 }
 .itinerary-title h4{
     text-transform: uppercase;
-    margin-bottom: 15px;
     display: flex;
 }
 .itinerary-head h5 {
@@ -43,8 +43,14 @@
 }
 
 .itinerary-content {
+  overflow: hidden;
   display: flex;
-  padding: 10px 0;
+  padding: 10px 0;  
+  padding-left: 100px;
+  background: #FAFCFE;
+  /* Shadow 2 */
+  box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+  border-radius: 0px 5px 5px 0px;
 }
 .tf-single-itinerary .itinerary-content img {
   float: left;

@@ -1,0 +1,82 @@
+.inc-exc-content {
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 15%;
+    border: 5px solid #C4C4C4;
+  }
+.inc-exc-content:before {
+    content: url(../img/quote.png);
+    font-weight: 700;
+    left: 55px;
+    position: absolute;
+    top: 10%;
+    background: #fafcfe;
+}
+.inc-exc-content:after {
+    content: url(../img/quote.png);
+    font-weight: 700;
+    right: 55px;
+    position: absolute;
+    bottom: 10%;
+    background: #fafcfe;
+    transform: rotate(180deg);
+}
+  .inc-exc-content h4 {
+    font-size: 36px;
+    font-weight: 700;
+  }
+  
+.inc-exc-content {
+    ul {
+        li {
+            font-size: 18px;
+            line-height: 28px;
+          }
+    }
+  }
+  
+  .inc-title {
+    margin-bottom: 30px;
+  }
+  /* AH Tour Styles*/
+  .single_feature_box img {
+      width: 25px;
+    }
+  .inc-exc-section {
+    padding: 60px 60px;
+    overflow: hidden;
+    background: #FAFCFE;
+    position: relative;
+  }
+  .inc-exc-title{
+    text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+  .tf-exclude ul,.tf-include ul {
+    list-style: none;
+  }
+  .tf-exclude ul li:before {
+    content: "\f057";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 600;
+    margin-right: 5px;
+    color: #e12608;
+  }
+  .tf-include ul li:before {
+    content: "\f00c";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 600;
+    margin-right: 5px;
+    color: #00698f;
+  }
+  .tf-include {
+    width: 50%;
+  }
+  
+  .tf-exclude {
+    width: 50%;
+  }
+  /*AH css code end */
+  

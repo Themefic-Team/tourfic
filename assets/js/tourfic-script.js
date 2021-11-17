@@ -701,6 +701,6 @@ function tourfic_autocomplete(inp, arr) {
 
 var destinations = tf_params.destinations;
 
-tourfic_autocomplete( document.getElementById("destination"), destinations );
+//tourfic_autocomplete( document.getElementById("destination"), destinations );
 
 

@@ -1,0 +1,58 @@
+.tf-tourbox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: #fff;
+}
+.single-tourbox {
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 30%;
+    margin: 1em;
+    height: 500px;
+    display: flex;
+    align-items: end;
+    /* Blue Dark */
+    background: #002248;
+    /* Neutral/100 */
+    border: 5px solid #FAFCFE;
+    /* Shadow 2 */
+    box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+    border-radius: 10px;
+        h3{
+            color: #fff;
+            font-size: 18px;
+            font-weight: 400;
+            margin: 2px 0;
+        }
+    }
+
+.tf-tourbox-info {
+    display: flex;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background: rgba(2, 51, 110, 0.3);
+    /* Neutral/100 */
+    border: 1px solid #FAFCFE;
+    box-sizing: border-box;
+    backdrop-filter: blur(20px);
+    /* Note: backdrop-filter has minimal browser support */
+    border-radius: 10px;
+    padding: 15px 8px;
+    margin-bottom: 25px;
+    .right-info {
+        text-align: right;
+        width: 50%;
+    }
+    .left-info {
+        text-align: left;
+        width: 50%;
+    }
+}
+.tf-rating{
+    .star{
+        color: #FFC314;
+    }
+}
