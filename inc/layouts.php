@@ -136,12 +136,13 @@ function tourfic_item_review_block(){
 
 // Map Link
 function tourfic_map_link(){
-	$location = get_field( 'location' ) ? get_field( 'location' ) : null;
 	if( 'tf_tours' === get_post_type() ){
 		$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
-		$location = $meta['location']['address'];
+		$location = $meta['location']['address'] ? $meta['location']['address'] : '';
+	}else{
+	$location = get_field( 'location' ) ? get_field( 'location' ) : null;
+		
 	}
-
 	if ( !$location ) {
 		return;
 	}
@@ -303,4 +304,58 @@ function tourfic_get_sidebar( $placement = 'single' ){
 	<?php endif; ?>
 
 	<?php
+}
+/**
+ * Booking forms for tour
+ */
+function tf_tours_booking_form(){
+	ob_start();
+	?>
+	<div class="tf-tour-booking-wrap">
+		<form class="tf_tours_booking">
+		<div class="tf_person-selection-wrap">
+			<div class="tf_person-selection-inner">
+				<div class="tf_person-selection">
+					<div class="acr-label">Adults</div>
+					<div class="acr-select">
+						<div class="acr-dec">-</div>
+						<input type="number" name="adults" id="adults" min="1" value="2">
+						<div class="acr-inc">+</div>
+					</div>
+				</div>
+				<div class="tf_person-selection">
+					<div class="acr-label">Childrens</div>
+					<div class="acr-select">
+						<div class="acr-dec">-</div>
+						<input type="number" name="children" id="children" min="0" value="0">
+						<div class="acr-inc">+</div>
+					</div>
+				</div>
+				<div class="tf_person-selection">
+					<div class="acr-label">Infants</div>
+					<div class="acr-select">
+						<div class="acr-dec">-</div>
+						<input type="number" name="infant" id="infant" min="1" value="1">
+						<div class="acr-inc">+</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php tourfic_booking_widget_field(
+			array(
+				'type' => 'text',
+				'svg_icon' => 'calendar_today',
+				'name' => 'check-in-out-date',
+				'placeholder' => 'Check-in/Check-out Date',
+				'label' => 'Check-in & Check-out date',
+				'required' => 'true',
+				'disabled' => 'true',
+				'class'    => 'tours-check-in-out',
+			));
+			echo tourfic_tours_booking_submit_button("Book Now");
+		?>
+		</form>
+	</div>
+	<?php
+	return ob_get_clean();
 }

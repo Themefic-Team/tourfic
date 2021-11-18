@@ -10,8 +10,8 @@ get_header('tourfic'); ?>
 <?php
 $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
 
-$location = $meta['location']['address'];
-$gallery = $meta['tour_gallery'];
+$location = $meta['location']['address'] ? $meta['location']['address'] : '';
+$gallery = $meta['tour_gallery'] ? $meta['tour_gallery'] : array();
 $additional_information = $meta['additional_information'] ? $meta['additional_information'] : null; 
 $tour_duration = $meta['duration'] ? $meta['duration'] : null;
 $group_size = $meta['group_size'] ? $meta['group_size'] : null;
@@ -282,6 +282,11 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					</div>
 					<!-- End highlights content -->
 				<?php endif; ?>
+				
+				<!-- Start booking form  -->
+				<?php echo tf_tours_booking_form();?>
+				<!-- End booking form -->
+
 				<!-- Start tourbox Content -->
 				<div class="tf-tourbox-section">
 					<div class="tf-tourbox-title">

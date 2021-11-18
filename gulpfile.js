@@ -74,7 +74,7 @@ function browserSync(done) {
   /*browsersync.init({
     proxy: 'http://localhost/themefic/tf_tours/sant-martin-tour/', // Change this value to match your local URL.
     socket: {
-      domain: 'localhost:3000'
+      domain: 'localhost'
     }
   });*/
 

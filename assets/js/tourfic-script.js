@@ -101,6 +101,7 @@
         $('.faq-head').click(function(e){
             $(this).parent().toggleClass('active').find('.faq-content').slideToggle('fast');
         });
+        
         //Itinerary accordion
         $('.itinerary-head').on('click',function(e){
             $(this).parent().toggleClass('active').find('.itinerary-content').slideToggle('fast');
@@ -115,7 +116,7 @@
         var dateFormat = 'DD-MM-YYYY';
 
         // Trigger Check-in Date
-        $('.tf_selectdate-wrap, #check-in-out-date').daterangepicker({
+        $('.tf_selectdate-wrap, #check-in-out-date, .tours-check-in-out').daterangepicker({
             "locale": {
                 "format": dateFormat,
                 "separator": " - ",
@@ -491,7 +492,80 @@
     });
 
 })(jQuery);
+// Ajax Scripts
+(function($){
+    'use strict';
 
+    $(document).ready(function(){
+
+        // Email Capture
+        $(document).on('submit', 'form.tf_tours_booking', function(e){
+            e.preventDefault();
+
+            var $this = $(this);
+
+            var formData = new FormData(this);
+            formData.append('action', 'tf_tours_booking');
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function(data){
+                    $this.block({
+                        message: null,
+                        overlayCSS: {
+                            background: "#fff",
+                            opacity: .5
+                        }
+                    });
+
+                    $('.tf_notice_wrapper').html("").hide();
+                },
+                complete: function(data){
+                    $this.unblock();
+                },
+                success: function(data){
+                    $this.unblock();
+
+                    var response = JSON.parse(data);
+
+                    if( response.status == 'error' ) {
+                        var errorHtml = "";
+
+                        if ( response.errors ) {
+                            response.errors.forEach( function( text ){
+                                errorHtml += '<div class="woocommerce-error">'+text+'</div>';
+                            } );
+                        }
+
+                        $('.tf_notice_wrapper').html( errorHtml ).show();
+
+                        $("html, body").animate({ scrollTop: 0 }, 300);
+                        return false;
+                    } else {
+
+                        if ( response.redirect_to ) {
+                            window.location.replace( response.redirect_to );
+                        } else {
+                            jQuery(document.body).trigger('added_to_cart');
+                        }
+
+                    }
+                },
+                error: function(data){
+                    console.log(data);
+
+                },
+
+            });
+
+        });
+    });
+
+})(jQuery);
 // Infinite Scroll
 (function($){
     'use strict';

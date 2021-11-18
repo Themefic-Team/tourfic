@@ -119,7 +119,8 @@ if ( !class_exists( 'Tourfic_WordPress_Plugin' ) ):
             /**
              *    WooCommerce booking
              */
-            require_once dirname( __FILE__ ) . '/inc/tf-woocommerce-class.php';
+            require_once dirname( __FILE__ ) . '/inc/booking/tf-woocommerce-hotel-class.php';
+            require_once dirname( __FILE__ ) . '/inc/booking/tf-woocommerce-tours-class.php';
 
             /**
              *    Widgets

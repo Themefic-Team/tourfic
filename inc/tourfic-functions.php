@@ -533,6 +533,35 @@ function tourfic_room_booking_submit_button( $label = null ){
 	}
 
 	?>
+	
+	<button class="tf_button" type="submit"><?php esc_html_e( $label ); ?></button>
+	<?php
+}
+
+/**
+ * Submit button Tour booking
+ */
+function tourfic_tours_booking_submit_button( $label = null ){
+
+	$booking_fields = array(
+		'location',
+		'check-in-date',
+		'check-out-date',
+		'adults',
+		'children',
+		'infant'
+	);
+
+	foreach ( $booking_fields as $key ) {
+
+		$value = isset( $_GET[$key] ) ? $_GET[$key] : tourfic_getcookie( $key );
+
+		echo "<input type='hidden' placeholder='{$key}' name='{$key}' value='{$value}'>";
+	}
+
+	?>
+	
+	<input type="hidden" name="tour_id" value="<?php echo get_the_ID(); ?>">
 	<button class="tf_button" type="submit"><?php esc_html_e( $label ); ?></button>
 	<?php
 }
