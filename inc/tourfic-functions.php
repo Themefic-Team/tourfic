@@ -548,8 +548,6 @@ function tourfic_tours_booking_submit_button( $label = null ){
 		'check-in-date',
 		'check-out-date',
 		'adults',
-		'children',
-		'infant'
 	);
 
 	foreach ( $booking_fields as $key ) {

@@ -327,7 +327,7 @@ function tf_tours_booking_form(){
 					<div class="acr-label">Childrens</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-						<input type="number" name="children" id="children" min="0" value="0">
+						<input type="number" name="childrens" id="children" min="0" value="0">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
@@ -335,7 +335,7 @@ function tf_tours_booking_form(){
 					<div class="acr-label">Infants</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-						<input type="number" name="infant" id="infant" min="1" value="1">
+						<input type="number" name="infants" id="infant" min="1" value="1">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>

@@ -6,7 +6,7 @@ class Tourfic_Tours_WooCommerceHandle{
 
 		// Booking ajax
 		add_action('wp_ajax_tf_tours_booking', [ $this, 'tf_tours_booking_function' ] );
-		add_action('wp_ajax_nopriv_tf_tours_booking', [ $this, 'tf_room_booking_function' ] );
+		add_action('wp_ajax_nopriv_tf_tours_booking', [ $this, 'tf_tours_booking_function' ] );
 
 		// proccess room price
 		add_action('woocommerce_before_calculate_totals', [ $this, 'set_order_price' ], 30, 1 );
@@ -33,7 +33,8 @@ class Tourfic_Tours_WooCommerceHandle{
 		$tour_id = isset( $_POST['tour_id'] ) ? intval( sanitize_text_field( $_POST['tour_id'] ) ) : null;
 
 		$adults = isset( $_POST['adults'] ) ? intval( sanitize_text_field( $_POST['adults'] ) ) : null;
-		$children = isset( $_POST['children'] ) ? intval( sanitize_text_field( $_POST['children'] ) ) : null;
+		$children = isset( $_POST['childrens'] ) ? intval( sanitize_text_field( $_POST['childrens'] ) ) : null;
+		$infant = isset( $_POST['infants'] ) ? intval( sanitize_text_field( $_POST['infants'] ) ) : null;
 
 		$destination = isset( $_POST['destination'] ) ? sanitize_text_field( $_POST['destination'] ) : null;
 		$check_in = isset( $_POST['check-in-date'] ) ? sanitize_text_field( $_POST['check-in-date'] ) : null;
@@ -98,10 +99,16 @@ class Tourfic_Tours_WooCommerceHandle{
 			$tf_tours_data['tf_data']['tour_id'] = $tour_id;
 
 			$tf_tours_data['tf_data']['adults'] = $adults;
-			$tf_tours_data['tf_data']['children'] = $children;
-			$tf_tours_data['tf_data']['infant'] = $children;
+			$tf_tours_data['tf_data']['childrens'] = $children;
+			$tf_tours_data['tf_data']['infants'] = $infant;
 			$tf_tours_data['tf_data']['check_in'] = $check_in;
 			$tf_tours_data['tf_data']['check_out'] = $check_out;
+
+			$meta = get_post_meta( $tour_id,'tf_tours_option',true );
+			$adult_price = $meta['adult_price'];
+			$children_price = $meta['child_price'];
+			$infant_price = $meta['infant_price'];
+			$tf_tours_data['tf_data']['price'] = ( $adult_price * $adults ) + ($children*$children_price) + ($infant*$infant_price);
 
 			// If want to empty the cart
 			//WC()->cart->empty_cart();
@@ -134,8 +141,8 @@ class Tourfic_Tours_WooCommerceHandle{
 
 	    foreach ( $cart->get_cart() as $cart_item ) {
 
-	        if( isset($cart_item['tf_data']['price_total']) ){
-	            $cart_item['data']->set_price( $cart_item['tf_data']['price_total'] );
+	        if( isset($cart_item['tf_data']['price']) ){
+	            $cart_item['data']->set_price( $cart_item['tf_data']['price'] );
 	        }
 	    }
 
@@ -151,10 +158,17 @@ class Tourfic_Tours_WooCommerceHandle{
 	        );
 	    }
 
-	    if ( isset( $cart_item['tf_data']['children'] ) && $cart_item['tf_data']['children'] > 0 ) {
+	    if ( isset( $cart_item['tf_data']['childrens'] ) && $cart_item['tf_data']['childrens'] > 0 ) {
 	        $item_data[] = array(
 	            'key'       => __('Children', 'tourfic'),
-	            'value'     => $cart_item['tf_data']['children'],
+	            'value'     => $cart_item['tf_data']['childrens'],
+	        );
+	    }
+
+	    if ( isset( $cart_item['tf_data']['infants'] ) && $cart_item['tf_data']['infants'] > 0 ) {
+	        $item_data[] = array(
+	            'key'       => __('Children', 'tourfic'),
+	            'value'     => $cart_item['tf_data']['infants'],
 	        );
 	    }
 
