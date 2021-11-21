@@ -61,7 +61,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 			<div class="tf_content tf_content-full mb-15">
 				<!-- Start gallery -->
 				<div class="tf_gallery-wrap">
-					<?php echo tourfic_gallery_slider( false, $post_id, $gallery); ?>
+					<?php echo tourfic_gallery_slider( false, $post->ID, $gallery); ?>
 				</div>
 				<!-- End gallery-->
 				<!-- Start title area -->

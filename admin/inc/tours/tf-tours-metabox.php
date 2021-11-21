@@ -15,7 +15,7 @@ if ( class_exists( 'CSF' ) ) {
         'post_type' => 'tf_tours',
         'context'   => 'advanced',
         'priority'  => 'high',
-        'theme' => 'light'
+        'theme'     => 'light',
     ) );
 
     // Create a section
@@ -202,11 +202,11 @@ if ( class_exists( 'CSF' ) ) {
                         'title' => __( 'Short description', 'tourfic' ),
                     ),
                     array(
-                        'id'    => 'price',
-                        'type'  => 'text',
-                        'title' => __( 'Price', 'tourfic' ),
+                        'id'         => 'price',
+                        'type'       => 'text',
+                        'title'      => __( 'Price', 'tourfic' ),
                         'attributes' => array(
-                            'min' => '0'
+                            'min' => '0',
                         ),
                     ),
                 ),
@@ -218,76 +218,81 @@ if ( class_exists( 'CSF' ) ) {
         'title'  => __( 'Price Settings', 'tourfic' ),
         'fields' => array(
             array(
-                'id'      => 'pricing',
-                'type'    => 'select',
-                'title'   => __( 'Pricing rule', 'tourfic' ),
-                'subtitle'   => __( 'Input pricing rule', 'tourfic' ),
-                'class'   => 'pricing',
-                'options' => [
+                'id'       => 'pricing',
+                'type'     => 'select',
+                'title'    => __( 'Pricing rule', 'tourfic' ),
+                'subtitle' => __( 'Input pricing rule', 'tourfic' ),
+                'class'    => 'pricing',
+                'options'  => [
                     'person' => __( 'Person', 'tourfic' ),
                     'group'  => __( 'Group', 'tourfic' ),
                 ],
             ),
             array(
-                'id'    => 'adult_price',
-                'type'  => 'number',
-                'title' => __( 'Adult Price', 'tourfic' ),
+                'id'         => 'adult_price',
+                'type'       => 'number',
+                'title'      => __( 'Adult Price', 'tourfic' ),
                 'subtitle'   => __( 'Input adult price', 'tourfic' ),
                 'dependency' => array( 'pricing', '==', 'person' ),
                 'attributes' => array(
-                    'min' => '0'
+                    'min' => '0',
                 ),
             ),
             array(
-                'id'    => 'child_price',
-                'type'  => 'number',
+                'id'         => 'child_price',
+                'type'       => 'number',
                 'dependency' => array( 'pricing', '==', 'person' ),
-                'title' => __( 'Child price', 'tourfic' ),
+                'title'      => __( 'Child price', 'tourfic' ),
                 'subtitle'   => __( 'Input child price', 'tourfic' ),
                 'attributes' => array(
-                    'min' => '0'
+                    'min' => '0',
                 ),
             ),
             array(
-                'id'    => 'infant_price',
-                'type'  => 'number',
+                'id'         => 'infant_price',
+                'type'       => 'number',
                 'dependency' => array( 'pricing', '==', 'person' ),
-                'title' => __( 'Infant price', 'tourfic' ),
+                'title'      => __( 'Infant price', 'tourfic' ),
                 'subtitle'   => __( 'Input infant price', 'tourfic' ),
                 'attributes' => array(
-                    'min' => '0'
-                ),
-            ),            
-            array(
-                'id'    => 'group_price',
-                'type'  => 'number',
-                'dependency' => array( 'pricing', '==', 'group' ),
-                'title' => __( 'Group price', 'tourfic' ),
-                'subtitle'   => __( 'Input group price', 'tourfic' ),
-                'attributes' => array(
-                    'min' => '0'
-                ),
-            ),            
-            array(
-                'id'    => 'discount_type',
-                'type'  => 'select',
-                'title' => __( 'Discount type', 'tourfic' ),
-                'subtitle'   => __( 'Select discount type Percent or Fixed', 'tourfic' ),
-                'options' => array(
-                    'percent' =>  __( 'Percent', 'tourfic' ),
-                    'fixed' =>  __( 'Fixed', 'tourfic' ),
-                ),
-            ),           
-            array(
-                'id'    => 'discount_price',
-                'type'  => 'number',
-                'title' => __( 'Discount price', 'tourfic' ),
-                'subtitle'   => __( 'Input discount price in number', 'tourfic' ),
-                'attributes' => array(
-                    'min' => '0'
+                    'min' => '0',
                 ),
             ),
-           
+            array(
+                'id'         => 'group_price',
+                'type'       => 'number',
+                'dependency' => array( 'pricing', '==', 'group' ),
+                'title'      => __( 'Group price', 'tourfic' ),
+                'subtitle'   => __( 'Input group price', 'tourfic' ),
+                'attributes' => array(
+                    'min' => '0',
+                ),
+            ),
+            array(
+                'id'       => 'discount_type',
+                'type'     => 'select',
+                'title'    => __( 'Discount type', 'tourfic' ),
+                'subtitle' => __( 'Select discount type Percent or Fixed', 'tourfic' ),
+                'options'  => array(
+                    'none'    => __( 'None', 'tourfic' ),
+                    'percent' => __( 'Percent', 'tourfic' ),
+                    'fixed'   => __( 'Fixed', 'tourfic' ),
+                ),
+                'default'  => 'none',
+            ),
+            array(
+                'id'         => 'discount_price',
+                'type'       => 'number',
+                'title'      => __( 'Discount price', 'tourfic' ),
+                'subtitle'   => __( 'Input discount price in number', 'tourfic' ),
+                'attributes' => array(
+                    'min' => '0',
+                ),
+                'dependency' => array(
+                    array( 'discount_type', '!=', 'none' ),
+                ),
+            ),
+
         ),
     ) );
 
@@ -295,12 +300,12 @@ if ( class_exists( 'CSF' ) ) {
         'title'  => __( 'Availability', 'tourfic' ),
         'fields' => array(
             array(
-                'id'      => 'type',
-                'type'    => 'select',
-                'title'   => __( 'Tour type', 'tourfic' ),
-                'subtitle'   => __( 'Select availability', 'tourfic' ),
-                'class'   => 'tour-type',
-                'options' => [
+                'id'       => 'type',
+                'type'     => 'select',
+                'title'    => __( 'Tour type', 'tourfic' ),
+                'subtitle' => __( 'Select availability', 'tourfic' ),
+                'class'    => 'tour-type',
+                'options'  => [
                     'continuous' => __( 'Continuous', 'tourfic' ),
                     'fixed'      => __( 'Fixed', 'tourfic' ),
                 ],
@@ -315,36 +320,36 @@ if ( class_exists( 'CSF' ) ) {
                 'class'      => 'fixed_availability',
                 'fields'     => array(
                     array(
-                        'id'    => 'check_in',
-                        'type'  => 'date',
-                        'title' => __( 'Check In', 'tourfic' ),
-                        'subtitle'   => __( 'Select check in date', 'tourfic' ),
-                        'class' => 'check-in',
+                        'id'       => 'check_in',
+                        'type'     => 'date',
+                        'title'    => __( 'Check In', 'tourfic' ),
+                        'subtitle' => __( 'Select check in date', 'tourfic' ),
+                        'class'    => 'check-in',
                     ),
                     array(
-                        'id'    => 'check_out',
-                        'type'  => 'date',
-                        'title' => __( 'Check Out', 'tourfic' ),
-                        'subtitle'   => __( 'Select check out date', 'tourfic' ),
-                        'class' => 'check-out',
+                        'id'       => 'check_out',
+                        'type'     => 'date',
+                        'title'    => __( 'Check Out', 'tourfic' ),
+                        'subtitle' => __( 'Select check out date', 'tourfic' ),
+                        'class'    => 'check-out',
                     ),
                     array(
-                        'id'    => 'min_seat',
-                        'type'  => 'number',
-                        'title' => __( 'Minimum people', 'tourfic' ),
-                        'subtitle'   => __( 'Minimum seat number', 'tourfic' ),
+                        'id'       => 'min_seat',
+                        'type'     => 'number',
+                        'title'    => __( 'Minimum people', 'tourfic' ),
+                        'subtitle' => __( 'Minimum seat number', 'tourfic' ),
                     ),
                     array(
-                        'id'    => 'max_seat',
-                        'type'  => 'number',
-                        'title' => __( 'Maximum people', 'tourfic' ),
-                        'subtitle'   => __( 'Maximum seat number', 'tourfic' ),
+                        'id'       => 'max_seat',
+                        'type'     => 'number',
+                        'title'    => __( 'Maximum people', 'tourfic' ),
+                        'subtitle' => __( 'Maximum seat number', 'tourfic' ),
                     ),
                     array(
-                        'id'    => 'calendar',
-                        'type'  => 'calendar',
-                        'title' => __( 'Availability', 'tourfic' ),
-                        'subtitle'   => __( 'Select your check in out date', 'tourfic' ),
+                        'id'       => 'calendar',
+                        'type'     => 'calendar',
+                        'title'    => __( 'Availability', 'tourfic' ),
+                        'subtitle' => __( 'Select your check in out date', 'tourfic' ),
                     ),
                 ),
             ),

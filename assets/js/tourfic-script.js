@@ -492,7 +492,8 @@
     });
 
 })(jQuery);
-// Ajax Scripts
+
+// Ajax Scripts for tour booking
 (function($){
     'use strict';
 
