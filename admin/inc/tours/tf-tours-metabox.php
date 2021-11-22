@@ -325,6 +325,9 @@ if ( class_exists( 'CSF' ) ) {
                         'title'    => __( 'Check In', 'tourfic' ),
                         'subtitle' => __( 'Select check in date', 'tourfic' ),
                         'class'    => 'check-in',
+                        'attributes' => array(
+                            'required' => 'required'
+                        )
                     ),
                     array(
                         'id'       => 'check_out',
@@ -332,6 +335,9 @@ if ( class_exists( 'CSF' ) ) {
                         'title'    => __( 'Check Out', 'tourfic' ),
                         'subtitle' => __( 'Select check out date', 'tourfic' ),
                         'class'    => 'check-out',
+                        'attributes' => array(
+                            'required' => 'required'
+                        )
                     ),
                     array(
                         'id'       => 'min_seat',

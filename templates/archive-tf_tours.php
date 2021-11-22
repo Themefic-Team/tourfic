@@ -26,7 +26,7 @@ get_header('tourfic'); ?>
 				<div class="archive_ajax_result">
 					<?php if ( have_posts() ) : ?>
 						<?php while ( have_posts() ) : the_post(); ?>
-							<?php tourfic_archive_single(); ?>
+							<?php tf_tours_archive_single(); ?>
 						<?php endwhile; ?>
 					<?php else : ?>
 						<?php get_template_part( 'template-parts/content', 'none' ); ?>

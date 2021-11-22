@@ -27,38 +27,38 @@ function tourfic_archive_single() {
 				<!-- Title area End -->
 
 				<?php if ( $tf_room ): $i = 0;?>
-					<!-- Room details start -->
-					<div class="sr_rooms_table_block">
-						<?php foreach ( $tf_room as $key => $room_type ): ?>
-							<?php
+						<!-- Room details start -->
+						<div class="sr_rooms_table_block">
+							<?php foreach ( $tf_room as $key => $room_type ): ?>
+								<?php
     if ( ++$i > 1 ) {
             break;
         }
         // Array to variable
         extract( $room_type );
         ?>
-							<div class="room_details">
-								<div class="featuredRooms">
-	                               <div class="prco-ltr-right-align-helper">
-	                                    <div class="tf-archive-shortdesc"><?php echo do_shortcode( $short_desc ); ?></div>
-	                                </div>
-	                                <div class="roomNameInner">
-	                                    <div class="room_link">
-	                                       <div class="roomrow_flex">
-	                                            <div class="roomName_flex">
-	                                                <div class="tf-archive-roomname"><strong><?php echo esc_html( $name ); ?></strong> <span class="dash">-</span> <span><?php tourfic_pax( $pax );?></span></div>
-	                                                <ul class="tf-archive-desc"><?php echo do_shortcode( $desc ); ?></ul>
-	                                            </div>
+								<div class="room_details">
+									<div class="featuredRooms">
+		                               <div class="prco-ltr-right-align-helper">
+		                                    <div class="tf-archive-shortdesc"><?php echo do_shortcode( $short_desc ); ?></div>
+		                                </div>
+		                                <div class="roomNameInner">
+		                                    <div class="room_link">
+		                                       <div class="roomrow_flex">
+		                                            <div class="roomName_flex">
+		                                                <div class="tf-archive-roomname"><strong><?php echo esc_html( $name ); ?></strong> <span class="dash">-</span> <span><?php tourfic_pax( $pax );?></span></div>
+		                                                <ul class="tf-archive-desc"><?php echo do_shortcode( $desc ); ?></ul>
+		                                            </div>
 
-	                                            <div class="roomPrice roomPrice_flex sr_discount">
-	                                                <div class="bui-price-display__value prco-inline-block-maker-helper" aria-hidden="true"><?php echo tourfic_price_html( $price, $sale_price ); ?></div>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                </div>
+		                                            <div class="roomPrice roomPrice_flex sr_discount">
+		                                                <div class="bui-price-display__value prco-inline-block-maker-helper" aria-hidden="true"><?php echo tourfic_price_html( $price, $sale_price ); ?></div>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                </div>
+									</div>
 								</div>
-							</div>
-						<?php endforeach;?>
+							<?php endforeach;?>
 				</div>
 				<!-- Room details end -->
 
@@ -66,6 +66,46 @@ function tourfic_archive_single() {
 					<a href="<?php echo get_the_permalink() . '?destination=' . $_GET['destination'] . '&adults=' . $_GET['adults'] . '&children=' . $_GET['children'] . '&room=' . $_GET['room'] . '&check-in-date=' . $_GET['check-in-date'] . '&check-out-date=' . $_GET['check-out-date']; ?>" class="button tf_button"><?php esc_html_e( 'Book Now', 'tourfic' );?></a>
 				</div>
 				<?php endif;?>
+
+
+			</div>
+		</div>
+	</div>
+
+	<?php
+}
+
+/**
+ * Tours Archive
+ */
+function tf_tours_archive_single() {
+    ?>
+	<div class="single-tour-wrap">
+		<div class="single-tour-inner">
+			<div class="tourfic-single-left">
+				<?php if ( has_post_thumbnail() ): ?>
+					<?php the_post_thumbnail( 'full' );?>
+				<?php endif;?>
+			</div>
+			<div class="tourfic-single-right">
+				<!-- Title area Start -->
+				<div class="tf_property_block_main_row">
+					<div class="tf_item_main_block">
+						<div class="tf-hotel__title-wrap">
+							<a href="<?php echo get_the_permalink() . '?destination=' . $_GET['destination'] . '&adults=' . $_GET['adults'] . '&children=' . $_GET['children'] . '&room=' . $_GET['room'] . '&check-in-date=' . $_GET['check-in-date'] . '&check-out-date=' . $_GET['check-out-date']; ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
+						</div>
+						<?php tourfic_map_link();?>
+					</div>
+					<?php tourfic_item_review_block();?>
+				</div>
+				<!-- Title area End -->
+
+				<!-- Tour details end -->
+				<!-- Tour details end -->
+
+				<div class="availability-btn-area">
+					<a href="<?php echo get_the_permalink() . '?destination=' . $_GET['destination'] . '&adults=' . $_GET['adults'] . '&children=' . $_GET['children'] . '&room=' . $_GET['room'] . '&check-in-date=' . $_GET['check-in-date'] . '&check-out-date=' . $_GET['check-out-date']; ?>" class="button tf_button"><?php esc_html_e( 'Book Now', 'tourfic' );?></a>
+				</div>
 
 
 			</div>
@@ -308,10 +348,22 @@ function tourfic_get_sidebar( $placement = 'single' ) {
 /**
  * Booking forms for tour
  */
-function tf_tours_booking_form() {
-    ob_start();
+function tf_tours_booking_form($post_id) {
+	$meta = get_post_meta( $post_id,'tf_tours_option',true );
+	$type = $meta['type'];
+	$custom_availability = $meta['custom_availability'];
+	if( $type == 'fixed' ){
+		$fixed_check_in = $meta['fixed_availability']['check_in'] ? $meta['fixed_availability']['check_in'] : null;
+		$fixed_check_out = $meta['fixed_availability']['check_out'] ? $meta['fixed_availability']['check_out'] : null;
+		$min_seat = $meta['fixed_availability']['min_seat'] ? $meta['fixed_availability']['min_seat'] : null;
+		$max_seat = $meta['fixed_availability']['max_seat'] ? $meta['fixed_availability']['max_seat'] : null;
+		ob_start();
+	}elseif( $type == "continuous" && $custom_availability == 'yes' ){
+		$min_seat = $meta['continuous_availability'][0]['min_seat'] ? $meta['continuous_availability'][0]['min_seat'] : null;
+		$max_seat = $meta['continuous_availability'][0]['max_seat'] ? $meta['continuous_availability'][0]['max_seat'] : null;
+	}
     ?>
-	<div class="tf-tour-booking-wrap">
+	<div class="tf-tour-booking-wrap" data-min-seat="<?php echo $min_seat; ?>" data-max-seat="<?php echo $max_seat; ?>" data-fixed-check-in="<?php echo $fixed_check_in; ?>" data-fixed-check-out="<?php echo $fixed_check_out ?>">
 		<form class="tf_tours_booking">
 		<div class="tf_person-selection-wrap">
 			<div class="tf_person-selection-inner">
@@ -335,25 +387,56 @@ function tf_tours_booking_form() {
 					<div class="acr-label">Infants</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-						<input type="number" name="infants" id="infant" min="1" value="0">
+						<input type="number" name="infants" id="infant" min="0" value="0">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<?php tourfic_booking_widget_field(
-        array(
-            'type'        => 'text',
-            'svg_icon'    => 'calendar_today',
-            'name'        => 'check-in-out-date',
-            'placeholder' => 'Check-in/Check-out Date',
-            'label'       => 'Check-in & Check-out date',
-            'required'    => 'true',
-            'disabled'    => 'true',
-            'class'       => 'tours-check-in-out',
-        )
-    );
-    echo tourfic_tours_booking_submit_button( "Book Now" );
+				array(
+					'type'        => 'text',
+					'svg_icon'    => 'calendar_today',
+					'name'        => 'check-in-out-date',
+					'placeholder' => 'Check-in/Check-out Date',
+					'label'       => 'Check-in & Check-out date',
+					'required'    => 'true',
+					'disabled'    => 'true',
+					'class'       => 'tours-check-in-out',
+				)
+    		);
+    	?>
+			<div class="screen-reader-text">
+				<!-- Start form row -->
+				<?php tourfic_booking_widget_field(
+				array(
+					'type'        => 'text',
+					'svg_icon'    => 'calendar_today',
+					'name'        => 'check-in-date',
+					'placeholder' => 'Check-in date',
+					'label'       => 'Check-in date',
+					'required'    => 'true',
+					'disabled'    => 'true',
+				)
+    		);?>
+				<!-- End form row -->
+
+				<!-- Start form row -->
+				<?php tourfic_booking_widget_field(
+						array(
+							'type'        => 'text',
+							'svg_icon'    => 'calendar_today',
+							'name'        => 'check-out-date',
+							'placeholder' => 'Check-out date',
+							'required'    => 'true',
+							'disabled'    => 'true',
+							'label'       => 'Check-out date',
+						)
+    				);
+				?>
+			</div>
+	<?php
+echo tourfic_tours_booking_submit_button( "Book Now" );
     ?>
 		</form>
 	</div>

@@ -12,7 +12,7 @@ class Tourfic_Tours_WooCommerceHandle {
         add_action( 'woocommerce_before_calculate_totals', [$this, 'tours_set_order_price'], 30, 1 );
 
         // Display custom cart item meta data (in cart and checkout)
-        add_filter( 'woocommerce_get_item_data', [$this, 'display_cart_item_custom_meta_data'], 10, 2 );
+        add_filter( 'woocommerce_get_item_data', [$this, 'tours_display_cart_item_custom_meta_data'], 10, 2 );
 
         add_action( 'woocommerce_checkout_create_order_line_item', [$this, 'add_custom_data_to_order'], 10, 4 );
 
@@ -96,13 +96,13 @@ class Tourfic_Tours_WooCommerceHandle {
         // If no errors then process
         if ( 0 == count( $response['errors'] ) ) {
 
-            $tf_tours_data['tf_data']['tour_id'] = $tour_id;
+            $tf_tours_data['tf_tours_data']['tour_id'] = $tour_id;
 
-            $tf_tours_data['tf_data']['adults'] = $adults;
-            $tf_tours_data['tf_data']['childrens'] = $children;
-            $tf_tours_data['tf_data']['infants'] = $infant;
-            $tf_tours_data['tf_data']['check_in'] = $check_in;
-            $tf_tours_data['tf_data']['check_out'] = $check_out;
+            $tf_tours_data['tf_tours_data']['adults'] = $adults;
+            $tf_tours_data['tf_tours_data']['childrens'] = $children;
+            $tf_tours_data['tf_tours_data']['infants'] = $infant;
+            $tf_tours_data['tf_tours_data']['check_in'] = $check_in;
+            $tf_tours_data['tf_tours_data']['check_out'] = $check_out;
 
             $meta = get_post_meta( $tour_id, 'tf_tours_option', true );
             $discount_type = $meta['discount_type'];
@@ -126,9 +126,9 @@ class Tourfic_Tours_WooCommerceHandle {
                 $group_price = number_format(  ( $group_price - $discounted_price ), 1 );
             }
             if ( $pricing_rule == 'group' ) {
-                $tf_tours_data['tf_data']['price'] = $group_price;
+                $tf_tours_data['tf_tours_data']['price'] = $group_price;
             } else {
-                $tf_tours_data['tf_data']['price'] = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
+                $tf_tours_data['tf_tours_data']['price'] = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
             }
 
             // If want to empty the cart
@@ -164,48 +164,48 @@ class Tourfic_Tours_WooCommerceHandle {
 
         foreach ( $cart->get_cart() as $cart_item ) {
 
-            if ( isset( $cart_item['tf_data']['price'] ) ) {
-                $cart_item['data']->set_price( $cart_item['tf_data']['price'] );
+            if ( isset( $cart_item['tf_tours_data']['price'] ) ) {
+                $cart_item['data']->set_price( $cart_item['tf_tours_data']['price'] );
             }
         }
 
     }
 
     // Display custom cart item meta data (in cart and checkout)
-    function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
+    function tours_display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 
-        if ( isset( $cart_item['tf_data']['adults'] ) && $cart_item['tf_data']['adults'] > 0 ) {
+        if ( isset( $cart_item['tf_tours_data']['adults'] ) && $cart_item['tf_tours_data']['adults'] > 0 ) {
             $item_data[] = array(
                 'key'   => __( 'Adults', 'tourfic' ),
-                'value' => $cart_item['tf_data']['adults'],
+                'value' => $cart_item['tf_tours_data']['adults'],
             );
         }
 
-        if ( isset( $cart_item['tf_data']['childrens'] ) && $cart_item['tf_data']['childrens'] > 0 ) {
+        if ( isset( $cart_item['tf_tours_data']['childrens'] ) && $cart_item['tf_tours_data']['childrens'] > 0 ) {
             $item_data[] = array(
                 'key'   => __( 'Children', 'tourfic' ),
-                'value' => $cart_item['tf_data']['childrens'],
+                'value' => $cart_item['tf_tours_data']['childrens'],
             );
         }
 
-        if ( isset( $cart_item['tf_data']['infants'] ) && $cart_item['tf_data']['infants'] > 0 ) {
+        if ( isset( $cart_item['tf_tours_data']['infants'] ) && $cart_item['tf_tours_data']['infants'] > 0 ) {
             $item_data[] = array(
                 'key'   => __( 'Infant', 'tourfic' ),
-                'value' => $cart_item['tf_data']['infants'],
+                'value' => $cart_item['tf_tours_data']['infants'],
             );
         }
 
-        if ( isset( $cart_item['tf_data']['check_in'] ) ) {
+        if ( isset( $cart_item['tf_tours_data']['check_in'] ) ) {
             $item_data[] = array(
                 'key'   => __( 'Check-in Date', 'tourfic' ),
-                'value' => $cart_item['tf_data']['check_in'],
+                'value' => $cart_item['tf_tours_data']['check_in'],
             );
         }
 
-        if ( isset( $cart_item['tf_data']['check_out'] ) ) {
+        if ( isset( $cart_item['tf_tours_data']['check_out'] ) ) {
             $item_data[] = array(
                 'key'   => __( 'Check-out Date', 'tourfic' ),
-                'value' => $cart_item['tf_data']['check_out'],
+                'value' => $cart_item['tf_tours_data']['check_out'],
             );
         }
 
@@ -217,27 +217,27 @@ class Tourfic_Tours_WooCommerceHandle {
      */
     function add_custom_data_to_order( $item, $cart_item_key, $values, $order ) {
 
-        if ( isset( $values['tf_data']['adults'] ) && $values['tf_data']['adults'] > 0 ) {
+        if ( isset( $values['tf_tours_data']['adults'] ) && $values['tf_tours_data']['adults'] > 0 ) {
 
-            $item->update_meta_data( __( 'Adults', 'tourfic' ), $values['tf_data']['adults'] );
+            $item->update_meta_data( __( 'Adults', 'tourfic' ), $values['tf_tours_data']['adults'] );
         }
 
-        if ( isset( $values['tf_data']['childrens'] ) && $values['tf_data']['childrens'] > 0 ) {
+        if ( isset( $values['tf_tours_data']['childrens'] ) && $values['tf_tours_data']['childrens'] > 0 ) {
 
-            $item->update_meta_data( __( 'Children', 'tourfic' ), $values['tf_data']['childrens'] );
+            $item->update_meta_data( __( 'Children', 'tourfic' ), $values['tf_tours_data']['childrens'] );
         }
-        if ( isset( $values['tf_data']['infants'] ) && $values['tf_data']['infants'] > 0 ) {
+        if ( isset( $values['tf_tours_data']['infants'] ) && $values['tf_tours_data']['infants'] > 0 ) {
 
-            $item->update_meta_data( __( 'Infants', 'tourfic' ), $values['tf_data']['infants'] );
+            $item->update_meta_data( __( 'Infants', 'tourfic' ), $values['tf_tours_data']['infants'] );
         }
-        if ( isset( $values['tf_data']['check_in'] ) ) {
+        if ( isset( $values['tf_tours_data']['check_in'] ) ) {
 
-            $item->update_meta_data( __( 'Check-in Date', 'tourfic' ), $values['tf_data']['check_in'] );
+            $item->update_meta_data( __( 'Check-in Date', 'tourfic' ), $values['tf_tours_data']['check_in'] );
         }
 
-        if ( isset( $values['tf_data']['check_out'] ) ) {
+        if ( isset( $values['tf_tours_data']['check_out'] ) ) {
 
-            $item->update_meta_data( __( 'Check-out Date', 'tourfic' ), $values['tf_data']['check_out'] );
+            $item->update_meta_data( __( 'Check-out Date', 'tourfic' ), $values['tf_tours_data']['check_out'] );
         }
 
     }

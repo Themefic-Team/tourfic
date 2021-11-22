@@ -338,6 +338,16 @@ if ( !class_exists( 'Tourfic_WordPress_Plugin' ) ):
                 }
 
             }
+
+            if( is_post_type_archive( 'tf_tours' ) ){
+                $theme_files = array( 'archive-tf_tours.php', 'templates/archive-tf_tours.php' );
+                $exists_in_theme = locate_template( $theme_files, false );
+                if( $exists_in_theme != '' ){
+                    return $exists_in_theme;
+                }else{
+                    return dirname( __FILE__ ) . '/templates/archive-tf_tours.php';
+                }
+            }
             return $template;
         }
 

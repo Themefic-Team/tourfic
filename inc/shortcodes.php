@@ -54,7 +54,7 @@ function tourfic_destinations_shortcode( $atts, $content = null ){
                 <a href="<?php echo tourfic_booking_search_action(); ?>?destination=/<?php _e( $term->slug ); ?>">
                   <div class="single_recomended_content" style="background-image: url(<?php echo wp_get_attachment_url( $image_id ); ?>);">
                     <div class="recomended_place_info_header">
-                      <h3><?php _e($term->name); ?></h3>
+                      <h3><?php _e( $term->name ); ?></h3>
                       <p><?php printf( esc_html__( "%s properties", 'tourfic' ), $term->count); ?></p>
                     </div>
                     <?php if( $term->description ): ?>
@@ -252,7 +252,6 @@ function tourfic_search_shortcode( $atts, $content = null ){
 
                 <div class="tf_acrselection-wrap">
                     <div class="tf_acrselection-inner">
-
                         <div class="tf_acrselection">
                             <div class="acr-label">Adults</div>
                             <div class="acr-select">

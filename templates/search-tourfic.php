@@ -13,7 +13,6 @@ get_header('tourfic'); ?>
 <div class="tourfic-wrap" data-fullwidth="true">
 	<?php do_action( 'tf_before_container' ); ?>
 	<div class="tf_container">
-
 		<div class="tf_row">
 			<!-- Start Content -->
 			<div class="tf_content">

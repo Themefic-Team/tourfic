@@ -284,7 +284,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				<?php endif; ?>
 				
 				<!-- Start booking form  -->
-				<?php echo tf_tours_booking_form();?>
+				<?php echo tf_tours_booking_form($post->ID);?>
 				<!-- End booking form -->
 
 				<!-- Start tourbox Content -->

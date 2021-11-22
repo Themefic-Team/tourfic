@@ -134,6 +134,27 @@
             $('.checkout-date-text').text( end.format(dateFormat) );
         });
 
+
+        // Trigger Tours Check-in Date
+        var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
+        var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
+         $('.tours-check-in-out').daterangepicker({
+            "locale": {
+                "format": dateFormat,
+                "separator": " - ",
+                "firstDay": 1
+            },
+            minDate : new Date(fixedCheckIn),
+            maxDate : new Date(fixedCheckOut),
+            autoApply: true,
+        }, function(start, end, label) {
+            checkin_input.val( start.format(dateFormat) );
+            $('.checkin-date-text').text( start.format(dateFormat) );
+
+            checkout_input.val( end.format(dateFormat) );
+            $('.checkout-date-text').text( end.format(dateFormat) );
+        });
+
         // Number Decrement
         $('.acr-dec').on('click',function(e){
 
