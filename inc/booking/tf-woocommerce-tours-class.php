@@ -40,6 +40,23 @@ class Tourfic_Tours_WooCommerceHandle {
         $check_in = isset( $_POST['check-in-date'] ) ? sanitize_text_field( $_POST['check-in-date'] ) : null;
         $check_out = isset( $_POST['check-out-date'] ) ? sanitize_text_field( $_POST['check-out-date'] ) : null;
 
+        //Validation of Fixed tours person
+        $total_person = $adults + $children + $infant;
+        $meta = get_post_meta( $tour_id,'tf_tours_option',true );
+        $type = $meta['type'];
+        $fixed_min_seat = $meta['fixed_availability']['min_seat'] ? $meta['fixed_availability']['min_seat'] : null;
+        $fixed_max_seat = $meta['fixed_availability']['max_seat'] ? $meta['fixed_availability']['max_seat'] : null;
+        if($type == 'fixed'){
+            if( $total_person < $fixed_min_seat && $fixed_min_seat > 0 ){
+            $response['errors'][] = __( 'You must select minimum '.$fixed_min_seat.' person ', 'tourfic' );
+
+            }else if( $total_person > $fixed_max_seat && $fixed_max_seat > 0 ){
+                $response['errors'][] = __( 'Maximum '.$fixed_max_seat.' person are allowed for this tour ', 'tourfic' );
+    
+            }
+
+        }
+
         // Check errors
         if ( !$check_in ) {
             $response['errors'][] = __( 'Check-in date missing.', 'tourfic' );

@@ -327,6 +327,9 @@ if ( class_exists( 'CSF' ) ) {
                         'class'    => 'check-in',
                         'attributes' => array(
                             'required' => 'required'
+                        ),
+                        'settings' => array(
+                            'dateFormat'      => 'dd/mm/yy'
                         )
                     ),
                     array(
@@ -337,6 +340,9 @@ if ( class_exists( 'CSF' ) ) {
                         'class'    => 'check-out',
                         'attributes' => array(
                             'required' => 'required'
+                        ),
+                        'settings' => array(
+                            'dateFormat'      => 'dd/mm/yy'
                         )
                     ),
                     array(
@@ -387,12 +393,18 @@ if ( class_exists( 'CSF' ) ) {
                         'type'  => 'date',
                         'title' => __( 'Check In', 'tourfic' ),
                         'class' => 'check-in',
+                        'settings' => array(
+                            'dateFormat'      => 'dd/mm/yy'
+                        )
                     ),
                     array(
                         'id'    => 'check_out',
                         'type'  => 'date',
                         'title' => __( 'Check Out', 'tourfic' ),
                         'class' => 'check-out',
+                        'settings' => array(
+                            'dateFormat'      => 'dd/mm/yy'
+                        )
                     ),
                     array(
                         'id'    => 'min_seat',

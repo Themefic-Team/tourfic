@@ -125,7 +125,6 @@
             minDate : dateToday,
             autoApply: true,
         }, function(start, end, label) {
-            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
 
             checkin_input.val( start.format(dateFormat) );
             $('.checkin-date-text').text( start.format(dateFormat) );
@@ -134,8 +133,20 @@
             $('.checkout-date-text').text( end.format(dateFormat) );
         });
 
+/**
+ *          continuousDate = JSON.stringify(continuousDate);
+            
+            continuousDate = continuousDate.substring(1, continuousDate.length-1);
+            continuousDate = JSON.parse(continuousDate);
+ */
+        // Tours Check-in DateRange Picker Start
+        function tfContinuousDate(){
 
-        // Trigger Tours Check-in Date
+            var continuousDate = $('.tourfic-wrap').data('continuous-array');
+            for( var i = 0 ; i < continuousDate.length; i++){
+                return 'Availability ' + i + ':' + '['+ continuousDate[i].check_in,continuousDate[i].check_out+']';
+            }
+        }
         var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
         var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
          $('.tours-check-in-out').daterangepicker({
@@ -143,6 +154,9 @@
                 "format": dateFormat,
                 "separator": " - ",
                 "firstDay": 1
+            },
+            ranges: {
+                tfContinuousDate()
             },
             minDate : new Date(fixedCheckIn),
             maxDate : new Date(fixedCheckOut),

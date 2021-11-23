@@ -44,7 +44,9 @@ if( $discount_type == 'percent' ){
 	$sale_price = number_format( ( $price - $discounted_price ),1 );
 }
 
-
+//continuous tour
+$continuous_availability = $meta['continuous_availability'];
+$continuous_availability = json_encode($continuous_availability);
 $information = get_field('information') ? get_field('information') : null;
 $share_text = get_the_title();
 $share_link = esc_url( home_url("/?p=").get_the_ID() );
@@ -54,7 +56,7 @@ $terms_and_conditions = $meta['terms_conditions'];
 $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $post->ID, 'tf_faqs', true ) : array();
 
 ?>
-<div class="tourfic-wrap default-style" data-fullwidth="true">
+<div class="tourfic-wrap default-style" data-fullwidth="true" data-continuous-array='<?php echo $continuous_availability;?>'>
 	<?php do_action( 'tf_before_container' ); ?>
 	<div class="tf_container">
 		<div class="tf_row">
