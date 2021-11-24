@@ -140,13 +140,20 @@
             continuousDate = JSON.parse(continuousDate);
  */
         // Tours Check-in DateRange Picker Start
-        function tfContinuousDate(){
+          function tfContinuousDate(rangeVal){
 
             var continuousDate = $('.tourfic-wrap').data('continuous-array');
+            var rangeVal = '{ ';
             for( var i = 0 ; i < continuousDate.length; i++){
-                return 'Availability ' + i + ':' + '['+ continuousDate[i].check_in,continuousDate[i].check_out+']';
+                rangeVal +=   '\'Availability ' + i + '\' :' + ' ['+ continuousDate[i].check_in +','+continuousDate[i].check_out+'],';
             }
+            rangeVal += ' }';
+            return rangeVal;
+            
+
         }
+        console.log(tfContinuousDate());
+
         var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
         var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
          $('.tours-check-in-out').daterangepicker({
@@ -155,9 +162,7 @@
                 "separator": " - ",
                 "firstDay": 1
             },
-            ranges: {
-                tfContinuousDate()
-            },
+            ranges :  tfContinuousDate(),
             minDate : new Date(fixedCheckIn),
             maxDate : new Date(fixedCheckOut),
             autoApply: true,
