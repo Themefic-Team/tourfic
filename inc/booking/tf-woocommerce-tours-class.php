@@ -57,17 +57,38 @@ class Tourfic_Tours_WooCommerceHandle {
 
         }
 
-        //validation continuous date
+        //validation continuous tours date
         if( $type == 'continuous' ){
             $continuous_availability = $meta['continuous_availability'];
-            foreach( $continuous_availability as $availability){
-                $continuous_min_seat    = $availability['min_seat'];
-                $continuous_max_seat    = $availability['max_seat'];
-                $continuous_check_in    = $availability['check_in'];
-                $continuous_check_out   = $availability['check_out'];
-                if( $total_person < $continuous_min_seat ){
+            foreach( $continuous_availability as $key => $availability){
+                if( $key === array_key_first( $continuous_availability ) ){
+                    $check_in = strtotime(str_replace('/','-',$check_in));
+                    $check_out = strtotime(str_replace('/','-',$check_out));
+                    $continuous_min_seat    = $availability['min_seat'];
+                    $continuous_max_seat    = $availability['max_seat'];
+                    $continuous_check_in    = strtotime(str_replace( '/','-', $availability['check_in']));
+                    $continuous_check_out   = strtotime(str_replace( '/','-', $availability['check_out']));
+                    if( ($check_in >= $continuous_check_in && $check_out <= $continuous_check_out) && $total_person < $continuous_min_seat ){
+                        $response['errors'][] = __( 'Minimum '.$continuous_min_seat.' person you must select ', 'tourfic' );            
 
-                    $response['errors'][] = __( 'Minimum '.$fixed_min_seat.' person you must select ', 'tourfic' );            
+                    }else{
+                        $response['errors'][] = __( 'Select correct date range ', 'tourfic' );            
+
+                    }
+                }elseif( $key === array_key_last( $continuous_availability ) ){
+                    $check_in = strtotime(str_replace('/','-',$check_in));
+                    $check_out = strtotime(str_replace('/','-',$check_out));
+                    $continuous_min_seat    = $availability['min_seat'];
+                    $continuous_max_seat    = $availability['max_seat'];
+                    $continuous_check_in    = strtotime(str_replace( '/','-', $availability['check_in']));
+                    $continuous_check_out   = strtotime(str_replace( '/','-', $availability['check_out']));
+                    if( ($check_in >= $continuous_check_in && $check_out <= $continuous_check_out) && $total_person < $continuous_min_seat ){
+                        $response['errors'][] = __( 'Minimum '.$continuous_min_seat.' person you must select ', 'tourfic' );            
+
+                    }else{
+                        $response['errors'][] = __( 'Select correct date range ', 'tourfic' );            
+
+                    }
                 }
             }
 
