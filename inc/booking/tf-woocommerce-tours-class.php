@@ -57,6 +57,22 @@ class Tourfic_Tours_WooCommerceHandle {
 
         }
 
+        //validation continuous date
+        if( $type == 'continuous' ){
+            $continuous_availability = $meta['continuous_availability'];
+            foreach( $continuous_availability as $availability){
+                $continuous_min_seat    = $availability['min_seat'];
+                $continuous_max_seat    = $availability['max_seat'];
+                $continuous_check_in    = $availability['check_in'];
+                $continuous_check_out   = $availability['check_out'];
+                if( $total_person < $continuous_min_seat ){
+
+                    $response['errors'][] = __( 'Minimum '.$fixed_min_seat.' person you must select ', 'tourfic' );            
+                }
+            }
+
+        }
+        
         // Check errors
         if ( !$check_in ) {
             $response['errors'][] = __( 'Check-in date missing.', 'tourfic' );

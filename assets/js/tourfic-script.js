@@ -116,7 +116,7 @@
         var dateFormat = 'DD-MM-YYYY';
 
         // Trigger Check-in Date
-        $('.tf_selectdate-wrap, #check-in-out-date, .tours-check-in-out').daterangepicker({
+        $('.tf_selectdate-wrap, #check-in-out-date').daterangepicker({
             "locale": {
                 "format": dateFormat,
                 "separator": " - ",
@@ -125,34 +125,12 @@
             minDate : dateToday,
             autoApply: true,
         }, function(start, end, label) {
-
             checkin_input.val( start.format(dateFormat) );
             $('.checkin-date-text').text( start.format(dateFormat) );
 
             checkout_input.val( end.format(dateFormat) );
             $('.checkout-date-text').text( end.format(dateFormat) );
         });
-
-/**
- *          continuousDate = JSON.stringify(continuousDate);
-            
-            continuousDate = continuousDate.substring(1, continuousDate.length-1);
-            continuousDate = JSON.parse(continuousDate);
- */
-        // Tours Check-in DateRange Picker Start
-          function tfContinuousDate(rangeVal){
-
-            var continuousDate = $('.tourfic-wrap').data('continuous-array');
-            var rangeVal = '{ ';
-            for( var i = 0 ; i < continuousDate.length; i++){
-                rangeVal +=   '\'Availability ' + i + '\' :' + ' ['+ continuousDate[i].check_in +','+continuousDate[i].check_out+'],';
-            }
-            rangeVal += ' }';
-            return rangeVal;
-            
-
-        }
-        console.log(tfContinuousDate());
 
         var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
         var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
@@ -162,7 +140,6 @@
                 "separator": " - ",
                 "firstDay": 1
             },
-            ranges :  tfContinuousDate(),
             minDate : new Date(fixedCheckIn),
             maxDate : new Date(fixedCheckOut),
             autoApply: true,
@@ -595,6 +572,7 @@
                         }
 
                     }
+                    console.log(response);
                 },
                 error: function(data){
                     console.log(data);
