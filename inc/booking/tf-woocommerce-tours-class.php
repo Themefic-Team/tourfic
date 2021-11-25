@@ -40,60 +40,46 @@ class Tourfic_Tours_WooCommerceHandle {
         $check_in = isset( $_POST['check-in-date'] ) ? sanitize_text_field( $_POST['check-in-date'] ) : null;
         $check_out = isset( $_POST['check-out-date'] ) ? sanitize_text_field( $_POST['check-out-date'] ) : null;
 
-        //Validation of Fixed tours person
+        //Validation of Fixed tours person limit
         $total_person = $adults + $children + $infant;
-        $meta = get_post_meta( $tour_id,'tf_tours_option',true );
+        $meta = get_post_meta( $tour_id, 'tf_tours_option', true );
         $type = $meta['type'];
         $fixed_min_seat = $meta['fixed_availability']['min_seat'] ? $meta['fixed_availability']['min_seat'] : null;
         $fixed_max_seat = $meta['fixed_availability']['max_seat'] ? $meta['fixed_availability']['max_seat'] : null;
-        if($type == 'fixed'){
-            if( $total_person < $fixed_min_seat && $fixed_min_seat > 0 ){
-            $response['errors'][] = __( 'You must select minimum '.$fixed_min_seat.' person ', 'tourfic' );
+        if ( $type == 'fixed' ) {
+            if ( $total_person < $fixed_min_seat && $fixed_min_seat > 0 ) {
+                $response['errors'][] = __( 'You must select minimum ' . $fixed_min_seat . ' person ', 'tourfic' );
 
-            }else if( $total_person > $fixed_max_seat && $fixed_max_seat > 0 ){
-                $response['errors'][] = __( 'Maximum '.$fixed_max_seat.' person are allowed for this tour ', 'tourfic' );
-    
+            } else if ( $total_person > $fixed_max_seat && $fixed_max_seat > 0 ) {
+                $response['errors'][] = __( 'Maximum ' . $fixed_max_seat . ' person are allowed for this tour ', 'tourfic' );
+
             }
 
         }
 
-        //validation continuous tours date
-        if( $type == 'continuous' ){
+        //validation continuous tours minimum maximum person
+        if ( $type == 'continuous' ) {
             $continuous_availability = $meta['continuous_availability'];
-            foreach( $continuous_availability as $key => $availability){
-                if( $key === array_key_first( $continuous_availability ) ){
-                    $check_in = strtotime(str_replace('/','-',$check_in));
-                    $check_out = strtotime(str_replace('/','-',$check_out));
-                    $continuous_min_seat    = $availability['min_seat'];
-                    $continuous_max_seat    = $availability['max_seat'];
-                    $continuous_check_in    = strtotime(str_replace( '/','-', $availability['check_in']));
-                    $continuous_check_out   = strtotime(str_replace( '/','-', $availability['check_out']));
-                    if( ($check_in >= $continuous_check_in && $check_out <= $continuous_check_out) && $total_person < $continuous_min_seat ){
-                        $response['errors'][] = __( 'Minimum '.$continuous_min_seat.' person you must select ', 'tourfic' );            
 
-                    }else{
-                        $response['errors'][] = __( 'Select correct date range ', 'tourfic' );            
-
-                    }
-                }elseif( $key === array_key_last( $continuous_availability ) ){
-                    $check_in = strtotime(str_replace('/','-',$check_in));
-                    $check_out = strtotime(str_replace('/','-',$check_out));
-                    $continuous_min_seat    = $availability['min_seat'];
-                    $continuous_max_seat    = $availability['max_seat'];
-                    $continuous_check_in    = strtotime(str_replace( '/','-', $availability['check_in']));
-                    $continuous_check_out   = strtotime(str_replace( '/','-', $availability['check_out']));
-                    if( ($check_in >= $continuous_check_in && $check_out <= $continuous_check_out) && $total_person < $continuous_min_seat ){
-                        $response['errors'][] = __( 'Minimum '.$continuous_min_seat.' person you must select ', 'tourfic' );            
-
-                    }else{
-                        $response['errors'][] = __( 'Select correct date range ', 'tourfic' );            
+            foreach ( $continuous_availability as $key => $availability ) {
+                $ct_check_in = strtotime( str_replace( '/', '-', $check_in ) );
+                $ct_check_out = strtotime( str_replace( '/', '-', $check_out ) );
+                $continuous_min_seat = $continuous_availability[$key]['min_seat'];
+                $continuous_max_seat = $continuous_availability[$key]['max_seat'];
+                $continuous_check_in = strtotime( str_replace( '/', '-', $continuous_availability[$key]['check_in'] ) );
+                $continuous_check_out = strtotime( str_replace( '/', '-', $continuous_availability[$key]['check_out'] ) );
+                if ( $ct_check_in >= $continuous_check_in && $ct_check_out <= $continuous_check_out ) {
+                    if ( $total_person < $continuous_min_seat && $continuous_min_seat > 0 ) {
+                        $response['errors'][] = __( 'Minimum ' . $continuous_min_seat . ' person you must select ', 'tourfic' );
+                    } elseif ( $total_person > $continuous_max_seat && $continuous_max_seat > 0 ) {
+                        $response['errors'][] = __( 'Maximum ' . $continuous_max_seat . ' person are allowed ', 'tourfic' );
 
                     }
+
                 }
             }
-
         }
-        
+
         // Check errors
         if ( !$check_in ) {
             $response['errors'][] = __( 'Check-in date missing.', 'tourfic' );

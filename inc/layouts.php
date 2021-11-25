@@ -37,28 +37,28 @@ function tourfic_archive_single() {
         // Array to variable
         extract( $room_type );
         ?>
-												<div class="room_details">
-													<div class="featuredRooms">
-						                               <div class="prco-ltr-right-align-helper">
-						                                    <div class="tf-archive-shortdesc"><?php echo do_shortcode( $short_desc ); ?></div>
-						                                </div>
-						                                <div class="roomNameInner">
-						                                    <div class="room_link">
-						                                       <div class="roomrow_flex">
-						                                            <div class="roomName_flex">
-						                                                <div class="tf-archive-roomname"><strong><?php echo esc_html( $name ); ?></strong> <span class="dash">-</span> <span><?php tourfic_pax( $pax );?></span></div>
-						                                                <ul class="tf-archive-desc"><?php echo do_shortcode( $desc ); ?></ul>
-						                                            </div>
+					<div class="room_details">
+						<div class="featuredRooms">
+							<div class="prco-ltr-right-align-helper">
+								<div class="tf-archive-shortdesc"><?php echo do_shortcode( $short_desc ); ?></div>
+							</div>
+							<div class="roomNameInner">
+								<div class="room_link">
+									<div class="roomrow_flex">
+										<div class="roomName_flex">
+											<div class="tf-archive-roomname"><strong><?php echo esc_html( $name ); ?></strong> <span class="dash">-</span> <span><?php tourfic_pax( $pax );?></span></div>
+											<ul class="tf-archive-desc"><?php echo do_shortcode( $desc ); ?></ul>
+										</div>
 
-						                                            <div class="roomPrice roomPrice_flex sr_discount">
-						                                                <div class="bui-price-display__value prco-inline-block-maker-helper" aria-hidden="true"><?php echo tourfic_price_html( $price, $sale_price ); ?></div>
-						                                            </div>
-						                                        </div>
-						                                    </div>
-						                                </div>
-													</div>
-												</div>
-											<?php endforeach;?>
+										<div class="roomPrice roomPrice_flex sr_discount">
+											<div class="bui-price-display__value prco-inline-block-maker-helper" aria-hidden="true"><?php echo tourfic_price_html( $price, $sale_price ); ?></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php endforeach;?>
 				</div>
 				<!-- Room details end -->
 
