@@ -35,9 +35,12 @@ if ( post_password_required() ) {
 	foreach ( $comments as $comment ) {
 
 	    $tf_comment_meta = get_comment_meta( $comment->comment_ID, 'tf_comment_meta', true );
+		echo "<pre>";
+		var_dump($tf_comment_meta);
+		echo "</pre>";
 
 	    if( $tf_comment_meta ) {
-	    	foreach ($tf_comment_meta as $key => $value) {
+	    	foreach ( $tf_comment_meta as $key => $value ) {
 	    		$tf_overall_rate[$key][] = $value ? $value : "5";
 	    	}
 	    } else {

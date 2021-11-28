@@ -207,7 +207,8 @@ function tourfic_get_review_form( ){
  * Save Comment Meta
  */
 function tourfic_save_comment_meta_data( $comment_id ) {
-    update_comment_meta( $comment_id, 'tf_comment_meta', sanitize_textarea_field( $_POST[ 'tf_comment_meta' ] ) );
+	$meta_values = $_POST['tf_comment_meta'];
+    update_comment_meta( $comment_id, 'tf_comment_meta',  $meta_values );
 }
 add_action( 'comment_post', 'tourfic_save_comment_meta_data' );
 

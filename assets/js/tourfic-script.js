@@ -131,13 +131,12 @@
             checkout_input.val( end.format(dateFormat) );
             $('.checkout-date-text').text( end.format(dateFormat) );
         });
+
         function tfContinuousDate(){
 
             var continuousDate = $('.tourfic-wrap').data('continuous-array');
-            if(continuousDate != null){
-
-          
-                var rangeVal = 'ranges : { ';
+            if( continuousDate != null ){          
+                var rangeVal = '{ ';
                 for( var i = 0 ; i < continuousDate.length; i++){
                     rangeVal +=   '\'Availability ' + i + '\' :' + ' ["'+ continuousDate[i].check_in +'","'+continuousDate[i].check_out+'"],';
                 }
@@ -151,15 +150,24 @@
         console.log(tfContinuousDate())
         var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
         var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
+        if(fixedCheckIn){
+            fixedCheckIn = new Date(fixedCheckIn);
+        }else{
+            fixedCheckIn = false;
+        }
+        if(fixedCheckOut){
+            fixedCheckOut = new Date(fixedCheckOut);
+        }else{
+            fixedCheckOut = false;
+        }
          $('.tours-check-in-out').daterangepicker({
             "locale": {
                 "format": dateFormat,
                 "separator": " - ",
                 "firstDay": 1
             },
-            minDate : new Date(fixedCheckIn),
-            maxDate : new Date(fixedCheckOut),
-            ranges : { 'Availability 0' : ["23/11/2021","25/11/2021"],'Availability 1' : ["28/11/2021","30/11/2021"], },
+            minDate : fixedCheckIn,
+            maxDate : fixedCheckOut,
             autoApply: true,
         }, function(start, end, label) {
             checkin_input.val( start.format(dateFormat) );

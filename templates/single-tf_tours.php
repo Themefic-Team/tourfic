@@ -43,7 +43,6 @@ if( $discount_type == 'percent' ){
 }elseif( $discount_type == 'fixed'){
 	$sale_price = number_format( ( $price - $discounted_price ),1 );
 }
-
 //continuous tour
 $continuous_availability = $meta['continuous_availability'];
 $continuous_availability = json_encode($continuous_availability);
