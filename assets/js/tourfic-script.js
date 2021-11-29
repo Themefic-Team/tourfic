@@ -1,20 +1,20 @@
-;(function($, win) {
-  $.fn.inViewport = function(cb) {
-     return this.each(function(i,el){
-       function visPx(){
-         var H = $(this).height(),
-             r = el.getBoundingClientRect(), t=r.top, b=r.bottom;
-         return cb.call(el, Math.max(0, t>0? H-t : (b<H?b:H)));
-       } visPx();
-       $(win).on("resize scroll", visPx);
-     });
-  };
+; (function ($, win) {
+    $.fn.inViewport = function (cb) {
+        return this.each(function (i, el) {
+            function visPx() {
+                var H = $(this).height(),
+                    r = el.getBoundingClientRect(), t = r.top, b = r.bottom;
+                return cb.call(el, Math.max(0, t > 0 ? H - t : (b < H ? b : H)));
+            } visPx();
+            $(win).on("resize scroll", visPx);
+        });
+    };
 }(jQuery, window));
 
-(function($){
+(function ($) {
     'use strict';
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         var sbp = $('.swiper-button-prev'),
             sbn = $('.swiper-button-next');
 
@@ -27,7 +27,7 @@
             dots: false,
             centerMode: false,
             asNavFor: '.tf_slider-nav',
-            variableWidth: true 
+            variableWidth: true
         });
 
         $('.single-slider-wrapper .tf_slider-nav').slick({
@@ -49,11 +49,11 @@
         });
 
         // Tab controlling
-        $('.tf_tab-nav a').on('click',function(e){
+        $('.tf_tab-nav a').on('click', function (e) {
             e.preventDefault();
             var targetDiv = $(this).attr('href');
 
-            if(!$(this).hasClass('active')){
+            if (!$(this).hasClass('active')) {
                 $(this).addClass('active').siblings().removeClass('active');
             }
             $('.tf-tab-container').find(targetDiv).addClass('active').siblings().removeClass('active');
@@ -61,20 +61,20 @@
         });
 
         // FullWidth Container JS
-        function fullwidthInit(selector){
-            function fullWidth(selector){
-                $(selector).each(function(){
-                    $(this).width("100%").css({ marginLeft : "-0px" });
+        function fullwidthInit(selector) {
+            function fullWidth(selector) {
+                $(selector).each(function () {
+                    $(this).width("100%").css({ marginLeft: "-0px" });
 
                     var window_width = $(window).width();
 
-                    var left_margin = "-"+$(this).offset().left+"px";
+                    var left_margin = "-" + $(this).offset().left + "px";
 
-                    $(this).width(window_width).css({ marginLeft : left_margin });
-                    console.log("Width:",window_width,"Margin Left:",left_margin);
+                    $(this).width(window_width).css({ marginLeft: left_margin });
+                    console.log("Width:", window_width, "Margin Left:", left_margin);
                 });
             }
-            $(window).on("resize load", function(){
+            $(window).on("resize load", function () {
                 fullWidth(selector);
             });
         }
@@ -83,35 +83,35 @@
         fullwidthInit("[data-fullwidth=true]");
 
         // Share copy
-        $('button#share_link_button').click(function(){
+        $('button#share_link_button').click(function () {
 
             $(this).addClass('copied');
-            setTimeout(function(){ $('button#share_link_button').removeClass('copied'); }, 3000);
+            setTimeout(function () { $('button#share_link_button').removeClass('copied'); }, 3000);
             $(this).parent().find("#share_link_input").select();
             document.execCommand("copy");
         });
 
         // Toggle
-        $('[data-toggle="true"]').click(function(e){
+        $('[data-toggle="true"]').click(function (e) {
             e.preventDefault();
             var target = $(this).attr('href');
             $(target).slideToggle('fast');
         });
 
-        $('.faq-head').click(function(e){
+        $('.faq-head').click(function (e) {
             $(this).parent().toggleClass('active').find('.faq-content').slideToggle('fast');
         });
-        
+
         //Itinerary accordion
-        $('.itinerary-head').on('click',function(e){
+        $('.itinerary-head').on('click', function (e) {
             $(this).parent().toggleClass('active').find('.itinerary-content').slideToggle('fast');
         });
 
 
         // Date picker
         var dateToday = new Date();
-        var checkin_input = jQuery( "#check-in-date" ),
-            checkout_input = jQuery( "#check-out-date" );
+        var checkin_input = jQuery("#check-in-date"),
+            checkout_input = jQuery("#check-out-date");
 
         var dateFormat = 'DD-MM-YYYY';
 
@@ -122,27 +122,27 @@
                 "separator": " - ",
                 "firstDay": 1
             },
-            minDate : dateToday,
+            minDate: dateToday,
             autoApply: true,
-        }, function(start, end, label) {
-            checkin_input.val( start.format(dateFormat) );
-            $('.checkin-date-text').text( start.format(dateFormat) );
+        }, function (start, end, label) {
+            checkin_input.val(start.format(dateFormat));
+            $('.checkin-date-text').text(start.format(dateFormat));
 
-            checkout_input.val( end.format(dateFormat) );
-            $('.checkout-date-text').text( end.format(dateFormat) );
+            checkout_input.val(end.format(dateFormat));
+            $('.checkout-date-text').text(end.format(dateFormat));
         });
 
-        function tfContinuousDate(){
+        function tfContinuousDate() {
 
             var continuousDate = $('.tourfic-wrap').data('continuous-array');
-            if( continuousDate != null ){          
+            if (continuousDate != null) {
                 var rangeVal = '{ ';
-                for( var i = 0 ; i < continuousDate.length; i++){
-                    rangeVal +=   '\'Availability ' + i + '\' :' + ' ["'+ continuousDate[i].check_in +'","'+continuousDate[i].check_out+'"],';
+                for (var i = 0; i < continuousDate.length; i++) {
+                    rangeVal += '\'Availability ' + i + '\' :' + ' ["' + continuousDate[i].check_in + '","' + continuousDate[i].check_out + '"],';
                 }
                 rangeVal += ' },';
                 return rangeVal;
-            }else{
+            } else {
                 return false;
             }
 
@@ -150,111 +150,111 @@
         console.log(tfContinuousDate())
         var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
         var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
-        if(fixedCheckIn){
+        if (fixedCheckIn) {
             fixedCheckIn = new Date(fixedCheckIn);
-        }else{
+        } else {
             fixedCheckIn = false;
         }
-        if(fixedCheckOut){
+        if (fixedCheckOut) {
             fixedCheckOut = new Date(fixedCheckOut);
-        }else{
+        } else {
             fixedCheckOut = false;
         }
-         $('.tours-check-in-out').daterangepicker({
+        $('.tours-check-in-out').daterangepicker({
             "locale": {
                 "format": dateFormat,
                 "separator": " - ",
                 "firstDay": 1
             },
-            minDate : fixedCheckIn,
-            maxDate : fixedCheckOut,
+            minDate: fixedCheckIn,
+            maxDate: fixedCheckOut,
             autoApply: true,
-        }, function(start, end, label) {
-            checkin_input.val( start.format(dateFormat) );
-            $('.checkin-date-text').text( start.format(dateFormat) );
+        }, function (start, end, label) {
+            checkin_input.val(start.format(dateFormat));
+            $('.checkin-date-text').text(start.format(dateFormat));
 
-            checkout_input.val( end.format(dateFormat) );
-            $('.checkout-date-text').text( end.format(dateFormat) );
+            checkout_input.val(end.format(dateFormat));
+            $('.checkout-date-text').text(end.format(dateFormat));
         });
 
         // Number Decrement
-        $('.acr-dec').on('click',function(e){
+        $('.acr-dec').on('click', function (e) {
 
             var input = $(this).parent().find('input');
             var min = input.attr('min');
 
-            if ( input.val() > min ) {
-                input.val( input.val()-1 ).change();
+            if (input.val() > min) {
+                input.val(input.val() - 1).change();
             }
 
         });
 
         // Number Increment
-        $('.acr-inc').on('click',function(e){
+        $('.acr-inc').on('click', function (e) {
             var input = $(this).parent().find('input');
-            input.val( parseInt(input.val())+1 ).change();
+            input.val(parseInt(input.val()) + 1).change();
         });
 
         // Adults change trigger
-        $(document).on('change', '#adults', function(){
+        $(document).on('change', '#adults', function () {
             var thisVal = $(this).val();
 
-            if ( thisVal > 1 ) {
-                $('.adults-text').text(thisVal+" Adults");
+            if (thisVal > 1) {
+                $('.adults-text').text(thisVal + " Adults");
             } else {
-                $('.adults-text').text(thisVal+" Adult");
+                $('.adults-text').text(thisVal + " Adult");
             }
 
         });
 
         // Children change trigger
-        $(document).on('change', '#children', function(){
+        $(document).on('change', '#children', function () {
             var thisVal = $(this).val();
 
-            if ( thisVal > 1 ) {
-                $('.child-text').text(thisVal+" Children");
+            if (thisVal > 1) {
+                $('.child-text').text(thisVal + " Children");
             } else {
-                $('.child-text').text(thisVal+" Child");
+                $('.child-text').text(thisVal + " Child");
             }
 
         });
 
         // Room change trigger
-        $(document).on('change', '#room', function(){
+        $(document).on('change', '#room', function () {
             var thisVal = $(this).val();
 
-            if ( thisVal > 1 ) {
-                $('.room-text').text(thisVal+" Rooms");
+            if (thisVal > 1) {
+                $('.room-text').text(thisVal + " Rooms");
             } else {
-                $('.room-text').text(thisVal+" Room");
+                $('.room-text').text(thisVal + " Room");
             }
         });
 
         // Adult, Child, Room Selection toggle
-        $(document).on('click', '.tf_selectperson-wrap .tf_input-inner', function(){
+        $(document).on('click', '.tf_selectperson-wrap .tf_input-inner', function () {
             $('.tf_acrselection-wrap').slideToggle('fast');
         });
 
-        jQuery(document).on("click", function(event){
-            
-            if(!jQuery(event.target).closest(".tf_selectperson-wrap").length){
+        jQuery(document).on("click", function (event) {
+
+            if (!jQuery(event.target).closest(".tf_selectperson-wrap").length) {
                 jQuery(".tf_acrselection-wrap").slideUp("fast");
-                
+
             }
         });
 
         // Comment Reply Toggle
-        $(document).on('click', '#reply-title', function(){
+        $(document).on('click', '#reply-title', function () {
             var $this = $(this);
-            $('#commentform').slideToggle('fast', 'swing', function(){
+            $('#commentform').slideToggle('fast', 'swing', function () {
                 $this.parent().toggleClass('active');
             });
         });
 
         // Smooth scroll to id
-        $(".reserve-button a").click(function() {
+        $(".reserve-button a").click(function () {
             $('html, body').animate({
-                scrollTop: $("#rooms").offset().top-32
+                scrollTop: $("#rooms").offset().top - 32
             }, 1000);
         });
 
@@ -271,35 +271,35 @@
             gallery: {
                 enabled: true,
                 navigateByImgClick: true,
-                preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-            },  
+                preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
+            },
             callbacks: {
-                open: function() {
-                  // Will fire when this exact popup is opened
-                  // this - is Magnific Popup object
-                  
-                  jQuery('#elementor-lightbox-slideshow-single-img').addClass('dialog-type-lightboxjhfsjdfhreuru');
+                open: function () {
+                    // Will fire when this exact popup is opened
+                    // this - is Magnific Popup object
+
+                    jQuery('#elementor-lightbox-slideshow-single-img').addClass('dialog-type-lightboxjhfsjdfhreuru');
                 },
-                close: function() {
-                  // Will fire when popup is closed
+                close: function () {
+                    // Will fire when popup is closed
                 }
                 // e.t.c.
-              }
+            }
         });
-        
+
         // Ask question
-        $(document).on('click', '#tf-ask-question-trigger', function(e){
+        $(document).on('click', '#tf-ask-question-trigger', function (e) {
             e.preventDefault();
             $('#tf-ask-question').fadeIn().find('.response').html("");
         });
 
         // Close Ask question
-        $(document).on('click', 'span.close-aq', function(){
+        $(document).on('click', 'span.close-aq', function () {
             $('#tf-ask-question').fadeOut();
         });
 
         // Ask question Submit
-        $(document).on('submit', 'form#ask-question', function(e){
+        $(document).on('submit', 'form#ask-question', function (e) {
             e.preventDefault();
 
             var $this = $(this);
@@ -313,7 +313,7 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                beforeSend: function(data){
+                beforeSend: function (data) {
                     $this.block({
                         message: null,
                         overlayCSS: {
@@ -324,23 +324,23 @@
 
                     $this.find('.response').html("Sending your question...");
                 },
-                complete: function(data){
+                complete: function (data) {
                     $this.unblock();
                 },
-                success: function(data){
+                success: function (data) {
                     $this.unblock();
 
                     var response = JSON.parse(data);
 
-                    if( response.status == 'sent' ) {
-                        $this.find('.response').html( response.msg );
+                    if (response.status == 'sent') {
+                        $this.find('.response').html(response.msg);
 
-                        $this.find('[type="reset"]').trigger( 'click' );
+                        $this.find('[type="reset"]').trigger('click');
                     } else {
-                        $this.find('.response').html( response.msg );
+                        $this.find('.response').html(response.msg);
                     }
                 },
-                error: function(data){
+                error: function (data) {
                     console.log(data);
 
                 },
@@ -349,16 +349,16 @@
 
         });
 
-        
+
 
         // Change view
-        $(document).on('click', '.change-view', function(e){
+        $(document).on('click', '.change-view', function (e) {
             e.preventDefault();
             $('.change-view').removeClass('active');
             $(this).addClass('active');
 
             var dataid = $(this).data('id');
-            if ( dataid == 'grid-view' ) {
+            if (dataid == 'grid-view') {
                 $('.archive_ajax_result').addClass('tours-grid');
             } else {
                 $('.archive_ajax_result').removeClass('tours-grid');
@@ -368,7 +368,7 @@
 
         // Change view
         var filter_xhr;
-        $(document).on('change', '[name*=tf_filters], #destination, #adults, #room, #children, #check-in-date, #check-out-date, #check-in-out-date', function(){
+        $(document).on('change', '[name*=tf_filters], #destination, #adults, #room, #children, #check-in-date, #check-out-date, #check-in-out-date', function () {
             var dest = $('#destination').val();
             var adults = $('#adults').val();
             var room = $('#room').val();
@@ -378,9 +378,9 @@
 
             var filters = [];
 
-            $('[name*=tf_filters]').each(function(){
-                if ( $(this).is(':checked') ) {
-                    filters.push( $(this).val() );
+            $('[name*=tf_filters]').each(function () {
+                if ($(this).is(':checked')) {
+                    filters.push($(this).val());
                 }
             });
             var filters = filters.join();
@@ -396,7 +396,7 @@
             formData.append('filters', filters);
 
             // abort previous request
-            if(filter_xhr && filter_xhr.readyState != 4){
+            if (filter_xhr && filter_xhr.readyState != 4) {
                 filter_xhr.abort();
             }
 
@@ -406,7 +406,7 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                beforeSend: function(data){
+                beforeSend: function (data) {
                     $('.archive_ajax_result').block({
                         message: null,
                         overlayCSS: {
@@ -416,15 +416,15 @@
                     });
 
                 },
-                complete: function(data){
+                complete: function (data) {
                     $('.archive_ajax_result').unblock();
                 },
-                success: function(data){
+                success: function (data) {
                     $('.archive_ajax_result').unblock();
 
-                    $('.archive_ajax_result').html( data );
+                    $('.archive_ajax_result').html(data);
                 },
-                error: function(data){
+                error: function (data) {
                     console.log(data);
                 },
 
@@ -438,23 +438,23 @@
 
     });
 
-    $(window).load(function(){
+    $(window).load(function () {
 
         // Trigger Animation
-        jQuery('[data-width]').each(function(){
+        jQuery('[data-width]').each(function () {
 
             var $this = jQuery(this);
 
             var width = $this.attr('data-width');
-/*
-            $this.inViewport(function(px) {
-                if( px > 0 ) {
-                    $this.css('width', +width+'%');
-                } else {
-                    $this.css('width', '0%');
-                }
-            });
-*/
+            /*
+                        $this.inViewport(function(px) {
+                            if( px > 0 ) {
+                                $this.css('width', +width+'%');
+                            } else {
+                                $this.css('width', '0%');
+                            }
+                        });
+            */
         });
 
     });
@@ -462,13 +462,13 @@
 })(jQuery);
 
 // Ajax Scripts
-(function($){
+(function ($) {
     'use strict';
 
-    $(document).ready(function(){
+    $(document).ready(function () {
 
         // Email Capture
-        $(document).on('submit', 'form.tf-room', function(e){
+        $(document).on('submit', 'form.tf-room', function (e) {
             e.preventDefault();
 
             var $this = $(this);
@@ -482,7 +482,7 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                beforeSend: function(data){
+                beforeSend: function (data) {
                     $this.block({
                         message: null,
                         overlayCSS: {
@@ -493,38 +493,38 @@
 
                     $('.tf_notice_wrapper').html("").hide();
                 },
-                complete: function(data){
+                complete: function (data) {
                     $this.unblock();
                 },
-                success: function(data){
+                success: function (data) {
                     $this.unblock();
 
                     var response = JSON.parse(data);
 
-                    if( response.status == 'error' ) {
+                    if (response.status == 'error') {
                         var errorHtml = "";
 
-                        if ( response.errors ) {
-                            response.errors.forEach( function( text ){
-                                errorHtml += '<div class="woocommerce-error">'+text+'</div>';
-                            } );
+                        if (response.errors) {
+                            response.errors.forEach(function (text) {
+                                errorHtml += '<div class="woocommerce-error">' + text + '</div>';
+                            });
                         }
 
-                        $('.tf_notice_wrapper').html( errorHtml ).show();
+                        $('.tf_notice_wrapper').html(errorHtml).show();
 
                         $("html, body").animate({ scrollTop: 0 }, 300);
                         return false;
                     } else {
 
-                        if ( response.redirect_to ) {
-                            window.location.replace( response.redirect_to );
+                        if (response.redirect_to) {
+                            window.location.replace(response.redirect_to);
                         } else {
                             jQuery(document.body).trigger('added_to_cart');
                         }
 
                     }
                 },
-                error: function(data){
+                error: function (data) {
                     console.log(data);
 
                 },
@@ -537,13 +537,13 @@
 })(jQuery);
 
 // Ajax Scripts for tour booking
-(function($){
+(function ($) {
     'use strict';
 
-    $(document).ready(function(){
+    $(document).ready(function () {
 
         // Email Capture
-        $(document).on('submit', 'form.tf_tours_booking', function(e){
+        $(document).on('submit', 'form.tf_tours_booking', function (e) {
             e.preventDefault();
 
             var $this = $(this);
@@ -557,7 +557,7 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                beforeSend: function(data){
+                beforeSend: function (data) {
                     $this.block({
                         message: null,
                         overlayCSS: {
@@ -568,31 +568,31 @@
 
                     $('.tf_notice_wrapper').html("").hide();
                 },
-                complete: function(data){
+                complete: function (data) {
                     $this.unblock();
                 },
-                success: function(data){
+                success: function (data) {
                     $this.unblock();
 
                     var response = JSON.parse(data);
 
-                    if( response.status == 'error' ) {
+                    if (response.status == 'error') {
                         var errorHtml = "";
 
-                        if ( response.errors ) {
-                            response.errors.forEach( function( text ){
-                                errorHtml += '<div class="woocommerce-error">'+text+'</div>';
-                            } );
+                        if (response.errors) {
+                            response.errors.forEach(function (text) {
+                                errorHtml += '<div class="woocommerce-error">' + text + '</div>';
+                            });
                         }
 
-                        $('.tf_notice_wrapper').html( errorHtml ).show();
+                        $('.tf_notice_wrapper').html(errorHtml).show();
 
                         $("html, body").animate({ scrollTop: 0 }, 300);
                         return false;
                     } else {
 
-                        if ( response.redirect_to ) {
-                            window.location.replace( response.redirect_to );
+                        if (response.redirect_to) {
+                            window.location.replace(response.redirect_to);
                         } else {
                             jQuery(document.body).trigger('added_to_cart');
                         }
@@ -600,7 +600,7 @@
                     }
                     console.log(response);
                 },
-                error: function(data){
+                error: function (data) {
                     console.log(data);
 
                 },
@@ -612,16 +612,16 @@
 
 })(jQuery);
 // Infinite Scroll
-(function($){
+(function ($) {
     'use strict';
 
-    $(document).ready(function(){
+    $(document).ready(function () {
 
         var flag = false;
         var main_xhr;
 
-        var amPushAjax = function( url ){
-            if(main_xhr && main_xhr.readyState != 4){
+        var amPushAjax = function (url) {
+            if (main_xhr && main_xhr.readyState != 4) {
                 main_xhr.abort();
             }
 
@@ -632,12 +632,12 @@
                 contentType: false, // Not to set any content header
                 processData: false, // Not to process data
                 asynch: true,
-                beforeSend: function(  ) {
+                beforeSend: function () {
 
-                    $( document ).find( '.tf_posts_navigation' ).addClass( 'loading' );
+                    $(document).find('.tf_posts_navigation').addClass('loading');
                     flag = true;
                 },
-                success: function(data) {
+                success: function (data) {
                     //console.log(data);
                     $('.archive_ajax_result').append($('.archive_ajax_result', data).html());
 
@@ -647,7 +647,7 @@
 
                     flag = false;
 
-                    $( document ).find( '.tf_posts_navigation' ).removeClass( 'loading' );
+                    $(document).find('.tf_posts_navigation').removeClass('loading');
 
                 }
             });
@@ -656,29 +656,29 @@
         };
 
         // Feed Ajax Trigger
-        $( document ).on('click', '.tf_posts_navigation a.next.page-numbers', function(e){
+        $(document).on('click', '.tf_posts_navigation a.next.page-numbers', function (e) {
             e.preventDefault();
 
-            var targetUrl = ( e.target.href ) ? e.target.href : $(this).context.href;
-            amPushAjax( targetUrl );
-            window.history.pushState({url: "" + targetUrl + ""}, "", targetUrl);
+            var targetUrl = (e.target.href) ? e.target.href : $(this).context.href;
+            amPushAjax(targetUrl);
+            window.history.pushState({ url: "" + targetUrl + "" }, "", targetUrl);
         });
         // End Feed Ajax Trigger
 
         // Feed Click Trigger
-        $( window ).on('scroll', function(e){
-            $('.tf_posts_navigation a.next.page-numbers').each(function(i,el){
+        $(window).on('scroll', function (e) {
+            $('.tf_posts_navigation a.next.page-numbers').each(function (i, el) {
 
                 var $this = $(this);
 
                 var H = $(window).height(),
                     r = el.getBoundingClientRect(),
-                    t=r.top,
-                    b=r.bottom;
+                    t = r.top,
+                    b = r.bottom;
 
-                var tAdj = parseInt(t-(H/2));
+                var tAdj = parseInt(t - (H / 2));
 
-                if ( flag === false && (H >= tAdj) ) {
+                if (flag === false && (H >= tAdj)) {
                     //console.log( 'inview' );
                     $this.trigger('click');
                 } else {
@@ -687,6 +687,10 @@
             });
         });
         // End Feed Click Trigger
+
+        //Ratings copy/move under gallery
+        var avg_rating = $('.tf-overall-ratings .overall-rate').text();
+        $('.tf_title-area .reviews').html(avg_rating);
 
     });
 
@@ -697,129 +701,129 @@
 * Trourfic autocomplete destination
 */
 function tourfic_autocomplete(inp, arr) {
-  /*the autocomplete function takes two arguments,
-  the text field element and an array of possible autocompleted values:*/
-  var currentFocus;
-  /*execute a function when someone writes in the text field:*/
-  inp.addEventListener("input", function(e) {
-      var a, b, i, val = this.value;
-      /*close any already open lists of autocompleted values*/
-      closeAllLists();
-      if (!val) { return false;}
-      currentFocus = -1;
-      /*create a DIV element that will contain the items (values):*/
-      a = document.createElement("DIV");
-      a.setAttribute("id", this.id + "autocomplete-list");
-      a.setAttribute("class", "autocomplete-items");
-      /*append the DIV element as a child of the autocomplete container:*/
-      this.parentNode.appendChild(a);
-      var $notfound = [];
-      /*for each item in the array...*/
-      for (i = 0; i < arr.length; i++) {
-        /*check if the item starts with the same letters as the text field value:*/
-        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-          $notfound.push('found');
-            
-          /*create a DIV element for each matching element:*/
-          b = document.createElement("DIV");
-          /*make the matching letters bold:*/
-          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-          b.innerHTML += arr[i].substr(val.length);
-          /*insert a input field that will hold the current array item's value:*/
-          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-          /*execute a function when someone clicks on the item value (DIV element):*/
-          b.addEventListener("click", function(e) {
-              /*insert the value for the autocomplete text field:*/
-              inp.value = this.getElementsByTagName("input")[0].value;
-              /*close the list of autocompleted values,
-              (or any other open lists of autocompleted values:*/
-              closeAllLists();
-          });
-          a.appendChild(b);
-        
-        } else {
-            $notfound.push('notfound');
-        }
-      }
+    /*the autocomplete function takes two arguments,
+    the text field element and an array of possible autocompleted values:*/
+    var currentFocus;
+    /*execute a function when someone writes in the text field:*/
+    inp.addEventListener("input", function (e) {
+        var a, b, i, val = this.value;
+        /*close any already open lists of autocompleted values*/
+        closeAllLists();
+        if (!val) { return false; }
+        currentFocus = -1;
+        /*create a DIV element that will contain the items (values):*/
+        a = document.createElement("DIV");
+        a.setAttribute("id", this.id + "autocomplete-list");
+        a.setAttribute("class", "autocomplete-items");
+        /*append the DIV element as a child of the autocomplete container:*/
+        this.parentNode.appendChild(a);
+        var $notfound = [];
+        /*for each item in the array...*/
+        for (i = 0; i < arr.length; i++) {
+            /*check if the item starts with the same letters as the text field value:*/
+            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                $notfound.push('found');
 
-      if( $notfound.indexOf('found') == -1 ) {
-          /*create a DIV element for each matching element:*/
-          b = document.createElement("DIV");
-          /*make the matching letters bold:*/
-          
-          b.innerHTML += 'Not Found';
-          /*insert a input field that will hold the current array item's value:*/
-          b.innerHTML += "<input type='hidden' value=''>";
-          /*execute a function when someone clicks on the item value (DIV element):*/
-          b.addEventListener("click", function(e) {
-              /*insert the value for the autocomplete text field:*/
-              inp.value = this.getElementsByTagName("input")[0].value;
-              /*close the list of autocompleted values,
-              (or any other open lists of autocompleted values:*/
-              closeAllLists();
-          });
-          a.appendChild(b);
-      }
-  });
-  /*execute a function presses a key on the keyboard:*/
-  inp.addEventListener("keydown", function(e) {
-      var x = document.getElementById(this.id + "autocomplete-list");
-      if (x) x = x.getElementsByTagName("div");
-      if (e.keyCode == 40) {
-        /*If the arrow DOWN key is pressed,
-        increase the currentFocus variable:*/
-        currentFocus++;
-        /*and and make the current item more visible:*/
-        addActive(x);
-      } else if (e.keyCode == 38) { //up
-        /*If the arrow UP key is pressed,
-        decrease the currentFocus variable:*/
-        currentFocus--;
-        /*and and make the current item more visible:*/
-        addActive(x);
-      } else if (e.keyCode == 13) {
-        /*If the ENTER key is pressed, prevent the form from being submitted,*/
-        e.preventDefault();
-        if (currentFocus > -1) {
-          /*and simulate a click on the "active" item:*/
-          if (x) x[currentFocus].click();
+                /*create a DIV element for each matching element:*/
+                b = document.createElement("DIV");
+                /*make the matching letters bold:*/
+                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                b.innerHTML += arr[i].substr(val.length);
+                /*insert a input field that will hold the current array item's value:*/
+                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                /*execute a function when someone clicks on the item value (DIV element):*/
+                b.addEventListener("click", function (e) {
+                    /*insert the value for the autocomplete text field:*/
+                    inp.value = this.getElementsByTagName("input")[0].value;
+                    /*close the list of autocompleted values,
+                    (or any other open lists of autocompleted values:*/
+                    closeAllLists();
+                });
+                a.appendChild(b);
+
+            } else {
+                $notfound.push('notfound');
+            }
         }
-      }
-  });
-  function addActive(x) {
-    /*a function to classify an item as "active":*/
-    if (!x) return false;
-    /*start by removing the "active" class on all items:*/
-    removeActive(x);
-    if (currentFocus >= x.length) currentFocus = 0;
-    if (currentFocus < 0) currentFocus = (x.length - 1);
-    /*add class "autocomplete-active":*/
-    x[currentFocus].classList.add("autocomplete-active");
-  }
-  function removeActive(x) {
-    /*a function to remove the "active" class from all autocomplete items:*/
-    for (var i = 0; i < x.length; i++) {
-      x[i].classList.remove("autocomplete-active");
+
+        if ($notfound.indexOf('found') == -1) {
+            /*create a DIV element for each matching element:*/
+            b = document.createElement("DIV");
+            /*make the matching letters bold:*/
+
+            b.innerHTML += 'Not Found';
+            /*insert a input field that will hold the current array item's value:*/
+            b.innerHTML += "<input type='hidden' value=''>";
+            /*execute a function when someone clicks on the item value (DIV element):*/
+            b.addEventListener("click", function (e) {
+                /*insert the value for the autocomplete text field:*/
+                inp.value = this.getElementsByTagName("input")[0].value;
+                /*close the list of autocompleted values,
+                (or any other open lists of autocompleted values:*/
+                closeAllLists();
+            });
+            a.appendChild(b);
+        }
+    });
+    /*execute a function presses a key on the keyboard:*/
+    inp.addEventListener("keydown", function (e) {
+        var x = document.getElementById(this.id + "autocomplete-list");
+        if (x) x = x.getElementsByTagName("div");
+        if (e.keyCode == 40) {
+            /*If the arrow DOWN key is pressed,
+            increase the currentFocus variable:*/
+            currentFocus++;
+            /*and and make the current item more visible:*/
+            addActive(x);
+        } else if (e.keyCode == 38) { //up
+            /*If the arrow UP key is pressed,
+            decrease the currentFocus variable:*/
+            currentFocus--;
+            /*and and make the current item more visible:*/
+            addActive(x);
+        } else if (e.keyCode == 13) {
+            /*If the ENTER key is pressed, prevent the form from being submitted,*/
+            e.preventDefault();
+            if (currentFocus > -1) {
+                /*and simulate a click on the "active" item:*/
+                if (x) x[currentFocus].click();
+            }
+        }
+    });
+    function addActive(x) {
+        /*a function to classify an item as "active":*/
+        if (!x) return false;
+        /*start by removing the "active" class on all items:*/
+        removeActive(x);
+        if (currentFocus >= x.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = (x.length - 1);
+        /*add class "autocomplete-active":*/
+        x[currentFocus].classList.add("autocomplete-active");
     }
-  }
-  function closeAllLists(elmnt) {
-    /*close all autocomplete lists in the document,
-    except the one passed as an argument:*/
-    var x = document.getElementsByClassName("autocomplete-items");
-    for (var i = 0; i < x.length; i++) {
-      if (elmnt != x[i] && elmnt != inp) {
-        x[i].parentNode.removeChild(x[i]);
-      }
+    function removeActive(x) {
+        /*a function to remove the "active" class from all autocomplete items:*/
+        for (var i = 0; i < x.length; i++) {
+            x[i].classList.remove("autocomplete-active");
+        }
     }
-  }
-  /*execute a function when someone clicks in the document:*/
-  document.addEventListener("click", function (e) {
-      closeAllLists(e.target);
-  });
+    function closeAllLists(elmnt) {
+        /*close all autocomplete lists in the document,
+        except the one passed as an argument:*/
+        var x = document.getElementsByClassName("autocomplete-items");
+        for (var i = 0; i < x.length; i++) {
+            if (elmnt != x[i] && elmnt != inp) {
+                x[i].parentNode.removeChild(x[i]);
+            }
+        }
+    }
+    /*execute a function when someone clicks in the document:*/
+    document.addEventListener("click", function (e) {
+        closeAllLists(e.target);
+    });
 }
 
 var destinations = tf_params.destinations;
 
-//tourfic_autocomplete( document.getElementById("destination"), destinations );
+tourfic_autocomplete(document.getElementById("destination"), destinations);
 
 

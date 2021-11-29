@@ -175,6 +175,7 @@ if ( !class_exists( 'Tourfic_WordPress_Plugin' ) ):
                     'nonce'        => wp_create_nonce( 'tf_ajax_nonce' ),
                     'ajax_url'     => admin_url( 'admin-ajax.php' ),
                     'destinations' => $this->get_tourfic_destinations(),
+                    'tour_destinations' => $this->get_tours_destinations(),
                 )
             );
         }
@@ -189,6 +190,27 @@ if ( !class_exists( 'Tourfic_WordPress_Plugin' ) ):
 
             $destination_terms = get_terms( array(
                 'taxonomy'   => 'destination',
+                'hide_empty' => false,
+            ) );
+
+            foreach ( $destination_terms as $destination_term ) {
+
+                $destinations[] = $destination_term->name;
+            }
+
+            return $destinations;
+
+        }
+  /*
+         * Get tours destinations{taxonomy-tour_destination}
+         */
+
+        public function get_tours_destinations() {
+
+            $destinations = array();
+
+            $destination_terms = get_terms( array(
+                'taxonomy'   => 'tour_destination',
                 'hide_empty' => false,
             ) );
 

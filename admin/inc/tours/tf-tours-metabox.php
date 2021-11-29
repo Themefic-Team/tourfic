@@ -15,7 +15,7 @@ if ( class_exists( 'CSF' ) ) {
         'post_type' => 'tf_tours',
         'context'   => 'advanced',
         'priority'  => 'high',
-        'theme'     => 'light',
+        'theme'     => 'dark',
     ) );
 
     // Create a section
@@ -136,13 +136,13 @@ if ( class_exists( 'CSF' ) ) {
             ),
             array(
                 'id'       => 'min_people',
-                'type'     => 'text',
+                'type'     => 'number',
                 'title'    => __( 'Minimum person', 'tourfic' ),
                 'subtitle' => __( 'Minimum person to travel', 'tourfic' ),
             ),
             array(
                 'id'       => 'max_people',
-                'type'     => 'text',
+                'type'     => 'number',
                 'title'    => __( 'Maximum person', 'tourfic' ),
                 'subtitle' => __( 'Maximum person to travel', 'tourfic' ),
             ),
