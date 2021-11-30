@@ -31,3 +31,25 @@
 .tf-tab-container {
     border: 1px solid #ddd;
 }
+
+/* search widget tab styles */
+/* Style the buttons inside the tab */
+.tf-booking-search-tabs {
+    overflow: hidden;
+    background-color: #f1f1f1;
+  }
+.tf-booking-search-tabs button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+  }
+.tf-tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+  }
