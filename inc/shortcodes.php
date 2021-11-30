@@ -205,129 +205,19 @@ function tourfic_search_shortcode( $atts, $content = null ){
 
 
     <?php tourfic_fullwidth_container_start( $fullwidth ); ?>
-
-    <!-- Start Booking widget -->
-    <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" method="get" autocomplete="off" action="<?php echo tourfic_booking_search_action(); ?>">
-
-        <?php if( $title ): ?>
-            <div class="tf_widget-title"><h2><?php esc_html_e( $title ); ?></h2></div>
-        <?php endif; ?>
-
-        <?php if( $subtitle ): ?>
-            <div class="tf_widget-subtitle"><?php esc_html_e( $subtitle ); ?></div>
-        <?php endif; ?>
-
-
-        <div class="tf_homepage-booking">
-
-            <div class="tf_destination-wrap">
-                <div class="tf_input-inner">
-                    <!-- Start form row -->
-                    <?php tourfic_booking_widget_field(
-                        array(
-                            'type' => 'text',
-                            'svg_icon' => 'search',
-                            'name' => 'destination',
-                            'label' => 'Destination/property name:',
-                            'placeholder' => 'Destination',
-                            'required' => 'true',
-                        )
-                    ); ?>
-                    <!-- End form row -->
-                </div>
-            </div>
-
-            <div class="tf_selectperson-wrap">
-
-                <div class="tf_input-inner">
-                    <span class="tf_person-icon">
-                        <?php echo tourfic_get_svg('person'); ?>
-                    </span>
-                    <div class="adults-text">2 Adults</div>
-                    <div class="person-sep"></div>
-                    <div class="child-text">0 Childreen</div>
-                    <div class="person-sep"></div>
-                    <div class="room-text">1 Room</div>
-                </div>
-
-                <div class="tf_acrselection-wrap">
-                    <div class="tf_acrselection-inner">
-                        <div class="tf_acrselection">
-                            <div class="acr-label">Adults</div>
-                            <div class="acr-select">
-                                <div class="acr-dec">-</div>
-                                <input type="number" name="adults" id="adults" min="1" value="2">
-                                <div class="acr-inc">+</div>
-                            </div>
-                        </div>
-                        <div class="tf_acrselection">
-                            <div class="acr-label">Children</div>
-                            <div class="acr-select">
-                                <div class="acr-dec">-</div>
-                                <input type="number" name="children" id="children" min="0" value="0">
-                                <div class="acr-inc">+</div>
-                            </div>
-                        </div>
-                        <div class="tf_acrselection">
-                            <div class="acr-label">Rooms</div>
-                            <div class="acr-select">
-                                <div class="acr-dec">-</div>
-                                <input type="number" name="room" id="room" min="1" value="1">
-                                <div class="acr-inc">+</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            
-            <div class="tf_selectdate-wrap">
-
-                <div class="tf_input-inner">
-                    <span class="tf_date-icon">
-                        <?php echo tourfic_get_svg('calendar_today'); ?>
-                    </span>
-                    <div class="checkin-date-text">Check-in</div>
-                    <div class="date-sep"></div>
-                    <div class="checkout-date-text">Check-out</div>
-                </div>
-
-                <div class="tf_date-wrap-srt screen-reader-text">
-                <!-- Start form row -->
-                <?php tourfic_booking_widget_field(
-                    array(
-                        'type' => 'text',
-                        'svg_icon' => '',
-                        'name' => 'check-in-date',
-                        'placeholder' => 'Check-in date',
-                        'label' => 'Check-in date',
-                        'required' => 'true',
-                        'disabled' => 'true',
-                    )
-                ); ?>
-
-                <?php tourfic_booking_widget_field(
-                    array(
-                        'type' => 'text',
-                        'svg_icon' => '',
-                        'name' => 'check-out-date',
-                        'placeholder' => 'Check-out date',
-                        'required' => 'true',
-                        'disabled' => 'true',
-                        'label' => 'Check-out date',
-                    )
-                ); ?>
-                </div>
-
-            </div>
-
-            <div class="tf_submit-wrap">
-                <button class="tf_button tf-submit" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
-            </div>
-
+    <div id="tf-booking-search-tabs">
+        <!-- Start Booking widget -->
+        <div class="tf-booking-form-tab">
+            <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-hotel-booking-form')">Hotel</button>
+            <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-tour-booking-form')">Tours</button>
         </div>
-
-    </form>
+        <div id="tf-hotel-booking-form" class="tf-tabcontent"> 
+            <?php tourfic_search_widget_hotel( $classes, $title, $subtitle ); ?>
+        </div>
+        <div id="tf-tour-booking-form" class="tf-tabcontent"> 
+            <?php tourfic_search_widget_tour( $classes, $title, $subtitle ); ?>
+        </div>
+    </div>
     <!-- End Booking widget -->
 
     <?php tourfic_fullwidth_container_end( $fullwidth ); ?>
