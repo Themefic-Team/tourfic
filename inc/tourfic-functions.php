@@ -1273,7 +1273,7 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 			</span>
 			<div class="adults-text">2 Adults</div>
 			<div class="person-sep"></div>
-			<div class="child-text">0 Childreen</div>
+			<div class="child-text">0 Children</div>
 			<div class="person-sep"></div>
 			<div class="room-text">1 Room</div>
 		</div>
@@ -1284,7 +1284,7 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 					<div class="acr-label">Adults</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-						<input type="number" name="adults" id="adults" min="1" value="2">
+						<input type="number" name="adults" id="adults" min="1" value="1">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
@@ -1350,6 +1350,7 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 	</div>
 
 	<div class="tf_submit-wrap">
+		<input type="hidden" name="type" value="tourfic" />		
 		<button class="tf_button tf-submit" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
 	</div>
 
@@ -1384,7 +1385,7 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 				array(
 					'type' => 'text',
 					'svg_icon' => 'search',
-					'name' => 'destination',
+					'name' => 'tour_destination',
 					'label' => 'Destination/property name:',
 					'placeholder' => 'Destination',
 					'required' => 'true',
@@ -1402,7 +1403,7 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 			</span>
 			<div class="adults-text">2 Adults</div>
 			<div class="person-sep"></div>
-			<div class="child-text">0 Childreen</div>
+			<div class="child-text">0 Children</div>
 			<div class="person-sep"></div>
 			<div class="room-text">1 Room</div>
 		</div>
@@ -1413,7 +1414,7 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 					<div class="acr-label">Adults</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-						<input type="number" name="adults" id="adults" min="1" value="2">
+							<input type="number" name="adults" id="adults" min="1" value="2">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
@@ -1421,7 +1422,7 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 					<div class="acr-label">Children</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-						<input type="number" name="children" id="children" min="0" value="0">
+							<input type="number" name="children" id="children" min="0" value="0">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
@@ -1429,7 +1430,7 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 					<div class="acr-label">Rooms</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-						<input type="number" name="room" id="room" min="1" value="1">
+							<input type="number" name="room" id="room" min="1" value="1">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
@@ -1478,7 +1479,8 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 	</div>
 
 	<div class="tf_submit-wrap">
-		<button class="tf_button tf-submit tf-tours-btn" type="submit"><?php esc_html_e( 'Search tours', 'tourfic' ); ?></button>
+		<input type="hidden" name="type" value="tf_tours" />
+		<button class="tf_button tf-submit tf-tours-btn" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
 	</div>
 
 </div>

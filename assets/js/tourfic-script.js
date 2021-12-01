@@ -823,8 +823,12 @@ function tourfic_autocomplete(inp, arr) {
 }
 
 var destinations = tf_params.destinations;
+var tour_destinations = tf_params.tour_destinations;
 
+//Autocomplete for Hotel
 tourfic_autocomplete(document.getElementById("destination"), destinations);
+//Autocomplete for Tours
+tourfic_autocomplete(document.getElementById("tour_destination"), tour_destinations);
 
 /**
  * Searchbox widgets tab scripts

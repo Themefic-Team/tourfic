@@ -91,8 +91,8 @@ function tf_tours_archive_single() {
 				<!-- Title area Start -->
 				<div class="tf_property_block_main_row">
 					<div class="tf_item_main_block">
-						<div class="tf-hotel__title-wrap">
-							<a href="<?php echo get_the_permalink() . '?destination=' . $_GET['destination'] . '&adults=' . $_GET['adults'] . '&children=' . $_GET['children'] . '&room=' . $_GET['room'] . '&check-in-date=' . $_GET['check-in-date'] . '&check-out-date=' . $_GET['check-out-date']; ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
+						<div class="tf-hotel__title-wrap tf-tours-title-wrap">
+							<a href="<?php echo get_the_permalink() . '?tour_destination=' . $_GET['destination'] . '&adults=' . $_GET['adults'] . '&children=' . $_GET['children'] . '&check-in-date=' . $_GET['check-in-date'] . '&check-out-date=' . $_GET['check-out-date']; ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
 						</div>
 						<?php tourfic_map_link();?>
 					</div>
@@ -104,7 +104,7 @@ function tf_tours_archive_single() {
 				<!-- Tour details end -->
 
 				<div class="availability-btn-area">
-					<a href="<?php echo get_the_permalink() . '?destination=' . $_GET['destination'] . '&adults=' . $_GET['adults'] . '&children=' . $_GET['children'] . '&room=' . $_GET['room'] . '&check-in-date=' . $_GET['check-in-date'] . '&check-out-date=' . $_GET['check-out-date']; ?>" class="button tf_button"><?php esc_html_e( 'Book Now', 'tourfic' );?></a>
+					<a href="<?php echo get_the_permalink() . '?tour_destination=' . $_GET['destination'] . '&adults=' . $_GET['adults'] . '&children=' . $_GET['children'] . '&check-in-date=' . $_GET['check-in-date'] . '&check-out-date=' . $_GET['check-out-date']; ?>" class="button tf_button"><?php esc_html_e( 'Book Now', 'tourfic' );?></a>
 				</div>
 
 
