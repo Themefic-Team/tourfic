@@ -1487,3 +1487,27 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 </form>
 <?php
 }
+
+/**
+ * Filter the excerpt "read more" string.
+ *
+ * @param string $more "Read more" excerpt string.
+ * @return string (Maybe) modified "read more" excerpt string.
+ */
+function tf_tours_excerpt_more( $more ) {
+	if( 'tf_tours' === get_post_type())
+    return '.....';
+}
+add_filter( 'excerpt_more', 'tf_tours_excerpt_more' );
+
+/**
+ * Filter the except length to 20 words.
+ *
+ * @param int $length Excerpt length.
+ * @return int (Maybe) modified excerpt length.
+ */
+function wpdocs_custom_excerpt_length( $length ) {
+	if( 'tf_tours' === get_post_type())
+    return 30;
+}
+add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );

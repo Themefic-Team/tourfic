@@ -105,3 +105,20 @@
 .tf_gallery-wrap .swiper-button-prev, .tf_gallery-wrap .swiper-container-rtl .swiper-button-next {
     background-image: none !important
 }
+.tf-featured {
+    display: block;
+    position: absolute;
+    left: -56px;
+    top: -24px;
+    padding-top: 51px;
+    background: #00698f;
+    color: white;
+    transform: rotate(310deg);
+    width: 131px;
+    height: 80px;
+    text-align: center;
+}
+
+.single-tour-inner {
+    overflow: hidden;
+}

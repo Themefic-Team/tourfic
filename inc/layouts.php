@@ -78,10 +78,19 @@ function tourfic_archive_single() {
 /**
  * Tours Archive
  */
-function tf_tours_archive_single() {
+function tf_tours_archive_single( $price,$sale_price,$discounted_price ) {
+	$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+	$featured = $meta['tour_as_featured'];
+	$feature_meta = $meta['tour_feature'];
     ?>
 	<div class="single-tour-wrap">
 		<div class="single-tour-inner">
+			<?php if($featured){
+				?>
+				<div class="tf-featured"><?php _e( 'Featured','tourfic' ) ?></div>
+				<?php 
+			}
+			?>
 			<div class="tourfic-single-left">
 				<?php if ( has_post_thumbnail() ): ?>
 					<?php the_post_thumbnail( 'full' );?>
@@ -99,8 +108,40 @@ function tf_tours_archive_single() {
 					<?php tourfic_item_review_block();?>
 				</div>
 				<!-- Title area End -->
+				<div class="tf-tour-desc">
+					<p><?php the_excerpt(); ?></p>
+				</div>
 
-				<!-- Tour details end -->
+				<!-- Tour details start -->
+				<div class="tf-tour-details">
+					<div class="tf-tour-features">
+					<?php if( $feature_meta ) : ?>
+				<!-- Start features -->
+				<div class="tf_features">
+					<div class="tf_feature_list">
+						<?php 
+						foreach( $feature_meta as $feature ):
+							$term_meta = get_term_meta( $feature, 'feature_meta', true );
+							$term = get_term_by( 'id', $feature, 'tf_feature' );
+						
+						?>
+                           <div class="single_feature_box">
+								<img src="<?php echo $term_meta['fetures_icon']; ?>" alt="">
+								<p class="feature_list_title"><?php echo $term->name;  ?></p>
+                           </div>
+						<?php
+					 endforeach;
+					endif;
+					  ?>
+
+					</div>
+				</div>
+				<!-- End features -->
+					</div>
+					<div class="tf-tour-price">
+						<?php echo tf_tours_price_html( $price,$sale_price,$discounted_price ); ?>
+					</div>
+				</div>
 				<!-- Tour details end -->
 
 				<div class="availability-btn-area">

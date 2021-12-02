@@ -678,7 +678,7 @@
 
         //Ratings copy/move under gallery
         var avg_rating = $('.tf-overall-ratings .overall-rate').text();
-        $('.tf_title-area .reviews').html(avg_rating);
+        $('.tf_title-area .reviews span').html(avg_rating);
 
     });
 

@@ -8,7 +8,24 @@
  */
 
 
-get_header('tourfic'); ?>
+get_header('tourfic');
+$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+$pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
+$tour_type = $meta['type'] ? $meta['type'] : null;
+if( $pricing_rule == 'group'){
+	$price = $meta['group_price'] ? $meta['group_price'] : null;
+}else{
+	$price = $meta['adult_price'] ? $meta['adult_price'] : null;
+}
+$discount_type = $meta['discount_type'] ? $meta['discount_type'] : null;
+$discounted_price = $meta['discount_price'] ? $meta['discount_price'] : NULL;
+if( $discount_type == 'percent' ){
+	$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 ); 
+}elseif( $discount_type == 'fixed'){
+	$sale_price = number_format( ( $price - $discounted_price ),1 );
+}
+
+?>
 
 <div class="tourfic-wrap" data-fullwidth="true">
 	<?php do_action( 'tf_before_container' ); ?>
@@ -26,7 +43,7 @@ get_header('tourfic'); ?>
 				<div class="archive_ajax_result">
 					<?php if ( have_posts() ) : ?>
 						<?php while ( have_posts() ) : the_post(); ?>
-							<?php tf_tours_archive_single(); ?>
+							<?php tf_tours_archive_single( $price,$sale_price,$discounted_price ); ?>
 						<?php endwhile; ?>
 					<?php else : ?>
 						<?php get_template_part( 'template-parts/content', 'none' ); ?>

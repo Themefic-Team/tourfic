@@ -89,7 +89,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 								<span class="fa fa-star"></span>
 							</div>
 							<div class="reviews">
-								<span>4.5</span>
+								<span></span>
 							</div>
 						</div>
 					</div>

@@ -232,7 +232,7 @@ add_shortcode('tf_search', 'tourfic_search_shortcode');
  * Search Result Shortcode Function
  */
 function tourfic_search_result_shortcode( $atts, $content = null ){
-
+    
     $relation = tourfic_opt( 'search_relation', 'AND' );
 
     // Unwanted Slashes Remove
@@ -316,7 +316,24 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
                         if( $post_type == 'tourfic' ){
                             tourfic_archive_single(); 
                         }elseif( $post_type == 'tf_tours' ){
-                            tf_tours_archive_single();
+
+                            /**Meta field query for the pricing calcualtion */
+                            $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+                            $pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
+                            if( $pricing_rule == 'group'){
+                                $price = $meta['group_price'] ? $meta['group_price'] : null;
+                            }else{
+                                $price = $meta['adult_price'] ? $meta['adult_price'] : null;
+                            }
+                            $discount_type = $meta['discount_type'] ? $meta['discount_type'] : null;
+                            $discounted_price = $meta['discount_price'] ? $meta['discount_price'] : NULL;
+                            if( $discount_type == 'percent' ){
+                                $sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 ); 
+                            }elseif( $discount_type == 'fixed'){
+                                $sale_price = number_format( ( $price - $discounted_price ),1 );
+                            }
+                            //tour archive single gird/section added
+                            tf_tours_archive_single( $price,$sale_price,$discounted_price );
                         }
                         
                     endwhile;

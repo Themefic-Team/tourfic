@@ -1797,6 +1797,24 @@ span.review_num {
   background-image: none !important;
 }
 
+.tf-featured {
+  display: block;
+  position: absolute;
+  left: -56px;
+  top: -24px;
+  padding-top: 51px;
+  background: #00698f;
+  color: white;
+  transform: rotate(310deg);
+  width: 131px;
+  height: 80px;
+  text-align: center;
+}
+
+.single-tour-inner {
+  overflow: hidden;
+}
+
 #tf-ask-question {
   position: fixed;
   top: 0;
@@ -1910,6 +1928,26 @@ span.close-aq {
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
+}
+
+.tf-tour-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+.tf-tour-details .tf_features {
+  border-top: none;
+  margin: unset;
+  padding: 0;
+}
+.tf-tour-details .tf-tour-price {
+  font-size: 20px;
+}
+.tf-tour-details .single_feature_box {
+  padding: 4px 5px;
+}
+.tf-tour-details .single_feature_box img {
+  width: 16px;
 }
 
 /*Archive page*/
