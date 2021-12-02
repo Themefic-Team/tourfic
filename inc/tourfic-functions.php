@@ -1310,7 +1310,6 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 	</div>
 	
 	<div class="tf_selectdate-wrap">
-
 		<div class="tf_input-inner">
 			<span class="tf_date-icon">
 				<?php echo tourfic_get_svg('calendar_today'); ?>
@@ -1405,7 +1404,7 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 			<div class="person-sep"></div>
 			<div class="child-text">0 Children</div>
 			<div class="person-sep"></div>
-			<div class="room-text">1 Room</div>
+			<div class="infant-text">0 Infant</div>
 		</div>
 
 		<div class="tf_acrselection-wrap">
@@ -1414,7 +1413,7 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 					<div class="acr-label">Adults</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-							<input type="number" name="adults" id="adults" min="1" value="2">
+							<input type="number" name="adults" id="adults" min="1" value="1">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
@@ -1427,10 +1426,10 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 					</div>
 				</div>
 				<div class="tf_acrselection">
-					<div class="acr-label">Rooms</div>
+					<div class="acr-label">Infant</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-							<input type="number" name="room" id="room" min="1" value="1">
+							<input type="number" name="infant" id="infant" min="0" value="0">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
@@ -1449,7 +1448,7 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 			<div class="checkout-date-text">Check-out</div>
 		</div>
 
-		<div class="tf_date-wrap-srt screen-reader-text">
+		<div class="tf_tours_date-wrap screen-reader-text">
 		<!-- Start form row -->
 		<?php tourfic_booking_widget_field(
 			array(

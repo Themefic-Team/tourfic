@@ -240,8 +240,6 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
         $_GET = array_map( 'stripslashes_deep', $_GET );
     }
     $post_type = isset( $_GET['type'] ) ? $_GET['type'] : 'tourfic';
-
-    var_dump($post_type);
     $taxonomy = $post_type == 'tf_tours' ? 'tour_destination' : 'destination';
     // Shortcode extract
     extract(
