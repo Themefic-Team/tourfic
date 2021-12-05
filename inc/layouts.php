@@ -116,27 +116,23 @@ function tf_tours_archive_single( $price,$sale_price,$discounted_price ) {
 				<div class="tf-tour-details">
 					<div class="tf-tour-features">
 					<?php if( $feature_meta ) : ?>
-				<!-- Start features -->
-				<div class="tf_features">
-					<div class="tf_feature_list">
-						<?php 
-						foreach( $feature_meta as $feature ):
-							$term_meta = get_term_meta( $feature, 'feature_meta', true );
-							$term = get_term_by( 'id', $feature, 'tf_feature' );
-						
-						?>
-                           <div class="single_feature_box">
-								<img src="<?php echo $term_meta['fetures_icon']; ?>" alt="">
-								<p class="feature_list_title"><?php echo $term->name;  ?></p>
-                           </div>
-						<?php
-					 endforeach;
-					endif;
-					  ?>
-
-					</div>
-				</div>
-				<!-- End features -->
+						<!-- Start features -->
+						<div class="tf_features">
+							<div class="tf_feature_list">
+								<?php 
+								foreach( $feature_meta as $feature ):
+									$term_meta = get_term_meta( $feature, 'feature_meta', true );
+									$term = get_term_by( 'id', $feature, 'tf_feature' );								
+								?>
+								<div class="single_feature_box">
+									<img src="<?php echo $term_meta['fetures_icon']; ?>" alt="">
+									<p class="feature_list_title"><?php echo $term->name;  ?></p>
+								</div>
+								<?php endforeach; ?>
+							</div>
+						</div>
+						<?php endif; ?>
+						<!-- End features -->
 					</div>
 					<div class="tf-tour-price">
 						<?php echo tf_tours_price_html( $price,$sale_price,$discounted_price ); ?>
