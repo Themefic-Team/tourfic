@@ -61,26 +61,26 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 		<div class="tf_row">
 			<div class="tf_content tf_content-full mb-15">
 				<!-- Start gallery -->
-				<div class="tf_gallery-wrap">
+				<div class="tf-tours_gallery-wrap">
 					<?php echo tourfic_gallery_slider( false, $post->ID, $gallery); ?>
 				</div>
 				<!-- End gallery-->
 				<!-- Start title area -->
-				<div class="tf_title-area">
-					<div class="tf_title-left">
-						<h2 class="tf_title"><?php the_title(); ?></h2>
+				<div class="tf_tours-title-area">
+					<div class="tf_tours-title-left">
+						<h2 class="tf_tours-title"><?php the_title(); ?></h2>
 						<!-- Start map link -->
-						<div class="tf_map-link">
+						<div class="tf-tours-map-link">
 							<?php tourfic_map_link(); ?>
 						</div>
 					</div>
 					<!-- End map link -->
-					<div class="tf_title-right">
-						<div class="tf_price">
+					<div class="tf-tours-title-right">
+						<div class="tf-tours-price">
 							<span><?php echo __('Price','tourfic') ?></span>
 							<?php echo tf_tours_price_html( $price, $sale_price,$discounted_price );?>
 						</div>
-						<div class="tf-ratings">
+						<div class="tf-tours-ratings">
 							<div class="star">
 								<span class="fa fa-star checked"></span>
 								<span class="fa fa-star checked"></span>
@@ -89,7 +89,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 								<span class="fa fa-star"></span>
 							</div>
 							<div class="reviews">
-								<span></span>
+								<span>5</span>
 							</div>
 						</div>
 					</div>
@@ -102,7 +102,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 			<!-- Start Content -->
 			<div class="tf_content">
 				<!--Information section start-->
-				<div class="tf_informations">
+				<div class="tf-tours-informations">
 					<?php if( $tour_duration ): ?>
 					<div class="item">
 						<div class="icon">
@@ -152,7 +152,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 
 				<?php if( $additional_information ): ?>
 				<!-- Start highlights content -->
-				<div class="tf_contents highlights">
+				<div class="tf_contents tf-tours-highlights">
 					<div class="highlights-title">
 						<h4><?php esc_html_e( 'Highlights', 'tourfic' ); ?></h4>
 					</div>
@@ -163,7 +163,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 
 				<!-- Start content -->
 				<div class="tf_contents">
-					<div class="listing-title">
+					<div class="tf-tours-listing-title">
 						<h4><?php esc_html_e( 'Listing Description', 'tourfic' ); ?></h4>
 					</div>
 					<?php the_content(); ?>
@@ -350,15 +350,10 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					endif;
 					?>
 				</div>
-
-
-
 				<!-- End Review Content -->
-
-
 				<!-- Start TOC Content -->
-				<div class="tf_toc-wrap">
-					<div class="tf_toc-inner">
+				<div class="tf-tours-toc-wrap">
+					<div class="tf-tours-toc-inner">
 						<?php _e( $terms_and_conditions,'tourfic' ); ?>
 					</div>
 				</div>

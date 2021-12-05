@@ -1360,7 +1360,7 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 }
 
 /**
- * Search Widget for Hotel search ..
+ * Search Widget for Hotel and Tour search ..
  * Seperated as functions for the tab of  search widgets
  */
 function tourfic_search_widget_tour( $classes, $title, $subtitle ){
@@ -1374,8 +1374,6 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 	<?php if( $subtitle ): ?>
 		<div class="tf_widget-subtitle"><?php esc_html_e( $subtitle ); ?></div>
 	<?php endif; ?>
-
-
 <div class="tf_homepage-booking">
 	<div class="tf_destination-wrap">
 		<div class="tf_input-inner">
