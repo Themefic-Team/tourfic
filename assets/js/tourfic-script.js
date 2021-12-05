@@ -112,6 +112,8 @@
         var dateToday = new Date();
         var checkin_input = jQuery("#check-in-date"),
             checkout_input = jQuery("#check-out-date");
+        var hotel_checkin_input = jQuery(".tf-hotel-check-in");
+        var hotel_checkout_input = jQuery(".tf-hotel-check-out");
 
         var dateFormat = 'DD-MM-YYYY';
 
@@ -126,9 +128,11 @@
             autoApply: true,
         }, function (start, end, label) {
             checkin_input.val(start.format(dateFormat));
+            hotel_checkin_input.val(start.format(dateFormat));
             $('.checkin-date-text').text(start.format(dateFormat));
 
             checkout_input.val(end.format(dateFormat));
+            hotel_checkout_input.val(end.format(dateFormat));
             $('.checkout-date-text').text(end.format(dateFormat));
         });
 
@@ -355,6 +359,7 @@
         });
 
         // Change view
+        
         var filter_xhr;
         $(document).on('change', '[name*=tf_filters], #destination, #adults, #room, #children, #check-in-date, #check-out-date, #check-in-out-date', function () {
             var dest = $('#destination').val();
@@ -363,6 +368,7 @@
             var children = $('#children').val();
             var checkin = $('#check-in-date').val();
             var checkout = $('#check-out-date').val();
+            var posttype = $('.tf-post-type').val();
 
             var filters = [];
 
@@ -375,6 +381,7 @@
 
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
+            formData.append('type', posttype);
             formData.append('dest', dest);
             formData.append('adults', adults);
             formData.append('room', room);
@@ -406,6 +413,7 @@
                 },
                 complete: function (data) {
                     $('.archive_ajax_result').unblock();
+                    console.log(posttype,dest);
                 },
                 success: function (data) {
                     $('.archive_ajax_result').unblock();

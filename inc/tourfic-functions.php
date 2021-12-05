@@ -1330,6 +1330,7 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 				'label' => 'Check-in date',
 				'required' => 'true',
 				'disabled' => 'true',
+				'class' => 'tf-hotel-check-in',
 			)
 		); ?>
 
@@ -1342,6 +1343,7 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 				'required' => 'true',
 				'disabled' => 'true',
 				'label' => 'Check-out date',
+				'class' => 'tf-hotel-check-out'
 			)
 		); ?>
 		</div>
@@ -1441,9 +1443,9 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 			<span class="tf_date-icon">
 				<?php echo tourfic_get_svg('calendar_today'); ?>
 			</span>
-			<div class="checkin-date-text">Check-in</div>
+			<div class="checkin-date-text"><?php echo __( 'From','tourfic' ) ?></div>
 			<div class="date-sep"></div>
-			<div class="checkout-date-text">Check-out</div>
+			<div class="checkout-date-text"><?php echo __( 'To','tourfic' ) ?></div>
 		</div>
 
 		<div class="tf_tours_date-wrap screen-reader-text">

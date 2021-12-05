@@ -357,6 +357,10 @@ function tourfic_get_sidebar( $placement = 'single' ) {
 
 		<!-- Start form row -->
 		<div class="tf_form-row">
+			<?php
+				$ptype = $_GET['type'];
+			?>
+			<input type="hidden" name="type" value="<?php echo $ptype;?>" class="tf-post-type" />
 			<button class="tf_button tf-submit" type="submit"><?php esc_html_e( 'Search', 'tourfic' );?></button>
 		</div>
 		<!-- End form row -->
@@ -446,16 +450,16 @@ function tf_tours_booking_form( $post_id ) {
 			<div class="screen-reader-text">
 				<!-- Start form row -->
 				<?php tourfic_booking_widget_field(
-        array(
-            'type'        => 'text',
-            'svg_icon'    => 'calendar_today',
-            'name'        => 'check-in-date',
-            'placeholder' => 'Check-in date',
-            'label'       => 'Check-in date',
-            'required'    => 'true',
-            'disabled'    => 'true',
-        )
-    );?>
+					array(
+						'type'        => 'text',
+						'svg_icon'    => 'calendar_today',
+						'name'        => 'check-in-date',
+						'placeholder' => 'Check-in date',
+						'label'       => 'Check-in date',
+						'required'    => 'true',
+						'disabled'    => 'true',
+					)
+				);?>
 				<!-- End form row -->
 
 				<!-- Start form row -->
@@ -472,9 +476,7 @@ function tf_tours_booking_form( $post_id ) {
     );
     ?>
 			</div>
-	<?php
-echo tourfic_tours_booking_submit_button( "Book Now" );
-    ?>
+	<?php echo tourfic_tours_booking_submit_button( "Book Now" ); ?>
 		</form>
 	</div>
 	<?php

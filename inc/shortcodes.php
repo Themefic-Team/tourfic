@@ -365,10 +365,12 @@ function tourfic_trigger_filter_ajax(){
 
     $search = ( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
     $filters = ( $_POST['filters'] ) ? explode(',', sanitize_text_field( $_POST['filters'] )) : null;
+    $posttype = $_POST['type']  ? sanitize_text_field( $_POST['type'] ): 'tourfic';
+    $taxonomy = $posttype == 'tf_tours' ? $taxonomy = 'tour_destination' : 'destination';
 
     // Propertise args
     $args = array(
-        'post_type' => 'tourfic',
+        'post_type' => $posttype,
         'post_status' => 'publish',
         'posts_per_page' => -1,
     );
@@ -378,7 +380,7 @@ function tourfic_trigger_filter_ajax(){
 
         // 1st search on Destination taxonomy
         $destinations = get_terms( array(
-            'taxonomy' => 'destination',
+            'taxonomy' => $taxonomy,
             'orderby' => 'name',
             'order' => 'ASC',
             'hide_empty' => 0, //can be 1, '1' too
@@ -398,7 +400,7 @@ function tourfic_trigger_filter_ajax(){
 
             $args['tax_query']['relation'] = $relation;
             $args['tax_query'][] = array(
-                'taxonomy' => 'destination',
+                'taxonomy' => $taxonomy,
                 'terms'    => $destinations_ids,
             );
 
