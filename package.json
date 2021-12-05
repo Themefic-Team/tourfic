@@ -31,5 +31,6 @@
   },
   "bugs": {
     "url": "https://bitbucket.org/themefic/tourfic/issues"
-  }
+  },
+  "devDependencies": {}
 }
