@@ -55,7 +55,7 @@ $terms_and_conditions = $meta['terms_conditions'];
 $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $post->ID, 'tf_faqs', true ) : array();
 
 ?>
-<div class="tourfic-wrap default-style" data-fullwidth="true" data-continuous-array='<?php echo $continuous_availability;?>'>
+<div class="tourfic-wrap tf_tours-single-layout default-style" data-fullwidth="true" data-continuous-array='<?php echo $continuous_availability;?>'>
 	<?php do_action( 'tf_before_container' ); ?>
 	<div class="tf_container">
 		<div class="tf_row">
@@ -68,7 +68,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				<!-- Start title area -->
 				<div class="tf_tours-title-area">
 					<div class="tf_tours-title-left">
-						<h2 class="tf_tours-title"><?php the_title(); ?></h2>
+						<h2 class="tf_tours-title "><?php the_title(); ?></h2>
 						<!-- Start map link -->
 						<div class="tf-tours-map-link">
 							<?php tourfic_map_link(); ?>
@@ -97,11 +97,12 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				<!-- End title area -->	
 			</div>
 		</div>
+	</div>
 
+	<!--Information section start-->
+	<div class="tf_container">
 		<div class="tf_row">
-			<!-- Start Content -->
 			<div class="tf_content">
-				<!--Information section start-->
 				<div class="tf-tours-informations">
 					<?php if( $tour_duration ): ?>
 					<div class="item">
@@ -148,33 +149,54 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					</div>
 					<?php endif;?>
 				</div>
-				<!--Information section end-->
+				<?php // echo tf_tours_booking_form($post->ID);?>
+			</div>
+		</div>
+	</div>
+   <!-- Information section end -->
 
-				<?php if( $additional_information ): ?>
-				<!-- Start highlights content -->
-				<div class="tf_contents tf-tours-highlights">
-					<div class="highlights-title">
-						<h4><?php esc_html_e( 'Highlights', 'tourfic' ); ?></h4>
+	<!--Start Description section-->
+	<div class="tf_container">
+		<div class="tf_row">
+			<div class="tf_content">
+			<div class="tf_tours-content_wrapper">
+					<div class="tf_tours-content_wrapper_inner">
+						<?php if( $additional_information ): ?>
+						<!-- Start highlights content -->
+						<div class="tf_contents tf-tours-highlights">
+							<div class="highlights-title">
+								<h4 class="tf-tours_section_title"><?php esc_html_e( 'Highlights', 'tourfic' ); ?></h4>
+							</div>
+							<?php _e( $additional_information, 'tourfic' ); ?>
+						</div>
+						<!-- End highlights content -->
+						<?php endif; ?>
+
+						<!-- Start content -->
+						<div class="tf_contents">
+							<div class="tf-tours-listing-title">
+								<h4 class="tf-tours_section_title"><?php esc_html_e( 'Listing Description', 'tourfic' ); ?></h4>
+							</div>
+							<?php the_content(); ?>
+						</div>
+						<!-- End content -->
 					</div>
-					<?php _e( $additional_information, 'tourfic' ); ?>
 				</div>
-				<!-- End highlights content -->
-				<?php endif; ?>
+			</div>
+		</div>
+	</div>    
+    <!--End Decription/highlight section-->
 
-				<!-- Start content -->
-				<div class="tf_contents">
-					<div class="tf-tours-listing-title">
-						<h4><?php esc_html_e( 'Listing Description', 'tourfic' ); ?></h4>
-					</div>
-					<?php the_content(); ?>
-				</div>
-				<!-- End content -->
 
-				<?php if( $itineraries ): ?>
-				<!--Iternary start-->
+
+	<!--Start Iternary section-->
+	<div class="tf_container">
+		<div class="tf_row">
+			<div class="tf_content">
+			<?php if( $itineraries ): ?>
 				<div class="tf-itinerary">
 					<div class="itinerary-title">
-						<h4><?php echo __( 'Itinerary','tourfic' ); ?></h4>
+						<h4 class="tf-tours_section_title"><?php echo __( 'Itinerary','tourfic' ); ?></h4>
 					</div>
 					<?php foreach( $itineraries as $itinerary ){ ?>
 					<div class="tf-single-itinerary">
@@ -192,14 +214,21 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					</div>
 					<?php } ?>
 				</div>
-				<!--Iternary end-->
 				<?php endif; ?>
-				
-				<?php if( $feature_meta ) : ?>
-				<!-- Start features -->
+			</div>
+		</div>
+	</div>    
+    <!--End Iternary section-->
+
+
+	<!--Start features section-->
+	<div class="tf_container">
+		<div class="tf_row">
+			<div class="tf_content">
+			<?php if( $feature_meta ) : ?>
 				<div class="tf_features">
 					<div class="listing-title">
-						<h4><?php esc_html_e( 'Features', 'tourfic' ); ?></h4>
+						<h4 class="tf-tours_section_title"><?php esc_html_e( 'Features', 'tourfic' ); ?></h4>
 					</div>
 
 					<div class="tf_feature_list">
@@ -217,15 +246,23 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 
 					</div>
 				</div>
-				<!-- End features -->
 				<?php endif; ?>
-				<?php if( $inc || $exc ): ?>			
-				<!-- Start Include/Exlude  -->
+			</div>
+		</div>
+	</div>    
+    <!--End features section-->
+
+
+	<!--Start Include Exclude section-->
+	<div class="tf_container">
+		<div class="tf_row">
+			<div class="tf_content">
+			<?php if( $inc || $exc ): ?>			
 				<div class="inc-exc-section">
 					<div class="inc-exc-content">
 						<div class="tf-include">
 							<div class="inc-title">
-								<h4><?php esc_html_e( 'Included', 'tourfic' ); ?></h4>
+								<h4 class="tf-tours_section_title"><?php esc_html_e( 'Included', 'tourfic' ); ?></h4>
 							</div>
 							<ul class="items">
 							<?php
@@ -237,7 +274,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 						</div>
 						<div class="tf-exclude">
 							<div class="inc-title">
-								<h4><?php esc_html_e( 'Excluded', 'tourfic' ); ?></h4>
+								<h4 class="tf-tours_section_title"><?php esc_html_e( 'Excluded', 'tourfic' ); ?></h4>
 							</div>
 							<ul class="items">
 							<?php
@@ -249,21 +286,37 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 						</div>
 					</div>
 				</div>
-				<!-- End Include/Exlude  -->
 				<?php endif;?>
-				<!--Start tour map section-->
+			</div>
+		</div>
+	</div>    
+    <!--End Include Exclude section-->
+
+
+
+	<!--Start tour map section-->
+	<div class="tf_container">
+		<div class="tf_row">
+			<div class="tf_content">
 				<div class="tf_map_section">
 					<div class="tf_map">
 					<iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1891144.1036137978!2d90.26962864671933!3d22.21575206911091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka%2C%20Bangladesh!3m2!1d23.810332!2d90.4125181!4m5!1s0x30ae2363dee2d61b%3A0xfb3463713589d312!2sSt.%20Martin&#39;s%20Island%2C%20Bangladesh!3m2!1d20.6237016!2d92.3233948!5e0!3m2!1sen!2sus!4v1637065617200!5m2!1sen!2sus" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 					</div>
 				</div>
-				<!--End tour map section-->
+			</div>
+		</div>
+	</div>    
+    <!--End tour map section-->
 
-				<?php if( $faqs ): ?>
-					<!-- Start highlights content -->
+	<!--Start tour Faq section-->
+	<div class="tf_container">
+		<div class="tf_row">
+			<!-- Start Content -->
+			<div class="tf_content">
+			<?php if( $faqs ): ?>
 					<div class="tf_contents faqs">
 						<div class="highlights-title">
-							<h4><?php esc_html_e( 'FAQs', 'tourfic' ); ?></h4>
+							<h4 class="tf-tours_section_title"><?php esc_html_e( 'FAQs', 'tourfic' ); ?></h4>
 						</div>
 						<div class="tf-faqs">
 						<?php foreach ( $faqs as $key => $faq ): ?>
@@ -281,17 +334,21 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 						<?php endforeach; ?>
 						</div>
 					</div>
-					<!-- End highlights content -->
 				<?php endif; ?>
-				
-				<!-- Start booking form  -->
-				<?php echo tf_tours_booking_form($post->ID);?>
-				<!-- End booking form -->
+			</div>
+		</div>
+	</div>    
+    <!--End tour FAQ section-->
 
+	<!--Start tour recommendation section-->
+	<div class="tf_container">
+		<div class="tf_row">
+			<!-- Start Content -->
+			<div class="tf_content">
 				<!-- Start tourbox Content -->
 				<div class="tf-tourbox-section">
 					<div class="tf-tourbox-title">
-						<h4><?php echo __( 'You might also like','tourfic' ) ?></h4>
+						<h4 class="tf-tours_section_title"><?php echo __( 'You might also like','tourfic' ) ?></h4>
 						<p><?php echo __('Travel is my life. Since 1999, I’ve been traveling around the world nonstop.
 						If you also love travel, you’re in the right place!
 						','tourfic') ?></p>						
@@ -338,6 +395,32 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					</div>
 				</div>
 				<!-- end tourbox Content -->
+			</div>
+		</div>
+	</div>    
+    <!--End tour recommendation section-->
+
+	<!--Start TOC section-->
+	<div class="tf_container">
+		<div class="tf_row">
+			<!-- Start Content -->
+			<div class="tf_content">
+				<!-- Start TOC Content -->
+				<div class="tf-tours-toc-wrap">
+					<div class="tf-tours-toc-inner">
+						<?php _e( $terms_and_conditions,'tourfic' ); ?>
+					</div>
+				</div>
+				<!-- End TOC Content -->
+			</div>
+		</div>
+	</div>    
+    <!--End TOC section-->
+
+	<!--Start review section-->
+	<div class="tf_container">
+		<div class="tf_row">
+			<div class="tf_content">
 				<!-- Start Review Content -->
 				<div class="tf_contents reviews">
 					<div class="highlights-title">
@@ -351,19 +434,27 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					?>
 				</div>
 				<!-- End Review Content -->
-				<!-- Start TOC Content -->
+			</div>
+		</div>
+	</div>    
+    <!--End review section-->
+
+
+	<!--Start review section-->
+	<div class="tf_container">
+		<div class="tf_row">
+			<div class="tf_content">
 				<div class="tf-tours-toc-wrap">
 					<div class="tf-tours-toc-inner">
 						<?php _e( $terms_and_conditions,'tourfic' ); ?>
 					</div>
 				</div>
-				<!-- End TOC Content -->
-
-
 			</div>
-			<!-- End Content -->
 		</div>
-	</div>
+	</div>    
+    <!--End review section-->
+
+
 	<?php do_action( 'tf_after_container' ); ?>
 </div>
 <?php endwhile; ?>
