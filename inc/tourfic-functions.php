@@ -1273,7 +1273,7 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 			</span>
 			<div class="adults-text">2 Adults</div>
 			<div class="person-sep"></div>
-			<div class="child-text">0 Childreen</div>
+			<div class="child-text">0 Children</div>
 			<div class="person-sep"></div>
 			<div class="room-text">1 Room</div>
 		</div>
@@ -1284,7 +1284,7 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 					<div class="acr-label">Adults</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-						<input type="number" name="adults" id="adults" min="1" value="2">
+						<input type="number" name="adults" id="adults" min="1" value="1">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
@@ -1310,7 +1310,6 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 	</div>
 	
 	<div class="tf_selectdate-wrap">
-
 		<div class="tf_input-inner">
 			<span class="tf_date-icon">
 				<?php echo tourfic_get_svg('calendar_today'); ?>
@@ -1350,6 +1349,7 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 	</div>
 
 	<div class="tf_submit-wrap">
+		<input type="hidden" name="type" value="tourfic" />		
 		<button class="tf_button tf-submit" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
 	</div>
 
@@ -1360,7 +1360,7 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 }
 
 /**
- * Search Widget for Hotel search ..
+ * Search Widget for Hotel and Tour search ..
  * Seperated as functions for the tab of  search widgets
  */
 function tourfic_search_widget_tour( $classes, $title, $subtitle ){
@@ -1374,8 +1374,6 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 	<?php if( $subtitle ): ?>
 		<div class="tf_widget-subtitle"><?php esc_html_e( $subtitle ); ?></div>
 	<?php endif; ?>
-
-
 <div class="tf_homepage-booking">
 	<div class="tf_destination-wrap">
 		<div class="tf_input-inner">
@@ -1384,7 +1382,7 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 				array(
 					'type' => 'text',
 					'svg_icon' => 'search',
-					'name' => 'destination',
+					'name' => 'tour_destination',
 					'label' => 'Destination/property name:',
 					'placeholder' => 'Destination',
 					'required' => 'true',
@@ -1402,9 +1400,9 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 			</span>
 			<div class="adults-text">2 Adults</div>
 			<div class="person-sep"></div>
-			<div class="child-text">0 Childreen</div>
+			<div class="child-text">0 Children</div>
 			<div class="person-sep"></div>
-			<div class="room-text">1 Room</div>
+			<div class="infant-text">0 Infant</div>
 		</div>
 
 		<div class="tf_acrselection-wrap">
@@ -1413,7 +1411,7 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 					<div class="acr-label">Adults</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-						<input type="number" name="adults" id="adults" min="1" value="2">
+							<input type="number" name="adults" id="adults" min="1" value="1">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
@@ -1421,15 +1419,15 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 					<div class="acr-label">Children</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-						<input type="number" name="children" id="children" min="0" value="0">
+							<input type="number" name="children" id="children" min="0" value="0">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
 				<div class="tf_acrselection">
-					<div class="acr-label">Rooms</div>
+					<div class="acr-label">Infant</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-						<input type="number" name="room" id="room" min="1" value="1">
+							<input type="number" name="infant" id="infant" min="0" value="0">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
@@ -1448,7 +1446,7 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 			<div class="checkout-date-text">Check-out</div>
 		</div>
 
-		<div class="tf_date-wrap-srt screen-reader-text">
+		<div class="tf_tours_date-wrap screen-reader-text">
 		<!-- Start form row -->
 		<?php tourfic_booking_widget_field(
 			array(
@@ -1478,7 +1476,8 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 	</div>
 
 	<div class="tf_submit-wrap">
-		<button class="tf_button tf-submit tf-tours-btn" type="submit"><?php esc_html_e( 'Search tours', 'tourfic' ); ?></button>
+		<input type="hidden" name="type" value="tf_tours" />
+		<button class="tf_button tf-submit tf-tours-btn" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
 	</div>
 
 </div>
@@ -1486,3 +1485,27 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 </form>
 <?php
 }
+
+/**
+ * Filter the excerpt "read more" string.
+ *
+ * @param string $more "Read more" excerpt string.
+ * @return string (Maybe) modified "read more" excerpt string.
+ */
+function tf_tours_excerpt_more( $more ) {
+	if( 'tf_tours' === get_post_type())
+    return '.....';
+}
+add_filter( 'excerpt_more', 'tf_tours_excerpt_more' );
+
+/**
+ * Filter the except length to 20 words.
+ *
+ * @param int $length Excerpt length.
+ * @return int (Maybe) modified excerpt length.
+ */
+function wpdocs_custom_excerpt_length( $length ) {
+	if( 'tf_tours' === get_post_type())
+    return 30;
+}
+add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );

@@ -132,22 +132,6 @@
             $('.checkout-date-text').text(end.format(dateFormat));
         });
 
-        function tfContinuousDate() {
-
-            var continuousDate = $('.tourfic-wrap').data('continuous-array');
-            if (continuousDate != null) {
-                var rangeVal = '{ ';
-                for (var i = 0; i < continuousDate.length; i++) {
-                    rangeVal += '\'Availability ' + i + '\' :' + ' ["' + continuousDate[i].check_in + '","' + continuousDate[i].check_out + '"],';
-                }
-                rangeVal += ' },';
-                return rangeVal;
-            } else {
-                return false;
-            }
-
-        }
-        console.log(tfContinuousDate())
         var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
         var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
         if (fixedCheckIn) {
@@ -160,6 +144,10 @@
         } else {
             fixedCheckOut = false;
         }
+
+        
+        var checkin_input = jQuery(".tf_tours_date-wrap #check-in-date"),
+            checkout_input = jQuery(".tf_tours_date-wrap #check-out-date");
         $('.tours-check-in-out').daterangepicker({
             "locale": {
                 "format": dateFormat,
@@ -690,7 +678,7 @@
 
         //Ratings copy/move under gallery
         var avg_rating = $('.tf-overall-ratings .overall-rate').text();
-        $('.tf_title-area .reviews').html(avg_rating);
+        $('.tf_title-area .reviews span').html(avg_rating);
 
     });
 
@@ -823,8 +811,12 @@ function tourfic_autocomplete(inp, arr) {
 }
 
 var destinations = tf_params.destinations;
+var tour_destinations = tf_params.tour_destinations;
 
+//Autocomplete for Hotel
 tourfic_autocomplete(document.getElementById("destination"), destinations);
+//Autocomplete for Tours
+tourfic_autocomplete(document.getElementById("tour_destination"), tour_destinations);
 
 /**
  * Searchbox widgets tab scripts

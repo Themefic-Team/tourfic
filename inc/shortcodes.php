@@ -211,10 +211,12 @@ function tourfic_search_shortcode( $atts, $content = null ){
             <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-hotel-booking-form')">Hotel</button>
             <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-tour-booking-form')">Tours</button>
         </div>
-        <div id="tf-hotel-booking-form" class="tf-tabcontent"> 
+        <div id="tf-hotel-booking-form" class="tf-tabcontent">
+            <!--Added hotel search widget--> 
             <?php tourfic_search_widget_hotel( $classes, $title, $subtitle ); ?>
         </div>
-        <div id="tf-tour-booking-form" class="tf-tabcontent"> 
+        <div id="tf-tour-booking-form" class="tf-tabcontent">
+             <!--Added tours search widget--> 
             <?php tourfic_search_widget_tour( $classes, $title, $subtitle ); ?>
         </div>
     </div>
@@ -230,14 +232,15 @@ add_shortcode('tf_search', 'tourfic_search_shortcode');
  * Search Result Shortcode Function
  */
 function tourfic_search_result_shortcode( $atts, $content = null ){
-
+    
     $relation = tourfic_opt( 'search_relation', 'AND' );
 
     // Unwanted Slashes Remove
     if ( isset( $_GET ) ) {
         $_GET = array_map( 'stripslashes_deep', $_GET );
     }
-
+    $post_type = isset( $_GET['type'] ) ? $_GET['type'] : 'tourfic';
+    $taxonomy = $post_type == 'tf_tours' ? 'tour_destination' : 'destination';
     // Shortcode extract
     extract(
       shortcode_atts(
@@ -257,17 +260,15 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
             //$search = '';
         //}
     }
-
     // Propertise args
     $args = array(
-        'post_type' => 'tourfic',
+        'post_type' => $post_type,
         'post_status' => 'publish',
         'posts_per_page' => $max,
     );
-
     // 1st search on Destination taxonomy
     $destinations = get_terms( array(
-        'taxonomy' => 'destination',
+        'taxonomy' => $taxonomy,
         'orderby' => 'name',
         'order' => 'ASC',
         'hide_empty' => 0, //can be 1, '1' too
@@ -279,23 +280,22 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
     if ( $destinations ) {
         // Define Featured Category IDs first
         $destinations_ids = array();
+       
 
         // Creating loop to insert IDs to array.
         foreach( $destinations as $cat ) {
             $destinations_ids[] = $cat->term_id;
         }
-
         $args['tax_query'] = array(
             'relation' => $relation,
             array(
-                'taxonomy' => 'destination',
+                'taxonomy' => $taxonomy,
                 'terms'    => $destinations_ids,
             )
         );
     } else {
         $args['s'] = $search;
     }
-
     $loop = new WP_Query( $args );
 
     ob_start(); ?>
@@ -310,12 +310,37 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
         </div>
         <div class="archive_ajax_result">
             <?php if ( $loop->have_posts() ) : ?>
-                <?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
-                    <?php tourfic_archive_single(); ?>
-                <?php endwhile; ?>
-            <?php else : ?>
-                <?php get_template_part( 'template-parts/content', 'none' ); ?>
-            <?php endif; ?>
+                <?php
+                    while ( $loop->have_posts() ) : $loop->the_post(); 
+
+                        if( $post_type == 'tourfic' ){
+                            tourfic_archive_single(); 
+                        }elseif( $post_type == 'tf_tours' ){
+
+                            /**Meta field query for the pricing calcualtion */
+                            $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+                            $pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
+                            if( $pricing_rule == 'group'){
+                                $price = $meta['group_price'] ? $meta['group_price'] : null;
+                            }else{
+                                $price = $meta['adult_price'] ? $meta['adult_price'] : null;
+                            }
+                            $discount_type = $meta['discount_type'] ? $meta['discount_type'] : null;
+                            $discounted_price = $meta['discount_price'] ? $meta['discount_price'] : NULL;
+                            if( $discount_type == 'percent' ){
+                                $sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 ); 
+                            }elseif( $discount_type == 'fixed'){
+                                $sale_price = number_format( ( $price - $discounted_price ),1 );
+                            }
+                            //tour archive single gird/section added
+                            tf_tours_archive_single( $price,$sale_price,$discounted_price );
+                        }
+                        
+                    endwhile;
+                    else : 
+                        get_template_part( 'template-parts/content', 'none' ); 
+                    endif; 
+                ?>
         </div>
         <div class="tf_posts_navigation">
             <?php tourfic_posts_navigation(); ?>
