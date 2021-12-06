@@ -109,7 +109,6 @@ function tourfic_tours_shortcode( $atts, $content = null ){
     <!-- Populer Destinaiton -->
     <section id="populer_section_wrapper">
         <div class="populer_inner">
-
             <div class="populer_section_heading">
                 <?php if (!empty($title)){ ?>
                   <h3><?php echo esc_html($title) ?></h3>
@@ -430,16 +429,36 @@ function tourfic_trigger_filter_ajax(){
         }
 
     }
-
+    
     $loop = new WP_Query( $args ); ?>
-    <?php if ( $loop->have_posts() ) : ?>
-        <?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
-            <?php tourfic_archive_single(); ?>
-        <?php endwhile; ?>
-    <?php else : ?>
-        <?php get_template_part( 'template-parts/content', 'none' ); ?>
-    <?php endif; ?>
-    <?php wp_reset_postdata();
+    <?php if ( $loop->have_posts() ) : 
+        while ( $loop->have_posts() ) : $loop->the_post(); 
+            if( $posttype == 'tf_tours' ){
+                //Get all the price calculation
+                $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+                $pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
+                if( $pricing_rule == 'group'){
+                    $price = $meta['group_price'] ? $meta['group_price'] : null;
+                }else{
+                    $price = $meta['adult_price'] ? $meta['adult_price'] : null;
+                }
+                $discount_type = $meta['discount_type'] ? $meta['discount_type'] : null;
+                $discounted_price = $meta['discount_price'] ? $meta['discount_price'] : NULL;
+                if( $discount_type == 'percent' ){
+                    $sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 ); 
+                }elseif( $discount_type == 'fixed'){
+                    $sale_price = number_format( ( $price - $discounted_price ),1 );
+                }
+                //include the tours search result and archive layout
+                tf_tours_archive_single( $price,$sale_price,$discounted_price );
+            }else{
+                tourfic_archive_single();
+            }  
+        endwhile; 
+     else : 
+        get_template_part( 'template-parts/content', 'none' );
+     endif; 
+    wp_reset_postdata();
 
     die();
 }

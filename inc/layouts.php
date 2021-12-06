@@ -275,21 +275,26 @@ function tourfic_get_sidebar( $placement = 'single' ) {
 
 		<!-- Start form row -->
 
-		<?php tourfic_booking_widget_field(
-        array(
-            'type'     => 'select',
-            'svg_icon' => 'checkin',
-            'name'     => 'room',
-            'id'       => 'room',
-            'options'  => array(
-                '1' => '1 room',
-                '2' => '2 rooms',
-                '3' => '3 rooms',
-                '4' => '4 rooms',
-                '5' => '5 rooms',
-            ),
-        )
-    );?>
+		<?php
+		$posttype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type(); 
+		if( $posttype == 'tourfic'){
+			tourfic_booking_widget_field(
+				array(
+					'type'     => 'select',
+					'svg_icon' => 'checkin',
+					'name'     => 'room',
+					'id'       => 'room',
+					'options'  => array(
+						'1' => '1 room',
+						'2' => '2 rooms',
+						'3' => '3 rooms',
+						'4' => '4 rooms',
+						'5' => '5 rooms',
+					),
+				)
+			);
+		}
+		?>
 
 		<?php tourfic_booking_widget_field(
         array(
@@ -327,16 +332,16 @@ function tourfic_get_sidebar( $placement = 'single' ) {
 			<div class="screen-reader-text">
 				<!-- Start form row -->
 				<?php tourfic_booking_widget_field(
-        array(
-            'type'        => 'text',
-            'svg_icon'    => 'calendar_today',
-            'name'        => 'check-in-date',
-            'placeholder' => 'Check-in date',
-            'label'       => 'Check-in date',
-            'required'    => 'true',
-            'disabled'    => 'true',
-        )
-    );?>
+					array(
+						'type'        => 'text',
+						'svg_icon'    => 'calendar_today',
+						'name'        => 'check-in-date',
+						'placeholder' => 'Check-in date',
+						'label'       => 'Check-in date',
+						'required'    => 'true',
+						'disabled'    => 'true',
+					));
+				?>
 				<!-- End form row -->
 
 				<!-- Start form row -->

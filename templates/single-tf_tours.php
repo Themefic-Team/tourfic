@@ -360,7 +360,8 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 								'post_status' => 'publish',
 								'posts_per_page' => 8, 
 								'orderby' => 'title', 
-								'order' => 'ASC', 
+								'order' => 'ASC',
+								'post__not_in' => array($post->ID) 
 							);
 							$tours = new WP_Query( $args );
 							while($tours->have_posts() ) : $tours->the_post();
@@ -369,8 +370,8 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 						<div class="single-tourbox" style="background-image:url(<?php echo get_the_post_thumbnail_url(get_the_ID(),'full') ?>)">
 							<div class="tf-tourbox-info">
 									<div class="left-info">
-										<h3 class="tf-tour-title"><?php the_title(); ?></h3>
-										<p class="tf-location"><?php echo __( 'Indonesia','tourfic' ) ?></p>
+									<a href="<?php the_permalink() ?>" ><h3 class="tf-tour-title"><?php the_title(); ?></h3></a>
+										<p class="tf-location"><?php echo esc_html__( $location,'tourfic' ) ?></p>
 									</div>
 									<div class="right-info">
 										<div class="tf-rating">
@@ -383,7 +384,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 											</div>
 										</div>
 										<div class="tf-price">
-											<span>$1200</span>
+											<span><?php echo tf_tours_price_html($price,$sale_price,$discounted_price); ?></span>
 										</div>
 									</div>
 							</div>
