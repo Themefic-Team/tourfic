@@ -11,7 +11,8 @@
   }
 
 .tf_title-right {
-    float: right;
+    display: flex;
+    align-items: center;
 }
 
 .reviews span{

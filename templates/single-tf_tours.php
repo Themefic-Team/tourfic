@@ -59,7 +59,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<?php do_action( 'tf_before_container' ); ?>
 	<div class="tf_container">
 		<div class="tf_row">
-			<div class="tf_content tf_content-full mb-15">
+			<div class="tf-tours-content tf_content-full mb-15">
 				<!-- Start gallery -->
 				<div class="tf-tours_gallery-wrap">
 					<?php echo tourfic_gallery_slider( false, $post->ID, $gallery); ?>
@@ -102,7 +102,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<!--Information section start-->
 	<div class="tf_container">
 		<div class="tf_row">
-			<div class="tf_content">
+			<div class="tf-tours-content">
 				<div class="tf-tours-informations">
 					<?php if( $tour_duration ): ?>
 					<div class="item">
@@ -158,7 +158,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<!--Start Description section-->
 	<div class="tf_container">
 		<div class="tf_row">
-			<div class="tf_content">
+			<div class="tf-tours-content ">
 			<div class="tf_tours-content_wrapper">
 					<div class="tf_tours-content_wrapper_inner">
 						<?php if( $additional_information ): ?>
@@ -192,7 +192,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<!--Start Iternary section-->
 	<div class="tf_container">
 		<div class="tf_row">
-			<div class="tf_content">
+			<div class="tf-tours-content ">
 			<?php if( $itineraries ): ?>
 				<div class="tf-itinerary">
 					<div class="itinerary-title">
@@ -224,7 +224,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<!--Start features section-->
 	<div class="tf_container">
 		<div class="tf_row">
-			<div class="tf_content">
+			<div class="tf-tours-content ">
 			<?php if( $feature_meta ) : ?>
 				<div class="tf_features">
 					<div class="listing-title">
@@ -256,7 +256,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<!--Start Include Exclude section-->
 	<div class="tf_container">
 		<div class="tf_row">
-			<div class="tf_content">
+			<div class="tf-tours-content ">
 			<?php if( $inc || $exc ): ?>			
 				<div class="inc-exc-section">
 					<div class="inc-exc-content">
@@ -297,7 +297,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<!--Start tour map section-->
 	<div class="tf_container">
 		<div class="tf_row">
-			<div class="tf_content">
+			<div class="tf-tours-content ">
 				<div class="tf_map_section">
 					<div class="tf_map">
 					<iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1891144.1036137978!2d90.26962864671933!3d22.21575206911091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka%2C%20Bangladesh!3m2!1d23.810332!2d90.4125181!4m5!1s0x30ae2363dee2d61b%3A0xfb3463713589d312!2sSt.%20Martin&#39;s%20Island%2C%20Bangladesh!3m2!1d20.6237016!2d92.3233948!5e0!3m2!1sen!2sus!4v1637065617200!5m2!1sen!2sus" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
@@ -312,7 +312,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<div class="tf_container">
 		<div class="tf_row">
 			<!-- Start Content -->
-			<div class="tf_content">
+			<div class="tf-tours-content ">
 			<?php if( $faqs ): ?>
 					<div class="tf_contents faqs">
 						<div class="highlights-title">
@@ -344,7 +344,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<div class="tf_container">
 		<div class="tf_row">
 			<!-- Start Content -->
-			<div class="tf_content">
+			<div class="tf-tours-content ">
 				<!-- Start tourbox Content -->
 				<div class="tf-tourbox-section">
 					<div class="tf-tourbox-title">
@@ -399,12 +399,70 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 		</div>
 	</div>    
     <!--End tour recommendation section-->
+	<!-- Custom review section start j-->
+	<div class="tf_container">
+	<div class="tf-custom-review-section-wrapper">
+		<div class="tf-custom-review-title-area">
+			<h2>Customer Review</h2>
+			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+		</div>
+		<?php
+
+			$comments = get_comments( array( 'post_id' => get_the_ID() ) );
+			$tf_overall_rate = array();
+			$tf_overall_rate['review'] = null;
+		?>
+			<div class="tf-custom-review-slider-area">
+		<?php
+			foreach ( $comments as $comment ) {
+		
+				$tf_comment_meta = get_comment_meta( $comment->comment_ID, 'tf_comment_meta', true );
+		
+				if ( $tf_comment_meta ) {
+					foreach ( $tf_comment_meta as $key => $value ) {
+						$tf_overall_rate[$key][] = $value ? $value : "5";
+					}
+				} else {
+					$tf_overall_rate['review'][] = "5";
+					$tf_overall_rate['sleep'][] = "5";
+					$tf_overall_rate['location'][] = "5";
+					$tf_overall_rate['services'][] = "5";
+					$tf_overall_rate['cleanliness'][] = "5";
+					$tf_overall_rate['rooms'][] = "5";
+				}
+				?>
+					<div class="tf-single-custom-review">
+						<div class="tf-cr-reting">
+							<span><?php _e( tourfic_avg_ratings($tf_overall_rate['review']) ); ?></span>
+							<i class="fas fa-star"></i>
+						</div>
+						<div class="tf-cr-avater-image">
+							<img src="<?php echo get_avatar_url( $comment->user_id );?>">
+						</div>
+						<div class="tf-cr-avater-meta">
+							<h4><?php echo get_the_author_meta( 'display_name',$comment->user_id ); ?> <span><?php echo get_the_author_meta( 'description',$comment->user_id ); ?></span></h4>
+						</div>
+						<div class="tf-cr-desc">
+							<img src="<?php echo plugin_dir_url( __DIR__ ) . 'assets/img/quote.png';?>">
+							<p><?php echo $comment->comment_content;?> </p>
+							<img src="<?php echo plugin_dir_url( __DIR__ ) . 'assets/img/quote.png';?>">
+						</div>
+					</div>
+					
+				
+		<?php
+			}
+		?>
+		</div>
+	</div>
+	</div>
+	<!-- Custom review section end j-->
 
 	<!--Start TOC section-->
 	<div class="tf_container">
 		<div class="tf_row">
 			<!-- Start Content -->
-			<div class="tf_content">
+			<div class="tf-tours-content">
 				<!-- Start TOC Content -->
 				<div class="tf-tours-toc-wrap">
 					<div class="tf-tours-toc-inner">

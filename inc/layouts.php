@@ -360,7 +360,7 @@ function tourfic_get_sidebar( $placement = 'single' ) {
 			<?php
 				$ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
 			?>
-			<input type="hidden" name="type" value="<?php echo $ptype;?>" class="tf-post-type" />
+			<input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type" />
 			<button class="tf_button tf-submit" type="submit"><?php esc_html_e( 'Search', 'tourfic' );?></button>
 		</div>
 		<!-- End form row -->

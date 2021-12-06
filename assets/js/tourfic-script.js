@@ -40,6 +40,30 @@
             focusOnSelect: true
         });
 
+        $('.tf-hero-slider-wrapper').slick({
+            arrows: true,
+            fade: false,
+            prevArrow: '<button class="tf-hero-slider-arrow slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>',
+            nextArrow: '<button class="tf-hero-slider-arrow slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>'
+        });
+
+        $('.tf-custom-review-slider-area').slick({
+            arrows: true,
+            fade: false,
+            slidesToShow: 3,
+            prevArrow: '<button class="tf-cr-slider-arrow slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>',
+            nextArrow: '<button class="tf-cr-slider-arrow slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>'
+        });
+
+        
+        $(".tf-hero-btm-icon").click(function () {
+            $(".tf-hero-slider-fixed").addClass("show");
+        });
+
+        $(".tf-hero-slider-cross-icon").click(function () {
+            $(".tf-hero-slider-fixed").removeClass("show");
+        });
+
         sbp.on("click", function () {
             $(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickPrev');
         });
@@ -822,9 +846,9 @@ var destinations = tf_params.destinations;
 var tour_destinations = tf_params.tour_destinations;
 
 //Autocomplete for Hotel
-tourfic_autocomplete(document.getElementById("destination"), destinations);
+//tourfic_autocomplete(document.getElementById("destination"), destinations);
 //Autocomplete for Tours
-tourfic_autocomplete(document.getElementById("tour_destination"), tour_destinations);
+//tourfic_autocomplete(document.getElementById("tour_destination"), tour_destinations);
 
 /**
  * Searchbox widgets tab scripts

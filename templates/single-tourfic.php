@@ -16,7 +16,7 @@ $additional_information = get_field('additional_information') ? get_field('addit
 $share_text = get_the_title();
 $share_link = esc_url( home_url("/?p=").get_the_ID() );
 $location = get_field('formatted_location') ? get_field('formatted_location') : null;
-$features = get_the_terms( get_the_ID() , array( 'tf_filters') );
+$features = get_the_terms( get_the_ID() ,  'tf_filters' );
 
 $terms_and_conditions = get_post_meta( $post->ID, 'terms_and_conditions', true );
 $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $post->ID, 'tf_faqs', true ) : array();
@@ -27,7 +27,6 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<div class="tf_container">
 		<div class="tf_row">
 			<div class="tf_content tf_content-full mb-15">
-
 				<!-- Start title area -->
 				<div class="tf_title-area">
 					<h2 class="tf_title"><?php the_title(); ?></h2>
