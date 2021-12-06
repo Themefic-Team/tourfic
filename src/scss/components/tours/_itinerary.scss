@@ -1,6 +1,10 @@
 .tf-itinerary {
-    padding: 50px 0;
+  padding: 50px 70px;
+  background: #FAFCFE;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
+
 .tf-single-itinerary {
     padding: 0 5px;
     margin: 10px 0;
@@ -23,7 +27,6 @@
     color: #f7f7f7;
 }
 .itinerary-title h4{
-    text-transform: uppercase;
     display: flex;
 }
 .itinerary-head h5 {
