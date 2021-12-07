@@ -25,6 +25,9 @@ class Tourfic_TourFilter extends WP_Widget {
      * @param array $instance Saved values from database.
      */
     public function widget( $args, $instance ) {
+        //check if is Hotel
+        $posttype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
+        if( $posttype == 'tourfic' ) :
         extract( $args );
         $title = apply_filters( 'widget_title', $instance['title'] );
 
@@ -59,6 +62,7 @@ class Tourfic_TourFilter extends WP_Widget {
 		echo "</ul>";
 
         echo $after_widget;
+    endif;
     }
 
     /**
@@ -172,6 +176,10 @@ class Tourfic_Tour_FeatureFilter extends WP_Widget {
      * @param array $instance Saved values from database.
      */
     public function widget( $args, $instance ) {
+        //check if is Tours
+        $posttype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
+        if( $posttype == 'tf_tours' ) :
+
         extract( $args );
         $title = apply_filters( 'widget_title', $instance['title'] );
 
@@ -206,6 +214,7 @@ class Tourfic_Tour_FeatureFilter extends WP_Widget {
 		echo "</ul>";
 
         echo $after_widget;
+    endif;
     }
 
     /**

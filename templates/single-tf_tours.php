@@ -160,7 +160,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<div class="tf-tours_content_area_wrapper tf-tours_section">
 		<div class="tf_container">
 			<div class="tf_row">
-				<div class="tf_content">
+				<div class="tf-tours-content">
 				<div class="tf_tours-content_wrapper">
 						<div class="tf_tours-content_wrapper_inner">
 							<?php if( $additional_information ): ?>
@@ -226,7 +226,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<div class="tf-tours_in_ex_area_wrapper tf-tours_section">
 		<div class="tf_container">
 			<div class="tf_row">
-				<div class="tf_content">
+				<div class="tf-tours-content">
 				<?php if( $inc || $exc ): ?>			
 					<div class="inc-exc-section">
 						<div class="inc-exc-content">
@@ -267,7 +267,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<div class="tf-tours_itinerary_area_wrapper tf-tours_section">
 		<div class="tf_container">
 			<div class="tf_row">
-				<div class="tf_content">
+				<div class="tf-tours-content">
 				<?php if( $itineraries ): ?>
 					<div class="tf-itinerary">
 						<div class="itinerary-title">
@@ -305,7 +305,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<div class="tf-tours_map_area_wrapper tf-tours_section">
 		<div class="tf_container">
 			<div class="tf_row">
-				<div class="tf_content">
+				<div class="tf-tours-content">
 					<div class="tf_map_section">
 						<div class="tf_map">
 						<iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1891144.1036137978!2d90.26962864671933!3d22.21575206911091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka%2C%20Bangladesh!3m2!1d23.810332!2d90.4125181!4m5!1s0x30ae2363dee2d61b%3A0xfb3463713589d312!2sSt.%20Martin&#39;s%20Island%2C%20Bangladesh!3m2!1d20.6237016!2d92.3233948!5e0!3m2!1sen!2sus!4v1637065617200!5m2!1sen!2sus" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
@@ -322,7 +322,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 		<div class="tf_container">
 			<div class="tf_row">
 				<!-- Start Content -->
-				<div class="tf_content">
+				<div class="tf-tours-content">
 				<?php if( $faqs ): ?>
 						<div class="faqs tf-tours_faq ">
 							<div class="highlights-title">
@@ -361,7 +361,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 		<div class="tf_container">
 			<div class="tf_row">
 				<!-- Start Content -->
-				<div class="tf_content">
+				<div class="tf-tours-content">
 					<!-- Start tourbox Content -->
 					<div class="tf-tourbox-section">
 						<div class="tf-tourbox-title">
@@ -481,7 +481,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 		<div class="tf_container">
 			<div class="tf_row">
 				<!-- Start Content -->
-				<div class="tf_content">
+				<div class="tf-tours-content">
 					<!-- Start TOC Content -->
 					<div class="tf-tours-toc-wrap">
 						<div class="tf-tours-toc-inner">
@@ -499,7 +499,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<div class="tf-tours_toc_area_wrapper tf-tours_section">
 		<div class="tf_container">
 			<div class="tf_row">
-				<div class="tf_content">
+				<div class="tf-tours-content">
 					<!-- Start Review Content -->
 					<div class="tf_contents reviews">
 						<div class="highlights-title">
@@ -523,7 +523,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<!--Start review section-->
 	<div class="tf_container">
 		<div class="tf_row">
-			<div class="tf_content">
+			<div class="tf-tours-content">
 				<div class="tf-tours-toc-wrap">
 					<div class="tf-tours-toc-inner">
 						<?php _e( $terms_and_conditions,'tourfic' ); ?>

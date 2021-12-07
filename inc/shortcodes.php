@@ -430,6 +430,7 @@ function tourfic_trigger_filter_ajax(){
         }
 
     }
+    
     //Query for the features filter of tours
     if ( $features ) {
         $args['tax_query']['relation'] = $relation;
@@ -437,7 +438,7 @@ function tourfic_trigger_filter_ajax(){
         if ( $filter_relation == "OR" ) {
             $args['tax_query'][] = array(
                 'taxonomy' => 'tf_feature',
-                'terms'    => $filters,
+                'terms'    => $features,
             );
         } else {
             $args['tax_query']['tf_feature']['relation'] = 'AND';
