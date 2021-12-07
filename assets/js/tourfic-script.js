@@ -846,25 +846,27 @@ var destinations = tf_params.destinations;
 var tour_destinations = tf_params.tour_destinations;
 
 //Autocomplete for Hotel
-//tourfic_autocomplete(document.getElementById("destination"), destinations);
+tourfic_autocomplete(document.getElementById("destination"), destinations);
 //Autocomplete for Tours
-//tourfic_autocomplete(document.getElementById("tour_destination"), tour_destinations);
+tourfic_autocomplete(document.getElementById("tour_destination"), tour_destinations);
 
 /**
  * Searchbox widgets tab scripts
  */
- function tfOpenForm(evt, formName) {
+function tfOpenForm(evt, formName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tf-tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
       tabcontent[i].style.display = "none";
+     
     }
     tablinks = document.getElementsByClassName("tf-tablinks");
     for (i = 0; i < tablinks.length; i++) {
       tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     document.getElementById(formName).style.display = "block";
+    document.getElementById(formName).style.transition = "all 0.2s";
     evt.currentTarget.className += " active";
-  }
-
+}
+jQuery('#tf-hotel-booking-form').css('display','block');
 
