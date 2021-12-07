@@ -1,18 +1,22 @@
 .tf-itinerary {
   padding: 50px 70px;
   background: #FAFCFE;
-  margin-top: 100px;
-  margin-bottom: 100px;
 }
-
+.tf-single-itinerary_inner {
+  background: #fafcfe;
+  box-shadow: 0 5px 10px rgb(0 44 102 / 20%)!important;
+  width: 100%;
+  border-radius: 0px 5px 5px 0px;
+  padding: 37px 30px;
+}
 .tf-single-itinerary {
-    padding: 0 5px;
-    margin: 10px 0;
-    overflow: hidden;
-  }
+  margin: 0;
+  padding-left: 100px;
+  position: relative;
+  margin-bottom: 30px;
+}
 .itinerary-head {
     cursor: pointer;
-    background: #f7f7f7;
     display: flex;
     align-items: center;
 }
@@ -30,30 +34,33 @@
     display: flex;
 }
 .itinerary-head h5 {
+  color: #152b47;
   display: flex;
   font-size: 18px;
-  color:#152B47;
-  width: 80%;
   justify-content: start;
-  padding-left: 15px;
-
+  padding-left: 0;
+  width: 100%;
 }
+.tf-tours_itinerary_time {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 5px 0px 0px 5px;
+  overflow: hidden;
+}
+
 .itinerary-head span.time {
   font-weight: bold;
 }
-.tf-single-itinerary img {
-  width: 30%;
-}
+
+
 
 .itinerary-content {
+  background: #fafcfe;
+  border-radius: initial;
   overflow: hidden;
-  display: flex;
-  padding: 10px 0;  
-  padding-left: 100px;
-  background: #FAFCFE;
-  /* Shadow 2 */
-  box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
-  border-radius: 0px 5px 5px 0px;
+  padding: 14px 0px;
+  font-size: 18px;
 }
 .tf-single-itinerary .itinerary-content img {
   float: left;
