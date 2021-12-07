@@ -1138,7 +1138,8 @@ function tourfic_sidebar_widgets_init() {
     	'Tourfic_TourFilter',
     	'Tourfic_Show_On_Map',
     	'Tourfic_Ask_Question',
-    	'Tourfic_Similar_Tours'
+    	'Tourfic_Similar_Tours',
+		'Tourfic_Tour_FeatureFilter'
     );
     foreach ($custom_widgets as $key => $widget) {
     	register_widget( $widget );
@@ -1430,7 +1431,6 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 	</div>
 
 	<div class="tf_selectperson-wrap">
-
 		<div class="tf_input-inner">
 			<span class="tf_person-icon">
 				<?php echo tourfic_get_svg('person'); ?>
@@ -1441,7 +1441,6 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 			<div class="person-sep"></div>
 			<div class="infant-text">0 Infant</div>
 		</div>
-
 		<div class="tf_acrselection-wrap">
 			<div class="tf_acrselection-inner">
 				<div class="tf_acrselection">
@@ -1470,7 +1469,6 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 				</div>
 			</div>
 		</div>
-
 	</div>
 	
 	<div class="tf_selectdate-wrap">

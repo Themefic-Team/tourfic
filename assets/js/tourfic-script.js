@@ -188,7 +188,8 @@
         }, function (start, end, label) {
             checkin_input.val(start.format(dateFormat));
             $('.checkin-date-text').text(start.format(dateFormat));
-
+            $('#check-in-date').val(start.format(dateFormat));
+            $('#check-out-date').val(start.format(dateFormat));
             checkout_input.val(end.format(dateFormat));
             $('.checkout-date-text').text(end.format(dateFormat));
         });
@@ -247,7 +248,7 @@
         });
 
         // Adult, Child, Room Selection toggle
-        $(document).on('click', '.tf_selectperson-wrap .tf_input-inner', function () {
+        $(document).on('click', '.tf_selectperson-wrap .tf_input-inner,.tf_person-selection-wrap .tf_person-selection-inner', function () {
             $('.tf_acrselection-wrap').slideToggle('fast');
         });
 
@@ -385,7 +386,7 @@
         // Change view
         
         var filter_xhr;
-        $(document).on('change', '[name*=tf_filters], #destination, #adults, #room, #children, #check-in-date, #check-out-date, #check-in-out-date', function () {
+        $(document).on('change', '[name*=tf_filters],[name*=tf_features], #destination, #adults, #room, #children, #check-in-date, #check-out-date, #check-in-out-date', function () {
             var dest = $('#destination').val();
             var adults = $('#adults').val();
             var room = $('#room').val();
@@ -403,6 +404,15 @@
             });
             var filters = filters.join();
 
+            var features = [];
+
+            $('[name*=tf_features]').each(function () {
+                if ($(this).is(':checked')) {
+                    features.push($(this).val());
+                }
+            });
+            var features = features.join();
+
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
             formData.append('type', posttype);
@@ -413,6 +423,7 @@
             formData.append('checkin', checkin);
             formData.append('checkout', checkout);
             formData.append('filters', filters);
+            formData.append('features', features);
 
             // abort previous request
             if (filter_xhr && filter_xhr.readyState != 4) {
@@ -449,10 +460,6 @@
                 },
 
             });
-
-            //console.log('/---------');
-            //console.log(dest, adults, room, children, checkin, checkout, filters);
-            //console.log('---------/');
 
         });
 

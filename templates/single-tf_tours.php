@@ -63,6 +63,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				<!-- Start gallery -->
 				<div class="tf-tours_gallery-wrap">
 					<?php echo tourfic_gallery_slider( false, $post->ID, $gallery); ?>
+					<?php echo tf_tours_booking_form( $post->ID ); ?>
 				</div>
 				<!-- End gallery-->
 				<!-- Start title area -->

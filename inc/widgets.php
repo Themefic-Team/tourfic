@@ -147,6 +147,152 @@ class Tourfic_TourFilter extends WP_Widget {
 
 
 /**
+ * Adds Tour Feature Filter widget.
+ */
+class Tourfic_Tour_FeatureFilter extends WP_Widget {
+
+    /**
+     * Register widget with WordPress.
+     */
+    public function __construct() {
+
+        parent::__construct(
+            'tf_tour_feature_filter', // Base ID
+            'Tourfic - Features', // Name
+            array( 'description' => __( 'Filter Tourfic tour on archive with features.', 'tourfic' ), ) // Args
+        );
+    }
+
+    /**
+     * Front-end display of widget.
+     *
+     * @see WP_Widget::widget()
+     *
+     * @param array $args     Widget arguments.
+     * @param array $instance Saved values from database.
+     */
+    public function widget( $args, $instance ) {
+        extract( $args );
+        $title = apply_filters( 'widget_title', $instance['title'] );
+
+        $terms = isset( $instance[ 'terms' ] ) ? $instance[ 'terms' ] : 'all';
+        $show_count = isset( $instance[ 'show_count' ] ) ? $instance[ 'show_count' ] : null;
+        $hide_empty = ( $instance[ 'hide_empty' ] == "on" ) ? true : false;
+
+        echo $before_widget;
+        if ( ! empty( $title ) ) {
+            echo $before_title . $title . $after_title;
+        }
+
+		$taxonomy = array(
+			'hide_empty' => $hide_empty,
+		    'taxonomy' => 'tf_feature',
+		    'include' => $terms
+		);
+
+		$get_terms = get_terms( $taxonomy );
+
+        $destination_name = !empty( $_GET['tour_destination'] ) ? $_GET['tour_destination'] : '';
+
+		echo "<ul class='tf-popular_filter'>";
+		foreach ( $get_terms as $key => $term ) {
+			$name = $term->name;
+			$id = $term->term_id;
+			$default_count = $term->count;
+			$count = $show_count ? '<span>'.tf_term_count( $term->slug, $destination_name, $default_count ).'</span>' : '';
+
+			echo "<li><label><input type='checkbox' name='tf_features[]' value='{$id}'/> {$name}</label> {$count}</li>";
+		}
+		echo "</ul>";
+
+        echo $after_widget;
+    }
+
+    /**
+     * Back-end widget form.
+     *
+     * @see WP_Widget::form()
+     *
+     * @param array $instance Previously saved values from database.
+     */
+    public function form( $instance ) {
+
+        $title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : __( 'Popular Filters', 'tourfic' );
+        $terms = isset( $instance[ 'terms' ] ) ? $instance[ 'terms' ] : 'all';
+
+        $show_count = isset( $instance[ 'show_count' ] ) ? $instance[ 'show_count' ] : '';
+        $hide_empty = isset( $instance[ 'hide_empty' ] ) ? $instance[ 'hide_empty' ] : '';
+
+        ?>
+        <p class="tf-widget-field">
+            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+        </p>
+
+		<p class="tf-widget-field">
+	        <label for="<?php echo $this->get_field_id( 'terms' ); ?>">Select Terms:</label>
+	        <br>
+			<?php
+			    wp_dropdown_categories( array(
+			        'taxonomy'          => 'tf_feature',
+			        'hierarchical'      => false,
+			        //'show_option_none'  => esc_html_x( '', 'All Terms', 'tourfic' ),
+			        //'option_none_value' => '',
+			        'name'              => $this->get_field_name( 'terms' ),
+			        'id'                => $this->get_field_id( 'terms' ),
+			        'selected'          => $terms, // e.x 86,110,786
+			        'multiple'          => true,
+			        'class'          	=> 'widefat tf-select2',
+			        'show_count' 		=> true,
+			        'hide_empty'        => 0
+			    ) );
+			?>
+			<br>
+			<span>Leave this field empty if you want to show all terms.</span>
+        </p>
+        <p class="tf-widget-field">
+			<label for="<?php echo $this->get_field_id( 'show_count' ); ?>">Show Count:</label>
+			<input id="<?php echo $this->get_field_id( 'show_count' ); ?>" name="<?php echo $this->get_field_name( 'show_count' ); ?>" type="checkbox" <?php checked('on', $show_count); ?>>
+		</p>
+		<p class="tf-widget-field">
+			<label for="<?php echo $this->get_field_id( 'hide_empty' ); ?>">Hide Empty Categories:</label>
+			<input id="<?php echo $this->get_field_id( 'hide_empty' ); ?>" name="<?php echo $this->get_field_name( 'hide_empty' ); ?>" type="checkbox" <?php checked('on', $hide_empty); ?>>
+		</p>
+		<style>
+			.tf-widget-field label{
+				font-weight: 600;
+			}
+		</style>
+		<script>
+			jQuery('#<?php echo $this->get_field_id( 'terms' ); ?>').select2({ width: '100%' });
+			jQuery(document).trigger('tf_select2');
+		</script>
+    <?php
+    }
+
+    /**
+     * Sanitize widget form values as they are saved.
+     *
+     * @see WP_Widget::update()
+     *
+     * @param array $new_instance Values just sent to be saved.
+     * @param array $old_instance Previously saved values from database.
+     *
+     * @return array Updated safe values to be saved.
+     */
+    public function update( $new_instance, $old_instance ) {
+        $instance = array();
+        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+        $instance['terms'] = ( !empty( $new_instance['terms'] ) ) ? implode( ",", $new_instance['terms'] ) : 'all';
+        $instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? strip_tags( $new_instance['show_count'] ) : '';
+        $instance['hide_empty'] = ( !empty( $new_instance['hide_empty'] ) ) ? strip_tags( $new_instance['hide_empty'] ) : '';
+
+        return $instance;
+    }
+
+}
+
+/**
  * Similar Tours
  */
 class Tourfic_Similar_Tours extends WP_Widget {
