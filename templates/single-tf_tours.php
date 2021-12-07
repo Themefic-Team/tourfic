@@ -53,9 +53,12 @@ $feature_meta = $meta['tour_feature'];
 
 $terms_and_conditions = $meta['terms_conditions'];
 $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $post->ID, 'tf_faqs', true ) : array();
+$comments = get_comments( array( 'post_id' => get_the_ID() ) );
+$tf_overall_rate = array();
+$tf_overall_rate['review'] = null;
 
 ?>
-<div class="tourfic-wrap tf_tours-single-layout default-style" data-fullwidth="true" data-continuous-array='<?php echo $continuous_availability;?>'>
+<div class="tourfic-wrap tf_tours-single-layout  tf-tours_nosidebar_layout default-style" data-fullwidth="true" data-continuous-array='<?php echo $continuous_availability;?>'>
 	<?php do_action( 'tf_before_container' ); ?>
 	<div class="tf_container">
 		<div class="tf_row">
@@ -190,33 +193,35 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
     <!--End Decription/highlight section-->
 
 	<!--Start features section-->
-	<div class="tf_container">
-		<div class="tf_row">
-			<div class="tf-tours-content ">
-			<?php if( $feature_meta ) : ?>
-				<div class="tf_features">
-					<div class="listing-title">
-						<h4 class="tf-tours_section_title"><?php esc_html_e( 'Features', 'tourfic' ); ?></h4>
-					</div>
+	<div class="tf-tours_features_area_wrapper tf-tours_section">
+		<div class="tf_container">
+			<div class="tf_row">
+				<div class="tf-tours-content ">
+				<?php if( $feature_meta ) : ?>
+					<div class="tf_features">
+						<div class="listing-title">
+							<h4 class="tf-tours_section_title"><?php esc_html_e( 'Features', 'tourfic' ); ?></h4>
+						</div>
 
-					<div class="tf_feature_list">
-						<?php 
-						foreach( $feature_meta as $feature ):
-							$term_meta = get_term_meta( $feature, 'feature_meta', true );
-							$term = get_term_by( 'id', $feature, 'tf_feature' );
-						
-						?>
-                           <div class="single_feature_box">
-								<img src="<?php echo $term_meta['fetures_icon']; ?>" alt="">
-								<p class="feature_list_title"><?php echo $term->name;  ?></p>
-                           </div>
-						<?php endforeach; ?>
+						<div class="tf_feature_list">
+							<?php 
+							foreach( $feature_meta as $feature ):
+								$term_meta = get_term_meta( $feature, 'feature_meta', true );
+								$term = get_term_by( 'id', $feature, 'tf_feature' );
+							
+							?>
+							<div class="single_feature_box">
+									<img src="<?php echo $term_meta['fetures_icon']; ?>" alt="">
+									<p class="feature_list_title"><?php echo $term->name;  ?></p>
+							</div>
+							<?php endforeach; ?>
 
+						</div>
 					</div>
+					<?php endif; ?>
 				</div>
-				<?php endif; ?>
 			</div>
-		</div>
+		</div>    
 	</div>    
     <!--End features section-->
 
@@ -417,73 +422,85 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	</div>
     <!--End tour recommendation section-->
 	<!-- Custom review section start j-->
-	<div class="tf_container">
-	<div class="tf-custom-review-section-wrapper">
-		<div class="tf-custom-review-title-area">
-			<h2>Customer Review</h2>
-			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-		</div>
-		<?php
-
-			$comments = get_comments( array( 'post_id' => get_the_ID() ) );
-			$tf_overall_rate = array();
-			$tf_overall_rate['review'] = null;
-		?>
-			<div class="tf-custom-review-slider-area">
-		<?php
-			foreach ( $comments as $comment ) {
-		
-				$tf_comment_meta = get_comment_meta( $comment->comment_ID, 'tf_comment_meta', true );
-		
-				if ( $tf_comment_meta ) {
-					foreach ( $tf_comment_meta as $key => $value ) {
-						$tf_overall_rate[$key][] = $value ? $value : "5";
-					}
-				} else {
-					$tf_overall_rate['review'][] = "5";
-					$tf_overall_rate['sleep'][] = "5";
-					$tf_overall_rate['location'][] = "5";
-					$tf_overall_rate['services'][] = "5";
-					$tf_overall_rate['cleanliness'][] = "5";
-					$tf_overall_rate['rooms'][] = "5";
-				}
-				?>
-					<div class="tf-single-custom-review">
-						<div class="tf-cr-reting">
-							<span><?php _e( tourfic_avg_ratings($tf_overall_rate['review']) ); ?></span>
-							<i class="fas fa-star"></i>
-						</div>
-						<div class="tf-cr-avater-image">
-							<img src="<?php echo get_avatar_url( $comment->user_id );?>">
-						</div>
-						<div class="tf-cr-avater-meta">
-							<h4><?php echo get_the_author_meta( 'display_name',$comment->user_id ); ?> <span><?php echo get_the_author_meta( 'description',$comment->user_id ); ?></span></h4>
-						</div>
-						<div class="tf-cr-desc">
-							<img src="<?php echo plugin_dir_url( __DIR__ ) . 'assets/img/quote.png';?>">
-							<p><?php echo $comment->comment_content;?> </p>
-							<img src="<?php echo plugin_dir_url( __DIR__ ) . 'assets/img/quote.png';?>">
-						</div>
+	
+	<div class="tf-tours_review_area_wrapper tf-tours_section">
+		<div class="tf_container">
+			<div class="tf-custom-review-section-wrapper">
+			<?php if($comments): ?>
+				<div class="tf-custom-review-section-wrapper_inner">
+					<div class="tf-custom-review-title-area">
+						<h2>Customer Review</h2>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
 					</div>
-					
-				
-		<?php
-			}
-		?>
+					<div class="tf-custom-review-slider-area">
+							<?php
+								foreach ( $comments as $comment ) :
+							
+									$tf_comment_meta = get_comment_meta( $comment->comment_ID, 'tf_comment_meta', true );
+							
+									if ( $tf_comment_meta ) {
+										foreach ( $tf_comment_meta as $key => $value ) {
+											$tf_overall_rate[$key][] = $value ? $value : "5";
+										}
+									} else {
+										$tf_overall_rate['review'][] = "5";
+										$tf_overall_rate['sleep'][] = "5";
+										$tf_overall_rate['location'][] = "5";
+										$tf_overall_rate['services'][] = "5";
+										$tf_overall_rate['cleanliness'][] = "5";
+										$tf_overall_rate['rooms'][] = "5";
+									}
+									?>
+										<div class="tf-single-custom-review">
+											<div class="tf-cr-reting">
+												<span><?php _e( tourfic_avg_ratings($tf_overall_rate['review']) ); ?></span>
+												<i class="fas fa-star"></i>
+											</div>
+											<div class="tf-cr-avater-image">
+												<img src="<?php echo get_avatar_url( $comment->user_id );?>">
+											</div>
+											<div class="tf-cr-avater-meta">
+												<h4><?php echo get_the_author_meta( 'display_name',$comment->user_id ); ?> <span><?php echo get_the_author_meta( 'description',$comment->user_id ); ?></span></h4>
+											</div>
+											<div class="tf-cr-desc">
+												<img src="<?php echo plugin_dir_url( __DIR__ ) . 'assets/img/quote.png';?>">
+												<p><?php echo $comment->comment_content;?> </p>
+												<img src="<?php echo plugin_dir_url( __DIR__ ) . 'assets/img/quote.png';?>">
+											</div>
+										</div>
+							<?php endforeach; ?>
+					</div>
+				</div>
+				<?php endif; ?>	
+				<div class="tf-tours_submit_review">
+					<?php
+							if ( comments_open() || get_comments_number() ) :
+								comments_template();
+							endif;
+					?>				
+				</div>						
+			</div>
 		</div>
 	</div>
-	</div>
+	
 	<!-- Custom review section end j-->
 
+
+
 	<!--Start TOC section-->
+	<?php if($terms_and_conditions): ?>
 	<div class="tf-tours_toc_area_wrapper tf-tours_section">
 		<div class="tf_container">
 			<div class="tf_row">
 				<!-- Start Content -->
 				<div class="tf_content">
 					<!-- Start TOC Content -->
+					<div class="highlights-title">
+							<h4><?php esc_html_e( 'Terms and Conditions', 'tourfic' ); ?></h4>
+					</div>
 					<div class="tf-tours-toc-wrap">
 						<div class="tf-tours-toc-inner">
+
 							<?php _e( $terms_and_conditions,'tourfic' ); ?>
 						</div>
 					</div>
@@ -492,46 +509,8 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 			</div>
 		</div> 
 	</div>
+	<?php endif; ?>
     <!--End TOC section-->
-
-	<!--Start review section-->
-	<div class="tf-tours_toc_area_wrapper tf-tours_section">
-		<div class="tf_container">
-			<div class="tf_row">
-				<div class="tf_content">
-					<!-- Start Review Content -->
-					<div class="tf_contents reviews">
-						<div class="highlights-title">
-							<h4><?php esc_html_e( 'Reviews', 'tourfic' ); ?></h4>
-						</div>
-
-						<?php
-						if ( comments_open() || get_comments_number() ) :
-							comments_template();
-						endif;
-						?>
-					</div>
-					<!-- End Review Content -->
-				</div>
-			</div>
-		</div>    
-	</div>
-  <!--End review section-->
-
-
-	<!--Start review section-->
-	<div class="tf_container">
-		<div class="tf_row">
-			<div class="tf_content">
-				<div class="tf-tours-toc-wrap">
-					<div class="tf-tours-toc-inner">
-						<?php _e( $terms_and_conditions,'tourfic' ); ?>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>    
-    <!--End review section-->
 
 
 	<?php do_action( 'tf_after_container' ); ?>

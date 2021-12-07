@@ -2346,6 +2346,10 @@ button.tf-cr-slider-arrow.prev-arrow {
   margin-bottom: 100px;
 }
 
+.tf-tours_nosidebar_layout .tf_content {
+  width: 100%;
+}
+
 .tf-single-faq {
   position: relative;
   padding-left: 41px;
@@ -2414,6 +2418,33 @@ button.tf-cr-slider-arrow.prev-arrow {
 .faqs.tf-tours_faq {
   padding: 50px 70px;
   background: #FAFCFE;
+}
+
+.tf-tours_single_faq_inner.active .faq-head .faq-indicator .fa-minus {
+  display: block;
+}
+
+.tf-tours_single_faq_inner.active .faq-head .faq-indicator .fa-plus {
+  display: none;
+}
+
+.tf-tours_submit_review .comment-respond {
+  background-color: unset !important;
+  border: 0px solid #ddd !important;
+  padding: 0 !important;
+}
+.tf-tours_submit_review div#reply-title {
+  background: #002C66;
+  color: white;
+  text-align: center;
+  display: block;
+  padding: 12px 24px;
+  border-radius: 5px;
+  max-width: 185px;
+  margin: 0 auto;
+}
+.tf-tours_submit_review div#reply-title span {
+  display: none !important;
 }
 
 /*Archive page*/

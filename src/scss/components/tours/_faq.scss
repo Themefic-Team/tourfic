@@ -78,3 +78,10 @@
     padding: 50px 70px;
     background: #FAFCFE;
 }
+
+.tf-tours_single_faq_inner.active  .faq-head .faq-indicator .fa-minus {
+    display: block;
+}
+.tf-tours_single_faq_inner.active .faq-head .faq-indicator .fa-plus {
+    display: none;
+}

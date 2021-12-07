@@ -211,16 +211,21 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 						<div class="tf-faqs">
 						<?php foreach ( $tf_faqs as $key => $faq ): ?>
 							<div class="tf-single-faq">
-								<div class="faq-head">
-									<i class="fa fa-question-circle-o" aria-hidden="true">
-									</i> <?php esc_html_e( $faq['name'] ); ?>
-									<span class="faq-indicator">
-										<i class="fa fa-angle-up" aria-hidden="true"></i>
-										<i class="fa fa-angle-down" aria-hidden="true"></i>
-									</span>
+									<div class="tf-tours_faq_icon">
+									<i class="far fa-question-circle" aria-hidden="true"></i>
+									</div>
+									<div class="tf-tours_single_faq_inner">
+										<div class="faq-head">
+											<?php esc_html_e( $faq['name'] ); ?>
+											<span class="faq-indicator">
+												<i class="fas fa-minus" aria-hidden="true"></i>
+												<i class="fas fa-plus" aria-hidden="true"></i>
+											</span>
+										</div>
+										<div class="faq-content"><?php _e( $faq['desc'] ); ?></div>
+									</div>
+
 								</div>
-								<div class="faq-content"><?php _e( $faq['desc'] ); ?></div>
-							</div>
 						<?php endforeach; ?>
 						</div>
 					</div>
