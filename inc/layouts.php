@@ -451,47 +451,47 @@ function tf_tours_booking_form( $post_id ) {
 		</div>
 	</div>
 		<?php tourfic_booking_widget_field(
-        array(
-            'type'        => 'text',
-            'svg_icon'    => 'calendar_today',
-            'name'        => 'check-in-out-date',
-            'placeholder' => 'Check-in/Check-out Date',
-            'label'       => 'Check-in & Check-out date',
-            'required'    => 'true',
-            'disabled'    => 'true',
-            'class'       => 'tours-check-in-out',
-			)
-		);
+			array(
+				'type'        => 'text',
+				'svg_icon'    => 'calendar_today',
+				'name'        => 'check-in-out-date',
+				'placeholder' => 'Select Date',
+				'label'       => 'Select date',
+				'required'    => 'true',
+				'disabled'    => 'true',
+				'class'       => 'tours-check-in-out',
+				)
+			);
 		?>
-			<div class="screen-reader-text">
-				<!-- Start form row -->
-				<?php tourfic_booking_widget_field(
-					array(
-						'type'        => 'text',
-						'svg_icon'    => 'calendar_today',
-						'name'        => 'check-in-date',
-						'placeholder' => 'Check-in date',
-						'label'       => 'Check-in date',
-						'required'    => 'true',
-						'disabled'    => 'true',
-					)
-				);?>
-				<!-- End form row -->
+		<div class="screen-reader-text">
+			<!-- Start form row -->
+			<?php tourfic_booking_widget_field(
+				array(
+					'type'        => 'text',
+					'svg_icon'    => 'calendar_today',
+					'name'        => 'check-in-date',
+					'placeholder' => 'Check-in date',
+					'label'       => 'Check-in date',
+					'required'    => 'true',
+					'disabled'    => 'true',
+				)
+			);?>
+			<!-- End form row -->
 
-				<!-- Start form row -->
-				<?php tourfic_booking_widget_field(
-					array(
-						'type'        => 'text',
-						'svg_icon'    => 'calendar_today',
-						'name'        => 'check-out-date',
-						'placeholder' => 'Check-out date',
-						'required'    => 'true',
-						'disabled'    => 'true',
-						'label'       => 'Check-out date',
-						)
-					);
-				?>
-			</div>
+			<!-- Start form row -->
+			<?php tourfic_booking_widget_field(
+				array(
+					'type'        => 'text',
+					'svg_icon'    => 'calendar_today',
+					'name'        => 'check-out-date',
+					'placeholder' => 'Check-out date',
+					'required'    => 'false',
+					'disabled'    => 'true',
+					'label'       => 'Check-out date',
+					)
+				);
+			?>
+		</div>
 	<?php echo tourfic_tours_booking_submit_button( "Book Now" ); ?>
 		</form>
 	</div>

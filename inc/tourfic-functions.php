@@ -401,7 +401,7 @@ function tourfic_booking_widget_field( $args ){
 
     if ( $type == 'select' ) {
 
-    	$output .= "<div class='tf_form-row $class'>";
+    	$output .= "<div class='tf_form-row'>";
 	    	$output .= "<label class='tf_label-row'>";
 	    		$output .= "<div class='tf_form-inner'>";
 	    		$output .= "<span class='icon'>";
@@ -634,13 +634,30 @@ function tourfic_booking_set_search_result( $url ){
 add_filter( 'tf_booking_search_action', 'tourfic_booking_set_search_result' );
 
 // Tours price with html format
-function tf_tours_price_html( $price = null, $sale_price = null,$discounted_price = null ) {
+function tf_tours_price_html() {
+	$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+	$pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
+	$tour_type = $meta['type'] ? $meta['type'] : null;
+	if( $pricing_rule == 'group'){
+		$price = $meta['group_price'] ? $meta['group_price'] : 0;
+	}else{
+		$price = $meta['adult_price'] ? $meta['adult_price'] : null;
+	}
+	$discount_type = $meta['discount_type'] ? $meta['discount_type'] : null;
+	$discounted_price = $meta['discount_price'] ? $meta['discount_price'] : NULL;
+	if( $discount_type == 'percent' ){
+		$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 ); 
+	}elseif( $discount_type == 'fixed'){
+		$sale_price = number_format( ( $price - $discounted_price ),1 );
+	}else if( $discount_type == 'none' ){
+		$sale_price = number_format( $price, 1 );
+	}
 	if ( !$price ) {
 		return;
 	}
 	ob_start();
 	?>
-	<?php if ( $discounted_price > 0 ) { ?>
+	<?php if (  $sale_price < $price && $discounted_price > 0 && $discount_type != 'none' ) { ?>
 		<span class="tf-price"><del><?php echo wc_price( $price ); ?></del></span>
 		<span class="tf-price"><?php echo wc_price( $sale_price ); ?></span>
 	<?php } else { ?>

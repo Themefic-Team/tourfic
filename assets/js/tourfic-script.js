@@ -47,6 +47,15 @@
             nextArrow: '<button class="tf-hero-slider-arrow slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>'
         });
 
+        $('.tf-tourbox').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            arrows: true,
+            fade: false,
+            prevArrow: '<button class="tf-tourbox-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>',
+            nextArrow: '<button class="tf-tourbox-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>'
+        });
+
         $('.tf-custom-review-slider-area').slick({
             arrows: true,
             fade: false,
@@ -56,11 +65,11 @@
         });
 
         
-        $(".tf-hero-btm-icon").click(function () {
+        $(".tf-hero-btm-icon").on('click',function () {
             $(".tf-hero-slider-fixed").addClass("show");
         });
 
-        $(".tf-hero-slider-cross-icon").click(function () {
+        $(".tf-hero-slider-cross-icon").on('click',function () {
             $(".tf-hero-slider-fixed").removeClass("show");
         });
 
@@ -194,6 +203,15 @@
             $('.checkout-date-text').text(end.format(dateFormat));
         });
 
+        //position fixed of sticky tour booking form
+        $(window).scroll(function(){
+            var sticky = $('.tf-tour-booking-wrap'),
+                scroll = $(window).scrollTop();
+          
+            if (scroll >= 800) sticky.addClass('tf-tours-fixed');
+            else sticky.removeClass('tf-tours-fixed');
+          });
+
         // Number Decrement
         $('.acr-dec').on('click', function (e) {
 
@@ -232,6 +250,18 @@
                 $('.child-text').text(thisVal + " Children");
             } else {
                 $('.child-text').text(thisVal + " Child");
+            }
+
+        });
+
+         // Infant change trigger
+         $(document).on('change', '#infant', function () {
+            var thisVal = $(this).val();
+
+            if (thisVal > 1) {
+                $('.infant-text').text(thisVal + " Infants");
+            } else {
+                $('.infant-text').text(thisVal + " Infant");
             }
 
         });

@@ -21,6 +21,7 @@ $external_booking = $meta['external_booking'] ? $meta['external_booking'] : fals
 $external_booking_link = $meta['external_booking_link'] ? $meta['external_booking_link'] : null;
 $min_people = $meta['min_people'] ? $meta['min_people'] : null;
 $min_people = $meta['max_people'] ? $meta['max_people'] : null;
+$max_person = $meta['max_people'] ? $meta['max_people'] : null;
 $email = $meta['email'] ? $meta['email'] : null;
 $phone = $meta['phone'] ? $meta['phone'] : null;
 $website = $meta['website'] ? $meta['website'] : null;
@@ -29,20 +30,7 @@ $faqs = $meta['faqs'] ? $meta['faqs'] : null;
 $inc = $meta['inc'] ? $meta['inc'] : null;
 $exc = $meta['exc'] ? $meta['exc'] : null;
 $itineraries = $meta['itinerary'] ? $meta['itinerary'] : null;
-$pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
-$tour_type = $meta['type'] ? $meta['type'] : null;
-if( $pricing_rule == 'group'){
-	$price = $meta['group_price'] ? $meta['group_price'] : null;
-}else{
-	$price = $meta['adult_price'] ? $meta['adult_price'] : null;
-}
-$discount_type = $meta['discount_type'] ? $meta['discount_type'] : null;
-$discounted_price = $meta['discount_price'] ? $meta['discount_price'] : NULL;
-if( $discount_type == 'percent' ){
-	$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 ); 
-}elseif( $discount_type == 'fixed'){
-	$sale_price = number_format( ( $price - $discounted_price ),1 );
-}
+
 //continuous tour
 $continuous_availability = $meta['continuous_availability'];
 $continuous_availability = json_encode($continuous_availability);
@@ -79,7 +67,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					<div class="tf-tours-title-right">
 						<div class="tf-tours-price">
 							<span><?php echo __('Price','tourfic') ?></span>
-							<?php echo tf_tours_price_html( $price, $sale_price,$discounted_price );?>
+							<?php echo tf_tours_price_html();?>
 						</div>
 						<div class="tf-tours-ratings">
 							<div class="star">
@@ -116,14 +104,14 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 						</div>
 					</div>
 					<?php endif;?>
-					<?php if( $tour_type ): ?>
+					<?php if( $max_person ): ?>
 					<div class="item">
 						<div class="icon">
 							<i class="fas fa-globe"></i>
 						</div>
 						<div class="info">
-							<h4 class="title"><?php echo __( 'Tour type', 'tourfic' ); ?></h4>
-							<p><?php echo esc_html__( $tour_type,'tourfic' ) ?></p>
+							<h4 class="title"><?php echo __( 'Max People', 'tourfic' ); ?></h4>
+							<p><?php echo esc_html__( $max_person,'tourfic' ) ?></p>
 						</div>
 					</div>
 					<?php endif;?>
@@ -207,10 +195,10 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 							$term = get_term_by( 'id', $feature, 'tf_feature' );
 						
 						?>
-                           <div class="single_feature_box">
-								<img src="<?php echo $term_meta['fetures_icon']; ?>" alt="">
-								<p class="feature_list_title"><?php echo $term->name;  ?></p>
-                           </div>
+						<div class="single_feature_box">
+							<img src="<?php echo $term_meta['fetures_icon']; ?>" alt="">
+							<p class="feature_list_title"><?php echo $term->name;  ?></p>
+						</div>
 						<?php endforeach; ?>
 
 					</div>
@@ -377,7 +365,8 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 									'post_status' => 'publish',
 									'posts_per_page' => 8, 
 									'orderby' => 'title', 
-									'order' => 'ASC', 
+									'order' => 'ASC',
+									'post__not_in' => array( get_the_ID() ),
 								);
 								$tours = new WP_Query( $args );
 								while($tours->have_posts() ) : $tours->the_post();
@@ -400,7 +389,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 												</div>
 											</div>
 											<div class="tf-price">
-												<span>$1200</span>
+												<span><?php echo tf_tours_price_html();?></span>
 											</div>
 										</div>
 								</div>
