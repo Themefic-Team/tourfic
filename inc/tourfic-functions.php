@@ -173,7 +173,7 @@ function tourfic_get_review_form( ){
 	        //URL Field
 	        //'url' => '<p class="comment-form-url"><input type="text" id="url" name="url" placeholder="' . $comment_url .'"></input></p>',
 	        //Cookies
-	        'cookies' => '<input type="checkbox" required>' . $comment_cookies_1 . '<a href="' . get_privacy_policy_url() . '">' . $comment_cookies_2 . '</a>',
+	        'cookies' => '<input type="checkbox" required>' . $comment_cookies_1 . '<a href="' . get_privacy_policy_url() . '">' . $comment_cookies_2 . '</a></div>',
 	    ),
 	    // Change the title of send button
 	    'label_submit' => $comment_send,
@@ -188,7 +188,7 @@ function tourfic_get_review_form( ){
 	    //Cancel Reply Text
 	    'cancel_reply_link' => $comment_cancel,
 	    // Redefine your own textarea (the comment body).
-	    'comment_field' => $comment_meta.'<p class="comment-form-comment"><textarea id="comment" name="comment" aria-required="true" placeholder="' . $comment_body .'"></textarea></p>',
+	    'comment_field' => $comment_meta.'<div class="comment_form_fields"><p class="comment-form-comment"><textarea id="comment" name="comment" aria-required="true" placeholder="' . $comment_body .'"></textarea></p>',
 	    //Message Before Comment
 	    'comment_notes_before' => $comment_before,
 	    // Remove "Text or HTML to be displayed after the set of comment fields".
