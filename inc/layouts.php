@@ -411,34 +411,45 @@ function tf_tours_booking_form( $post_id ) {
     ?>
 	<div class="tf-tour-booking-wrap" data-min-seat="<?php echo $min_seat; ?>" data-max-seat="<?php echo $max_seat; ?>" data-fixed-check-in="<?php echo $fixed_check_in; ?>" data-fixed-check-out="<?php echo $fixed_check_out ?>">
 		<form class="tf_tours_booking">
-		<div class="tf_person-selection-wrap">
-			<div class="tf_person-selection-inner">
-				<div class="tf_person-selection">
+		<div class="tf_selectperson-wrap">
+		<div class="tf_input-inner">
+			<span class="tf_person-icon">
+				<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M16.5 6a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0zM18 6A6 6 0 1 0 6 6a6 6 0 0 0 12 0zM3 23.25a9 9 0 1 1 18 0 .75.75 0 0 0 1.5 0c0-5.799-4.701-10.5-10.5-10.5S1.5 17.451 1.5 23.25a.75.75 0 0 0 1.5 0z"></path></svg>			</span>
+			<div class="adults-text">1 Adults</div>
+			<div class="person-sep"></div>
+			<div class="child-text">0 Children</div>
+			<div class="person-sep"></div>
+			<div class="infant-text">0 Infant</div>
+		</div>
+		<div class="tf_acrselection-wrap" style="display: none;">
+			<div class="tf_acrselection-inner">
+				<div class="tf_acrselection">
 					<div class="acr-label">Adults</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-						<input type="number" name="adults" id="adults" min="1" value="1">
+							<input type="number" name="adults" id="adults" min="1" value="1">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
-				<div class="tf_person-selection">
-					<div class="acr-label">Childrens</div>
+				<div class="tf_acrselection">
+					<div class="acr-label">Children</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-						<input type="number" name="childrens" id="children" min="0" value="0">
+							<input type="number" name="childrens" id="children" min="0" value="0">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
-				<div class="tf_person-selection">
-					<div class="acr-label">Infants</div>
+				<div class="tf_acrselection">
+					<div class="acr-label">Infant</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-						<input type="number" name="infants" id="infant" min="0" value="0">
+							<input type="number" name="infants" id="infant" min="0" value="0">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 		<?php tourfic_booking_widget_field(
         array(
             'type'        => 'text',
@@ -449,9 +460,9 @@ function tf_tours_booking_form( $post_id ) {
             'required'    => 'true',
             'disabled'    => 'true',
             'class'       => 'tours-check-in-out',
-        )
-    );
-    ?>
+			)
+		);
+		?>
 			<div class="screen-reader-text">
 				<!-- Start form row -->
 				<?php tourfic_booking_widget_field(
@@ -469,17 +480,17 @@ function tf_tours_booking_form( $post_id ) {
 
 				<!-- Start form row -->
 				<?php tourfic_booking_widget_field(
-        array(
-            'type'        => 'text',
-            'svg_icon'    => 'calendar_today',
-            'name'        => 'check-out-date',
-            'placeholder' => 'Check-out date',
-            'required'    => 'true',
-            'disabled'    => 'true',
-            'label'       => 'Check-out date',
-        )
-    );
-    ?>
+					array(
+						'type'        => 'text',
+						'svg_icon'    => 'calendar_today',
+						'name'        => 'check-out-date',
+						'placeholder' => 'Check-out date',
+						'required'    => 'true',
+						'disabled'    => 'true',
+						'label'       => 'Check-out date',
+						)
+					);
+				?>
 			</div>
 	<?php echo tourfic_tours_booking_submit_button( "Book Now" ); ?>
 		</form>

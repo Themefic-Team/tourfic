@@ -401,7 +401,7 @@ function tourfic_booking_widget_field( $args ){
 
     if ( $type == 'select' ) {
 
-    	$output .= "<div class='tf_form-row'>";
+    	$output .= "<div class='tf_form-row $class'>";
 	    	$output .= "<label class='tf_label-row'>";
 	    		$output .= "<div class='tf_form-inner'>";
 	    		$output .= "<span class='icon'>";
@@ -586,7 +586,7 @@ function tourfic_tours_booking_submit_button( $label = null ){
 	foreach ( $booking_fields as $key ) {
 
 		$value = isset( $_GET[$key] ) ? $_GET[$key] : tourfic_getcookie( $key );
-
+		echo "<div class='tf-tours-booking-btn'>";
 		echo "<input type='hidden' placeholder='{$key}' name='{$key}' value='{$value}'>";
 	}
 
@@ -594,6 +594,7 @@ function tourfic_tours_booking_submit_button( $label = null ){
 	
 	<input type="hidden" name="tour_id" value="<?php echo get_the_ID(); ?>">
 	<button class="tf_button" type="submit"><?php esc_html_e( $label ); ?></button>
+</div>
 	<?php
 }
 
