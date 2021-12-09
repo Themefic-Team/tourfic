@@ -399,17 +399,20 @@ function tf_tours_booking_form( $post_id ) {
     $type 					= $meta['type'];
     $custom_availability 	= $meta['custom_availability'];
     if ( $type == 'fixed' ) {
-        $fixed_check_in 	= $meta['fixed_availability']['check_in'] ? $meta['fixed_availability']['check_in'] : null;
-        $fixed_check_out 	= $meta['fixed_availability']['check_out'] ? $meta['fixed_availability']['check_out'] : null;
+        $check_in 	= $meta['fixed_availability']['check_in'] ? $meta['fixed_availability']['check_in'] : null;
+        $check_out 	= $meta['fixed_availability']['check_out'] ? $meta['fixed_availability']['check_out'] : null;
         $min_seat 			= $meta['fixed_availability']['min_seat'] ? $meta['fixed_availability']['min_seat'] : null;
         $max_seat 			= $meta['fixed_availability']['max_seat'] ? $meta['fixed_availability']['max_seat'] : null;
         ob_start();
-    } elseif ( $type == "continuous" && $custom_availability == 'yes' ) {
+    } else if ( $type == "continuous" && $custom_availability == 'yes' ) {
         $min_seat = $meta['continuous_availability'][0]['min_seat'] ? $meta['continuous_availability'][0]['min_seat'] : null;
         $max_seat = $meta['continuous_availability'][0]['max_seat'] ? $meta['continuous_availability'][0]['max_seat'] : null;
-    }
+    }else{
+		$check_in = $meta['continuous_availability'][0]['check_in'] ? $meta['continuous_availability'][0]['check_in'] : null;
+		echo $check_in;
+	}
     ?>
-	<div class="tf-tour-booking-wrap" data-min-seat="<?php echo $min_seat; ?>" data-max-seat="<?php echo $max_seat; ?>" data-fixed-check-in="<?php echo $fixed_check_in; ?>" data-fixed-check-out="<?php echo $fixed_check_out ?>">
+	<div class="tf-tour-booking-wrap" data-min-seat="<?php echo $min_seat; ?>" data-max-seat="<?php echo $max_seat; ?>" data-fixed-check-in="<?php echo $check_in; ?>" data-fixed-check-out="<?php echo $check_out ?>">
 		<form class="tf_tours_booking">
 		<div class="tf_selectperson-wrap">
 		<div class="tf_input-inner">

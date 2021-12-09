@@ -357,3 +357,6 @@
     position: inherit;
     top: inherit
 }
+strong.tf-pro {
+    color: red;
+}

@@ -1,4 +1,7 @@
 
+.tf-tours_gallery-wrap {
+    position: relative;
+}
 .tf-tour-booking-wrap {
     font-weight: 700;
     border-radius: 10px;
@@ -13,7 +16,11 @@
     /* Shadow 2 */
     box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
     height: 100px;
-
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 32%;
+    width: 70%;
     .tf_selectperson-wrap{
         width: 40%;
         color: #152B47;

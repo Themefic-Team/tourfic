@@ -150,27 +150,27 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 			<div class="tf_row">
 				<div class="tf-tours-content">
 				<div class="tf_tours-content_wrapper">
-						<div class="tf_tours-content_wrapper_inner">
-							<?php if( $additional_information ): ?>
-							<!-- Start highlights content -->
-							<div class="tf_contents tf-tours-highlights">
-								<div class="highlights-title">
-									<h4 class="tf-tours_section_title"><?php esc_html_e( 'Highlights', 'tourfic' ); ?></h4>
-								</div>
-								<?php _e( $additional_information, 'tourfic' ); ?>
+					<div class="tf_tours-content_wrapper_inner">
+						<?php if( $additional_information ): ?>
+						<!-- Start highlights content -->
+						<div class="tf_contents tf-tours-highlights">
+							<div class="highlights-title">
+								<h4 class="tf-tours_section_title"><?php esc_html_e( 'Highlights', 'tourfic' ); ?></h4>
 							</div>
-							<!-- End highlights content -->
-							<?php endif; ?>
-
-							<!-- Start content -->
-							<div class="tf_contents">
-								<div class="tf-tours-listing-title">
-									<h4 class="tf-tours_section_title"><?php esc_html_e( 'Listing Description', 'tourfic' ); ?></h4>
-								</div>
-								<?php the_content(); ?>
-							</div>
-							<!-- End content -->
+							<?php _e( $additional_information, 'tourfic' ); ?>
 						</div>
+						<!-- End highlights content -->
+						<?php endif; ?>
+
+						<!-- Start content -->
+						<div class="tf_contents">
+							<div class="tf-tours-listing-title">
+								<h4 class="tf-tours_section_title"><?php esc_html_e( 'Listing Description', 'tourfic' ); ?></h4>
+							</div>
+							<?php the_content(); ?>
+						</div>
+						<!-- End content -->
+					</div>
 					</div>
 				</div>
 			</div>
@@ -296,7 +296,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				<div class="tf-tours-content">
 					<div class="tf_map_section">
 						<div class="tf_map">
-						<iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1891144.1036137978!2d90.26962864671933!3d22.21575206911091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka%2C%20Bangladesh!3m2!1d23.810332!2d90.4125181!4m5!1s0x30ae2363dee2d61b%3A0xfb3463713589d312!2sSt.%20Martin&#39;s%20Island%2C%20Bangladesh!3m2!1d20.6237016!2d92.3233948!5e0!3m2!1sen!2sus!4v1637065617200!5m2!1sen!2sus" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+						<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr($location); ?>&hl=es&z=14&amp;output=embed" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 						</div>
 					</div>
 				</div>
@@ -376,7 +376,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 								<div class="tf-tourbox-info">
 										<div class="left-info">
 											<h3 class="tf-tour-title"><?php the_title(); ?></h3>
-											<p class="tf-location"><?php echo __( 'Indonesia','tourfic' ) ?></p>
+											<p class="tf-location"><?php echo __( $location,'tourfic' ) ?></p>
 										</div>
 										<div class="right-info">
 											<div class="tf-rating">

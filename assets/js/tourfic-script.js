@@ -169,17 +169,23 @@
             $('.checkout-date-text').text(end.format(dateFormat));
         });
 
+        //Get continuous check in out date 
+        var continuousDate = $('.tf_tours-single-layout').data('continuous-array');
+        var continuousCheckIn = continuousDate[0].check_in;
+        var continuousCheckOut = continuousDate[1].check_out;
+        console.log(continuousCheckOut);
+       
         var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
         var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
         if (fixedCheckIn) {
             fixedCheckIn = new Date(fixedCheckIn);
         } else {
-            fixedCheckIn = false;
+            fixedCheckIn = new Date( continuousCheckIn );
         }
         if (fixedCheckOut) {
             fixedCheckOut = new Date(fixedCheckOut);
         } else {
-            fixedCheckOut = false;
+            fixedCheckOut =  new Date(continuousCheckOut);
         }
 
         
@@ -191,8 +197,8 @@
                 "separator": " - ",
                 "firstDay": 1
             },
-            minDate: fixedCheckIn,
-            maxDate: fixedCheckOut,
+            minDate: dateToday,
+            maxDate: continuousCheckOut,
             autoApply: true,
         }, function (start, end, label) {
             checkin_input.val(start.format(dateFormat));
