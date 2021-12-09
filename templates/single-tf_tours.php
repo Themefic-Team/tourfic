@@ -21,6 +21,7 @@ $external_booking = $meta['external_booking'] ? $meta['external_booking'] : fals
 $external_booking_link = $meta['external_booking_link'] ? $meta['external_booking_link'] : null;
 $min_people = $meta['min_people'] ? $meta['min_people'] : null;
 $min_people = $meta['max_people'] ? $meta['max_people'] : null;
+$max_person = $meta['max_people'] ? $meta['max_people'] : null;
 $email = $meta['email'] ? $meta['email'] : null;
 $phone = $meta['phone'] ? $meta['phone'] : null;
 $website = $meta['website'] ? $meta['website'] : null;
@@ -29,20 +30,7 @@ $faqs = $meta['faqs'] ? $meta['faqs'] : null;
 $inc = $meta['inc'] ? $meta['inc'] : null;
 $exc = $meta['exc'] ? $meta['exc'] : null;
 $itineraries = $meta['itinerary'] ? $meta['itinerary'] : null;
-$pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
-$tour_type = $meta['type'] ? $meta['type'] : null;
-if( $pricing_rule == 'group'){
-	$price = $meta['group_price'] ? $meta['group_price'] : null;
-}else{
-	$price = $meta['adult_price'] ? $meta['adult_price'] : null;
-}
-$discount_type = $meta['discount_type'] ? $meta['discount_type'] : null;
-$discounted_price = $meta['discount_price'] ? $meta['discount_price'] : NULL;
-if( $discount_type == 'percent' ){
-	$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 ); 
-}elseif( $discount_type == 'fixed'){
-	$sale_price = number_format( ( $price - $discounted_price ),1 );
-}
+
 //continuous tour
 $continuous_availability = $meta['continuous_availability'];
 $continuous_availability = json_encode($continuous_availability);
@@ -66,6 +54,7 @@ $tf_overall_rate['review'] = null;
 				<!-- Start gallery -->
 				<div class="tf-tours_gallery-wrap">
 					<?php echo tourfic_gallery_slider( false, $post->ID, $gallery); ?>
+					<?php echo tf_tours_booking_form( $post->ID ); ?>
 				</div>
 				<!-- End gallery-->
 				<!-- Start title area -->
@@ -81,7 +70,7 @@ $tf_overall_rate['review'] = null;
 					<div class="tf-tours-title-right">
 						<div class="tf-tours-price">
 							<span><?php echo __('Price','tourfic') ?></span>
-							<?php echo tf_tours_price_html( $price, $sale_price,$discounted_price );?>
+							<?php echo tf_tours_price_html();?>
 						</div>
 						<div class="tf-tours-ratings">
 							<div class="star">
@@ -103,56 +92,58 @@ $tf_overall_rate['review'] = null;
 	</div>
 
 	<!--Information section start-->
-	<div class="tf_container">
-		<div class="tf_row">
-			<div class="tf-tours-content">
-				<div class="tf-tours-informations">
-					<?php if( $tour_duration ): ?>
-					<div class="item">
-						<div class="icon">
-							<i class="far fa-clock"></i>
+	<div class="tf-tours_info_feature_area_wrapper tf-tours_section">
+		<div class="tf_container">
+			<div class="tf_row">
+				<div class="tf-tours-content">
+					<div class="tf-tours-informations">
+						<?php if( $tour_duration ): ?>
+						<div class="item">
+							<div class="icon">
+								<i class="far fa-clock"></i>
+							</div>
+							<div class="info">
+								<h4 class="title"><?php echo __( 'Duration', 'tourfic' ); ?></h4>
+								<p><?php echo esc_html__( $tour_duration,'tourfic' ) ?></p>
+							</div>
 						</div>
-						<div class="info">
-							<h4 class="title"><?php echo __( 'Duration', 'tourfic' ); ?></h4>
-							<p><?php echo esc_html__( $tour_duration,'tourfic' ) ?></p>
+						<?php endif;?>
+						<?php if( $max_person ): ?>
+						<div class="item">
+							<div class="icon">
+								<i class="fas fa-globe"></i>
+							</div>
+							<div class="info">
+								<h4 class="title"><?php echo __( 'Max People', 'tourfic' ); ?></h4>
+								<p><?php echo esc_html__( $max_person,'tourfic' ) ?></p>
+							</div>
 						</div>
+						<?php endif;?>
+						<?php if( $group_size ): ?>
+						<div class="item">
+							<div class="icon">
+								<i class="fas fa-users"></i>
+							</div>
+							<div class="info">
+								<h4 class="title"><?php echo __( 'Group Size', 'tourfic' ); ?></h4>
+								<p><?php echo esc_html__( $group_size,'tourfic' ) ?></p>
+							</div>
+						</div>
+						<?php endif;?>
+						<?php if( $language ): ?>
+						<div class="item">
+							<div class="icon">
+								<i class="fas fa-language"></i>
+							</div>
+							<div class="info">
+								<h4 class="title"><?php echo __( 'Language', 'tourfic' ); ?></h4>
+								<p><?php echo esc_html__( $language,'tourfic' ) ?></p>
+							</div>
+						</div>
+						<?php endif;?>
 					</div>
-					<?php endif;?>
-					<?php if( $tour_type ): ?>
-					<div class="item">
-						<div class="icon">
-							<i class="fas fa-globe"></i>
-						</div>
-						<div class="info">
-							<h4 class="title"><?php echo __( 'Tour type', 'tourfic' ); ?></h4>
-							<p><?php echo esc_html__( $tour_type,'tourfic' ) ?></p>
-						</div>
-					</div>
-					<?php endif;?>
-					<?php if( $group_size ): ?>
-					<div class="item">
-						<div class="icon">
-							<i class="fas fa-users"></i>
-						</div>
-						<div class="info">
-							<h4 class="title"><?php echo __( 'Group Size', 'tourfic' ); ?></h4>
-							<p><?php echo esc_html__( $group_size,'tourfic' ) ?></p>
-						</div>
-					</div>
-					<?php endif;?>
-					<?php if( $language ): ?>
-					<div class="item">
-						<div class="icon">
-							<i class="fas fa-language"></i>
-						</div>
-						<div class="info">
-							<h4 class="title"><?php echo __( 'Language', 'tourfic' ); ?></h4>
-							<p><?php echo esc_html__( $language,'tourfic' ) ?></p>
-						</div>
-					</div>
-					<?php endif;?>
+					<?php // echo tf_tours_booking_form($post->ID);?>
 				</div>
-				<?php // echo tf_tours_booking_form($post->ID);?>
 			</div>
 		</div>
 	</div>
@@ -162,29 +153,29 @@ $tf_overall_rate['review'] = null;
 	<div class="tf-tours_content_area_wrapper tf-tours_section">
 		<div class="tf_container">
 			<div class="tf_row">
-				<div class="tf_content">
+				<div class="tf-tours-content">
 				<div class="tf_tours-content_wrapper">
-						<div class="tf_tours-content_wrapper_inner">
-							<?php if( $additional_information ): ?>
-							<!-- Start highlights content -->
-							<div class="tf_contents tf-tours-highlights">
-								<div class="highlights-title">
-									<h4 class="tf-tours_section_title"><?php esc_html_e( 'Highlights', 'tourfic' ); ?></h4>
-								</div>
-								<?php _e( $additional_information, 'tourfic' ); ?>
+					<div class="tf_tours-content_wrapper_inner">
+						<?php if( $additional_information ): ?>
+						<!-- Start highlights content -->
+						<div class="tf_contents tf-tours-highlights">
+							<div class="highlights-title">
+								<h4 class="tf-tours_section_title"><?php esc_html_e( 'Highlights', 'tourfic' ); ?></h4>
 							</div>
-							<!-- End highlights content -->
-							<?php endif; ?>
-
-							<!-- Start content -->
-							<div class="tf_contents">
-								<div class="tf-tours-listing-title">
-									<h4 class="tf-tours_section_title"><?php esc_html_e( 'Listing Description', 'tourfic' ); ?></h4>
-								</div>
-								<?php the_content(); ?>
-							</div>
-							<!-- End content -->
+							<?php _e( $additional_information, 'tourfic' ); ?>
 						</div>
+						<!-- End highlights content -->
+						<?php endif; ?>
+
+						<!-- Start content -->
+						<div class="tf_contents">
+							<div class="tf-tours-listing-title">
+								<h4 class="tf-tours_section_title"><?php esc_html_e( 'Listing Description', 'tourfic' ); ?></h4>
+							</div>
+							<?php the_content(); ?>
+						</div>
+						<!-- End content -->
+					</div>
 					</div>
 				</div>
 			</div>
@@ -203,18 +194,18 @@ $tf_overall_rate['review'] = null;
 							<h4 class="tf-tours_section_title"><?php esc_html_e( 'Features', 'tourfic' ); ?></h4>
 						</div>
 
-						<div class="tf_feature_list">
-							<?php 
-							foreach( $feature_meta as $feature ):
-								$term_meta = get_term_meta( $feature, 'feature_meta', true );
-								$term = get_term_by( 'id', $feature, 'tf_feature' );
-							
-							?>
-							<div class="single_feature_box">
-									<img src="<?php echo $term_meta['fetures_icon']; ?>" alt="">
-									<p class="feature_list_title"><?php echo $term->name;  ?></p>
-							</div>
-							<?php endforeach; ?>
+					<div class="tf_feature_list">
+						<?php 
+						foreach( $feature_meta as $feature ):
+							$term_meta = get_term_meta( $feature, 'feature_meta', true );
+							$term = get_term_by( 'id', $feature, 'tf_feature' );
+						
+						?>
+						<div class="single_feature_box">
+							<img src="<?php echo $term_meta['fetures_icon']; ?>" alt="">
+							<p class="feature_list_title"><?php echo $term->name;  ?></p>
+						</div>
+						<?php endforeach; ?>
 
 						</div>
 					</div>
@@ -230,7 +221,7 @@ $tf_overall_rate['review'] = null;
 	<div class="tf-tours_in_ex_area_wrapper tf-tours_section">
 		<div class="tf_container">
 			<div class="tf_row">
-				<div class="tf_content">
+				<div class="tf-tours-content">
 				<?php if( $inc || $exc ): ?>			
 					<div class="inc-exc-section">
 						<div class="inc-exc-content">
@@ -271,7 +262,7 @@ $tf_overall_rate['review'] = null;
 	<div class="tf-tours_itinerary_area_wrapper tf-tours_section">
 		<div class="tf_container">
 			<div class="tf_row">
-				<div class="tf_content">
+				<div class="tf-tours-content">
 				<?php if( $itineraries ): ?>
 					<div class="tf-itinerary">
 						<div class="itinerary-title">
@@ -309,10 +300,10 @@ $tf_overall_rate['review'] = null;
 	<div class="tf-tours_map_area_wrapper tf-tours_section">
 		<div class="tf_container">
 			<div class="tf_row">
-				<div class="tf_content">
+				<div class="tf-tours-content">
 					<div class="tf_map_section">
 						<div class="tf_map">
-						<iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1891144.1036137978!2d90.26962864671933!3d22.21575206911091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka%2C%20Bangladesh!3m2!1d23.810332!2d90.4125181!4m5!1s0x30ae2363dee2d61b%3A0xfb3463713589d312!2sSt.%20Martin&#39;s%20Island%2C%20Bangladesh!3m2!1d20.6237016!2d92.3233948!5e0!3m2!1sen!2sus!4v1637065617200!5m2!1sen!2sus" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+						<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr($location); ?>&hl=es&z=14&amp;output=embed" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 						</div>
 					</div>
 				</div>
@@ -326,7 +317,7 @@ $tf_overall_rate['review'] = null;
 		<div class="tf_container">
 			<div class="tf_row">
 				<!-- Start Content -->
-				<div class="tf_content">
+				<div class="tf-tours-content">
 				<?php if( $faqs ): ?>
 						<div class="faqs tf-tours_faq ">
 							<div class="highlights-title">
@@ -365,7 +356,7 @@ $tf_overall_rate['review'] = null;
 		<div class="tf_container">
 			<div class="tf_row">
 				<!-- Start Content -->
-				<div class="tf_content">
+				<div class="tf-tours-content">
 					<!-- Start tourbox Content -->
 					<div class="tf-tourbox-section">
 						<div class="tf-tourbox-title">
@@ -381,7 +372,8 @@ $tf_overall_rate['review'] = null;
 									'post_status' => 'publish',
 									'posts_per_page' => 8, 
 									'orderby' => 'title', 
-									'order' => 'ASC', 
+									'order' => 'ASC',
+									'post__not_in' => array( get_the_ID() ),
 								);
 								$tours = new WP_Query( $args );
 								while($tours->have_posts() ) : $tours->the_post();
@@ -391,7 +383,7 @@ $tf_overall_rate['review'] = null;
 								<div class="tf-tourbox-info">
 										<div class="left-info">
 											<h3 class="tf-tour-title"><?php the_title(); ?></h3>
-											<p class="tf-location"><?php echo __( 'Indonesia','tourfic' ) ?></p>
+											<p class="tf-location"><?php echo __( $location,'tourfic' ) ?></p>
 										</div>
 										<div class="right-info">
 											<div class="tf-rating">
@@ -404,7 +396,7 @@ $tf_overall_rate['review'] = null;
 												</div>
 											</div>
 											<div class="tf-price">
-												<span>$1200</span>
+												<span><?php echo tf_tours_price_html();?></span>
 											</div>
 										</div>
 								</div>
@@ -493,7 +485,7 @@ $tf_overall_rate['review'] = null;
 		<div class="tf_container">
 			<div class="tf_row">
 				<!-- Start Content -->
-				<div class="tf_content">
+				<div class="tf-tours-content">
 					<!-- Start TOC Content -->
 					<div class="highlights-title">
 							<h4><?php esc_html_e( 'Terms and Conditions', 'tourfic' ); ?></h4>
@@ -511,6 +503,7 @@ $tf_overall_rate['review'] = null;
 	</div>
 	<?php endif; ?>
     <!--End TOC section-->
+
 
 
 	<?php do_action( 'tf_after_container' ); ?>

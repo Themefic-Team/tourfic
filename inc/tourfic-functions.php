@@ -586,7 +586,7 @@ function tourfic_tours_booking_submit_button( $label = null ){
 	foreach ( $booking_fields as $key ) {
 
 		$value = isset( $_GET[$key] ) ? $_GET[$key] : tourfic_getcookie( $key );
-
+		echo "<div class='tf-tours-booking-btn'>";
 		echo "<input type='hidden' placeholder='{$key}' name='{$key}' value='{$value}'>";
 	}
 
@@ -594,6 +594,7 @@ function tourfic_tours_booking_submit_button( $label = null ){
 	
 	<input type="hidden" name="tour_id" value="<?php echo get_the_ID(); ?>">
 	<button class="tf_button" type="submit"><?php esc_html_e( $label ); ?></button>
+</div>
 	<?php
 }
 
@@ -633,13 +634,30 @@ function tourfic_booking_set_search_result( $url ){
 add_filter( 'tf_booking_search_action', 'tourfic_booking_set_search_result' );
 
 // Tours price with html format
-function tf_tours_price_html( $price = null, $sale_price = null,$discounted_price = null ) {
+function tf_tours_price_html() {
+	$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+	$pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
+	$tour_type = $meta['type'] ? $meta['type'] : null;
+	if( $pricing_rule == 'group'){
+		$price = $meta['group_price'] ? $meta['group_price'] : 0;
+	}else{
+		$price = $meta['adult_price'] ? $meta['adult_price'] : null;
+	}
+	$discount_type = $meta['discount_type'] ? $meta['discount_type'] : null;
+	$discounted_price = $meta['discount_price'] ? $meta['discount_price'] : NULL;
+	if( $discount_type == 'percent' ){
+		$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 ); 
+	}elseif( $discount_type == 'fixed'){
+		$sale_price = number_format( ( $price - $discounted_price ),1 );
+	}else if( $discount_type == 'none' ){
+		$sale_price = number_format( $price, 1 );
+	}
 	if ( !$price ) {
 		return;
 	}
 	ob_start();
 	?>
-	<?php if ( $discounted_price > 0 ) { ?>
+	<?php if (  $sale_price < $price && $discounted_price > 0 && $discount_type != 'none' ) { ?>
 		<span class="tf-price"><del><?php echo wc_price( $price ); ?></del></span>
 		<span class="tf-price"><?php echo wc_price( $sale_price ); ?></span>
 	<?php } else { ?>
@@ -1138,7 +1156,8 @@ function tourfic_sidebar_widgets_init() {
     	'Tourfic_TourFilter',
     	'Tourfic_Show_On_Map',
     	'Tourfic_Ask_Question',
-    	'Tourfic_Similar_Tours'
+    	'Tourfic_Similar_Tours',
+		'Tourfic_Tour_FeatureFilter'
     );
     foreach ($custom_widgets as $key => $widget) {
     	register_widget( $widget );
@@ -1430,7 +1449,6 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 	</div>
 
 	<div class="tf_selectperson-wrap">
-
 		<div class="tf_input-inner">
 			<span class="tf_person-icon">
 				<?php echo tourfic_get_svg('person'); ?>
@@ -1441,7 +1459,6 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 			<div class="person-sep"></div>
 			<div class="infant-text">0 Infant</div>
 		</div>
-
 		<div class="tf_acrselection-wrap">
 			<div class="tf_acrselection-inner">
 				<div class="tf_acrselection">
@@ -1470,7 +1487,6 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 				</div>
 			</div>
 		</div>
-
 	</div>
 	
 	<div class="tf_selectdate-wrap">

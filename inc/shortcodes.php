@@ -364,6 +364,7 @@ function tourfic_trigger_filter_ajax(){
 
     $search = ( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
     $filters = ( $_POST['filters'] ) ? explode(',', sanitize_text_field( $_POST['filters'] )) : null;
+    $features = ( $_POST['features'] ) ? explode(',', sanitize_text_field( $_POST['features'] )) : null;
     $posttype = $_POST['type']  ? sanitize_text_field( $_POST['type'] ): 'tourfic';
     $taxonomy = $posttype == 'tf_tours' ? $taxonomy = 'tour_destination' : 'destination';
 
@@ -422,6 +423,29 @@ function tourfic_trigger_filter_ajax(){
             foreach ($filters as $key => $term_id) {
                 $args['tax_query']['tf_filters'][] = array(
                     'taxonomy' => 'tf_filters',
+                    'terms'    => array($term_id),
+                );
+            }
+
+        }
+
+    }
+    
+    //Query for the features filter of tours
+    if ( $features ) {
+        $args['tax_query']['relation'] = $relation;
+
+        if ( $filter_relation == "OR" ) {
+            $args['tax_query'][] = array(
+                'taxonomy' => 'tf_feature',
+                'terms'    => $features,
+            );
+        } else {
+            $args['tax_query']['tf_feature']['relation'] = 'AND';
+
+            foreach ($filters as $key => $term_id) {
+                $args['tax_query']['tf_feature'][] = array(
+                    'taxonomy' => 'tf_feature',
                     'terms'    => array($term_id),
                 );
             }

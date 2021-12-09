@@ -47,6 +47,15 @@
             nextArrow: '<button class="tf-hero-slider-arrow slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>'
         });
 
+        $('.tf-tourbox').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            arrows: true,
+            fade: false,
+            prevArrow: '<button class="tf-tourbox-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>',
+            nextArrow: '<button class="tf-tourbox-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>'
+        });
+
         $('.tf-custom-review-slider-area').slick({
             arrows: true,
             fade: false,
@@ -56,11 +65,11 @@
         });
 
         
-        $(".tf-hero-btm-icon").click(function () {
+        $(".tf-hero-btm-icon").on('click',function () {
             $(".tf-hero-slider-fixed").addClass("show");
         });
 
-        $(".tf-hero-slider-cross-icon").click(function () {
+        $(".tf-hero-slider-cross-icon").on('click',function () {
             $(".tf-hero-slider-fixed").removeClass("show");
         });
 
@@ -160,17 +169,23 @@
             $('.checkout-date-text').text(end.format(dateFormat));
         });
 
+        //Get continuous check in out date 
+        var continuousDate = $('.tf_tours-single-layout').data('continuous-array');
+        var continuousCheckIn = continuousDate[0].check_in;
+        var continuousCheckOut = continuousDate[1].check_out;
+        console.log(continuousCheckOut);
+       
         var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
         var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
         if (fixedCheckIn) {
             fixedCheckIn = new Date(fixedCheckIn);
         } else {
-            fixedCheckIn = false;
+            fixedCheckIn = new Date( continuousCheckIn );
         }
         if (fixedCheckOut) {
             fixedCheckOut = new Date(fixedCheckOut);
         } else {
-            fixedCheckOut = false;
+            fixedCheckOut =  new Date(continuousCheckOut);
         }
 
         
@@ -182,16 +197,26 @@
                 "separator": " - ",
                 "firstDay": 1
             },
-            minDate: fixedCheckIn,
-            maxDate: fixedCheckOut,
+            minDate: dateToday,
+            maxDate: continuousCheckOut,
             autoApply: true,
         }, function (start, end, label) {
             checkin_input.val(start.format(dateFormat));
             $('.checkin-date-text').text(start.format(dateFormat));
-
+            $('#check-in-date').val(start.format(dateFormat));
+            $('#check-out-date').val(start.format(dateFormat));
             checkout_input.val(end.format(dateFormat));
             $('.checkout-date-text').text(end.format(dateFormat));
         });
+
+        //position fixed of sticky tour booking form
+        $(window).scroll(function(){
+            var sticky = $('.tf-tour-booking-wrap'),
+                scroll = $(window).scrollTop();
+          
+            if (scroll >= 800) sticky.addClass('tf-tours-fixed');
+            else sticky.removeClass('tf-tours-fixed');
+          });
 
         // Number Decrement
         $('.acr-dec').on('click', function (e) {
@@ -235,6 +260,18 @@
 
         });
 
+         // Infant change trigger
+         $(document).on('change', '#infant', function () {
+            var thisVal = $(this).val();
+
+            if (thisVal > 1) {
+                $('.infant-text').text(thisVal + " Infants");
+            } else {
+                $('.infant-text').text(thisVal + " Infant");
+            }
+
+        });
+
         // Room change trigger
         $(document).on('change', '#room', function () {
             var thisVal = $(this).val();
@@ -247,7 +284,7 @@
         });
 
         // Adult, Child, Room Selection toggle
-        $(document).on('click', '.tf_selectperson-wrap .tf_input-inner', function () {
+        $(document).on('click', '.tf_selectperson-wrap .tf_input-inner,.tf_person-selection-wrap .tf_person-selection-inner', function () {
             $('.tf_acrselection-wrap').slideToggle('fast');
         });
 
@@ -385,7 +422,7 @@
         // Change view
         
         var filter_xhr;
-        $(document).on('change', '[name*=tf_filters], #destination, #adults, #room, #children, #check-in-date, #check-out-date, #check-in-out-date', function () {
+        $(document).on('change', '[name*=tf_filters],[name*=tf_features], #destination, #adults, #room, #children, #check-in-date, #check-out-date, #check-in-out-date', function () {
             var dest = $('#destination').val();
             var adults = $('#adults').val();
             var room = $('#room').val();
@@ -403,6 +440,15 @@
             });
             var filters = filters.join();
 
+            var features = [];
+
+            $('[name*=tf_features]').each(function () {
+                if ($(this).is(':checked')) {
+                    features.push($(this).val());
+                }
+            });
+            var features = features.join();
+
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
             formData.append('type', posttype);
@@ -413,6 +459,7 @@
             formData.append('checkin', checkin);
             formData.append('checkout', checkout);
             formData.append('filters', filters);
+            formData.append('features', features);
 
             // abort previous request
             if (filter_xhr && filter_xhr.readyState != 4) {
@@ -449,10 +496,6 @@
                 },
 
             });
-
-            //console.log('/---------');
-            //console.log(dest, adults, room, children, checkin, checkout, filters);
-            //console.log('---------/');
 
         });
 
@@ -710,7 +753,7 @@
 
         //Ratings copy/move under gallery
         var avg_rating = $('.tf-overall-ratings .overall-rate').text();
-        $('.tf_title-area .reviews span').html(avg_rating);
+        $('.tf_tours-title-area .reviews span').html(avg_rating);
 
     });
 
