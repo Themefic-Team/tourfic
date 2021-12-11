@@ -35,6 +35,10 @@
 .tf-tour-booking-wrap.tf-tours-fixed{
     width: 50.5%;
     z-index: 10;
+    .tf_acrselection-wrap{
+        position: absolute;
+        top: -237px;
+    }
 } 
 .tf-tours-booking-btn{
     .tf_button {

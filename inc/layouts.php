@@ -78,7 +78,7 @@ function tourfic_archive_single() {
 /**
  * Tours Archive
  */
-function tf_tours_archive_single( $price,$sale_price,$discounted_price ) {
+function tf_tours_archive_single() {
 	$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
 	$featured = $meta['tour_as_featured'];
 	$feature_meta = $meta['tour_feature'];
@@ -135,7 +135,7 @@ function tf_tours_archive_single( $price,$sale_price,$discounted_price ) {
 						<!-- End features -->
 					</div>
 					<div class="tf-tour-price">
-						<?php echo tf_tours_price_html( $price,$sale_price,$discounted_price ); ?>
+						<?php echo tf_tours_price_html(); ?>
 					</div>
 				</div>
 				<!-- Tour details end -->

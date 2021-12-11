@@ -458,23 +458,8 @@ function tourfic_trigger_filter_ajax(){
     <?php if ( $loop->have_posts() ) : 
         while ( $loop->have_posts() ) : $loop->the_post(); 
             if( $posttype == 'tf_tours' ){
-                //Get all the price calculation
-                $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
-                $pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
-                if( $pricing_rule == 'group'){
-                    $price = $meta['group_price'] ? $meta['group_price'] : null;
-                }else{
-                    $price = $meta['adult_price'] ? $meta['adult_price'] : null;
-                }
-                $discount_type = $meta['discount_type'] ? $meta['discount_type'] : null;
-                $discounted_price = $meta['discount_price'] ? $meta['discount_price'] : NULL;
-                if( $discount_type == 'percent' ){
-                    $sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 ); 
-                }elseif( $discount_type == 'fixed'){
-                    $sale_price = number_format( ( $price - $discounted_price ),1 );
-                }
                 //include the tours search result and archive layout
-                tf_tours_archive_single( $price,$sale_price,$discounted_price );
+                tf_tours_archive_single();
             }else{
                 tourfic_archive_single();
             }  

@@ -14,7 +14,9 @@
     } 
     form#commentform {
         background: rgb(2 51 110 / 10%);
-        padding: 50px 100px;overflow:hidden;
+        padding: 50px 100px;
+        overflow:hidden;
+        margin-top: 30px;
     }
     .tf_comment-metas {
         background: #fafcfe;
@@ -47,6 +49,7 @@
         float: none;
         display: block;
         overflow: hidden;
+        margin-top: 15px;
     }
     .comment_form_fields textarea {
         border: unset!important;

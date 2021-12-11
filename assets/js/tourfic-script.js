@@ -171,9 +171,10 @@
 
         //Get continuous check in out date 
         var continuousDate = $('.tf_tours-single-layout').data('continuous-array');
-        var continuousCheckIn = continuousDate[0].check_in;
-        var continuousCheckOut = continuousDate[1].check_out;
-        console.log(continuousCheckOut);
+        if(continuousDate){
+            var continuousCheckIn = continuousDate[0].check_in;
+            var continuousCheckOut = continuousDate[1].check_out;
+        }
        
         var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
         var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
@@ -484,7 +485,6 @@
                 },
                 complete: function (data) {
                     $('.archive_ajax_result').unblock();
-                    console.log(posttype,dest);
                 },
                 success: function (data) {
                     $('.archive_ajax_result').unblock();
@@ -887,11 +887,17 @@ function tourfic_autocomplete(inp, arr) {
 
 var destinations = tf_params.destinations;
 var tour_destinations = tf_params.tour_destinations;
+let dest = document.getElementById("destination");
+let tourDest = document.getElementById("tour_destination");
 
-//Autocomplete for Hotel
-tourfic_autocomplete(document.getElementById("destination"), destinations);
-//Autocomplete for Tours
-tourfic_autocomplete(document.getElementById("tour_destination"), tour_destinations);
+if(dest){
+    //Autocomplete for Hotel
+    tourfic_autocomplete(dest, destinations);
+}
+if(tourDest){
+    //Autocomplete for Tours
+    tourfic_autocomplete(tourDest, tour_destinations);
+}
 
 /**
  * Searchbox widgets tab scripts

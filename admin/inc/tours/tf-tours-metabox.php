@@ -37,8 +37,6 @@ if ( class_exists( 'CSF' ) ) {
                 'title'   => __( 'Booking type', 'tourfic' ),
                 'options' => array(
                     'instant'         => __( 'Instant Booking', 'tourfic' ),
-                    'enquire'         => __( 'Enquire Booking', 'tourfic' ),
-                    'instant_enquire' => __( 'Instant and Enquire Booking', 'tourfic' ),
                 ),
             ),
             array(
