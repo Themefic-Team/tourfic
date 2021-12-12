@@ -648,6 +648,11 @@ div#tf-booking-search-tabs {
   padding: 0 11px;
 }
 
+button.tf-tablinks.active {
+  background: #00698f;
+  color: #f1f1f1;
+}
+
 .tf_room-type {
   margin-top: 40px;
 }
@@ -1895,29 +1900,20 @@ button.tf-hero-slider-arrow.next-arrow {
   padding: 50px 70px;
   background: #FAFCFE;
 }
-
-.tf-single-itinerary_inner {
-  background: #fafcfe;
-  box-shadow: 0 5px 10px rgba(0, 44, 102, 0.2) !important;
-  width: 100%;
-  border-radius: 0px 5px 5px 0px;
-  padding: 37px 30px;
-}
-
-.tf-single-itinerary {
+.tf-itinerary .tf-single-itinerary {
   margin: 0;
   padding-left: 100px;
   position: relative;
   margin-bottom: 30px;
 }
-
-.itinerary-head {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
+.tf-itinerary .tf-single-itinerary .tf-single-itinerary_inner {
+  background: #fafcfe;
+  box-shadow: 0 5px 10px rgba(0, 44, 102, 0.2) !important;
+  width: 100%;
+  border-radius: 0px 5px 5px 0px;
+  padding: 30px 30px;
 }
-
-.tf-single-itinerary span.time {
+.tf-itinerary .tf-single-itinerary span.time {
   width: 100px;
   height: 100px;
   background: #002C66;
@@ -1925,6 +1921,12 @@ button.tf-hero-slider-arrow.next-arrow {
   justify-content: center;
   align-items: center;
   color: #f7f7f7;
+}
+
+.itinerary-head {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .itinerary-title h4 {
@@ -2475,6 +2477,7 @@ button.tf-cr-slider-arrow.prev-arrow {
   background: rgba(2, 51, 110, 0.1);
   padding: 50px 100px;
   overflow: hidden;
+  margin-top: 30px;
 }
 .tf-tours_review_area_wrapper .tf_comment-metas {
   background: #fafcfe;
@@ -2507,6 +2510,7 @@ button.tf-cr-slider-arrow.prev-arrow {
   float: none;
   display: block;
   overflow: hidden;
+  margin-top: 15px;
 }
 .tf-tours_review_area_wrapper .comment_form_fields textarea {
   border: unset !important;
@@ -2560,6 +2564,10 @@ button.tf-cr-slider-arrow.prev-arrow {
   width: 50.5%;
   z-index: 10;
 }
+.tf-tour-booking-wrap.tf-tours-fixed .tf_acrselection-wrap {
+  position: absolute;
+  top: -237px;
+}
 
 .tf-tours-booking-btn .tf_button {
   background: #002C66;
@@ -2586,6 +2594,90 @@ form.tf_tours_booking .tf_selectperson-wrap {
   right: 0;
 }
 
+/* Medium device */
+/* Mobile devices */
+@media (max-width: 767px) {
+  .tf_tours-title-area {
+    padding: 0 10px;
+  }
+
+  .tf-tour-booking-wrap {
+    height: auto;
+    width: 95%;
+  }
+  .tf-tour-booking-wrap .tf_tours_booking {
+    display: block;
+  }
+  .tf-tour-booking-wrap .tf_tours_booking .tf_selectperson-wrap {
+    width: 100%;
+  }
+
+  .tourfic-wrap.default-style button[type=submit] {
+    width: 100%;
+  }
+
+  .tf_selectdate-wrap, .tf_selectperson-wrap {
+    padding: 14px 0px !important;
+  }
+
+  .tf-tours-informations {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
+  }
+  .tf-tours-informations .item {
+    margin-bottom: 15px;
+  }
+
+  .tf-itinerary {
+    padding: 50px 15px;
+  }
+  .tf-itinerary .tf-single-itinerary {
+    margin: 0 0 15px;
+    padding-left: unset;
+  }
+  .tf-itinerary .tf-single-itinerary .tf-single-itinerary_inner {
+    padding: 4px;
+  }
+  .tf-itinerary .tf-single-itinerary .tf-single-itinerary_inner .itinerary-head {
+    padding-left: 100px;
+  }
+  .tf-itinerary .tf-single-itinerary span.time {
+    height: 47px;
+  }
+
+  .faqs.tf-tours_faq {
+    background: #fafcfe;
+    padding: 50px 25px;
+  }
+
+  .tf-tour-booking-wrap.tf-tours-fixed {
+    width: 90.5%;
+    z-index: 99999;
+  }
+
+  .tf-tours_review_area_wrapper form#commentform {
+    padding: 10px 0px;
+  }
+
+  .tf-tours_review_area_wrapper .tf_comment-metas {
+    padding: 8px;
+    width: 100%;
+  }
+
+  .tf-tours_review_area_wrapper .comment_form_fields {
+    width: 100%;
+  }
+
+  .tf-custom-review-section-wrapper {
+    padding: 15px;
+  }
+
+  .tf-tours_features_area_wrapper.tf-tours_section {
+    padding: 0 15px;
+  }
+}
 /*Archive page*/
 .archive_ajax_result .price-per-night {
   line-height: 1;

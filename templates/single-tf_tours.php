@@ -30,7 +30,7 @@ $faqs = $meta['faqs'] ? $meta['faqs'] : null;
 $inc = $meta['inc'] ? $meta['inc'] : null;
 $exc = $meta['exc'] ? $meta['exc'] : null;
 $itineraries = $meta['itinerary'] ? $meta['itinerary'] : null;
-
+$custom_availability = $meta['custom_availability'] ? $meta['custom_availability'] : null;
 //continuous tour
 $continuous_availability = $meta['continuous_availability'];
 $continuous_availability = json_encode($continuous_availability);
@@ -46,7 +46,7 @@ $tf_overall_rate = array();
 $tf_overall_rate['review'] = null;
 
 ?>
-<div class="tourfic-wrap tf_tours-single-layout  tf-tours_nosidebar_layout default-style" data-fullwidth="true" data-continuous-array='<?php echo $continuous_availability;?>'>
+<div class="tourfic-wrap tf_tours-single-layout  tf-tours_nosidebar_layout default-style" data-custom-availability="<?php echo $custom_availability; ?>" data-fullwidth="true" data-continuous-array='<?php echo $continuous_availability;?>'>
 	<?php do_action( 'tf_before_container' ); ?>
 	<div class="tf_container">
 		<div class="tf_row">

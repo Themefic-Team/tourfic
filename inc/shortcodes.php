@@ -207,7 +207,7 @@ function tourfic_search_shortcode( $atts, $content = null ){
     <div id="tf-booking-search-tabs">
         <!-- Start Booking widget -->
         <div class="tf-booking-form-tab">
-            <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-hotel-booking-form')">Hotel</button>
+            <button class="tf-tablinks active" onclick="tfOpenForm(event, 'tf-hotel-booking-form')">Hotel</button>
             <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-tour-booking-form')">Tours</button>
         </div>
         <div id="tf-hotel-booking-form" class="tf-tabcontent">
@@ -280,7 +280,6 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
         // Define Featured Category IDs first
         $destinations_ids = array();
        
-
         // Creating loop to insert IDs to array.
         foreach( $destinations as $cat ) {
             $destinations_ids[] = $cat->term_id;

@@ -53,7 +53,16 @@
             arrows: true,
             fade: false,
             prevArrow: '<button class="tf-tourbox-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>',
-            nextArrow: '<button class="tf-tourbox-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>'
+            nextArrow: '<button class="tf-tourbox-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>',
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    }
+                },
+            ],
         });
 
         $('.tf-custom-review-slider-area').slick({
@@ -61,7 +70,16 @@
             fade: false,
             slidesToShow: 3,
             prevArrow: '<button class="tf-cr-slider-arrow slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>',
-            nextArrow: '<button class="tf-cr-slider-arrow slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>'
+            nextArrow: '<button class="tf-cr-slider-arrow slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>',
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    }
+                },
+            ],
         });
 
         
@@ -171,9 +189,12 @@
 
         //Get continuous check in out date 
         var continuousDate = $('.tf_tours-single-layout').data('continuous-array');
+        let customAvailability =  $('.tf_tours-single-layout').data('custom-availability');
         if(continuousDate){
             var continuousCheckIn = continuousDate[0].check_in;
             var continuousCheckOut = continuousDate[1].check_out;
+        }else if(customAvailability == "no"){
+            continuousCheckOut == false; 
         }
        
         var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
@@ -189,7 +210,6 @@
             fixedCheckOut =  new Date(continuousCheckOut);
         }
 
-        
         var checkin_input = jQuery(".tf_tours_date-wrap #check-in-date"),
             checkout_input = jQuery(".tf_tours_date-wrap #check-out-date");
         $('.tours-check-in-out').daterangepicker({
@@ -201,6 +221,7 @@
             minDate: dateToday,
             maxDate: continuousCheckOut,
             autoApply: true,
+            drops: 'up',
         }, function (start, end, label) {
             checkin_input.val(start.format(dateFormat));
             $('.checkin-date-text').text(start.format(dateFormat));
@@ -885,6 +906,7 @@ function tourfic_autocomplete(inp, arr) {
     });
 }
 
+//get the tours and hotel destination array
 var destinations = tf_params.destinations;
 var tour_destinations = tf_params.tour_destinations;
 let dest = document.getElementById("destination");
@@ -894,6 +916,7 @@ if(dest){
     //Autocomplete for Hotel
     tourfic_autocomplete(dest, destinations);
 }
+
 if(tourDest){
     //Autocomplete for Tours
     tourfic_autocomplete(tourDest, tour_destinations);

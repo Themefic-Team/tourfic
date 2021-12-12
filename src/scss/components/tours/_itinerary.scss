@@ -1,35 +1,37 @@
 .tf-itinerary {
   padding: 50px 70px;
   background: #FAFCFE;
+    .tf-single-itinerary {
+      margin: 0;
+      padding-left: 100px;
+      position: relative;
+      margin-bottom: 30px;
+        .tf-single-itinerary_inner {
+          background: #fafcfe;
+          box-shadow: 0 5px 10px rgb(0 44 102 / 20%)!important;
+          width: 100%;
+          border-radius: 0px 5px 5px 0px;
+          padding: 30px 30px;
+        }
+        span.time {
+          width: 100px;
+          height: 100px;
+          background: #002C66;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #f7f7f7;
+      }
+  }
 }
-.tf-single-itinerary_inner {
-  background: #fafcfe;
-  box-shadow: 0 5px 10px rgb(0 44 102 / 20%)!important;
-  width: 100%;
-  border-radius: 0px 5px 5px 0px;
-  padding: 37px 30px;
-}
-.tf-single-itinerary {
-  margin: 0;
-  padding-left: 100px;
-  position: relative;
-  margin-bottom: 30px;
-}
+
 .itinerary-head {
     cursor: pointer;
     display: flex;
     align-items: center;
 }
 
-.tf-single-itinerary span.time {
-    width: 100px;
-    height: 100px;
-    background: #002C66;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #f7f7f7;
-}
+
 .itinerary-title h4{
     display: flex;
 }
