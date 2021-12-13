@@ -68,7 +68,7 @@ class Tourfic_Tours_WooCommerceHandle {
                 $continuous_max_seat = $continuous_availability[$key]['max_seat'];
                 $continuous_check_in = strtotime( str_replace( '/', '-', $continuous_availability[$key]['check_in'] ) );
                 $continuous_check_out = strtotime( str_replace( '/', '-', $continuous_availability[$key]['check_out'] ) );
-                if ( $ct_check_in >= $continuous_check_in && $ct_check_out <= $continuous_check_out ) {
+                if ( $ct_check_in >= $continuous_check_in && $ct_check_in <= $continuous_check_out ) {
                     if ( $total_person < $continuous_min_seat && $continuous_min_seat > 0 ) {
                         $response['errors'][] = __( 'Minimum ' . $continuous_min_seat . ' person you must select ', 'tourfic' );
                     } elseif ( $total_person > $continuous_max_seat && $continuous_max_seat > 0 ) {
