@@ -337,9 +337,6 @@ if ( class_exists( 'CSF' ) ) {
                         'title'    => __( 'Check In', 'tourfic' ),
                         'subtitle' => __( 'Select check in date', 'tourfic' ),
                         'class'    => 'check-in',
-                        'attributes' => array(
-                            'required' => 'required'
-                        ),
                         'settings' => array(
                             'dateFormat'      => 'dd/mm/yy'
                         )
@@ -350,9 +347,6 @@ if ( class_exists( 'CSF' ) ) {
                         'title'    => __( 'Check Out', 'tourfic' ),
                         'subtitle' => __( 'Select check out date', 'tourfic' ),
                         'class'    => 'check-out',
-                        'attributes' => array(
-                            'required' => 'required'
-                        ),
                         'settings' => array(
                             'dateFormat'      => 'dd/mm/yy'
                         )

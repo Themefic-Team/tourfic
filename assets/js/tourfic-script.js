@@ -191,11 +191,15 @@
         var continuousDate = $('.tf_tours-single-layout').data('continuous-array');
         let customAvailability =  $('.tf_tours-single-layout').data('custom-availability');
         if(continuousDate){
-            var continuousCheckIn = continuousDate[0].check_in;
-            var continuousCheckOut = continuousDate[1].check_out;
+            for(let i = 0; i < continuousDate.length; i++){            
+                var continuousCheckIn = continuousDate[i].check_in;
+                var continuousCheckOut = continuousDate[i].check_out;
+            }
         }else if(customAvailability == "no"){
             continuousCheckOut == false; 
         }
+       
+        
        
         var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
         var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
