@@ -81,8 +81,6 @@
                 },
             ],
         });
-        
-        $(".slick-track").css("max-width", $(window).width());
 
         
         $(".tf-hero-btm-icon").on('click',function () {
