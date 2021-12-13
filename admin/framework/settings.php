@@ -11,7 +11,7 @@ if( class_exists( 'CSF' ) ) {
     'menu_title'              =>   __( 'Tourfic', 'tourfic' ),
     'menu_slug'               =>   'tourfic',
     'framework_title'         =>   __( 'Tourfic Settings <small><a href="https://themefic.com/">By THEMEFIC</a></small>', 'tourfic' ),
-    'footer_credit'           =>   __( 'Enjoyed Tourfic? Please leave us a <a href="">★★★★★</a> rating. We really appreciate your support!', 'tourfic' ),
+    'footer_credit'           =>   __( 'Enjoyed Tourfic? Please leave us a <a target="_blank" href="https://wordpress.org/support/plugin/tourfic/reviews/#new-post">★★★★★</a> rating. We really appreciate your support!', 'tourfic' ),
     'menu_position'           =>   6,
     'show_sub_menu'           =>   false,
     'theme'                   =>   'dark',
