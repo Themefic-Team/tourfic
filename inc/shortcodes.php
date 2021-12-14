@@ -200,7 +200,11 @@ function tourfic_search_shortcode( $atts, $content = null ){
         $classes = " default-form ";
     }
 
-    ob_start(); ?>
+    ob_start();
+
+    //check if Tours published at least one post
+    $tf_count_posts = wp_count_posts( 'tf_tours' )->publish;
+    ?>
 
 
     <?php tourfic_fullwidth_container_start( $fullwidth ); ?>
@@ -208,16 +212,20 @@ function tourfic_search_shortcode( $atts, $content = null ){
         <!-- Start Booking widget -->
         <div class="tf-booking-form-tab">
             <button class="tf-tablinks active" onclick="tfOpenForm(event, 'tf-hotel-booking-form')">Hotel</button>
-            <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-tour-booking-form')">Tours</button>
+            <?php if( $tf_count_posts > 0) : ?>
+                <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-tour-booking-form')">Tours</button>
+            <?php endif; ?>
         </div>
         <div id="tf-hotel-booking-form" class="tf-tabcontent">
             <!--Added hotel search widget--> 
             <?php tourfic_search_widget_hotel( $classes, $title, $subtitle ); ?>
         </div>
+        <?php if( $tf_count_posts > 0) : ?>
         <div id="tf-tour-booking-form" class="tf-tabcontent">
              <!--Added tours search widget--> 
             <?php tourfic_search_widget_tour( $classes, $title, $subtitle ); ?>
         </div>
+        <?php endif; ?>
     </div>
     <!-- End Booking widget -->
 

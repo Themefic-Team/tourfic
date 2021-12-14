@@ -204,16 +204,16 @@
         var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
         var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
         if (fixedCheckIn) {
-            fixedCheckIn = new Date(fixedCheckIn);
+           var tfMinDate = fixedCheckIn;
         } else {
-            fixedCheckIn = new Date( continuousCheckIn );
+            tfMinDate =  continuousCheckIn ;
         }
         if (fixedCheckOut) {
-            fixedCheckOut = new Date(fixedCheckOut);
+           var tfMaxDate = fixedCheckOut;
         } else {
-            fixedCheckOut =  new Date(continuousCheckOut);
+            tfMaxDate =  continuousCheckOut;
         }
-
+        console.log(tfMinDate,tfMaxDate);
         var checkin_input = jQuery(".tf_tours_date-wrap #check-in-date"),
             checkout_input = jQuery(".tf_tours_date-wrap #check-out-date");
         $('.tours-check-in-out').daterangepicker({
@@ -222,8 +222,8 @@
                 "separator": " - ",
                 "firstDay": 1
             },
-            minDate: dateToday,
-            maxDate: continuousCheckOut,
+            minDate: tfMinDate,
+            maxDate: tfMaxDate,
             autoApply: true,
             drops: 'up',
         }, function (start, end, label) {

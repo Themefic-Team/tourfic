@@ -286,34 +286,33 @@ function tourfic_gallery_slider( $file_list_meta_key = null, $post_id = null, $c
 		<!--Hero slider section start-->
 		<div class="tf-hero-area" style="background-image: url(<?php echo wp_get_attachment_url( $files[0], 'tf_gallery_thumb' ); ?>);">
 			<div class="tf-hero-top-icons">
-				
 				<div class="share-tour">
-				<a href="#dropdown_share_center" class="share-toggle" data-toggle="true"><img src="<?php echo plugin_dir_url(dirname(__FILE__)) . '/assets/img/share-icon.png'; ?>"></a>
-							<div id="dropdown_share_center" class="share-tour-content">
- 								<ul class="tf-dropdown__content">
-									<li>
-									    <a href="http://www.facebook.com/share.php?u=<?php _e( $share_link ); ?>" class="tf-dropdown__item" target="_blank">
-									        <span class="tf-dropdown__item-content"><?php echo tourfic_get_svg('facebook'); ?> <?php esc_html_e( 'Share on Facebook', 'tourfic' ); ?></span>
-									    </a>
-									</li>
-									<li>
-									    <a href="http://twitter.com/share?text=<?php _e( $share_text ); ?>&url=<?php _e( $share_link ); ?>" class="tf-dropdown__item" target="_blank">
-									        <span class="tf-dropdown__item-content"><?php echo tourfic_get_svg('twitter'); ?> <?php esc_html_e( 'Share on Twitter', 'tourfic' ); ?></span>
-									    </a>
-									</li>
-									<li>
-									    <div class="share_center_copy_form tf-dropdown__item" title="Share this link" aria-controls="share_link_button">
-									        <label class="share_center_copy_label" for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
-									        <input type="text" id="share_link_input" class="share_center_url share_center_url_input" value="<?php _e( $share_link ); ?>" readonly>
-									        <button id="share_link_button" class="share_center_copy_cta" tabindex="0" role="button">
-									        	<span class="tf-button__text share_center_copy_message"><?php esc_html_e( 'Copy link', 'tourfic' ); ?></span>
-									            <span class="tf-button__text share_center_copied_message"><?php esc_html_e( 'Copied!', 'tourfic' ); ?></span>
-									        </button>
-									    </div>
-									</li>
-								</ul>
-							</div>
-						</div>
+					<a href="#dropdown_share_center" class="share-toggle" data-toggle="true"><img src="<?php echo plugin_dir_url(dirname(__FILE__)) . '/assets/img/share-icon.png'; ?>"></a>
+					<div id="dropdown_share_center" class="share-tour-content">
+						<ul class="tf-dropdown__content">
+							<li>
+								<a href="http://www.facebook.com/share.php?u=<?php _e( $share_link ); ?>" class="tf-dropdown__item" target="_blank">
+									<span class="tf-dropdown__item-content"><?php echo tourfic_get_svg('facebook'); ?> <?php esc_html_e( 'Share on Facebook', 'tourfic' ); ?></span>
+								</a>
+							</li>
+							<li>
+								<a href="http://twitter.com/share?text=<?php _e( $share_text ); ?>&url=<?php _e( $share_link ); ?>" class="tf-dropdown__item" target="_blank">
+									<span class="tf-dropdown__item-content"><?php echo tourfic_get_svg('twitter'); ?> <?php esc_html_e( 'Share on Twitter', 'tourfic' ); ?></span>
+								</a>
+							</li>
+							<li>
+								<div class="share_center_copy_form tf-dropdown__item" title="Share this link" aria-controls="share_link_button">
+									<label class="share_center_copy_label" for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
+									<input type="text" id="share_link_input" class="share_center_url share_center_url_input" value="<?php _e( $share_link ); ?>" readonly>
+									<button id="share_link_button" class="share_center_copy_cta" tabindex="0" role="button">
+										<span class="tf-button__text share_center_copy_message"><?php esc_html_e( 'Copy link', 'tourfic' ); ?></span>
+										<span class="tf-button__text share_center_copied_message"><?php esc_html_e( 'Copied!', 'tourfic' ); ?></span>
+									</button>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
 				<a href="#"><img src="<?php echo plugin_dir_url(dirname(__FILE__)) . '/assets/img/hart-icon.png'; ?>"></a>
 			
 			</div>
@@ -410,9 +409,7 @@ function tourfic_booking_widget_field( $args ){
     $default_val =  isset( $_GET[$name] ) ? $_GET[$name] : '';
     
     if( $name == 'check-in-out-date' ) {
-        
-        if( isset( $_GET['check-in-date'] ) && !empty( $_GET['check-in-date'] ) && isset( $_GET['check-out-date'] ) && !empty( $_GET['check-out-date'] ) ){
-            
+        if( isset( $_GET['check-in-date'] ) && !empty( $_GET['check-in-date'] ) && isset( $_GET['check-out-date'] ) && !empty( $_GET['check-out-date'] ) ){ 
             $default_val = $_GET['check-in-date'];
             $default_val .= ' - ';
             $default_val .= $_GET['check-out-date'];
@@ -906,12 +903,7 @@ if ( ! class_exists( 'TOURFIC_TAX_META' ) ) {
 }
 
 
-
-  
-   /**
-    * Add /**
- * Icon Upload to taxonomy
- **/
+/** Add Icon Upload to taxonomy **/
 
 if( ! class_exists( 'Adding_Filter_Image' ) ) {
   class Adding_Filter_Image {
