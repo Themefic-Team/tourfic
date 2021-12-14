@@ -214,7 +214,7 @@ function tourfic_map_link() {
         $meta = get_post_meta( get_the_ID(), 'tf_tours_option', true );
         $location = $meta['location']['address'] ? $meta['location']['address'] : '';
     } else {
-        $location = get_field( 'location' ) ? get_field( 'location' ) : null;
+        $location = get_field( 'formatted_location' ) ? get_field( 'formatted_location' ) : null;
 
     }
     if ( !$location ) {

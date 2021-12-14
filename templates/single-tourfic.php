@@ -244,11 +244,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					endif;
 					?>
 				</div>
-
-
-
 				<!-- End Review Content -->
-
 
 				<!-- Start TOC Content -->
 				<div class="tf_toc-wrap">
@@ -257,8 +253,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					</div>
 				</div>
 				<!-- End TOC Content -->
-
-
+			</div>
 			</div>
 			<!-- End Content -->
 

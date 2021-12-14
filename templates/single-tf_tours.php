@@ -303,7 +303,7 @@ $tf_overall_rate['review'] = null;
 				<div class="tf-tours-content">
 					<div class="tf_map_section">
 						<div class="tf_map">
-						<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr($location); ?>&hl=es&z=14&amp;output=embed" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+						<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr($location); ?>&hl=eng&z=14&amp;output=embed" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 						</div>
 					</div>
 				</div>

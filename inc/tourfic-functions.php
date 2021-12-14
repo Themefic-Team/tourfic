@@ -287,7 +287,7 @@ function tourfic_gallery_slider( $file_list_meta_key = null, $post_id = null, $c
 		<div class="tf-hero-area" style="background-image: url(<?php echo wp_get_attachment_url( $files[0], 'tf_gallery_thumb' ); ?>);">
 			<div class="tf-hero-top-icons">
 				<div class="share-tour">
-					<a href="#dropdown_share_center" class="share-toggle" data-toggle="true"><img src="<?php echo plugin_dir_url(dirname(__FILE__)) . '/assets/img/share-icon.png'; ?>"></a>
+					<a href="#dropdown_share_center" class="share-toggle" data-toggle="true"><img src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/share-icon.png'; ?>"></a>
 					<div id="dropdown_share_center" class="share-tour-content">
 						<ul class="tf-dropdown__content">
 							<li>
@@ -313,13 +313,13 @@ function tourfic_gallery_slider( $file_list_meta_key = null, $post_id = null, $c
 						</ul>
 					</div>
 				</div>
-				<a href="#"><img src="<?php echo plugin_dir_url(dirname(__FILE__)) . '/assets/img/hart-icon.png'; ?>"></a>
+				<a href="#"><img src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/hart-icon.png'; ?>"></a>
 			
 			</div>
 
 			<div class="tf-hero-bottom-area">
 				<div class="tf-hero-btm-icon">
-					<img src="<?php echo plugin_dir_url(dirname(__FILE__)) . '/assets/img/yt-icon.png'; ?>">
+					<img src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/yt-icon.png'; ?>">
 					<span><?php echo __( 'Tour Videos','tourfic' ); ?></span>
 				</div>
 			</div>

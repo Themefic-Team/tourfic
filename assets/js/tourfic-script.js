@@ -225,6 +225,8 @@
             minDate: tfMinDate,
             maxDate: tfMaxDate,
             autoApply: true,
+            startDate: tfMinDate,
+            endDate: tfMaxDate,
             drops: 'up',
         }, function (start, end, label) {
             checkin_input.val(start.format(dateFormat));
