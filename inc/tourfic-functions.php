@@ -1532,6 +1532,7 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 				'label' => 'Check-in date',
 				'required' => 'true',
 				'disabled' => 'true',
+				'class'    => 'tf-tour-check-in',
 			)
 		); ?>
 
@@ -1544,6 +1545,8 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 				'required' => 'true',
 				'disabled' => 'true',
 				'label' => 'Check-out date',
+				'class'    => 'tf-tour-check-out',
+
 			)
 		); ?>
 		</div>

@@ -161,8 +161,6 @@
 
         // Date picker
         var dateToday = new Date();
-        var checkin_input = jQuery("#check-in-date"),
-            checkout_input = jQuery("#check-out-date");
         var hotel_checkin_input = jQuery(".tf-hotel-check-in");
         var hotel_checkout_input = jQuery(".tf-hotel-check-out");
 
@@ -178,13 +176,18 @@
             minDate: dateToday,
             autoApply: true,
         }, function (start, end, label) {
+            
+            var checkin_input = jQuery(".tf-tour-check-in");
+            var checkout_input = jQuery(".tf-tour-check-out");
+
             checkin_input.val(start.format(dateFormat));
-            console.log(checkin_input);
             hotel_checkin_input.val(start.format(dateFormat));
+            $('.tf-widget-check-in').val(start.format(dateFormat));
             $('.checkin-date-text').text(start.format(dateFormat));
 
             checkout_input.val(end.format(dateFormat));
             hotel_checkout_input.val(end.format(dateFormat));
+            $('.tf-widget-check-out').val(end.format(dateFormat));
             $('.checkout-date-text').text(end.format(dateFormat));
         });
 
@@ -204,7 +207,9 @@
         var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
         if (fixedCheckIn) {
            var tfMinDate = fixedCheckIn;
-        } else {
+        } else if(customAvailability == 'no') {
+            tfMinDate =  dateToday;
+        }else{
             tfMinDate =  continuousCheckIn ;
         }
         if (fixedCheckOut) {
@@ -212,9 +217,8 @@
         } else {
             tfMaxDate =  continuousCheckOut;
         }
-        console.log(tfMinDate,tfMaxDate);
-        var checkin_input = jQuery(".tf_tours_date-wrap #check-in-date"),
-            checkout_input = jQuery(".tf_tours_date-wrap #check-out-date");
+console.log(tfMinDate);
+        //Tours booking DateSelection init in single tour page
         $('.tours-check-in-out').daterangepicker({
             "locale": {
                 "format": dateFormat,
@@ -223,16 +227,19 @@
             },
             minDate: tfMinDate,
             maxDate: tfMaxDate,
+            singleDatePicker: true,
             autoApply: true,
             startDate: tfMinDate,
             endDate: tfMaxDate,
             drops: 'up',
         }, function (start, end, label) {
+            
+            var checkin_input = jQuery("#check-in-date");
+            var checkout_input = jQuery("#check-out-date");
+
             checkin_input.val(start.format(dateFormat));
-            $('.checkin-date-text').text(start.format(dateFormat));
-            $('#check-in-date').val(start.format(dateFormat));
-            $('#check-out-date').val(start.format(dateFormat));
             checkout_input.val(end.format(dateFormat));
+            $('.checkin-date-text').text(start.format(dateFormat));
             $('.checkout-date-text').text(end.format(dateFormat));
         });
 

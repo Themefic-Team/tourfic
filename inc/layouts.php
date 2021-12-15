@@ -5,6 +5,13 @@
  */
 function tourfic_archive_single() {
     $tf_room = get_field( 'tf_room' ) ? get_field( 'tf_room' ) : array();
+	
+	$destination = isset($_GET['destination']) ? $_GET['destination'] : "";
+	$adults = isset($_GET['adults']) ? $_GET['adults'] : "1";
+	$children = isset($_GET['children']) ? $_GET['children'] : "0";
+	$room = isset($_GET['room']) ? $_GET['room'] : "1";
+	$check_in_date = isset($_GET['check-in-date']) ? $_GET['check-in-date'] : "";
+	$check_out_date = isset($_GET['check-out-date']) ? $_GET['check-out-date'] : "";
     ?>
 	<div class="single-tour-wrap">
 		<div class="single-tour-inner">
@@ -18,7 +25,7 @@ function tourfic_archive_single() {
 				<div class="tf_property_block_main_row">
 					<div class="tf_item_main_block">
 						<div class="tf-hotel__title-wrap">
-							<a href="<?php echo get_the_permalink() . '?destination=' . $_GET['destination'] . '&adults=' . $_GET['adults'] . '&children=' . $_GET['children'] . '&room=' . $_GET['room'] . '&check-in-date=' . $_GET['check-in-date'] . '&check-out-date=' . $_GET['check-out-date']; ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
+							<a href="<?php echo get_the_permalink() . '?destination=' . $destination. '&adults=' . $adults . '&children=' . $children . '&room=' . $room . '&check-in-date=' . $check_in_date . '&check-out-date=' . $check_out_date; ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
 						</div>
 						<?php tourfic_map_link();?>
 					</div>
@@ -63,7 +70,7 @@ function tourfic_archive_single() {
 				<!-- Room details end -->
 
 				<div class="availability-btn-area">
-					<a href="<?php echo get_the_permalink() . '?destination=' . $_GET['destination'] . '&adults=' . $_GET['adults'] . '&children=' . $_GET['children'] . '&room=' . $_GET['room'] . '&check-in-date=' . $_GET['check-in-date'] . '&check-out-date=' . $_GET['check-out-date']; ?>" class="button tf_button"><?php esc_html_e( 'Book Now', 'tourfic' );?></a>
+					<a href="<?php echo get_the_permalink() . '?destination=' . $destination. '&adults=' . $adults . '&children=' . $children . '&room=' . $room . '&check-in-date=' . $check_in_date . '&check-out-date=' . $check_out_date; ?>" class="button tf_button"><?php esc_html_e( 'Book Now', 'tourfic' );?></a>
 				</div>
 				<?php endif;?>
 
@@ -79,9 +86,16 @@ function tourfic_archive_single() {
  * Tours Archive
  */
 function tf_tours_archive_single() {
+
 	$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
 	$featured = $meta['tour_as_featured'];
 	$feature_meta = $meta['tour_feature'];
+	$tour_destination = isset($_GET['tour_destination']) ? $_GET['tour_destination'] : "";
+	$adults = isset($_GET['adults']) ? $_GET['adults'] : "1";
+	$children = isset($_GET['children']) ? $_GET['children'] : "0";
+	$infant = isset($_GET['infant']) ? $_GET['infant'] : "0";
+	$check_in_date = isset($_GET['check-in-date']) ? $_GET['check-in-date'] : "";
+	$check_out_date = isset($_GET['check-out-date']) ? $_GET['check-out-date'] : "";
     ?>
 	<div class="single-tour-wrap">
 		<div class="single-tour-inner">
@@ -98,7 +112,7 @@ function tf_tours_archive_single() {
 				<div class="tf_property_block_main_row">
 					<div class="tf_item_main_block">
 						<div class="tf-hotel__title-wrap tf-tours-title-wrap">
-							<a href="<?php echo get_the_permalink() . '?tour_destination=' . $_GET['tour_destination'] . '&adults=' . $_GET['adults'] . '&children=' . $_GET['children'] . '&infant=' . $_GET['infant'] . '&check-in-date=' . $_GET['check-in-date'] . '&check-out-date=' . $_GET['check-out-date']; ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
+							<a href="<?php echo get_the_permalink() . '?tour_destination=' . $tour_destination. '&adults=' . $adults . '&children=' . $children . '&infant=' . $infant . '&check-in-date=' . $check_in_date . '&check-out-date=' . $check_out_date; ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
 						</div>
 						<?php tourfic_map_link();?>
 					</div>
@@ -138,7 +152,7 @@ function tf_tours_archive_single() {
 				<!-- Tour details end -->
 
 				<div class="availability-btn-area">
-					<a href="<?php echo get_the_permalink() . '?tour_destination=' . $_GET['tour_destination'] . '&adults=' . $_GET['adults'] . '&children=' . $_GET['children'] . '&check-in-date=' . $_GET['check-in-date'] . '&check-out-date=' . $_GET['check-out-date']; ?>" class="button tf_button"><?php esc_html_e( 'Book Now', 'tourfic' );?></a>
+					<a href="<?php echo get_the_permalink() . '?tour_destination=' . $tour_destination. '&adults=' . $adults . '&children=' . $children . '&infant=' . $infant . '&check-in-date=' . $check_in_date . '&check-out-date=' . $check_out_date; ?>" class="button tf_button"><?php esc_html_e( 'Book Now', 'tourfic' );?></a>
 				</div>
 
 
@@ -153,7 +167,22 @@ function tf_tours_archive_single() {
 function tourfic_item_review_block() {
 
     $comments = get_comments( array( 'post_id' => get_the_ID() ) );
+	$tour_destination = isset($_GET['tour_destination']) ? $_GET['tour_destination'] : "";
+	$destination = isset($_GET['tour_destination']) ? $_GET['tour_destination'] : "";
+	if('tourfic' == get_post_type()){
+		$dest_slug_param = 'destination=' . $destination;
+		$room = isset( $_GET['room'] ) ? $_GET['room'] : '';
+		$infant = '';
+	}else if('tf_tours' == get_post_type()){
+		$dest_slug_param = 'tour_destination' . $tour_destination;
+		$infant = isset($_GET['infant']) ? $_GET['infant'] : "0";
+		$room = '';
 
+	};
+	$adults = isset($_GET['adults']) ? $_GET['adults'] : "1";
+	$children = isset($_GET['children']) ? $_GET['children'] : "0";
+	$check_in_date = isset($_GET['check-in-date']) ? $_GET['check-in-date'] : "";
+	$check_out_date = isset($_GET['check-out-date']) ? $_GET['check-out-date'] : "";
     $tf_overall_rate = array();
     $tf_overall_rate['review'] = null;
 
@@ -181,7 +210,7 @@ function tourfic_item_review_block() {
 	<div class="tf_item_review_block">
 		<div class="reviewFloater reviewFloaterBadge__container">
 		    <div class="sr-review-score">
-		        <a class="sr-review-score__link" href="<?php echo get_the_permalink() . '?destination=' . $_GET['destination'] . '&adults=' . $_GET['adults'] . '&children=' . $_GET['children'] . '&room=' . $_GET['room'] . '&check-in-date=' . $_GET['check-in-date'] . '&check-out-date=' . $_GET['check-out-date']; ?>" target="_blank">
+		        <a class="sr-review-score__link" href="<?php echo get_the_permalink() . '?'. $dest_slug_param . '&adults=' . $adults . '&children=' . $children . '&room=' . $room . '&check-in-date=' . $check_in_date . '&check-out-date=' . $check_out_date; ?>" target="_blank">
 		            <div class="bui-review-score c-score bui-review-score--end">
 		                <div class="bui-review-score__badge"> <?php _e( tourfic_avg_ratings( $tf_overall_rate['review'] ) );?> </div>
 		                <div class="bui-review-score__content">
@@ -337,22 +366,24 @@ function tourfic_get_sidebar( $placement = 'single' ) {
 						'label'       => 'Check-in date',
 						'required'    => 'true',
 						'disabled'    => 'true',
+						'class'		  => 'tf-widget-check-in',
 					));
 				?>
 				<!-- End form row -->
 
 				<!-- Start form row -->
 				<?php tourfic_booking_widget_field(
-        array(
-            'type'        => 'text',
-            'svg_icon'    => 'calendar_today',
-            'name'        => 'check-out-date',
-            'placeholder' => 'Check-out date',
-            'required'    => 'true',
-            'disabled'    => 'true',
-            'label'       => 'Check-out date',
-        )
-    );?>
+					array(
+						'type'        => 'text',
+						'svg_icon'    => 'calendar_today',
+						'name'        => 'check-out-date',
+						'placeholder' => 'Check-out date',
+						'required'    => 'true',
+						'disabled'    => 'true',
+						'label'       => 'Check-out date',
+						'class'		  => 'tf-widget-check-out',
+					)
+				);?>
 			</div>
 			<!-- End form row -->
 		</div>
@@ -404,8 +435,8 @@ function tf_tours_booking_form( $post_id ) {
         $max_seat 			= $meta['fixed_availability']['max_seat'] ? $meta['fixed_availability']['max_seat'] : null;
         ob_start();
 		?>
-		<div class="tf-tour-booking-wrap" data-min-seat="<?php echo $min_seat; ?>" data-max-seat="<?php echo $max_seat; ?>" data-fixed-check-in="<?php echo $first_check_in; ?>" data-fixed-check-out="<?php echo $last_check_out ?>">
-<?php 
+		<div class="tf-tour-booking-wrap" data-custom-availability="<?php echo $custom_availability; ?>" data-min-seat="<?php echo $min_seat; ?>" data-max-seat="<?php echo $max_seat; ?>" data-fixed-check-in="<?php echo $first_check_in; ?>" data-fixed-check-out="<?php echo $last_check_out ?>">
+	<?php 
     } else if ( $type == "continuous" && $custom_availability == 'yes' ) {
 		foreach($continuous_availability as $key => $options){
 			if( $key === array_key_first($continuous_availability)){
@@ -424,8 +455,13 @@ function tf_tours_booking_form( $post_id ) {
 			}
 		}
 		?>
-		<div class="tf-tour-booking-wrap" data-min-seat="<?php echo $min_seat; ?>" data-max-seat="<?php echo $max_seat; ?>" data-fixed-check-in="<?php echo $first_check_in; ?>" data-fixed-check-out="<?php echo $last_check_out ?>">
-	<?php } ?>
+		<div class="tf-tour-booking-wrap" data-custom-availability="<?php echo $custom_availability; ?>" data-min-seat="<?php echo $min_seat; ?>" data-max-seat="<?php echo $max_seat; ?>" data-fixed-check-in="<?php echo $first_check_in; ?>" data-fixed-check-out="<?php echo $last_check_out ?>">
+	<?php }else if( $type == "continuous" && $custom_availability == 'no' ){
+		$min_seat = $meta['min_people'] ? $meta['min_people'] : '-1';
+		$max_seat = $meta['max_people'] ? $meta['max_people'] : '-1';
+		?>
+		<div class="tf-tour-booking-wrap" data-custom-availability="<?php echo $custom_availability; ?>" data-min-seat="<?php echo $min_seat; ?>" data-max-seat="<?php echo $max_seat; ?>" >
+		<?php }	?>
 	
    
 		<form class="tf_tours_booking">

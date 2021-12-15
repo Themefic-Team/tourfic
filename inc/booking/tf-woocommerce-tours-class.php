@@ -237,15 +237,8 @@ class Tourfic_Tours_WooCommerceHandle {
 
         if ( isset( $cart_item['tf_tours_data']['check_in'] ) ) {
             $item_data[] = array(
-                'key'   => __( 'Check-in Date', 'tourfic' ),
+                'key'   => __( 'Departure Date', 'tourfic' ),
                 'value' => $cart_item['tf_tours_data']['check_in'],
-            );
-        }
-
-        if ( isset( $cart_item['tf_tours_data']['check_out'] ) ) {
-            $item_data[] = array(
-                'key'   => __( 'Check-out Date', 'tourfic' ),
-                'value' => $cart_item['tf_tours_data']['check_out'],
             );
         }
 
@@ -272,12 +265,7 @@ class Tourfic_Tours_WooCommerceHandle {
         }
         if ( isset( $values['tf_tours_data']['check_in'] ) ) {
 
-            $item->update_meta_data( __( 'Check-in Date', 'tourfic' ), $values['tf_tours_data']['check_in'] );
-        }
-
-        if ( isset( $values['tf_tours_data']['check_out'] ) ) {
-
-            $item->update_meta_data( __( 'Check-out Date', 'tourfic' ), $values['tf_tours_data']['check_out'] );
+            $item->update_meta_data( __( 'Departure Date', 'tourfic' ), $values['tf_tours_data']['check_in'] );
         }
 
     }

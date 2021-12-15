@@ -1675,6 +1675,10 @@ span.close-aq {
   margin-top: 20px;
 }
 
+.tf-tours_gallery-wrap {
+  min-height: 300px;
+}
+
 .tf-hero-slider-bottom-area {
   display: flex;
   justify-content: flex-end;
@@ -1788,6 +1792,7 @@ button.tf-hero-slider-arrow.next-arrow {
   visibility: visible;
   opacity: 1;
   transform: scale(1);
+  z-index: 1;
 }
 
 .tf-hero-slider-cross-icon {
@@ -2195,6 +2200,10 @@ button.tf-tourbox-arrow.next-arrow.slick-arrow {
 
 .slick-initialized .slick-slide.single-tourbox {
   display: flex;
+}
+
+button.tf-tourbox-arrow {
+  color: black;
 }
 
 .tf-custom-review-section-wrapper {
