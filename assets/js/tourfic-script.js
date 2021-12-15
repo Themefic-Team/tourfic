@@ -179,6 +179,7 @@
             autoApply: true,
         }, function (start, end, label) {
             checkin_input.val(start.format(dateFormat));
+            console.log(checkin_input);
             hotel_checkin_input.val(start.format(dateFormat));
             $('.checkin-date-text').text(start.format(dateFormat));
 
@@ -198,9 +199,7 @@
         }else if(customAvailability == "no"){
             continuousCheckOut == false; 
         }
-       
-        
-       
+
         var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
         var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
         if (fixedCheckIn) {

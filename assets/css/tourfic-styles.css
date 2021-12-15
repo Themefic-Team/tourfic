@@ -110,7 +110,7 @@
 .tf_title-area {
   display: flex;
   justify-content: space-between;
-  padding: 20px 0;
+  align-items: center;
 }
 
 .tf_title {
@@ -682,6 +682,7 @@ button.tf-tablinks.active {
 .tf-room-header .last-booked {
   font-size: 12px;
 }
+
 .tf-room-content-wrap {
   border: 1px solid #ddd;
   border-top: 0;
@@ -1867,6 +1868,7 @@ button.tf-hero-slider-arrow.next-arrow {
   display: flex;
   justify-content: space-between;
   margin: 20px 0 100px;
+  padding: 0 15px;
 }
 
 .tf-tours-price * {
@@ -1915,7 +1917,7 @@ button.tf-hero-slider-arrow.next-arrow {
 }
 .tf-itinerary .tf-single-itinerary span.time {
   width: 100px;
-  height: 100px;
+  height: 89px;
   background: #002C66;
   display: flex;
   justify-content: center;
@@ -2358,6 +2360,10 @@ button.tf-cr-slider-arrow.prev-arrow {
 
 .tf-tours_nosidebar_layout .tf_content {
   width: 100%;
+}
+
+.plr-15 {
+  padding: 0 15px;
 }
 
 .tf-single-faq {

@@ -248,7 +248,7 @@ class Tourfic_Metabox_Class {
 								<label for="formatted_location"><?php esc_html_e( 'Formatted Location', 'tourfic' ); ?></label>
 							</div>
 
-					        <input type="text" class="wfull" id="formatted_location" name="formatted_location" value="<?php echo esc_attr( $formatted_location ); ?>" size="25" />
+					        <input placeholder="Eg. New York" type="text" class="wfull" id="formatted_location" name="formatted_location" value="<?php echo esc_attr( $formatted_location ); ?>" size="25" />
 						</div>
 
 					</div>

@@ -46,7 +46,7 @@ $tf_overall_rate = array();
 $tf_overall_rate['review'] = null;
 
 ?>
-<div class="tourfic-wrap tf_tours-single-layout  tf-tours_nosidebar_layout default-style" data-custom-availability="<?php echo $custom_availability; ?>" data-fullwidth="true" data-continuous-array='<?php echo $continuous_availability;?>'>
+<div class="tourfic-wrap tf_tours-single-layout  tf-tours_nosidebar_layout default-style" data-custom-availability="<?php echo $custom_availability; ?>" data-continuous-array='<?php echo $continuous_availability;?>'>
 	<?php do_action( 'tf_before_container' ); ?>
 	<div class="tf_container">
 		<div class="tf_row">
@@ -92,7 +92,7 @@ $tf_overall_rate['review'] = null;
 	</div>
 
 	<!--Information section start-->
-	<div class="tf-tours_info_feature_area_wrapper tf-tours_section">
+	<div class="tf-tours_info_feature_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
 				<div class="tf-tours-content">
@@ -150,7 +150,7 @@ $tf_overall_rate['review'] = null;
    <!-- Information section end -->
 
 	<!--Start Description section-->
-	<div class="tf-tours_content_area_wrapper tf-tours_section">
+	<div class="tf-tours_content_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
 				<div class="tf-tours-content">
@@ -170,7 +170,7 @@ $tf_overall_rate['review'] = null;
 						<!-- Start content -->
 						<div class="tf_contents">
 							<div class="tf-tours-listing-title">
-								<h4 class="tf-tours_section_title"><?php esc_html_e( 'Listing Description', 'tourfic' ); ?></h4>
+								<h4 class="tf-tours_section_title"><?php esc_html_e( 'Tour Description', 'tourfic' ); ?></h4>
 							</div>
 							<?php the_content(); ?>
 						</div>
@@ -184,7 +184,7 @@ $tf_overall_rate['review'] = null;
     <!--End Decription/highlight section-->
 
 	<!--Start features section-->
-	<div class="tf-tours_features_area_wrapper tf-tours_section">
+	<div class="tf-tours_features_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
 				<div class="tf-tours-content ">
@@ -218,7 +218,7 @@ $tf_overall_rate['review'] = null;
 
 
 	<!--Start Include Exclude section-->
-	<div class="tf-tours_in_ex_area_wrapper tf-tours_section">
+	<div class="tf-tours_in_ex_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
 				<div class="tf-tours-content">
@@ -259,7 +259,7 @@ $tf_overall_rate['review'] = null;
     <!--End Include Exclude section-->
 
 	<!--Start Iternary section-->
-	<div class="tf-tours_itinerary_area_wrapper tf-tours_section">
+	<div class="tf-tours_itinerary_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
 				<div class="tf-tours-content">
@@ -313,7 +313,7 @@ $tf_overall_rate['review'] = null;
     <!--End tour map section-->
 
 	<!--Start tour Faq section-->
-	<div class="tf-tours_faq_area_wrapper tf-tours_section">
+	<div class="tf-tours_faq_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
 				<!-- Start Content -->
@@ -352,7 +352,7 @@ $tf_overall_rate['review'] = null;
     <!--End tour FAQ section-->
 
 	<!--Start tour recommendation section-->
-	<div class="tf-tours_recomendation_area_wrapper tf-tours_section">
+	<div class="tf-tours_recomendation_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
 				<!-- Start Content -->
@@ -415,14 +415,13 @@ $tf_overall_rate['review'] = null;
     <!--End tour recommendation section-->
 	<!-- Custom review section start j-->
 	
-	<div class="tf-tours_review_area_wrapper tf-tours_section">
+	<div class="tf-tours_review_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf-custom-review-section-wrapper">
 			<?php if($comments): ?>
 				<div class="tf-custom-review-section-wrapper_inner">
 					<div class="tf-custom-review-title-area">
-						<h2>Customer Review</h2>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+						<h2><?php echo esc_html__( 'Customer Review','tourfic' );?></h2>
 					</div>
 					<div class="tf-custom-review-slider-area">
 							<?php
@@ -481,7 +480,7 @@ $tf_overall_rate['review'] = null;
 
 	<!--Start TOC section-->
 	<?php if($terms_and_conditions): ?>
-	<div class="tf-tours_toc_area_wrapper tf-tours_section">
+	<div class="tf-tours_toc_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
 				<!-- Start Content -->

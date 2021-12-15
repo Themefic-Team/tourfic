@@ -29,13 +29,13 @@ if( class_exists( 'CSF' ) ) {
       array(
         'id'      => 'post_type_slug',
         'type'    => 'text',
-        'title'   => __( 'Select slug of Hotel', 'tourfic' ),
+        'title'   => __( 'Input slug of Hotel', 'tourfic' ),
         'desc'   =>  __( 'Default is: <code>tourfic</code> - <strong>Save 2 times if you change this field for permalink flush</strong>', 'tourfic' )
       ),
       array(
         'id'      => 'tour_type_slug',
         'type'    => 'text',
-        'title'   => __( 'Select slug of Tour', 'tourfic' ),
+        'title'   => __( 'Input slug of Tour', 'tourfic' ),
         'desc'   =>  __( 'Default is: <code>tour</code> - <strong>Save 2 times if you change this field for permalink flush</strong>', 'tourfic' )
       ),
       array(
@@ -44,10 +44,9 @@ if( class_exists( 'CSF' ) ) {
         'placeholder' => 'Select a page',
         'chosen'      => true,
         'title'       =>  __( 'Select Single Page Template', 'tourfic' ),
-        'desc'        =>  __( 'Page template: <code>Tourfic - Search Result</code> must be selected', 'tourfic' ),
+        'desc'        =>  __( 'You can choose signle tour page layout from here', 'tourfic' ),
         'options'  => array(
           'single-tourfic.php' => 'Style 1',
-          //'single-tourfic-2.php' => 'Style 2',
       ),
       'default'  => 'single-tourfic.php',
       ),
