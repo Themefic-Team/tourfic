@@ -11,7 +11,7 @@ if( class_exists( 'CSF' ) ) {
     'menu_title'              =>   __( 'Tourfic', 'tourfic' ),
     'menu_slug'               =>   'tourfic',
     'framework_title'         =>   __( 'Tourfic Settings <small><a href="https://themefic.com/">By THEMEFIC</a></small>', 'tourfic' ),
-    'footer_credit'           =>   __( 'Enjoyed Tourfic? Please leave us a <a href="">★★★★★</a> rating. We really appreciate your support!', 'tourfic' ),
+    'footer_credit'           =>   __( 'Enjoyed Tourfic? Please leave us a <a target="_blank" href="https://wordpress.org/support/plugin/tourfic/reviews/#new-post">★★★★★</a> rating. We really appreciate your support!', 'tourfic' ),
     'menu_position'           =>   6,
     'show_sub_menu'           =>   false,
     'theme'                   =>   'dark',
@@ -29,13 +29,13 @@ if( class_exists( 'CSF' ) ) {
       array(
         'id'      => 'post_type_slug',
         'type'    => 'text',
-        'title'   => __( 'Select slug of Hotel', 'tourfic' ),
+        'title'   => __( 'Input slug of Hotel', 'tourfic' ),
         'desc'   =>  __( 'Default is: <code>tourfic</code> - <strong>Save 2 times if you change this field for permalink flush</strong>', 'tourfic' )
       ),
       array(
         'id'      => 'tour_type_slug',
         'type'    => 'text',
-        'title'   => __( 'Select slug of Tour', 'tourfic' ),
+        'title'   => __( 'Input slug of Tour', 'tourfic' ),
         'desc'   =>  __( 'Default is: <code>tour</code> - <strong>Save 2 times if you change this field for permalink flush</strong>', 'tourfic' )
       ),
       array(
@@ -44,10 +44,9 @@ if( class_exists( 'CSF' ) ) {
         'placeholder' => 'Select a page',
         'chosen'      => true,
         'title'       =>  __( 'Select Single Page Template', 'tourfic' ),
-        'desc'        =>  __( 'Page template: <code>Tourfic - Search Result</code> must be selected', 'tourfic' ),
+        'desc'        =>  __( 'You can choose signle tour page layout from here', 'tourfic' ),
         'options'  => array(
           'single-tourfic.php' => 'Style 1',
-          //'single-tourfic-2.php' => 'Style 2',
       ),
       'default'  => 'single-tourfic.php',
       ),

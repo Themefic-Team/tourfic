@@ -40,7 +40,7 @@
   .inc-title {
     margin-bottom: 30px;
   }
-  /* AH Tour Styles*/
+
   .single_feature_box img {
       width: 25px;
     }
@@ -78,5 +78,35 @@
   .tf-exclude {
     width: 50%;
   }
-  /*AH css code end */
+
+
+  .inc-exc-content:before {
+    width: 50px;
+    height: 44px;
+}
+
+.inc-exc-content ul li {
+   
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+}
+
+.tf-include ul li:before, .tf-exclude ul li:before {
+    margin-right: 10px;
+}
+
+.inc-exc-content h4 {
+    
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: -0.4px;
+    color: #002C66;
+}
+
   

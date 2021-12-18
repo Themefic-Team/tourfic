@@ -53,3 +53,20 @@
     padding: 6px 12px;
     border-top: none;
   }
+  div#tf-booking-search-tabs {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.4px);
+    -webkit-backdrop-filter: blur(3.4px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 13px;
+}
+
+.tf-booking-form-tab {
+    padding: 0 11px;
+}
+button.tf-tablinks.active {
+    background: #00698f;
+    color: #f1f1f1;
+}

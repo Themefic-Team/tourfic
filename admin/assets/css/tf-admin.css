@@ -357,3 +357,11 @@
     position: inherit;
     top: inherit
 }
+strong.tf-pro {
+    color: red;
+}
+
+/* Rooms admin */
+.tf-field-wrap div.tf-label {
+    margin-bottom: 10px;
+}

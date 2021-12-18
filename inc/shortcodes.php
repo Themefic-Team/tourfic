@@ -109,7 +109,6 @@ function tourfic_tours_shortcode( $atts, $content = null ){
     <!-- Populer Destinaiton -->
     <section id="populer_section_wrapper">
         <div class="populer_inner">
-
             <div class="populer_section_heading">
                 <?php if (!empty($title)){ ?>
                   <h3><?php echo esc_html($title) ?></h3>
@@ -201,24 +200,32 @@ function tourfic_search_shortcode( $atts, $content = null ){
         $classes = " default-form ";
     }
 
-    ob_start(); ?>
+    ob_start();
+
+    //check if Tours published at least one post
+    $tf_count_posts = wp_count_posts( 'tf_tours' )->publish;
+    ?>
 
 
     <?php tourfic_fullwidth_container_start( $fullwidth ); ?>
     <div id="tf-booking-search-tabs">
         <!-- Start Booking widget -->
         <div class="tf-booking-form-tab">
-            <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-hotel-booking-form')">Hotel</button>
-            <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-tour-booking-form')">Tours</button>
+            <button class="tf-tablinks active" onclick="tfOpenForm(event, 'tf-hotel-booking-form')">Hotel</button>
+            <?php if( $tf_count_posts > 0) : ?>
+                <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-tour-booking-form')">Tours</button>
+            <?php endif; ?>
         </div>
         <div id="tf-hotel-booking-form" class="tf-tabcontent">
             <!--Added hotel search widget--> 
             <?php tourfic_search_widget_hotel( $classes, $title, $subtitle ); ?>
         </div>
+        <?php if( $tf_count_posts > 0) : ?>
         <div id="tf-tour-booking-form" class="tf-tabcontent">
              <!--Added tours search widget--> 
             <?php tourfic_search_widget_tour( $classes, $title, $subtitle ); ?>
         </div>
+        <?php endif; ?>
     </div>
     <!-- End Booking widget -->
 
@@ -239,7 +246,9 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
     if ( isset( $_GET ) ) {
         $_GET = array_map( 'stripslashes_deep', $_GET );
     }
-    $post_type = isset( $_GET['type'] ) ? $_GET['type'] : 'tourfic';
+    //Show both Hotel and Tourfic posts in the search result
+    $post_type = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
+    
     $taxonomy = $post_type == 'tf_tours' ? 'tour_destination' : 'destination';
     // Shortcode extract
     extract(
@@ -281,7 +290,6 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
         // Define Featured Category IDs first
         $destinations_ids = array();
        
-
         // Creating loop to insert IDs to array.
         foreach( $destinations as $cat ) {
             $destinations_ids[] = $cat->term_id;
@@ -365,10 +373,13 @@ function tourfic_trigger_filter_ajax(){
 
     $search = ( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
     $filters = ( $_POST['filters'] ) ? explode(',', sanitize_text_field( $_POST['filters'] )) : null;
+    $features = ( $_POST['features'] ) ? explode(',', sanitize_text_field( $_POST['features'] )) : null;
+    $posttype = $_POST['type']  ? sanitize_text_field( $_POST['type'] ): 'tourfic';
+    $taxonomy = $posttype == 'tf_tours' ? $taxonomy = 'tour_destination' : 'destination';
 
     // Propertise args
     $args = array(
-        'post_type' => 'tourfic',
+        'post_type' => $posttype,
         'post_status' => 'publish',
         'posts_per_page' => -1,
     );
@@ -378,7 +389,7 @@ function tourfic_trigger_filter_ajax(){
 
         // 1st search on Destination taxonomy
         $destinations = get_terms( array(
-            'taxonomy' => 'destination',
+            'taxonomy' => $taxonomy,
             'orderby' => 'name',
             'order' => 'ASC',
             'hide_empty' => 0, //can be 1, '1' too
@@ -398,7 +409,7 @@ function tourfic_trigger_filter_ajax(){
 
             $args['tax_query']['relation'] = $relation;
             $args['tax_query'][] = array(
-                'taxonomy' => 'destination',
+                'taxonomy' => $taxonomy,
                 'terms'    => $destinations_ids,
             );
 
@@ -428,16 +439,44 @@ function tourfic_trigger_filter_ajax(){
         }
 
     }
+    
+    //Query for the features filter of tours
+    if ( $features ) {
+        $args['tax_query']['relation'] = $relation;
 
+        if ( $filter_relation == "OR" ) {
+            $args['tax_query'][] = array(
+                'taxonomy' => 'tf_feature',
+                'terms'    => $features,
+            );
+        } else {
+            $args['tax_query']['tf_feature']['relation'] = 'AND';
+
+            foreach ($filters as $key => $term_id) {
+                $args['tax_query']['tf_feature'][] = array(
+                    'taxonomy' => 'tf_feature',
+                    'terms'    => array($term_id),
+                );
+            }
+
+        }
+
+    }
+    
     $loop = new WP_Query( $args ); ?>
-    <?php if ( $loop->have_posts() ) : ?>
-        <?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
-            <?php tourfic_archive_single(); ?>
-        <?php endwhile; ?>
-    <?php else : ?>
-        <?php get_template_part( 'template-parts/content', 'none' ); ?>
-    <?php endif; ?>
-    <?php wp_reset_postdata();
+    <?php if ( $loop->have_posts() ) : 
+        while ( $loop->have_posts() ) : $loop->the_post(); 
+            if( $posttype == 'tf_tours' ){
+                //include the tours search result and archive layout
+                tf_tours_archive_single();
+            }else{
+                tourfic_archive_single();
+            }  
+        endwhile; 
+     else : 
+        get_template_part( 'template-parts/content', 'none' );
+     endif; 
+    wp_reset_postdata();
 
     die();
 }

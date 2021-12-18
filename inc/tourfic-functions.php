@@ -173,7 +173,7 @@ function tourfic_get_review_form( ){
 	        //URL Field
 	        //'url' => '<p class="comment-form-url"><input type="text" id="url" name="url" placeholder="' . $comment_url .'"></input></p>',
 	        //Cookies
-	        'cookies' => '<input type="checkbox" required>' . $comment_cookies_1 . '<a href="' . get_privacy_policy_url() . '">' . $comment_cookies_2 . '</a>',
+	        'cookies' => '<input type="checkbox" required>' . $comment_cookies_1 . '<a href="' . get_privacy_policy_url() . '">' . $comment_cookies_2 . '</a></div>',
 	    ),
 	    // Change the title of send button
 	    'label_submit' => $comment_send,
@@ -188,7 +188,7 @@ function tourfic_get_review_form( ){
 	    //Cancel Reply Text
 	    'cancel_reply_link' => $comment_cancel,
 	    // Redefine your own textarea (the comment body).
-	    'comment_field' => $comment_meta.'<p class="comment-form-comment"><textarea id="comment" name="comment" aria-required="true" placeholder="' . $comment_body .'"></textarea></p>',
+	    'comment_field' => $comment_meta.'<div class="comment_form_fields"><p class="comment-form-comment"><textarea id="comment" name="comment" aria-required="true" placeholder="' . $comment_body .'"></textarea></p>',
 	    //Message Before Comment
 	    'comment_notes_before' => $comment_before,
 	    // Remove "Text or HTML to be displayed after the set of comment fields".
@@ -278,8 +278,71 @@ function tourfic_gallery_slider( $file_list_meta_key = null, $post_id = null, $c
 	}else{
 		$files = explode(',', $tf_gallery_ids);
 	}
-
+	$share_text = get_the_title();
+	$share_link = esc_url( home_url("/?p=").get_the_ID() );
 	?>
+	<?php if( 'tf_tours' == get_post_type() ) :  ?>
+
+		<!--Hero slider section start-->
+		<div class="tf-hero-area" style="background-image: url(<?php echo wp_get_attachment_url( $files[0], 'tf_gallery_thumb' ); ?>);">
+			<div class="tf-hero-top-icons">
+				<div class="share-tour">
+					<a href="#dropdown_share_center" class="share-toggle" data-toggle="true"><img src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/share-icon.png'; ?>"></a>
+					<div id="dropdown_share_center" class="share-tour-content">
+						<ul class="tf-dropdown__content">
+							<li>
+								<a href="http://www.facebook.com/share.php?u=<?php _e( $share_link ); ?>" class="tf-dropdown__item" target="_blank">
+									<span class="tf-dropdown__item-content"><?php echo tourfic_get_svg('facebook'); ?> <?php esc_html_e( 'Share on Facebook', 'tourfic' ); ?></span>
+								</a>
+							</li>
+							<li>
+								<a href="http://twitter.com/share?text=<?php _e( $share_text ); ?>&url=<?php _e( $share_link ); ?>" class="tf-dropdown__item" target="_blank">
+									<span class="tf-dropdown__item-content"><?php echo tourfic_get_svg('twitter'); ?> <?php esc_html_e( 'Share on Twitter', 'tourfic' ); ?></span>
+								</a>
+							</li>
+							<li>
+								<div class="share_center_copy_form tf-dropdown__item" title="Share this link" aria-controls="share_link_button">
+									<label class="share_center_copy_label" for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
+									<input type="text" id="share_link_input" class="share_center_url share_center_url_input" value="<?php _e( $share_link ); ?>" readonly>
+									<button id="share_link_button" class="share_center_copy_cta" tabindex="0" role="button">
+										<span class="tf-button__text share_center_copy_message"><?php esc_html_e( 'Copy link', 'tourfic' ); ?></span>
+										<span class="tf-button__text share_center_copied_message"><?php esc_html_e( 'Copied!', 'tourfic' ); ?></span>
+									</button>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<a href="#"><img src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/hart-icon.png'; ?>"></a>
+			
+			</div>
+
+			<div class="tf-hero-bottom-area">
+				<div class="tf-hero-btm-icon">
+					<img src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/yt-icon.png'; ?>">
+					<span><?php echo __( 'Tour Videos','tourfic' ); ?></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="tf-hero-slider-fixed">
+			<div class="tf-hero-slider-relative">
+				<div class="tf-hero-slider-cross-icon">
+					<i class="fas fa-times"></i>
+				</div>
+				<div class="tf-hero-slider-wrapper">
+					<?php 
+						foreach( $files as $attachment_id ){
+						?>
+						<div class="tf-single-slide-wrapper" style="background-image: url(<?php echo wp_get_attachment_url( $attachment_id, 'tf_gallery_thumb' ) ?>);"></div>
+					
+					<?php } ?>
+				</div>
+			</div>
+		</div>
+		<!--Hero slider section start-->
+		<?php endif; ?>
+		<?php if( 'tourfic' == get_post_type() ) : ?>
 	<div class="list-single-main-media fl-wrap" id="sec1">
 	    <div class="single-slider-wrapper fl-wrap">
 	        <div class="tf_slider-for fl-wrap">
@@ -307,6 +370,7 @@ function tourfic_gallery_slider( $file_list_meta_key = null, $post_id = null, $c
 	    </div>
 	</div>
 	<?php
+	endif;
 }
 
 
@@ -345,9 +409,7 @@ function tourfic_booking_widget_field( $args ){
     $default_val =  isset( $_GET[$name] ) ? $_GET[$name] : '';
     
     if( $name == 'check-in-out-date' ) {
-        
-        if( isset( $_GET['check-in-date'] ) && !empty( $_GET['check-in-date'] ) && isset( $_GET['check-out-date'] ) && !empty( $_GET['check-out-date'] ) ){
-            
+        if( isset( $_GET['check-in-date'] ) && !empty( $_GET['check-in-date'] ) && isset( $_GET['check-out-date'] ) && !empty( $_GET['check-out-date'] ) ){ 
             $default_val = $_GET['check-in-date'];
             $default_val .= ' - ';
             $default_val .= $_GET['check-out-date'];
@@ -551,7 +613,7 @@ function tourfic_tours_booking_submit_button( $label = null ){
 	foreach ( $booking_fields as $key ) {
 
 		$value = isset( $_GET[$key] ) ? $_GET[$key] : tourfic_getcookie( $key );
-
+		echo "<div class='tf-tours-booking-btn'>";
 		echo "<input type='hidden' placeholder='{$key}' name='{$key}' value='{$value}'>";
 	}
 
@@ -559,6 +621,7 @@ function tourfic_tours_booking_submit_button( $label = null ){
 	
 	<input type="hidden" name="tour_id" value="<?php echo get_the_ID(); ?>">
 	<button class="tf_button" type="submit"><?php esc_html_e( $label ); ?></button>
+</div>
 	<?php
 }
 
@@ -598,13 +661,30 @@ function tourfic_booking_set_search_result( $url ){
 add_filter( 'tf_booking_search_action', 'tourfic_booking_set_search_result' );
 
 // Tours price with html format
-function tf_tours_price_html( $price = null, $sale_price = null,$discounted_price = null ) {
+function tf_tours_price_html() {
+	$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+	$pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
+	$tour_type = $meta['type'] ? $meta['type'] : null;
+	if( $pricing_rule == 'group'){
+		$price = $meta['group_price'] ? $meta['group_price'] : 0;
+	}else{
+		$price = $meta['adult_price'] ? $meta['adult_price'] : 0;
+	}
+	$discount_type = $meta['discount_type'] ? $meta['discount_type'] : null;
+	$discounted_price = $meta['discount_price'] ? $meta['discount_price'] : NULL;
+	if( $discount_type == 'percent' ){
+		$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 ); 
+	}elseif( $discount_type == 'fixed'){
+		$sale_price = number_format( ( $price - $discounted_price ),1 );
+	}else if( $discount_type == 'none' ){
+		$sale_price = number_format( $price, 1 );
+	}
 	if ( !$price ) {
-		return;
+		echo  "<span class='tf-price'></span>";
 	}
 	ob_start();
 	?>
-	<?php if ( $discounted_price > 0 ) { ?>
+	<?php if (  $sale_price < $price && $discounted_price > 0 && $discount_type != 'none' ) { ?>
 		<span class="tf-price"><del><?php echo wc_price( $price ); ?></del></span>
 		<span class="tf-price"><?php echo wc_price( $sale_price ); ?></span>
 	<?php } else { ?>
@@ -823,12 +903,7 @@ if ( ! class_exists( 'TOURFIC_TAX_META' ) ) {
 }
 
 
-
-  
-   /**
-    * Add /**
- * Icon Upload to taxonomy
- **/
+/** Add Icon Upload to taxonomy **/
 
 if( ! class_exists( 'Adding_Filter_Image' ) ) {
   class Adding_Filter_Image {
@@ -1103,7 +1178,8 @@ function tourfic_sidebar_widgets_init() {
     	'Tourfic_TourFilter',
     	'Tourfic_Show_On_Map',
     	'Tourfic_Ask_Question',
-    	'Tourfic_Similar_Tours'
+    	'Tourfic_Similar_Tours',
+		'Tourfic_Tour_FeatureFilter'
     );
     foreach ($custom_widgets as $key => $widget) {
     	register_widget( $widget );
@@ -1330,6 +1406,7 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 				'label' => 'Check-in date',
 				'required' => 'true',
 				'disabled' => 'true',
+				'class' => 'tf-hotel-check-in',
 			)
 		); ?>
 
@@ -1342,6 +1419,7 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 				'required' => 'true',
 				'disabled' => 'true',
 				'label' => 'Check-out date',
+				'class' => 'tf-hotel-check-out'
 			)
 		); ?>
 		</div>
@@ -1360,7 +1438,7 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 }
 
 /**
- * Search Widget for Hotel search ..
+ * Search Widget for Hotel and Tour search ..
  * Seperated as functions for the tab of  search widgets
  */
 function tourfic_search_widget_tour( $classes, $title, $subtitle ){
@@ -1374,8 +1452,6 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 	<?php if( $subtitle ): ?>
 		<div class="tf_widget-subtitle"><?php esc_html_e( $subtitle ); ?></div>
 	<?php endif; ?>
-
-
 <div class="tf_homepage-booking">
 	<div class="tf_destination-wrap">
 		<div class="tf_input-inner">
@@ -1395,7 +1471,6 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 	</div>
 
 	<div class="tf_selectperson-wrap">
-
 		<div class="tf_input-inner">
 			<span class="tf_person-icon">
 				<?php echo tourfic_get_svg('person'); ?>
@@ -1406,7 +1481,6 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 			<div class="person-sep"></div>
 			<div class="infant-text">0 Infant</div>
 		</div>
-
 		<div class="tf_acrselection-wrap">
 			<div class="tf_acrselection-inner">
 				<div class="tf_acrselection">
@@ -1435,7 +1509,6 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 				</div>
 			</div>
 		</div>
-
 	</div>
 	
 	<div class="tf_selectdate-wrap">
@@ -1443,9 +1516,9 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 			<span class="tf_date-icon">
 				<?php echo tourfic_get_svg('calendar_today'); ?>
 			</span>
-			<div class="checkin-date-text">Check-in</div>
+			<div class="checkin-date-text"><?php echo __( 'From','tourfic' ) ?></div>
 			<div class="date-sep"></div>
-			<div class="checkout-date-text">Check-out</div>
+			<div class="checkout-date-text"><?php echo __( 'To','tourfic' ) ?></div>
 		</div>
 
 		<div class="tf_tours_date-wrap screen-reader-text">
@@ -1459,6 +1532,7 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 				'label' => 'Check-in date',
 				'required' => 'true',
 				'disabled' => 'true',
+				'class'    => 'tf-tour-check-in',
 			)
 		); ?>
 
@@ -1471,6 +1545,8 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 				'required' => 'true',
 				'disabled' => 'true',
 				'label' => 'Check-out date',
+				'class'    => 'tf-tour-check-out',
+
 			)
 		); ?>
 		</div>

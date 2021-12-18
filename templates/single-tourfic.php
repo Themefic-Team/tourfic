@@ -16,7 +16,7 @@ $additional_information = get_field('additional_information') ? get_field('addit
 $share_text = get_the_title();
 $share_link = esc_url( home_url("/?p=").get_the_ID() );
 $location = get_field('formatted_location') ? get_field('formatted_location') : null;
-$features = get_the_terms( get_the_ID() , array( 'tf_filters') );
+$features = get_the_terms( get_the_ID() ,  'tf_filters' );
 
 $terms_and_conditions = get_post_meta( $post->ID, 'terms_and_conditions', true );
 $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $post->ID, 'tf_faqs', true ) : array();
@@ -27,7 +27,6 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 	<div class="tf_container">
 		<div class="tf_row">
 			<div class="tf_content tf_content-full mb-15">
-
 				<!-- Start title area -->
 				<div class="tf_title-area">
 					<h2 class="tf_title"><?php the_title(); ?></h2>
@@ -212,16 +211,21 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 						<div class="tf-faqs">
 						<?php foreach ( $tf_faqs as $key => $faq ): ?>
 							<div class="tf-single-faq">
-								<div class="faq-head">
-									<i class="fa fa-question-circle-o" aria-hidden="true">
-									</i> <?php esc_html_e( $faq['name'] ); ?>
-									<span class="faq-indicator">
-										<i class="fa fa-angle-up" aria-hidden="true"></i>
-										<i class="fa fa-angle-down" aria-hidden="true"></i>
-									</span>
+									<div class="tf-tours_faq_icon">
+									<i class="far fa-question-circle" aria-hidden="true"></i>
+									</div>
+									<div class="tf-tours_single_faq_inner">
+										<div class="faq-head">
+											<?php esc_html_e( $faq['name'] ); ?>
+											<span class="faq-indicator">
+												<i class="fas fa-minus" aria-hidden="true"></i>
+												<i class="fas fa-plus" aria-hidden="true"></i>
+											</span>
+										</div>
+										<div class="faq-content"><?php _e( $faq['desc'] ); ?></div>
+									</div>
+
 								</div>
-								<div class="faq-content"><?php _e( $faq['desc'] ); ?></div>
-							</div>
 						<?php endforeach; ?>
 						</div>
 					</div>
@@ -240,11 +244,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					endif;
 					?>
 				</div>
-
-
-
 				<!-- End Review Content -->
-
 
 				<!-- Start TOC Content -->
 				<div class="tf_toc-wrap">
@@ -253,8 +253,7 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 					</div>
 				</div>
 				<!-- End TOC Content -->
-
-
+			</div>
 			</div>
 			<!-- End Content -->
 

@@ -423,6 +423,9 @@ function taxonomy_template( $template ) {
     if ( is_tax( 'destination' ) ) {
         $template = dirname( __FILE__ ) . '/templates/taxonomy-destination.php';
     }
+    if ( is_tax( 'tour_destination' ) ) {
+        $template = dirname( __FILE__ ) . '/templates/taxonomy-tour_destination.php';
+    }
 
     return $template;
 

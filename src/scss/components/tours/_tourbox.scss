@@ -1,8 +1,14 @@
+.tf-tours_recomendation_area_wrapper {
+    background: #fafcfe;
+    padding: 50px 0px;
+}
+
 .tf-tourbox {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     color: #fff;
+    position: relative;
 }
 .single-tourbox {
     background-repeat: no-repeat;
@@ -55,4 +61,33 @@
     .star{
         color: #FFC314;
     }
+}
+button.tf-tourbox-arrow {
+    align-items: center;
+    background: none!important;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgb(0 44 102 / 20%);
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    position: absolute;
+    top: calc(50% - 30px);
+    transform: matrix(1,0,0,-1,0,0);
+    transition: .3s;
+    width: 50px;
+    z-index: 999;
+}
+button.tf-tourbox-arrow.prev-arrow.slick-arrow {
+    left: -60px;
+}
+
+button.tf-tourbox-arrow.next-arrow.slick-arrow {
+    right: -60px;
+}
+.slick-initialized .slick-slide.single-tourbox{
+    display: flex;
+}
+button.tf-tourbox-arrow {
+    color: black;
 }
