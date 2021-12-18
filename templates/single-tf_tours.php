@@ -350,7 +350,7 @@ $tf_overall_rate['review'] = null;
 		</div>    
     </div>	
     <!--End tour FAQ section-->
-
+<?php echo wp_count_posts('tf_tours')->publish; ?>
 	<!--Start tour recommendation section-->
 	<div class="tf-tours_recomendation_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">

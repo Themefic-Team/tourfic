@@ -68,7 +68,7 @@
         $('.tf-custom-review-slider-area').slick({
             arrows: true,
             fade: false,
-            slidesToShow: 3,
+            slidesToShow: 1,
             prevArrow: '<button class="tf-cr-slider-arrow slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>',
             nextArrow: '<button class="tf-cr-slider-arrow slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>',
             responsive: [
