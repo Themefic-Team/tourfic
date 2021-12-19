@@ -46,29 +46,31 @@
             prevArrow: '<button class="tf-hero-slider-arrow slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>',
             nextArrow: '<button class="tf-hero-slider-arrow slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>'
         });
-
-        $('.tf-tourbox').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            arrows: true,
-            fade: false,
-            prevArrow: '<button class="tf-tourbox-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>',
-            nextArrow: '<button class="tf-tourbox-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>',
-            responsive: [
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                    }
-                },
-            ],
-        });
+        var tfToursCount = $('.tf-tours_recomendation_area_wrapper').data('tours-count');
+        if( tfToursCount > 3 ){
+            $('.tf-tourbox').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                arrows: true,
+                fade: false,
+                prevArrow: '<button class="tf-tourbox-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>',
+                nextArrow: '<button class="tf-tourbox-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>',
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                        }
+                    },
+                ],
+            });
+        };
 
         $('.tf-custom-review-slider-area').slick({
             arrows: true,
             fade: false,
-            slidesToShow: 1,
+            slidesToShow: 3,
             prevArrow: '<button class="tf-cr-slider-arrow slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>',
             nextArrow: '<button class="tf-cr-slider-arrow slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>',
             responsive: [
@@ -542,15 +544,15 @@ console.log(tfMinDate);
             var $this = jQuery(this);
 
             var width = $this.attr('data-width');
-            /*
-                        $this.inViewport(function(px) {
-                            if( px > 0 ) {
-                                $this.css('width', +width+'%');
-                            } else {
-                                $this.css('width', '0%');
-                            }
-                        });
-            */
+           
+            $this.inViewport(function(px) {
+                if( px > 0 ) {
+                    $this.css('width', +width+'%');
+                } else {
+                    $this.css('width', '0%');
+                }
+            });
+            
         });
 
     });
@@ -786,7 +788,11 @@ console.log(tfMinDate);
 
         //Ratings copy/move under gallery
         var avg_rating = $('.tf-overall-ratings .overall-rate').text();
-        $('.tf_tours-title-area .reviews span').html(avg_rating);
+        if(avg_rating){
+            $('.tf_tours-title-area .reviews span').html(avg_rating);
+        }else{
+            $('.tf_tours-title-area .reviews span').html("0/5");
+        }
 
     });
 

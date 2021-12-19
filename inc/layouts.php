@@ -461,9 +461,10 @@ function tf_tours_booking_form( $post_id ) {
 		$max_seat = $meta['max_people'] ? $meta['max_people'] : '-1';
 		?>
 		<div class="tf-tour-booking-wrap" data-custom-availability="<?php echo $custom_availability; ?>" data-min-seat="<?php echo $min_seat; ?>" data-max-seat="<?php echo $max_seat; ?>" >
-		<?php }	?>
-	
-   
+		<?php }else{
+			echo '<div class="tf-tour-booking-wrap">';
+		}?>
+
 		<form class="tf_tours_booking">
 		<div class="tf_selectperson-wrap">
 		<div class="tf_input-inner">

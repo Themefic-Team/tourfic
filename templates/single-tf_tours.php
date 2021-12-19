@@ -46,7 +46,7 @@ $tf_overall_rate = array();
 $tf_overall_rate['review'] = null;
 
 ?>
-<div class="tourfic-wrap tf_tours-single-layout  tf-tours_nosidebar_layout default-style" data-custom-availability="<?php echo $custom_availability; ?>" data-continuous-array='<?php echo $continuous_availability;?>'>
+<div class="tourfic-wrap tf_tours-single-layout tf-tours_nosidebar_layout default-style" data-custom-availability="<?php echo $custom_availability; ?>" data-continuous-array='<?php echo $continuous_availability;?>'>
 	<?php do_action( 'tf_before_container' ); ?>
 	<div class="tf_container">
 		<div class="tf_row">
@@ -75,13 +75,9 @@ $tf_overall_rate['review'] = null;
 						<div class="tf-tours-ratings">
 							<div class="star">
 								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
 							</div>
 							<div class="reviews">
-								<span>5</span>
+								<span>0</span>
 							</div>
 						</div>
 					</div>
@@ -182,13 +178,12 @@ $tf_overall_rate['review'] = null;
 		</div>    
 	</div>    
     <!--End Decription/highlight section-->
-
+	<?php if( $feature_meta ) : ?>
 	<!--Start features section-->
 	<div class="tf-tours_features_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
-				<div class="tf-tours-content ">
-				<?php if( $feature_meta ) : ?>
+				<div class="tf-tours-content ">				
 					<div class="tf_features">
 						<div class="listing-title">
 							<h4 class="tf-tours_section_title"><?php esc_html_e( 'Features', 'tourfic' ); ?></h4>
@@ -209,20 +204,20 @@ $tf_overall_rate['review'] = null;
 
 						</div>
 					</div>
-					<?php endif; ?>
+					
 				</div>
 			</div>
 		</div>    
 	</div>    
     <!--End features section-->
+	<?php endif; ?>
 
-
+	<?php if( $inc || $exc ): ?>
 	<!--Start Include Exclude section-->
 	<div class="tf-tours_in_ex_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
-				<div class="tf-tours-content">
-				<?php if( $inc || $exc ): ?>			
+				<div class="tf-tours-content">							
 					<div class="inc-exc-section">
 						<div class="inc-exc-content">
 							<div class="tf-include">
@@ -250,20 +245,20 @@ $tf_overall_rate['review'] = null;
 								</ul>
 							</div>
 						</div>
-					</div>
-					<?php endif;?>
+					</div>				
 				</div>
 			</div>
 		</div>    
 	</div>    
     <!--End Include Exclude section-->
+	<?php endif;?>
 
+	<?php if( $itineraries ): ?>
 	<!--Start Iternary section-->
 	<div class="tf-tours_itinerary_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
 				<div class="tf-tours-content">
-				<?php if( $itineraries ): ?>
 					<div class="tf-itinerary">
 						<div class="itinerary-title">
 							<h4 class="tf-tours_section_title"><?php echo __( 'Travel Itinerary','tourfic' ); ?></h4>
@@ -289,13 +284,14 @@ $tf_overall_rate['review'] = null;
 						</div>
 						<?php } ?>
 					</div>
-					<?php endif; ?>
 				</div>
 			</div>
 		</div>    
 	</div>    
     <!--End Iternary section-->
+	<?php endif; ?>
 
+	<?php if( $location ):  ?>
 	<!--Start tour map section-->
 	<div class="tf-tours_map_area_wrapper tf-tours_section">
 		<div class="tf_container">
@@ -311,14 +307,15 @@ $tf_overall_rate['review'] = null;
 		</div> 
 	</div>
     <!--End tour map section-->
+	<?php endif; ?>
 
+	<?php if( $faqs ): ?>
 	<!--Start tour Faq section-->
 	<div class="tf-tours_faq_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
 				<!-- Start Content -->
 				<div class="tf-tours-content">
-				<?php if( $faqs ): ?>
 						<div class="faqs tf-tours_faq ">
 							<div class="highlights-title">
 								<h4 class="tf-tours_section_title"><?php esc_html_e( 'Frequently asked questions?', 'tourfic' ); ?></h4>
@@ -344,15 +341,18 @@ $tf_overall_rate['review'] = null;
 							<?php endforeach; ?>
 							</div>
 						</div>
-					<?php endif; ?>
 				</div>
 			</div>
 		</div>    
     </div>	
     <!--End tour FAQ section-->
-<?php echo wp_count_posts('tf_tours')->publish; ?>
+	<?php endif; ?>
+
+	<?php $tf_tours_count = wp_count_posts('tf_tours')->publish;
+		if( $tf_tours_count > 1 ) :
+	?>
 	<!--Start tour recommendation section-->
-	<div class="tf-tours_recomendation_area_wrapper tf-tours_section plr-15">
+	<div data-tours-count="<?php echo $tf_tours_count; ?>" class="tf-tours_recomendation_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
 				<!-- Start Content -->
@@ -413,8 +413,9 @@ $tf_overall_rate['review'] = null;
 		</div> 
 	</div>
     <!--End tour recommendation section-->
+	<?php endif; ?>
+
 	<!-- Custom review section start j-->
-	
 	<div class="tf-tours_review_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf-custom-review-section-wrapper">
@@ -465,9 +466,9 @@ $tf_overall_rate['review'] = null;
 				<?php endif; ?>	
 				<div class="tf-tours_submit_review">
 					<?php
-							if ( comments_open() || get_comments_number() ) :
-								comments_template();
-							endif;
+						if ( comments_open() || get_comments_number() ) :
+							comments_template();
+						endif;
 					?>				
 				</div>						
 			</div>

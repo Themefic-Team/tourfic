@@ -240,7 +240,7 @@ function tourfic_attach_city_to_author( $author ) {
 
     <?php if( $tf_comment_meta ) : ?>
     	<div class="tf_comment-metas">
-    	<?php foreach ($tf_comment_meta as $key => $value) : ?>
+    	<?php foreach ( $tf_comment_meta as $key => $value ) : ?>
 			<div class="comment-meta">
 				<label class="tf_comment_meta-key"><?php _e( $key ); ?></label>
 				<div class="tf_comment_meta-ratings"><?php _e( tourfic_star_generate($value) ); ?></div>
@@ -341,8 +341,8 @@ function tourfic_gallery_slider( $file_list_meta_key = null, $post_id = null, $c
 			</div>
 		</div>
 		<!--Hero slider section start-->
-		<?php endif; ?>
-		<?php if( 'tourfic' == get_post_type() ) : ?>
+	<?php endif; ?>
+	<?php if( 'tourfic' == get_post_type() ) : ?>
 	<div class="list-single-main-media fl-wrap" id="sec1">
 	    <div class="single-slider-wrapper fl-wrap">
 	        <div class="tf_slider-for fl-wrap">
