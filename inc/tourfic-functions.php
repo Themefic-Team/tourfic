@@ -256,6 +256,7 @@ function tourfic_attach_city_to_author( $author ) {
     return $author;
 }
 
+
 /**
  * Sample template tag function for outputting a cmb2 file_list
  *
@@ -278,9 +279,42 @@ function tourfic_gallery_slider( $file_list_meta_key = null, $post_id = null, $c
 	}else{
 		$files = explode(',', $tf_gallery_ids);
 	}
-	$share_text = get_the_title();
-	$share_link = esc_url( home_url("/?p=").get_the_ID() );
+
 	?>
+	<?php if( 'tf_tours' == get_post_type() ) :  ?>
+		<!--Hero slider section start-->
+		<div class="tf-hero-area" style="background-image: url(<?php echo wp_get_attachment_url( $files[0], 'tf_gallery_thumb' ); ?>);">
+			<div class="tf-hero-top-icons">
+				<a href="#"><img src="<?php echo plugin_dir_url(dirname(__FILE__)) . '/assets/img/share-icon.png'; ?>"></a>
+				<a href="#"><img src="<?php echo plugin_dir_url(dirname(__FILE__)) . '/assets/img/hart-icon.png'; ?>"></a>
+			</div>
+
+			<div class="tf-hero-bottom-area">
+				<div class="tf-hero-btm-icon">
+					<img src="<?php echo plugin_dir_url(dirname(__FILE__)) . '/assets/img/yt-icon.png'; ?>">
+					<span><?php echo __( 'Tour Videos','tourfic' ); ?></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="tf-hero-slider-fixed">
+			<div class="tf-hero-slider-relative">
+				<div class="tf-hero-slider-cross-icon">
+					<i class="fas fa-times"></i>
+				</div>
+				<div class="tf-hero-slider-wrapper">
+					<?php 
+						foreach( $files as $attachment_id ){
+						?>
+						<div class="tf-single-slide-wrapper" style="background-image: url(<?php echo wp_get_attachment_url( $attachment_id, 'tf_gallery_thumb' ) ?>);"></div>
+					
+					<?php } ?>
+				</div>
+			</div>
+		</div>
+		<!--Hero slider section start-->
+		<?php endif; ?>
+		<?php if( 'tourfic' == get_post_type() ) : ?>
 	<div class="list-single-main-media fl-wrap" id="sec1">
 	    <div class="single-slider-wrapper fl-wrap">
 	        <div class="tf_slider-for fl-wrap">
@@ -307,7 +341,8 @@ function tourfic_gallery_slider( $file_list_meta_key = null, $post_id = null, $c
 	        </div>
 	    </div>
 	</div>
-<?php
+	<?php
+	endif;
 }
 
 
