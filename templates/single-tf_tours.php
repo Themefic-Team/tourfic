@@ -197,7 +197,7 @@ $tf_overall_rate['review'] = null;
 						
 						?>
 						<div class="single_feature_box">
-							<img src="<?php echo $term_meta['fetures_icon']; ?>" alt="">
+							<img src="<?php echo $term_meta['features_icon']; ?>" alt="">
 							<p class="feature_list_title"><?php echo $term->name;  ?></p>
 						</div>
 						<?php endforeach; ?>

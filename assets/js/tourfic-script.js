@@ -133,7 +133,7 @@
         }
 
         // Usage DOM: <div data-fullwidth="true">...</div> in JS: fullwidthInit("[data-fullwidth=true]");
-        fullwidthInit("[data-fullwidth=true]");
+        //fullwidthInit("[data-fullwidth=true]");
 
         // Share copy
         $('button#share_link_button').click(function () {

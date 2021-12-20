@@ -51,7 +51,7 @@ function tourfic_destinations_shortcode( $atts, $content = null ){
             ?>
 
             <div class="single_recomended_item">
-                <a href="<?php echo tourfic_booking_search_action(); ?>?destination=/<?php _e( $term->slug ); ?>">
+                <a href="<?php echo tourfic_booking_search_action(); ?>?destination=<?php _e( $term->slug ); ?>">
                   <div class="single_recomended_content" style="background-image: url(<?php echo wp_get_attachment_url( $image_id ); ?>);">
                     <div class="recomended_place_info_header">
                       <h3><?php _e( $term->name ); ?></h3>
@@ -74,6 +74,79 @@ function tourfic_destinations_shortcode( $atts, $content = null ){
     <?php return ob_get_clean();
 }
 add_shortcode('tourfic_destinations', 'tourfic_destinations_shortcode');
+
+
+/**
+ * Destination Shortcode Function
+ */
+function tf_tour_destinations_shortcode( $atts, $content = null ){
+
+    // Shortcode extract
+    extract(
+      shortcode_atts(
+        array(
+            'orderby' => 'name',
+            'order' => 'ASC',
+            'hide_empty' => 0,
+          ),
+        $atts
+      )
+    );
+
+    // 1st search on Destination taxonomy
+    $destinations = get_terms( array(
+        'taxonomy' => 'tour_destination',
+        'orderby' => $orderby,
+        'order' => $order,
+        'hide_empty' => $hide_empty, //can be 1, '1' too
+        'hierarchical' => 0, //can be 1, '1' too
+        'search' => '',
+        'number' => 6,
+        //'name__like' => '',
+    ) );
+
+    ob_start();
+
+    if ( $destinations ) : ?>
+    <!-- Recommended destinations  -->
+    <section id="recomended_section_wrapper">
+        <div class="recomended_inner">
+            <?php //var_dump($destinations); ?>
+        <?php foreach( $destinations as $term ) :
+            $image_id = get_term_meta( $term->term_id, 'tour_destination_meta', true );
+            $image_url = !empty($image_id['tour_destination_meta']) ? $image_id['tour_destination_meta'] : '';
+
+            $term_link = get_term_link( $term );
+
+            if ( is_wp_error( $term_link ) ) {
+                continue;
+            }
+            ?>
+
+            <div class="single_recomended_item">
+                <a href="<?php echo tourfic_booking_search_action(); ?>?tour_destination=<?php _e( $term->slug ); ?>">
+                  <div class="single_recomended_content" style="background-image: url(<?php echo $image_url; ?>);">
+                    <div class="recomended_place_info_header">
+                      <h3><?php _e( $term->name ); ?></h3>
+                      <p><?php printf( esc_html__( "%s properties", 'tourfic' ), $term->count); ?></p>
+                    </div>
+                    <?php if( $term->description ): ?>
+                        <div class="recomended_place_info_footer">
+                            <p><?php echo nl2br($term->description); ?></p>
+                        </div>
+                    <?php endif; ?>
+                  </div>
+                </a>
+            </div>
+
+        <?php endforeach; ?>
+        </div>
+     </section>
+    <!-- Recommended destinations  End-->
+    <?php endif; ?>
+    <?php return ob_get_clean();
+}
+add_shortcode('tour_destinations', 'tf_tour_destinations_shortcode');
 
 /**
  * Tours Shortcode
@@ -178,6 +251,108 @@ function tourfic_tours_shortcode( $atts, $content = null ){
 
 add_shortcode('tf_tours', 'tourfic_tours_shortcode');
 
+/**
+ * Tours grid Shortcode
+ */
+function tf_tours_grid_shortcode( $atts, $content = null ){
+    extract(
+        shortcode_atts(
+          array(
+              'title'  => '',  //title populer section
+              'subtitle'  => '',   // Sub title populer section
+              'count'  => 10,
+              'slidesToShow'  => 5,
+            ),
+          $atts
+        )
+    );
+
+    $args = array(
+        'post_type' => 'tf_tours',
+        'post_status' => 'publish',
+        'posts_per_page' => $count,
+    );
+
+    ob_start();
+
+    $hotel_loop = new WP_Query( $args );
+
+    // Generate an Unique ID
+    $thisid = uniqid('tfpopular_');
+
+    ?>
+    <?php if ( $hotel_loop->have_posts() ) : ?>
+    <!-- Populer Destinaiton -->
+    <section id="populer_section_wrapper">
+        <div class="populer_inner">
+            <div class="populer_section_heading">
+                <?php if (!empty($title)){ ?>
+                  <h3><?php echo esc_html($title) ?></h3>
+                <?php }?>
+                <?php if (!empty($subtitle)){ ?>
+                  <p><?php echo esc_html($subtitle) ?></p>
+                <?php }?>
+            </div>
+
+            <div class="popupler_widget_wrapper">
+                <div id="<?php echo $thisid; ?>" class="populer_widget_inner">
+                    <?php while ( $hotel_loop->have_posts() ) : $hotel_loop->the_post(); ?>
+                        <div class="single_populer_item">
+                            <a href="<?php the_permalink(); ?>">
+                              <div class="populer_item_img" style="background-image: url(<?php the_post_thumbnail_url(); ?>);">
+                              </div>
+                              <div class="tourfic_location_widget_meta">
+                                  <p class="tourfic_widget_location_title"><?php the_title(); ?></p>
+                              </div>
+                            </a>
+                        </div>
+                    <?php endwhile; ?>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        jQuery('#<?php echo $thisid; ?>').slick({
+        dots: false,
+        infinite: true,
+        slidesToShow: <?php echo $slidesToShow; ?>,
+        slidesToScroll: 1,
+        autoplay:true,
+        //autoplaySpeed:2500,
+        arrows:false,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1,
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
+
+      });
+    </script>
+    <?php endif; wp_reset_postdata(); ?>
+
+    <?php return ob_get_clean();
+}
+
+add_shortcode('tf_tours_grid', 'tf_tours_grid_shortcode');
 
 /**
  * Search Shortcode Function
