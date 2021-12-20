@@ -254,7 +254,6 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				</div>
 				<!-- End TOC Content -->
 			</div>
-			</div>
 			<!-- End Content -->
 
 			<!-- Start Sidebar -->

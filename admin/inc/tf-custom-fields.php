@@ -191,9 +191,7 @@ class Tourfic_Metabox_Class {
 
 	   		<div class="tf-box-content">
 				<div class="tf-tab-container">
-
 					<div id="rooms" class="tf-tab-content">
-
 						<h4><?php esc_html_e( 'Room Options', 'tourfic' ); ?></h4>
 
 						<div class="tf-field-wrap">
@@ -279,7 +277,6 @@ class Tourfic_Metabox_Class {
                         </h4>
 
                         <div class="tf-field-wrap">
-
                             <input type="search" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
                             <?php
                             $tf_filters = get_terms( 'tf_filters', array(
@@ -290,12 +287,11 @@ class Tourfic_Metabox_Class {
                             $tf_filters_obj_list = get_the_terms( $post->ID, 'tf_filters' );
                             $selected_terms = wp_list_pluck( $tf_filters_obj_list, 'term_id' );
 
-                            if ( ! empty( $tf_filters ) && ! is_wp_error( $tf_filters ) ){
+                            if ( ! empty( $tf_filters ) && ! is_wp_error( $tf_filters ) && ! empty($selected_terms) ){
                                 echo '<ul class="filter-list" id="myUL">';
                                 foreach ( $tf_filters as $term ) { ?>
                                     <li>
                                         <input class="screen-reader-text" type="checkbox" name="tf_filters[]" id="tf_filter-<?php esc_attr_e( $term->term_id ); ?>" value="<?php esc_attr_e( $term->term_id ); ?>" <?php if ( in_array( $term->term_id, $selected_terms ) ) echo 'checked="checked"'; ?>>
-
                                         <label for="tf_filter-<?php esc_attr_e( $term->term_id ); ?>" title="<?php esc_attr_e( 'Toggle selection', 'tourfic' ); ?>">
                                             <?php esc_html_e( $term->name ); ?>
                                             <i class="fa fa-plus"></i>
@@ -339,7 +335,6 @@ class Tourfic_Metabox_Class {
                             <input type="text" class="wfull" placeholder="<?php esc_attr_e( 'abc@xyz.com', 'tourfic' ); ?>" id="send_email_to" name="send_email_to" value="<?php echo esc_attr( $send_email_to ); ?>" size="25" />
                             <p>Available tags: <code title="<?php esc_html_e( 'Site admin email.', 'tourfic' ); ?>">{{admin_email}}</code>, <code title="<?php esc_html_e( 'Author email of this post.', 'tourfic' ); ?>">{{author_email}}</code></p>
                         </div>
-
                     </div>
 
                     <div id="tos-tab" class="tf-tab-content">

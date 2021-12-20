@@ -160,28 +160,28 @@ if ( class_exists( 'CSF' ) ) {
         'fields' => array(
 
             array(
-                'id'       => 'email',
+                'id'       => apply_filters('tf_contact_email',''),
                 'type'     => 'text',
                 'title'    => __( 'Email address', 'tourfic' ),
-                'subtitle' => __( 'Input email address', 'tourfic' ),
+                'subtitle' => __( '<strong class="tf-pro">Pro</strong>', 'tourfic' ),
             ),
             array(
                 'id'       => 'phone',
                 'type'     => 'text',
                 'title'    => __( 'Phone Number', 'tourfic' ),
-                'subtitle' => __( 'Input Phone Number', 'tourfic' ),
+                'subtitle' => __( '<strong class="tf-pro">Pro</strong>', 'tourfic' ),
             ),
             array(
                 'id'       => 'website',
                 'type'     => 'text',
                 'title'    => __( 'Website Url', 'tourfic' ),
-                'subtitle' => __( 'Input website url', 'tourfic' ),
+                'subtitle' => __( '<strong class="tf-pro">Pro</strong>', 'tourfic' ),
             ),
             array(
                 'id'       => 'fax',
                 'type'     => 'text',
                 'title'    => __( 'Fax Number', 'tourfic' ),
-                'subtitle' => __( 'Input Fax Number', 'tourfic' ),
+                'subtitle' => __( '<strong class="tf-pro">Pro</strong>', 'tourfic' ),
             ),
 
         ),
