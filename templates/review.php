@@ -35,8 +35,9 @@ if ( post_password_required() ) {
 	foreach ( $comments as $comment ) {
 
 	    $tf_comment_meta = get_comment_meta( $comment->comment_ID, 'tf_comment_meta', true );
+
 	    if( $tf_comment_meta ) {
-	    	foreach ( $tf_comment_meta as $key => $value ) {
+	    	foreach ($tf_comment_meta as $key => $value) {
 	    		$tf_overall_rate[$key][] = $value ? $value : "5";
 	    	}
 	    } else {
@@ -106,8 +107,10 @@ if ( post_password_required() ) {
 		<nav id="comment-nav-above" class="navigation comment-navigation" aria-label="<?php esc_attr_e( 'Comments Navigation', 'tourfic' ); ?>">
 			<h3 class="screen-reader-text"><?php echo esc_html( astra_default_strings( 'string-comment-navigation-next', false ) ); ?></h3>
 			<div class="nav-links">
+
 				<div class="nav-previous"><?php previous_comments_link( astra_default_strings( 'string-comment-navigation-previous', false ) ); ?></div>
 				<div class="nav-next"><?php next_comments_link( astra_default_strings( 'string-comment-navigation-next', false ) ); ?></div>
+
 			</div><!-- .nav-links -->
 		</nav><!-- #comment-nav-above -->
 		<?php endif; ?>

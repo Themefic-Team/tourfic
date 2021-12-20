@@ -261,9 +261,6 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				<?php tourfic_get_sidebar( 'single' ); ?>
 			</div>
 			<!-- End Sidebar -->
-			
-		</div>
-		</div>
 		</div>
 	</div>
 	<?php do_action( 'tf_after_container' ); ?>

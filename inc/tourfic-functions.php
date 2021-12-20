@@ -173,7 +173,7 @@ function tourfic_get_review_form( ){
 	        //URL Field
 	        //'url' => '<p class="comment-form-url"><input type="text" id="url" name="url" placeholder="' . $comment_url .'"></input></p>',
 	        //Cookies
-	        'cookies' => '<input type="checkbox" required>' . $comment_cookies_1 . '<a href="' . get_privacy_policy_url() . '">' . $comment_cookies_2 . '</a></div>',
+	        'cookies' => '<input type="checkbox" required>' . $comment_cookies_1 . '<a href="' . get_privacy_policy_url() . '">' . $comment_cookies_2 . '</a>',
 	    ),
 	    // Change the title of send button
 	    'label_submit' => $comment_send,
@@ -188,7 +188,7 @@ function tourfic_get_review_form( ){
 	    //Cancel Reply Text
 	    'cancel_reply_link' => $comment_cancel,
 	    // Redefine your own textarea (the comment body).
-	    'comment_field' => $comment_meta.'<div class="comment_form_fields"><p class="comment-form-comment"><textarea id="comment" name="comment" aria-required="true" placeholder="' . $comment_body .'"></textarea></p>',
+	    'comment_field' => $comment_meta.'<p class="comment-form-comment"><textarea id="comment" name="comment" aria-required="true" placeholder="' . $comment_body .'"></textarea></p>',
 	    //Message Before Comment
 	    'comment_notes_before' => $comment_before,
 	    // Remove "Text or HTML to be displayed after the set of comment fields".
@@ -281,68 +281,6 @@ function tourfic_gallery_slider( $file_list_meta_key = null, $post_id = null, $c
 	$share_text = get_the_title();
 	$share_link = esc_url( home_url("/?p=").get_the_ID() );
 	?>
-	<?php if( 'tf_tours' == get_post_type() ) :  ?>
-
-		<!--Hero slider section start-->
-		<div class="tf-hero-area" style="background-image: url(<?php echo wp_get_attachment_url( $files[0], 'tf_gallery_thumb' ); ?>);">
-			<div class="tf-hero-top-icons">
-				<div class="share-tour">
-					<a href="#dropdown_share_center" class="share-toggle" data-toggle="true"><img src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/share-icon.png'; ?>"></a>
-					<div id="dropdown_share_center" class="share-tour-content">
-						<ul class="tf-dropdown__content">
-							<li>
-								<a href="http://www.facebook.com/share.php?u=<?php _e( $share_link ); ?>" class="tf-dropdown__item" target="_blank">
-									<span class="tf-dropdown__item-content"><?php echo tourfic_get_svg('facebook'); ?> <?php esc_html_e( 'Share on Facebook', 'tourfic' ); ?></span>
-								</a>
-							</li>
-							<li>
-								<a href="http://twitter.com/share?text=<?php _e( $share_text ); ?>&url=<?php _e( $share_link ); ?>" class="tf-dropdown__item" target="_blank">
-									<span class="tf-dropdown__item-content"><?php echo tourfic_get_svg('twitter'); ?> <?php esc_html_e( 'Share on Twitter', 'tourfic' ); ?></span>
-								</a>
-							</li>
-							<li>
-								<div class="share_center_copy_form tf-dropdown__item" title="Share this link" aria-controls="share_link_button">
-									<label class="share_center_copy_label" for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
-									<input type="text" id="share_link_input" class="share_center_url share_center_url_input" value="<?php _e( $share_link ); ?>" readonly>
-									<button id="share_link_button" class="share_center_copy_cta" tabindex="0" role="button">
-										<span class="tf-button__text share_center_copy_message"><?php esc_html_e( 'Copy link', 'tourfic' ); ?></span>
-										<span class="tf-button__text share_center_copied_message"><?php esc_html_e( 'Copied!', 'tourfic' ); ?></span>
-									</button>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<a href="#"><img src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/hart-icon.png'; ?>"></a>
-			
-			</div>
-
-			<div class="tf-hero-bottom-area">
-				<div class="tf-hero-btm-icon">
-					<img src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/yt-icon.png'; ?>">
-					<span><?php echo __( 'Tour Videos','tourfic' ); ?></span>
-				</div>
-			</div>
-		</div>
-
-		<div class="tf-hero-slider-fixed">
-			<div class="tf-hero-slider-relative">
-				<div class="tf-hero-slider-cross-icon">
-					<i class="fas fa-times"></i>
-				</div>
-				<div class="tf-hero-slider-wrapper">
-					<?php 
-						foreach( $files as $attachment_id ){
-						?>
-						<div class="tf-single-slide-wrapper" style="background-image: url(<?php echo wp_get_attachment_url( $attachment_id, 'tf_gallery_thumb' ) ?>);"></div>
-					
-					<?php } ?>
-				</div>
-			</div>
-		</div>
-		<!--Hero slider section start-->
-	<?php endif; ?>
-	<?php if( 'tourfic' == get_post_type() ) : ?>
 	<div class="list-single-main-media fl-wrap" id="sec1">
 	    <div class="single-slider-wrapper fl-wrap">
 	        <div class="tf_slider-for fl-wrap">
@@ -369,8 +307,7 @@ function tourfic_gallery_slider( $file_list_meta_key = null, $post_id = null, $c
 	        </div>
 	    </div>
 	</div>
-	<?php
-	endif;
+<?php
 }
 
 
