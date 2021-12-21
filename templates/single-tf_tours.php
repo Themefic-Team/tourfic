@@ -301,7 +301,7 @@ $tf_overall_rate['review'] = null;
 				<div class="tf-tours-content">
 					<div class="tf_map_section">
 						<div class="tf_map">
-						<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr($location); ?>&output=embed" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+						<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $location ); ?>&output=embed" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 						</div>
 					</div>
 				</div>
@@ -384,7 +384,7 @@ $tf_overall_rate['review'] = null;
 							<div class="single-tourbox" style="background-image:url(<?php echo get_the_post_thumbnail_url(get_the_ID(),'full') ?>)">
 								<div class="tf-tourbox-info">
 										<div class="left-info">
-											<h3 class="tf-tour-title"><?php the_title(); ?></h3>
+											<h3 class="tf-tour-title"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h3>
 											<p class="tf-location"><?php echo __( $location,'tourfic' ) ?></p>
 										</div>
 										<div class="right-info">

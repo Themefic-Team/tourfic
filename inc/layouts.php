@@ -136,7 +136,9 @@ function tf_tours_archive_single() {
 									$term = get_term_by( 'id', $feature, 'tf_feature' );								
 								?>
 								<div class="single_feature_box">
-									<img src="<?php echo $term_meta['fetures_icon']; ?>" alt="">
+									<?php if($term_meta['features_icon']): ?>
+									<img src="<?php echo $term_meta['features_icon']; ?>" alt="">
+									<?php endif; ?>
 									<p class="feature_list_title"><?php echo $term->name;  ?></p>
 								</div>
 								<?php endforeach; ?>
