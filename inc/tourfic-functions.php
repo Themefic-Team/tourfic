@@ -1105,7 +1105,7 @@ add_action( 'wp_enqueue_scripts', 'tourfic_custom_css', 200 );
  */
 function tourfic_avg_ratings( $a = array() ){
 	if ( !$a ) {
-		return '5.0';
+		return 'N/A';
 	}
 
 	$a = array_filter($a);
