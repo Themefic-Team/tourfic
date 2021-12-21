@@ -51,19 +51,6 @@ if( class_exists( 'CSF' ) ) {
       'default'  => 'single-tourfic.php',
       ),
 
-      array(
-        'id'        => 'activated_post_types',
-        'type'      => 'image_select',
-        'title'     => 'Activated Types',
-        'multiple'  => true,
-        'options'   => array(
-          'value-1' => 'http://codestarframework.com/assets/images/placeholder/80x80-2c3e50.gif',
-          'value-2' => 'http://codestarframework.com/assets/images/placeholder/80x80-2c3e50.gif',
-          'value-3' => 'http://codestarframework.com/assets/images/placeholder/80x80-2c3e50.gif',
-        ),
-        'default'   => array( 'value-1', 'value-3' )
-      ),
-
     )
     
   ) );
