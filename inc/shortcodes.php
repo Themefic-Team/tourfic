@@ -423,15 +423,22 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
     }
     //Show both Hotel and Tourfic posts in the search result
     $post_type = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
-    
+
+    if($post_type == 'page' && get_query_var( 'destination' ) == ''){
+        $post_type = 'tf_tours';
+    }else if( $post_type == 'page' && get_query_var( 'tour_destination' ) == '' ){
+        $post_type = 'tourfic';
+    }
+
     $taxonomy = $post_type == 'tf_tours' ? 'tour_destination' : 'destination';
+    
     // Shortcode extract
     extract(
       shortcode_atts(
         array(
             'style'  => 'default',
             'max'  => '50',
-            'search' => isset( $_GET['destination'] ) ? $_GET['destination'] : '',
+            'search' => isset( $_GET['destination'] ) ? $_GET['destination'] : $_GET['tour_destination'],
           ),
         $atts
       )

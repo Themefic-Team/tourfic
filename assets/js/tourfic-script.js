@@ -219,7 +219,6 @@
         } else {
             tfMaxDate =  continuousCheckOut;
         }
-console.log(tfMinDate);
         //Tours booking DateSelection init in single tour page
         $('.tours-check-in-out').daterangepicker({
             "locale": {
