@@ -431,10 +431,10 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
     }
 
     $taxonomy = $post_type == 'tf_tours' ? 'tour_destination' : 'destination';
-    if(isset($_GET['tour_destination']) ){
+    if( isset($_GET['tour_destination']) ){
         $dest = $_GET['tour_destination'];
     }else{
-        $dest = '';
+        $dest = get_query_var('tour_destination');
     }
 
     // Shortcode extract

@@ -363,12 +363,6 @@ if ( class_exists( 'CSF' ) ) {
                         'title'    => __( 'Maximum people', 'tourfic' ),
                         'subtitle' => __( 'Maximum seat number', 'tourfic' ),
                     ),
-                    array(
-                        'id'       => 'calendar',
-                        'type'     => 'calendar',
-                        'title'    => __( 'Availability', 'tourfic' ),
-                        'subtitle' => __( 'Select your check in out date', 'tourfic' ),
-                    ),
                 ),
             ),
 
