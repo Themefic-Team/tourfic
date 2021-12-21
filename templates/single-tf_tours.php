@@ -192,12 +192,14 @@ $tf_overall_rate['review'] = null;
 					<div class="tf_feature_list">
 						<?php 
 						foreach( $feature_meta as $feature ):
-							$term_meta = get_term_meta( $feature, 'feature_meta', true );
+							$term_meta = get_term_meta( $feature, 'feature_meta', true );							
 							$term = get_term_by( 'id', $feature, 'tf_feature' );
-						
+							
 						?>
 						<div class="single_feature_box">
+							<?php if($term_meta['features_icon']):?>
 							<img src="<?php echo $term_meta['features_icon']; ?>" alt="">
+							<?php endif;?>
 							<p class="feature_list_title"><?php echo $term->name;  ?></p>
 						</div>
 						<?php endforeach; ?>
