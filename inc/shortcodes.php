@@ -431,14 +431,19 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
     }
 
     $taxonomy = $post_type == 'tf_tours' ? 'tour_destination' : 'destination';
-    
+    if(isset($_GET['tour_destination']) ){
+        $dest = $_GET['tour_destination'];
+    }else{
+        $dest = '';
+    }
+
     // Shortcode extract
     extract(
       shortcode_atts(
         array(
             'style'  => 'default',
             'max'  => '50',
-            'search' => isset( $_GET['destination'] ) ? $_GET['destination'] : $_GET['tour_destination'],
+            'search' => isset( $_GET['destination'] ) ? $_GET['destination'] : $dest,
           ),
         $atts
       )
@@ -523,7 +528,7 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
                                 $sale_price = number_format( ( $price - $discounted_price ),1 );
                             }
                             //tour archive single gird/section added
-                            tf_tours_archive_single( $price,$sale_price,$discounted_price );
+                            tf_tours_archive_single();
                         }
                         
                     endwhile;
