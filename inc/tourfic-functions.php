@@ -76,6 +76,16 @@ if ( !function_exists('get_field') ) {
  * Review form
  */
 function tourfic_get_review_form( ){
+
+	//tours and hotel comment conditional markup
+	if('tf_tours' === get_post_type()){
+		$div_start = "<div class='comment_form_fields'>";
+		$div_end   = "</div>";
+	}else{
+		$div_start = '';
+		$div_end   = '';
+	};
+	
 	//Declare Vars
 	$comment_send = __( 'Submit', 'tourfic' );
 	$comment_reply = __( 'Write a Review', 'tourfic' );
@@ -173,7 +183,7 @@ function tourfic_get_review_form( ){
 	        //URL Field
 	        //'url' => '<p class="comment-form-url"><input type="text" id="url" name="url" placeholder="' . $comment_url .'"></input></p>',
 	        //Cookies
-	        'cookies' => '<input type="checkbox" required>' . $comment_cookies_1 . '<a href="' . get_privacy_policy_url() . '">' . $comment_cookies_2 . '</a>',
+	        'cookies' => '<input type="checkbox" required>' . $comment_cookies_1 . '<a href="' . get_privacy_policy_url() . '">' . $comment_cookies_2 . '</a>' . $div_end,
 	    ),
 	    // Change the title of send button
 	    'label_submit' => $comment_send,
@@ -188,7 +198,7 @@ function tourfic_get_review_form( ){
 	    //Cancel Reply Text
 	    'cancel_reply_link' => $comment_cancel,
 	    // Redefine your own textarea (the comment body).
-	    'comment_field' => $comment_meta.'<p class="comment-form-comment"><textarea id="comment" name="comment" aria-required="true" placeholder="' . $comment_body .'"></textarea></p>',
+	    'comment_field' => $comment_meta . $div_start .'<p class="comment-form-comment"><textarea id="comment" name="comment" aria-required="true" placeholder="' . $comment_body .'"></textarea></p>',
 	    //Message Before Comment
 	    'comment_notes_before' => $comment_before,
 	    // Remove "Text or HTML to be displayed after the set of comment fields".
