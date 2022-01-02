@@ -429,7 +429,6 @@ function tf_tours_booking_form( $post_id ) {
     $type 					= $meta['type'];
     $custom_availability 	= $meta['custom_availability'];
 	$continuous_availability = $meta['continuous_availability'];
-	//var_dump($continuous_availability);
     if ( $type == 'fixed' ) {
         $first_check_in 	= $meta['fixed_availability']['check_in'] ? $meta['fixed_availability']['check_in'] : null;
         $last_check_out 	= $meta['fixed_availability']['check_out'] ? $meta['fixed_availability']['check_out'] : null;
@@ -513,7 +512,6 @@ function tf_tours_booking_form( $post_id ) {
 				'svg_icon'    => 'calendar_today',
 				'name'        => 'check-in-out-date',
 				'placeholder' => 'Select Date',
-				'label'       => 'Select date',
 				'required'    => 'true',
 				'disabled'    => 'true',
 				'class'       => 'tours-check-in-out',

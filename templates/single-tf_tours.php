@@ -87,13 +87,13 @@ $tf_overall_rate['review'] = null;
 		</div>
 	</div>
 
+	<?php if( $tour_duration ): ?>
 	<!--Information section start-->
 	<div class="tf-tours_info_feature_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
 				<div class="tf-tours-content">
 					<div class="tf-tours-informations">
-						<?php if( $tour_duration ): ?>
 						<div class="item">
 							<div class="icon">
 								<i class="far fa-clock"></i>
@@ -135,8 +135,7 @@ $tf_overall_rate['review'] = null;
 								<h4 class="title"><?php echo __( 'Language', 'tourfic' ); ?></h4>
 								<p><?php echo esc_html__( $language,'tourfic' ) ?></p>
 							</div>
-						</div>
-						<?php endif;?>
+						</div>					
 					</div>
 					<?php // echo tf_tours_booking_form($post->ID);?>
 				</div>
@@ -144,6 +143,7 @@ $tf_overall_rate['review'] = null;
 		</div>
 	</div>
    <!-- Information section end -->
+   <?php endif;?>
 
 	<!--Start Description section-->
 	<div class="tf-tours_content_area_wrapper tf-tours_section plr-15">
