@@ -475,7 +475,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'     => 'itinerary',
                 'type'   => 'repeater',
                 'title'  => __( 'Itinerary', 'tourfic' ),
-                'max'    => apply_filters( 'tf_repeater_limit', '1'),
+                'max'    => apply_filters( 'tf_repeater_limit', '5'),
                 'fields' => array(
                     array(
                         'id'       => 'time',
@@ -515,6 +515,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'     => 'inc',
                 'type'   => 'repeater',
                 'title'  => __( 'Include', 'tourfic' ),
+                'max'    => apply_filters( 'tf_repeater_limit', '5'),
                 'fields' => array(
                     array(
                         'id'       => 'inc',
@@ -528,6 +529,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'     => 'exc',
                 'type'   => 'repeater',
                 'title'  => __( 'Exclude', 'tourfic' ),
+                'max'    => apply_filters( 'tf_repeater_limit', '5'),
                 'fields' => array(
                     array(
                         'id'       => 'exc',
