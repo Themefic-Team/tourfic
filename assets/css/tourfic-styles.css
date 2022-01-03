@@ -2712,7 +2712,7 @@ form.tf_tours_booking .tf_selectperson-wrap {
     padding-left: 100px;
   }
   .tf-itinerary .tf-single-itinerary span.time {
-    height: 47px;
+    height: 37px;
   }
 
   .faqs.tf-tours_faq {
@@ -2781,6 +2781,10 @@ form.tf_tours_booking .tf_selectperson-wrap {
 
   .tf_comment-metas .comment-meta label {
     min-width: 180px;
+  }
+
+  .itinerary-head h5 {
+    font-size: 17px;
   }
 }
 /*Archive page*/
