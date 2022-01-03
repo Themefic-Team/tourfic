@@ -18,7 +18,6 @@
     .tf-tour-booking-wrap{
         height: auto;
         width: 95%;
-
         .tf_tours_booking{
             display: block;
 
@@ -45,8 +44,10 @@
             margin-bottom: 15px;
         }
     }
-   
-
+    
+    .tf-tours-fixed form.tf_tours_booking {
+        width: 90%;
+    }
     .tf-itinerary {
         padding: 50px 15px;
         .tf-single-itinerary {
@@ -68,8 +69,9 @@
         padding: 50px 25px;
     }
     .tf-tour-booking-wrap.tf-tours-fixed {
-        width: 90.5%;
+        width: 95.5%;
         z-index: 99999;
+        height: auto;
     } 
     .tf-tours_review_area_wrapper form#commentform {
         padding: 10px 0px;
@@ -88,7 +90,7 @@
         padding: 0 15px;
     }
     .inc-exc-section{
-        padding: 35px;
+        padding: 15px;
     }
     .tf_features {
         padding: 15px 30px;
