@@ -305,8 +305,17 @@ function tourfic_gallery_slider( $file_list_meta_key = null, $post_id = null, $c
 
 			<div class="tf-hero-bottom-area">
 				<div class="tf-hero-btm-icon">
-					<img src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/yt-icon.png'; ?>">
-					<span><?php echo __( 'Tour Videos','tourfic' ); ?></span>
+					
+					<?php
+						$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+						$tour_video = $meta['tour_video'] ? $meta['tour_video'] : '';
+						if ( $tour_video):
+					?>
+					<img src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/video.png'; ?>">
+					 <span><?php echo __( 'Tour Videos','tourfic' ); ?></span>
+					 <?php endif;	?>
+					 <img width="50px" src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/gallery.png'; ?>">
+					 <span><?php echo __( 'Tour Gallery','tourfic' ); ?></span>
 				</div>
 			</div>
 		</div>
