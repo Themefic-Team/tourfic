@@ -174,7 +174,9 @@ jQuery(function ($) {
 
     })
 
-
+    //repeater limitation message in free version
+    jQuery('.csf-repeater-alert.csf-repeater-max').text('You can not add more in Free version ');
+    
 
   });
 

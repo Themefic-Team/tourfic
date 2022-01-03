@@ -10,7 +10,11 @@ get_header('tourfic'); ?>
 <?php
 $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
 
-$location = $meta['location']['address'] ? $meta['location']['address'] : '';
+$location = isset( $meta['location']['address'] ) ? $meta['location']['address'] : '';
+$text_location = isset( $meta['text_location']) ? $meta['text_location'] : '';
+if( empty( $location ) ){
+	$location = $text_location;
+}
 $gallery = $meta['tour_gallery'] ? $meta['tour_gallery'] : array();
 $additional_information = $meta['additional_information'] ? $meta['additional_information'] : null; 
 $tour_duration = $meta['duration'] ? $meta['duration'] : null;

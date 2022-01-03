@@ -3,6 +3,10 @@
 * Function: tf_term_count
 * Return number of available terms
 */
+add_filter('tf_repeater_limit','my_functionsss',10);
+function my_functionsss(){
+	echo 2;
+}
 if( !function_exists('tf_term_count') ){
     function tf_term_count( $filter, $destination, $default_count ){
         
