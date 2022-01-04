@@ -362,6 +362,7 @@ function tourfic_search_shortcode( $atts, $content = null ){
       shortcode_atts(
         array(
             'style'  => 'default', //recomended, populer
+            'type'   => 'hotel',
             'title'  => '',  //title populer section
             'subtitle'  => '',   // Sub title populer section
             'classes'  => '',
@@ -376,9 +377,6 @@ function tourfic_search_shortcode( $atts, $content = null ){
     }
 
     ob_start();
-
-    //check if Tours published at least one post
-    $tf_count_posts = wp_count_posts( 'tf_tours' )->publish;
     ?>
 
 
@@ -386,16 +384,20 @@ function tourfic_search_shortcode( $atts, $content = null ){
     <div id="tf-booking-search-tabs">
         <!-- Start Booking widget -->
         <div class="tf-booking-form-tab">
-            <button class="tf-tablinks active" onclick="tfOpenForm(event, 'tf-hotel-booking-form')">Hotel</button>
-            <?php if( $tf_count_posts > 0) : ?>
+            <?php if( $type == 'hotel' || $type == 'all') : ?>
+                <button class="tf-tablinks active" onclick="tfOpenForm(event, 'tf-hotel-booking-form')">Hotel</button>
+            <?php endif; ?>
+            <?php if( $type == 'tour' || $type == 'all') : ?>
                 <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-tour-booking-form')">Tours</button>
             <?php endif; ?>
         </div>
-        <div id="tf-hotel-booking-form" class="tf-tabcontent">
-            <!--Added hotel search widget--> 
-            <?php tourfic_search_widget_hotel( $classes, $title, $subtitle ); ?>
-        </div>
-        <?php if( $tf_count_posts > 0) : ?>
+        <?php if( $type == 'hotel' || $type == 'all') : ?>           
+            <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent">
+                <!--Added hotel search widget--> 
+                <?php tourfic_search_widget_hotel( $classes, $title, $subtitle ); ?>
+            </div>
+        <?php endif; ?>
+        <?php if( $type == 'tour' || $type == 'all') : ?>
         <div id="tf-tour-booking-form" class="tf-tabcontent">
              <!--Added tours search widget--> 
             <?php tourfic_search_widget_tour( $classes, $title, $subtitle ); ?>

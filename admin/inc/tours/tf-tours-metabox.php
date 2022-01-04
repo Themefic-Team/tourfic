@@ -37,6 +37,7 @@ if ( class_exists( 'CSF' ) ) {
                 'title'   => __( 'Booking type', 'tourfic' ),
                 'options' => array(
                     'instant'         => __( 'Instant Booking', 'tourfic' ),
+                    apply_filters('tf_external_booking','')    => __( 'External Booking (Pro)', 'tourfic' ),
                 ),
             ),
             array(
@@ -83,10 +84,20 @@ if ( class_exists( 'CSF' ) ) {
         'fields' => array(
 
             array(
+                'id'       => 'text_location',
+                'type'     => 'text',
+                'title'    => __( 'Tour Location manual', 'tourfic' ),
+                'subtitle' => __( 'Input tour location', 'tourfic' ),
+            ),
+
+            array(
                 'id'       => 'location',
                 'type'     => 'map',
-                'title'    => __( 'Tour Location', 'tourfic' ),
-                'subtitle' => __( 'Select tour location', 'tourfic' ),
+                'title'    => __( 'Tour Location Map', 'tourfic' ),
+                'subtitle' => __( 'Select tour location <strong class="tf-pro">Pro</strong>', 'tourfic' ),
+                'attributes'  => [
+                    'disabled' => 'disabled',
+                ],
             ),
             array(
                 'id'       => 'nearby_properties',
@@ -237,8 +248,9 @@ if ( class_exists( 'CSF' ) ) {
                 'class'    => 'pricing',
                 'options'  => [
                     'person' => __( 'Person', 'tourfic' ),
-                    'group'  => __( 'Group', 'tourfic' ),
+                    ''  => __( 'Group (Pro)', 'tourfic' ),
                 ],
+                'default' => 'person',
             ),
             array(
                 'id'         => 'adult_price',
@@ -318,9 +330,10 @@ if ( class_exists( 'CSF' ) ) {
                 'subtitle' => __( 'Select availability', 'tourfic' ),
                 'class'    => 'tour-type',
                 'options'  => [
-                    'continuous' => __( 'Continuous', 'tourfic' ),
+                    apply_filters('tf_continuous_availability','') => __( 'Continuous (Pro)', 'tourfic' ),
                     'fixed'      => __( 'Fixed', 'tourfic' ),
                 ],
+                'default' => 'fixed',
             ),
             //Fixed availability
             array(
@@ -462,6 +475,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'     => 'itinerary',
                 'type'   => 'repeater',
                 'title'  => __( 'Itinerary', 'tourfic' ),
+                'max'    => apply_filters( 'tf_repeater_limit', '5'),
                 'fields' => array(
                     array(
                         'id'       => 'time',
@@ -501,6 +515,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'     => 'inc',
                 'type'   => 'repeater',
                 'title'  => __( 'Include', 'tourfic' ),
+                'max'    => apply_filters( 'tf_repeater_limit', '5'),
                 'fields' => array(
                     array(
                         'id'       => 'inc',
@@ -514,6 +529,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'     => 'exc',
                 'type'   => 'repeater',
                 'title'  => __( 'Exclude', 'tourfic' ),
+                'max'    => apply_filters( 'tf_repeater_limit', '5'),
                 'fields' => array(
                     array(
                         'id'       => 'exc',
@@ -533,6 +549,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'     => 'faqs',
                 'type'   => 'repeater',
                 'title'  => __( 'FAQs', 'tourfic' ),
+                'max'    => apply_filters( 'tf_repeater_limit', '5'),
                 'fields' => array(
                     array(
                         'id'    => 'title',

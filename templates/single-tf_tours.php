@@ -10,7 +10,11 @@ get_header('tourfic'); ?>
 <?php
 $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
 
-$location = $meta['location']['address'] ? $meta['location']['address'] : '';
+$location = isset( $meta['location']['address'] ) ? $meta['location']['address'] : '';
+$text_location = isset( $meta['text_location']) ? $meta['text_location'] : '';
+if( empty( $location ) ){
+	$location = $text_location;
+}
 $gallery = $meta['tour_gallery'] ? $meta['tour_gallery'] : array();
 $additional_information = $meta['additional_information'] ? $meta['additional_information'] : null; 
 $tour_duration = $meta['duration'] ? $meta['duration'] : null;
@@ -87,13 +91,13 @@ $tf_overall_rate['review'] = null;
 		</div>
 	</div>
 
+	<?php if( $tour_duration ): ?>
 	<!--Information section start-->
 	<div class="tf-tours_info_feature_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
 				<div class="tf-tours-content">
 					<div class="tf-tours-informations">
-						<?php if( $tour_duration ): ?>
 						<div class="item">
 							<div class="icon">
 								<i class="far fa-clock"></i>
@@ -135,8 +139,7 @@ $tf_overall_rate['review'] = null;
 								<h4 class="title"><?php echo __( 'Language', 'tourfic' ); ?></h4>
 								<p><?php echo esc_html__( $language,'tourfic' ) ?></p>
 							</div>
-						</div>
-						<?php endif;?>
+						</div>					
 					</div>
 					<?php // echo tf_tours_booking_form($post->ID);?>
 				</div>
@@ -144,6 +147,7 @@ $tf_overall_rate['review'] = null;
 		</div>
 	</div>
    <!-- Information section end -->
+   <?php endif;?>
 
 	<!--Start Description section-->
 	<div class="tf-tours_content_area_wrapper tf-tours_section plr-15">
@@ -266,13 +270,10 @@ $tf_overall_rate['review'] = null;
 							<h4 class="tf-tours_section_title"><?php echo __( 'Travel Itinerary','tourfic' ); ?></h4>
 						</div>
 						<?php foreach( $itineraries as $itinerary ){ ?>
-						<div class="tf-single-itinerary">
-							<div class="tf-tours_itinerary_time">
-								<span class="time"><?php echo esc_html( $itinerary['time'] ) ?></span>
-							</div>
+						<div class="tf-single-itinerary">						
 							<div class="tf-single-itinerary_inner">
-								<div class="itinerary-head">							
-									
+								<div class="itinerary-head">	
+									<span class="time"><?php echo esc_html( $itinerary['time'] ) ?></span>									
 									<h5> <?php echo esc_html( $itinerary['title'] );  ?></h5>
 									<div class="icon">
 										<i class="fa fa-angle-down"></i>

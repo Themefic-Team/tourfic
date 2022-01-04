@@ -958,4 +958,3 @@ function tfOpenForm(evt, formName) {
     evt.currentTarget.className += " active";
 }
 jQuery('#tf-hotel-booking-form').css('display','block');
-

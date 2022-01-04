@@ -243,7 +243,12 @@ $comments_title = apply_filters(
 function tourfic_map_link() {
     if ( 'tf_tours' === get_post_type() ) {
         $meta = get_post_meta( get_the_ID(), 'tf_tours_option', true );
-        $location = $meta['location']['address'] ? $meta['location']['address'] : '';
+        $location = isset($meta['location']['address']) ? $meta['location']['address'] : '';
+		$text_location = isset( $meta['text_location']) ? $meta['text_location'] : '';
+
+		if( empty( $location ) ){
+			$location = $text_location;
+		}
     } else {
         $location = get_field( 'formatted_location' ) ? get_field( 'formatted_location' ) : null;
 
@@ -429,7 +434,6 @@ function tf_tours_booking_form( $post_id ) {
     $type 					= $meta['type'];
     $custom_availability 	= $meta['custom_availability'];
 	$continuous_availability = $meta['continuous_availability'];
-	//var_dump($continuous_availability);
     if ( $type == 'fixed' ) {
         $first_check_in 	= $meta['fixed_availability']['check_in'] ? $meta['fixed_availability']['check_in'] : null;
         $last_check_out 	= $meta['fixed_availability']['check_out'] ? $meta['fixed_availability']['check_out'] : null;
@@ -513,7 +517,6 @@ function tf_tours_booking_form( $post_id ) {
 				'svg_icon'    => 'calendar_today',
 				'name'        => 'check-in-out-date',
 				'placeholder' => 'Select Date',
-				'label'       => 'Select date',
 				'required'    => 'true',
 				'disabled'    => 'true',
 				'class'       => 'tours-check-in-out',

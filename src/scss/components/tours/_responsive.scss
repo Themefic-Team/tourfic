@@ -12,16 +12,27 @@
 }
 /* Mobile devices */
 @media (max-width: 766px) {
+    .tf-hero-area{
+        margin-bottom: 30px;
+    }
     .tf_tours-title-area{
-        padding: 0 10px;
+        padding: 0 15px;
+        flex-direction: column;
+    }
+    .tf_tours-title{
+        font-weight: 600;
+    }
+    .tf-tours-price *{
+        font-size: 16px;
+    }
+    .tf-tours-ratings{
+        justify-content: flex-start;
     }
     .tf-tour-booking-wrap{
         height: auto;
         width: 95%;
-
         .tf_tours_booking{
             display: block;
-
             .tf_selectperson-wrap{
                 width: 100%;
             }
@@ -45,8 +56,10 @@
             margin-bottom: 15px;
         }
     }
-   
 
+    .tf-tours-fixed form.tf_tours_booking {
+        width: 90%;
+    }
     .tf-itinerary {
         padding: 50px 15px;
         .tf-single-itinerary {
@@ -54,22 +67,21 @@
             padding-left: unset;
             .tf-single-itinerary_inner{
                 padding: 4px;
-                .itinerary-head{
-                    padding-left: 100px;
-                }
-            }
-            span.time{
-                height: 47px;
             }
         }
     }
+    .tf-itinerary .tf-single-itinerary span.time{
+        padding: 20px;
+        margin-right: 10px;
+    }
     .faqs.tf-tours_faq {
-        background: #fafcfe;
-        padding: 50px 25px;
+        background: #fff;
+        padding: 15px 10px;
     }
     .tf-tour-booking-wrap.tf-tours-fixed {
-        width: 90.5%;
+        width: 95.5%;
         z-index: 99999;
+        height: auto;
     } 
     .tf-tours_review_area_wrapper form#commentform {
         padding: 10px 0px;
@@ -88,7 +100,7 @@
         padding: 0 15px;
     }
     .inc-exc-section{
-        padding: 35px;
+        padding: 15px;
     }
     .tf_features {
         padding: 15px 30px;
@@ -99,5 +111,36 @@
     .tf-tours_toc_area_wrapper .tf-tours-content {
         padding: 15px 20px;
     }
-    
+    .tf_tours-content_wrapper_inner {
+        padding: 10px;
+    }
+    h4.tf-tours_section_title{
+        font-size: 25px;
+        text-align: center;
+        justify-content: center;
+    }
+    .highlights-title h4{
+        font-size: 25px;
+        text-align: center;
+    }
+    .tf-tours_section {
+        margin-bottom: 15px;
+    }
+    .tf_comment-metas .comment-meta label {
+        min-width: 180px;
+    }
+    .itinerary-head h5{
+		font-size: 17px;
+	} 
+    .tf-tours-title-right {
+        display: flex;
+        justify-content: space-between;
+    }
+    .tf-tours-price {
+        margin-right: 30px;
+    }
+    .tf_tours-title-left {
+        display: flex;
+        justify-content: space-between;
+    }
 }
