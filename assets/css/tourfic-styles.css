@@ -1925,13 +1925,13 @@ button.tf-hero-slider-arrow.next-arrow {
 }
 .tf-itinerary .tf-single-itinerary span.time {
   width: 100px;
-  height: 84px;
   background: #002C66;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #f7f7f7;
-  max-height: 84px;
+  padding: 25px;
+  margin-right: 15px;
 }
 
 .itinerary-head {
@@ -2719,11 +2719,10 @@ form.tf_tours_booking .tf_selectperson-wrap {
   .tf-itinerary .tf-single-itinerary .tf-single-itinerary_inner {
     padding: 4px;
   }
-  .tf-itinerary .tf-single-itinerary .tf-single-itinerary_inner .itinerary-head {
-    padding-left: 100px;
-  }
+
   .tf-itinerary .tf-single-itinerary span.time {
-    height: 37px;
+    padding: 20px;
+    margin-right: 10px;
   }
 
   .faqs.tf-tours_faq {

@@ -67,14 +67,12 @@
             padding-left: unset;
             .tf-single-itinerary_inner{
                 padding: 4px;
-                .itinerary-head{
-                    padding-left: 100px;
-                }
-            }
-            span.time{
-                height: 37px;
             }
         }
+    }
+    .tf-itinerary .tf-single-itinerary span.time{
+        padding: 20px;
+        margin-right: 10px;
     }
     .faqs.tf-tours_faq {
         background: #fff;

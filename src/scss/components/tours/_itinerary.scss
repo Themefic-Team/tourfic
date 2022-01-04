@@ -15,13 +15,13 @@
         }
         span.time {
           width: 100px;
-          height: 84px;
           background: #002C66;
           display: flex;
           justify-content: center;
           align-items: center;
           color: #f7f7f7;
-          max-height: 84px;
+          padding: 25px;
+          margin-right: 15px;
       }
   }
 }

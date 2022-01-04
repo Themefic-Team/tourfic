@@ -270,13 +270,10 @@ $tf_overall_rate['review'] = null;
 							<h4 class="tf-tours_section_title"><?php echo __( 'Travel Itinerary','tourfic' ); ?></h4>
 						</div>
 						<?php foreach( $itineraries as $itinerary ){ ?>
-						<div class="tf-single-itinerary">
-							<div class="tf-tours_itinerary_time">
-								<span class="time"><?php echo esc_html( $itinerary['time'] ) ?></span>
-							</div>
+						<div class="tf-single-itinerary">						
 							<div class="tf-single-itinerary_inner">
-								<div class="itinerary-head">							
-									
+								<div class="itinerary-head">	
+									<span class="time"><?php echo esc_html( $itinerary['time'] ) ?></span>									
 									<h5> <?php echo esc_html( $itinerary['title'] );  ?></h5>
 									<div class="icon">
 										<i class="fa fa-angle-down"></i>
