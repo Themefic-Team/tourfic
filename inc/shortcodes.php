@@ -11,6 +11,7 @@ function tourfic_destinations_shortcode( $atts, $content = null ){
             'orderby' => 'name',
             'order' => 'ASC',
             'hide_empty' => 0,
+            'ids' => '',
           ),
         $atts
       )
@@ -32,9 +33,10 @@ function tourfic_destinations_shortcode( $atts, $content = null ){
         'hierarchical' => 0, //can be 1, '1' too
         'search' => '',
         'number' => 6,
+        'include' => $ids,
         //'name__like' => '',
     ) );
-    shuffle($destinations);
+    //shuffle($destinations);
     ob_start();
 
     if ( $destinations ) : ?>
@@ -88,6 +90,7 @@ function tf_tour_destinations_shortcode( $atts, $content = null ){
             'orderby' => 'name',
             'order' => 'ASC',
             'hide_empty' => 0,
+            'ids' => '',
           ),
         $atts
       )
@@ -102,6 +105,7 @@ function tf_tour_destinations_shortcode( $atts, $content = null ){
         'hierarchical' => 0, //can be 1, '1' too
         'search' => '',
         'number' => 6,
+        'include' => $ids,
         //'name__like' => '',
     ) );
     shuffle($destinations);
