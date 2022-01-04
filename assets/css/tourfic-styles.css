@@ -1912,7 +1912,6 @@ button.tf-hero-slider-arrow.next-arrow {
 }
 .tf-itinerary .tf-single-itinerary {
   margin: 0;
-  padding-left: 100px;
   position: relative;
   margin-bottom: 30px;
 }
@@ -1921,7 +1920,7 @@ button.tf-hero-slider-arrow.next-arrow {
   box-shadow: 0 5px 10px rgba(0, 44, 102, 0.2) !important;
   width: 100%;
   border-radius: 0px 5px 5px 0px;
-  padding: 30px 30px;
+  padding: 5px;
 }
 .tf-itinerary .tf-single-itinerary span.time {
   width: 100px;
