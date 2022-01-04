@@ -1609,7 +1609,7 @@ span.close-aq {
 .tf_features {
   border-top: 1px solid #0000001a;
   margin-top: 40px;
-  padding: 35px 70px;
+  padding: 35px 0px;
 }
 .tf_features .feature_list_title {
   margin: 0;

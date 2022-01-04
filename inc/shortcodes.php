@@ -34,7 +34,7 @@ function tourfic_destinations_shortcode( $atts, $content = null ){
         'number' => 6,
         //'name__like' => '',
     ) );
-
+    shuffle($destinations);
     ob_start();
 
     if ( $destinations ) : ?>
@@ -104,7 +104,7 @@ function tf_tour_destinations_shortcode( $atts, $content = null ){
         'number' => 6,
         //'name__like' => '',
     ) );
-
+    shuffle($destinations);
     ob_start();
 
     if ( $destinations ) : ?>
