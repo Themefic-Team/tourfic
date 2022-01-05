@@ -79,13 +79,13 @@
 =            Buttons            =
 ===============================*/
 .tf_button {
-  background: #00698F;
+  background: #003162;
   color: #fff;
   text-decoration: none;
   display: inline-block;
   text-align: center;
   font-size: 14px;
-  border: 1px solid #00698F;
+  border: 1px solid #003162;
   border-radius: 2px;
   padding: 20px;
 }
@@ -157,7 +157,7 @@ span.tf-price .amount {
   color: #7893B0;
 }
 .tf_map-link a:hover {
-  color: #00698F;
+  color: #003162;
 }
 .tf_map-link svg {
   margin-right: 4px;
@@ -649,7 +649,7 @@ div#tf-booking-search-tabs {
 }
 
 button.tf-tablinks.active {
-  background: #00698f;
+  background: #003162;
   color: #f1f1f1;
 }
 
@@ -868,9 +868,9 @@ button.tf-tablinks.active {
       -ms-user-select: none;
           user-select: none;
   background-color: #fff;
-  color: #00698F;
-  border-color: #00698F;
-  border: 1px solid #00698F;
+  color: #003162;
+  border-color: #003162;
+  border: 1px solid #003162;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -1191,7 +1191,7 @@ span.review_num {
 
 .tf_submit-wrap {
   border-right: 0;
-  background: #00698F;
+  background: #003162;
 }
 
 .tf_selectdate-wrap .tf_input-inner,
@@ -1509,7 +1509,7 @@ span.review_num {
   left: -56px;
   top: -24px;
   padding-top: 51px;
-  background: #00698f;
+  background: #003162;
   color: white;
   transform: rotate(310deg);
   width: 131px;
@@ -2872,7 +2872,7 @@ form.tf_tours_booking .tf_selectperson-wrap {
   display: inline-block;
   margin: 0 !important;
   padding-right: 2px;
-  color: #00698F;
+  color: #003162;
 }
 
 .single-tour-wrap:first-child .single-tour-inner {
@@ -2929,7 +2929,7 @@ form.tf_tours_booking .tf_selectperson-wrap {
 }
 
 .bui-review-score__badge {
-  background: #00698F;
+  background: #003162;
   color: #fff;
   display: flex;
   align-items: center;
