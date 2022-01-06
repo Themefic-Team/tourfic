@@ -91,13 +91,13 @@ $tf_overall_rate['review'] = null;
 		</div>
 	</div>
 
-	<?php if( $tour_duration ): ?>
 	<!--Information section start-->
 	<div class="tf-tours_info_feature_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
 				<div class="tf-tours-content">
 					<div class="tf-tours-informations">
+						<?php if( $tour_duration ): ?>
 						<div class="item">
 							<div class="icon">
 								<i class="far fa-clock"></i>
@@ -380,7 +380,6 @@ $tf_overall_rate['review'] = null;
 								);
 								$tours = new WP_Query( $args );
 								while($tours->have_posts() ) : $tours->the_post();
-
 							?>
 							<div class="single-tourbox" style="background-image:url(<?php echo get_the_post_thumbnail_url(get_the_ID(),'full') ?>)">
 								<div class="tf-tourbox-info">
@@ -418,72 +417,70 @@ $tf_overall_rate['review'] = null;
     <!--End tour recommendation section-->
 	<?php endif; ?>
 
+	<?php if($comments): ?>
 	<!-- Custom review section start j-->
 	<div class="tf-tours_review_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf-custom-review-section-wrapper">
-			<?php if($comments): ?>
 				<div class="tf-custom-review-section-wrapper_inner">
 					<div class="tf-custom-review-title-area">
 						<h2><?php echo esc_html__( 'Customer Review','tourfic' );?></h2>
 					</div>
 					<div class="tf-custom-review-slider-area">
-							<?php
-								foreach ( $comments as $comment ) :
-							
-									$tf_comment_meta = get_comment_meta( $comment->comment_ID, 'tf_comment_meta', true );
-							
-									if ( $tf_comment_meta ) {
-										foreach ( $tf_comment_meta as $key => $value ) {
-											$tf_overall_rate[$key][] = $value ? $value : "5";
-										}
-									} else {
-										$tf_overall_rate['review'][] = "5";
-										$tf_overall_rate['sleep'][] = "5";
-										$tf_overall_rate['location'][] = "5";
-										$tf_overall_rate['services'][] = "5";
-										$tf_overall_rate['cleanliness'][] = "5";
-										$tf_overall_rate['rooms'][] = "5";
+						<?php
+							foreach ( $comments as $comment ) :
+						
+								$tf_comment_meta = get_comment_meta( $comment->comment_ID, 'tf_comment_meta', true );
+						
+								if ( $tf_comment_meta ) {
+									foreach ( $tf_comment_meta as $key => $value ) {
+										$tf_overall_rate[$key][] = $value ? $value : "5";
 									}
-									?>
-										<div class="tf-single-custom-review">
-											<div class="tf-cr-reting">
-												<span><?php _e( tourfic_avg_ratings($tf_overall_rate['review']) ); ?></span>
-												<i class="fas fa-star"></i>
-											</div>
-											<div class="tf-cr-avater-image">
-												<img src="<?php echo get_avatar_url( $comment->user_id );?>">
-											</div>
-											<div class="tf-cr-avater-meta">
-												<h4><?php echo get_the_author_meta( 'display_name',$comment->user_id ); ?> <span><?php echo get_the_author_meta( 'description',$comment->user_id ); ?></span></h4>
-											</div>
-											<div class="tf-cr-desc">
-												<img src="<?php echo plugin_dir_url( __DIR__ ) . 'assets/img/quote.png';?>">
-												<p><?php echo $comment->comment_content;?> </p>
-												<img src="<?php echo plugin_dir_url( __DIR__ ) . 'assets/img/quote.png';?>">
-											</div>
+								} else {
+									$tf_overall_rate['review'][] = "5";
+									$tf_overall_rate['sleep'][] = "5";
+									$tf_overall_rate['location'][] = "5";
+									$tf_overall_rate['services'][] = "5";
+									$tf_overall_rate['cleanliness'][] = "5";
+									$tf_overall_rate['rooms'][] = "5";
+								}
+								?>
+									<div class="tf-single-custom-review">
+										<div class="tf-cr-reting">
+											<span><?php _e( tourfic_avg_ratings($tf_overall_rate['review']) ); ?></span>
+											<i class="fas fa-star"></i>
 										</div>
-							<?php endforeach; ?>
+										<div class="tf-cr-avater-image">
+											<img src="<?php echo get_avatar_url( $comment->user_id );?>">
+										</div>
+										<div class="tf-cr-avater-meta">
+											<h4><?php echo get_the_author_meta( 'display_name',$comment->user_id ); ?> <span><?php echo get_the_author_meta( 'description',$comment->user_id ); ?></span></h4>
+										</div>
+										<div class="tf-cr-desc">
+											<img src="<?php echo plugin_dir_url( __DIR__ ) . 'assets/img/quote.png';?>">
+											<p><?php echo $comment->comment_content;?> </p>
+											<img src="<?php echo plugin_dir_url( __DIR__ ) . 'assets/img/quote.png';?>">
+										</div>
+									</div>
+						<?php endforeach; ?>
 					</div>
 				</div>
-				<?php endif; ?>	
 				<div class="tf-tours_submit_review">
 					<?php
 						if ( comments_open() || get_comments_number() ) :
 							comments_template();
 						endif;
 					?>				
-				</div>						
+				</div>					
 			</div>
 		</div>
 	</div>
-	
+</div>
 	<!-- Custom review section end j-->
+	<?php endif; ?>	
 
-
-
-	<!--Start TOC section-->
 	<?php if($terms_and_conditions): ?>
+	<!--Start TOC section-->
 	<div class="tf-tours_toc_area_wrapper tf-tours_section plr-15">
 		<div class="tf_container">
 			<div class="tf_row">
@@ -491,28 +488,25 @@ $tf_overall_rate['review'] = null;
 				<div class="tf-tours-content">
 					<!-- Start TOC Content -->
 					<div class="highlights-title">
-							<h4><?php esc_html_e( 'Terms and Conditions', 'tourfic' ); ?></h4>
+						<h4><?php esc_html_e( 'Terms and Conditions', 'tourfic' ); ?></h4>
 					</div>
+					<!-- Start TOC Content -->
 					<div class="tf-tours-toc-wrap">
 						<div class="tf-tours-toc-inner">
-
-				<!-- Start TOC Content -->
-				<div class="tf-tours-toc-wrap">
-					<div class="tf-tours-toc-inner">
-						<?php _e( $terms_and_conditions,'tourfic' ); ?>
+							<?php _e( $terms_and_conditions,'tourfic' ); ?>
+						</div>
+						<!-- End TOC Content -->
 					</div>
-					<!-- End TOC Content -->
 				</div>
-			</div>
-		</div> 
+			</div> 
+		</div>
 	</div>
-	<?php endif; ?>
     <!--End TOC section-->
-
-
+	<?php endif; ?>
 
 	<?php do_action( 'tf_after_container' ); ?>
 </div>
+<!--Tourfic Layout end-->
 <?php endwhile; ?>
 <?php
 get_footer('tourfic');
