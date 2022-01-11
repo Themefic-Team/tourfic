@@ -3,7 +3,6 @@
 * Function: tf_term_count
 * Return number of available terms
 */
-
 if( !function_exists('tf_term_count') ){
     function tf_term_count( $filter, $destination, $default_count ){
         
@@ -117,59 +116,59 @@ function tourfic_get_review_form( ){
 	</div>';
 
 	$comment_meta .= '<div class="comment-meta">
-						<label>Sleep</label>
-						<select name="tf_comment_meta[sleep]">
-							<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-							<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
-							<option value="3">&#9733; &#9733; &#9733;</option>
-							<option value="2">&#9733; &#9733;</option>
-							<option value="1">&#9733;</option>
-						</select>
-					</div>';
+		<label>Sleep</label>
+		<select name="tf_comment_meta[sleep]">
+			<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
+			<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
+			<option value="3">&#9733; &#9733; &#9733;</option>
+			<option value="2">&#9733; &#9733;</option>
+			<option value="1">&#9733;</option>
+		</select>
+	</div>';
 
 	$comment_meta .= '<div class="comment-meta">
-						<label>Location</label>
-						<select name="tf_comment_meta[location]">
-							<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-							<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
-							<option value="3">&#9733; &#9733; &#9733;</option>
-							<option value="2">&#9733; &#9733;</option>
-							<option value="1">&#9733;</option>
-						</select>
-					</div>';
+		<label>Location</label>
+		<select name="tf_comment_meta[location]">
+			<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
+			<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
+			<option value="3">&#9733; &#9733; &#9733;</option>
+			<option value="2">&#9733; &#9733;</option>
+			<option value="1">&#9733;</option>
+		</select>
+	</div>';
 
 	$comment_meta .= '<div class="comment-meta">
-						<label>Services</label>
-						<select name="tf_comment_meta[services]">
-							<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-							<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
-							<option value="3">&#9733; &#9733; &#9733;</option>
-							<option value="2">&#9733; &#9733;</option>
-							<option value="1">&#9733;</option>
-						</select>
-					</div>';
+		<label>Services</label>
+		<select name="tf_comment_meta[services]">
+			<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
+			<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
+			<option value="3">&#9733; &#9733; &#9733;</option>
+			<option value="2">&#9733; &#9733;</option>
+			<option value="1">&#9733;</option>
+		</select>
+	</div>';
 
 	$comment_meta .= '<div class="comment-meta">
-						<label>Cleanliness</label>
-						<select name="tf_comment_meta[cleanliness]">
-							<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-							<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
-							<option value="3">&#9733; &#9733; &#9733;</option>
-							<option value="2">&#9733; &#9733;</option>
-							<option value="1">&#9733;</option>
-						</select>
-					</div>';
+		<label>Cleanliness</label>
+		<select name="tf_comment_meta[cleanliness]">
+			<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
+			<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
+			<option value="3">&#9733; &#9733; &#9733;</option>
+			<option value="2">&#9733; &#9733;</option>
+			<option value="1">&#9733;</option>
+		</select>
+	</div>';
 
 	$comment_meta .= '<div class="comment-meta">
-						<label>Room(s)</label>
-						<select name="tf_comment_meta[rooms]">
-							<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-							<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
-							<option value="3">&#9733; &#9733; &#9733;</option>
-							<option value="2">&#9733; &#9733;</option>
-							<option value="1">&#9733;</option>
-						</select>
-					</div>';
+		<label>Room(s)</label>
+		<select name="tf_comment_meta[rooms]">
+			<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
+			<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
+			<option value="3">&#9733; &#9733; &#9733;</option>
+			<option value="2">&#9733; &#9733;</option>
+			<option value="1">&#9733;</option>
+		</select>
+	</div>';
 
 	$comment_meta .= '</div>';
 
@@ -300,20 +299,22 @@ function tourfic_gallery_slider( $file_list_meta_key = null, $post_id = null, $c
 				<a href="#"><img src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/hart-icon.png'; ?>"></a>
 			</div>
 
-			<div class="tf-hero-bottom-area">
-				<div class="tf-hero-btm-icon">
+			<div class="tf-hero-bottom-area">					
+				<?php 
+				$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+				$tour_video = $meta['tour_video'] ? $meta['tour_video'] : '';
+				if (defined( 'TF_PRO' ) && $tour_video){ 
+				?>	
+				<div class="tf-hero-btm-icon tf-tour-video" data-fancybox href="<?php echo $tour_video; ?>">
 					
-					<?php
-						$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
-						$tour_video = $meta['tour_video'] ? $meta['tour_video'] : '';
-						if ( $tour_video):
-					?>
-					<img src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/video.png'; ?>">
-					 <span><?php echo __( 'Tour Videos','tourfic' ); ?></span>
-					 <?php endif;	?>
-					 <img width="50px" src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/gallery.png'; ?>">
-					 <span><?php echo __( 'Tour Gallery','tourfic' ); ?></span>
+					<i class="fab fa-youtube"></i>
+					<span><?php echo __( 'Tour Videos','tourfic' ); ?></span>
 				</div>
+				<?php } ?>
+				<div class="tf-hero-btm-icon tf-tour-gallery">
+					<img width="50px" src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/gallery.png'; ?>">
+					<span><?php echo __( 'Tour Gallery','tourfic' ); ?></span>
+				</div>					
 			</div>
 		</div>
 
@@ -1569,7 +1570,7 @@ function tf_tours_excerpt_more( $more ) {
 add_filter( 'excerpt_more', 'tf_tours_excerpt_more' );
 
 /**
- * Filter the except length to 30 words.
+ * Filter the except length to 20 words.
  *
  * @param int $length Excerpt length.
  * @return int (Maybe) modified excerpt length.

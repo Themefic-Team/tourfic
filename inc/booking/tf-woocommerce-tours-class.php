@@ -40,6 +40,9 @@ class Tourfic_Tours_WooCommerceHandle {
         $check_in = isset( $_POST['check-in-date'] ) ? sanitize_text_field( $_POST['check-in-date'] ) : null;
         $check_out = isset( $_POST['check-out-date'] ) ? sanitize_text_field( $_POST['check-out-date'] ) : null;
 
+        $tour_extra_total = !empty( $_POST['tour_extra_total'] ) ? sanitize_text_field( $_POST['tour_extra_total'] ) : '';
+        $tour_extra_title = !empty( $_POST['tour_extra_title'] ) ? str_replace(',', ', ', sanitize_text_field( $_POST['tour_extra_title'] )) : '';
+
         //Validation of Fixed tours person limit
         $total_person = $adults + $children + $infant;
         $meta = get_post_meta( $tour_id, 'tf_tours_option', true );
@@ -81,6 +84,15 @@ class Tourfic_Tours_WooCommerceHandle {
         }
 
         // Check errors
+        /* Minimum days to book before departure */
+        $before_departure_date = $meta['min_days'] ? $meta['min_days'] : '';
+        $current_date = new DateTime(date('Y-m-d', strtotime(date('Y-m-d'))));
+        $check_in_date = new DateTime(date('Y-m-d', strtotime($check_in)));
+        $date_difference = $current_date->diff($check_in_date)->days;
+
+        if ( $date_difference < $before_departure_date ) {
+            $response['errors'][] = __( 'Minimum ' .$before_departure_date. ' days to book before departure', 'tourfic' );
+        }
         if ( !$check_in ) {
             $response['errors'][] = __( 'Check-in date missing.', 'tourfic' );
         }
@@ -144,6 +156,9 @@ class Tourfic_Tours_WooCommerceHandle {
             $tf_tours_data['tf_tours_data']['check_in'] = $check_in;
             $tf_tours_data['tf_tours_data']['check_out'] = $check_out;
 
+            $tf_tours_data['tf_tours_data']['tour_extra_total'] = $tour_extra_total;
+            $tf_tours_data['tf_tours_data']['tour_extra_title'] = $tour_extra_title;
+
             $meta = get_post_meta( $tour_id, 'tf_tours_option', true );
             $discount_type = $meta['discount_type'];
             $discounted_price = $meta['discount_price'];
@@ -204,7 +219,9 @@ class Tourfic_Tours_WooCommerceHandle {
 
         foreach ( $cart->get_cart() as $cart_item ) {
 
-            if ( isset( $cart_item['tf_tours_data']['price'] ) ) {
+            if ( isset( $cart_item['tf_tours_data']['price'] ) && !empty($cart_item['tf_tours_data']['tour_extra_total']) ) {
+                $cart_item['data']->set_price( $cart_item['tf_tours_data']['price'] + $cart_item['tf_tours_data']['tour_extra_total'] );
+            } elseif ( isset( $cart_item['tf_tours_data']['price'] ) && empty($cart_item['tf_tours_data']['tour_extra_total']) ) {
                 $cart_item['data']->set_price( $cart_item['tf_tours_data']['price'] );
             }
         }
@@ -239,6 +256,13 @@ class Tourfic_Tours_WooCommerceHandle {
             $item_data[] = array(
                 'key'   => __( 'Departure Date', 'tourfic' ),
                 'value' => $cart_item['tf_tours_data']['check_in'],
+            );
+        }
+
+        if ( !empty( $cart_item['tf_tours_data']['tour_extra_title'] ) ) {
+            $item_data[] = array(
+                'key'   => __( 'Tour Extra: ', 'tourfic' ),
+                'value' => $cart_item['tf_tours_data']['tour_extra_title'],
             );
         }
 

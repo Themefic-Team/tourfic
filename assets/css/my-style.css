@@ -1,0 +1,15 @@
+.tf-tour-video {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+}
+.tf-tour-video i{
+    font-size: 28px;
+}
+.tf-tour-booking-wrap form.tf_tours_booking {
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 0;
+    width: 100%;
+}

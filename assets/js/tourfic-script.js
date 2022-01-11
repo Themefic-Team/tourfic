@@ -85,7 +85,7 @@
         });
 
         
-        $(".tf-hero-btm-icon").on('click',function () {
+        $(".tf-tour-gallery").on('click',function () {
             $(".tf-hero-slider-fixed").addClass("show");
         });
 
@@ -194,8 +194,8 @@
         });
 
         //Get continuous check in out date 
-        var continuousDate = $('.tf_tours-single-layout').data('continuous-array');
-        let customAvailability =  $('.tf_tours-single-layout').data('custom-availability');
+        var continuousDate = $('.tf-tour-booking-wrap').data('continuous-array');
+        let customAvailability =  $('.tf-tour-booking-wrap').data('custom-availability');
         if(continuousDate){
             for(let i = 0; i < continuousDate.length; i++){            
                 var continuousCheckIn = continuousDate[i].check_in;
@@ -219,6 +219,7 @@
         } else {
             tfMaxDate =  continuousCheckOut;
         }
+        
         //Tours booking DateSelection init in single tour page
         $('.tours-check-in-out').daterangepicker({
             "locale": {
@@ -647,6 +648,18 @@
 
             var formData = new FormData(this);
             formData.append('action', 'tf_tours_booking');
+
+            // Tour Extra
+            var tour_extra_total = 0;
+            jQuery('.tour-extra-single input:checkbox:checked').each(function(){
+                tour_extra_total += isNaN(parseInt(jQuery(this).val())) ? 0 : parseInt(jQuery(this).val());
+            });     
+            formData.append('tour_extra_total', tour_extra_total);
+
+            var tour_extra_title = $(".tour-extra-single input:checkbox:checked").map(function () {
+                return $(this).data('title')
+            }).get();
+            formData.append('tour_extra_title', tour_extra_title);
 
             $.ajax({
                 type: 'post',

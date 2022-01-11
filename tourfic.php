@@ -1,31 +1,34 @@
 <?php
 /**
- * Plugin Name: Tourfic - Travel Booking Solution for WooCommerce
- * Plugin URI: https://live.themefic.com/tourfic
+ * Plugin Name: Tourfic - Travel and Hotel Booking Solution for WooCommerce
+ * Plugin URI: https://tourfic.com
  * Github Plugin URI: http://github.com/themefic/tourfic
- * Description: Tourfic is the ultimate WordPress travel plugin for hotel booking, tour operator and travel agency websites. It is designed to build your own professional tour operator website or travel agency website where you can efficiently list your hotels and resorts for booking along with receiving payments for each booking. The plugin is fully powered by WooCommerce, thus you can easily manage all your online Booking system along with order system and any payment of WooCommerce. Allow visitors to register account and booking online.
+ * Description: The ultimate WordPress tour management plugin for hotel booking, tour operator and travel agency websites. Manage all your online Travel Booking system along with order system and any payment of WooCommerce. 
  * Author: Themefic
  * Text Domain: tourfic
  * Domain Path: /lang/
  * Author URI: https://themefic.com
  * Tags:
- * Version: 1.7.4
- * WC tested up to: 5.6.0
+ * Version: 2.0.0
+ * WC tested up to: 6.0.0
  */
 
 // don't load directly
-if ( !defined( 'ABSPATH' ) ) {
-    die( '-1' );
-}
+defined( 'ABSPATH' ) || exit;
 
 // Define WI_VERSION.
 if ( !defined( 'TOURFIC_VERSION' ) ) {
-    define( 'TOURFIC_VERSION', '1.7.4' );
+    define( 'TOURFIC_VERSION', '2.0.0' );
 }
 
 define( 'TOURFIC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'TOURFIC_TEMPLATES_URL', TOURFIC_PLUGIN_URL . 'templates/' );
 define( 'TOURFIC_ADMIN_URL', TOURFIC_PLUGIN_URL . 'admin/' );
+define( 'TF_ASSETS_URL', TOURFIC_PLUGIN_URL.'assets/' );
+// Paths
+define( 'TF_PATH', plugin_dir_path( __FILE__ ) );
+define( 'TF_ADMIN_PATH', TF_PATH.'admin/' );
+define( 'TF_ASSETS_PATH', TF_PATH.'assets/' );
 
 /**
  * Including Plugin file for security
@@ -38,7 +41,9 @@ include_once ABSPATH . 'wp-admin/includes/plugin.php';
 require_once dirname( __FILE__ ) . '/admin/framework/framework.php';
 require_once dirname( __FILE__ ) . '/admin/framework/settings.php';
 require_once dirname( __FILE__ ) . '/admin/framework/taxonomy-fields.php';
-require_once dirname( __FILE__ ) . '/admin/inc/tours/tf-tours-metabox.php';
+if ( !is_plugin_active('tourfic-pro/tourfic-pro.php') ) {
+    require_once dirname( __FILE__ ) . '/admin/inc/tours/tf-tours-metabox.php';
+}
 require_once dirname( __FILE__ ) . '/admin/framework/calendar.php';
 
 if ( !function_exists( 'tourfic_opt' ) ) {
@@ -152,6 +157,9 @@ if ( !class_exists( 'Tourfic_WordPress_Plugin' ) ):
         public function enqueue_scripts() {
 
             $TOURFIC_VERSION = current_time( 'timestamp' );
+
+            wp_enqueue_script( 'fancybox', TF_ASSETS_URL . 'js/jquery.fancybox.min.js', array( 'jquery' ), '3.5.7' );
+            wp_enqueue_style( 'fancybox', TF_ASSETS_URL . 'css/jquery.fancybox.min.css', '', '3.5.7' );
 
             wp_register_style( 'font-awesome-5', plugin_dir_url( __FILE__ ) . 'assets/font-awesome-4.7.0/css/all.min.css' );
             wp_enqueue_style( 'font-awesome-5' );

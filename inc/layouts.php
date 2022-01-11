@@ -431,17 +431,25 @@ function tourfic_get_sidebar( $placement = 'single' ) {
  */
 function tf_tours_booking_form( $post_id ) {
     $meta 					= get_post_meta( $post_id, 'tf_tours_option', true );
+	$today 					= date("d/m/Y");
+	$today_ts 				= strtotime($today);
     $type 					= $meta['type'];
     $custom_availability 	= $meta['custom_availability'];
+	$tour_extras = isset($meta['tour-extra']) ? $meta['tour-extra'] : null;
 	$continuous_availability = $meta['continuous_availability'];
+
     if ( $type == 'fixed' ) {
         $first_check_in 	= $meta['fixed_availability']['check_in'] ? $meta['fixed_availability']['check_in'] : null;
+		$first_check_in_ts = strtotime($first_check_in);
+		if ($today_ts > $first_check_in_ts) {
+			$first_check_in = $today;
+		}
         $last_check_out 	= $meta['fixed_availability']['check_out'] ? $meta['fixed_availability']['check_out'] : null;
         $min_seat 			= $meta['fixed_availability']['min_seat'] ? $meta['fixed_availability']['min_seat'] : null;
         $max_seat 			= $meta['fixed_availability']['max_seat'] ? $meta['fixed_availability']['max_seat'] : null;
         ob_start();
 		?>
-		<div class="tf-tour-booking-wrap" data-custom-availability="<?php echo $custom_availability; ?>" data-min-seat="<?php echo $min_seat; ?>" data-max-seat="<?php echo $max_seat; ?>" data-fixed-check-in="<?php echo $first_check_in; ?>" data-fixed-check-out="<?php echo $last_check_out ?>">
+		<div class="tf-tour-booking-wrap" data-min-seat="<?php echo $min_seat; ?>" data-max-seat="<?php echo $max_seat; ?>" data-fixed-check-in="<?php echo $first_check_in; ?>" data-fixed-check-out="<?php echo $last_check_out ?>">
 	<?php 
     } else if ( $type == "continuous" && $custom_availability == 'yes' ) {
 		foreach($continuous_availability as $key => $options){
@@ -450,6 +458,10 @@ function tf_tours_booking_form( $post_id ) {
 				$min_seat = $meta['continuous_availability'][$key]['min_seat'] ? $meta['continuous_availability'][$key]['min_seat'] : null;
 				$max_seat = $meta['continuous_availability'][$key]['max_seat'] ? $meta['continuous_availability'][$key]['max_seat'] : null;	
 				$first_check_in = $meta['continuous_availability'][$key]['check_in'] ? $meta['continuous_availability'][$key]['check_in'] : null;
+				$first_check_in_ts = strtotime($first_check_in);
+				if ($today_ts > $first_check_in_ts) {
+					$first_check_in = $today;
+				}
 				$check_out = $meta['continuous_availability'][$key]['check_out'] ? $meta['continuous_availability'][$key]['check_out'] : null;
 			}
 			if( $key === array_key_last($continuous_availability)){
@@ -552,6 +564,27 @@ function tf_tours_booking_form( $post_id ) {
 				);
 			?>
 		</div>
+		<?php if (defined( 'TF_PRO' ) && $tour_extras) { ?>
+		<div class="tour-extra">
+			<a data-fancybox data-src="#tour-extra" href="javascript:;">Package <i class="far fa-plus-square"></i></a>
+			<div style="display: none;" id="tour-extra">
+				<div class="tour-extra-container">
+				<?php foreach( $tour_extras as $tour_extra ){ ?>
+					<div class="tour-extra-single">
+						<div class="tour-extra-left">
+							<h4><?php _e( $tour_extra['title'] ); ?></h4>
+							<?php if ($tour_extra['desc']) { ?><p><?php _e( $tour_extra['desc'] ); ?></p><?php } ?>
+						</div>
+						<div class="tour-extra-right">
+							<span><?php _e( $tour_extra['price'] ); ?></span>
+							<input type="checkbox" value="<?php _e( $tour_extra['price'] ); ?>" data-title="<?php _e( $tour_extra['title'] ); ?>">
+						</div>												
+					</div>					
+				<?php } ?>
+				</div>
+			</div>
+		</div>	
+		<?php } ?>	
 	<?php echo tourfic_tours_booking_submit_button( "Book Now" ); ?>
 		</form>
 	</div>
