@@ -801,10 +801,68 @@
         //Ratings copy/move under gallery
         var avg_rating = $('.tf-overall-ratings .overall-rate').text();
         if(avg_rating){
-            $('.tf_tours-title-area .reviews span').html(avg_rating);
+            $('.reviews span').html(avg_rating);
         }else{
-            $('.tf_tours-title-area .reviews span').html("0/5");
+            $('.reviews span').html("0/5");
         }
+
+        $(".tf-suggestion-items-wrapper").owlCarousel({            
+            margin:30,
+            stagePadding: 20,
+            loop:true,
+            nav:true,
+            dots:false,
+            responsive: {
+                0 : {
+                    items:1,
+                },
+                1000 : {
+                    items:2,
+                },
+                1241 : {
+                    items:3,
+                }
+            }
+        });
+        $(".tf-review-items-wrapper").owlCarousel({            
+            margin:30,
+            stagePadding: 20,
+            loop:true,
+            nav:true,
+            dots:false,
+            items:4,
+
+            responsive: {
+                0 : {
+                    items:1,
+                },
+                600 : {
+                    items:2,
+                },
+                1000 : {
+                    items:3,
+                },
+                1241 : {
+                    items:4,
+                }
+            }
+
+        });
+
+        //code from J
+        $(".tf-travel-text h4").click(function(){
+            $(this).siblings('.tf-travel-contetn').slideToggle();
+            $(this).parents('.tf-travel-itinerary-item').siblings().find('.tf-travel-contetn').slideUp();
+        });
+        $(".tf-faq-title").click(function(){
+            $(this).siblings('.tf-faq-desc').slideToggle();
+            $(this).parents('.tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
+        });
+
+        
+        $(".tf-header-menu-triger").click(function(){
+            $('.tf-header-menu-wrap').slideToggle();
+        });
 
     });
 

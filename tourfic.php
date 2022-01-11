@@ -171,10 +171,13 @@ if ( !class_exists( 'Tourfic_WordPress_Plugin' ) ):
 
             wp_enqueue_style( 'tourfic-autocomplete', plugin_dir_url( __FILE__ ) . 'assets/css/tourfic-autocomplete.css', null, $TOURFIC_VERSION );
             wp_enqueue_style( 'my-style', plugin_dir_url( __FILE__ ) . 'assets/css/my-style.css', null, $TOURFIC_VERSION );
+            wp_enqueue_style( 'owl-carousel', plugin_dir_url( __FILE__ ) . 'assets/css/owl.carousel.min.css', null, $TOURFIC_VERSION );
+            wp_enqueue_style( 'tf-style', plugin_dir_url( __FILE__ ) . 'assets/css/style.css', null, $TOURFIC_VERSION );
 
             wp_enqueue_script( 'slick', plugin_dir_url( __FILE__ ) . 'assets/slick/slick.min.js', array( 'jquery' ), $TOURFIC_VERSION );
 
             wp_enqueue_script( 'magnific-popup-js', plugin_dir_url( __FILE__ ) . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), $TOURFIC_VERSION );
+            wp_enqueue_script( 'owl-carousel', plugin_dir_url( __FILE__ ) . 'assets/js/owl.carousel.min.js', array( 'jquery' ), $TOURFIC_VERSION );
 
             wp_enqueue_script( 'tourfic-script', plugin_dir_url( __FILE__ ) . 'assets/js/tourfic-script.js', array( 'jquery' ), $TOURFIC_VERSION, true );
 

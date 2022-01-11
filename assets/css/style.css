@@ -1,0 +1,1282 @@
+/*----------------------------------------- 
+            Common CSS Start
+ -----------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.tf-page-wrapper,
+.tf-page-wrapper p,
+.tf-page-wrapper a,
+.tf-wrapper {
+    font-family: 'Rubik', sans-serif;
+}
+.tf-page-wrapper {
+    width: 100%;
+}
+
+
+.tf-page-wrapper h1,
+.tf-page-wrapper h2,
+.tf-page-wrapper h3,
+.tf-page-wrapper h4,
+.tf-page-wrapper h5,
+.tf-page-wrapper h6 {
+    margin-top: 0;
+    margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    font-family: 'Rubik', sans-serif;
+}
+
+.tf-page-wrapper h1 {
+    font-size: calc(1.375rem + 1.5vw)
+}
+
+.tf-page-wrapper h2 {
+    font-size: calc(1.325rem + .9vw)
+}
+
+.tf-page-wrapper h3 {
+    font-size: calc(1.3rem + .6vw)
+}
+
+.tf-page-wrapper h4 {
+    font-size: calc(1.275rem + .3vw)
+}
+
+.tf-page-wrapper h5 {
+    font-size: 1.25rem
+}
+
+.tf-page-wrapper h6 {
+    font-size: 1rem
+}
+
+.tf-page-wrapper p {
+    margin: 0;
+    padding: 0;
+}
+
+.tf-page-wrapper a {
+    display: inline-block;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.tf-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.tf-row {
+    padding: 0 15px;
+}
+
+/*--------------- Common CSS End ---------------*/
+
+/*------------- Header CSS Start ----------------------*/
+.tf-header-wrapper {
+    background: #E2EBF3;
+}
+
+.tf-header-main-content {
+    background: #fff;
+}
+
+.tf-header-top {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 35px 0;
+}
+
+.tf-header-top a {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+}
+
+.tf-htc-right {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 26px;
+    align-items: center;
+}
+
+.tf-header-main-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    min-height: 80px;
+    align-items: center;
+    padding: 0 30px;
+    border-radius: 5px;
+}
+
+.tf-header-menu-wrap ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.tf-header-menu-wrap ul a {
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0.2px;
+    color: #002C66;
+}
+
+.tf-htc-login-links a {
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+}
+
+.tf-header-top i {
+    font-size: 24px;
+}
+
+.tf-htc-social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.tf-header-top-left {
+    display: flex;
+    gap: 20px;
+}
+
+.tf-header-top-left a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tf-htc-social-icons a {
+    display: flex;
+    align-items: stretch;
+}
+
+.tf-header-menu-triger {
+    display: none;
+}
+
+/*--------- Header CSS End ---------*/
+
+
+
+
+/*-----------------------------------
+            Hero CSS Start 
+------------------------------------*/
+.tf-hero-top-content {
+    min-height: 460px;
+    background: url(./assets/image/hero-bg.png);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+.tf-hero-top-content-inner {
+    max-width: 640px;
+    text-align: center;
+}
+
+.tf-hero-top-content-inner h1 {
+    font-size: 64px;
+    line-height: 68px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.4px;
+    color: #FAFCFE;
+    margin-bottom: 70px;
+}
+
+.tf-hero-form {
+    max-width: 638px;
+    height: 84px;
+    background: #FAFCFE;
+    border-radius: 5px;
+}
+
+.tf-hero-bottom-left h4 {
+    font-size: 20px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+    font-weight: normal;
+}
+
+.tf-hero-bottom-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.tf-hero-bottom-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.tf-hero-bottom-left-location {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.2px;
+    color: #7893B0;
+    gap: 10px;
+}
+
+.tf-hero-bottom-left-location i {
+    font-size: 24px;
+}
+
+.tf-hero-bcr-star i {
+    font-size: 15px;
+    color: #FFCD3D;
+}
+
+.tf-hero-rating {
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
+}
+
+.tf-hero-bcr-num {
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+}
+
+.tf-hero-bcr-star {
+    display: flex;
+    align-items: center;
+}
+
+.tf-hero-review-count p {
+    font-size: 18px;
+    line-height: 26px;
+    text-align: right;
+    letter-spacing: 0.2px;
+    color: #7893B0;
+}
+
+.tf-hero-bottom-content {
+    padding: 24px 0;
+}
+
+.tf-hero-pricing span {
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+}
+
+.tf-review-items-wrapper {
+    margin-bottom: 40px;
+}
+
+.tf-review-items-wrapper .owl-nav button {
+    height: 50px;
+    position: absolute;
+    box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+    border-radius: 5px;
+    width: 50px;
+    top: calc(50% - 25px);
+    background: #fff !important;
+}
+
+.tf-review-items-wrapper .owl-nav button.owl-prev {
+    left: -80px;
+}
+
+.tf-review-items-wrapper .owl-nav button.owl-next {
+    right: -80px;
+}
+
+/*--------- hero CSS End ---------*/
+
+/*-----------------------------------
+            Square block CSS Start
+------------------------------------*/
+.tf-single-square-block {
+    width: 200px;
+    height: 200.02px;
+    background: #FAFCFE;
+    box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: #152B47;
+}
+
+.tf-single-square-block * {
+    margin: 0;
+}
+
+.tf-single-square-block i {
+    font-size: 32px;
+}
+
+.tf-single-square-block p {
+    color: #2F4E74;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+}
+
+.tf-square-block-content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 55px;
+    justify-content: center;
+    margin: 100px 0;
+}
+
+/*--------- Square block CSS End ---------*/
+
+
+/*----------------------------------------------------
+            Overview and Highlight CSS Start
+-----------------------------------------------------*/
+.tf-overview-content-wrapper {
+    background: #FAFCFE;
+    padding: 50px 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+    margin-bottom: 100px;
+}
+
+.tf-overview-item {
+    display: flex;
+    flex-direction: row;
+    gap: 70px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tf-overview-item>div {
+    max-width: 48%;
+}
+
+.tf-overview-text h2 {
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: -0.4px;
+    color: #002C66;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.tf-overview-text p {
+    font-size: 16px;
+    line-height: 24px;
+    text-align: justify;
+    letter-spacing: 0.2px;
+    color: #152B47;
+    margin-bottom: 20px;
+}
+
+.tf-overview-text a {
+    background: #002C66;
+    box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+    border-radius: 5px;
+    padding: 15px 18px;
+    font-size: 16px;
+    line-height: 24px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.2px;
+    color: #FAFCFE;
+}
+
+.tf-overview-text a:hover {
+    background: #002c66e3;
+}
+
+.tf-overview-text a i {
+    margin-left: 10px;
+}
+
+.tf-overview-text ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.tf-overview-text ul li {
+    position: relative;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+    padding-left: 30px;
+}
+
+.tf-overview-text ul li:before {
+    width: 18px;
+    height: 18px;
+    left: 0;
+    top: 3px;
+    background: #2F4E74;
+    content: "";
+    position: absolute;
+    border-radius: 50px;
+}
+
+/*--------- Overview and Highlight CSS End ---------*/
+
+
+
+/*----------------------------------------------------
+            Qoted List CSS Start
+-----------------------------------------------------*/
+
+.tf-quoted-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    padding: 70px 80px;
+    border: 5px solid #E2EBF3;
+    position: relative;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.tf-quoted-content-wrapper h2 {
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: -0.4px;
+    color: #002C66;
+    margin-bottom: 30px;
+}
+
+.tf-quoted-content-wrapper ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tf-quoted-content-wrapper ul li {
+    padding-left: 35px;
+    position: relative;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+}
+
+.tf-quoted-content-wrapper ul li:before {
+    content: "";
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    left: 0;
+}
+
+.tf-quoted-include ul li:before {
+    background: url(./assets/image/check.png);
+}
+
+.tf-quoted-exclude ul li:before {
+    background: url(./assets/image/x.png);
+}
+
+.tf-quoted-content-upper {
+    padding: 70px;
+    background: #FAFCFE;
+    margin-bottom: 100px;
+}
+
+.tf-quoted-content-wrapper:before,
+.tf-quoted-content-wrapper:after {
+    position: absolute;
+    content: "";
+    height: 60px;
+    width: 60px;
+    background: #fafcfe;
+    left: -20px;
+    top: -30px;
+    background-image: url(./assets/image/quot1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.tf-quoted-content-wrapper:after {
+    right: -20px;
+    bottom: -30px;
+    top: unset;
+    left: unset;
+    background-image: url(./assets/image/quot2.png);
+}
+
+/*--------- Qoted List CSS End ---------*/
+
+
+
+/*----------------------------------------------------
+            Travel Itinerary CSS Start
+-----------------------------------------------------*/
+
+.tf-travel-itinerary-content-wrapper {
+    padding: 70px;
+    background: #FAFCFE;
+    margin-bottom: 100px;
+}
+
+.tf-travel-itinerary-content-wrapper h2 {
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: -0.4px;
+    color: #002C66;
+    margin-bottom: 50px;
+}
+
+.tf-travel-itinerary-item {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 33px;
+}
+
+.tf-travel-time span {
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0.2px;
+    color: #FAFCFE;
+}
+
+.tf-travel-time {
+    background: #002C66;
+    box-shadow: 0px 2px 10px rgba(2, 51, 110, 0.2);
+    border-radius: 5px 0px 0px 5px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tf-travel-text {
+    left: 305px;
+    top: 3358px;
+    background: #FAFCFE;
+    box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+    border-radius: 0px 5px 5px 0px;
+    width: calc(100% - 100px);
+}
+
+.tf-travel-text h4 {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.2px;
+    display: flex;
+    height: 100px;
+    padding: 0;
+    margin: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tf-travel-contetn-wrap {
+    display: flex;
+    padding: 40px;
+    gap: 50px;
+}
+
+.tf-travel-contetn-wrap img {
+    width: 250px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.tf-travel-desc p {
+    font-size: 16px;
+    line-height: 24px;
+    text-align: justify;
+    letter-spacing: 0.2px;
+    color: #152B47;
+}
+
+.tf-travel-contetn {
+    display: none;
+}
+
+.tf-travel-itinerary-item:first-child .tf-travel-contetn {
+    display: unset;
+}
+
+.tf-travel-text h4:hover {
+    background: #002c6614;
+}
+
+/*--------- Travel Itinerary CSS End ---------*/
+
+
+/*----------------------------------------------------
+            Map CSS Start
+-----------------------------------------------------*/
+
+.tf-map-wrapper {
+    background: #fafcfe;
+    padding: 50px 0;
+    margin-bottom: 100px;
+}
+
+/*--------- map CSS End ---------*/
+
+/*----------------------------------------------------
+            Accordion CSS Start
+-----------------------------------------------------*/
+
+.tf-faq-content-wrapper {
+    padding: 70px;
+    background: #FAFCFE;
+    margin-bottom: 100px;
+}
+
+.tf-faq-sec-title h2 {
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: -0.4px;
+    color: #002C66;
+    text-align: center;
+}
+
+.tf-faq-item {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.tf-faq-text {
+    background: #FAFCFE;
+    box-shadow: 0px 2px 10px rgba(2, 51, 110, 0.2);
+    border-radius: 5px;
+    width: calc(100% - 30px);
+}
+
+.tf-faq-title h3 {
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+    font-weight: normal;
+    margin: 0;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.tf-faq-title {
+    padding: 26px;
+    cursor: pointer;
+}
+
+.tf-faq-desc {
+    padding: 0px 26px 26px 26px;
+    font-size: 18px;
+    line-height: 26px;
+    text-align: justify;
+    letter-spacing: 0.2px;
+    color: #152B47;
+    display: none;
+}
+
+.tf-faq-items-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.tf-faq-icon img {
+    margin-top: 24px;
+}
+
+.tf-faq-icon {
+    width: 30px;
+}
+
+.tf-faq-sec-title {
+    margin-bottom: 60px;
+}
+
+.tf-faq-item:first-child .tf-faq-desc {
+    display: block;
+}
+
+.tf-faq-title:hover h3 {
+    color: #002c66;
+}
+
+/*--------- Accordion Itinerary CSS End ---------*/
+
+
+/*----------------------------------------------------
+            suggestion CSS Start
+-----------------------------------------------------*/
+
+.tf-suggestion-item {
+    background: #002248;
+    border: 5px solid #FAFCFE;
+    box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+    border-radius: 10px;
+    height: 500px;
+    padding: 30px;
+    display: flex;
+    align-items: flex-end;
+    margin: 20px 0 !important;
+}
+
+.tf-suggestion-content {
+    background: rgba(2, 51, 110, 0.3);
+    border: 1px solid #FAFCFE;
+    backdrop-filter: blur(20px);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
+}
+
+.tf-suggestion-desc h3 {
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.2px;
+    color: #FFFFFF;
+    font-weight: normal;
+    margin: 0;
+}
+
+.tf-suggestion-desc h3 span {
+    display: flex;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+    color: #FFFFFF;
+    margin-top: 5px;
+}
+
+.tf-suggestion-rating i {
+    color: #FFCD3D;
+}
+
+.tf-suggestion-price span {
+    font-size: 20px;
+    line-height: 28px;
+    text-align: right;
+    letter-spacing: 0.2px;
+    color: #FFFFFF;
+    font-weight: normal;
+}
+
+.tf-suggestion-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+}
+
+.tf-suggestion-sec-head h2 {
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: -0.4px;
+    color: #002C66;
+}
+
+.tf-suggestion-sec-head p {
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.2px;
+}
+
+.tf-suggestion-wrapper {
+    background: #FAFCFE;
+    padding: 50px 0;
+    margin-bottom: 100px;
+}
+
+.tf-suggestion-sec-head {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 1170px;
+    margin: auto;
+    margin-bottom: 35px;
+}
+
+.tf-suggestion-wrapper .tf-container {
+    max-width: 1240px;
+}
+
+.tf-suggestion-wrapper .tf-container .owl-nav button {
+    position: absolute;
+    top: calc(50% - 25px);
+    width: 50px;
+    height: 50px;
+    background: #FAFCFE;
+    box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+    border-radius: 5px;
+    transform: matrix(1, 0, 0, -1, 0, 0);
+    color: #002C66;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.tf-suggestion-wrapper .tf-container .owl-nav button.owl-prev {
+    left: -85px;
+}
+
+.tf-suggestion-wrapper .tf-container .owl-nav button:hover {
+    background: #002C66;
+    color: #fff;
+}
+
+.tf-suggestion-wrapper .tf-container .owl-nav button.owl-next {
+    right: -85px;
+}
+
+/*--------- suggestion Itinerary CSS End ---------*/
+
+
+/*----------------------------------------------------
+            sec CSS Start
+-----------------------------------------------------*/
+
+
+
+.tf-review-item {
+    background: #FAFCFE;
+    box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+    padding: 20px;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.tf-review-rating {
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+}
+
+.tf-review-rating i {
+    color: #FFCD3D;
+    font-size: 15px;
+}
+
+.tf-review-item h3 {
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+    text-align: center;
+}
+
+.tf-review-item h3 span {
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.2px;
+    color: #213650;
+    display: block;
+}
+
+.tf-review-desc {}
+
+.tf-review-desc {
+    font-size: 12px;
+    line-height: 16px;
+    text-align: justify;
+    letter-spacing: 0.2px;
+    position: relative;
+    padding: 0 15px;
+}
+
+.tf-review-desc img {
+    width: 16px !important;
+}
+
+.tf-review-desc img:last-child {
+    left: auto;
+    right: 0;
+    bottom: 0;
+}
+
+.tf-review-wrapper .tf-container {
+    max-width: 1240px;
+}
+
+.tf-review-sec-head {
+    max-width: 1170px;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.tf-review-sec-head h2 {
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: -0.4px;
+    color: #002C66;
+    font-weight: bold;
+}
+
+.tf-review-sec-head p {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+}
+
+.tf-review-wrapper {
+    background: #FAFCFE;
+    padding: 50px 0;
+    margin-bottom: 100px;
+}
+
+.tf-review-avater {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.tf-review-avater img {
+    position: unset !important;
+}
+
+.tf-review-write a {
+    background: #002C66;
+    box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+    color: #FAFCFE;
+    padding: 12px 30px;
+}
+
+.tf-review-write a:hover {
+    background: #002c66d6;
+}
+
+.tf-review-write {
+    text-align: center;
+}
+
+.tf-review-form-area {
+    background: rgba(2, 51, 110, 0.1);
+    padding: 50px 100px;
+    margin-top: 60px;
+}
+
+form.tf-review-form {
+    display: flex;
+    gap: 50px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.tf-field-wrapper {
+    width: calc(50% - 25px);
+    display: flex;
+    flex-direction: column;
+}
+
+.tf-field-wrapper input,
+.tf-field-wrapper textarea {
+    width: -webkit-fill-available;
+    background: #FAFCFE;
+    border-radius: 5px;
+    margin: 0px 0px;
+    border: 1px;
+    padding: 12px 17px;
+}
+
+.tf-width-100 {
+    width: 100%;
+}
+
+.tf-review-form-stars-rating {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tf-review-form-stars-rating h5 {
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+}
+
+.tf-review-form-stars i {
+    color: #C7D6E6;
+}
+
+.tf-bg-white {
+    background: #FAFCFE;
+    border-radius: 5px;
+    border: 1px;
+}
+
+
+.tf-review-form-area .tf-bg-white {
+    padding: 45px 0;
+}
+
+.tf-review-form-area .tf-bg-white .tf-review-form-stars-rating {
+    padding: 0 50px;
+}
+
+.tf-field-wrapper textarea {
+    height: -webkit-fill-available;
+}
+
+button.tf-review-form-btn {
+    padding: 16px 32px;
+    background: #002C66;
+    border-radius: 5px;
+    width: max-content;
+    font-size: 30px;
+    line-height: 44px;
+    letter-spacing: 0.367568px;
+    color: #FAFCFE;
+    margin: 0px 0px;
+    border: none;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+button.tf-review-form-btn:hover {
+    background: #002c66d6;
+}
+.tf-review-title h2 {
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: -0.4px;
+    color: #002C66;
+    margin-bottom: 40px;
+}
+/*--------- review CSS End ---------*/
+
+
+/*----------------------------------------------------
+            subscribe CSS Start
+-----------------------------------------------------*/
+
+.tf-subscribe-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    align-items: center;
+    padding: 50px 0;
+}
+
+.tf-subscribe-left h2 {
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: -0.4px;
+    color: #002C66;
+    margin: 0;
+}
+
+.tf-subscribe-content-wrapper p {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+}
+
+.tf-subscribe-inputs-wrapper {
+    background: #FAFCFE;
+    border: 1px solid #002C66;
+    box-sizing: border-box;
+    border-radius: 5px;
+    display: inline-block;
+    width: fit-content;
+}
+
+.tf-subscribe-inputs-wrapper input,
+.tf-subscribe-inputs-wrapper input:focus {
+    margin: 0;
+    border: 0;
+    padding: 14px 18px;
+    outline: none;
+    border-radius: 20px;
+    width: 230px;
+}
+
+.tf-subscribe-inputs-wrapper button {
+    background: #002C66;
+    border-radius: 3px;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.2px;
+    color: #FAFCFE;
+    padding: 12px 30px;
+    border: none;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.tf-subscribe-inputs-wrapper button:hover {
+    background: #002c66d9;
+}
+
+.tf-subscribe-left {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.tf-subscribe-wrapper {
+    background: #FAFCFE;
+    margin-bottom: 100px;
+}
+
+/*--------- subscribe CSS End ---------*/
+
+
+/*----------------------------------------------------
+            footer CSS Start
+-----------------------------------------------------*/
+
+.tf-footer-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    width: 100%;
+}
+
+.tf-footer-content-wrapper>div {
+    width: 20%;
+}
+
+.tf-footer-colunm-item:first-child {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tf-footer-desc p {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+    margin-bottom: 30px;
+}
+
+.tf-footer-desc img {
+    width: 130px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.tf-footer-colunm-item h3 {
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+    margin-bottom: 20px;
+}
+
+.tf-footer-colunm-item ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tf-footer-colunm-item ul li a {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+}
+
+.tf-footer-colunm-item ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tf-footer-colunm-item:last-child {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.tf-footer-colunm-item {
+    display: flex;
+    justify-content: center;
+}
+
+.tf-footer-socials a {
+    color: #002c66;
+    font-size: 24px;
+}
+
+.tf-footer-socials {
+    display: flex;
+    gap: 10px;
+}
+
+.tf-footer-wrapper {
+    padding: 50px 0;
+    background: #FAFCFE;
+}
+
+.tf-footer-bottom {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+    text-align: center;
+    margin-top: 40px;
+}
+
+/*--------- footer CSS End ---------*/
