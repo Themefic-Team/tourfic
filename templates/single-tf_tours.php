@@ -317,7 +317,7 @@ $tf_overall_rate['review'] = null;
                                 style="background-image: url(<?php echo get_the_post_thumbnail_url(get_the_ID(),'full') ?>);">
                                 <div class="tf-suggestion-content">
                                     <div class="tf-suggestion-desc">
-									<a href="<?php the_permalink() ?>"><h3><?php the_title() ?></a> <span><?php echo __( $location,'tourfic' ) ?></span></h3>
+									<h3><a href="<?php the_permalink() ?>"><?php the_title() ?></a> <span><?php echo __( $location,'tourfic' ) ?></span></h3>
                                     </div>
                                     <div class="tf-suggestion-rating">
                                         <div class="tf-suggestion-rating-star">

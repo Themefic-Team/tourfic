@@ -46,43 +46,7 @@
             prevArrow: '<button class="tf-hero-slider-arrow slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>',
             nextArrow: '<button class="tf-hero-slider-arrow slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>'
         });
-        var tfToursCount = $('.tf-tours_recomendation_area_wrapper').data('tours-count');
-        if( tfToursCount > 3 ){
-            $('.tf-tourbox').slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                arrows: true,
-                fade: false,
-                prevArrow: '<button class="tf-tourbox-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>',
-                nextArrow: '<button class="tf-tourbox-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>',
-                responsive: [
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1,
-                        }
-                    },
-                ],
-            });
-        };
 
-        $('.tf-custom-review-slider-area').slick({
-            arrows: true,
-            fade: false,
-            slidesToShow: 3,
-            prevArrow: '<button class="tf-cr-slider-arrow slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>',
-            nextArrow: '<button class="tf-cr-slider-arrow slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>',
-            responsive: [
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                    }
-                },
-            ],
-        });
 
         
         $(".tf-tour-gallery").on('click',function () {

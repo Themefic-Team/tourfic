@@ -2565,11 +2565,12 @@ button.tf-cr-slider-arrow.prev-arrow {
   position: relative;
 }
 
-.tf-hero-btm-icon.tf-tour-gallery {
+.tf-hero-btm-icon.tf-tour-gallery, .tf-hero-btm-icon .tf-tour-video {
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 4px;
   padding: 5px 25px 5px 15px;
   color: #fff;
+  margin-right: 10px;
 }
 
 .tf-tour-booking-wrap {
