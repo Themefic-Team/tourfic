@@ -163,8 +163,7 @@ if ( !class_exists( 'Tourfic_WordPress_Plugin' ) ):
 
             wp_register_style( 'font-awesome-5', plugin_dir_url( __FILE__ ) . 'assets/font-awesome-4.7.0/css/all.min.css' );
             wp_enqueue_style( 'font-awesome-5' );
-
-            wp_enqueue_style( 'rubik', 'https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+           
             wp_enqueue_style( 'magnific-popup-css', plugin_dir_url( __FILE__ ) . 'assets/css/magnific-popup.css', null, $TOURFIC_VERSION );
 
             wp_enqueue_style( 'tourfic-styles', plugin_dir_url( __FILE__ ) . 'assets/css/tourfic-styles.min.css', null, $TOURFIC_VERSION );
@@ -173,6 +172,7 @@ if ( !class_exists( 'Tourfic_WordPress_Plugin' ) ):
             wp_enqueue_style( 'my-style', plugin_dir_url( __FILE__ ) . 'assets/css/my-style.css', null, $TOURFIC_VERSION );
             wp_enqueue_style( 'owl-carousel', plugin_dir_url( __FILE__ ) . 'assets/css/owl.carousel.min.css', null, $TOURFIC_VERSION );
             wp_enqueue_style( 'tf-style', plugin_dir_url( __FILE__ ) . 'assets/css/style.css', null, $TOURFIC_VERSION );
+            wp_enqueue_style( 'tf-responsive', plugin_dir_url( __FILE__ ) . 'assets/css/responsive.css', null, $TOURFIC_VERSION );
 
             wp_enqueue_script( 'slick', plugin_dir_url( __FILE__ ) . 'assets/slick/slick.min.js', array( 'jquery' ), $TOURFIC_VERSION );
 

@@ -1482,12 +1482,12 @@ span.review_num {
 }
 
 .ni-buttons .button {
-  border-color: #004d95;
-  color: #004d95;
+  border-color: #003162;
+  color: #003162;
   min-width: 100%;
 }
 .ni-buttons .button:hover {
-  background: #004d95;
+  background: #003162;
   color: #fff;
 }
 
@@ -1754,6 +1754,7 @@ button.tf-hero-slider-arrow.next-arrow {
 .tf-hero-bottom-area {
   display: flex;
   justify-content: flex-end;
+  width: 100%;
 }
 
 .tf-hero-slider-fixed {
@@ -1853,6 +1854,10 @@ button.tf-hero-slider-arrow.next-arrow {
 
 .tf_tours-content_wrapper_inner {
   padding: 0 70px;
+}
+
+.tf-page-wrapper span.tf-price .amount {
+  font-weight: normal;
 }
 
 .tf_tours-title {
@@ -2495,21 +2500,21 @@ button.tf-cr-slider-arrow.prev-arrow {
   display: none;
 }
 
-.tf-tours_review_area_wrapper {
+.tf-review-wrapper {
   background: #fff;
 }
-.tf-tours_review_area_wrapper label {
+.tf-review-wrapper label {
   font-size: 20px;
   font-weight: 400;
   line-height: 28px;
 }
-.tf-tours_review_area_wrapper form#commentform {
+.tf-review-wrapper form#commentform {
   background: rgba(2, 51, 110, 0.1);
   padding: 50px 100px;
   overflow: hidden;
   margin-top: 30px;
 }
-.tf-tours_review_area_wrapper .tf_comment-metas {
+.tf-review-wrapper .tf_comment-metas {
   background: #fff;
   border-radius: 5px;
   padding: 40px;
@@ -2517,17 +2522,17 @@ button.tf-cr-slider-arrow.prev-arrow {
   float: left;
   margin-right: 10px;
 }
-.tf-tours_review_area_wrapper select {
+.tf-review-wrapper select {
   padding: 0;
   background: unset;
   border: unset;
 }
-.tf-tours_review_area_wrapper .comment_form_fields {
+.tf-review-wrapper .comment_form_fields {
   width: 50%;
   float: right;
   padding: 0px 15px;
 }
-.tf-tours_review_area_wrapper p.form-submit input[type=submit] {
+.tf-review-wrapper p.form-submit input[type=submit] {
   padding: 12px 43px;
   font-size: 18px;
   font-weight: 400 !important;
@@ -2536,28 +2541,35 @@ button.tf-cr-slider-arrow.prev-arrow {
   background: #002c66 !important;
   border: unset !important;
 }
-.tf-tours_review_area_wrapper p.form-submit {
+.tf-review-wrapper p.form-submit {
   width: 100%;
   float: none;
   display: block;
   overflow: hidden;
   margin-top: 15px;
 }
-.tf-tours_review_area_wrapper .comment_form_fields textarea {
+.tf-review-wrapper .comment_form_fields textarea {
   border: unset !important;
   height: 153px;
   border-radius: 5px;
 }
-.tf-tours_review_area_wrapper .author-email input {
+.tf-review-wrapper .author-email input {
   border: unset;
   border-radius: 5px;
 }
-.tf-tours_review_area_wrapper p.logged-in-as {
+.tf-review-wrapper p.logged-in-as {
   padding-bottom: 22px;
 }
 
 .tf-tours_gallery-wrap {
   position: relative;
+}
+
+.tf-hero-btm-icon.tf-tour-gallery {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  padding: 5px 25px 5px 15px;
+  color: #fff;
 }
 
 .tf-tour-booking-wrap {
@@ -2602,6 +2614,9 @@ button.tf-cr-slider-arrow.prev-arrow {
 .tf-tour-booking-wrap.tf-tours-fixed .tf_acrselection-wrap {
   position: absolute;
   top: -237px;
+}
+.tf-tour-booking-wrap.tf-tours-fixed .tf_tours_booking {
+  width: 80%;
 }
 
 .tf-tours-booking-btn .tf_button {
@@ -2675,10 +2690,13 @@ form.tf_tours_booking .tf_selectperson-wrap {
     height: auto;
     width: 95%;
   }
-  .tf-tour-booking-wrap .tf_tours_booking {
-    display: block;
+  .tf-tour-booking-wrap form.tf_tours_booking {
+    display: block !important;
   }
-  .tf-tour-booking-wrap .tf_tours_booking .tf_selectperson-wrap {
+  .tf-tour-booking-wrap form.tf_tours_booking .tf_selectperson-wrap {
+    width: 100%;
+  }
+  .tf-tour-booking-wrap .tf_button {
     width: 100%;
   }
 
@@ -2688,6 +2706,7 @@ form.tf_tours_booking .tf_selectperson-wrap {
 
   .tourfic-wrap.default-style button[type=submit] {
     width: 100%;
+    margin-top: 10px;
   }
 
   .tf_selectdate-wrap, .tf_selectperson-wrap {
@@ -2735,20 +2754,20 @@ form.tf_tours_booking .tf_selectperson-wrap {
     height: auto;
   }
 
-  .tf-tours_review_area_wrapper form#commentform {
+  .tf-review-wrapper form#commentform {
     padding: 10px 0px;
   }
 
-  .tf-tours_review_area_wrapper .tf_comment-metas {
+  .tf-review-wrapper .tf_comment-metas {
     padding: 8px;
     width: 100%;
   }
 
-  .tf-tours_review_area_wrapper .comment_form_fields {
+  .tf-review-wrapper .comment_form_fields {
     width: 100%;
   }
 
-  .tf-custom-review-section-wrapper {
+  .tf-review-wrapper {
     padding: 15px;
   }
 
@@ -2811,6 +2830,11 @@ form.tf_tours_booking .tf_selectperson-wrap {
   .tf_tours-title-left {
     display: flex;
     justify-content: space-between;
+  }
+
+  .tf-hero-pricing {
+    display: flex;
+    justify-content: flex-end;
   }
 }
 /*Archive page*/

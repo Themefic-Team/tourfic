@@ -1,14 +1,6 @@
 /*----------------------------------------- 
             Common CSS Start
  -----------------------------------------*/
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-.tf-page-wrapper,
-.tf-page-wrapper p,
-.tf-page-wrapper a,
-.tf-wrapper {
-    font-family: 'Rubik', sans-serif;
-}
 .tf-page-wrapper {
     width: 100%;
 }
@@ -22,9 +14,7 @@
 .tf-page-wrapper h6 {
     margin-top: 0;
     margin-bottom: .5rem;
-    font-weight: 500;
     line-height: 1.2;
-    font-family: 'Rubik', sans-serif;
 }
 
 .tf-page-wrapper h1 {
@@ -180,7 +170,6 @@
 ------------------------------------*/
 .tf-hero-top-content {
     min-height: 460px;
-    background: url(./assets/image/hero-bg.png);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -189,7 +178,7 @@
 }
 
 .tf-hero-top-content-inner {
-    max-width: 640px;
+    width: 100%;
     text-align: center;
 }
 
@@ -200,7 +189,10 @@
     align-items: center;
     letter-spacing: -0.4px;
     color: #FAFCFE;
-    margin-bottom: 70px;
+    margin-bottom: -50px;
+    justify-content: center;
+    padding: 0 20px;
+    padding-top: 50px;
 }
 
 .tf-hero-form {
@@ -374,7 +366,9 @@
     align-items: center;
     justify-content: space-between;
 }
-
+.tf-ohi-image img {
+    border-radius: 10px;
+}
 .tf-overview-item>div {
     max-width: 48%;
 }
@@ -501,11 +495,11 @@
 }
 
 .tf-quoted-include ul li:before {
-    background: url(./assets/image/check.png);
+    background: url(../img/check.png);
 }
 
 .tf-quoted-exclude ul li:before {
-    background: url(./assets/image/x.png);
+    background: url(../img/x.png);
 }
 
 .tf-quoted-content-upper {
@@ -523,7 +517,7 @@
     background: #fafcfe;
     left: -20px;
     top: -30px;
-    background-image: url(./assets/image/quot1.png);
+    background-image: url(../img/quote1.png);
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -533,7 +527,7 @@
     bottom: -30px;
     top: unset;
     left: unset;
-    background-image: url(./assets/image/quot2.png);
+    background-image: url(../img/quote2.png);
 }
 
 /*--------- Qoted List CSS End ---------*/
@@ -755,6 +749,8 @@
     display: flex;
     align-items: flex-end;
     margin: 20px 0 !important;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .tf-suggestion-content {
@@ -767,7 +763,9 @@
     padding: 20px;
     width: 100%;
 }
-
+.tf-suggestion-desc {
+    max-width: 175px;
+}
 .tf-suggestion-desc h3 {
     font-size: 18px;
     line-height: 26px;
@@ -785,9 +783,12 @@
     color: #FFFFFF;
     margin-top: 5px;
 }
-
+.tf-suggestion-desc a{
+    color: #fff;
+}
 .tf-suggestion-rating i {
     color: #FFCD3D;
+    font-size: 12px;
 }
 
 .tf-suggestion-price span {
@@ -1068,14 +1069,13 @@ form.tf-review-form {
 .tf-field-wrapper textarea {
     height: -webkit-fill-available;
 }
-
 button.tf-review-form-btn {
     padding: 16px 32px;
     background: #002C66;
     border-radius: 5px;
     width: max-content;
-    font-size: 30px;
-    line-height: 44px;
+    font-size: 16px;
+    line-height: 26px;
     letter-spacing: 0.367568px;
     color: #FAFCFE;
     margin: 0px 0px;

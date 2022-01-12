@@ -293,31 +293,6 @@ function tourfic_gallery_slider( $file_list_meta_key = null, $post_id = null, $c
 	?>
 	<?php if( 'tf_tours' == get_post_type() ) :  ?>
 		<!--Hero slider section start-->
-		<div class="tf-hero-area" style="background-image: url(<?php echo wp_get_attachment_url( $files[0], 'tf_gallery_thumb' ); ?>);">
-			<div class="tf-hero-top-icons">
-				<a href="#"><img src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/share-icon.png'; ?>"></a>
-				<a href="#"><img src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/hart-icon.png'; ?>"></a>
-			</div>
-
-			<div class="tf-hero-bottom-area">					
-				<?php 
-				$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
-				$tour_video = $meta['tour_video'] ? $meta['tour_video'] : '';
-				if (defined( 'TF_PRO' ) && $tour_video){ 
-				?>	
-				<div class="tf-hero-btm-icon tf-tour-video" data-fancybox href="<?php echo $tour_video; ?>">
-					
-					<i class="fab fa-youtube"></i>
-					<span><?php echo __( 'Tour Videos','tourfic' ); ?></span>
-				</div>
-				<?php } ?>
-				<div class="tf-hero-btm-icon tf-tour-gallery">
-					<img width="50px" src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/gallery.png'; ?>">
-					<span><?php echo __( 'Tour Gallery','tourfic' ); ?></span>
-				</div>					
-			</div>
-		</div>
-
 		<div class="tf-hero-slider-fixed">
 			<div class="tf-hero-slider-relative">
 				<div class="tf-hero-slider-cross-icon">

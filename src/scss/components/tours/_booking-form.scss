@@ -2,6 +2,12 @@
 .tf-tours_gallery-wrap {
     position: relative;
 }
+.tf-hero-btm-icon.tf-tour-gallery {
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 4px;
+    padding: 5px 25px 5px 15px;
+    color: #fff;
+}
 .tf-tour-booking-wrap {
     font-weight: 700;
     border-radius: 10px;
@@ -36,13 +42,16 @@
 }
 .tf-tour-booking-wrap.tf-tours-fixed{
     width: 100%;
-    z-index: 10;
+    z-index: 10;    
+    background-color: #ecf0f2;
+    height: 60px;
     .tf_acrselection-wrap{
         position: absolute;
         top: -237px;
     }
-    background-color: #ecf0f2;
-    height: 60px;
+    .tf_tours_booking{
+        width: 80%;
+    }
 } 
 .tf-tours-booking-btn{
     .tf_button {

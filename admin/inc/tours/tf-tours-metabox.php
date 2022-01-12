@@ -65,6 +65,12 @@ if ( class_exists( 'CSF' ) ) {
                 'type'  => 'gallery',
                 'title' => __( 'Tour Gallery', 'tourfic' ),
             ),
+            
+            array(
+                'id'    => 'hero_title',
+                'type'  => 'text',
+                'title' => __( 'Hero section title', 'tourfic' ),
+            ),
             array(
                 'id'       => 'tour_video',
                 'type'     => 'text',

@@ -806,6 +806,7 @@
             $('.reviews span').html("0/5");
         }
 
+        //code from J
         $(".tf-suggestion-items-wrapper").owlCarousel({            
             margin:30,
             stagePadding: 20,
@@ -848,8 +849,6 @@
             }
 
         });
-
-        //code from J
         $(".tf-travel-text h4").click(function(){
             $(this).siblings('.tf-travel-contetn').slideToggle();
             $(this).parents('.tf-travel-itinerary-item').siblings().find('.tf-travel-contetn').slideUp();
