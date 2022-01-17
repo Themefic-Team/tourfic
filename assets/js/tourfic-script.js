@@ -175,6 +175,8 @@
            var tfMinDate = fixedCheckIn;
         } else if(customAvailability == 'no') {
             tfMinDate =  dateToday;
+        }else if(customAvailability == 'fake') {
+            tfMinDate =  '01/12/3000';
         }else{
             tfMinDate =  continuousCheckIn ;
         }

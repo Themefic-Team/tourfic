@@ -28,22 +28,22 @@ if ( class_exists( 'CSF' ) ) {
                 'id'       => 'tour_as_featured',
                 'type'     => 'switcher',
                 'title'    => __( 'Set this tour as featured', 'tourfic' ),
-                'subtitle' => __( 'To show the feature label', 'tourfic' ),
+                'subtitle' => __( 'Tour will be shown under featured sections', 'tourfic' ),
             ),
 
-            array(
-                'id'      => 'booking_type',
-                'type'    => 'select',
-                'title'   => __( 'Booking type', 'tourfic' ),
-                'options' => array(
-                    'instant'         => __( 'Instant Booking', 'tourfic' ),
-                    apply_filters('tf_external_booking','')    => __( 'External Booking (Pro)', 'tourfic' ),
-                ),
-            ),
+//             array(
+//                 'id'      => 'booking_type',
+//                 'type'    => 'select',
+//                 'title'   => __( 'Booking type', 'tourfic' ),
+//                 'options' => array(
+//                     'instant'         => __( 'Instant Booking', 'tourfic' ),
+//                     apply_filters('tf_external_booking','')    => __( 'External Booking (Pro)', 'tourfic' ),
+//                 ),
+//             ),
             array(
                 'id'      => 'tour_single_page',
                 'type'    => 'select',
-                'title'   => __( 'Tour single page layout', 'tourfic' ),
+                'title'   => __( 'Single Tour Page Layout', 'tourfic' ),
                 'options' => array(
                     'instant' => __( 'Default', 'tourfic' ),
                 ),
@@ -69,13 +69,13 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'    => 'hero_title',
                 'type'  => 'text',
-                'title' => __( 'Hero section title', 'tourfic' ),
+                'title' => __( 'Hero Section Title', 'tourfic' ),
             ),
             array(
-                'id'       => 'tour_video',
+                'id'       => '',
                 'type'     => 'text',
-                'title'    => __( 'Tour video', 'tourfic' ),
-                'subtitle' => __( '<strong class="tf-pro">Pro</strong>', 'tourfic' ),
+                'title'    => __( 'Tour Video', 'tourfic' ),
+                'subtitle' => __( '<a href="https://tourfic.com/#purchase" target="_blank" style="text-decoration: none;"><a href="https://tourfic.com/#purchase" target="_blank" style="text-decoration: none;"><strong class="tf-pro">Pro</strong></a></a>', 'tourfic' ),
                 'attributes'  => [
                     'disabled' => 'disabled',
                 ],
@@ -92,28 +92,28 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'       => 'text_location',
                 'type'     => 'text',
-                'title'    => __( 'Tour Location manual', 'tourfic' ),
-                'subtitle' => __( 'Input tour location', 'tourfic' ),
+                'title'    => __( 'Tour Location', 'tourfic' ),
+                'subtitle' => __( 'Manually enter your tour location', 'tourfic' ),
             ),
 
             array(
-                'id'       => 'location',
+                'id'       => '',
                 'type'     => 'map',
-                'title'    => __( 'Tour Location Map', 'tourfic' ),
-                'subtitle' => __( 'Select tour location <strong class="tf-pro">Pro</strong>', 'tourfic' ),
+                'title'    => __( 'Tour Location Pro (Auto Suggestion)', 'tourfic' ),
+                'subtitle' => __( 'Location suggestions will be provided from Google <a href="https://tourfic.com/#purchase" target="_blank" style="text-decoration: none;"><strong class="tf-pro">Pro</strong></a>', 'tourfic' ),
                 'attributes'  => [
                     'disabled' => 'disabled',
                 ],
             ),
-            array(
-                'id'       => 'nearby_properties',
-                'type'     => 'text',
-                'title'    => __( 'Nearby properties', 'tourfic' ),
-                'subtitle' => __( '<strong class="tf-pro">Pro</strong>', 'tourfic' ),
-                'attributes'  => [
-                    'disabled' => 'disabled',
-                ],
-            ),
+//             array(
+//                 'id'       => 'nearby_properties',
+//                 'type'     => 'text',
+//                 'title'    => __( 'Nearby properties', 'tourfic' ),
+//                 'subtitle' => __( '<a href="https://tourfic.com/#purchase" target="_blank" style="text-decoration: none;"><strong class="tf-pro">Pro</strong></a>', 'tourfic' ),
+//                 'attributes'  => [
+//                     'disabled' => 'disabled',
+//                 ],
+//             ),
 
         ),
     ) );
@@ -126,7 +126,8 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'    => 'additional_information',
                 'type'  => 'wp_editor',
-                'title' => __( 'Hightlights', 'tourfic' ),
+                'title' => __( 'Tour Hightlights', 'tourfic' ),
+				'subtitle' => __( 'Enter a summary or full description of your tour', 'tourfic' ),
             ),
 
         ),
@@ -140,14 +141,14 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'       => 'duration',
                 'type'     => 'text',
-                'title'    => __( 'Tour duration', 'tourfic' ),
-                'subtitle' => __( 'Tour duration eg. 3 days', 'tourfic' ),
+                'title'    => __( 'Tour Duration', 'tourfic' ),
+                'subtitle' => __( 'E.g. 3 days', 'tourfic' ),
             ),
             array(
                 'id'       => 'group_size',
                 'type'     => 'text',
-                'title'    => __( 'Group size', 'tourfic' ),
-                'subtitle' => __( 'Group size eg. 10 people', 'tourfic' ),
+                'title'    => __( 'Group Size', 'tourfic' ),
+                'subtitle' => __( 'E.g. 10 people', 'tourfic' ),
             ),
             array(
                 'id'       => 'language',
@@ -158,13 +159,13 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'       => 'min_people',
                 'type'     => 'number',
-                'title'    => __( 'Minimum person', 'tourfic' ),
+                'title'    => __( 'Minimum Person', 'tourfic' ),
                 'subtitle' => __( 'Minimum person to travel', 'tourfic' ),
             ),
             array(
                 'id'       => 'max_people',
                 'type'     => 'number',
-                'title'    => __( 'Maximum person', 'tourfic' ),
+                'title'    => __( 'Maximum Person', 'tourfic' ),
                 'subtitle' => __( 'Maximum person to travel', 'tourfic' ),
             ),
 
@@ -177,28 +178,28 @@ if ( class_exists( 'CSF' ) ) {
         'fields' => array(
 
             array(
-                'id'       => apply_filters('tf_contact_email',''),
+                'id'       => '',
                 'type'     => 'text',
-                'title'    => __( 'Email address', 'tourfic' ),
-                'subtitle' => __( '<strong class="tf-pro">Pro</strong>', 'tourfic' ),
+                'title'    => __( 'Email Address', 'tourfic' ),
+                'subtitle' => __( '<a href="https://tourfic.com/#purchase" target="_blank" style="text-decoration: none;"><strong class="tf-pro">Pro</strong></a>', 'tourfic' ),
             ),
             array(
-                'id'       => 'phone',
+                'id'       => '',
                 'type'     => 'text',
                 'title'    => __( 'Phone Number', 'tourfic' ),
-                'subtitle' => __( '<strong class="tf-pro">Pro</strong>', 'tourfic' ),
+                'subtitle' => __( '<a href="https://tourfic.com/#purchase" target="_blank" style="text-decoration: none;"><strong class="tf-pro">Pro</strong></a>', 'tourfic' ),
             ),
             array(
-                'id'       => 'website',
+                'id'       => '',
                 'type'     => 'text',
                 'title'    => __( 'Website Url', 'tourfic' ),
-                'subtitle' => __( '<strong class="tf-pro">Pro</strong>', 'tourfic' ),
+                'subtitle' => __( '<a href="https://tourfic.com/#purchase" target="_blank" style="text-decoration: none;"><strong class="tf-pro">Pro</strong></a>', 'tourfic' ),
             ),
             array(
-                'id'       => 'fax',
+                'id'       => '',
                 'type'     => 'text',
                 'title'    => __( 'Fax Number', 'tourfic' ),
-                'subtitle' => __( '<strong class="tf-pro">Pro</strong>', 'tourfic' ),
+                'subtitle' => __( '<a href="https://tourfic.com/#purchase" target="_blank" style="text-decoration: none;"><strong class="tf-pro">Pro</strong></a>', 'tourfic' ),
             ),
 
         ),
@@ -210,8 +211,8 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'     => '',
                 'type'   => 'repeater',
-                'title'  => __( 'Extra service', 'tourfic' ),
-                'subtitle'   => __( '<strong class="tf-pro">Pro</strong>','tourfic'),
+                'title'  => __( 'Extra Services on Tour', 'tourfic' ),
+                'subtitle'   => __( '<a href="https://tourfic.com/#purchase" target="_blank" style="text-decoration: none;"><strong class="tf-pro">Pro</strong></a>','tourfic'),
                 'fields' => array(
                     array(
                         'id'    => 'title',
@@ -224,7 +225,7 @@ if ( class_exists( 'CSF' ) ) {
                     array(
                         'id'    => 'desc',
                         'type'  => 'textarea',
-                        'title' => __( 'Short description', 'tourfic' ),
+                        'title' => __( 'Short Description', 'tourfic' ),
                         'attributes' => array(
                             'disabled' => 'disabled',
                         ),
@@ -249,7 +250,7 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'       => 'pricing',
                 'type'     => 'select',
-                'title'    => __( 'Pricing rule', 'tourfic' ),
+                'title'    => __( 'Pricing Rule', 'tourfic' ),
                 'subtitle' => __( 'Input pricing rule', 'tourfic' ),
                 'class'    => 'pricing',
                 'options'  => [
@@ -261,7 +262,7 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'         => 'adult_price',
                 'type'       => 'number',
-                'title'      => __( 'Adult Price', 'tourfic' ),
+                'title'      => __( 'Price for Adult', 'tourfic' ),
                 'subtitle'   => __( 'Input adult price', 'tourfic' ),
                 'dependency' => array( 'pricing', '==', 'person' ),
                 'attributes' => array(
@@ -272,7 +273,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'         => 'child_price',
                 'type'       => 'number',
                 'dependency' => array( 'pricing', '==', 'person' ),
-                'title'      => __( 'Child price', 'tourfic' ),
+                'title'      => __( 'Price for Child', 'tourfic' ),
                 'subtitle'   => __( 'Input child price', 'tourfic' ),
                 'attributes' => array(
                     'min' => '0',
@@ -282,7 +283,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'         => 'infant_price',
                 'type'       => 'number',
                 'dependency' => array( 'pricing', '==', 'person' ),
-                'title'      => __( 'Infant price', 'tourfic' ),
+                'title'      => __( 'Price for Infant', 'tourfic' ),
                 'subtitle'   => __( 'Input infant price', 'tourfic' ),
                 'attributes' => array(
                     'min' => '0',
@@ -292,7 +293,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'         => 'group_price',
                 'type'       => 'number',
                 'dependency' => array( 'pricing', '==', 'group' ),
-                'title'      => __( 'Group price', 'tourfic' ),
+                'title'      => __( 'Group Price', 'tourfic' ),
                 'subtitle'   => __( 'Input group price', 'tourfic' ),
                 'attributes' => array(
                     'min' => '0',
@@ -301,7 +302,7 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'       => 'discount_type',
                 'type'     => 'select',
-                'title'    => __( 'Discount type', 'tourfic' ),
+                'title'    => __( 'Discount Type', 'tourfic' ),
                 'subtitle' => __( 'Select discount type Percent or Fixed', 'tourfic' ),
                 'options'  => array(
                     'none'    => __( 'None', 'tourfic' ),
@@ -313,7 +314,7 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'         => 'discount_price',
                 'type'       => 'number',
-                'title'      => __( 'Discount price', 'tourfic' ),
+                'title'      => __( 'Discount Price', 'tourfic' ),
                 'subtitle'   => __( 'Input discount price in number', 'tourfic' ),
                 'attributes' => array(
                     'min' => '0',
@@ -332,11 +333,11 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'       => 'type',
                 'type'     => 'select',
-                'title'    => __( 'Tour type', 'tourfic' ),
-                'subtitle' => __( 'Select availability', 'tourfic' ),
+                'title'    => __( 'Tour Type', 'tourfic' ),
+                'subtitle' => __( 'Fixed: Tour will be available on a fixed date. Continous: Tour will be available every month within the mentioned range.', 'tourfic' ),
                 'class'    => 'tour-type',
                 'options'  => [
-                    apply_filters('tf_continuous_availability','') => __( 'Continuous (Pro)', 'tourfic' ),
+                    'continuous' => __( 'Continuous (Pro)', 'tourfic' ),
                     'fixed'      => __( 'Fixed', 'tourfic' ),
                 ],
                 'default' => 'fixed',
@@ -373,13 +374,13 @@ if ( class_exists( 'CSF' ) ) {
                     array(
                         'id'       => 'min_seat',
                         'type'     => 'number',
-                        'title'    => __( 'Minimum people', 'tourfic' ),
+                        'title'    => __( 'Minimum People', 'tourfic' ),
                         'subtitle' => __( 'Minimum seat number', 'tourfic' ),
                     ),
                     array(
                         'id'       => 'max_seat',
                         'type'     => 'number',
-                        'title'    => __( 'Maximum people', 'tourfic' ),
+                        'title'    => __( 'Maximum People', 'tourfic' ),
                         'subtitle' => __( 'Maximum seat number', 'tourfic' ),
                     ),
                 ),
@@ -389,26 +390,28 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'         => 'custom_availability',
                 'type'       => 'radio',
-                'title'      => __( 'Custom availability', 'tourfic' ),
+                'title'      => __( 'Custom Availability', 'tourfic' ),
+				 'subtitle'   => __( '<a href="https://tourfic.com/#purchase" target="_blank" style="text-decoration: none;"><strong class="tf-pro">Pro</strong></a>', 'tourfic' ),
                 'inline'     => true,
                 'dependency' => array( 'type', '==', 'continuous' ),
                 'options'    => [
-                    'yes' => __( 'Yes', 'tourfic' ),
-                    'no'  => __( 'No', 'tourfic' ),
+                    'fake' => __( 'Yes', 'tourfic' ),
+                    'fake2'  => __( 'No', 'tourfic' ),
                 ],
             ),
             array(
-                'id'         => 'continuous_availability',
+                'id'         => '',
                 'type'       => 'repeater',
                 'title'      => 'Continuous Availability',
+				'subtitle'   => __( '<a href="https://tourfic.com/#purchase" target="_blank" style="text-decoration: none;"><strong class="tf-pro">Pro</strong></a>', 'tourfic' ),
                 'class'      => 'continuous_availability',
                 'dependency' => array(
-                    array( 'custom_availability', '==', 'yes' ),
+                    array( 'custom_availability', '==', 'fake' ),
                     array( 'type', '==', 'continuous' ),
                 ),
                 'fields'     => array(
                     array(
-                        'id'    => 'check_in',
+                        'id'    => '',
                         'type'  => 'date',
                         'title' => __( 'Check In', 'tourfic' ),
                         'class' => 'check-in',
@@ -417,7 +420,7 @@ if ( class_exists( 'CSF' ) ) {
                         )
                     ),
                     array(
-                        'id'    => 'check_out',
+                        'id'    => '',
                         'type'  => 'date',
                         'title' => __( 'Check Out', 'tourfic' ),
                         'class' => 'check-out',
@@ -426,14 +429,14 @@ if ( class_exists( 'CSF' ) ) {
                         )
                     ),
                     array(
-                        'id'    => 'min_seat',
+                        'id'    => '',
                         'type'  => 'number',
-                        'title' => __( 'Min people', 'tourfic' ),
+                        'title' => __( 'Min People', 'tourfic' ),
                     ),
                     array(
-                        'id'    => 'max_seat',
+                        'id'    => '',
                         'type'  => 'number',
-                        'title' => __( 'Maximum people', 'tourfic' ),
+                        'title' => __( 'Maximum People', 'tourfic' ),
                     ),
                 ),
             ),
@@ -446,31 +449,31 @@ if ( class_exists( 'CSF' ) ) {
         'fields' => array(
 
             array(
-                'id'       => 'min_days',
+                'id'       => '',
                 'type'     => 'slider',
                 'max'      => '30',
                 'title'    => __( 'Minimum days to book before departure', 'tourfic' ),
-                'subtitle' => __( '<strong class="tf-pro">Pro</strong>', 'tourfic' ),
+                'subtitle' => __( 'Customer can not book after this date <a href="https://tourfic.com/#purchase" target="_blank" style="text-decoration: none;"><strong class="tf-pro">Pro</strong></a>', 'tourfic' ),
                 'attributes' => array(
                     'disabled' => 'disabled',
                 ),
             ),
-            array(
-                'id'       => 'external_booking',
-                'type'     => 'switcher',
-                'title'    => __( 'Allow external booking', 'tourfic' ),
-                'subtitle' => __( '<strong class="tf-pro">Pro</strong>', 'tourfic' ),
-                'attributes' => array(
-                    'disabled' => 'disabled',
-                ),
-            ),
-            array(
-                'id'         => 'external_booking_link',
-                'type'       => 'text',
-                'title'      => __( 'External booking link', 'tourfic' ),
-                'subtitle'   => __( 'Input external booking link', 'tourfic' ),
-                'dependency' => array( 'external_booking', '==', 'true' ),
-            ),
+//             array(
+//                 'id'       => 'external_booking',
+//                 'type'     => 'switcher',
+//                 'title'    => __( 'Allow external booking', 'tourfic' ),
+//                 'subtitle' => __( '<a href="https://tourfic.com/#purchase" target="_blank" style="text-decoration: none;"><strong class="tf-pro">Pro</strong></a>', 'tourfic' ),
+//                 'attributes' => array(
+//                     'disabled' => 'disabled',
+//                 ),
+//             ),
+//             array(
+//                 'id'         => 'external_booking_link',
+//                 'type'       => 'text',
+//                 'title'      => __( 'External booking link', 'tourfic' ),
+//                 'subtitle'   => __( 'Input external booking link', 'tourfic' ),
+//                 'dependency' => array( 'external_booking', '==', 'true' ),
+//             ),
         ),
     ) );
 
@@ -481,7 +484,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'     => 'itinerary',
                 'type'   => 'repeater',
                 'title'  => __( 'Itinerary', 'tourfic' ),
-                'max'    => apply_filters( 'tf_repeater_limit', '5'),
+                'max'    => '5',
                 'fields' => array(
                     array(
                         'id'       => 'time',
@@ -521,7 +524,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'     => 'inc',
                 'type'   => 'repeater',
                 'title'  => __( 'Include', 'tourfic' ),
-                'max'    => apply_filters( 'tf_repeater_limit', '5'),
+                'max'    => '5',
                 'fields' => array(
                     array(
                         'id'       => 'inc',
@@ -535,7 +538,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'     => 'exc',
                 'type'   => 'repeater',
                 'title'  => __( 'Exclude', 'tourfic' ),
-                'max'    => apply_filters( 'tf_repeater_limit', '5'),
+                'max'    => '5',
                 'fields' => array(
                     array(
                         'id'       => 'exc',
@@ -555,17 +558,16 @@ if ( class_exists( 'CSF' ) ) {
                 'id'     => 'faqs',
                 'type'   => 'repeater',
                 'title'  => __( 'FAQs', 'tourfic' ),
-                'max'    => apply_filters( 'tf_repeater_limit', '5'),
                 'fields' => array(
                     array(
                         'id'    => 'title',
                         'type'  => 'text',
-                        'title' => __( 'FAQ title', 'tourfic' ),
+                        'title' => __( 'FAQ Title', 'tourfic' ),
                     ),
                     array(
                         'id'    => 'desc',
                         'type'  => 'textarea',
-                        'title' => __( 'FAQ description', 'tourfic' ),
+                        'title' => __( 'FAQ Description', 'tourfic' ),
                     ),
                 ),
             ),

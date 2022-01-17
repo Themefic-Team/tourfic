@@ -1,10 +1,10 @@
 === Travel and Hotel Booking Solution for WooCommerce - Tourfic ===
 Contributors: psdtowpservice, themefic, mdshuvo, raihan143, hasanet, kamrul0424, codexa
-Tags: tour booking, tour operator, travel, tour, trip, travel-booking, travel agency, hotel booking, reservation, hotel, booking engine, booking, booking calendar, booking system, calendar, online booking, travel, airbnb, booking.com, homeaway, apartments, villa, hostel, reservation system, travel itinerary, trekking, tour itinerary, travel booking engine, tour accommodation listings, travel destinations, trip book, travel payment, woocommerce tour booking, woocommerce travel booking plugin, woocommerce tour, woocommerce travel, wordpress travel, wp travel plugin, wp travel, wordpress travel booking plugin, wordpress tour plugin, tour booking plugin wordpress, wordpress travel agency, travel tour wordpress, wordpress tour
+Tags: tour booking, tour operator, travel, tour, trip, travel-booking, travel agency, hotel booking, reservation, hotel, booking engine, booking, booking calendar, booking system, calendar, online booking, travel, airbnb, booking.com, homeaway, apartments, villa, hostel, reservation system, travel itinerary, trekking, tour itinerary, travel booking engine, tour accommodation listings, travel destinations, trip book, travel payment, woocommerce tour booking, woocommerce travel booking plugin, woocommerce tour, woocommerce travel, wordpress travel, wp travel plugin, wp travel, wordpress travel booking plugin, wordpress tour plugin, tour booking plugin wordpress, wordpress travel agency, travel tour wordpress, wordpress tour, tour-booking, travel wp, travel wordpress, tour wp, travel wordpress, hotel wp, hotel wordpress
 Requires at least: 4.2
 Tested up to: 5.8
 Requires PHP: 5.4
-Stable tag: 2.0.0
+Stable tag: 2.0.3
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -133,7 +133,7 @@ This plugin doesn’t collect/store any user related information.
 
 <strong>Credits</strong>
 
-The icon and banner used on this plugin are taken from <a href="https://www.iconfinder.com" target="_blank">Iconfinder</a> and <a href="https://www.freepik.com/vectors/nature" target="_blank">Freepik</a>
+The icon and banner used on this plugin are taken from <a href="https://icons8.com" target="_blank">Icons8</a> and <a href="https://www.freepik.com/vectors/nature" target="_blank">Freepik</a>
 
 <strong>Our Other Plugins</strong>
 
@@ -198,7 +198,25 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Changelog ==
 
-= 2.0.0 - 4/1/2021 =
+= 2.0.3 - 14/1/2022 =
+
+- Updated: Options Panel Description
+- Fixed: Options Panel Bug
+
+= 2.0.2 - 12/1/2022 =
+
+- Fixed: CSS Issues on Single  Tours
+- Fixed: Single Tour page Markup
+- Added Heading for Single Tours
+- Compatibility with Tourfic Pro
+
+= 2.0.1 - 7/1/2022 =
+
+- Updated Preview URL
+- WordPress 5.8.3 Compatiblity Check
+- Fixed a Div Bug
+
+= 2.0.0 - 4/1/2022 =
 
 - Introducing: tour post types
 - Added Tour single page

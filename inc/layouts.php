@@ -480,7 +480,7 @@ function tf_tours_booking_form( $post_id ) {
 		?>
 		<div class="tf-tour-booking-wrap" data-custom-availability="<?php echo $custom_availability; ?>" data-min-seat="<?php echo $min_seat; ?>" data-max-seat="<?php echo $max_seat; ?>" >
 		<?php }else{
-			echo '<div class="tf-tour-booking-wrap">';
+			echo '<div class="tf-tour-booking-wrap" data-custom-availability="fake">';
 		}?>
 
 		<form class="tf_tours_booking">

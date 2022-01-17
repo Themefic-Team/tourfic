@@ -9,7 +9,7 @@
  * Domain Path: /lang/
  * Author URI: https://themefic.com
  * Tags:
- * Version: 2.0.0
+ * Version: 2.0.3
  * WC tested up to: 6.0.0
  */
 
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 
 // Define WI_VERSION.
 if ( !defined( 'TOURFIC_VERSION' ) ) {
-    define( 'TOURFIC_VERSION', '2.0.0' );
+    define( 'TOURFIC_VERSION', '2.0.3' );
 }
 
 define( 'TOURFIC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
