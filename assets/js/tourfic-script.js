@@ -993,4 +993,9 @@ function tfOpenForm(evt, formName) {
     document.getElementById(formName).style.transition = "all 0.2s";
     evt.currentTarget.className += " active";
 }
+tablinks = document.getElementsByClassName("tf-tablinks");
+if(tablinks.length == 1){
+    jQuery('#tf-tour-booking-form').css('display','block');
+    
+}
 jQuery('#tf-hotel-booking-form').css('display','block');
