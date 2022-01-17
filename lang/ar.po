@@ -3,387 +3,462 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-17 11:04+0600\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2022-01-17 14:17+0600\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: tourfic.php:417
+#, fuzzy
 msgid "Tourfic requires WooCommerce to be activated "
-msgstr ""
+msgstr "تورفيك يتطلب تنشيط WooCommerce "
 
 #: admin/framework/settings.php:11
+#, fuzzy
 msgid "Tourfic"
-msgstr ""
+msgstr "تورفيك"
 
 #: admin/framework/settings.php:13
+#, fuzzy
 msgid ""
 "Tourfic Settings <small><a href=\"https://themefic.com/\">By THEMEFIC</a></"
 "small>"
 msgstr ""
+"إعدادات <small> <a href=\"https://themefic.com/\">تورفيك بواسطة THEMEFIC</"
+"a></small>"
 
 #: admin/framework/settings.php:14
+#, fuzzy
 msgid ""
 "Enjoyed Tourfic? Please leave us a <a target=\"_blank\" href=\"https://"
 "wordpress.org/support/plugin/tourfic/reviews/#new-post\">★★★★★</a> rating. "
 "We really appreciate your support!"
 msgstr ""
+"هل استمتعت بتورفيك؟ يرجى ترك لنا تصنيف <a target=\"_blank\" href=\"https://"
+"wordpress.org/support/plugin/tourfic/reviews/#new-post\">★★★★★.</a> نحن نقدر "
+"حقا دعمكم!"
 
 #: admin/framework/settings.php:26 admin/inc/tours/tf-tours-metabox.php:23
 msgid "General"
-msgstr ""
+msgstr "عام"
 
 #: admin/framework/settings.php:32
+#, fuzzy
 msgid "Input slug of Hotel"
-msgstr ""
+msgstr "سبيكة الإدخال من الفندق"
 
 #: admin/framework/settings.php:33
+#, fuzzy
 msgid ""
 "Default is: <code>tourfic</code> - <strong>Save 2 times if you change this "
 "field for permalink flush</strong>"
 msgstr ""
+"الافتراضي هو: <code>tourfic</code> - <strong>حفظ 2 مرات إذا قمت بتغيير هذا "
+"الحقل لتدفق permalink</strong>"
 
 #: admin/framework/settings.php:38
+#, fuzzy
 msgid "Input slug of Tour"
-msgstr ""
+msgstr "سبيكة الإدخال من جولة"
 
 #: admin/framework/settings.php:39
+#, fuzzy
 msgid ""
 "Default is: <code>tour</code> - <strong>Save 2 times if you change this "
 "field for permalink flush</strong>"
 msgstr ""
+"الافتراضي هو: <code>tour</code> - <strong>حفظ 2 مرات إذا قمت بتغيير هذا "
+"الحقل لتدفق permalink</strong>"
 
 #: admin/framework/settings.php:46
 msgid "Select Single Page Template"
-msgstr ""
+msgstr "تحديد قالب صفحة واحدة"
 
 #: admin/framework/settings.php:47
+#, fuzzy
 msgid "You can choose signle tour page layout from here"
-msgstr ""
+msgstr "يمكنك اختيار تخطيط صفحة جولة الموقع من هنا"
 
 #: admin/framework/settings.php:62 inc/layouts.php:275 inc/layouts.php:404
 #: inc/tourfic-functions.php:1399 inc/tourfic-functions.php:1526
 msgid "Search"
-msgstr ""
+msgstr "بحث"
 
 #: admin/framework/settings.php:72
+#, fuzzy
 msgid "Select Search Result Page"
-msgstr ""
+msgstr "تحديد صفحة نتائج البحث"
 
 #: admin/framework/settings.php:73
+#, fuzzy
 msgid "Page template: <code>Tourfic - Search Result</code> must be selected"
-msgstr ""
+msgstr "قالب الصفحة: <code>Tourfic - Search Result</code> يجب تحديده"
 
 #: admin/framework/settings.php:80
+#, fuzzy
 msgid "Search Result Relation"
-msgstr ""
+msgstr "علاقة نتائج البحث"
 
 #: admin/framework/settings.php:81
+#, fuzzy
 msgid ""
 "Search result relation with search widget and filters. OR means matched any "
 "query, AND means matched all query."
 msgstr ""
+"علاقة نتائج البحث مع أداة البحث والفلاتر. أو يعني مطابقة أي استعلام، ويعني "
+"مطابقة كل الاستعلام."
 
 #: admin/framework/settings.php:94
+#, fuzzy
 msgid "Filters Relation"
-msgstr ""
+msgstr "علاقة عوامل التصفية"
 
 #: admin/framework/settings.php:95
+#, fuzzy
 msgid ""
 "Search result Filters relation with among filters. OR means matched any "
 "filter, AND means matched all filter."
 msgstr ""
+"علاقة عوامل تصفية نتائج البحث مع بين عوامل التصفية. أو يعني مطابقة أي مرشح، "
+"ويعني مطابقة جميع عامل التصفية."
 
 #: admin/framework/settings.php:118
 msgid "Custom CSS"
-msgstr ""
+msgstr "تخصيص CSS"
 
 #: admin/inc/tf-custom-fields.php:38
+#, fuzzy
 msgid "Tourfic Options"
-msgstr ""
+msgstr "خيارات تورفيك"
 
 #: admin/inc/tf-custom-fields.php:183 admin/inc/tf-custom-fields.php:255
 #: templates/single-tf_tours.php:168 templates/single-tourfic.php:93
 #: templates/tf-tours-single.php:163
 msgid "Highlights"
-msgstr ""
+msgstr "تسليط الضوء"
 
 #: admin/inc/tf-custom-fields.php:184
 msgid "Rooms"
-msgstr ""
+msgstr "الغرف"
 
 #: admin/inc/tf-custom-fields.php:185 admin/inc/tf-custom-fields.php:217
 msgid "Gallery"
-msgstr ""
+msgstr "المعرض"
 
 #: admin/inc/tf-custom-fields.php:186 admin/inc/tours/tf-tours-metabox.php:89
 msgid "Location"
-msgstr ""
+msgstr "الموقع"
 
 #: admin/inc/tf-custom-fields.php:187 admin/inc/tours/tf-tours-metabox.php:555
 #: admin/inc/tours/tf-tours-metabox.php:560 templates/single-tourfic.php:208
 msgid "FAQs"
-msgstr ""
+msgstr "أسئلة متكررة"
 
 #: admin/inc/tf-custom-fields.php:188 admin/inc/tours/tf-tours-metabox.php:578
 #: admin/inc/tours/tf-tours-metabox.php:583
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "الشروط والاحكام"
 
 #: admin/inc/tf-custom-fields.php:195
 msgid "Room Options"
-msgstr ""
+msgstr "خيارات الغرفة"
 
 #: admin/inc/tf-custom-fields.php:209
 msgid "Add Room"
-msgstr ""
+msgstr "إضافة غرفة"
 
 #: admin/inc/tf-custom-fields.php:235
 msgid "Add Gallery Images"
-msgstr ""
+msgstr "اضافة معرض الصور"
 
 #: admin/inc/tf-custom-fields.php:242
+#, fuzzy
 msgid "Location Options"
-msgstr ""
+msgstr "خيارات الموقع"
 
 #: admin/inc/tf-custom-fields.php:246
+#, fuzzy
 msgid "Formatted Location"
-msgstr ""
+msgstr "موقع منسق"
 
 #: admin/inc/tf-custom-fields.php:275 inc/post-type.php:352
 msgid "Popular Features"
-msgstr ""
+msgstr "مزايا الشائعة"
 
 #: admin/inc/tf-custom-fields.php:276
+#, fuzzy
 msgid "Select Popular Features for Filters"
-msgstr ""
+msgstr "حدد الميزات الشائعة للفلاتر"
 
 #: admin/inc/tf-custom-fields.php:295
+#, fuzzy
 msgid "Toggle selection"
-msgstr ""
+msgstr "تبديل التحديد"
 
 #: admin/inc/tf-custom-fields.php:310
 msgid "Frequently Asked Questions"
-msgstr ""
+msgstr "أسئلة مكررة"
 
 #: admin/inc/tf-custom-fields.php:324
 msgid "Add FAQ"
-msgstr ""
+msgstr "إضافة التعليمات"
 
 #: admin/inc/tf-custom-fields.php:328
+#, fuzzy
 msgid "Ask Questions"
-msgstr ""
+msgstr "طرح الأسئلة"
 
 #: admin/inc/tf-custom-fields.php:332
+#, fuzzy
 msgid "Send email to"
-msgstr ""
+msgstr "إرسال بريد إلكتروني إلى"
 
 #: admin/inc/tf-custom-fields.php:335
+#, fuzzy
 msgid "abc@xyz.com"
-msgstr ""
+msgstr "abc@xyz.com"
 
 #: admin/inc/tf-custom-fields.php:336
+#, fuzzy
 msgid "Site admin email."
-msgstr ""
+msgstr "البريد الإلكتروني لمسؤول الموقع."
 
 #: admin/inc/tf-custom-fields.php:336
+#, fuzzy
 msgid "Author email of this post."
-msgstr ""
+msgstr "مؤلف البريد الإلكتروني لهذا المنصب."
 
 #: admin/inc/tf-custom-fields.php:341
+#, fuzzy
 msgid "Add Terms & Conditions"
-msgstr ""
+msgstr "إضافة شروط وأحكام"
 
 #: admin/inc/tf-field-functions.php:35
+#, fuzzy
 msgid "# Room Title"
-msgstr ""
+msgstr "# عنوان الغرفة"
 
 #: admin/inc/tf-field-functions.php:56
 msgid "Room Name"
-msgstr ""
+msgstr "اسم الغرفة"
 
-#: admin/inc/tf-field-functions.php:63
-#: admin/inc/tours/tf-tours-metabox.php:228
+#: admin/inc/tf-field-functions.php:63 admin/inc/tours/tf-tours-metabox.php:228
 msgid "Short Description"
-msgstr ""
+msgstr "الوصف القصير"
 
 #: admin/inc/tf-field-functions.php:70 templates/single-tourfic.php:161
+#, fuzzy
 msgid "Room Features"
-msgstr ""
+msgstr "ميزات الغرفة"
 
 #: admin/inc/tf-field-functions.php:74
+#, fuzzy
 msgid "[tf_list icon=\"fa-wifi\" text=\"Free Wifi\"]"
 msgstr ""
+"[رمز tf_list =\"fa-wifi\" نص =\"خدمة الاتصال اللاسلكي بالإنترنت عبر تقنية "
+"واي فاي مجانية\"]"
 
-#: admin/inc/tf-field-functions.php:81
-#: admin/inc/tours/tf-tours-metabox.php:236 templates/single-tf_tours.php:98
-#: templates/tf-tours-single.php:76
+#: admin/inc/tf-field-functions.php:81 admin/inc/tours/tf-tours-metabox.php:236
+#: templates/single-tf_tours.php:98 templates/tf-tours-single.php:76
 msgid "Price"
-msgstr ""
+msgstr "السعر"
 
 #: admin/inc/tf-field-functions.php:89
 msgid "Sale Price"
-msgstr ""
+msgstr "سعر البيع"
 
 #: admin/inc/tf-field-functions.php:98 templates/single-tourfic.php:142
+#, fuzzy
 msgid "Pax"
-msgstr ""
+msgstr "باكس"
 
 #: admin/inc/tf-field-functions.php:139
+#, fuzzy
 msgid "# FAQ Title"
-msgstr ""
+msgstr "# عنوان الأسئلة الشائعة"
 
 #: admin/inc/tf-field-functions.php:159
 #: admin/inc/tours/tf-tours-metabox.php:565
 msgid "FAQ Title"
-msgstr ""
+msgstr "عنوان الأسئلة الشائعة"
 
 #: admin/inc/tf-field-functions.php:166
 #: admin/inc/tours/tf-tours-metabox.php:513
 msgid "Description"
-msgstr ""
+msgstr "الوصف"
 
 #: admin/inc/tours/tf-tours-metabox.php:14
+#, fuzzy
 msgid "Tours Setting"
-msgstr ""
+msgstr "إعداد الجولات"
 
 #: admin/inc/tours/tf-tours-metabox.php:30
+#, fuzzy
 msgid "Set this tour as featured"
-msgstr ""
+msgstr "تعيين هذه الجولة كما ظهرت"
 
 #: admin/inc/tours/tf-tours-metabox.php:31
+#, fuzzy
 msgid "Tour will be shown under featured sections"
-msgstr ""
+msgstr "سيتم عرض الجولة تحت الأقسام المميزة"
 
 #: admin/inc/tours/tf-tours-metabox.php:46
+#, fuzzy
 msgid "Single Tour Page Layout"
-msgstr ""
+msgstr "تخطيط صفحة جولة واحدة"
 
 #: admin/inc/tours/tf-tours-metabox.php:48
 msgid "Default"
-msgstr ""
+msgstr "افتراضي"
 
 #: admin/inc/tours/tf-tours-metabox.php:60
+#, fuzzy
 msgid "Add features"
-msgstr ""
+msgstr "إضافة ميزات"
 
 #: admin/inc/tours/tf-tours-metabox.php:61
+#, fuzzy
 msgid "Tour features"
-msgstr ""
+msgstr "ميزات الجولة"
 
 #: admin/inc/tours/tf-tours-metabox.php:66 templates/single-tf_tours.php:84
+#, fuzzy
 msgid "Tour Gallery"
-msgstr ""
+msgstr "معرض الجولات السياحية"
 
 #: admin/inc/tours/tf-tours-metabox.php:72
+#, fuzzy
 msgid "Hero Section Title"
-msgstr ""
+msgstr "عنوان قسم البطل"
 
 #: admin/inc/tours/tf-tours-metabox.php:77
 msgid "Tour Video"
-msgstr ""
+msgstr "فيديو الرحلة"
 
 #: admin/inc/tours/tf-tours-metabox.php:78
+#, fuzzy
 msgid ""
 "<a href=\"https://tourfic.com/#purchase\" target=\"_blank\" style=\"text-"
 "decoration: none;\"><a href=\"https://tourfic.com/#purchase\" target=\"_blank"
 "\" style=\"text-decoration: none;\"><strong class=\"tf-pro\">Pro</strong></"
 "a></a>"
 msgstr ""
+"<a href=\"https://tourfic.com/#purchase\" target=\"_blank\" style=\"text-"
+"decoration: none;\"><a href=\"https://tourfic.com/#purchase\" target=\"_blank"
+"\" style=\"text-decoration: none;\"><strong class=\"tf-pro\">برو</strong></"
+"a></a>"
 
 #: admin/inc/tours/tf-tours-metabox.php:95
 msgid "Tour Location"
-msgstr ""
+msgstr "موقع الرحلة"
 
 #: admin/inc/tours/tf-tours-metabox.php:96
+#, fuzzy
 msgid "Manually enter your tour location"
-msgstr ""
+msgstr "أدخل موقع الجولة يدويا"
 
 #: admin/inc/tours/tf-tours-metabox.php:102
+#, fuzzy
 msgid "Tour Location Pro (Auto Suggestion)"
-msgstr ""
+msgstr "جولة الموقع برو (اقتراح تلقائي)"
 
 #: admin/inc/tours/tf-tours-metabox.php:103
+#, fuzzy
 msgid ""
 "Location suggestions will be provided from Google <a href=\"https://tourfic."
 "com/#purchase\" target=\"_blank\" style=\"text-decoration: none;\"><strong "
 "class=\"tf-pro\">Pro</strong></a>"
 msgstr ""
+"سيتم تقديم اقتراحات الموقع من Google <a href=\"https://tourfic.com/#purchase"
+"\" target=\"_blank\" style=\"text-decoration: none;\"> <strong class=\"tf-pro"
+"\">Pro</strong></a>"
 
 #: admin/inc/tours/tf-tours-metabox.php:123
 msgid "Hightlights"
-msgstr ""
+msgstr "هايتلايتس"
 
 #: admin/inc/tours/tf-tours-metabox.php:129
+#, fuzzy
 msgid "Tour Hightlights"
-msgstr ""
+msgstr "جولة هايتلايتس"
 
 #: admin/inc/tours/tf-tours-metabox.php:130
+#, fuzzy
 msgid "Enter a summary or full description of your tour"
-msgstr ""
+msgstr "أدخل ملخصا أو وصفا كاملا لجولتك"
 
 #: admin/inc/tours/tf-tours-metabox.php:138
 msgid "Information"
-msgstr ""
+msgstr "معلومات"
 
 #: admin/inc/tours/tf-tours-metabox.php:144
+#, fuzzy
 msgid "Tour Duration"
-msgstr ""
+msgstr "مدة الجولة"
 
 #: admin/inc/tours/tf-tours-metabox.php:145
+#, fuzzy
 msgid "E.g. 3 days"
-msgstr ""
+msgstr "على سبيل المثال 3 أيام"
 
 #: admin/inc/tours/tf-tours-metabox.php:150 templates/single-tf_tours.php:137
 #: templates/tf-tours-single.php:128
+#, fuzzy
 msgid "Group Size"
-msgstr ""
+msgstr "حجم المجموعة"
 
 #: admin/inc/tours/tf-tours-metabox.php:151
+#, fuzzy
 msgid "E.g. 10 people"
-msgstr ""
+msgstr "على سبيل المثال 10 أشخاص"
 
 #: admin/inc/tours/tf-tours-metabox.php:156
 msgid "Languages"
-msgstr ""
+msgstr "اللغات"
 
 #: admin/inc/tours/tf-tours-metabox.php:157
+#, fuzzy
 msgid "Input languages seperated by comma(,)"
-msgstr ""
+msgstr "لغات الإدخال مفصولة بفاصلة(,)"
 
 #: admin/inc/tours/tf-tours-metabox.php:162
+#, fuzzy
 msgid "Minimum Person"
-msgstr ""
+msgstr "الحد الأدنى للشخص"
 
 #: admin/inc/tours/tf-tours-metabox.php:163
+#, fuzzy
 msgid "Minimum person to travel"
-msgstr ""
+msgstr "الحد الأدنى من الأشخاص الذين يسافرون"
 
 #: admin/inc/tours/tf-tours-metabox.php:168
+#, fuzzy
 msgid "Maximum Person"
-msgstr ""
+msgstr "الحد الأقصى للشخص"
 
 #: admin/inc/tours/tf-tours-metabox.php:169
+#, fuzzy
 msgid "Maximum person to travel"
-msgstr ""
+msgstr "الحد الأقصى للشخص الذي يسافر"
 
 #: admin/inc/tours/tf-tours-metabox.php:177
 msgid "Contact Info"
-msgstr ""
+msgstr "معلومات الاتصال"
 
 #: admin/inc/tours/tf-tours-metabox.php:183
 msgid "Email Address"
-msgstr ""
+msgstr "عنوان البريد الإلكتروني"
 
 #: admin/inc/tours/tf-tours-metabox.php:184
 #: admin/inc/tours/tf-tours-metabox.php:190
@@ -392,1108 +467,1252 @@ msgstr ""
 #: admin/inc/tours/tf-tours-metabox.php:215
 #: admin/inc/tours/tf-tours-metabox.php:394
 #: admin/inc/tours/tf-tours-metabox.php:406
+#, fuzzy
 msgid ""
 "<a href=\"https://tourfic.com/#purchase\" target=\"_blank\" style=\"text-"
 "decoration: none;\"><strong class=\"tf-pro\">Pro</strong></a>"
 msgstr ""
+"<a href=\"https://tourfic.com/#purchase\" target=\"_blank\" style=\"text-"
+"decoration: none;\"><strong class=\"tf-pro\">برو</strong></a>"
 
 #: admin/inc/tours/tf-tours-metabox.php:189
 msgid "Phone Number"
-msgstr ""
+msgstr "رقم الهاتف"
 
 #: admin/inc/tours/tf-tours-metabox.php:195
 msgid "Website Url"
-msgstr ""
+msgstr "رابط الموقع"
 
 #: admin/inc/tours/tf-tours-metabox.php:201
 msgid "Fax Number"
-msgstr ""
+msgstr "رقم الفاكس"
 
 #: admin/inc/tours/tf-tours-metabox.php:209
+#, fuzzy
 msgid "Tour Extra"
-msgstr ""
+msgstr "جولة إضافية"
 
 #: admin/inc/tours/tf-tours-metabox.php:214
+#, fuzzy
 msgid "Extra Services on Tour"
-msgstr ""
+msgstr "خدمات إضافية في الجولة"
 
 #: admin/inc/tours/tf-tours-metabox.php:220
 #: admin/inc/tours/tf-tours-metabox.php:498
 #: inc/elementor-addon/widgets/tourfic-search.php:99
 msgid "Title"
-msgstr ""
+msgstr "العنوان"
 
 #: admin/inc/tours/tf-tours-metabox.php:248
 msgid "Price Settings"
-msgstr ""
+msgstr "اعدادات السعر"
 
 #: admin/inc/tours/tf-tours-metabox.php:253
+#, fuzzy
 msgid "Pricing Rule"
-msgstr ""
+msgstr "قاعدة التسعير"
 
 #: admin/inc/tours/tf-tours-metabox.php:254
+#, fuzzy
 msgid "Input pricing rule"
-msgstr ""
+msgstr "قاعدة تسعير الإدخال"
 
 #: admin/inc/tours/tf-tours-metabox.php:257
 msgid "Person"
-msgstr ""
+msgstr "شخص"
 
 #: admin/inc/tours/tf-tours-metabox.php:258
+#, fuzzy
 msgid "Group (Pro)"
-msgstr ""
+msgstr "المجموعة (برو)"
 
 #: admin/inc/tours/tf-tours-metabox.php:265
+#, fuzzy
 msgid "Price for Adult"
-msgstr ""
+msgstr "السعر للبالغين"
 
 #: admin/inc/tours/tf-tours-metabox.php:266
+#, fuzzy
 msgid "Input adult price"
-msgstr ""
+msgstr "إدخال سعر الكبار"
 
 #: admin/inc/tours/tf-tours-metabox.php:276
+#, fuzzy
 msgid "Price for Child"
-msgstr ""
+msgstr "سعر الطفل"
 
 #: admin/inc/tours/tf-tours-metabox.php:277
+#, fuzzy
 msgid "Input child price"
-msgstr ""
+msgstr "إدخال سعر الطفل"
 
 #: admin/inc/tours/tf-tours-metabox.php:286
+#, fuzzy
 msgid "Price for Infant"
-msgstr ""
+msgstr "سعر الرضيع"
 
 #: admin/inc/tours/tf-tours-metabox.php:287
+#, fuzzy
 msgid "Input infant price"
-msgstr ""
+msgstr "إدخال سعر الرضيع"
 
 #: admin/inc/tours/tf-tours-metabox.php:296
+#, fuzzy
 msgid "Group Price"
-msgstr ""
+msgstr "سعر المجموعة"
 
 #: admin/inc/tours/tf-tours-metabox.php:297
+#, fuzzy
 msgid "Input group price"
-msgstr ""
+msgstr "سعر مجموعة الإدخال"
 
 #: admin/inc/tours/tf-tours-metabox.php:305
 msgid "Discount Type"
-msgstr ""
+msgstr "نوع الخصم"
 
 #: admin/inc/tours/tf-tours-metabox.php:306
+#, fuzzy
 msgid "Select discount type Percent or Fixed"
-msgstr ""
+msgstr "تحديد نوع الخصم النسبة المئوية أو ثابت"
 
 #: admin/inc/tours/tf-tours-metabox.php:308
 msgid "None"
-msgstr ""
+msgstr "لا شيء"
 
 #: admin/inc/tours/tf-tours-metabox.php:309
 msgid "Percent"
-msgstr ""
+msgstr "النسبة المئوية"
 
 #: admin/inc/tours/tf-tours-metabox.php:310
 #: admin/inc/tours/tf-tours-metabox.php:341
 msgid "Fixed"
-msgstr ""
+msgstr "ثابت"
 
 #: admin/inc/tours/tf-tours-metabox.php:317
+#, fuzzy
 msgid "Discount Price"
-msgstr ""
+msgstr "سعر الخصم"
 
 #: admin/inc/tours/tf-tours-metabox.php:318
+#, fuzzy
 msgid "Input discount price in number"
-msgstr ""
+msgstr "سعر الخصم المدخل في العدد"
 
 #: admin/inc/tours/tf-tours-metabox.php:331
 #: admin/inc/tours/tf-tours-metabox.php:349 templates/single-tourfic.php:135
 msgid "Availability"
-msgstr ""
+msgstr "توفر"
 
 #: admin/inc/tours/tf-tours-metabox.php:336
 msgid "Tour Type"
-msgstr ""
+msgstr "نوع الرحلة "
 
 #: admin/inc/tours/tf-tours-metabox.php:337
+#, fuzzy
 msgid ""
 "Fixed: Tour will be available on a fixed date. Continous: Tour will be "
 "available every month within the mentioned range."
 msgstr ""
+"ثابت: ستكون الجولة متاحة في تاريخ محدد. Continous: ستكون الجولة متاحة كل شهر "
+"ضمن النطاق المذكور."
 
 #: admin/inc/tours/tf-tours-metabox.php:340
+#, fuzzy
 msgid "Continuous (Pro)"
-msgstr ""
+msgstr "مستمر (برو)"
 
 #: admin/inc/tours/tf-tours-metabox.php:350
+#, fuzzy
 msgid "Input your availability"
-msgstr ""
+msgstr "إدخال مدى توفرك"
 
 #: admin/inc/tours/tf-tours-metabox.php:357
 #: admin/inc/tours/tf-tours-metabox.php:416
 msgid "Check In"
-msgstr ""
+msgstr "الوصول"
 
 #: admin/inc/tours/tf-tours-metabox.php:358
+#, fuzzy
 msgid "Select check in date"
-msgstr ""
+msgstr "تحديد تاريخ تسجيل الوصول"
 
 #: admin/inc/tours/tf-tours-metabox.php:367
 #: admin/inc/tours/tf-tours-metabox.php:425
 msgid "Check Out"
-msgstr ""
+msgstr "إتمام الدفع"
 
 #: admin/inc/tours/tf-tours-metabox.php:368
+#, fuzzy
 msgid "Select check out date"
-msgstr ""
+msgstr "تحديد تاريخ السحب"
 
 #: admin/inc/tours/tf-tours-metabox.php:377
+#, fuzzy
 msgid "Minimum People"
-msgstr ""
+msgstr "الحد الأدنى من الأشخاص"
 
 #: admin/inc/tours/tf-tours-metabox.php:378
+#, fuzzy
 msgid "Minimum seat number"
-msgstr ""
+msgstr "الحد الأدنى لعدد المقاعد"
 
 #: admin/inc/tours/tf-tours-metabox.php:383
 #: admin/inc/tours/tf-tours-metabox.php:439
+#, fuzzy
 msgid "Maximum People"
-msgstr ""
+msgstr "الحد الأقصى للأشخاص"
 
 #: admin/inc/tours/tf-tours-metabox.php:384
+#, fuzzy
 msgid "Maximum seat number"
-msgstr ""
+msgstr "الحد الأقصى لعدد المقاعد"
 
 #: admin/inc/tours/tf-tours-metabox.php:393
 msgid "Custom Availability"
-msgstr ""
+msgstr "توفر مخصص"
 
 #: admin/inc/tours/tf-tours-metabox.php:398
 msgid "Yes"
-msgstr ""
+msgstr "نعم"
 
 #: admin/inc/tours/tf-tours-metabox.php:399
 msgid "No"
-msgstr ""
+msgstr "لا"
 
 #: admin/inc/tours/tf-tours-metabox.php:434
+#, fuzzy
 msgid "Min People"
-msgstr ""
+msgstr "مين الناس"
 
 #: admin/inc/tours/tf-tours-metabox.php:448
 msgid "Booking"
-msgstr ""
+msgstr "الحجز"
 
 #: admin/inc/tours/tf-tours-metabox.php:455
 msgid "Minimum days to book before departure"
-msgstr ""
+msgstr "العدد الأقل من الأيام للحجز قبل المغادرة"
 
 #: admin/inc/tours/tf-tours-metabox.php:456
+#, fuzzy
 msgid ""
 "Customer can not book after this date <a href=\"https://tourfic.com/#purchase"
 "\" target=\"_blank\" style=\"text-decoration: none;\"><strong class=\"tf-pro"
 "\">Pro</strong></a>"
 msgstr ""
+"لا يمكن للعميل الحجز بعد هذا التاريخ <a href=\"https://tourfic.com/#purchase"
+"\" target=\"_blank\" style=\"text-decoration: none;\"> <strong class=\"tf-pro"
+"\">برو</strong></a>"
 
 #: admin/inc/tours/tf-tours-metabox.php:481
 #: admin/inc/tours/tf-tours-metabox.php:486
 msgid "Itinerary"
-msgstr ""
+msgstr "خط  السير"
 
 #: admin/inc/tours/tf-tours-metabox.php:492
+#, fuzzy
 msgid "Time or Day"
-msgstr ""
+msgstr "الوقت أو اليوم"
 
 #: admin/inc/tours/tf-tours-metabox.php:493
+#, fuzzy
 msgid "You can place the tour plan"
-msgstr ""
+msgstr "يمكنك وضع خطة الجولة"
 
 #: admin/inc/tours/tf-tours-metabox.php:499
+#, fuzzy
 msgid "Input the title here"
-msgstr ""
+msgstr "إدخال العنوان هنا"
 
 #: admin/inc/tours/tf-tours-metabox.php:521
+#, fuzzy
 msgid "Exclude/Include"
-msgstr ""
+msgstr "استبعاد/تضمين"
 
 #: admin/inc/tours/tf-tours-metabox.php:526
 msgid "Include"
-msgstr ""
+msgstr "التضمين"
 
 #: admin/inc/tours/tf-tours-metabox.php:532 templates/single-tf_tours.php:187
 #: templates/tf-tours-single.php:231
 msgid "Included"
-msgstr ""
+msgstr "يتضمن"
 
 #: admin/inc/tours/tf-tours-metabox.php:533
+#, fuzzy
 msgid "Included facilites"
-msgstr ""
+msgstr "المرافق المشمولة"
 
 #: admin/inc/tours/tf-tours-metabox.php:540
 msgid "Exclude"
-msgstr ""
+msgstr "استبعاد"
 
 #: admin/inc/tours/tf-tours-metabox.php:546 templates/single-tf_tours.php:197
 #: templates/tf-tours-single.php:244
 msgid "Excluded"
-msgstr ""
+msgstr "لايشمل"
 
 #: admin/inc/tours/tf-tours-metabox.php:547
+#, fuzzy
 msgid "Excluded facilites"
-msgstr ""
+msgstr "المرفقات المستبعدة"
 
 #: admin/inc/tours/tf-tours-metabox.php:570
+#, fuzzy
 msgid "FAQ Description"
-msgstr ""
+msgstr "وصف الأسئلة الشائعة"
 
 #: inc/layouts.php:73 inc/layouts.php:157
 msgid "Book Now"
-msgstr ""
+msgstr "احجز الآن"
 
 #: inc/layouts.php:103
 msgid "Featured"
-msgstr ""
+msgstr "مميز"
 
 #: inc/layouts.php:219
 msgid "Customer Rating"
-msgstr ""
+msgstr "تصنيف العميل"
 
 #: inc/layouts.php:226 templates/review.php:90
-#, php-format
+#, fuzzy, php-format
 msgctxt "comments title"
 msgid "Based on %1$s review"
 msgid_plural "Based on %1$s reviews"
-msgstr[0] ""
+msgstr[0] "بناء على %1$s الاستعراض"
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #: inc/post-type.php:17 inc/post-type.php:46
 #, php-format
 msgctxt "tourfic post type name"
 msgid "%2$s"
-msgstr ""
+msgstr "%2$s"
 
 #: inc/post-type.php:18 inc/post-type.php:47
 #, php-format
 msgctxt "singular tourfic post type name"
 msgid "%1$s"
-msgstr ""
+msgstr "%1$s"
 
 #: inc/post-type.php:19 inc/post-type.php:48
 msgid "Add New"
-msgstr ""
+msgstr "اضف جديد"
 
 #: inc/post-type.php:20 inc/post-type.php:49
 #, php-format
 msgid "Add New %1$s"
-msgstr ""
+msgstr "أضف  %1$s جديد "
 
 #: inc/post-type.php:21 inc/post-type.php:50
 #, php-format
 msgid "Edit %1$s"
-msgstr ""
+msgstr "تعديل %1$s"
 
 #: inc/post-type.php:22 inc/post-type.php:51
 #, php-format
 msgid "New %1$s"
-msgstr ""
+msgstr "جديد %1$s"
 
 #: inc/post-type.php:23 inc/post-type.php:52
 #, php-format
 msgid "All %2$s"
-msgstr ""
+msgstr "الكل %2$s"
 
 #: inc/post-type.php:24 inc/post-type.php:53
 #, php-format
 msgid "View %1$s"
-msgstr ""
+msgstr "معاينة  %1$s"
 
 #: inc/post-type.php:25 inc/post-type.php:54
-#, php-format
+#, fuzzy, php-format
 msgid "View %2$s"
-msgstr ""
+msgstr "عرض %2$s"
 
 #: inc/post-type.php:26 inc/post-type.php:55
 #, php-format
 msgid "Search %2$s"
-msgstr ""
+msgstr "بحث  %2$s"
 
 #: inc/post-type.php:27 inc/post-type.php:56
 #, php-format
 msgid "No %2$s found"
-msgstr ""
+msgstr "لم يتم   %2$s العثور على"
 
 #: inc/post-type.php:28 inc/post-type.php:57
-#, php-format
+#, fuzzy, php-format
 msgid "No %2$s found in Trash"
-msgstr ""
+msgstr "لم يتم العثور على أي %2$s في المهملات"
 
 #: inc/post-type.php:30
 msgctxt "tourfic post type menu name"
 msgid "Hotels"
-msgstr ""
+msgstr "الفنادق"
 
 #: inc/post-type.php:31 inc/post-type.php:60
-#, php-format
+#, fuzzy, php-format
 msgid "%1$s Image"
-msgstr ""
+msgstr "صورة %1$s"
 
 #: inc/post-type.php:32 inc/post-type.php:61
 #, php-format
 msgid "Set %1$s Image"
-msgstr ""
+msgstr "تعين %1$s صورة"
 
 #: inc/post-type.php:33 inc/post-type.php:62
 #, php-format
 msgid "Remove %1$s Image"
-msgstr ""
+msgstr "إزالة %1$s الصورة"
 
 #: inc/post-type.php:34 inc/post-type.php:63
 #, php-format
 msgid "Use as %1$s Image"
-msgstr ""
+msgstr "الاستخدام كـ %1$s صورة"
 
 #: inc/post-type.php:35 inc/post-type.php:64
 #, php-format
 msgid "%1$s Attributes"
-msgstr ""
+msgstr "%1$s خصائص"
 
 #: inc/post-type.php:36 inc/post-type.php:65
 #, php-format
 msgid "Filter %2$s list"
-msgstr ""
+msgstr "فلتر %2$s قائمة "
 
 #: inc/post-type.php:37 inc/post-type.php:66
-#, php-format
+#, fuzzy, php-format
 msgid "%2$s list navigation"
-msgstr ""
+msgstr "التنقل في قائمة %2$s"
 
 #: inc/post-type.php:38 inc/post-type.php:67
-#, php-format
+#, fuzzy, php-format
 msgid "%2$s list"
-msgstr ""
+msgstr "قائمة %2$s"
 
 #: inc/post-type.php:59
 msgctxt "tourfic post type menu name"
 msgid "Tours"
-msgstr ""
+msgstr "الرحلات"
 
 #: inc/post-type.php:120
 msgid "Hotel"
-msgstr ""
+msgstr "فندق"
 
 #: inc/post-type.php:121
 msgid "Hotels"
-msgstr ""
+msgstr "الفنادق"
 
 #: inc/post-type.php:128
 msgid "Tour"
-msgstr ""
+msgstr "رحلة"
 
 #: inc/post-type.php:129
 msgid "Tours"
-msgstr ""
+msgstr "الرحلات"
 
 #: inc/post-type.php:178 inc/post-type.php:186
 #, php-format
 msgid "Enter %s name here"
-msgstr ""
+msgstr "ادخل %s الإسم هنا"
 
 #: inc/post-type.php:199 inc/post-type.php:201 inc/post-type.php:223
 #: inc/post-type.php:294 inc/post-type.php:296 inc/post-type.php:318
 msgid "Destination"
-msgstr ""
+msgstr "الوجهة"
 
 #: inc/post-type.php:200 inc/post-type.php:295
 msgid "Destinations"
-msgstr ""
+msgstr "المناطق"
 
 #: inc/post-type.php:202 inc/post-type.php:297
+#, fuzzy
 msgid "All Destination"
-msgstr ""
+msgstr "كل الوجهة"
 
 #: inc/post-type.php:203 inc/post-type.php:298
+#, fuzzy
 msgid "Edit Destinations"
-msgstr ""
+msgstr "تحرير الوجهات"
 
 #: inc/post-type.php:204 inc/post-type.php:299
+#, fuzzy
 msgid "View Destinations"
-msgstr ""
+msgstr "عرض الوجهات"
 
 #: inc/post-type.php:205 inc/post-type.php:300
+#, fuzzy
 msgid "Update Destinations name"
-msgstr ""
+msgstr "تحديث اسم الوجهات"
 
 #: inc/post-type.php:206 inc/post-type.php:301
+#, fuzzy
 msgid "Add new Destinations"
-msgstr ""
+msgstr "إضافة وجهات جديدة"
 
 #: inc/post-type.php:207 inc/post-type.php:302
+#, fuzzy
 msgid "New Destinations name"
-msgstr ""
+msgstr "اسم الوجهات الجديدة"
 
 #: inc/post-type.php:208 inc/post-type.php:303
+#, fuzzy
 msgid "Parent Destinations"
-msgstr ""
+msgstr "الوجهات الأصلية"
 
 #: inc/post-type.php:209 inc/post-type.php:304
+#, fuzzy
 msgid "Parent Destinations:"
-msgstr ""
+msgstr "الوجهات الأصلية:"
 
 #: inc/post-type.php:210 inc/post-type.php:305
+#, fuzzy
 msgid "Search Destination"
-msgstr ""
+msgstr "وجهة البحث"
 
 #: inc/post-type.php:211 inc/post-type.php:306
+#, fuzzy
 msgid "Popular Destination"
-msgstr ""
+msgstr "الوجهة الشعبية"
 
 #: inc/post-type.php:212 inc/post-type.php:307
+#, fuzzy
 msgid "Separate Destination with commas"
-msgstr ""
+msgstr "الوجهة المنفصلة بفواصل"
 
 #: inc/post-type.php:213 inc/post-type.php:308
+#, fuzzy
 msgid "Add or remove Destination"
-msgstr ""
+msgstr "إضافة الوجهة أو إزالتها"
 
 #: inc/post-type.php:214 inc/post-type.php:309
+#, fuzzy
 msgid "Choose from the most used Destination"
-msgstr ""
+msgstr "اختر من الوجهة الأكثر استخداما"
 
 #: inc/post-type.php:215 inc/post-type.php:310
+#, fuzzy
 msgid "No Destination found"
-msgstr ""
+msgstr "لم يتم العثور على وجهة"
 
 #: inc/post-type.php:216 inc/post-type.php:311
+#, fuzzy
 msgid "No Destination"
-msgstr ""
+msgstr "لا وجهة"
 
 #: inc/post-type.php:217 inc/post-type.php:312
 msgid "Destination list navigation"
-msgstr ""
+msgstr "التنقل في قائمة الوجهات"
 
 #: inc/post-type.php:218 inc/post-type.php:313
+#, fuzzy
 msgid "Destination list"
-msgstr ""
+msgstr "قائمة الوجهات"
 
 #: inc/post-type.php:219 inc/post-type.php:314
+#, fuzzy
 msgid "Back to Destination"
-msgstr ""
+msgstr "العودة إلى الوجهة"
 
 #: inc/post-type.php:245 inc/post-type.php:247 inc/post-type.php:269
 msgid "Filters"
-msgstr ""
+msgstr "الفلاتر"
 
 #: inc/post-type.php:246
 msgid "Filter"
-msgstr ""
+msgstr "تصفية"
 
 #: inc/post-type.php:248
 msgid "All Filters"
-msgstr ""
+msgstr "كل الأقسام"
 
 #: inc/post-type.php:249
 msgid "Edit Filter"
-msgstr ""
+msgstr "تعديل القسم"
 
 #: inc/post-type.php:250
+#, fuzzy
 msgid "View Filter"
-msgstr ""
+msgstr "عرض عامل التصفية"
 
 #: inc/post-type.php:251
+#, fuzzy
 msgid "Update Filter name"
-msgstr ""
+msgstr "تحديث اسم عامل التصفية"
 
 #: inc/post-type.php:252
+#, fuzzy
 msgid "Add new Filter"
-msgstr ""
+msgstr "إضافة عامل تصفية جديد"
 
 #: inc/post-type.php:253
+#, fuzzy
 msgid "New Filter name"
-msgstr ""
+msgstr "اسم عامل تصفية جديد"
 
 #: inc/post-type.php:254
 msgid "Parent Filter"
-msgstr ""
+msgstr "القسم الرئيسي"
 
 #: inc/post-type.php:255
 msgid "Parent Filter:"
-msgstr ""
+msgstr "القسم الرئيسي :"
 
 #: inc/post-type.php:256
 msgid "Search Filters"
-msgstr ""
+msgstr "البحث في الأقسام"
 
 #: inc/post-type.php:257 inc/widgets.php:77 inc/widgets.php:229
+#, fuzzy
 msgid "Popular Filters"
-msgstr ""
+msgstr "مرشحات شعبية"
 
 #: inc/post-type.php:258
+#, fuzzy
 msgid "Separate Filters with commas"
-msgstr ""
+msgstr "عوامل تصفية منفصلة بفواصل"
 
 #: inc/post-type.php:259
+#, fuzzy
 msgid "Add or remove Filters"
-msgstr ""
+msgstr "إضافة عوامل تصفية أو إزالتها"
 
 #: inc/post-type.php:260
+#, fuzzy
 msgid "Choose from the most used Filters"
-msgstr ""
+msgstr "الاختيار من بين المرشحات الأكثر استخداما"
 
 #: inc/post-type.php:261
+#, fuzzy
 msgid "No Filters found"
-msgstr ""
+msgstr "لم يتم العثور على عوامل تصفية"
 
 #: inc/post-type.php:262
 msgid "No Filters"
-msgstr ""
+msgstr "لا توجد عوامل تصفية"
 
 #: inc/post-type.php:263
+#, fuzzy
 msgid "Filters list navigation"
-msgstr ""
+msgstr "التنقل في قائمة عوامل التصفية"
 
 #: inc/post-type.php:264
+#, fuzzy
 msgid "Filters list"
-msgstr ""
+msgstr "قائمة عوامل التصفية"
 
 #: inc/post-type.php:265
+#, fuzzy
 msgid "Back to Filters"
-msgstr ""
+msgstr "العودة إلى عوامل التصفية"
 
 #: inc/post-type.php:340 inc/post-type.php:342 inc/post-type.php:364
+#, fuzzy
 msgid "Tour Features"
-msgstr ""
+msgstr "ميزات الجولة"
 
 #: inc/post-type.php:341
+#, fuzzy
 msgid "Tour Feature"
-msgstr ""
+msgstr "ميزة الجولة"
 
 #: inc/post-type.php:343
 msgid "All Features"
-msgstr ""
+msgstr "جميع المزايا"
 
 #: inc/post-type.php:344
 msgid "Edit Feature"
-msgstr ""
+msgstr "تعديل المزايا"
 
 #: inc/post-type.php:345
+#, fuzzy
 msgid "View Features"
-msgstr ""
+msgstr "عرض الميزات"
 
 #: inc/post-type.php:346
+#, fuzzy
 msgid "Update Feature name"
-msgstr ""
+msgstr "تحديث اسم الميزة"
 
 #: inc/post-type.php:347
 msgid "Add new Feature"
-msgstr ""
+msgstr "إضافة ميزة جديدة"
 
 #: inc/post-type.php:348
+#, fuzzy
 msgid "New Feature name"
-msgstr ""
+msgstr "اسم ميزة جديدة"
 
 #: inc/post-type.php:349
+#, fuzzy
 msgid "Parent Feature"
-msgstr ""
+msgstr "الميزة الأصل"
 
 #: inc/post-type.php:350
 msgid "Parent Feature:"
-msgstr ""
+msgstr "المميز "
 
 #: inc/post-type.php:351
+#, fuzzy
 msgid "Search Features"
-msgstr ""
+msgstr "ميزات البحث"
 
 #: inc/post-type.php:353
+#, fuzzy
 msgid "Separate Features with commas"
-msgstr ""
+msgstr "فصل الميزات بفواصل"
 
 #: inc/post-type.php:354
+#, fuzzy
 msgid "Add or remove Features"
-msgstr ""
+msgstr "إضافة ميزات أو إزالتها"
 
 #: inc/post-type.php:355
+#, fuzzy
 msgid "Choose from the most used Features"
-msgstr ""
+msgstr "اختر من بين الميزات الأكثر استخداما"
 
 #: inc/post-type.php:356
+#, fuzzy
 msgid "No Features found"
-msgstr ""
+msgstr "لم يتم العثور على ميزات"
 
 #: inc/post-type.php:357
+#, fuzzy
 msgid "No Features"
-msgstr ""
+msgstr "لا توجد ميزات"
 
 #: inc/post-type.php:358
+#, fuzzy
 msgid "Features list navigation"
-msgstr ""
+msgstr "التنقل في قائمة الميزات"
 
 #: inc/post-type.php:359
+#, fuzzy
 msgid "Features list"
-msgstr ""
+msgstr "قائمة الميزات"
 
 #: inc/post-type.php:360
+#, fuzzy
 msgid "Back to Features"
-msgstr ""
+msgstr "العودة إلى الميزات"
 
 #: inc/shortcodes.php:60 inc/shortcodes.php:135
-#, php-format
+#, fuzzy, php-format
 msgid "%s properties"
-msgstr ""
+msgstr "خصائص %s"
 
 #: inc/tourfic-functions.php:90 inc/tourfic-functions.php:1180
 msgid "Submit"
-msgstr ""
+msgstr "إرسال"
 
 #: inc/tourfic-functions.php:91
 msgid "Write a Review"
-msgstr ""
+msgstr "اكتب تقييم "
 
 #: inc/tourfic-functions.php:92
 msgid "Reply"
-msgstr ""
+msgstr "الرد"
 
 #: inc/tourfic-functions.php:680
 msgid "Price per night"
-msgstr ""
+msgstr "السعر  لليلة"
 
 #: inc/tourfic-functions.php:751 inc/tourfic-functions.php:780
+#, fuzzy
 msgid "Destination Image"
-msgstr ""
+msgstr "صورة الوجهة"
 
 #: inc/tourfic-functions.php:755 inc/tourfic-functions.php:791
 #: inc/tourfic-functions.php:947
 msgid "Add Image"
-msgstr ""
+msgstr "إضافة صورة"
 
 #: inc/tourfic-functions.php:756 inc/tourfic-functions.php:792
 #: inc/tourfic-functions.php:948
 msgid "Remove Image"
-msgstr ""
+msgstr "احذف صورة"
 
 #: inc/tourfic-functions.php:909
 msgid "Icon"
-msgstr ""
+msgstr "أيقونة"
 
 #: inc/tourfic-functions.php:913
 msgid "Add Icon"
-msgstr ""
+msgstr "إضافة أيقونة"
 
 #: inc/tourfic-functions.php:914
 msgid "Remove Icon"
-msgstr ""
+msgstr "إزالة الايقونة"
 
 #: inc/tourfic-functions.php:936
 msgid "Image"
-msgstr ""
+msgstr "صورة"
 
 #: inc/tourfic-functions.php:975
 msgid "Insert"
-msgstr ""
+msgstr "إدراج"
 
 #: inc/tourfic-functions.php:1126
+#, fuzzy
 msgid "TOURFIC: Single Tour Sidebar"
-msgstr ""
+msgstr "TOURFIC: الشريط الجانبي جولة واحدة"
 
 #: inc/tourfic-functions.php:1128
+#, fuzzy
 msgid "Widgets in this area will be shown on tourfic single page"
-msgstr ""
+msgstr "سيتم عرض الحاجيات في هذا المجال على صفحة واحدة tourfic"
 
 #: inc/tourfic-functions.php:1135
+#, fuzzy
 msgid "TOURFIC: Archive Sidebar"
-msgstr ""
+msgstr "تورفيك: الشريط الجانبي الأرشيف"
 
 #: inc/tourfic-functions.php:1137
+#, fuzzy
 msgid "Widgets in this area will be shown on tourfic archive/search page"
-msgstr ""
+msgstr "سيتم عرض الحاجيات في هذا المجال على أرشيف tourfic / صفحة البحث"
 
 #: inc/tourfic-functions.php:1167
+#, fuzzy
 msgid "Submit your question"
-msgstr ""
+msgstr "أرسل سؤالك"
 
 #: inc/tourfic-functions.php:1170
 msgid "Your Name"
-msgstr ""
+msgstr "اسمك"
 
 #: inc/tourfic-functions.php:1173
 msgid "Your email"
-msgstr ""
+msgstr "بريدك الالكتروني"
 
 #: inc/tourfic-functions.php:1176
 msgid "Your Question"
-msgstr ""
+msgstr "سؤالك"
 
 #: inc/tourfic-functions.php:1179
 msgid "Reset"
-msgstr ""
+msgstr "إعادة تعيين"
 
 #: inc/tourfic-functions.php:1199
+#, fuzzy
 msgid "Security error! Reload the page and try again."
-msgstr ""
+msgstr "خطأ أمني! أعد تحميل الصفحة وحاول مرة أخرى."
 
 #: inc/tourfic-functions.php:1223
-#, php-format
+#, fuzzy, php-format
 msgid "Someone asked question on: %s"
-msgstr ""
+msgstr "سأل شخص ما سؤالا حول: %s"
 
 #: inc/tourfic-functions.php:1231
+#, fuzzy
 msgid "Your question has been sent!"
-msgstr ""
+msgstr "لقد تم إرسال سؤالك!"
 
 #: inc/tourfic-functions.php:1234
+#, fuzzy
 msgid "Message sent failed!"
-msgstr ""
+msgstr "فشلت الرسالة المرسلة!"
 
 #: inc/tourfic-functions.php:1487
 msgid "From"
-msgstr ""
+msgstr "من"
 
 #: inc/tourfic-functions.php:1489
 msgid "To"
-msgstr ""
+msgstr "إلى"
 
 #: inc/widgets.php:15
+#, fuzzy
 msgid "Filter Tourfic tour on archive."
-msgstr ""
+msgstr "تصفية جولة تورفيك على الأرشيف."
 
 #: inc/widgets.php:85 inc/widgets.php:237 inc/widgets.php:373
 #: inc/widgets.php:568
 msgid "Title:"
-msgstr ""
+msgstr "العنوان:"
 
 #: inc/widgets.php:166
+#, fuzzy
 msgid "Filter Tourfic tour on archive with features."
-msgstr ""
+msgstr "جولة تصفية Tourfic على الأرشيف مع الميزات."
 
 #: inc/widgets.php:317
+#, fuzzy
 msgid "Show more tours button on single tour page."
-msgstr ""
+msgstr "إظهار المزيد من الجولات زر على صفحة جولة واحدة."
 
 #: inc/widgets.php:332 inc/widgets.php:370
+#, fuzzy
 msgid "Show more hotels"
-msgstr ""
+msgstr "عرض المزيد من الفنادق"
 
 #: inc/widgets.php:369
+#, fuzzy
 msgid "Not impressive?"
-msgstr ""
+msgstr "ليست مثيرة للإعجاب؟"
 
 #: inc/widgets.php:377 inc/widgets.php:466 inc/widgets.php:576
 msgid "Button Label"
-msgstr ""
+msgstr "تسمية الزر"
 
 #: inc/widgets.php:417
+#, fuzzy
 msgid "Show On Map tours button on single tour page."
-msgstr ""
+msgstr "زر جولات عرض على الخريطة في صفحة جولة واحدة."
 
 #: inc/widgets.php:463 templates/single-tourfic.php:62
 msgid "Show on map"
-msgstr ""
+msgstr "عرض على الخريطة"
 
 #: inc/widgets.php:505
+#, fuzzy
 msgid "Ask a question button on single tour page."
-msgstr ""
+msgstr "طرح زر سؤال على صفحة جولة واحدة."
 
 #: inc/widgets.php:520 inc/widgets.php:564
+#, fuzzy
 msgid "Find more info in the FAQ section."
-msgstr ""
+msgstr "ابحث عن مزيد من المعلومات في قسم الأسئلة الشائعة."
 
 #: inc/widgets.php:521 inc/widgets.php:565
 msgid "Ask a question"
-msgstr ""
+msgstr "طرح سؤال"
 
 #: inc/widgets.php:563
+#, fuzzy
 msgid "Got a question?"
-msgstr ""
+msgstr "هل لديك سؤال؟"
 
 #: inc/widgets.php:572 inc/elementor-addon/widgets/tourfic-search.php:110
 msgid "Subtitle"
-msgstr ""
+msgstr "عنوان فرعي"
 
 #: inc/booking/tf-woocommerce-hotel-class.php:47
 #: inc/booking/tf-woocommerce-tours-class.php:97
+#, fuzzy
 msgid "Check-in date missing."
-msgstr ""
+msgstr "تاريخ تسجيل الوصول مفقود."
 
 #: inc/booking/tf-woocommerce-hotel-class.php:50
 #: inc/booking/tf-woocommerce-tours-class.php:100
+#, fuzzy
 msgid "Check-out date missing."
-msgstr ""
+msgstr "تاريخ تسجيل المغادرة مفقود."
 
 #: inc/booking/tf-woocommerce-hotel-class.php:53
 #: inc/booking/tf-woocommerce-tours-class.php:103
+#, fuzzy
 msgid "Select Adult(s)."
-msgstr ""
+msgstr "حدد البالغين(الكبار)."
 
 #: inc/booking/tf-woocommerce-hotel-class.php:56
+#, fuzzy
 msgid "Select Room(s)."
-msgstr ""
+msgstr "حدد الغرفة (الغرف)."
 
 #: inc/booking/tf-woocommerce-hotel-class.php:59
 #: inc/booking/tf-woocommerce-tours-class.php:106
+#, fuzzy
 msgid "Unknown Error! Please try again."
-msgstr ""
+msgstr "خطأ غير معروف! الرجاء المحاولة مرة أخرى."
 
 #: inc/booking/tf-woocommerce-hotel-class.php:171
 #: inc/booking/tf-woocommerce-hotel-class.php:222
 #: templates/single-tourfic.php:141
 msgid "Room Type"
-msgstr ""
+msgstr "نوع الغرفة"
 
 #: inc/booking/tf-woocommerce-hotel-class.php:178
 #: inc/booking/tf-woocommerce-hotel-class.php:227
+#, fuzzy
 msgid "Room Selected"
-msgstr ""
+msgstr "غرفة مختارة"
 
 #: inc/booking/tf-woocommerce-hotel-class.php:185
 #: inc/booking/tf-woocommerce-hotel-class.php:232
 #: inc/booking/tf-woocommerce-tours-class.php:236
 #: inc/booking/tf-woocommerce-tours-class.php:279
 msgid "Adults"
-msgstr ""
+msgstr "البالغين"
 
 #: inc/booking/tf-woocommerce-hotel-class.php:192
 #: inc/booking/tf-woocommerce-hotel-class.php:237
 #: inc/booking/tf-woocommerce-tours-class.php:243
 #: inc/booking/tf-woocommerce-tours-class.php:284
 msgid "Children"
-msgstr ""
+msgstr "الأطفال"
 
 #: inc/booking/tf-woocommerce-hotel-class.php:199
 #: inc/booking/tf-woocommerce-hotel-class.php:242
 msgid "Check-in Date"
-msgstr ""
+msgstr "تاريخ الوصول"
 
 #: inc/booking/tf-woocommerce-hotel-class.php:206
 #: inc/booking/tf-woocommerce-hotel-class.php:247
 msgid "Check-out Date"
-msgstr ""
+msgstr "تاريخ المغادرة"
 
 #: inc/booking/tf-woocommerce-tours-class.php:54
+#, fuzzy
 msgid "You must select minimum "
-msgstr ""
+msgstr "يجب تحديد الحد الأدنى "
 
 #: inc/booking/tf-woocommerce-tours-class.php:57
 #: inc/booking/tf-woocommerce-tours-class.php:78
+#, fuzzy
 msgid "Maximum "
-msgstr ""
+msgstr "الحد الاقصي "
 
 #: inc/booking/tf-woocommerce-tours-class.php:76
 #: inc/booking/tf-woocommerce-tours-class.php:94
 msgid "Minimum "
-msgstr ""
+msgstr "الحد الأدنى"
 
 #: inc/booking/tf-woocommerce-tours-class.php:250
 msgid "Infant"
-msgstr ""
+msgstr "رضيع"
 
 #: inc/booking/tf-woocommerce-tours-class.php:257
 #: inc/booking/tf-woocommerce-tours-class.php:292
 msgid "Departure Date"
-msgstr ""
+msgstr "تاريخ المغادرة"
 
 #: inc/booking/tf-woocommerce-tours-class.php:264
+#, fuzzy
 msgid "Tour Extra: "
-msgstr ""
+msgstr "جولة اضافية: "
 
 #: inc/booking/tf-woocommerce-tours-class.php:288
+#, fuzzy
 msgid "Infants"
-msgstr ""
+msgstr "الرضع"
 
 #: inc/elementor-addon/widgets/tourfic-destination.php:37
+#, fuzzy
 msgid "Tourfic Destination"
-msgstr ""
+msgstr "وجهة تورفيك"
 
 #: inc/elementor-addon/widgets/tourfic-destination.php:91
 #: inc/elementor-addon/widgets/tourfic-search.php:125
 msgid "Style"
-msgstr ""
+msgstr "النمط"
 
 #: inc/elementor-addon/widgets/tourfic-destination.php:102
+#, fuzzy
 msgid "Destination Title Typography"
-msgstr ""
+msgstr "طباعة عنوان الوجهة"
 
 #: inc/elementor-addon/widgets/tourfic-destination.php:110
+#, fuzzy
 msgid "Destination title Color"
-msgstr ""
+msgstr "لون عنوان الوجهة"
 
 #: inc/elementor-addon/widgets/tourfic-destination.php:126
+#, fuzzy
 msgid "Destination Title Hover Color"
-msgstr ""
+msgstr "لون تحوم عنوان الوجهة"
 
 #: inc/elementor-addon/widgets/tourfic-destination.php:145
+#, fuzzy
 msgid "Destination Subitle Typography"
-msgstr ""
+msgstr "الوجهة سوبيتل الطباعة"
 
 #: inc/elementor-addon/widgets/tourfic-destination.php:153
+#, fuzzy
 msgid "Destination Subtitle Color"
-msgstr ""
+msgstr "لون العنوان الفرعي الوجهة"
 
 #: inc/elementor-addon/widgets/tourfic-destination.php:169
+#, fuzzy
 msgid "Destination Subtitle Hover Color"
-msgstr ""
+msgstr "الوجهة العنوان الفرعي تحوم اللون"
 
 #: inc/elementor-addon/widgets/tourfic-destination.php:187
 msgid "Info Background"
-msgstr ""
+msgstr "خلفية المعلومات"
 
 #: inc/elementor-addon/widgets/tourfic-destination.php:197
 #: inc/elementor-addon/widgets/tourfic-destination.php:214
 msgid "Background Color"
-msgstr ""
+msgstr "لون الخلفية"
 
 #: inc/elementor-addon/widgets/tourfic-destination.php:205
+#, fuzzy
 msgid "Info Hover Background"
-msgstr ""
+msgstr "معلومات تحوم الخلفية"
 
 #: inc/elementor-addon/widgets/tourfic-search.php:37
+#, fuzzy
 msgid "Tourfic search"
-msgstr ""
+msgstr "البحث السياحي"
 
 #: inc/elementor-addon/widgets/tourfic-search.php:91
 msgid "Content"
-msgstr ""
+msgstr "المحتوى"
 
 #: inc/elementor-addon/widgets/tourfic-search.php:101
 msgid "Default title"
-msgstr ""
+msgstr "العنوان الافتراضي"
 
 #: inc/elementor-addon/widgets/tourfic-search.php:102
+#, fuzzy
 msgid "Type your title here"
-msgstr ""
+msgstr "اكتب عنوانك هنا"
 
 #: inc/elementor-addon/widgets/tourfic-search.php:112
+#, fuzzy
 msgid "Default description"
-msgstr ""
+msgstr "الوصف الافتراضي"
 
 #: inc/elementor-addon/widgets/tourfic-search.php:113
+#, fuzzy
 msgid "Type your description here"
-msgstr ""
+msgstr "اكتب الوصف هنا"
 
 #: inc/elementor-addon/widgets/tourfic-search.php:134
 msgid "Title Typography"
-msgstr ""
+msgstr "خط العنوان"
 
 #: inc/elementor-addon/widgets/tourfic-search.php:141
 msgid "Title Color"
-msgstr ""
+msgstr "لون العنوان"
 
 #: inc/elementor-addon/widgets/tourfic-search.php:164
 msgid "Subtitle Typography"
-msgstr ""
+msgstr "طباعة العنوان الفرعي"
 
 #: inc/elementor-addon/widgets/tourfic-search.php:172
 msgid "Subtitle Color"
-msgstr ""
+msgstr "لون العنوان الفرعي"
 
 #: inc/elementor-addon/widgets/tourfic-tours.php:37
+#, fuzzy
 msgid "Tourfic slider"
-msgstr ""
+msgstr "شريط التمرير تورفيك"
 
 #: templates/review.php:107 templates/review.php:132
+#, fuzzy
 msgid "Comments Navigation"
-msgstr ""
+msgstr "تنقل التعليقات"
 
 #: templates/single-tf_tours.php:79
+#, fuzzy
 msgid "Tour Videos"
-msgstr ""
+msgstr "فيديو الجولة"
 
 #: templates/single-tf_tours.php:109
 msgid "reviews"
-msgstr ""
+msgstr "التقييمات"
 
 #: templates/single-tf_tours.php:127 templates/tf-tours-single.php:106
 msgid "Duration"
-msgstr ""
+msgstr "المدة"
 
 #: templates/single-tf_tours.php:132 templates/tf-tours-single.php:117
 msgid "Max People"
-msgstr ""
+msgstr "الحد الأقصى"
 
 #: templates/single-tf_tours.php:142 templates/tf-tours-single.php:139
 msgid "Language"
-msgstr ""
+msgstr "اللغة"
 
 #: templates/single-tf_tours.php:157
 msgid "Overview"
-msgstr ""
+msgstr "نظرة عامة"
 
 #: templates/single-tf_tours.php:219 templates/tf-tours-single.php:272
+#, fuzzy
 msgid "Travel Itinerary"
-msgstr ""
+msgstr "خط سير الرحلة"
 
 #: templates/single-tf_tours.php:266 templates/tf-tours-single.php:326
+#, fuzzy
 msgid "Frequently asked questions?"
-msgstr ""
+msgstr "الأسئلة المتداولة؟"
 
 #: templates/single-tf_tours.php:297 templates/tf-tours-single.php:368
 msgid "You might also like"
-msgstr ""
+msgstr "ربما يعجبك أيضا"
 
 #: templates/single-tf_tours.php:298 templates/tf-tours-single.php:369
+#, fuzzy
 msgid ""
 "Travel is my life. Since 1999, I’ve been traveling around the world "
 "nonstop.\n"
 "\t\t\t\t\t\t\tIf you also love travel, you’re in the right place!\n"
 "\t\t\t\t\t\t\t"
 msgstr ""
+"السفر هو حياتي. منذ عام 1999، كنت أسافر حول العالم دون توقف.\n"
+"\t\t\t\t\t\t\tإذا كنت تحب السفر أيضا، فأنت في المكان المناسب!\n"
+"\t\t\t\t\t\t\t"
 
 #: templates/single-tf_tours.php:353
 msgid "Customer Reviews"
-msgstr ""
+msgstr "تقييم العملاء"
 
 #: templates/single-tf_tours.php:354
+#, fuzzy
 msgid "Reviews given by our customers."
-msgstr ""
+msgstr "التعليقات التي قدمها عملائنا."
 
 #: templates/single-tourfic.php:40
 msgid "Share on Facebook"
-msgstr ""
+msgstr "شارك على الفيسبوك"
 
 #: templates/single-tourfic.php:45
 msgid "Share on Twitter"
-msgstr ""
+msgstr "شارك على تويتر"
 
 #: templates/single-tourfic.php:50
+#, fuzzy
 msgid "Share this link"
-msgstr ""
+msgstr "مشاركة هذا الرابط"
 
 #: templates/single-tourfic.php:53
 msgid "Copy link"
-msgstr ""
+msgstr "انسخ الرابط"
 
 #: templates/single-tourfic.php:54
 msgid "Copied!"
-msgstr ""
+msgstr "نسخ!"
 
 #: templates/single-tourfic.php:65
 msgid "Reserve"
-msgstr ""
+msgstr "محجوز"
 
 #: templates/single-tourfic.php:103
 msgid "Listing Description"
-msgstr ""
+msgstr "وصف المكان"
 
 #: templates/single-tourfic.php:113 templates/tf-tours-single.php:193
+#, fuzzy
 msgid "Features"
-msgstr ""
+msgstr "الميزات"
 
 #: templates/single-tourfic.php:143
 msgid "Total Price"
-msgstr ""
+msgstr "السعر الإجمالي"
 
 #: templates/single-tourfic.php:144
+#, fuzzy
 msgid "Select Rooms"
-msgstr ""
+msgstr "تحديد الغرف"
 
 #: templates/single-tourfic.php:238
 msgid "Reviews"
-msgstr ""
+msgstr "التقييمات"
 
 #: templates/tf-tours-single.php:173
 msgid "Tour Description"
-msgstr ""
+msgstr "وصف الجولة"
 
 #: templates/tf-tours-single.php:430
+#, fuzzy
 msgid "Customer Review"
-msgstr ""
+msgstr "مراجعة العملاء"
 
 #: templates/tf-tours-single.php:496
 msgid "Terms and Conditions"
-msgstr ""
+msgstr "الأحكام والشروط"
