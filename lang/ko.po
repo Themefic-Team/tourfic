@@ -1,0 +1,1715 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-17 11:04+0600\n"
+"PO-Revision-Date: 2022-01-17 21:51+0600\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: tourfic.php:417
+msgid "Tourfic requires WooCommerce to be activated "
+msgstr "투어픽은 우커머스를 활성화해야 합니다. "
+
+#: admin/framework/settings.php:11
+msgid "Tourfic"
+msgstr "투르픽 ()"
+
+#: admin/framework/settings.php:13
+#, fuzzy
+msgid ""
+"Tourfic Settings <small><a href=\"https://themefic.com/\">By THEMEFIC</a></"
+"small>"
+msgstr ""
+"투픽 설정 <small> <a href=\"https://themefic.com/\">바이 THEMEFIC</a></small>"
+
+#: admin/framework/settings.php:14
+#, fuzzy
+msgid ""
+"Enjoyed Tourfic? Please leave us a <a target=\"_blank\" href=\"https://"
+"wordpress.org/support/plugin/tourfic/reviews/#new-post\">★★★★★</a> rating. "
+"We really appreciate your support!"
+msgstr ""
+"투르픽을 즐겼습니까? <a target=\"_blank\" href=\"https://wordpress.org/"
+"support/plugin/tourfic/reviews/#new-post\">우리에게 ★★★★★</a> 등급을 남겨주세"
+"요. 우리는 정말 당신의 지원을 주셔서 감사합니다!"
+
+#: admin/framework/settings.php:26 admin/inc/tours/tf-tours-metabox.php:23
+msgid "General"
+msgstr "일반"
+
+#: admin/framework/settings.php:32
+#, fuzzy
+msgid "Input slug of Hotel"
+msgstr "호텔의 입력 슬러그"
+
+#: admin/framework/settings.php:33
+#, fuzzy
+msgid ""
+"Default is: <code>tourfic</code> - <strong>Save 2 times if you change this "
+"field for permalink flush</strong>"
+msgstr ""
+"기본값은 : <code>tourfic</code> - <strong>퍼마 링크 플러시이 필드를 변경하는 "
+"경우 2 번 저장</strong>"
+
+#: admin/framework/settings.php:38
+#, fuzzy
+msgid "Input slug of Tour"
+msgstr "투어의 입력 슬러그"
+
+#: admin/framework/settings.php:39
+#, fuzzy
+msgid ""
+"Default is: <code>tour</code> - <strong>Save 2 times if you change this "
+"field for permalink flush</strong>"
+msgstr ""
+"기본값은 : <code>tour</code> - <strong>퍼마 링크 플러시이 필드를 변경하는 경"
+"우 2 번 저장</strong>"
+
+#: admin/framework/settings.php:46
+#, fuzzy
+msgid "Select Single Page Template"
+msgstr "단일 페이지 템플릿 선택"
+
+#: admin/framework/settings.php:47
+msgid "You can choose signle tour page layout from here"
+msgstr "여기에서 로그인 투어 페이지 레이아웃을 선택할 수 있습니다."
+
+#: admin/framework/settings.php:62 inc/layouts.php:275 inc/layouts.php:404
+#: inc/tourfic-functions.php:1399 inc/tourfic-functions.php:1526
+msgid "Search"
+msgstr "검색"
+
+#: admin/framework/settings.php:72
+#, fuzzy
+msgid "Select Search Result Page"
+msgstr "검색 결과 페이지 선택"
+
+#: admin/framework/settings.php:73
+#, fuzzy
+msgid "Page template: <code>Tourfic - Search Result</code> must be selected"
+msgstr "페이지 템플릿: <code>Tourfic - Search Result</code> 선택해야 합니다."
+
+#: admin/framework/settings.php:80
+#, fuzzy
+msgid "Search Result Relation"
+msgstr "검색 결과 관계"
+
+#: admin/framework/settings.php:81
+#, fuzzy
+msgid ""
+"Search result relation with search widget and filters. OR means matched any "
+"query, AND means matched all query."
+msgstr ""
+"검색 위젯 및 필터와 결과 관계를 검색합니다. 또는 모든 쿼리와 일치하고 모든 쿼"
+"리와 일치하는 것을 의미합니다."
+
+#: admin/framework/settings.php:94
+#, fuzzy
+msgid "Filters Relation"
+msgstr "필터 관계"
+
+#: admin/framework/settings.php:95
+msgid ""
+"Search result Filters relation with among filters. OR means matched any "
+"filter, AND means matched all filter."
+msgstr ""
+"검색 결과 필터 간의 관계를 필터링합니다. 또는 모든 필터와 일치하고 모든 필터"
+"와 일치하는 것을 의미합니다."
+
+#: admin/framework/settings.php:118
+msgid "Custom CSS"
+msgstr "사용자 정의 CSS"
+
+#: admin/inc/tf-custom-fields.php:38
+#, fuzzy
+msgid "Tourfic Options"
+msgstr "투르픽 옵션"
+
+#: admin/inc/tf-custom-fields.php:183 admin/inc/tf-custom-fields.php:255
+#: templates/single-tf_tours.php:168 templates/single-tourfic.php:93
+#: templates/tf-tours-single.php:163
+msgid "Highlights"
+msgstr "하이라이트"
+
+#: admin/inc/tf-custom-fields.php:184
+msgid "Rooms"
+msgstr "방"
+
+#: admin/inc/tf-custom-fields.php:185 admin/inc/tf-custom-fields.php:217
+msgid "Gallery"
+msgstr "갤러리"
+
+#: admin/inc/tf-custom-fields.php:186 admin/inc/tours/tf-tours-metabox.php:89
+msgid "Location"
+msgstr "위치"
+
+#: admin/inc/tf-custom-fields.php:187 admin/inc/tours/tf-tours-metabox.php:555
+#: admin/inc/tours/tf-tours-metabox.php:560 templates/single-tourfic.php:208
+msgid "FAQs"
+msgstr "FAQ"
+
+#: admin/inc/tf-custom-fields.php:188 admin/inc/tours/tf-tours-metabox.php:578
+#: admin/inc/tours/tf-tours-metabox.php:583
+msgid "Terms & Conditions"
+msgstr "이용 약관"
+
+#: admin/inc/tf-custom-fields.php:195
+#, fuzzy
+msgid "Room Options"
+msgstr "객실 옵션"
+
+#: admin/inc/tf-custom-fields.php:209
+msgid "Add Room"
+msgstr "객실 추가"
+
+#: admin/inc/tf-custom-fields.php:235
+msgid "Add Gallery Images"
+msgstr "갤러리 이미지 추가"
+
+#: admin/inc/tf-custom-fields.php:242
+msgid "Location Options"
+msgstr "위치 옵션"
+
+#: admin/inc/tf-custom-fields.php:246
+#, fuzzy
+msgid "Formatted Location"
+msgstr "서식 위치"
+
+#: admin/inc/tf-custom-fields.php:275 inc/post-type.php:352
+#, fuzzy
+msgid "Popular Features"
+msgstr "인기 기능"
+
+#: admin/inc/tf-custom-fields.php:276
+#, fuzzy
+msgid "Select Popular Features for Filters"
+msgstr "필터에 대한 인기 기능 선택"
+
+#: admin/inc/tf-custom-fields.php:295
+#, fuzzy
+msgid "Toggle selection"
+msgstr "토글 선택"
+
+#: admin/inc/tf-custom-fields.php:310
+msgid "Frequently Asked Questions"
+msgstr "자주 묻는 질문"
+
+#: admin/inc/tf-custom-fields.php:324
+msgid "Add FAQ"
+msgstr "FAQ 추가"
+
+#: admin/inc/tf-custom-fields.php:328
+#, fuzzy
+msgid "Ask Questions"
+msgstr "질문"
+
+#: admin/inc/tf-custom-fields.php:332
+msgid "Send email to"
+msgstr "이메일 발송"
+
+#: admin/inc/tf-custom-fields.php:335
+#, fuzzy
+msgid "abc@xyz.com"
+msgstr "abc@xyz.com"
+
+#: admin/inc/tf-custom-fields.php:336
+#, fuzzy
+msgid "Site admin email."
+msgstr "사이트 관리자 이메일입니다."
+
+#: admin/inc/tf-custom-fields.php:336
+#, fuzzy
+msgid "Author email of this post."
+msgstr "이 게시물의 저자 이메일입니다."
+
+#: admin/inc/tf-custom-fields.php:341
+#, fuzzy
+msgid "Add Terms & Conditions"
+msgstr "이용 약관 추가"
+
+#: admin/inc/tf-field-functions.php:35
+#, fuzzy
+msgid "# Room Title"
+msgstr "# 룸 타이틀"
+
+#: admin/inc/tf-field-functions.php:56
+msgid "Room Name"
+msgstr "객실명"
+
+#: admin/inc/tf-field-functions.php:63 admin/inc/tours/tf-tours-metabox.php:228
+msgid "Short Description"
+msgstr "요약 설명"
+
+#: admin/inc/tf-field-functions.php:70 templates/single-tourfic.php:161
+#, fuzzy
+msgid "Room Features"
+msgstr "객실 기능"
+
+#: admin/inc/tf-field-functions.php:74
+#, fuzzy
+msgid "[tf_list icon=\"fa-wifi\" text=\"Free Wifi\"]"
+msgstr "[tf_list 아이콘=\"fa-wi-fi\" 텍스트=\"무료 Wi-Fi\"]"
+
+#: admin/inc/tf-field-functions.php:81 admin/inc/tours/tf-tours-metabox.php:236
+#: templates/single-tf_tours.php:98 templates/tf-tours-single.php:76
+msgid "Price"
+msgstr "가격"
+
+#: admin/inc/tf-field-functions.php:89
+msgid "Sale Price"
+msgstr "할인가격"
+
+#: admin/inc/tf-field-functions.php:98 templates/single-tourfic.php:142
+#, fuzzy
+msgid "Pax"
+msgstr "팩스 (동음이의)"
+
+#: admin/inc/tf-field-functions.php:139
+#, fuzzy
+msgid "# FAQ Title"
+msgstr "# FAQ 타이틀"
+
+#: admin/inc/tf-field-functions.php:159
+#: admin/inc/tours/tf-tours-metabox.php:565
+#, fuzzy
+msgid "FAQ Title"
+msgstr "FAQ 타이틀"
+
+#: admin/inc/tf-field-functions.php:166
+#: admin/inc/tours/tf-tours-metabox.php:513
+msgid "Description"
+msgstr "설명"
+
+#: admin/inc/tours/tf-tours-metabox.php:14
+#, fuzzy
+msgid "Tours Setting"
+msgstr "투어 설정"
+
+#: admin/inc/tours/tf-tours-metabox.php:30
+msgid "Set this tour as featured"
+msgstr "이 투어를 추천으로 설정"
+
+#: admin/inc/tours/tf-tours-metabox.php:31
+msgid "Tour will be shown under featured sections"
+msgstr "투어는 추천 섹션으로 표시됩니다."
+
+#: admin/inc/tours/tf-tours-metabox.php:46
+#, fuzzy
+msgid "Single Tour Page Layout"
+msgstr "단일 투어 페이지 레이아웃"
+
+#: admin/inc/tours/tf-tours-metabox.php:48
+msgid "Default"
+msgstr "기본값"
+
+#: admin/inc/tours/tf-tours-metabox.php:60
+#, fuzzy
+msgid "Add features"
+msgstr "기능 추가"
+
+#: admin/inc/tours/tf-tours-metabox.php:61
+#, fuzzy
+msgid "Tour features"
+msgstr "투어 기능"
+
+#: admin/inc/tours/tf-tours-metabox.php:66 templates/single-tf_tours.php:84
+#, fuzzy
+msgid "Tour Gallery"
+msgstr "투어 갤러리"
+
+#: admin/inc/tours/tf-tours-metabox.php:72
+#, fuzzy
+msgid "Hero Section Title"
+msgstr "영웅 섹션 제목"
+
+#: admin/inc/tours/tf-tours-metabox.php:77
+msgid "Tour Video"
+msgstr "투어 동영상"
+
+#: admin/inc/tours/tf-tours-metabox.php:78
+#, fuzzy
+msgid ""
+"<a href=\"https://tourfic.com/#purchase\" target=\"_blank\" style=\"text-"
+"decoration: none;\"><a href=\"https://tourfic.com/#purchase\" target=\"_blank"
+"\" style=\"text-decoration: none;\"><strong class=\"tf-pro\">Pro</strong></"
+"a></a>"
+msgstr ""
+"<a href=\"https://tourfic.com/#purchase\" target=\"_blank\" style=\"text-"
+"decoration: none;\"><a href=\"https://tourfic.com/#purchase\" target=\"_blank"
+"\" style=\"text-decoration: none;\"><strong class=\"tf-pro\">프로</strong></"
+"a></a>"
+
+#: admin/inc/tours/tf-tours-metabox.php:95
+msgid "Tour Location"
+msgstr "투어 지역"
+
+#: admin/inc/tours/tf-tours-metabox.php:96
+#, fuzzy
+msgid "Manually enter your tour location"
+msgstr "투어 위치를 수동으로 입력합니다."
+
+#: admin/inc/tours/tf-tours-metabox.php:102
+#, fuzzy
+msgid "Tour Location Pro (Auto Suggestion)"
+msgstr "투어 위치 프로 (자동 제안)"
+
+#: admin/inc/tours/tf-tours-metabox.php:103
+#, fuzzy
+msgid ""
+"Location suggestions will be provided from Google <a href=\"https://tourfic."
+"com/#purchase\" target=\"_blank\" style=\"text-decoration: none;\"><strong "
+"class=\"tf-pro\">Pro</strong></a>"
+msgstr ""
+"위치 제안은 구글 <a href=\"https://tourfic.com/#purchase\" target=\"_blank\" "
+"style=\"text-decoration: none;\"> <strong class=\"tf-pro\">프로에서</strong> "
+"제공됩니다</a>"
+
+#: admin/inc/tours/tf-tours-metabox.php:123
+msgid "Hightlights"
+msgstr "핵심정보"
+
+#: admin/inc/tours/tf-tours-metabox.php:129
+#, fuzzy
+msgid "Tour Hightlights"
+msgstr "투어 하이트라이트"
+
+#: admin/inc/tours/tf-tours-metabox.php:130
+#, fuzzy
+msgid "Enter a summary or full description of your tour"
+msgstr "투어에 대한 요약 또는 전체 설명 입력"
+
+#: admin/inc/tours/tf-tours-metabox.php:138
+msgid "Information"
+msgstr "정보"
+
+#: admin/inc/tours/tf-tours-metabox.php:144
+#, fuzzy
+msgid "Tour Duration"
+msgstr "투어 기간"
+
+#: admin/inc/tours/tf-tours-metabox.php:145
+#, fuzzy
+msgid "E.g. 3 days"
+msgstr "예를 들어 3일"
+
+#: admin/inc/tours/tf-tours-metabox.php:150 templates/single-tf_tours.php:137
+#: templates/tf-tours-single.php:128
+#, fuzzy
+msgid "Group Size"
+msgstr "그룹 크기"
+
+#: admin/inc/tours/tf-tours-metabox.php:151
+#, fuzzy
+msgid "E.g. 10 people"
+msgstr "예를 들어 10명"
+
+#: admin/inc/tours/tf-tours-metabox.php:156
+msgid "Languages"
+msgstr "언어"
+
+#: admin/inc/tours/tf-tours-metabox.php:157
+#, fuzzy
+msgid "Input languages seperated by comma(,)"
+msgstr "쉼표에 의해 분리된 입력 언어(,)"
+
+#: admin/inc/tours/tf-tours-metabox.php:162
+#, fuzzy
+msgid "Minimum Person"
+msgstr "최소 사람"
+
+#: admin/inc/tours/tf-tours-metabox.php:163
+msgid "Minimum person to travel"
+msgstr "최소 여행 인원"
+
+#: admin/inc/tours/tf-tours-metabox.php:168
+#, fuzzy
+msgid "Maximum Person"
+msgstr "최대 인원"
+
+#: admin/inc/tours/tf-tours-metabox.php:169
+#, fuzzy
+msgid "Maximum person to travel"
+msgstr "최대 여행 인원"
+
+#: admin/inc/tours/tf-tours-metabox.php:177
+msgid "Contact Info"
+msgstr "상담안내"
+
+#: admin/inc/tours/tf-tours-metabox.php:183
+msgid "Email Address"
+msgstr "이메일 주소"
+
+#: admin/inc/tours/tf-tours-metabox.php:184
+#: admin/inc/tours/tf-tours-metabox.php:190
+#: admin/inc/tours/tf-tours-metabox.php:196
+#: admin/inc/tours/tf-tours-metabox.php:202
+#: admin/inc/tours/tf-tours-metabox.php:215
+#: admin/inc/tours/tf-tours-metabox.php:394
+#: admin/inc/tours/tf-tours-metabox.php:406
+#, fuzzy
+msgid ""
+"<a href=\"https://tourfic.com/#purchase\" target=\"_blank\" style=\"text-"
+"decoration: none;\"><strong class=\"tf-pro\">Pro</strong></a>"
+msgstr ""
+"<a href=\"https://tourfic.com/#purchase\" target=\"_blank\" style=\"text-"
+"decoration: none;\"><strong class=\"tf-pro\">프로</strong></a>"
+
+#: admin/inc/tours/tf-tours-metabox.php:189
+msgid "Phone Number"
+msgstr "전화번호"
+
+#: admin/inc/tours/tf-tours-metabox.php:195
+#, fuzzy
+msgid "Website Url"
+msgstr "웹사이트 URL"
+
+#: admin/inc/tours/tf-tours-metabox.php:201
+msgid "Fax Number"
+msgstr "팩스번호"
+
+#: admin/inc/tours/tf-tours-metabox.php:209
+#, fuzzy
+msgid "Tour Extra"
+msgstr "투어 엑스트라"
+
+#: admin/inc/tours/tf-tours-metabox.php:214
+#, fuzzy
+msgid "Extra Services on Tour"
+msgstr "투어 의 추가 서비스"
+
+#: admin/inc/tours/tf-tours-metabox.php:220
+#: admin/inc/tours/tf-tours-metabox.php:498
+#: inc/elementor-addon/widgets/tourfic-search.php:99
+msgid "Title"
+msgstr "제목"
+
+#: admin/inc/tours/tf-tours-metabox.php:248
+msgid "Price Settings"
+msgstr "금액 설정"
+
+#: admin/inc/tours/tf-tours-metabox.php:253
+#, fuzzy
+msgid "Pricing Rule"
+msgstr "가격 규칙"
+
+#: admin/inc/tours/tf-tours-metabox.php:254
+#, fuzzy
+msgid "Input pricing rule"
+msgstr "입력 가격 규칙"
+
+#: admin/inc/tours/tf-tours-metabox.php:257
+msgid "Person"
+msgstr "사람"
+
+#: admin/inc/tours/tf-tours-metabox.php:258
+#, fuzzy
+msgid "Group (Pro)"
+msgstr "그룹 (프로)"
+
+#: admin/inc/tours/tf-tours-metabox.php:265
+#, fuzzy
+msgid "Price for Adult"
+msgstr "성인 가격"
+
+#: admin/inc/tours/tf-tours-metabox.php:266
+#, fuzzy
+msgid "Input adult price"
+msgstr "입력 성인 가격"
+
+#: admin/inc/tours/tf-tours-metabox.php:276
+#, fuzzy
+msgid "Price for Child"
+msgstr "어린이 가격"
+
+#: admin/inc/tours/tf-tours-metabox.php:277
+#, fuzzy
+msgid "Input child price"
+msgstr "입력 자식 가격"
+
+#: admin/inc/tours/tf-tours-metabox.php:286
+#, fuzzy
+msgid "Price for Infant"
+msgstr "유아 가격"
+
+#: admin/inc/tours/tf-tours-metabox.php:287
+#, fuzzy
+msgid "Input infant price"
+msgstr "입력 유아 가격"
+
+#: admin/inc/tours/tf-tours-metabox.php:296
+#, fuzzy
+msgid "Group Price"
+msgstr "그룹 가격"
+
+#: admin/inc/tours/tf-tours-metabox.php:297
+#, fuzzy
+msgid "Input group price"
+msgstr "입력 그룹 가격"
+
+#: admin/inc/tours/tf-tours-metabox.php:305
+msgid "Discount Type"
+msgstr "할인 유형"
+
+#: admin/inc/tours/tf-tours-metabox.php:306
+#, fuzzy
+msgid "Select discount type Percent or Fixed"
+msgstr "할인 유형 백분율 또는 고정"
+
+#: admin/inc/tours/tf-tours-metabox.php:308
+msgid "None"
+msgstr "없음"
+
+#: admin/inc/tours/tf-tours-metabox.php:309
+msgid "Percent"
+msgstr "퍼센트"
+
+#: admin/inc/tours/tf-tours-metabox.php:310
+#: admin/inc/tours/tf-tours-metabox.php:341
+msgid "Fixed"
+msgstr "고정"
+
+#: admin/inc/tours/tf-tours-metabox.php:317
+msgid "Discount Price"
+msgstr "할인가"
+
+#: admin/inc/tours/tf-tours-metabox.php:318
+#, fuzzy
+msgid "Input discount price in number"
+msgstr "입력 할인 가격 수"
+
+#: admin/inc/tours/tf-tours-metabox.php:331
+#: admin/inc/tours/tf-tours-metabox.php:349 templates/single-tourfic.php:135
+msgid "Availability"
+msgstr "예약가용성"
+
+#: admin/inc/tours/tf-tours-metabox.php:336
+msgid "Tour Type"
+msgstr "투어 유형"
+
+#: admin/inc/tours/tf-tours-metabox.php:337
+#, fuzzy
+msgid ""
+"Fixed: Tour will be available on a fixed date. Continous: Tour will be "
+"available every month within the mentioned range."
+msgstr ""
+"고정: 투어는 정해진 날짜에 이용할 수 있습니다. 연속: 투어는 매월 명시된 범위 "
+"내에서 이용할 수 있습니다."
+
+#: admin/inc/tours/tf-tours-metabox.php:340
+#, fuzzy
+msgid "Continuous (Pro)"
+msgstr "연속 (프로)"
+
+#: admin/inc/tours/tf-tours-metabox.php:350
+#, fuzzy
+msgid "Input your availability"
+msgstr "가용성 입력"
+
+#: admin/inc/tours/tf-tours-metabox.php:357
+#: admin/inc/tours/tf-tours-metabox.php:416
+msgid "Check In"
+msgstr "체크인"
+
+#: admin/inc/tours/tf-tours-metabox.php:358
+#, fuzzy
+msgid "Select check in date"
+msgstr "체크인 날짜 선택"
+
+#: admin/inc/tours/tf-tours-metabox.php:367
+#: admin/inc/tours/tf-tours-metabox.php:425
+msgid "Check Out"
+msgstr "퇴근"
+
+#: admin/inc/tours/tf-tours-metabox.php:368
+#, fuzzy
+msgid "Select check out date"
+msgstr "체크아웃 날짜 선택"
+
+#: admin/inc/tours/tf-tours-metabox.php:377
+#, fuzzy
+msgid "Minimum People"
+msgstr "최소 인원"
+
+#: admin/inc/tours/tf-tours-metabox.php:378
+#, fuzzy
+msgid "Minimum seat number"
+msgstr "최소 좌석 번호"
+
+#: admin/inc/tours/tf-tours-metabox.php:383
+#: admin/inc/tours/tf-tours-metabox.php:439
+#, fuzzy
+msgid "Maximum People"
+msgstr "최대 인원"
+
+#: admin/inc/tours/tf-tours-metabox.php:384
+#, fuzzy
+msgid "Maximum seat number"
+msgstr "최대 좌석 번호"
+
+#: admin/inc/tours/tf-tours-metabox.php:393
+msgid "Custom Availability"
+msgstr "업무 시간"
+
+#: admin/inc/tours/tf-tours-metabox.php:398
+#, fuzzy
+msgid "Yes"
+msgstr "예"
+
+#: admin/inc/tours/tf-tours-metabox.php:399
+msgid "No"
+msgstr "아니오"
+
+#: admin/inc/tours/tf-tours-metabox.php:434
+#, fuzzy
+msgid "Min People"
+msgstr "민피플"
+
+#: admin/inc/tours/tf-tours-metabox.php:448
+msgid "Booking"
+msgstr "예약"
+
+#: admin/inc/tours/tf-tours-metabox.php:455
+msgid "Minimum days to book before departure"
+msgstr "시작 전 최소 (설정일) 전까지 예약"
+
+#: admin/inc/tours/tf-tours-metabox.php:456
+#, fuzzy
+msgid ""
+"Customer can not book after this date <a href=\"https://tourfic.com/#purchase"
+"\" target=\"_blank\" style=\"text-decoration: none;\"><strong class=\"tf-pro"
+"\">Pro</strong></a>"
+msgstr ""
+"고객은 이 날짜 Pro 이후에 예약할 수 <a href=\"https://tourfic.com/#purchase"
+"\" target=\"_blank\" style=\"text-decoration: none;\"> <strong class=\"tf-pro"
+"\">없습니다.</strong></a>"
+
+#: admin/inc/tours/tf-tours-metabox.php:481
+#: admin/inc/tours/tf-tours-metabox.php:486
+#, fuzzy
+msgid "Itinerary"
+msgstr "여정"
+
+#: admin/inc/tours/tf-tours-metabox.php:492
+#, fuzzy
+msgid "Time or Day"
+msgstr "시간 또는 일"
+
+#: admin/inc/tours/tf-tours-metabox.php:493
+#, fuzzy
+msgid "You can place the tour plan"
+msgstr "투어 플랜을 배치할 수 있습니다."
+
+#: admin/inc/tours/tf-tours-metabox.php:499
+#, fuzzy
+msgid "Input the title here"
+msgstr "제목 입력 여기"
+
+#: admin/inc/tours/tf-tours-metabox.php:521
+#, fuzzy
+msgid "Exclude/Include"
+msgstr "제외/포함"
+
+#: admin/inc/tours/tf-tours-metabox.php:526
+msgid "Include"
+msgstr "포함"
+
+#: admin/inc/tours/tf-tours-metabox.php:532 templates/single-tf_tours.php:187
+#: templates/tf-tours-single.php:231
+#, fuzzy
+msgid "Included"
+msgstr "포함"
+
+#: admin/inc/tours/tf-tours-metabox.php:533
+#, fuzzy
+msgid "Included facilites"
+msgstr "포함 된 촉진자"
+
+#: admin/inc/tours/tf-tours-metabox.php:540
+msgid "Exclude"
+msgstr "제외"
+
+#: admin/inc/tours/tf-tours-metabox.php:546 templates/single-tf_tours.php:197
+#: templates/tf-tours-single.php:244
+msgid "Excluded"
+msgstr "제외 됨"
+
+#: admin/inc/tours/tf-tours-metabox.php:547
+#, fuzzy
+msgid "Excluded facilites"
+msgstr "제외된 촉진제"
+
+#: admin/inc/tours/tf-tours-metabox.php:570
+#, fuzzy
+msgid "FAQ Description"
+msgstr "FAQ 설명"
+
+#: inc/layouts.php:73 inc/layouts.php:157
+msgid "Book Now"
+msgstr "예약하기"
+
+#: inc/layouts.php:103
+msgid "Featured"
+msgstr "추천"
+
+#: inc/layouts.php:219
+msgid "Customer Rating"
+msgstr "고객 평가"
+
+#: inc/layouts.php:226 templates/review.php:90
+#, fuzzy, php-format
+msgctxt "comments title"
+msgid "Based on %1$s review"
+msgid_plural "Based on %1$s reviews"
+msgstr[0] "%1$s 검토 에 따라"
+
+#: inc/post-type.php:17 inc/post-type.php:46
+#, php-format
+msgctxt "tourfic post type name"
+msgid "%2$s"
+msgstr "%2$s"
+
+#: inc/post-type.php:18 inc/post-type.php:47
+#, php-format
+msgctxt "singular tourfic post type name"
+msgid "%1$s"
+msgstr "%1$s"
+
+#: inc/post-type.php:19 inc/post-type.php:48
+msgid "Add New"
+msgstr "새로 추가"
+
+#: inc/post-type.php:20 inc/post-type.php:49
+#, php-format
+msgid "Add New %1$s"
+msgstr "새 %1$s 추가"
+
+#: inc/post-type.php:21 inc/post-type.php:50
+#, php-format
+msgid "Edit %1$s"
+msgstr "%1$s 편집"
+
+#: inc/post-type.php:22 inc/post-type.php:51
+#, php-format
+msgid "New %1$s"
+msgstr "%1$s 추가"
+
+#: inc/post-type.php:23 inc/post-type.php:52
+#, php-format
+msgid "All %2$s"
+msgstr "모든 %2$s"
+
+#: inc/post-type.php:24 inc/post-type.php:53
+#, php-format
+msgid "View %1$s"
+msgstr "%1$s 보기"
+
+#: inc/post-type.php:25 inc/post-type.php:54
+#, fuzzy, php-format
+msgid "View %2$s"
+msgstr "%2$s 보기"
+
+#: inc/post-type.php:26 inc/post-type.php:55
+#, php-format
+msgid "Search %2$s"
+msgstr "%1$s 검색"
+
+#: inc/post-type.php:27 inc/post-type.php:56
+#, php-format
+msgid "No %2$s found"
+msgstr "%2$s를 찾을 수 없습니다"
+
+#: inc/post-type.php:28 inc/post-type.php:57
+#, php-format
+msgid "No %2$s found in Trash"
+msgstr "%2$s를 휴지통에서 찾을 수 없습니다"
+
+#: inc/post-type.php:30
+msgctxt "tourfic post type menu name"
+msgid "Hotels"
+msgstr "호텔"
+
+#: inc/post-type.php:31 inc/post-type.php:60
+#, php-format
+msgid "%1$s Image"
+msgstr "%1$s 의 이미지"
+
+#: inc/post-type.php:32 inc/post-type.php:61
+#, php-format
+msgid "Set %1$s Image"
+msgstr "%1$s 대표 이미지 설정 "
+
+#: inc/post-type.php:33 inc/post-type.php:62
+#, php-format
+msgid "Remove %1$s Image"
+msgstr "%1$s 대표 이미지 제거"
+
+#: inc/post-type.php:34 inc/post-type.php:63
+#, php-format
+msgid "Use as %1$s Image"
+msgstr "%1$s 이미지 사용"
+
+#: inc/post-type.php:35 inc/post-type.php:64
+#, php-format
+msgid "%1$s Attributes"
+msgstr "%1$s 특성"
+
+#: inc/post-type.php:36 inc/post-type.php:65
+#, php-format
+msgid "Filter %2$s list"
+msgstr "%2$s 목록 필터"
+
+#: inc/post-type.php:37 inc/post-type.php:66
+#, php-format
+msgid "%2$s list navigation"
+msgstr "%2$s 목록 네비게이션"
+
+#: inc/post-type.php:38 inc/post-type.php:67
+#, php-format
+msgid "%2$s list"
+msgstr "%2$s 목록"
+
+#: inc/post-type.php:59
+msgctxt "tourfic post type menu name"
+msgid "Tours"
+msgstr "투어"
+
+#: inc/post-type.php:120
+#, fuzzy
+msgid "Hotel"
+msgstr "호텔"
+
+#: inc/post-type.php:121
+msgid "Hotels"
+msgstr "호텔"
+
+#: inc/post-type.php:128
+msgid "Tour"
+msgstr "투어"
+
+#: inc/post-type.php:129
+msgid "Tours"
+msgstr "투어"
+
+#: inc/post-type.php:178 inc/post-type.php:186
+#, php-format
+msgid "Enter %s name here"
+msgstr "여기에 %s 이름을 입력합니다"
+
+#: inc/post-type.php:199 inc/post-type.php:201 inc/post-type.php:223
+#: inc/post-type.php:294 inc/post-type.php:296 inc/post-type.php:318
+msgid "Destination"
+msgstr "목적지"
+
+#: inc/post-type.php:200 inc/post-type.php:295
+msgid "Destinations"
+msgstr "목적지"
+
+#: inc/post-type.php:202 inc/post-type.php:297
+#, fuzzy
+msgid "All Destination"
+msgstr "모든 목적지"
+
+#: inc/post-type.php:203 inc/post-type.php:298
+#, fuzzy
+msgid "Edit Destinations"
+msgstr "목적지 편집"
+
+#: inc/post-type.php:204 inc/post-type.php:299
+#, fuzzy
+msgid "View Destinations"
+msgstr "목적지 보기"
+
+#: inc/post-type.php:205 inc/post-type.php:300
+#, fuzzy
+msgid "Update Destinations name"
+msgstr "대상 이름 업데이트"
+
+#: inc/post-type.php:206 inc/post-type.php:301
+#, fuzzy
+msgid "Add new Destinations"
+msgstr "새 목적지 추가"
+
+#: inc/post-type.php:207 inc/post-type.php:302
+#, fuzzy
+msgid "New Destinations name"
+msgstr "새 목적지 이름"
+
+#: inc/post-type.php:208 inc/post-type.php:303
+#, fuzzy
+msgid "Parent Destinations"
+msgstr "상위 목적지"
+
+#: inc/post-type.php:209 inc/post-type.php:304
+#, fuzzy
+msgid "Parent Destinations:"
+msgstr "상위 목적지:"
+
+#: inc/post-type.php:210 inc/post-type.php:305
+#, fuzzy
+msgid "Search Destination"
+msgstr "검색 대상"
+
+#: inc/post-type.php:211 inc/post-type.php:306
+#, fuzzy
+msgid "Popular Destination"
+msgstr "인기 있는 여행지"
+
+#: inc/post-type.php:212 inc/post-type.php:307
+#, fuzzy
+msgid "Separate Destination with commas"
+msgstr "쉼표가 있는 별도의 목적지"
+
+#: inc/post-type.php:213 inc/post-type.php:308
+#, fuzzy
+msgid "Add or remove Destination"
+msgstr "대상 추가 또는 제거"
+
+#: inc/post-type.php:214 inc/post-type.php:309
+#, fuzzy
+msgid "Choose from the most used Destination"
+msgstr "가장 많이 사용되는 대상 중에서 선택"
+
+#: inc/post-type.php:215 inc/post-type.php:310
+#, fuzzy
+msgid "No Destination found"
+msgstr "목적지를 찾을 수 없음"
+
+#: inc/post-type.php:216 inc/post-type.php:311
+#, fuzzy
+msgid "No Destination"
+msgstr "목적지 없음"
+
+#: inc/post-type.php:217 inc/post-type.php:312
+#, fuzzy
+msgid "Destination list navigation"
+msgstr "대상 목록 탐색"
+
+#: inc/post-type.php:218 inc/post-type.php:313
+#, fuzzy
+msgid "Destination list"
+msgstr "대상 목록"
+
+#: inc/post-type.php:219 inc/post-type.php:314
+#, fuzzy
+msgid "Back to Destination"
+msgstr "목적지로 돌아가기"
+
+#: inc/post-type.php:245 inc/post-type.php:247 inc/post-type.php:269
+msgid "Filters"
+msgstr "필터"
+
+#: inc/post-type.php:246
+msgid "Filter"
+msgstr "필터"
+
+#: inc/post-type.php:248
+msgid "All Filters"
+msgstr "모든 필터"
+
+#: inc/post-type.php:249
+msgid "Edit Filter"
+msgstr "필터 편집"
+
+#: inc/post-type.php:250
+msgid "View Filter"
+msgstr "필터 보기"
+
+#: inc/post-type.php:251
+#, fuzzy
+msgid "Update Filter name"
+msgstr "필터 이름 업데이트"
+
+#: inc/post-type.php:252
+#, fuzzy
+msgid "Add new Filter"
+msgstr "새 필터 추가"
+
+#: inc/post-type.php:253
+#, fuzzy
+msgid "New Filter name"
+msgstr "새 필터 이름"
+
+#: inc/post-type.php:254
+#, fuzzy
+msgid "Parent Filter"
+msgstr "부모 필터"
+
+#: inc/post-type.php:255
+msgid "Parent Filter:"
+msgstr "상위 필터:"
+
+#: inc/post-type.php:256
+msgid "Search Filters"
+msgstr "필터 검색"
+
+#: inc/post-type.php:257 inc/widgets.php:77 inc/widgets.php:229
+#, fuzzy
+msgid "Popular Filters"
+msgstr "인기 필터"
+
+#: inc/post-type.php:258
+#, fuzzy
+msgid "Separate Filters with commas"
+msgstr "쉼표와 별도의 필터"
+
+#: inc/post-type.php:259
+#, fuzzy
+msgid "Add or remove Filters"
+msgstr "필터 추가 또는 제거"
+
+#: inc/post-type.php:260
+#, fuzzy
+msgid "Choose from the most used Filters"
+msgstr "가장 많이 사용되는 필터 중에서 선택"
+
+#: inc/post-type.php:261
+#, fuzzy
+msgid "No Filters found"
+msgstr "필터를 찾을 수 없음"
+
+#: inc/post-type.php:262
+#, fuzzy
+msgid "No Filters"
+msgstr "필터 없음"
+
+#: inc/post-type.php:263
+#, fuzzy
+msgid "Filters list navigation"
+msgstr "필터 목록 탐색"
+
+#: inc/post-type.php:264
+#, fuzzy
+msgid "Filters list"
+msgstr "필터 목록"
+
+#: inc/post-type.php:265
+#, fuzzy
+msgid "Back to Filters"
+msgstr "필터로 돌아가기"
+
+#: inc/post-type.php:340 inc/post-type.php:342 inc/post-type.php:364
+#, fuzzy
+msgid "Tour Features"
+msgstr "투어 기능"
+
+#: inc/post-type.php:341
+#, fuzzy
+msgid "Tour Feature"
+msgstr "투어 기능"
+
+#: inc/post-type.php:343
+#, fuzzy
+msgid "All Features"
+msgstr "모든 기능"
+
+#: inc/post-type.php:344
+#, fuzzy
+msgid "Edit Feature"
+msgstr "기능 편집"
+
+#: inc/post-type.php:345
+#, fuzzy
+msgid "View Features"
+msgstr "기능 보기"
+
+#: inc/post-type.php:346
+#, fuzzy
+msgid "Update Feature name"
+msgstr "기능 이름 업데이트"
+
+#: inc/post-type.php:347
+#, fuzzy
+msgid "Add new Feature"
+msgstr "새 기능 추가"
+
+#: inc/post-type.php:348
+#, fuzzy
+msgid "New Feature name"
+msgstr "새 기능 이름"
+
+#: inc/post-type.php:349
+#, fuzzy
+msgid "Parent Feature"
+msgstr "상위 기능"
+
+#: inc/post-type.php:350
+#, fuzzy
+msgid "Parent Feature:"
+msgstr "상위 기능:"
+
+#: inc/post-type.php:351
+#, fuzzy
+msgid "Search Features"
+msgstr "검색 기능"
+
+#: inc/post-type.php:353
+#, fuzzy
+msgid "Separate Features with commas"
+msgstr "쉼표와 별도 기능"
+
+#: inc/post-type.php:354
+#, fuzzy
+msgid "Add or remove Features"
+msgstr "기능 추가 또는 제거"
+
+#: inc/post-type.php:355
+#, fuzzy
+msgid "Choose from the most used Features"
+msgstr "가장 많이 사용되는 기능 중에서 선택"
+
+#: inc/post-type.php:356
+#, fuzzy
+msgid "No Features found"
+msgstr "발견된 기능 없음"
+
+#: inc/post-type.php:357
+#, fuzzy
+msgid "No Features"
+msgstr "기능 없음"
+
+#: inc/post-type.php:358
+#, fuzzy
+msgid "Features list navigation"
+msgstr "기능 목록 탐색"
+
+#: inc/post-type.php:359
+msgid "Features list"
+msgstr "기능 목록"
+
+#: inc/post-type.php:360
+#, fuzzy
+msgid "Back to Features"
+msgstr "기능으로 돌아가기"
+
+#: inc/shortcodes.php:60 inc/shortcodes.php:135
+#, fuzzy, php-format
+msgid "%s properties"
+msgstr "%s 속성"
+
+#: inc/tourfic-functions.php:90 inc/tourfic-functions.php:1180
+#, fuzzy
+msgid "Submit"
+msgstr "제출"
+
+#: inc/tourfic-functions.php:91
+msgid "Write a Review"
+msgstr "리뷰 쓰기"
+
+#: inc/tourfic-functions.php:92
+msgid "Reply"
+msgstr "답글"
+
+#: inc/tourfic-functions.php:680
+msgid "Price per night"
+msgstr "가격"
+
+#: inc/tourfic-functions.php:751 inc/tourfic-functions.php:780
+#, fuzzy
+msgid "Destination Image"
+msgstr "대상 이미지"
+
+#: inc/tourfic-functions.php:755 inc/tourfic-functions.php:791
+#: inc/tourfic-functions.php:947
+msgid "Add Image"
+msgstr "이미지 추가"
+
+#: inc/tourfic-functions.php:756 inc/tourfic-functions.php:792
+#: inc/tourfic-functions.php:948
+msgid "Remove Image"
+msgstr "이미지 제거"
+
+#: inc/tourfic-functions.php:909
+msgid "Icon"
+msgstr "아이콘"
+
+#: inc/tourfic-functions.php:913
+msgid "Add Icon"
+msgstr "아이콘 추가"
+
+#: inc/tourfic-functions.php:914
+msgid "Remove Icon"
+msgstr "아이콘 제거"
+
+#: inc/tourfic-functions.php:936
+msgid "Image"
+msgstr "이미지"
+
+#: inc/tourfic-functions.php:975
+msgid "Insert"
+msgstr "삽입"
+
+#: inc/tourfic-functions.php:1126
+#, fuzzy
+msgid "TOURFIC: Single Tour Sidebar"
+msgstr "투어픽: 싱글 투어 사이드바"
+
+#: inc/tourfic-functions.php:1128
+#, fuzzy
+msgid "Widgets in this area will be shown on tourfic single page"
+msgstr "이 지역의 위젯은 tourfic 단일 페이지에 표시됩니다."
+
+#: inc/tourfic-functions.php:1135
+#, fuzzy
+msgid "TOURFIC: Archive Sidebar"
+msgstr "투어픽: 아카이브 사이드바"
+
+#: inc/tourfic-functions.php:1137
+#, fuzzy
+msgid "Widgets in this area will be shown on tourfic archive/search page"
+msgstr "이 지역의 위젯은 tourfic 아카이브 /검색 페이지에 표시됩니다"
+
+#: inc/tourfic-functions.php:1167
+#, fuzzy
+msgid "Submit your question"
+msgstr "질문 제출"
+
+#: inc/tourfic-functions.php:1170
+msgid "Your Name"
+msgstr "이름"
+
+#: inc/tourfic-functions.php:1173
+msgid "Your email"
+msgstr "이메일"
+
+#: inc/tourfic-functions.php:1176
+#, fuzzy
+msgid "Your Question"
+msgstr "귀하의 질문"
+
+#: inc/tourfic-functions.php:1179
+msgid "Reset"
+msgstr "초기화"
+
+#: inc/tourfic-functions.php:1199
+#, fuzzy
+msgid "Security error! Reload the page and try again."
+msgstr "보안 오류! 페이지를 다시 로드하고 다시 시도합니다."
+
+#: inc/tourfic-functions.php:1223
+#, fuzzy, php-format
+msgid "Someone asked question on: %s"
+msgstr "누군가가 질문 : %s"
+
+#: inc/tourfic-functions.php:1231
+#, fuzzy
+msgid "Your question has been sent!"
+msgstr "질문이 전송되었습니다!"
+
+#: inc/tourfic-functions.php:1234
+#, fuzzy
+msgid "Message sent failed!"
+msgstr "보낸 메시지는 실패했습니다!"
+
+#: inc/tourfic-functions.php:1487
+msgid "From"
+msgstr "발신자"
+
+#: inc/tourfic-functions.php:1489
+msgid "To"
+msgstr "수신"
+
+#: inc/widgets.php:15
+#, fuzzy
+msgid "Filter Tourfic tour on archive."
+msgstr "아카이브에 대한 필터 투르픽 투어."
+
+#: inc/widgets.php:85 inc/widgets.php:237 inc/widgets.php:373
+#: inc/widgets.php:568
+msgid "Title:"
+msgstr "제목:"
+
+#: inc/widgets.php:166
+#, fuzzy
+msgid "Filter Tourfic tour on archive with features."
+msgstr "아카이브에서 투어픽 투어를 필터링합니다."
+
+#: inc/widgets.php:317
+#, fuzzy
+msgid "Show more tours button on single tour page."
+msgstr "단일 투어 페이지에서 더 많은 투어 버튼을 표시합니다."
+
+#: inc/widgets.php:332 inc/widgets.php:370
+#, fuzzy
+msgid "Show more hotels"
+msgstr "더 많은 호텔 보기"
+
+#: inc/widgets.php:369
+#, fuzzy
+msgid "Not impressive?"
+msgstr "인상적이지 않습니까?"
+
+#: inc/widgets.php:377 inc/widgets.php:466 inc/widgets.php:576
+msgid "Button Label"
+msgstr "버튼 이름"
+
+#: inc/widgets.php:417
+#, fuzzy
+msgid "Show On Map tours button on single tour page."
+msgstr "단일 투어 페이지에서 지도 투어 버튼을 표시합니다."
+
+#: inc/widgets.php:463 templates/single-tourfic.php:62
+#, fuzzy
+msgid "Show on map"
+msgstr "지도에 표시"
+
+#: inc/widgets.php:505
+#, fuzzy
+msgid "Ask a question button on single tour page."
+msgstr "단일 투어 페이지에서 질문 버튼을 질문합니다."
+
+#: inc/widgets.php:520 inc/widgets.php:564
+#, fuzzy
+msgid "Find more info in the FAQ section."
+msgstr "FAQ 섹션에서 자세한 정보를 확인하세요."
+
+#: inc/widgets.php:521 inc/widgets.php:565
+msgid "Ask a question"
+msgstr "질문하기"
+
+#: inc/widgets.php:563
+#, fuzzy
+msgid "Got a question?"
+msgstr "질문이 있어?"
+
+#: inc/widgets.php:572 inc/elementor-addon/widgets/tourfic-search.php:110
+msgid "Subtitle"
+msgstr "부제목"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:47
+#: inc/booking/tf-woocommerce-tours-class.php:97
+#, fuzzy
+msgid "Check-in date missing."
+msgstr "체크인 날짜가 누락되었습니다."
+
+#: inc/booking/tf-woocommerce-hotel-class.php:50
+#: inc/booking/tf-woocommerce-tours-class.php:100
+#, fuzzy
+msgid "Check-out date missing."
+msgstr "체크아웃 날짜가 누락되었습니다."
+
+#: inc/booking/tf-woocommerce-hotel-class.php:53
+#: inc/booking/tf-woocommerce-tours-class.php:103
+#, fuzzy
+msgid "Select Adult(s)."
+msgstr "성인을 선택합니다."
+
+#: inc/booking/tf-woocommerce-hotel-class.php:56
+#, fuzzy
+msgid "Select Room(s)."
+msgstr "룸을 선택합니다."
+
+#: inc/booking/tf-woocommerce-hotel-class.php:59
+#: inc/booking/tf-woocommerce-tours-class.php:106
+#, fuzzy
+msgid "Unknown Error! Please try again."
+msgstr "알 수없는 오류! 다시 시도하십시오."
+
+#: inc/booking/tf-woocommerce-hotel-class.php:171
+#: inc/booking/tf-woocommerce-hotel-class.php:222
+#: templates/single-tourfic.php:141
+msgid "Room Type"
+msgstr "객실 유형"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:178
+#: inc/booking/tf-woocommerce-hotel-class.php:227
+#, fuzzy
+msgid "Room Selected"
+msgstr "룸 선택"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:185
+#: inc/booking/tf-woocommerce-hotel-class.php:232
+#: inc/booking/tf-woocommerce-tours-class.php:236
+#: inc/booking/tf-woocommerce-tours-class.php:279
+msgid "Adults"
+msgstr "성인"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:192
+#: inc/booking/tf-woocommerce-hotel-class.php:237
+#: inc/booking/tf-woocommerce-tours-class.php:243
+#: inc/booking/tf-woocommerce-tours-class.php:284
+msgid "Children"
+msgstr "어린이"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:199
+#: inc/booking/tf-woocommerce-hotel-class.php:242
+msgid "Check-in Date"
+msgstr "체크인 날짜"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:206
+#: inc/booking/tf-woocommerce-hotel-class.php:247
+msgid "Check-out Date"
+msgstr "예약 종료일"
+
+#: inc/booking/tf-woocommerce-tours-class.php:54
+#, fuzzy
+msgid "You must select minimum "
+msgstr "최소를 선택해야 합니다. "
+
+#: inc/booking/tf-woocommerce-tours-class.php:57
+#: inc/booking/tf-woocommerce-tours-class.php:78
+#, fuzzy
+msgid "Maximum "
+msgstr "최대 "
+
+#: inc/booking/tf-woocommerce-tours-class.php:76
+#: inc/booking/tf-woocommerce-tours-class.php:94
+#, fuzzy
+msgid "Minimum "
+msgstr "최소 "
+
+#: inc/booking/tf-woocommerce-tours-class.php:250
+msgid "Infant"
+msgstr "유아"
+
+#: inc/booking/tf-woocommerce-tours-class.php:257
+#: inc/booking/tf-woocommerce-tours-class.php:292
+msgid "Departure Date"
+msgstr "출발 날짜"
+
+#: inc/booking/tf-woocommerce-tours-class.php:264
+#, fuzzy
+msgid "Tour Extra: "
+msgstr "투어 추가: "
+
+#: inc/booking/tf-woocommerce-tours-class.php:288
+#, fuzzy
+msgid "Infants"
+msgstr "유아"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:37
+#, fuzzy
+msgid "Tourfic Destination"
+msgstr "투르픽 목적지"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:91
+#: inc/elementor-addon/widgets/tourfic-search.php:125
+msgid "Style"
+msgstr "스타일"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:102
+#, fuzzy
+msgid "Destination Title Typography"
+msgstr "대상 제목 타이포그래피"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:110
+#, fuzzy
+msgid "Destination title Color"
+msgstr "대상 제목 색상"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:126
+#, fuzzy
+msgid "Destination Title Hover Color"
+msgstr "대상 제목 호버 색상"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:145
+#, fuzzy
+msgid "Destination Subitle Typography"
+msgstr "대상 수막 타이포그래피"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:153
+#, fuzzy
+msgid "Destination Subtitle Color"
+msgstr "대상 자막 색상"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:169
+#, fuzzy
+msgid "Destination Subtitle Hover Color"
+msgstr "대상 자막 호버 색상"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:187
+#, fuzzy
+msgid "Info Background"
+msgstr "정보 배경"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:197
+#: inc/elementor-addon/widgets/tourfic-destination.php:214
+msgid "Background Color"
+msgstr "배경 색상"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:205
+#, fuzzy
+msgid "Info Hover Background"
+msgstr "정보 호버 배경"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:37
+#, fuzzy
+msgid "Tourfic search"
+msgstr "투르픽 검색"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:91
+msgid "Content"
+msgstr "내용"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:101
+msgid "Default title"
+msgstr "기본 제목"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:102
+msgid "Type your title here"
+msgstr "여기에 제목을 입력하세요"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:112
+#, fuzzy
+msgid "Default description"
+msgstr "기본 설명"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:113
+msgid "Type your description here"
+msgstr "여기에 설명을 입력합니다."
+
+#: inc/elementor-addon/widgets/tourfic-search.php:134
+msgid "Title Typography"
+msgstr "제목 타이포그래피"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:141
+msgid "Title Color"
+msgstr "제목 색상"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:164
+msgid "Subtitle Typography"
+msgstr "자막 타이포그래피"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:172
+msgid "Subtitle Color"
+msgstr "부제목 색상"
+
+#: inc/elementor-addon/widgets/tourfic-tours.php:37
+#, fuzzy
+msgid "Tourfic slider"
+msgstr "투르픽 슬라이더"
+
+#: templates/review.php:107 templates/review.php:132
+#, fuzzy
+msgid "Comments Navigation"
+msgstr "댓글 탐색"
+
+#: templates/single-tf_tours.php:79
+#, fuzzy
+msgid "Tour Videos"
+msgstr "투어 동영상"
+
+#: templates/single-tf_tours.php:109
+msgid "reviews"
+msgstr "리뷰"
+
+#: templates/single-tf_tours.php:127 templates/tf-tours-single.php:106
+msgid "Duration"
+msgstr "기간"
+
+#: templates/single-tf_tours.php:132 templates/tf-tours-single.php:117
+msgid "Max People"
+msgstr "최대 인원"
+
+#: templates/single-tf_tours.php:142 templates/tf-tours-single.php:139
+msgid "Language"
+msgstr "언어"
+
+#: templates/single-tf_tours.php:157
+msgid "Overview"
+msgstr "개요"
+
+#: templates/single-tf_tours.php:219 templates/tf-tours-single.php:272
+#, fuzzy
+msgid "Travel Itinerary"
+msgstr "여행 일정"
+
+#: templates/single-tf_tours.php:266 templates/tf-tours-single.php:326
+#, fuzzy
+msgid "Frequently asked questions?"
+msgstr "자주 묻는 질문?"
+
+#: templates/single-tf_tours.php:297 templates/tf-tours-single.php:368
+msgid "You might also like"
+msgstr "추천"
+
+#: templates/single-tf_tours.php:298 templates/tf-tours-single.php:369
+#, fuzzy
+msgid ""
+"Travel is my life. Since 1999, I’ve been traveling around the world "
+"nonstop.\n"
+"\t\t\t\t\t\t\tIf you also love travel, you’re in the right place!\n"
+"\t\t\t\t\t\t\t"
+msgstr ""
+"여행은 내 인생이다. 1999년부터 저는 전 세계를 논스톱으로 여행해 왔습니다.\n"
+"\t\t\t\t\t\t\t여행을 좋아한다면, 당신은 올바른 장소에 있습니다!\n"
+"\t\t\t\t\t\t\t"
+
+#: templates/single-tf_tours.php:353
+msgid "Customer Reviews"
+msgstr "고객 리뷰"
+
+#: templates/single-tf_tours.php:354
+#, fuzzy
+msgid "Reviews given by our customers."
+msgstr "고객에 의해 주어진 리뷰."
+
+#: templates/single-tourfic.php:40
+msgid "Share on Facebook"
+msgstr "페이스북 공유"
+
+#: templates/single-tourfic.php:45
+msgid "Share on Twitter"
+msgstr "트위터 공유"
+
+#: templates/single-tourfic.php:50
+#, fuzzy
+msgid "Share this link"
+msgstr "이 링크 공유"
+
+#: templates/single-tourfic.php:53
+msgid "Copy link"
+msgstr "링크 복사"
+
+#: templates/single-tourfic.php:54
+msgid "Copied!"
+msgstr "복사됨!"
+
+#: templates/single-tourfic.php:65
+msgid "Reserve"
+msgstr "보류"
+
+#: templates/single-tourfic.php:103
+msgid "Listing Description"
+msgstr "캠페인 설명"
+
+#: templates/single-tourfic.php:113 templates/tf-tours-single.php:193
+msgid "Features"
+msgstr "특징"
+
+#: templates/single-tourfic.php:143
+msgid "Total Price"
+msgstr "합계"
+
+#: templates/single-tourfic.php:144
+#, fuzzy
+msgid "Select Rooms"
+msgstr "객실 선택"
+
+#: templates/single-tourfic.php:238
+msgid "Reviews"
+msgstr "리뷰"
+
+#: templates/tf-tours-single.php:173
+msgid "Tour Description"
+msgstr "콘텐츠 설명"
+
+#: templates/tf-tours-single.php:430
+#, fuzzy
+msgid "Customer Review"
+msgstr "고객 검토"
+
+#: templates/tf-tours-single.php:496
+msgid "Terms and Conditions"
+msgstr "이용약관"
