@@ -1,0 +1,1804 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-17 11:04+0600\n"
+"PO-Revision-Date: 2022-01-17 21:30+0600\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hi_IN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: tourfic.php:417
+msgid "Tourfic requires WooCommerce to be activated "
+msgstr "टूफिक को सक्रिय होने के लिए वूकॉमर्स की आवश्यकता होती है "
+
+#: admin/framework/settings.php:11
+#, fuzzy
+msgid "Tourfic"
+msgstr "टूफ्इक"
+
+#: admin/framework/settings.php:13
+#, fuzzy
+msgid ""
+"Tourfic Settings <small><a href=\"https://themefic.com/\">By THEMEFIC</a></"
+"small>"
+msgstr ""
+"<small> <a href=\"https://themefic.com/\">थीईफिक द्वारा</a> टूफिक सेटिंग्स</small>"
+
+#: admin/framework/settings.php:14
+#, fuzzy
+msgid ""
+"Enjoyed Tourfic? Please leave us a <a target=\"_blank\" href=\"https://"
+"wordpress.org/support/plugin/tourfic/reviews/#new-post\">★★★★★</a> rating. "
+"We really appreciate your support!"
+msgstr ""
+"टूम्फिक का आनंद लिया? कृपया हमें <a target=\"_blank\" href=\"https://wordpress.org/"
+"support/plugin/tourfic/reviews/#new-post\">★★★★★</a> रेटिंग छोड़ दें । हम वास्तव में "
+"आपके समर्थन की सराहना करते हैं!"
+
+#: admin/framework/settings.php:26 admin/inc/tours/tf-tours-metabox.php:23
+msgid "General"
+msgstr "सामान्य"
+
+#: admin/framework/settings.php:32
+msgid "Input slug of Hotel"
+msgstr "होटल के इनपुट स्लग"
+
+#: admin/framework/settings.php:33
+#, fuzzy
+msgid ""
+"Default is: <code>tourfic</code> - <strong>Save 2 times if you change this "
+"field for permalink flush</strong>"
+msgstr ""
+"डिफ़ॉल्ट है: <code>tourfic</code> - <strong>यदि आप पर्मालिंक फ्लश के लिए इस फ़ील्ड को "
+"बदलते हैं तो 2 बार बचाएं</strong>"
+
+#: admin/framework/settings.php:38
+msgid "Input slug of Tour"
+msgstr "टूर के इनपुट स्लग"
+
+#: admin/framework/settings.php:39
+#, fuzzy
+msgid ""
+"Default is: <code>tour</code> - <strong>Save 2 times if you change this "
+"field for permalink flush</strong>"
+msgstr ""
+"डिफ़ॉल्ट है: <code>tour</code> - <strong>यदि आप पर्मालिंक फ्लश के लिए इस फ़ील्ड को "
+"बदलते हैं तो 2 बार बचाएं</strong>"
+
+#: admin/framework/settings.php:46
+msgid "Select Single Page Template"
+msgstr "सिंगल पेज टेम्पलेट चुनें"
+
+#: admin/framework/settings.php:47
+#, fuzzy
+msgid "You can choose signle tour page layout from here"
+msgstr "आप यहां से साइनल टूर पेज लेआउट चुन सकते हैं"
+
+#: admin/framework/settings.php:62 inc/layouts.php:275 inc/layouts.php:404
+#: inc/tourfic-functions.php:1399 inc/tourfic-functions.php:1526
+#, fuzzy
+msgid "Search"
+msgstr "ढूँढ"
+
+#: admin/framework/settings.php:72
+msgid "Select Search Result Page"
+msgstr "खोज परिणाम पेज का चयन करें"
+
+#: admin/framework/settings.php:73
+#, fuzzy
+msgid "Page template: <code>Tourfic - Search Result</code> must be selected"
+msgstr "पेज टेम्पलेट: <code>Tourfic - Search Result</code> चुना जाना चाहिए"
+
+#: admin/framework/settings.php:80
+#, fuzzy
+msgid "Search Result Relation"
+msgstr "सर्च रिजल्ट रिलेशन"
+
+#: admin/framework/settings.php:81
+#, fuzzy
+msgid ""
+"Search result relation with search widget and filters. OR means matched any "
+"query, AND means matched all query."
+msgstr ""
+"खोज विजेट और फिल्टर के साथ परिणाम संबंध खोजें। या किसी भी प्रश्न मिलान का मतलब है, और "
+"सभी क्वेरी मिलान का मतलब है ।"
+
+#: admin/framework/settings.php:94
+#, fuzzy
+msgid "Filters Relation"
+msgstr "फिल्टर रिलेशन"
+
+#: admin/framework/settings.php:95
+#, fuzzy
+msgid ""
+"Search result Filters relation with among filters. OR means matched any "
+"filter, AND means matched all filter."
+msgstr ""
+"फ़िल्टर के बीच के साथ खोज परिणाम फ़िल्टर संबंध। या किसी भी फिल्टर मिलान का मतलब है, और "
+"सभी फिल्टर मिलान का मतलब है ।"
+
+#: admin/framework/settings.php:118
+msgid "Custom CSS"
+msgstr "कस्टम सीएसएस"
+
+#: admin/inc/tf-custom-fields.php:38
+#, fuzzy
+msgid "Tourfic Options"
+msgstr "टूफिक विकल्प"
+
+#: admin/inc/tf-custom-fields.php:183 admin/inc/tf-custom-fields.php:255
+#: templates/single-tf_tours.php:168 templates/single-tourfic.php:93
+#: templates/tf-tours-single.php:163
+#, fuzzy
+msgid "Highlights"
+msgstr "मुख्य आकर्षण"
+
+#: admin/inc/tf-custom-fields.php:184
+#, fuzzy
+msgid "Rooms"
+msgstr "कमरे"
+
+#: admin/inc/tf-custom-fields.php:185 admin/inc/tf-custom-fields.php:217
+msgid "Gallery"
+msgstr "गेलरी"
+
+#: admin/inc/tf-custom-fields.php:186 admin/inc/tours/tf-tours-metabox.php:89
+msgid "Location"
+msgstr "स्थान"
+
+#: admin/inc/tf-custom-fields.php:187 admin/inc/tours/tf-tours-metabox.php:555
+#: admin/inc/tours/tf-tours-metabox.php:560 templates/single-tourfic.php:208
+msgid "FAQs"
+msgstr "अक्सर पूछे जाने वाले प्रश्न"
+
+#: admin/inc/tf-custom-fields.php:188 admin/inc/tours/tf-tours-metabox.php:578
+#: admin/inc/tours/tf-tours-metabox.php:583
+#, fuzzy
+msgid "Terms & Conditions"
+msgstr "नियम और शर्तें"
+
+#: admin/inc/tf-custom-fields.php:195
+#, fuzzy
+msgid "Room Options"
+msgstr "कमरे के विकल्प"
+
+#: admin/inc/tf-custom-fields.php:209
+#, fuzzy
+msgid "Add Room"
+msgstr "कमरे जोड़ें"
+
+#: admin/inc/tf-custom-fields.php:235
+#, fuzzy
+msgid "Add Gallery Images"
+msgstr "गैलरी छवियां जोड़ें"
+
+#: admin/inc/tf-custom-fields.php:242
+#, fuzzy
+msgid "Location Options"
+msgstr "स्थान विकल्प"
+
+#: admin/inc/tf-custom-fields.php:246
+#, fuzzy
+msgid "Formatted Location"
+msgstr "स्वरूपित स्थान"
+
+#: admin/inc/tf-custom-fields.php:275 inc/post-type.php:352
+#, fuzzy
+msgid "Popular Features"
+msgstr "लोकप्रिय विशेषताएं"
+
+#: admin/inc/tf-custom-fields.php:276
+#, fuzzy
+msgid "Select Popular Features for Filters"
+msgstr "फ़िल्टर के लिए लोकप्रिय सुविधाओं का चयन करें"
+
+#: admin/inc/tf-custom-fields.php:295
+#, fuzzy
+msgid "Toggle selection"
+msgstr "टॉगल चयन"
+
+#: admin/inc/tf-custom-fields.php:310
+#, fuzzy
+msgid "Frequently Asked Questions"
+msgstr "अक्सर पूछे जाने वाले प्रश्न"
+
+#: admin/inc/tf-custom-fields.php:324
+#, fuzzy
+msgid "Add FAQ"
+msgstr "एफएक्यू जोड़ें"
+
+#: admin/inc/tf-custom-fields.php:328
+#, fuzzy
+msgid "Ask Questions"
+msgstr "प्रश्न पूछें"
+
+#: admin/inc/tf-custom-fields.php:332
+#, fuzzy
+msgid "Send email to"
+msgstr "ईमेल भेजें"
+
+#: admin/inc/tf-custom-fields.php:335
+#, fuzzy
+msgid "abc@xyz.com"
+msgstr "abc@xyz.com"
+
+#: admin/inc/tf-custom-fields.php:336
+#, fuzzy
+msgid "Site admin email."
+msgstr "साइट व्यवस्थापक ईमेल।"
+
+#: admin/inc/tf-custom-fields.php:336
+#, fuzzy
+msgid "Author email of this post."
+msgstr "लेखक इस पोस्ट के ईमेल."
+
+#: admin/inc/tf-custom-fields.php:341
+#, fuzzy
+msgid "Add Terms & Conditions"
+msgstr "नियम और शर्तें जोड़ें"
+
+#: admin/inc/tf-field-functions.php:35
+#, fuzzy
+msgid "# Room Title"
+msgstr "# कमरे का शीर्षक"
+
+#: admin/inc/tf-field-functions.php:56
+#, fuzzy
+msgid "Room Name"
+msgstr "कमरे का नाम"
+
+#: admin/inc/tf-field-functions.php:63 admin/inc/tours/tf-tours-metabox.php:228
+msgid "Short Description"
+msgstr "संक्षिप्त वर्णन "
+
+#: admin/inc/tf-field-functions.php:70 templates/single-tourfic.php:161
+#, fuzzy
+msgid "Room Features"
+msgstr "कमरे की विशेषताएं"
+
+#: admin/inc/tf-field-functions.php:74
+#, fuzzy
+msgid "[tf_list icon=\"fa-wifi\" text=\"Free Wifi\"]"
+msgstr "[tf_list आइकन = \"फा-वाईफाई\" पाठ = \"फ्री वाईफाई\"]"
+
+#: admin/inc/tf-field-functions.php:81 admin/inc/tours/tf-tours-metabox.php:236
+#: templates/single-tf_tours.php:98 templates/tf-tours-single.php:76
+msgid "Price"
+msgstr "मूल्य"
+
+#: admin/inc/tf-field-functions.php:89
+#, fuzzy
+msgid "Sale Price"
+msgstr "बिक्री मूल्य"
+
+#: admin/inc/tf-field-functions.php:98 templates/single-tourfic.php:142
+#, fuzzy
+msgid "Pax"
+msgstr "शांति"
+
+#: admin/inc/tf-field-functions.php:139
+#, fuzzy
+msgid "# FAQ Title"
+msgstr "# एफएक्यू शीर्षक"
+
+#: admin/inc/tf-field-functions.php:159
+#: admin/inc/tours/tf-tours-metabox.php:565
+#, fuzzy
+msgid "FAQ Title"
+msgstr "एफएक्यू शीर्षक"
+
+#: admin/inc/tf-field-functions.php:166
+#: admin/inc/tours/tf-tours-metabox.php:513
+msgid "Description"
+msgstr "विवरण"
+
+#: admin/inc/tours/tf-tours-metabox.php:14
+#, fuzzy
+msgid "Tours Setting"
+msgstr "पर्यटन सेटिंग"
+
+#: admin/inc/tours/tf-tours-metabox.php:30
+#, fuzzy
+msgid "Set this tour as featured"
+msgstr "इस दौरे को विशेष रुप से प्रदर्शित के रूप में सेट करें"
+
+#: admin/inc/tours/tf-tours-metabox.php:31
+#, fuzzy
+msgid "Tour will be shown under featured sections"
+msgstr "टूर विशेष रुप से प्रदर्शित वर्गों के तहत दिखाया जाएगा"
+
+#: admin/inc/tours/tf-tours-metabox.php:46
+#, fuzzy
+msgid "Single Tour Page Layout"
+msgstr "सिंगल टूर पेज लेआउट"
+
+#: admin/inc/tours/tf-tours-metabox.php:48
+#, fuzzy
+msgid "Default"
+msgstr "चूक"
+
+#: admin/inc/tours/tf-tours-metabox.php:60
+#, fuzzy
+msgid "Add features"
+msgstr "सुविधाओं को जोड़ें"
+
+#: admin/inc/tours/tf-tours-metabox.php:61
+#, fuzzy
+msgid "Tour features"
+msgstr "टूर फीचर्स"
+
+#: admin/inc/tours/tf-tours-metabox.php:66 templates/single-tf_tours.php:84
+#, fuzzy
+msgid "Tour Gallery"
+msgstr "टूर गैलरी"
+
+#: admin/inc/tours/tf-tours-metabox.php:72
+#, fuzzy
+msgid "Hero Section Title"
+msgstr "हीरो सेक्शन टाइटल"
+
+#: admin/inc/tours/tf-tours-metabox.php:77
+#, fuzzy
+msgid "Tour Video"
+msgstr "टूर वीडियो"
+
+#: admin/inc/tours/tf-tours-metabox.php:78
+#, fuzzy
+msgid ""
+"<a href=\"https://tourfic.com/#purchase\" target=\"_blank\" style=\"text-"
+"decoration: none;\"><a href=\"https://tourfic.com/#purchase\" target=\"_blank"
+"\" style=\"text-decoration: none;\"><strong class=\"tf-pro\">Pro</strong></"
+"a></a>"
+msgstr ""
+"<a href=\"https://tourfic.com/#purchase\" target=\"_blank\" style=\"text-"
+"decoration: none;\"><a href=\"https://tourfic.com/#purchase\" target=\"_blank"
+"\" style=\"text-decoration: none;\"><strong class=\"tf-pro\">प्रो</strong></"
+"a></a>"
+
+#: admin/inc/tours/tf-tours-metabox.php:95
+#, fuzzy
+msgid "Tour Location"
+msgstr "टूर स्थान"
+
+#: admin/inc/tours/tf-tours-metabox.php:96
+#, fuzzy
+msgid "Manually enter your tour location"
+msgstr "मैन्युअल रूप से अपना टूर स्थान दर्ज करें"
+
+#: admin/inc/tours/tf-tours-metabox.php:102
+#, fuzzy
+msgid "Tour Location Pro (Auto Suggestion)"
+msgstr "टूर लोकेशन प्रो (ऑटो सुझाव)"
+
+#: admin/inc/tours/tf-tours-metabox.php:103
+#, fuzzy
+msgid ""
+"Location suggestions will be provided from Google <a href=\"https://tourfic."
+"com/#purchase\" target=\"_blank\" style=\"text-decoration: none;\"><strong "
+"class=\"tf-pro\">Pro</strong></a>"
+msgstr ""
+"स्थान सुझाव Google Pro से प्रदान किए जाएंगे <a href=\"https://tourfic.com/#purchase"
+"\" target=\"_blank\" style=\"text-decoration: none;\"> <strong class=\"tf-pro"
+"\"></strong></a>"
+
+#: admin/inc/tours/tf-tours-metabox.php:123
+#, fuzzy
+msgid "Hightlights"
+msgstr "हाईटलाइट्स"
+
+#: admin/inc/tours/tf-tours-metabox.php:129
+#, fuzzy
+msgid "Tour Hightlights"
+msgstr "टूर हाईटलाइट्स"
+
+#: admin/inc/tours/tf-tours-metabox.php:130
+#, fuzzy
+msgid "Enter a summary or full description of your tour"
+msgstr "अपने दौरे का सारांश या पूर्ण विवरण दर्ज करें"
+
+#: admin/inc/tours/tf-tours-metabox.php:138
+#, fuzzy
+msgid "Information"
+msgstr "सूचना"
+
+#: admin/inc/tours/tf-tours-metabox.php:144
+#, fuzzy
+msgid "Tour Duration"
+msgstr "टूर अवधि"
+
+#: admin/inc/tours/tf-tours-metabox.php:145
+#, fuzzy
+msgid "E.g. 3 days"
+msgstr "उदाहरण के लिए 3 दिन"
+
+#: admin/inc/tours/tf-tours-metabox.php:150 templates/single-tf_tours.php:137
+#: templates/tf-tours-single.php:128
+#, fuzzy
+msgid "Group Size"
+msgstr "समूह आकार"
+
+#: admin/inc/tours/tf-tours-metabox.php:151
+#, fuzzy
+msgid "E.g. 10 people"
+msgstr "जैसे 10 लोग"
+
+#: admin/inc/tours/tf-tours-metabox.php:156
+msgid "Languages"
+msgstr "बोली"
+
+#: admin/inc/tours/tf-tours-metabox.php:157
+#, fuzzy
+msgid "Input languages seperated by comma(,)"
+msgstr "अल्पविराम द्वारा अलग की गई इनपुट भाषाएं (,)"
+
+#: admin/inc/tours/tf-tours-metabox.php:162
+#, fuzzy
+msgid "Minimum Person"
+msgstr "न्यूनतम व्यक्ति"
+
+#: admin/inc/tours/tf-tours-metabox.php:163
+#, fuzzy
+msgid "Minimum person to travel"
+msgstr "यात्रा करने के लिए न्यूनतम व्यक्ति"
+
+#: admin/inc/tours/tf-tours-metabox.php:168
+#, fuzzy
+msgid "Maximum Person"
+msgstr "अधिकतम व्यक्ति"
+
+#: admin/inc/tours/tf-tours-metabox.php:169
+#, fuzzy
+msgid "Maximum person to travel"
+msgstr "यात्रा करने के लिए अधिकतम व्यक्ति"
+
+#: admin/inc/tours/tf-tours-metabox.php:177
+msgid "Contact Info"
+msgstr "संपर्क जानकारी"
+
+#: admin/inc/tours/tf-tours-metabox.php:183
+msgid "Email Address"
+msgstr "ईमेल पता"
+
+#: admin/inc/tours/tf-tours-metabox.php:184
+#: admin/inc/tours/tf-tours-metabox.php:190
+#: admin/inc/tours/tf-tours-metabox.php:196
+#: admin/inc/tours/tf-tours-metabox.php:202
+#: admin/inc/tours/tf-tours-metabox.php:215
+#: admin/inc/tours/tf-tours-metabox.php:394
+#: admin/inc/tours/tf-tours-metabox.php:406
+#, fuzzy
+msgid ""
+"<a href=\"https://tourfic.com/#purchase\" target=\"_blank\" style=\"text-"
+"decoration: none;\"><strong class=\"tf-pro\">Pro</strong></a>"
+msgstr ""
+"<a href=\"https://tourfic.com/#purchase\" target=\"_blank\" style=\"text-"
+"decoration: none;\"><strong class=\"tf-pro\">प्रो</strong></a>"
+
+#: admin/inc/tours/tf-tours-metabox.php:189
+msgid "Phone Number"
+msgstr "फ़ोन नंबर"
+
+#: admin/inc/tours/tf-tours-metabox.php:195
+#, fuzzy
+msgid "Website Url"
+msgstr "वेबसाइट यूआरएल"
+
+#: admin/inc/tours/tf-tours-metabox.php:201
+#, fuzzy
+msgid "Fax Number"
+msgstr "फैक्स नंबर"
+
+#: admin/inc/tours/tf-tours-metabox.php:209
+#, fuzzy
+msgid "Tour Extra"
+msgstr "टूर अतिरिक्त"
+
+#: admin/inc/tours/tf-tours-metabox.php:214
+#, fuzzy
+msgid "Extra Services on Tour"
+msgstr "टूर पर अतिरिक्त सेवाएं"
+
+#: admin/inc/tours/tf-tours-metabox.php:220
+#: admin/inc/tours/tf-tours-metabox.php:498
+#: inc/elementor-addon/widgets/tourfic-search.php:99
+msgid "Title"
+msgstr "शीर्षक"
+
+#: admin/inc/tours/tf-tours-metabox.php:248
+#, fuzzy
+msgid "Price Settings"
+msgstr "मूल्य सेटिंग्स"
+
+#: admin/inc/tours/tf-tours-metabox.php:253
+#, fuzzy
+msgid "Pricing Rule"
+msgstr "मूल्य निर्धारण नियम"
+
+#: admin/inc/tours/tf-tours-metabox.php:254
+#, fuzzy
+msgid "Input pricing rule"
+msgstr "इनपुट मूल्य निर्धारण नियम"
+
+#: admin/inc/tours/tf-tours-metabox.php:257
+msgid "Person"
+msgstr "व्यक्ति"
+
+#: admin/inc/tours/tf-tours-metabox.php:258
+#, fuzzy
+msgid "Group (Pro)"
+msgstr "समूह (प्रो)"
+
+#: admin/inc/tours/tf-tours-metabox.php:265
+#, fuzzy
+msgid "Price for Adult"
+msgstr "वयस्क के लिए मूल्य"
+
+#: admin/inc/tours/tf-tours-metabox.php:266
+#, fuzzy
+msgid "Input adult price"
+msgstr "इनपुट वयस्क मूल्य"
+
+#: admin/inc/tours/tf-tours-metabox.php:276
+#, fuzzy
+msgid "Price for Child"
+msgstr "बच्चे के लिए मूल्य"
+
+#: admin/inc/tours/tf-tours-metabox.php:277
+#, fuzzy
+msgid "Input child price"
+msgstr "इनपुट बच्चे की कीमत"
+
+#: admin/inc/tours/tf-tours-metabox.php:286
+#, fuzzy
+msgid "Price for Infant"
+msgstr "शिशु के लिए मूल्य"
+
+#: admin/inc/tours/tf-tours-metabox.php:287
+#, fuzzy
+msgid "Input infant price"
+msgstr "इनपुट शिशु मूल्य"
+
+#: admin/inc/tours/tf-tours-metabox.php:296
+#, fuzzy
+msgid "Group Price"
+msgstr "समूह मूल्य"
+
+#: admin/inc/tours/tf-tours-metabox.php:297
+#, fuzzy
+msgid "Input group price"
+msgstr "इनपुट समूह मूल्य"
+
+#: admin/inc/tours/tf-tours-metabox.php:305
+msgid "Discount Type"
+msgstr "Prisavslagstype"
+
+#: admin/inc/tours/tf-tours-metabox.php:306
+#, fuzzy
+msgid "Select discount type Percent or Fixed"
+msgstr "डिस्काउंट टाइप प्रतिशत या फिक्स्ड का चयन करें"
+
+#: admin/inc/tours/tf-tours-metabox.php:308
+#, fuzzy
+msgid "None"
+msgstr "कोई नहीं"
+
+#: admin/inc/tours/tf-tours-metabox.php:309
+#, fuzzy
+msgid "Percent"
+msgstr "प्रतिशत"
+
+#: admin/inc/tours/tf-tours-metabox.php:310
+#: admin/inc/tours/tf-tours-metabox.php:341
+msgid "Fixed"
+msgstr "निश्चित"
+
+#: admin/inc/tours/tf-tours-metabox.php:317
+#, fuzzy
+msgid "Discount Price"
+msgstr "डिस्काउंट प्राइस"
+
+#: admin/inc/tours/tf-tours-metabox.php:318
+#, fuzzy
+msgid "Input discount price in number"
+msgstr "संख्या में इनपुट डिस्काउंट मूल्य"
+
+#: admin/inc/tours/tf-tours-metabox.php:331
+#: admin/inc/tours/tf-tours-metabox.php:349 templates/single-tourfic.php:135
+#, fuzzy
+msgid "Availability"
+msgstr "उपलब्धता"
+
+#: admin/inc/tours/tf-tours-metabox.php:336
+#, fuzzy
+msgid "Tour Type"
+msgstr "टूर टाइप"
+
+#: admin/inc/tours/tf-tours-metabox.php:337
+#, fuzzy
+msgid ""
+"Fixed: Tour will be available on a fixed date. Continous: Tour will be "
+"available every month within the mentioned range."
+msgstr ""
+"फिक्स्ड: टूर एक निश्चित तिथि पर उपलब्ध होगा। निरंतर: टूर उल्लेख सीमा के भीतर हर महीने "
+"उपलब्ध हो जाएगा ।"
+
+#: admin/inc/tours/tf-tours-metabox.php:340
+#, fuzzy
+msgid "Continuous (Pro)"
+msgstr "सतत (प्रो)"
+
+#: admin/inc/tours/tf-tours-metabox.php:350
+#, fuzzy
+msgid "Input your availability"
+msgstr "अपनी उपलब्धता इनपुट करें"
+
+#: admin/inc/tours/tf-tours-metabox.php:357
+#: admin/inc/tours/tf-tours-metabox.php:416
+#, fuzzy
+msgid "Check In"
+msgstr "चेक इन करो"
+
+#: admin/inc/tours/tf-tours-metabox.php:358
+#, fuzzy
+msgid "Select check in date"
+msgstr "तारीख में चेक का चयन करें"
+
+#: admin/inc/tours/tf-tours-metabox.php:367
+#: admin/inc/tours/tf-tours-metabox.php:425
+#, fuzzy
+msgid "Check Out"
+msgstr "देखो"
+
+#: admin/inc/tours/tf-tours-metabox.php:368
+#, fuzzy
+msgid "Select check out date"
+msgstr "चेक आउट तिथि का चयन करें"
+
+#: admin/inc/tours/tf-tours-metabox.php:377
+#, fuzzy
+msgid "Minimum People"
+msgstr "न्यूनतम लोग"
+
+#: admin/inc/tours/tf-tours-metabox.php:378
+#, fuzzy
+msgid "Minimum seat number"
+msgstr "न्यूनतम सीट संख्या"
+
+#: admin/inc/tours/tf-tours-metabox.php:383
+#: admin/inc/tours/tf-tours-metabox.php:439
+#, fuzzy
+msgid "Maximum People"
+msgstr "अधिकतम लोग"
+
+#: admin/inc/tours/tf-tours-metabox.php:384
+#, fuzzy
+msgid "Maximum seat number"
+msgstr "अधिकतम सीट संख्या"
+
+#: admin/inc/tours/tf-tours-metabox.php:393
+#, fuzzy
+msgid "Custom Availability"
+msgstr "कस्टम उपलब्धता"
+
+#: admin/inc/tours/tf-tours-metabox.php:398
+msgid "Yes"
+msgstr "हाँ"
+
+#: admin/inc/tours/tf-tours-metabox.php:399
+msgid "No"
+msgstr "नहीं"
+
+#: admin/inc/tours/tf-tours-metabox.php:434
+#, fuzzy
+msgid "Min People"
+msgstr "मिन लोग"
+
+#: admin/inc/tours/tf-tours-metabox.php:448
+#, fuzzy
+msgid "Booking"
+msgstr "बुकिंग"
+
+#: admin/inc/tours/tf-tours-metabox.php:455
+#, fuzzy
+msgid "Minimum days to book before departure"
+msgstr "प्रस्थान से पहले बुक करने के लिए न्यूनतम दिन"
+
+#: admin/inc/tours/tf-tours-metabox.php:456
+#, fuzzy
+msgid ""
+"Customer can not book after this date <a href=\"https://tourfic.com/#purchase"
+"\" target=\"_blank\" style=\"text-decoration: none;\"><strong class=\"tf-pro"
+"\">Pro</strong></a>"
+msgstr ""
+"ग्राहक इस तारीख के बाद बुक नहीं कर सकते <a href=\"https://tourfic.com/#purchase\" "
+"target=\"_blank\" style=\"text-decoration: none;\"> <strong class=\"tf-pro"
+"\">प्रो</strong></a>"
+
+#: admin/inc/tours/tf-tours-metabox.php:481
+#: admin/inc/tours/tf-tours-metabox.php:486
+#, fuzzy
+msgid "Itinerary"
+msgstr "यात्रा कार्यक्रम"
+
+#: admin/inc/tours/tf-tours-metabox.php:492
+#, fuzzy
+msgid "Time or Day"
+msgstr "समय या दिन"
+
+#: admin/inc/tours/tf-tours-metabox.php:493
+#, fuzzy
+msgid "You can place the tour plan"
+msgstr "आप टूर प्लान कर सकते हैं"
+
+#: admin/inc/tours/tf-tours-metabox.php:499
+#, fuzzy
+msgid "Input the title here"
+msgstr "यहां शीर्षक इनपुट"
+
+#: admin/inc/tours/tf-tours-metabox.php:521
+#, fuzzy
+msgid "Exclude/Include"
+msgstr "बाहर/शामिल"
+
+#: admin/inc/tours/tf-tours-metabox.php:526
+#, fuzzy
+msgid "Include"
+msgstr "शामिल करना"
+
+#: admin/inc/tours/tf-tours-metabox.php:532 templates/single-tf_tours.php:187
+#: templates/tf-tours-single.php:231
+#, fuzzy
+msgid "Included"
+msgstr "शामिल"
+
+#: admin/inc/tours/tf-tours-metabox.php:533
+#, fuzzy
+msgid "Included facilites"
+msgstr "शामिल facilites"
+
+#: admin/inc/tours/tf-tours-metabox.php:540
+#, fuzzy
+msgid "Exclude"
+msgstr "बाहर"
+
+#: admin/inc/tours/tf-tours-metabox.php:546 templates/single-tf_tours.php:197
+#: templates/tf-tours-single.php:244
+#, fuzzy
+msgid "Excluded"
+msgstr "बाहर"
+
+#: admin/inc/tours/tf-tours-metabox.php:547
+#, fuzzy
+msgid "Excluded facilites"
+msgstr "बहिष्कृत फेसिलिट्स"
+
+#: admin/inc/tours/tf-tours-metabox.php:570
+#, fuzzy
+msgid "FAQ Description"
+msgstr "एफएक्यू विवरण"
+
+#: inc/layouts.php:73 inc/layouts.php:157
+#, fuzzy
+msgid "Book Now"
+msgstr "अब बुक करें"
+
+#: inc/layouts.php:103
+#, fuzzy
+msgid "Featured"
+msgstr "चित्रित किया"
+
+#: inc/layouts.php:219
+#, fuzzy
+msgid "Customer Rating"
+msgstr "ग्राहक रेटिंग"
+
+#: inc/layouts.php:226 templates/review.php:90
+#, fuzzy, php-format
+msgctxt "comments title"
+msgid "Based on %1$s review"
+msgid_plural "Based on %1$s reviews"
+msgstr[0] "%1$s समीक्षा के आधार पर"
+msgstr[1] "%1$s समीक्षा के आधार पर"
+
+#: inc/post-type.php:17 inc/post-type.php:46
+#, fuzzy, php-format
+msgctxt "tourfic post type name"
+msgid "%2$s"
+msgstr "%2$s"
+
+#: inc/post-type.php:18 inc/post-type.php:47
+#, fuzzy, php-format
+msgctxt "singular tourfic post type name"
+msgid "%1$s"
+msgstr "%1$s"
+
+#: inc/post-type.php:19 inc/post-type.php:48
+msgid "Add New"
+msgstr "नया जोड़ें"
+
+#: inc/post-type.php:20 inc/post-type.php:49
+#, fuzzy, php-format
+msgid "Add New %1$s"
+msgstr "नई %1$s जोड़ें"
+
+#: inc/post-type.php:21 inc/post-type.php:50
+#, fuzzy, php-format
+msgid "Edit %1$s"
+msgstr "%1$s संपादित करें"
+
+#: inc/post-type.php:22 inc/post-type.php:51
+#, fuzzy, php-format
+msgid "New %1$s"
+msgstr "नई %1$s"
+
+#: inc/post-type.php:23 inc/post-type.php:52
+#, fuzzy, php-format
+msgid "All %2$s"
+msgstr "सभी %2$s"
+
+#: inc/post-type.php:24 inc/post-type.php:53
+#, fuzzy, php-format
+msgid "View %1$s"
+msgstr "%1$s देखें"
+
+#: inc/post-type.php:25 inc/post-type.php:54
+#, fuzzy, php-format
+msgid "View %2$s"
+msgstr "%2$s देखें"
+
+#: inc/post-type.php:26 inc/post-type.php:55
+#, fuzzy, php-format
+msgid "Search %2$s"
+msgstr "%2$s खोजें"
+
+#: inc/post-type.php:27 inc/post-type.php:56
+#, fuzzy, php-format
+msgid "No %2$s found"
+msgstr "कोई %2$s नहीं मिला"
+
+#: inc/post-type.php:28 inc/post-type.php:57
+#, fuzzy, php-format
+msgid "No %2$s found in Trash"
+msgstr "कचरे में नहीं मिला कोई %2$s"
+
+#: inc/post-type.php:30
+#, fuzzy
+msgctxt "tourfic post type menu name"
+msgid "Hotels"
+msgstr "होटल"
+
+#: inc/post-type.php:31 inc/post-type.php:60
+#, php-format
+msgid "%1$s Image"
+msgstr "%1$s छवि।"
+
+#: inc/post-type.php:32 inc/post-type.php:61
+#, php-format
+msgid "Set %1$s Image"
+msgstr "%1$s छवि सेट करें।"
+
+#: inc/post-type.php:33 inc/post-type.php:62
+#, php-format
+msgid "Remove %1$s Image"
+msgstr "%1$s छवि निकालें ।"
+
+#: inc/post-type.php:34 inc/post-type.php:63
+#, php-format
+msgid "Use as %1$s Image"
+msgstr "%1$s छवि के रूप में उपयोग करें ।"
+
+#: inc/post-type.php:35 inc/post-type.php:64
+#, fuzzy, php-format
+msgid "%1$s Attributes"
+msgstr "%1$s विशेषताएं"
+
+#: inc/post-type.php:36 inc/post-type.php:65
+#, php-format
+msgid "Filter %2$s list"
+msgstr "फ़िल्टर %2$s सूची"
+
+#: inc/post-type.php:37 inc/post-type.php:66
+#, fuzzy, php-format
+msgid "%2$s list navigation"
+msgstr "%2$s सूची नेविगेशन"
+
+#: inc/post-type.php:38 inc/post-type.php:67
+#, fuzzy, php-format
+msgid "%2$s list"
+msgstr "%2$s सूची"
+
+#: inc/post-type.php:59
+#, fuzzy
+msgctxt "tourfic post type menu name"
+msgid "Tours"
+msgstr "पर्यटन"
+
+#: inc/post-type.php:120
+#, fuzzy
+msgid "Hotel"
+msgstr "होटल"
+
+#: inc/post-type.php:121
+#, fuzzy
+msgid "Hotels"
+msgstr "होटल"
+
+#: inc/post-type.php:128
+#, fuzzy
+msgid "Tour"
+msgstr "दौरा"
+
+#: inc/post-type.php:129
+#, fuzzy
+msgid "Tours"
+msgstr "पर्यटन"
+
+#: inc/post-type.php:178 inc/post-type.php:186
+#, fuzzy, php-format
+msgid "Enter %s name here"
+msgstr "यहां %s नाम दर्ज करें"
+
+#: inc/post-type.php:199 inc/post-type.php:201 inc/post-type.php:223
+#: inc/post-type.php:294 inc/post-type.php:296 inc/post-type.php:318
+msgid "Destination"
+msgstr "स्थान"
+
+#: inc/post-type.php:200 inc/post-type.php:295
+#, fuzzy
+msgid "Destinations"
+msgstr "स्थलों"
+
+#: inc/post-type.php:202 inc/post-type.php:297
+#, fuzzy
+msgid "All Destination"
+msgstr "सभी गंतव्य"
+
+#: inc/post-type.php:203 inc/post-type.php:298
+#, fuzzy
+msgid "Edit Destinations"
+msgstr "गंतव्यों को संपादित करें"
+
+#: inc/post-type.php:204 inc/post-type.php:299
+#, fuzzy
+msgid "View Destinations"
+msgstr "देखें गंतव्य"
+
+#: inc/post-type.php:205 inc/post-type.php:300
+#, fuzzy
+msgid "Update Destinations name"
+msgstr "गंतव्यों का नाम अपडेट करें"
+
+#: inc/post-type.php:206 inc/post-type.php:301
+#, fuzzy
+msgid "Add new Destinations"
+msgstr "नए गंतव्य जोड़ें"
+
+#: inc/post-type.php:207 inc/post-type.php:302
+#, fuzzy
+msgid "New Destinations name"
+msgstr "नए गंतव्यों का नाम"
+
+#: inc/post-type.php:208 inc/post-type.php:303
+#, fuzzy
+msgid "Parent Destinations"
+msgstr "माता-पिता के गंतव्य"
+
+#: inc/post-type.php:209 inc/post-type.php:304
+#, fuzzy
+msgid "Parent Destinations:"
+msgstr "माता-पिता के गंतव्य:"
+
+#: inc/post-type.php:210 inc/post-type.php:305
+#, fuzzy
+msgid "Search Destination"
+msgstr "खोज गंतव्य"
+
+#: inc/post-type.php:211 inc/post-type.php:306
+#, fuzzy
+msgid "Popular Destination"
+msgstr "लोकप्रिय गंतव्य"
+
+#: inc/post-type.php:212 inc/post-type.php:307
+#, fuzzy
+msgid "Separate Destination with commas"
+msgstr "अल्पविराम के साथ अलग गंतव्य"
+
+#: inc/post-type.php:213 inc/post-type.php:308
+#, fuzzy
+msgid "Add or remove Destination"
+msgstr "गंतव्य जोड़ें या निकालें"
+
+#: inc/post-type.php:214 inc/post-type.php:309
+#, fuzzy
+msgid "Choose from the most used Destination"
+msgstr "सबसे अधिक उपयोग किए जाने वाले गंतव्य में से चुनें"
+
+#: inc/post-type.php:215 inc/post-type.php:310
+#, fuzzy
+msgid "No Destination found"
+msgstr "कोई गंतव्य नहीं मिला"
+
+#: inc/post-type.php:216 inc/post-type.php:311
+#, fuzzy
+msgid "No Destination"
+msgstr "कोई गंतव्य नहीं"
+
+#: inc/post-type.php:217 inc/post-type.php:312
+#, fuzzy
+msgid "Destination list navigation"
+msgstr "गंतव्य सूची नेविगेशन"
+
+#: inc/post-type.php:218 inc/post-type.php:313
+#, fuzzy
+msgid "Destination list"
+msgstr "गंतव्य सूची"
+
+#: inc/post-type.php:219 inc/post-type.php:314
+#, fuzzy
+msgid "Back to Destination"
+msgstr "गंतव्य पर वापस"
+
+#: inc/post-type.php:245 inc/post-type.php:247 inc/post-type.php:269
+#, fuzzy
+msgid "Filters"
+msgstr "फ़िल्टर"
+
+#: inc/post-type.php:246
+msgid "Filter"
+msgstr "छलनी"
+
+#: inc/post-type.php:248
+#, fuzzy
+msgid "All Filters"
+msgstr "सभी फ़िल्टर"
+
+#: inc/post-type.php:249
+#, fuzzy
+msgid "Edit Filter"
+msgstr "फ़िल्टर संपादित करें"
+
+#: inc/post-type.php:250
+#, fuzzy
+msgid "View Filter"
+msgstr "फ़िल्टर देखें"
+
+#: inc/post-type.php:251
+#, fuzzy
+msgid "Update Filter name"
+msgstr "फ़िल्टर नाम अपडेट करें"
+
+#: inc/post-type.php:252
+#, fuzzy
+msgid "Add new Filter"
+msgstr "नया फ़िल्टर जोड़ें"
+
+#: inc/post-type.php:253
+#, fuzzy
+msgid "New Filter name"
+msgstr "नया फ़िल्टर नाम"
+
+#: inc/post-type.php:254
+#, fuzzy
+msgid "Parent Filter"
+msgstr "पैरेंट फ़िल्टर"
+
+#: inc/post-type.php:255
+#, fuzzy
+msgid "Parent Filter:"
+msgstr "पैरेंट फ़िल्टर:"
+
+#: inc/post-type.php:256
+#, fuzzy
+msgid "Search Filters"
+msgstr "फ़िल्टर खोजें"
+
+#: inc/post-type.php:257 inc/widgets.php:77 inc/widgets.php:229
+#, fuzzy
+msgid "Popular Filters"
+msgstr "लोकप्रिय फ़िल्टर"
+
+#: inc/post-type.php:258
+#, fuzzy
+msgid "Separate Filters with commas"
+msgstr "अल्पविराम के साथ अलग फिल्टर"
+
+#: inc/post-type.php:259
+#, fuzzy
+msgid "Add or remove Filters"
+msgstr "फ़िल्टर जोड़ें या निकालें"
+
+#: inc/post-type.php:260
+#, fuzzy
+msgid "Choose from the most used Filters"
+msgstr "सबसे अधिक उपयोग किए जाने वाले फ़िल्टर में से चुनें"
+
+#: inc/post-type.php:261
+#, fuzzy
+msgid "No Filters found"
+msgstr "कोई फ़िल्टर नहीं मिला"
+
+#: inc/post-type.php:262
+#, fuzzy
+msgid "No Filters"
+msgstr "कोई फ़िल्टर नहीं"
+
+#: inc/post-type.php:263
+#, fuzzy
+msgid "Filters list navigation"
+msgstr "फ़िल्टर सूची नेविगेशन"
+
+#: inc/post-type.php:264
+#, fuzzy
+msgid "Filters list"
+msgstr "फ़िल्टर सूची"
+
+#: inc/post-type.php:265
+#, fuzzy
+msgid "Back to Filters"
+msgstr "वापस फिल्टर करने के लिए"
+
+#: inc/post-type.php:340 inc/post-type.php:342 inc/post-type.php:364
+#, fuzzy
+msgid "Tour Features"
+msgstr "टूर फीचर्स"
+
+#: inc/post-type.php:341
+#, fuzzy
+msgid "Tour Feature"
+msgstr "टूर फ़ीचर"
+
+#: inc/post-type.php:343
+#, fuzzy
+msgid "All Features"
+msgstr "सभी विशेषताएं"
+
+#: inc/post-type.php:344
+#, fuzzy
+msgid "Edit Feature"
+msgstr "एडिट फ़ीचर"
+
+#: inc/post-type.php:345
+#, fuzzy
+msgid "View Features"
+msgstr "देखें फीचर्स"
+
+#: inc/post-type.php:346
+#, fuzzy
+msgid "Update Feature name"
+msgstr "अपडेट फ़ीचर नाम"
+
+#: inc/post-type.php:347
+#, fuzzy
+msgid "Add new Feature"
+msgstr "नई सुविधा जोड़ें"
+
+#: inc/post-type.php:348
+#, fuzzy
+msgid "New Feature name"
+msgstr "नई सुविधा नाम"
+
+#: inc/post-type.php:349
+#, fuzzy
+msgid "Parent Feature"
+msgstr "पैरेंट फ़ीचर"
+
+#: inc/post-type.php:350
+#, fuzzy
+msgid "Parent Feature:"
+msgstr "पैरेंट फ़ीचर:"
+
+#: inc/post-type.php:351
+#, fuzzy
+msgid "Search Features"
+msgstr "खोज सुविधाओं"
+
+#: inc/post-type.php:353
+#, fuzzy
+msgid "Separate Features with commas"
+msgstr "अल्पविराम के साथ अलग विशेषताएं"
+
+#: inc/post-type.php:354
+#, fuzzy
+msgid "Add or remove Features"
+msgstr "सुविधाओं को जोड़ें या हटाएं"
+
+#: inc/post-type.php:355
+#, fuzzy
+msgid "Choose from the most used Features"
+msgstr "सबसे अधिक उपयोग की जाने वाली सुविधाओं में से चुनें"
+
+#: inc/post-type.php:356
+#, fuzzy
+msgid "No Features found"
+msgstr "कोई सुविधा नहीं मिली"
+
+#: inc/post-type.php:357
+#, fuzzy
+msgid "No Features"
+msgstr "कोई सुविधा नहीं"
+
+#: inc/post-type.php:358
+#, fuzzy
+msgid "Features list navigation"
+msgstr "सुविधा सूची नेविगेशन"
+
+#: inc/post-type.php:359
+#, fuzzy
+msgid "Features list"
+msgstr "सुविधा सूची"
+
+#: inc/post-type.php:360
+#, fuzzy
+msgid "Back to Features"
+msgstr "वापस सुविधाओं के लिए"
+
+#: inc/shortcodes.php:60 inc/shortcodes.php:135
+#, fuzzy, php-format
+msgid "%s properties"
+msgstr "%s गुण"
+
+#: inc/tourfic-functions.php:90 inc/tourfic-functions.php:1180
+msgid "Submit"
+msgstr "जमा करें"
+
+#: inc/tourfic-functions.php:91
+#, fuzzy
+msgid "Write a Review"
+msgstr "एक समीक्षा लिखें"
+
+#: inc/tourfic-functions.php:92
+#, fuzzy
+msgid "Reply"
+msgstr "उत्तर"
+
+#: inc/tourfic-functions.php:680
+#, fuzzy
+msgid "Price per night"
+msgstr "प्रति रात मूल्य"
+
+#: inc/tourfic-functions.php:751 inc/tourfic-functions.php:780
+#, fuzzy
+msgid "Destination Image"
+msgstr "डेस्टिनेशन इमेज"
+
+#: inc/tourfic-functions.php:755 inc/tourfic-functions.php:791
+#: inc/tourfic-functions.php:947
+msgid "Add Image"
+msgstr "添加图片"
+
+#: inc/tourfic-functions.php:756 inc/tourfic-functions.php:792
+#: inc/tourfic-functions.php:948
+msgid "Remove Image"
+msgstr "चित्र हटाएँ"
+
+#: inc/tourfic-functions.php:909
+#, fuzzy
+msgid "Icon"
+msgstr "मूर्ति"
+
+#: inc/tourfic-functions.php:913
+msgid "Add Icon"
+msgstr "添加图标"
+
+#: inc/tourfic-functions.php:914
+msgid "Remove Icon"
+msgstr "删除图标"
+
+#: inc/tourfic-functions.php:936
+#, fuzzy
+msgid "Image"
+msgstr "चित्र"
+
+#: inc/tourfic-functions.php:975
+msgid "Insert"
+msgstr "अंदर डालें"
+
+#: inc/tourfic-functions.php:1126
+#, fuzzy
+msgid "TOURFIC: Single Tour Sidebar"
+msgstr "TOURFIC: सिंगल टूर साइडबार"
+
+#: inc/tourfic-functions.php:1128
+#, fuzzy
+msgid "Widgets in this area will be shown on tourfic single page"
+msgstr "इस क्षेत्र में विजेट्स को टूफिक सिंगल पेज पर दिखाया जाएगा"
+
+#: inc/tourfic-functions.php:1135
+#, fuzzy
+msgid "TOURFIC: Archive Sidebar"
+msgstr "TOURFIC: आर्काइव साइडबार"
+
+#: inc/tourfic-functions.php:1137
+#, fuzzy
+msgid "Widgets in this area will be shown on tourfic archive/search page"
+msgstr "इस क्षेत्र में विजेट्स को टूफिक आर्काइव/सर्च पेज पर दिखाया जाएगा"
+
+#: inc/tourfic-functions.php:1167
+#, fuzzy
+msgid "Submit your question"
+msgstr "अपना प्रश्न सबमिट करें"
+
+#: inc/tourfic-functions.php:1170
+#, fuzzy
+msgid "Your Name"
+msgstr "तुम्हारा नाम"
+
+#: inc/tourfic-functions.php:1173
+#, fuzzy
+msgid "Your email"
+msgstr "आपका ईमेल"
+
+#: inc/tourfic-functions.php:1176
+#, fuzzy
+msgid "Your Question"
+msgstr "आपका प्रश्न"
+
+#: inc/tourfic-functions.php:1179
+msgid "Reset"
+msgstr "रिसेट"
+
+#: inc/tourfic-functions.php:1199
+#, fuzzy
+msgid "Security error! Reload the page and try again."
+msgstr "सुरक्षा त्रुटि! पेज को फिर से लोड करें और फिर से प्रयास करें।"
+
+#: inc/tourfic-functions.php:1223
+#, fuzzy, php-format
+msgid "Someone asked question on: %s"
+msgstr "किसी ने सवाल पूछा: %s"
+
+#: inc/tourfic-functions.php:1231
+#, fuzzy
+msgid "Your question has been sent!"
+msgstr "आपका प्रश्न भेजा गया है!"
+
+#: inc/tourfic-functions.php:1234
+#, fuzzy
+msgid "Message sent failed!"
+msgstr "संदेश भेजा विफल!"
+
+#: inc/tourfic-functions.php:1487
+msgid "From"
+msgstr "और से"
+
+#: inc/tourfic-functions.php:1489
+msgid "To"
+msgstr "Til"
+
+#: inc/widgets.php:15
+#, fuzzy
+msgid "Filter Tourfic tour on archive."
+msgstr "संग्रह पर फिल्टर Tourfic दौरे।"
+
+#: inc/widgets.php:85 inc/widgets.php:237 inc/widgets.php:373
+#: inc/widgets.php:568
+msgid "Title:"
+msgstr "शीर्षक:"
+
+#: inc/widgets.php:166
+#, fuzzy
+msgid "Filter Tourfic tour on archive with features."
+msgstr "सुविधाओं के साथ संग्रह पर फिल्टर Tourfic दौरे।"
+
+#: inc/widgets.php:317
+#, fuzzy
+msgid "Show more tours button on single tour page."
+msgstr "सिंगल टूर पेज पर अधिक टूर बटन दिखाएं।"
+
+#: inc/widgets.php:332 inc/widgets.php:370
+#, fuzzy
+msgid "Show more hotels"
+msgstr "अधिक होटल दिखाएं"
+
+#: inc/widgets.php:369
+#, fuzzy
+msgid "Not impressive?"
+msgstr "प्रभावशाली नहीं?"
+
+#: inc/widgets.php:377 inc/widgets.php:466 inc/widgets.php:576
+#, fuzzy
+msgid "Button Label"
+msgstr "बटन लेबल"
+
+#: inc/widgets.php:417
+#, fuzzy
+msgid "Show On Map tours button on single tour page."
+msgstr "सिंगल टूर पेज पर मैप टूर बटन पर दिखाएं।"
+
+#: inc/widgets.php:463 templates/single-tourfic.php:62
+#, fuzzy
+msgid "Show on map"
+msgstr "नक्शे पर दिखाएं"
+
+#: inc/widgets.php:505
+#, fuzzy
+msgid "Ask a question button on single tour page."
+msgstr "सिंगल टूर पेज पर एक प्रश्न बटन पूछें।"
+
+#: inc/widgets.php:520 inc/widgets.php:564
+#, fuzzy
+msgid "Find more info in the FAQ section."
+msgstr "एफएक्यू अनुभाग में अधिक जानकारी प्राप्त करें।"
+
+#: inc/widgets.php:521 inc/widgets.php:565
+#, fuzzy
+msgid "Ask a question"
+msgstr "एक सवाल पूछें"
+
+#: inc/widgets.php:563
+#, fuzzy
+msgid "Got a question?"
+msgstr "एक सवाल है?"
+
+#: inc/widgets.php:572 inc/elementor-addon/widgets/tourfic-search.php:110
+#, fuzzy
+msgid "Subtitle"
+msgstr "उपशीर्षक"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:47
+#: inc/booking/tf-woocommerce-tours-class.php:97
+#, fuzzy
+msgid "Check-in date missing."
+msgstr "चेक-इन डेट गायब।"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:50
+#: inc/booking/tf-woocommerce-tours-class.php:100
+#, fuzzy
+msgid "Check-out date missing."
+msgstr "चेक-आउट की तारीख गायब।"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:53
+#: inc/booking/tf-woocommerce-tours-class.php:103
+#, fuzzy
+msgid "Select Adult(s)."
+msgstr "वयस्क (एस) का चयन करें।"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:56
+#, fuzzy
+msgid "Select Room(s)."
+msgstr "कक्ष (एस) का चयन करें।"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:59
+#: inc/booking/tf-woocommerce-tours-class.php:106
+#, fuzzy
+msgid "Unknown Error! Please try again."
+msgstr "अज्ञात त्रुटि! कृपया फिर से प्रयास करें।"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:171
+#: inc/booking/tf-woocommerce-hotel-class.php:222
+#: templates/single-tourfic.php:141
+#, fuzzy
+msgid "Room Type"
+msgstr "रूम टाइप"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:178
+#: inc/booking/tf-woocommerce-hotel-class.php:227
+#, fuzzy
+msgid "Room Selected"
+msgstr "कक्ष का चयन"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:185
+#: inc/booking/tf-woocommerce-hotel-class.php:232
+#: inc/booking/tf-woocommerce-tours-class.php:236
+#: inc/booking/tf-woocommerce-tours-class.php:279
+#, fuzzy
+msgid "Adults"
+msgstr "वयस्कों"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:192
+#: inc/booking/tf-woocommerce-hotel-class.php:237
+#: inc/booking/tf-woocommerce-tours-class.php:243
+#: inc/booking/tf-woocommerce-tours-class.php:284
+#, fuzzy
+msgid "Children"
+msgstr "बच्चे"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:199
+#: inc/booking/tf-woocommerce-hotel-class.php:242
+#, fuzzy
+msgid "Check-in Date"
+msgstr "चेक-इन तिथि"
+
+#: inc/booking/tf-woocommerce-hotel-class.php:206
+#: inc/booking/tf-woocommerce-hotel-class.php:247
+#, fuzzy
+msgid "Check-out Date"
+msgstr "चेक-आउट तिथि"
+
+#: inc/booking/tf-woocommerce-tours-class.php:54
+#, fuzzy
+msgid "You must select minimum "
+msgstr "आपको न्यूनतम चयन करना होगा "
+
+#: inc/booking/tf-woocommerce-tours-class.php:57
+#: inc/booking/tf-woocommerce-tours-class.php:78
+#, fuzzy
+msgid "Maximum "
+msgstr "अधिकतम "
+
+#: inc/booking/tf-woocommerce-tours-class.php:76
+#: inc/booking/tf-woocommerce-tours-class.php:94
+#, fuzzy
+msgid "Minimum "
+msgstr "कम से कम "
+
+#: inc/booking/tf-woocommerce-tours-class.php:250
+#, fuzzy
+msgid "Infant"
+msgstr "शिशु"
+
+#: inc/booking/tf-woocommerce-tours-class.php:257
+#: inc/booking/tf-woocommerce-tours-class.php:292
+#, fuzzy
+msgid "Departure Date"
+msgstr "प्रस्थान तिथि"
+
+#: inc/booking/tf-woocommerce-tours-class.php:264
+#, fuzzy
+msgid "Tour Extra: "
+msgstr "टूर अतिरिक्त: "
+
+#: inc/booking/tf-woocommerce-tours-class.php:288
+#, fuzzy
+msgid "Infants"
+msgstr "शिशुओं"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:37
+#, fuzzy
+msgid "Tourfic Destination"
+msgstr "टूफिक डेस्टिनेशन"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:91
+#: inc/elementor-addon/widgets/tourfic-search.php:125
+msgid "Style"
+msgstr "शैली"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:102
+#, fuzzy
+msgid "Destination Title Typography"
+msgstr "डेस्टिनेशन टाइटल टाइपोग्राफी"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:110
+#, fuzzy
+msgid "Destination title Color"
+msgstr "गंतव्य शीर्षक रंग"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:126
+#, fuzzy
+msgid "Destination Title Hover Color"
+msgstr "डेस्टिनेशन टाइटल होवर कलर"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:145
+#, fuzzy
+msgid "Destination Subitle Typography"
+msgstr "डेस्टिनेशन सबिटल टाइपोग्राफी"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:153
+#, fuzzy
+msgid "Destination Subtitle Color"
+msgstr "डेस्टिनेशन सबटाइटल कलर"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:169
+#, fuzzy
+msgid "Destination Subtitle Hover Color"
+msgstr "गंतव्य उपशीर्षक होवर रंग"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:187
+#, fuzzy
+msgid "Info Background"
+msgstr "जानकारी पृष्ठभूमि"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:197
+#: inc/elementor-addon/widgets/tourfic-destination.php:214
+msgid "Background Color"
+msgstr "पीछे का रंग"
+
+#: inc/elementor-addon/widgets/tourfic-destination.php:205
+#, fuzzy
+msgid "Info Hover Background"
+msgstr "जानकारी होवर बैकग्राउंड"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:37
+#, fuzzy
+msgid "Tourfic search"
+msgstr "टूफ़िक खोज"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:91
+#, fuzzy
+msgid "Content"
+msgstr "सन्तोष"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:101
+#, fuzzy
+msgid "Default title"
+msgstr "डिफ़ॉल्ट शीर्षक"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:102
+#, fuzzy
+msgid "Type your title here"
+msgstr "यहां अपना शीर्षक टाइप करें"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:112
+#, fuzzy
+msgid "Default description"
+msgstr "डिफ़ॉल्ट विवरण"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:113
+#, fuzzy
+msgid "Type your description here"
+msgstr "अपना विवरण यहां टाइप करें"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:134
+#, fuzzy
+msgid "Title Typography"
+msgstr "शीर्षक टाइपोग्राफी"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:141
+#, fuzzy
+msgid "Title Color"
+msgstr "शीर्षक रंग"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:164
+#, fuzzy
+msgid "Subtitle Typography"
+msgstr "उपशीर्षक टाइपोग्राफी"
+
+#: inc/elementor-addon/widgets/tourfic-search.php:172
+#, fuzzy
+msgid "Subtitle Color"
+msgstr "उपशीर्षक रंग"
+
+#: inc/elementor-addon/widgets/tourfic-tours.php:37
+#, fuzzy
+msgid "Tourfic slider"
+msgstr "टूफिक स्लाइडर"
+
+#: templates/review.php:107 templates/review.php:132
+#, fuzzy
+msgid "Comments Navigation"
+msgstr "टिप्पणियां नेविगेशन"
+
+#: templates/single-tf_tours.php:79
+#, fuzzy
+msgid "Tour Videos"
+msgstr "टूर वीडियो"
+
+#: templates/single-tf_tours.php:109
+#, fuzzy
+msgid "reviews"
+msgstr "समीक्षाएँ"
+
+#: templates/single-tf_tours.php:127 templates/tf-tours-single.php:106
+#, fuzzy
+msgid "Duration"
+msgstr "अवधि"
+
+#: templates/single-tf_tours.php:132 templates/tf-tours-single.php:117
+#, fuzzy
+msgid "Max People"
+msgstr "मैक्स लोग"
+
+#: templates/single-tf_tours.php:142 templates/tf-tours-single.php:139
+msgid "Language"
+msgstr "भाषा"
+
+#: templates/single-tf_tours.php:157
+#, fuzzy
+msgid "Overview"
+msgstr "सिंहावलोकन"
+
+#: templates/single-tf_tours.php:219 templates/tf-tours-single.php:272
+#, fuzzy
+msgid "Travel Itinerary"
+msgstr "यात्रा यात्रा कार्यक्रम"
+
+#: templates/single-tf_tours.php:266 templates/tf-tours-single.php:326
+#, fuzzy
+msgid "Frequently asked questions?"
+msgstr "अक्सर सवाल पूछा?"
+
+#: templates/single-tf_tours.php:297 templates/tf-tours-single.php:368
+#, fuzzy
+msgid "You might also like"
+msgstr "आप भी पसंद कर सकते हैं"
+
+#: templates/single-tf_tours.php:298 templates/tf-tours-single.php:369
+#, fuzzy
+msgid ""
+"Travel is my life. Since 1999, I’ve been traveling around the world "
+"nonstop.\n"
+"\t\t\t\t\t\t\tIf you also love travel, you’re in the right place!\n"
+"\t\t\t\t\t\t\t"
+msgstr ""
+"यात्रा मेरी जिंदगी है। 1999 के बाद से, मैं दुनिया भर में लगातार यात्रा कर रहा हूँ.\n"
+"\t\t\t\t\t\t\tयदि आप भी यात्रा से प्यार करते हैं, तो आप सही जगह पर हैं!\n"
+"\t\t\t\t\t\t\t"
+
+#: templates/single-tf_tours.php:353
+#, fuzzy
+msgid "Customer Reviews"
+msgstr "ग्राहक समीक्षा"
+
+#: templates/single-tf_tours.php:354
+#, fuzzy
+msgid "Reviews given by our customers."
+msgstr "हमारे ग्राहकों द्वारा दी गई समीक्षाएं।"
+
+#: templates/single-tourfic.php:40
+#, fuzzy
+msgid "Share on Facebook"
+msgstr "फेसबुक पर साझा करें"
+
+#: templates/single-tourfic.php:45
+#, fuzzy
+msgid "Share on Twitter"
+msgstr "ट्विटर पर साझा करें"
+
+#: templates/single-tourfic.php:50
+#, fuzzy
+msgid "Share this link"
+msgstr "इस लिंक को साझा करें"
+
+#: templates/single-tourfic.php:53
+msgid "Copy link"
+msgstr "प्रतिरूप जोड़ना"
+
+#: templates/single-tourfic.php:54
+msgid "Copied!"
+msgstr "कॉपी किया गया!"
+
+#: templates/single-tourfic.php:65
+#, fuzzy
+msgid "Reserve"
+msgstr "अलगा"
+
+#: templates/single-tourfic.php:103
+#, fuzzy
+msgid "Listing Description"
+msgstr "लिस्टिंग विवरण"
+
+#: templates/single-tourfic.php:113 templates/tf-tours-single.php:193
+#, fuzzy
+msgid "Features"
+msgstr "सुविधाऐं"
+
+#: templates/single-tourfic.php:143
+#, fuzzy
+msgid "Total Price"
+msgstr "कुल कीमत"
+
+#: templates/single-tourfic.php:144
+#, fuzzy
+msgid "Select Rooms"
+msgstr "कमरे का चयन करें"
+
+#: templates/single-tourfic.php:238
+#, fuzzy
+msgid "Reviews"
+msgstr "समीक्षाएँ"
+
+#: templates/tf-tours-single.php:173
+#, fuzzy
+msgid "Tour Description"
+msgstr "टूर विवरण"
+
+#: templates/tf-tours-single.php:430
+#, fuzzy
+msgid "Customer Review"
+msgstr "ग्राहक समीक्षा"
+
+#: templates/tf-tours-single.php:496
+#, fuzzy
+msgid "Terms and Conditions"
+msgstr "नियम और शर्तें"
