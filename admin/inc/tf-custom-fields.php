@@ -30,7 +30,7 @@ class Tourfic_Metabox_Class {
      */
     public function add_meta_box( $post_type ) {
         // Limit meta box to certain post types.
-        $post_types = array( 'tourfic' );
+        $post_types = array( 'tf_hotel' );
 
         if ( in_array( $post_type, $post_types ) ) {
             add_meta_box(

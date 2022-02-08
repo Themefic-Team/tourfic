@@ -13,13 +13,13 @@ if( !function_exists('tf_term_count') ){
         $term_count = array();
         
         $args = array(
-            'post_type' => 'tourfic',
+            'post_type' => 'tf_hotel',
             'post_status' => 'publish',
             'posts_per_page' => -1,
             'tax_query' => array(
                 'relation' => 'AND',
                 array(
-                    'taxonomy' => 'destination',
+                    'taxonomy' => 'hotel_location',
                     'field'    => 'slug',
                     'terms'    => $destination
                 )
@@ -586,8 +586,7 @@ function tourfic_tours_booking_submit_button( $label = null ){
 	}
 
 	?>
-	
-	<input type="hidden" name="tour_id" value="<?php echo get_the_ID(); ?>">
+
 	<button class="tf_button" type="submit"><?php esc_html_e( $label ); ?></button>
 </div>
 	<?php
@@ -615,7 +614,7 @@ function tourfic_booking_search_action(){
 
 // Set search reult page
 function tourfic_booking_set_search_result( $url ){	
-	$search_result_page = tourfic_opt( 'search-result-page' );
+	$search_result_page = tfopt( 'search-result-page' );
 
 	if ( isset( $search_result_page ) ){
 		$url = get_permalink( $search_result_page );
@@ -1049,7 +1048,7 @@ function tourfic_fullwidth_container_end( $fullwidth ){
  */
 function tourfic_change_tourfic_post_type_slug( $slug ){
 	
-    $hotel_slug = tourfic_opt( 'post_type_slug' );
+    $hotel_slug = tfopt( 'post_type_slug' );
 	if ( isset( $hotel_slug ) && $hotel_slug != "" ) {
 		$slug = esc_attr( $hotel_slug );
 	}
@@ -1061,7 +1060,7 @@ add_filter( 'tourfic_post_type_slug', 'tourfic_change_tourfic_post_type_slug', 1
 
 function tourfic_change_tour_post_type_slug($tour_slug ){
 	
-    $tour_slug = tourfic_opt( 'tour_type_slug' );
+    $tour_slug = tfopt( 'tour_type_slug' );
 	if ( isset( $tour_slug ) && $tour_slug != "" ) {
 		$tour_slug = esc_attr( $tour_slug );
 	}
@@ -1076,7 +1075,7 @@ add_filter( 'tourfic_post_type_tour_slug', 'tourfic_change_tour_post_type_slug',
 function tourfic_flush_permalink( $value ){
 	flush_rewrite_rules();
 }
-add_action('csf_tourfic_opt_saved', 'tourfic_flush_permalink' );
+add_action('csf_tfopt_saved', 'tourfic_flush_permalink' );
 
 
 /**
@@ -1084,7 +1083,7 @@ add_action('csf_tourfic_opt_saved', 'tourfic_flush_permalink' );
  */
 function tourfic_custom_css(){
 	
-    $tf_custom_css =  tourfic_opt( 'custom-css' );
+    $tf_custom_css =  tfopt( 'custom-css' );
 	$output = '';
 
 	//Custom css

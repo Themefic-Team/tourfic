@@ -19,14 +19,14 @@ function tourfic_destinations_shortcode( $atts, $content = null ){
 
     // Propertise args
     $args = array(
-        'post_type' => 'tourfic',
+        'post_type' => 'tf_hotel',
         'post_status' => 'publish',
         'posts_per_page' => -1,
     );
 
-    // 1st search on Destination taxonomy
+    // 1st search on hotel_location taxonomy
     $destinations = get_terms( array(
-        'taxonomy' => 'destination',
+        'taxonomy' => 'hotel_location',
         'orderby' => $orderby,
         'order' => $order,
         'hide_empty' => $hide_empty, //can be 1, '1' too
@@ -169,7 +169,7 @@ function tourfic_tours_shortcode( $atts, $content = null ){
     );
 
     $args = array(
-        'post_type' => 'tourfic',
+        'post_type' => 'tf_hotel',
         'post_status' => 'publish',
         'posts_per_page' => $count,
     );
@@ -421,7 +421,7 @@ add_shortcode('tf_search', 'tourfic_search_shortcode');
  */
 function tourfic_search_result_shortcode( $atts, $content = null ){
     
-    $relation = tourfic_opt( 'search_relation', 'AND' );
+    $relation = tfopt( 'search_relation', 'AND' );
 
     // Unwanted Slashes Remove
     if ( isset( $_GET ) ) {
@@ -430,13 +430,13 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
     //Show both Hotel and Tourfic posts in the search result
     $post_type = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
 
-    if($post_type == 'page' && get_query_var( 'destination' ) == ''){
+    if($post_type == 'page' && get_query_var( 'hotel_location' ) == ''){
         $post_type = 'tf_tours';
     }else if( $post_type == 'page' && get_query_var( 'tour_destination' ) == '' ){
-        $post_type = 'tourfic';
+        $post_type = 'tf_hotel';
     }
 
-    $taxonomy = $post_type == 'tf_tours' ? 'tour_destination' : 'destination';
+    $taxonomy = $post_type == 'tf_tours' ? 'tour_destination' : 'hotel_location';
     if( isset($_GET['tour_destination']) ){
         $dest = $_GET['tour_destination'];
     }else{
@@ -514,7 +514,7 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
                 <?php
                     while ( $loop->have_posts() ) : $loop->the_post(); 
 
-                        if( $post_type == 'tourfic' ){
+                        if( $post_type == 'tf_hotel' ){
                             tourfic_archive_single(); 
                         }elseif( $post_type == 'tf_tours' ){
                             //tour archive single gird/section added
@@ -545,8 +545,8 @@ add_shortcode('tf_search_result', 'tourfic_search_result_shortcode');
  */
 function tourfic_trigger_filter_ajax(){
 
-    $relation = tourfic_opt( 'search_relation', 'AND' );
-    $filter_relation = tourfic_opt( 'filter_relation', 'OR' );
+    $relation = tfopt( 'search_relation', 'AND' );
+    $filter_relation = tfopt( 'filter_relation', 'OR' );
 
     $search = ( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
     $filters = ( $_POST['filters'] ) ? explode(',', sanitize_text_field( $_POST['filters'] )) : null;

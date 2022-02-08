@@ -1,442 +1,236 @@
 <?php
 /**
- * Plugin Name: Tourfic - Travel and Hotel Booking Solution for WooCommerce
- * Plugin URI: https://tourfic.com
- * Description: The ultimate WordPress tour management plugin for hotel booking, tour operator and travel agency websites. Manage all your online Travel Booking system along with order system and any payment of WooCommerce. 
- * Author: Themefic
- * Text Domain: tourfic
- * Domain Path: /lang/
- * Author URI: https://themefic.com
- * Version: 2.0.4
- * Tested up to: 5.9
- * Requires PHP: 7.1
- * WC tested up to: 6.1.1
+ * Plugin Name:     Tourfic - Travel and Hotel Booking Solution for WooCommerce
+ * Plugin URI:      https://tourfic.com
+ * Author:          Themefic
+ * Author URI:      https://themefic.com
+ * Github URI:      http://github.com/themefic/tourfic 
+ * Text Domain:     tourfic
+ * Domain Path:     /lang/
+ * Version:         2.1.0
+ * WC tested up to: 6.1.0
+ * Description:     The ultimate WordPress tour management plugin for hotel booking, tour operator and travel agency websites. Manage all your online Travel Booking system along with order system and any payment of WooCommerce.
  */
 
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-// Define WI_VERSION.
-if ( !defined( 'TOURFIC_VERSION' ) ) {
-    define( 'TOURFIC_VERSION', '2.0.4' );
-}
+/**
+ * Including Plugin file
+ * 
+ * @since 1.0
+ */
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
+/**
+ * Tourfic All the Defines
+ *
+ * @since 1.0
+ */
+// URLs
 define( 'TOURFIC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'TOURFIC_TEMPLATES_URL', TOURFIC_PLUGIN_URL . 'templates/' );
 define( 'TOURFIC_ADMIN_URL', TOURFIC_PLUGIN_URL . 'admin/' );
-define( 'TF_ASSETS_URL', TOURFIC_PLUGIN_URL.'assets/' );
+define( 'TF_URL', plugin_dir_url( __FILE__ ) );
+define( 'TF_TEMPLATES_URL', TF_URL . 'templates/' );
+define( 'TF_ADMIN_URL', TF_URL . 'admin/' );
+define( 'TF_ASSETS_URL', TF_URL.'assets/' );
 // Paths
 define( 'TF_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TF_ADMIN_PATH', TF_PATH.'admin/' );
+define( 'TF_INC_PATH', TF_PATH.'inc/' );
+define( 'TF_TEMPLATE_PATH', TF_PATH.'templates/' );
+define( 'TF_OPTIONS_PATH', TF_ADMIN_PATH.'options/' );
 define( 'TF_ASSETS_PATH', TF_PATH.'assets/' );
 
 /**
- * Including Plugin file for security
- * Include_once
+ * Enqueue Main Admin scripts
+ * 
+ * @since 1.0
+ */
+if ( !function_exists('tf_enqueue_main_admin_scripts') ) {
+    function tf_enqueue_main_admin_scripts(){
+
+        // Custom
+        //wp_enqueue_style('tf-pro', TF_PRO_ADMIN_URL . 'css/admin.css','', date("his") );
+        wp_enqueue_script( 'tf', TF_ADMIN_URL . 'assets/js/admin.js', array('jquery'), '', true );   
+        wp_localize_script( 'tf', 'tf_params',
+            array(
+                'tf_nonce' => wp_create_nonce( 'updates' ),
+                'ajax_url' => admin_url( 'admin-ajax.php' ),
+            )
+        );    
+    }
+    add_action( 'admin_enqueue_scripts', 'tf_enqueue_main_admin_scripts' );
+}
+
+/**
+ * Check if WooCommerce is active, and if it isn't, disable the plugin.
  *
+ * @since 1.0
+ */
+if ( !is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+	add_action( 'admin_notices', 'tf_is_woo' );
+
+	/**
+     * Ajax install & activate WooCommerce
+     *
+     * @since 1.0
+     * @link https://developer.wordpress.org/reference/functions/wp_ajax_install_plugin/
+     */
+    add_action("wp_ajax_tf_ajax_install_plugin" , "wp_ajax_install_plugin");
+
+	return;
+}
+
+/**
+ * Tourfic Define
+ *
+ * @since 1.0
+ */
+if ( !defined( 'TOURFIC' ) ) {
+    define( 'TOURFIC', '2.1.0' );
+}
+
+  
+/**
+ * Load the text domain to make the plugin's strings available for localisation.
+ * 
  * @since 1.0.0
  */
-include_once ABSPATH . 'wp-admin/includes/plugin.php';
+function tf_load_textdomain() {
 
-require_once dirname( __FILE__ ) . '/admin/framework/framework.php';
-require_once dirname( __FILE__ ) . '/admin/framework/settings.php';
-require_once dirname( __FILE__ ) . '/admin/framework/taxonomy-fields.php';
-if ( !is_plugin_active('tourfic-pro/tourfic-pro.php') ) {
-    require_once dirname( __FILE__ ) . '/admin/inc/tours/tf-tours-metabox.php';
+    $locale = apply_filters( 'plugin_locale', get_locale(), 'tourfic' );
+    // Allow upgrade safe, site specific language files in /wp-content/languages/tourfic/
+    load_textdomain( 'tourfic', WP_LANG_DIR . '/tourfic/tourfic-' . $locale . '.mo' );
+    // Then check for a language file in /wp-content/plugins/tourfic/lang/ (this will be overriden by any file already loaded)
+    load_plugin_textdomain( 'tourfic', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+
 }
-require_once dirname( __FILE__ ) . '/admin/framework/calendar.php';
+add_action( 'init', 'tf_load_textdomain' );
 
-if ( !function_exists( 'tourfic_opt' ) ) {
-    function tourfic_opt( $option = '', $default = null ) {
-        $options = get_option( 'tourfic_opt' ); // Attention: Set your unique id of the framework
+/**
+ * Plugins Loaded Actions
+ * 
+ * Including Option Framework
+ * 
+ * Including Options
+ */
+if ( ! function_exists( 'tf_plugin_loaded_action' ) ) {
+	function tf_plugin_loaded_action() {
+		
+        /**
+         * Option Framework & options
+         *
+         * @since 1.0
+         */
+		// Options Framework
+		require_once( TF_ADMIN_PATH .'framework/framework.php' );
+        // Options
+        require_once TF_OPTIONS_PATH . 'options.php';
+        //require_once dirname( __FILE__ ) . '/admin/framework/calendar.php';
+		
+	}
+}
+add_action( 'plugins_loaded', 'tf_plugin_loaded_action' );
+
+/**
+ * Global Admin Get Option
+ */
+if ( !function_exists( 'tfopt' ) ) {
+    function tfopt( $option = '', $default = null ) {
+        $options = get_option( 'tourfic_opt' );
         return ( isset( $options[$option] ) ) ? $options[$option] : $default;
     }
 }
 
 /**
- *    Main Class
+ * All the requires
+ */
+
+// Functions
+require_once TF_INC_PATH . 'functions.php';
+
+/**
+ *    Font awesome
+ */
+require_once dirname( __FILE__ ) . '/admin/font-awesome.php';
+
+/**
+ *    Custom Meta Fields
+ */
+require_once dirname( __FILE__ ) . '/admin/tf-admin.php';
+
+/**
+ *    Layouts Function
+ */
+require_once dirname( __FILE__ ) . '/inc/layouts.php';
+
+/**
+ *    Post type
+ */
+require_once dirname( __FILE__ ) . '/inc/post-type.php';
+
+/**
+ *    Post type
+ */
+require_once dirname( __FILE__ ) . '/inc/tourfic-functions.php';
+
+/**
+ *    SVG Icons
+ */
+require_once dirname( __FILE__ ) . '/inc/svg-icons.php';
+
+/**
+ *    Shortcodes
+ */
+require_once dirname( __FILE__ ) . '/inc/shortcodes.php';
+
+/**
+ *    WooCommerce booking
+ */
+require_once dirname( __FILE__ ) . '/inc/booking/tf-woocommerce-hotel-class.php';
+//require_once dirname( __FILE__ ) . '/inc/booking/tf-woocommerce-tours-class.php';
+
+/**
+ *    Widgets
+ */
+require_once dirname( __FILE__ ) . '/inc/widgets.php';
+
+
+/**
+ * Called when WooCommerce is inactive to display an inactive notice.
  *
+ * @since 1.0
  */
-if ( !class_exists( 'Tourfic_WordPress_Plugin' ) ):
-    class Tourfic_WordPress_Plugin {
+function tf_is_woo() {
+    if ( current_user_can( 'activate_plugins' ) ) {
+        if ( !is_plugin_active( 'woocommerce/woocommerce.php' ) && !file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
+        ?>
 
-        public function __construct() {
-            add_action( 'plugins_loaded', [$this, 'load_text_domain'], 10, 2 );
+            <div id="message" class="error">
+                <p><?php printf( __( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
+                <p><a class="install-now button tf-install" data-plugin-slug="woocommerce"><?php esc_attr_e( 'Install Now', 'tourfic' ); ?></a></p>
+            </div>
 
-            add_action( 'wp_enqueue_scripts', [$this, 'enqueue_scripts'], 100 );
-            add_action( 'admin_enqueue_scripts', [$this, 'admin_scripts'] );
-            add_action( 'wp_enqueue_scripts', [$this, 'enqueue_datepicker'] );
+        <?php 
+        } elseif ( !is_plugin_active( 'woocommerce/woocommerce.php' ) && file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
+        ?>
 
-            add_filter( 'single_template', [$this, 'tourfic_single_page_template'] );
-            add_filter( 'template_include', [$this, 'tourfic_archive_page_template'] );
-            add_filter( 'theme_page_templates', [$this, 'page_templates'], 10, 4 );
-            add_filter( 'page_template', [$this, 'load_page_templates'] );
+            <div id="message" class="error">
+                <p><?php printf( __( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
+                <p><a href="<?php echo get_admin_url(); ?>plugins.php?_wpnonce=<?php echo wp_create_nonce( 'activate-plugin_woocommerce/woocommerce.php' ); ?>&action=activate&plugin=woocommerce/woocommerce.php" class="button activate-now button-primary"><?php esc_attr_e( 'Activate', 'tourfic' ); ?></a></p>
+            </div>
 
-            add_filter( 'comments_template', [$this, 'load_comment_template'] );
+        <?php 
+        } elseif ( version_compare( get_option( 'woocommerce_db_version' ), '2.5', '<' ) ) {
+        ?>
 
-            // Admin Notice
-            add_filter( 'admin_notices', [$this, 'admin_notices'] );
+            <div id="message" class="error">
+                <p><?php printf( __( '%sTourfic is inactive.%s This plugin requires WooCommerce 2.5 or newer. Please %supdate WooCommerce to version 2.5 or newer%s', 'tourfic' ), '<strong>', '</strong>', '<a href="' . admin_url( 'plugins.php' ) . '">', '&nbsp;&raquo;</a>' ); ?></p>
+            </div>
 
-            // Image sizes
-            add_filter( 'after_setup_theme', [$this, 'image_sizes'] );
-
-            add_action( 'plugins_loaded', array( $this, 'add_elelmentor_addon' ) );
-
+        <?php 
         }
-
-        public function includes() {
-
-            /**
-             *    Font awesome
-             */
-            require_once dirname( __FILE__ ) . '/admin/font-awesome.php';
-
-            /**
-             *    Custom Meta Fields
-             */
-            require_once dirname( __FILE__ ) . '/admin/tf-admin.php';
-
-            /**
-             *    Layouts Function
-             */
-            require_once dirname( __FILE__ ) . '/inc/layouts.php';
-
-            /**
-             *    Post type
-             */
-            require_once dirname( __FILE__ ) . '/inc/post-type.php';
-
-            /**
-             *    Post type
-             */
-            require_once dirname( __FILE__ ) . '/inc/tourfic-functions.php';
-
-            /**
-             *    SVG Icons
-             */
-            require_once dirname( __FILE__ ) . '/inc/svg-icons.php';
-
-            /**
-             *    Shortcodes
-             */
-            require_once dirname( __FILE__ ) . '/inc/shortcodes.php';
-
-            /**
-             *    WooCommerce booking
-             */
-            require_once dirname( __FILE__ ) . '/inc/booking/tf-woocommerce-hotel-class.php';
-            require_once dirname( __FILE__ ) . '/inc/booking/tf-woocommerce-tours-class.php';
-
-            /**
-             *    Widgets
-             */
-            require_once dirname( __FILE__ ) . '/inc/widgets.php';
-
-        }
-
-        /**
-         * Loading Text Domain
-         *
-         */
-        public function load_text_domain() {
-            $this->includes();
-            //Internationalization
-			load_plugin_textdomain( 'tourfic', false, 'tourfic/lang/' );
-        }
-
-        // Image sizes
-        public function image_sizes() {
-            add_image_size( 'tf_gallery_thumb', 900, 490, true );
-        }
-
-        /**
-         *    Enqueue  scripts
-         *
-         */
-        public function enqueue_scripts() {
-
-            $TOURFIC_VERSION = current_time( 'timestamp' );
-
-            wp_enqueue_script( 'fancybox', TF_ASSETS_URL . 'js/jquery.fancybox.min.js', array( 'jquery' ), '3.5.7' );
-            wp_enqueue_style( 'fancybox', TF_ASSETS_URL . 'css/jquery.fancybox.min.css', '', '3.5.7' );
-
-            wp_register_style( 'font-awesome-5', plugin_dir_url( __FILE__ ) . 'assets/font-awesome-4.7.0/css/all.min.css' );
-            wp_enqueue_style( 'font-awesome-5' );
-           
-            wp_enqueue_style( 'magnific-popup-css', plugin_dir_url( __FILE__ ) . 'assets/css/magnific-popup.css', null, $TOURFIC_VERSION );
-
-            wp_enqueue_style( 'tourfic-styles', plugin_dir_url( __FILE__ ) . 'assets/css/tourfic-styles.min.css', null, $TOURFIC_VERSION );
-
-            wp_enqueue_style( 'tourfic-autocomplete', plugin_dir_url( __FILE__ ) . 'assets/css/tourfic-autocomplete.css', null, $TOURFIC_VERSION );
-            wp_enqueue_style( 'my-style', plugin_dir_url( __FILE__ ) . 'assets/css/my-style.css', null, $TOURFIC_VERSION );
-            wp_enqueue_style( 'owl-carousel', plugin_dir_url( __FILE__ ) . 'assets/css/owl.carousel.min.css', null, $TOURFIC_VERSION );
-            wp_enqueue_style( 'tf-style', plugin_dir_url( __FILE__ ) . 'assets/css/style.css', null, $TOURFIC_VERSION );
-            wp_enqueue_style( 'tf-responsive', plugin_dir_url( __FILE__ ) . 'assets/css/responsive.css', null, $TOURFIC_VERSION );
-
-            wp_enqueue_script( 'slick', plugin_dir_url( __FILE__ ) . 'assets/slick/slick.min.js', array( 'jquery' ), $TOURFIC_VERSION );
-
-            wp_enqueue_script( 'magnific-popup-js', plugin_dir_url( __FILE__ ) . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), $TOURFIC_VERSION );
-            wp_enqueue_script( 'owl-carousel', plugin_dir_url( __FILE__ ) . 'assets/js/owl.carousel.min.js', array( 'jquery' ), $TOURFIC_VERSION );
-
-            wp_enqueue_script( 'tourfic-script', plugin_dir_url( __FILE__ ) . 'assets/js/tourfic-script.js', array( 'jquery' ), $TOURFIC_VERSION, true );
-
-            wp_localize_script( 'tourfic-script', 'tf_params',
-                array(
-                    'nonce'        => wp_create_nonce( 'tf_ajax_nonce' ),
-                    'ajax_url'     => admin_url( 'admin-ajax.php' ),
-                    'destinations' => $this->get_tourfic_destinations(),
-                    'tour_destinations' => $this->get_tours_destinations(),
-                )
-            );
-        }
-
-        /*
-         * Get tourfic destinations
-         */
-
-        public function get_tourfic_destinations() {
-
-            $destinations = array();
-
-            $destination_terms = get_terms( array(
-                'taxonomy'   => 'destination',
-                'hide_empty' => false,
-            ) );
-
-            foreach ( $destination_terms as $destination_term ) {
-
-                $destinations[] = $destination_term->name;
-            }
-
-            return $destinations;
-
-        }
-  /*
-         * Get tours destinations{taxonomy-tour_destination}
-         */
-
-        public function get_tours_destinations() {
-
-            $destinations = array();
-
-            $destination_terms = get_terms( array(
-                'taxonomy'   => 'tour_destination',
-                'hide_empty' => false,
-            ) );
-
-            foreach ( $destination_terms as $destination_term ) {
-
-                $destinations[] = $destination_term->name;
-            }
-
-            return $destinations;
-
-        }
-
-        /**
-         *    Enqueue  scripts
-         */
-        public function admin_scripts( $hook ) {
-            if ( $hook == "widgets.php" && function_exists( 'is_woocommerce' ) ) {
-
-                $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ?: '.min';
-
-                $assets_path = str_replace( array( 'http:', 'https:' ), '', WC()->plugin_url() ) . '/assets/';
-                wp_register_script( 'select2', WC()->plugin_url() . '/assets/js/select2/select2.full' . $suffix . '.js', array( 'jquery' ), '4.0.3' );
-                wp_register_style( 'select2', WC()->plugin_url() . '/assets/css/select2.css' );
-
-                wp_enqueue_script( 'select2' );
-                wp_enqueue_style( 'select2' );
-
-                $output = "
-				(function($) {
-		    		'use strict';
-		    		jQuery(document).ready(function() { ";
-
-                $output .= "$(document).on('tf_select2 widget-added widget-updated', function() {
-
-		    				jQuery('.tf-select2').each(function(){
-		    					if( !$(this).hasClass('select2-hidden-accessible') ){
-		    						$(this).select2({ width: '100%' });
-		    					}
-		    				});
-
-					    });";
-
-                $output .= "
-					});
-				})(jQuery);";
-
-                wp_add_inline_script( 'select2', $output );
-
-            }
-            wp_register_style( 'font-awesome', plugin_dir_url( __FILE__ ) . 'assets/font-awesome-4.7.0/css/font-awesome.min.css' );
-            wp_enqueue_style( 'fullcalendar', plugin_dir_url( __FILE__ ) . 'admin/assets/css/fullcalendar/main.min.css' );
-            wp_enqueue_script( 'fullcalendar', plugin_dir_url( __FILE__ ) . 'admin/assets/js/fullcalendar/main.js', array( 'jquery' ), false, true );
-            wp_enqueue_script( 'fullcalendar-init', plugin_dir_url( __FILE__ ) . 'admin/assets/js/fullcalendar/calendar.js', array( 'jquery', 'fullcalendar' ), false, true );
-
-        }
-
-        /**
-         * Load jQuery datepicker.
-         *
-         */
-        public function enqueue_datepicker() {
-
-            wp_enqueue_style( 'daterangepicker', plugin_dir_url( __FILE__ ) . 'assets/daterangepicker/daterangepicker.css', null, TOURFIC_VERSION );
-
-            wp_enqueue_script( 'moment', plugin_dir_url( __FILE__ ) . 'assets/daterangepicker/moment.min.js', array( 'jquery' ), TOURFIC_VERSION, true );
-            wp_enqueue_script( 'daterangepicker', plugin_dir_url( __FILE__ ) . 'assets/daterangepicker/daterangepicker.js', array( 'jquery' ), TOURFIC_VERSION, true );
-
-        }
-
-        /**
-         * Load elementor.
-         *
-         */
-        public function add_elelmentor_addon() {
-
-            // Check if Elementor installed and activated
-            if ( !did_action( 'elementor/loaded' ) ) {
-                return;
-            }
-            // Once we get here, We have passed all validation checks so we can safely include our plugin
-            require_once 'inc/elementor-addon/elementor-addon-register.php';
-
-        }
-
-        // Show Page Template
-        public function page_templates( $templates, $wp_theme, $post, $post_type ) {
-            $templates['tf_search-result'] = 'Tourfic - Search Result';
-            return $templates;
-        }
-
-        // Load Page Template
-        public function load_page_templates( $page_template ) {
-
-            if ( get_page_template_slug() == 'tf_search-result' ) {
-                $theme_files = array( 'search-tourfic.php', 'templates/search-tourfic.php' );
-                $exists_in_theme = locate_template( $theme_files, false );
-                if ( $exists_in_theme != '' ) {
-                    return $exists_in_theme;
-                } else {
-                    return dirname( __FILE__ ) . '/templates/search-tourfic.php';
-                }
-            }
-            return $page_template;
-        }
-
-        // Single Template
-        public function tourfic_single_page_template( $single_template ) {
-            global $post;
-
-            $single_tour_style = tourfic_opt( 'single_tour_style' );
-
-            $st = isset( $single_tour_style ) ? $single_tour_style : 'single-tourfic.php';
-            //$s_tours = isset( $single_tour_style ) ? $single_tour_style : 'single-tf_tours.php';
-
-            if ( 'tourfic' === $post->post_type ) {
-                $theme_files = array( 'single-tourfic.php', 'templates/single-tourfic.php' );
-                $exists_in_theme = locate_template( $theme_files, false );
-                if ( $exists_in_theme != '' ) {
-                    return $exists_in_theme;
-                } else {
-                    return dirname( __FILE__ ) . "/templates/{$st}";
-                }
-            }
-
-            if ( 'tf_tours' === $post->post_type ) {
-                $theme_files = array( 'single-tf_tours.php', 'templates/single-tf_tours.php' );
-                $exists_in_theme = locate_template( $theme_files, false );
-                if ( $exists_in_theme != '' ) {
-                    return $exists_in_theme;
-                } else {
-                    return dirname( __FILE__ ) . "/templates/single-tf_tours.php";
-                }
-            }
-            return $single_template;
-        }
-
-        // Archive Template
-        public function tourfic_archive_page_template( $template ) {
-            if ( is_post_type_archive( 'tourfic' ) ) {
-
-                $theme_files = array( 'archive-tourfic.php', 'templates/archive-tourfic.php' );
-                $exists_in_theme = locate_template( $theme_files, false );
-                if ( $exists_in_theme != '' ) {
-                    return $exists_in_theme;
-                } else {
-                    return dirname( __FILE__ ) . '/templates/archive-tourfic.php';
-                }
-
-            }
-
-            if( is_post_type_archive( 'tf_tours' ) ){
-                $theme_files = array( 'archive-tf_tours.php', 'templates/archive-tf_tours.php' );
-                $exists_in_theme = locate_template( $theme_files, false );
-                if( $exists_in_theme != '' ){
-                    return $exists_in_theme;
-                }else{
-                    return dirname( __FILE__ ) . '/templates/archive-tf_tours.php';
-                }
-            }
-            return $template;
-        }
-
-        // Review form load
-        public function load_comment_template( $comment_template ) {
-            global $post;
-
-            if ( !( is_singular() && ( have_comments() || 'open' == $post->comment_status ) ) ) {
-                // leave the standard comments template for standard post types
-                return;
-            }
-
-            if ( 'tourfic' === $post->post_type || 'tf_tours' === $post->post_type ) {
-                $theme_files = array( 'review.php', 'templates/review.php' );
-                $exists_in_theme = locate_template( $theme_files, false );
-                if ( $exists_in_theme != '' ) {
-                    return $exists_in_theme;
-                } else {
-                    return dirname( __FILE__ ) . '/templates/review.php';
-                }
-            }
-
-            return $comment_template;
-
-        }
-
-        /**
-         * Notice if WooCommerce is inactive
-         */
-        public function admin_notices() {
-            if ( !class_exists( 'WooCommerce' ) ) {?>
-			    <div class="notice notice-warning is-dismissible">
-			        <p>
-			        	<strong><?php esc_html_e( 'Tourfic requires WooCommerce to be activated ', 'tourfic' );?> <a href="<?php echo esc_url( admin_url( '/plugin-install.php?s=slug:woocommerce&tab=search&type=term' ) ); ?>">Install Now</a></strong>
-			        </p>
-			    </div> <?php
     }
-        }
-
-    }
-    new Tourfic_WordPress_Plugin;
-endif;
-
-/*
- * Asign Destination taxonomy template
- */
-
-add_filter( 'template_include', 'taxonomy_template' );
-function taxonomy_template( $template ) {
-
-    if ( is_tax( 'destination' ) ) {
-        $template = dirname( __FILE__ ) . '/templates/taxonomy-destination.php';
-    }
-    if ( is_tax( 'tour_destination' ) ) {
-        $template = dirname( __FILE__ ) . '/templates/taxonomy-tour_destination.php';
-    }
-
-    return $template;
-
 }

@@ -1,1499 +1,474 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Tourfic - Tour / Travel / Trip Booking for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-17 11:04+0600\n"
+"POT-Creation-Date: 2021-02-03 05:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: \n"
 "Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.5.0; wp-5.6\n"
+"X-Domain: tourfic"
 
-#: tourfic.php:417
-msgid "Tourfic requires WooCommerce to be activated "
+#: admin/inc/tf-field-functions.php:37
+msgid "# Room Title"
 msgstr ""
 
-#: admin/framework/settings.php:11
-msgid "Tourfic"
+#: inc/post-type.php:33
+#, php-format
+msgid "%1$s Attributes"
 msgstr ""
 
-#: admin/framework/settings.php:13
-msgid ""
-"Tourfic Settings <small><a href=\"https://themefic.com/\">By THEMEFIC</a></"
-"small>"
+#: inc/post-type.php:29
+#, php-format
+msgid "%1$s Image"
 msgstr ""
 
-#: admin/framework/settings.php:14
-msgid ""
-"Enjoyed Tourfic? Please leave us a <a target=\"_blank\" href=\"https://"
-"wordpress.org/support/plugin/tourfic/reviews/#new-post\">★★★★★</a> rating. "
-"We really appreciate your support!"
+#: inc/post-type.php:36
+#, php-format
+msgid "%2$s list"
 msgstr ""
 
-#: admin/framework/settings.php:26 admin/inc/tours/tf-tours-metabox.php:23
+#: inc/post-type.php:35
+#, php-format
+msgid "%2$s list navigation"
+msgstr ""
+
+#: inc/shortcodes.php:58
+#, php-format
+msgid "%s properties"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:207
+msgid "Add Gallery Images"
+msgstr ""
+
+#: inc/tourfic-functions.php:471 inc/tourfic-functions.php:507
+msgid "Add Image"
+msgstr ""
+
+#: inc/post-type.php:17
+msgid "Add New"
+msgstr ""
+
+#: inc/post-type.php:18
+#, php-format
+msgid "Add New %1$s"
+msgstr ""
+
+#: inc/post-type.php:142
+msgid "Add new Destinations"
+msgstr ""
+
+#: inc/post-type.php:149
+msgid "Add or remove Destination"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:232
+msgid "Add Property Description"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:243
+msgid "Add Property Informations"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:181
+msgid "Add Room"
+msgstr ""
+
+#: templates/single-tourfic.php:153 admin/inc/tf-custom-fields.php:157
+#: admin/inc/tf-custom-fields.php:240
+msgid "Additional Information"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:185 inc/tf-woocommerce-class.php:232
+msgid "Adults"
+msgstr ""
+
+#: inc/post-type.php:21
+#, php-format
+msgid "All %2$s"
+msgstr ""
+
+#: templates/single-tourfic.php:92
+msgid "All Available Rooms"
+msgstr ""
+
+#: inc/post-type.php:138
+msgid "All Destination"
+msgstr ""
+
+#: inc/post-type.php:155
+msgid "Back to Destination"
+msgstr ""
+
+#. Author of the plugin
+msgid "BootPeople"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:199 inc/tf-woocommerce-class.php:242
+msgid "Check-in Date"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:48
+msgid "Check-in date missing."
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:206 inc/tf-woocommerce-class.php:247
+msgid "Check-out Date"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:51
+msgid "Check-out date missing."
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:192 inc/tf-woocommerce-class.php:237
+msgid "Children"
+msgstr ""
+
+#: inc/post-type.php:150
+msgid "Choose from the most used Destination"
+msgstr ""
+
+#: templates/single-tourfic.php:50
+msgid "Copied!"
+msgstr ""
+
+#: templates/single-tourfic.php:49
+msgid "Copy link"
+msgstr ""
+
+#: inc/options.php:177
+msgid "Custom CSS"
+msgstr ""
+
+#: inc/options.php:164
+msgid "Default is: <code>tourfic</code>"
+msgstr ""
+
+#: templates/single-tourfic.php:152 admin/inc/tf-field-functions.php:71
+msgid "Description"
+msgstr ""
+
+#: inc/post-type.php:135 inc/post-type.php:137 inc/post-type.php:159
+msgid "Destination"
+msgstr ""
+
+#: inc/tourfic-functions.php:467 inc/tourfic-functions.php:496
+msgid "Destination Image"
+msgstr ""
+
+#: inc/post-type.php:154
+msgid "Destination list"
+msgstr ""
+
+#: inc/post-type.php:153
+msgid "Destination list navigation"
+msgstr ""
+
+#: inc/post-type.php:136
+msgid "Destinations"
+msgstr ""
+
+#: inc/post-type.php:19
+#, php-format
+msgid "Edit %1$s"
+msgstr ""
+
+#: inc/post-type.php:139
+msgid "Edit Destinations"
+msgstr ""
+
+#: inc/post-type.php:112 inc/post-type.php:120
+#, php-format
+msgid "Enter %s name here"
+msgstr ""
+
+#: inc/options.php:170
+msgid "Extras"
+msgstr ""
+
+#: inc/options.php:171
+msgid "Extras Options for Advance Useages"
+msgstr ""
+
+#: inc/post-type.php:34
+#, php-format
+msgid "Filter %2$s list"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:218
+msgid "Formatted Location"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:154 admin/inc/tf-custom-fields.php:189
+msgid "Gallery"
+msgstr ""
+
+#: inc/options.php:149
 msgid "General"
 msgstr ""
 
-#: admin/framework/settings.php:32
-msgid "Input slug of Hotel"
+#: inc/options.php:150
+msgid "General Options"
 msgstr ""
 
-#: admin/framework/settings.php:33
-msgid ""
-"Default is: <code>tourfic</code> - <strong>Save 2 times if you change this "
-"field for permalink flush</strong>"
+#. Author URI of the plugin
+msgid "https://psdtowpservice.com"
 msgstr ""
 
-#: admin/framework/settings.php:38
-msgid "Input slug of Tour"
+#. URI of the plugin
+msgid "https://psdtowpservice.com/tourfic"
 msgstr ""
 
-#: admin/framework/settings.php:39
-msgid ""
-"Default is: <code>tour</code> - <strong>Save 2 times if you change this "
-"field for permalink flush</strong>"
+#: admin/inc/tf-custom-fields.php:228
+msgid "Information"
 msgstr ""
 
-#: admin/framework/settings.php:46
-msgid "Select Single Page Template"
+#: inc/tourfic-functions.php:36
+msgid "Leave a Review"
 msgstr ""
 
-#: admin/framework/settings.php:47
-msgid "You can choose signle tour page layout from here"
+#: admin/inc/tf-custom-fields.php:155
+msgid "Location"
 msgstr ""
 
-#: admin/framework/settings.php:62 inc/layouts.php:275 inc/layouts.php:404
-#: inc/tourfic-functions.php:1399 inc/tourfic-functions.php:1526
-msgid "Search"
+#: admin/inc/tf-custom-fields.php:214
+msgid "Location Options"
 msgstr ""
 
-#: admin/framework/settings.php:72
-msgid "Select Search Result Page"
+#: inc/post-type.php:20
+#, php-format
+msgid "New %1$s"
 msgstr ""
 
-#: admin/framework/settings.php:73
+#: inc/post-type.php:143
+msgid "New Destinations name"
+msgstr ""
+
+#: inc/post-type.php:25
+#, php-format
+msgid "No %2$s found"
+msgstr ""
+
+#: inc/post-type.php:26
+#, php-format
+msgid "No %2$s found in Trash"
+msgstr ""
+
+#: inc/post-type.php:152
+msgid "No Destination"
+msgstr ""
+
+#: inc/post-type.php:151
+msgid "No Destination found"
+msgstr ""
+
+#: inc/options.php:158
 msgid "Page template: <code>Tourfic - Search Result</code> must be selected"
 msgstr ""
 
-#: admin/framework/settings.php:80
-msgid "Search Result Relation"
+#: inc/post-type.php:144
+msgid "Parent Destinations"
 msgstr ""
 
-#: admin/framework/settings.php:81
-msgid ""
-"Search result relation with search widget and filters. OR means matched any "
-"query, AND means matched all query."
+#: inc/post-type.php:145
+msgid "Parent Destinations:"
 msgstr ""
 
-#: admin/framework/settings.php:94
-msgid "Filters Relation"
+#: inc/post-type.php:147
+msgid "Popular Destination"
 msgstr ""
 
-#: admin/framework/settings.php:95
-msgid ""
-"Search result Filters relation with among filters. OR means matched any "
-"filter, AND means matched all filter."
+#: admin/inc/tf-field-functions.php:80
+msgid "Price"
 msgstr ""
 
-#: admin/framework/settings.php:118
-msgid "Custom CSS"
+#: inc/tourfic-functions.php:396
+msgid "Price per night"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:156
+msgid "Property Description"
+msgstr ""
+
+#: inc/post-type.php:31
+#, php-format
+msgid "Remove %1$s Image"
+msgstr ""
+
+#: inc/tourfic-functions.php:472 inc/tourfic-functions.php:508
+msgid "Remove Image"
+msgstr ""
+
+#: inc/tourfic-functions.php:37
+msgid "Reply"
+msgstr ""
+
+#: templates/single-tourfic.php:58
+msgid "Reserve"
+msgstr ""
+
+#: templates/single-tourfic.php:154
+msgid "Reviews"
+msgstr ""
+
+#: admin/inc/tf-field-functions.php:57
+msgid "Room Name"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:167
+msgid "Room Options"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:178 inc/tf-woocommerce-class.php:227
+msgid "Room Selected"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:171 inc/tf-woocommerce-class.php:222
+msgid "Room Type"
+msgstr ""
+
+#: admin/inc/tf-custom-fields.php:153
+msgid "Rooms"
+msgstr ""
+
+#: admin/inc/tf-field-functions.php:88
+msgid "Sale Price"
+msgstr ""
+
+#: inc/layouts.php:115 inc/layouts.php:223 inc/shortcodes.php:326
+msgid "Search"
+msgstr ""
+
+#: inc/post-type.php:24
+#, php-format
+msgid "Search %2$s"
+msgstr ""
+
+#: inc/post-type.php:146
+msgid "Search Destination"
+msgstr ""
+
+#: inc/layouts.php:64
+msgid "See availability"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:54
+msgid "Select Adult(s)."
+msgstr ""
+
+#: inc/options.php:163
+msgid "Select post type slug"
+msgstr ""
+
+#: inc/tf-woocommerce-class.php:57
+msgid "Select Room(s)."
+msgstr ""
+
+#: inc/options.php:157
+msgid "Select Search Result Page"
+msgstr ""
+
+#: inc/post-type.php:148
+msgid "Separate Destination with commas"
+msgstr ""
+
+#: inc/post-type.php:30
+#, php-format
+msgid "Set %1$s Image"
+msgstr ""
+
+#: inc/options.php:25 inc/options.php:33 inc/options.php:34
+msgid "Settings"
+msgstr ""
+
+#: templates/single-tourfic.php:36
+msgid "Share on Facebook"
+msgstr ""
+
+#: templates/single-tourfic.php:41
+msgid "Share on Twitter"
+msgstr ""
+
+#: templates/single-tourfic.php:46
+msgid "Share this link"
+msgstr ""
+
+#: admin/inc/tf-field-functions.php:64
+msgid "Short Description"
+msgstr ""
+
+#: inc/post-type.php:16
+#, php-format
+msgctxt "singular tourfic post type name"
+msgid "%1$s"
+msgstr ""
+
+#: inc/tourfic-functions.php:35
+msgid "Submit"
+msgstr ""
+
+#: inc/post-type.php:71
+msgid "Tour"
+msgstr ""
+
+#. Name of the plugin
+msgid "Tourfic - Tour / Travel / Trip Booking for WooCommerce"
 msgstr ""
 
 #: admin/inc/tf-custom-fields.php:38
 msgid "Tourfic Options"
 msgstr ""
 
-#: admin/inc/tf-custom-fields.php:183 admin/inc/tf-custom-fields.php:255
-#: templates/single-tf_tours.php:168 templates/single-tourfic.php:93
-#: templates/tf-tours-single.php:163
-msgid "Highlights"
+#: inc/post-type.php:28
+msgctxt "tourfic post type menu name"
+msgid "Tourfic"
 msgstr ""
 
-#: admin/inc/tf-custom-fields.php:184
-msgid "Rooms"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:185 admin/inc/tf-custom-fields.php:217
-msgid "Gallery"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:186 admin/inc/tours/tf-tours-metabox.php:89
-msgid "Location"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:187 admin/inc/tours/tf-tours-metabox.php:555
-#: admin/inc/tours/tf-tours-metabox.php:560 templates/single-tourfic.php:208
-msgid "FAQs"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:188 admin/inc/tours/tf-tours-metabox.php:578
-#: admin/inc/tours/tf-tours-metabox.php:583
-msgid "Terms & Conditions"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:195
-msgid "Room Options"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:209
-msgid "Add Room"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:235
-msgid "Add Gallery Images"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:242
-msgid "Location Options"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:246
-msgid "Formatted Location"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:275 inc/post-type.php:352
-msgid "Popular Features"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:276
-msgid "Select Popular Features for Filters"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:295
-msgid "Toggle selection"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:310
-msgid "Frequently Asked Questions"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:324
-msgid "Add FAQ"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:328
-msgid "Ask Questions"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:332
-msgid "Send email to"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:335
-msgid "abc@xyz.com"
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:336
-msgid "Site admin email."
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:336
-msgid "Author email of this post."
-msgstr ""
-
-#: admin/inc/tf-custom-fields.php:341
-msgid "Add Terms & Conditions"
-msgstr ""
-
-#: admin/inc/tf-field-functions.php:35
-msgid "# Room Title"
-msgstr ""
-
-#: admin/inc/tf-field-functions.php:56
-msgid "Room Name"
-msgstr ""
-
-#: admin/inc/tf-field-functions.php:63
-#: admin/inc/tours/tf-tours-metabox.php:228
-msgid "Short Description"
-msgstr ""
-
-#: admin/inc/tf-field-functions.php:70 templates/single-tourfic.php:161
-msgid "Room Features"
-msgstr ""
-
-#: admin/inc/tf-field-functions.php:74
-msgid "[tf_list icon=\"fa-wifi\" text=\"Free Wifi\"]"
-msgstr ""
-
-#: admin/inc/tf-field-functions.php:81
-#: admin/inc/tours/tf-tours-metabox.php:236 templates/single-tf_tours.php:98
-#: templates/tf-tours-single.php:76
-msgid "Price"
-msgstr ""
-
-#: admin/inc/tf-field-functions.php:89
-msgid "Sale Price"
-msgstr ""
-
-#: admin/inc/tf-field-functions.php:98 templates/single-tourfic.php:142
-msgid "Pax"
-msgstr ""
-
-#: admin/inc/tf-field-functions.php:139
-msgid "# FAQ Title"
-msgstr ""
-
-#: admin/inc/tf-field-functions.php:159
-#: admin/inc/tours/tf-tours-metabox.php:565
-msgid "FAQ Title"
-msgstr ""
-
-#: admin/inc/tf-field-functions.php:166
-#: admin/inc/tours/tf-tours-metabox.php:513
-msgid "Description"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:14
-msgid "Tours Setting"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:30
-msgid "Set this tour as featured"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:31
-msgid "Tour will be shown under featured sections"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:46
-msgid "Single Tour Page Layout"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:48
-msgid "Default"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:60
-msgid "Add features"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:61
-msgid "Tour features"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:66 templates/single-tf_tours.php:84
-msgid "Tour Gallery"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:72
-msgid "Hero Section Title"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:77
-msgid "Tour Video"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:78
-msgid ""
-"<a href=\"https://tourfic.com/#purchase\" target=\"_blank\" style=\"text-"
-"decoration: none;\"><a href=\"https://tourfic.com/#purchase\" target=\"_blank"
-"\" style=\"text-decoration: none;\"><strong class=\"tf-pro\">Pro</strong></"
-"a></a>"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:95
-msgid "Tour Location"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:96
-msgid "Manually enter your tour location"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:102
-msgid "Tour Location Pro (Auto Suggestion)"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:103
-msgid ""
-"Location suggestions will be provided from Google <a href=\"https://tourfic."
-"com/#purchase\" target=\"_blank\" style=\"text-decoration: none;\"><strong "
-"class=\"tf-pro\">Pro</strong></a>"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:123
-msgid "Hightlights"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:129
-msgid "Tour Hightlights"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:130
-msgid "Enter a summary or full description of your tour"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:138
-msgid "Information"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:144
-msgid "Tour Duration"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:145
-msgid "E.g. 3 days"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:150 templates/single-tf_tours.php:137
-#: templates/tf-tours-single.php:128
-msgid "Group Size"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:151
-msgid "E.g. 10 people"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:156
-msgid "Languages"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:157
-msgid "Input languages seperated by comma(,)"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:162
-msgid "Minimum Person"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:163
-msgid "Minimum person to travel"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:168
-msgid "Maximum Person"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:169
-msgid "Maximum person to travel"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:177
-msgid "Contact Info"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:183
-msgid "Email Address"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:184
-#: admin/inc/tours/tf-tours-metabox.php:190
-#: admin/inc/tours/tf-tours-metabox.php:196
-#: admin/inc/tours/tf-tours-metabox.php:202
-#: admin/inc/tours/tf-tours-metabox.php:215
-#: admin/inc/tours/tf-tours-metabox.php:394
-#: admin/inc/tours/tf-tours-metabox.php:406
-msgid ""
-"<a href=\"https://tourfic.com/#purchase\" target=\"_blank\" style=\"text-"
-"decoration: none;\"><strong class=\"tf-pro\">Pro</strong></a>"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:189
-msgid "Phone Number"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:195
-msgid "Website Url"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:201
-msgid "Fax Number"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:209
-msgid "Tour Extra"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:214
-msgid "Extra Services on Tour"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:220
-#: admin/inc/tours/tf-tours-metabox.php:498
-#: inc/elementor-addon/widgets/tourfic-search.php:99
-msgid "Title"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:248
-msgid "Price Settings"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:253
-msgid "Pricing Rule"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:254
-msgid "Input pricing rule"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:257
-msgid "Person"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:258
-msgid "Group (Pro)"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:265
-msgid "Price for Adult"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:266
-msgid "Input adult price"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:276
-msgid "Price for Child"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:277
-msgid "Input child price"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:286
-msgid "Price for Infant"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:287
-msgid "Input infant price"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:296
-msgid "Group Price"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:297
-msgid "Input group price"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:305
-msgid "Discount Type"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:306
-msgid "Select discount type Percent or Fixed"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:308
-msgid "None"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:309
-msgid "Percent"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:310
-#: admin/inc/tours/tf-tours-metabox.php:341
-msgid "Fixed"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:317
-msgid "Discount Price"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:318
-msgid "Input discount price in number"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:331
-#: admin/inc/tours/tf-tours-metabox.php:349 templates/single-tourfic.php:135
-msgid "Availability"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:336
-msgid "Tour Type"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:337
-msgid ""
-"Fixed: Tour will be available on a fixed date. Continous: Tour will be "
-"available every month within the mentioned range."
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:340
-msgid "Continuous (Pro)"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:350
-msgid "Input your availability"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:357
-#: admin/inc/tours/tf-tours-metabox.php:416
-msgid "Check In"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:358
-msgid "Select check in date"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:367
-#: admin/inc/tours/tf-tours-metabox.php:425
-msgid "Check Out"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:368
-msgid "Select check out date"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:377
-msgid "Minimum People"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:378
-msgid "Minimum seat number"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:383
-#: admin/inc/tours/tf-tours-metabox.php:439
-msgid "Maximum People"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:384
-msgid "Maximum seat number"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:393
-msgid "Custom Availability"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:398
-msgid "Yes"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:399
-msgid "No"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:434
-msgid "Min People"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:448
-msgid "Booking"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:455
-msgid "Minimum days to book before departure"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:456
-msgid ""
-"Customer can not book after this date <a href=\"https://tourfic.com/#purchase"
-"\" target=\"_blank\" style=\"text-decoration: none;\"><strong class=\"tf-pro"
-"\">Pro</strong></a>"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:481
-#: admin/inc/tours/tf-tours-metabox.php:486
-msgid "Itinerary"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:492
-msgid "Time or Day"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:493
-msgid "You can place the tour plan"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:499
-msgid "Input the title here"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:521
-msgid "Exclude/Include"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:526
-msgid "Include"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:532 templates/single-tf_tours.php:187
-#: templates/tf-tours-single.php:231
-msgid "Included"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:533
-msgid "Included facilites"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:540
-msgid "Exclude"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:546 templates/single-tf_tours.php:197
-#: templates/tf-tours-single.php:244
-msgid "Excluded"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:547
-msgid "Excluded facilites"
-msgstr ""
-
-#: admin/inc/tours/tf-tours-metabox.php:570
-msgid "FAQ Description"
-msgstr ""
-
-#: inc/layouts.php:73 inc/layouts.php:157
-msgid "Book Now"
-msgstr ""
-
-#: inc/layouts.php:103
-msgid "Featured"
-msgstr ""
-
-#: inc/layouts.php:219
-msgid "Customer Rating"
-msgstr ""
-
-#: inc/layouts.php:226 templates/review.php:90
-#, php-format
-msgctxt "comments title"
-msgid "Based on %1$s review"
-msgid_plural "Based on %1$s reviews"
-msgstr[0] ""
-msgstr[1] ""
-
-#: inc/post-type.php:17 inc/post-type.php:46
+#: inc/post-type.php:15
 #, php-format
 msgctxt "tourfic post type name"
 msgid "%2$s"
 msgstr ""
 
-#: inc/post-type.php:18 inc/post-type.php:47
-#, php-format
-msgctxt "singular tourfic post type name"
-msgid "%1$s"
+#: tourfic.php:247
+msgid "Tourfic requires WooCommerce to be activated "
 msgstr ""
 
-#: inc/post-type.php:19 inc/post-type.php:48
-msgid "Add New"
+#: inc/post-type.php:72
+msgid "Tours"
 msgstr ""
 
-#: inc/post-type.php:20 inc/post-type.php:49
-#, php-format
-msgid "Add New %1$s"
+#: inc/tf-woocommerce-class.php:60
+msgid "Unknown Error! Please try again."
 msgstr ""
 
-#: inc/post-type.php:21 inc/post-type.php:50
-#, php-format
-msgid "Edit %1$s"
+#: inc/post-type.php:141
+msgid "Update Destinations name"
 msgstr ""
 
-#: inc/post-type.php:22 inc/post-type.php:51
-#, php-format
-msgid "New %1$s"
-msgstr ""
-
-#: inc/post-type.php:23 inc/post-type.php:52
-#, php-format
-msgid "All %2$s"
-msgstr ""
-
-#: inc/post-type.php:24 inc/post-type.php:53
-#, php-format
-msgid "View %1$s"
-msgstr ""
-
-#: inc/post-type.php:25 inc/post-type.php:54
-#, php-format
-msgid "View %2$s"
-msgstr ""
-
-#: inc/post-type.php:26 inc/post-type.php:55
-#, php-format
-msgid "Search %2$s"
-msgstr ""
-
-#: inc/post-type.php:27 inc/post-type.php:56
-#, php-format
-msgid "No %2$s found"
-msgstr ""
-
-#: inc/post-type.php:28 inc/post-type.php:57
-#, php-format
-msgid "No %2$s found in Trash"
-msgstr ""
-
-#: inc/post-type.php:30
-msgctxt "tourfic post type menu name"
-msgid "Hotels"
-msgstr ""
-
-#: inc/post-type.php:31 inc/post-type.php:60
-#, php-format
-msgid "%1$s Image"
-msgstr ""
-
-#: inc/post-type.php:32 inc/post-type.php:61
-#, php-format
-msgid "Set %1$s Image"
-msgstr ""
-
-#: inc/post-type.php:33 inc/post-type.php:62
-#, php-format
-msgid "Remove %1$s Image"
-msgstr ""
-
-#: inc/post-type.php:34 inc/post-type.php:63
+#: inc/post-type.php:32
 #, php-format
 msgid "Use as %1$s Image"
 msgstr ""
 
-#: inc/post-type.php:35 inc/post-type.php:64
+#: inc/post-type.php:22
 #, php-format
-msgid "%1$s Attributes"
+msgid "View %1$s"
 msgstr ""
 
-#: inc/post-type.php:36 inc/post-type.php:65
+#: inc/post-type.php:23
 #, php-format
-msgid "Filter %2$s list"
+msgid "View %2$s"
 msgstr ""
 
-#: inc/post-type.php:37 inc/post-type.php:66
-#, php-format
-msgid "%2$s list navigation"
-msgstr ""
-
-#: inc/post-type.php:38 inc/post-type.php:67
-#, php-format
-msgid "%2$s list"
-msgstr ""
-
-#: inc/post-type.php:59
-msgctxt "tourfic post type menu name"
-msgid "Tours"
-msgstr ""
-
-#: inc/post-type.php:120
-msgid "Hotel"
-msgstr ""
-
-#: inc/post-type.php:121
-msgid "Hotels"
-msgstr ""
-
-#: inc/post-type.php:128
-msgid "Tour"
-msgstr ""
-
-#: inc/post-type.php:129
-msgid "Tours"
-msgstr ""
-
-#: inc/post-type.php:178 inc/post-type.php:186
-#, php-format
-msgid "Enter %s name here"
-msgstr ""
-
-#: inc/post-type.php:199 inc/post-type.php:201 inc/post-type.php:223
-#: inc/post-type.php:294 inc/post-type.php:296 inc/post-type.php:318
-msgid "Destination"
-msgstr ""
-
-#: inc/post-type.php:200 inc/post-type.php:295
-msgid "Destinations"
-msgstr ""
-
-#: inc/post-type.php:202 inc/post-type.php:297
-msgid "All Destination"
-msgstr ""
-
-#: inc/post-type.php:203 inc/post-type.php:298
-msgid "Edit Destinations"
-msgstr ""
-
-#: inc/post-type.php:204 inc/post-type.php:299
+#: inc/post-type.php:140
 msgid "View Destinations"
-msgstr ""
-
-#: inc/post-type.php:205 inc/post-type.php:300
-msgid "Update Destinations name"
-msgstr ""
-
-#: inc/post-type.php:206 inc/post-type.php:301
-msgid "Add new Destinations"
-msgstr ""
-
-#: inc/post-type.php:207 inc/post-type.php:302
-msgid "New Destinations name"
-msgstr ""
-
-#: inc/post-type.php:208 inc/post-type.php:303
-msgid "Parent Destinations"
-msgstr ""
-
-#: inc/post-type.php:209 inc/post-type.php:304
-msgid "Parent Destinations:"
-msgstr ""
-
-#: inc/post-type.php:210 inc/post-type.php:305
-msgid "Search Destination"
-msgstr ""
-
-#: inc/post-type.php:211 inc/post-type.php:306
-msgid "Popular Destination"
-msgstr ""
-
-#: inc/post-type.php:212 inc/post-type.php:307
-msgid "Separate Destination with commas"
-msgstr ""
-
-#: inc/post-type.php:213 inc/post-type.php:308
-msgid "Add or remove Destination"
-msgstr ""
-
-#: inc/post-type.php:214 inc/post-type.php:309
-msgid "Choose from the most used Destination"
-msgstr ""
-
-#: inc/post-type.php:215 inc/post-type.php:310
-msgid "No Destination found"
-msgstr ""
-
-#: inc/post-type.php:216 inc/post-type.php:311
-msgid "No Destination"
-msgstr ""
-
-#: inc/post-type.php:217 inc/post-type.php:312
-msgid "Destination list navigation"
-msgstr ""
-
-#: inc/post-type.php:218 inc/post-type.php:313
-msgid "Destination list"
-msgstr ""
-
-#: inc/post-type.php:219 inc/post-type.php:314
-msgid "Back to Destination"
-msgstr ""
-
-#: inc/post-type.php:245 inc/post-type.php:247 inc/post-type.php:269
-msgid "Filters"
-msgstr ""
-
-#: inc/post-type.php:246
-msgid "Filter"
-msgstr ""
-
-#: inc/post-type.php:248
-msgid "All Filters"
-msgstr ""
-
-#: inc/post-type.php:249
-msgid "Edit Filter"
-msgstr ""
-
-#: inc/post-type.php:250
-msgid "View Filter"
-msgstr ""
-
-#: inc/post-type.php:251
-msgid "Update Filter name"
-msgstr ""
-
-#: inc/post-type.php:252
-msgid "Add new Filter"
-msgstr ""
-
-#: inc/post-type.php:253
-msgid "New Filter name"
-msgstr ""
-
-#: inc/post-type.php:254
-msgid "Parent Filter"
-msgstr ""
-
-#: inc/post-type.php:255
-msgid "Parent Filter:"
-msgstr ""
-
-#: inc/post-type.php:256
-msgid "Search Filters"
-msgstr ""
-
-#: inc/post-type.php:257 inc/widgets.php:77 inc/widgets.php:229
-msgid "Popular Filters"
-msgstr ""
-
-#: inc/post-type.php:258
-msgid "Separate Filters with commas"
-msgstr ""
-
-#: inc/post-type.php:259
-msgid "Add or remove Filters"
-msgstr ""
-
-#: inc/post-type.php:260
-msgid "Choose from the most used Filters"
-msgstr ""
-
-#: inc/post-type.php:261
-msgid "No Filters found"
-msgstr ""
-
-#: inc/post-type.php:262
-msgid "No Filters"
-msgstr ""
-
-#: inc/post-type.php:263
-msgid "Filters list navigation"
-msgstr ""
-
-#: inc/post-type.php:264
-msgid "Filters list"
-msgstr ""
-
-#: inc/post-type.php:265
-msgid "Back to Filters"
-msgstr ""
-
-#: inc/post-type.php:340 inc/post-type.php:342 inc/post-type.php:364
-msgid "Tour Features"
-msgstr ""
-
-#: inc/post-type.php:341
-msgid "Tour Feature"
-msgstr ""
-
-#: inc/post-type.php:343
-msgid "All Features"
-msgstr ""
-
-#: inc/post-type.php:344
-msgid "Edit Feature"
-msgstr ""
-
-#: inc/post-type.php:345
-msgid "View Features"
-msgstr ""
-
-#: inc/post-type.php:346
-msgid "Update Feature name"
-msgstr ""
-
-#: inc/post-type.php:347
-msgid "Add new Feature"
-msgstr ""
-
-#: inc/post-type.php:348
-msgid "New Feature name"
-msgstr ""
-
-#: inc/post-type.php:349
-msgid "Parent Feature"
-msgstr ""
-
-#: inc/post-type.php:350
-msgid "Parent Feature:"
-msgstr ""
-
-#: inc/post-type.php:351
-msgid "Search Features"
-msgstr ""
-
-#: inc/post-type.php:353
-msgid "Separate Features with commas"
-msgstr ""
-
-#: inc/post-type.php:354
-msgid "Add or remove Features"
-msgstr ""
-
-#: inc/post-type.php:355
-msgid "Choose from the most used Features"
-msgstr ""
-
-#: inc/post-type.php:356
-msgid "No Features found"
-msgstr ""
-
-#: inc/post-type.php:357
-msgid "No Features"
-msgstr ""
-
-#: inc/post-type.php:358
-msgid "Features list navigation"
-msgstr ""
-
-#: inc/post-type.php:359
-msgid "Features list"
-msgstr ""
-
-#: inc/post-type.php:360
-msgid "Back to Features"
-msgstr ""
-
-#: inc/shortcodes.php:60 inc/shortcodes.php:135
-#, php-format
-msgid "%s properties"
-msgstr ""
-
-#: inc/tourfic-functions.php:90 inc/tourfic-functions.php:1180
-msgid "Submit"
-msgstr ""
-
-#: inc/tourfic-functions.php:91
-msgid "Write a Review"
-msgstr ""
-
-#: inc/tourfic-functions.php:92
-msgid "Reply"
-msgstr ""
-
-#: inc/tourfic-functions.php:680
-msgid "Price per night"
-msgstr ""
-
-#: inc/tourfic-functions.php:751 inc/tourfic-functions.php:780
-msgid "Destination Image"
-msgstr ""
-
-#: inc/tourfic-functions.php:755 inc/tourfic-functions.php:791
-#: inc/tourfic-functions.php:947
-msgid "Add Image"
-msgstr ""
-
-#: inc/tourfic-functions.php:756 inc/tourfic-functions.php:792
-#: inc/tourfic-functions.php:948
-msgid "Remove Image"
-msgstr ""
-
-#: inc/tourfic-functions.php:909
-msgid "Icon"
-msgstr ""
-
-#: inc/tourfic-functions.php:913
-msgid "Add Icon"
-msgstr ""
-
-#: inc/tourfic-functions.php:914
-msgid "Remove Icon"
-msgstr ""
-
-#: inc/tourfic-functions.php:936
-msgid "Image"
-msgstr ""
-
-#: inc/tourfic-functions.php:975
-msgid "Insert"
-msgstr ""
-
-#: inc/tourfic-functions.php:1126
-msgid "TOURFIC: Single Tour Sidebar"
-msgstr ""
-
-#: inc/tourfic-functions.php:1128
-msgid "Widgets in this area will be shown on tourfic single page"
-msgstr ""
-
-#: inc/tourfic-functions.php:1135
-msgid "TOURFIC: Archive Sidebar"
-msgstr ""
-
-#: inc/tourfic-functions.php:1137
-msgid "Widgets in this area will be shown on tourfic archive/search page"
-msgstr ""
-
-#: inc/tourfic-functions.php:1167
-msgid "Submit your question"
-msgstr ""
-
-#: inc/tourfic-functions.php:1170
-msgid "Your Name"
-msgstr ""
-
-#: inc/tourfic-functions.php:1173
-msgid "Your email"
-msgstr ""
-
-#: inc/tourfic-functions.php:1176
-msgid "Your Question"
-msgstr ""
-
-#: inc/tourfic-functions.php:1179
-msgid "Reset"
-msgstr ""
-
-#: inc/tourfic-functions.php:1199
-msgid "Security error! Reload the page and try again."
-msgstr ""
-
-#: inc/tourfic-functions.php:1223
-#, php-format
-msgid "Someone asked question on: %s"
-msgstr ""
-
-#: inc/tourfic-functions.php:1231
-msgid "Your question has been sent!"
-msgstr ""
-
-#: inc/tourfic-functions.php:1234
-msgid "Message sent failed!"
-msgstr ""
-
-#: inc/tourfic-functions.php:1487
-msgid "From"
-msgstr ""
-
-#: inc/tourfic-functions.php:1489
-msgid "To"
-msgstr ""
-
-#: inc/widgets.php:15
-msgid "Filter Tourfic tour on archive."
-msgstr ""
-
-#: inc/widgets.php:85 inc/widgets.php:237 inc/widgets.php:373
-#: inc/widgets.php:568
-msgid "Title:"
-msgstr ""
-
-#: inc/widgets.php:166
-msgid "Filter Tourfic tour on archive with features."
-msgstr ""
-
-#: inc/widgets.php:317
-msgid "Show more tours button on single tour page."
-msgstr ""
-
-#: inc/widgets.php:332 inc/widgets.php:370
-msgid "Show more hotels"
-msgstr ""
-
-#: inc/widgets.php:369
-msgid "Not impressive?"
-msgstr ""
-
-#: inc/widgets.php:377 inc/widgets.php:466 inc/widgets.php:576
-msgid "Button Label"
-msgstr ""
-
-#: inc/widgets.php:417
-msgid "Show On Map tours button on single tour page."
-msgstr ""
-
-#: inc/widgets.php:463 templates/single-tourfic.php:62
-msgid "Show on map"
-msgstr ""
-
-#: inc/widgets.php:505
-msgid "Ask a question button on single tour page."
-msgstr ""
-
-#: inc/widgets.php:520 inc/widgets.php:564
-msgid "Find more info in the FAQ section."
-msgstr ""
-
-#: inc/widgets.php:521 inc/widgets.php:565
-msgid "Ask a question"
-msgstr ""
-
-#: inc/widgets.php:563
-msgid "Got a question?"
-msgstr ""
-
-#: inc/widgets.php:572 inc/elementor-addon/widgets/tourfic-search.php:110
-msgid "Subtitle"
-msgstr ""
-
-#: inc/booking/tf-woocommerce-hotel-class.php:47
-#: inc/booking/tf-woocommerce-tours-class.php:97
-msgid "Check-in date missing."
-msgstr ""
-
-#: inc/booking/tf-woocommerce-hotel-class.php:50
-#: inc/booking/tf-woocommerce-tours-class.php:100
-msgid "Check-out date missing."
-msgstr ""
-
-#: inc/booking/tf-woocommerce-hotel-class.php:53
-#: inc/booking/tf-woocommerce-tours-class.php:103
-msgid "Select Adult(s)."
-msgstr ""
-
-#: inc/booking/tf-woocommerce-hotel-class.php:56
-msgid "Select Room(s)."
-msgstr ""
-
-#: inc/booking/tf-woocommerce-hotel-class.php:59
-#: inc/booking/tf-woocommerce-tours-class.php:106
-msgid "Unknown Error! Please try again."
-msgstr ""
-
-#: inc/booking/tf-woocommerce-hotel-class.php:171
-#: inc/booking/tf-woocommerce-hotel-class.php:222
-#: templates/single-tourfic.php:141
-msgid "Room Type"
-msgstr ""
-
-#: inc/booking/tf-woocommerce-hotel-class.php:178
-#: inc/booking/tf-woocommerce-hotel-class.php:227
-msgid "Room Selected"
-msgstr ""
-
-#: inc/booking/tf-woocommerce-hotel-class.php:185
-#: inc/booking/tf-woocommerce-hotel-class.php:232
-#: inc/booking/tf-woocommerce-tours-class.php:236
-#: inc/booking/tf-woocommerce-tours-class.php:279
-msgid "Adults"
-msgstr ""
-
-#: inc/booking/tf-woocommerce-hotel-class.php:192
-#: inc/booking/tf-woocommerce-hotel-class.php:237
-#: inc/booking/tf-woocommerce-tours-class.php:243
-#: inc/booking/tf-woocommerce-tours-class.php:284
-msgid "Children"
-msgstr ""
-
-#: inc/booking/tf-woocommerce-hotel-class.php:199
-#: inc/booking/tf-woocommerce-hotel-class.php:242
-msgid "Check-in Date"
-msgstr ""
-
-#: inc/booking/tf-woocommerce-hotel-class.php:206
-#: inc/booking/tf-woocommerce-hotel-class.php:247
-msgid "Check-out Date"
-msgstr ""
-
-#: inc/booking/tf-woocommerce-tours-class.php:54
-msgid "You must select minimum "
-msgstr ""
-
-#: inc/booking/tf-woocommerce-tours-class.php:57
-#: inc/booking/tf-woocommerce-tours-class.php:78
-msgid "Maximum "
-msgstr ""
-
-#: inc/booking/tf-woocommerce-tours-class.php:76
-#: inc/booking/tf-woocommerce-tours-class.php:94
-msgid "Minimum "
-msgstr ""
-
-#: inc/booking/tf-woocommerce-tours-class.php:250
-msgid "Infant"
-msgstr ""
-
-#: inc/booking/tf-woocommerce-tours-class.php:257
-#: inc/booking/tf-woocommerce-tours-class.php:292
-msgid "Departure Date"
-msgstr ""
-
-#: inc/booking/tf-woocommerce-tours-class.php:264
-msgid "Tour Extra: "
-msgstr ""
-
-#: inc/booking/tf-woocommerce-tours-class.php:288
-msgid "Infants"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-destination.php:37
-msgid "Tourfic Destination"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-destination.php:91
-#: inc/elementor-addon/widgets/tourfic-search.php:125
-msgid "Style"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-destination.php:102
-msgid "Destination Title Typography"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-destination.php:110
-msgid "Destination title Color"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-destination.php:126
-msgid "Destination Title Hover Color"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-destination.php:145
-msgid "Destination Subitle Typography"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-destination.php:153
-msgid "Destination Subtitle Color"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-destination.php:169
-msgid "Destination Subtitle Hover Color"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-destination.php:187
-msgid "Info Background"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-destination.php:197
-#: inc/elementor-addon/widgets/tourfic-destination.php:214
-msgid "Background Color"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-destination.php:205
-msgid "Info Hover Background"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-search.php:37
-msgid "Tourfic search"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-search.php:91
-msgid "Content"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-search.php:101
-msgid "Default title"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-search.php:102
-msgid "Type your title here"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-search.php:112
-msgid "Default description"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-search.php:113
-msgid "Type your description here"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-search.php:134
-msgid "Title Typography"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-search.php:141
-msgid "Title Color"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-search.php:164
-msgid "Subtitle Typography"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-search.php:172
-msgid "Subtitle Color"
-msgstr ""
-
-#: inc/elementor-addon/widgets/tourfic-tours.php:37
-msgid "Tourfic slider"
-msgstr ""
-
-#: templates/review.php:107 templates/review.php:132
-msgid "Comments Navigation"
-msgstr ""
-
-#: templates/single-tf_tours.php:79
-msgid "Tour Videos"
-msgstr ""
-
-#: templates/single-tf_tours.php:109
-msgid "reviews"
-msgstr ""
-
-#: templates/single-tf_tours.php:127 templates/tf-tours-single.php:106
-msgid "Duration"
-msgstr ""
-
-#: templates/single-tf_tours.php:132 templates/tf-tours-single.php:117
-msgid "Max People"
-msgstr ""
-
-#: templates/single-tf_tours.php:142 templates/tf-tours-single.php:139
-msgid "Language"
-msgstr ""
-
-#: templates/single-tf_tours.php:157
-msgid "Overview"
-msgstr ""
-
-#: templates/single-tf_tours.php:219 templates/tf-tours-single.php:272
-msgid "Travel Itinerary"
-msgstr ""
-
-#: templates/single-tf_tours.php:266 templates/tf-tours-single.php:326
-msgid "Frequently asked questions?"
-msgstr ""
-
-#: templates/single-tf_tours.php:297 templates/tf-tours-single.php:368
-msgid "You might also like"
-msgstr ""
-
-#: templates/single-tf_tours.php:298 templates/tf-tours-single.php:369
-msgid ""
-"Travel is my life. Since 1999, I’ve been traveling around the world "
-"nonstop.\n"
-"\t\t\t\t\t\t\tIf you also love travel, you’re in the right place!\n"
-"\t\t\t\t\t\t\t"
-msgstr ""
-
-#: templates/single-tf_tours.php:353
-msgid "Customer Reviews"
-msgstr ""
-
-#: templates/single-tf_tours.php:354
-msgid "Reviews given by our customers."
-msgstr ""
-
-#: templates/single-tourfic.php:40
-msgid "Share on Facebook"
-msgstr ""
-
-#: templates/single-tourfic.php:45
-msgid "Share on Twitter"
-msgstr ""
-
-#: templates/single-tourfic.php:50
-msgid "Share this link"
-msgstr ""
-
-#: templates/single-tourfic.php:53
-msgid "Copy link"
-msgstr ""
-
-#: templates/single-tourfic.php:54
-msgid "Copied!"
-msgstr ""
-
-#: templates/single-tourfic.php:65
-msgid "Reserve"
-msgstr ""
-
-#: templates/single-tourfic.php:103
-msgid "Listing Description"
-msgstr ""
-
-#: templates/single-tourfic.php:113 templates/tf-tours-single.php:193
-msgid "Features"
-msgstr ""
-
-#: templates/single-tourfic.php:143
-msgid "Total Price"
-msgstr ""
-
-#: templates/single-tourfic.php:144
-msgid "Select Rooms"
-msgstr ""
-
-#: templates/single-tourfic.php:238
-msgid "Reviews"
-msgstr ""
-
-#: templates/tf-tours-single.php:173
-msgid "Tour Description"
-msgstr ""
-
-#: templates/tf-tours-single.php:430
-msgid "Customer Review"
-msgstr ""
-
-#: templates/tf-tours-single.php:496
-msgid "Terms and Conditions"
 msgstr ""
