@@ -2,15 +2,15 @@
 /**
  * Plugin Name: Tourfic - Travel and Hotel Booking Solution for WooCommerce
  * Plugin URI: https://tourfic.com
- * Github Plugin URI: http://github.com/themefic/tourfic
  * Description: The ultimate WordPress tour management plugin for hotel booking, tour operator and travel agency websites. Manage all your online Travel Booking system along with order system and any payment of WooCommerce. 
  * Author: Themefic
  * Text Domain: tourfic
  * Domain Path: /lang/
  * Author URI: https://themefic.com
- * Tags:
  * Version: 2.0.4
- * WC tested up to: 6.0.0
+ * Tested up to: 5.9
+ * Requires PHP: 7.1
+ * WC tested up to: 6.1.1
  */
 
 // don't load directly
@@ -141,8 +141,7 @@ if ( !class_exists( 'Tourfic_WordPress_Plugin' ) ):
         public function load_text_domain() {
             $this->includes();
             //Internationalization
-            load_plugin_textdomain( 'tourfic', false, TOURFIC_PLUGIN_URL . '/lang/' );
-
+			load_plugin_textdomain( 'tourfic', false, 'tourfic/lang/' );
         }
 
         // Image sizes
