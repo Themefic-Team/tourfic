@@ -1,9 +1,9 @@
 === Travel and Hotel Booking Solution for WooCommerce - Tourfic ===
-Contributors: psdtowpservice, themefic, mdshuvo, raihan143, hasanet, kamrul0424, codexa
+Contributors: psdtowpservice, themefic, fida02, mdshuvo, raihan143, hasanet, kamrul0424, codexa
 Tags: tour booking, tour operator, travel, tour, trip, travel-booking, travel agency, hotel booking, reservation, hotel, booking engine, booking, booking calendar, booking system, calendar, online booking, travel, airbnb, booking.com, homeaway, apartments, villa, hostel, reservation system, travel itinerary, trekking, tour itinerary, travel booking engine, tour accommodation listings, travel destinations, trip book, travel payment, woocommerce tour booking, woocommerce travel booking plugin, woocommerce tour, woocommerce travel, wordpress travel, wp travel plugin, wp travel, wordpress travel booking plugin, wordpress tour plugin, tour booking plugin wordpress, wordpress travel agency, travel tour wordpress, wordpress tour, tour-booking, travel wp, travel wordpress, tour wp, travel wordpress, hotel wp, hotel wordpress
 Requires at least: 4.2
 Tested up to: 5.9
-Requires PHP: 5.4
+Requires PHP: 7.1
 Stable tag: 2.0.4
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -177,30 +177,30 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 == Screenshots ==
 
 1. Search Bar with Heading and Description (Add anywhere with Shortcode)
-2. Destination View (Shortcode based)
-3. Recent Properties (Shortcode based)
-4. Search bar with Autocomplete feature
-5. Search Result page (list View)
-6. Search Result page (Grid View)
-7. Single Hotel / Tour Page (1)
-8. Single Hotel / Tour Page (2)
-9. Single Hotel / Tour Page (3)
-10. Single Hotel / Tour Page (4)
-11. Single Hotel / Tour Page (5)
-12. Tourfic Widgets
-13. Single Tour/Hotel Page (Backend Options)
-14. Single Tour/Hotel Page (Backend Options)
-15. Single Tour/Hotel Page (Backend Options)
-16. Single Tour/Hotel Page (Backend Options)
-17. Single Tour/Hotel Page (Backend Options)
-18. Single Tour/Hotel Page (Backend Options)
-19. Single Tour/Hotel Page (Backend Options)
+2. Featured Destination for Hotel (Shortcode based)
+3. Featured Hotels (Shortcode based)
+4. Featured Destination for Tours (Shortcode based)
+5. Featured Tours (Shortcode based)
+6. Search bar with Autocomplete feature
+7. Search Result page (list View)
+8. Search Result page (Grid View)
+9. Tourfic Widgets
+10. Single Hotel Page (1)
+11. Single Hotel Page (2)
+12. Hotel Page (Backend Options)
+13. Hotel Page (Backend Options)
+14. Single Tour Page (1)
+15. Single Tour Page (2)
+16. Tour Page (Backend Options)
+17. Tour Page (Backend Options)
 
 == Changelog ==
-= 2.0.4 - 27/1/2022 =
 
-- Compatibility Checked: WordPress 5.9
-- Updated: Minor CSS updated
+= 2.0.4 - 22/2/2022 =
+
+– Fixed: Minor CSS issues
+– Updated: Compatibility check with WordPress 5.9
+– Updated: Compatibility check with WooCommerce 6.1.1
 
 = 2.0.3 - 14/1/2022 =
 
