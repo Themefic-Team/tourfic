@@ -1,0 +1,117 @@
+.tf-custom-review-section-wrapper{
+    padding: 30px;
+    background-color: #fff;
+}
+.tf-single-custom-review {
+    padding: 26px 20px;
+    background: #fff;
+    box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+    margin: 15px;
+}
+.tf-custom-review-slider-area {
+    position: relative;
+}
+button.tf-cr-slider-arrow {
+    position: absolute;
+    z-index: 999;
+    border: none;
+    background: none !important;
+    top: calc(50% - 30px);
+    box-shadow: 0px 0px 5px rgb(0 44 102 / 20%);
+    border-radius: 5px;
+    transform: matrix(1, 0, 0, -1, 0, 0);
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+button.tf-cr-slider-arrow.next-arrow {
+    right: -60px;
+}
+button.tf-cr-slider-arrow.prev-arrow {
+    left: -60px;
+}
+.tf-cr-reting {
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.2px;
+    color: #152B47;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 5px;
+}
+.tf-cr-reting i {
+    color: #FFCD3D;
+    font-size: 16px;
+}
+.tf-cr-avater-image img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+.tf-cr-avater-image {
+    display: flex;
+    justify-content: center;
+}
+.tf-cr-avater-meta h4 {
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.2px;
+    text-align: center;
+}
+.tf-cr-avater-meta h4 span {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.2px;
+    display: block;
+}
+.tf-cr-avater-meta {
+    display: flex;
+    justify-content: center;
+}
+.tf-cr-desc p {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: justify;
+    letter-spacing: 0.2px;
+    color: #213650;
+}
+.tf-cr-desc {
+    position: relative;
+    margin: 0 6px;
+}
+.tf-cr-desc img {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: -20px;
+    top: -5px;
+}
+.tf-cr-slider-arrow i {
+    color: #002c66;
+}
+.tf-cr-slider-arrow i {
+    color: #002c66;
+}
+
+.tf-custom-review-title-area {
+    text-align: center;
+    margin-bottom: 60px;
+    margin-top: 60px;
+}
+
+.tf-custom-review-title-area h2 {
+    font-weight: bold;
+    color: #002c66;
+    font-size: 36px;
+}
+
+.tf-custom-review-title-area p {
+    font-size: 18px;
+    line-height: 26px;
+}

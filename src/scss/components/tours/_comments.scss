@@ -1,0 +1,71 @@
+.tf-tours_submit_review .tf-comments-count-wrapper {
+    display: none;
+}
+.tf-tours_submit_review ol.tf-comment-list {
+    display: none;
+}
+.tf-review-wrapper {
+    background: #fff;
+
+    label {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 28px;
+    } 
+    form#commentform {
+        background: rgb(2 51 110 / 10%);
+        padding: 50px 100px;
+        overflow:hidden;
+        margin-top: 30px;
+    }
+    .tf_comment-metas {
+        background: #fff;
+        border-radius: 5px;
+        padding: 40px;
+        width: 48%;
+        float: left;
+        margin-right: 10px;
+    }
+    select {
+        padding: 0;
+        background: unset;
+        border: unset;
+    }
+    .comment_form_fields {
+        width: 50%;
+        float: right;
+        padding: 0px 15px;
+    }
+    p.form-submit input[type="submit"] {
+        padding: 12px 43px;
+        font-size: 18px;
+        font-weight: 400!important;
+        color: white!important;
+        border-radius: 5px;
+        background: #002c66!important;
+        border: unset!important;
+    }
+    p.form-submit {
+        width: 100%;
+        float: none;
+        display: block;
+        overflow: hidden;
+        margin-top: 15px;
+    }
+    .comment_form_fields textarea {
+        border: unset!important;
+        height: 153px;
+        border-radius: 5px;
+    }
+    .author-email input {
+        border: unset;
+        border-radius: 5px;
+    }
+    p.logged-in-as {
+        padding-bottom: 22px;
+    }
+
+
+}
+
+

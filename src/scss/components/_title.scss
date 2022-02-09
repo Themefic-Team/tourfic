@@ -1,0 +1,31 @@
+.tf_title-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.tf_title {
+    font-family: "rubik";
+    font-size: 26px;
+    margin: 0;
+    color: #152B47;
+  }
+
+.tf_title-right {
+    display: flex;
+    align-items: center;
+}
+
+.reviews span{
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.share-tour {
+    margin-right: 14px;
+}
+.tf_price {
+    font-size: 20px;
+}
+span.tf-price .amount {
+    font-weight: bold;
+}

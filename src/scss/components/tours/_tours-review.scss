@@ -1,0 +1,26 @@
+.tf-tours_submit_review{
+
+    .comment-respond {
+        background-color: unset!important;
+        border: 0px solid #ddd!important;
+        padding: 0!important;
+    }
+
+    div#reply-title {
+        background: #002C66;
+        color: white;
+        text-align: center;
+        display: block;
+        padding: 12px 24px;
+        border-radius: 5px;
+        max-width: 185px;
+        margin: 0 auto;
+    }
+
+    div#reply-title span {
+        display: none!important;
+    }
+    
+    
+
+}
