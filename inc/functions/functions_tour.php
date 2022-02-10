@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
  */
 function register_tf_tours_post_type() {
 
-    $tour_slug = apply_filters( 'tf_tours_slug', 'tour' );
+    $tour_slug = !empty(get_option( 'tour_slug' )) ? get_option( 'tour_slug' ) : apply_filters( 'tf_tours_slug', 'tours' );
 
     $tour_labels = apply_filters( 'tf_tours_labels', array(
         'name'                  => _x( '%2$s', 'tourfic post type name', 'tourfic' ),

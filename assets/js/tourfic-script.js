@@ -133,29 +133,29 @@
         var dateFormat = 'DD-MM-YYYY';
 
         // Trigger Check-in Date
-        // $('.tf_selectdate-wrap, #check-in-out-date').daterangepicker({
-        //     "locale": {
-        //         "format": dateFormat,
-        //         "separator": " - ",
-        //         "firstDay": 1
-        //     },
-        //     minDate: dateToday,
-        //     autoApply: true,
-        // }, function (start, end, label) {
+        $('.tf_selectdate-wrap, #check-in-out-date').daterangepicker({
+            "locale": {
+                "format": dateFormat,
+                "separator": " - ",
+                "firstDay": 1
+            },
+            minDate: dateToday,
+            autoApply: true,
+        }, function (start, end, label) {
             
-        //     var checkin_input = jQuery(".tf-tour-check-in");
-        //     var checkout_input = jQuery(".tf-tour-check-out");
+            var checkin_input = jQuery(".tf-tour-check-in");
+            var checkout_input = jQuery(".tf-tour-check-out");
 
-        //     checkin_input.val(start.format(dateFormat));
-        //     hotel_checkin_input.val(start.format(dateFormat));
-        //     $('.tf-widget-check-in').val(start.format(dateFormat));
-        //     $('.checkin-date-text').text(start.format(dateFormat));
+            checkin_input.val(start.format(dateFormat));
+            hotel_checkin_input.val(start.format(dateFormat));
+            $('.tf-widget-check-in').val(start.format(dateFormat));
+            $('.checkin-date-text').text(start.format(dateFormat));
 
-        //     checkout_input.val(end.format(dateFormat));
-        //     hotel_checkout_input.val(end.format(dateFormat));
-        //     $('.tf-widget-check-out').val(end.format(dateFormat));
-        //     $('.checkout-date-text').text(end.format(dateFormat));
-        // });
+            checkout_input.val(end.format(dateFormat));
+            hotel_checkout_input.val(end.format(dateFormat));
+            $('.tf-widget-check-out').val(end.format(dateFormat));
+            $('.checkout-date-text').text(end.format(dateFormat));
+        });
 
         //Get continuous check in out date 
         var continuousDate = $('.tf-tour-booking-wrap').data('continuous-array');

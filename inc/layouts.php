@@ -310,7 +310,7 @@ function tourfic_get_sidebar( $placement = 'single' ) {
 
 		<?php
 		$posttype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type(); 
-		if( $posttype == 'tourfic'){
+		if( $posttype == 'tf_hotel'){
 			tourfic_booking_widget_field(
 				array(
 					'type'     => 'select',

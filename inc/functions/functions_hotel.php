@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) || exit;
 
 function register_tf_hotel_post_type() {
 
-    $hotel_slug = apply_filters( 'tf_hotel_slug', 'hotel' );
+    $hotel_slug = !empty(get_option( 'hotel_slug' )) ? get_option( 'hotel_slug' ) : apply_filters( 'tf_hotel_slug', 'hotels' );
 
     $hotel_labels = apply_filters( 'tf_hotel_labels', array(
         'name'                  => _x( '%2$s', 'tourfic post type name', 'tourfic' ),

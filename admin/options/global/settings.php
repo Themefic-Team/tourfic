@@ -27,18 +27,6 @@ if( class_exists( 'CSF' ) ) {
     'icon'  =>  'fas fa-rocket' ,
     'fields' => array(
       array(
-        'id'      => 'post_type_slug',
-        'type'    => 'text',
-        'title'   => __( 'Input slug of Hotel', 'tourfic' ),
-        'desc'   =>  __( 'Default is: <code>tourfic</code> - <strong>Save 2 times if you change this field for permalink flush</strong>', 'tourfic' )
-      ),
-      array(
-        'id'      => 'tour_type_slug',
-        'type'    => 'text',
-        'title'   => __( 'Input slug of Tour', 'tourfic' ),
-        'desc'   =>  __( 'Default is: <code>tour</code> - <strong>Save 2 times if you change this field for permalink flush</strong>', 'tourfic' )
-      ),
-      array(
         'id'          => 'single_tour_style',
         'type'        => 'select',
         'placeholder' => 'Select a page',
