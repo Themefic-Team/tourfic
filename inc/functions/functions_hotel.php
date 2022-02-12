@@ -151,34 +151,35 @@ function tf_hotel_taxonomies_register() {
     register_taxonomy( 'hotel_location', 'tf_hotel', apply_filters( 'hotel_location_args', $hotel_location_args ) );
 
     /**
-     * Taxonomy: Filters.
+     * Taxonomy: hotel_feature.
      */
+    
     $labels = [
-        "name"                       => __( "Filters", 'tourfic' ),
-        "singular_name"              => __( "Filter", 'tourfic' ),
-        "menu_name"                  => __( "Filters", 'tourfic' ),
-        "all_items"                  => __( "All Filters", 'tourfic' ),
-        "edit_item"                  => __( "Edit Filter", 'tourfic' ),
-        "view_item"                  => __( "View Filter", 'tourfic' ),
-        "update_item"                => __( "Update Filter name", 'tourfic' ),
-        "add_new_item"               => __( "Add new Filter", 'tourfic' ),
-        "new_item_name"              => __( "New Filter name", 'tourfic' ),
-        "parent_item"                => __( "Parent Filter", 'tourfic' ),
-        "parent_item_colon"          => __( "Parent Filter:", 'tourfic' ),
-        "search_items"               => __( "Search Filters", 'tourfic' ),
-        "popular_items"              => __( "Popular Filters", 'tourfic' ),
-        "separate_items_with_commas" => __( "Separate Filters with commas", 'tourfic' ),
-        "add_or_remove_items"        => __( "Add or remove Filters", 'tourfic' ),
-        "choose_from_most_used"      => __( "Choose from the most used Filters", 'tourfic' ),
-        "not_found"                  => __( "No Filters found", 'tourfic' ),
-        "no_terms"                   => __( "No Filters", 'tourfic' ),
-        "items_list_navigation"      => __( "Filters list navigation", 'tourfic' ),
-        "items_list"                 => __( "Filters list", 'tourfic' ),
-        "back_to_items"              => __( "Back to Filters", 'tourfic' ),
+        "name"                       => __( "Features", 'tourfic' ),
+        "singular_name"              => __( "Feature", 'tourfic' ),
+        "menu_name"                  => __( "Features", 'tourfic' ),
+        "all_items"                  => __( "All Features", 'tourfic' ),
+        "edit_item"                  => __( "Edit Feature", 'tourfic' ),
+        "view_item"                  => __( "View Feature", 'tourfic' ),
+        "update_item"                => __( "Update Feature", 'tourfic' ),
+        "add_new_item"               => __( "Add new Feature", 'tourfic' ),
+        "new_item_name"              => __( "New Feature name", 'tourfic' ),
+        "parent_item"                => __( "Parent Feature", 'tourfic' ),
+        "parent_item_colon"          => __( "Parent Feature:", 'tourfic' ),
+        "search_items"               => __( "Search Feature", 'tourfic' ),
+        "popular_items"              => __( "Popular Features", 'tourfic' ),
+        "separate_items_with_commas" => __( "Separate Features with commas", 'tourfic' ),
+        "add_or_remove_items"        => __( "Add or remove Features", 'tourfic' ),
+        "choose_from_most_used"      => __( "Choose from the most used Features", 'tourfic' ),
+        "not_found"                  => __( "No Features found", 'tourfic' ),
+        "no_terms"                   => __( "No Features", 'tourfic' ),
+        "items_list_navigation"      => __( "Features list navigation", 'tourfic' ),
+        "items_list"                 => __( "Features list", 'tourfic' ),
+        "back_to_items"              => __( "Back to Features", 'tourfic' ),
     ];
 
     $args = [
-        "label"                 => __( "Filters", 'tourfic' ),
+        "label"                 => __( "Features", 'tourfic' ),
         "labels"                => $labels,
         "public"                => true,
         "publicly_queryable"    => false,
@@ -189,14 +190,14 @@ function tf_hotel_taxonomies_register() {
         "show_in_quick_edit"    => true,
         "meta_box_cb"           => false,
         "query_var"             => true,
-        "rewrite"               => ['slug' => 'tf_filters', 'with_front' => true],
+        "rewrite"               => ['slug' => 'hotel_feature', 'with_front' => true],
         "show_admin_column"     => true,
         "show_in_rest"          => true,
-        "rest_base"             => "tf_filters",
+        "rest_base"             => "hotel_feature",
         "rest_controller_class" => "WP_REST_Terms_Controller",
         "show_in_quick_edit"    => false,
     ];
-    register_taxonomy( 'tf_filters', ['tf_hotel'], apply_filters( 'tf_filters_tax_args', $args ) );
+    register_taxonomy( 'hotel_feature', ['tf_hotel'], apply_filters( 'tf_feature_tax_args', $args ) );
 
 }
 add_action( 'init', 'tf_hotel_taxonomies_register' );

@@ -10,7 +10,7 @@ if ( class_exists( 'CSF' ) ) {
     //}
     
     /**
-     * Post Type: Tour
+     * Post Type: tf_tours
      */
     // Single Tour Metabox
     if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
@@ -23,6 +23,27 @@ if ( class_exists( 'CSF' ) ) {
     if ( !is_plugin_active('tourfic-pro/tourfic-pro.php') ) {
         require_once TF_OPTIONS_PATH . 'tour/taxonomy_tour-features.php';
     }
+
+    /**
+     * Post Type: tf_hotel
+     */
+    // Single Tour Metabox
+    // if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
+    //     require_once TF_PRO_OPTIONS_PATH . 'hotel/single_hotel.php';
+    // } else {
+        require_once TF_OPTIONS_PATH . 'hotel/single_hotel.php';
+    // }
+
+    /**
+     * Taxonomy: hotel_feature
+     */
+    require_once TF_OPTIONS_PATH . 'hotel/taxonomy-hotel_feature.php';
+
+    /**
+     * Taxonomy: hotel_location
+     */
+    require_once TF_OPTIONS_PATH . 'hotel/taxonomy-hotel_location.php';
+
 }
 
 # ================================== #
