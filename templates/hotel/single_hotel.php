@@ -1,13 +1,45 @@
 <?php
 /**
- * The template for displaying all single posts.
- *
- * @package storefront
+ * Template for hotel single
  */
 
-get_header('tourfic'); ?>
-<?php while ( have_posts() ) : the_post(); ?>
-<?php
+get_header();
+
+while ( have_posts() ) : the_post(); 
+
+/**
+ * Assign all values to variable
+ */
+// get option meta
+$meta = get_post_meta( get_the_ID(), 'tf_hotel', true );
+
+// Location
+$location = !empty($meta['location']) ? $meta['location'] : '';
+$address  = !empty($meta['address']) ? $meta['address'] : '';
+$map      = !empty($meta['map']) ? $meta['map'] : '';
+// Detail
+$featured = !empty($meta['featured']) ? $meta['featured'] : '';
+$logo     = !empty($meta['logo']) ? $meta['logo'] : '';
+$features = !empty($meta['features']) ? $meta['features'] : '';
+$gallery  = !empty($meta['gallery']) ? $meta['gallery'] : '';
+$video    = !empty($meta['video']) ? $meta['video'] : '';
+$rating   = !empty($meta['rating']) ? $meta['rating'] : '';
+// Contact
+$c_email = !empty($meta['c-email']) ? $meta['c-email'] : '';
+$c_web   = !empty($meta['c-web']) ? $meta['c-web'] : '';
+$c_phone = !empty($meta['c-phone']) ? $meta['c-phone'] : '';
+$c_fax   = !empty($meta['c-fax']) ? $meta['c-fax'] : '';
+// Check in/out
+$full_day  = !empty($meta['full-day']) ? $meta['full-day'] : '';
+$check_in  = !empty($meta['check-in']) ? $meta['check-in'] : '';
+$check_out = !empty($meta['check-out']) ? $meta['check-out'] : '';
+// Room
+$rooms = !empty($meta['room']) ? $meta['room'] : '';
+// FAQ
+$faqs = !empty($meta['faq']) ? $meta['faq'] : '';
+// Terms & condition
+$tc = !empty($meta['tc']) ? $meta['tc'] : '';
+
 
 // Get all rooms
 $tf_room = get_field('tf_room') ? get_field('tf_room') : array();
@@ -15,7 +47,7 @@ $information = get_field('information') ? get_field('information') : null;
 $additional_information = get_field('additional_information') ? get_field('additional_information') : null;
 $share_text = get_the_title();
 $share_link = esc_url( home_url("/?p=").get_the_ID() );
-$location = get_field('formatted_location') ? get_field('formatted_location') : null;
+//$location = get_field('formatted_location') ? get_field('formatted_location') : null;
 $features = get_the_terms( get_the_ID() ,  'tf_filters' );
 
 $terms_and_conditions = get_post_meta( $post->ID, 'terms_and_conditions', true );
@@ -68,11 +100,13 @@ $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $pos
 				</div>
 				<!-- End title area -->
 
-				<!-- Start map link -->
+				<?php if ($location) { ?>
+				<!-- Start map link -->				
 				<div class="tf_map-link">
-					<?php tourfic_map_link(); ?>
-				</div>
+					<a title="<?php echo esc_attr( !empty($address) ? $address : '' ); ?>" href="<?php echo !empty($map["address"]) ? 'https://www.google.com/maps/search/' .$map["address"] : '#'; ?>" target="_blank"><i class="fas fa-map-marker-alt"></i> <?php var_dump($location ); ?></a>
+				</div>				
 				<!-- End map link -->
+				<?php } ?>
 			</div>
 		</div>
 
