@@ -196,6 +196,47 @@ function tf_tours_booking_function() {
     }
 
     /**
+     * Seasional price
+     * 
+     * @author KK
+     */
+    $tour                                = strtotime($tour_date);
+    $seasional_price                     = array_values(array_filter($meta['cont_custom_date'], function ($value) use ($tour) {
+        $seasion_start = strtotime($value['date']['from']);
+        $seasion_end   = strtotime($value['date']['to']);
+        return $seasion_start <= $tour && $seasion_end >= $tour;
+    }));
+    if ($meta['type'] === 'continuous' && !empty($meta['cont_custom_date']) && !empty($seasional_price)) {
+        $pricing_rule   = $seasional_price[0]['pricing'];
+        $group_price    = $seasional_price[0]['group_price'];
+        $adult_price    = $seasional_price[0]['adult_price'];
+        $children_price = $seasional_price[0]['child_price'];
+        $infant_price   = $seasional_price[0]['infant_price'];
+    } else {
+        $pricing_rule   = $meta['pricing'];
+        $group_price    = $meta['group_price'];
+        $adult_price    = $meta['adult_price'];
+        $children_price = $meta['child_price'];
+        $infant_price   = $meta['infant_price'];
+    }
+
+    if ($tour_type == 'continuous' && empty($tour_time)) {
+
+        if (!empty($meta['allowed_time']) && empty($meta['cont_custom_date']) && empty($seasional_price['allowed_time'])) {
+            $response['errors'][]  = __('Please select time', 'tourfic');
+        }
+        if (!empty($meta['cont_custom_date']) && !empty($seasional_price['allowed_time']) && empty($meta['allowed_time'])) {
+            $response['errors'][]  = __('Please select time', 'tourfic');
+        }
+    }
+
+    if ($adults > 0 && empty($adult_price)) $response['errors'][]               = __('Adult price is blank!', 'tourfic');
+    if ($children > 0 && empty($children_price)) $response['errors'][]          = __('Childern price is blank!', 'tourfic');
+    if ($infant > 0 && empty($infant_price)) $response['errors'][]              = __('Infant price is blank!', 'tourfic');
+    if ($infant > 0 && !empty($infant_price) && !$adults) $response['errors'][] = __('Infant without adults is not allowed!', 'tourfic');
+    // End of seasional price
+
+    /**
      * If no errors then process
      * 
      * Store custom data in array

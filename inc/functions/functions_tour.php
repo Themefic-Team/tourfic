@@ -279,6 +279,15 @@ function tf_single_tour_booking_form( $post_id ) {
     }
 
 	$tour_extras = isset($meta['tour-extra']) ? $meta['tour-extra'] : null;
+
+    $times = [];
+
+    if ($meta['custom_avail'] == true && !empty($meta['cont_custom_date'])) {
+        $allowed_times = array_map(fn ($v) => $times[] = ['date' => $v['date'], 'times' => array_map(fn ($v) => $v['time'], $v['allowed_time'] ?? [])], $meta['cont_custom_date']);
+    }
+    if ($meta['custom_avail'] == false && !empty($meta['allowed_time'])) {
+        $allowed_times = array_map(fn ($v) => $v['time'], $meta['allowed_time'] ?? []);
+    }
 	
     ob_start();
     ?>
@@ -289,14 +298,21 @@ function tf_single_tour_booking_form( $post_id ) {
                         <span class="tf_person-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M16.5 6a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0zM18 6A6 6 0 1 0 6 6a6 6 0 0 0 12 0zM3 23.25a9 9 0 1 1 18 0 .75.75 0 0 0 1.5 0c0-5.799-4.701-10.5-10.5-10.5S1.5 17.451 1.5 23.25a.75.75 0 0 0 1.5 0z"></path></svg>
                         </span>
-                        <div class="adults-text">0 Adults</div>
-                        <div class="person-sep"></div>
-                        <div class="child-text">0 Children</div>
-                        <div class="person-sep"></div>
-                        <div class="infant-text">0 Infant</div>
+                        <?php if ($meta['custom_avail'] == true || (!$meta['disable_adult_price'] && $meta['adult_price'] != false)) { ?>
+                            <div class="adults-text">0 Adults</div>
+                        <?php } ?>
+                        <?php if ($meta['custom_avail'] == true || (!$meta['disable_child_price'] && $meta['child_price'] != false)) { ?>
+                            <div class="person-sep"></div>
+                            <div class="child-text">0 Children</div>
+                        <?php } ?>
+                        <?php if ($meta['custom_avail'] == true || (!$meta['disable_infant_price'] && $meta['infant_price'] != false)) { ?>
+                            <div class="person-sep"></div>
+                            <div class="infant-text">0 Infant</div>
+                        <?php } ?>
                     </div>
                     <div class="tf_acrselection-wrap" style="display: none;">
                         <div class="tf_acrselection-inner">
+                            <?php if ($meta['custom_avail'] == true || (!$meta['disable_adult_price'] && $meta['adult_price'] != false)) { ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label">Adults</div>
                                 <div class="acr-select">
@@ -305,6 +321,8 @@ function tf_single_tour_booking_form( $post_id ) {
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
+                            <?php } ?>
+                            <?php if ($meta['custom_avail'] == true || (!$meta['disable_child_price'] && $meta['child_price'] != false)) { ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label">Children</div>
                                 <div class="acr-select">
@@ -313,6 +331,8 @@ function tf_single_tour_booking_form( $post_id ) {
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
+                            <?php } ?>
+                            <?php if ($meta['custom_avail'] == true || (!$meta['disable_infant_price'] && $meta['infant_price'] != false)) { ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label">Infant</div>
                                 <div class="acr-select">
@@ -321,6 +341,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -335,10 +356,42 @@ function tf_single_tour_booking_form( $post_id ) {
 				        </div>
 			        </label>
 		        </div>
+
+                <div class='tf_form-row' id="check-in-time-div" style="display: none;">
+                    <label class='tf_label-row'>
+                        <div class='tf_form-inner'>
+                            <span class='icon'>
+                                <?php tourfic_get_svg('calendar_today'); ?>
+                            </span>
+                            <select name="check-in-time" id="check-in-time">
+                            </select>
+                        </div>
+                    </label>
+                </div>
+
                 <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
                 <script>
                     (function ($) {
                         $(document).ready(function () {
+
+                            const allowed_times = JSON.parse('<?php echo wp_json_encode($allowed_times ?? []) ?>');
+                            const custom_avail = '<?php echo $meta['custom_avail'] ?>';
+                            if (custom_avail == false && allowed_times.length > 0) {
+                                populateTimeSelect(allowed_times)
+                            }
+
+                            function populateTimeSelect(times) {
+                                let timeSelect = $('#check-in-time');
+                                let timeSelectDiv = $("#check-in-time-div");
+                                timeSelect.empty();
+                                if (times.length > 0) {
+                                    timeSelect.append(`<option value="" selected hidden>Select time</option>`);
+                                    $.each(times, function(i, v) {
+                                        timeSelect.append(`<option value="${v}">${v}</option>`);
+                                    });
+                                    timeSelectDiv.show();
+                                } else timeSelectDiv.hide();
+                            }
 
                             $("#check-in-out-date").flatpickr({  
                                 enableTime: false,
@@ -403,6 +456,22 @@ function tf_single_tour_booking_form( $post_id ) {
                                 
                             } 
                             ?>
+
+                            onChange: function(selectedDates, dateStr, instance) {
+                                if (custom_avail == true) {
+
+                                    let times = allowed_times.filter((v) => {
+                                        let date_str = Date.parse(dateStr);
+                                        let start_date = Date.parse(v.date.from);
+                                        let end_date = Date.parse(v.date.to);
+                                        return start_date <= date_str && end_date >= date_str;
+                                    });
+                                    times = times.length > 0 && times[0].times ? times[0].times : null;
+                                    populateTimeSelect(times);
+                                }
+
+                            },
+
                             });
 
                         });
