@@ -80,20 +80,6 @@ if( class_exists( 'CSF' ) ) {
         ),
 
         array(
-          'id'          => 'features',
-          'type'        => 'select',
-          'title'       => 'Select Features',
-          'placeholder' => 'Select',
-          'chosen'      => true,
-          'multiple'    => true,
-          //'ajax'        => true,
-          'options'     => 'categories',
-          'query_args'  => array(
-            'taxonomy'  => 'hotel_feature',
-          ),
-        ),
-
-        array(
           'id'    => 'gallery',
           'type'  => 'gallery',
           'title' => 'Hotel gallery',
@@ -214,10 +200,11 @@ if( class_exists( 'CSF' ) ) {
               'id'         => 'enable',
               'type'       => 'switcher',
               'title'      => 'Status',
-              'subtitle' =>  __( 'Enable/disable this room', 'tourfic' ),
+              'subtitle'   => __( 'Enable/disable this room', 'tourfic' ),
               'text_on'    => 'Enabled',
               'text_off'   => 'Disabled',
-              'text_width' => 100
+              'text_width' => 100,
+              'default'    => true,
             ),
 
             array(

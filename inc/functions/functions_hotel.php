@@ -179,25 +179,26 @@ function tf_hotel_taxonomies_register() {
     ];
 
     $args = [
-        "label"                 => __( "Features", 'tourfic' ),
         "labels"                => $labels,
         "public"                => true,
-        "publicly_queryable"    => false,
-        "hierarchical"          => false,
+        "publicly_queryable"    => true,
+        "hierarchical"          => true,
         "show_ui"               => true,
         "show_in_menu"          => true,
         "show_in_nav_menus"     => true,
-        "show_in_quick_edit"    => true,
-        "meta_box_cb"           => false,
         "query_var"             => true,
         "rewrite"               => ['slug' => 'hotel_feature', 'with_front' => true],
         "show_admin_column"     => true,
         "show_in_rest"          => true,
         "rest_base"             => "hotel_feature",
         "rest_controller_class" => "WP_REST_Terms_Controller",
-        "show_in_quick_edit"    => false,
+        "show_in_quick_edit"    => true,
+        'capabilities'          => array( 
+            'assign_terms' => 'edit_tf_hotel',
+            'edit_terms' => 'edit_tf_hotel',
+         ),
     ];
-    register_taxonomy( 'hotel_feature', ['tf_hotel'], apply_filters( 'tf_feature_tax_args', $args ) );
+    register_taxonomy( 'hotel_feature', 'tf_hotel', apply_filters( 'tf_feature_tax_args', $args ) );
 
 }
 add_action( 'init', 'tf_hotel_taxonomies_register' );

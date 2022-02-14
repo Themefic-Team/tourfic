@@ -281,7 +281,8 @@ function tourfic_gallery_slider( $file_list_meta_key = null, $post_id = null, $c
 	
 	$post_id = ( $post_id ) ? $post_id : get_the_ID();
 	// Get the list of files
-	$tf_gallery_ids = get_post_meta( $post_id, $file_list_meta_key, 1 );
+	$meta = get_post_meta( $post_id, 'tf_hotel', true );
+	$tf_gallery_ids = !empty($meta['gallery']) ? $meta['gallery'] : '';
 
 	// Comma seperated list to array
 	if( $csf_gallery ){
@@ -310,7 +311,7 @@ function tourfic_gallery_slider( $file_list_meta_key = null, $post_id = null, $c
 		</div>
 		<!--Hero slider section start-->
 		<?php endif; ?>
-		<?php if( 'tourfic' == get_post_type() ) : ?>
+		<?php if( 'tf_hotel' == get_post_type() ) : ?>
 	<div class="list-single-main-media fl-wrap" id="sec1">
 	    <div class="single-slider-wrapper fl-wrap">
 	        <div class="tf_slider-for fl-wrap">
