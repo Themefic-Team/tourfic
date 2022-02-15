@@ -744,9 +744,9 @@
     border: 5px solid #FAFCFE;
     box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
     border-radius: 10px;
-    height: 500px;
+    height: 500px !important;
     padding: 30px;
-    display: flex;
+    display: flex !important;
     align-items: flex-end;
     margin: 20px 0 !important;
     background-repeat: no-repeat;

@@ -10,8 +10,9 @@
 }
 .tourfic-wrap ul {
   list-style: none;
-  margin: 0;
+  margin: 10px 0 0 0;
   padding: 0;
+  display: flex;
 }
 .tourfic-wrap svg {
   display: block;
@@ -1463,9 +1464,7 @@ span.review_num {
 }
 
 .room-feature-list li {
-  display: inline;
-  margin-right: 10px;
-  vertical-align: middle;
+  margin-right: 15px;
 }
 
 .tf-similar-tour-wrap {
@@ -3218,10 +3217,6 @@ form.tf_tours_booking .tf_selectperson-wrap {
 
 .tf_pax {
   white-space: nowrap;
-}
-
-.tf_room-table {
-  overflow-x: auto;
 }
 
 /* Medium devices (0 - 991px) */

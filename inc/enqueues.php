@@ -48,9 +48,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 
 
 
-        wp_enqueue_style( 'magnific-popup-css', TF_ASSETS_URL . 'css/magnific-popup.css', null, '' );
-
-        wp_enqueue_style( 'tourfic-styles', TF_ASSETS_URL . 'css/tourfic-styles.min.css', null, '' );
+        wp_enqueue_style( 'tourfic-styles', TF_ASSETS_URL . 'css/tourfic-styles.css', null, '' );
 
         wp_enqueue_style( 'tourfic-autocomplete', TF_ASSETS_URL . 'css/tourfic-autocomplete.css', null, '' );
         wp_enqueue_style( 'my-style', TF_ASSETS_URL . 'css/my-style.css', null, '' );
@@ -58,7 +56,6 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         wp_enqueue_style( 'tf-style', TF_ASSETS_URL . 'css/style.css', null, '' );
         wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/responsive.css', null, '' );
 
-        wp_enqueue_script( 'magnific-popup-js', TF_ASSETS_URL . 'js/jquery.magnific-popup.min.js', array( 'jquery' ), '' );
         wp_enqueue_script( 'owl-carousel', TF_ASSETS_URL . 'js/owl.carousel.min.js', array( 'jquery' ), '' );
 
         wp_enqueue_style( 'daterangepicker', TF_ASSETS_URL . 'daterangepicker/daterangepicker.css', null, TOURFIC );
@@ -108,8 +105,8 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 			wp_enqueue_style( 'fancyBox', '//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css', array(), '3.5.7' );
 			wp_enqueue_script( 'fancyBox', '//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', array( 'jquery' ), '3.5.7', true );
 		} else {
-            wp_enqueue_style( 'fancybox', TF_ASSETS_URL . 'css/jquery.fancybox.min.css', '', '3.5.7' );
-			wp_enqueue_script( 'fancybox', TF_ASSETS_URL . 'js/jquery.fancybox.min.js', array( 'jquery' ), '3.5.7', true );
+            wp_enqueue_style( 'fancybox', TF_ASSETS_URL . 'fancybox/jquery.fancybox.min.css', '', '3.5.7' );
+			wp_enqueue_script( 'fancybox', TF_ASSETS_URL . 'fancybox/jquery.fancybox.min.js', array( 'jquery' ), '3.5.7', true );
 		}  
         
         /**
@@ -119,6 +116,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
          */
         if ($slick_cdn == true) {
 			wp_enqueue_style( 'slick', '//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css', array(), '1.8.1' );
+            wp_enqueue_style( 'slick-theme', '//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css', array(), '1.8.1' );
 			wp_enqueue_script( 'slick', '//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js', array( 'jquery' ), '1.8.1', true );
 		} else {
             wp_enqueue_style( 'slick', TF_ASSETS_URL . 'slick/slick.css', '', '1.8.1' );

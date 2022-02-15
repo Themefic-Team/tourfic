@@ -1,87 +1,7 @@
-; (function ($, win) {
-    $.fn.inViewport = function (cb) {
-        return this.each(function (i, el) {
-            function visPx() {
-                var H = $(this).height(),
-                    r = el.getBoundingClientRect(), t = r.top, b = r.bottom;
-                return cb.call(el, Math.max(0, t > 0 ? H - t : (b < H ? b : H)));
-            } visPx();
-            $(win).on("resize scroll", visPx);
-        });
-    };
-}(jQuery, window));
-
 (function ($) {
     'use strict';
 
     $(document).ready(function () {
-
-        $('.tf-hero-slider-wrapper').slick({
-            arrows: true,
-            fade: false,
-            prevArrow: '<button class="tf-hero-slider-arrow slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>',
-            nextArrow: '<button class="tf-hero-slider-arrow slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>'
-        });
-
-        // Tab controlling
-        $('.tf_tab-nav a').on('click', function (e) {
-            e.preventDefault();
-            var targetDiv = $(this).attr('href');
-
-            if (!$(this).hasClass('active')) {
-                $(this).addClass('active').siblings().removeClass('active');
-            }
-            $('.tf-tab-container').find(targetDiv).addClass('active').siblings().removeClass('active');
-
-        });
-
-        // FullWidth Container JS
-        function fullwidthInit(selector) {
-            function fullWidth(selector) {
-                $(selector).each(function () {
-                    $(this).width("100%").css({ marginLeft: "-0px" });
-
-                    var window_width = $(window).width();
-
-                    var left_margin = "-" + $(this).offset().left + "px";
-
-                    $(this).width(window_width).css({ marginLeft: left_margin });
-                    console.log("Width:", window_width, "Margin Left:", left_margin);
-                });
-            }
-            $(window).on("resize load", function () {
-                fullWidth(selector);
-            });
-        }
-
-        // Usage DOM: <div data-fullwidth="true">...</div> in JS: fullwidthInit("[data-fullwidth=true]");
-        //fullwidthInit("[data-fullwidth=true]");
-
-        // Share copy
-        $('button#share_link_button').click(function () {
-
-            $(this).addClass('copied');
-            setTimeout(function () { $('button#share_link_button').removeClass('copied'); }, 3000);
-            $(this).parent().find("#share_link_input").select();
-            document.execCommand("copy");
-        });
-
-        // Toggle
-        $('[data-toggle="true"]').click(function (e) {
-            e.preventDefault();
-            var target = $(this).attr('href');
-            $(target).slideToggle('fast');
-        });
-
-        $('.faq-head').click(function (e) {
-            $(this).parent().toggleClass('active').find('.faq-content').slideToggle('fast');
-        });
-
-        //Itinerary accordion
-        $('.itinerary-head').on('click', function (e) {
-            $(this).parent().toggleClass('active').find('.itinerary-content').slideToggle('fast');
-        });
-
 
         // Date picker
         var dateToday = new Date();
@@ -141,31 +61,6 @@
         } else {
             tfMaxDate =  continuousCheckOut;
         }
-        
-        //Tours booking DateSelection init in single tour page
-        // $('.tours-check-in-out').daterangepicker({
-        //     "locale": {
-        //         "format": dateFormat,
-        //         "separator": " - ",
-        //         "firstDay": 1
-        //     },
-        //     minDate: tfMinDate,
-        //     maxDate: tfMaxDate,
-        //     singleDatePicker: true,
-        //     autoApply: true,
-        //     startDate: tfMinDate,
-        //     endDate: tfMaxDate,
-        //     drops: 'up',
-        // }, function (start, end, label) {
-            
-        //     var checkin_input = jQuery("#check-in-date");
-        //     var checkout_input = jQuery("#check-out-date");
-
-        //     checkin_input.val(start.format(dateFormat));
-        //     checkout_input.val(end.format(dateFormat));
-        //     $('.checkin-date-text').text(start.format(dateFormat));
-        //     $('.checkout-date-text').text(end.format(dateFormat));
-        // });
 
         //position fixed of sticky tour booking form
         $(window).scroll(function(){
@@ -267,35 +162,6 @@
             $('html, body').animate({
                 scrollTop: $("#rooms").offset().top - 32
             }, 1000);
-        });
-
-        //Popup
-
-        $('.tf_slider-for').magnificPopup({
-            delegate: 'div a',
-            type: 'image',
-            fixedContentPos: true,
-            closeOnBgClick: true,
-            alignTop: false,
-            tLoading: 'Loading image #%curr%...',
-            mainClass: 'tourfic-popup-wrapper',
-            gallery: {
-                enabled: true,
-                navigateByImgClick: true,
-                preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
-            },
-            callbacks: {
-                open: function () {
-                    // Will fire when this exact popup is opened
-                    // this - is Magnific Popup object
-
-                    jQuery('#elementor-lightbox-slideshow-single-img').addClass('dialog-type-lightboxjhfsjdfhreuru');
-                },
-                close: function () {
-                    // Will fire when popup is closed
-                }
-                // e.t.c.
-            }
         });
 
         // Ask question
@@ -454,27 +320,6 @@
 
             });
 
-        });
-
-    });
-
-    $(window).load(function () {
-
-        // Trigger Animation
-        jQuery('[data-width]').each(function () {
-
-            var $this = jQuery(this);
-
-            var width = $this.attr('data-width');
-           
-            $this.inViewport(function(px) {
-                if( px > 0 ) {
-                    $this.css('width', +width+'%');
-                } else {
-                    $this.css('width', '0%');
-                }
-            });
-            
         });
 
     });
@@ -732,48 +577,48 @@
         }
 
         //code from J
-        $(".tf-suggestion-items-wrapper").owlCarousel({            
-            margin:30,
-            stagePadding: 20,
-            loop:true,
-            nav:true,
-            dots:false,
-            responsive: {
-                0 : {
-                    items:1,
-                },
-                1000 : {
-                    items:2,
-                },
-                1241 : {
-                    items:3,
-                }
-            }
-        });
-        $(".tf-review-items-wrapper").owlCarousel({            
-            margin:30,
-            stagePadding: 20,
-            loop:true,
-            nav:true,
-            dots:false,
-            items:4,
+        // $(".tf-suggestion-items-wrapper").owlCarousel({            
+        //     margin:30,
+        //     stagePadding: 20,
+        //     loop:true,
+        //     nav:true,
+        //     dots:false,
+        //     responsive: {
+        //         0 : {
+        //             items:1,
+        //         },
+        //         1000 : {
+        //             items:2,
+        //         },
+        //         1241 : {
+        //             items:3,
+        //         }
+        //     }
+        // });
+        // $(".tf-review-items-wrapper").owlCarousel({            
+        //     margin:30,
+        //     stagePadding: 20,
+        //     loop:true,
+        //     nav:true,
+        //     dots:false,
+        //     items:4,
 
-            responsive: {
-                0 : {
-                    items:1,
-                },
-                600 : {
-                    items:2,
-                },
-                1000 : {
-                    items:3,
-                },
-                1241 : {
-                    items:4,
-                }
-            }
+        //     responsive: {
+        //         0 : {
+        //             items:1,
+        //         },
+        //         600 : {
+        //             items:2,
+        //         },
+        //         1000 : {
+        //             items:3,
+        //         },
+        //         1241 : {
+        //             items:4,
+        //         }
+        //     }
 
-        });
+        // });
         $(".tf-travel-text h4").click(function(){
             $(this).siblings('.tf-travel-contetn').slideToggle();
             $(this).parents('.tf-travel-itinerary-item').siblings().find('.tf-travel-contetn').slideUp();

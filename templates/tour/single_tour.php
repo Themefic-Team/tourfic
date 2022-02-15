@@ -55,7 +55,7 @@ $tf_overall_rate['review'] = null;
 
 <div class="tf-page-wrapper">
 <?php do_action( 'tf_before_container' ); ?>
-<!-- Hero section Start -->
+	<!-- Hero section Start -->
 	<div class="tf-hero-wrapper">
 		<div class="tf-container">
 			<div class="tf-row">
@@ -159,6 +159,7 @@ $tf_overall_rate['review'] = null;
 		</div>
 	</div>
 	<!-- Square block section end -->
+
 	<!-- Overview and Highlight section Start -->
 	<div class="tf-overview-wrapper">
 		<div class="tf-container">
@@ -188,6 +189,7 @@ $tf_overall_rate['review'] = null;
 	</div>
 	<!-- Overview and Highlight section end -->
 	<?php endif; ?>
+
 	<?php if( $inc || $exc ): ?>
 	<!-- Qoted List section Start -->
 	<div class="tf-quoted-wrapper">
@@ -222,139 +224,174 @@ $tf_overall_rate['review'] = null;
 	</div>
 	<!-- Qoted List section end -->
 	<?php endif; ?>
+
 	<?php if( $itineraries ): ?>
-<!-- Travel Itinerary section Start -->
-<div class="tf-travel-itinerary-wrapper">
-	<div class="tf-container">
-		<div class="tf-row">
-			<div class="tf-travel-itinerary-content-wrapper">
-				<h2><?php _e( "Travel Itinerary", 'tourfic' ); ?></h2>
-				<div class="tf-travel-itinerary-items-wrapper">
-					<?php foreach( $itineraries as $itinerary ){ ?>
-					<div class="tf-travel-itinerary-item">
-						<div class="tf-travel-time">
-							<span><?php echo esc_html( $itinerary['time'] ) ?></span>
-						</div>
-						<div class="tf-travel-text">
-							<h4><?php echo esc_html( $itinerary['title'] );  ?></h4>
-							<div class="tf-travel-contetn">
-								<div class="tf-travel-contetn-wrap">
-									<img src="<?php echo esc_url( $itinerary['image'] );?>">
-									<div class="tf-travel-desc">
-										<p><?php echo esc_html( $itinerary['desc'] ); ?></p>
+	<!-- Travel Itinerary section Start -->
+	<div class="tf-travel-itinerary-wrapper">
+		<div class="tf-container">
+			<div class="tf-row">
+				<div class="tf-travel-itinerary-content-wrapper">
+					<h2><?php _e( "Travel Itinerary", 'tourfic' ); ?></h2>
+					<div class="tf-travel-itinerary-items-wrapper">
+						<?php foreach( $itineraries as $itinerary ){ ?>
+						<div class="tf-travel-itinerary-item">
+							<div class="tf-travel-time">
+								<span><?php echo esc_html( $itinerary['time'] ) ?></span>
+							</div>
+							<div class="tf-travel-text">
+								<h4><?php echo esc_html( $itinerary['title'] );  ?></h4>
+								<div class="tf-travel-contetn">
+									<div class="tf-travel-contetn-wrap">
+										<img src="<?php echo esc_url( $itinerary['image'] );?>">
+										<div class="tf-travel-desc">
+											<p><?php echo esc_html( $itinerary['desc'] ); ?></p>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						<?php } ?>
 					</div>
-					<?php } ?>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<!-- Travel Itinerary section end -->
-<?php endif; ?>
-<?php if( $location ):  ?>
-<!-- Map section Start -->
-<div class="tf-map-wrapper">
-	<div class="tf-container">
-		<div class="tf-row">
-			<div class="tf-map-content-wrapper">
-			<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $location ); ?>&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+	<!-- Travel Itinerary section end -->
+	<?php endif; ?>
+
+	<?php if( $location ):  ?>
+	<!-- Map section Start -->
+	<div class="tf-map-wrapper">
+		<div class="tf-container">
+			<div class="tf-row">
+				<div class="tf-map-content-wrapper">
+				<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $location ); ?>&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<!-- Map section end -->
-<?php endif; ?>
-<?php if( $faqs ): ?>
-<!-- Accordion section Start -->
-<div class="tf-faq-wrapper">
-	<div class="tf-container">
-		<div class="tf-row">
-			<div class="tf-faq-content-wrapper">
-				<div class="tf-faq-sec-title">
-					<h2><?php _e( "Frequently asked questions?", 'tourfic' ); ?></h2>
-				</div>
-				<div class="tf-faq-items-wrapper">
-					<?php foreach ( $faqs as $key => $faq ): ?>
-						<div class="tf-faq-item">
-							<div class="tf-faq-icon">
-								<img src=<?php echo TOURFIC_PLUGIN_URL . "assets/img/icon.png"?> alt="">
-							</div>
-							<div class="tf-faq-text">
-								<div class="tf-faq-title">
-									<h3><?php esc_html_e( $faq['title'] ); ?></h3>
+	<!-- Map section end -->
+	<?php endif; ?>
+
+	<?php if( $faqs ): ?>
+	<!-- Accordion section Start -->
+	<div class="tf-faq-wrapper">
+		<div class="tf-container">
+			<div class="tf-row">
+				<div class="tf-faq-content-wrapper">
+					<div class="tf-faq-sec-title">
+						<h2><?php _e( "Frequently asked questions?", 'tourfic' ); ?></h2>
+					</div>
+					<div class="tf-faq-items-wrapper">
+						<?php foreach ( $faqs as $key => $faq ): ?>
+							<div class="tf-faq-item">
+								<div class="tf-faq-icon">
+									<img src=<?php echo TOURFIC_PLUGIN_URL . "assets/img/icon.png"?> alt="">
 								</div>
-								<div class="tf-faq-desc">
-									<p><?php _e( $faq['desc'] ); ?></p>
+								<div class="tf-faq-text">
+									<div class="tf-faq-title">
+										<h3><?php esc_html_e( $faq['title'] ); ?></h3>
+									</div>
+									<div class="tf-faq-desc">
+										<p><?php _e( $faq['desc'] ); ?></p>
+									</div>
+								</div>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Accordion section end -->
+	<?php endif; ?>
+
+	<?php 
+	$args = array(
+		'post_type' => 'tf_tours',
+		'post_status' => 'publish',
+		'posts_per_page' => 8, 
+		'orderby' => 'title', 
+		'order' => 'ASC',
+		'post__not_in' => array( get_the_ID() ),
+	);
+	$tours = new WP_Query( $args );
+	if ($tours->have_posts()) {
+	?>
+ 	<!-- tours suggestion section Start -->
+ 	<div class="tf-suggestion-wrapper">
+		<div class="tf-container">
+			<div class="tf-row">
+				<div class="tf-suggestion-content-wrapper">
+					<div class="tf-suggestion-sec-head">
+						<h2><?php echo __( 'You might also like','tourfic' ) ?></h2>
+						<p><?php echo __('Travel is my life. Since 1999, I’ve been traveling around the world nonstop.
+						If you also love travel, you’re in the right place!
+						','tourfic') ?></p>
+					</div>
+					<div class="tf-suggestion-items-wrapper">
+						<?php
+							while($tours->have_posts() ) {
+								$tours->the_post();
+								$post_id   = get_the_ID();
+								$destinations = get_the_terms( $post_id, 'tour_destination' );
+								$first_destination_name = $destinations[0]->name;
+
+								$related_comments = get_comments( array( 'post_id' => $post_id ) );								
+						?>
+						<div class="tf-suggestion-item" style="background-image: url(<?php echo get_the_post_thumbnail_url(get_the_ID(),'full') ?>);">
+							<div class="tf-suggestion-content">
+								<div class="tf-suggestion-desc">
+									<h3>
+										<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+										<span><?php echo $first_destination_name; ?></span>
+									</h3>
+								</div>
+								<div class="tf-suggestion-rating">
+
+								<?php 
+									if ($related_comments) {
+										foreach ($related_comments as $related_comment) {
+											$related_comment_meta = get_comment_meta( $related_comment->comment_ID, 'tf_comment_meta', true );
+											if ( $related_comment_meta ) {
+												foreach ( $related_comment_meta as $key => $value ) {
+													$related_overall_rate[$key][] = $value ? $value : "5";
+												}
+											} else {
+												$related_overall_rate['review'][] = "5";
+												$related_overall_rate['sleep'][] = "5";
+												$related_overall_rate['location'][] = "5";
+												$related_overall_rate['services'][] = "5";
+												$related_overall_rate['cleanliness'][] = "5";
+												$related_overall_rate['rooms'][] = "5";
+											}
+											?>
+											<div class="tf-suggestion-rating-star">
+												<i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tourfic_avg_ratings($related_overall_rate['review']); ?></span>
+											</div>											
+										<?php 
+										}
+									} else {
+										echo '<div class="tf-suggestion-rating-star"><i class="fas fa-star"></i> <span style="color:#fff;">N/A</span></div>';
+									}
+								?>									
+									<div class="tf-suggestion-price">
+										<span><?php echo tf_tours_price_html();?></span>
+									</div>
 								</div>
 							</div>
 						</div>
-					<?php endforeach; ?>
+						<?php }	?>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<!-- Accordion section end -->
-<?php endif; ?>
- <!-- tours suggestion section Start -->
- <div class="tf-suggestion-wrapper">
-            <div class="tf-container">
-                <div class="tf-row">
-                    <div class="tf-suggestion-content-wrapper">
-                        <div class="tf-suggestion-sec-head">
-                            <h2><?php echo __( 'You might also like','tourfic' ) ?></h2>
-                            <p><?php echo __('Travel is my life. Since 1999, I’ve been traveling around the world nonstop.
-							If you also love travel, you’re in the right place!
-							','tourfic') ?></p>
-                        </div>
-                        <div class="tf-suggestion-items-wrapper owl-carousel">
-							<?php
-								$args = array(
-									'post_type' => 'tf_tours',
-									'post_status' => 'publish',
-									'posts_per_page' => 8, 
-									'orderby' => 'title', 
-									'order' => 'ASC',
-									'post__not_in' => array( get_the_ID() ),
-								);
-								$tours = new WP_Query( $args );
-								while($tours->have_posts() ) : $tours->the_post();
+	<!-- tours suggestion section end -->
+	<?php }
+	wp_reset_postdata();
+	?>
 
-							?>
-                            <div class="tf-suggestion-item"
-                                style="background-image: url(<?php echo get_the_post_thumbnail_url(get_the_ID(),'full') ?>);">
-                                <div class="tf-suggestion-content">
-                                    <div class="tf-suggestion-desc">
-									<h3><a href="<?php the_permalink() ?>"><?php the_title() ?></a> <span><?php echo __( $location,'tourfic' ) ?></span></h3>
-                                    </div>
-                                    <div class="tf-suggestion-rating">
-                                        <div class="tf-suggestion-rating-star">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <div class="tf-suggestion-price">
-                                            <span><?php echo tf_tours_price_html();?></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-							<?php 
-								endwhile;
-								wp_reset_postdata(); 
-							?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- tours suggestion section end -->
 	<!-- tours review section Start -->
 	<div class="tf-review-wrapper">
 		<div class="tf-container">
@@ -365,7 +402,7 @@ $tf_overall_rate['review'] = null;
 						<h2><?php echo esc_html__( 'Customer Reviews','tourfic' );?></h2>
 						<p><?php echo esc_html__( 'Reviews given by our customers.','tourfic' );?></p>
 					</div>
-					<div class="tf-review-items-wrapper owl-carousel">
+					<div class="tf-review-items-wrapper">
 					<?php
 						foreach ( $comments as $comment ) :
 					
@@ -416,12 +453,11 @@ $tf_overall_rate['review'] = null;
 		</div>
 	</div>
 	<!-- tours suggestion section end -->
-<?php do_action( 'tf_after_container' ); ?>
+	<?php do_action( 'tf_after_container' ); ?>
 </div>
 
 <?php 
-
-
-endwhile; ?>
+endwhile;
+?>
 <?php
 get_footer('tourfic');

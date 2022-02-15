@@ -135,7 +135,7 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
 							<div class="tf_slider-for fl-wrap">
 								<?php foreach ( $gallery_ids as $attachment_id ) {
 									echo '<div class="slick-slide-item">';
-										echo '<a href="'.wp_get_attachment_url( $attachment_id, 'tf_gallery_thumb' ).'" class="slick-slide-item-link" >';
+										echo '<a href="'.wp_get_attachment_url( $attachment_id, 'tf_gallery_thumb' ).'" class="slick-slide-item-link" data-fancybox="hotel-gallery">';
 
 											echo wp_get_attachment_image( $attachment_id, 'tf_gallery_thumb' );
 										echo '</a>';

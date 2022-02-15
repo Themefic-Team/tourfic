@@ -1,4 +1,4 @@
-(function ($) {
+(function ($, win) {
     $(document).ready(function () {
 
         /**
@@ -7,6 +7,22 @@
          * Fancybox
          */
         $('[data-fancybox="tour-gallery"]').fancybox({
+            loop: true,
+            buttons: [
+                "zoom",
+                "slideShow",
+                "fullScreen",
+                "close"
+            ],
+            hash: false,
+        });
+
+        /**
+         * Single hotel Gallery
+         * 
+         * Fancybox
+         */
+         $('[data-fancybox="hotel-gallery"]').fancybox({
             loop: true,
             buttons: [
                 "zoom",
@@ -56,5 +72,175 @@
             $(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickNext');
         });
 
+        /**
+         * Rating bar
+         */
+        $.fn.inViewport = function (cb) {
+            return this.each(function (i, el) {
+                function visPx() {
+                    var H = $(this).height(),
+                        r = el.getBoundingClientRect(), t = r.top, b = r.bottom;
+                    return cb.call(el, Math.max(0, t > 0 ? H - t : (b < H ? b : H)));
+                } visPx();
+                $(win).on("resize scroll", visPx);
+            });
+        };
+
+        $(window).load(function () {
+            // Trigger Animation
+            jQuery('[data-width]').each(function () {  
+                var $this = jQuery(this);   
+                var width = $this.attr('data-width');
+               
+                $this.inViewport(function(px) {
+                    if( px > 0 ) {
+                        $this.css('width', +width+'%');
+                    } else {
+                        $this.css('width', '0%');
+                    }
+                });              
+            });    
+        });
+
+        /**
+         * Full Width JS
+         */
+        function fullwidthInit(selector) {
+            function fullWidth(selector) {
+                $(selector).each(function () {
+                    $(this).width("100%").css({ marginLeft: "-0px" });
+
+                    var window_width = $(window).width();
+
+                    var left_margin = "-" + $(this).offset().left + "px";
+
+                    $(this).width(window_width).css({ marginLeft: left_margin });
+                    console.log("Width:", window_width, "Margin Left:", left_margin);
+                });
+            }
+            $(window).on("resize load", function () {
+                fullWidth(selector);
+            });
+        }
+
+        // Usage DOM: <div data-fullwidth="true">...</div> in JS: fullwidthInit("[data-fullwidth=true]");
+        //fullwidthInit("[data-fullwidth=true]");
+
+        /**
+         * Share buttons
+         */
+        // Toggle share buttons
+        $('.share-toggle[data-toggle="true"]').click(function (e) {
+            e.preventDefault();
+            var target = $(this).attr('href');
+            $(target).slideToggle('fast');
+        });
+
+        // Copy button
+        $('button#share_link_button').click(function () {
+
+            $(this).addClass('copied');
+            setTimeout(function () { $('button#share_link_button').removeClass('copied'); }, 3000);
+            $(this).parent().find("#share_link_input").select();
+            document.execCommand("copy");
+        });
+
+        /**
+         * Toggle FAQ
+         */
+        $('.faq-head').click(function (e) {
+            $(this).parent().toggleClass('active').find('.faq-content').slideToggle('fast');
+        });
+
+        /**
+         * Toggle Itinerary
+         */
+         $('.itinerary-head').on('click', function (e) {
+            $(this).parent().toggleClass('active').find('.itinerary-content').slideToggle('fast');
+        });
+
+        /**
+         * Related Tour
+         * 
+         * Slick
+         */
+        $('.tf-suggestion-items-wrapper').slick({
+            dots: true,
+            arrows: false,
+            infinite: true,
+            speed: 300,
+            //autoplay: true,
+            autoplaySpeed: 2000,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+
+        /**
+         * Customer Reviews
+         * 
+         * Slick
+         */
+         $('.tf-review-items-wrapper').slick({
+            dots: true,
+            arrows: false,
+            infinite: true,
+            speed: 300,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+
+
     });
-})(jQuery);
+})(jQuery, window);

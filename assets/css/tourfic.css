@@ -4,29 +4,31 @@
 .tf-tooltip {
     position:relative;
 }
-
 .tf-tooltip .tf-top {
-    min-width:200px; 
-    top:-20px;
-    left:50%;
-    transform:translate(-50%, -100%);
-    padding:10px 20px;
-    color:#FFFFFF;
-    background-color:#333333;
-    font-weight:normal;
-    font-size:13px;
-    border-radius:8px;
-    position:absolute;
-    z-index:99999999;
-    box-sizing:border-box;
-    border:1px solid #333333;box-shadow:0 1px 8px transparent;
-    visibility:hidden; opacity:0; transition:opacity 0.8s;
+    top: -20px;
+    left: 50%;
+    transform: translate(-50%, -74%);
+    padding: 10px 10px;
+    color: #FFFFFF;
+    background-color: #333333;
+    font-weight: normal;
+    font-size: 12px;
+    border-radius: 4px;
+    position: absolute;
+    z-index: 99999999;
+    box-sizing: border-box;
+    border: 1px solid #333333;
+    box-shadow: 0 1px 8px transparent;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.8s;
+    text-align: center;
+    line-height: 1;
+    white-space: nowrap;
 }
-
 .tf-tooltip:hover .tf-top {
     visibility:visible; opacity:1;
 }
-
 .tf-tooltip .tf-top i.tool-i {
     position:absolute;
     top:100%;
@@ -36,7 +38,6 @@
     height:12px;
     overflow:hidden;
 }
-
 .tf-tooltip .tf-top i.tool-i::after {
     content:'';
     position:absolute;
@@ -46,4 +47,23 @@
     transform:translate(-50%,-50%) rotate(45deg);
     background-color:#333333;
     border:1px solid #333333;box-shadow:0 1px 8px transparent;
+}
+
+/*================================
+|            Hotel CSS           |
+================================*/
+.tf_room-table .availability-table tbody tr:nth-child(odd) td{
+    background: #fff;
+}
+
+/* the slides */
+.slick-slide {
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+}
+
+/* the parent */
+.slick-list {
+    margin-left: -5px !important;
+    margin-right: -5px !important;
 }
