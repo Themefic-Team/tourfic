@@ -362,7 +362,7 @@ foreach ($rooms as $room) {
 
 			<!-- Start Sidebar -->
 			<div class="tf_sidebar">
-				<?php tourfic_get_sidebar( 'single' ); ?>
+				<?php tf_hotel_sidebar_booking_form( 'single' ); ?>
 			</div>
 			<!-- End Sidebar -->
 		</div>

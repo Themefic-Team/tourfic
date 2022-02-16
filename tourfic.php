@@ -187,12 +187,6 @@ require_once dirname( __FILE__ ) . '/inc/svg-icons.php';
 require_once dirname( __FILE__ ) . '/inc/shortcodes.php';
 
 /**
- *    WooCommerce booking
- */
-require_once dirname( __FILE__ ) . '/inc/booking/tf-woocommerce-hotel-class.php';
-//require_once dirname( __FILE__ ) . '/inc/booking/tf-woocommerce-tours-class.php';
-
-/**
  *    Widgets
  */
 require_once dirname( __FILE__ ) . '/inc/widgets.php';

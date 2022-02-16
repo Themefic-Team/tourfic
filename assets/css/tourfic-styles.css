@@ -750,13 +750,6 @@ button.tf-tablinks.active {
   font-size: inherit;
 }
 
-.tf_form-inner {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 0 0 0 10px;
-  background: #fff;
-}
 .tf_form-inner input[type=text],
 .tf_form-inner select {
   width: 100%;

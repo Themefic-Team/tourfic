@@ -67,3 +67,20 @@
     margin-left: -5px !important;
     margin-right: -5px !important;
 }
+
+/** 
+ * TF Hotel Sidebar Booking
+ */
+.tf-hotel-side-booking .tf_form-inner {
+    position: relative;
+    display: grid;
+    padding: 0 0 0 0;
+    background: #fff;
+    grid-template-columns: 38px auto;
+    align-items: center;
+    justify-items: center;
+}
+.tf-hotel-side-booking .tf_form-inner i{
+    color: #bfbfbf;
+    font-size: 16px;
+}

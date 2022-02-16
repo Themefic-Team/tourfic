@@ -3,64 +3,64 @@
 
     $(document).ready(function () {
 
-        // Date picker
-        var dateToday = new Date();
-        var hotel_checkin_input = jQuery(".tf-hotel-check-in");
-        var hotel_checkout_input = jQuery(".tf-hotel-check-out");
+        // // Date picker
+        // var dateToday = new Date();
+        // var hotel_checkin_input = jQuery(".tf-hotel-check-in");
+        // var hotel_checkout_input = jQuery(".tf-hotel-check-out");
 
-        var dateFormat = 'DD-MM-YYYY';
+        // var dateFormat = 'DD-MM-YYYY';
 
-        // Trigger Check-in Date
-        $('.tf_selectdate-wrap, #check-in-out-date').daterangepicker({
-            "locale": {
-                "format": dateFormat,
-                "separator": " - ",
-                "firstDay": 1
-            },
-            minDate: dateToday,
-            autoApply: true,
-        }, function (start, end, label) {
+        // // Trigger Check-in Date
+        // $('.tf_selectdate-wrap, #check-in-out-date').daterangepicker({
+        //     "locale": {
+        //         "format": dateFormat,
+        //         "separator": " - ",
+        //         "firstDay": 1
+        //     },
+        //     minDate: dateToday,
+        //     autoApply: true,
+        // }, function (start, end, label) {
             
-            var checkin_input = jQuery(".tf-tour-check-in");
-            var checkout_input = jQuery(".tf-tour-check-out");
+        //     var checkin_input = jQuery(".tf-tour-check-in");
+        //     var checkout_input = jQuery(".tf-tour-check-out");
 
-            checkin_input.val(start.format(dateFormat));
-            hotel_checkin_input.val(start.format(dateFormat));
-            $('.tf-widget-check-in').val(start.format(dateFormat));
-            $('.checkin-date-text').text(start.format(dateFormat));
+        //     checkin_input.val(start.format(dateFormat));
+        //     hotel_checkin_input.val(start.format(dateFormat));
+        //     $('.tf-widget-check-in').val(start.format(dateFormat));
+        //     $('.checkin-date-text').text(start.format(dateFormat));
 
-            checkout_input.val(end.format(dateFormat));
-            hotel_checkout_input.val(end.format(dateFormat));
-            $('.tf-widget-check-out').val(end.format(dateFormat));
-            $('.checkout-date-text').text(end.format(dateFormat));
-        });
+        //     checkout_input.val(end.format(dateFormat));
+        //     hotel_checkout_input.val(end.format(dateFormat));
+        //     $('.tf-widget-check-out').val(end.format(dateFormat));
+        //     $('.checkout-date-text').text(end.format(dateFormat));
+        // });
 
-        //Get continuous check in out date 
-        var continuousDate = $('.tf-tour-booking-wrap').data('continuous-array');
-        let customAvailability =  $('.tf-tour-booking-wrap').data('custom-availability');
-        if(continuousDate){
-            for(let i = 0; i < continuousDate.length; i++){            
-                var continuousCheckIn = continuousDate[i].check_in;
-                var continuousCheckOut = continuousDate[i].check_out;
-            }
-        }else if(customAvailability == "no"){
-            continuousCheckOut == false; 
-        }
+        // //Get continuous check in out date 
+        // var continuousDate = $('.tf-tour-booking-wrap').data('continuous-array');
+        // let customAvailability =  $('.tf-tour-booking-wrap').data('custom-availability');
+        // if(continuousDate){
+        //     for(let i = 0; i < continuousDate.length; i++){            
+        //         var continuousCheckIn = continuousDate[i].check_in;
+        //         var continuousCheckOut = continuousDate[i].check_out;
+        //     }
+        // }else if(customAvailability == "no"){
+        //     continuousCheckOut == false; 
+        // }
 
-        var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
-        var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
-        if (fixedCheckIn) {
-           var tfMinDate = fixedCheckIn;
-        } else if(customAvailability == 'no') {
-            tfMinDate =  dateToday;
-        }else{
-            tfMinDate =  continuousCheckIn ;
-        }
-        if (fixedCheckOut) {
-           var tfMaxDate = fixedCheckOut;
-        } else {
-            tfMaxDate =  continuousCheckOut;
-        }
+        // var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
+        // var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
+        // if (fixedCheckIn) {
+        //    var tfMinDate = fixedCheckIn;
+        // } else if(customAvailability == 'no') {
+        //     tfMinDate =  dateToday;
+        // }else{
+        //     tfMinDate =  continuousCheckIn ;
+        // }
+        // if (fixedCheckOut) {
+        //    var tfMaxDate = fixedCheckOut;
+        // } else {
+        //     tfMaxDate =  continuousCheckOut;
+        // }
 
         //position fixed of sticky tour booking form
         $(window).scroll(function(){
