@@ -246,6 +246,128 @@ if ( !function_exists( 'get_hotel_destinations' ) ) {
 function tf_hotel_sidebar_booking_form( $placement = 'single' ) { ?>
 
 	<!-- Start Booking widget -->
+	<form id="tf-single-hotel-avail" class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off" action="<?php echo tourfic_booking_search_action(); ?>">
+
+		<div class="tf_form-row">
+            <label class="tf_label-row">
+                <div class="tf_form-inner">
+                    <i class="fas fa-user-friends"></i>
+                    <select name="adults" id="adults" class="">
+                        <option value="1">1 adult</option>
+                        <option value="2">2 adults</option>
+                        <option value="3">3 adults</option>
+                        <option value="4">4 adults</option>
+                        <option value="5">5 adults</option>
+                        <option value="6">6 adults</option>
+                    </select>
+				</div>
+			</label>
+		</div>
+
+        <div class="tf_form-row">
+            <label class="tf_label-row">
+                <div class="tf_form-inner">
+                <i class="fas fa-child"></i>
+                    <select name="children" id="children" class="">
+                        <option value="0">0 child</option>
+                        <option value="1">1 child</option>
+                        <option value="2">2 childrens</option>
+                        <option value="3">3 childrens</option>
+                        <option value="4">4 childrens</option>
+                        <option value="5">5 childrens</option>
+                    </select>
+				</div>
+			</label>
+		</div>
+
+		<div class="tf_booking-dates">
+            <div class="tf_form-row">
+                <label class="tf_label-row">
+                    <span class="tf-label">Check-in &amp; Check-out date</span>
+                    <div class="tf_form-inner">
+                        <i class="far fa-calendar-alt"></i>
+                        <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="Select Date" required>
+                    </div>
+			    </label>
+		    </div>
+
+			<div class="screen-reader-text">
+				<?php //tourfic_booking_widget_field(
+					// array(
+					// 	'type'        => 'text',
+					// 	'svg_icon'    => 'calendar_today',
+					// 	'name'        => 'check-in-date',
+					// 	'placeholder' => 'Check-in date',
+					// 	'label'       => 'Check-in date',
+					// 	'required'    => 'true',
+					// 	'disabled'    => 'true',
+					// 	'class'		  => 'tf-widget-check-in',
+					// ));
+				?>
+
+				<?php //tourfic_booking_widget_field(
+				// 	array(
+				// 		'type'        => 'text',
+				// 		'svg_icon'    => 'calendar_today',
+				// 		'name'        => 'check-out-date',
+				// 		'placeholder' => 'Check-out date',
+				// 		'required'    => 'true',
+				// 		'disabled'    => 'true',
+				// 		'label'       => 'Check-out date',
+				// 		'class'		  => 'tf-widget-check-out',
+				// 	)
+				// );?>
+			</div>
+		</div>
+
+		<div class="tf_form-row">
+			<?php
+				$ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
+			?>
+			<input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type" />
+			<button class="tf_button tf-submit" type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' );?></button>
+		</div>
+
+	</form>
+    
+    <script>
+        (function ($) {
+            $(document).ready(function () {
+
+                $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
+                    enableTime: false,
+                    mode: "range",
+                });
+
+            });
+        })(jQuery);
+    </script>
+
+	<?php if ( $placement == 'single' ) { ?>
+		<?php if ( is_active_sidebar( 'tf_single_booking_sidebar' ) ) { ?>
+		    <div id="tf__booking_sidebar">
+		        <?php dynamic_sidebar( 'tf_single_booking_sidebar' ); ?>
+		        <br>
+		    </div>
+		<?php } ?>
+	<?php } else { ?>
+		<?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
+		    <div id="tf__booking_sidebar">
+		        <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
+		        <br>
+		    </div>
+		<?php } ?>
+	<?php } ?>
+
+	<?php
+}
+
+/**
+ * Archive Hotel Sidebar Booking Form
+ */
+function tourfic_get_sidebar( $placement = 'single' ) { ?>
+
+	<!-- Start Booking widget -->
 	<form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off" action="<?php echo tourfic_booking_search_action(); ?>">
 
         <div class="tf_form-row">

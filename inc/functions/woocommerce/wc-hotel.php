@@ -1,8 +1,13 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-add_action('wp_ajax_tf_room_booking', 'tf_room_booking_function');
-add_action('wp_ajax_nopriv_tf_room_booking', 'tf_room_booking_function');
+/**
+ * Hotel booking ajax function
+ * 
+ * @since 2.2.0
+ */
+add_action('wp_ajax_tf_hotel_booking', 'tf_room_booking_function');
+add_action('wp_ajax_nopriv_tf_hotel_booking', 'tf_room_booking_function');
 
 /**
  * Handles AJAX for Booking
