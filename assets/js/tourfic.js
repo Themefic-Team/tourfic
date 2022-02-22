@@ -91,24 +91,115 @@
         });
 
         /**
+         * Hotel room availability
+         */
+        $(document).on('click', '#tf-single-hotel-avail .tf-submit', function(e) {
+            e.preventDefault();
+
+            if($.trim($('input[name=check-in-out-date]').val()) == ''){
+                $('.tf_booking-dates .tf_label-row').append('<span clss="required"><b>This field is required!</b></span>');
+                return;
+            }
+
+            var tf_room_avail_nonce = $("input[name=tf_room_avail_nonce]").val();
+            var post_id = $('input[name=post_id]').val();
+            var adult = $('select[name=adults] option').filter(':selected').val();
+            var child = $('select[name=children] option').filter(':selected').val();
+            var check_in_out = $('input[name=check-in-out-date]').val();
+            //console.log(post_id);
+
+            var data = {
+                action: 'tf_room_availability',
+                tf_room_avail_nonce: tf_room_avail_nonce,
+                post_id: post_id,
+                adult: adult,
+                child: child,
+                check_in_out: check_in_out,
+            };
+
+            jQuery.ajax({
+                url: tf_params.ajax_url,
+                type: 'post',
+                data: data,
+                success: function (data) {
+                    $('html, body').animate({
+                        scrollTop: $("#rooms").offset().top
+                    }, 2000);
+                    //console.log(data);
+                    $("#rooms").html(data);
+                },
+                error: function (jqXHR, exception) {
+                    var error_msg = '';
+                    if (jqXHR.status === 0) {
+                        var error_msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        var error_msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        var error_msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        var error_msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        var error_msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        var error_msg = 'Ajax request aborted.';
+                    } else {
+                        var error_msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    alert(error_msg);
+                }
+            });
+
+        });
+
+        /**
+         * Click to go back to availability form
+         */
+         $(document).on('click', '.select-rooms-td .check-availability', function(e) {
+            e.preventDefault();
+
+            $('html, body').animate({
+                scrollTop: $("#tf-single-hotel-avail").offset().top
+            }, 2000);
+        });   
+
+        /**
          * Ajax hotel booking
          * 
          * tf_hotel_booking
          */
-         $(document).on('submit', 'form.tf-room', function (e) {
+        $(document).on('click', '.tf-room-book', function (e) {
             e.preventDefault();
 
             var $this = $(this);
 
-            var formData = new FormData(this);
-            formData.append('action', 'tf_hotel_booking');
+            var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
+            var post_id = $('input[name=post_id]').val();
+            var room_id = $('input[name=room_id]').val();
+            var location = $('input[name=location]').val();
+            var adult = $('input[name=adult]').val();
+            var child = $('input[name=child]').val();
+            var check_in_date = $('input[name=check_in_date]').val();
+            var check_out_date = $('input[name=check_out_date]').val();
+            var room = $('select[name=room-selected] option').filter(':selected').val();
+            //console.log(post_id);
+
+            var data = {
+                action: 'tf_hotel_booking',
+                tf_room_booking_nonce: tf_room_booking_nonce,
+                post_id: post_id,
+                room_id: room_id,
+                location: location,
+                adult: adult,
+                child: child,
+                check_in_date: check_in_date,
+                check_out_date: check_out_date,
+                room: room,
+            };
 
             $.ajax({
                 type: 'post',
                 url: tf_params.ajax_url,
-                data: formData,
-                processData: false,
-                contentType: false,
+                data: data,
                 beforeSend: function (data) {
                     $this.block({
                         message: null,

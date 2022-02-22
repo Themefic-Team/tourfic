@@ -195,25 +195,12 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
 				<!-- End features -->
 				<?php } ?>
 
-				<?php if( $rooms ) : ?>
+				<?php if( $rooms ) { ?>
 				<!-- Start Room Type -->
 				<div class="tf_room-type" id="rooms">
 					<div class="listing-title">
 						<h4><?php esc_html_e( 'Availability', 'tourfic' ); ?></h4>
 					</div>
-
-<?php 
-//var_dump($rooms); 
-
-foreach ($rooms as $room) {
-	echo $room['num-room'];
-
-	echo '<br>';
-}
-?>
-
-
-
 					<div class="tf_room-table">
 						<table class="availability-table">
 							<thead>
@@ -221,12 +208,17 @@ foreach ($rooms as $room) {
 							      <th class="room-type-td"><?php esc_html_e( 'Room Type', 'tourfic' ); ?></th>
 							      <th class="pax-td"><?php esc_html_e( 'Pax', 'tourfic' ); ?></th>
 							      <th class="total-price-td"><?php esc_html_e( 'Total Price', 'tourfic' ); ?></th>
-							      <th class="select-rooms-td"><?php esc_html_e( 'Select Rooms', 'tourfic' ); ?></th>
+							      <th class="select-rooms-td"></th>
 							    </tr>
 							</thead>
 							<tbody>
 							<!-- Start Single Room -->
-							<?php foreach ($rooms as $room) { ?>
+							<?php foreach ($rooms as $room) {
+								
+								$adult_number = !empty($room['adult']) ? $room['adult'] : '0';
+								$child_number = !empty($room['child']) ? $room['child'] : '0';
+								$total_person = $adult_number + $child_number;
+							?>
 								<tr>
 							      <td class="room-type-td">
 							      	<div class="tf-room-type">
@@ -262,7 +254,7 @@ foreach ($rooms as $room) {
 							      </td>
 							      <td class="pax-td">
 									<div class="tf_pax">
-										<?php for ($i=0; $i < $room['person']; $i++) {
+										<?php for ($i=0; $i < $total_person; $i++) {
 											echo '<i class="fa fa-user"></i>';
 										} ?>
 									</div>
@@ -274,33 +266,16 @@ foreach ($rooms as $room) {
 									</div>
 							      </td>
 							      <td class="select-rooms-td">
-							      	<form class="tf-room" id="tf_room-id-<?php echo esc_attr( $key ); ?>">
-								      	<div class="room-selection-wrap">
-											<select name="room-selected" id="room-selected">
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-											</select>
-										</div>
-										<div class="room-submit-wrap">
-											<input type="hidden" name="tour_id" value="<?php echo get_the_ID(); ?>">
-											<input type="hidden" name="room_key" value="<?php echo esc_attr( $key ); ?>">
-											<?php tourfic_room_booking_submit_button( 'I\'ll reserve' ); ?>
-										</div>
-										<div class="tf_desc"></div>
-									</form>
+										<button class="tf_button check-availability" type="submit"><?php _e('Check Availability', 'tourfic'); ?></button>
 							      </td>
 							    </tr>
 							<?php } ?>
 							</tbody>
 						</table>
-
-						<?php //ppr( $add_room_type ); ?>
 					</div>
 				</div>
 				<!-- End Room Type -->
-				<?php endif; ?>
+				<?php } ?>
 
 				<?php if( $faqs ) { ?>
 					<!-- Start highlights content -->

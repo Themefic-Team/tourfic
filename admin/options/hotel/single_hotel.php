@@ -240,9 +240,16 @@ if( class_exists( 'CSF' ) ) {
             ),
 
             array(
-              'id'    => 'person',
+              'id'    => 'adult',
               'type'  => 'number',
-              'title' => 'Number of persons',
+              'title' => 'Number of adults',
+              'subtitle' =>  __( 'Max number of persons allowed in the room', 'tourfic' ),
+            ),
+
+            array(
+              'id'    => 'child',
+              'type'  => 'number',
+              'title' => 'Number of children',
               'subtitle' =>  __( 'Max number of persons allowed in the room', 'tourfic' ),
             ),
 
@@ -294,6 +301,23 @@ if( class_exists( 'CSF' ) ) {
               'type'    => 'text',
               'title'   => 'Pricing',
               'desc' =>  __( 'The price of room per one night', 'tourfic' ),
+              'dependency' => array( 'pricing-by', '==', '1' ),
+            ),
+
+            array(
+              'id'      => 'adult_price',
+              'type'    => 'text',
+              'title'   => 'Adult Pricing',
+              'desc' =>  __( 'The price of room per one night', 'tourfic' ),
+              'dependency' => array( 'pricing-by', '==', '2' ),
+            ),
+
+            array(
+              'id'      => 'child_price',
+              'type'    => 'text',
+              'title'   => 'Children Pricing',
+              'desc' =>  __( 'The price of room per one night', 'tourfic' ),
+              'dependency' => array( 'pricing-by', '==', '2' ),
             ),
 
             array(
