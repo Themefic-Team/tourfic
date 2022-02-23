@@ -127,15 +127,53 @@
 /**
  * Room table 
  */
-.tf_room-table .description {
-    width: 40%;
+.hotel-room-wrap {
+    overflow-x: auto;
+    width: 100%;
 }
-.tf_room-table .details {
-    width: 40%;
+
+.tf_room-table th.description {
+    border-top: 1px solid #f2f2f2;
+    border-left: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    border-right: 1px solid #f2f2f2;
 }
-.tf_room-table .pricing {
-    width: 20%;
+.tf_room-table th.pax {
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
     text-align: center;
+}
+.tf_room-table th.pricing {
+    border-top: 1px solid #f2f2f2;
+    border-left: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    text-align: center;
+}
+.tf_room-table th.reserve {
+    border-top: 1px solid #f2f2f2;
+    border-right: 1px solid #f2f2f2;
+    border-left: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    text-align: center;
+}
+
+.tf_room-table td.description {
+    border-left: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    border-right: 1px solid #f2f2f2;
+}
+.tf_room-table td.pax {
+    border-bottom: 1px solid #f2f2f2;
+    min-width: 80px;
+}
+.tf_room-table td.pricing {
+    border-left: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+}
+.tf_room-table td.reserve {
+    border-right: 1px solid #f2f2f2;
+    border-left: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
 }
 
 /**
@@ -157,4 +195,26 @@
 .room-detail-icon .icon-text{
     font-size: 14px;
     color: #5e6d77;
+}
+
+.hotel-room-availability, .hotel-room-book {
+    background: #003162;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    font-size: 12px;
+    border: 1px solid #003162;
+    border-radius: 2px;
+    padding: 6px 12px;
+    white-space: nowrap;
+}
+#hotel-room-selected {
+    width: 50%;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    color: #333;
+    outline: none;
 }

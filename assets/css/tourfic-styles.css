@@ -1415,8 +1415,6 @@ span.review_num {
   padding: 0;
 }
 .tourfic-wrap.default-style button[type=submit] {
-  padding-left: 30px;
-  padding-right: 30px;
   white-space: nowrap;
 }
 .tourfic-wrap.default-style .tf-room-title {

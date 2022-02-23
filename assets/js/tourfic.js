@@ -167,7 +167,7 @@
          * 
          * tf_hotel_booking
          */
-        $(document).on('click', '.tf-room-book', function (e) {
+        $(document).on('click', '.hotel-room-book', function (e) {
             e.preventDefault();
 
             var $this = $(this);
@@ -180,7 +180,7 @@
             var child = $('input[name=child]').val();
             var check_in_date = $('input[name=check_in_date]').val();
             var check_out_date = $('input[name=check_out_date]').val();
-            var room = $(this).closest('.pricing').find('select[name=room-selected] option').filter(':selected').val();
+            var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
             //console.log(post_id);
 
             var data = {

@@ -375,8 +375,16 @@ function tf_room_availability_callback() {
 	<div class="listing-title">
 		<h4><?php esc_html_e( 'Availability', 'tourfic' ); ?></h4>
 	</div>
-    <div class="tf_room-table">
+    <div class="tf_room-table hotel-room-wrap">
         <table class="availability-table">
+            <thead>
+                <tr>
+                    <th class="description"><?php _e( 'Room Details', 'tourfic' ); ?></th>
+                    <th class="pax"><?php _e( 'Pax', 'tourfic' ); ?></th>
+                    <th class="pricing"><?php _e( 'Price', 'tourfic' ); ?></th>
+                    <th class="reserve"><?php _e( 'Select Rooms', 'tourfic' ); ?></th>
+                </tr>
+            </thead>
             <tbody>
                 <!-- Start Single Room -->
                 <?php 
@@ -404,11 +412,9 @@ function tf_room_availability_callback() {
                             <div class="tf-room-title"><?php echo esc_html( $room['title'] ); ?></div>
                             <div class="bed-facilities"><?php echo $room['description']; ?></div>
                         </div>
-                    </td>
-                    <td class="details">
 
                         <div class="tf-room-title">
-                                <?php esc_html_e( 'Key Features', 'tourfic' ); ?>
+                            <?php esc_html_e( 'Key Features', 'tourfic' ); ?>
                         </div>
 
                         <?php if ($footage) { ?>
@@ -431,30 +437,6 @@ function tf_room_availability_callback() {
                             </div>
                             <div class="tf-top">
                                 <?php _e( 'No. Beds', 'tourfic' ); ?>
-                                <i class="tool-i"></i>
-                            </div>
-                        </div>
-                        <?php }
-                        if ($adult_number) { ?>
-                        <div class="tf-tooltip tf-d-ib">
-                            <div class="room-detail-icon">
-                                <span class="room-icon-wrap"><i class="fas fa-male"></i><i class="fas fa-female"></i></span>
-                                <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
-                            </div>
-                            <div class="tf-top">
-                                <?php _e( 'No. Adults', 'tourfic' ); ?>
-                                <i class="tool-i"></i>
-                            </div>
-                        </div>
-                        <?php }
-                        if ($child_number) { ?>
-                        <div class="tf-tooltip tf-d-ib">
-                            <div class="room-detail-icon">
-                                <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
-                                <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
-                            </div>
-                            <div class="tf-top">
-                                <?php _e( 'No. Children', 'tourfic' ); ?>
                                 <i class="tool-i"></i>
                             </div>
                         </div>
@@ -486,6 +468,33 @@ function tf_room_availability_callback() {
                             </ul>
                         </div>
                     </td>
+                    <td class="pax">
+
+                        <?php if ($adult_number) { ?>
+                        <div class="tf-tooltip tf-d-b">
+                            <div class="room-detail-icon">
+                                <span class="room-icon-wrap"><i class="fas fa-male"></i><i class="fas fa-female"></i></span>
+                                <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
+                            </div>
+                            <div class="tf-top">
+                                <?php _e( 'No. Adults', 'tourfic' ); ?>
+                                <i class="tool-i"></i>
+                            </div>
+                        </div>
+                        <?php }
+                        if ($child_number) { ?>
+                        <div class="tf-tooltip tf-d-b">
+                            <div class="room-detail-icon">
+                                <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
+                                <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
+                            </div>
+                            <div class="tf-top">
+                                <?php _e( 'No. Children', 'tourfic' ); ?>
+                                <i class="tool-i"></i>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </td>
                     <td class="pricing">
                         <div class="tf-price-column">
                         <?php if ($pricing_by == '1') { ?>
@@ -495,11 +504,13 @@ function tf_room_availability_callback() {
                             <span class="tf-price"><?php echo wc_price( $room['adult_price'] ); ?></span>
                             <div class="price-per-night"><?php esc_html_e( 'per person/night', 'tourfic' ); ?></div>
                         <?php } ?>
-                        </div>
+                        </div>										
+                    </td>
+                    <td class="reserve">
                         <form class="tf-room">
                             <?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' ); ?>
                             <div class="room-selection-wrap">
-                                <select name="room-selected" id="room-selected">
+                                <select name="hotel_room_selected" id="hotel-room-selected">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -514,7 +525,7 @@ function tf_room_availability_callback() {
                                 <input type="hidden" name="child" value="<?php echo $form_child; ?>">
                                 <input type="hidden" name="check_in_date" value="<?php echo $form_check_in; ?>">
                                 <input type="hidden" name="check_out_date" value="<?php echo $form_check_out; ?>">
-                                <button class="tf_button tf-room-book" type="submit">I'll reserve</button>
+                                <button class="hotel-room-book" type="submit">I'll reserve</button>
                             </div>
                             <div class="tf_desc"></div>
                         </form>
