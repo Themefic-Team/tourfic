@@ -154,7 +154,7 @@
         /**
          * Click to go back to availability form
          */
-         $(document).on('click', '.select-rooms-td .check-availability', function(e) {
+         $(document).on('click', '.hotel-room-availability', function(e) {
             e.preventDefault();
 
             $('html, body').animate({
@@ -174,13 +174,13 @@
 
             var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
             var post_id = $('input[name=post_id]').val();
-            var room_id = $('input[name=room_id]').val();
+            var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
             var location = $('input[name=location]').val();
             var adult = $('input[name=adult]').val();
             var child = $('input[name=child]').val();
             var check_in_date = $('input[name=check_in_date]').val();
             var check_out_date = $('input[name=check_out_date]').val();
-            var room = $('select[name=room-selected] option').filter(':selected').val();
+            var room = $(this).closest('.pricing').find('select[name=room-selected] option').filter(':selected').val();
             //console.log(post_id);
 
             var data = {

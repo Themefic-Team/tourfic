@@ -1,4 +1,43 @@
 /**
+ * Global re-usable classes
+ */
+/* Display */
+.tf-d-b {
+    display: block !important;
+}
+.tf-d-g {
+    display: grid !important;
+}
+.tf-d-f {
+    display: flex !important;
+}
+.tf-d-i {
+    display: inline !important;
+}
+.tf-d-ib {
+    display: inline-block !important;
+}
+.tf-d-ig {
+    display: inline-grid !important;
+}
+.tf-d-if {
+    display: inline-flex !important;
+}
+.tf-d-n {
+    display: none !important;
+}
+/* Position */
+.tf-p-a {
+    position: absolute !important;
+}
+.tf-p-f {
+    position: fixed !important;
+}
+.tf-p-r {
+    position: relative !important;
+}
+
+/**
  * tf-tooltip
  */
 .tf-tooltip {
@@ -83,4 +122,39 @@
 .tf-hotel-side-booking .tf_form-inner i{
     color: #bfbfbf;
     font-size: 16px;
+}
+
+/**
+ * Room table 
+ */
+.tf_room-table .description {
+    width: 40%;
+}
+.tf_room-table .details {
+    width: 40%;
+}
+.tf_room-table .pricing {
+    width: 20%;
+    text-align: center;
+}
+
+/**
+ * Hotel Room Details
+ */
+.room-detail-icon {
+    text-align: center;
+    margin: 15px 0 0 0;
+}
+.room-detail-icon .room-icon-wrap{
+    border: 1px solid #eaeef3;
+    border-radius: 5px;
+    padding: 8px 10px 4px 10px;
+}
+.room-detail-icon  .room-icon-wrap i{
+    font-size: 18px;
+    color: #5e6d77;
+}
+.room-detail-icon .icon-text{
+    font-size: 14px;
+    color: #5e6d77;
 }

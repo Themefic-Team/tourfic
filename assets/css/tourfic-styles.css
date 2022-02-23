@@ -737,6 +737,7 @@ button.tf-tablinks.active {
 
 .bed-facilities {
   margin: 8px 0;
+  text-align: justify;
 }
 
 .tf_room-type-head {
@@ -1436,6 +1437,7 @@ span.review_num {
 }
 .tourfic-wrap.default-style .tf-price-column {
   text-align: center;
+  margin: 0 0 10px 0;
 }
 
 .highlights-title,

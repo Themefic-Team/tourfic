@@ -32,7 +32,7 @@ function tf_hotel_booking_callback(){
      * 
      * @since 2.2.0
      */
-    $meta = get_post_meta( $post_id, 'tf_tours_option', true );
+    $meta = get_post_meta( $post_id, 'tf_hotel', true );
     $rooms = !empty($meta['room']) ? $meta['room'] : '';
     $pricing_by = $rooms[$room_id]['pricing-by'];
 
@@ -40,13 +40,13 @@ function tf_hotel_booking_callback(){
      * All form data
      * 
      */
-    $location = isset( $_POST['location'] ) ? sanitize_text_field( $_POST['location'] ) : null;
+    $location = isset( $_POST['location'] ) ? sanitize_text_field( $_POST['location'] ) : '';
     // People number
-    $adult = isset( $_POST['adult'] ) ? intval( sanitize_text_field( $_POST['adult'] ) ) : null;
-    $child = isset( $_POST['child'] ) ? intval( sanitize_text_field( $_POST['child'] ) ) : null;
-    $room = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : null;
-    $check_in = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : null;
-    $check_out = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : null;
+    $adult = isset( $_POST['adult'] ) ? intval( sanitize_text_field( $_POST['adult'] ) ) : '0';
+    $child = isset( $_POST['child'] ) ? intval( sanitize_text_field( $_POST['child'] ) ) : '0';
+    $room = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
+    $check_in = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
+    $check_out = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
 
     // Check errors
     if ( !$check_in ) {
@@ -96,7 +96,9 @@ function tf_hotel_booking_callback(){
         }
     }
 
-    $response['errors'][] = $room_id;
+    //echo var_dump($rooms);
+
+    //$response['errors'][] = $pricing_by;
     // If no errors then process
     if( 0 == count( $response['errors'] ) ) {
 
@@ -115,7 +117,9 @@ function tf_hotel_booking_callback(){
             $total_price = $rooms[$room_id]['price'];
         } elseif ($pricing_by == '2') {
             $adult_price = $rooms[$room_id]['adult_price'];
+            $adult_price = $adult_price * $adult;
             $child_price = $rooms[$room_id]['child_price'];
+            $child_price = $child_price * $child;
             $total_price = $adult_price + $child_price;
         }
         $price_total = $total_price*$room;

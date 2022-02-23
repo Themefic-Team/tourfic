@@ -257,7 +257,7 @@ if( class_exists( 'CSF' ) ) {
               'id'      => 'footage',
               'type'    => 'text',
               'title'   => 'Room footage',
-              'subtitle' =>  __( 'Room footage (square meters)', 'tourfic' ),
+              'subtitle' =>  __( 'Room footage (sft)', 'tourfic' ),
             ),
 
             array(
