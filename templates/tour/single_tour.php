@@ -5,10 +5,15 @@
  * @package storefront
  */
 
-get_header('tourfic'); ?>
-<?php while ( have_posts() ) : the_post(); ?>
-<?php
-$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+get_header('tourfic');
+
+while ( have_posts() ) : the_post();
+
+$post_id   = get_the_ID();
+$post_type = substr(get_post_type(), 3, -1);
+$has_in_wishlist = tf_has_item_in_wishlist($post_id);
+
+$meta = get_post_meta( $post_id,'tf_tours_option',true );
 
 $location = isset( $meta['location']['address'] ) ? $meta['location']['address'] : '';
 $text_location = isset( $meta['text_location']) ? $meta['text_location'] : '';
@@ -62,6 +67,7 @@ $tf_overall_rate['review'] = null;
 				<div class="tf-hero-content-wrapper">
 					<div class="tf-hero-top-content" style="background-image: url(<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>);">
 						<div class="tf-hero-top-content-inner">
+							<i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>"></i>
 								<h1><?php echo esc_html__( $hero_title, 'tourfic' ); ?></h1>
 								<!-- Start gallery -->
 								<div class="tf-tours_gallery-wrap">

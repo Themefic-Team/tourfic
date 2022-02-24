@@ -13,6 +13,11 @@ require_once TF_INC_PATH . 'functions/functions_hotel.php';
 require_once TF_INC_PATH . 'functions/functions_tour.php';
 
 /**
+ * Wishlist Functions
+ */
+require_once TF_INC_PATH . 'functions/functions_wishlist.php';
+
+/**
  * Including CSS & JS
  * 
  * @since 1.0

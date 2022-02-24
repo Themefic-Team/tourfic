@@ -135,6 +135,16 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         }
 
         /**
+         * Notyf
+         * 
+         * v1.8.1
+         * 
+         * https://github.com/caroso1222/notyf
+         */
+        wp_enqueue_style( 'notyf', TF_ASSETS_URL . 'notyf/notyf.min.css', '', '3.0' );
+		wp_enqueue_script( 'notyf', TF_ASSETS_URL . 'notyf/notyf.min.js', array( 'jquery' ), '3.0', true );
+
+        /**
          * Custom
          */       
         wp_enqueue_style( 'tourfic', TF_ASSETS_URL . 'css/tourfic' . $min_css . '.css', '', TOURFIC );
@@ -143,6 +153,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
             array(
                 'nonce'        => wp_create_nonce( 'tf_ajax_nonce' ),
                 'ajax_url'     => admin_url( 'admin-ajax.php' ),
+                'single' => is_single(),
                 'destinations' => get_hotel_destinations(),
                 'tour_destinations' => get_tour_destinations(),
             )

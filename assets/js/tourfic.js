@@ -491,6 +491,186 @@
             ]
         });
 
+        /**
+         * Wishlist Functionality 
+         * @author KK
+         */
+        // Create an instance of Notyf
+        const notyf = new Notyf({
+            ripple: true,
+            dismissable: true,
+            position: {
+                x: 'right',
+                y: 'bottom',
+            },
+        });
+
+
+        /* get wishlist from localstorage  */
+        const wishKey = 'wishlist_item';
+        const getWish = () => {
+            let userLists = localStorage.getItem(wishKey);
+            // if list is null then init list else make array from json string
+            return (userLists === null) ? [] : JSON.parse(userLists);
+        }
+
+        /* store item in wishlist for loggedin and visitor */
+        const addWish = item => {
+            let userLists = getWish()
+            // Look if item is not already is in list
+            if (userLists.filter(i => i.post == item.post).length === 0) {
+                // push to list 
+                userLists.push(item)
+                // save list
+                localStorage.setItem(wishKey, JSON.stringify(userLists));
+                return true;
+            } return false;
+        }
+        /* get all wishlist items */
+        const getAllWish = () => {
+            let nodes = $('.tf-wishlist-holder');
+            $.each(nodes, function (index, element) {
+                let type = $(element).data('type');
+                type = type ? type.split(',') : undefined;
+                let userLists = getWish();
+                if (type !== undefined) userLists = userLists.filter(e => type.includes(e.type));
+                let ids = userLists.map(e => e.post);
+                let data = {
+                    nonce: $(element).data('nonce'),
+                    action: 'tf_generate_table',
+                    ids
+                }
+                $.post(tf_params.ajax_url, data,
+                    function (data) {
+                        if (data.success) {
+                            $(element).html(data.data);
+                        }
+                    },
+                );
+            });
+
+
+        }
+        /* delete item from wishlist */
+        const removeWish = id => {
+            let userLists = getWish()
+            let index = userLists.findIndex(x => x.post == id);
+            console.log(index, id, userLists);
+            if (index >= 0) {
+                userLists.splice(index, 1)
+                console.log(userLists);
+                localStorage.setItem(wishKey, JSON.stringify(userLists));
+                if (tf_params.single != '1') getAllWish()
+                return true;
+            } else return false;
+
+        }
+
+        /* toggle icon for the wish list */
+        const wishIconToggleForGuest = () => {
+            if (!$(document).hasClass('logged-in') && $(document).find('.add-wishlist')) {
+                let targetNode = $('.add-wishlist');
+                let id = targetNode.data('id');
+                let userLists = getWish()
+                var index = userLists.findIndex(x => x.post == id);
+                if (index >= 0) {
+                    wishIconFill(targetNode);
+                } else {
+                    wishIcon(targetNode);
+                }
+            }
+        }
+
+        /* fill icon class */
+        const wishIconFill = targetNode => {
+            targetNode.addClass('remove-wishlist');
+            targetNode.addClass('fas');
+            targetNode.addClass('tf-text-red');
+            targetNode.removeClass('far');
+            targetNode.removeClass('add-wishlist');
+
+
+        }
+        /* blank icon */
+        const wishIcon = targetNode => {
+            targetNode.addClass('add-wishlist');
+            targetNode.addClass('far');
+            targetNode.removeClass('fas');
+            targetNode.removeClass('tf-text-red');
+            targetNode.removeClass('remove-wishlist');
+        }
+        /* send request to wp-admin for storing request */
+        $(document).on('click', '.add-wishlist', function () {
+
+            let targetNode = $('.add-wishlist');
+            let data = {
+                type: targetNode.data('type'),
+                post: targetNode.data('id'),
+            }
+            /* For logged in user */
+            if ($('body').hasClass('logged-in')) {
+                data.action = 'tf_add_to_wishlists';
+                data.nonce = targetNode.data('nonce');
+                $.post(tf_params.ajax_url, data,
+                    function (data) {
+                        if (data.success) {
+                            wishIconFill(targetNode);
+                            notyf.success(data.data);
+                        }
+                    },
+                );
+            } else {
+                /* For guest */
+                if (addWish(data) === true) {
+                    wishIconFill(targetNode);
+                    notyf.success('Item added to wishlist');
+                } else notyf.error('Item not added to wishlist');
+
+            }
+
+            return false;
+
+        });
+        /* populate wishlist table */
+        if ($('body').find('.tf-wishlist-holder').length) {
+            getAllWish()
+        }
+        /* trigger remove wish function */
+        $(document).on('click', '.remove-wishlist', function () {
+            let targetNode = $('.remove-wishlist');
+            let id = targetNode.data('id');
+            /* For logged in user */
+            if ($('body').hasClass('logged-in')) {
+                let tableNode = targetNode.closest('table');
+                let type = tableNode.data('type');
+                let data = { id, action: 'tf_remove_wishlist', type, nonce: targetNode.data('nonce') }
+                $.get(tf_params.ajax_url, data,
+                    function (data) {
+                        if (data.success) {
+                            if (tf_params.single != '1') {
+                                tableNode.closest('.tf-wishlists').html(data.data);
+                            }
+                            wishIcon(targetNode);
+                            notyf.success('Item removed from wishlist');
+                        }
+                    }
+                );
+
+            } else {
+                /* For guest */
+                if (removeWish(id) == true) {
+                    wishIcon(targetNode);
+                    notyf.success('Item removed from wishlist');
+                } else {
+                    notyf.error('Item not removed from wishlist');
+                };
+            }
+
+        });
+
+        /* toggle icon for guest */
+        wishIconToggleForGuest();
+
 
     });
 })(jQuery, window);

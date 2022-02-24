@@ -44,6 +44,63 @@ if( class_exists( 'CSF' ) ) {
   ) );
 
 
+  // Vendor
+  CSF::createSection( $prefix, array(
+    'id'    => 'vendor', 
+    'title' =>  __( 'Vendor', 'tourfic' ),
+    'icon'  =>  'fas fa-handshake' ,
+    'fields' => array(
+
+      // Registration
+      array(
+        'type'    => 'subheading',
+        'content' => 'Registration',
+      ),
+
+      array(
+        'id'         => 'reg-pop',
+        'type'       => 'switcher',
+        'title'      => 'Registration Form Popup',
+        'desc'      => 'Add class <code>tf-reg-popup</code> to trigger the popup',
+        'text_on'    => 'Enabled',
+        'text_off'   => 'Disabled',
+        'text_width' => 100,
+        'default' => true,
+      ),
+
+      array(
+        'id'         => 'email-verify',
+        'type'       => 'switcher',
+        'title'      => 'Enable Email Verification',
+        'default' => true,
+      ),
+
+      array(
+        'id'         => 'prevent-login',
+        'type'       => 'switcher',
+        'title'      => 'Login Restriction',
+        'subtitle'      => 'Prevent unverified user to login',
+        'dependency' => array( 'email-verify', '==', 'true' ),
+        'default' => true,
+      ),
+      
+      // Vendor
+      array(
+        'type'    => 'subheading',
+        'content' => 'Vendor',
+      ),
+
+      array(
+        'id'         => 'vendor-reg',
+        'type'       => 'switcher',
+        'title'      => 'Enable Vendor Registration',
+        'subtitle'      => 'Visitor can register as vendor using the registration form',
+        'default' => true,
+      ),
+
+    )    
+  ) );
+
   // Search tab
   CSF::createSection( $prefix, array(
     'id'    => 'search', 
