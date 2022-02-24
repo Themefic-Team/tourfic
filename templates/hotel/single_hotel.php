@@ -284,6 +284,7 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                                         </div>
                                         <?php } ?>
 
+                                        <?php if($room['features']) { ?>
                                         <div class="room-features">
                                             <div class="tf-room-title"><?php esc_html_e( 'Amenities', 'tourfic' ); ?>
                                             </div>
@@ -310,6 +311,7 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                                                 <?php } ?>
                                             </ul>
                                         </div>
+                                        <?php } ?>
                                     </td>
                                     <td class="pax">
 

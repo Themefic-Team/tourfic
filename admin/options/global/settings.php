@@ -61,11 +61,16 @@ if( class_exists( 'CSF' ) ) {
         'id'         => 'reg-pop',
         'type'       => 'switcher',
         'title'      => 'Registration Form Popup',
-        'desc'      => 'Add class <code>tf-reg-popup</code> to trigger the popup',
+        'subtitle'      => 'Add class <code>tf-reg-popup</code> to trigger the popup',
         'text_on'    => 'Enabled',
         'text_off'   => 'Disabled',
         'text_width' => 100,
         'default' => true,
+      ),
+
+      array(
+        'type'    => 'content',
+        'content' => 'Use shortcode <code>[tf_registration_form]</code> to show registration form in post/page.',
       ),
 
       array(

@@ -152,24 +152,9 @@ if ( !function_exists( 'tfopt' ) ) {
 require_once TF_INC_PATH . 'functions.php';
 
 /**
- *    Font awesome
- */
-//require_once dirname( __FILE__ ) . '/admin/font-awesome.php';
-
-/**
- *    Custom Meta Fields
- */
-//require_once dirname( __FILE__ ) . '/admin/tf-admin.php';
-
-/**
  *    Layouts Function
  */
 require_once dirname( __FILE__ ) . '/inc/layouts.php';
-
-/**
- *    Post type
- */
-require_once dirname( __FILE__ ) . '/inc/post-type.php';
 
 /**
  *    Post type

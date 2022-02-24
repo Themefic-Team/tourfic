@@ -1,8 +1,8 @@
 <?php
 /**
- * Destination Shortcode Function
+ * Hotel Locations Shortcode
  */
-function tourfic_destinations_shortcode( $atts, $content = null ){
+function shortcode_hotel_locations( $atts, $content = null ){
 
     // Shortcode extract
     extract(
@@ -17,15 +17,8 @@ function tourfic_destinations_shortcode( $atts, $content = null ){
       )
     );
 
-    // Propertise args
-    $args = array(
-        'post_type' => 'tf_hotel',
-        'post_status' => 'publish',
-        'posts_per_page' => -1,
-    );
-
     // 1st search on hotel_location taxonomy
-    $destinations = get_terms( array(
+    $locations = get_terms( array(
         'taxonomy' => 'hotel_location',
         'orderby' => $orderby,
         'order' => $order,
@@ -36,52 +29,45 @@ function tourfic_destinations_shortcode( $atts, $content = null ){
         'include' => $ids,
         //'name__like' => '',
     ) );
-    //shuffle($destinations);
+
     ob_start();
 
-    if ( $destinations ) : ?>
-    <!-- Recommended destinations  -->
-    <section id="recomended_section_wrapper">
-        <div class="recomended_inner">
-        <?php foreach( $destinations as $term ) :
-            $image_id = get_term_meta( $term->term_id, 'category-image-id', true );
-            $term_link = get_term_link( $term );
+    if ( $locations ) { ?>
+        <section id="recomended_section_wrapper">
+            <div class="recomended_inner">
 
-            if ( is_wp_error( $term_link ) ) {
-                continue;
-            }
-            ?>
+            <?php foreach( $locations as $term ) {
 
-            <div class="single_recomended_item">
-                <a href="<?php echo tourfic_booking_search_action(); ?>?destination=<?php _e( $term->slug ); ?>">
-                  <div class="single_recomended_content" style="background-image: url(<?php echo wp_get_attachment_url( $image_id ); ?>);">
-                    <div class="recomended_place_info_header">
-                      <h3><?php _e( $term->name ); ?></h3>
-                      <p><?php printf( esc_html__( "%s properties", 'tourfic' ), $term->count); ?></p>
-                    </div>
-                    <?php if( $term->description ): ?>
-                        <div class="recomended_place_info_footer">
-                            <p><?php echo nl2br($term->description); ?></p>
+                $meta = get_term_meta( $term->term_id, 'hotel_location', true );
+                $image_url = $meta['image']['url'];
+                $term_link = get_term_link( $term ); ?>
+
+                <div class="single_recomended_item">
+                    <a href="<?php echo $term_link; ?>">
+                        <div class="single_recomended_content" style="background-image: url(<?php echo $image_url; ?>);">
+                            <div class="recomended_place_info_header">
+                                <h3><?php _e( $term->name ); ?></h3>
+                                <p><?php printf( esc_html__( "%s properties", 'tourfic' ), $term->count); ?></p>
+                            </div>
                         </div>
-                    <?php endif; ?>
-                  </div>
-                </a>
-            </div>
+                    </a>
+                </div>
 
-        <?php endforeach; ?>
-        </div>
-     </section>
-    <!-- Recommended destinations  End-->
-    <?php endif; ?>
-    <?php return ob_get_clean();
+            <?php } ?>
+
+            </div>
+        </section>
+
+    <?php }
+    return ob_get_clean();
 }
-add_shortcode('tourfic_destinations', 'tourfic_destinations_shortcode');
+add_shortcode('hotel_locations', 'shortcode_hotel_locations');
 
 
 /**
- * Destination Shortcode Function
+ * Tour destinations shortcode
  */
-function tf_tour_destinations_shortcode( $atts, $content = null ){
+function shortcode_tour_destinations( $atts, $content = null ){
 
     // Shortcode extract
     extract(
@@ -108,49 +94,43 @@ function tf_tour_destinations_shortcode( $atts, $content = null ){
         'include' => $ids,
         //'name__like' => '',
     ) );
+
     shuffle($destinations);
     ob_start();
 
-    if ( $destinations ) : ?>
-    <!-- Recommended destinations  -->
-    <section id="recomended_section_wrapper">
-        <div class="recomended_inner">
-            <?php //var_dump($destinations); ?>
-        <?php foreach( $destinations as $term ) :
-            $image_id = get_term_meta( $term->term_id, 'tour_destination_meta', true );
-            $image_url = !empty($image_id['tour_destination_meta']) ? $image_id['tour_destination_meta'] : '';
+    if ( $destinations ) { ?>
+        <section id="recomended_section_wrapper">
+            <div class="recomended_inner">
 
-            $term_link = get_term_link( $term );
+            <?php foreach( $destinations as $term ) {
 
-            if ( is_wp_error( $term_link ) ) {
-                continue;
-            }
-            ?>
+                $meta = get_term_meta( $term->term_id, 'tour_destination', true );
+                $image_url = !empty($meta['image']['url']) ? $meta['image']['url'] : '';
+                $term_link = get_term_link( $term );
 
-            <div class="single_recomended_item">
-                <a href="<?php echo tourfic_booking_search_action(); ?>?tour_destination=<?php _e( $term->slug ); ?>">
-                  <div class="single_recomended_content" style="background-image: url(<?php echo $image_url; ?>);">
-                    <div class="recomended_place_info_header">
-                      <h3><?php _e( $term->name ); ?></h3>
-                      <p><?php printf( esc_html__( "%s properties", 'tourfic' ), $term->count); ?></p>
-                    </div>
-                    <?php if( $term->description ): ?>
-                        <div class="recomended_place_info_footer">
-                            <p><?php echo nl2br($term->description); ?></p>
+                if ( is_wp_error( $term_link ) ) {
+                    continue;
+                } ?>
+
+                <div class="single_recomended_item">
+                    <a href="<?php echo $term_link; ?>">
+                        <div class="single_recomended_content" style="background-image: url(<?php echo $image_url; ?>);">
+                            <div class="recomended_place_info_header">
+                                <h3><?php _e( $term->name ); ?></h3>
+                                <p><?php printf( esc_html__( "%s properties", 'tourfic' ), $term->count); ?></p>
+                            </div>
                         </div>
-                    <?php endif; ?>
-                  </div>
-                </a>
-            </div>
+                    </a>
+                </div>
 
-        <?php endforeach; ?>
-        </div>
-     </section>
-    <!-- Recommended destinations  End-->
-    <?php endif; ?>
-    <?php return ob_get_clean();
+            <?php } ?>
+
+            </div>
+        </section>
+    <?php }
+    return ob_get_clean();
 }
-add_shortcode('tour_destinations', 'tf_tour_destinations_shortcode');
+add_shortcode('tour_destinations', 'shortcode_tour_destinations');
 
 /**
  * Tours Shortcode
