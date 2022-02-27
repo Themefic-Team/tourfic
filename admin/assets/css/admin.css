@@ -1,0 +1,23 @@
+.tf-pro {
+    background: #b30000;
+    color: #fff;
+    padding: 3px 0 3px 0;
+    border-radius: 3px;
+    text-align: center;
+    width: 90px;
+    margin: 5px 0 0 0;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.tf-upcoming {
+    background: #006600;
+    color: #fff;
+    padding: 3px 0 3px 0;
+    border-radius: 3px;
+    text-align: center;
+    width: 90px;
+    margin: 5px 0 0 0;
+    font-size: 12px;
+    font-weight: 600;
+}

@@ -50,7 +50,7 @@ if( class_exists( 'CSF' ) ) {
           'id'       => 'map',
           'type'     => 'map',
           'title'    => __('Location on map', 'tourfic'),
-          'subtitle' => __('Select one location on map to see latiture and longiture', 'tourfic'),
+          'subtitle' => __('Select one location on map to see latiture and longiture<div class="tf-pro">Pro Feature</div>', 'tourfic'),
           'height'   => '250px',
           'settings' => array(
             'scrollWheelZoom' => true,
@@ -75,6 +75,7 @@ if( class_exists( 'CSF' ) ) {
           'id'      => 'logo',
           'type'    => 'media',
           'title'   => 'Hotel logo',
+          'subtitle'   => '<div class="tf-upcoming">Upcoming</div>',
           'desc' =>  __( 'Upload the hotel logo (it is recommended using size: 256 x 195 px)', 'tourfic' ),
           'library' => 'image',
         ),

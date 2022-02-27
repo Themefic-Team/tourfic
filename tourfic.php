@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 /**
- * Tourfic All the Defines
+ * Tourfic All the Defines 
  *
  * @since 1.0
  */
@@ -52,7 +52,7 @@ if ( !function_exists('tf_enqueue_main_admin_scripts') ) {
     function tf_enqueue_main_admin_scripts(){
 
         // Custom
-        //wp_enqueue_style('tf-pro', TF_PRO_ADMIN_URL . 'css/admin.css','', date("his") );
+        wp_enqueue_style('tf', TF_ADMIN_URL . 'assets/css/admin.css','', date("his") );
         wp_enqueue_script( 'tf', TF_ADMIN_URL . 'assets/js/admin.js', array('jquery'), '', true );   
         wp_localize_script( 'tf', 'tf_params',
             array(

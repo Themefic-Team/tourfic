@@ -223,20 +223,21 @@ register_activation_hook( TF_PATH . 'tourfic.php', 'tf_hotel_rewrite_flush' );
  * 
  * {taxonomy-hotel_destination}
  */
-if ( !function_exists( 'get_hotel_destinations' ) ) {
-    function get_hotel_destinations() {
-        $destinations = array();
+if ( !function_exists( 'get_hotel_locations' ) ) {
+    function get_hotel_locations() {
+        
+        $locations = array();
 
-        $destination_terms = get_terms( array(
+        $location_terms = get_terms( array(
             'taxonomy'   => 'hotel_location',
             'hide_empty' => false,
         ) );
 
-        foreach ( $destination_terms as $destination_term ) {
-            $destinations[] = $destination_term->name;
+        foreach ( $location_terms as $location_term ) {
+            $locations[] = $location_term->name;
         }
 
-        return $destinations;
+        return $locations;
     }
 }
 

@@ -36,6 +36,19 @@
 .tf-p-r {
     position: relative !important;
 }
+/* Align */
+.tf-t-l {
+    text-align: left !important;
+}
+.tf-t-c {
+    text-align: center !important;
+}
+.tf-t-r {
+    text-align: right !important;
+}
+.tf-t-j {
+    text-align: justify !important;
+}
 
 /**
  * tf-tooltip
@@ -128,7 +141,6 @@
  * Room table 
  */
 .hotel-room-wrap {
-    overflow-x: auto;
     width: 100%;
 }
 

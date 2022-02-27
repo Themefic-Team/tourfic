@@ -897,7 +897,7 @@ function tourfic_wp_dropdown_cats_multiple( $output, $r ) {
  * Search Widget for Hotel search ..
  * Seperated as functions for the tab of  search widgets
  */
-function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
+function tf_hotel_search_form( $classes, $title, $subtitle ){
 	?>
 	<form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" method="get" autocomplete="off" action="<?php echo tourfic_booking_search_action(); ?>">
 
@@ -913,18 +913,15 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 <div class="tf_homepage-booking">
 	<div class="tf_destination-wrap">
 		<div class="tf_input-inner">
-			<!-- Start form row -->
-			<?php tourfic_booking_widget_field(
-				array(
-					'type' => 'text',
-					'svg_icon' => 'search',
-					'name' => 'destination',
-					'label' => 'Destination/property name:',
-					'placeholder' => 'Destination',
-					'required' => 'true',
-				)
-			); ?>
-			<!-- End form row -->
+			<div class="tf_form-row">
+				<label class="tf_label-row">
+					<span class="tf-label">Location:</span>
+					<div class="tf_form-inner tf-d-g">
+						<i class="fas fa-search"></i>
+						<input type="text" name="location" required="" id="location" class="" placeholder="Location" value="">
+					</div>
+				</label>
+			</div>
 		</div>
 	</div>
 
@@ -934,11 +931,11 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 			<span class="tf_person-icon">
 				<?php echo tourfic_get_svg('person'); ?>
 			</span>
-			<div class="adults-text">2 Adults</div>
+			<div class="adults-text">0 Adults</div>
 			<div class="person-sep"></div>
 			<div class="child-text">0 Children</div>
 			<div class="person-sep"></div>
-			<div class="room-text">1 Room</div>
+			<div class="room-text">0 Room</div>
 		</div>
 
 		<div class="tf_acrselection-wrap">
@@ -947,7 +944,7 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 					<div class="acr-label">Adults</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-						<input type="number" name="adults" id="adults" min="1" value="1">
+						<input type="number" name="adults" id="adults" min="0" value="0">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
@@ -963,7 +960,7 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 					<div class="acr-label">Rooms</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-						<input type="number" name="room" id="room" min="1" value="1">
+						<input type="number" name="room" id="room" min="0" value="0">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
@@ -974,53 +971,41 @@ function tourfic_search_widget_hotel( $classes, $title, $subtitle ){
 	
 	<div class="tf_selectdate-wrap">
 		<div class="tf_input-inner">
-			<span class="tf_date-icon">
-				<?php echo tourfic_get_svg('calendar_today'); ?>
-			</span>
-			<div class="checkin-date-text">Check-in</div>
-			<div class="date-sep"></div>
-			<div class="checkout-date-text">Check-out</div>
+			<div class="tf_form-row">
+				<label class="tf_label-row">
+					<span class="tf-label">Check-in & Check-out date</span>
+					<div class="tf_form-inner tf-d-g">
+						<i class="far fa-calendar-alt"></i>
+						<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="Select Date">
+					</div>
+				</label>
+			</div>
 		</div>
-
-		<div class="tf_date-wrap-srt screen-reader-text">
-		<!-- Start form row -->
-		<?php tourfic_booking_widget_field(
-			array(
-				'type' => 'text',
-				'svg_icon' => '',
-				'name' => 'check-in-date',
-				'placeholder' => 'Check-in date',
-				'label' => 'Check-in date',
-				'required' => 'true',
-				'disabled' => 'true',
-				'class' => 'tf-hotel-check-in',
-			)
-		); ?>
-
-		<?php tourfic_booking_widget_field(
-			array(
-				'type' => 'text',
-				'svg_icon' => '',
-				'name' => 'check-out-date',
-				'placeholder' => 'Check-out date',
-				'required' => 'true',
-				'disabled' => 'true',
-				'label' => 'Check-out date',
-				'class' => 'tf-hotel-check-out'
-			)
-		); ?>
-		</div>
-
 	</div>
 
 	<div class="tf_submit-wrap">
-		<input type="hidden" name="type" value="tourfic" />		
+		<input type="hidden" name="type" value="tf_hotel" />		
 		<button class="tf_button tf-submit" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
 	</div>
 
 </div>
 
 </form>
+
+<script>
+(function($) {
+    $(document).ready(function() {
+
+        $(".tf_booking-widget #check-in-out-date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            allowInput: true,
+        });
+
+    });
+})(jQuery);
+</script>
 <?php
 }
 

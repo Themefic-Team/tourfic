@@ -312,6 +312,24 @@ $tf_overall_rate['review'] = null;
 	<!-- Accordion section end -->
 	<?php endif; ?>
 
+	<!-- Terms and Conditions -->
+	<?php if ($terms_and_conditions) : ?>
+		<div class="tf-faq-wrapper">
+			<div class="tf-container">
+				<div class="tf-row">
+					<div class="tf-travel-itinerary-content-wrapper">
+						<h2><?php _e("Terms and Conditions", 'tourfic'); ?></h2>
+						<div class="tf-travel-itinerary-items-wrapper">
+							<?php echo $terms_and_conditions; ?>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	<?php endif; ?>
+	<!-- Terms and Conditions -->
+	
 	<?php 
 	$args = array(
 		'post_type' => 'tf_tours',

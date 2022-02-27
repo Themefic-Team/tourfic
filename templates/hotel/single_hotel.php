@@ -355,7 +355,7 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                                             <?php } ?>
                                         </div>
                                     </td>
-                                    <td class="reserve">
+                                    <td class="reserve tf-t-c">
                                         <button class="hotel-room-availability"
                                             type="submit"><?php _e('Check Availability', 'tourfic'); ?></button>
                                     </td>
