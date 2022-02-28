@@ -230,7 +230,7 @@ class TOURFIC_Destination extends Widget_Base {
 	 */
 	protected function render() {
 
-        echo do_shortcode('[tourfic_destinations]');
+        echo do_shortcode('[tour_destinations]');
 
 
 	}

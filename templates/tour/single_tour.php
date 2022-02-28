@@ -338,6 +338,15 @@ $tf_overall_rate['review'] = null;
 		'orderby' => 'title', 
 		'order' => 'ASC',
 		'post__not_in' => array( get_the_ID() ),
+        // call all related posts @ KK
+        'meta_query' => array(
+            'relation' => 'OR',
+            array(
+                'key'     => 'tf_tours_option',
+                'value'   => $location,
+                'compare' => 'LIKE',
+            ),
+        ),
 	);
 	$tours = new WP_Query( $args );
 	if ($tours->have_posts()) {

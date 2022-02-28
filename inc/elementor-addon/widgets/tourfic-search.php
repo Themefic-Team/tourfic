@@ -200,7 +200,7 @@ class TOURFIC_Search extends Widget_Base {
 
 
       
-        echo do_shortcode('[tf_search title="'.$tf_search_title.'" subtitle="'.$tf_search_subtitle.'" ]');
+        echo do_shortcode('[tf_search_form title="'.$tf_search_title.'" subtitle="'.$tf_search_subtitle.'" ]');
 
 
 	}

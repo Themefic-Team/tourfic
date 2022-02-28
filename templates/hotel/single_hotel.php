@@ -425,6 +425,96 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                 </div>
                 <!-- End TOC Content -->
                 <?php } ?>
+<!-- Related posts collection @KK -->
+                <?php 
+	$args = array(
+		'post_type' => 'tf_hotel',
+		'post_status' => 'publish',
+		'posts_per_page' => 8, 
+		'orderby' => 'title', 
+		'order' => 'ASC',
+		'post__not_in' => array( get_the_ID() ),
+        // call all related posts @ KK
+        'tax_query' => array(
+            'relation' => 'OR',
+            array(
+                'taxonomy' => 'hotel_location',
+                'field'    => 'term_id',
+                'terms'    => $first_location_id,
+            ),
+        ),
+	);
+	$tours = new WP_Query( $args );               
+	if ($tours->have_posts()) {
+	?>
+ 	<!-- tours suggestion section Start -->
+ 	<div class="tf-suggestion-wrapper">
+		<div class="tf-container">
+			<div class="tf-row">
+				<div class="tf-suggestion-content-wrapper">
+					<div class="tf-suggestion-sec-head">
+						<h2><?php echo __( 'You might also like','tourfic' ) ?></h2>
+						<p><?php echo __('Add subtitle','tourfic') ?></p>
+					</div>
+					<div class="tf-suggestion-items-wrapper">
+						<?php
+							while($tours->have_posts() ) {
+								$tours->the_post();
+								$post_id   = get_the_ID();
+								$destinations = get_the_terms( $post_id, 'tour_destination' );
+								$first_destination_name = $destinations[0]->name;
+								$related_comments = get_comments( array( 'post_id' => $post_id ) );								
+						?>
+						<div class="tf-suggestion-item" style="background-image: url(<?php echo get_the_post_thumbnail_url(get_the_ID(),'full') ?>);">
+							<div class="tf-suggestion-content">
+								<div class="tf-suggestion-desc">
+									<h3>
+										<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+										<span><?php echo $first_destination_name; ?></span>
+									</h3>
+								</div>
+								<div class="tf-suggestion-rating">
+
+								<?php 
+									if ($related_comments) {
+										foreach ($related_comments as $related_comment) {
+											$related_comment_meta = get_comment_meta( $related_comment->comment_ID, 'tf_comment_meta', true );
+											if ( $related_comment_meta ) {
+												foreach ( $related_comment_meta as $key => $value ) {
+													$related_overall_rate[$key][] = $value ? $value : "5";
+												}
+											} else {
+												$related_overall_rate['review'][] = "5";
+												$related_overall_rate['sleep'][] = "5";
+												$related_overall_rate['location'][] = "5";
+												$related_overall_rate['services'][] = "5";
+												$related_overall_rate['cleanliness'][] = "5";
+												$related_overall_rate['rooms'][] = "5";
+											}
+											?>
+											<div class="tf-suggestion-rating-star">
+												<i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tourfic_avg_ratings($related_overall_rate['review']); ?></span>
+											</div>											
+										<?php 
+										}
+									} else {
+										echo '<div class="tf-suggestion-rating-star"><i class="fas fa-star"></i> <span style="color:#fff;">N/A</span></div>';
+									}
+								?>									
+								
+								</div>
+							</div>
+						</div>
+						<?php }	?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- tours suggestion section end -->
+	<?php }
+	wp_reset_postdata();
+	?>
 
             </div>
             <!-- End Content -->

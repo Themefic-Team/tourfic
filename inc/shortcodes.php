@@ -142,7 +142,7 @@ function tourfic_tours_shortcode( $atts, $content = null ){
               'title'  => '',  //title populer section
               'subtitle'  => '',   // Sub title populer section
               'count'  => 10,
-              'slidesToShow'  => 5,
+              'slidestoshow'  => 5,
             ),
           $atts
         )
@@ -194,10 +194,11 @@ function tourfic_tours_shortcode( $atts, $content = null ){
     </section>
 
     <script>
-        jQuery('#<?php echo $thisid; ?>').slick({
+        jQuery(document).ready(function() {
+            jQuery('#<?php echo $thisid; ?>').not('.slick-initialized').slick({
         dots: false,
         infinite: true,
-        slidesToShow: <?php echo $slidesToShow; ?>,
+        slidesToShow: <?php echo $slidestoshow; ?>,
         slidesToScroll: 1,
         autoplay:true,
         //autoplaySpeed:2500,
@@ -227,6 +228,8 @@ function tourfic_tours_shortcode( $atts, $content = null ){
         ]
 
       });
+        });
+        
     </script>
     <?php endif; wp_reset_postdata(); ?>
 
@@ -245,7 +248,7 @@ function tf_tours_grid_shortcode( $atts, $content = null ){
               'title'  => '',  //title populer section
               'subtitle'  => '',   // Sub title populer section
               'count'  => 10,
-              'slidesToShow'  => 5,
+              'slidestoshow'  => 5,
             ),
           $atts
         )
@@ -297,10 +300,11 @@ function tf_tours_grid_shortcode( $atts, $content = null ){
     </section>
 
     <script>
-        jQuery('#<?php echo $thisid; ?>').slick({
+        jQuery(document).ready(function() {
+            jQuery('#<?php echo $thisid; ?>').not('.slick-initialized').slick({
         dots: false,
         infinite: true,
-        slidesToShow: <?php echo $slidesToShow; ?>,
+        slidesToShow: <?php echo $slidestoshow; ?>,
         slidesToScroll: 1,
         autoplay:true,
         //autoplaySpeed:2500,
@@ -330,6 +334,8 @@ function tf_tours_grid_shortcode( $atts, $content = null ){
         ]
 
       });
+        });
+       
     </script>
     <?php endif; wp_reset_postdata(); ?>
 

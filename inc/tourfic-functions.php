@@ -766,7 +766,8 @@ function tourfic_sidebar_widgets_init() {
     	'Tourfic_Show_On_Map',
     	'Tourfic_Ask_Question',
     	'Tourfic_Similar_Tours',
-		'Tourfic_Tour_FeatureFilter'
+		'Tourfic_Tour_FeatureFilter',
+        'TF_Hotel_Feature_Filter'
     );
     foreach ($custom_widgets as $key => $widget) {
     	register_widget( $widget );
