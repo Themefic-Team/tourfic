@@ -36,6 +36,7 @@ if( class_exists( 'CSF' ) ) {
           'settings'  => array(
             'min_length'  => '1',
           ),
+          'validate' => 'csf_validate_required',
         ),
 
         array(
@@ -44,6 +45,9 @@ if( class_exists( 'CSF' ) ) {
           'title'   => __('Hotel address', 'tourfic'),
           'subtitle' => __('Enter your hotel address detail', 'tourfic'),
           'placeholder' => __('Address', 'tourfic'),
+          'attributes' => array(
+            'required' => 'required',
+          ),
         ),
 
         array(
