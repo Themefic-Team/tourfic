@@ -2704,9 +2704,6 @@ form.tf_tours_booking .tf_selectperson-wrap {
     margin-top: 10px;
   }
 
-  .tf_selectdate-wrap, .tf_selectperson-wrap {
-    padding: 14px 0px !important;
-  }
 
   .tf-tours-informations {
     display: flex;

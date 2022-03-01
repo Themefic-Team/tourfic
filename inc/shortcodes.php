@@ -537,8 +537,8 @@ function tourfic_trigger_filter_ajax(){
     $search = ( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
     $filters = ( $_POST['filters'] ) ? explode(',', sanitize_text_field( $_POST['filters'] )) : null;
     $features = ( $_POST['features'] ) ? explode(',', sanitize_text_field( $_POST['features'] )) : null;
-    $posttype = $_POST['type']  ? sanitize_text_field( $_POST['type'] ): 'tourfic';
-    $taxonomy = $posttype == 'tf_tours' ? $taxonomy = 'tour_destination' : 'destination';
+    $posttype = $_POST['type']  ? sanitize_text_field( $_POST['type'] ): 'tf_hotel';
+    $taxonomy = $posttype == 'tf_tours' ? $taxonomy = 'tour_destination' : 'hotel_location';
 
     // Propertise args
     $args = array(
@@ -551,14 +551,14 @@ function tourfic_trigger_filter_ajax(){
     if ( $search ) {
 
         // 1st search on Destination taxonomy
-        $destinations = get_terms( array(
+        $destinations = new WP_Term_Query( array(
             'taxonomy' => $taxonomy,
             'orderby' => 'name',
             'order' => 'ASC',
             'hide_empty' => 0, //can be 1, '1' too
             'hierarchical' => 0, //can be 1, '1' too
-            'search' => $search,
-            //'name__like' => '',
+            // 'search' => "$search",
+            'name' => "$search",
         ) );
 
         if ( $destinations ) {
@@ -566,7 +566,7 @@ function tourfic_trigger_filter_ajax(){
             $destinations_ids = array();
 
             // Creating loop to insert IDs to array.
-            foreach( $destinations as $cat ) {
+            foreach( $destinations->get_terms() as $cat ) {
                 $destinations_ids[] = $cat->term_id;
             }
 

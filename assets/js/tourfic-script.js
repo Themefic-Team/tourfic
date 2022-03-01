@@ -3,11 +3,29 @@
 
     $(document).ready(function () {
 
-        // // Date picker
-        // var dateToday = new Date();
-        // var hotel_checkin_input = jQuery(".tf-hotel-check-in");
-        // var hotel_checkout_input = jQuery(".tf-hotel-check-out");
-
+        // Date picker
+        var tour_checkin_input  = $(".tf-tour-check-in");
+        var tour_checkin_text   = $(".checkin-date-text");
+        var tour_checkout_input = $(".tf-tour-check-out");
+        var tour_checkout_text  = $(".checkout-date-text");
+        var optional_config     = {
+                mode      : "range",
+                minDate   : "today",
+                dateFormat: "Y/m/d",
+                allowInput: true,
+                onChange  : function (selectedDates, dateStr, instance) {                    
+                   if (selectedDates[0] != null) {
+                       tour_checkin_input.attr('value', selectedDates[0].toLocaleDateString())
+                       tour_checkin_text.text(selectedDates[0].toLocaleDateString())
+                   }
+                   if (selectedDates[1] != null) {
+                        tour_checkout_input.attr('value', selectedDates[1].toLocaleDateString())
+                        tour_checkout_text.text(selectedDates[1].toLocaleDateString())
+                   }
+                   
+                },
+        }
+        $('#tf-tour-date-field').flatpickr(optional_config)
         // var dateFormat = 'DD-MM-YYYY';
 
         // // Trigger Check-in Date
@@ -246,15 +264,15 @@
         // Change view
         
         var filter_xhr;
-        $(document).on('change', '[name*=tf_filters],[name*=tf_features], #location, #adults, #room, #children, #check-in-date, #check-out-date, #check-in-out-date', function () {
-            var dest = $('#location').val();
+        $(document).on('change', '[name*=tf_filters],[name*=tf_features], #location, #adults, #room, #children, #check-in-date, #check-out-date, #check-in-out-date, #tour_destination', function () {
+            var form = $(this).closest('.tf-tabcontent').attr('id');
+            var dest = form == 'tf-tour-booking-form' ? $('#tour_destination').val() : $('#location').val();
             var adults = $('#adults').val();
             var room = $('#room').val();
             var children = $('#children').val();
             var checkin = $('#check-in-date').val();
             var checkout = $('#check-out-date').val();
-            var posttype = $('.tf-post-type').val();
-
+            var posttype = $('#'+form).find('.tf-post-type').val();
             var filters = [];
 
             $('[name*=tf_filters]').each(function () {

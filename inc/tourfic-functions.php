@@ -985,7 +985,7 @@ function tf_hotel_search_form( $classes, $title, $subtitle ){
 	</div>
 
 	<div class="tf_submit-wrap">
-		<input type="hidden" name="type" value="tf_hotel" />		
+		<input type="hidden" name="type" value="tf_hotel" class="tf-post-type"/>		
 		<button class="tf_button tf-submit" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
 	</div>
 
@@ -1028,18 +1028,15 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 <div class="tf_homepage-booking">
 	<div class="tf_destination-wrap">
 		<div class="tf_input-inner">
-			<!-- Start form row -->
-			<?php tourfic_booking_widget_field(
-				array(
-					'type' => 'text',
-					'svg_icon' => 'search',
-					'name' => 'tour_destination',
-					'label' => 'Destination/property name:',
-					'placeholder' => 'Destination',
-					'required' => 'true',
-				)
-			); ?>
-			<!-- End form row -->
+        <div class="tf_form-row">
+				<label class="tf_label-row">
+					<span class="tf-label">Location:</span>
+					<div class="tf_form-inner tf-d-g">
+						<i class="fas fa-search"></i>
+                        <input type="text" name="tour_destination" required="" id="tour_destination" class="" placeholder="Destination" value="">
+					</div>
+				</label>
+			</div>
 		</div>
 	</div>
 
@@ -1085,7 +1082,7 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 	</div>
 	
 	<div class="tf_selectdate-wrap">
-		<div class="tf_input-inner">
+		<div class="tf_input-inner" id="tf-tour-date-field">
 			<span class="tf_date-icon">
 				<?php echo tourfic_get_svg('calendar_today'); ?>
 			</span>
@@ -1127,7 +1124,7 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 	</div>
 
 	<div class="tf_submit-wrap">
-		<input type="hidden" name="type" value="tf_tours" />
+		<input type="hidden" name="type" value="tf_tours" class="tf-post-type"/>
 		<button class="tf_button tf-submit tf-tours-btn" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
 	</div>
 
