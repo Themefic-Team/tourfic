@@ -19,25 +19,25 @@ if( class_exists( 'CSF' ) ) {
       'title'  => 'Location',
       'fields' => array(
   
-        array(
-          'id'          => 'location',
-          'type'        => 'select',
-          'title'       => 'Hotel location',
-          'subtitle' => __( 'Select one or more locations for your hotel', 'tourfic' ),
-          'placeholder' => 'Type to search',
-          'desc' =>  __( 'Enter the name you need to search in search box to filter address faster', 'tourfic' ),
-          'chosen'      => true,
-          'multiple'    => true,
-          'ajax'        => true,
-          'options'     => 'categories',
-          'query_args'  => array(
-            'taxonomy'  => 'hotel_location',
-          ),
-          'settings'  => array(
-            'min_length'  => '1',
-          ),
-          'validate' => 'csf_validate_required',
-        ),
+        // array(
+        //   'id'          => 'location',
+        //   'type'        => 'select',
+        //   'title'       => 'Hotel location',
+        //   'subtitle' => __( 'Select one or more locations for your hotel', 'tourfic' ),
+        //   'placeholder' => 'Type to search',
+        //   'desc' =>  __( 'Enter the name you need to search in search box to filter address faster', 'tourfic' ),
+        //   'chosen'      => true,
+        //   'multiple'    => false,
+        //   'ajax'        => true,
+        //   'options'     => 'categories',
+        //   'query_args'  => array(
+        //     'taxonomy'  => 'hotel_location',
+        //   ),
+        //   'settings'  => array(
+        //     'min_length'  => '1',
+        //   ),
+        //   'validate' => 'csf_validate_required',
+        // ),
 
         array(
           'id'      => 'address',
@@ -48,6 +48,7 @@ if( class_exists( 'CSF' ) ) {
           'attributes' => array(
             'required' => 'required',
           ),
+          'validate' => 'csf_validate_required',
         ),
 
         array(

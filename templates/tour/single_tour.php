@@ -1,18 +1,17 @@
 <?php
 /**
- * The template for displaying all single posts.
- *
- * @package storefront
+ * Template: Signle Tour
  */
 
-get_header('tourfic');
+get_header();
 
 while ( have_posts() ) : the_post();
 
 $post_id   = get_the_ID();
+// Wishlist
 $post_type = substr(get_post_type(), 3, -1);
 $has_in_wishlist = tf_has_item_in_wishlist($post_id);
-
+// Meta Settings
 $meta = get_post_meta( $post_id,'tf_tours_option',true );
 
 $location = isset( $meta['location']['address'] ) ? $meta['location']['address'] : '';
@@ -67,7 +66,7 @@ $tf_overall_rate['review'] = null;
 				<div class="tf-hero-content-wrapper">
 					<div class="tf-hero-top-content" style="background-image: url(<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>);">
 						<div class="tf-hero-top-content-inner">
-							<i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>"></i>
+							<span class="single-tour-wish-bt"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>"></i></span>
 								<h1><?php echo esc_html__( $hero_title, 'tourfic' ); ?></h1>
 								<!-- Start gallery -->
 								<div class="tf-tours_gallery-wrap">
@@ -82,7 +81,6 @@ $tf_overall_rate['review'] = null;
 							?>	
 							<div class="tf-hero-btm-icon tf-tour-video" data-fancybox="tour-video" href="<?php echo $tour_video; ?>">	
 								<i class="fab fa-youtube"></i>
-								<span><?php _e( 'Video','tourfic' ); ?></span>
 							</div>
 							<?php } 
 							// Gallery
@@ -91,7 +89,7 @@ $tf_overall_rate['review'] = null;
 									if ($key === array_key_first($gallery_ids)) {
 										$image_url = wp_get_attachment_url( $gallery_item_id, 'full' ); ?>
 										<div data-fancybox="tour-gallery" class="tf-hero-btm-icon tf-tour-gallery" data-src="<?php echo $image_url; ?>">
-											<i class="far fa-images"></i> <span><?php _e( 'Gallery','tourfic' ); ?></span>
+											<i class="far fa-image"></i>
 										</div>
 									<?php } else {
 										$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
@@ -107,8 +105,8 @@ $tf_overall_rate['review'] = null;
 						<div class="tf-hero-bottom-left">
 							<h4><?php the_title(); ?></h4>
 							<div class="tf-hero-bottom-left-location">
-								<i class="fas fa-map-marker"></i>
-								<p><?php echo esc_html( $location ); ?></p>
+								<i class="fas fa-map-marker-alt"></i>
+								<?php echo esc_html( $location ); ?>
 							</div>
 						</div>
 						<div class="tf-hero-bottom-right">
@@ -134,37 +132,47 @@ $tf_overall_rate['review'] = null;
 	</div>
 	<!-- Hero section end -->
 
-	<?php if( $tour_duration ): ?>
+	
+	<?php if($tour_duration || $info_type || $group_size || $language) { ?>
 	<!-- Square block section Start -->
 	<div class="tf-square-block-wrapper">
 		<div class="tf-container">
 			<div class="tf-row">
 				<div class="tf-square-block-content-wrapper">
+					<?php if($tour_duration) { ?>
 					<div class="tf-single-square-block">
 						<i class="far fa-clock"></i>
 						<h5><?php echo __( 'Duration', 'tourfic' ); ?></h5>
 						<p><?php echo esc_html__( $tour_duration,'tourfic' ) ?></p>
 					</div>
+					<?php } ?>
+					<?php if($info_type) { ?>
 					<div class="tf-single-square-block">
 						<img src=<?php echo TF_ASSETS_URL . "img/globe.png" ?> alt="">
-						<h5><?php echo __( 'Max People', 'tourfic' ); ?></h5>
+						<h5><?php echo __( 'Tour Type', 'tourfic' ); ?></h5>
 						<p><?php echo esc_html__( $info_type,'tourfic' ) ?></p>
 					</div>
+					<?php } ?>
+					<?php if($group_size) { ?>
 					<div class="tf-single-square-block">
 						<img src=<?php echo TF_ASSETS_URL . "img/users.svg" ?> alt="">
 						<h5><?php echo __( 'Group Size', 'tourfic' ); ?></h5>
 						<p><?php echo esc_html__( $group_size,'tourfic' ) ?></p>
 					</div>
+					<?php } ?>
+					<?php if($language) { ?>
 					<div class="tf-single-square-block">
 						<img src=<?php echo TF_ASSETS_URL . "img/lang.png" ?> alt="">
 						<h5><?php echo __( 'Language', 'tourfic' ); ?></h5>
 						<p><?php echo esc_html__( $language,'tourfic' ) ?></p>
 					</div>
+					<?php } ?>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Square block section end -->
+	<?php } ?>
 
 	<!-- Overview and Highlight section Start -->
 	<div class="tf-overview-wrapper">
@@ -172,20 +180,20 @@ $tf_overall_rate['review'] = null;
 			<div class="tf-row">
 				<div class="tf-overview-content-wrapper">
 					<div class="tf-overview-item">
-						<div class="tf-overview-text">
-							<h2><?php _e( 'Overview','tourfic' ); ?></h2>
-							<?php  the_content(); ?>
-							<!-- <a href="#">See Less <i class="fas fa-angle-up"></i></a> -->
+						<div class="tf-overview-text">							
+							<h2><?php _e( 'Highlights','tourfic' ); ?></h2>
+							<?php echo $additional_information; ?>
+
 						</div>
 						<div class="tf-ohi-image">
 							<img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>" alt="">
 						</div>
 					</div>
 					<?php if( $additional_information ): ?>
-					<div class="tf-overview-item">
+					<div class="">
 						<div class="tf-overview-text">
-							<h2><?php echo __( 'Highlights', 'tourfic' ); ?></h2>
-							<?php _e( $additional_information, 'tourfic' ); ?>
+							<h2><?php _e( 'Overview','tourfic' ); ?></h2>
+							<?php the_content(); ?>
 						</div>
 					</div>
 					<?php endif; ?>
@@ -194,9 +202,8 @@ $tf_overall_rate['review'] = null;
 		</div>
 	</div>
 	<!-- Overview and Highlight section end -->
-	<?php endif; ?>
 
-	<?php if( $inc || $exc ): ?>
+	<?php if( $inc || $exc ) { ?>
 	<!-- Qoted List section Start -->
 	<div class="tf-quoted-wrapper">
 		<div class="tf-container">
@@ -229,9 +236,9 @@ $tf_overall_rate['review'] = null;
 		</div>
 	</div>
 	<!-- Qoted List section end -->
-	<?php endif; ?>
+	<?php } ?>
 
-	<?php if( $itineraries ): ?>
+	<?php if( $itineraries ) { ?>
 	<!-- Travel Itinerary section Start -->
 	<div class="tf-travel-itinerary-wrapper">
 		<div class="tf-container">
@@ -248,7 +255,9 @@ $tf_overall_rate['review'] = null;
 								<h4><?php echo esc_html( $itinerary['title'] );  ?></h4>
 								<div class="tf-travel-contetn">
 									<div class="tf-travel-contetn-wrap">
-										<img src="<?php echo esc_url( $itinerary['image'] );?>">
+										<?php if ($itinerary['image']) {
+											echo '<img src="' .esc_url( $itinerary['image'] ). '">';
+										} ?>										
 										<div class="tf-travel-desc">
 											<p><?php echo esc_html( $itinerary['desc'] ); ?></p>
 										</div>
@@ -263,7 +272,7 @@ $tf_overall_rate['review'] = null;
 		</div>
 	</div>
 	<!-- Travel Itinerary section end -->
-	<?php endif; ?>
+	<?php } ?>
 
 	<?php if( $location ):  ?>
 	<!-- Map section Start -->
@@ -317,7 +326,7 @@ $tf_overall_rate['review'] = null;
 		<div class="tf-faq-wrapper">
 			<div class="tf-container">
 				<div class="tf-row">
-					<div class="tf-travel-itinerary-content-wrapper">
+					<div class="tf-suggestion-wrapper">
 						<h2><?php _e("Terms and Conditions", 'tourfic'); ?></h2>
 						<div class="tf-travel-itinerary-items-wrapper">
 							<?php echo $terms_and_conditions; ?>

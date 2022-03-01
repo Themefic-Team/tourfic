@@ -100,6 +100,58 @@
     background-color:#333333;
     border:1px solid #333333;box-shadow:0 1px 8px transparent;
 }
+/*================================
+|            Tour CSS           |
+================================*/
+/**
+ * Tour Extra
+ */
+#tour-extra {
+    padding: 40px 30px 20px 30px;
+}
+.tour-extra-container {
+    min-width: 300px;
+}
+.tour-extra-container .tour-extra-single{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #f2f2f2;
+    padding: 15px;
+    margin-bottom: 10px;
+    gap: 20px;
+}
+.tour-extra-container .tour-extra-left{
+    
+}
+.tour-extra-container  .tour-extra-left h4{
+    font-size: 18px;
+    font-weight: 600;
+}
+.tour-extra-container  .tour-extra-left p{
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+}
+.tour-extra-container .tour-extra-right{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+.tour-extra-container  .tour-extra-right span{
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+.tour-extra-container  .tour-extra-right input{
+    width: 18px;
+    height: 18px;
+    outline: none;
+    border: 1px solid #333;
+}
+
+
 
 /*================================
 |            Hotel CSS           |
@@ -234,6 +286,23 @@
 /*================================
 |            Wishlist CSS           |
 ================================*/
+.tf-wishlist-button {
+    font-size: 24px;
+    cursor: pointer;
+    margin: 0 5px 0 0;
+    line-height: 1;
+    color: #333;
+}
+.single-tour-wish-bt {
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 1;
+    color: #333;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 999;
+}
 /* Table Skeleton Loader */
 .tf-text-preloader {
     position: relative;
