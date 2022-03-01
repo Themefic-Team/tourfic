@@ -50,6 +50,10 @@
     display: inline-block;
     text-decoration: none;
     transition: 0.3s;
+    color: #333;
+    font-weight: normal;
+    padding-right: 10px;
+    outline: none;
 }
 
 .tf-container {
@@ -169,7 +173,6 @@
             Hero CSS Start 
 ------------------------------------*/
 .tf-hero-top-content {
-    min-height: 460px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -180,6 +183,7 @@
 .tf-hero-top-content-inner {
     width: 100%;
     text-align: center;
+    position: relative;
 }
 
 .tf-hero-top-content-inner h1 {
@@ -268,7 +272,7 @@
 }
 
 .tf-hero-bottom-content {
-    padding: 24px 0;
+    padding: 24px 0 0 0;
 }
 
 .tf-hero-pricing span {
@@ -307,8 +311,8 @@
             Square block CSS Start
 ------------------------------------*/
 .tf-single-square-block {
-    width: 200px;
-    height: 200.02px;
+    width: 230px;
+    height: 200px;
     background: #FAFCFE;
     box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
     border-radius: 5px;
@@ -339,9 +343,8 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    gap: 55px;
-    justify-content: center;
-    margin: 100px 0;
+    justify-content: space-between;
+    margin: 50px 0;
 }
 
 /*--------- Square block CSS End ---------*/
@@ -355,8 +358,7 @@
     padding: 50px 70px;
     display: flex;
     flex-direction: column;
-    gap: 70px;
-    margin-bottom: 100px;
+    gap: 40px;
 }
 
 .tf-overview-item {
@@ -371,6 +373,7 @@
 }
 .tf-overview-item>div {
     max-width: 48%;
+    overflow: hidden;
 }
 
 .tf-overview-text h2 {
@@ -416,26 +419,24 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    display: flex;
-    gap: 20px;
-    flex-direction: column;
 }
 
 .tf-overview-text ul li {
     position: relative;
     font-weight: normal;
     font-size: 16px;
-    line-height: 24px;
+    line-height: 22px;
     letter-spacing: 0.2px;
     color: #152B47;
-    padding-left: 30px;
+    padding-left: 26px;
+    margin-bottom: 8px;
 }
 
 .tf-overview-text ul li:before {
-    width: 18px;
-    height: 18px;
+    width: 12px;
+    height: 12px;
     left: 0;
-    top: 3px;
+    top: 7px;
     background: #2F4E74;
     content: "";
     position: absolute;
@@ -453,7 +454,7 @@
 .tf-quoted-content-wrapper {
     display: flex;
     flex-direction: row;
-    padding: 70px 80px;
+    padding: 50px 70px;
     border: 5px solid #E2EBF3;
     position: relative;
     justify-content: space-between;
@@ -504,8 +505,6 @@
 
 .tf-quoted-content-upper {
     padding: 70px;
-    background: #FAFCFE;
-    margin-bottom: 100px;
 }
 
 .tf-quoted-content-wrapper:before,
@@ -539,9 +538,8 @@
 -----------------------------------------------------*/
 
 .tf-travel-itinerary-content-wrapper {
-    padding: 70px;
+    padding: 50px 70px;
     background: #FAFCFE;
-    margin-bottom: 100px;
 }
 
 .tf-travel-itinerary-content-wrapper h2 {
@@ -570,7 +568,7 @@
     box-shadow: 0px 2px 10px rgba(2, 51, 110, 0.2);
     border-radius: 5px 0px 0px 5px;
     width: 100px;
-    height: 100px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -591,7 +589,7 @@
     line-height: 26px;
     letter-spacing: 0.2px;
     display: flex;
-    height: 100px;
+    height: 80px;
     padding: 0;
     margin: 0;
     padding-left: 40px;
@@ -603,8 +601,8 @@
 
 .tf-travel-contetn-wrap {
     display: flex;
-    padding: 40px;
-    gap: 50px;
+    padding: 0 40px 40px 40px;
+    gap: 40px;
 }
 
 .tf-travel-contetn-wrap img {
@@ -641,9 +639,7 @@
 -----------------------------------------------------*/
 
 .tf-map-wrapper {
-    background: #fafcfe;
     padding: 50px 0;
-    margin-bottom: 100px;
 }
 
 /*--------- map CSS End ---------*/
@@ -655,7 +651,6 @@
 .tf-faq-content-wrapper {
     padding: 70px;
     background: #FAFCFE;
-    margin-bottom: 100px;
 }
 
 .tf-faq-sec-title h2 {
@@ -822,9 +817,7 @@
 }
 
 .tf-suggestion-wrapper {
-    background: #FAFCFE;
     padding: 50px 0;
-    margin-bottom: 100px;
 }
 
 .tf-suggestion-sec-head {
@@ -970,7 +963,7 @@
 .tf-review-wrapper {
     background: #FAFCFE;
     padding: 50px 0;
-    margin-bottom: 100px;
+    margin-bottom: 40px;
 }
 
 .tf-review-avater {

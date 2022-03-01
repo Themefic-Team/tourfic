@@ -196,6 +196,16 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 if ( !function_exists('tf_enqueue_admin_scripts') ) {
     function tf_enqueue_admin_scripts($hook){ 
 
+        /**
+         * Notyf
+         * 
+         * v1.8.1
+         * 
+         * https://github.com/caroso1222/notyf
+         */
+        wp_enqueue_style( 'notyf', TF_ASSETS_URL . 'notyf/notyf.min.css', '', '3.0' );
+		wp_enqueue_script( 'notyf', TF_ASSETS_URL . 'notyf/notyf.min.js', array( 'jquery' ), '3.0', true );
+
         if ( $hook == "widgets.php" && function_exists( 'is_woocommerce' ) ) {
 
             $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ?: '.min';

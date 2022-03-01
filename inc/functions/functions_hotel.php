@@ -47,6 +47,7 @@ function register_tf_hotel_post_type() {
         'capability_type'    => array( 'tf_hotel', 'tf_hotels' ),
         'has_archive'        => true,
         'hierarchical'       => false,
+        'menu_position'      => 25,
         'supports'           => apply_filters( 'tf_hotel_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
     );
 

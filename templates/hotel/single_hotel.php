@@ -31,11 +31,7 @@ $features  = get_the_terms( $post_id, 'hotel_feature' );
 $meta = get_post_meta( get_the_ID(), 'tf_hotel', true );
 
 $address  = !empty($meta['address']) ? $meta['address'] : '';
-if ($address) {
-	$location_name = $address;
-} elseif ($first_location_name) {
-	$location_name = $first_location_name;
-}
+
 $map      = !empty($meta['map']) ? $meta['map'] : '';
 // Detail
 $featured = !empty($meta['featured']) ? $meta['featured'] : '';
@@ -77,7 +73,7 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                 <div class="tf_title-area">
                     <h2 class="tf_title"><?php the_title(); ?></h2>
                     <div class="tf_title-right">
-                        <i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart fa-2x" data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>"></i>
+                        <a class="tf-wishlist-button" title="<?php _e('Click to toggle wishlist', 'tourfic'); ?>"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart" data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>"></i></a>
                         &nbsp;
                         <div class="share-tour">
                             <a href="#dropdown_share_center" class="share-toggle"
@@ -136,8 +132,13 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                 <?php if ($locations) { ?>
                 <!-- Start map link -->
                 <div class="tf_map-link">
-                    <a href="<?php echo $first_location_url; ?>"><i class="fas fa-map-marker-alt"></i>
-                        <?php echo $location_name; ?></a>
+                    <?php if($address) {
+                        echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' .$address. ' – </span>';
+                    } ?>
+
+                    <a href="<?php echo $first_location_url; ?>" class="tf-d-ib">                      
+                        <?php printf(__('Show more hotels in %s', 'tourfic'),$first_location_name); ?>
+                    </a>
                 </div>
                 <!-- End map link -->
                 <?php } ?>

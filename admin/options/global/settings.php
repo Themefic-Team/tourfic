@@ -5,17 +5,15 @@ if( class_exists( 'CSF' ) ) {
 
   $prefix = 'tourfic_opt';
 
-  //
-  // Create options
   CSF::createOptions( $prefix, array(
-    'menu_title'              =>   __( 'Tourfic', 'tourfic' ),
+    'menu_title'              =>   __( 'Tourfic Settings', 'tourfic' ),
     'menu_slug'               =>   'tourfic',
-    'framework_title'         =>   __( 'Tourfic Settings <small><a href="https://themefic.com/">By THEMEFIC</a></small>', 'tourfic' ),
-    'footer_credit'           =>   __( 'Enjoyed Tourfic? Please leave us a <a target="_blank" href="https://wordpress.org/support/plugin/tourfic/reviews/#new-post">★★★★★</a> rating. We really appreciate your support!', 'tourfic' ),
-    'menu_position'           =>   6,
-    'show_sub_menu'           =>   false,
+    'framework_title'         =>   __( 'Tourfic Settings <small>by <a style="color: #bfbfbf;text-decoration:none;" href="https://themefic.com" target="_blank">Themefic</a></small>', 'tourfic' ),
+    'footer_credit'           =>   __( '<em>Enjoyed <strong>Tourfic</strong>? Please leave us a <a style="color:#e9570a;" href="https://wordpress.org/support/plugin/tourfic/reviews/?filter=5/#new-post" target="_blank">★★★★★</a> rating. We really appreciate your support!</em>', 'tourfic' ),
+    'menu_position'           =>   25,
+    'show_sub_menu'           =>   true,
     'theme'                   =>   'dark',
-    'menu_icon'               =>   'dashicons-calendar-alt',
+    'menu_icon'               =>   'dashicons-palmtree',
     
   ) );
 
@@ -47,7 +45,7 @@ if( class_exists( 'CSF' ) ) {
   // Vendor
   CSF::createSection( $prefix, array(
     'id'    => 'vendor', 
-    'title' =>  __( 'Vendor', 'tourfic' ),
+    'title' =>  __( 'Multi Vendor', 'tourfic' ),
     'icon'  =>  'fas fa-handshake' ,
     'fields' => array(
 
@@ -101,6 +99,17 @@ if( class_exists( 'CSF' ) ) {
         'title'      => 'Enable Vendor Registration',
         'subtitle'      => 'Visitor can register as vendor using the registration form',
         'default' => true,
+      ),
+
+      array(
+        'id'         => 'vendor-tax-add',
+        'type'       => 'checkbox',
+        'title'      => 'Vendor Can Add',
+        'options'    => array(
+          'hl' => 'Hotel Location',
+          'hf' => 'Hotel Feature',
+          'td' => 'Tour Destination',
+        ),
       ),
 
     )    

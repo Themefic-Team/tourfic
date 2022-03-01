@@ -151,6 +151,9 @@ if ( !function_exists( 'tfopt' ) ) {
 // Functions
 require_once TF_INC_PATH . 'functions.php';
 
+// Admin Functions
+require_once TF_ADMIN_PATH . 'inc/functions.php';
+
 /**
  *    Layouts Function
  */

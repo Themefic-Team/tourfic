@@ -52,6 +52,7 @@ function register_tf_tours_post_type() {
         'capability_type'    => array( 'tf_tours', 'tf_tourss' ),
         'has_archive'        => true,
         'hierarchical'       => false,
+        'menu_position'      => 25,
         'supports'           => apply_filters( 'tf_tours_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
     );
 
@@ -154,53 +155,6 @@ function tf_tours_taxonomies_register() {
          ),
     );
     register_taxonomy( 'tour_destination', 'tf_tours', apply_filters( 'tour_destination_args', $tour_destination_args ) );
-
-    /**
-     * Taxonomy: tf_feature.
-     */
-    $labels = [
-        "name"                       => __( "Tour Features", 'tourfic' ),
-        "singular_name"              => __( "Tour Feature", 'tourfic' ),
-        "menu_name"                  => __( "Tour Features", 'tourfic' ),
-        "all_items"                  => __( "All Features", 'tourfic' ),
-        "edit_item"                  => __( "Edit Feature", 'tourfic' ),
-        "view_item"                  => __( "View Features", 'tourfic' ),
-        "update_item"                => __( "Update Feature name", 'tourfic' ),
-        "add_new_item"               => __( "Add new Feature", 'tourfic' ),
-        "new_item_name"              => __( "New Feature name", 'tourfic' ),
-        "parent_item"                => __( "Parent Feature", 'tourfic' ),
-        "parent_item_colon"          => __( "Parent Feature:", 'tourfic' ),
-        "search_items"               => __( "Search Features", 'tourfic' ),
-        "popular_items"              => __( "Popular Features", 'tourfic' ),
-        "separate_items_with_commas" => __( "Separate Features with commas", 'tourfic' ),
-        "add_or_remove_items"        => __( "Add or remove Features", 'tourfic' ),
-        "choose_from_most_used"      => __( "Choose from the most used Features", 'tourfic' ),
-        "not_found"                  => __( "No Features found", 'tourfic' ),
-        "no_terms"                   => __( "No Features", 'tourfic' ),
-        "items_list_navigation"      => __( "Features list navigation", 'tourfic' ),
-        "items_list"                 => __( "Features list", 'tourfic' ),
-        "back_to_items"              => __( "Back to Features", 'tourfic' ),
-    ];
-
-    $feature_args = [
-        "label"                 => __( "Tour Features", 'tourfic' ),
-        "labels"                => $labels,
-        "public"                => true,
-        "publicly_queryable"    => true,
-        "hierarchical"          => true,
-        "show_ui"               => true,
-        "show_in_menu"          => true,
-        "show_in_nav_menus"     => true,
-        "meta_box_cb"           => false,
-        "query_var"             => true,
-        "rewrite"               => ['slug' => 'tf_feature', 'with_front' => true],
-        "show_admin_column"     => true,
-        "show_in_rest"          => true,
-        "rest_base"             => "tf_feature",
-        "rest_controller_class" => "WP_REST_Terms_Controller",
-        "show_in_quick_edit"    => true,
-    ];
-    register_taxonomy( 'tf_feature', ['tf_tours'], apply_filters( 'tf_features_tax_args', $feature_args ) );
 
 }
 add_action( 'init', 'tf_tours_taxonomies_register' );
@@ -371,7 +325,7 @@ function tf_single_tour_booking_form( $post_id ) {
                             <span class='icon'>
                                 <?php tourfic_get_svg('calendar_today'); ?>
                             </span>
-                            <select name="check-in-time" id="check-in-time">
+                            <select name="check-in-time" id="check-in-time" style="min-width: 100px;">
                             </select>
                         </div>
                     </label>
@@ -488,7 +442,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
                 <?php if (defined( 'TF_PRO' ) && $tour_extras) { ?>
                 <div class="tour-extra">
-                    <a data-fancybox data-src="#tour-extra" href="javascript:;">Package <i class="far fa-plus-square"></i></a>
+                    <a data-fancybox data-src="#tour-extra" href="javascript:;"><i class="far fa-plus-square"></i></a>
                     <div style="display: none;" id="tour-extra">
                         <div class="tour-extra-container">
                         <?php foreach( $tour_extras as $tour_extra ){ ?>
@@ -498,7 +452,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                     <?php if ($tour_extra['desc']) { ?><p><?php _e( $tour_extra['desc'] ); ?></p><?php } ?>
                                 </div>
                                 <div class="tour-extra-right">
-                                    <span><?php _e( $tour_extra['price'] ); ?></span>
+                                    <span><?php echo wc_price( $tour_extra['price'] ); ?></span>
                                     <input type="checkbox" value="<?php _e( $tour_extra['price'] ); ?>" data-title="<?php _e( $tour_extra['title'] ); ?>">
                                 </div>												
                             </div>					
