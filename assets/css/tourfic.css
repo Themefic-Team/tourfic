@@ -121,9 +121,6 @@
     margin-bottom: 10px;
     gap: 20px;
 }
-.tour-extra-container .tour-extra-left{
-    
-}
 .tour-extra-container  .tour-extra-left h4{
     font-size: 18px;
     font-weight: 600;
@@ -151,7 +148,10 @@
     border: 1px solid #333;
 }
 
-
+/* Related tour */
+.tf-suggestion-item {
+    background-position: center center;
+}
 
 /*================================
 |            Hotel CSS           |

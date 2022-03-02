@@ -45,6 +45,10 @@
             window.open('https://tourfic.com/');
         });
 
+        $(document).on('click', '.tf-csf-pro', function(e) {
+            window.open('https://tourfic.com/');
+        });
+
     });
 
 })(jQuery);

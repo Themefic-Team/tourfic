@@ -2,18 +2,27 @@
 /**
  * Template: Signle Tour
  */
-
+// Get header
 get_header();
 
+// Post query
 while ( have_posts() ) : the_post();
 
 $post_id   = get_the_ID();
+
+// Get destination
+$destinations = get_the_terms( $post_id, 'tour_destination' );
+if($destinations) {
+	$first_destination_slug = $destinations[0]->slug;
+}
+
 // Wishlist
 $post_type = substr(get_post_type(), 3, -1);
 $has_in_wishlist = tf_has_item_in_wishlist($post_id);
-// Meta Settings
-$meta = get_post_meta( $post_id,'tf_tours_option',true );
 
+// Meta field information
+$meta = get_post_meta( $post_id,'tf_tours_option',true );
+// Address
 $location = isset( $meta['location']['address'] ) ? $meta['location']['address'] : '';
 $text_location = isset( $meta['text_location']) ? $meta['text_location'] : '';
 if( empty( $location ) ){
@@ -25,20 +34,23 @@ if ($gallery) {
 	$gallery_ids = explode( ',', $gallery );
 }
 $hero_title = !empty($meta['hero_title']) ? $meta['hero_title'] : '';
-$additional_information = $meta['additional_information'] ? $meta['additional_information'] : null; 
+// Highlights
+$highlights = !empty($meta['additional_information']) ? $meta['additional_information'] : ''; 
 // Informations
 $tour_duration = !empty($meta['duration']) ? $meta['duration'] : '';
-$info_type = !empty($meta['info_type']) ? $meta['info_type'] : '';
+$tour_type = !empty($meta['info_type']) ? $meta['info_type'] : '';
 $group_size = !empty($meta['group_size']) ? $meta['group_size'] : '';
 $language = !empty($meta['language']) ? $meta['language'] : '';
 
-$min_days = !empty($meta['min_days']) ? $meta['min_days'] : null;
+$min_days = !empty($meta['min_days']) ? $meta['min_days'] : '';
 $external_booking = !empty($meta['external_booking']) ? $meta['external_booking'] : false;
 $external_booking_link = !empty($meta['external_booking_link']) ? $meta['external_booking_link'] : null;
+
 //$email = $meta['email'] ? $meta['email'] : null;
 //$phone = $meta['phone'] ? $meta['phone'] : null;
 //$website = $meta['website'] ? $meta['website'] : null;
 //$fax = $meta['fax'] ? $meta['fax'] : null;
+
 $faqs = $meta['faqs'] ? $meta['faqs'] : null;
 $inc = $meta['inc'] ? $meta['inc'] : null;
 $exc = $meta['exc'] ? $meta['exc'] : null;
@@ -133,7 +145,7 @@ $tf_overall_rate['review'] = null;
 	<!-- Hero section end -->
 
 	
-	<?php if($tour_duration || $info_type || $group_size || $language) { ?>
+	<?php if($tour_duration || $tour_type || $group_size || $language) { ?>
 	<!-- Square block section Start -->
 	<div class="tf-square-block-wrapper">
 		<div class="tf-container">
@@ -146,11 +158,11 @@ $tf_overall_rate['review'] = null;
 						<p><?php echo esc_html__( $tour_duration,'tourfic' ) ?></p>
 					</div>
 					<?php } ?>
-					<?php if($info_type) { ?>
+					<?php if($tour_type) { ?>
 					<div class="tf-single-square-block">
 						<img src=<?php echo TF_ASSETS_URL . "img/globe.png" ?> alt="">
 						<h5><?php echo __( 'Tour Type', 'tourfic' ); ?></h5>
-						<p><?php echo esc_html__( $info_type,'tourfic' ) ?></p>
+						<p><?php echo esc_html__( $tour_type,'tourfic' ) ?></p>
 					</div>
 					<?php } ?>
 					<?php if($group_size) { ?>
@@ -182,14 +194,14 @@ $tf_overall_rate['review'] = null;
 					<div class="tf-overview-item">
 						<div class="tf-overview-text">							
 							<h2><?php _e( 'Highlights','tourfic' ); ?></h2>
-							<?php echo $additional_information; ?>
+							<?php echo $highlights; ?>
 
 						</div>
 						<div class="tf-ohi-image">
 							<img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>" alt="">
 						</div>
 					</div>
-					<?php if( $additional_information ): ?>
+					<?php if( $highlights ): ?>
 					<div class="">
 						<div class="tf-overview-text">
 							<h2><?php _e( 'Overview','tourfic' ); ?></h2>
@@ -346,16 +358,14 @@ $tf_overall_rate['review'] = null;
 		'posts_per_page' => 8, 
 		'orderby' => 'title', 
 		'order' => 'ASC',
-		'post__not_in' => array( get_the_ID() ),
-        // call all related posts @ KK
-        'meta_query' => array(
-            'relation' => 'OR',
-            array(
-                'key'     => 'tf_tours_option',
-                'value'   => $location,
-                'compare' => 'LIKE',
-            ),
-        ),
+		'post__not_in' => array($post_id),
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'tour_destination',
+				'field'    => 'slug',
+				'terms'    => $first_destination_slug,
+			),
+		),
 	);
 	$tours = new WP_Query( $args );
 	if ($tours->have_posts()) {
