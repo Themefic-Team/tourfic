@@ -1,23 +1,41 @@
-.tf-pro {
-    background: #b30000;
-    color: #fff;
-    padding: 3px 0 3px 0;
-    border-radius: 3px;
-    text-align: center;
-    width: 90px;
-    margin: 5px 0 0 0;
-    font-size: 12px;
-    font-weight: 600;
+.csf-section .csf-field.tf-csf-disable {
+    opacity: 1;
+    user-select: none;
+    border-top: 1px solid #eee;
+}
+.csf-section .csf-field.tf-csf-disable .clear:before {
+    content: "";
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background-color: #eee;
+    opacity: 0.25;
+    z-index: 10;
+}
+
+.csf-section .csf-field.tf-csf-pro {
     cursor: pointer;
 }
-.tf-upcoming {
-    background: #006600;
+
+.tf-csf-badge {
+    
+}
+.tf-csf-badge .tf-upcoming, .tf-csf-badge .tf-pro {
+    display: inline-block;
     color: #fff;
-    padding: 3px 0 3px 0;
+    padding: 3px 10px 3px 10px;
     border-radius: 3px;
     text-align: center;
-    width: 90px;
     margin: 5px 0 0 0;
     font-size: 12px;
     font-weight: 600;
+}
+.tf-csf-badge .tf-upcoming {
+    background: #006600;
+    margin-right: 5px;
+}
+.tf-csf-badge .tf-pro {
+    background: #b30000;
 }

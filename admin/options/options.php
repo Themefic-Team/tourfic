@@ -29,11 +29,11 @@ if ( class_exists( 'CSF' ) ) {
      * Post Type: tf_hotel
      */
     // Single Tour Metabox
-    // if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
-    //     require_once TF_PRO_OPTIONS_PATH . 'hotel/single_hotel.php';
-    // } else {
-        require_once TF_OPTIONS_PATH . 'hotel/single_hotel.php';
-    // }
+    if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
+        require_once TF_PRO_OPTIONS_PATH . 'hotel/single-hotel.php';
+    } else {
+        require_once TF_OPTIONS_PATH . 'hotel/single-hotel.php';
+    }
 
     /**
      * Taxonomy: hotel_feature

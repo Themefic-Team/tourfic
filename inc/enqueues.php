@@ -51,12 +51,9 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         wp_enqueue_style( 'tourfic-styles', TF_ASSETS_URL . 'css/tourfic-styles.css', null, '' );
 
         wp_enqueue_style( 'tourfic-autocomplete', TF_ASSETS_URL . 'css/tourfic-autocomplete.css', null, '' );
-        wp_enqueue_style( 'my-style', TF_ASSETS_URL . 'css/my-style.css', null, '' );
-        wp_enqueue_style( 'owl-carousel', TF_ASSETS_URL . 'css/owl.carousel.min.css', null, '' );
         wp_enqueue_style( 'tf-style', TF_ASSETS_URL . 'css/style.css', null, '' );
         wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/responsive.css', null, '' );
 
-        wp_enqueue_script( 'owl-carousel', TF_ASSETS_URL . 'js/owl.carousel.min.js', array( 'jquery' ), '' );
 
         wp_enqueue_style( 'daterangepicker', TF_ASSETS_URL . 'daterangepicker/daterangepicker.css', null, TOURFIC );
 
