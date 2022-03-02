@@ -550,18 +550,36 @@ function tf_room_availability_callback() {
  * Archive Hotel Sidebar Booking Form
  */
 function tourfic_get_sidebar( $placement = 'single' ) { ?>
-
+<?php
+/**
+ * Populate search form from url
+ * @author KK
+ */
+ // Unwanted Slashes Remove
+if ( isset( $_GET ) ) {
+    $_GET = array_map( 'stripslashes_deep', $_GET );
+} 
+$post_type = isset( $_GET['type'] ) ? $_GET['type'] : null;
+if(isset($post_type)){
+   $id =  $post_type == 'tf_tours' ? 'tour_destination' : 'location';
+   $location = isset($_GET[$id]) ? $_GET[$id] : null;
+   $adult = isset($_GET['adults']) ? $_GET['adults'] : 0;
+   $children = isset($_GET['children']) ? $_GET['children'] : 0;
+   $room = isset($_GET['room']) ? $_GET['room'] : 0;
+   $date = isset($_GET['check-in-out-date']) ? $_GET['check-in-out-date'] : null;
+}
+?>
 <!-- Start Booking widget -->
 <form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
-    action="<?php echo tourfic_booking_search_action(); ?>">
+    action="<?php echo tourfic_booking_search_action(); ?>" id="tf-widget-booking-search">
 
     <div class="tf_form-row">
         <label class="tf_label-row">
             <span class="tf-label">Enter Your Destination:</span>
             <div class="tf_form-inner">
                 <i class="fas fa-map-marker-alt"></i>
-                <input type="text" name="destination" required="" id="destination" class="" placeholder="Destination"
-                    value="">
+                <input type="text" name="location" required="" id="<?php echo $id ?>" class="" placeholder="Destination"
+                    value="<?php echo $location ?>">
             </div>
         </label>
     </div>
@@ -571,12 +589,11 @@ function tourfic_get_sidebar( $placement = 'single' ) { ?>
             <div class="tf_form-inner">
                 <i class="fas fa-user-friends"></i>
                 <select name="adults" id="adults" class="">
-                    <option value="1">1 adult</option>
-                    <option value="2">2 adults</option>
-                    <option value="3">3 adults</option>
-                    <option value="4">4 adults</option>
-                    <option value="5">5 adults</option>
-                    <option value="6">6 adults</option>
+                    <option <?php echo 1 == $adult ? 'selected' : null ?> value="1">1 adult</option>
+                    <?php foreach (range(2,6) as $value) {
+                        $selected = $value == $adult ? 'selected' : null;
+                        echo "<option $selected value='$value'>$value adults</option>";
+                    } ?>                   
                 </select>
             </div>
         </label>
@@ -588,11 +605,12 @@ function tourfic_get_sidebar( $placement = 'single' ) { ?>
                 <i class="fas fa-child"></i>
                 <select name="children" id="children" class="">
                     <option value="0">0 child</option>
-                    <option value="1">1 child</option>
-                    <option value="2">2 childrens</option>
-                    <option value="3">3 childrens</option>
-                    <option value="4">4 childrens</option>
-                    <option value="5">5 childrens</option>
+                    <option <?php echo 1 == $children ? 'selected' : null ?> value="1">1 child</option>
+                    <?php foreach (range(2,5) as $value) {
+                        $selected = $value == $children ? 'selected' : null;
+                        echo "<option $selected value='$value'>$value children</option>";
+                    } ?> 
+                  
                 </select>
             </div>
         </label>
@@ -603,11 +621,11 @@ function tourfic_get_sidebar( $placement = 'single' ) { ?>
             <div class="tf_form-inner">
                 <i class="fas fa-couch"></i>
                 <select name="room" id="room" class="">
-                    <option value="1">1 room</option>
-                    <option value="2">2 rooms</option>
-                    <option value="3">3 rooms</option>
-                    <option value="4">4 rooms</option>
-                    <option value="5">5 rooms</option>
+                    <option <?php echo 1 == $room ? 'selected' : null ?> value="1">1 room</option>
+                    <?php foreach (range(2,5) as $value) {
+                        $selected = $value == $room ? 'selected' : null;
+                        echo "<option $selected value='$value'>$value rooms</option>";
+                    } ?>                   
                 </select>
             </div>
         </label>
@@ -620,7 +638,7 @@ function tourfic_get_sidebar( $placement = 'single' ) { ?>
                 <div class="tf_form-inner">
                     <i class="far fa-calendar-alt"></i>
                     <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                        placeholder="Select Date" required>
+                        placeholder="Select Date" required value="<?php echo $date ?>">
                 </div>
             </label>
         </div>

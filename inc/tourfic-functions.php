@@ -1082,45 +1082,16 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 	</div>
 	
 	<div class="tf_selectdate-wrap">
-		<div class="tf_input-inner" id="tf-tour-date-field">
-			<span class="tf_date-icon">
-				<?php echo tourfic_get_svg('calendar_today'); ?>
-			</span>
-			<div class="checkin-date-text"><?php echo __( 'From','tourfic' ) ?></div>
-			<div class="date-sep"></div>
-			<div class="checkout-date-text"><?php echo __( 'To','tourfic' ) ?></div>
+	<!-- @KK Merged two inputs into one  -->
+    <div class="tf_input-inner">
+		<label class="tf_label-row">
+					<span class="tf-label">Check-in & Check-out date</span>
+					<div class="tf_form-inner tf-d-g">
+						<i class="far fa-calendar-alt"></i>
+						<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="Select Date">
+					</div>
+				</label>
 		</div>
-
-		<div class="tf_tours_date-wrap screen-reader-text">
-		<!-- Start form row -->
-		<?php tourfic_booking_widget_field(
-			array(
-				'type' => 'text',
-				'svg_icon' => '',
-				'name' => 'check-in-date',
-				'placeholder' => 'Check-in date',
-				'label' => 'Check-in date',
-				'required' => 'true',
-				'disabled' => 'true',
-				'class'    => 'tf-tour-check-in',
-			)
-		); ?>
-
-		<?php tourfic_booking_widget_field(
-			array(
-				'type' => 'text',
-				'svg_icon' => '',
-				'name' => 'check-out-date',
-				'placeholder' => 'Check-out date',
-				'required' => 'true',
-				'disabled' => 'true',
-				'label' => 'Check-out date',
-				'class'    => 'tf-tour-check-out',
-
-			)
-		); ?>
-		</div>
-
 	</div>
 
 	<div class="tf_submit-wrap">
