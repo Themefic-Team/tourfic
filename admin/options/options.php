@@ -14,14 +14,14 @@ if ( class_exists( 'CSF' ) ) {
      */
     // Single Tour Metabox
     if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
-        require_once TF_PRO_OPTIONS_PATH . 'tour/single_tour.php';
+        require_once TF_PRO_OPTIONS_PATH . 'tour/single-tour.php';
     } else {
-        require_once TF_OPTIONS_PATH . 'tour/single_tour.php';
+        require_once TF_OPTIONS_PATH . 'tour/single-tour.php';
     }
 
     // Taxonomy: Tour Feature
     if ( !is_plugin_active('tourfic-pro/tourfic-pro.php') ) {
-        require_once TF_OPTIONS_PATH . 'tour/taxonomy_tour-features.php';
+        require_once TF_OPTIONS_PATH . 'tour/taxonomy-tour_features.php';
     }
     require_once TF_OPTIONS_PATH . 'tour/taxonomy-tour_destination.php';
 
