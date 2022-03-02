@@ -164,12 +164,12 @@ add_filter( 'theme_page_templates', 'page_templates', 10, 4 );
 function load_page_templates( $page_template ) {
 
     if ( get_page_template_slug() == 'tf_search-result' ) {
-        $theme_files = array( 'search-tourfic.php', 'templates/search-tourfic.php' );
+        $theme_files = array( 'search-tourfic.php', 'templates/common/search-results.php' );
         $exists_in_theme = locate_template( $theme_files, false );
         if ( $exists_in_theme ) {
             return $exists_in_theme;
         } else {
-            return TF_TEMPLATE_PATH . 'search-tourfic.php';
+            return TF_TEMPLATE_PATH . 'common/search-results.php';
         }
     }
     return $page_template;

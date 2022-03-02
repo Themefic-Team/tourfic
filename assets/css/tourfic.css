@@ -353,3 +353,19 @@
 .tf-text-red{
       color: #c00;
 }
+
+/*================================
+|            Search Page CSS           |
+================================*/
+.tf-filter ul{
+    display: list-item;
+}
+.tf-filter ul li {
+    text-transform: capitalize;
+}
+.tf-filter ul li input[type="checkbox"] {
+    margin-right: 5px;
+}
+.tf-filter ul li i {
+    margin-right: 5px;
+}

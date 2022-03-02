@@ -461,7 +461,7 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
         'order' => 'ASC',
         'hide_empty' => 0, //can be 1, '1' too
         'hierarchical' => 0, //can be 1, '1' too
-        'search' => $search,
+        'name' => $search,
         //'name__like' => '',
     ) );
 

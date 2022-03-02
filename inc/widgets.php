@@ -657,7 +657,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget
 
             $destination_name = !empty($_GET['destination']) ? $_GET['destination'] : '';
 
-            echo "<ul class='tf-list-item'>";
+            echo "<div class='tf-filter'><ul>";
             foreach ($get_terms as $key => $term) {
                 $feature_meta = get_term_meta($term->term_taxonomy_id, 'hotel_feature', true);
                 if ($feature_meta['icon-type'] == 'fa') {
@@ -672,7 +672,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget
 
                 echo "<li><label><input type='checkbox' name='tf_filters[]' value='{$id}'/> {$feature_icon} {$name}</label> {$count}</li>";
             }
-            echo "</ul>";
+            echo "</ul></div>";
 
             echo $after_widget;
         endif;
