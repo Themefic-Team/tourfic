@@ -2,6 +2,10 @@
     'use strict';
 
     $(document).ready(function () {
+        var notyf = new Notyf({
+            duration: 3000,
+            dismissable: true
+        });
 
         // Date picker
         var tour_checkin_input  = $(".tf-tour-check-in");
@@ -262,17 +266,21 @@
         });
 
         // Change view
-        
+
         var filter_xhr;
-        $(document).on('change', '[name*=tf_filters],[name*=tf_features], #location, #adults, #room, #children, #check-in-date, #check-out-date, #check-in-out-date, #tour_destination', function () {
-            var form = $(this).closest('.tf-tabcontent').attr('id');
-            var dest = form == 'tf-tour-booking-form' ? $('#tour_destination').val() : $('#location').val();
+        // @KK creating a function for reuse this filter in any where we needs.
+        const makeFilter = () => { 
+            var dest = $('#location').val() || $('#tour_destination').val() ;
             var adults = $('#adults').val();
             var room = $('#room').val();
             var children = $('#children').val();
-            var checkin = $('#check-in-date').val();
-            var checkout = $('#check-out-date').val();
-            var posttype = $('#'+form).find('.tf-post-type').val();
+            var checked = $('#check-in-out-date').val();
+            // @KK split date range into dates
+            var checkedArr = checked.split(' to ');
+            var checkin = checkedArr[0];
+            var checkout = checkedArr[1];
+            var posttype = $('.tf-post-type').val();
+
             var filters = [];
 
             $('[name*=tf_filters]').each(function () {
@@ -331,14 +339,23 @@
                     $('.archive_ajax_result').unblock();
 
                     $('.archive_ajax_result').html(data);
+                    // @KK show notice in every success request 
+                    notyf.success('Results refreshed successfully');
                 },
                 error: function (data) {
                     console.log(data);
                 },
 
             });
-
+        };
+        // @KK Look for submission and change on filter widgets
+        $(document).on('submit', '#tf-widget-booking-search', function (e) {
+            e.preventDefault();
+            makeFilter()
         });
+        $(document).on('change', '[name*=tf_filters],[name*=tf_features]', function () {
+            makeFilter();
+        })
 
     });
 
