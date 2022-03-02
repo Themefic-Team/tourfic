@@ -17,8 +17,7 @@ if( class_exists( 'CSF' ) ) {
     
   ) );
 
-  //
-  // Create a top-tab
+  // General
   CSF::createSection( $prefix, array(
     'id'    => 'general_tab', 
     'title' =>  __( 'General', 'tourfic' ),
