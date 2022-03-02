@@ -629,8 +629,8 @@ function tourfic_trigger_filter_ajax(){
         }
 
     }
-    // @KK Add meta if dates exists
-    if ($checkin && $checkout){
+    // @KK Add meta if dates exists and post type is tours
+    if ($checkin && $checkout && $posttype == ' tf_tours'){
         $args['tax_query']['relation'] = $relation;
         $args['meta_query'] = array(
                 array(
