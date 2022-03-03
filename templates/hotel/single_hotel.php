@@ -168,7 +168,7 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                         <!-- End Share Section -->
                         <?php } ?>
 
-                        <?php if ($map["address"]) { ?>
+                        <?php if (!empty($map["address"])) { ?>
                         <div class="show-on-map">
                             <a href="https://www.google.com/maps/search/<?php echo $map["address"]; ?>" target="_blank"
                                 class="tf_button btn-outline button"><?php esc_html_e( 'Show on map', 'tourfic' ); ?></a>
@@ -334,7 +334,7 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                                         </div>
                                         <?php } ?>
 
-                                        <?php if($room['features']) { ?>
+                                        <?php if(!empty($room['features'])) { ?>
                                         <div class="room-features">
                                             <div class="tf-room-title"><?php esc_html_e( 'Amenities', 'tourfic' ); ?>
                                             </div>

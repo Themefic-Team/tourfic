@@ -464,7 +464,10 @@ function tf_single_tour_booking_form( $post_id ) {
                     </div>
                 </div>	
                 <?php } ?>	
-                <?php echo tourfic_tours_booking_submit_button( "Book Now" ); ?>
+                <div class="tf-tours-booking-btn">
+                    <input type="hidden" placeholder="location" name="location" value="">
+                    <button class="tf_button" type="submit"><?php _e('Book Now', 'tourfic'); ?></button>
+                </div>
             </form>
 	    </div>
 	<?php

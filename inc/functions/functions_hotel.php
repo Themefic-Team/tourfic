@@ -647,34 +647,6 @@ if(isset($post_type)){
                 </div>
             </label>
         </div>
-
-        <div class="screen-reader-text">
-            <?php //tourfic_booking_widget_field(
-					// array(
-					// 	'type'        => 'text',
-					// 	'svg_icon'    => 'calendar_today',
-					// 	'name'        => 'check-in-date',
-					// 	'placeholder' => 'Check-in date',
-					// 	'label'       => 'Check-in date',
-					// 	'required'    => 'true',
-					// 	'disabled'    => 'true',
-					// 	'class'		  => 'tf-widget-check-in',
-					// ));
-				?>
-
-            <?php //tourfic_booking_widget_field(
-				// 	array(
-				// 		'type'        => 'text',
-				// 		'svg_icon'    => 'calendar_today',
-				// 		'name'        => 'check-out-date',
-				// 		'placeholder' => 'Check-out date',
-				// 		'required'    => 'true',
-				// 		'disabled'    => 'true',
-				// 		'label'       => 'Check-out date',
-				// 		'class'		  => 'tf-widget-check-out',
-				// 	)
-				// );?>
-        </div>
     </div>
 
     <div class="tf_form-row">

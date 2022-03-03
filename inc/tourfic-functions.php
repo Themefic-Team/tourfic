@@ -266,120 +266,6 @@ function tourfic_attach_city_to_author( $author ) {
     return $author;
 }
 
-
-function tourfic_booking_widget_field( $args ){
-	$defaults = array (
-        'type' => '',
-        'svg_icon' => '',
-        'id' => '',
-        'name' => '',
-        'default' => '',
-        'options' => array(),
-        'required' => false,
-        'label' => '',
-        'placeholder' => '',
-        'class' => false,
-        'disabled' => false,
-        'echo' => TRUE
-    );
-	$args = wp_parse_args( $args, $defaults );
-
-	$svg_icon     	= esc_attr( $args['svg_icon'] );
-	$type     		= esc_attr( $args['type'] );
-	$name     		= esc_attr( $args['name'] );
-    $class    		= esc_attr( $args['class'] );
-
-    $id       		= $args['id'] ? esc_attr( $args['id'] ) : $name;
-    $required 		= $args['required'] ? 'required' : '';
-
-    $label 			= $args['label'] ? "<span class='tf-label'>".$args['label']."</span>" : '';
-
-    $disabled 		= $args['disabled'] ? "onkeypress='return false';" : '';
-
-	$placeholder 	= esc_attr( $args['placeholder'] );
-
-    //$default_val =  isset( $_POST[$name] ) ? $_POST[$name] : tourfic_getcookie( $name );
-    $default_val =  isset( $_GET[$name] ) ? $_GET[$name] : '';
-    
-    if( $name == 'check-in-out-date' ) {
-        if( isset( $_GET['check-in-date'] ) && !empty( $_GET['check-in-date'] ) && isset( $_GET['check-out-date'] ) && !empty( $_GET['check-out-date'] ) ){ 
-            $default_val = $_GET['check-in-date'];
-            $default_val .= ' - ';
-            $default_val .= $_GET['check-out-date'];
-            
-        }
-        
-    }
-    
-    $default = $args['default'] ? sanitize_text_field( $args['default'] ) : $default_val;
-
-    if ( !$name ) {
-    	return;
-    }
-
-    $output = '';
-
-    if ( $type == 'select' ) {
-
-    	$output .= "<div class='tf_form-row'>";
-	    	$output .= "<label class='tf_label-row'>";
-	    		$output .= "<div class='tf_form-inner'>";
-	    		$output .= "<span class='icon'>";
-	    			$output .= tourfic_get_svg($svg_icon);
-	    		$output .= "</span>";
-	    		$output .= "<select $required name='$name' id='$id' class='$class'>";
-
-	    		foreach ( $args['options'] as $key => $value) {
-	    			$output .= "<option value='$key' ".selected( $default, $key, false ).">{$value}</option>";
-	    		}
-
-				$output .= "</select>
-				</div>
-			</label>
-		</div>";
-
-    } elseif ( $type == 'number' ) {
-
-    	$output .= "<div class='tf_form-row'>";
-	    	$output .= "<label class='tf_label-row'>";
-	    		$output .= $label;
-	    		$output .= "<div class='tf_form-inner'>";
-	    			$output .= "<span class='icon'>";
-	    				$output .= tourfic_get_svg($svg_icon);
-	    			$output .= "</span>";
-
-					$output .= "<input type='number' name='$name' $required  id='$id' $disabled class='$class' placeholder='$placeholder' value='$default' />";
-
-				$output .= "</div>
-			</label>
-		</div>";
-
-    } else {
-
-    	$output .= "<div class='tf_form-row'>";
-	    	$output .= "<label class='tf_label-row'>";
-	    		$output .= $label;
-	    		$output .= "<div class='tf_form-inner'>";
-	    			$output .= "<span class='icon'>";
-	    				$output .= tourfic_get_svg($svg_icon);
-	    			$output .= "</span>";
-
-					$output .= "<input type='text' name='$name' $required  id='$id' $disabled class='$class' placeholder='$placeholder' value='$default' />";
-
-				$output .= "</div>
-			</label>
-		</div>";
-
-    }
-
-    if ( $args['echo'] ) {
-        echo $output;
-    }
-
-    return $output;
-
-}
-
 // Pagination
 function tourfic_posts_navigation(){
 	global $wp_query;
@@ -396,125 +282,6 @@ function tourfic_posts_navigation(){
 	    'prev_next'       => true,
 	) );
 	echo "</div>";
-}
-
-/**
- * Set Cookie Data
- */
-function tourfic_setcookie( $cookie = null, $value = null ){
-
-    $expiry = strtotime('+1 day');
-
-	if ( $cookie && $value ) {
-	    setcookie( $cookie, $value, $expiry, COOKIEPATH, COOKIE_DOMAIN );
-	    return true;
-	} else {
-		return false;
-	}
-}
-
-/**
- * Get Cookie Data
- */
-function tourfic_getcookie( $cookie = null ){
-	if ( $cookie && isset( $_COOKIE[$cookie] ) ) {
-		return $_COOKIE[$cookie];
-	} else {
-		return false;
-	}
-}
-
-/**
- * Sitewide Set Cookie Function
- *
- */
-function tourfic_setcookie_sitewide(){
-
-	if ( is_admin() ) {
-		//return;
-	}
-
-    $user_id = get_current_user_id();
-
-    if( isset( $_GET['check-in-date'] ) ) {
-
-    	foreach ( $_GET as $key => $value ) {
-    		tourfic_setcookie( $key, $value );
-    	}
-
-    }
-
-}
-add_action('init', 'tourfic_setcookie_sitewide', 5 );
-//add_action('template_redirect', 'tourfic_setcookie_sitewide', 5 );
-
-/**
- * Get Cookie Data
- */
-function tourfic_delete_cookie( $cookie = null ){
-
-    $expiry = strtotime('-1 day');
-
-	if ( $cookie && isset( $_COOKIE[$cookie] ) ) {
-	    unset( $_COOKIE[$cookie] );
-
-	    setcookie($cookie, '', $expiry, COOKIEPATH, COOKIE_DOMAIN);
-	    setcookie($cookie, '', $expiry, "/");
-
-	    return true;
-	} else {
-		return false;
-	}
-}
-
-/**
- * Submit button data
- */
-function tourfic_room_booking_submit_button( $label = null ){
-
-	$booking_fields = array(
-		'destination',
-		'check-in-date',
-		'check-out-date',
-		'adults',
-		'room',
-		'children',
-	);
-
-	foreach ( $booking_fields as $key ) {
-
-		$value = isset( $_GET[$key] ) ? $_GET[$key] : tourfic_getcookie( $key );
-
-		echo "<input type='hidden' placeholder='{$key}' name='{$key}' value='{$value}'>";
-	}
-
-	?>
-	
-	<button class="tf_button" type="submit"><?php esc_html_e( $label ); ?></button>
-	<?php
-}
-
-/**
- * Submit button Tour booking
- */
-function tourfic_tours_booking_submit_button( $label = null ){
-
-	$booking_fields = array(
-		'location',
-	);
-
-	foreach ( $booking_fields as $key ) {
-
-		$value = isset( $_GET[$key] ) ? $_GET[$key] : tourfic_getcookie( $key );
-		echo "<div class='tf-tours-booking-btn'>";
-		echo "<input type='hidden' placeholder='{$key}' name='{$key}' value='{$value}'>";
-	}
-
-	?>
-
-	<button class="tf_button" type="submit"><?php esc_html_e( $label ); ?></button>
-</div>
-	<?php
 }
 
 // Protected Pass
@@ -607,36 +374,6 @@ function tourfic_price_html( $price = null, $sale_price = null ) {
 	return ob_get_clean();
 }
 
-// return only raw price
-function tourfic_price_raw( $price = null, $sale_price = null ) {
-	if ( !$price ) {
-		return;
-	}
-
-	if ( $sale_price > 0 ) {
-		return $sale_price;
-	}
-
-	return $price;
-}
-
-// Sale tag
-function tourfic_sale_tag( $price = null, $sale_price = null ) {
-	if ( !$sale_price ) {
-		return;
-	}
-
-	$parsent = number_format((($price-$sale_price)/$price)*100,1);
-
-	ob_start();
-	?>
-	<?php if ( $sale_price > 0 ) { ?>
-		<div class="tf-sale-tag"><?php printf( esc_html( 'Save %s%% Today', 'tourfic' ), $parsent ); ?></div>
-	<?php } ?>
-	<?php
-	return ob_get_clean();
-}
-
 
 
 /**
@@ -662,58 +399,6 @@ function tourfic_fullwidth_container_end( $fullwidth ){
         <!-- Close Fullwidth Wrap -->
     <?php endif;
 }
-
-/**
- * Change Post Type Slug
- */
-function tourfic_change_tourfic_post_type_slug( $slug ){
-	
-    $hotel_slug = tfopt( 'post_type_slug' );
-	if ( isset( $hotel_slug ) && $hotel_slug != "" ) {
-		$slug = esc_attr( $hotel_slug );
-	}
-
-	return $slug;
-}
-add_filter( 'tourfic_post_type_slug', 'tourfic_change_tourfic_post_type_slug', 10, 1 );
-
-
-function tourfic_change_tour_post_type_slug($tour_slug ){
-	
-    $tour_slug = tfopt( 'tour_type_slug' );
-	if ( isset( $tour_slug ) && $tour_slug != "" ) {
-		$tour_slug = esc_attr( $tour_slug );
-	}
-
-	return $tour_slug; 
-}
-add_filter( 'tourfic_post_type_tour_slug', 'tourfic_change_tour_post_type_slug', 10, 1 );
-
-/**
- * Flush after redux save
- */
-function tourfic_flush_permalink( $value ){
-	flush_rewrite_rules();
-}
-add_action('csf_tfopt_saved', 'tourfic_flush_permalink' );
-
-
-/**
- *	Custom CSS function
- */
-function tourfic_custom_css(){
-	
-    $tf_custom_css =  tfopt( 'custom-css' );
-	$output = '';
-
-	//Custom css
-	if ( isset( $tf_custom_css ) ) {
-		$output .=  $tf_custom_css;
-	}
-
-	wp_add_inline_style( 'tourfic-styles', $output );
-}
-add_action( 'wp_enqueue_scripts', 'tourfic_custom_css', 200 );
 
 /**
  * Get AVG
@@ -1119,13 +804,13 @@ function tf_tours_excerpt_more( $more ) {
 add_filter( 'excerpt_more', 'tf_tours_excerpt_more' );
 
 /**
- * Filter the except length to 20 words.
+ * Filter the except length to 30 words.
  *
  * @param int $length Excerpt length.
  * @return int (Maybe) modified excerpt length.
  */
-function wpdocs_custom_excerpt_length( $length ) {
+function tf_custom_excerpt_length( $length ) {
 	if( 'tf_tours' === get_post_type())
     return 30;
 }
-add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
+add_filter( 'excerpt_length', 'tf_custom_excerpt_length', 999 );
