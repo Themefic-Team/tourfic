@@ -11,6 +11,12 @@ get_header();
 while ( have_posts() ) : the_post(); 
 
 /**
+ * Settings
+ */
+$s_share = !empty(tfopt('h-share')) ? tfopt('h-share') : '';
+$s_review = !empty(tfopt('h-review')) ? tfopt('h-review') : '';
+
+/**
  * Assign all values to variables
  * 
  */
@@ -97,8 +103,27 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                 <div class="tf_title-area">
                     <h2 class="tf_title"><?php the_title(); ?></h2>
                     <div class="tf_title-right">
-                        <a class="tf-wishlist-button" title="<?php _e('Click to toggle wishlist', 'tourfic'); ?>"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart" data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>"></i></a>
+                        <?php
+                        // Wishlist
+                        if(tfopt('wl-bt-for') && in_array('1', tfopt('wl-bt-for'))) {
+                            if ( is_user_logged_in() ) {
+                                if(tfopt('wl-for') && in_array('li', tfopt('wl-for'))) {
+                                ?>
+                                    <a class="tf-wishlist-button" title="<?php _e('Click to toggle wishlist', 'tourfic'); ?>"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart" data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if(tfopt('wl-page')) { echo 'data-page-title="' .get_the_title(tfopt('wl-page')). '" data-page-url="' .get_permalink(tfopt('wl-page')). '"'; } ?>></i></a>
+                                <?php
+                                }
+                            } else {
+                                if(tfopt('wl-for') && in_array('lo', tfopt('wl-for'))) {
+                                ?>
+                                    <a class="tf-wishlist-button" title="<?php _e('Click to toggle wishlist', 'tourfic'); ?>"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart" data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if(tfopt('wl-page')) { echo 'data-page-title="' .get_the_title(tfopt('wl-page')). '" data-page-url="' .get_permalink(tfopt('wl-page')). '"'; } ?>></i></a>
+                                <?php
+                                }
+                            }
+                        }
+                        ?>                          
                         &nbsp;
+                        <?php if($s_share && $s_share == '1') {} else { ?>
+                        <!-- Share Section -->
                         <div class="share-tour">
                             <a href="#dropdown_share_center" class="share-toggle"
                                 data-toggle="true"><?php echo tourfic_get_svg('share'); ?></a>
@@ -140,6 +165,9 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                                 </ul>
                             </div>
                         </div>
+                        <!-- End Share Section -->
+                        <?php } ?>
+
                         <?php if ($map["address"]) { ?>
                         <div class="show-on-map">
                             <a href="https://www.google.com/maps/search/<?php echo $map["address"]; ?>" target="_blank"
@@ -424,6 +452,7 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                 <!-- End FAQ -->
                 <?php } ?>
 
+                <?php if($s_review && $s_review == '1') {} else { ?>
                 <!-- Start Review Content -->
                 <div class="tf_contents reviews">
                     <div class="highlights-title">
@@ -435,6 +464,7 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
 					} ?>
                 </div>
                 <!-- End Review Content -->
+                <?php } ?>
 
                 <?php if ($tc) { ?>
                 <!-- Start TOC Content -->
@@ -454,95 +484,6 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
             </div>
             <!-- End Sidebar -->
         </div>
-
-        <?php 
-        $args = array(
-            'post_type' => 'tf_tours',
-            'post_status' => 'publish',
-            'posts_per_page' => 8, 
-            'orderby' => 'title', 
-            'order' => 'ASC',
-            'post__not_in' => array($post_id),
-            'tax_query' => array(
-                array(
-                    'taxonomy' => 'tour_destination',
-                    'field'    => 'slug',
-                    'terms'    => $first_destination_slug,
-                ),
-            ),
-        );
-        $tours = new WP_Query( $args );
-        if ($tours->have_posts()) {
-        ?>
-            <!-- tours suggestion section Start -->
-            <div class="tf-row">
-                <div class="tf-suggestion-content-wrapper">
-                    <div class="tf-suggestion-sec-head">
-                        <h2><?php echo __( 'You might also like','tourfic' ) ?></h2>
-                        <p><?php echo __('Travel is my life. Since 1999, I’ve been traveling around the world nonstop.
-                        If you also love travel, you’re in the right place!
-                        ','tourfic') ?></p>
-                    </div>
-                    <div class="tf-suggestion-items-wrapper">
-                        <?php
-                            while($tours->have_posts() ) {
-                                $tours->the_post();
-                                $post_id   = get_the_ID();
-                                $destinations = get_the_terms( $post_id, 'tour_destination' );
-                                $first_destination_name = $destinations[0]->name;
-
-                                $related_comments = get_comments( array( 'post_id' => $post_id ) );								
-                        ?>
-                        <div class="tf-suggestion-item" style="background-image: url(<?php echo get_the_post_thumbnail_url(get_the_ID(),'full') ?>);">
-                            <div class="tf-suggestion-content">
-                                <div class="tf-suggestion-desc">
-                                    <h3>
-                                        <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
-                                        <span><?php echo $first_destination_name; ?></span>
-                                    </h3>
-                                </div>
-                                <div class="tf-suggestion-rating">
-
-                                <?php 
-                                    if ($related_comments) {
-                                        foreach ($related_comments as $related_comment) {
-                                            $related_comment_meta = get_comment_meta( $related_comment->comment_ID, 'tf_comment_meta', true );
-                                            if ( $related_comment_meta ) {
-                                                foreach ( $related_comment_meta as $key => $value ) {
-                                                    $related_overall_rate[$key][] = $value ? $value : "5";
-                                                }
-                                            } else {
-                                                $related_overall_rate['review'][] = "5";
-                                                $related_overall_rate['sleep'][] = "5";
-                                                $related_overall_rate['location'][] = "5";
-                                                $related_overall_rate['services'][] = "5";
-                                                $related_overall_rate['cleanliness'][] = "5";
-                                                $related_overall_rate['rooms'][] = "5";
-                                            }
-                                            ?>
-                                            <div class="tf-suggestion-rating-star">
-                                                <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tourfic_avg_ratings($related_overall_rate['review']); ?></span>
-                                            </div>											
-                                        <?php 
-                                        }
-                                    } else {
-                                        echo '<div class="tf-suggestion-rating-star"><i class="fas fa-star"></i> <span style="color:#fff;">N/A</span></div>';
-                                    }
-                                ?>									
-                                    <div class="tf-suggestion-price">
-                                        <span><?php echo tf_tours_price_html();?></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php }	?>
-                    </div>
-                </div>
-            </div>
-            <!-- tours suggestion section end -->
-        <?php }
-        wp_reset_postdata();
-        ?>
 
     </div>
     <?php do_action( 'tf_after_container' ); ?>
