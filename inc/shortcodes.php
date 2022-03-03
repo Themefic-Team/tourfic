@@ -454,15 +454,15 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
         'post_status' => 'publish',
         'posts_per_page' => $max,
     );
+    $place_taxonomy = $post_type == 'tf_tours' ? 'tour_destination' : 'hotel_location';
     // 1st search on Destination taxonomy
-    $destinations = get_terms( array(
-        'taxonomy' => $taxonomy,
+    $destinations = new WP_Term_Query( array(
+        'taxonomy' => $place_taxonomy,
         'orderby' => 'name',
         'order' => 'ASC',
         'hide_empty' => 0, //can be 1, '1' too
         'hierarchical' => 0, //can be 1, '1' too
-        'name' => $search,
-        //'name__like' => '',
+        'slug' => sanitize_title($search, ''),
     ) );
 
     if ( $destinations ) {
@@ -561,8 +561,7 @@ function tourfic_trigger_filter_ajax(){
             'order' => 'ASC',
             'hide_empty' => 0, //can be 1, '1' too
             'hierarchical' => 0, //can be 1, '1' too
-            // 'search' => "$search",
-            'name' => "$search",
+            'slug' => sanitize_title($search, ''),
         ) );
 
         if ( $destinations ) {

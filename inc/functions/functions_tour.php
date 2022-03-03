@@ -190,7 +190,7 @@ if ( !function_exists( 'get_tour_destinations' ) ) {
         ) );
 
         foreach ( $destination_terms as $destination_term ) {
-            $destinations[] = $destination_term->name;
+            $destinations[$destination_term->slug] = $destination_term->name;
         }
 
         return $destinations;

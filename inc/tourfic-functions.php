@@ -919,7 +919,8 @@ function tf_hotel_search_form( $classes, $title, $subtitle ){
 					<span class="tf-label">Location:</span>
 					<div class="tf_form-inner tf-d-g">
 						<i class="fas fa-search"></i>
-						<input type="text" name="location" required="" id="location" class="" placeholder="Location" value="">
+						<input type="text" required="" id="location" class="" placeholder="Location" value="">
+                        <input type="hidden" name="location" class="tf-place-input">
 					</div>
 				</label>
 			</div>
@@ -1033,8 +1034,8 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 					<span class="tf-label">Location:</span>
 					<div class="tf_form-inner tf-d-g">
 						<i class="fas fa-search"></i>
-                        <input type="text" name="tour_destination" required="" id="tour_destination" class="" placeholder="Destination" value="">
-					</div>
+                        <input type="text" required id="tour_destination" class="" placeholder="Destination" value="">
+                        <input type="hidden" name="tour_destination" class="tf-place-input" required="" />                    </div>
 				</label>
 			</div>
 		</div>
@@ -1045,7 +1046,7 @@ function tourfic_search_widget_tour( $classes, $title, $subtitle ){
 			<span class="tf_person-icon">
 				<?php echo tourfic_get_svg('person'); ?>
 			</span>
-			<div class="adults-text">2 Adults</div>
+			<div class="adults-text">1 Adults</div>
 			<div class="person-sep"></div>
 			<div class="child-text">0 Children</div>
 			<div class="person-sep"></div>

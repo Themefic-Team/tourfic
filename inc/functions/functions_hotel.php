@@ -235,7 +235,7 @@ if ( !function_exists( 'get_hotel_locations' ) ) {
         ) );
 
         foreach ( $location_terms as $location_term ) {
-            $locations[] = $location_term->name;
+            $locations[$location_term->slug] = $location_term->name;
         }
 
         return $locations;
@@ -562,11 +562,14 @@ if ( isset( $_GET ) ) {
 $post_type = isset( $_GET['type'] ) ? $_GET['type'] : null;
 if(isset($post_type)){
    $id =  $post_type == 'tf_tours' ? 'tour_destination' : 'location';
+   $placeholder =  $post_type == 'tf_tours' ? 'Destination' : 'Location';
    $location = isset($_GET[$id]) ? $_GET[$id] : null;
    $adult = isset($_GET['adults']) ? $_GET['adults'] : 0;
    $children = isset($_GET['children']) ? $_GET['children'] : 0;
    $room = isset($_GET['room']) ? $_GET['room'] : 0;
    $date = isset($_GET['check-in-out-date']) ? $_GET['check-in-out-date'] : null;
+   $place_taxonomy = $post_type == 'tf_tours' ? 'tour_destination' : 'hotel_location';
+   $place_name = get_term_by( 'slug', $location , $place_taxonomy)->name;
 }
 ?>
 <!-- Start Booking widget -->
@@ -575,11 +578,11 @@ if(isset($post_type)){
 
     <div class="tf_form-row">
         <label class="tf_label-row">
-            <span class="tf-label">Enter Your Destination:</span>
             <div class="tf_form-inner">
                 <i class="fas fa-map-marker-alt"></i>
-                <input type="text" name="location" required="" id="<?php echo $id ?>" class="" placeholder="Destination"
-                    value="<?php echo $location ?>">
+                <input type="text" name="location" required=""  class="" placeholder="<?php echo $placeholder ??  "Enter Location" ?>" 
+                    value="<?php echo $place_name ?>">
+                    <input type="hidden" id="<?php echo $id ?>" value="<?php echo $location ?>"/>
             </div>
         </label>
     </div>
@@ -615,7 +618,7 @@ if(isset($post_type)){
             </div>
         </label>
     </div>
-
+<?php if ($post_type !== 'tf_tours') { ?>
     <div class="tf_form-row">
         <label class="tf_label-row">
             <div class="tf_form-inner">
@@ -630,11 +633,10 @@ if(isset($post_type)){
             </div>
         </label>
     </div>
-
+<?php } ?>
     <div class="tf_booking-dates">
         <div class="tf_form-row">
             <label class="tf_label-row">
-                <span class="tf-label">Check-in &amp; Check-out date</span>
                 <div class="tf_form-inner">
                     <i class="far fa-calendar-alt"></i>
                     <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"

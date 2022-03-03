@@ -697,22 +697,22 @@ function tourfic_autocomplete(inp, arr) {
         this.parentNode.appendChild(a);
         var $notfound = [];
         /*for each item in the array...*/
-        for (i = 0; i < arr.length; i++) {
-            /*check if the item starts with the same letters as the text field value:*/
-            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+        for (const [key, value] of Object.entries(arr)) {
+            if (value.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
                 $notfound.push('found');
-
                 /*create a DIV element for each matching element:*/
                 b = document.createElement("DIV");
                 /*make the matching letters bold:*/
-                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-                b.innerHTML += arr[i].substr(val.length);
+                b.innerHTML = "<strong>" + value.substr(0, val.length) + "</strong>";
+                b.innerHTML += value.substr(val.length);
                 /*insert a input field that will hold the current array item's value:*/
-                b.innerHTML += `<input type='hidden' value=" ${arr[i]}">`;
+                b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'> `;
                 /*execute a function when someone clicks on the item value (DIV element):*/
                 b.addEventListener("click", function (e) {
+                    let source = this.getElementsByTagName("input")[0];
                     /*insert the value for the autocomplete text field:*/
-                    inp.value = this.getElementsByTagName("input")[0].value;
+                    inp.value = source.value;
+                    inp.closest('input').nextElementSibling.value = source.dataset.slug
                     /*close the list of autocompleted values,
                     (or any other open lists of autocompleted values:*/
                     closeAllLists();
@@ -722,7 +722,7 @@ function tourfic_autocomplete(inp, arr) {
             } else {
                 $notfound.push('notfound');
             }
-        }
+          }
 
         if ($notfound.indexOf('found') == -1) {
             /*create a DIV element for each matching element:*/
