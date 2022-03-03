@@ -5,9 +5,11 @@ defined( 'ABSPATH' ) || exit;
 if ( class_exists( 'CSF' ) ) {
 
     // Global Settings
-    //if ( !is_plugin_active('tourfic-pro/tourfic-pro.php') ) {
+    if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
+        require_once TF_PRO_OPTIONS_PATH . 'global/settings.php';
+    } else {
         require_once TF_OPTIONS_PATH . 'global/settings.php';
-    //}
+    }
     
     /**
      * Post Type: tf_tours

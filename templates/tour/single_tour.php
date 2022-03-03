@@ -8,6 +8,12 @@ get_header();
 // Post query
 while ( have_posts() ) : the_post();
 
+/**
+ * Settings
+ */
+$s_related = !empty(tfopt('t-related')) ? tfopt('t-related') : '';
+$s_review = !empty(tfopt('t-review')) ? tfopt('t-review') : '';
+
 $post_id   = get_the_ID();
 
 // Get destination
@@ -78,7 +84,24 @@ $tf_overall_rate['review'] = null;
 				<div class="tf-hero-content-wrapper">
 					<div class="tf-hero-top-content" style="background-image: url(<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>);">
 						<div class="tf-hero-top-content-inner">
-							<span class="single-tour-wish-bt"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>"></i></span>
+							<?php
+							// Wishlist
+							if(tfopt('wl-bt-for') && in_array('2', tfopt('wl-bt-for'))) {
+								if ( is_user_logged_in() ) {
+									if(tfopt('wl-for') && in_array('li', tfopt('wl-for'))) {
+									?>
+										<span class="single-tour-wish-bt"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if(tfopt('wl-page')) { echo 'data-page-title="' .get_the_title(tfopt('wl-page')). '" data-page-url="' .get_permalink(tfopt('wl-page')). '"'; } ?>></i></span>
+									<?php
+									}
+								} else {
+									if(tfopt('wl-for') && in_array('lo', tfopt('wl-for'))) {
+									?>
+										<span class="single-tour-wish-bt"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if(tfopt('wl-page')) { echo 'data-page-title="' .get_the_title(tfopt('wl-page')). '" data-page-url="' .get_permalink(tfopt('wl-page')). '"'; } ?>></i></span>
+									<?php
+									}
+								}
+							}
+							?>
 								<h1><?php echo esc_html__( $hero_title, 'tourfic' ); ?></h1>
 								<!-- Start gallery -->
 								<div class="tf-tours_gallery-wrap">
@@ -351,6 +374,7 @@ $tf_overall_rate['review'] = null;
 	<?php endif; ?>
 	<!-- Terms and Conditions -->
 	
+	<?php if($s_related && $s_related == '1') {} else { ?>
 	<?php 
 	$args = array(
 		'post_type' => 'tf_tours',
@@ -443,7 +467,9 @@ $tf_overall_rate['review'] = null;
 	<?php }
 	wp_reset_postdata();
 	?>
+	<?php } ?>
 
+	<?php if($s_review && $s_review == '1') {} else { ?>
 	<!-- tours review section Start -->
 	<div class="tf-review-wrapper">
 		<div class="tf-container">
@@ -505,6 +531,8 @@ $tf_overall_rate['review'] = null;
 		</div>
 	</div>
 	<!-- tours suggestion section end -->
+	<?php } ?>
+
 	<?php do_action( 'tf_after_container' ); ?>
 </div>
 

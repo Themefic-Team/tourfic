@@ -607,6 +607,9 @@
                 type: targetNode.data('type'),
                 post: targetNode.data('id'),
             }
+            let wishPageTitle = targetNode.data('page-title');
+            let wishPageUrl = targetNode.data('page-url');
+
             /* For logged in user */
             if ($('body').hasClass('logged-in')) {
                 data.action = 'tf_add_to_wishlists';
@@ -615,7 +618,10 @@
                     function (data) {
                         if (data.success) {
                             wishIconFill(targetNode);
-                            notyf.success(data.data);
+                            notyf.success({
+                                message: data.data + '. <a class="wish-button" href="'+wishPageUrl+'">'+wishPageTitle+'</a>',
+                                duration: 4e3
+                            });
                         }
                     },
                 );
@@ -623,7 +629,10 @@
                 /* For guest */
                 if (addWish(data) === true) {
                     wishIconFill(targetNode);
-                    notyf.success('Item added to wishlist');
+                    notyf.success({
+                        message: 'Item added to wishlist. <a class="wish-button" href="'+wishPageUrl+'">'+wishPageTitle+'</a>',
+                        duration: 4e3
+                    });
                 } else notyf.error('Item not added to wishlist');
 
             }

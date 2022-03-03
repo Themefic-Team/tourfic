@@ -55,10 +55,10 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/responsive.css', null, '' );
 
 
-        wp_enqueue_style( 'daterangepicker', TF_ASSETS_URL . 'daterangepicker/daterangepicker.css', null, TOURFIC );
+        //wp_enqueue_style( 'daterangepicker', TF_ASSETS_URL . 'daterangepicker/daterangepicker.css', null, TOURFIC );
 
-        wp_enqueue_script( 'moment', TF_ASSETS_URL . 'daterangepicker/moment.min.js', array( 'jquery' ), TOURFIC, true );
-        wp_enqueue_script( 'daterangepicker', TF_ASSETS_URL . 'daterangepicker/daterangepicker.js', array( 'jquery' ), TOURFIC, true );
+        //wp_enqueue_script( 'moment', TF_ASSETS_URL . 'daterangepicker/moment.min.js', array( 'jquery' ), TOURFIC, true );
+        //wp_enqueue_script( 'daterangepicker', TF_ASSETS_URL . 'daterangepicker/daterangepicker.js', array( 'jquery' ), TOURFIC, true );
 
         wp_enqueue_script( 'tourfic-script', TF_ASSETS_URL . 'js/tourfic-script.js', array( 'jquery' ), '', true );
 

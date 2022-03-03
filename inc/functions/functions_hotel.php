@@ -53,7 +53,10 @@ function register_tf_hotel_post_type() {
 
     register_post_type( 'tf_hotel', apply_filters( 'tf_hotel_post_type_args', $hotel_args ) );
 }
-add_action( 'init', 'register_tf_hotel_post_type' );
+// Enable/disable check
+if(tfopt('disable-services') && in_array('hotel', tfopt('disable-services'))) {} else {
+    add_action( 'init', 'register_tf_hotel_post_type' );
+}
 
 /**
  * Get Default Labels

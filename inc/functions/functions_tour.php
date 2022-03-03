@@ -58,7 +58,10 @@ function register_tf_tours_post_type() {
 
     register_post_type( 'tf_tours', apply_filters( 'tf_tour_post_type_args', $tour_args ) );
 }
-add_action( 'init', 'register_tf_tours_post_type' );
+// Enable/disable check
+if(tfopt('disable-services') && in_array('tour', tfopt('disable-services'))) {} else {
+    add_action( 'init', 'register_tf_tours_post_type' );
+}
 
 /**
  * Get Default Labels
