@@ -405,7 +405,7 @@ add_shortcode('tf_search_form', 'tf_search_form_shortcode');
 /**
  * Search Result Shortcode Function
  */
-function tourfic_search_result_shortcode( $atts, $content = null ){
+function tf_search_result_shortcode( $atts, $content = null ){
     
     $relation = tfopt( 'search_relation', 'AND' );
 
@@ -523,7 +523,7 @@ function tourfic_search_result_shortcode( $atts, $content = null ){
     <?php wp_reset_postdata(); ?>
     <?php return ob_get_clean();
 }
-add_shortcode('tf_search_result', 'tourfic_search_result_shortcode');
+add_shortcode('tf_search_result', 'tf_search_result_shortcode');
 
 
 /**
