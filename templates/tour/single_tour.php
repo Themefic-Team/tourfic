@@ -49,8 +49,6 @@ $group_size = !empty($meta['group_size']) ? $meta['group_size'] : '';
 $language = !empty($meta['language']) ? $meta['language'] : '';
 
 $min_days = !empty($meta['min_days']) ? $meta['min_days'] : '';
-$external_booking = !empty($meta['external_booking']) ? $meta['external_booking'] : false;
-$external_booking_link = !empty($meta['external_booking_link']) ? $meta['external_booking_link'] : null;
 
 //$email = $meta['email'] ? $meta['email'] : null;
 //$phone = $meta['phone'] ? $meta['phone'] : null;
@@ -65,7 +63,6 @@ $itineraries = $meta['itinerary'] ? $meta['itinerary'] : null;
 $information = get_field('information') ? get_field('information') : null;
 $share_text = get_the_title();
 $share_link = esc_url( home_url("/?p=").get_the_ID() );
-$feature_meta = $meta['tour_feature'];
 
 $terms_and_conditions = $meta['terms_conditions'];
 $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $post->ID, 'tf_faqs', true ) : array();
