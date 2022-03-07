@@ -265,4 +265,22 @@ function tf_admin_role_caps() {
     }
 }
 add_action( 'admin_init', 'tf_admin_role_caps', 999 );
+
+/**
+ * Migrate data from v2.0.4 to v2.1.0
+ * 
+ * run once
+ */
+function tf_migrate_data() {
+    if ( get_option( 'tf_migrate_data_204' ) < 1 ) {
+ 
+		   global $wpdb;
+		   $wpdb->update( $wpdb->posts, ['post_type'=>'tf_hotel'] , ['post_type' => 'tourfic'] );
+		   $wpdb->update( $wpdb->term_taxonomy, ['taxonomy'=>'hotel_location'] , ['taxonomy' => 'destination'] );
+		   $wpdb->update( $wpdb->term_taxonomy, ['taxonomy'=>'hotel_feature'] , ['taxonomy' => 'tf_filters'] );
+ 
+       update_option( 'tf_migrate_data_204', 1 );
+	}
+}
+add_action( 'init', 'tf_migrate_data' );
 ?>
