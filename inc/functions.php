@@ -273,12 +273,130 @@ add_action( 'admin_init', 'tf_admin_role_caps', 999 );
  */
 function tf_migrate_data() {
     if ( get_option( 'tf_migrate_data_204' ) < 1 ) {
- 
-		   global $wpdb;
-		   $wpdb->update( $wpdb->posts, ['post_type'=>'tf_hotel'] , ['post_type' => 'tourfic'] );
-		   $wpdb->update( $wpdb->term_taxonomy, ['taxonomy'=>'hotel_location'] , ['taxonomy' => 'destination'] );
-		   $wpdb->update( $wpdb->term_taxonomy, ['taxonomy'=>'hotel_feature'] , ['taxonomy' => 'tf_filters'] );
- 
+
+        global $wpdb;
+        $wpdb->update($wpdb->posts, ['post_type' => 'tf_hotel'], ['post_type' => 'tourfic']);
+        $wpdb->update($wpdb->term_taxonomy, ['taxonomy' => 'hotel_location'], ['taxonomy' => 'destination']);
+        $wpdb->update($wpdb->term_taxonomy, ['taxonomy' => 'hotel_feature'], ['taxonomy' => 'tf_filters']);
+
+
+        /** Hotels Migrations */
+        $hotels = get_posts(['post_type'   => 'tf_hotel']);
+        foreach ($hotels as   $hotel) {
+            $old_meta = get_post_meta($hotel->ID);
+            $new_meta = [];
+            if (!empty($old_meta['formatted_location'])) {
+                $new_meta['location'] = $old_meta['formatted_location'];
+            }
+            if (!empty($old_meta['tf_gallery_ids'])) {
+                $new_meta['gallery_ids'] = $old_meta['tf_gallery_ids'];
+            }
+            if (!empty($old_meta['additional_information'])) {
+                $new_meta['highlights'] = $old_meta['additional_information'];
+            }
+            if (!empty($old_meta['terms_and_conditions'])) {
+                $new_meta['tc'] = $old_meta['terms_and_conditions'];
+            }
+            if (!empty($old_meta['send_email_to'])) {
+                $new_meta['c-email'] = $old_meta['send_email_to'][0];
+            }
+            if (!empty($old_meta['tf_room'])) {
+                $rooms =  unserialize($old_meta['tf_room'][0]);
+                foreach ($rooms as $room) {
+                    $new_meta['room'][] = [
+                        "enable" => "1",
+                        "title" => $room['name'],
+                        "adult" => $room['pax'],
+                        "description" => $room['short_desc'],
+                        "pricing-by" => "1",
+                        "price" => $room['sale_price'] ?? $room['price'],
+                    ];
+                }
+            }
+
+            if (!empty($old_meta['tf_faqs'])) {
+                $faqs = unserialize($old_meta['tf_faqs'][0]);
+                foreach ($faqs as  $faq) {
+                    $new_meta['faq'][] = [
+                        'title' => $faq['name'],
+                        'description' => $faq['desc'],
+                    ];
+                }
+            }
+
+            update_post_meta(
+                $hotel->ID,
+                'tf_hotel',
+                $new_meta
+            );
+        }
+
+        /** Hotels Location Taxonomy Migration */
+        $hotel_locations = get_terms([
+            'taxonomy' => 'hotel_location',
+            'hide_empty' => false,
+        ]);
+
+        foreach ($hotel_locations as $hotel_location) {
+
+            $old_locations_meta = get_term_meta(
+                $hotel_location->term_id,
+                'category-image-id',
+                true
+            );
+            $new_meta = [
+                "image" => [
+                    "url" => wp_get_attachment_url($old_locations_meta),
+                    "id" => $old_locations_meta,
+                    "width" => "1920",
+                    "height" => "1080",
+                    "thumbnail" => wp_get_attachment_thumb_url($old_locations_meta),
+                    "alt" => "",
+                    "title" => "",
+                    "description" => ""
+                ]
+            ];
+            // If the meta field for the term does not exist, it will be added.
+            update_term_meta(
+                $hotel_location->term_id,
+                "hotel_location",
+                $new_meta
+            );
+        }
+        /** Tour Destinations Image Fix */
+        $tour_destinations = get_terms([
+            'taxonomy' => 'tour_destination',
+            'hide_empty' => false,
+        ]);
+
+        foreach ($tour_destinations as  $tour_destination) {
+            $old_term_metadata =  get_term_meta($tour_destination->term_id, 'tour_destination_meta', true)['tour_destination_meta'] ?? null;
+            if (!empty($old_term_metadata)) {
+                $image_id = attachment_url_to_postid($old_term_metadata);
+                $new_meta = [
+                    "image" => [
+                        "url" => wp_get_attachment_url($image_id),
+                        "id" => $image_id,
+                        "width" => "1920",
+                        "height" => "1080",
+                        "thumbnail" => wp_get_attachment_thumb_url($image_id),
+                        "alt" => "",
+                        "title" => "",
+                        "description" => ""
+                    ]
+                ];
+                // If the meta field for the term does not exist, it will be added.
+                update_term_meta(
+                    $tour_destination->term_id,
+                    "tour_destination",
+                    $new_meta
+                );
+            }
+        }
+
+
+
+        flush_rewrite_rules(true);
        update_option( 'tf_migrate_data_204', 1 );
 	}
 }
