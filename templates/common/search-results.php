@@ -11,7 +11,7 @@
 
 			<!-- Start Sidebar -->
 			<div class="tf_sidebar">
-				<?php tourfic_get_sidebar( 'archive' ); ?>
+				<?php tf_search_result_sidebar_form( 'archive' ); ?>
 			</div>
 			<!-- End Sidebar -->
 		</div>

@@ -3092,9 +3092,9 @@ form.tf_tours_booking .tf_selectperson-wrap {
 }
 
 .tf-archive-shortdesc {
-  white-space: break-spaces;
   line-height: 1.8;
   margin: 10px 0 15px;
+  text-align: justify;
 }
 
 .tourfic-wrap .tf-archive-desc {

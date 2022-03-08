@@ -1,12 +1,12 @@
 <?php
 /**
- * Template: Tour Destination Archive
+ * Template: Hotel Location Archive
  */
 
 get_header();
 
 $term = get_queried_object();
-$post_type = 'tf_tours';
+$post_type = 'tf_hotel';
 $taxonomy = $term->taxonomy;
 $taxonomy_name = $term->name;
 $taxonomy_slug = $term->slug;
@@ -32,4 +32,4 @@ $max = '8';
 	<?php do_action( 'tf_after_container' ); ?>
 </div>
 <?php
-get_footer('tourfic');
+get_footer();

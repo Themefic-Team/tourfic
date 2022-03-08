@@ -3,26 +3,51 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Helper Functions
+ */
+if ( file_exists( TF_INC_PATH . 'functions/functions-helper.php' ) ) {
+    require_once TF_INC_PATH . 'functions/functions-helper.php';
+} else {
+    tf_file_missing('functions-helper.php');
+}
+
+/**
  * Hotel Functions
  */
-require_once TF_INC_PATH . 'functions/functions_hotel.php';
+if ( file_exists( TF_INC_PATH . 'functions/functions_hotel.php' ) ) {
+    require_once TF_INC_PATH . 'functions/functions_hotel.php';
+} else {
+    tf_file_missing('functions/functions_hotel.php');
+}
 
 /**
  * Tour Functions
  */
-require_once TF_INC_PATH . 'functions/functions_tour.php';
+if ( file_exists( TF_INC_PATH . 'functions/functions_tour.php' ) ) {
+    require_once TF_INC_PATH . 'functions/functions_tour.php';
+} else {
+    tf_file_missing('functions/functions_tour.php');
+}
 
 /**
  * Wishlist Functions
  */
-require_once TF_INC_PATH . 'functions/functions_wishlist.php';
+if ( file_exists( TF_INC_PATH . 'functions/functions_wishlist.php' ) ) {
+    require_once TF_INC_PATH . 'functions/functions_wishlist.php';
+} else {
+    tf_file_missing('functions/functions_wishlist.php');
+}
 
 /**
  * Including CSS & JS
  * 
  * @since 1.0
  */
-require_once TF_INC_PATH . 'enqueues.php';
+if ( file_exists( TF_INC_PATH . 'enqueues.php' ) ) {
+    require_once TF_INC_PATH . 'enqueues.php';
+} else {
+    tf_file_missing('enqueues.php');
+}
 
 /**
  * Necessary Image Sizes
@@ -201,7 +226,7 @@ add_filter( 'template_include', 'taxonomy_template' );
 function taxonomy_template( $template ) {
 
     if ( is_tax( 'hotel_location' ) ) {
-        $template = TF_TEMPLATE_PATH . 'hotel/taxonomy_hotel-destinations.php';
+        $template = TF_TEMPLATE_PATH . 'hotel/taxonomy-hotel_locations.php';
     }
     if ( is_tax( 'tour_destination' ) ) {
         $template = TF_TEMPLATE_PATH . 'tour/taxonomy_tour-destinations.php';
@@ -265,6 +290,256 @@ function tf_admin_role_caps() {
     }
 }
 add_action( 'admin_init', 'tf_admin_role_caps', 999 );
+
+/**
+ * Search Result Sidebar form
+ */
+function tf_search_result_sidebar_form( $placement = 'single' ) { ?>
+    <?php
+    /**
+     * Populate search form from url
+     * @author KK
+     */
+     // Unwanted Slashes Remove
+    if ( isset( $_GET ) ) {
+        $_GET = array_map( 'stripslashes_deep', $_GET );
+    } 
+    $post_type = isset( $_GET['type'] ) ? $_GET['type'] : null;
+    if(isset($post_type)){
+       $id = $post_type == 'tf_tours' ? 'tour_destination' : 'location';
+       $placeholder =  $post_type == 'tf_tours' ? 'Destination' : 'Location';
+       $location = isset($_GET[$id]) ? $_GET[$id] : null;
+       $adult = isset($_GET['adults']) ? $_GET['adults'] : 0;
+       $children = isset($_GET['children']) ? $_GET['children'] : 0;
+       $room = isset($_GET['room']) ? $_GET['room'] : 0;
+       $date = isset($_GET['check-in-out-date']) ? $_GET['check-in-out-date'] : null;
+       $place_taxonomy = $post_type == 'tf_tours' ? 'tour_destination' : 'hotel_location';
+       $place_name = get_term_by( 'slug', $location , $place_taxonomy)->name;
+    }
+    ?>
+    <!-- Start Booking widget -->
+    <form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
+        action="<?php echo tf_booking_search_action(); ?>" id="tf-widget-booking-search">
+    
+        <div class="tf_form-row">
+            <label class="tf_label-row">
+                <div class="tf_form-inner">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" name="location" required=""  class="" placeholder="<?php echo $placeholder ??  "Enter Location" ?>" 
+                        value="<?php echo $place_name; ?>">
+                        <input type="hidden" id="<?php echo $id; ?>" value="<?php echo $location; ?>"/>
+                </div>
+            </label>
+        </div>
+    
+        <div class="tf_form-row">
+            <label class="tf_label-row">
+                <div class="tf_form-inner">
+                    <i class="fas fa-user-friends"></i>
+                    <select name="adults" id="adults" class="">
+                        <option <?php echo 1 == $adult ? 'selected' : null ?> value="1">1 adult</option>
+                        <?php foreach (range(2,6) as $value) {
+                            $selected = $value == $adult ? 'selected' : null;
+                            echo "<option $selected value='$value'>$value adults</option>";
+                        } ?>                   
+                    </select>
+                </div>
+            </label>
+        </div>
+    
+        <div class="tf_form-row">
+            <label class="tf_label-row">
+                <div class="tf_form-inner">
+                    <i class="fas fa-child"></i>
+                    <select name="children" id="children" class="">
+                        <option value="0">0 child</option>
+                        <option <?php echo 1 == $children ? 'selected' : null ?> value="1">1 child</option>
+                        <?php foreach (range(2,5) as $value) {
+                            $selected = $value == $children ? 'selected' : null;
+                            echo "<option $selected value='$value'>$value children</option>";
+                        } ?> 
+                      
+                    </select>
+                </div>
+            </label>
+        </div>
+    <?php if ($post_type !== 'tf_tours') { ?>
+        <div class="tf_form-row">
+            <label class="tf_label-row">
+                <div class="tf_form-inner">
+                    <i class="fas fa-couch"></i>
+                    <select name="room" id="room" class="">
+                        <option <?php echo 1 == $room ? 'selected' : null ?> value="1">1 room</option>
+                        <?php foreach (range(2,5) as $value) {
+                            $selected = $value == $room ? 'selected' : null;
+                            echo "<option $selected value='$value'>$value rooms</option>";
+                        } ?>                   
+                    </select>
+                </div>
+            </label>
+        </div>
+    <?php } ?>
+        <div class="tf_booking-dates">
+            <div class="tf_form-row">
+                <label class="tf_label-row">
+                    <div class="tf_form-inner">
+                        <i class="far fa-calendar-alt"></i>
+                        <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
+                            placeholder="Select Date" required value="<?php echo $date ?>">
+                    </div>
+                </label>
+            </div>
+        </div>
+    
+        <div class="tf_form-row">
+            <?php
+                    $ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
+                ?>
+            <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type" />
+            <button class="tf_button tf-submit"
+                type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' );?></button>
+        </div>
+    
+    </form>
+    
+    <script>
+    (function($) {
+        $(document).ready(function() {
+    
+            $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
+                enableTime: false,
+                mode: "range",
+            });
+    
+        });
+    })(jQuery);
+    </script>
+    
+    <?php if ( $placement == 'single' ) { ?>
+    <?php if ( is_active_sidebar( 'tf_single_booking_sidebar' ) ) { ?>
+    <div id="tf__booking_sidebar">
+        <?php dynamic_sidebar( 'tf_single_booking_sidebar' ); ?>
+        <br>
+    </div>
+    <?php } ?>
+    <?php } else { ?>
+    <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
+    <div id="tf__booking_sidebar">
+        <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
+        <br>
+    </div>
+    <?php } ?>
+    <?php } ?>
+    
+    <?php
+    }
+
+/**
+ * Archive Sidebar Search Form
+ */
+function tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug) {
+    $taxonomy_type = $post_type == 'tf_tours' ? 'tour_destination' : 'location';
+    ?>
+
+    <form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
+        action="<?php echo tf_booking_search_action(); ?>">
+    
+        <div class="tf_form-row">
+            <label class="tf_label-row">
+                <div class="tf_form-inner">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" required=""  class="" placeholder="<?php echo $placeholder ??  "Enter Location" ?>" 
+                        value="<?php echo $taxonomy_name; ?>">
+                    <input type="hidden" name="location" id="<?php echo $taxonomy_type; ?>" value="<?php echo $taxonomy_slug; ?>"/>
+                </div>
+            </label>
+        </div>
+    
+        <div class="tf_form-row">
+            <label class="tf_label-row">
+                <div class="tf_form-inner">
+                    <i class="fas fa-user-friends"></i>
+                    <select name="adults" id="adults" class="">
+                        <option value="1">1 adult</option>
+                        <?php foreach (range(2,6) as $value) {                      
+                            echo "<option value='$value'>$value adults</option>";
+                        } ?>                   
+                    </select>
+                </div>
+            </label>
+        </div>
+    
+        <div class="tf_form-row">
+            <label class="tf_label-row">
+                <div class="tf_form-inner">
+                    <i class="fas fa-child"></i>
+                    <select name="children" id="children" class="">
+                        <option value="0">0 child</option>
+                        <option value="1">1 child</option>
+                        <?php foreach (range(2,5) as $value) {                          
+                            echo "<option value='$value'>$value children</option>";
+                        } ?> 
+                      
+                    </select>
+                </div>
+            </label>
+        </div>
+    <?php if ($post_type !== 'tf_tours') { ?>
+        <div class="tf_form-row">
+            <label class="tf_label-row">
+                <div class="tf_form-inner">
+                    <i class="fas fa-couch"></i>
+                    <select name="room" id="room" class="">
+                        <option value="1">1 room</option>
+                        <?php foreach (range(2,5) as $value) {
+                            echo "<option value='$value'>$value rooms</option>";
+                        } ?>                   
+                    </select>
+                </div>
+            </label>
+        </div>
+    <?php } ?>
+        <div class="tf_booking-dates">
+            <div class="tf_form-row">
+                <label class="tf_label-row">
+                    <div class="tf_form-inner">
+                        <i class="far fa-calendar-alt"></i>
+                        <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
+                            placeholder="Select Date" required value="">
+                    </div>
+                </label>
+            </div>
+        </div>
+    
+        <div class="tf_form-row">
+            <input type="hidden" name="type" value="<?php echo $post_type; ?>" class="tf-post-type" />
+            <button class="tf_button tf-submit"
+                type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' );?></button>
+        </div>
+    
+    </form>
+    
+    <script>
+    (function($) {
+        $(document).ready(function() {
+    
+            $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
+                enableTime: false,
+                mode: "range",
+            });
+    
+        });
+    })(jQuery);
+    </script>
+    
+    <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
+        <div id="tf__booking_sidebar">
+            <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
+            <br>
+        </div>
+    <?php
+    }
+}
 
 /**
  * Migrate data from v2.0.4 to v2.1.0

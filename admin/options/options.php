@@ -22,9 +22,6 @@ if ( class_exists( 'CSF' ) ) {
     }
 
     // Taxonomy: Tour Feature
-    if ( !is_plugin_active('tourfic-pro/tourfic-pro.php') ) {
-        require_once TF_OPTIONS_PATH . 'tour/taxonomy-tour_features.php';
-    }
     require_once TF_OPTIONS_PATH . 'tour/taxonomy-tour_destination.php';
 
     /**
