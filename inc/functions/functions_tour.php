@@ -1,6 +1,10 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
+#################################
+# Custom post types, taxonomies #
+#################################
+
 /**
  * Register post type: tf_tours
  * 
@@ -162,6 +166,10 @@ function tf_tours_taxonomies_register() {
 }
 add_action( 'init', 'tf_tours_taxonomies_register' );
 
+###############################################
+# Functions related to post types, taxonomies #
+###############################################
+
 /**
  * Flushing Rewrite on Tourfic Activation
  * 
@@ -201,6 +209,124 @@ if ( !function_exists( 'get_tour_destinations' ) ) {
     }
 }
 
+#################################
+# All the forms                 #
+# Search form, booking form     #
+#################################
+
+/**
+ * Tour Search form
+ * 
+ * Horizontal
+ * 
+ * Called in shortcodes
+ */
+if ( !function_exists('tf_tour_search_form_horizontal') ) {
+    function tf_tour_search_form_horizontal( $classes, $title, $subtitle ){
+        ?>
+        <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
+
+        <?php if( $title ): ?>
+            <div class="tf_widget-title"><h2><?php esc_html_e( $title ); ?></h2></div>
+        <?php endif; ?>
+
+        <?php if( $subtitle ): ?>
+            <div class="tf_widget-subtitle"><?php esc_html_e( $subtitle ); ?></div>
+        <?php endif; ?>
+    <div class="tf_homepage-booking">
+        <div class="tf_destination-wrap">
+            <div class="tf_input-inner">
+            <div class="tf_form-row">
+                    <label class="tf_label-row">
+                        <span class="tf-label">Destination:</span>
+                        <div class="tf_form-inner tf-d-g">
+                            <i class="fas fa-search"></i>
+                            <input type="text" required id="tour_destination" class="" placeholder="Destination" value="">
+                            <input type="hidden" name="tour_destination" class="tf-place-input" required="" />                    </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="tf_selectperson-wrap">
+            <div class="tf_input-inner">
+                <span class="tf_person-icon">
+                    <?php echo tourfic_get_svg('person'); ?>
+                </span>
+                <div class="adults-text">1 Adults</div>
+                <div class="person-sep"></div>
+                <div class="child-text">0 Children</div>
+                <div class="person-sep"></div>
+                <div class="infant-text">0 Infant</div>
+            </div>
+            <div class="tf_acrselection-wrap">
+                <div class="tf_acrselection-inner">
+                    <div class="tf_acrselection">
+                        <div class="acr-label">Adults</div>
+                        <div class="acr-select">
+                            <div class="acr-dec">-</div>
+                                <input type="number" name="adults" id="adults" min="1" value="1">
+                            <div class="acr-inc">+</div>
+                        </div>
+                    </div>
+                    <div class="tf_acrselection">
+                        <div class="acr-label">Children</div>
+                        <div class="acr-select">
+                            <div class="acr-dec">-</div>
+                                <input type="number" name="children" id="children" min="0" value="0">
+                            <div class="acr-inc">+</div>
+                        </div>
+                    </div>
+                    <div class="tf_acrselection">
+                        <div class="acr-label">Infant</div>
+                        <div class="acr-select">
+                            <div class="acr-dec">-</div>
+                                <input type="number" name="infant" id="infant" min="0" value="0">
+                            <div class="acr-inc">+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tf_selectdate-wrap">
+        <!-- @KK Merged two inputs into one  -->
+        <div class="tf_input-inner">
+            <label class="tf_label-row">
+                        <span class="tf-label">Check-in & Check-out date</span>
+                        <div class="tf_form-inner tf-d-g">
+                            <i class="far fa-calendar-alt"></i>
+                            <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="Select Date">
+                        </div>
+                    </label>
+            </div>
+        </div>
+
+        <div class="tf_submit-wrap">
+            <input type="hidden" name="type" value="tf_tours" class="tf-post-type"/>
+            <button class="tf_button tf-submit tf-tours-btn" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
+        </div>
+
+    </div>
+
+    </form>
+    <script>
+    (function($) {
+        $(document).ready(function() {
+
+            $(".tf_booking-widget #check-in-out-date").flatpickr({
+                enableTime: false,
+                mode: "range",
+                dateFormat: "Y/m/d",
+                allowInput: true,
+            });
+
+        });
+    })(jQuery);
+    </script>
+    <?php
+    }
+}
 
 /**
  * Single Tour Booking Bar
@@ -474,6 +600,9 @@ function tf_single_tour_booking_form( $post_id ) {
 return ob_get_clean();
 }
 
+#################################
+# WooCommerce integration       #
+#################################
 /**
  * WooCommerce Tour Functions
  * 

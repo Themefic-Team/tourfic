@@ -58,7 +58,7 @@ if( $discount_type == 'percent' ){
 
 			<!-- Start Sidebar -->
 			<div class="tf_sidebar">
-				<?php tourfic_get_sidebar( 'archive' ); ?>
+				<?php tf_archive_sidebar_search_form(); ?>
 			</div>
 			<!-- End Sidebar -->
 		</div>

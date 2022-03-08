@@ -2,6 +2,12 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+#################################
+# Custom post types, taxonomies #
+#################################
+/**
+ * Register tf_hotel
+ */
 function register_tf_hotel_post_type() {
 
     $hotel_slug = !empty(get_option( 'hotel_slug' )) ? get_option( 'hotel_slug' ) : apply_filters( 'tf_hotel_slug', 'hotels' );
@@ -99,12 +105,12 @@ function tf_hotel_plural_label( $lowercase = false ) {
 /**
  * Register taxonomies for tf_hotel
  * 
- * tour_destination
+ * hotel_location, hotel_feature
  */
 function tf_hotel_taxonomies_register() {
 
     /**
-     * Taxonomy: tour_destination.
+     * Taxonomy: hotel_location
      */
     $hotel_location_slug = apply_filters( 'hotel_location_slug', 'hotel-location' );
 
@@ -207,6 +213,10 @@ function tf_hotel_taxonomies_register() {
 }
 add_action( 'init', 'tf_hotel_taxonomies_register' );
 
+###############################################
+# Functions related to post types, taxonomies #
+###############################################
+
 /**
  * Flushing Rewrite on Tourfic Activation
  * 
@@ -223,9 +233,9 @@ function tf_hotel_rewrite_flush() {
 register_activation_hook( TF_PATH . 'tourfic.php', 'tf_hotel_rewrite_flush' );
 
 /**
- * Get Hotel Destinations
+ * Get Hotel Locations
  * 
- * {taxonomy-hotel_destination}
+ * {taxonomy-hotel_location}
  */
 if ( !function_exists( 'get_hotel_locations' ) ) {
     function get_hotel_locations() {
@@ -245,107 +255,9 @@ if ( !function_exists( 'get_hotel_locations' ) ) {
     }
 }
 
-/**
- * Single Hotel Sidebar Booking Form
- */
-function tf_hotel_sidebar_booking_form( $placement = 'single' ) { ?>
-
-<!-- Start Booking widget -->
-<form id="tf-single-hotel-avail" class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off">
-
-    <?php wp_nonce_field( 'check_room_avail_nonce', 'tf_room_avail_nonce' ); ?>
-
-    <div class="tf_form-row">
-        <label class="tf_label-row">
-            <div class="tf_form-inner">
-                <i class="fas fa-user-friends"></i>
-                <select name="adults" id="adults" class="">
-                    <option value="1">1 adult</option>
-                    <option value="2">2 adults</option>
-                    <option value="3">3 adults</option>
-                    <option value="4">4 adults</option>
-                    <option value="5">5 adults</option>
-                    <option value="6">6 adults</option>
-                </select>
-            </div>
-        </label>
-    </div>
-
-    <div class="tf_form-row">
-        <label class="tf_label-row">
-            <div class="tf_form-inner">
-                <i class="fas fa-child"></i>
-                <select name="children" id="children" class="">
-                    <option value="0">0 child</option>
-                    <option value="1">1 child</option>
-                    <option value="2">2 childrens</option>
-                    <option value="3">3 childrens</option>
-                    <option value="4">4 childrens</option>
-                    <option value="5">5 childrens</option>
-                </select>
-            </div>
-        </label>
-    </div>
-
-    <div class="tf_booking-dates">
-        <div class="tf_form-row">
-            <label class="tf_label-row">
-                <span class="tf-label">Check-in &amp; Check-out date</span>
-                <div class="tf_form-inner">
-                    <i class="far fa-calendar-alt"></i>
-                    <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                        placeholder="Select Date" required>
-                </div>
-            </label>
-        </div>
-    </div>
-
-    <div class="tf_form-row">
-        <?php
-				$ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
-			?>
-        <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type" />
-        <input type="hidden" name="post_id" value="<?php echo get_the_ID(); ?>" />
-        <button class="tf_button tf-submit"
-            type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' );?></button>
-    </div>
-
-</form>
-
-<script>
-(function($) {
-    $(document).ready(function() {
-
-        $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
-            enableTime: false,
-            mode: "range",
-            dateFormat: "Y/m/d",
-            allowInput: true,
-        });
-
-    });
-})(jQuery);
-</script>
-
-<?php if ( $placement == 'single' ) { ?>
-<?php if ( is_active_sidebar( 'tf_single_booking_sidebar' ) ) { ?>
-<div id="tf__booking_sidebar">
-    <?php dynamic_sidebar( 'tf_single_booking_sidebar' ); ?>
-    <br>
-</div>
-<?php } ?>
-<?php } else { ?>
-<?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
-<div id="tf__booking_sidebar">
-    <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
-    <br>
-</div>
-<?php } ?>
-<?php } ?>
-
-<?php
-}
-
+#################################
+# Ajax functions                #
+#################################
 /**
  * Ajax hotel room availability
  * 
@@ -548,150 +460,344 @@ function tf_room_availability_callback() {
     wp_die();
 }
 
+#################################
+# All the forms                 #
+# Search form, booking form     #
+#################################
 
 /**
- * Archive Hotel Sidebar Booking Form
+ * Hotel Search form
+ * 
+ * Horizontal
+ * 
+ * Called in shortcodes
  */
-function tourfic_get_sidebar( $placement = 'single' ) { ?>
-<?php
-/**
- * Populate search form from url
- * @author KK
- */
- // Unwanted Slashes Remove
-if ( isset( $_GET ) ) {
-    $_GET = array_map( 'stripslashes_deep', $_GET );
-} 
-$post_type = isset( $_GET['type'] ) ? $_GET['type'] : null;
-if(isset($post_type)){
-   $id =  $post_type == 'tf_tours' ? 'tour_destination' : 'location';
-   $placeholder =  $post_type == 'tf_tours' ? 'Destination' : 'Location';
-   $location = isset($_GET[$id]) ? $_GET[$id] : null;
-   $adult = isset($_GET['adults']) ? $_GET['adults'] : 0;
-   $children = isset($_GET['children']) ? $_GET['children'] : 0;
-   $room = isset($_GET['room']) ? $_GET['room'] : 0;
-   $date = isset($_GET['check-in-out-date']) ? $_GET['check-in-out-date'] : null;
-   $place_taxonomy = $post_type == 'tf_tours' ? 'tour_destination' : 'hotel_location';
-   $place_name = get_term_by( 'slug', $location , $place_taxonomy)->name;
+if ( !function_exists('tf_hotel_search_form_horizontal') ) {
+    function tf_hotel_search_form_horizontal( $classes, $title, $subtitle ){
+        ?>
+        <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
+
+        <?php if( $title ): ?>
+            <div class="tf_widget-title"><h2><?php esc_html_e( $title ); ?></h2></div>
+        <?php endif; ?>
+
+        <?php if( $subtitle ): ?>
+            <div class="tf_widget-subtitle"><?php esc_html_e( $subtitle ); ?></div>
+        <?php endif; ?>
+
+
+    <div class="tf_homepage-booking">
+        <div class="tf_destination-wrap">
+            <div class="tf_input-inner">
+                <div class="tf_form-row">
+                    <label class="tf_label-row">
+                        <span class="tf-label">Location:</span>
+                        <div class="tf_form-inner tf-d-g">
+                            <i class="fas fa-search"></i>
+                            <input type="text" required="" id="location" class="" placeholder="Location" value="">
+                            <input type="hidden" name="location" class="tf-place-input">
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="tf_selectperson-wrap">
+
+            <div class="tf_input-inner">
+                <span class="tf_person-icon">
+                    <?php echo tourfic_get_svg('person'); ?>
+                </span>
+                <div class="adults-text">0 Adults</div>
+                <div class="person-sep"></div>
+                <div class="child-text">0 Children</div>
+                <div class="person-sep"></div>
+                <div class="room-text">0 Room</div>
+            </div>
+
+            <div class="tf_acrselection-wrap">
+                <div class="tf_acrselection-inner">
+                    <div class="tf_acrselection">
+                        <div class="acr-label">Adults</div>
+                        <div class="acr-select">
+                            <div class="acr-dec">-</div>
+                            <input type="number" name="adults" id="adults" min="0" value="0">
+                            <div class="acr-inc">+</div>
+                        </div>
+                    </div>
+                    <div class="tf_acrselection">
+                        <div class="acr-label">Children</div>
+                        <div class="acr-select">
+                            <div class="acr-dec">-</div>
+                            <input type="number" name="children" id="children" min="0" value="0">
+                            <div class="acr-inc">+</div>
+                        </div>
+                    </div>
+                    <div class="tf_acrselection">
+                        <div class="acr-label">Rooms</div>
+                        <div class="acr-select">
+                            <div class="acr-dec">-</div>
+                            <input type="number" name="room" id="room" min="0" value="0">
+                            <div class="acr-inc">+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="tf_selectdate-wrap">
+            <div class="tf_input-inner">
+                <div class="tf_form-row">
+                    <label class="tf_label-row">
+                        <span class="tf-label">Check-in & Check-out date</span>
+                        <div class="tf_form-inner tf-d-g">
+                            <i class="far fa-calendar-alt"></i>
+                            <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="Select Date">
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="tf_submit-wrap">
+            <input type="hidden" name="type" value="tf_hotel" class="tf-post-type"/>		
+            <button class="tf_button tf-submit" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
+        </div>
+
+    </div>
+
+    </form>
+
+    <script>
+    (function($) {
+        $(document).ready(function() {
+
+            $(".tf_booking-widget #check-in-out-date").flatpickr({
+                enableTime: false,
+                mode: "range",
+                dateFormat: "Y/m/d",
+                allowInput: true,
+            });
+
+        });
+    })(jQuery);
+    </script>
+    <?php
+    }
 }
-?>
-<!-- Start Booking widget -->
-<form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
-    action="<?php echo tourfic_booking_search_action(); ?>" id="tf-widget-booking-search">
 
-    <div class="tf_form-row">
-        <label class="tf_label-row">
-            <div class="tf_form-inner">
-                <i class="fas fa-map-marker-alt"></i>
-                <input type="text" name="location" required=""  class="" placeholder="<?php echo $placeholder ??  "Enter Location" ?>" 
-                    value="<?php echo $place_name ?>">
-                    <input type="hidden" id="<?php echo $id ?>" value="<?php echo $location ?>"/>
-            </div>
-        </label>
-    </div>
+/**
+ * Single Hotel Sidebar Booking Form
+ */
+function tf_hotel_sidebar_booking_form( $placement = 'single' ) { ?>
 
-    <div class="tf_form-row">
-        <label class="tf_label-row">
-            <div class="tf_form-inner">
-                <i class="fas fa-user-friends"></i>
-                <select name="adults" id="adults" class="">
-                    <option <?php echo 1 == $adult ? 'selected' : null ?> value="1">1 adult</option>
-                    <?php foreach (range(2,6) as $value) {
-                        $selected = $value == $adult ? 'selected' : null;
-                        echo "<option $selected value='$value'>$value adults</option>";
-                    } ?>                   
-                </select>
-            </div>
-        </label>
-    </div>
-
-    <div class="tf_form-row">
-        <label class="tf_label-row">
-            <div class="tf_form-inner">
-                <i class="fas fa-child"></i>
-                <select name="children" id="children" class="">
-                    <option value="0">0 child</option>
-                    <option <?php echo 1 == $children ? 'selected' : null ?> value="1">1 child</option>
-                    <?php foreach (range(2,5) as $value) {
-                        $selected = $value == $children ? 'selected' : null;
-                        echo "<option $selected value='$value'>$value children</option>";
-                    } ?> 
-                  
-                </select>
-            </div>
-        </label>
-    </div>
-<?php if ($post_type !== 'tf_tours') { ?>
-    <div class="tf_form-row">
-        <label class="tf_label-row">
-            <div class="tf_form-inner">
-                <i class="fas fa-couch"></i>
-                <select name="room" id="room" class="">
-                    <option <?php echo 1 == $room ? 'selected' : null ?> value="1">1 room</option>
-                    <?php foreach (range(2,5) as $value) {
-                        $selected = $value == $room ? 'selected' : null;
-                        echo "<option $selected value='$value'>$value rooms</option>";
-                    } ?>                   
-                </select>
-            </div>
-        </label>
-    </div>
-<?php } ?>
-    <div class="tf_booking-dates">
+    <!-- Start Booking widget -->
+    <form id="tf-single-hotel-avail" class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off">
+    
+        <?php wp_nonce_field( 'check_room_avail_nonce', 'tf_room_avail_nonce' ); ?>
+    
         <div class="tf_form-row">
             <label class="tf_label-row">
                 <div class="tf_form-inner">
-                    <i class="far fa-calendar-alt"></i>
-                    <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                        placeholder="Select Date" required value="<?php echo $date ?>">
+                    <i class="fas fa-user-friends"></i>
+                    <select name="adults" id="adults" class="">
+                        <option value="1">1 adult</option>
+                        <option value="2">2 adults</option>
+                        <option value="3">3 adults</option>
+                        <option value="4">4 adults</option>
+                        <option value="5">5 adults</option>
+                        <option value="6">6 adults</option>
+                    </select>
                 </div>
             </label>
         </div>
-    </div>
-
-    <div class="tf_form-row">
-        <?php
-				$ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
-			?>
-        <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type" />
-        <button class="tf_button tf-submit"
-            type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' );?></button>
-    </div>
-
-</form>
-
-<script>
-(function($) {
-    $(document).ready(function() {
-
-        $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
-            enableTime: false,
-            mode: "range",
+    
+        <div class="tf_form-row">
+            <label class="tf_label-row">
+                <div class="tf_form-inner">
+                    <i class="fas fa-child"></i>
+                    <select name="children" id="children" class="">
+                        <option value="0">0 child</option>
+                        <option value="1">1 child</option>
+                        <option value="2">2 childrens</option>
+                        <option value="3">3 childrens</option>
+                        <option value="4">4 childrens</option>
+                        <option value="5">5 childrens</option>
+                    </select>
+                </div>
+            </label>
+        </div>
+    
+        <div class="tf_booking-dates">
+            <div class="tf_form-row">
+                <label class="tf_label-row">
+                    <span class="tf-label">Check-in &amp; Check-out date</span>
+                    <div class="tf_form-inner">
+                        <i class="far fa-calendar-alt"></i>
+                        <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
+                            placeholder="Select Date" required>
+                    </div>
+                </label>
+            </div>
+        </div>
+    
+        <div class="tf_form-row">
+            <?php
+                    $ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
+                ?>
+            <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type" />
+            <input type="hidden" name="post_id" value="<?php echo get_the_ID(); ?>" />
+            <button class="tf_button tf-submit"
+                type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' );?></button>
+        </div>
+    
+    </form>
+    
+    <script>
+    (function($) {
+        $(document).ready(function() {
+    
+            $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
+                enableTime: false,
+                mode: "range",
+                dateFormat: "Y/m/d",
+                allowInput: true,
+            });
+    
         });
+    })(jQuery);
+    </script>
+    
+    <?php if ( $placement == 'single' ) { ?>
+    <?php if ( is_active_sidebar( 'tf_single_booking_sidebar' ) ) { ?>
+    <div id="tf__booking_sidebar">
+        <?php dynamic_sidebar( 'tf_single_booking_sidebar' ); ?>
+        <br>
+    </div>
+    <?php } ?>
+    <?php } else { ?>
+    <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
+    <div id="tf__booking_sidebar">
+        <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
+        <br>
+    </div>
+    <?php } ?>
+    <?php } ?>
+    
+    <?php
+}
 
-    });
-})(jQuery);
-</script>
+#################################
+# Layouts                       #
+#################################
 
-<?php if ( $placement == 'single' ) { ?>
-<?php if ( is_active_sidebar( 'tf_single_booking_sidebar' ) ) { ?>
-<div id="tf__booking_sidebar">
-    <?php dynamic_sidebar( 'tf_single_booking_sidebar' ); ?>
-    <br>
-</div>
-<?php } ?>
-<?php } else { ?>
-<?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
-<div id="tf__booking_sidebar">
-    <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
-    <br>
-</div>
-<?php } ?>
-<?php } ?>
+/**
+ * Hotel Archive Single Item Layout
+ */
+function tf_hotel_archive_single_item() {
 
+    // get post id
+    $post_id   = get_the_ID();
+
+    /**
+     * Get features
+     * 
+     * hotel_feature
+     */
+    $features  = !empty(get_the_terms( $post_id, 'hotel_feature' )) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
+
+    /**
+     * Get hotel meta values
+     */
+    $meta = get_post_meta( get_the_ID(), 'tf_hotel', true );
+
+    // Location
+    $address  = !empty($meta['address']) ? $meta['address'] : '';
+    ?>
+	<div class="single-tour-wrap">
+		<div class="single-tour-inner">
+			<div class="tourfic-single-left">
+                <a href="<?php echo get_the_permalink(); ?>">
+				<?php
+                if ( has_post_thumbnail() ){ 
+					the_post_thumbnail( 'full' );
+				} else {
+                    echo '<img width="100%" height="100%" src="' .TF_ASSETS_URL . "img/img-not-available.svg". '" class="attachment-full size-full wp-post-image">';
+                }
+                ?>
+                </a>
+			</div>
+			<div class="tourfic-single-right">
+				<div class="tf_property_block_main_row">
+					<div class="tf_item_main_block">
+						<div class="tf-hotel__title-wrap">
+							<a href="<?php echo get_the_permalink(); ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
+						</div>						
+                        <?php
+                        if($address) {
+                            echo '<div class="tf_map-link">';
+                            echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' .$address. '</span>';
+                            echo '</div>';
+                        }
+                        ?>	                    
+					</div>
+					<?php tourfic_item_review_block();?>
+				</div>
+                
+                <div class="sr_rooms_table_block">
+					<div class="room_details">
+						<div class="featuredRooms">
+							<div class="prco-ltr-right-align-helper">
+								<div class="tf-archive-shortdesc">
+                                    <?php echo substr(wp_strip_all_tags(get_the_content()), 0, 200). '...'; ?>
+                            </div>
+							</div>
+							<div class="roomNameInner">
+								<div class="room_link">
+									<div class="roomrow_flex">
+                                        <?php if( $features ) { ?>
+										<div class="roomName_flex">
+                                            <strong><?php _e('Features', 'tourfic'); ?></strong>
+											<ul class="tf-archive-desc">
+                                                <?php foreach($features as $feature) {
+                                                $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'hotel_feature', true );
+                                                if ($feature_meta['icon-type'] == 'fa') {
+                                                    $feature_icon = '<i class="' .$feature_meta['icon-fa']. '"></i>';
+                                                } elseif ($feature_meta['icon-type'] == 'c') {
+                                                    $feature_icon = '<img src="' .$feature_meta['icon-c']["url"]. '" style="width: ' .$feature_meta['dimention']["width"]. 'px; height: ' .$feature_meta['dimention']["width"]. 'px;" />';
+                                                } ?>
+                                                <li class="tf-tooltip">
+                                                    <?php echo $feature_icon; ?>
+                                                    <div class="tf-top">
+                                                        <?php echo $feature->name; ?>
+                                                        <i class="tool-i"></i>
+                                                    </div>
+                                                </li>
+                                                <?php } ?>
+                                            </ul>
+										</div>
+                                        <?php } ?>
+                                        <div class="roomPrice roomPrice_flex sr_discount">
+                                            <div class="availability-btn-area">
+                                                <a href="<?php echo get_the_permalink(); ?>" class="button tf_button"><?php esc_html_e( 'Details', 'tourfic' );?></a>
+                                            </div>
+                                        </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 <?php
 }
 
+#################################
+# WooCommerce integration       #
+#################################
 /**
  * WooCommerce hotel Functions
  * 

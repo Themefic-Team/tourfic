@@ -2,7 +2,7 @@
 /**
  * Hotel Locations Shortcode
  */
-function shortcode_hotel_locations( $atts, $content = null ){
+function hotel_locations_shortcode( $atts, $content = null ){
 
     // Shortcode extract
     extract(
@@ -61,7 +61,9 @@ function shortcode_hotel_locations( $atts, $content = null ){
     <?php }
     return ob_get_clean();
 }
-add_shortcode('hotel_locations', 'shortcode_hotel_locations');
+add_shortcode('hotel_locations', 'hotel_locations_shortcode');
+// Old compatibility
+add_shortcode('tourfic_destinations', 'hotel_locations_shortcode');
 
 
 /**
@@ -345,7 +347,7 @@ function tf_tours_grid_shortcode( $atts, $content = null ){
 add_shortcode('tf_tours_grid', 'tf_tours_grid_shortcode');
 
 /**
- * Search Shortcode Function
+ * Search form
  */
 function tf_search_form_shortcode( $atts, $content = null ){
     extract(
@@ -372,29 +374,45 @@ function tf_search_form_shortcode( $atts, $content = null ){
 
     <?php tourfic_fullwidth_container_start( $fullwidth ); ?>
     <div id="tf-booking-search-tabs">
-        <!-- Start Booking widget -->
+
+        <?php
+        if ($type == 'all') {
+        ?>
+
         <div class="tf-booking-form-tab">
-            <?php if( $type == 'hotel' || $type == 'all') { ?>
-                <button class="tf-tablinks active" onclick="tfOpenForm(event, 'tf-hotel-booking-form')">Hotel</button>
-            <?php } ?>
-            <?php if( $type == 'tour' || $type == 'all') { ?>
-                <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-tour-booking-form')">Tours</button>
-            <?php } ?>
+            <button class="tf-tablinks active" onclick="tfOpenForm(event, 'tf-hotel-booking-form')"><?php _e('Hotel', 'tourfic'); ?></button>
+            <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-tour-booking-form')"><?php _e('Tour', 'tourfic'); ?></button>
         </div>
-        <?php if( $type == 'hotel' || $type == 'all') { ?>           
-            <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent">
-                <!--Added hotel search widget--> 
-                <?php tf_hotel_search_form( $classes, $title, $subtitle ); ?>
-            </div>
-        <?php } ?>
-        <?php if( $type == 'tour' || $type == 'all') { ?>
+
+        <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent">             
+            <?php tf_hotel_search_form_horizontal( $classes, $title, $subtitle ); ?>
+        </div>
+
         <div id="tf-tour-booking-form" class="tf-tabcontent">
-             <!--Added tours search widget--> 
-            <?php tourfic_search_widget_tour( $classes, $title, $subtitle ); ?>
+            <?php tf_tour_search_form_horizontal( $classes, $title, $subtitle ); ?>
         </div>
-        <?php } ?>
+
+        <?php
+        } else if ($type == 'hotel'){
+        ?>
+
+        <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent">             
+            <?php tf_hotel_search_form_horizontal( $classes, $title, $subtitle ); ?>
+        </div>
+
+        <?php
+        } else if ($type == 'tour'){
+        ?>
+
+        <div id="tf-tour-booking-form" style="display:block" class="tf-tabcontent">
+            <?php tf_tour_search_form_horizontal( $classes, $title, $subtitle ); ?>
+        </div>
+
+        <?php
+        }
+        ?>
+
     </div>
-    <!-- End Booking widget -->
 
     <?php tourfic_fullwidth_container_end( $fullwidth ); ?>
 
@@ -501,7 +519,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
                     while ( $loop->have_posts() ) : $loop->the_post(); 
 
                         if( $post_type == 'tf_hotel' ){
-                            tourfic_archive_single(); 
+                            tf_hotel_archive_single_item(); 
                         }elseif( $post_type == 'tf_tours' ){
                             //tour archive single gird/section added
                             tf_tours_archive_single();

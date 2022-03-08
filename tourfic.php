@@ -40,6 +40,7 @@ define( 'TF_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TF_ADMIN_PATH', TF_PATH.'admin/' );
 define( 'TF_INC_PATH', TF_PATH.'inc/' );
 define( 'TF_TEMPLATE_PATH', TF_PATH.'templates/' );
+define( 'TF_TEMPLATE_PART_PATH', TF_TEMPLATE_PATH.'template-parts/' );
 define( 'TF_OPTIONS_PATH', TF_ADMIN_PATH.'options/' );
 define( 'TF_ASSETS_PATH', TF_PATH.'assets/' );
 
@@ -145,39 +146,81 @@ if ( !function_exists( 'tfopt' ) ) {
 }
 
 /**
+ * Show admin warning if a required file is missing
+ */
+function tf_file_missing( $files = '' ) {
+
+    if(!empty($files)) {
+        $class = 'notice notice-error';
+        $message = '<strong>' .$files. '</strong>' .__(' file is missing! It is required to function Tourfic properly!', 'tourfic');
+    
+        printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message ); 
+    }
+
+}
+add_action( 'admin_notices', 'tf_file_missing' );
+
+/**
  * All the requires
  */
-
 // Functions
-require_once TF_INC_PATH . 'functions.php';
+if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {
+    require_once TF_INC_PATH . 'functions.php';
+} else {
+    tf_file_missing('functions.php');
+}
 
 // Admin Functions
-require_once TF_ADMIN_PATH . 'inc/functions.php';
+if ( file_exists( TF_ADMIN_PATH . 'inc/functions.php' ) ) {
+    require_once TF_ADMIN_PATH . 'inc/functions.php';
+} else {
+    tf_file_missing('inc/functions.php');
+}
 
 /**
  *    Layouts Function
  */
-require_once dirname( __FILE__ ) . '/inc/layouts.php';
+if ( file_exists( dirname( __FILE__ ) . '/inc/layouts.php' ) ) {
+    require_once dirname( __FILE__ ) . '/inc/layouts.php';
+} else {
+    tf_file_missing('inc/layouts.php');
+}
 
 /**
  *    Post type
  */
-require_once dirname( __FILE__ ) . '/inc/tourfic-functions.php';
+if ( file_exists( dirname( __FILE__ ) . '/inc/tourfic-functions.php' ) ) {
+    require_once dirname( __FILE__ ) . '/inc/tourfic-functions.php';
+} else {
+    tf_file_missing('inc/tourfic-functions.php');
+}
 
 /**
  *    SVG Icons
  */
-require_once dirname( __FILE__ ) . '/inc/svg-icons.php';
+if ( file_exists( dirname( __FILE__ ) . '/inc/svg-icons.php' ) ) {
+    require_once dirname( __FILE__ ) . '/inc/svg-icons.php';
+} else {
+    tf_file_missing('inc/svg-icons.php');
+}
 
 /**
  *    Shortcodes
  */
-require_once dirname( __FILE__ ) . '/inc/shortcodes.php';
+if ( file_exists( dirname( __FILE__ ) . '/inc/shortcodes.php' ) ) {
+    require_once dirname( __FILE__ ) . '/inc/shortcodes.php';
+} else {
+    tf_file_missing('inc/shortcodes.php');
+}
 
 /**
  *    Widgets
  */
-require_once dirname( __FILE__ ) . '/inc/widgets.php';
+if ( file_exists( dirname( __FILE__ ) . '/inc/widgets.php' ) ) {
+    require_once dirname( __FILE__ ) . '/inc/widgets.php';
+} else {
+    tf_file_missing('inc/widgets.php');
+}
 
 
 /**

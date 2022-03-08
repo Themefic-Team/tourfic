@@ -26,7 +26,7 @@ get_header('tourfic'); ?>
 				<div class="archive_ajax_result">
 					<?php if ( have_posts() ) : ?>
 						<?php while ( have_posts() ) : the_post(); ?>
-							<?php tourfic_archive_single(); ?>
+							<?php tf_hotel_archive_single_item(); ?>
 						<?php endwhile; ?>
 					<?php else : ?>
 						<?php get_template_part( 'template-parts/content', 'none' ); ?>
@@ -41,7 +41,7 @@ get_header('tourfic'); ?>
 
 			<!-- Start Sidebar -->
 			<div class="tf_sidebar">
-				<?php tourfic_get_sidebar( 'archive' ); ?>
+				<?php tf_archive_sidebar_search_form(); ?>
 			</div>
 			<!-- End Sidebar -->
 		</div>
