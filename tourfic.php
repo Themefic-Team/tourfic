@@ -150,11 +150,13 @@ if ( !function_exists( 'tfopt' ) ) {
  */
 function tf_file_missing( $files = '' ) {
 
-    if(!empty($files)) {
-        $class = 'notice notice-error';
-        $message = '<strong>' .$files. '</strong>' .__(' file is missing! It is required to function Tourfic properly!', 'tourfic');
-    
-        printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message ); 
+    if(is_admin()) {
+        if(!empty($files)) {
+            $class = 'notice notice-error';
+            $message = '<strong>' .$files. '</strong>' .__(' file is missing! It is required to function Tourfic properly!', 'tourfic');
+        
+            printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message ); 
+        }
     }
 
 }
@@ -175,15 +177,6 @@ if ( file_exists( TF_ADMIN_PATH . 'inc/functions.php' ) ) {
     require_once TF_ADMIN_PATH . 'inc/functions.php';
 } else {
     tf_file_missing('inc/functions.php');
-}
-
-/**
- *    Layouts Function
- */
-if ( file_exists( dirname( __FILE__ ) . '/inc/layouts.php' ) ) {
-    require_once dirname( __FILE__ ) . '/inc/layouts.php';
-} else {
-    tf_file_missing('inc/layouts.php');
 }
 
 /**

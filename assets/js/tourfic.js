@@ -2,7 +2,228 @@
     $(document).ready(function () {
 
         //###############################
-        //         Ajax Functions       #
+        //         Hotel Functions      #
+        //###############################
+
+        /**
+         * Hotel room availability
+         * 
+         * Ajax
+         */
+         $(document).on('click', '#tf-single-hotel-avail .tf-submit', function(e) {
+            e.preventDefault();
+
+            if($.trim($('input[name=check-in-out-date]').val()) == ''){
+                $('.tf_booking-dates .tf_label-row').append('<span clss="required"><b>This field is required!</b></span>');
+                return;
+            }
+
+            var tf_room_avail_nonce = $("input[name=tf_room_avail_nonce]").val();
+            var post_id = $('input[name=post_id]').val();
+            var adult = $('select[name=adults] option').filter(':selected').val();
+            var child = $('select[name=children] option').filter(':selected').val();
+            var check_in_out = $('input[name=check-in-out-date]').val();
+            //console.log(post_id);
+
+            var data = {
+                action: 'tf_room_availability',
+                tf_room_avail_nonce: tf_room_avail_nonce,
+                post_id: post_id,
+                adult: adult,
+                child: child,
+                check_in_out: check_in_out,
+            };
+
+            jQuery.ajax({
+                url: tf_params.ajax_url,
+                type: 'post',
+                data: data,
+                success: function (data) {
+                    $('html, body').animate({
+                        scrollTop: $("#rooms").offset().top
+                    }, 2000);
+                    //console.log(data);
+                    $("#rooms").html(data);
+                },
+                error: function (jqXHR, exception) {
+                    var error_msg = '';
+                    if (jqXHR.status === 0) {
+                        var error_msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        var error_msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        var error_msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        var error_msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        var error_msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        var error_msg = 'Ajax request aborted.';
+                    } else {
+                        var error_msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    alert(error_msg);
+                }
+            });
+        });
+
+        /**
+         * Click to go back to hotel availability form
+         */
+         $(document).on('click', '.hotel-room-availability', function(e) {
+            e.preventDefault();
+
+            $('html, body').animate({
+                scrollTop: $("#tf-single-hotel-avail").offset().top
+            }, 2000);
+        });
+
+        /**
+         * Ajax hotel booking
+         * 
+         * tf_hotel_booking
+         */
+         $(document).on('click', '.hotel-room-book', function (e) {
+            e.preventDefault();
+
+            var $this = $(this);
+
+            var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
+            var post_id = $('input[name=post_id]').val();
+            var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
+            var location = $('input[name=location]').val();
+            var adult = $('input[name=adult]').val();
+            var child = $('input[name=child]').val();
+            var check_in_date = $('input[name=check_in_date]').val();
+            var check_out_date = $('input[name=check_out_date]').val();
+            var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
+            //console.log(post_id);
+
+            var data = {
+                action: 'tf_hotel_booking',
+                tf_room_booking_nonce: tf_room_booking_nonce,
+                post_id: post_id,
+                room_id: room_id,
+                location: location,
+                adult: adult,
+                child: child,
+                check_in_date: check_in_date,
+                check_out_date: check_out_date,
+                room: room,
+            };
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: data,
+                beforeSend: function (data) {
+                    $this.block({
+                        message: null,
+                        overlayCSS: {
+                            background: "#fff",
+                            opacity: .5
+                        }
+                    });
+
+                    $('.tf_notice_wrapper').html("").hide();
+                },
+                complete: function (data) {
+                    $this.unblock();
+                },
+                success: function (data) {
+                    $this.unblock();
+
+                    var response = JSON.parse(data);
+
+                    if (response.status == 'error') {
+                        var errorHtml = "";
+
+                        if (response.errors) {
+                            response.errors.forEach(function (text) {
+                                errorHtml += '<div class="woocommerce-error">' + text + '</div>';
+                            });
+                        }
+
+                        $('.tf_notice_wrapper').html(errorHtml).show();
+
+                        $("html, body").animate({ scrollTop: 0 }, 300);
+                        return false;
+                    } else {
+
+                        if (response.redirect_to) {
+                            window.location.replace(response.redirect_to);
+                        } else {
+                            jQuery(document.body).trigger('added_to_cart');
+                        }
+
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+
+                },
+
+            });
+
+        });
+
+        /**
+         * Single hotel Gallery
+         * 
+         * Fancybox
+         */
+         $('[data-fancybox="hotel-gallery"]').fancybox({
+            loop: true,
+            buttons: [
+                "zoom",
+                "slideShow",
+                "fullScreen",
+                "close"
+            ],
+            hash: false,
+        });
+
+        /**
+         * Hotel slider
+         * 
+         * Slick
+         */
+
+        var sbp = $('.swiper-button-prev'),
+            sbn = $('.swiper-button-next');
+        
+        $('.single-slider-wrapper .tf_slider-for').slick({
+            slide: '.slick-slide-item',
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: false,
+            dots: false,
+            centerMode: false,
+            asNavFor: '.tf_slider-nav',
+            variableWidth: true
+        });
+
+        $('.single-slider-wrapper .tf_slider-nav').slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            asNavFor: '.tf_slider-for',
+            dots: false,
+            arrows: false,
+            centerMode: true,
+            focusOnSelect: true
+        });
+
+        sbp.on("click", function () {
+            $(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickPrev');
+        });
+
+        sbn.on("click", function () {
+            $(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickNext');
+        });
+
+        //###############################
+        //         Tour Functions       #
         //###############################
         
         /**
@@ -88,168 +309,7 @@
                 },
 
             });
-        });
-
-        /**
-         * Hotel room availability
-         */
-        $(document).on('click', '#tf-single-hotel-avail .tf-submit', function(e) {
-            e.preventDefault();
-
-            if($.trim($('input[name=check-in-out-date]').val()) == ''){
-                $('.tf_booking-dates .tf_label-row').append('<span clss="required"><b>This field is required!</b></span>');
-                return;
-            }
-
-            var tf_room_avail_nonce = $("input[name=tf_room_avail_nonce]").val();
-            var post_id = $('input[name=post_id]').val();
-            var adult = $('select[name=adults] option').filter(':selected').val();
-            var child = $('select[name=children] option').filter(':selected').val();
-            var check_in_out = $('input[name=check-in-out-date]').val();
-            //console.log(post_id);
-
-            var data = {
-                action: 'tf_room_availability',
-                tf_room_avail_nonce: tf_room_avail_nonce,
-                post_id: post_id,
-                adult: adult,
-                child: child,
-                check_in_out: check_in_out,
-            };
-
-            jQuery.ajax({
-                url: tf_params.ajax_url,
-                type: 'post',
-                data: data,
-                success: function (data) {
-                    $('html, body').animate({
-                        scrollTop: $("#rooms").offset().top
-                    }, 2000);
-                    //console.log(data);
-                    $("#rooms").html(data);
-                },
-                error: function (jqXHR, exception) {
-                    var error_msg = '';
-                    if (jqXHR.status === 0) {
-                        var error_msg = 'Not connect.\n Verify Network.';
-                    } else if (jqXHR.status == 404) {
-                        var error_msg = 'Requested page not found. [404]';
-                    } else if (jqXHR.status == 500) {
-                        var error_msg = 'Internal Server Error [500].';
-                    } else if (exception === 'parsererror') {
-                        var error_msg = 'Requested JSON parse failed.';
-                    } else if (exception === 'timeout') {
-                        var error_msg = 'Time out error.';
-                    } else if (exception === 'abort') {
-                        var error_msg = 'Ajax request aborted.';
-                    } else {
-                        var error_msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                    }
-                    alert(error_msg);
-                }
-            });
-
-        });
-
-        /**
-         * Click to go back to availability form
-         */
-         $(document).on('click', '.hotel-room-availability', function(e) {
-            e.preventDefault();
-
-            $('html, body').animate({
-                scrollTop: $("#tf-single-hotel-avail").offset().top
-            }, 2000);
         });   
-
-        /**
-         * Ajax hotel booking
-         * 
-         * tf_hotel_booking
-         */
-        $(document).on('click', '.hotel-room-book', function (e) {
-            e.preventDefault();
-
-            var $this = $(this);
-
-            var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
-            var post_id = $('input[name=post_id]').val();
-            var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
-            var location = $('input[name=location]').val();
-            var adult = $('input[name=adult]').val();
-            var child = $('input[name=child]').val();
-            var check_in_date = $('input[name=check_in_date]').val();
-            var check_out_date = $('input[name=check_out_date]').val();
-            var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
-            //console.log(post_id);
-
-            var data = {
-                action: 'tf_hotel_booking',
-                tf_room_booking_nonce: tf_room_booking_nonce,
-                post_id: post_id,
-                room_id: room_id,
-                location: location,
-                adult: adult,
-                child: child,
-                check_in_date: check_in_date,
-                check_out_date: check_out_date,
-                room: room,
-            };
-
-            $.ajax({
-                type: 'post',
-                url: tf_params.ajax_url,
-                data: data,
-                beforeSend: function (data) {
-                    $this.block({
-                        message: null,
-                        overlayCSS: {
-                            background: "#fff",
-                            opacity: .5
-                        }
-                    });
-
-                    $('.tf_notice_wrapper').html("").hide();
-                },
-                complete: function (data) {
-                    $this.unblock();
-                },
-                success: function (data) {
-                    $this.unblock();
-
-                    var response = JSON.parse(data);
-
-                    if (response.status == 'error') {
-                        var errorHtml = "";
-
-                        if (response.errors) {
-                            response.errors.forEach(function (text) {
-                                errorHtml += '<div class="woocommerce-error">' + text + '</div>';
-                            });
-                        }
-
-                        $('.tf_notice_wrapper').html(errorHtml).show();
-
-                        $("html, body").animate({ scrollTop: 0 }, 300);
-                        return false;
-                    } else {
-
-                        if (response.redirect_to) {
-                            window.location.replace(response.redirect_to);
-                        } else {
-                            jQuery(document.body).trigger('added_to_cart');
-                        }
-
-                    }
-                },
-                error: function (data) {
-                    console.log(data);
-
-                },
-
-            });
-
-        });
 
         /**
          * Single Tour Gallery
@@ -267,60 +327,9 @@
             hash: false,
         });
 
-        /**
-         * Single hotel Gallery
-         * 
-         * Fancybox
-         */
-         $('[data-fancybox="hotel-gallery"]').fancybox({
-            loop: true,
-            buttons: [
-                "zoom",
-                "slideShow",
-                "fullScreen",
-                "close"
-            ],
-            hash: false,
-        });
-
-        /**
-         * Hotel slider
-         * 
-         * Slick
-         */
-
-        var sbp = $('.swiper-button-prev'),
-            sbn = $('.swiper-button-next');
-        
-        $('.single-slider-wrapper .tf_slider-for').slick({
-            slide: '.slick-slide-item',
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            fade: false,
-            dots: false,
-            centerMode: false,
-            asNavFor: '.tf_slider-nav',
-            variableWidth: true
-        });
-
-        $('.single-slider-wrapper .tf_slider-nav').slick({
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            asNavFor: '.tf_slider-for',
-            dots: false,
-            arrows: false,
-            centerMode: true,
-            focusOnSelect: true
-        });
-
-        sbp.on("click", function () {
-            $(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickPrev');
-        });
-
-        sbn.on("click", function () {
-            $(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickNext');
-        });
+        //###############################
+        //        Common Functions      #
+        //###############################
 
         /**
          * Rating bar
@@ -493,7 +502,7 @@
 
         /**
          * Wishlist Functionality 
-         * @author KK
+         * 
          */
         // Create an instance of Notyf
         const notyf = new Notyf({
@@ -681,164 +690,169 @@
         /* toggle icon for guest */
         wishIconToggleForGuest();
 
+        //###############################
+        //      Reusable Functions      #
+        //###############################
+
+        /*
+        * Trourfic autocomplete destination
+        */
+        function tourfic_autocomplete(inp, arr) {
+            /*the autocomplete function takes two arguments,
+            the text field element and an array of possible autocompleted values:*/
+            var currentFocus;
+            /*execute a function when someone writes in the text field:*/
+            inp.addEventListener("input", function (e) {
+                var a, b, i, val = this.value;
+                /*close any already open lists of autocompleted values*/
+                closeAllLists();
+                if (!val) { return false; }
+                currentFocus = -1;
+                /*create a DIV element that will contain the items (values):*/
+                a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
+                /*append the DIV element as a child of the autocomplete container:*/
+                this.parentNode.appendChild(a);
+                var $notfound = [];
+                /*for each item in the array...*/
+                for (const [key, value] of Object.entries(arr)) {
+                    if (value.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                        $notfound.push('found');
+                        /*create a DIV element for each matching element:*/
+                        b = document.createElement("DIV");
+                        /*make the matching letters bold:*/
+                        b.innerHTML = "<strong>" + value.substr(0, val.length) + "</strong>";
+                        b.innerHTML += value.substr(val.length);
+                        /*insert a input field that will hold the current array item's value:*/
+                        b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'> `;
+                        /*execute a function when someone clicks on the item value (DIV element):*/
+                        b.addEventListener("click", function (e) {
+                            let source = this.getElementsByTagName("input")[0];
+                            /*insert the value for the autocomplete text field:*/
+                            inp.value = source.value;
+                            inp.closest('input').nextElementSibling.value = source.dataset.slug
+                            /*close the list of autocompleted values,
+                            (or any other open lists of autocompleted values:*/
+                            closeAllLists();
+                        });
+                        a.appendChild(b);
+
+                    } else {
+                        $notfound.push('notfound');
+                    }
+                }
+
+                if ($notfound.indexOf('found') == -1) {
+                    /*create a DIV element for each matching element:*/
+                    b = document.createElement("DIV");
+                    /*make the matching letters bold:*/
+
+                    b.innerHTML += 'Not Found';
+                    /*insert a input field that will hold the current array item's value:*/
+                    b.innerHTML += "<input type='hidden' value=''>";
+                    /*execute a function when someone clicks on the item value (DIV element):*/
+                    b.addEventListener("click", function (e) {
+                        /*insert the value for the autocomplete text field:*/
+                        inp.value = this.getElementsByTagName("input")[0].value;
+                        /*close the list of autocompleted values,
+                        (or any other open lists of autocompleted values:*/
+                        closeAllLists();
+                    });
+                    a.appendChild(b);
+                }
+            });
+            /*execute a function presses a key on the keyboard:*/
+            inp.addEventListener("keydown", function (e) {
+                var x = document.getElementById(this.id + "autocomplete-list");
+                if (x) x = x.getElementsByTagName("div");
+                if (e.keyCode == 40) {
+                    /*If the arrow DOWN key is pressed,
+                    increase the currentFocus variable:*/
+                    currentFocus++;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 38) { //up
+                    /*If the arrow UP key is pressed,
+                    decrease the currentFocus variable:*/
+                    currentFocus--;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 13) {
+                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                    e.preventDefault();
+                    if (currentFocus > -1) {
+                        /*and simulate a click on the "active" item:*/
+                        if (x) x[currentFocus].click();
+                    }
+                }
+            });
+            function addActive(x) {
+                /*a function to classify an item as "active":*/
+                if (!x) return false;
+                /*start by removing the "active" class on all items:*/
+                removeActive(x);
+                if (currentFocus >= x.length) currentFocus = 0;
+                if (currentFocus < 0) currentFocus = (x.length - 1);
+                /*add class "autocomplete-active":*/
+                x[currentFocus].classList.add("autocomplete-active");
+            }
+            function removeActive(x) {
+                /*a function to remove the "active" class from all autocomplete items:*/
+                for (var i = 0; i < x.length; i++) {
+                    x[i].classList.remove("autocomplete-active");
+                }
+            }
+            function closeAllLists(elmnt) {
+                /*close all autocomplete lists in the document,
+                except the one passed as an argument:*/
+                var x = document.getElementsByClassName("autocomplete-items");
+                for (var i = 0; i < x.length; i++) {
+                    if (elmnt != x[i] && elmnt != inp) {
+                        x[i].parentNode.removeChild(x[i]);
+                    }
+                }
+            }
+            /*execute a function when someone clicks in the document:*/
+            document.addEventListener("click", function (e) {
+                closeAllLists(e.target);
+            });
+        }
+
+        /**
+         * Initiate autocomplete on inputs
+         */
+
+        // Hotel location autocomplete
+        var hotel_location_input = document.getElementById("tf-location");
+        var hotel_locations = tf_params.locations;
+        if(hotel_location_input){
+            tourfic_autocomplete(hotel_location_input, hotel_locations);
+        }
+        // Tour destination autocomplete
+        var tour_destination_input = document.getElementById("tf-destination");
+        var tour_destinations = tf_params.tour_destinations;
+        if(tour_destination_input){
+            tourfic_autocomplete(tour_destination_input, tour_destinations);
+        }
+
 
     });
 })(jQuery, window);
 
-/*
-* Trourfic autocomplete destination
-*/
-function tourfic_autocomplete(inp, arr) {
-    /*the autocomplete function takes two arguments,
-    the text field element and an array of possible autocompleted values:*/
-    var currentFocus;
-    /*execute a function when someone writes in the text field:*/
-    inp.addEventListener("input", function (e) {
-        var a, b, i, val = this.value;
-        /*close any already open lists of autocompleted values*/
-        closeAllLists();
-        if (!val) { return false; }
-        currentFocus = -1;
-        /*create a DIV element that will contain the items (values):*/
-        a = document.createElement("DIV");
-        a.setAttribute("id", this.id + "autocomplete-list");
-        a.setAttribute("class", "autocomplete-items");
-        /*append the DIV element as a child of the autocomplete container:*/
-        this.parentNode.appendChild(a);
-        var $notfound = [];
-        /*for each item in the array...*/
-        for (const [key, value] of Object.entries(arr)) {
-            if (value.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-                $notfound.push('found');
-                /*create a DIV element for each matching element:*/
-                b = document.createElement("DIV");
-                /*make the matching letters bold:*/
-                b.innerHTML = "<strong>" + value.substr(0, val.length) + "</strong>";
-                b.innerHTML += value.substr(val.length);
-                /*insert a input field that will hold the current array item's value:*/
-                b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'> `;
-                /*execute a function when someone clicks on the item value (DIV element):*/
-                b.addEventListener("click", function (e) {
-                    let source = this.getElementsByTagName("input")[0];
-                    /*insert the value for the autocomplete text field:*/
-                    inp.value = source.value;
-                    inp.closest('input').nextElementSibling.value = source.dataset.slug
-                    /*close the list of autocompleted values,
-                    (or any other open lists of autocompleted values:*/
-                    closeAllLists();
-                });
-                a.appendChild(b);
-
-            } else {
-                $notfound.push('notfound');
-            }
-          }
-
-        if ($notfound.indexOf('found') == -1) {
-            /*create a DIV element for each matching element:*/
-            b = document.createElement("DIV");
-            /*make the matching letters bold:*/
-
-            b.innerHTML += 'Not Found';
-            /*insert a input field that will hold the current array item's value:*/
-            b.innerHTML += "<input type='hidden' value=''>";
-            /*execute a function when someone clicks on the item value (DIV element):*/
-            b.addEventListener("click", function (e) {
-                /*insert the value for the autocomplete text field:*/
-                inp.value = this.getElementsByTagName("input")[0].value;
-                /*close the list of autocompleted values,
-                (or any other open lists of autocompleted values:*/
-                closeAllLists();
-            });
-            a.appendChild(b);
-        }
-    });
-    /*execute a function presses a key on the keyboard:*/
-    inp.addEventListener("keydown", function (e) {
-        var x = document.getElementById(this.id + "autocomplete-list");
-        if (x) x = x.getElementsByTagName("div");
-        if (e.keyCode == 40) {
-            /*If the arrow DOWN key is pressed,
-            increase the currentFocus variable:*/
-            currentFocus++;
-            /*and and make the current item more visible:*/
-            addActive(x);
-        } else if (e.keyCode == 38) { //up
-            /*If the arrow UP key is pressed,
-            decrease the currentFocus variable:*/
-            currentFocus--;
-            /*and and make the current item more visible:*/
-            addActive(x);
-        } else if (e.keyCode == 13) {
-            /*If the ENTER key is pressed, prevent the form from being submitted,*/
-            e.preventDefault();
-            if (currentFocus > -1) {
-                /*and simulate a click on the "active" item:*/
-                if (x) x[currentFocus].click();
-            }
-        }
-    });
-    function addActive(x) {
-        /*a function to classify an item as "active":*/
-        if (!x) return false;
-        /*start by removing the "active" class on all items:*/
-        removeActive(x);
-        if (currentFocus >= x.length) currentFocus = 0;
-        if (currentFocus < 0) currentFocus = (x.length - 1);
-        /*add class "autocomplete-active":*/
-        x[currentFocus].classList.add("autocomplete-active");
-    }
-    function removeActive(x) {
-        /*a function to remove the "active" class from all autocomplete items:*/
-        for (var i = 0; i < x.length; i++) {
-            x[i].classList.remove("autocomplete-active");
-        }
-    }
-    function closeAllLists(elmnt) {
-        /*close all autocomplete lists in the document,
-        except the one passed as an argument:*/
-        var x = document.getElementsByClassName("autocomplete-items");
-        for (var i = 0; i < x.length; i++) {
-            if (elmnt != x[i] && elmnt != inp) {
-                x[i].parentNode.removeChild(x[i]);
-            }
-        }
-    }
-    /*execute a function when someone clicks in the document:*/
-    document.addEventListener("click", function (e) {
-        closeAllLists(e.target);
-    });
-}
-
-//get the tours and hotel destination array
-var destinations = tf_params.locations;
-let dest = document.getElementById("location");
-var tour_destinations = tf_params.tour_destinations;
-let tourDest = document.getElementById("tour_destination");
-
-if(dest){
-    //Autocomplete for Hotel
-    tourfic_autocomplete(dest, destinations);
-}
-
-if(tourDest){
-    //Autocomplete for Tours
-    tourfic_autocomplete(tourDest, tour_destinations);
-}
-
 /**
- * Searchbox widgets tab scripts
+ * Horizontal Search Form Tab Control
  */
-function tfOpenForm(evt, formName) {
+ function tfOpenForm(evt, formName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tf-tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-     
+    tabcontent[i].style.display = "none";
+    
     }
     tablinks = document.getElementsByClassName("tf-tablinks");
     for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     document.getElementById(formName).style.display = "block";
     document.getElementById(formName).style.transition = "all 0.2s";

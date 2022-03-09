@@ -238,11 +238,11 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
             <div class="tf_input-inner">
             <div class="tf_form-row">
                     <label class="tf_label-row">
-                        <span class="tf-label">Destination:</span>
+                        <span class="tf-label"><?php _e('Destination', 'tourfic'); ?>:</span>
                         <div class="tf_form-inner tf-d-g">
                             <i class="fas fa-search"></i>
-                            <input type="text" required id="tour_destination" class="" placeholder="Destination" value="">
-                            <input type="hidden" name="tour_destination" class="tf-place-input" required="" />                    </div>
+                            <input type="text" required id="tf-destination" class="" placeholder="<?php _e('Enter Destination', 'tourfic'); ?>" value="">
+                            <input type="hidden" name="destination" class="tf-place-input" />                    </div>
                     </label>
                 </div>
             </div>
@@ -253,16 +253,16 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
                 <span class="tf_person-icon">
                     <?php echo tourfic_get_svg('person'); ?>
                 </span>
-                <div class="adults-text">1 Adults</div>
+                <div class="adults-text">1 <?php _e('Adults', 'tourfic'); ?></div>
                 <div class="person-sep"></div>
-                <div class="child-text">0 Children</div>
+                <div class="child-text">0 <?php _e('Children', 'tourfic'); ?></div>
                 <div class="person-sep"></div>
-                <div class="infant-text">0 Infant</div>
+                <div class="infant-text">0 <?php _e('Infant', 'tourfic'); ?></div>
             </div>
             <div class="tf_acrselection-wrap">
                 <div class="tf_acrselection-inner">
                     <div class="tf_acrselection">
-                        <div class="acr-label">Adults</div>
+                        <div class="acr-label"><?php _e('Adults', 'tourfic'); ?></div>
                         <div class="acr-select">
                             <div class="acr-dec">-</div>
                                 <input type="number" name="adults" id="adults" min="1" value="1">
@@ -270,7 +270,7 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
                         </div>
                     </div>
                     <div class="tf_acrselection">
-                        <div class="acr-label">Children</div>
+                        <div class="acr-label"><?php _e('Children', 'tourfic'); ?></div>
                         <div class="acr-select">
                             <div class="acr-dec">-</div>
                                 <input type="number" name="children" id="children" min="0" value="0">
@@ -278,7 +278,7 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
                         </div>
                     </div>
                     <div class="tf_acrselection">
-                        <div class="acr-label">Infant</div>
+                        <div class="acr-label"><?php _e('Infant', 'tourfic'); ?></div>
                         <div class="acr-select">
                             <div class="acr-dec">-</div>
                                 <input type="number" name="infant" id="infant" min="0" value="0">
@@ -293,10 +293,10 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
         <!-- @KK Merged two inputs into one  -->
         <div class="tf_input-inner">
             <label class="tf_label-row">
-                        <span class="tf-label">Check-in & Check-out date</span>
+                        <span class="tf-label"><?php _e('Check-in & Check-out date', 'tourfic'); ?></span>
                         <div class="tf_form-inner tf-d-g">
                             <i class="far fa-calendar-alt"></i>
-                            <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="Select Date">
+                            <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e('Select Date', 'tourfic'); ?>" required>
                         </div>
                     </label>
             </div>
@@ -598,6 +598,73 @@ function tf_single_tour_booking_form( $post_id ) {
 	    </div>
 	<?php
 return ob_get_clean();
+}
+
+#################################
+# Layouts                       #
+#################################
+
+/**
+ * Tours Archive
+ */
+function tf_tour_archive_single_item() {
+
+    // get post id
+    $post_id = get_the_ID();
+
+    /**
+     * Get hotel meta values
+     */
+    $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+
+    // Location
+    $location  = !empty($meta['text_location']) ? $meta['text_location'] : '';
+
+    // Featured
+    $featured  = !empty($meta['tour_as_featured']) ? $meta['tour_as_featured'] : '';
+    ?>
+	<div class="single-tour-wrap">
+		<div class="single-tour-inner">
+			<?php if($featured){ ?>
+				<div class="tf-featured"><?php _e( 'Featured','tourfic' ) ?></div>
+			<?php }	?>
+			<div class="tourfic-single-left">
+				<?php
+                if (has_post_thumbnail()) {
+					the_post_thumbnail( 'full' );
+				} else {
+                    echo '<img width="100%" height="100%" src="' .TF_ASSETS_URL . "img/img-not-available.svg". '" class="attachment-full size-full wp-post-image">';
+                }
+                ?>
+			</div>
+			<div class="tourfic-single-right">
+				<div class="tf_property_block_main_row">
+					<div class="tf_item_main_block">
+						<div class="tf-hotel__title-wrap tf-tours-title-wrap">
+                            <a href="<?php echo get_the_permalink(); ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
+						</div>
+						<?php
+                        if($location) {
+                            echo '<div class="tf_map-link">';
+                            echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' .$location. '</span>';
+                            echo '</div>';
+                        }
+                        ?>
+					</div>
+					<?php tourfic_item_review_block();?>
+				</div>
+				<div class="tf-tour-desc">
+					<p><?php echo substr(wp_strip_all_tags(get_the_content()), 0, 200). '...'; ?></p>
+				</div>
+
+				<div class="availability-btn-area">
+					<a href="<?php echo get_the_permalink(); ?>" class="button tf_button"><?php esc_html_e( 'Details', 'tourfic' );?></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<?php
 }
 
 #################################

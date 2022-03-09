@@ -424,83 +424,55 @@ add_shortcode('tf_search_form', 'tf_search_form_shortcode');
  * Search Result Shortcode Function
  */
 function tf_search_result_shortcode( $atts, $content = null ){
-    
-    $relation = tfopt( 'search_relation', 'AND' );
 
     // Unwanted Slashes Remove
     if ( isset( $_GET ) ) {
         $_GET = array_map( 'stripslashes_deep', $_GET );
     }
-    //Show both Hotel and Tourfic posts in the search result
-    $post_type = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
-
-    if($post_type == 'page' && get_query_var( 'hotel_location' ) == ''){
-        $post_type = 'tf_hotel';
-    }else if( $post_type == 'page' && get_query_var( 'tour_destination' ) == '' ){
-        $post_type = 'tf_tours';
-    }
-
-    $taxonomy = $post_type == 'tf_tours' ? 'tour_destination' : 'hotel_location';
-    if( isset($_GET['tour_destination']) ){
-        $dest = $_GET['tour_destination'];
-    }else{
-        $dest = get_query_var('tour_destination');
-    }
-
-    // Shortcode extract
-    extract(
-      shortcode_atts(
-        array(
-            'style'  => 'default',
-            'max'  => '50',
-            'search' => isset( $_GET['location'] ) ? $_GET['location'] : $dest,
-          ),
-        $atts
-      )
-    );
     
-    if( $search == '' ){
-        //if( isset(get_query_var( 'destination' ))){
-            $search = get_query_var( 'location' );
-        //}else {
-            //$search = '';
-        //}
-    }
-    // Propertise args
+    // Get post type
+    $post_type = isset( $_GET['type'] ) ? $_GET['type'] : '';
+    // Get hotel location or tour destination
+    $taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : 'tour_destination';
+    // Get place
+    $place = isset( $_GET['location'] ) ? $_GET['location'] : $_GET['destination'];
+    
+    // Main Query args
     $args = array(
         'post_type' => $post_type,
         'post_status' => 'publish',
-        'posts_per_page' => $max,
+        'posts_per_page' => 12,
     );
-    $place_taxonomy = $post_type == 'tf_tours' ? 'tour_destination' : 'hotel_location';
-    // 1st search on Destination taxonomy
-    $destinations = new WP_Term_Query( array(
-        'taxonomy' => $place_taxonomy,
-        'orderby' => 'name',
-        'order' => 'ASC',
-        'hide_empty' => 0, //can be 1, '1' too
-        'hierarchical' => 0, //can be 1, '1' too
-        'slug' => sanitize_title($search, ''),
-    ) );
 
-    if ( $destinations ) {
-        // Define Featured Category IDs first
-        $destinations_ids = array();
-       
-        // Creating loop to insert IDs to array.
-        foreach( $destinations as $cat ) {
-            $destinations_ids[] = $cat->term_id;
+    $taxonomy_query = new WP_Term_Query(array(
+        'taxonomy'               => $taxonomy,
+        'orderby'                => 'name',
+        'order'                  => 'ASC',
+        'hide_empty'             => false,
+        'slug' => sanitize_title($place, ''),
+    ));
+
+    if ($taxonomy_query) {
+
+        $place_ids = array();
+
+        // Place IDs array
+        foreach($taxonomy_query->get_terms() as $term){ 
+            $place_ids[] = $term->term_id;
         }
+
         $args['tax_query'] = array(
-            'relation' => $relation,
+            'relation' => 'AND',
             array(
                 'taxonomy' => $taxonomy,
-                'terms'    => $destinations_ids,
+                'terms'    => $place_ids,
             )
         );
+
     } else {
-        $args['s'] = $search;
+        $args['s'] = $place;
     }
+    
     $loop = new WP_Query( $args );
 
     ob_start(); ?>
@@ -522,7 +494,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
                             tf_hotel_archive_single_item(); 
                         }elseif( $post_type == 'tf_tours' ){
                             //tour archive single gird/section added
-                            tf_tours_archive_single();
+                            tf_tour_archive_single_item();
                         }
                         
                     endwhile;
@@ -667,9 +639,9 @@ function tourfic_trigger_filter_ajax(){
         while ( $loop->have_posts() ) : $loop->the_post(); 
             if( $posttype == 'tf_tours' ){
                 //include the tours search result and archive layout
-                tf_tours_archive_single();
+                tf_tour_archive_single_item();
             }else{
-                tourfic_archive_single();
+                tf_hotel_archive_single_item();
             }  
         endwhile; 
      else : 
@@ -682,20 +654,4 @@ function tourfic_trigger_filter_ajax(){
 add_action( 'wp_ajax_nopriv_tf_trigger_filter', 'tourfic_trigger_filter_ajax' );
 add_action( 'wp_ajax_tf_trigger_filter', 'tourfic_trigger_filter_ajax' );
 
-// TF Icon List Shortcode
-add_shortcode('tf_list','tourfic_icon_list_shortcode');
-function tourfic_icon_list_shortcode( $atts, $content = null ) {
-    // Params extraction
-    extract(
-        shortcode_atts(
-            array(
-                'icon'   => '',
-                'text'   => '',
-            ),
-            $atts
-        )
-    );
-    ob_start();?>
-    <li><i class="fa  <?php esc_attr_e($icon); ?> "></i> <?php _e($text); ?></li>
-    <?php return ob_get_clean();
-}
+?>

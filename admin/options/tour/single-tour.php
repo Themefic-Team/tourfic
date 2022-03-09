@@ -26,10 +26,9 @@ if ( class_exists( 'CSF' ) ) {
 
             array(
                 'id'       => 'tour_as_featured',
-                'class' => 'tf-csf-disable',
                 'type'     => 'switcher',
                 'title'    => __( 'Set this tour as featured', 'tourfic' ),
-                'subtitle' => __( 'Tour will be shown under featured sections' .$badge_up, 'tourfic' ),
+                'subtitle' => __( 'Tour will be shown under featured sections', 'tourfic' ),
             ),
 
             array(

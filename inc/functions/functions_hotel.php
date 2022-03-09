@@ -491,10 +491,10 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
             <div class="tf_input-inner">
                 <div class="tf_form-row">
                     <label class="tf_label-row">
-                        <span class="tf-label">Location:</span>
+                        <span class="tf-label"><?php _e('Location', 'tourfic'); ?>:</span>
                         <div class="tf_form-inner tf-d-g">
                             <i class="fas fa-search"></i>
-                            <input type="text" required="" id="location" class="" placeholder="Location" value="">
+                            <input type="text" required="" id="tf-location" class="" placeholder="<?php _e('Enter Location', 'tourfic'); ?>" value="">
                             <input type="hidden" name="location" class="tf-place-input">
                         </div>
                     </label>
@@ -508,25 +508,25 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
                 <span class="tf_person-icon">
                     <?php echo tourfic_get_svg('person'); ?>
                 </span>
-                <div class="adults-text">0 Adults</div>
+                <div class="adults-text">1 <?php _e('Adults', 'tourfic'); ?></div>
                 <div class="person-sep"></div>
-                <div class="child-text">0 Children</div>
+                <div class="child-text">0 <?php _e('Children', 'tourfic'); ?></div>
                 <div class="person-sep"></div>
-                <div class="room-text">0 Room</div>
+                <div class="room-text">1 <?php _e('Room', 'tourfic'); ?></div>
             </div>
 
             <div class="tf_acrselection-wrap">
                 <div class="tf_acrselection-inner">
                     <div class="tf_acrselection">
-                        <div class="acr-label">Adults</div>
+                        <div class="acr-label"><?php _e('Adults', 'tourfic'); ?></div>
                         <div class="acr-select">
                             <div class="acr-dec">-</div>
-                            <input type="number" name="adults" id="adults" min="0" value="0">
+                            <input type="number" name="adults" id="adults" min="1" value="1">
                             <div class="acr-inc">+</div>
                         </div>
                     </div>
                     <div class="tf_acrselection">
-                        <div class="acr-label">Children</div>
+                        <div class="acr-label"><?php _e('Children', 'tourfic'); ?></div>
                         <div class="acr-select">
                             <div class="acr-dec">-</div>
                             <input type="number" name="children" id="children" min="0" value="0">
@@ -534,10 +534,10 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
                         </div>
                     </div>
                     <div class="tf_acrselection">
-                        <div class="acr-label">Rooms</div>
+                        <div class="acr-label">1 <?php _e('Rooms', 'tourfic'); ?></div>
                         <div class="acr-select">
                             <div class="acr-dec">-</div>
-                            <input type="number" name="room" id="room" min="0" value="0">
+                            <input type="number" name="room" id="room" min="1" value="1">
                             <div class="acr-inc">+</div>
                         </div>
                     </div>
@@ -550,10 +550,10 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
             <div class="tf_input-inner">
                 <div class="tf_form-row">
                     <label class="tf_label-row">
-                        <span class="tf-label">Check-in & Check-out date</span>
+                        <span class="tf-label"><?php _e('Check-in & Check-out date', 'tourfic'); ?></span>
                         <div class="tf_form-inner tf-d-g">
                             <i class="far fa-calendar-alt"></i>
-                            <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="Select Date">
+                            <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e('Check-in - Check-out', 'tourfic'); ?>">
                         </div>
                     </label>
                 </div>
@@ -698,14 +698,14 @@ function tf_hotel_sidebar_booking_form( $placement = 'single' ) { ?>
 function tf_hotel_archive_single_item() {
 
     // get post id
-    $post_id   = get_the_ID();
+    $post_id = get_the_ID();
 
     /**
      * Get features
      * 
      * hotel_feature
      */
-    $features  = !empty(get_the_terms( $post_id, 'hotel_feature' )) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
+    $features = !empty(get_the_terms( $post_id, 'hotel_feature' )) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
 
     /**
      * Get hotel meta values

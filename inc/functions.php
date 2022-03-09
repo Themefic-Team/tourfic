@@ -294,28 +294,34 @@ add_action( 'admin_init', 'tf_admin_role_caps', 999 );
 /**
  * Search Result Sidebar form
  */
-function tf_search_result_sidebar_form( $placement = 'single' ) { ?>
-    <?php
-    /**
-     * Populate search form from url
-     * @author KK
-     */
-     // Unwanted Slashes Remove
+function tf_search_result_sidebar_form( $placement = 'single' ) { 
+
+    // Unwanted Slashes Remove
     if ( isset( $_GET ) ) {
         $_GET = array_map( 'stripslashes_deep', $_GET );
     } 
-    $post_type = isset( $_GET['type'] ) ? $_GET['type'] : null;
-    if(isset($post_type)){
-       $id = $post_type == 'tf_tours' ? 'tour_destination' : 'location';
-       $placeholder =  $post_type == 'tf_tours' ? 'Destination' : 'Location';
-       $location = isset($_GET[$id]) ? $_GET[$id] : null;
-       $adult = isset($_GET['adults']) ? $_GET['adults'] : 0;
-       $children = isset($_GET['children']) ? $_GET['children'] : 0;
-       $room = isset($_GET['room']) ? $_GET['room'] : 0;
-       $date = isset($_GET['check-in-out-date']) ? $_GET['check-in-out-date'] : null;
-       $place_taxonomy = $post_type == 'tf_tours' ? 'tour_destination' : 'hotel_location';
-       $place_name = get_term_by( 'slug', $location , $place_taxonomy)->name;
+
+    // Get post type
+    $post_type = isset( $_GET['type'] ) ? $_GET['type'] : '';
+
+    if(!empty($post_type)){
+
+        $place_input_id = $post_type == 'tf_hotel' ? 'tf-location' : 'tf-destination';
+        $place_placeholder = $post_type == 'tf_hotel' ? __('Enter Location', 'tourfic') : __('Enter Destination', 'tourfic');
+
+        $place_key = $post_type == 'tf_hotel' ? 'location' : 'destination';
+        $place_value = isset($_GET[$place_key]) ? $_GET[$place_key] : '';
+
+        $taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : 'tour_destination';
+        $place_name = get_term_by( 'slug', $place_value , $taxonomy)->name;
+
+        $adult = isset($_GET['adults']) ? $_GET['adults'] : 0;
+        $children = isset($_GET['children']) ? $_GET['children'] : 0;
+        $room = isset($_GET['room']) ? $_GET['room'] : 0;
+        $date = isset($_GET['check-in-out-date']) ? $_GET['check-in-out-date'] : '';
+
     }
+
     ?>
     <!-- Start Booking widget -->
     <form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
@@ -325,9 +331,8 @@ function tf_search_result_sidebar_form( $placement = 'single' ) { ?>
             <label class="tf_label-row">
                 <div class="tf_form-inner">
                     <i class="fas fa-map-marker-alt"></i>
-                    <input type="text" name="location" required=""  class="" placeholder="<?php echo $placeholder ??  "Enter Location" ?>" 
-                        value="<?php echo $place_name; ?>">
-                        <input type="hidden" id="<?php echo $id; ?>" value="<?php echo $location; ?>"/>
+                    <input type="text" id="<?php echo $place_input_id; ?>" required=""  class="" placeholder="<?php echo $place_placeholder; ?>" value="<?php echo $place_name; ?>">
+                    <input type="hidden" name="place" id="tf-place" value="<?php echo $place_value; ?>"/>
                 </div>
             </label>
         </div>
@@ -337,10 +342,10 @@ function tf_search_result_sidebar_form( $placement = 'single' ) { ?>
                 <div class="tf_form-inner">
                     <i class="fas fa-user-friends"></i>
                     <select name="adults" id="adults" class="">
-                        <option <?php echo 1 == $adult ? 'selected' : null ?> value="1">1 adult</option>
+                        <option <?php echo 1 == $adult ? 'selected' : null ?> value="1">1 <?php _e('Adult', 'tourfic'); ?></option>
                         <?php foreach (range(2,6) as $value) {
                             $selected = $value == $adult ? 'selected' : null;
-                            echo "<option $selected value='$value'>$value adults</option>";
+                            echo "<option $selected value='$value'>$value Adults</option>";
                         } ?>                   
                     </select>
                 </div>
@@ -352,11 +357,11 @@ function tf_search_result_sidebar_form( $placement = 'single' ) { ?>
                 <div class="tf_form-inner">
                     <i class="fas fa-child"></i>
                     <select name="children" id="children" class="">
-                        <option value="0">0 child</option>
-                        <option <?php echo 1 == $children ? 'selected' : null ?> value="1">1 child</option>
+                        <option value="0">0 <?php _e('Children', 'tourfic'); ?></option>
+                        <option <?php echo 1 == $children ? 'selected' : null ?> value="1">1 <?php _e('Children', 'tourfic'); ?></option>
                         <?php foreach (range(2,5) as $value) {
                             $selected = $value == $children ? 'selected' : null;
-                            echo "<option $selected value='$value'>$value children</option>";
+                            echo "<option $selected value='$value'>$value Children</option>";
                         } ?> 
                       
                     </select>
@@ -369,10 +374,10 @@ function tf_search_result_sidebar_form( $placement = 'single' ) { ?>
                 <div class="tf_form-inner">
                     <i class="fas fa-couch"></i>
                     <select name="room" id="room" class="">
-                        <option <?php echo 1 == $room ? 'selected' : null ?> value="1">1 room</option>
+                        <option <?php echo 1 == $room ? 'selected' : null ?> value="1">1 <?php _e('Room', 'tourfic'); ?></option>
                         <?php foreach (range(2,5) as $value) {
                             $selected = $value == $room ? 'selected' : null;
-                            echo "<option $selected value='$value'>$value rooms</option>";
+                            echo "<option $selected value='$value'>$value Rooms</option>";
                         } ?>                   
                     </select>
                 </div>
@@ -385,7 +390,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) { ?>
                     <div class="tf_form-inner">
                         <i class="far fa-calendar-alt"></i>
                         <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                            placeholder="Select Date" required value="<?php echo $date ?>">
+                            placeholder="<?php _e('Select Date', 'tourfic'); ?>" required value="<?php echo $date ?>">
                     </div>
                 </label>
             </div>
@@ -415,30 +420,21 @@ function tf_search_result_sidebar_form( $placement = 'single' ) { ?>
     })(jQuery);
     </script>
     
-    <?php if ( $placement == 'single' ) { ?>
-    <?php if ( is_active_sidebar( 'tf_single_booking_sidebar' ) ) { ?>
-    <div id="tf__booking_sidebar">
-        <?php dynamic_sidebar( 'tf_single_booking_sidebar' ); ?>
-        <br>
-    </div>
-    <?php } ?>
-    <?php } else { ?>
-    <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
-    <div id="tf__booking_sidebar">
-        <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
-        <br>
-    </div>
-    <?php } ?>
-    <?php } ?>
-    
-    <?php
+    <?php if ( is_active_sidebar( 'tf_search_result' ) ) { ?>
+        <div id="tf__booking_sidebar">
+            <?php dynamic_sidebar( 'tf_search_result' ); ?>
+            <br>
+        </div>
+    <?php } 
+
     }
 
 /**
  * Archive Sidebar Search Form
  */
 function tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug) {
-    $taxonomy_type = $post_type == 'tf_tours' ? 'tour_destination' : 'location';
+    $place = $post_type == 'tf_hotel' ? 'tf-location' : 'tf-destination';
+    $place_text = $post_type == 'tf_hotel' ? __('Enter Location', 'tourfic') : __('Enter Destination', 'tourfic');
     ?>
 
     <form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
@@ -448,9 +444,8 @@ function tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $
             <label class="tf_label-row">
                 <div class="tf_form-inner">
                     <i class="fas fa-map-marker-alt"></i>
-                    <input type="text" required=""  class="" placeholder="<?php echo $placeholder ??  "Enter Location" ?>" 
-                        value="<?php echo $taxonomy_name; ?>">
-                    <input type="hidden" name="location" id="<?php echo $taxonomy_type; ?>" value="<?php echo $taxonomy_slug; ?>"/>
+                    <input type="text" required="" id="<?php echo $place; ?>"  class="" placeholder="<?php echo $place_text; ?>" value="<?php echo $taxonomy_name; ?>">
+                    <input type="hidden" name="place" value="<?php echo $taxonomy_slug; ?>"/>
                 </div>
             </label>
         </div>
@@ -557,7 +552,7 @@ function tf_migrate_data() {
 
         /** Hotels Migrations */
         $hotels = get_posts(['post_type'   => 'tf_hotel']);
-        foreach ($hotels as   $hotel) {
+        foreach ($hotels as $hotel) {
             $old_meta = get_post_meta($hotel->ID);
             if (empty($old_meta['tf_hotel'])) {
             $new_meta = [];

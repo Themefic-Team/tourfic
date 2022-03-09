@@ -43,7 +43,7 @@ if( $discount_type == 'percent' ){
 				<div class="archive_ajax_result">
 					<?php if ( have_posts() ) : ?>
 						<?php while ( have_posts() ) : the_post(); ?>
-							<?php tf_tours_archive_single( $price,$sale_price,$discounted_price ); ?>
+							<?php tf_tour_archive_single_item( $price,$sale_price,$discounted_price ); ?>
 						<?php endwhile; ?>
 					<?php else : ?>
 						<?php get_template_part( 'template-parts/content', 'none' ); ?>
