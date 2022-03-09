@@ -762,9 +762,10 @@ function tf_hotel_archive_single_item() {
 											<ul class="tf-archive-desc">
                                                 <?php foreach($features as $feature) {
                                                 $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'hotel_feature', true );
-                                                if ($feature_meta['icon-type'] == 'fa') {
+                                                $f_icon_type = !empty($feature_meta['icon-type']) ? $feature_meta['icon-type'] : '';
+                                                if ($f_icon_type == 'fa') {
                                                     $feature_icon = '<i class="' .$feature_meta['icon-fa']. '"></i>';
-                                                } elseif ($feature_meta['icon-type'] == 'c') {
+                                                } elseif ($f_icon_type == 'c') {
                                                     $feature_icon = '<img src="' .$feature_meta['icon-c']["url"]. '" style="width: ' .$feature_meta['dimention']["width"]. 'px; height: ' .$feature_meta['dimention']["width"]. 'px;" />';
                                                 } ?>
                                                 <li class="tf-tooltip">

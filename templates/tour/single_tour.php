@@ -60,7 +60,6 @@ $inc = $meta['inc'] ? $meta['inc'] : null;
 $exc = $meta['exc'] ? $meta['exc'] : null;
 $itineraries = $meta['itinerary'] ? $meta['itinerary'] : null;
 //continuous tour
-$information = get_field('information') ? get_field('information') : null;
 $share_text = get_the_title();
 $share_link = esc_url( home_url("/?p=").get_the_ID() );
 

@@ -44,34 +44,6 @@ if( !function_exists('tf_term_count') ){
     }
 }
 
-
-if ( !function_exists('get_field') ) {
-	function get_field( $selector, $post_id = false, $format_value = true ) {
-
-		// if not $post_id, load queried object
-		if( !$post_id ) {
-			// try for global post (needed for setup_postdata)
-			$post_id = (int) get_the_ID();
-			// try for current screen
-			if( !$post_id ) {
-				$post_id = get_queried_object();
-			}
-
-		}
-
-		// format value
-		if( $post_id ) {
-			// get value for field
-			$value = get_post_meta( $post_id, $selector, true );
-		}
-
-		// return
-		return ($value) ? $value : null;
-
-	}
-}
-
-
 /**
  * Review form
  */
