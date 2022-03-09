@@ -417,45 +417,6 @@ function tourfic_avg_rating_percent( $val = 0, $total = 5 ){
 	return sprintf("%.2f", $percent);
 }
 
-/**
- * Add Tourfic sidebar.
- */
-function tourfic_sidebar_widgets_init() {
-    register_sidebar( array(
-        'name'          => __( 'TOURFIC: Single Tour Sidebar', 'tourfic' ),
-        'id'            => 'tf_single_booking_sidebar',
-        'description'   => __( 'Widgets in this area will be shown on tourfic single page', 'tourfic' ),
-        'before_widget' => '<div id="%1$s" class="tf_widget widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<h4 class="tf_widgettitle">',
-        'after_title'   => '</h4>',
-    ) );
-    register_sidebar( array(
-        'name'          => __( 'TOURFIC: Archive Sidebar', 'tourfic' ),
-        'id'            => 'tf_archive_booking_sidebar',
-        'description'   => __( 'Widgets in this area will be shown on tourfic archive/search page', 'tourfic' ),
-        'before_widget' => '<div id="%1$s" class="tf_widget widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<h4 class="tf_widgettitle">',
-        'after_title'   => '</h4>',
-    ) );
-
-    // Register Custom Widgets
-    $custom_widgets = array(
-    	'Tourfic_TourFilter',
-    	'Tourfic_Show_On_Map',
-    	'Tourfic_Ask_Question',
-    	'Tourfic_Similar_Tours',
-		'Tourfic_Tour_FeatureFilter',
-        'TF_Hotel_Feature_Filter'
-    );
-    foreach ($custom_widgets as $key => $widget) {
-    	register_widget( $widget );
-    }
-
-}
-add_action( 'widgets_init', 'tourfic_sidebar_widgets_init', 100 );
-
 // Ask Question
 function tourfic_ask_question(){
 	?>

@@ -30,59 +30,6 @@
                 },
         }
         $('#tf-tour-date-field').flatpickr(optional_config)
-        // var dateFormat = 'DD-MM-YYYY';
-
-        // // Trigger Check-in Date
-        // $('.tf_selectdate-wrap, #check-in-out-date').daterangepicker({
-        //     "locale": {
-        //         "format": dateFormat,
-        //         "separator": " - ",
-        //         "firstDay": 1
-        //     },
-        //     minDate: dateToday,
-        //     autoApply: true,
-        // }, function (start, end, label) {
-            
-        //     var checkin_input = jQuery(".tf-tour-check-in");
-        //     var checkout_input = jQuery(".tf-tour-check-out");
-
-        //     checkin_input.val(start.format(dateFormat));
-        //     hotel_checkin_input.val(start.format(dateFormat));
-        //     $('.tf-widget-check-in').val(start.format(dateFormat));
-        //     $('.checkin-date-text').text(start.format(dateFormat));
-
-        //     checkout_input.val(end.format(dateFormat));
-        //     hotel_checkout_input.val(end.format(dateFormat));
-        //     $('.tf-widget-check-out').val(end.format(dateFormat));
-        //     $('.checkout-date-text').text(end.format(dateFormat));
-        // });
-
-        // //Get continuous check in out date 
-        // var continuousDate = $('.tf-tour-booking-wrap').data('continuous-array');
-        // let customAvailability =  $('.tf-tour-booking-wrap').data('custom-availability');
-        // if(continuousDate){
-        //     for(let i = 0; i < continuousDate.length; i++){            
-        //         var continuousCheckIn = continuousDate[i].check_in;
-        //         var continuousCheckOut = continuousDate[i].check_out;
-        //     }
-        // }else if(customAvailability == "no"){
-        //     continuousCheckOut == false; 
-        // }
-
-        // var fixedCheckIn = $('.tf-tour-booking-wrap').data('fixed-check-in');
-        // var fixedCheckOut = $('.tf-tour-booking-wrap').data('fixed-check-out');
-        // if (fixedCheckIn) {
-        //    var tfMinDate = fixedCheckIn;
-        // } else if(customAvailability == 'no') {
-        //     tfMinDate =  dateToday;
-        // }else{
-        //     tfMinDate =  continuousCheckIn ;
-        // }
-        // if (fixedCheckOut) {
-        //    var tfMaxDate = fixedCheckOut;
-        // } else {
-        //     tfMaxDate =  continuousCheckOut;
-        // }
 
         //position fixed of sticky tour booking form
         $(window).scroll(function(){
@@ -265,12 +212,14 @@
 
         });
 
-        // Change view
 
+        /**
+         * Search Result Sidebar Ajax
+         */
         var filter_xhr;
-        // @KK creating a function for reuse this filter in any where we needs.
+        // Creating a function for reuse this filter in any where we needs.
         const makeFilter = () => { 
-            var dest = $('#location').val() || $('#tour_destination').val() ;
+            var dest = $('#tf-place').val();
             var adults = $('#adults').val();
             var room = $('#room').val();
             var children = $('#children').val();
@@ -446,49 +395,6 @@
             $('.reviews span').html("0/5");
         }
 
-        //code from J
-        // $(".tf-suggestion-items-wrapper").owlCarousel({            
-        //     margin:30,
-        //     stagePadding: 20,
-        //     loop:true,
-        //     nav:true,
-        //     dots:false,
-        //     responsive: {
-        //         0 : {
-        //             items:1,
-        //         },
-        //         1000 : {
-        //             items:2,
-        //         },
-        //         1241 : {
-        //             items:3,
-        //         }
-        //     }
-        // });
-        // $(".tf-review-items-wrapper").owlCarousel({            
-        //     margin:30,
-        //     stagePadding: 20,
-        //     loop:true,
-        //     nav:true,
-        //     dots:false,
-        //     items:4,
-
-        //     responsive: {
-        //         0 : {
-        //             items:1,
-        //         },
-        //         600 : {
-        //             items:2,
-        //         },
-        //         1000 : {
-        //             items:3,
-        //         },
-        //         1241 : {
-        //             items:4,
-        //         }
-        //     }
-
-        // });
         $(".tf-travel-text h4").click(function(){
             $(this).siblings('.tf-travel-contetn').slideToggle();
             $(this).parents('.tf-travel-itinerary-item').siblings().find('.tf-travel-contetn').slideUp();

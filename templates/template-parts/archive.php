@@ -35,7 +35,7 @@ $loop = new WP_Query( $args );
                 if( $post_type == 'tf_hotel' ){
                     tf_hotel_archive_single_item();
                 } elseif( $post_type == 'tf_tours' ) {
-                    tf_tours_archive_single();
+                    tf_tour_archive_single_item();
                 }
                     
             }           
