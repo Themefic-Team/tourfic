@@ -22,7 +22,7 @@ function tourfic_item_review_block() {
     $comments = get_comments( array( 'post_id' => get_the_ID() ) );
 	$tour_destination = isset($_GET['tour_destination']) ? $_GET['tour_destination'] : "";
 	$destination = isset($_GET['tour_destination']) ? $_GET['tour_destination'] : "";
-	if('tourfic' == get_post_type()){
+        if ('tf_hotel' == get_post_type()) {
 		$dest_slug_param = 'destination=' . $destination;
 		$room = isset( $_GET['room'] ) ? $_GET['room'] : '';
 		$infant = '';

@@ -559,22 +559,21 @@ function tf_migrate_data() {
         $hotels = get_posts(['post_type'   => 'tf_hotel']);
         foreach ($hotels as   $hotel) {
             $old_meta = get_post_meta($hotel->ID);
+            if (empty($old_meta['tf_hotel'])) {
             $new_meta = [];
             if (!empty($old_meta['formatted_location'])) {
-                $new_meta['location'] = $old_meta['formatted_location'];
+                    $new_meta['address'] = join(',', $old_meta['formatted_location']);
             }
             if (!empty($old_meta['tf_gallery_ids'])) {
-                $new_meta['gallery_ids'] = $old_meta['tf_gallery_ids'];
+                    $new_meta['gallery'] = join(',', $old_meta['tf_gallery_ids']);
             }
             if (!empty($old_meta['additional_information'])) {
                 $new_meta['highlights'] = $old_meta['additional_information'];
             }
             if (!empty($old_meta['terms_and_conditions'])) {
-                $new_meta['tc'] = $old_meta['terms_and_conditions'];
+                    $new_meta['tc'] = join(' ', $old_meta['terms_and_conditions']);
             }
-            if (!empty($old_meta['send_email_to'])) {
-                $new_meta['c-email'] = $old_meta['send_email_to'][0];
-            }
+
             if (!empty($old_meta['tf_room'])) {
                 $rooms =  unserialize($old_meta['tf_room'][0]);
                 foreach ($rooms as $room) {
@@ -604,6 +603,7 @@ function tf_migrate_data() {
                 'tf_hotel',
                 $new_meta
             );
+        }
         }
 
         /** Hotels Location Taxonomy Migration */
@@ -668,9 +668,21 @@ function tf_migrate_data() {
                 );
             }
         }
+        /** Tour Type Fix */
+        $tours = get_posts(['post_type'   => 'tf_tours']);
+        foreach ($tours as $tour) {
+            $old_meta = get_post_meta($tour->ID);
+            $tour_options = unserialize($old_meta['tf_tours_option'][0]);
+            $tour_options['type'] = 'continuous';
+            update_post_meta(
+                $tour->ID,
+                'tf_tours_option',
+                $tour_options,
+            );
+        }
 
 
-
+        wp_cache_flush();
         flush_rewrite_rules(true);
        update_option( 'tf_migrate_data_204', 1 );
 	}
