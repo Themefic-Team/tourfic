@@ -618,6 +618,7 @@
             }
             let wishPageTitle = targetNode.data('page-title');
             let wishPageUrl = targetNode.data('page-url');
+            let wishlistpage = wishPageUrl !== undefined ? '<a class="wish-button" href="' + wishPageUrl + '">' + wishPageTitle + '</a>' : '';
 
             /* For logged in user */
             if ($('body').hasClass('logged-in')) {
@@ -628,7 +629,7 @@
                         if (data.success) {
                             wishIconFill(targetNode);
                             notyf.success({
-                                message: data.data + '. <a class="wish-button" href="'+wishPageUrl+'">'+wishPageTitle+'</a>',
+                                message: data.data + wishlistpage,
                                 duration: 4e3
                             });
                         }
@@ -639,7 +640,7 @@
                 if (addWish(data) === true) {
                     wishIconFill(targetNode);
                     notyf.success({
-                        message: 'Item added to wishlist. <a class="wish-button" href="'+wishPageUrl+'">'+wishPageTitle+'</a>',
+                        message: 'Item added to wishlist.' + wishlistpage,
                         duration: 4e3
                     });
                 } else notyf.error('Item not added to wishlist');

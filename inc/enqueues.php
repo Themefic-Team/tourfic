@@ -161,7 +161,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
          */
         // Get single tour meta data
         global $post;
-        if(!is_404()) {
+        if (!is_404() && !empty($post)) {
             $meta = !empty(get_post_meta( $post->ID, 'tf_tours_option', true )) ? get_post_meta( $post->ID, 'tf_tours_option', true ) : '';
         }
         $tour_type = !empty($meta['type']) ? $meta['type'] : '';
@@ -240,4 +240,3 @@ if ( !function_exists('tf_enqueue_admin_scripts') ) {
     }
     add_action( 'admin_enqueue_scripts', 'tf_enqueue_admin_scripts' );
 }
-?>
