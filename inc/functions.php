@@ -537,6 +537,151 @@ function tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $
 }
 
 /**
+ * Search Result Sidebar check availability
+ * 
+ * Hotel Filter by Feature
+ * 
+ * Ajax function
+ */
+add_action( 'wp_ajax_nopriv_tf_trigger_filter', 'tf_search_result_ajax_sidebar' );
+add_action( 'wp_ajax_tf_trigger_filter', 'tf_search_result_ajax_sidebar' );
+function tf_search_result_ajax_sidebar(){
+
+    $relation = tfopt( 'search_relation', 'AND' );
+    $filter_relation = tfopt( 'filter_relation', 'OR' );
+
+    $search = ( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
+    $filters = ( $_POST['filters'] ) ? explode(',', sanitize_text_field( $_POST['filters'] )) : null;
+    $features = ( $_POST['features'] ) ? explode(',', sanitize_text_field( $_POST['features'] )) : null;
+    $posttype = $_POST['type']  ? sanitize_text_field( $_POST['type'] ): 'tf_hotel';
+    // @KK separate texonomy input for filter query
+    $place_taxonomy = $posttype == 'tf_tours' ? 'tour_destination' : 'hotel_location';
+    $filter_taxonomy = $posttype == 'tf_tours' ? 'null' : 'hotel_feature';
+    // @KK take dates for filter query
+    $checkin = isset($_POST['checkin']) ? trim($_POST['checkin']) : null;
+    $checkout = isset($_POST['checkout']) ? trim($_POST['checkout']) : null;
+    // Propertise args
+    $args = array(
+        'post_type' => $posttype,
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+    );
+
+
+    if ( $search ) {
+
+        // 1st search on Destination taxonomy
+        $destinations = new WP_Term_Query( array(
+            'taxonomy' => $place_taxonomy,
+            'orderby' => 'name',
+            'order' => 'ASC',
+            'hide_empty' => 0, //can be 1, '1' too
+            'hierarchical' => 0, //can be 1, '1' too
+            'slug' => sanitize_title($search, ''),
+        ) );
+
+        if ( $destinations ) {
+            // Define Featured Category IDs first
+            $destinations_ids = array();
+
+            // Creating loop to insert IDs to array.
+            foreach( $destinations->get_terms() as $cat ) {
+                $destinations_ids[] = $cat->term_id;
+            }
+
+            $args['tax_query']['relation'] = $relation;
+            $args['tax_query'][] = array(
+                'taxonomy' => $place_taxonomy,
+                'terms'    => $destinations_ids,
+            );
+
+        } else {
+            $args['s'] = $search;
+        }
+    }
+
+    if ( $filters ) {
+        $args['tax_query']['relation'] = $relation;
+
+        if ( $filter_relation == "OR" ) {
+            $args['tax_query'][] = array(
+                'taxonomy' => $filter_taxonomy,
+                'terms'    => $filters,
+            );
+        } else {
+            $args['tax_query']['tf_filters']['relation'] = 'AND';
+
+            foreach ($filters as $key => $term_id) {
+                $args['tax_query']['tf_filters'][] = array(
+                    'taxonomy' => $filter_taxonomy,
+                    'terms'    => array($term_id),
+                );
+            }
+
+        }
+
+    }
+    
+    //Query for the features filter of tours
+    if ( $features ) {
+        $args['tax_query']['relation'] = $relation;
+
+        if ( $filter_relation == "OR" ) {
+            $args['tax_query'][] = array(
+                'taxonomy' => 'tf_feature',
+                'terms'    => $features,
+            );
+        } else {
+            $args['tax_query']['tf_feature']['relation'] = 'AND';
+
+            foreach ($filters as $key => $term_id) {
+                $args['tax_query']['tf_feature'][] = array(
+                    'taxonomy' => 'tf_feature',
+                    'terms'    => array($term_id),
+                );
+            }
+
+        }
+
+    }
+    // @KK Add meta if dates exists and post type is tours
+    if ($checkin && $checkout && $posttype == ' tf_tours'){
+        $args['tax_query']['relation'] = $relation;
+        $args['meta_query'] = array(
+                array(
+                    'key'     => 'tf_tours_option',
+                    'value'   => str_replace('-', '/', $checkin),
+                    'compare' => 'LIKE',
+                ),
+                array(
+                    'key'     => 'tf_tours_option',
+                    'value'   => str_replace('-', '/', $checkout),
+                    'compare' => 'LIKE',
+                ),
+            );        
+    }   
+    $loop = new WP_Query( $args ); ?>
+    <?php
+    if ( $loop->have_posts() ) { 
+        while ( $loop->have_posts() ) {
+            
+            $loop->the_post(); 
+
+            if( $posttype == 'tf_tours' ){
+                tf_tour_archive_single_item();
+            }else{
+                tf_hotel_archive_single_item();
+            }  
+        } 
+    } else {
+        echo 'Nothing Found!';
+    }
+    wp_reset_postdata();
+
+    die();
+}
+
+/**
  * Migrate data from v2.0.4 to v2.1.0
  * 
  * run once
