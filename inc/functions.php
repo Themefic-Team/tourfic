@@ -681,6 +681,7 @@ function tf_search_result_ajax_sidebar(){
     die();
 }
 
+
 /**
  * Migrate data from v2.0.4 to v2.1.0
  * 
@@ -696,10 +697,12 @@ function tf_migrate_data() {
 
 
         /** Hotels Migrations */
-        $hotels = get_posts(['post_type'   => 'tf_hotel']);
+        $hotels = get_posts(['post_type' => 'tf_hotel', 'numberposts' => -1,]);
         foreach ($hotels as $hotel) {
             $old_meta = get_post_meta($hotel->ID);
-            if (empty($old_meta['tf_hotel'])) {
+            if (!empty($old_meta['tf_hotel'])) {
+                continue;
+            } 
             $new_meta = [];
             if (!empty($old_meta['formatted_location'])) {
                     $new_meta['address'] = join(',', $old_meta['formatted_location']);
@@ -743,7 +746,7 @@ function tf_migrate_data() {
                 'tf_hotel',
                 $new_meta
             );
-        }
+        
         }
 
         /** Hotels Location Taxonomy Migration */
@@ -809,7 +812,7 @@ function tf_migrate_data() {
             }
         }
         /** Tour Type Fix */
-        $tours = get_posts(['post_type'   => 'tf_tours']);
+        $tours = get_posts(['post_type'   => 'tf_tours', 'numberposts' => -1,]);
         foreach ($tours as $tour) {
             $old_meta = get_post_meta($tour->ID);
             $tour_options = unserialize($old_meta['tf_tours_option'][0]);
@@ -824,7 +827,7 @@ function tf_migrate_data() {
 
         wp_cache_flush();
         flush_rewrite_rules(true);
-       update_option( 'tf_migrate_data_204', 1 );
+        update_option('tf_migrate_data_204', 1);
 	}
 }
 add_action( 'init', 'tf_migrate_data' );
