@@ -256,11 +256,6 @@ function tourfic_posts_navigation(){
 	echo "</div>";
 }
 
-// Protected Pass
-function tourfic_proctected_product_pass(){
-	return "111111";
-}
-
 // Notice wrapper
 function tourfic_notice_wrapper(){
 	?>

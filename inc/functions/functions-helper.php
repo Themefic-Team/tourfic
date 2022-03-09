@@ -14,6 +14,11 @@ function tf_booking_search_action(){
 
 }
 
+// Protected Pass
+function tourfic_proctected_product_pass(){
+	return "111111";
+}
+
 /**
  * Review Block
  */
