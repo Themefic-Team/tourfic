@@ -413,7 +413,6 @@ function tourfic_sidebar_widgets_init() {
 
     // Register Custom Widgets
     $custom_widgets = array(
-    	'Tourfic_Show_On_Map',
     	'Tourfic_Ask_Question',
     	'Tourfic_Similar_Tours',
         'TF_Hotel_Feature_Filter'
