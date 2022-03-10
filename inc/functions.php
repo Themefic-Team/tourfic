@@ -8,7 +8,7 @@ defined( 'ABSPATH' ) || exit;
 if ( file_exists( TF_INC_PATH . 'functions/functions-helper.php' ) ) {
     require_once TF_INC_PATH . 'functions/functions-helper.php';
 } else {
-    tf_file_missing('functions-helper.php');
+    tf_file_missing(TF_INC_PATH . 'functions/functions-helper.php');
 }
 
 /**
@@ -17,7 +17,7 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-helper.php' ) ) {
 if ( file_exists( TF_INC_PATH . 'functions/functions_hotel.php' ) ) {
     require_once TF_INC_PATH . 'functions/functions_hotel.php';
 } else {
-    tf_file_missing('functions/functions_hotel.php');
+    tf_file_missing(TF_INC_PATH . 'functions/functions_hotel.php');
 }
 
 /**
@@ -26,7 +26,7 @@ if ( file_exists( TF_INC_PATH . 'functions/functions_hotel.php' ) ) {
 if ( file_exists( TF_INC_PATH . 'functions/functions_tour.php' ) ) {
     require_once TF_INC_PATH . 'functions/functions_tour.php';
 } else {
-    tf_file_missing('functions/functions_tour.php');
+    tf_file_missing(TF_INC_PATH . 'functions/functions_tour.php');
 }
 
 /**
@@ -35,7 +35,7 @@ if ( file_exists( TF_INC_PATH . 'functions/functions_tour.php' ) ) {
 if ( file_exists( TF_INC_PATH . 'functions/functions_wishlist.php' ) ) {
     require_once TF_INC_PATH . 'functions/functions_wishlist.php';
 } else {
-    tf_file_missing('functions/functions_wishlist.php');
+    tf_file_missing(TF_INC_PATH . 'functions/functions_wishlist.php');
 }
 
 /**
@@ -46,7 +46,40 @@ if ( file_exists( TF_INC_PATH . 'functions/functions_wishlist.php' ) ) {
 if ( file_exists( TF_INC_PATH . 'enqueues.php' ) ) {
     require_once TF_INC_PATH . 'enqueues.php';
 } else {
-    tf_file_missing('enqueues.php');
+    tf_file_missing(TF_INC_PATH . 'enqueues.php');
+}
+
+/**
+ * SVG
+ * 
+ * @since 1.0
+ */
+if ( file_exists( TF_INC_PATH . 'functions/svg-icons.php' ) ) {
+    require_once TF_INC_PATH . 'functions/svg-icons.php';
+} else {
+    tf_file_missing(TF_INC_PATH . 'functions/svg-icons.php');
+}
+
+/**
+ * Shortcodes
+ * 
+ * @since 1.0
+ */
+if ( file_exists( TF_INC_PATH . 'functions/shortcodes.php' ) ) {
+    require_once TF_INC_PATH . 'functions/shortcodes.php';
+} else {
+    tf_file_missing(TF_INC_PATH . 'functions/shortcodes.php');
+}
+
+/**
+ * Widgets
+ * 
+ * @since 1.0
+ */
+if ( file_exists( TF_INC_PATH . 'functions/widgets.php' ) ) {
+    require_once TF_INC_PATH . 'functions/widgets.php';
+} else {
+    tf_file_missing(TF_INC_PATH . 'functions/widgets.php');
 }
 
 /**
@@ -212,7 +245,11 @@ function add_elelmentor_addon() {
         return;
     }
     // Once we get here, We have passed all validation checks so we can safely include our plugin
-    require_once TF_INC_PATH . 'elementor-addon/elementor-addon-register.php';
+    if ( file_exists( TF_INC_PATH . 'elementor-addon/elementor-addon-register.php' ) ) {
+        require_once TF_INC_PATH . 'elementor-addon/elementor-addon-register.php';
+    } else {
+        tf_file_missing(TF_INC_PATH . 'elementor-addon/elementor-addon-register.php');
+    }
 
 }
 add_action( 'plugins_loaded', 'add_elelmentor_addon' );

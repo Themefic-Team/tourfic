@@ -22,8 +22,10 @@ if( class_exists( 'CSF' ) ) {
      * 
      * Main menu
      */
-    if ( file_exists( dirname( __FILE__ ) . '/parts/general.php' ) ) {
-        require_once dirname( __FILE__ ) . '/parts/general.php';
+    if ( file_exists( TF_OPTIONS_PATH . 'global/parts/general.php' ) ) {
+        require_once TF_OPTIONS_PATH . 'global/parts/general.php';
+    } else {
+        tf_file_missing(TF_OPTIONS_PATH . 'global/parts/general.php');
     }
 
     /**
@@ -38,8 +40,10 @@ if( class_exists( 'CSF' ) ) {
     ) );
     
     // Single hotel
-    if ( file_exists( dirname( __FILE__ ) . '/parts/hotel/single.php' ) ) {
-        require_once dirname( __FILE__ ) . '/parts/hotel/single.php';
+    if ( file_exists( TF_OPTIONS_PATH . 'global/parts/hotel/single.php' ) ) {
+        require_once TF_OPTIONS_PATH . 'global/parts/hotel/single.php';
+    } else {
+        tf_file_missing(TF_OPTIONS_PATH . 'global/parts/hotel/single.php');
     }
 
     /**
@@ -54,8 +58,10 @@ if( class_exists( 'CSF' ) ) {
     ) );
 
     // Single tour
-    if ( file_exists( dirname( __FILE__ ) . '/parts/tour/single.php' ) ) {
-        require_once dirname( __FILE__ ) . '/parts/tour/single.php';
+    if ( file_exists( TF_OPTIONS_PATH . 'global/parts/tour/single.php' ) ) {
+        require_once TF_OPTIONS_PATH . 'global/parts/tour/single.php';
+    } else {
+        tf_file_missing(TF_OPTIONS_PATH . 'global/parts/tour/single.php');
     }
 
     /**
@@ -63,8 +69,10 @@ if( class_exists( 'CSF' ) ) {
      * 
      * Main menu
      */
-    if ( file_exists( dirname( __FILE__ ) . '/parts/vendor.php' ) ) {
-        require_once dirname( __FILE__ ) . '/parts/vendor.php';
+    if ( file_exists( TF_OPTIONS_PATH . 'global/parts/vendor.php' ) ) {
+        require_once TF_OPTIONS_PATH . 'global/parts/vendor.php';
+    } else {
+        tf_file_missing(TF_OPTIONS_PATH . 'global/parts/vendor.php');
     }
 
     /**
@@ -72,8 +80,10 @@ if( class_exists( 'CSF' ) ) {
      * 
      * Main menu
      */
-    if ( file_exists( dirname( __FILE__ ) . '/parts/search.php' ) ) {
-        require_once dirname( __FILE__ ) . '/parts/search.php';
+    if ( file_exists( TF_OPTIONS_PATH . 'global/parts/search.php' ) ) {
+        require_once TF_OPTIONS_PATH . 'global/parts/search.php';
+    } else {
+        tf_file_missing(TF_OPTIONS_PATH . 'global/parts/search.php');
     }
 
     /**
@@ -81,8 +91,10 @@ if( class_exists( 'CSF' ) ) {
      * 
      * Main menu
      */
-    if ( file_exists( dirname( __FILE__ ) . '/parts/miscellaneous.php' ) ) {
-        require_once dirname( __FILE__ ) . '/parts/miscellaneous.php';
+    if ( file_exists( TF_OPTIONS_PATH . 'global/parts/miscellaneous.php' ) ) {
+        require_once TF_OPTIONS_PATH . 'global/parts/miscellaneous.php';
+    } else {
+        tf_file_missing(TF_OPTIONS_PATH . 'global/parts/miscellaneous.php');
     }
 
     /**

@@ -804,5 +804,9 @@ function tf_hotel_archive_single_item() {
  * 
  * @include
  */
-require_once TF_INC_PATH . 'functions/woocommerce/wc-hotel.php';
+if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-hotel.php' ) ) {
+    require_once TF_INC_PATH . 'functions/woocommerce/wc-hotel.php';
+} else {
+    tf_file_missing(TF_INC_PATH . 'functions/woocommerce/wc-hotel.php');
+}
 ?>

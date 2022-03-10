@@ -6,9 +6,17 @@ if ( class_exists( 'CSF' ) ) {
 
     // Global Settings
     if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
-        require_once TF_PRO_OPTIONS_PATH . 'global/settings.php';
+        if ( file_exists( TF_PRO_OPTIONS_PATH . 'global/settings.php' ) ) {
+            require_once TF_PRO_OPTIONS_PATH . 'global/settings.php';
+        } else {
+            tf_file_missing(TF_PRO_OPTIONS_PATH . 'global/settings.php');
+        }
     } else {
-        require_once TF_OPTIONS_PATH . 'global/settings.php';
+        if ( file_exists( TF_OPTIONS_PATH . 'global/settings.php' ) ) {
+            require_once TF_OPTIONS_PATH . 'global/settings.php';
+        } else {
+            tf_file_missing(TF_OPTIONS_PATH . 'global/settings.php');
+        }
     }
     
     /**
@@ -16,33 +24,61 @@ if ( class_exists( 'CSF' ) ) {
      */
     // Single Tour Metabox
     if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
-        require_once TF_PRO_OPTIONS_PATH . 'tour/single-tour.php';
+        if ( file_exists( TF_PRO_OPTIONS_PATH . 'tour/single-tour.php' ) ) {
+            require_once TF_PRO_OPTIONS_PATH . 'tour/single-tour.php';
+        } else {
+            tf_file_missing(TF_PRO_OPTIONS_PATH . 'tour/single-tour.php');
+        }
     } else {
-        require_once TF_OPTIONS_PATH . 'tour/single-tour.php';
+        if ( file_exists( TF_OPTIONS_PATH . 'tour/single-tour.php' ) ) {
+            require_once TF_OPTIONS_PATH . 'tour/single-tour.php';
+        } else {
+            tf_file_missing(TF_OPTIONS_PATH . 'tour/single-tour.php');
+        }
     }
 
     // Taxonomy: Tour Feature
-    require_once TF_OPTIONS_PATH . 'tour/taxonomy-tour_destination.php';
+    if ( file_exists( TF_OPTIONS_PATH . 'tour/taxonomy-tour_destination.php' ) ) {
+        require_once TF_OPTIONS_PATH . 'tour/taxonomy-tour_destination.php';
+    } else {
+        tf_file_missing(TF_OPTIONS_PATH . 'tour/taxonomy-tour_destination.php');
+    }
 
     /**
      * Post Type: tf_hotel
      */
     // Single Tour Metabox
     if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
-        require_once TF_PRO_OPTIONS_PATH . 'hotel/single-hotel.php';
+        if ( file_exists( TF_PRO_OPTIONS_PATH . 'hotel/single-hotel.php' ) ) {
+            require_once TF_PRO_OPTIONS_PATH . 'hotel/single-hotel.php';
+        } else {
+            tf_file_missing(TF_PRO_OPTIONS_PATH . 'hotel/single-hotel.php');
+        }
     } else {
-        require_once TF_OPTIONS_PATH . 'hotel/single-hotel.php';
+        if ( file_exists( TF_OPTIONS_PATH . 'hotel/single-hotel.php' ) ) {
+            require_once TF_OPTIONS_PATH . 'hotel/single-hotel.php';
+        } else {
+            tf_file_missing(TF_OPTIONS_PATH . 'hotel/single-hotel.php');
+        }
     }
 
     /**
      * Taxonomy: hotel_feature
      */
-    require_once TF_OPTIONS_PATH . 'hotel/taxonomy-hotel_feature.php';
+    if ( file_exists( TF_OPTIONS_PATH . 'hotel/taxonomy-hotel_feature.php' ) ) {
+        require_once TF_OPTIONS_PATH . 'hotel/taxonomy-hotel_feature.php';
+    } else {
+        tf_file_missing(TF_OPTIONS_PATH . 'hotel/taxonomy-hotel_feature.php');
+    }
 
     /**
      * Taxonomy: hotel_location
      */
-    require_once TF_OPTIONS_PATH . 'hotel/taxonomy-hotel_location.php';
+    if ( file_exists( TF_OPTIONS_PATH . 'hotel/taxonomy-hotel_location.php' ) ) {
+        require_once TF_OPTIONS_PATH . 'hotel/taxonomy-hotel_location.php';
+    } else {
+        tf_file_missing(TF_OPTIONS_PATH . 'hotel/taxonomy-hotel_location.php');
+    }
 
 }
 
