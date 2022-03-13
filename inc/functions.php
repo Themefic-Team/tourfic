@@ -725,7 +725,7 @@ function tf_search_result_ajax_sidebar(){
  * run once
  */
 function tf_migrate_data() {
-    if ( get_option( 'tf_migrate_data_204' ) < 1 ) {
+    if ( get_option( 'tf_migrate_data_204_210' ) < 1 ) {
 
         global $wpdb;
         $wpdb->update($wpdb->posts, ['post_type' => 'tf_hotel'], ['post_type' => 'tourfic']);
@@ -864,7 +864,7 @@ function tf_migrate_data() {
 
         wp_cache_flush();
         flush_rewrite_rules(true);
-        update_option('tf_migrate_data_204', 1);
+        update_option('tf_migrate_data_204_210', 1);
 	}
 }
 add_action( 'init', 'tf_migrate_data' );
