@@ -629,7 +629,7 @@
                     url: tf_params.ajax_url,
                     data: data,
                     beforeSend: function (data) {
-                        notyf.success("Adding to Wishlist")
+                        notyf.success("Adding to wishlist...")
                     },
                     success: function (response) {
                         if (response.success) {
