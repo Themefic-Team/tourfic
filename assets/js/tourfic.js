@@ -624,20 +624,28 @@
             if ($('body').hasClass('logged-in')) {
                 data.action = 'tf_add_to_wishlists';
                 data.nonce = targetNode.data('nonce');
-                $.post(tf_params.ajax_url, data,
-                    function (data) {
-                        if (data.success) {
+                $.ajax({
+                    type: "post",
+                    url: tf_params.ajax_url,
+                    data: data,
+                    beforeSend: function (data) {
+                        notyf.success("Adding to Wishlist")
+                    },
+                    success: function (response) {
+                        if (response.success) {
                             wishIconFill(targetNode);
                             notyf.success({
-                                message: data.data + wishlistpage,
+                                message: response.data + wishlistpage,
                                 duration: 4e3
                             });
                         }
-                    },
-                );
+                    }
+                });
+
             } else {
                 /* For guest */
                 if (addWish(data) === true) {
+                    notyf.success("Adding to Wishlist")
                     wishIconFill(targetNode);
                     notyf.success({
                         message: 'Item added to wishlist.' + wishlistpage,
