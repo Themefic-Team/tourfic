@@ -58,7 +58,7 @@ if( class_exists( 'CSF' ) ) {
           'id'    => 'featured',
           'class' => 'tf-csf-disable',
           'type'  => 'switcher',
-          'title' => __('Featured Tour', 'tourfic' ),
+          'title' => __('Featured Hotel', 'tourfic' ),
           'subtitle'   => $badge_up,
           'text_on'  => __('Yes', 'tourfic' ),
           'text_off' => __('No', 'tourfic' ),

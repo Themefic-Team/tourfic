@@ -50,26 +50,10 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 
         wp_enqueue_style( 'tourfic-styles', TF_ASSETS_URL . 'css/tourfic-styles.css', null, '' );
 
-        wp_enqueue_style( 'tourfic-autocomplete', TF_ASSETS_URL . 'css/tourfic-autocomplete.css', null, '' );
         wp_enqueue_style( 'tf-style', TF_ASSETS_URL . 'css/style.css', null, '' );
         wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/responsive.css', null, '' );
 
-
-        //wp_enqueue_style( 'daterangepicker', TF_ASSETS_URL . 'daterangepicker/daterangepicker.css', null, TOURFIC );
-
-        //wp_enqueue_script( 'moment', TF_ASSETS_URL . 'daterangepicker/moment.min.js', array( 'jquery' ), TOURFIC, true );
-        //wp_enqueue_script( 'daterangepicker', TF_ASSETS_URL . 'daterangepicker/daterangepicker.js', array( 'jquery' ), TOURFIC, true );
-
         wp_enqueue_script( 'tourfic-script', TF_ASSETS_URL . 'js/tourfic-script.js', array( 'jquery' ), '', true );
-
-        // wp_localize_script( 'tourfic-script', 'tf_params',
-        //     array(
-        //         'nonce'        => wp_create_nonce( 'tf_ajax_nonce' ),
-        //         'ajax_url'     => admin_url( 'admin-ajax.php' ),
-        //         'locations' => get_hotel_locations(),
-        //         'tour_destinations' => get_tour_destinations(),
-        //     )
-        // );
 
 
 

@@ -112,23 +112,5 @@ if( class_exists( 'CSF' ) ) {
         )
     ) );
 
-    /**
-     * License Info
-     * 
-     * Main menu
-     */
-    CSF::createSection( $prefix, array(
-        'title'       => __('License Info', 'tourfic'),
-        'icon'        => 'fas fa-hdd',
-        'fields'      => array(   
-            
-            array(
-                'type'     => 'callback',
-                'function' => 'tf_license_option',
-            ),
-
-        )
-    ) );
-
 
 }

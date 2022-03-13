@@ -106,18 +106,15 @@ if ( !function_exists( 'tf_single_page_template' ) ) {
 
         global $post;
 
-        $single_tour_style = tfopt( 'single_tour_style' );
-
-        $st = isset( $single_tour_style ) ? $single_tour_style : 'single_hotel.php';
-        //$s_tours = isset( $single_tour_style ) ? $single_tour_style : 'single-tf_tours.php';
-
         if ( 'tf_hotel' === $post->post_type ) {
+            
             $theme_files = array( 'tourfic/single_hotel.php' );
             $exists_in_theme = locate_template( $theme_files, false );
+
             if ( $exists_in_theme ) {
                 return $exists_in_theme;
             } else {
-                return TF_TEMPLATE_PATH . "hotel/{$st}";
+                return TF_TEMPLATE_PATH . "hotel/single_hotel.php";
             }
         }
 
