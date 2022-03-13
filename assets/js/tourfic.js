@@ -75,7 +75,7 @@
 
             $('html, body').animate({
                 scrollTop: $("#tf-single-hotel-avail").offset().top
-            }, 2000);
+            }, 500);
         });
 
         /**

@@ -345,9 +345,11 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
 
 													$room_f_meta = get_term_meta( $feature, 'hotel_feature', true );
 
-													if ($room_f_meta['icon-type'] == 'fa') {
+                                                    $room_icon_type = !empty($room_f_meta['icon-type']) ? $room_f_meta['icon-type'] : '';
+
+													if ($room_icon_type == 'fa') {
 														$room_feature_icon = '<i class="' .$room_f_meta['icon-fa']. '"></i>';
-													} elseif ($room_f_meta['icon-type'] == 'c') {
+													} elseif ($room_icon_type == 'c') {
 														$room_feature_icon = '<img src="' .$room_f_meta['icon-c']["url"]. '" style="min-width: ' .$room_f_meta['dimention']["width"]. 'px; height: ' .$room_f_meta['dimention']["width"]. 'px;" />';
 													}
 
