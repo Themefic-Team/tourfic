@@ -279,7 +279,7 @@ class Tourfic_Ask_Question extends WP_Widget {
         parent::__construct(
             'tf_ask_question', // Base ID
             'Tourfic - Ask Question', // Name
-            array( 'description' => __( 'Ask a question button on single tour page.', 'tourfic' ), ) // Args
+            array( 'description' => __( 'Ask a question button on single hotel page.', 'tourfic' ), ) // Args
         );
     }
 
@@ -297,7 +297,7 @@ class Tourfic_Ask_Question extends WP_Widget {
         $subtitle = isset( $instance[ 'subtitle' ] ) ? $instance[ 'subtitle' ] : __( 'Find more info in the FAQ section.', 'tourfic' );
         $btn_label = isset( $instance[ 'btn_label' ] ) ? $instance[ 'btn_label' ] : __( 'Ask a question', 'tourfic' );
 
-        if ( !is_singular( 'tourfic' ) ) {
+        if ( !is_singular( array( 'tf_hotel', 'tf_tours' ) ) ) {
         	return;
         }
 
@@ -383,9 +383,9 @@ class Tourfic_Ask_Question extends WP_Widget {
 function tourfic_sidebar_widgets_init() {
 
     register_sidebar( array(
-        'name'          => __( 'TOURFIC: Single Tour Sidebar', 'tourfic' ),
+        'name'          => __( 'TOURFIC: Single Hotel Sidebar', 'tourfic' ),
         'id'            => 'tf_single_booking_sidebar',
-        'description'   => __( 'Widgets in this area will be shown on tourfic single page', 'tourfic' ),
+        'description'   => __( 'Widgets in this area will be shown on hotel single page', 'tourfic' ),
         'before_widget' => '<div id="%1$s" class="tf_widget widget %2$s">',
         'after_widget'  => '</div>',
         'before_title'  => '<h4 class="tf_widgettitle">',

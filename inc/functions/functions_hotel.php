@@ -669,23 +669,12 @@ function tf_hotel_sidebar_booking_form( $placement = 'single' ) { ?>
     })(jQuery);
     </script>
     
-    <?php if ( $placement == 'single' ) { ?>
     <?php if ( is_active_sidebar( 'tf_single_booking_sidebar' ) ) { ?>
-    <div id="tf__booking_sidebar">
-        <?php dynamic_sidebar( 'tf_single_booking_sidebar' ); ?>
-        <br>
-    </div>
-    <?php } ?>
-    <?php } else { ?>
-    <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
-    <div id="tf__booking_sidebar">
-        <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
-        <br>
-    </div>
-    <?php } ?>
-    <?php } ?>
-    
-    <?php
+        <div id="tf__booking_sidebar">
+            <?php dynamic_sidebar( 'tf_single_booking_sidebar' ); ?>
+            <br>
+        </div>
+    <?php }
 }
 
 #################################
