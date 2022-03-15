@@ -39,6 +39,8 @@ $loop = new WP_Query( $args );
                 }
                     
             }           
+        } else {
+            echo '<div class="tf-nothing-found">Nothing Found!</div>';
         }
         ?>
     </div>

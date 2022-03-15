@@ -71,7 +71,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
                 $default_count = $term->count;
                 $count = $show_count ? '<span>' . tf_term_count($term->slug, $destination_name, $default_count) . '</span>' : '';
 
-                echo "<li><label><input type='checkbox' name='tf_filters[]' value='{$id}'/> {$feature_icon} {$name}</label> {$count}</li>";
+                echo "<li><label><input type='checkbox' name='tf_filters[]' value='{$id}'/> {$feature_icon} {$name}</label></li>";
             }
             echo "</ul></div>";
 

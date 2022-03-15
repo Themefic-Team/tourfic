@@ -24,13 +24,16 @@ get_header('tourfic'); ?>
 		            </div>
 		        </div>
 				<div class="archive_ajax_result">
-					<?php if ( have_posts() ) : ?>
-						<?php while ( have_posts() ) : the_post(); ?>
-							<?php tf_hotel_archive_single_item(); ?>
-						<?php endwhile; ?>
-					<?php else : ?>
-						<?php get_template_part( 'template-parts/content', 'none' ); ?>
-					<?php endif; ?>
+					<?php
+					if ( have_posts() ) {
+						while ( have_posts() ) {
+							the_post();
+							tf_hotel_archive_single_item();
+						}
+					} else {
+						echo 'Nothing Found!';
+					}
+					?>
 				</div>
 				<div class="tf_posts_navigation">
 					<?php tourfic_posts_navigation(); ?>

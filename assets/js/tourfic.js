@@ -41,7 +41,7 @@
                 success: function (data) {
                     $('html, body').animate({
                         scrollTop: $("#rooms").offset().top
-                    }, 2000);
+                    }, 500);
                     //console.log(data);
                     $("#rooms").html(data);
                 },

@@ -77,7 +77,7 @@
             if (thisVal > 1) {
                 $('.child-text').text(thisVal + " Children");
             } else {
-                $('.child-text').text(thisVal + " Child");
+                $('.child-text').text(thisVal + " Children");
             }
 
         });

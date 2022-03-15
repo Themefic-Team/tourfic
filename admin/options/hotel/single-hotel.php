@@ -53,6 +53,13 @@ if( class_exists( 'CSF' ) ) {
     CSF::createSection( $prefix, array(
       'title'  => __( 'Hotel Detail', 'tourfic' ),
       'fields' => array(
+
+        array(
+          'id'    => 'gallery',
+          'type'  => 'gallery',
+          'title' => __('Hotel Gallery', 'tourfic'),
+          'subtitle' => __('Upload one or many images to make a hotel image gallery for customers', 'tourfic'),
+        ),
   
         array(
           'id'    => 'featured',
@@ -64,22 +71,15 @@ if( class_exists( 'CSF' ) ) {
           'text_off' => __('No', 'tourfic' ),
         ),
 
-        array(
-          'id'      => '',
-          'class' => 'tf-csf-disable tf-csf-pro',
-          'type'    => 'media',
-          'title'   => __('Hotel logo', 'tourfic' ),
-          'subtitle'   => $badge_up_pro,
-          'desc' =>  __( 'Upload the hotel logo (it is recommended using size: 256 x 195 px)', 'tourfic' ),
-          'library' => 'image',
-        ),
-
-        array(
-          'id'    => 'gallery',
-          'type'  => 'gallery',
-          'title' => __('Hotel Gallery', 'tourfic'),
-          'subtitle' => __('Upload one or many images to make a hotel image gallery for customers', 'tourfic'),
-        ),
+        // array(
+        //   'id'      => '',
+        //   'class' => 'tf-csf-disable tf-csf-pro',
+        //   'type'    => 'media',
+        //   'title'   => __('Hotel logo', 'tourfic' ),
+        //   'subtitle'   => $badge_up_pro,
+        //   'desc' =>  __( 'Upload the hotel logo (it is recommended using size: 256 x 195 px)', 'tourfic' ),
+        //   'library' => 'image',
+        // ),
 
         array(
           'id'       => '',
@@ -91,63 +91,63 @@ if( class_exists( 'CSF' ) ) {
           'validate' => 'csf_validate_url',
         ),
 
-        array(
-          'id'      => '',
-          'class' => 'tf-csf-disable tf-csf-pro',
-          'type'    => 'slider',
-          'title'   => __('Hotel Rating Standard', 'tourfic'),
-          'subtitle'   => $badge_up_pro,
-          'min'     => 0,
-          'max'     => 7,
-          'step'    => 1,
-          'default' => 0,
-        ),
+        // array(
+        //   'id'      => '',
+        //   'class' => 'tf-csf-disable tf-csf-pro',
+        //   'type'    => 'slider',
+        //   'title'   => __('Hotel Rating Standard', 'tourfic'),
+        //   'subtitle'   => $badge_up_pro,
+        //   'min'     => 0,
+        //   'max'     => 7,
+        //   'step'    => 1,
+        //   'default' => 0,
+        // ),
   
       )
     ) );
 
     // Contact Information
-    CSF::createSection( $prefix, array(
-      'title'  => __('Contact Information', 'tourfic'),
-      'fields' => array(
+    // CSF::createSection( $prefix, array(
+    //   'title'  => __('Contact Information', 'tourfic'),
+    //   'fields' => array(
   
-        array(
-          'id'       => 'c-email',
-          'class' => 'tf-csf-disable',
-          'type'     => 'text',
-          'title'    => __('Hotel Email', 'tourfic'),
-          'subtitle'   => $badge_up,
-          'desc' =>  __( 'This email will received notification when have booking order', 'tourfic' ),
-          //'validate' => 'csf_validate_email',
-        ),
+    //     array(
+    //       'id'       => 'c-email',
+    //       'class' => 'tf-csf-disable',
+    //       'type'     => 'text',
+    //       'title'    => __('Hotel Email', 'tourfic'),
+    //       'subtitle'   => $badge_up,
+    //       'desc' =>  __( 'This email will received notification when have booking order', 'tourfic' ),
+    //       //'validate' => 'csf_validate_email',
+    //     ),
 
-        array(
-          'id'       => 'c-web',
-          'class' => 'tf-csf-disable',
-          'type'     => 'text',
-          'title'    => __('Hotel Website', 'tourfic'),
-          'subtitle' =>  __( 'Enter hotel website' .$badge_up, 'tourfic' ),
-          //'validate' => 'csf_validate_url',
-        ),
+    //     array(
+    //       'id'       => 'c-web',
+    //       'class' => 'tf-csf-disable',
+    //       'type'     => 'text',
+    //       'title'    => __('Hotel Website', 'tourfic'),
+    //       'subtitle' =>  __( 'Enter hotel website' .$badge_up, 'tourfic' ),
+    //       //'validate' => 'csf_validate_url',
+    //     ),
 
-        array(
-          'id'      => 'c-phone',
-          'class' => 'tf-csf-disable',
-          'type'    => 'text',
-          'title'   => __('Hotel Phone Number', 'tourfic'),
-          'subtitle' => __('Enter hotel phone number' .$badge_up, 'tourfic'),
-        ),
+    //     array(
+    //       'id'      => 'c-phone',
+    //       'class' => 'tf-csf-disable',
+    //       'type'    => 'text',
+    //       'title'   => __('Hotel Phone Number', 'tourfic'),
+    //       'subtitle' => __('Enter hotel phone number' .$badge_up, 'tourfic'),
+    //     ),
 
-        array(
-          'id'      => 'c-fax',
-          'class' => 'tf-csf-disable',
-          'type'    => 'text',
-          'title'   => __('Hotel Fax', 'tourfic'),
-          'subtitle' => __('Enter hotel fax number' .$badge_up, 'tourfic'),
-        ),
+    //     array(
+    //       'id'      => 'c-fax',
+    //       'class' => 'tf-csf-disable',
+    //       'type'    => 'text',
+    //       'title'   => __('Hotel Fax', 'tourfic'),
+    //       'subtitle' => __('Enter hotel fax number' .$badge_up, 'tourfic'),
+    //     ),
   
-      )
-    ) );
+    //   )
+    // ) );
 
      
     // Check-in check-out
@@ -164,31 +164,31 @@ if( class_exists( 'CSF' ) ) {
           'desc' =>  __( 'E.g: booking from 22 -23, then all days 22 and 23 are full, other people cannot book', 'tourfic' ),
         ),
 
-        array(
-          'id'       => '',
-          'class' => 'tf-csf-disable tf-csf-pro',
-          'type'     => 'datetime',
-          'title'    => __('Time for Check-in', 'tourfic'),
-          'subtitle' => __('Enter time for check-in at hotel' .$badge_up_pro, 'tourfic'),
-          'settings' => array(
-            'noCalendar' => true,
-            'enableTime' => true,
-            'dateFormat' => 'h:i K',
-          ),
-        ),
+        // array(
+        //   'id'       => '',
+        //   'class' => 'tf-csf-disable tf-csf-pro',
+        //   'type'     => 'datetime',
+        //   'title'    => __('Time for Check-in', 'tourfic'),
+        //   'subtitle' => __('Enter time for check-in at hotel' .$badge_up_pro, 'tourfic'),
+        //   'settings' => array(
+        //     'noCalendar' => true,
+        //     'enableTime' => true,
+        //     'dateFormat' => 'h:i K',
+        //   ),
+        // ),
 
-        array(
-          'id'       => '',
-          'class' => 'tf-csf-disable tf-csf-pro',
-          'type'     => 'datetime',
-          'title'    => __('Time for Check-out', 'tourfic'),
-          'subtitle' => __('Enter time for check-out at hotel' .$badge_up_pro, 'tourfic'),
-          'settings' => array(
-            'noCalendar' => true,
-            'enableTime' => true,
-            'dateFormat' => 'h:i K',
-          ),
-        ),
+        // array(
+        //   'id'       => '',
+        //   'class' => 'tf-csf-disable tf-csf-pro',
+        //   'type'     => 'datetime',
+        //   'title'    => __('Time for Check-out', 'tourfic'),
+        //   'subtitle' => __('Enter time for check-out at hotel' .$badge_up_pro, 'tourfic'),
+        //   'settings' => array(
+        //     'noCalendar' => true,
+        //     'enableTime' => true,
+        //     'dateFormat' => 'h:i K',
+        //   ),
+        // ),
   
       )
     ) );

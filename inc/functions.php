@@ -14,28 +14,28 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-helper.php' ) ) {
 /**
  * Hotel Functions
  */
-if ( file_exists( TF_INC_PATH . 'functions/functions_hotel.php' ) ) {
-    require_once TF_INC_PATH . 'functions/functions_hotel.php';
+if ( file_exists( TF_INC_PATH . 'functions/functions-hotel.php' ) ) {
+    require_once TF_INC_PATH . 'functions/functions-hotel.php';
 } else {
-    tf_file_missing(TF_INC_PATH . 'functions/functions_hotel.php');
+    tf_file_missing(TF_INC_PATH . 'functions/functions-hotel.php');
 }
 
 /**
  * Tour Functions
  */
-if ( file_exists( TF_INC_PATH . 'functions/functions_tour.php' ) ) {
-    require_once TF_INC_PATH . 'functions/functions_tour.php';
+if ( file_exists( TF_INC_PATH . 'functions/functions-tour.php' ) ) {
+    require_once TF_INC_PATH . 'functions/functions-tour.php';
 } else {
-    tf_file_missing(TF_INC_PATH . 'functions/functions_tour.php');
+    tf_file_missing(TF_INC_PATH . 'functions/functions-tour.php');
 }
 
 /**
  * Wishlist Functions
  */
-if ( file_exists( TF_INC_PATH . 'functions/functions_wishlist.php' ) ) {
-    require_once TF_INC_PATH . 'functions/functions_wishlist.php';
+if ( file_exists( TF_INC_PATH . 'functions/functions-wishlist.php' ) ) {
+    require_once TF_INC_PATH . 'functions/functions-wishlist.php';
 } else {
-    tf_file_missing(TF_INC_PATH . 'functions/functions_wishlist.php');
+    tf_file_missing(TF_INC_PATH . 'functions/functions-wishlist.php');
 }
 
 /**
@@ -80,6 +80,17 @@ if ( file_exists( TF_INC_PATH . 'functions/widgets.php' ) ) {
     require_once TF_INC_PATH . 'functions/widgets.php';
 } else {
     tf_file_missing(TF_INC_PATH . 'functions/widgets.php');
+}
+
+/**
+ * Notice
+ * 
+ * Update
+ */
+if ( file_exists( TF_INC_PATH . 'functions/functions-notice_update.php' ) ) {
+    require_once TF_INC_PATH . 'functions/functions-notice_update.php';
+} else {
+    tf_file_missing(TF_INC_PATH . 'functions/functions-notice_update.php');
 }
 
 /**

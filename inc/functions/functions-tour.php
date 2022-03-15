@@ -334,6 +334,16 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
  * Single Tour Page
  */
 function tf_single_tour_booking_form( $post_id ) {
+
+    // Value from URL
+    // Adults
+    $adults = !empty($_GET['adults']) ? sanitize_text_field($_GET['adults']) : '';
+    // children
+    $child = !empty($_GET['children']) ? sanitize_text_field($_GET['children']) : '';
+    // room
+    $infant = !empty($_GET['infant']) ? sanitize_text_field($_GET['infant']) : '';
+    // Check-in & out date
+    $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
     
     $meta = get_post_meta( $post_id, 'tf_tours_option', true );
     $tour_type = !empty($meta['type']) ? $meta['type'] : '';
@@ -390,45 +400,45 @@ function tf_single_tour_booking_form( $post_id ) {
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M16.5 6a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0zM18 6A6 6 0 1 0 6 6a6 6 0 0 0 12 0zM3 23.25a9 9 0 1 1 18 0 .75.75 0 0 0 1.5 0c0-5.799-4.701-10.5-10.5-10.5S1.5 17.451 1.5 23.25a.75.75 0 0 0 1.5 0z"></path></svg>
                         </span>
                         <?php if ($meta['custom_avail'] == true || (!$disable_adult_price && $adult_price != false)) { ?>
-                            <div class="adults-text">0 Adults</div>
+                            <div class="adults-text"><?php echo (!empty($adults) ? $adults : '0') . ' ' . __("Adults", "tourfic"); ?></div>
                         <?php } ?>
                         <?php if ($meta['custom_avail'] == true || (!$disable_child_price && $child_price != false)) { ?>
                             <div class="person-sep"></div>
-                            <div class="child-text">0 Children</div>
+                            <div class="child-text"><?php echo (!empty($child) ? $child : '0') . ' ' . __("Children", "tourfic"); ?></div>
                         <?php } ?>
                         <?php if ($meta['custom_avail'] == true || (!$disable_infant_price && $infant_price != false)) { ?>
                             <div class="person-sep"></div>
-                            <div class="infant-text">0 Infant</div>
+                            <div class="infant-text"><?php echo (!empty($infant) ? $infant : '0') . ' ' . __("Infant", "tourfic"); ?></div>
                         <?php } ?>
                     </div>
                     <div class="tf_acrselection-wrap" style="display: none;">
                         <div class="tf_acrselection-inner">
                             <?php if ($meta['custom_avail'] == true || (!$disable_adult_price && $adult_price != false)) { ?>
                             <div class="tf_acrselection">
-                                <div class="acr-label">Adults</div>
+                                <div class="acr-label"><?php _e('Adults', 'tourfic'); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
-                                        <input type="number" name="adults" id="adults" min="0" value="0">
+                                        <input type="number" name="adults" id="adults" min="0" value="<?php echo !empty($adults) ? $adults : '0'; ?>">
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
                             <?php } ?>
                             <?php if ($meta['custom_avail'] == true || (!$disable_child_price && $child_price != false)) { ?>
                             <div class="tf_acrselection">
-                                <div class="acr-label">Children</div>
+                                <div class="acr-label"><?php _e('Children', 'tourfic'); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
-                                        <input type="number" name="childrens" id="children" min="0" value="0">
+                                        <input type="number" name="childrens" id="children" min="0" value="<?php echo !empty($child) ? $child : '0'; ?>">
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
                             <?php } ?>
                             <?php if ($meta['custom_avail'] == true || (!$disable_infant_price && $infant_price != false)) { ?>
                             <div class="tf_acrselection">
-                                <div class="acr-label">Infant</div>
+                                <div class="acr-label"><?php _e('Infant', 'tourfic'); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
-                                        <input type="number" name="infants" id="infant" min="0" value="0">
+                                        <input type="number" name="infants" id="infant" min="0" value="<?php echo !empty($infant) ? $infant : '0'; ?>">
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
@@ -611,17 +621,24 @@ function tf_tour_archive_single_item() {
 
     // get post id
     $post_id = get_the_ID();
-
-    /**
-     * Get hotel meta values
-     */
+    //Get hotel meta values
     $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
-
     // Location
     $location  = !empty($meta['text_location']) ? $meta['text_location'] : '';
-
     // Featured
     $featured  = !empty($meta['tour_as_featured']) ? $meta['tour_as_featured'] : '';
+
+    // Adults
+    $adults = !empty($_GET['adults']) ? sanitize_text_field($_GET['adults']) : '';
+    // children
+    $child = !empty($_GET['children']) ? sanitize_text_field($_GET['children']) : '';
+    // room
+    $infant = !empty($_GET['infant']) ? sanitize_text_field($_GET['infant']) : '';
+    // Check-in & out date
+    $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
+    // Single link
+    $url = get_the_permalink() . '?adults=' . ($adults ?? '') . '&children=' . ($child ?? '') . '&infant=' . ($infant ?? '') . '&check-in-out-date=' . ($check_in_out ?? '');
+
     ?>
 	<div class="single-tour-wrap">
 		<div class="single-tour-inner">
@@ -629,6 +646,7 @@ function tf_tour_archive_single_item() {
 				<div class="tf-featured"><?php _e( 'Featured','tourfic' ) ?></div>
 			<?php }	?>
 			<div class="tourfic-single-left">
+                <a href="<?php echo $url; ?>">
 				<?php
                 if (has_post_thumbnail()) {
 					the_post_thumbnail( 'full' );
@@ -636,12 +654,13 @@ function tf_tour_archive_single_item() {
                     echo '<img width="100%" height="100%" src="' .TF_ASSETS_URL . "img/img-not-available.svg". '" class="attachment-full size-full wp-post-image">';
                 }
                 ?>
+                </a>
 			</div>
 			<div class="tourfic-single-right">
 				<div class="tf_property_block_main_row">
 					<div class="tf_item_main_block">
 						<div class="tf-hotel__title-wrap tf-tours-title-wrap">
-                            <a href="<?php echo get_the_permalink(); ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
+                            <a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
 						</div>
 						<?php
                         if($location) {
@@ -658,7 +677,7 @@ function tf_tour_archive_single_item() {
 				</div>
 
 				<div class="availability-btn-area">
-					<a href="<?php echo get_the_permalink(); ?>" class="button tf_button"><?php esc_html_e( 'Details', 'tourfic' );?></a>
+					<a href="<?php echo $url; ?>" class="button tf_button"><?php esc_html_e( 'Details', 'tourfic' );?></a>
 				</div>
 			</div>
 		</div>

@@ -50,6 +50,17 @@
     text-align: justify !important;
 }
 
+/*================================
+|            Common              |
+================================*/
+.tf-nothing-found {
+    font-size: 24px;
+    font-weight: normal;
+    color: #333;
+    text-align: center;
+    margin: 20% 0 20% 0;
+}
+
 /**
  * tf-tooltip
  */
@@ -240,6 +251,11 @@
     padding: 0;
 }
 
+.tf-hotel-side-booking #check-in-out-date {
+    font-size: 13px;
+    min-width: 150px;
+    padding: 0;
+}
 /*================================
 |         Wishlist CSS           |
 ================================*/
@@ -367,18 +383,49 @@
     font-size: 13px;
     min-width: 150px;
 }
+
 /*================================
 |            Search Page CSS     |
 ================================*/
-.tf-filter ul{
-    display: list-item;
+/* Filter Widget  */
+.widget_tf_hotel_filter .tf-filter{
+
 }
-.tf-filter ul li {
-    text-transform: capitalize;
+.widget_tf_hotel_filter .tf-filter ul{
+    display: block;
+    margin: 0;
 }
-.tf-filter ul li input[type="checkbox"] {
-    margin-right: 5px;
+.widget_tf_hotel_filter .tf-filter ul li{
+    background: #f2f2f2;
+    margin: 0 0 3px 0;
+    /* display: grid;
+    grid-template-columns: 90% 10%;
+    align-items: center; */
+    padding: 8px 10px 8px 10px;
+    justify-content: space-between;
 }
-.tf-filter ul li i {
-    margin-right: 5px;
+.widget_tf_hotel_filter .tf-filter ul li label{
+    display: grid;
+    grid-template-columns: 11% 13% 76%;
+    align-items: center;
+    line-height: 1;
+    color: #333;
+    cursor: pointer;
+}
+.widget_tf_hotel_filter .tf-filter ul li label input{
+    outline: none;
+    width: 14px;
+    height: 14px;
+    color: #333;
+}
+.widget_tf_hotel_filter .tf-filter ul li span{
+    display: block;
+    text-align: center;
+    background: #333;
+    border-radius: 50%;
+    line-height: 20px;
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    font-size: 12px;
 }

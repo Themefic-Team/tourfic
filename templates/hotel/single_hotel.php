@@ -355,7 +355,7 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
 
 													$room_term = get_term( $feature ); ?>
                                                 <li class="tf-tooltip">
-                                                    <?php echo $room_feature_icon; ?>
+                                                    <?php echo !empty($room_feature_icon) ? $room_feature_icon : ''; ?>
                                                     <div class="tf-top">
                                                         <?php echo $room_term->name; ?>
                                                         <i class="tool-i"></i>
@@ -483,7 +483,7 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
 
             <!-- Start Sidebar -->
             <div class="tf_sidebar">
-                <?php tf_hotel_sidebar_booking_form( 'single' ); ?>
+                <?php tf_hotel_sidebar_booking_form(); ?>
             </div>
             <!-- End Sidebar -->
         </div>

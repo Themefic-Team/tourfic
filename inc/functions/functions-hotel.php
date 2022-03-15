@@ -430,10 +430,11 @@ function tf_room_availability_callback() {
                         <?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' ); ?>
                         <div class="room-selection-wrap">
                             <select name="hotel_room_selected" id="hotel-room-selected">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                                <?php
+                                foreach (range(1,8) as $value) {
+                                    echo '<option>' . $value . '</option>';
+                                }
+                                ?>
                             </select>
                         </div>
                         <div class="room-submit-wrap">
@@ -474,6 +475,18 @@ function tf_room_availability_callback() {
  */
 if ( !function_exists('tf_hotel_search_form_horizontal') ) {
     function tf_hotel_search_form_horizontal( $classes, $title, $subtitle ){
+
+        // location
+        $location = !empty($_GET['location']) ? sanitize_text_field($_GET['location']) : '';
+        // Adults
+        $adults = !empty($_GET['adults']) ? sanitize_text_field($_GET['adults']) : '';
+        // children
+        $child = !empty($_GET['children']) ? sanitize_text_field($_GET['children']) : '';
+        // room
+        $room = !empty($_GET['room']) ? sanitize_text_field($_GET['room']) : '';
+        // Check-in & out date
+        $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
+        
         ?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
 
@@ -508,11 +521,11 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
                 <span class="tf_person-icon">
                     <?php echo tourfic_get_svg('person'); ?>
                 </span>
-                <div class="adults-text">1 <?php _e('Adults', 'tourfic'); ?></div>
+                <div class="adults-text"><?php echo (!empty($adults) ? $adults : '1') . ' ' . __('Adults', 'tourfic'); ?></div>
                 <div class="person-sep"></div>
-                <div class="child-text">0 <?php _e('Children', 'tourfic'); ?></div>
+                <div class="child-text"><?php echo (!empty($child) ? $child : '0') . ' ' . __('Children', 'tourfic'); ?></div>
                 <div class="person-sep"></div>
-                <div class="room-text">1 <?php _e('Room', 'tourfic'); ?></div>
+                <div class="room-text"><?php echo (!empty($room) ? $room : '1') . ' ' . __('Room', 'tourfic'); ?></div>
             </div>
 
             <div class="tf_acrselection-wrap">
@@ -521,7 +534,7 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
                         <div class="acr-label"><?php _e('Adults', 'tourfic'); ?></div>
                         <div class="acr-select">
                             <div class="acr-dec">-</div>
-                            <input type="number" name="adults" id="adults" min="1" value="1">
+                            <input type="number" name="adults" id="adults" min="1" value="<?php echo !empty($adults) ? $adults : '1'; ?>">
                             <div class="acr-inc">+</div>
                         </div>
                     </div>
@@ -529,7 +542,7 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
                         <div class="acr-label"><?php _e('Children', 'tourfic'); ?></div>
                         <div class="acr-select">
                             <div class="acr-dec">-</div>
-                            <input type="number" name="children" id="children" min="0" value="0">
+                            <input type="number" name="children" id="children" min="0" value="<?php echo !empty($child) ? $child : '0'; ?>">
                             <div class="acr-inc">+</div>
                         </div>
                     </div>
@@ -537,7 +550,7 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
                         <div class="acr-label">1 <?php _e('Rooms', 'tourfic'); ?></div>
                         <div class="acr-select">
                             <div class="acr-dec">-</div>
-                            <input type="number" name="room" id="room" min="1" value="1">
+                            <input type="number" name="room" id="room" min="1" value="<?php echo !empty($room) ? $room : '1'; ?>">
                             <div class="acr-inc">+</div>
                         </div>
                     </div>
@@ -590,7 +603,16 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
 /**
  * Single Hotel Sidebar Booking Form
  */
-function tf_hotel_sidebar_booking_form( $placement = 'single' ) { ?>
+function tf_hotel_sidebar_booking_form() {
+
+    // Adults
+    $adults = !empty($_GET['adults']) ? sanitize_text_field($_GET['adults']) : '';
+    // children
+    $child = !empty($_GET['children']) ? sanitize_text_field($_GET['children']) : '';
+    // Check-in & out date
+    $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
+
+    ?>
 
     <!-- Start Booking widget -->
     <form id="tf-single-hotel-avail" class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off">
@@ -602,12 +624,15 @@ function tf_hotel_sidebar_booking_form( $placement = 'single' ) { ?>
                 <div class="tf_form-inner">
                     <i class="fas fa-user-friends"></i>
                     <select name="adults" id="adults" class="">
-                        <option value="1">1 adult</option>
-                        <option value="2">2 adults</option>
-                        <option value="3">3 adults</option>
-                        <option value="4">4 adults</option>
-                        <option value="5">5 adults</option>
-                        <option value="6">6 adults</option>
+                        <?php
+                        echo '<option value="1">1 ' .__("Adult", "tourfic"). '</option>';
+                        
+                        foreach (range(2,8) as $value) {
+                            $selected = $value == $adults ? 'selected' : null;
+                            echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __("Adult", "tourfic") . '</option>';
+                        }
+                        ?>
+                        
                     </select>
                 </div>
             </label>
@@ -618,12 +643,14 @@ function tf_hotel_sidebar_booking_form( $placement = 'single' ) { ?>
                 <div class="tf_form-inner">
                     <i class="fas fa-child"></i>
                     <select name="children" id="children" class="">
-                        <option value="0">0 child</option>
-                        <option value="1">1 child</option>
-                        <option value="2">2 childrens</option>
-                        <option value="3">3 childrens</option>
-                        <option value="4">4 childrens</option>
-                        <option value="5">5 childrens</option>
+                        <?php
+                        echo '<option value="0">0 ' .__("Children", "tourfic"). '</option>';
+                        
+                        foreach (range(1,8) as $value) {
+                            $selected = $value == $child ? 'selected' : null;
+                            echo '<option ' .$selected. ' value="' .$value. '">' . $value . ' ' . __("Children", "tourfic") . '</option>';
+                        }
+                        ?>
                     </select>
                 </div>
             </label>
@@ -636,7 +663,7 @@ function tf_hotel_sidebar_booking_form( $placement = 'single' ) { ?>
                     <div class="tf_form-inner">
                         <i class="far fa-calendar-alt"></i>
                         <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                            placeholder="Select Date" required>
+                            placeholder="Select Date" <?php echo !empty($check_in_out) ? 'value="' . $check_in_out . '"' : '' ?> required>
                     </div>
                 </label>
             </div>
@@ -649,7 +676,7 @@ function tf_hotel_sidebar_booking_form( $placement = 'single' ) { ?>
             <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type" />
             <input type="hidden" name="post_id" value="<?php echo get_the_ID(); ?>" />
             <button class="tf_button tf-submit"
-                type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' );?></button>
+                type="submit"><?php esc_html_e( 'Booking Availability', 'tourfic' );?></button>
         </div>
     
     </form>
@@ -688,26 +715,28 @@ function tf_hotel_archive_single_item() {
 
     // get post id
     $post_id = get_the_ID();
-
-    /**
-     * Get features
-     * 
-     * hotel_feature
-     */
+    //Get hotel_feature
     $features = !empty(get_the_terms( $post_id, 'hotel_feature' )) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
-
-    /**
-     * Get hotel meta values
-     */
+    //Get hotel meta values
     $meta = get_post_meta( get_the_ID(), 'tf_hotel', true );
-
     // Location
     $address  = !empty($meta['address']) ? $meta['address'] : '';
+    // Adults
+    $adults = !empty($_GET['adults']) ? sanitize_text_field($_GET['adults']) : '';
+    // children
+    $child = !empty($_GET['children']) ? sanitize_text_field($_GET['children']) : '';
+    // room
+    $room = !empty($_GET['room']) ? sanitize_text_field($_GET['room']) : '';
+    // Check-in & out date
+    $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
+    // Single link
+    $url = get_the_permalink() . '?adults=' . ($adults ?? '') . '&children=' . ($child ?? '') . '&room=' . ($room ?? '') . '&check-in-out-date=' . ($check_in_out ?? '');
+
     ?>
 	<div class="single-tour-wrap">
 		<div class="single-tour-inner">
 			<div class="tourfic-single-left">
-                <a href="<?php echo get_the_permalink(); ?>">
+                <a href="<?php echo $url; ?>">
 				<?php
                 if ( has_post_thumbnail() ){ 
 					the_post_thumbnail( 'full' );
@@ -721,7 +750,7 @@ function tf_hotel_archive_single_item() {
 				<div class="tf_property_block_main_row">
 					<div class="tf_item_main_block">
 						<div class="tf-hotel__title-wrap">
-							<a href="<?php echo get_the_permalink(); ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
+							<a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
 						</div>						
                         <?php
                         if($address) {
@@ -770,7 +799,7 @@ function tf_hotel_archive_single_item() {
                                         <?php } ?>
                                         <div class="roomPrice roomPrice_flex sr_discount">
                                             <div class="availability-btn-area">
-                                                <a href="<?php echo get_the_permalink(); ?>" class="button tf_button"><?php esc_html_e( 'Details', 'tourfic' );?></a>
+                                                <a href="<?php echo $url; ?>" class="button tf_button"><?php esc_html_e( 'Details', 'tourfic' );?></a>
                                             </div>
                                         </div>
 									</div>
