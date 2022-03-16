@@ -3,12 +3,11 @@
  * The template for displaying archive pages.
  *
  * Learn more: https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package tourfic
  */
 
 
 get_header('tourfic');
+
 $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
 $pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
 $tour_type = $meta['type'] ? $meta['type'] : null;
