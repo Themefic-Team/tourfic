@@ -2,17 +2,21 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
+
 $args = array(
     'post_type' => $post_type,
+    'orderby'   => 'date',
+    'order'     => 'DESC',
     'tax_query' => array(
         array (
             'taxonomy' => $taxonomy,
-            'field' => 'slug',
-            'terms' => $taxonomy_slug,
+            'field'    => 'slug',
+            'terms'    => $taxonomy_slug,
         )
     ),
-    'post_status' => 'publish',
-    'posts_per_page' => $max,
+    'post_status'    => 'publish',
+    'paged'          => $paged,
 );
 
 $loop = new WP_Query( $args );

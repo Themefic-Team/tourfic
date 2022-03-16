@@ -10,7 +10,7 @@ $post_type = 'tf_tours';
 $taxonomy = $term->taxonomy;
 $taxonomy_name = $term->name;
 $taxonomy_slug = $term->slug;
-$max = '8';
+$max = '2';
 ?>
 
 <div class="tourfic-wrap" data-fullwidth="true">

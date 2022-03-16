@@ -606,8 +606,10 @@ function tf_custom_excerpt_length( $length ) {
 add_filter( 'excerpt_length', 'tf_custom_excerpt_length', 999 );
 
 // Pagination
-function tourfic_posts_navigation(){
-	global $wp_query;
+function tourfic_posts_navigation($wp_query=''){
+	if(empty($wp_query)) {
+		global $wp_query;
+	}
 	$max_num_pages = $wp_query->max_num_pages;
 	$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 

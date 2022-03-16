@@ -49,8 +49,6 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         wp_enqueue_style( 'tf-style', TF_ASSETS_URL . 'css/style.css', null, '' );
         wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/responsive.css', null, '' );
 
-        wp_enqueue_script( 'tourfic-script', TF_ASSETS_URL . 'js/tourfic-script.js', array( 'jquery' ), '', true );
-
         /**
          * Flatpickr
          * 
@@ -128,6 +126,18 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'single' => is_single(),
                 'locations' => get_hotel_locations(),
                 'tour_destinations' => get_tour_destinations(),
+                'ajax_result_success' => __('Refreshed Successfully!', 'tourfic'),
+                'wishlist_add' => __('Adding to wishlist...', 'tourfic'),
+                'wishlist_added' => __('Item added to wishlist.', 'tourfic'),
+                'wishlist_add_error' => __('Failed to add in wishlist!', 'tourfic'),
+                'wishlist_removed' => __('Item removed from wishlist', 'tourfic'),
+                'wishlist_remove_error' => __('Failed to remove from wishlist!', 'tourfic'),
+                'field_required' => __('This field is required!', 'tourfic'),
+                'adult' => __('Adult', 'tourfic'),
+                'children' => __('Children', 'tourfic'),
+                'infant' => __('Infant', 'tourfic'),
+                'room' => __('Room', 'tourfic'),
+                'sending_ques' => __('Sending your question...', 'tourfic'),
             )
         );
 

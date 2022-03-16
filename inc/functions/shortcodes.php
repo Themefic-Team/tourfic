@@ -438,12 +438,14 @@ function tf_search_result_shortcode( $atts, $content = null ){
     $taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : 'tour_destination';
     // Get place
     $place = isset( $_GET['place'] ) ? $_GET['place'] : '';
+
+    $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
     
     // Main Query args
     $args = array(
         'post_type' => $post_type,
         'post_status' => 'publish',
-        'posts_per_page' => 12,
+        'paged'          => $paged,
     );
 
     $taxonomy_query = new WP_Term_Query(array(
@@ -488,25 +490,26 @@ function tf_search_result_shortcode( $atts, $content = null ){
             </div>
         </div>
         <div class="archive_ajax_result">
-            <?php if ( $loop->have_posts() ) : ?>
-                <?php
-                    while ( $loop->have_posts() ) : $loop->the_post(); 
+            <?php
+            if ( $loop->have_posts() ) {               
+                while ( $loop->have_posts() ) {
+                    $loop->the_post(); 
 
-                        if( $post_type == 'tf_hotel' ){
-                            tf_hotel_archive_single_item(); 
-                        }elseif( $post_type == 'tf_tours' ){
-                            //tour archive single gird/section added
-                            tf_tour_archive_single_item();
-                        }
-                        
-                    endwhile;
-                    else : 
-                        echo '<div class="tf-nothing-found">Nothing Found!</div>';
-                    endif; 
-                ?>
+                    if( $post_type == 'tf_hotel' ){
+                        tf_hotel_archive_single_item(); 
+                    }elseif( $post_type == 'tf_tours' ){
+                        //tour archive single gird/section added
+                        tf_tour_archive_single_item();
+                    }
+                      
+                }
+            } else {
+                echo '<div class="tf-nothing-found">Nothing Found!</div>';
+            } 
+            ?>
         </div>
         <div class="tf_posts_navigation">
-            <?php tourfic_posts_navigation(); ?>
+            <?php tourfic_posts_navigation($loop); ?>
         </div>
 
     </div>

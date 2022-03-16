@@ -1,8 +1,19 @@
 (function ($, win) {
     $(document).ready(function () {
 
+        // Create an instance of Notyf
+        const notyf = new Notyf({
+            ripple: true,
+            duration: 3000,
+            dismissable: true,
+            position: {
+                x: 'right',
+                y: 'bottom',
+            },
+        });
+
         //###############################
-        //         Hotel Functions      #
+        //         Hotel                #
         //###############################
 
         /**
@@ -14,7 +25,7 @@
             e.preventDefault();
 
             if($.trim($('input[name=check-in-out-date]').val()) == ''){
-                $('.tf_booking-dates .tf_label-row').append('<span clss="required"><b>This field is required!</b></span>');
+                $('.tf_booking-dates .tf_label-row').append('<span clss="required"><b>'+tf_params.field_required+'</b></span>');
                 return;
             }
 
@@ -222,8 +233,17 @@
             $(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickNext');
         });
 
+        /**
+         * Scroll to room reserve table
+         */
+        $(".reserve-button a").click(function () {
+            $('html, body').animate({
+                scrollTop: $("#rooms").offset().top - 32
+            }, 1000);
+        });
+
         //###############################
-        //         Tour Functions       #
+        //         Tour                 #
         //###############################
         
         /**
@@ -326,6 +346,109 @@
             ],
             hash: false,
         });
+
+        //###############################
+        //        Search                #
+        //###############################
+
+        /**
+         * Ajax Search Result
+         * 
+         * by search form submit
+         * 
+         * by feature filter
+         */
+        
+        var filter_xhr;
+         // Creating a function for reuse this filter in any where we needs.
+        const makeFilter = () => { 
+            var dest = $('#tf-place').val();
+            var adults = $('#adults').val();
+            var room = $('#room').val();
+            var children = $('#children').val();
+            var checked = $('#check-in-out-date').val();
+            // split date range into dates
+            var checkedArr = checked.split(' to ');
+            var checkin = checkedArr[0];
+            var checkout = checkedArr[1];
+            var posttype = $('.tf-post-type').val();
+
+            var filters = [];
+
+            $('[name*=tf_filters]').each(function () {
+                if ($(this).is(':checked')) {
+                    filters.push($(this).val());
+                }
+            });
+            var filters = filters.join();
+
+            var features = [];
+
+            $('[name*=tf_features]').each(function () {
+                if ($(this).is(':checked')) {
+                    features.push($(this).val());
+                }
+            });
+            var features = features.join();
+
+            var formData = new FormData();
+            formData.append('action', 'tf_trigger_filter');
+            formData.append('type', posttype);
+            formData.append('dest', dest);
+            formData.append('adults', adults);
+            formData.append('room', room);
+            formData.append('children', children);
+            formData.append('checkin', checkin);
+            formData.append('checkout', checkout);
+            formData.append('filters', filters);
+            formData.append('features', features);
+            formData.append('checked', checked);
+
+            // abort previous request
+            if (filter_xhr && filter_xhr.readyState != 4) {
+                filter_xhr.abort();
+            }
+
+            filter_xhr = $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (data) {
+                    $('.archive_ajax_result').block({
+                        message: null,
+                        overlayCSS: {
+                            background: "#fff",
+                            opacity: .5
+                        }
+                    });
+
+                },
+                complete: function (data) {
+                    $('.archive_ajax_result').unblock();
+                },
+                success: function (data) {
+                    $('.archive_ajax_result').unblock();
+
+                    $('.archive_ajax_result').html(data);
+                    // @KK show notice in every success request 
+                    notyf.success(tf_params.ajax_result_success);
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+        };
+        // Look for submission and change on filter widgets
+        $(document).on('submit', '#tf-widget-booking-search', function (e) {
+            e.preventDefault();
+            makeFilter()
+        });
+        $(document).on('change', '[name*=tf_filters],[name*=tf_features]', function () {
+            makeFilter();
+        })
 
         //###############################
         //        Common Functions      #
@@ -504,17 +627,6 @@
          * Wishlist Functionality 
          * 
          */
-        // Create an instance of Notyf
-        const notyf = new Notyf({
-            ripple: true,
-            dismissable: true,
-            position: {
-                x: 'right',
-                y: 'bottom',
-            },
-        });
-
-
         /* get wishlist from localstorage  */
         const wishKey = 'wishlist_item';
         const getWish = () => {
@@ -629,7 +741,7 @@
                     url: tf_params.ajax_url,
                     data: data,
                     beforeSend: function (data) {
-                        notyf.success("Adding to wishlist...")
+                        notyf.success(tf_params.wishlist_add)
                     },
                     success: function (response) {
                         if (response.success) {
@@ -645,13 +757,13 @@
             } else {
                 /* For guest */
                 if (addWish(data) === true) {
-                    notyf.success("Adding to Wishlist")
+                    notyf.success(tf_params.wishlist_add)
                     wishIconFill(targetNode);
                     notyf.success({
-                        message: 'Item added to wishlist.' + wishlistpage,
+                        message: tf_params.wishlist_added + wishlistpage,
                         duration: 4e3
                     });
-                } else notyf.error('Item not added to wishlist');
+                } else notyf.error(tf_params.wishlist_add_error);
 
             }
 
@@ -678,7 +790,7 @@
                                 tableNode.closest('.tf-wishlists').html(data.data);
                             }
                             wishIcon(targetNode);
-                            notyf.success('Item removed from wishlist');
+                            notyf.success(tf_params.wishlist_removed);
                         }
                     }
                 );
@@ -687,9 +799,9 @@
                 /* For guest */
                 if (removeWish(id) == true) {
                     wishIcon(targetNode);
-                    notyf.success('Item removed from wishlist');
+                    notyf.success(tf_params.wishlist_removed);
                 } else {
-                    notyf.error('Item not removed from wishlist');
+                    notyf.error(tf_params.wishlist_remove_error);
                 };
             }
 
@@ -844,6 +956,286 @@
             tourfic_autocomplete(tour_destination_input, tour_destinations);
         }
 
+        /**
+         * Single tour sticky booking bar position fixed
+         */
+        $(window).scroll(function(){
+            var sticky = $('.tf-tour-booking-wrap'),
+                scroll = $(window).scrollTop();
+          
+            if (scroll >= 800) sticky.addClass('tf-tours-fixed');
+            else sticky.removeClass('tf-tours-fixed');
+        });
+
+        /**
+         * Open/close horizontal search form persons panel
+         */
+        // Adult, Child, Room Selection toggle
+        $(document).on('click', '.tf_selectperson-wrap .tf_input-inner,.tf_person-selection-wrap .tf_person-selection-inner', function () {
+            $('.tf_acrselection-wrap').slideToggle('fast');
+        });
+        // Close
+        jQuery(document).on("click", function (event) {
+            if (!jQuery(event.target).closest(".tf_selectperson-wrap").length) {
+                jQuery(".tf_acrselection-wrap").slideUp("fast");
+            }
+        });
+
+        /**
+         * Number/text change horizontal search form
+         */
+        // Number Increment
+        $('.acr-inc').on('click', function (e) {
+            var input = $(this).parent().find('input');
+            input.val(parseInt(input.val()) + 1).change();
+        });
+
+        // Number Decrement
+        $('.acr-dec').on('click', function (e) {
+
+            var input = $(this).parent().find('input');
+            var min = input.attr('min');
+
+            if (input.val() > min) {
+                input.val(input.val() - 1).change();
+            }
+
+        });
+
+        // Adults change trigger
+        $(document).on('change', '#adults', function () {
+            var thisVal = $(this).val();
+
+            if (thisVal > 1) {
+                $('.adults-text').text(thisVal + " " + tf_params.adult);
+            } else {
+                $('.adults-text').text(thisVal + " " + tf_params.adult);
+            }
+
+        });
+
+        // Children change trigger
+        $(document).on('change', '#children', function () {
+            var thisVal = $(this).val();
+
+            if (thisVal > 1) {
+                $('.child-text').text(thisVal + " " + tf_params.children);
+            } else {
+                $('.child-text').text(thisVal + " " + tf_params.children);
+            }
+
+        });
+
+        // Infant change trigger
+        $(document).on('change', '#infant', function () {
+            var thisVal = $(this).val();
+
+            if (thisVal > 1) {
+                $('.infant-text').text(thisVal + " " + tf_params.infant);
+            } else {
+                $('.infant-text').text(thisVal + " " + tf_params.infant);
+            }
+
+        });
+
+        // Room change trigger
+        $(document).on('change', '#room', function () {
+            var thisVal = $(this).val();
+
+            if (thisVal > 1) {
+                $('.room-text').text(thisVal + " " + tf_params.room);
+            } else {
+                $('.room-text').text(thisVal + " " + tf_params.room);
+            }
+        });
+
+        /**
+         * Review submit form toggle
+         */
+        $(document).on('click', '#reply-title', function () {
+            var $this = $(this);
+            $('#commentform').slideToggle('fast', 'swing', function () {
+                $this.parent().toggleClass('active');
+            });
+        });
+
+        /**
+         * Ask question
+         */
+        // Ask question
+        $(document).on('click', '#tf-ask-question-trigger', function (e) {
+            e.preventDefault();
+            $('#tf-ask-question').fadeIn().find('.response').html("");
+        });
+
+        // Close Ask question
+        $(document).on('click', 'span.close-aq', function () {
+            $('#tf-ask-question').fadeOut();
+        });
+
+        // Ajax Ask question submit
+        $(document).on('submit', 'form#ask-question', function (e) {
+            e.preventDefault();
+
+            var $this = $(this);
+
+            var formData = new FormData(this);
+            formData.append('action', 'tf_ask_question');
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (data) {
+                    $this.block({
+                        message: null,
+                        overlayCSS: {
+                            background: "#fff",
+                            opacity: .5
+                        }
+                    });
+
+                    $this.find('.response').html(tf_params.sending_ques);
+                },
+                complete: function (data) {
+                    $this.unblock();
+                },
+                success: function (data) {
+                    $this.unblock();
+
+                    var response = JSON.parse(data);
+
+                    if (response.status == 'sent') {
+                        $this.find('.response').html(response.msg);
+
+                        $this.find('[type="reset"]').trigger('click');
+                    } else {
+                        $this.find('.response').html(response.msg);
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+
+                },
+
+            });
+
+        });
+
+        /**
+         * Change archive item
+         * 
+         * Grid/List
+         */
+        $(document).on('click', '.change-view', function (e) {
+            e.preventDefault();
+            $('.change-view').removeClass('active');
+            $(this).addClass('active');
+
+            var dataid = $(this).data('id');
+            if (dataid == 'grid-view') {
+                $('.archive_ajax_result').addClass('tours-grid');
+            } else {
+                $('.archive_ajax_result').removeClass('tours-grid');
+            }
+
+        });
+
+        /**
+         * Mixed
+         */
+         var flag = false;
+         var main_xhr;
+ 
+         var amPushAjax = function (url) {
+             if (main_xhr && main_xhr.readyState != 4) {
+                 main_xhr.abort();
+             }
+ 
+             main_xhr = $.ajax({
+                 url: url,
+                 contentType: false, // Not to set any content header
+                 processData: false, // Not to process data
+                 asynch: true,
+                 beforeSend: function () {
+ 
+                     $(document).find('.tf_posts_navigation').addClass('loading');
+                     flag = true;
+                 },
+                 success: function (data) {
+                     //console.log(data);
+                     $('.archive_ajax_result').append($('.archive_ajax_result', data).html());
+ 
+                     $('.tf_posts_navigation').html($('.tf_posts_navigation', data).html());
+ 
+                     //document.title = $(data).filter('title').text();
+ 
+                     flag = false;
+ 
+                     $(document).find('.tf_posts_navigation').removeClass('loading');
+ 
+                 }
+             });
+ 
+             //console.log(main_xhr);
+         };
+ 
+         // Feed Ajax Trigger
+         $(document).on('click', '.tf_posts_navigation a.next.page-numbers', function (e) {
+             e.preventDefault();
+ 
+             var targetUrl = (e.target.href) ? e.target.href : $(this).context.href;
+             amPushAjax(targetUrl);
+             window.history.pushState({ url: "" + targetUrl + "" }, "", targetUrl);
+         });
+         // End Feed Ajax Trigger
+ 
+         // Feed Click Trigger
+         $(window).on('scroll', function (e) {
+             $('.tf_posts_navigation a.next.page-numbers').each(function (i, el) {
+ 
+                 var $this = $(this);
+ 
+                 var H = $(window).height(),
+                     r = el.getBoundingClientRect(),
+                     t = r.top,
+                     b = r.bottom;
+ 
+                 var tAdj = parseInt(t - (H / 2));
+ 
+                 if (flag === false && (H >= tAdj)) {
+                     //console.log( 'inview' );
+                     $this.trigger('click');
+                 } else {
+                     //console.log( 'outview' );
+                 }
+             });
+         });
+         // End Feed Click Trigger
+ 
+         //Ratings copy/move under gallery
+         var avg_rating = $('.tf-overall-ratings .overall-rate').text();
+         if(avg_rating){
+             $('.reviews span').html(avg_rating);
+         }else{
+             $('.reviews span').html("0/5");
+         }
+ 
+         $(".tf-travel-text h4").click(function(){
+             $(this).siblings('.tf-travel-contetn').slideToggle();
+             $(this).parents('.tf-travel-itinerary-item').siblings().find('.tf-travel-contetn').slideUp();
+         });
+         $(".tf-faq-title").click(function(){
+             $(this).siblings('.tf-faq-desc').slideToggle();
+             $(this).parents('.tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
+         });
+ 
+         
+         $(".tf-header-menu-triger").click(function(){
+             $('.tf-header-menu-wrap').slideToggle();
+         });
 
     });
 })(jQuery, window);
