@@ -1,10 +1,10 @@
 === Travel and Hotel Booking Solution for WooCommerce - Tourfic ===
-Contributors: psdtowpservice, themefic, mdshuvo, raihan143, hasanet, kamrul0424, codexa
-Tags: tour booking, tour operator, travel, tour, trip, travel-booking, travel agency, hotel booking, reservation, hotel, booking engine, booking, booking calendar, booking system, calendar, online booking, travel, airbnb, booking.com, homeaway, apartments, villa, hostel, reservation system, travel itinerary, trekking, tour itinerary, travel booking engine, tour accommodation listings, travel destinations, trip book, travel payment, woocommerce tour booking, woocommerce travel booking plugin, woocommerce tour, woocommerce travel, wordpress travel, wp travel plugin, wp travel, wordpress travel booking plugin, wordpress tour plugin, tour booking plugin wordpress, wordpress travel agency, travel tour wordpress, wordpress tour
+Contributors: fida02, themefic, devkabir, mdshuvo, codexa, kamrul0424, raihan143, hasanet
+Tags: tour booking, tour operator, travel, tour, trip, travel-booking, travel agency, hotel booking, reservation, hotel, booking engine, booking, booking calendar, booking system, calendar, online booking, travel, airbnb, booking.com, homeaway, apartments, villa, hostel, reservation system, travel itinerary, trekking, tour itinerary, travel booking engine, tour accommodation listings, travel destinations, trip book, travel payment, woocommerce tour booking, woocommerce travel booking plugin, woocommerce tour, woocommerce travel, wordpress travel, wp travel plugin, wp travel, wordpress travel booking plugin, wordpress tour plugin, tour booking plugin wordpress, wordpress travel agency, travel tour wordpress, wordpress tour, tour-booking, travel wp, travel wordpress, tour wp, travel wordpress, hotel wp, hotel wordpress
 Requires at least: 4.2
-Tested up to: 5.8
-Requires PHP: 5.4
-Stable tag: 2.0.2
+Tested up to: 5.9
+Requires PHP: 7.1
+Stable tag: 2.1.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -40,14 +40,14 @@ It is fully powered by WooCommerce, you can easily manage all your online Bookin
 
 ### Shortcodes:
 
-= Show Hotel Destination Grid =
-<pre class="wp-block-preformatted">[tourfic_destinations ids="1,2,3..."]</pre>
+= Show Hotel Locations Grid =
+<pre class="wp-block-preformatted">[hotel_locations ids="1,2,3..."]</pre>
 
 = Show Tour Destination Grid =
 <pre class="wp-block-preformatted">[tour_destinations ids="1,2,3..."]</pre>
 
 = Show Recent Hotel Slider: =
-<pre class="wp-block-preformatted">[tf_tours]
+<pre class="wp-block-preformatted">[tf_recent_hotel]
 Attributes: 
 - title : Title of the section
 -  subtitle : Subtitle Of the section
@@ -56,10 +56,10 @@ Attributes:
 </pre>
 
 = Show Recent Tour Slider: =
-<pre class="wp-block-preformatted">[tf_tours_grid]</pre>
+<pre class="wp-block-preformatted">[tf_recent_tour]</pre>
 
 = Show search form: =
-<pre class="wp-block-preformatted">[tf_search type="all"]
+<pre class="wp-block-preformatted">[tf_search_form type="all"]
 Attributes: 
 - all : Show all Post type search
 - hotel : Show Hotel search
@@ -113,7 +113,7 @@ Tourfic comes up with built-in awesome shortcode. With these, you can easily add
 
 * **Awesome UI:** Easy and clean user interface
 
-* **Lightweight:** The plugin is so lightweight that it wonâ€™t impact much on your speed.
+* **Lightweight:** The plugin is so lightweight that it wonÃ¢â‚¬â„¢t impact much on your speed.
 
 * **Speed optimized:** Compatible with any lazy load plugins. It also works with WEBP images.
 
@@ -129,7 +129,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 <strong>Privacy Policy : </strong>
 
-This plugin doesn’t collect/store any user related information.
+This plugin doesnâ€™t collect/store any user related information.
 
 <strong>Credits</strong>
 
@@ -137,7 +137,7 @@ The icon and banner used on this plugin are taken from <a href="https://icons8.c
 
 <strong>Our Other Plugins</strong>
 
-* <a href="https://wordpress.org/plugins/beaf-before-and-after-gallery/">Ultimate Before After Image Slider & Gallery – BEAF</a>
+* <a href="https://wordpress.org/plugins/beaf-before-and-after-gallery/">Ultimate Before After Image Slider & Gallery â€“ BEAF</a>
 * <a href="https://wordpress.org/plugins/ultimate-addons-for-contact-form-7/">Ultimate Addons For Contact Form 7</a>
 * <a href="https://wordpress.org/plugins/instantio" target="_blank">Onepage / Direct Checkout for WooCommerce - Instantio</a>
 
@@ -177,62 +177,105 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 == Screenshots ==
 
 1. Search Bar with Heading and Description (Add anywhere with Shortcode)
-2. Destination View (Shortcode based)
-3. Recent Properties (Shortcode based)
-4. Search bar with Autocomplete feature
-5. Search Result page (list View)
-6. Search Result page (Grid View)
-7. Single Hotel / Tour Page (1)
-8. Single Hotel / Tour Page (2)
-9. Single Hotel / Tour Page (3)
-10. Single Hotel / Tour Page (4)
-11. Single Hotel / Tour Page (5)
-12. Tourfic Widgets
-13. Single Tour/Hotel Page (Backend Options)
-14. Single Tour/Hotel Page (Backend Options)
-15. Single Tour/Hotel Page (Backend Options)
-16. Single Tour/Hotel Page (Backend Options)
-17. Single Tour/Hotel Page (Backend Options)
-18. Single Tour/Hotel Page (Backend Options)
-19. Single Tour/Hotel Page (Backend Options)
+2. Featured Destination for Hotel (Shortcode based)
+3. Featured Hotels (Shortcode based)
+4. Featured Destination for Tours (Shortcode based)
+5. Featured Tours (Shortcode based)
+6. Search bar with Autocomplete feature
+7. Search Result page (list View)
+8. Search Result page (Grid View)
+9. Tourfic Widgets
+10. Single Hotel Page (1)
+11. Single Hotel Page (2)
+12. Hotel Page (Backend Options)
+13. Hotel Page (Backend Options)
+14. Single Tour Page (1)
+15. Single Tour Page (2)
+16. Tour Page (Backend Options)
+17. Tour Page (Backend Options)
 
 == Changelog ==
 
-= 2.0.2 - 12/1/2021 =
+= 2.1.0 - 18/03/2022 =
 
-- Fixed: CSS Issues on Single  Tours
-- Fixed: Single Tour page Markup
-- Added Heading for Single Tours
-- Compatibility with Tourfic Pro
+* Added: New Feature "Wishlist"
+* Added: New options for global settings
+* Added: New options for hotels
+* Added: New options for tours
+* Added: You can now disable specific services which you don't want from the option panel
+* Added: Several filter hooks
+* Added: Permalink options added on permalink settings
+* Added: You can now choose the FontAwesome icon as the hotel feature icon with one click
+* Added: New shortcodes with backward compatibility
+* Changed: Now for the free version "tour availability" is set to "Continuous type" instead of "Fixed type".
+* Removed: Tour feature taxonomy
+* Removed: Unnecessary libraries & codes
+* Fixed: T&C are now showing on the single tour page
+* Fixed: Now related tours are shown based on destination
+* Fixed: Hotel & tour gallery popup responsive issues
+* Fixed: Translation issues
+* Updated: Calendar library replaced with flatpickr
+* Updated: Popup library replaced with Fancybox
+* Updated: Carousel library replaced with Slick
+* Updated: Compatibility check with WooCommerce 6.3.1
+* Improved: Hotel options panel
+* Improved: Hotel Booking UI
+* Improved: Search system and results
+* Improved: Coding structure
+* Improved: All the logic used in the plugin
+* Improved: All the conditional options
 
-= 2.0.1 - 7/1/2021 =
+= 2.0.5 - 14/3/2022 =
 
-- Updated Preview URL
-- WordPress 5.8.3 Compatiblity Check
-- Fixed a Div Bug
+* Fixed: Some bugs
+* Critical Update: Preparation for next big release (This update is required)
 
-= 2.0.0 - 4/1/2021 =
+= 2.0.4 - 22/2/2022 =
 
-- Introducing: tour post types
-- Added Tour single page
-- Added Tour Booking
-- Added tour in the search box
-- Modified Searchbox shortcode
-- Fixed Hotel single page layout
+* Fixed: Minor CSS issues
+* Updated: Compatibility check with WordPress 5.9
+* Updated: Compatibility check with WooCommerce 6.1.1
+
+= 2.0.3 - 14/1/2022 =
+
+* Updated: Options Panel Description
+* Fixed: Options Panel Bug
+
+= 2.0.2 - 12/1/2022 =
+
+* Fixed: CSS Issues on Single  Tours
+* Fixed: Single Tour page Markup
+* Added Heading for Single Tours
+* Compatibility with Tourfic Pro
+
+= 2.0.1 - 7/1/2022 =
+
+* Updated Preview URL
+* WordPress 5.8.3 Compatiblity Check
+* Fixed a Div Bug
+
+= 2.0.0 - 4/1/2022 =
+
+* Introducing: tour post types
+* Added Tour single page
+* Added Tour Booking
+* Added tour in the search box
+* Modified Searchbox shortcode
+* Fixed Hotel single page layout
 
 = 1.7.3 - 18/12/2021 =
 
-- WooCommerce 6.0.0 Compatiblity Check
+* WooCommerce 6.0.0 Compatiblity Check
 
 = 1.7.2 - 01/12/2021 =
 
-- WooCommerce 5.9.0 Compatiblity Check
-- WordPress 5.8.2 Compatiblity Check
+* WooCommerce 5.9.0 Compatiblity Check
+* WordPress 5.8.2 Compatiblity Check
 
 = 1.7.1 - 24/10/2021 =
 
-- WooCommerce 5.8.0 Compatiblity Check
-- WordPress 5.8.1 Compatiblity Check
+* WooCommerce 5.8.0 Compatiblity Check
+* WordPress 5.8.1 Compatiblity Check
 
 = 1.7.0 - 23/09/2021 =
 
@@ -308,3 +351,8 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 = 1.0.0 - 23/03/2021 =
 
 - Initial stable release
+
+== Upgrade Notice ==
+
+= 2.1.0 =
+This is a major update of Tourfic. To provide you with a better and improved experience for the coming days, we have completely revamped our options panel for the "Hotel" post type. After this update, your Hotel related data should be smoothly migrated from the old panel to the new panel. However, issues may arise on a few websites. In such cases, please contact our support and we will try to help further. We highly suggest backing up your data and testing the upgrade on a staging site before updating the plugin on live.

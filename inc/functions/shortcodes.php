@@ -135,9 +135,9 @@ function shortcode_tour_destinations( $atts, $content = null ){
 add_shortcode('tour_destinations', 'shortcode_tour_destinations');
 
 /**
- * Tours Shortcode
+ * Recent Hotel Slider
  */
-function tourfic_tours_shortcode( $atts, $content = null ){
+function tf_recent_hotel_shortcode( $atts, $content = null ){
     extract(
         shortcode_atts(
           array(
@@ -151,8 +151,10 @@ function tourfic_tours_shortcode( $atts, $content = null ){
     );
 
     $args = array(
-        'post_type' => 'tf_hotel',
-        'post_status' => 'publish',
+        'post_type'      => 'tf_hotel',
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => 'DESC',
         'posts_per_page' => $count,
     );
 
@@ -237,13 +239,14 @@ function tourfic_tours_shortcode( $atts, $content = null ){
 
     <?php return ob_get_clean();
 }
-
-add_shortcode('tf_tours', 'tourfic_tours_shortcode');
+add_shortcode('tf_recent_hotel', 'tf_recent_hotel_shortcode');
+// old
+add_shortcode('tf_tours', 'tf_recent_hotel_shortcode');
 
 /**
- * Tours grid Shortcode
+ * Recent Tour
  */
-function tf_tours_grid_shortcode( $atts, $content = null ){
+function tf_recent_tour_shortcode( $atts, $content = null ){
     extract(
         shortcode_atts(
           array(
@@ -257,8 +260,10 @@ function tf_tours_grid_shortcode( $atts, $content = null ){
     );
 
     $args = array(
-        'post_type' => 'tf_tours',
-        'post_status' => 'publish',
+        'post_type'      => 'tf_tours',
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => 'DESC',
         'posts_per_page' => $count,
     );
 
@@ -343,8 +348,9 @@ function tf_tours_grid_shortcode( $atts, $content = null ){
 
     <?php return ob_get_clean();
 }
-
-add_shortcode('tf_tours_grid', 'tf_tours_grid_shortcode');
+add_shortcode('tf_recent_tour', 'tf_recent_tour_shortcode');
+// Old
+add_shortcode('tf_tours_grid', 'tf_recent_tour_shortcode');
 
 /**
  * Search form
