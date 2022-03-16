@@ -501,7 +501,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
                         
                     endwhile;
                     else : 
-                        get_template_part( 'template-parts/content', 'none' ); 
+                        echo '<div class="tf-nothing-found">Nothing Found!</div>';
                     endif; 
                 ?>
         </div>

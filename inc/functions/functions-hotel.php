@@ -711,7 +711,7 @@ function tf_hotel_sidebar_booking_form() {
 /**
  * Hotel Archive Single Item Layout
  */
-function tf_hotel_archive_single_item() {
+function tf_hotel_archive_single_item($adults='', $child='', $room='', $check_in_out='') {
 
     // get post id
     $post_id = get_the_ID();
@@ -721,14 +721,26 @@ function tf_hotel_archive_single_item() {
     $meta = get_post_meta( get_the_ID(), 'tf_hotel', true );
     // Location
     $address  = !empty($meta['address']) ? $meta['address'] : '';
+
+    /**
+     * All values from URL
+     */
     // Adults
-    $adults = !empty($_GET['adults']) ? sanitize_text_field($_GET['adults']) : '';
+    if(empty($adults)) {
+        $adults = !empty($_GET['adults']) ? sanitize_text_field($_GET['adults']) : '';
+    }
     // children
-    $child = !empty($_GET['children']) ? sanitize_text_field($_GET['children']) : '';
+    if(empty($child)) {
+        $child = !empty($_GET['children']) ? sanitize_text_field($_GET['children']) : '';
+    }
     // room
-    $room = !empty($_GET['room']) ? sanitize_text_field($_GET['room']) : '';
+    if(empty($room)) {
+        $room = !empty($_GET['room']) ? sanitize_text_field($_GET['room']) : '';
+    }
     // Check-in & out date
-    $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
+    if(empty($check_in_out)) {
+        $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
+    }
     // Single link
     $url = get_the_permalink() . '?adults=' . ($adults ?? '') . '&children=' . ($child ?? '') . '&room=' . ($room ?? '') . '&check-in-out-date=' . ($check_in_out ?? '');
 

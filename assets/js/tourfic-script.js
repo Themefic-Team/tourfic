@@ -259,6 +259,7 @@
             formData.append('checkout', checkout);
             formData.append('filters', filters);
             formData.append('features', features);
+            formData.append('checked', checked);
 
             // abort previous request
             if (filter_xhr && filter_xhr.readyState != 4) {

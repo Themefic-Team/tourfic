@@ -117,6 +117,11 @@ if ( !function_exists( 'tf_single_page_template' ) ) {
 
         global $post;
 
+        /**
+         * Hotel Single
+         * 
+         * single-hotel.php
+         */
         if ( 'tf_hotel' === $post->post_type ) {
             
             $theme_files = array( 'tourfic/hotel/single-hotel.php' );
@@ -132,7 +137,7 @@ if ( !function_exists( 'tf_single_page_template' ) ) {
         /**
          * Tour Single
          * 
-         * single_tour.php
+         * single-tour.php
          */
         if ( $post->post_type == 'tf_tours' ) {
 
@@ -615,6 +620,14 @@ add_action( 'wp_ajax_nopriv_tf_trigger_filter', 'tf_search_result_ajax_sidebar' 
 add_action( 'wp_ajax_tf_trigger_filter', 'tf_search_result_ajax_sidebar' );
 function tf_search_result_ajax_sidebar(){
 
+    /**
+     * Get form data
+     */
+    $adults = !empty($_POST['adults']) ? sanitize_text_field($_POST['adults']) : '';
+    $child = !empty($_POST['children']) ? sanitize_text_field($_POST['children']) : '';
+    $room = !empty($_POST['room']) ? sanitize_text_field($_POST['room']) : '';
+    $check_in_out = !empty($_POST['checked']) ? sanitize_text_field($_POST['checked']) : '';
+
     $relation = tfopt( 'search_relation', 'AND' );
     $filter_relation = tfopt( 'filter_relation', 'OR' );
 
@@ -736,9 +749,9 @@ function tf_search_result_ajax_sidebar(){
             $loop->the_post(); 
 
             if( $posttype == 'tf_tours' ){
-                tf_tour_archive_single_item();
+                tf_tour_archive_single_item($adults, $child, $check_in_out);
             }else{
-                tf_hotel_archive_single_item();
+                tf_hotel_archive_single_item($adults, $child, $room, $check_in_out);
             }  
         } 
     } else {

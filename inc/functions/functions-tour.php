@@ -617,7 +617,7 @@ return ob_get_clean();
 /**
  * Tours Archive
  */
-function tf_tour_archive_single_item() {
+function tf_tour_archive_single_item($adults='', $child='', $check_in_out='') {
 
     // get post id
     $post_id = get_the_ID();
@@ -629,13 +629,19 @@ function tf_tour_archive_single_item() {
     $featured  = !empty($meta['tour_as_featured']) ? $meta['tour_as_featured'] : '';
 
     // Adults
-    $adults = !empty($_GET['adults']) ? sanitize_text_field($_GET['adults']) : '';
+    if(empty($adults)) {
+        $adults = !empty($_GET['adults']) ? sanitize_text_field($_GET['adults']) : '';
+    }
     // children
-    $child = !empty($_GET['children']) ? sanitize_text_field($_GET['children']) : '';
+    if(empty($child)) {
+        $child = !empty($_GET['children']) ? sanitize_text_field($_GET['children']) : '';
+    }
     // room
     $infant = !empty($_GET['infant']) ? sanitize_text_field($_GET['infant']) : '';
     // Check-in & out date
-    $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
+    if(empty($check_in_out)) {
+        $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
+    }
     // Single link
     $url = get_the_permalink() . '?adults=' . ($adults ?? '') . '&children=' . ($child ?? '') . '&infant=' . ($infant ?? '') . '&check-in-out-date=' . ($check_in_out ?? '');
 
