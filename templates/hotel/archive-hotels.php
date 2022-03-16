@@ -1,14 +1,14 @@
 <?php
 /**
- * The template for displaying archive pages.
+ * Template: Hotel Archive
  *
- * Learn more: https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package tourfic
+ * Display all hotels here
+ * 
+ * Default slug: /hotels 
  */
 
 
-get_header('tourfic'); ?>
+get_header(); ?>
 
 <div class="tourfic-wrap" data-fullwidth="true">
 	<?php do_action( 'tf_before_container' ); ?>
@@ -28,10 +28,11 @@ get_header('tourfic'); ?>
 					if ( have_posts() ) {
 						while ( have_posts() ) {
 							the_post();
+							// Location: functions-hotel.php
 							tf_hotel_archive_single_item();
 						}
 					} else {
-						echo 'Nothing Found!';
+						echo '<div class="tf-nothing-found">Nothing Found!</div>';
 					}
 					?>
 				</div>
@@ -44,7 +45,10 @@ get_header('tourfic'); ?>
 
 			<!-- Start Sidebar -->
 			<div class="tf_sidebar">
-				<?php tf_archive_sidebar_search_form(); ?>
+				<?php
+				// Location: functions.php
+				tf_archive_sidebar_search_form('tf_hotel');
+				?>
 			</div>
 			<!-- End Sidebar -->
 		</div>

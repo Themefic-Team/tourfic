@@ -477,7 +477,7 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
     function tf_hotel_search_form_horizontal( $classes, $title, $subtitle ){
 
         // location
-        $location = !empty($_GET['location']) ? sanitize_text_field($_GET['location']) : '';
+        $location = !empty($_GET['place']) ? sanitize_text_field($_GET['place']) : '';
         // Adults
         $adults = !empty($_GET['adults']) ? sanitize_text_field($_GET['adults']) : '';
         // children
@@ -508,7 +508,7 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
                         <div class="tf_form-inner tf-d-g">
                             <i class="fas fa-search"></i>
                             <input type="text" required="" id="tf-location" class="" placeholder="<?php _e('Enter Location', 'tourfic'); ?>" value="">
-                            <input type="hidden" name="location" class="tf-place-input">
+                            <input type="hidden" name="place" class="tf-place-input">
                         </div>
                     </label>
                 </div>
@@ -629,7 +629,7 @@ function tf_hotel_sidebar_booking_form() {
                         
                         foreach (range(2,8) as $value) {
                             $selected = $value == $adults ? 'selected' : null;
-                            echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __("Adult", "tourfic") . '</option>';
+                            echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __("Adults", "tourfic") . '</option>';
                         }
                         ?>
                         
@@ -659,11 +659,11 @@ function tf_hotel_sidebar_booking_form() {
         <div class="tf_booking-dates">
             <div class="tf_form-row">
                 <label class="tf_label-row">
-                    <span class="tf-label">Check-in &amp; Check-out date</span>
+                    <span class="tf-label"><?php _e('Check-in &amp; Check-out date', 'tourfic'); ?></span>
                     <div class="tf_form-inner">
                         <i class="far fa-calendar-alt"></i>
                         <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                            placeholder="Select Date" <?php echo !empty($check_in_out) ? 'value="' . $check_in_out . '"' : '' ?> required>
+                            placeholder="<?php _e('Select Date', 'tourfic'); ?>" <?php echo !empty($check_in_out) ? 'value="' . $check_in_out . '"' : '' ?> required>
                     </div>
                 </label>
             </div>

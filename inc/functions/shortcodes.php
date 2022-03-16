@@ -437,7 +437,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
     // Get hotel location or tour destination
     $taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : 'tour_destination';
     // Get place
-    $place = isset( $_GET['location'] ) ? $_GET['location'] : $_GET['destination'];
+    $place = isset( $_GET['place'] ) ? $_GET['place'] : '';
     
     // Main Query args
     $args = array(

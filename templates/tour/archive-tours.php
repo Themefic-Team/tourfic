@@ -40,13 +40,16 @@ if( $discount_type == 'percent' ){
 		            </div>
 		        </div>
 				<div class="archive_ajax_result">
-					<?php if ( have_posts() ) : ?>
-						<?php while ( have_posts() ) : the_post(); ?>
-							<?php tf_tour_archive_single_item( $price,$sale_price,$discounted_price ); ?>
-						<?php endwhile; ?>
-					<?php else : ?>
-						<?php get_template_part( 'template-parts/content', 'none' ); ?>
-					<?php endif; ?>
+					<?php
+					if ( have_posts() ) {
+						while ( have_posts() ) {
+							the_post();
+							tf_tour_archive_single_item();
+						}
+					} else {
+						get_template_part( 'template-parts/content', 'none' );
+					}
+					?>
 				</div>
 				<div class="tf_posts_navigation">
 					<?php tourfic_posts_navigation(); ?>
@@ -57,7 +60,7 @@ if( $discount_type == 'percent' ){
 
 			<!-- Start Sidebar -->
 			<div class="tf_sidebar">
-				<?php tf_archive_sidebar_search_form(); ?>
+				<?php tf_archive_sidebar_search_form('tf_tours'); ?>
 			</div>
 			<!-- End Sidebar -->
 		</div>

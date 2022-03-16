@@ -242,7 +242,7 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
                         <div class="tf_form-inner tf-d-g">
                             <i class="fas fa-search"></i>
                             <input type="text" required id="tf-destination" class="" placeholder="<?php _e('Enter Destination', 'tourfic'); ?>" value="">
-                            <input type="hidden" name="destination" class="tf-place-input" />                    </div>
+                            <input type="hidden" name="place" class="tf-place-input" />                    </div>
                     </label>
                 </div>
             </div>

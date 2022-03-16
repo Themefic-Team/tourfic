@@ -119,13 +119,13 @@ if ( !function_exists( 'tf_single_page_template' ) ) {
 
         if ( 'tf_hotel' === $post->post_type ) {
             
-            $theme_files = array( 'tourfic/single_hotel.php' );
+            $theme_files = array( 'tourfic/hotel/single-hotel.php' );
             $exists_in_theme = locate_template( $theme_files, false );
 
             if ( $exists_in_theme ) {
                 return $exists_in_theme;
             } else {
-                return TF_TEMPLATE_PATH . "hotel/single_hotel.php";
+                return TF_TEMPLATE_PATH . "hotel/single-hotel.php";
             }
         }
 
@@ -136,13 +136,13 @@ if ( !function_exists( 'tf_single_page_template' ) ) {
          */
         if ( $post->post_type == 'tf_tours' ) {
 
-            $theme_files = array( 'tourfic/single_tour.php' );
+            $theme_files = array( 'tourfic/tour/single-tour.php' );
             $exists_in_theme = locate_template( $theme_files, false );
 
             if ( $exists_in_theme ) {
                 return $exists_in_theme;
             } else {
-                return TF_TEMPLATE_PATH . "tour/single_tour.php";
+                return TF_TEMPLATE_PATH . "tour/single-tour.php";
             }
         }
 
@@ -160,23 +160,23 @@ if ( !function_exists( 'tourfic_archive_page_template' ) ) {
     function tourfic_archive_page_template( $template ) {
         if ( is_post_type_archive( 'tf_hotel' ) ) {
 
-            $theme_files = array( 'tourfic/archive_hotels.php' );
+            $theme_files = array( 'tourfic/hotel/archive-hotels.php' );
             $exists_in_theme = locate_template( $theme_files, false );
             if ( $exists_in_theme ) {
                 return $exists_in_theme;
             } else {
-                return TF_TEMPLATE_PATH . 'hotel/archive_hotels.php';
+                return TF_TEMPLATE_PATH . 'hotel/archive-hotels.php';
             }
 
         }
 
         if( is_post_type_archive( 'tf_tours' ) ){
-            $theme_files = array( 'tourfic/archive_tours.php' );
+            $theme_files = array( 'tourfic/tour/archive-tours.php' );
             $exists_in_theme = locate_template( $theme_files, false );
             if( $exists_in_theme ){
                 return $exists_in_theme;
             }else{
-                return TF_TEMPLATE_PATH . 'tour/archive_tours.php';
+                return TF_TEMPLATE_PATH . 'tour/archive-tours.php';
             }
         }
         return $template;
@@ -230,7 +230,7 @@ add_filter( 'theme_page_templates', 'page_templates', 10, 4 );
 function load_page_templates( $page_template ) {
 
     if ( get_page_template_slug() == 'tf_search-result' ) {
-        $theme_files = array( 'search-tourfic.php', 'templates/common/search-results.php' );
+        $theme_files = array( 'tourfic/common/search-results.php' );
         $exists_in_theme = locate_template( $theme_files, false );
         if ( $exists_in_theme ) {
             return $exists_in_theme;
@@ -271,10 +271,29 @@ add_filter( 'template_include', 'taxonomy_template' );
 function taxonomy_template( $template ) {
 
     if ( is_tax( 'hotel_location' ) ) {
-        $template = TF_TEMPLATE_PATH . 'hotel/taxonomy-hotel_locations.php';
+
+        $theme_files = array( 'tourfic/hotel/taxonomy-hotel_locations.php' );
+        $exists_in_theme = locate_template( $theme_files, false );
+
+        if ( $exists_in_theme ) {
+            $template = $exists_in_theme;
+        } else {
+            $template = TF_TEMPLATE_PATH . 'hotel/taxonomy-hotel_locations.php';
+        }
+
     }
+
     if ( is_tax( 'tour_destination' ) ) {
-        $template = TF_TEMPLATE_PATH . 'tour/taxonomy_tour-destinations.php';
+
+        $theme_files = array( 'tourfic/tour/taxonomy-tour_destinations.php' );
+        $exists_in_theme = locate_template( $theme_files, false );
+
+        if ( $exists_in_theme ) {
+            $template = $exists_in_theme;
+        } else {
+            $template = TF_TEMPLATE_PATH . 'tour/taxonomy-tour_destinations.php';
+        }
+
     }
 
     return $template;
@@ -354,7 +373,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
         $place_input_id = $post_type == 'tf_hotel' ? 'tf-location' : 'tf-destination';
         $place_placeholder = $post_type == 'tf_hotel' ? __('Enter Location', 'tourfic') : __('Enter Destination', 'tourfic');
 
-        $place_key = $post_type == 'tf_hotel' ? 'location' : 'destination';
+        $place_key = 'place';
         $place_value = isset($_GET[$place_key]) ? $_GET[$place_key] : '';
 
         $taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : 'tour_destination';
@@ -388,9 +407,9 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     <i class="fas fa-user-friends"></i>
                     <select name="adults" id="adults" class="">
                         <option <?php echo 1 == $adult ? 'selected' : null ?> value="1">1 <?php _e('Adult', 'tourfic'); ?></option>
-                        <?php foreach (range(2,6) as $value) {
+                        <?php foreach (range(2,8) as $value) {
                             $selected = $value == $adult ? 'selected' : null;
-                            echo "<option $selected value='$value'>$value Adults</option>";
+                            echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __("Adults", "tourfic") . '</option>';
                         } ?>                   
                     </select>
                 </div>
@@ -404,9 +423,9 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     <select name="children" id="children" class="">
                         <option value="0">0 <?php _e('Children', 'tourfic'); ?></option>
                         <option <?php echo 1 == $children ? 'selected' : null ?> value="1">1 <?php _e('Children', 'tourfic'); ?></option>
-                        <?php foreach (range(2,5) as $value) {
+                        <?php foreach (range(2,8) as $value) {
                             $selected = $value == $children ? 'selected' : null;
-                            echo "<option $selected value='$value'>$value Children</option>";
+                            echo '<option ' .$selected. ' value="' .$value. '">' . $value . ' ' . __("Children", "tourfic") . '</option>';
                         } ?> 
                       
                     </select>
@@ -420,9 +439,9 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     <i class="fas fa-couch"></i>
                     <select name="room" id="room" class="">
                         <option <?php echo 1 == $room ? 'selected' : null ?> value="1">1 <?php _e('Room', 'tourfic'); ?></option>
-                        <?php foreach (range(2,5) as $value) {
+                        <?php foreach (range(2,8) as $value) {
                             $selected = $value == $room ? 'selected' : null;
-                            echo "<option $selected value='$value'>$value Rooms</option>";
+                            echo '<option ' .$selected. ' value="' .$value. '">' . $value . ' ' . __("Rooms", "tourfic") . '</option>';
                         } ?>                   
                     </select>
                 </div>
@@ -477,7 +496,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 /**
  * Archive Sidebar Search Form
  */
-function tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug) {
+function tf_archive_sidebar_search_form($post_type, $taxonomy='', $taxonomy_name='', $taxonomy_slug='') {
     $place = $post_type == 'tf_hotel' ? 'tf-location' : 'tf-destination';
     $place_text = $post_type == 'tf_hotel' ? __('Enter Location', 'tourfic') : __('Enter Destination', 'tourfic');
     ?>
@@ -489,8 +508,8 @@ function tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $
             <label class="tf_label-row">
                 <div class="tf_form-inner">
                     <i class="fas fa-map-marker-alt"></i>
-                    <input type="text" required="" id="<?php echo $place; ?>"  class="" placeholder="<?php echo $place_text; ?>" value="<?php echo $taxonomy_name; ?>">
-                    <input type="hidden" name="place" value="<?php echo $taxonomy_slug; ?>"/>
+                    <input type="text" required="" id="<?php echo $place; ?>"  class="" placeholder="<?php echo $place_text; ?>" value="<?php echo !empty($taxonomy_name) ? $taxonomy_name : ''; ?>">
+                    <input type="hidden" name="place" value="<?php echo !empty($taxonomy_slug) ? $taxonomy_slug : ''; ?>"/>
                 </div>
             </label>
         </div>
@@ -500,10 +519,12 @@ function tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $
                 <div class="tf_form-inner">
                     <i class="fas fa-user-friends"></i>
                     <select name="adults" id="adults" class="">
-                        <option value="1">1 adult</option>
-                        <?php foreach (range(2,6) as $value) {                      
-                            echo "<option value='$value'>$value adults</option>";
-                        } ?>                   
+                        <?php
+                        echo '<option value="1">1 ' .__("Adult", "tourfic"). '</option>';                       
+                        foreach (range(2,8) as $value) {
+                            echo '<option value="' . $value . '">' . $value . ' ' . __("Adults", "tourfic") . '</option>';
+                        }
+                        ?>                   
                     </select>
                 </div>
             </label>
@@ -514,12 +535,12 @@ function tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $
                 <div class="tf_form-inner">
                     <i class="fas fa-child"></i>
                     <select name="children" id="children" class="">
-                        <option value="0">0 child</option>
-                        <option value="1">1 child</option>
-                        <?php foreach (range(2,5) as $value) {                          
-                            echo "<option value='$value'>$value children</option>";
-                        } ?> 
-                      
+                        <?php
+                        echo '<option value="0">0 ' .__("Children", "tourfic"). '</option>';                       
+                        foreach (range(1,8) as $value) {
+                            echo '<option value="' .$value. '">' . $value . ' ' . __("Children", "tourfic") . '</option>';
+                        }
+                        ?>
                     </select>
                 </div>
             </label>
@@ -530,10 +551,12 @@ function tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $
                 <div class="tf_form-inner">
                     <i class="fas fa-couch"></i>
                     <select name="room" id="room" class="">
-                        <option value="1">1 room</option>
-                        <?php foreach (range(2,5) as $value) {
-                            echo "<option value='$value'>$value rooms</option>";
-                        } ?>                   
+                        <?php
+                        echo '<option value="1">1 ' .__("Room", "tourfic"). '</option>';                       
+                        foreach (range(2,8) as $value) {
+                            echo '<option value="' . $value . '">' . $value . ' ' . __("Rooms", "tourfic") . '</option>';
+                        }
+                        ?>                  
                     </select>
                 </div>
             </label>
@@ -545,7 +568,7 @@ function tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $
                     <div class="tf_form-inner">
                         <i class="far fa-calendar-alt"></i>
                         <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                            placeholder="Select Date" required value="">
+                            placeholder="<?php _e('Select Date', 'tourfic'); ?>" required value="">
                     </div>
                 </label>
             </div>
@@ -719,7 +742,7 @@ function tf_search_result_ajax_sidebar(){
             }  
         } 
     } else {
-        echo 'Nothing Found!';
+        echo '<div class="tf-nothing-found">Nothing Found!</div>';
     }
     wp_reset_postdata();
 
