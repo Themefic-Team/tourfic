@@ -439,11 +439,11 @@ function tf_search_result_shortcode( $atts, $content = null ){
     }
     
     // Get post type
-    $post_type = isset( $_GET['type'] ) ? $_GET['type'] : '';
+    $post_type = isset( $_GET['type'] ) ? sanitize_text_field($_GET['type']) : '';
     // Get hotel location or tour destination
     $taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : 'tour_destination';
     // Get place
-    $place = isset( $_GET['place'] ) ? $_GET['place'] : '';
+    $place = isset( $_GET['place'] ) ? sanitize_text_field($_GET['place']) : '';
 
     $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
     
