@@ -770,132 +770,134 @@ function tf_hotel_archive_single_item($adults='', $child='', $room='', $check_in
     // Check-in & out date
     if(empty($check_in_out)) {
         $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
-        if ($check_in_out) {
-            $form_check_in = substr($check_in_out,0,10);
-            $form_check_in_stt = strtotime($form_check_in);
-            $form_check_out = substr($check_in_out,14,10);
-            $form_check_out_stt = strtotime($form_check_out);
-        }
+    }
+    if ($check_in_out) {
+        $form_check_in = substr($check_in_out,0,10);
+        $form_check_in_stt = strtotime($form_check_in);
+        $form_check_out = substr($check_in_out,14,10);
+        $form_check_out_stt = strtotime($form_check_out);
     }
 
     // Single link
     $url = get_the_permalink() . '?adults=' . ($adults ?? '') . '&children=' . ($child ?? '') . '&room=' . ($room ?? '') . '&check-in-out-date=' . ($check_in_out ?? '');
 
     // Check room check in/out time
-    if(!empty($b_rooms)) {
-        $b_room_id = -1;
-        foreach ($b_rooms as $b_room) {
-            
-            $b_room_id++;
-
-            $enable = !empty($b_room['enable']) ? $b_room['enable'] : '';
-
-            // Check if room is enabled
-            if ($enable == '1') {
-
-                $b_check_in = !empty($b_room['availability']['from']) ? $b_room['availability']['from'] : '';
-                if($b_check_in) {
-                    $b_check_in_stt = strtotime($b_check_in);
-                }
-                $b_check_out = !empty($b_room['availability']['to']) ? $b_room['availability']['to'] : '';
-                if($b_check_out) {
-                    $b_check_out_stt = strtotime($b_check_out);
-                }
-
-                if(empty($b_check_in) || empty($b_check_out) || ($form_check_in_stt >= $b_check_in_stt && $form_check_out_stt <= $b_check_out_stt)) {
-                    $room_date_matched = 'yes';
-                } else {
-                    $room_date_matched = 'no';
-                }
-
-            }
-        }
-    }
-
-    if(empty($room_date_matched) || $room_date_matched == 'yes') {
-        echo 'Yes';
-    }
-
-    ?>
-	<div class="single-tour-wrap">
-		<div class="single-tour-inner">
-			<div class="tourfic-single-left">
-                <a href="<?php echo $url; ?>">
-				<?php
-                if ( has_post_thumbnail() ){ 
-					the_post_thumbnail( 'full' );
-				} else {
-                    echo '<img width="100%" height="100%" src="' .TF_ASSETS_URL . "img/img-not-available.svg". '" class="attachment-full size-full wp-post-image">';
-                }
-                ?>
-                </a>
-			</div>
-			<div class="tourfic-single-right">
-				<div class="tf_property_block_main_row">
-					<div class="tf_item_main_block">
-						<div class="tf-hotel__title-wrap">
-							<a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
-						</div>						
-                        <?php
-                        if($address) {
-                            echo '<div class="tf_map-link">';
-                            echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' .$address. '</span>';
-                            echo '</div>';
-                        }
-                        ?>	                    
-					</div>
-					<?php tourfic_item_review_block();?>
-				</div>
+    $room_date_matched = array();
+    if(!empty($check_in_out)) {
+        if(!empty($b_rooms)) {
+            $b_room_id = -1;
+            foreach ($b_rooms as $b_room) {
                 
-                <div class="sr_rooms_table_block">
-					<div class="room_details">
-						<div class="featuredRooms">
-							<div class="prco-ltr-right-align-helper">
-								<div class="tf-archive-shortdesc">
-                                    <?php echo substr(wp_strip_all_tags(get_the_content()), 0, 200). '...'; ?>
-                            </div>
-							</div>
-							<div class="roomNameInner">
-								<div class="room_link">
-									<div class="roomrow_flex">
-                                        <?php if( $features ) { ?>
-										<div class="roomName_flex">
-                                            <strong><?php _e('Features', 'tourfic'); ?></strong>
-											<ul class="tf-archive-desc">
-                                                <?php foreach($features as $feature) {
-                                                $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'hotel_feature', true );
-                                                $f_icon_type = !empty($feature_meta['icon-type']) ? $feature_meta['icon-type'] : '';
-                                                if ($f_icon_type == 'fa') {
-                                                    $feature_icon = '<i class="' .$feature_meta['icon-fa']. '"></i>';
-                                                } elseif ($f_icon_type == 'c') {
-                                                    $feature_icon = '<img src="' .$feature_meta['icon-c']["url"]. '" style="width: ' .$feature_meta['dimention']["width"]. 'px; height: ' .$feature_meta['dimention']["width"]. 'px;" />';
-                                                } ?>
-                                                <li class="tf-tooltip">
-                                                    <?php echo $feature_icon; ?>
-                                                    <div class="tf-top">
-                                                        <?php echo $feature->name; ?>
-                                                        <i class="tool-i"></i>
-                                                    </div>
-                                                </li>
-                                                <?php } ?>
-                                            </ul>
-										</div>
-                                        <?php } ?>
-                                        <div class="roomPrice roomPrice_flex sr_discount">
-                                            <div class="availability-btn-area">
-                                                <a href="<?php echo $url; ?>" class="button tf_button"><?php esc_html_e( 'Details', 'tourfic' );?></a>
+                $b_room_id++;
+
+                $enable = !empty($b_room['enable']) ? $b_room['enable'] : '';
+
+                // Check if room is enabled
+                if ($enable == '1') {
+
+                    $b_check_in = !empty($b_room['availability']['from']) ? $b_room['availability']['from'] : '';
+                    if($b_check_in) {
+                        $b_check_in_stt = strtotime($b_check_in);
+                    }
+                    $b_check_out = !empty($b_room['availability']['to']) ? $b_room['availability']['to'] : '';
+                    if($b_check_out) {
+                        $b_check_out_stt = strtotime($b_check_out);
+                    }
+
+                    if(empty($b_check_in) || empty($b_check_out) || ($form_check_in_stt >= $b_check_in_stt && $form_check_out_stt <= $b_check_out_stt)) {
+                        array_push($room_date_matched, 'yes');                
+                    }
+
+                }
+            }
+        } else {
+            array_push($room_date_matched, 'yes'); 
+        }
+    } else {
+        array_push($room_date_matched, 'yes'); 
+    }
+    if(!empty($room_date_matched)) {
+    ?>
+        <div class="single-tour-wrap">
+            <div class="single-tour-inner">
+                <div class="tourfic-single-left">
+                    <a href="<?php echo $url; ?>">
+                    <?php
+                    if ( has_post_thumbnail() ){ 
+                        the_post_thumbnail( 'full' );
+                    } else {
+                        echo '<img width="100%" height="100%" src="' .TF_ASSETS_URL . "img/img-not-available.svg". '" class="attachment-full size-full wp-post-image">';
+                    }
+                    ?>
+                    </a>
+                </div>
+                <div class="tourfic-single-right">
+                    <div class="tf_property_block_main_row">
+                        <div class="tf_item_main_block">
+                            <div class="tf-hotel__title-wrap">
+                                <a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
+                            </div>						
+                            <?php
+                            if($address) {
+                                echo '<div class="tf_map-link">';
+                                echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' .$address. '</span>';
+                                echo '</div>';
+                            }
+                            ?>	                    
+                        </div>
+                        <?php tourfic_item_review_block();?>
+                    </div>
+                    
+                    <div class="sr_rooms_table_block">
+                        <div class="room_details">
+                            <div class="featuredRooms">
+                                <div class="prco-ltr-right-align-helper">
+                                    <div class="tf-archive-shortdesc">
+                                        <?php echo substr(wp_strip_all_tags(get_the_content()), 0, 200). '...'; ?>
+                                </div>
+                                </div>
+                                <div class="roomNameInner">
+                                    <div class="room_link">
+                                        <div class="roomrow_flex">
+                                            <?php if( $features ) { ?>
+                                            <div class="roomName_flex">
+                                                <strong><?php _e('Features', 'tourfic'); ?></strong>
+                                                <ul class="tf-archive-desc">
+                                                    <?php foreach($features as $feature) {
+                                                    $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'hotel_feature', true );
+                                                    $f_icon_type = !empty($feature_meta['icon-type']) ? $feature_meta['icon-type'] : '';
+                                                    if ($f_icon_type == 'fa') {
+                                                        $feature_icon = '<i class="' .$feature_meta['icon-fa']. '"></i>';
+                                                    } elseif ($f_icon_type == 'c') {
+                                                        $feature_icon = '<img src="' .$feature_meta['icon-c']["url"]. '" style="width: ' .$feature_meta['dimention']["width"]. 'px; height: ' .$feature_meta['dimention']["width"]. 'px;" />';
+                                                    } ?>
+                                                    <li class="tf-tooltip">
+                                                        <?php echo $feature_icon; ?>
+                                                        <div class="tf-top">
+                                                            <?php echo $feature->name; ?>
+                                                            <i class="tool-i"></i>
+                                                        </div>
+                                                    </li>
+                                                    <?php } ?>
+                                                </ul>
+                                            </div>
+                                            <?php } ?>
+                                            <div class="roomPrice roomPrice_flex sr_discount">
+                                                <div class="availability-btn-area">
+                                                    <a href="<?php echo $url; ?>" class="button tf_button"><?php esc_html_e( 'Details', 'tourfic' );?></a>
+                                                </div>
                                             </div>
                                         </div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-<?php
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php
+    }
 }
 
 #################################

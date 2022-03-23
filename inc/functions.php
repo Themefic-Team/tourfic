@@ -310,55 +310,57 @@ function taxonomy_template( $template ) {
  * 
  * tf_tours & tf_hotel
  */
-function tf_admin_role_caps() {
+if ( !function_exists('tf_admin_role_caps') ) {
+    function tf_admin_role_caps() {
 
-    if ( get_option( 'tf_admin_caps' ) < 1 ) {
-        $admin_role = get_role( 'administrator' );
-        $editor_role = get_role( 'editor' );
-    
-        // Add a new capability.
-        $caps = array (
-            // Hotels
-            'edit_tf_hotel',
-            'read_tf_hotel',
-            'delete_tf_hotel',
-            'edit_tf_hotels',
-            'edit_others_tf_hotels',
-            'publish_tf_hotels',
-            'read_private_tf_hotels',
-            'delete_tf_hotels',
-            'delete_private_tf_hotels',
-            'delete_published_tf_hotels',
-            'delete_others_tf_hotels',
-            'edit_private_tf_hotels',
-            'edit_published_tf_hotels',
-            'create_tf_hotels',
-            // Tours
-            'edit_tf_tours',
-            'read_tf_tours',
-            'delete_tf_tours',
-            'edit_tf_tourss',
-            'edit_others_tf_tourss',
-            'publish_tf_tourss',
-            'read_private_tf_tourss',
-            'delete_tf_tourss',
-            'delete_private_tf_tourss',
-            'delete_published_tf_tourss',
-            'delete_others_tf_tourss',
-            'edit_private_tf_tourss',
-            'edit_published_tf_tourss',
-            'create_tf_tourss',
-        );
-    
-        foreach ( $caps as $cap ) {   
-            $admin_role->add_cap( $cap );
-            $editor_role->add_cap( $cap );
+        if ( get_option( 'tf_admin_caps' ) < 1 ) {
+            $admin_role = get_role( 'administrator' );
+            $editor_role = get_role( 'editor' );
+        
+            // Add a new capability.
+            $caps = array (
+                // Hotels
+                'edit_tf_hotel',
+                'read_tf_hotel',
+                'delete_tf_hotel',
+                'edit_tf_hotels',
+                'edit_others_tf_hotels',
+                'publish_tf_hotels',
+                'read_private_tf_hotels',
+                'delete_tf_hotels',
+                'delete_private_tf_hotels',
+                'delete_published_tf_hotels',
+                'delete_others_tf_hotels',
+                'edit_private_tf_hotels',
+                'edit_published_tf_hotels',
+                'create_tf_hotels',
+                // Tours
+                'edit_tf_tours',
+                'read_tf_tours',
+                'delete_tf_tours',
+                'edit_tf_tourss',
+                'edit_others_tf_tourss',
+                'publish_tf_tourss',
+                'read_private_tf_tourss',
+                'delete_tf_tourss',
+                'delete_private_tf_tourss',
+                'delete_published_tf_tourss',
+                'delete_others_tf_tourss',
+                'edit_private_tf_tourss',
+                'edit_published_tf_tourss',
+                'create_tf_tourss',
+            );
+        
+            foreach ( $caps as $cap ) {   
+                $admin_role->add_cap( $cap );
+                $editor_role->add_cap( $cap );
+            }
+
+            update_option( 'tf_admin_caps', 1 );
         }
-
-        update_option( 'tf_admin_caps', 1 );
     }
+    add_action( 'admin_init', 'tf_admin_role_caps', 999 );
 }
-add_action( 'admin_init', 'tf_admin_role_caps', 999 );
 
 /**
  * Search Result Sidebar form
@@ -382,7 +384,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
         $place_value = isset($_GET[$place_key]) ? $_GET[$place_key] : '';
 
         $taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : 'tour_destination';
-        $place_name = get_term_by( 'slug', $place_value , $taxonomy)->name;
+        $place_name = !empty($place_value) ? get_term_by( 'slug', $place_value , $taxonomy)->name : '';
 
         $adult = isset($_GET['adults']) ? $_GET['adults'] : 0;
         $children = isset($_GET['children']) ? $_GET['children'] : 0;
@@ -748,10 +750,10 @@ function tf_search_result_ajax_sidebar(){
             
             $loop->the_post(); 
 
-            if( $posttype == 'tf_tours' ){
-                tf_tour_archive_single_item($adults, $child, $check_in_out);
+            if( $posttype == 'tf_hotel' ){
+                tf_hotel_archive_single_item($adults, $child, $room, $check_in_out);               
             }else{
-                tf_hotel_archive_single_item($adults, $child, $room, $check_in_out);
+                tf_tour_archive_single_item($adults, $child, $check_in_out);
             }  
         } 
     } else {
@@ -901,7 +903,7 @@ function tf_migrate_data() {
             update_post_meta(
                 $tour->ID,
                 'tf_tours_option',
-                $tour_options,
+                $tour_options
             );
         }
 

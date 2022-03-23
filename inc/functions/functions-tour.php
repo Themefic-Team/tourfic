@@ -384,10 +384,16 @@ function tf_single_tour_booking_form( $post_id ) {
     $times = [];
 
     if ($meta['custom_avail'] == true && !empty($meta['cont_custom_date'])) {
-        $allowed_times = array_map(fn ($v) => $times[] = ['date' => $v['date'], 'times' => array_map(fn ($v) => $v['time'], $v['allowed_time'] ?? [])], $meta['cont_custom_date']);
+        $allowed_times = array_map(function ($v) {
+            return $times[] = ['date' => $v['date'], 'times' => array_map(function ($v) {
+                return $v['time'];
+            }, $v['allowed_time'] ?? [])];
+        }, $meta['cont_custom_date']);
     }
     if ($meta['custom_avail'] == false && !empty($meta['allowed_time'])) {
-        $allowed_times = array_map(fn ($v) => $v['time'], $meta['allowed_time'] ?? []);
+        $allowed_times = array_map(function ($v) {
+            return $v['time']; 
+        }, $meta['allowed_time'] ?? []);
     }
 	
     ob_start();

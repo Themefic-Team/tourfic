@@ -220,14 +220,14 @@ $tf_overall_rate['review'] = null;
 							<img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>" alt="">
 						</div>
 					</div>
-					<?php if( $highlights ): ?>
+					<?php if( get_the_content() ) { ?>
 					<div class="">
 						<div class="tf-overview-text">
 							<h2><?php _e( 'Overview','tourfic' ); ?></h2>
 							<?php the_content(); ?>
 						</div>
 					</div>
-					<?php endif; ?>
+					<?php } ?>
 				</div>
 			</div>
 		</div>
