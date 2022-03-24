@@ -333,6 +333,16 @@ if( class_exists( 'CSF' ) ) {
             ),
 
             array(
+              'id'       => 'price_multi_day',
+              'type'     => 'switcher',
+              'title'    => __('Multiply Pricing By Day', 'tourfic' ),
+              'subtitle' =>  __( 'Dyring booking pricing will be multiplied by day number (Check-in to Check-out)', 'tourfic' ),
+              'text_on'  => __('Yes', 'tourfic' ),
+              'text_off' => __('No', 'tourfic' ),
+              'default' => true,
+            ),
+
+            array(
               'type'    => 'subheading',
               'content' => __('Availability', 'tourfic' ),
             ),
@@ -347,8 +357,8 @@ if( class_exists( 'CSF' ) ) {
                   'dateFormat'      => 'Y/m/d'
               ),
               'from_to'   => true,
-              'text_from' => __('Check-in', 'tourfic' ),
-              'text_to'   => __('Check-out', 'tourfic' ),
+              'text_from' => __('From', 'tourfic' ),
+              'text_to'   => __('To', 'tourfic' ),
           ),
         
           ),

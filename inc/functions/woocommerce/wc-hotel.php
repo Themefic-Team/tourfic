@@ -37,6 +37,7 @@ function tf_hotel_booking_callback(){
     $rooms = !empty($meta['room']) ? $meta['room'] : '';
     $room_name = $rooms[$room_id]['title'];
     $pricing_by = $rooms[$room_id]['pricing-by'];
+    $price_multi_day = !empty($rooms[$room_id]['price_multi_day']) ? $rooms[$room_id]['price_multi_day'] : false;
 
     /**
      * All form data
@@ -49,6 +50,11 @@ function tf_hotel_booking_callback(){
     $room_selected = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
     $check_in = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
     $check_out = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
+    if($check_in && $check_out) {
+        $check_in_stt = strtotime($check_in);
+        $check_out_stt = strtotime($check_out);
+        $day_difference = round((($check_out_stt - $check_in_stt) / (60 * 60 * 24)) + 1);
+    }
 
     // Check errors
     if ( !$check_in ) {
@@ -66,6 +72,7 @@ function tf_hotel_booking_callback(){
     if ( !$post_id  ) {
         $response['errors'][] = __('Unknown Error! Please try again.','tourfic');
     }
+    //$response['errors'][] = $price_multi_day;
 
     $post_title = get_the_title( $post_id );
 
@@ -127,7 +134,11 @@ function tf_hotel_booking_callback(){
             $child_price = $child_price * $child;
             $total_price = $adult_price + $child_price;
         }
-        $price_total = $total_price*$room_selected;
+        if(!empty($day_difference) && $price_multi_day == true) {
+            $price_total = $total_price*$room_selected*$day_difference;
+        } else {
+            $price_total = $total_price*$room_selected;
+        }
 
         $tf_room_data['tf_hotel_data']['price_total'] = $price_total;
 
