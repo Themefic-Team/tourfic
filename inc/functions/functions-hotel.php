@@ -49,7 +49,7 @@ function register_tf_hotel_post_type() {
         'show_in_menu'       => true,
         'query_var'          => true,
         'menu_icon'          => 'dashicons-building',
-        'rewrite'            => array( 'slug' => $hotel_slug ),
+        'rewrite'            => array( 'slug' => $hotel_slug, 'with_front' => false ),
         'capability_type'    => array( 'tf_hotel', 'tf_hotels' ),
         'has_archive'        => true,
         'hierarchical'       => false,

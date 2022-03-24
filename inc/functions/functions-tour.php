@@ -52,7 +52,7 @@ function register_tf_tours_post_type() {
         'show_in_menu'       => true,
         'query_var'          => true,
         'menu_icon'          => 'dashicons-location-alt',
-        'rewrite'            => array( 'slug' => $tour_slug ),      
+        'rewrite'            => array( 'slug' => $tour_slug, 'with_front' => false ),
         'capability_type'    => array( 'tf_tours', 'tf_tourss' ),
         'has_archive'        => true,
         'hierarchical'       => false,
