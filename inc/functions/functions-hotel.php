@@ -49,7 +49,7 @@ function register_tf_hotel_post_type() {
         'show_in_menu'       => true,
         'query_var'          => true,
         'menu_icon'          => 'dashicons-building',
-        'rewrite'            => array( 'slug' => $hotel_slug ),
+        'rewrite'            => array( 'slug' => $hotel_slug, 'with_front' => false ),
         'capability_type'    => array( 'tf_hotel', 'tf_hotels' ),
         'has_archive'        => true,
         'hierarchical'       => false,
@@ -147,7 +147,7 @@ function tf_hotel_taxonomies_register() {
         'show_in_menu'          => true,
         'show_in_nav_menus'     => true,
         'query_var'             => true,
-        'rewrite'               => array('slug' => $hotel_location_slug),
+        'rewrite'               => array('slug' => $hotel_location_slug, 'with_front' => false ),
         'show_admin_column'     => true,
         'show_in_rest'          => true,
         'rest_base'             => 'hotel_location',
@@ -323,7 +323,7 @@ function tf_room_availability_callback() {
                         $total_person = $adult_number + $child_number;	
                         $pricing_by = !empty($room['pricing-by']) ? $room['pricing-by'] : '';
 
-                    if ($form_total_person < $total_person) {                                                                 
+                    if ($form_total_person <= $total_person) {                                                                 
                 ?>
             <tr>
                 <td class="description">
@@ -690,6 +690,7 @@ function tf_hotel_sidebar_booking_form() {
                 mode: "range",
                 dateFormat: "Y/m/d",
                 allowInput: true,
+                minDate: "today",
             });
     
         });

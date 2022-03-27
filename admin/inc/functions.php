@@ -101,7 +101,8 @@ function tf_required_taxonomies( $hook ) {
 
 	wp_localize_script( 'tf-required', 'tf_params', array(
 			'taxonomies' => $post_types[ $post_type ],
-			'error'      => false
+			'error'      => false,
+			'tour_location_required' => __('Tour Location is a required field!', 'tourfic'),
 		)
 	);
 

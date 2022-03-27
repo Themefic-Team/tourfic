@@ -40,6 +40,52 @@ if ($gallery) {
 	$gallery_ids = explode( ',', $gallery );
 }
 $hero_title = !empty($meta['hero_title']) ? $meta['hero_title'] : '';
+
+// Price
+$pricing_rule = !empty($meta['pricing']) ? $meta['pricing'] : '';
+$discount_type = !empty($meta['discount_type']) ? $meta['discount_type'] : '';
+$discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : '';
+
+if( $pricing_rule == 'group'){
+
+	$price = !empty($meta['group_price']) ? $meta['group_price'] : '';
+
+	if( $discount_type == 'percent' ){
+		$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 ); 
+	}elseif( $discount_type == 'fixed'){
+		$sale_price = number_format( ( $price - $discounted_price ),1 );
+	}else if( $discount_type == 'none' ){
+		$sale_price = number_format( $price, 1 );
+	}
+
+}else{
+
+	$price_adult = !empty($meta['adult_price']) ? $meta['adult_price'] : '0';
+	$price_child = !empty($meta['child_price']) ? $meta['child_price'] : '0';
+	$price_infant = !empty($meta['infant_price']) ? $meta['infant_price'] : '0';
+
+	if( $discount_type == 'percent' ){
+
+		$sale_price_adult = number_format( $price_adult - (( $price_adult / 100 ) * $discounted_price) ,0 ); 
+		$sale_price_child = number_format( $price_child - (( $price_child / 100 ) * $discounted_price) ,0 );
+		$sale_price_infant = number_format( $price_infant - (( $price_infant / 100 ) * $discounted_price) ,0 );
+
+	}elseif( $discount_type == 'fixed'){
+
+		$sale_price_adult = number_format( ( $price_adult - $discounted_price ),1 );
+		$sale_price_child = number_format( ( $price_child - $discounted_price ),1 );
+		$sale_price_infant = number_format( ( $price_infant - $discounted_price ),1 );
+
+	}else if( $discount_type == 'none' ){
+
+		$sale_price_adult = number_format( $price_adult, 0 );
+		$sale_price_child = number_format( $price_child, 0 );
+		$sale_price_infant = number_format( $price_infant, 0 );
+
+	}
+
+}
+
 // Highlights
 $highlights = !empty($meta['additional_information']) ? $meta['additional_information'] : ''; 
 // Informations
@@ -142,7 +188,7 @@ $tf_overall_rate['review'] = null;
 						</div>
 						<div class="tf-hero-bottom-right">
 							<div class="tf-hero-pricing">
-								<span><?php echo esc_html__( 'Price','tourfic' ); ?>: <?php echo tf_tours_price_html();?></span>
+								<span><?php echo get_woocommerce_currency_symbol() . $sale_price_adult;?></span>
 							</div>
 							<div class="tf-hero-rating">
 								<div class="tf-hero-bcr-star">
@@ -210,24 +256,23 @@ $tf_overall_rate['review'] = null;
 		<div class="tf-container">
 			<div class="tf-row">
 				<div class="tf-overview-content-wrapper">
-					<div class="tf-overview-item">
-						<div class="tf-overview-text">							
-							<h2><?php _e( 'Highlights','tourfic' ); ?></h2>
-							<?php echo $highlights; ?>
-
+					<?php if($highlights) { ?>
+						<div class="tf-overview-item">
+							<div class="tf-overview-text">							
+								<h2><?php _e( 'Highlights','tourfic' ); ?></h2>
+								<?php echo $highlights; ?>
+							</div>
+							<div class="tf-ohi-image">
+								<img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>" alt="">
+							</div>
 						</div>
-						<div class="tf-ohi-image">
-							<img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>" alt="">
-						</div>
-					</div>
-					<?php if( $highlights ): ?>
-					<div class="">
+					<?php }
+					if(get_the_content()) { ?>
 						<div class="tf-overview-text">
 							<h2><?php _e( 'Overview','tourfic' ); ?></h2>
 							<?php the_content(); ?>
 						</div>
-					</div>
-					<?php endif; ?>
+					<?php } ?>
 				</div>
 			</div>
 		</div>
@@ -360,7 +405,7 @@ $tf_overall_rate['review'] = null;
 					<div class="tf-suggestion-wrapper">
 						<h2><?php _e("Terms and Conditions", 'tourfic'); ?></h2>
 						<div class="tf-travel-itinerary-items-wrapper">
-							<?php echo $terms_and_conditions; ?>
+							<?php echo wpautop($terms_and_conditions); ?>
 						</div>
 					</div>
 
