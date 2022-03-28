@@ -429,3 +429,20 @@
     color: #fff;
     font-size: 12px;
 }
+
+/*================================
+|      Theme based CSS Fix       |
+================================*/
+/**
+ * Twenty Twenty Two
+ */
+/* Slick SLider*/
+.single-tf_hotel.theme-twentytwentytwo .slick-slide {
+    height: auto !important;
+}
+.single-tf_hotel.theme-twentytwentytwo .slick-slide img{
+    height: auto !important;
+}
+.single-tf_tours.theme-twentytwentytwo .tf-tour-booking-wrap {
+    height: auto !important;
+}

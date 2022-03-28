@@ -178,6 +178,8 @@
     flex-direction: column;
     justify-content: center;
     padding: 20px;
+    background-position: center center;
+    background-size: cover;
 }
 
 .tf-hero-top-content-inner {
