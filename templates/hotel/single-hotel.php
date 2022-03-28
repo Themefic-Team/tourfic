@@ -217,15 +217,6 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                             <div class="swiper-button-prev sw-btn"><i class="fa fa-angle-left"></i></div>
                             <div class="swiper-button-next sw-btn"><i class="fa fa-angle-right"></i></div>
                         </div>
-                        <div class="single-slider-wrapper fl-wrap">
-                            <div class="tf_slider-nav fl-wrap">
-                                <?php foreach ( (array) $gallery_ids as $attachment_id ) {
-									echo '<div class="slick-slide-item">';
-										echo wp_get_attachment_image( $attachment_id, 'thumbnail' );
-									echo '</div>';
-								} ?>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <!-- End gallery-->
@@ -473,7 +464,7 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                 <!-- Start TOC Content -->
                 <div class="tf_toc-wrap">
                     <div class="tf_toc-inner">
-                        <?php echo $tc; ?>
+                        <?php echo wpautop($tc); ?>
                     </div>
                 </div>
                 <!-- End TOC Content -->
@@ -493,4 +484,4 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
 </div>
 <?php endwhile; ?>
 <?php
-get_footer('tourfic');
+get_footer();

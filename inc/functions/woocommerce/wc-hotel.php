@@ -109,7 +109,7 @@ function tf_hotel_booking_callback(){
 
     //$response['errors'][] = $pricing_by;
     // If no errors then process
-    if( 0 == count( $response['errors'] ) ) {
+    if(!array_key_exists('errors', $response) || count($response['errors']) == 0) {
 
         $tf_room_data['tf_hotel_data']['order_type'] = 'hotel';
         $tf_room_data['tf_hotel_data']['post_author'] = $post_author;
@@ -121,9 +121,6 @@ function tf_hotel_booking_callback(){
         $tf_room_data['tf_hotel_data']['check_out'] = $check_out;
         $tf_room_data['tf_hotel_data']['room'] = $room_selected;
         $tf_room_data['tf_hotel_data']['room_name'] = $room_name;
-
-        $tf_room_data['tf_hotel_data']['price'] = $get_room_type['price'];
-        $tf_room_data['tf_hotel_data']['sale_price'] = $get_room_type['sale_price'];
 
         if ($pricing_by == '1') {
             $total_price = $rooms[$room_id]['price'];

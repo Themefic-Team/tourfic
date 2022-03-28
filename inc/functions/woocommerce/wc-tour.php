@@ -24,10 +24,21 @@ function tf_tours_booking_function() {
     $meta = get_post_meta( $post_id, 'tf_tours_option', true );
     $tour_type = !empty($meta['type']) ? $meta['type'] : '';
     
-    // If continuous is selected but pro is not activated return
-    if ($tour_type == 'continuous' && !defined( 'TF_PRO' )) {
+    /**
+     * If fixed is selected but pro is not activated
+     * 
+     * show error
+     * 
+     * @return
+     */
+    if ($tour_type == 'fixed' && !defined( 'TF_PRO' )) {
+        $response['errors'][] = __( 'Fixed Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
+        $response['status'] = 'error';
+        echo wp_json_encode( $response );
+        die();
         return;
     }
+
     if ($tour_type == 'fixed') {
 
         $start_date = !empty($meta['fixed_availability']['date']['from']) ? $meta['fixed_availability']['date']['from'] : '';
@@ -52,6 +63,21 @@ function tf_tours_booking_function() {
 
     } else {
 
+    }
+
+    /**
+     * If continuous custom availability is selected but pro is not activated
+     * 
+     * Show error
+     * 
+     * @return
+     */
+    if ($tour_type == 'continuous' && $custom_avail == true && !defined( 'TF_PRO' )) {
+        $response['errors'][] = __( 'Custom Continous Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
+        $response['status'] = 'error';
+        echo wp_json_encode( $response );
+        die();
+        return;
     }
 
     /**
@@ -242,7 +268,7 @@ function tf_tours_booking_function() {
      * Store custom data in array
      * Add to cart with custom data
      */
-    if ( 0 == count( $response['errors'] ) ) {
+    if (!array_key_exists('errors', $response) || count($response['errors']) == 0) {
 
         $tf_tours_data['tf_tours_data']['order_type'] = 'tour';
         $tf_tours_data['tf_tours_data']['post_author'] = $post_author;

@@ -211,18 +211,7 @@
             fade: false,
             dots: false,
             centerMode: false,
-            asNavFor: '.tf_slider-nav',
-            variableWidth: true
-        });
-
-        $('.single-slider-wrapper .tf_slider-nav').slick({
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            asNavFor: '.tf_slider-for',
-            dots: false,
-            arrows: false,
-            centerMode: true,
-            focusOnSelect: true
+            variableWidth: false,
         });
 
         sbp.on("click", function () {

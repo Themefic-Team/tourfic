@@ -67,4 +67,28 @@ CSF::createSection( $prefix, array(
     )
     
 ) );
+
+/**
+ * Permalink Settings
+ * 
+ * Sub Menu
+ */
+CSF::createSection( $prefix, array(
+    'parent'    => 'miscellaneous', 
+    'title' =>  __( 'Permalink Settings', 'tourfic' ),
+    'fields' => array(
+
+        array(
+            'type'    => 'subheading',
+            'content' => __('Permalink Settings', 'tourfic' ),
+        ),
+
+        array(
+            'type'    => 'content',
+            'content' => __('For permalink settings go to default <a href="' .get_admin_url(). 'options-permalink.php">permalink settings page</a>.', 'tourfic' ),
+        ),
+
+    )
+    
+) );
 ?>
