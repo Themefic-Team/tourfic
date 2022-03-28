@@ -391,6 +391,7 @@ function tf_single_tour_booking_form( $post_id ) {
             }, $v['allowed_time'] ?? [])];
         }, $meta['cont_custom_date']);
     }
+    
     if ($custom_avail == false && !empty($meta['allowed_time'])) {
         $allowed_times = array_map(function ($v) {
             return $v['time'];          
