@@ -41,51 +41,6 @@ if ($gallery) {
 }
 $hero_title = !empty($meta['hero_title']) ? $meta['hero_title'] : '';
 
-// Price
-$pricing_rule = !empty($meta['pricing']) ? $meta['pricing'] : '';
-$discount_type = !empty($meta['discount_type']) ? $meta['discount_type'] : '';
-$discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : '';
-
-if( $pricing_rule == 'group'){
-
-	$price = !empty($meta['group_price']) ? $meta['group_price'] : '';
-
-	if( $discount_type == 'percent' ){
-		$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 ); 
-	}elseif( $discount_type == 'fixed'){
-		$sale_price = number_format( ( $price - $discounted_price ),1 );
-	}else if( $discount_type == 'none' ){
-		$sale_price = number_format( $price, 1 );
-	}
-
-}else{
-
-	$price_adult = !empty($meta['adult_price']) ? $meta['adult_price'] : '0';
-	$price_child = !empty($meta['child_price']) ? $meta['child_price'] : '0';
-	$price_infant = !empty($meta['infant_price']) ? $meta['infant_price'] : '0';
-
-	if( $discount_type == 'percent' ){
-
-		$sale_price_adult = number_format( $price_adult - (( $price_adult / 100 ) * $discounted_price) ,0 ); 
-		$sale_price_child = number_format( $price_child - (( $price_child / 100 ) * $discounted_price) ,0 );
-		$sale_price_infant = number_format( $price_infant - (( $price_infant / 100 ) * $discounted_price) ,0 );
-
-	}elseif( $discount_type == 'fixed'){
-
-		$sale_price_adult = number_format( ( $price_adult - $discounted_price ),1 );
-		$sale_price_child = number_format( ( $price_child - $discounted_price ),1 );
-		$sale_price_infant = number_format( ( $price_infant - $discounted_price ),1 );
-
-	}else if( $discount_type == 'none' ){
-
-		$sale_price_adult = number_format( $price_adult, 0 );
-		$sale_price_child = number_format( $price_child, 0 );
-		$sale_price_infant = number_format( $price_infant, 0 );
-
-	}
-
-}
-
 // Highlights
 $highlights = !empty($meta['additional_information']) ? $meta['additional_information'] : ''; 
 // Informations
@@ -188,7 +143,7 @@ $tf_overall_rate['review'] = null;
 						</div>
 						<div class="tf-hero-bottom-right">
 							<div class="tf-hero-pricing">
-								<span><?php echo get_woocommerce_currency_symbol() . $sale_price_adult;?></span>
+								<span><?php echo esc_html__( 'Price','tourfic' ); ?>: <?php echo tf_tours_price_html();?></span>
 							</div>
 							<div class="tf-hero-rating">
 								<div class="tf-hero-bcr-star">
