@@ -268,7 +268,7 @@ function tf_tours_booking_function() {
      * Store custom data in array
      * Add to cart with custom data
      */
-    if ( 0 == count( $response['errors'] ) ) {
+    if (!array_key_exists('errors', $response) || count($response['errors']) == 0) {
 
         $tf_tours_data['tf_tours_data']['order_type'] = 'tour';
         $tf_tours_data['tf_tours_data']['post_author'] = $post_author;
