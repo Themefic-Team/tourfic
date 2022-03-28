@@ -147,7 +147,7 @@ function tf_hotel_taxonomies_register() {
         'show_in_menu'          => true,
         'show_in_nav_menus'     => true,
         'query_var'             => true,
-        'rewrite'               => array('slug' => $hotel_location_slug),
+        'rewrite'               => array('slug' => $hotel_location_slug, 'with_front' => false ),
         'show_admin_column'     => true,
         'show_in_rest'          => true,
         'rest_base'             => 'hotel_location',
@@ -336,15 +336,14 @@ function tf_room_availability_callback() {
                         // Check if date is provided and within date range
                         if(empty($b_check_in) || empty($b_check_out) || ($form_check_in_stt >= $b_check_in_stt && $form_check_out_stt <= $b_check_out_stt)) {                                         
 
-                            // Check persons number
-                            if ($form_total_person < $total_person) {                                                                 
-                            ?>
-                                <tr>
-                                    <td class="description">
-                                        <div class="tf-room-type">
-                                            <div class="tf-room-title"><?php echo esc_html( $room['title'] ); ?></div>
-                                            <div class="bed-facilities"><?php echo $room['description']; ?></div>
-                                        </div>
+                    if ($form_total_person <= $total_person) {                                                                 
+                ?>
+            <tr>
+                <td class="description">
+                    <div class="tf-room-type">
+                        <div class="tf-room-title"><?php echo esc_html( $room['title'] ); ?></div>
+                        <div class="bed-facilities"><?php echo $room['description']; ?></div>
+                    </div>
 
                                         <div class="tf-room-title">
                                             <?php esc_html_e( 'Key Features', 'tourfic' ); ?>

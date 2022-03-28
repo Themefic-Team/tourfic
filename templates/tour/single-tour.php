@@ -40,6 +40,7 @@ if ($gallery) {
 	$gallery_ids = explode( ',', $gallery );
 }
 $hero_title = !empty($meta['hero_title']) ? $meta['hero_title'] : '';
+
 // Highlights
 $highlights = !empty($meta['additional_information']) ? $meta['additional_information'] : ''; 
 // Informations
@@ -210,23 +211,22 @@ $tf_overall_rate['review'] = null;
 		<div class="tf-container">
 			<div class="tf-row">
 				<div class="tf-overview-content-wrapper">
-					<div class="tf-overview-item">
-						<div class="tf-overview-text">							
-							<h2><?php _e( 'Highlights','tourfic' ); ?></h2>
-							<?php echo $highlights; ?>
-
+					<?php if($highlights) { ?>
+						<div class="tf-overview-item">
+							<div class="tf-overview-text">							
+								<h2><?php _e( 'Highlights','tourfic' ); ?></h2>
+								<?php echo $highlights; ?>
+							</div>
+							<div class="tf-ohi-image">
+								<img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>" alt="">
+							</div>
 						</div>
-						<div class="tf-ohi-image">
-							<img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>" alt="">
-						</div>
-					</div>
-					<?php if( get_the_content() ) { ?>
-					<div class="">
+					<?php }
+					if(get_the_content()) { ?>
 						<div class="tf-overview-text">
 							<h2><?php _e( 'Overview','tourfic' ); ?></h2>
 							<?php the_content(); ?>
 						</div>
-					</div>
 					<?php } ?>
 				</div>
 			</div>
@@ -360,7 +360,7 @@ $tf_overall_rate['review'] = null;
 					<div class="tf-suggestion-wrapper">
 						<h2><?php _e("Terms and Conditions", 'tourfic'); ?></h2>
 						<div class="tf-travel-itinerary-items-wrapper">
-							<?php echo $terms_and_conditions; ?>
+							<?php echo wpautop($terms_and_conditions); ?>
 						</div>
 					</div>
 

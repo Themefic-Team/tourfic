@@ -7,8 +7,8 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.1.0
- * Tested up to: 5.9.1
+ * Version:         2.1.1
+ * Tested up to: 5.9.2
  * WC tested up to: 6.3.1
  * Requires PHP: 7.1
  */
@@ -91,7 +91,7 @@ if ( !is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
  * @since 1.0
  */
 if ( !defined( 'TOURFIC' ) ) {
-    define( 'TOURFIC', '2.1.0' );
+    define( 'TOURFIC', '2.1.1' );
 }
 
 /**
@@ -200,7 +200,7 @@ function tf_is_woo() {
 
             <div id="message" class="error">
                 <p><?php printf( __( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
-                <p><a class="install-now button tf-install" data-plugin-slug="woocommerce"><?php esc_attr_e( 'Install Now', 'tourfic' ); ?></a></p>
+                <p><a class="install-now button" href="<?php echo esc_url( admin_url('/plugin-install.php?s=slug:woocommerce&tab=search&type=term') ); ?>"><?php esc_attr_e( 'Install Now', 'tourfic' ); ?></a></p>
             </div>
 
         <?php 

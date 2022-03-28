@@ -150,7 +150,7 @@ function tf_tours_taxonomies_register() {
         'show_in_menu'          => true,
         'show_in_nav_menus'     => true,
         'query_var'             => true,
-        'rewrite'               => array('slug' => $tour_destination_slug),
+        'rewrite'               => array('slug' => $tour_destination_slug, 'with_front' => false ),
         'show_admin_column'     => true,
         'show_in_rest'          => true,
         'rest_base'             => 'tour_destination',
@@ -347,6 +347,8 @@ function tf_single_tour_booking_form( $post_id ) {
     
     $meta = get_post_meta( $post_id, 'tf_tours_option', true );
     $tour_type = !empty($meta['type']) ? $meta['type'] : '';
+    // Continuous custom availability
+    $custom_avail = !empty($meta['custom_avail']) ? $meta['custom_avail'] : '';
 
     if ($tour_type == 'fixed') {
 
@@ -357,7 +359,6 @@ function tf_single_tour_booking_form( $post_id ) {
 
     } elseif ($tour_type == 'continuous') {
 
-        $custom_avail = !empty($meta['custom_avail']) ? $meta['custom_avail'] : '';
         $disabled_day = !empty($meta['disabled_day']) ? $meta['disabled_day'] : '';
         $disable_range = !empty($meta['disable_range']) ? $meta['disable_range'] : '';
         $disable_specific = !empty($meta['disable_specific']) ? $meta['disable_specific'] : '';
