@@ -1,9 +1,4 @@
 <?php
-namespace ElementorTourfic\Widgets;
-
-use Elementor\Widget_Base;
-use Elementor\Controls_Manager;
-
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -13,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Elementor widget for BEAF Slider.
  *
  */
-class TOURFIC_slider extends Widget_Base {
+class TOURFIC_slider extends \Elementor\Widget_Base {
 
 	/**
 	 * Retrieve the widget name.
@@ -82,7 +77,7 @@ class TOURFIC_slider extends Widget_Base {
 	 *
 	 * @access protected
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
         
         /*
 		$this->start_controls_section(

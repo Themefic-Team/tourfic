@@ -58,6 +58,9 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         if ($flatpickr_cdn == true) {
 			wp_enqueue_style( 'flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.11/flatpickr.min.css', array(), '4.6.9' );
 			wp_enqueue_script( 'flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.11/flatpickr.min.js', array( 'jquery' ), '4.6.9', true );
+            if (in_array($flatpickr_locale, $allowed_locale)) {
+                wp_enqueue_script( 'flatpickr-locale', TF_ASSETS_URL . 'flatpickr/l10n/' .$flatpickr_locale. '.min.js', array( 'jquery' ), '4.6.11', true );
+            }
 		} else {
             wp_enqueue_style( 'flatpickr', TF_ASSETS_URL . 'flatpickr/flatpickr.min.css', '', '4.6.11' );
 			wp_enqueue_script( 'flatpickr', TF_ASSETS_URL . 'flatpickr/flatpickr.min.js', array( 'jquery' ), '4.6.11', true );
