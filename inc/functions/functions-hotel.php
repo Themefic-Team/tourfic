@@ -717,6 +717,10 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
                 dateFormat: "Y/m/d",
                 allowInput: true,
                 minDate: "today",
+                <?php
+                // Flatpickt locale for translation
+                tf_flatpickr_locale();
+                ?>
             });
     
         });

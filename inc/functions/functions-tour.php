@@ -504,9 +504,12 @@ function tf_single_tour_booking_form( $post_id ) {
 
                             $("#check-in-out-date").flatpickr({  
                                 enableTime: false,
-                                dateFormat: "Y/m/d",                               
+                                dateFormat: "Y/m/d",
+                            <?php
+                            // Flatpickt locale for translation
+                            tf_flatpickr_locale();
 
-                            <?php if ($tour_type && $tour_type == 'fixed') { ?>
+                            if ($tour_type && $tour_type == 'fixed') { ?>
 
                                 mode: "range",
                                 defaultDate: ["<?php echo $departure_date; ?>", "<?php echo $return_date; ?>"],

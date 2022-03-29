@@ -36,11 +36,12 @@ if ( !function_exists('tf_dequeue_scripts') ) {
 if ( !function_exists('tf_enqueue_scripts') ) {
 	function tf_enqueue_scripts(){
 
-        $flatpickr_cdn = !empty(tfopt( 'ftpr_cdn' )) ? tfopt( 'ftpr_cdn' ) : false ;
-        //$flatpickr_locale = !empty(tfopt( 'flatpickr-cdn' )) ? tfopt( 'flatpickr-cdn' ) : false ;
-        $fancy_cdn = !empty(tfopt( 'fnybx_cdn' )) ? tfopt( 'fnybx_cdn' ) : false ;
-        $slick_cdn = !empty(tfopt( 'slick_cdn' )) ? tfopt( 'slick_cdn' ) : false ;
-        $fa_cdn = !empty(tfopt( 'fa_cdn' )) ? tfopt( 'fa_cdn' ) : false ;
+        $flatpickr_cdn = !empty(tfopt( 'ftpr_cdn' )) ? tfopt( 'ftpr_cdn' ) : false;
+        $flatpickr_locale = !empty(get_locale()) ? get_locale() : 'en_US';
+        $allowed_locale = array('ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN');
+        $fancy_cdn = !empty(tfopt( 'fnybx_cdn' )) ? tfopt( 'fnybx_cdn' ) : false;
+        $slick_cdn = !empty(tfopt( 'slick_cdn' )) ? tfopt( 'slick_cdn' ) : false;
+        $fa_cdn = !empty(tfopt( 'fa_cdn' )) ? tfopt( 'fa_cdn' ) : false;
         $min_css = !empty(tfopt( 'css_min' )) ? '.min' : '';
 		$min_js = !empty(tfopt( 'js_min' )) ? '.min' : '';
 
@@ -60,9 +61,9 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 		} else {
             wp_enqueue_style( 'flatpickr', TF_ASSETS_URL . 'flatpickr/flatpickr.min.css', '', '4.6.11' );
 			wp_enqueue_script( 'flatpickr', TF_ASSETS_URL . 'flatpickr/flatpickr.min.js', array( 'jquery' ), '4.6.11', true );
-            //if ($flatpickr_locale) {
-                //wp_enqueue_script( 'flatpickr-locale', TF_ASSETS_URL . 'flatpickr/l10n/bn_BD.min.js', array( 'jquery' ), '4.6.11', true );
-            //}
+            if (in_array($flatpickr_locale, $allowed_locale)) {
+                wp_enqueue_script( 'flatpickr-locale', TF_ASSETS_URL . 'flatpickr/l10n/' .$flatpickr_locale. '.min.js', array( 'jquery' ), '4.6.11', true );
+            }
 		}
 
 

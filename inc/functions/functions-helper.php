@@ -624,4 +624,50 @@ function tourfic_posts_navigation($wp_query=''){
 	) );
 	echo "</div>";
 }
+
+/**
+ * Flatpickr locale
+ */
+if(!function_exists('tf_flatpickr_locale')) {
+	function tf_flatpickr_locale() {
+		
+		$flatpickr_locale = !empty(get_locale()) ? get_locale() : 'en_US';
+		$allowed_locale = array('ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN');
+
+		if (in_array($flatpickr_locale, $allowed_locale)) {
+
+			switch ($flatpickr_locale) {
+				case "bn_BD":
+					$flatpickr_locale = 'bn';
+					break;
+				case "de_DE":
+					$flatpickr_locale = 'de';
+					break;
+				case "es_ES":
+					$flatpickr_locale = 'es';
+					break;
+				case "fr_FR":
+					$flatpickr_locale = 'fr';
+					break;
+				case "hi_IN":
+					$flatpickr_locale = 'hi';
+					break;
+				case "it_IT":
+					$flatpickr_locale = 'it';
+					break;
+				case "nl_NL":
+					$flatpickr_locale = 'nl';
+					break;
+				case "ru_RU":
+					$flatpickr_locale = 'ru';
+					break;
+				case "zh_CN":
+					$flatpickr_locale = 'zh';
+					break;
+			}
+
+			echo 'locale: "' .$flatpickr_locale. '",';
+		}
+	}
+}
 ?>
