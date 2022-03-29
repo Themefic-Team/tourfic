@@ -37,7 +37,14 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-wishlist.php' ) ) {
 } else {
     tf_file_missing(TF_INC_PATH . 'functions/functions-wishlist.php');
 }
-
+/**
+ * Review Functions
+ */
+if (file_exists(TF_INC_PATH . 'functions/functions-review.php')) {
+    require_once TF_INC_PATH . 'functions/functions-review.php';
+} else {
+    tf_file_missing(TF_INC_PATH . 'functions/functions-review.php');
+}
 /**
  * Including CSS & JS
  * 
@@ -206,11 +213,8 @@ if ( !function_exists( 'load_comment_template' ) ) {
         if ( 'tf_hotel' === $post->post_type || 'tf_tours' === $post->post_type ) {
             $theme_files = array( 'tourfic/template-parts/review.php' );
             $exists_in_theme = locate_template( $theme_files, false );
-            if ( $exists_in_theme ) {
-                return $exists_in_theme;
-            } else {
-                return TF_TEMPLATE_PATH . 'template-parts/review.php';
-            }
+            return empty($exists_in_theme) ? TF_TEMPLATE_PATH . 'template-parts/review.php' : $exists_in_theme;
+            
         }
 
         return $comment_template;

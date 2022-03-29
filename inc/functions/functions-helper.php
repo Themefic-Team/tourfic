@@ -19,155 +19,9 @@ function tourfic_proctected_product_pass(){
 	return "111111";
 }
 
-/**
- * Review form
- */
-function tourfic_get_review_form( ){
 
-	//tours and hotel comment conditional markup
-	if('tf_tours' === get_post_type()){
-		$div_start = "<div class='comment_form_fields'>";
-		$div_end   = "</div>";
-	}else{
-		$div_start = '';
-		$div_end   = '';
-	};
-	
-	//Declare Vars
-	$comment_send = __( 'Submit', 'tourfic' );
-	$comment_reply = __( 'Write a Review', 'tourfic' );
-	$comment_reply_to = __( 'Reply', 'tourfic' );
 
-	$comment_author = 'Name';
-	$comment_email = 'E-Mail';
-	$comment_body = 'Comment';
-	$comment_url = 'Website';
-	$comment_cookies_1 = ' By commenting you accept the';
-	$comment_cookies_2 = ' Privacy Policy';
 
-	$comment_before = 'Registration isn\'t required.';
-
-	$comment_cancel = 'Cancel Reply';
-
-	$comment_meta = '<div class="tf_comment-metas">';
-
-	$comment_meta .= '<div class="comment-meta">
-		<label>Ratings</label>
-		<select name="tf_comment_meta[review]">
-			<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-			<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
-			<option value="3">&#9733; &#9733; &#9733;</option>
-			<option value="2">&#9733; &#9733;</option>
-			<option value="1">&#9733;</option>
-		</select>
-	</div>';
-
-	$comment_meta .= '<div class="comment-meta">
-		<label>Sleep</label>
-		<select name="tf_comment_meta[sleep]">
-			<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-			<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
-			<option value="3">&#9733; &#9733; &#9733;</option>
-			<option value="2">&#9733; &#9733;</option>
-			<option value="1">&#9733;</option>
-		</select>
-	</div>';
-
-	$comment_meta .= '<div class="comment-meta">
-		<label>Location</label>
-		<select name="tf_comment_meta[location]">
-			<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-			<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
-			<option value="3">&#9733; &#9733; &#9733;</option>
-			<option value="2">&#9733; &#9733;</option>
-			<option value="1">&#9733;</option>
-		</select>
-	</div>';
-
-	$comment_meta .= '<div class="comment-meta">
-		<label>Services</label>
-		<select name="tf_comment_meta[services]">
-			<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-			<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
-			<option value="3">&#9733; &#9733; &#9733;</option>
-			<option value="2">&#9733; &#9733;</option>
-			<option value="1">&#9733;</option>
-		</select>
-	</div>';
-
-	$comment_meta .= '<div class="comment-meta">
-		<label>Cleanliness</label>
-		<select name="tf_comment_meta[cleanliness]">
-			<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-			<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
-			<option value="3">&#9733; &#9733; &#9733;</option>
-			<option value="2">&#9733; &#9733;</option>
-			<option value="1">&#9733;</option>
-		</select>
-	</div>';
-
-	$comment_meta .= '<div class="comment-meta">
-		<label>Room(s)</label>
-		<select name="tf_comment_meta[rooms]">
-			<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-			<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
-			<option value="3">&#9733; &#9733; &#9733;</option>
-			<option value="2">&#9733; &#9733;</option>
-			<option value="1">&#9733;</option>
-		</select>
-	</div>';
-
-	$comment_meta .= '</div>';
-
-	//Array
-	$comments_args = array(
-	    //Define Fields
-	    'fields' => array(
-	        //Author field
-	        'author' => '<div class="author-email"><p class="comment-form-author"><input type="text" id="author" name="author" aria-required="true" placeholder="' . $comment_author .'"></input></p>',
-	        //Email Field
-	        'email' => '<p class="comment-form-email"><input type="email" id="email" name="email" placeholder="' . $comment_email .'"></input></p></div>',
-	        //URL Field
-	        //'url' => '<p class="comment-form-url"><input type="text" id="url" name="url" placeholder="' . $comment_url .'"></input></p>',
-	        //Cookies
-	        'cookies' => '<input type="checkbox" required>' . $comment_cookies_1 . '<a href="' . get_privacy_policy_url() . '">' . $comment_cookies_2 . '</a>' . $div_end,
-	    ),
-	    // Change the title of send button
-	    'label_submit' => $comment_send,
-	    // Change the title of the reply section
-	    'title_reply' => $comment_reply,
-	    // Change the title of the reply section
-	    'title_reply_to' => $comment_reply_to,
-	    // Reply html start
-	    'title_reply_before' => '<div id="reply-title" class="comment-reply-title">',
-	    // Reply html end
-	    'title_reply_after' => '<span class="faq-indicator"> <i class="fa fa-angle-up" aria-hidden="true"></i> <i class="fa fa-angle-down" aria-hidden="true"></i> </span></div>',
-	    //Cancel Reply Text
-	    'cancel_reply_link' => $comment_cancel,
-	    // Redefine your own textarea (the comment body).
-	    'comment_field' => $comment_meta . $div_start .'<p class="comment-form-comment"><textarea id="comment" name="comment" aria-required="true" placeholder="' . $comment_body .'"></textarea></p>',
-	    //Message Before Comment
-	    'comment_notes_before' => $comment_before,
-	    // Remove "Text or HTML to be displayed after the set of comment fields".
-	    'comment_notes_after' => '',
-	    //Submit Button ID
-	    'id_submit' => 'comment-submit',
-	    //Submit Button html
-	    'submit_button' => '<input name="%1$s" type="submit" id="%2$s" class="%3$s" value="%4$s" />',
-	);
-
-	comment_form( $comments_args );
-
-}
-
-/**
- * Save Comment Meta
- */
-function tourfic_save_comment_meta_data( $comment_id ) {
-	$meta_values = $_POST['tf_comment_meta'];
-    update_comment_meta( $comment_id, 'tf_comment_meta',  $meta_values );
-}
-add_action( 'comment_post', 'tourfic_save_comment_meta_data' );
 
 /**
  * Generate Star
@@ -185,33 +39,7 @@ function tourfic_star_generate( $count ){
 	return $stars;
 }
 
-/**
- * Show Comment meta
- */
-add_filter( 'get_comment_author_link', 'tourfic_attach_city_to_author' );
-function tourfic_attach_city_to_author( $author ) {
 
-    $tf_comment_meta = get_comment_meta( get_comment_ID(), 'tf_comment_meta', true );
-
-    ob_start(); ?>
-
-    <?php if( $tf_comment_meta ) : ?>
-    	<div class="tf_comment-metas">
-    	<?php foreach ( $tf_comment_meta as $key => $value ) : ?>
-			<div class="comment-meta">
-				<label class="tf_comment_meta-key"><?php _e( $key ); ?></label>
-				<div class="tf_comment_meta-ratings"><?php _e( tourfic_star_generate($value) ); ?></div>
-			</div>
-    	<?php endforeach; ?>
-    	</div>
-    <?php endif; ?>
-    <?php
-    $output = ob_get_clean();
-
-    if ( $tf_comment_meta )
-        $author .= $output;
-    return $author;
-}
 
 /**
  * Review Block
@@ -441,27 +269,6 @@ function tourfic_fullwidth_container_end( $fullwidth ){
     <?php endif;
 }
 
-/**
- * Get AVG
- */
-function tourfic_avg_ratings( $a = array() ){
-	if ( !$a ) {
-		return 'N/A';
-	}
-
-	$a = array_filter($a);
-	$average = array_sum($a)/count($a);
-	return sprintf("%.1f", $average);
-}
-
-/**
- * Get Percent
- */
-function tourfic_avg_rating_percent( $val = 0, $total = 5 ){
-
-	$percent = ($val*100)/$total;
-	return sprintf("%.2f", $percent);
-}
 
 // Ask Question
 function tourfic_ask_question(){
