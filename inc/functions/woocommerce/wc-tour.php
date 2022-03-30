@@ -2,6 +2,18 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Add tour in WooCommerce product categories
+ */
+function tf_add_tour_product_catgory() {
+    wp_insert_term( 'Tour', 'product_cat', array(
+        'description' => 'This category is used for Tourfic tours. Never delete it!',
+        'parent' => 0,
+        'slug' => 'tour'
+    ) );
+}
+add_action( 'wp_loaded', 'tf_add_tour_product_catgory' );
+
+/**
  * Tour booking ajax function
  * 
  * @since 2.2.0

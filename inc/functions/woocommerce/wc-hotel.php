@@ -2,6 +2,18 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Add hotel in WooCommerce product categories
+ */
+function tf_add_hotel_product_catgory() {
+    wp_insert_term( 'Hotel', 'product_cat', array(
+        'description' => 'This category is used for Tourfic hotels. Never delete it!',
+        'parent' => 0,
+        'slug' => 'hotel'
+    ) );
+}
+add_action( 'wp_loaded', 'tf_add_hotel_product_catgory' );
+
+/**
  * Hotel booking ajax function
  * 
  * @since 2.2.0

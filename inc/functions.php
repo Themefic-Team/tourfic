@@ -766,152 +766,129 @@ function tf_search_result_ajax_sidebar(){
 
 
 /**
- * Migrate data from v2.0.4 to v2.1.0
+ * Create/update WooCommerce product
  * 
- * run once
+ * On hotel/tour publish/update
  */
-function tf_migrate_data() {
-    if ( get_option( 'tf_migrate_data_204_210' ) < 1 ) {
-
-        global $wpdb;
-        $wpdb->update($wpdb->posts, ['post_type' => 'tf_hotel'], ['post_type' => 'tourfic']);
-        $wpdb->update($wpdb->term_taxonomy, ['taxonomy' => 'hotel_location'], ['taxonomy' => 'destination']);
-        $wpdb->update($wpdb->term_taxonomy, ['taxonomy' => 'hotel_feature'], ['taxonomy' => 'tf_filters']);
-
-
-        /** Hotels Migrations */
-        $hotels = get_posts(['post_type' => 'tf_hotel', 'numberposts' => -1,]);
-        foreach ($hotels as $hotel) {
-            $old_meta = get_post_meta($hotel->ID);
-            if (!empty($old_meta['tf_hotel'])) {
-                continue;
-            } 
-            $new_meta = [];
-            if (!empty($old_meta['formatted_location'])) {
-                    $new_meta['address'] = join(',', $old_meta['formatted_location']);
-            }
-            if (!empty($old_meta['tf_gallery_ids'])) {
-                    $new_meta['gallery'] = join(',', $old_meta['tf_gallery_ids']);
-            }
-            if (!empty($old_meta['additional_information'])) {
-                $new_meta['highlights'] = $old_meta['additional_information'];
-            }
-            if (!empty($old_meta['terms_and_conditions'])) {
-                    $new_meta['tc'] = join(' ', $old_meta['terms_and_conditions']);
-            }
-
-            if (!empty($old_meta['tf_room'])) {
-                $rooms =  unserialize($old_meta['tf_room'][0]);
-                foreach ($rooms as $room) {
-                    $new_meta['room'][] = [
-                        "enable" => "1",
-                        "title" => $room['name'],
-                        "adult" => $room['pax'],
-                        "description" => $room['short_desc'],
-                        "pricing-by" => "1",
-                        "price" => $room['sale_price'] ?? $room['price'],
-                    ];
-                }
-            }
-
-            if (!empty($old_meta['tf_faqs'])) {
-                $faqs = unserialize($old_meta['tf_faqs'][0]);
-                foreach ($faqs as  $faq) {
-                    $new_meta['faq'][] = [
-                        'title' => $faq['name'],
-                        'description' => $faq['desc'],
-                    ];
-                }
-            }
-
-            update_post_meta(
-                $hotel->ID,
-                'tf_hotel',
-                $new_meta
-            );
-        
-        }
-
-        /** Hotels Location Taxonomy Migration */
-        $hotel_locations = get_terms([
-            'taxonomy' => 'hotel_location',
-            'hide_empty' => false,
-        ]);
-
-        foreach ($hotel_locations as $hotel_location) {
-
-            $old_locations_meta = get_term_meta(
-                $hotel_location->term_id,
-                'category-image-id',
-                true
-            );
-            $new_meta = [
-                "image" => [
-                    "url" => wp_get_attachment_url($old_locations_meta),
-                    "id" => $old_locations_meta,
-                    "width" => "1920",
-                    "height" => "1080",
-                    "thumbnail" => wp_get_attachment_thumb_url($old_locations_meta),
-                    "alt" => "",
-                    "title" => "",
-                    "description" => ""
-                ]
-            ];
-            // If the meta field for the term does not exist, it will be added.
-            update_term_meta(
-                $hotel_location->term_id,
-                "hotel_location",
-                $new_meta
-            );
-        }
-        /** Tour Destinations Image Fix */
-        $tour_destinations = get_terms([
-            'taxonomy' => 'tour_destination',
-            'hide_empty' => false,
-        ]);
-
-        foreach ($tour_destinations as  $tour_destination) {
-            $old_term_metadata =  get_term_meta($tour_destination->term_id, 'tour_destination_meta', true)['tour_destination_meta'] ?? null;
-            if (!empty($old_term_metadata)) {
-                $image_id = attachment_url_to_postid($old_term_metadata);
-                $new_meta = [
-                    "image" => [
-                        "url" => wp_get_attachment_url($image_id),
-                        "id" => $image_id,
-                        "width" => "1920",
-                        "height" => "1080",
-                        "thumbnail" => wp_get_attachment_thumb_url($image_id),
-                        "alt" => "",
-                        "title" => "",
-                        "description" => ""
-                    ]
-                ];
-                // If the meta field for the term does not exist, it will be added.
-                update_term_meta(
-                    $tour_destination->term_id,
-                    "tour_destination",
-                    $new_meta
-                );
-            }
-        }
-        /** Tour Type Fix */
-        $tours = get_posts(['post_type'   => 'tf_tours', 'numberposts' => -1,]);
-        foreach ($tours as $tour) {
-            $old_meta = get_post_meta($tour->ID);
-            $tour_options = unserialize($old_meta['tf_tours_option'][0]);
-            $tour_options['type'] = 'continuous';
-            update_post_meta(
-                $tour->ID,
-                'tf_tours_option',
-                $tour_options
-            );
-        }
-
-
-        wp_cache_flush();
-        flush_rewrite_rules(true);
-        update_option('tf_migrate_data_204_210', 1);
-	}
+function tf_post_exists( $title, $content = '', $date = '', $type = '', $status = '' ) {
+    global $wpdb;
+ 
+    $post_title   = wp_unslash( sanitize_post_field( 'post_title', $title, 0, 'db' ) );
+    $post_content = wp_unslash( sanitize_post_field( 'post_content', $content, 0, 'db' ) );
+    $post_date    = wp_unslash( sanitize_post_field( 'post_date', $date, 0, 'db' ) );
+    $post_type    = wp_unslash( sanitize_post_field( 'post_type', $type, 0, 'db' ) );
+    $post_status  = wp_unslash( sanitize_post_field( 'post_status', $status, 0, 'db' ) );
+ 
+    $query = "SELECT ID FROM $wpdb->posts WHERE 1=1";
+    $args  = array();
+ 
+    if ( ! empty( $date ) ) {
+        $query .= ' AND post_date = %s';
+        $args[] = $post_date;
+    }
+ 
+    if ( ! empty( $title ) ) {
+        $query .= ' AND post_title = %s';
+        $args[] = $post_title;
+    }
+ 
+    if ( ! empty( $content ) ) {
+        $query .= ' AND post_content = %s';
+        $args[] = $post_content;
+    }
+ 
+    if ( ! empty( $type ) ) {
+        $query .= ' AND post_type = %s';
+        $args[] = $post_type;
+    }
+ 
+    if ( ! empty( $status ) ) {
+        $query .= ' AND post_status = %s';
+        $args[] = $post_status;
+    }
+ 
+    if ( ! empty( $args ) ) {
+        return (int) $wpdb->get_var( $wpdb->prepare( $query, $args ) );
+    }
+ 
+    return 0;
 }
-add_action( 'init', 'tf_migrate_data' );
+
+function tf_create_woo_product($post_id, $post, $update) {
+
+    // bail out if this is an autosave
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+
+    // Only set for post_type = hotel/tour!
+    if ( 'tf_hotel' !== $post->post_type && 'tf_tours' !== $post->post_type ) {
+        return;
+    }
+
+    $post_title = $post->post_title;
+    if ( $post->post_type == 'tf_hotel' ) {
+        $term_id = get_term_by('slug', 'hotel', 'product_cat')->term_id;
+    } else if ( $post->post_type == 'tf_tours' ) {
+        $term_id = get_term_by('slug', 'tour', 'product_cat')->term_id;
+    }
+
+    $args = array( // Set up the basic post data to insert for our product
+
+        'post_title'   => $post_title,
+        'post_content' => 'This product is reserved for ' .$post_title. '. Don\'t delete or edit it!',
+        'post_status'  => 'publish',
+        'post_parent'  => '',
+        'post_type'    => 'product',
+        'post_password' => tourfic_proctected_product_pass(),
+        'tax_input'    => array(
+            'product_cat' => array($term_id),
+        ),
+        'meta_input'   => array(
+            '_price' => '0',
+            '_regular_price' => '0',
+            '_visibility' => 'visible',
+            '_virtual' => 'yes',
+            '_sold_individually' => 'yes',
+        )
+    );
+
+    // If product exit get the product id
+    $product_id = tf_post_exists( $post_title,'','','product', 'publish');
+
+    //If product id exists
+    if ( $product_id ) {
+        return false;
+    } else {
+        // Create product
+        $product_id = wp_insert_post($args);
+        // If product creation failed
+        if (!$product_id) {
+            return false;
+        }
+
+    }
+
+}
+add_action( 'save_post', 'tf_create_woo_product', 10,3 );
+
+/**
+ * Display "Reserved for Tourfic" text on product states
+ * 
+ * post states
+ */
+function tf_product_post_state( $post_states, $post ) {
+    
+    if ( 'product' !== $post->post_type ) {
+        return;
+    }
+
+    $term_slug = get_the_terms($post->ID, 'product_cat')[0]->slug;
+    
+	if( $term_slug == 'hotel' || $term_slug == 'tour' ) {
+		$post_states[] = '<div class="tf-post-states">Reserved for Tourfic</div>';
+	}
+	return $post_states;
+}
+add_filter( 'display_post_states', 'tf_product_post_state', 10, 2 );
 ?>
