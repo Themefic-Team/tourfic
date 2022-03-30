@@ -86,7 +86,7 @@ if ( file_exists( TF_INC_PATH . 'functions/widgets.php' ) ) {
  * Elementor Widgets
  *
  */
-function add_elelmentor_addon() {
+function tf_add_elelmentor_addon() {
 
     // Check if Elementor installed and activated
     if ( !did_action( 'elementor/loaded' ) ) {
@@ -100,7 +100,7 @@ function add_elelmentor_addon() {
     }
 
 }
-add_action( 'plugins_loaded', 'add_elelmentor_addon' );
+add_action( 'plugins_loaded', 'tf_add_elelmentor_addon' );
 
 /**
  * Notice
