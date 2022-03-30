@@ -3,9 +3,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Search Form Horizontal
+ * Recent Hotel Slider
+ * 
+ * Slick
  */
-class TF_Search_horizontal extends \Elementor\Widget_Base {
+class TF_Recent_Tours_slider extends \Elementor\Widget_Base {
 
 	/**
 	 * Retrieve the widget name.
@@ -15,7 +17,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'tourfic-search';
+		return 'recent-tours-slider';
 	}
 
 	/**
@@ -26,7 +28,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Tourfic Search Form (Horizontal)', 'tourfic' );
+		return __( 'Recent Tours Slider', 'tourfic' );
 	}
 
 	/**
@@ -37,7 +39,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-site-search';
+		return 'eicon-carousel';
 	}
 
 	/**
@@ -65,65 +67,61 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 	 */
 	protected function register_controls() {
         
-        
 		$this->start_controls_section(
-			'tf_search_content_section',
+			'content',
 			[
 				'label' => __( 'Content', 'tourfic' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
-        
-        $this->add_control(
-			'tf_search_title',
+
+		$this->add_control(
+			'title',
 			[
-				'label' => __( 'Title', 'tourfic' ),
+				'label' => esc_html__( 'Title', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
 				'rows' => 1,
 			]
-		);        
-
+		);
 
 		$this->add_control(
-			'tf_search_subtitle',
+			'subtitle',
 			[
-				'label' => __( 'Subtitle', 'tourfic' ),
+				'label' => esc_html__( 'Sub-Title', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
 				'rows' => 2,
 			]
 		);
-		
+
 		$this->add_control(
-			'type',
+			'count',
 			[
-				'type' => \Elementor\Controls_Manager::SELECT,
-				'label' => esc_html__( 'Type', 'tourfic' ),
-				'options' => [
-					'all' => esc_html__( 'All', 'tourfic' ),
-					'hotel' => esc_html__( 'Hotel', 'tourfic' ),
-					'tour' => esc_html__( 'Tour', 'tourfic' ),					
-				],
-				'default' => 'all',
+				'label' => esc_html__( 'Total Tours', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'description' => __( 'Number of total tours to show. Min 3. Default to 7', 'tourfic' ),
+				'min' => 3,
+				'step' => 1,
+				'default' => 7,
 			]
 		);
 
 		$this->add_control(
-			'full-width',
+			'slidestoshow',
 			[
-				'label' => esc_html__( 'Full Width', 'tourfic' ),
-				'type' => \Elementor\Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'Yes', 'tourfic' ),
-				'label_off' => esc_html__( 'No', 'tourfic' ),
-				'return_value' => true,
-				'default' => false,
+				'label' => esc_html__( 'Slide to Show', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'description' => __( 'Number of tours to show on the slider at a time. Min 1. Default to 3', 'tourfic' ),
+				'min' => 1,
+				'step' => 1,
+				'default' => 3,
 			]
 		);
+        
 
 		$this->end_controls_section();
 
-
 		$this->start_controls_section(
-			'tf_search_style_section',
+			'style_section',
 			[
 				'label' => __( 'Style', 'tourfic' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
@@ -135,11 +133,11 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			[
 				'name' => 'title_typography',
 				'label' => __( 'Title Typography', 'tourfic' ),
-				'selector' => '{{WRAPPER}} .tf_widget-title h2',
+				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading h2',
 			]
 		);
 		$this->add_control(
-			'tf_search_title_color',
+			'title_color',
 			[
 				'label' => __( 'Title Color', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
@@ -148,7 +146,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tf_widget-title h2' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tf-widget-slider .tf-heading h2' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -165,12 +163,12 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			[
 				'name' => 'subtitle_typography',
 				'label' => __( 'Subtitle Typography', 'tourfic' ),
-				'selector' => '{{WRAPPER}} .tf_widget-subtitle',
+				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading p',
 			]
 		);
 
 		$this->add_control(
-			'tf_search_subtitle_color',
+			'subtitle_color',
 			[
 				'label' => __( 'Subtitle Color', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
@@ -179,7 +177,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tf_widget-subtitle' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tf-widget-slider .tf-heading p' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -197,12 +195,13 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-        $tf_search_title = $settings['tf_search_title'];
-        $tf_search_subtitle = $settings['tf_search_subtitle'];
-		$type = $settings['type'];
-		$full_width = $settings['full-width'];
-      
-        echo do_shortcode('[tf_search_form title="'.$tf_search_title.'" subtitle="'.$tf_search_subtitle.'" type="'.$type.'" fullwidth="'.$full_width.'"]');
+		$title = $settings['title'];
+		$subtitle = $settings['subtitle'];
+		$count = $settings['count'];
+		$slidestoshow = $settings['slidestoshow'];
+
+        echo do_shortcode('[tf_recent_tour title="' .$title. '" subtitle="' .$subtitle. '" count="' .$count. '" slidestoshow="' .$slidestoshow. '"]');
+
 
 	}
 

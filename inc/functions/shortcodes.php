@@ -47,7 +47,7 @@ function hotel_locations_shortcode( $atts, $content = null ){
                         <div class="single_recomended_content" style="background-image: url(<?php echo $image_url; ?>);">
                             <div class="recomended_place_info_header">
                                 <h3><?php _e( $term->name ); ?></h3>
-                                <p><?php printf( esc_html__( "%s properties", 'tourfic' ), $term->count); ?></p>
+                                <p><?php printf( esc_html__( "%s hotels", 'tourfic' ), $term->count); ?></p>
                             </div>
                         </div>
                     </a>
@@ -119,7 +119,7 @@ function shortcode_tour_destinations( $atts, $content = null ){
                         <div class="single_recomended_content" style="background-image: url(<?php echo $image_url; ?>);">
                             <div class="recomended_place_info_header">
                                 <h3><?php _e( $term->name ); ?></h3>
-                                <p><?php printf( esc_html__( "%s properties", 'tourfic' ), $term->count); ?></p>
+                                <p><?php printf( esc_html__( "%s tours", 'tourfic' ), $term->count); ?></p>
                             </div>
                         </div>
                     </a>
@@ -167,27 +167,26 @@ function tf_recent_hotel_shortcode( $atts, $content = null ){
 
     ?>
     <?php if ( $hotel_loop->have_posts() ) : ?>
-    <!-- Populer Destinaiton -->
-    <section id="populer_section_wrapper">
-        <div class="populer_inner">
-            <div class="populer_section_heading">
-                <?php if (!empty($title)){ ?>
-                  <h3><?php echo esc_html($title) ?></h3>
-                <?php }?>
-                <?php if (!empty($subtitle)){ ?>
-                  <p><?php echo esc_html($subtitle) ?></p>
-                <?php }?>
+        <div class="tf-widget-slider recent-hotel-slider">
+            <div class="tf-heading">
+                <?php
+                if (!empty($title)){
+                    echo '<h2>' .esc_html($title). '</h2>';
+                }
+                if (!empty($subtitle)){
+                    echo '<p>' .esc_html($subtitle). '</p>';
+                }
+                ?>
             </div>
 
-            <div class="popupler_widget_wrapper">
-                <div id="<?php echo $thisid; ?>" class="populer_widget_inner">
+            <div class="tf-slider-wrapper">
+                <div id="<?php echo $thisid; ?>" class="tf-slider-inner">
                     <?php while ( $hotel_loop->have_posts() ) : $hotel_loop->the_post(); ?>
-                        <div class="single_populer_item">
+                        <div class="tf-single">
                             <a href="<?php the_permalink(); ?>">
-                              <div class="populer_item_img" style="background-image: url(<?php the_post_thumbnail_url(); ?>);">
-                              </div>
-                              <div class="tourfic_location_widget_meta">
-                                  <p class="tourfic_widget_location_title"><?php the_title(); ?></p>
+                            <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
+                              <div class="tf-single-meta">
+                                  <p class="tf-title"><?php the_title(); ?></p>
                               </div>
                             </a>
                         </div>
@@ -195,7 +194,6 @@ function tf_recent_hotel_shortcode( $atts, $content = null ){
                 </div>
             </div>
         </div>
-    </section>
 
     <script>
         jQuery(document).ready(function() {
@@ -207,6 +205,7 @@ function tf_recent_hotel_shortcode( $atts, $content = null ){
         autoplay:true,
         //autoplaySpeed:2500,
         arrows:false,
+        adaptiveHeight: false,
         responsive: [
           {
             breakpoint: 1024,
@@ -276,27 +275,26 @@ function tf_recent_tour_shortcode( $atts, $content = null ){
 
     ?>
     <?php if ( $hotel_loop->have_posts() ) : ?>
-    <!-- Populer Destinaiton -->
-    <section id="populer_section_wrapper">
-        <div class="populer_inner">
-            <div class="populer_section_heading">
-                <?php if (!empty($title)){ ?>
-                  <h3><?php echo esc_html($title) ?></h3>
-                <?php }?>
-                <?php if (!empty($subtitle)){ ?>
-                  <p><?php echo esc_html($subtitle) ?></p>
-                <?php }?>
+        <div class="tf-widget-slider recent-tour-slider">
+            <div class="tf-heading">
+                <?php
+                if (!empty($title)){
+                    echo '<h2>' .esc_html($title). '</h2>';
+                }
+                if (!empty($subtitle)){
+                    echo '<p>' .esc_html($subtitle). '</p>';
+                }
+                ?>
             </div>
 
-            <div class="popupler_widget_wrapper">
-                <div id="<?php echo $thisid; ?>" class="populer_widget_inner">
+            <div class="tf-slider-wrapper">
+                <div id="<?php echo $thisid; ?>" class="tf-slider-inner">
                     <?php while ( $hotel_loop->have_posts() ) : $hotel_loop->the_post(); ?>
-                        <div class="single_populer_item">
+                        <div class="tf-single">
                             <a href="<?php the_permalink(); ?>">
-                              <div class="populer_item_img" style="background-image: url(<?php the_post_thumbnail_url(); ?>);">
-                              </div>
-                              <div class="tourfic_location_widget_meta">
-                                  <p class="tourfic_widget_location_title"><?php the_title(); ?></p>
+                            <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
+                              <div class="tf-single-meta">
+                                  <p class="tf-title"><?php the_title(); ?></p>
                               </div>
                             </a>
                         </div>
@@ -304,7 +302,6 @@ function tf_recent_tour_shortcode( $atts, $content = null ){
                 </div>
             </div>
         </div>
-    </section>
 
     <script>
         jQuery(document).ready(function() {
@@ -316,6 +313,7 @@ function tf_recent_tour_shortcode( $atts, $content = null ){
         autoplay:true,
         //autoplaySpeed:2500,
         arrows:false,
+        adaptiveHeight: true,
         responsive: [
           {
             breakpoint: 1024,

@@ -93,12 +93,6 @@ function add_elelmentor_addon() {
         return;
     }
     // Once we get here, We have passed all validation checks so we can safely include our plugin
-    // if ( file_exists( TF_INC_PATH . 'elementor/elementor-addon-register.php' ) ) {
-    //     require_once TF_INC_PATH . 'elementor/elementor-addon-register.php';
-    // } else {
-    //     tf_file_missing(TF_INC_PATH . 'elementor/elementor-addon-register.php');
-    // }
-
     if ( file_exists( TF_INC_PATH . 'elementor/widget-register.php' ) ) {
         require_once TF_INC_PATH . 'elementor/widget-register.php';
     } else {

@@ -32,14 +32,22 @@ function tf_register_widget( $widgets_manager ) {
 
 	
 	require_once( __DIR__ . '/widgets/search-form-horizontal.php' );
-	require_once( __DIR__ . '/widgets/tourfic-tours.php' );
-	require_once( __DIR__ . '/widgets/tour-destinations.php' );
+	require_once( __DIR__ . '/widgets/wishlist.php' );
 	require_once( __DIR__ . '/widgets/hotel-locations.php' );
+	require_once( __DIR__ . '/widgets/tour-destinations.php' );
+	require_once( __DIR__ . '/widgets/recent-hotels-slider.php' );
+	require_once( __DIR__ . '/widgets/recent-tours-slider.php' );
+	require_once( __DIR__ . '/widgets/login-form.php' );
+	require_once( __DIR__ . '/widgets/registration-form.php' );
 
 	$widgets_manager->register( new \TF_Search_horizontal() );
-	$widgets_manager->register( new \TF_Tour_Destinations() );
+	$widgets_manager->register( new \TF_Wishlist() );
 	$widgets_manager->register( new \TF_Hotel_Locations() );
-	$widgets_manager->register( new \TOURFIC_Slider() );
+	$widgets_manager->register( new \TF_Tour_Destinations() );
+	$widgets_manager->register( new \TF_Recent_Hotels_slider() );
+	$widgets_manager->register( new \TF_Recent_Tours_slider() );
+	$widgets_manager->register( new \TF_Login_Form() );
+	$widgets_manager->register( new \TF_Registration_Form() );
 
 }
 add_action( 'elementor/widgets/register', 'tf_register_widget' );

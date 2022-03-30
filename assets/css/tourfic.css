@@ -431,6 +431,62 @@
 }
 
 /*================================
+|        Widget/Shortcode        |
+================================*/
+/* Widget Slider */
+.tf-widget-slider {
+    padding: 40px 0 40px 0;
+    margin: 0;
+}
+.tf-widget-slider .tf-heading{
+    text-align: center;
+    margin: 0 0 30px 0;
+}
+.tf-widget-slider .tf-heading h2{
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 32px;
+    padding: 0;
+    margin: 0 0 10px;
+    color: #333;
+}
+.tf-widget-slider .tf-heading p{
+    font-size: 16px;
+    color: #555;
+    line-height: 18px;
+    padding: 0;
+    margin: 0;
+}
+.tf-widget-slider .tf-slider-wrapper{
+    
+}
+.tf-widget-slider .tf-slider-wrapper .tf-slider-inner{
+    
+}
+.tf-widget-slider .tf-slider-wrapper .tf-single{
+    
+}
+.tf-widget-slider .tf-slider-wrapper .tf-single img{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.tf-widget-slider .tf-slider-wrapper .tf-single .tf-single-meta{
+    text-align: center;
+    background: #f2f2f2;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 10px 10px 12px 10px;
+}
+.tf-widget-slider .tf-slider-wrapper .tf-single .tf-single-meta .tf-title{
+    color: #333;
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+}
+
+/*================================
 |      Theme based CSS Fix       |
 ================================*/
 /**
