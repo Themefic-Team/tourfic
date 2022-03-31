@@ -211,18 +211,7 @@
             fade: false,
             dots: false,
             centerMode: false,
-            asNavFor: '.tf_slider-nav',
-            variableWidth: true
-        });
-
-        $('.single-slider-wrapper .tf_slider-nav').slick({
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            asNavFor: '.tf_slider-for',
-            dots: false,
-            arrows: false,
-            centerMode: true,
-            focusOnSelect: true
+            variableWidth: false,
         });
 
         sbp.on("click", function () {
@@ -1216,12 +1205,12 @@
          // End Feed Click Trigger
  
          //Ratings copy/move under gallery
-        //  var avg_rating = $('.tf-overall-ratings .overall-rate').text();
-        //  if(avg_rating){
-        //      $('.reviews span').html(avg_rating);
-        //  }else{
-        //      $('.reviews span').html("0/5");
-        //  }
+         var avg_rating = $('.tf-overall-ratings .overall-rate').text();
+         if(avg_rating){
+             $('.reviews span').html(avg_rating);
+         }else{
+             $('.reviews span').html("0/5");
+         }
  
          $(".tf-travel-text h4").click(function(){
              $(this).siblings('.tf-travel-contetn').slideToggle();
@@ -1236,7 +1225,7 @@
          $(".tf-header-menu-triger").click(function(){
              $('.tf-header-menu-wrap').slideToggle();
          });
-       
+
     });
 })(jQuery, window);
 
@@ -1259,6 +1248,3 @@
     evt.currentTarget.className += " active";
 }
 jQuery('#tf-hotel-booking-form').css('display','block');
-function tf_load_rating() {
-    jQuery('#commentform').show();
-}

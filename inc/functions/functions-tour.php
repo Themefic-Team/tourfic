@@ -52,7 +52,7 @@ function register_tf_tours_post_type() {
         'show_in_menu'       => true,
         'query_var'          => true,
         'menu_icon'          => 'dashicons-location-alt',
-        'rewrite'            => array( 'slug' => $tour_slug ),      
+        'rewrite'            => array( 'slug' => $tour_slug, 'with_front' => false ),
         'capability_type'    => array( 'tf_tours', 'tf_tourss' ),
         'has_archive'        => true,
         'hierarchical'       => false,
@@ -150,7 +150,7 @@ function tf_tours_taxonomies_register() {
         'show_in_menu'          => true,
         'show_in_nav_menus'     => true,
         'query_var'             => true,
-        'rewrite'               => array('slug' => $tour_destination_slug),
+        'rewrite'               => array('slug' => $tour_destination_slug, 'with_front' => false ),
         'show_admin_column'     => true,
         'show_in_rest'          => true,
         'rest_base'             => 'tour_destination',
@@ -347,6 +347,8 @@ function tf_single_tour_booking_form( $post_id ) {
     
     $meta = get_post_meta( $post_id, 'tf_tours_option', true );
     $tour_type = !empty($meta['type']) ? $meta['type'] : '';
+    // Continuous custom availability
+    $custom_avail = !empty($meta['custom_avail']) ? $meta['custom_avail'] : '';
 
     if ($tour_type == 'fixed') {
 
@@ -357,7 +359,6 @@ function tf_single_tour_booking_form( $post_id ) {
 
     } elseif ($tour_type == 'continuous') {
 
-        $custom_avail = !empty($meta['custom_avail']) ? $meta['custom_avail'] : '';
         $disabled_day = !empty($meta['disabled_day']) ? $meta['disabled_day'] : '';
         $disable_range = !empty($meta['disable_range']) ? $meta['disable_range'] : '';
         $disable_specific = !empty($meta['disable_specific']) ? $meta['disable_specific'] : '';
@@ -383,16 +384,18 @@ function tf_single_tour_booking_form( $post_id ) {
 
     $times = [];
 
-    if ($meta['custom_avail'] == true && !empty($meta['cont_custom_date'])) {
-        $allowed_times = array_map( function ($meta) use ( $times ) {
-	        return $times[] = [
-		        'date' => $meta['date'],
-		        'times' => array_map( function ( $v ) { return $v['time']; }, $meta['allowed_time'] ?? [] )
-	        ];
+    if ($custom_avail == true && !empty($meta['cont_custom_date'])) {
+        $allowed_times = array_map(function ($v) {
+            return $times[] = ['date' => $v['date'], 'times' => array_map(function ($v) {
+                return $v['time'];
+            }, $v['allowed_time'] ?? [])];
         }, $meta['cont_custom_date']);
     }
-    if ($meta['custom_avail'] == false && !empty($meta['allowed_time'])) {
-        $allowed_times = array_map( function ($v) { return $v['time']; }, $meta['allowed_time'] ?? []);
+    
+    if ($custom_avail == false && !empty($meta['allowed_time'])) {
+        $allowed_times = array_map(function ($v) {
+            return $v['time'];          
+        }, $meta['allowed_time'] ?? []);
     }
 	
     ob_start();
@@ -404,21 +407,21 @@ function tf_single_tour_booking_form( $post_id ) {
                         <span class="tf_person-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M16.5 6a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0zM18 6A6 6 0 1 0 6 6a6 6 0 0 0 12 0zM3 23.25a9 9 0 1 1 18 0 .75.75 0 0 0 1.5 0c0-5.799-4.701-10.5-10.5-10.5S1.5 17.451 1.5 23.25a.75.75 0 0 0 1.5 0z"></path></svg>
                         </span>
-                        <?php if ($meta['custom_avail'] == true || (!$disable_adult_price && $adult_price != false)) { ?>
+                        <?php if ($custom_avail == true || (!$disable_adult_price && $adult_price != false)) { ?>
                             <div class="adults-text"><?php echo (!empty($adults) ? $adults : '0') . ' ' . __("Adults", "tourfic"); ?></div>
                         <?php } ?>
-                        <?php if ($meta['custom_avail'] == true || (!$disable_child_price && $child_price != false)) { ?>
+                        <?php if ($custom_avail == true || (!$disable_child_price && $child_price != false)) { ?>
                             <div class="person-sep"></div>
                             <div class="child-text"><?php echo (!empty($child) ? $child : '0') . ' ' . __("Children", "tourfic"); ?></div>
                         <?php } ?>
-                        <?php if ($meta['custom_avail'] == true || (!$disable_infant_price && $infant_price != false)) { ?>
+                        <?php if ($custom_avail == true || (!$disable_infant_price && $infant_price != false)) { ?>
                             <div class="person-sep"></div>
                             <div class="infant-text"><?php echo (!empty($infant) ? $infant : '0') . ' ' . __("Infant", "tourfic"); ?></div>
                         <?php } ?>
                     </div>
                     <div class="tf_acrselection-wrap" style="display: none;">
                         <div class="tf_acrselection-inner">
-                            <?php if ($meta['custom_avail'] == true || (!$disable_adult_price && $adult_price != false)) { ?>
+                            <?php if ($custom_avail == true || (!$disable_adult_price && $adult_price != false)) { ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php _e('Adults', 'tourfic'); ?></div>
                                 <div class="acr-select">
@@ -428,7 +431,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                 </div>
                             </div>
                             <?php } ?>
-                            <?php if ($meta['custom_avail'] == true || (!$disable_child_price && $child_price != false)) { ?>
+                            <?php if ($custom_avail == true || (!$disable_child_price && $child_price != false)) { ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php _e('Children', 'tourfic'); ?></div>
                                 <div class="acr-select">
@@ -438,7 +441,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                 </div>
                             </div>
                             <?php } ?>
-                            <?php if ($meta['custom_avail'] == true || (!$disable_infant_price && $infant_price != false)) { ?>
+                            <?php if ($custom_avail == true || (!$disable_infant_price && $infant_price != false)) { ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php _e('Infant', 'tourfic'); ?></div>
                                 <div class="acr-select">
@@ -481,7 +484,7 @@ function tf_single_tour_booking_form( $post_id ) {
                         $(document).ready(function () {
 
                             const allowed_times = JSON.parse('<?php echo wp_json_encode($allowed_times ?? []) ?>');
-                            const custom_avail = '<?php echo $meta['custom_avail'] ?>';
+                            const custom_avail = '<?php echo $custom_avail; ?>';
                             if (custom_avail == false && allowed_times.length > 0) {
                                 populateTimeSelect(allowed_times)
                             }
@@ -681,7 +684,7 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='') {
                         }
                         ?>
 					</div>
-					<?php tf_item_review_block();?>
+					<?php tourfic_item_review_block();?>
 				</div>
 				<div class="tf-tour-desc">
 					<p><?php echo substr(wp_strip_all_tags(get_the_content()), 0, 200). '...'; ?></p>
