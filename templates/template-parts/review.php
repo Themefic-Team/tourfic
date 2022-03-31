@@ -28,21 +28,15 @@ if (post_password_required()) {
 
 <div id="comments" class="tf_comments-area">
     <?php
-    $comments = get_comments(array('post_id' => get_the_ID()));
+    $comments = get_comments(array('post_id' => get_the_ID(), 'status'       => 'approve'));
 
     $tf_overall_rate = array();
     $tf_extr_html = '';
 
+
+
     foreach ($comments as $comment) {
-
-        $tf_comment_meta = get_comment_meta($comment->comment_ID, 'tf_comment_meta', true);
-
-        if ($tf_comment_meta) {
-            foreach ($tf_comment_meta as $key => $value) {
-                $tf_overall_rate[$key][] = $value ? $value : "0";
-                $tf_overall_rate['review'][] = tourfic_avg_ratings(array_values($tf_comment_meta));
-            }
-        }
+        tf_calculate_user_ratings($comment, $tf_overall_rate);
     }
 
     if ($tf_overall_rate) {
@@ -53,18 +47,41 @@ if (post_password_required()) {
             }
             $tf_extr_html .= '<div class="comment-meta">';
             $tf_extr_html .= '<label class="tf_comment_meta-key">' . $key . '</label>';
-            $tf_extr_html .= '<div class="tf_comment_meta-percent"><div class="percent-progress" data-width="' . tourfic_avg_rating_percent(tourfic_avg_ratings($value)) . '"></div></div>';
-            $tf_extr_html .= '<div class="tf_comment_meta-ratings">' . tourfic_avg_ratings($value) . '</div>';
+            $tf_extr_html .= '<div class="tf_comment_meta-percent"><div class="percent-progress" data-width="' . tf_average_rating_percent(tf_average_ratings($value)) . '"></div></div>';
+            $tf_extr_html .= '<div class="tf_comment_meta-ratings">' . tf_average_ratings($value) . '</div>';
             $tf_extr_html .= '</div>';
         }
         $tf_extr_html .= '</div>';
     }
 
-    if (count($comments) !== 0) { ?>
+    if (count($comments) > 0 && get_post_type() == 'tf_hotel') { ?>
         <div class="tf-comments-count-wrapper">
 
             <div class="tf-overall-ratings">
-                <div class="overall-rate"><?php _e(tourfic_avg_ratings($tf_overall_rate['review'] ?? [])); ?></div>
+                <div class="overall-rate">
+                    <?php _e(tf_average_ratings($tf_overall_rate['review'] ?? [])); ?>
+                    <?php
+                    // Review Button
+                    if (is_user_logged_in()) {
+                        if (tfopt('r-for') && in_array('li', tfopt('r-for'))) {        ?>
+                            <button data-fancybox data-src="#tourfic-rating" class="tf_button" onclick=" tf_load_rating()"><i class="fas fa-plus"></i> <?php _e('Add a review', 'tourfic') ?></button>
+                            <div style="display: none;" id="tourfic-rating">
+                                <?php tf_get_review_form(); ?>
+                            </div>
+                        <?php
+                        }
+                    } else {
+                        if (tfopt('r-for') && in_array('lo', tfopt('r-for'))) {
+                        ?>
+                            <button data-fancybox data-src="#tourfic-rating" class="tf_button" onclick=" tf_load_rating()"><i class="fas fa-plus"></i> <?php _e('Add a review', 'tourfic') ?></button>
+                            <div style="display: none;" id="tourfic-rating">
+                                <?php tf_get_review_form(); ?>
+                            </div>
+                    <?php
+                        }
+                    }
+                    ?>
+                </div>
 
                 <div class="based-on-title">
                     <?php
@@ -72,8 +89,8 @@ if (post_password_required()) {
                         'tf_comment_form_title',
                         sprintf( // WPCS: XSS OK.
                             /* translators: 1: number of comments */
-                            esc_html(_nx('%1$s review', '%1$s reviews', get_comments_number(), 'comments title', 'tourfic')),
-                            number_format_i18n(get_comments_number())
+                            esc_html(_nx('%1$s review', '%1$s reviews', count($comments), 'comments title', 'tourfic')),
+                            number_format_i18n(count($comments))
                         )
                     );
 
@@ -104,7 +121,7 @@ if (post_password_required()) {
             <?php
             wp_list_comments(
                 array(
-                    //'callback' => 'tf_comment_callback',
+                    'callback' => 'tf_comment_callback',
                     'style'    => 'ol',
                     'type'      => 'comment',
                     'max_depth' => 1,
@@ -125,15 +142,39 @@ if (post_password_required()) {
             </nav><!-- #comment-nav-below -->
         <?php } ?>
 
-    <?php } ?>
+    <?php } else { ?>
+        <?php
+        // Review Button
+        if (is_user_logged_in()) {
+            if (tfopt('r-for') && in_array('li', tfopt('r-for'))) {        ?>
+                <button data-fancybox data-src="#tourfic-rating" class="tf_button" onclick=" tf_load_rating()"><i class="fas fa-plus"></i> <?php _e('Add a review', 'tourfic') ?></button>
+                <div style="display: none;" id="tourfic-rating">
+                    <?php tf_get_review_form(); ?>
+                </div>
+            <?php
+            }
+        } else {
+            if (tfopt('r-for') && in_array('lo', tfopt('r-for'))) {
+            ?>
+                <button data-fancybox data-src="#tourfic-rating" class="tf_button" onclick=" tf_load_rating()"><i class="fas fa-plus"></i> <?php _e('Add a review', 'tourfic') ?></button>
+                <div style="display: none;" id="tourfic-rating">
+                    <?php tf_get_review_form(); ?>
+                </div>
+        <?php
+            }
+        }
+        ?>
 
-    <?php
+    <?php }
+
+
+
     // If comments are closed and there are comments, let's leave a little note, shall we?
-    if (!comments_open() && get_comments_number() && post_type_supports(get_post_type(), 'comments')) {
+    if (!comments_open() && count($comments) && post_type_supports(get_post_type(), 'comments')) {
     ?>
-        <p class="no-comments"><?php echo esc_html(astra_default_strings('string-comment-closed', false)); ?></p>
+        <p class="no-comments"><?php echo __('Comments are closed.', 'tourfic') ?></p>
     <?php } ?>
 
-    <?php tourfic_get_review_form(); ?>
+
 
 </div><!-- #comments -->

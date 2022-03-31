@@ -122,51 +122,66 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                         }
                         ?>                          
                         &nbsp;
-                        <?php if($s_share && $s_share == '1') {} else { ?>
-                        <!-- Share Section -->
-                        <div class="share-tour">
-                            <a href="#dropdown_share_center" class="share-toggle"
-                                data-toggle="true"><?php echo tourfic_get_svg('share'); ?></a>
-                            <div id="dropdown_share_center" class="share-tour-content">
-                                <ul class="tf-dropdown__content">
-                                    <li>
-                                        <a href="http://www.facebook.com/share.php?u=<?php _e( $share_link ); ?>"
-                                            class="tf-dropdown__item" target="_blank">
+                        <?php if( ! $s_share || $s_share != '1' ) { ?>
+                            <!-- Share Section -->
+                            <div class="share-tour">
+                                <a href="#dropdown_share_center" class="share-toggle"
+                                   data-toggle="true"><?php
+				                        echo tourfic_get_svg( 'share' ); ?></a>
+                                <div id="dropdown_share_center" class="share-tour-content">
+                                    <ul class="tf-dropdown__content">
+                                        <li>
+                                            <a href="http://www.facebook.com/share.php?u=<?php
+						                        _e( $share_link ); ?>"
+                                               class="tf-dropdown__item" target="_blank">
                                             <span
-                                                class="tf-dropdown__item-content"><?php echo tourfic_get_svg('facebook'); ?>
-                                                <?php esc_html_e( 'Share on Facebook', 'tourfic' ); ?></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="http://twitter.com/share?text=<?php _e( $share_text ); ?>&url=<?php _e( $share_link ); ?>"
-                                            class="tf-dropdown__item" target="_blank">
+                                                    class="tf-dropdown__item-content"><?php
+		                                            echo tourfic_get_svg( 'facebook' ); ?>
+	                                            <?php
+		                                            esc_html_e( 'Share on Facebook', 'tourfic' ); ?></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="http://twitter.com/share?text=<?php
+						                        _e( $share_text ); ?>&url=<?php
+						                        _e( $share_link ); ?>"
+                                               class="tf-dropdown__item" target="_blank">
                                             <span
-                                                class="tf-dropdown__item-content"><?php echo tourfic_get_svg('twitter'); ?>
-                                                <?php esc_html_e( 'Share on Twitter', 'tourfic' ); ?></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="share_center_copy_form tf-dropdown__item" title="Share this link"
-                                            aria-controls="share_link_button">
-                                            <label class="share_center_copy_label"
-                                                for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
-                                            <input type="text" id="share_link_input"
-                                                class="share_center_url share_center_url_input"
-                                                value="<?php _e( $share_link ); ?>" readonly>
-                                            <button id="share_link_button" class="share_center_copy_cta" tabindex="0"
-                                                role="button">
+                                                    class="tf-dropdown__item-content"><?php
+		                                            echo tourfic_get_svg( 'twitter' ); ?>
+	                                            <?php
+		                                            esc_html_e( 'Share on Twitter', 'tourfic' ); ?></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div class="share_center_copy_form tf-dropdown__item"
+                                                 title="Share this link"
+                                                 aria-controls="share_link_button">
+                                                <label class="share_center_copy_label"
+                                                       for="share_link_input"><?php
+								                        esc_html_e( 'Share this link', 'tourfic' ); ?></label>
+                                                <input type="text" id="share_link_input"
+                                                       class="share_center_url share_center_url_input"
+                                                       value="<?php
+							                               _e( $share_link ); ?>" readonly>
+                                                <button id="share_link_button" class="share_center_copy_cta"
+                                                        tabindex="0"
+                                                        role="button">
                                                 <span
-                                                    class="tf-button__text share_center_copy_message"><?php esc_html_e( 'Copy link', 'tourfic' ); ?></span>
-                                                <span
-                                                    class="tf-button__text share_center_copied_message"><?php esc_html_e( 'Copied!', 'tourfic' ); ?></span>
-                                            </button>
-                                        </div>
-                                    </li>
-                                </ul>
+                                                        class="tf-button__text share_center_copy_message"><?php
+		                                                esc_html_e( 'Copy link', 'tourfic' ); ?></span>
+                                                    <span
+                                                            class="tf-button__text share_center_copied_message"><?php
+									                        esc_html_e( 'Copied!', 'tourfic' ); ?></span>
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <!-- End Share Section -->
-                        <?php } ?>
+                            <!-- End Share Section -->
+                        <?php
+                        } ?>
 
                         <?php if (!empty($map["address"])) { ?>
                         <div class="show-on-map">
@@ -455,19 +470,22 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                 <!-- End FAQ -->
                 <?php } ?>
 
-                <?php if($s_review && $s_review == '1') {} else { ?>
-                <!-- Start Review Content -->
-                <div class="tf_contents reviews">
-                    <div class="highlights-title">
-                        <h4><?php esc_html_e( 'Reviews', 'tourfic' ); ?></h4>
-                    </div>
+                <?php if( ! $s_review || $s_review != '1' ) { ?>
+                    <!-- Start Review Content -->
+                    <div class="tf_contents reviews">
+                        <div class="highlights-title">
+                            <h4><?php
+					                esc_html_e( 'Reviews', 'tourfic' ); ?></h4>
+                        </div>
 
-                    <?php if ( comments_open() || get_comments_number() ) {
-						comments_template();
-					} ?>
-                </div>
-                <!-- End Review Content -->
-                <?php } ?>
+		                <?php
+			                if ( comments_open() || get_comments_number() ) {
+				                comments_template();
+			                } ?>
+                    </div>
+                    <!-- End Review Content -->
+                <?php
+                } ?>
 
                 <?php if ($tc) { ?>
                 <!-- Start TOC Content -->

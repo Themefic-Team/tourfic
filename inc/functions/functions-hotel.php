@@ -772,7 +772,7 @@ function tf_hotel_archive_single_item($adults='', $child='', $room='', $check_in
                         }
                         ?>	                    
 					</div>
-					<?php tourfic_item_review_block();?>
+					<?php tf_item_review_block();?>
 				</div>
                 
                 <div class="sr_rooms_table_block">

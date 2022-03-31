@@ -1236,7 +1236,7 @@
          $(".tf-header-menu-triger").click(function(){
              $('.tf-header-menu-wrap').slideToggle();
          });
-
+       
     });
 })(jQuery, window);
 
@@ -1259,3 +1259,6 @@
     evt.currentTarget.className += " active";
 }
 jQuery('#tf-hotel-booking-form').css('display','block');
+function tf_load_rating() {
+    jQuery('#commentform').show();
+}

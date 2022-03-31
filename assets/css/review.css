@@ -1,5 +1,5 @@
-:root{
-    --tourfic-review-filled: #e52;
+:root {
+  --tourfic-review-filled: #e52;
 }
 .comments-rating {
   border: none;
@@ -23,13 +23,13 @@
   font-size: 1.4rem;
 }
 
-.rating-container>input {
+.rating-container > input {
   display: none;
 }
 
-.rating-container>input+label {
+.rating-container > input + label {
   /* only enough room for the star */
-  font-family: 'dashicons';
+  font-family: "dashicons";
   display: inline-block;
   overflow: hidden;
   text-indent: 9999px;
@@ -39,52 +39,61 @@
   margin: 0;
 }
 
-.rating-container>input+label:before {
+.rating-container > input + label:before {
   display: inline-block;
   text-indent: -9999px;
   content: "\f154";
   color: #888;
 }
 
-.rating-container>input:checked~label:before,
-.rating-container>input+label:hover~label:before,
-.rating-container>input+label:hover:before {
+.rating-container > input:checked ~ label:before,
+.rating-container > input + label:hover ~ label:before,
+.rating-container > input + label:hover:before {
   content: "\f155";
   color: var(--tourfic-review-filled);
   text-shadow: 0 0 1px #333;
 }
 
-.rating-container>.star-cb-clear+label {
+.rating-container > .star-cb-clear + label {
   text-indent: -9999px;
-  width: .5em;
-  margin-left: -.5em;
+  width: 0.5em;
+  margin-left: -0.5em;
 }
 
-.rating-container>.star-cb-clear+label:before {
-  width: .5em;
+.rating-container > .star-cb-clear + label:before {
+  width: 0.5em;
 }
 
-.rating-container:hover>input+label:before {
+.rating-container:hover > input + label:before {
   content: "\f154";
   color: #888;
   text-shadow: none;
 }
 
-.rating-container:hover>input+label:hover~label:before,
-.rating-container:hover>input+label:hover:before {
+.rating-container:hover > input + label:hover ~ label:before,
+.rating-container:hover > input + label:hover:before {
   content: "\f155";
   color: var(--tourfic-review-filled);
   text-shadow: 0 0 1px #333;
 }
 
-.comment-respond .rating-container>.star-cb-clear+label,
-.comment-respond .rating-container>input+label:before {
+.comment-respond .rating-container > .star-cb-clear + label,
+.comment-respond .rating-container > input + label:before {
   text-indent: 9999px;
 }
 
-.comment-respond .rating-container>input+label {
+.comment-respond .rating-container > input + label {
   text-indent: -9999px;
 }
-i.dashicons.dashicons-star-filled{
-    color: var(--tourfic-review-filled);
+i.dashicons.dashicons-star-filled {
+  color: var(--tourfic-review-filled);
+}
+.says {
+  display: none;
+}
+@media (min-width: 1220px) {
+  .comment-respond p.comment-notes,
+  .comment-respond p.logged-in-as {
+    margin: 17px 0;
+  }
 }
