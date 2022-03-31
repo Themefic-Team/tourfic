@@ -784,6 +784,8 @@ function tf_create_woo_product($post_id, $post, $update) {
     }
 
     $post_title = $post->post_title;
+    $post_name = $post->post_name;
+
     if ( $post->post_type == 'tf_hotel' ) {
         $term_id = get_term_by('slug', 'hotel', 'product_cat')->term_id;
     } else if ( $post->post_type == 'tf_tours' ) {
@@ -811,7 +813,7 @@ function tf_create_woo_product($post_id, $post, $update) {
     );
 
     // If product exit get the product id
-    $product_id = tf_post_exists( $post_title,'','','product', 'publish');
+    $product_id = tf_post_exists( $post_title,'','','product', 'publish', $post_name);
 
     //If product id exists
     if ( $product_id ) {
