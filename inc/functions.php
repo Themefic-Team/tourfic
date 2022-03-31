@@ -770,49 +770,6 @@ function tf_search_result_ajax_sidebar(){
  * 
  * On hotel/tour publish/update
  */
-function tf_post_exists( $title, $content = '', $date = '', $type = '', $status = '' ) {
-    global $wpdb;
- 
-    $post_title   = wp_unslash( sanitize_post_field( 'post_title', $title, 0, 'db' ) );
-    $post_content = wp_unslash( sanitize_post_field( 'post_content', $content, 0, 'db' ) );
-    $post_date    = wp_unslash( sanitize_post_field( 'post_date', $date, 0, 'db' ) );
-    $post_type    = wp_unslash( sanitize_post_field( 'post_type', $type, 0, 'db' ) );
-    $post_status  = wp_unslash( sanitize_post_field( 'post_status', $status, 0, 'db' ) );
- 
-    $query = "SELECT ID FROM $wpdb->posts WHERE 1=1";
-    $args  = array();
- 
-    if ( ! empty( $date ) ) {
-        $query .= ' AND post_date = %s';
-        $args[] = $post_date;
-    }
- 
-    if ( ! empty( $title ) ) {
-        $query .= ' AND post_title = %s';
-        $args[] = $post_title;
-    }
- 
-    if ( ! empty( $content ) ) {
-        $query .= ' AND post_content = %s';
-        $args[] = $post_content;
-    }
- 
-    if ( ! empty( $type ) ) {
-        $query .= ' AND post_type = %s';
-        $args[] = $post_type;
-    }
- 
-    if ( ! empty( $status ) ) {
-        $query .= ' AND post_status = %s';
-        $args[] = $post_status;
-    }
- 
-    if ( ! empty( $args ) ) {
-        return (int) $wpdb->get_var( $wpdb->prepare( $query, $args ) );
-    }
- 
-    return 0;
-}
 
 function tf_create_woo_product($post_id, $post, $update) {
 

@@ -3,6 +3,62 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Search if a post exist
+ * 
+ * Copy of post_exits
+ * @see https://developer.wordpress.org/reference/functions/post_exists/
+ */
+function tf_post_exists( $title, $content = '', $date = '', $type = '', $status = '', $slug = '' ) {
+    global $wpdb;
+ 
+    $post_title   = wp_unslash( sanitize_post_field( 'post_title', $title, 0, 'db' ) );
+    $post_content = wp_unslash( sanitize_post_field( 'post_content', $content, 0, 'db' ) );
+    $post_date    = wp_unslash( sanitize_post_field( 'post_date', $date, 0, 'db' ) );
+    $post_type    = wp_unslash( sanitize_post_field( 'post_type', $type, 0, 'db' ) );
+    $post_status  = wp_unslash( sanitize_post_field( 'post_status', $status, 0, 'db' ) );
+	$post_slug    = wp_unslash( sanitize_post_field( 'post_name', $slug, 0, 'db' ) );
+ 
+    $query = "SELECT ID FROM $wpdb->posts WHERE 1=1";
+    $args  = array();
+ 
+    if ( ! empty( $date ) ) {
+        $query .= ' AND post_date = %s';
+        $args[] = $post_date;
+    }
+ 
+    if ( ! empty( $title ) ) {
+        $query .= ' AND post_title = %s';
+        $args[] = $post_title;
+    }
+ 
+    if ( ! empty( $content ) ) {
+        $query .= ' AND post_content = %s';
+        $args[] = $post_content;
+    }
+ 
+    if ( ! empty( $type ) ) {
+        $query .= ' AND post_type = %s';
+        $args[] = $post_type;
+    }
+ 
+    if ( ! empty( $status ) ) {
+        $query .= ' AND post_status = %s';
+        $args[] = $post_status;
+    }
+
+	if ( ! empty( $slug ) ) {
+        $query .= ' AND post_name = %s';
+        $args[] = $post_slug;
+    }
+ 
+    if ( ! empty( $args ) ) {
+        return (int) $wpdb->get_var( $wpdb->prepare( $query, $args ) );
+    }
+ 
+    return 0;
+}
+
+/**
  * Search form action url
  */
 function tf_booking_search_action(){
