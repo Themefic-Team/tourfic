@@ -44,6 +44,7 @@ function tf_hotel_booking_callback(){
      * 
      * @since 2.2.0
      */
+    $product_id = get_post_meta( $post_id, 'product_id', true );
     $post_author = get_post_field( 'post_author', $post_id );
     $meta = get_post_meta( $post_id, 'tf_hotel', true );
     $rooms = !empty($meta['room']) ? $meta['room'] : '';
@@ -86,36 +87,36 @@ function tf_hotel_booking_callback(){
     }
     //$response['errors'][] = $price_multi_day;
 
-    $post_title = get_the_title( $post_id );
+    // $post_title = get_the_title( $post_id );
 
-    // Add Product
-    $product_arr = apply_filters( 'tf_create_product_array', array(
-        'post_title' => $post_title,
-        'post_type' => 'product',
-        'post_status' => 'publish',
-        'post_password' => tourfic_proctected_product_pass(),
-        'meta_input'   => array(
-            '_price' => '0',
-            '_regular_price' => '0',
-            '_visibility' => 'visible',
-            '_virtual' => 'yes',
-            '_sold_individually' => 'yes',
-        )
-    ) );
+    // // Add Product
+    // $product_arr = apply_filters( 'tf_create_product_array', array(
+    //     'post_title' => $post_title,
+    //     'post_type' => 'product',
+    //     'post_status' => 'publish',
+    //     'post_password' => tourfic_proctected_product_pass(),
+    //     'meta_input'   => array(
+    //         '_price' => '0',
+    //         '_regular_price' => '0',
+    //         '_visibility' => 'visible',
+    //         '_virtual' => 'yes',
+    //         '_sold_individually' => 'yes',
+    //     )
+    // ) );
 
-    $product_id = post_exists( $post_title,'','','product');
+    // $product_id = post_exists( $post_title,'','','product');
 
-    if ( $product_id ) {
-        $response['product_status'] = 'exists';
-    } else {
-        $product_id = wp_insert_post( $product_arr );
-        if( !is_wp_error($product_id) ){
-            $response['product_status'] = 'new';
-        }else{
-            $response['errors'][] = $product_id->get_error_message();
-            $response['status'] = 'error';
-        }
-    }
+    // if ( $product_id ) {
+    //     $response['product_status'] = 'exists';
+    // } else {
+    //     $product_id = wp_insert_post( $product_arr );
+    //     if( !is_wp_error($product_id) ){
+    //         $response['product_status'] = 'new';
+    //     }else{
+    //         $response['errors'][] = $product_id->get_error_message();
+    //         $response['status'] = 'error';
+    //     }
+    // }
 
     //echo var_dump($rooms);
 
@@ -124,8 +125,9 @@ function tf_hotel_booking_callback(){
     if(!array_key_exists('errors', $response) || count($response['errors']) == 0) {
 
         $tf_room_data['tf_hotel_data']['order_type'] = 'hotel';
-        $tf_room_data['tf_hotel_data']['post_author'] = $post_author;
         $tf_room_data['tf_hotel_data']['post_id'] = $post_id;
+        $tf_room_data['tf_hotel_data']['post_permalink'] = get_permalink($post_id);
+        $tf_room_data['tf_hotel_data']['post_author'] = $post_author;
         $tf_room_data['tf_hotel_data']['location'] = $location;
         $tf_room_data['tf_hotel_data']['adult'] = $adult;
         $tf_room_data['tf_hotel_data']['child'] = $child;
@@ -150,9 +152,6 @@ function tf_hotel_booking_callback(){
         }
 
         $tf_room_data['tf_hotel_data']['price_total'] = $price_total;
-
-        // If want to empty the cart
-        //WC()->cart->empty_cart();
 
         // Add product to cart with the custom cart item data
         WC()->cart->add_to_cart( $product_id, 1, '0', array(), $tf_room_data );
@@ -238,6 +237,20 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
     return $item_data;
 }
 add_filter( 'woocommerce_get_item_data', 'display_cart_item_custom_meta_data', 10, 2 );
+
+/**
+ * Change cart item permalink
+ */
+function tf_hotel_cart_item_permalink( $permalink, $cart_item, $cart_item_key ) {
+
+    $type = !empty($cart_item['tf_hotel_data']['order_type']) ? $cart_item['tf_hotel_data']['order_type'] : '';
+    if ( is_cart() && $type == 'hotel') {
+        $permalink = $cart_item['tf_hotel_data']['post_permalink'];
+    }
+
+    return $permalink;
+}
+add_filter ('woocommerce_cart_item_permalink', 'tf_hotel_cart_item_permalink' , 10, 3 );
 
 /**
  * Show custom data in order details

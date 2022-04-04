@@ -783,11 +783,18 @@ function tf_create_woo_product($post_id, $post, $update) {
         return;
     }
 
+    $post_id = $post->ID;
     $post_title = $post->post_title;
     $post_name = $post->post_name;
 
     if ( $post->post_type == 'tf_hotel' ) {
         $term_id = get_term_by('slug', 'hotel', 'product_cat')->term_id;
+        $meta = get_post_meta( $post_id, 'tf_hotel', true );
+        $rooms = !empty($meta['room']) ? $meta['room'] : '';
+        $room_name = array();
+        foreach($rooms as $room) {
+            array_push($room_name,$room['title']);
+        }
     } else if ( $post->post_type == 'tf_tours' ) {
         $term_id = get_term_by('slug', 'tour', 'product_cat')->term_id;
     }
@@ -815,21 +822,84 @@ function tf_create_woo_product($post_id, $post, $update) {
     // If product exit get the product id
     $product_id = tf_post_exists( $post_title,'','','product', 'publish', $post_name);
 
-    //If product id exists
+    //If product exists
     if ( $product_id ) {
-        return false;
+        update_post_meta( $product_id, 'tf_id', $post_id );
+        update_post_meta( $post_id, 'product_id', $product_id );
     } else {
-        // Create product
-        $product_id = wp_insert_post($args);
+        $product_id = wp_insert_post($args); // Create product
         // If product creation failed
         if (!$product_id) {
             return false;
         }
 
     }
+    update_post_meta($product_id, "_manage_stock", "yes");
+    update_post_meta($product_id, "_stock", 1);
+    if($post->post_type == 'tf_hotel') {
+        wp_set_object_terms($product_id, 'variable', 'product_type'); // Set it to a variable product type
+        //Creating Attributes 
+        $atts = [];
+        $atts[] = pricode_create_attributes('room_name',$room_name);
+        //Adding attributes to the created product
+        $product = wc_get_product($product_id);
+        $product->set_attributes( $atts );
+        $product->save();
+
+        foreach($room_name as $room_name_single) {
+            $variation = new WC_Product_Variation();
+            $variation->set_parent_id( $product_id );
+            $variation->set_attributes(['room_name' => $room_name_single]);
+            $variation->set_status('publish');
+            $variation->set_price('0');
+            $variation->set_regular_price('0');
+            $variation->set_stock_status();
+            $variation->set_stock('8');
+            $variation->save();
+            $product = wc_get_product($product_id);
+            $product->save();
+        }
+    }
 
 }
 add_action( 'save_post', 'tf_create_woo_product', 10,3 );
+
+/**
+ * Create Product Attributes 
+ * @param  string $name    Attribute name
+ * @param  array $options Options values
+ * @return Object          WC_Product_Attribute 
+ */
+function pricode_create_attributes( $name, $options ){
+    $attribute = new WC_Product_Attribute();
+    $attribute->set_id(0);
+    $attribute->set_name($name);
+    $attribute->set_options($options);
+    $attribute->set_visible(true);
+    $attribute->set_variation(true);
+    return $attribute;
+}
+
+/**
+ * [pricode_create_variations description]
+ * @param  [type] $product_id [description]
+ * @param  [type] $values     [description]
+ * @return [type]             [description]
+ */
+function pricode_create_variations( $product_id, $values ){
+    $variation = new WC_Product_Variation();
+    $variation->set_parent_id( $product_id );
+    $variation->set_attributes($values);
+    $variation->set_status('publish');
+    $variation->set_price('0');
+    $variation->set_regular_price('0');
+    $variation->set_stock_status();
+    $variation->set_stock('8');
+    $variation->save();
+    $product = wc_get_product($product_id);
+    $product->save();
+
+}
 
 /**
  * Display "Reserved for Tourfic" text on product states

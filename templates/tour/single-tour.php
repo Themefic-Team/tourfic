@@ -1,11 +1,11 @@
 <?php
 /**
- * Template: Signle Tour
+ * Template: Signle Tour (Full width)
  */
 // Get header
 get_header();
 
-// Post query
+// Main query
 while ( have_posts() ) : the_post();
 
 /**
@@ -70,6 +70,55 @@ $comments = get_comments( array( 'post_id' => get_the_ID() ) );
 $tf_overall_rate = array();
 $tf_overall_rate['review'] = null;
 
+/**
+ * Pricing
+ */
+$pricing_rule = !empty($meta['pricing']) ? $meta['pricing'] : '';
+$tour_type = !empty($meta['type']) ? $meta['type'] : '';
+if($tour_type && $tour_type == 'continuous') {
+	$custom_avail = !empty($meta['custom_avail']) ? $meta['custom_avail'] : false;
+}
+$discount_type = !empty($meta['discount_type']) ? $meta['discount_type'] : 'none';
+$discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : '';
+$disable_adult = !empty($meta['disable_adult_price']) ? $meta['disable_adult_price'] : false;
+$disable_child = !empty($meta['disable_child_price']) ? $meta['disable_child_price'] : false;
+$disable_infant = !empty($meta['disable_infant_price']) ? $meta['disable_infant_price'] : false;
+$price = '0.0';
+
+/**
+ * Group price
+ */
+if($pricing_rule == 'group') {
+
+	$price = !empty($meta['group_price']) ? $meta['group_price'] : '0.0';
+
+	if($discount_type == 'percent') {
+		$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 );
+	} else if($discount_type == 'fixed') {
+		$sale_price = number_format( ( $price - $discounted_price ),1 );
+	}
+}
+
+/**
+ * Person price
+ */
+if($pricing_rule == 'person') {
+
+	$adult_price = !empty($meta['adult_price']) ? $meta['adult_price'] : '';
+	$child_price = !empty($meta['child_price']) ? $meta['child_price'] : '';
+	$infant_price = !empty($meta['infant_price']) ? $meta['infant_price'] : '';
+
+	if($discount_type == 'percent') {
+		$sale_adult_price = number_format( $adult_price - (( $adult_price / 100 ) * $discounted_price) ,1 );
+		$sale_child_price = number_format( $child_price - (( $child_price / 100 ) * $discounted_price) ,1 );
+		$sale_infant_price = number_format( $infant_price - (( $infant_price / 100 ) * $discounted_price) ,1 );
+	} else if($discount_type == 'fixed') {
+		$sale_adult_price = number_format( ( $adult_price - $discounted_price ),1 );
+		$sale_child_price = number_format( ( $child_price - $discounted_price ),1 );
+		$sale_infant_price = number_format( ( $infant_price - $discounted_price ),1 );
+	}
+}
+
 ?>
 
 <div class="tf-page-wrapper">
@@ -81,6 +130,9 @@ $tf_overall_rate['review'] = null;
 				<div class="tf-hero-content-wrapper">
 					<div class="tf-hero-top-content" style="background-image: url(<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>);">
 						<div class="tf-hero-top-content-inner">
+							<div class="tf-single-rating">
+								<i class="fas fa-star"></i> <span>4.8</span> (<?php printf( _n( '%s Review', '%s Reviews', get_comments_number(), 'tourfic' ), number_format_i18n( get_comments_number() ) ); ?>)
+							</div>
 							<?php
 							// Wishlist
 							if(tfopt('wl-bt-for') && in_array('2', tfopt('wl-bt-for'))) {
@@ -142,19 +194,63 @@ $tf_overall_rate['review'] = null;
 							</div>
 						</div>
 						<div class="tf-hero-bottom-right">
-							<div class="tf-hero-pricing">
-								<span><?php echo esc_html__( 'Price','tourfic' ); ?>: <?php echo tf_tours_price_html();?></span>
-							</div>
-							<div class="tf-hero-rating">
-								<div class="tf-hero-bcr-star">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="tf-hero-bcr-num reviews">
-									<span>5</span>
-								</div>
-							</div>
-							<div class="tf-hero-review-count">
-								<p><?php echo number_format_i18n( get_comments_number()); ?> <?php echo __( 'reviews', 'tourfic' );?></p>
+							<div class="tf-single-tour-pricing">
+								<?php
+								if($pricing_rule == 'group') {
+								?>
+									<div class="tf-price group-price">
+										<span class="sale-price">
+											<?php echo wc_price($sale_price ?? $price, array('decimals'=>0)); ?>
+										</span>
+										<?php echo ($discount_type != 'none') ? '<del>'.wc_price($price, array('decimals'=>0)).'</del>' : ''; ?>
+									</div>
+								<?php
+								} else if($pricing_rule == 'person') {
+								?>
+									<?php if(!$disable_adult && !empty($adult_price)) { ?>
+										<div class="tf-price adult-price">
+											<span class="sale-price">
+												<?php echo wc_price($sale_adult_price ?? $adult_price, array('decimals'=>0)); ?>
+											</span>
+											<?php echo ($discount_type != 'none') ? '<del>'.wc_price($adult_price, array('decimals'=>0)).'</del>' : ''; ?>
+										</div>
+									<?php } if(!$disable_child && !empty($child_price)) { ?>
+										<div class="tf-price child-price tf-d-n">
+											<span class="sale-price">
+												<?php echo wc_price($sale_child_price ?? $child_price, array('decimals'=>0)); ?>
+											</span>
+											<?php echo ($discount_type != 'none') ? '<del>'.wc_price($child_price, array('decimals'=>0)).'</del>' : ''; ?>
+										</div>
+									<?php } if(!$disable_infant && !empty($infant_price)) { ?>
+										<div class="tf-price infant-price tf-d-n">
+											<span class="sale-price">
+												<?php echo wc_price($sale_infant_price ?? $infant_price, array('decimals'=>0)); ?>
+											</span>
+											<?php echo ($discount_type != 'none') ? '<del>'.wc_price($infant_price, array('decimals'=>0)).'</del>' : ''; ?>
+										</div>
+									<?php } ?>
+								<?php
+								}
+								?>
+								<ul class="tf-price-tab">
+									<?php
+									if($pricing_rule == 'group') {
+
+										echo '<li id="group" class="active">' .__("Group", "tourfic"). '</li>';
+
+									} else if($pricing_rule == 'person') {
+
+										if(!$disable_adult) {
+											echo '<li id="adult" class="active">' .__("Adult", "tourfic"). '</li>';
+										} if(!$disable_child && !empty($child_price)) {
+											echo '<li id="child">' .__("Child", "tourfic"). '</li>';
+										} if(!$disable_infant) {
+											echo '<li id="infant">' .__("Infant", "tourfic"). '</li>';
+										}
+
+									}
+									?>
+								</ul>
 							</div>
 						</div>
 					</div>

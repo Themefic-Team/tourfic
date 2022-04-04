@@ -1,6 +1,6 @@
-/**
- * Global re-usable classes
- */
+/*================================
+|    Global re-usable classes    |
+================================*/
 /* Display */
 .tf-d-b {
     display: block !important;
@@ -114,6 +114,101 @@
 /*================================
 |            Tour CSS           |
 ================================*/
+/**
+ * Sinlge tour
+ * Full Width
+ */
+/* Star rating */
+.tf-single-rating {
+    position: absolute;
+    left: 0;
+    top: 0;
+    line-height: 1;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    background: rgba(19, 55, 116, 0.24);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-sizing: border-box;
+    padding: 8px;
+    color: #fff;
+    border-radius: 8px;
+}
+.tf-single-rating i {
+    font-size: 14px;
+    color: #FFCD3D;
+}
+.tf-single-rating span {
+    margin: 0 3px 0 5px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+/* Pricing */
+.tf-single-tour-pricing {
+    width: 200px;
+}
+.tf-single-tour-pricing .tf-price{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1;
+    color: #9696A0;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+.tf-single-tour-pricing .tf-price span.sale-price{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1;
+    color: #133774;
+    margin: 0 8px 0 0;
+}
+.tf-single-tour-pricing .tf-price-tab{
+    list-style: none;
+    display: flex;
+    line-height: 1;
+    font-size: 14px;
+    font-weight: 600;
+    color: #5A5B6A;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 10px 0 0 0;
+    border: 1px solid #D8E6FF;
+    box-sizing: border-box;
+    border-radius: 8px 8px 8px 8px;
+    cursor: pointer;
+}
+.tf-single-tour-pricing .tf-price-tab li{
+    padding: 0;
+    width: 100%;
+    text-align: center;
+    height: 36px;
+    justify-content: center;
+    align-content: center;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+.tf-single-tour-pricing .tf-price-tab li:hover{
+    color: #133774;
+    background: #F5F8FF;
+}
+.tf-single-tour-pricing .tf-price-tab li:nth-child(2){
+    border-left: 1px solid #D8E6FF;
+}
+.tf-single-tour-pricing .tf-price-tab li:nth-child(3){
+    border-left: 1px solid #D8E6FF;
+}
+.tf-single-tour-pricing  .tf-price-tab li.active{
+    color: #133774;
+    background: #D8E6FF;
+}
 
 /* Related tour */
 .tf-suggestion-item {

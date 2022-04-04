@@ -57,7 +57,7 @@ function register_tf_tours_post_type() {
         'has_archive'        => true,
         'hierarchical'       => false,
         'menu_position'      => 25,
-        'supports'           => apply_filters( 'tf_tours_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
+        'supports'           => apply_filters( 'tf_tours_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author', 'custom-fields' ) ),
     );
 
     register_post_type( 'tf_tours', apply_filters( 'tf_tour_post_type_args', $tour_args ) );
@@ -702,6 +702,11 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='') {
 
 	<?php
 }
+
+###############################################
+#               Helper Functions              #
+###############################################
+
 
 #################################
 # WooCommerce integration       #

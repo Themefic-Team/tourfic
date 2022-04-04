@@ -336,6 +336,19 @@
             hash: false,
         });
 
+        /**
+         * Single Tour price change
+         * 
+         * adult, child, infant
+         */
+         $('.tf-single-tour-pricing .tf-price-tab li').click(function(){
+            var t = $(this).attr('id');
+
+            $(this).addClass('active').siblings().removeClass('active');
+            $('.tf-price').addClass('tf-d-n');
+            $('.'+ t + '-price').removeClass('tf-d-n');
+        });
+
         //###############################
         //        Search                #
         //###############################
