@@ -4,14 +4,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Add tour in WooCommerce product categories
  */
-function tf_add_tour_product_catgory() {
-    wp_insert_term( 'Tour', 'product_cat', array(
-        'description' => 'This category is used for Tourfic tours. Never delete it!',
-        'parent' => 0,
-        'slug' => 'tour'
-    ) );
-}
-add_action( 'wp_loaded', 'tf_add_tour_product_catgory' );
+// function tf_add_tour_product_catgory() {
+//     wp_insert_term( 'Tour', 'product_cat', array(
+//         'description' => 'This category is used for Tourfic tours. Never delete it!',
+//         'parent' => 0,
+//         'slug' => 'tour'
+//     ) );
+// }
+// add_action( 'wp_loaded', 'tf_add_tour_product_catgory' );
 
 /**
  * Tour booking ajax function
@@ -32,7 +32,6 @@ function tf_tours_booking_function() {
      * @since 2.2.0
      */
     $post_id = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : '';
-    $product_id = get_post_meta( $post_id, 'product_id', true );
     $post_author = get_post_field( 'post_author', $post_id );
     $meta = get_post_meta( $post_id, 'tf_tours_option', true );
     $tour_type = !empty($meta['type']) ? $meta['type'] : '';
@@ -326,7 +325,7 @@ function tf_tours_booking_function() {
         }
 
         // Add product to cart with the custom cart item data
-        WC()->cart->add_to_cart( $product_id, 1, '0', array(), $tf_tours_data );
+        WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_tours_data );
 
         $response['product_id'] = $product_id;
         $response['add_to_cart'] = 'true';
