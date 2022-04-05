@@ -30,14 +30,9 @@ if (post_password_required()) {
     <?php
     $comments = get_comments(array('post_id' => get_the_ID(), 'status'       => 'approve'));
 
-    $tf_overall_rate = array();
     $tf_extr_html = '';
+    $tf_overall_rate = tf_calculate_comments_rating($comments);
 
-
-
-    foreach ($comments as $comment) {
-        tf_calculate_user_ratings($comment, $tf_overall_rate);
-    }
 
     if ($tf_overall_rate) {
         $tf_extr_html .= '<div class="tf_comment-metas">';
@@ -45,6 +40,7 @@ if (post_password_required()) {
             if (empty($value)) {
                 continue;
             }
+            $value = tf_average_ratings($value);
             $tf_extr_html .= '<div class="comment-meta">';
             $tf_extr_html .= '<label class="tf_comment_meta-key">' . $key . '</label>';
             $tf_extr_html .= '<div class="tf_comment_meta-percent"><div class="percent-progress" data-width="' . tf_average_rating_percent($value) . '"></div></div>';

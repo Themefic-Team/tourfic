@@ -68,11 +68,9 @@ while (have_posts()) : the_post();
     $terms_and_conditions = $meta['terms_conditions'];
     $tf_faqs = (get_post_meta($post->ID, 'tf_faqs', true)) ? get_post_meta($post->ID, 'tf_faqs', true) : array();
     $comments = get_comments(array('post_id' => get_the_ID(), 'status'       => 'approve'));
-    $tf_overall_rate = array();
-    $tf_overall_rate['review'] = null;
-    foreach ($comments as $comment) {
-        tf_calculate_user_ratings($comment, $tf_overall_rate);
-    }
+    $tf_overall_rate = tf_calculate_comments_rating($comments);
+
+
 ?>
 
     <div class="tf-page-wrapper">
@@ -161,7 +159,7 @@ while (have_posts()) : the_post();
                                     </div>
                                 </div>
                                 <div class="tf-hero-review-count">
-                                    <p><?php echo number_format_i18n(get_comments_number()); ?> <?php echo __('reviews', 'tourfic'); ?></p>
+                                    <p><?php echo number_format_i18n(count($comments)); ?> <?php echo __('reviews', 'tourfic'); ?></p>
                                 </div>
                             </div>
                         </div>
@@ -442,8 +440,7 @@ while (have_posts()) : the_post();
                                                         }
                                                     ?>
                                                         <div class="tf-suggestion-rating-star">
-                                                            <i class="fas fa-star"></i> <span style="color:#fff;"><?php
-                                                                                                                    echo tf_average_ratings($related_overall_rate); ?></span>
+                                                            <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_average_ratings($related_overall_rate); ?></span>
                                                         </div>
                                                     <?php
                                                     } else {
@@ -479,17 +476,14 @@ while (have_posts()) : the_post();
                 <div class="tf-container">
                     <div class="tf-row">
                         <div class="tf-review-content-wrapper">
-                            <?php
-                            if ($comments) : ?>
+                            <?php if ($comments) { ?>
                                 <div class="tf-review-sec-head">
-                                    <h2><?php
-                                        echo esc_html__('Customer Reviews', 'tourfic'); ?></h2>
-                                    <p><?php
-                                        echo esc_html__('Reviews given by our customers.', 'tourfic'); ?></p>
+                                    <h2><?php echo esc_html__('Customer Reviews', 'tourfic'); ?></h2>
+                                    <p><?php echo esc_html__('Reviews given by our customers.', 'tourfic'); ?></p>
                                 </div>
                                 <div class="tf-review-items-wrapper">
-                                    <?php
-                                    foreach ($comments as $comment) :
+                                    <?php foreach ($comments as $comment) {
+                                        $tf_overall_rate = [];
                                         tf_calculate_user_ratings($comment, $tf_overall_rate);
 
                                     ?>
@@ -517,16 +511,14 @@ while (have_posts()) : the_post();
                                                             echo TOURFIC_PLUGIN_URL . "assets/img/quote4.png"; ?> alt="">
                                             </div>
                                         </div>
-                                    <?php
-                                    endforeach; ?>
+                                    <?php }; ?>
                                 </div>
-                            <?php
-                            endif; ?>
+                            <?php }; ?>
                             <div class="tf-tours_submit_review">
                                 <?php
-                                if (comments_open() || get_comments_number()) :
+                                if (comments_open() || get_comments_number()) {
                                     comments_template();
-                                endif;
+                                };
                                 ?>
                             </div>
 
