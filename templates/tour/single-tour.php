@@ -109,13 +109,45 @@ if($pricing_rule == 'person') {
 	$infant_price = !empty($meta['infant_price']) ? $meta['infant_price'] : '';
 
 	if($discount_type == 'percent') {
-		$sale_adult_price = number_format( $adult_price - (( $adult_price / 100 ) * $discounted_price) ,1 );
-		$sale_child_price = number_format( $child_price - (( $child_price / 100 ) * $discounted_price) ,1 );
-		$sale_infant_price = number_format( $infant_price - (( $infant_price / 100 ) * $discounted_price) ,1 );
+		$adult_price ? $sale_adult_price = number_format( $adult_price - (( $adult_price / 100 ) * $discounted_price) ,1 ) : '';
+		$child_price ? $sale_child_price = number_format( $child_price - (( $child_price / 100 ) * $discounted_price) ,1 ) : '';
+		$infant_price ? $sale_infant_price = number_format( $infant_price - (( $infant_price / 100 ) * $discounted_price) ,1 ) : '';
 	} else if($discount_type == 'fixed') {
-		$sale_adult_price = number_format( ( $adult_price - $discounted_price ),1 );
-		$sale_child_price = number_format( ( $child_price - $discounted_price ),1 );
-		$sale_infant_price = number_format( ( $infant_price - $discounted_price ),1 );
+		$adult_price ? $sale_adult_price = number_format( ( $adult_price - $discounted_price ),1 ) : '';
+		$child_price ? $sale_child_price = number_format( ( $child_price - $discounted_price ),1 ) : '';
+		$infant_price ? $sale_infant_price = number_format( ( $infant_price - $discounted_price ),1 ) : '';
+	}
+}
+
+if($tour_type == 'continuous' && $custom_avail == true) {
+	$pricing_rule = !empty($meta['cont_custom_date'][0]['pricing']) ? $meta['cont_custom_date'][0]['pricing'] : '';
+
+	if($pricing_rule == 'group') {
+
+		$price = !empty($meta['cont_custom_date'][0]['group_price']) ? $meta['cont_custom_date'][0]['group_price'] : '0.0';
+	
+		if($discount_type == 'percent') {
+			$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 );
+		} else if($discount_type == 'fixed') {
+			$sale_price = number_format( ( $price - $discounted_price ),1 );
+		}
+	}
+
+	if($pricing_rule == 'person') {
+
+		$adult_price = !empty($meta['cont_custom_date'][0]['adult_price']) ? $meta['cont_custom_date'][0]['adult_price'] : '';
+		$child_price = !empty($meta['cont_custom_date'][0]['child_price']) ? $meta['cont_custom_date'][0]['child_price'] : '';
+		$infant_price = !empty($meta['cont_custom_date'][0]['infant_price']) ? $meta['cont_custom_date'][0]['infant_price'] : '';
+	
+		if($discount_type == 'percent') {
+			$adult_price ? $sale_adult_price = number_format( $adult_price - (( $adult_price / 100 ) * $discounted_price) ,1 ) : '';
+			$child_price ? $sale_child_price = number_format( $child_price - (( $child_price / 100 ) * $discounted_price) ,1 ) : '';
+			$infant_price ? $sale_infant_price = number_format( $infant_price - (( $infant_price / 100 ) * $discounted_price) ,1 ) : '';
+		} else if($discount_type == 'fixed') {
+			$adult_price ? $sale_adult_price = number_format( ( $adult_price - $discounted_price ),1 ) : '';
+			$child_price ? $sale_child_price = number_format( ( $child_price - $discounted_price ),1 ) : '';
+			$infant_price ? $sale_infant_price = number_format( ( $infant_price - $discounted_price ),1 ) : '';
+		}
 	}
 }
 
@@ -240,11 +272,11 @@ if($pricing_rule == 'person') {
 
 									} else if($pricing_rule == 'person') {
 
-										if(!$disable_adult) {
+										if(!$disable_adult && !empty($adult_price)) {
 											echo '<li id="adult" class="active">' .__("Adult", "tourfic"). '</li>';
 										} if(!$disable_child && !empty($child_price)) {
 											echo '<li id="child">' .__("Child", "tourfic"). '</li>';
-										} if(!$disable_infant) {
+										} if(!$disable_infant && !empty($infant_price)) {
 											echo '<li id="infant">' .__("Infant", "tourfic"). '</li>';
 										}
 
@@ -632,4 +664,4 @@ if($pricing_rule == 'person') {
 endwhile;
 ?>
 <?php
-get_footer('tourfic');
+get_footer();
