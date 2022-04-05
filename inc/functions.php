@@ -862,7 +862,7 @@ function tf_create_woo_product($post_id, $post, $update) {
     }
 
 }
-add_action( 'save_post', 'tf_create_woo_product', 10,3 );
+//add_action( 'save_post', 'tf_create_woo_product', 10,3 );
 
 /**
  * Create Product Attributes 
