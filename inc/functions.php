@@ -37,7 +37,14 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-wishlist.php' ) ) {
 } else {
     tf_file_missing(TF_INC_PATH . 'functions/functions-wishlist.php');
 }
-
+	/**
+	 * Review Functions
+	 */
+	if ( file_exists( TF_INC_PATH . 'functions/functions-review.php' ) ) {
+		require_once TF_INC_PATH . 'functions/functions-review.php';
+	} else {
+		tf_file_missing(TF_INC_PATH . 'functions/functions-review.php');
+	}
 /**
  * Including CSS & JS
  * 
@@ -161,8 +168,8 @@ if ( !function_exists( 'tf_single_page_template' ) ) {
  * 
  * @since 1.0
  */
-if ( !function_exists( 'tourfic_archive_page_template' ) ) {
-    function tourfic_archive_page_template( $template ) {
+if ( !function_exists( 'tf_archive_page_template' ) ) {
+    function tf_archive_page_template( $template ) {
         if ( is_post_type_archive( 'tf_hotel' ) ) {
 
             $theme_files = array( 'tourfic/hotel/archive-hotels.php' );
@@ -186,7 +193,7 @@ if ( !function_exists( 'tourfic_archive_page_template' ) ) {
         }
         return $template;
     }
-    add_filter( 'template_include', 'tourfic_archive_page_template' );
+    add_filter( 'template_include', 'tf_archive_page_template' );
 }
 
 /**
@@ -199,18 +206,14 @@ if ( !function_exists( 'load_comment_template' ) ) {
         global $post;
 
         if ( !( is_singular() && ( have_comments() || 'open' == $post->comment_status ) ) ) {
-            // leave the standard comments template for standard post types
-            return;
+	        return;
         }
 
         if ( 'tf_hotel' === $post->post_type || 'tf_tours' === $post->post_type ) {
             $theme_files = array( 'tourfic/template-parts/review.php' );
             $exists_in_theme = locate_template( $theme_files, false );
-            if ( $exists_in_theme ) {
-                return $exists_in_theme;
-            } else {
-                return TF_TEMPLATE_PATH . 'template-parts/review.php';
-            }
+
+	        return ! $exists_in_theme ? TF_TEMPLATE_PATH . 'template-parts/review.php' : $exists_in_theme;
         }
 
         return $comment_template;
