@@ -18,9 +18,7 @@ $post_id   = get_the_ID();
 
 // Get destination
 $destinations = get_the_terms( $post_id, 'tour_destination' );
-if($destinations) {
-	$first_destination_slug = $destinations[0]->slug;
-}
+$first_destination_slug = !empty($destinations) ? $destinations[0]->slug : '';
 
 // Wishlist
 $post_type = substr(get_post_type(), 3, -1);
@@ -192,7 +190,7 @@ if($tour_type == 'continuous' && $custom_avail == true) {
 						</div>
 						<div class="tf-hero-bottom-area">					
 							<?php 
-							$tour_video = $meta['tour_video'] ? $meta['tour_video'] : '';
+							$tour_video = !empty($meta['tour_video']) ? $meta['tour_video'] : '';
 							if (defined( 'TF_PRO' ) && $tour_video){ 
 							?>	
 							<div class="tf-hero-btm-icon tf-tour-video" data-fancybox="tour-video" href="<?php echo $tour_video; ?>">	
@@ -369,6 +367,7 @@ if($tour_type == 'continuous' && $custom_avail == true) {
 			<div class="tf-row">
 				<div class="tf-quoted-content-upper">
 					<div class="tf-quoted-content-wrapper">
+						<?php if($inc) { ?>
 						<div class="tf-quoted-include">
 							<h2><?php _e( 'Included','tourfic' ); ?></h2>
 							<ul>
@@ -379,6 +378,8 @@ if($tour_type == 'continuous' && $custom_avail == true) {
 								?>
 							</ul>
 						</div>
+						<?php } ?>
+						<?php if($exc) { ?>
 						<div class="tf-quoted-exclude">
 							<h2><?php _e( 'Excluded','tourfic' ); ?></h2>
 							<ul>
@@ -389,6 +390,7 @@ if($tour_type == 'continuous' && $custom_avail == true) {
 								?>
 							</ul>
 						</div>
+						<?php } ?>
 					</div>
 				</div>
 			</div>

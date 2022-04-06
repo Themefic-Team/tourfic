@@ -370,8 +370,6 @@ if ( !function_exists('tf_admin_role_caps') ) {
 
             update_option( 'tf_admin_caps', 1 );
         }
-
-        update_post_meta( '22', '_price', '10' );
     }
     add_action( 'admin_init', 'tf_admin_role_caps', 999 );
 }

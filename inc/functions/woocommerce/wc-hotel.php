@@ -154,7 +154,7 @@ function tf_hotel_booking_callback(){
         $tf_room_data['tf_hotel_data']['price_total'] = $price_total;
 
         // Add product to cart with the custom cart item data
-        WC()->cart->add_to_cart( $product_id, 1, '0', array(), $tf_room_data );
+        WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
 
         $response['product_id'] = $product_id;
         $response['add_to_cart'] = 'true';

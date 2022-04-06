@@ -56,14 +56,52 @@ function tf_woocommerce_data_stores( $stores ) {
 }
 add_filter( 'woocommerce_data_stores', 'tf_woocommerce_data_stores' );
 
-function tf_woocommerce_product_get_price( $price, $product ) {
-
-    $post_id = $product->get_id();
-
-    if (get_post_type($post_id) === 'tf_tours'){
-        $price = '0';
-    }
-    return $price;
+/**
+ * Add _price post_meta to hotels & tours upon publish
+ * 
+ * _pirce field is required for WooCommerce add to cart
+ */
+function tf_add_price_field_to_post($post_id, $post) {
+    update_post_meta( $post_id, '_price', '0' );
 }
-//add_filter('woocommerce_product_get_price', 'tf_woocommerce_product_get_price', 10, 2 );
+add_action( 'publish_tf_hotel', 'tf_add_price_field_to_post', 10, 2 );
+add_action( 'publish_tf_tours', 'tf_add_price_field_to_post', 10, 2 );
+
+/**
+ * Run Once
+ * Add _price post_meta to all hotels & tours
+ * 
+ * Will be delete in future version
+ */
+function tf_update_meta_all_hotels_tours() {
+
+    //if ( get_option( 'tf_update_meta_all' ) < 1 ) {
+
+        $args = array(
+            'posts_per_page'   => -1,
+            'post_type'        => 'tf_hotel',
+            'suppress_filters' => true 
+        );
+        $posts_array = get_posts( $args );
+        foreach($posts_array as $post_array) {
+            update_post_meta($post_array->ID, 'ff', '0' );
+        } 
+        update_post_meta('13', 'ff', '0' );
+        die;
+
+        // $args = array(
+        //     'posts_per_page'   => -1,
+        //     'post_type'        => 'tf_tours',
+        //     'suppress_filters' => true 
+        // );
+        // $posts_array = get_posts( $args );
+        // foreach($posts_array as $post_array) {
+        //     update_post_meta($post_array->ID, '_price', '0' );
+        // }
+
+        //update_option( 'tf_update_meta_all', 1 );
+
+    //}
+}
+add_action('init', 'tf_update_meta_all_hotels_tours');
 ?>
