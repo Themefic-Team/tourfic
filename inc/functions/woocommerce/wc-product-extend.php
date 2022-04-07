@@ -75,8 +75,10 @@ add_action( 'publish_tf_tours', 'tf_add_price_field_to_post', 10, 2 );
  */
 function tf_update_meta_all_hotels_tours() {
 
-    //if ( get_option( 'tf_update_meta_all' ) < 1 ) {
+    // Run once only
+    if ( get_option( 'tf_update_meta_all' ) < 1 ) {
 
+        // Update hotels meta
         $args = array(
             'posts_per_page'   => -1,
             'post_type'        => 'tf_hotel',
@@ -84,24 +86,23 @@ function tf_update_meta_all_hotels_tours() {
         );
         $posts_array = get_posts( $args );
         foreach($posts_array as $post_array) {
-            update_post_meta($post_array->ID, 'ff', '0' );
+            update_post_meta($post_array->ID, '_price', '0' );
         } 
-        update_post_meta('13', 'ff', '0' );
-        die;
 
-        // $args = array(
-        //     'posts_per_page'   => -1,
-        //     'post_type'        => 'tf_tours',
-        //     'suppress_filters' => true 
-        // );
-        // $posts_array = get_posts( $args );
-        // foreach($posts_array as $post_array) {
-        //     update_post_meta($post_array->ID, '_price', '0' );
-        // }
+        // Update tours meta
+        $args = array(
+            'posts_per_page'   => -1,
+            'post_type'        => 'tf_tours',
+            'suppress_filters' => true 
+        );
+        $posts_array = get_posts( $args );
+        foreach($posts_array as $post_array) {
+            update_post_meta($post_array->ID, '_price', '0' );
+        }
 
-        //update_option( 'tf_update_meta_all', 1 );
+        update_option( 'tf_update_meta_all', 1 );
 
-    //}
+    }
 }
-add_action('init', 'tf_update_meta_all_hotels_tours');
+add_action('wp_loaded', 'tf_update_meta_all_hotels_tours');
 ?>
