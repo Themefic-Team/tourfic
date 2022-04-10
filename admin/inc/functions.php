@@ -102,7 +102,7 @@ function tf_required_taxonomies( $hook ) {
 	wp_localize_script( 'tf-required', 'tf_params', array(
 			'taxonomies' => $post_types[ $post_type ],
 			'error'      => false,
-			'tour_location_required' => __('Tour Location is a required field!', 'tourfic'),
+			'tour_location_required' => __('Tour Location is a required field!', TFD),
 		)
 	);
 
@@ -126,5 +126,3 @@ function tf_is_gutenberg_active() {
 	
 	return false;
 }
-
-?>

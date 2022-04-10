@@ -11,7 +11,7 @@ if( class_exists( 'CSF' ) ) {
     $prefix = 'tf_hotel';
 
     CSF::createMetabox( $prefix, array(
-        'title'     => __( 'Hotel Settings', 'tourfic' ),
+        'title'     => __( 'Hotel Settings', TFD ),
         'post_type' => 'tf_hotel',
         'context'   => 'advanced',
         'priority'  => 'high',
@@ -20,15 +20,15 @@ if( class_exists( 'CSF' ) ) {
   
     // Location Details
     CSF::createSection( $prefix, array(
-      'title'  => __('Location', 'tourfic'),
+      'title'  => __('Location', TFD),
       'fields' => array(
 
         array(
           'id'      => 'address',
           'type'    => 'textarea',
-          'title'   => __('Hotel Address', 'tourfic'),
-          'subtitle' => __('Enter hotel adress', 'tourfic'),
-          'placeholder' => __('Address', 'tourfic'),
+          'title'   => __('Hotel Address', TFD),
+          'subtitle' => __('Enter hotel adress', TFD),
+          'placeholder' => __('Address', TFD),
           'attributes' => array(
             'required' => 'required',
           ),
@@ -38,8 +38,8 @@ if( class_exists( 'CSF' ) ) {
           'id'       => '',
           'class' => 'tf-csf-disable tf-csf-pro',
           'type'     => 'map',
-          'title'    => __('Location on Map', 'tourfic'),
-          'subtitle' => __('Select one location on the map to see latitude and longitude' .$badge_pro, 'tourfic'),
+          'title'    => __('Location on Map', TFD),
+          'subtitle' => __('Select one location on the map to see latitude and longitude' .$badge_pro, TFD),
           'height'   => '250px',
           'settings' => array(
             'scrollWheelZoom' => true,
@@ -51,33 +51,33 @@ if( class_exists( 'CSF' ) ) {
 
     // Hotel Details
     CSF::createSection( $prefix, array(
-      'title'  => __( 'Hotel Detail', 'tourfic' ),
+      'title'  => __( 'Hotel Detail', TFD ),
       'fields' => array(
 
         array(
           'id'    => 'gallery',
           'type'  => 'gallery',
-          'title' => __('Hotel Gallery', 'tourfic'),
-          'subtitle' => __('Upload one or many images to make a hotel image gallery for customers', 'tourfic'),
+          'title' => __('Hotel Gallery', TFD),
+          'subtitle' => __('Upload one or many images to make a hotel image gallery for customers', TFD),
         ),
   
         array(
           'id'    => 'featured',
           'class' => 'tf-csf-disable',
           'type'  => 'switcher',
-          'title' => __('Featured Hotel', 'tourfic' ),
+          'title' => __('Featured Hotel', TFD ),
           'subtitle'   => $badge_up,
-          'text_on'  => __('Yes', 'tourfic' ),
-          'text_off' => __('No', 'tourfic' ),
+          'text_on'  => __('Yes', TFD ),
+          'text_off' => __('No', TFD ),
         ),
 
         // array(
         //   'id'      => '',
         //   'class' => 'tf-csf-disable tf-csf-pro',
         //   'type'    => 'media',
-        //   'title'   => __('Hotel logo', 'tourfic' ),
+        //   'title'   => __('Hotel logo', TFD ),
         //   'subtitle'   => $badge_up_pro,
-        //   'desc' =>  __( 'Upload the hotel logo (it is recommended using size: 256 x 195 px)', 'tourfic' ),
+        //   'desc' =>  __( 'Upload the hotel logo (it is recommended using size: 256 x 195 px)', TFD ),
         //   'library' => 'image',
         // ),
 
@@ -85,9 +85,9 @@ if( class_exists( 'CSF' ) ) {
           'id'       => '',
           'class' => 'tf-csf-disable tf-csf-pro',
           'type'     => 'text',
-          'title'    => __('Hotel Video', 'tourfic'),
+          'title'    => __('Hotel Video', TFD),
           'subtitle'   => $badge_up_pro,
-          'desc' =>  __( 'Enter YouTube/Vimeo URL here', 'tourfic' ),
+          'desc' =>  __( 'Enter YouTube/Vimeo URL here', TFD ),
           'validate' => 'csf_validate_url',
         ),
 
@@ -95,7 +95,7 @@ if( class_exists( 'CSF' ) ) {
         //   'id'      => '',
         //   'class' => 'tf-csf-disable tf-csf-pro',
         //   'type'    => 'slider',
-        //   'title'   => __('Hotel Rating Standard', 'tourfic'),
+        //   'title'   => __('Hotel Rating Standard', TFD),
         //   'subtitle'   => $badge_up_pro,
         //   'min'     => 0,
         //   'max'     => 7,
@@ -108,16 +108,16 @@ if( class_exists( 'CSF' ) ) {
 
     // Contact Information
     // CSF::createSection( $prefix, array(
-    //   'title'  => __('Contact Information', 'tourfic'),
+    //   'title'  => __('Contact Information', TFD),
     //   'fields' => array(
   
     //     array(
     //       'id'       => 'c-email',
     //       'class' => 'tf-csf-disable',
     //       'type'     => 'text',
-    //       'title'    => __('Hotel Email', 'tourfic'),
+    //       'title'    => __('Hotel Email', TFD),
     //       'subtitle'   => $badge_up,
-    //       'desc' =>  __( 'This email will received notification when have booking order', 'tourfic' ),
+    //       'desc' =>  __( 'This email will received notification when have booking order', TFD ),
     //       //'validate' => 'csf_validate_email',
     //     ),
 
@@ -125,8 +125,8 @@ if( class_exists( 'CSF' ) ) {
     //       'id'       => 'c-web',
     //       'class' => 'tf-csf-disable',
     //       'type'     => 'text',
-    //       'title'    => __('Hotel Website', 'tourfic'),
-    //       'subtitle' =>  __( 'Enter hotel website' .$badge_up, 'tourfic' ),
+    //       'title'    => __('Hotel Website', TFD),
+    //       'subtitle' =>  __( 'Enter hotel website' .$badge_up, TFD ),
     //       //'validate' => 'csf_validate_url',
     //     ),
 
@@ -134,16 +134,16 @@ if( class_exists( 'CSF' ) ) {
     //       'id'      => 'c-phone',
     //       'class' => 'tf-csf-disable',
     //       'type'    => 'text',
-    //       'title'   => __('Hotel Phone Number', 'tourfic'),
-    //       'subtitle' => __('Enter hotel phone number' .$badge_up, 'tourfic'),
+    //       'title'   => __('Hotel Phone Number', TFD),
+    //       'subtitle' => __('Enter hotel phone number' .$badge_up, TFD),
     //     ),
 
     //     array(
     //       'id'      => 'c-fax',
     //       'class' => 'tf-csf-disable',
     //       'type'    => 'text',
-    //       'title'   => __('Hotel Fax', 'tourfic'),
-    //       'subtitle' => __('Enter hotel fax number' .$badge_up, 'tourfic'),
+    //       'title'   => __('Hotel Fax', TFD),
+    //       'subtitle' => __('Enter hotel fax number' .$badge_up, TFD),
     //     ),
   
     //   )
@@ -152,24 +152,24 @@ if( class_exists( 'CSF' ) ) {
      
     // Check-in check-out
     CSF::createSection( $prefix, array(
-      'title'  => __('Check in/out Time', 'tourfic'),
+      'title'  => __('Check in/out Time', TFD),
       'fields' => array(
   
         array(
           'id'    => '',
           'class' => 'tf-csf-disable tf-csf-pro',
           'type'  => 'switcher',
-          'title' => __('Allowed Full Day Booking', 'tourfic'),
-          'subtitle' =>  __( 'You can book room with full day' .$badge_up_pro, 'tourfic' ),
-          'desc' =>  __( 'E.g: booking from 22 -23, then all days 22 and 23 are full, other people cannot book', 'tourfic' ),
+          'title' => __('Allowed Full Day Booking', TFD),
+          'subtitle' =>  __( 'You can book room with full day' .$badge_up_pro, TFD ),
+          'desc' =>  __( 'E.g: booking from 22 -23, then all days 22 and 23 are full, other people cannot book', TFD ),
         ),
 
         // array(
         //   'id'       => '',
         //   'class' => 'tf-csf-disable tf-csf-pro',
         //   'type'     => 'datetime',
-        //   'title'    => __('Time for Check-in', 'tourfic'),
-        //   'subtitle' => __('Enter time for check-in at hotel' .$badge_up_pro, 'tourfic'),
+        //   'title'    => __('Time for Check-in', TFD),
+        //   'subtitle' => __('Enter time for check-in at hotel' .$badge_up_pro, TFD),
         //   'settings' => array(
         //     'noCalendar' => true,
         //     'enableTime' => true,
@@ -181,8 +181,8 @@ if( class_exists( 'CSF' ) ) {
         //   'id'       => '',
         //   'class' => 'tf-csf-disable tf-csf-pro',
         //   'type'     => 'datetime',
-        //   'title'    => __('Time for Check-out', 'tourfic'),
-        //   'subtitle' => __('Enter time for check-out at hotel' .$badge_up_pro, 'tourfic'),
+        //   'title'    => __('Time for Check-out', TFD),
+        //   'subtitle' => __('Enter time for check-out at hotel' .$badge_up_pro, TFD),
         //   'settings' => array(
         //     'noCalendar' => true,
         //     'enableTime' => true,
@@ -194,23 +194,23 @@ if( class_exists( 'CSF' ) ) {
     ) );
 
     CSF::createSection( $prefix, array(
-      'title'  => __('Room Details', 'tourfic' ),
+      'title'  => __('Room Details', TFD ),
       'fields' => array(
   
         array(
           'id'     => 'room',
           'type'   => 'repeater',
-          'title'  => __('Room Details', 'tourfic' ),
+          'title'  => __('Room Details', TFD ),
           'max' => 5,
           'fields' => array(
                   
             array(
               'id'         => 'enable',
               'type'       => 'switcher',
-              'title'      => __('Status', 'tourfic' ),
-              'subtitle'   => __( 'Enable/disable this Room', 'tourfic' ),
-              'text_on'    => __('Enabled', 'tourfic' ),
-              'text_off'   => __('Disabled', 'tourfic' ),
+              'title'      => __('Status', TFD ),
+              'subtitle'   => __( 'Enable/disable this Room', TFD ),
+              'text_on'    => __('Enabled', TFD ),
+              'text_off'   => __('Disabled', TFD ),
               'text_width' => 100,
               'default'    => true,
             ),
@@ -218,62 +218,62 @@ if( class_exists( 'CSF' ) ) {
             array(
               'id'      => 'title',
               'type'    => 'text',
-              'title'   => __('Room Title', 'tourfic' ),
+              'title'   => __('Room Title', TFD ),
             ),
 
             array(
               'id'    => 'num-room',
               'type'  => 'number',
-              'title' => __('Number of Rooms', 'tourfic' ),
-              'subtitle' =>  __( 'Number of available rooms for booking', 'tourfic' ),
+              'title' => __('Number of Rooms', TFD ),
+              'subtitle' =>  __( 'Number of available rooms for booking', TFD ),
             ),
 
             array(
               'type'    => 'subheading',
-              'content' => __('Details', 'tourfic' ),
+              'content' => __('Details', TFD ),
             ),
 
             array(
               'id'    => 'gallery',
               'type'  => 'gallery',
-              'title' => __('Gallery', 'tourfic' ),
-              'subtitle' =>  __( 'Upload images to make a gallery image for room', 'tourfic' ),
+              'title' => __('Gallery', TFD ),
+              'subtitle' =>  __( 'Upload images to make a gallery image for room', TFD ),
             ),
 
             array(
               'id'    => 'bed',
               'type'  => 'number',
-              'title' => __('Number of Beds', 'tourfic' ),
-              'subtitle' =>  __( 'Number of beds present in the room', 'tourfic' ),
+              'title' => __('Number of Beds', TFD ),
+              'subtitle' =>  __( 'Number of beds present in the room', TFD ),
             ),
 
             array(
               'id'    => 'adult',
               'type'  => 'number',
-              'title' => __('Number of Adults', 'tourfic' ),
-              'subtitle' =>  __( 'Max number of persons allowed in the room', 'tourfic' ),
+              'title' => __('Number of Adults', TFD ),
+              'subtitle' =>  __( 'Max number of persons allowed in the room', TFD ),
             ),
 
             array(
               'id'    => 'child',
               'type'  => 'number',
-              'title' => __('Number of Children', 'tourfic' ),
-              'subtitle' =>  __( 'Max number of persons allowed in the room', 'tourfic' ),
+              'title' => __('Number of Children', TFD ),
+              'subtitle' =>  __( 'Max number of persons allowed in the room', TFD ),
             ),
 
             array(
               'id'      => 'footage',
               'type'    => 'text',
-              'title'   => __('Room Footage', 'tourfic' ),
-              'subtitle' =>  __( 'Room footage (sft)', 'tourfic' ),
+              'title'   => __('Room Footage', TFD ),
+              'subtitle' =>  __( 'Room footage (sft)', TFD ),
             ),
 
             array(
               'id'          => 'features',
               'type'        => 'select',
-              'title'       => __('Select Features', 'tourfic' ),
-              'placeholder' => __('Select', 'tourfic' ),
-              'empty_message' => __('No feature available', 'tourfic' ),
+              'title'       => __('Select Features', TFD ),
+              'placeholder' => __('Select', TFD ),
+              'empty_message' => __('No feature available', TFD ),
               'chosen'      => true,
               'multiple'    => true,
               'options'     => 'categories',
@@ -285,21 +285,21 @@ if( class_exists( 'CSF' ) ) {
             array(
               'id'      => 'description',
               'type'    => 'textarea',
-              'title'   => __('Room Description', 'tourfic' ),
+              'title'   => __('Room Description', TFD ),
             ),
 
             array(
               'type'    => 'subheading',
-              'content' => __('Pricing', 'tourfic' ),
+              'content' => __('Pricing', TFD ),
             ),
 
             array(
               'id'          => 'pricing-by',
               'type'        => 'select',
-              'title'       => __('Pricing by', 'tourfic' ),
+              'title'       => __('Pricing by', TFD ),
               'options'     => array(
-                '1'  => __('Per room', 'tourfic' ),
-                '2'  => __('Per person (Pro)', 'tourfic' ),
+                '1'  => __('Per room', TFD ),
+                '2'  => __('Per person (Pro)', TFD ),
               ),
               'default'     => '1'
             ),
@@ -307,8 +307,8 @@ if( class_exists( 'CSF' ) ) {
             array(
               'id'      => 'price',
               'type'    => 'text',
-              'title'   => __('Pricing', 'tourfic' ),
-              'desc' =>  __( 'The price of room per one night', 'tourfic' ),
+              'title'   => __('Pricing', TFD ),
+              'desc' =>  __( 'The price of room per one night', TFD ),
               'dependency' => array( 'pricing-by', '==', '1' ),
             ),
 
@@ -316,9 +316,9 @@ if( class_exists( 'CSF' ) ) {
               'id'      => '',
               'class' => 'tf-csf-disable tf-csf-pro',
               'type'    => 'text',
-              'title'   => __('Adult Pricing', 'tourfic' ),
+              'title'   => __('Adult Pricing', TFD ),
               'subtitle'   => $badge_pro,
-              'desc' =>  __( 'The price of room per one night', 'tourfic' ),
+              'desc' =>  __( 'The price of room per one night', TFD ),
               'dependency' => array( 'pricing-by', '==', '2' ),
             ),
 
@@ -326,29 +326,29 @@ if( class_exists( 'CSF' ) ) {
               'id'      => '',
               'class' => 'tf-csf-disable tf-csf-pro',
               'type'    => 'text',
-              'title'   => __('Children Pricing', 'tourfic' ),
+              'title'   => __('Children Pricing', TFD ),
               'subtitle'   => $badge_pro,
-              'desc' =>  __( 'The price of room per one night', 'tourfic' ),
+              'desc' =>  __( 'The price of room per one night', TFD ),
               'dependency' => array( 'pricing-by', '==', '2' ),
             ),
 
             array(
               'type'    => 'subheading',
-              'content' => __('Availability', 'tourfic' ),
+              'content' => __('Availability', TFD ),
             ),
 
             array(
               'id'       => '',
               'class' => 'tf-csf-disable tf-csf-pro',
               'type'     => 'datetime',
-              'title'    => __( 'Date', 'tourfic' ),
-              'subtitle' => __( 'Select availablity date' .$badge_up_pro, 'tourfic' ),
+              'title'    => __( 'Date', TFD ),
+              'subtitle' => __( 'Select availablity date' .$badge_up_pro, TFD ),
               'settings' => array(
                   'dateFormat'      => 'Y/m/d'
               ),
               'from_to'   => true,
-              'text_from' => __('Check-in', 'tourfic' ),
-              'text_to'   => __('Check-out', 'tourfic' ),
+              'text_from' => __('Check-in', TFD ),
+              'text_to'   => __('Check-out', TFD ),
           ),
         
           ),
@@ -359,26 +359,26 @@ if( class_exists( 'CSF' ) ) {
 
     // FAQ
     CSF::createSection( $prefix, array(
-      'title'  => __('F.A.Q.', 'tourfic' ),
+      'title'  => __('F.A.Q.', TFD ),
       'fields' => array(
   
         array(
           'id'     => 'faq',
           'type'   => 'repeater',
-          'title'  => __('Frequently Asked Questions', 'tourfic' ),
-          'button_title' => __( 'Add FAQ', 'tourfic' ),
+          'title'  => __('Frequently Asked Questions', TFD ),
+          'button_title' => __( 'Add FAQ', TFD ),
           'fields' => array(
         
             array(
               'id'    => 'title',
               'type'  => 'text',
-              'title' => __('Title', 'tourfic' ),
+              'title' => __('Title', TFD ),
             ),
 
             array(
               'id'      => 'description',
               'type'    => 'textarea',
-              'title'   => __('Description', 'tourfic' ),
+              'title'   => __('Description', TFD ),
             ),
         
           ),
@@ -389,13 +389,13 @@ if( class_exists( 'CSF' ) ) {
 
     // Terms & conditions
     CSF::createSection( $prefix, array(
-      'title'  => __('Terms & Conditions', 'tourfic' ),
+      'title'  => __('Terms & Conditions', TFD ),
       'fields' => array(
   
         array(
           'id'    => 'tc',
           'type'  => 'wp_editor',
-          'title' => __('Terms & Conditions', 'tourfic' ),
+          'title' => __('Terms & Conditions', TFD ),
         ),
   
       )
@@ -403,4 +403,3 @@ if( class_exists( 'CSF' ) ) {
 
   
   }
-?>

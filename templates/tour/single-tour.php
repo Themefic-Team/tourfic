@@ -104,7 +104,7 @@ while (have_posts()) : the_post();
                                     }
                                 }
                                 ?>
-                                <h1><?php echo esc_html__($hero_title, 'tourfic'); ?></h1>
+                                <h1><?php echo esc_html__($hero_title, TFD); ?></h1>
                                 <!-- Start gallery -->
                                 <div class="tf-tours_gallery-wrap">
                                     <?php echo tf_single_tour_booking_form($post->ID); ?>
@@ -148,7 +148,7 @@ while (have_posts()) : the_post();
                             </div>
                             <div class="tf-hero-bottom-right">
                                 <div class="tf-hero-pricing">
-                                    <span><?php echo esc_html__('Price', 'tourfic'); ?>: <?php echo tf_tours_price_html(); ?></span>
+                                    <span><?php echo esc_html__('Price', TFD); ?>: <?php echo tf_tours_price_html(); ?></span>
                                 </div>
                                 <div class="tf-hero-rating">
                                     <div class="tf-hero-bcr-star">
@@ -159,7 +159,7 @@ while (have_posts()) : the_post();
                                     </div>
                                 </div>
                                 <div class="tf-hero-review-count">
-                                    <p><?php echo number_format_i18n(count($comments)); ?> <?php echo __('reviews', 'tourfic'); ?></p>
+                                    <p><?php echo number_format_i18n(count($comments)); ?> <?php echo __('reviews', TFD); ?></p>
                                 </div>
                             </div>
                         </div>
@@ -179,29 +179,29 @@ while (have_posts()) : the_post();
                             <?php if ($tour_duration) { ?>
                                 <div class="tf-single-square-block">
                                     <i class="far fa-clock"></i>
-                                    <h5><?php echo __('Duration', 'tourfic'); ?></h5>
-                                    <p><?php echo esc_html__($tour_duration, 'tourfic') ?></p>
+                                    <h5><?php echo __('Duration', TFD); ?></h5>
+                                    <p><?php echo esc_html__($tour_duration, TFD) ?></p>
                                 </div>
                             <?php } ?>
                             <?php if ($tour_type) { ?>
                                 <div class="tf-single-square-block">
                                     <img src=<?php echo TF_ASSETS_URL . "img/globe.png" ?> alt="">
-                                    <h5><?php echo __('Tour Type', 'tourfic'); ?></h5>
-                                    <p><?php echo esc_html__($tour_type, 'tourfic') ?></p>
+                                    <h5><?php echo __('Tour Type', TFD); ?></h5>
+                                    <p><?php echo esc_html__($tour_type, TFD) ?></p>
                                 </div>
                             <?php } ?>
                             <?php if ($group_size) { ?>
                                 <div class="tf-single-square-block">
                                     <img src=<?php echo TF_ASSETS_URL . "img/users.svg" ?> alt="">
-                                    <h5><?php echo __('Group Size', 'tourfic'); ?></h5>
-                                    <p><?php echo esc_html__($group_size, 'tourfic') ?></p>
+                                    <h5><?php echo __('Group Size', TFD); ?></h5>
+                                    <p><?php echo esc_html__($group_size, TFD) ?></p>
                                 </div>
                             <?php } ?>
                             <?php if ($language) { ?>
                                 <div class="tf-single-square-block">
                                     <img src=<?php echo TF_ASSETS_URL . "img/lang.png" ?> alt="">
-                                    <h5><?php echo __('Language', 'tourfic'); ?></h5>
-                                    <p><?php echo esc_html__($language, 'tourfic') ?></p>
+                                    <h5><?php echo __('Language', TFD); ?></h5>
+                                    <p><?php echo esc_html__($language, TFD) ?></p>
                                 </div>
                             <?php } ?>
                         </div>
@@ -219,7 +219,7 @@ while (have_posts()) : the_post();
                         <?php if ($highlights) { ?>
                             <div class="tf-overview-item">
                                 <div class="tf-overview-text">
-                                    <h2><?php _e('Highlights', 'tourfic'); ?></h2>
+                                    <h2><?php _e('Highlights', TFD); ?></h2>
                                     <?php echo $highlights; ?>
                                 </div>
                                 <div class="tf-ohi-image">
@@ -229,7 +229,7 @@ while (have_posts()) : the_post();
                         <?php }
                         if (get_the_content()) { ?>
                             <div class="tf-overview-text">
-                                <h2><?php _e('Overview', 'tourfic'); ?></h2>
+                                <h2><?php _e('Overview', TFD); ?></h2>
                                 <?php the_content(); ?>
                             </div>
                         <?php } ?>
@@ -247,7 +247,7 @@ while (have_posts()) : the_post();
                         <div class="tf-quoted-content-upper">
                             <div class="tf-quoted-content-wrapper">
                                 <div class="tf-quoted-include">
-                                    <h2><?php _e('Included', 'tourfic'); ?></h2>
+                                    <h2><?php _e('Included', TFD); ?></h2>
                                     <ul>
                                         <?php
                                         foreach ($inc as $key => $val) {
@@ -257,7 +257,7 @@ while (have_posts()) : the_post();
                                     </ul>
                                 </div>
                                 <div class="tf-quoted-exclude">
-                                    <h2><?php _e('Excluded', 'tourfic'); ?></h2>
+                                    <h2><?php _e('Excluded', TFD); ?></h2>
                                     <ul>
                                         <?php
                                         foreach ($exc as $key => $val) {
@@ -280,7 +280,7 @@ while (have_posts()) : the_post();
                 <div class="tf-container">
                     <div class="tf-row">
                         <div class="tf-travel-itinerary-content-wrapper">
-                            <h2><?php _e("Travel Itinerary", 'tourfic'); ?></h2>
+                            <h2><?php _e("Travel Itinerary", TFD); ?></h2>
                             <div class="tf-travel-itinerary-items-wrapper">
                                 <?php foreach ($itineraries as $itinerary) { ?>
                                     <div class="tf-travel-itinerary-item">
@@ -331,7 +331,7 @@ while (have_posts()) : the_post();
                     <div class="tf-row">
                         <div class="tf-faq-content-wrapper">
                             <div class="tf-faq-sec-title">
-                                <h2><?php _e("Frequently asked questions?", 'tourfic'); ?></h2>
+                                <h2><?php _e("Frequently asked questions?", TFD); ?></h2>
                             </div>
                             <div class="tf-faq-items-wrapper">
                                 <?php foreach ($faqs as $key => $faq) : ?>
@@ -363,7 +363,7 @@ while (have_posts()) : the_post();
                 <div class="tf-container">
                     <div class="tf-row">
                         <div class="tf-suggestion-wrapper">
-                            <h2><?php _e("Terms and Conditions", 'tourfic'); ?></h2>
+                            <h2><?php _e("Terms and Conditions", TFD); ?></h2>
                             <div class="tf-travel-itinerary-items-wrapper">
                                 <?php echo wpautop($terms_and_conditions); ?>
                             </div>
@@ -402,11 +402,11 @@ while (have_posts()) : the_post();
                             <div class="tf-suggestion-content-wrapper">
                                 <div class="tf-suggestion-sec-head">
                                     <h2><?php
-                                        echo __('You might also like', 'tourfic') ?></h2>
+                                        echo __('You might also like', TFD) ?></h2>
                                     <p><?php
                                         echo __('Travel is my life. Since 1999, I’ve been traveling around the world nonstop.
 						If you also love travel, you’re in the right place!
-						', 'tourfic') ?></p>
+						', TFD) ?></p>
                                 </div>
                                 <div class="tf-suggestion-items-wrapper">
                                     <?php
@@ -478,8 +478,8 @@ while (have_posts()) : the_post();
                         <div class="tf-review-content-wrapper">
                             <?php if ($comments) { ?>
                                 <div class="tf-review-sec-head">
-                                    <h2><?php echo esc_html__('Customer Reviews', 'tourfic'); ?></h2>
-                                    <p><?php echo esc_html__('Reviews given by our customers.', 'tourfic'); ?></p>
+                                    <h2><?php echo esc_html__('Customer Reviews', TFD); ?></h2>
+                                    <p><?php echo esc_html__('Reviews given by our customers.', TFD); ?></p>
                                 </div>
                                 <div class="tf-review-items-wrapper">
                                     <?php foreach ($comments as $comment) {
@@ -538,4 +538,4 @@ while (have_posts()) : the_post();
 endwhile;
 ?>
 <?php
-get_footer('tourfic');
+get_footer(TFD);

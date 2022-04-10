@@ -52,19 +52,19 @@ function tf_hotel_booking_callback(){
 
     // Check errors
     if ( !$check_in ) {
-        $response['errors'][] = __('Check-in date missing.','tourfic');
+        $response['errors'][] = __('Check-in date missing.',TFD);
     }
     if ( !$check_out ) {
-        $response['errors'][] = __('Check-out date missing.','tourfic');
+        $response['errors'][] = __('Check-out date missing.',TFD);
     }
     if ( !$adult ) {
-        $response['errors'][] = __('Select Adult(s).','tourfic');
+        $response['errors'][] = __('Select Adult(s).',TFD);
     }
     if ( !$room_selected ) {
-        $response['errors'][] = __('Select Room(s).','tourfic');
+        $response['errors'][] = __('Select Room(s).',TFD);
     }
     if ( !$post_id  ) {
-        $response['errors'][] = __('Unknown Error! Please try again.','tourfic');
+        $response['errors'][] = __('Unknown Error! Please try again.',TFD);
     }
 
     $post_title = get_the_title( $post_id );
@@ -172,42 +172,42 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 
     if ( isset( $cart_item['tf_hotel_data']['room_name'] ) ) {
         $item_data[] = array(
-            'key'       => __('Room', 'tourfic'),
+            'key'       => __('Room', TFD),
             'value'     => $cart_item['tf_hotel_data']['room_name'],
         );
     }
 
     if ( isset( $cart_item['tf_hotel_data']['room'] ) && $cart_item['tf_hotel_data']['room'] > 0 ) {
         $item_data[] = array(
-            'key'       => __('Number of Room Booked', 'tourfic'),
+            'key'       => __('Number of Room Booked', TFD),
             'value'     => $cart_item['tf_hotel_data']['room'],
         );
     }
 
     if ( isset( $cart_item['tf_hotel_data']['adult'] ) && $cart_item['tf_hotel_data']['adult'] > 0 ) {
         $item_data[] = array(
-            'key'       => __('Adult Number', 'tourfic'),
+            'key'       => __('Adult Number', TFD),
             'value'     => $cart_item['tf_hotel_data']['adult'],
         );
     }
 
     if ( isset( $cart_item['tf_hotel_data']['child'] ) && $cart_item['tf_hotel_data']['child'] > 0 ) {
         $item_data[] = array(
-            'key'       => __('Child Number', 'tourfic'),
+            'key'       => __('Child Number', TFD),
             'value'     => $cart_item['tf_hotel_data']['child'],
         );
     }
 
     if ( isset( $cart_item['tf_hotel_data']['check_in'] ) ) {
         $item_data[] = array(
-            'key'       => __('Check-in', 'tourfic'),
+            'key'       => __('Check-in', TFD),
             'value'     => $cart_item['tf_hotel_data']['check_in'],
         );
     }
 
     if ( isset( $cart_item['tf_hotel_data']['check_out'] ) ) {
         $item_data[] = array(
-            'key'       => __('Check-out', 'tourfic'),
+            'key'       => __('Check-out', TFD),
             'value'     => $cart_item['tf_hotel_data']['check_out'],
         );
     }
@@ -250,34 +250,33 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
 
     if ($room_name) {
 
-        $item->update_meta_data( __('room_name', 'tourfic'), $room_name );
+        $item->update_meta_data( __('room_name', TFD), $room_name );
     }
 
     if ( $room_selected && $room_selected > 0 ) {
 
-        $item->update_meta_data( __('number_room_booked', 'tourfic'), $room_selected );
+        $item->update_meta_data( __('number_room_booked', TFD), $room_selected );
     }
 
     if ( $adult && $adult > 0 ) {
 
-        $item->update_meta_data( __('adult', 'tourfic'), $adult );
+        $item->update_meta_data( __('adult', TFD), $adult );
     }
 
     if ( $child && $child > 0 ) {
 
-        $item->update_meta_data( __('child', 'tourfic'), $child );
+        $item->update_meta_data( __('child', TFD), $child );
     }
 
     if ( $check_in ) {
 
-        $item->update_meta_data( __('check_in', 'tourfic'), $check_in );
+        $item->update_meta_data( __('check_in', TFD), $check_in );
     }
 
     if ( $check_out ) {
 
-        $item->update_meta_data( __('check_out', 'tourfic'), $check_out );
+        $item->update_meta_data( __('check_out', TFD), $check_out );
     }
 
 }
 add_action( 'woocommerce_checkout_create_order_line_item', 'tf_hotel_custom_order_data', 10, 4 );
-?>

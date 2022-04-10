@@ -14,28 +14,28 @@ function register_tf_hotel_post_type()
     $hotel_slug = !empty(get_option('hotel_slug')) ? get_option('hotel_slug') : apply_filters('tf_hotel_slug', 'hotels');
 
     $hotel_labels = apply_filters('tf_hotel_labels', array(
-        'name'                  => _x('%2$s', 'tourfic post type name', 'tourfic'),
-        'singular_name'         => _x('%1$s', 'singular tourfic post type name', 'tourfic'),
-        'add_new'               => __('Add New', 'tourfic'),
-        'add_new_item'          => __('Add New %1$s', 'tourfic'),
-        'edit_item'             => __('Edit %1$s', 'tourfic'),
-        'new_item'              => __('New %1$s', 'tourfic'),
-        'all_items'             => __('All %2$s', 'tourfic'),
-        'view_item'             => __('View %1$s', 'tourfic'),
-        'view_items'            => __('View %2$s', 'tourfic'),
-        'search_items'          => __('Search %2$s', 'tourfic'),
-        'not_found'             => __('No %2$s found', 'tourfic'),
-        'not_found_in_trash'    => __('No %2$s found in Trash', 'tourfic'),
+        'name'                  => _x('%2$s', 'tourfic post type name', TFD),
+        'singular_name'         => _x('%1$s', 'singular tourfic post type name', TFD),
+        'add_new'               => __('Add New', TFD),
+        'add_new_item'          => __('Add New %1$s', TFD),
+        'edit_item'             => __('Edit %1$s', TFD),
+        'new_item'              => __('New %1$s', TFD),
+        'all_items'             => __('All %2$s', TFD),
+        'view_item'             => __('View %1$s', TFD),
+        'view_items'            => __('View %2$s', TFD),
+        'search_items'          => __('Search %2$s', TFD),
+        'not_found'             => __('No %2$s found', TFD),
+        'not_found_in_trash'    => __('No %2$s found in Trash', TFD),
         'parent_item_colon'     => '',
-        'menu_name'             => _x('Hotels', 'tourfic post type menu name', 'tourfic'),
-        'featured_image'        => __('%1$s Image', 'tourfic'),
-        'set_featured_image'    => __('Set %1$s Image', 'tourfic'),
-        'remove_featured_image' => __('Remove %1$s Image', 'tourfic'),
-        'use_featured_image'    => __('Use as %1$s Image', 'tourfic'),
-        'attributes'            => __('%1$s Attributes', 'tourfic'),
-        'filter_items_list'     => __('Filter %2$s list', 'tourfic'),
-        'items_list_navigation' => __('%2$s list navigation', 'tourfic'),
-        'items_list'            => __('%2$s list', 'tourfic'),
+        'menu_name'             => _x('Hotels', 'tourfic post type menu name', TFD),
+        'featured_image'        => __('%1$s Image', TFD),
+        'set_featured_image'    => __('Set %1$s Image', TFD),
+        'remove_featured_image' => __('Remove %1$s Image', TFD),
+        'use_featured_image'    => __('Use as %1$s Image', TFD),
+        'attributes'            => __('%1$s Attributes', TFD),
+        'filter_items_list'     => __('Filter %2$s list', TFD),
+        'items_list_navigation' => __('%2$s list navigation', TFD),
+        'items_list'            => __('%2$s list', TFD),
     ));
 
     foreach ($hotel_labels as $key => $value) {
@@ -61,8 +61,8 @@ function register_tf_hotel_post_type()
     register_post_type('tf_hotel', apply_filters('tf_hotel_post_type_args', $hotel_args));
 }
 // Enable/disable check
-if ( ! tfopt( 'disable-services' ) || ! in_array( 'hotel', tfopt( 'disable-services' ) ) ) {
-	add_action( 'init', 'register_tf_hotel_post_type' );
+if (!tfopt('disable-services') || !in_array('hotel', tfopt('disable-services'))) {
+    add_action('init', 'register_tf_hotel_post_type');
 }
 
 /**
@@ -74,8 +74,8 @@ if ( ! tfopt( 'disable-services' ) || ! in_array( 'hotel', tfopt( 'disable-servi
 function tf_hotel_default_labels()
 {
     $default_hotel = array(
-        'singular' => __('Hotel', 'tourfic'),
-        'plural'   => __('Hotels', 'tourfic'),
+        'singular' => __('Hotel', TFD),
+        'plural'   => __('Hotels', TFD),
     );
     return apply_filters('tf_hotel_name', $default_hotel);
 }
@@ -120,27 +120,27 @@ function tf_hotel_taxonomies_register()
     $hotel_location_slug = apply_filters('hotel_location_slug', 'hotel-location');
 
     $hotel_location_labels = array(
-        'name'                       => __('Locations', 'tourfic'),
-        'singular_name'              => __('Location', 'tourfic'),
-        'menu_name'                  => __('Location', 'tourfic'),
-        'all_items'                  => __('All Locations', 'tourfic'),
-        'edit_item'                  => __('Edit Location', 'tourfic'),
-        'view_item'                  => __('View Location', 'tourfic'),
-        'update_item'                => __('Update location name', 'tourfic'),
-        'add_new_item'               => __('Add new location', 'tourfic'),
-        'new_item_name'              => __('New location name', 'tourfic'),
-        'parent_item'                => __('Parent Location', 'tourfic'),
-        'parent_item_colon'          => __('Parent Location:', 'tourfic'),
-        'search_items'               => __('Search Location', 'tourfic'),
-        'popular_items'              => __('Popular Location', 'tourfic'),
-        'separate_items_with_commas' => __('Separate location with commas', 'tourfic'),
-        'add_or_remove_items'        => __('Add or remove location', 'tourfic'),
-        'choose_from_most_used'      => __('Choose from the most used location', 'tourfic'),
-        'not_found'                  => __('No location found', 'tourfic'),
-        'no_terms'                   => __('No location', 'tourfic'),
-        'items_list_navigation'      => __('Location list navigation', 'tourfic'),
-        'items_list'                 => __('Locations list', 'tourfic'),
-        'back_to_items'              => __('Back to location', 'tourfic'),
+        'name'                       => __('Locations', TFD),
+        'singular_name'              => __('Location', TFD),
+        'menu_name'                  => __('Location', TFD),
+        'all_items'                  => __('All Locations', TFD),
+        'edit_item'                  => __('Edit Location', TFD),
+        'view_item'                  => __('View Location', TFD),
+        'update_item'                => __('Update location name', TFD),
+        'add_new_item'               => __('Add new location', TFD),
+        'new_item_name'              => __('New location name', TFD),
+        'parent_item'                => __('Parent Location', TFD),
+        'parent_item_colon'          => __('Parent Location:', TFD),
+        'search_items'               => __('Search Location', TFD),
+        'popular_items'              => __('Popular Location', TFD),
+        'separate_items_with_commas' => __('Separate location with commas', TFD),
+        'add_or_remove_items'        => __('Add or remove location', TFD),
+        'choose_from_most_used'      => __('Choose from the most used location', TFD),
+        'not_found'                  => __('No location found', TFD),
+        'no_terms'                   => __('No location', TFD),
+        'items_list_navigation'      => __('Location list navigation', TFD),
+        'items_list'                 => __('Locations list', TFD),
+        'back_to_items'              => __('Back to location', TFD),
     );
 
     $hotel_location_args = array(
@@ -170,27 +170,27 @@ function tf_hotel_taxonomies_register()
      */
 
     $labels = [
-        "name"                       => __("Features", 'tourfic'),
-        "singular_name"              => __("Feature", 'tourfic'),
-        "menu_name"                  => __("Features", 'tourfic'),
-        "all_items"                  => __("All Features", 'tourfic'),
-        "edit_item"                  => __("Edit Feature", 'tourfic'),
-        "view_item"                  => __("View Feature", 'tourfic'),
-        "update_item"                => __("Update Feature", 'tourfic'),
-        "add_new_item"               => __("Add new Feature", 'tourfic'),
-        "new_item_name"              => __("New Feature name", 'tourfic'),
-        "parent_item"                => __("Parent Feature", 'tourfic'),
-        "parent_item_colon"          => __("Parent Feature:", 'tourfic'),
-        "search_items"               => __("Search Feature", 'tourfic'),
-        "popular_items"              => __("Popular Features", 'tourfic'),
-        "separate_items_with_commas" => __("Separate Features with commas", 'tourfic'),
-        "add_or_remove_items"        => __("Add or remove Features", 'tourfic'),
-        "choose_from_most_used"      => __("Choose from the most used Features", 'tourfic'),
-        "not_found"                  => __("No Features found", 'tourfic'),
-        "no_terms"                   => __("No Features", 'tourfic'),
-        "items_list_navigation"      => __("Features list navigation", 'tourfic'),
-        "items_list"                 => __("Features list", 'tourfic'),
-        "back_to_items"              => __("Back to Features", 'tourfic'),
+        "name"                       => __("Features", TFD),
+        "singular_name"              => __("Feature", TFD),
+        "menu_name"                  => __("Features", TFD),
+        "all_items"                  => __("All Features", TFD),
+        "edit_item"                  => __("Edit Feature", TFD),
+        "view_item"                  => __("View Feature", TFD),
+        "update_item"                => __("Update Feature", TFD),
+        "add_new_item"               => __("Add new Feature", TFD),
+        "new_item_name"              => __("New Feature name", TFD),
+        "parent_item"                => __("Parent Feature", TFD),
+        "parent_item_colon"          => __("Parent Feature:", TFD),
+        "search_items"               => __("Search Feature", TFD),
+        "popular_items"              => __("Popular Features", TFD),
+        "separate_items_with_commas" => __("Separate Features with commas", TFD),
+        "add_or_remove_items"        => __("Add or remove Features", TFD),
+        "choose_from_most_used"      => __("Choose from the most used Features", TFD),
+        "not_found"                  => __("No Features found", TFD),
+        "no_terms"                   => __("No Features", TFD),
+        "items_list_navigation"      => __("Features list navigation", TFD),
+        "items_list"                 => __("Features list", TFD),
+        "back_to_items"              => __("Back to Features", TFD),
     ];
 
     $args = [
@@ -298,16 +298,16 @@ function tf_room_availability_callback()
 ?>
 
     <div class="listing-title">
-        <h4><?php esc_html_e('Availability', 'tourfic'); ?></h4>
+        <h4><?php esc_html_e('Availability', TFD); ?></h4>
     </div>
     <div class="tf_room-table hotel-room-wrap">
         <table class="availability-table">
             <thead>
                 <tr>
-                    <th class="description"><?php _e('Room Details', 'tourfic'); ?></th>
-                    <th class="pax"><?php _e('Pax', 'tourfic'); ?></th>
-                    <th class="pricing"><?php _e('Price', 'tourfic'); ?></th>
-                    <th class="reserve"><?php _e('Select Rooms', 'tourfic'); ?></th>
+                    <th class="description"><?php _e('Room Details', TFD); ?></th>
+                    <th class="pax"><?php _e('Pax', TFD); ?></th>
+                    <th class="pricing"><?php _e('Price', TFD); ?></th>
+                    <th class="reserve"><?php _e('Select Rooms', TFD); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -339,7 +339,7 @@ function tf_room_availability_callback()
                                     </div>
 
                                     <div class="tf-room-title">
-                                        <?php esc_html_e('Key Features', 'tourfic'); ?>
+                                        <?php esc_html_e('Key Features', TFD); ?>
                                     </div>
 
                                     <?php if ($footage) { ?>
@@ -349,7 +349,7 @@ function tf_room_availability_callback()
                                                 <span class="icon-text tf-d-b"><?php echo $footage; ?> sft</span>
                                             </div>
                                             <div class="tf-top">
-                                                <?php _e('Room Footage', 'tourfic'); ?>
+                                                <?php _e('Room Footage', TFD); ?>
                                                 <i class="tool-i"></i>
                                             </div>
                                         </div>
@@ -361,14 +361,14 @@ function tf_room_availability_callback()
                                                 <span class="icon-text tf-d-b">x<?php echo $bed; ?></span>
                                             </div>
                                             <div class="tf-top">
-                                                <?php _e('No. Beds', 'tourfic'); ?>
+                                                <?php _e('No. Beds', TFD); ?>
                                                 <i class="tool-i"></i>
                                             </div>
                                         </div>
                                     <?php } ?>
 
                                     <div class="room-features">
-                                        <div class="tf-room-title"><?php esc_html_e('Amenities', 'tourfic'); ?></div>
+                                        <div class="tf-room-title"><?php esc_html_e('Amenities', TFD); ?></div>
                                         <ul class="room-feature-list">
 
                                             <?php foreach ($room['features'] as $feature) {
@@ -402,7 +402,7 @@ function tf_room_availability_callback()
                                                 <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
                                             </div>
                                             <div class="tf-top">
-                                                <?php _e('No. Adults', 'tourfic'); ?>
+                                                <?php _e('No. Adults', TFD); ?>
                                                 <i class="tool-i"></i>
                                             </div>
                                         </div>
@@ -414,7 +414,7 @@ function tf_room_availability_callback()
                                                 <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                                             </div>
                                             <div class="tf-top">
-                                                <?php _e('No. Children', 'tourfic'); ?>
+                                                <?php _e('No. Children', TFD); ?>
                                                 <i class="tool-i"></i>
                                             </div>
                                         </div>
@@ -424,10 +424,10 @@ function tf_room_availability_callback()
                                     <div class="tf-price-column">
                                         <?php if ($pricing_by == '1') { ?>
                                             <span class="tf-price"><?php echo wc_price($room['price']); ?></span>
-                                            <div class="price-per-night"><?php esc_html_e('per night', 'tourfic'); ?></div>
+                                            <div class="price-per-night"><?php esc_html_e('per night', TFD); ?></div>
                                         <?php } elseif ($pricing_by == '2') { ?>
                                             <span class="tf-price"><?php echo wc_price($room['adult_price']); ?></span>
-                                            <div class="price-per-night"><?php esc_html_e('per person/night', 'tourfic'); ?></div>
+                                            <div class="price-per-night"><?php esc_html_e('per person/night', TFD); ?></div>
                                         <?php } ?>
                                     </div>
                                 </td>
@@ -514,10 +514,10 @@ if (!function_exists('tf_hotel_search_form_horizontal')) {
                     <div class="tf_input-inner">
                         <div class="tf_form-row">
                             <label class="tf_label-row">
-                                <span class="tf-label"><?php _e('Location', 'tourfic'); ?>:</span>
+                                <span class="tf-label"><?php _e('Location', TFD); ?>:</span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>
-                                    <input type="text" required="" id="tf-location" class="" placeholder="<?php _e('Enter Location', 'tourfic'); ?>" value="">
+                                    <input type="text" required="" id="tf-location" class="" placeholder="<?php _e('Enter Location', TFD); ?>" value="">
                                     <input type="hidden" name="place" class="tf-place-input">
                                 </div>
                             </label>
@@ -531,17 +531,17 @@ if (!function_exists('tf_hotel_search_form_horizontal')) {
                         <span class="tf_person-icon">
                             <?php echo tourfic_get_svg('person'); ?>
                         </span>
-                        <div class="adults-text"><?php echo (!empty($adults) ? $adults : '1') . ' ' . __('Adults', 'tourfic'); ?></div>
+                        <div class="adults-text"><?php echo (!empty($adults) ? $adults : '1') . ' ' . __('Adults', TFD); ?></div>
                         <div class="person-sep"></div>
-                        <div class="child-text"><?php echo (!empty($child) ? $child : '0') . ' ' . __('Children', 'tourfic'); ?></div>
+                        <div class="child-text"><?php echo (!empty($child) ? $child : '0') . ' ' . __('Children', TFD); ?></div>
                         <div class="person-sep"></div>
-                        <div class="room-text"><?php echo (!empty($room) ? $room : '1') . ' ' . __('Room', 'tourfic'); ?></div>
+                        <div class="room-text"><?php echo (!empty($room) ? $room : '1') . ' ' . __('Room', TFD); ?></div>
                     </div>
 
                     <div class="tf_acrselection-wrap">
                         <div class="tf_acrselection-inner">
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e('Adults', 'tourfic'); ?></div>
+                                <div class="acr-label"><?php _e('Adults', TFD); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
                                     <input type="number" name="adults" id="adults" min="1" value="<?php echo !empty($adults) ? $adults : '1'; ?>">
@@ -549,7 +549,7 @@ if (!function_exists('tf_hotel_search_form_horizontal')) {
                                 </div>
                             </div>
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e('Children', 'tourfic'); ?></div>
+                                <div class="acr-label"><?php _e('Children', TFD); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
                                     <input type="number" name="children" id="children" min="0" value="<?php echo !empty($child) ? $child : '0'; ?>">
@@ -557,7 +557,7 @@ if (!function_exists('tf_hotel_search_form_horizontal')) {
                                 </div>
                             </div>
                             <div class="tf_acrselection">
-                                <div class="acr-label">1 <?php _e('Rooms', 'tourfic'); ?></div>
+                                <div class="acr-label">1 <?php _e('Rooms', TFD); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
                                     <input type="number" name="room" id="room" min="1" value="<?php echo !empty($room) ? $room : '1'; ?>">
@@ -573,10 +573,10 @@ if (!function_exists('tf_hotel_search_form_horizontal')) {
                     <div class="tf_input-inner">
                         <div class="tf_form-row">
                             <label class="tf_label-row">
-                                <span class="tf-label"><?php _e('Check-in & Check-out date', 'tourfic'); ?></span>
+                                <span class="tf-label"><?php _e('Check-in & Check-out date', TFD); ?></span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="far fa-calendar-alt"></i>
-                                    <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e('Check-in - Check-out', 'tourfic'); ?>">
+                                    <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e('Check-in - Check-out', TFD); ?>">
                                 </div>
                             </label>
                         </div>
@@ -585,7 +585,7 @@ if (!function_exists('tf_hotel_search_form_horizontal')) {
 
                 <div class="tf_submit-wrap">
                     <input type="hidden" name="type" value="tf_hotel" class="tf-post-type" />
-                    <button class="tf_button tf-submit" type="submit"><?php esc_html_e('Search', 'tourfic'); ?></button>
+                    <button class="tf_button tf-submit" type="submit"><?php esc_html_e('Search', TFD); ?></button>
                 </div>
 
             </div>
@@ -670,10 +670,10 @@ function tf_hotel_sidebar_booking_form()
         <div class="tf_booking-dates">
             <div class="tf_form-row">
                 <label class="tf_label-row">
-                    <span class="tf-label"><?php _e('Check-in &amp; Check-out date', 'tourfic'); ?></span>
+                    <span class="tf-label"><?php _e('Check-in &amp; Check-out date', TFD); ?></span>
                     <div class="tf_form-inner">
                         <i class="far fa-calendar-alt"></i>
-                        <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e('Select Date', 'tourfic'); ?>" <?php echo !empty($check_in_out) ? 'value="' . $check_in_out . '"' : '' ?> required>
+                        <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e('Select Date', TFD); ?>" <?php echo !empty($check_in_out) ? 'value="' . $check_in_out . '"' : '' ?> required>
                     </div>
                 </label>
             </div>
@@ -685,7 +685,7 @@ function tf_hotel_sidebar_booking_form()
             ?>
             <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type" />
             <input type="hidden" name="post_id" value="<?php echo get_the_ID(); ?>" />
-            <button class="tf_button tf-submit" type="submit"><?php esc_html_e('Booking Availability', 'tourfic'); ?></button>
+            <button class="tf_button tf-submit" type="submit"><?php esc_html_e('Booking Availability', TFD); ?></button>
         </div>
 
     </form>
@@ -801,7 +801,7 @@ function tf_hotel_archive_single_item($adults = '', $child = '', $room = '', $ch
                                     <div class="roomrow_flex">
                                         <?php if ($features) { ?>
                                             <div class="roomName_flex">
-                                                <strong><?php _e('Features', 'tourfic'); ?></strong>
+                                                <strong><?php _e('Features', TFD); ?></strong>
                                                 <ul class="tf-archive-desc">
                                                     <?php foreach ($features as $feature) {
                                                         $feature_meta = get_term_meta($feature->term_taxonomy_id, 'hotel_feature', true);
@@ -824,7 +824,7 @@ function tf_hotel_archive_single_item($adults = '', $child = '', $room = '', $ch
                                         <?php } ?>
                                         <div class="roomPrice roomPrice_flex sr_discount">
                                             <div class="availability-btn-area">
-                                                <a href="<?php echo $url; ?>" class="button tf_button"><?php esc_html_e('Details', 'tourfic'); ?></a>
+                                                <a href="<?php echo $url; ?>" class="button tf_button"><?php esc_html_e('Details', TFD); ?></a>
                                             </div>
                                         </div>
                                     </div>

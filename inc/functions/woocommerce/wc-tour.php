@@ -32,7 +32,7 @@ function tf_tours_booking_function() {
      * @return
      */
     if ($tour_type == 'fixed' && !defined( 'TF_PRO' )) {
-        $response['errors'][] = __( 'Fixed Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
+        $response['errors'][] = __( 'Fixed Availability is selected but Tourfic Pro is not activated!', TFD );
         $response['status'] = 'error';
         echo wp_json_encode( $response );
         die();
@@ -73,7 +73,7 @@ function tf_tours_booking_function() {
      * @return
      */
     if ($tour_type == 'continuous' && $custom_avail == true && !defined( 'TF_PRO' )) {
-        $response['errors'][] = __( 'Custom Continous Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
+        $response['errors'][] = __( 'Custom Continous Availability is selected but Tourfic Pro is not activated!', TFD );
         $response['status'] = 'error';
         echo wp_json_encode( $response );
         die();
@@ -104,27 +104,27 @@ function tf_tours_booking_function() {
      */
     if ( $tour_type == 'fixed' ) {
 
-        $min_text = sprintf( _n( '%s person', '%s persons', $min_people, 'tourfic' ), $min_people );
-        $max_text = sprintf( _n( '%s person', '%s persons', $max_people, 'tourfic' ), $max_people );
+        $min_text = sprintf( _n( '%s person', '%s persons', $min_people, TFD ), $min_people );
+        $max_text = sprintf( _n( '%s person', '%s persons', $max_people, TFD ), $max_people );
 
         if ( $total_people < $min_people && $min_people > 0 ) {
-            $response['errors'][] = sprintf( __( 'Minimum %1$s required', 'tourfic' ), $min_text );
+            $response['errors'][] = sprintf( __( 'Minimum %1$s required', TFD ), $min_text );
 
         } else if ( $total_people > $max_people && $max_people > 0 ) {
-            $response['errors'][] = sprintf( __( 'Maximum %1$s allowed', 'tourfic' ), $max_text );
+            $response['errors'][] = sprintf( __( 'Maximum %1$s allowed', TFD ), $max_text );
 
         }
 
     } elseif ( $tour_type == 'continuous' && $custom_avail == false ) {
 
-        $min_text = sprintf( _n( '%s person', '%s persons', $min_people, 'tourfic' ), $min_people );
-        $max_text = sprintf( _n( '%s person', '%s persons', $max_people, 'tourfic' ), $max_people ); 
+        $min_text = sprintf( _n( '%s person', '%s persons', $min_people, TFD ), $min_people );
+        $max_text = sprintf( _n( '%s person', '%s persons', $max_people, TFD ), $max_people ); 
 
         if ( $total_people < $min_people && $min_people > 0 ) {
-            $response['errors'][] = sprintf( __( 'Minimum %1$s required', 'tourfic' ), $min_text );
+            $response['errors'][] = sprintf( __( 'Minimum %1$s required', TFD ), $min_text );
 
         } else if ( $total_people > $max_people && $max_people > 0 ) {
-            $response['errors'][] = sprintf( __( 'Maximum %1$s allowed', 'tourfic' ), $max_text );
+            $response['errors'][] = sprintf( __( 'Maximum %1$s allowed', TFD ), $max_text );
 
         }
 
@@ -142,17 +142,17 @@ function tf_tours_booking_function() {
             // Backend continuous min/max people values
             $min_people = !empty($item["min_people"]) ? $item["min_people"] : '';
             $max_people = !empty($item["max_people"]) ? $item["max_people"] : '';
-            $min_text = sprintf( _n( '%s person', '%s persons', $min_people, 'tourfic' ), $min_people );
-            $max_text = sprintf( _n( '%s person', '%s persons', $max_people, 'tourfic' ), $max_people );
+            $min_text = sprintf( _n( '%s person', '%s persons', $min_people, TFD ), $min_people );
+            $max_text = sprintf( _n( '%s person', '%s persons', $max_people, TFD ), $max_people );
 
             // Compare backend & frontend date values to show specific people number error
             if ( $front_date >= $back_date_from_stt && $front_date <= $back_date_to_stt ) {
                 if ( $total_people < $min_people && $min_people > 0 ) {
-                    $response['errors'][] = sprintf( __( 'Minimum %1$s required for date %2$s - %3$s', 'tourfic' ), $min_text, $back_date_from, $back_date_to );
+                    $response['errors'][] = sprintf( __( 'Minimum %1$s required for date %2$s - %3$s', TFD ), $min_text, $back_date_from, $back_date_to );
         
                 }
                 if ( $total_people > $max_people && $max_people > 0 ) {
-                    $response['errors'][] = sprintf( __( 'Maximum %1$s allowed for date %2$s - %3$s', 'tourfic' ), $max_text, $back_date_from, $back_date_to );
+                    $response['errors'][] = sprintf( __( 'Maximum %1$s allowed for date %2$s - %3$s', TFD ), $max_text, $back_date_from, $back_date_to );
         
                 }
             }
@@ -167,19 +167,19 @@ function tf_tours_booking_function() {
      */
     /* Minimum days to book before departure */
     $min_days_before_book = !empty($meta['min_days_before_book']) ? $meta['min_days_before_book'] : '0';
-    $min_days_before_book_text = sprintf( _n( '%s day', '%s days', $min_days_before_book, 'tourfic' ), $min_days_before_book );
+    $min_days_before_book_text = sprintf( _n( '%s day', '%s days', $min_days_before_book, TFD ), $min_days_before_book );
     $today_stt = new DateTime(date('Y-m-d', strtotime(date('Y-m-d'))));
     $tour_date_stt = new DateTime(date('Y-m-d', strtotime($start_date)));
     $day_difference = $today_stt->diff($tour_date_stt)->days;   
 
     if ( $day_difference < $min_days_before_book ) {
-        $response['errors'][] = sprintf( __( 'Present date to booking date required minimum %1$s gap', 'tourfic' ), $min_days_before_book_text );
+        $response['errors'][] = sprintf( __( 'Present date to booking date required minimum %1$s gap', TFD ), $min_days_before_book_text );
     }
     if ( !$start_date ) {
-        $response['errors'][] = __( 'You must select booking date', 'tourfic' );
+        $response['errors'][] = __( 'You must select booking date', TFD );
     }
     if ( !$post_id ) {
-        $response['errors'][] = __( 'Unknown Error! Please try again.', 'tourfic' );
+        $response['errors'][] = __( 'Unknown Error! Please try again.', TFD );
     }
 
     // Get product title from post id
@@ -249,17 +249,17 @@ function tf_tours_booking_function() {
     if ($tour_type == 'continuous' && empty($tour_time)) {
 
         if (!empty($meta['allowed_time']) && empty($meta['cont_custom_date']) && empty($seasional_price['allowed_time'])) {
-            $response['errors'][]  = __('Please select time', 'tourfic');
+            $response['errors'][]  = __('Please select time', TFD);
         }
         if (!empty($meta['cont_custom_date']) && !empty($seasional_price['allowed_time']) && empty($meta['allowed_time'])) {
-            $response['errors'][]  = __('Please select time', 'tourfic');
+            $response['errors'][]  = __('Please select time', TFD);
         }
     }
 
-    if ($adults > 0 && empty($adult_price)) $response['errors'][]               = __('Adult price is blank!', 'tourfic');
-    if ($children > 0 && empty($children_price)) $response['errors'][]          = __('Childern price is blank!', 'tourfic');
-    if ($infant > 0 && empty($infant_price)) $response['errors'][]              = __('Infant price is blank!', 'tourfic');
-    if ($infant > 0 && !empty($infant_price) && !$adults) $response['errors'][] = __('Infant without adults is not allowed!', 'tourfic');
+    if ($adults > 0 && empty($adult_price)) $response['errors'][]               = __('Adult price is blank!', TFD);
+    if ($children > 0 && empty($children_price)) $response['errors'][]          = __('Childern price is blank!', TFD);
+    if ($infant > 0 && empty($infant_price)) $response['errors'][]              = __('Infant price is blank!', TFD);
+    if ($infant > 0 && !empty($infant_price) && !$adults) $response['errors'][] = __('Infant without adults is not allowed!', TFD);
     // End of seasional price
 
     /**
@@ -372,21 +372,21 @@ function tf_tours_cart_item_custom_data( $item_data, $cart_item ) {
     // Adults
     if ( $adults_number && $adults_number > 0 ) {
         $item_data[] = array(
-            'key'   => __( 'Adults', 'tourfic' ),
+            'key'   => __( 'Adults', TFD ),
             'value' => $adults_number,
         );
     }
     // Childrens
     if ( $childrens_number && $childrens_number > 0 ) {
         $item_data[] = array(
-            'key'   => __( 'Children', 'tourfic' ),
+            'key'   => __( 'Children', TFD ),
             'value' => $childrens_number,
         );
     }
     // Infants
     if ( $infants_number && $infants_number > 0 ) {
         $item_data[] = array(
-            'key'   => __( 'Infant', 'tourfic' ),
+            'key'   => __( 'Infant', TFD ),
             'value' => $infants_number,
         );
     }
@@ -394,14 +394,14 @@ function tf_tours_cart_item_custom_data( $item_data, $cart_item ) {
     if ( !empty($tour_type) && $tour_type == 'fixed') {
         if ( $start_date && $end_date ) {
             $item_data[] = array(
-                'key'   => __( 'Tour Date', 'tourfic' ),
+                'key'   => __( 'Tour Date', TFD ),
                 'value' => $start_date. ' - ' .$end_date,
             );
         }
     } elseif ( !empty($tour_type) && $tour_type == 'continuous') {
         if ( $tour_date ) {
             $item_data[] = array(
-                'key'   => __( 'Tour Date', 'tourfic' ),
+                'key'   => __( 'Tour Date', TFD ),
                 'value' => date("F j, Y", strtotime($tour_date)),
             );
         }
@@ -409,7 +409,7 @@ function tf_tours_cart_item_custom_data( $item_data, $cart_item ) {
     // Tour extras
     if ( $tour_extra ) {
         $item_data[] = array(
-            'key'   => __( 'Tour Extra: ', 'tourfic' ),
+            'key'   => __( 'Tour Extra: ', TFD ),
             'value' => $tour_extra,
         );
     }
@@ -479,4 +479,3 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
     }
 
 }
-?>

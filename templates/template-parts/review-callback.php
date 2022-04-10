@@ -6,16 +6,16 @@
         <div class="tf-author-infobox">
             <div class="comment-meta commentmetadata">
                 <div class="comment-author vcard">
-                    <?php printf(wp_kses_post('<cite class="fn">%s</cite>', TF_NAME), get_comment_author_link()); ?>
+                    <?php printf(wp_kses_post('<cite class="fn">%s</cite>', TFD), get_comment_author_link()); ?>
                 </div>
                 <?php if ('0' === $comment->comment_approved) { ?>
-                    <em class="comment-awaiting-moderation"><?php esc_html_e('Your review is awaiting moderation.', TF_NAME); ?></em>
+                    <em class="comment-awaiting-moderation"><?php esc_html_e('Your review is awaiting moderation.', TFD); ?></em>
                     <br />
                 <?php } ?>
                 <a href="<?php echo esc_url(htmlspecialchars(get_comment_link($comment->comment_ID))); ?>" class="comment-date">
                     <?php echo '<time datetime="' . esc_attr(get_comment_date('c')) . '">' . esc_html(get_comment_date()) . '</time>'; ?>
                 </a>
-                <p><?php echo $tf_overall_rate ?>/<?php echo $base_rate ?? '5' ?></p>
+                <p><?php echo tf_average_ratings_format($tf_overall_rate, $base_rate)  ?></p>
             </div>
         </div>
         <?php if ('div' !== $args['style']) { ?>
@@ -37,7 +37,7 @@
                     )
                 );
                 ?>
-                <?php edit_comment_link(__('Edit', TF_NAME), '  ', ''); ?>
+                <?php edit_comment_link(__('Edit', TFD), '  ', ''); ?>
             </div>
             </div>
             <?php if ('div' !== $args['style']) { ?>

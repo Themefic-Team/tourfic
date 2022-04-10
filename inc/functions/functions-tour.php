@@ -17,28 +17,28 @@ function register_tf_tours_post_type()
     $tour_slug = !empty(get_option('tour_slug')) ? get_option('tour_slug') : apply_filters('tf_tours_slug', 'tours');
 
     $tour_labels = apply_filters('tf_tours_labels', array(
-        'name'                  => _x('%2$s', 'tourfic post type name', 'tourfic'),
-        'singular_name'         => _x('%1$s', 'singular tourfic post type name', 'tourfic'),
-        'add_new'               => __('Add New', 'tourfic'),
-        'add_new_item'          => __('Add New %1$s', 'tourfic'),
-        'edit_item'             => __('Edit %1$s', 'tourfic'),
-        'new_item'              => __('New %1$s', 'tourfic'),
-        'all_items'             => __('All %2$s', 'tourfic'),
-        'view_item'             => __('View %1$s', 'tourfic'),
-        'view_items'            => __('View %2$s', 'tourfic'),
-        'search_items'          => __('Search %2$s', 'tourfic'),
-        'not_found'             => __('No %2$s found', 'tourfic'),
-        'not_found_in_trash'    => __('No %2$s found in Trash', 'tourfic'),
+        'name'                  => _x('%2$s', 'tourfic post type name', TFD),
+        'singular_name'         => _x('%1$s', 'singular tourfic post type name', TFD),
+        'add_new'               => __('Add New', TFD),
+        'add_new_item'          => __('Add New %1$s', TFD),
+        'edit_item'             => __('Edit %1$s', TFD),
+        'new_item'              => __('New %1$s', TFD),
+        'all_items'             => __('All %2$s', TFD),
+        'view_item'             => __('View %1$s', TFD),
+        'view_items'            => __('View %2$s', TFD),
+        'search_items'          => __('Search %2$s', TFD),
+        'not_found'             => __('No %2$s found', TFD),
+        'not_found_in_trash'    => __('No %2$s found in Trash', TFD),
         'parent_item_colon'     => '',
-        'menu_name'             => _x('Tours', 'tourfic post type menu name', 'tourfic'),
-        'featured_image'        => __('%1$s Image', 'tourfic'),
-        'set_featured_image'    => __('Set %1$s Image', 'tourfic'),
-        'remove_featured_image' => __('Remove %1$s Image', 'tourfic'),
-        'use_featured_image'    => __('Use as %1$s Image', 'tourfic'),
-        'attributes'            => __('%1$s Attributes', 'tourfic'),
-        'filter_items_list'     => __('Filter %2$s list', 'tourfic'),
-        'items_list_navigation' => __('%2$s list navigation', 'tourfic'),
-        'items_list'            => __('%2$s list', 'tourfic'),
+        'menu_name'             => _x('Tours', 'tourfic post type menu name', TFD),
+        'featured_image'        => __('%1$s Image', TFD),
+        'set_featured_image'    => __('Set %1$s Image', TFD),
+        'remove_featured_image' => __('Remove %1$s Image', TFD),
+        'use_featured_image'    => __('Use as %1$s Image', TFD),
+        'attributes'            => __('%1$s Attributes', TFD),
+        'filter_items_list'     => __('Filter %2$s list', TFD),
+        'items_list_navigation' => __('%2$s list navigation', TFD),
+        'items_list'            => __('%2$s list', TFD),
     ));
 
     foreach ($tour_labels as $key => $value) {
@@ -78,8 +78,8 @@ if (tfopt('disable-services') && in_array('tour', tfopt('disable-services'))) {
 function tf_tours_default_labels()
 {
     $default_tour = array(
-        'singular' => __('Tour', 'tourfic'),
-        'plural'   => __('Tours', 'tourfic'),
+        'singular' => __('Tour', TFD),
+        'plural'   => __('Tours', TFD),
     );
     return apply_filters('tf_tours_name', $default_tour);
 }
@@ -124,27 +124,27 @@ function tf_tours_taxonomies_register()
     $tour_destination_slug = apply_filters('tour_destination_slug', 'tour-destination');
 
     $tour_destination_labels = array(
-        'name'                       => __('Tour Destinations', 'tourfic'),
-        'singular_name'              => __('Tour Destination', 'tourfic'),
-        'menu_name'                  => __('Destination', 'tourfic'),
-        'all_items'                  => __('All Destinations', 'tourfic'),
-        'edit_item'                  => __('Edit Destinations', 'tourfic'),
-        'view_item'                  => __('View Destinations', 'tourfic'),
-        'update_item'                => __('Update Destinations name', 'tourfic'),
-        'add_new_item'               => __('Add new Destinations', 'tourfic'),
-        'new_item_name'              => __('New Destinations name', 'tourfic'),
-        'parent_item'                => __('Parent Destinations', 'tourfic'),
-        'parent_item_colon'          => __('Parent Destinations:', 'tourfic'),
-        'search_items'               => __('Search Destination', 'tourfic'),
-        'popular_items'              => __('Popular Destination', 'tourfic'),
-        'separate_items_with_commas' => __('Separate Destination with commas', 'tourfic'),
-        'add_or_remove_items'        => __('Add or remove Destination', 'tourfic'),
-        'choose_from_most_used'      => __('Choose from the most used Destination', 'tourfic'),
-        'not_found'                  => __('No Destination found', 'tourfic'),
-        'no_terms'                   => __('No Destination', 'tourfic'),
-        'items_list_navigation'      => __('Destination list navigation', 'tourfic'),
-        'items_list'                 => __('Destination list', 'tourfic'),
-        'back_to_items'              => __('Back to Destination', 'tourfic'),
+        'name'                       => __('Tour Destinations', TFD),
+        'singular_name'              => __('Tour Destination', TFD),
+        'menu_name'                  => __('Destination', TFD),
+        'all_items'                  => __('All Destinations', TFD),
+        'edit_item'                  => __('Edit Destinations', TFD),
+        'view_item'                  => __('View Destinations', TFD),
+        'update_item'                => __('Update Destinations name', TFD),
+        'add_new_item'               => __('Add new Destinations', TFD),
+        'new_item_name'              => __('New Destinations name', TFD),
+        'parent_item'                => __('Parent Destinations', TFD),
+        'parent_item_colon'          => __('Parent Destinations:', TFD),
+        'search_items'               => __('Search Destination', TFD),
+        'popular_items'              => __('Popular Destination', TFD),
+        'separate_items_with_commas' => __('Separate Destination with commas', TFD),
+        'add_or_remove_items'        => __('Add or remove Destination', TFD),
+        'choose_from_most_used'      => __('Choose from the most used Destination', TFD),
+        'not_found'                  => __('No Destination found', TFD),
+        'no_terms'                   => __('No Destination', TFD),
+        'items_list_navigation'      => __('Destination list navigation', TFD),
+        'items_list'                 => __('Destination list', TFD),
+        'back_to_items'              => __('Back to Destination', TFD),
     );
 
     $tour_destination_args = array(
@@ -246,10 +246,10 @@ if (!function_exists('tf_tour_search_form_horizontal')) {
                     <div class="tf_input-inner">
                         <div class="tf_form-row">
                             <label class="tf_label-row">
-                                <span class="tf-label"><?php _e('Destination', 'tourfic'); ?>:</span>
+                                <span class="tf-label"><?php _e('Destination', TFD); ?>:</span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>
-                                    <input type="text" required id="tf-destination" class="" placeholder="<?php _e('Enter Destination', 'tourfic'); ?>" value="">
+                                    <input type="text" required id="tf-destination" class="" placeholder="<?php _e('Enter Destination', TFD); ?>" value="">
                                     <input type="hidden" name="place" class="tf-place-input" />
                                 </div>
                             </label>
@@ -262,16 +262,16 @@ if (!function_exists('tf_tour_search_form_horizontal')) {
                         <span class="tf_person-icon">
                             <?php echo tourfic_get_svg('person'); ?>
                         </span>
-                        <div class="adults-text">1 <?php _e('Adults', 'tourfic'); ?></div>
+                        <div class="adults-text">1 <?php _e('Adults', TFD); ?></div>
                         <div class="person-sep"></div>
-                        <div class="child-text">0 <?php _e('Children', 'tourfic'); ?></div>
+                        <div class="child-text">0 <?php _e('Children', TFD); ?></div>
                         <div class="person-sep"></div>
-                        <div class="infant-text">0 <?php _e('Infant', 'tourfic'); ?></div>
+                        <div class="infant-text">0 <?php _e('Infant', TFD); ?></div>
                     </div>
                     <div class="tf_acrselection-wrap">
                         <div class="tf_acrselection-inner">
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e('Adults', 'tourfic'); ?></div>
+                                <div class="acr-label"><?php _e('Adults', TFD); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
                                     <input type="number" name="adults" id="adults" min="1" value="1">
@@ -279,7 +279,7 @@ if (!function_exists('tf_tour_search_form_horizontal')) {
                                 </div>
                             </div>
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e('Children', 'tourfic'); ?></div>
+                                <div class="acr-label"><?php _e('Children', TFD); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
                                     <input type="number" name="children" id="children" min="0" value="0">
@@ -287,7 +287,7 @@ if (!function_exists('tf_tour_search_form_horizontal')) {
                                 </div>
                             </div>
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e('Infant', 'tourfic'); ?></div>
+                                <div class="acr-label"><?php _e('Infant', TFD); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
                                     <input type="number" name="infant" id="infant" min="0" value="0">
@@ -302,10 +302,10 @@ if (!function_exists('tf_tour_search_form_horizontal')) {
                     <!-- @KK Merged two inputs into one  -->
                     <div class="tf_input-inner">
                         <label class="tf_label-row">
-                            <span class="tf-label"><?php _e('Check-in & Check-out date', 'tourfic'); ?></span>
+                            <span class="tf-label"><?php _e('Check-in & Check-out date', TFD); ?></span>
                             <div class="tf_form-inner tf-d-g">
                                 <i class="far fa-calendar-alt"></i>
-                                <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e('Select Date', 'tourfic'); ?>" required>
+                                <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e('Select Date', TFD); ?>" required>
                             </div>
                         </label>
                     </div>
@@ -313,7 +313,7 @@ if (!function_exists('tf_tour_search_form_horizontal')) {
 
                 <div class="tf_submit-wrap">
                     <input type="hidden" name="type" value="tf_tours" class="tf-post-type" />
-                    <button class="tf_button tf-submit tf-tours-btn" type="submit"><?php esc_html_e('Search', 'tourfic'); ?></button>
+                    <button class="tf_button tf-submit tf-tours-btn" type="submit"><?php esc_html_e('Search', TFD); ?></button>
                 </div>
 
             </div>
@@ -432,7 +432,7 @@ function tf_single_tour_booking_form($post_id)
                     <div class="tf_acrselection-inner">
                         <?php if ($custom_avail == true || (!$disable_adult_price && $adult_price != false)) { ?>
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e('Adults', 'tourfic'); ?></div>
+                                <div class="acr-label"><?php _e('Adults', TFD); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
                                     <input type="number" name="adults" id="adults" min="0" value="<?php echo !empty($adults) ? $adults : '0'; ?>">
@@ -442,7 +442,7 @@ function tf_single_tour_booking_form($post_id)
                         <?php } ?>
                         <?php if ($custom_avail == true || (!$disable_child_price && $child_price != false)) { ?>
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e('Children', 'tourfic'); ?></div>
+                                <div class="acr-label"><?php _e('Children', TFD); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
                                     <input type="number" name="childrens" id="children" min="0" value="<?php echo !empty($child) ? $child : '0'; ?>">
@@ -452,7 +452,7 @@ function tf_single_tour_booking_form($post_id)
                         <?php } ?>
                         <?php if ($custom_avail == true || (!$disable_infant_price && $infant_price != false)) { ?>
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e('Infant', 'tourfic'); ?></div>
+                                <div class="acr-label"><?php _e('Infant', TFD); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
                                     <input type="number" name="infants" id="infant" min="0" value="<?php echo !empty($infant) ? $infant : '0'; ?>">
@@ -619,7 +619,7 @@ function tf_single_tour_booking_form($post_id)
             <?php } ?>
             <div class="tf-tours-booking-btn">
                 <input type="hidden" placeholder="location" name="location" value="">
-                <button class="tf_button" type="submit"><?php _e('Book Now', 'tourfic'); ?></button>
+                <button class="tf_button" type="submit"><?php _e('Book Now', TFD); ?></button>
             </div>
         </form>
     </div>
@@ -667,7 +667,7 @@ function tf_tour_archive_single_item($adults = '', $child = '', $check_in_out = 
     <div class="single-tour-wrap">
         <div class="single-tour-inner">
             <?php if ($featured) { ?>
-                <div class="tf-featured"><?php _e('Featured', 'tourfic') ?></div>
+                <div class="tf-featured"><?php _e('Featured', TFD) ?></div>
             <?php }    ?>
             <div class="tourfic-single-left">
                 <a href="<?php echo $url; ?>">
@@ -703,7 +703,7 @@ function tf_tour_archive_single_item($adults = '', $child = '', $check_in_out = 
                 </div>
 
                 <div class="availability-btn-area">
-                    <a href="<?php echo $url; ?>" class="button tf_button"><?php esc_html_e('Details', 'tourfic'); ?></a>
+                    <a href="<?php echo $url; ?>" class="button tf_button"><?php esc_html_e('Details', TFD); ?></a>
                 </div>
             </div>
         </div>

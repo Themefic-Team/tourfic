@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
  */
 CSF::createSection( $prefix, array(
     'id'    => 'miscellaneous', 
-    'title' =>  __( 'Miscellaneous', 'tourfic' ),
+    'title' =>  __( 'Miscellaneous', TFD ),
     'icon'  =>  'fas fa-boxes' ,   
 ) );
 
@@ -20,21 +20,21 @@ CSF::createSection( $prefix, array(
  */
 CSF::createSection( $prefix, array(
     'parent'    => 'miscellaneous', 
-    'title' =>  __( 'Wishlist', 'tourfic' ),
+    'title' =>  __( 'Wishlist', TFD ),
     'fields' => array(
 
         array(
             'type'    => 'subheading',
-            'content' => __('Wishlist Settings', 'tourfic' ),
+            'content' => __('Wishlist Settings', TFD ),
         ),
 
         array(
             'id'         => 'wl-for',
             'type'       => 'checkbox',
-            'title'      => __('Enable Wishlist for', 'tourfic' ),
+            'title'      => __('Enable Wishlist for', TFD ),
             'options'    => array(
-                'li' => __('Logged in User', 'tourfic' ),
-                'lo' => __('Logged out User', 'tourfic' ),
+                'li' => __('Logged in User', TFD ),
+                'lo' => __('Logged out User', TFD ),
             ),
             'default'    => array( 'li', 'lo' )
         ),
@@ -42,10 +42,10 @@ CSF::createSection( $prefix, array(
         array(
             'id'         => 'wl-bt-for',
             'type'       => 'checkbox',
-            'title'      => __('Show Wishlist Button on', 'tourfic' ),
+            'title'      => __('Show Wishlist Button on', TFD ),
             'options'    => array(
-                '1' => __('Single Hotel Page', 'tourfic' ),
-                '2' => __('Single Tour Page', 'tourfic' ),
+                '1' => __('Single Hotel Page', TFD ),
+                '2' => __('Single Tour Page', TFD ),
             ),
             'default'    => array( '1', '2' ),
         ),
@@ -53,8 +53,8 @@ CSF::createSection( $prefix, array(
         array(
             'id'          => 'wl-page',
             'type'        => 'select',
-            'title'       => __('Select Wishlist Page', 'tourfic' ),
-            'placeholder' => __('Select Wishlist Page', 'tourfic' ),
+            'title'       => __('Select Wishlist Page', TFD ),
+            'placeholder' => __('Select Wishlist Page', TFD ),
             'ajax' => true,
             'options'     => 'pages',
             'query_args'  => array(
@@ -75,20 +75,19 @@ CSF::createSection( $prefix, array(
  */
 CSF::createSection( $prefix, array(
     'parent'    => 'miscellaneous', 
-    'title' =>  __( 'Permalink Settings', 'tourfic' ),
+    'title' =>  __( 'Permalink Settings', TFD ),
     'fields' => array(
 
         array(
             'type'    => 'subheading',
-            'content' => __('Permalink Settings', 'tourfic' ),
+            'content' => __('Permalink Settings', TFD ),
         ),
 
         array(
             'type'    => 'content',
-            'content' => __('For permalink settings go to default <a href="' .get_admin_url(). 'options-permalink.php">permalink settings page</a>.', 'tourfic' ),
+            'content' => __('For permalink settings go to default <a href="' .get_admin_url(). 'options-permalink.php">permalink settings page</a>.', TFD ),
         ),
 
     )
     
 ) );
-?>

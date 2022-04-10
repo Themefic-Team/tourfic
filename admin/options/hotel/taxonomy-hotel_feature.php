@@ -50,7 +50,7 @@ if( class_exists( 'CSF' ) ) {
         'id'         => 'dimention',
         'type'       => 'dimensions',
         'title'      => 'Custom Icon Size',
-        'desc'       => __( 'Size in "px"', 'tourfic' ),
+        'desc'       => __( 'Size in "px"', TFD ),
         'show_units' => false,
         'height'     => false,
         'default'    => array(
@@ -63,5 +63,3 @@ if( class_exists( 'CSF' ) ) {
   ) );
 
 }
-
-?>

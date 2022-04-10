@@ -1,28 +1,28 @@
 <?php
 
 // Control core classes for avoid errors
-if( class_exists( 'CSF' ) ) {
+if (class_exists('CSF')) {
 
-  $prefix = 'tourfic_opt';
+    $prefix = 'tourfic_opt';
 
-  CSF::createOptions( $prefix, array(
-    'framework_title'         =>   __( 'Tourfic Settings <small>by <a style="color: #bfbfbf;text-decoration:none;" href="https://themefic.com" target="_blank">Themefic</a></small>', 'tourfic' ),
-    'menu_title'              =>   __( 'Tourfic Settings', 'tourfic' ),
-    'menu_slug'               =>   'tourfic',
-    'menu_icon'               =>   'dashicons-palmtree',
-    'footer_credit'           =>   __( '<em>Enjoyed <strong>Tourfic</strong>? Please leave us a <a style="color:#e9570a;" href="https://wordpress.org/support/plugin/tourfic/reviews/?filter=5/#new-post" target="_blank">★★★★★</a> rating. We really appreciate your support!</em>', 'tourfic' ),
-    'menu_position'           =>   25,
-    'show_sub_menu'           =>   true,
-    'theme'                   =>   'dark',   
-  ) );
+    CSF::createOptions($prefix, array(
+        'framework_title'         =>   __('Tourfic Settings <small>by <a style="color: #bfbfbf;text-decoration:none;" href="https://themefic.com" target="_blank">Themefic</a></small>', TFD),
+        'menu_title'              =>   __('Tourfic Settings', TFD),
+        'menu_slug'               =>   TFD,
+        'menu_icon'               =>   'dashicons-palmtree',
+        'footer_credit'           =>   __('<em>Enjoyed <strong>Tourfic</strong>? Please leave us a <a style="color:#e9570a;" href="https://wordpress.org/support/plugin/tourfic/reviews/?filter=5/#new-post" target="_blank">★★★★★</a> rating. We really appreciate your support!</em>', TFD),
+        'menu_position'           =>   25,
+        'show_sub_menu'           =>   true,
+        'theme'                   =>   'dark',
+    ));
 
-  
+
     /**
      * General Options
      * 
      * Main menu
      */
-    if ( file_exists( TF_OPTIONS_PATH . 'global/parts/general.php' ) ) {
+    if (file_exists(TF_OPTIONS_PATH . 'global/parts/general.php')) {
         require_once TF_OPTIONS_PATH . 'global/parts/general.php';
     } else {
         tf_file_missing(TF_OPTIONS_PATH . 'global/parts/general.php');
@@ -33,14 +33,14 @@ if( class_exists( 'CSF' ) ) {
      * 
      * Main menu
      */
-    CSF::createSection( $prefix, array(
+    CSF::createSection($prefix, array(
         'id'    => 'hotel', // Set a unique slug-like ID
-        'title' => __( 'Hotel Options', 'instantio' ),
+        'title' => __('Hotel Options', TFD),
         'icon'  => 'fas fa-hotel',
-    ) );
-    
+    ));
+
     // Single hotel
-    if ( file_exists( TF_OPTIONS_PATH . 'global/parts/hotel/single.php' ) ) {
+    if (file_exists(TF_OPTIONS_PATH . 'global/parts/hotel/single.php')) {
         require_once TF_OPTIONS_PATH . 'global/parts/hotel/single.php';
     } else {
         tf_file_missing(TF_OPTIONS_PATH . 'global/parts/hotel/single.php');
@@ -51,14 +51,14 @@ if( class_exists( 'CSF' ) ) {
      * 
      * Main menu
      */
-    CSF::createSection( $prefix, array(
+    CSF::createSection($prefix, array(
         'id'    => 'tour', // Set a unique slug-like ID
-        'title' => __( 'Tour Options', 'instantio' ),
+        'title' => __('Tour Options', TFD),
         'icon'  => 'fas fa-umbrella-beach',
-    ) );
+    ));
 
     // Single tour
-    if ( file_exists( TF_OPTIONS_PATH . 'global/parts/tour/single.php' ) ) {
+    if (file_exists(TF_OPTIONS_PATH . 'global/parts/tour/single.php')) {
         require_once TF_OPTIONS_PATH . 'global/parts/tour/single.php';
     } else {
         tf_file_missing(TF_OPTIONS_PATH . 'global/parts/tour/single.php');
@@ -69,7 +69,7 @@ if( class_exists( 'CSF' ) ) {
      * 
      * Main menu
      */
-    if ( file_exists( TF_OPTIONS_PATH . 'global/parts/vendor.php' ) ) {
+    if (file_exists(TF_OPTIONS_PATH . 'global/parts/vendor.php')) {
         require_once TF_OPTIONS_PATH . 'global/parts/vendor.php';
     } else {
         tf_file_missing(TF_OPTIONS_PATH . 'global/parts/vendor.php');
@@ -80,7 +80,7 @@ if( class_exists( 'CSF' ) ) {
      * 
      * Main menu
      */
-    if ( file_exists( TF_OPTIONS_PATH . 'global/parts/search.php' ) ) {
+    if (file_exists(TF_OPTIONS_PATH . 'global/parts/search.php')) {
         require_once TF_OPTIONS_PATH . 'global/parts/search.php';
     } else {
         tf_file_missing(TF_OPTIONS_PATH . 'global/parts/search.php');
@@ -91,7 +91,7 @@ if( class_exists( 'CSF' ) ) {
      * 
      * Main menu
      */
-    if ( file_exists( TF_OPTIONS_PATH . 'global/parts/miscellaneous.php' ) ) {
+    if (file_exists(TF_OPTIONS_PATH . 'global/parts/miscellaneous.php')) {
         require_once TF_OPTIONS_PATH . 'global/parts/miscellaneous.php';
     } else {
         tf_file_missing(TF_OPTIONS_PATH . 'global/parts/miscellaneous.php');
@@ -102,15 +102,13 @@ if( class_exists( 'CSF' ) ) {
      * 
      * Main menu
      */
-    CSF::createSection( $prefix, array(
-        'title'       => __('Import/Export', 'tourfic'),
+    CSF::createSection($prefix, array(
+        'title'       => __('Import/Export', TFD),
         'icon'        => 'fas fa-hdd',
-        'fields'      => array(   
+        'fields'      => array(
             array(
                 'type' => 'backup',
-            ),   
+            ),
         )
-    ) );
-
-
+    ));
 }

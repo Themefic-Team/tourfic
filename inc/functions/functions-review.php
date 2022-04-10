@@ -2,7 +2,6 @@
 const TF_COMMENT_META  = 'tf_comment_meta';
 const TF_TOTAL_RATINGS = 'tf_total_ratings';
 const TF_BASE_RATE     = 'tf_base_rate';
-const TF_NAME          = 'tourfic';
 /**
  * Steps
  * 0. Add styles to frontend
@@ -24,7 +23,25 @@ add_action('wp_enqueue_scripts', 'tf_review_add_style', 99999);
 // 1. Create the rating interface
 function tf_get_review_form()
 {
-    $fields = 'tf_tours' === get_post_type() ? tfopt('r-tour') : tfopt('r-hotel');
+
+    $default_tours_field  = [
+        ["r-field-type" => "Guide"],
+        ["r-field-type" => "Transportation"],
+        ["r-field-type" => "Value for money"],
+        ["r-field-type" => "Safety"],
+    ];
+    $default_hotels_field = [
+        ["r-field-type" => "Staff"],
+        ["r-field-type" => "Cleanness"],
+        ["r-field-type" => "Comfort"],
+        ["r-field-type" => "Value for money"]
+    ];
+    //    If user does not have new settings, default setting will be loaded
+    $tfopt_tours  = !empty(tfopt('r-tour')) ? tfopt('r-tour') : $default_tours_field;
+    $tfopt_hotels = !empty(tfopt('r-hotel')) ? tfopt('r-hotel') : $default_hotels_field;
+
+    $fields = 'tf_tours' === get_post_type() ? $tfopt_tours : $tfopt_hotels;
+
     $fields = array_map(function ($i) {
         return $i['r-field-type'];
     }, $fields);
@@ -37,19 +54,16 @@ function tf_get_review_form()
         $div_end   = '';
     }
     //Declare Vars
-    $comment_send      = __(
-        'Submit',
-        TF_NAME
-    );
-    $comment_reply     = __('Write a Review', TF_NAME);
-    $comment_reply_to  = __('Reply', TF_NAME);
-    $comment_author    = 'Name';
-    $comment_email     = 'E-Mail';
-    $comment_body      = 'Review';
-    $comment_cookies_1 = ' By commenting you accept the';
-    $comment_cookies_2 = ' Privacy Policy';
-    $comment_before    = 'Registration isn\'t required.';
-    $comment_cancel    = 'Cancel Reply';
+    $comment_send      = __('Submit', TFD);
+    $comment_reply     = __('Write a Review', TFD);
+    $comment_reply_to  = __('Reply', TFD);
+    $comment_author    = __('Name', TFD);
+    $comment_email     = __('E-Mail', TFD);
+    $comment_body      = __('Review', TFD);
+    $comment_cookies_1 = __(' By commenting you accept the', TFD);
+    $comment_cookies_2 = __(' Privacy Policy', TFD);
+    $comment_before    = __('Registration isn\'t required.', TFD);
+    $comment_cancel    = __('Cancel Reply', TFD);
     $comment_meta      = tf_generate_review_fields($fields);
     //Array
     $comments_args = [
@@ -120,7 +134,7 @@ function tf_generate_review_fields(array $fields): string
  */
 function tf_generate_stars(string $key): string
 {
-    $limit = tfopt('r-base');
+    $limit = tfopt('r-base') ?? 5;
     $html  = '';
     foreach (array_reverse(range(0, $limit, 1)) as $i) {
         $class = $i == 0 ? 'star-cb-clear' : '';
@@ -134,13 +148,15 @@ function tf_generate_stars(string $key): string
  * 2. Saving the user’s input
  *
  * @param int $comment_id
+ * @param       $comment_approved
+ * @param array $commentdata
  */
-function tf_save_rating(int $comment_id,  $comment_approved, array $commentdata)
+function tf_save_rating(int $comment_id, $comment_approved, array $commentdata)
 {
     if ((isset($_POST[TF_COMMENT_META])) && ('' !== $_POST[TF_COMMENT_META])) {
         $tf_comment_meta = $_POST[TF_COMMENT_META];
         add_comment_meta($comment_id, TF_COMMENT_META, $tf_comment_meta);
-        add_comment_meta($comment_id, TF_BASE_RATE, tfopt('r-base'));
+        add_comment_meta($comment_id, TF_BASE_RATE, tfopt('r-base') ?? 5);
     }
 }
 
@@ -151,6 +167,7 @@ add_action('comment_post', 'tf_save_rating', 10, 3);
  */
 // Enable empty comment.
 add_filter('allow_empty_comment', '__return_true');
+// Validation for rating inputs
 function tf_review_scripts()
 {
     if (is_single() && comments_open()) { ?>
@@ -184,7 +201,7 @@ function tf_review_scripts()
                 });
             });
         </script>
-    <?php
+<?php
     }
 }
 
@@ -202,7 +219,6 @@ function tf_comment_callback($comment, $args, $depth)
         $tf_comment_meta = get_comment_meta($comment->comment_ID, TF_COMMENT_META, true);
         $tf_overall_rate = tf_average_ratings(array_values($tf_comment_meta));
     }
-
     if ('div' === $args['style']) {
         $tag       = 'div';
         $add_below = 'comment';
@@ -219,7 +235,7 @@ function tf_comment_callback($comment, $args, $depth)
 /**
  * Calculate average ratings
  *
- * @param array    $ratings collection of array
+ * @param array $ratings collection of array
  *
  * @return string
  */
@@ -231,8 +247,7 @@ function tf_average_ratings(array $ratings = []): string
     // No sub collection of ratings
     if (count($ratings) == count($ratings, COUNT_RECURSIVE)) {
         $average = array_sum($ratings) / count($ratings);
-    }
-    // Has sub collection of ratings
+    } // Has sub collection of ratings
     else {
         $average = 0;
         foreach ($ratings as $rating) {
@@ -240,7 +255,6 @@ function tf_average_ratings(array $ratings = []): string
         }
         $average = $average / count($ratings);
     }
-
 
     return sprintf('%.1f', $average);
 }
@@ -269,8 +283,6 @@ function tf_average_rating_percent(int $rating = 0, int $total = 5): string
 function tf_calculate_user_ratings($comment, array &$overall_rating): void
 {
     $tf_comment_meta = get_comment_meta($comment->comment_ID, TF_COMMENT_META, true);
-
-
     if ($tf_comment_meta) {
         foreach ($tf_comment_meta as $key => $ratings) {
             if (is_array($ratings)) {
@@ -317,47 +329,19 @@ function tf_item_review_block()
     $check_in_date   = $_GET['check-in-date'] ?? "";
     $check_out_date  = $_GET['check-out-date'] ?? "";
     $tf_overall_rate = tf_calculate_comments_rating($comments);
-
     $tf_extr_html    = '';
-    ?>
-    <div class="tf_item_review_block">
-        <div class="reviewFloater reviewFloaterBadge__container">
-            <div class="sr-review-score">
-                <a class="sr-review-score__link" href="<?php
-                                                        echo get_the_permalink() . '?' . $dest_slug_param . '&adults=' . $adults . '&children=' . $children . '&room=' . $room . '&check-in-date=' . $check_in_date . '&check-out-date=' . $check_out_date; ?>" target="_blank">
-                    <div class="bui-review-score c-score bui-review-score--end">
-                        <div class="bui-review-score__badge"> <?php
-                                                                _e(tf_average_ratings(array_values($tf_overall_rate ?? []))); ?> </div>
-                        <div class="bui-review-score__content">
-                            <div class="bui-review-score__title"> <?php
-                                                                    esc_html_e('Customer Rating', TF_NAME); ?> </div>
-                            <div class="bui-review-score__text">
-                                <?php
-                                $comments_title = apply_filters(
-                                    'tf_comment_form_title',
-                                    sprintf(  // WPCS: XSS OK.
-                                        /* translators: 1: number of comments */
-                                        esc_html(_nx('Based on %1$s review', 'Based on %1$s reviews', count($comments), 'comments title', TF_NAME)),
-                                        number_format_i18n(count($comments))
-                                    )
-                                );
-                                echo esc_html($comments_title);
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-<?php }
+    ob_start();
+    include TF_TEMPLATE_PART_PATH . 'single-review-block.php';
+
+    return ob_get_clean();
+}
 
 /**
  * Calculate total ratings for a post
- * 
+ *
  * @param array $comments All comments for current post
  *
- * @return array 
+ * @return array
  */
 function tf_calculate_comments_rating(array $comments): array
 {
@@ -365,7 +349,6 @@ function tf_calculate_comments_rating(array $comments): array
     foreach ($comments as $comment) {
         tf_calculate_user_ratings($comment, $tf_overall_rate);
     }
-
 
     return $tf_overall_rate;
 }
@@ -381,18 +364,80 @@ function tf_based_on_text(int $number): void
         'tf_comment_form_title',
         sprintf( // WPCS: XSS OK.
             /* translators: 1: number of comments */
-            esc_html(_nx('Based on %1$s review', 'Based on %1$s reviews', $number, 'comments title', TF_NAME)),
+            esc_html(_nx('Based on %1$s review', 'Based on %1$s reviews', $number, 'comments title', TFD)),
             number_format_i18n($number)
         )
     );
     echo esc_html($comments_title);
 }
 
-function tf_auto_approve_comments($comment_id)
+/**
+ * Auto approve comment based on settings
+ * 
+ * @param int $comment_id
+ */
+function tf_auto_approve_comments(int $comment_id)
 {
-    $comment = array();
-    $comment['comment_ID'] = $comment_id;
-    $comment['comment_approved'] =  intval(tfopt('r-auto-publish'));
+    $comment                     = [];
+    $comment['comment_ID']       = $comment_id;
+    $comment['comment_approved'] = intval(tfopt('r-auto-publish') ?? 0);
     wp_update_comment($comment);
 }
+
 add_action('wp_insert_comment', 'tf_auto_approve_comments');
+
+/**
+ * Remove comment id from url and restore query params
+ *
+ * @return string
+ */
+function tf_redirect_user_to_previous_url(): string
+{
+    return wp_get_referer();
+}
+
+add_filter('comment_post_redirect', 'tf_redirect_user_to_previous_url');
+
+
+/**
+ * Is current logged in user has any comments ??
+ *
+ * @return bool
+ */
+function tf_user_has_comments(): bool
+{
+    if (is_user_logged_in()) {
+        global $wpdb, $current_user, $post;
+        $userId = $current_user->ID;
+        $count  = $wpdb->get_var('
+             SELECT COUNT(comment_ID) 
+             FROM ' . $wpdb->comments . ' 
+             WHERE user_id = "' . $userId . '"' . ' and comment_post_ID = "' . $post->ID . '"');
+
+        return boolval($count) ?? false;
+    }
+
+    return false;
+}
+
+/**
+ * Format rating accordion to settings
+ *
+ * @param int $rating average rating from a review
+ * @param int $base_rate comment's base rate
+ *
+ * @return string
+ */
+function tf_average_ratings_format(int $rating, int $base_rate = 5): string
+{
+    $settings_base = tfopt('r-base');
+
+    if ($settings_base != $base_rate) {
+        if ($settings_base > 5) {
+            $rating = $rating * 2;
+        } else {
+            $rating = $rating / 2;
+        }
+    }
+    return $rating . '/' . $settings_base;
+}
