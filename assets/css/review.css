@@ -1,10 +1,9 @@
 :root {
     --tf-star-filled-color: rgb(255 205 61);
-    --tf-star-border: #888;
+    --tf-star-border: #a6a6a6;
     --tf-star: "\f005";
     --tf-star-filled: "\f005";
-    --tf-star-size: 1.5em;
-    --tf-star-shadow: #333;
+    --tf-star-size: 2rem;
 }
 
 .comments-rating {
@@ -38,7 +37,7 @@
     width: var(--tf-star-size);
     white-space: nowrap;
     cursor: pointer;
-    margin: 0;
+    padding: 6px 1px;
     color: transparent;
 }
 
@@ -47,7 +46,7 @@
     text-indent: -9999px;
     content: var(--tf-star);
     color: var(--tf-star-border);
-    font-size: var(--tf-star-size);
+    font-size: 1.4rem;
 }
 
 .rating-container > input:checked ~ label:before,
@@ -55,7 +54,6 @@
 .rating-container > input + label:hover:before {
     content: var(--tf-star-filled);
     color: var(--tf-star-filled-color);
-    text-shadow: 0 0 1px var(--tf-star-shadow);
     font-weight: 900;
 }
 
@@ -71,16 +69,13 @@
 
 .rating-container:hover > input + label:before {
     content: var(--tf-star);
-    color: var(--tf-star-border);
-    text-shadow: none;
-    
+    color: var(--tf-star-border);    
 }
 
 .rating-container:hover > input + label:hover ~ label:before,
 .rating-container:hover > input + label:hover:before {
     content: var(--tf-star-filled);
     color: var(--tf-star-filled-color);
-    text-shadow: 0 0 1px var(--tf-star-shadow);
     font-weight: 900;
 }
 
@@ -91,10 +86,6 @@
 
 .comment-respond .rating-container > input + label {
     text-indent: -9999px;
-}
-
-i.dashicons.dashicons-star-filled {
-    color: var(--tf-star-filled-color);
 }
 
 @media (min-width: 1220px) {
