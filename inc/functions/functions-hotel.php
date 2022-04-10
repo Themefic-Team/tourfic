@@ -155,7 +155,7 @@ function tf_hotel_taxonomies_register() {
         'show_in_quick_edit'    => true,
         'capabilities'          => array( 
             'assign_terms' => 'edit_tf_hotel',
-            'edit_terms' => 'edit_tf_hotel',
+            'edit_terms'   => 'edit_tf_hotel',
          ),
     );
     register_taxonomy( 'hotel_location', 'tf_hotel', apply_filters( 'hotel_location_args', $hotel_location_args ) );
@@ -205,7 +205,7 @@ function tf_hotel_taxonomies_register() {
         "show_in_quick_edit"    => true,
         'capabilities'          => array( 
             'assign_terms' => 'edit_tf_hotel',
-            'edit_terms' => 'edit_tf_hotel',
+            'edit_terms'   => 'edit_tf_hotel',
          ),
     ];
     register_taxonomy( 'hotel_feature', 'tf_hotel', apply_filters( 'tf_feature_tax_args', $args ) );
@@ -271,20 +271,26 @@ function tf_room_availability_callback() {
         return;
     }
 
-    $form_post_id = isset($_POST['post_id']) ? sanitize_text_field($_POST['post_id']) : '';
-    $form_adult = isset($_POST['adult']) ? sanitize_text_field($_POST['adult']) : '';
-    $form_child = isset($_POST['child']) ? sanitize_text_field($_POST['child']) : '';
+    /**
+     * Form data
+     */
+    $form_post_id      = isset($_POST['post_id']) ? sanitize_text_field($_POST['post_id']) : '';
+    $form_adult        = isset($_POST['adult']) ? sanitize_text_field($_POST['adult']) : '';
+    $form_child        = isset($_POST['child']) ? sanitize_text_field($_POST['child']) : '';
     $form_total_person = $form_adult + $form_child;
     $form_check_in_out = isset($_POST['check_in_out']) ? sanitize_text_field($_POST['check_in_out']) : '';
     if ($form_check_in_out) {
-        $form_check_in = substr($form_check_in_out,0,10);
-        $form_check_in_stt = strtotime($form_check_in);
-        $form_check_out = substr($form_check_in_out,14,10);
+        $form_check_in      = substr($form_check_in_out,0,10);
+        $form_check_in_stt  = strtotime($form_check_in);
+        $form_check_out     = substr($form_check_in_out,14,10);
         $form_check_out_stt = strtotime($form_check_out);
     } 
 
-    $meta  = get_post_meta( $form_post_id, 'tf_hotel', true );
-    $rooms = !empty($meta['room']) ? $meta['room'] : '';
+    /**
+     * Backend data
+     */
+    $meta      = get_post_meta( $form_post_id, 'tf_hotel', true );
+    $rooms     = !empty($meta['room']) ? $meta['room'] : '';
     $locations = get_the_terms( $form_post_id, 'hotel_location' );
     if ($locations) {
         $first_location_name = $locations[0]->name;
@@ -308,22 +314,46 @@ function tf_room_availability_callback() {
             <!-- Start Single Room -->
             <?php
             if(!empty($rooms)) {
-                $room_id = -1;
+                $room_id = -1; //Start counting room id
                 foreach ($rooms as $room) {
                     
-                    $room_id++;
+                    $room_id++; //Increase room id count
 
+                    /**
+                     * Backend if room enabled
+                     */
                     $enable = !empty($room['enable']) ? $room['enable'] : '';
 
                     // Check if room is enabled
                     if ($enable == '1') {
 
-                        $footage = !empty($room['footage']) ? $room['footage'] : '';
-                        $bed = !empty($room['bed']) ? $room['bed'] : '';
+                        /**
+                         * Backend room options
+                         */
+                        $footage      = !empty($room['footage']) ? $room['footage'] : '';
+                        $bed          = !empty($room['bed']) ? $room['bed'] : '';
                         $adult_number = !empty($room['adult']) ? $room['adult'] : '0';
                         $child_number = !empty($room['child']) ? $room['child'] : '0';
-                        $total_person = $adult_number + $child_number;	
+                        $total_person = $adult_number + $child_number;
+
                         $pricing_by = !empty($room['pricing-by']) ? $room['pricing-by'] : '';
+
+                        // Check availability by date option
+                        $enable_avail_by_date = !empty($room['avil_by_date']) ? $room['avil_by_date'] : 0;
+                        if($enable_avail_by_date == 1) {
+                            $repeat_avail_by_dates = !empty($room['repeat_by_date']) ? $room['repeat_by_date'] : '';
+                            foreach($repeat_avail_by_dates as $avail_by_date) {
+                                $date_availability_from = !empty($avail_by_date['availability']['from']) ? $avail_by_date['availability']['from'] : '';
+                                $date_availability_to   = !empty($avail_by_date['availability']['to']) ? $avail_by_date['availability']['to'] : '';
+                                $d_num_room             = !empty($avail_by_date['num-room']) ? $avail_by_date['num-room'] : '';
+                                $d_pricing_by           = !empty($avail_by_date['pricing-by']) ? $avail_by_date['pricing-by'] : '';
+                                $d_price                = !empty($avail_by_date['price']) ? $avail_by_date['price'] : '';
+                                $d_adult_price          = !empty($avail_by_date['adult_price']) ? $avail_by_date['adult_price'] : '';
+                                $d_child_price          = !empty($avail_by_date['child_price']) ? $avail_by_date['child_price'] : '';
+                                var_dump($d_num_room);
+                            }
+                        }                    
+
                         $b_check_in = !empty($room['availability']['from']) ? $room['availability']['from'] : '';
                         if($b_check_in) {
                             $b_check_in_stt = strtotime($b_check_in);
@@ -336,8 +366,8 @@ function tf_room_availability_callback() {
                         // Check if date is provided and within date range
                         if(empty($b_check_in) || empty($b_check_out) || ($form_check_in_stt >= $b_check_in_stt && $form_check_out_stt <= $b_check_out_stt)) {                                         
 
-                    if ($form_total_person <= $total_person) {                                                                 
-                ?>
+                            if ($form_total_person <= $total_person) {                                                                 
+                            ?>
             <tr>
                 <td class="description">
                     <div class="tf-room-type">
