@@ -7,6 +7,10 @@
     color: #fff; 
 }
 
+/** 
+ * Meta field
+ * Common
+ */
 .csf-section .csf-field.tf-csf-disable {
     opacity: 1;
     user-select: none;
@@ -46,6 +50,15 @@
     background: #b30000;
 }
 
+/**
+ * Hotel
+ */
+ .room-repeater .unique-id {
+    display: none;
+ }
+/**
+ * General Settings
+ */
 .document-button {
     display: block;
     background: #ddd;

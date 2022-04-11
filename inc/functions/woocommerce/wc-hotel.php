@@ -38,6 +38,7 @@ function tf_hotel_booking_callback(){
     $tf_room_data = array();
     $post_id = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
     $room_id = isset( $_POST['room_id'] ) ? intval( sanitize_text_field( $_POST['room_id'] ) ) : null;
+    $unique_id = isset( $_POST['unique_id'] ) ? intval( sanitize_text_field( $_POST['unique_id'] ) ) : null;
 
     /**
      * Backend options panel data
@@ -126,6 +127,7 @@ function tf_hotel_booking_callback(){
 
         $tf_room_data['tf_hotel_data']['order_type'] = 'hotel';
         $tf_room_data['tf_hotel_data']['post_id'] = $post_id;
+        $tf_room_data['tf_hotel_data']['unique_id'] = $unique_id;
         $tf_room_data['tf_hotel_data']['post_permalink'] = get_permalink($post_id);
         $tf_room_data['tf_hotel_data']['post_author'] = $post_author;
         $tf_room_data['tf_hotel_data']['location'] = $location;
@@ -261,6 +263,7 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
     $order_type = $values['tf_hotel_data']['order_type'];
     $post_author = $values['tf_hotel_data']['post_author'];
     $post_id = !empty($values['tf_hotel_data']['post_id']) ? $values['tf_hotel_data']['post_id'] : '';
+    $unique_id = !empty($values['tf_hotel_data']['unique_id']) ? $values['tf_hotel_data']['unique_id'] : '';
     $room_name = !empty($values['tf_hotel_data']['room_name']) ? $values['tf_hotel_data']['room_name'] : '';
     $room_selected = !empty($values['tf_hotel_data']['room']) ? $values['tf_hotel_data']['room'] : '';
     $adult = !empty($values['tf_hotel_data']['adult']) ? $values['tf_hotel_data']['adult'] : '';
@@ -282,6 +285,10 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
 
     if ( $post_id ) {
         $item->update_meta_data( '_post_id', $post_id );
+    }
+
+    if ( $unique_id ) {
+        $item->update_meta_data( '_unique_id', $unique_id );
     }
 
     if ($room_name) {

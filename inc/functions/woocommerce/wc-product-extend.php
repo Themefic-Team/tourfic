@@ -67,42 +67,4 @@ function tf_add_price_field_to_post($post_id, $post) {
 add_action( 'publish_tf_hotel', 'tf_add_price_field_to_post', 10, 2 );
 add_action( 'publish_tf_tours', 'tf_add_price_field_to_post', 10, 2 );
 
-/**
- * Run Once
- * Add _price post_meta to all hotels & tours
- * 
- * Will be delete in future version
- */
-function tf_update_meta_all_hotels_tours() {
-
-    // Run once only
-    if ( get_option( 'tf_update_meta_all' ) < 1 ) {
-
-        // Update hotels meta
-        $args = array(
-            'posts_per_page'   => -1,
-            'post_type'        => 'tf_hotel',
-            'suppress_filters' => true 
-        );
-        $posts_array = get_posts( $args );
-        foreach($posts_array as $post_array) {
-            update_post_meta($post_array->ID, '_price', '0' );
-        } 
-
-        // Update tours meta
-        $args = array(
-            'posts_per_page'   => -1,
-            'post_type'        => 'tf_tours',
-            'suppress_filters' => true 
-        );
-        $posts_array = get_posts( $args );
-        foreach($posts_array as $post_array) {
-            update_post_meta($post_array->ID, '_price', '0' );
-        }
-
-        update_option( 'tf_update_meta_all', 1 );
-
-    }
-}
-add_action('wp_loaded', 'tf_update_meta_all_hotels_tours');
 ?>
