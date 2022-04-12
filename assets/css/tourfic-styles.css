@@ -70,7 +70,7 @@
   /*===============================
   =            Buttons            =
   ===============================*/
-  .tf_button, #comment-submit {
+  .tf_button {
     background: #003162;
     color: #fff;
     text-decoration: none;
@@ -452,7 +452,7 @@
     height: 100%;
     transition: width 1s ease-in-out;
   }
-  #reply-title {
+  /* #reply-title {
     position: relative;
     cursor: pointer;
     font-size: 18px;
@@ -460,18 +460,18 @@
        -moz-user-select: none;
         -ms-user-select: none;
             user-select: none;
-  }
-  #reply-title .faq-indicator {
+  } */
+  /* #reply-title .faq-indicator {
     position: relative;
-  }
-  .comment-respond {
-    /* background-color: #f6f6f6 !important; */
+  } */
+  /* .comment-respond {
+    /* background-color: #f6f6f6 !important;
     padding: 20px !important;
-    /* border: 1px solid #ddd !important; */
-  }
-  .comment-respond #commentform {
+    /* border: 1px solid #ddd !important;
+  } */
+  /* .comment-respond #commentform {
     display: none;
-  }
+  } */
   /*Informations style*/
   .tf_informations {
     overflow: hidden;
@@ -2173,7 +2173,7 @@
   .tf-tours_single_faq_inner.active .faq-head .faq-indicator .fa-plus {
     display: none;
   }
-  .tf-tours_submit_review .comment-respond {
+  /* .tf-tours_submit_review .comment-respond {
     background-color: unset !important;
     border: 0px solid #ddd !important;
     padding: 0 !important;
@@ -2256,7 +2256,7 @@
   }
   .tf-review-wrapper p.logged-in-as {
     padding-bottom: 22px;
-  }
+  } */
   .tf-tours_gallery-wrap {
     position: relative;
   }
@@ -2997,17 +2997,17 @@
     }
   }
   /* Tourfic new ratings styles */
-  .tf-single-rating-box {
+  /* .tf-single-rating-box {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      /* width: 55%; */
+      /* width: 55%;
   }
   .tf-ratings-wrapper {
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
       margin: 10px;
-  }
+  } */

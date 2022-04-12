@@ -20,31 +20,42 @@ function tf_review_add_style()
 }
 
 add_action('wp_enqueue_scripts', 'tf_review_add_style', 99999);
-// 1. Create the rating interface
-function tf_get_review_form()
-{
 
-    $default_tours_field  = [
+/**
+ * Review submit form
+ * 
+ * Popup
+ */
+function tf_get_review_form() {
+
+    /**
+     * Default fields until user save from option panel
+     */
+    $default_hotels_field  = [
+        ["r-field-type" => "Staff"],
+        ["r-field-type" => "Facilities"],
+        ["r-field-type" => "Cleanliness"],
+        ["r-field-type" => "Comfort"],
+        ["r-field-type" => "Value for money"],
+        ["r-field-type" => "Location"],
+    ];
+    $default_tours_field = [
         ["r-field-type" => "Guide"],
         ["r-field-type" => "Transportation"],
         ["r-field-type" => "Value for money"],
-        ["r-field-type" => "Safety"],
+        ["r-field-type" => "Safety"]
     ];
-    $default_hotels_field = [
-        ["r-field-type" => "Staff"],
-        ["r-field-type" => "Cleanness"],
-        ["r-field-type" => "Comfort"],
-        ["r-field-type" => "Value for money"]
-    ];
-    //    If user does not have new settings, default setting will be loaded
-    $tfopt_tours  = !empty(tfopt('r-tour')) ? tfopt('r-tour') : $default_tours_field;
+
+    // If user does not have fields from settings, default fields will be loaded
     $tfopt_hotels = !empty(tfopt('r-hotel')) ? tfopt('r-hotel') : $default_hotels_field;
+    $tfopt_tours  = !empty(tfopt('r-tour')) ? tfopt('r-tour') : $default_tours_field;
 
     $fields = 'tf_tours' === get_post_type() ? $tfopt_tours : $tfopt_hotels;
 
     $fields = array_map(function ($i) {
         return $i['r-field-type'];
     }, $fields);
+    
     //tours and hotel comment conditional markup
     if ('tf_tours' === get_post_type()) {
         $div_start = "<div class='comment_form_fields'>";
@@ -57,22 +68,24 @@ function tf_get_review_form()
     $comment_send      = __('Submit', TFD);
     $comment_reply     = __('Write a Review', TFD);
     $comment_reply_to  = __('Reply', TFD);
-    $comment_author    = __('Name', TFD);
-    $comment_email     = __('E-Mail', TFD);
-    $comment_body      = __('Review', TFD);
+    $comment_author    = __('Your Name', TFD);
+    $comment_email     = __('Email Address', TFD);
+    $comment_body      = __('Review Description', TFD);
     $comment_cookies_1 = __(' By commenting you accept the', TFD);
     $comment_cookies_2 = __(' Privacy Policy', TFD);
-    $comment_before    = __('Registration isn\'t required.', TFD);
+    $comment_before    = __('', TFD);
     $comment_cancel    = __('Cancel Reply', TFD);
     $comment_meta      = tf_generate_review_fields($fields);
     //Array
     $comments_args = [
         //Define Fields
         'fields'               => [
-            'author'  => '<div class="author-email"><p class="comment-form-author"><input type="text" id="author" name="author" aria-required="true" placeholder="' . $comment_author . '"/></p>',
-            'email'   => '<p class="comment-form-email"><input type="email" id="email" name="email" placeholder="' . $comment_email . '"/></p></div>',
-            'cookies' => $div_end,
+            'author'  => '<div class="tf-visitor-info"><div><input type="text" id="author" name="author" aria-required="true" placeholder="' . $comment_author . '"/></div>',
+            'email'   => '<div><input type="email" id="email" name="email" placeholder="' . $comment_email . '"/></div></div>',
+            'cookies' => '',
         ],
+        'class_container' => 'tf-review-form-container',
+        'class_form' => 'tf-review-form',
         // Change the title of send button
         'label_submit'         => $comment_send,
         // Change the title of the reply section
@@ -86,7 +99,7 @@ function tf_get_review_form()
         //Cancel Reply Text
         'cancel_reply_link'    => $comment_cancel,
         // Redefine your own textarea (the comment body).
-        'comment_field'        => "{$comment_meta}{$div_start}<p class=\"comment-form-comment\"><textarea id=\"comment\" name=\"comment\" aria-required=\"true\" placeholder=\"{$comment_body}\"></textarea></p>",
+        'comment_field'        => "{$comment_meta}<div class=\"review-desc\"><textarea id=\"comment\" name=\"comment\" aria-required=\"true\" placeholder=\"{$comment_body}\"></textarea></div>",
         //Message Before Comment
         'comment_notes_before' => $comment_before,
         // Remove "Text or HTML to be displayed after the set of comment fields".
@@ -96,7 +109,8 @@ function tf_get_review_form()
         // The comment submit element class attribute. Default 'submit'.
         // 'class_submit' => 'tf_button',
         //Submit Button html
-        'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" class="tf_button" value="%4$s" />',
+        'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" value="%4$s" />',
+        'submit_field' => '<div class="tf-review-submit">%1$s %2$s</div>',
     ];
     comment_form($comments_args);
 }
@@ -110,14 +124,14 @@ function tf_get_review_form()
  */
 function tf_generate_review_fields(array $fields): string
 {
-    $html = '<div class="tf-ratings-wrapper">';
+    $html = '<div class="tf-rating-wrapper">';
     foreach ($fields as $field) {
         if (empty($field)) {
             continue;
         }
-        $html .= '<div class="tf-single-rating-box">';
+        $html .= '<div class="tf-single-rating">';
         $html .= sprintf('<label for="rating">%s</label>', $field);
-        $html .= sprintf('<fieldset class="comments-rating"> <div class="rating-container">%s </div> </fieldset>', tf_generate_stars($field));
+        $html .= sprintf('<div class="ratings-container">%s </div>', tf_generate_stars($field));
         $html .= '</div>';
     }
     $html .= '</div>';
@@ -190,10 +204,10 @@ function tf_review_scripts()
                     messages: {
                         'tf_comment_meta[]': "Please provide a ratings",
                     },
-                    errorElement: "div",
+                    errorElement: "span",
                     errorPlacement: function(error, element) {
                         if (element.is(":radio")) {
-                            error.appendTo(element.parents('.comments-rating'));
+                            error.appendTo(element.parents('.tf-single-rating'));
                         } else { // This is the default behavior
                             error.insertAfter(element);
                         }

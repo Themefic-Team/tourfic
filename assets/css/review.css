@@ -1,97 +1,160 @@
 :root {
-    --tf-star-filled-color: rgb(255 205 61);
-    --tf-star-border: #a6a6a6;
+    --tf-star-filled-color: #FFC314;
+    --tf-star-border: #E1E1E3;
     --tf-star: "\f005";
-    --tf-star-filled: "\f005";
-    --tf-star-size: 2rem;
+    --tf-star-size: 22px;
 }
 
-.comments-rating {
-    border: none;
-    padding: 0;
-    margin-left: 0;
-}
 
-.comments-rating label {
-    display: inline-block;
-}
 
-.rating-container {
+
+
+
+.tf-review-form-container {
+    min-width: 600px;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #fff !important;
+}
+.tf-review-form-container .tf-rating-wrapper{
+    display: grid;
+    grid-template-columns: calc(50% - 20px) calc(50% - 20px);
+    column-gap: 40px;
+    row-gap: 15px;
+    margin: 0 0 80px 0;
+}
+.tf-review-form-container .tf-rating-wrapper .tf-single-rating {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    align-items: center;
+}
+.tf-review-form-container .tf-single-rating .error{
+    color: red;
+}
+.tf-review-form-container .tf-rating-wrapper .tf-single-rating label{
+    color: #333;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1;
+}
+.tf-review-form-container .tf-single-rating .ratings-container {
+    line-height: 1;
     unicode-bidi: bidi-override;
     direction: rtl;
 }
-
-.rating-container * {
-    font-size: 1.4rem;
+.tf-review-form-container .tf-single-rating .ratings-container label{
+    padding: 0;
+    margin: 0;
+    height: auto;
+    line-height: 1;
+    color: transparent;
 }
-
-.rating-container > input {
+.tf-review-form-container .tf-single-rating .ratings-container > input {
     display: none;
 }
-
-.rating-container > input + label {
+.tf-review-form-container .ratings-container > input + label {
+    text-indent: -9999px;
     font-family: "Font Awesome 5 Free";
     display: inline-block;
     overflow: hidden;
-    text-indent: 9999px;
     width: var(--tf-star-size);
     white-space: nowrap;
     cursor: pointer;
-    padding: 6px 1px;
     color: transparent;
 }
-
-.rating-container > input + label:before {
+.tf-review-form-container .ratings-container > .star-cb-clear + label,
+.tf-review-form-container .ratings-container > input + label:before {
+    text-indent: 9999px;
+}
+.tf-review-form-container .ratings-container > input + label:before {
     display: inline-block;
-    text-indent: -9999px;
     content: var(--tf-star);
     color: var(--tf-star-border);
-    font-size: 1.4rem;
+    font-size: 18px;
 }
-
-.rating-container > input:checked ~ label:before,
-.rating-container > input + label:hover ~ label:before,
-.rating-container > input + label:hover:before {
-    content: var(--tf-star-filled);
+.tf-review-form-container .ratings-container > input:checked ~ label:before,
+.tf-review-form-container .ratings-container > input + label:hover ~ label:before,
+.tf-review-form-container .ratings-container > input + label:hover:before {
+    content: var(--tf-star);
     color: var(--tf-star-filled-color);
     font-weight: 900;
 }
 
-.rating-container > .star-cb-clear + label {
+.tf-review-form-container .ratings-container > .star-cb-clear + label {
     text-indent: -9999px;
     width: 0.5em;
     margin-left: -0.5em;
 }
 
-.rating-container > .star-cb-clear + label:before {
+.tf-review-form-container .ratings-container > .star-cb-clear + label:before {
     width: 0.5em;
 }
 
-.rating-container:hover > input + label:before {
+.tf-review-form-container .ratings-container:hover > input + label:before {
     content: var(--tf-star);
     color: var(--tf-star-border);    
 }
 
-.rating-container:hover > input + label:hover ~ label:before,
-.rating-container:hover > input + label:hover:before {
-    content: var(--tf-star-filled);
+.tf-review-form-container .ratings-container:hover > input + label:hover ~ label:before,
+.tf-review-form-container .ratings-container:hover > input + label:hover:before {
+    content: var(--tf-star);
     color: var(--tf-star-filled-color);
     font-weight: 900;
 }
-
-.comment-respond .rating-container > .star-cb-clear + label,
-.comment-respond .rating-container > input + label:before {
-    text-indent: 9999px;
+.tf-review-form-container .review-desc{
+    
 }
-
-.comment-respond .rating-container > input + label {
-    text-indent: -9999px;
+.tf-review-form-container .review-desc textarea{
+    background: #F7F7FA;
+    border: 1px solid #EDEDF0;
+    border-radius: 8px;
+    padding: 16px 8px 16px 16px;
+    height: 160px;
+    outline: none;
+    color: #333;
+    box-shadow: none;
 }
-
-@media (min-width: 1220px) {
-    .comment-respond p.comment-notes,
-    .comment-respond p.logged-in-as {
-        margin: 17px 0;
-    }
+.tf-review-form-container .tf-visitor-info{
+    display: grid;
+    grid-template-columns: calc(50% - 20px) calc(50% - 20px);
+    column-gap: 40px;
+    margin: 40px 0 40px 0;
 }
-  
+.tf-review-form-container .tf-visitor-info input{
+    background: #F7F7FA;
+    border: 1px solid #EDEDF0;
+    box-sizing: border-box;
+    border-radius: 8px;
+    height: 56px;
+    padding: 16px 8px 16px 16px;
+    outline: none;
+    color: #333;
+    box-shadow: none;
+    width: 100%;
+}
+.tf-review-form-container .tf-review-submit{
+    
+}
+.tf-review-form-container .tf-review-submit input[type="submit"]{
+    background: #2979FF;
+    border-radius: 4px;
+    height: 56px;
+    padding: 16px 32px;
+    width: 100%;
+    color: #fff;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1;
+}
+.tf-review-form-container {
+    
+}
+.tf-review-form-container {
+    
+}
+.tf-review-form-container {
+    
+} 
