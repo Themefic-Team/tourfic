@@ -261,6 +261,7 @@ if ( !function_exists( 'get_hotel_locations' ) ) {
 /**
  * Ajax hotel room availability
  * 
+ * @author fida
  */
 add_action( 'wp_ajax_tf_room_availability', 'tf_room_availability_callback' );
 add_action( 'wp_ajax_nopriv_tf_room_availability', 'tf_room_availability_callback' );
@@ -271,6 +272,9 @@ function tf_room_availability_callback() {
         return;
     }
 
+    /**
+     * Form data
+     */
     $form_post_id = isset($_POST['post_id']) ? sanitize_text_field($_POST['post_id']) : '';
     $form_adult = isset($_POST['adult']) ? sanitize_text_field($_POST['adult']) : '';
     $form_child = isset($_POST['child']) ? sanitize_text_field($_POST['child']) : '';
@@ -283,6 +287,9 @@ function tf_room_availability_callback() {
         $form_check_out_stt = strtotime($form_check_out);
     } 
 
+    /**
+     * Backend data
+     */
     $meta  = get_post_meta( $form_post_id, 'tf_hotel', true );
     $rooms = !empty($meta['room']) ? $meta['room'] : '';
     $locations = get_the_terms( $form_post_id, 'hotel_location' );
@@ -291,199 +298,232 @@ function tf_room_availability_callback() {
     }
     ?>
 
-<div class="listing-title">
-    <h4><?php esc_html_e( 'Availability', 'tourfic' ); ?></h4>
-</div>
-<div class="tf_room-table hotel-room-wrap">
-    <table class="availability-table">
-        <thead>
-            <tr>
-                <th class="description"><?php _e( 'Room Details', 'tourfic' ); ?></th>
-                <th class="pax"><?php _e( 'Pax', 'tourfic' ); ?></th>
-                <th class="pricing"><?php _e( 'Price', 'tourfic' ); ?></th>
-                <th class="reserve"><?php _e( 'Select Rooms', 'tourfic' ); ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Start Single Room -->
-            <?php
-            if(!empty($rooms)) {
-                $room_id = -1;
-                foreach ($rooms as $room) {
-                    
-                    $room_id++;
+    <div class="listing-title">
+        <h4><?php esc_html_e( 'Availability', 'tourfic' ); ?></h4>
+    </div>
+    <div class="tf_room-table hotel-room-wrap">
+        <table class="availability-table">
+            <thead>
+                <tr>
+                    <th class="description"><?php _e( 'Room Details', 'tourfic' ); ?></th>
+                    <th class="pax"><?php _e( 'Pax', 'tourfic' ); ?></th>
+                    <th class="pricing"><?php _e( 'Price', 'tourfic' ); ?></th>
+                    <th class="reserve"><?php _e( 'Select Rooms', 'tourfic' ); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Start Single Room -->
+                <?php
+                if(!empty($rooms)) {
 
-                    $enable = !empty($room['enable']) ? $room['enable'] : '';
+                    $room_id = -1;
 
-                    // Check if room is enabled
-                    if ($enable == '1') {
-
-                        $unique_id = !empty($room['unique_id']) ? $room['unique_id'] : '';
-                        $footage = !empty($room['footage']) ? $room['footage'] : '';
-                        $bed = !empty($room['bed']) ? $room['bed'] : '';
-                        $adult_number = !empty($room['adult']) ? $room['adult'] : '0';
-                        $child_number = !empty($room['child']) ? $room['child'] : '0';
-                        $total_person = $adult_number + $child_number;	
-                        $pricing_by = !empty($room['pricing-by']) ? $room['pricing-by'] : '';
-                        $b_check_in = !empty($room['availability']['from']) ? $room['availability']['from'] : '';
-                        if($b_check_in) {
-                            $b_check_in_stt = strtotime($b_check_in);
-                        }
-                        $b_check_out = !empty($room['availability']['to']) ? $room['availability']['to'] : '';
-                        if($b_check_out) {
-                            $b_check_out_stt = strtotime($b_check_out);
-                        }
+                    foreach ($rooms as $room) {
                         
-                        // Check if date is provided and within date range
-                        if(empty($b_check_in) || empty($b_check_out) || ($form_check_in_stt >= $b_check_in_stt && $form_check_out_stt <= $b_check_out_stt)) {                                         
+                        $room_id++;
 
-                    if ($form_total_person <= $total_person) {                                                                 
-                ?>
-            <tr>
-                <td class="description">
-                    <div class="tf-room-type">
-                        <div class="tf-room-title"><?php echo esc_html( $room['title'] ); ?></div>
-                        <div class="bed-facilities"><?php echo $room['description']; ?></div>
-                    </div>
+                        $enable = !empty($room['enable']) ? $room['enable'] : '';
 
-                                        <div class="tf-room-title">
-                                            <?php esc_html_e( 'Key Features', 'tourfic' ); ?>
-                                        </div>
+                        // Check if room is enabled
+                        if ($enable == '1') {
 
-                                        <?php if ($footage) { ?>
-                                        <div class="tf-tooltip tf-d-ib">
-                                            <div class="room-detail-icon">
-                                                <span class="room-icon-wrap"><i class="fas fa-ruler-combined"></i></span>
-                                                <span class="icon-text tf-d-b"><?php echo $footage; ?> sft</span>
+                            /**
+                             * Set room availability
+                             */
+                            $unique_id = !empty($room['unique_id']) ? $room['unique_id'] : ''; // Unique id of rooms
+                            $order_ids = !empty($room['order_id']) ? $room['order_id'] : '';
+                            $num_room_available = !empty($room['num-room']) ? $room['num-room'] : '1'; // Number of room
+                            $number_orders = '0';
+
+                            if(!empty($order_ids)) {
+
+                                foreach($order_ids as $order_id) {
+
+                                    $order = wc_get_order( $order_id ); // Get $order object from order ID
+    
+                                    if ( $order && $order->get_status() == 'completed') {
+    
+                                        // Get and Loop Over Order Items
+                                        foreach ( $order->get_items() as $item_id => $item ) {
+    
+                                            $ordered_room_number = $item->get_meta( 'number_room_booked', true );
+                                            $number_orders = $number_orders + $ordered_room_number;
+    
+                                        }
+    
+                                    }
+    
+                                }
+
+                                $num_room_available = $num_room_available - $number_orders; // Calculate
+
+                            }                           
+
+                            $footage = !empty($room['footage']) ? $room['footage'] : '';
+                            $bed = !empty($room['bed']) ? $room['bed'] : '';
+                            $adult_number = !empty($room['adult']) ? $room['adult'] : '0';
+                            $child_number = !empty($room['child']) ? $room['child'] : '0';
+                            $total_person = $adult_number + $child_number;	
+                            $pricing_by = !empty($room['pricing-by']) ? $room['pricing-by'] : '';
+                            $b_check_in = !empty($room['availability']['from']) ? $room['availability']['from'] : '';
+                            if($b_check_in) {
+                                $b_check_in_stt = strtotime($b_check_in);
+                            }
+                            $b_check_out = !empty($room['availability']['to']) ? $room['availability']['to'] : '';
+                            if($b_check_out) {
+                                $b_check_out_stt = strtotime($b_check_out);
+                            }
+                            
+                            // Check if date is provided and within date range
+                            if(empty($b_check_in) || empty($b_check_out) || ($form_check_in_stt >= $b_check_in_stt && $form_check_out_stt <= $b_check_out_stt)) {                                         
+
+                                if ($form_total_person <= $total_person) {                                                                 
+                                ?>
+                                    <tr>
+                                        <td class="description">
+                                            <div class="tf-room-type">
+                                                <div class="tf-room-title"><?php echo esc_html( $room['title'] ); ?></div>
+                                                <div class="bed-facilities"><?php echo $room['description']; ?></div>
                                             </div>
-                                            <div class="tf-top">
-                                                <?php _e( 'Room Footage', 'tourfic' ); ?>
-                                                <i class="tool-i"></i>
-                                            </div>
-                                        </div>
-                                        <?php }
-                                            if ($bed) { ?>
-                                        <div class="tf-tooltip tf-d-ib">
-                                            <div class="room-detail-icon">
-                                                <span class="room-icon-wrap"><i class="fas fa-bed"></i></span>
-                                                <span class="icon-text tf-d-b">x<?php echo $bed; ?></span>
-                                            </div>
-                                            <div class="tf-top">
-                                                <?php _e( 'No. Beds', 'tourfic' ); ?>
-                                                <i class="tool-i"></i>
-                                            </div>
-                                        </div>
-                                        <?php } ?>
 
-                                        <div class="room-features">
-                                            <div class="tf-room-title"><?php esc_html_e( 'Amenities', 'tourfic' ); ?></div>
-                                            <ul class="room-feature-list">
-
-                                                <?php foreach ($room['features'] as $feature) {
-
-                                                        $room_f_meta = get_term_meta( $feature, 'hotel_feature', true );
-
-                                                        if ($room_f_meta['icon-type'] == 'fa') {
-                                                            $room_feature_icon = '<i class="' .$room_f_meta['icon-fa']. '"></i>';
-                                                        } elseif ($room_f_meta['icon-type'] == 'c') {
-                                                            $room_feature_icon = '<img src="' .$room_f_meta['icon-c']["url"]. '" style="min-width: ' .$room_f_meta['dimention']["width"]. 'px; height: ' .$room_f_meta['dimention']["width"]. 'px;" />';
-                                                        }
-
-                                                        $room_term = get_term( $feature ); ?>
-                                                <li class="tf-tooltip">
-                                                    <?php echo $room_feature_icon; ?>
-                                                    <div class="tf-top">
-                                                        <?php echo $room_term->name; ?>
-                                                        <i class="tool-i"></i>
-                                                    </div>
-                                                </li>
-                                                <?php } ?>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                    <td class="pax">
-
-                                        <?php if ($adult_number) { ?>
-                                        <div class="tf-tooltip tf-d-b">
-                                            <div class="room-detail-icon">
-                                                <span class="room-icon-wrap"><i class="fas fa-male"></i><i class="fas fa-female"></i></span>
-                                                <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
+                                            <div class="tf-room-title">
+                                                <?php esc_html_e( 'Key Features', 'tourfic' ); ?>
                                             </div>
-                                            <div class="tf-top">
-                                                <?php _e( 'No. Adults', 'tourfic' ); ?>
-                                                <i class="tool-i"></i>
+
+                                            <?php if ($footage) { ?>
+                                            <div class="tf-tooltip tf-d-ib">
+                                                <div class="room-detail-icon">
+                                                    <span class="room-icon-wrap"><i class="fas fa-ruler-combined"></i></span>
+                                                    <span class="icon-text tf-d-b"><?php echo $footage; ?> sft</span>
+                                                </div>
+                                                <div class="tf-top">
+                                                    <?php _e( 'Room Footage', 'tourfic' ); ?>
+                                                    <i class="tool-i"></i>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <?php }
-                                            if ($child_number) { ?>
-                                        <div class="tf-tooltip tf-d-b">
-                                            <div class="room-detail-icon">
-                                                <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
-                                                <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
+                                            <?php }
+                                                if ($bed) { ?>
+                                            <div class="tf-tooltip tf-d-ib">
+                                                <div class="room-detail-icon">
+                                                    <span class="room-icon-wrap"><i class="fas fa-bed"></i></span>
+                                                    <span class="icon-text tf-d-b">x<?php echo $bed; ?></span>
+                                                </div>
+                                                <div class="tf-top">
+                                                    <?php _e( 'No. Beds', 'tourfic' ); ?>
+                                                    <i class="tool-i"></i>
+                                                </div>
                                             </div>
-                                            <div class="tf-top">
-                                                <?php _e( 'No. Children', 'tourfic' ); ?>
-                                                <i class="tool-i"></i>
-                                            </div>
-                                        </div>
-                                        <?php } ?>
-                                    </td>
-                                    <td class="pricing">
-                                        <div class="tf-price-column">
-                                            <?php if ($pricing_by == '1') { ?>
-                                            <span class="tf-price"><?php echo wc_price( $room['price'] ); ?></span>
-                                            <div class="price-per-night"><?php esc_html_e( 'per night', 'tourfic' ); ?></div>
-                                            <?php } elseif ($pricing_by == '2') { ?>
-                                            <span class="tf-price"><?php echo wc_price( $room['adult_price'] ); ?></span>
-                                            <div class="price-per-night"><?php esc_html_e( 'per person/night', 'tourfic' ); ?></div>
                                             <?php } ?>
-                                        </div>
-                                    </td>
-                                    <td class="reserve">
-                                        <form class="tf-room">
-                                            <?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' ); ?>
-                                            <div class="room-selection-wrap">
-                                                <select name="hotel_room_selected" id="hotel-room-selected">
-                                                    <?php
-                                                    foreach (range(1,8) as $value) {
-                                                        echo '<option>' . $value . '</option>';
-                                                    }
-                                                    ?>
-                                                </select>
+
+                                            <div class="room-features">
+                                                <div class="tf-room-title"><?php esc_html_e( 'Amenities', 'tourfic' ); ?></div>
+                                                <ul class="room-feature-list">
+
+                                                    <?php foreach ($room['features'] as $feature) {
+
+                                                            $room_f_meta = get_term_meta( $feature, 'hotel_feature', true );
+
+                                                            if ($room_f_meta['icon-type'] == 'fa') {
+                                                                $room_feature_icon = '<i class="' .$room_f_meta['icon-fa']. '"></i>';
+                                                            } elseif ($room_f_meta['icon-type'] == 'c') {
+                                                                $room_feature_icon = '<img src="' .$room_f_meta['icon-c']["url"]. '" style="min-width: ' .$room_f_meta['dimention']["width"]. 'px; height: ' .$room_f_meta['dimention']["width"]. 'px;" />';
+                                                            }
+
+                                                            $room_term = get_term( $feature ); ?>
+                                                    <li class="tf-tooltip">
+                                                        <?php echo $room_feature_icon; ?>
+                                                        <div class="tf-top">
+                                                            <?php echo $room_term->name; ?>
+                                                            <i class="tool-i"></i>
+                                                        </div>
+                                                    </li>
+                                                    <?php } ?>
+                                                </ul>
                                             </div>
-                                            <div class="room-submit-wrap">
-                                                <input type="hidden" name="post_id" value="<?php echo $form_post_id; ?>">
-                                                <input type="hidden" name="room_id" value="<?php echo $room_id; ?>">
-                                                <input type="hidden" name="unique_id" value="<?php echo $unique_id; ?>">
-                                                <input type="hidden" name="location" value="<?php echo $first_location_name; ?>">
-                                                <input type="hidden" name="adult" value="<?php echo $form_adult; ?>">
-                                                <input type="hidden" name="child" value="<?php echo $form_child; ?>">
-                                                <input type="hidden" name="check_in_date" value="<?php echo $form_check_in; ?>">
-                                                <input type="hidden" name="check_out_date" value="<?php echo $form_check_out; ?>">
-                                                <button class="hotel-room-book" type="submit"><?php _e('I\'ll reserve', 'tourfic'); ?></button>
+                                        </td>
+                                        <td class="pax">
+
+                                            <?php if ($adult_number) { ?>
+                                            <div class="tf-tooltip tf-d-b">
+                                                <div class="room-detail-icon">
+                                                    <span class="room-icon-wrap"><i class="fas fa-male"></i><i class="fas fa-female"></i></span>
+                                                    <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
+                                                </div>
+                                                <div class="tf-top">
+                                                    <?php _e( 'No. Adults', 'tourfic' ); ?>
+                                                    <i class="tool-i"></i>
+                                                </div>
                                             </div>
-                                            <div class="tf_desc"></div>
-                                        </form>
-                                    </td>
-                                </tr>
-                            <?php
+                                            <?php }
+                                                if ($child_number) { ?>
+                                            <div class="tf-tooltip tf-d-b">
+                                                <div class="room-detail-icon">
+                                                    <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
+                                                    <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
+                                                </div>
+                                                <div class="tf-top">
+                                                    <?php _e( 'No. Children', 'tourfic' ); ?>
+                                                    <i class="tool-i"></i>
+                                                </div>
+                                            </div>
+                                            <?php } ?>
+                                        </td>
+                                        <td class="pricing">
+                                            <div class="tf-price-column">
+                                                <?php if ($pricing_by == '1') { ?>
+                                                <span class="tf-price"><?php echo wc_price( $room['price'] ); ?></span>
+                                                <div class="price-per-night"><?php esc_html_e( 'per night', 'tourfic' ); ?></div>
+                                                <?php } elseif ($pricing_by == '2') { ?>
+                                                <span class="tf-price"><?php echo wc_price( $room['adult_price'] ); ?></span>
+                                                <div class="price-per-night"><?php esc_html_e( 'per person/night', 'tourfic' ); ?></div>
+                                                <?php } ?>
+                                            </div>
+                                        </td>
+                                        <td class="reserve">
+                                            <form class="tf-room">
+                                                <?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' ); ?>
+                                                <div class="room-selection-wrap">
+                                                    <select name="hotel_room_selected" id="hotel-room-selected">
+                                                        <?php
+                                                        foreach (range(1,$num_room_available) as $value) {
+                                                            echo '<option>' . $value . '</option>';
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                                <div class="room-submit-wrap">
+                                                    <input type="hidden" name="post_id" value="<?php echo $form_post_id; ?>">
+                                                    <input type="hidden" name="room_id" value="<?php echo $room_id; ?>">
+                                                    <input type="hidden" name="unique_id" value="<?php echo $unique_id; ?>">
+                                                    <input type="hidden" name="location" value="<?php echo $first_location_name; ?>">
+                                                    <input type="hidden" name="adult" value="<?php echo $form_adult; ?>">
+                                                    <input type="hidden" name="child" value="<?php echo $form_child; ?>">
+                                                    <input type="hidden" name="check_in_date" value="<?php echo $form_check_in; ?>">
+                                                    <input type="hidden" name="check_out_date" value="<?php echo $form_check_out; ?>">
+                                                    <button class="hotel-room-book" type="submit"><?php _e('I\'ll reserve', 'tourfic'); ?></button>
+                                                </div>
+                                                <div class="tf_desc"></div>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php
+                                } else {
+                                    echo '<tr><td colspan="4" style="text-align:center;font-weight:bold;">' .__("No Room Available! Total person number exceeds!", "tourfic"). '</td></tr>';
+                                }
                             } else {
-                                echo '<tr><td colspan="4" style="text-align:center;font-weight:bold;">' .__("No Room Available! Total person number exceeds!", "tourfic"). '</td></tr>';
+                                echo '<tr><td colspan="4" style="text-align:center;font-weight:bold;">' .__("No Room Available within this Date Range!", "tourfic"). '</td></tr>';
                             }
                         } else {
-                            echo '<tr><td colspan="4" style="text-align:center;font-weight:bold;">' .__("No Room Available within this Date Range!", "tourfic"). '</td></tr>';
+                            echo '<tr><td colspan="4" style="text-align:center;font-weight:bold;">' .__("No Room Available!", "tourfic"). '</td></tr>';
                         }
-                    } else {
-                        echo '<tr><td colspan="4" style="text-align:center;font-weight:bold;">' .__("No Room Available!", "tourfic"). '</td></tr>';
                     }
+                } else {
+                    echo '<tr><td colspan="4" style="text-align:center;font-weight:bold;">' .__("No Room Available!", "tourfic"). '</td></tr>';
                 }
-            } else {
-                echo '<tr><td colspan="4" style="text-align:center;font-weight:bold;">' .__("No Room Available!", "tourfic"). '</td></tr>';
-            }
-            ?>
-        </tbody>
-    </table>
-</div>
+                ?>
+            </tbody>
+        </table>
+    </div>
 
 <?php
     wp_die();

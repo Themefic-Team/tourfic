@@ -278,6 +278,8 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                                 <!-- Start Single Room -->
                                 <?php foreach ($rooms as $room) {
 
+                                    var_dump($room['order_id']);
+
 								$enable = !empty($room['enable']) ? $room['enable'] : '';
 
 								if ($enable == '1') {

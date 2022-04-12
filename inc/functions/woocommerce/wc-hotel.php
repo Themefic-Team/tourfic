@@ -323,4 +323,54 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
 
 }
 add_action( 'woocommerce_checkout_create_order_line_item', 'tf_hotel_custom_order_data', 10, 4 );
+
+/**
+ * Add order id to the hotel room meta field
+ * 
+ * runs during WooCommerce checkout process
+ * 
+ * @author fida
+ */
+function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data, $order ) {
+
+    // Get and Loop Over Order Line Items
+    foreach ( $order->get_items() as $item_id => $item ) {
+
+        $post_id = $item->get_meta( '_post_id', true ); // Hotel id
+        $unique_id = $item->get_meta( '_unique_id', true ); // Unique id of rooms
+        $meta = get_post_meta( $post_id, 'tf_hotel', true ); // Hotel meta
+        $rooms = !empty($meta['room']) ? $meta['room'] : ''; 
+        $new_rooms = []; 
+
+        // Get and Loop Over Room Meta
+        foreach($rooms as $room) {
+            
+            // Check if order is for this room
+            if($room['unique_id'] == $unique_id){
+
+                $old_order_id = $room['order_id'];
+
+                // If is array push data else create an array
+                if(is_array($old_order_id)) {
+                    $old_order_id[] = $order_id;
+                } else {
+                    $old_order_id = array($order_id);
+                }
+
+                // set old + new data to the oder_id meta
+                $room['order_id']  = array_unique($old_order_id);
+            }
+
+            // Set whole room array
+            $new_rooms[] = $room; 
+        }
+
+        // Set whole room array to the room meta
+        $meta['room'] = $new_rooms;
+        // Update hotel post meta with array values
+        update_post_meta($post_id, 'tf_hotel', $meta );
+
+    }
+}
+add_action('woocommerce_checkout_order_processed', 'tf_add_order_id_room_checkout_order_processed', 10, 3);
 ?>
