@@ -205,6 +205,16 @@ if( class_exists( 'CSF' ) ) {
           'fields' => array(
                   
             array(
+              'id'         => 'unique_id',
+              'class'      => 'unique-id',
+              'type'       => 'text',
+              'title'      => __('Unique ID', 'tourfic' ),
+              'attributes' => array(
+                'readonly' => 'readonly',
+              ),
+            ),
+            
+            array(
               'id'         => 'enable',
               'type'       => 'switcher',
               'title'      => __('Status', 'tourfic' ),
