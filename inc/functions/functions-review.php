@@ -1,4 +1,7 @@
 <?php
+// don't load directly
+defined('ABSPATH') || exit;
+
 const TF_COMMENT_META  = 'tf_comment_meta';
 const TF_TOTAL_RATINGS = 'tf_total_ratings';
 const TF_BASE_RATE     = 'tf_base_rate';
@@ -15,10 +18,8 @@ const TF_BASE_RATE     = 'tf_base_rate';
 // 0. Add styles to frontend
 function tf_review_add_style()
 {
-    wp_enqueue_style('dashicons');
-    wp_enqueue_style('tourfic-review-styles', TF_ASSETS_URL . 'css/review.css', null, '');
+    wp_enqueue_style('tf-review', TF_ASSETS_URL . 'css/review.css', null, '');
 }
-
 add_action('wp_enqueue_scripts', 'tf_review_add_style', 99999);
 
 /**
@@ -26,136 +27,134 @@ add_action('wp_enqueue_scripts', 'tf_review_add_style', 99999);
  * 
  * Popup
  */
-function tf_get_review_form() {
+if(!function_exists('tf_review_form')) {
+    function tf_review_form() {
 
-    /**
-     * Default fields until user save from option panel
-     */
-    $default_hotels_field  = [
-        ["r-field-type" => "Staff"],
-        ["r-field-type" => "Facilities"],
-        ["r-field-type" => "Cleanliness"],
-        ["r-field-type" => "Comfort"],
-        ["r-field-type" => "Value for money"],
-        ["r-field-type" => "Location"],
-    ];
-    $default_tours_field = [
-        ["r-field-type" => "Guide"],
-        ["r-field-type" => "Transportation"],
-        ["r-field-type" => "Value for money"],
-        ["r-field-type" => "Safety"]
-    ];
+        /**
+         * Default fields until user save from option panel
+         */
+        $default_hotels_field  = [
+            ["r-field-type" => "Staff"],
+            ["r-field-type" => "Facilities"],
+            ["r-field-type" => "Cleanliness"],
+            ["r-field-type" => "Comfort"],
+            ["r-field-type" => "Value for money"],
+            ["r-field-type" => "Location"],
+        ];
+        $default_tours_field = [
+            ["r-field-type" => "Guide"],
+            ["r-field-type" => "Transportation"],
+            ["r-field-type" => "Value for money"],
+            ["r-field-type" => "Safety"]
+        ];
 
-    // If user does not have fields from settings, default fields will be loaded
-    $tfopt_hotels = !empty(tfopt('r-hotel')) ? tfopt('r-hotel') : $default_hotels_field;
-    $tfopt_tours  = !empty(tfopt('r-tour')) ? tfopt('r-tour') : $default_tours_field;
+        // If user does not have fields from settings, default fields will be loaded
+        $tfopt_hotels = !empty(tfopt('r-hotel')) ? tfopt('r-hotel') : $default_hotels_field;
+        $tfopt_tours  = !empty(tfopt('r-tour')) ? tfopt('r-tour') : $default_tours_field;
 
-    $fields = 'tf_tours' === get_post_type() ? $tfopt_tours : $tfopt_hotels;
+        $fields = 'tf_tours' === get_post_type() ? $tfopt_tours : $tfopt_hotels;
 
-    $fields = array_map(function ($i) {
-        return $i['r-field-type'];
-    }, $fields);
-    
-    //tours and hotel comment conditional markup
-    if ('tf_tours' === get_post_type()) {
-        $div_start = "<div class='comment_form_fields'>";
-        $div_end   = "</div>";
-    } else {
-        $div_start = '';
-        $div_end   = '';
+        $fields = array_map(function ($i) {
+            return $i['r-field-type'];
+        }, $fields);
+        
+        
+        //Declare Vars
+        $comment_send      = __('Submit', TFD);
+        $comment_reply     = __('Write a Review', TFD);
+        $comment_reply_to  = __('Reply', TFD);
+        $comment_author    = __('Your Name', TFD);
+        $comment_email     = __('Email Address', TFD);
+        $comment_body      = __('Review Description', TFD);
+        $comment_cookies_1 = __(' By commenting you accept the', TFD);
+        $comment_cookies_2 = __(' Privacy Policy', TFD);
+        $comment_before    = __('', TFD);
+        $comment_cancel    = __('Cancel Reply', TFD);
+        $comment_meta      = tf_generate_review_meta_fields($fields);
+        //Array
+        $comments_args = [
+            //Define Fields
+            'fields'               => [
+                'author'  => '<div class="tf-visitor-info"><div><input type="text" id="author" name="author" aria-required="true" placeholder="' . $comment_author . '"/></div>',
+                'email'   => '<div><input type="email" id="email" name="email" placeholder="' . $comment_email . '"/></div></div>',
+                'cookies' => '',
+            ],
+            'class_container' => 'tf-review-form-container',
+            'class_form' => 'tf-review-form',
+            // Change the title of send button
+            'label_submit'         => $comment_send,
+            // Change the title of the reply section
+            'title_reply'          => null,
+            // Change the title of the reply section
+            'title_reply_to'       => $comment_reply_to,
+            // Reply html start
+            'title_reply_before'   => '<div id="reply-title" class="comment-reply-title" style="display:none">',
+            // Reply html end
+            'title_reply_after'    => '<span class="faq-indicator"> <i class="fa fa-angle-up" aria-hidden="true"></i> <i class="fa fa-angle-down" aria-hidden="true"></i> </span></div>',
+            //Cancel Reply Text
+            'cancel_reply_link'    => $comment_cancel,
+            // Redefine your own textarea (the comment body).
+            'comment_field'        => "{$comment_meta}<div class=\"review-desc\"><textarea id=\"comment\" name=\"comment\" aria-required=\"true\" placeholder=\"{$comment_body}\"></textarea></div>",
+            //Message Before Comment
+            'comment_notes_before' => $comment_before,
+            // Remove "Text or HTML to be displayed after the set of comment fields".
+            'comment_notes_after'  => '',
+            //Submit Button ID
+            'id_submit'            => 'comment-submit',
+            // The comment submit element class attribute. Default 'submit'.
+            // 'class_submit' => 'tf_button',
+            //Submit Button html
+            'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" value="%4$s" />',
+            'submit_field' => '<div class="tf-review-submit">%1$s %2$s</div>',
+        ];
+        comment_form($comments_args);
     }
-    //Declare Vars
-    $comment_send      = __('Submit', TFD);
-    $comment_reply     = __('Write a Review', TFD);
-    $comment_reply_to  = __('Reply', TFD);
-    $comment_author    = __('Your Name', TFD);
-    $comment_email     = __('Email Address', TFD);
-    $comment_body      = __('Review Description', TFD);
-    $comment_cookies_1 = __(' By commenting you accept the', TFD);
-    $comment_cookies_2 = __(' Privacy Policy', TFD);
-    $comment_before    = __('', TFD);
-    $comment_cancel    = __('Cancel Reply', TFD);
-    $comment_meta      = tf_generate_review_fields($fields);
-    //Array
-    $comments_args = [
-        //Define Fields
-        'fields'               => [
-            'author'  => '<div class="tf-visitor-info"><div><input type="text" id="author" name="author" aria-required="true" placeholder="' . $comment_author . '"/></div>',
-            'email'   => '<div><input type="email" id="email" name="email" placeholder="' . $comment_email . '"/></div></div>',
-            'cookies' => '',
-        ],
-        'class_container' => 'tf-review-form-container',
-        'class_form' => 'tf-review-form',
-        // Change the title of send button
-        'label_submit'         => $comment_send,
-        // Change the title of the reply section
-        'title_reply'          => null,
-        // Change the title of the reply section
-        'title_reply_to'       => $comment_reply_to,
-        // Reply html start
-        'title_reply_before'   => '<div id="reply-title" class="comment-reply-title" style="display:none">',
-        // Reply html end
-        'title_reply_after'    => '<span class="faq-indicator"> <i class="fa fa-angle-up" aria-hidden="true"></i> <i class="fa fa-angle-down" aria-hidden="true"></i> </span></div>',
-        //Cancel Reply Text
-        'cancel_reply_link'    => $comment_cancel,
-        // Redefine your own textarea (the comment body).
-        'comment_field'        => "{$comment_meta}<div class=\"review-desc\"><textarea id=\"comment\" name=\"comment\" aria-required=\"true\" placeholder=\"{$comment_body}\"></textarea></div>",
-        //Message Before Comment
-        'comment_notes_before' => $comment_before,
-        // Remove "Text or HTML to be displayed after the set of comment fields".
-        'comment_notes_after'  => '',
-        //Submit Button ID
-        'id_submit'            => 'comment-submit',
-        // The comment submit element class attribute. Default 'submit'.
-        // 'class_submit' => 'tf_button',
-        //Submit Button html
-        'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" value="%4$s" />',
-        'submit_field' => '<div class="tf-review-submit">%1$s %2$s</div>',
-    ];
-    comment_form($comments_args);
 }
 
 /**
- * Generate review inputs for fields
+ * Generate review meta fields
  *
  * @param array $fields
  *
  * @return string
  */
-function tf_generate_review_fields(array $fields): string
-{
-    $html = '<div class="tf-rating-wrapper">';
-    foreach ($fields as $field) {
-        if (empty($field)) {
-            continue;
-        }
-        $html .= '<div class="tf-single-rating">';
-        $html .= sprintf('<label for="rating">%s</label>', $field);
-        $html .= sprintf('<div class="ratings-container">%s </div>', tf_generate_stars($field));
-        $html .= '</div>';
-    }
-    $html .= '</div>';
+if(!function_exists('tf_generate_review_meta_fields')) {
+    function tf_generate_review_meta_fields(array $fields): string {
 
-    return $html;
+        $html = '<div class="tf-rating-wrapper">';
+        foreach ($fields as $field) {
+            if (empty($field)) {
+                continue;
+            }
+            $html .= '<div class="tf-single-rating">';
+            $html .= sprintf('<label for="rating">%s</label>', $field);
+            $html .= sprintf('<div class="ratings-container">%s </div>', tf_generate_stars($field));
+            $html .= '</div>';
+        }
+        $html .= '</div>';
+
+        return $html;
+    }
 }
 
 /**
- * Generate stars for input fields
+ * Generate stars for meta fields
  *
  * @param string $key
  *
  * @return string
  */
-function tf_generate_stars(string $key): string
-{
-    $limit = tfopt('r-base') ?? 5;
-    $html  = '';
-    foreach (array_reverse(range(0, $limit, 1)) as $i) {
-        $class = $i == 0 ? 'star-cb-clear' : '';
-        $html  .= "<input type=\"radio\" id=\"{$key}-{$i}\" class=\"{$class}\" name=\"tf_comment_meta[{$key}]\" value=\"{$i}\" required><label for=\"{$key}-{$i}\">{$i}</label>";
-    }
+if(!function_exists('tf_generate_stars')) {
+    function tf_generate_stars(string $key): string {
 
-    return $html;
+        $limit = tfopt('r-base') ?? 5;
+        $html  = '';
+        foreach (array_reverse(range(1, $limit, 1)) as $i) {
+            $html  .= "<input type=\"radio\" id=\"{$key}-{$i}\" name=\"tf_comment_meta[{$key}]\" value=\"{$i}\" required><label for=\"{$key}-{$i}\">{$i}</label>";
+        }
+
+        return $html;
+    }
 }
 
 /**
@@ -165,73 +164,79 @@ function tf_generate_stars(string $key): string
  * @param       $comment_approved
  * @param array $commentdata
  */
-function tf_save_rating(int $comment_id, $comment_approved, array $commentdata)
-{
-    if ((isset($_POST[TF_COMMENT_META])) && ('' !== $_POST[TF_COMMENT_META])) {
-        $tf_comment_meta = $_POST[TF_COMMENT_META];
-        add_comment_meta($comment_id, TF_COMMENT_META, $tf_comment_meta);
-        add_comment_meta($comment_id, TF_BASE_RATE, tfopt('r-base') ?? 5);
+if(!function_exists('tf_save_rating')) {
+    function tf_save_rating(int $comment_id, $comment_approved, array $commentdata) {
+
+        if ((isset($_POST[TF_COMMENT_META])) && ('' !== $_POST[TF_COMMENT_META])) {
+            $tf_comment_meta = $_POST[TF_COMMENT_META];
+            add_comment_meta($comment_id, TF_COMMENT_META, $tf_comment_meta);
+            add_comment_meta($comment_id, TF_BASE_RATE, tfopt('r-base') ?? 5);
+        }
     }
+    add_action('comment_post', 'tf_save_rating', 10, 3);
 }
 
-add_action('comment_post', 'tf_save_rating', 10, 3);
 /**
- * 3. Making the rating required (optional)
+ * 3. Rating validation (optional)
  *
  */
 // Enable empty comment.
 add_filter('allow_empty_comment', '__return_true');
+
 // Validation for rating inputs
-function tf_review_scripts()
-{
-    if (is_single() && comments_open()) { ?>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-        <script type="text/javascript">
-            jQuery(document).ready(function($) {
-                $('#commentform').validate({
-                    ignore: [],
-                    rules: {
-                        'tf_comment_meta[]': {
-                            required: true,
+if(!function_exists('tf_review_scripts')) {
+    function tf_review_scripts() {
+
+        if (is_single() && comments_open()) {
+        ?>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+            <script type="text/javascript">
+                jQuery(document).ready(function($) {
+                    $('#commentform').validate({
+                        ignore: [],
+                        rules: {
+                            'tf_comment_meta[]': {
+                                required: true,
+                            },
+                            author: {
+                                required: true,
+                            },
+                            email: {
+                                required: true,
+                            }
                         },
-                        author: {
-                            required: true,
+                        messages: {
+                            'tf_comment_meta[]': "Please provide a ratings",
                         },
-                        email: {
-                            required: true,
+                        errorElement: "span",
+                        errorPlacement: function(error, element) {
+                            if (element.is(":radio")) {
+                                error.appendTo(element.parents('.tf-single-rating'));
+                            } else { // This is the default behavior
+                                error.insertAfter(element);
+                            }
                         }
-                    },
-                    messages: {
-                        'tf_comment_meta[]': "Please provide a ratings",
-                    },
-                    errorElement: "span",
-                    errorPlacement: function(error, element) {
-                        if (element.is(":radio")) {
-                            error.appendTo(element.parents('.tf-single-rating'));
-                        } else { // This is the default behavior
-                            error.insertAfter(element);
-                        }
-                    }
+                    });
                 });
-            });
-        </script>
-<?php
+            </script>
+        <?php
+        }
     }
+    add_action('wp_footer', 'tf_review_scripts');
 }
 
-add_action('wp_footer', 'tf_review_scripts');
 // 4. Display the rating on a submitted comment. (If you need to display the rating)
 /**
  * @param $comment
  * @param $args
  * @param $depth
  */
-function tf_comment_callback($comment, $args, $depth)
+function tf_single_review($comment, $args, $depth)
 {
     $tf_overall_rate = get_comment_meta($comment->comment_ID, TF_TOTAL_RATINGS, true);
     if ($tf_overall_rate == false) {
         $tf_comment_meta = get_comment_meta($comment->comment_ID, TF_COMMENT_META, true);
-        $tf_overall_rate = tf_average_ratings(array_values($tf_comment_meta));
+        $tf_overall_rate = tf_average_ratings($tf_comment_meta);
     }
     if ('div' === $args['style']) {
         $tag       = 'div';
@@ -242,7 +247,7 @@ function tf_comment_callback($comment, $args, $depth)
     }
     $base_rate = get_comment_meta($comment->comment_ID, TF_BASE_RATE, true);
     ob_start();
-    include TF_PATH . "templates/template-parts/review-callback.php";
+    include TF_PATH . "templates/template-parts/review/single-review.php";
     echo ob_get_clean();
 }
 
@@ -251,10 +256,9 @@ function tf_comment_callback($comment, $args, $depth)
  *
  * @param array $ratings collection of array
  *
- * @return string
+ * @return float
  */
-function tf_average_ratings(array $ratings = []): string
-{
+function tf_average_ratings(array $ratings = []): float {
     if (!$ratings) {
         return 'N/A';
     }
@@ -309,6 +313,70 @@ function tf_calculate_user_ratings($comment, array &$overall_rating): void
 }
 
 /**
+ * Format rating accordion to settings
+ * 
+ */
+function tf_average_rating_change_on_base( $rating,  $base_rate = 5)
+{
+    $settings_base = tfopt('r-base');
+
+    if ($settings_base != $base_rate) {
+        if ($settings_base > 5) {
+            $rating = $rating * 2;
+        } else {
+            $rating = $rating / 2;
+        }
+    }
+    return $rating;
+}
+
+/**
+ * Format rating accordion to settings
+ *
+ * @param float $rating average rating from a review
+ * @param int $base_rate comment's base rate
+ *
+ * @return string
+ */
+function tf_single_rating_change_on_base(float $rating, int $base_rate = 5): string {
+
+    $settings_base = tfopt('r-base');
+
+    if ($settings_base != $base_rate) {
+        if ($settings_base > 5) {
+            $rating = $rating * 2;
+        } else {
+            $rating = $rating / 2;
+        }
+    }
+
+    $rating_star = ceil($rating/0.5)*0.5;
+
+    $icons = '';
+    if($rating_star > 1.5) {
+        if(strpos($rating_star,".") !== false){
+            foreach(range(0,abs($rating_star-1)) as $i) {
+                $icons .= '<i class="fas fa-star"></i>';
+            }
+            $icons .= '<i class="fas fa-star-half-alt"></i>';
+        }else{
+            foreach(range(1,$rating_star) as $i) {
+                $icons .= '<i class="fas fa-star"></i>';
+            }
+        }
+    } else if($rating_star == 1.5){
+        $icons .= '<i class="fas fa-star"></i>';
+        $icons .= '<i class="fas fa-star-half-alt"></i>';
+    } else if($rating_star == 1){
+        $icons .= '<i class="fas fa-star"></i>';
+    } else if($rating_star == 0.5){
+        $icons .= '<i class="fas fa-star-half-alt"></i>';
+    }
+    
+    return $icons . $rating . '/' . $settings_base;
+}
+
+/**
  * comment_reply_link_filter
  *
  * @param mixed $content
@@ -357,8 +425,8 @@ function tf_item_review_block()
  *
  * @return array
  */
-function tf_calculate_comments_rating(array $comments): array
-{
+function tf_calculate_comments_rating(array $comments): array {
+    
     $tf_overall_rate = [];
     foreach ($comments as $comment) {
         tf_calculate_user_ratings($comment, $tf_overall_rate);
@@ -378,7 +446,7 @@ function tf_based_on_text(int $number): void
         'tf_comment_form_title',
         sprintf( // WPCS: XSS OK.
             /* translators: 1: number of comments */
-            esc_html(_nx('Based on %1$s review', 'Based on %1$s reviews', $number, 'comments title', TFD)),
+            esc_html(_nx('%1$s review', '%1$s reviews', $number, 'comments title', TFD)),
             number_format_i18n($number)
         )
     );
@@ -434,24 +502,4 @@ function tf_user_has_comments(): bool
     return false;
 }
 
-/**
- * Format rating accordion to settings
- *
- * @param int $rating average rating from a review
- * @param int $base_rate comment's base rate
- *
- * @return string
- */
-function tf_average_ratings_format(int $rating, int $base_rate = 5): string
-{
-    $settings_base = tfopt('r-base');
 
-    if ($settings_base != $base_rate) {
-        if ($settings_base > 5) {
-            $rating = $rating * 2;
-        } else {
-            $rating = $rating / 2;
-        }
-    }
-    return $rating . '/' . $settings_base;
-}

@@ -115,10 +115,6 @@
     display: flex;
     align-items: center;
   }
-  .reviews span {
-    margin-left: 10px;
-    font-size: 18px;
-  }
   .share-tour {
     margin-right: 14px;
   }

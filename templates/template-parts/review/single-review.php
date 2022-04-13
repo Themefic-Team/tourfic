@@ -15,7 +15,7 @@
                 <a href="<?php echo esc_url(htmlspecialchars(get_comment_link($comment->comment_ID))); ?>" class="comment-date">
                     <?php echo '<time datetime="' . esc_attr(get_comment_date('c')) . '">' . esc_html(get_comment_date()) . '</time>'; ?>
                 </a>
-                <p><?php echo tf_average_ratings_format($tf_overall_rate, $base_rate)  ?></p>
+                <p><?php echo tf_single_rating_change_on_base($tf_overall_rate, $base_rate)  ?></p>
             </div>
         </div>
         <?php if ('div' !== $args['style']) { ?>
