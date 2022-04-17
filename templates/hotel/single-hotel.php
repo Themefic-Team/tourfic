@@ -438,14 +438,16 @@ while (have_posts()) : the_post();
                     <?php if ($s_review && $s_review == '1') {
                     } else { ?>
                         <!-- Start Review Content -->
-                        <div class="tf_contents reviews">
+                        <div class="tf_contents">
                             <div class="highlights-title">
                                 <h4><?php esc_html_e('Reviews', TFD); ?></h4>
                             </div>
 
-                            <?php if (comments_open() || get_comments_number()) {
+                            <?php
+                            if (comments_open() || get_comments_number()) {
                                 comments_template();
-                            } ?>
+                            }
+                            ?>
                         </div>
                         <!-- End Review Content -->
                     <?php } ?>

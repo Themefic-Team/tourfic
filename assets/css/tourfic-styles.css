@@ -441,13 +441,13 @@
     position: relative;
     overflow: hidden;
   }
-  .percent-progress {
+  /* .percent-progress {
     position: absolute;
     width: 0;
     background-color: #e7711b;
     height: 100%;
     transition: width 1s ease-in-out;
-  }
+  } */
   /* #reply-title {
     position: relative;
     cursor: pointer;
@@ -1277,7 +1277,6 @@
   .highlights-title,
   .listing-title {
     margin-bottom: 14px;
-    text-transform: uppercase;
   }
   .tf_contents.highlights {
     border-bottom: 1px solid #e2e2e2;

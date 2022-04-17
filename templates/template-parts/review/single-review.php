@@ -1,8 +1,8 @@
 <<?php echo esc_attr($tag) . ' '; ?><?php comment_class(empty($args['has_children']) ? '' : 'parent'); ?> id="comment-<?php comment_ID(); ?>">
     <div class="comment-body">
-        <?php if ($args['avatar_size'] != 0) {
+        <?php //if ($args['avatar_size'] != 0) {
             echo get_avatar($comment, $args['avatar_size']);
-        } ?>
+        //} ?>
         <div class="tf-author-infobox">
             <div class="comment-meta commentmetadata">
                 <div class="comment-author vcard">

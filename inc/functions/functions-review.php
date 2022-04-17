@@ -5,6 +5,15 @@ defined('ABSPATH') || exit;
 const TF_COMMENT_META  = 'tf_comment_meta';
 const TF_TOTAL_RATINGS = 'tf_total_ratings';
 const TF_BASE_RATE     = 'tf_base_rate';
+
+/**
+ * Remove Comment Meta Box from post edit screen
+ */
+function tf_remove_comment_meta_box() {
+    remove_meta_box( 'commentsdiv', array('tf_hotel', 'tf_tours'), 'normal' );
+}
+add_action( 'admin_init', 'tf_remove_comment_meta_box' );
+
 /**
  * Steps
  * 0. Add styles to frontend
@@ -238,13 +247,13 @@ function tf_single_review($comment, $args, $depth)
         $tf_comment_meta = get_comment_meta($comment->comment_ID, TF_COMMENT_META, true);
         $tf_overall_rate = tf_average_ratings($tf_comment_meta);
     }
-    if ('div' === $args['style']) {
-        $tag       = 'div';
-        $add_below = 'comment';
-    } else {
-        $tag       = 'li';
-        $add_below = 'div-comment';
-    }
+    // if ('div' === $args['style']) {
+    //     $tag       = 'div';
+    //     $add_below = 'comment';
+    // } else {
+    //     $tag       = 'li';
+    //     $add_below = 'div-comment';
+    // }
     $base_rate = get_comment_meta($comment->comment_ID, TF_BASE_RATE, true);
     ob_start();
     include TF_PATH . "templates/template-parts/review/single-review.php";
@@ -373,7 +382,7 @@ function tf_single_rating_change_on_base(float $rating, int $base_rate = 5): str
         $icons .= '<i class="fas fa-star-half-alt"></i>';
     }
     
-    return $icons . $rating . '/' . $settings_base;
+    return '<div>' .$icons . '</div>' . $rating;
 }
 
 /**
@@ -502,4 +511,42 @@ function tf_user_has_comments(): bool
     return false;
 }
 
+/**
+ * Pending moderation notice
+ * 
+ * @author fida
+ * @return string
+ */
+function tf_pending_review_notice($post_id) {
 
+    if (is_user_logged_in()) {
+
+        $args = array( 
+            'post_id' => $post_id,
+            'status'  => 'hold',
+            'type'    => 'comment',
+        );
+        $comments_query = new WP_Comment_Query( $args ); 
+        $comments = $comments_query->comments;
+
+        if($comments) {
+
+            foreach($comments as $comment) {
+
+                $logged_in_id = get_current_user_id();
+                $comment_author_id = $comment->user_id;
+    
+                if($comment->comment_approved === '0' && $logged_in_id == $comment_author_id) {
+                    return '<h3 style="text-align:center;"><em>' .__("Your review is awaiting moderation.", "tourfic"). '</em></h3>';
+                }
+            }
+
+        } else {
+            return false;
+        }
+
+    } else {
+        return true;
+    }
+
+}

@@ -13,6 +13,9 @@
     margin: 0 !important;
     background: #fff !important;
 }
+.tf-review-form-container .logged-in-as {
+    display: none;
+}
 .tf-review-form-container .tf-rating-wrapper{
     display: grid;
     grid-template-columns: calc(50% - 20px) calc(50% - 20px);
@@ -188,7 +191,7 @@
     line-height: 24px;
     margin: 0px 16px;
 }
-.tf-review-container .tf-total-review button {
+.tf-review-container button {
     color: #2979FF;
     font-style: normal;
     font-weight: 400;
@@ -201,7 +204,7 @@
     padding: 8px 16px;
     outline: none;
 }
-.tf-review-container .tf-total-review button i{
+.tf-review-container button i{
     font-size: 14px;
 }
 .tf-review-container .tf-review-progress-bar {
@@ -232,11 +235,18 @@
 .tf-review-container .tf-review-progress-bar .tf-single .tf-p-bar{
     width: 100%;
     height: 7px;
-    background: #ddd;
+    background: #D8E6FF;
     border-radius: 7px;
     position: relative;
     overflow: hidden;
 }
+.tf-review-container .tf-review-progress-bar .tf-single .tf-p-bar .percent-progress {
+    position: absolute;
+    width: 0;
+    background-color: #76A9FF;
+    height: 100%;
+    transition: width 1s ease-in-out;
+  }
 .tf-review-container .tf-review-progress-bar .tf-single .tf-p-b-rating{
     text-align: right;
     font-style: normal;
@@ -245,12 +255,65 @@
     line-height: 1;
     color: #5A5B6A;
 }
-.tf-review-container {
-    
+.tf-review-container .no-review {
+    text-align: center;
 }
-.tf-review-container {
-    
+/**
+ * Individual Single Review
+ */
+.tf-single-review {
+    display: grid;
+    grid-template-columns: calc(50% - 10px) calc(50% - 10px);
+    column-gap: 20px;
+    row-gap: 40px;
 }
-.tf-review-container {
-    
+.tf-single-review .tf-single-details {
+    display: grid;
+    grid-template-columns: 56px calc(100% - 72px);
+    column-gap: 16px;
+}
+.tf-single-review .tf-review-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.tf-single-review .tf-review-details .tf-name {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1;
+    color: #3A3A44;
+    margin: 0 0 8px 0;
+    text-transform: capitalize;
+}
+.tf-single-review .tf-review-details .tf-date {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1;
+    color: #5A5B6A;
+    letter-spacing: 0.2px;
+    margin: 0 0 8px;
+}
+.tf-single-review .tf-review-details .tf-rating-stars {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 5px;
+    align-items: center;
+    justify-content: start;
+    line-height: 1;
+}
+.tf-single-review .tf-review-details .tf-rating-stars i{
+    color: #FFBF00;
+    font-size: 10px;
+    height: 14px;
+}
+.tf-single-review .tf-review-details .tf-description {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: #5A5B6A;
+    margin: 8px 0 0 0;
 }
