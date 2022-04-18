@@ -12,7 +12,7 @@ if ( class_exists( 'CSF' ) ) {
 
     // Create a metabox
     CSF::createMetabox( $prefix, array(
-        'title'     => __( 'Tour Setting', 'tourfic' ),
+        'title'     => __( 'Tour Setting', TFD ),
         'post_type' => 'tf_tours',
         'context'   => 'advanced',
         'priority'  => 'high',
@@ -21,36 +21,36 @@ if ( class_exists( 'CSF' ) ) {
 
     // General
     CSF::createSection( $prefix, array(
-        'title'  => __( 'General', 'tourfic' ),
+        'title'  => __( 'General', TFD ),
         'fields' => array(
 
             array(
                 'id'       => 'tour_as_featured',
                 'type'     => 'switcher',
-                'title'    => __( 'Set this tour as featured', 'tourfic' ),
-                'subtitle' => __( 'Tour will be shown under featured sections', 'tourfic' ),
+                'title'    => __( 'Set this tour as featured', TFD ),
+                'subtitle' => __( 'Tour will be shown under featured sections', TFD ),
             ),
 
             array(
                 'id'      => 'tour_single_page',
                 'type'    => 'select',
-                'title'   => __( 'Single Tour Page Layout', 'tourfic' ),
+                'title'   => __( 'Single Tour Page Layout', TFD ),
                 'options' => array(
-                    'instant' => __( 'Default', 'tourfic' ),
+                    'instant' => __( 'Default', TFD ),
                 ),
             ),
 
             array(
                 'id'    => 'tour_gallery',
                 'type'  => 'gallery',
-                'title' => __( 'Tour Gallery', 'tourfic' ),
+                'title' => __( 'Tour Gallery', TFD ),
             ),
 
             array(
                 'id'       => '',
                 'class' => 'tf-csf-disable tf-csf-pro',
                 'type'     => 'text',
-                'title'    => __( 'Tour video', 'tourfic' ),
+                'title'    => __( 'Tour video', TFD ),
                 'subtitle'   => $badge_pro,
             ),
 
@@ -59,14 +59,14 @@ if ( class_exists( 'CSF' ) ) {
 
     // Location
     CSF::createSection( $prefix, array(
-        'title'  => __( 'Location', 'tourfic' ),
+        'title'  => __( 'Location', TFD ),
         'fields' => array(
 
             array(
                 'id'       => 'text_location',
                 'type'     => 'textarea',
-                'title'    => __( 'Tour Location', 'tourfic' ),
-                'subtitle' => __( 'Manually enter your tour location', 'tourfic' ),
+                'title'    => __( 'Tour Location', TFD ),
+                'subtitle' => __( 'Manually enter your tour location', TFD ),
                 'attributes' => array(
                     'required' => 'required',
                 ),
@@ -76,8 +76,8 @@ if ( class_exists( 'CSF' ) ) {
                 'id'       => '',
                 'class' => 'tf-csf-disable tf-csf-pro',
                 'type'     => 'map',
-                'title'    => __( 'Tour Location Pro (Auto Suggestion)', 'tourfic' ),
-                'subtitle' => __( 'Location suggestions will be provided from Google' .$badge_pro, 'tourfic' ),
+                'title'    => __( 'Tour Location Pro (Auto Suggestion)', TFD ),
+                'subtitle' => __( 'Location suggestions will be provided from Google' .$badge_pro, TFD ),
                 'height'   => '250px',
                 'settings' => array(
                     'scrollWheelZoom' => true,
@@ -89,39 +89,39 @@ if ( class_exists( 'CSF' ) ) {
 
     // Information
     CSF::createSection( $prefix, array(
-        'title'  => __( 'Information', 'tourfic' ),
+        'title'  => __( 'Information', TFD ),
         'fields' => array(
 
             array(
                 'id'       => 'duration',
                 'type'     => 'text',
-                'title'    => __( 'Tour Duration', 'tourfic' ),
-                'subtitle' => __( 'E.g. 3 days', 'tourfic' ),
+                'title'    => __( 'Tour Duration', TFD ),
+                'subtitle' => __( 'E.g. 3 days', TFD ),
             ),
             array(
                 'id'       => 'info_type',
                 'type'     => 'text',
-                'title'    => __( 'Tour Type', 'tourfic' ),
-                'subtitle' => __( 'E.g. Fixed Tour', 'tourfic' ),
+                'title'    => __( 'Tour Type', TFD ),
+                'subtitle' => __( 'E.g. Fixed Tour', TFD ),
             ),
             array(
                 'id'       => 'group_size',
                 'type'     => 'text',
-                'title'    => __( 'Group Size', 'tourfic' ),
-                'subtitle' => __( 'E.g. 10 people', 'tourfic' ),
+                'title'    => __( 'Group Size', TFD ),
+                'subtitle' => __( 'E.g. 10 people', TFD ),
             ),
             array(
                 'id'       => 'language',
                 'type'     => 'text',
-                'title'    => __( 'Languages', 'tourfic' ),
-                'subtitle' => __( 'Input languages seperated by comma (,)', 'tourfic' ),
+                'title'    => __( 'Languages', TFD ),
+                'subtitle' => __( 'Input languages seperated by comma (,)', TFD ),
             ),
 
             array(
                 'id'    => 'additional_information',
                 'type'  => 'wp_editor',
-                'title' => __( 'Tour Hightlights', 'tourfic' ),
-				'subtitle' => __( 'Enter a summary or full description of your tour', 'tourfic' ),
+                'title' => __( 'Tour Hightlights', TFD ),
+				'subtitle' => __( 'Enter a summary or full description of your tour', TFD ),
             ),
 
         ),
@@ -129,35 +129,35 @@ if ( class_exists( 'CSF' ) ) {
 
     // Contact Info
     CSF::createSection( $prefix, array(
-        'title'  => __( 'Contact Info', 'tourfic' ),
+        'title'  => __( 'Contact Info', TFD ),
         'fields' => array(
 
             array(
                 'id'       => '',
                 'class' => 'tf-csf-disable tf-csf-pro',
                 'type'     => 'text',
-                'title'    => __( 'Email address', 'tourfic' ),
+                'title'    => __( 'Email address', TFD ),
                 'subtitle'   => $badge_up_pro,
             ),
             array(
                 'id'       => '',
                 'class' => 'tf-csf-disable tf-csf-pro',
                 'type'     => 'text',
-                'title'    => __( 'Phone Number', 'tourfic' ),
+                'title'    => __( 'Phone Number', TFD ),
                 'subtitle'   => $badge_up_pro,
             ),
             array(
                 'id'       => '',
                 'class' => 'tf-csf-disable tf-csf-pro',
                 'type'     => 'text',
-                'title'    => __( 'Website Url', 'tourfic' ),
+                'title'    => __( 'Website Url', TFD ),
                 'subtitle'   => $badge_up_pro,
             ),
             array(
                 'id'       => '',
                 'class' => 'tf-csf-disable tf-csf-pro',
                 'type'     => 'text',
-                'title'    => __( 'Fax Number', 'tourfic' ),
+                'title'    => __( 'Fax Number', TFD ),
                 'subtitle'   => $badge_up_pro,
             ),
 
@@ -166,32 +166,32 @@ if ( class_exists( 'CSF' ) ) {
 
     // Tour Extra
     CSF::createSection( $prefix, array(
-        'title'  => __( 'Tour Extra', 'tourfic' ),
+        'title'  => __( 'Tour Extra', TFD ),
         'fields' => array(
             array(
                 'id'     => 'tour-extra',
                 'type'   => 'repeater',
-                'title'  => __( 'Extra Services on Tour', 'tourfic' ),
+                'title'  => __( 'Extra Services on Tour', TFD ),
                 'fields' => array(
                     array(
                         'id'    => '',
                         'class' => 'tf-csf-disable tf-csf-pro',
                         'type'  => 'text',
-                        'title' => __( 'Title', 'tourfic' ),
+                        'title' => __( 'Title', TFD ),
                         'subtitle'   => $badge_pro,
                     ),
                     array(
                         'id'    => '',
                         'class' => 'tf-csf-disable tf-csf-pro',
                         'type'  => 'textarea',
-                        'title' => __( 'Short Description', 'tourfic' ),
+                        'title' => __( 'Short Description', TFD ),
                         'subtitle'   => $badge_pro,
                     ),
                     array(
                         'id'         => '',
                         'class' => 'tf-csf-disable tf-csf-pro',
                         'type'       => 'text',
-                        'title'      => __( 'Price', 'tourfic' ),
+                        'title'      => __( 'Price', TFD ),
                         'subtitle'   => $badge_pro,
                         'attributes' => array(
                             'min' => '0',
@@ -204,25 +204,25 @@ if ( class_exists( 'CSF' ) ) {
 
     // Price
     CSF::createSection($prefix, array(
-        'title'  => __('Price Settings', 'tourfic'),
+        'title'  => __('Price Settings', TFD),
         'fields' => array(
             array(
                 'id'       => 'pricing',
                 'type'     => 'select',
-                'title'    => __('Pricing rule', 'tourfic'),
-                'subtitle' => __('Input pricing rule', 'tourfic'),
+                'title'    => __('Pricing rule', TFD),
+                'subtitle' => __('Input pricing rule', TFD),
                 'class'    => 'pricing',
                 'options'  => [
-                    'person' => __('Person', 'tourfic'),
-                    'group'  => __('Group (Pro)', 'tourfic'),
+                    'person' => __('Person', TFD),
+                    'group'  => __('Group (Pro)', TFD),
                 ],
                 'default' => 'person',
             ),
             array(
                 'id'         => 'adult_price',
                 'type'       => 'number',
-                'title'      => __('Price for Adult', 'tourfic'),
-                'subtitle'   => __('Input adult price', 'tourfic'),
+                'title'      => __('Price for Adult', TFD),
+                'subtitle'   => __('Input adult price', TFD),
                 'dependency' => [
                     array('pricing', '==', 'person'),
                     ['disable_adult_price', '==', 'false']
@@ -238,8 +238,8 @@ if ( class_exists( 'CSF' ) ) {
                     array('pricing', '==', 'person'),
                     ['disable_child_price', '==', 'false']
                 ],
-                'title'      => __('Price for Child', 'tourfic'),
-                'subtitle'   => __('Input child price', 'tourfic'),
+                'title'      => __('Price for Child', TFD),
+                'subtitle'   => __('Input child price', TFD),
                 'attributes' => array(
                     'min' => '0',
                 ),
@@ -252,8 +252,8 @@ if ( class_exists( 'CSF' ) ) {
                     ['disable_infant_price', '==', 'false'],
                     ['disable_adult_price', '==', 'false'],
                 ],
-                'title'      => __('Price for Infant', 'tourfic'),
-                'subtitle'   => __('Input infant price', 'tourfic'),
+                'title'      => __('Price for Infant', TFD),
+                'subtitle'   => __('Input infant price', TFD),
                 'attributes' => array(
                     'min' => '0',
                 ),
@@ -263,8 +263,8 @@ if ( class_exists( 'CSF' ) ) {
                 'class' => 'tf-csf-disable tf-csf-pro',
                 'type'       => 'number',
                 'dependency' => array('pricing', '==', 'group'),
-                'title'      => __('Group Price', 'tourfic'),
-                'subtitle'   => __('Input group price' .$badge_pro, 'tourfic'),
+                'title'      => __('Group Price', TFD),
+                'subtitle'   => __('Input group price' .$badge_pro, TFD),
                 'attributes' => array(
                     'min' => '0',
                 ),
@@ -272,20 +272,20 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'       => 'discount_type',
                 'type'     => 'select',
-                'title'    => __('Discount Type', 'tourfic'),
-                'subtitle' => __('Select discount type Percent or Fixed', 'tourfic'),
+                'title'    => __('Discount Type', TFD),
+                'subtitle' => __('Select discount type Percent or Fixed', TFD),
                 'options'  => array(
-                    'none'    => __('None', 'tourfic'),
-                    'percent' => __('Percent', 'tourfic'),
-                    'fixed'   => __('Fixed', 'tourfic'),
+                    'none'    => __('None', TFD),
+                    'percent' => __('Percent', TFD),
+                    'fixed'   => __('Fixed', TFD),
                 ),
                 'default'  => 'none',
             ),
             array(
                 'id'         => 'discount_price',
                 'type'       => 'number',
-                'title'      => __('Discount Price', 'tourfic'),
-                'subtitle'   => __('Input discount price in number', 'tourfic'),
+                'title'      => __('Discount Price', TFD),
+                'subtitle'   => __('Input discount price in number', TFD),
                 'attributes' => array(
                     'min' => '0',
                 ),
@@ -296,20 +296,20 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'       => 'disable_adult_price',
                 'type'     => 'switcher',
-                'title'    => __('Disable adult price', 'tourfic'),
-                'subtitle' => __('Hide No of adult in booking form', 'tourfic'),
+                'title'    => __('Disable adult price', TFD),
+                'subtitle' => __('Hide No of adult in booking form', TFD),
             ),
             array(
                 'id'       => 'disable_child_price',
                 'type'     => 'switcher',
-                'title'    => __('Disable children price', 'tourfic'),
-                'subtitle' => __('Hide No of children in booking form', 'tourfic'),
+                'title'    => __('Disable children price', TFD),
+                'subtitle' => __('Hide No of children in booking form', TFD),
             ),
             array(
                 'id'       => 'disable_infant_price',
                 'type'     => 'switcher',
-                'title'    => __('Disable infant price', 'tourfic'),
-                'subtitle' => __('Hide No of infant in booking form', 'tourfic'),
+                'title'    => __('Disable infant price', TFD),
+                'subtitle' => __('Hide No of infant in booking form', TFD),
             ),
 
         ),
@@ -317,17 +317,17 @@ if ( class_exists( 'CSF' ) ) {
 
     // Availability
     CSF::createSection($prefix, array(
-        'title'  => __('Availability', 'tourfic'),
+        'title'  => __('Availability', TFD),
         'fields' => array(
             array(
                 'id'       => 'type',
                 'type'     => 'select',
-                'title'    => __('Tour Type', 'tourfic'),
-                'subtitle' => __('Fixed: Tour will be available on a fixed date. Continous: Tour will be available every month within the mentioned range.', 'tourfic'),
+                'title'    => __('Tour Type', TFD),
+                'subtitle' => __('Fixed: Tour will be available on a fixed date. Continous: Tour will be available every month within the mentioned range.', TFD),
                 'class'    => 'tour-type',
                 'options'  => [
-                    'continuous' => __('Continuous', 'tourfic'),
-                    'fixed'      => __('Fixed (Pro)', 'tourfic'),              
+                    'continuous' => __('Continuous', TFD),
+                    'fixed'      => __('Fixed (Pro)', TFD),              
                 ],
                 'default' => 'continuous',
             ),          
@@ -338,11 +338,11 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'         => 'custom_avail',
                 'type'       => 'switcher',
-                'title'      => __('Custom Availability', 'tourfic'),
+                'title'      => __('Custom Availability', TFD),
                 'subtitle'   => $badge_pro,
                 'dependency' => array('type', '==', 'continuous'),
-                'text_on'  => __('Yes', 'tourfic'),
-                'text_off' => __('No', 'tourfic'),
+                'text_on'  => __('Yes', TFD),
+                'text_off' => __('No', TFD),
             ),
 
             /**
@@ -353,7 +353,7 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'         => 'cont_custom_date',
                 'type'       => 'repeater',
-                'title'      => __('Allowed Dates', 'tourfic'),
+                'title'      => __('Allowed Dates', TFD),
                 'subtitle'   => $badge_pro,
                 'dependency' => array(
                     array('type', '==', 'continuous'),
@@ -364,7 +364,7 @@ if ( class_exists( 'CSF' ) ) {
                         'id'    => '',
                         'class' => 'tf-csf-disable tf-csf-pro',
                         'type'  => 'datetime',
-                        'title' => __('Date Range', 'tourfic'),
+                        'title' => __('Date Range', TFD),
                         'subtitle'   => $badge_pro,
                         'settings' => array(
                             'dateFormat'      => 'Y/m/d'
@@ -378,25 +378,25 @@ if ( class_exists( 'CSF' ) ) {
                         'id'    => '',
                         'class' => 'tf-csf-disable tf-csf-pro',
                         'type'  => 'number',
-                        'title' => __('Min people', 'tourfic'),
+                        'title' => __('Min people', TFD),
                         'subtitle'   => $badge_pro,
                     ),
                     array(
                         'id'    => '',
                         'class' => 'tf-csf-disable tf-csf-pro',
                         'type'  => 'number',
-                        'title' => __('Maximum people', 'tourfic'),
+                        'title' => __('Maximum people', TFD),
                         'subtitle'   => $badge_pro,
                     ),
                     array(
                         'id'       => 'pricing',
                         'type'     => 'select',
-                        'title'    => __('Pricing rule', 'tourfic'),
-                        'subtitle' => __('Input pricing rule' .$badge_pro, 'tourfic'),
+                        'title'    => __('Pricing rule', TFD),
+                        'subtitle' => __('Input pricing rule' .$badge_pro, TFD),
                         'class'    => 'pricing',
                         'options'  => [
-                            'person' => __('Person', 'tourfic'),
-                            'group'  => __('Group', 'tourfic'),
+                            'person' => __('Person', TFD),
+                            'group'  => __('Group', TFD),
                         ],
                         'default' => 'person',
                     ),
@@ -404,8 +404,8 @@ if ( class_exists( 'CSF' ) ) {
                         'id'         => '',
                         'class' => 'tf-csf-disable tf-csf-pro',
                         'type'       => 'number',
-                        'title'      => __('Price for Adult', 'tourfic'),
-                        'subtitle'   => __('Input adult price' .$badge_pro, 'tourfic'),
+                        'title'      => __('Price for Adult', TFD),
+                        'subtitle'   => __('Input adult price' .$badge_pro, TFD),
                         'dependency' => array( 'pricing', '==', 'person' ),
                         'attributes' => array(
                             'min' => '0',
@@ -415,8 +415,8 @@ if ( class_exists( 'CSF' ) ) {
                         'id'         => '',
                         'class' => 'tf-csf-disable tf-csf-pro',
                         'type'       => 'number',
-                        'title'      => __('Price for Child', 'tourfic'),
-                        'subtitle'   => __('Input child price' .$badge_pro, 'tourfic'),
+                        'title'      => __('Price for Child', TFD),
+                        'subtitle'   => __('Input child price' .$badge_pro, TFD),
                         'dependency' =>  array('pricing', '==', 'person'),
                         'attributes' => array(
                             'min' => '0',
@@ -426,8 +426,8 @@ if ( class_exists( 'CSF' ) ) {
                         'id'         => '',
                         'class' => 'tf-csf-disable tf-csf-pro',
                         'type'       => 'number',
-                        'title'      => __('Price for Infant', 'tourfic'),
-                        'subtitle'   => __('Input infant price' .$badge_pro, 'tourfic'),
+                        'title'      => __('Price for Infant', TFD),
+                        'subtitle'   => __('Input infant price' .$badge_pro, TFD),
                         'dependency' => array('pricing', '==', 'person'),
                         'attributes' => array(
                             'min' => '0',
@@ -438,8 +438,8 @@ if ( class_exists( 'CSF' ) ) {
                         'class' => 'tf-csf-disable tf-csf-pro',
                         'type'       => 'number',
                         'dependency' => array('pricing', '==', 'group'),
-                        'title'      => __('Group Price', 'tourfic'),
-                        'subtitle'   => __('Input group price' .$badge_pro, 'tourfic'),
+                        'title'      => __('Group Price', TFD),
+                        'subtitle'   => __('Input group price' .$badge_pro, TFD),
                         'attributes' => array(
                             'min' => '0',
                         ),
@@ -447,7 +447,7 @@ if ( class_exists( 'CSF' ) ) {
                     array(
                         'id'     => 'allowed_time',
                         'type'   => 'repeater',
-                        'title'  => __('Allowed Time', 'tourfic'),
+                        'title'  => __('Allowed Time', TFD),
                         'subtitle'   => $badge_pro,
                         'fields' => array(
 
@@ -455,8 +455,8 @@ if ( class_exists( 'CSF' ) ) {
                                 'id'       => '',
                                 'class' => 'tf-csf-disable tf-csf-pro',
                                 'type'     => 'datetime',
-                                'title'    => __('Time', 'tourfic'),
-                                'subtitle' => __('Only Time' .$badge_pro, 'tourfic'),
+                                'title'    => __('Time', TFD),
+                                'subtitle' => __('Only Time' .$badge_pro, TFD),
                                 'settings' => array(
                                     'noCalendar' => true,
                                     'enableTime' => true,
@@ -479,8 +479,8 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'       => 'cont_min_people',
                 'type'     => 'number',
-                'title'    => __('Minimum Person', 'tourfic'),
-                'subtitle' => __('Minimum person to travel', 'tourfic'),
+                'title'    => __('Minimum Person', TFD),
+                'subtitle' => __('Minimum person to travel', TFD),
                 'dependency' => array(
                     array('type', '==', 'continuous'),
                     array('custom_avail', '==', 'false'),
@@ -489,8 +489,8 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'       => 'cont_max_people',
                 'type'     => 'number',
-                'title'    => __('Maximum Person', 'tourfic'),
-                'subtitle' => __('Maximum person to travel', 'tourfic'),
+                'title'    => __('Maximum Person', TFD),
+                'subtitle' => __('Maximum person to travel', TFD),
                 'dependency' => array(
                     array('type', '==', 'continuous'),
                     array('custom_avail', '==', 'false'),
@@ -499,7 +499,7 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'     => 'allowed_time',
                 'type'   => 'repeater',
-                'title'  => __('Allowed Time', 'tourfic'),
+                'title'  => __('Allowed Time', TFD),
                 'subtitle'   => $badge_pro,
                 'dependency' => array(
                     array('type', '==', 'continuous'),
@@ -511,8 +511,8 @@ if ( class_exists( 'CSF' ) ) {
                         'id'       => '',
                         'class' => 'tf-csf-disable tf-csf-pro',
                         'type'     => 'datetime',
-                        'title'    => __('Time', 'tourfic'),
-                        'subtitle' => __('Only Time' .$badge_pro, 'tourfic'),
+                        'title'    => __('Time', TFD),
+                        'subtitle' => __('Only Time' .$badge_pro, TFD),
                         'settings' => array(
                             'noCalendar' => true,
                             'enableTime' => true,
@@ -526,7 +526,7 @@ if ( class_exists( 'CSF' ) ) {
 
             array(
                 'type'    => 'subheading',
-                'content' => __('Disabled Dates', 'tourfic'),
+                'content' => __('Disabled Dates', TFD),
                 'dependency' => array(
                     array('type', '==', 'continuous'),
                     array('custom_avail', '==', 'false'),
@@ -537,7 +537,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'         => '',
                 'class' => 'tf-csf-disable tf-csf-pro',
                 'type'       => 'checkbox',
-                'title'      => __('Select day to disable', 'tourfic'),
+                'title'      => __('Select day to disable', TFD),
                 'subtitle'   => $badge_pro,
                 'dependency' => array(
                     array('type', '==', 'continuous'),
@@ -545,13 +545,13 @@ if ( class_exists( 'CSF' ) ) {
                 ),
                 'inline'     => true,
                 'options'    => array(
-                    '0' => __('Sunday', 'tourfic'),
-                    '1' => __('Monday', 'tourfic'),
-                    '2' => __('Tuesday', 'tourfic'),
-                    '3' => __('Wednesday', 'tourfic'),
-                    '4' => __('Thursday', 'tourfic'),
-                    '5' => __('Friday', 'tourfic'),
-                    '6' => __('Saturday', 'tourfic'),
+                    '0' => __('Sunday', TFD),
+                    '1' => __('Monday', TFD),
+                    '2' => __('Tuesday', TFD),
+                    '3' => __('Wednesday', TFD),
+                    '4' => __('Thursday', TFD),
+                    '5' => __('Friday', TFD),
+                    '6' => __('Saturday', TFD),
                 ),
             ),
 
@@ -559,7 +559,7 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'     => 'disable_range',
                 'type'   => 'repeater',
-                'title'  => __('Disabled Date Range', 'tourfic'),
+                'title'  => __('Disabled Date Range', TFD),
                 'max' => 2,
                 'dependency' => array(
                     array('type', '==', 'continuous'),
@@ -570,7 +570,7 @@ if ( class_exists( 'CSF' ) ) {
                     array(
                         'id'       => 'date',
                         'type'     => 'datetime',
-                        'title'    => __('Select date range', 'tourfic'),
+                        'title'    => __('Select date range', TFD),
                         'from_to'  => true,
                         'settings' => array(
                             'dateFormat' => 'Y/m/d',
@@ -587,7 +587,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'    => '',
                 'class' => 'tf-csf-disable tf-csf-pro',
                 'type'  => 'datetime',
-                'title' => __('Disable Specific Dates', 'tourfic'),
+                'title' => __('Disable Specific Dates', TFD),
                 'subtitle'   => $badge_pro,
                 'dependency' => array(
                     array('type', '==', 'continuous'),
@@ -608,8 +608,8 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'         => 'fixed_availability',
                 'type'       => 'fieldset',
-                'title'      => __('Availability', 'tourfic'),
-                'subtitle'   => __('Input your availability' .$badge_pro, 'tourfic'),
+                'title'      => __('Availability', TFD),
+                'subtitle'   => __('Input your availability' .$badge_pro, TFD),
                 'dependency' => array('type', '==', 'fixed'),
                 'class'      => 'fixed_availability',
                 'fields'     => array(
@@ -617,8 +617,8 @@ if ( class_exists( 'CSF' ) ) {
                         'id'       => '',
                         'class' => 'tf-csf-disable tf-csf-pro',
                         'type'     => 'datetime',
-                        'title'    => __('Check In', 'tourfic'),
-                        'subtitle' => __('Select check in date' .$badge_pro, 'tourfic'),
+                        'title'    => __('Check In', TFD),
+                        'subtitle' => __('Select check in date' .$badge_pro, TFD),
                         'class'    => 'check-in',
                         'settings' => array(
                             'dateFormat'      => 'Y/m/d'
@@ -632,15 +632,15 @@ if ( class_exists( 'CSF' ) ) {
                         'id'       => '',
                         'class' => 'tf-csf-disable tf-csf-pro',
                         'type'     => 'number',
-                        'title'    => __('Minimum People', 'tourfic'),
-                        'subtitle' => __('Minimum seat number' .$badge_pro, 'tourfic'),
+                        'title'    => __('Minimum People', TFD),
+                        'subtitle' => __('Minimum seat number' .$badge_pro, TFD),
                     ),
                     array(
                         'id'       => '',
                         'class' => 'tf-csf-disable tf-csf-pro',
                         'type'     => 'number',
-                        'title'    => __('Maximum People', 'tourfic'),
-                        'subtitle' => __('Maximum seat number' .$badge_pro, 'tourfic'),
+                        'title'    => __('Maximum People', TFD),
+                        'subtitle' => __('Maximum seat number' .$badge_pro, TFD),
                     ),
                 ),
             ),
@@ -649,7 +649,7 @@ if ( class_exists( 'CSF' ) ) {
     ));
 
     CSF::createSection( $prefix, array(
-        'title'  => __( 'Booking', 'tourfic' ),
+        'title'  => __( 'Booking', TFD ),
         'fields' => array(
 
             array(
@@ -657,40 +657,40 @@ if ( class_exists( 'CSF' ) ) {
                 'class' => 'tf-csf-disable tf-csf-pro',
                 'type'     => 'slider',
                 'max'      => '30',
-                'title'    => __( 'Minimum days to book before departure', 'tourfic' ),
-                'subtitle' => __( 'Customer can not book after this date' .$badge_pro, 'tourfic' ),
+                'title'    => __( 'Minimum days to book before departure', TFD ),
+                'subtitle' => __( 'Customer can not book after this date' .$badge_pro, TFD ),
             ),
         ),
     ) );
 
     CSF::createSection( $prefix, array(
-        'title'  => __( 'Exclude/Include', 'tourfic' ),
+        'title'  => __( 'Exclude/Include', TFD ),
         'fields' => array(
             array(
                 'id'     => 'inc',
                 'type'   => 'repeater',
-                'title'  => __( 'Include', 'tourfic' ),
+                'title'  => __( 'Include', TFD ),
                 'max' => 5,
                 'fields' => array(
                     array(
                         'id'       => 'inc',
                         'type'     => 'text',
-                        'title'    => __( 'Included', 'tourfic' ),
-                        'subtitle' => __( 'Included facilites', 'tourfic' ),
+                        'title'    => __( 'Included', TFD ),
+                        'subtitle' => __( 'Included facilites', TFD ),
                     ),
                 ),
             ),
             array(
                 'id'     => 'exc',
                 'type'   => 'repeater',
-                'title'  => __( 'Exclude', 'tourfic' ),
+                'title'  => __( 'Exclude', TFD ),
                 'max' => 5,
                 'fields' => array(
                     array(
                         'id'       => 'exc',
                         'type'     => 'text',
-                        'title'    => __( 'Excluded', 'tourfic' ),
-                        'subtitle' => __( 'Excluded facilites', 'tourfic' ),
+                        'title'    => __( 'Excluded', TFD ),
+                        'subtitle' => __( 'Excluded facilites', TFD ),
                     ),
                 ),
             ),
@@ -698,39 +698,39 @@ if ( class_exists( 'CSF' ) ) {
     ) );
 
     CSF::createSection( $prefix, array(
-        'title'  => __( 'Itinerary', 'tourfic' ),
+        'title'  => __( 'Itinerary', TFD ),
         'fields' => array(
             array(
                 'id'     => 'itinerary',
                 'type'   => 'repeater',
-                'title'  => __( 'Itinerary', 'tourfic' ),
+                'title'  => __( 'Itinerary', TFD ),
                 'max' => 5,
                 'fields' => array(
                     array(
                         'id'       => 'time',
                         'type'     => 'text',
-                        'title'    => __( 'Time or Day', 'tourfic' ),
-                        'subtitle' => __( 'You can place the tour plan', 'tourfic' ),
+                        'title'    => __( 'Time or Day', TFD ),
+                        'subtitle' => __( 'You can place the tour plan', TFD ),
                     ),
                     array(
                         'id'       => 'title',
                         'type'     => 'text',
-                        'title'    => __( 'Title', 'tourfic' ),
-                        'subtitle' => __( 'Input the title here', 'tourfic' ),
+                        'title'    => __( 'Title', TFD ),
+                        'subtitle' => __( 'Input the title here', TFD ),
                     ),
                     array(
                         'id'           => 'image',
                         'type'         => 'upload',
-                        'title'        => __('Upload Image', 'tourfic' ),
+                        'title'        => __('Upload Image', TFD ),
                         'library'      => 'image',
                         'placeholder'  => 'http://',
-                        'button_title' => __('Add Image', 'tourfic' ),
-                        'remove_title' => __('Remove Image', 'tourfic' ),
+                        'button_title' => __('Add Image', TFD ),
+                        'remove_title' => __('Remove Image', TFD ),
                     ),
                     array(
                         'id'    => 'desc',
                         'type'  => 'textarea',
-                        'title' => __( 'Description', 'tourfic' ),
+                        'title' => __( 'Description', TFD ),
                     ),
                 ),
             ),
@@ -738,22 +738,22 @@ if ( class_exists( 'CSF' ) ) {
     ) );
 
     CSF::createSection( $prefix, array(
-        'title'  => __( 'FAQs', 'tourfic' ),
+        'title'  => __( 'FAQs', TFD ),
         'fields' => array(
             array(
                 'id'     => 'faqs',
                 'type'   => 'repeater',
-                'title'  => __( 'FAQs', 'tourfic' ),
+                'title'  => __( 'FAQs', TFD ),
                 'fields' => array(
                     array(
                         'id'    => 'title',
                         'type'  => 'text',
-                        'title' => __( 'FAQ Title', 'tourfic' ),
+                        'title' => __( 'FAQ Title', TFD ),
                     ),
                     array(
                         'id'    => 'desc',
                         'type'  => 'textarea',
-                        'title' => __( 'FAQ Description', 'tourfic' ),
+                        'title' => __( 'FAQ Description', TFD ),
                     ),
                 ),
             ),
@@ -761,16 +761,52 @@ if ( class_exists( 'CSF' ) ) {
     ) );
 
     CSF::createSection( $prefix, array(
-        'title'  => __( 'Terms & Conditions', 'tourfic' ),
+        'title'  => __( 'Terms & Conditions', TFD ),
         'fields' => array(
             array(
                 'id'    => 'terms_conditions',
                 'type'  => 'wp_editor',
-                'title' => __( 'Terms & Conditions', 'tourfic' ),
+                'title' => __( 'Terms & Conditions', TFD ),
             ),
         ),
     ) );
 
-}
+    // Settings
+    CSF::createSection(
+        $prefix,
+        array(
+            'title'  => __('Settings', 'tourfic'),
+            'fields' => array(
 
-?>
+              array(
+                'type'    => 'subheading',
+                'content' => __('Settings', 'tourfic' ),
+              ),
+      
+              array(
+                'id'       => 't-review',
+                'type'     => 'switcher',
+                'title'    => __('Disable Review Section', 'tourfic' ),
+                'text_on'  => __('Yes', 'tourfic' ),
+                'text_off' => __('No', 'tourfic' ),
+            ),
+    
+            array(
+                'id'       => 't-related',
+                'type'     => 'switcher',
+                'title'    => __('Disable Related Tour Section', 'tourfic' ),
+                'text_on'  => __('Yes', 'tourfic' ),
+                'text_off' => __('No', 'tourfic' ),
+            ),
+
+              array(
+                'type'    => 'notice',
+                'style'   => 'info',
+                'content' => __('These settings will overwrite global settings', 'tourfic' ),
+              ),
+
+            ),
+        )
+    );
+
+}

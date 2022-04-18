@@ -126,5 +126,3 @@ function tf_is_gutenberg_active() {
 	
 	return false;
 }
-
-?>

@@ -9,16 +9,17 @@ defined( 'ABSPATH' ) || exit;
  */
 class TF_Recent_Hotels_slider extends \Elementor\Widget_Base {
 
-	/**
-	 * Retrieve the widget name.
-	 *
-	 * @access public
-	 *
-	 * @return string Widget name.
-	 */
-	public function get_name() {
-		return 'tourfic-slider';
-	}
+    /**
+     * Retrieve the widget name.
+     *
+     * @access public
+     *
+     * @return string Widget name.
+     */
+    public function get_name()
+    {
+        return 'tourfic-slider';
+    }
 
 	/**
 	 * Retrieve the widget title.
@@ -31,16 +32,17 @@ class TF_Recent_Hotels_slider extends \Elementor\Widget_Base {
 		return __( 'Recent Hotels Slider', 'tourfic' );
 	}
 
-	/**
-	 * Retrieve the widget icon.
-	 *
-	 * @access public
-	 *
-	 * @return string Widget icon.
-	 */
-	public function get_icon() {
-		return 'eicon-carousel';
-	}
+    /**
+     * Retrieve the widget icon.
+     *
+     * @access public
+     *
+     * @return string Widget icon.
+     */
+    public function get_icon()
+    {
+        return 'eicon-carousel';
+    }
 
 	/**
 	 * Retrieve the list of categories the widget belongs to.
@@ -70,7 +72,7 @@ class TF_Recent_Hotels_slider extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content',
 			[
-				'label' => __( 'Content', 'tourfic' ),
+				'label' => __( 'Content', TFD ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -139,7 +141,7 @@ class TF_Recent_Hotels_slider extends \Elementor\Widget_Base {
 		$this->add_control(
 			'title_color',
 			[
-				'label' => __( 'Title Color', 'tourfic' ),
+				'label' => __( 'Title Color', TFD ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => \Elementor\Core\Schemes\Color::get_type(),
@@ -170,7 +172,7 @@ class TF_Recent_Hotels_slider extends \Elementor\Widget_Base {
 		$this->add_control(
 			'subtitle_color',
 			[
-				'label' => __( 'Subtitle Color', 'tourfic' ),
+				'label' => __( 'Subtitle Color', TFD ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => \Elementor\Core\Schemes\Color::get_type(),

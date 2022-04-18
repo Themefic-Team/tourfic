@@ -120,3 +120,11 @@
 .notice-warning .tf-major-update-warning__icon {
     fill: #f56e28;
 }
+
+/**
+ * Codestar
+ */
+.disable-sortable .csf-repeater-sort,
+.disable-sortable .csf-repeater-clone {
+    display: none !important;
+}

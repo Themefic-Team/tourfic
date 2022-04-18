@@ -8,16 +8,17 @@ defined( 'ABSPATH' ) || exit;
  */
 class TF_Tour_Destinations extends \Elementor\Widget_Base {
 
-	/**
-	 * Retrieve the widget name.
-	 *
-	 * @access public
-	 *
-	 * @return string Widget name.
-	 */
-	public function get_name() {
-		return 'tourfic-destination';
-	}
+    /**
+     * Retrieve the widget name.
+     *
+     * @access public
+     *
+     * @return string Widget name.
+     */
+    public function get_name()
+    {
+        return 'tourfic-destination';
+    }
 
 	/**
 	 * Retrieve the widget title.
@@ -194,54 +195,97 @@ class TF_Tour_Destinations extends \Elementor\Widget_Base {
 
 
 
-		$this->add_control(
-			'tf_info_options',
-			[
-				'label' => __( 'Info Background', 'tourfic' ),
-				'type' => \Elementor\Controls_Manager::HEADING,
-				'separator' => 'after',
-			]
-		);
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'tf_destination_subtitle_typography',
+                'label' => __('Destination Subitle Typography', 'torfic'),
+                'selector' => '{{WRAPPER}} .recomended_place_info_header p',
+            ]
+        );
 
-		$this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
-			[
-				'name' => 'tf_info_background',
-				'label' => __( 'Background Color', 'tourfic' ),
-				'types' => [ 'classic', 'gradient', 'video' ],
-				'selector' => '{{WRAPPER}} .recomended_place_info_header',
-			]
-		);		
-		$this->add_control(
-			'tf_info_hover_options',
-			[
-				'label' => __( 'Info Hover Background', 'tourfic' ),
-				'type' => \Elementor\Controls_Manager::HEADING,
-				'separator' => 'after',
-			]
-		);
-		$this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
-			[
-				'name' => 'tf_info_hover_background',
-				'label' => __( 'Background Color', 'tourfic' ),
-				'types' => [ 'classic', 'gradient', 'video' ],
-				'selector' => '{{WRAPPER}} .single_recomended_item:hover .recomended_place_info_header',
-			]
-		);
+        $this->add_control(
+            'tf_destination_subtitle_color',
+            [
+                'label' => __('Destination Subtitle Color', TFD),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'scheme' => [
+                    'type' => \Elementor\Scheme_Color::get_type(),
+                    'value' => \Elementor\Scheme_Color::COLOR_3,
+                ],
+                'default' => '#FFFFFF',
+                'selectors' => [
+                    '{{WRAPPER}} .recomended_place_info_header p' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
 
-		$this->end_controls_section();
+        $this->add_control(
+            'tf_destination_subtitle_hover_color',
+            [
+                'label' => __('Destination Subtitle Hover Color', TFD),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'scheme' => [
+                    'type' => \Elementor\Scheme_Color::get_type(),
+                    'value' => \Elementor\Scheme_Color::COLOR_4,
+                ],
+                'default' => '#FFFFFF',
+                'selectors' => [
+                    '{{WRAPPER}} .single_recomended_item:hover .recomended_place_info_header p' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
 
-	}
 
-	/**
-	 * Render the widget output on the frontend.
-	 *
-	 * Written in PHP and used to generate the final HTML.
-	 *
-	 * @access protected
-	 */
-	protected function render() {
+
+        $this->add_control(
+            'tf_info_options',
+            [
+                'label' => __('Info Background', TFD),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'after',
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'tf_info_background',
+                'label' => __('Background Color', TFD),
+                'types' => ['classic', 'gradient', 'video'],
+                'selector' => '{{WRAPPER}} .recomended_place_info_header',
+            ]
+        );
+        $this->add_control(
+            'tf_info_hover_options',
+            [
+                'label' => __('Info Hover Background', TFD),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'after',
+            ]
+        );
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'tf_info_hover_background',
+                'label' => __('Background Color', TFD),
+                'types' => ['classic', 'gradient', 'video'],
+                'selector' => '{{WRAPPER}} .single_recomended_item:hover .recomended_place_info_header',
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    /**
+     * Render the widget output on the frontend.
+     *
+     * Written in PHP and used to generate the final HTML.
+     *
+     * @access protected
+     */
+    protected function render()
+    {
 
 		$settings = $this->get_settings_for_display();
 		$ids = $settings['ids'];

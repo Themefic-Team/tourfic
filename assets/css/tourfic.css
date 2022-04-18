@@ -483,9 +483,6 @@
 |            Search Page CSS     |
 ================================*/
 /* Filter Widget  */
-.widget_tf_hotel_filter .tf-filter{
-
-}
 .widget_tf_hotel_filter .tf-filter ul{
     display: block;
     margin: 0;
@@ -551,15 +548,6 @@
     line-height: 18px;
     padding: 0;
     margin: 0;
-}
-.tf-widget-slider .tf-slider-wrapper{
-    
-}
-.tf-widget-slider .tf-slider-wrapper .tf-slider-inner{
-    
-}
-.tf-widget-slider .tf-slider-wrapper .tf-single{
-    
 }
 .tf-widget-slider .tf-slider-wrapper .tf-single img{
     border-top-right-radius: 10px;

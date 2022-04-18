@@ -7,16 +7,17 @@ defined( 'ABSPATH' ) || exit;
  */
 class TF_Search_horizontal extends \Elementor\Widget_Base {
 
-	/**
-	 * Retrieve the widget name.
-	 *
-	 * @access public
-	 *
-	 * @return string Widget name.
-	 */
-	public function get_name() {
-		return 'tourfic-search';
-	}
+    /**
+     * Retrieve the widget name.
+     *
+     * @access public
+     *
+     * @return string Widget name.
+     */
+    public function get_name()
+    {
+        return 'tourfic-search';
+    }
 
 	/**
 	 * Retrieve the widget title.
@@ -29,16 +30,17 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 		return __( 'Tourfic Search Form (Horizontal)', 'tourfic' );
 	}
 
-	/**
-	 * Retrieve the widget icon.
-	 *
-	 * @access public
-	 *
-	 * @return string Widget icon.
-	 */
-	public function get_icon() {
-		return 'eicon-site-search';
-	}
+    /**
+     * Retrieve the widget icon.
+     *
+     * @access public
+     *
+     * @return string Widget icon.
+     */
+    public function get_icon()
+    {
+        return 'eicon-site-search';
+    }
 
 	/**
 	 * Retrieve the list of categories the widget belongs to.
@@ -119,16 +121,16 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			]
 		);
 
-		$this->end_controls_section();
+        $this->end_controls_section();
 
 
-		$this->start_controls_section(
-			'tf_search_style_section',
-			[
-				'label' => __( 'Style', 'tourfic' ),
-				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-			]
-		);
+        $this->start_controls_section(
+            'tf_search_style_section',
+            [
+                'label' => __('Style', TFD),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
@@ -153,12 +155,12 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'tf_subhr',
-			[
-				'type' => \Elementor\Controls_Manager::DIVIDER,
-			]
-		);
+        $this->add_control(
+            'tf_subhr',
+            [
+                'type' => \Elementor\Controls_Manager::DIVIDER,
+            ]
+        );
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
@@ -184,19 +186,19 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			]
 		);
 
-		$this->end_controls_section();
+        $this->end_controls_section();
+    }
 
-	}
-
-	/**
-	 * Render the widget output on the frontend.
-	 *
-	 * Written in PHP and used to generate the final HTML.
-	 *
-	 * @access protected
-	 */
-	protected function render() {
-		$settings = $this->get_settings_for_display();
+    /**
+     * Render the widget output on the frontend.
+     *
+     * Written in PHP and used to generate the final HTML.
+     *
+     * @access protected
+     */
+    protected function render()
+    {
+        $settings = $this->get_settings_for_display();
         $tf_search_title = $settings['tf_search_title'];
         $tf_search_subtitle = $settings['tf_search_subtitle'];
 		$type = $settings['type'];
@@ -207,4 +209,6 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 	}
 
 
+        echo do_shortcode('[tf_search_form title="' . $tf_search_title . '" subtitle="' . $tf_search_subtitle . '" ]');
+    }
 }

@@ -8,38 +8,38 @@ $badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' .__("Upco
 
 CSF::createSection( $prefix, array(
     'id'     => 'vendor',
-    'title'  => __( 'Multi Vendor', 'tourfic' ),
+    'title'  => __( 'Multi Vendor', TFD ),
     'icon'   => 'fas fa-handshake',
     'fields' => array(
 
       // Registration
       array(
         'type'    => 'subheading',
-        'content' => __('Registration', 'tourfic' ),
+        'content' => __('Registration', TFD ),
       ),
 
       array(
         'id'         => 'reg-pop',
         'class'      => 'tf-csf-disable tf-csf-pro',
         'type'       => 'switcher',
-        'title'      => __('Registration Form Popup', 'tourfic' ),
-        'subtitle'   => __('Add class <code>tf-reg-popup</code> to trigger the popup' .$badge_pro, 'tourfic' ),
-        'text_on'    => __('Enabled', 'tourfic' ),
-        'text_off'   => __('Disabled', 'tourfic' ),
+        'title'      => __('Registration Form Popup', TFD ),
+        'subtitle'   => __('Add class <code>tf-reg-popup</code> to trigger the popup' .$badge_pro, TFD ),
+        'text_on'    => __('Enabled', TFD ),
+        'text_off'   => __('Disabled', TFD ),
         'text_width' => 100,
         'default'    => true,
       ),
 
       array(
         'type'    => 'content',
-        'content' => __('Use shortcode <code>[tf_registration_form]</code> to show registration form in post/page.', 'tourfic' ),
+        'content' => __('Use shortcode <code>[tf_registration_form]</code> to show registration form in post/page.', TFD ),
       ),
 
       array(
         'id'       => 'email-verify',
         'class'    => 'tf-csf-disable tf-csf-pro',
         'type'     => 'switcher',
-        'title'    => __('Enable Email Verification', 'tourfic' ),
+        'title'    => __('Enable Email Verification', TFD ),
         'subtitle' => $badge_pro,
         'default'  => true,
       ),
@@ -48,8 +48,8 @@ CSF::createSection( $prefix, array(
         'id'         => 'prevent-login',
         'class' => 'tf-csf-disable tf-csf-pro',
         'type'       => 'switcher',
-        'title'      => __('Login Restriction', 'tourfic' ),
-        'subtitle'   => __('Prevent unverified user to login' .$badge_pro, 'tourfic' ),
+        'title'      => __('Login Restriction', TFD ),
+        'subtitle'   => __('Prevent unverified user to login' .$badge_pro, TFD ),
         'dependency' => array( 'email-verify', '==', 'true' ),
         'default'    => true,
       ),
@@ -57,15 +57,15 @@ CSF::createSection( $prefix, array(
       // Vendor
       array(
         'type'    => 'subheading',
-        'content' => __('Vendor', 'tourfic' ),
+        'content' => __('Vendor', TFD ),
       ),
 
       array(
         'id'       => 'vendor-reg',
         'class' => 'tf-csf-disable tf-csf-pro',
         'type'     => 'switcher',
-        'title'    => __('Enable Vendor Registration', 'tourfic' ),
-        'subtitle' => __('Visitor can register as vendor using the registration form' .$badge_pro, 'tourfic' ),
+        'title'    => __('Enable Vendor Registration', TFD ),
+        'subtitle' => __('Visitor can register as vendor using the registration form' .$badge_pro, TFD ),
         'default'  => true,
       ),
 
@@ -73,15 +73,14 @@ CSF::createSection( $prefix, array(
         'id'       => 'vendor-tax-add',
         'class'    => 'tf-csf-disable tf-csf-pro',
         'type'     => 'checkbox',
-        'title'    => __('Vendor Can Add', 'tourfic' ),
+        'title'    => __('Vendor Can Add', TFD ),
         'subtitle' => $badge_pro,
         'options'  => array(
-          'hl' => __('Hotel Location', 'tourfic' ),
-          'hf' => __('Hotel Feature', 'tourfic' ),
-          'td' => __('Tour Destination', 'tourfic' ),
+          'hl' => __('Hotel Location', TFD ),
+          'hf' => __('Hotel Feature', TFD ),
+          'td' => __('Tour Destination', TFD ),
         ),
       ),
 
     )    
   ) );
-?>

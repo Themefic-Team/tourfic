@@ -4,31 +4,30 @@ defined( 'ABSPATH' ) || exit;
 
 CSF::createSection( $prefix, array(
     'parent' => 'tour',
-    'title'  => __( 'Single Page', 'tourfic' ),
+    'title'  => __( 'Single Page', TFD ),
     'fields' => array(
 
         array(
             'type'    => 'subheading',
-            'content' => __('Single Tour Settings', 'tourfic' ),
+            'content' => __('Single Tour Settings', TFD ),
         ),
 
         array(
             'id'       => 't-review',
             'type'     => 'switcher',
-            'title'    => __('Disable Review Section', 'tourfic' ),
-            'text_on'  => __('Yes', 'tourfic' ),
-            'text_off' => __('No', 'tourfic' ),
+            'title'    => __('Disable Review Section', TFD ),
+            'text_on'  => __('Yes', TFD ),
+            'text_off' => __('No', TFD ),
         ),
 
         array(
             'id'       => 't-related',
             'type'     => 'switcher',
-            'title'    => __('Disable Related Tour Section', 'tourfic' ),
-            'text_on'  => __('Yes', 'tourfic' ),
-            'text_off' => __('No', 'tourfic' ),
+            'title'    => __('Disable Related Tour Section', TFD ),
+            'text_on'  => __('Yes', TFD ),
+            'text_off' => __('No', TFD ),
         ),
 
     )
     
 ) );
-?>

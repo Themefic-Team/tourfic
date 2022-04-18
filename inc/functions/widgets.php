@@ -1,13 +1,14 @@
 <?php
 // don't load directly
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
 /**
  * Hotel filter by features
  * 
  * Works only for hotel
  */
-class TF_Hotel_Feature_Filter extends WP_Widget {
+class TF_Hotel_Feature_Filter extends WP_Widget
+{
     /**
      * Register widget with WordPress.
      */
@@ -16,8 +17,8 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
 
         parent::__construct(
             'tf_hotel_filter', // Base ID
-            'Tourfic - Hotels Filters by Feature', 
-            array('description' => __('Filter search result by hotel feature', 'tourfic'),) // Args
+            'Tourfic - Hotels Filters by Feature',
+            array('description' => __('Filter search result by hotel feature', TFD),) // Args
         );
     }
 
@@ -55,7 +56,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
             );
 
             $get_terms = get_terms($taxonomy);
-                
+
             $destination_name = !empty($_GET['destination']) ? $_GET['destination'] : '';
 
             echo "<div class='tf-filter'><ul>";
@@ -89,13 +90,13 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
     public function form($instance)
     {
 
-        $title = isset($instance['title']) ? $instance['title'] : __('Popular Filters', 'tourfic');
+        $title = isset($instance['title']) ? $instance['title'] : __('Popular Filters', TFD);
         $terms = isset($instance['terms']) ? $instance['terms'] : 'all';
 
         $show_count = isset($instance['show_count']) ? $instance['show_count'] : '';
         $hide_empty = isset($instance['hide_empty']) ? $instance['hide_empty'] : '';
 
-    ?>
+?>
         <p class="tf-widget-field">
             <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
@@ -108,7 +109,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
             wp_dropdown_categories(array(
                 'taxonomy'          => 'hotel_feature',
                 'hierarchical'      => false,
-                //'show_option_none'  => esc_html_x( '', 'All Terms', 'tourfic' ),
+                //'show_option_none'  => esc_html_x( '', 'All Terms', TFD ),
                 //'option_none_value' => '',
                 'name'              => $this->get_field_name('terms'),
                 'id'                => $this->get_field_id('terms'),
@@ -141,7 +142,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
             });
             jQuery(document).trigger('tf_select2');
         </script>
-<?php
+    <?php
     }
 
     /**
@@ -169,17 +170,19 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
 /**
  * Similar Tours
  */
-class Tourfic_Similar_Tours extends WP_Widget {
+class Tourfic_Similar_Tours extends WP_Widget
+{
 
     /**
      * Register widget with WordPress.
      */
-    public function __construct() {
+    public function __construct()
+    {
 
         parent::__construct(
             'tf_similar_tours', // Base ID
             'Tourfic - Similar Tours', // Name
-            array( 'description' => __( 'Show more tours button on single tour page.', 'tourfic' ), ) // Args
+            array('description' => __('Show more tours button on single tour page.', TFD),) // Args
         );
     }
 
@@ -191,33 +194,34 @@ class Tourfic_Similar_Tours extends WP_Widget {
      * @param array $args     Widget arguments.
      * @param array $instance Saved values from database.
      */
-    public function widget( $args, $instance ) {
-        extract( $args );
-        $title = apply_filters( 'widget_title', $instance['title'] );
-        $btn_label = isset( $instance[ 'btn_label' ] ) ? $instance[ 'btn_label' ] : __( 'Show more hotels', 'tourfic' );
+    public function widget($args, $instance)
+    {
+        extract($args);
+        $title = apply_filters('widget_title', $instance['title']);
+        $btn_label = isset($instance['btn_label']) ? $instance['btn_label'] : __('Show more hotels', TFD);
 
-        if ( !is_singular( 'tourfic' ) ) {
-        	return;
+        if (!is_singular(TFD)) {
+            return;
         }
 
 
-        $terms = get_the_terms( get_the_ID(), 'destination' );
+        $terms = get_the_terms(get_the_ID(), 'destination');
 
         echo $before_widget;
-        ?>
-		<!-- Start similar tour widget -->
-		<div class="tf-similar-tour-wrap">
-			<?php
-			if ( ! empty( $title ) ) {
-	            echo "<div class='not-impressive'>{$title}</div>";
-	        }
-			?>
-			<div class="ni-buttons">
-				<a href="<?php echo tourfic_booking_search_action().'?destination='.esc_attr( $terms[0]->name ).'&adults='.$_GET['adults'].'&children='.$_GET['children'].'&room='.$_GET['room'].'&check-in-date='.$_GET['check-in-date'].'&check-out-date='.$_GET['check-out-date']; ?>" class="button tf_button btn-outline"><?php esc_html_e( $btn_label ); ?></a>
-			</div>
-		</div>
-		<!-- End similar tour widget -->
-        <?php
+    ?>
+        <!-- Start similar tour widget -->
+        <div class="tf-similar-tour-wrap">
+            <?php
+            if (!empty($title)) {
+                echo "<div class='not-impressive'>{$title}</div>";
+            }
+            ?>
+            <div class="ni-buttons">
+                <a href="<?php echo tourfic_booking_search_action() . '?destination=' . esc_attr($terms[0]->name) . '&adults=' . $_GET['adults'] . '&children=' . $_GET['children'] . '&room=' . $_GET['room'] . '&check-in-date=' . $_GET['check-in-date'] . '&check-out-date=' . $_GET['check-out-date']; ?>" class="button tf_button btn-outline"><?php esc_html_e($btn_label); ?></a>
+            </div>
+        </div>
+        <!-- End similar tour widget -->
+    <?php
 
         echo $after_widget;
     }
@@ -229,18 +233,19 @@ class Tourfic_Similar_Tours extends WP_Widget {
      *
      * @param array $instance Previously saved values from database.
      */
-    public function form( $instance ) {
+    public function form($instance)
+    {
 
-        $title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : __( 'Not impressive?', 'tourfic' );
-        $btn_label = isset( $instance[ 'btn_label' ] ) ? $instance[ 'btn_label' ] : __( 'Show more hotels', 'tourfic' );
-        ?>
+        $title = isset($instance['title']) ? $instance['title'] : __('Not impressive?', TFD);
+        $btn_label = isset($instance['btn_label']) ? $instance['btn_label'] : __('Show more hotels', TFD);
+    ?>
         <p class="tf-widget-field">
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'tourfic' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', TFD); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
         </p>
         <p class="tf-widget-field">
-            <label for="<?php echo $this->get_field_id( 'btn_label' ); ?>"><?php _e( 'Button Label', 'tourfic' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'btn_label' ); ?>" name="<?php echo $this->get_field_name( 'btn_label' ); ?>" type="text" value="<?php echo esc_attr( $btn_label ); ?>" />
+            <label for="<?php echo $this->get_field_id('btn_label'); ?>"><?php _e('Button Label', TFD); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id('btn_label'); ?>" name="<?php echo $this->get_field_name('btn_label'); ?>" type="text" value="<?php echo esc_attr($btn_label); ?>" />
         </p>
     <?php
     }
@@ -255,31 +260,33 @@ class Tourfic_Similar_Tours extends WP_Widget {
      *
      * @return array Updated safe values to be saved.
      */
-    public function update( $new_instance, $old_instance ) {
+    public function update($new_instance, $old_instance)
+    {
         $instance = array();
-        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-        $instance['btn_label'] = ( !empty( $new_instance['btn_label'] ) ) ? strip_tags( $new_instance['btn_label'] ) : '';
+        $instance['title'] = (!empty($new_instance['title'])) ? strip_tags($new_instance['title']) : '';
+        $instance['btn_label'] = (!empty($new_instance['btn_label'])) ? strip_tags($new_instance['btn_label']) : '';
 
         return $instance;
     }
-
 }
 
 
 /**
  * Ask Question
  */
-class Tourfic_Ask_Question extends WP_Widget {
+class Tourfic_Ask_Question extends WP_Widget
+{
 
     /**
      * Register widget with WordPress.
      */
-    public function __construct() {
+    public function __construct()
+    {
 
         parent::__construct(
             'tf_ask_question', // Base ID
             'Tourfic - Ask Question', // Name
-            array( 'description' => __( 'Ask a question button on single hotel page.', 'tourfic' ), ) // Args
+            array('description' => __('Ask a question button on single hotel page.', TFD),) // Args
         );
     }
 
@@ -291,39 +298,40 @@ class Tourfic_Ask_Question extends WP_Widget {
      * @param array $args     Widget arguments.
      * @param array $instance Saved values from database.
      */
-    public function widget( $args, $instance ) {
-        extract( $args );
-        $title = apply_filters( 'widget_title', $instance['title'] );
-        $subtitle = isset( $instance[ 'subtitle' ] ) ? $instance[ 'subtitle' ] : __( 'Find more info in the FAQ section.', 'tourfic' );
-        $btn_label = isset( $instance[ 'btn_label' ] ) ? $instance[ 'btn_label' ] : __( 'Ask a question', 'tourfic' );
+    public function widget($args, $instance)
+    {
+        extract($args);
+        $title = apply_filters('widget_title', $instance['title']);
+        $subtitle = isset($instance['subtitle']) ? $instance['subtitle'] : __('Find more info in the FAQ section.', TFD);
+        $btn_label = isset($instance['btn_label']) ? $instance['btn_label'] : __('Ask a question', TFD);
 
-        if ( !is_singular( array( 'tf_hotel', 'tf_tours' ) ) ) {
-        	return;
+        if (!is_singular(array('tf_hotel', 'tf_tours'))) {
+            return;
         }
 
         echo $before_widget;
 
-        ?>
-		<!-- Start ask ques tour widget -->
-		<div class="tf-gotq-tour-wrap">
-			<div class="gotq-top">
-				<?php
-				if ( ! empty( $title ) ) {
-		            echo "<h4>{$title}</h4>";
-		        }
-				?>
-				<?php
-				if ( ! empty( $subtitle ) ) {
-		            echo "<p>{$subtitle}</p>";
-		        }
-				?>
-			</div>
-			<div class="ni-buttons">
-				<a href="#" id="tf-ask-question-trigger" class="button tf_button btn-outline"><?php esc_html_e( $btn_label ); ?></a>
-			</div>
-		</div>
-		<!-- End ask ques tour widget -->
-        <?php
+    ?>
+        <!-- Start ask ques tour widget -->
+        <div class="tf-gotq-tour-wrap">
+            <div class="gotq-top">
+                <?php
+                if (!empty($title)) {
+                    echo "<h4>{$title}</h4>";
+                }
+                ?>
+                <?php
+                if (!empty($subtitle)) {
+                    echo "<p>{$subtitle}</p>";
+                }
+                ?>
+            </div>
+            <div class="ni-buttons">
+                <a href="#" id="tf-ask-question-trigger" class="button tf_button btn-outline"><?php esc_html_e($btn_label); ?></a>
+            </div>
+        </div>
+        <!-- End ask ques tour widget -->
+    <?php
 
         echo $after_widget;
     }
@@ -335,25 +343,26 @@ class Tourfic_Ask_Question extends WP_Widget {
      *
      * @param array $instance Previously saved values from database.
      */
-    public function form( $instance ) {
+    public function form($instance)
+    {
 
-        $title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : __( 'Got a question?', 'tourfic' );
-        $subtitle = isset( $instance[ 'subtitle' ] ) ? $instance[ 'subtitle' ] : __( 'Find more info in the FAQ section.', 'tourfic' );
-        $btn_label = isset( $instance[ 'btn_label' ] ) ? $instance[ 'btn_label' ] : __( 'Ask a question', 'tourfic' );
-        ?>
+        $title = isset($instance['title']) ? $instance['title'] : __('Got a question?', TFD);
+        $subtitle = isset($instance['subtitle']) ? $instance['subtitle'] : __('Find more info in the FAQ section.', TFD);
+        $btn_label = isset($instance['btn_label']) ? $instance['btn_label'] : __('Ask a question', TFD);
+    ?>
         <p class="tf-widget-field">
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'tourfic' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', TFD); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
         </p>
         <p class="tf-widget-field">
-            <label for="<?php echo $this->get_field_id( 'subtitle' ); ?>"><?php _e( 'Subtitle', 'tourfic' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'subtitle' ); ?>" name="<?php echo $this->get_field_name( 'subtitle' ); ?>" type="text" value="<?php echo esc_attr( $subtitle ); ?>" />
+            <label for="<?php echo $this->get_field_id('subtitle'); ?>"><?php _e('Subtitle', TFD); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id('subtitle'); ?>" name="<?php echo $this->get_field_name('subtitle'); ?>" type="text" value="<?php echo esc_attr($subtitle); ?>" />
         </p>
         <p class="tf-widget-field">
-            <label for="<?php echo $this->get_field_id( 'btn_label' ); ?>"><?php _e( 'Button Label', 'tourfic' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'btn_label' ); ?>" name="<?php echo $this->get_field_name( 'btn_label' ); ?>" type="text" value="<?php echo esc_attr( $btn_label ); ?>" />
+            <label for="<?php echo $this->get_field_id('btn_label'); ?>"><?php _e('Button Label', TFD); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id('btn_label'); ?>" name="<?php echo $this->get_field_name('btn_label'); ?>" type="text" value="<?php echo esc_attr($btn_label); ?>" />
         </p>
-    <?php
+<?php
     }
 
     /**
@@ -366,61 +375,61 @@ class Tourfic_Ask_Question extends WP_Widget {
      *
      * @return array Updated safe values to be saved.
      */
-    public function update( $new_instance, $old_instance ) {
+    public function update($new_instance, $old_instance)
+    {
         $instance = array();
-        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-        $instance['btn_label'] = ( !empty( $new_instance['btn_label'] ) ) ? strip_tags( $new_instance['btn_label'] ) : '';
-        $instance['subtitle'] = ( !empty( $new_instance['subtitle'] ) ) ? strip_tags( $new_instance['subtitle'] ) : '';
+        $instance['title'] = (!empty($new_instance['title'])) ? strip_tags($new_instance['title']) : '';
+        $instance['btn_label'] = (!empty($new_instance['btn_label'])) ? strip_tags($new_instance['btn_label']) : '';
+        $instance['subtitle'] = (!empty($new_instance['subtitle'])) ? strip_tags($new_instance['subtitle']) : '';
 
         return $instance;
     }
-
 }
 
 /**
  * Add Tourfic sidebar.
  */
-function tourfic_sidebar_widgets_init() {
+function tourfic_sidebar_widgets_init()
+{
 
-    register_sidebar( array(
-        'name'          => __( 'TOURFIC: Single Hotel Sidebar', 'tourfic' ),
+    register_sidebar(array(
+        'name'          => __('TOURFIC: Single Hotel Sidebar', TFD),
         'id'            => 'tf_single_booking_sidebar',
-        'description'   => __( 'Widgets in this area will be shown on hotel single page', 'tourfic' ),
+        'description'   => __('Widgets in this area will be shown on hotel single page', TFD),
         'before_widget' => '<div id="%1$s" class="tf_widget widget %2$s">',
         'after_widget'  => '</div>',
         'before_title'  => '<h4 class="tf_widgettitle">',
         'after_title'   => '</h4>',
-    ) );
-    register_sidebar( array(
-        'name'          => __( 'TOURFIC: Archive Sidebar', 'tourfic' ),
+    ));
+    register_sidebar(array(
+        'name'          => __('TOURFIC: Archive Sidebar', TFD),
         'id'            => 'tf_archive_booking_sidebar',
-        'description'   => __( 'Widgets in this area will be shown on tourfic archive/search page', 'tourfic' ),
+        'description'   => __('Widgets in this area will be shown on tourfic archive/search page', TFD),
         'before_widget' => '<div id="%1$s" class="tf_widget widget %2$s">',
         'after_widget'  => '</div>',
         'before_title'  => '<h4 class="tf_widgettitle">',
         'after_title'   => '</h4>',
-    ) );
+    ));
 
-	register_sidebar( array(
-        'name'          => __( 'Tourfic: Search Result Sidebar', 'tourfic' ),
+    register_sidebar(array(
+        'name'          => __('Tourfic: Search Result Sidebar', TFD),
         'id'            => 'tf_search_result',
-        'description'   => __( 'Widgets in this area will be shown on tourfic search page', 'tourfic' ),
+        'description'   => __('Widgets in this area will be shown on tourfic search page', TFD),
         'before_widget' => '<div id="%1$s" class="tf_widget widget %2$s">',
         'after_widget'  => '</div>',
         'before_title'  => '<h4 class="tf_widgettitle">',
         'after_title'   => '</h4>',
-    ) );
+    ));
 
     // Register Custom Widgets
     $custom_widgets = array(
-    	'Tourfic_Ask_Question',
-    	'Tourfic_Similar_Tours',
+        'Tourfic_Ask_Question',
+        'Tourfic_Similar_Tours',
         'TF_Hotel_Feature_Filter'
     );
     foreach ($custom_widgets as $key => $widget) {
-    	register_widget( $widget );
+        register_widget($widget);
     }
-
 }
-add_action( 'widgets_init', 'tourfic_sidebar_widgets_init', 100 );
+add_action('widgets_init', 'tourfic_sidebar_widgets_init', 100);
 ?>
