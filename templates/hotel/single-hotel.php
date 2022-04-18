@@ -11,19 +11,36 @@ get_header();
  */
 while (have_posts()) : the_post();
 
+    // get post id
+    $post_id = get_the_ID();
+
     /**
-     * Settings
+     * Get hotel meta values
      */
-    $s_share = !empty(tfopt('h-share')) ? tfopt('h-share') : '';
-    $s_review = !empty(tfopt('h-review')) ? tfopt('h-review') : '';
+    $meta = get_post_meta($post_id, 'tf_hotel', true);
+
+    /**
+     * Show/hide sections
+     */
+    // Share section
+    $d_r_s = !empty($meta['h-review']) ? $meta['h-review'] : 0;
+    if($d_r_s == 1) {
+        $disable_review = 1;
+    } else {
+        $disable_review = !empty(tfopt('h-review')) ? tfopt('h-review') : 0;
+    }
+    // Share section
+    $d_s_o = !empty($meta['h-share']) ? $meta['h-share'] : 0;
+    if($d_s_o == 1) {
+        $disable_share = 1;
+    } else {
+        $disable_share = !empty(tfopt('h-share')) ? tfopt('h-share') : 0;
+    }
 
     /**
      * Assign all values to variables
      * 
      */
-
-    // get post id
-    $post_id   = get_the_ID();
 
     // Wishlist
     $post_type = str_replace('tf_', '', get_post_type());
@@ -49,11 +66,6 @@ while (have_posts()) : the_post();
      * hotel_feature
      */
     $features  = !empty(get_the_terms($post_id, 'hotel_feature')) ? get_the_terms($post_id, 'hotel_feature') : '';
-
-    /**
-     * Get hotel meta values
-     */
-    $meta = get_post_meta(get_the_ID(), 'tf_hotel', true);
 
     // Location
     $address  = !empty($meta['address']) ? $meta['address'] : '';
@@ -92,7 +104,7 @@ while (have_posts()) : the_post();
 
 
     $share_text = get_the_title();
-    $share_link = esc_url(home_url("/?p=") . get_the_ID());
+    $share_link = esc_url(home_url("/?p=") . $post_id);
 
 ?>
     <div class="tourfic-wrap default-style" data-fullwidth="true">
@@ -127,7 +139,7 @@ while (have_posts()) : the_post();
                             }
                             ?>
                             &nbsp;
-                            <?php if ($s_share && $s_share == '1') {
+                            <?php if ($disable_share == '1') {
                             } else { ?>
                                 <!-- Share Section -->
                                 <div class="share-tour">
@@ -435,7 +447,7 @@ while (have_posts()) : the_post();
                         <!-- End FAQ -->
                     <?php } ?>
 
-                    <?php if ($s_review && $s_review == '1') {
+                    <?php if ($disable_review == '1') {
                     } else { ?>
                         <!-- Start Review Content -->
                         <div class="tf_contents">

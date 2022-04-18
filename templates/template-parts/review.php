@@ -19,8 +19,12 @@ if (post_password_required()) {
 
 <div class="tf-review-container">
     <?php
+    global $post, $current_user;
 
-    $post_id = get_the_ID();
+    // Check if user is logged in
+    $is_user_logged_in = $current_user->exists();
+    $post_id = $post->ID;
+    // Get settings value
     $tf_ratings_for = tfopt('r-for') ?? ['li', 'lo'];
 
     $args = array( 
@@ -44,7 +48,7 @@ if (post_password_required()) {
                 if (empty($value)) {
                     continue;
                 }
-                $value        = tf_average_rating_change_on_base(tf_average_ratings($value));
+                $value        = tf_average_ratings($value);
                 $tf_rating_progress_bar .= '<div class="tf-single">';
                 $tf_rating_progress_bar .= '<div class="tf-text">' . $key . '</div>';
                 $tf_rating_progress_bar .= '<div class="tf-p-bar"><div class="percent-progress" data-width="' . tf_average_rating_percent($value, tfopt('r-base')) . '"></div></div>';
@@ -57,12 +61,12 @@ if (post_password_required()) {
 
             <div class="tf-total-review">
                 <div class="tf-total-average">
-                    <div><?php _e(tf_average_rating_change_on_base(tf_average_ratings($tf_overall_rate ?? []))); ?></div>
+                    <div><?php _e(tf_average_ratings($tf_overall_rate ?? [])); ?></div>
                     <span><?php tf_based_on_text(count($comments)); ?></span>
                 </div>           
                 <?php
                 if (!empty($tf_ratings_for)) {
-                    if (is_user_logged_in()) {
+                    if ($is_user_logged_in) {
                         if (in_array('li', $tf_ratings_for) && !tf_user_has_comments()) {
                         ?>
                             <button data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
@@ -125,6 +129,9 @@ if (post_password_required()) {
             </div>
 
         <?php
+        // Review moderation notice
+        echo tf_pending_review_notice($post_id);
+
         // If comments are closed and there are comments, let's leave a little note, shall we?
         if (!comments_open() && count($comments) && post_type_supports(get_post_type(), 'comments')) {
         ?>
@@ -136,30 +143,24 @@ if (post_password_required()) {
 
         echo '<div class="no-review">';
 
-        echo $moderation_notice = tf_pending_review_notice($post_id);
+        echo '<h3>' .__("No Review Available", "tourfic"). '</h3>';
 
-        if($moderation_notice == true) {
-            $moderation_notice;
-        } else {
+        if ($is_user_logged_in) {
 
-            echo '<h3>' .__("No Review Available", "tourfic"). '</h3>';
-
+            // Add Review button
             if (in_array('li', $tf_ratings_for) && !tf_user_has_comments()) {
-            ?>
+                ?>
                 <button data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
                     <i class="fas fa-plus"></i> <?php _e('Add Review', TFD); ?>
                 </button>
-    
-            <?php
+        
+                <?php
+            } else {
+                // Pending review notice
+                echo tf_pending_review_notice($post_id);
             }
 
-        }
-
-        //tf_pending_review_notice($post_id);
-
-        if (!is_user_logged_in()) {
-
-            echo '<h3>' .__("No Review Available", "tourfic"). '</h3>';
+        } else {
 
             if (in_array('lo', $tf_ratings_for)) {
             ?>
@@ -168,6 +169,7 @@ if (post_password_required()) {
                 </button>
             <?php
             }
+
         }
 
         echo '</div>';

@@ -696,7 +696,7 @@ function tf_tour_archive_single_item($adults = '', $child = '', $check_in_out = 
                         }
                         ?>
                     </div>
-                    <?php tf_item_review_block(); ?>
+                    <?php tf_archive_single_rating(); ?>
                 </div>
                 <div class="tf-tour-desc">
                     <p><?php echo substr(wp_strip_all_tags(get_the_content()), 0, 200) . '...'; ?></p>

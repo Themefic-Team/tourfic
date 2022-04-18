@@ -9,13 +9,29 @@ get_header();
 // Post query
 while (have_posts()) : the_post();
 
-    /**
-     * Settings
-     */
-    $s_related = !empty(tfopt('t-related')) ? tfopt('t-related') : '';
-    $s_review = !empty(tfopt('t-review')) ? tfopt('t-review') : '';
+    // get post id
+    $post_id = get_the_ID();
 
-    $post_id   = get_the_ID();
+    // Get Tour Meta
+    $meta = get_post_meta($post_id, 'tf_tours_option', true);
+
+    /**
+     * Show/hide sections
+     */
+    // Share section
+    $d_r_s = !empty($meta['t-review']) ? $meta['t-review'] : 0;
+    if($d_r_s == 1) {
+        $disable_review = 1;
+    } else {
+        $disable_review = !empty(tfopt('t-review')) ? tfopt('t-review') : '';
+    }
+    // Related Tour section
+    $d_r_t = !empty($meta['t-related']) ? $meta['t-related'] : 0;
+    if($d_r_t == 1) {
+        $disable_related_tour = 1;
+    } else {
+        $disable_related_tour = !empty(tfopt('t-related')) ? tfopt('t-related') : '';
+    }
 
     // Get destination
     $destinations = get_the_terms($post_id, 'tour_destination');
@@ -27,8 +43,6 @@ while (have_posts()) : the_post();
     $post_type = substr(get_post_type(), 3, -1);
     $has_in_wishlist = tf_has_item_in_wishlist($post_id);
 
-    // Meta field information
-    $meta = get_post_meta($post_id, 'tf_tours_option', true);
     // Address
     $location = $meta['location']['address'] ?? '';
     $text_location = $meta['text_location'] ?? '';
@@ -63,11 +77,11 @@ while (have_posts()) : the_post();
     $itineraries = $meta['itinerary'] ? $meta['itinerary'] : null;
     //continuous tour
     $share_text = get_the_title();
-    $share_link = esc_url(home_url("/?p=") . get_the_ID());
+    $share_link = esc_url(home_url("/?p=") . $post_id);
 
     $terms_and_conditions = $meta['terms_conditions'];
     $tf_faqs = (get_post_meta($post->ID, 'tf_faqs', true)) ? get_post_meta($post->ID, 'tf_faqs', true) : array();
-    $comments = get_comments(array('post_id' => get_the_ID(), 'status'       => 'approve'));
+    $comments = get_comments(array('post_id' => $post_id, 'status'       => 'approve'));
     $tf_overall_rate = tf_calculate_comments_rating($comments);
 
 
@@ -88,17 +102,17 @@ while (have_posts()) : the_post();
                                     if (is_user_logged_in()) {
                                         if (tfopt('wl-for') && in_array('li', tfopt('wl-for'))) {
                                 ?>
-                                            <span class="single-tour-wish-bt"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if (tfopt('wl-page')) {
-                                                                                                                                                                                                                                                                                                                                    echo 'data-page-title="' . get_the_title(tfopt('wl-page')) . '" data-page-url="' . get_permalink(tfopt('wl-page')) . '"';
-                                                                                                                                                                                                                                                                                                                                } ?>></i></span>
+                                            <span class="single-tour-wish-bt"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if (tfopt('wl-page')) { 
+                                                echo 'data-page-title="' . get_the_title(tfopt('wl-page')) . '" data-page-url="' . get_permalink(tfopt('wl-page')) . '"';
+                                                } ?>></i></span>
                                         <?php
                                         }
                                     } else {
                                         if (tfopt('wl-for') && in_array('lo', tfopt('wl-for'))) {
                                         ?>
                                             <span class="single-tour-wish-bt"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if (tfopt('wl-page')) {
-                                                                                                                                                                                                                                                                                                                                    echo 'data-page-title="' . get_the_title(tfopt('wl-page')) . '" data-page-url="' . get_permalink(tfopt('wl-page')) . '"';
-                                                                                                                                                                                                                                                                                                                                } ?>></i></span>
+                                                echo 'data-page-title="' . get_the_title(tfopt('wl-page')) . '" data-page-url="' . get_permalink(tfopt('wl-page')) . '"';
+                                                } ?>></i></span>
                                 <?php
                                         }
                                     }
@@ -375,7 +389,7 @@ while (have_posts()) : the_post();
         <?php } ?>
         <!-- Terms and Conditions -->
 
-        <?php if (!$s_related || $s_related != '1') { ?>
+        <?php if (!$disable_related_tour || $disable_related_tour != '1') { ?>
             <?php
             $args  = [
                 'post_type'      => 'tf_tours',
@@ -470,7 +484,7 @@ while (have_posts()) : the_post();
         } ?>
 
         <?php
-        if (!$s_review || $s_review != '1') { ?>
+        if (!$disable_review || $disable_review != '1') { ?>
             <!-- tours review section Start -->
             <div class="tf-review-wrapper">
                 <div class="tf-container">
@@ -481,47 +495,12 @@ while (have_posts()) : the_post();
                                     <h2><?php echo esc_html__('Customer Reviews', TFD); ?></h2>
                                     <p><?php echo esc_html__('Reviews given by our customers.', TFD); ?></p>
                                 </div>
-                                <div class="tf-review-items-wrapper">
-                                    <?php foreach ($comments as $comment) {
-                                        $tf_overall_rate = [];
-                                        tf_calculate_user_ratings($comment, $tf_overall_rate);
-
-                                    ?>
-                                        <div class="tf-review-item">
-                                            <div class="tf-review-rating">
-                                                <i class="fas fa-star"></i>
-                                                <span><?php
-                                                        _e(tf_average_ratings($tf_overall_rate)); ?></span>
-                                            </div>
-                                            <div class="tf-review-avater">
-                                                <img src="<?php
-                                                            echo get_avatar_url($comment->user_id); ?>" alt="">
-                                            </div>
-                                            <h3><?php
-                                                echo get_the_author_meta('display_name', $comment->user_id); ?>
-                                                <span><?php
-                                                        echo get_the_author_meta('description', $comment->user_id); ?></span>
-                                            </h3>
-                                            <div class="tf-review-desc">
-                                                <img src=<?php
-                                                            echo TOURFIC_PLUGIN_URL . "assets/img/quote3.png"; ?> alt="">
-                                                <p><?php
-                                                    echo $comment->comment_content; ?></p>
-                                                <img src=<?php
-                                                            echo TOURFIC_PLUGIN_URL . "assets/img/quote4.png"; ?> alt="">
-                                            </div>
-                                        </div>
-                                    <?php }; ?>
-                                </div>
                             <?php }; ?>
-                            <div class="tf-tours_submit_review">
-                                <?php
-                                if (comments_open() || get_comments_number()) {
-                                    comments_template();
-                                };
-                                ?>
-                            </div>
-
+                            <?php
+                            if (comments_open() || get_comments_number()) {
+                                comments_template();
+                            };
+                            ?>
 
                         </div>
                     </div>

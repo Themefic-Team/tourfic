@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
  */
 CSF::createSection( $prefix, array(
     'id'    => 'miscellaneous', 
-    'title' =>  __( 'Miscellaneous', TFD ),
+    'title' =>  __( 'Miscellaneous', 'tourfic' ),
     'icon'  =>  'fas fa-boxes' ,   
 ) );
 
@@ -20,21 +20,22 @@ CSF::createSection( $prefix, array(
  */
 CSF::createSection( $prefix, array(
     'parent'    => 'miscellaneous', 
-    'title' =>  __( 'Wishlist', TFD ),
+    'title' =>  __( 'Wishlist', 'tourfic' ),
+    'icon'   => 'fas fa-heart',
     'fields' => array(
 
         array(
             'type'    => 'subheading',
-            'content' => __('Wishlist Settings', TFD ),
+            'content' => __('Wishlist Settings', 'tourfic' ),
         ),
 
         array(
             'id'         => 'wl-for',
             'type'       => 'checkbox',
-            'title'      => __('Enable Wishlist for', TFD ),
+            'title'      => __('Enable Wishlist for', 'tourfic' ),
             'options'    => array(
-                'li' => __('Logged in User', TFD ),
-                'lo' => __('Logged out User', TFD ),
+                'li' => __('Logged in User', 'tourfic' ),
+                'lo' => __('Logged out User', 'tourfic' ),
             ),
             'default'    => array( 'li', 'lo' )
         ),
@@ -42,10 +43,10 @@ CSF::createSection( $prefix, array(
         array(
             'id'         => 'wl-bt-for',
             'type'       => 'checkbox',
-            'title'      => __('Show Wishlist Button on', TFD ),
+            'title'      => __('Show Wishlist Button on', 'tourfic' ),
             'options'    => array(
-                '1' => __('Single Hotel Page', TFD ),
-                '2' => __('Single Tour Page', TFD ),
+                '1' => __('Single Hotel Page', 'tourfic' ),
+                '2' => __('Single Tour Page', 'tourfic' ),
             ),
             'default'    => array( '1', '2' ),
         ),
@@ -53,8 +54,8 @@ CSF::createSection( $prefix, array(
         array(
             'id'          => 'wl-page',
             'type'        => 'select',
-            'title'       => __('Select Wishlist Page', TFD ),
-            'placeholder' => __('Select Wishlist Page', TFD ),
+            'title'       => __('Select Wishlist Page', 'tourfic' ),
+            'placeholder' => __('Select Wishlist Page', 'tourfic' ),
             'ajax' => true,
             'options'     => 'pages',
             'query_args'  => array(
@@ -74,20 +75,240 @@ CSF::createSection( $prefix, array(
  * Sub Menu
  */
 CSF::createSection( $prefix, array(
-    'parent'    => 'miscellaneous', 
-    'title' =>  __( 'Permalink Settings', TFD ),
+    'parent' => 'miscellaneous',
+    'title'  => __( 'Permalink Settings', 'tourfic' ),
+    'icon'   => 'fas fa-link',
     'fields' => array(
 
         array(
             'type'    => 'subheading',
-            'content' => __('Permalink Settings', TFD ),
+            'content' => __('Permalink Settings', 'tourfic' ),
         ),
 
         array(
             'type'    => 'content',
-            'content' => __('For permalink settings go to default <a href="' .get_admin_url(). 'options-permalink.php">permalink settings page</a>.', TFD ),
+            'content' => __('For permalink settings go to default <a href="' .get_admin_url(). 'options-permalink.php">permalink settings page</a>.', 'tourfic' ),
         ),
 
     )
     
 ) );
+
+/**
+ * optimization Settings
+ * 
+ * Sub Menu
+ */
+CSF::createSection( $prefix, array(
+    'parent' => 'miscellaneous',
+    'title'  => __( 'Optimization', 'tourfic' ),
+    'icon'   => 'fas fa-bolt',
+    'fields' => array(
+
+        array(
+            'type'    => 'subheading',
+            'content' => __('Minification Settings', 'tourfic' ),
+        ),
+
+        array(
+            'id'         => 'css_min',
+            'type'       => 'switcher',
+            'title'      => __('Minify CSS', 'tourfic' ),
+            'subtitle'   => __('Enable/disable Tourfic CSS minification', 'tourfic' ),
+            'text_on'    => __('Enabled', 'tourfic' ),
+            'text_off'   => __('Disabled', 'tourfic' ),
+            'text_width' => 100,
+            'default'    => true
+        ),
+
+        array(
+            'id'         => 'js_min',
+            'type'       => 'switcher',
+            'title'      => __('Minify JS', 'tourfic' ),
+            'subtitle'   => __('Enable/disable Tourfic JS minification', 'tourfic' ),
+            'text_on'    => __('Enabled', 'tourfic' ),
+            'text_off'   => __('Disabled', 'tourfic' ),
+            'text_width' => 100,
+            'default'    => true
+        ),
+
+        array(
+            'type'    => 'subheading',
+            'content' => __('CDN Settings', 'tourfic' ),
+        ),
+
+        array(
+            'id'         => 'ftpr_cdn',
+            'type'       => 'switcher',
+            'title'      => __('Flatpickr CDN', 'tourfic' ),
+            'subtitle'   => __('Enable/disable cloudflare CDN for Flatpickr CSS & JS', 'tourfic' ),
+            'text_on'    => __('Enabled', 'tourfic' ),
+            'text_off'   => __('Disabled', 'tourfic' ),
+            'text_width' => 100
+        ),
+
+        array(
+            'id'         => 'fnybx_cdn',
+            'type'       => 'switcher',
+            'title'      => __('Fancybox CDN', 'tourfic' ),
+            'subtitle'   => __('Enable/disable cloudflare CDN for Fancybox CSS & JS', 'tourfic' ),
+            'text_on'    => __('Enabled', 'tourfic' ),
+            'text_off'   => __('Disabled', 'tourfic' ),
+            'text_width' => 100
+        ),
+
+        array(
+            'id'         => 'slick_cdn',
+            'type'       => 'switcher',
+            'title'      => __('Slick CDN', 'tourfic' ),
+            'subtitle'   => __('Enable/disable cloudflare CDN for Slick CSS & JS', 'tourfic' ),
+            'text_on'    => __('Enabled', 'tourfic' ),
+            'text_off'   => __('Disabled', 'tourfic' ),
+            'text_width' => 100
+        ),
+
+        array(
+            'id'         => 'fa_cdn',
+            'type'       => 'switcher',
+            'title'      => __('Font Awesome CDN', 'tourfic' ),
+            'subtitle'   => __('Enable/disable cloudflare CDN for Font Awesome CSS', 'tourfic' ),
+            'text_on'    => __('Enabled', 'tourfic' ),
+            'text_off'   => __('Disabled', 'tourfic' ),
+            'text_width' => 100
+        ),
+
+    )
+    
+) );
+
+/**
+ * Review
+ * 
+ * Sub Menu
+ */
+CSF::createSection($prefix, array(
+    'parent'    => 'miscellaneous',
+    'title' =>  __('Review', 'tourfic'),
+    'icon'   => 'fas fa-star',
+    'fields' => array(
+
+        array(
+            'type'    => 'subheading',
+            'content' => __('Review Settings', 'tourfic'),
+        ),
+        array(
+            'id'       => 'r-customer',
+            'type'     => 'switcher',
+            'title'    => __('Enable Review Only for Customers', 'tourfic'),
+            'subtitle' => __('Customers only who have complete orders', 'tourfic'),
+            'text_on'  => __('Yes', 'tourfic'),
+            'text_off' => __('No', 'tourfic'),
+            'default'  => false
+        ),
+
+        array(
+            'id'      => 'r-for',
+            'type'    => 'checkbox',
+            'title'   => __('Enable Review for', 'tourfic'),
+            'options' => array(
+                'li' => __('Logged in User', 'tourfic'),
+                'lo' => __('Log out User', 'tourfic'),
+            ),
+            'default'    => array('li'),
+            'dependency' => array( 'r-customer', '==', 'false' ),
+        ),
+
+        array(
+            'id'       => 'r-auto-publish',
+            'type'     => 'switcher',
+            'title'    => __('Auto Publish Review', 'tourfic'),
+            'subtitle' => __('By default review will be pending and waiting for admin approval', 'tourfic'),
+            'text_on'  => __('Yes', 'tourfic'),
+            'text_off' => __('No', 'tourfic'),
+            'default'  => false
+        ),
+
+        array(
+            'id'      => 'r-base',
+            'type'    => 'radio',
+            'title'   => __('Calculate Review Based on', 'tourfic'),
+            'options' => array(
+                '5'  => __('5', 'tourfic'),
+                '10' => __('10', 'tourfic'),
+            ),
+            'default'    => '5',
+        ),
+
+        array(
+            'id'       => 'r-hotel',
+            'class'    => 'disable-sortable',
+            'type'     => 'repeater',
+            'title'    => __('Review Fields for Hotels', 'tourfic'),
+            'subtitle' => __('Maximum 10 fields allowed', 'tourfic'),
+            'max'      => '10',
+            'fields'   => array(
+
+                array(
+                    'id'    => 'r-field-type',
+                    'type'  => 'text',
+                    'title' => __('Review for', 'tourfic'),
+                ),
+
+            ),
+            'default'   => array(
+                array(
+                    'r-field-type' => __('Staff', 'tourfic'),
+                ),
+                array(
+                    'r-field-type' => __('Facilities', 'tourfic'),
+                ),
+                array(
+                    'r-field-type' => __('Cleanliness', 'tourfic'),
+                ),
+                array(
+                    'r-field-type' => __('Comfort', 'tourfic'),
+                ),
+                array(
+                    'r-field-type' => __('Value for money', 'tourfic'),
+                ),
+                array(
+                    'r-field-type' => __('Location', 'tourfic'),
+                ),
+            )
+        ),
+        array(
+            'id'       => 'r-tour',
+            'class'    => 'disable-sortable',
+            'type'     => 'repeater',
+            'title'    => __('Review Fields for Tours', 'tourfic'),
+            'subtitle' => __('Maximum 10 fields allowed', 'tourfic'),
+            'max'      => '10',
+            'fields'   => array(
+
+                array(
+                    'id'    => 'r-field-type',
+                    'type'  => 'text',
+                    'title' => __('Review for', 'tourfic'),
+                ),
+
+            ),
+            'default'   => array(
+                array(
+                    'r-field-type' => __('Guide', 'tourfic'),
+                ),
+                array(
+                    'r-field-type' => __('Transportation', 'tourfic'),
+                ),
+                array(
+                    'r-field-type' => __('Value for money', 'tourfic'),
+                ),
+                array(
+                    'r-field-type' => __('Safety', 'tourfic'),
+                ),
+            )
+        ),
+
+
+    )
+
+));

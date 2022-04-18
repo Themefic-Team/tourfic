@@ -213,10 +213,10 @@ if (!function_exists('load_comment_template')) {
         }
 
         if ('tf_hotel' === $post->post_type || 'tf_tours' === $post->post_type) {
-            $theme_files = array('tourfic/template-parts/review/review.php');
+            $theme_files = array('tourfic/template-parts/review.php');
             $exists_in_theme = locate_template($theme_files, false);
 
-            return !$exists_in_theme ? TF_TEMPLATE_PATH . 'template-parts/review/review.php' : $exists_in_theme;
+            return !$exists_in_theme ? TF_TEMPLATE_PATH . 'template-parts/review.php' : $exists_in_theme;
         }
 
         return $comment_template;

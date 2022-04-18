@@ -785,7 +785,7 @@ function tf_hotel_archive_single_item($adults = '', $child = '', $room = '', $ch
                         }
                         ?>
                     </div>
-                    <?php tf_item_review_block(); ?>
+                    <?php echo tf_archive_single_rating(); ?>
                 </div>
 
                 <div class="sr_rooms_table_block">

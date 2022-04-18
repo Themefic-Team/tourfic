@@ -36,3 +36,8 @@
 .tf-csf-badge .tf-pro {
     background: #b30000;
 }
+
+.disable-sortable .csf-repeater-sort,
+.disable-sortable .csf-repeater-clone {
+    display: none !important;
+}

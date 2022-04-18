@@ -234,32 +234,6 @@ if(!function_exists('tf_review_scripts')) {
     add_action('wp_footer', 'tf_review_scripts');
 }
 
-// 4. Display the rating on a submitted comment. (If you need to display the rating)
-/**
- * @param $comment
- * @param $args
- * @param $depth
- */
-function tf_single_review($comment, $args, $depth)
-{
-    $tf_overall_rate = get_comment_meta($comment->comment_ID, TF_TOTAL_RATINGS, true);
-    if ($tf_overall_rate == false) {
-        $tf_comment_meta = get_comment_meta($comment->comment_ID, TF_COMMENT_META, true);
-        $tf_overall_rate = tf_average_ratings($tf_comment_meta);
-    }
-    // if ('div' === $args['style']) {
-    //     $tag       = 'div';
-    //     $add_below = 'comment';
-    // } else {
-    //     $tag       = 'li';
-    //     $add_below = 'div-comment';
-    // }
-    $base_rate = get_comment_meta($comment->comment_ID, TF_BASE_RATE, true);
-    ob_start();
-    include TF_PATH . "templates/template-parts/review/single-review.php";
-    echo ob_get_clean();
-}
-
 /**
  * Calculate average ratings
  *
@@ -267,7 +241,7 @@ function tf_single_review($comment, $args, $depth)
  *
  * @return float
  */
-function tf_average_ratings(array $ratings = []): float {
+function tf_average_ratings(array $ratings = []) {
     if (!$ratings) {
         return 'N/A';
     }
@@ -310,13 +284,19 @@ function tf_average_rating_percent(int $rating = 0, int $total = 5): string
 function tf_calculate_user_ratings($comment, array &$overall_rating): void
 {
     $tf_comment_meta = get_comment_meta($comment->comment_ID, TF_COMMENT_META, true);
+    $tf_base_rate = get_comment_meta($comment->comment_ID, TF_BASE_RATE, true);
+
     if ($tf_comment_meta) {
         foreach ($tf_comment_meta as $key => $ratings) {
+            // calculate rate 
+            $ratings = tf_average_rating_change_on_base($ratings, $tf_base_rate);
+           
             if (is_array($ratings)) {
                 $overall_rating[$key][] = tf_average_ratings($ratings);
             } else {
                 $overall_rating[$key][] = $ratings;
             }
+
         }
     }
 }
@@ -399,32 +379,31 @@ function tf_comment_reply_link_filter($content): string
 
 add_filter('comment_link', 'tf_comment_reply_link_filter');
 /**
- * Review Block
+ * Show rating on archive single item
  */
-function tf_item_review_block()
-{
-    $comments         = get_comments(['post_id' => get_the_ID(), 'status' => 'approve']);
-    $tour_destination = $_GET['tour_destination'] ?? "";
-    $destination      = $_GET['tour_destination'] ?? "";
-    if ('tf_hotel' == get_post_type()) {
-        $dest_slug_param = 'destination=' . $destination;
-        $room            = $_GET['room'] ?? '';
-        $infant          = '';
-    } else if ('tf_tours' == get_post_type()) {
-        $dest_slug_param = 'tour_destination' . $tour_destination;
-        $infant          = $_GET['infant'] ?? "0";
-        $room            = '';
-    }
-    $adults          = $_GET['adults'] ?? "1";
-    $children        = $_GET['children'] ?? "0";
-    $check_in_date   = $_GET['check-in-date'] ?? "";
-    $check_out_date  = $_GET['check-out-date'] ?? "";
-    $tf_overall_rate = tf_calculate_comments_rating($comments);
-    $tf_extr_html    = '';
-    ob_start();
-    include TF_TEMPLATE_PART_PATH . 'single-review-block.php';
+function tf_archive_single_rating() {
 
-    return ob_get_clean();
+    $comments         = get_comments(['post_id' => get_the_ID(), 'status' => 'approve']);
+    $tf_overall_rate = tf_calculate_comments_rating($comments);
+    if($comments) {
+        ob_start();
+        ?>
+        
+        <div class="tf_item_review_block">
+            <div class="reviewFloater reviewFloaterBadge__container">
+                <div class="sr-review-score">
+                    <div class="bui-review-score c-score bui-review-score--end">
+                        <div class="bui-review-score__badge"> 
+                            <?php _e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <?php
+        return ob_get_clean();
+    }
 }
 
 /**
@@ -521,32 +500,22 @@ function tf_pending_review_notice($post_id) {
 
     if (is_user_logged_in()) {
 
-        $args = array( 
-            'post_id' => $post_id,
-            'status'  => 'hold',
-            'type'    => 'comment',
-        );
-        $comments_query = new WP_Comment_Query( $args ); 
+        global $wpdb, $current_user;
+        $logged_in_id = $current_user->ID;
+
+        $comments_query = new WP_Comment_Query( array( 'post_id' => $post_id, 'status' => 'hold', 'type' => 'comment', ) ); 
         $comments = $comments_query->comments;
 
         if($comments) {
 
             foreach($comments as $comment) {
 
-                $logged_in_id = get_current_user_id();
                 $comment_author_id = $comment->user_id;
     
                 if($comment->comment_approved === '0' && $logged_in_id == $comment_author_id) {
-                    return '<h3 style="text-align:center;"><em>' .__("Your review is awaiting moderation.", "tourfic"). '</em></h3>';
+                    return '<div class="tf-review-pending">' .__("Your review is awaiting moderation", "tourfic"). '</div>';
                 }
             }
-
-        } else {
-            return false;
         }
-
-    } else {
-        return true;
     }
-
 }
