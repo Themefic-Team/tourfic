@@ -202,17 +202,7 @@ if( class_exists( 'CSF' ) ) {
           'type'   => 'repeater',
           'title'  => __('Room Details', 'tourfic' ),
           'max' => 5,
-          'fields' => array(
-                  
-            array(
-              'id'         => 'unique_id',
-              'class'      => 'unique-id',
-              'type'       => 'text',
-              'title'      => __('Unique ID', 'tourfic' ),
-              'attributes' => array(
-                'readonly' => 'readonly',
-              ),
-            ),
+          'fields' => array(             
             
             array(
               'id'         => 'enable',

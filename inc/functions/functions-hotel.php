@@ -54,7 +54,7 @@ function register_tf_hotel_post_type() {
         'has_archive'        => true,
         'hierarchical'       => false,
         'menu_position'      => 25,
-        'supports'           => apply_filters( 'tf_hotel_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author', 'custom-fields' ) ),
+        'supports'           => apply_filters( 'tf_hotel_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
     );
 
     register_post_type( 'tf_hotel', apply_filters( 'tf_hotel_post_type_args', $hotel_args ) );
@@ -330,7 +330,6 @@ function tf_room_availability_callback() {
                             /**
                              * Set room availability
                              */
-                            $unique_id = !empty($room['unique_id']) ? $room['unique_id'] : ''; // Unique id of rooms
                             $order_ids = !empty($room['order_id']) ? $room['order_id'] : '';
                             $num_room_available = !empty($room['num-room']) ? $room['num-room'] : '1'; // Number of room
                             $number_orders = '0';
@@ -494,7 +493,6 @@ function tf_room_availability_callback() {
                                                 <div class="room-submit-wrap">
                                                     <input type="hidden" name="post_id" value="<?php echo $form_post_id; ?>">
                                                     <input type="hidden" name="room_id" value="<?php echo $room_id; ?>">
-                                                    <input type="hidden" name="unique_id" value="<?php echo $unique_id; ?>">
                                                     <input type="hidden" name="location" value="<?php echo $first_location_name; ?>">
                                                     <input type="hidden" name="adult" value="<?php echo $form_adult; ?>">
                                                     <input type="hidden" name="child" value="<?php echo $form_child; ?>">
@@ -958,79 +956,4 @@ if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-hotel.php' ) ) {
 } else {
     tf_file_missing(TF_INC_PATH . 'functions/woocommerce/wc-hotel.php');
 }
-
-#################################
-#           Temporary           #
-#################################
-/**
- * Add missing unique id to hotel room
- */
-function tf_update_missing_room_id() {
-
-    if ( get_option( 'tf_miss_room_id' ) < 1 ) {
-
-        $args = array(
-            'posts_per_page'   => -1,
-            'post_type'        => 'tf_hotel',
-            'suppress_filters' => true 
-        );
-        $posts_array = get_posts( $args );
-        foreach($posts_array as $post_array) {
-            $meta = get_post_meta( $post_array->ID, 'tf_hotel', true );
-            $rooms = !empty($meta['room']) ? $meta['room'] : '';
-            $new_rooms = [];
-            foreach($rooms as $room) {
-                
-                if(empty($room['unique_id'])) {
-                    $room['unique_id']  = mt_rand(1, time());
-                }
-                $new_rooms[] = $room; 
-            }
-            $meta['room'] = $new_rooms;
-            update_post_meta($post_array->ID, 'tf_hotel', $meta );
-        
-        }
-        update_option( 'tf_miss_room_id', 1 );
-    }
-}
-add_action( 'init', 'tf_update_missing_room_id' );
-
-/**
- * Run Once
- * Add _price post_meta to all hotels & tours
- * 
- * Will be delete in future version
- */
-function tf_update_meta_all_hotels_tours() {
-
-    // Run once only
-    if ( get_option( 'tf_update_meta_all' ) < 1 ) {
-
-        // Update hotels meta
-        $args = array(
-            'posts_per_page'   => -1,
-            'post_type'        => 'tf_hotel',
-            'suppress_filters' => true 
-        );
-        $posts_array = get_posts( $args );
-        foreach($posts_array as $post_array) {
-            update_post_meta($post_array->ID, '_price', '0' );
-        } 
-
-        // Update tours meta
-        $args = array(
-            'posts_per_page'   => -1,
-            'post_type'        => 'tf_tours',
-            'suppress_filters' => true 
-        );
-        $posts_array = get_posts( $args );
-        foreach($posts_array as $post_array) {
-            update_post_meta($post_array->ID, '_price', '0' );
-        }
-
-        update_option( 'tf_update_meta_all', 1 );
-
-    }
-}
-add_action('wp_loaded', 'tf_update_meta_all_hotels_tours');
 ?>
