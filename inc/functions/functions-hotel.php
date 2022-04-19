@@ -260,67 +260,48 @@ if ( !function_exists( 'get_hotel_locations' ) ) {
 #################################
 /**
  * Ajax hotel room availability
- * 
+ * @author themefic, kabir
  */
 add_action( 'wp_ajax_tf_room_availability', 'tf_room_availability_callback' );
 add_action( 'wp_ajax_nopriv_tf_room_availability', 'tf_room_availability_callback' );
+
+
 function tf_room_availability_callback()
 {
+    
     // Check nonce security
-    //    if (!isset($_POST['tf_room_avail_nonce']) || !wp_verify_nonce($_POST['tf_room_avail_nonce'], 'check_room_avail_nonce')) {
-    //        return;
-    //    }
+    if ( !isset( $_POST['tf_room_avail_nonce'] ) || !wp_verify_nonce( $_POST['tf_room_avail_nonce'], 'check_room_avail_nonce' ) ) {
+        return;
+    }
     // Format form data
-    $form_post_id      = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
-    $form_adult        = isset( $_POST['adult'] ) ? sanitize_text_field( $_POST['adult'] ) : '';
-    $form_child        = isset( $_POST['child'] ) ? sanitize_text_field( $_POST['child'] ) : '';
+    $form_post_id      = !empty( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
+    $form_adult        = !empty( $_POST['adult'] ) ? sanitize_text_field( $_POST['adult'] ) : '';
+    $form_child        = !empty( $_POST['child'] ) ? sanitize_text_field( $_POST['child'] ) : '';
+    $form_check_in_out = !empty( $_POST['check_in_out'] ) ? sanitize_text_field( $_POST['check_in_out'] ) : '';
     $form_total_person = $form_adult + $form_child;
-    $form_check_in_out = isset( $_POST['check_in_out'] ) ? sanitize_text_field( $_POST['check_in_out'] ) : '';
     if ( $form_check_in_out ) {
         list( $form_start, $form_end ) = explode( ' to ', $form_check_in_out );
     }
     // get rooms
-    $meta  = get_post_meta( $form_post_id, 'tf_hotel', true );
-    $rooms = empty( $meta['room'] ) ? '' : $meta['room'];
+    $meta      = get_post_meta( $form_post_id, 'tf_hotel', true );
+    $rooms     = !empty( $meta['room'] ) ? $meta['room'] : '';
+    $locations = get_the_terms( $form_post_id, 'hotel_location' );
+    $first_location_name = !empty( $locations ) ? $locations[0]->name : '';
+
     //  start table
     ob_start();
     include TF_TEMPLATE_PART_PATH . 'hotel\hotel-availability-start.php';
     echo ob_get_clean();
+    $error    = $rows    = null;
+    $has_room = false;
+
     // generate table rows
     if ( !empty( $rooms ) ) {
-        $error = "";
-        $table = "";
-        foreach ( $rooms as $room_id => $room ) {
-            /*
-             * $room = {
-             * "enable": "1",
-             * "title": "Room",
-             * "num-room": "10",
-             * "gallery": "40,41",
-             * "bed": "2",
-             * "adult": "2",
-             * "child": "1",
-             * "footage": "26",
-             * "features": [ "17" ],
-             * "description": "description"
-             * "pricing-by": "1",
-             * "price": "100",
-             * "adult_price": "",
-             * "child_price": "",
-             * "price_multi_day": "1",
-             * "avil_by_date": "1",
-             * "repeat_by_date": [
-             *                      { "availability":
-             *                          { "from": "2022\/04\/11", "to": "2022\/04\/14" },
-             *                      "num-room": "5",
-             *                      "price": "90",
-             *                      "adult_price": "",
-             *                      "child_price": ""
-             *                      }
-             *                   ]
-             * }
-             */
+        ob_start();
+        foreach ( $rooms as $room_id => $room ) {            
             extract( $room );
+            
+
             // Check if room is enabled
             if ( boolval( $enable ) ) {
                 /*
@@ -331,12 +312,12 @@ function tf_room_availability_callback()
                 $adult_number    = intval( $adult );
                 $child_number    = intval( $child );
                 $total_person    = $adult_number + $child_number;
-                $number_of_rooms = $room['num-room'] ?? 10;
+                $number_of_rooms = $room['num-room'] ?? 1;
                 $pricing_by      = $room['pricing-by'];
                 $price           = $pricing_by == '1' ? $room['price'] : $room['adult_price'];
 
+
                 // Check availability by date option
-                $has_room = false;
                 if ( boolval( $avil_by_date ) ) {
                     // split date range
                     $check_in = new DateTime( $form_start );
@@ -353,13 +334,17 @@ function tf_room_availability_callback()
                             $date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
                             return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
                         } ) );
-                        
-                        
-                        if ( count( $available_rooms ) == 1 ) {
-                            $price_by_date = $pricing_by == '1' ? $available_rooms[0]['price'] : (($available_rooms[0]['adult_price'] * $form_adult) + ($available_rooms[0]['child_price'] * $form_child));
+
+                        if ( is_iterable($available_rooms) && count( $available_rooms ) >=1) {
+
+                            $room_price    = !empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $room['price'];
+                            $adult_price   = !empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $room['adult_price'];
+                            $child_price   = !empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $room['child_price'];
+                            $price_by_date = $pricing_by == '1' ? $room_price : (  ( $adult_price * $form_adult ) + ( $child_price * $form_child ) );
                             $price += $price_by_date;
-                            $number_of_rooms += $available_rooms[0]['num-room'];
-                            $has_room = true;
+                            $number_of_rooms = $available_rooms[0]['num-room'];
+                            $has_room = true;                           
+
                         } else {
                             $has_room = false;
                         }
@@ -368,10 +353,8 @@ function tf_room_availability_callback()
                 }
                 // Check if date is provided and within date range
                 if ( $has_room == true ) {
-                    if ( $form_total_person <= $total_person ) {
-                        ob_start();
+                    if ( $form_total_person <= $total_person ) {                        
                         include TF_TEMPLATE_PART_PATH . 'hotel\hotel-availability-tr.php';
-                        $table .= ob_get_clean();
                     } else {
                         $error = "No Room Available! Total person number exceeds!";
                     }
@@ -382,30 +365,23 @@ function tf_room_availability_callback()
                 $error = "No Room Available!";
             }
         }
-        if ( !empty( $table ) ) {
-            echo $table;
-        } else {
-            tf_show_empty_room_message( $error );
-        }
+        $rows .= ob_get_clean();
     } else {
-        tf_show_empty_room_message( "No Room Available!" );
+        $error = "No Room Available!";
+
+    }    
+    
+
+    if ( !empty( $rows  ) ) {
+        echo $rows . '</tbody> </table> </div>';
+    } else {
+       echo sprintf( "<tr><td colspan=\"4\" style=\"text-align:center;font-weight:bold;\">%s</td></tr>", __( $error, "tourfic" ) ).'</tbody> </table> </div>';
+
     }
-    ob_start();
-    include TF_TEMPLATE_PART_PATH . 'hotel\hotel-availability-end.php';
-    echo ob_get_clean();
+
     wp_die();
 }
 
-
-/**
- * Generate empty row with message
- *
- * @param string $message Message to show.
- */
-function tf_show_empty_room_message( string $message ): void
-{
-    echo sprintf( "<tr><td colspan=\"4\" style=\"text-align:center;font-weight:bold;\">%s</td></tr>", __( $message, "tourfic" ) );
-}
 
 
 #################################
