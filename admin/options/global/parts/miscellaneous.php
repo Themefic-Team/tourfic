@@ -2,6 +2,10 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+$badge_up = '<div class="tf-csf-badge"><span class="tf-upcoming">' .__("Upcoming", "tourfic"). '</span></div>';
+$badge_pro = '<div class="tf-csf-badge"><span class="tf-pro">' .__("Pro Feature", "tourfic"). '</span></div>';
+$badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' .__("Upcoming", "tourfic"). '</span><span class="tf-pro">' .__("Pro Feature", "tourfic"). '</span></div>';
+
 /**
  * Parent
  * 
@@ -111,9 +115,10 @@ CSF::createSection($prefix, array(
         ),
         array(
             'id'       => 'r-customer',
+            'class'    => 'tf-csf-disable tf-csf-pro',
             'type'     => 'switcher',
             'title'    => __('Enable Review Only for Customers', 'tourfic'),
-            'subtitle' => __('Customers only who have complete orders', 'tourfic'),
+            'subtitle' => __('Customers only who have complete orders' . $badge_up_pro, 'tourfic'),
             'text_on'  => __('Yes', 'tourfic'),
             'text_off' => __('No', 'tourfic'),
             'default'  => false
@@ -125,7 +130,7 @@ CSF::createSection($prefix, array(
             'title'   => __('Enable Review for', 'tourfic'),
             'options' => array(
                 'li' => __('Logged in User', 'tourfic'),
-                'lo' => __('Log out User', 'tourfic'),
+                '' => __('Log out User (Pro)', 'tourfic'),
             ),
             'default'    => array('li'),
             'dependency' => array( 'r-customer', '==', 'false' ),
@@ -157,8 +162,8 @@ CSF::createSection($prefix, array(
             'class'    => 'disable-sortable',
             'type'     => 'repeater',
             'title'    => __('Review Fields for Hotels', 'tourfic'),
-            'subtitle' => __('Maximum 10 fields allowed', 'tourfic'),
-            'max'      => '10',
+            'subtitle' => __('Maximum 6 fields allowed for free version', 'tourfic'),
+            'max'      => '6',
             'fields'   => array(
 
                 array(
@@ -194,8 +199,8 @@ CSF::createSection($prefix, array(
             'class'    => 'disable-sortable',
             'type'     => 'repeater',
             'title'    => __('Review Fields for Tours', 'tourfic'),
-            'subtitle' => __('Maximum 10 fields allowed', 'tourfic'),
-            'max'      => '10',
+            'subtitle' => __('Maximum 6 fields allowed for free version', 'tourfic'),
+            'max'      => '6',
             'fields'   => array(
 
                 array(
