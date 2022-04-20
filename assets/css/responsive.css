@@ -180,7 +180,7 @@
         flex-direction: column;
     }
 
-    .tf-travel-contetn-wrap {
+    .tf-travel-content-wrap {
         display: flex;
         flex-direction: column;
     }
@@ -272,12 +272,12 @@
         padding: 20px 20px;
     }
 
-    .tf-travel-contetn-wrap {
+    .tf-travel-content-wrap {
         padding: 20px;
         gap: 20px;
     }
 
-    .tf-travel-contetn-wrap img {
+    .tf-travel-content-wrap img {
         max-width: 100%;
     }
     .tf-review-form-area {

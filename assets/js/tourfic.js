@@ -1213,8 +1213,8 @@
          }
  
          $(".tf-travel-text h4").click(function(){
-             $(this).siblings('.tf-travel-contetn').slideToggle();
-             $(this).parents('.tf-travel-itinerary-item').siblings().find('.tf-travel-contetn').slideUp();
+             $(this).siblings('.tf-travel-content').slideToggle();
+             $(this).parents('.tf-travel-itinerary-item').siblings().find('.tf-travel-content').slideUp();
          });
          $(".tf-faq-title").click(function(){
              $(this).siblings('.tf-faq-desc').slideToggle();

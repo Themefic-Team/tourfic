@@ -53,6 +53,46 @@
 /*================================
 |            Common              |
 ================================*/
+.tf-page-wrapper {
+    line-height: 1.75;
+    color:#3A3A44;
+    font-size:16px;
+  }
+  .tf-page-wrapper h1,
+  .tf-page-wrapper h2,
+  .tf-page-wrapper h3,
+  .tf-page-wrapper h4,
+  .tf-page-wrapper h5,
+  .tf-page-wrapper h6 {
+      margin: 0 0 12px;
+      line-height: 1.5;
+      font-weight:500;
+      color:#133774;
+  }
+
+.tf-page-wrapper h1 {
+    font-size: 45px;
+}
+
+.tf-page-wrapper h2 {
+    font-size: 35px;
+}
+
+.tf-page-wrapper h3 {
+    font-size: 30px;
+}
+
+.tf-page-wrapper h4 {
+    font-size: 25px;
+}
+
+.tf-page-wrapper h5 {
+    font-size: 20px;
+}
+.tf-page-wrapper h6 {
+    font-size: 18px;
+}
+
 .tf-nothing-found {
     font-size: 24px;
     font-weight: normal;
@@ -60,6 +100,65 @@
     text-align: center;
     margin: 20% 0 20% 0;
 }
+
+.tf-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.tf-row {
+    padding: 0 15px;
+}
+
+.tf-section-wrapper {
+    padding:70px 0;
+    background:#F5F8FF;
+}
+
+.tf-section-white {
+    background:#fff;
+}
+
+/*===============================
+=            Buttons            =
+===============================*/
+.tf_button {
+    background: #133774;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+    border: 1px solid #003162;
+    border-radius: 4px;
+    padding: 13px 20px;
+    font-weight: 500;
+  }
+  .tf_button:hover {
+    text-decoration: none;
+    background: #333;
+  }
+  .tf_button.btn-outline {
+    background: #fff;
+    color: #333;
+    border-color: #333;
+  }
+  
+  .page-template-tf_search-result .tf_form-row .tf_button, .single-tourfic .tf_form-row .tf_button {
+    padding: 15px 20px;
+    width: 100%;
+  }
+  
+  .page-template-tf_search-result .single-tour-inner .tf_button {
+    padding: 15px 20px;
+  }
+  
+  .single-tourfic .tf_container .tf_button {
+    padding: 15px 20px;
+  }
+  
+  /*=====  End of Buttons  ======*/
+
 
 /**
  * tf-tooltip
@@ -115,10 +214,422 @@
 |            Tour CSS           |
 ================================*/
 
+/*--------- Hero CSS Start ---------*/
+
+.tf-hero-top-content {
+    padding: 20px;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 5px;
+}
+.tf-tours_search-wrap {
+    margin-top: 150px;
+    margin-bottom: 150px;
+  }
+.tf-hero-bottom-area {
+    text-align: right;
+    color: #fff;
+    font-size: 14px;
+    margin-top: 20px;
+}
+.tf-hero-btm-icon {
+    display: inline-block;
+}
+.tf-hero-btm-icon i {
+    background: rgba(26,43,72,.6);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 18px;
+    padding: 11px 10px;
+    transition: 0.3s;
+  }
+.tf-hero-btm-icon i:hover {
+    background: rgba(26,43,72,.8);
+}
+.tf-hero-btm-icon.tf-tour-gallery i {
+    padding: 10px;
+    margin-left:20px;
+}
+
+.tf-hero-bottom-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+  .tf-hero-bottom-left-location {
+    font-size: 16px;
+    line-height: 26px;
+    color: #5A5B6AE6;
+  }
+
+  .tf-hero-bottom-left-location i {
+    font-size: 18px;
+    color: #2979FF;
+  }
+
+
+/** Booking Form Start **/
+
+.tf-tour-booking-wrap {
+    border-radius: 4px;
+    padding: 10px;
+    margin: 0 auto;
+    background: #FFFC;
+    box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+    width: 80%;
+  }
+  .tf-tour-booking-wrap form.tf_tours_booking {
+    justify-content: space-evenly;
+    width: 100%;
+  }
+  .tf-tour-booking-wrap .tf_selectperson-wrap {
+    width: 36%;
+    color: #152B47;
+    font-weight: 500;
+    border: none;
+  }
+  .tf-tour-booking-wrap .tf_form-row .tf_label-row {
+    margin-bottom: 0;
+  }
+  .tf-tour-booking-wrap .tf_form-row {
+    color: #152B47;
+  }
+  .tf-tour-booking-wrap .tours-check-in-out {
+    color: #152B47;
+  }
+  
+  .tf-tour-booking-wrap.tf-tours-fixed {
+    width: 100%;
+    z-index: 10;
+    background-color: #ecf0f2;
+    height: 60px;
+  }
+  .tf-tour-booking-wrap.tf-tours-fixed .tf_acrselection-wrap {
+    position: absolute;
+    top: -237px;
+  }
+  .tf-tour-booking-wrap.tf-tours-fixed .tf_tours_booking {
+    width: 80%;
+  }
+  
+  .tf_acrselection-wrap {
+    position: absolute;
+    margin-top: 12px;
+    background: #F5F8FFE6;
+    padding: 24px 24px 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+    width: 100%;
+    display: none;
+  }
+  
+  form.tf_tours_booking {
+    display: flex;
+    align-items: center;
+  }
+  
+  .tf-tours-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0%;
+    right: 0;
+  }
+  .tf-tours-fixed button[type=submit] {
+    padding: 12px;
+  }
+  .tf-tours-fixed form.tf_tours_booking {
+    width: 55%;
+  }
+
+  .tf_form-inner input[type="text"], .tf_form-inner select {
+    background: transparent;
+    font-size: 16px;
+    border: none;
+  }
+.tf_form-inner input[type=text]:focus,
+.tf_form-inner select:focus {
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.tour-extra {
+    background: #EBF2FF;
+    border-radius: 50%;
+    padding: 3px 12px;
+  }
+
+  .tour-extra a {
+    color: #133774;
+  }
+
+
+/** Booking Form End **/
+
+/*--------- hero CSS End ---------*/
+
+/*-----------------------------------
+            Square block CSS Start
+------------------------------------*/
+
+.tf-square-block-content-wrapper {
+    display: flex;
+    text-align: center;
+    gap: 35px;
+  }
+
+  .tf-single-square-block {
+    width: 100%;
+    background: #FAFCFE;
+    box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.08);
+    border-radius: 8px;
+    color: #152B47;
+    border: 1px solid #F5F8FF;
+    padding: 50px 20px;
+  }
+
+  .tf-single-square-block.first {
+    background-color: #007bff24;
+  }
+
+  .tf-single-square-block.second {
+    background: #28a74524;
+  }
+
+  .tf-single-square-block.third {
+    background: #ffc10724;
+  }
+
+  .tf-single-square-block.fourth {
+    background: #dc354524;
+  }
+
+  .tf-single-square-block img {
+    display: block;
+    margin: auto;
+  }
+
+  .tf-single-square-block i, .tf-single-square-block img {
+    margin-bottom: 12px;
+  }
+
+.tf-single-square-block * {
+    margin: 0;
+}
+
+.tf-single-square-block i {
+    font-size: 32px;
+}
+
+.tf-single-square-block p {
+    color: #373737;
+    font-size: 16px;
+    line-height: 24px;
+  }
+/*--------- Square block CSS End ---------*/
+
 /* Related tour */
 .tf-suggestion-item {
     background-position: center center;
 }
+
+/*--------- Highlight CSS Start ---------*/
+
+  .tf-highlight-item {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .tf-highlight-wrapper {
+    font-size: 16px;
+  }
+  .tf-highlight-text ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-top: 15px;
+}
+
+.tf-highlight-text ul li {
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+.tf-highlight-text ul li::before {
+    width: 10px;
+    height: 10px;
+    left: 0;
+    top: 7px;
+    background: #133774;
+    content: "";
+    position: absolute;
+    border-radius: 50px;
+  }
+
+  .tf-highlight-image img {
+    border-radius: 8px;
+    background: #fff;
+    padding: 8px;
+  }
+  
+  .tf-overview-wrapper {
+    padding-bottom: 40px;
+  }
+/*--------- Highlight CSS  End ---------*/
+
+/*--------- Include Exclude CSS Start ---------*/
+.tf-inc-exc-wrapper {
+    padding-bottom: 40px;
+  }
+
+.tf-inc-exc-content-wrapper {
+    display: flex;
+    /*! max-width: 980px; */
+    margin: auto;
+    gap: 35px;
+    border-top: 2px dotted #ccc;
+    padding: 40px;
+  }
+
+  .tf-inc-exc-content-wrapper h4 {
+    /*! border-bottom: 2px dotted #ccc; */
+    /*! text-align: center; */
+    /*! border-top: 2px dotted #ccc; */
+    padding: 6px 0;
+    /*! margin-bottom: 30px; */
+    display: ;
+  }
+  
+  .tf-inc-exc-content-wrapper > * { 
+    flex: 1; 
+  }
+  .tf-include-section {
+    /*! background: #EBF2FF; */
+    /*! padding: 40px; */
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+  
+  .tf-exclude-section {
+    /*! background: #f9f9f9; */
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    /*! padding: 40px; */
+  }
+
+  .tf-inc-exc-content-wrapper ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tf-inc-exc-content-wrapper ul li {
+    padding-left: 35px;
+    position: relative;
+    margin-left: 0;
+  }
+
+.tf-include-section ul li:before {
+    background: url(../img/check.png);
+}
+
+.tf-exclude-section ul li:before {
+    background: url(../img/x.png);
+}
+
+.tf-inc-exc-content-wrapper ul li:before {
+    content: "";
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    left: 0;
+    background-size: contain;
+}
+
+/*--------- Include Exclude CSS End ---------*/
+
+/*--------- Travel Itinerary CSS Start ---------*/
+
+.tf-travel-itinerary-content-wrapper h2 {
+    margin-bottom: 30px;
+}
+
+.tf-travel-itinerary-item {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+.tf-travel-time span {
+    font-size: 18px;
+    color: #FAFCFE;
+  }
+
+.tf-travel-time {
+    background: #002C66;
+    border-radius: 5px 0px 0px 5px;
+    width: 130px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
+    padding: 10px;
+  }
+
+.tf-travel-text {
+    background: #FAFCFE;
+    border-radius: 8px 0px 0px 8px;
+    width: calc(100% - 100px);
+    box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
+  }
+
+.tf-travel-text h4 {
+    font-size: 18px;
+    color: #3A3A44;
+    display: flex;
+    height: 80px;
+    padding: 0;
+    margin: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tf-travel-content-wrap {
+    display: flex;
+    padding: 40px;
+    gap: 40px;
+}
+
+.tf-travel-content-wrap img {
+    max-width: 350px;
+    height: auto;
+    object-fit: cover;
+    border-radius:8px;
+}
+
+.tf-travel-content {
+    display: none;
+}
+
+.tf-travel-itinerary-item:first-child .tf-travel-content {
+    display: unset;
+}
+
+.tf-travel-text h4:hover {
+    color:#133774;
+}
+
+/*--------- Travel Itinerary CSS End ---------*/
 
 /*================================
 |            Hotel CSS           |
@@ -284,16 +795,23 @@
     line-height: 1;
     color: #333;
 }
+.tf-wishlist {
+    text-align: right;
+    margin-bottom: 20px;
+  }
 .single-tour-wish-bt {
-    position: absolute;
-    right: 0;
-    top: 0;
-    line-height: 1;
     color: #333;
     font-size: 24px;
     cursor: pointer;
-    z-index: 999;
-}
+  }
+  .single-tour-wish-bt i {
+    background: rgba(26,43,72,.6);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 9px 7px 10px;
+    transition: 0.3s;
+  }
 /* Table Skeleton Loader */
 .tf-text-preloader {
     position: relative;

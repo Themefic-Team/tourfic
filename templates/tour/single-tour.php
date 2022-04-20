@@ -81,38 +81,39 @@ $tf_overall_rate['review'] = null;
 				<div class="tf-hero-content-wrapper">
 					<div class="tf-hero-top-content" style="background-image: url(<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>);">
 						<div class="tf-hero-top-content-inner">
-							<?php
-							// Wishlist
-							if(tfopt('wl-bt-for') && in_array('2', tfopt('wl-bt-for'))) {
-								if ( is_user_logged_in() ) {
-									if(tfopt('wl-for') && in_array('li', tfopt('wl-for'))) {
-									?>
-										<span class="single-tour-wish-bt"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if(tfopt('wl-page')) { echo 'data-page-title="' .get_the_title(tfopt('wl-page')). '" data-page-url="' .get_permalink(tfopt('wl-page')). '"'; } ?>></i></span>
-									<?php
-									}
-								} else {
-									if(tfopt('wl-for') && in_array('lo', tfopt('wl-for'))) {
-									?>
-										<span class="single-tour-wish-bt"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if(tfopt('wl-page')) { echo 'data-page-title="' .get_the_title(tfopt('wl-page')). '" data-page-url="' .get_permalink(tfopt('wl-page')). '"'; } ?>></i></span>
-									<?php
+							<div class="tf-wishlist">
+								<?php
+								// Wishlist
+								if(tfopt('wl-bt-for') && in_array('2', tfopt('wl-bt-for'))) {
+									if ( is_user_logged_in() ) {
+										if(tfopt('wl-for') && in_array('li', tfopt('wl-for'))) {
+										?>
+											<span class="single-tour-wish-bt"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if(tfopt('wl-page')) { echo 'data-page-title="' .get_the_title(tfopt('wl-page')). '" data-page-url="' .get_permalink(tfopt('wl-page')). '"'; } ?>></i></span>
+										<?php
+										}
+									} else {
+										if(tfopt('wl-for') && in_array('lo', tfopt('wl-for'))) {
+										?>
+											<span class="single-tour-wish-bt"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if(tfopt('wl-page')) { echo 'data-page-title="' .get_the_title(tfopt('wl-page')). '" data-page-url="' .get_permalink(tfopt('wl-page')). '"'; } ?>></i></span>
+										<?php
+										}
 									}
 								}
-							}
-							?>
-								<h1><?php echo esc_html__( $hero_title, 'tourfic' ); ?></h1>
+								?>
+							</div>
 								<!-- Start gallery -->
-								<div class="tf-tours_gallery-wrap">
+								<div class="tf-tours_search-wrap">
 									<?php echo tf_single_tour_booking_form( $post->ID ); ?>
 								</div>
 								<!-- End gallery-->
 						</div>
-						<div class="tf-hero-bottom-area">					
+						<div class="tf-hero-bottom-area">
 							<?php 
 							$tour_video = $meta['tour_video'] ? $meta['tour_video'] : '';
 							if (defined( 'TF_PRO' ) && $tour_video){ 
 							?>	
 							<div class="tf-hero-btm-icon tf-tour-video" data-fancybox="tour-video" href="<?php echo $tour_video; ?>">	
-								<i class="fab fa-youtube"></i>
+								<i class="fab fa-youtube"></i> <span>Tour Video</span>
 							</div>
 							<?php } 
 							// Gallery
@@ -121,7 +122,7 @@ $tf_overall_rate['review'] = null;
 									if ($key === array_key_first($gallery_ids)) {
 										$image_url = wp_get_attachment_url( $gallery_item_id, 'full' ); ?>
 										<div data-fancybox="tour-gallery" class="tf-hero-btm-icon tf-tour-gallery" data-src="<?php echo $image_url; ?>">
-											<i class="far fa-image"></i>
+											<i class="far fa-image"></i> <span>Tour Gallery</span>
 										</div>
 									<?php } else {
 										$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
@@ -167,33 +168,33 @@ $tf_overall_rate['review'] = null;
 	
 	<?php if($tour_duration || $tour_type || $group_size || $language) { ?>
 	<!-- Square block section Start -->
-	<div class="tf-square-block-wrapper">
+	<div class="tf-square-block-wrapper tf-section-wrapper tf-section-white">
 		<div class="tf-container">
 			<div class="tf-row">
 				<div class="tf-square-block-content-wrapper">
 					<?php if($tour_duration) { ?>
-					<div class="tf-single-square-block">
+					<div class="tf-single-square-block first">
 						<i class="far fa-clock"></i>
 						<h5><?php echo __( 'Duration', 'tourfic' ); ?></h5>
 						<p><?php echo esc_html__( $tour_duration,'tourfic' ) ?></p>
 					</div>
 					<?php } ?>
 					<?php if($tour_type) { ?>
-					<div class="tf-single-square-block">
+					<div class="tf-single-square-block second">
 						<img src=<?php echo TF_ASSETS_URL . "img/globe.png" ?> alt="">
 						<h5><?php echo __( 'Tour Type', 'tourfic' ); ?></h5>
 						<p><?php echo esc_html__( $tour_type,'tourfic' ) ?></p>
 					</div>
 					<?php } ?>
 					<?php if($group_size) { ?>
-					<div class="tf-single-square-block">
+					<div class="tf-single-square-block third">
 						<img src=<?php echo TF_ASSETS_URL . "img/users.svg" ?> alt="">
 						<h5><?php echo __( 'Group Size', 'tourfic' ); ?></h5>
 						<p><?php echo esc_html__( $group_size,'tourfic' ) ?></p>
 					</div>
 					<?php } ?>
 					<?php if($language) { ?>
-					<div class="tf-single-square-block">
+					<div class="tf-single-square-block fourth">
 						<img src=<?php echo TF_ASSETS_URL . "img/lang.png" ?> alt="">
 						<h5><?php echo __( 'Language', 'tourfic' ); ?></h5>
 						<p><?php echo esc_html__( $language,'tourfic' ) ?></p>
@@ -206,21 +207,32 @@ $tf_overall_rate['review'] = null;
 	<!-- Square block section end -->
 	<?php } ?>
 
-	<!-- Overview and Highlight section Start -->
-	<div class="tf-overview-wrapper">
+	<!-- Highlight section Start -->
+	<div class="tf-highlight-wrapper tf-section-wrapper">
 		<div class="tf-container">
 			<div class="tf-row">
-				<div class="tf-overview-content-wrapper">
+				<div class="tf-highlight-content-wrapper">
 					<?php if($highlights) { ?>
-						<div class="tf-overview-item">
-							<div class="tf-overview-text">							
+						<div class="tf-highlight-item">
+							<div class="tf-highlight-text">							
 								<h2><?php _e( 'Highlights','tourfic' ); ?></h2>
 								<?php echo $highlights; ?>
 							</div>
-							<div class="tf-ohi-image">
+							<div class="tf-highlight-image">
 								<img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>" alt="">
 							</div>
 						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Highlight section end -->
+
+	<!-- Overview section Start -->
+	<div class="tf-overview-wrapper tf-section-wrapper tf-section-white">
+		<div class="tf-container">
+			<div class="tf-row">
+				<div class="tf-overview-content-wrapper">
 					<?php }
 					if(get_the_content()) { ?>
 						<div class="tf-overview-text">
@@ -232,46 +244,44 @@ $tf_overall_rate['review'] = null;
 			</div>
 		</div>
 	</div>
-	<!-- Overview and Highlight section end -->
+	<!-- Overview section end -->
 
 	<?php if( $inc || $exc ) { ?>
-	<!-- Qoted List section Start -->
-	<div class="tf-quoted-wrapper">
+	<!-- Include-Exclude section Start -->
+	<div class="tf-inc-exc-wrapper">
 		<div class="tf-container">
 			<div class="tf-row">
-				<div class="tf-quoted-content-upper">
-					<div class="tf-quoted-content-wrapper">
-						<div class="tf-quoted-include">
-							<h2><?php _e( 'Included','tourfic' ); ?></h2>
-							<ul>
-								<?php
-									foreach( $inc as $key => $val ){
-										echo "<li>". $val['inc'] ."</li>";
-									}
-								?>
-							</ul>
-						</div>
-						<div class="tf-quoted-exclude">
-							<h2><?php _e( 'Excluded','tourfic' ); ?></h2>
-							<ul>
-								<?php
-									foreach( $exc as $key => $val ){
-										echo "<li>". $val['exc'] ."</li>";
-									}
-								?>
-							</ul>
-						</div>
+				<div class="tf-inc-exc-content-wrapper">
+					<div class="tf-include-section">
+						<h4><?php _e( 'Included','tourfic' ); ?></h4>
+						<ul>
+							<?php
+								foreach( $inc as $key => $val ){
+									echo "<li>". $val['inc'] ."</li>";
+								}
+							?>
+						</ul>
+					</div>
+					<div class="tf-exclude-section">
+						<h4><?php _e( 'Excluded','tourfic' ); ?></h4>
+						<ul>
+							<?php
+								foreach( $exc as $key => $val ){
+									echo "<li>". $val['exc'] ."</li>";
+								}
+							?>
+						</ul>	
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Qoted List section end -->
+	<!-- Include-Exclude section End -->
 	<?php } ?>
 
 	<?php if( $itineraries ) { ?>
 	<!-- Travel Itinerary section Start -->
-	<div class="tf-travel-itinerary-wrapper">
+	<div class="tf-travel-itinerary-wrapper tf-section-wrapper">
 		<div class="tf-container">
 			<div class="tf-row">
 				<div class="tf-travel-itinerary-content-wrapper">
@@ -284,8 +294,8 @@ $tf_overall_rate['review'] = null;
 							</div>
 							<div class="tf-travel-text">
 								<h4><?php echo esc_html( $itinerary['title'] );  ?></h4>
-								<div class="tf-travel-contetn">
-									<div class="tf-travel-contetn-wrap">
+								<div class="tf-travel-content">
+									<div class="tf-travel-content-wrap">
 										<?php if ($itinerary['image']) {
 											echo '<img src="' .esc_url( $itinerary['image'] ). '">';
 										} ?>										
