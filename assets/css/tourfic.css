@@ -60,6 +60,9 @@
     text-align: center;
     margin: 20% 0 20% 0;
 }
+.fancybox-container {
+    z-index: 999999;
+}
 
 /**
  * tf-tooltip
@@ -290,6 +293,7 @@
     grid-template-columns: auto auto;
     justify-content: space-between;
     align-items: center;
+    column-gap: 20px;
 }
 .tf-review-form-container .tf-single-rating .error{
     color: red;
@@ -305,6 +309,12 @@
     line-height: 1;
     unicode-bidi: bidi-override;
     direction: rtl;
+}
+.tf-review-form-container .tf-single-rating .ratings-container.star10 {
+    width: 220px;
+}
+.tf-review-form-container .tf-single-rating .ratings-container.star5 {
+    width: 110px;
 }
 .tf-review-form-container .tf-single-rating .ratings-container label{
     padding: 0;
@@ -680,6 +690,26 @@
 }
 
 /*================================
+|            Archive CSS         |
+================================*/
+.tf-archive-rating {
+    width: 40px;
+    height: 40px;
+    line-height: 1;
+    background: #133774;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.tf-archive-rating span{
+    font-weight: 600;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+/*================================
 |            Search Form CSS     |
 ================================*/
 /* Auto complete */
@@ -710,6 +740,7 @@
 }
 .single-tour-inner .tf_button {
       padding: 15px 20px;
+      border-radius: 8px;
 }
 
 /* Horizontal Search Form */

@@ -47,7 +47,6 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         wp_enqueue_style( 'tourfic-styles', TF_ASSETS_URL . 'css/tourfic-styles.css', null, '' );
 
         wp_enqueue_style( 'tf-style', TF_ASSETS_URL . 'css/style.css', null, '' );
-        wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/responsive.css', null, '' );
 
         /**
          * Flatpickr
@@ -140,6 +139,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'sending_ques' => __('Sending your question...', 'tourfic'),
             )
         );
+        wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/responsive.css', '', TOURFIC );
 
         /**
          * Inline scripts

@@ -166,6 +166,8 @@ if(!function_exists('tf_review_form')) {
 if(!function_exists('tf_generate_review_meta_fields')) {
     function tf_generate_review_meta_fields(array $fields): string {
 
+        $limit = tfopt('r-base') ?? 5;
+
         $html = '<div class="tf-rating-wrapper">';
         foreach ($fields as $field) {
             if (empty($field)) {
@@ -173,7 +175,7 @@ if(!function_exists('tf_generate_review_meta_fields')) {
             }
             $html .= '<div class="tf-single-rating">';
             $html .= sprintf('<label for="rating">%s</label>', $field);
-            $html .= sprintf('<div class="ratings-container">%s </div>', tf_generate_stars($field));
+            $html .= sprintf('<div class="ratings-container star' .$limit. '">%s </div>', tf_generate_stars($field));
             $html .= '</div>';
         }
         $html .= '</div>';
@@ -381,16 +383,10 @@ function tf_archive_single_rating() {
         ob_start();
         ?>
         
-        <div class="tf_item_review_block">
-            <div class="reviewFloater reviewFloaterBadge__container">
-                <div class="sr-review-score">
-                    <div class="bui-review-score c-score bui-review-score--end">
-                        <div class="bui-review-score__badge"> 
-                            <?php _e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="tf-archive-rating">
+            <span> 
+                <?php _e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
+            </span>
         </div>
 
         <?php

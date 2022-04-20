@@ -133,11 +133,6 @@
   align-items: center;
 }
 
-.reviews span {
-  margin-left: 10px;
-  font-size: 18px;
-}
-
 .share-tour {
   margin-right: 14px;
 }
@@ -151,7 +146,7 @@ span.tf-price .amount {
 }
 
 .tf_map-link {
-  font-size: 18px;
+  font-size: 14px;
   color: #666;
 }
 .tf_map-link a {
@@ -354,11 +349,6 @@ a.slick-slide-item-link {
   -o-object-fit: cover;
   object-fit: cover;
   cursor: zoom-in;
-}
-
-.tf_contents.reviews .comment-respond {
-  padding: 0;
-  background: transparent;
 }
 
 .tf_toc-wrap {
@@ -1094,23 +1084,6 @@ p.price {
   margin: 0px;
   color: #000;
   font-weight: 700;
-}
-
-.tourfic_review_part {
-  margin-top: 7px;
-}
-
-p.review_number_wrap {
-  font-size: 13px;
-}
-
-span.review_num {
-  background: #003580;
-  padding: 5px;
-  border-radius: 8px;
-  font-weight: 700;
-  color: white;
-  font-size: 14px;
 }
 
 .populer_item_img {
@@ -2208,22 +2181,6 @@ button.tf-tourbox-arrow {
   color: black;
 }
 
-.tf-custom-review-section-wrapper {
-  padding: 30px;
-  background-color: #fff;
-}
-
-.tf-single-custom-review {
-  padding: 26px 20px;
-  background: #fff;
-  box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
-  margin: 15px;
-}
-
-.tf-custom-review-slider-area {
-  position: relative;
-}
-
 button.tf-cr-slider-arrow {
   position: absolute;
   z-index: 999;
@@ -2325,23 +2282,6 @@ button.tf-cr-slider-arrow.prev-arrow {
 
 .tf-cr-slider-arrow i {
   color: #002c66;
-}
-
-.tf-custom-review-title-area {
-  text-align: center;
-  margin-bottom: 60px;
-  margin-top: 60px;
-}
-
-.tf-custom-review-title-area h2 {
-  font-weight: bold;
-  color: #002c66;
-  font-size: 36px;
-}
-
-.tf-custom-review-title-area p {
-  font-size: 18px;
-  line-height: 26px;
 }
 
 .tf_map_section iframe {
@@ -2460,94 +2400,6 @@ button.tf-cr-slider-arrow.prev-arrow {
 
 .tf-tours_single_faq_inner.active .faq-head .faq-indicator .fa-plus {
   display: none;
-}
-
-.tf-tours_submit_review .comment-respond {
-  background-color: unset !important;
-  border: 0px solid #ddd !important;
-  padding: 0 !important;
-}
-.tf-tours_submit_review div#reply-title {
-  background: #002C66;
-  color: white;
-  text-align: center;
-  display: block;
-  padding: 12px 24px;
-  border-radius: 5px;
-  max-width: 185px;
-  margin: 0 auto;
-}
-.tf-tours_submit_review div#reply-title span {
-  display: none !important;
-}
-
-.tf-tours_submit_review .tf-comments-count-wrapper {
-  display: none;
-}
-
-.tf-tours_submit_review ol.tf-comment-list {
-  display: none;
-}
-
-.tf-review-wrapper {
-  background: #fff;
-}
-.tf-review-wrapper label {
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 28px;
-}
-.tf-review-wrapper form#commentform {
-  background: rgba(2, 51, 110, 0.1);
-  padding: 50px 100px;
-  overflow: hidden;
-  margin-top: 30px;
-}
-.tf-review-wrapper .tf_comment-metas {
-  background: #fff;
-  border-radius: 5px;
-  padding: 40px;
-  width: 48%;
-  float: left;
-  margin-right: 10px;
-}
-.tf-review-wrapper select {
-  padding: 0;
-  background: unset;
-  border: unset;
-}
-.tf-review-wrapper .comment_form_fields {
-  width: 50%;
-  float: right;
-  padding: 0px 15px;
-}
-.tf-review-wrapper p.form-submit input[type=submit] {
-  padding: 12px 43px;
-  font-size: 18px;
-  font-weight: 400 !important;
-  color: white !important;
-  border-radius: 5px;
-  background: #002c66 !important;
-  border: unset !important;
-}
-.tf-review-wrapper p.form-submit {
-  width: 100%;
-  float: none;
-  display: block;
-  overflow: hidden;
-  margin-top: 15px;
-}
-.tf-review-wrapper .comment_form_fields textarea {
-  border: unset !important;
-  height: 153px;
-  border-radius: 5px;
-}
-.tf-review-wrapper .author-email input {
-  border: unset;
-  border-radius: 5px;
-}
-.tf-review-wrapper p.logged-in-as {
-  padding-bottom: 22px;
 }
 
 .tf-tours_gallery-wrap {
@@ -2770,23 +2622,6 @@ form.tf_tours_booking .tf_selectperson-wrap {
     height: auto;
   }
 
-  .tf-review-wrapper form#commentform {
-    padding: 10px 0px;
-  }
-
-  .tf-review-wrapper .tf_comment-metas {
-    padding: 8px;
-    width: 100%;
-  }
-
-  .tf-review-wrapper .comment_form_fields {
-    width: 100%;
-  }
-
-  .tf-review-wrapper {
-    padding: 15px;
-  }
-
   .tf-tours_features_area_wrapper.tf-tours_section {
     padding: 0 15px;
   }
@@ -2942,67 +2777,6 @@ form.tf_tours_booking .tf_selectperson-wrap {
   -ms-flex: 1;
 }
 
-.tf_item_review_block {
-  order: 1;
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: main-size;
-  width: auto;
-  max-width: 45%;
-}
-
-.reviewFloater {
-  margin-left: 24px;
-  float: none;
-  text-align: right;
-}
-
-.sr-review-score__link {
-  text-decoration: none;
-}
-
-.bui-review-score {
-  display: inline-flex;
-  align-items: center;
-  font-weight: 500;
-  flex-direction: row-reverse;
-}
-
-.bui-review-score__badge {
-  background: #003162;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 500;
-  justify-content: center;
-  vertical-align: baseline;
-  border-radius: 50%;
-  height: 40px;
-  width: 40px;
-}
-
-.bui-review-score__content {
-  margin-left: 0;
-  margin-right: 8px;
-  text-align: right;
-}
-
-.bui-review-score__title {
-  color: #003580;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1;
-}
-
-.bui-review-score__text {
-  color: #707070;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1;
-  margin-top: 4px;
-}
-
 .tf_card_address_line a {
   color: #0a75c2;
 }
@@ -3142,15 +2916,6 @@ form.tf_tours_booking .tf_selectperson-wrap {
   width: 100%;
   height: 100%;
 }
-.archive_ajax_result.tours-grid .tf_item_review_block {
-  max-width: 40%;
-}
-.archive_ajax_result.tours-grid .tf_item_main_block {
-  max-width: 60%;
-}
-.archive_ajax_result.tours-grid .bui-review-score__title {
-  font-size: 14px;
-}
 .archive_ajax_result.tours-grid .tf_map-link {
   white-space: nowrap;
   max-width: 100%;
@@ -3281,14 +3046,6 @@ form.tf_tours_booking .tf_selectperson-wrap {
 
   .archive_ajax_result .tf_item_main_block {
     max-width: 60% !important;
-  }
-
-  .tf_item_review_block {
-    max-width: 40%;
-  }
-
-  .archive_ajax_result .bui-review-score__title {
-    font-size: 14px;
   }
 
   .archive_ajax_result .roomPrice.roomPrice_flex.sr_discount {

@@ -144,18 +144,7 @@ $tf_overall_rate['review'] = null;
 						<div class="tf-hero-bottom-right">
 							<div class="tf-hero-pricing">
 								<span><?php echo esc_html__( 'Price','tourfic' ); ?>: <?php echo tf_tours_price_html();?></span>
-							</div>
-							<div class="tf-hero-rating">
-								<div class="tf-hero-bcr-star">
-									<i class="fas fa-star"></i>
-								</div>
-								<div class="tf-hero-bcr-num reviews">
-									<span>5</span>
-								</div>
-							</div>
-							<div class="tf-hero-review-count">
-								<p><?php echo number_format_i18n( get_comments_number()); ?> <?php echo __( 'reviews', 'tourfic' );?></p>
-							</div>
+							</div>							
 						</div>
 					</div>
 				</div>
@@ -470,59 +459,17 @@ $tf_overall_rate['review'] = null;
 	<div class="tf-review-wrapper">
 		<div class="tf-container">
 			<div class="tf-row">
-				<div class="tf-review-content-wrapper">
-					<?php if($comments): ?>
-					<div class="tf-review-sec-head">
-						<h2><?php echo esc_html__( 'Customer Reviews','tourfic' );?></h2>
-						<p><?php echo esc_html__( 'Reviews given by our customers.','tourfic' );?></p>
-					</div>
-					<div class="tf-review-items-wrapper">
-					<?php
-						foreach ( $comments as $comment ) :
-					
-							$tf_comment_meta = get_comment_meta( $comment->comment_ID, 'tf_comment_meta', true );
-					
-							if ( $tf_comment_meta ) {
-								foreach ( $tf_comment_meta as $key => $value ) {
-									$tf_overall_rate[$key][] = $value ? $value : "5";
-								}
-							} else {
-								$tf_overall_rate['review'][] = "5";
-								$tf_overall_rate['sleep'][] = "5";
-								$tf_overall_rate['location'][] = "5";
-								$tf_overall_rate['services'][] = "5";
-								$tf_overall_rate['cleanliness'][] = "5";
-								$tf_overall_rate['rooms'][] = "5";
-							}
-							?>
-						<div class="tf-review-item">
-							<div class="tf-review-rating">
-								<i class="fas fa-star"></i>
-								<span><?php _e( tourfic_avg_ratings($tf_overall_rate['review']) ); ?></span>
-							</div>
-							<div class="tf-review-avater">
-								<img src="<?php echo get_avatar_url( $comment->user_id );?>" alt="">
-							</div>
-							<h3><?php echo get_the_author_meta( 'display_name',$comment->user_id ); ?> <span><?php echo get_the_author_meta( 'description',$comment->user_id ); ?></span></h3>
-							<div class="tf-review-desc">
-								<img src=<?php echo TOURFIC_PLUGIN_URL . "assets/img/quote3.png"; ?> alt="">
-								<p><?php echo $comment->comment_content;?></p>
-								<img src=<?php echo TOURFIC_PLUGIN_URL . "assets/img/quote4.png"; ?> alt="">
-							</div>
-						</div>
-						<?php endforeach; ?>
-					</div>
-					<?php endif; ?>
-					<div class="tf-tours_submit_review">
-					<?php
-						if ( comments_open() || get_comments_number() ) :
-							comments_template();
-						endif;
-					?>				
-					</div>		
-					
-
+				<?php if($comments): ?>
+				<div class="tf-review-sec-head">
+					<h2><?php echo esc_html__( 'Customer Reviews','tourfic' );?></h2>
+					<p><?php echo esc_html__( 'Reviews given by our customers.','tourfic' );?></p>
 				</div>
+				<?php endif; ?>
+				<?php
+				if( comments_open() || get_comments_number() ) {
+					comments_template();
+				}
+				?>						
 			</div>
 		</div>
 	</div>
