@@ -61,8 +61,6 @@ function tf_tours_booking_function() {
 
         }
 
-    } else {
-
     }
 
     /**
@@ -91,6 +89,8 @@ function tf_tours_booking_function() {
     $total_people = $adults + $children + $infant;
     // Tour date
     $tour_date = !empty( $_POST['check-in-out-date'] ) ? sanitize_text_field( $_POST['check-in-out-date'] ) : '';
+    $tour_time = !empty( $_POST['check-in-time'] ) ? sanitize_text_field( $_POST['check-in-time'] ) : null;
+
     if ($tour_type == 'continuous') {
         $start_date = $end_date = $tour_date;
     }
@@ -246,12 +246,12 @@ function tf_tours_booking_function() {
         $infant_price   = $meta['infant_price'];
     }
 
-    if ($tour_type == 'continuous' && empty($tour_time)) {
+    if ($tour_type == 'continuous') {
 
-        if (!empty($meta['allowed_time']) && empty($meta['cont_custom_date']) && empty($seasional_price['allowed_time'])) {
+        if ( $custom_avail == 0 && !empty($meta['allowed_time']) && empty($tour_time) ) {
             $response['errors'][]  = __('Please select time', 'tourfic');
         }
-        if (!empty($meta['cont_custom_date']) && !empty($seasional_price['allowed_time']) && empty($meta['allowed_time'])) {
+        if ($custom_avail == 1  && !empty($seasional_price[0]['allowed_time']) && empty($tour_time) ) {
             $response['errors'][]  = __('Please select time', 'tourfic');
         }
     }
