@@ -15,21 +15,57 @@ function tf_remove_comment_meta_box() {
 add_action( 'admin_init', 'tf_remove_comment_meta_box' );
 
 /**
- * Steps
- * 0. Add styles to frontend
- * 1. Create the rating interface.
- * 2. Saving the user’s input.
- * 3. Making the rating required (optional).
- * 4. Display  the rating on a submitted comment.
- * 5. Get the average rating of a post.
- * 6. Update the average rating of a post when comment is updated
+ * Add script only for review
  */
-// 0. Add styles to frontend
-function tf_review_add_style()
-{
-    wp_enqueue_style('tf-review', TF_ASSETS_URL . 'css/review.css', null, '');
+function tf_review_script() {
+
+    if (is_singular( array( 'tf_hotel', 'tf_tours' ) ) && comments_open()) {
+
+        /**
+         * jquery-validate
+         * 
+         * v1.19.3
+         */
+        wp_enqueue_script( 'jquery-validate', TF_ASSETS_URL . 'js/jquery.validate.min.js', array( 'jquery' ), '1.19.3', true );
+
+        $data = '
+        
+            jQuery(document).ready(function($) {
+                $("#commentform").validate({
+                    ignore: [],
+                    rules: {
+                        "tf_comment_meta[]": {
+                            required: true,
+                        },
+                        author: {
+                            required: true,
+                        },
+                        email: {
+                            required: true,
+                        }
+                    },
+                    messages: {
+                        "tf_comment_meta[]": "' .__("Please provide a ratings", "tourfic"). '",
+                    },
+                    errorElement: "span",
+                    errorPlacement: function(error, element) {
+                        if (element.is(":radio")) {
+                            error.appendTo(element.parents(".tf-single-rating"));
+                        } else { // This is the default behavior
+                            error.insertAfter(element);
+                        }
+                    }
+                });
+            });
+        
+        ';
+
+        wp_add_inline_script( 'jquery-validate', $data );
+
+    }
+
 }
-add_action('wp_enqueue_scripts', 'tf_review_add_style', 99999);
+add_action('wp_enqueue_scripts', 'tf_review_script', 99999);
 
 /**
  * Review submit form
@@ -186,53 +222,9 @@ if(!function_exists('tf_save_rating')) {
 }
 
 /**
- * 3. Rating validation (optional)
- *
+ * Enable empty comment.
  */
-// Enable empty comment.
 add_filter('allow_empty_comment', '__return_true');
-
-// Validation for rating inputs
-if(!function_exists('tf_review_scripts')) {
-    function tf_review_scripts() {
-
-        if (is_single() && comments_open()) {
-        ?>
-            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-            <script type="text/javascript">
-                jQuery(document).ready(function($) {
-                    $('#commentform').validate({
-                        ignore: [],
-                        rules: {
-                            'tf_comment_meta[]': {
-                                required: true,
-                            },
-                            author: {
-                                required: true,
-                            },
-                            email: {
-                                required: true,
-                            }
-                        },
-                        messages: {
-                            'tf_comment_meta[]': "Please provide a ratings",
-                        },
-                        errorElement: "span",
-                        errorPlacement: function(error, element) {
-                            if (element.is(":radio")) {
-                                error.appendTo(element.parents('.tf-single-rating'));
-                            } else { // This is the default behavior
-                                error.insertAfter(element);
-                            }
-                        }
-                    });
-                });
-            </script>
-        <?php
-        }
-    }
-    add_action('wp_footer', 'tf_review_scripts');
-}
 
 /**
  * Calculate average ratings
