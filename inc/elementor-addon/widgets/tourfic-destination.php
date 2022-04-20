@@ -8,7 +8,7 @@ use Elementor\Controls_Manager;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
- * Elementor BEAF Slider
+ * Elementor Tourfic Des
  *
  * Elementor widget for BEAF Slider.
  *
@@ -82,7 +82,7 @@ class TOURFIC_Destination extends Widget_Base {
 	 *
 	 * @access protected
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
         
         
 		$this->start_controls_section(
@@ -99,7 +99,7 @@ class TOURFIC_Destination extends Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name' => 'tf_destination_title_typography',
-				'label' => __( 'Destination Title Typography', 'torfic' ),
+				'label' => __( 'Destination Title Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .recomended_place_info_header h3',
 			]
 		);
@@ -107,11 +107,11 @@ class TOURFIC_Destination extends Widget_Base {
 		$this->add_control(
 			'tf_destination_title_color',
 			[
-				'label' => __( 'Destination title Color', 'tourfic' ),
+				'label' => __( 'Destination Title Color', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => \Elementor\Core\Schemes\Color::get_type(),
+					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
 				],
 				'default' => '#FFFFFF',
 				'selectors' => [
@@ -126,8 +126,8 @@ class TOURFIC_Destination extends Widget_Base {
 				'label' => __( 'Destination Title Hover Color', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_2,
+					'type' => \Elementor\Core\Schemes\Color::get_type(),
+					'value' => \Elementor\Core\Schemes\Color::COLOR_2,
 				],
 				'default' => '#FFFFFF',
 				'selectors' => [
@@ -142,7 +142,7 @@ class TOURFIC_Destination extends Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name' => 'tf_destination_subtitle_typography',
-				'label' => __( 'Destination Subitle Typography', 'torfic' ),
+				'label' => __( 'Destination Subitle Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .recomended_place_info_header p',
 			]
 		);
@@ -153,8 +153,8 @@ class TOURFIC_Destination extends Widget_Base {
 				'label' => __( 'Destination Subtitle Color', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_3,
+					'type' => \Elementor\Core\Schemes\Color::get_type(),
+					'value' => \Elementor\Core\Schemes\Color::COLOR_3,
 				],
 				'default' => '#FFFFFF',
 				'selectors' => [
@@ -169,8 +169,8 @@ class TOURFIC_Destination extends Widget_Base {
 				'label' => __( 'Destination Subtitle Hover Color', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_4,
+					'type' => \Elementor\Core\Schemes\Color::get_type(),
+					'value' => \Elementor\Core\Schemes\Color::COLOR_4,
 				],
 				'default' => '#FFFFFF',
 				'selectors' => [

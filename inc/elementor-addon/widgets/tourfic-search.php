@@ -8,9 +8,9 @@ use Elementor\Controls_Manager;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
- * Elementor BEAF Slider
+ * Elementor Tourfic Search
  *
- * Elementor widget for BEAF Slider.
+ * Elementor widget for Tourfic Search
  *
  */
 class TOURFIC_Search extends Widget_Base {
@@ -34,7 +34,7 @@ class TOURFIC_Search extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Tourfic search', 'tourfic' );
+		return __( 'Tourfic Search', 'tourfic' );
 	}
 
 	/**
@@ -82,7 +82,7 @@ class TOURFIC_Search extends Widget_Base {
 	 *
 	 * @access protected
 	 */
-	protected function _register_controls() {
+	protected function register_controls() {
         
         
 		$this->start_controls_section(
@@ -96,10 +96,10 @@ class TOURFIC_Search extends Widget_Base {
         $this->add_control(
 			'tf_search_title',
 			[
-				'label' => __( 'Title', 'toufic' ),
+				'label' => __( 'Title', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Default title', 'toufic' ),
-				'placeholder' => __( 'Type your title here', 'toufic' ),
+				'default' => __( 'Default Title', 'tourfic' ),
+				'placeholder' => __( 'Type your title here', 'tourfic' ),
 			]
 		);        
 
@@ -107,10 +107,10 @@ class TOURFIC_Search extends Widget_Base {
 		$this->add_control(
 			'tf_search_subtitle',
 			[
-				'label' => __( 'Subtitle', 'toufic' ),
+				'label' => __( 'Subtitle', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
-				'default' => __( 'Default description', 'toufic' ),
-				'placeholder' => __( 'Type your description here', 'toufic' ),
+				'default' => __( 'Default subtitle', 'tourfic' ),
+				'placeholder' => __( 'Type your subtitle here', 'tourfic' ),
 			]
 		);		
 
@@ -131,7 +131,7 @@ class TOURFIC_Search extends Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name' => 'title_typography',
-				'label' => __( 'Title Typography', 'torfic' ),
+				'label' => __( 'Title Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .tf_widget-title h2',
 			]
 		);
@@ -141,8 +141,8 @@ class TOURFIC_Search extends Widget_Base {
 				'label' => __( 'Title Color', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => \Elementor\Core\Schemes\Color::get_type(),
+					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .tf_widget-title h2' => 'color: {{VALUE}}',
@@ -161,7 +161,7 @@ class TOURFIC_Search extends Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name' => 'subtitle_typography',
-				'label' => __( 'Subtitle Typography', 'torfic' ),
+				'label' => __( 'Subtitle Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .tf_widget-subtitle',
 			]
 		);
@@ -172,8 +172,8 @@ class TOURFIC_Search extends Widget_Base {
 				'label' => __( 'Subtitle Color', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => \Elementor\Core\Schemes\Color::get_type(),
+					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .tf_widget-subtitle' => 'color: {{VALUE}}',
