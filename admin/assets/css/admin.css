@@ -1,3 +1,7 @@
+/** 
+ * Meta field
+ * Common
+ */
 .csf-section .csf-field.tf-csf-disable {
     opacity: 1;
     user-select: none;
@@ -35,6 +39,27 @@
 }
 .tf-csf-badge .tf-pro {
     background: #b30000;
+}
+
+/**
+ * General Settings
+ */
+ .document-button {
+    display: block;
+    background: #ddd;
+    color: #050505;
+    border-radius: 3px;
+    line-height: 1;
+    padding: 10px 15px;
+    margin: 0;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+}
+.document-button:hover {
+    background: #135e96;
+    color: #fff;
 }
 
 /**
@@ -79,4 +104,12 @@
 } 
 .notice-warning .tf-major-update-warning__icon {
     fill: #f56e28;
+}
+
+/**
+ * Codestar
+ */
+.disable-sortable .csf-repeater-sort,
+.disable-sortable .csf-repeater-clone {
+    display: none !important;
 }

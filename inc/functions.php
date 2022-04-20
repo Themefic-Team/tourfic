@@ -39,6 +39,15 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-wishlist.php' ) ) {
 }
 
 /**
+ * Review Functions
+ */
+if (file_exists(TF_INC_PATH . 'functions/functions-review.php')) {
+    require_once TF_INC_PATH . 'functions/functions-review.php';
+} else {
+    tf_file_missing(TF_INC_PATH . 'functions/functions-review.php');
+}
+
+/**
  * Including CSS & JS
  * 
  * @since 1.0

@@ -21,6 +21,7 @@ CSF::createSection( $prefix, array(
 CSF::createSection( $prefix, array(
     'parent'    => 'miscellaneous', 
     'title' =>  __( 'Wishlist', 'tourfic' ),
+    'icon'   => 'fas fa-heart',
     'fields' => array(
 
         array(
@@ -76,6 +77,7 @@ CSF::createSection( $prefix, array(
 CSF::createSection( $prefix, array(
     'parent'    => 'miscellaneous', 
     'title' =>  __( 'Permalink Settings', 'tourfic' ),
+    'icon'   => 'fas fa-link',
     'fields' => array(
 
         array(
@@ -91,4 +93,135 @@ CSF::createSection( $prefix, array(
     )
     
 ) );
+
+/**
+ * Review
+ * 
+ * Sub Menu
+ */
+CSF::createSection($prefix, array(
+    'parent'    => 'miscellaneous',
+    'title' =>  __('Review', 'tourfic'),
+    'icon'   => 'fas fa-star',
+    'fields' => array(
+
+        array(
+            'type'    => 'subheading',
+            'content' => __('Review Settings', 'tourfic'),
+        ),
+        array(
+            'id'       => 'r-customer',
+            'type'     => 'switcher',
+            'title'    => __('Enable Review Only for Customers', 'tourfic'),
+            'subtitle' => __('Customers only who have complete orders', 'tourfic'),
+            'text_on'  => __('Yes', 'tourfic'),
+            'text_off' => __('No', 'tourfic'),
+            'default'  => false
+        ),
+
+        array(
+            'id'      => 'r-for',
+            'type'    => 'checkbox',
+            'title'   => __('Enable Review for', 'tourfic'),
+            'options' => array(
+                'li' => __('Logged in User', 'tourfic'),
+                'lo' => __('Log out User', 'tourfic'),
+            ),
+            'default'    => array('li'),
+            'dependency' => array( 'r-customer', '==', 'false' ),
+        ),
+
+        array(
+            'id'       => 'r-auto-publish',
+            'type'     => 'switcher',
+            'title'    => __('Auto Publish Review', 'tourfic'),
+            'subtitle' => __('By default review will be pending and waiting for admin approval', 'tourfic'),
+            'text_on'  => __('Yes', 'tourfic'),
+            'text_off' => __('No', 'tourfic'),
+            'default'  => false
+        ),
+
+        array(
+            'id'      => 'r-base',
+            'type'    => 'radio',
+            'title'   => __('Calculate Review Based on', 'tourfic'),
+            'options' => array(
+                '5'  => __('5', 'tourfic'),
+                '10' => __('10', 'tourfic'),
+            ),
+            'default'    => '5',
+        ),
+
+        array(
+            'id'       => 'r-hotel',
+            'class'    => 'disable-sortable',
+            'type'     => 'repeater',
+            'title'    => __('Review Fields for Hotels', 'tourfic'),
+            'subtitle' => __('Maximum 10 fields allowed', 'tourfic'),
+            'max'      => '10',
+            'fields'   => array(
+
+                array(
+                    'id'    => 'r-field-type',
+                    'type'  => 'text',
+                    'title' => __('Review for', 'tourfic'),
+                ),
+
+            ),
+            'default'   => array(
+                array(
+                    'r-field-type' => __('Staff', 'tourfic'),
+                ),
+                array(
+                    'r-field-type' => __('Facilities', 'tourfic'),
+                ),
+                array(
+                    'r-field-type' => __('Cleanliness', 'tourfic'),
+                ),
+                array(
+                    'r-field-type' => __('Comfort', 'tourfic'),
+                ),
+                array(
+                    'r-field-type' => __('Value for money', 'tourfic'),
+                ),
+                array(
+                    'r-field-type' => __('Location', 'tourfic'),
+                ),
+            )
+        ),
+        array(
+            'id'       => 'r-tour',
+            'class'    => 'disable-sortable',
+            'type'     => 'repeater',
+            'title'    => __('Review Fields for Tours', 'tourfic'),
+            'subtitle' => __('Maximum 10 fields allowed', 'tourfic'),
+            'max'      => '10',
+            'fields'   => array(
+
+                array(
+                    'id'    => 'r-field-type',
+                    'type'  => 'text',
+                    'title' => __('Review for', 'tourfic'),
+                ),
+
+            ),
+            'default'   => array(
+                array(
+                    'r-field-type' => __('Guide', 'tourfic'),
+                ),
+                array(
+                    'r-field-type' => __('Transportation', 'tourfic'),
+                ),
+                array(
+                    'r-field-type' => __('Value for money', 'tourfic'),
+                ),
+                array(
+                    'r-field-type' => __('Safety', 'tourfic'),
+                ),
+            )
+        ),
+
+    )
+
+));
 ?>

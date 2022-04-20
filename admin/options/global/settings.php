@@ -10,10 +10,12 @@ if( class_exists( 'CSF' ) ) {
     'menu_title'              =>   __( 'Tourfic Settings', 'tourfic' ),
     'menu_slug'               =>   'tourfic',
     'menu_icon'               =>   'dashicons-palmtree',
-    'footer_credit'           =>   __( '<em>Enjoyed <strong>Tourfic</strong>? Please leave us a <a style="color:#e9570a;" href="https://wordpress.org/support/plugin/tourfic/reviews/?filter=5/#new-post" target="_blank">★★★★★</a> rating. We really appreciate your support!</em>', 'tourfic' ),
     'menu_position'           =>   25,
     'show_sub_menu'           =>   true,
     'theme'                   =>   'dark',   
+    // footer
+    'footer_text'             => '<a class="document-button" href="https://themefic.com/docs/tourfic/" target="_blank">Documentation</a>',
+    'footer_credit'           =>   __( '<em>Enjoyed <strong>Tourfic</strong>? Please leave us a <a style="color:#e9570a;" href="https://wordpress.org/support/plugin/tourfic/reviews/?filter=5/#new-post" target="_blank">★★★★★</a> rating. We really appreciate your support!</em>', 'tourfic' ),  
   ) );
 
   

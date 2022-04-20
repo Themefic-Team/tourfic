@@ -1205,12 +1205,12 @@
          // End Feed Click Trigger
  
          //Ratings copy/move under gallery
-         var avg_rating = $('.tf-overall-ratings .overall-rate').text();
-         if(avg_rating){
-             $('.reviews span').html(avg_rating);
-         }else{
-             $('.reviews span').html("0/5");
-         }
+        //  var avg_rating = $('.tf-overall-ratings .overall-rate').text();
+        //  if(avg_rating){
+        //      $('.reviews span').html(avg_rating);
+        //  }else{
+        //      $('.reviews span').html("0/5");
+        //  }
  
          $(".tf-travel-text h4").click(function(){
              $(this).siblings('.tf-travel-contetn').slideToggle();
@@ -1248,3 +1248,10 @@
     evt.currentTarget.className += " active";
 }
 jQuery('#tf-hotel-booking-form').css('display','block');
+
+/**
+ * Show review form on popup
+ */
+function tf_load_rating() {
+    jQuery('#commentform').show();
+}

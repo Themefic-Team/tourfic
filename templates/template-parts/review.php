@@ -1,154 +1,182 @@
 <?php
+
 /**
- * The template for displaying comments.
- *
- * This is the template that displays the area of the page that contains both the current comments
- * and the comment form.
- *
- * @link https://codex.wordpress.org/Template_Hierarchy
- *
- * @package Tourfic
- * @since 1.0.0
+ * Template Name: Review Template
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
+// don't load directly
+defined('ABSPATH') || exit;
 
 /*
  * If the current post is protected by a password and
  * the visitor has not yet entered the password we will
  * return early without loading the comments.
  */
-if ( post_password_required() ) {
-	return;
+if (post_password_required()) {
+    return;
 }
 ?>
 
-<div id="comments" class="tf_comments-area">
-	<?php
-	$comments = get_comments( array( 'post_id' => get_the_ID() ) );
+<div class="tf-review-container">
+    <?php
+    global $post, $current_user;
 
-	$tf_overall_rate = array();
-	$tf_extr_html = '';
+    // Check if user is logged in
+    $is_user_logged_in = $current_user->exists();
+    $post_id = $post->ID;
+    // Get settings value
+    $tf_ratings_for = tfopt('r-for') ?? ['li', 'lo'];
 
-	foreach ( $comments as $comment ) {
+    $args = array( 
+        'post_id' => $post_id,
+        'status'  => 'approve',
+        'type'    => 'comment',
+    );
+    $comments_query = new WP_Comment_Query( $args ); 
+    $comments = $comments_query->comments;
 
-	    $tf_comment_meta = get_comment_meta( $comment->comment_ID, 'tf_comment_meta', true );
+    if($comments) {
 
-	    if( $tf_comment_meta ) {
-	    	foreach ($tf_comment_meta as $key => $value) {
-	    		$tf_overall_rate[$key][] = $value ? $value : "5";
-	    	}
-	    } else {
-	    	$tf_overall_rate['review'][] = "5";
-	    	$tf_overall_rate['sleep'][] = "5";
-	    	$tf_overall_rate['location'][] = "5";
-	    	$tf_overall_rate['services'][] = "5";
-	    	$tf_overall_rate['cleanliness'][] = "5";
-	    	$tf_overall_rate['rooms'][] = "5";
-	    }
-	}
+        $tf_rating_progress_bar    = '';
+        $tf_overall_rate = tf_calculate_comments_rating($comments);
 
-    if( $tf_overall_rate ) {
-    	$tf_extr_html .= '<div class="tf_comment-metas">';
-    		foreach ($tf_overall_rate as $key => $value) {
-    			if ( $key == "review" ) {
-    				continue;
-    			}
-    			$tf_extr_html .= '<div class="comment-meta">';
-					$tf_extr_html .= '<label class="tf_comment_meta-key">'.$key.'</label>';
-					$tf_extr_html .= '<div class="tf_comment_meta-percent"><div class="percent-progress" data-width="'.tourfic_avg_rating_percent( tourfic_avg_ratings($value) ).'"></div></div>';
-					$tf_extr_html .= '<div class="tf_comment_meta-ratings">'.tourfic_avg_ratings($value).'/5</div>';
-				$tf_extr_html .= '</div>';
-    		}
-    	$tf_extr_html .= '</div>';
+
+        if ($tf_overall_rate) {
+
+            foreach ($tf_overall_rate as $key => $value) {
+
+                if (empty($value)) {
+                    continue;
+                }
+                $value        = tf_average_ratings($value);
+                $tf_rating_progress_bar .= '<div class="tf-single">';
+                $tf_rating_progress_bar .= '<div class="tf-text">' . $key . '</div>';
+                $tf_rating_progress_bar .= '<div class="tf-p-bar"><div class="percent-progress" data-width="' . tf_average_rating_percent($value, tfopt('r-base')) . '"></div></div>';
+                $tf_rating_progress_bar .= '<div class="tf-p-b-rating">' . $value . '</div>';
+                $tf_rating_progress_bar .= '</div>';
+
+            }
+        }
+        ?>
+
+            <div class="tf-total-review">
+                <div class="tf-total-average">
+                    <div><?php _e(tf_average_ratings($tf_overall_rate ?? [])); ?></div>
+                    <span><?php tf_based_on_text(count($comments)); ?></span>
+                </div>           
+                <?php
+                if (!empty($tf_ratings_for)) {
+                    if ($is_user_logged_in) {
+                        if (in_array('li', $tf_ratings_for) && !tf_user_has_comments()) {
+                        ?>
+                            <button data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
+                                <i class="fas fa-plus"></i> <?php _e('Add Review', 'tourfic'); ?>
+                            </button>
+
+                        <?php
+                        }
+                    } else {
+                        if (in_array('lo', $tf_ratings_for)) {
+                        ?>
+                            <button data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
+                                <i class="fas fa-plus"></i> <?php _e('Add Review', 'tourfic') ?>
+                            </button>
+                        <?php
+                        }
+                    }
+                }
+                ?>
+            </div>
+            <div class="tf-review-progress-bar">
+                <?php _e($tf_rating_progress_bar); ?>
+            </div>
+
+            <div class="tf-single-review">
+                <?php
+                if ( $comments ) {
+                    foreach ( $comments as $comment ) {
+
+                        // Get rating details
+                        $tf_overall_rate = get_comment_meta($comment->comment_ID, TF_TOTAL_RATINGS, true);
+                        if ($tf_overall_rate == false) {
+                            $tf_comment_meta = get_comment_meta($comment->comment_ID, TF_COMMENT_META, true);
+                            $tf_overall_rate = tf_average_ratings($tf_comment_meta);
+                        }
+                        $base_rate = get_comment_meta($comment->comment_ID, TF_BASE_RATE, true);
+                        $c_rating = tf_single_rating_change_on_base($tf_overall_rate, $base_rate);
+
+                        // Comment details
+                        $c_avatar = get_avatar($comment, '56');
+                        $c_author_name = $comment->comment_author;
+                        $c_date = $comment->comment_date;
+                        $c_content = $comment->comment_content;
+                        ?>                  
+                        <div class="tf-single-details">
+                            <div class="tf-review-avatar"><?php echo $c_avatar; ?></div>
+                            <div class="tf-review-details">
+                                <div class="tf-name"><?php echo $c_author_name; ?></div>
+                                <div class="tf-date"><?php echo $c_date; ?></div>
+                                <div class="tf-rating-stars">
+                                    <?php echo $c_rating;  ?>
+                                </div>
+                                <div class="tf-description"><?php echo $c_content; ?></div>
+                            </div>
+                        </div>                  
+                    <?php
+                    }
+                }
+                ?>
+            </div>
+
+        <?php
+        // Review moderation notice
+        echo tf_pending_review_notice($post_id);
+
+        // If comments are closed and there are comments, let's leave a little note, shall we?
+        if (!comments_open() && count($comments) && post_type_supports(get_post_type(), 'comments')) {
+        ?>
+            <p class="no-comments"><?php echo __('Comments are closed.', 'tourfic') ?></p>
+        <?php } ?>
+
+    <?php
+    } else {
+
+        echo '<div class="no-review">';
+
+        echo '<h3>' .__("No Review Available", "tourfic"). '</h3>';
+
+        if ($is_user_logged_in) {
+
+            // Add Review button
+            if (in_array('li', $tf_ratings_for) && !tf_user_has_comments()) {
+                ?>
+                <button data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
+                    <i class="fas fa-plus"></i> <?php _e('Add Review', 'tourfic'); ?>
+                </button>
+        
+                <?php
+            } else {
+                // Pending review notice
+                echo tf_pending_review_notice($post_id);
+            }
+
+        } else {
+
+            if (in_array('lo', $tf_ratings_for)) {
+            ?>
+                <button data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
+                    <i class="fas fa-plus"></i> <?php _e('Add Review', 'tourfic') ?>
+                </button>
+            <?php
+            }
+
+        }
+
+        echo '</div>';
     }
-
     ?>
-	<?php if ( have_comments() ) : ?>
-		<div class="tf-comments-count-wrapper">
+</div>
 
-			<div class="tf-overall-ratings">
-				<div class="overall-rate"><?php _e( tourfic_avg_ratings($tf_overall_rate['review']) ); ?>/5</div>
-				<div class="overall-rate-stars">
-					<div class="star-ratings">
-					  	<div class="fill-ratings" style="width: <?php _e( tourfic_avg_rating_percent(tourfic_avg_ratings($tf_overall_rate['review'])) ); ?>%" data-width="<?php _e( tourfic_avg_rating_percent(tourfic_avg_ratings($tf_overall_rate['review'])) ); ?>">
-					  	  	<span>★★★★★</span>
-					  	</div>
-					  	<div class="empty-ratings">
-					  	  	<span>★★★★★</span>
-					  	</div>
-					</div>
-				</div>
-				<div class="based-on-title">
-					<?php
-					$comments_title = apply_filters(
-						'tf_comment_form_title',
-						sprintf( // WPCS: XSS OK.
-							/* translators: 1: number of comments */
-							esc_html( _nx( 'Based on %1$s review', 'Based on %1$s reviews', get_comments_number(), 'comments title', 'tourfic' ) ),
-							number_format_i18n( get_comments_number() )
-						)
-					);
-
-					echo esc_html( $comments_title );
-					?>
-				</div>
-			</div>
-
-			<div class="tf-extra-ratings">
-				<?php _e( $tf_extr_html ); ?>
-			</div>
-
-		</div>
-
-		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
-		<nav id="comment-nav-above" class="navigation comment-navigation" aria-label="<?php esc_attr_e( 'Comments Navigation', 'tourfic' ); ?>">
-			<h3 class="screen-reader-text"><?php echo esc_html( astra_default_strings( 'string-comment-navigation-next', false ) ); ?></h3>
-			<div class="nav-links">
-
-				<div class="nav-previous"><?php previous_comments_link( astra_default_strings( 'string-comment-navigation-previous', false ) ); ?></div>
-				<div class="nav-next"><?php next_comments_link( astra_default_strings( 'string-comment-navigation-next', false ) ); ?></div>
-
-			</div><!-- .nav-links -->
-		</nav><!-- #comment-nav-above -->
-		<?php endif; ?>
-
-		<ol class="tf-comment-list">
-			<?php
-			wp_list_comments(
-				array(
-					//'callback' => 'tf_comment_callback',
-					'style'    => 'ol',
-					'type'      => 'comment',
-					'max_depth' => 1,
-				)
-			);
-			?>
-		</ol><!-- .ast-comment-list -->
-
-		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
-		<nav id="comment-nav-below" class="navigation comment-navigation" aria-label="<?php esc_attr_e( 'Comments Navigation', 'tourfic' ); ?>">
-			<h3 class="screen-reader-text"><?php echo esc_html( astra_default_strings( 'string-comment-navigation-next', false ) ); ?></h3>
-			<div class="nav-links">
-
-				<div class="nav-previous"><?php previous_comments_link( astra_default_strings( 'string-comment-navigation-previous', false ) ); ?></div>
-				<div class="nav-next"><?php next_comments_link( astra_default_strings( 'string-comment-navigation-next', false ) ); ?></div>
-
-			</div><!-- .nav-links -->
-		</nav><!-- #comment-nav-below -->
-		<?php endif; ?>
-
-	<?php endif; ?>
-
-	<?php
-		// If comments are closed and there are comments, let's leave a little note, shall we?
-	if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
-		?>
-		<p class="no-comments"><?php echo esc_html( astra_default_strings( 'string-comment-closed', false ) ); ?></p>
-	<?php endif; ?>
-
-	<?php tourfic_get_review_form(); ?>
-
-</div><!-- #comments -->
+<div style="display: none;" id="tourfic-rating">
+    <?php tf_review_form(); ?>
+</div>

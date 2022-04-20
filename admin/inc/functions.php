@@ -110,9 +110,7 @@ function tf_required_taxonomies( $hook ) {
 add_action( 'admin_enqueue_scripts', 'tf_required_taxonomies' );
 
 function tf_is_gutenberg_active() {
-	if ( function_exists( 'is_gutenberg_page' ) &&
-	     is_gutenberg_page()
-	) {
+	if ( function_exists( 'is_gutenberg_page' ) && is_gutenberg_page() ) {
 		return true;
 	}
 

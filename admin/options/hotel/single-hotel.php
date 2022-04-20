@@ -411,6 +411,46 @@ if( class_exists( 'CSF' ) ) {
       )
     ) );
 
+    // Settings
+    CSF::createSection(
+      $prefix,
+      array(
+          'title'  => __('Settings', 'tourfic'),
+          'fields' => array(
+
+            array(
+              'type'    => 'subheading',
+              'content' => __('Settings', 'tourfic' ),
+            ),
+    
+            array(
+                'id'       => 'h-review',
+                'type'     => 'switcher',
+                'title'    => __('Disable Review Section', 'tourfic' ),
+                'text_on'  => __('Yes', 'tourfic' ),
+                'text_off' => __('No', 'tourfic' ),
+                'default'  => false
+            ),
+    
+            array(
+                'id'       => 'h-share',
+                'type'     => 'switcher',
+                'title'    => __('Disable Share Option', 'tourfic' ),
+                'text_on'  => __('Yes', 'tourfic' ),
+                'text_off' => __('No', 'tourfic' ),
+                'default'  => false
+            ),
+
+            array(
+              'type'    => 'notice',
+              'style'   => 'info',
+              'content' => __('These settings will overwrite global settings', 'tourfic' ),
+            ),
+
+          ),
+      )
+    );
+
   
   }
 ?>

@@ -771,6 +771,44 @@ if ( class_exists( 'CSF' ) ) {
         ),
     ) );
 
+    // Settings
+    CSF::createSection(
+        $prefix,
+        array(
+            'title'  => __('Settings', 'tourfic'),
+            'fields' => array(
+
+              array(
+                'type'    => 'subheading',
+                'content' => __('Settings', 'tourfic' ),
+              ),
+      
+              array(
+                'id'       => 't-review',
+                'type'     => 'switcher',
+                'title'    => __('Disable Review Section', 'tourfic' ),
+                'text_on'  => __('Yes', 'tourfic' ),
+                'text_off' => __('No', 'tourfic' ),
+            ),
+    
+            array(
+                'id'       => 't-related',
+                'type'     => 'switcher',
+                'title'    => __('Disable Related Tour Section', 'tourfic' ),
+                'text_on'  => __('Yes', 'tourfic' ),
+                'text_off' => __('No', 'tourfic' ),
+            ),
+
+              array(
+                'type'    => 'notice',
+                'style'   => 'info',
+                'content' => __('These settings will overwrite global settings', 'tourfic' ),
+              ),
+
+            ),
+        )
+    );
+
 }
 
 ?>
