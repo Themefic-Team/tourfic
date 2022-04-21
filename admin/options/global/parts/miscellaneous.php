@@ -133,7 +133,6 @@ CSF::createSection($prefix, array(
                 '' => __('Log out User (Pro)', 'tourfic'),
             ),
             'default'    => array('li'),
-            'dependency' => array( 'r-customer', '==', 'false' ),
         ),
 
         array(
