@@ -427,6 +427,9 @@
 /**
  * Review Block
  */
+.tf-review-container .no-comments {
+    display: none;
+}
 .tf-review-container .tf-total-review {
     display: grid;
     grid-template-columns: auto auto;
