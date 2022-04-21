@@ -263,6 +263,9 @@ function tf_average_ratings($ratings = []) {
  * @return string
  */
 function tf_average_rating_percent( $rating = 0, $total = 5 ) {
+    if (empty($total)) {
+        $total = 5;
+    }
     $percent = ($rating * 100) / $total;
 
     return sprintf("%.2f", $percent);
