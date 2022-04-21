@@ -226,6 +226,11 @@ CSF::createSection($prefix, array(
             )
         ),
 
+        array(
+            'type'     => 'callback',
+            'function' => 'tf_delete_old_review_fields_button',
+        ),
+
     )
 
 ));

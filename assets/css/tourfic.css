@@ -500,6 +500,7 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 1;
+    text-transform: capitalize;
 }
 .tf-review-container .tf-review-progress-bar .tf-single .tf-p-bar{
     width: 100%;

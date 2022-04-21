@@ -504,3 +504,27 @@ function tf_pending_review_notice($post_id) {
         }
     }
 }
+
+/**
+ * Delete old review fields button
+ */
+function tf_delete_old_review_fields_button() {
+    echo '
+    <div class="csf-title">
+        <h4>' .__("Delete Old Review Fields", "tourfic"). '</h4>
+        <div class="csf-subtitle-text">' .__("Delete review fields which doesn't match with the present fields", "tourfic"). '</div>
+    </div>
+    <div class="csf-fieldset">
+        <button class="button button-large csf-warning-primary tf-del-old-review-fields">' .__("Delete", "tourfic"). '</button>
+    </div>
+    <div class="clear"></div>
+    ';
+}
+
+/**
+ * Ajax delete old review fields
+ */
+add_action( 'wp_ajax_tf_delete_old_review_fields', 'tf_delete_old_review_fields' );
+function tf_delete_old_review_fields() {
+
+}
