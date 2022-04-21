@@ -164,7 +164,7 @@ if(!function_exists('tf_review_form')) {
  * @return string
  */
 if(!function_exists('tf_generate_review_meta_fields')) {
-    function tf_generate_review_meta_fields(array $fields): string {
+    function tf_generate_review_meta_fields( $fields ) {
 
         $limit = tfopt('r-base') ?? 5;
 
@@ -192,7 +192,7 @@ if(!function_exists('tf_generate_review_meta_fields')) {
  * @return string
  */
 if(!function_exists('tf_generate_stars')) {
-    function tf_generate_stars(string $key): string {
+    function tf_generate_stars($key) {
 
         $limit = tfopt('r-base') ?? 5;
         $html  = '';
@@ -212,7 +212,7 @@ if(!function_exists('tf_generate_stars')) {
  * @param array $commentdata
  */
 if(!function_exists('tf_save_rating')) {
-    function tf_save_rating(int $comment_id, $comment_approved, array $commentdata) {
+    function tf_save_rating($comment_id, $comment_approved, $commentdata) {
 
         if ((isset($_POST[TF_COMMENT_META])) && ('' !== $_POST[TF_COMMENT_META])) {
             $tf_comment_meta = $_POST[TF_COMMENT_META];
@@ -235,7 +235,7 @@ add_filter('allow_empty_comment', '__return_true');
  *
  * @return float
  */
-function tf_average_ratings(array $ratings = []) {
+function tf_average_ratings($ratings = []) {
     if (!$ratings) {
         return 'N/A';
     }
@@ -262,8 +262,7 @@ function tf_average_ratings(array $ratings = []) {
  *
  * @return string
  */
-function tf_average_rating_percent(int $rating = 0, int $total = 5): string
-{
+function tf_average_rating_percent( $rating = 0, $total = 5 ) {
     $percent = ($rating * 100) / $total;
 
     return sprintf("%.2f", $percent);
@@ -275,8 +274,7 @@ function tf_average_rating_percent(int $rating = 0, int $total = 5): string
  * @param       $comment
  * @param array $overall_rating
  */
-function tf_calculate_user_ratings($comment, array &$overall_rating): void
-{
+function tf_calculate_user_ratings($comment, &$overall_rating) {
     $tf_comment_meta = get_comment_meta($comment->comment_ID, TF_COMMENT_META, true);
     $tf_base_rate = get_comment_meta($comment->comment_ID, TF_BASE_RATE, true);
 
@@ -321,7 +319,7 @@ function tf_average_rating_change_on_base( $rating,  $base_rate = 5)
  *
  * @return string
  */
-function tf_single_rating_change_on_base(float $rating, int $base_rate = 5): string {
+function tf_single_rating_change_on_base($rating, $base_rate = 5) {
 
     $settings_base = tfopt('r-base');
 
@@ -366,8 +364,7 @@ function tf_single_rating_change_on_base(float $rating, int $base_rate = 5): str
  *
  * @return string
  */
-function tf_comment_reply_link_filter($content): string
-{
+function tf_comment_reply_link_filter($content) {
     return '<div id="tourfic-rating" style="display: none">' . $content . '</div>';
 }
 
@@ -401,7 +398,7 @@ function tf_archive_single_rating() {
  *
  * @return array
  */
-function tf_calculate_comments_rating(array $comments): array {
+function tf_calculate_comments_rating($comments) {
     
     $tf_overall_rate = [];
     foreach ($comments as $comment) {
@@ -416,8 +413,7 @@ function tf_calculate_comments_rating(array $comments): array {
  *
  * @param int $number comment number
  */
-function tf_based_on_text(int $number): void
-{
+function tf_based_on_text($number) {
     $comments_title = apply_filters(
         'tf_comment_form_title',
         sprintf( // WPCS: XSS OK.
@@ -434,7 +430,7 @@ function tf_based_on_text(int $number): void
  * 
  * @param int $comment_id
  */
-function tf_auto_approve_comments(int $comment_id)
+function tf_auto_approve_comments($comment_id)
 {
     $comment                     = [];
     $comment['comment_ID']       = $comment_id;
@@ -449,8 +445,7 @@ add_action('wp_insert_comment', 'tf_auto_approve_comments');
  *
  * @return string
  */
-function tf_redirect_user_to_previous_url(): string
-{
+function tf_redirect_user_to_previous_url() {
     return wp_get_referer();
 }
 
@@ -462,8 +457,7 @@ add_filter('comment_post_redirect', 'tf_redirect_user_to_previous_url');
  *
  * @return bool
  */
-function tf_user_has_comments(): bool
-{
+function tf_user_has_comments() {
     if (is_user_logged_in()) {
         global $wpdb, $current_user, $post;
         $userId = $current_user->ID;

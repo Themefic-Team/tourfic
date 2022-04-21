@@ -29,7 +29,7 @@ function tf_critical_update_admin_notice() {
         }
     }
 }
-add_action( 'admin_notices', 'tf_critical_update_admin_notice' );
+//add_action( 'admin_notices', 'tf_critical_update_admin_notice' );
 
 /**
  * Ajax disable critical update admin notice

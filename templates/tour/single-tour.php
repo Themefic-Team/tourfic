@@ -8,13 +8,32 @@ get_header();
 // Post query
 while ( have_posts() ) : the_post();
 
-/**
- * Settings
- */
-$s_related = !empty(tfopt('t-related')) ? tfopt('t-related') : '';
-$s_review = !empty(tfopt('t-review')) ? tfopt('t-review') : '';
+$post_id = get_the_ID();
 
-$post_id   = get_the_ID();
+/**
+ * Get tour meta values
+ */
+$meta = get_post_meta( $post_id,'tf_tours_option',true );
+
+$disable_review_sec = !empty($meta['t-review']) ? $meta['t-review'] : '';
+$disable_related_tour = !empty($meta['t-related']) ? $meta['t-related'] : '';
+
+/**
+ * Get global settings value
+ */
+$s_review = !empty(tfopt('t-review')) ? tfopt('t-review') : '';
+$s_related = !empty(tfopt('t-related')) ? tfopt('t-related') : '';
+
+/**
+ * Disable Review Section
+ */
+$disable_review_sec = !empty($disable_review_sec) ? $disable_review_sec : $s_review;
+
+/**
+ * Disable Related Tour
+ */
+$disable_related_tour = !empty($disable_related_tour) ? $disable_related_tour : $s_related;
+
 
 // Get destination
 $destinations = get_the_terms( $post_id, 'tour_destination' );
@@ -26,8 +45,6 @@ if($destinations) {
 $post_type = substr(get_post_type(), 3, -1);
 $has_in_wishlist = tf_has_item_in_wishlist($post_id);
 
-// Meta field information
-$meta = get_post_meta( $post_id,'tf_tours_option',true );
 // Address
 $location = isset( $meta['location']['address'] ) ? $meta['location']['address'] : '';
 $text_location = isset( $meta['text_location']) ? $meta['text_location'] : '';
@@ -359,8 +376,9 @@ $tf_overall_rate['review'] = null;
 	<?php endif; ?>
 	<!-- Terms and Conditions -->
 	
-	<?php if($s_related && $s_related == '1') {} else { ?>
-	<?php 
+	<?php
+	if(!$disable_related_tour == '1') {
+
 	$args = array(
 		'post_type' => 'tf_tours',
 		'post_status' => 'publish',
@@ -454,7 +472,7 @@ $tf_overall_rate['review'] = null;
 	?>
 	<?php } ?>
 
-	<?php if($s_review && $s_review == '1') {} else { ?>
+	<?php if(!$disable_review_sec == '1') { ?>
 	<!-- tours review section Start -->
 	<div class="tf-review-wrapper">
 		<div class="tf-container">

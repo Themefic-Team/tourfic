@@ -113,16 +113,16 @@ CSF::createSection($prefix, array(
             'type'    => 'subheading',
             'content' => __('Review Settings', 'tourfic'),
         ),
-        array(
-            'id'       => 'r-customer',
-            'class'    => 'tf-csf-disable tf-csf-pro',
-            'type'     => 'switcher',
-            'title'    => __('Enable Review Only for Customers', 'tourfic'),
-            'subtitle' => __('Customers only who have complete orders' . $badge_up_pro, 'tourfic'),
-            'text_on'  => __('Yes', 'tourfic'),
-            'text_off' => __('No', 'tourfic'),
-            'default'  => false
-        ),
+        // array(
+        //     'id'       => 'r-customer',
+        //     'class'    => 'tf-csf-disable tf-csf-pro',
+        //     'type'     => 'switcher',
+        //     'title'    => __('Enable Review Only for Customers', 'tourfic'),
+        //     'subtitle' => __('Customers only who have complete orders' . $badge_up_pro, 'tourfic'),
+        //     'text_on'  => __('Yes', 'tourfic'),
+        //     'text_off' => __('No', 'tourfic'),
+        //     'default'  => false
+        // ),
 
         array(
             'id'      => 'r-for',

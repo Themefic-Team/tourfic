@@ -10,19 +10,37 @@ get_header();
  */
 while ( have_posts() ) : the_post(); 
 
+// get post id
+$post_id = get_the_ID();
+
 /**
- * Settings
+ * Get hotel meta values
  */
-$s_share = !empty(tfopt('h-share')) ? tfopt('h-share') : '';
-$s_review = !empty(tfopt('h-review')) ? tfopt('h-review') : '';
+$meta = get_post_meta( $post_id, 'tf_hotel', true );
+
+$disable_share_opt = !empty($meta['h-share']) ? $meta['h-share'] : '';
+$disable_review_sec = !empty($meta['h-review']) ? $meta['h-review'] : '';
+
+/**
+ * Get global settings value
+ */
+$s_share = !empty(tfopt('h-share')) ? tfopt('h-share') : 0;
+$s_review = !empty(tfopt('h-review')) ? tfopt('h-review') : 0;
+
+/**
+ * Disable Share Option
+ */
+$disable_share_opt = !empty($disable_share_opt) ? $disable_share_opt : $s_share;
+
+/**
+ * Disable Review Section
+ */
+$disable_review_sec = !empty($disable_review_sec) ? $disable_review_sec : $s_review;
 
 /**
  * Assign all values to variables
  * 
  */
-
-// get post id
-$post_id   = get_the_ID();
 
 // Wishlist
 $post_type = str_replace('tf_', '', get_post_type());
@@ -49,11 +67,6 @@ if ($locations) {
  */
 $features  = !empty(get_the_terms( $post_id, 'hotel_feature' )) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
 
-/**
- * Get hotel meta values
- */
-$meta = get_post_meta( get_the_ID(), 'tf_hotel', true );
-
 // Location
 $address  = !empty($meta['address']) ? $meta['address'] : '';
 $map      = !empty($meta['map']) ? $meta['map'] : '';
@@ -67,18 +80,6 @@ if ($gallery) {
 	$gallery_ids = explode( ',', $gallery );
 }
 $video    = !empty($meta['video']) ? $meta['video'] : '';
-//$rating   = !empty($meta['rating']) ? $meta['rating'] : '';
-
-// Contact Information
-// $c_email = !empty($meta['c-email']) ? $meta['c-email'] : '';
-// $c_web   = !empty($meta['c-web']) ? $meta['c-web'] : '';
-// $c_phone = !empty($meta['c-phone']) ? $meta['c-phone'] : '';
-// $c_fax   = !empty($meta['c-fax']) ? $meta['c-fax'] : '';
-
-// Check in/out Time
-// $full_day  = !empty($meta['full-day']) ? $meta['full-day'] : '';
-// $check_in  = !empty($meta['check-in']) ? $meta['check-in'] : '';
-// $check_out = !empty($meta['check-out']) ? $meta['check-out'] : '';
 
 // Room Details
 $rooms = !empty($meta['room']) ? $meta['room'] : '';
@@ -89,9 +90,8 @@ $faqs = !empty($meta['faq']) ? $meta['faq'] : '';
 // Terms & condition
 $tc = !empty($meta['tc']) ? $meta['tc'] : '';
 
-
 $share_text = get_the_title();
-$share_link = esc_url( home_url("/?p=").get_the_ID() );
+$share_link = esc_url( home_url("/?p=").$post_id );
 
 ?>
 <div class="tourfic-wrap default-style" data-fullwidth="true">
@@ -122,7 +122,7 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                         }
                         ?>                          
                         &nbsp;
-                        <?php if($s_share && $s_share == '1') {} else { ?>
+                        <?php if(!$disable_share_opt == '1') { ?>
                         <!-- Share Section -->
                         <div class="share-tour">
                             <a href="#dropdown_share_center" class="share-toggle"
@@ -446,19 +446,20 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                 <!-- End FAQ -->
                 <?php } ?>
 
-                <?php if($s_review && $s_review == '1') {} else { ?>
-                <!-- Start Review Content -->
-                <div class="tf_contents reviews">
-                    <div class="highlights-title">
-                        <h4><?php esc_html_e( 'Reviews', 'tourfic' ); ?></h4>
-                    </div>
+                <?php
+                if(!$disable_review_sec == 1) {
+                ?>
+                    <div class="tf_contents reviews">
+                        <div class="highlights-title">
+                            <h4><?php esc_html_e( 'Reviews', 'tourfic' ); ?></h4>
+                        </div>
 
-                    <?php if ( comments_open() || get_comments_number() ) {
-						comments_template();
-					} ?>
-                </div>
-                <!-- End Review Content -->
-                <?php } ?>
+                        <?php if ( comments_open() || get_comments_number() ) {
+                            comments_template();
+                        } ?>
+                    </div>
+                <?php
+                } ?>
 
                 <?php if ($tc) { ?>
                 <!-- Start TOC Content -->
