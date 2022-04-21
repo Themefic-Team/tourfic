@@ -39,13 +39,15 @@ if (post_password_required()) {
 
         $tf_rating_progress_bar    = '';
         $tf_overall_rate = tf_calculate_comments_rating($comments);
-
+tf_get_review_fields($fields);
 
         if ($tf_overall_rate) {
 
+          
+            
             foreach ($tf_overall_rate as $key => $value) {
 
-                if (empty($value)) {
+                if (empty($value) || !in_array($key, $fields)) {
                     continue;
                 }
                 $value        = tf_average_ratings($value);
@@ -87,9 +89,11 @@ if (post_password_required()) {
                 }
                 ?>
             </div>
+            <?php if (!empty($tf_rating_progress_bar)) { ?>
             <div class="tf-review-progress-bar">
                 <?php _e($tf_rating_progress_bar); ?>
             </div>
+            <?php } ?>
 
             <div class="tf-single-review">
                 <?php

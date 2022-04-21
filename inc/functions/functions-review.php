@@ -74,37 +74,10 @@ add_action('wp_enqueue_scripts', 'tf_review_script', 99999);
  */
 if(!function_exists('tf_review_form')) {
     function tf_review_form() {
+	    tf_get_review_fields( $fields );
 
-        /**
-         * Default fields until user save from option panel
-         */
-        $default_hotels_field  = [
-            ["r-field-type" => "Staff"],
-            ["r-field-type" => "Facilities"],
-            ["r-field-type" => "Cleanliness"],
-            ["r-field-type" => "Comfort"],
-            ["r-field-type" => "Value for money"],
-            ["r-field-type" => "Location"],
-        ];
-        $default_tours_field = [
-            ["r-field-type" => "Guide"],
-            ["r-field-type" => "Transportation"],
-            ["r-field-type" => "Value for money"],
-            ["r-field-type" => "Safety"]
-        ];
 
-        // If user does not have fields from settings, default fields will be loaded
-        $tfopt_hotels = !empty(tfopt('r-hotel')) ? tfopt('r-hotel') : $default_hotels_field;
-        $tfopt_tours  = !empty(tfopt('r-tour')) ? tfopt('r-tour') : $default_tours_field;
-
-        $fields = 'tf_tours' === get_post_type() ? $tfopt_tours : $tfopt_hotels;
-
-        $fields = array_map(function ($i) {
-            return $i['r-field-type'];
-        }, $fields);
-        
-        
-        //Declare Vars
+	    //Declare Vars
         $comment_send      = __('Submit', 'tourfic');
         $comment_reply     = __('Write a Review', 'tourfic');
         $comment_reply_to  = __('Reply', 'tourfic');
@@ -154,6 +127,39 @@ if(!function_exists('tf_review_form')) {
         ];
         comment_form($comments_args);
     }
+
+	/**
+	 * @param $fields
+	 */
+	function tf_get_review_fields( &$fields ) {
+		/**
+		 * Default fields until user save from option panel
+		 */
+		$default_hotels_field = [
+			[ "r-field-type" => "Staff" ],
+			[ "r-field-type" => "Facilities" ],
+			[ "r-field-type" => "Cleanliness" ],
+			[ "r-field-type" => "Comfort" ],
+			[ "r-field-type" => "Value for money" ],
+			[ "r-field-type" => "Location" ],
+		];
+		$default_tours_field  = [
+			[ "r-field-type" => "Guide" ],
+			[ "r-field-type" => "Transportation" ],
+			[ "r-field-type" => "Value for money" ],
+			[ "r-field-type" => "Safety" ]
+		];
+
+		// If user does not have fields from settings, default fields will be loaded
+		$tfopt_hotels = ! empty( tfopt( 'r-hotel' ) ) ? tfopt( 'r-hotel' ) : $default_hotels_field;
+		$tfopt_tours  = ! empty( tfopt( 'r-tour' ) ) ? tfopt( 'r-tour' ) : $default_tours_field;
+
+		$fields = 'tf_tours' === get_post_type() ? $tfopt_tours : $tfopt_hotels;
+
+		$fields = array_map( function ( $i ) {
+			return strtolower($i['r-field-type']);
+		}, $fields );
+	}
 }
 
 /**
@@ -324,6 +330,9 @@ function tf_average_rating_change_on_base( $rating,  $base_rate = 5)
  */
 function tf_single_rating_change_on_base($rating, $base_rate = 5) {
 
+    if (empty($rating) || empty($base_rate)) {
+        return '';
+    }
     $settings_base = tfopt('r-base');
 
     if ($settings_base != $base_rate) {
@@ -515,7 +524,7 @@ function tf_delete_old_review_fields_button() {
         <div class="csf-subtitle-text">' .__("Delete review fields which doesn't match with the present fields", "tourfic"). '</div>
     </div>
     <div class="csf-fieldset">
-        <button class="button button-large csf-warning-primary tf-del-old-review-fields">' .__("Delete", "tourfic"). '</button>
+        <button type="button" class="button button-large csf-warning-primary tf-del-old-review-fields">' .__("Delete", "tourfic"). '</button>
     </div>
     <div class="clear"></div>
     ';
@@ -526,5 +535,21 @@ function tf_delete_old_review_fields_button() {
  */
 add_action( 'wp_ajax_tf_delete_old_review_fields', 'tf_delete_old_review_fields' );
 function tf_delete_old_review_fields() {
+    global $wpdb;
+    $fields = array_merge(tfopt('r-tour'), tfopt('r-hotel'));
+    $fields = array_map( function ( $i ) {
+        return  $i['r-field-type'] ;
+    }, $fields );
+    $comments = get_comments();
+    foreach ( $comments as $comment ) {
+        $review = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true);
+        if ( !empty($review)){
+            foreach ( $review as $key=>$r){
+                if (!in_array($key, $fields)) unset($review[$key]);
+            }
+            update_comment_meta( $comment->comment_ID,TF_COMMENT_META, $review );
+        }
+    }
 
+    wp_send_json_success("Old review fields deleted.");
 }

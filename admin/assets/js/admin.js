@@ -12,7 +12,34 @@
                 y: 'bottom',
             },
         });
+        /**
+                 * Delete old review fields
+                 * @author kabir, fida
+                 */
+        $(document).on('click', '.tf-del-old-review-fields', function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            var data = {
+                action: 'tf_delete_old_review_fields',
+            };
 
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: data,
+                beforeSend: function (data) {
+                    notyf.success('Deleting old review fields...')
+                },
+                success: function (data) {
+                    notyf.success(data.data);
+                },
+                error: function (data) {
+                    notyf.error(data.data);
+                },
+
+            });
+
+        });
         /**
          * Tour location required
          * 
