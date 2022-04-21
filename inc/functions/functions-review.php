@@ -330,10 +330,12 @@ function tf_average_rating_change_on_base( $rating,  $base_rate = 5)
  */
 function tf_single_rating_change_on_base($rating, $base_rate = 5) {
 
-    if (empty($rating) || empty($base_rate)) {
-        return '';
-    }
-    $settings_base = tfopt('r-base');
+    // if (empty($rating) || empty($base_rate)) {
+    //     return '';
+    // }
+
+    $settings_base = !empty (tfopt('r-base')) ? tfopt('r-base') : 5;
+    $base_rate = !empty ($base_rate) ? $base_rate : 5;
 
     if ($settings_base != $base_rate) {
         if ($settings_base > 5) {
