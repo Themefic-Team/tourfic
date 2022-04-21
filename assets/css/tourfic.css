@@ -54,10 +54,10 @@
 |            Common              |
 ================================*/
 .tf-page-wrapper {
-    line-height: 1.75;
-    color:#3A3A44;
-    font-size:16px;
-  }
+  line-height: 1.75 !important;
+  color: #3A3A44;
+  font-size: 16px !important;
+}
   .tf-page-wrapper h1,
   .tf-page-wrapper h2,
   .tf-page-wrapper h3,
@@ -117,6 +117,23 @@
 
 .tf-section-white {
     background:#fff;
+}
+
+.tf-btn {
+  background: #D8E6FF;
+  display: inline-block;
+  text-align: center;
+  padding: 10px 20px;
+  border: 1px solid #D8E6FF;
+  border-radius: 4px;
+  color: #133774;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.tf-btn:hover {
+  background: #EBF2FF;
+
 }
 
 /*===============================
@@ -476,6 +493,7 @@
     border-radius: 8px;
     background: #fff;
     padding: 8px;
+    box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
   }
   
   .tf-overview-wrapper {
@@ -494,7 +512,7 @@
     margin: auto;
     gap: 35px;
     border-top: 2px dotted #ccc;
-    padding: 40px;
+    padding: 40px 0 70px;
   }
 
   .tf-inc-exc-content-wrapper h4 {
@@ -503,7 +521,6 @@
     /*! border-top: 2px dotted #ccc; */
     padding: 6px 0;
     /*! margin-bottom: 30px; */
-    display: ;
   }
   
   .tf-inc-exc-content-wrapper > * { 
@@ -560,10 +577,20 @@
     margin-bottom: 30px;
 }
 
-.tf-travel-itinerary-item {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 30px;
+#tf-accordion-wrapper {
+  margin-bottom: 30px;
+}
+
+.tf-travel-time {
+  background: #002C66;
+  border-radius: 5px 0px 0px 5px;
+  width: 130px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
+  padding: 10px;
 }
 
 .tf-travel-time span {
@@ -571,65 +598,290 @@
     color: #FAFCFE;
   }
 
-.tf-travel-time {
-    background: #002C66;
-    border-radius: 5px 0px 0px 5px;
-    width: 130px;
-    height: 80px;
+
+.tf-travel-itinerary-item {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
-    padding: 10px;
-  }
-
-.tf-travel-text {
-    background: #FAFCFE;
-    border-radius: 8px 0px 0px 8px;
-    width: calc(100% - 100px);
-    box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
-  }
-
-.tf-travel-text h4 {
-    font-size: 18px;
-    color: #3A3A44;
-    display: flex;
-    height: 80px;
-    padding: 0;
-    margin: 0;
-    padding-left: 40px;
-    padding-right: 40px;
-    align-items: center;
-    cursor: pointer;
-    transition: 0.3s;
+    flex-direction: row;
+    margin-bottom: 30px;
 }
 
-.tf-travel-content-wrap {
-    display: flex;
-    padding: 40px;
-    gap: 40px;
+#tf-accordion-wrapper .tf-accordion-head {
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
+  border-radius: 5px;
+  z-index: 1;
+  position: relative;
 }
 
-.tf-travel-content-wrap img {
-    max-width: 350px;
-    height: auto;
-    object-fit: cover;
-    border-radius:8px;
+#tf-accordion-wrapper .arrow {
+  transition: 0.25s ease;
+  transform: rotate(-90deg);
+  font-size: 20px;
+  margin-right: 25px;
 }
 
-.tf-travel-content {
-    display: none;
+
+#tf-accordion-wrapper .arrow-animate{
+  transform: rotate(0deg);
 }
 
-.tf-travel-itinerary-item:first-child .tf-travel-content {
-    display: unset;
+#tf-accordion-wrapper .tf-accordion-content {
+  background-color: #FFFFFF;
+  display: none;
+  padding: 20px 30px;
+  color: #333333;
+  margin-top: -2px;
+  z-index: 999;
+  position: relative;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
-.tf-travel-text h4:hover {
+.tf-accordion-head h4 {
+  font-size: 18px;
+  color: #3A3A44;
+  padding-left: 25px;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.tf-travel-desc {
+  display: flex;
+  padding-top:20px;
+}
+
+.tf-accordion-content img {
+  max-width: 350px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.tf-accordion-head h4:hover {
     color:#133774;
 }
 
+/*.tf-travel-text h4:after {
+  font-family: "Font Awesome 5 Free"; 
+  font-weight: 900; 
+  content: "\f007";
+  transform: rotate(-90deg);
+}
+
+.tf-travel-text .tf-arrow{
+  transition: 0.25s ease;
+  transform: rotate(-90deg);
+}
+
+.tf-travel-text .tf-arrow-animate{
+  transform: rotate(0deg);
+}*/
+
+
 /*--------- Travel Itinerary CSS End ---------*/
+
+/*--------- FAQ CSS Start ---------*/
+.tf-faq-wrapper {
+  padding-top: 0;
+}
+.tf-faq-sec-title {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.tf-faq-sec-title p {
+  max-width: 480px;
+  margin: auto;
+}
+.tf-faq-content-wrapper {
+  display: flex;
+  gap: 35px;
+}
+.tf-ask-question {
+  background: #F7F7FA;
+  padding: 30px;
+  border-radius:5px;
+  flex:2;
+}
+.tf-faq-items-wrapper {
+  flex: 5;
+}
+.tf-ask-question h4:before {
+  font-family: "Font Awesome 5 Free"; 
+  font-weight: 900; 
+  content: "\f059";
+  padding-right:15px;
+  color:#133774;
+}
+.tf-ask-question h4 {
+  font-size: 22px;
+  color: #3A3A44;
+}
+
+.tf-faq-btn {
+  text-align: center;
+  margin-top: 40px;
+}
+#tf-faq-item {
+  border-bottom: 1px solid #EAF0FF;
+  margin-bottom: 15px;
+}
+.tf-faq-title h4 {
+  font-size: 18px;
+  width: 100%;
+}
+
+#tf-faq-item .tf-faq-title {
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+#tf-faq-item .arrow {
+  transition: 0.25s ease;
+  transform: rotate(-90deg);
+  font-size: 20px;
+  margin-right: 25px;
+}
+
+
+#tf-faq-item .arrow-animate{
+  transform: rotate(0deg);
+}
+
+#tf-faq-item .tf-faq-desc {
+  background-color: #FFFFFF;
+  display: none;
+  padding: 20px 0;
+  color: #333333;
+  margin-top: -2px;
+  z-index: 999;
+  position: relative;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+/*--------- FAQ CSS End ---------*/
+
+/*--------- Suggestion Itinerary CSS Start ---------*/
+.tf-suggestion-wrapper .owl-nav button {
+  position: absolute;
+  top: calc(50% - 25px);
+  width: 50px;
+  height: 50px;
+  background: #FAFCFE;
+  box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+  border-radius: 5px;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+  color: #002C66;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.tf-suggestion-wrapper .owl-nav button.owl-prev {
+  left: -85px;
+}
+
+.tf-suggestion-wrapper .owl-nav button:hover {
+  background: #002C66;
+  color: #fff;
+}
+
+.tf-suggestion-wrapper .owl-nav button.owl-next {
+  right: -85px;
+}
+
+.tf-suggestion-sec-head {
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.tf-suggestion-sec-head p {
+  max-width: 480px;
+  margin: auto;
+}
+
+.tf-suggestion-item {
+  border: 10px solid #fff;
+  box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
+  border-radius: 10px;
+  height: 400px !important;
+  padding: 30px;
+  display: flex !important;
+  align-items: flex-end;
+  margin: 20px 0 !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.tf-suggestion-content {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+
+}
+.tf-suggestion-desc {
+  max-width: 175px;
+}
+.tf-suggestion-desc h3 {
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: 0.2px;
+  color: #FFFFFF;
+  font-weight: normal;
+  margin: 0;
+}
+
+.tf-suggestion-desc h3 span {
+  display: flex;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  color: #FFFFFF;
+  margin-top: 5px;
+}
+.tf-suggestion-desc a{
+  color: #fff;
+}
+.tf-suggestion-rating i {
+  color: #FFCD3D;
+  font-size: 12px;
+}
+
+.tf-suggestion-price span {
+  font-size: 20px;
+  line-height: 28px;
+  text-align: right;
+  letter-spacing: 0.2px;
+  color: #FFFFFF;
+  font-weight: normal;
+}
+
+.tf-suggestion-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+}
+
+
+
+
+
+
+/*--------- Suggestion Itinerary CSS End ---------*/
+
 
 /*================================
 |            Hotel CSS           |

@@ -288,24 +288,24 @@ $tf_overall_rate['review'] = null;
 					<h2><?php _e( "Travel Itinerary", 'tourfic' ); ?></h2>
 					<div class="tf-travel-itinerary-items-wrapper">
 						<?php foreach( $itineraries as $itinerary ){ ?>
-						<div class="tf-travel-itinerary-item">
-							<div class="tf-travel-time">
-								<span><?php echo esc_html( $itinerary['time'] ) ?></span>
-							</div>
-							<div class="tf-travel-text">
+							<div id="tf-accordion-wrapper">
+								<div class="tf-accordion-head">
+									<div class="tf-travel-time">
+									<span><?php echo esc_html( $itinerary['time'] ) ?></span>
+								</div>
 								<h4><?php echo esc_html( $itinerary['title'] );  ?></h4>
-								<div class="tf-travel-content">
-									<div class="tf-travel-content-wrap">
+								<i class="fas fa-angle-down arrow"></i>
+								</div>
+								<div class="tf-accordion-content">
+									<div class="tf-travel-desc">
 										<?php if ($itinerary['image']) {
 											echo '<img src="' .esc_url( $itinerary['image'] ). '">';
 										} ?>										
-										<div class="tf-travel-desc">
+										
 											<p><?php echo esc_html( $itinerary['desc'] ); ?></p>
 										</div>
 									</div>
-								</div>
 							</div>
-						</div>
 						<?php } ?>
 					</div>
 				</div>
@@ -317,11 +317,11 @@ $tf_overall_rate['review'] = null;
 
 	<?php if( $location ):  ?>
 	<!-- Map section Start -->
-	<div class="tf-map-wrapper">
+	<div class="tf-map-wrapper tf-section-wrapper tf-section-white">
 		<div class="tf-container">
 			<div class="tf-row">
 				<div class="tf-map-content-wrapper">
-				<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $location ); ?>&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+				<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $location ); ?>&output=embed" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 				</div>
 			</div>
 		</div>
@@ -330,27 +330,30 @@ $tf_overall_rate['review'] = null;
 	<?php endif; ?>
 
 	<?php if( $faqs ): ?>
-	<!-- Accordion section Start -->
-	<div class="tf-faq-wrapper">
+	<!-- FAQ section Start -->
+	<div class="tf-faq-wrapper tf-section-wrapper tf-section-white">
 		<div class="tf-container">
 			<div class="tf-row">
+				<div class="tf-faq-sec-title">
+					<h2><?php _e( "Frequently asked questions?", 'tourfic' ); ?></h2>
+					<p>Let’s clarify your confusions. Here are some of the Frequently Asked Questions which most of our client asks.</p>
+				</div>
 				<div class="tf-faq-content-wrapper">
-					<div class="tf-faq-sec-title">
-						<h2><?php _e( "Frequently asked questions?", 'tourfic' ); ?></h2>
+					<div class="tf-ask-question">
+						<h4>Have a question in mind ?</h4>
+						<p>Looking for more info? Send a question to the property to find out more.</p>
+						<div class="tf-faq-btn"><a class="tf-btn" href="#">Ask a Question</a></div>
 					</div>
+				
 					<div class="tf-faq-items-wrapper">
 						<?php foreach ( $faqs as $key => $faq ): ?>
-							<div class="tf-faq-item">
-								<div class="tf-faq-icon">
-									<img src=<?php echo TOURFIC_PLUGIN_URL . "assets/img/icon.png"?> alt="">
+							<div id="tf-faq-item">
+								<div class="tf-faq-title">
+									<h4><?php esc_html_e( $faq['title'] ); ?></h4>
+									<i class="fas fa-angle-down arrow"></i>
 								</div>
-								<div class="tf-faq-text">
-									<div class="tf-faq-title">
-										<h3><?php esc_html_e( $faq['title'] ); ?></h3>
-									</div>
-									<div class="tf-faq-desc">
-										<p><?php _e( $faq['desc'] ); ?></p>
-									</div>
+								<div class="tf-faq-desc">
+									<p><?php _e( $faq['desc'] ); ?></p>
 								</div>
 							</div>
 						<?php endforeach; ?>
@@ -359,27 +362,10 @@ $tf_overall_rate['review'] = null;
 			</div>
 		</div>
 	</div>
-	<!-- Accordion section end -->
+	<!-- FAQ section end -->
 	<?php endif; ?>
 
-	<!-- Terms and Conditions -->
-	<?php if ($terms_and_conditions) : ?>
-		<div class="tf-faq-wrapper">
-			<div class="tf-container">
-				<div class="tf-row">
-					<div class="tf-suggestion-wrapper">
-						<h2><?php _e("Terms and Conditions", 'tourfic'); ?></h2>
-						<div class="tf-travel-itinerary-items-wrapper">
-							<?php echo wpautop($terms_and_conditions); ?>
-						</div>
-					</div>
 
-				</div>
-			</div>
-		</div>
-	<?php endif; ?>
-	<!-- Terms and Conditions -->
-	
 	<?php if($s_related && $s_related == '1') {} else { ?>
 	<?php 
 	$args = array(
@@ -400,8 +386,9 @@ $tf_overall_rate['review'] = null;
 	$tours = new WP_Query( $args );
 	if ($tours->have_posts()) {
 	?>
+
  	<!-- tours suggestion section Start -->
- 	<div class="tf-suggestion-wrapper">
+ 	<div class="tf-suggestion-wrapper tf-section-wrapper">
 		<div class="tf-container">
 			<div class="tf-row">
 				<div class="tf-suggestion-content-wrapper">
@@ -474,6 +461,25 @@ $tf_overall_rate['review'] = null;
 	wp_reset_postdata();
 	?>
 	<?php } ?>
+
+		<!-- Terms and Conditions -->
+		<?php if ($terms_and_conditions) : ?>
+		<div class="tf-faq-wrapper">
+			<div class="tf-container">
+				<div class="tf-row">
+					<div class="tf-suggestion-wrapper">
+						<h2><?php _e("Terms and Conditions", 'tourfic'); ?></h2>
+						<div class="tf-travel-itinerary-items-wrapper">
+							<?php echo wpautop($terms_and_conditions); ?>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	<?php endif; ?>
+	<!-- Terms and Conditions -->
+	
 
 	<?php if($s_review && $s_review == '1') {} else { ?>
 	<!-- tours review section Start -->

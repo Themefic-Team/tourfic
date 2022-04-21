@@ -1211,15 +1211,33 @@
          }else{
              $('.reviews span').html("0/5");
          }
- 
-         $(".tf-travel-text h4").click(function(){
-             $(this).siblings('.tf-travel-content').slideToggle();
-             $(this).parents('.tf-travel-itinerary-item').siblings().find('.tf-travel-content').slideUp();
-         });
-         $(".tf-faq-title").click(function(){
-             $(this).siblings('.tf-faq-desc').slideToggle();
-             $(this).parents('.tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
-         });
+
+         // Itinerary Accordion
+         $('.tf-accordion-head').click(function(){
+            $(this).toggleClass('active');
+            $(this).parent().find('.arrow').toggleClass('arrow-animate');
+            $(this).parent().find('.tf-accordion-content').slideToggle();
+            $(this).parents('#tf-accordion-wrapper').siblings().find('.tf-accordion-content').slideUp();
+          });
+          
+        // $(".tf-travel-text h4").click(function(){
+           //  $(this).parent().find('.tf-arrow').toggleClass('tf-arrow-animate');
+          //   $(this).siblings('.tf-travel-content').slideToggle();
+          //   $(this).parents('.tf-travel-itinerary-item').siblings().find('.tf-travel-content').slideUp();
+         //});
+
+         // FAQ Accordion
+         $('.tf-faq-title').click(function(){
+            $(this).toggleClass('active');
+            $(this).parent().find('.arrow').toggleClass('arrow-animate');
+            $(this).parent().find('.tf-faq-desc').slideToggle();
+            $(this).parents('#tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
+          });
+
+         //$(".tf-faq-title").click(function(){
+             //$(this).siblings('.tf-faq-desc').slideToggle();
+            // $(this).parents('.tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
+         //});
  
          
          $(".tf-header-menu-triger").click(function(){
