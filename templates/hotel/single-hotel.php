@@ -249,7 +249,7 @@ $share_link = esc_url( home_url("/?p=").$post_id );
 							} ?>
 
                         <div class="single_feature_box">
-                            <?php echo $feature_icon; ?>
+                            <?php echo $feature_icon ?? ''; ?>
                             <p class="feature_list_title"><?php echo $feature->name; ?></p>
                         </div>
                         <?php } ?>

@@ -125,7 +125,7 @@ $tf_overall_rate['review'] = null;
 						</div>
 						<div class="tf-hero-bottom-area">					
 							<?php 
-							$tour_video = $meta['tour_video'] ? $meta['tour_video'] : '';
+							$tour_video = !empty($meta['tour_video']) ? $meta['tour_video'] : '';
 							if (defined( 'TF_PRO' ) && $tour_video){ 
 							?>	
 							<div class="tf-hero-btm-icon tf-tour-video" data-fancybox="tour-video" href="<?php echo $tour_video; ?>">	
