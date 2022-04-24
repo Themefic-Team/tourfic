@@ -41,7 +41,7 @@ if (post_password_required()) {
         $tf_overall_rate = [];
         tf_calculate_comments_rating($comments, $tf_overall_rate, $total_rating);
         tf_get_review_fields($fields);
-
+        
         if ($tf_overall_rate) {
 
           
@@ -51,6 +51,7 @@ if (post_password_required()) {
                 if (empty($value) || !in_array($key, $fields)) {
                     continue;
                 }
+
                 $value        = tf_average_ratings($value);
                 $tf_rating_progress_bar .= '<div class="tf-single">';
                 $tf_rating_progress_bar .= '<div class="tf-text">' . $key . '</div>';
