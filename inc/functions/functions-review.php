@@ -335,7 +335,8 @@ function tf_average_rating_change_on_base( $rating,  $base_rate = 5) {
  */
 function tf_single_rating_change_on_base($rating, $base_rate = 5) {
 
-    if ($rating == 0) {
+
+    if ($rating == 0 ) {
         return '';
     }
 
@@ -546,12 +547,18 @@ add_action( 'wp_ajax_tf_delete_old_review_fields', 'tf_delete_old_review_fields'
 function tf_delete_old_review_fields() {
     global $wpdb;
     $fields = array_merge(tfopt('r-tour'), tfopt('r-hotel'));
-    $fields = array_map( function ( $i ) {
+    $tour_fields = array_map( function ( $i ) {
         return strtolower( $i['r-field-type'] ) ;
-    }, $fields );
+    }, tfopt('r-tour'));
+    $hotel_fields = array_map( function ( $i ) {
+    return strtolower( $i['r-field-type'] );
+}, tfopt( 'r-hotel' ) );
+
     $comments = get_comments();
     foreach ( $comments as $comment ) {
         $review = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true);
+        $post_type = get_post_type( $comment->comment_post_ID );
+        $fields = $post_type == 'hotel' ? $hotel_fields : $tour_fields; 
         if ( !empty($review)){
             foreach ( $review as $key=>$r){
                 if (!in_array($key, $fields)) unset($review[$key]);
