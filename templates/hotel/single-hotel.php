@@ -454,9 +454,7 @@ $share_link = esc_url( home_url("/?p=").$post_id );
                             <h4><?php esc_html_e( 'Reviews', 'tourfic' ); ?></h4>
                         </div>
 
-                        <?php if ( comments_open() || get_comments_number() ) {
-                            comments_template();
-                        } ?>
+                        <?php comments_template(); ?>
                     </div>
                 <?php
                 } ?>

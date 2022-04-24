@@ -242,9 +242,11 @@ add_filter('allow_empty_comment', '__return_true');
  * @return float
  */
 function tf_average_ratings($ratings = []) {
+    
     if (!$ratings) {
         return 0;
     }
+
     // No sub collection of ratings
     if (count($ratings) == count($ratings, COUNT_RECURSIVE)) {
         $average = array_sum($ratings) / count($ratings);
@@ -283,11 +285,12 @@ function tf_average_rating_percent( $rating = 0, $total = 5 ) {
  * @param       $comment
  * @param array $overall_rating
  */
-function tf_calculate_user_ratings($comment, &$overall_rating) {
+function tf_calculate_user_ratings($comment, &$overall_rating, &$total_rate) {
     $tf_comment_meta = get_comment_meta($comment->comment_ID, TF_COMMENT_META, true);
     $tf_base_rate = get_comment_meta($comment->comment_ID, TF_BASE_RATE, true);
-
+    
     if ($tf_comment_meta) {
+        $total_rate  = tf_average_ratings($tf_comment_meta);
         foreach ($tf_comment_meta as $key => $ratings) {
             // calculate rate 
             $ratings = tf_average_rating_change_on_base($ratings, $tf_base_rate);
@@ -390,7 +393,8 @@ add_filter('comment_link', 'tf_comment_reply_link_filter');
 function tf_archive_single_rating() {
 
     $comments         = get_comments(['post_id' => get_the_ID(), 'status' => 'approve']);
-    $tf_overall_rate = tf_calculate_comments_rating($comments);
+    $tf_overall_rate = [];
+    tf_calculate_comments_rating($comments, $tf_overall_rate, $total_rate);
     if($comments) {
         ob_start();
         ?>
@@ -413,11 +417,12 @@ function tf_archive_single_rating() {
  *
  * @return array
  */
-function tf_calculate_comments_rating($comments) {
+function tf_calculate_comments_rating($comments, &$tf_overall_rate, &$total_rating ) {
     
     $tf_overall_rate = [];
     foreach ($comments as $comment) {
-        tf_calculate_user_ratings($comment, $tf_overall_rate);
+        tf_calculate_user_ratings($comment, $tf_overall_rate, $total_rating);
+        echo $total_rating;
     }
 
     return $tf_overall_rate;

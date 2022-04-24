@@ -38,8 +38,9 @@ if (post_password_required()) {
     if($comments) {
 
         $tf_rating_progress_bar    = '';
-        $tf_overall_rate = tf_calculate_comments_rating($comments);
-tf_get_review_fields($fields);
+        $tf_overall_rate = [];
+        tf_calculate_comments_rating($comments, $tf_overall_rate, $total_rating);
+        tf_get_review_fields($fields);
 
         if ($tf_overall_rate) {
 
