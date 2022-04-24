@@ -290,7 +290,7 @@ function tf_calculate_user_ratings($comment, &$overall_rating, &$total_rate) {
     $tf_base_rate = get_comment_meta($comment->comment_ID, TF_BASE_RATE, true);
     
     if ($tf_comment_meta) {
-        $total_rate  = tf_average_ratings($tf_comment_meta);
+        $total_rate  += tf_average_ratings($tf_comment_meta);
         foreach ($tf_comment_meta as $key => $ratings) {
             // calculate rate 
             $ratings = tf_average_rating_change_on_base($ratings, $tf_base_rate);
@@ -421,11 +421,9 @@ function tf_calculate_comments_rating($comments, &$tf_overall_rate, &$total_rati
     
     $tf_overall_rate = [];
     foreach ($comments as $comment) {
-        tf_calculate_user_ratings($comment, $tf_overall_rate, $total_rating);
-        echo $total_rating;
+        tf_calculate_user_ratings($comment, $tf_overall_rate, $total_rating);        
     }
-
-    return $tf_overall_rate;
+    $total_rating = $total_rating / count($comments);
 }
 
 /**
