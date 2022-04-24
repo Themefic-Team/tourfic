@@ -64,7 +64,7 @@ if (post_password_required()) {
 
             <div class="tf-total-review">
                 <div class="tf-total-average">
-                    <div><?php _e($total_rating); ?></div>
+                    <div><?php _e(sprintf('%.1f', $total_rating)); ?></div>
                     <span><?php tf_based_on_text(count($comments)); ?></span>
                 </div>           
                 <?php
