@@ -47,13 +47,13 @@
 }
 
 .tf-page-wrapper a {
-    display: inline-block;
+    /* display: inline-block;
     text-decoration: none;
     transition: 0.3s;
     color: #333;
     font-weight: normal;
     padding-right: 10px;
-    outline: none;
+    outline: none; */
 }
 
 .tf-container {

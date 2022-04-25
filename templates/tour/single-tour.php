@@ -83,9 +83,17 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
 
 $terms_and_conditions = $meta['terms_conditions'];
 $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $post->ID, 'tf_faqs', true ) : array();
-$comments = get_comments( array( 'post_id' => get_the_ID() ) );
-$tf_overall_rate = array();
-$tf_overall_rate['review'] = null;
+
+/**
+ * Review query
+ */
+$args = array( 
+	'post_id' => $post_id,
+	'status'  => 'approve',
+	'type'    => 'comment',
+);
+$comments_query = new WP_Comment_Query( $args ); 
+$comments = $comments_query->comments;
 
 ?>
 
@@ -161,7 +169,24 @@ $tf_overall_rate['review'] = null;
 						<div class="tf-hero-bottom-right">
 							<div class="tf-hero-pricing">
 								<span><?php echo esc_html__( 'Price','tourfic' ); ?>: <?php echo tf_tours_price_html();?></span>
-							</div>							
+							</div>
+							<?php
+							if($comments) {
+							?>
+							<a href="#tf-review">
+								<div class="tf-hero-rating">
+									<div class="tf-hero-bcr-star">
+										<i class="fas fa-star"></i>
+									</div>
+									<div class="tf-hero-bcr-num reviews">
+										<span><?php echo tf_total_avg_rating($comments); ?></span>
+									</div>
+								</div>
+								<div class="tf-hero-review-count">
+									<p><?php tf_based_on_text(count($comments)); ?></p>
+								</div>
+							</a>
+							<?php } ?>							
 						</div>
 					</div>
 				</div>
@@ -429,30 +454,13 @@ $tf_overall_rate['review'] = null;
 								<div class="tf-suggestion-rating">
 
 								<?php 
-									if ($related_comments) {
-										foreach ($related_comments as $related_comment) {
-											$related_comment_meta = get_comment_meta( $related_comment->comment_ID, 'tf_comment_meta', true );
-											if ( $related_comment_meta ) {
-												foreach ( $related_comment_meta as $key => $value ) {
-													$related_overall_rate[$key][] = $value ? $value : "5";
-												}
-											} else {
-												$related_overall_rate['review'][] = "5";
-												$related_overall_rate['sleep'][] = "5";
-												$related_overall_rate['location'][] = "5";
-												$related_overall_rate['services'][] = "5";
-												$related_overall_rate['cleanliness'][] = "5";
-												$related_overall_rate['rooms'][] = "5";
-											}
-											?>
-											<div class="tf-suggestion-rating-star">
-												<i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tourfic_avg_ratings($related_overall_rate['review']); ?></span>
-											</div>											
-										<?php 
-										}
-									} else {
-										echo '<div class="tf-suggestion-rating-star"><i class="fas fa-star"></i> <span style="color:#fff;">N/A</span></div>';
-									}
+								if ($related_comments) {										
+								?>
+									<div class="tf-suggestion-rating-star">
+										<i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating($related_comments); ?></span>
+									</div>											
+								<?php 
+								}
 								?>									
 									<div class="tf-suggestion-price">
 										<span><?php echo tf_tours_price_html();?></span>
@@ -474,19 +482,15 @@ $tf_overall_rate['review'] = null;
 
 	<?php if(!$disable_review_sec == '1') { ?>
 	<!-- tours review section Start -->
-	<div class="tf-review-wrapper">
+	<div id="tf-review" class="tf-review-wrapper">
 		<div class="tf-container">
 			<div class="tf-row">
-				<?php if($comments): ?>
 				<div class="tf-review-sec-head">
 					<h2><?php echo esc_html__( 'Customer Reviews','tourfic' );?></h2>
 					<p><?php echo esc_html__( 'Reviews given by our customers.','tourfic' );?></p>
 				</div>
-				<?php endif; ?>
 				<?php
-				if( comments_open() || get_comments_number() ) {
-					comments_template();
-				}
+				comments_template();
 				?>						
 			</div>
 		</div>

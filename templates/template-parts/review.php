@@ -19,21 +19,13 @@ if (post_password_required()) {
 
 <div class="tf-review-container">
     <?php
-    global $post, $current_user;
+    global $current_user;
 
     // Check if user is logged in
     $is_user_logged_in = $current_user->exists();
     $post_id = $post->ID;
     // Get settings value
     $tf_ratings_for = tfopt('r-for') ?? ['li', 'lo'];
-
-    $args = array( 
-        'post_id' => $post_id,
-        'status'  => 'approve',
-        'type'    => 'comment',
-    );
-    $comments_query = new WP_Comment_Query( $args ); 
-    $comments = $comments_query->comments;
 
     if($comments) {
 
@@ -138,13 +130,6 @@ if (post_password_required()) {
         // Review moderation notice
         echo tf_pending_review_notice($post_id);
 
-        // If comments are closed and there are comments, let's leave a little note, shall we?
-        if (!comments_open() && count($comments) && post_type_supports(get_post_type(), 'comments')) {
-        ?>
-            <p class="no-comments"><?php echo __('Comments are closed.', 'tourfic') ?></p>
-        <?php } ?>
-
-    <?php
     } else {
 
         echo '<div class="no-review">';

@@ -19,7 +19,7 @@ add_action( 'admin_init', 'tf_remove_comment_meta_box' );
  */
 function tf_review_script() {
 
-    if (is_singular( array( 'tf_hotel', 'tf_tours' ) ) && comments_open()) {
+    if (is_singular( array( 'tf_hotel', 'tf_tours' ) )) {
 
         /**
          * jquery-validate
@@ -74,8 +74,8 @@ add_action('wp_enqueue_scripts', 'tf_review_script', 99999);
  */
 if(!function_exists('tf_review_form')) {
     function tf_review_form() {
-	    tf_get_review_fields( $fields );
 
+	    tf_get_review_fields( $fields );
 
 	    //Declare Vars
         $comment_send      = __('Submit', 'tourfic');
@@ -127,39 +127,55 @@ if(!function_exists('tf_review_form')) {
         ];
         comment_form($comments_args);
     }
+}
 
-	/**
-	 * @param $fields
-	 */
-	function tf_get_review_fields( &$fields ) {
-		/**
-		 * Default fields until user save from option panel
-		 */
-		$default_hotels_field = [
-			[ "r-field-type" => "Staff" ],
-			[ "r-field-type" => "Facilities" ],
-			[ "r-field-type" => "Cleanliness" ],
-			[ "r-field-type" => "Comfort" ],
-			[ "r-field-type" => "Value for money" ],
-			[ "r-field-type" => "Location" ],
-		];
-		$default_tours_field  = [
-			[ "r-field-type" => "Guide" ],
-			[ "r-field-type" => "Transportation" ],
-			[ "r-field-type" => "Value for money" ],
-			[ "r-field-type" => "Safety" ]
-		];
+/**
+ * Always open comments for hotel & tour
+ */
+function tf_comments_open( $open, $post_id ) {
 
-		// If user does not have fields from settings, default fields will be loaded
-		$tfopt_hotels = ! empty( tfopt( 'r-hotel' ) ) ? tfopt( 'r-hotel' ) : $default_hotels_field;
-		$tfopt_tours  = ! empty( tfopt( 'r-tour' ) ) ? tfopt( 'r-tour' ) : $default_tours_field;
+    $post = get_post( $post_id );
 
-		$fields = 'tf_tours' === get_post_type() ? $tfopt_tours : $tfopt_hotels;
+    if ( 'tf_hotel' == $post->post_type || 'tf_tours' == $post->post_type ) {
+        $open = true;
+    }
 
-		$fields = array_map( function ( $i ) {
-			return strtolower($i['r-field-type']);
-		}, $fields );
-	}
+    return $open;
+
+}
+add_filter( 'comments_open', 'tf_comments_open', 99, 2 );
+
+/**
+ * @param $fields
+ */
+function tf_get_review_fields( &$fields ) {
+    /**
+     * Default fields until user save from option panel
+     */
+    $default_hotels_field = [
+        [ "r-field-type" => "Staff" ],
+        [ "r-field-type" => "Facilities" ],
+        [ "r-field-type" => "Cleanliness" ],
+        [ "r-field-type" => "Comfort" ],
+        [ "r-field-type" => "Value for money" ],
+        [ "r-field-type" => "Location" ],
+    ];
+    $default_tours_field  = [
+        [ "r-field-type" => "Guide" ],
+        [ "r-field-type" => "Transportation" ],
+        [ "r-field-type" => "Value for money" ],
+        [ "r-field-type" => "Safety" ]
+    ];
+
+    // If user does not have fields from settings, default fields will be loaded
+    $tfopt_hotels = ! empty( tfopt( 'r-hotel' ) ) ? tfopt( 'r-hotel' ) : $default_hotels_field;
+    $tfopt_tours  = ! empty( tfopt( 'r-tour' ) ) ? tfopt( 'r-tour' ) : $default_tours_field;
+
+    $fields = 'tf_tours' === get_post_type() ? $tfopt_tours : $tfopt_hotels;
+
+    $fields = array_map( function ( $i ) {
+        return strtolower($i['r-field-type']);
+    }, $fields );
 }
 
 /**
@@ -428,6 +444,24 @@ function tf_calculate_comments_rating($comments, &$tf_overall_rate, &$total_rati
     }
     $total_rating = tf_average_ratings($total_rating);
     
+}
+
+/**
+ * Total Average Rating
+ */
+function tf_total_avg_rating($comments) {
+
+    foreach ($comments as $comment) {
+        $tf_comment_meta = get_comment_meta($comment->comment_ID, TF_COMMENT_META, true);
+        $tf_base_rate = get_comment_meta($comment->comment_ID, TF_BASE_RATE, true);
+    
+        if ($tf_comment_meta) {
+            $total_rate[]  = tf_average_rating_change_on_base(tf_average_ratings($tf_comment_meta), $tf_base_rate);
+        }
+    }
+    
+    return tf_average_ratings($total_rate);
+
 }
 
 /**

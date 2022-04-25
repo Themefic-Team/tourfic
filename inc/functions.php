@@ -207,11 +207,6 @@ if ( !function_exists( 'load_comment_template' ) ) {
     function load_comment_template( $comment_template ) {
         global $post;
 
-        if ( !( is_singular() && ( have_comments() || 'open' == $post->comment_status ) ) ) {
-            // leave the standard comments template for standard post types
-            return;
-        }
-
         if ( 'tf_hotel' === $post->post_type || 'tf_tours' === $post->post_type ) {
             $theme_files = array( 'tourfic/template-parts/review.php' );
             $exists_in_theme = locate_template( $theme_files, false );
@@ -220,9 +215,7 @@ if ( !function_exists( 'load_comment_template' ) ) {
             } else {
                 return TF_TEMPLATE_PATH . 'template-parts/review.php';
             }
-        }
-
-        return $comment_template;
+        } 
 
     }
     add_filter( 'comments_template', 'load_comment_template' );
