@@ -57,7 +57,7 @@ function register_tf_tours_post_type() {
         'has_archive'        => true,
         'hierarchical'       => false,
         'menu_position'      => 25,
-        'supports'           => apply_filters( 'tf_tours_supports', array( 'title', 'editor', 'thumbnail', 'author' ) ),
+        'supports'           => apply_filters( 'tf_tours_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
     );
 
     register_post_type( 'tf_tours', apply_filters( 'tf_tour_post_type_args', $tour_args ) );

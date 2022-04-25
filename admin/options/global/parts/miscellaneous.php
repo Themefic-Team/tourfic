@@ -158,10 +158,10 @@ CSF::createSection($prefix, array(
 
         array(
             'id'       => 'r-hotel',
-            'class'    => 'disable-sortable',
+            'class'    => 'disable-sortable tf-csf-disable tf-csf-pro',
             'type'     => 'repeater',
             'title'    => __('Review Fields for Hotels', 'tourfic'),
-            'subtitle' => __('Maximum 6 fields allowed for free version', 'tourfic'),
+            'subtitle' => __('Maximum 10 fields allowed' . $badge_pro, 'tourfic'),
             'max'      => '6',
             'fields'   => array(
 
@@ -195,10 +195,10 @@ CSF::createSection($prefix, array(
         ),
         array(
             'id'       => 'r-tour',
-            'class'    => 'disable-sortable',
+            'class'    => 'disable-sortable tf-csf-disable tf-csf-pro',
             'type'     => 'repeater',
             'title'    => __('Review Fields for Tours', 'tourfic'),
-            'subtitle' => __('Maximum 6 fields allowed for free version', 'tourfic'),
+            'subtitle' => __('Maximum 10 fields allowed' . $badge_pro, 'tourfic'),
             'max'      => '6',
             'fields'   => array(
 

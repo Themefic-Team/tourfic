@@ -577,8 +577,8 @@ function tf_delete_old_review_fields_button() {
 /**
  * Delete old complete review button
  */
-function tf_delete_old_complete_review_button()
-{
+function tf_delete_old_complete_review_button() {
+    
     echo '
     <div class="csf-title">
         <h4>' . __( "Delete Old Complete Review", "tourfic" ) . '</h4>
@@ -597,58 +597,54 @@ function tf_delete_old_complete_review_button()
  */
 add_action( 'wp_ajax_tf_delete_old_review_fields', 'tf_delete_old_review_fields' );
 function tf_delete_old_review_fields() {
+
     global $wpdb;
+
     $fields = array_merge(tfopt('r-tour'), tfopt('r-hotel'));
+
     $tour_fields = array_map( function ( $i ) {
         return strtolower( $i['r-field-type'] ) ;
     }, tfopt('r-tour'));
+
     $hotel_fields = array_map( function ( $i ) {
-    return strtolower( $i['r-field-type'] );
-}, tfopt( 'r-hotel' ) );
+        return strtolower( $i['r-field-type'] );
+    }, tfopt( 'r-hotel' ) );
 
     $comments = get_comments();
+
     foreach ( $comments as $comment ) {
+
         $review = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true);
         $post_type = get_post_type( $comment->comment_post_ID );
         $fields = $post_type == 'tf_hotel' ? $hotel_fields : $tour_fields; 
-        if ( !empty($review)){
+
+        if ( !empty($review)) {
+
             $counter = 0;
+
             foreach ( $review as $key=>$r){
                 if (!in_array($key, $fields)){
                     unset($review[$key]);
                 } else {
                     $counter++;
-                }
-                
+                }              
             }
             
             update_comment_meta( $comment->comment_ID,TF_COMMENT_META, $review );
-            $review = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
-            
+            $review = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );        
 
-    if (count($review) == 0 && $_POST['deleteAll'] == 'yes'  ) {
-        
-        wp_delete_comment($comment, true);
-
-    }
+            if (count($review) == 0 && $_POST['deleteAll'] == 'yes'  ) {     
+                wp_delete_comment($comment, true);
+            }
            
-        } else{
-if (  $_POST['deleteAll'] == 'yes' ) {
-    
+        } else {
 
-    wp_delete_comment($comment, true);
-
-}
-
+            if (  $_POST['deleteAll'] == 'yes' ) {   
+                wp_delete_comment($comment, true);
+            }
 
         }
-
     }
-    
-    
-
 
     wp_send_json_success("Old review fields deleted.");
 }
-
-

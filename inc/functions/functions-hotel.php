@@ -54,7 +54,7 @@ function register_tf_hotel_post_type() {
         'has_archive'        => true,
         'hierarchical'       => false,
         'menu_position'      => 25,
-        'supports'           => apply_filters( 'tf_hotel_supports', array( 'title', 'editor', 'thumbnail', 'author' ) ),
+        'supports'           => apply_filters( 'tf_hotel_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
     );
 
     register_post_type( 'tf_hotel', apply_filters( 'tf_hotel_post_type_args', $hotel_args ) );
