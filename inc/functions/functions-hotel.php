@@ -268,7 +268,6 @@ add_action( 'wp_ajax_nopriv_tf_room_availability', 'tf_room_availability_callbac
 
 function tf_room_availability_callback()
 {
-    
     // Check nonce security
     if ( !isset( $_POST['tf_room_avail_nonce'] ) || !wp_verify_nonce( $_POST['tf_room_avail_nonce'], 'check_room_avail_nonce' ) ) {
         return;
@@ -287,38 +286,36 @@ function tf_room_availability_callback()
     $rooms     = !empty( $meta['room'] ) ? $meta['room'] : '';
     $locations = get_the_terms( $form_post_id, 'hotel_location' );
     $first_location_name = !empty( $locations ) ? $locations[0]->name : '';
-
     //  start table
     ob_start();
     include TF_TEMPLATE_PART_PATH . 'hotel\hotel-availability-start.php';
     echo ob_get_clean();
     $error    = $rows    = null;
     $has_room = false;
-
     // generate table rows
     if ( !empty( $rooms ) ) {
         ob_start();
-        foreach ( $rooms as $room_id => $room ) {            
-            extract( $room );
-            
-
+        foreach ( $rooms as $room_id => $room ) {
             // Check if room is enabled
-            if ( boolval( $enable ) ) {
+            $enable = !empty($room['enable']) && boolval($room['enable']);
+            if ( $enable )  {
                 /*
                  * Backend room options
                  */
-                $footage         = $footage ?? '';
-                $bed             = $bed ?? '';
-                $adult_number    = intval( $adult );
-                $child_number    = intval( $child );
-                $total_person    = $adult_number + $child_number;
-                $number_of_rooms = $room['num-room'] ?? 1;
-                $pricing_by      = $room['pricing-by'];
-                $price           = $pricing_by == '1' ? $room['price'] : $room['adult_price'];
-
-
+                $footage          = !empty( $room['footage'] ) ? $room['footage'] : 0;
+                $bed              = !empty( $room['bed'] ) ? $room['bed'] : 0;
+                $adult_number     = !empty( $room['adult'] ) ? $room['adult'] : 0;
+                $child_number     = !empty( $room['child'] ) ? $room['child'] : 0;
+                $number_of_rooms  = !empty( $room['num-room'] ) ? $room['num-room'] : 1;
+                $pricing_by       = !empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
+                $room_price       = !empty( $room['price'] ) ? $room['price'] : 0;
+                $room_adult_price = !empty( $room['adult_price'] ) ? $room['adult_price'] : 0;
+                $room_child_price = !empty( $room['child_price'] ) ? $room['child_price'] : 0;
+                $total_person     = $adult_number + $child_number;
+                $price            = $pricing_by == '1' ? $room_price : $room_adult_price + $room_child_price;
                 // Check availability by date option
-                if ( boolval( $avil_by_date ) ) {
+                $avil_by_date = !empty($room['avil_by_date']) && boolval($room['avil_by_date']);
+                if ( $avil_by_date ) {
                     // split date range
                     $check_in = new DateTime( $form_start );
                     $period   = new DatePeriod(
@@ -329,30 +326,27 @@ function tf_room_availability_callback()
                     $price = $number_of_rooms = 0;
                     // extract price from available room options
                     foreach ( $period as $date ) {
-                        $available_rooms = array_values( array_filter( $repeat_by_date, function ( $date_availability ) use ( $date ) {
+                        $repeat_by_date =!empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
+                        $available_rooms = array_values( array_filter( $repeat_by_date, function ($date_availability ) use ( $date ) {
                             $date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
                             $date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
                             return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
                         } ) );
-
                         if ( is_iterable($available_rooms) && count( $available_rooms ) >=1) {
-
-                            $room_price    = !empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $room['price'];
-                            $adult_price   = !empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $room['adult_price'];
+                            $room_price    = !empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $room_price;
+                            $adult_price   = !empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $room_adult_price;
                             $child_price   = !empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $room['child_price'];
                             $price_by_date = $pricing_by == '1' ? $room_price : (  ( $adult_price * $form_adult ) + ( $child_price * $form_child ) );
                             $price += $price_by_date;
                             $number_of_rooms = $available_rooms[0]['num-room'];
                             $has_room = true;                           
-
                         } else {
                             $has_room = false;
                         }
                     }
-
                 }
                 // Check if date is provided and within date range
-                if ( $has_room == true ) {
+                if ( $avil_by_date &&  $has_room == true ) {
                     if ( $form_total_person <= $total_person ) {                        
                         include TF_TEMPLATE_PART_PATH . 'hotel\hotel-availability-tr.php';
                     } else {
@@ -361,6 +355,17 @@ function tf_room_availability_callback()
                 } else {
                     $error = "No Room Available within this Date Range!";
                 }
+
+                if ( !$avil_by_date ) {
+                    if ( $form_total_person <= $total_person ) {
+                        include TF_TEMPLATE_PART_PATH . 'hotel\hotel-availability-tr.php';
+                    } else {
+                        $error = 'No Room Available! Total person number exceeds!';
+                    }   
+
+                }else{
+                    $error = 'No Room Available';
+                }
             } else {
                 $error = "No Room Available!";
             }
@@ -368,17 +373,12 @@ function tf_room_availability_callback()
         $rows .= ob_get_clean();
     } else {
         $error = "No Room Available!";
-
     }    
-    
-
     if ( !empty( $rows  ) ) {
         echo $rows . '</tbody> </table> </div>';
     } else {
        echo sprintf( "<tr><td colspan=\"4\" style=\"text-align:center;font-weight:bold;\">%s</td></tr>", __( $error, "tourfic" ) ).'</tbody> </table> </div>';
-
     }
-
     wp_die();
 }
 
