@@ -589,18 +589,30 @@ function tf_delete_old_review_fields() {
             }
             
             update_comment_meta( $comment->comment_ID,TF_COMMENT_META, $review );
-        }
+            $review = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+            
+
+    if (count($review) == 0 && $_POST['deleteAll'] == 'yes'  ) {
+        
+        wp_delete_comment($comment, true);
+
     }
-foreach ($comments as $comment) {
-    $review = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true);
-    if ( empty($review) && $_POST['deleteAll']) {
-        wp_delete_comment( $comment->comment_ID , true);
-        delete_metadata( 'comment', $comment->comment_ID, TF_COMMENT_META );
+           
+        } else{
+if (  $_POST['deleteAll'] == 'yes' ) {
+    
+
+    wp_delete_comment($comment, true);
+
+}
+
+
+        }
 
     }
     
     
-}
+
 
     wp_send_json_success("Old review fields deleted.");
 }
