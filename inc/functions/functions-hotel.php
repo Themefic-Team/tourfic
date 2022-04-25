@@ -313,13 +313,15 @@ function tf_room_availability_callback()
                 $room_child_price = !empty( $room['child_price'] ) ? $room['child_price'] : 0;
                 $total_person     = $adult_number + $child_number;
                 $price            = $pricing_by == '1' ? $room_price : $room_adult_price + $room_child_price;
+                $form_check_in = $form_start;
+                $form_check_out = $form_end;
                 // Check availability by date option
                 $avil_by_date = !empty($room['avil_by_date']) && boolval($room['avil_by_date']);
                 if ( $avil_by_date ) {
                     // split date range
-                    $check_in = new DateTime( $form_start );
+                    $check_in = new DateTime( $form_start . ' 00:00' );
                     $period   = new DatePeriod(
-                        $check_in->add( new DateInterval( 'P1D' ) ),
+                        $check_in,
                         new DateInterval( 'P1D' ),
                         new DateTime( $form_end . ' 23:59' )
                     );

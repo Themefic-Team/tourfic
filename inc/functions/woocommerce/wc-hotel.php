@@ -75,7 +75,7 @@ function tf_hotel_booking_callback(){
     $pricing_by = $rooms[$room_id]['pricing-by'];
     $price_multi_day = !empty($rooms[$room_id]['price_multi_day']) ? $rooms[$room_id]['price_multi_day'] : false;
 
-    $response['errors'][] = $room_avail_by_date;
+    // $response['errors'][] = ;
 
     /**
      * Create Product
