@@ -21,6 +21,7 @@
             var $this = $(this);
             var data = {
                 action: 'tf_delete_old_review_fields',
+                deleteAll: $(this).data('delete-all')
             };
 
             $.ajax({

@@ -530,15 +530,33 @@ function tf_pending_review_notice($post_id) {
 function tf_delete_old_review_fields_button() {
     echo '
     <div class="csf-title">
-        <h4>' .__("Delete Old Review Fields", "tourfic"). '</h4>
+        <h4>' .__("Delete Old Review Meta Fields", "tourfic"). '</h4>
         <div class="csf-subtitle-text">' .__("Delete review fields which doesn't match with the present fields", "tourfic"). '</div>
     </div>
     <div class="csf-fieldset">
-        <button type="button" class="button button-large csf-warning-primary tf-del-old-review-fields">' .__("Delete", "tourfic"). '</button>
+        <button type="button" data-delete-all="no" class="button button-large csf-warning-primary tf-del-old-review-fields">' .__("Delete Meta", "tourfic"). '</button>
     </div>
     <div class="clear"></div>
     ';
 }
+
+/**
+ * Delete old complete review button
+ */
+function tf_delete_old_complete_review_button()
+{
+    echo '
+    <div class="csf-title">
+        <h4>' . __( "Delete Old Complete Review", "tourfic" ) . '</h4>
+        <div class="csf-subtitle-text">' . __( "Delete review fields which doesn't match with the present fields", "tourfic" ) . '</div>
+    </div>
+    <div class="csf-fieldset">
+        <button type="button" data-delete-all="yes" class="button button-large csf-warning-primary tf-del-old-review-fields">' . __( "Delete Reviews", "tourfic" ) . '</button>
+    </div>
+    <div class="clear"></div>
+    ';
+}
+
 
 /**
  * Ajax delete old review fields
@@ -558,16 +576,33 @@ function tf_delete_old_review_fields() {
     foreach ( $comments as $comment ) {
         $review = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true);
         $post_type = get_post_type( $comment->comment_post_ID );
-        $fields = $post_type == 'hotel' ? $hotel_fields : $tour_fields; 
+        $fields = $post_type == 'tf_hotel' ? $hotel_fields : $tour_fields; 
         if ( !empty($review)){
+            $counter = 0;
             foreach ( $review as $key=>$r){
-                if (!in_array($key, $fields)) unset($review[$key]);
+                if (!in_array($key, $fields)){
+                    unset($review[$key]);
+                } else {
+                    $counter++;
+                }
                 
             }
             
             update_comment_meta( $comment->comment_ID,TF_COMMENT_META, $review );
         }
     }
+foreach ($comments as $comment) {
+    $review = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true);
+    if ( empty($review)) {
+        wp_delete_comment( $comment->comment_ID , true);
+        delete_metadata( 'comment', $comment->comment_ID, TF_COMMENT_META );
+
+    }
+    
+    
+}
 
     wp_send_json_success("Old review fields deleted.");
 }
+
+
