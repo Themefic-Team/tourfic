@@ -593,7 +593,7 @@ function tf_delete_old_review_fields() {
     }
 foreach ($comments as $comment) {
     $review = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true);
-    if ( empty($review)) {
+    if ( empty($review) && $_POST['deleteAll']) {
         wp_delete_comment( $comment->comment_ID , true);
         delete_metadata( 'comment', $comment->comment_ID, TF_COMMENT_META );
 
