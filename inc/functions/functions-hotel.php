@@ -340,9 +340,7 @@ function tf_room_availability_callback()
                             $price += $price_by_date;
                             $number_of_rooms = $available_rooms[0]['num-room'];
                             $has_room = true;                           
-                        } else {
-                            $has_room = false;
-                        }
+                        } 
                     }
                 }
                 // Check if date is provided and within date range
