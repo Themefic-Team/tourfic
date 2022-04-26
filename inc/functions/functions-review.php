@@ -148,7 +148,9 @@ add_filter( 'comments_open', 'tf_comments_open', 99, 2 );
 /**
  * @param $fields
  */
-function tf_get_review_fields( &$fields ) {
+function tf_get_review_fields( &$fields , $type = null ) {
+
+    $type = $type === null ? get_post_type() : 'tf_hotel';
     /**
      * Default fields until user save from option panel
      */
@@ -171,7 +173,7 @@ function tf_get_review_fields( &$fields ) {
     $tfopt_hotels = ! empty( tfopt( 'r-hotel' ) ) ? tfopt( 'r-hotel' ) : $default_hotels_field;
     $tfopt_tours  = ! empty( tfopt( 'r-tour' ) ) ? tfopt( 'r-tour' ) : $default_tours_field;
 
-    $fields = 'tf_tours' === get_post_type() ? $tfopt_tours : $tfopt_hotels;
+    $fields = 'tf_tours' === $type ? $tfopt_tours : $tfopt_hotels;
 
     $fields = array_map( function ( $i ) {
         return strtolower($i['r-field-type']);
@@ -598,17 +600,7 @@ function tf_delete_old_complete_review_button() {
 add_action( 'wp_ajax_tf_delete_old_review_fields', 'tf_delete_old_review_fields' );
 function tf_delete_old_review_fields() {
 
-    global $wpdb;
-
-    $fields = array_merge(tfopt('r-tour'), tfopt('r-hotel'));
-
-    $tour_fields = array_map( function ( $i ) {
-        return strtolower( $i['r-field-type'] ) ;
-    }, tfopt('r-tour'));
-
-    $hotel_fields = array_map( function ( $i ) {
-        return strtolower( $i['r-field-type'] );
-    }, tfopt( 'r-hotel' ) );
+    global $wpdb;   
 
     $comments = get_comments();
 
@@ -616,8 +608,7 @@ function tf_delete_old_review_fields() {
 
         $review = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true);
         $post_type = get_post_type( $comment->comment_post_ID );
-        $fields = $post_type == 'tf_hotel' ? $hotel_fields : $tour_fields; 
-
+        tf_get_review_fields( $fields, $post_type);
         if ( !empty($review)) {
 
             $counter = 0;
