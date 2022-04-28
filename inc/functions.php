@@ -30,6 +30,15 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-tour.php' ) ) {
 }
 
 /**
+ * WooCommerce Common Functions
+ */
+if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-common.php' ) ) {
+    require_once TF_INC_PATH . 'functions/woocommerce/wc-common.php';
+} else {
+    tf_file_missing(TF_INC_PATH . 'functions/woocommerce/wc-common.php');
+}
+
+/**
  * Wishlist Functions
  */
 if ( file_exists( TF_INC_PATH . 'functions/functions-wishlist.php' ) ) {
@@ -90,6 +99,26 @@ if ( file_exists( TF_INC_PATH . 'functions/widgets.php' ) ) {
 } else {
     tf_file_missing(TF_INC_PATH . 'functions/widgets.php');
 }
+
+/**
+ * Elementor Widgets
+ *
+ */
+function tf_add_elelmentor_addon() {
+
+    // Check if Elementor installed and activated
+    if ( !did_action( 'elementor/loaded' ) ) {
+        return;
+    }
+    // Once we get here, We have passed all validation checks so we can safely include our plugin
+    if ( file_exists( TF_INC_PATH . 'elementor/widget-register.php' ) ) {
+        require_once TF_INC_PATH . 'elementor/widget-register.php';
+    } else {
+        tf_file_missing(TF_INC_PATH . 'elementor/widget-register.php');
+    }
+
+}
+add_action( 'plugins_loaded', 'tf_add_elelmentor_addon' );
 
 /**
  * Notice
@@ -248,27 +277,6 @@ function load_page_templates( $page_template ) {
     return $page_template;
 }
 add_filter( 'page_template', 'load_page_templates' );
-
-/**
- * Load elementor.
- *
- */
-function add_elelmentor_addon() {
-
-    // Check if Elementor installed and activated
-    if ( !did_action( 'elementor/loaded' ) ) {
-        return;
-    }
-    // Once we get here, We have passed all validation checks so we can safely include our plugin
-    if ( file_exists( TF_INC_PATH . 'elementor-addon/elementor-addon-register.php' ) ) {
-        require_once TF_INC_PATH . 'elementor-addon/elementor-addon-register.php';
-    } else {
-        tf_file_missing(TF_INC_PATH . 'elementor-addon/elementor-addon-register.php');
-    }
-
-}
-add_action( 'plugins_loaded', 'add_elelmentor_addon' );
-
 
 /*
  * Asign Destination taxonomy template

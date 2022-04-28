@@ -375,6 +375,8 @@ function tf_single_tour_booking_form( $post_id ) {
     $disable_adult_price = !empty($meta['disable_adult_price']) ? $meta['disable_adult_price'] : false;
     $disable_child_price = !empty($meta['disable_child_price']) ? $meta['disable_child_price'] : false;
     $disable_infant_price = !empty($meta['disable_infant_price']) ? $meta['disable_infant_price'] : false;
+    $pricing_rule = !empty($meta['pricing']) ? $meta['pricing'] : '';
+    $group_price = !empty($meta['group_price']) ? $meta['group_price'] : false;
     $adult_price = !empty($meta['adult_price']) ? $meta['adult_price'] : false;
     $child_price = !empty($meta['child_price']) ? $meta['child_price'] : false;
     $infant_price = !empty($meta['infant_price']) ? $meta['infant_price'] : false;
@@ -407,21 +409,21 @@ function tf_single_tour_booking_form( $post_id ) {
                         <span class="tf_person-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M16.5 6a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0zM18 6A6 6 0 1 0 6 6a6 6 0 0 0 12 0zM3 23.25a9 9 0 1 1 18 0 .75.75 0 0 0 1.5 0c0-5.799-4.701-10.5-10.5-10.5S1.5 17.451 1.5 23.25a.75.75 0 0 0 1.5 0z"></path></svg>
                         </span>
-                        <?php if ($custom_avail == true || (!$disable_adult_price && $adult_price != false)) { ?>
+                        <?php if ($custom_avail == true || (!$disable_adult_price && $pricing_rule == 'person' && $adult_price != false) || (!$disable_adult_price && $pricing_rule == 'group' && $group_price != false)) { ?>
                             <div class="adults-text"><?php echo (!empty($adults) ? $adults : '0') . ' ' . __("Adults", "tourfic"); ?></div>
                         <?php } ?>
-                        <?php if ($custom_avail == true || (!$disable_child_price && $child_price != false)) { ?>
+                        <?php if ($custom_avail == true || (!$disable_child_price && $pricing_rule == 'person' && $child_price != false) || (!$disable_child_price && $pricing_rule == 'group' && $group_price != false)) { ?>
                             <div class="person-sep"></div>
                             <div class="child-text"><?php echo (!empty($child) ? $child : '0') . ' ' . __("Children", "tourfic"); ?></div>
                         <?php } ?>
-                        <?php if ($custom_avail == true || (!$disable_infant_price && $infant_price != false)) { ?>
+                        <?php if ($custom_avail == true || (!$disable_infant_price && $pricing_rule == 'person' && $infant_price != false) || (!$disable_infant_price && $pricing_rule == 'group' && $group_price != false)) { ?>
                             <div class="person-sep"></div>
                             <div class="infant-text"><?php echo (!empty($infant) ? $infant : '0') . ' ' . __("Infant", "tourfic"); ?></div>
                         <?php } ?>
                     </div>
                     <div class="tf_acrselection-wrap" style="display: none;">
                         <div class="tf_acrselection-inner">
-                            <?php if ($custom_avail == true || (!$disable_adult_price && $adult_price != false)) { ?>
+                            <?php if ($custom_avail == true || (!$disable_adult_price && $pricing_rule == 'person' && $adult_price != false) || (!$disable_adult_price && $pricing_rule == 'group' && $group_price != false)) { ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php _e('Adults', 'tourfic'); ?></div>
                                 <div class="acr-select">
@@ -431,7 +433,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                 </div>
                             </div>
                             <?php } ?>
-                            <?php if ($custom_avail == true || (!$disable_child_price && $child_price != false)) { ?>
+                            <?php if ($custom_avail == true || (!$disable_child_price && $pricing_rule == 'person' && $child_price != false) || (!$disable_child_price && $pricing_rule == 'group' && $group_price != false)) { ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php _e('Children', 'tourfic'); ?></div>
                                 <div class="acr-select">
@@ -441,7 +443,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                 </div>
                             </div>
                             <?php } ?>
-                            <?php if ($custom_avail == true || (!$disable_infant_price && $infant_price != false)) { ?>
+                            <?php if ($custom_avail == true || (!$disable_infant_price && $pricing_rule == 'person' && $infant_price != false) || (!$disable_infant_price && $pricing_rule == 'group' && $group_price != false)) { ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php _e('Infant', 'tourfic'); ?></div>
                                 <div class="acr-select">
@@ -505,8 +507,11 @@ function tf_single_tour_booking_form( $post_id ) {
                             $("#check-in-out-date").flatpickr({  
                                 enableTime: false,
                                 dateFormat: "Y/m/d",                               
+                                <?php
+                                // Flatpickt locale for translation
+                                tf_flatpickr_locale();
 
-                            <?php if ($tour_type && $tour_type == 'fixed') { ?>
+                            if ($tour_type && $tour_type == 'fixed') { ?>
 
                                 mode: "range",
                                 defaultDate: ["<?php echo $departure_date; ?>", "<?php echo $return_date; ?>"],

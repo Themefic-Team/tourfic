@@ -1,20 +1,22 @@
 <?php
 /**
- * Template: Signle Tour
+ * Template: Signle Tour (Full width)
  */
 // Get header
 get_header();
 
-// Post query
+// Main query
 while ( have_posts() ) : the_post();
 
+// get post id
 $post_id = get_the_ID();
 
-/**
- * Get tour meta values
- */
+// Get Tour Meta
 $meta = get_post_meta( $post_id,'tf_tours_option',true );
 
+/**
+ * Show/hide sections
+ */
 $disable_review_sec = !empty($meta['t-review']) ? $meta['t-review'] : '';
 $disable_related_tour = !empty($meta['t-related']) ? $meta['t-related'] : '';
 
@@ -37,9 +39,7 @@ $disable_related_tour = !empty($disable_related_tour) ? $disable_related_tour : 
 
 // Get destination
 $destinations = get_the_terms( $post_id, 'tour_destination' );
-if($destinations) {
-	$first_destination_slug = $destinations[0]->slug;
-}
+$first_destination_slug = !empty($destinations) ? $destinations[0]->slug : '';
 
 // Wishlist
 $post_type = substr(get_post_type(), 3, -1);
@@ -68,18 +68,13 @@ $language = !empty($meta['language']) ? $meta['language'] : '';
 
 $min_days = !empty($meta['min_days']) ? $meta['min_days'] : '';
 
-//$email = $meta['email'] ? $meta['email'] : null;
-//$phone = $meta['phone'] ? $meta['phone'] : null;
-//$website = $meta['website'] ? $meta['website'] : null;
-//$fax = $meta['fax'] ? $meta['fax'] : null;
-
 $faqs = $meta['faqs'] ? $meta['faqs'] : null;
 $inc = $meta['inc'] ? $meta['inc'] : null;
 $exc = $meta['exc'] ? $meta['exc'] : null;
 $itineraries = $meta['itinerary'] ? $meta['itinerary'] : null;
 //continuous tour
 $share_text = get_the_title();
-$share_link = esc_url( home_url("/?p=").get_the_ID() );
+$share_link = esc_url( home_url("/?p=").$post_id );
 
 $terms_and_conditions = $meta['terms_conditions'];
 $tf_faqs = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $post->ID, 'tf_faqs', true ) : array();
@@ -95,6 +90,87 @@ $args = array(
 $comments_query = new WP_Comment_Query( $args ); 
 $comments = $comments_query->comments;
 
+/**
+ * Pricing
+ */
+$pricing_rule = !empty($meta['pricing']) ? $meta['pricing'] : '';
+$tour_type = !empty($meta['type']) ? $meta['type'] : '';
+if($tour_type && $tour_type == 'continuous') {
+	$custom_avail = !empty($meta['custom_avail']) ? $meta['custom_avail'] : false;
+}
+$discount_type = !empty($meta['discount_type']) ? $meta['discount_type'] : 'none';
+$discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : '';
+$disable_adult = !empty($meta['disable_adult_price']) ? $meta['disable_adult_price'] : false;
+$disable_child = !empty($meta['disable_child_price']) ? $meta['disable_child_price'] : false;
+$disable_infant = !empty($meta['disable_infant_price']) ? $meta['disable_infant_price'] : false;
+$price = '0.0';
+
+/**
+ * Group price
+ */
+if($pricing_rule == 'group') {
+
+	$price = !empty($meta['group_price']) ? $meta['group_price'] : '0.0';
+
+	if($discount_type == 'percent') {
+		$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 );
+	} else if($discount_type == 'fixed') {
+		$sale_price = number_format( ( $price - $discounted_price ),1 );
+	}
+}
+
+/**
+ * Person price
+ */
+if($pricing_rule == 'person') {
+
+	$adult_price = !empty($meta['adult_price']) ? $meta['adult_price'] : '';
+	$child_price = !empty($meta['child_price']) ? $meta['child_price'] : '';
+	$infant_price = !empty($meta['infant_price']) ? $meta['infant_price'] : '';
+
+	if($discount_type == 'percent') {
+		$adult_price ? $sale_adult_price = number_format( $adult_price - (( $adult_price / 100 ) * $discounted_price) ,1 ) : '';
+		$child_price ? $sale_child_price = number_format( $child_price - (( $child_price / 100 ) * $discounted_price) ,1 ) : '';
+		$infant_price ? $sale_infant_price = number_format( $infant_price - (( $infant_price / 100 ) * $discounted_price) ,1 ) : '';
+	} else if($discount_type == 'fixed') {
+		$adult_price ? $sale_adult_price = number_format( ( $adult_price - $discounted_price ),1 ) : '';
+		$child_price ? $sale_child_price = number_format( ( $child_price - $discounted_price ),1 ) : '';
+		$infant_price ? $sale_infant_price = number_format( ( $infant_price - $discounted_price ),1 ) : '';
+	}
+}
+
+if($tour_type == 'continuous' && $custom_avail == true) {
+	$pricing_rule = !empty($meta['cont_custom_date'][0]['pricing']) ? $meta['cont_custom_date'][0]['pricing'] : '';
+
+	if($pricing_rule == 'group') {
+
+		$price = !empty($meta['cont_custom_date'][0]['group_price']) ? $meta['cont_custom_date'][0]['group_price'] : '0.0';
+	
+		if($discount_type == 'percent') {
+			$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 );
+		} else if($discount_type == 'fixed') {
+			$sale_price = number_format( ( $price - $discounted_price ),1 );
+		}
+	}
+
+	if($pricing_rule == 'person') {
+
+		$adult_price = !empty($meta['cont_custom_date'][0]['adult_price']) ? $meta['cont_custom_date'][0]['adult_price'] : '';
+		$child_price = !empty($meta['cont_custom_date'][0]['child_price']) ? $meta['cont_custom_date'][0]['child_price'] : '';
+		$infant_price = !empty($meta['cont_custom_date'][0]['infant_price']) ? $meta['cont_custom_date'][0]['infant_price'] : '';
+	
+		if($discount_type == 'percent') {
+			$adult_price ? $sale_adult_price = number_format( $adult_price - (( $adult_price / 100 ) * $discounted_price) ,1 ) : '';
+			$child_price ? $sale_child_price = number_format( $child_price - (( $child_price / 100 ) * $discounted_price) ,1 ) : '';
+			$infant_price ? $sale_infant_price = number_format( $infant_price - (( $infant_price / 100 ) * $discounted_price) ,1 ) : '';
+		} else if($discount_type == 'fixed') {
+			$adult_price ? $sale_adult_price = number_format( ( $adult_price - $discounted_price ),1 ) : '';
+			$child_price ? $sale_child_price = number_format( ( $child_price - $discounted_price ),1 ) : '';
+			$infant_price ? $sale_infant_price = number_format( ( $infant_price - $discounted_price ),1 ) : '';
+		}
+	}
+}
+
 ?>
 
 <div class="tf-page-wrapper">
@@ -106,6 +182,13 @@ $comments = $comments_query->comments;
 				<div class="tf-hero-content-wrapper">
 					<div class="tf-hero-top-content" style="background-image: url(<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>);">
 						<div class="tf-hero-top-content-inner">
+							<?php if($comments) { ?>
+								<a href="#tf-review">
+									<div class="tf-single-rating">
+										<i class="fas fa-star"></i> <span><?php echo tf_total_avg_rating($comments); ?></span> (<?php tf_based_on_text(count($comments)); ?>)
+									</div>
+								</a>
+							<?php } ?>
 							<?php
 							// Wishlist
 							if(tfopt('wl-bt-for') && in_array('2', tfopt('wl-bt-for'))) {
@@ -167,26 +250,64 @@ $comments = $comments_query->comments;
 							</div>
 						</div>
 						<div class="tf-hero-bottom-right">
-							<div class="tf-hero-pricing">
-								<span><?php echo esc_html__( 'Price','tourfic' ); ?>: <?php echo tf_tours_price_html();?></span>
-							</div>
-							<?php
-							if($comments) {
-							?>
-							<a href="#tf-review">
-								<div class="tf-hero-rating">
-									<div class="tf-hero-bcr-star">
-										<i class="fas fa-star"></i>
+							<div class="tf-single-tour-pricing">
+								<?php
+								if($pricing_rule == 'group') {
+								?>
+									<div class="tf-price group-price">
+										<span class="sale-price">
+											<?php echo wc_price($sale_price ?? $price, array('decimals'=>0)); ?>
+										</span>
+										<?php echo ($discount_type != 'none') ? '<del>'.wc_price($price, array('decimals'=>0)).'</del>' : ''; ?>
 									</div>
-									<div class="tf-hero-bcr-num reviews">
-										<span><?php echo tf_total_avg_rating($comments); ?></span>
-									</div>
-								</div>
-								<div class="tf-hero-review-count">
-									<p><?php tf_based_on_text(count($comments)); ?></p>
-								</div>
-							</a>
-							<?php } ?>							
+								<?php
+								} else if($pricing_rule == 'person') {
+								?>
+									<?php if(!$disable_adult && !empty($adult_price)) { ?>
+										<div class="tf-price adult-price">
+											<span class="sale-price">
+												<?php echo wc_price($sale_adult_price ?? $adult_price, array('decimals'=>0)); ?>
+											</span>
+											<?php echo ($discount_type != 'none') ? '<del>'.wc_price($adult_price, array('decimals'=>0)).'</del>' : ''; ?>
+										</div>
+									<?php } if(!$disable_child && !empty($child_price)) { ?>
+										<div class="tf-price child-price tf-d-n">
+											<span class="sale-price">
+												<?php echo wc_price($sale_child_price ?? $child_price, array('decimals'=>0)); ?>
+											</span>
+											<?php echo ($discount_type != 'none') ? '<del>'.wc_price($child_price, array('decimals'=>0)).'</del>' : ''; ?>
+										</div>
+									<?php } if(!$disable_infant && !empty($infant_price)) { ?>
+										<div class="tf-price infant-price tf-d-n">
+											<span class="sale-price">
+												<?php echo wc_price($sale_infant_price ?? $infant_price, array('decimals'=>0)); ?>
+											</span>
+											<?php echo ($discount_type != 'none') ? '<del>'.wc_price($infant_price, array('decimals'=>0)).'</del>' : ''; ?>
+										</div>
+									<?php } ?>
+								<?php
+								}
+								?>
+								<ul class="tf-price-tab">
+									<?php
+									if($pricing_rule == 'group') {
+
+										echo '<li id="group" class="active">' .__("Group", "tourfic"). '</li>';
+
+									} else if($pricing_rule == 'person') {
+
+										if(!$disable_adult && !empty($adult_price)) {
+											echo '<li id="adult" class="active">' .__("Adult", "tourfic"). '</li>';
+										} if(!$disable_child && !empty($child_price)) {
+											echo '<li id="child">' .__("Child", "tourfic"). '</li>';
+										} if(!$disable_infant && !empty($infant_price)) {
+											echo '<li id="infant">' .__("Infant", "tourfic"). '</li>';
+										}
+
+									}
+									?>
+								</ul>
+							</div>							
 						</div>
 					</div>
 				</div>
@@ -272,6 +393,7 @@ $comments = $comments_query->comments;
 			<div class="tf-row">
 				<div class="tf-quoted-content-upper">
 					<div class="tf-quoted-content-wrapper">
+						<?php if($inc) { ?>
 						<div class="tf-quoted-include">
 							<h2><?php _e( 'Included','tourfic' ); ?></h2>
 							<ul>
@@ -282,6 +404,8 @@ $comments = $comments_query->comments;
 								?>
 							</ul>
 						</div>
+						<?php } ?>
+						<?php if($exc) { ?>
 						<div class="tf-quoted-exclude">
 							<h2><?php _e( 'Excluded','tourfic' ); ?></h2>
 							<ul>
@@ -292,6 +416,7 @@ $comments = $comments_query->comments;
 								?>
 							</ul>
 						</div>
+						<?php } ?>
 					</div>
 				</div>
 			</div>
@@ -437,13 +562,13 @@ $comments = $comments_query->comments;
 						<?php
 							while($tours->have_posts() ) {
 								$tours->the_post();
-								$post_id   = get_the_ID();
+								$post_id   = $post_id;
 								$destinations = get_the_terms( $post_id, 'tour_destination' );
 								$first_destination_name = $destinations[0]->name;
 
 								$related_comments = get_comments( array( 'post_id' => $post_id ) );								
 						?>
-						<div class="tf-suggestion-item" style="background-image: url(<?php echo get_the_post_thumbnail_url(get_the_ID(),'full') ?>);">
+						<div class="tf-suggestion-item" style="background-image: url(<?php echo get_the_post_thumbnail_url($post_id,'full') ?>);">
 							<div class="tf-suggestion-content">
 								<div class="tf-suggestion-desc">
 									<h3>
@@ -505,4 +630,4 @@ $comments = $comments_query->comments;
 endwhile;
 ?>
 <?php
-get_footer('tourfic');
+get_footer();

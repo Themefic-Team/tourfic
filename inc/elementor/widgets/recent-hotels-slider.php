@@ -1,19 +1,13 @@
 <?php
-namespace ElementorTourfic\Widgets;
-
-use Elementor\Widget_Base;
-use Elementor\Controls_Manager;
-
-
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// don't load directly
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Elementor BEAF Slider
- *
- * Elementor widget for BEAF Slider.
- *
+ * Recent Hotel Slider
+ * 
+ * Slick
  */
-class TOURFIC_slider extends Widget_Base {
+class TF_Recent_Hotels_slider extends \Elementor\Widget_Base {
 
 	/**
 	 * Retrieve the widget name.
@@ -34,7 +28,7 @@ class TOURFIC_slider extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Tourfic slider', 'tourfic' );
+		return __( 'Recent Hotels Slider', 'tourfic' );
 	}
 
 	/**
@@ -61,19 +55,8 @@ class TOURFIC_slider extends Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return [ 'general' ];
+		return [ 'tourfic' ];
 	}
-
-	/**
-	 * Retrieve the list of scripts the widget depended on.
-	 *
-	 * Used to set scripts dependencies required to run the widget.
-	 *
-	 * @access public
-	 *
-	 * @return array Widget scripts dependencies.
-	 */
-
 
 	/**
 	 * Register the widget controls.
@@ -84,40 +67,64 @@ class TOURFIC_slider extends Widget_Base {
 	 */
 	protected function register_controls() {
         
-        /*
 		$this->start_controls_section(
-			'content_section',
+			'content',
 			[
 				'label' => __( 'Content', 'tourfic' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
-        
-        $this->add_control(
-			'search_title',
-			[
-				'label' => __( 'Title', 'toufic' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Default title', 'toufic' ),
-				'placeholder' => __( 'Type your title here', 'toufic' ),
-			]
-		);        
-
 
 		$this->add_control(
-			'search_subtitle',
+			'title',
 			[
-				'label' => __( 'Subtitle', 'toufic' ),
+				'label' => esc_html__( 'Title', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
-				'default' => __( 'Default description', 'toufic' ),
-				'placeholder' => __( 'Type your description here', 'toufic' ),
+				'rows' => 1,
 			]
-		);		
+		);
 
 		$this->add_control(
-			'hr',
+			'subtitle',
 			[
-				'type' => \Elementor\Controls_Manager::DIVIDER,
+				'label' => esc_html__( 'Sub-Title', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'rows' => 2,
+			]
+		);
+
+		$this->add_control(
+			'count',
+			[
+				'label' => esc_html__( 'Total Hotels', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'description' => __( 'Number of total hotels to show. Min 3. Default to 7', 'tourfic' ),
+				'min' => 3,
+				'step' => 1,
+				'default' => 7,
+			]
+		);
+
+		$this->add_control(
+			'slidestoshow',
+			[
+				'label' => esc_html__( 'Slide to Show', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'description' => __( 'Number of hotels to show on the slider at a time. Min 1. Default to 3', 'tourfic' ),
+				'min' => 1,
+				'step' => 1,
+				'default' => 3,
+			]
+		);
+        
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'style_section',
+			[
+				'label' => __( 'Style', 'tourfic' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
 
@@ -125,28 +132,27 @@ class TOURFIC_slider extends Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name' => 'title_typography',
-				'label' => __( 'Title Typography', 'torfic' ),
-				'selector' => '{{WRAPPER}} .tf_widget-title h2',
+				'label' => __( 'Title Typography', 'tourfic' ),
+				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading h2',
 			]
 		);
-
 		$this->add_control(
 			'title_color',
 			[
 				'label' => __( 'Title Color', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => \Elementor\Core\Schemes\Color::get_type(),
+					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tf_widget-title h2' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tf-widget-slider .tf-heading h2' => 'color: {{VALUE}}',
 				],
 			]
 		);
 
 		$this->add_control(
-			'subhr',
+			'tf_subhr',
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
 			]
@@ -156,8 +162,8 @@ class TOURFIC_slider extends Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name' => 'subtitle_typography',
-				'label' => __( 'Subtitle Typography', 'torfic' ),
-				'selector' => '{{WRAPPER}} .tf_widget-subtitle',
+				'label' => __( 'Subtitle Typography', 'tourfic' ),
+				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading p',
 			]
 		);
 
@@ -167,15 +173,15 @@ class TOURFIC_slider extends Widget_Base {
 				'label' => __( 'Subtitle Color', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'scheme' => [
-					'type' => \Elementor\Scheme_Color::get_type(),
-					'value' => \Elementor\Scheme_Color::COLOR_1,
+					'type' => \Elementor\Core\Schemes\Color::get_type(),
+					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tf_widget-subtitle' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tf-widget-slider .tf-heading p' => 'color: {{VALUE}}',
 				],
 			]
 		);
-*/
+
 		$this->end_controls_section();
 
 	}
@@ -189,8 +195,12 @@ class TOURFIC_slider extends Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
+		$title = $settings['title'];
+		$subtitle = $settings['subtitle'];
+		$count = $settings['count'];
+		$slidestoshow = $settings['slidestoshow'];
 
-        echo do_shortcode('[tf_tours]');
+        echo do_shortcode('[tf_recent_hotel title="' .$title. '" subtitle="' .$subtitle. '" count="' .$count. '" slidestoshow="' .$slidestoshow. '"]');
 
 
 	}

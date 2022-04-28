@@ -1,19 +1,12 @@
 <?php
-namespace ElementorTourfic\Widgets;
-
-use Elementor\Widget_Base;
-use Elementor\Controls_Manager;
-
-
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// don't load directly
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Elementor Tourfic Des
- *
- * Elementor widget for BEAF Slider.
+ * Tour Destinations
  *
  */
-class TOURFIC_Destination extends Widget_Base {
+class TF_Tour_Destinations extends \Elementor\Widget_Base {
 
 	/**
 	 * Retrieve the widget name.
@@ -34,7 +27,7 @@ class TOURFIC_Destination extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Tourfic Destination', 'tourfic' );
+		return __( 'Tour Destinations', 'tourfic' );
 	}
 
 	/**
@@ -45,7 +38,7 @@ class TOURFIC_Destination extends Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-map-pin';
+		return 'eicon-google-maps';
 	}
 
 	/**
@@ -61,19 +54,8 @@ class TOURFIC_Destination extends Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return [ 'general' ];
+		return [ 'tourfic' ];
 	}
-
-	/**
-	 * Retrieve the list of scripts the widget depended on.
-	 *
-	 * Used to set scripts dependencies required to run the widget.
-	 *
-	 * @access public
-	 *
-	 * @return array Widget scripts dependencies.
-	 */
-
 
 	/**
 	 * Register the widget controls.
@@ -86,14 +68,45 @@ class TOURFIC_Destination extends Widget_Base {
         
         
 		$this->start_controls_section(
-			'tf_destination_content_section',
+			'tour_destination_content',
 			[
-				'label' => __( 'Style', 'tourfic' ),
+				'label' => __( 'Content', 'tourfic' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
+
+		$this->add_control(
+			'ids',
+			[
+				'label' => esc_html__( 'Tour Destination Ids', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'rows' => 2,
+				'description' => esc_html__( 'Specify the ids of the destinations which you want to show. Separated by commas (,). Default to blank', 'tourfic' ),
+			]
+		);
+
+		$this->add_control(
+			'hide_empty',
+			[
+				'label' => esc_html__( 'Hide Empty', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'Yes', 'tourfic' ),
+				'label_off' => esc_html__( 'No', 'tourfic' ),
+				'return_value' => 1,
+				'default' => 0,
+			]
+		);
+
+		$this->end_controls_section();
         
 
+		$this->start_controls_section(
+			'tour_destination_style',
+			[
+				'label' => __( 'Style', 'tourfic' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
@@ -230,8 +243,12 @@ class TOURFIC_Destination extends Widget_Base {
 	 */
 	protected function render() {
 
-        echo do_shortcode('[tour_destinations]');
+		$settings = $this->get_settings_for_display();
+		$ids = $settings['ids'];
+		$ids_txt = !empty($ids) ? ' ids="' .$ids. '"' : '';
+		$hide_empty = $settings['hide_empty'];
 
+        echo do_shortcode('[tour_destinations' .$ids_txt. ' hide_empty="' .$hide_empty. '"]');
 
 	}
 

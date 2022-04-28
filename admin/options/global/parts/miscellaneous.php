@@ -237,4 +237,97 @@ CSF::createSection($prefix, array(
     )
 
 ));
+
+/**
+ * optimization Settings
+ * 
+ * Sub Menu
+ */
+CSF::createSection( $prefix, array(
+    'parent' => 'miscellaneous',
+    'title'  => __( 'Optimization', 'tourfic' ),
+    'icon'   => 'fas fa-bolt',
+    'fields' => array(
+
+        array(
+            'type'    => 'subheading',
+            'content' => __('Minification Settings', 'tourfic' ),
+        ),
+
+        array(
+            'id'         => '',
+            'class'    => 'tf-csf-disable tf-csf-pro',
+            'type'       => 'switcher',
+            'title'      => __('Minify CSS', 'tourfic' ),
+            'subtitle'   => __('Enable/disable Tourfic CSS minification' . $badge_pro, 'tourfic' ),
+            'text_on'    => __('Enabled', 'tourfic' ),
+            'text_off'   => __('Disabled', 'tourfic' ),
+            'text_width' => 100,
+            'default'    => false
+        ),
+
+        array(
+            'id'         => '',
+            'class'    => 'tf-csf-disable tf-csf-pro',
+            'type'       => 'switcher',
+            'title'      => __('Minify JS', 'tourfic' ),
+            'subtitle'   => __('Enable/disable Tourfic JS minification' . $badge_pro, 'tourfic' ),
+            'text_on'    => __('Enabled', 'tourfic' ),
+            'text_off'   => __('Disabled', 'tourfic' ),
+            'text_width' => 100,
+            'default'    => false
+        ),
+
+        array(
+            'type'    => 'subheading',
+            'content' => __('CDN Settings', 'tourfic' ),
+        ),
+
+        array(
+            'id'         => '',
+            'class'    => 'tf-csf-disable tf-csf-pro',
+            'type'       => 'switcher',
+            'title'      => __('Flatpickr CDN', 'tourfic' ),
+            'subtitle'   => __('Enable/disable cloudflare CDN for Flatpickr CSS & JS' . $badge_pro, 'tourfic' ),
+            'text_on'    => __('Enabled', 'tourfic' ),
+            'text_off'   => __('Disabled', 'tourfic' ),
+            'text_width' => 100
+        ),
+
+        array(
+            'id'         => '',
+            'class'    => 'tf-csf-disable tf-csf-pro',
+            'type'       => 'switcher',
+            'title'      => __('Fancybox CDN', 'tourfic' ),
+            'subtitle'   => __('Enable/disable cloudflare CDN for Fancybox CSS & JS' . $badge_pro, 'tourfic' ),
+            'text_on'    => __('Enabled', 'tourfic' ),
+            'text_off'   => __('Disabled', 'tourfic' ),
+            'text_width' => 100
+        ),
+
+        array(
+            'id'         => '',
+            'class'    => 'tf-csf-disable tf-csf-pro',
+            'type'       => 'switcher',
+            'title'      => __('Slick CDN', 'tourfic' ),
+            'subtitle'   => __('Enable/disable cloudflare CDN for Slick CSS & JS' . $badge_pro, 'tourfic' ),
+            'text_on'    => __('Enabled', 'tourfic' ),
+            'text_off'   => __('Disabled', 'tourfic' ),
+            'text_width' => 100
+        ),
+
+        array(
+            'id'         => '',
+            'class'    => 'tf-csf-disable tf-csf-pro',
+            'type'       => 'switcher',
+            'title'      => __('Font Awesome CDN', 'tourfic' ),
+            'subtitle'   => __('Enable/disable cloudflare CDN for Font Awesome CSS' . $badge_pro, 'tourfic' ),
+            'text_on'    => __('Enabled', 'tourfic' ),
+            'text_off'   => __('Disabled', 'tourfic' ),
+            'text_width' => 100
+        ),
+
+    )
+    
+) );
 ?>

@@ -228,6 +228,20 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 add_filter( 'woocommerce_get_item_data', 'display_cart_item_custom_meta_data', 10, 2 );
 
 /**
+ * Change cart item permalink
+ */
+function tf_hotel_cart_item_permalink( $permalink, $cart_item, $cart_item_key ) {
+
+    $type = !empty($cart_item['tf_hotel_data']['order_type']) ? $cart_item['tf_hotel_data']['order_type'] : '';
+    if ( is_cart() && $type == 'hotel') {
+        $permalink = $cart_item['tf_hotel_data']['post_permalink'];
+    }
+
+    return $permalink;
+}
+add_filter ('woocommerce_cart_item_permalink', 'tf_hotel_cart_item_permalink' , 10, 3 );
+
+/**
  * Show custom data in order details
  */
 function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {

@@ -197,7 +197,7 @@ if(!function_exists('tf_generate_review_meta_fields')) {
             if (empty($field)) {
                 continue;
             }
-            $html .= '<div class="tf-single-rating">';
+            $html .= '<div class="tf-form-single-rating">';
             $html .= sprintf('<label for="rating">%s</label>', $field);
             $html .= sprintf('<div class="ratings-container star' .$limit. '">%s </div>', tf_generate_stars($field));
             $html .= '</div>';

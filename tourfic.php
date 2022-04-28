@@ -7,10 +7,11 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.2
+ * Version:         2.3
  * Tested up to: 5.9.3
  * WC tested up to: 6.4.1
  * Requires PHP: 7.2
+ * Elementor tested up to: 3.6.5
  */
 
 // don't load directly
@@ -91,7 +92,7 @@ if ( !is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
  * @since 1.0
  */
 if ( !defined( 'TOURFIC' ) ) {
-    define( 'TOURFIC', '2.2' );
+    define( 'TOURFIC', '2.3' );
 }
 
 /**
