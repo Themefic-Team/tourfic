@@ -182,7 +182,7 @@ if($tour_type == 'continuous' && $custom_avail == true) {
 				<div class="tf-hero-content-wrapper">
 					<div class="tf-hero-top-content" style="background-image: url(<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>);">
 						<div class="tf-hero-top-content-inner">
-							<?php if($comments) { ?>
+							<?php if($comments && !$disable_review_sec == '1') { ?>
 								<a href="#tf-review">
 									<div class="tf-single-rating">
 										<i class="fas fa-star"></i> <span><?php echo tf_total_avg_rating($comments); ?></span> (<?php tf_based_on_text(count($comments)); ?>)
