@@ -177,7 +177,12 @@
             });
 
         });
+        $(document).on('click', '.hotel-room-book-error', function (e) {
+            e.preventDefault()
+            let selectedDate = $('#check-in-out-date').val();
+            notyf.error(selectedDate + ' date is not available')
 
+        });
         /**
          * Single hotel Gallery
          * 
