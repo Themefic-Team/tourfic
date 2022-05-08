@@ -89,11 +89,11 @@
     </td>
     <td class="pricing">
         <div class="tf-price-column">
-            <span class="tf-price"><?php echo $has_range ? $price :  wc_price( $price ); ?></span>
+            <span class="tf-price"><?php echo wc_price( $price ); ?></span>
             <?php if ( $pricing_by == '1' ) { ?>
-                <div class="price-per-night"><?php esc_html_e( 'per night', 'tourfic' );?></div>
+                <div class="price-per-night"><?php $days > 0 ? esc_html_e( 'for '.$days .' nights', 'tourfic' ) :  esc_html_e( 'per night', 'tourfic' );?></div>
             <?php } else {?>
-                <div class="price-per-night"><?php esc_html_e( 'per person/night', 'tourfic' );?></div>
+                <div class="price-per-night"><?php $days > 0 ? esc_html_e( 'per person for '.$days .' nights', 'tourfic' ) : esc_html_e( 'per person/night', 'tourfic' );?></div>
             <?php }?>
         </div>
     </td>
@@ -118,7 +118,7 @@
                 <input type="hidden" name="child" value="<?php echo $form_child; ?>">
                 <input type="hidden" name="check_in_date" value="<?php echo $form_check_in; ?>">
                 <input type="hidden" name="check_out_date" value="<?php echo $form_check_out; ?>">
-                <button class="<?php echo $has_range ? 'hotel-room-book-error' :  'hotel-room-book'  ?>" type="<?php echo $has_range ? 'button' :  'submit'  ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
+                <button class="hotel-room-book" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
             </div>
             <div class="tf_desc"></div>
         </form>
