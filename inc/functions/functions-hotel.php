@@ -334,51 +334,44 @@ function tf_room_availability_callback()
                         $date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
                         return $check_in >= $date_availability_from && $check_out <= $date_availability_to;
                     } ) );
+                    // Check if date is provided and within date range
+                    if ( is_iterable( $available_rooms ) && count( $available_rooms ) >= 1 ) {                
+                                        
+                        $room_price    = !empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $room_price;
+                        $adult_price   = !empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $room_adult_price;
+                        $child_price   =  $form_child  ? (!empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $room['child_price']) : 0;
+                        if ($pricing_by == '1') {
+                            $price_by_date = $room_price;
+                        } else {
+                            $price_by_date = (($adult_price * $form_adult) + ($child_price * $form_child));
+                        }
+                        
+                        $price = $price_by_date * $days;
+                        if ( $form_total_person <= $total_person ) {
+                            include TF_TEMPLATE_PART_PATH . 'hotel\hotel-availability-tr.php';
+                        } else {
+                            $error = 'No Room Available! Total person number exceeds!';
+                        }
 
-                }    
+                    } else {
+                        $error = 'No Room Available within this Date Range!';
 
-                // Check if date is provided and within date range
-                if ( is_iterable( $available_rooms ) && count( $available_rooms ) >= 1 ) {                
-                    
-                    $room_price    = !empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $room_price;
-                    $adult_price   = !empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $room_adult_price;
-                    $child_price   =  $form_child  ? (!empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $room['child_price']) : 0;
+                    }
+                }    else {
+                   
                     if ($pricing_by == '1') {
                         $price_by_date = $room_price;
                     } else {
-                        $price_by_date = (($adult_price * $form_adult) + ($child_price * $form_child));
-                    }
+                        $price_by_date = (($room_adult_price * $form_adult) + ($room_child_price * $form_child));
+                    }                  
                     
                     $price = $price_by_date * $days;
-                    if ( $form_total_person <= $total_person ) {
-                        include TF_TEMPLATE_PART_PATH . 'hotel\hotel-availability-tr.php';
-                    } else {
-                        $error = 'No Room Available! Total person number exceeds!';
-                    }
 
-                } else {
-                    $error = 'No Room Available within this Date Range!';
-
-                }
-
-                if ($pricing_by == '1') {
-                    $price_by_date = $room_price;
-                } else {
-                    $price_by_date = (($room_adult_price * $form_adult) + ($room_child_price * $form_child));
-                }
-                
-                
-                $price = $price_by_date * $days;
-
-                if ( !$avil_by_date ) {
                     if ( $form_total_person <= $total_person ) {
                         include TF_TEMPLATE_PART_PATH . 'hotel\hotel-availability-tr.php';
                     } else {
                         $error = 'No Room Available! Total person number exceeds!';
                     }   
-
-                }else{
-                    $error = 'No Room Available';
                 }
             } else {
                 $error = "No Room Available!";
