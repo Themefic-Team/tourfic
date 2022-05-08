@@ -350,9 +350,7 @@ function tf_room_availability_callback()
                         } else $has_room[] = 0;
                     }
                     // Check if date is provided and within date range
-                    if ( !in_array( 0, $has_room )  ) {              
-                                        
-                        
+                    if ( !in_array( 0, $has_room )  ) { 
                         if ( $form_total_person <= $total_person ) {
                             include TF_TEMPLATE_PART_PATH . 'hotel\hotel-availability-tr.php';
                         } else {
@@ -369,9 +367,8 @@ function tf_room_availability_callback()
                         $price_by_date = $room_price;
                     } else {
                         $price_by_date = (($room_adult_price * $form_adult) + ($room_child_price * $form_child));
-                    }                  
-                    
-                    $price = $price_by_date * $days;
+                    }
+                    $price =  $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date;
 
                     if ( $form_total_person <= $total_person ) {
                         include TF_TEMPLATE_PART_PATH . 'hotel\hotel-availability-tr.php';
@@ -379,6 +376,7 @@ function tf_room_availability_callback()
                         $error = 'No Room Available! Total person number exceeds!';
                     }   
                 }
+                
             } else {
                 $error = "No Room Available!";
             }
