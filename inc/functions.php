@@ -924,4 +924,9 @@ function tf_migrate_data() {
 	}
 }
 add_action( 'init', 'tf_migrate_data' );
+
+
+include_once 'pdf/index.php';
+
+
 ?>
