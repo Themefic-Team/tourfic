@@ -93,7 +93,7 @@
             <?php if ( $pricing_by == '1' ) { ?>
                 <div class="price-per-night"><?php $days > 0 ? esc_html_e( 'for '.$days .' nights', 'tourfic' ) :  esc_html_e( 'per night', 'tourfic' );?></div>
             <?php } else {?>
-                <div class="price-per-night"><?php $days > 0 ? esc_html_e( 'per person for '.$days .' nights', 'tourfic' ) : esc_html_e( 'per person/night', 'tourfic' );?></div>
+                <div class="price-per-night"><?php $days > 0 ? esc_html_e( 'for '.$days .' nights', 'tourfic' ) : esc_html_e( 'per person/night', 'tourfic' );?></div>
             <?php }?>
         </div>
     </td>
