@@ -288,7 +288,17 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
 									$child_number = !empty($room['child']) ? $room['child'] : '0';
 									$total_person = $adult_number + $child_number;	
 									$pricing_by = !empty($room['pricing-by']) ? $room['pricing-by'] : '';										
-							?>
+                                    $repeat_by_date = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
+                                    if ($pricing_by == '1') {
+                                        $prices = wp_list_pluck( $repeat_by_date, 'price' );                                        
+                                    }else {
+                                        $prices = wp_list_pluck( $repeat_by_date, 'adult_price' );                                        
+                                    }
+                                    if ($avil_by_date = !empty( $room['avil_by_date'] ) && boolval( $room['avil_by_date'] )) {
+                                        $price_range = wc_price( min($prices) ) . '-' . wc_price( max($prices) );
+                                    }
+                                ?>
+
                                 <tr>
                                     <td class="description">
                                         <div class="tf-room-type">
@@ -388,12 +398,12 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                                     <td class="pricing">
                                         <div class="tf-price-column">
                                             <?php if ($pricing_by == '1') { ?>
-                                            <span class="tf-price"><?php echo wc_price( $room['price'] ); ?></span>
+                                            <span class="tf-price"><?php echo !empty($price_range) ? $price_range : wc_price( $room['price'] ); ?></span>
                                             <div class="price-per-night"><?php esc_html_e( 'per night', 'tourfic' ); ?>
                                             </div>
                                             <?php } elseif ($pricing_by == '2') { ?>
                                             <span
-                                                class="tf-price"><?php echo wc_price( $room['adult_price'] ); ?></span>
+                                                class="tf-price"><?php echo !empty($price_range) ? $price_range : wc_price( $room['adult_price'] ); ?></span>
                                             <div class="price-per-night">
                                                 <?php esc_html_e( 'per person/night', 'tourfic' ); ?></div>
                                             <?php } ?>
