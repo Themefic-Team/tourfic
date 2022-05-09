@@ -300,7 +300,8 @@ $share_link = esc_url( home_url("/?p=").$post_id );
                                             $prices = wp_list_pluck( $repeat_by_date, 'adult_price' );                                        
                                         }
 
-                                        $price = wc_price( min($prices) ) . '-' . wc_price( max($prices) );
+$price = min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) );
+
 
                                     } else {
 
