@@ -113,3 +113,29 @@
 .disable-sortable .csf-repeater-clone {
     display: none !important;
 }
+/**
+ * Override Codestar repeater for Hotel Room
+ */
+.csf-section .room-repeater > .csf-title{
+    width: 100%;
+    margin: 0 0 20px 0;
+    font-size: 18px;
+}
+.csf-section .room-repeater > .csf-fieldset{
+    width: 100%;
+}
+.csf-section .room-repeater .csf-repeater-wrapper .csf-repeater-item {
+    margin: 0 0 20px 0;
+    border-bottom: 2px solid #2271b1;
+}
+
+.csf-section .room-repeater .repeater-by-date > .csf-title{
+    display: none;
+}
+.csf-section .room-repeater .repeater-by-date > .csf-fieldset{
+    width: 100%;
+}
+.csf-section .room-repeater .repeater-by-date .csf-repeater-wrapper .csf-repeater-item {
+    margin: 0 0 20px 0;
+    border-bottom: 1px solid #eee;
+}

@@ -24,25 +24,14 @@ function tf_hotel_booking_callback(){
     // Declaring errors & hotel data array
     $response = array();
     $tf_room_data = array();
+
+    /**
+     * Data from booking form
+     * 
+     * With errors
+     */
     $post_id = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
-    $room_id = isset( $_POST['room_id'] ) ? intval( sanitize_text_field( $_POST['room_id'] ) ) : null;
-
-    /**
-     * Backend options panel data
-     * 
-     * @since 2.2.0
-     */
-    $post_author = get_post_field( 'post_author', $post_id );
-    $meta = get_post_meta( $post_id, 'tf_hotel', true );
-    $rooms = !empty($meta['room']) ? $meta['room'] : '';
-    $room_name = $rooms[$room_id]['title'];
-    $pricing_by = $rooms[$room_id]['pricing-by'];
-    $price_multi_day = !empty($rooms[$room_id]['price_multi_day']) ? $rooms[$room_id]['price_multi_day'] : false;
-
-    /**
-     * All form data
-     * 
-     */
+    $room_id = isset( $_POST['room_id'] ) ? intval( sanitize_text_field( $_POST['room_id'] ) ) : null;   
     $location = isset( $_POST['location'] ) ? sanitize_text_field( $_POST['location'] ) : '';
     // People number
     $adult = isset( $_POST['adult'] ) ? intval( sanitize_text_field( $_POST['adult'] ) ) : '0';
@@ -72,11 +61,25 @@ function tf_hotel_booking_callback(){
     if ( !$post_id  ) {
         $response['errors'][] = __('Unknown Error! Please try again.','tourfic');
     }
-    //$response['errors'][] = $price_multi_day;
 
+    /**
+     * Backend options panel data
+     * 
+     * @since 2.2.0
+     */
+    $post_author = get_post_field( 'post_author', $post_id );
+    $meta = get_post_meta( $post_id, 'tf_hotel', true );
+    $rooms = !empty($meta['room']) ? $meta['room'] : '';
+    $room_avail_by_date = !empty($rooms[$room_id]['avil_by_date']) ? $rooms[$room_id]['avil_by_date'] : 0; /** @return array */
+    $room_name = $rooms[$room_id]['title'];
+    $pricing_by = $rooms[$room_id]['pricing-by'];
+    $price_multi_day = !empty($rooms[$room_id]['price_multi_day']) ? $rooms[$room_id]['price_multi_day'] : false;   
+
+    /**
+     * Create Product
+     */
     $post_title = get_the_title( $post_id );
-
-    // Add Product
+    // Product args
     $product_arr = apply_filters( 'tf_create_product_array', array(
         'post_title' => $post_title,
         'post_type' => 'product',
@@ -105,10 +108,9 @@ function tf_hotel_booking_callback(){
         }
     }
 
-    //echo var_dump($rooms);
-
-    //$response['errors'][] = $pricing_by;
-    // If no errors then process
+    /**
+     * If no errors then process
+     */
     if(!array_key_exists('errors', $response) || count($response['errors']) == 0) {
 
         $tf_room_data['tf_hotel_data']['order_type'] = 'hotel';
@@ -122,6 +124,7 @@ function tf_hotel_booking_callback(){
         $tf_room_data['tf_hotel_data']['room'] = $room_selected;
         $tf_room_data['tf_hotel_data']['room_name'] = $room_name;
 
+        // Pricing
         if ($pricing_by == '1') {
             $total_price = $rooms[$room_id]['price'];
         } elseif ($pricing_by == '2') {
@@ -139,9 +142,6 @@ function tf_hotel_booking_callback(){
 
         $tf_room_data['tf_hotel_data']['price_total'] = $price_total;
 
-        // If want to empty the cart
-        //WC()->cart->empty_cart();
-
         // Add product to cart with the custom cart item data
         WC()->cart->add_to_cart( $product_id, 1, '0', array(), $tf_room_data );
 
@@ -152,16 +152,16 @@ function tf_hotel_booking_callback(){
         $response['status'] = 'error';
     }
 
-    //ppr($get_room_type);
-
     // Json Response
     echo wp_json_encode( $response );
 
     die();
 }
 
-// Set price
-function set_order_price( $cart ) {
+/**
+ * Over write WooCommerce Price
+ */
+function tf_hotel_set_order_price( $cart ) {
     if ( is_admin() && ! defined( 'DOING_AJAX' ) )
         return;
 
@@ -176,7 +176,7 @@ function set_order_price( $cart ) {
     }
 
 }
-add_action('woocommerce_before_calculate_totals', 'set_order_price', 30, 1 );
+add_action('woocommerce_before_calculate_totals', 'tf_hotel_set_order_price', 30, 1 );
 
 // Display custom cart item meta data (in cart and checkout)
 function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
