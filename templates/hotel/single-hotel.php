@@ -287,16 +287,30 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
 									$adult_number = !empty($room['adult']) ? $room['adult'] : '0';
 									$child_number = !empty($room['child']) ? $room['child'] : '0';
 									$total_person = $adult_number + $child_number;	
-									$pricing_by = !empty($room['pricing-by']) ? $room['pricing-by'] : '';										
-                                    $repeat_by_date = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
-                                    if ($pricing_by == '1') {
-                                        $prices = wp_list_pluck( $repeat_by_date, 'price' );                                        
-                                    }else {
-                                        $prices = wp_list_pluck( $repeat_by_date, 'adult_price' );                                        
-                                    }
-                                    if ($avil_by_date = !empty( $room['avil_by_date'] ) && boolval( $room['avil_by_date'] )) {
-                                        $price_range = wc_price( min($prices) ) . '-' . wc_price( max($prices) );
-                                    }
+									$pricing_by = !empty($room['pricing-by']) ? $room['pricing-by'] : '';
+                                    $avil_by_date = !empty( $room['avil_by_date'] ) ? !empty( $room['avil_by_date'] ) : false;
+
+                                    if($avil_by_date == true) {
+
+                                        $repeat_by_date = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
+
+                                        if ($pricing_by == '1') {
+                                            $prices = wp_list_pluck( $repeat_by_date, 'price' );                                        
+                                        } else {
+                                            $prices = wp_list_pluck( $repeat_by_date, 'adult_price' );                                        
+                                        }
+
+                                        $price = wc_price( min($prices) ) . '-' . wc_price( max($prices) );
+
+                                    } else {
+
+                                        if ($pricing_by == '1') {
+                                            $price = wc_price( !empty($room['price']) ? $room['price'] : '0.0' );
+                                        } else {
+                                            $price = wc_price( !empty($room['adult_price']) ? $room['adult_price'] : '0.0' );
+                                        }
+
+                                    }                                                                    
                                 ?>
 
                                 <tr>
@@ -397,16 +411,23 @@ $share_link = esc_url( home_url("/?p=").get_the_ID() );
                                     </td>
                                     <td class="pricing">
                                         <div class="tf-price-column">
-                                            <?php if ($pricing_by == '1') { ?>
-                                            <span class="tf-price"><?php echo !empty($price_range) ? $price_range : wc_price( $room['price'] ); ?></span>
-                                            <div class="price-per-night"><?php esc_html_e( 'per night', 'tourfic' ); ?>
-                                            </div>
-                                            <?php } elseif ($pricing_by == '2') { ?>
-                                            <span
-                                                class="tf-price"><?php echo !empty($price_range) ? $price_range : wc_price( $room['adult_price'] ); ?></span>
-                                            <div class="price-per-night">
-                                                <?php esc_html_e( 'per person/night', 'tourfic' ); ?></div>
-                                            <?php } ?>
+                                            <?php
+                                            if ($pricing_by == '1') {
+                                            ?>
+                                                <span class="tf-price"><?php echo $price; ?></span>
+                                                <div class="price-per-night">
+                                                    <?php esc_html_e( 'per night', 'tourfic' ); ?>
+                                                </div>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <span class="tf-price"><?php echo $price; ?></span>
+                                                <div class="price-per-night">
+                                                    <?php esc_html_e( 'per person/night', 'tourfic' ); ?>
+                                                </div>
+                                            <?php
+                                            }
+                                            ?>
                                         </div>
                                     </td>
                                     <td class="reserve tf-t-c">

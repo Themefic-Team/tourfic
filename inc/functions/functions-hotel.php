@@ -329,7 +329,7 @@ function tf_room_availability_callback()
                     $check_in        = strtotime( $form_start . ' 00:00' );
                     $check_out       = strtotime( $form_end . ' 23:59' );
                     $repeat_by_date  = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
-                    $price = $number_of_rooms = 0;
+                    $price = 0;
                     $has_room = [];
                     // extract price from available room options
                     foreach ( $period as $date ) {
@@ -345,7 +345,7 @@ function tf_room_availability_callback()
                             $child_price   = !empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $room['child_price'];
                             $price_by_date = $pricing_by == '1' ? $room_price : (  ( $adult_price * $form_adult ) + ( $child_price * $form_child ) );
                             $price += $price_by_date;
-                            $number_of_rooms = $available_rooms[0]['num-room'];
+                            $number_of_rooms = !empty($available_rooms[0]['num-room']) ? $available_rooms[0]['num-room'] : $room['num-room'];
                             $has_room[] = 1;                           
                         } else $has_room[] = 0;
                     }
