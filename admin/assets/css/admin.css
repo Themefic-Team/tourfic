@@ -1,3 +1,15 @@
+/**
+ * Common
+ */
+.tf-post-states{
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 8px;
+    border-radius: 10px;
+    background: #333;
+    color: #fff; 
+}
+
 /** 
  * Meta field
  * Common
@@ -40,6 +52,13 @@
 .tf-csf-badge .tf-pro {
     background: #b30000;
 }
+
+/**
+ * Hotel
+ */
+/* .room-repeater .unique-id {
+    display: none;
+} */
 
 /**
  * General Settings

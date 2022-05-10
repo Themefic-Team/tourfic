@@ -113,6 +113,7 @@
             <div class="room-submit-wrap">
                 <input type="hidden" name="post_id" value="<?php echo $form_post_id; ?>">
                 <input type="hidden" name="room_id" value="<?php echo $room_id; ?>">
+                <input type="hidden" name="unique_id" value="<?php echo $unique_id; ?>">
                 <input type="hidden" name="location" value="<?php echo $first_location_name; ?>">
                 <input type="hidden" name="adult" value="<?php echo $form_adult; ?>">
                 <input type="hidden" name="child" value="<?php echo $form_child; ?>">

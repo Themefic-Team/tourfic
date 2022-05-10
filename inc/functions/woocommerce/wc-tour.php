@@ -20,6 +20,7 @@ function tf_tours_booking_function() {
      * @since 2.2.0
      */
     $post_id = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : '';
+    $product_id = get_post_meta( $post_id, 'product_id', true );
     $post_author = get_post_field( 'post_author', $post_id );
     $meta = get_post_meta( $post_id, 'tf_tours_option', true );
     $tour_type = !empty($meta['type']) ? $meta['type'] : '';
@@ -186,44 +187,44 @@ function tf_tours_booking_function() {
         $response['errors'][] = __( 'Unknown Error! Please try again.', 'tourfic' );
     }
 
-    // Get product title from post id
-    $post_title = get_the_title( $post_id );
+    // // Get product title from post id
+    // $post_title = get_the_title( $post_id );
 
-    /**
-     * Create tours as WooCommerce product
-     * 
-     * Password protected
-     */
-    // Arguments
-    $product_arr = apply_filters( 'tf_create_product_array', array(
-        'post_title'    => $post_title,
-        'post_type'     => 'product',
-        'post_status'   => 'publish',
-        'post_password' => tourfic_proctected_product_pass(),
-        'meta_input'    => array(
-            '_price'             => '0',
-            '_regular_price'     => '0',
-            '_visibility'        => 'visible',
-            '_virtual'           => 'yes',
-            '_sold_individually' => 'yes',
-        ),
-    ) );
+    // /**
+    //  * Create tours as WooCommerce product
+    //  * 
+    //  * Password protected
+    //  */
+    // // Arguments
+    // $product_arr = apply_filters( 'tf_create_product_array', array(
+    //     'post_title'    => $post_title,
+    //     'post_type'     => 'product',
+    //     'post_status'   => 'publish',
+    //     'post_password' => tourfic_proctected_product_pass(),
+    //     'meta_input'    => array(
+    //         '_price'             => '0',
+    //         '_regular_price'     => '0',
+    //         '_visibility'        => 'visible',
+    //         '_virtual'           => 'yes',
+    //         '_sold_individually' => 'yes',
+    //     ),
+    // ) );
 
-    $product_id = post_exists( $post_title, '', '', 'product' );
+    // $product_id = post_exists( $post_title, '', '', 'product' );
 
-    // Check if product already exists
-    if ( $product_id ) {
-        $response['product_status'] = 'exists';
-    } else {
-        $product_id = wp_insert_post( $product_arr );
+    // // Check if product already exists
+    // if ( $product_id ) {
+    //     $response['product_status'] = 'exists';
+    // } else {
+    //     $product_id = wp_insert_post( $product_arr );
 
-        if ( !is_wp_error( $product_id ) ) {
-            $response['product_status'] = 'new';
-        } else {
-            $response['errors'][] = $product_id->get_error_message();
-            $response['status'] = 'error';
-        }
-    }
+    //     if ( !is_wp_error( $product_id ) ) {
+    //         $response['product_status'] = 'new';
+    //     } else {
+    //         $response['errors'][] = $product_id->get_error_message();
+    //         $response['status'] = 'error';
+    //     }
+    // }
 
     /**
      * Seasional price
@@ -281,6 +282,7 @@ function tf_tours_booking_function() {
         $tf_tours_data['tf_tours_data']['post_author'] = $post_author;
         $tf_tours_data['tf_tours_data']['tour_type'] = $tour_type;
         $tf_tours_data['tf_tours_data']['tour_id'] = $post_id;
+        $tf_tours_data['tf_tours_data']['post_permalink'] = get_permalink($post_id);
 
         $tf_tours_data['tf_tours_data']['adults'] = $adults;
         $tf_tours_data['tf_tours_data']['childrens'] = $children;
@@ -319,7 +321,7 @@ function tf_tours_booking_function() {
         }
 
         // Add product to cart with the custom cart item data
-        WC()->cart->add_to_cart( $product_id, 1, '0', array(), $tf_tours_data );
+        WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_tours_data );
 
         $response['product_id'] = $product_id;
         $response['add_to_cart'] = 'true';

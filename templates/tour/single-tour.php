@@ -62,7 +62,7 @@ $hero_title = !empty($meta['hero_title']) ? $meta['hero_title'] : '';
 $highlights = !empty($meta['additional_information']) ? $meta['additional_information'] : ''; 
 // Informations
 $tour_duration = !empty($meta['duration']) ? $meta['duration'] : '';
-$tour_type = !empty($meta['info_type']) ? $meta['info_type'] : '';
+$tour_type_info = !empty($meta['info_type']) ? $meta['info_type'] : '';
 $group_size = !empty($meta['group_size']) ? $meta['group_size'] : '';
 $language = !empty($meta['language']) ? $meta['language'] : '';
 
@@ -317,7 +317,7 @@ if($tour_type == 'continuous' && $custom_avail == true) {
 	<!-- Hero section end -->
 
 	
-	<?php if($tour_duration || $tour_type || $group_size || $language) { ?>
+	<?php if($tour_duration || $tour_type_info || $group_size || $language) { ?>
 	<!-- Square block section Start -->
 	<div class="tf-square-block-wrapper">
 		<div class="tf-container">
@@ -330,11 +330,11 @@ if($tour_type == 'continuous' && $custom_avail == true) {
 						<p><?php echo esc_html__( $tour_duration,'tourfic' ) ?></p>
 					</div>
 					<?php } ?>
-					<?php if($tour_type) { ?>
+					<?php if($tour_type_info) { ?>
 					<div class="tf-single-square-block">
 						<img src=<?php echo TF_ASSETS_URL . "img/globe.png" ?> alt="">
 						<h5><?php echo __( 'Tour Type', 'tourfic' ); ?></h5>
-						<p><?php echo esc_html__( $tour_type,'tourfic' ) ?></p>
+						<p><?php echo $tour_type_info; ?></p>
 					</div>
 					<?php } ?>
 					<?php if($group_size) { ?>

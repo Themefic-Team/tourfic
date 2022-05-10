@@ -3,6 +3,18 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * WC Product Extend
+ */
+if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php' ) ) {
+    function fida() {
+    require_once TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php';
+    }
+    add_action( 'init', 'fida' );
+} else {
+    tf_file_missing(TF_INC_PATH . 'functions/woocommerce/wc-product-extend.php');
+}
+
+/**
  * Helper Functions
  */
 if ( file_exists( TF_INC_PATH . 'functions/functions-helper.php' ) ) {

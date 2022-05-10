@@ -102,6 +102,22 @@
             window.open('https://tourfic.com/');
         });
 
+        /**
+         * Generate & set unique id for hotel rooms
+         */
+        $(document).on('click', '.room-repeater .csf-repeater-add', function(e) {
+
+            var repeaterNumber = $('.room-repeater .csf-repeater-wrapper .csf-repeater-item').length - 2;
+
+            $('.room-repeater .unique-id input').each(function() {
+                repeaterNumber++;
+                if( $('.room-repeater [data-depend-id="room"] [data-depend-id="unique_id"]').val().length === 0 ) {
+                    $('.room-repeater [name="tf_hotel[room]['+repeaterNumber+'][unique_id]"]').val(new Date().valueOf() + repeaterNumber);
+                }
+            });
+
+        });
+
     });
 
 })(jQuery);

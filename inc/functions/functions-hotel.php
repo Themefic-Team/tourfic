@@ -261,6 +261,7 @@ if ( !function_exists( 'get_hotel_locations' ) ) {
 /**
  * Ajax hotel room availability
  * 
+ * @author fida
  */
 add_action( 'wp_ajax_tf_room_availability', 'tf_room_availability_callback' );
 add_action( 'wp_ajax_nopriv_tf_room_availability', 'tf_room_availability_callback' );
@@ -271,6 +272,9 @@ function tf_room_availability_callback() {
         return;
     }
 
+    /**
+     * Form data
+     */
     $form_post_id      = !empty( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
     $form_adult        = !empty( $_POST['adult'] ) ? sanitize_text_field( $_POST['adult'] ) : 0;
     $form_child        = !empty( $_POST['child'] ) ? sanitize_text_field( $_POST['child'] ) : 0;
@@ -280,7 +284,9 @@ function tf_room_availability_callback() {
         list( $form_start, $form_end ) = explode( ' to ', $form_check_in_out );
     } 
 
-    // get rooms
+    /**
+     * Backend data
+     */
     $meta  = get_post_meta( $form_post_id, 'tf_hotel', true );
     $rooms = !empty($meta['room']) ? $meta['room'] : '';
     $locations = get_the_terms( $form_post_id, 'hotel_location' );
@@ -317,6 +323,38 @@ function tf_room_availability_callback() {
                         $enable = !empty($room['enable']) && boolval($room['enable']);
 
                         if ( $enable )  {
+
+                            /**
+                             * Set room availability
+                             */
+                            $unique_id = !empty($room['unique_id']) ? $room['unique_id'] : ''; // Unique id of rooms
+                            $order_ids = !empty($room['order_id']) ? $room['order_id'] : '';
+                            $num_room_available = !empty($room['num-room']) ? $room['num-room'] : '1'; // Number of room
+                            $number_orders = '0';
+
+                            if(!empty($order_ids)) {
+
+                                foreach($order_ids as $order_id) {
+
+                                    $order = wc_get_order( $order_id ); // Get $order object from order ID
+    
+                                    if ( $order && $order->get_status() == 'completed') {
+    
+                                        // Get and Loop Over Order Items
+                                        foreach ( $order->get_items() as $item_id => $item ) {
+    
+                                            $ordered_room_number = $item->get_meta( 'number_room_booked', true );
+                                            $number_orders = $number_orders + $ordered_room_number;
+    
+                                        }
+    
+                                    }
+    
+                                }
+
+                                $num_room_available = $num_room_available - $number_orders; // Calculate
+                            }
+
                             /*
                             * Backend room options
                             */
@@ -854,4 +892,79 @@ if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-hotel.php' ) ) {
 } else {
     tf_file_missing(TF_INC_PATH . 'functions/woocommerce/wc-hotel.php');
 }
+
+#################################
+#           Temporary           #
+#################################
+/**
+ * Add missing unique id to hotel room
+ */
+function tf_update_missing_room_id() {
+
+    //if ( get_option( 'tf_miss_room_id' ) < 1 ) {
+
+        $args = array(
+            'posts_per_page'   => -1,
+            'post_type'        => 'tf_hotel',
+            'suppress_filters' => true 
+        );
+        $posts_array = get_posts( $args );
+        foreach($posts_array as $post_array) {
+            $meta = get_post_meta( $post_array->ID, 'tf_hotel', true );
+            $rooms = !empty($meta['room']) ? $meta['room'] : '';
+            $new_rooms = [];
+            foreach($rooms as $room) {
+                
+                if(empty($room['unique_id'])) {
+                    $room['unique_id']  = mt_rand(1, time());
+                }
+                $new_rooms[] = $room; 
+            }
+            $meta['room'] = $new_rooms;
+            update_post_meta($post_array->ID, 'tf_hotel', $meta );
+        
+        }
+        //update_option( 'tf_miss_room_id', 1 );
+    //}
+}
+add_action( 'init', 'tf_update_missing_room_id' );
+
+/**
+ * Run Once
+ * Add _price post_meta to all hotels & tours
+ * 
+ * Will be delete in future version
+ */
+function tf_update_meta_all_hotels_tours() {
+
+    // Run once only
+    if ( get_option( 'tf_update_meta_all' ) < 1 ) {
+
+        // Update hotels meta
+        $args = array(
+            'posts_per_page'   => -1,
+            'post_type'        => 'tf_hotel',
+            'suppress_filters' => true 
+        );
+        $posts_array = get_posts( $args );
+        foreach($posts_array as $post_array) {
+            update_post_meta($post_array->ID, '_price', '0' );
+        } 
+
+        // Update tours meta
+        $args = array(
+            'posts_per_page'   => -1,
+            'post_type'        => 'tf_tours',
+            'suppress_filters' => true 
+        );
+        $posts_array = get_posts( $args );
+        foreach($posts_array as $post_array) {
+            update_post_meta($post_array->ID, '_price', '0' );
+        }
+
+        update_option( 'tf_update_meta_all', 1 );
+
+    }
+}
+add_action('wp_loaded', 'tf_update_meta_all_hotels_tours');
 ?>
