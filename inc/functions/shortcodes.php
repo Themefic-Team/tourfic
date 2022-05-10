@@ -119,7 +119,7 @@ function shortcode_tour_destinations( $atts, $content = null ){
                         <div class="single_recomended_content" style="background-image: url(<?php echo $image_url; ?>);">
                             <div class="recomended_place_info_header">
                                 <h3><?php _e( $term->name ); ?></h3>
-                                <p><?php printf( esc_html__( "%s hotels", 'tourfic' ), $term->count); ?></p>
+                                <p><?php printf( esc_html__( "%s tours", 'tourfic' ), $term->count); ?></p>
                             </div>
                         </div>
                     </a>
