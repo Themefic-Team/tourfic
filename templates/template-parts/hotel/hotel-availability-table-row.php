@@ -104,7 +104,7 @@
             <div class="room-selection-wrap">
                 <select name="hotel_room_selected" id="hotel-room-selected">
                     <?php
-                        foreach ( range( 1, $number_of_rooms, 1 ) as $value ) {
+                        foreach ( range( 1, $num_room_available) as $value ) {
                             echo '<option>' . $value . '</option>';
                         }
                     ?>
