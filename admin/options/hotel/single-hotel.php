@@ -348,18 +348,70 @@ if( class_exists( 'CSF' ) ) {
             ),
 
             array(
-              'id'       => '',
-              'class' => 'tf-csf-disable tf-csf-pro',
-              'type'     => 'datetime',
-              'title'    => __( 'Date', 'tourfic' ),
-              'subtitle' => __( 'Select availablity date' .$badge_up_pro, 'tourfic' ),
-              'settings' => array(
-                  'dateFormat'      => 'Y/m/d'
+                'id'       => '',
+                'class'    => 'tf-csf-disable tf-csf-pro',
+                'type'     => 'switcher',
+                'title'    => __( 'Enable Availability by Date', 'tourfic' ),
+                'subtitle' => __( $badge_pro, 'tourfic' ),
+                'label'    => 'Do you want activate it ?',
+                'default'  => true
               ),
-              'from_to'   => true,
-              'text_from' => __('From', 'tourfic' ),
-              'text_to'   => __('To', 'tourfic' ),
-          ),
+              array(
+                'id'       => '',
+                'class'    => 'repeater-by-date',
+                'type'     => 'repeater',
+                'title'    => __( 'By Date', 'tourfic' ),
+                'subtitle' => __( $badge_pro, 'tourfic' ),
+                'fields'   => array(            
+              
+                  array(
+                    'id'       => '',
+                    'class'    => 'tf-csf-disable tf-csf-pro',
+                    'type'     => 'datetime',
+                    'title'    => __( 'Date Range', 'tourfic' ),
+                    'subtitle' => __( 'Select availablity date range', 'tourfic' ),
+                    'settings' => array(
+                        'dateFormat'      => 'Y/m/d'
+                    ),
+                    'from_to'   => true,
+                    'text_from' => __('From', 'tourfic' ),
+                    'text_to'   => __('To', 'tourfic' ),
+                  ),
+                  array(
+                    'id'       => '',
+                    'class'    => 'tf-csf-disable tf-csf-pro',
+                    'type'     => 'number',
+                    'title'    => __('Number of Rooms', 'tourfic' ),
+                    'subtitle' => __( 'Number of available rooms for booking on this date range', 'tourfic' ),
+                  ),
+                  
+      
+                  array(
+                    'id'    => '',
+                    'class' => 'tf-csf-disable tf-csf-pro',
+                    'type'  => 'text',
+                    'title' => __('Pricing', 'tourfic' ),
+                    'desc'  => __( 'The price of room per one night', 'tourfic' ),
+                  ),
+      
+                  array(
+                    'id'    => '',
+                    'class' => 'tf-csf-disable tf-csf-pro',
+                    'type'  => 'text',
+                    'title' => __('Adult Pricing', 'tourfic' ),
+                    'desc'  => __( 'The price of room per one night', 'tourfic' ),
+                  ),
+      
+                  array(
+                    'id'    => '',
+                    'class' => 'tf-csf-disable tf-csf-pro',
+                    'type'  => 'text',
+                    'title' => __('Children Pricing', 'tourfic' ),
+                    'desc'  => __( 'The price of room per one night', 'tourfic' ),
+                  ),
+              
+                ),
+              ),
         
           ),
         ),
