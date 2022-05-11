@@ -290,6 +290,9 @@
     }
 }
 
+/***********************
+ * Added by Fida 
+ ***********************/
 @media only screen and (min-width: 1000px) {
     .tf-review-form-container {
         min-width: 800px;
@@ -319,4 +322,93 @@
     .tf-single-review {
         grid-template-columns: auto;
     }
+}
+
+/***********************
+ * Added by Mirza
+ ***********************/
+ @media only screen and (max-width: 1200px) {
+    .tf-container {
+        padding-left:50px;
+        padding-right:50px;
+    }
+    .tf-tour-booking-wrap {
+        width: 95%;
+      }
+      .tf-tour-booking-wrap form.tf_tours_booking {
+        flex-wrap: wrap;
+      }
+}
+
+@media only screen and (max-width: 1070px) {
+    .tf_button {
+        width: 500px;
+      }
+}
+
+@media only screen and (max-width: 1025px) {
+    .tf-tour-booking-wrap, .tf_form-inner input[type="text"], .tf_form-inner select {
+        font-size: 14px;
+      }
+      .tf_button, .flatpickr-calendar {
+        font-size: 12px;
+      }
+      .tf-square-block-content-wrapper {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .tf-single-square-block {
+        width: 300px;
+      }
+      
+}
+
+@media only screen and (max-width: 980px) {
+      .tf-faq-content-wrapper {
+        display: grid;
+      }
+      .tf-suggestion-desc h3 {
+        font-size: 18px;
+      }
+      .tf-suggestion-rating {
+        font-size: 14px;
+      }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 899px) {
+    .tf_button {
+        width: 500px;
+      }
+}
+
+@media only screen and (max-width: 767px) {
+    .tf-highlight-item, .tf-travel-desc {
+        display: grid;
+      }
+      .tf-accordion-content img {
+        max-width: 100%;
+      }
+      .tf-travel-time span {
+        font-size: 15px;
+        text-align: center;
+      }
+      .tf-accordion-head h4 {
+        font-size: 15px;
+        padding-left: 20px;
+      }
+      .tf_button {
+        width: 250px;
+      }
+}
+
+@media only screen and (max-width: 480px) {
+    .tf-suggestion-desc h3 {
+        font-size: 16px;
+      }
+      .tf-suggestion-rating {
+        font-size: 12px;
+      }
+      .tf_button {
+        width: 100%;
+      }
 }
