@@ -1160,12 +1160,6 @@ span.review_num {
   pointer-events: none;
 }
 
-.tf_destination-wrap .tf_input-inner,
-.tf_selectdate-wrap,
-.tf_selectperson-wrap {
-  padding: 0 15px;
-}
-
 .person-sep {
   padding: 0 8px;
   position: relative;
@@ -1204,7 +1198,6 @@ span.review_num {
 }
 
 .tf_selectperson-wrap {
-  width: 25%;
   position: relative;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -1221,32 +1214,13 @@ span.review_num {
   height: 100%;
 }
 
-@media screen and (max-width: 767px) {
-  .tf_destination-wrap,
-.tf_selectdate-wrap,
-.tf_selectperson-wrap,
-.tf_submit-wrap {
-    width: 100%;
-    display: block;
-  }
-}
 
-@media screen and (max-width: 767px) {
-  .tf_selectdate-wrap,
-.tf_selectperson-wrap {
-    padding: 20px !important;
-    border-bottom: 1px solid #ccc;
-  }
-}
 
 @media screen and (max-width: 767px) {
   .tf_destination-wrap {
     padding: 10px !important;
     border-bottom: 1px solid #ccc;
   }
-}
-
-@media screen and (max-width: 767px) {
   .tf_destination-wrap .tf_input-inner {
     padding: 0 10px;
   }
@@ -2493,7 +2467,7 @@ button.tf-cr-slider-arrow.prev-arrow {
   }
 }
 /* Mobile devices */
-@media (max-width: 766px) {
+@media (max-width: 767px) {
   .tf-hero-area {
     margin-bottom: 30px;
   }
@@ -2513,20 +2487,6 @@ button.tf-cr-slider-arrow.prev-arrow {
 
   .tf-tours-ratings {
     justify-content: flex-start;
-  }
-
-  .tf-tour-booking-wrap {
-    height: auto;
-    width: 95%;
-  }
-  .tf-tour-booking-wrap form.tf_tours_booking {
-    display: block !important;
-  }
-  .tf-tour-booking-wrap form.tf_tours_booking .tf_selectperson-wrap {
-    width: 100%;
-  }
-  .tf-tour-booking-wrap .tf_button {
-    width: 100%;
   }
 
   .tf-tours-informations .item {

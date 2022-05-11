@@ -301,9 +301,11 @@
   .tf-tour-booking-wrap form.tf_tours_booking {
     justify-content: space-evenly;
     width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
   }
   .tf-tour-booking-wrap .tf_selectperson-wrap {
-    width: 36%;
     color: #152B47;
     font-weight: 500;
     border: none;
@@ -316,25 +318,42 @@
   }
   .tf-tour-booking-wrap .tours-check-in-out {
     color: #152B47;
+    padding: 0;
   }
-  
   .tf-tour-booking-wrap.tf-tours-fixed {
     width: 100%;
-    z-index: 10;
-    background-color: #ecf0f2;
-    height: 60px;
+    z-index: 999;
+    background-color: #ecf0f2f2;
+    border-top: 1px solid #13377424;
   }
   .tf-tour-booking-wrap.tf-tours-fixed .tf_acrselection-wrap {
     position: absolute;
-    top: -237px;
+    top: -222px;
+  }
+  .tf-tours-fixed .tf_selectperson-wrap,  .tf-tours-fixed .tf_form-row .tf_label-row {
+    background: #ffffffb0;
+    border-radius: 5px;
+    padding: 12px 20px;
+  }
+  .tf-tours-fixed .tf_form-row .tf_label-row {
+    padding: 16px 20px;
+  }
+  .tf-tours-fixed .tour-extra {
+    background: #ffffffb0;
   }
   .tf-tour-booking-wrap.tf-tours-fixed .tf_tours_booking {
-    width: 80%;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .tf-tours-fixed .tf_form-inner input[type="text"], .tf_form-inner select {
+    padding: 0;
   }
   
   .tf_acrselection-wrap {
     position: absolute;
-    margin-top: 12px;
+    margin-top: 21px;
     background: #F5F8FFE6;
     padding: 24px 24px 8px;
     border-radius: 4px;
@@ -343,20 +362,17 @@
     width: 100%;
     display: none;
   }
-  
-  form.tf_tours_booking {
-    display: flex;
-    align-items: center;
-  }
-  
+
   .tf-tours-fixed {
     position: fixed;
     bottom: 0;
     left: 0%;
     right: 0;
   }
-  .tf-tours-fixed button[type=submit] {
-    padding: 12px;
+
+  .tf-tours-fixed button[type="submit"] {
+    padding: 16px;
+
   }
   .tf-tours-fixed form.tf_tours_booking {
     width: 55%;
@@ -377,7 +393,7 @@
 .tour-extra {
     background: #EBF2FF;
     border-radius: 50%;
-    padding: 3px 12px;
+    padding: 5px 12px;
   }
 
   .tour-extra a {
@@ -812,7 +828,7 @@
   box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
   border-radius: 10px;
   height: 400px !important;
-  padding: 30px;
+  padding: 20px;
   display: flex !important;
   align-items: flex-end;
   margin: 20px 0 !important;
@@ -823,62 +839,41 @@
 .tf-suggestion-content {
   background: rgba(0, 0, 0, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.16);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
   border-radius: 5px;
   width: 100%;
-  padding: 10px;
-
-}
-.tf-suggestion-desc {
-  max-width: 175px;
-}
-.tf-suggestion-desc h3 {
-  font-size: 18px;
-  line-height: 26px;
-  letter-spacing: 0.2px;
+  padding: 15px;
   color: #FFFFFF;
-  font-weight: normal;
-  margin: 0;
+}
+
+.tf-suggestion-desc h3 {
+  font-size: 22px;
+  line-height: 28px;
+  color: #FFFFFF;
 }
 
 .tf-suggestion-desc h3 span {
-  display: flex;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.2px;
-  color: #FFFFFF;
+  font-size: 15px;
+  line-height: 26px;
   margin-top: 5px;
+  display: block;
+  font-weight: 400;
 }
-.tf-suggestion-desc a{
+.tf-suggestion-desc a {
   color: #fff;
+  text-decoration:none;
 }
 .tf-suggestion-rating i {
   color: #FFCD3D;
-  font-size: 12px;
-}
-
-.tf-suggestion-price span {
-  font-size: 20px;
-  line-height: 28px;
-  text-align: right;
-  letter-spacing: 0.2px;
-  color: #FFFFFF;
-  font-weight: normal;
 }
 
 .tf-suggestion-rating {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 4px;
+  justify-content: space-between;
+  font-size: 18px;
+  margin-top: 30px;
 }
-
-
-
-
-
 
 /*--------- Suggestion Itinerary CSS End ---------*/
 

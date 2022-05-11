@@ -1,291 +1,85 @@
-@media only screen and (max-width: 1500px) {
-
-    .tf-review-items-wrapper .owl-nav button.owl-prev,
-    .tf-suggestion-wrapper .tf-container .owl-nav button.owl-prev {
-        left: -40px;
-    }
-
-    .tf-review-items-wrapper .owl-nav button.owl-next,
-    .tf-suggestion-wrapper .tf-container .owl-nav button.owl-next {
-        right: -40px;
-    }
-
-    .tf-page-wrapper {
-        width: 100%;
-        overflow: hidden;
-    }
-
-}
-
-@media only screen and (max-width: 1240px) {
-
+@media only screen and (max-width: 1200px) {
     .tf-container {
-        max-width: 900px !important;
+        padding-left:50px;
+        padding-right:50px;
     }
-
-    .tf-header-top {
-        padding: 10px 0;
-    }
-
-    .tf-header-main-content {
-        min-height: 64px;
-    }
-
-    .tf-header-menu-wrap ul a {
-        font-size: 16px;
-        line-height: 18px;
-    }
-
-    .tf-header-menu-wrap ul {
-        gap: 30px;
-    }
-
-    .tf-square-block-content-wrapper {
-        gap: 20px;
-    }
-
-    .tf-overview-item>div img {
-        width: 100%;
-    }
-
-    .tf-quoted-content-upper {
-        padding: 30px;
-    }
-
-    .tf-quoted-content-wrapper {
-        padding: 30px;
-    }
-
-    .tf-travel-itinerary-content-wrapper {
-        padding: 30px;
-    }
-
-    .tf-faq-content-wrapper {
-        padding: 30px;
-    }
-
-    .tf-subscribe-inputs-wrapper {
-        display: flex;
-    }
-
-}
-
-@media only screen and (max-width: 1000px) {
-
-
-
-    .tf-container {
-        max-width: 700px !important;
-    }
-
-    .tf-header-main-content {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 18px 16px;
-        position: relative;
-        min-height: unset;
-    }
-
-    .tf-header-menu-wrap ul {
-        display: flex;
-        flex-direction: column;
-        padding: 13px 0;
-        align-items: stretch;
-        gap: 0;
-    }
-
-    .tf-header-menu-wrap {
-        width: 100%;
-    }
-
-    .tf-header-menu-wrap ul li {
-        border-bottom: 1px solid #eee;
-        padding-bottom: 14px;
-        margin-bottom: 14px;
-    }
-
-    .tf-header-menu-wrap ul li:last-child {
-        border: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .tf-header-menu-triger {
-        display: unset;
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        font-size: 31px;
-        color: #002c66;
-        cursor: pointer;
-    }
-
-    .tf-header-menu-wrap {
-        display: none;
-    }
-
-    .tf-hero-top-content-inner h1 {
-        font-size: 48px;
-        line-height: 1.3;
-        margin-bottom: 20px;
-    }
-
-    .tf-hero-top-content-inner {
-        gap: 20px;
-    }
-
-    .tf-hero-bottom-left h4 {
-        font-size: 16px;
-    }
-
-    .tf-hero-bottom-left-location {
-        font-size: 16px;
-    }
-
-    .tf-hero-bottom-left-location i {
-        font-size: 19px;
-    }
-
-    .tf-hero-pricing span {
-        font-size: 16px;
-    }
-
-    .tf-hero-rating * {
-        font-size: 16px !important;
-    }
-
-    .tf-square-block-content-wrapper {
-        max-width: 620px;
-        margin: auto;
-        width: 100%;
-        margin-bottom: 60px;
-    }
-
-    .tf-overview-content-wrapper {
-        padding: 30px;
-    }
-
-    .tf-overview-item {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .tf-overview-item>div {
-        max-width: unset;
-    }
-
-    .tf-quoted-content-wrapper {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .tf-travel-content-wrap {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .tf-subscribe-content-wrapper {
-        display: flex;
-        flex-direction: column-reverse;
-        align-items: flex-start;
-    }
-
-    .tf-footer-content-wrapper>div {
-        width: calc(50% - 25px) !important;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .tf-footer-content-wrapper {
-        display: flex;
+    .tf-tour-booking-wrap {
+        width: 95%;
+      }
+      .tf-tour-booking-wrap form.tf_tours_booking {
         flex-wrap: wrap;
-        flex-direction: row;
-        gap: 50px;
-    }
-
-    .tf-suggestion-items-wrapper {
-        max-width: 400px;
-        margin: auto;
-        width: 100%;
-    }
-
-    .tf-field-wrapper {
-        width: 100%;
-    }
-
-    form.tf-review-form {
-        gap: 20px;
-    }
-
-    .tf-field-wrapper textarea {
-        min-height: 150px;
-    }
-
+      }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1070px) {
+    .tf_button {
+        width: 500px;
+      }
+}
 
-    .tf-review-items-wrapper .owl-nav button.owl-prev,
-    .tf-suggestion-wrapper .tf-container .owl-nav button.owl-prev {
-        left: 0px;
-    }
+@media only screen and (max-width: 1025px) {
+    .tf-tour-booking-wrap, .tf_form-inner input[type="text"], .tf_form-inner select {
+        font-size: 14px;
+      }
+      .tf_button, .flatpickr-calendar {
+        font-size: 12px;
+      }
+      .tf-square-block-content-wrapper {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .tf-single-square-block {
+        width: 300px;
+      }
+      
+}
 
-    .tf-review-items-wrapper .owl-nav button.owl-next,
-    .tf-suggestion-wrapper .tf-container .owl-nav button.owl-next {
-        right: 0px;
-    }
-
-    .tf-overview-content-wrapper,
-    .tf-quoted-content-upper,
-    .tf-travel-itinerary-content-wrapper,
-    .tf-faq-content-wrapper,
-    .tf-suggestion-wrapper,
-    .tf-review-wrapper,
-    .tf-subscribe-wrapper {
-        margin-bottom: 60px
-    }
-
-    .tf-hero-bottom-content>div {
-        min-width: 111px;
-    }
-
-    .tf-travel-itinerary-item {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .tf-travel-time {
-        width: auto;
-        border-radius: 5px 5px 0px 0px;
-        height: 60px;
-    }
-
-    .tf-travel-text {
-        width: auto;
-        border-radius: 0px 0px 5px 5px;
-    }
-
-    .tf-travel-text h4 {
-        display: block;
-        height: unset;
-        padding: 20px 20px;
-    }
-
-    .tf-travel-content-wrap {
-        padding: 20px;
-        gap: 20px;
-    }
-
-    .tf-travel-content-wrap img {
-        max-width: 100%;
-    }
-    .tf-review-form-area {
-        padding: 30px;
-    }
-    button.tf-review-form-btn {
+@media only screen and (max-width: 980px) {
+      .tf-faq-content-wrapper {
+        display: grid;
+      }
+      .tf-suggestion-desc h3 {
         font-size: 18px;
-        padding: 20px 30px;
-        line-height: 1;
-    }
+      }
+      .tf-suggestion-rating {
+        font-size: 14px;
+      }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 899px) {
+    .tf_button {
+        width: 500px;
+      }
+}
+
+@media only screen and (max-width: 767px) {
+    .tf-highlight-item, .tf-travel-desc {
+        display: grid;
+      }
+      .tf-accordion-content img {
+        max-width: 100%;
+      }
+      .tf-travel-time span {
+        font-size: 15px;
+        text-align: center;
+      }
+      .tf-accordion-head h4 {
+        font-size: 15px;
+        padding-left: 20px;
+      }
+      .tf_button {
+        width: 250px;
+      }
+}
+
+@media only screen and (max-width: 480px) {
+    .tf-suggestion-desc h3 {
+        font-size: 16px;
+      }
+      .tf-suggestion-rating {
+        font-size: 12px;
+      }
+      .tf_button {
+        width: 100%;
+      }
 }

@@ -45,9 +45,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 		$min_js = !empty(tfopt( 'js-min' )) ? '.min' : '';
 
         wp_enqueue_style( 'tourfic-styles', TF_ASSETS_URL . 'css/tourfic-styles.css', null, '' );
-
-        wp_enqueue_style( 'tf-style', TF_ASSETS_URL . 'css/style.css', null, '' );
-        wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/responsive.css', null, '' );
+        
 
         /**
          * Flatpickr
@@ -118,6 +116,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
          * Custom
          */       
         wp_enqueue_style( 'tourfic', TF_ASSETS_URL . 'css/tourfic' . $min_css . '.css', '', TOURFIC );
+        wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/responsive.css', null, '' );
         wp_enqueue_script( 'tourfic', TF_ASSETS_URL . 'js/tourfic' . $min_js . '.js', '', TOURFIC, true );
         wp_localize_script( 'tourfic', 'tf_params',
             array(
