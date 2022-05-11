@@ -158,3 +158,16 @@
     margin: 0 0 20px 0;
     border-bottom: 1px solid #eee;
 }
+
+/**
+ * Change admin menu color
+ */
+#adminmenu .toplevel_page_tourfic .dashicons-before:before {
+    color: #8bc34a;
+}
+#adminmenu .menu-icon-tf_hotel .dashicons-before:before {
+    color: #03a9f4;
+}
+#adminmenu .menu-icon-tf_tours .dashicons-before:before {
+    color: #ffc107;
+}

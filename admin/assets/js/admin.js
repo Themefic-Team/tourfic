@@ -105,9 +105,9 @@
         /**
          * Generate & set unique id for hotel rooms
          */
-        $(document).on('click', '.room-repeater .csf-repeater-add', function(e) {
+        $(document).on('click', '.room-repeater > div.csf-fieldset > a.csf-repeater-add', function(e) {
 
-            var repeaterNumber = $('.room-repeater .csf-repeater-wrapper .csf-repeater-item').length - 2;
+            var repeaterNumber = $('.room-repeater .csf-repeater-wrapper [data-depend-id="room"]').length - 2;
 
             $('.room-repeater .unique-id input').each(function() {
                 repeaterNumber++;
