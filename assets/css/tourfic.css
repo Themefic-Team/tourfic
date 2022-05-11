@@ -217,6 +217,7 @@
 ================================*/
 /*--------- Hero CSS Start ---------*/
 .tf-hero-top-content {
+  position: relative;
   padding: 20px;
   background-position: center center;
   background-size: cover;
@@ -286,6 +287,11 @@
   color: #152b47;
   font-weight: 500;
   border: none;
+}
+.tf_selectdate-wrap .tf_input-inner, .tf-tour-booking-wrap .tf_selectperson-wrap .tf_input-inner {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 .tf-tour-booking-wrap .tf_form-row .tf_label-row {
   margin-bottom: 0;
@@ -379,8 +385,8 @@
 /* Star rating */
 .tf-single-rating {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 10px;
+  top: 10px;
   line-height: 1;
   color: #333;
   font-size: 16px;
@@ -518,8 +524,9 @@
 /*--------- Square block CSS End ---------*/
 /*--------- Highlight CSS Start ---------*/
 .tf-highlight-item {
-  display: flex;
-  gap: 30px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-column-gap: 20px;
   align-items: center;
 }
 .tf-highlight-wrapper {
@@ -1386,16 +1393,21 @@
     margin-bottom: 20px;
 }
 .single-tour-wish-bt {
-  color: #333;
-  font-size: 24px;
-  cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    line-height: 1;
+    color: #333;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 999;
 }
 .single-tour-wish-bt i {
     background: rgba(26,43,72,.6);
     border-radius: 50%;
     color: #fff;
     font-size: 18px;
-    padding: 10px 9px 7px 10px;
+    padding: 10px 10px 9px 10px;
     transition: 0.3s;
 }
 /* Table Skeleton Loader */
