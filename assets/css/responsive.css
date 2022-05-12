@@ -332,18 +332,23 @@
         padding-left:50px;
         padding-right:50px;
     }
-    .tf-tour-booking-wrap {
-        width: 95%;
-      }
-      .tf-tour-booking-wrap form.tf_tours_booking {
-        flex-wrap: wrap;
-      }
 }
-
-@media only screen and (max-width: 1070px) {
+@media only screen and (max-width: 1100px) {
     .tf_button {
         width: 500px;
-      }
+    }
+    .flex-break {
+        flex-basis: 100%;
+        height: 0;
+    }
+    .tf-tour-booking-wrap .tf-tour-book-bt {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .tf-tour-booking-wrap .tf-tour-book-bt button {
+        width: 100%;
+        padding: 10px;
+    }
 }
 
 @media only screen and (max-width: 1025px) {

@@ -152,6 +152,9 @@ if ( !function_exists( 'tf_image_sizes' ) ) {
     function tf_image_sizes() {
         // Hotel gallery, hard crop
         add_image_size( 'tf_gallery_thumb', 900, 490, true );
+
+        // Hero Background
+        add_image_size( 'tf_hero_bg', 900, 490, true );
     }
     add_filter( 'after_setup_theme', 'tf_image_sizes' );
 }

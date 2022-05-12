@@ -8,8 +8,12 @@ get_header();
 // Main query
 while ( have_posts() ) : the_post();
 
-// get post id
-$post_id = get_the_ID();
+//var_dump($post);
+//var_dump(get_the_post_thumbnail_url('', 'tf_hero_bg'));
+
+// WP_Post objects
+$post_id = $post->ID; // This Post ID
+$hero_bg_url = get_the_post_thumbnail_url('', 'tf_hero_bg'); // Hero Background Image Url
 
 // Get Tour Meta
 $meta = get_post_meta( $post_id,'tf_tours_option',true );
@@ -45,6 +49,9 @@ $first_destination_slug = !empty($destinations) ? $destinations[0]->slug : '';
 $post_type = substr(get_post_type(), 3, -1);
 $has_in_wishlist = tf_has_item_in_wishlist($post_id);
 
+// Tour Video
+$tour_video = !empty($meta['tour_video']) ? $meta['tour_video'] : '';
+
 // Address
 $location = isset( $meta['location']['address'] ) ? $meta['location']['address'] : '';
 $text_location = isset( $meta['text_location']) ? $meta['text_location'] : '';
@@ -56,7 +63,6 @@ $gallery = $meta['tour_gallery'] ? $meta['tour_gallery'] : array();
 if ($gallery) {
 	$gallery_ids = explode( ',', $gallery );
 }
-$hero_title = !empty($meta['hero_title']) ? $meta['hero_title'] : '';
 
 // Highlights
 $highlights = !empty($meta['additional_information']) ? $meta['additional_information'] : ''; 
@@ -175,146 +181,161 @@ if($tour_type == 'continuous' && $custom_avail == true) {
 
 <div class="tf-page-wrapper">
 <?php do_action( 'tf_before_container' ); ?>
+
 	<!-- Hero section Start -->
-	<div class="tf-hero-wrapper">
-		<div class="tf-container">
-			<div class="tf-row">
-				<div class="tf-hero-content-wrapper">
-					<div class="tf-hero-top-content" style="background-image: url(<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>);">
-						<?php if($comments && !$disable_review_sec == '1') { ?>
-							<a href="#tf-review">
-								<div class="tf-single-rating">
-									<i class="fas fa-star"></i> <span><?php echo tf_total_avg_rating($comments); ?></span> (<?php tf_based_on_text(count($comments)); ?>)
-								</div>
-							</a>
-						<?php } ?>
-						<?php
-						// Wishlist
-						if(tfopt('wl-bt-for') && in_array('2', tfopt('wl-bt-for'))) {
-							if ( is_user_logged_in() ) {
-								if(tfopt('wl-for') && in_array('li', tfopt('wl-for'))) {
-								?>
-									<span class="single-tour-wish-bt"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if(tfopt('wl-page')) { echo 'data-page-title="' .get_the_title(tfopt('wl-page')). '" data-page-url="' .get_permalink(tfopt('wl-page')). '"'; } ?>></i></span>
-								<?php
-								}
-							} else {
-								if(tfopt('wl-for') && in_array('lo', tfopt('wl-for'))) {
-								?>
-									<span class="single-tour-wish-bt"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if(tfopt('wl-page')) { echo 'data-page-title="' .get_the_title(tfopt('wl-page')). '" data-page-url="' .get_permalink(tfopt('wl-page')). '"'; } ?>></i></span>
-								<?php
-								}
-							}
-						}
-						?>
-							<h1><?php echo esc_html__( $hero_title, 'tourfic' ); ?></h1>
-							<!-- Start gallery -->
-							<div class="tf-tours_search-wrap">
-								<?php echo tf_single_tour_booking_form( $post->ID ); ?>
-							</div>
-							<!-- End gallery-->
-						<div class="tf-hero-bottom-area">					
-							<?php 
-							$tour_video = !empty($meta['tour_video']) ? $meta['tour_video'] : '';
-							if (defined( 'TF_PRO' ) && $tour_video){ 
-							?>	
-							<div class="tf-hero-btm-icon tf-tour-video" data-fancybox="tour-video" href="<?php echo $tour_video; ?>">	
-								<i class="fab fa-youtube"></i> <span><?php _e('Tour Video', 'tourfic'); ?></span>
-							</div>
-							<?php } 
-							// Gallery
-							if ( !empty( $gallery_ids ) ) {
-								foreach ($gallery_ids as $key => $gallery_item_id) {
-									if ($key === array_key_first($gallery_ids)) {
-										$image_url = wp_get_attachment_url( $gallery_item_id, 'full' ); ?>
-										<div data-fancybox="tour-gallery" class="tf-hero-btm-icon tf-tour-gallery" data-src="<?php echo $image_url; ?>">
-											<i class="far fa-image"></i> <span><?php _e('Tour Gallery', 'tourfic'); ?></span>
-										</div>
-									<?php } else {
-										$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
-										echo '<a data-fancybox="tour-gallery" href="' .$image_url. '" style="display:none;"></a>';
-									}
-								}
-							}
-							
-							?>												
-						</div>
-					</div>
-					<div class="tf-hero-bottom-content">
-						<div class="tf-hero-bottom-left">
-							<h4><?php the_title(); ?></h4>
-							<div class="tf-hero-bottom-left-location">
-								<i class="fas fa-map-marker-alt"></i>
-								<?php echo esc_html( $location ); ?>
-							</div>
-						</div>
-						<div class="tf-hero-bottom-right">
-							<div class="tf-single-tour-pricing">
-								<?php
-								if($pricing_rule == 'group') {
-								?>
-									<div class="tf-price group-price">
-										<span class="sale-price">
-											<?php echo wc_price($sale_price ?? $price, array('decimals'=>0)); ?>
-										</span>
-										<?php echo ($discount_type != 'none') ? '<del>'.wc_price($price, array('decimals'=>0)).'</del>' : ''; ?>
-									</div>
-								<?php
-								} else if($pricing_rule == 'person') {
-								?>
-									<?php if(!$disable_adult && !empty($adult_price)) { ?>
-										<div class="tf-price adult-price">
-											<span class="sale-price">
-												<?php echo wc_price($sale_adult_price ?? $adult_price, array('decimals'=>0)); ?>
-											</span>
-											<?php echo ($discount_type != 'none') ? '<del>'.wc_price($adult_price, array('decimals'=>0)).'</del>' : ''; ?>
-										</div>
-									<?php } if(!$disable_child && !empty($child_price)) { ?>
-										<div class="tf-price child-price tf-d-n">
-											<span class="sale-price">
-												<?php echo wc_price($sale_child_price ?? $child_price, array('decimals'=>0)); ?>
-											</span>
-											<?php echo ($discount_type != 'none') ? '<del>'.wc_price($child_price, array('decimals'=>0)).'</del>' : ''; ?>
-										</div>
-									<?php } if(!$disable_infant && !empty($infant_price)) { ?>
-										<div class="tf-price infant-price tf-d-n">
-											<span class="sale-price">
-												<?php echo wc_price($sale_infant_price ?? $infant_price, array('decimals'=>0)); ?>
-											</span>
-											<?php echo ($discount_type != 'none') ? '<del>'.wc_price($infant_price, array('decimals'=>0)).'</del>' : ''; ?>
-										</div>
-									<?php } ?>
-								<?php
-								}
-								?>
-								<ul class="tf-price-tab">
-									<?php
-									if($pricing_rule == 'group') {
+	<div class="tf-hero">
+		<img src="<?php echo $hero_bg_url; ?>" alt="" class="tf-hero-bg">
 
-										echo '<li id="group" class="active">' .__("Group", "tourfic"). '</li>';
-
-									} else if($pricing_rule == 'person') {
-
-										if(!$disable_adult && !empty($adult_price)) {
-											echo '<li id="adult" class="active">' .__("Adult", "tourfic"). '</li>';
-										} if(!$disable_child && !empty($child_price)) {
-											echo '<li id="child">' .__("Child", "tourfic"). '</li>';
-										} if(!$disable_infant && !empty($infant_price)) {
-											echo '<li id="infant">' .__("Infant", "tourfic"). '</li>';
-										}
-
-									}
-									?>
-								</ul>
-							</div>							
-						</div>
-					</div>
+		<?php // Rating
+		if($comments && !$disable_review_sec == '1') { ?>
+			<a href="#tf-review">
+				<div class="tf-hero-rating">
+					<i class="fas fa-star"></i> <span><?php echo tf_total_avg_rating($comments); ?></span> (<?php tf_based_on_text(count($comments)); ?>)
 				</div>
+			</a>
+		<?php }
+
+		// Wishlist
+		if(tfopt('wl-bt-for') && in_array('2', tfopt('wl-bt-for'))) {
+
+			if ( is_user_logged_in() ) {
+
+				if(tfopt('wl-for') && in_array('li', tfopt('wl-for'))) {
+
+				?>
+					<div class="tf-hero-wish">
+						<i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if(tfopt('wl-page')) { echo 'data-page-title="' .get_the_title(tfopt('wl-page')). '" data-page-url="' .get_permalink(tfopt('wl-page')). '"'; } ?>></i>
+					</div>
+				<?php
+				}
+
+			} else {
+				
+				if(tfopt('wl-for') && in_array('lo', tfopt('wl-for'))) {
+				?>
+					<div class="tf-hero-wish">
+						<i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist'  ?> fa-heart " data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if(tfopt('wl-page')) { echo 'data-page-title="' .get_the_title(tfopt('wl-page')). '" data-page-url="' .get_permalink(tfopt('wl-page')). '"'; } ?>></i>
+					</div>
+				<?php
+				}
+
+			}
+
+		}
+		
+		// Booking Form
+		echo tf_single_tour_booking_form( $post_id );
+
+		// Hero Media
+		echo '<div class="hero-media">';
+
+			if(defined('TF_PRO') && $tour_video) { 
+			?>	
+			<div class="tf-hero-video" data-fancybox="tour-video" href="<?php echo $tour_video; ?>" title="<?php _e('Tour Video', 'tourfic'); ?>">	
+				<i class="fab fa-youtube"></i>
+			</div>
+			<?php }
+
+			// Gallery
+			if ( !empty( $gallery_ids ) ) {
+
+				foreach ($gallery_ids as $key => $gallery_item_id) {
+
+					if ($key === array_key_first($gallery_ids)) {
+
+						$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+						?>
+						<div data-fancybox="tour-gallery" class="tf-hero-gallery" data-src="<?php echo $image_url; ?>" title="<?php _e('Tour Gallery', 'tourfic'); ?>">
+							<i class="far fa-image"></i>
+						</div>
+					<?php
+					} else {
+
+						$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+						echo '<a data-fancybox="tour-gallery" href="' .$image_url. '" style="display:none;"></a>';
+
+					}
+
+				}
+
+			}
+
+		echo '</div>';
+		?>
+
+	</div>
+	<!-- Hero section End -->
+
+	<!-- Intro section Start -->
+	<div class="tf-tour-intro">
+		<div class="tf-tour-title">
+			<h4><?php the_title(); ?></h4>
+			<div class="tf-tour-address">
+				<i class="fas fa-map-marker-alt"></i>
+				<?php echo esc_html( $location ); ?>
 			</div>
 		</div>
-	</div>
-	<!-- Hero section end -->
+		<div class="tf-single-tour-pricing">
+			<?php
+			if($pricing_rule == 'group') {
+			?>
+				<div class="tf-price group-price">
+					<span class="sale-price">
+						<?php echo wc_price($sale_price ?? $price, array('decimals'=>0)); ?>
+					</span>
+					<?php echo ($discount_type != 'none') ? '<del>'.wc_price($price, array('decimals'=>0)).'</del>' : ''; ?>
+				</div>
+			<?php
+			} else if($pricing_rule == 'person') {
+			?>
+				<?php if(!$disable_adult && !empty($adult_price)) { ?>
+					<div class="tf-price adult-price">
+						<span class="sale-price">
+							<?php echo wc_price($sale_adult_price ?? $adult_price, array('decimals'=>0)); ?>
+						</span>
+						<?php echo ($discount_type != 'none') ? '<del>'.wc_price($adult_price, array('decimals'=>0)).'</del>' : ''; ?>
+					</div>
+				<?php } if(!$disable_child && !empty($child_price)) { ?>
+					<div class="tf-price child-price tf-d-n">
+						<span class="sale-price">
+							<?php echo wc_price($sale_child_price ?? $child_price, array('decimals'=>0)); ?>
+						</span>
+						<?php echo ($discount_type != 'none') ? '<del>'.wc_price($child_price, array('decimals'=>0)).'</del>' : ''; ?>
+					</div>
+				<?php } if(!$disable_infant && !empty($infant_price)) { ?>
+					<div class="tf-price infant-price tf-d-n">
+						<span class="sale-price">
+							<?php echo wc_price($sale_infant_price ?? $infant_price, array('decimals'=>0)); ?>
+						</span>
+						<?php echo ($discount_type != 'none') ? '<del>'.wc_price($infant_price, array('decimals'=>0)).'</del>' : ''; ?>
+					</div>
+				<?php } ?>
+			<?php
+			}
+			?>
+			<ul class="tf-price-tab">
+				<?php
+				if($pricing_rule == 'group') {
 
-	
+					echo '<li id="group" class="active">' .__("Group", "tourfic"). '</li>';
+
+				} else if($pricing_rule == 'person') {
+
+					if(!$disable_adult && !empty($adult_price)) {
+						echo '<li id="adult" class="active">' .__("Adult", "tourfic"). '</li>';
+					} if(!$disable_child && !empty($child_price)) {
+						echo '<li id="child">' .__("Child", "tourfic"). '</li>';
+					} if(!$disable_infant && !empty($infant_price)) {
+						echo '<li id="infant">' .__("Infant", "tourfic"). '</li>';
+					}
+
+				}
+				?>
+			</ul>
+		</div>
+	</div>
+	<!-- Intro section End -->
+
 	<?php if($tour_duration || $tour_type_info || $group_size || $language) { ?>
 	<!-- Square block section Start -->
 	<div class="tf-square-block-wrapper tf-section-wrapper tf-section-white">

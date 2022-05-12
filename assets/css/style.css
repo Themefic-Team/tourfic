@@ -1,73 +1,3 @@
-/*----------------------------------------- 
-            Common CSS Start
- -----------------------------------------*/
-.tf-page-wrapper {
-    width: 100%;
-}
-
-
-.tf-page-wrapper h1,
-.tf-page-wrapper h2,
-.tf-page-wrapper h3,
-.tf-page-wrapper h4,
-.tf-page-wrapper h5,
-.tf-page-wrapper h6 {
-    margin-top: 0;
-    margin-bottom: .5rem;
-    line-height: 1.2;
-}
-
-.tf-page-wrapper h1 {
-    font-size: calc(1.375rem + 1.5vw)
-}
-
-.tf-page-wrapper h2 {
-    font-size: calc(1.325rem + .9vw)
-}
-
-.tf-page-wrapper h3 {
-    font-size: calc(1.3rem + .6vw)
-}
-
-.tf-page-wrapper h4 {
-    font-size: calc(1.275rem + .3vw)
-}
-
-.tf-page-wrapper h5 {
-    font-size: 1.25rem
-}
-
-.tf-page-wrapper h6 {
-    font-size: 1rem
-}
-
-.tf-page-wrapper p {
-    margin: 0;
-    padding: 0;
-}
-
-.tf-page-wrapper a {
-    /* display: inline-block;
-    text-decoration: none;
-    transition: 0.3s;
-    color: #333;
-    font-weight: normal;
-    padding-right: 10px;
-    outline: none; */
-}
-
-.tf-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: auto;
-}
-
-.tf-row {
-    padding: 0 15px;
-}
-
-/*--------------- Common CSS End ---------------*/
-
 /*------------- Header CSS Start ----------------------*/
 .tf-header-wrapper {
     background: #E2EBF3;
@@ -172,15 +102,6 @@
 /*-----------------------------------
             Hero CSS Start 
 ------------------------------------*/
-.tf-hero-top-content {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    padding: 20px;
-    background-position: center center;
-    background-size: cover;
-}
 
 .tf-hero-top-content-inner {
     width: 100%;

@@ -406,9 +406,8 @@ function tf_single_tour_booking_form( $post_id ) {
             <form class="tf_tours_booking">
                 <div class="tf_selectperson-wrap">
                     <div class="tf_input-inner">
-                        <span class="tf_person-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M16.5 6a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0zM18 6A6 6 0 1 0 6 6a6 6 0 0 0 12 0zM3 23.25a9 9 0 1 1 18 0 .75.75 0 0 0 1.5 0c0-5.799-4.701-10.5-10.5-10.5S1.5 17.451 1.5 23.25a.75.75 0 0 0 1.5 0z"></path></svg>
-                        </span>
+                        <i class="fas fa-user"></i>
+                        
                         <?php if ($custom_avail == true || (!$disable_adult_price && $pricing_rule == 'person' && $adult_price != false) || (!$disable_adult_price && $pricing_rule == 'group' && $group_price != false)) { ?>
                             <div class="adults-text"><?php echo (!empty($adults) ? $adults : '0') . ' ' . __("Adults", "tourfic"); ?></div>
                         <?php } ?>
@@ -421,204 +420,194 @@ function tf_single_tour_booking_form( $post_id ) {
                             <div class="infant-text"><?php echo (!empty($infant) ? $infant : '0') . ' ' . __("Infant", "tourfic"); ?></div>
                         <?php } ?>
                     </div>
-                    <div class="tf_acrselection-wrap" style="display: none;">
-                        <div class="tf_acrselection-inner">
-                            <?php if ($custom_avail == true || (!$disable_adult_price && $pricing_rule == 'person' && $adult_price != false) || (!$disable_adult_price && $pricing_rule == 'group' && $group_price != false)) { ?>
-                            <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e('Adults', 'tourfic'); ?></div>
-                                <div class="acr-select">
-                                    <div class="acr-dec">-</div>
-                                        <input type="number" name="adults" id="adults" min="0" value="<?php echo !empty($adults) ? $adults : '0'; ?>">
-                                    <div class="acr-inc">+</div>
-                                </div>
+                    <div class="tf_acrselection-wrap" style="display: none;">                     
+                        <?php if ($custom_avail == true || (!$disable_adult_price && $pricing_rule == 'person' && $adult_price != false) || (!$disable_adult_price && $pricing_rule == 'group' && $group_price != false)) { ?>
+                        <div class="tf_acrselection">
+                            <div class="acr-label"><?php _e('Adults', 'tourfic'); ?></div>
+                            <div class="acr-select">
+                                <div class="acr-dec">-</div>
+                                    <input type="number" name="adults" id="adults" min="0" value="<?php echo !empty($adults) ? $adults : '0'; ?>">
+                                <div class="acr-inc">+</div>
                             </div>
-                            <?php } ?>
-                            <?php if ($custom_avail == true || (!$disable_child_price && $pricing_rule == 'person' && $child_price != false) || (!$disable_child_price && $pricing_rule == 'group' && $group_price != false)) { ?>
-                            <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e('Children', 'tourfic'); ?></div>
-                                <div class="acr-select">
-                                    <div class="acr-dec">-</div>
-                                        <input type="number" name="childrens" id="children" min="0" value="<?php echo !empty($child) ? $child : '0'; ?>">
-                                    <div class="acr-inc">+</div>
-                                </div>
-                            </div>
-                            <?php } ?>
-                            <?php if ($custom_avail == true || (!$disable_infant_price && $pricing_rule == 'person' && $infant_price != false) || (!$disable_infant_price && $pricing_rule == 'group' && $group_price != false)) { ?>
-                            <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e('Infant', 'tourfic'); ?></div>
-                                <div class="acr-select">
-                                    <div class="acr-dec">-</div>
-                                        <input type="number" name="infants" id="infant" min="0" value="<?php echo !empty($infant) ? $infant : '0'; ?>">
-                                    <div class="acr-inc">+</div>
-                                </div>
-                            </div>
-                            <?php } ?>
                         </div>
+                        <?php } ?>
+                        <?php if ($custom_avail == true || (!$disable_child_price && $pricing_rule == 'person' && $child_price != false) || (!$disable_child_price && $pricing_rule == 'group' && $group_price != false)) { ?>
+                        <div class="tf_acrselection">
+                            <div class="acr-label"><?php _e('Children', 'tourfic'); ?></div>
+                            <div class="acr-select">
+                                <div class="acr-dec">-</div>
+                                    <input type="number" name="childrens" id="children" min="0" value="<?php echo !empty($child) ? $child : '0'; ?>">
+                                <div class="acr-inc">+</div>
+                            </div>
+                        </div>
+                        <?php } ?>
+                        <?php if ($custom_avail == true || (!$disable_infant_price && $pricing_rule == 'person' && $infant_price != false) || (!$disable_infant_price && $pricing_rule == 'group' && $group_price != false)) { ?>
+                        <div class="tf_acrselection">
+                            <div class="acr-label"><?php _e('Infant', 'tourfic'); ?></div>
+                            <div class="acr-select">
+                                <div class="acr-dec">-</div>
+                                    <input type="number" name="infants" id="infant" min="0" value="<?php echo !empty($infant) ? $infant : '0'; ?>">
+                                <div class="acr-inc">+</div>
+                            </div>
+                        </div>
+                        <?php } ?>                      
                     </div>
                 </div>
 
-                <div class='tf_form-row'>
-	    	        <label class='tf_label-row'>
-	    		        <div class='tf_form-inner'>
-                            <span class='icon'>
-                                <?php tourfic_get_svg('calendar_today'); ?>
-                            </span>
-                            <input type='text' name='check-in-out-date' id='check-in-out-date' class='tours-check-in-out' onkeypress="return false;" placeholder='Select Date' value='' required />
-				        </div>
-			        </label>
-		        </div>
-
-                <div class='tf_form-row' id="check-in-time-div" style="display: none;">
-                    <label class='tf_label-row'>
-                        <div class='tf_form-inner'>
-                            <span class='icon'>
-                                <?php tourfic_get_svg('calendar_today'); ?>
-                            </span>
-                            <select name="check-in-time" id="check-in-time" style="min-width: 100px;">
-                            </select>
-                        </div>
-                    </label>
+                <div class="tf-tour-book-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <input type='text' name='check-in-out-date' id='check-in-out-date' class='tours-check-in-out' onkeypress="return false;" placeholder='<?php _e('Select Date', 'tourfic'); ?>' value='' required />
                 </div>
 
-                <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
-                <script>
-                    (function ($) {
-                        $(document).ready(function () {
-
-                            const allowed_times = JSON.parse('<?php echo wp_json_encode($allowed_times ?? []) ?>');
-                            const custom_avail = '<?php echo $custom_avail; ?>';
-                            if (custom_avail == false && allowed_times.length > 0) {
-                                populateTimeSelect(allowed_times)
-                            }
-
-                            function populateTimeSelect(times) {
-                                let timeSelect = $('#check-in-time');
-                                let timeSelectDiv = $("#check-in-time-div");
-                                timeSelect.empty();
-                                if (times.length > 0) {
-                                    timeSelect.append(`<option value="" selected hidden>Select time</option>`);
-                                    $.each(times, function(i, v) {
-                                        timeSelect.append(`<option value="${v}">${v}</option>`);
-                                    });
-                                    timeSelectDiv.show();
-                                } else timeSelectDiv.hide();
-                            }
-
-                            $("#check-in-out-date").flatpickr({  
-                                enableTime: false,
-                                dateFormat: "Y/m/d",                               
-                                <?php
-                                // Flatpickt locale for translation
-                                tf_flatpickr_locale();
-
-                            if ($tour_type && $tour_type == 'fixed') { ?>
-
-                                mode: "range",
-                                defaultDate: ["<?php echo $departure_date; ?>", "<?php echo $return_date; ?>"],
-                                enable: [
-                                    {
-                                        from: "<?php echo $departure_date; ?>",
-                                        to: "<?php echo $return_date; ?>"
-                                    }
-                                ],
-
-                            <?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
-
-                                minDate: "today",
-
-                                <?php if ($custom_avail && $custom_avail == true){ ?>
-
-                                enable: [
-
-                                <?php foreach ($cont_custom_date as $item) {
-                                    echo '{
-                                            from: "' .$item["date"]["from"]. '",
-                                            to: "' .$item["date"]["to"]. '"
-                                        },';
-                                } ?>
-
-                                ],
-
-                                <?php }
-                                if ($custom_avail == false) {
-                                    if ($disabled_day || $disable_range || $disable_specific) {
-                                ?>
-
-                                "disable": [
-                                    <?php if ($disabled_day) { ?>
-                                    function(date) {
-                                        return (date.getDay() === 8 <?php foreach($disabled_day as $dis_day) { echo '|| date.getDay() === ' .$dis_day. ' '; } ?>);
-                                    },
-                                    <?php }
-                                    if ($disable_range) {
-                                        foreach ($disable_range as $d_item) {
-                                            echo '{
-                                                from: "' .$d_item["date"]["from"]. '",
-                                                to: "' .$d_item["date"]["to"]. '"
-                                            },';
-                                        }
-                                    }
-
-                                    if ($disable_specific) {
-                                        echo '"' .$disable_specific. '"';
-                                    }
-                                    ?>
-                                ],
-                            <?php 
-                                }
-                                }
-                                
-                            } 
-                            ?>
-
-                            onChange: function(selectedDates, dateStr, instance) {
-                                if (custom_avail == true) {
-
-                                    let times = allowed_times.filter((v) => {
-                                        let date_str = Date.parse(dateStr);
-                                        let start_date = Date.parse(v.date.from);
-                                        let end_date = Date.parse(v.date.to);
-                                        return start_date <= date_str && end_date >= date_str;
-                                    });
-                                    times = times.length > 0 && times[0].times ? times[0].times : null;
-                                    populateTimeSelect(times);
-                                }
-
-                            },
-
-                            });
-
-                        });
-                    })(jQuery);
-                </script>
+                <div class="tf-tour-book-time" id="check-in-time-div" style="display: none;">
+                    <i class="fas fa-clock"></i>
+                    <select name="check-in-time" id="check-in-time" style="min-width: 100px;"></select>
+                </div>
 
                 <?php if (defined( 'TF_PRO' ) && $tour_extras) { ?>
-                <div class="tour-extra">
-                    <a data-fancybox data-src="#tour-extra" href="javascript:;"><i class="far fa-plus-square"></i></a>
-                    <div style="display: none;" id="tour-extra">
-                        <div class="tour-extra-container">
-                        <?php foreach( $tour_extras as $tour_extra ){ ?>
-                            <div class="tour-extra-single">
-                                <div class="tour-extra-right">
-                                    <input type="checkbox" value="<?php _e( $tour_extra['price'] ); ?>" data-title="<?php _e( $tour_extra['title'] ); ?>">
-                                </div>
-                                <div class="tour-extra-left">
-                                    <h4><?php _e( $tour_extra['title'] ); ?></h4>
-                                    <?php if ($tour_extra['desc']) { ?><p><?php _e( $tour_extra['desc'] ); ?></p><?php } ?>
-                                    <span><?php echo wc_price( $tour_extra['price'] ); ?></span>
-                                </div>												
-                            </div>					
-                        <?php } ?>
+                    <a data-fancybox data-src="#tour-extra" href="javascript:;">
+                        <div class="tf-tour-extra">                   
+                                <i class="far fa-plus-square"></i>
+                                <span>Addons</span>                                      
                         </div>
+                    </a>
+                <div style="display: none;" id="tour-extra">
+                    <div class="tour-extra-container">
+                    <?php foreach( $tour_extras as $tour_extra ){ ?>
+                        <div class="tour-extra-single">
+                            <div class="tour-extra-right">
+                                <input type="checkbox" value="<?php _e( $tour_extra['price'] ); ?>" data-title="<?php _e( $tour_extra['title'] ); ?>">
+                            </div>
+                            <div class="tour-extra-left">
+                                <h4><?php _e( $tour_extra['title'] ); ?></h4>
+                                <?php if ($tour_extra['desc']) { ?><p><?php _e( $tour_extra['desc'] ); ?></p><?php } ?>
+                                <span><?php echo wc_price( $tour_extra['price'] ); ?></span>
+                            </div>												
+                        </div>					
+                    <?php } ?>
                     </div>
                 </div>	
-                <?php } ?>	
-                <div class="tf-tours-booking-btn">
+                <?php } ?>
+                
+                <div class="flex-break"></div> <!-- break -->
+
+                <div class="tf-tour-book-bt">
                     <input type="hidden" placeholder="location" name="location" value="">
+                    <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
                     <button class="tf_button" type="submit"><?php _e('Book Now', 'tourfic'); ?></button>
                 </div>
             </form>
 	    </div>
+    <script>
+        (function ($) {
+            $(document).ready(function () {
+
+                const allowed_times = JSON.parse('<?php echo wp_json_encode($allowed_times ?? []) ?>');
+                const custom_avail = '<?php echo $custom_avail; ?>';
+                if (custom_avail == false && allowed_times.length > 0) {
+                    populateTimeSelect(allowed_times)
+                }
+
+                function populateTimeSelect(times) {
+                    let timeSelect = $('#check-in-time');
+                    let timeSelectDiv = $("#check-in-time-div");
+                    timeSelect.empty();
+                    if (times.length > 0) {
+                        timeSelect.append(`<option value="" selected hidden>Select time</option>`);
+                        $.each(times, function(i, v) {
+                            timeSelect.append(`<option value="${v}">${v}</option>`);
+                        });
+                        timeSelectDiv.show();
+                    } else timeSelectDiv.hide();
+                }
+
+                $("#check-in-out-date").flatpickr({  
+                    enableTime: false,
+                    dateFormat: "Y/m/d",                               
+                    <?php
+                    // Flatpickt locale for translation
+                    tf_flatpickr_locale();
+
+                if ($tour_type && $tour_type == 'fixed') { ?>
+
+                    mode: "range",
+                    defaultDate: ["<?php echo $departure_date; ?>", "<?php echo $return_date; ?>"],
+                    enable: [
+                        {
+                            from: "<?php echo $departure_date; ?>",
+                            to: "<?php echo $return_date; ?>"
+                        }
+                    ],
+
+                <?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
+
+                    minDate: "today",
+
+                    <?php if ($custom_avail && $custom_avail == true){ ?>
+
+                    enable: [
+
+                    <?php foreach ($cont_custom_date as $item) {
+                        echo '{
+                                from: "' .$item["date"]["from"]. '",
+                                to: "' .$item["date"]["to"]. '"
+                            },';
+                    } ?>
+
+                    ],
+
+                    <?php }
+                    if ($custom_avail == false) {
+                        if ($disabled_day || $disable_range || $disable_specific) {
+                    ?>
+
+                    "disable": [
+                        <?php if ($disabled_day) { ?>
+                        function(date) {
+                            return (date.getDay() === 8 <?php foreach($disabled_day as $dis_day) { echo '|| date.getDay() === ' .$dis_day. ' '; } ?>);
+                        },
+                        <?php }
+                        if ($disable_range) {
+                            foreach ($disable_range as $d_item) {
+                                echo '{
+                                    from: "' .$d_item["date"]["from"]. '",
+                                    to: "' .$d_item["date"]["to"]. '"
+                                },';
+                            }
+                        }
+
+                        if ($disable_specific) {
+                            echo '"' .$disable_specific. '"';
+                        }
+                        ?>
+                    ],
+                <?php 
+                    }
+                    }
+                    
+                } 
+                ?>
+
+                onChange: function(selectedDates, dateStr, instance) {
+                    if (custom_avail == true) {
+
+                        let times = allowed_times.filter((v) => {
+                            let date_str = Date.parse(dateStr);
+                            let start_date = Date.parse(v.date.from);
+                            let end_date = Date.parse(v.date.to);
+                            return start_date <= date_str && end_date >= date_str;
+                        });
+                        times = times.length > 0 && times[0].times ? times[0].times : null;
+                        populateTimeSelect(times);
+                    }
+
+                },
+
+                });
+
+            });
+        })(jQuery);
+    </script>
 	<?php
 return ob_get_clean();
 }
