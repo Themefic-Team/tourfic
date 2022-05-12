@@ -659,13 +659,20 @@ function tf_search_result_ajax_sidebar(){
     $filters = ( $_POST['filters'] ) ? explode(',', sanitize_text_field( $_POST['filters'] )) : null;
     $features = ( $_POST['features'] ) ? explode(',', sanitize_text_field( $_POST['features'] )) : null;
     $posttype = $_POST['type']  ? sanitize_text_field( $_POST['type'] ): 'tf_hotel';
-    // @KK separate texonomy input for filter query
+// @KK separate taxonomy input for filter query
+
     $place_taxonomy = $posttype == 'tf_tours' ? 'tour_destination' : 'hotel_location';
     $filter_taxonomy = $posttype == 'tf_tours' ? 'null' : 'hotel_feature';
     // @KK take dates for filter query
     $checkin = isset($_POST['checkin']) ? trim($_POST['checkin']) : null;
     $checkout = isset($_POST['checkout']) ? trim($_POST['checkout']) : null;
-    // Propertise args
+$period = new DatePeriod(
+    new DateTime( $checkin ),
+    new DateInterval( 'P1D' ),
+    new DateTime( $checkout . '23:59' )
+);
+// Properties args
+
     $args = array(
         'post_type' => $posttype,
         'post_status' => 'publish',
@@ -768,6 +775,7 @@ function tf_search_result_ajax_sidebar(){
     $loop = new WP_Query( $args ); ?>
     <?php
     if ( $loop->have_posts() ) { 
+        $not_found = [];
         while ( $loop->have_posts() ) {
             
             $loop->the_post(); 
@@ -775,9 +783,13 @@ function tf_search_result_ajax_sidebar(){
             if( $posttype == 'tf_hotel' ){
                 tf_hotel_archive_single_item($adults, $child, $room, $check_in_out);               
             }else{
-                tf_tour_archive_single_item($adults, $child, $check_in_out);
+                $data = [$adults, $child, $check_in_out];
+                tf_filter_tour_by_date( $period, $not_found, $data );
             }  
         } 
+        if (!in_array(0, $not_found)) {
+            echo '<div class="tf-nothing-found">'. __('Nothing Found! Select another dates', 'tourfic').'</div>';
+        }
     } else {
         echo '<div class="tf-nothing-found">Nothing Found!</div>';
     }
