@@ -395,7 +395,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
     } 
 
     // Get post type
-    $post_type = isset( $_GET['type'] ) ? $_GET['type'] : '';
+    $post_type = $_GET['type'] ?? '';
 
     if(!empty($post_type)){
 
@@ -403,15 +403,15 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
         $place_placeholder = $post_type == 'tf_hotel' ? __('Enter Location', 'tourfic') : __('Enter Destination', 'tourfic');
 
         $place_key = 'place';
-        $place_value = isset($_GET[$place_key]) ? $_GET[$place_key] : '';
+        $place_value = $_GET[ $place_key ] ?? '';
 
         $taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : 'tour_destination';
         $place_name = !empty($place_value) ? get_term_by( 'slug', $place_value , $taxonomy)->name : '';
 
-        $adult = isset($_GET['adults']) ? $_GET['adults'] : 0;
-        $children = isset($_GET['children']) ? $_GET['children'] : 0;
-        $room = isset($_GET['room']) ? $_GET['room'] : 0;
-        $date = isset($_GET['check-in-out-date']) ? $_GET['check-in-out-date'] : '';
+        $adult = $_GET['adults'] ?? 0;
+        $children = $_GET['children'] ?? 0;
+        $room = $_GET['room'] ?? 0;
+        $date = $_GET['check-in-out-date'] ?? '';
 
     }
 
@@ -491,7 +491,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
     
         <div class="tf_form-row">
             <?php
-                    $ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
+                    $ptype = $_GET['type'] ?? get_post_type();
                 ?>
             <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type" />
             <button class="tf_button tf-submit"
@@ -781,7 +781,9 @@ $period = new DatePeriod(
             $loop->the_post(); 
 
             if( $posttype == 'tf_hotel' ){
-                tf_hotel_archive_single_item($adults, $child, $room, $check_in_out);               
+                $data = [$adults, $child, $room, $check_in_out];
+	            tf_filter_hotel_by_date( $period,$not_found, $data);
+
             }else{
                 $data = [$adults, $child, $check_in_out];
                 tf_filter_tour_by_date( $period, $not_found, $data );
@@ -797,6 +799,7 @@ $period = new DatePeriod(
 
     die();
 }
+
 
 
 /**

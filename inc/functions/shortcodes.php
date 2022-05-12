@@ -504,28 +504,26 @@ function tf_search_result_shortcode( $atts, $content = null ){
         <div class="archive_ajax_result">
             <?php
                 if ( $loop->have_posts() ) {
-                        $not_found = [];
+                    $not_found = [];
                     while ( $loop->have_posts() ) {
                         $loop->the_post();
                         if ( $post_type == 'tf_hotel' ) {
-                            tf_hotel_archive_single_item();
-                        } 
-                        if ( $post_type == 'tf_tours' ) {
-	                        tf_filter_tour_by_date( $period, $not_found, [] );
-                        }                   
-                        
-                        
-                        
+                            tf_filter_hotel_by_date( $period, $not_found );
+
+                        } else {
+                            tf_filter_tour_by_date( $period, $not_found );
+
+                        }
+
                     }
-                    
-                    if (!in_array(0, $not_found)) {
-                        echo '<div class="tf-nothing-found">'. __('Nothing Found! Select another dates', 'tourfic').'</div>';
+
+                    if ( !in_array( 0, $not_found ) ) {
+                        echo '<div class="tf-nothing-found">' . __( 'Nothing Found! Select another dates', 'tourfic' ) . '</div>';
                     }
                 } else {
-                    echo '<div class="tf-nothing-found">' . __('Nothing Found!', 'tourfic') . '</div>';
+                    echo '<div class="tf-nothing-found">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
                 }
-                    
-                ?>
+            ?>
         </div>
         <div class="tf_posts_navigation">
             <?php tourfic_posts_navigation($loop); ?>

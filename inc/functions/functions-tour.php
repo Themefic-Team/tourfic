@@ -721,52 +721,53 @@ if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-tour.php' ) ) {
 /**
  * Filter tours on search result page by checkin checkout dates set by backend
  *
- * @param DatePeriod $period collection of dates by user input;
- * @param array $not_found collection of tour exists
- * @param array $data
  *
  * @author devkabir
+ *
+ * @param DatePeriod $period    collection of dates by user input;
+ * @param array      $not_found collection of tour exists
+ * @param array      $data      user input for sidebar form
  */
-function tf_filter_tour_by_date( DatePeriod $period, array &$not_found, array $data ): void {
-	$meta     = get_post_meta( get_the_ID(), 'tf_tours_option', true );
+function tf_filter_tour_by_date( DatePeriod $period, array &$not_found, array $data = [] ): void
+{
+    $meta = get_post_meta( get_the_ID(), 'tf_tours_option', true );
 
-	$has_tour = false;
-	if ( $meta['type'] === 'fixed' ) {
-		$fixed_availability = ! empty( $meta['fixed_availability'] ) ? $meta['fixed_availability']['date'] : [];
-		$show_fixed_tour    = [];
-		foreach ( $period as $date ) {
-			$show_fixed_tour[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $fixed_availability['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $fixed_availability['to'] ) );
-		}
-		$has_tour = ! in_array( 0, $show_fixed_tour );
-	}
-	if ( $meta['type'] === 'continuous' ) {
-		$custom_availability = ! empty( $meta['custom_avail'] );
-		if ( $custom_availability ) {
-			$custom_dates = wp_list_pluck( $meta['cont_custom_date'], 'date' );
-			foreach ( $custom_dates as $custom_date ) {
-				$show_continuous_tour = [];
-				foreach ( $period as $date ) {
-					$show_continuous_tour[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $custom_date['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $custom_date['to'] ) );
-				}
-				if ( ! in_array( 0, $show_continuous_tour ) ) {
-					$has_tour = true;
-					break;
-				}
-			}
-		}
-	}
-	if ( $has_tour ) {
-		if ( ! empty( $data ) ) {
-			[$adults, $child, $check_in_out] = $data;
-		    tf_tour_archive_single_item($adults, $child, $check_in_out);
-		}else{
-			tf_tour_archive_single_item();
+    $has_tour = false;
+    if ( $meta['type'] === 'fixed' ) {
+        $fixed_availability = !empty( $meta['fixed_availability'] ) ? $meta['fixed_availability']['date'] : [];
+        $show_fixed_tour    = [];
+        foreach ( $period as $date ) {
+            $show_fixed_tour[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $fixed_availability['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $fixed_availability['to'] ) );
         }
-		$not_found[] = 0;
-	} else {
-		$not_found[] = 1;
-	}
+        $has_tour = !in_array( 0, $show_fixed_tour );
+    }
+    if ( $meta['type'] === 'continuous' ) {
+        $custom_availability = !empty( $meta['custom_avail'] );
+        if ( $custom_availability ) {
+            $custom_dates = wp_list_pluck( $meta['cont_custom_date'], 'date' );
+            foreach ( $custom_dates as $custom_date ) {
+                $show_continuous_tour = [];
+                foreach ( $period as $date ) {
+                    $show_continuous_tour[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $custom_date['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $custom_date['to'] ) );
+                }
+                if ( !in_array( 0, $show_continuous_tour ) ) {
+                    $has_tour = true;
+                    break;
+                }
+            }
+        }
+    }
+    if ( $has_tour ) {
+        if ( !empty( $data ) ) {
+            [$adults, $child, $check_in_out] = $data;
+            tf_tour_archive_single_item( $adults, $child, $check_in_out );
+        } else {
+            tf_tour_archive_single_item();
+        }
+        $not_found[] = 0;
+    } else {
+        $not_found[] = 1;
+    }
 }
-
 
 ?>
