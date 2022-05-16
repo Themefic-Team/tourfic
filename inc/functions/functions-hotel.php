@@ -995,32 +995,43 @@ add_action('wp_loaded', 'tf_update_meta_all_hotels_tours');
  */
 function tf_filter_hotel_by_date( DatePeriod $period, array &$not_found, array $data = [] ): void
 {
-    $meta               = get_post_meta(get_the_ID(), 'tf_hotel', true);
+    $meta = get_post_meta(get_the_ID(), 'tf_hotel', true);
     $meta = array_filter($meta['room'], function ($value) {
         return !empty($value) && $value['enable'] != '0';
     });
+
     if (empty($meta)) {
         return;
     }
-    $dates = array_column($meta, 'repeat_by_date');
 
+    $dates = array_column($meta, 'repeat_by_date');
     if (empty($dates)) {
         return;
     }
+
     $availability_dates = array_column($dates[0], 'availability');
 
-    $has_hotel          = false;
+    $has_hotel = false;
+
     foreach ( $availability_dates as $dates ) {
+
         $show_hotel = [];
+
         foreach ( $period as $date ) {
+
             $show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
+
         }
+
         if ( !in_array( 0, $show_hotel ) ) {
             $has_hotel = true;
             break;
         }
+
     }
+
     if ( $has_hotel ) {
+
         if ( !empty( $data ) ) {
             [$adults, $child, $room, $check_in_out] = $data;
             tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
@@ -1029,8 +1040,11 @@ function tf_filter_hotel_by_date( DatePeriod $period, array &$not_found, array $
         }
 
         $not_found[] = 0;
+
     } else {
+
         $not_found[] = 1;
+        
     }
 }
 

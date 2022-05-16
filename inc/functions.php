@@ -408,12 +408,12 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
         $taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : 'tour_destination';
         $place_name = !empty($place_value) ? get_term_by( 'slug', $place_value , $taxonomy)->name : '';
 
-        $adult = $_GET['adults'] ?? 0;
-        $children = $_GET['children'] ?? 0;
         $room = $_GET['room'] ?? 0;
-        $date = $_GET['check-in-out-date'] ?? '';
-
     }
+
+    $adult = $_GET['adults'] ?? 0;
+    $children = $_GET['children'] ?? 0;
+    $date = $_GET['check-in-out-date'] ?? '';
 
     ?>
     <!-- Start Booking widget -->
@@ -424,8 +424,8 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
             <label class="tf_label-row">
                 <div class="tf_form-inner">
                     <i class="fas fa-map-marker-alt"></i>
-                    <input type="text" id="<?php echo $place_input_id; ?>" required=""  class="" placeholder="<?php echo $place_placeholder; ?>" value="<?php echo $place_name; ?>">
-                    <input type="hidden" name="place" id="tf-place" value="<?php echo $place_value; ?>"/>
+                    <input type="text" id="<?php echo $place_input_id ?? ''; ?>" required=""  class="" placeholder="<?php echo $place_placeholder ?? __('Location/Destination', 'tourfic'); ?>" value="<?php echo $place_name ?? ''; ?>">
+                    <input type="hidden" name="place" id="tf-place" value="<?php echo $place_value ?? ''; ?>"/>
                 </div>
             </label>
         </div>
@@ -461,7 +461,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                 </div>
             </label>
         </div>
-    <?php if ($post_type !== 'tf_tours') { ?>
+    <?php if ($post_type == 'tf_hotel') { ?>
         <div class="tf_form-row">
             <label class="tf_label-row">
                 <div class="tf_form-inner">

@@ -435,19 +435,21 @@ function tf_search_result_shortcode( $atts, $content = null ){
     if ( isset( $_GET ) ) {
         $_GET = array_map( 'stripslashes_deep', $_GET );
     }
-
-
     
     // Get post type
     $post_type = isset( $_GET['type'] ) ? sanitize_text_field($_GET['type']) : '';
+    if(empty($post_type)) {
+        _e('<h3>Please select fields from the form!</h3>', 'tourfic');
+        return;
+    }
     // Get hotel location or tour destination
     $taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : 'tour_destination';
     // Get place
     $place = isset( $_GET['place'] ) ? sanitize_text_field($_GET['place']) : '';
 
-    $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
+    $paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
     $checkInOutDate = !empty( $_GET['check-in-out-date']) ? explode( ' to ', $_GET['check-in-out-date'] ) : array();
-    $period       = new DatePeriod(
+    $period         = new DatePeriod(
         new DateTime( $checkInOutDate[0]  ),
         new DateInterval( 'P1D' ),
         new DateTime( $checkInOutDate[1] .  '23:59'  )
