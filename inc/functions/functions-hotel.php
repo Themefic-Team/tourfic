@@ -999,8 +999,16 @@ function tf_filter_hotel_by_date( DatePeriod $period, array &$not_found, array $
     $meta = array_filter($meta['room'], function ($value) {
         return !empty($value) && $value['enable'] != '0';
     });
-    $dates              = array_column($meta, 'repeat_by_date');
-    $availability_dates = array_column( $dates[0], 'availability' );
+    if (empty($meta)) {
+        return;
+    }
+    $dates = array_column($meta, 'repeat_by_date');
+
+    if (empty($dates)) {
+        return;
+    }
+    $availability_dates = array_column($dates[0], 'availability');
+
     $has_hotel          = false;
     foreach ( $availability_dates as $dates ) {
         $show_hotel = [];
