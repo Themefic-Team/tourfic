@@ -343,4 +343,39 @@ if(!function_exists('tf_flatpickr_locale')) {
 		}
 	}
 }
+
+
+if (!function_exists('tf_array_flatten')) {
+    /**
+     * Flatten a multi-dimensional array into a single level.
+     *
+     * @author devkabir
+     * 
+     * @param  iterable  $array
+     * @param  int  $depth
+     * @return array
+     */
+    function tf_array_flatten($array, $depth = INF)
+    {
+        $result = [];
+
+        foreach ($array as $item) {
+
+            if (!is_array($item)) {
+                $result[] = $item;
+            } else {
+                $values = $depth === 1
+                    ? array_values($item)
+                    : tf_array_flatten($item, $depth - 1);
+
+                foreach ($values as $value) {
+                    $result[] = $value;
+                }
+            }
+        }
+
+        return $result;
+    }
+};
+
 ?>
