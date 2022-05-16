@@ -995,8 +995,11 @@ add_action('wp_loaded', 'tf_update_meta_all_hotels_tours');
  */
 function tf_filter_hotel_by_date( DatePeriod $period, array &$not_found, array $data = [] ): void
 {
-    $meta               = get_post_meta( get_the_ID(), 'tf_hotel', true );
-    $dates              = array_column( $meta['room'], 'repeat_by_date' );
+    $meta               = get_post_meta(get_the_ID(), 'tf_hotel', true);
+    $meta = array_filter($meta['room'], function ($value) {
+        return !empty($value) && $value['enable'] != '0';
+    });
+    $dates              = array_column($meta, 'repeat_by_date');
     $availability_dates = array_column( $dates[0], 'availability' );
     $has_hotel          = false;
     foreach ( $availability_dates as $dates ) {
