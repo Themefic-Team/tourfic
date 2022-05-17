@@ -446,14 +446,28 @@ function tf_search_result_shortcode( $atts, $content = null ){
     $taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : 'tour_destination';
     // Get place
     $place = isset( $_GET['place'] ) ? sanitize_text_field($_GET['place']) : '';
+    // Get Adult
+    $adults = isset( $_GET['adults'] ) ? sanitize_text_field($_GET['adults']) : '';
+    // Get Child
+    $child = isset( $_GET['children'] ) ? sanitize_text_field($_GET['children']) : '';
+    // Get Room
+    $room = isset( $_GET['room'] ) ? sanitize_text_field($_GET['room']) : '';
+    // Get date
+    $check_in_out = isset( $_GET['check-in-out-date'] ) ? sanitize_text_field($_GET['check-in-out-date']) : '';
+
+    $data = array($adults, $child, $room, $check_in_out);
 
     $paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-    $checkInOutDate = !empty( $_GET['check-in-out-date']) ? explode( ' to ', $_GET['check-in-out-date'] ) : array();
-    $period         = new DatePeriod(
-        new DateTime( $checkInOutDate[0]  ),
-        new DateInterval( 'P1D' ),
-        new DateTime( $checkInOutDate[1] .  '23:59'  )
-    );
+    $checkInOutDate = !empty( $_GET['check-in-out-date']) ? explode( ' to ', $_GET['check-in-out-date'] ) : '';
+    if(!empty($checkInOutDate)) {
+        $period         = new DatePeriod(
+            new DateTime( $checkInOutDate[0] ),
+            new DateInterval( 'P1D' ),
+            new DateTime( $checkInOutDate[1] .  '23:59' )
+        );
+    } else {
+        $period = '';
+    }
     
     // Main Query args
     $args = array(
@@ -509,11 +523,12 @@ function tf_search_result_shortcode( $atts, $content = null ){
                     $not_found = [];
                     while ( $loop->have_posts() ) {
                         $loop->the_post();
+
                         if ( $post_type == 'tf_hotel' ) {
-                            tf_filter_hotel_by_date( $period, $not_found );
+                            tf_filter_hotel_by_date( $period, $not_found, $data );
 
                         } else {
-                            tf_filter_tour_by_date( $period, $not_found );
+                            tf_filter_tour_by_date( $period, $not_found, $data );
 
                         }
 

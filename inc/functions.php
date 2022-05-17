@@ -666,13 +666,17 @@ function tf_search_result_ajax_sidebar(){
     // @KK take dates for filter query
     $checkin = isset($_POST['checkin']) ? trim($_POST['checkin']) : null;
     $checkout = isset($_POST['checkout']) ? trim($_POST['checkout']) : null;
-$period = new DatePeriod(
-    new DateTime( $checkin ),
-    new DateInterval( 'P1D' ),
-    new DateTime( $checkout . '23:59' )
-);
-// Properties args
+    if(!empty($checkin) && !empty($checkout)) {
+        $period = new DatePeriod(
+            new DateTime( $checkin ),
+            new DateInterval( 'P1D' ),
+            new DateTime( $checkout . '23:59' )
+        );
+    } else {
+        $period = '';
+    }
 
+    // Properties args
     $args = array(
         'post_type' => $posttype,
         'post_status' => 'publish',
