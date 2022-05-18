@@ -352,18 +352,24 @@ function tf_room_availability_callback() {
                              */
                             $unique_id = !empty($room['unique_id']) ? $room['unique_id'] : ''; // Unique id of rooms
                             $order_ids = !empty($room['order_id']) ? $room['order_id'] : '';
+                            $order_ids = array_filter(explode(",", $order_ids));
                             $num_room_available = !empty($room['num-room']) ? $room['num-room'] : '1'; // Number of room
                             $number_orders = '0';
                             $avil_by_date   = !empty( $room['avil_by_date'] ) && boolval( $room['avil_by_date'] ); // Room Available by date enabled or  not ?
                             $repeat_by_date = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
+                            
                             if ( !empty( $order_ids ) ) {
+
                                 foreach ( $order_ids as $order_id ) {
+                           
                                     $order = wc_get_order( $order_id ); // Get $order object from order ID
+
                                     if ( $order && $order->get_status() == 'completed' ) {
                                         // Get and Loop Over Order Items
                                         foreach ( $order->get_items() as $item_id => $item ) {
 
                                             if ( $avil_by_date ) {
+
                                                 // look for check in & check out date
                                                 $check_in_date  = $item->get_meta( 'check_in', true );
                                                 $check_out_date = $item->get_meta( 'check_out', true );
@@ -372,26 +378,37 @@ function tf_room_availability_callback() {
                                                     new DateInterval( 'P1D' ),
                                                     new DateTime( $check_out_date . ' 23:59' )
                                                 );
+
                                                 foreach ( $period as $date ) {
+                                                    
                                                     $available_rooms = array_values( array_filter( $repeat_by_date, function ( $date_availability ) use ( $date ) {
+
                                                         $date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
                                                         $date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
                                                         return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
                                                     } ) );
+
                                                     $available_rooms_count[] = $available_rooms[0]['num-room'];
 
                                                 }
+
                                                 $num_room_available  = array_sum( array_unique( $available_rooms_count ) );
                                                 $ordered_room_number = $item->get_meta( 'number_room_booked', true );
                                                 $number_orders       = $number_orders + $ordered_room_number;
+
                                             } else {
+
                                                 $ordered_room_number = $item->get_meta( 'number_room_booked', true );
                                                 $number_orders       = $number_orders + $ordered_room_number;
+
                                             }
                                         }
                                     }
                                 }
+
                                 $num_room_available = $num_room_available - $number_orders; // Calculate
+                                $num_room_available = max($num_room_available, 0); // If negetive value make that 0
+var_dump($num_room_available);
                             }
 
 
@@ -986,7 +1003,7 @@ add_action('wp_loaded', 'tf_update_meta_all_hotels_tours');
  * Filter hotels on search result page by checkin checkout dates set by backend
  *
  *
- * @author devkabir
+ * @author devkabir, fida
  *
  * @param DatePeriod $period    collection of dates by user input;
  * @param array      $not_found collection of hotels exists
@@ -1111,4 +1128,19 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 
 }
 
+/**
+ * Delete old review fields button
+ */
+function tf_remove_order_ids_from_room() {
+    echo '
+    <div class="csf-title">
+        <h4>' .__("Reset Room Availability", "tourfic"). '</h4>
+        <div class="csf-subtitle-text">' .__("Remove order ids linked with this room.<br><b style='color: red;'>Be aware! It is irreversible!</b>", "tourfic"). '</div>
+    </div>
+    <div class="csf-fieldset">
+        <button type="button" class="button button-large csf-warning-primary">' .__("Reset", "tourfic"). '</button>
+    </div>
+    <div class="clear"></div>
+    ';
+}
 ?>
