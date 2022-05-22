@@ -785,12 +785,23 @@ function tf_search_result_ajax_sidebar(){
             $loop->the_post(); 
 
             if( $posttype == 'tf_hotel' ){
-                $data = [$adults, $child, $room, $check_in_out];
-	            tf_filter_hotel_by_date( $period,$not_found, $data);
+
+                if(empty($check_in_out)) {
+                    tf_hotel_archive_single_item();
+                } else {
+                    $data = [$adults, $child, $room, $check_in_out];
+	                tf_filter_hotel_by_date( $period,$not_found, $data);
+                }
 
             }else{
-                $data = [$adults, $child, $check_in_out];
-                tf_filter_tour_by_date( $period, $not_found, $data );
+
+                if(empty($check_in_out)) {
+                    tf_tour_archive_single_item();
+                } else {
+                    $data = [$adults, $child, $check_in_out];
+                    tf_filter_tour_by_date( $period, $not_found, $data );
+                }
+
             }  
         } 
         if (!in_array(0, $not_found)) {

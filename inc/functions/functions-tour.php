@@ -460,25 +460,21 @@ function tf_single_tour_booking_form( $post_id ) {
                 <div class='tf_form-row'>
 	    	        <label class='tf_label-row'>
 	    		        <div class='tf_form-inner'>
-                            <span class='icon'>
-                                <?php tourfic_get_svg('calendar_today'); ?>
-                            </span>
                             <input type='text' name='check-in-out-date' id='check-in-out-date' class='tours-check-in-out' onkeypress="return false;" placeholder='Select Date' value='' required />
 				        </div>
 			        </label>
 		        </div>
 
+                <?php if ($tour_type != 'fixed') { ?>
                 <div class='tf_form-row' id="check-in-time-div" style="display: none;">
                     <label class='tf_label-row'>
                         <div class='tf_form-inner'>
-                            <span class='icon'>
-                                <?php tourfic_get_svg('calendar_today'); ?>
-                            </span>
                             <select name="check-in-time" id="check-in-time" style="min-width: 100px;">
                             </select>
                         </div>
                     </label>
                 </div>
+                <?php } ?>
 
                 <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
                 <script>
@@ -728,7 +724,7 @@ if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-tour.php' ) ) {
  * @param array      $not_found collection of tour exists
  * @param array      $data      user input for sidebar form
  */
-function tf_filter_tour_by_date( DatePeriod $period, array &$not_found, array $data = [] ): void {
+function tf_filter_tour_by_date( $period, array &$not_found, array $data = [] ): void {
 
     // Get tour meta options
     $meta = get_post_meta( get_the_ID(), 'tf_tours_option', true );

@@ -525,10 +525,20 @@ function tf_search_result_shortcode( $atts, $content = null ){
                         $loop->the_post();
 
                         if ( $post_type == 'tf_hotel' ) {
-                            tf_filter_hotel_by_date( $period, $not_found, $data );
+
+                            if(empty($check_in_out)) {
+                                tf_hotel_archive_single_item();
+                            } else {
+                                tf_filter_hotel_by_date( $period, $not_found, $data );
+                            }
 
                         } else {
-                            tf_filter_tour_by_date( $period, $not_found, $data );
+
+                            if(empty($check_in_out)) {
+                                tf_tour_archive_single_item();
+                            } else {
+                                tf_filter_tour_by_date( $period, $not_found, $data );
+                            }                        
 
                         }
 

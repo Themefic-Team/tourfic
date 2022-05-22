@@ -140,11 +140,16 @@ if($pricing_rule == 'person') {
 }
 
 if($tour_type == 'continuous' && $custom_avail == true) {
-	$pricing_rule = !empty($meta['cont_custom_date'][0]['pricing']) ? $meta['cont_custom_date'][0]['pricing'] : '';
+	
+	$pricing_rule = !empty($meta['custom_pricing_by']) ? $meta['custom_pricing_by'] : 'person';
 
 	if($pricing_rule == 'group') {
 
-		$price = !empty($meta['cont_custom_date'][0]['group_price']) ? $meta['cont_custom_date'][0]['group_price'] : '0.0';
+		$group_prices = array_column($meta['cont_custom_date'], 'group_price');
+		$min_group_price = min($group_prices);
+		$max_group_price = max($group_prices);
+
+		$price = $min_group_price. '-' .$max_group_price;
 	
 		if($discount_type == 'percent') {
 			$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 );
@@ -171,6 +176,9 @@ if($tour_type == 'continuous' && $custom_avail == true) {
 	}
 }
 
+echo tf_single_tour_price($meta);
+global $wc_price;
+echo '<pre>'; var_dump($wc_min_adult_price); echo '</pre>';
 ?>
 
 <div class="tf-page-wrapper">
