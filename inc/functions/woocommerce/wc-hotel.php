@@ -342,15 +342,18 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 
                 $old_order_id = $room['order_id'];
 
+                $old_order_id != "" && $old_order_id .= ",";
+                $old_order_id .= $order_id;
+
                 // If is array push data else create an array
-                if(is_array($old_order_id)) {
-                    $old_order_id[] = $order_id;
-                } else {
-                    $old_order_id = array($order_id);
-                }
+                // if(is_array($old_order_id)) {
+                //     $old_order_id[] = $order_id;
+                // } else {
+                //     $old_order_id = array($order_id);
+                // }
 
                 // set old + new data to the oder_id meta
-                $room['order_id']  = array_unique($old_order_id);
+                $room['order_id']  = $old_order_id;
             }
 
             // Set whole room array

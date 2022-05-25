@@ -322,8 +322,8 @@ function tf_room_availability_callback() {
                         // Check if room is enabled
                         $enable = !empty($room['enable']) && boolval($room['enable']);
 
-                        if ( $enable )  {                         
-                            
+                        if ( $enable )  {                                             
+
                             /*
                             * Backend room options
                             */
@@ -353,17 +353,18 @@ function tf_room_availability_callback() {
                             /**
                              * Set room availability
                              */
-                            $unique_id          = !empty($room['unique_id']) ? $room['unique_id'] : '';                 // Unique id of rooms
-                            $order_ids          = !empty($room['order_id']) ? $room['order_id'] : '';
-                            $num_room_available = !empty($room['num-room']) ? $room['num-room'] : '1';                  // Number of room
-                            $number_orders      = '0';
-                            $avil_by_date       = !empty( $room['avil_by_date'] ) && boolval( $room['avil_by_date'] );  // Room Available by date enabled or  not ?
-                            $repeat_by_date     = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
-
+                            $unique_id = !empty($room['unique_id']) ? $room['unique_id'] : ''; // Unique id of rooms
+                            $order_ids = !empty($room['order_id']) ? $room['order_id'] : '';
+                            $order_ids = array_filter(explode(",", $order_ids));
+                            $num_room_available = !empty($room['num-room']) ? $room['num-room'] : '1'; // Number of room
+                            $number_orders = '0';
+                            $avil_by_date   = !empty( $room['avil_by_date'] ) && boolval( $room['avil_by_date'] ); // Room Available by date enabled or  not ?
+                            $repeat_by_date = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
+                            
                             if ( !empty( $order_ids ) ) {
 
                                 foreach ( $order_ids as $order_id ) {
-
+                           
                                     $order = wc_get_order( $order_id ); // Get $order object from order ID
 
                                     if ( $order && $order->get_status() == 'completed' ) {
@@ -383,7 +384,7 @@ function tf_room_availability_callback() {
                                                 );
 
                                                 foreach ( $period as $date ) {
-
+                                                    
                                                     $available_rooms = array_values( array_filter( $repeat_by_date, function ( $date_availability ) use ( $date ) {
 
                                                         $date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
@@ -391,6 +392,7 @@ function tf_room_availability_callback() {
                                                         return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
 
                                                     } ) );
+
                                                     $available_rooms_count[] = $available_rooms[0]['num-room'];
 
                                                 }
@@ -409,8 +411,9 @@ function tf_room_availability_callback() {
                                     }
                                 }
 
-                                // Calculate available room number after order
                                 $num_room_available = $num_room_available - $number_orders; // Calculate
+                                $num_room_available = max($num_room_available, 0); // If negetive value make that 0
+
                             }
 
                             if ( $avil_by_date ) {
@@ -608,7 +611,7 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
                         <span class="tf-label"><?php _e('Check-in & Check-out date', 'tourfic'); ?></span>
                         <div class="tf_form-inner tf-d-g">
                             <i class="far fa-calendar-alt"></i>
-                            <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e('Check-in - Check-out', 'tourfic'); ?>">
+                            <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e('Check-in - Check-out', 'tourfic'); ?>" <?php echo tfopt('date_hotel_search')? 'required' : ''; ?>>
                         </div>
                     </label>
                 </div>
@@ -764,8 +767,7 @@ function tf_hotel_archive_single_item($adults='', $child='', $room='', $check_in
     $post_id = get_the_ID();
     //Get hotel_feature
     $features = !empty(get_the_terms( $post_id, 'hotel_feature' )) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
-    //Get hotel meta values
-    $meta = get_post_meta( get_the_ID(), 'tf_hotel', true );
+    
     // Location
     $address  = !empty($meta['address']) ? $meta['address'] : '';
     // Rooms
@@ -1007,4 +1009,150 @@ function tf_update_meta_all_hotels_tours() {
     }
 }
 add_action('wp_loaded', 'tf_update_meta_all_hotels_tours');
+
+
+/**
+ * Filter hotels on search result page by checkin checkout dates set by backend
+ *
+ *
+ * @author devkabir, fida
+ *
+ * @param DatePeriod $period    collection of dates by user input;
+ * @param array      $not_found collection of hotels exists
+ * @param array      $data      user input for sidebar form
+ */
+function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] ): void {
+
+    // Form Data
+    [$adults, $child, $room, $check_in_out] = $data;
+
+    // Get hotel meta options
+    $meta = get_post_meta(get_the_ID(), 'tf_hotel', true);
+    // Remove disabled rooms
+    $meta = array_filter($meta['room'], function ($value) {
+        return !empty($value) && $value['enable'] != '0';
+    });
+
+    // If no room return
+    if (empty($meta)) {
+        return;
+    }
+
+    // Set initial room availability status
+    $has_hotel = false;
+
+    /**
+     * Adult Number Validation
+     */
+    $back_adults = array_column($meta, 'adult');
+    $adult_counter = 0;
+    foreach($back_adults as $back_adult) {
+        if($back_adult >= $adults) {
+            $adult_counter++;
+        }
+    }
+
+    /**
+     * Child Number Validation
+     */
+    $back_childs = array_column($meta, 'adult');
+    $child_counter = 0;
+    foreach($back_childs as $back_child) {
+        if($back_child >= $child) {
+            $child_counter++;
+        }
+    }
+
+    // If adult and child number validation is true proceed
+    if($adult_counter > 0 && $child_counter > 0) {
+
+        // Check custom date range status of room
+        $avil_by_date = array_column($meta, 'avil_by_date');
+
+        // Check if any room available without custom date range
+        if (in_array(0, $avil_by_date)) {
+
+            $has_hotel = true; // Show that hotel
+
+        } else {
+            // If all the room has custom date range then filter the rooms by date
+            
+            // Get custom date range repeater
+            $dates = array_column($meta, 'repeat_by_date');
+
+            // If no date range return
+            if (empty($dates)) {
+                return;
+            }
+
+            // Initial available dates array
+            $availability_dates = [];
+
+            // Run loop through custom date range repeater and filter out only the dates
+            foreach ($dates as $date) {
+                $availability_dates[] = array_column($date, 'availability');
+            }    
+
+            // Run loop through custom dates & set custom dates on a single array
+            foreach (tf_array_flatten($availability_dates, 1) as $dates) {
+
+                //Initial matching date array
+                $show_hotel = [];
+
+                // Check if any date range match with search form date range and set them on array
+                if(!empty($period)) {
+                    foreach ( $period as $date ) {
+
+                        $show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
+    
+                    }
+                }              
+
+                // If any date range matches show hotel
+                if ( !in_array( 0, $show_hotel ) ) {
+                    $has_hotel = true;
+                    break;
+                }
+
+            }
+
+        }
+
+    }
+
+    // Conditional hotel showing
+    if ( $has_hotel ) {
+
+        if ( !empty( $data ) ) {
+            [$adults, $child, $room, $check_in_out] = $data;
+            tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
+        } else {
+            tf_hotel_archive_single_item();
+        }
+
+        $not_found[] = 0;
+
+    } else {
+
+        $not_found[] = 1;
+        
+    }
+
+}
+
+/**
+ * Delete old review fields button
+ */
+function tf_remove_order_ids_from_room() {
+    echo '
+    <div class="csf-title">
+        <h4>' .__("Reset Room Availability", "tourfic"). '</h4>
+        <div class="csf-subtitle-text">' .__("Remove order ids linked with this room.<br><b style='color: red;'>Be aware! It is irreversible!</b>", "tourfic"). '</div>
+    </div>
+    <div class="csf-fieldset">
+        <button type="button" class="button button-large csf-warning-primary">' .__("Reset", "tourfic"). '</button>
+    </div>
+    <div class="clear"></div>
+    ';
+}
 ?>

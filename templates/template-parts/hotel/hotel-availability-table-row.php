@@ -104,12 +104,13 @@
             <div class="room-selection-wrap">
                 <select name="hotel_room_selected" id="hotel-room-selected">
                     <?php
-                        foreach ( range( 1, $num_room_available) as $value ) {
+                        foreach ( range( 0, $num_room_available) as $value ) {
                             echo '<option>' . $value . '</option>';
                         }
                     ?>
                 </select>
             </div>
+            <?php //var_dump($order_ids); ?>
             <div class="room-submit-wrap">
                 <input type="hidden" name="post_id" value="<?php echo $form_post_id; ?>">
                 <input type="hidden" name="room_id" value="<?php echo $room_id; ?>">

@@ -438,12 +438,36 @@ function tf_search_result_shortcode( $atts, $content = null ){
     
     // Get post type
     $post_type = isset( $_GET['type'] ) ? sanitize_text_field($_GET['type']) : '';
+    if(empty($post_type)) {
+        _e('<h3>Please select fields from the form!</h3>', 'tourfic');
+        return;
+    }
     // Get hotel location or tour destination
     $taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : 'tour_destination';
     // Get place
     $place = isset( $_GET['place'] ) ? sanitize_text_field($_GET['place']) : '';
+    // Get Adult
+    $adults = isset( $_GET['adults'] ) ? sanitize_text_field($_GET['adults']) : '';
+    // Get Child
+    $child = isset( $_GET['children'] ) ? sanitize_text_field($_GET['children']) : '';
+    // Get Room
+    $room = isset( $_GET['room'] ) ? sanitize_text_field($_GET['room']) : '';
+    // Get date
+    $check_in_out = isset( $_GET['check-in-out-date'] ) ? sanitize_text_field($_GET['check-in-out-date']) : '';
 
-    $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
+    $data = array($adults, $child, $room, $check_in_out);
+
+    $paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
+    $checkInOutDate = !empty( $_GET['check-in-out-date']) ? explode( ' to ', $_GET['check-in-out-date'] ) : '';
+    if(!empty($checkInOutDate)) {
+        $period         = new DatePeriod(
+            new DateTime( $checkInOutDate[0] ),
+            new DateInterval( 'P1D' ),
+            new DateTime( $checkInOutDate[1] .  '23:59' )
+        );
+    } else {
+        $period = '';
+    }
     
     // Main Query args
     $args = array(
@@ -495,21 +519,37 @@ function tf_search_result_shortcode( $atts, $content = null ){
         </div>
         <div class="archive_ajax_result">
             <?php
-            if ( $loop->have_posts() ) {               
-                while ( $loop->have_posts() ) {
-                    $loop->the_post(); 
+                if ( $loop->have_posts() ) {
+                    $not_found = [];
+                    while ( $loop->have_posts() ) {
+                        $loop->the_post();
 
-                    if( $post_type == 'tf_hotel' ){
-                        tf_hotel_archive_single_item(); 
-                    }elseif( $post_type == 'tf_tours' ){
-                        //tour archive single gird/section added
-                        tf_tour_archive_single_item();
+                        if ( $post_type == 'tf_hotel' ) {
+
+                            if(empty($check_in_out)) {
+                                tf_hotel_archive_single_item();
+                            } else {
+                                tf_filter_hotel_by_date( $period, $not_found, $data );
+                            }
+
+                        } else {
+
+                            if(empty($check_in_out)) {
+                                tf_tour_archive_single_item();
+                            } else {
+                                tf_filter_tour_by_date( $period, $not_found, $data );
+                            }                        
+
+                        }
+
                     }
-                      
+
+                    if ( !in_array( 0, $not_found ) ) {
+                        echo '<div class="tf-nothing-found">' . __( 'Nothing Found! Select another dates', 'tourfic' ) . '</div>';
+                    }
+                } else {
+                    echo '<div class="tf-nothing-found">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
                 }
-            } else {
-                echo '<div class="tf-nothing-found">Nothing Found!</div>';
-            } 
             ?>
         </div>
         <div class="tf_posts_navigation">
@@ -522,6 +562,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
     <?php wp_reset_postdata(); ?>
     <?php return ob_get_clean();
 }
-add_shortcode('tf_search_result', 'tf_search_result_shortcode');
 
+
+add_shortcode('tf_search_result', 'tf_search_result_shortcode');
 ?>
