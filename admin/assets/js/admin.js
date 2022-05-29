@@ -12,10 +12,11 @@
                 y: 'bottom',
             },
         });
+
         /**
-                 * Delete old review fields
-                 * @author kabir, fida
-                 */
+         * Delete old review fields
+         * @author kabir, fida
+         */
         $(document).on('click', '.tf-del-old-review-fields', function (e) {
             e.preventDefault();
             var $this = $(this);
@@ -41,6 +42,40 @@
             });
 
         });
+
+        /**
+         * Delete room order ids
+         * @author fida
+         */
+         $(document).on('click', '.remove-order-ids', function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            var ff = $this.closest( '.csf-repeater-content' ).find('.tf-order_id input').attr('name');
+            console.log(ff);
+
+            // var data = {
+            //     action: 'tf_remove_room_order_ids',
+            //     deleteAll: $(this).data('delete-all')
+            // };
+
+            // $.ajax({
+            //     type: 'post',
+            //     url: tf_params.ajax_url,
+            //     data: data,
+            //     beforeSend: function (data) {
+            //         notyf.success('Deleting order ids...')
+            //     },
+            //     success: function (data) {
+            //         notyf.success(data.data);
+            //     },
+            //     error: function (data) {
+            //         notyf.error(data.data);
+            //     },
+
+            // });
+
+        });
+
         /**
          * Tour location required
          * 

@@ -352,9 +352,9 @@ function tf_room_availability_callback() {
                             /**
                              * Set room availability
                              */
-                            $unique_id          = !empty($room['unique_id']) ? $room['unique_id'] : '';                 // Unique id of rooms
+                            $unique_id          = !empty($room['unique_id']) ? $room['unique_id'] : '';
                             $order_ids          = !empty($room['order_id']) ? $room['order_id'] : '';
-                            $num_room_available = !empty($room['num-room']) ? $room['num-room'] : '1';                  // Number of room
+                            $num_room_available = !empty($room['num-room']) ? $room['num-room'] : '1';
                             $number_orders      = '0';
                             $avil_by_date       = !empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : false;  // Room Available by date enabled or  not ?
                             if($avil_by_date) {
@@ -365,6 +365,8 @@ function tf_room_availability_callback() {
 
                                 # Get backend available date range as an array
                                 if ( $avil_by_date ) {
+
+                                    $order_date_ranges = array();
 
                                     $backend_date_ranges = array();
                                     foreach($repeat_by_date as $single_date_range) {
@@ -391,21 +393,29 @@ function tf_room_availability_callback() {
 
                                             /**
                                              * Order item data
-                                             */
-                                            $order_check_in_date = strtotime( $item->get_meta( 'check_in', true ) );
-                                            $order_check_out_date = strtotime( $item->get_meta( 'check_out', true ) );
+                                             */                                          
                                             $ordered_number_of_room = $item->get_meta( 'number_room_booked', true );
 
-                                            if ( $avil_by_date ) {
+                                            if ( $avil_by_date ) {                                             
 
-                                                # Compare backend date with order date
-                                                // foreach( $backend_date_ranges as $backend_date_range) {
+                                                $order_check_in_date = strtotime( $item->get_meta( 'check_in', true ) );
+                                                $order_check_out_date = strtotime( $item->get_meta( 'check_out', true ) );
 
-                                                //     if($order_check_in_date >= $backend_date_range[0] && $order_check_out_date <= $backend_date_range[1]) {
-                                                //         //echo 'match';
-                                                //     }
+                                                foreach($repeat_by_date as $single_date_range) {
 
-                                                // }
+                                                    if( strtotime( $single_date_range["availability"]["from"] ) <= strtotime( $form_start ) && strtotime( $single_date_range["availability"]["to"] ) >= strtotime( $form_end ) ) {
+    
+                                                        if( strtotime( $single_date_range["availability"]["from"] ) <= $order_check_in_date && strtotime( $single_date_range["availability"]["to"] ) >= $order_check_out_date ) {
+
+                                                            $number_orders = $number_orders + $ordered_number_of_room;
+
+                                                        }                                              
+    
+                                                    }
+            
+                                                }
+
+                                                array_push( $order_date_ranges, array( $order_check_in_date, $order_check_out_date ) );
 
                                             } else {
 
@@ -414,43 +424,11 @@ function tf_room_availability_callback() {
 
                                             }
 
-                                            // # If availability by date range enabled
-                                            // if ( $avil_by_date ) {
-
-                                            //     // look for check in & check out date
-                                            //     $check_in_date  = $item->get_meta( 'check_in', true );
-                                            //     $check_out_date = $item->get_meta( 'check_out', true );
-                                            //     $daterange         = new DatePeriod(
-                                            //         new DateTime( $check_in_date . ' 00:00' ),
-                                            //         new DateInterval( 'P1D' ),
-                                            //         new DateTime( $check_out_date . ' 23:59' )
-                                            //     );
-
-                                            //     foreach ( $daterange as $date ) {
-                                                    
-                                            //         $available_rooms = array_values( array_filter( $repeat_by_date, function ( $date_availability ) use ( $date ) {
-
-                                            //             $date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
-                                            //             $date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
-
-                                            //             return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
-
-                                            //         } ) );
-
-                                            //         $available_rooms_count[] = $available_rooms[0]['num-room'];
-
-                                            //     }
-
-                                            //     $num_room_available  = array_sum( array_unique( $available_rooms_count ) );
-                                            //     $number_orders       = $number_orders + $ordered_number_of_room;
-
-                                            // } else {
-
                                         }
                                     }
-                                }
-
-                                // Calculate available room number after order
+                                }   
+                                
+                                # Calculate available room number after order
                                 $num_room_available = $num_room_available - $number_orders; // Calculate
                                 $num_room_available = max($num_room_available, 0); // If negetive value make that 0
 
@@ -495,17 +473,10 @@ function tf_room_availability_callback() {
 
                                     if ( $form_total_person <= $total_person ) {
 
-                                        $backend_date_from = strtotime( $available_rooms[0]['availability']['from'] );
-                                        $backend_date_to = strtotime( $available_rooms[0]['availability']['to'] );
-                                        echo '<pre>'; var_dump($order_check_in_date); echo '</pre>';
-                                        echo '<pre>'; var_dump($backend_date_from); echo '</pre>';
-
-                                        if( $order_check_in_date >= $backend_date_from && $order_check_out_date <= $backend_date_to ) {
-                                            echo 'match';
-                                        }
-
                                         include TF_TEMPLATE_PART_PATH . 'hotel\hotel-availability-table-row.php';
+
                                     } else {
+
                                         $error = 'No Room Available! Total person number exceeds!';
                                     }
 
@@ -526,6 +497,11 @@ function tf_room_availability_callback() {
                                 $price =  $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date;
 
                                 if ( $form_total_person <= $total_person ) {
+
+                                    // Calculate available room number after order
+                                    $num_room_available = $num_room_available - $number_orders; // Calculate
+                                    $num_room_available = max($num_room_available, 0); // If negetive value make that 0
+
                                     include TF_TEMPLATE_PART_PATH . 'hotel\hotel-availability-table-row.php';
                                 } else {
                                     $error = 'No Room Available! Total person number exceeds!';
@@ -1203,7 +1179,7 @@ function tf_remove_order_ids_from_room() {
         <div class="csf-subtitle-text">' .__("Remove order ids linked with this room.<br><b style='color: red;'>Be aware! It is irreversible!</b>", "tourfic"). '</div>
     </div>
     <div class="csf-fieldset">
-        <button type="button" class="button button-large csf-warning-primary">' .__("Reset", "tourfic"). '</button>
+        <button type="button" class="button button-large csf-warning-primary remove-order-ids">' .__("Reset", "tourfic"). '</button>
     </div>
     <div class="clear"></div>
     ';
