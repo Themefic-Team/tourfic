@@ -110,7 +110,7 @@ function tf_required_taxonomies( $hook ) {
 add_action( 'admin_enqueue_scripts', 'tf_required_taxonomies' );
 
 function tf_is_gutenberg_active() {
-	if ( function_exists( 'is_gutenberg_page' ) && is_gutenberg_page() ) {
+	if ( function_exists( 'is_gutenberg_page' ) ) {
 		return true;
 	}
 
@@ -125,4 +125,21 @@ function tf_is_gutenberg_active() {
 	return false;
 }
 
+/**
+ * Get post id
+ */
+function id_WPSE_114111() {
+
+    $screen = get_current_screen();
+
+    if ( is_admin() && ($screen->id == 'tf_hotel') ) {
+        global $post;
+		?>
+		<script>
+			var post_id = '<?php echo $post->ID; ?>';
+		</script>
+		<?php
+    }
+}
+add_action( 'admin_footer', 'id_WPSE_114111' );
 ?>

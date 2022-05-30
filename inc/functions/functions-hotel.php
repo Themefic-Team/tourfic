@@ -498,19 +498,20 @@ function tf_room_availability_callback() {
 
                                 if ( $form_total_person <= $total_person ) {
 
-                                    // Calculate available room number after order
-                                    $num_room_available = $num_room_available - $number_orders; // Calculate
-                                    $num_room_available = max($num_room_available, 0); // If negetive value make that 0
-
                                     include TF_TEMPLATE_PART_PATH . 'hotel\hotel-availability-table-row.php';
+
                                 } else {
+
                                     $error = 'No Room Available! Total person number exceeds!';
+
                                 } 
 
                             }
                 
                         } else {
+
                             $error = "No Room Available!";
+                            
                         }
                     }
 
@@ -1170,7 +1171,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 }
 
 /**
- * Delete old review fields button
+ * Remove room order ids
  */
 function tf_remove_order_ids_from_room() {
     echo '
@@ -1183,5 +1184,32 @@ function tf_remove_order_ids_from_room() {
     </div>
     <div class="clear"></div>
     ';
+}
+
+/**
+ * Ajax remove room order ids
+ */
+add_action( 'wp_ajax_tf_remove_room_order_ids', 'tf_remove_room_order_ids' );
+function tf_remove_room_order_ids() {
+
+    # Get order id field's name
+    $meta_field = isset( $_POST['meta_field'] ) ? sanitize_text_field( $_POST['meta_field'] ) : '';
+    # Trim room id from order id name
+    $room_id = trim($meta_field, "tf_hotel[room][][order_id");
+    # Get post id
+    $post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
+    # Get hotel meta
+    $meta = get_post_meta( $post_id, 'tf_hotel', true );
+
+    # Set order id field's value to blank
+    $meta['room'][$room_id]['order_id'] = '';
+
+    # Update whole hotel meta
+    update_post_meta( $post_id, 'tf_hotel', $meta );
+
+    # Send success message
+    wp_send_json_success("Order ids have been removed!");
+
+    wp_die();
 }
 ?>

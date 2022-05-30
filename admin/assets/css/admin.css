@@ -56,7 +56,8 @@
 /**
  * Hotel
  */
-.room-repeater .unique-id {
+.room-repeater .unique-id,
+.room-repeater .tf-order_id {
     display: none;
 }
 

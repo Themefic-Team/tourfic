@@ -48,31 +48,33 @@
          * @author fida
          */
          $(document).on('click', '.remove-order-ids', function (e) {
+
             e.preventDefault();
+            
             var $this = $(this);
-            var ff = $this.closest( '.csf-repeater-content' ).find('.tf-order_id input').attr('name');
-            console.log(ff);
+            var meta_field = $this.closest( '.csf-repeater-content' ).find('.tf-order_id input').attr('name');
 
-            // var data = {
-            //     action: 'tf_remove_room_order_ids',
-            //     deleteAll: $(this).data('delete-all')
-            // };
+            var data = {
+                action: 'tf_remove_room_order_ids',
+                meta_field: meta_field,
+                post_id: post_id,
+            };
 
-            // $.ajax({
-            //     type: 'post',
-            //     url: tf_params.ajax_url,
-            //     data: data,
-            //     beforeSend: function (data) {
-            //         notyf.success('Deleting order ids...')
-            //     },
-            //     success: function (data) {
-            //         notyf.success(data.data);
-            //     },
-            //     error: function (data) {
-            //         notyf.error(data.data);
-            //     },
-
-            // });
+            $.ajax({
+                type: 'post',
+                url: ajaxurl,
+                data: data,
+                beforeSend: function (data) {
+                    notyf.success('Deleting order ids...')
+                },
+                success: function (data) {
+                    notyf.success(data.data);
+                    location.reload();
+                },
+                error: function (data) {
+                    notyf.error(data.data);
+                },
+            });
 
         });
 
