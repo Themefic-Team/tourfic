@@ -1,4 +1,6 @@
 <?php
+// don't load directly
+defined( 'ABSPATH' ) || exit;
 /**
  * Base Class File
  */
