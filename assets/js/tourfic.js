@@ -25,7 +25,10 @@
             e.preventDefault();
 
             if($.trim($('input[name=check-in-out-date]').val()) == ''){
-                $('.tf_booking-dates .tf_label-row').append('<span clss="required"><b>'+tf_params.field_required+'</b></span>');
+
+                if( $('#tf-required').length === 0 ) {
+                    $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" clss="required"><b>'+tf_params.field_required+'</b></span>');
+                }
                 return;
             }
 

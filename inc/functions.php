@@ -80,17 +80,6 @@ if ( file_exists( TF_INC_PATH . 'enqueues.php' ) ) {
 }
 
 /**
- * SVG
- * 
- * @since 1.0
- */
-if ( file_exists( TF_INC_PATH . 'functions/svg-icons.php' ) ) {
-    require_once TF_INC_PATH . 'functions/svg-icons.php';
-} else {
-    tf_file_missing(TF_INC_PATH . 'functions/svg-icons.php');
-}
-
-/**
  * Shortcodes
  * 
  * @since 1.0
