@@ -18,9 +18,9 @@ get_header(); ?>
 			<!-- Start Content -->
 			<div class="tf_content">
 				<div class="tf-action-top">
-		            <div class="tf-list-grid">
-		                <a href="#list-view" data-id="list-view" class="change-view" title="List View"><?php echo tourfic_get_svg('list_view'); ?></a>
-		                <a href="#grid-view" data-id="grid-view" class="change-view" title="Grid View"><?php echo tourfic_get_svg('grid_view'); ?></a>
+					<div class="tf-list-grid">
+		                <a href="#list-view" data-id="list-view" class="change-view" title="<?php _e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
+		                <a href="#grid-view" data-id="grid-view" class="change-view" title="<?php _e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
 		            </div>
 		        </div>
 				<div class="archive_ajax_result">
@@ -32,7 +32,7 @@ get_header(); ?>
 							tf_hotel_archive_single_item();
 						}
 					} else {
-						echo '<div class="tf-nothing-found">Nothing Found!</div>';
+						echo '<div class="tf-nothing-found">' .__("No Hotels Found!", "tourfic"). '</div>';
 					}
 					?>
 				</div>

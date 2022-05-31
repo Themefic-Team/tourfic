@@ -594,7 +594,7 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
 
             <div class="tf_input-inner">
                 <span class="tf_person-icon">
-                    <?php echo tourfic_get_svg('person'); ?>
+                    <i class="fas fa-user"></i>
                 </span>
                 <div class="adults-text"><?php echo (!empty($adults) ? $adults : '1') . ' ' . __('Adults', 'tourfic'); ?></div>
                 <div class="person-sep"></div>

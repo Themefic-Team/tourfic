@@ -255,7 +255,7 @@ CSF::createSection( $prefix, array(
         ),
 
         array(
-            'id'         => '',
+            'id'         => 'css_min',
             'class'    => 'tf-csf-disable tf-csf-pro',
             'type'       => 'switcher',
             'title'      => __('Minify CSS', 'tourfic' ),
@@ -267,7 +267,7 @@ CSF::createSection( $prefix, array(
         ),
 
         array(
-            'id'         => '',
+            'id'         => 'js_min',
             'class'    => 'tf-csf-disable tf-csf-pro',
             'type'       => 'switcher',
             'title'      => __('Minify JS', 'tourfic' ),
@@ -284,7 +284,7 @@ CSF::createSection( $prefix, array(
         ),
 
         array(
-            'id'         => '',
+            'id'         => 'ftpr_cdn',
             'class'    => 'tf-csf-disable tf-csf-pro',
             'type'       => 'switcher',
             'title'      => __('Flatpickr CDN', 'tourfic' ),
@@ -295,7 +295,7 @@ CSF::createSection( $prefix, array(
         ),
 
         array(
-            'id'         => '',
+            'id'         => 'fnybx_cdn',
             'class'    => 'tf-csf-disable tf-csf-pro',
             'type'       => 'switcher',
             'title'      => __('Fancybox CDN', 'tourfic' ),
@@ -306,7 +306,7 @@ CSF::createSection( $prefix, array(
         ),
 
         array(
-            'id'         => '',
+            'id'         => 'slick_cdn',
             'class'    => 'tf-csf-disable tf-csf-pro',
             'type'       => 'switcher',
             'title'      => __('Slick CDN', 'tourfic' ),
@@ -317,7 +317,7 @@ CSF::createSection( $prefix, array(
         ),
 
         array(
-            'id'         => '',
+            'id'         => 'fa_cdn',
             'class'    => 'tf-csf-disable tf-csf-pro',
             'type'       => 'switcher',
             'title'      => __('Font Awesome CDN', 'tourfic' ),

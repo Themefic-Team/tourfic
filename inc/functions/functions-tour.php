@@ -251,7 +251,7 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
         <div class="tf_selectperson-wrap">
             <div class="tf_input-inner">
                 <span class="tf_person-icon">
-                    <?php echo tourfic_get_svg('person'); ?>
+                    <i class="fas fa-user"></i>
                 </span>
                 <div class="adults-text">1 <?php _e('Adults', 'tourfic'); ?></div>
                 <div class="person-sep"></div>
@@ -407,7 +407,7 @@ function tf_single_tour_booking_form( $post_id ) {
                 <div class="tf_selectperson-wrap">
                     <div class="tf_input-inner">
                         <span class="tf_person-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M16.5 6a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0zM18 6A6 6 0 1 0 6 6a6 6 0 0 0 12 0zM3 23.25a9 9 0 1 1 18 0 .75.75 0 0 0 1.5 0c0-5.799-4.701-10.5-10.5-10.5S1.5 17.451 1.5 23.25a.75.75 0 0 0 1.5 0z"></path></svg>
+                            <i class="fas fa-user"></i>
                         </span>
                         <?php if ($custom_avail == true || (!$disable_adult_price && $pricing_rule == 'person' && $adult_price != false) || (!$disable_adult_price && $pricing_rule == 'group' && $group_price != false)) { ?>
                             <div class="adults-text"><?php echo (!empty($adults) ? $adults : '0') . ' ' . __("Adults", "tourfic"); ?></div>

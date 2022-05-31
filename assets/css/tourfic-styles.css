@@ -131,10 +131,7 @@
 .tf_title-right {
   display: flex;
   align-items: center;
-}
-
-.share-tour {
-  margin-right: 14px;
+  column-gap: 5px;
 }
 
 .tf_price {
@@ -1292,10 +1289,6 @@ p.price {
   }
 }
 
-.share-tour {
-  position: relative;
-}
-
 .share-tour-content {
   display: none;
   position: absolute;
@@ -1337,6 +1330,7 @@ p.price {
   display: flex;
   align-items: center;
   font-weight: 400;
+  font-size: 14px;
 }
 .share-tour-content .tf-dropdown__item:hover {
   background-color: #f5f5f5;
@@ -2967,10 +2961,11 @@ form.tf_tours_booking .tf_selectperson-wrap {
 .tf-list-grid a {
   display: inline-flex;
   margin-left: 10px;
-  opacity: 0.4;
+  color: #333;
+  font-size: 20px;
 }
 .tf-list-grid a:hover, .tf-list-grid a.active {
-  opacity: 1;
+  color: #000;
 }
 
 .tf-popular_filter {

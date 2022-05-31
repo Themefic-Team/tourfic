@@ -63,6 +63,14 @@
 .fancybox-container {
     z-index: 999999;
 }
+.tf-single-share {
+    position: relative;
+    margin: 0 15px 0 0;
+}
+.tf-single-share a {
+    font-size: 20px;
+    color: #333;
+}
 
 /**
  * tf-tooltip
