@@ -229,10 +229,20 @@
 /*================================
 |            Hotel CSS           |
 ================================*/
+.tf-share {
+    position: relative;
+}
+.tf-share a {
+    color: #333;
+    line-height: 1;
+    font-size: 22px;
+    display: block;
+    margin: 0 10px 0 0;
+    outline: none;
+}
 .tf_room-table .availability-table tbody tr:nth-child(odd) td{
     background: #fff;
 }
-
 /* the slides */
 .slick-slide {
     margin-left: 5px !important;

@@ -11,7 +11,7 @@ get_header();
 while ( have_posts() ) : the_post(); 
 
 // get post id
-$post_id = get_the_ID();
+$post_id = $post->ID;
 
 /**
  * Get hotel meta values
@@ -72,27 +72,20 @@ $address  = !empty($meta['address']) ? $meta['address'] : '';
 $map      = !empty($meta['map']) ? $meta['map'] : '';
 
 // Hotel Detail
-//$featured = !empty($meta['featured']) ? $meta['featured'] : '';
-//$logo     = !empty($meta['logo']) ? $meta['logo'] : '';
 $gallery  = !empty($meta['gallery']) ? $meta['gallery'] : '';
 if ($gallery) {
-	// Comma seperated list to array
-	$gallery_ids = explode( ',', $gallery );
+	$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
 }
 $video    = !empty($meta['video']) ? $meta['video'] : '';
-
 // Room Details
 $rooms = !empty($meta['room']) ? $meta['room'] : '';
-
 // FAQ
 $faqs = !empty($meta['faq']) ? $meta['faq'] : '';
-
 // Terms & condition
 $tc = !empty($meta['tc']) ? $meta['tc'] : '';
 
 $share_text = get_the_title();
-$share_link = esc_url( home_url("/?p=").$post_id );
-
+$share_link = get_permalink($post_id);
 ?>
 <div class="tourfic-wrap default-style" data-fullwidth="true">
     <?php do_action( 'tf_before_container' ); ?>
@@ -124,25 +117,27 @@ $share_link = esc_url( home_url("/?p=").$post_id );
                         &nbsp;
                         <?php if(!$disable_share_opt == '1') { ?>
                         <!-- Share Section -->
-                        <div class="share-tour">
+                        <div class="tf-share">
                             <a href="#dropdown_share_center" class="share-toggle"
-                                data-toggle="true"><?php echo tourfic_get_svg('share'); ?></a>
+                                data-toggle="true"><i class="fas fa-share-alt"></i></a>
                             <div id="dropdown_share_center" class="share-tour-content">
                                 <ul class="tf-dropdown__content">
                                     <li>
                                         <a href="http://www.facebook.com/share.php?u=<?php _e( $share_link ); ?>"
                                             class="tf-dropdown__item" target="_blank">
-                                            <span
-                                                class="tf-dropdown__item-content"><?php echo tourfic_get_svg('facebook'); ?>
-                                                <?php esc_html_e( 'Share on Facebook', 'tourfic' ); ?></span>
+                                            <span class="tf-dropdown__item-content">
+                                                <i class="fab fa-facebook-square"></i>
+                                                <?php esc_html_e( 'Share on Facebook', 'tourfic' ); ?>
+                                            </span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="http://twitter.com/share?text=<?php _e( $share_text ); ?>&url=<?php _e( $share_link ); ?>"
                                             class="tf-dropdown__item" target="_blank">
-                                            <span
-                                                class="tf-dropdown__item-content"><?php echo tourfic_get_svg('twitter'); ?>
-                                                <?php esc_html_e( 'Share on Twitter', 'tourfic' ); ?></span>
+                                            <span class="tf-dropdown__item-content">
+                                                <i class="fab fa-twitter-square"></i>
+                                                <?php esc_html_e( 'Share on Twitter', 'tourfic' ); ?>
+                                            </span>
                                         </a>
                                     </li>
                                     <li>

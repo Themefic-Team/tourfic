@@ -1313,6 +1313,7 @@ p.price {
   white-space: nowrap;
   display: flex;
   align-items: center;
+  column-gap: 5px;
 }
 .share-tour-content .tf-dropdown__item-content svg {
   margin-right: 8px;
