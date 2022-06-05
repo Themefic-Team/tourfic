@@ -277,6 +277,7 @@
  */
 .hotel-room-wrap {
     width: 100%;
+    overflow-x: auto;
 }
 
 .tf_room-table th.description {

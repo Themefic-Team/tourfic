@@ -335,8 +335,8 @@ if( class_exists( 'CSF' ) ) {
             array(
               'id'       => 'price_multi_day',
               'type'     => 'switcher',
-              'title'    => __('Multiply Pricing By Day', 'tourfic' ),
-              'subtitle' =>  __( 'Dyring booking pricing will be multiplied by day number (Check-in to Check-out)', 'tourfic' ),
+              'title'    => __('Multiply Pricing By Night', 'tourfic' ),
+              'subtitle' =>  __( 'During booking pricing will be multiplied by number of nights (Check-in to Check-out)', 'tourfic' ),
               'text_on'  => __('Yes', 'tourfic' ),
               'text_off' => __('No', 'tourfic' ),
               'default' => true,
@@ -477,10 +477,8 @@ if( class_exists( 'CSF' ) ) {
     
             array(
                 'id'       => 'h-review',
-                'class'    => 'tf-csf-disable tf-csf-pro',
                 'type'     => 'switcher',
                 'title'    => __('Disable Review Section', 'tourfic' ),
-                'subtitle'   => $badge_pro,
                 'text_on'  => __('Yes', 'tourfic' ),
                 'text_off' => __('No', 'tourfic' ),
                 'default'  => false
@@ -488,10 +486,8 @@ if( class_exists( 'CSF' ) ) {
     
             array(
                 'id'       => 'h-share',
-                'class'    => 'tf-csf-disable tf-csf-pro',
                 'type'     => 'switcher',
                 'title'    => __('Disable Share Option', 'tourfic' ),
-                'subtitle'   => $badge_pro,
                 'text_on'  => __('Yes', 'tourfic' ),
                 'text_off' => __('No', 'tourfic' ),
                 'default'  => false

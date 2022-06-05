@@ -13,6 +13,7 @@
   margin: 10px 0 0 0;
   padding: 0;
   display: flex;
+  flex-wrap: wrap;
 }
 .tourfic-wrap svg {
   display: block;
@@ -2730,7 +2731,6 @@ form.tf_tours_booking .tf_selectperson-wrap {
 .tourfic-single-right {
   order: 2;
   flex-grow: 1;
-  -ms-flex: 1;
   flex-basis: 200px;
   padding: 0 0 0 16px;
 }
@@ -2773,7 +2773,6 @@ form.tf_tours_booking .tf_selectperson-wrap {
 .tf_item_main_block {
   order: 2;
   flex-grow: 1;
-  -ms-flex: 1;
 }
 
 .tf_card_address_line a {
