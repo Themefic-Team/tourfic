@@ -198,12 +198,34 @@ if( class_exists( 'CSF' ) ) {
       'fields' => array(
   
         array(
-          'id'     => 'room',
-          'type'   => 'repeater',
-          'title'  => __('Room Details', 'tourfic' ),
-          'max' => 5,
-          'fields' => array(
+          'id'           => 'room',
+          'class'        => 'room-repeater',
+          'type'         => 'repeater',
+          'title'        => __('Room Details', 'tourfic' ),
+          'button_title' => __('Add New Room', 'tourfic'),
+          'max'          => 5,
+          'fields'       => array(
                   
+            array(
+              'id'         => 'unique_id',
+              'class'      => 'unique-id',
+              'type'       => 'text',
+              'title'      => __('Unique ID', 'tourfic' ),
+              'attributes' => array(
+                'readonly' => 'readonly',
+              ),
+            ),
+
+            array(
+              'id'         => 'order_id',
+              'class'      => 'tf-order_id',
+              'type'       => 'text',
+              'title'      => __('Order ID', 'tourfic' ),
+              'attributes' => array(
+                'readonly' => 'readonly',
+              ),
+            ),
+            
             array(
               'id'         => 'enable',
               'type'       => 'switcher',
@@ -353,7 +375,6 @@ if( class_exists( 'CSF' ) ) {
                 'type'     => 'switcher',
                 'title'    => __( 'Enable Availability by Date', 'tourfic' ),
                 'subtitle' => __( $badge_pro, 'tourfic' ),
-                'label'    => 'Do you want activate it ?',
                 'default'  => true
               ),
               array(

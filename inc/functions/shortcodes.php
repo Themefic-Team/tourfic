@@ -439,7 +439,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
     // Get post type
     $post_type = isset( $_GET['type'] ) ? sanitize_text_field($_GET['type']) : '';
     if(empty($post_type)) {
-        _e('<h3>Please select fields from the form!</h3>', 'tourfic');
+        _e('<h3>Please select fields from the search form!</h3>', 'tourfic');
         return;
     }
     // Get hotel location or tour destination
@@ -471,17 +471,17 @@ function tf_search_result_shortcode( $atts, $content = null ){
     
     // Main Query args
     $args = array(
-        'post_type' => $post_type,
+        'post_type'   => $post_type,
         'post_status' => 'publish',
-        'paged'          => $paged,
+        'paged'       => $paged,
     );
 
     $taxonomy_query = new WP_Term_Query(array(
-        'taxonomy'               => $taxonomy,
-        'orderby'                => 'name',
-        'order'                  => 'ASC',
-        'hide_empty'             => false,
-        'slug' => sanitize_title($place, ''),
+        'taxonomy'   => $taxonomy,
+        'orderby'    => 'name',
+        'order'      => 'ASC',
+        'hide_empty' => false,
+        'slug'       => sanitize_title($place, ''),
     ));
 
     if ($taxonomy_query) {
@@ -513,8 +513,8 @@ function tf_search_result_shortcode( $atts, $content = null ){
     <div class="tf_search_result">
         <div class="tf-action-top">
             <div class="tf-list-grid">
-                <a href="#list-view" data-id="list-view" class="change-view" title="List View"><?php echo tourfic_get_svg('list_view'); ?></a>
-                <a href="#grid-view" data-id="grid-view" class="change-view" title="Grid View"><?php echo tourfic_get_svg('grid_view'); ?></a>
+                <a href="#list-view" data-id="list-view" class="change-view" title="<?php _e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
+                <a href="#grid-view" data-id="grid-view" class="change-view" title="<?php _e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
             </div>
         </div>
         <div class="archive_ajax_result">
@@ -526,7 +526,8 @@ function tf_search_result_shortcode( $atts, $content = null ){
 
                         if ( $post_type == 'tf_hotel' ) {
 
-                            if(empty($check_in_out)) {
+                            if( empty( $check_in_out ) ) {
+                                $not_found[] = 0;
                                 tf_hotel_archive_single_item();
                             } else {
                                 tf_filter_hotel_by_date( $period, $not_found, $data );
@@ -534,7 +535,8 @@ function tf_search_result_shortcode( $atts, $content = null ){
 
                         } else {
 
-                            if(empty($check_in_out)) {
+                            if( empty( $check_in_out ) ) {
+                                $not_found[] = 0;
                                 tf_tour_archive_single_item();
                             } else {
                                 tf_filter_tour_by_date( $period, $not_found, $data );

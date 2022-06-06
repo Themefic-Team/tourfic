@@ -105,6 +105,8 @@ $disable_infant = !empty($meta['disable_infant_price']) ? $meta['disable_infant_
 if($tour_type == 'continuous' && $custom_avail == true) {	
 	$pricing_rule = !empty($meta['custom_pricing_by']) ? $meta['custom_pricing_by'] : 'person';
 }
+
+# Get Pricing
 $tour_price = new Tour_Price($meta);
 ?>
 
@@ -503,13 +505,18 @@ $tour_price = new Tour_Price($meta);
 						<?php
 							while($tours->have_posts() ) {
 								$tours->the_post();
-								$post_id   = $post_id;
-								$destinations = get_the_terms( $post_id, 'tour_destination' );
-								$first_destination_name = $destinations[0]->name;
 
-								$related_comments = get_comments( array( 'post_id' => $post_id ) );								
+								$post_id                = get_the_ID();
+								$destinations           = get_the_terms( $post_id, 'tour_destination' );
+								$first_destination_name = $destinations[0]->name;
+								$related_comments       = get_comments( array( 'post_id' => $post_id ) );
+								$meta = get_post_meta( $post_id,'tf_tours_option',true );
+								$pricing_rule = !empty($meta['pricing']) ? $meta['pricing'] : '';
+								$disable_adult  = !empty($meta['disable_adult_price']) ? $meta['disable_adult_price'] : false;
+								$disable_child  = !empty($meta['disable_child_price']) ? $meta['disable_child_price'] : false;
+								$tour_price = new Tour_Price($meta);
 						?>
-						<div class="tf-suggestion-item" style="background-image: url(<?php echo get_the_post_thumbnail_url($post_id,'full') ?>);">
+						<div class="tf-suggestion-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
 							<div class="tf-suggestion-content">
 								<div class="tf-suggestion-desc">
 									<h3>
@@ -529,7 +536,26 @@ $tour_price = new Tour_Price($meta);
 								}
 								?>									
 									<div class="tf-suggestion-price">
-										<span><?php echo tf_tours_price_html();?></span>
+										<span>
+										<?php if( $pricing_rule == 'group' ) {
+
+											echo $tour_price->wc_sale_group ?? $tour_price->wc_group;
+
+										} else if( $pricing_rule == 'person' ) {
+
+											if( !$disable_adult && !empty( $tour_price->adult ) ) {
+
+												echo $tour_price->wc_sale_adult ?? $tour_price->wc_adult;
+
+											} else if( !$disable_child && !empty( $tour_price->child ) ) {
+
+												echo $tour_price->wc_sale_child ?? $tour_price->wc_child;
+
+											}
+										
+										}
+										?>
+										</span>
 									</div>
 								</div>
 							</div>

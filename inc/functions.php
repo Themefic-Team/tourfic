@@ -648,11 +648,10 @@ function tf_search_result_ajax_sidebar(){
     $filters = ( $_POST['filters'] ) ? explode(',', sanitize_text_field( $_POST['filters'] )) : null;
     $features = ( $_POST['features'] ) ? explode(',', sanitize_text_field( $_POST['features'] )) : null;
     $posttype = $_POST['type']  ? sanitize_text_field( $_POST['type'] ): 'tf_hotel';
-// @KK separate taxonomy input for filter query
-
+    # Separate taxonomy input for filter query
     $place_taxonomy = $posttype == 'tf_tours' ? 'tour_destination' : 'hotel_location';
     $filter_taxonomy = $posttype == 'tf_tours' ? 'null' : 'hotel_feature';
-    // @KK take dates for filter query
+    # Take dates for filter query
     $checkin = isset($_POST['checkin']) ? trim($_POST['checkin']) : null;
     $checkout = isset($_POST['checkout']) ? trim($_POST['checkout']) : null;
     if(!empty($checkin) && !empty($checkout)) {
@@ -680,8 +679,8 @@ function tf_search_result_ajax_sidebar(){
             'taxonomy' => $place_taxonomy,
             'orderby' => 'name',
             'order' => 'ASC',
-            'hide_empty' => 0, //can be 1, '1' too
-            'hierarchical' => 0, //can be 1, '1' too
+            'hide_empty' => 0,
+            'hierarchical' => 0,
             'slug' => sanitize_title($search, ''),
         ) );
 
@@ -739,34 +738,38 @@ function tf_search_result_ajax_sidebar(){
         } else {
             $args['tax_query']['tf_feature']['relation'] = 'AND';
 
-            foreach ($filters as $key => $term_id) {
+            foreach ( $filters as $key => $term_id ) {
                 $args['tax_query']['tf_feature'][] = array(
                     'taxonomy' => 'tf_feature',
-                    'terms'    => array($term_id),
+                    'terms'    => array( $term_id ),
                 );
             }
 
         }
 
     }
-    // @KK Add meta if dates exists and post type is tours
-    if ($checkin && $checkout && $posttype == ' tf_tours'){
+
+    # Add meta if dates exists and post type is tours
+    if ( $checkin && $checkout && $posttype == ' tf_tours' ){
+
         $args['tax_query']['relation'] = $relation;
         $args['meta_query'] = array(
                 array(
                     'key'     => 'tf_tours_option',
-                    'value'   => str_replace('-', '/', $checkin),
+                    'value'   => str_replace( '-', '/', $checkin ),
                     'compare' => 'LIKE',
                 ),
                 array(
                     'key'     => 'tf_tours_option',
-                    'value'   => str_replace('-', '/', $checkout),
+                    'value'   => str_replace( '-', '/', $checkout ),
                     'compare' => 'LIKE',
                 ),
-            );        
-    }   
-    $loop = new WP_Query( $args ); ?>
-    <?php
+            );
+
+    } 
+
+    $loop = new WP_Query( $args );
+
     if ( $loop->have_posts() ) { 
         $not_found = [];
         while ( $loop->have_posts() ) {
@@ -775,30 +778,45 @@ function tf_search_result_ajax_sidebar(){
 
             if( $posttype == 'tf_hotel' ){
 
-                if(empty($check_in_out)) {
+                if( empty( $check_in_out ) ) {
+
+                    $not_found[] = 0;
                     tf_hotel_archive_single_item();
+
                 } else {
+
                     $data = [$adults, $child, $room, $check_in_out];
 	                tf_filter_hotel_by_date( $period,$not_found, $data);
+
                 }
 
             }else{
 
-                if(empty($check_in_out)) {
+                if( empty( $check_in_out ) ) {
+
+                    $not_found[] = 0;
                     tf_tour_archive_single_item();
+
                 } else {
+
                     $data = [$adults, $child, $check_in_out];
                     tf_filter_tour_by_date( $period, $not_found, $data );
+
                 }
 
             }  
         } 
+
         if (!in_array(0, $not_found)) {
-            echo '<div class="tf-nothing-found">'. __('Nothing Found! Select another dates', 'tourfic').'</div>';
+            echo '<div class="tf-nothing-found">'. __('Nothing Found!', 'tourfic').'</div>';
         }
+
     } else {
-        echo '<div class="tf-nothing-found">Nothing Found!</div>';
+
+        echo '<div class="tf-nothing-found">'. __('Nothing Found!', 'tourfic').'</div>';
+
     }
+
     wp_reset_postdata();
 
     die();
@@ -812,6 +830,7 @@ function tf_search_result_ajax_sidebar(){
  * run once
  */
 function tf_migrate_data() {
+
     if ( get_option( 'tf_migrate_data_204_210' ) < 1 ) {
 
         global $wpdb;
@@ -905,6 +924,7 @@ function tf_migrate_data() {
                 $new_meta
             );
         }
+
         /** Tour Destinations Image Fix */
         $tour_destinations = get_terms([
             'taxonomy' => 'tour_destination',
@@ -935,6 +955,7 @@ function tf_migrate_data() {
                 );
             }
         }
+
         /** Tour Type Fix */
         $tours = get_posts(['post_type'   => 'tf_tours', 'numberposts' => -1,]);
         foreach ($tours as $tour) {
@@ -952,7 +973,9 @@ function tf_migrate_data() {
         wp_cache_flush();
         flush_rewrite_rules(true);
         update_option('tf_migrate_data_204_210', 1);
+
 	}
+    
 }
 add_action( 'init', 'tf_migrate_data' );
 ?>
