@@ -1,8 +1,8 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-$badge_up = '<div class="tf-csf-badge"><span class="tf-upcoming">' .__("Upcoming", "tourfic"). '</span></div>';
-$badge_pro = '<div class="tf-csf-badge"><span class="tf-pro">' .__("Pro Feature", "tourfic"). '</span></div>';
+$badge_up     = '<div class="tf-csf-badge"><span class="tf-upcoming">' .__("Upcoming", "tourfic"). '</span></div>';
+$badge_pro    = '<div class="tf-csf-badge"><span class="tf-pro">' .__("Pro Feature", "tourfic"). '</span></div>';
 $badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' .__("Upcoming", "tourfic"). '</span><span class="tf-pro">' .__("Pro Feature", "tourfic"). '</span></div>';
 
 if( class_exists( 'CSF' ) ) {
@@ -24,19 +24,19 @@ if( class_exists( 'CSF' ) ) {
       'fields' => array(
 
         array(
-          'id'      => 'address',
-          'type'    => 'textarea',
-          'title'   => __('Hotel Address', 'tourfic'),
-          'subtitle' => __('Enter hotel adress', 'tourfic'),
+          'id'          => 'address',
+          'type'        => 'textarea',
+          'title'       => __('Hotel Address', 'tourfic'),
+          'subtitle'    => __('Enter hotel adress', 'tourfic'),
           'placeholder' => __('Address', 'tourfic'),
-          'attributes' => array(
+          'attributes'  => array(
             'required' => 'required',
           ),
         ),
 
         array(
           'id'       => '',
-          'class' => 'tf-csf-disable tf-csf-pro',
+          'class'    => 'tf-csf-disable tf-csf-pro',
           'type'     => 'map',
           'title'    => __('Location on Map', 'tourfic'),
           'subtitle' => __('Select one location on the map to see latitude and longitude' .$badge_pro, 'tourfic'),
@@ -55,18 +55,18 @@ if( class_exists( 'CSF' ) ) {
       'fields' => array(
 
         array(
-          'id'    => 'gallery',
-          'type'  => 'gallery',
-          'title' => __('Hotel Gallery', 'tourfic'),
+          'id'       => 'gallery',
+          'type'     => 'gallery',
+          'title'    => __('Hotel Gallery', 'tourfic'),
           'subtitle' => __('Upload one or many images to make a hotel image gallery for customers', 'tourfic'),
         ),
   
         array(
-          'id'    => 'featured',
-          'class' => 'tf-csf-disable',
-          'type'  => 'switcher',
-          'title' => __('Featured Hotel', 'tourfic' ),
-          'subtitle'   => $badge_up,
+          'id'       => 'featured',
+          'class'    => 'tf-csf-disable',
+          'type'     => 'switcher',
+          'title'    => __('Featured Hotel', 'tourfic' ),
+          'subtitle' => $badge_up,
           'text_on'  => __('Yes', 'tourfic' ),
           'text_off' => __('No', 'tourfic' ),
         ),
@@ -83,11 +83,11 @@ if( class_exists( 'CSF' ) ) {
 
         array(
           'id'       => '',
-          'class' => 'tf-csf-disable tf-csf-pro',
+          'class'    => 'tf-csf-disable tf-csf-pro',
           'type'     => 'text',
           'title'    => __('Hotel Video', 'tourfic'),
-          'subtitle'   => $badge_up_pro,
-          'desc' =>  __( 'Enter YouTube/Vimeo URL here', 'tourfic' ),
+          'subtitle' => $badge_up_pro,
+          'desc'     => __( 'Enter YouTube/Vimeo URL here', 'tourfic' ),
           'validate' => 'csf_validate_url',
         ),
 
@@ -156,12 +156,12 @@ if( class_exists( 'CSF' ) ) {
       'fields' => array(
   
         array(
-          'id'    => '',
-          'class' => 'tf-csf-disable tf-csf-pro',
-          'type'  => 'switcher',
-          'title' => __('Allowed Full Day Booking', 'tourfic'),
-          'subtitle' =>  __( 'You can book room with full day' .$badge_up_pro, 'tourfic' ),
-          'desc' =>  __( 'E.g: booking from 22 -23, then all days 22 and 23 are full, other people cannot book', 'tourfic' ),
+          'id'       => '',
+          'class'    => 'tf-csf-disable tf-csf-pro',
+          'type'     => 'switcher',
+          'title'    => __('Allowed Full Day Booking', 'tourfic'),
+          'subtitle' => __( 'You can book room with full day' .$badge_up_pro, 'tourfic' ),
+          'desc'     => __( 'E.g: booking from 22 -23, then all days 22 and 23 are full, other people cannot book', 'tourfic' ),
         ),
 
         // array(
@@ -244,10 +244,10 @@ if( class_exists( 'CSF' ) ) {
             ),
 
             array(
-              'id'    => 'num-room',
-              'type'  => 'number',
-              'title' => __('Number of Rooms', 'tourfic' ),
-              'subtitle' =>  __( 'Number of available rooms for booking', 'tourfic' ),
+              'id'       => 'num-room',
+              'type'     => 'number',
+              'title'    => __('Number of Rooms', 'tourfic' ),
+              'subtitle' => __( 'Number of available rooms for booking', 'tourfic' ),
             ),
 
             array(
@@ -256,50 +256,50 @@ if( class_exists( 'CSF' ) ) {
             ),
 
             array(
-              'id'    => 'gallery',
-              'type'  => 'gallery',
-              'title' => __('Gallery', 'tourfic' ),
-              'subtitle' =>  __( 'Upload images to make a gallery image for room', 'tourfic' ),
+              'id'       => 'gallery',
+              'type'     => 'gallery',
+              'title'    => __('Gallery', 'tourfic' ),
+              'subtitle' => __( 'Upload images to make a gallery image for room', 'tourfic' ),
             ),
 
             array(
-              'id'    => 'bed',
-              'type'  => 'number',
-              'title' => __('Number of Beds', 'tourfic' ),
-              'subtitle' =>  __( 'Number of beds present in the room', 'tourfic' ),
+              'id'       => 'bed',
+              'type'     => 'number',
+              'title'    => __('Number of Beds', 'tourfic' ),
+              'subtitle' => __( 'Number of beds present in the room', 'tourfic' ),
             ),
 
             array(
-              'id'    => 'adult',
-              'type'  => 'number',
-              'title' => __('Number of Adults', 'tourfic' ),
-              'subtitle' =>  __( 'Max number of persons allowed in the room', 'tourfic' ),
+              'id'       => 'adult',
+              'type'     => 'number',
+              'title'    => __('Number of Adults', 'tourfic' ),
+              'subtitle' => __( 'Max number of persons allowed in the room', 'tourfic' ),
             ),
 
             array(
-              'id'    => 'child',
-              'type'  => 'number',
-              'title' => __('Number of Children', 'tourfic' ),
-              'subtitle' =>  __( 'Max number of persons allowed in the room', 'tourfic' ),
+              'id'       => 'child',
+              'type'     => 'number',
+              'title'    => __('Number of Children', 'tourfic' ),
+              'subtitle' => __( 'Max number of persons allowed in the room', 'tourfic' ),
             ),
 
             array(
-              'id'      => 'footage',
-              'type'    => 'text',
-              'title'   => __('Room Footage', 'tourfic' ),
-              'subtitle' =>  __( 'Room footage (sft)', 'tourfic' ),
+              'id'       => 'footage',
+              'type'     => 'text',
+              'title'    => __('Room Footage', 'tourfic' ),
+              'subtitle' => __( 'Room footage (sft)', 'tourfic' ),
             ),
 
             array(
-              'id'          => 'features',
-              'type'        => 'select',
-              'title'       => __('Select Features', 'tourfic' ),
-              'placeholder' => __('Select', 'tourfic' ),
+              'id'            => 'features',
+              'type'          => 'select',
+              'title'         => __('Select Features', 'tourfic' ),
+              'placeholder'   => __('Select', 'tourfic' ),
               'empty_message' => __('No feature available', 'tourfic' ),
-              'chosen'      => true,
-              'multiple'    => true,
-              'options'     => 'categories',
-              'query_args'  => array(
+              'chosen'        => true,
+              'multiple'      => true,
+              'options'       => 'categories',
+              'query_args'    => array(
                 'taxonomy'  => 'hotel_feature',
               ),
             ),
@@ -316,10 +316,10 @@ if( class_exists( 'CSF' ) ) {
             ),
 
             array(
-              'id'          => 'pricing-by',
-              'type'        => 'select',
-              'title'       => __('Pricing by', 'tourfic' ),
-              'options'     => array(
+              'id'      => 'pricing-by',
+              'type'    => 'select',
+              'title'   => __('Pricing by', 'tourfic' ),
+              'options' => array(
                 '1'  => __('Per room', 'tourfic' ),
                 '2'  => __('Per person (Pro)', 'tourfic' ),
               ),
@@ -327,30 +327,30 @@ if( class_exists( 'CSF' ) ) {
             ),
 
             array(
-              'id'      => 'price',
-              'type'    => 'text',
-              'title'   => __('Pricing', 'tourfic' ),
-              'desc' =>  __( 'The price of room per one night', 'tourfic' ),
+              'id'         => 'price',
+              'type'       => 'text',
+              'title'      => __('Pricing', 'tourfic' ),
+              'desc'       => __( 'The price of room per one night', 'tourfic' ),
               'dependency' => array( 'pricing-by', '==', '1' ),
             ),
 
             array(
-              'id'      => '',
-              'class' => 'tf-csf-disable tf-csf-pro',
-              'type'    => 'text',
-              'title'   => __('Adult Pricing', 'tourfic' ),
+              'id'         => '',
+              'class'      => 'tf-csf-disable tf-csf-pro',
+              'type'       => 'text',
+              'title'      => __('Adult Pricing', 'tourfic' ),
               'subtitle'   => $badge_pro,
-              'desc' =>  __( 'The price of room per one night', 'tourfic' ),
+              'desc'       => __( 'The price of room per one night', 'tourfic' ),
               'dependency' => array( 'pricing-by', '==', '2' ),
             ),
 
             array(
-              'id'      => '',
-              'class' => 'tf-csf-disable tf-csf-pro',
-              'type'    => 'text',
-              'title'   => __('Children Pricing', 'tourfic' ),
+              'id'         => '',
+              'class'      => 'tf-csf-disable tf-csf-pro',
+              'type'       => 'text',
+              'title'      => __('Children Pricing', 'tourfic' ),
               'subtitle'   => $badge_pro,
-              'desc' =>  __( 'The price of room per one night', 'tourfic' ),
+              'desc'       => __( 'The price of room per one night', 'tourfic' ),
               'dependency' => array( 'pricing-by', '==', '2' ),
             ),
 
@@ -358,10 +358,10 @@ if( class_exists( 'CSF' ) ) {
               'id'       => 'price_multi_day',
               'type'     => 'switcher',
               'title'    => __('Multiply Pricing By Night', 'tourfic' ),
-              'subtitle' =>  __( 'During booking pricing will be multiplied by number of nights (Check-in to Check-out)', 'tourfic' ),
+              'label'    => __( 'During booking pricing will be multiplied by number of nights (Check-in to Check-out)', 'tourfic' ),
               'text_on'  => __('Yes', 'tourfic' ),
               'text_off' => __('No', 'tourfic' ),
-              'default' => true,
+              'default'  => true,
             ),
 
             array(
@@ -446,11 +446,11 @@ if( class_exists( 'CSF' ) ) {
       'fields' => array(
   
         array(
-          'id'     => 'faq',
-          'type'   => 'repeater',
-          'title'  => __('Frequently Asked Questions', 'tourfic' ),
+          'id'           => 'faq',
+          'type'         => 'repeater',
+          'title'        => __('Frequently Asked Questions', 'tourfic' ),
           'button_title' => __( 'Add FAQ', 'tourfic' ),
-          'fields' => array(
+          'fields'       => array(
         
             array(
               'id'    => 'title',
