@@ -355,13 +355,14 @@ function tf_room_availability_callback() {
                             $unique_id          = !empty($room['unique_id']) ? $room['unique_id'] : '';
                             $order_ids          = !empty($room['order_id']) ? $room['order_id'] : '';
                             $num_room_available = !empty($room['num-room']) ? $room['num-room'] : '1';
+                            $reduce_num_room = !empty($room['reduce_num_room']) ? $room['reduce_num_room'] : false;
                             $number_orders      = '0';
                             $avil_by_date       = !empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : false;  // Room Available by date enabled or  not ?
                             if($avil_by_date) {
                                 $repeat_by_date = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
                             }
 
-                            if( !empty( $order_ids ) && defined( 'TF_PRO' ) ) {
+                            if( !empty( $order_ids ) && defined( 'TF_PRO' ) && $reduce_num_room == true ) {
 
                                 # Get backend available date range as an array
                                 if ( $avil_by_date ) {
