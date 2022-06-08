@@ -40,6 +40,8 @@ function tf_hotel_booking_callback(){
     $room_selected = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
     $check_in = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
     $check_out = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
+
+    # Calculate night number
     if($check_in && $check_out) {
         $check_in_stt = strtotime($check_in);
         $check_out_stt = strtotime($check_out);
@@ -72,7 +74,10 @@ function tf_hotel_booking_callback(){
     $post_author = get_post_field( 'post_author', $post_id );
     $meta = get_post_meta( $post_id, 'tf_hotel', true );
     $rooms = !empty($meta['room']) ? $meta['room'] : '';
-    $room_avail_by_date = !empty($rooms[$room_id]['avil_by_date']) ? $rooms[$room_id]['avil_by_date'] : 0; /** @return array */
+    $avail_by_date = !empty($rooms[$room_id]['avil_by_date']) ? $rooms[$room_id]['avil_by_date'] : false;
+    if($avail_by_date) {
+        $repeat_by_date = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
+    }
     $room_name = $rooms[$room_id]['title'];
     $pricing_by = $rooms[$room_id]['pricing-by'];
     $price_multi_day = !empty($rooms[$room_id]['price_multi_day']) ? $rooms[$room_id]['price_multi_day'] : false;   
@@ -96,25 +101,40 @@ function tf_hotel_booking_callback(){
         $tf_room_data['tf_hotel_data']['room'] = $room_selected;
         $tf_room_data['tf_hotel_data']['room_name'] = $room_name;
 
-        // Pricing
-        if ( $pricing_by == '1' ) {
-            $total_price = $rooms[$room_id]['price'];
-        } elseif ( $pricing_by == '2' ) {
-            $adult_price = $rooms[$room_id]['adult_price'];
-            $adult_price = $adult_price * $adult;
-            $child_price = $rooms[$room_id]['child_price'];
-            $child_price = $child_price * $child;
-            $total_price = $adult_price + $child_price;
+        /**
+         * Calculate Pricing
+         */
+        if( $avail_by_date ) {
+
+        } else {
+
+            if ( $pricing_by == '1' ) {
+
+                $total_price = $rooms[$room_id]['price'];
+
+            } elseif ( $pricing_by == '2' ) {
+
+                $adult_price = $rooms[$room_id]['adult_price'];
+                $adult_price = $adult_price * $adult;
+                $child_price = $rooms[$room_id]['child_price'];
+                $child_price = $child_price * $child;
+                $total_price = $adult_price + $child_price;
+                
+            }
+
         }
+
+        # Multiply pricing by night number
         if(!empty($day_difference) && $price_multi_day == true) {
             $price_total = $total_price*$room_selected*$day_difference;
         } else {
             $price_total = $total_price*$room_selected;
         }
 
+        # Set pricing
         $tf_room_data['tf_hotel_data']['price_total'] = $price_total;
 
-        // Add product to cart with the custom cart item data
+        # Add product to cart with the custom cart item data
         WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
 
         $response['product_id'] = $product_id;
