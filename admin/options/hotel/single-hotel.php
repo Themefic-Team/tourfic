@@ -251,6 +251,17 @@ if( class_exists( 'CSF' ) ) {
             ),
 
             array(
+              'id'         => '',
+              'class'      => 'tf-csf-disable tf-csf-pro',
+              'type'       => 'switcher',
+              'title'      => __('Reduce Number of Rooms by Orders', 'tourfic' ),
+              'subtitle'   => __( 'Reduce the number of available rooms for booking by WooCommerce orders details' .$badge_pro, 'tourfic' ),
+              'text_on'    => __('Yes', 'tourfic' ),
+              'text_off'   => __('No', 'tourfic' ),
+              'default'    => false,
+            ),
+
+            array(
               'type'    => 'subheading',
               'content' => __('Details', 'tourfic' ),
             ),
