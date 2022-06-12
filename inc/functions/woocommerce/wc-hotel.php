@@ -110,6 +110,7 @@ function tf_hotel_booking_callback(){
          * Calculate Pricing
          */
         if ( $avail_by_date && defined( 'TF_PRO' ) ) {
+            
             // Check availability by date option
             $period = new DatePeriod(
                 new DateTime( $check_in . ' 00:00' ),
@@ -131,8 +132,12 @@ function tf_hotel_booking_callback(){
                     $child_price   = !empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $rooms[$room_id]['child_price'];
                     $total_price += $pricing_by == '1' ? $room_price : (  ( $adult_price * $adult ) + ( $child_price * $child ) );
                 } ;
-            }            
+            } 
+            
+            $price_total = $total_price*$room_selected;
+
         } else {
+
             if ( $pricing_by == '1' ) {
                 $total_price = $rooms[$room_id]['price'];
             } elseif ( $pricing_by == '2' ) {
@@ -142,13 +147,14 @@ function tf_hotel_booking_callback(){
                 $child_price = $child_price * $child;
                 $total_price = $adult_price + $child_price;              
             }
-        }
 
-        # Multiply pricing by night number
-        if(!empty($day_difference) && $price_multi_day == true) {
-            $price_total = $total_price*$room_selected*$day_difference;
-        } else {
-            $price_total = $total_price*$room_selected;
+            # Multiply pricing by night number
+            if(!empty($day_difference) && $price_multi_day == true) {
+                $price_total = $total_price*$room_selected*$day_difference;
+            } else {
+                $price_total = $total_price*$room_selected;
+            }
+
         }
 
         # Set pricing
