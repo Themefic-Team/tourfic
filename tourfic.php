@@ -9,9 +9,9 @@
  * Domain Path:     /lang/
  * Version:         2.5
  * Tested up to: 6.0
- * WC tested up to: 6.5.1
+ * WC tested up to: 6.6.0
  * Requires PHP: 7.2
- * Elementor tested up to: 3.6.5
+ * Elementor tested up to: 3.6.6
  */
 
 // don't load directly
