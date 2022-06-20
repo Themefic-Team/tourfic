@@ -112,8 +112,9 @@
             var check_in_date = $('input[name=check_in_date]').val();
             var check_out_date = $('input[name=check_out_date]').val();
             var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
-            //console.log(post_id);
+            var deposit = $('input[name=make_deposit]').is(':checked');
 
+            
             var data = {
                 action: 'tf_hotel_booking',
                 tf_room_booking_nonce: tf_room_booking_nonce,
@@ -126,7 +127,9 @@
                 check_in_date: check_in_date,
                 check_out_date: check_out_date,
                 room: room,
+                deposit
             };
+             
 
             $.ajax({
                 type: 'post',
@@ -1236,6 +1239,7 @@
              $('.tf-header-menu-wrap').slideToggle();
          });
 
+        
     });
 })(jQuery, window);
 
