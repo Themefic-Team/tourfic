@@ -7,11 +7,11 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.3
- * Tested up to: 5.9.3
- * WC tested up to: 6.4.1
+ * Version:         2.5
+ * Tested up to: 6.0
+ * WC tested up to: 6.6.0
  * Requires PHP: 7.2
- * Elementor tested up to: 3.6.5
+ * Elementor tested up to: 3.6.6
  */
 
 // don't load directly
@@ -92,7 +92,7 @@ if ( !is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
  * @since 1.0
  */
 if ( !defined( 'TOURFIC' ) ) {
-    define( 'TOURFIC', '2.3' );
+    define( 'TOURFIC', '2.5' );
 }
 
 /**
@@ -174,6 +174,13 @@ if ( !function_exists( 'tfopt' ) ) {
 /**
  * All the requires
  */
+// Classes
+if ( file_exists( TF_INC_PATH . 'classes.php' ) ) {
+    require_once TF_INC_PATH . 'classes.php';
+} else {
+    tf_file_missing(TF_INC_PATH . 'classes.php');
+}
+
 // Functions
 if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {
     require_once TF_INC_PATH . 'functions.php';

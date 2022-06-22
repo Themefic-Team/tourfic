@@ -18,14 +18,14 @@ function tf_required_taxonomies( $hook ) {
 	$default_post_types = array(
         'tf_hotel' => array(
 			'hotel_location' => array(
-				'message' => 'Please select a location before publishing this hotel.'
+				'message' => __( 'Please select a location before publishing this hotel', 'tourfic' )
 			)
         ),
 		'tf_tours' => array(
 			'tour_destination' => array(
-				'message' => 'Please select a destination before publishing this tour.'
-			)
-        ),
+				'message' => __( 'Please select a destination before publishing this tour', 'tourfic' )
+        	)
+		)
 	);
 
 	$post_types = apply_filters( 'tf_post_types', $default_post_types );
@@ -92,11 +92,15 @@ function tf_required_taxonomies( $hook ) {
 	}
 
 	if ( $tf_is_gutenberg_active ) {
+
 		wp_enqueue_script( 'tf-required', TF_ADMIN_URL . 'assets/js/required-taxonomies-gutenberg.js', array(
 			'jquery', 'wp-data', 'wp-editor', 'wp-edit-post'
 		));
+
 	} else {
+
 		wp_enqueue_script( 'tf-required', TF_ADMIN_URL . 'assets/js/required-taxonomies.js', array( 'jquery' ), false, true );
+
 	}
 
 	wp_localize_script( 'tf-required', 'tf_params', array(
@@ -110,7 +114,7 @@ function tf_required_taxonomies( $hook ) {
 add_action( 'admin_enqueue_scripts', 'tf_required_taxonomies' );
 
 function tf_is_gutenberg_active() {
-	if ( function_exists( 'is_gutenberg_page' ) && is_gutenberg_page() ) {
+	if ( function_exists( 'is_gutenberg_page' ) ) {
 		return true;
 	}
 
@@ -125,4 +129,21 @@ function tf_is_gutenberg_active() {
 	return false;
 }
 
+/**
+ * Get post id
+ */
+function tf_admin_footer() {
+
+    $screen = get_current_screen();
+
+    if ( is_admin() && ($screen->id == 'tf_hotel') ) {
+        global $post;
+		?>
+		<script>
+			var post_id = '<?php echo $post->ID; ?>';
+		</script>
+		<?php
+    }
+}
+add_action( 'admin_footer', 'tf_admin_footer' );
 ?>

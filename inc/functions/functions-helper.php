@@ -5,22 +5,19 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Search form action url
  */
-function tf_booking_search_action(){
+function tf_booking_search_action() {
 
     // get data from global settings else default
-	$search_result_action = !empty(tfopt('search-result-page')) ? get_permalink(tfopt('search-result-page')) : home_url('/search-result/');
+	$search_result_action = !empty( tfopt( 'search-result-page' ) ) ? get_permalink( tfopt( 'search-result-page' ) ) : home_url( '/search-result/' );
     // can be override by filter
 	return apply_filters( 'tf_booking_search_action', $search_result_action );
 
 }
 
-// Protected Pass
-function tourfic_proctected_product_pass(){
-	return "111111";
-}
-
-// Notice wrapper
-function tourfic_notice_wrapper(){
+/**
+ * Notice wrapper
+ */
+function tourfic_notice_wrapper() {
 	?>
 	<div class="tf_container">
 		<div class="tf_notice_wrapper"></div>
@@ -34,8 +31,8 @@ add_action( 'tf_before_container', 'tourfic_notice_wrapper', 10 );
  * 
  * @return number of available terms
  */
-if( !function_exists('tf_term_count') ){
-    function tf_term_count( $filter, $destination, $default_count ){
+if( !function_exists('tf_term_count') ) {
+    function tf_term_count( $filter, $destination, $default_count ) {
         
         if( $destination == '' ){
             return $default_count;
@@ -69,29 +66,31 @@ if( !function_exists('tf_term_count') ){
             endwhile; 
         endif;
         
-        return count($term_count);
+        return count( $term_count );
         
         wp_reset_postdata();
     }
 }
 
-// Set search reult page
-function tourfic_booking_set_search_result( $url ){	
+/**
+ * Set search reult page
+ */
+function tourfic_booking_set_search_result( $url ) {
+
 	$search_result_page = tfopt( 'search-result-page' );
 
-	if ( isset( $search_result_page ) ){
+	if ( isset( $search_result_page ) ) {
 		$url = get_permalink( $search_result_page );
 	}
 	
 	return $url;
-
-	
 
 }
 add_filter( 'tf_booking_search_action', 'tourfic_booking_set_search_result' );
 
 // Tours price with html format
 function tf_tours_price_html() {
+
 	$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
 	$pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
 	$tour_type = $meta['type'] ? $meta['type'] : null;
@@ -128,20 +127,21 @@ function tf_tours_price_html() {
 /**
  * Full Width Container Start
  */
-function tourfic_fullwidth_container_start( $fullwidth ){
+function tourfic_fullwidth_container_start( $fullwidth ) {
 
     if ( $fullwidth == "true" ) : ?>
         <!-- Start Fullwidth Wrap -->
         <div class="tf_tf_booking-widget-wrap" data-fullwidth="true">
         <div class="tf_custom-container">
         <div class="tf_custom-inner">
+
     <?php endif;
 }
 
 /**
- * Full Width Container Start
+ * Full Width Container End
  */
-function tourfic_fullwidth_container_end( $fullwidth ){
+function tourfic_fullwidth_container_end( $fullwidth ) {
 
     if ( $fullwidth == "true" ) : ?>
         </div></div></div>
@@ -149,8 +149,10 @@ function tourfic_fullwidth_container_end( $fullwidth ){
     <?php endif;
 }
 
-// Ask Question
-function tourfic_ask_question(){
+/**
+ * Ask Question
+ */
+function tourfic_ask_question() {
 	?>
 	<div id="tf-ask-question" style="display: none;">
 		<div class="tf-aq-overlay"></div>
@@ -183,8 +185,11 @@ function tourfic_ask_question(){
 }
 add_action( 'wp_footer', 'tourfic_ask_question' );
 
-// Ask question ajax
-function tourfic_ask_question_ajax(){
+/**
+ * Ask question ajax
+ */
+function tourfic_ask_question_ajax() {
+
 	$response = array();
 
 	if ( !check_ajax_referer( 'ask_question_nonce' ) ){
@@ -261,8 +266,10 @@ function tourfic_wp_dropdown_cats_multiple( $output, $r ) {
  * @return string (Maybe) modified "read more" excerpt string.
  */
 function tf_tours_excerpt_more( $more ) {
+
 	if( 'tf_tours' === get_post_type())
-    return '.....';
+    return '...';
+
 }
 add_filter( 'excerpt_more', 'tf_tours_excerpt_more' );
 
@@ -273,16 +280,22 @@ add_filter( 'excerpt_more', 'tf_tours_excerpt_more' );
  * @return int (Maybe) modified excerpt length.
  */
 function tf_custom_excerpt_length( $length ) {
+
 	if( 'tf_tours' === get_post_type())
     return 30;
+
 }
 add_filter( 'excerpt_length', 'tf_custom_excerpt_length', 999 );
 
-// Pagination
-function tourfic_posts_navigation($wp_query=''){
+/**
+ * Pagination
+ */
+function tourfic_posts_navigation($wp_query='') {
+
 	if(empty($wp_query)) {
 		global $wp_query;
 	}
+
 	$max_num_pages = $wp_query->max_num_pages;
 	$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 
@@ -296,6 +309,7 @@ function tourfic_posts_navigation($wp_query=''){
 	    'prev_next'       => true,
 	) );
 	echo "</div>";
+
 }
 
 /**
@@ -341,6 +355,40 @@ if(!function_exists('tf_flatpickr_locale')) {
 
 			echo 'locale: "' .$flatpickr_locale. '",';
 		}
+
 	}
+}
+
+/**
+ * Flatten a multi-dimensional array into a single level.
+ *
+ * @author devkabir
+ * 
+ * @param  iterable  $array
+ * @param  int  $depth
+ * @return array
+ */
+if (!function_exists('tf_array_flatten')) {
+    function tf_array_flatten($array, $depth = INF) {
+
+        $result = [];
+
+        foreach ($array as $item) {
+            if (!is_array($item)) {
+                $result[] = $item;
+            } else {
+                $values = $depth === 1
+                    ? array_values($item)
+                    : tf_array_flatten($item, $depth - 1);
+
+                foreach ($values as $value) {
+                    $result[] = $value;
+                }
+            }
+        }
+
+        return $result;
+		
+    }
 }
 ?>

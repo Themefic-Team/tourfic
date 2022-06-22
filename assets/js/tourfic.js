@@ -25,7 +25,10 @@
             e.preventDefault();
 
             if($.trim($('input[name=check-in-out-date]').val()) == ''){
-                $('.tf_booking-dates .tf_label-row').append('<span clss="required"><b>'+tf_params.field_required+'</b></span>');
+
+                if( $('#tf-required').length === 0 ) {
+                    $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" clss="required"><b>'+tf_params.field_required+'</b></span>');
+                }
                 return;
             }
 
@@ -102,6 +105,7 @@
             var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
             var post_id = $('input[name=post_id]').val();
             var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
+            var unique_id = $(this).closest('.room-submit-wrap').find('input[name=unique_id]').val();
             var location = $('input[name=place]').val();
             var adult = $('input[name=adult]').val();
             var child = $('input[name=child]').val();
@@ -115,6 +119,7 @@
                 tf_room_booking_nonce: tf_room_booking_nonce,
                 post_id: post_id,
                 room_id: room_id,
+                unique_id: unique_id,
                 location: location,
                 adult: adult,
                 child: child,
@@ -1216,14 +1221,6 @@
              });
          });
          // End Feed Click Trigger
- 
-         //Ratings copy/move under gallery
-        //  var avg_rating = $('.tf-overall-ratings .overall-rate').text();
-        //  if(avg_rating){
-        //      $('.reviews span').html(avg_rating);
-        //  }else{
-        //      $('.reviews span').html("0/5");
-        //  }
  
          $(".tf-travel-text h4").click(function(){
              $(this).siblings('.tf-travel-contetn').slideToggle();

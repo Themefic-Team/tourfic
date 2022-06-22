@@ -35,8 +35,8 @@ if( $discount_type == 'percent' ){
 			<div class="tf_content">
 				<div class="tf-action-top">
 		            <div class="tf-list-grid">
-		                <a href="#list-view" data-id="list-view" class="change-view" title="List View"><?php echo tourfic_get_svg('list_view'); ?></a>
-		                <a href="#grid-view" data-id="grid-view" class="change-view" title="Grid View"><?php echo tourfic_get_svg('grid_view'); ?></a>
+		                <a href="#list-view" data-id="list-view" class="change-view" title="<?php _e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
+		                <a href="#grid-view" data-id="grid-view" class="change-view" title="<?php _e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
 		            </div>
 		        </div>
 				<div class="archive_ajax_result">
@@ -47,7 +47,7 @@ if( $discount_type == 'percent' ){
 							tf_tour_archive_single_item();
 						}
 					} else {
-						get_template_part( 'template-parts/content', 'none' );
+						echo '<div class="tf-nothing-found">' .__("No Tours Found!", "tourfic"). '</div>';
 					}
 					?>
 				</div>

@@ -13,6 +13,7 @@
   margin: 10px 0 0 0;
   padding: 0;
   display: flex;
+  flex-wrap: wrap;
 }
 .tourfic-wrap svg {
   display: block;
@@ -131,10 +132,7 @@
 .tf_title-right {
   display: flex;
   align-items: center;
-}
-
-.share-tour {
-  margin-right: 14px;
+  column-gap: 5px;
 }
 
 .tf_price {
@@ -1292,10 +1290,6 @@ p.price {
   }
 }
 
-.share-tour {
-  position: relative;
-}
-
 .share-tour-content {
   display: none;
   position: absolute;
@@ -1320,6 +1314,7 @@ p.price {
   white-space: nowrap;
   display: flex;
   align-items: center;
+  column-gap: 5px;
 }
 .share-tour-content .tf-dropdown__item-content svg {
   margin-right: 8px;
@@ -1337,6 +1332,7 @@ p.price {
   display: flex;
   align-items: center;
   font-weight: 400;
+  font-size: 14px;
 }
 .share-tour-content .tf-dropdown__item:hover {
   background-color: #f5f5f5;
@@ -2735,7 +2731,6 @@ form.tf_tours_booking .tf_selectperson-wrap {
 .tourfic-single-right {
   order: 2;
   flex-grow: 1;
-  -ms-flex: 1;
   flex-basis: 200px;
   padding: 0 0 0 16px;
 }
@@ -2778,7 +2773,6 @@ form.tf_tours_booking .tf_selectperson-wrap {
 .tf_item_main_block {
   order: 2;
   flex-grow: 1;
-  -ms-flex: 1;
 }
 
 .tf_card_address_line a {
@@ -2967,10 +2961,11 @@ form.tf_tours_booking .tf_selectperson-wrap {
 .tf-list-grid a {
   display: inline-flex;
   margin-left: 10px;
-  opacity: 0.4;
+  color: #333;
+  font-size: 20px;
 }
 .tf-list-grid a:hover, .tf-list-grid a.active {
-  opacity: 1;
+  color: #000;
 }
 
 .tf-popular_filter {

@@ -32,7 +32,7 @@ CSF::createSection( $prefix, array(
 
       array(
         'type'    => 'content',
-        'content' => __('Use shortcode <code>[tf_registration_form]</code> to show registration form in post/page.', 'tourfic' ),
+        'content' => __('Use shortcode <code>[tf_registration_form]</code> to show registration form in post/page/widget.', 'tourfic' ),
       ),
 
       array(
@@ -52,6 +52,11 @@ CSF::createSection( $prefix, array(
         'subtitle'   => __('Prevent unverified user to login' .$badge_pro, 'tourfic' ),
         'dependency' => array( 'email-verify', '==', 'true' ),
         'default'    => true,
+      ),
+
+      array(
+        'type'    => 'content',
+        'content' => __('Use shortcode <code>[tf_login_form]</code> to show login form in post/page/widget.', 'tourfic' ),
       ),
       
       // Vendor

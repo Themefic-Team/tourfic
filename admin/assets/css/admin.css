@@ -1,3 +1,15 @@
+/**
+ * Common
+ */
+.tf-post-states{
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 8px;
+    border-radius: 10px;
+    background: #333;
+    color: #fff; 
+}
+
 /** 
  * Meta field
  * Common
@@ -39,6 +51,14 @@
 }
 .tf-csf-badge .tf-pro {
     background: #b30000;
+}
+
+/**
+ * Hotel
+ */
+.room-repeater .unique-id,
+.room-repeater .tf-order_id {
+    display: none;
 }
 
 /**
@@ -112,4 +132,43 @@
 .disable-sortable .csf-repeater-sort,
 .disable-sortable .csf-repeater-clone {
     display: none !important;
+}
+/**
+ * Override Codestar repeater for Hotel Room
+ */
+.csf-section .room-repeater > .csf-title{
+    width: 100%;
+    margin: 0 0 20px 0;
+    font-size: 18px;
+}
+.csf-section .room-repeater > .csf-fieldset{
+    width: 100%;
+}
+.csf-section .room-repeater .csf-repeater-wrapper .csf-repeater-item {
+    margin: 0 0 20px 0;
+    border-bottom: 2px solid #2271b1;
+}
+
+.csf-section .room-repeater .repeater-by-date > .csf-title{
+    display: none;
+}
+.csf-section .room-repeater .repeater-by-date > .csf-fieldset{
+    width: 100%;
+}
+.csf-section .room-repeater .repeater-by-date .csf-repeater-wrapper .csf-repeater-item {
+    margin: 0 0 20px 0;
+    border-bottom: 1px solid #eee;
+}
+
+/**
+ * Change admin menu color
+ */
+#adminmenu .toplevel_page_tourfic .dashicons-before:before {
+    color: #8bc34a;
+}
+#adminmenu .menu-icon-tf_hotel .dashicons-before:before {
+    color: #03a9f4;
+}
+#adminmenu .menu-icon-tf_tours .dashicons-before:before {
+    color: #ffc107;
 }

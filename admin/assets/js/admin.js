@@ -12,10 +12,11 @@
                 y: 'bottom',
             },
         });
+
         /**
-                 * Delete old review fields
-                 * @author kabir, fida
-                 */
+         * Delete old review fields
+         * @author kabir, fida
+         */
         $(document).on('click', '.tf-del-old-review-fields', function (e) {
             e.preventDefault();
             var $this = $(this);
@@ -41,6 +42,42 @@
             });
 
         });
+
+        /**
+         * Delete room order ids
+         * @author fida
+         */
+         $(document).on('click', '.remove-order-ids', function (e) {
+
+            e.preventDefault();
+            
+            var $this = $(this);
+            var meta_field = $this.closest( '.csf-repeater-content' ).find('.tf-order_id input').attr('name');
+
+            var data = {
+                action: 'tf_remove_room_order_ids',
+                meta_field: meta_field,
+                post_id: post_id,
+            };
+
+            $.ajax({
+                type: 'post',
+                url: ajaxurl,
+                data: data,
+                beforeSend: function (data) {
+                    notyf.success('Deleting order ids...')
+                },
+                success: function (data) {
+                    notyf.success(data.data);
+                    location.reload();
+                },
+                error: function (data) {
+                    notyf.error(data.data);
+                },
+            });
+
+        });
+
         /**
          * Tour location required
          * 
@@ -100,6 +137,22 @@
 
         $(document).on('click', '.tf-csf-pro', function(e) {
             window.open('https://tourfic.com/');
+        });
+
+        /**
+         * Generate & set unique id for hotel rooms
+         */
+        $(document).on('click', '.room-repeater > div.csf-fieldset > a.csf-repeater-add', function(e) {
+
+            var repeaterNumber = $('.room-repeater .csf-repeater-wrapper [data-depend-id="room"]').length - 2;
+
+            $('.room-repeater .unique-id input').each(function() {
+                repeaterNumber++;
+                if( $('.room-repeater [data-depend-id="room"] [data-depend-id="unique_id"]').val().length === 0 ) {
+                    $('.room-repeater [name="tf_hotel[room]['+repeaterNumber+'][unique_id]"]').val(new Date().valueOf() + repeaterNumber);
+                }
+            });
+
         });
 
     });

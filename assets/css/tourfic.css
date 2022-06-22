@@ -63,6 +63,14 @@
 .fancybox-container {
     z-index: 999999;
 }
+.tf-single-share {
+    position: relative;
+    margin: 0 15px 0 0;
+}
+.tf-single-share a {
+    font-size: 20px;
+    color: #333;
+}
 
 /**
  * tf-tooltip
@@ -221,10 +229,20 @@
 /*================================
 |            Hotel CSS           |
 ================================*/
+.tf-share {
+    position: relative;
+}
+.tf-share a {
+    color: #333;
+    line-height: 1;
+    font-size: 22px;
+    display: block;
+    margin: 0 10px 0 0;
+    outline: none;
+}
 .tf_room-table .availability-table tbody tr:nth-child(odd) td{
     background: #fff;
 }
-
 /* the slides */
 .slick-slide {
     margin-left: 5px !important;
@@ -259,6 +277,7 @@
  */
 .hotel-room-wrap {
     width: 100%;
+    overflow-x: auto;
 }
 
 .tf_room-table th.description {
