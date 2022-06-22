@@ -96,7 +96,7 @@
                 <div class="price-per-night"><?php $days > 0 ? esc_html_e( 'for '.$days .' nights', 'tourfic' ) : esc_html_e( 'per person/night', 'tourfic' );?></div>
             <?php }?>
 
-            <?php if ($has_deposit == true) { ?>
+            <?php if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount)) { ?>
                 <span class="tf-price tf-deposit-amount-<?php echo $room_id ?>" style="display: none;"><?php echo wc_price( $deposit_amount ); ?></span>
                 <div class="price-per-night tf-deposit-amount-<?php echo $room_id ?> " style="display: none;">need to be deposited</div>
             <?php } ?>
@@ -115,7 +115,7 @@
                     ?>
                 </select>
             </div>
-	        <?php if ($has_deposit == true) { ?>
+	        <?php if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
                 <div class="room-deposit-wrap">
                     <input type="checkbox" id="tf-make-deposit" name="make_deposit" value="<?php echo $room_id ?>">
                     <label for="tf-make-deposit">I'll make a deposit</label><br>

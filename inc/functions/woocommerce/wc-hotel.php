@@ -162,7 +162,7 @@ function tf_hotel_booking_callback(){
         $tf_room_data['tf_hotel_data']['price_total'] = $price_total;
         # check for deposit
 	    tf_get_deposit_amount($rooms[$room_id], $price_total, $deposit_amount, $has_deposit);
-	    if ($has_deposit == true) {
+	    if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount) ) {
 		    $tf_room_data['tf_hotel_data']['price_total'] = $deposit_amount;
 		    $tf_room_data['tf_hotel_data']['due'] = $price_total - $deposit_amount;
 	    }
