@@ -474,7 +474,7 @@ function tf_room_availability_callback() {
 
                                     if ( $form_total_person <= $total_person ) {
 
-                                        include TF_TEMPLATE_PART_PATH . 'hotel\hotel-availability-table-row.php';
+                                        include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
 
                                     } else {
 
@@ -499,7 +499,7 @@ function tf_room_availability_callback() {
 
                                 if ( $form_total_person <= $total_person ) {
 
-                                    include TF_TEMPLATE_PART_PATH . 'hotel\hotel-availability-table-row.php';
+                                    include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
 
                                 } else {
 

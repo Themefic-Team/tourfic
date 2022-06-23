@@ -222,7 +222,7 @@ if ( class_exists( 'CSF' ) ) {
                 'id'         => 'adult_price',
                 'type'       => 'number',
                 'title'      => __('Price for Adult', 'tourfic'),
-                'subtitle'   => __('Input adult price', 'tourfic'),
+                'subtitle'   => __('For no price use 00', 'tourfic'),
                 'dependency' => [
                     array('pricing', '==', 'person'),
                     ['disable_adult_price', '==', 'false']
@@ -239,7 +239,7 @@ if ( class_exists( 'CSF' ) ) {
                     ['disable_child_price', '==', 'false']
                 ],
                 'title'      => __('Price for Child', 'tourfic'),
-                'subtitle'   => __('Input child price', 'tourfic'),
+                'subtitle'   => __('For no price use 00', 'tourfic'),
                 'attributes' => array(
                     'min' => '0',
                 ),
@@ -253,7 +253,7 @@ if ( class_exists( 'CSF' ) ) {
                     ['disable_adult_price', '==', 'false'],
                 ],
                 'title'      => __('Price for Infant', 'tourfic'),
-                'subtitle'   => __('Input infant price', 'tourfic'),
+                'subtitle'   => __('For no price use 00', 'tourfic'),
                 'attributes' => array(
                     'min' => '0',
                 ),

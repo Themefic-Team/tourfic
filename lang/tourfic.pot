@@ -6,40 +6,52 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-16 16:29+0600\n"
+"POT-Creation-Date: 2022-06-21 14:48+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.1\n"
 
-#: tourfic/tourfic.php:105
+#: tourfic/tourfic.php:106
 msgid " file is missing! It is required to function Tourfic properly!"
 msgstr ""
 
-#: tourfic/tourfic.php:202 tourfic/tourfic.php:211
+#: tourfic/tourfic.php:210 tourfic/tourfic.php:219
 #, php-format
 msgid "Tourfic requires %1$s WooCommerce %2$s to be activated."
 msgstr ""
 
-#: tourfic/tourfic.php:203 tourfic-pro/tourfic-pro.php:159
+#: tourfic/tourfic.php:211 tourfic-pro/tourfic-pro.php:155
 msgid "Install Now"
 msgstr ""
 
-#: tourfic/tourfic.php:212 tourfic-pro/tourfic-pro.php:168
+#: tourfic/tourfic.php:220 tourfic-pro/tourfic-pro.php:164
 msgid "Activate"
 msgstr ""
 
-#: tourfic/tourfic.php:220
+#: tourfic/tourfic.php:228
 #, php-format
 msgid ""
 "%sTourfic is inactive.%s This plugin requires WooCommerce 2.5 or newer. "
 "Please %supdate WooCommerce to version 2.5 or newer%s"
+msgstr ""
+
+#: tourfic/admin/inc/functions.php:21
+msgid "Please select a location before publishing this hotel"
+msgstr ""
+
+#: tourfic/admin/inc/functions.php:26
+msgid "Please select a destination before publishing this tour"
+msgstr ""
+
+#: tourfic/admin/inc/functions.php:109
+msgid "Tour Location is a required field!"
 msgstr ""
 
 #: tourfic/admin/options/options.php:99
@@ -83,8 +95,8 @@ msgstr ""
 msgid "Tourfic Settings"
 msgstr ""
 
-#: tourfic/admin/options/global/settings.php:13
-#: tourfic-pro/admin/options/global/settings.php:13
+#: tourfic/admin/options/global/settings.php:18
+#: tourfic-pro/admin/options/global/settings.php:17
 msgid ""
 "<em>Enjoyed <strong>Tourfic</strong>? Please leave us a <a style=\"color:"
 "#e9570a;\" href=\"https://wordpress.org/support/plugin/tourfic/reviews/?"
@@ -92,18 +104,18 @@ msgid ""
 "appreciate your support!</em>"
 msgstr ""
 
-#: tourfic/admin/options/global/settings.php:38
-#: tourfic-pro/admin/options/global/settings.php:38
+#: tourfic/admin/options/global/settings.php:40
+#: tourfic-pro/admin/options/global/settings.php:39
 msgid "Hotel Options"
 msgstr ""
 
-#: tourfic/admin/options/global/settings.php:56
-#: tourfic-pro/admin/options/global/settings.php:56
+#: tourfic/admin/options/global/settings.php:58
+#: tourfic-pro/admin/options/global/settings.php:57
 msgid "Tour Options"
 msgstr ""
 
-#: tourfic/admin/options/global/settings.php:106
-#: tourfic-pro/admin/options/global/settings.php:106
+#: tourfic/admin/options/global/settings.php:108
+#: tourfic-pro/admin/options/global/settings.php:107
 msgid "Import/Export"
 msgstr ""
 
@@ -125,8 +137,9 @@ msgid "Disable or hide the services you don't need by ticking the checkbox"
 msgstr ""
 
 #: tourfic/admin/options/global/parts/general.php:17
+#: tourfic/inc/elementor/widgets/search-form-horizontal.php:103
 #: tourfic/inc/functions/functions-hotel.php:75
-#: tourfic/inc/functions/shortcodes.php:383
+#: tourfic/inc/functions/shortcodes.php:387
 #: tourfic-pro/admin/options/global/parts/general.php:17
 #: tourfic-pro/inc/functions/functions_user.php:647
 #: tourfic-pro/inc/functions/functions_user.php:661
@@ -134,116 +147,32 @@ msgid "Hotel"
 msgstr ""
 
 #: tourfic/admin/options/global/parts/general.php:18
+#: tourfic/inc/elementor/widgets/search-form-horizontal.php:104
 #: tourfic/inc/functions/functions-tour.php:78
-#: tourfic/inc/functions/shortcodes.php:384
+#: tourfic/inc/functions/shortcodes.php:388
 #: tourfic-pro/admin/options/global/parts/general.php:18
 #: tourfic-pro/inc/functions/functions_user.php:652
 #: tourfic-pro/inc/functions/functions_user.php:666
 msgid "Tour"
 msgstr ""
 
-#: tourfic/admin/options/global/parts/miscellaneous.php:12
-#: tourfic-pro/admin/options/global/parts/miscellaneous.php:12
-msgid "Miscellaneous"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/miscellaneous.php:23
-#: tourfic-pro/admin/options/global/parts/miscellaneous.php:23
-msgid "Wishlist"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/miscellaneous.php:28
-#: tourfic-pro/admin/options/global/parts/miscellaneous.php:28
-msgid "Wishlist Settings"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/miscellaneous.php:34
-#: tourfic-pro/admin/options/global/parts/miscellaneous.php:34
-msgid "Enable Wishlist for"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/miscellaneous.php:36
-#: tourfic-pro/admin/options/global/parts/miscellaneous.php:36
-msgid "Logged in User"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/miscellaneous.php:37
-#: tourfic-pro/admin/options/global/parts/miscellaneous.php:37
-msgid "Logged out User"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/miscellaneous.php:45
-#: tourfic-pro/admin/options/global/parts/miscellaneous.php:45
-msgid "Show Wishlist Button on"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/miscellaneous.php:47
-#: tourfic-pro/admin/options/global/parts/miscellaneous.php:47
-msgid "Single Hotel Page"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/miscellaneous.php:48
-#: tourfic-pro/admin/options/global/parts/miscellaneous.php:48
-msgid "Single Tour Page"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/miscellaneous.php:56
-#: tourfic/admin/options/global/parts/miscellaneous.php:57
-#: tourfic-pro/admin/options/global/parts/miscellaneous.php:56
-#: tourfic-pro/admin/options/global/parts/miscellaneous.php:57
-msgid "Select Wishlist Page"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/search.php:7
-#: tourfic/inc/functions/functions-hotel.php:578
-#: tourfic/inc/functions/functions-tour.php:307
-#: tourfic-pro/admin/options/global/parts/search.php:7
-msgid "Search"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/search.php:14
-#: tourfic-pro/admin/options/global/parts/search.php:14
-msgid "Select a page"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/search.php:17
-#: tourfic-pro/admin/options/global/parts/search.php:17
-msgid "Select Search Result Page"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/search.php:18
-#: tourfic-pro/admin/options/global/parts/search.php:18
-msgid "Page template: <code>Tourfic - Search Result</code> must be selected"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/search.php:25
-#: tourfic-pro/admin/options/global/parts/search.php:25
-msgid "Search Result Relation"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/search.php:26
-#: tourfic-pro/admin/options/global/parts/search.php:26
-msgid ""
-"Search result relation with search widget and filters. OR means matched any "
-"query, AND means matched all query."
-msgstr ""
-
-#: tourfic/admin/options/global/parts/search.php:28
-#: tourfic-pro/admin/options/global/parts/search.php:28
-msgid "Select an option"
-msgstr ""
-
+#: tourfic/admin/options/global/parts/miscellaneous.php:5
+#: tourfic/admin/options/global/parts/miscellaneous.php:7
 #: tourfic/admin/options/global/parts/vendor.php:5
 #: tourfic/admin/options/global/parts/vendor.php:7
 #: tourfic/admin/options/hotel/single-hotel.php:4
 #: tourfic/admin/options/hotel/single-hotel.php:6
 #: tourfic/admin/options/tour/single-tour.php:5
 #: tourfic/admin/options/tour/single-tour.php:7
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:5
 #: tourfic-pro/admin/options/hotel/single-hotel.php:4
 #: tourfic-pro/admin/options/tour/single-tour.php:5
 msgid "Upcoming"
 msgstr ""
 
+#: tourfic/admin/options/global/parts/miscellaneous.php:6
+#: tourfic/admin/options/global/parts/miscellaneous.php:7
+#: tourfic/admin/options/global/parts/search.php:5
 #: tourfic/admin/options/global/parts/vendor.php:6
 #: tourfic/admin/options/global/parts/vendor.php:7
 #: tourfic/admin/options/hotel/single-hotel.php:5
@@ -251,6 +180,412 @@ msgstr ""
 #: tourfic/admin/options/tour/single-tour.php:6
 #: tourfic/admin/options/tour/single-tour.php:7
 msgid "Pro Feature"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:16
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:14
+msgid "Miscellaneous"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:27
+#: tourfic/inc/elementor/widgets/wishlist.php:31
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:25
+msgid "Wishlist"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:33
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:31
+msgid "Wishlist Settings"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:39
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:37
+msgid "Enable Wishlist for"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:41
+#: tourfic/admin/options/global/parts/miscellaneous.php:132
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:39
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:120
+msgid "Logged in User"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:42
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:40
+msgid "Logged out User"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:50
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:48
+msgid "Show Wishlist Button on"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:52
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:50
+msgid "Single Hotel Page"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:53
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:51
+msgid "Single Tour Page"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:61
+#: tourfic/admin/options/global/parts/miscellaneous.php:62
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:59
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:60
+msgid "Select Wishlist Page"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:83
+#: tourfic/admin/options/global/parts/miscellaneous.php:89
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:81
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:87
+msgid "Permalink Settings"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:94
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:92
+msgid "For permalink settings go to default <a href=\""
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:108
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:106
+msgid "Review"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:114
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:112
+msgid "Review Settings"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:130
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:118
+msgid "Enable Review for"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:133
+msgid "Log out User (Pro)"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:141
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:129
+msgid "Auto Publish Review"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:142
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:130
+msgid "By default review will be pending and waiting for admin approval"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:143
+#: tourfic/admin/options/global/parts/search.php:31
+#: tourfic/admin/options/global/parts/search.php:41
+#: tourfic/admin/options/global/parts/hotel/single.php:19
+#: tourfic/admin/options/global/parts/hotel/single.php:28
+#: tourfic/admin/options/global/parts/tour/single.php:19
+#: tourfic/admin/options/global/parts/tour/single.php:27
+#: tourfic/admin/options/hotel/single-hotel.php:70
+#: tourfic/admin/options/hotel/single-hotel.php:259
+#: tourfic/admin/options/hotel/single-hotel.php:373
+#: tourfic/admin/options/hotel/single-hotel.php:514
+#: tourfic/admin/options/hotel/single-hotel.php:523
+#: tourfic/admin/options/tour/single-tour.php:344
+#: tourfic/admin/options/tour/single-tour.php:792
+#: tourfic/admin/options/tour/single-tour.php:802
+#: tourfic/inc/elementor/widgets/hotel-locations.php:93
+#: tourfic/inc/elementor/widgets/search-form-horizontal.php:115
+#: tourfic/inc/elementor/widgets/tour-destinations.php:93
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:131
+#: tourfic-pro/admin/options/global/parts/search.php:27
+#: tourfic-pro/admin/options/global/parts/search.php:35
+#: tourfic-pro/admin/options/global/parts/hotel/single.php:19
+#: tourfic-pro/admin/options/global/parts/hotel/single.php:28
+#: tourfic-pro/admin/options/global/parts/tour/single.php:19
+#: tourfic-pro/admin/options/global/parts/tour/single.php:27
+#: tourfic-pro/admin/options/hotel/single-hotel.php:67
+#: tourfic-pro/admin/options/hotel/single-hotel.php:254
+#: tourfic-pro/admin/options/hotel/single-hotel.php:373
+#: tourfic-pro/admin/options/hotel/single-hotel.php:515
+#: tourfic-pro/admin/options/hotel/single-hotel.php:524
+#: tourfic-pro/admin/options/tour/single-tour.php:331
+#: tourfic-pro/admin/options/tour/single-tour.php:751
+#: tourfic-pro/admin/options/tour/single-tour.php:759
+msgid "Yes"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:144
+#: tourfic/admin/options/global/parts/search.php:32
+#: tourfic/admin/options/global/parts/search.php:42
+#: tourfic/admin/options/global/parts/hotel/single.php:20
+#: tourfic/admin/options/global/parts/hotel/single.php:29
+#: tourfic/admin/options/global/parts/tour/single.php:20
+#: tourfic/admin/options/global/parts/tour/single.php:28
+#: tourfic/admin/options/hotel/single-hotel.php:71
+#: tourfic/admin/options/hotel/single-hotel.php:260
+#: tourfic/admin/options/hotel/single-hotel.php:374
+#: tourfic/admin/options/hotel/single-hotel.php:515
+#: tourfic/admin/options/hotel/single-hotel.php:524
+#: tourfic/admin/options/tour/single-tour.php:345
+#: tourfic/admin/options/tour/single-tour.php:793
+#: tourfic/admin/options/tour/single-tour.php:803
+#: tourfic/inc/elementor/widgets/hotel-locations.php:94
+#: tourfic/inc/elementor/widgets/search-form-horizontal.php:116
+#: tourfic/inc/elementor/widgets/tour-destinations.php:94
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:132
+#: tourfic-pro/admin/options/global/parts/search.php:28
+#: tourfic-pro/admin/options/global/parts/search.php:36
+#: tourfic-pro/admin/options/global/parts/hotel/single.php:20
+#: tourfic-pro/admin/options/global/parts/hotel/single.php:29
+#: tourfic-pro/admin/options/global/parts/tour/single.php:20
+#: tourfic-pro/admin/options/global/parts/tour/single.php:28
+#: tourfic-pro/admin/options/hotel/single-hotel.php:68
+#: tourfic-pro/admin/options/hotel/single-hotel.php:255
+#: tourfic-pro/admin/options/hotel/single-hotel.php:374
+#: tourfic-pro/admin/options/hotel/single-hotel.php:516
+#: tourfic-pro/admin/options/hotel/single-hotel.php:525
+#: tourfic-pro/admin/options/tour/single-tour.php:332
+#: tourfic-pro/admin/options/tour/single-tour.php:752
+#: tourfic-pro/admin/options/tour/single-tour.php:760
+msgid "No"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:151
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:139
+msgid "Calculate Review Based on"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:153
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:141
+msgid "5"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:154
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:142
+msgid "10"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:163
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:151
+msgid "Review Fields for Hotels"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:164
+#: tourfic/admin/options/global/parts/miscellaneous.php:201
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:152
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:189
+msgid "Maximum 10 fields allowed"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:171
+#: tourfic/admin/options/global/parts/miscellaneous.php:208
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:159
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:196
+msgid "Review for"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:177
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:165
+msgid "Staff"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:180
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:168
+msgid "Facilities"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:183
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:171
+msgid "Cleanliness"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:186
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:174
+msgid "Comfort"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:189
+#: tourfic/admin/options/global/parts/miscellaneous.php:220
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:177
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:208
+msgid "Value for money"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:192
+#: tourfic/admin/options/hotel/single-hotel.php:23
+#: tourfic/admin/options/tour/single-tour.php:62
+#: tourfic/inc/functions/functions-hotel.php:119
+#: tourfic/inc/functions/functions-hotel.php:120
+#: tourfic/inc/functions/functions-hotel.php:583
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:180
+#: tourfic-pro/admin/options/hotel/single-hotel.php:21
+#: tourfic-pro/admin/options/tour/single-tour.php:58
+msgid "Location"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:200
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:188
+msgid "Review Fields for Tours"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:214
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:202
+msgid "Guide"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:217
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:205
+msgid "Transportation"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:223
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:211
+msgid "Safety"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:248
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:236
+msgid "Optimization"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:254
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:242
+msgid "Minification Settings"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:261
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:248
+msgid "Minify CSS"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:262
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:249
+msgid "Enable/disable Tourfic CSS minification"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:263
+#: tourfic/admin/options/global/parts/miscellaneous.php:275
+#: tourfic/admin/options/global/parts/miscellaneous.php:292
+#: tourfic/admin/options/global/parts/miscellaneous.php:303
+#: tourfic/admin/options/global/parts/miscellaneous.php:314
+#: tourfic/admin/options/global/parts/miscellaneous.php:325
+#: tourfic/admin/options/global/parts/vendor.php:27
+#: tourfic/admin/options/hotel/single-hotel.php:234
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:250
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:261
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:277
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:287
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:297
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:307
+#: tourfic-pro/admin/options/global/parts/vendor.php:22
+#: tourfic-pro/admin/options/hotel/single-hotel.php:230
+msgid "Enabled"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:264
+#: tourfic/admin/options/global/parts/miscellaneous.php:276
+#: tourfic/admin/options/global/parts/miscellaneous.php:293
+#: tourfic/admin/options/global/parts/miscellaneous.php:304
+#: tourfic/admin/options/global/parts/miscellaneous.php:315
+#: tourfic/admin/options/global/parts/miscellaneous.php:326
+#: tourfic/admin/options/global/parts/vendor.php:28
+#: tourfic/admin/options/hotel/single-hotel.php:235
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:251
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:262
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:278
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:288
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:298
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:308
+#: tourfic-pro/admin/options/global/parts/vendor.php:23
+#: tourfic-pro/admin/options/hotel/single-hotel.php:231
+msgid "Disabled"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:273
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:259
+msgid "Minify JS"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:274
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:260
+msgid "Enable/disable Tourfic JS minification"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:283
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:269
+msgid "CDN Settings"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:290
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:275
+msgid "Flatpickr CDN"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:291
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:276
+msgid "Enable/disable cloudflare CDN for Flatpickr CSS & JS"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:301
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:285
+msgid "Fancybox CDN"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:302
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:286
+msgid "Enable/disable cloudflare CDN for Fancybox CSS & JS"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:312
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:295
+msgid "Slick CDN"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:313
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:296
+msgid "Enable/disable cloudflare CDN for Slick CSS & JS"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:323
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:305
+msgid "Font Awesome CDN"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/miscellaneous.php:324
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:306
+msgid "Enable/disable cloudflare CDN for Font Awesome CSS"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/search.php:9
+#: tourfic/inc/functions/functions-hotel.php:654
+#: tourfic/inc/functions/functions-tour.php:309
+#: tourfic-pro/admin/options/global/parts/search.php:7
+msgid "Search"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/search.php:16
+#: tourfic-pro/admin/options/global/parts/search.php:14
+msgid "Select a page"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/search.php:19
+#: tourfic-pro/admin/options/global/parts/search.php:17
+msgid "Select Search Result Page"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/search.php:20
+#: tourfic-pro/admin/options/global/parts/search.php:18
+msgid "Page template: <code>Tourfic - Search Result</code> must be selected"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/search.php:29
+#: tourfic-pro/admin/options/global/parts/search.php:26
+msgid "Date Required in Hotel Search"
+msgstr ""
+
+#: tourfic/admin/options/global/parts/search.php:39
+#: tourfic-pro/admin/options/global/parts/search.php:34
+msgid "Date Required in Tour Search"
 msgstr ""
 
 #: tourfic/admin/options/global/parts/vendor.php:11
@@ -273,25 +608,10 @@ msgstr ""
 msgid "Add class <code>tf-reg-popup</code> to trigger the popup"
 msgstr ""
 
-#: tourfic/admin/options/global/parts/vendor.php:27
-#: tourfic/admin/options/hotel/single-hotel.php:212
-#: tourfic-pro/admin/options/global/parts/vendor.php:22
-#: tourfic-pro/admin/options/hotel/single-hotel.php:208
-msgid "Enabled"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/vendor.php:28
-#: tourfic/admin/options/hotel/single-hotel.php:213
-#: tourfic-pro/admin/options/global/parts/vendor.php:23
-#: tourfic-pro/admin/options/hotel/single-hotel.php:209
-msgid "Disabled"
-msgstr ""
-
 #: tourfic/admin/options/global/parts/vendor.php:35
-#: tourfic-pro/admin/options/global/parts/vendor.php:30
 msgid ""
 "Use shortcode <code>[tf_registration_form]</code> to show registration form "
-"in post/page."
+"in post/page/widget."
 msgstr ""
 
 #: tourfic/admin/options/global/parts/vendor.php:42
@@ -309,41 +629,48 @@ msgstr ""
 msgid "Prevent unverified user to login"
 msgstr ""
 
-#: tourfic/admin/options/global/parts/vendor.php:60
-#: tourfic-pro/admin/options/global/parts/vendor.php:52
+#: tourfic/admin/options/global/parts/vendor.php:59
+#: tourfic-pro/admin/options/global/parts/vendor.php:51
+msgid ""
+"Use shortcode <code>[tf_login_form]</code> to show login form in post/page/"
+"widget."
+msgstr ""
+
+#: tourfic/admin/options/global/parts/vendor.php:65
+#: tourfic-pro/admin/options/global/parts/vendor.php:57
 #: tourfic-pro/inc/functions/functions_user.php:195
 #: tourfic-pro/inc/functions/functions_user.php:254
 msgid "Vendor"
 msgstr ""
 
-#: tourfic/admin/options/global/parts/vendor.php:67
-#: tourfic-pro/admin/options/global/parts/vendor.php:58
+#: tourfic/admin/options/global/parts/vendor.php:72
+#: tourfic-pro/admin/options/global/parts/vendor.php:63
 msgid "Enable Vendor Registration"
 msgstr ""
 
-#: tourfic/admin/options/global/parts/vendor.php:68
-#: tourfic-pro/admin/options/global/parts/vendor.php:59
+#: tourfic/admin/options/global/parts/vendor.php:73
+#: tourfic-pro/admin/options/global/parts/vendor.php:64
 msgid "Visitor can register as vendor using the registration form"
 msgstr ""
 
-#: tourfic/admin/options/global/parts/vendor.php:76
-#: tourfic-pro/admin/options/global/parts/vendor.php:66
+#: tourfic/admin/options/global/parts/vendor.php:81
+#: tourfic-pro/admin/options/global/parts/vendor.php:71
 msgid "Vendor Can Add"
 msgstr ""
 
-#: tourfic/admin/options/global/parts/vendor.php:79
-#: tourfic-pro/admin/options/global/parts/vendor.php:68
+#: tourfic/admin/options/global/parts/vendor.php:84
+#: tourfic-pro/admin/options/global/parts/vendor.php:73
 msgid "Hotel Location"
 msgstr ""
 
-#: tourfic/admin/options/global/parts/vendor.php:80
-#: tourfic-pro/admin/options/global/parts/vendor.php:69
+#: tourfic/admin/options/global/parts/vendor.php:85
+#: tourfic-pro/admin/options/global/parts/vendor.php:74
 msgid "Hotel Feature"
 msgstr ""
 
-#: tourfic/admin/options/global/parts/vendor.php:81
+#: tourfic/admin/options/global/parts/vendor.php:86
 #: tourfic/inc/functions/functions-tour.php:122
-#: tourfic-pro/admin/options/global/parts/vendor.php:70
+#: tourfic-pro/admin/options/global/parts/vendor.php:75
 msgid "Tour Destination"
 msgstr ""
 
@@ -361,43 +688,19 @@ msgstr ""
 
 #: tourfic/admin/options/global/parts/hotel/single.php:18
 #: tourfic/admin/options/global/parts/tour/single.php:18
+#: tourfic/admin/options/hotel/single-hotel.php:513
+#: tourfic/admin/options/tour/single-tour.php:790
 #: tourfic-pro/admin/options/global/parts/hotel/single.php:18
 #: tourfic-pro/admin/options/global/parts/tour/single.php:18
+#: tourfic-pro/admin/options/hotel/single-hotel.php:514
+#: tourfic-pro/admin/options/tour/single-tour.php:750
 msgid "Disable Review Section"
 msgstr ""
 
-#: tourfic/admin/options/global/parts/hotel/single.php:19
-#: tourfic/admin/options/global/parts/hotel/single.php:28
-#: tourfic/admin/options/global/parts/tour/single.php:19
-#: tourfic/admin/options/global/parts/tour/single.php:27
-#: tourfic/admin/options/hotel/single-hotel.php:70
-#: tourfic/admin/options/tour/single-tour.php:344
-#: tourfic-pro/admin/options/global/parts/hotel/single.php:19
-#: tourfic-pro/admin/options/global/parts/hotel/single.php:28
-#: tourfic-pro/admin/options/global/parts/tour/single.php:19
-#: tourfic-pro/admin/options/global/parts/tour/single.php:27
-#: tourfic-pro/admin/options/hotel/single-hotel.php:67
-#: tourfic-pro/admin/options/tour/single-tour.php:331
-msgid "Yes"
-msgstr ""
-
-#: tourfic/admin/options/global/parts/hotel/single.php:20
-#: tourfic/admin/options/global/parts/hotel/single.php:29
-#: tourfic/admin/options/global/parts/tour/single.php:20
-#: tourfic/admin/options/global/parts/tour/single.php:28
-#: tourfic/admin/options/hotel/single-hotel.php:71
-#: tourfic/admin/options/tour/single-tour.php:345
-#: tourfic-pro/admin/options/global/parts/hotel/single.php:20
-#: tourfic-pro/admin/options/global/parts/hotel/single.php:29
-#: tourfic-pro/admin/options/global/parts/tour/single.php:20
-#: tourfic-pro/admin/options/global/parts/tour/single.php:28
-#: tourfic-pro/admin/options/hotel/single-hotel.php:68
-#: tourfic-pro/admin/options/tour/single-tour.php:332
-msgid "No"
-msgstr ""
-
 #: tourfic/admin/options/global/parts/hotel/single.php:27
+#: tourfic/admin/options/hotel/single-hotel.php:522
 #: tourfic-pro/admin/options/global/parts/hotel/single.php:27
+#: tourfic-pro/admin/options/hotel/single-hotel.php:523
 msgid "Disable Share Option"
 msgstr ""
 
@@ -407,23 +710,15 @@ msgid "Single Tour Settings"
 msgstr ""
 
 #: tourfic/admin/options/global/parts/tour/single.php:26
+#: tourfic/admin/options/tour/single-tour.php:800
 #: tourfic-pro/admin/options/global/parts/tour/single.php:26
+#: tourfic-pro/admin/options/tour/single-tour.php:758
 msgid "Disable Related Tour Section"
 msgstr ""
 
 #: tourfic/admin/options/hotel/single-hotel.php:14
 #: tourfic-pro/admin/options/hotel/single-hotel.php:12
 msgid "Hotel Settings"
-msgstr ""
-
-#: tourfic/admin/options/hotel/single-hotel.php:23
-#: tourfic/admin/options/tour/single-tour.php:62
-#: tourfic/inc/functions/functions-hotel.php:119
-#: tourfic/inc/functions/functions-hotel.php:120
-#: tourfic/inc/functions/functions-hotel.php:507
-#: tourfic-pro/admin/options/hotel/single-hotel.php:21
-#: tourfic-pro/admin/options/tour/single-tour.php:58
-msgid "Location"
 msgstr ""
 
 #: tourfic/admin/options/hotel/single-hotel.php:29
@@ -506,235 +801,316 @@ msgid ""
 msgstr ""
 
 #: tourfic/admin/options/hotel/single-hotel.php:197
-#: tourfic/admin/options/hotel/single-hotel.php:203
-#: tourfic/inc/functions/functions-hotel.php:301
-#: tourfic/templates/hotel/single-hotel.php:280
+#: tourfic/admin/options/hotel/single-hotel.php:204
+#: tourfic/inc/functions/functions-hotel.php:306
+#: tourfic/templates/hotel/single-hotel.php:266
 #: tourfic-pro/admin/options/hotel/single-hotel.php:194
-#: tourfic-pro/admin/options/hotel/single-hotel.php:200
+#: tourfic-pro/admin/options/hotel/single-hotel.php:201
 msgid "Room Details"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:210
-#: tourfic-pro/admin/options/hotel/single-hotel.php:206
+#: tourfic/admin/options/hotel/single-hotel.php:205
+#: tourfic-pro/admin/options/hotel/single-hotel.php:202
+msgid "Add New Room"
+msgstr ""
+
+#: tourfic/admin/options/hotel/single-hotel.php:213
+#: tourfic-pro/admin/options/hotel/single-hotel.php:209
+msgid "Unique ID"
+msgstr ""
+
+#: tourfic/admin/options/hotel/single-hotel.php:223
+#: tourfic-pro/admin/options/hotel/single-hotel.php:219
+#: tourfic-pro/inc/functions/functions_order.php:88
+#: tourfic-pro/inc/functions/functions_order.php:314
+msgid "Order ID"
+msgstr ""
+
+#: tourfic/admin/options/hotel/single-hotel.php:232
+#: tourfic-pro/admin/options/hotel/single-hotel.php:228
 #: tourfic-pro/inc/functions/functions_order.php:103
 #: tourfic-pro/inc/functions/functions_order.php:329
 #: tourfic-pro/inc/license/license.php:28
 msgid "Status"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:211
-#: tourfic-pro/admin/options/hotel/single-hotel.php:207
+#: tourfic/admin/options/hotel/single-hotel.php:233
+#: tourfic-pro/admin/options/hotel/single-hotel.php:229
 msgid "Enable/disable this Room"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:221
-#: tourfic-pro/admin/options/hotel/single-hotel.php:217
+#: tourfic/admin/options/hotel/single-hotel.php:243
+#: tourfic-pro/admin/options/hotel/single-hotel.php:239
 msgid "Room Title"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:227
-#: tourfic-pro/admin/options/hotel/single-hotel.php:223
+#: tourfic/admin/options/hotel/single-hotel.php:249
+#: tourfic/admin/options/hotel/single-hotel.php:416
+#: tourfic-pro/admin/options/hotel/single-hotel.php:245
 msgid "Number of Rooms"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:228
-#: tourfic-pro/admin/options/hotel/single-hotel.php:224
+#: tourfic/admin/options/hotel/single-hotel.php:250
+#: tourfic-pro/admin/options/hotel/single-hotel.php:246
 msgid "Number of available rooms for booking"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:233
-#: tourfic/inc/functions/functions-hotel.php:814
-#: tourfic/inc/functions/functions-tour.php:686
-#: tourfic-pro/admin/options/hotel/single-hotel.php:229
+#: tourfic/admin/options/hotel/single-hotel.php:257
+#: tourfic-pro/admin/options/hotel/single-hotel.php:252
+msgid "Reduce Number of Rooms by Orders"
+msgstr ""
+
+#: tourfic/admin/options/hotel/single-hotel.php:258
+#: tourfic-pro/admin/options/hotel/single-hotel.php:253
+msgid ""
+"Reduce the number of available rooms for booking by WooCommerce orders "
+"details"
+msgstr ""
+
+#: tourfic/admin/options/hotel/single-hotel.php:266
+#: tourfic/inc/functions/functions-hotel.php:939
+#: tourfic/inc/functions/functions-tour.php:696
+#: tourfic-pro/admin/options/hotel/single-hotel.php:261
 msgid "Details"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:239
-#: tourfic-pro/admin/options/hotel/single-hotel.php:235
+#: tourfic/admin/options/hotel/single-hotel.php:272
+#: tourfic-pro/admin/options/hotel/single-hotel.php:267
 msgid "Gallery"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:240
-#: tourfic-pro/admin/options/hotel/single-hotel.php:236
+#: tourfic/admin/options/hotel/single-hotel.php:273
+#: tourfic-pro/admin/options/hotel/single-hotel.php:268
 msgid "Upload images to make a gallery image for room"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:246
-#: tourfic-pro/admin/options/hotel/single-hotel.php:242
+#: tourfic/admin/options/hotel/single-hotel.php:279
+#: tourfic-pro/admin/options/hotel/single-hotel.php:274
 msgid "Number of Beds"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:247
-#: tourfic-pro/admin/options/hotel/single-hotel.php:243
+#: tourfic/admin/options/hotel/single-hotel.php:280
+#: tourfic-pro/admin/options/hotel/single-hotel.php:275
 msgid "Number of beds present in the room"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:253
-#: tourfic-pro/admin/options/hotel/single-hotel.php:249
+#: tourfic/admin/options/hotel/single-hotel.php:286
+#: tourfic-pro/admin/options/hotel/single-hotel.php:281
 msgid "Number of Adults"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:254
-#: tourfic/admin/options/hotel/single-hotel.php:261
-#: tourfic-pro/admin/options/hotel/single-hotel.php:250
-#: tourfic-pro/admin/options/hotel/single-hotel.php:257
+#: tourfic/admin/options/hotel/single-hotel.php:287
+#: tourfic/admin/options/hotel/single-hotel.php:294
+#: tourfic-pro/admin/options/hotel/single-hotel.php:282
+#: tourfic-pro/admin/options/hotel/single-hotel.php:289
 msgid "Max number of persons allowed in the room"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:260
-#: tourfic-pro/admin/options/hotel/single-hotel.php:256
+#: tourfic/admin/options/hotel/single-hotel.php:293
+#: tourfic-pro/admin/options/hotel/single-hotel.php:288
 msgid "Number of Children"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:267
-#: tourfic/inc/functions/functions-hotel.php:346
-#: tourfic/templates/hotel/single-hotel.php:320
-#: tourfic-pro/admin/options/hotel/single-hotel.php:263
+#: tourfic/admin/options/hotel/single-hotel.php:300
+#: tourfic/templates/hotel/single-hotel.php:330
+#: tourfic/templates/template-parts/hotel/hotel-availability-table-row.php:19
+#: tourfic-pro/admin/options/hotel/single-hotel.php:295
 msgid "Room Footage"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:268
-#: tourfic-pro/admin/options/hotel/single-hotel.php:264
+#: tourfic/admin/options/hotel/single-hotel.php:301
+#: tourfic-pro/admin/options/hotel/single-hotel.php:296
 msgid "Room footage (sft)"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:274
-#: tourfic-pro/admin/options/hotel/single-hotel.php:270
+#: tourfic/admin/options/hotel/single-hotel.php:307
+#: tourfic-pro/admin/options/hotel/single-hotel.php:302
 msgid "Select Features"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:275
-#: tourfic-pro/admin/options/hotel/single-hotel.php:271
+#: tourfic/admin/options/hotel/single-hotel.php:308
+#: tourfic-pro/admin/options/hotel/single-hotel.php:303
 msgid "Select"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:276
-#: tourfic-pro/admin/options/hotel/single-hotel.php:272
+#: tourfic/admin/options/hotel/single-hotel.php:309
+#: tourfic-pro/admin/options/hotel/single-hotel.php:304
 msgid "No feature available"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:288
-#: tourfic-pro/admin/options/hotel/single-hotel.php:284
+#: tourfic/admin/options/hotel/single-hotel.php:321
+#: tourfic-pro/admin/options/hotel/single-hotel.php:316
 msgid "Room Description"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:293
-#: tourfic/admin/options/hotel/single-hotel.php:310
-#: tourfic-pro/admin/options/hotel/single-hotel.php:289
-#: tourfic-pro/admin/options/hotel/single-hotel.php:306
+#: tourfic/admin/options/hotel/single-hotel.php:326
+#: tourfic/admin/options/hotel/single-hotel.php:343
+#: tourfic/admin/options/hotel/single-hotel.php:425
+#: tourfic-pro/admin/options/hotel/single-hotel.php:321
+#: tourfic-pro/admin/options/hotel/single-hotel.php:338
 msgid "Pricing"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:299
-#: tourfic-pro/admin/options/hotel/single-hotel.php:295
+#: tourfic/admin/options/hotel/single-hotel.php:332
+#: tourfic-pro/admin/options/hotel/single-hotel.php:327
 msgid "Pricing by"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:301
-#: tourfic-pro/admin/options/hotel/single-hotel.php:297
+#: tourfic/admin/options/hotel/single-hotel.php:334
+#: tourfic-pro/admin/options/hotel/single-hotel.php:329
 msgid "Per room"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:302
+#: tourfic/admin/options/hotel/single-hotel.php:335
 msgid "Per person (Pro)"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:311
-#: tourfic/admin/options/hotel/single-hotel.php:321
-#: tourfic/admin/options/hotel/single-hotel.php:331
-#: tourfic-pro/admin/options/hotel/single-hotel.php:307
-#: tourfic-pro/admin/options/hotel/single-hotel.php:315
-#: tourfic-pro/admin/options/hotel/single-hotel.php:323
+#: tourfic/admin/options/hotel/single-hotel.php:344
+#: tourfic/admin/options/hotel/single-hotel.php:354
+#: tourfic/admin/options/hotel/single-hotel.php:364
+#: tourfic/admin/options/hotel/single-hotel.php:426
+#: tourfic/admin/options/hotel/single-hotel.php:434
+#: tourfic/admin/options/hotel/single-hotel.php:442
+#: tourfic-pro/admin/options/hotel/single-hotel.php:339
+#: tourfic-pro/admin/options/hotel/single-hotel.php:350
+#: tourfic-pro/admin/options/hotel/single-hotel.php:361
 msgid "The price of room per one night"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:319
-#: tourfic-pro/admin/options/hotel/single-hotel.php:314
+#: tourfic/admin/options/hotel/single-hotel.php:352
+#: tourfic/admin/options/hotel/single-hotel.php:433
+#: tourfic-pro/admin/options/hotel/single-hotel.php:349
 msgid "Adult Pricing"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:329
-#: tourfic-pro/admin/options/hotel/single-hotel.php:322
+#: tourfic/admin/options/hotel/single-hotel.php:362
+#: tourfic/admin/options/hotel/single-hotel.php:441
+#: tourfic-pro/admin/options/hotel/single-hotel.php:360
 msgid "Children Pricing"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:337
+#: tourfic/admin/options/hotel/single-hotel.php:371
+#: tourfic-pro/admin/options/hotel/single-hotel.php:371
+msgid "Multiply Pricing By Night"
+msgstr ""
+
+#: tourfic/admin/options/hotel/single-hotel.php:372
+#: tourfic-pro/admin/options/hotel/single-hotel.php:372
+msgid ""
+"During booking pricing will be multiplied by number of nights (Check-in to "
+"Check-out)"
+msgstr ""
+
+#: tourfic/admin/options/hotel/single-hotel.php:380
 #: tourfic/admin/options/tour/single-tour.php:320
 #: tourfic/admin/options/tour/single-tour.php:611
-#: tourfic/inc/functions/functions-hotel.php:295
-#: tourfic/templates/hotel/single-hotel.php:274
-#: tourfic-pro/admin/options/hotel/single-hotel.php:329
+#: tourfic/inc/functions/functions-hotel.php:300
+#: tourfic/templates/hotel/single-hotel.php:260
 #: tourfic-pro/admin/options/tour/single-tour.php:308
-#: tourfic-pro/admin/options/tour/single-tour.php:578
+#: tourfic-pro/admin/options/tour/single-tour.php:579
 msgid "Availability"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:344
-#: tourfic-pro/admin/options/hotel/single-hotel.php:336
-msgid "Date"
+#: tourfic/admin/options/hotel/single-hotel.php:387
+#: tourfic-pro/admin/options/hotel/single-hotel.php:387
+msgid "Enable Availability by Date"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:345
-#: tourfic-pro/admin/options/hotel/single-hotel.php:337
-msgid "Select availablity date"
+#: tourfic/admin/options/hotel/single-hotel.php:395
+#: tourfic-pro/admin/options/hotel/single-hotel.php:395
+msgid "By Date"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:350
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:206
-#: tourfic-pro/admin/options/hotel/single-hotel.php:342
-#: tourfic-pro/inc/functions/functions_order.php:426
-msgid "Check-in"
+#: tourfic/admin/options/hotel/single-hotel.php:403
+#: tourfic/admin/options/tour/single-tour.php:367
+#: tourfic-pro/admin/options/hotel/single-hotel.php:402
+#: tourfic-pro/admin/options/tour/single-tour.php:369
+msgid "Date Range"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:351
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:213
-#: tourfic-pro/admin/options/hotel/single-hotel.php:343
-#: tourfic-pro/inc/functions/functions_order.php:430
-msgid "Check-out"
+#: tourfic/admin/options/hotel/single-hotel.php:404
+#: tourfic-pro/admin/options/hotel/single-hotel.php:403
+msgid "Select availablity date range"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:362
-#: tourfic-pro/admin/options/hotel/single-hotel.php:354
+#: tourfic/admin/options/hotel/single-hotel.php:409
+#: tourfic-pro/admin/options/hotel/single-hotel.php:408
+msgid "From"
+msgstr ""
+
+#: tourfic/admin/options/hotel/single-hotel.php:410
+#: tourfic-pro/admin/options/hotel/single-hotel.php:409
+msgid "To"
+msgstr ""
+
+#: tourfic/admin/options/hotel/single-hotel.php:417
+msgid "Number of available rooms for booking on this date range"
+msgstr ""
+
+#: tourfic/admin/options/hotel/single-hotel.php:456
+#: tourfic-pro/admin/options/hotel/single-hotel.php:457
 msgid "F.A.Q."
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:368
-#: tourfic-pro/admin/options/hotel/single-hotel.php:360
+#: tourfic/admin/options/hotel/single-hotel.php:462
+#: tourfic-pro/admin/options/hotel/single-hotel.php:463
 msgid "Frequently Asked Questions"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:369
-#: tourfic-pro/admin/options/hotel/single-hotel.php:361
+#: tourfic/admin/options/hotel/single-hotel.php:463
+#: tourfic-pro/admin/options/hotel/single-hotel.php:464
 msgid "Add FAQ"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:375
+#: tourfic/admin/options/hotel/single-hotel.php:469
 #: tourfic/admin/options/tour/single-tour.php:180
 #: tourfic/admin/options/tour/single-tour.php:718
-#: tourfic/inc/elementor-addon/widgets/tourfic-search.php:99
-#: tourfic-pro/admin/options/hotel/single-hotel.php:367
+#: tourfic/inc/elementor/widgets/recent-hotels-slider.php:81
+#: tourfic/inc/elementor/widgets/recent-tours-slider.php:81
+#: tourfic/inc/elementor/widgets/search-form-horizontal.php:80
+#: tourfic-pro/admin/options/hotel/single-hotel.php:470
 #: tourfic-pro/admin/options/tour/single-tour.php:174
-#: tourfic-pro/admin/options/tour/single-tour.php:678
+#: tourfic-pro/admin/options/tour/single-tour.php:679
 msgid "Title"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:381
+#: tourfic/admin/options/hotel/single-hotel.php:475
 #: tourfic/admin/options/tour/single-tour.php:733
-#: tourfic/templates/hotel/single-hotel.php:237
-#: tourfic-pro/admin/options/hotel/single-hotel.php:373
-#: tourfic-pro/admin/options/tour/single-tour.php:693
+#: tourfic/templates/hotel/single-hotel.php:223
+#: tourfic-pro/admin/options/hotel/single-hotel.php:476
+#: tourfic-pro/admin/options/tour/single-tour.php:694
 msgid "Description"
 msgstr ""
 
-#: tourfic/admin/options/hotel/single-hotel.php:392
-#: tourfic/admin/options/hotel/single-hotel.php:398
+#: tourfic/admin/options/hotel/single-hotel.php:486
+#: tourfic/admin/options/hotel/single-hotel.php:492
 #: tourfic/admin/options/tour/single-tour.php:764
 #: tourfic/admin/options/tour/single-tour.php:769
-#: tourfic-pro/admin/options/hotel/single-hotel.php:384
-#: tourfic-pro/admin/options/hotel/single-hotel.php:390
-#: tourfic-pro/admin/options/tour/single-tour.php:724
-#: tourfic-pro/admin/options/tour/single-tour.php:729
+#: tourfic-pro/admin/options/hotel/single-hotel.php:487
+#: tourfic-pro/admin/options/hotel/single-hotel.php:493
+#: tourfic-pro/admin/options/tour/single-tour.php:725
+#: tourfic-pro/admin/options/tour/single-tour.php:730
 msgid "Terms & Conditions"
+msgstr ""
+
+#: tourfic/admin/options/hotel/single-hotel.php:502
+#: tourfic/admin/options/hotel/single-hotel.php:507
+#: tourfic/admin/options/tour/single-tour.php:778
+#: tourfic/admin/options/tour/single-tour.php:783
+#: tourfic/inc/functions/functions-notice_update.php:106
+#: tourfic-pro/admin/options/hotel/single-hotel.php:503
+#: tourfic-pro/admin/options/hotel/single-hotel.php:508
+#: tourfic-pro/admin/options/tour/single-tour.php:739
+#: tourfic-pro/admin/options/tour/single-tour.php:744
+#: tourfic-pro/inc/functions.php:239
+msgid "Settings"
+msgstr ""
+
+#: tourfic/admin/options/hotel/single-hotel.php:531
+#: tourfic/admin/options/tour/single-tour.php:809
+#: tourfic-pro/admin/options/hotel/single-hotel.php:532
+#: tourfic-pro/admin/options/tour/single-tour.php:766
+msgid "These settings will overwrite global settings"
 msgstr ""
 
 #: tourfic/admin/options/hotel/taxonomy-hotel_feature.php:53
@@ -813,7 +1189,7 @@ msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:104
 #: tourfic/admin/options/tour/single-tour.php:325
-#: tourfic/templates/tour/single-tour.php:183
+#: tourfic/templates/tour/single-tour.php:279
 #: tourfic-pro/admin/options/tour/single-tour.php:99
 #: tourfic-pro/admin/options/tour/single-tour.php:313
 msgid "Tour Type"
@@ -825,7 +1201,7 @@ msgid "E.g. Fixed Tour"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:110
-#: tourfic/templates/tour/single-tour.php:190
+#: tourfic/templates/tour/single-tour.php:286
 #: tourfic-pro/admin/options/tour/single-tour.php:105
 msgid "Group Size"
 msgstr ""
@@ -896,9 +1272,8 @@ msgid "Short Description"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:194
-#: tourfic/inc/functions/functions-hotel.php:303
-#: tourfic/templates/hotel/single-hotel.php:282
-#: tourfic/templates/tour/single-tour.php:145
+#: tourfic/inc/functions/functions-hotel.php:308
+#: tourfic/templates/hotel/single-hotel.php:268
 #: tourfic-pro/admin/options/tour/single-tour.php:184
 msgid "Price"
 msgstr ""
@@ -911,21 +1286,21 @@ msgstr ""
 #: tourfic/admin/options/tour/single-tour.php:212
 #: tourfic/admin/options/tour/single-tour.php:394
 #: tourfic-pro/admin/options/tour/single-tour.php:201
-#: tourfic-pro/admin/options/tour/single-tour.php:374
+#: tourfic-pro/admin/options/tour/single-tour.php:338
 msgid "Pricing rule"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:213
 #: tourfic/admin/options/tour/single-tour.php:395
 #: tourfic-pro/admin/options/tour/single-tour.php:202
-#: tourfic-pro/admin/options/tour/single-tour.php:375
+#: tourfic-pro/admin/options/tour/single-tour.php:339
 msgid "Input pricing rule"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:216
 #: tourfic/admin/options/tour/single-tour.php:398
 #: tourfic-pro/admin/options/tour/single-tour.php:205
-#: tourfic-pro/admin/options/tour/single-tour.php:378
+#: tourfic-pro/admin/options/tour/single-tour.php:346
 msgid "Person"
 msgstr ""
 
@@ -936,56 +1311,56 @@ msgstr ""
 #: tourfic/admin/options/tour/single-tour.php:224
 #: tourfic/admin/options/tour/single-tour.php:407
 #: tourfic-pro/admin/options/tour/single-tour.php:213
-#: tourfic-pro/admin/options/tour/single-tour.php:386
+#: tourfic-pro/admin/options/tour/single-tour.php:391
 msgid "Price for Adult"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:225
 #: tourfic/admin/options/tour/single-tour.php:408
 #: tourfic-pro/admin/options/tour/single-tour.php:214
-#: tourfic-pro/admin/options/tour/single-tour.php:387
+#: tourfic-pro/admin/options/tour/single-tour.php:392
 msgid "Input adult price"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:241
 #: tourfic/admin/options/tour/single-tour.php:418
 #: tourfic-pro/admin/options/tour/single-tour.php:230
-#: tourfic-pro/admin/options/tour/single-tour.php:396
+#: tourfic-pro/admin/options/tour/single-tour.php:400
 msgid "Price for Child"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:242
 #: tourfic/admin/options/tour/single-tour.php:419
 #: tourfic-pro/admin/options/tour/single-tour.php:231
-#: tourfic-pro/admin/options/tour/single-tour.php:397
+#: tourfic-pro/admin/options/tour/single-tour.php:401
 msgid "Input child price"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:255
 #: tourfic/admin/options/tour/single-tour.php:429
 #: tourfic-pro/admin/options/tour/single-tour.php:244
-#: tourfic-pro/admin/options/tour/single-tour.php:406
+#: tourfic-pro/admin/options/tour/single-tour.php:409
 msgid "Price for Infant"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:256
 #: tourfic/admin/options/tour/single-tour.php:430
 #: tourfic-pro/admin/options/tour/single-tour.php:245
-#: tourfic-pro/admin/options/tour/single-tour.php:407
+#: tourfic-pro/admin/options/tour/single-tour.php:410
 msgid "Input infant price"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:266
 #: tourfic/admin/options/tour/single-tour.php:441
 #: tourfic-pro/admin/options/tour/single-tour.php:254
-#: tourfic-pro/admin/options/tour/single-tour.php:417
+#: tourfic-pro/admin/options/tour/single-tour.php:418
 msgid "Group Price"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:267
 #: tourfic/admin/options/tour/single-tour.php:442
 #: tourfic-pro/admin/options/tour/single-tour.php:255
-#: tourfic-pro/admin/options/tour/single-tour.php:418
+#: tourfic-pro/admin/options/tour/single-tour.php:419
 msgid "Input group price"
 msgstr ""
 
@@ -1077,538 +1452,635 @@ msgid "Custom Availability"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:356
-#: tourfic-pro/admin/options/tour/single-tour.php:343
+#: tourfic-pro/admin/options/tour/single-tour.php:360
 msgid "Allowed Dates"
 msgstr ""
 
-#: tourfic/admin/options/tour/single-tour.php:367
-#: tourfic-pro/admin/options/tour/single-tour.php:352
-msgid "Date Range"
-msgstr ""
-
 #: tourfic/admin/options/tour/single-tour.php:381
-#: tourfic-pro/admin/options/tour/single-tour.php:364
+#: tourfic-pro/admin/options/tour/single-tour.php:381
 msgid "Min people"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:388
-#: tourfic-pro/admin/options/tour/single-tour.php:369
+#: tourfic-pro/admin/options/tour/single-tour.php:386
 msgid "Maximum people"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:399
+#: tourfic/templates/tour/single-tour.php:238
 #: tourfic-pro/admin/options/tour/single-tour.php:206
-#: tourfic-pro/admin/options/tour/single-tour.php:379
+#: tourfic-pro/admin/options/tour/single-tour.php:347
 msgid "Group"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:450
 #: tourfic/admin/options/tour/single-tour.php:502
-#: tourfic-pro/admin/options/tour/single-tour.php:426
-#: tourfic-pro/admin/options/tour/single-tour.php:476
+#: tourfic-pro/admin/options/tour/single-tour.php:427
+#: tourfic-pro/admin/options/tour/single-tour.php:477
 msgid "Allowed Time"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:458
 #: tourfic/admin/options/tour/single-tour.php:514
-#: tourfic-pro/admin/options/tour/single-tour.php:432
-#: tourfic-pro/admin/options/tour/single-tour.php:486
+#: tourfic-pro/admin/options/tour/single-tour.php:433
+#: tourfic-pro/admin/options/tour/single-tour.php:487
 msgid "Time"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:459
 #: tourfic/admin/options/tour/single-tour.php:515
-#: tourfic-pro/admin/options/tour/single-tour.php:433
-#: tourfic-pro/admin/options/tour/single-tour.php:487
+#: tourfic-pro/admin/options/tour/single-tour.php:434
+#: tourfic-pro/admin/options/tour/single-tour.php:488
 msgid "Only Time"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:482
-#: tourfic-pro/admin/options/tour/single-tour.php:456
+#: tourfic-pro/admin/options/tour/single-tour.php:457
 msgid "Minimum Person"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:483
-#: tourfic-pro/admin/options/tour/single-tour.php:457
+#: tourfic-pro/admin/options/tour/single-tour.php:458
 msgid "Minimum person to travel"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:492
-#: tourfic-pro/admin/options/tour/single-tour.php:466
+#: tourfic-pro/admin/options/tour/single-tour.php:467
 msgid "Maximum Person"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:493
-#: tourfic-pro/admin/options/tour/single-tour.php:467
+#: tourfic-pro/admin/options/tour/single-tour.php:468
 msgid "Maximum person to travel"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:529
-#: tourfic-pro/admin/options/tour/single-tour.php:501
+#: tourfic-pro/admin/options/tour/single-tour.php:502
 msgid "Disabled Dates"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:540
-#: tourfic-pro/admin/options/tour/single-tour.php:511
+#: tourfic-pro/admin/options/tour/single-tour.php:512
 msgid "Select day to disable"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:548
-#: tourfic-pro/admin/options/tour/single-tour.php:518
+#: tourfic-pro/admin/options/tour/single-tour.php:519
 msgid "Sunday"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:549
-#: tourfic-pro/admin/options/tour/single-tour.php:519
+#: tourfic-pro/admin/options/tour/single-tour.php:520
 msgid "Monday"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:550
-#: tourfic-pro/admin/options/tour/single-tour.php:520
+#: tourfic-pro/admin/options/tour/single-tour.php:521
 msgid "Tuesday"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:551
-#: tourfic-pro/admin/options/tour/single-tour.php:521
+#: tourfic-pro/admin/options/tour/single-tour.php:522
 msgid "Wednesday"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:552
-#: tourfic-pro/admin/options/tour/single-tour.php:522
+#: tourfic-pro/admin/options/tour/single-tour.php:523
 msgid "Thursday"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:553
-#: tourfic-pro/admin/options/tour/single-tour.php:523
+#: tourfic-pro/admin/options/tour/single-tour.php:524
 msgid "Friday"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:554
-#: tourfic-pro/admin/options/tour/single-tour.php:524
+#: tourfic-pro/admin/options/tour/single-tour.php:525
 msgid "Saturday"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:562
-#: tourfic-pro/admin/options/tour/single-tour.php:532
+#: tourfic-pro/admin/options/tour/single-tour.php:533
 msgid "Disabled Date Range"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:573
-#: tourfic-pro/admin/options/tour/single-tour.php:542
+#: tourfic-pro/admin/options/tour/single-tour.php:543
 msgid "Select date range"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:590
-#: tourfic-pro/admin/options/tour/single-tour.php:558
+#: tourfic-pro/admin/options/tour/single-tour.php:559
 msgid "Disable Specific Dates"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:612
-#: tourfic-pro/admin/options/tour/single-tour.php:579
+#: tourfic-pro/admin/options/tour/single-tour.php:580
 msgid "Input your availability"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:620
-#: tourfic-pro/admin/options/tour/single-tour.php:586
+#: tourfic-pro/admin/options/tour/single-tour.php:587
 msgid "Check In"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:621
-#: tourfic-pro/admin/options/tour/single-tour.php:587
+#: tourfic-pro/admin/options/tour/single-tour.php:588
 msgid "Select check in date"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:635
-#: tourfic-pro/admin/options/tour/single-tour.php:600
+#: tourfic-pro/admin/options/tour/single-tour.php:601
 msgid "Minimum People"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:636
-#: tourfic-pro/admin/options/tour/single-tour.php:601
+#: tourfic-pro/admin/options/tour/single-tour.php:602
 msgid "Minimum seat number"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:642
-#: tourfic-pro/admin/options/tour/single-tour.php:606
+#: tourfic-pro/admin/options/tour/single-tour.php:607
 msgid "Maximum People"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:643
-#: tourfic-pro/admin/options/tour/single-tour.php:607
+#: tourfic-pro/admin/options/tour/single-tour.php:608
 msgid "Maximum seat number"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:652
-#: tourfic-pro/admin/options/tour/single-tour.php:616
+#: tourfic-pro/admin/options/tour/single-tour.php:617
 msgid "Booking"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:660
-#: tourfic-pro/admin/options/tour/single-tour.php:623
+#: tourfic-pro/admin/options/tour/single-tour.php:624
 msgid "Minimum days to book before departure"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:661
-#: tourfic-pro/admin/options/tour/single-tour.php:624
+#: tourfic-pro/admin/options/tour/single-tour.php:625
 msgid "Customer can not book after this date"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:667
-#: tourfic-pro/admin/options/tour/single-tour.php:630
+#: tourfic-pro/admin/options/tour/single-tour.php:631
 msgid "Exclude/Include"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:672
-#: tourfic-pro/admin/options/tour/single-tour.php:635
+#: tourfic-pro/admin/options/tour/single-tour.php:636
 msgid "Include"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:678
-#: tourfic/templates/tour/single-tour.php:245
-#: tourfic-pro/admin/options/tour/single-tour.php:640
+#: tourfic/templates/tour/single-tour.php:341
+#: tourfic-pro/admin/options/tour/single-tour.php:641
 msgid "Included"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:679
-#: tourfic-pro/admin/options/tour/single-tour.php:641
+#: tourfic-pro/admin/options/tour/single-tour.php:642
 msgid "Included facilites"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:686
-#: tourfic-pro/admin/options/tour/single-tour.php:648
+#: tourfic-pro/admin/options/tour/single-tour.php:649
 msgid "Exclude"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:692
-#: tourfic/templates/tour/single-tour.php:255
-#: tourfic-pro/admin/options/tour/single-tour.php:653
+#: tourfic/templates/tour/single-tour.php:353
+#: tourfic-pro/admin/options/tour/single-tour.php:654
 msgid "Excluded"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:693
-#: tourfic-pro/admin/options/tour/single-tour.php:654
+#: tourfic-pro/admin/options/tour/single-tour.php:655
 msgid "Excluded facilites"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:701
 #: tourfic/admin/options/tour/single-tour.php:706
-#: tourfic-pro/admin/options/tour/single-tour.php:662
-#: tourfic-pro/admin/options/tour/single-tour.php:667
+#: tourfic-pro/admin/options/tour/single-tour.php:663
+#: tourfic-pro/admin/options/tour/single-tour.php:668
 msgid "Itinerary"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:712
-#: tourfic-pro/admin/options/tour/single-tour.php:672
+#: tourfic-pro/admin/options/tour/single-tour.php:673
 msgid "Time or Day"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:713
-#: tourfic-pro/admin/options/tour/single-tour.php:673
+#: tourfic-pro/admin/options/tour/single-tour.php:674
 msgid "You can place the tour plan"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:719
-#: tourfic-pro/admin/options/tour/single-tour.php:679
+#: tourfic-pro/admin/options/tour/single-tour.php:680
 msgid "Input the title here"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:724
-#: tourfic-pro/admin/options/tour/single-tour.php:684
+#: tourfic-pro/admin/options/tour/single-tour.php:685
 msgid "Upload Image"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:727
-#: tourfic-pro/admin/options/tour/single-tour.php:687
+#: tourfic-pro/admin/options/tour/single-tour.php:688
 msgid "Add Image"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:728
-#: tourfic-pro/admin/options/tour/single-tour.php:688
+#: tourfic-pro/admin/options/tour/single-tour.php:689
 msgid "Remove Image"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:741
 #: tourfic/admin/options/tour/single-tour.php:746
-#: tourfic/templates/hotel/single-hotel.php:431
-#: tourfic-pro/admin/options/tour/single-tour.php:701
-#: tourfic-pro/admin/options/tour/single-tour.php:706
+#: tourfic/templates/hotel/single-hotel.php:448
+#: tourfic-pro/admin/options/tour/single-tour.php:702
+#: tourfic-pro/admin/options/tour/single-tour.php:707
 msgid "FAQs"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:751
-#: tourfic-pro/admin/options/tour/single-tour.php:711
+#: tourfic-pro/admin/options/tour/single-tour.php:712
 msgid "FAQ Title"
 msgstr ""
 
 #: tourfic/admin/options/tour/single-tour.php:756
-#: tourfic-pro/admin/options/tour/single-tour.php:716
+#: tourfic-pro/admin/options/tour/single-tour.php:717
 msgid "FAQ Description"
 msgstr ""
 
-#: tourfic/inc/enqueues.php:129
+#: tourfic/inc/enqueues.php:131
 msgid "Refreshed Successfully!"
 msgstr ""
 
-#: tourfic/inc/enqueues.php:130
+#: tourfic/inc/enqueues.php:132
 msgid "Adding to wishlist..."
 msgstr ""
 
-#: tourfic/inc/enqueues.php:131
+#: tourfic/inc/enqueues.php:133
 msgid "Item added to wishlist."
 msgstr ""
 
-#: tourfic/inc/enqueues.php:132
+#: tourfic/inc/enqueues.php:134
 msgid "Failed to add in wishlist!"
 msgstr ""
 
-#: tourfic/inc/enqueues.php:133
+#: tourfic/inc/enqueues.php:135
 msgid "Item removed from wishlist"
 msgstr ""
 
-#: tourfic/inc/enqueues.php:134
+#: tourfic/inc/enqueues.php:136
 msgid "Failed to remove from wishlist!"
 msgstr ""
 
-#: tourfic/inc/enqueues.php:135
+#: tourfic/inc/enqueues.php:137
 msgid "This field is required!"
 msgstr ""
 
-#: tourfic/inc/enqueues.php:136 tourfic/inc/functions.php:414
-#: tourfic/inc/functions.php:528 tourfic/inc/functions/functions-hotel.php:628
+#: tourfic/inc/enqueues.php:138 tourfic/inc/functions.php:427
+#: tourfic/inc/functions.php:541 tourfic/inc/functions/functions-hotel.php:704
+#: tourfic/templates/tour/single-tour.php:243
 msgid "Adult"
 msgstr ""
 
-#: tourfic/inc/enqueues.php:137 tourfic/inc/functions.php:429
-#: tourfic/inc/functions.php:430 tourfic/inc/functions.php:433
-#: tourfic/inc/functions.php:544 tourfic/inc/functions.php:546
-#: tourfic/inc/functions/functions-hotel.php:526
-#: tourfic/inc/functions/functions-hotel.php:542
-#: tourfic/inc/functions/functions-hotel.php:647
-#: tourfic/inc/functions/functions-hotel.php:651
-#: tourfic/inc/functions/functions-tour.php:258
-#: tourfic/inc/functions/functions-tour.php:273
-#: tourfic/inc/functions/functions-tour.php:407
-#: tourfic/inc/functions/functions-tour.php:428
-#: tourfic/inc/functions/woocommerce/wc-tour.php:356
+#: tourfic/inc/enqueues.php:139 tourfic/inc/functions.php:442
+#: tourfic/inc/functions.php:443 tourfic/inc/functions.php:446
+#: tourfic/inc/functions.php:557 tourfic/inc/functions.php:559
+#: tourfic/inc/functions/functions-hotel.php:602
+#: tourfic/inc/functions/functions-hotel.php:618
+#: tourfic/inc/functions/functions-hotel.php:723
+#: tourfic/inc/functions/functions-hotel.php:727
+#: tourfic/inc/functions/functions-tour.php:260
+#: tourfic/inc/functions/functions-tour.php:275
+#: tourfic/inc/functions/functions-tour.php:419
+#: tourfic/inc/functions/functions-tour.php:440
+#: tourfic/inc/functions/woocommerce/wc-tour.php:374
 msgid "Children"
 msgstr ""
 
-#: tourfic/inc/enqueues.php:138 tourfic/inc/functions/functions-tour.php:260
-#: tourfic/inc/functions/functions-tour.php:281
-#: tourfic/inc/functions/functions-tour.php:411
-#: tourfic/inc/functions/functions-tour.php:438
-#: tourfic/inc/functions/woocommerce/wc-tour.php:363
+#: tourfic/inc/enqueues.php:140 tourfic/inc/functions/functions-tour.php:262
+#: tourfic/inc/functions/functions-tour.php:283
+#: tourfic/inc/functions/functions-tour.php:423
+#: tourfic/inc/functions/functions-tour.php:450
+#: tourfic/inc/functions/woocommerce/wc-tour.php:381
+#: tourfic/templates/tour/single-tour.php:247
 msgid "Infant"
 msgstr ""
 
-#: tourfic/inc/enqueues.php:139 tourfic/inc/functions.php:446
-#: tourfic/inc/functions.php:560 tourfic/inc/functions/functions-hotel.php:528
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:178
+#: tourfic/inc/enqueues.php:141 tourfic/inc/functions.php:459
+#: tourfic/inc/functions.php:573 tourfic/inc/functions/functions-hotel.php:604
+#: tourfic/inc/functions/woocommerce/wc-hotel.php:204
 #: tourfic-pro/inc/functions/functions_order.php:410
 msgid "Room"
 msgstr ""
 
-#: tourfic/inc/enqueues.php:140
+#: tourfic/inc/enqueues.php:142
 msgid "Sending your question..."
 msgstr ""
 
-#: tourfic/inc/functions.php:379 tourfic/inc/functions.php:506
-#: tourfic/inc/functions/functions-hotel.php:510
+#: tourfic/inc/functions.php:392 tourfic/inc/functions.php:519
+#: tourfic/inc/functions/functions-hotel.php:586
 msgid "Enter Location"
 msgstr ""
 
-#: tourfic/inc/functions.php:379 tourfic/inc/functions.php:506
-#: tourfic/inc/functions/functions-tour.php:244
+#: tourfic/inc/functions.php:392 tourfic/inc/functions.php:519
+#: tourfic/inc/functions/functions-tour.php:246
 msgid "Enter Destination"
 msgstr ""
 
-#: tourfic/inc/functions.php:417 tourfic/inc/functions.php:530
-#: tourfic/inc/functions/functions-hotel.php:524
-#: tourfic/inc/functions/functions-hotel.php:534
-#: tourfic/inc/functions/functions-hotel.php:632
-#: tourfic/inc/functions/functions-tour.php:256
-#: tourfic/inc/functions/functions-tour.php:265
-#: tourfic/inc/functions/functions-tour.php:403
-#: tourfic/inc/functions/functions-tour.php:418
-#: tourfic/inc/functions/woocommerce/wc-tour.php:349
+#: tourfic/inc/functions.php:416
+msgid "Location/Destination"
+msgstr ""
+
+#: tourfic/inc/functions.php:430 tourfic/inc/functions.php:543
+#: tourfic/inc/functions/functions-hotel.php:600
+#: tourfic/inc/functions/functions-hotel.php:610
+#: tourfic/inc/functions/functions-hotel.php:708
+#: tourfic/inc/functions/functions-tour.php:258
+#: tourfic/inc/functions/functions-tour.php:267
+#: tourfic/inc/functions/functions-tour.php:415
+#: tourfic/inc/functions/functions-tour.php:430
+#: tourfic/inc/functions/woocommerce/wc-tour.php:367
 msgid "Adults"
 msgstr ""
 
-#: tourfic/inc/functions.php:449 tourfic/inc/functions.php:562
-#: tourfic/inc/functions/functions-hotel.php:550
+#: tourfic/inc/functions.php:462 tourfic/inc/functions.php:575
+#: tourfic/inc/functions/functions-hotel.php:626
 msgid "Rooms"
 msgstr ""
 
-#: tourfic/inc/functions.php:462 tourfic/inc/functions.php:576
-#: tourfic/inc/functions/functions-hotel.php:666
-#: tourfic/inc/functions/functions-tour.php:299
+#: tourfic/inc/functions.php:475 tourfic/inc/functions.php:589
+#: tourfic/inc/functions/functions-hotel.php:742
+#: tourfic/inc/functions/functions-tour.php:301
+#: tourfic/inc/functions/functions-tour.php:465
 msgid "Select Date"
 msgstr ""
 
-#: tourfic/inc/functions.php:474 tourfic/inc/functions.php:585
-#: tourfic/templates/hotel/single-hotel.php:413
+#: tourfic/inc/functions.php:487 tourfic/inc/functions.php:598
+#: tourfic/templates/hotel/single-hotel.php:430
 msgid "Check Availability"
 msgstr ""
 
-#: tourfic/inc/elementor-addon/widgets/tourfic-destination.php:37
-msgid "Tourfic Destination"
+#: tourfic/inc/functions.php:811 tourfic/inc/functions.php:816
+#: tourfic/inc/functions/shortcodes.php:553
+#: tourfic/templates/template-parts/archive.php:47
+msgid "Nothing Found!"
 msgstr ""
 
-#: tourfic/inc/elementor-addon/widgets/tourfic-destination.php:91
-#: tourfic/inc/elementor-addon/widgets/tourfic-search.php:125
-msgid "Style"
+#: tourfic/inc/elementor/widget-register.php:13
+msgid "Tourfic"
 msgstr ""
 
-#: tourfic/inc/elementor-addon/widgets/tourfic-destination.php:102
-msgid "Destination Title Typography"
+#: tourfic/inc/elementor/widgets/hotel-locations.php:30
+msgid "Hotel Locations"
 msgstr ""
 
-#: tourfic/inc/elementor-addon/widgets/tourfic-destination.php:110
-msgid "Destination title Color"
-msgstr ""
-
-#: tourfic/inc/elementor-addon/widgets/tourfic-destination.php:126
-msgid "Destination Title Hover Color"
-msgstr ""
-
-#: tourfic/inc/elementor-addon/widgets/tourfic-destination.php:145
-msgid "Destination Subitle Typography"
-msgstr ""
-
-#: tourfic/inc/elementor-addon/widgets/tourfic-destination.php:153
-msgid "Destination Subtitle Color"
-msgstr ""
-
-#: tourfic/inc/elementor-addon/widgets/tourfic-destination.php:169
-msgid "Destination Subtitle Hover Color"
-msgstr ""
-
-#: tourfic/inc/elementor-addon/widgets/tourfic-destination.php:187
-msgid "Info Background"
-msgstr ""
-
-#: tourfic/inc/elementor-addon/widgets/tourfic-destination.php:197
-#: tourfic/inc/elementor-addon/widgets/tourfic-destination.php:214
-msgid "Background Color"
-msgstr ""
-
-#: tourfic/inc/elementor-addon/widgets/tourfic-destination.php:205
-msgid "Info Hover Background"
-msgstr ""
-
-#: tourfic/inc/elementor-addon/widgets/tourfic-search.php:37
-msgid "Tourfic search"
-msgstr ""
-
-#: tourfic/inc/elementor-addon/widgets/tourfic-search.php:91
+#: tourfic/inc/elementor/widgets/hotel-locations.php:73
+#: tourfic/inc/elementor/widgets/recent-hotels-slider.php:73
+#: tourfic/inc/elementor/widgets/recent-tours-slider.php:73
+#: tourfic/inc/elementor/widgets/search-form-horizontal.php:72
+#: tourfic/inc/elementor/widgets/tour-destinations.php:73
 msgid "Content"
 msgstr ""
 
-#: tourfic/inc/elementor-addon/widgets/tourfic-search.php:101
-msgid "Default title"
+#: tourfic/inc/elementor/widgets/hotel-locations.php:81
+msgid "Hotel Location Ids"
 msgstr ""
 
-#: tourfic/inc/elementor-addon/widgets/tourfic-search.php:102
-msgid "Type your title here"
+#: tourfic/inc/elementor/widgets/hotel-locations.php:84
+msgid ""
+"Specify the ids of the locations which you want to show. Separated by commas "
+"(,). Default to blank"
 msgstr ""
 
-#: tourfic/inc/elementor-addon/widgets/tourfic-search.php:110
+#: tourfic/inc/elementor/widgets/hotel-locations.php:91
+#: tourfic/inc/elementor/widgets/tour-destinations.php:91
+msgid "Hide Empty"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/hotel-locations.php:106
+#: tourfic/inc/elementor/widgets/recent-hotels-slider.php:126
+#: tourfic/inc/elementor/widgets/recent-tours-slider.php:126
+#: tourfic/inc/elementor/widgets/search-form-horizontal.php:128
+#: tourfic/inc/elementor/widgets/tour-destinations.php:106
+msgid "Style"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/hotel-locations.php:115
+msgid "Location Title Typography"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/hotel-locations.php:123
+msgid "Location Title Color"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/hotel-locations.php:139
+msgid "Location Title Hover Color"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/hotel-locations.php:158
+msgid "Location Subitle Typography"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/hotel-locations.php:166
+msgid "Location Subtitle Color"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/hotel-locations.php:182
+msgid "Location Subtitle Hover Color"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/hotel-locations.php:200
+#: tourfic/inc/elementor/widgets/tour-destinations.php:200
+msgid "Info Background"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/hotel-locations.php:210
+#: tourfic/inc/elementor/widgets/hotel-locations.php:227
+#: tourfic/inc/elementor/widgets/tour-destinations.php:210
+#: tourfic/inc/elementor/widgets/tour-destinations.php:227
+msgid "Background Color"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/hotel-locations.php:218
+#: tourfic/inc/elementor/widgets/tour-destinations.php:218
+msgid "Info Hover Background"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/recent-hotels-slider.php:31
+msgid "Recent Hotels Slider"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/recent-hotels-slider.php:90
+#: tourfic/inc/elementor/widgets/recent-tours-slider.php:90
+msgid "Sub-Title"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/recent-hotels-slider.php:99
+msgid "Total Hotels"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/recent-hotels-slider.php:101
+msgid "Number of total hotels to show. Min 3. Default to 7"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/recent-hotels-slider.php:111
+#: tourfic/inc/elementor/widgets/recent-tours-slider.php:111
+msgid "Slide to Show"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/recent-hotels-slider.php:113
+msgid "Number of hotels to show on the slider at a time. Min 1. Default to 3"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/recent-hotels-slider.php:135
+#: tourfic/inc/elementor/widgets/recent-tours-slider.php:135
+#: tourfic/inc/elementor/widgets/search-form-horizontal.php:137
+msgid "Title Typography"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/recent-hotels-slider.php:142
+#: tourfic/inc/elementor/widgets/recent-tours-slider.php:142
+#: tourfic/inc/elementor/widgets/search-form-horizontal.php:144
+msgid "Title Color"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/recent-hotels-slider.php:165
+#: tourfic/inc/elementor/widgets/recent-tours-slider.php:165
+#: tourfic/inc/elementor/widgets/search-form-horizontal.php:167
+msgid "Subtitle Typography"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/recent-hotels-slider.php:173
+#: tourfic/inc/elementor/widgets/recent-tours-slider.php:173
+#: tourfic/inc/elementor/widgets/search-form-horizontal.php:175
+msgid "Subtitle Color"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/recent-tours-slider.php:31
+msgid "Recent Tours Slider"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/recent-tours-slider.php:99
+msgid "Total Tours"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/recent-tours-slider.php:101
+msgid "Number of total tours to show. Min 3. Default to 7"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/recent-tours-slider.php:113
+msgid "Number of tours to show on the slider at a time. Min 1. Default to 3"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/search-form-horizontal.php:29
+msgid "Tourfic Search Form (Horizontal)"
+msgstr ""
+
+#: tourfic/inc/elementor/widgets/search-form-horizontal.php:90
 #: tourfic/inc/functions/widgets.php:349
 msgid "Subtitle"
 msgstr ""
 
-#: tourfic/inc/elementor-addon/widgets/tourfic-search.php:112
-msgid "Default description"
+#: tourfic/inc/elementor/widgets/search-form-horizontal.php:100
+msgid "Type"
 msgstr ""
 
-#: tourfic/inc/elementor-addon/widgets/tourfic-search.php:113
-msgid "Type your description here"
+#: tourfic/inc/elementor/widgets/search-form-horizontal.php:102
+msgid "All"
 msgstr ""
 
-#: tourfic/inc/elementor-addon/widgets/tourfic-search.php:134
-msgid "Title Typography"
+#: tourfic/inc/elementor/widgets/search-form-horizontal.php:113
+msgid "Full Width"
 msgstr ""
 
-#: tourfic/inc/elementor-addon/widgets/tourfic-search.php:141
-msgid "Title Color"
+#: tourfic/inc/elementor/widgets/tour-destinations.php:30
+#: tourfic/inc/functions/functions-tour.php:121
+msgid "Tour Destinations"
 msgstr ""
 
-#: tourfic/inc/elementor-addon/widgets/tourfic-search.php:164
-msgid "Subtitle Typography"
+#: tourfic/inc/elementor/widgets/tour-destinations.php:81
+msgid "Tour Destination Ids"
 msgstr ""
 
-#: tourfic/inc/elementor-addon/widgets/tourfic-search.php:172
-msgid "Subtitle Color"
+#: tourfic/inc/elementor/widgets/tour-destinations.php:84
+msgid ""
+"Specify the ids of the destinations which you want to show. Separated by "
+"commas (,). Default to blank"
 msgstr ""
 
-#: tourfic/inc/elementor-addon/widgets/tourfic-tours.php:37
-msgid "Tourfic slider"
+#: tourfic/inc/elementor/widgets/tour-destinations.php:115
+msgid "Destination Title Typography"
 msgstr ""
 
-#: tourfic/inc/functions/functions-helper.php:37
-#: tourfic/inc/functions/functions-helper.php:487
-msgid "Submit"
+#: tourfic/inc/elementor/widgets/tour-destinations.php:123
+msgid "Destination Title Color"
 msgstr ""
 
-#: tourfic/inc/functions/functions-helper.php:38
-msgid "Write a Review"
+#: tourfic/inc/elementor/widgets/tour-destinations.php:139
+msgid "Destination Title Hover Color"
 msgstr ""
 
-#: tourfic/inc/functions/functions-helper.php:39
-msgid "Reply"
+#: tourfic/inc/elementor/widgets/tour-destinations.php:158
+msgid "Destination Subitle Typography"
 msgstr ""
 
-#: tourfic/inc/functions/functions-helper.php:269
-msgid "Customer Rating"
+#: tourfic/inc/elementor/widgets/tour-destinations.php:166
+msgid "Destination Subtitle Color"
 msgstr ""
 
-#: tourfic/inc/functions/functions-helper.php:276
-#: tourfic/templates/template-parts/review.php:90
-#, php-format
-msgctxt "comments title"
-msgid "Based on %1$s review"
-msgid_plural "Based on %1$s reviews"
-msgstr[0] ""
-msgstr[1] ""
-
-#: tourfic/inc/functions/functions-helper.php:412
-msgid "Price per night"
+#: tourfic/inc/elementor/widgets/tour-destinations.php:182
+msgid "Destination Subtitle Hover Color"
 msgstr ""
 
-#: tourfic/inc/functions/functions-helper.php:474
+#: tourfic/inc/functions/functions-helper.php:162
 msgid "Submit your question"
 msgstr ""
 
-#: tourfic/inc/functions/functions-helper.php:477
+#: tourfic/inc/functions/functions-helper.php:165
+#: tourfic/inc/functions/functions-review.php:84
 msgid "Your Name"
 msgstr ""
 
-#: tourfic/inc/functions/functions-helper.php:480
+#: tourfic/inc/functions/functions-helper.php:168
 msgid "Your email"
 msgstr ""
 
-#: tourfic/inc/functions/functions-helper.php:483
+#: tourfic/inc/functions/functions-helper.php:171
 msgid "Your Question"
 msgstr ""
 
-#: tourfic/inc/functions/functions-helper.php:486
+#: tourfic/inc/functions/functions-helper.php:174
+#: tourfic/inc/functions/functions-hotel.php:1094
 msgid "Reset"
 msgstr ""
 
-#: tourfic/inc/functions/functions-helper.php:506
+#: tourfic/inc/functions/functions-helper.php:175
+#: tourfic/inc/functions/functions-review.php:81
+msgid "Submit"
+msgstr ""
+
+#: tourfic/inc/functions/functions-helper.php:197
 msgid "Security error! Reload the page and try again."
 msgstr ""
 
-#: tourfic/inc/functions/functions-helper.php:530
+#: tourfic/inc/functions/functions-helper.php:221
 #, php-format
 msgid "Someone asked question on: %s"
 msgstr ""
 
-#: tourfic/inc/functions/functions-helper.php:538
+#: tourfic/inc/functions/functions-helper.php:229
 msgid "Your question has been sent!"
 msgstr ""
 
-#: tourfic/inc/functions/functions-helper.php:541
+#: tourfic/inc/functions/functions-helper.php:232
 msgid "Message sent failed!"
 msgstr ""
 
@@ -1820,8 +2292,8 @@ msgstr ""
 
 #: tourfic/inc/functions/functions-hotel.php:168
 #: tourfic/inc/functions/functions-hotel.php:170
-#: tourfic/inc/functions/functions-hotel.php:791
-#: tourfic/templates/hotel/single-hotel.php:247
+#: tourfic/inc/functions/functions-hotel.php:916
+#: tourfic/templates/hotel/single-hotel.php:233
 msgid "Features"
 msgstr ""
 
@@ -1901,66 +2373,59 @@ msgstr ""
 msgid "Back to Features"
 msgstr ""
 
-#: tourfic/inc/functions/functions-hotel.php:302
-#: tourfic/templates/hotel/single-hotel.php:281
+#: tourfic/inc/functions/functions-hotel.php:307
+#: tourfic/templates/hotel/single-hotel.php:267
 msgid "Pax"
 msgstr ""
 
-#: tourfic/inc/functions/functions-hotel.php:304
-#: tourfic/templates/hotel/single-hotel.php:283
+#: tourfic/inc/functions/functions-hotel.php:309
+#: tourfic/templates/hotel/single-hotel.php:269
 msgid "Select Rooms"
 msgstr ""
 
-#: tourfic/inc/functions/functions-hotel.php:336
-#: tourfic/templates/hotel/single-hotel.php:309
-msgid "Key Features"
+#: tourfic/inc/functions/functions-hotel.php:481
+#: tourfic/inc/functions/functions-hotel.php:506
+msgid "No Room Available! Total person number exceeds!"
 msgstr ""
 
-#: tourfic/inc/functions/functions-hotel.php:358
-#: tourfic/templates/hotel/single-hotel.php:332
-msgid "No. Beds"
+#: tourfic/inc/functions/functions-hotel.php:486
+msgid "No Room Available within this Date Range!"
 msgstr ""
 
-#: tourfic/inc/functions/functions-hotel.php:365
-#: tourfic/templates/hotel/single-hotel.php:340
-msgid "Amenities"
+#: tourfic/inc/functions/functions-hotel.php:514
+#: tourfic/inc/functions/functions-hotel.php:523
+msgid "No Room Available!"
 msgstr ""
 
-#: tourfic/inc/functions/functions-hotel.php:399
-#: tourfic/templates/hotel/single-hotel.php:379
-msgid "No. Adults"
-msgstr ""
-
-#: tourfic/inc/functions/functions-hotel.php:411
-#: tourfic/templates/hotel/single-hotel.php:391
-msgid "No. Children"
-msgstr ""
-
-#: tourfic/inc/functions/functions-hotel.php:421
-#: tourfic/templates/hotel/single-hotel.php:401
-msgid "per night"
-msgstr ""
-
-#: tourfic/inc/functions/functions-hotel.php:424
-#: tourfic/templates/hotel/single-hotel.php:407
-msgid "per person/night"
-msgstr ""
-
-#: tourfic/inc/functions/functions-hotel.php:566
-#: tourfic/inc/functions/functions-tour.php:296
+#: tourfic/inc/functions/functions-hotel.php:642
+#: tourfic/inc/functions/functions-tour.php:298
 msgid "Check-in & Check-out date"
 msgstr ""
 
-#: tourfic/inc/functions/functions-hotel.php:569
+#: tourfic/inc/functions/functions-hotel.php:645
 msgid "Check-in - Check-out"
 msgstr ""
 
-#: tourfic/inc/functions/functions-hotel.php:662
+#: tourfic/inc/functions/functions-hotel.php:738
 msgid "Check-in &amp; Check-out date"
 msgstr ""
 
-#: tourfic/inc/functions/functions-hotel.php:679
+#: tourfic/inc/functions/functions-hotel.php:755
 msgid "Booking Availability"
+msgstr ""
+
+#: tourfic/inc/functions/functions-hotel.php:1090
+msgid "Reset Room Availability"
+msgstr ""
+
+#: tourfic/inc/functions/functions-hotel.php:1091
+msgid ""
+"Remove order ids linked with this room.<br><b style='color: red;'>Be aware! "
+"It is irreversible!</b>"
+msgstr ""
+
+#: tourfic/inc/functions/functions-hotel.php:1122
+msgid "Order ids have been removed!"
 msgstr ""
 
 #: tourfic/inc/functions/functions-notice_update.php:13
@@ -1974,18 +2439,89 @@ msgid ""
 "target=\"_blank\"><b>video</b></a> to know how to do it. "
 msgstr ""
 
-#: tourfic/inc/functions/functions-notice_update.php:75
-#: tourfic/inc/functions/functions-notice_update.php:76
-msgid "Upgrade to Pro"
-msgstr ""
-
-#: tourfic/inc/functions/functions-notice_update.php:88
-#: tourfic-pro/inc/functions.php:204
-msgid "Settings"
+#: tourfic/inc/functions/functions-notice_update.php:62
+msgid "Heads up, Please backup before upgrade!"
 msgstr ""
 
 #: tourfic/inc/functions/functions-notice_update.php:93
+#: tourfic/inc/functions/functions-notice_update.php:94
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: tourfic/inc/functions/functions-notice_update.php:111
 msgid "GO PRO"
+msgstr ""
+
+#: tourfic/inc/functions/functions-review.php:48
+msgid "Please provide a ratings"
+msgstr ""
+
+#: tourfic/inc/functions/functions-review.php:82
+msgid "Write a Review"
+msgstr ""
+
+#: tourfic/inc/functions/functions-review.php:83
+msgid "Reply"
+msgstr ""
+
+#: tourfic/inc/functions/functions-review.php:85
+msgid "Email Address"
+msgstr ""
+
+#: tourfic/inc/functions/functions-review.php:86
+msgid "Review Description"
+msgstr ""
+
+#: tourfic/inc/functions/functions-review.php:87
+msgid " By commenting you accept the"
+msgstr ""
+
+#: tourfic/inc/functions/functions-review.php:88
+msgid " Privacy Policy"
+msgstr ""
+
+#: tourfic/inc/functions/functions-review.php:90
+msgid "Cancel Reply"
+msgstr ""
+
+#: tourfic/inc/functions/functions-review.php:479
+#, php-format
+msgctxt "comments title"
+msgid "%1$s review"
+msgid_plural "%1$s reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+#: tourfic/inc/functions/functions-review.php:556
+msgid "Your review is awaiting moderation"
+msgstr ""
+
+#: tourfic/inc/functions/functions-review.php:569
+msgid "Delete Old Review Fields"
+msgstr ""
+
+#: tourfic/inc/functions/functions-review.php:570
+msgid ""
+"Delete review fields that don't match with the present fields.<br><b "
+"style='color: red;'>Be aware! You will lose your old data!</b>"
+msgstr ""
+
+#: tourfic/inc/functions/functions-review.php:573
+msgid "Delete Fields"
+msgstr ""
+
+#: tourfic/inc/functions/functions-review.php:586
+msgid "Delete Old Reviews"
+msgstr ""
+
+#: tourfic/inc/functions/functions-review.php:587
+msgid ""
+"Delete reviews that don't have any review (rating) fields.<br><b "
+"style='color: red;'>Be aware! You will lose your old data!</b>"
+msgstr ""
+
+#: tourfic/inc/functions/functions-review.php:590
+msgid "Delete Reviews"
 msgstr ""
 
 #: tourfic/inc/functions/functions-tour.php:32
@@ -1997,12 +2533,8 @@ msgstr ""
 msgid "Tours"
 msgstr ""
 
-#: tourfic/inc/functions/functions-tour.php:121
-msgid "Tour Destinations"
-msgstr ""
-
 #: tourfic/inc/functions/functions-tour.php:123
-#: tourfic/inc/functions/functions-tour.php:241
+#: tourfic/inc/functions/functions-tour.php:243
 msgid "Destination"
 msgstr ""
 
@@ -2078,11 +2610,15 @@ msgstr ""
 msgid "Back to Destination"
 msgstr ""
 
-#: tourfic/inc/functions/functions-tour.php:605
+#: tourfic/inc/functions/functions-tour.php:497
+msgid "Select Time"
+msgstr ""
+
+#: tourfic/inc/functions/functions-tour.php:616
 msgid "Book Now"
 msgstr ""
 
-#: tourfic/inc/functions/functions-tour.php:652
+#: tourfic/inc/functions/functions-tour.php:662
 msgid "Featured"
 msgstr ""
 
@@ -2095,9 +2631,35 @@ msgid "<p>No items added yet!</p>"
 msgstr ""
 
 #: tourfic/inc/functions/shortcodes.php:50
+#, php-format
+msgid "%s hotels"
+msgstr ""
+
 #: tourfic/inc/functions/shortcodes.php:122
 #, php-format
-msgid "%s properties"
+msgid "%s tours"
+msgstr ""
+
+#: tourfic/inc/functions/shortcodes.php:442
+msgid "<h3>Please select fields from the search form!</h3>"
+msgstr ""
+
+#: tourfic/inc/functions/shortcodes.php:516
+#: tourfic/templates/hotel/archive-hotels.php:22
+#: tourfic/templates/template-parts/archive.php:28
+#: tourfic/templates/tour/archive-tours.php:38
+msgid "List View"
+msgstr ""
+
+#: tourfic/inc/functions/shortcodes.php:517
+#: tourfic/templates/hotel/archive-hotels.php:23
+#: tourfic/templates/template-parts/archive.php:29
+#: tourfic/templates/tour/archive-tours.php:39
+msgid "Grid View"
+msgstr ""
+
+#: tourfic/inc/functions/shortcodes.php:550
+msgid "Nothing Found! Select another dates"
 msgstr ""
 
 #: tourfic/inc/functions/widgets.php:20
@@ -2169,230 +2731,315 @@ msgstr ""
 msgid "Widgets in this area will be shown on tourfic search page"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:55
-msgid "Check-in date missing."
+#: tourfic/inc/functions/woocommerce/wc-common.php:15
+msgid "Room Name"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:58
-msgid "Check-out date missing."
-msgstr ""
-
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:61
-msgid "Select Adult(s)."
-msgstr ""
-
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:64
-msgid "Select Room(s)."
-msgstr ""
-
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:67
-#: tourfic/inc/functions/woocommerce/wc-tour.php:156
-msgid "Unknown Error! Please try again."
-msgstr ""
-
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:185
+#: tourfic/inc/functions/woocommerce/wc-common.php:16
+#: tourfic/inc/functions/woocommerce/wc-hotel.php:211
 msgid "Number of Room Booked"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:192
+#: tourfic/inc/functions/woocommerce/wc-common.php:17
+#: tourfic/inc/functions/woocommerce/wc-hotel.php:218
 #: tourfic-pro/inc/functions/functions_order.php:185
 #: tourfic-pro/inc/functions/functions_order.php:418
 msgid "Adult Number"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:199
+#: tourfic/inc/functions/woocommerce/wc-common.php:18
+#: tourfic-pro/inc/functions/functions_order.php:189
+#: tourfic-pro/inc/functions/functions_order.php:422
+msgid "Children Number"
+msgstr ""
+
+#: tourfic/inc/functions/woocommerce/wc-common.php:19
+msgid "Check-in Date"
+msgstr ""
+
+#: tourfic/inc/functions/woocommerce/wc-common.php:20
+msgid "Check-out Date"
+msgstr ""
+
+#: tourfic/inc/functions/woocommerce/wc-common.php:21
+msgid "Tour ID"
+msgstr ""
+
+#: tourfic/inc/functions/woocommerce/wc-hotel.php:56
+msgid "Check-in date missing."
+msgstr ""
+
+#: tourfic/inc/functions/woocommerce/wc-hotel.php:59
+msgid "Check-out date missing."
+msgstr ""
+
+#: tourfic/inc/functions/woocommerce/wc-hotel.php:62
+msgid "Select Adult(s)."
+msgstr ""
+
+#: tourfic/inc/functions/woocommerce/wc-hotel.php:65
+msgid "Select Room(s)."
+msgstr ""
+
+#: tourfic/inc/functions/woocommerce/wc-hotel.php:68
+#: tourfic/inc/functions/woocommerce/wc-tour.php:189
+msgid "Unknown Error! Please try again."
+msgstr ""
+
+#: tourfic/inc/functions/woocommerce/wc-hotel.php:225
 msgid "Child Number"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:256
-msgid "room_name"
+#: tourfic/inc/functions/woocommerce/wc-hotel.php:232
+#: tourfic-pro/inc/functions/functions_order.php:426
+msgid "Check-in"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:261
-msgid "number_room_booked"
+#: tourfic/inc/functions/woocommerce/wc-hotel.php:239
+#: tourfic-pro/inc/functions/functions_order.php:430
+msgid "Check-out"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:266
-msgid "adult"
+#: tourfic/inc/functions/woocommerce/wc-product-extend.php:21
+msgid "Invalid product."
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:271
-msgid "child"
+#: tourfic/inc/functions/woocommerce/wc-tour.php:40
+msgid "Fixed Availability is selected but Tourfic Pro is not activated!"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:276
-msgid "check_in"
+#: tourfic/inc/functions/woocommerce/wc-tour.php:80
+msgid ""
+"Custom Continous Availability is selected but Tourfic Pro is not activated!"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-hotel.php:281
-msgid "check_out"
-msgstr ""
-
-#: tourfic/inc/functions/woocommerce/wc-tour.php:81
-#: tourfic/inc/functions/woocommerce/wc-tour.php:82
-#: tourfic/inc/functions/woocommerce/wc-tour.php:94
-#: tourfic/inc/functions/woocommerce/wc-tour.php:95
-#: tourfic/inc/functions/woocommerce/wc-tour.php:119
-#: tourfic/inc/functions/woocommerce/wc-tour.php:120
+#: tourfic/inc/functions/woocommerce/wc-tour.php:114
+#: tourfic/inc/functions/woocommerce/wc-tour.php:115
+#: tourfic/inc/functions/woocommerce/wc-tour.php:127
+#: tourfic/inc/functions/woocommerce/wc-tour.php:128
+#: tourfic/inc/functions/woocommerce/wc-tour.php:152
+#: tourfic/inc/functions/woocommerce/wc-tour.php:153
 #, php-format
 msgid "%s person"
 msgid_plural "%s persons"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tourfic/inc/functions/woocommerce/wc-tour.php:85
-#: tourfic/inc/functions/woocommerce/wc-tour.php:98
+#: tourfic/inc/functions/woocommerce/wc-tour.php:118
+#: tourfic/inc/functions/woocommerce/wc-tour.php:131
 #, php-format
 msgid "Minimum %1$s required"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-tour.php:88
-#: tourfic/inc/functions/woocommerce/wc-tour.php:101
+#: tourfic/inc/functions/woocommerce/wc-tour.php:121
+#: tourfic/inc/functions/woocommerce/wc-tour.php:134
 #, php-format
 msgid "Maximum %1$s allowed"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-tour.php:125
+#: tourfic/inc/functions/woocommerce/wc-tour.php:158
 #, php-format
 msgid "Minimum %1$s required for date %2$s - %3$s"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-tour.php:129
+#: tourfic/inc/functions/woocommerce/wc-tour.php:162
 #, php-format
 msgid "Maximum %1$s allowed for date %2$s - %3$s"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-tour.php:144
+#: tourfic/inc/functions/woocommerce/wc-tour.php:177
 #, php-format
 msgid "%s day"
 msgid_plural "%s days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tourfic/inc/functions/woocommerce/wc-tour.php:150
+#: tourfic/inc/functions/woocommerce/wc-tour.php:183
 #, php-format
 msgid "Present date to booking date required minimum %1$s gap"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-tour.php:153
+#: tourfic/inc/functions/woocommerce/wc-tour.php:186
 msgid "You must select booking date"
 msgstr ""
 
+#: tourfic/inc/functions/woocommerce/wc-tour.php:223
 #: tourfic/inc/functions/woocommerce/wc-tour.php:226
-#: tourfic/inc/functions/woocommerce/wc-tour.php:229
 msgid "Please select time"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-tour.php:233
+#: tourfic/inc/functions/woocommerce/wc-tour.php:232
 msgid "Adult price is blank!"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-tour.php:234
+#: tourfic/inc/functions/woocommerce/wc-tour.php:233
 msgid "Childern price is blank!"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-tour.php:235
+#: tourfic/inc/functions/woocommerce/wc-tour.php:234
 msgid "Infant price is blank!"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-tour.php:236
+#: tourfic/inc/functions/woocommerce/wc-tour.php:235
 msgid "Infant without adults is not allowed!"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-tour.php:371
-#: tourfic/inc/functions/woocommerce/wc-tour.php:378
+#: tourfic/inc/functions/woocommerce/wc-tour.php:239
+msgid "Group price is blank!"
+msgstr ""
+
+#: tourfic/inc/functions/woocommerce/wc-tour.php:389
+#: tourfic/inc/functions/woocommerce/wc-tour.php:396
 #: tourfic-pro/inc/functions/functions_order.php:181
 msgid "Tour Date"
 msgstr ""
 
-#: tourfic/inc/functions/woocommerce/wc-tour.php:386
+#: tourfic/inc/functions/woocommerce/wc-tour.php:404
 msgid "Tour Extra: "
 msgstr ""
 
-#: tourfic/templates/hotel/single-hotel.php:112
-#: tourfic/templates/hotel/single-hotel.php:118
+#: tourfic/templates/hotel/archive-hotels.php:35
+msgid "No Hotels Found!"
+msgstr ""
+
+#: tourfic/templates/hotel/single-hotel.php:105
+#: tourfic/templates/hotel/single-hotel.php:111
 msgid "Click to toggle wishlist"
 msgstr ""
 
-#: tourfic/templates/hotel/single-hotel.php:137
+#: tourfic/templates/hotel/single-hotel.php:130
 msgid "Share on Facebook"
 msgstr ""
 
-#: tourfic/templates/hotel/single-hotel.php:145
+#: tourfic/templates/hotel/single-hotel.php:139
 msgid "Share on Twitter"
 msgstr ""
 
-#: tourfic/templates/hotel/single-hotel.php:152
+#: tourfic/templates/hotel/single-hotel.php:147
 msgid "Share this link"
 msgstr ""
 
-#: tourfic/templates/hotel/single-hotel.php:159
+#: tourfic/templates/hotel/single-hotel.php:154
 msgid "Copy link"
 msgstr ""
 
-#: tourfic/templates/hotel/single-hotel.php:161
+#: tourfic/templates/hotel/single-hotel.php:156
 msgid "Copied!"
 msgstr ""
 
-#: tourfic/templates/hotel/single-hotel.php:174
+#: tourfic/templates/hotel/single-hotel.php:169
 msgid "Show on map"
 msgstr ""
 
-#: tourfic/templates/hotel/single-hotel.php:178
+#: tourfic/templates/hotel/single-hotel.php:173
 msgid "Reserve"
 msgstr ""
 
-#: tourfic/templates/hotel/single-hotel.php:192
+#: tourfic/templates/hotel/single-hotel.php:187
 #, php-format
 msgid "Show more hotels in %s"
 msgstr ""
 
-#: tourfic/templates/hotel/single-hotel.php:462
+#: tourfic/templates/hotel/single-hotel.php:319
+#: tourfic/templates/template-parts/hotel/hotel-availability-table-row.php:9
+msgid "Key Features"
+msgstr ""
+
+#: tourfic/templates/hotel/single-hotel.php:342
+#: tourfic/templates/template-parts/hotel/hotel-availability-table-row.php:31
+msgid "No. Beds"
+msgstr ""
+
+#: tourfic/templates/hotel/single-hotel.php:350
+#: tourfic/templates/template-parts/hotel/hotel-availability-table-row.php:38
+msgid "Amenities"
+msgstr ""
+
+#: tourfic/templates/hotel/single-hotel.php:389
+#: tourfic/templates/template-parts/hotel/hotel-availability-table-row.php:72
+msgid "No. Adults"
+msgstr ""
+
+#: tourfic/templates/hotel/single-hotel.php:401
+#: tourfic/templates/template-parts/hotel/hotel-availability-table-row.php:84
+msgid "No. Children"
+msgstr ""
+
+#: tourfic/templates/hotel/single-hotel.php:414
+#: tourfic/templates/template-parts/hotel/hotel-availability-table-row.php:94
+msgid "per night"
+msgstr ""
+
+#: tourfic/templates/hotel/single-hotel.php:421
+#: tourfic/templates/template-parts/hotel/hotel-availability-table-row.php:96
+msgid "per person/night"
+msgstr ""
+
+#: tourfic/templates/hotel/single-hotel.php:480
 msgid "Reviews"
 msgstr ""
 
-#: tourfic/templates/template-parts/review.php:107
-#: tourfic/templates/template-parts/review.php:132
-msgid "Comments Navigation"
+#: tourfic/templates/template-parts/review.php:69
+#: tourfic/templates/template-parts/review.php:78
+#: tourfic/templates/template-parts/review.php:145
+#: tourfic/templates/template-parts/review.php:159
+msgid "Add Review"
 msgstr ""
 
-#: tourfic/templates/tour/single-tour.php:156
-msgid "reviews"
+#: tourfic/templates/template-parts/review.php:137
+msgid "No Review Available"
 msgstr ""
 
-#: tourfic/templates/tour/single-tour.php:176
+#: tourfic/templates/template-parts/hotel/hotel-availability-table-row.php:94
+#: tourfic/templates/template-parts/hotel/hotel-availability-table-row.php:96
+msgid "for "
+msgstr ""
+
+#: tourfic/templates/template-parts/hotel/hotel-availability-table-row.php:123
+msgid "I'll reserve"
+msgstr ""
+
+#: tourfic/templates/tour/archive-tours.php:50
+msgid "No Tours Found!"
+msgstr ""
+
+#: tourfic/templates/tour/single-tour.php:245
+msgid "Child"
+msgstr ""
+
+#: tourfic/templates/tour/single-tour.php:272
 msgid "Duration"
 msgstr ""
 
-#: tourfic/templates/tour/single-tour.php:197
+#: tourfic/templates/tour/single-tour.php:293
 msgid "Language"
 msgstr ""
 
-#: tourfic/templates/tour/single-tour.php:215
+#: tourfic/templates/tour/single-tour.php:312
 msgid "Highlights"
 msgstr ""
 
-#: tourfic/templates/tour/single-tour.php:226
+#: tourfic/templates/tour/single-tour.php:322
 msgid "Overview"
 msgstr ""
 
-#: tourfic/templates/tour/single-tour.php:278
+#: tourfic/templates/tour/single-tour.php:377
 msgid "Travel Itinerary"
 msgstr ""
 
-#: tourfic/templates/tour/single-tour.php:329
+#: tourfic/templates/tour/single-tour.php:428
 msgid "Frequently asked questions?"
 msgstr ""
 
-#: tourfic/templates/tour/single-tour.php:361
+#: tourfic/templates/tour/single-tour.php:460
 msgid "Terms and Conditions"
 msgstr ""
 
-#: tourfic/templates/tour/single-tour.php:399
+#: tourfic/templates/tour/single-tour.php:499
 msgid "You might also like"
 msgstr ""
 
-#: tourfic/templates/tour/single-tour.php:400
+#: tourfic/templates/tour/single-tour.php:500
 msgid ""
 "Travel is my life. Since 1999, I’ve been traveling around the world "
 "nonstop.\n"
@@ -2400,19 +3047,19 @@ msgid ""
 "\t\t\t\t\t\t"
 msgstr ""
 
-#: tourfic/templates/tour/single-tour.php:476
+#: tourfic/templates/tour/single-tour.php:581
 msgid "Customer Reviews"
 msgstr ""
 
-#: tourfic/templates/tour/single-tour.php:477
+#: tourfic/templates/tour/single-tour.php:582
 msgid "Reviews given by our customers."
 msgstr ""
 
-#: tourfic-pro/tourfic-pro.php:104
+#: tourfic-pro/tourfic-pro.php:100
 msgid " file is missing! It is required to function Tourfic Pro properly!"
 msgstr ""
 
-#: tourfic-pro/tourfic-pro.php:158 tourfic-pro/tourfic-pro.php:167
+#: tourfic-pro/tourfic-pro.php:154 tourfic-pro/tourfic-pro.php:163
 #, php-format
 msgid "Tourfic Pro requires %1$s Tourfic %2$s to be activated."
 msgstr ""
@@ -2450,8 +3097,56 @@ msgid ""
 "we hate spam"
 msgstr ""
 
-#: tourfic-pro/admin/options/hotel/single-hotel.php:298
+#: tourfic-pro/admin/options/global/parts/miscellaneous.php:121
+msgid "Log out User"
+msgstr ""
+
+#: tourfic-pro/admin/options/global/parts/vendor.php:30
+msgid ""
+"Use shortcode <code>[tf_registration_form]</code> to show registration form "
+"in post/page."
+msgstr ""
+
+#: tourfic-pro/admin/options/hotel/single-hotel.php:330
 msgid "Per person"
+msgstr ""
+
+#: tourfic-pro/admin/options/hotel/single-hotel.php:381
+msgid "Availability by Date"
+msgstr ""
+
+#: tourfic-pro/admin/options/hotel/single-hotel.php:416
+msgid "Per Room Price"
+msgstr ""
+
+#: tourfic-pro/admin/options/hotel/single-hotel.php:417
+#: tourfic-pro/admin/options/hotel/single-hotel.php:424
+#: tourfic-pro/admin/options/hotel/single-hotel.php:431
+msgid "The price of room per night"
+msgstr ""
+
+#: tourfic-pro/admin/options/hotel/single-hotel.php:423
+msgid "Per Adult Price"
+msgstr ""
+
+#: tourfic-pro/admin/options/hotel/single-hotel.php:430
+msgid "Per Children Price"
+msgstr ""
+
+#: tourfic-pro/admin/options/hotel/single-hotel.php:440
+msgid "Other"
+msgstr ""
+
+#: tourfic-pro/inc/elementor/widget-register.php:13
+msgid "Tourfic Pro"
+msgstr ""
+
+#: tourfic-pro/inc/elementor/widgets/login-form.php:31
+msgid "Ajax Login Form"
+msgstr ""
+
+#: tourfic-pro/inc/elementor/widgets/registration-form.php:31
+msgid "Ajax Registration Form"
 msgstr ""
 
 #: tourfic-pro/inc/functions/functions_order.php:13
@@ -2489,11 +3184,6 @@ msgstr ""
 #: tourfic-pro/inc/functions/functions_order.php:300
 #: tourfic-pro/inc/functions/functions_order.php:462
 msgid "items"
-msgstr ""
-
-#: tourfic-pro/inc/functions/functions_order.php:88
-#: tourfic-pro/inc/functions/functions_order.php:314
-msgid "Order ID"
 msgstr ""
 
 #: tourfic-pro/inc/functions/functions_order.php:91
@@ -2537,11 +3227,6 @@ msgstr ""
 
 #: tourfic-pro/inc/functions/functions_order.php:178
 msgid "Tour Name"
-msgstr ""
-
-#: tourfic-pro/inc/functions/functions_order.php:189
-#: tourfic-pro/inc/functions/functions_order.php:422
-msgid "Children Number"
 msgstr ""
 
 #: tourfic-pro/inc/functions/functions_order.php:193
