@@ -922,13 +922,13 @@
         /**
          * Single tour sticky booking bar position fixed
          */
-        $(window).scroll(function(){
-            var sticky = $('.tf-tour-booking-wrap'),
-                scroll = $(window).scrollTop();
+        // $(window).scroll(function(){
+        //     var sticky = $('.tf-tour-booking-wrap'),
+        //         scroll = $(window).scrollTop();
           
-            if (scroll >= 800) sticky.addClass('tf-tours-fixed');
-            else sticky.removeClass('tf-tours-fixed');
-        });
+        //     if (scroll >= 800) sticky.addClass('tf-tours-fixed');
+        //     else sticky.removeClass('tf-tours-fixed');
+        // });
 
         /**
          * Open/close horizontal search form persons panel

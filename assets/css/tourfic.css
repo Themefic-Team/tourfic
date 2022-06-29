@@ -65,7 +65,7 @@
 .tf-page-wrapper h6 {
   margin: 0 0 12px;
   line-height: 1.5;
-  font-weight: 500;
+  font-weight: 600;
   color: #133774;
 }
 .tf-page-wrapper h1 {
@@ -82,6 +82,7 @@
 }
 .tf-page-wrapper h5 {
   font-size: 20px;
+  color: #333;
 }
 .tf-page-wrapper h6 {
   font-size: 18px;
@@ -96,6 +97,7 @@
 .tf-section-wrapper {
   padding: 70px 0;
   background: #f5f8ff;
+  border-radius: 3px;
 }
 .tf-section-white {
   background: #fff;
@@ -138,10 +140,12 @@
   border-radius: 4px;
   padding: 13px 20px;
   font-weight: 500;
+  outline: none;
 }
 .tf_button:hover {
   text-decoration: none;
   background: #333;
+  color: #fff;
 }
 .tf_button.btn-outline {
   background: #fff;
@@ -435,36 +439,6 @@ form.tf_tours_booking a:focus {
   font-weight: normal;
 }
 
-
-
-.tf_tours_booking.tf-tours-fixed {
-  width: 100%;
-  z-index: 999;
-  background-color: #ecf0f2f2;
-  border-top: 1px solid #13377424;
-}
-.tf_tours_booking.tf-tours-fixed .tf_acrselection-wrap {
-  position: absolute;
-  top: -222px;
-}
-.tf-tours-fixed .tf_selectperson-wrap,
-.tf-tours-fixed .tf_form-row .tf_label-row {
-  background: #ffffffb0;
-  border-radius: 5px;
-  padding: 12px 20px;
-}
-.tf-tours-fixed .tf_form-row .tf_label-row {
-  padding: 16px 20px;
-}
-.tf-tours-fixed .tour-extra {
-  background: #ffffffb0;
-}
-.tf_tours_booking.tf-tours-fixed .tf_tours_booking {
-  width: 100%;
-  max-width: 1200px;
-  margin: auto;
-}
-.tf-tours-fixed .tf_form-inner input[type="text"],
 .tf_form-inner select {
   padding: 0;
 }
@@ -490,7 +464,6 @@ form.tf_tours_booking a:focus {
 .tf_acrselection-wrap .tf_acrselection:last-child {
   margin: 0;
 }
-
 .tf_acrselection-wrap .tf_acrselection .acr-dec,
 .tf_acrselection-wrap .tf_acrselection .acr-inc {
   width: 34px;
@@ -539,18 +512,6 @@ form.tf_tours_booking a:focus {
 .tf_acrselection-wrap .tf_acrselection .acr-select input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-.tf-tours-fixed {
-  position: fixed;
-  bottom: 0;
-  left: 0%;
-  right: 0;
-}
-.tf-tours-fixed button[type="submit"] {
-  padding: 16px;
-}
-.tf-tours-fixed form.tf_tours_booking {
-  width: 55%;
 }
 .tf_form-inner input[type="text"],
 .tf_form-inner select {
@@ -726,27 +687,28 @@ form.tf_tours_booking a:focus {
 }
 /*--------- Square block CSS End ---------*/
 /*--------- Highlight CSS Start ---------*/
-.tf-highlight-item {
+.tf-highlight {
+  overflow: hidden;
+}
+.tf-highlight__wrap {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: calc(55% - 10px) calc(45% - 10px);
   grid-column-gap: 20px;
   align-items: center;
+  padding: 0 25px;
 }
-.tf-highlight-wrapper {
-  font-size: 16px;
-}
-.tf-highlight-text ul {
+.tf-highlight__text ul {
   margin: 0;
   padding: 0;
   list-style: none;
   margin-top: 15px;
 }
-.tf-highlight-text ul li {
+.tf-highlight__text ul li {
   padding-left: 20px;
   position: relative;
   margin-bottom: 10px;
 }
-.tf-highlight-text ul li::before {
+.tf-highlight__text ul li::before {
   width: 10px;
   height: 10px;
   left: 0;
@@ -756,73 +718,89 @@ form.tf_tours_booking a:focus {
   position: absolute;
   border-radius: 50px;
 }
-.tf-highlight-image img {
-  border-radius: 8px;
+.tf-highlight__image img {
+  border-radius: 3px;
   background: #fff;
-  padding: 8px;
+  padding: 6px;
   box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
 }
-.tf-overview-wrapper {
-  padding-bottom: 40px;
-}
 /*--------- Highlight CSS  End ---------*/
-/*--------- Include Exclude CSS Start ---------*/
-.tf-inc-exc-wrapper {
+/*--------- Overview Start ---------*/
+.tf-overview {
   padding-bottom: 40px;
 }
-.tf-inc-exc-content-wrapper {
-  display: flex;
-  /*! max-width: 980px; */
-  margin: auto;
-  gap: 35px;
+.tf-overview__container {
+  background: #FAFCFE;
+  padding: 40px 40px 30px 40px;
+}
+.tf-overview__container h2 {
+  font-size: 36px;
+  line-height: 40px;
+  color: #002C66;
+  margin-bottom: 20px;
+}
+.tf-overview__container p {
+  font-size: 16px;
+  line-height: 24px;
+  text-align: justify;
+  color: #152B47;
+  margin-bottom: 10px;
+}
+.tf-overview__container a {
+  color: #152B47;
+}
+.tf-overview__container a:hover {
+  background: #002c66e3;
+}
+/*--------- Overview End ---------*/
+/*--------- Include Exclude CSS Start ---------*/
+.tf-inc-exc {
+  padding-bottom: 40px;
+}
+.tf-inc-exc__content {
+  display: grid;
+  grid-template-columns: calc(50% - 10px) calc(50% - 10px);
+  grid-column-gap: 20px;
   border-top: 2px dotted #ccc;
   padding: 40px 0 70px;
+  justify-items: center;
+  text-align: justify;
 }
-.tf-inc-exc-content-wrapper h4 {
-  /*! border-bottom: 2px dotted #ccc; */
-  /*! text-align: center; */
-  /*! border-top: 2px dotted #ccc; */
+.tf-inc-exc__content h4 {
   padding: 6px 0;
-  /*! margin-bottom: 30px; */
 }
-.tf-inc-exc-content-wrapper > * {
-  flex: 1;
-}
-.tf-include-section {
-  /*! background: #EBF2FF; */
-  /*! padding: 40px; */
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
-}
-.tf-exclude-section {
-  /*! background: #f9f9f9; */
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
-  /*! padding: 40px; */
-}
-.tf-inc-exc-content-wrapper ul {
+.tf-inc-exc__content ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.tf-inc-exc-content-wrapper ul li {
-  padding-left: 35px;
+.tf-inc-exc__content ul li {
+  padding-left: 20px;
   position: relative;
-  margin-left: 0;
+  margin-left: 15px;
 }
-.tf-include-section ul li:before {
-  background: url(../img/check.png);
-}
-.tf-exclude-section ul li:before {
-  background: url(../img/x.png);
-}
-.tf-inc-exc-content-wrapper ul li:before {
-  content: "";
+.tf-inc-exc__content ul li:before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
   position: absolute;
-  height: 22px;
-  width: 22px;
   left: 0;
-  background-size: contain;
+  font-size: 14px;
+  top: 3px;
+}
+.tf-inc-exc__include ul li:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f00c";
+  color: green;
+}
+.tf-inc-exc__exclude ul li:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f00d";
+  color: red;
 }
 /*--------- Include Exclude CSS End ---------*/
 /*--------- Travel Itinerary CSS Start ---------*/

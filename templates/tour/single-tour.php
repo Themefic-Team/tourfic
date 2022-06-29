@@ -53,11 +53,9 @@ $has_in_wishlist = tf_has_item_in_wishlist($post_id);
 $tour_video = !empty($meta['tour_video']) ? $meta['tour_video'] : '';
 
 // Address
-$location = isset( $meta['location']['address'] ) ? $meta['location']['address'] : '';
+$map_location = isset( $meta['location']['address'] ) ? $meta['location']['address'] : '';
 $text_location = isset( $meta['text_location']) ? $meta['text_location'] : '';
-if( empty( $location ) ){
-	$location = $text_location;
-}
+
 // Gallery
 $gallery = $meta['tour_gallery'] ? $meta['tour_gallery'] : array();
 if ($gallery) {
@@ -179,7 +177,7 @@ if($tour_type == 'continuous' && $custom_avail == true) {
 
 ?>
 
-<div class="tf-page-wrapper">
+<div class="tf-single-tour tf-page-wrapper">
 <?php do_action( 'tf_before_container' ); ?>
 
 	<!-- Hero section Start -->
@@ -272,7 +270,15 @@ if($tour_type == 'continuous' && $custom_avail == true) {
 			<h4><?php the_title(); ?></h4>
 			<div class="tf-tour-address">
 				<i class="fas fa-map-marker-alt"></i>
-				<?php echo esc_html( $location ); ?>
+				<?php if( empty( $map_location ) ) {
+
+					echo esc_html( $text_location );
+
+				} else {
+
+					echo '<a href="https://www.google.com/maps/search/' . $map_location . '" target="_blank">' . esc_html( $text_location ) . '</a>';
+
+				} ?>
 			</div>
 		</div>
 		<div class="tf-single-tour-pricing">
@@ -340,118 +346,104 @@ if($tour_type == 'continuous' && $custom_avail == true) {
 	<!-- Square block section Start -->
 	<div class="tf-square-block-wrapper tf-section-wrapper tf-section-white">
 		<div class="tf-container">
-			<div class="tf-row">
-				<div class="tf-square-block-content-wrapper">
-					<?php if($tour_duration) { ?>
-					<div class="tf-single-square-block first">
-						<i class="far fa-clock"></i>
-						<h5><?php echo __( 'Duration', 'tourfic' ); ?></h5>
-						<p><?php echo esc_html__( $tour_duration,'tourfic' ) ?></p>
-					</div>
-					<?php } ?>
-					<?php if($tour_type_info) { ?>
-					<div class="tf-single-square-block second">
-						<img src=<?php echo TF_ASSETS_URL . "img/globe.png" ?> alt="">
-						<h5><?php echo __( 'Tour Type', 'tourfic' ); ?></h5>
-						<p><?php echo $tour_type_info; ?></p>
-					</div>
-					<?php } ?>
-					<?php if($group_size) { ?>
-					<div class="tf-single-square-block third">
-						<img src=<?php echo TF_ASSETS_URL . "img/users.svg" ?> alt="">
-						<h5><?php echo __( 'Group Size', 'tourfic' ); ?></h5>
-						<p><?php echo esc_html__( $group_size,'tourfic' ) ?></p>
-					</div>
-					<?php } ?>
-					<?php if($language) { ?>
-					<div class="tf-single-square-block fourth">
-						<img src=<?php echo TF_ASSETS_URL . "img/lang.png" ?> alt="">
-						<h5><?php echo __( 'Language', 'tourfic' ); ?></h5>
-						<p><?php echo esc_html__( $language,'tourfic' ) ?></p>
-					</div>
-					<?php } ?>
+			<div class="tf-square-block-content-wrapper">
+				<?php if($tour_duration) { ?>
+				<div class="tf-single-square-block first">
+					<i class="far fa-clock"></i>
+					<h5><?php echo __( 'Duration', 'tourfic' ); ?></h5>
+					<p><?php echo esc_html__( $tour_duration,'tourfic' ) ?></p>
 				</div>
+				<?php } ?>
+				<?php if($tour_type_info) { ?>
+				<div class="tf-single-square-block second">
+					<i class="fas fa-globe-americas"></i>
+					<h5><?php echo __( 'Tour Type', 'tourfic' ); ?></h5>
+					<p><?php echo $tour_type_info; ?></p>
+				</div>
+				<?php } ?>
+				<?php if($group_size) { ?>
+				<div class="tf-single-square-block third">
+					<i class="fas fa-users"></i>
+					<h5><?php echo __( 'Group Size', 'tourfic' ); ?></h5>
+					<p><?php echo esc_html__( $group_size,'tourfic' ) ?></p>
+				</div>
+				<?php } ?>
+				<?php if($language) { ?>
+				<div class="tf-single-square-block fourth">
+					<i class="fas fa-language"></i>
+					<h5><?php echo __( 'Language', 'tourfic' ); ?></h5>
+					<p><?php echo esc_html__( $language,'tourfic' ) ?></p>
+				</div>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
 	<!-- Square block section end -->
 	<?php } ?>
 
+	<?php if( $highlights ) { ?>
 	<!-- Highlight section Start -->
-	<div class="tf-highlight-wrapper tf-section-wrapper">
+	<div class="tf-highlight tf-section-wrapper">
 		<div class="tf-container">
-			<div class="tf-row">
-				<div class="tf-highlight-content-wrapper">
-					<?php if($highlights) { ?>
-						<div class="tf-highlight-item">
-							<div class="tf-highlight-text">							
-								<h2><?php _e( 'Highlights','tourfic' ); ?></h2>
-								<?php echo $highlights; ?>
-							</div>
-							<div class="tf-highlight-image">
-								<img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>" alt="">
-							</div>
-						</div>
+			<div class="tf-highlight__wrap">
+				<div class="tf-highlight__text">							
+					<h2><?php _e( 'Highlights','tourfic' ); ?></h2>
+					<?php echo $highlights; ?>
+				</div>
+				<div class="tf-highlight__image">
+					<img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ); ?>" alt="">
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Highlight section end -->
+	<?php } ?>
 
+	<?php if( get_the_content() ) { ?>
 	<!-- Overview section Start -->
-	<div class="tf-overview-wrapper tf-section-wrapper tf-section-white">
+	<div class="tf-overview tf-section-wrapper tf-section-white">
 		<div class="tf-container">
-			<div class="tf-row">
-				<div class="tf-overview-content-wrapper">
-					<?php }
-					if(get_the_content()) { ?>
-						<div class="tf-overview-text">
-							<h2><?php _e( 'Overview','tourfic' ); ?></h2>
-							<?php the_content(); ?>
-						</div>
-					<?php } ?>
-				</div>
+			<div class="tf-overview__container">
+				<h2><?php _e( 'Overview','tourfic' ); ?></h2>
+				<?php the_content(); ?>
 			</div>
 		</div>
 	</div>
 	<!-- Overview section end -->
+	<?php } ?>
 
 	<?php if( $inc || $exc ) { ?>
 	<!-- Include-Exclude section Start -->
-	<div class="tf-inc-exc-wrapper">
+	<div class="tf-inc-exc">
 		<div class="tf-container">
-			<div class="tf-row">
-				<div class="tf-inc-exc-content-wrapper">
+			<div class="tf-inc-exc__content">
+			<?php
+			if( $inc ) {
+				?>
+				<div class="tf-inc-exc__include">
+					<h4><?php _e( 'Included','tourfic' ); ?></h4>
+					<ul>
 					<?php
-					if($inc) {
-						?>
-						<div class="tf-include-section">
-							<h4><?php _e( 'Included','tourfic' ); ?></h4>
-							<ul>
-								<?php
-									foreach( $inc as $key => $val ){
-										echo "<li>". $val['inc'] ."</li>";
-									}
-								?>
-							</ul>
-						</div>
-						<?php
+						foreach( $inc as $key => $val ){
+							echo "<li>". $val['inc'] ."</li>";
 						}
-
-						if($exc) {
-							?>
-							<div class="tf-exclude-section">
-								<h4><?php _e( 'Excluded','tourfic' ); ?></h4>
-								<ul>
-									<?php
-										foreach( $exc as $key => $val ){
-											echo "<li>". $val['exc'] ."</li>";
-										}
-									?>
-								</ul>
-							</div>
-					<?php } ?>
+					?>
+					</ul>
 				</div>
+				<?php
+			} if( $exc ) {
+				?>
+				<div class="tf-inc-exc__exclude">
+					<h4><?php _e( 'Excluded','tourfic' ); ?></h4>
+					<ul>
+					<?php
+						foreach( $exc as $key => $val ){
+							echo "<li>". $val['exc'] ."</li>";
+						}
+					?>
+					</ul>
+				</div>
+			<?php } ?>
 			</div>
 		</div>
 	</div>
