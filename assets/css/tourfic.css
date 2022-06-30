@@ -610,6 +610,7 @@ form.tf_tours_booking a:focus {
   box-sizing: border-box;
   border-radius: 8px 8px 8px 8px;
   cursor: pointer;
+  padding: 0;
 }
 .tf-single-tour-pricing .tf-price-tab li {
   padding: 0;

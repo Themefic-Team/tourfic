@@ -485,13 +485,13 @@ if($tour_type == 'continuous' && $custom_avail == true) {
 	<!-- Travel Itinerary section end -->
 	<?php } ?>
 
-	<?php if( $location ) {  ?>
+	<?php if( $map_location ) {  ?>
 	<!-- Map section Start -->
 	<div class="tf-map-wrapper tf-section-wrapper tf-section-white">
 		<div class="tf-container">
 			<div class="tf-row">
 				<div class="tf-map-content-wrapper">
-				<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $location ); ?>&output=embed" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+				<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map_location ); ?>&output=embed" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 				</div>
 			</div>
 		</div>
