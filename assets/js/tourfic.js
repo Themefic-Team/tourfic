@@ -112,8 +112,7 @@
             var check_in_date = $('input[name=check_in_date]').val();
             var check_out_date = $('input[name=check_out_date]').val();
             var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
-            //console.log(post_id);
-
+            var airport_pickup= $('input[name=airport_pickup]').is(':checked');
             var data = {
                 action: 'tf_hotel_booking',
                 tf_room_booking_nonce: tf_room_booking_nonce,
@@ -126,6 +125,7 @@
                 check_in_date: check_in_date,
                 check_out_date: check_out_date,
                 room: room,
+                airport_pickup: airport_pickup,
             };
 
             $.ajax({

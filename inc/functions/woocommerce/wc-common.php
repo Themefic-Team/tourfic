@@ -18,6 +18,8 @@ function tf_change_meta_key_title( $key, $meta, $item ) {
     if ( 'child' === $meta->key ) { $key = __( 'Children Number', 'tourfic'); }
     if ( 'check_in' === $meta->key ) { $key = __( 'Check-in Date', 'tourfic'); }
     if ( 'check_out' === $meta->key ) { $key = __( 'Check-out Date', 'tourfic'); }
+    if ( 'airport_pickup' === $meta->key ) { $key = __( 'Airport Pickup', 'tourfic'); }
+    if ( 'airport_pickup_fee' === $meta->key ) { $key = __( 'Airport Pickup Fee', 'tourfic'); }
     if ( '_tour_id' === $meta->key ) { $key = __( 'Tour ID', 'tourfic'); }
      
     return $key;

@@ -95,6 +95,10 @@
             <?php } else {?>
                 <div class="price-per-night"><?php $days > 0 ? esc_html_e( 'for '.$days .' nights', 'tourfic' ) : esc_html_e( 'per person/night', 'tourfic' );?></div>
             <?php }?>
+            <?php if (defined('TF_PRO') && $airport_pickup == true && !empty($airport_pickup_fee)) { ?>
+                    <span class="tf-price tf-airport-pickup-<?php echo $room_id ?>" style="display: none;"><?php echo wc_price($airport_pickup_fee); ?></span>
+                    <div class="price-per-night tf-airport-pickup-<?php echo $room_id ?>" style="display: none;"><?php _e('for airport pickup', 'tourfic');?></div>
+            <?php } ?>
         </div>
     </td>
     <td class="reserve">
@@ -110,7 +114,14 @@
                     ?>
                 </select>
             </div>
-            <?php //var_dump($order_ids); ?>
+            
+            <?php if(defined('TF_PRO') && $airport_pickup == true && $airport_pickup_type != 'none' ) { ?>
+                    <div class="room-airport-pickup-wrap">
+                        <input type="checkbox" id="tf-airport-pickup" name="airport_pickup" value="<?php echo $room_id ?>">
+                        <label for="tf-airport-pickup"><?php _e('Pick me up from airport', 'tourfic') ?> </label><br>
+                    </div>               
+            <?php } ?>
+            
             <div class="room-submit-wrap">
                 <input type="hidden" name="post_id" value="<?php echo $form_post_id; ?>">
                 <input type="hidden" name="room_id" value="<?php echo $room_id; ?>">

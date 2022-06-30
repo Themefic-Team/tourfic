@@ -91,6 +91,15 @@ if( class_exists( 'CSF' ) ) {
           'validate' => 'csf_validate_url',
         ),
 
+        array(
+            'id'=> '',
+            'class' => 'tf-csf-disable tf-csf-pro',
+            'type' => 'switcher',
+            'title' => __('Airport Pickup', 'tourfic'),
+            'subtitle'   => $badge_pro,
+            'default' => false,
+        ),
+
         // array(
         //   'id'      => '',
         //   'class' => 'tf-csf-disable tf-csf-pro',
@@ -189,6 +198,7 @@ if( class_exists( 'CSF' ) ) {
         //     'dateFormat' => 'h:i K',
         //   ),
         // ),
+        
   
       )
     ) );

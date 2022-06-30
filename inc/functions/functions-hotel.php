@@ -291,6 +291,22 @@ function tf_room_availability_callback() {
     $rooms = !empty($meta['room']) ? $meta['room'] : '';
     $locations = get_the_terms( $form_post_id, 'hotel_location' );
     $first_location_name = !empty( $locations ) ? $locations[0]->name : '';
+    /**
+     * Airport Pickup data
+     * @author Dev Kabir <dev.kabir01@gmail.com>
+     */
+
+    $airport_pickup_type = !empty( $meta['airport_pickup_type'] ) ? $meta['airport_pickup_type'] : 'none';
+    $airport_pickup = !empty( $meta['airport_pickup'] ) ? $meta['airport_pickup'] == '1' && $airport_pickup_type != 'none' : false;
+    $airport_pickup_fee = !empty( $meta['airport_pickup_fee'] ) ? $meta['airport_pickup_fee'] : 0;
+    if (!empty($airport_pickup) && !empty($airport_pickup_type) && !empty($airport_pickup_fee)) {
+        if ($airport_pickup_type == 'per-person') {
+            $airport_pickup_fee = $airport_pickup_fee * $form_total_person;
+        }
+        if ($airport_pickup_type == 'free') {
+            $airport_pickup_fee = 0;
+        }
+    }
 
     // start table
     ob_start();
