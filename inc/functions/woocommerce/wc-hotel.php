@@ -46,7 +46,7 @@ function tf_hotel_booking_callback(){
 
     # Calculate night number
     if($check_in && $check_out) {
-        $check_in_stt   = strtotime( $check_in );
+        $check_in_stt   = strtotime( $check_in . ' +1 day' );
         $check_out_stt  = strtotime( $check_out );
         $day_difference = round(  (  ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1 );
     }
