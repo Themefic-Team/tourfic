@@ -470,8 +470,8 @@ function tf_room_availability_callback() {
                                 }
 
                                 // Check if date is provided and within date range
-                                if ( !in_array( 0, $has_room )  ) { 
-
+                                if ( !in_array( 0, $has_room )  ) {
+	                                tf_get_deposit_amount($room, $price, $deposit_amount, $has_deposit);
                                     if ( $form_total_person <= $total_person ) {
 
                                         include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
@@ -496,6 +496,8 @@ function tf_room_availability_callback() {
                                 }
 
                                 $price =  $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date;
+
+                                tf_get_deposit_amount($room, $price, $deposit_amount, $has_deposit);
 
                                 if ( $form_total_person <= $total_person ) {
 
@@ -537,7 +539,8 @@ function tf_room_availability_callback() {
     wp_die();
 }
 
-#################################
+
+                #################################
 # All the forms                 #
 # Search form, booking form     #
 #################################

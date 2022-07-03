@@ -42,6 +42,7 @@ function tf_hotel_booking_callback(){
     $room_selected = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
     $check_in      = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
     $check_out     = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
+    $deposit     = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
 
 
     # Calculate night number
@@ -159,6 +160,12 @@ function tf_hotel_booking_callback(){
 
         # Set pricing
         $tf_room_data['tf_hotel_data']['price_total'] = $price_total;
+        # check for deposit
+	    tf_get_deposit_amount($rooms[$room_id], $price_total, $deposit_amount, $has_deposit);
+	    if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount) ) {
+		    $tf_room_data['tf_hotel_data']['price_total'] = $deposit_amount;
+		    $tf_room_data['tf_hotel_data']['due'] = $price_total - $deposit_amount;
+	    }
         # Add product to cart with the custom cart item data
         WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
 
@@ -241,6 +248,13 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
         );
     }
 
+    if ( isset( $cart_item['tf_hotel_data']['due'] ) ) {
+        $item_data[] = array(
+            'key'       => __('Due', 'tourfic'),
+            'value'     => wc_price($cart_item['tf_hotel_data']['due']),
+        );
+    }
+
     return $item_data;
 
 }
@@ -277,6 +291,7 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
     $child = !empty($values['tf_hotel_data']['child']) ? $values['tf_hotel_data']['child'] : '';
     $check_in = !empty($values['tf_hotel_data']['check_in']) ? $values['tf_hotel_data']['check_in'] : '';
     $check_out = !empty($values['tf_hotel_data']['check_out']) ? $values['tf_hotel_data']['check_out'] : '';
+    $due = !empty($values['tf_hotel_data']['due']) ? $values['tf_hotel_data']['due'] : '';
 
     /**
      * Show data in order meta & email
@@ -327,6 +342,11 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
 
         $item->update_meta_data( 'check_out', $check_out );
     }
+
+	if ( ! empty( $due ) ) {
+		$item->update_meta_data( 'due', wc_price($due) );
+	}
+
 
 }
 add_action( 'woocommerce_checkout_create_order_line_item', 'tf_hotel_custom_order_data', 10, 4 );
