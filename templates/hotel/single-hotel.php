@@ -311,7 +311,27 @@ $price = min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices 
                                 <tr>
                                     <td class="description">
                                         <div class="tf-room-type">
-                                            <div class="tf-room-title"><?php echo esc_html( $room['title'] ); ?></div>
+                                            <div class="tf-room-title">
+                                            <?php 
+                                            $tour_room_details_gall = !empty($room['gallery']) ? $room['gallery'] : '';
+                                            if ($tour_room_details_gall) {
+                                                $tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
+                                            }
+                                            if (defined( 'TF_PRO' ) && $tour_room_details_gall){ 
+                                            ?>	
+                                            <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'] : '' ?>" data-hotel="<?php echo $post_id; ?>">
+                                                <?php echo esc_html( $room['title'] ); ?>
+                                            </a>
+
+                                            <div id="tour_room_details_qv" class="tf-reg-wrap" >
+                                                                                        
+                                            </div>
+                                            <?php } else{ ?>
+                                                <?php echo esc_html( $room['title'] ); ?>
+                                             <?php   
+                                            }
+                                            ?>
+                                            </div>
                                             <div class="bed-facilities"><?php echo $room['description']; ?></div>
                                         </div>
 
