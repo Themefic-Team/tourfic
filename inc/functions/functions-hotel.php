@@ -1244,12 +1244,25 @@ function tf_hotel_quickview_callback(){
             $bed = !empty($room['bed']) ? $room['bed'] : '';
             $adult_number = !empty($room['adult']) ? $room['adult'] : '0';
             $child_number = !empty($room['child']) ? $room['child'] : '0';
+            $num_room = !empty($room['num-room']) ? $room['num-room'] : '0';
             ?>
-            <h3><?php echo esc_html( $room['title'] ); ?></h3>
+            <span class="tf-hotel-room-title"><b><?php echo esc_html( $room['title'] ); ?></b></span>
             <p><?php echo $room['description']; ?></p>
             <div class="tf-room-title description">
                 <?php esc_html_e( 'Key Features', 'tourfic' ); ?> <br>
-                <?php if ($footage) { ?>
+                <?php if ($num_room) { ?>
+                <div class="tf-tooltip tf-d-ib">
+                    <div class="room-detail-icon">
+                        <span class="room-icon-wrap"><i class="fas fa-person-booth"></i></span>
+                        <span class="icon-text tf-d-b"><?php echo $num_room; ?></span>
+                    </div>
+                    <div class="tf-top">
+                        <?php _e( 'No. Room', 'tourfic' ); ?>
+                        <i class="tool-i"></i>
+                    </div>
+                </div>
+                <?php }
+                if ($footage) { ?>
                 <div class="tf-tooltip tf-d-ib">
                     <div class="room-detail-icon">
                         <span class="room-icon-wrap"><i
@@ -1336,6 +1349,7 @@ function tf_hotel_quickview_callback(){
             </div>
             <?php } ?>
             </div>
+            
         </div>
         <?php 
         }
