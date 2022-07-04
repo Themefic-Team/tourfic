@@ -976,3 +976,43 @@
 .single-tf_tours.theme-twentytwentytwo .tf-tour-booking-wrap {
     height: auto !important;
 }
+
+
+/*===========================================
+|      Single Hotel Details Quick View      |
+===========================================*/
+
+.fancybox-slide #tour_room_details_qv{
+    border-radius: 5px;
+    padding: 30px;
+}
+.tf-hotel-room-title {
+    line-height: 28px;
+    font-size: 24px;
+    display: block;
+    padding-bottom: 15px;
+}
+.tf-details-qc-slider-single .tf-details-qcs img{
+    width: 100%;
+    height: 410px;;
+}
+.tf-details-qc-slider-nav {
+    margin-top: 10px;
+}
+
+.tf-details-qc-slider-nav .tf-details-qcs img{
+    height: 60px;
+    width: 70px;
+}
+.tf-details-qc-slider-nav .tf-details-qcs.is-active img{
+    border: 2px solid #003162;
+}
+.tf-details-qc-slider-nav .slick-track{
+    margin: 0;
+}
+
+.tf-details-qc-slider-single .slick-prev:before,
+.tf-details-qc-slider-single .slick-next:before{
+    color: #000 !important;
+}
+
