@@ -458,7 +458,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
     $data = array($adults, $child, $room, $check_in_out);
 
     $paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-    $checkInOutDate = !empty( $_GET['check-in-out-date']) ? explode( ' to ', $_GET['check-in-out-date'] ) : '';
+    $checkInOutDate = !empty( $_GET['check-in-out-date']) ? explode( ' - ', $_GET['check-in-out-date'] ) : '';
     if(!empty($checkInOutDate)) {
         $period         = new DatePeriod(
             new DateTime( $checkInOutDate[0] ),

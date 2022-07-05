@@ -404,6 +404,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
     $children = $_GET['children'] ?? 0;
     $date = $_GET['check-in-out-date'] ?? '';
 
+
     ?>
     <!-- Start Booking widget -->
     <form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
@@ -496,6 +497,14 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
             $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
                 enableTime: false,
                 mode: "range",
+                dateFormat: "Y/m/d",
+                onReady: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
+                onChange: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
+                defaultDate: <?php echo json_encode(explode('-', $date)) ?>,
             });
     
         });
@@ -607,6 +616,10 @@ function tf_archive_sidebar_search_form($post_type, $taxonomy='', $taxonomy_name
             $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
                 enableTime: false,
                 mode: "range",
+                dateFormat: "Y/m/d",
+                onChange: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
             });
     
         });
