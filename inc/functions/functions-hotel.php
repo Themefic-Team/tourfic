@@ -554,7 +554,9 @@ function tf_room_availability_callback() {
  */
 if ( !function_exists('tf_hotel_search_form_horizontal') ) {
     function tf_hotel_search_form_horizontal( $classes, $title, $subtitle ){
-
+        if ( isset( $_GET ) ) {
+            $_GET = array_map( 'stripslashes_deep', $_GET );
+        }
         // location
         $location = !empty($_GET['place']) ? sanitize_text_field($_GET['place']) : '';
         // Adults
@@ -668,8 +670,15 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
             $(".tf_booking-widget #check-in-out-date").flatpickr({
                 enableTime: false,
                 mode: "range",
-                dateFormat: "Y/m/d",
                 allowInput: true,
+                dateFormat: "Y/m/d",
+                onReady: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
+                onChange: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
+                defaultDate: <?php echo json_encode(explode('-', $date)) ?>,
             });
 
         });
@@ -683,7 +692,10 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
  * Single Hotel Sidebar Booking Form
  */
 function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
-
+   
+    if ( isset( $_GET ) ) {
+        $_GET = array_map( 'stripslashes_deep', $_GET );
+    }
     // Adults
     $adults = !empty($_GET['adults']) ? sanitize_text_field($_GET['adults']) : '';
     // children
@@ -767,11 +779,15 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
             const checkinoutdateange = flatpickr(".tf-hotel-side-booking #check-in-out-date",{
                 enableTime: false,
                 mode: "range",
-                dateFormat: "Y/m/d",
                 minDate: "today",
+                dateFormat: "Y/m/d",
+                onReady: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
                 onChange: function(selectedDates, dateStr, instance) {
-                    instance.element.value = dateStr.replace('to', ' - ');
-                }
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
+                defaultDate: <?php echo json_encode(explode('-', $check_in_out)) ?>,
                 
                 <?php
                 // Flatpickt locale for translation
