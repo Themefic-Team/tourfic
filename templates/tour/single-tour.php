@@ -163,13 +163,13 @@ $tour_price = new Tour_Price($meta);
 							// Gallery
 							if ( !empty( $gallery_ids ) ) {
 								foreach ($gallery_ids as $key => $gallery_item_id) {
-									if ($key === array_key_first($gallery_ids)) {
-										$image_url = wp_get_attachment_url( $gallery_item_id, 'full' ); ?>
+									$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+									if ( $key === array_key_first($gallery_ids)) {
+										?>
 										<div data-fancybox="tour-gallery" class="tf-hero-btm-icon tf-tour-gallery" data-src="<?php echo $image_url; ?>">
 											<i class="far fa-image"></i>
 										</div>
 									<?php } else {
-										$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
 										echo '<a data-fancybox="tour-gallery" href="' .$image_url. '" style="display:none;"></a>';
 									}
 								}

@@ -282,8 +282,9 @@ function tf_room_availability_callback() {
     $form_total_person = $form_adult + $form_child;
     if ($form_check_in_out) {
         list( $form_start, $form_end ) = explode( ' to ', $form_check_in_out );
-    } 
-
+    }
+    $form_check_in = $form_start;
+    $form_start = date( 'Y/m/d', strtotime( $form_start . ' +1 day' ) );
     /**
      * Backend data
      */
@@ -337,7 +338,6 @@ function tf_room_availability_callback() {
                             $room_child_price = !empty( $room['child_price'] ) ? $room['child_price'] : 0;
                             $total_person     = $adult_number + $child_number;
                             $price            = $pricing_by == '1' ? $room_price : $room_adult_price + $room_child_price;
-                            $form_check_in = $form_start;
                             $form_check_out = $form_end;
 
                             // Check availability by date option
@@ -761,12 +761,15 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
     (function($) {
         $(document).ready(function() {
     
-            $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
+            const checkinoutdateange = flatpickr(".tf-hotel-side-booking #check-in-out-date",{
                 enableTime: false,
                 mode: "range",
                 dateFormat: "Y/m/d",
-                allowInput: true,
                 minDate: "today",
+                onChange: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace('to', ' - ');
+                }
+                
                 <?php
                 // Flatpickt locale for translation
                 tf_flatpickr_locale();

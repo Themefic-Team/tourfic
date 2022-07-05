@@ -311,6 +311,19 @@ if ( class_exists( 'CSF' ) ) {
                 'title'    => __('Disable infant price', 'tourfic'),
                 'subtitle' => __('Hide No of infant in booking form', 'tourfic'),
             ),
+            array(
+		        'type'    => 'subheading',
+		        'content' => __('Deposit', 'tourfic'),
+	        ),
+
+	        array(
+		        'id'      => 'allow_deposit',
+		        'type'    => 'switcher',
+		        'title'   => __('Enable Deposit', 'tourfic'),
+                'subtitle'   => $badge_pro,
+                'class' => 'tf-csf-disable tf-csf-pro',
+		        'default' => false,
+	        ),       
 
         ),
     ));

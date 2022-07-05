@@ -391,4 +391,33 @@ if (!function_exists('tf_array_flatten')) {
 		
     }
 }
+/**
+ * Calculate the deposit amount based on the deposit type and pricing. This function will return $deposit_amount and
+ * $has_deposit
+ *
+ * @param array         $room           collection of room data
+ * @param float|integer $price          calculated price
+ * @param float|integer $deposit_amount calculated deposit amount
+ * @param boolean       $has_deposit    is deposit allowed for this room?
+ *
+ * 
+ * @author Dev Kabir <dev.kabir01@gmail.com>
+ */
+if (!function_exists('tf_get_deposit_amount')) {
+    function tf_get_deposit_amount($room, $price, &$deposit_amount,  &$has_deposit)
+    {
+        $deposit_amount = null;
+        $has_deposit = !empty($room['allow_deposit']) && $room['allow_deposit'] == true;
+        if ($has_deposit == true) {
+            if ($room['deposit_type'] == 'percent') {
+                $deposit_amount = $price * (intval($room['deposit_amount']) / 100);
+            } else {
+                $deposit_amount = $room['deposit_amount'];
+            }
+        }
+    }
+};
+
+
+
 ?>
