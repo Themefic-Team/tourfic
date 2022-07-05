@@ -95,7 +95,7 @@ if( class_exists( 'CSF' ) ) {
             'id'=> '',
             'class' => 'tf-csf-disable tf-csf-pro',
             'type' => 'switcher',
-            'title' => __('Airport Pickup', 'tourfic'),
+            'title' => __('Airport Service', 'tourfic'),
             'subtitle'   => $badge_pro,
             'default' => false,
         ),

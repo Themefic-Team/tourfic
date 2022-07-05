@@ -292,19 +292,19 @@ function tf_room_availability_callback() {
     $locations = get_the_terms( $form_post_id, 'hotel_location' );
     $first_location_name = !empty( $locations ) ? $locations[0]->name : '';
     /**
-     * Airport Pickup data
+     * Airport Service data
      * @author Dev Kabir <dev.kabir01@gmail.com>
      */
 
-    $airport_pickup_type = !empty( $meta['airport_pickup_type'] ) ? $meta['airport_pickup_type'] : 'none';
-    $airport_pickup = !empty( $meta['airport_pickup'] ) ? $meta['airport_pickup'] == '1' && $airport_pickup_type != 'none' : false;
-    $airport_pickup_fee = !empty( $meta['airport_pickup_fee'] ) ? $meta['airport_pickup_fee'] : 0;
-    if (!empty($airport_pickup) && !empty($airport_pickup_type) && !empty($airport_pickup_fee)) {
-        if ($airport_pickup_type == 'per-person') {
-            $airport_pickup_fee = $airport_pickup_fee * $form_total_person;
+    $airport_service_type = !empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : 'none';
+    $airport_service = !empty( $meta['airport_service'] ) ? $meta['airport_service'] == '1' && $airport_service_type != 'none' : false;
+    $airport_service_fee = !empty( $meta['airport_service_fee'] ) ? $meta['airport_service_fee'] : 0;
+    if (!empty($airport_service) && !empty($airport_service_type) && !empty($airport_service_fee)) {
+        if ($airport_service_type == 'per-person') {
+            $airport_service_fee = $airport_service_fee * $form_total_person;
         }
-        if ($airport_pickup_type == 'free') {
-            $airport_pickup_fee = 0;
+        if ($airport_service_type == 'free') {
+            $airport_service_fee = 0;
         }
     }
 
@@ -541,8 +541,23 @@ function tf_room_availability_callback() {
                 } 
 
             if ( !empty( $rows  ) ) {
+            
+                echo $rows .= '</tbody> </table> </div>';
+                ?>
+                <script>
+                    (function ($) {
+                        $(document).on('click', ".tf-hotel-services-wrap > div > div.tf_button_group > button", function(e) {
+                            e.preventDefault();
+                            let parent = $(this).parentsUntil('.tf-hotel-services-wrap').parent();
+                            let id = parent.data('id');
+                            let form = $(document).find("form#tf-room-booking-" + id);
+                            form.find('input[name="airport_service"]').val(parent.find('#airport-service').val());
+                            $.fancybox.close()
+                        });
+                    })(jQuery);
 
-                echo $rows . '</tbody> </table> </div>';
+                </script>
+                <?php
 
             } else {
 
