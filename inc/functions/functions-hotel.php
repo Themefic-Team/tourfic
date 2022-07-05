@@ -281,7 +281,7 @@ function tf_room_availability_callback() {
     $form_check_in_out = !empty( $_POST['check_in_out'] ) ? sanitize_text_field( $_POST['check_in_out'] ) : '';
     $form_total_person = $form_adult + $form_child;
     if ($form_check_in_out) {
-        list( $form_start, $form_end ) = explode( ' to ', $form_check_in_out );
+        list( $form_start, $form_end ) = explode( ' - ', $form_check_in_out );
     }
     $form_check_in = $form_start;
     $form_start = date( 'Y/m/d', strtotime( $form_start . ' +1 day' ) );
