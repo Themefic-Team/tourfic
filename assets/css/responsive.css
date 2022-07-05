@@ -336,6 +336,10 @@
     .tf-details-qc-slider-nav .tf-details-qcs{
         width: 75px !important;
     }
+    .fancybox-button.fancybox-close-small{
+        right: -3px;
+        top: -5px;
+    }
 }
 @media all and (max-width: 540px){
     .tf-details-qc-slider-single .tf-details-qcs img{

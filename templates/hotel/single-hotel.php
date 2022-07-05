@@ -319,7 +319,7 @@ $price = min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices 
                                             }
                                             if (defined( 'TF_PRO' ) && $tour_room_details_gall){ 
                                             ?>	
-                                            <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'] : '' ?>" data-hotel="<?php echo $post_id; ?>">
+                                            <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'] : '' ?>" data-hotel="<?php echo $post_id; ?>" style="text-decoration: underline;">
                                                 <?php echo esc_html( $room['title'] ); ?>
                                             </a>
 
