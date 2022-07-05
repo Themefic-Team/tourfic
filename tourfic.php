@@ -7,7 +7,7 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.6
+ * Version:         2.7
  * Tested up to: 6.0
  * WC tested up to: 6.6.1
  * Requires PHP: 7.2
