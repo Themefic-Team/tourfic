@@ -225,7 +225,7 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
     function tf_tour_search_form_horizontal( $classes, $title, $subtitle ) {
 
         ?>
-        <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
+        <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
 
         <?php if( $title ) { ?>
             <div class="tf_widget-title"><h2><?php esc_html_e( $title ); ?></h2></div>
@@ -316,11 +316,16 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
     (function($) {
         $(document).ready(function() {
 
-            $(".tf_booking-widget #check-in-out-date").flatpickr({
+            $("#tf_tour_aval_check #check-in-out-date").flatpickr({
                 enableTime: false,
                 mode: "range",
                 dateFormat: "Y/m/d",
-                allowInput: true,
+                onReady: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
+                onChange: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
             });
 
         });
@@ -374,18 +379,15 @@ function tf_single_tour_booking_form( $post_id ) {
 
     }
 
-    $disable_adult_price = !empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
-    $disable_child_price = !empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
+    $disable_adult_price  = !empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
+    $disable_child_price  = !empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
     $disable_infant_price = !empty( $meta['disable_infant_price'] ) ? $meta['disable_infant_price'] : false;
-    $pricing_rule = !empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-    $group_price = !empty( $meta['group_price'] ) ? $meta['group_price'] : false;
-    $adult_price = !empty( $meta['adult_price'] ) ? $meta['adult_price'] : false;
-    $child_price = !empty( $meta['child_price'] ) ? $meta['child_price'] : false;
-    $infant_price = !empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
-
-
-	$tour_extras = isset( $meta['tour-extra'] ) ? $meta['tour-extra'] : null;
-
+    $pricing_rule         = !empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+    $group_price          = !empty( $meta['group_price'] ) ? $meta['group_price'] : false;
+    $adult_price          = !empty( $meta['adult_price'] ) ? $meta['adult_price'] : false;
+    $child_price          = !empty( $meta['child_price'] ) ? $meta['child_price'] : false;
+    $infant_price         = !empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
+    $tour_extras          = isset( $meta['tour-extra'] ) ? $meta['tour-extra'] : null;
     $times = [];
 
     if ( $custom_avail == true && !empty( $meta['cont_custom_date'] ) ) {
@@ -613,10 +615,47 @@ function tf_single_tour_booking_form( $post_id ) {
                 <?php } ?>	
                 <div class="tf-tours-booking-btn">
                     <input type="hidden" name="location" value="">
-                    <button class="tf_button" type="submit"><?php _e('Book Now', 'tourfic'); ?></button>
+                    <input type="hidden" name="deposit" value="0">
+	                <?php if ( defined( 'TF_PRO' ) && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] )) { ?>
+                        <a data-fancybox class="tf_button" data-src="#tour-deposit" href="javascript:;"><?php _e('Book Now', 'tourfic'); ?></a>
+                        <div style="display: none;" id="tour-deposit">
+                            <div class="tf-tours-booking-deposit">
+                                <div class="tf-tours-booking-deposit-text">
+                                    <h3><?php _e(tfopt('deposit-title', 'Do you want to deposit amount for booking the tour?'), 'tourfic'); ?></h3>
+                                    <p><?php _e(tfopt('deposit-subtitle', 'You can deposit amount for booking the tour. After booking the tour, you can pay the rest amount after the tour is completed.'), 'tourfic'); ?></p>
+                                </div>
+                                <div class="tf-tours-booking-deposit-amount">
+                                        <span><?php _e(tfopt('deposit-amount','Amount of deposit on total price'), 'tourfic'); ?></span>
+                                        <span><?php echo $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%'; ?> </span>
+                                </div>
+                                <div class="tf_button_group">
+                                    <button class="tf_button" type="submit" data-deposit="false"><?php _e(tfopt('deposit-full-payment','Pay full amount'), 'tourfic'); ?></button>
+                                    <button class="tf_button" type="submit" data-deposit="true"><?php _e(tfopt('deposit-payment','Make a deposit'), 'tourfic'); ?></button>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } else { ?>
+                        <button class="tf_button" type="submit"><?php _e('Book Now', 'tourfic'); ?></button>
+                    <?php } ?>
                 </div>
             </form>
 	    </div>
+    <script>
+        (function ($) {
+            $(document).on('click', "#tour-deposit > div > div.tf_button_group > button", function(e) {
+                e.preventDefault();
+                var form = $(document).find('form.tf_tours_booking');
+                var has_deposit = $(this).data('deposit');
+                if (has_deposit === true) {
+                    form.find('input[name="deposit"]').val(1);
+                } else {
+                    form.find('input[name="deposit"]').val(0);
+                }
+                form.submit();
+            });
+        })(jQuery);
+
+    </script>
 	<?php
 return ob_get_clean();
 }

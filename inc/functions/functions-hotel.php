@@ -281,9 +281,10 @@ function tf_room_availability_callback() {
     $form_check_in_out = !empty( $_POST['check_in_out'] ) ? sanitize_text_field( $_POST['check_in_out'] ) : '';
     $form_total_person = $form_adult + $form_child;
     if ($form_check_in_out) {
-        list( $form_start, $form_end ) = explode( ' to ', $form_check_in_out );
-    } 
-
+        list( $form_start, $form_end ) = explode( ' - ', $form_check_in_out );
+    }
+    $form_check_in = $form_start;
+    $form_start = date( 'Y/m/d', strtotime( $form_start . ' +1 day' ) );
     /**
      * Backend data
      */
@@ -337,7 +338,6 @@ function tf_room_availability_callback() {
                             $room_child_price = !empty( $room['child_price'] ) ? $room['child_price'] : 0;
                             $total_person     = $adult_number + $child_number;
                             $price            = $pricing_by == '1' ? $room_price : $room_adult_price + $room_child_price;
-                            $form_check_in = $form_start;
                             $form_check_out = $form_end;
 
                             // Check availability by date option
@@ -470,8 +470,8 @@ function tf_room_availability_callback() {
                                 }
 
                                 // Check if date is provided and within date range
-                                if ( !in_array( 0, $has_room )  ) { 
-
+                                if ( !in_array( 0, $has_room )  ) {
+	                                tf_get_deposit_amount($room, $price, $deposit_amount, $has_deposit);
                                     if ( $form_total_person <= $total_person ) {
 
                                         include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
@@ -496,6 +496,8 @@ function tf_room_availability_callback() {
                                 }
 
                                 $price =  $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date;
+
+                                tf_get_deposit_amount($room, $price, $deposit_amount, $has_deposit);
 
                                 if ( $form_total_person <= $total_person ) {
 
@@ -537,7 +539,8 @@ function tf_room_availability_callback() {
     wp_die();
 }
 
-#################################
+
+                #################################
 # All the forms                 #
 # Search form, booking form     #
 #################################
@@ -551,7 +554,9 @@ function tf_room_availability_callback() {
  */
 if ( !function_exists('tf_hotel_search_form_horizontal') ) {
     function tf_hotel_search_form_horizontal( $classes, $title, $subtitle ){
-
+        if ( isset( $_GET ) ) {
+            $_GET = array_map( 'stripslashes_deep', $_GET );
+        }
         // location
         $location = !empty($_GET['place']) ? sanitize_text_field($_GET['place']) : '';
         // Adults
@@ -564,7 +569,7 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
         $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
         
         ?>
-        <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
+        <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
 
         <?php if( $title ): ?>
             <div class="tf_widget-title"><h2><?php esc_html_e( $title ); ?></h2></div>
@@ -662,11 +667,17 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
     (function($) {
         $(document).ready(function() {
 
-            $(".tf_booking-widget #check-in-out-date").flatpickr({
+            $("#tf_hotel_aval_check #check-in-out-date").flatpickr({
                 enableTime: false,
                 mode: "range",
                 dateFormat: "Y/m/d",
-                allowInput: true,
+                onReady: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
+                onChange: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
+                defaultDate: <?php echo json_encode(explode('-', $check_in_out)) ?>,
             });
 
         });
@@ -680,7 +691,10 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
  * Single Hotel Sidebar Booking Form
  */
 function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
-
+   
+    if ( isset( $_GET ) ) {
+        $_GET = array_map( 'stripslashes_deep', $_GET );
+    }
     // Adults
     $adults = !empty($_GET['adults']) ? sanitize_text_field($_GET['adults']) : '';
     // children
@@ -761,12 +775,19 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
     (function($) {
         $(document).ready(function() {
     
-            $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
+            const checkinoutdateange = flatpickr(".tf-hotel-side-booking #check-in-out-date",{
                 enableTime: false,
                 mode: "range",
-                dateFormat: "Y/m/d",
-                allowInput: true,
                 minDate: "today",
+                dateFormat: "Y/m/d",
+                onReady: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
+                onChange: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
+                defaultDate: <?php echo json_encode(explode('-', $check_in_out)) ?>,
+                
                 <?php
                 // Flatpickt locale for translation
                 tf_flatpickr_locale();

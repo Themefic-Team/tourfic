@@ -374,7 +374,21 @@ if( class_exists( 'CSF' ) ) {
               'text_off' => __('No', 'tourfic' ),
               'default'  => true,
             ),
-
+            array(
+                'type'    => 'subheading',
+                'content' => __('Deposit', 'tourfic'),
+            ),
+        
+            array(
+                'id'      => '',
+                'type'    => 'switcher',
+                'class'    => 'tf-csf-disable tf-csf-pro',
+                'title'   => __('Enable Deposit', 'tourfic'),
+                'subtitle' => __( $badge_pro, 'tourfic' ),
+                'default' => false,
+            ),
+        
+           
             array(
               'type'    => 'subheading',
               'content' => __('Availability', 'tourfic' ),
