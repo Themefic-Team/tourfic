@@ -225,7 +225,7 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
     function tf_tour_search_form_horizontal( $classes, $title, $subtitle ) {
 
         ?>
-        <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
+        <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
 
         <?php if( $title ) { ?>
             <div class="tf_widget-title"><h2><?php esc_html_e( $title ); ?></h2></div>
@@ -316,7 +316,7 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
     (function($) {
         $(document).ready(function() {
 
-            $(".tf_booking-widget #check-in-out-date").flatpickr({
+            $("#tf_tour_aval_check #check-in-out-date").flatpickr({
                 enableTime: false,
                 mode: "range",
                 dateFormat: "Y/m/d",
