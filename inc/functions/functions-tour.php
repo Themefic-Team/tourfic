@@ -316,11 +316,17 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
     (function($) {
         $(document).ready(function() {
 
+            
             $("#tf_tour_aval_check #check-in-out-date").flatpickr({
                 enableTime: false,
                 mode: "range",
                 dateFormat: "Y/m/d",
-                allowInput: true,
+                onReady: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
+                onChange: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
             });
 
         });
