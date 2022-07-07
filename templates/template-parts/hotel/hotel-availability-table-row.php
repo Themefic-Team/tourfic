@@ -139,14 +139,24 @@
                                     <p><?php _e(tfopt('deposit-subtitle', 'Select the services you want to add to your booking.'), 'tourfic');?></p>
                                 </div>
                                 <div class="tf-hotel-service">
-                                        <label><?php _e('Airport Service & Dropoff', 'tourfic');?></label>
+                                        <label><?php _e('Airport Pickup & Dropoff', 'tourfic');?></label>
                                         <select id="airport-service">
                                             <option value="none"><?php _e('None', 'tourfic');?></option>
-                                            <option value="airport_service"><?php _e('Airport Service', 'tourfic');?></option>
+                                            <option value="airport_pickup"><?php _e('Airport Pickup', 'tourfic');?></option>
                                             <option value="airport_dropoff"><?php _e('Airport Dropoff', 'tourfic');?></option>
-                                            <option value="both"><?php _e('Both', 'tourfic');?></option>
+                                            <option value="both"><?php _e('Airport Pickup & Dropoff', 'tourfic');?></option>
                                         </select>
+                                        <input type="hidden" value="<?php echo $form_post_id; ?>" id="hotel-post-id">
+                                        <input type="hidden" value="none" id="hotel-service-type-val">
                                 </div>
+                                <div class="tf-hotel-service">
+                                    <label><?php _e('Airport Service Price Type', 'tourfic');?></label>
+                                    <select id="airport-price-type">
+                                        <option value="per_person"><?php _e('Per Person', 'tourfic');?></option>
+                                        <option value="fixed"><?php _e('Fixed', 'tourfic');?></option>
+                                    </select>
+                                </div>
+                                <div class="tf-airport-pickup-response"> </div>
                                 <div class="tf_button_group">
                                     <button class="tf_button" type="submit" ><?php _e(tfopt('hotel_service_popup_action', 'Continue to booking'), 'tourfic');?></button>
                                 </div>

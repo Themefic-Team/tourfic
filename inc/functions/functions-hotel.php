@@ -256,6 +256,52 @@ if ( !function_exists( 'get_hotel_locations' ) ) {
 }
 
 #################################
+# Air port Service Price        #
+#################################
+
+add_action( 'wp_ajax_tf_hotel_airport_service_price', 'tf_hotel_airport_service_callback' );
+add_action( 'wp_ajax_nopriv_tf_hotel_airport_service_price', 'tf_hotel_airport_service_callback' );
+
+function tf_hotel_airport_service_callback(){
+
+$meta = get_post_meta( sanitize_key( $_POST['id'] ), 'tf_hotel', true );
+$airport_service  = !empty($meta['airport_service']) ? $meta['airport_service'] : '';
+if(1==$airport_service){ 
+
+if("airport_pickup"==$_POST['service_type']){
+    $airport_pickup_price  = !empty($meta['airport_pickup_price']) ? $meta['airport_pickup_price'] : '';
+    if("per_person"==$_POST['service_price_type']){
+        echo "<span>Per Person Price: ".wc_price($airport_pickup_price['airport_service_fee_per_person'])."</span>";
+    }
+    if("fixed"==$_POST['service_price_type']){
+        echo "<span>Fixed Price: ".wc_price($airport_pickup_price['airport_service_fee_fixed'])."</span>";
+    }
+}
+if("airport_dropoff"==$_POST['service_type']){
+    $airport_dropoff_price  = !empty($meta['airport_dropoff_price']) ? $meta['airport_dropoff_price'] : '';
+    if("per_person"==$_POST['service_price_type']){
+        echo "<span>Per Person Price: ".wc_price($airport_dropoff_price['airport_service_fee_per_person'])."</span>";
+    }
+    if("fixed"==$_POST['service_price_type']){
+        echo "<span>Fixed Price: ".wc_price($airport_dropoff_price['airport_service_fee_fixed'])."</span>";
+    }
+}
+if("both"==$_POST['service_type']){
+    $airport_pickup_dropoff_price  = !empty($meta['airport_pickup_dropoff_price']) ? $meta['airport_pickup_dropoff_price'] : '';
+    if("per_person"==$_POST['service_price_type']){
+        echo "<span>Per Person Price: ".wc_price($airport_pickup_dropoff_price['airport_service_fee_per_person'])."</span>";
+    }
+    if("fixed"==$_POST['service_price_type']){
+        echo "<span>Fixed Price: ".wc_price($airport_pickup_dropoff_price['airport_service_fee_fixed'])."</span>";
+    }
+}
+
+}
+wp_die();    
+}
+
+
+#################################
 # Ajax functions                #
 #################################
 /**
