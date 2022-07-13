@@ -130,7 +130,7 @@
                 <input type="hidden" name="child" value="<?php echo $form_child; ?>">
                 <input type="hidden" name="check_in_date" value="<?php echo $form_check_in; ?>">
                 <input type="hidden" name="check_out_date" value="<?php echo $form_check_out; ?>">
-                <input type="hidden" name="airport_service" />
+                
                 <?php if (defined('TF_PRO') && $airport_service == true && $airport_service_type != 'none') {?>
                     <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap" data-id="<?php echo $room_id ?>">
                             <div class="tf-hotel-services">
@@ -140,18 +140,17 @@
                                 </div>
                                 <div class="tf-hotel-service">
                                         <label><?php _e('Airport Pickup & Dropoff', 'tourfic');?></label>
-                                        <select id="airport-service">
+                                        <select id="airport-service" name="airport_service">
                                             <option value="none"><?php _e('None', 'tourfic');?></option>
                                             <option value="airport_pickup"><?php _e('Airport Pickup', 'tourfic');?></option>
                                             <option value="airport_dropoff"><?php _e('Airport Dropoff', 'tourfic');?></option>
                                             <option value="both"><?php _e('Airport Pickup & Dropoff', 'tourfic');?></option>
                                         </select>
                                         <input type="hidden" value="<?php echo $form_post_id; ?>" id="hotel-post-id">
-                                        <input type="hidden" value="none" id="hotel-service-type-val">
                                 </div>
                                 <div class="tf-hotel-service">
                                     <label><?php _e('Airport Service Price Type', 'tourfic');?></label>
-                                    <select id="airport-price-type">
+                                    <select id="airport-price-type" name="airport_price_type">
                                         <option value="per_person"><?php _e('Per Person', 'tourfic');?></option>
                                         <option value="fixed"><?php _e('Fixed', 'tourfic');?></option>
                                     </select>
@@ -162,7 +161,11 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" id="tf_update_service_type">
+                        <input type="hidden" id="tf_update_price_type">
                 <?php }?>
+
+                    
                     <button class="hotel-room-book" type="submit"><?php _e('I\'ll reserve', 'tourfic');?></button>
             </div>
             <div class="tf_desc"></div>

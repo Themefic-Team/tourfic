@@ -597,6 +597,10 @@ function tf_room_availability_callback() {
                             let parent = $(this).parentsUntil('.tf-hotel-services-wrap').parent();
                             let id = parent.data('id');
                             let form = $(document).find("form#tf-room-booking-" + id);
+                            var up_service_air_service_type = $('.fancybox-slide #airport-service').val();  
+                            $("#tf_update_service_type").val(up_service_air_service_type);
+                            var up_service_air_price_type = $('.fancybox-slide #airport-price-type').val();  
+                            $("#tf_update_price_type").val(up_service_air_price_type);
                             form.find('input[name="airport_service"]').val(parent.find('#airport-service').val());
                             $.fancybox.close()
                         });
