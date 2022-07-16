@@ -148,13 +148,6 @@
                                         </select>
                                         <input type="hidden" value="<?php echo $form_post_id; ?>" id="hotel-post-id">
                                 </div>
-                                <div class="tf-hotel-service">
-                                    <label><?php _e('Airport Service Price Type', 'tourfic');?></label>
-                                    <select id="airport-price-type" name="airport_price_type">
-                                        <option value="per_person"><?php _e('Per Person', 'tourfic');?></option>
-                                        <option value="fixed"><?php _e('Fixed', 'tourfic');?></option>
-                                    </select>
-                                </div>
                                 <div class="tf-airport-pickup-response"> </div>
                                 <div class="tf_button_group">
                                     <button class="tf_button" type="submit" ><?php _e(tfopt('hotel_service_popup_action', 'Continue to booking'), 'tourfic');?></button>
@@ -162,7 +155,6 @@
                             </div>
                         </div>
                         <input type="hidden" id="tf_update_service_type">
-                        <input type="hidden" id="tf_update_price_type">
                 <?php }?>
 
                     

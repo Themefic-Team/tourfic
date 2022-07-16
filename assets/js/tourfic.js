@@ -113,7 +113,6 @@
             var check_out_date = $('input[name=check_out_date]').val();
             var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
             var airport_service= $("#tf_update_service_type").val();
-            var airport_price_type= $("#tf_update_price_type").val();
             
             var data = {
                 action: 'tf_hotel_booking',
@@ -128,7 +127,6 @@
                 check_out_date: check_out_date,
                 room: room,
                 airport_service: airport_service,
-                airport_price_type: airport_price_type,
             };
 
             $.ajax({
