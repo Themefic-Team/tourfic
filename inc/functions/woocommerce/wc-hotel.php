@@ -99,8 +99,6 @@ function tf_hotel_booking_callback(){
         $tf_room_data['tf_hotel_data']['post_author']    = $post_author;
         $tf_room_data['tf_hotel_data']['post_id']        = $post_id;
         $tf_room_data['tf_hotel_data']['location']       = $location;
-        $tf_room_data['tf_hotel_data']['adult']          = $adult;
-        $tf_room_data['tf_hotel_data']['child']          = $child;
         $tf_room_data['tf_hotel_data']['check_in']       = $check_in;
         $tf_room_data['tf_hotel_data']['check_out']      = $check_out;
         $tf_room_data['tf_hotel_data']['room']           = $room_selected;
@@ -132,6 +130,16 @@ function tf_hotel_booking_callback(){
                     $adult_price   = !empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $rooms[$room_id]['adult_price'];
                     $child_price   = !empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $rooms[$room_id]['child_price'];
                     $total_price += $pricing_by == '1' ? $room_price : (  ( $adult_price * $adult ) + ( $child_price * $child ) );
+
+                    if ( $pricing_by == '1' ) {
+                        $tf_room_data['tf_hotel_data']['adult']          = $adult;
+                        $tf_room_data['tf_hotel_data']['child']          = $child;
+                    }
+                    if ( $pricing_by == '2' ) {
+                        $tf_room_data['tf_hotel_data']['adult']          = $adult." × ".wc_price($available_rooms[0]['adult_price']);
+                        $tf_room_data['tf_hotel_data']['child']          = $child." × ".wc_price($available_rooms[0]['child_price']);
+                    }
+                    
                 } ;
             } 
             
@@ -141,12 +149,18 @@ function tf_hotel_booking_callback(){
 
             if ( $pricing_by == '1' ) {
                 $total_price = $rooms[$room_id]['price'];
+                
+                $tf_room_data['tf_hotel_data']['adult']          = $adult;
+                $tf_room_data['tf_hotel_data']['child']          = $child;
             } elseif ( $pricing_by == '2' ) {
                 $adult_price = $rooms[$room_id]['adult_price'];
                 $adult_price = $adult_price * $adult;
                 $child_price = $rooms[$room_id]['child_price'];
                 $child_price = $child_price * $child;
-                $total_price = $adult_price + $child_price;              
+                $total_price = $adult_price + $child_price;    
+                                
+                $tf_room_data['tf_hotel_data']['adult']          = $adult." × ".wc_price($rooms[$room_id]['adult_price']);
+                $tf_room_data['tf_hotel_data']['child']          = $child." × ".wc_price($rooms[$room_id]['child_price']);
             }
 
             # Multiply pricing by night number
