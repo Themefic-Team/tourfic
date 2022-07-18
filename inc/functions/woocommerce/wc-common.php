@@ -18,12 +18,9 @@ function tf_change_meta_key_title( $key, $meta, $item ) {
     if ( 'child' === $meta->key ) { $key = __( 'Children Number', 'tourfic'); }
     if ( 'check_in' === $meta->key ) { $key = __( 'Check-in Date', 'tourfic'); }
     if ( 'check_out' === $meta->key ) { $key = __( 'Check-out Date', 'tourfic'); }
-<<<<<<< HEAD
     if ( 'due' === $meta->key ) { $key = __( 'Due', 'tourfic'); }
-=======
     if ( 'airport_service' === $meta->key ) { $key = __( 'Airport Service', 'tourfic'); }
     if ( 'airport_service_fee' === $meta->key ) { $key = __( 'Airport Service Fee', 'tourfic'); }
->>>>>>> d55d7cf1fed73d56ea6b676825f3658695128103
     if ( '_tour_id' === $meta->key ) { $key = __( 'Tour ID', 'tourfic'); }
      
     return $key;
