@@ -320,3 +320,29 @@
         grid-template-columns: auto;
     }
 }
+
+@media all and (max-width: 767px){
+    .tf-hotel-quick-view{
+        display: flow-root !important;
+    }
+    .tf-hotel-details-qc-gallelry,
+    .tf-hotel-details-info{
+        width: 100% !important;
+    }
+    .tf-hotel-details-info{
+        padding-left: 0px !important;
+        padding-top: 15px;
+    }
+    .tf-details-qc-slider-nav .tf-details-qcs{
+        width: 75px !important;
+    }
+    .fancybox-button.fancybox-close-small{
+        right: -3px;
+        top: -5px;
+    }
+}
+@media all and (max-width: 540px){
+    .tf-details-qc-slider-single .tf-details-qcs img{
+        height: 300px;;
+    }
+}
