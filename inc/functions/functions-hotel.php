@@ -256,6 +256,88 @@ if ( !function_exists( 'get_hotel_locations' ) ) {
 }
 
 #################################
+# Air port Service Price        #
+#################################
+
+add_action( 'wp_ajax_tf_hotel_airport_service_price', 'tf_hotel_airport_service_callback' );
+add_action( 'wp_ajax_nopriv_tf_hotel_airport_service_price', 'tf_hotel_airport_service_callback' );
+
+function tf_hotel_airport_service_callback(){
+
+$meta = get_post_meta( sanitize_key( $_POST['id'] ), 'tf_hotel', true );
+$airport_service  = !empty($meta['airport_service']) ? $meta['airport_service'] : '';
+if(1==$airport_service){ 
+
+if("airport_pickup"==$_POST['service_type']){
+    $airport_pickup_price  = !empty($meta['airport_pickup_price']) ? $meta['airport_pickup_price'] : '';
+    if("per_person"==$airport_pickup_price['airport_pickup_price_type']){
+        echo "<span>Airport Pickup Fee (Per Person): ".wc_price($airport_pickup_price['airport_service_fee_per_person'])."</span>";
+    }
+    if("fixed"==$airport_pickup_price['airport_pickup_price_type']){
+        echo "<span>Airport Pickup Fee (Fixed): ".wc_price($airport_pickup_price['airport_service_fee_fixed'])."</span>";
+    }
+    if("free"==$airport_pickup_price['airport_pickup_price_type']){
+        echo "<span>Airport Pickup Fee: Free</span>";
+    }
+}
+if("airport_dropoff"==$_POST['service_type']){
+    $airport_dropoff_price  = !empty($meta['airport_dropoff_price']) ? $meta['airport_dropoff_price'] : '';
+    if("per_person"==$airport_dropoff_price['airport_pickup_price_type']){
+        echo "<span>Airport Dropoff Fee (Per Person): ".wc_price($airport_dropoff_price['airport_service_fee_per_person'])."</span>";
+    }
+    if("fixed"==$airport_dropoff_price['airport_pickup_price_type']){
+        echo "<span>Airport Dropoff Fee (Fixed): ".wc_price($airport_dropoff_price['airport_service_fee_fixed'])."</span>";
+    }
+    if("free"==$airport_dropoff_price['airport_pickup_price_type']){
+        echo "<span>Airport Dropoff Fee: Free</span>";
+    }
+}
+if("both"==$_POST['service_type']){
+    $airport_pickup_dropoff_price  = !empty($meta['airport_pickup_dropoff_price']) ? $meta['airport_pickup_dropoff_price'] : '';
+    if("per_person"==$airport_pickup_dropoff_price['airport_pickup_price_type']){
+        echo "<span>Airport Pickup & Dropoff Fee (Per Person): ".wc_price($airport_pickup_dropoff_price['airport_service_fee_per_person'])."</span>";
+    }
+    if("fixed"==$airport_pickup_dropoff_price['airport_pickup_price_type']){
+        echo "<span>Airport Pickup & Dropoff Fee (Fixed): ".wc_price($airport_pickup_dropoff_price['airport_service_fee_fixed'])."</span>";
+    }
+    if("free"==$airport_pickup_dropoff_price['airport_pickup_price_type']){
+        echo "<span>Airport Pickup & Dropoff Fee: Free</span>";
+    }
+}
+// if("airport_pickup"==$_POST['service_type']){
+//     $airport_pickup_price  = !empty($meta['airport_pickup_price']) ? $meta['airport_pickup_price'] : '';
+//     if("per_person"==$_POST['service_price_type']){
+//         echo "<span>Per Person Price: ".wc_price($airport_pickup_price['airport_service_fee_per_person'])."</span>";
+//     }
+//     if("fixed"==$_POST['service_price_type']){
+//         echo "<span>Fixed Price: ".wc_price($airport_pickup_price['airport_service_fee_fixed'])."</span>";
+//     }
+// }
+// if("airport_dropoff"==$_POST['service_type']){
+//     $airport_dropoff_price  = !empty($meta['airport_dropoff_price']) ? $meta['airport_dropoff_price'] : '';
+//     if("per_person"==$_POST['service_price_type']){
+//         echo "<span>Per Person Price: ".wc_price($airport_dropoff_price['airport_service_fee_per_person'])."</span>";
+//     }
+//     if("fixed"==$_POST['service_price_type']){
+//         echo "<span>Fixed Price: ".wc_price($airport_dropoff_price['airport_service_fee_fixed'])."</span>";
+//     }
+// }
+// if("both"==$_POST['service_type']){
+//     $airport_pickup_dropoff_price  = !empty($meta['airport_pickup_dropoff_price']) ? $meta['airport_pickup_dropoff_price'] : '';
+//     if("per_person"==$_POST['service_price_type']){
+//         echo "<span>Per Person Price: ".wc_price($airport_pickup_dropoff_price['airport_service_fee_per_person'])."</span>";
+//     }
+//     if("fixed"==$_POST['service_price_type']){
+//         echo "<span>Fixed Price: ".wc_price($airport_pickup_dropoff_price['airport_service_fee_fixed'])."</span>";
+//     }
+// }
+
+}
+wp_die();    
+}
+
+
+#################################
 # Ajax functions                #
 #################################
 /**
@@ -292,6 +374,22 @@ function tf_room_availability_callback() {
     $rooms = !empty($meta['room']) ? $meta['room'] : '';
     $locations = get_the_terms( $form_post_id, 'hotel_location' );
     $first_location_name = !empty( $locations ) ? $locations[0]->name : '';
+    /**
+     * Airport Service data
+     * @author Dev Kabir <dev.kabir01@gmail.com>
+     */
+
+    $airport_service_type = !empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : 'none';
+    $airport_service = !empty( $meta['airport_service'] ) ? $meta['airport_service'] == '1' && $airport_service_type != 'none' : false;
+    $airport_service_fee = !empty( $meta['airport_service_fee'] ) ? $meta['airport_service_fee'] : 0;
+    if (!empty($airport_service) && !empty($airport_service_type) && !empty($airport_service_fee)) {
+        if ($airport_service_type == 'per-person') {
+            $airport_service_fee = $airport_service_fee * $form_total_person;
+        }
+        if ($airport_service_type == 'free') {
+            $airport_service_fee = 0;
+        }
+    }
 
     // start table
     ob_start();
@@ -527,8 +625,26 @@ function tf_room_availability_callback() {
                 } 
 
             if ( !empty( $rows  ) ) {
+            
+                echo $rows .= '</tbody> </table> </div>';
+                ?>
+                <script>
+                    (function ($) {
+                        $(document).on('click', ".tf-hotel-services-wrap > div > div.tf_button_group > button", function(e) {
+                            e.preventDefault();
+                            let parent = $(this).parentsUntil('.tf-hotel-services-wrap').parent();
+                            let id = parent.data('id');
+                            let form = $(document).find("form#tf-room-booking-" + id);
+                            var up_service_air_service_type = $('.fancybox-slide #airport-service').val();  
+                            $("#tf_update_service_type").val(up_service_air_service_type);
+                            
+                            form.find('input[name="airport_service"]').val(parent.find('#airport-service').val());
+                            $.fancybox.close()
+                        });
+                    })(jQuery);
 
-                echo $rows . '</tbody> </table> </div>';
+                </script>
+                <?php
 
             } else {
 
