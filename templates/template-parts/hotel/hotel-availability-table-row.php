@@ -1,7 +1,6 @@
 <tr>
     <td class="description">
         <div class="tf-room-type">
-            <div class="tf-room-title"><?php echo esc_html($room['title']); ?></div>
             <div class="tf-room-title">
             <?php 
             $tour_room_details_gall = !empty($room['gallery']) ? $room['gallery'] : '';
