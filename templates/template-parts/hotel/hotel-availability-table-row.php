@@ -148,7 +148,7 @@
 
             <?php if (defined('TF_PRO') && $airport_service == true && $airport_service_type != 'none') {?>
                     <div class="hotel-services-wrap">
-                    <a data-fancybox data-src="#tf-hotel-services" href="javascript:;" class="tf-btn-booking"><?php _e('Choose Services', 'tourfic');?></a>
+                    <a data-fancybox data-src="#tf-hotel-services" href="javascript:;" class="tf-btn-booking"><i class="fas fa-plus"></i> <?php _e('Add Services', 'tourfic');?></a>
                     </div>
             <?php }?>
 

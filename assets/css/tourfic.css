@@ -1015,4 +1015,10 @@
 .tf-details-qc-slider-single .slick-next:before{
     color: #000 !important;
 }
-
+.hotel-services-wrap a.tf-btn-booking{
+    background-color: #F5F8FF;
+    color: #133774;
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
