@@ -1145,6 +1145,243 @@ function tf_remove_room_order_ids() {
     wp_die();
 }
 
+/**
+ * Ajax hotel quick view
+ */
+
+function tf_hotel_quickview_callback(){
+    ?>
+    <div class="tf-hotel-quick-view" style="display: flex">
+        <?php 
+            $meta = get_post_meta( $_POST['post_id'], 'tf_hotel', true );
+            $rooms = !empty($meta['room']) ? $meta['room'] : '';
+            foreach ($rooms as $room) {
+            $enable = !empty($room['enable']) ? $room['enable'] : '';
+            if ($enable == '1') {
+            $tf_room_gallery = !empty($room['gallery']) ? $room['gallery'] : '';
+            if($room['unique_id']==$_POST['uniqid_id']){
+        ?>
+        <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
+            <?php
+            if ($tf_room_gallery) {
+                $tf_room_gallery_ids = explode( ',', $tf_room_gallery );
+            }
+                       
+            ?>
+                       
+            <div class="tf-details-qc-slider tf-details-qc-slider-single">
+                <?php 
+                if ( !empty( $tf_room_gallery_ids ) ) {
+                foreach ($tf_room_gallery_ids as $key => $gallery_item_id) {
+                ?>    
+				<div class="tf-details-qcs">
+                    <?php 
+                    $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+                    echo '<img src="'.$image_url.'" alt="">';
+                    ?>
+                </div>
+                <?php }} ?>
+			</div>
+			<div class="tf-details-qc-slider tf-details-qc-slider-nav">
+                <?php 
+                if ( !empty( $tf_room_gallery_ids ) ) {
+                foreach ($tf_room_gallery_ids as $key => $gallery_item_id) {
+                ?>    
+				<div class="tf-details-qcs">
+                    <?php 
+                    $image_url = wp_get_attachment_url( $gallery_item_id, 'thumbnail' );
+                    echo '<img src="'.$image_url.'" alt="">';
+                    ?>
+                </div>
+                <?php }} ?>
+			</div>
+
+            <script>
+               jQuery('.tf-details-qc-slider-single').slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: true,
+                    fade: false,
+                    adaptiveHeight: true,
+                    infinite: true,
+                    useTransform: true,
+                    speed: 400,
+                    cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
+                });
+            
+                jQuery('.tf-details-qc-slider-nav')
+                    .on('init', function(event, slick) {
+                        jQuery('.tf-details-qc-slider-nav .slick-slide.slick-current').addClass('is-active');
+                    })
+                    .slick({
+                        slidesToShow: 7,
+                        slidesToScroll: 7,
+                        dots: false,
+                        focusOnSelect: false,
+                        infinite: false,
+                        responsive: [{
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 5,
+                                slidesToScroll: 5,
+                            }
+                        }, {
+                            breakpoint: 640,
+                            settings: {
+                                slidesToShow: 4,
+                                slidesToScroll: 4,
+                        }
+                        }, {
+                            breakpoint: 420,
+                            settings: {
+                                slidesToShow: 3,
+                                slidesToScroll: 3,
+                    }
+                        }]
+                    });
+            
+                    jQuery('.tf-details-qc-slider-single').on('afterChange', function(event, slick, currentSlide) {
+                        jQuery('.tf-details-qc-slider-nav').slick('slickGoTo', currentSlide);
+                    var currrentNavSlideElem = '.tf-details-qc-slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
+                    jQuery('.tf-details-qc-slider-nav .slick-slide.is-active').removeClass('is-active');
+                    jQuery(currrentNavSlideElem).addClass('is-active');
+                });
+            
+                jQuery('.tf-details-qc-slider-nav').on('click', '.slick-slide', function(event) {
+                    event.preventDefault();
+                    var goToSingleSlide = jQuery(this).data('slick-index');
+            
+                    jQuery('.tf-details-qc-slider-single').slick('slickGoTo', goToSingleSlide);
+                });
+            </script>
+
+        </div>
+        <div class="tf-hotel-details-info" style="width:440px; padding-left: 35px;">
+            <?php 
+            $footage = !empty($room['footage']) ? $room['footage'] : '';
+            $bed = !empty($room['bed']) ? $room['bed'] : '';
+            $adult_number = !empty($room['adult']) ? $room['adult'] : '0';
+            $child_number = !empty($room['child']) ? $room['child'] : '0';
+            $num_room = !empty($room['num-room']) ? $room['num-room'] : '0';
+            ?>
+            <span class="tf-hotel-room-title"><b><?php echo esc_html( $room['title'] ); ?></b></span>
+            <p><?php echo $room['description']; ?></p>
+            <div class="tf-room-title description">
+                <?php esc_html_e( 'Key Features', 'tourfic' ); ?> <br>
+                <?php if ($num_room) { ?>
+                <div class="tf-tooltip tf-d-ib">
+                    <div class="room-detail-icon">
+                        <span class="room-icon-wrap"><i class="fas fa-person-booth"></i></span>
+                        <span class="icon-text tf-d-b"><?php echo $num_room; ?></span>
+                    </div>
+                    <div class="tf-top">
+                        <?php _e( 'No. Room', 'tourfic' ); ?>
+                        <i class="tool-i"></i>
+                    </div>
+                </div>
+                <?php }
+                if ($footage) { ?>
+                <div class="tf-tooltip tf-d-ib">
+                    <div class="room-detail-icon">
+                        <span class="room-icon-wrap"><i
+                                class="fas fa-ruler-combined"></i></span>
+                        <span class="icon-text tf-d-b"><?php echo $footage; ?> sft</span>
+                    </div>
+                    <div class="tf-top">
+                        <?php _e( 'Room Footage', 'tourfic' ); ?>
+                        <i class="tool-i"></i>
+                    </div>
+                </div>
+                <?php }
+                if ($bed) { ?>
+                <div class="tf-tooltip tf-d-ib">
+                    <div class="room-detail-icon">
+                        <span class="room-icon-wrap"><i class="fas fa-bed"></i></span>
+                        <span class="icon-text tf-d-b">x<?php echo $bed; ?></span>
+                    </div>
+                    <div class="tf-top">
+                        <?php _e( 'No. Beds', 'tourfic' ); ?>
+                        <i class="tool-i"></i>
+                    </div>
+                </div>
+                <?php } ?>
+
+                <?php if(!empty($room['features'])) { ?>
+                <div class="room-features">
+                    <div class="tf-room-title"><?php esc_html_e( 'Amenities', 'tourfic' ); ?><br>
+                    </div>
+                    <ul class="room-feature-list" style="margin: 0;">
+
+                        <?php foreach ($room['features'] as $feature) {
+
+                            $room_f_meta = get_term_meta( $feature, 'hotel_feature', true );
+
+                            $room_icon_type = !empty($room_f_meta['icon-type']) ? $room_f_meta['icon-type'] : '';
+
+                            if ($room_icon_type == 'fa') {
+                                $room_feature_icon = '<i class="' .$room_f_meta['icon-fa']. '"></i>';
+                            } elseif ($room_icon_type == 'c') {
+                                $room_feature_icon = '<img src="' .$room_f_meta['icon-c']["url"]. '" style="min-width: ' .$room_f_meta['dimention']["width"]. 'px; height: ' .$room_f_meta['dimention']["width"]. 'px;" />';
+                            }
+
+                            $room_term = get_term( $feature ); ?>
+                        <li class="tf-tooltip tf-d-ib">
+                            <?php echo !empty($room_feature_icon) ? $room_feature_icon : ''; ?>
+                            <div class="tf-top">
+                                <?php echo $room_term->name; ?>
+                                <i class="tool-i"></i>
+                            </div>
+                        </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+                <?php } ?>
+            </div>
+            <div class="pax">
+                
+            <div class="tf-room-title"><?php esc_html_e( 'Pax', 'tourfic' ); ?><br>
+            <?php if ($adult_number) { ?>
+            <div class="tf-tooltip tf-d-ib">
+                <div class="room-detail-icon">
+                    <span class="room-icon-wrap"><i class="fas fa-male"></i><i
+                            class="fas fa-female"></i></span>
+                    <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
+                </div>
+                <div class="tf-top">
+                    <?php _e( 'No. Adults', 'tourfic' ); ?>
+                    <i class="tool-i"></i>
+                </div>
+            </div>
+            
+            <?php }
+            if ($child_number) { ?>
+            <div class="tf-tooltip tf-d-ib">
+                <div class="room-detail-icon">
+                    <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
+                    <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
+                </div>
+                <div class="tf-top">
+                    <?php _e( 'No. Children', 'tourfic' ); ?>
+                    <i class="tool-i"></i>
+                </div>
+            </div>
+            <?php } ?>
+            </div>
+            
+        </div>
+        <?php 
+        }
+        }
+        } 
+        ?>
+    </div>
+    <?php
+    wp_die();
+}
+
+add_action( 'wp_ajax_tf_tour_details_qv', 'tf_hotel_quickview_callback' );
+add_action( 'wp_ajax_nopriv_tf_tour_details_qv', 'tf_hotel_quickview_callback' );
+
 #################################
 # WooCommerce integration       #
 #################################
