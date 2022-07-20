@@ -113,7 +113,6 @@
             var check_out_date = $('input[name=check_out_date]').val();
             var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
             var deposit = $('input[name=make_deposit]').is(':checked');
-
             
             var data = {
                 action: 'tf_hotel_booking',
@@ -127,7 +126,7 @@
                 check_in_date: check_in_date,
                 check_out_date: check_out_date,
                 room: room,
-                deposit
+                deposit: deposit
             };
              
 
