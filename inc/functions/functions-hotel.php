@@ -301,6 +301,11 @@ function tf_room_availability_callback() {
         <h4><?php esc_html_e( 'Availability', 'tourfic' ); ?></h4>
     </div>
     <div class="tf_room-table hotel-room-wrap">
+    <div id="tour_room_details_loader">
+        <div id="tour_room_details_loader_img">
+            <img src="<?php echo TF_ASSETS_URL ?>img/loader.gif" alt="">
+        </div>
+    </div>
         <table class="availability-table">
             <thead>
                 <tr>

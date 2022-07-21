@@ -1015,4 +1015,20 @@
 .tf-details-qc-slider-single .slick-next:before{
     color: #000 !important;
 }
-
+#tour_room_details_loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,.8);
+    display: none;
+    z-index: 99;
+}
+#tour_room_details_loader_img{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
