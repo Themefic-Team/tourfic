@@ -32,7 +32,7 @@ function tf_documentation_page_integration() {
  */
 
 function tf_hotel_tour_docs() {
-    add_meta_box( 'tfhotel_docs', __( 'Tourfic Documantation', 'tourfic' ), 'tf_hotel_docs_callback','tf_hotel','side' ,'high');
+    add_meta_box( 'tfhotel_docs', __( 'Tourfic Documantation', 'tourfic' ), 'tf_hotel_docs_callback','tf_hotel','side' ,'default');
     add_meta_box( 'tftour_docs', __( 'Tourfic Documantation', 'tourfic' ), 'tf_tour_docs_callback','tf_tours','side' ,'high');
 }
 add_action( 'add_meta_boxes', 'tf_hotel_tour_docs' );
@@ -40,13 +40,17 @@ add_action( 'add_meta_boxes', 'tf_hotel_tour_docs' );
 function tf_hotel_docs_callback(){
 	$tfhoteldocumentation =sanitize_url('https://themefic.com/docs/tourfic/');
 ?>
-	<a href="<?php echo $tfhoteldocumentation; ?>" target="_blank" class="button button-primary button-large"><?php echo __('Go to Documentation','tourfic'); ?></a>
+	<div class="tf_docs_preview" style="padding: 10px; text-align: center;">
+		<a href="<?php echo $tfhoteldocumentation; ?>" target="_blank" class="button button-primary button-large"><?php echo __('Go to Documentation','tourfic'); ?></a>
+	</div>
 <?php
 }
 function tf_tour_docs_callback(){
 	$tftourdocumentation =sanitize_url('https://themefic.com/docs/tourfic/');
 ?>
-	<a href="<?php echo $tftourdocumentation; ?>" target="_blank" class="button button-primary button-large"><?php echo __('Go to Documentation','tourfic'); ?></a>
+	<div class="tf_docs_preview" style="padding: 10px; text-align: center;">
+		<a href="<?php echo $tftourdocumentation; ?>" target="_blank" class="button button-primary button-large"><?php echo __('Go to Documentation','tourfic'); ?></a>
+	</div>
 <?php
 }
 
