@@ -321,7 +321,7 @@
     }
 }
 @media all and (max-width: 1240px){
-    .tf_form-inner input[type="text"]{
+    .tf-tours_gallery-wrap .tf_form-inner input[type="text"]{
         text-align: center;
     }
 }
@@ -347,7 +347,7 @@
     
 }
 @media all and (max-width: 766px){
-    .tf_form-inner input[type="text"]{
+    .tf-tours_gallery-wrap .tf_form-inner input[type="text"]{
         text-align: left;
     }
 }
