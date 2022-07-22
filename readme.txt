@@ -2,7 +2,7 @@
 Contributors: fida02, themefic, devkabir, mdshuvo, codexa, kamrul0424, raihan143, hasanet
 Tags: tour booking, tour operator, travel, tour, trip, travel-booking, travel agency, hotel booking, reservation, hotel, booking engine, booking, booking calendar, booking system, calendar, online booking, travel, airbnb, booking.com, homeaway, apartments, villa, hostel, reservation system, travel itinerary, trekking, tour itinerary, travel booking engine, tour accommodation listings, travel destinations, trip book, travel payment, woocommerce tour booking, woocommerce travel booking plugin, woocommerce tour, woocommerce travel, wordpress travel, wp travel plugin, wp travel, wordpress travel booking plugin, wordpress tour plugin, tour booking plugin wordpress, wordpress travel agency, travel tour wordpress, wordpress tour, tour-booking, travel wp, travel wordpress, tour wp, travel wordpress, hotel wp, hotel wordpress
 Requires at least: 4.2
-Tested up to: 6.0
+Tested up to: 6.0.1
 Requires PHP: 7.1
 Stable tag: 2.1.0
 License: GPL-2.0+
@@ -195,6 +195,13 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 17. Tour Page (Backend Options)
 
 == Changelog ==
+
+= 2.7.2 - 23/07/2022 =
+* Compititable check
+* Cart pricing summary improved
+* Checkout summary improved
+* Per night price calculation issue fixed
+
 
 = 2.1.0 - 18/03/2022 =
 

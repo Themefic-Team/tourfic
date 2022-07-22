@@ -260,9 +260,7 @@ function tf_tours_booking_function() {
         $tf_tours_data['tf_tours_data']['tour_type']        = $tour_type;
         $tf_tours_data['tf_tours_data']['tour_id']          = $post_id;
         $tf_tours_data['tf_tours_data']['post_permalink']   = get_permalink( $post_id );
-        $tf_tours_data['tf_tours_data']['adults']           = $adults;
-        $tf_tours_data['tf_tours_data']['childrens']        = $children;
-        $tf_tours_data['tf_tours_data']['infants']          = $infant;
+        
         $tf_tours_data['tf_tours_data']['start_date']       = $start_date;
         $tf_tours_data['tf_tours_data']['end_date']         = $end_date;
         $tf_tours_data['tf_tours_data']['tour_date']        = $tour_date;
@@ -297,11 +295,16 @@ function tf_tours_booking_function() {
         if ( $pricing_rule == 'group' ) {
 
             $tf_tours_data['tf_tours_data']['price'] = $group_price;
+            $tf_tours_data['tf_tours_data']['adults'] = $adults;
+            $tf_tours_data['tf_tours_data']['childrens'] = $children;
+            $tf_tours_data['tf_tours_data']['infants']  = $infant;
 
         } else {
 
             $tf_tours_data['tf_tours_data']['price'] = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
-
+            $tf_tours_data['tf_tours_data']['adults']           = $adults." × ".wc_price($adult_price);
+            $tf_tours_data['tf_tours_data']['childrens']        = $children." × ".wc_price($children_price);
+            $tf_tours_data['tf_tours_data']['infants']          = $infant." × ".wc_price($infant_price);
         }
 
         # Deposit information

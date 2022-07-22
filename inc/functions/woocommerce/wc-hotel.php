@@ -51,7 +51,7 @@ function tf_hotel_booking_callback(){
         $check_out_stt  = strtotime( $check_out );
         $day_difference = round(  (  ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1 );
     }
-
+    
     // Check errors
     if ( !$check_in ) {
         $response['errors'][] = __('Check-in date missing.','tourfic');
@@ -99,8 +99,6 @@ function tf_hotel_booking_callback(){
         $tf_room_data['tf_hotel_data']['post_author']    = $post_author;
         $tf_room_data['tf_hotel_data']['post_id']        = $post_id;
         $tf_room_data['tf_hotel_data']['location']       = $location;
-        $tf_room_data['tf_hotel_data']['adult']          = $adult;
-        $tf_room_data['tf_hotel_data']['child']          = $child;
         $tf_room_data['tf_hotel_data']['check_in']       = $check_in;
         $tf_room_data['tf_hotel_data']['check_out']      = $check_out;
         $tf_room_data['tf_hotel_data']['room']           = $room_selected;
@@ -116,37 +114,54 @@ function tf_hotel_booking_callback(){
             $period = new DatePeriod(
                 new DateTime( $check_in . ' 00:00' ),
                 new DateInterval( 'P1D' ),
-                new DateTime( $check_out . ' 23:59' )
+                new DateTime( $check_out . ' 00:00' )
             );
+            
             $total_price = 0;
             foreach ( $period as $date ) {
-                                  
-                $available_rooms = array_values( array_filter( $repeat_by_date, function ($date_availability ) use ( $date ) {
-                    $date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
-                    $date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
-                    return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
-                } ) );
+                            
+            $available_rooms = array_values( array_filter( $repeat_by_date, function ($date_availability ) use ( $date ) {
+                $date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
+                $date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
+                return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
+            } ) );
 
-                if ( is_iterable($available_rooms) && count( $available_rooms ) >=1) {                    
-                    $room_price    = !empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $rooms[$room_id]['price'];
-                    $adult_price   = !empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $rooms[$room_id]['adult_price'];
-                    $child_price   = !empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $rooms[$room_id]['child_price'];
-                    $total_price += $pricing_by == '1' ? $room_price : (  ( $adult_price * $adult ) + ( $child_price * $child ) );
-                } ;
+            if ( is_iterable($available_rooms) && count( $available_rooms ) >=1) {                    
+                $room_price    = !empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $rooms[$room_id]['price'];
+                $adult_price   = !empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $rooms[$room_id]['adult_price'];
+                $child_price   = !empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $rooms[$room_id]['child_price'];
+                $total_price += $pricing_by == '1' ? $room_price : (  ( $adult_price * $adult ) + ( $child_price * $child ) );
+                
+                if ( $pricing_by == '1' ) {
+                    $tf_room_data['tf_hotel_data']['adult']          = $adult;
+                    $tf_room_data['tf_hotel_data']['child']          = $child;
+                }
+                if ( $pricing_by == '2' ) {
+                    $tf_room_data['tf_hotel_data']['adult']          = $adult." × ".wc_price($available_rooms[0]['adult_price']);
+                    $tf_room_data['tf_hotel_data']['child']          = $child." × ".wc_price($available_rooms[0]['child_price']);
+                }
+                
+            } ;
+                
             } 
             
             $price_total = $total_price*$room_selected;
-
         } else {
 
             if ( $pricing_by == '1' ) {
                 $total_price = $rooms[$room_id]['price'];
+                
+                $tf_room_data['tf_hotel_data']['adult']          = $adult;
+                $tf_room_data['tf_hotel_data']['child']          = $child;
             } elseif ( $pricing_by == '2' ) {
                 $adult_price = $rooms[$room_id]['adult_price'];
                 $adult_price = $adult_price * $adult;
                 $child_price = $rooms[$room_id]['child_price'];
                 $child_price = $child_price * $child;
-                $total_price = $adult_price + $child_price;              
+                $total_price = $adult_price + $child_price;    
+                                
+                $tf_room_data['tf_hotel_data']['adult']          = $adult." × ".wc_price($rooms[$room_id]['adult_price']);
+                $tf_room_data['tf_hotel_data']['child']          = $child." × ".wc_price($rooms[$room_id]['child_price']);
             }
 
             # Multiply pricing by night number
@@ -161,11 +176,13 @@ function tf_hotel_booking_callback(){
         # Set pricing
         $tf_room_data['tf_hotel_data']['price_total'] = $price_total;
         # check for deposit
-	    tf_get_deposit_amount($rooms[$room_id], $price_total, $deposit_amount, $has_deposit);
-	    if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount) ) {
-		    $tf_room_data['tf_hotel_data']['price_total'] = $deposit_amount;
-		    $tf_room_data['tf_hotel_data']['due'] = $price_total - $deposit_amount;
-	    }
+        if($deposit=="true"){
+            tf_get_deposit_amount($rooms[$room_id], $price_total, $deposit_amount, $has_deposit);
+            if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount) ) {
+                $tf_room_data['tf_hotel_data']['price_total'] = $deposit_amount;
+                $tf_room_data['tf_hotel_data']['due'] = $price_total - $deposit_amount;
+            }
+        }
         # Add product to cart with the custom cart item data
         WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
 
