@@ -149,7 +149,23 @@ if( class_exists( 'CSF' ) ) {
     //   )
     // ) );
 
-     
+    // Hotel Service
+
+    CSF::createSection($prefix, array (
+      'title' => __('Hotel Services', 'tourfic'),
+      'fields' => array(
+            array(
+              'id'=> '',
+              'class'    => 'tf-csf-disable tf-csf-pro',
+              'type' => 'switcher',
+              'title' => __('Pickup Service', 'tourfic'),
+              'subtitle' => __( 'Airport Service' .$badge_pro, 'tourfic' ),
+              'default' => false,
+          )
+  
+    )
+  ));
+
     // Check-in check-out
     CSF::createSection( $prefix, array(
       'title'  => __('Check in/out Time', 'tourfic'),

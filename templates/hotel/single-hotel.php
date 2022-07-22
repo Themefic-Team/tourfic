@@ -260,6 +260,11 @@ $share_link = get_permalink($post_id);
                         <h4><?php esc_html_e( 'Availability', 'tourfic' ); ?></h4>
                     </div>
                     <div class="tf_room-table hotel-room-wrap">
+                    <div id="tour_room_details_loader">
+                        <div id="tour_room_details_loader_img">
+                            <img src="<?php echo TF_ASSETS_URL ?>img/loader.gif" alt="">
+                        </div>
+                    </div>
                         <table class="availability-table">
                             <thead>
                                 <tr>
@@ -311,7 +316,27 @@ $price = min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices 
                                 <tr>
                                     <td class="description">
                                         <div class="tf-room-type">
-                                            <div class="tf-room-title"><?php echo esc_html( $room['title'] ); ?></div>
+                                            <div class="tf-room-title">
+                                            <?php 
+                                            $tour_room_details_gall = !empty($room['gallery']) ? $room['gallery'] : '';
+                                            if ($tour_room_details_gall) {
+                                                $tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
+                                            }
+                                            if (defined( 'TF_PRO' ) && $tour_room_details_gall){ 
+                                            ?>	
+                                            <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'] : '' ?>" data-hotel="<?php echo $post_id; ?>" style="text-decoration: underline;">
+                                                <?php echo esc_html( $room['title'] ); ?>
+                                            </a>
+                                            
+                                            <div id="tour_room_details_qv" class="tf-reg-wrap" >
+                                                                                        
+                                            </div>
+                                            <?php } else{ ?>
+                                                <?php echo esc_html( $room['title'] ); ?>
+                                             <?php   
+                                            }
+                                            ?>
+                                            </div>
                                             <div class="bed-facilities"><?php echo $room['description']; ?></div>
                                         </div>
 
