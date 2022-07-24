@@ -150,7 +150,56 @@
                 <input type="hidden" name="child" value="<?php echo $form_child; ?>">
                 <input type="hidden" name="check_in_date" value="<?php echo $form_check_in; ?>">
                 <input type="hidden" name="check_out_date" value="<?php echo $form_check_out; ?>">
+                <input type="hidden" id="hotel_roomid">
+                <input type="hidden" id="hotel_room_number">
+                <?php 
+                $tour_hotel_service_avail = !empty($meta['airport_service']) ? $meta['airport_service'] : '';
+                $tour_hotel_service_type = !empty($meta['airport_service_type']) ? $meta['airport_service_type'] : '';
+                
+                if(!empty($tour_hotel_service_avail) && !empty($tour_hotel_service_type)){
+                ?>
+                <a class="tf_air_service" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
+                
+                
+                <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap" data-id="<?php echo $room_id ?>">
+                    <div class="tf-hotel-services">
+                        <div class="tf-hotel-services-text">
+                            <h3><?php _e(tfopt('hotel_service_popup_title', 'Add Service to your Booking.'), 'tourfic');?></h3>
+                            <p><?php _e(tfopt('deposit-subtitle', 'Select the services you want to add to your booking.'), 'tourfic');?></p>
+                        </div>
+                        <div class="tf-hotel-service">
+                            <label><?php _e('Pickup & Dropoff Service', 'tourfic');?></label>
+                            <select id="airport-service" name="airport_service">
+                                <option value="none"><?php _e('No Service', 'tourfic');?></option>
+                                <?php 
+                                foreach($tour_hotel_service_type as $single_service_type){ ?>
+                                <option value="<?php echo $single_service_type; ?>">
+                                <?php 
+                                if("pickup"==$single_service_type){
+                                    _e('Pickup Service', 'tourfic');
+                                }
+                                if("dropoff"==$single_service_type){
+                                    _e('Dropoff Service', 'tourfic');
+                                }
+                                if("both"==$single_service_type){
+                                    _e('Pickup & Dropoff Service', 'tourfic');
+                                }
+                                ?>
+                                </option>
+                                <?php } ?>
+                            </select>
+                            <input type="hidden" id="hotel-post-id" value="<?php echo $form_post_id; ?>">
+                        </div>
+                        <div class="tf-airport-pickup-response"> </div>
+                        <div class="tf_button_group">
+                            <button class="tf_button" type="submit" ><?php _e(tfopt('hotel_service_popup_action', 'Continue to booking'), 'tourfic');?></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <?php }else{ ?>
                 <button class="hotel-room-book" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
+                <?php } ?>
             </div>
             <div class="tf_desc"></div>
         </form>
