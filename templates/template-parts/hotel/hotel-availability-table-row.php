@@ -162,7 +162,7 @@
                 $tour_hotel_service_avail = !empty($meta['airport_service']) ? $meta['airport_service'] : '';
                 $tour_hotel_service_type = !empty($meta['airport_service_type']) ? $meta['airport_service_type'] : '';
                 
-                if(!empty($tour_hotel_service_avail) && !empty($tour_hotel_service_type)){
+                if(defined( 'TF_PRO' ) && !empty($tour_hotel_service_avail) && !empty($tour_hotel_service_type)){
                 ?>
                 <a class="tf_air_service" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
                 
