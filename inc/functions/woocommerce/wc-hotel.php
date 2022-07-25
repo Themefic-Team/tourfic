@@ -179,7 +179,7 @@ function tf_hotel_booking_callback(){
         
         # Set pricing
         $tf_room_data['tf_hotel_data']['price_total'] = $price_total;
-        
+
         # Airport Service Fee 
 
         if("pickup"==$airport_service){
@@ -491,13 +491,13 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
     }
 
     if ( ! empty( $airport_service_type ) && $airport_service_type === 'pickup' ) {
-        $item->update_meta_data( 'Airport Service Type',  __( 'Airport Pickup', 'tourfic' ));
+        $item->update_meta_data( 'Airport Service',  __( 'Airport Pickup', 'tourfic' ));
     }
     if ( ! empty( $airport_service_type ) && $airport_service_type === 'dropoff' ) {
-        $item->update_meta_data( 'Airport Service Type',  __( 'Airport Dropoff', 'tourfic' ));
+        $item->update_meta_data( 'Airport Service',  __( 'Airport Dropoff', 'tourfic' ));
     }
     if ( ! empty( $airport_service_type ) && $airport_service_type === 'both' ) {
-        $item->update_meta_data( 'Airport Service Type',  __( 'Airport Pickup & Dropoff', 'tourfic' ));
+        $item->update_meta_data( 'Airport Service',  __( 'Airport Pickup & Dropoff', 'tourfic' ));
     }
     if ( ! empty( $airport_fees ) ) {
         $item->update_meta_data( 'Airport Service Fee', $values['tf_hotel_data']['air_service_info']);
