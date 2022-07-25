@@ -126,6 +126,7 @@
                 var room = $("#hotel_room_number").val();
                 var deposit = $("#hotel_room_depo").val();
             }
+            var airport_service= $('.fancybox-slide #airport-service').val();
             
             var data = {
                 action: 'tf_hotel_booking',
@@ -139,7 +140,8 @@
                 check_in_date: check_in_date,
                 check_out_date: check_out_date,
                 room: room,
-                deposit: deposit
+                deposit: deposit,
+                airport_service: airport_service
             };
              
 
