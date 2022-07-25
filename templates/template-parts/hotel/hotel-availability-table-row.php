@@ -135,13 +135,17 @@
                     ?>
                 </select>
             </div>
-	        <?php if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
+	        
+            <div class="room-submit-wrap">
+
+            <?php if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
+                <div class="roomselectissue"></div>
                 <div class="room-deposit-wrap">
                     <input type="checkbox" id="tf-make-deposit" name="make_deposit" value="<?php echo $room_id ?>">
                     <label for="tf-make-deposit">I'll make a deposit</label><br>
                 </div>
 	        <?php } ?>
-            <div class="room-submit-wrap">
+
                 <input type="hidden" name="post_id" value="<?php echo $form_post_id; ?>">
                 <input type="hidden" name="room_id" value="<?php echo $room_id; ?>">
                 <input type="hidden" name="unique_id" value="<?php echo $unique_id; ?>">
@@ -152,6 +156,8 @@
                 <input type="hidden" name="check_out_date" value="<?php echo $form_check_out; ?>">
                 <input type="hidden" id="hotel_roomid">
                 <input type="hidden" id="hotel_room_number">
+                <input type="hidden" id="hotel_room_uniqueid">
+                <input type="hidden" id="hotel_room_depo" value="false">
                 <?php 
                 $tour_hotel_service_avail = !empty($meta['airport_service']) ? $meta['airport_service'] : '';
                 $tour_hotel_service_type = !empty($meta['airport_service_type']) ? $meta['airport_service_type'] : '';
@@ -188,11 +194,12 @@
                                 </option>
                                 <?php } ?>
                             </select>
+                            <input type="hidden" name="room_id" value="<?php echo $room_id; ?>">
                             <input type="hidden" id="hotel-post-id" value="<?php echo $form_post_id; ?>">
                         </div>
                         <div class="tf-airport-pickup-response"> </div>
                         <div class="tf_button_group">
-                            <button class="tf_button" type="submit" ><?php _e(tfopt('hotel_service_popup_action', 'Continue to booking'), 'tourfic');?></button>
+                        <button class="hotel-room-book" type="submit"><?php _e(tfopt('hotel_service_popup_action', 'Continue to booking'), 'tourfic');?></button>
                         </div>
                     </div>
                 </div>

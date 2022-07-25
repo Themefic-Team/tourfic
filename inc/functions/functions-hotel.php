@@ -278,6 +278,7 @@ if(1==$airport_service){
     $room_selected = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
     $check_in      = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
     $check_out     = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
+    $deposit     = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
 
 
     # Calculate night number
@@ -355,6 +356,13 @@ if(1==$airport_service){
 
     }
 
+    if($deposit=="true"){
+        tf_get_deposit_amount($rooms[$room_id], $price_total, $deposit_amount, $has_deposit);
+        if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount) ) {
+            $deposit_amount;
+        }
+    }
+
 if("pickup"==$_POST['service_type']){
     $airport_pickup_price  = !empty($meta['airport_pickup_price']) ? $meta['airport_pickup_price'] : '';
     if("per_person"==$airport_pickup_price['airport_pickup_price_type']){
@@ -364,16 +372,31 @@ if("pickup"==$_POST['service_type']){
         }else{
             echo "<span>Airport Pickup Fee Adult - ". sanitize_key( $_POST['hoteladult'] ) ." × ". wc_price($airport_pickup_price['airport_service_fee_adult'])." : <b>".wc_price($service_fee)."</b></span></br>";
         }
-        echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
+        if($deposit=="true"){
+            echo "<span>Due Amount : <b>".wc_price(($price_total+$service_fee)-$deposit_amount)."</b></span></br>";
+            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
+        }else{
+            echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
+        }
     }
     if("fixed"==$airport_pickup_price['airport_pickup_price_type']){
         $service_fee = $airport_pickup_price['airport_service_fee_fixed'];
         echo "<span>Airport Pickup Fee (Fixed): <b>".wc_price($service_fee)."</b></span></br>";
-        echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
+        if($deposit=="true"){
+            echo "<span>Due Amount : <b>".wc_price(($price_total+$service_fee)-$deposit_amount)."</b></span></br>";
+            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
+        }else{
+            echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
+        }
     }
     if("free"==$airport_pickup_price['airport_pickup_price_type']){
         echo "<span>Airport Pickup Fee: <b>Free</b></span></br>";
-        echo "<span>Total Payable Amount : <b>".wc_price($price_total)."</b></span>";
+        if($deposit=="true"){
+            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)."</b></span></br>";
+            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
+        }else{
+            echo "<span>Total Payable Amount : <b>".wc_price($price_total)."</b></span>";
+        }
     }
 }
 if("dropoff"==$_POST['service_type']){
@@ -385,16 +408,31 @@ if("dropoff"==$_POST['service_type']){
         }else{
             echo "<span>Airport Pickup Fee Adult - ". sanitize_key( $_POST['hoteladult'] ) ." × ". wc_price($airport_dropoff_price['airport_service_fee_adult'])." : <b>".wc_price($service_fee)."</b></span></br>";
         }
-        echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
+        if($deposit=="true"){
+            echo "<span>Due Amount : <b>".wc_price(($price_total+$service_fee)-$deposit_amount)."</b></span></br>";
+            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
+        }else{
+            echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
+        }
     }
     if("fixed"==$airport_dropoff_price['airport_pickup_price_type']){
         $service_fee = $airport_dropoff_price['airport_service_fee_fixed'];
         echo "<span>Airport Pickup Fee (Fixed): <b>".wc_price($service_fee)."</b></span></br>";
-        echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
+        if($deposit=="true"){
+            echo "<span>Due Amount : <b>".wc_price(($price_total+$service_fee)-$deposit_amount)."</b></span></br>";
+            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
+        }else{
+            echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
+        }
     }
     if("free"==$airport_dropoff_price['airport_pickup_price_type']){
         echo "<span>Airport Pickup Fee: <b>Free</b></span></br>";
-        echo "<span>Total Payable Amount : <b>".wc_price($price_total)."</b></span>";
+        if($deposit=="true"){
+            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)."</b></span></br>";
+            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
+        }else{
+            echo "<span>Total Payable Amount : <b>".wc_price($price_total)."</b></span>";
+        }
     }
 }
 if("both"==$_POST['service_type']){
@@ -406,16 +444,33 @@ if("both"==$_POST['service_type']){
         }else{
             echo "<span>Airport Pickup Fee Adult - ". sanitize_key( $_POST['hoteladult'] ) ." × ". wc_price($airport_pickup_dropoff_price['airport_service_fee_adult'])." : <b>".wc_price($service_fee)."</b></span></br>";
         }
-        echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
+        if($deposit=="true"){
+            echo "<span>Due Amount : <b>".wc_price(($price_total+$service_fee)-$deposit_amount)."</b></span></br>";
+            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
+        }else{
+            echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
+        }
+        
     }
     if("fixed"==$airport_pickup_dropoff_price['airport_pickup_price_type']){
         $service_fee = $airport_pickup_dropoff_price['airport_service_fee_fixed'];
         echo "<span>Airport Pickup Fee (Fixed): <b>".wc_price($service_fee)."</b></span></br>";
-        echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
+
+        if($deposit=="true"){
+            echo "<span>Due Amount : <b>".wc_price(($price_total+$service_fee)-$deposit_amount)."</b></span></br>";
+            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
+        }else{
+            echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
+        }
     }
     if("free"==$airport_pickup_dropoff_price['airport_pickup_price_type']){
         echo "<span>Airport Pickup Fee: <b>Free</b></span></br>";
-        echo "<span>Total Payable Amount : <b>".wc_price($price_total)."</b></span>";
+        if($deposit=="true"){
+            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)."</b></span></br>";
+            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
+        }else{
+            echo "<span>Total Payable Amount : <b>".wc_price($price_total)."</b></span>";
+        }
     }
 }
 

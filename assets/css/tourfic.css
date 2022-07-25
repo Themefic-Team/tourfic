@@ -1023,7 +1023,7 @@
     bottom: 0;
     background: rgba(255,255,255,.8);
     display: none;
-    z-index: 99;
+    z-index: 99999999;
 }
 #tour_room_details_loader_img{
     height: 100%;
