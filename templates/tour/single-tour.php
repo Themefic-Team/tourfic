@@ -437,7 +437,12 @@ $tour_price = new Tour_Price($meta);
 									<div class="tf-faq-title">
 										<h3><?php esc_html_e( $faq['title'] ); ?></h3>
 									</div>
-									<div class="tf-faq-desc">
+									<?php 
+									if(defined( 'TF_PRO' )){ ?>
+										<div class="tf-faq-desc faq-content-details">
+									<?php }else{ ?>
+										<div class="tf-faq-desc">
+									<?php } ?>
 										<p><?php _e( $faq['desc'] ); ?></p>
 									</div>
 								</div>

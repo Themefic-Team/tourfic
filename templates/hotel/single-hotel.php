@@ -487,7 +487,14 @@ $price = min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices 
                                         <i class="fas fa-plus" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <div class="faq-content"><?php _e( $faq['description'] ); ?></div>
+                                <?php 
+                                if(defined( 'TF_PRO' )){ ?>
+                                    <div class="faq-content faq-content-details">
+                                <?php }else{ ?>
+                                    <div class="faq-content">
+                                <?php } ?>
+                                    <?php _e( $faq['description'] ); ?>
+                                </div>
                             </div>
 
                         </div>
