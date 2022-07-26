@@ -344,6 +344,16 @@
         right: -3px;
         top: -5px;
     }
+    .tf-share{
+        position: static !important;
+    }
+    .share-tour-content{
+        top: auto !important;
+        width: 385px;
+        left: 0;
+        right: auto;
+        min-width: 385px;
+    }
     
 }
 @media all and (max-width: 766px){

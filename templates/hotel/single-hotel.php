@@ -141,6 +141,27 @@ $share_link = get_permalink($post_id);
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="https://www.linkedin.com/cws/share?url=<?php _e( $share_link ); ?>"
+                                            class="tf-dropdown__item" target="_blank">
+                                            <span class="tf-dropdown__item-content">
+                                                <i class="fab fa-linkedin"></i>
+                                                <?php esc_html_e( 'Share on Linkedin', 'tourfic' ); ?>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <?php 
+                                     $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
+                                     ?>
+                                    <li>
+                                        <a href="http://pinterest.com/pin/create/button/?url=<?php _e( $share_link ); ?>&media=<?php _e( $share_image_link[0]); ?>&description=<?php _e( $share_text ); ?>"
+                                            class="tf-dropdown__item" target="_blank">
+                                            <span class="tf-dropdown__item-content">
+                                                <i class="fab fa-pinterest"></i>
+                                                <?php esc_html_e( 'Share on Pinterest', 'tourfic' ); ?>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <div class="share_center_copy_form tf-dropdown__item" title="Share this link"
                                             aria-controls="share_link_button">
                                             <label class="share_center_copy_label"
