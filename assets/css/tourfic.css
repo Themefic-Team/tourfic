@@ -1032,3 +1032,50 @@
     align-items: center;
     justify-content: center;
 }
+.tf-hotel-location-preview{
+    position: relative;
+}
+.tf-hotel-location-preview a{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tf-hotel-location-preview a span{
+    background: #003162;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+    border: 1px solid #003162;
+    border-radius: 2px;
+    padding: 6px 15px;
+}
+#tf-hotel-google-maps {
+    background-color: unset;
+    width: 98%;
+}
+.tf-hotel-google-maps-container{
+    padding: 5px;
+    gap: 16px;
+    isolation: isolate;
+    position: relative;
+    width: 100%;
+    background: #FFFFFF;
+    box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.2);
+    border-radius: 5px;
+}
+#tf-hotel-google-maps button.fancybox-button.fancybox-close-small {
+  padding: 8px;
+  width: 40px;
+  height: 40px;
+  right: 28px;
+  top: 28px;
+  background: #F5F8FF;
+  border-radius: 20px;
+}
