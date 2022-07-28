@@ -169,5 +169,6 @@ if (post_password_required()) {
 </div>
 
 <div style="display: none;" id="tourfic-rating">
+    <div id="tfreview-error-response"></div>
     <?php tf_review_form(); ?>
 </div>

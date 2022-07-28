@@ -1153,6 +1153,32 @@
         });
 
         /**
+         * Rating Required
+         * 
+         */
+         $(document).on('click', '#tourfic-rating #comment-submit', function (e) {
+            var tfcomment = $("#tourfic-rating #comment").val();
+            var tfauthor = $("#tourfic-rating #author").val();
+            var tfemail = $("#tourfic-rating #email").val();
+            var numberofratingfield = $('#tourfic-rating .tf-form-single-rating').length;
+            var useratingresult = $(".tf-form-single-rating input:radio:checked").get();
+            if(tf_params.user_auth){
+            if(!tfcomment || numberofratingfield!=useratingresult.length){ 
+                e.preventDefault();
+                $(".fancybox-slide #tfreview-error-response").html("<span style='display: block;color:red; text-align:center;padding-bottom: 15px'>Please provide a ratings and Fillup all fields</span>");
+            }
+            }
+            if(!tf_params.user_auth){
+            if(!tfauthor || !tfemail || !tfcomment || numberofratingfield!=useratingresult.length){ 
+                e.preventDefault();
+                $(".fancybox-slide #tfreview-error-response").html("<span style='display: block;color:red; text-align:center;padding-bottom: 15px'>Please provide a ratings and Fillup all fields</span>");
+            }            
+        }
+
+        });
+       
+
+        /**
          * Mixed
          */
          var flag = false;

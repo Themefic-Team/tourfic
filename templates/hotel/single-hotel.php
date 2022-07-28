@@ -535,7 +535,7 @@ $price = min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices 
                 </div>
                 <div style="display: none;" id="tf-hotel-google-maps">
                     <div class="tf-hotel-google-maps-container">
-                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["address"] ); ?>&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["address"] ); ?>&z=18&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
                 <?php if ( is_active_sidebar( 'tf_single_booking_sidebar' ) ) { ?>

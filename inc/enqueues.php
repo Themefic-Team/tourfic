@@ -140,6 +140,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'infant' => __('Infant', 'tourfic'),
                 'room' => __('Room', 'tourfic'),
                 'sending_ques' => __('Sending your question...', 'tourfic'),
+                'user_auth' => is_user_logged_in(),
             )
         );
         wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/responsive.css', '', TOURFIC );
