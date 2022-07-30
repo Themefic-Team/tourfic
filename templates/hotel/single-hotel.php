@@ -525,19 +525,22 @@ $price = min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices 
             <!-- Start Sidebar -->
             <div class="tf_sidebar">
                 <?php tf_hotel_sidebar_booking_form(); ?>
-                <div class="tf-hotel-location-preview">
-                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address ); ?>&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    
-                    <a data-fancybox data-src="#tf-hotel-google-maps" href="javascript:;">
-                        <span><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
-                    </a>
-                    
-                </div>
-                <div style="display: none;" id="tf-hotel-google-maps">
-                    <div class="tf-hotel-google-maps-container">
-                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["address"] ); ?>&z=18&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+                <?php if (defined( 'TF_PRO' ) && !empty($map["address"])) { ?>
+                    <div class="tf-hotel-location-preview">
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address ); ?>&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        
+                        <a data-fancybox data-src="#tf-hotel-google-maps" href="javascript:;">
+                            <span><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
+                        </a>
+                        
                     </div>
-                </div>
+                    <div style="display: none;" id="tf-hotel-google-maps">
+                        <div class="tf-hotel-google-maps-container">
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["address"] ); ?>&z=18&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                <?php } ?>
                 <?php if ( is_active_sidebar( 'tf_single_booking_sidebar' ) ) { ?>
                     <div id="tf__booking_sidebar">
                         <?php dynamic_sidebar( 'tf_single_booking_sidebar' ); ?>
