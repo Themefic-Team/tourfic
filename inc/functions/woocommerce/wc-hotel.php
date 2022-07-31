@@ -388,7 +388,7 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 
     // airport price type
 
-    if (!empty($cart_item['tf_hotel_data']['air_serivice_avail']) && 1==$cart_item['tf_hotel_data']['air_serivice_avail'] && !empty($cart_item['tf_hotel_data']['air_serivicetype'])) {
+    if (!empty($cart_item['tf_hotel_data']['air_serivice_avail']) && !empty($cart_item['tf_hotel_data']['air_service_info']) && 1==$cart_item['tf_hotel_data']['air_serivice_avail'] && !empty($cart_item['tf_hotel_data']['air_serivicetype'])) {
         $item_data[] = array(
             'key'       => __('Airport Service Fee', 'tourfic'),
             'value'     => $cart_item['tf_hotel_data']['air_service_info'],
