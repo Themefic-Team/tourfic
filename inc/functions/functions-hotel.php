@@ -373,7 +373,7 @@ if("pickup"==$_POST['service_type']){
             echo "<span>Airport Pickup Fee Adult ( ". sanitize_key( $_POST['hoteladult'] ) ." × ". wc_price($airport_pickup_price['airport_service_fee_adult'])." ) : <b>".wc_price($service_fee)."</b></span></br>";
         }
         if($deposit=="true"){
-            echo "<span>Due Amount : <b>".wc_price(($price_total+$service_fee)-$deposit_amount)."</b></span></br>";
+            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)." + ".wc_price($service_fee)."</b></span></br>";
             echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
         }else{
             echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
@@ -383,7 +383,7 @@ if("pickup"==$_POST['service_type']){
         $service_fee = $airport_pickup_price['airport_service_fee_fixed'];
         echo "<span>Airport Pickup Fee (Fixed): <b>".wc_price($service_fee)."</b></span></br>";
         if($deposit=="true"){
-            echo "<span>Due Amount : <b>".wc_price(($price_total+$service_fee)-$deposit_amount)."</b></span></br>";
+            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)." + ".wc_price($service_fee)."</b></span></br>";
             echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
         }else{
             echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
@@ -409,7 +409,7 @@ if("dropoff"==$_POST['service_type']){
             echo "<span>Airport Dropoff Fee Adult ( ". sanitize_key( $_POST['hoteladult'] ) ." × ". wc_price($airport_dropoff_price['airport_service_fee_adult'])." ) : <b>".wc_price($service_fee)."</b></span></br>";
         }
         if($deposit=="true"){
-            echo "<span>Due Amount : <b>".wc_price(($price_total+$service_fee)-$deposit_amount)."</b></span></br>";
+            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)." + ".wc_price($service_fee)."</b></span></br>";
             echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
         }else{
             echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
@@ -419,7 +419,7 @@ if("dropoff"==$_POST['service_type']){
         $service_fee = $airport_dropoff_price['airport_service_fee_fixed'];
         echo "<span>Airport Dropoff Fee (Fixed): <b>".wc_price($service_fee)."</b></span></br>";
         if($deposit=="true"){
-            echo "<span>Due Amount : <b>".wc_price(($price_total+$service_fee)-$deposit_amount)."</b></span></br>";
+            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)." + ".wc_price($service_fee)."</b></span></br>";
             echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
         }else{
             echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
@@ -445,7 +445,7 @@ if("both"==$_POST['service_type']){
             echo "<span>Airport Pickup & Dropoff Fee Adult ( ". sanitize_key( $_POST['hoteladult'] ) ." × ". wc_price($airport_pickup_dropoff_price['airport_service_fee_adult'])." ) : <b>".wc_price($service_fee)."</b></span></br>";
         }
         if($deposit=="true"){
-            echo "<span>Due Amount : <b>".wc_price(($price_total+$service_fee)-$deposit_amount)."</b></span></br>";
+            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)." + ".wc_price($service_fee)."</b></span></br>";
             echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
         }else{
             echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
@@ -457,7 +457,7 @@ if("both"==$_POST['service_type']){
         echo "<span>Airport Pickup & Dropoff Fee (Fixed): <b>".wc_price($service_fee)."</b></span></br>";
 
         if($deposit=="true"){
-            echo "<span>Due Amount : <b>".wc_price(($price_total+$service_fee)-$deposit_amount)."</b></span></br>";
+            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)." + ".wc_price($service_fee)."</b></span></br>";
             echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
         }else{
             echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";

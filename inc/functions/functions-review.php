@@ -50,7 +50,7 @@ function tf_review_script() {
                     errorElement: "span",
                     errorPlacement: function(error, element) {
                         if (element.is(":radio")) {
-                            error.appendTo(element.parents(".tf-single-rating"));
+                            error.appendTo(element.parents(".tf-form-single-rating"));
                         } else { // This is the default behavior
                             error.insertAfter(element);
                         }
