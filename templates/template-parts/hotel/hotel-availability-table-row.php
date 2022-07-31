@@ -137,9 +137,9 @@
             </div>
 	        
             <div class="room-submit-wrap">
-
+            <div class="roomselectissue"></div>
             <?php if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
-                <div class="roomselectissue"></div>
+                
                 <div class="room-deposit-wrap">
                     <input type="checkbox" id="tf-make-deposit" name="make_deposit" value="<?php echo $room_id ?>">
                     <label for="tf-make-deposit">I'll make a deposit</label><br>
