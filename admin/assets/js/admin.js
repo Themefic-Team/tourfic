@@ -97,11 +97,20 @@
          * show notyf error
          */
         
-        $(document).on('click', '.post-type-tf_tours #publish, .post-type-tf_tours #save-post, .post-type-tf_hotel #publish, .post-type-tf_hotel #save-post', function(e) {
+        $(document).on('click', '.post-type-tf_tours #publish, .post-type-tf_tours #save-post', function(e) {
             if( $('#set-post-thumbnail').find('img').size() == 0) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
-                notyf.error('Feature image is a required!');
+                notyf.error('Tour image is a required!');
+                return false;
+            }
+        });
+
+        $(document).on('click', '.post-type-tf_hotel #publish, .post-type-tf_hotel #save-post', function(e) {
+            if( $('#set-post-thumbnail').find('img').size() == 0) {
+                e.preventDefault;
+                e.stopImmediatePropagation();
+                notyf.error('Hotel image is a required!');
                 return false;
             }
         });
