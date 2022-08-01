@@ -365,6 +365,9 @@
     #tour-deposit .tf_button_group{
         width: 100% !important;
     }
+    #tour-deposit .tf-tours-booking-deposit{
+        height: auto !important;
+    }
     
 }
 @media all and (max-width: 766px){
