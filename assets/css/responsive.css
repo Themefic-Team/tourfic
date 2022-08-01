@@ -325,6 +325,11 @@
         text-align: center;
     }
 }
+@media all and (max-width: 991px){
+    form.tf_tours_booking .tf_selectperson-wrap{
+        font-size: 15px;
+    }
+}
 @media all and (max-width: 767px){
     .tf-hotel-quick-view{
         display: flow-root !important;
@@ -353,6 +358,12 @@
         left: 0;
         right: auto;
         min-width: 385px;
+    }
+    .tf-hotel-services-wrap .tf-hotel-services,
+    .tf-hotel-services-wrap .tf_button_group,
+    #tour-deposit .tf-tours-booking-deposit,
+    #tour-deposit .tf_button_group{
+        width: 100% !important;
     }
     
 }
