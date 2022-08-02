@@ -79,18 +79,21 @@ if ( ! class_exists( 'CSF_Field_map' ) ) {
     }
 
     public function enqueue() {
+      
+      $tf_google_map = !empty(tfopt('google-page-option')) ? tfopt('google-page-option') : 0;
+      if("default"==$tf_google_map){
+        if ( ! wp_script_is( 'csf-leaflet' ) ) {
+          wp_enqueue_script( 'csf-leaflet', esc_url( $this->cdn_url . $this->version .'/dist/leaflet.js' ), array( 'csf' ), $this->version, true );
+        }
 
-      if ( ! wp_script_is( 'csf-leaflet' ) ) {
-        wp_enqueue_script( 'csf-leaflet', esc_url( $this->cdn_url . $this->version .'/dist/leaflet.js' ), array( 'csf' ), $this->version, true );
-      }
-
-      if ( ! wp_style_is( 'csf-leaflet' ) ) {
-        wp_enqueue_style( 'csf-leaflet', esc_url( $this->cdn_url . $this->version .'/dist/leaflet.css' ), array(), $this->version );
-      }
-
-      if ( ! wp_script_is( 'jquery-ui-autocomplete' ) ) {
-        wp_enqueue_script( 'jquery-ui-autocomplete' );
-      }
+        if ( ! wp_style_is( 'csf-leaflet' ) ) {
+          wp_enqueue_style( 'csf-leaflet', esc_url( $this->cdn_url . $this->version .'/dist/leaflet.css' ), array(), $this->version );
+        }
+        }
+        if ( ! wp_script_is( 'jquery-ui-autocomplete' ) ) {
+          wp_enqueue_script( 'jquery-ui-autocomplete' );
+        }
+      
 
     }
 
