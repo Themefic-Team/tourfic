@@ -834,7 +834,8 @@
 |            Search Form CSS     |
 ================================*/
 /* Auto complete */
-.tf_form-inner .autocomplete-items {
+.tf_form-inner .autocomplete-items,
+.tf_form-inner .defatultautocomplete-item {
     position: absolute;
     border: 1px solid #d4d4d4;
     border-bottom: none;
@@ -845,14 +846,16 @@
     left: 0;
     right: 0;
 }
-.tf_form-inner .autocomplete-items div {
+.tf_form-inner .autocomplete-items div,
+.tf_form-inner .defatultautocomplete-item div {
     padding: 10px;
     cursor: pointer;
     background-color: #fff; 
     border-bottom: 1px solid #d4d4d4;
     color: #444;
 }
-.tf_form-inner .autocomplete-items div:hover {
+.tf_form-inner .autocomplete-items div:hover,
+.tf_form-inner .defatultautocomplete-item div:hover {
     background-color: #e9e9e9; 
 }  
 .tf_booking-widget .tf_form-row .tf_button {

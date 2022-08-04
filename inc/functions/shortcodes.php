@@ -426,6 +426,141 @@ add_shortcode('tf_search_form', 'tf_search_form_shortcode');
 // Old shortcode
 add_shortcode('tf_search', 'tf_search_form_shortcode');
 
+
+
+/**
+ * Advance Search from Shortcode Function
+ */
+function tf_advance_search_form_shortcode(){
+    
+    ob_start();
+?>
+<div id="tf-booking-search-tabs">
+    <div id="tf-tour-booking-form">
+    <form class="tf_booking-widget default-form" id="tf_tour_aval_check" method="get" autocomplete="off" action="">
+
+        <div class="tf_homepage-booking">
+            <div class="tf_destination-wrap">
+                <div class="tf_input-inner">
+                <div class="tf_form-row">
+                        <label class="tf_label-row">
+                            <span class="tf-label"><?php _e('Destination', 'tourfic'); ?>:</span>
+                            <div class="tf_form-inner tf-d-g">
+                                <i class="fas fa-search"></i>
+                                <input type="text" required id="tf-destination" class="tf-advance-destination" placeholder="<?php _e('Enter Destination', 'tourfic'); ?>" value="">
+                                <input type="hidden" name="place" class="tf-place-input" />                    
+                                <div id="tf-destinationautocomplete-list" class="defatultautocomplete-item" style="display: none;">
+                                    <div value="Comilla" data-slug="comilla">
+                                        <strong>C</strong>omilla<input type="hidden" value="Comilla" data-slug="comilla"> 
+                                    </div>
+                                    <div value="Cox's Bazar" data-slug="coxs-bazar">
+                                        <strong>C</strong>ox's Bazar<input type="hidden" value="Cox's Bazar" data-slug="coxs-bazar"> 
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tf_selectperson-wrap">
+                <div class="tf_input-inner">
+                    <span class="tf_person-icon">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    <div class="adults-text">1 <?php _e('Adults', 'tourfic'); ?></div>
+                    <div class="person-sep"></div>
+                    <div class="child-text">0 <?php _e('Children', 'tourfic'); ?></div>
+                    <div class="person-sep"></div>
+                    <div class="infant-text">0 <?php _e('Infant', 'tourfic'); ?></div>
+                </div>
+                <div class="tf_acrselection-wrap">
+                    <div class="tf_acrselection-inner">
+                        <div class="tf_acrselection">
+                            <div class="acr-label"><?php _e('Adults', 'tourfic'); ?></div>
+                            <div class="acr-select">
+                                <div class="acr-dec">-</div>
+                                    <input type="number" name="adults" id="adults" min="1" value="1">
+                                <div class="acr-inc">+</div>
+                            </div>
+                        </div>
+                        <div class="tf_acrselection">
+                            <div class="acr-label"><?php _e('Children', 'tourfic'); ?></div>
+                            <div class="acr-select">
+                                <div class="acr-dec">-</div>
+                                    <input type="number" name="children" id="children" min="0" value="0">
+                                <div class="acr-inc">+</div>
+                            </div>
+                        </div>
+                        <div class="tf_acrselection">
+                            <div class="acr-label"><?php _e('Infant', 'tourfic'); ?></div>
+                            <div class="acr-select">
+                                <div class="acr-dec">-</div>
+                                    <input type="number" name="infant" id="infant" min="0" value="0">
+                                <div class="acr-inc">+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tf_selectdate-wrap">
+            <!-- @KK Merged two inputs into one  -->
+            <div class="tf_input-inner">
+                <label class="tf_label-row">
+                            <span class="tf-label"><?php _e('Check-in & Check-out date', 'tourfic'); ?></span>
+                            <div class="tf_form-inner tf-d-g">
+                                <i class="far fa-calendar-alt"></i>
+                                <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e('Select Date', 'tourfic'); ?>" <?php echo tfopt('date_tour_search')? 'required' : ''; ?>>
+                            </div>
+                        </label>
+                </div>
+            </div>
+            
+            <div class="tf_selectdate-wrap">
+            <div class="tf_input-inner">
+                <label class="tf_label-row" style="width: 100%;">
+                        <span class="tf-label"><?php _e('More', 'tourfic'); ?></span>
+                        <span style="text-decoration: none; display: block; cursor: pointer;"><?php _e('More', 'tourfic'); ?>  <i class="fas fa-angle-down"></i></a>
+                    </label>
+                </div>
+            </div>
+
+            <div class="tf_submit-wrap">
+                <input type="hidden" name="type" value="tf_tours" class="tf-post-type"/>
+                <button class="tf_button tf-submit tf-tours-btn" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
+            </div>
+
+        </div>
+
+        </form>
+        <script>
+        (function($) {
+        $(document).ready(function() {
+
+            $("#tf_tour_aval_check #check-in-out-date").flatpickr({
+                enableTime: false,
+                mode: "range",
+                dateFormat: "Y/m/d",
+                onReady: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
+                onChange: function(selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                },
+            });
+
+        });
+        })(jQuery);
+        </script>
+    </div>
+</div>
+<?php
+
+return ob_get_clean();
+}
+add_shortcode('tf_advance_search', 'tf_advance_search_form_shortcode');
+
 /**
  * Search Result Shortcode Function
  */

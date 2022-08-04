@@ -1238,7 +1238,22 @@
              $('.tf-header-menu-wrap').slideToggle();
          });
 
+         
+         // Advance Search form
+
+         $(".tf-advance-destination").click(function(){
+            $('.defatultautocomplete-item').show();
+         });
+         
+         $(".tf-advance-destination").keyup(function(){
+            $('.defatultautocomplete-item').hide();
+         });
         
+         $(".defatultautocomplete-item div").click(function(e){
+            $("#tf-destination").val($(this).attr('value'));
+            $(".tf-place-input").val($(this).attr('data-slug'));
+            $('.defatultautocomplete-item').hide();
+         })
     });
 })(jQuery, window);
 
