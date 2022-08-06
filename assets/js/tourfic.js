@@ -1243,6 +1243,8 @@
 
          $(".tf-advance-destination").click(function(){
             $('.defatultautocomplete-item').show();
+         }).blur(function(){
+            $('.defatultautocomplete-item').hide();
          });
          
          $(".tf-advance-destination").keyup(function(){
@@ -1253,7 +1255,7 @@
             $("#tf-destination").val($(this).attr('value'));
             $(".tf-place-input").val($(this).attr('data-slug'));
             $('.defatultautocomplete-item').hide();
-         })
+         });
     });
 })(jQuery, window);
 
