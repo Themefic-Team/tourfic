@@ -141,6 +141,27 @@ if ( !function_exists('tf_enqueue_scripts') ) {
              $tf_hotellocationlists[] = $term->slug;
         } }
 
+        $tfhotel_min_max = array(
+            'posts_per_page'=> -1,
+            'post_type'     => 'tf_hotel',
+        );
+        $tfhotel_min_max_query = new WP_Query( $tfhotel_min_max ); 
+        $tfhotel_min_maxprices = array();
+
+        if( $tfhotel_min_max_query->have_posts() ):
+            while( $tfhotel_min_max_query->have_posts() ) : $tfhotel_min_max_query->the_post();
+                
+                $meta = get_post_meta( get_the_ID( ), 'tf_hotel', true );
+                $rooms = !empty($meta['room']) ? $meta['room'] : '';
+                echo "<pre>";
+                var_dump($rooms);
+                
+            endwhile;
+            // $max_price = max($prices);
+            // $min_price = min($prices);
+
+        endif; wp_reset_query(); 
+
         /**
          * Custom
          */       
