@@ -68,6 +68,14 @@ if ( !function_exists('tf_enqueue_scripts') ) {
             }
         }
 
+        /**
+         * Range Slider
+         * 
+         */
+
+        wp_enqueue_style( 'al-range-slider', TF_ASSETS_URL . 'range-slider/al-range-slider.css', '', '' );
+        wp_enqueue_script( 'al-range-slider', TF_ASSETS_URL . 'range-slider/al-range-slider.js', array( 'jquery' ), '', true ); 
+        wp_enqueue_script( 'jquery-ui-autocomplete' );
 
         /**
          * Fancybox
@@ -117,6 +125,23 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 		wp_enqueue_script( 'notyf', TF_ASSETS_URL . 'notyf/notyf.min.js', array( 'jquery' ), '3.0', true );
 
         /**
+         * Hotel Feature
+         */ 
+
+        $tf_hotellocationlists=array();
+        $tf_hotellocation = get_terms( array(
+            'taxonomy' => 'hotel_location',
+            'orderby' => 'title',
+            'order' => 'ASC',
+            'hide_empty' => true,
+            'hierarchical' => 0,
+        ) );
+        if ( $tf_hotellocation ) { 
+        foreach( $tf_hotellocation as $term ) {
+             $tf_hotellocationlists[] = $term->slug;
+        } }
+
+        /**
          * Custom
          */       
         wp_enqueue_style( 'tourfic', TF_ASSETS_URL . 'css/tourfic' . $min_css . '.css', '', TOURFIC );
@@ -140,6 +165,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'infant' => __('Infant', 'tourfic'),
                 'room' => __('Room', 'tourfic'),
                 'sending_ques' => __('Sending your question...', 'tourfic'),
+                'tf_hotellocationlists' => $tf_hotellocationlists,
             )
         );
         wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/responsive.css', '', TOURFIC );

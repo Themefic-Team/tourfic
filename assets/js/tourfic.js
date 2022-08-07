@@ -1241,21 +1241,37 @@
          
          // Advance Search form
 
-         $(".tf-advance-destination").click(function(){
-            $('.defatultautocomplete-item').show();
-         }).blur(function(){
-            $('.defatultautocomplete-item').hide();
+         $(".tf_selectdate-wrap.tf_more_info_selections .tf_input-inner").click(function(){
+            $('.tf-more-info').toggleClass('show');
          });
-         
-         $(".tf-advance-destination").keyup(function(){
-            $('.defatultautocomplete-item').hide();
-         });
-        
-         $(".defatultautocomplete-item div").click(function(e){
-            $("#tf-destination").val($(this).attr('value'));
-            $(".tf-place-input").val($(this).attr('data-slug'));
-            $('.defatultautocomplete-item').hide();
-         });
+
+         const tf_hotel_range_options = {
+            range: { min: 10, max: 100, step: 1 },
+            initialSelectedValues: { from: 10, to: 50 },
+            grid: false,
+            theme: "dark",
+        };
+        $('.tf-filter-range').alRangeSlider(tf_hotel_range_options);
+
+        var availablehotellocation = tf_params.tf_hotellocationlists;
+
+        $("#tf-destination-adv").autocomplete({
+            source: availablehotellocation,
+            minLength: 0,
+            open: function() {
+                $(this).autocomplete("widget")
+                       .appendTo(".results")
+                       .css("position", "absolute");
+            }
+        });
+
+        $("#tf-destination-adv").on('focus', function() {
+            if ($("#tf-destination-adv").val() == '') {
+            console.log('is empty, force search with blank terms...')
+            $("#tf-destination-adv").autocomplete("search", "");
+            }
+        });
+
     });
 })(jQuery, window);
 

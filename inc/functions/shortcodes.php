@@ -447,21 +447,17 @@ function tf_advance_search_form_shortcode(){
                             <span class="tf-label"><?php _e('Destination', 'tourfic'); ?>:</span>
                             <div class="tf_form-inner tf-d-g">
                                 <i class="fas fa-search"></i>
-                                <input type="text" required id="tf-destination" class="tf-advance-destination" placeholder="<?php _e('Enter Destination', 'tourfic'); ?>" value="">
+                                <input type="text" required id="tf-destination-adv" class="tf-advance-destination" placeholder="<?php _e('Enter Destination', 'tourfic'); ?>" value="">
                                 <input type="hidden" name="place" class="tf-place-input" />                    
-                                <div id="tf-destinationautocomplete-list" class="defatultautocomplete-item" style="display: none;">
-                                    <div value="Comilla" data-slug="comilla">
-                                        <strong>C</strong>omilla<input type="hidden" value="Comilla" data-slug="comilla"> 
-                                    </div>
-                                    <div value="Cox's Bazar" data-slug="coxs-bazar">
-                                        <strong>C</strong>ox's Bazar<input type="hidden" value="Cox's Bazar" data-slug="coxs-bazar"> 
-                                    </div>
+                                <div class="ui-widget ui-widget-content results tf-hotel-results">
                                 </div>
                             </div>
+                            
                         </label>
                     </div>
                 </div>
             </div>
+            
 
             <div class="tf_selectperson-wrap">
                 <div class="tf_input-inner">
@@ -517,13 +513,36 @@ function tf_advance_search_form_shortcode(){
                 </div>
             </div>
             
-            <div class="tf_selectdate-wrap">
+            <div class="tf_selectdate-wrap tf_more_info_selections">
             <div class="tf_input-inner">
                 <label class="tf_label-row" style="width: 100%;">
-                        <span class="tf-label"><?php _e('More', 'tourfic'); ?></span>
-                        <span style="text-decoration: none; display: block; cursor: pointer;"><?php _e('More', 'tourfic'); ?>  <i class="fas fa-angle-down"></i></a>
-                    </label>
-                </div>
+                    <span class="tf-label"><?php _e('More', 'tourfic'); ?></span>
+                    <span style="text-decoration: none; display: block; cursor: pointer;"><?php _e('More', 'tourfic'); ?>  <i class="fas fa-angle-down"></i></a>
+                </label>
+            </div>
+            <div class="tf-more-info">
+            <span><?php _e('Filter Price', 'tourfic'); ?></span>
+            <div class="tf-filter-price-range">
+                <div class="tf-filter-range"></div>
+            </div>
+
+            <span><?php _e('Hotel Features', 'tourfic'); ?></span>
+                <?php
+                $tf_hotelfeature = get_terms( array(
+                    'taxonomy' => 'hotel_feature',
+                    'orderby' => 'title',
+                    'order' => 'ASC',
+                    'hide_empty' => true,
+                    'hierarchical' => 0,
+                ) );
+                if ( $tf_hotelfeature ) { ?>
+                <?php foreach( $tf_hotelfeature as $term ) { ?>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" value="<?php _e( $term->slug ); ?>" id="<?php _e( $term->slug ); ?>">
+                        <label class="form-check-label" for="<?php _e( $term->slug ); ?>"><?php _e( $term->name ); ?></label>
+                    </div>
+                <?php } } ?>
+            </div>
             </div>
 
             <div class="tf_submit-wrap">
@@ -532,7 +551,7 @@ function tf_advance_search_form_shortcode(){
             </div>
 
         </div>
-
+        
         </form>
         <script>
         (function($) {
