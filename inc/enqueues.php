@@ -232,7 +232,6 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 
         $tour_max_price = max($tftours_min_maxprices);
         $tour_min_price = min($tftours_min_maxprices);
-        // var_dump($tour_min_price);
 
         /**
          * Custom
@@ -262,6 +261,8 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'tf_hotel_max_price' => $hotel_max_price,
                 'tf_hotel_min_price' => $hotel_min_price,
                 'tf_tourdestinationlists' => $tf_tourdestinationlists,
+                'tf_tour_max_price' => $tour_max_price,
+                'tf_tour_min_price' => $tour_min_price,
             )
         );
         wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/responsive.css', '', TOURFIC );
