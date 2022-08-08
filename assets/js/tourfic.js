@@ -1245,9 +1245,16 @@
             $('.tf-more-info').toggleClass('show');
          });
 
-         const tf_hotel_range_options = {
-            range: { min: 10, max: 100, step: 1 },
-            initialSelectedValues: { from: 10, to: 50 },
+         let tf_hotel_range_options = {
+            range: { 
+                min: parseInt(tf_params.tf_hotel_min_price), 
+                max: parseInt(tf_params.tf_hotel_max_price), 
+                step: 1 
+            },
+            initialSelectedValues: { 
+                from: parseInt(tf_params.tf_hotel_min_price), 
+                to: parseInt(tf_params.tf_hotel_max_price)/2 
+            },
             grid: false,
             theme: "dark",
         };

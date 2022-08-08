@@ -538,7 +538,7 @@ function tf_advance_search_form_shortcode(){
                 if ( $tf_hotelfeature ) { ?>
                 <?php foreach( $tf_hotelfeature as $term ) { ?>
                     <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" value="<?php _e( $term->slug ); ?>" id="<?php _e( $term->slug ); ?>">
+                        <input type="checkbox" name="features[]" class="form-check-input" value="<?php _e( $term->slug ); ?>" id="<?php _e( $term->slug ); ?>">
                         <label class="form-check-label" for="<?php _e( $term->slug ); ?>"><?php _e( $term->name ); ?></label>
                     </div>
                 <?php } } ?>

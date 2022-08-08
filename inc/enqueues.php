@@ -153,14 +153,37 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 
                 $meta = get_post_meta( get_the_ID( ), 'tf_hotel', true );
                 $rooms = !empty($meta['room']) ? $meta['room'] : '';
-                echo "<pre>";
-                var_dump($rooms);
+                foreach($rooms as $singleroom){
+                    if(!empty($singleroom['price'])){
+                        $tfhotel_min_maxprices[]=$singleroom['price'];
+                    }
+                    if(!empty($singleroom['adult_price'])){
+                        $tfhotel_min_maxprices[]=$singleroom['adult_price'];
+                    }
+                    if(!empty($singleroom['child_price'])){
+                        $tfhotel_min_maxprices[]=$singleroom['child_price'];
+                    }
+                    if(!empty($singleroom['repeat_by_date'])){
+                        foreach($singleroom['repeat_by_date'] as $singleavailroom){
+                            if(!empty($singleavailroom['price'])){
+                                $tfhotel_min_maxprices[]=$singleavailroom['price'];
+                            }
+                            if(!empty($singleavailroom['adult_price'])){
+                                $tfhotel_min_maxprices[]=$singleavailroom['adult_price'];
+                            }
+                            if(!empty($singleavailroom['child_price'])){
+                                $tfhotel_min_maxprices[]=$singleavailroom['child_price'];
+                            }
+                        }
+                    }
+                }
                 
             endwhile;
-            // $max_price = max($prices);
-            // $min_price = min($prices);
 
         endif; wp_reset_query(); 
+        
+        $hotel_max_price = max($tfhotel_min_maxprices);
+        $hotel_min_price = min($tfhotel_min_maxprices);
 
         /**
          * Custom
@@ -187,6 +210,8 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'room' => __('Room', 'tourfic'),
                 'sending_ques' => __('Sending your question...', 'tourfic'),
                 'tf_hotellocationlists' => $tf_hotellocationlists,
+                'tf_hotel_max_price' => $hotel_max_price,
+                'tf_hotel_min_price' => $hotel_min_price,
             )
         );
         wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/responsive.css', '', TOURFIC );
