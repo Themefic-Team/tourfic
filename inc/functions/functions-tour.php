@@ -671,7 +671,8 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='') {
 
     // get post id
     $post_id = get_the_ID();
-    
+    //Get hotel meta values
+    $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
     // Location
     $location  = !empty($meta['text_location']) ? $meta['text_location'] : '';
     // Featured

@@ -141,6 +141,27 @@ $share_link = get_permalink($post_id);
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="https://www.linkedin.com/cws/share?url=<?php _e( $share_link ); ?>"
+                                            class="tf-dropdown__item" target="_blank">
+                                            <span class="tf-dropdown__item-content">
+                                                <i class="fab fa-linkedin"></i>
+                                                <?php esc_html_e( 'Share on Linkedin', 'tourfic' ); ?>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <?php 
+                                     $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
+                                     ?>
+                                    <li>
+                                        <a href="http://pinterest.com/pin/create/button/?url=<?php _e( $share_link ); ?>&media=<?php _e( $share_image_link[0]); ?>&description=<?php _e( $share_text ); ?>"
+                                            class="tf-dropdown__item" target="_blank">
+                                            <span class="tf-dropdown__item-content">
+                                                <i class="fab fa-pinterest"></i>
+                                                <?php esc_html_e( 'Share on Pinterest', 'tourfic' ); ?>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <div class="share_center_copy_form tf-dropdown__item" title="Share this link"
                                             aria-controls="share_link_button">
                                             <label class="share_center_copy_label"
@@ -487,7 +508,14 @@ $price = min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices 
                                         <i class="fas fa-plus" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <div class="faq-content"><?php _e( $faq['description'] ); ?></div>
+                                <?php 
+                                if(defined( 'TF_PRO' )){ ?>
+                                    <div class="faq-content faq-content-details">
+                                <?php }else{ ?>
+                                    <div class="faq-content">
+                                <?php } ?>
+                                    <?php _e( $faq['description'] ); ?>
+                                </div>
                             </div>
 
                         </div>
@@ -525,6 +553,28 @@ $price = min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices 
             <!-- Start Sidebar -->
             <div class="tf_sidebar">
                 <?php tf_hotel_sidebar_booking_form(); ?>
+
+                <?php if (defined( 'TF_PRO' ) && !empty($map["address"])) { ?>
+                    <div class="tf-hotel-location-preview">
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["address"] ); ?>&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        
+                        <a data-fancybox data-src="#tf-hotel-google-maps" href="javascript:;">
+                            <span><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
+                        </a>
+                        
+                    </div>
+                    <div style="display: none;" id="tf-hotel-google-maps">
+                        <div class="tf-hotel-google-maps-container">
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["address"] ); ?>&z=18&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                <?php } ?>
+                <?php if ( is_active_sidebar( 'tf_single_booking_sidebar' ) ) { ?>
+                    <div id="tf__booking_sidebar">
+                        <?php dynamic_sidebar( 'tf_single_booking_sidebar' ); ?>
+                        <br>
+                    </div>
+                <?php } ?>
             </div>
             <!-- End Sidebar -->
         </div>
