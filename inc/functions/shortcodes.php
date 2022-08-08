@@ -437,7 +437,7 @@ function tf_advance_search_form_shortcode(){
 ?>
 <div id="tf-booking-search-tabs">
     <div id="tf-tour-booking-form">
-    <form class="tf_booking-widget default-form" id="tf_tour_aval_check" method="get" autocomplete="off" action="">
+    <form class="tf_booking-widget default-form" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
 
         <div class="tf_homepage-booking">
             <div class="tf_destination-wrap">
@@ -447,8 +447,7 @@ function tf_advance_search_form_shortcode(){
                             <span class="tf-label"><?php _e('Destination', 'tourfic'); ?>:</span>
                             <div class="tf_form-inner tf-d-g">
                                 <i class="fas fa-search"></i>
-                                <input type="text" required id="tf-destination-adv" class="tf-advance-destination" placeholder="<?php _e('Enter Destination', 'tourfic'); ?>" value="">
-                                <input type="hidden" name="place" class="tf-place-input" />                    
+                                <input type="text" name="place" required id="tf-destination-adv" class="tf-advance-destination" placeholder="<?php _e('Enter Destination', 'tourfic'); ?>" value="">               
                                 <div class="ui-widget ui-widget-content results tf-hotel-results">
                                 </div>
                             </div>
@@ -546,7 +545,7 @@ function tf_advance_search_form_shortcode(){
             </div>
 
             <div class="tf_submit-wrap">
-                <input type="hidden" name="type" value="tf_tours" class="tf-post-type"/>
+                <input type="hidden" name="type" value="tf_hotel" class="tf-post-type"/>
                 <button class="tf_button tf-submit tf-tours-btn" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
             </div>
 
@@ -606,10 +605,14 @@ function tf_search_result_shortcode( $atts, $content = null ){
     $child = isset( $_GET['children'] ) ? sanitize_text_field($_GET['children']) : '';
     // Get Room
     $room = isset( $_GET['room'] ) ? sanitize_text_field($_GET['room']) : '';
+    // Price Range
+    $startprice = isset( $_GET['from'] ) ? absint(sanitize_key($_GET['from'])) : '';
+    $endprice = isset( $_GET['to'] ) ? absint(sanitize_key($_GET['to'])) : '';
+
     // Get date
     $check_in_out = isset( $_GET['check-in-out-date'] ) ? sanitize_text_field($_GET['check-in-out-date']) : '';
 
-    $data = array($adults, $child, $room, $check_in_out);
+    $data = array($adults, $child, $room, $check_in_out, $startprice, $endprice);
 
     $paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
     $checkInOutDate = !empty( $_GET['check-in-out-date']) ? explode( ' - ', $_GET['check-in-out-date'] ) : '';
@@ -658,6 +661,18 @@ function tf_search_result_shortcode( $atts, $content = null ){
     } else {
         $args['s'] = $place;
     }
+
+    if (!empty($_GET['features'])) {
+        $args['tax_query'] = array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'hotel_feature',
+                'field' => 'slug',
+                'terms'    => $_GET['features'],
+            )
+        );
+    }
+    
     
     $loop = new WP_Query( $args );
 

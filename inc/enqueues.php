@@ -125,7 +125,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 		wp_enqueue_script( 'notyf', TF_ASSETS_URL . 'notyf/notyf.min.js', array( 'jquery' ), '3.0', true );
 
         /**
-         * Hotel Feature
+         * Hotel Location
          */ 
 
         $tf_hotellocationlists=array();
@@ -133,7 +133,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
             'taxonomy' => 'hotel_location',
             'orderby' => 'title',
             'order' => 'ASC',
-            'hide_empty' => true,
+            'hide_empty' => false,
             'hierarchical' => 0,
         ) );
         if ( $tf_hotellocation ) { 
@@ -186,6 +186,55 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         $hotel_min_price = min($tfhotel_min_maxprices);
 
         /**
+         * Tour Destination
+         */ 
+
+        $tf_tourdestinationlists=array();
+        $tf_tourdestination = get_terms( array(
+            'taxonomy' => 'tour_destination',
+            'orderby' => 'title',
+            'order' => 'ASC',
+            'hide_empty' => false,
+            'hierarchical' => 0,
+        ) );
+        if ( $tf_tourdestination ) { 
+        foreach( $tf_tourdestination as $term ) {
+             $tf_tourdestinationlists[] = $term->slug;
+        } }
+
+        $tftours_min_max = array(
+            'posts_per_page'=> -1,
+            'post_type'     => 'tf_tours',
+        );
+        $tftours_min_max_query = new WP_Query( $tftours_min_max ); 
+        $tftours_min_maxprices = array();
+
+        if( $tftours_min_max_query->have_posts() ):
+            while( $tftours_min_max_query->have_posts() ) : $tftours_min_max_query->the_post();
+                
+                $meta = get_post_meta( get_the_ID( ), 'tf_tours_option', true );
+                if(!empty($meta['adult_price'])){
+                    $tftours_min_maxprices[]=$meta['adult_price'];
+                }
+                if(!empty($meta['child_price'])){
+                    $tftours_min_maxprices[]=$meta['child_price'];
+                }
+                if(!empty($meta['infant_price'])){
+                    $tftours_min_maxprices[]=$meta['infant_price'];
+                }
+                if(!empty($meta['group_price'])){
+                    $tftours_min_maxprices[]=$meta['group_price'];
+                }
+                
+            endwhile;
+
+        endif; wp_reset_query(); 
+
+        $tour_max_price = max($tftours_min_maxprices);
+        $tour_min_price = min($tftours_min_maxprices);
+        // var_dump($tour_min_price);
+
+        /**
          * Custom
          */       
         wp_enqueue_style( 'tourfic', TF_ASSETS_URL . 'css/tourfic' . $min_css . '.css', '', TOURFIC );
@@ -212,6 +261,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'tf_hotellocationlists' => $tf_hotellocationlists,
                 'tf_hotel_max_price' => $hotel_max_price,
                 'tf_hotel_min_price' => $hotel_min_price,
+                'tf_tourdestinationlists' => $tf_tourdestinationlists,
             )
         );
         wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/responsive.css', '', TOURFIC );
