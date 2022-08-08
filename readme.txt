@@ -1,12 +1,12 @@
 === Travel and Hotel Booking Solution for WooCommerce - Tourfic ===
-Contributors: fida02, themefic, devkabir, mdshuvo, codexa, kamrul0424, raihan143, hasanet
-Tags: tour booking, tour operator, travel, tour, trip, travel-booking, travel agency, hotel booking, reservation, hotel, booking engine, booking, booking calendar, booking system, calendar, online booking, travel, airbnb, booking.com, homeaway, apartments, villa, hostel, reservation system, travel itinerary, trekking, tour itinerary, travel booking engine, tour accommodation listings, travel destinations, trip book, travel payment, woocommerce tour booking, woocommerce travel booking plugin, woocommerce tour, woocommerce travel, wordpress travel, wp travel plugin, wp travel, wordpress travel booking plugin, wordpress tour plugin, tour booking plugin wordpress, wordpress travel agency, travel tour wordpress, wordpress tour, tour-booking, travel wp, travel wordpress, tour wp, travel wordpress, hotel wp, hotel wordpress
-Requires at least: 4.2
+Contributors: fida02, themefic, mdshuvo, kamrul0424, hasanet, jahidcse
+Tags: tour booking, tour operator, travel, tour, trip, travel-booking, travel agency, hotel booking, reservation, hotel, booking engine, booking, booking calendar, booking system, calendar, online booking, travel, airbnb, booking.com, homeaway, apartments, villa, hostel, reservation system, travel itinerary, trekking, tour itinerary, travel booking engine, tour accommodation listings, travel destinations, trip book, travel payment, woocommerce tour booking, woocommerce travel booking plugin, woocommerce tour, woocommerce travel, wordpress travel, wp travel plugin, wp travel, wordpress travel booking plugin, wordpress tour plugin, tour booking plugin wordpress, wordpress travel agency, travel tour wordpress, wordpress tour, tour-booking, travel wp, travel wordpress, tour wp, travel wordpress, hotel wp, hotel wordpress, tour website, travel website, trip website
+Requires at least: 5.4
 Tested up to: 6.0.1
-Requires PHP: 7.1
-Stable tag: 2.1.0
-License: GPL-2.0+
-License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+Stable tag: 2.7.2
+Requires PHP: 7.2
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Ultimate hotel, tour & travel booking WooCommerce. Build your own travel agency website like Agoda, Airbnb, Hotels.com, Booking.com
 
@@ -15,21 +15,105 @@ Ultimate hotel, tour & travel booking WooCommerce. Build your own travel agency 
 = The easiest and fastest WooCommerce travel & hotel management by Tourfic | Build Your own travel agency website like Agoda, Airbnb, Booking.com =
 
 👉 Official Demo Link: [Tourfic Live Preview](https://tourfic.com)
+👉 Buy Pro Version: [Tourfic Pro](https://tourfic.com/pricing)
 👉 Video Guide: [Youtube Video](https://youtu.be/emXXlSYAl_Y)
-👉 Installation Guide: [Tourfic Shortcodes](https://themefic.com/docs/tourfic/shortcodes/)
+👉 Installation Guide: [Tourfic Documentation](https://themefic.com/docs/tourfic/)
 👉 Join Our FB Community: [Tourfic Facebook Group](https://www.facebook.com/groups/tourfic)
 
-= The ultimate WordPress tour management plugin for hotel booking, tour operator and travel agency websites =
+Tourfic is fully powered by WooCommerce, you can easily manage all your online Booking system along with order system and any payment of WooCommerce. Allow visitors to register account and booking online. To be precise, you can easily develop a website similar to Booking.com, Agoda, Hotels.com, Airbnb etc in no time with the help of Tourfic. This All-in-One Travel Booking plugin consists almost all the basic to advanced options which you may need for your WordPress based Travel website:
 
-Tourfic is designed to build your own professional tour operator website or travel agency website where you can efficiently list your hotels and resorts for booking along with receiving payments for each booking. 
+= Hotel Booking & Management System =
+* Add Unlimited Hotels
+* Add Unlimited Rooms (Up to 5 on Free Version)
+* Set room price by persons (Adult, Children) or by per room
+* Hotel Gallery, features, FAQs, T&C, etc
+* Room gallery and features
+* Dedicated hotel review system
+* Room availability check based on Ajax
+* Hotel wishlist functionality
+* Hotel Video (Pro)
+* Set room availability based on the date (Pro)
+* Set room price based on the date (Pro)
+* Set room number based on the date (Pro)
+* Hotel Listing with Google Map Integration (Pro)
 
-It is fully powered by WooCommerce, you can easily manage all your online Booking system along with order system and any payment of WooCommerce. Allow visitors to register account and booking online. To be precise, you can easily develop a website similar to Booking.com, Agoda, Hotels.com, Airbnb etc in no time with the help of Tourfic.
+= Tour Listing & Booking System =
+* Add Unlimited Tours
+* Tour Gallery, , features, include/exclude, itinerary, FAQs, T&C, etc
+* Tour video (Pro)
+* Set Tour Price by persons (Adult, Children, Infant) or group
+* Dedicated Tour review system
+* Tour wishlist functionality
+* Set tour availability for year-long or specific dates (Pro) or date ranges (Pro)
+* Set tour price globally or based on dates (Pro)
+* Set minimum/maximum person restrictions globally or based on dates (Pro)
+* Set tour time with dates (Pro)
+* Add extra services with tours (Pro)
+* Set minimum days before restrictions on tours booking (Pro)
 
+= Multi-Vendor Functions (Pro) =
+* Vendors can add unlimited hotels and tours with all the fields (Pro)
+* Vendors have dedicated order details pages (Pro)
+* Dedicated login and registration system for vendors (Pro)
+* Enable/disable specific vendors (Pro)
+* Email verification for vendors (Pro)
+* Frontend Dashboard for Vendors (Coming soon on Pro)
+
+= Search Function =
+* Separate or combined search box for hotels and tours
+* Ajax-based search box for hotels and tours
+* Ajax-based filter system
+
+= Wishlist =
+* Wishlist for hotels and tours
+* Wishlist page
+* Wishlist for logged in and log out users (Pro)
+
+= Review System =
+* Review System for hotels and tours
+* Enable/disable review
+* Change review fields
+* Delete old review fields
+* Review for logged in and log out users (Pro)
+
+= Available Shortcodes & Elementor Widgets =
+* Hotel Locations
+* Tour Destinations
+* Recent Hotel Slider
+* Recent Tour Slider
+* Search Form (Horizontal)
+* Search Result
+* Wishlist
+* Login Form (Pro)
+* Registration Form (Pro)
+
+= Booking data on Dashboard for Hotel/Tour = 
+* Order ID
+* Customer Details
+* Order Details
+* Order Date
+* Total Price
+* Status
+* Payment Method
+
+<strong>Demo Link </strong>
 > <strong><a href="https://tourfic.com" target="_blank">Check out the demo</a></strong> to see it in action!
 
-### How It works:
+Tourfic is the ultimate WordPress tour management plugin for hotel booking, tour operator and travel agency websites. It is designed to build your own professional tour operator website or travel agency website where you can efficiently list your hotels and resorts for booking along with receiving payments for each booking. 
 
-[youtube https://www.youtube.com/watch?v=emXXlSYAl_Y]
+<strong>Pro Version </strong>
+
+We believe the free version is good enough for most business. However, we have a **Pro version** of this plugin which has more advanced features as mentioned above.
+
+> <strong><a href="https://tourfic.com/pricing" target="_blank">Buy Tourfic Pro</a></strong>
+
+### How to create a Hotel Booking Website with WooCommerce  & Tourfic:
+
+[youtube https://www.youtube.com/watch?v=xeVkabWobDU]
+
+### How to create a Travel & Tour Booking Website with WooCommerce & Tourfic:
+
+[youtube https://www.youtube.com/watch?v=99jUEJQIxkg]
 
 **With Tourfic, You can:**
 - Quickly and easily build a professional website for your tour operator or travel agency;
@@ -73,63 +157,15 @@ Want to know all the latest news and be a part of the Tourfic community? Join ou
 
 <hr>
 
-### Features:
-
-Tourfic was built to help you with your tour booking needs. It comes with a lot of features that will help you manage your hotels and resorts easily. Here are the most important features of Tourfic:
-
-= Add Tour Plans/Hotels/Resorts =
-
- Tourfic is developed focusing to create a travel agency website easily. So, you can add your own tour plan or hotel or resorts through this plugin and have your customer book it. You can add rooms, Gallery, Location, FAQs and Terms & Conditions.
- 
-= Autocomplete search & Auto Suggestions =
-
-Whenever user types a destination on search, they will see autocomplete suggestions.
-
-= Multiple layout =
-
-Search result page has two built-in Preview layouts. List View and Grid View.
-
-= WooCommerce Support =
-
-Tourfic is fully powered by WooCommerce. You can easily manage all your online Booking system along with order system and any payment of WooCommerce. Allow visitors to register account and booking online.
-
-= Option Panel =
-
-Tourfic has built in easy-to-use option panel. You can add or remove any options from this panel. You can change post type slug, select search result page, add custom css through this panel.
-
-= Shortcode Support =
-
-Tourfic comes up with built-in awesome shortcode. With these, you can easily add it's features anywhere on the website you want. Check the shortcode section to find out more.
-
-= Other Features: =
-
-* **Unlimited Tours/Hotels:** You can create unlimited Tours/Hotels with Tourfic.
-
-* **Image Lightbox:** Image Lightbox on Single Tour page.
-
-* **Widget Support:** Tourfic comes up with built-in awesome widgets. With these, you can easily add it's features anywhere on the website through widget.
-
-* **Responsive and Touch Compatibility** : Tourfic is fully responsive and also supports touch on mobile devices.
-
-* **Awesome UI:** Easy and clean user interface
-
-* **Lightweight:** The plugin is so lightweight that it wonÃ¢â‚¬â„¢t impact much on your speed.
-
-* **Speed optimized:** Compatible with any lazy load plugins. It also works with WEBP images.
-
-* **SEO Friendly:** Support WP Image alt as image alt and title.
-
-* More Features Coming Soon...
-
 > <strong><a href="https://tourfic.com" target="_blank">Check out the demo</a></strong>
 
 <strong>Premium Support</strong>
 
-We provide full support on the WordPress.org forums. In addition, please feel free to post questions or bug reports through our <a href="https://www.facebook.com/groups/tourfic/" target="_blank">Facebook group</a> or <a href="https://themefic.com/contact/" target="_blank">Our Website</a>.
+We provide full support on the WordPress.org forums. In addition, please feel free to post questions or bug reports through our <a href="https://www.facebook.com/groups/tourfic/" target="_blank">Facebook group</a> or <a href="https://themefic.com/contact/" target="_blank">Our Website</a>. However, please note that, for free version’s support/replies, there can be delays upto 24-48 hours. So, if you need urgent support, we recommend purchasing <a href="https://tourfic.com/pricing">Pro Version</a>.
 
 <strong>Privacy Policy : </strong>
 
-This plugin doesnâ€™t collect/store any user related information.
+This plugin doesn’t collect/store any user related information.
 
 <strong>Credits</strong>
 
@@ -137,7 +173,7 @@ The icon and banner used on this plugin are taken from <a href="https://icons8.c
 
 <strong>Our Other Plugins</strong>
 
-* <a href="https://wordpress.org/plugins/beaf-before-and-after-gallery/">Ultimate Before After Image Slider & Gallery â€“ BEAF</a>
+* <a href="https://wordpress.org/plugins/beaf-before-and-after-gallery/">Ultimate Before After Image Slider & Gallery - BEAF</a>
 * <a href="https://wordpress.org/plugins/ultimate-addons-for-contact-form-7/">Ultimate Addons For Contact Form 7</a>
 * <a href="https://wordpress.org/plugins/instantio" target="_blank">Onepage / Direct Checkout for WooCommerce - Instantio</a>
 
@@ -176,32 +212,123 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Screenshots ==
 
-1. Search Bar with Heading and Description (Add anywhere with Shortcode)
-2. Featured Destination for Hotel (Shortcode based)
-3. Featured Hotels (Shortcode based)
-4. Featured Destination for Tours (Shortcode based)
-5. Featured Tours (Shortcode based)
-6. Search bar with Autocomplete feature
-7. Search Result page (list View)
-8. Search Result page (Grid View)
-9. Tourfic Widgets
-10. Single Hotel Page (1)
-11. Single Hotel Page (2)
-12. Hotel Page (Backend Options)
-13. Hotel Page (Backend Options)
-14. Single Tour Page (1)
-15. Single Tour Page (2)
-16. Tour Page (Backend Options)
-17. Tour Page (Backend Options)
+1. Tourfic Settings Panel
+2. Tourfic Settings Panel
+3. Tourfic Settings Panel
+4. Tourfic Settings Panel
+5. Tourfic Settings Panel
+6. Tourfic Settings Panel
+7. Tourfic Settings Panel
+8. Tourfic Settings Panel
+9. Tourfic Settings Panel
+10. Hotel / Tour Booking Data
+11. Hotel Option Panel
+12. Hotel Option Panel
+13. Hotel Option Panel
+14. Hotel Option Panel
+15. Hotel Option Panel
+16. Hotel Option Panel
+17. Tour Option Panel
+18. Tour Option Panel
+19. Tour Option Panel
+20. Tour Option Panel
+21. Tour Option Panel
+22. Tour Option Panel
+23. Tour Option Panel
+24. Tour Option Panel
+25. Tour Option Panel
 
 == Changelog ==
 
-= 2.7.2 - 23/07/2022 =
-* Compititable check
-* Cart pricing summary improved
-* Checkout summary improved
-* Per night price calculation issue fixed
+= 2.7.3 - 08/08/2022 =
 
+* Fixed: Responsive issue on tour
+* Fixed: Review validation message issue fixed on tours
+* Fixed: Review validation message issue fixed on hotels
+* Fixed: Tour Booking validation issue
+* Added: Linkedin and Pinterest share option
+* Added: Feature image required hotel and tours
+
+= 2.7.2 - 23/07/2022 =
+
+* Fixed: Per night pricing calculation
+* Fixed:  Tour Search from responsive issue fixed
+* Fixed: Pricing details cart and checkout
+* Added: Documentation link added to menu edit post widgets
+* Fixed: Partial payment notification (Pro)
+* Added: Hotel Single Room gallery (Pro)
+
+= 2.7.1 - 10/07/2022 =
+
+* Critical Fixed: Hotel Pricing calculation issue.
+* Added: Calendar translation strings
+* Fixed: Calendar date selection issue 
+* Updated: Compatibility check with WooCommerce 6.6.1
+
+= 2.6 - 22/06/2022 =
+
+* Critical Fixed: Hotel template path issue.
+* Added: You can set tour adult, child, infant price to no price using 00 in the field. 
+* Fixed: Minor CSS z-index issue. 
+
+= 2.5 - 15/06/2022 =
+
+* Added: Multiply hotel room pricing by night
+* Improved: Hotel/tour will be directly added to the WooCommerce cart/checkout
+* Removed: Dependency on WooCommerce products. No product will be created for hotel/tour booking.
+* Improved: All icons replaced with FontAwesome icons
+* Fixed: Single tour pricing display issue
+* Fixed: Several conditional bugs
+* Updated: Several translation strings
+* Removed: Some deprecated functions
+* Fixed: Some CSS bugs
+* Fixed: Elementor widget bugs
+
+= 2.4 - 21/05/2022 =
+
+* Critical: Fixed - Global settings were not saving
+* Updated: Compatibility check with WooCommerce 6.5.1
+
+= 2.3 - 28/04/2022 =
+
+* Added + Improved: 6 Elementor widgets
+* Added: Adult, children, infant prices will be shown on the single tour page
+* Added: Flatpickr calendar translations - Arabic, Bengali, German, Spanish (Spain), French (France), Hindi, Italian, Dutch, Russian, Chinese (China)
+* Fixed: Some shortcodes layouts & design
+* Fixed: Tour booking when group price is selected
+* Fixed: Cart Items will have hotels/tours URL
+* Fixed: Disable review section will also disable average review from showing on the single tour page
+* Improved: Placement change & design improved of average review rating on the single tour page
+* Improved: Order meta field label on thank you page and order details page
+* Updated: Flatpickr
+
+= 2.2 - 27/04/2022 =
+
+* Improved: Whole review system
+* Improved: Review frontend layout & design
+* Added: Auto publish review option
+* Added: Change review base rating to 5/10 star
+* Removed: Comments enable/disable don't control the review system
+* Fixed: Tour time validation check
+
+= 2.1.1.1 - 29/03/2022 =
+
+* Fixed: Compatibility issue with latest Elementor
+
+= 2.1.1 - 28/03/2022 =
+
+* Added: Tour location is required warning on tour publish/edit page.
+* Added: Permalink settings page on Global settings section
+* Fixed: Tour booking issue
+* Fixed: Tour description visibility issue
+* Fixed: Single tour hero section background position and size.
+* Fixed: Hotel room availability based on person number
+* Fixed: Hotel booking calendar minimum date set to today date
+* Fixed: Tour and hotel permalink structure
+* Fixed: Tour and hotel's terms and conditions auto paragraph issue
+* Fixed: Compatible issue with Twenty Twenty Two theme
+* Fixed: PHP variable error while booking through WooCommerce
+* Removed: Hotel gallery thumbnails
 
 = 2.1.0 - 18/03/2022 =
 
@@ -362,4 +489,3 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 == Upgrade Notice ==
 
 = 2.1.0 =
-This is a major update of Tourfic. To provide you with a better and improved experience for the coming days, we have completely revamped our options panel for the "Hotel" post type. After this update, your Hotel related data should be smoothly migrated from the old panel to the new panel. However, issues may arise on a few websites. In such cases, please contact our support and we will try to help further. We highly suggest backing up your data and testing the upgrade on a staging site before updating the plugin on live.
