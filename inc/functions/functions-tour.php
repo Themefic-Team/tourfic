@@ -906,8 +906,11 @@ if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-tour.php' ) ) {
  */
 function tf_filter_tour_by_date( $period, array &$not_found, array $data = [] ): void {
 
-    
-    [$adults, $child, $check_in_out, $startprice, $endprice] = $data;
+    if(isset($data[3]) && isset($data[4])){
+        [$adults, $child, $check_in_out, $startprice, $endprice] = $data;
+    }else{
+        [$adults, $child, $check_in_out] = $data;
+    }
     // Get tour meta options
     $meta = get_post_meta( get_the_ID(), 'tf_tours_option', true );
 
@@ -1039,8 +1042,13 @@ function tf_filter_tour_by_date( $period, array &$not_found, array $data = [] ):
 
         if ( !empty( $data ) ) {
 
-            [$adults, $child, $check_in_out, $startprice, $endprice] = $data;
-            tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+            if(isset($data[3]) && isset($data[4])){
+                [$adults, $child, $check_in_out, $startprice, $endprice] = $data;
+                tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+            }else{
+                [$adults, $child, $check_in_out] = $data;
+                tf_tour_archive_single_item( $adults, $child, $check_in_out );
+            }
 
         } else {
 

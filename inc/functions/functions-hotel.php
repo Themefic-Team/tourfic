@@ -1425,7 +1425,11 @@ function tf_hotel_archive_single_item($adults='', $child='', $room='', $check_in
 function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] ): void {
 
     // Form Data
+    if(isset($data[4]) && isset($data[5])){
     [$adults, $child, $room, $check_in_out, $startprice, $endprice] = $data;
+    }else{
+        [$adults, $child, $room, $check_in_out] = $data;
+    }
 
     // Get hotel meta options
     $meta = get_post_meta(get_the_ID(), 'tf_hotel', true);
@@ -1525,8 +1529,13 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
     if ( $has_hotel ) {
 
         if ( !empty( $data ) ) {
+            if(isset($data[4]) && isset($data[5])){
             [$adults, $child, $room, $check_in_out, $startprice, $endprice] = $data;
             tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
+            }else{
+                [$adults, $child, $room, $check_in_out] = $data;
+                tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out);
+            }
         } else {
             tf_hotel_archive_single_item();
         }
