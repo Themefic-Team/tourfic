@@ -7,7 +7,6 @@ if(!class_exists('TourPrice')){
     class Tour_Price {
 
         public $meta;
-
         function __construct($meta) {
         
             # Get tour type
@@ -215,7 +214,7 @@ if(!class_exists('TourPrice')){
                     if($discount_type == 'percent') {
                         $sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) , 1, '.', '' );
                     } else if($discount_type == 'fixed') {
-                        $sale_price = number_format( ( $price - $discounted_price ), 1, '.', '' );
+                        $sale_price = number_format( ( $price - $discounted_price ), 2, '.', '' );
                     }
 
                     # WooCommerce Price
@@ -233,15 +232,15 @@ if(!class_exists('TourPrice')){
                 
                     if($discount_type == 'percent') {
         
-                        $adult_price  ? $sale_adult_price  = number_format( $adult_price - (( $adult_price / 100 ) * $discounted_price) , 1, '.', '' ) : '';
-                        $child_price  ? $sale_child_price  = number_format( $child_price - (( $child_price / 100 ) * $discounted_price) , 1, '.', '' ) : '';
-                        $infant_price ? $sale_infant_price = number_format( $infant_price - (( $infant_price / 100 ) * $discounted_price) , 1, '.', '' ) : '';
+                        $adult_price  ? $sale_adult_price  = number_format( $adult_price - (( $adult_price / 100 ) * $discounted_price) , 2, '.', '' ) : '';
+                        $child_price  ? $sale_child_price  = number_format( $child_price - (( $child_price / 100 ) * $discounted_price) , 2, '.', '' ) : '';
+                        $infant_price ? $sale_infant_price = number_format( $infant_price - (( $infant_price / 100 ) * $discounted_price) , 2, '.', '' ) : '';
         
                     } else if($discount_type == 'fixed') {
         
-                        $adult_price  ? $sale_adult_price  = number_format( ( $adult_price - $discounted_price ), 1, '.', '' ) : '';
-                        $child_price  ? $sale_child_price  = number_format( ( $child_price - $discounted_price ), 1, '.', '' ) : '';
-                        $infant_price ? $sale_infant_price = number_format( ( $infant_price - $discounted_price ), 1, '.', '' ) : '';
+                        $adult_price  ? $sale_adult_price  = number_format( ( $adult_price - $discounted_price ), 2, '.', '' ) : '';
+                        $child_price  ? $sale_child_price  = number_format( ( $child_price - $discounted_price ), 2, '.', '' ) : '';
+                        $infant_price ? $sale_infant_price = number_format( ( $infant_price - $discounted_price ), 2, '.', '' ) : '';
         
                     }
 

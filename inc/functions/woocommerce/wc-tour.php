@@ -283,18 +283,18 @@ function tf_tours_booking_function() {
         # Calculate discounted price
         if ( $discount_type == 'percent' ) {
 
-            $adult_price    = number_format( $adult_price - (  ( $adult_price / 100 ) * $discounted_price ), 1 );
-            $children_price = number_format( $children_price - (  ( $children_price / 100 ) * $discounted_price ), 1 );
-            $infant_price   = number_format( $infant_price - (  ( $infant_price / 100 ) * $discounted_price ), 1 );
-            $group_price    = number_format( $group_price - (  ( $group_price / 100 ) * $discounted_price ), 1 );
+            $adult_price    = number_format( $adult_price - (  ( $adult_price / 100 ) * $discounted_price ), 2 );
+            $children_price = number_format( $children_price - (  ( $children_price / 100 ) * $discounted_price ), 2 );
+            $infant_price   = number_format( $infant_price - (  ( $infant_price / 100 ) * $discounted_price ), 2 );
+            $group_price    = number_format( $group_price - (  ( $group_price / 100 ) * $discounted_price ), 2 );
 
 
         } elseif ( $discount_type == 'fixed' ) {
 
-            $adult_price    = number_format(  ( $adult_price - $discounted_price ), 1 );
-            $children_price = number_format(  ( $children_price - $discounted_price ), 1 );
-            $infant_price   = number_format(  ( $infant_price - $discounted_price ), 1 );
-            $group_price    = number_format(  ( $group_price - $discounted_price ), 1 );
+            $adult_price    = number_format(  ( $adult_price - $discounted_price ), 2 );
+            $children_price = number_format(  ( $children_price - $discounted_price ), 2 );
+            $infant_price   = number_format(  ( $infant_price - $discounted_price ), 2 );
+            $group_price    = number_format(  ( $group_price - $discounted_price ), 2 );
 
 
         }
@@ -318,7 +318,7 @@ function tf_tours_booking_function() {
         # Deposit information
         tf_get_deposit_amount( $meta, $tf_tours_data['tf_tours_data']['price'], $deposit_amount, $has_deposit );
         if ( defined( 'TF_PRO' ) && $has_deposit == true && $make_deposit == true ) {
-            $tf_tours_data['tf_tours_data']['due']   = intval($tf_tours_data['tf_tours_data']['price'])  - $deposit_amount;
+            $tf_tours_data['tf_tours_data']['due']   = $tf_tours_data['tf_tours_data']['price']  - $deposit_amount;
             $tf_tours_data['tf_tours_data']['price'] = $deposit_amount;
         }
         // Add product to cart with the custom cart item data
