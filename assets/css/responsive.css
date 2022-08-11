@@ -368,6 +368,9 @@
     #tour-deposit .tf-tours-booking-deposit{
         height: auto !important;
     }
+    .tf-more-info{
+        width: 100% !important;
+    }
     
 }
 @media all and (max-width: 766px){
@@ -378,5 +381,8 @@
 @media all and (max-width: 540px){
     .tf-details-qc-slider-single .tf-details-qcs img{
         height: 300px;;
+    }
+    .tf-more-info .form-group.form-check{
+        width: 100% !important;
     }
 }
