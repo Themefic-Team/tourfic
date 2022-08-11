@@ -667,11 +667,14 @@ function tf_search_result_ajax_sidebar(){
     # Take dates for filter query
     $checkin = isset($_POST['checkin']) ? trim($_POST['checkin']) : null;
     $checkout = isset($_POST['checkout']) ? trim($_POST['checkout']) : null;
-    if(!empty($checkin) && !empty($checkout)) {
+    
+    list( $tf_form_start, $tf_form_end ) = explode( ' - ', $checkin );
+
+    if(!empty($checkin)) {
         $period = new DatePeriod(
-            new DateTime( $checkin ),
+            new DateTime( $tf_form_start ),
             new DateInterval( 'P1D' ),
-            new DateTime( $checkout . '23:59' )
+            new DateTime( $tf_form_end . '23:59' )
         );
     } else {
         $period = '';
@@ -763,18 +766,18 @@ function tf_search_result_ajax_sidebar(){
     }
 
     # Add meta if dates exists and post type is tours
-    if ( $checkin && $checkout && $posttype == ' tf_tours' ){
+    if ( $checkin && $posttype == ' tf_tours' ){
 
         $args['tax_query']['relation'] = $relation;
         $args['meta_query'] = array(
                 array(
                     'key'     => 'tf_tours_option',
-                    'value'   => str_replace( '-', '/', $checkin ),
+                    'value'   => str_replace( '-', '/', $tf_form_start ),
                     'compare' => 'LIKE',
                 ),
                 array(
                     'key'     => 'tf_tours_option',
-                    'value'   => str_replace( '-', '/', $checkout ),
+                    'value'   => str_replace( '-', '/', $tf_form_end ),
                     'compare' => 'LIKE',
                 ),
             );
