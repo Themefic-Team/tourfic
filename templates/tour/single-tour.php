@@ -108,9 +108,8 @@ if($tour_type == 'continuous' && $custom_avail == true) {
 
 # Get Pricing
 $tour_price = new Tour_Price($meta);
-echo "<pre>";
-var_dump($tour_price);
-echo "</pre>";
+
+
 ?>
 
 <div class="tf-page-wrapper">
@@ -196,9 +195,9 @@ echo "</pre>";
 
 									<div class="tf-price group-price">
 										<span class="sale-price">
-											<?php echo $tour_price->sale_group ? wc_price( $tour_price->sale_group ) : wc_price( $tour_price->group ); ?>
+											<?php echo $tour_price->wc_sale_group ?? $tour_price->wc_group; ?>
 										</span>
-										<?php echo ($discount_type != 'none') ? '<del>'.wc_price( $tour_price->group ).'</del>' : ''; ?>
+										<?php echo ($discount_type != 'none') ? '<del>'.$tour_price->wc_group.'</del>' : ''; ?>
 									</div>
 
 								<?php } elseif($pricing_rule == 'person') { ?>
@@ -207,27 +206,27 @@ echo "</pre>";
 
 										<div class="tf-price adult-price">
 											<span class="sale-price">
-												<?php echo $tour_price->sale_adult ? wc_price( $tour_price->sale_adult ) : wc_price( $tour_price->adult ); ?>
+												<?php echo $tour_price->wc_sale_adult ?? $tour_price->wc_adult; ?>
 											</span>
-											<?php echo ($discount_type != 'none') ? '<del>'.wc_price( $tour_price->adult ).'</del>' : ''; ?>
+											<?php echo ($discount_type != 'none') ? '<del>'.$tour_price->wc_adult.'</del>' : ''; ?>
 										</div>
 
 									<?php } if(!$disable_child && !empty($tour_price->child)) { ?>
 
 										<div class="tf-price child-price tf-d-n">
 											<span class="sale-price">
-												<?php echo $tour_price->sale_child ? wc_price( $tour_price->sale_child ) : wc_price( $tour_price->child ); ?>
+												<?php echo $tour_price->wc_sale_child ?? $tour_price->wc_child; ?>
 											</span>
-											<?php echo ($discount_type != 'none') ? '<del>'.wc_price( $tour_price->child ).'</del>' : ''; ?>
+											<?php echo ($discount_type != 'none') ? '<del>'.$tour_price->wc_child.'</del>' : ''; ?>
 										</div>
 
 									<?php } if(!$disable_infant && !empty($tour_price->infant)) { ?>
 
 										<div class="tf-price infant-price tf-d-n">
 											<span class="sale-price">
-												<?php echo $tour_price->sale_infant ? wc_price( $tour_price->sale_infant ) : wc_price( $tour_price->infant ); ?>
+												<?php echo $tour_price->wc_sale_infant ?? $tour_price->wc_infant; ?>
 											</span>
-											<?php echo ($discount_type != 'none') ? '<del>'.wc_price( $tour_price->infant ).'</del>' : ''; ?>
+											<?php echo ($discount_type != 'none') ? '<del>'.$tour_price->wc_infant.'</del>' : ''; ?>
 										</div>
 
 									<?php } ?>
