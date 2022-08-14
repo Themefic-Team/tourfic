@@ -169,17 +169,13 @@
                     var response = JSON.parse(data);
 
                     if (response.status == 'error') {
-                        var errorHtml = "";
 
                         if (response.errors) {
                             response.errors.forEach(function (text) {
-                                errorHtml += '<div class="woocommerce-error">' + text + '</div>';
+                                notyf.error(text);
                             });
                         }
 
-                        $('.tf_notice_wrapper').html(errorHtml).show();
-
-                        $("html, body").animate({ scrollTop: 0 }, 300);
                         return false;
                     } else {
 
@@ -311,17 +307,12 @@
                     var response = JSON.parse(data);
 
                     if (response.status == 'error') {
-                        var errorHtml = "";
-
+                        $.fancybox.close();
                         if (response.errors) {
                             response.errors.forEach(function (text) {
-                                errorHtml += '<div class="woocommerce-error">' + text + '</div>';
+                                notyf.error(text);
                             });
                         }
-
-                        $('.tf_notice_wrapper').html(errorHtml).show();
-
-                        $("html, body").animate({ scrollTop: 0 }, 300);
                         return false;
                     } else {
 
