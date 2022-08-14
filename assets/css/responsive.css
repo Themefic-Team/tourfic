@@ -378,6 +378,18 @@
         text-align: left;
     }
 }
+@media all and (max-width: 600px){
+    .tf-hero-bottom-content{
+        display: flow-root;
+    }
+    .tf-single-tour-pricing .tf-price{
+        justify-content: left;
+    }
+    .tf-single-tour-pricing{
+        width: 100%;
+        margin: 10px 0px;
+    }
+}
 @media all and (max-width: 540px){
     .tf-details-qc-slider-single .tf-details-qcs img{
         height: 300px;;
