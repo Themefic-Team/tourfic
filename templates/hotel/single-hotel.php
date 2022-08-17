@@ -184,12 +184,6 @@ $share_link = get_permalink($post_id);
                         <!-- End Share Section -->
                         <?php } ?>
 
-                        <?php if (!empty($map["address"])) { ?>
-                        <div class="show-on-map">
-                            <a href="https://www.google.com/maps/search/<?php echo $map["address"]; ?>" target="_blank"
-                                class="tf_button btn-outline button"><?php esc_html_e( 'Show on map', 'tourfic' ); ?></a>
-                        </div>
-                        <?php } ?>
                         <div class="reserve-button">
                             <a href="#rooms" class="tf_button button"><?php esc_html_e( 'Reserve', 'tourfic' ); ?></a>
                         </div>
@@ -565,7 +559,12 @@ $price = min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices 
                     </div>
                     <div style="display: none;" id="tf-hotel-google-maps">
                         <div class="tf-hotel-google-maps-container">
-                        <iframe src="https://maps.google.com/maps/place?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            <?php 
+                            if(!empty($map["address"])){ ?>
+                            <iframe src="https://maps.google.com/maps/place?q=<?php echo esc_attr( $map["address"] ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            <?php } else{ ?>
+                            <iframe src="https://maps.google.com/maps/place?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            <?php } ?>
                         </div>
                     </div>
                 <?php } ?>

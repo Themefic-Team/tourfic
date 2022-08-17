@@ -1172,8 +1172,14 @@
     margin: 0 !important;
     list-style: none;
     top: 100% !important;
+    height: 225px;
+    z-index: 99999;
+    overflow-y: scroll;
   }
   .tf_form-inner .tf-hotel-results #ui-id-1 li,
   .tf_form-inner .tf-hotel-results #ui-id-2 li{
     text-transform: capitalize;
+  }
+  .tf_tf_booking-widget-wrap{
+    z-index: 999;
   }
