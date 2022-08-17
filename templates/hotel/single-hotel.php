@@ -370,7 +370,7 @@ $price = min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices 
                                             <div class="room-detail-icon">
                                                 <span class="room-icon-wrap"><i
                                                         class="fas fa-ruler-combined"></i></span>
-                                                <span class="icon-text tf-d-b"><?php echo $footage; ?> sft</span>
+                                                <span class="icon-text tf-d-b"><?php echo $footage; ?> <?php _e( 'sft', 'tourfic' ); ?></span>
                                             </div>
                                             <div class="tf-top">
                                                 <?php _e( 'Room Footage', 'tourfic' ); ?>
