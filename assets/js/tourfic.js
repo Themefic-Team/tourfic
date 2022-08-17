@@ -382,6 +382,8 @@
             var room = $('#room').val();
             var children = $('#children').val();
             var checked = $('#check-in-out-date').val();
+            var startprice = $('#startprice').val();
+            var endprice = $('#endprice').val();
             // split date range into dates
             var checkedArr = checked.split(' to ');
             var checkin = checkedArr[0];
@@ -418,6 +420,8 @@
             formData.append('filters', filters);
             formData.append('features', features);
             formData.append('checked', checked);
+            formData.append('startprice', startprice);
+            formData.append('endprice', endprice);
 
             // abort previous request
             if (filter_xhr && filter_xhr.readyState != 4) {
