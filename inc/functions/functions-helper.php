@@ -59,8 +59,8 @@ function tf_tour_docs_callback(){
  */
 function tourfic_notice_wrapper() {
 	?>
-	<div class="tf_container">
-		<div class="tf_notice_wrapper"></div>
+	<div class="tf-container">
+		<div class="tf-notice-wrapper"></div>
 	</div>
 	<?php
 }

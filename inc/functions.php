@@ -491,7 +491,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     $ptype = $_GET['type'] ?? get_post_type();
                 ?>
             <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type" />
-            <button class="tf_button tf-submit"
+            <button class="tf_button tf-submit btn-styled"
                 type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' );?></button>
         </div>
     
@@ -610,7 +610,7 @@ function tf_archive_sidebar_search_form($post_type, $taxonomy='', $taxonomy_name
     
         <div class="tf_form-row">
             <input type="hidden" name="type" value="<?php echo $post_type; ?>" class="tf-post-type" />
-            <button class="tf_button tf-submit"
+            <button class="tf_button tf-submit btn-styled"
                 type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' );?></button>
         </div>
     
