@@ -548,7 +548,7 @@ $price = min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices 
             <div class="tf_sidebar">
                 <?php tf_hotel_sidebar_booking_form(); ?>
 
-                <?php if (defined( 'TF_PRO' ) && !empty($map["address"])) { ?>
+                <?php if (defined( 'TF_PRO' ) && ( !empty($map["address"]) || !empty($map["latitude"]) || !empty($map["longitude"]) )) { ?>
                     <div class="tf-hotel-location-preview">
                         <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                         
