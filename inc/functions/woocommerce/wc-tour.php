@@ -114,7 +114,7 @@ function tf_tours_booking_function() {
      * 
      */
     if($total_people==0){
-        $response['errors'][] = sprintf( __( 'Please Select Adults/Children/Infant required', 'tourfic' ));
+        $response['errors'][] =  __( 'Please Select Adults/Children/Infant required', 'tourfic' );
     }
 
     /**
@@ -234,10 +234,10 @@ function tf_tours_booking_function() {
 
     if ($tour_type == 'continuous') {
 
-        if ( $custom_avail == 0 && !empty($meta['allowed_time']) && empty($tour_time) ) {
+        if ( $custom_avail == false && !empty($meta['allowed_time']) && empty($tour_time) ) {
             $response['errors'][]  = __('Please select time', 'tourfic');
         }
-        if ($custom_avail == 1  && !empty($seasional_price[0]['allowed_time']) && empty($tour_time) ) {
+        if ($custom_avail == true  && !empty($seasional_price[0]['allowed_time']) && empty($tour_time) ) {
             $response['errors'][]  = __('Please select time', 'tourfic');
         }
     }
