@@ -104,29 +104,15 @@
 
             var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
             var post_id = $('input[name=post_id]').val();
-            if($(this).closest('.room-submit-wrap').find('input[name=room_id]').val()){
-                var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
-            }else{
-                var room_id = $("#hotel_roomid").val();
-            }
-            if($(this).closest('.room-submit-wrap').find('input[name=unique_id]').val()){
-                var unique_id = $(this).closest('.room-submit-wrap').find('input[name=unique_id]').val();
-            }else{
-                var unique_id = $("#hotel_room_uniqueid").val();
-            }
+            var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
+            var unique_id = $(this).closest('.room-submit-wrap').find('input[name=unique_id]').val();
             var location = $('input[name=place]').val();
             var adult = $('input[name=adult]').val();
             var child = $('input[name=child]').val();
             var check_in_date = $('input[name=check_in_date]').val();
             var check_out_date = $('input[name=check_out_date]').val();
-            if($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()){
-                var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
-                var deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
-            }else{
-                var room = $("#hotel_room_number").val();
-                var deposit = $("#hotel_room_depo").val();
-            }
-            var airport_service= $('.fancybox-slide #airport-service').val();
+            var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
+            var deposit = $('input[name=make_deposit]').is(':checked');
             
             var data = {
                 action: 'tf_hotel_booking',
@@ -140,8 +126,7 @@
                 check_in_date: check_in_date,
                 check_out_date: check_out_date,
                 room: room,
-                deposit: deposit,
-                airport_service: airport_service
+                deposit: deposit
             };
              
 
@@ -158,7 +143,7 @@
                         }
                     });
 
-                    $('.tf_notice_wrapper').html("").hide();
+                    $('.tf-notice-wrapper').html("").hide();
                 },
                 complete: function (data) {
                     $this.unblock();
@@ -177,7 +162,7 @@
                             });
                         }
 
-                        $('.tf_notice_wrapper').html(errorHtml).show();
+                        $('.tf-notice-wrapper').html(errorHtml).show();
 
                         $("html, body").animate({ scrollTop: 0 }, 300);
                         return false;
@@ -234,7 +219,7 @@
             dots: false,
             centerMode: false,
             variableWidth: false,
-        });
+        }); 
 
         sbp.on("click", function () {
             $(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickPrev');
@@ -243,6 +228,14 @@
         sbn.on("click", function () {
             $(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickNext');
         });
+
+        /**
+         * Recent Hotel - Tour
+         * 
+         * Slick
+         */
+
+
 
         /**
          * Scroll to room reserve table
@@ -256,6 +249,15 @@
         //###############################
         //         Tour                 #
         //###############################
+
+         /**
+         * Scroll to Tour Review Section
+         */
+          $(".tf-top-review a").click(function () {
+            $('html, body').animate({
+                scrollTop: $("#tf-review").offset().top - 32
+            }, 1000);
+        });
         
         /**
          * Ajax tour booking
@@ -300,7 +302,7 @@
                         }
                     });
 
-                    $('.tf_notice_wrapper').html("").hide();
+                    $('.tf-notice-wrapper').html("").hide();
                 },
                 complete: function (data) {
                     $this.unblock();
@@ -319,7 +321,7 @@
                             });
                         }
 
-                        $('.tf_notice_wrapper').html(errorHtml).show();
+                        $('.tf-notice-wrapper').html(errorHtml).show();
 
                         $("html, body").animate({ scrollTop: 0 }, 300);
                         return false;
@@ -554,23 +556,16 @@
         /**
          * Toggle FAQ
          */
-        $('.faq-head').click(function (e) {
-            $(this).parent().toggleClass('active').find('.faq-content').slideToggle('fast');
-        });
-
-        /**
-         * Toggle Itinerary
-         */
-         $('.itinerary-head').on('click', function (e) {
-            $(this).parent().toggleClass('active').find('.itinerary-content').slideToggle('fast');
-        });
+        //$('.faq-head').click(function (e) {
+           // $(this).parent().toggleClass('active').find('.faq-content').slideToggle('fast');
+        //});
 
         /**
          * Related Tour
          * 
          * Slick
          */
-        $('.tf-suggestion-items-wrapper').slick({
+        $('.tf-slider-items-wrapper').slick({
             dots: true,
             arrows: false,
             infinite: true,
@@ -1167,8 +1162,6 @@
 
         });
 
-       
-
         /**
          * Mixed
          */
@@ -1240,20 +1233,38 @@
              });
          });
          // End Feed Click Trigger
- 
-         $(".tf-travel-text h4").click(function(){
-             $(this).siblings('.tf-travel-contetn').slideToggle();
-             $(this).parents('.tf-travel-itinerary-item').siblings().find('.tf-travel-contetn').slideUp();
-         });
-         $(".tf-faq-title").click(function(){
-             $(this).siblings('.tf-faq-desc').slideToggle();
-             $(this).parents('.tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
-         });
+
+         // Itinerary Accordion
+         $('.tf-accordion-head').click(function(){
+            $(this).toggleClass('active');
+            $(this).parent().find('.arrow').toggleClass('arrow-animate');
+            $(this).parent().find('.tf-accordion-content').slideToggle();
+            $(this).parents('#tf-accordion-wrapper').siblings().find('.tf-accordion-content').slideUp();
+          });
+          
+        // $(".tf-travel-text h4").click(function(){
+           //  $(this).parent().find('.tf-arrow').toggleClass('tf-arrow-animate');
+          //   $(this).siblings('.tf-travel-content').slideToggle();
+          //   $(this).parents('.tf-travel-itinerary-item').siblings().find('.tf-travel-content').slideUp();
+         //});
+
+         // FAQ Accordion
+         $('.tf-faq-title').click(function(){
+            $(this).toggleClass('active');
+            $(this).parent().find('.arrow').toggleClass('arrow-animate');
+            $(this).parent().find('.tf-faq-desc').slideToggle();
+            $(this).parents('#tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
+          });
+
+         //$(".tf-faq-title").click(function(){
+             //$(this).siblings('.tf-faq-desc').slideToggle();
+            // $(this).parents('.tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
+         //});
  
          
-         $(".tf-header-menu-triger").click(function(){
-             $('.tf-header-menu-wrap').slideToggle();
-         });
+         //$(".tf-header-menu-triger").click(function(){
+           //  $('.tf-header-menu-wrap').slideToggle();
+         //});
 
         
     });

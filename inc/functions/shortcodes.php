@@ -179,60 +179,30 @@ function tf_recent_hotel_shortcode( $atts, $content = null ){
                 ?>
             </div>
 
-            <div class="tf-slider-wrapper">
-                <div id="<?php echo $thisid; ?>" class="tf-slider-inner">
-                    <?php while ( $hotel_loop->have_posts() ) : $hotel_loop->the_post(); ?>
-                        <div class="tf-single">
-                            <a href="<?php the_permalink(); ?>">
-                            <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
-                              <div class="tf-single-meta">
-                                  <p class="tf-title"><?php the_title(); ?></p>
-                              </div>
-                            </a>
+            <div class="tf-slider-items-wrapper">
+                <?php while ( $hotel_loop->have_posts() ) {
+                    $hotel_loop->the_post();
+                                $post_id                = get_the_ID();
+                                $related_comments_hotel       = get_comments( array( 'post_id' => $post_id ) );
+                    ?>
+                    <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                        <div class="tf-slider-content">
+                            <div class="tf-slider-desc">
+                                <h3>
+                                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+                                </h3>
+                                <?php if ($related_comments_hotel) { ?>
+                                    <div class="tf-slider-rating-star">
+                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating($related_comments_hotel); ?></span>
+                                    </div>											
+								<?php }?>
+                                <p><?php echo wp_trim_words(get_the_content(), 10); ?></p>
+                            </div>
                         </div>
-                    <?php endwhile; ?>
-                </div>
+                    </div>
+                <?php }	?>
             </div>
         </div>
-
-    <script>
-        jQuery(document).ready(function() {
-            jQuery('#<?php echo $thisid; ?>').not('.slick-initialized').slick({
-        dots: false,
-        infinite: true,
-        slidesToShow: <?php echo $slidestoshow; ?>,
-        slidesToScroll: 1,
-        autoplay:true,
-        //autoplaySpeed:2500,
-        arrows:false,
-        adaptiveHeight: false,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
-        ]
-
-                });
-            });
-        </script>
     <?php endif;
     wp_reset_postdata(); ?>
 
@@ -268,13 +238,13 @@ function tf_recent_tour_shortcode( $atts, $content = null ){
 
     ob_start();
 
-    $hotel_loop = new WP_Query( $args );
+    $tour_loop = new WP_Query( $args );
 
     // Generate an Unique ID
     $thisid = uniqid('tfpopular_');
 
     ?>
-    <?php if ( $hotel_loop->have_posts() ) : ?>
+    <?php if ( $tour_loop->have_posts() ) : ?>
         <div class="tf-widget-slider recent-tour-slider">
             <div class="tf-heading">
                 <?php
@@ -287,60 +257,32 @@ function tf_recent_tour_shortcode( $atts, $content = null ){
                 ?>
             </div>
 
-            <div class="tf-slider-wrapper">
-                <div id="<?php echo $thisid; ?>" class="tf-slider-inner">
-                    <?php while ( $hotel_loop->have_posts() ) : $hotel_loop->the_post(); ?>
-                        <div class="tf-single">
-                            <a href="<?php the_permalink(); ?>">
-                            <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
-                              <div class="tf-single-meta">
-                                  <p class="tf-title"><?php the_title(); ?></p>
-                              </div>
-                            </a>
+
+            <div class="tf-slider-items-wrapper">
+                <?php while ( $tour_loop->have_posts() ) { 
+                    $tour_loop->the_post();
+                                $post_id                = get_the_ID();
+                                $related_comments       = get_comments( array( 'post_id' => $post_id ) );
+                        ?>
+                    <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                        <div class="tf-slider-content">
+                            <div class="tf-slider-desc">
+                                <h3>
+                                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>  
+                                </h3>
+                                <?php if ($related_comments) { ?>
+                                    <div class="tf-slider-rating-star">
+                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating($related_comments); ?></span>
+                                    </div>											
+								<?php }?>	
+                                <p><?php echo wp_trim_words(get_the_excerpt(), 10); ?></p>
+                                
+                            </div>
                         </div>
-                    <?php endwhile; ?>
-                </div>
+                    </div>
+                <?php }	?>
             </div>
         </div>
-
-    <script>
-        jQuery(document).ready(function() {
-            jQuery('#<?php echo $thisid; ?>').not('.slick-initialized').slick({
-        dots: false,
-        infinite: true,
-        slidesToShow: <?php echo $slidestoshow; ?>,
-        slidesToScroll: 1,
-        autoplay:true,
-        //autoplaySpeed:2500,
-        arrows:false,
-        adaptiveHeight: true,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
-        ]
-
-                });
-            });
-        </script>
     <?php endif;
     wp_reset_postdata(); ?>
 

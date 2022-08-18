@@ -306,7 +306,7 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
 
                 <div class="tf_submit-wrap">
                     <input type="hidden" name="type" value="tf_tours" class="tf-post-type"/>
-                    <button class="tf_button tf-submit tf-tours-btn" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
+                    <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
                 </div>
 
             </div>
@@ -594,7 +594,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
                 <?php if ( defined( 'TF_PRO' ) && $tour_extras ) { ?>
                 <div class="tour-extra">
-                    <a data-fancybox data-src="#tour-extra" href="javascript:;"><i class="far fa-plus-square"></i></a>
+                    <a data-fancybox data-src="#tour-extra" href="javascript:;"><i class="far fa-plus-square"></i>Tour Extras</a>
                     <div style="display: none;" id="tour-extra">
                         <div class="tour-extra-container">
                         <?php foreach( $tour_extras as $tour_extra ){ ?>
@@ -617,7 +617,7 @@ function tf_single_tour_booking_form( $post_id ) {
                     <input type="hidden" name="location" value="">
                     <input type="hidden" name="deposit" value="0">
 	                <?php if ( defined( 'TF_PRO' ) && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] )) { ?>
-                        <a data-fancybox class="tf_button" data-src="#tour-deposit" href="javascript:;"><?php _e('Book Now', 'tourfic'); ?></a>
+                        <div class="tf-btn"><a data-fancybox class="tf_button btn-styled" data-src="#tour-deposit" href="javascript:;"><?php _e('Book Now', 'tourfic'); ?></a></div>
                         <div style="display: none;" id="tour-deposit">
                             <div class="tf-tours-booking-deposit">
                                 <div class="tf-tours-booking-deposit-text">
@@ -629,13 +629,15 @@ function tf_single_tour_booking_form( $post_id ) {
                                         <span><?php echo $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%'; ?> </span>
                                 </div>
                                 <div class="tf_button_group">
-                                    <button class="tf_button" type="submit" data-deposit="false"><?php _e(tfopt('deposit-full-payment','Pay full amount'), 'tourfic'); ?></button>
-                                    <button class="tf_button" type="submit" data-deposit="true"><?php _e(tfopt('deposit-payment','Make a deposit'), 'tourfic'); ?></button>
+                                    <button class="tf_button btn-styled" type="submit" data-deposit="false"><?php _e(tfopt('deposit-full-payment','Pay full amount'), 'tourfic'); ?></button>
+                                    <button class="tf_button btn-styled" type="submit" data-deposit="true"><?php _e(tfopt('deposit-payment','Make a deposit'), 'tourfic'); ?></button>
                                 </div>
                             </div>
                         </div>
                     <?php } else { ?>
-                        <button class="tf_button" type="submit"><?php _e('Book Now', 'tourfic'); ?></button>
+                        <div class="tf-btn">
+                            <button class="tf_button btn-styled" type="submit"><?php _e('Book Now', 'tourfic'); ?></button>
+                        </div>
                     <?php } ?>
                 </div>
             </form>
@@ -671,8 +673,7 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='') {
 
     // get post id
     $post_id = get_the_ID();
-    //Get hotel meta values
-    $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+    
     // Location
     $location  = !empty($meta['text_location']) ? $meta['text_location'] : '';
     // Featured
@@ -720,9 +721,9 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='') {
 						</div>
 						<?php
                         if($location) {
-                            echo '<div class="tf_map-link">';
+                            echo '<div class="tf-map-link">';
                             echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' .$location. '</span>';
-                            echo '</div>';
+                            echo '</div>'; 
                         }
                         ?>
 					</div>

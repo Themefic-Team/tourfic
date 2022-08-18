@@ -1,9 +1,9 @@
 === Travel and Hotel Booking Solution for WooCommerce - Tourfic ===
-Contributors: fida02, themefic, mdshuvo, kamrul0424, hasanet, jahidcse
+Contributors: fida02, themefic, devkabir, mdshuvo, codexa, kamrul0424, raihan143, hasanet
 Tags: tour booking, tour operator, travel, tour, trip, travel-booking, travel agency, hotel booking, reservation, hotel, booking engine, booking, booking calendar, booking system, calendar, online booking, travel, airbnb, booking.com, homeaway, apartments, villa, hostel, reservation system, travel itinerary, trekking, tour itinerary, travel booking engine, tour accommodation listings, travel destinations, trip book, travel payment, woocommerce tour booking, woocommerce travel booking plugin, woocommerce tour, woocommerce travel, wordpress travel, wp travel plugin, wp travel, wordpress travel booking plugin, wordpress tour plugin, tour booking plugin wordpress, wordpress travel agency, travel tour wordpress, wordpress tour, tour-booking, travel wp, travel wordpress, tour wp, travel wordpress, hotel wp, hotel wordpress, tour website, travel website, trip website
 Requires at least: 5.4
-Tested up to: 6.0.1
-Stable tag: 2.7.2
+Tested up to: 6.0
+Stable tag: 3.7.2
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -239,15 +239,6 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 25. Tour Option Panel
 
 == Changelog ==
-
-= 2.7.3 - 08/08/2022 =
-
-* Fixed: Responsive issue on tour
-* Fixed: Review validation message issue fixed on tours
-* Fixed: Review validation message issue fixed on hotels
-* Fixed: Tour Booking validation issue
-* Added: Linkedin and Pinterest share option
-* Added: Feature image required hotel and tours
 
 = 2.7.2 - 23/07/2022 =
 

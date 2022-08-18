@@ -110,14 +110,6 @@ function tf_tours_booking_function() {
     $tour_extra_title = !empty( $_POST['tour_extra_title'] ) ? str_replace(',', ', ', sanitize_text_field( $_POST['tour_extra_title'] )) : '';
 
     /**
-     * People 0 number validation
-     * 
-     */
-    if($total_people==0){
-        $response['errors'][] = sprintf( __( 'Please Select Adults/Children/Infant required', 'tourfic' ));
-    }
-
-    /**
      * People number validation
      * 
      */

@@ -45,9 +45,15 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         $min_css = !empty(tfopt( 'css_min' )) ? '.min' : '';
 		$min_js = !empty(tfopt( 'js_min' )) ? '.min' : '';
 
-        wp_enqueue_style( 'tourfic-styles', TF_ASSETS_URL . 'css/tourfic-styles.css', null, '' );
+        //wp_enqueue_style( 'tourfic-styles', TF_ASSETS_URL . 'css/old/tourfic-styles.css', null, '' );
+        //wp_enqueue_style( 'tf-style', TF_ASSETS_URL . 'css/old/style.css', null, '' );
 
-        wp_enqueue_style( 'tf-style', TF_ASSETS_URL . 'css/style.css', null, '' );
+        //Updated CSS
+        wp_enqueue_style( 'tf-common-style', TF_ASSETS_URL . 'css/common.css', null, '' );
+        wp_enqueue_style( 'tf-hotel-style', TF_ASSETS_URL . 'css/hotel.css', null, '' );
+        wp_enqueue_style( 'tf-tour-style', TF_ASSETS_URL . 'css/tour.css', null, '' );
+        wp_enqueue_style( 'tf-search-style', TF_ASSETS_URL . 'css/search-result.css', null, '' );
+        wp_enqueue_style( 'tf-shortcode-style', TF_ASSETS_URL . 'css/shortcode.css', null, '' );
 
         /**
          * Flatpickr
@@ -119,7 +125,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         /**
          * Custom
          */       
-        wp_enqueue_style( 'tourfic', TF_ASSETS_URL . 'css/tourfic' . $min_css . '.css', '', TOURFIC );
+        //wp_enqueue_style( 'tourfic', TF_ASSETS_URL . 'css/old/tourfic' . $min_css . '.css', '', TOURFIC );
         wp_enqueue_script( 'tourfic', TF_ASSETS_URL . 'js/tourfic' . $min_js . '.js', '', TOURFIC, true );
         wp_localize_script( 'tourfic', 'tf_params',
             array(
@@ -140,10 +146,9 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'infant' => __('Infant', 'tourfic'),
                 'room' => __('Room', 'tourfic'),
                 'sending_ques' => __('Sending your question...', 'tourfic'),
-                'user_auth' => is_user_logged_in(),
             )
         );
-        wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/responsive.css', '', TOURFIC );
+        //wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/old/responsive.css', '', TOURFIC );
 
         /**
          * Inline scripts

@@ -13,17 +13,17 @@ $taxonomy_slug = $term->slug;
 $max = '8';
 ?>
 
-<div class="tourfic-wrap" data-fullwidth="true">
+<div class="tf-main-wrapper" data-fullwidth="true">
 	<?php do_action( 'tf_before_container' ); ?>
-	<div class="tf_container">
+	<div class="tf-container">
 		<h3><?php echo $taxonomy_name; ?></h3>
-		<div class="tf_row">
+		<div class="search-result-inner">
 
-			<div class="tf_content">
+			<div class="tf-search-left">
 				<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
 			</div>
 
-			<div class="tf_sidebar">
+			<div class="tf-search-right">
 				<?php tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
 			</div>
 

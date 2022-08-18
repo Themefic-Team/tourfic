@@ -50,7 +50,7 @@ function tf_review_script() {
                     errorElement: "span",
                     errorPlacement: function(error, element) {
                         if (element.is(":radio")) {
-                            error.appendTo(element.parents(".tf-form-single-rating"));
+                            error.appendTo(element.parents(".tf-single-rating"));
                         } else { // This is the default behavior
                             error.insertAfter(element);
                         }
@@ -419,10 +419,13 @@ function tf_archive_single_rating() {
         ob_start();
         ?>
         
-        <div class="tf-archive-rating">
-            <span> 
-                <?php _e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
-            </span>
+        <div class="tf-archive-rating-wrapper">
+            <div class="tf-archive-rating">
+                <span>
+                    <?php _e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
+                </span>
+            </div>
+            <h6><?php tf_based_on_text(count($comments)); ?></h6>
         </div>
 
         <?php

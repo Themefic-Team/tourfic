@@ -255,231 +255,6 @@ if ( !function_exists( 'get_hotel_locations' ) ) {
     }
 }
 
-
-
-#################################
-# Air port Service Price        #
-#################################
-
-add_action( 'wp_ajax_tf_hotel_airport_service_price', 'tf_hotel_airport_service_callback' );
-add_action( 'wp_ajax_nopriv_tf_hotel_airport_service_price', 'tf_hotel_airport_service_callback' );
-
-function tf_hotel_airport_service_callback(){
-
-$meta = get_post_meta( sanitize_key( $_POST['id'] ), 'tf_hotel', true );
-$airport_service  = !empty($meta['airport_service']) ? $meta['airport_service'] : '';
-
-if(1==$airport_service){ 
-    
-    $post_id   = isset( $_POST['id'] ) ? intval( sanitize_text_field( $_POST['id'] ) ) : null;
-    $room_id   = isset( $_POST['roomid'] ) ? intval( sanitize_text_field( $_POST['roomid'] ) ) : null;
-    $adult         = isset( $_POST['hoteladult'] ) ? intval( sanitize_text_field( $_POST['hoteladult'] ) ) : '0';
-    $child         = isset( $_POST['hotelchildren'] ) ? intval( sanitize_text_field( $_POST['hotelchildren'] ) ) : '0';
-    $room_selected = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
-    $check_in      = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
-    $check_out     = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
-    $deposit     = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
-
-
-    # Calculate night number
-    if($check_in && $check_out) {
-        $check_in_stt   = strtotime( $check_in . ' +1 day' );
-        $check_out_stt  = strtotime( $check_out );
-        $day_difference = round(  (  ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1 );
-    }
-    
-    
-    $meta          = get_post_meta( $post_id, 'tf_hotel', true );
-    $rooms         = !empty( $meta['room'] ) ? $meta['room'] : '';
-
-    $avail_by_date = !empty( $rooms[$room_id]['avil_by_date'] ) && $rooms[$room_id]['avil_by_date'];
-    if ( $avail_by_date ) {
-        $repeat_by_date = !empty( $rooms[$room_id]['repeat_by_date'] ) ? $rooms[$room_id]['repeat_by_date'] : [];
-    }
-    
-    $pricing_by      = $rooms[$room_id]['pricing-by'];
-    $price_multi_day = !empty( $rooms[$room_id]['price_multi_day'] ) ? $rooms[$room_id]['price_multi_day'] : false;
-   
-
-    /**
-     * Calculate Pricing
-     */
-    if ( $avail_by_date && defined( 'TF_PRO' ) ) {
-        
-        // Check availability by date option
-        $period = new DatePeriod(
-            new DateTime( $check_in . ' 00:00' ),
-            new DateInterval( 'P1D' ),
-            new DateTime( $check_out . ' 00:00' )
-        );
-        
-        $total_price = 0;
-        foreach ( $period as $date ) {
-                    
-        $available_rooms = array_values( array_filter( $repeat_by_date, function ($date_availability ) use ( $date ) {
-            $date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
-            $date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
-            return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
-        } ) );
-
-        if ( is_iterable($available_rooms) && count( $available_rooms ) >=1) {                    
-            $room_price    = !empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $rooms[$room_id]['price'];
-            $adult_price   = !empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $rooms[$room_id]['adult_price'];
-            $child_price   = !empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $rooms[$room_id]['child_price'];
-            $total_price += $pricing_by == '1' ? $room_price : (  ( $adult_price * $adult ) + ( $child_price * $child ) );
-            
-        } ;
-            
-        } 
-        
-        $price_total = $total_price*$room_selected;
-    } else {
-
-        if ( $pricing_by == '1' ) {
-            $total_price = $rooms[$room_id]['price'];
-            
-        } elseif ( $pricing_by == '2' ) {
-            $adult_price = $rooms[$room_id]['adult_price'];
-            $adult_price = $adult_price * $adult;
-            $child_price = $rooms[$room_id]['child_price'];
-            $child_price = $child_price * $child;
-            $total_price = $adult_price + $child_price;    
-            
-        }
-
-        # Multiply pricing by night number
-        if(!empty($day_difference) && $price_multi_day == true) {
-            $price_total = $total_price*$room_selected*$day_difference;
-        } else {
-            $price_total = $total_price*$room_selected;
-        }
-
-    }
-
-    if($deposit=="true"){
-        tf_get_deposit_amount($rooms[$room_id], $price_total, $deposit_amount, $has_deposit);
-        if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount) ) {
-            $deposit_amount;
-        }
-    }
-
-if("pickup"==$_POST['service_type']){
-    $airport_pickup_price  = !empty($meta['airport_pickup_price']) ? $meta['airport_pickup_price'] : '';
-    if("per_person"==$airport_pickup_price['airport_pickup_price_type']){
-        $service_fee = (sanitize_key($_POST['hoteladult'])*$airport_pickup_price['airport_service_fee_adult']) + (sanitize_key($_POST['hotelchildren'])*$airport_pickup_price['airport_service_fee_children']);
-        if(sanitize_key( $_POST['hotelchildren'] ) != 0){
-            echo "<span>Airport Pickup Fee Adult ( ". sanitize_key( $_POST['hoteladult'] ) ." × ". wc_price($airport_pickup_price['airport_service_fee_adult']). " ) + Child ( " . sanitize_key( $_POST['hotelchildren'] ) ." × ". wc_price($airport_pickup_price['airport_service_fee_children'])." ) : <b>".wc_price($service_fee)."</b></span></br>";
-        }else{
-            echo "<span>Airport Pickup Fee Adult ( ". sanitize_key( $_POST['hoteladult'] ) ." × ". wc_price($airport_pickup_price['airport_service_fee_adult'])." ) : <b>".wc_price($service_fee)."</b></span></br>";
-        }
-        if($deposit=="true"){
-            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)." + ".wc_price($service_fee)."</b></span></br>";
-            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
-        }else{
-            echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
-        }
-    }
-    if("fixed"==$airport_pickup_price['airport_pickup_price_type']){
-        $service_fee = $airport_pickup_price['airport_service_fee_fixed'];
-        echo "<span>Airport Pickup Fee (Fixed): <b>".wc_price($service_fee)."</b></span></br>";
-        if($deposit=="true"){
-            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)." + ".wc_price($service_fee)."</b></span></br>";
-            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
-        }else{
-            echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
-        }
-    }
-    if("free"==$airport_pickup_price['airport_pickup_price_type']){
-        echo "<span>Airport Pickup Fee: <b>Free</b></span></br>";
-        if($deposit=="true"){
-            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)."</b></span></br>";
-            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
-        }else{
-            echo "<span>Total Payable Amount : <b>".wc_price($price_total)."</b></span>";
-        }
-    }
-}
-if("dropoff"==$_POST['service_type']){
-    $airport_dropoff_price  = !empty($meta['airport_dropoff_price']) ? $meta['airport_dropoff_price'] : '';
-    if("per_person"==$airport_dropoff_price['airport_pickup_price_type']){
-        $service_fee = (sanitize_key($_POST['hoteladult'])*$airport_dropoff_price['airport_service_fee_adult']) + (sanitize_key($_POST['hotelchildren'])*$airport_dropoff_price['airport_service_fee_children']);
-        if(sanitize_key( $_POST['hotelchildren'] ) != 0){
-            echo "<span>Airport Dropoff Fee Adult ( ". sanitize_key( $_POST['hoteladult'] ) ." × ". wc_price($airport_dropoff_price['airport_service_fee_adult']). " ) + Child ( " . sanitize_key( $_POST['hotelchildren'] ) ." × ". wc_price($airport_dropoff_price['airport_service_fee_children'])." ) : <b>".wc_price($service_fee)."</b></span></br>";
-        }else{
-            echo "<span>Airport Dropoff Fee Adult ( ". sanitize_key( $_POST['hoteladult'] ) ." × ". wc_price($airport_dropoff_price['airport_service_fee_adult'])." ) : <b>".wc_price($service_fee)."</b></span></br>";
-        }
-        if($deposit=="true"){
-            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)." + ".wc_price($service_fee)."</b></span></br>";
-            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
-        }else{
-            echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
-        }
-    }
-    if("fixed"==$airport_dropoff_price['airport_pickup_price_type']){
-        $service_fee = $airport_dropoff_price['airport_service_fee_fixed'];
-        echo "<span>Airport Dropoff Fee (Fixed): <b>".wc_price($service_fee)."</b></span></br>";
-        if($deposit=="true"){
-            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)." + ".wc_price($service_fee)."</b></span></br>";
-            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
-        }else{
-            echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
-        }
-    }
-    if("free"==$airport_dropoff_price['airport_pickup_price_type']){
-        echo "<span>Airport Dropoff Fee: <b>Free</b></span></br>";
-        if($deposit=="true"){
-            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)."</b></span></br>";
-            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
-        }else{
-            echo "<span>Total Payable Amount : <b>".wc_price($price_total)."</b></span>";
-        }
-    }
-}
-if("both"==$_POST['service_type']){
-    $airport_pickup_dropoff_price  = !empty($meta['airport_pickup_dropoff_price']) ? $meta['airport_pickup_dropoff_price'] : '';
-    if("per_person"==$airport_pickup_dropoff_price['airport_pickup_price_type']){
-        $service_fee = (sanitize_key($_POST['hoteladult'])*$airport_pickup_dropoff_price['airport_service_fee_adult']) + (sanitize_key($_POST['hotelchildren'])*$airport_pickup_dropoff_price['airport_service_fee_children']);
-        if(sanitize_key( $_POST['hotelchildren'] ) != 0){
-            echo "<span>Airport Pickup & Dropoff Fee Adult ( ". sanitize_key( $_POST['hoteladult'] ) ." × ". wc_price($airport_pickup_dropoff_price['airport_service_fee_adult']). " ) + Child ( " . sanitize_key( $_POST['hotelchildren'] ) ." × ". wc_price($airport_pickup_dropoff_price['airport_service_fee_children'])." ) : <b>".wc_price($service_fee)."</b></span></br>";
-        }else{
-            echo "<span>Airport Pickup & Dropoff Fee Adult ( ". sanitize_key( $_POST['hoteladult'] ) ." × ". wc_price($airport_pickup_dropoff_price['airport_service_fee_adult'])." ) : <b>".wc_price($service_fee)."</b></span></br>";
-        }
-        if($deposit=="true"){
-            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)." + ".wc_price($service_fee)."</b></span></br>";
-            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
-        }else{
-            echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
-        }
-        
-    }
-    if("fixed"==$airport_pickup_dropoff_price['airport_pickup_price_type']){
-        $service_fee = $airport_pickup_dropoff_price['airport_service_fee_fixed'];
-        echo "<span>Airport Pickup & Dropoff Fee (Fixed): <b>".wc_price($service_fee)."</b></span></br>";
-
-        if($deposit=="true"){
-            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)." + ".wc_price($service_fee)."</b></span></br>";
-            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
-        }else{
-            echo "<span>Total Payable Amount : <b>".wc_price($price_total+$service_fee)."</b></span>";
-        }
-    }
-    if("free"==$airport_pickup_dropoff_price['airport_pickup_price_type']){
-        echo "<span>Airport Pickup & Dropoff Fee: <b>Free</b></span></br>";
-        if($deposit=="true"){
-            echo "<span>Due Amount : <b>".wc_price($price_total-$deposit_amount)."</b></span></br>";
-            echo "<span>Total Payable Amount : <b>".wc_price($deposit_amount)."</b></span>";
-        }else{
-            echo "<span>Total Payable Amount : <b>".wc_price($price_total)."</b></span>";
-        }
-    }
-}
-
-}
-wp_die();    
-}
-
-
-
 #################################
 # Ajax functions                #
 #################################
@@ -522,15 +297,13 @@ function tf_room_availability_callback() {
     ob_start();
     ?>
 
-    <div class="listing-title">
-        <h4><?php esc_html_e( 'Availability', 'tourfic' ); ?></h4>
-    </div>
-    <div class="tf_room-table hotel-room-wrap">
-    <div id="tour_room_details_loader">
-        <div id="tour_room_details_loader_img">
-            <img src="<?php echo TF_ASSETS_URL ?>img/loader.gif" alt="">
+    <h2 class="section-heading"><?php esc_html_e( 'Available Rooms', 'tourfic' ); ?></h2>
+    <div class="tf-room-table hotel-room-wrap">
+        <div id="tour_room_details_loader">
+            <div id="tour-room-details-loader-img">
+                <img src="<?php echo TF_ASSETS_URL ?>img/loader.gif" alt="">
+            </div>
         </div>
-    </div>
         <table class="availability-table">
             <thead>
                 <tr>
@@ -886,7 +659,7 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
 
         <div class="tf_submit-wrap">
             <input type="hidden" name="type" value="tf_hotel" class="tf-post-type"/>		
-            <button class="tf_button tf-submit" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
+            <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
         </div>
 
     </div>
@@ -995,8 +768,10 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
                 ?>
             <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type" />
             <input type="hidden" name="post_id" value="<?php echo get_the_ID(); ?>" />
-            <button class="tf_button tf-submit"
-                type="submit"><?php esc_html_e( 'Booking Availability', 'tourfic' );?></button>
+            <div class="tf-btn"><button class="tf_button tf-submit btn-styled"
+                type="submit"><?php esc_html_e( 'Booking Availability', 'tourfic' );?></button></div>
+
+
         </div>
     
     </form>
@@ -1028,7 +803,12 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
     })(jQuery);
     </script>
     
-    <?php 
+    <?php if ( is_active_sidebar( 'tf_single_booking_sidebar' ) ) { ?>
+        <div id="tf__booking_sidebar">
+            <?php dynamic_sidebar( 'tf_single_booking_sidebar' ); ?>
+            <br>
+        </div>
+    <?php }
 }
 
 #################################
@@ -1134,10 +914,10 @@ function tf_hotel_archive_single_item($adults='', $child='', $room='', $check_in
                         <div class="tf_item_main_block">
                             <div class="tf-hotel__title-wrap">
                                 <a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
-                            </div>						
+                            </div>			
                             <?php
                             if($address) {
-                                echo '<div class="tf_map-link">';
+                                echo '<div class="tf-map-link">';
                                 echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' .$address. '</span>';
                                 echo '</div>';
                             }
@@ -1151,7 +931,7 @@ function tf_hotel_archive_single_item($adults='', $child='', $room='', $check_in
                             <div class="featuredRooms">
                                 <div class="prco-ltr-right-align-helper">
                                     <div class="tf-archive-shortdesc">
-                                        <?php echo substr(wp_strip_all_tags(get_the_content()), 0, 200). '...'; ?>
+                                        <?php echo substr(wp_strip_all_tags(get_the_content()), 0, 160). '...'; ?>
                                 </div>
                                 </div>
                                 <div class="roomNameInner">
@@ -1159,7 +939,6 @@ function tf_hotel_archive_single_item($adults='', $child='', $room='', $check_in
                                         <div class="roomrow_flex">
                                             <?php if( $features ) { ?>
                                             <div class="roomName_flex">
-                                                <strong><?php _e('Features', 'tourfic'); ?></strong>
                                                 <ul class="tf-archive-desc">
                                                     <?php foreach($features as $feature) {
                                                     $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'hotel_feature', true );
@@ -1182,7 +961,7 @@ function tf_hotel_archive_single_item($adults='', $child='', $room='', $check_in
                                             <?php } ?>
                                             <div class="roomPrice roomPrice_flex sr_discount">
                                                 <div class="availability-btn-area">
-                                                    <a href="<?php echo $url; ?>" class="button tf_button"><?php esc_html_e( 'Details', 'tourfic' );?></a>
+                                                    <a href="<?php echo $url; ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' );?></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -1489,10 +1268,9 @@ function tf_hotel_quickview_callback(){
             $child_number = !empty($room['child']) ? $room['child'] : '0';
             $num_room = !empty($room['num-room']) ? $room['num-room'] : '0';
             ?>
-            <span class="tf-hotel-room-title"><b><?php echo esc_html( $room['title'] ); ?></b></span>
+            <h3><?php echo esc_html( $room['title'] ); ?></h3>
             <p><?php echo $room['description']; ?></p>
             <div class="tf-room-title description">
-                <?php esc_html_e( 'Key Features', 'tourfic' ); ?> <br>
                 <?php if ($num_room) { ?>
                 <div class="tf-tooltip tf-d-ib">
                     <div class="room-detail-icon">
@@ -1533,7 +1311,7 @@ function tf_hotel_quickview_callback(){
 
                 <?php if(!empty($room['features'])) { ?>
                 <div class="room-features">
-                    <div class="tf-room-title"><?php esc_html_e( 'Amenities', 'tourfic' ); ?><br>
+                    <div class="tf-room-title"><h4><?php esc_html_e( 'Amenities', 'tourfic' ); ?></h4>
                     </div>
                     <ul class="room-feature-list" style="margin: 0;">
 
@@ -1564,7 +1342,7 @@ function tf_hotel_quickview_callback(){
             </div>
             <div class="pax">
                 
-            <div class="tf-room-title"><?php esc_html_e( 'Pax', 'tourfic' ); ?><br>
+            <div class="tf-room-title"><h4><?php esc_html_e( 'Pax', 'tourfic' ); ?></h4>
             <?php if ($adult_number) { ?>
             <div class="tf-tooltip tf-d-ib">
                 <div class="room-detail-icon">
