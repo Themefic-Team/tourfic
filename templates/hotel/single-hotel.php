@@ -240,6 +240,12 @@ $share_link = get_permalink($post_id);
                             <div class="tf-btn"><a href="https://www.google.com/maps/search/<?php echo $map["address"]; ?>" target="_blank" class="btn-styled"><span><i class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a> </div>
                         </div>
                         <?php } ?>
+                        <!-- End Share Section -->
+
+
+                        <div class="reserve-button">
+                            <a href="#rooms" class="tf_button button"><?php esc_html_e( 'Reserve', 'tourfic' ); ?></a>
+                        </div>
                     </div>
                 </div>
                 <div class="hero-right">
@@ -377,7 +383,7 @@ $share_link = get_permalink($post_id);
                                             <div class="room-detail-icon">
                                                 <span class="room-icon-wrap"><i
                                                         class="fas fa-ruler-combined"></i></span>
-                                                <span class="icon-text tf-d-b"><?php echo $footage; ?> sft</span>
+                                                <span class="icon-text tf-d-b"><?php echo $footage; ?> <?php _e( 'sft', 'tourfic' ); ?></span>
                                             </div>
                                             <div class="tf-top">
                                                 <?php _e( 'Room Footage', 'tourfic' ); ?>

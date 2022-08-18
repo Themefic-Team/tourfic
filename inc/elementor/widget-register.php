@@ -32,6 +32,7 @@ function tf_register_widget( $widgets_manager ) {
 
 	
 	require_once( __DIR__ . '/widgets/search-form-horizontal.php' );
+	require_once( __DIR__ . '/widgets/search-form-advanced.php' );
 	require_once( __DIR__ . '/widgets/wishlist.php' );
 	require_once( __DIR__ . '/widgets/hotel-locations.php' );
 	require_once( __DIR__ . '/widgets/tour-destinations.php' );
@@ -39,6 +40,7 @@ function tf_register_widget( $widgets_manager ) {
 	require_once( __DIR__ . '/widgets/recent-tours-slider.php' );
 
 	$widgets_manager->register( new \TF_Search_horizontal() );
+	$widgets_manager->register( new \TF_Search_advanced() );
 	$widgets_manager->register( new \TF_Wishlist() );
 	$widgets_manager->register( new \TF_Hotel_Locations() );
 	$widgets_manager->register( new \TF_Tour_Destinations() );

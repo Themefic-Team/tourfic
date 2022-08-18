@@ -7,7 +7,6 @@ if(!class_exists('TourPrice')){
     class Tour_Price {
 
         public $meta;
-
         function __construct($meta) {
         
             # Get tour type
@@ -47,35 +46,48 @@ if(!class_exists('TourPrice')){
                     # Discount price calculation
                     if($discount_type == 'percent') {
         
-                        $sale_min_group_price = number_format( $min_group_price - (( $min_group_price / 100 ) * $discounted_price) , 1, '.', '' );
-                        $sale_max_group_price = number_format( $max_group_price - (( $max_group_price / 100 ) * $discounted_price) , 1, '.', '' );
+                        $sale_min_group_price = number_format( $min_group_price - (( $min_group_price / 100 ) * $discounted_price) , 2, '.', '' );
+                        $sale_max_group_price = number_format( $max_group_price - (( $max_group_price / 100 ) * $discounted_price) , 2, '.', '' );
         
                     } else if($discount_type == 'fixed') {
         
-                        $sale_min_group_price = number_format( ( $min_group_price - $discounted_price ), 1, '.', '' );
-                        $sale_max_group_price = number_format( ( $max_group_price - $discounted_price ), 1, '.', '' );
+                        $sale_min_group_price = number_format( ( $min_group_price - $discounted_price ), 2, '.', '' );
+                        $sale_max_group_price = number_format( ( $max_group_price - $discounted_price ), 2, '.', '' );
         
                     }
         
                     if($discount_type == 'percent' || $discount_type == 'fixed') {
 
+
+                        # WooCommerce Regular Price
+                        $wc_regular_min_group_price = wc_price($min_group_price, array('decimals'=>2));
+                        $wc_regular_max_group_price = wc_price($max_group_price, array('decimals'=>2));
+
+                        # Final output Regular (price range)
+                        if(!empty($wc_regular_min_group_price) && !empty($wc_regular_max_group_price)) {
+                            $price = $wc_regular_min_group_price. '-' .$wc_regular_max_group_price; // Discounted price range
+                        }
+                        if(!empty($wc_regular_min_group_price) && !empty($wc_regular_max_group_price)) {
+                            $wc_price = $wc_regular_min_group_price. '-' .$wc_regular_max_group_price; // Discounted WooCommerce price range
+                        }
+
                         # WooCommerce Price
-                        $wc_min_group_price = wc_price($sale_min_group_price, array('decimals'=>0));
-                        $wc_max_group_price = wc_price($sale_max_group_price, array('decimals'=>0));
+                        $wc_min_group_price = wc_price($sale_min_group_price, array('decimals'=>2));
+                        $wc_max_group_price = wc_price($sale_max_group_price, array('decimals'=>2));
 
                         # Final output (price range)
                         if(!empty($sale_min_group_price) && !empty($sale_max_group_price)) {
-                            $price = $sale_min_group_price. '-' .$sale_max_group_price; // Discounted price range
+                            $sale_price = $sale_min_group_price. '-' .$sale_max_group_price; // Discounted price range
                         }
                         if(!empty($wc_min_group_price) && !empty($wc_max_group_price)) {
-                            $wc_price = $wc_min_group_price. '-' .$wc_max_group_price; // Discounted WooCommerce price range
+                            $wc_sale_price = $wc_min_group_price. '-' .$wc_max_group_price; // Discounted WooCommerce price range
                         }
 
                     } else {
 
                         # WooCommerce Price
-                        $wc_min_group_price = wc_price($min_group_price, array('decimals'=>0));
-                        $wc_max_group_price = wc_price($max_group_price, array('decimals'=>0));
+                        $wc_min_group_price = wc_price($min_group_price, array('decimals'=>2));
+                        $wc_max_group_price = wc_price($max_group_price, array('decimals'=>2));
 
                         # Final output (price range)
                         if(!empty($min_group_price) && !empty($max_group_price)) {
@@ -108,37 +120,37 @@ if(!class_exists('TourPrice')){
                     if($discount_type == 'percent') {
         
                         # Minimum discounted price
-                        $sale_min_adult_price  = number_format( $min_adult_price - (( $min_adult_price / 100 ) * $discounted_price) , 1, '.', '' );
-                        $sale_min_child_price  = number_format( $min_child_price - (( $min_child_price / 100 ) * $discounted_price) , 1, '.', '' );
-                        $sale_min_infant_price = number_format( $min_infant_price - (( $min_infant_price / 100 ) * $discounted_price) , 1, '.', '' );
+                        $sale_min_adult_price  = number_format( $min_adult_price - (( $min_adult_price / 100 ) * $discounted_price) , 2, '.', '' );
+                        $sale_min_child_price  = number_format( $min_child_price - (( $min_child_price / 100 ) * $discounted_price) , 2, '.', '' );
+                        $sale_min_infant_price = number_format( $min_infant_price - (( $min_infant_price / 100 ) * $discounted_price) , 2, '.', '' );
                         # Maximum discounted price
-                        $sale_max_adult_price  = number_format( $max_adult_price - (( $max_adult_price / 100 ) * $discounted_price) , 1, '.', '' );
-                        $sale_max_child_price  = number_format( $max_child_price - (( $max_child_price / 100 ) * $discounted_price) , 1, '.', '' );
-                        $sale_max_infant_price = number_format( $max_infant_price - (( $max_infant_price / 100 ) * $discounted_price) , 1, '.', '' );
+                        $sale_max_adult_price  = number_format( $max_adult_price - (( $max_adult_price / 100 ) * $discounted_price) , 2, '.', '' );
+                        $sale_max_child_price  = number_format( $max_child_price - (( $max_child_price / 100 ) * $discounted_price) , 2, '.', '' );
+                        $sale_max_infant_price = number_format( $max_infant_price - (( $max_infant_price / 100 ) * $discounted_price) , 2, '.', '' );
         
                     } else if($discount_type == 'fixed') {
         
                         # Minimum discounted price
-                        $sale_min_adult_price  = number_format( ( $min_adult_price - $discounted_price ), 1, '.', '' );
-                        $sale_min_child_price  = number_format( ( $min_child_price - $discounted_price ), 1, '.', '' );
-                        $sale_min_infant_price = number_format( ( $min_infant_price - $discounted_price ), 1, '.', '' );
+                        $sale_min_adult_price  = number_format( ( $min_adult_price - $discounted_price ), 2, '.', '' );
+                        $sale_min_child_price  = number_format( ( $min_child_price - $discounted_price ), 2, '.', '' );
+                        $sale_min_infant_price = number_format( ( $min_infant_price - $discounted_price ), 2, '.', '' );
                         # Maximum discounted price
-                        $sale_max_adult_price  = number_format( ( $max_adult_price - $discounted_price ), 1, '.', '' );
-                        $sale_max_child_price  = number_format( ( $max_child_price - $discounted_price ), 1, '.', '' );
-                        $sale_max_infant_price = number_format( ( $max_infant_price - $discounted_price ), 1, '.', '' );
+                        $sale_max_adult_price  = number_format( ( $max_adult_price - $discounted_price ), 2, '.', '' );
+                        $sale_max_child_price  = number_format( ( $max_child_price - $discounted_price ), 2, '.', '' );
+                        $sale_max_infant_price = number_format( ( $max_infant_price - $discounted_price ), 2, '.', '' );
         
                     }
 
                     if($discount_type == 'percent' || $discount_type == 'fixed') {
         
                         # WooCommerce Price
-                        $wc_min_adult_price  = wc_price($sale_min_adult_price, array('decimals'=>0));
-                        $wc_min_child_price  = wc_price($sale_min_child_price, array('decimals'=>0));
-                        $wc_min_infant_price = wc_price($sale_min_infant_price, array('decimals'=>0));
+                        $wc_min_adult_price  = wc_price($sale_min_adult_price, array('decimals'=>2));
+                        $wc_min_child_price  = wc_price($sale_min_child_price, array('decimals'=>2));
+                        $wc_min_infant_price = wc_price($sale_min_infant_price, array('decimals'=>2));
 
-                        $wc_max_adult_price  = wc_price($sale_max_adult_price, array('decimals'=>0));
-                        $wc_max_child_price  = wc_price($sale_max_child_price, array('decimals'=>0));
-                        $wc_max_infant_price = wc_price($sale_max_infant_price, array('decimals'=>0));
+                        $wc_max_adult_price  = wc_price($sale_max_adult_price, array('decimals'=>2));
+                        $wc_max_child_price  = wc_price($sale_max_child_price, array('decimals'=>2));
+                        $wc_max_infant_price = wc_price($sale_max_infant_price, array('decimals'=>2));
             
                         # Final output (price range)
                         if(!empty($sale_min_adult_price) && !empty($sale_max_adult_price)) {
@@ -164,13 +176,13 @@ if(!class_exists('TourPrice')){
                     }
 
                     # WooCommerce Price
-                    $wc_min_adult_price  = wc_price($min_adult_price, array('decimals'=>0));
-                    $wc_min_child_price  = wc_price($min_child_price, array('decimals'=>0));
-                    $wc_min_infant_price = wc_price($min_infant_price, array('decimals'=>0));
+                    $wc_min_adult_price  = wc_price($min_adult_price, array('decimals'=>2));
+                    $wc_min_child_price  = wc_price($min_child_price, array('decimals'=>2));
+                    $wc_min_infant_price = wc_price($min_infant_price, array('decimals'=>2));
 
-                    $wc_max_adult_price  = wc_price($max_adult_price, array('decimals'=>0));
-                    $wc_max_child_price  = wc_price($max_child_price, array('decimals'=>0));
-                    $wc_max_infant_price = wc_price($max_infant_price, array('decimals'=>0));
+                    $wc_max_adult_price  = wc_price($max_adult_price, array('decimals'=>2));
+                    $wc_max_child_price  = wc_price($max_child_price, array('decimals'=>2));
+                    $wc_max_infant_price = wc_price($max_infant_price, array('decimals'=>2));
 
                     # Final output (price range)
                     if(!empty($min_adult_price) && !empty($max_adult_price)) {
@@ -213,16 +225,16 @@ if(!class_exists('TourPrice')){
                     $price = !empty($meta['group_price']) ? $meta['group_price'] : '';
                 
                     if($discount_type == 'percent') {
-                        $sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) , 1, '.', '' );
+                        $sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) , 2, '.', '' );
                     } else if($discount_type == 'fixed') {
-                        $sale_price = number_format( ( $price - $discounted_price ), 1, '.', '' );
+                        $sale_price = number_format( ( $price - $discounted_price ), 2, '.', '' );
                     }
 
                     # WooCommerce Price
-                    $wc_price = wc_price($price, array('decimals'=>0));
+                    $wc_price = wc_price($price, array('decimals'=>2));
 
                     if($discount_type == 'percent' || $discount_type == 'fixed') {
-                        $wc_sale_price = wc_price($sale_price, array('decimals'=>0));
+                        $wc_sale_price = wc_price($sale_price, array('decimals'=>2));
                     }
         
                 } else if($pricing_rule == 'person') {
@@ -233,27 +245,27 @@ if(!class_exists('TourPrice')){
                 
                     if($discount_type == 'percent') {
         
-                        $adult_price  ? $sale_adult_price  = number_format( $adult_price - (( $adult_price / 100 ) * $discounted_price) , 1, '.', '' ) : '';
-                        $child_price  ? $sale_child_price  = number_format( $child_price - (( $child_price / 100 ) * $discounted_price) , 1, '.', '' ) : '';
-                        $infant_price ? $sale_infant_price = number_format( $infant_price - (( $infant_price / 100 ) * $discounted_price) , 1, '.', '' ) : '';
+                        $adult_price  ? $sale_adult_price  = number_format( $adult_price - (( $adult_price / 100 ) * $discounted_price) , 2, '.', '' ) : '';
+                        $child_price  ? $sale_child_price  = number_format( $child_price - (( $child_price / 100 ) * $discounted_price) , 2, '.', '' ) : '';
+                        $infant_price ? $sale_infant_price = number_format( $infant_price - (( $infant_price / 100 ) * $discounted_price) , 2, '.', '' ) : '';
         
                     } else if($discount_type == 'fixed') {
         
-                        $adult_price  ? $sale_adult_price  = number_format( ( $adult_price - $discounted_price ), 1, '.', '' ) : '';
-                        $child_price  ? $sale_child_price  = number_format( ( $child_price - $discounted_price ), 1, '.', '' ) : '';
-                        $infant_price ? $sale_infant_price = number_format( ( $infant_price - $discounted_price ), 1, '.', '' ) : '';
+                        $adult_price  ? $sale_adult_price  = number_format( ( $adult_price - $discounted_price ), 2, '.', '' ) : '';
+                        $child_price  ? $sale_child_price  = number_format( ( $child_price - $discounted_price ), 2, '.', '' ) : '';
+                        $infant_price ? $sale_infant_price = number_format( ( $infant_price - $discounted_price ), 2, '.', '' ) : '';
         
                     }
 
                     # WooCommerce Price
-                    $wc_adult_price  = wc_price($adult_price, array('decimals'=>0));
-                    $wc_child_price  = wc_price($child_price, array('decimals'=>0));
-                    $wc_infant_price = wc_price($infant_price, array('decimals'=>0));
+                    $wc_adult_price  = wc_price($adult_price, array('decimals'=>2));
+                    $wc_child_price  = wc_price($child_price, array('decimals'=>2));
+                    $wc_infant_price = wc_price($infant_price, array('decimals'=>2));
 
                     if($discount_type == 'percent' || $discount_type == 'fixed') {
-                        $wc_sale_adult_price  = wc_price($sale_adult_price, array('decimals'=>0));
-                        $wc_sale_child_price  = wc_price($sale_child_price, array('decimals'=>0));
-                        $wc_sale_infant_price = wc_price($sale_infant_price, array('decimals'=>0));
+                        $wc_sale_adult_price  = wc_price($sale_adult_price, array('decimals'=>2));
+                        $wc_sale_child_price  = wc_price($sale_child_price, array('decimals'=>2));
+                        $wc_sale_infant_price = wc_price($sale_infant_price, array('decimals'=>2));
                     }
         
                 }

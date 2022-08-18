@@ -108,6 +108,8 @@ if($tour_type == 'continuous' && $custom_avail == true) {
 
 # Get Pricing
 $tour_price = new Tour_Price($meta);
+
+
 ?>
 
 <div class="tf-main-wrapper">
