@@ -51,8 +51,7 @@ $loop = new WP_Query( $args );
     <div class="tf_posts_navigation">
         <?php tourfic_posts_navigation(); ?>
     </div>
-
-    </div>
+</div>
 
 <?php
 

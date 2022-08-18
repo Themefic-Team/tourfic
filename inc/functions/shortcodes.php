@@ -179,60 +179,30 @@ function tf_recent_hotel_shortcode( $atts, $content = null ){
                 ?>
             </div>
 
-            <div class="tf-slider-wrapper">
-                <div id="<?php echo $thisid; ?>" class="tf-slider-inner">
-                    <?php while ( $hotel_loop->have_posts() ) : $hotel_loop->the_post(); ?>
-                        <div class="tf-single">
-                            <a href="<?php the_permalink(); ?>">
-                            <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
-                              <div class="tf-single-meta">
-                                  <p class="tf-title"><?php the_title(); ?></p>
-                              </div>
-                            </a>
+            <div class="tf-slider-items-wrapper">
+                <?php while ( $hotel_loop->have_posts() ) {
+                    $hotel_loop->the_post();
+                                $post_id                = get_the_ID();
+                                $related_comments_hotel       = get_comments( array( 'post_id' => $post_id ) );
+                    ?>
+                    <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                        <div class="tf-slider-content">
+                            <div class="tf-slider-desc">
+                                <h3>
+                                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+                                </h3>
+                                <?php if ($related_comments_hotel) { ?>
+                                    <div class="tf-slider-rating-star">
+                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating($related_comments_hotel); ?></span>
+                                    </div>											
+								<?php }?>
+                                <p><?php echo wp_trim_words(get_the_content(), 10); ?></p>
+                            </div>
                         </div>
-                    <?php endwhile; ?>
-                </div>
+                    </div>
+                <?php }	?>
             </div>
         </div>
-
-    <script>
-        jQuery(document).ready(function() {
-            jQuery('#<?php echo $thisid; ?>').not('.slick-initialized').slick({
-        dots: false,
-        infinite: true,
-        slidesToShow: <?php echo $slidestoshow; ?>,
-        slidesToScroll: 1,
-        autoplay:true,
-        //autoplaySpeed:2500,
-        arrows:false,
-        adaptiveHeight: false,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
-        ]
-
-                });
-            });
-        </script>
     <?php endif;
     wp_reset_postdata(); ?>
 
@@ -268,13 +238,13 @@ function tf_recent_tour_shortcode( $atts, $content = null ){
 
     ob_start();
 
-    $hotel_loop = new WP_Query( $args );
+    $tour_loop = new WP_Query( $args );
 
     // Generate an Unique ID
     $thisid = uniqid('tfpopular_');
 
     ?>
-    <?php if ( $hotel_loop->have_posts() ) : ?>
+    <?php if ( $tour_loop->have_posts() ) : ?>
         <div class="tf-widget-slider recent-tour-slider">
             <div class="tf-heading">
                 <?php
@@ -287,60 +257,32 @@ function tf_recent_tour_shortcode( $atts, $content = null ){
                 ?>
             </div>
 
-            <div class="tf-slider-wrapper">
-                <div id="<?php echo $thisid; ?>" class="tf-slider-inner">
-                    <?php while ( $hotel_loop->have_posts() ) : $hotel_loop->the_post(); ?>
-                        <div class="tf-single">
-                            <a href="<?php the_permalink(); ?>">
-                            <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
-                              <div class="tf-single-meta">
-                                  <p class="tf-title"><?php the_title(); ?></p>
-                              </div>
-                            </a>
+
+            <div class="tf-slider-items-wrapper">
+                <?php while ( $tour_loop->have_posts() ) { 
+                    $tour_loop->the_post();
+                                $post_id                = get_the_ID();
+                                $related_comments       = get_comments( array( 'post_id' => $post_id ) );
+                        ?>
+                    <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                        <div class="tf-slider-content">
+                            <div class="tf-slider-desc">
+                                <h3>
+                                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>  
+                                </h3>
+                                <?php if ($related_comments) { ?>
+                                    <div class="tf-slider-rating-star">
+                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating($related_comments); ?></span>
+                                    </div>											
+								<?php }?>	
+                                <p><?php echo wp_trim_words(get_the_excerpt(), 10); ?></p>
+                                
+                            </div>
                         </div>
-                    <?php endwhile; ?>
-                </div>
+                    </div>
+                <?php }	?>
             </div>
         </div>
-
-    <script>
-        jQuery(document).ready(function() {
-            jQuery('#<?php echo $thisid; ?>').not('.slick-initialized').slick({
-        dots: false,
-        infinite: true,
-        slidesToShow: <?php echo $slidestoshow; ?>,
-        slidesToScroll: 1,
-        autoplay:true,
-        //autoplaySpeed:2500,
-        arrows:false,
-        adaptiveHeight: true,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
-        ]
-
-                });
-            });
-        </script>
     <?php endif;
     wp_reset_postdata(); ?>
 
@@ -363,6 +305,7 @@ function tf_search_form_shortcode( $atts, $content = null ){
             'subtitle'  => '',   // Sub title populer section
             'classes'  => '',
             'fullwidth'  => '',
+            'advanced' => '',
           ),
         $atts
       )
@@ -389,11 +332,24 @@ function tf_search_form_shortcode( $atts, $content = null ){
         </div>
 
         <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent">             
-            <?php tf_hotel_search_form_horizontal( $classes, $title, $subtitle ); ?>
+            <?php 
+            if($advanced=="enabled"){
+                tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle );
+            }else{    
+                tf_hotel_search_form_horizontal( $classes, $title, $subtitle ); 
+            }
+            ?>
         </div>
 
         <div id="tf-tour-booking-form" class="tf-tabcontent">
-            <?php tf_tour_search_form_horizontal( $classes, $title, $subtitle ); ?>
+            <?php 
+            if($advanced=="enabled"){
+                tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle );
+            }else{    
+                tf_tour_search_form_horizontal( $classes, $title, $subtitle ); 
+            }
+            ?>
+       
         </div>
 
         <?php
@@ -401,7 +357,13 @@ function tf_search_form_shortcode( $atts, $content = null ){
         ?>
 
         <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent">             
-            <?php tf_hotel_search_form_horizontal( $classes, $title, $subtitle ); ?>
+        <?php 
+            if($advanced=="enabled"){
+                tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle );
+            }else{    
+                tf_hotel_search_form_horizontal( $classes, $title, $subtitle ); 
+            }
+            ?> 
         </div>
 
         <?php
@@ -409,7 +371,13 @@ function tf_search_form_shortcode( $atts, $content = null ){
         ?>
 
         <div id="tf-tour-booking-form" style="display:block" class="tf-tabcontent">
-            <?php tf_tour_search_form_horizontal( $classes, $title, $subtitle ); ?>
+        <?php 
+            if($advanced=="enabled"){
+                tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle );
+            }else{    
+                tf_tour_search_form_horizontal( $classes, $title, $subtitle ); 
+            }
+        ?>
         </div>
 
         <?php
@@ -455,7 +423,22 @@ function tf_search_result_shortcode( $atts, $content = null ){
     // Get date
     $check_in_out = isset( $_GET['check-in-out-date'] ) ? sanitize_text_field($_GET['check-in-out-date']) : '';
 
-    $data = array($adults, $child, $room, $check_in_out);
+    
+    // Price Range
+    $startprice = isset( $_GET['from'] ) ? absint(sanitize_key($_GET['from'])) : '';
+    $endprice = isset( $_GET['to'] ) ? absint(sanitize_key($_GET['to'])) : '';
+
+    if(!empty($startprice) && !empty($endprice)){
+        if($_GET['type']=="tf_tours"){
+            $data = array($adults, $child, $check_in_out, $startprice, $endprice);
+        }else{
+            $data = array($adults, $child, $room, $check_in_out, $startprice, $endprice);
+        }
+    }else{
+        $data = array($adults, $child, $room, $check_in_out);
+    }
+
+
 
     $paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
     $checkInOutDate = !empty( $_GET['check-in-out-date']) ? explode( ' - ', $_GET['check-in-out-date'] ) : '';
@@ -504,7 +487,21 @@ function tf_search_result_shortcode( $atts, $content = null ){
     } else {
         $args['s'] = $place;
     }
+
     
+    // Hotel Features
+
+    if (!empty($_GET['features'])) {
+        $args['tax_query'] = array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'hotel_feature',
+                'field' => 'slug',
+                'terms'    => $_GET['features'],
+            )
+        );
+    }
+
     $loop = new WP_Query( $args );
 
     ob_start(); ?>
