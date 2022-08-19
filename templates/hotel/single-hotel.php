@@ -169,8 +169,8 @@ $share_link = get_permalink($post_id);
                                 </li>
                                 <li>
                                     <a href="https://www.linkedin.com/cws/share?url=<?php _e( $share_link ); ?>"
-                                        class="tf-dropdown__item" target="_blank">
-                                        <span class="tf-dropdown__item-content">
+                                        class="tf-dropdown-item" target="_blank">
+                                        <span class="tf-dropdown-item-content">
                                             <i class="fab fa-linkedin"></i>
                                             <?php esc_html_e( 'Share on Linkedin', 'tourfic' ); ?>
                                         </span>
@@ -181,8 +181,8 @@ $share_link = get_permalink($post_id);
                                     ?>
                                 <li>
                                     <a href="http://pinterest.com/pin/create/button/?url=<?php _e( $share_link ); ?>&media=<?php _e( $share_image_link[0]); ?>&description=<?php _e( $share_text ); ?>"
-                                        class="tf-dropdown__item" target="_blank">
-                                        <span class="tf-dropdown__item-content">
+                                        class="tf-dropdown-item" target="_blank">
+                                        <span class="tf-dropdown-item-content">
                                             <i class="fab fa-pinterest"></i>
                                             <?php esc_html_e( 'Share on Pinterest', 'tourfic' ); ?>
                                         </span>

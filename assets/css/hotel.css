@@ -401,7 +401,7 @@ a.slick-slide-item-link {
     bottom: 0;
     background: rgba(255, 255, 255, .8);
     display: none;
-    z-index: 99;
+    z-index: 999999;
 }
 
 #tour-room-details-loader-img {

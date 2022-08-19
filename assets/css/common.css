@@ -1272,3 +1272,130 @@ h3.section-heading {
         padding: 6px;
       }
 }
+
+
+
+
+
+/*================================
+|       Adavance Search Form     |
+================================*/
+
+.tf_more_info_selections{
+    position: relative;
+    cursor: pointer;
+}
+.tf-more-info {
+    position: absolute;
+    width: 620px;
+    padding: 15px 30px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.175);
+    border-radius: 0 0 4px 4px;
+    border-color: #dfdfdf;
+    margin-top: 0;
+    background: #fff;
+    right: 0;
+    top: 102%;
+    display: none;
+    z-index: 999;
+}
+
+.tf_form-inner .tf-hotel-results {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+.tf_form-inner .tf-hotel-results #ui-id-1 li,
+.tf_form-inner .tf-hotel-results #ui-id-2 li {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff; 
+    border-bottom: 1px solid #d4d4d4;
+    color: #444;
+}
+.tf_form-inner .tf-hotel-results #ui-id-1 li:hover,
+.tf_form-inner .tf-hotel-results #ui-id-2 li:hover {
+    background-color: #e9e9e9; 
+}  
+
+.tf-more-info .form-group.form-check{
+    width: 33%;
+    float: left;
+}
+.tf-more-info span{
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 10px;
+}
+.tf-more-info.show{
+    display: block;
+}
+.tf_form-inner .tf-hotel-results #ui-id-1 li,
+.tf_form-inner .tf-hotel-results #ui-id-2 li {
+    border-left: 1px solid #d4d4d4;
+    border-right: 1px solid #d4d4d4;
+}
+.tf-filter-price-range .al-range-slider__track{
+    background: #EEE;
+    height: 10px;
+    box-shadow: none !important;
+    margin: 30px 0px 10px 0px;
+}
+
+.tf-filter-price-range .al-range-slider_dark{
+    padding: 0px !important;
+}
+.tf-filter-price-range .al-range-slider_dark .al-range-slider__bar{
+    background: #003162;
+    box-shadow: none !important;
+}
+.tf-filter-price-range .al-range-slider__knob {
+    background: #003162;
+    height: 15px;
+    width: 15px;
+    box-shadow: none !important;
+    border: 3px solid #003162;
+  }
+.tf-filter-price-range  .al-range-slider__tooltip {
+    background: #003162;
+    border-radius: 5px;
+    box-shadow: none;
+    padding: 3px 10px;
+    color: #fff !important;
+    font-size: 13px !important;
+    margin-bottom: 0px !important;
+  }
+  .tf-filter-price-range .al-range-slider__knob:first-child span{
+    left: 10px !important;
+  }
+  .tf-filter-price-range .al-range-slider__input.js-al-range-slider__input {
+    display: none;
+  }
+  .tf_form-inner .tf-hotel-results #ui-id-1,
+  .tf_form-inner .tf-hotel-results #ui-id-2{
+    left: 0 !important;
+    width: 100% !important;
+    right: 0 !important;
+    margin: 0 !important;
+    list-style: none;
+    top: 100% !important;
+    height: 225px;
+    z-index: 99999;
+    overflow-y: scroll;
+    padding-left: 0px !important;
+  }
+  .tf_form-inner .tf-hotel-results #ui-id-1 li,
+  .tf_form-inner .tf-hotel-results #ui-id-2 li{
+    text-transform: capitalize;
+  }
+  .tf_tf_booking-widget-wrap{
+    z-index: 999;
+  }

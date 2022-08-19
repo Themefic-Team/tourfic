@@ -1227,6 +1227,7 @@ function tf_hotel_archive_single_item($adults='', $child='', $room='', $check_in
     //Get hotel_feature
     $features = !empty(get_the_terms( $post_id, 'hotel_feature' )) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
     
+    $meta  = get_post_meta( $post_id, 'tf_hotel', true );
     // Location
     $address  = !empty($meta['address']) ? $meta['address'] : '';
     // Rooms
