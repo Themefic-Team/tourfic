@@ -411,7 +411,7 @@ $tour_price = new Tour_Price($meta);
 				<div class="tf-container">
 					<div class="tf-row">
 						<div class="tf-map-content-wrapper">
-						<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $location ); ?>&output=embed" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+						<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace("#","",$location) ); ?>&output=embed" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 						</div>
 					</div>
 				</div>
