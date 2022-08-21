@@ -17,6 +17,50 @@ CSF::createSection( $prefix, array(
     'icon'  =>  'fas fa-boxes' ,   
 ) );
 
+
+/**
+ * Google Map
+ * 
+ * Sub Menu
+ */
+CSF::createSection( $prefix, array(
+    'parent'    => 'miscellaneous', 
+    'title' =>  __( 'Map Settings', 'tourfic' ),
+    'icon'   => 'fas fa-globe',
+    'fields' => array(
+
+        array(
+            'type'    => 'subheading',
+            'content' => __('Map Settings', 'tourfic' ),
+        ),
+
+        array(
+            'id'          => '',
+            'class'    => 'tf-csf-disable tf-csf-pro',
+            'type'        => 'select',
+            'title'       => __('Select Map', 'tourfic' ),
+            'subtitle'   => __( $badge_pro, 'tourfic' ),
+            'options'     => array(
+                'default'  => 'Default Map',
+                'googlemap'  => 'Google Map',
+            ),
+            'default'     => 'default'
+        ),
+        array(
+			'id'         => '',
+            'class'    => 'tf-csf-disable tf-csf-pro',
+			'type'       => 'text',
+			'title'      => __('Google Map API Key', 'tourfic' ),
+            'dependency' => array(
+                array( 'google-page-option', '==', 'googlemap' ),
+            ),
+		),
+
+    )
+    
+) );
+
+
 /**
  * Wishlist
  * 

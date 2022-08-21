@@ -282,9 +282,9 @@ $share_link = get_permalink($post_id);
                         <div class="tf-hotel-google-maps-container">
                             <?php 
                             if(!empty($map["address"])){ ?>
-                            <iframe src="https://maps.google.com/maps/place?q=<?php echo esc_attr( $map["address"] ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            <iframe src="https://maps.google.com/maps?q=<?php echo $map["address"] ; ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                             <?php } else{ ?>
-                            <iframe src="https://maps.google.com/maps/place?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                             <?php } ?>
                         </div>
                     </div>

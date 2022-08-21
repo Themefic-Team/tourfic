@@ -137,7 +137,7 @@
                 
                 <div class="room-deposit-wrap">
                     <input type="checkbox" id="tf-make-deposit" name="make_deposit" value="<?php echo $room_id ?>">
-                    <label for="tf-make-deposit">I'll make a deposit</label><br>
+                    <label for="tf-make-deposit">I'll make a partial payment</label><br>
                 </div>
 	        <?php } ?>
 

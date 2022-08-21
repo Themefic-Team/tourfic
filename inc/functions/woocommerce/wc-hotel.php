@@ -337,14 +337,14 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
         );
     }
 
-    if ( isset( $cart_item['tf_hotel_data']['adult'] ) && $cart_item['tf_hotel_data']['adult'] > 0 ) {
+    if ( isset( $cart_item['tf_hotel_data']['adult'] ) && $cart_item['tf_hotel_data']['adult'] >=1 ) {
         $item_data[] = array(
             'key'       => __('Adult Number', 'tourfic'),
             'value'     => $cart_item['tf_hotel_data']['adult'],
         );
     }
 
-    if ( isset( $cart_item['tf_hotel_data']['child'] ) && $cart_item['tf_hotel_data']['child'] > 0 ) {
+    if ( isset( $cart_item['tf_hotel_data']['child'] ) && $cart_item['tf_hotel_data']['child'] >=1 ) {
         $item_data[] = array(
             'key'       => __('Child Number', 'tourfic'),
             'value'     => $cart_item['tf_hotel_data']['child'],

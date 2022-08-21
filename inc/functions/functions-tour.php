@@ -768,7 +768,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                 </div>
                                 <div class="tf_button_group">
                                     <button class="tf_button btn-styled" type="submit" data-deposit="false"><?php _e(tfopt('deposit-full-payment','Pay full amount'), 'tourfic'); ?></button>
-                                    <button class="tf_button btn-styled" type="submit" data-deposit="true"><?php _e(tfopt('deposit-payment','Make a deposit'), 'tourfic'); ?></button>
+                                    <button class="tf_button btn-styled" type="submit" data-deposit="true"><?php _e(tfopt('deposit-payment','Make a partial payment'), 'tourfic'); ?></button>
                                 </div>
                             </div>
                         </div>
