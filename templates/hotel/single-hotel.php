@@ -292,6 +292,18 @@ $share_link = get_permalink($post_id);
                     <div class="hero-booking">
                         <?php tf_hotel_sidebar_booking_form(); ?>
                     </div>
+
+                    <div id="tf_ask_question-1" class="tf_widget widget widget_tf_ask_question">
+                        <div class="tf-gotq-tour-wrap">
+                            <div class="gotq-top">
+                                <h4><?php esc_html_e( 'Got a question?', 'tourfic' ); ?></h4>				
+                                <p><?php esc_html_e( 'Find more info in the FAQ section.', 'tourfic' ); ?></p>			
+                            </div>
+                            <div class="ni-buttons">
+                                <a href="#" id="tf-ask-question-trigger" class="btn-styled"><?php esc_html_e( 'Ask a question', 'tourfic' ); ?></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
