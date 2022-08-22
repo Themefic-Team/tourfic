@@ -431,7 +431,7 @@ $tour_price = new Tour_Price($meta);
 					<div class="tf-ask-question">
 						<h3>Have a question in mind</h3>
 						<p>Looking for more info? Send a question to the property to find out more.</p>
-						<div class="tf-btn"><a href="#"  class="btn-styled"><span><?php esc_html_e( 'Ask a Question', 'tourfic' ); ?></span></a> </div>
+						<div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled"><span><?php esc_html_e( 'Ask a Question', 'tourfic' ); ?></span></a> </div>
 					</div>
 				
 					<div class="tf-faq-items-wrapper">

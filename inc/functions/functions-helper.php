@@ -245,9 +245,12 @@ function tourfic_ask_question_ajax() {
 
 	$post_id = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : null;
 	$post_title = get_the_title( $post_id );
-	
 	if (defined( 'TF_PRO' )){
-		$send_email_to = !empty( tfopt('h-enquiry-email') ) ? sanitize_email( tfopt('h-enquiry-email') ) : sanitize_email( get_option( 'admin_email' ) );
+		if( "tf_hotel" == get_post_type( $post_id ) ){
+			$send_email_to = !empty( tfopt('h-enquiry-email') ) ? sanitize_email( tfopt('h-enquiry-email') ) : sanitize_email( get_option( 'admin_email' ) );
+		}else{
+			$send_email_to = !empty( tfopt('t-enquiry-email') ) ? sanitize_email( tfopt('t-enquiry-email') ) : sanitize_email( get_option( 'admin_email' ) );
+		}
 	}else{
 		$send_email_to = sanitize_email( get_option( 'admin_email' ) );
 	}
