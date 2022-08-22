@@ -95,6 +95,11 @@ if ( !defined( 'TOURFIC' ) ) {
     define( 'TOURFIC', '2.6' );
 }
 
+// Styles & Scripts
+if (!defined( 'INSTANTIO_PRO_SCRIPT' )) {
+	require_once TF_INC_PATH . '/style-script.php';
+}
+
 /**
  * Show admin warning if a required file is missing
  */

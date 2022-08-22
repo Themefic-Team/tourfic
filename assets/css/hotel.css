@@ -46,6 +46,24 @@
     display: inline-block;
 }
 
+
+.tf-dropdown-content li a i {
+    color: #1D75E3;
+    font-size: 17px;
+  }
+  
+  .tf-dropdown-content li:nth-child(2) a i {
+    color: #1D9BF0;
+  }
+  
+  .tf-dropdown-content li:nth-child(3) a i {
+    color: #0A66C2;
+  }
+  
+  .tf-dropdown-content li:nth-child(4) a i {
+    color: #CC0000;
+  }
+
 .share-tour-content .tf-dropdown-item {
     border: 0;
     margin: 0;

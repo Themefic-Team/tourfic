@@ -403,7 +403,8 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
     $adult = $_GET['adults'] ?? 0;
     $children = $_GET['children'] ?? 0;
     $date = $_GET['check-in-out-date'] ?? '';
-
+    $startprice = $_GET['from'] ?? '';
+    $endprice = $_GET['to'] ?? '';
 
     ?>
     <!-- Start Booking widget -->
@@ -480,6 +481,11 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
         </div>
     
         <div class="tf_form-row">
+            <?php 
+            if(!empty($startprice) && !empty($endprice)){ ?>
+            <input type="hidden" id="startprice" value="<?php echo $startprice; ?>">
+            <input type="hidden" id="endprice" value="<?php echo $endprice; ?>">
+            <?php } ?>
             <?php
                     $ptype = $_GET['type'] ?? get_post_type();
                 ?>
@@ -666,12 +672,16 @@ function tf_search_result_ajax_sidebar(){
     $filter_taxonomy = $posttype == 'tf_tours' ? 'null' : 'hotel_feature';
     # Take dates for filter query
     $checkin = isset($_POST['checkin']) ? trim($_POST['checkin']) : null;
-    $checkout = isset($_POST['checkout']) ? trim($_POST['checkout']) : null;
-    if(!empty($checkin) && !empty($checkout)) {
+    $startprice = !empty($_POST['startprice']) ? $_POST['startprice'] : '';
+    $endprice = !empty($_POST['endprice']) ? $_POST['endprice'] : '';
+    
+    list( $tf_form_start, $tf_form_end ) = explode( ' - ', $checkin );
+
+    if(!empty($checkin)) {
         $period = new DatePeriod(
-            new DateTime( $checkin ),
+            new DateTime( $tf_form_start ),
             new DateInterval( 'P1D' ),
-            new DateTime( $checkout . '23:59' )
+            new DateTime( $tf_form_end . '23:59' )
         );
     } else {
         $period = '';
@@ -763,18 +773,18 @@ function tf_search_result_ajax_sidebar(){
     }
 
     # Add meta if dates exists and post type is tours
-    if ( $checkin && $checkout && $posttype == ' tf_tours' ){
+    if ( $checkin && $posttype == ' tf_tours' ){
 
         $args['tax_query']['relation'] = $relation;
         $args['meta_query'] = array(
                 array(
                     'key'     => 'tf_tours_option',
-                    'value'   => str_replace( '-', '/', $checkin ),
+                    'value'   => str_replace( '-', '/', $tf_form_start ),
                     'compare' => 'LIKE',
                 ),
                 array(
                     'key'     => 'tf_tours_option',
-                    'value'   => str_replace( '-', '/', $checkout ),
+                    'value'   => str_replace( '-', '/', $tf_form_end ),
                     'compare' => 'LIKE',
                 ),
             );
@@ -797,8 +807,12 @@ function tf_search_result_ajax_sidebar(){
                     tf_hotel_archive_single_item();
 
                 } else {
-
-                    $data = [$adults, $child, $room, $check_in_out];
+                    if(!empty($startprice) && !empty($endprice)){
+                        $data = [$adults, $child, $room, $check_in_out, $startprice, $endprice];
+                    }else{
+                        $data = [$adults, $child, $room, $check_in_out];
+                    }
+                    
 	                tf_filter_hotel_by_date( $period,$not_found, $data);
 
                 }
@@ -811,8 +825,11 @@ function tf_search_result_ajax_sidebar(){
                     tf_tour_archive_single_item();
 
                 } else {
-
-                    $data = [$adults, $child, $check_in_out];
+                    if(!empty($startprice) && !empty($endprice)){
+                        $data = [$adults, $child, $check_in_out, $startprice, $endprice];
+                    }else{
+                        $data = [$adults, $child, $check_in_out];
+                    }
                     tf_filter_tour_by_date( $period, $not_found, $data );
 
                 }
@@ -834,6 +851,7 @@ function tf_search_result_ajax_sidebar(){
 
     die();
 }
+
 
 
 

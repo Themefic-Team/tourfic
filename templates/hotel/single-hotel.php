@@ -168,6 +168,27 @@ $share_link = get_permalink($post_id);
                                     </a>
                                 </li>
                                 <li>
+                                    <a href="https://www.linkedin.com/cws/share?url=<?php _e( $share_link ); ?>"
+                                        class="tf-dropdown-item" target="_blank">
+                                        <span class="tf-dropdown-item-content">
+                                            <i class="fab fa-linkedin"></i>
+                                            <?php esc_html_e( 'Share on Linkedin', 'tourfic' ); ?>
+                                        </span>
+                                    </a>
+                                </li>
+                                <?php 
+                                    $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
+                                    ?>
+                                <li>
+                                    <a href="http://pinterest.com/pin/create/button/?url=<?php _e( $share_link ); ?>&media=<?php _e( $share_image_link[0]); ?>&description=<?php _e( $share_text ); ?>"
+                                        class="tf-dropdown-item" target="_blank">
+                                        <span class="tf-dropdown-item-content">
+                                            <i class="fab fa-pinterest"></i>
+                                            <?php esc_html_e( 'Share on Pinterest', 'tourfic' ); ?>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
                                     <div class="share-center-copy-form tf-dropdown-item" title="Share this link"
                                         aria-controls="share_link_button">
                                         <label class="share-center-copy-label"
@@ -248,6 +269,26 @@ $share_link = get_permalink($post_id);
                         <div class="tf-btn"><a href="https://www.google.com/maps/search/<?php echo $map["address"]; ?>" target="_blank" class="btn-styled"><span><i class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a> </div>
                     </div>
                     <?php } ?>
+                    <?php if (defined( 'TF_PRO' ) && ( !empty($map["address"]) || !empty($map["latitude"]) || !empty($map["longitude"]) )) { ?>
+                    <div class="tf-hotel-location-preview">
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        
+                        <a data-fancybox data-src="#tf-hotel-google-maps" href="javascript:;">
+                            <span><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
+                        </a>
+                        
+                    </div>
+                    <div style="display: none;" id="tf-hotel-google-maps">
+                        <div class="tf-hotel-google-maps-container">
+                            <?php 
+                            if(!empty($map["address"])){ ?>
+                            <iframe src="https://maps.google.com/maps/place?q=<?php echo esc_attr( $map["address"] ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            <?php } else{ ?>
+                            <iframe src="https://maps.google.com/maps/place?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            <?php } ?>
+                        </div>
+                    </div>
+                     <?php } ?>
                     <div class="hero-booking">
                         <?php tf_hotel_sidebar_booking_form(); ?>
                     </div>

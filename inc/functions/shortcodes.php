@@ -305,6 +305,7 @@ function tf_search_form_shortcode( $atts, $content = null ){
             'subtitle'  => '',   // Sub title populer section
             'classes'  => '',
             'fullwidth'  => '',
+            'advanced' => '',
           ),
         $atts
       )
@@ -331,11 +332,24 @@ function tf_search_form_shortcode( $atts, $content = null ){
         </div>
 
         <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent">             
-            <?php tf_hotel_search_form_horizontal( $classes, $title, $subtitle ); ?>
+            <?php 
+            if($advanced=="enabled"){
+                tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle );
+            }else{    
+                tf_hotel_search_form_horizontal( $classes, $title, $subtitle ); 
+            }
+            ?>
         </div>
 
         <div id="tf-tour-booking-form" class="tf-tabcontent">
-            <?php tf_tour_search_form_horizontal( $classes, $title, $subtitle ); ?>
+            <?php 
+            if($advanced=="enabled"){
+                tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle );
+            }else{    
+                tf_tour_search_form_horizontal( $classes, $title, $subtitle ); 
+            }
+            ?>
+       
         </div>
 
         <?php
@@ -343,7 +357,13 @@ function tf_search_form_shortcode( $atts, $content = null ){
         ?>
 
         <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent">             
-            <?php tf_hotel_search_form_horizontal( $classes, $title, $subtitle ); ?>
+        <?php 
+            if($advanced=="enabled"){
+                tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle );
+            }else{    
+                tf_hotel_search_form_horizontal( $classes, $title, $subtitle ); 
+            }
+            ?> 
         </div>
 
         <?php
@@ -351,7 +371,13 @@ function tf_search_form_shortcode( $atts, $content = null ){
         ?>
 
         <div id="tf-tour-booking-form" style="display:block" class="tf-tabcontent">
-            <?php tf_tour_search_form_horizontal( $classes, $title, $subtitle ); ?>
+        <?php 
+            if($advanced=="enabled"){
+                tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle );
+            }else{    
+                tf_tour_search_form_horizontal( $classes, $title, $subtitle ); 
+            }
+        ?>
         </div>
 
         <?php
@@ -397,7 +423,22 @@ function tf_search_result_shortcode( $atts, $content = null ){
     // Get date
     $check_in_out = isset( $_GET['check-in-out-date'] ) ? sanitize_text_field($_GET['check-in-out-date']) : '';
 
-    $data = array($adults, $child, $room, $check_in_out);
+    
+    // Price Range
+    $startprice = isset( $_GET['from'] ) ? absint(sanitize_key($_GET['from'])) : '';
+    $endprice = isset( $_GET['to'] ) ? absint(sanitize_key($_GET['to'])) : '';
+
+    if(!empty($startprice) && !empty($endprice)){
+        if($_GET['type']=="tf_tours"){
+            $data = array($adults, $child, $check_in_out, $startprice, $endprice);
+        }else{
+            $data = array($adults, $child, $room, $check_in_out, $startprice, $endprice);
+        }
+    }else{
+        $data = array($adults, $child, $room, $check_in_out);
+    }
+
+
 
     $paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
     $checkInOutDate = !empty( $_GET['check-in-out-date']) ? explode( ' - ', $_GET['check-in-out-date'] ) : '';
@@ -446,7 +487,21 @@ function tf_search_result_shortcode( $atts, $content = null ){
     } else {
         $args['s'] = $place;
     }
+
     
+    // Hotel Features
+
+    if (!empty($_GET['features'])) {
+        $args['tax_query'] = array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'hotel_feature',
+                'field' => 'slug',
+                'terms'    => $_GET['features'],
+            )
+        );
+    }
+
     $loop = new WP_Query( $args );
 
     ob_start(); ?>
