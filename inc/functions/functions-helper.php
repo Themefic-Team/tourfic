@@ -248,16 +248,12 @@ function tourfic_ask_question_ajax() {
 
 	$author_id = get_post_field('post_author', $post_id);
 
-	$send_email_to = get_post_meta( $post_id, 'send_email_to', true ) ? get_post_meta( $post_id, 'send_email_to', true ) : null;
-
+	$send_email_to = !empty(tfopt('h-enquiry-email')) ? tfopt('h-enquiry-email') : null;
 	$email_replace = array(
 	    "{{admin_email}}" => sanitize_email( get_option( 'admin_email' ) ),
 	    "{{author_email}}" => sanitize_email( get_the_author_meta( 'user_email' , $author_id ) ),
 	);
-
     $send_email_to = strtr($send_email_to, $email_replace);
-
-
 	$subject     = sprintf( esc_html__( 'Someone asked question on: %s', 'tourfic' ), $post_title );
 	$message     = "{$question}";
 	$headers[]   = 'Reply-To: '.$name.' <'.$email.'>';
