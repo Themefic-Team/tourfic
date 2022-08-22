@@ -659,6 +659,9 @@ function tf_single_tour_booking_form( $post_id ) {
                                         to: "<?php echo $return_date; ?>"
                                     }
                                 ],
+                                onReady: function(selectedDates, dateStr, instance) {
+                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                },
 
                             <?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
 

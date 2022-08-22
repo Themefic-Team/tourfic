@@ -425,12 +425,12 @@ $tour_price = new Tour_Price($meta);
 			<div class="tf-container">
 				<div class="tf-faq-sec-title">
 					<h2 class="section-heading"><?php _e( "Frequently Asked Questions", 'tourfic' ); ?></h2>
-					<p>Let’s clarify your confusions. Here are some of the Frequently Asked Questions which most of our client asks.</p>
+					<p><?php _e( "Let’s clarify your confusions. Here are some of the Frequently Asked Questions which most of our client asks.", 'tourfic' ); ?></p>
 				</div>
 				<div class="tf-faq-content-wrapper">
 					<div class="tf-ask-question">
-						<h3>Have a question in mind</h3>
-						<p>Looking for more info? Send a question to the property to find out more.</p>
+						<h3><?php _e( "Have a question in mind", 'tourfic' ); ?></h3>
+						<p><?php _e( "Looking for more info? Send a question to the property to find out more.", 'tourfic' ); ?></p>
 						<div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled"><span><?php esc_html_e( 'Ask a Question', 'tourfic' ); ?></span></a> </div>
 					</div>
 				
