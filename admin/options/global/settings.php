@@ -89,6 +89,17 @@ if( class_exists( 'CSF' ) ) {
     }
 
     /**
+     * Design Options
+     * 
+     * Main menu
+     */
+    if ( file_exists( TF_OPTIONS_PATH . 'global/parts/design-panel.php' ) ) {
+        require_once TF_OPTIONS_PATH . 'global/parts/design-panel.php';
+    } else {
+        tf_file_missing(TF_OPTIONS_PATH . 'global/parts/design-panel.php');
+    }
+
+    /**
      * Miscellaneous Options
      * 
      * Main menu
