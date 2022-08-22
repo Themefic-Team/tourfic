@@ -144,6 +144,7 @@ $share_link = get_permalink($post_id);
                     ?>                          
 
                     <!-- Share Section -->
+                    <?php if(!$disable_share_opt == '1') { ?>
                     <div class="tf-share">
                         <a href="#dropdown-share-center" class="share-toggle"
                             data-toggle="true"><i class="fas fa-share-alt"></i></a>
@@ -209,6 +210,7 @@ $share_link = get_permalink($post_id);
                             </ul>
                         </div>
                     </div>
+                    <?php } ?>
                     <!-- End Share Section -->
                     
                     <div class="reserve-button">
@@ -256,17 +258,39 @@ $share_link = get_permalink($post_id);
                      <?php } ?>
                      <!-- End gallery-->
                      <div class="map-for-mobile">
-                        <?php if (!empty($map["address"])) { ?>
+                        <?php if (!defined( 'TF_PRO' ) && ($address)) { ?>
                         <div class="show-on-map">
-                            <div class="tf-btn"><a href="https://www.google.com/maps/search/<?php echo $map["address"]; ?>" target="_blank" class="btn-styled"><span><i class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a> </div>
+                            <div class="tf-btn"><a href="https://www.google.com/maps/search/<?php echo $address; ?>" target="_blank" class="btn-styled"><span><i class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a> </div>
                         </div>
                         <?php } ?>
-                    </div>
+                     </div>
+                     <?php if (defined( 'TF_PRO' ) && ( !empty($map["address"]) || !empty($map["latitude"]) || !empty($map["longitude"]) )) { ?>
+                        <div class="popupmap-for-mobile">
+                            <div class="tf-hotel-location-preview">
+                                <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                
+                                <a data-fancybox data-src="#tf-hotel-google-maps" href="javascript:;">
+                                    <span class="btn-styled"><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
+                                </a>
+                                
+                            </div>
+                            <div style="display: none;" id="tf-hotel-google-maps">
+                                <div class="tf-hotel-google-maps-container">
+                                    <?php 
+                                    if(!empty($map["address"])){ ?>
+                                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace("#","",$map["address"]) ) ; ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                    <?php } else{ ?>
+                                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
                 </div>
                 <div class="hero-right">
-                    <?php if (!empty($map["address"])) { ?>
+                    <?php if (!defined( 'TF_PRO' ) && ($address)) { ?>
                     <div class="show-on-map">
-                        <div class="tf-btn"><a href="https://www.google.com/maps/search/<?php echo $map["address"]; ?>" target="_blank" class="btn-styled"><span><i class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a> </div>
+                        <div class="tf-btn"><a href="https://www.google.com/maps/search/<?php echo $address; ?>" target="_blank" class="btn-styled"><span><i class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a> </div>
                     </div>
                     <?php } ?>
                     <?php if (defined( 'TF_PRO' ) && ( !empty($map["address"]) || !empty($map["latitude"]) || !empty($map["longitude"]) )) { ?>
@@ -274,7 +298,7 @@ $share_link = get_permalink($post_id);
                         <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                         
                         <a data-fancybox data-src="#tf-hotel-google-maps" href="javascript:;">
-                            <span><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
+                            <span class="btn-styled"><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
                         </a>
                         
                     </div>
@@ -291,18 +315,6 @@ $share_link = get_permalink($post_id);
                      <?php } ?>
                     <div class="hero-booking">
                         <?php tf_hotel_sidebar_booking_form(); ?>
-                    </div>
-
-                    <div id="tf_ask_question-1" class="tf_widget widget widget_tf_ask_question">
-                        <div class="tf-gotq-tour-wrap">
-                            <div class="gotq-top">
-                                <h4><?php esc_html_e( 'Got a question?', 'tourfic' ); ?></h4>				
-                                <p><?php esc_html_e( 'Find more info in the FAQ section.', 'tourfic' ); ?></p>			
-                            </div>
-                            <div class="ni-buttons">
-                                <a href="#" id="tf-ask-question-trigger" class="btn-styled"><?php esc_html_e( 'Ask a question', 'tourfic' ); ?></a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -555,7 +567,14 @@ $share_link = get_permalink($post_id);
 				<div class="tf-faq-sec-title">
                     <h2 class="section-heading"><?php esc_html_e( 'FAQs', 'tourfic' ); ?></h2>
 				</div>
+                
 				<div class="tf-faq-content-wrapper">
+                    <div class="tf-ask-question">
+						<h3><?php _e( "Have a question in mind", 'tourfic' ); ?></h3>
+						<p><?php _e( "Looking for more info? Send a question to the property to find out more.", 'tourfic' ); ?></p>
+						<div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled"><span><?php esc_html_e( 'Ask a Question', 'tourfic' ); ?></span></a> </div>
+					</div>
+
 					<div class="tf-faq-items-wrapper">
 						<?php foreach ( $faqs as $key => $faq ): ?>
 							<div id="tf-faq-item">

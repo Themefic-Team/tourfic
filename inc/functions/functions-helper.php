@@ -212,7 +212,7 @@ function tourfic_ask_question() {
 					</div>
 					<div class="tf-aq-field">
 						<button type="reset" class="screen-reader-text"><?php esc_html_e( 'Reset', 'tourfic' ); ?></button>
-						<button type="submit" form="ask-question" class="button tf_button"><?php esc_html_e( 'Submit', 'tourfic' ); ?></button>
+						<button type="submit" form="ask-question" class="button tf_button btn-styled"><?php esc_html_e( 'Submit', 'tourfic' ); ?></button>
 						<input type="hidden" name="post_id" value="<?php esc_attr_e( get_the_ID() ); ?>">
 						<?php wp_nonce_field( 'ask_question_nonce' ); ?>
 						<div class="response"></div>

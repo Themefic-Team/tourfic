@@ -248,6 +248,7 @@ h3.section-heading {
 .tf-sml-btn {
     font-size: 13px;
     padding: 6px 12px;
+    white-space: nowrap;
 }
 
 .tf_button:hover, .tf-sml-btn:hover {
@@ -1013,7 +1014,7 @@ h3.section-heading {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     content: "\f059";
-    padding-right: 15px;
+    padding-right: 7px;
     color: #003162;
   }
   

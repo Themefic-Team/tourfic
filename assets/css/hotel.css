@@ -46,8 +46,6 @@
     display: inline-block;
 }
 
-<<<<<<< HEAD
-=======
 
 .tf-dropdown-content li a i {
     color: #1D75E3;
@@ -66,7 +64,6 @@
     color: #CC0000;
   }
 
->>>>>>> f6b7f00c244066c7b926162c2795e7fac0acbc22
 .share-tour-content .tf-dropdown-item {
     border: 0;
     margin: 0;
@@ -230,6 +227,10 @@ a.slick-slide-item-link {
     font-size: 15px;
 }
 
+.hero-booking .widget {
+    margin-bottom: 0;
+  }
+
 /**************** FEATURES ****************/
 .tf_features {
     padding-top: 15px;
@@ -344,6 +345,13 @@ a.slick-slide-item-link {
     overflow-x: auto;
 }
 
+.room-selection-wrap select, .room-selection-wrap  .select2-container .select2-selection--single {
+    background-image: none;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
 .availability-table td.description {
     padding: 25px;
 }
@@ -422,11 +430,7 @@ a.slick-slide-item-link {
     bottom: 0;
     background: rgba(255, 255, 255, .8);
     display: none;
-<<<<<<< HEAD
     z-index: 999999;
-=======
-    z-index: 99;
->>>>>>> f6b7f00c244066c7b926162c2795e7fac0acbc22
 }
 
 #tour-room-details-loader-img {
@@ -455,11 +459,28 @@ span.tf-price .amount {
 }
 
 /********************** RESPONSIVE **********************/
+@media only screen and (min-width: 951px) {
+    .popupmap-for-mobile {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    .hero-right .tf-hotel-location-preview {
+        display: none;
+    }
+    .tf-hotel-location-preview iframe {
+        height: 200px;
+      }
+    .popupmap-for-mobile {
+        margin-top:15px;
+    }
+}
 
 @media only screen and (min-width: 831px) {
-.map-for-mobile {
-    display: none;
-}
+    .map-for-mobile {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 830px) {
