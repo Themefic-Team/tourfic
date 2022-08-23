@@ -839,11 +839,12 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
     $url = get_the_permalink() . '?adults=' . ($adults ?? '') . '&children=' . ($child ?? '') . '&infant=' . ($infant ?? '') . '&check-in-out-date=' . ($check_in_out ?? '');
 
     ?>
-	<div class="single-tour-wrap">
+<?php if($featured){ ?>
+	<div class="single-tour-wrap tf-featured">
+<?php } else {	?>
+    <div class="single-tour-wrap">
+<?php }	?>
 		<div class="single-tour-inner">
-			<?php if($featured){ ?>
-				<div class="tf-featured"><?php _e( 'Featured','tourfic' ) ?></div>
-			<?php }	?>
 			<div class="tourfic-single-left">
                 <a href="<?php echo $url; ?>">
 				<?php
@@ -872,16 +873,15 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
 					<?php tf_archive_single_rating();?>
 				</div>
 				<div class="tf-tour-desc">
-					<p><?php echo substr(wp_strip_all_tags(get_the_content()), 0, 200). '...'; ?></p>
+					<p><?php echo substr(wp_strip_all_tags(get_the_content()), 0, 160). '...'; ?></p>
 				</div>
 
-				<div class="availability-btn-area">
-					<a href="<?php echo $url; ?>" class="button tf_button"><?php esc_html_e( 'Details', 'tourfic' );?></a>
+				<div class="availability-btn-area tour-search">
+					<a href="<?php echo $url; ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' );?></a>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<?php
 }
 

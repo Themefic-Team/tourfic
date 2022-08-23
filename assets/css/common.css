@@ -1220,9 +1220,6 @@ h3.section-heading {
         max-width: 100%;
     }
 
-    .archive_ajax_result .tf_item_main_block {
-        max-width: 60% !important;
-    }
 
     .archive_ajax_result .roomPrice.roomPrice_flex.sr_discount {
         text-align: left;

@@ -97,9 +97,9 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-review-container .tf-review-progress-bar .tf-single .tf-text, .tf-review-container .tf-review-progress-bar .tf-single .tf-p-b-rating {
 				color: '.$tf_param_txt_color.';
 			}
-			.tf-review-container .tf-total-review .tf-total-average div {
-				background: '.$tf_rating_bg_color.';
-				color: '.$tf_rating_color.';
+			.tf-review-container .tf-total-review .tf-total-average div, .tf-archive-rating {
+				background: '.$tf_rating_bg_color.'!important;
+				color: '.$tf_rating_color.'!important;
 			}
 		'; }
 		
@@ -147,7 +147,7 @@ if( !function_exists( 'tf_hotel_css' ) ){
 			.show-on-map .btn-styled:hover {background: linear-gradient(to bottom, '.$tf_gradient_one_hov.' 0, '.$tf_gradient_two_hov.' 100%);}
 		'; }
 		if( $tf_hotel_features  ) { $output .= '
-			.tf_features i {color: '.$tf_hotel_features.';}
+			.tf_features i, .tf-archive-desc i {color: '.$tf_hotel_features.'!important;}
 		'; }
 		if( $tf_hotel_table_color OR $tf_hotel_table_bg_color ) { $output .= '
 			.availability-table thead {

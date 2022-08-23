@@ -258,6 +258,7 @@ a.slick-slide-item-link {
     border-radius: 4px;
     border: 1px solid #0000002e;
     box-shadow: -1px 1px 6px -1px #0000002e;
+    margin-top:10px;
 }
 
 .tf_features .tf-feature-list {
