@@ -1031,7 +1031,7 @@ if ( !function_exists('tf_hotel_advanced_search_form_horizontal') ) {
             <div class="tf_input-inner">
                 <label class="tf_label-row" style="width: 100%;">
                     <span class="tf-label"><?php _e('More', 'tourfic'); ?></span>
-                    <span style="text-decoration: none; display: block; cursor: pointer;"><?php _e('Advance', 'tourfic'); ?>  <i class="fas fa-angle-down"></i></a>
+                    <span style="text-decoration: none; display: block; cursor: pointer;"><?php _e('Filter', 'tourfic'); ?>  <i class="fas fa-angle-down"></i></a>
                 </label>
             </div>
             <div class="tf-more-info">
@@ -1061,7 +1061,7 @@ if ( !function_exists('tf_hotel_advanced_search_form_horizontal') ) {
 
         <div class="tf_submit-wrap">
             <input type="hidden" name="type" value="tf_hotel" class="tf-post-type"/>		
-            <button class="tf_button tf-submit" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
+            <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
         </div>
 
     </div>

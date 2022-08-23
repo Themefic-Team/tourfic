@@ -16,7 +16,7 @@
   display: flex;
   justify-content: space-between;
   gap: 30px;
-} 
+}
 
 .tf-tours_search-wrap {
   margin-top: 150px;
@@ -62,7 +62,7 @@
   background: #FFFFFFF0;
   box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
   width: 80%;
-  font-size:16px;
+  font-size: 16px;
 }
 
 
@@ -117,7 +117,7 @@
 }
 
 .tour-extra a {
-  color:#333;
+  color: #333;
 }
 
 .tour-extra i {
@@ -155,8 +155,9 @@
   padding: 9px 15px;
 }
 
-.tf-tours-fixed .tour-extra i, .tf-tours-fixed .tour-extra a {
-  color:#fff;
+.tf-tours-fixed .tour-extra i,
+.tf-tours-fixed .tour-extra a {
+  color: #fff;
 }
 
 .tf-tour-booking-wrap.tf-tours-fixed .tf_tours_booking {
@@ -184,7 +185,6 @@
   background: #fb5a3b;
   width: 180px;
 }
-
 
 /**************** Title Block ****************/
 
@@ -359,14 +359,15 @@
   flex: 1;
 }
 
-.tf-include-section, .tf-exclude-section {
+.tf-include-section,
+.tf-exclude-section {
   background: #000000a3;
-  background-image: linear-gradient(to right, rgba(253,97,67,0), rgb(0, 49, 98));
+  background-image: linear-gradient(to right, rgba(253, 97, 67, 0), rgb(0, 49, 98));
   border-radius: 4px;
   padding: 20px 30px 30px;
   color: #fff;
   -webkit-backdrop-filter: blur(3px);
-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
 }
 
 .tf-inc-exc-content ul {
@@ -563,7 +564,6 @@ backdrop-filter: blur(3px);
 }
 
 @media only screen and (max-width: 1025px) {
-
   .tf-tour-booking-wrap,
   .tf_form-inner input[type="text"],
   .tf_form-inner select {
@@ -572,7 +572,7 @@ backdrop-filter: blur(3px);
 
   .tf_button,
   .flatpickr-calendar {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .tf-square-block-content-wrapper {
@@ -583,7 +583,6 @@ backdrop-filter: blur(3px);
   .tf-single-square-block {
     width: 300px;
   }
-
 }
 
 @media only screen and (max-width: 980px) {
@@ -601,11 +600,12 @@ backdrop-filter: blur(3px);
 }
 
 @media only screen and (min-width: 768px) and (max-width: 970px) {
-  .tf-tours-booking-btn, 
+  .tf-tours-booking-btn,
   .tf-tour-booking-wrap .btn-styled {
     width: 98%;
-    margin:auto;
+    margin: auto;
   }
+
   .tf-slider-item {
     border: 7px solid #fff;
     height: 300px !important;
@@ -633,18 +633,23 @@ backdrop-filter: blur(3px);
     font-size: 15px;
     padding-left: 20px;
   }
-  .tf-tour-booking-wrap .tf_form-inner input[type="text"], .tf_form-inner select {
+
+  .tf-tour-booking-wrap .tf_form-inner input[type="text"],
+  .tf_form-inner select {
     max-width: 100%;
   }
+
   .tf-tour-booking-wrap .tf_selectperson-wrap {
     display: flex;
     justify-content: center;
     width: 95%;
     padding: 10px !important;
   }
+
   .tf-faq-sec-title {
     margin-bottom: 20px;
   }
+
   .tf-inc-exc-content {
     gap: 15px;
   }
@@ -654,32 +659,41 @@ backdrop-filter: blur(3px);
     gap: 2%;
     grid-template-columns: 48% 48%;
   }
+
   .tf-single-square-block {
     width: auto;
   }
-  .tf-tours-booking-btn, 
+
+  .tf-tours-booking-btn,
   .tf-tour-booking-wrap .btn-styled {
     width: 98%;
-    margin:auto;
+    margin: auto;
   }
+
   .tf-slider-item {
     border: 7px solid #fff;
     height: 250px !important;
     padding: 15px;
     margin: 0 7px 15px !important;
   }
-  .tf-include-section, .tf-exclude-section {
+
+  .tf-include-section,
+  .tf-exclude-section {
     padding: 15px 20px 20px;
   }
+
   .tf-travel-time {
     height: 60px;
   }
+
   .tf-tour-booking-wrap {
     max-width: 450px;
   }
+
   .tf-tour-booking-wrap.tf-tours-fixed {
     max-width: 100%;
   }
+
   .tf-ask-question {
     max-width: 450px;
     margin: auto;
@@ -690,9 +704,11 @@ backdrop-filter: blur(3px);
   .tf-title-wrap {
     display: block;
   }
+
   .tf-title-area.tf-tour-title {
     text-align: center;
   }
+
   .tf-single-tour-pricing {
     margin: 20px auto 0;
   }
@@ -702,30 +718,39 @@ backdrop-filter: blur(3px);
   .tf-slider-desc h3 {
     font-size: 16px;
   }
+
   .tf-map-content-wrapper iframe {
     height: 320px;
   }
+
   .tf-suggestion-rating {
     font-size: 12px;
   }
+
   #tour-extra {
     padding: 10px;
   }
-  .tf-single-square-block {;
+
+  .tf-single-square-block {
     padding: 30px 20px;
   }
+
   .tf-inc-exc-content {
     display: block;
   }
+
   .tf-include-section {
     margin-bottom: 15px;
   }
+
   #tf-accordion-wrapper {
     margin-bottom: 15px;
   }
+
   #tour-deposit .tf_button_group {
     display: block;
   }
+
   #tour-deposit .tf_button_group button:first-child {
     margin-bottom: 10px;
   }

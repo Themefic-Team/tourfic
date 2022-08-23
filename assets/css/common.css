@@ -15,7 +15,7 @@
 }
 
 .gray-wrap {
-    background:#F5F8FF;
+    background: #F5F8FF;
 }
 
 .section-heading {
@@ -56,7 +56,7 @@ h3.section-heading {
 }
 
 .tf-d-n {
-    display: none!important;
+    display: none !important;
 }
 
 .tf-d-g {
@@ -251,7 +251,8 @@ h3.section-heading {
     white-space: nowrap;
 }
 
-.tf_button:hover, .tf-sml-btn:hover {
+.tf_button:hover,
+.tf-sml-btn:hover {
     background: #0054a8;
     color: #fff;
     text-decoration: none;
@@ -304,18 +305,18 @@ h3.section-heading {
     color: #fff;
     border-radius: 4px;
     position: relative;
-  }
-  
-  .tf-single-rating i {
+}
+
+.tf-single-rating i {
     font-size: 14px;
     color: #FFCD3D;
-  }
-  
-  .tf-single-rating span {
+}
+
+.tf-single-rating span {
     margin: 0 3px 0 5px;
     font-weight: 700;
     font-size: 18px;
-  }
+}
 
 /***************** SLIDER ****************/
 
@@ -423,8 +424,9 @@ h3.section-heading {
 }
 
 .hero-booking .tf_booking-widget {
-    color:#fff;
+    color: #fff;
 }
+
 .tf-hotel-side-booking .tf_form-inner {
     position: relative;
     display: grid;
@@ -600,7 +602,7 @@ h3.section-heading {
 }
 
 .tf_selectperson-wrap {
-    width:auto;
+    width: auto;
     position: relative;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -986,73 +988,73 @@ h3.section-heading {
 .tf-faq-sec-title {
     margin-bottom: 60px;
     text-align: center;
-  }
-  
-  .tf-faq-sec-title p {
+}
+
+.tf-faq-sec-title p {
     max-width: 480px;
     margin: auto;
-  }
-  
-  .tf-faq-content-wrapper {
+}
+
+.tf-faq-content-wrapper {
     display: flex;
     gap: 35px;
-  }
-  
-  .tf-ask-question {
+}
+
+.tf-ask-question {
     background: #F7F7FA;
     padding: 30px;
     border-radius: 4px;
     flex: 2;
     text-align: center;
-  }
-  
-  .tf-faq-items-wrapper {
+}
+
+.tf-faq-items-wrapper {
     flex: 5;
-  }
-  
-  .tf-ask-question h3:before {
+}
+
+.tf-ask-question h3:before {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     content: "\f059";
     padding-right: 7px;
     color: #003162;
-  }
-  
-  .tf-ask-question h3 {
+}
+
+.tf-ask-question h3 {
     font-size: 22px;
     color: #3A3A44;
-  }
-  
-  #tf-faq-item {
+}
+
+#tf-faq-item {
     border-bottom: 1px solid #c8e2fc;
     margin-bottom: 10px;
     padding-bottom: 10px;
-  }
-  
-  .tf-faq-title h4 {
+}
+
+.tf-faq-title h4 {
     width: 100%;
-    color:#000;
-  }
-  
-  #tf-faq-item .tf-faq-title {
+    color: #000;
+}
+
+#tf-faq-item .tf-faq-title {
     cursor: pointer;
     transition: 0.2s ease;
     display: flex;
     align-items: center;
-  }
-  
-  #tf-faq-item .arrow {
+}
+
+#tf-faq-item .arrow {
     transition: 0.25s ease;
     transform: rotate(-90deg);
     font-size: 20px;
-    color:#4F91FF;
-  }
-  
-  #tf-faq-item .arrow-animate {
+    color: #4F91FF;
+}
+
+#tf-faq-item .arrow-animate {
     transform: rotate(0deg);
-  }
-  
-  #tf-faq-item .tf-faq-desc {
+}
+
+#tf-faq-item .tf-faq-desc {
     background-color: #FFFFFF;
     display: none;
     padding: 20px 0;
@@ -1062,11 +1064,11 @@ h3.section-heading {
     position: relative;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-  }
+}
 
 /**************** Slider / Carousel ****************/
 
-  .tf-slider-item {
+.tf-slider-item {
     border: 12px solid #fff;
     box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
     border-radius: 4px;
@@ -1078,9 +1080,9 @@ h3.section-heading {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-  }
-  
-  .tf-slider-content {
+}
+
+.tf-slider-content {
     background: rgba(0, 0, 0, 0.45);
     border: 1px solid rgba(255, 255, 255, 0.16);
     -webkit-backdrop-filter: blur(3px);
@@ -1089,29 +1091,29 @@ h3.section-heading {
     width: 100%;
     padding: 15px;
     color: #FFFFFF;
-  }
-  
-  .tf-slider-desc h3 {
+}
+
+.tf-slider-desc h3 {
     font-size: 20px;
     color: #FFFFFF;
-  }
-  
-  .tf-slider-desc h3 span {
+}
+
+.tf-slider-desc h3 span {
     font-size: 15px;
     line-height: 26px;
     margin-top: 5px;
     display: block;
     font-weight: 400;
-  }
-  
-  .tf-slider-desc a {
+}
+
+.tf-slider-desc a {
     color: #fff;
     text-decoration: none;
-  }
-  
-  .tf-slider-desc a:hover {
+}
+
+.tf-slider-desc a:hover {
     color: #FFCD3D;
-  }
+}
 
 /**************************************** WISHLIST **************************************/
 .wish-button {
@@ -1125,13 +1127,16 @@ h3.section-heading {
     margin: 0;
     transition: 0.3s;
 }
+
 .tf-wishlists .remove-wishlist {
     cursor: pointer;
 }
+
 .wish-button:hover {
     background: #333;
     color: #f1fbf3;
 }
+
 .tf-wishlist-button {
     font-size: 24px;
     cursor: pointer;
@@ -1139,29 +1144,33 @@ h3.section-heading {
     line-height: 1;
     color: #333;
 }
+
 .tf-wishlist {
     text-align: right;
     margin-bottom: 20px;
-  }
+}
+
 .single-tour-wish-bt {
     color: #333;
     font-size: 24px;
     cursor: pointer;
-  }
-  .single-tour-wish-bt i {
-    background: rgba(26,43,72,.6);
+}
+
+.single-tour-wish-bt i {
+    background: rgba(26, 43, 72, .6);
     border-radius: 50%;
     color: #fff;
     font-size: 18px;
     padding: 10px 9px 7px 10px;
     transition: 0.3s;
-  }
+}
 
 /**************************************** RESPONSIVE **************************************/
 @media only screen and (max-width: 1000px) {
     form.tf-review-form {
         gap: 20px;
     }
+
     .tf-review-form-container {
         min-width: 500px;
     }
@@ -1227,6 +1236,7 @@ h3.section-heading {
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
+
     .tf-review-container .tf-review-progress-bar,
     .tf-single-review {
         grid-template-columns: auto;
@@ -1250,11 +1260,20 @@ h3.section-heading {
         display: block;
     }
 
-    .tf_selectdate-wrap,
     .tf_selectperson-wrap {
         padding: 20px !important;
         border-bottom: 1px solid #ccc;
     }
+
+    .tf_selectdate-wrap {
+        padding: 10px 20px !important;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .tf_selectdate-wrap.tf_more_info_selections {
+        padding: 20px !important;
+      }
+
     .tf-container {
         width: 100%;
     }
@@ -1265,197 +1284,13 @@ h3.section-heading {
     .tf-single-review {
         grid-template-columns: auto;
     }
+
     .tf-single-rating span {
         font-size: 14px;
-      }
-      .tf-single-rating {
+    }
+
+    .tf-single-rating {
         font-size: 14px;
         padding: 6px;
-      }
+    }
 }
-
-
-
-
-
-/*================================
-|       Adavance Search Form     |
-================================*/
-
-.tf_more_info_selections{
-    position: relative;
-    cursor: pointer;
-}
-.tf-more-info {
-    position: absolute;
-    width: 620px;
-    padding: 15px 30px;
-    box-shadow: 0 1px 2px rgba(0,0,0,.175);
-    border-radius: 0 0 4px 4px;
-    border-color: #dfdfdf;
-    margin-top: 0;
-    background: #fff;
-    right: 0;
-    top: 102%;
-    display: none;
-    z-index: 999;
-}
-
-.tf_form-inner .tf-hotel-results {
-    position: absolute;
-    border: 1px solid #d4d4d4;
-    border-bottom: none;
-    border-top: none;
-    z-index: 99;
-    /*position the autocomplete items to be the same width as the container:*/
-    top: 100%;
-    left: 0;
-    right: 0;
-}
-.tf_form-inner .tf-hotel-results #ui-id-1 li,
-.tf_form-inner .tf-hotel-results #ui-id-2 li {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #fff; 
-    border-bottom: 1px solid #d4d4d4;
-    color: #444;
-}
-.tf_form-inner .tf-hotel-results #ui-id-1 li:hover,
-.tf_form-inner .tf-hotel-results #ui-id-2 li:hover {
-    background-color: #e9e9e9; 
-}  
-
-.tf-more-info .form-group.form-check{
-    width: 33%;
-    float: left;
-}
-.tf-more-info span{
-    color: #333;
-    font-size: 16px;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 10px;
-}
-.tf-more-info.show{
-    display: block;
-}
-.tf_form-inner .tf-hotel-results #ui-id-1 li,
-.tf_form-inner .tf-hotel-results #ui-id-2 li {
-    border-left: 1px solid #d4d4d4;
-    border-right: 1px solid #d4d4d4;
-}
-.tf-filter-price-range .al-range-slider__track{
-    background: #EEE;
-    height: 10px;
-    box-shadow: none !important;
-    margin: 30px 0px 10px 0px;
-}
-
-.tf-filter-price-range .al-range-slider_dark{
-    padding: 0px !important;
-}
-.tf-filter-price-range .al-range-slider_dark .al-range-slider__bar{
-    background: #003162;
-    box-shadow: none !important;
-}
-.tf-filter-price-range .al-range-slider__knob {
-    background: #003162;
-    height: 15px;
-    width: 15px;
-    box-shadow: none !important;
-    border: 3px solid #003162;
-  }
-.tf-filter-price-range  .al-range-slider__tooltip {
-    background: #003162;
-    border-radius: 5px;
-    box-shadow: none;
-    padding: 3px 10px;
-    color: #fff !important;
-    font-size: 13px !important;
-    margin-bottom: 0px !important;
-  }
-  .tf-filter-price-range .al-range-slider__knob:first-child span{
-    left: 10px !important;
-  }
-  .tf-filter-price-range .al-range-slider__input.js-al-range-slider__input {
-    display: none;
-  }
-  .tf_form-inner .tf-hotel-results #ui-id-1,
-  .tf_form-inner .tf-hotel-results #ui-id-2{
-    left: 0 !important;
-    width: 100% !important;
-    right: 0 !important;
-    margin: 0 !important;
-    list-style: none;
-    top: 100% !important;
-    height: 225px;
-    z-index: 99999;
-    overflow-y: scroll;
-    padding-left: 0px !important;
-  }
-  .tf_form-inner .tf-hotel-results #ui-id-1 li,
-  .tf_form-inner .tf-hotel-results #ui-id-2 li{
-    text-transform: capitalize;
-  }
-  .tf_tf_booking-widget-wrap{
-    z-index: 999;
-  }
-
-  /* Quick question */
-
-  #tf-ask-question {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;
-    background: transparent;
-  }
-  .tf-aq-overlay {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
-    background: #000;
-    opacity: 0.5;
-  }
-  .tf-aq-outer {
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    top: 50%;
-    width: 100%;
-    max-width: 428px;
-    background: #fff;
-    padding: 40px;
-    border-radius: 4px;
-    overflow: auto;
-    transform: translateY(-50%);
-    max-height: 95%;
-  }
-  span.close-aq {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    width: 25px;
-    text-align: center;
-    height: 25px;
-    background: #e00d0d;
-    color: #fff;
-    line-height: 25px;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  .tf-aq-field {
-    position: relative;
-    margin: 10px 0;
-    overflow: hidden;
-  }
-  .tf-aq-field input, .tf-aq-field textarea {
-    width: 100%;
-  }
