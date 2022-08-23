@@ -798,24 +798,22 @@ if ( class_exists( 'CSF' ) ) {
       
               array(
                 'id'       => 't-review',
-                'class'    => 'tf-csf-disable tf-csf-pro',
                 'type'     => 'switcher',
                 'title'    => __('Disable Review Section', 'tourfic' ),
-                'subtitle'   => $badge_pro,
                 'text_on'  => __('Yes', 'tourfic' ),
                 'text_off' => __('No', 'tourfic' ),
+                'default'  => false
             ),
     
             array(
                 'id'       => 't-related',
-                'class'    => 'tf-csf-disable tf-csf-pro',
                 'type'     => 'switcher',
                 'title'    => __('Disable Related Tour Section', 'tourfic' ),
-                'subtitle'   => $badge_pro,
                 'text_on'  => __('Yes', 'tourfic' ),
                 'text_off' => __('No', 'tourfic' ),
+                'default'  => false
             ),
-
+ 
               array(
                 'type'    => 'notice',
                 'style'   => 'info',

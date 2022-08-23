@@ -434,7 +434,7 @@ $share_link = get_permalink($post_id);
                                             }
                                             ?>
                                             </div>
-                                            <div class="bed-facilities"><?php echo $room['description']; ?></div>
+                                            <div class="bed-facilities"><?php _e( $room['description'] ); ?></div>
                                         </div>
 
                                         <?php if ($footage) { ?>

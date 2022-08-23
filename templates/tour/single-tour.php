@@ -190,7 +190,7 @@ $tour_price = new Tour_Price($meta);
 						<!-- Start map link -->
 							<div class="tf-map-link">
 							<?php if($location) {
-                                echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' .$location. '.</span>';
+                                echo '<a href="#tour-map"><span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' .$location. '.</span></a>';
                             } ?>
 							</div>
 						<!-- End map link -->
@@ -393,7 +393,9 @@ $tour_price = new Tour_Price($meta);
 										<?php if ($itinerary['image']) {
 											echo '<img src="' .esc_url( $itinerary['image'] ). '">';
 										} ?>
-											<p><?php echo esc_html( $itinerary['desc'] ); ?></p>
+										<div class="trav-cont">
+											<p><?php _e( $itinerary['desc'] ); ?></p> 
+										</div>
 										</div>
 									</div>
 							</div>
@@ -407,7 +409,7 @@ $tour_price = new Tour_Price($meta);
 										
 		<!-- Map Section Start -->
 		<?php if( $location ):  ?>
-			<div class="tf-map-wrapper">
+			<div id="tour-map" class="tf-map-wrapper">
 				<div class="tf-container">
 					<div class="tf-row">
 						<div class="tf-map-content-wrapper">

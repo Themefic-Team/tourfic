@@ -554,7 +554,7 @@ if( class_exists( 'CSF' ) ) {
                 'text_off' => __('No', 'tourfic' ),
                 'default'  => false
             ),
-
+ 
             array(
               'type'    => 'notice',
               'style'   => 'info',

@@ -269,6 +269,15 @@
                 scrollTop: $("#tf-review").offset().top - 32
             }, 1000);
         });
+
+        /**
+         * Scroll to Map Section
+         */
+         $(".tf-map-link a").click(function () {
+            $('html, body').animate({
+                scrollTop: $("#tour-map").offset().top - 32
+            }, 1000);
+        });
         
         /**
          * Ajax tour booking

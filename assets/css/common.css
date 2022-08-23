@@ -286,7 +286,7 @@ h3.section-heading {
     column-gap: 5px;
 }
 
-.tf-map-link {
+.tf-map-link a {
     font-size: 14px;
     color: #393939;
 }
