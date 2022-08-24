@@ -291,9 +291,7 @@
 
             var formData = new FormData(this);            
             formData.append('action', 'tf_tours_booking');
-            // for (var value of formData.values()) {
-            //     console.log(value);
-            // }
+            
 
             // Tour Extra
             var tour_extra_total = 0;
@@ -550,8 +548,7 @@
             });
         }
 
-        // Usage DOM: <div data-fullwidth="true">...</div> in JS: fullwidthInit("[data-fullwidth=true]");
-        //fullwidthInit("[data-fullwidth=true]");
+        
 
         /**
          * Share buttons
@@ -572,12 +569,7 @@
             document.execCommand("copy");
         });
 
-        /**
-         * Toggle FAQ
-         */
-        //$('.faq-head').click(function (e) {
-           // $(this).parent().toggleClass('active').find('.faq-content').slideToggle('fast');
-        //});
+        
 
         /**
          * Related Tour
@@ -1337,11 +1329,6 @@
             $(this).parents('#tf-accordion-wrapper').siblings().find('.tf-accordion-content').slideUp();
           });
           
-        // $(".tf-travel-text h4").click(function(){
-           //  $(this).parent().find('.tf-arrow').toggleClass('tf-arrow-animate');
-          //   $(this).siblings('.tf-travel-content').slideToggle();
-          //   $(this).parents('.tf-travel-itinerary-item').siblings().find('.tf-travel-content').slideUp();
-         //});
 
          // FAQ Accordion
          $('.tf-faq-title').click(function(){
@@ -1351,15 +1338,6 @@
             $(this).parents('#tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
           });
 
-         //$(".tf-faq-title").click(function(){
-             //$(this).siblings('.tf-faq-desc').slideToggle();
-            // $(this).parents('.tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
-         //});
- 
-         
-         //$(".tf-header-menu-triger").click(function(){
-           //  $('.tf-header-menu-wrap').slideToggle();
-         //});
 
         
     });

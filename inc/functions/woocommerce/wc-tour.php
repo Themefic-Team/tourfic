@@ -452,8 +452,8 @@ add_action( 'woocommerce_checkout_create_order_line_item', 'tf_tour_custom_order
 function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 
     // Assigning data into variables
-    $order_type       = $values['tf_tours_data']['order_type'];
-    $post_author      = $values['tf_tours_data']['post_author'];
+    $order_type       = !empty( $values['tf_tours_data']['order_type'] ) ? $values['tf_tours_data']['order_type'] : '';
+    $post_author      = !empty( $values['tf_tours_data']['post_author'] ) ? $values['tf_tours_data']['post_author'] : '';
     $tour_id          = !empty( $values['tf_tours_data']['tour_id'] ) ? $values['tf_tours_data']['tour_id'] : '';
     $tour_type        = !empty( $values['tf_tours_data']['tour_type'] ) ? $values['tf_tours_data']['tour_type'] : '';
     $adults_number    = !empty( $values['tf_tours_data']['adults'] ) ? $values['tf_tours_data']['adults'] : '';

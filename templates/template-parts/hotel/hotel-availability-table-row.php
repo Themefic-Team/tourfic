@@ -54,7 +54,9 @@
             <div class="tf-room-title"><h4><?php esc_html_e( 'Amenities', 'tourfic' );?></h4></div>
             <ul class="room-feature-list">
 
-                <?php foreach ( $room['features'] as $feature ) {
+                <?php 
+                if( !empty( $room['features'] ) ){
+                foreach ( $room['features'] as $feature ) {
 
                         $room_f_meta = get_term_meta( $feature, 'hotel_feature', true );
 
@@ -72,7 +74,7 @@
                             <i class="tool-i"></i>
                         </div>
                     </li>
-                <?php }?>
+                <?php } } ?>
             </ul>
         </div>
     </td>

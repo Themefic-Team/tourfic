@@ -50,8 +50,12 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 
         //Updated CSS
         wp_enqueue_style( 'tf-common-style', TF_ASSETS_URL . 'css/common.css', null, '' );
-        wp_enqueue_style( 'tf-hotel-style', TF_ASSETS_URL . 'css/hotel.css', null, '' );
-        wp_enqueue_style( 'tf-tour-style', TF_ASSETS_URL . 'css/tour.css', null, '' );
+        if ( get_post_type() == 'tf_hotel' ){
+            wp_enqueue_style( 'tf-hotel-style', TF_ASSETS_URL . 'css/hotel' . $min_css . '.css', null, '' );
+        }
+        if ( get_post_type() == 'tf_tours' ){
+            wp_enqueue_style( 'tf-tour-style', TF_ASSETS_URL . 'css/tour' . $min_css . '.css', null, '' );
+        }
         wp_enqueue_style( 'tf-search-style', TF_ASSETS_URL . 'css/search-result.css', null, '' );
         wp_enqueue_style( 'tf-shortcode-style', TF_ASSETS_URL . 'css/shortcode.css', null, '' );
 
@@ -244,7 +248,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         /**
          * Custom
          */       
-        //wp_enqueue_style( 'tourfic', TF_ASSETS_URL . 'css/old/tourfic' . $min_css . '.css', '', TOURFIC );
+
         wp_enqueue_script( 'tourfic', TF_ASSETS_URL . 'js/tourfic' . $min_js . '.js', '', TOURFIC, true );
         wp_localize_script( 'tourfic', 'tf_params',
             array(
