@@ -442,7 +442,7 @@ $share_link = get_permalink($post_id);
                                             <div class="room-detail-icon">
                                                 <span class="room-icon-wrap"><i
                                                         class="fas fa-ruler-combined"></i></span>
-                                                <span class="icon-text tf-d-b"><?php echo $footage; ?> sft</span>
+                                                <span class="icon-text tf-d-b"><?php echo $footage; ?> <?php _e( 'sft', 'tourfic' ); ?></span>
                                             </div>
                                             <div class="tf-top">
                                                 <?php _e( 'Room Footage', 'tourfic' ); ?>
