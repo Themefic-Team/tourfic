@@ -35,7 +35,7 @@ CSF::createSection( $prefix, array(
         ),
 
         array(
-            'id'          => '',
+            'id'          => 'google-page-option',
             'class'    => 'tf-csf-disable tf-csf-pro',
             'type'        => 'select',
             'title'       => __('Select Map', 'tourfic' ),
@@ -47,7 +47,7 @@ CSF::createSection( $prefix, array(
             'default'     => 'default'
         ),
         array(
-			'id'         => '',
+			'id'         => 'tf-googlemapapi',
             'class'    => 'tf-csf-disable tf-csf-pro',
 			'type'       => 'text',
 			'title'      => __('Google Map API Key', 'tourfic' ),
