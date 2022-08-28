@@ -323,14 +323,25 @@ function tf_search_form_shortcode( $atts, $content = null ){
     <div id="tf-booking-search-tabs">
 
         <?php
+        $disable_services_info = tfopt('disable-services');
         if ($type == 'all') {
         ?>
 
         <div class="tf-booking-form-tab">
-            <button class="tf-tablinks active" onclick="tfOpenForm(event, 'tf-hotel-booking-form')"><?php _e('Hotel', 'tourfic'); ?></button>
-            <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-tour-booking-form')"><?php _e('Tour', 'tourfic'); ?></button>
+            <?php 
+            if(empty($disable_services_info)){ ?>
+                <button class="tf-tablinks active" onclick="tfOpenForm(event, 'tf-hotel-booking-form')"><?php _e('Hotel', 'tourfic'); ?></button>
+                <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-tour-booking-form')"><?php _e('Tour', 'tourfic'); ?></button>
+            <?php 
+            }
+            if(tfopt('disable-services') && !in_array('hotel', tfopt('disable-services'))) { ?>
+                <button class="tf-tablinks active" onclick="tfOpenForm(event, 'tf-hotel-booking-form')"><?php _e('Hotel', 'tourfic'); ?></button>
+            <?php } ?>
+            <?php if(tfopt('disable-services') && !in_array('tour', tfopt('disable-services'))) { ?>
+                <button class="tf-tablinks active" onclick="tfOpenForm(event, 'tf-tour-booking-form')"><?php _e('Tour', 'tourfic'); ?></button>
+            <?php } ?>
         </div>
-
+        <?php if(empty($disable_services_info)){ ?>
         <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent">             
             <?php 
             if($advanced=="enabled"){
@@ -340,7 +351,6 @@ function tf_search_form_shortcode( $atts, $content = null ){
             }
             ?>
         </div>
-
         <div id="tf-tour-booking-form" class="tf-tabcontent">
             <?php 
             if($advanced=="enabled"){
@@ -349,11 +359,45 @@ function tf_search_form_shortcode( $atts, $content = null ){
                 tf_tour_search_form_horizontal( $classes, $title, $subtitle ); 
             }
             ?>
-       
         </div>
-
+        <?php } if(tfopt('disable-services') && !in_array('hotel', tfopt('disable-services'))) { ?>
+            <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent">             
+                <?php 
+                if($advanced=="enabled"){
+                    tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle );
+                }else{    
+                    tf_hotel_search_form_horizontal( $classes, $title, $subtitle ); 
+                }
+                ?>
+            </div>
+        
+        <?php } if(tfopt('disable-services') && !in_array('tour', tfopt('disable-services'))) { ?>
+            <div id="tf-tour-booking-form" style="display:block" class="tf-tabcontent">
+                <?php 
+                if($advanced=="enabled"){
+                    tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle );
+                }else{    
+                    tf_tour_search_form_horizontal( $classes, $title, $subtitle ); 
+                }
+                ?>
+            </div>
         <?php
+        }
         } else if ($type == 'hotel'){
+        if(empty($disable_services_info)){  ?>
+
+        <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent">             
+            <?php 
+            if($advanced=="enabled"){
+                tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle );
+            }else{    
+                tf_hotel_search_form_horizontal( $classes, $title, $subtitle ); 
+            }
+            ?> 
+        </div>
+        <?php
+        }
+        if(tfopt('disable-services') && !in_array('hotel', tfopt('disable-services'))) {
         ?>
 
         <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent">             
@@ -367,7 +411,20 @@ function tf_search_form_shortcode( $atts, $content = null ){
         </div>
 
         <?php
-        } else if ($type == 'tour'){
+        } } else if ($type == 'tour'){
+        if(empty($disable_services_info)){  ?>
+            <div id="tf-tour-booking-form" style="display:block" class="tf-tabcontent">
+            <?php 
+                if($advanced=="enabled"){
+                    tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle );
+                }else{    
+                    tf_tour_search_form_horizontal( $classes, $title, $subtitle ); 
+                }
+            ?>
+            </div>
+        <?php
+        }
+        if(tfopt('disable-services') && !in_array('tour', tfopt('disable-services'))) {
         ?>
 
         <div id="tf-tour-booking-form" style="display:block" class="tf-tabcontent">
@@ -381,7 +438,7 @@ function tf_search_form_shortcode( $atts, $content = null ){
         </div>
 
         <?php
-        }
+        } }
         ?>
 
     </div>

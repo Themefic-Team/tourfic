@@ -255,7 +255,25 @@ $share_link = get_permalink($post_id);
                                 </div>
                             </div>
                         </div>
-                     <?php } ?>
+                     <?php } else{ ?>
+                        <div class="tf-gallery-wrap">
+                            <div class="list-single-main-media fl-wrap" id="sec1">
+                                <div class="single-slider-wrapper fl-wrap">
+                                    <div class="tf_slider-for fl-wrap">
+                                        <?php
+                                            echo '<div class="slick-slide-item">';
+                                                echo '<a href="'.get_the_post_thumbnail_url( $post_id,'full' ).'" class="slick-slide-item-link" data-fancybox="hotel-gallery">';
+                                                    echo get_the_post_thumbnail( $post_id,'full' );
+                                                echo '</a>';
+                                            echo '</div>';
+                                        ?>
+                                    </div>
+                                    <div class="swiper-button-prev sw-btn"><i class="fa fa-angle-left"></i></div>
+                                    <div class="swiper-button-next sw-btn"><i class="fa fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
                      <!-- End gallery-->
                      <div class="map-for-mobile">
                         <?php if (!defined( 'TF_PRO' ) && ($address)) { ?>
@@ -266,7 +284,7 @@ $share_link = get_permalink($post_id);
                      </div>
                      <?php if (defined( 'TF_PRO' ) && ( !empty($map["address"]) || !empty($map["latitude"]) || !empty($map["longitude"]) )) { ?>
                         <div class="popupmap-for-mobile">
-                            <div class="tf-hotel-location-preview">
+                            <div class="tf-hotel-location-preview show-on-map">
                                 <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                                 
                                 <a data-fancybox data-src="#tf-hotel-google-maps" href="javascript:;">
@@ -294,7 +312,7 @@ $share_link = get_permalink($post_id);
                     </div>
                     <?php } ?>
                     <?php if (defined( 'TF_PRO' ) && ( !empty($map["address"]) || !empty($map["latitude"]) || !empty($map["longitude"]) )) { ?>
-                    <div class="tf-hotel-location-preview">
+                    <div class="tf-hotel-location-preview show-on-map">
                         <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&output=embed" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                         
                         <a data-fancybox data-src="#tf-hotel-google-maps" href="javascript:;">

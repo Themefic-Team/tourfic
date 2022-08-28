@@ -264,6 +264,9 @@ if( class_exists( 'CSF' ) ) {
               'type'     => 'number',
               'title'    => __('Number of Rooms', 'tourfic' ),
               'subtitle' => __( 'Number of available rooms for booking', 'tourfic' ),
+              'attributes' => array(
+                'min' => '0',
+              ),
             ),
 
             array(
@@ -284,9 +287,10 @@ if( class_exists( 'CSF' ) ) {
 
             array(
               'id'       => 'gallery',
+              'class'    => 'tf-csf-disable tf-csf-pro',
               'type'     => 'gallery',
               'title'    => __('Gallery', 'tourfic' ),
-              'subtitle' => __( 'Upload images to make a gallery image for room', 'tourfic' ),
+              'subtitle' => $badge_pro,
             ),
 
             array(
@@ -294,6 +298,9 @@ if( class_exists( 'CSF' ) ) {
               'type'     => 'number',
               'title'    => __('Number of Beds', 'tourfic' ),
               'subtitle' => __( 'Number of beds present in the room', 'tourfic' ),
+              'attributes' => array(
+                'min' => '0',
+              ),
             ),
 
             array(
@@ -301,6 +308,9 @@ if( class_exists( 'CSF' ) ) {
               'type'     => 'number',
               'title'    => __('Number of Adults', 'tourfic' ),
               'subtitle' => __( 'Max number of persons allowed in the room', 'tourfic' ),
+              'attributes' => array(
+                'min' => '0',
+              ),
             ),
 
             array(
@@ -308,6 +318,9 @@ if( class_exists( 'CSF' ) ) {
               'type'     => 'number',
               'title'    => __('Number of Children', 'tourfic' ),
               'subtitle' => __( 'Max number of persons allowed in the room', 'tourfic' ),
+              'attributes' => array(
+                'min' => '0',
+              ),
             ),
 
             array(

@@ -733,12 +733,16 @@ function tf_single_tour_booking_form( $post_id ) {
                     })(jQuery);
                 </script>
 
-                <?php if ( defined( 'TF_PRO' ) && $tour_extras ) { ?>
+                <?php if ( defined( 'TF_PRO' ) && $tour_extras ) { 
+                if((!empty($tour_extras[0]['title']) && !empty($tour_extras[0]['desc']) && !empty($tour_extras[0]['price'])) || !empty($tour_extras[1]['title']) && !empty($tour_extras[1]['desc']) && !empty($tour_extras[1]['price'])){  
+                ?>
                 <div class="tour-extra">
                     <a data-fancybox data-src="#tour-extra" href="javascript:;"><i class="far fa-plus-square"></i>Tour Extras</a>
                     <div style="display: none;" id="tour-extra">
                         <div class="tour-extra-container">
-                        <?php foreach( $tour_extras as $tour_extra ){ ?>
+                        <?php foreach( $tour_extras as $tour_extra ){ 
+                            if(!empty($tour_extra['title']) && !empty($tour_extra['desc']) && !empty($tour_extra['price'])){
+                        ?>
                             <div class="tour-extra-single">
                                 <div class="tour-extra-left">
                                     <h4><?php _e( $tour_extra['title'] ); ?></h4>
@@ -749,11 +753,11 @@ function tf_single_tour_booking_form( $post_id ) {
                                     <input type="checkbox" value="<?php _e( $tour_extra['price'] ); ?>" data-title="<?php _e( $tour_extra['title'] ); ?>">
                                 </div>												
                             </div>					
-                        <?php } ?>
+                        <?php } } ?>
                         </div>
                     </div>
                 </div>	
-                <?php } ?>	
+                <?php } } ?>	
                 <div class="tf-tours-booking-btn">
                     <input type="hidden" name="location" value="">
                     <input type="hidden" name="deposit" value="0">
