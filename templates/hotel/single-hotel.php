@@ -343,6 +343,145 @@ $share_link = get_permalink($post_id);
     <!-- Start description -->
     <div class="description-section sp-50">
         <div class="tf-container">
+            <div class="tf-ct-pricebox">
+            <h2 class="section-heading"><?php esc_html_e( 'Tariffs', 'tourfic' ); ?></h2>
+            <span class="tf-person-title"><?php esc_html_e( 'Per Person', 'tourfic' ); ?></span>
+            <div class="tf-ct-price-grid">
+                <?php 
+                if(defined( 'TF_PRO' ) && !empty($rooms)){ 
+                foreach ($rooms as $room) {
+                    ?>
+                    <table class="table tf-single-pricebox">
+                        <tr>
+                            <td>
+                                <?php echo esc_html( $room['title'] ); ?>
+                            </td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><?php esc_html_e( 'Room', 'tourfic' ); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><?php esc_html_e( 'Breakfast', 'tourfic' ); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><?php esc_html_e( 'Half B.', 'tourfic' ); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><?php esc_html_e( 'Full B.', 'tourfic' ); ?></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <?php 
+                            $tf8days  = !empty($room['tf-8-days']) ? $room['tf-8-days'] : ''; 
+                            if(!empty($tf8days)){
+                            ?>
+                            <td>
+                            <table>
+                                <tr>
+                                    <td><?php esc_html_e( '8 DAYS', 'tourfic' ); ?></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $tf8days['tf-room'] ? wc_price($tf8days['tf-room']) : '';  ?></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $tf8days['tf-breakfast'] ? wc_price($tf8days['tf-breakfast']) : '';  ?></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $tf8days['tf-half-b'] ? wc_price($tf8days['tf-half-b']) : '';  ?></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $tf8days['tf-full-b'] ? wc_price($tf8days['tf-full-b']) : '';  ?></td>
+                                </tr>
+                            </table>
+                            </td>
+                            <?php } ?>
+
+                            <?php 
+                            $tf16days  = !empty($room['tf-16-days']) ? $room['tf-16-days'] : ''; 
+                            if(!empty($tf16days)){
+                            ?>
+                            <td>
+                            <table>
+                                <tr>
+                                    <td><?php esc_html_e( '16 DAYS', 'tourfic' ); ?></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $tf16days['tf-room'] ? wc_price($tf16days['tf-room']) : '';  ?></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $tf16days['tf-breakfast'] ? wc_price($tf16days['tf-breakfast']) : '';  ?></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $tf16days['tf-half-b'] ? wc_price($tf16days['tf-half-b']) : '';  ?></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $tf16days['tf-full-b'] ? wc_price($tf16days['tf-full-b']) : '';  ?></td>
+                                </tr>
+                            </table>
+                            </td>
+                            <?php } ?>
+
+                            <?php 
+                            $tf24days  = !empty($room['tf-24-days']) ? $room['tf-24-days'] : ''; 
+                            if(!empty($tf24days)){
+                            ?>
+                            <td>
+                            <table>
+                                <tr>
+                                    <td><?php esc_html_e( '24 DAYS', 'tourfic' ); ?></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $tf24days['tf-room'] ? wc_price($tf24days['tf-room']) : '';  ?></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $tf24days['tf-breakfast'] ? wc_price($tf24days['tf-breakfast']) : '';  ?></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $tf24days['tf-half-b'] ? wc_price($tf24days['tf-half-b']) : '';  ?></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $tf24days['tf-full-b'] ? wc_price($tf24days['tf-full-b']) : '';  ?></td>
+                                </tr>
+                            </table>
+                            </td>
+                            <?php } ?>
+
+                            <?php 
+                            $tf32days  = !empty($room['tf-32-days']) ? $room['tf-32-days'] : ''; 
+                            if(!empty($tf32days)){
+                            ?>
+                            <td>
+                            <table>
+                                <tr>
+                                    <td><?php esc_html_e( '32 DAYS', 'tourfic' ); ?></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $tf32days['tf-room'] ? wc_price($tf32days['tf-room']) : '';  ?></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $tf32days['tf-breakfast'] ? wc_price($tf32days['tf-breakfast']) : '';  ?></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $tf32days['tf-half-b'] ? wc_price($tf32days['tf-half-b']) : '';  ?></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $tf32days['tf-full-b'] ? wc_price($tf32days['tf-full-b']) : '';  ?></td>
+                                </tr>
+                            </table>
+                            </td>
+                            <?php } ?>
+                        </tr>
+                    </table>
+                    <?php
+                }
+                }
+                ?>
+                </div>
+            </div>
             <div class="desc-wrap">
                 <?php the_content(); ?>
             </div>
@@ -548,13 +687,218 @@ $share_link = get_permalink($post_id);
                                                 <div class="price-per-night">
                                                     <?php esc_html_e( 'per night', 'tourfic' ); ?>
                                                 </div>
+
+                                                <?php 
+                                                if(defined( 'TF_PRO' )){ 
+                                                    ?>
+                                                    <table class="table tf-single-pricebox">
+                                                        <tr>
+                                                            <td>
+                                                                <?php echo esc_html( $room['title'] ); ?>
+                                                            </td>
+                                                            <td>
+                                                                <table>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><?php esc_html_e( 'Room', 'tourfic' ); ?></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><?php esc_html_e( 'Breakfast', 'tourfic' ); ?></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><?php esc_html_e( 'Half B.', 'tourfic' ); ?></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><?php esc_html_e( 'Full B.', 'tourfic' ); ?></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <?php 
+                                                            $tf8days  = !empty($room['tf-8-days']) ? $room['tf-8-days'] : ''; 
+                                                            if(!empty($tf8days)){
+                                                            ?>
+                                                            <td>
+                                                            <table>
+                                                                <tr>
+                                                                    <td><?php esc_html_e( '8 DAYS', 'tourfic' ); ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $tf8days['tf-room'] ? wc_price($tf8days['tf-room']) : '';  ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $tf8days['tf-breakfast'] ? wc_price($tf8days['tf-breakfast']) : '';  ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $tf8days['tf-half-b'] ? wc_price($tf8days['tf-half-b']) : '';  ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $tf8days['tf-full-b'] ? wc_price($tf8days['tf-full-b']) : '';  ?></td>
+                                                                </tr>
+                                                            </table>
+                                                            </td>
+                                                            <?php } ?>
+
+                                                            <?php 
+                                                            $tf16days  = !empty($room['tf-16-days']) ? $room['tf-16-days'] : ''; 
+                                                            if(!empty($tf16days)){
+                                                            ?>
+                                                            <td>
+                                                            <table>
+                                                                <tr>
+                                                                    <td><?php esc_html_e( '16 DAYS', 'tourfic' ); ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $tf16days['tf-room'] ? wc_price($tf16days['tf-room']) : '';  ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $tf16days['tf-breakfast'] ? wc_price($tf16days['tf-breakfast']) : '';  ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $tf16days['tf-half-b'] ? wc_price($tf16days['tf-half-b']) : '';  ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $tf16days['tf-full-b'] ? wc_price($tf16days['tf-full-b']) : '';  ?></td>
+                                                                </tr>
+                                                            </table>
+                                                            </td>
+                                                            <?php } ?>
+
+                                                            <?php 
+                                                            $tf24days  = !empty($room['tf-24-days']) ? $room['tf-24-days'] : ''; 
+                                                            if(!empty($tf24days)){
+                                                            ?>
+                                                            <td>
+                                                            <table>
+                                                                <tr>
+                                                                    <td><?php esc_html_e( '24 DAYS', 'tourfic' ); ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $tf24days['tf-room'] ? wc_price($tf24days['tf-room']) : '';  ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $tf24days['tf-breakfast'] ? wc_price($tf24days['tf-breakfast']) : '';  ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $tf24days['tf-half-b'] ? wc_price($tf24days['tf-half-b']) : '';  ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $tf24days['tf-full-b'] ? wc_price($tf24days['tf-full-b']) : '';  ?></td>
+                                                                </tr>
+                                                            </table>
+                                                            </td>
+                                                            <?php } ?>
+
+                                                            <?php 
+                                                            $tf32days  = !empty($room['tf-32-days']) ? $room['tf-32-days'] : ''; 
+                                                            if(!empty($tf32days)){
+                                                            ?>
+                                                            <td>
+                                                            <table>
+                                                                <tr>
+                                                                    <td><?php esc_html_e( '32 DAYS', 'tourfic' ); ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $tf32days['tf-room'] ? wc_price($tf32days['tf-room']) : '';  ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $tf32days['tf-breakfast'] ? wc_price($tf32days['tf-breakfast']) : '';  ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $tf32days['tf-half-b'] ? wc_price($tf32days['tf-half-b']) : '';  ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $tf32days['tf-full-b'] ? wc_price($tf32days['tf-full-b']) : '';  ?></td>
+                                                                </tr>
+                                                            </table>
+                                                            </td>
+                                                            <?php } ?>
+                                                        </tr>
+                                                    </table>
+                                                    <?php
+                                                }
+                                                ?>
                                             <?php
                                             } else {
                                             ?>
-                                                <span class="tf-price"><?php echo $price; ?></span>
                                                 <div class="price-per-night">
                                                     <?php esc_html_e( 'per person/night', 'tourfic' ); ?>
                                                 </div>
+                                                <?php 
+                                                if(defined( 'TF_PRO' )){ 
+                                                    ?>
+                                                    <?php 
+                                                    $tf8days  = !empty($room['tf-8-days']) ? $room['tf-8-days'] : ''; 
+                                                    if(!empty($tf8days)){
+                                                    ?>
+                                                    <div class="tf-single-prices">
+                                                        <span><?php esc_html_e( '8 DAYS', 'tourfic' ); ?>  <?php echo $tf8days['tf-room'] ? wc_price($tf8days['tf-room']) : '';  ?></span>
+                                                        
+                                                        <div class="tf-single-prices-item">
+                                                            <span><?php esc_html_e( 'Breakfast', 'tourfic' ); ?> <br><?php echo $tf8days['tf-breakfast'] ? wc_price($tf8days['tf-breakfast']) : '';  ?></span>
+                                                            
+                                                            <span><?php esc_html_e( 'Half B.', 'tourfic' ); ?> <br><?php echo $tf8days['tf-half-b'] ? wc_price($tf8days['tf-half-b']) : '';  ?></span>
+
+                                                            <span><?php esc_html_e( 'Full B.', 'tourfic' ); ?> <br><?php echo $tf8days['tf-full-b'] ? wc_price($tf8days['tf-full-b']) : '';  ?></span>
+                                                        </div>
+                                                    </div>
+                                                    <?php } ?>
+
+                                                    <?php 
+                                                    $tf16days  = !empty($room['tf-16-days']) ? $room['tf-16-days'] : ''; 
+                                                    if(!empty($tf16days)){
+                                                    ?>
+                                                    <div class="tf-single-prices">
+                                                        <span><?php esc_html_e( '16 DAYS', 'tourfic' ); ?>  <?php echo $tf16days['tf-room'] ? wc_price($tf16days['tf-room']) : '';  ?></span>
+                                                        
+                                                        <div class="tf-single-prices-item">
+                                                            <span><?php esc_html_e( 'Breakfast', 'tourfic' ); ?> <br><?php echo $tf16days['tf-breakfast'] ? wc_price($tf16days['tf-breakfast']) : '';  ?></span>
+                                                            
+                                                            <span><?php esc_html_e( 'Half B.', 'tourfic' ); ?> <br><?php echo $tf16days['tf-half-b'] ? wc_price($tf16days['tf-half-b']) : '';  ?></span>
+
+                                                            <span><?php esc_html_e( 'Full B.', 'tourfic' ); ?> <br><?php echo $tf16days['tf-full-b'] ? wc_price($tf16days['tf-full-b']) : '';  ?></span>
+                                                        </div>
+                                                    </div>
+                                                    <?php } ?>
+
+                                                    <?php 
+                                                    $tf24days  = !empty($room['tf-24-days']) ? $room['tf-24-days'] : ''; 
+                                                    if(!empty($tf24days)){
+                                                    ?>
+                                                    <div class="tf-single-prices">
+                                                        <span><?php esc_html_e( '24 DAYS', 'tourfic' ); ?>  <?php echo $tf24days['tf-room'] ? wc_price($tf24days['tf-room']) : '';  ?></span>
+                                                        
+                                                        <div class="tf-single-prices-item">
+                                                            <span><?php esc_html_e( 'Breakfast', 'tourfic' ); ?> <br><?php echo $tf24days['tf-breakfast'] ? wc_price($tf24days['tf-breakfast']) : '';  ?></span>
+                                                            
+                                                            <span><?php esc_html_e( 'Half B.', 'tourfic' ); ?> <br><?php echo $tf24days['tf-half-b'] ? wc_price($tf24days['tf-half-b']) : '';  ?></span>
+
+                                                            <span><?php esc_html_e( 'Full B.', 'tourfic' ); ?> <br><?php echo $tf24days['tf-full-b'] ? wc_price($tf24days['tf-full-b']) : '';  ?></span>
+                                                        </div>
+                                                    </div>
+                                                    <?php } ?>
+
+                                                    <?php 
+                                                    $tf32days  = !empty($room['tf-32-days']) ? $room['tf-32-days'] : ''; 
+                                                    if(!empty($tf32days)){
+                                                    ?>
+                                                    <div class="tf-single-prices">
+                                                        <span><?php esc_html_e( '32 DAYS', 'tourfic' ); ?>  <?php echo $tf32days['tf-room'] ? wc_price($tf32days['tf-room']) : '';  ?></span>
+                                                        
+                                                        <div class="tf-single-prices-item">
+                                                            <span><?php esc_html_e( 'Breakfast', 'tourfic' ); ?> <br><?php echo $tf32days['tf-breakfast'] ? wc_price($tf32days['tf-breakfast']) : '';  ?></span>
+                                                            
+                                                            <span><?php esc_html_e( 'Half B.', 'tourfic' ); ?> <br><?php echo $tf32days['tf-half-b'] ? wc_price($tf32days['tf-half-b']) : '';  ?></span>
+
+                                                            <span><?php esc_html_e( 'Full B.', 'tourfic' ); ?> <br><?php echo $tf32days['tf-full-b'] ? wc_price($tf32days['tf-full-b']) : '';  ?></span>
+                                                        </div>
+                                                    </div>
+                                                    <?php } ?>
+                                                            
+                                                    <?php
+                                                }
+                                                ?>
                                             <?php
                                             }
                                             ?>

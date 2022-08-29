@@ -450,6 +450,8 @@ span.tf-price .amount {
 .price-per-night {
     font-size: 12px;
     white-space: nowrap;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .bed-facilities {
@@ -459,6 +461,69 @@ span.tf-price .amount {
 .room-feature-list li {
     margin-right: 15px;
 }
+
+
+/********************** Custom Feature **********************/
+.tf-ct-pricebox {
+    width: 100%;
+}
+.tf-ct-price-grid {
+    width: 100%;
+    overflow: hidden;
+}
+.tf-single-pricebox{
+    width: 48%;
+    border: 1px solid #023169;
+    margin-right: 1%;
+    float: left;
+}
+.tf-person-title{
+    color: #023169;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    display: block;
+}
+.tf-single-pricebox tr td{
+    color: #023169;
+    font-weight: 600;
+    border-right: 1px solid #023169;
+}
+.tf-single-pricebox tr td:last-child{
+    border-right: 0px solid;
+}
+.tf-single-pricebox tr td table{
+    border: 0px solid;
+    margin: 0;
+}
+.tf-single-pricebox tr td table tr td{
+    border: 0px solid;
+    height: 30px;
+    padding: 0px;
+}
+.tf-single-prices {
+    margin-bottom: 15px;
+}
+.tf-single-prices > span {
+    text-align: center;
+    display: block;
+    font-weight: bold;
+    line-height: 18px;
+    font-size: 14px;
+  }
+.tf-single-prices-item {
+    display: flex;
+    justify-content: space-between;
+}
+.tf-single-prices-item span {
+    width: 70px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 18px;
+    font-size: 14px;
+}
+
 
 /********************** RESPONSIVE **********************/
 @media only screen and (min-width: 951px) {

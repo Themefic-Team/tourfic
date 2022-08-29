@@ -1100,13 +1100,20 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
     if ( isset( $_GET ) ) {
         $_GET = array_map( 'stripslashes_deep', $_GET );
     }
+    
+    // get post id
+    $post_id = get_the_ID();
+
+    // Get Tour Meta
+    $meta = get_post_meta( $post_id,'tf_hotel',true );
+
     // Adults
     $adults = !empty($_GET['adults']) ? sanitize_text_field($_GET['adults']) : '';
     // children
     $child = !empty($_GET['children']) ? sanitize_text_field($_GET['children']) : '';
     // Check-in & out date
     $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
-
+    $eheckinout_date = !empty($meta['tf-ct-checkinout']) ? $meta['tf-ct-checkinout'] : '';
     ?>
 
     <!-- Start Booking widget -->
@@ -1128,24 +1135,6 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
                         }
                         ?>
                         
-                    </select>
-                </div>
-            </label>
-        </div>
-    
-        <div class="tf_form-row">
-            <label class="tf_label-row">
-                <div class="tf_form-inner">
-                    <i class="fas fa-child"></i>
-                    <select name="children" id="children" class="">
-                        <?php
-                        echo '<option value="0">0 ' .__("Children", "tourfic"). '</option>';
-                        
-                        foreach (range(1,8) as $value) {
-                            $selected = $value == $child ? 'selected' : null;
-                            echo '<option ' .$selected. ' value="' .$value. '">' . $value . ' ' . __("Children", "tourfic") . '</option>';
-                        }
-                        ?>
                     </select>
                 </div>
             </label>
@@ -1185,7 +1174,6 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
             const checkinoutdateange = flatpickr(".tf-hotel-side-booking #check-in-out-date",{
                 enableTime: false,
                 mode: "range",
-                minDate: "today",
                 dateFormat: "Y/m/d",
                 onReady: function(selectedDates, dateStr, instance) {
                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -1193,7 +1181,17 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
                 onChange: function(selectedDates, dateStr, instance) {
                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                 },
+               
                 defaultDate: <?php echo json_encode(explode('-', $check_in_out)) ?>,
+                "disable": [
+                <?php if ($eheckinout_date) { ?>
+                function(date) {
+                    return (date.getDay() != <?php echo $eheckinout_date;  ?>);
+                },
+                <?php }
+                
+                ?>
+                ],
                 
                 <?php
                 // Flatpickt locale for translation
