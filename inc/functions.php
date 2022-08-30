@@ -559,7 +559,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                 </ul>
             </div>
         </div>
-                        
+        
         <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
             <h4 class="tf_widgettitle"><?php _e("Style of Property", "tourfic" ); ?></h4>
             <div class="tf-filter">
@@ -581,8 +581,6 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
             </div>
         </div>
 
-        
-                        
         <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
             <h4 class="tf_widgettitle"><?php _e("Meals", "tourfic" ); ?></h4>
             <div class="tf-filter">
