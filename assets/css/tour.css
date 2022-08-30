@@ -226,6 +226,7 @@
   box-sizing: border-box;
   border-radius: 4px;
   cursor: pointer;
+  padding: 0;
 }
 
 .tf-single-tour-pricing .tf-price-tab li {

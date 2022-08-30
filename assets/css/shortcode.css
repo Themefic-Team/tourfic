@@ -333,8 +333,8 @@ button.tf-tablinks:focus {
     display: none;
 }
 
-.tf_form-inner .tf-hotel-results #ui-id-1,
-.tf_form-inner .tf-hotel-results #ui-id-2 {
+.tf_form-inner .tf-hotel-results ul#ui-id-1,
+.tf_form-inner .tf-hotel-results ul#ui-id-2 {
     left: 0 !important;
     width: 100% !important;
     right: 0 !important;
