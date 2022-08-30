@@ -405,9 +405,10 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
     $date = $_GET['check-in-out-date'] ?? '';
     $startprice = $_GET['from'] ?? '';
     $endprice = $_GET['to'] ?? '';
-
+    if ( !defined( 'TF_PRO' ) ){
     ?>
     <!-- Start Booking widget -->
+    
     <form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
         action="<?php echo tf_booking_search_action(); ?>" id="tf-widget-booking-search">
     
@@ -516,6 +517,95 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
         });
     })(jQuery);
     </script>
+    <?php }else{ ?>
+
+        <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
+            <h4 class="tf_widgettitle"><?php _e("Type of Property", "tourfic" ); ?></h4>
+            <div class="tf-filter">
+                <ul>
+                    <?php 
+                    $tf_property_type= get_terms( array(
+                        'taxonomy' => 'hotel_type_property',
+                        'orderby' => 'title',
+                        'order' => 'ASC',
+                        'hide_empty' => false,
+                        'hierarchical' => 0,
+                    ) );
+                    if ( $tf_property_type ) { 
+                    foreach( $tf_property_type as $term ) {
+                    ?>
+                    <li><label><input type="checkbox" name="" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
+                    <?php } } ?>
+                </ul>
+            </div>
+        </div>
+        <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
+            <h4 class="tf_widgettitle"><?php _e("Type of Location", "tourfic" ); ?></h4>
+            <div class="tf-filter">
+                <ul>
+                    <?php 
+                    $tf_hotel_location= get_terms( array(
+                        'taxonomy' => 'hotel_location',
+                        'orderby' => 'title',
+                        'order' => 'ASC',
+                        'hide_empty' => false,
+                        'hierarchical' => 0,
+                    ) );
+                    if ( $tf_hotel_location ) { 
+                    foreach( $tf_hotel_location as $term ) {
+                    ?>
+                    <li><label><input type="checkbox" name="" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
+                    <?php } } ?>
+                </ul>
+            </div>
+        </div>
+                        
+        <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
+            <h4 class="tf_widgettitle"><?php _e("Style of Property", "tourfic" ); ?></h4>
+            <div class="tf-filter">
+                <ul>
+                    <?php 
+                    $tf_hotel_property_style= get_terms( array(
+                        'taxonomy' => 'hotel_style_property',
+                        'orderby' => 'title',
+                        'order' => 'ASC',
+                        'hide_empty' => false,
+                        'hierarchical' => 0,
+                    ) );
+                    if ( $tf_hotel_property_style ) { 
+                    foreach( $tf_hotel_property_style as $term ) {
+                    ?>
+                    <li><label><input type="checkbox" name="" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
+                    <?php } } ?>
+                </ul>
+            </div>
+        </div>
+
+        
+                        
+        <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
+            <h4 class="tf_widgettitle"><?php _e("Meals", "tourfic" ); ?></h4>
+            <div class="tf-filter">
+                <ul>
+                    <?php 
+                    $tf_hotel_meals= get_terms( array(
+                        'taxonomy' => 'hotel_meals',
+                        'orderby' => 'title',
+                        'order' => 'ASC',
+                        'hide_empty' => false,
+                        'hierarchical' => 0,
+                    ) );
+                    if ( $tf_hotel_meals ) { 
+                    foreach( $tf_hotel_meals as $term ) {
+                    ?>
+                    <li><label><input type="checkbox" name="" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
+                    <?php } } ?>
+                </ul>
+            </div>
+        </div>
+        
+
+    <?php } ?>
     
     <?php if ( is_active_sidebar( 'tf_search_result' ) ) { ?>
         <div id="tf__booking_sidebar">

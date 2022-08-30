@@ -1320,6 +1320,42 @@
             }
         });
 
+        // Hotel Country
+        var availablehotelcountry = tf_params.tf_hotel_country;
+        $("#tf-country-name").autocomplete({
+            source: availablehotelcountry,
+            minLength: 0,
+            open: function() {
+                $(this).autocomplete("widget")
+                       .appendTo(".tf-hotel-adv-results")
+                       .css("position", "absolute");
+            }
+        });
+        $("#tf-country-name").on('focus', function() {
+            if ($("#tf-country-name").val() == '') {
+            console.log('is empty, force search with blank terms...')
+            $("#tf-country-name").autocomplete("search", "");
+            }
+        });
+
+          // Hotel Month
+          var availablehotelmonth = tf_params.tf_hotel_month;
+          $("#tf-month-name").autocomplete({
+              source: availablehotelmonth,
+              minLength: 0,
+              open: function() {
+                  $(this).autocomplete("widget")
+                         .appendTo(".tf-hotel-month-results")
+                         .css("position", "absolute");
+              }
+          });
+          $("#tf-month-name").on('focus', function() {
+              if ($("#tf-month-name").val() == '') {
+              console.log('is empty, force search with blank terms...')
+              $("#tf-month-name").autocomplete("search", "");
+              }
+          });
+
 
          // Itinerary Accordion
          $('.tf-accordion-head').click(function(){

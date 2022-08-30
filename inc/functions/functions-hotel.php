@@ -110,6 +110,170 @@ function tf_hotel_plural_label( $lowercase = false ) {
 function tf_hotel_taxonomies_register() {
 
     /**
+     * Taxonomy: hotel_country
+     */
+    $hotel_country_slug = apply_filters( 'hotel_country_slug', 'hotel-country-type' );
+
+    $hotel_country_labels = array(
+        'name'                       => __( 'Country', 'tourfic' ),
+        'singular_name'              => __( 'Country', 'tourfic' ),
+        'menu_name'                  => __( 'Country', 'tourfic' ),
+        'all_items'                  => __( 'All Country', 'tourfic' ),
+        'edit_item'                  => __( 'Edit Country', 'tourfic' ),
+        'view_item'                  => __( 'View Country', 'tourfic' ),
+        'update_item'                => __( 'Update Country name', 'tourfic' ),
+        'add_new_item'               => __( 'Add new Country', 'tourfic' ),
+        'new_item_name'              => __( 'New Country name', 'tourfic' ),
+        'parent_item'                => __( 'Parent Country', 'tourfic' ),
+        'parent_item_colon'          => __( 'Parent Country:', 'tourfic' ),
+        'search_items'               => __( 'Search Country', 'tourfic' ),
+        'popular_items'              => __( 'Popular Country', 'tourfic' ),
+        'separate_items_with_commas' => __( 'Separate Country with commas', 'tourfic' ),
+        'add_or_remove_items'        => __( 'Add or remove Country', 'tourfic' ),
+        'choose_from_most_used'      => __( 'Choose from the most used Country', 'tourfic' ),
+        'not_found'                  => __( 'No Country found', 'tourfic' ),
+        'no_terms'                   => __( 'No Country', 'tourfic' ),
+        'items_list_navigation'      => __( 'Country list navigation', 'tourfic' ),
+        'items_list'                 => __( 'Country list', 'tourfic' ),
+        'back_to_items'              => __( 'Back to Country', 'tourfic' ),
+    );
+
+    $hotel_country_args = array(
+        'labels'                => $hotel_country_labels,
+        'public'                => true,
+        'publicly_queryable'    => true,
+        'hierarchical'          => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'show_in_nav_menus'     => true,
+        'query_var'             => true,
+        'rewrite'               => array('slug' => $hotel_country_slug, 'with_front' => false ),
+        'show_admin_column'     => true,
+        'show_in_rest'          => true,
+        'rest_base'             => 'hotel_country',
+        'rest_controller_class' => 'WP_REST_Terms_Controller',
+        'show_in_quick_edit'    => true,
+        'capabilities'          => array( 
+            'assign_terms' => 'edit_tf_hotel',
+            'edit_terms' => 'edit_tf_hotel',
+         ),
+    );
+    if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
+        register_taxonomy( 'hotel_country', 'tf_hotel', apply_filters( 'hotel_country_args', $hotel_country_args ) );
+    }
+
+
+    /**
+     * Taxonomy: hotel_month
+     */
+    $hotel_month_slug = apply_filters( 'hotel_month_slug', 'hotel-month-type' );
+
+    $hotel_month_labels = array(
+        'name'                       => __( 'Month', 'tourfic' ),
+        'singular_name'              => __( 'Month', 'tourfic' ),
+        'menu_name'                  => __( 'Month', 'tourfic' ),
+        'all_items'                  => __( 'All Month', 'tourfic' ),
+        'edit_item'                  => __( 'Edit Month', 'tourfic' ),
+        'view_item'                  => __( 'View Month', 'tourfic' ),
+        'update_item'                => __( 'Update Month name', 'tourfic' ),
+        'add_new_item'               => __( 'Add new Month', 'tourfic' ),
+        'new_item_name'              => __( 'New Month name', 'tourfic' ),
+        'parent_item'                => __( 'Parent Month', 'tourfic' ),
+        'parent_item_colon'          => __( 'Parent Month:', 'tourfic' ),
+        'search_items'               => __( 'Search Month', 'tourfic' ),
+        'popular_items'              => __( 'Popular Month', 'tourfic' ),
+        'separate_items_with_commas' => __( 'Separate Month with commas', 'tourfic' ),
+        'add_or_remove_items'        => __( 'Add or remove Month', 'tourfic' ),
+        'choose_from_most_used'      => __( 'Choose from the most used Month', 'tourfic' ),
+        'not_found'                  => __( 'No Month found', 'tourfic' ),
+        'no_terms'                   => __( 'No Month', 'tourfic' ),
+        'items_list_navigation'      => __( 'Month list navigation', 'tourfic' ),
+        'items_list'                 => __( 'Month list', 'tourfic' ),
+        'back_to_items'              => __( 'Back to Month', 'tourfic' ),
+    );
+
+    $hotel_month_args = array(
+        'labels'                => $hotel_month_labels,
+        'public'                => true,
+        'publicly_queryable'    => true,
+        'hierarchical'          => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'show_in_nav_menus'     => true,
+        'query_var'             => true,
+        'rewrite'               => array('slug' => $hotel_month_slug, 'with_front' => false ),
+        'show_admin_column'     => true,
+        'show_in_rest'          => true,
+        'rest_base'             => 'hotel_month',
+        'rest_controller_class' => 'WP_REST_Terms_Controller',
+        'show_in_quick_edit'    => true,
+        'capabilities'          => array( 
+            'assign_terms' => 'edit_tf_hotel',
+            'edit_terms' => 'edit_tf_hotel',
+         ),
+    );
+
+    if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
+        register_taxonomy( 'hotel_month', 'tf_hotel', apply_filters( 'hotel_month_args', $hotel_month_args ) );
+    }
+
+
+    /**
+     * Taxonomy: hotel_type_property
+     */
+    $hotel_type_property_slug = apply_filters( 'hotel_type_property_slug', 'hotel-property-type' );
+
+    $hotel_type_property_labels = array(
+        'name'                       => __( 'Type of Property', 'tourfic' ),
+        'singular_name'              => __( 'Type of Property', 'tourfic' ),
+        'menu_name'                  => __( 'Type of Property', 'tourfic' ),
+        'all_items'                  => __( 'All Type of Property', 'tourfic' ),
+        'edit_item'                  => __( 'Edit Type of Property', 'tourfic' ),
+        'view_item'                  => __( 'View Type of Property', 'tourfic' ),
+        'update_item'                => __( 'Update Type of Property name', 'tourfic' ),
+        'add_new_item'               => __( 'Add new Type of Property', 'tourfic' ),
+        'new_item_name'              => __( 'New Type of Property name', 'tourfic' ),
+        'parent_item'                => __( 'Parent Type of Property', 'tourfic' ),
+        'parent_item_colon'          => __( 'Parent Type of Property:', 'tourfic' ),
+        'search_items'               => __( 'Search Type of Property', 'tourfic' ),
+        'popular_items'              => __( 'Popular Type of Property', 'tourfic' ),
+        'separate_items_with_commas' => __( 'Separate Type of Property with commas', 'tourfic' ),
+        'add_or_remove_items'        => __( 'Add or remove Type of Property', 'tourfic' ),
+        'choose_from_most_used'      => __( 'Choose from the most used Type of Property', 'tourfic' ),
+        'not_found'                  => __( 'No Type of Property found', 'tourfic' ),
+        'no_terms'                   => __( 'No Type of Property', 'tourfic' ),
+        'items_list_navigation'      => __( 'Type of Property list navigation', 'tourfic' ),
+        'items_list'                 => __( 'Type of Property list', 'tourfic' ),
+        'back_to_items'              => __( 'Back to Type of Property', 'tourfic' ),
+    );
+
+    $hotel_type_property_args = array(
+        'labels'                => $hotel_type_property_labels,
+        'public'                => true,
+        'publicly_queryable'    => true,
+        'hierarchical'          => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'show_in_nav_menus'     => true,
+        'query_var'             => true,
+        'rewrite'               => array('slug' => $hotel_type_property_slug, 'with_front' => false ),
+        'show_admin_column'     => true,
+        'show_in_rest'          => true,
+        'rest_base'             => 'hotel_type_property',
+        'rest_controller_class' => 'WP_REST_Terms_Controller',
+        'show_in_quick_edit'    => true,
+        'capabilities'          => array( 
+            'assign_terms' => 'edit_tf_hotel',
+            'edit_terms' => 'edit_tf_hotel',
+         ),
+    );
+
+    if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
+        register_taxonomy( 'hotel_type_property', 'tf_hotel', apply_filters( 'hotel_type_property_args', $hotel_type_property_args ) );
+    }
+
+
+    /**
      * Taxonomy: hotel_location
      */
     $hotel_location_slug = apply_filters( 'hotel_location_slug', 'hotel-location' );
@@ -160,6 +324,221 @@ function tf_hotel_taxonomies_register() {
     );
     register_taxonomy( 'hotel_location', 'tf_hotel', apply_filters( 'hotel_location_args', $hotel_location_args ) );
 
+
+
+    /**
+     * Taxonomy: hotel_style_property
+     */
+    $hotel_style_property_slug = apply_filters( 'hotel_style_property_slug', 'hotel-property-style' );
+
+    $hotel_style_property_labels = array(
+        'name'                       => __( 'Style of Property', 'tourfic' ),
+        'singular_name'              => __( 'Style of Property', 'tourfic' ),
+        'menu_name'                  => __( 'Style of Property', 'tourfic' ),
+        'all_items'                  => __( 'All Style of Property', 'tourfic' ),
+        'edit_item'                  => __( 'Edit Style of Property', 'tourfic' ),
+        'view_item'                  => __( 'View Style of Property', 'tourfic' ),
+        'update_item'                => __( 'Update Style of Property name', 'tourfic' ),
+        'add_new_item'               => __( 'Add new Style of Property', 'tourfic' ),
+        'new_item_name'              => __( 'New Style of Property name', 'tourfic' ),
+        'parent_item'                => __( 'Parent Style of Property', 'tourfic' ),
+        'parent_item_colon'          => __( 'Parent Style of Property:', 'tourfic' ),
+        'search_items'               => __( 'Search Style of Property', 'tourfic' ),
+        'popular_items'              => __( 'Popular Style of Property', 'tourfic' ),
+        'separate_items_with_commas' => __( 'Separate Style of Property with commas', 'tourfic' ),
+        'add_or_remove_items'        => __( 'Add or remove Style of Property', 'tourfic' ),
+        'choose_from_most_used'      => __( 'Choose from the most used Style of Property', 'tourfic' ),
+        'not_found'                  => __( 'No Style of Property found', 'tourfic' ),
+        'no_terms'                   => __( 'No Style of Property', 'tourfic' ),
+        'items_list_navigation'      => __( 'Style of Property list navigation', 'tourfic' ),
+        'items_list'                 => __( 'Style of Property list', 'tourfic' ),
+        'back_to_items'              => __( 'Back to Style of Property', 'tourfic' ),
+    );
+
+    $hotel_style_property_args = array(
+        'labels'                => $hotel_style_property_labels,
+        'public'                => true,
+        'publicly_queryable'    => true,
+        'hierarchical'          => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'show_in_nav_menus'     => true,
+        'query_var'             => true,
+        'rewrite'               => array('slug' => $hotel_style_property_slug, 'with_front' => false ),
+        'show_admin_column'     => true,
+        'show_in_rest'          => true,
+        'rest_base'             => 'hotel_style_property',
+        'rest_controller_class' => 'WP_REST_Terms_Controller',
+        'show_in_quick_edit'    => true,
+        'capabilities'          => array( 
+            'assign_terms' => 'edit_tf_hotel',
+            'edit_terms' => 'edit_tf_hotel',
+         ),
+    );
+
+    if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
+        register_taxonomy( 'hotel_style_property', 'tf_hotel', apply_filters( 'hotel_style_property_args', $hotel_style_property_args ) );
+    }
+    /**
+     * Taxonomy: hotel_meals
+     */
+    $hotel_meals_slug = apply_filters( 'hotel_meals_slug', 'hotel-meals-style' );
+
+    $hotel_meals_labels = array(
+        'name'                       => __( 'Meals', 'tourfic' ),
+        'singular_name'              => __( 'Meals', 'tourfic' ),
+        'menu_name'                  => __( 'Meals', 'tourfic' ),
+        'all_items'                  => __( 'All Meals', 'tourfic' ),
+        'edit_item'                  => __( 'Edit Meals', 'tourfic' ),
+        'view_item'                  => __( 'View Meals', 'tourfic' ),
+        'update_item'                => __( 'Update Meals name', 'tourfic' ),
+        'add_new_item'               => __( 'Add new Meals', 'tourfic' ),
+        'new_item_name'              => __( 'New Meals name', 'tourfic' ),
+        'parent_item'                => __( 'Parent Meals', 'tourfic' ),
+        'parent_item_colon'          => __( 'Parent Meals:', 'tourfic' ),
+        'search_items'               => __( 'Search Meals', 'tourfic' ),
+        'popular_items'              => __( 'Popular Meals', 'tourfic' ),
+        'separate_items_with_commas' => __( 'Separate Meals with commas', 'tourfic' ),
+        'add_or_remove_items'        => __( 'Add or remove Meals', 'tourfic' ),
+        'choose_from_most_used'      => __( 'Choose from the most used Meals', 'tourfic' ),
+        'not_found'                  => __( 'No Meals found', 'tourfic' ),
+        'no_terms'                   => __( 'No Meals', 'tourfic' ),
+        'items_list_navigation'      => __( 'Meals list navigation', 'tourfic' ),
+        'items_list'                 => __( 'Meals list', 'tourfic' ),
+        'back_to_items'              => __( 'Back to Meals', 'tourfic' ),
+    );
+
+    $hotel_meals_args = array(
+        'labels'                => $hotel_meals_labels,
+        'public'                => true,
+        'publicly_queryable'    => true,
+        'hierarchical'          => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'show_in_nav_menus'     => true,
+        'query_var'             => true,
+        'rewrite'               => array('slug' => $hotel_meals_slug, 'with_front' => false ),
+        'show_admin_column'     => true,
+        'show_in_rest'          => true,
+        'rest_base'             => 'hotel_meals',
+        'rest_controller_class' => 'WP_REST_Terms_Controller',
+        'show_in_quick_edit'    => true,
+        'capabilities'          => array( 
+            'assign_terms' => 'edit_tf_hotel',
+            'edit_terms' => 'edit_tf_hotel',
+         ),
+    );
+
+    if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
+        register_taxonomy( 'hotel_meals', 'tf_hotel', apply_filters( 'hotel_meals_args', $hotel_meals_args ) );
+    }
+
+
+    /**
+     * Taxonomy: hotel_theme
+     */
+    $hotel_theme_slug = apply_filters( 'hotel_theme_slug', 'hotel-theme-style' );
+
+    $hotel_theme_labels = array(
+        'name'                       => __( 'Theme', 'tourfic' ),
+        'singular_name'              => __( 'Theme', 'tourfic' ),
+        'menu_name'                  => __( 'Theme', 'tourfic' ),
+        'all_items'                  => __( 'All Theme', 'tourfic' ),
+        'edit_item'                  => __( 'Edit Theme', 'tourfic' ),
+        'view_item'                  => __( 'View Theme', 'tourfic' ),
+        'update_item'                => __( 'Update Theme name', 'tourfic' ),
+        'add_new_item'               => __( 'Add new Theme', 'tourfic' ),
+        'new_item_name'              => __( 'New Theme name', 'tourfic' ),
+        'parent_item'                => __( 'Parent Theme', 'tourfic' ),
+        'parent_item_colon'          => __( 'Parent Theme:', 'tourfic' ),
+        'search_items'               => __( 'Search Theme', 'tourfic' ),
+        'popular_items'              => __( 'Popular Theme', 'tourfic' ),
+        'separate_items_with_commas' => __( 'Separate Theme with commas', 'tourfic' ),
+        'add_or_remove_items'        => __( 'Add or remove Theme', 'tourfic' ),
+        'choose_from_most_used'      => __( 'Choose from the most used Theme', 'tourfic' ),
+        'not_found'                  => __( 'No Theme found', 'tourfic' ),
+        'no_terms'                   => __( 'No Theme', 'tourfic' ),
+        'items_list_navigation'      => __( 'Theme list navigation', 'tourfic' ),
+        'items_list'                 => __( 'Theme list', 'tourfic' ),
+        'back_to_items'              => __( 'Back to Theme', 'tourfic' ),
+    );
+
+    $hotel_theme_args = array(
+        'labels'                => $hotel_theme_labels,
+        'public'                => true,
+        'publicly_queryable'    => true,
+        'hierarchical'          => true,        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'show_in_nav_menus'     => true,
+        'query_var'             => true,
+        'rewrite'               => array('slug' => $hotel_theme_slug, 'with_front' => false ),
+        'show_admin_column'     => true,
+        'show_in_rest'          => true,
+        'rest_base'             => 'hotel_theme',
+        'rest_controller_class' => 'WP_REST_Terms_Controller',
+        'show_in_quick_edit'    => true,
+        'capabilities'          => array( 
+            'assign_terms' => 'edit_tf_hotel',
+            'edit_terms' => 'edit_tf_hotel',
+         ),
+    );
+
+    if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
+        register_taxonomy( 'hotel_theme', 'tf_hotel', apply_filters( 'hotel_theme_args', $hotel_theme_args ) );
+    }
+
+    /**
+     * Taxonomy: hotel_activities
+     */
+    $hotel_activities_slug = apply_filters( 'hotel_activities_slug', 'hotel-activities-style' );
+
+    $hotel_activities_labels = array(
+        'name'                       => __( 'Activities', 'tourfic' ),
+        'singular_name'              => __( 'Activities', 'tourfic' ),
+        'menu_name'                  => __( 'Activities', 'tourfic' ),
+        'all_items'                  => __( 'All Activities', 'tourfic' ),
+        'edit_item'                  => __( 'Edit Activities', 'tourfic' ),
+        'view_item'                  => __( 'View Activities', 'tourfic' ),
+        'update_item'                => __( 'Update Activities name', 'tourfic' ),
+        'add_new_item'               => __( 'Add new Activities', 'tourfic' ),
+        'new_item_name'              => __( 'New Activities name', 'tourfic' ),
+        'parent_item'                => __( 'Parent Activities', 'tourfic' ),
+        'parent_item_colon'          => __( 'Parent Activities:', 'tourfic' ),
+        'search_items'               => __( 'Search Activities', 'tourfic' ),
+        'popular_items'              => __( 'Popular Activities', 'tourfic' ),
+        'separate_items_with_commas' => __( 'Separate Activities with commas', 'tourfic' ),
+        'add_or_remove_items'        => __( 'Add or remove Activities', 'tourfic' ),
+        'choose_from_most_used'      => __( 'Choose from the most used Activities', 'tourfic' ),
+        'not_found'                  => __( 'No Activities found', 'tourfic' ),
+        'no_terms'                   => __( 'No Activities', 'tourfic' ),
+        'items_list_navigation'      => __( 'Activities list navigation', 'tourfic' ),
+        'items_list'                 => __( 'Activities list', 'tourfic' ),
+        'back_to_items'              => __( 'Back to Activities', 'tourfic' ),
+    );
+
+    $hotel_activities_args = array(
+        'labels'                => $hotel_activities_labels,
+        'public'                => true,
+        'publicly_queryable'    => true,
+        'hierarchical'          => true,        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'show_in_nav_menus'     => true,
+        'query_var'             => true,
+        'rewrite'               => array('slug' => $hotel_activities_slug, 'with_front' => false ),
+        'show_admin_column'     => true,
+        'show_in_rest'          => true,
+        'rest_base'             => 'hotel_activities',
+        'rest_controller_class' => 'WP_REST_Terms_Controller',
+        'show_in_quick_edit'    => true,
+        'capabilities'          => array( 
+            'assign_terms' => 'edit_tf_hotel',
+            'edit_terms' => 'edit_tf_hotel',
+         ),
+    );
+    if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
+        register_taxonomy( 'hotel_activities', 'tf_hotel', apply_filters( 'hotel_activities_args', $hotel_activities_args ) );
+    }
+
     /**
      * Taxonomy: hotel_feature.
      */
@@ -209,6 +588,9 @@ function tf_hotel_taxonomies_register() {
          ),
     ];
     register_taxonomy( 'hotel_feature', 'tf_hotel', apply_filters( 'tf_feature_tax_args', $args ) );
+
+
+    
 
 }
 add_action( 'init', 'tf_hotel_taxonomies_register' );
@@ -951,7 +1333,8 @@ if ( !function_exists('tf_hotel_advanced_search_form_horizontal') ) {
             <div class="tf_widget-subtitle"><?php esc_html_e( $subtitle ); ?></div>
         <?php endif; ?>
 
-
+    <?php 
+    if ( !defined( 'TF_PRO' ) ){ ?>
     <div class="tf_homepage-booking">
         <div class="tf_destination-wrap">
             <div class="tf_input-inner">
@@ -1065,7 +1448,50 @@ if ( !function_exists('tf_hotel_advanced_search_form_horizontal') ) {
         </div>
 
     </div>
+    <?php }else{ ?>
+    
+        <div class="tf_homepage-booking">
 
+        <div class="tf_destination-wrap">
+            <div class="tf_input-inner">
+                <div class="tf_form-row">
+                    <label class="tf_label-row">
+                        <span class="tf-label"><?php _e('Country', 'tourfic'); ?>:</span>
+                        <div class="tf_form-inner tf-d-g">
+                            <i class="fas fa-search"></i>
+                            <input type="text" name="country" required id="tf-country-name" class="tf-advance-destination" placeholder="<?php _e('Enter Country', 'tourfic'); ?>" value="">               
+                            <div class="ui-widget ui-widget-content results tf-hotel-results tf-hotel-adv-results">
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="tf_destination-wrap">
+            <div class="tf_input-inner">
+                <div class="tf_form-row">
+                    <label class="tf_label-row">
+                        <span class="tf-label"><?php _e('Month', 'tourfic'); ?>:</span>
+                        <div class="tf_form-inner tf-d-g">
+                            <i class="fas fa-search"></i>
+                            <input type="text" name="month" required id="tf-month-name" class="tf-advance-destination" placeholder="<?php _e('Enter Month', 'tourfic'); ?>" value="">               
+                            <div class="ui-widget ui-widget-content results tf-hotel-results tf-hotel-month-results">
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tf_submit-wrap">
+            <input type="hidden" name="type" value="tf_hotel" class="tf-post-type"/>		
+            <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
+        </div>
+
+    </div>
+
+    <?php } ?>
     </form>
 
     <script>

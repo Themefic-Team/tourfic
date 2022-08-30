@@ -344,10 +344,14 @@ function tf_search_form_shortcode( $atts, $content = null ){
         <?php if(empty($disable_services_info)){ ?>
         <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent">             
             <?php 
-            if($advanced=="enabled"){
+            if ( !defined( 'TF_PRO' ) ){
+                if($advanced=="enabled"){
+                    tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle );
+                }else{    
+                    tf_hotel_search_form_horizontal( $classes, $title, $subtitle ); 
+                }
+            }else{
                 tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle );
-            }else{    
-                tf_hotel_search_form_horizontal( $classes, $title, $subtitle ); 
             }
             ?>
         </div>
@@ -467,48 +471,50 @@ function tf_search_result_shortcode( $atts, $content = null ){
         _e('<h3>Please select fields from the search form!</h3>', 'tourfic');
         return;
     }
-    // Get hotel location or tour destination
-    $taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : 'tour_destination';
-    // Get place
-    $place = isset( $_GET['place'] ) ? sanitize_text_field($_GET['place']) : '';
-    // Get Adult
-    $adults = isset( $_GET['adults'] ) ? sanitize_text_field($_GET['adults']) : '';
-    // Get Child
-    $child = isset( $_GET['children'] ) ? sanitize_text_field($_GET['children']) : '';
-    // Get Room
-    $room = isset( $_GET['room'] ) ? sanitize_text_field($_GET['room']) : '';
-    // Get date
-    $check_in_out = isset( $_GET['check-in-out-date'] ) ? sanitize_text_field($_GET['check-in-out-date']) : '';
+    if ( !defined( 'TF_PRO' ) ){
+        // Get hotel location or tour destination
+        $taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : 'tour_destination';
+        // Get place
+        $place = isset( $_GET['place'] ) ? sanitize_text_field($_GET['place']) : '';
+        // Get Adult
+        $adults = isset( $_GET['adults'] ) ? sanitize_text_field($_GET['adults']) : '';
+        // Get Child
+        $child = isset( $_GET['children'] ) ? sanitize_text_field($_GET['children']) : '';
+        // Get Room
+        $room = isset( $_GET['room'] ) ? sanitize_text_field($_GET['room']) : '';
+        // Get date
+        $check_in_out = isset( $_GET['check-in-out-date'] ) ? sanitize_text_field($_GET['check-in-out-date']) : '';
 
-    
-    // Price Range
-    $startprice = isset( $_GET['from'] ) ? absint(sanitize_key($_GET['from'])) : '';
-    $endprice = isset( $_GET['to'] ) ? absint(sanitize_key($_GET['to'])) : '';
+        
+        // Price Range
+        $startprice = isset( $_GET['from'] ) ? absint(sanitize_key($_GET['from'])) : '';
+        $endprice = isset( $_GET['to'] ) ? absint(sanitize_key($_GET['to'])) : '';
 
-    if(!empty($startprice) && !empty($endprice)){
-        if($_GET['type']=="tf_tours"){
-            $data = array($adults, $child, $check_in_out, $startprice, $endprice);
+        if(!empty($startprice) && !empty($endprice)){
+            if($_GET['type']=="tf_tours"){
+                $data = array($adults, $child, $check_in_out, $startprice, $endprice);
+            }else{
+                $data = array($adults, $child, $room, $check_in_out, $startprice, $endprice);
+            }
         }else{
-            $data = array($adults, $child, $room, $check_in_out, $startprice, $endprice);
+            $data = array($adults, $child, $room, $check_in_out);
         }
-    }else{
-        $data = array($adults, $child, $room, $check_in_out);
-    }
 
 
 
-    $paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-    $checkInOutDate = !empty( $_GET['check-in-out-date']) ? explode( ' - ', $_GET['check-in-out-date'] ) : '';
-    if(!empty($checkInOutDate)) {
-        $period         = new DatePeriod(
-            new DateTime( $checkInOutDate[0] ),
-            new DateInterval( 'P1D' ),
-            new DateTime( $checkInOutDate[1] .  '23:59' )
-        );
-    } else {
-        $period = '';
+        $checkInOutDate = !empty( $_GET['check-in-out-date']) ? explode( ' - ', $_GET['check-in-out-date'] ) : '';
+        if(!empty($checkInOutDate)) {
+            $period         = new DatePeriod(
+                new DateTime( $checkInOutDate[0] ),
+                new DateInterval( 'P1D' ),
+                new DateTime( $checkInOutDate[1] .  '23:59' )
+            );
+        } else {
+            $period = '';
+        }
     }
     
+    $paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
     // Main Query args
     $args = array(
         'post_type'   => $post_type,
@@ -516,48 +522,98 @@ function tf_search_result_shortcode( $atts, $content = null ){
         'paged'       => $paged,
     );
 
-    $taxonomy_query = new WP_Term_Query(array(
-        'taxonomy'   => $taxonomy,
-        'orderby'    => 'name',
-        'order'      => 'ASC',
-        'hide_empty' => false,
-        'slug'       => sanitize_title($place, ''),
-    ));
+    if ( !defined( 'TF_PRO' ) ){
+        $taxonomy_query = new WP_Term_Query(array(
+            'taxonomy'   => $taxonomy,
+            'orderby'    => 'name',
+            'order'      => 'ASC',
+            'hide_empty' => false,
+            'slug'       => sanitize_title($place, ''),
+        ));
 
-    if ($taxonomy_query) {
+        if ($taxonomy_query) {
 
-        $place_ids = array();
+            $place_ids = array();
 
-        // Place IDs array
-        foreach($taxonomy_query->get_terms() as $term){ 
-            $place_ids[] = $term->term_id;
+            // Place IDs array
+            foreach($taxonomy_query->get_terms() as $term){ 
+                $place_ids[] = $term->term_id;
+            }
+
+            $args['tax_query'] = array(
+                'relation' => 'AND',
+                array(
+                    'taxonomy' => $taxonomy,
+                    'terms'    => $place_ids,
+                )
+            );
+
+        } else {
+            $args['s'] = $place;
         }
 
-        $args['tax_query'] = array(
-            'relation' => 'AND',
-            array(
-                'taxonomy' => $taxonomy,
-                'terms'    => $place_ids,
-            )
-        );
+        
+        // Hotel Features
 
-    } else {
-        $args['s'] = $place;
+        if (!empty($_GET['features'])) {
+            $args['tax_query'] = array(
+                'relation' => 'AND',
+                array(
+                    'taxonomy' => 'hotel_feature',
+                    'field' => 'slug',
+                    'terms'    => $_GET['features'],
+                )
+            );
+        }
+
+    }else{
+
+        $country = isset( $_GET['country'] ) ? sanitize_text_field($_GET['country']) : '';
+
+        $taxonomy_query = new WP_Term_Query(array(
+            'taxonomy'   => 'hotel_country',
+            'orderby'    => 'name',
+            'order'      => 'ASC',
+            'hide_empty' => false,
+            'slug'       => sanitize_title($country, ''),
+        ));
+
+        if ($taxonomy_query) {
+
+            $place_ids = array();
+
+            // Place IDs array
+            foreach($taxonomy_query->get_terms() as $term){ 
+                $place_ids[] = $term->term_id;
+            }
+
+            $args['tax_query'] = array(
+                'relation' => 'AND',
+                array(
+                    'taxonomy' => 'hotel_country',
+                    'terms'    => $place_ids,
+                )
+            );
+
+        } else {
+            $args['s'] = $place;
+        }
+
+        // Hotel Month
+
+        if (!empty($_GET['month'])) {
+            $args['tax_query'] = array(
+                'relation' => 'AND',
+                array(
+                    'taxonomy' => 'hotel_month',
+                    'field' => 'slug',
+                    'terms'    => $_GET['month'],
+                )
+            );
+        }
     }
 
     
-    // Hotel Features
-
-    if (!empty($_GET['features'])) {
-        $args['tax_query'] = array(
-            'relation' => 'AND',
-            array(
-                'taxonomy' => 'hotel_feature',
-                'field' => 'slug',
-                'terms'    => $_GET['features'],
-            )
-        );
-    }
 
     $loop = new WP_Query( $args );
 

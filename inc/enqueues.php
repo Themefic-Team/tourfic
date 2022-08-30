@@ -240,9 +240,44 @@ if ( !function_exists('tf_enqueue_scripts') ) {
             endwhile;
 
         endif; wp_reset_query(); 
-
+        
         $tour_max_price = max($tftours_min_maxprices);
         $tour_min_price = min($tftours_min_maxprices);
+
+
+        /**
+         * Hotel Country
+         */ 
+
+        $tf_hotel_country=array();
+        $tf_countrylist = get_terms( array(
+            'taxonomy' => 'hotel_country',
+            'orderby' => 'title',
+            'order' => 'ASC',
+            'hide_empty' => false,
+            'hierarchical' => 0,
+        ) );
+        if ( $tf_countrylist ) { 
+        foreach( $tf_countrylist as $term ) {
+             $tf_hotel_country[] = $term->slug;
+        } }
+
+        /**
+         * Hotel Month
+         */ 
+
+        $tf_hotel_month=array();
+        $tf_monthlist = get_terms( array(
+            'taxonomy' => 'hotel_month',
+            'orderby' => 'title',
+            'order' => 'ASC',
+            'hide_empty' => false,
+            'hierarchical' => 0,
+        ) );
+        if ( $tf_monthlist ) { 
+        foreach( $tf_monthlist as $term ) {
+             $tf_hotel_month[] = $term->slug;
+        } }
 
 
         /**
@@ -275,6 +310,8 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'tf_tourdestinationlists' => $tf_tourdestinationlists,
                 'tf_tour_max_price' => $tour_max_price,
                 'tf_tour_min_price' => $tour_min_price,
+                'tf_hotel_country' => $tf_hotel_country,
+                'tf_hotel_month' => $tf_hotel_month
             )
         );
         //wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/old/responsive.css', '', TOURFIC );
