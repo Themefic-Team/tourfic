@@ -109,93 +109,7 @@
         <div class="tf-price-column">
             <span class="tf-price"><?php
                 if(!defined( 'TF_PRO' )){ echo wc_price( $price ); } ?></span>
-            <?php if ( $pricing_by == '1' ) { ?>
-                <div class="price-per-night">
-                <?php
-                if(!defined( 'TF_PRO' )){ ?>
-                    <?php $days > 0 ? esc_html_e( 'for '.$days .' nights', 'tourfic' ) :  esc_html_e( 'per night', 'tourfic' );?>
-                <?php } ?>
-                <?php
-                if(defined( 'TF_PRO' )){ ?>
-                    <?php $days > 0 ? esc_html_e( 'per person/night', 'tourfic' ) :  esc_html_e( 'per days', 'tourfic' );?>
-                <?php } ?>
-                </div>
-
-                <?php 
-                if(defined( 'TF_PRO' )){ 
-                ?>
-                    <?php 
-                    $tf8days  = !empty($room['tf-8-days']) ? $room['tf-8-days'] : ''; 
-                    if(!empty($tf8days)){
-                    ?>
-                    <div class="tf-single-prices">
-                        <span><?php esc_html_e( '8 DAYS', 'tourfic' ); ?>  <?php echo $tf8days['tf-room'] ? wc_price($tf8days['tf-room']) : '';  ?></span>
-                        
-                        <div class="tf-single-prices-item">
-                            <span><?php esc_html_e( 'Breakfast', 'tourfic' ); ?> <br><?php echo $tf8days['tf-breakfast'] ? wc_price($tf8days['tf-breakfast']) : '';  ?></span>
-                            
-                            <span><?php esc_html_e( 'Half B.', 'tourfic' ); ?> <br><?php echo $tf8days['tf-half-b'] ? wc_price($tf8days['tf-half-b']) : '';  ?></span>
-
-                            <span><?php esc_html_e( 'Full B.', 'tourfic' ); ?> <br><?php echo $tf8days['tf-full-b'] ? wc_price($tf8days['tf-full-b']) : '';  ?></span>
-                        </div>
-                    </div>
-                    <?php } ?>
-
-                    <?php 
-                    $tf16days  = !empty($room['tf-16-days']) ? $room['tf-16-days'] : ''; 
-                    if(!empty($tf16days)){
-                    ?>
-                    <div class="tf-single-prices">
-                        <span><?php esc_html_e( '16 DAYS', 'tourfic' ); ?>  <?php echo $tf16days['tf-room'] ? wc_price($tf16days['tf-room']) : '';  ?></span>
-                        
-                        <div class="tf-single-prices-item">
-                            <span><?php esc_html_e( 'Breakfast', 'tourfic' ); ?> <br><?php echo $tf16days['tf-breakfast'] ? wc_price($tf16days['tf-breakfast']) : '';  ?></span>
-                            
-                            <span><?php esc_html_e( 'Half B.', 'tourfic' ); ?> <br><?php echo $tf16days['tf-half-b'] ? wc_price($tf16days['tf-half-b']) : '';  ?></span>
-
-                            <span><?php esc_html_e( 'Full B.', 'tourfic' ); ?> <br><?php echo $tf16days['tf-full-b'] ? wc_price($tf16days['tf-full-b']) : '';  ?></span>
-                        </div>
-                    </div>
-                    <?php } ?>
-
-                    <?php 
-                    $tf24days  = !empty($room['tf-24-days']) ? $room['tf-24-days'] : ''; 
-                    if(!empty($tf24days)){
-                    ?>
-                    <div class="tf-single-prices">
-                        <span><?php esc_html_e( '24 DAYS', 'tourfic' ); ?>  <?php echo $tf24days['tf-room'] ? wc_price($tf24days['tf-room']) : '';  ?></span>
-                        
-                        <div class="tf-single-prices-item">
-                            <span><?php esc_html_e( 'Breakfast', 'tourfic' ); ?> <br><?php echo $tf24days['tf-breakfast'] ? wc_price($tf24days['tf-breakfast']) : '';  ?></span>
-                            
-                            <span><?php esc_html_e( 'Half B.', 'tourfic' ); ?> <br><?php echo $tf24days['tf-half-b'] ? wc_price($tf24days['tf-half-b']) : '';  ?></span>
-
-                            <span><?php esc_html_e( 'Full B.', 'tourfic' ); ?> <br><?php echo $tf24days['tf-full-b'] ? wc_price($tf24days['tf-full-b']) : '';  ?></span>
-                        </div>
-                    </div>
-                    <?php } ?>
-
-                    <?php 
-                    $tf32days  = !empty($room['tf-32-days']) ? $room['tf-32-days'] : ''; 
-                    if(!empty($tf32days)){
-                    ?>
-                    <div class="tf-single-prices">
-                        <span><?php esc_html_e( '32 DAYS', 'tourfic' ); ?>  <?php echo $tf32days['tf-room'] ? wc_price($tf32days['tf-room']) : '';  ?></span>
-                        
-                        <div class="tf-single-prices-item">
-                            <span><?php esc_html_e( 'Breakfast', 'tourfic' ); ?> <br><?php echo $tf32days['tf-breakfast'] ? wc_price($tf32days['tf-breakfast']) : '';  ?></span>
-                            
-                            <span><?php esc_html_e( 'Half B.', 'tourfic' ); ?> <br><?php echo $tf32days['tf-half-b'] ? wc_price($tf32days['tf-half-b']) : '';  ?></span>
-
-                            <span><?php esc_html_e( 'Full B.', 'tourfic' ); ?> <br><?php echo $tf32days['tf-full-b'] ? wc_price($tf32days['tf-full-b']) : '';  ?></span>
-                        </div>
-                    </div>
-                    <?php } ?>
-                            
-                    <?php
-                }
-                ?>
-            <?php } else {?>
+            
                 <div class="price-per-night">
                 <?php
                 if(!defined( 'TF_PRO' )){ ?>
@@ -210,12 +124,14 @@
                 <?php 
                 if(defined( 'TF_PRO' )){ 
                 ?>
+
                     <?php 
+                    if($days==7){
                     $tf8days  = !empty($room['tf-8-days']) ? $room['tf-8-days'] : ''; 
                     if(!empty($tf8days)){
                     ?>
                     <div class="tf-single-prices">
-                        <span><input type="radio" name="<?php echo $unique_id; ?>" id="tf-hotel-duration" value="8"> <?php esc_html_e( '8 DAYS', 'tourfic' ); ?>  <?php echo $tf8days['tf-room'] ? wc_price($tf8days['tf-room']*$form_adult) : '';  ?></span>
+                        <span><input type="radio" name="<?php echo $unique_id; ?>" id="tf-hotel-duration" value="8" checked> <?php esc_html_e( '8 DAYS', 'tourfic' ); ?>  <?php echo $tf8days['tf-room'] ? wc_price($tf8days['tf-room']*$form_adult) : '';  ?></span>
                         
                         <div class="tf-single-prices-item">
                             <span><?php esc_html_e( 'Breakfast', 'tourfic' ); ?> <br><?php echo $tf8days['tf-breakfast'] ? wc_price($tf8days['tf-breakfast']*$form_adult) : '';  ?></span>
@@ -225,14 +141,15 @@
                             <span><?php esc_html_e( 'Full B.', 'tourfic' ); ?> <br><?php echo $tf8days['tf-full-b'] ? wc_price($tf8days['tf-full-b']*$form_adult) : '';  ?></span>
                         </div>
                     </div>
-                    <?php } ?>
+                    <?php } } ?>
 
                     <?php 
+                    if($days==14){
                     $tf16days  = !empty($room['tf-16-days']) ? $room['tf-16-days'] : ''; 
                     if(!empty($tf16days)){
                     ?>
                     <div class="tf-single-prices">
-                        <span><input type="radio" name="<?php echo $unique_id; ?>" id="tf-hotel-duration" value="16"> <?php esc_html_e( '16 DAYS', 'tourfic' ); ?>  <?php echo $tf16days['tf-room'] ? wc_price($tf16days['tf-room']*$form_adult) : '';  ?></span>
+                        <span><input type="radio" name="<?php echo $unique_id; ?>" id="tf-hotel-duration" value="16" checked> <?php esc_html_e( '16 DAYS', 'tourfic' ); ?>  <?php echo $tf16days['tf-room'] ? wc_price($tf16days['tf-room']*$form_adult) : '';  ?></span>
                         
                         <div class="tf-single-prices-item">
                             <span><?php esc_html_e( 'Breakfast', 'tourfic' ); ?> <br><?php echo $tf16days['tf-breakfast'] ? wc_price($tf16days['tf-breakfast']*$form_adult) : '';  ?></span>
@@ -242,14 +159,15 @@
                             <span><?php esc_html_e( 'Full B.', 'tourfic' ); ?> <br><?php echo $tf16days['tf-full-b'] ? wc_price($tf16days['tf-full-b']*$form_adult) : '';  ?></span>
                         </div>
                     </div>
-                    <?php } ?>
+                    <?php } } ?>
 
                     <?php 
+                    if($days==21){
                     $tf24days  = !empty($room['tf-24-days']) ? $room['tf-24-days'] : ''; 
                     if(!empty($tf24days)){
                     ?>
                     <div class="tf-single-prices">
-                        <span><input type="radio" name="<?php echo $unique_id; ?>" id="tf-hotel-duration" value="24"> <?php esc_html_e( '24 DAYS', 'tourfic' ); ?>  <?php echo $tf24days['tf-room'] ? wc_price($tf24days['tf-room']*$form_adult) : '';  ?></span>
+                        <span><input type="radio" name="<?php echo $unique_id; ?>" id="tf-hotel-duration" value="24" checked> <?php esc_html_e( '24 DAYS', 'tourfic' ); ?>  <?php echo $tf24days['tf-room'] ? wc_price($tf24days['tf-room']*$form_adult) : '';  ?></span>
                         
                         <div class="tf-single-prices-item">
                             <span><?php esc_html_e( 'Breakfast', 'tourfic' ); ?> <br><?php echo $tf24days['tf-breakfast'] ? wc_price($tf24days['tf-breakfast']*$form_adult) : '';  ?></span>
@@ -259,14 +177,15 @@
                             <span><?php esc_html_e( 'Full B.', 'tourfic' ); ?> <br><?php echo $tf24days['tf-full-b'] ? wc_price($tf24days['tf-full-b']*$form_adult) : '';  ?></span>
                         </div>
                     </div>
-                    <?php } ?>
+                    <?php } } ?>
 
                     <?php 
+                    if($days==28){
                     $tf32days  = !empty($room['tf-32-days']) ? $room['tf-32-days'] : ''; 
                     if(!empty($tf32days)){
                     ?>
                     <div class="tf-single-prices">
-                        <span><input type="radio" name="<?php echo $unique_id; ?>" id="tf-hotel-duration" value="32"> <?php esc_html_e( '32 DAYS', 'tourfic' ); ?>  <?php echo $tf32days['tf-room'] ? wc_price($tf32days['tf-room']*$form_adult) : '';  ?></span>
+                        <span><input type="radio" name="<?php echo $unique_id; ?>" id="tf-hotel-duration" value="32" checked> <?php esc_html_e( '32 DAYS', 'tourfic' ); ?>  <?php echo $tf32days['tf-room'] ? wc_price($tf32days['tf-room']*$form_adult) : '';  ?></span>
                         
                         <div class="tf-single-prices-item">
                             <span><?php esc_html_e( 'Breakfast', 'tourfic' ); ?> <br><?php echo $tf32days['tf-breakfast'] ? wc_price($tf32days['tf-breakfast']*$form_adult) : '';  ?></span>
@@ -279,9 +198,8 @@
                     <?php } ?>
                             
                     <?php
-                }
+                } }
                 ?>
-            <?php }?>
 
             <?php if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount)) { ?>
                 <span class="tf-price tf-deposit-amount-<?php echo $room_id ?>" style="display: none;"><?php echo wc_price( $deposit_amount ); ?></span>
@@ -293,7 +211,7 @@
         <form class="tf-room">
             <?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' );?>
 
-            <div class="room-selection-wrap">
+            <!-- <div class="room-selection-wrap">
                 <select name="hotel_room_selected" id="hotel-room-selected">
                     <?php
                         foreach ( range( 0, $num_room_available) as $value ) {
@@ -301,7 +219,7 @@
                         }
                     ?>
                 </select>
-            </div>
+            </div> -->
             <div class="room-submit-wrap">
             <div class="roomselectissue"></div>
             <?php if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount) ) { ?>

@@ -360,48 +360,9 @@ if( class_exists( 'CSF' ) ) {
               'type'    => 'select',
               'title'   => __('Pricing by', 'tourfic' ),
               'options' => array(
-                '1'  => __('Per room', 'tourfic' ),
                 '2'  => __('Per person (Pro)', 'tourfic' ),
               ),
-              'default'     => '1'
-            ),
-
-            array(
-              'id'         => 'price',
-              'type'       => 'text',
-              'title'      => __('Pricing', 'tourfic' ),
-              'desc'       => __( 'The price of room per one night', 'tourfic' ),
-              'dependency' => array( 'pricing-by', '==', '1' ),
-            ),
-
-            array(
-              'id'         => '',
-              'class'      => 'tf-csf-disable tf-csf-pro',
-              'type'       => 'text',
-              'title'      => __('Adult Pricing', 'tourfic' ),
-              'subtitle'   => $badge_pro,
-              'desc'       => __( 'The price of room per one night', 'tourfic' ),
-              'dependency' => array( 'pricing-by', '==', '2' ),
-            ),
-
-            array(
-              'id'         => '',
-              'class'      => 'tf-csf-disable tf-csf-pro',
-              'type'       => 'text',
-              'title'      => __('Children Pricing', 'tourfic' ),
-              'subtitle'   => $badge_pro,
-              'desc'       => __( 'The price of room per one night', 'tourfic' ),
-              'dependency' => array( 'pricing-by', '==', '2' ),
-            ),
-
-            array(
-              'id'       => 'price_multi_day',
-              'type'     => 'switcher',
-              'title'    => __('Multiply Pricing By Night', 'tourfic' ),
-              'label'    => __( 'During booking pricing will be multiplied by number of nights (Check-in to Check-out)', 'tourfic' ),
-              'text_on'  => __('Yes', 'tourfic' ),
-              'text_off' => __('No', 'tourfic' ),
-              'default'  => true,
+              'default'     => '2'
             ),
             array(
                 'type'    => 'subheading',

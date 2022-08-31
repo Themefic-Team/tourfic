@@ -661,6 +661,7 @@ if(1==$airport_service){
     $check_in      = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
     $check_out     = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
     $deposit     = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
+    $hotel_pack = isset($_POST['hotel_pack']) ? sanitize_text_field($_POST['hotel_pack']) : '';
 
 
     # Calculate night number
@@ -686,57 +687,60 @@ if(1==$airport_service){
     /**
      * Calculate Pricing
      */
-    if ( $avail_by_date && defined( 'TF_PRO' ) ) {
+    // if ( $avail_by_date && defined( 'TF_PRO' ) ) {
         
-        // Check availability by date option
-        $period = new DatePeriod(
-            new DateTime( $check_in . ' 00:00' ),
-            new DateInterval( 'P1D' ),
-            new DateTime( $check_out . ' 00:00' )
-        );
+    //     // Check availability by date option
+    //     $period = new DatePeriod(
+    //         new DateTime( $check_in . ' 00:00' ),
+    //         new DateInterval( 'P1D' ),
+    //         new DateTime( $check_out . ' 00:00' )
+    //     );
         
-        $total_price = 0;
-        foreach ( $period as $date ) {
+    //     $total_price = 0;
+    //     foreach ( $period as $date ) {
                     
-        $available_rooms = array_values( array_filter( $repeat_by_date, function ($date_availability ) use ( $date ) {
-            $date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
-            $date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
-            return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
-        } ) );
+    //     $available_rooms = array_values( array_filter( $repeat_by_date, function ($date_availability ) use ( $date ) {
+    //         $date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
+    //         $date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
+    //         return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
+    //     } ) );
 
-        if ( is_iterable($available_rooms) && count( $available_rooms ) >=1) {                    
-            $room_price    = !empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $rooms[$room_id]['price'];
-            $adult_price   = !empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $rooms[$room_id]['adult_price'];
-            $child_price   = !empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $rooms[$room_id]['child_price'];
-            $total_price += $pricing_by == '1' ? $room_price : (  ( $adult_price * $adult ) + ( $child_price * $child ) );
+    //     if ( is_iterable($available_rooms) && count( $available_rooms ) >=1) {                    
+    //         $room_price    = !empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $rooms[$room_id]['price'];
+    //         $adult_price   = !empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $rooms[$room_id]['adult_price'];
+    //         $child_price   = !empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $rooms[$room_id]['child_price'];
+    //         $total_price += $pricing_by == '1' ? $room_price : (  ( $adult_price * $adult ) + ( $child_price * $child ) );
             
-        } ;
+    //     } ;
             
-        } 
+    //     } 
         
-        $price_total = $total_price*$room_selected;
-    } else {
+    //     $price_total = $total_price*$room_selected;
+    // } else {
 
-        if ( $pricing_by == '1' ) {
-            $total_price = $rooms[$room_id]['price'];
+    //     if ( $pricing_by == '1' ) {
+    //         $total_price = $rooms[$room_id]['price'];
             
-        } elseif ( $pricing_by == '2' ) {
-            $adult_price = $rooms[$room_id]['adult_price'];
-            $adult_price = $adult_price * $adult;
-            $child_price = $rooms[$room_id]['child_price'];
-            $child_price = $child_price * $child;
-            $total_price = $adult_price + $child_price;    
+    //     } elseif ( $pricing_by == '2' ) {
+    //         $adult_price = $rooms[$room_id]['adult_price'];
+    //         $adult_price = $adult_price * $adult;
+    //         $child_price = $rooms[$room_id]['child_price'];
+    //         $child_price = $child_price * $child;
+    //         $total_price = $adult_price + $child_price;    
             
-        }
+    //     }
 
-        # Multiply pricing by night number
-        if(!empty($day_difference) && $price_multi_day == true) {
-            $price_total = $total_price*$room_selected*$day_difference;
-        } else {
-            $price_total = $total_price*$room_selected;
-        }
+    //     # Multiply pricing by night number
+    //     if(!empty($day_difference) && $price_multi_day == true) {
+    //         $price_total = $total_price*$room_selected*$day_difference;
+    //     } else {
+    //         $price_total = $total_price*$room_selected;
+    //     }
 
-    }
+    // }
+
+    $roompackageprice = $rooms[$room_id]['tf-'.$hotel_pack.'-days'];
+    $price_total = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$adult;
 
     if($deposit=="true"){
         tf_get_deposit_amount($rooms[$room_id], $price_total, $deposit_amount, $has_deposit);
@@ -958,6 +962,20 @@ function tf_room_availability_callback() {
                             );
 
                             $days = iterator_count( $period );
+                            if($days==7){
+                            $roompackageprice = $room['tf-8-days'];
+                            
+                            $price = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$form_adult;
+                            } elseif($days==14){
+                                $roompackageprice = $room['tf-16-days'];
+                                $price = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$form_adult;
+                            } elseif($days==21){
+                                $roompackageprice = $room['tf-24-days'];
+                                $price = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$form_adult;
+                            } elseif($days==28){
+                                $roompackageprice = $room['tf-32-days'];
+                                $price = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$form_adult;
+                            }
 
                             /**
                              * Set room availability
@@ -1072,6 +1090,22 @@ function tf_room_availability_callback() {
                                         $child_price   = !empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $room['child_price'];
                                         $price_by_date = $pricing_by == '1' ? $room_price : (  ( $adult_price * $form_adult ) + ( $child_price * $form_child ) );
                                         $price += $price_by_date;
+
+                                        if($days==7){
+                                        $roompackageprice = $room['tf-8-days'];
+                                        
+                                        $price = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$form_adult;
+                                        } elseif($days==14){
+                                            $roompackageprice = $room['tf-16-days'];
+                                            $price = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$form_adult;
+                                        } elseif($days==21){
+                                            $roompackageprice = $room['tf-24-days'];
+                                            $price = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$form_adult;
+                                        } elseif($days==28){
+                                            $roompackageprice = $room['tf-32-days'];
+                                            $price = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$form_adult;
+                                        }
+                                        
                                         $number_of_rooms = !empty($available_rooms[0]['num-room']) ? $available_rooms[0]['num-room'] : $room['num-room'];                                     
                                         $has_room[] = 1; 
 
@@ -1099,13 +1133,20 @@ function tf_room_availability_callback() {
 
                             } else {
                    
-                                if ($pricing_by == '1') {
-                                    $price_by_date = $room_price;
-                                } else {
-                                    $price_by_date = (($room_adult_price * $form_adult) + ($room_child_price * $form_child));
+                                if($days==7){
+                                $roompackageprice = $room['tf-8-days'];
+                                
+                                $price = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$form_adult;
+                                } elseif($days==14){
+                                    $roompackageprice = $room['tf-16-days'];
+                                    $price = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$form_adult;
+                                } elseif($days==21){
+                                    $roompackageprice = $room['tf-24-days'];
+                                    $price = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$form_adult;
+                                } elseif($days==28){
+                                    $roompackageprice = $room['tf-32-days'];
+                                    $price = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$form_adult;
                                 }
-
-                                $price =  $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date;
 
                                 tf_get_deposit_amount($room, $price, $deposit_amount, $has_deposit);
 

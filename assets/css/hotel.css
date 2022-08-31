@@ -523,7 +523,11 @@ span.tf-price .amount {
     line-height: 18px;
     font-size: 14px;
 }
-
+.pricing .tf-price {
+    text-align: center;
+    width: 100%;
+    display: block;
+}
 
 /********************** RESPONSIVE **********************/
 @media only screen and (min-width: 951px) {

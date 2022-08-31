@@ -44,7 +44,7 @@ function tf_hotel_booking_callback(){
     $check_out     = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
     $deposit     = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
     $airport_service = isset($_POST['airport_service']) ? sanitize_text_field($_POST['airport_service']) : '';
-
+    $hotel_pack = isset($_POST['hotel_pack']) ? sanitize_text_field($_POST['hotel_pack']) : '';
 
     # Calculate night number
     if($check_in && $check_out) {
@@ -63,9 +63,9 @@ function tf_hotel_booking_callback(){
     if ( !$adult ) {
         $response['errors'][] = __('Select Adult(s).','tourfic');
     }
-    if ( !$room_selected ) {
-        $response['errors'][] = __('Select Room(s).','tourfic');
-    }
+    // if ( !$room_selected ) {
+    //     $response['errors'][] = __('Select Room(s).','tourfic');
+    // }
     if ( !$post_id  ) {
         $response['errors'][] = __('Unknown Error! Please try again.','tourfic');
     }
@@ -111,70 +111,79 @@ function tf_hotel_booking_callback(){
         /**
          * Calculate Pricing
          */
-        if ( $avail_by_date && defined( 'TF_PRO' ) ) {
+        // if ( $avail_by_date && defined( 'TF_PRO' ) ) {
             
-            // Check availability by date option
-            $period = new DatePeriod(
-                new DateTime( $check_in . ' 00:00' ),
-                new DateInterval( 'P1D' ),
-                new DateTime( $check_out . ' 00:00' )
-            );
+        //     // Check availability by date option
+        //     $period = new DatePeriod(
+        //         new DateTime( $check_in . ' 00:00' ),
+        //         new DateInterval( 'P1D' ),
+        //         new DateTime( $check_out . ' 00:00' )
+        //     );
             
-            $total_price = 0;
-            foreach ( $period as $date ) {
+        //     $total_price = 0;
+        //     foreach ( $period as $date ) {
                             
-            $available_rooms = array_values( array_filter( $repeat_by_date, function ($date_availability ) use ( $date ) {
-                $date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
-                $date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
-                return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
-            } ) );
+        //     $available_rooms = array_values( array_filter( $repeat_by_date, function ($date_availability ) use ( $date ) {
+        //         $date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
+        //         $date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
+        //         return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
+        //     } ) );
 
-            if ( is_iterable($available_rooms) && count( $available_rooms ) >=1) {                    
-                $room_price    = !empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $rooms[$room_id]['price'];
-                $adult_price   = !empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $rooms[$room_id]['adult_price'];
-                $child_price   = !empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $rooms[$room_id]['child_price'];
-                $total_price += $pricing_by == '1' ? $room_price : (  ( $adult_price * $adult ) + ( $child_price * $child ) );
+        //     if ( is_iterable($available_rooms) && count( $available_rooms ) >=1) {                    
+        //         $room_price    = !empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $rooms[$room_id]['price'];
+        //         $adult_price   = !empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $rooms[$room_id]['adult_price'];
+        //         $child_price   = !empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $rooms[$room_id]['child_price'];
+        //         $total_price += $pricing_by == '1' ? $room_price : (  ( $adult_price * $adult ) + ( $child_price * $child ) );
                 
-                if ( $pricing_by == '1' ) {
-                    $tf_room_data['tf_hotel_data']['adult']          = $adult;
-                    $tf_room_data['tf_hotel_data']['child']          = $child;
-                }
-                if ( $pricing_by == '2' ) {
-                    $tf_room_data['tf_hotel_data']['adult']          = $adult." × ".wc_price($available_rooms[0]['adult_price']);
-                    $tf_room_data['tf_hotel_data']['child']          = $child." × ".wc_price($available_rooms[0]['child_price']);
-                }
+        //         if ( $pricing_by == '1' ) {
+        //             $tf_room_data['tf_hotel_data']['adult']          = $adult;
+        //             $tf_room_data['tf_hotel_data']['child']          = $child;
+        //         }
+        //         if ( $pricing_by == '2' ) {
+        //             $tf_room_data['tf_hotel_data']['adult']          = $adult." × ".wc_price($available_rooms[0]['adult_price']);
+        //             $tf_room_data['tf_hotel_data']['child']          = $child." × ".wc_price($available_rooms[0]['child_price']);
+        //         }
                 
-            } ;
+        //     } ;
                 
-            } 
+        //     } 
             
-            $price_total = $total_price*$room_selected;
-        } else {
+        //     $price_total = $total_price*$room_selected;
+        // } else {
 
-            if ( $pricing_by == '1' ) {
-                $total_price = $rooms[$room_id]['price'];
+            // if ( $pricing_by == '1' ) {
+            //     $total_price = $rooms[$room_id]['price'];
                 
-                $tf_room_data['tf_hotel_data']['adult']          = $adult;
-                $tf_room_data['tf_hotel_data']['child']          = $child;
-            } elseif ( $pricing_by == '2' ) {
-                $adult_price = $rooms[$room_id]['adult_price'];
-                $adult_price = $adult_price * $adult;
-                $child_price = $rooms[$room_id]['child_price'];
-                $child_price = $child_price * $child;
-                $total_price = $adult_price + $child_price;    
+            //     $tf_room_data['tf_hotel_data']['adult']          = $adult;
+            //     $tf_room_data['tf_hotel_data']['child']          = $child;
+            // } elseif ( $pricing_by == '2' ) {
+
+                $roompackageprice = $rooms[$room_id]['tf-'.$hotel_pack.'-days'];
+                $price_total = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$adult;
+                
+                $tf_room_data['tf_hotel_data']['tf-room'] = $roompackageprice['tf-room'];
+                $tf_room_data['tf_hotel_data']['tf-breakfast'] = $roompackageprice['tf-breakfast'];
+                $tf_room_data['tf_hotel_data']['tf-half-b'] = $roompackageprice['tf-half-b'];
+                $tf_room_data['tf_hotel_data']['tf-full-b'] = $roompackageprice['tf-full-b'];
+
+                // $adult_price = $rooms[$room_id]['adult_price'];
+                // $adult_price = $adult_price * $adult;
+                // $child_price = $rooms[$room_id]['child_price'];
+                // $child_price = $child_price * $child;
+                // $total_price = $adult_price + $child_price;    
                                 
-                $tf_room_data['tf_hotel_data']['adult']          = $adult." × ".wc_price($rooms[$room_id]['adult_price']);
-                $tf_room_data['tf_hotel_data']['child']          = $child." × ".wc_price($rooms[$room_id]['child_price']);
-            }
+                $tf_room_data['tf_hotel_data']['adult']          = $adult;
+                // $tf_room_data['tf_hotel_data']['child']          = $child;
+            // }
 
             # Multiply pricing by night number
-            if(!empty($day_difference) && $price_multi_day == true) {
-                $price_total = $total_price*$room_selected*$day_difference;
-            } else {
-                $price_total = $total_price*$room_selected;
-            }
+            // if(!empty($day_difference) && $price_multi_day == true) {
+            //     $price_total = $total_price*$room_selected*$day_difference;
+            // } else {
+            //     $price_total = $total_price*$room_selected;
+            // }
 
-        }
+        // }
 
         
         # Set pricing
@@ -330,10 +339,35 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
         );
     }
 
-    if ( isset( $cart_item['tf_hotel_data']['room'] ) && $cart_item['tf_hotel_data']['room'] > 0 ) {
+    // if ( isset( $cart_item['tf_hotel_data']['room'] ) && $cart_item['tf_hotel_data']['room'] > 0 ) {
+    //     $item_data[] = array(
+    //         'key'       => __('Number of Room Booked', 'tourfic'),
+    //         'value'     => $cart_item['tf_hotel_data']['room'],
+    //     );
+    // }
+
+    if ( isset( $cart_item['tf_hotel_data']['tf-room'] ) && $cart_item['tf_hotel_data']['tf-room'] > 0 ) {
         $item_data[] = array(
-            'key'       => __('Number of Room Booked', 'tourfic'),
-            'value'     => $cart_item['tf_hotel_data']['room'],
+            'key'       => __('Room', 'tourfic'),
+            'value'     => wc_price( $cart_item['tf_hotel_data']['tf-room'] ),
+        );
+    }
+    if ( isset( $cart_item['tf_hotel_data']['tf-breakfast'] ) && $cart_item['tf_hotel_data']['tf-breakfast'] > 0 ) {
+        $item_data[] = array(
+            'key'       => __('Breakfast', 'tourfic'),
+            'value'     => wc_price( $cart_item['tf_hotel_data']['tf-breakfast'] ),
+        );
+    }
+    if ( isset( $cart_item['tf_hotel_data']['tf-half-b'] ) && $cart_item['tf_hotel_data']['tf-half-b'] > 0 ) {
+        $item_data[] = array(
+            'key'       => __('Half B.', 'tourfic'),
+            'value'     => wc_price( $cart_item['tf_hotel_data']['tf-half-b'] ),
+        );
+    }
+    if ( isset( $cart_item['tf_hotel_data']['tf-full-b'] ) && $cart_item['tf_hotel_data']['tf-full-b'] > 0 ) {
+        $item_data[] = array(
+            'key'       => __('Full B.', 'tourfic'),
+            'value'     => wc_price( $cart_item['tf_hotel_data']['tf-full-b'] ),
         );
     }
 
@@ -344,12 +378,12 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
         );
     }
 
-    if ( isset( $cart_item['tf_hotel_data']['child'] ) && $cart_item['tf_hotel_data']['child'] >=1 ) {
-        $item_data[] = array(
-            'key'       => __('Child Number', 'tourfic'),
-            'value'     => $cart_item['tf_hotel_data']['child'],
-        );
-    }
+    // if ( isset( $cart_item['tf_hotel_data']['child'] ) && $cart_item['tf_hotel_data']['child'] >=1 ) {
+    //     $item_data[] = array(
+    //         'key'       => __('Child Number', 'tourfic'),
+    //         'value'     => $cart_item['tf_hotel_data']['child'],
+    //     );
+    // }
 
     if ( isset( $cart_item['tf_hotel_data']['check_in'] ) ) {
         $item_data[] = array(
@@ -357,7 +391,7 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
             'value'     => $cart_item['tf_hotel_data']['check_in'],
         );
     }
-
+    
     if ( isset( $cart_item['tf_hotel_data']['check_out'] ) ) {
         $item_data[] = array(
             'key'       => __('Check-out', 'tourfic'),
@@ -433,9 +467,14 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
     $post_id = !empty($values['tf_hotel_data']['post_id']) ? $values['tf_hotel_data']['post_id'] : '';
     $unique_id = !empty($values['tf_hotel_data']['unique_id']) ? $values['tf_hotel_data']['unique_id'] : '';
     $room_name = !empty($values['tf_hotel_data']['room_name']) ? $values['tf_hotel_data']['room_name'] : '';
-    $room_selected = !empty($values['tf_hotel_data']['room']) ? $values['tf_hotel_data']['room'] : '';
+    // $room_selected = !empty($values['tf_hotel_data']['room']) ? $values['tf_hotel_data']['room'] : '';
     $adult = !empty($values['tf_hotel_data']['adult']) ? $values['tf_hotel_data']['adult'] : '';
-    $child = !empty($values['tf_hotel_data']['child']) ? $values['tf_hotel_data']['child'] : '';
+    // $child = !empty($values['tf_hotel_data']['child']) ? $values['tf_hotel_data']['child'] : '';
+    $tf_room = !empty($values['tf_hotel_data']['tf-room']) ? $values['tf_hotel_data']['tf-room'] : '';
+    $tf_breakfast = !empty($values['tf_hotel_data']['tf-breakfast']) ? $values['tf_hotel_data']['tf-breakfast'] : '';
+    $tf_half_b = !empty($values['tf_hotel_data']['tf-half-b']) ? $values['tf_hotel_data']['tf-half-b'] : '';
+    $tf_full_b = !empty($values['tf_hotel_data']['tf-full-b']) ? $values['tf_hotel_data']['tf-full-b'] : '';
+
     $check_in = !empty($values['tf_hotel_data']['check_in']) ? $values['tf_hotel_data']['check_in'] : '';
     $check_out = !empty($values['tf_hotel_data']['check_out']) ? $values['tf_hotel_data']['check_out'] : '';
     $due = !empty($values['tf_hotel_data']['due']) ? $values['tf_hotel_data']['due'] : '';
@@ -480,6 +519,22 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
     if ( $child && $child > 0 ) {
 
         $item->update_meta_data( 'child', $child );
+    }
+    if ( $tf_room ) {
+
+        $item->update_meta_data( 'Room', wc_price ( $tf_room ) );
+    }
+    if ( $tf_breakfast ) {
+
+        $item->update_meta_data( 'Breakfast', wc_price ( $tf_breakfast ) );
+    }
+    if ( $tf_half_b ) {
+
+        $item->update_meta_data( 'Half B.', wc_price ( $tf_half_b ) );
+    }
+    if ( $tf_full_b ) {
+
+        $item->update_meta_data( 'Full B', wc_price ( $tf_full_b ) );
     }
 
     if ( $check_in ) {
