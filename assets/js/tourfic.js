@@ -111,7 +111,7 @@
             }else{
                 var room_id = $("#hotel_roomid").val();
                 var room = $("#hotel_room_number").val();
-             var deposit = $("#hotel_room_depo").val();
+                var deposit = $("#hotel_room_depo").val();
             }
             if($(this).closest('.room-submit-wrap').find('input[name=unique_id]').val()){
                 var unique_id = $(this).closest('.room-submit-wrap').find('input[name=unique_id]').val();
