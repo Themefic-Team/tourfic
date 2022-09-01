@@ -123,6 +123,8 @@
             var child = $('input[name=child]').val();
             var check_in_date = $('input[name=check_in_date]').val();
             var check_out_date = $('input[name=check_out_date]').val();
+            var mealinfo = $('#hotel_meal_val').val();
+
             // if($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()){
                 // var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
                 // var deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
@@ -146,7 +148,8 @@
                 room: room,
                 deposit: deposit,
                 airport_service: airport_service,
-                hotel_pack: hotel_pack
+                hotel_pack: hotel_pack,
+                mealinfo: mealinfo
             };
              
 
@@ -415,9 +418,9 @@
             var startprice = $('#startprice').val();
             var endprice = $('#endprice').val();
             // split date range into dates
-            var checkedArr = checked.split(' to ');
-            var checkin = checkedArr[0];
-            var checkout = checkedArr[1];
+            // var checkedArr = checked.split(' to ');
+            // var checkin = checkedArr[0];
+            // var checkout = checkedArr[1];
             var posttype = $('.tf-post-type').val();
 
             var filters = [];
@@ -445,8 +448,8 @@
             formData.append('adults', adults);
             formData.append('room', room);
             formData.append('children', children);
-            formData.append('checkin', checkin);
-            formData.append('checkout', checkout);
+            // formData.append('checkin', checkin);
+            // formData.append('checkout', checkout);
             formData.append('filters', filters);
             formData.append('features', features);
             formData.append('checked', checked);

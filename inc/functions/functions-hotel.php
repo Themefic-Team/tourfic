@@ -662,6 +662,7 @@ if(1==$airport_service){
     $check_out     = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
     $deposit     = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
     $hotel_pack = isset($_POST['hotel_pack']) ? sanitize_text_field($_POST['hotel_pack']) : '';
+    $hotel_meal = isset($_POST['hotel_meal']) ? sanitize_text_field($_POST['hotel_meal']) : '';
 
 
     # Calculate night number
@@ -739,8 +740,15 @@ if(1==$airport_service){
 
     // }
 
+    // $roompackageprice = $rooms[$room_id]['tf-'.$hotel_pack.'-days'];
+    // $price_total = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$adult;
+
     $roompackageprice = $rooms[$room_id]['tf-'.$hotel_pack.'-days'];
-    $price_total = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$adult;
+    if(!empty($hotel_meal)){
+        $price_total = ($roompackageprice['tf-room'] + $roompackageprice[''.$hotel_meal.''])*$adult;
+    }else{
+        $price_total = $roompackageprice['tf-room']*$adult;
+    }
 
     if($deposit=="true"){
         tf_get_deposit_amount($rooms[$room_id], $price_total, $deposit_amount, $has_deposit);

@@ -192,9 +192,10 @@ if ( !function_exists('tf_enqueue_scripts') ) {
             endwhile;
 
         endif; wp_reset_query(); 
-        
-        $hotel_max_price = max($tfhotel_min_maxprices);
-        $hotel_min_price = min($tfhotel_min_maxprices);
+        if(!empty($tfhotel_min_maxprices)){
+            $hotel_max_price = max($tfhotel_min_maxprices);
+            $hotel_min_price = min($tfhotel_min_maxprices);
+        }
 
         /**
          * Tour Destination
@@ -241,9 +242,10 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 
         endif; wp_reset_query(); 
         
+        if(!empty($tftours_min_maxprices)){
         $tour_max_price = max($tftours_min_maxprices);
         $tour_min_price = min($tftours_min_maxprices);
-
+        }
 
         /**
          * Hotel Country

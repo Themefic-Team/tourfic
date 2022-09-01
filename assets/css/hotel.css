@@ -523,6 +523,9 @@ span.tf-price .amount {
     line-height: 18px;
     font-size: 14px;
 }
+.tf-single-prices-item span.inclusive{
+    width: auto !important;
+}
 .pricing .tf-price {
     text-align: center;
     width: 100%;

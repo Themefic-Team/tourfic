@@ -26,7 +26,6 @@ function tf_hotel_booking_callback(){
     $response     = [];
     $tf_room_data = [];
 
-
     /**
      * Data from booking form
      * 
@@ -45,6 +44,7 @@ function tf_hotel_booking_callback(){
     $deposit     = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
     $airport_service = isset($_POST['airport_service']) ? sanitize_text_field($_POST['airport_service']) : '';
     $hotel_pack = isset($_POST['hotel_pack']) ? sanitize_text_field($_POST['hotel_pack']) : '';
+    $hotel_meal = isset($_POST['mealinfo']) ? sanitize_text_field($_POST['mealinfo']) : '';
 
     # Calculate night number
     if($check_in && $check_out) {
@@ -159,12 +159,15 @@ function tf_hotel_booking_callback(){
             // } elseif ( $pricing_by == '2' ) {
 
                 $roompackageprice = $rooms[$room_id]['tf-'.$hotel_pack.'-days'];
-                $price_total = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$adult;
-                
-                $tf_room_data['tf_hotel_data']['tf-room'] = $roompackageprice['tf-room'];
-                $tf_room_data['tf_hotel_data']['tf-breakfast'] = $roompackageprice['tf-breakfast'];
-                $tf_room_data['tf_hotel_data']['tf-half-b'] = $roompackageprice['tf-half-b'];
-                $tf_room_data['tf_hotel_data']['tf-full-b'] = $roompackageprice['tf-full-b'];
+                if(!empty($hotel_meal)){
+                    $price_total = ($roompackageprice['tf-room'] + $roompackageprice[''.$hotel_meal.''])*$adult;
+                    $tf_room_data['tf_hotel_data']['tf-room'] = $roompackageprice['tf-room'];
+                    $tf_room_data['tf_hotel_data'][''.$hotel_meal.''] = $roompackageprice[''.$hotel_meal.''];
+                }else{
+                    $price_total = $roompackageprice['tf-room']*$adult;
+                    $tf_room_data['tf_hotel_data']['tf-room'] = $roompackageprice['tf-room'];
+                }
+
 
                 // $adult_price = $rooms[$room_id]['adult_price'];
                 // $adult_price = $adult_price * $adult;
@@ -370,6 +373,18 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
             'value'     => wc_price( $cart_item['tf_hotel_data']['tf-full-b'] ),
         );
     }
+    if ( isset( $cart_item['tf_hotel_data']['tf-inclusive'] ) && $cart_item['tf_hotel_data']['tf-inclusive'] > 0 ) {
+        $item_data[] = array(
+            'key'       => __('All Inclusive', 'tourfic'),
+            'value'     => wc_price( $cart_item['tf_hotel_data']['tf-inclusive'] ),
+        );
+    }
+    if ( isset( $cart_item['tf_hotel_data']['tf-inclusive-gold'] ) && $cart_item['tf_hotel_data']['tf-inclusive-gold'] > 0 ) {
+        $item_data[] = array(
+            'key'       => __('All Inclusive Gold', 'tourfic'),
+            'value'     => wc_price( $cart_item['tf_hotel_data']['tf-inclusive-gold'] ),
+        );
+    }
 
     if ( isset( $cart_item['tf_hotel_data']['adult'] ) && $cart_item['tf_hotel_data']['adult'] >=1 ) {
         $item_data[] = array(
@@ -474,6 +489,8 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
     $tf_breakfast = !empty($values['tf_hotel_data']['tf-breakfast']) ? $values['tf_hotel_data']['tf-breakfast'] : '';
     $tf_half_b = !empty($values['tf_hotel_data']['tf-half-b']) ? $values['tf_hotel_data']['tf-half-b'] : '';
     $tf_full_b = !empty($values['tf_hotel_data']['tf-full-b']) ? $values['tf_hotel_data']['tf-full-b'] : '';
+    $tf_inclusive = !empty($values['tf_hotel_data']['tf-inclusive']) ? $values['tf_hotel_data']['tf-inclusive'] : '';
+    $tf_inclusive_gold = !empty($values['tf_hotel_data']['tf-inclusive-gold']) ? $values['tf_hotel_data']['tf-inclusive-gold'] : '';
 
     $check_in = !empty($values['tf_hotel_data']['check_in']) ? $values['tf_hotel_data']['check_in'] : '';
     $check_out = !empty($values['tf_hotel_data']['check_out']) ? $values['tf_hotel_data']['check_out'] : '';
@@ -535,6 +552,15 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
     if ( $tf_full_b ) {
 
         $item->update_meta_data( 'Full B', wc_price ( $tf_full_b ) );
+    }
+    
+    if ( $tf_inclusive ) {
+
+        $item->update_meta_data( 'All Inclusive', wc_price ( $tf_inclusive ) );
+    }
+    if ( $tf_inclusive_gold ) {
+
+        $item->update_meta_data( 'All Inclusive Gold', wc_price ( $tf_inclusive_gold ) );
     }
 
     if ( $check_in ) {

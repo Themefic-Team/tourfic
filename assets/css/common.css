@@ -565,6 +565,9 @@ h3.section-heading {
 .tf_selectperson-wrap {
     padding: 0 15px;
 }
+#tf-hotel-booking-form .tf_destination-wrap .tf_input-inner{
+    position: relative;
+}
 
 .person-sep {
     padding: 0 8px;

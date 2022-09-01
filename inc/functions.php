@@ -520,6 +520,10 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
     <?php }else{ ?>
 
         <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
+        <?php
+            $ptype = $_GET['type'] ?? get_post_type();
+        ?>   
+        <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type" />
             <h4 class="tf_widgettitle"><?php _e("Type of Property", "tourfic" ); ?></h4>
             <div class="tf-filter">
                 <ul>
@@ -846,44 +850,44 @@ function tf_search_result_ajax_sidebar(){
     );
 
 
-    if ( $search ) {
+    // if ( $search ) {
 
-        // 1st search on Destination taxonomy
-        $destinations = new WP_Term_Query( array(
-            'taxonomy' => $place_taxonomy,
-            'orderby' => 'name',
-            'order' => 'ASC',
-            'hide_empty' => 0,
-            'hierarchical' => 0,
-            'slug' => sanitize_title($search, ''),
-        ) );
+    //     // 1st search on Destination taxonomy
+    //     $destinations = new WP_Term_Query( array(
+    //         'taxonomy' => $place_taxonomy,
+    //         'orderby' => 'name',
+    //         'order' => 'ASC',
+    //         'hide_empty' => 0,
+    //         'hierarchical' => 0,
+    //         'slug' => sanitize_title($search, ''),
+    //     ) );
 
-        if ( $destinations ) {
-            // Define Featured Category IDs first
-            $destinations_ids = array();
+    //     if ( $destinations ) {
+    //         // Define Featured Category IDs first
+    //         $destinations_ids = array();
 
-            // Creating loop to insert IDs to array.
-            foreach( $destinations->get_terms() as $cat ) {
-                $destinations_ids[] = $cat->term_id;
-            }
+    //         // Creating loop to insert IDs to array.
+    //         foreach( $destinations->get_terms() as $cat ) {
+    //             $destinations_ids[] = $cat->term_id;
+    //         }
 
-            $args['tax_query']['relation'] = $relation;
-            $args['tax_query'][] = array(
-                'taxonomy' => $place_taxonomy,
-                'terms'    => $destinations_ids,
-            );
+    //         $args['tax_query']['relation'] = $relation;
+    //         $args['tax_query'][] = array(
+    //             'taxonomy' => $place_taxonomy,
+    //             'terms'    => $destinations_ids,
+    //         );
 
-        } else {
-            $args['s'] = $search;
-        }
-    }
+    //     } else {
+    //         $args['s'] = $search;
+    //     }
+    // }
 
     if ( $filters ) {
         $args['tax_query']['relation'] = $relation;
 
         if ( $filter_relation == "OR" ) {
             $args['tax_query'][] = array(
-                'taxonomy' => $filter_taxonomy,
+                'taxonomy' => 'hotel_feature',
                 'terms'    => $filters,
             );
         } else {
@@ -891,7 +895,7 @@ function tf_search_result_ajax_sidebar(){
 
             foreach ($filters as $key => $term_id) {
                 $args['tax_query']['tf_filters'][] = array(
-                    'taxonomy' => $filter_taxonomy,
+                    'taxonomy' => 'hotel_feature',
                     'terms'    => array($term_id),
                 );
             }
@@ -900,28 +904,29 @@ function tf_search_result_ajax_sidebar(){
 
     }
     
+    
     //Query for the features filter of tours
-    if ( $features ) {
-        $args['tax_query']['relation'] = $relation;
+    // if ( $features ) {
+    //     $args['tax_query']['relation'] = $relation;
 
-        if ( $filter_relation == "OR" ) {
-            $args['tax_query'][] = array(
-                'taxonomy' => 'tf_feature',
-                'terms'    => $features,
-            );
-        } else {
-            $args['tax_query']['tf_feature']['relation'] = 'AND';
+    //     if ( $filter_relation == "OR" ) {
+    //         $args['tax_query'][] = array(
+    //             'taxonomy' => 'tf_feature',
+    //             'terms'    => $features,
+    //         );
+    //     } else {
+    //         $args['tax_query']['tf_feature']['relation'] = 'AND';
 
-            foreach ( $filters as $key => $term_id ) {
-                $args['tax_query']['tf_feature'][] = array(
-                    'taxonomy' => 'tf_feature',
-                    'terms'    => array( $term_id ),
-                );
-            }
+    //         foreach ( $filters as $key => $term_id ) {
+    //             $args['tax_query']['tf_feature'][] = array(
+    //                 'taxonomy' => 'tf_feature',
+    //                 'terms'    => array( $term_id ),
+    //             );
+    //         }
 
-        }
+    //     }
 
-    }
+    // }
 
     # Add meta if dates exists and post type is tours
     if ( $checkin && $posttype == ' tf_tours' ){
@@ -943,6 +948,9 @@ function tf_search_result_ajax_sidebar(){
     } 
 
     $loop = new WP_Query( $args );
+    // echo "<pre>";
+    // var_dump($loop);
+    // wp_die();
 
     if ( $loop->have_posts() ) { 
         $not_found = [];
@@ -958,11 +966,11 @@ function tf_search_result_ajax_sidebar(){
                     tf_hotel_archive_single_item();
 
                 } else {
-                    if(!empty($startprice) && !empty($endprice)){
-                        $data = [$adults, $child, $room, $check_in_out, $startprice, $endprice];
-                    }else{
-                        $data = [$adults, $child, $room, $check_in_out];
-                    }
+                    // if(!empty($startprice) && !empty($endprice)){
+                    //     $data = [$adults, $child, $room, $check_in_out, $startprice, $endprice];
+                    // }else{
+                    //     $data = [$adults, $child, $room, $check_in_out];
+                    // }
                     
 	                tf_filter_hotel_by_date( $period,$not_found, $data);
 
