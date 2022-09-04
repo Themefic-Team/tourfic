@@ -379,6 +379,61 @@ function tf_hotel_taxonomies_register() {
     if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
         register_taxonomy( 'hotel_style_property', 'tf_hotel', apply_filters( 'hotel_style_property_args', $hotel_style_property_args ) );
     }
+
+    /**
+     * Taxonomy: hotel_day
+     */
+    $hotel_day_slug = apply_filters( 'hotel_day_slug', 'hotel-property-style' );
+
+    $hotel_day_labels = array(
+        'name'                       => __( 'Days Stay', 'tourfic' ),
+        'singular_name'              => __( 'Days Stay', 'tourfic' ),
+        'menu_name'                  => __( 'Days Stay', 'tourfic' ),
+        'all_items'                  => __( 'All Days Stay', 'tourfic' ),
+        'edit_item'                  => __( 'Edit Days Stay', 'tourfic' ),
+        'view_item'                  => __( 'View Days Stay', 'tourfic' ),
+        'update_item'                => __( 'Update Days Stay name', 'tourfic' ),
+        'add_new_item'               => __( 'Add new Days Stay', 'tourfic' ),
+        'new_item_name'              => __( 'New Days Stay name', 'tourfic' ),
+        'parent_item'                => __( 'Parent Days Stay', 'tourfic' ),
+        'parent_item_colon'          => __( 'Parent Days Stay:', 'tourfic' ),
+        'search_items'               => __( 'Search Days Stay', 'tourfic' ),
+        'popular_items'              => __( 'Popular Days Stay', 'tourfic' ),
+        'separate_items_with_commas' => __( 'Separate Days Stay with commas', 'tourfic' ),
+        'add_or_remove_items'        => __( 'Add or remove Days Stay', 'tourfic' ),
+        'choose_from_most_used'      => __( 'Choose from the most used Days Stay', 'tourfic' ),
+        'not_found'                  => __( 'No Days Stay found', 'tourfic' ),
+        'no_terms'                   => __( 'No Days Stay', 'tourfic' ),
+        'items_list_navigation'      => __( 'Days Stay list navigation', 'tourfic' ),
+        'items_list'                 => __( 'Days Stay list', 'tourfic' ),
+        'back_to_items'              => __( 'Back to Days Stay', 'tourfic' ),
+    );
+
+    $hotel_day_args = array(
+        'labels'                => $hotel_day_labels,
+        'public'                => true,
+        'publicly_queryable'    => true,
+        'hierarchical'          => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'show_in_nav_menus'     => true,
+        'query_var'             => true,
+        'rewrite'               => array('slug' => $hotel_day_slug, 'with_front' => false ),
+        'show_admin_column'     => true,
+        'show_in_rest'          => true,
+        'rest_base'             => 'hotel_day',
+        'rest_controller_class' => 'WP_REST_Terms_Controller',
+        'show_in_quick_edit'    => true,
+        'capabilities'          => array( 
+            'assign_terms' => 'edit_tf_hotel',
+            'edit_terms' => 'edit_tf_hotel',
+         ),
+    );
+
+    if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
+        register_taxonomy( 'hotel_day', 'tf_hotel', apply_filters( 'hotel_day_args', $hotel_day_args ) );
+    }
+
     /**
      * Taxonomy: hotel_meals
      */
@@ -1693,7 +1748,7 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
 /**
  * Hotel Archive Single Item Layout
  */
-function tf_hotel_archive_single_item($adults='', $child='', $room='', $check_in_out='', $startprice='', $endprice='') {
+function tf_hotel_archive_single_item($tf_stars='') {
 
     // get post id
     $post_id = get_the_ID();
@@ -1736,79 +1791,91 @@ function tf_hotel_archive_single_item($adults='', $child='', $room='', $check_in
     $url = get_the_permalink() . '?adults=' . ($adults ?? '') . '&children=' . ($child ?? '') . '&room=' . ($room ?? '') . '&check-in-out-date=' . ($check_in_out ?? '');
 
     // Check room check in/out time
-    $room_date_matched = array();
-    if(!empty($check_in_out)) {
-        if(!empty($b_rooms)) {
-            $b_room_id = -1;
-            foreach ($b_rooms as $b_room) {
+    // $room_date_matched = array();
+    // if(!empty($check_in_out)) {
+    //     if(!empty($b_rooms)) {
+    //         $b_room_id = -1;
+    //         foreach ($b_rooms as $b_room) {
                 
-                $b_room_id++;
+    //             $b_room_id++;
 
-                $enable = !empty($b_room['enable']) ? $b_room['enable'] : '';
+    //             $enable = !empty($b_room['enable']) ? $b_room['enable'] : '';
 
-                // Check if room is enabled
-                if ($enable == '1') {
+    //             // Check if room is enabled
+    //             if ($enable == '1') {
 
-                    $b_check_in = !empty($b_room['availability']['from']) ? $b_room['availability']['from'] : '';
-                    if($b_check_in) {
-                        $b_check_in_stt = strtotime($b_check_in);
-                    }
-                    $b_check_out = !empty($b_room['availability']['to']) ? $b_room['availability']['to'] : '';
-                    if($b_check_out) {
-                        $b_check_out_stt = strtotime($b_check_out);
-                    }
+    //                 $b_check_in = !empty($b_room['availability']['from']) ? $b_room['availability']['from'] : '';
+    //                 if($b_check_in) {
+    //                     $b_check_in_stt = strtotime($b_check_in);
+    //                 }
+    //                 $b_check_out = !empty($b_room['availability']['to']) ? $b_room['availability']['to'] : '';
+    //                 if($b_check_out) {
+    //                     $b_check_out_stt = strtotime($b_check_out);
+    //                 }
 
-                    if(empty($b_check_in) || empty($b_check_out) || ($form_check_in_stt >= $b_check_in_stt && $form_check_out_stt <= $b_check_out_stt)) {
-                        if(!empty($startprice) && !empty($endprice)){
-                            if(!empty($b_room['price'])){
-                                if($startprice<=$b_room['price'] && $b_room['price']<=$endprice){
-                                    array_push($room_date_matched, 'yes');  
-                                }
-                            }
-                            if(!empty($b_room['adult_price'])){
-                                if($startprice<=$b_room['adult_price'] && $b_room['adult_price']<=$endprice){
-                                    array_push($room_date_matched, 'yes');  
-                                }
-                            }
-                            if(!empty($b_room['child_price'])){
-                                if($startprice<=$b_room['child_price'] && $b_room['child_price']<=$endprice){
-                                    array_push($room_date_matched, 'yes');  
-                                }
-                            }
-                            if(!empty($b_room['repeat_by_date'])){
-                                foreach($b_room['repeat_by_date'] as $singleavailroom){
-                                    if(!empty($singleavailroom['price'])){
-                                        if($startprice<=$singleavailroom['price'] && $singleavailroom['price']<=$endprice){
-                                            array_push($room_date_matched, 'yes');  
-                                        }
-                                    }
-                                    if(!empty($singleavailroom['adult_price'])){
-                                        if($startprice<=$singleavailroom['adult_price'] && $singleavailroom['adult_price']<=$endprice){
-                                            array_push($room_date_matched, 'yes');  
-                                        }
-                                    }
-                                    if(!empty($singleavailroom['child_price'])){
-                                        if($startprice<=$singleavailroom['child_price'] && $singleavailroom['child_price']<=$endprice){
-                                            array_push($room_date_matched, 'yes');  
-                                        }
-                                    }
-                                }
-                            }
-                        }else{
-                            array_push($room_date_matched, 'yes'); 
-                        }
+    //                 if(empty($b_check_in) || empty($b_check_out) || ($form_check_in_stt >= $b_check_in_stt && $form_check_out_stt <= $b_check_out_stt)) {
+    //                     if(!empty($startprice) && !empty($endprice)){
+    //                         if(!empty($b_room['price'])){
+    //                             if($startprice<=$b_room['price'] && $b_room['price']<=$endprice){
+    //                                 array_push($room_date_matched, 'yes');  
+    //                             }
+    //                         }
+    //                         if(!empty($b_room['adult_price'])){
+    //                             if($startprice<=$b_room['adult_price'] && $b_room['adult_price']<=$endprice){
+    //                                 array_push($room_date_matched, 'yes');  
+    //                             }
+    //                         }
+    //                         if(!empty($b_room['child_price'])){
+    //                             if($startprice<=$b_room['child_price'] && $b_room['child_price']<=$endprice){
+    //                                 array_push($room_date_matched, 'yes');  
+    //                             }
+    //                         }
+    //                         if(!empty($b_room['repeat_by_date'])){
+    //                             foreach($b_room['repeat_by_date'] as $singleavailroom){
+    //                                 if(!empty($singleavailroom['price'])){
+    //                                     if($startprice<=$singleavailroom['price'] && $singleavailroom['price']<=$endprice){
+    //                                         array_push($room_date_matched, 'yes');  
+    //                                     }
+    //                                 }
+    //                                 if(!empty($singleavailroom['adult_price'])){
+    //                                     if($startprice<=$singleavailroom['adult_price'] && $singleavailroom['adult_price']<=$endprice){
+    //                                         array_push($room_date_matched, 'yes');  
+    //                                     }
+    //                                 }
+    //                                 if(!empty($singleavailroom['child_price'])){
+    //                                     if($startprice<=$singleavailroom['child_price'] && $singleavailroom['child_price']<=$endprice){
+    //                                         array_push($room_date_matched, 'yes');  
+    //                                     }
+    //                                 }
+    //                             }
+    //                         }
+    //                     }else{
+    //                         array_push($room_date_matched, 'yes'); 
+    //                     }
                                        
-                    }
+    //                 }
 
-                }
-            }
-        } else {
-            array_push($room_date_matched, 'yes'); 
+    //             }
+    //         }
+    //     } else {
+    //         array_push($room_date_matched, 'yes'); 
+    //     }
+    // } else {
+    //     array_push($room_date_matched, 'yes'); 
+    // }
+    // if(!empty($room_date_matched)) {
+    ?>
+
+    <?php 
+    $tf_ratings = [];
+    if(!empty($tf_stars)){
+        foreach($tf_stars as $sstart){
+            $tf_ratings[]=intval($sstart);
         }
-    } else {
-        array_push($room_date_matched, 'yes'); 
     }
-    if(!empty($room_date_matched)) {
+    if(!empty($tf_ratings)){
+    $tf_rating_output = array_search(intval(tf_archive_single_rating_view()),$tf_ratings,true);
+    if(!empty($tf_rating_output)){
     ?>
         <div class="single-tour-wrap">
             <div class="single-tour-inner">
@@ -1889,6 +1956,87 @@ function tf_hotel_archive_single_item($adults='', $child='', $room='', $check_in
         </div>
     <?php
     }
+    }else{
+    ?>
+    <div class="single-tour-wrap">
+            <div class="single-tour-inner">
+                <div class="tourfic-single-left">
+                    <a href="<?php echo $url; ?>">
+                    <?php
+                    if ( has_post_thumbnail() ){ 
+                        the_post_thumbnail( 'full' );
+                    } else {
+                        echo '<img width="100%" height="100%" src="' .TF_ASSETS_URL . "img/img-not-available.svg". '" class="attachment-full size-full wp-post-image">';
+                    }
+                    ?>
+                    </a>
+                </div>
+                <div class="tourfic-single-right">
+                    <div class="tf_property_block_main_row">
+                        <div class="tf_item_main_block">
+                            <div class="tf-hotel__title-wrap">
+                                <a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php the_title();?></h3></a>
+                            </div>			
+                            <?php
+                            if($address) {
+                                echo '<div class="tf-map-link">';
+                                echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' .$address. '</span>';
+                                echo '</div>';
+                            }
+                            ?>	                    
+                        </div>
+                        <?php tf_archive_single_rating();?>
+                    </div>
+                    
+                    <div class="sr_rooms_table_block">
+                        <div class="room_details">
+                            <div class="featuredRooms">
+                                <div class="prco-ltr-right-align-helper">
+                                    <div class="tf-archive-shortdesc">
+                                        <?php echo substr(wp_strip_all_tags(get_the_content()), 0, 160). '...'; ?>
+                                </div>
+                                </div>
+                                <div class="roomNameInner">
+                                    <div class="room_link">
+                                        <div class="roomrow_flex">
+                                            <?php if( $features ) { ?>
+                                            <div class="roomName_flex">
+                                                <ul class="tf-archive-desc">
+                                                    <?php foreach($features as $feature) {
+                                                    $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'hotel_feature', true );
+                                                    $f_icon_type = !empty($feature_meta['icon-type']) ? $feature_meta['icon-type'] : '';
+                                                    if ($f_icon_type == 'fa') {
+                                                        $feature_icon = '<i class="' .$feature_meta['icon-fa']. '"></i>';
+                                                    } elseif ($f_icon_type == 'c') {
+                                                        $feature_icon = '<img src="' .$feature_meta['icon-c']["url"]. '" style="width: ' .$feature_meta['dimention']["width"]. 'px; height: ' .$feature_meta['dimention']["width"]. 'px;" />';
+                                                    } ?>
+                                                    <li class="tf-tooltip">
+                                                        <?php echo $feature_icon; ?>
+                                                        <div class="tf-top">
+                                                            <?php echo $feature->name; ?>
+                                                            <i class="tool-i"></i>
+                                                        </div>
+                                                    </li>
+                                                    <?php } ?>
+                                                </ul>
+                                            </div>
+                                            <?php } ?>
+                                            <div class="roomPrice roomPrice_flex sr_discount">
+                                                <div class="availability-btn-area">
+                                                    <a href="<?php echo $url; ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' );?></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php 
+}
 }
 
 /**
@@ -2016,7 +2164,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
                 tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out);
             }
         } else {
-            tf_hotel_archive_single_item();
+            tf_hotel_archive_single_item($tf_stars);
         }
 
         $not_found[] = 0;

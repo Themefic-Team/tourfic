@@ -417,10 +417,9 @@
             var checked = $('#check-in-out-date').val();
             var startprice = $('#startprice').val();
             var endprice = $('#endprice').val();
-            // split date range into dates
-            // var checkedArr = checked.split(' to ');
-            // var checkin = checkedArr[0];
-            // var checkout = checkedArr[1];
+            var post_country = $('.tf-post-country').val();
+            var post_month = $('.tf-post-month').val();
+
             var posttype = $('.tf-post-type').val();
 
             var filters = [];
@@ -432,14 +431,81 @@
             });
             var filters = filters.join();
 
-            var features = [];
+            // property type
+            var tf_property_type = [];
 
-            $('[name*=tf_features]').each(function () {
+            $('[name*=tf_property_type]').each(function () {
                 if ($(this).is(':checked')) {
-                    features.push($(this).val());
+                    tf_property_type.push($(this).val());
                 }
             });
-            var features = features.join();
+            var tf_property_type = tf_property_type.join();
+
+            
+            // Locations
+            var tf_location = [];
+
+            $('[name*=tf_location]').each(function () {
+                if ($(this).is(':checked')) {
+                    tf_location.push($(this).val());
+                }
+            });
+            var tf_location = tf_location.join();
+
+            // Property style
+            var tf_property = [];
+
+            $('[name*=tf_property]').each(function () {
+                if ($(this).is(':checked')) {
+                    tf_property.push($(this).val());
+                }
+            });
+            var tf_property = tf_property.join();
+
+            // Meals
+            var tf_meals = [];
+            $('[name*=tf_meals]').each(function () {
+                if ($(this).is(':checked')) {
+                    tf_meals.push($(this).val());
+                }
+            });
+            var tf_meals = tf_meals.join();
+
+            // Meals
+            var tf_theme = [];
+            $('[name*=tf_theme]').each(function () {
+                if ($(this).is(':checked')) {
+                    tf_theme.push($(this).val());
+                }
+            });
+            var tf_theme = tf_theme.join();
+
+            // Activities
+            var tf_activities = [];
+            $('[name*=tf_activities]').each(function () {
+                if ($(this).is(':checked')) {
+                    tf_activities.push($(this).val());
+                }
+            });
+            var tf_activities = tf_activities.join();
+
+            // Rating
+            var tf_stars = [];
+            $('[name*=tf_stars]').each(function () {
+                if ($(this).is(':checked')) {
+                    tf_stars.push($(this).val());
+                }
+            });
+            var tf_stars = tf_stars.join();
+
+            // Days
+            var tf_days = [];
+            $('[name*=tf_days]').each(function () {
+                if ($(this).is(':checked')) {
+                    tf_days.push($(this).val());
+                }
+            });
+            var tf_days = tf_days.join();
 
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
@@ -448,13 +514,20 @@
             formData.append('adults', adults);
             formData.append('room', room);
             formData.append('children', children);
-            // formData.append('checkin', checkin);
-            // formData.append('checkout', checkout);
             formData.append('filters', filters);
-            formData.append('features', features);
+            formData.append('tf_property_type', tf_property_type);
+            formData.append('tf_location', tf_location);
+            formData.append('tf_property', tf_property);
+            formData.append('tf_meals', tf_meals);
+            formData.append('tf_theme', tf_theme);
+            formData.append('tf_activities', tf_activities);
+            formData.append('tf_stars', tf_stars);
+            formData.append('tf_days', tf_days);
             formData.append('checked', checked);
             formData.append('startprice', startprice);
             formData.append('endprice', endprice);
+            formData.append('post_country', post_country);
+            formData.append('post_month', post_month);
             // abort previous request
             if (filter_xhr && filter_xhr.readyState != 4) {
                 filter_xhr.abort();
@@ -497,7 +570,7 @@
             e.preventDefault();
             makeFilter()
         });
-        $(document).on('change', '[name*=tf_filters],[name*=tf_features]', function () {
+        $(document).on('change', '[name*=tf_property_type],[name*=tf_location],[name*=tf_property],[name*=tf_days],[name*=tf_meals],[name*=tf_theme],[name*=tf_activities],[name*=tf_stars],[name*=tf_filters]', function () {
             makeFilter();
         })
 

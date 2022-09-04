@@ -434,6 +434,19 @@ function tf_archive_single_rating() {
 }
 
 /**
+ * Show only rating on archive single item
+ */
+function tf_archive_single_rating_view() {
+
+    $comments         = get_comments(['post_id' => get_the_ID(), 'status' => 'approve']);
+    $tf_overall_rate = [];
+    tf_calculate_comments_rating($comments, $tf_overall_rate, $total_rate);
+    if($comments) {
+        return tf_average_ratings( array_values( $tf_overall_rate ?? [] ) );
+    }
+}
+
+/**
  * Calculate total ratings for a post
  *
  * @param array $comments All comments for current post

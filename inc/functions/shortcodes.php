@@ -517,103 +517,32 @@ function tf_search_result_shortcode( $atts, $content = null ){
     $paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
     // Main Query args
     $args = array(
-        'post_type'   => $post_type,
+        'post_type'   => 'tf_hotel',
         'post_status' => 'publish',
         'paged'       => $paged,
     );
 
-    if ( !defined( 'TF_PRO' ) ){
-        $taxonomy_query = new WP_Term_Query(array(
-            'taxonomy'   => $taxonomy,
-            'orderby'    => 'name',
-            'order'      => 'ASC',
-            'hide_empty' => false,
-            'slug'       => sanitize_title($place, ''),
-        ));
+    $country = isset( $_GET['country'] ) ? sanitize_text_field($_GET['country']) : '';
 
-        if ($taxonomy_query) {
+    if ( $country ) {
 
-            $place_ids = array();
-
-            // Place IDs array
-            foreach($taxonomy_query->get_terms() as $term){ 
-                $place_ids[] = $term->term_id;
-            }
-
-            $args['tax_query'] = array(
-                'relation' => 'AND',
-                array(
-                    'taxonomy' => $taxonomy,
-                    'terms'    => $place_ids,
-                )
-            );
-
-        } else {
-            $args['s'] = $place;
-        }
-
-        
-        // Hotel Features
-
-        if (!empty($_GET['features'])) {
-            $args['tax_query'] = array(
-                'relation' => 'AND',
-                array(
-                    'taxonomy' => 'hotel_feature',
-                    'field' => 'slug',
-                    'terms'    => $_GET['features'],
-                )
-            );
-        }
-
-    }else{
-
-        $country = isset( $_GET['country'] ) ? sanitize_text_field($_GET['country']) : '';
-
-        $taxonomy_query = new WP_Term_Query(array(
-            'taxonomy'   => 'hotel_country',
-            'orderby'    => 'name',
-            'order'      => 'ASC',
-            'hide_empty' => false,
-            'slug'       => sanitize_title($country, ''),
-        ));
-
-        if ($taxonomy_query) {
-
-            $place_ids = array();
-
-            // Place IDs array
-            foreach($taxonomy_query->get_terms() as $term){ 
-                $place_ids[] = $term->term_id;
-            }
-
-            $args['tax_query'] = array(
-                'relation' => 'AND',
-                array(
-                    'taxonomy' => 'hotel_country',
-                    'terms'    => $place_ids,
-                )
-            );
-
-        } else {
-            $args['s'] = $place;
-        }
-
-        // Hotel Month
-
-        if (!empty($_GET['month'])) {
-            $args['tax_query'] = array(
-                'relation' => 'AND',
-                array(
-                    'taxonomy' => 'hotel_month',
-                    'field' => 'slug',
-                    'terms'    => $_GET['month'],
-                )
-            );
-        }
+        $args['tax_query']['relation'] = "AND";
+        $args['tax_query'][] = array(
+            'taxonomy' => 'hotel_country',
+            'field' => 'slug',
+            'terms'    => $country,
+        );
     }
+    // hotel month
+    if ( $_GET['month'] ) {
 
-    
+        $args['tax_query']['relation'] = "AND";
+        $args['tax_query'][] = array(
+            'taxonomy' => 'hotel_month',
+            'field' => 'slug',
+            'terms'    => $_GET['month'],
+        );
+    }
 
     $loop = new WP_Query( $args );
 
