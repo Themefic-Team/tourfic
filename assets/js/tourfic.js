@@ -445,8 +445,12 @@
             formData.append('filters', filters);
             formData.append('features', features);
             formData.append('checked', checked);
-            formData.append('startprice', startprice);
-            formData.append('endprice', endprice);
+            if(startprice){
+                formData.append('startprice', startprice);
+            }
+            if(endprice){
+                formData.append('endprice', endprice);
+            }
             // abort previous request
             if (filter_xhr && filter_xhr.readyState != 4) {
                 filter_xhr.abort();
