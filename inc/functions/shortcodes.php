@@ -351,7 +351,7 @@ function tf_search_form_shortcode( $atts, $content = null ) {
             </div>
 
             <!-- Booking Forms -->
-			<?php do_action('tf_before_booking_form') ?>
+			<?php do_action('tf_before_booking_form', $classes, $title, $subtitle) ?>
 
 			<?php if ( empty( $disable_services_info ) ) { ?>
                 <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent">
@@ -401,7 +401,7 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 				<?php
 			}
 
-			do_action( 'tf_after_booking_form', $atts );
+			do_action( 'tf_after_booking_form', $classes, $title, $subtitle );
 
 		} else if ( $type == 'hotel' ) {
 			if ( empty( $disable_services_info ) ) { ?>
