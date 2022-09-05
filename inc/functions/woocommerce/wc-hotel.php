@@ -38,7 +38,7 @@ function tf_hotel_booking_callback(){
     // People number
     $adult         = isset( $_POST['adult'] ) ? intval( sanitize_text_field( $_POST['adult'] ) ) : '0';
     $child         = isset( $_POST['child'] ) ? intval( sanitize_text_field( $_POST['child'] ) ) : '0';
-    $room_selected = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
+    $room_selected = 1;
     $check_in      = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
     $check_out     = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
     $deposit     = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
@@ -342,12 +342,12 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
         );
     }
 
-    // if ( isset( $cart_item['tf_hotel_data']['room'] ) && $cart_item['tf_hotel_data']['room'] > 0 ) {
-    //     $item_data[] = array(
-    //         'key'       => __('Number of Room Booked', 'tourfic'),
-    //         'value'     => $cart_item['tf_hotel_data']['room'],
-    //     );
-    // }
+    if ( isset( $cart_item['tf_hotel_data']['room'] ) && $cart_item['tf_hotel_data']['room'] > 0 ) {
+        $item_data[] = array(
+            'key'       => __('Number of Room Booked', 'tourfic'),
+            'value'     => $cart_item['tf_hotel_data']['room'],
+        );
+    }
 
     if ( isset( $cart_item['tf_hotel_data']['tf-room'] ) && $cart_item['tf_hotel_data']['tf-room'] > 0 ) {
         $item_data[] = array(
@@ -482,7 +482,7 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
     $post_id = !empty($values['tf_hotel_data']['post_id']) ? $values['tf_hotel_data']['post_id'] : '';
     $unique_id = !empty($values['tf_hotel_data']['unique_id']) ? $values['tf_hotel_data']['unique_id'] : '';
     $room_name = !empty($values['tf_hotel_data']['room_name']) ? $values['tf_hotel_data']['room_name'] : '';
-    // $room_selected = !empty($values['tf_hotel_data']['room']) ? $values['tf_hotel_data']['room'] : '';
+    $room_selected = !empty($values['tf_hotel_data']['room']) ? $values['tf_hotel_data']['room'] : '';
     $adult = !empty($values['tf_hotel_data']['adult']) ? $values['tf_hotel_data']['adult'] : '';
     // $child = !empty($values['tf_hotel_data']['child']) ? $values['tf_hotel_data']['child'] : '';
     $tf_room = !empty($values['tf_hotel_data']['tf-room']) ? $values['tf_hotel_data']['tf-room'] : '';
