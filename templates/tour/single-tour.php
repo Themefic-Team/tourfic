@@ -406,6 +406,51 @@ $tour_price = new Tour_Price($meta);
 		</div>
 		<?php } ?>
 		<!-- Travel Itinerary section End -->
+
+		<!-- Travel Itinerary section Start -->
+		<?php if( $itineraries ) { ?>
+		<div class="tf-travel-itinerary-wrapper gray-wrap sp-50">
+			<div class="tf-container">
+				<div class="tf-travel-itinerary-content">
+					<h2 class="section-heading"><?php _e( "Travel Itinerary", 'tourfic' ); ?></h2>
+					<div class="tf-travel-itinerary-items-wrapper">
+						<?php foreach( $itineraries as $itinerary ){ ?>
+							<div id="tf-accordion-wrapper" class="tf-ininerary-accordion-wrapper">
+								<div class="tf-accordion-head tf-ininerary-accordion-head">
+									
+								<h4><?php echo esc_html( $itinerary['title'] );  ?></h4>
+								<i class="fas fa-angle-down arrow"></i>
+								</div>
+								<div class="tf-accordion-content tf-ininerary-content">
+									<div class="tf-travel-desc">
+										<div class="trav-cont">
+											<?php _e( $itinerary['desc'] ); ?>
+										</div>
+									</div>
+									<div class="ininerary-other-info">
+										<ul>
+										<?php if( !empty($itinerary['duration']) && !empty($itinerary['timetype'])){ ?>
+											<li><i class="far fa-clock"></i> <?php _e( $itinerary['duration'] ); ?> <?php _e( $itinerary['timetype'] ); ?></li>
+										<?php } ?>
+										<?php if( !empty($itinerary['meals']) ){ ?>
+											<li><i class="fas fa-utensils"></i> 
+											<?php foreach($itinerary['meals'] as $smeal){ echo $smeal.', '; } ?>
+											</li>
+										<?php } ?>
+										<?php if( !empty($itinerary['sleepmode']) ){ ?>
+											<li><i class="fas fa-bed"></i> <?php _e( $itinerary['sleepmode'] ); ?></li>
+										<?php } ?>
+										</ul>
+									</div>
+								</div>
+							</div>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php } ?>
+		<!-- Travel Itinerary section End -->
 										
 		<!-- Map Section Start -->
 		<?php if( $location ):  ?>

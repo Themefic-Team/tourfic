@@ -553,6 +553,66 @@
   margin-top: 30px;
 }
 
+
+/**************** Pro Itinerary Block ****************/
+.tf-travel-itinerary-items-wrapper{
+  counter-reset: section;
+}
+.tf-ininerary-accordion-wrapper{
+  position: relative;
+  padding: 0 0 20px 60px;
+  border-left: 2px dashed rgba(0, 0, 0, 0.1);
+  margin: 0 0 0 20px !important;
+}
+.tf-ininerary-accordion-wrapper:last-child {
+  border-left: 0;
+}
+.tf-ininerary-accordion-wrapper:before{
+  counter-increment: section;
+  content: counter(section);
+  position: absolute;
+  top: 0;
+  left: -17px;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 600;
+  background: #5c7cfb;
+  padding: 2px 12px;
+  border-radius: 50%;
+}
+.tf-ininerary-accordion-head{
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.tf-ininerary-accordion-head h4{
+  padding-left: 0px;
+}
+.tf-ininerary-content{
+  background: transparent !important;
+  padding: 0px !important;
+}
+.tf-ininerary-content img{
+  float: left;
+  margin-bottom: 0px !important;
+}
+.tf-ininerary-content .trav-cont p{
+  margin: 0px;
+  font-size: 16px;
+}
+.ininerary-other-info ul{
+  margin: 0;
+  padding: 0;
+}
+.ininerary-other-info ul li{
+  display: inline-block;
+  color: #222322;
+  font-size: 16px;
+  margin-right: 10px;
+}
+.ininerary-other-info ul li i{
+  margin-right: 10px;
+}
+
 /**************************************** RESPONSIVE **************************************/
 @media only screen and (max-width: 1200px) {
   .tf-tour-booking-wrap {
