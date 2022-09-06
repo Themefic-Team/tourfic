@@ -236,7 +236,7 @@
     <td class="reserve">
         <form class="tf-room">
             <?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' );?>
-
+            
             <!-- <div class="room-selection-wrap">
                 <select name="hotel_room_selected" id="hotel-room-selected">
                     <?php
@@ -275,8 +275,16 @@
                 
                 if(defined( 'TF_PRO' ) && !empty($tour_hotel_service_avail) && !empty($tour_hotel_service_type)){
                 ?>
-                <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
-                
+                <?php 
+                if(!empty($num_room_available)){ ?>
+                    <?php if($days<=28){ ?>
+                        <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
+                    <?php }else{ ?>
+                        <div class="price-per-night"><?php _e( 'Please Select Date within 28 days', 'tourfic' );?></div>
+                    <?php } ?>
+                <?php }else{ ?>
+                    <span class="btn-styled tf-sml-btn"><?php _e( 'Room Not Available', 'tourfic' );?></span>
+                <?php } ?>
                 
                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap" data-id="<?php echo $room_id ?>">
                     <div class="tf-hotel-services">
@@ -316,7 +324,16 @@
                 </div>
                 
                 <?php }else{ ?>
-                <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
+                <?php 
+                if(!empty($num_room_available)){ ?>
+                    <?php if($days<=28){ ?>
+                    <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
+                    <?php }else{ ?>
+                        <div class="price-per-night"><?php _e( 'Please Select Date within 28 days', 'tourfic' );?></div>
+                    <?php } ?>
+                <?php }else{ ?>
+                    <span class="btn-styled tf-sml-btn"><?php _e( 'Room Not Available', 'tourfic' );?></span>
+                <?php } ?>
                 <?php } ?>
             </div>
             <div class="tf_desc"></div>
