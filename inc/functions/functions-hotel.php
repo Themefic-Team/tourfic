@@ -856,7 +856,7 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
                         </div>
                     </div>
                     <div class="tf_acrselection">
-                        <div class="acr-label">1 <?php _e('Rooms', 'tourfic'); ?></div>
+                        <div class="acr-label"><?php _e('Rooms', 'tourfic'); ?></div>
                         <div class="acr-select">
                             <div class="acr-dec">-</div>
                             <input type="number" name="room" id="room" min="1" value="<?php echo !empty($room) ? $room : '1'; ?>">
@@ -1001,7 +1001,7 @@ if ( !function_exists('tf_hotel_advanced_search_form_horizontal') ) {
                         </div>
                     </div>
                     <div class="tf_acrselection">
-                        <div class="acr-label">1 <?php _e('Rooms', 'tourfic'); ?></div>
+                        <div class="acr-label"><?php _e('Rooms', 'tourfic'); ?></div>
                         <div class="acr-select">
                             <div class="acr-dec">-</div>
                             <input type="number" name="room" id="room" min="1" value="<?php echo !empty($room) ? $room : '1'; ?>">
