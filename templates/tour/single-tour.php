@@ -427,6 +427,12 @@ $tour_price = new Tour_Price($meta);
 											<?php _e( $itinerary['desc'] ); ?>
 										</div>
 									</div>
+									<div class="ininerary-other-gallery">
+									<?php var_dump( $itinerary['image'] ); ?>
+										<div class="ininerary-gallery-single">
+
+										</div>
+									</div>
 									<div class="ininerary-other-info">
 										<ul>
 										<?php if( !empty($itinerary['duration']) && !empty($itinerary['timetype'])){ ?>
@@ -438,7 +444,18 @@ $tour_price = new Tour_Price($meta);
 											</li>
 										<?php } ?>
 										<?php if( !empty($itinerary['sleepmode']) ){ ?>
-											<li><i class="fas fa-bed"></i> <?php _e( $itinerary['sleepmode'] ); ?></li>
+											<li><a data-fancybox data-src="#tour-itinerary-sleep" href="javascript:;"><i class="fas fa-bed"></i> <?php _e( $itinerary['sleepmode'] ); ?> <sup><i class="fas fa-exclamation-circle"></i></sup></a></li>
+											<?php 
+											if(!empty($itinerary['sleep'])){ ?>
+											<div style="display: none;" id="tour-itinerary-sleep">
+												<div class="tf-tours-booking-deposit">
+													<div class="tf-tours-booking-deposit-text">
+														<?php _e( $itinerary['sleep'] ); ?>
+													</div>
+													
+												</div>
+											</div>
+											<?php } ?>
 										<?php } ?>
 										</ul>
 									</div>

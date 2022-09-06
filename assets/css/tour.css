@@ -609,8 +609,13 @@
   font-size: 16px;
   margin-right: 10px;
 }
+.ininerary-other-info ul li a{
+  color: #222322;
+  font-size: 16px;
+  text-decoration: none;
+}
 .ininerary-other-info ul li i{
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 /**************************************** RESPONSIVE **************************************/
