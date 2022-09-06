@@ -1870,7 +1870,7 @@ function tf_hotel_archive_single_item($tf_stars='') {
     $tf_ratings = [];
     if(!empty($tf_stars)){
         foreach($tf_stars as $sstart){
-            $tf_ratings[]=intval($sstart);
+            $tf_ratings[intval($sstart)]=intval($sstart);
         }
     }
     if(!empty($tf_ratings)){

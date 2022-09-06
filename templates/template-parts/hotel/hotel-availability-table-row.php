@@ -283,7 +283,7 @@
                         <div class="price-per-night"><?php _e( 'Please Select Date within 28 days', 'tourfic' );?></div>
                     <?php } ?>
                 <?php }else{ ?>
-                    <span class="btn-styled tf-sml-btn"><?php _e( 'Room Not Available', 'tourfic' );?></span>
+                    <button class="btn-styled tf-sml-btn" disabled><?php _e( 'Room Not Available', 'tourfic' );?></button>
                 <?php } ?>
                 
                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap" data-id="<?php echo $room_id ?>">
@@ -332,7 +332,7 @@
                         <div class="price-per-night"><?php _e( 'Please Select Date within 28 days', 'tourfic' );?></div>
                     <?php } ?>
                 <?php }else{ ?>
-                    <span class="btn-styled tf-sml-btn"><?php _e( 'Room Not Available', 'tourfic' );?></span>
+                    <button class="btn-styled tf-sml-btn" disabled><?php _e( 'Room Not Available', 'tourfic' );?></button>
                 <?php } ?>
                 <?php } ?>
             </div>
