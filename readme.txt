@@ -1,9 +1,9 @@
 === Travel and Hotel Booking Solution for WooCommerce - Tourfic ===
-Contributors: fida02, themefic, devkabir, mdshuvo, codexa, kamrul0424, raihan143, hasanet
+Contributors: fida02, themefic, mdshuvo, codexa, kamrul0424, hasanet, jahidcse
 Tags: tour booking, tour operator, travel, tour, trip, travel-booking, travel agency, hotel booking, reservation, hotel, booking engine, booking, booking calendar, booking system, calendar, online booking, travel, airbnb, booking.com, homeaway, apartments, villa, hostel, reservation system, travel itinerary, trekking, tour itinerary, travel booking engine, tour accommodation listings, travel destinations, trip book, travel payment, woocommerce tour booking, woocommerce travel booking plugin, woocommerce tour, woocommerce travel, wordpress travel, wp travel plugin, wp travel, wordpress travel booking plugin, wordpress tour plugin, tour booking plugin wordpress, wordpress travel agency, travel tour wordpress, wordpress tour, tour-booking, travel wp, travel wordpress, tour wp, travel wordpress, hotel wp, hotel wordpress, tour website, travel website, trip website
 Requires at least: 5.4
 Tested up to: 6.0
-Stable tag: 2.8.1
+Stable tag: 2.8.2
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -240,15 +240,15 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Changelog ==
 
-= 2.8.1 - 06 September 2022 =
+= 2.8.2 - 06 September 2022 =
 
 * Added: Front End Error Message redesign (Hotel and Tour Single Page)
 * Fixed: Tour Decimal issue fixed (Tour Single Page)
 * Added: Completely revambed the frontend with better look and improved UI
 * Added: Complete Style Panel on options panel. Common options can be handled from Theme.
+* Added: Advance Search form [tf_search advanced="enabled"]
 * Added: WP Editor Itinerary Description (Admin Tour) (Pro)
 * Added: Hotel Map show on Popup (Hotel Single Page) (Pro)
-* Added: Advance Search form [tf_search advanced="enabled"] (Pro)
 * Added: Google Map Settings (Admin Hotel and Tour) (Pro)
 * Added: Enquiry Email Hotel and Tour (Tourfic Settings) (Pro)
 
@@ -491,5 +491,5 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Upgrade Notice ==
 
-= 2.8.1 =
+= 2.8.2 =
 This is an important & big release. Please make sure you BACKUP your website before updating. You need to update the plugin to get next level updates & features of Tourfic. After you update the plugin, please go to "Tourfic Settings" and click the "Save Button". You can then go ahead and start editing.
