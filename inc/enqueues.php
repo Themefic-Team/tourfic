@@ -272,12 +272,12 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'infant' => __('Infant', 'tourfic'),
                 'room' => __('Room', 'tourfic'),
                 'sending_ques' => __('Sending your question...', 'tourfic'),
-                'tf_hotellocationlists' => $tf_hotellocationlists,
-                'tf_hotel_max_price' => $hotel_max_price,
-                'tf_hotel_min_price' => $hotel_min_price,
-                'tf_tourdestinationlists' => $tf_tourdestinationlists,
-                'tf_tour_max_price' => $tour_max_price,
-                'tf_tour_min_price' => $tour_min_price,
+                'tf_hotellocationlists' => !empty($tf_hotellocationlists) ? $tf_hotellocationlists : '',
+                'tf_hotel_max_price' => !empty($hotel_max_price) ? $hotel_max_price : '',
+                'tf_hotel_min_price' => !empty($hotel_min_price) ? $hotel_min_price : '',
+                'tf_tourdestinationlists' => !empty($tf_tourdestinationlists) ? $tf_tourdestinationlists : '',
+                'tf_tour_max_price' => !empty($tour_max_price) ? $tour_max_price : '',
+                'tf_tour_min_price' => !empty($tour_min_price) ? $tour_min_price : '',
             )
         );
         //wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/old/responsive.css', '', TOURFIC );
