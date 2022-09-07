@@ -37,7 +37,7 @@ if( class_exists( 'CSF' ) ) {
      */
     CSF::createSection( $prefix, array(
         'id'    => 'hotel', // Set a unique slug-like ID
-        'title' => __( 'Hotel Options', 'instantio' ),
+        'title' => __( 'Hotel Options', 'tourfic' ),
         'icon'  => 'fas fa-hotel',
     ) );
     
@@ -55,7 +55,7 @@ if( class_exists( 'CSF' ) ) {
      */
     CSF::createSection( $prefix, array(
         'id'    => 'tour', // Set a unique slug-like ID
-        'title' => __( 'Tour Options', 'instantio' ),
+        'title' => __( 'Tour Options', 'tourfic' ),
         'icon'  => 'fas fa-umbrella-beach',
     ) );
 

@@ -89,7 +89,7 @@ button.tf-tablinks:focus {
 }
 
 .recomended_inner .single_recomended_item {
-    width: calc((100% - 30px) / 3);
+    width: calc((98% - 30px) / 3);
     float: left;
     margin-right: 14.9px;
 }
