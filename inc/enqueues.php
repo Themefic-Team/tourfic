@@ -164,26 +164,28 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 
                 $meta = get_post_meta( get_the_ID( ), 'tf_hotel', true );
                 $rooms = !empty($meta['room']) ? $meta['room'] : '';
-                foreach($rooms as $singleroom){
-                    if(!empty($singleroom['price'])){
-                        $tfhotel_min_maxprices[]=$singleroom['price'];
-                    }
-                    if(!empty($singleroom['adult_price'])){
-                        $tfhotel_min_maxprices[]=$singleroom['adult_price'];
-                    }
-                    if(!empty($singleroom['child_price'])){
-                        $tfhotel_min_maxprices[]=$singleroom['child_price'];
-                    }
-                    if(!empty($singleroom['repeat_by_date'])){
-                        foreach($singleroom['repeat_by_date'] as $singleavailroom){
-                            if(!empty($singleavailroom['price'])){
-                                $tfhotel_min_maxprices[]=$singleavailroom['price'];
-                            }
-                            if(!empty($singleavailroom['adult_price'])){
-                                $tfhotel_min_maxprices[]=$singleavailroom['adult_price'];
-                            }
-                            if(!empty($singleavailroom['child_price'])){
-                                $tfhotel_min_maxprices[]=$singleavailroom['child_price'];
+                if(!empty($rooms)){
+                    foreach($rooms as $singleroom){
+                        if(!empty($singleroom['price'])){
+                            $tfhotel_min_maxprices[]=$singleroom['price'];
+                        }
+                        if(!empty($singleroom['adult_price'])){
+                            $tfhotel_min_maxprices[]=$singleroom['adult_price'];
+                        }
+                        if(!empty($singleroom['child_price'])){
+                            $tfhotel_min_maxprices[]=$singleroom['child_price'];
+                        }
+                        if(!empty($singleroom['repeat_by_date'])){
+                            foreach($singleroom['repeat_by_date'] as $singleavailroom){
+                                if(!empty($singleavailroom['price'])){
+                                    $tfhotel_min_maxprices[]=$singleavailroom['price'];
+                                }
+                                if(!empty($singleavailroom['adult_price'])){
+                                    $tfhotel_min_maxprices[]=$singleavailroom['adult_price'];
+                                }
+                                if(!empty($singleavailroom['child_price'])){
+                                    $tfhotel_min_maxprices[]=$singleavailroom['child_price'];
+                                }
                             }
                         }
                     }
@@ -270,12 +272,12 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'infant' => __('Infant', 'tourfic'),
                 'room' => __('Room', 'tourfic'),
                 'sending_ques' => __('Sending your question...', 'tourfic'),
-                'tf_hotellocationlists' => $tf_hotellocationlists,
-                'tf_hotel_max_price' => $hotel_max_price,
-                'tf_hotel_min_price' => $hotel_min_price,
-                'tf_tourdestinationlists' => $tf_tourdestinationlists,
-                'tf_tour_max_price' => $tour_max_price,
-                'tf_tour_min_price' => $tour_min_price,
+                'tf_hotellocationlists' => !empty($tf_hotellocationlists) ? $tf_hotellocationlists : '',
+                'tf_hotel_max_price' => !empty($hotel_max_price) ? $hotel_max_price : '',
+                'tf_hotel_min_price' => !empty($hotel_min_price) ? $hotel_min_price : '',
+                'tf_tourdestinationlists' => !empty($tf_tourdestinationlists) ? $tf_tourdestinationlists : '',
+                'tf_tour_max_price' => !empty($tour_max_price) ? $tour_max_price : '',
+                'tf_tour_min_price' => !empty($tour_min_price) ? $tour_min_price : '',
             )
         );
         //wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/old/responsive.css', '', TOURFIC );
