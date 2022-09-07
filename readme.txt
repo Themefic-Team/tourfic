@@ -22,7 +22,7 @@ Ultimate Hotel, Tour & Travel booking plugin for WooCommerce. Build your own tra
 
 Tourfic is fully powered by WooCommerce, you can easily manage all your online Booking system along with order system and any payment of WooCommerce. Allow visitors to register account and booking online. To be precise, you can easily develop a website similar to Booking.com, Agoda, Hotels.com, Airbnb etc in no time with the help of Tourfic. This All-in-One Travel Booking plugin consists almost all the basic to advanced options which you may need for your WordPress based Travel website:
 
-= Hotel Booking & Management System =
+= 🎉  Hotel Booking & Management System =
 * Add Unlimited Hotels
 * Add Unlimited Rooms (Up to 5 on Free Version)
 * Set room price per Room 					
@@ -46,7 +46,7 @@ Tourfic is fully powered by WooCommerce, you can easily manage all your online B
 * Add Video on Hotel Gallery (Pro)					
 * Airport Pickup Service (Pro)
 
-= Tour Listing & Booking System =
+= 🎉  Tour Listing & Booking System =
 * Add Unlimited Tours 					
 * Tour Photo Gallery 					
 * Features, FAQs and Terms & Condition Per Tour 					
@@ -71,7 +71,7 @@ Tourfic is fully powered by WooCommerce, you can easily manage all your online B
 * Dynamic Location Search based on OpenStreetMap on Option Panel  (Pro)					
 * Dynamic Location Search based on Google Maps on Option Panel  (Pro)	
 
-= Multi-Vendor Functions (Pro) =
+= 🎉  Multi-Vendor Functions (Pro) =
 * Vendors can add unlimited hotels and tours with all the fields (Pro)
 * Vendors have dedicated order details pages (Pro)
 * Dedicated login and registration system for vendors (Pro)
@@ -79,27 +79,27 @@ Tourfic is fully powered by WooCommerce, you can easily manage all your online B
 * Email verification for vendors (Pro)
 * Frontend Dashboard for Vendors (Coming soon on Pro)
 
-= Search Function =
+= 🎉  Search Function =
 * Separate or combined search box for hotels and tours
 * Ajax-based search box for hotels and tours
 * Ajax-based filter system
 
-= Wishlist =
+= 🎉  Wishlist =
 * Wishlist for hotels and tours
 * Wishlist page
 * Wishlist for logged in and log out users (Pro)
 
-= Customer Review System =
+= 🎉  Customer Review System =
 * Review System for hotels and tours 					
 * Enable/disable Review Section 					
 * Change Existing or Create New Review fields / parameters 					
 * Review for logged in and log out users 					
 * Delete old review fields 
 
-= Payment Method Support =
+= 🎉  Payment Method Support =
 * Literally any Payment Methods Powered by WooCommerce (Paypal, Stripe, Authorize.net etc)
 
-= Available Shortcodes & Elementor Widgets =
+= 🎉  Available Shortcodes & Elementor Widgets =
 * Hotel Locations
 * Tour Destinations
 * Recent Hotel Slider
@@ -110,13 +110,13 @@ Tourfic is fully powered by WooCommerce, you can easily manage all your online B
 * Login Form (Pro)
 * Registration Form (Pro)
 
-= Booking data on Dashboard for Hotel/Tour = 
+= 🎉  Booking data on Dashboard for Hotel/Tour = 
 * Default Analytics Tool Provided by WooCommerce
 * Tourfic Custom Booking Module: Order ID, Order Details, Order Date, Order Status (Pro)
 * Tourfic Custom Booking Module: Customer Information (Pro)
 * Tourfic Custom Booking Module: Payment Method Information (Pro)
 
-= Miscellaneous = 
+= 🎉  Miscellaneous = 
 * Complete Style Panel 					
 * Easy to use Option Panel 					
 * Disable Hotel or Tour Features Completely 					
