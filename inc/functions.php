@@ -548,7 +548,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
             </div>
         </div>
         <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
-            <h4 class="tf_widgettitle"><?php _e("Type of Location", "tourfic" ); ?></h4>
+            <h4 class="tf_widgettitle"><?php _e("Location", "tourfic" ); ?></h4>
             <div class="tf-filter">
                 <ul>
                     <?php 
@@ -611,7 +611,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     $tf_hotel_days= get_terms( array(
                         'taxonomy' => 'hotel_day',
                         'orderby' => 'title',
-                        'order' => 'ASC',
+                        'order' => 'DESC',
                         'hide_empty' => false,
                         'hierarchical' => 0,
                     ) );

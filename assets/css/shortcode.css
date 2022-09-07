@@ -337,7 +337,7 @@ button.tf-tablinks:focus {
 .tf_form-inner .tf-hotel-results ul#ui-id-2,
 .tf_form-inner .tf-hotel-results ul#ui-id-3 {
     left: 0 !important;
-    width: 320px !important;
+    width: 100% !important;
     right: 0 !important;
     margin: 0 !important;
     list-style: none;

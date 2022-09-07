@@ -271,8 +271,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         $tf_hotel_month=array();
         $tf_monthlist = get_terms( array(
             'taxonomy' => 'hotel_month',
-            'orderby' => 'title',
-            'order' => 'ASC',
+            'order' => 'DESC',
             'hide_empty' => false,
             'hierarchical' => 0,
         ) );
