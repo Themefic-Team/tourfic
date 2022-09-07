@@ -415,23 +415,35 @@ $tour_price = new Tour_Price($meta);
 					<h2 class="section-heading"><?php _e( "Travel Itinerary", 'tourfic' ); ?></h2>
 					<div class="tf-travel-itinerary-items-wrapper">
 						<?php foreach( $itineraries as $itinerary ){ ?>
-							<div id="tf-accordion-wrapper" class="tf-ininerary-accordion-wrapper">
+							<div id="tf-accordion-wrapper" class="tf-ininerary-accordion-wrapper" >
 								<div class="tf-accordion-head tf-ininerary-accordion-head">
 									
 								<h4><?php echo esc_html( $itinerary['title'] );  ?></h4>
 								<i class="fas fa-angle-down arrow"></i>
 								</div>
-								<div class="tf-accordion-content tf-ininerary-content">
+								<div class="tf-accordion-content tf-ininerary-content" >
 									<div class="tf-travel-desc">
 										<div class="trav-cont">
 											<?php _e( $itinerary['desc'] ); ?>
 										</div>
 									</div>
 									<div class="ininerary-other-gallery">
-									<?php var_dump( $itinerary['image'] ); ?>
+									<?php 
+									if ($itinerary['image']) {
+										$tf_itinerary_gallery_ids = explode( ',', $itinerary['image'] );
+									}   
+									?>
+									<?php 
+									if( !empty($itinerary['image']) && !empty($tf_itinerary_gallery_ids) ){ 
+									foreach ($tf_itinerary_gallery_ids as $key => $gallery_item_id) {	
+									?>
 										<div class="ininerary-gallery-single">
-
+										<?php 
+											$itinerary_gallery_image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+											echo '<img src="'.$itinerary_gallery_image_url.'" alt="" />';
+										?>
 										</div>
+									<?php } } ?>
 									</div>
 									<div class="ininerary-other-info">
 										<ul>

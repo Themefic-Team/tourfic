@@ -591,7 +591,7 @@
   background: transparent !important;
   padding: 0px !important;
 }
-.tf-ininerary-content img{
+.tf-ininerary-content .tf-travel-desc img{
   float: left;
   margin-bottom: 0px !important;
 }
@@ -616,6 +616,13 @@
 }
 .ininerary-other-info ul li i{
   margin-right: 5px;
+}
+.ininerary-gallery-single > img{
+  width: 150px;
+  height: 150px;
+}
+.ininerary-other-gallery .slick-track{
+  margin: 0 !important;
 }
 
 /**************************************** RESPONSIVE **************************************/
