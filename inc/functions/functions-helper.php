@@ -54,6 +54,22 @@ function tf_tour_docs_callback(){
 <?php
 }
 
+// Removed Site Store
+function remove_admin_bar_links() {
+    global $wp_admin_bar;
+    $wp_admin_bar->remove_menu('view-store');
+}
+add_action( 'wp_before_admin_bar_render', 'remove_admin_bar_links' );
+
+/**
+ * Removes some menus by page.
+ */
+function wpdocs_remove_menus(){
+	remove_menu_page( 'edit.php?post_type=product' );
+	remove_menu_page( 'edit.php' );
+}
+add_action( 'admin_menu', 'wpdocs_remove_menus' );
+
 /**
  * Notice wrapper
  */
