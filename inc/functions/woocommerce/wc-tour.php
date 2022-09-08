@@ -209,7 +209,7 @@ function tf_tours_booking_function() {
      * Tour type continuous and custom availability is true
      */
     $tour            = strtotime( $tour_date );
-    if(true==$custom_avail){
+    if(isset($custom_avail) && true==$custom_avail){
         $seasional_price = array_values( array_filter( $meta['cont_custom_date'], function ( $value ) use ( $tour ) {
             $seasion_start = strtotime( $value['date']['from'] );
             $seasion_end   = strtotime( $value['date']['to'] );

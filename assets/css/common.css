@@ -319,7 +319,9 @@ h3.section-heading {
 }
 
 /***************** SLIDER ****************/
-
+.roomNameInner {
+    padding-top: 20px;
+}
 .slick-slider {
     position: relative;
     display: block;
@@ -1080,6 +1082,7 @@ h3.section-heading {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
+    margin-left:0 !important;
 }
 
 .tf-slider-content {
