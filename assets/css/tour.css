@@ -567,7 +567,7 @@
 .tf-ininerary-accordion-wrapper:last-child {
   border-left: 0;
 }
-.tf-ininerary-accordion-wrapper:before{
+.tf-ininerary-accordion-wrapper::before {
   counter-increment: section;
   content: counter(section);
   position: absolute;
@@ -576,9 +576,12 @@
   font-size: 14px;
   color: #fff;
   font-weight: 600;
-  background: #5c7cfb;
-  padding: 2px 12px;
+  background: #002C66;
   border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  line-height: 30px;
 }
 .tf-ininerary-accordion-head{
   background: transparent !important;
@@ -624,7 +627,13 @@
 .ininerary-other-gallery .slick-track{
   margin: 0 !important;
 }
-
+.ininerary-other-gallery .slick-prev::before, 
+.ininerary-other-gallery .slick-next::before {
+  color: #000 !important;
+}
+.ininerary-other-gallery .slick-next{
+  right: 0px;
+}
 /**************************************** RESPONSIVE **************************************/
 @media only screen and (max-width: 1200px) {
   .tf-tour-booking-wrap {

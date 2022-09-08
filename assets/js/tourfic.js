@@ -1372,6 +1372,57 @@
             $(this).parents('#tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
           });
 
+          var ctx = document.getElementById('myChart').getContext('2d');
+          var chart = new Chart(ctx, {
+              // The type of chart we want to create
+              type: 'line', // also try bar or other graph types
+          
+              // The data for our dataset
+              data: {
+                  labels: tf_params.itinerarayday,
+                  // Information about the dataset
+              datasets: [{
+                      label : '',
+                      backgroundColor: 'lightblue',
+                      borderColor: 'royalblue',
+                      data: tf_params.itineraraymeter,
+                  }]
+              },
+          
+              // Configuration options
+              options: {
+                interaction: {
+                    mode: 'nearest',
+                    axis: 'x',
+                    intersect: false
+                  },
+              layout: {
+                padding: 10,
+              },
+                  legend: {
+                      position: 'bottom',
+                  },
+                  title: {
+                      display: true,
+                      text: 'Metar'
+                  },
+                  scales: {
+                      yAxes: [{
+                          scaleLabel: {
+                              display: false,
+                              labelString: 'Precipitation in mm'
+                          }
+                      }],
+                      xAxes: [{
+                          scaleLabel: {
+                              display: false,
+                              labelString: 'Month of the Year'
+                          }
+                      }]
+                  }
+              }
+          });
+          
           
 
         

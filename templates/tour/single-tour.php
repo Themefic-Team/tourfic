@@ -413,6 +413,11 @@ $tour_price = new Tour_Price($meta);
 			<div class="tf-container">
 				<div class="tf-travel-itinerary-content">
 					<h2 class="section-heading"><?php _e( "Travel Itinerary", 'tourfic' ); ?></h2>
+					<div class="tf-itineraray-chart">
+					<div class="chart">
+						<canvas id="myChart" width="400" height="200"></canvas>
+					</div>
+					</div>
 					<div class="tf-travel-itinerary-items-wrapper">
 						<?php foreach( $itineraries as $itinerary ){ ?>
 							<div id="tf-accordion-wrapper" class="tf-ininerary-accordion-wrapper" >
