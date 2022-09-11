@@ -520,6 +520,27 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
     <?php }else{ ?>
 
         <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
+            <h4 class="tf_widgettitle"><?php _e("Month", "tourfic" ); ?></h4>
+            <div class="tf-filter">
+                <ul>
+                    <?php 
+                    $tf_property_month= get_terms( array(
+                        'taxonomy' => 'hotel_month',
+                        'orderby' => 'title',
+                        'order' => 'DESC',
+                        'hide_empty' => false,
+                        'hierarchical' => 0,
+                    ) );
+                    if ( $tf_property_month ) { 
+                    foreach( $tf_property_month as $term ) {
+                    ?>
+                    <li><label><input type="checkbox" name="tf_property_month[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
+                    <?php } } ?>
+                </ul>
+            </div>
+        </div>
+
+        <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
         <?php
             $ptype = $_GET['type'] ?? get_post_type();
             $pcountry = $_GET['country'];
@@ -583,7 +604,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     if ( $tf_hotel_property_style ) { 
                     foreach( $tf_hotel_property_style as $term ) {
                     ?>
-                    <li><label><input type="checkbox" name="tf_property[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
+                    <li><label><input type="checkbox" name="tf_property_style[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
                     <?php } } ?>
                 </ul>
             </div>
@@ -592,13 +613,21 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
         <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
             <h4 class="tf_widgettitle"><?php _e("Stars", "tourfic" ); ?></h4>
             <div class="tf-filter">
+               
                 <ul>
-                    <li><label><input type="checkbox" name="tf_stars[]" value="1"> <?php _e("1", "tourfic" ); ?></label></li>
-                    <li><label><input type="checkbox" name="tf_stars[]" value="2"> <?php _e("2", "tourfic" ); ?></label></li>
-                    <li><label><input type="checkbox" name="tf_stars[]" value="3"> <?php _e("3", "tourfic" ); ?></label></li>
-                    <li><label><input type="checkbox" name="tf_stars[]" value="4"> <?php _e("4", "tourfic" ); ?></label></li>
-                    <li><label><input type="checkbox" name="tf_stars[]" value="5"> <?php _e("5", "tourfic" ); ?></label></li>
-                    <li><label><input type="checkbox" name="tf_stars[]" value="0"> <?php _e("Unrated", "tourfic" ); ?></label></li>
+                    <?php 
+                    $hotel_rating= get_terms( array(
+                        'taxonomy' => 'hotel_rating',
+                        'orderby' => 'title',
+                        'order' => 'ASC',
+                        'hide_empty' => false,
+                        'hierarchical' => 0,
+                    ) );
+                    if ( $hotel_rating ) { 
+                    foreach( $hotel_rating as $term ) {
+                    ?>
+                    <li><label><input type="checkbox" name="tf_stars[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
+                    <?php } } ?>
                 </ul>
             </div>
         </div>
@@ -859,9 +888,10 @@ function tf_search_result_ajax_sidebar(){
 
     $search = ( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
     $filters = ( $_POST['filters'] ) ? explode(',', sanitize_text_field( $_POST['filters'] )) : null;
+    $tf_property_month = ( $_POST['tf_property_month'] ) ? explode(',', sanitize_text_field( $_POST['tf_property_month'] )) : null;
     $tf_property_type = ( $_POST['tf_property_type'] ) ? explode(',', sanitize_text_field( $_POST['tf_property_type'] )) : null;
     $tf_location = ( $_POST['tf_location'] ) ? explode(',', sanitize_text_field( $_POST['tf_location'] )) : null;
-    $tf_property = ( $_POST['tf_property'] ) ? explode(',', sanitize_text_field( $_POST['tf_property'] )) : null;
+    $tf_property_style = ( $_POST['tf_property_style'] ) ? explode(',', sanitize_text_field( $_POST['tf_property_style'] )) : null;
     $tf_days = ( $_POST['tf_days'] ) ? explode(',', sanitize_text_field( $_POST['tf_days'] )) : null;
     $tf_meals = ( $_POST['tf_meals'] ) ? explode(',', sanitize_text_field( $_POST['tf_meals'] )) : null;
     $tf_theme = ( $_POST['tf_theme'] ) ? explode(',', sanitize_text_field( $_POST['tf_theme'] )) : null;
@@ -907,7 +937,7 @@ function tf_search_result_ajax_sidebar(){
         );
     }
     // hotel month
-    if ( $post_month ) {
+    if ( $tf_property_month!=null ) {
 
         $args['tax_query']['relation'] = $relation;
         $args['tax_query'][] = array(
@@ -917,28 +947,29 @@ function tf_search_result_ajax_sidebar(){
         );
     }
 
-    // hotel feature
+    // hotel Month
 
-    if ( $filters ) {
+    if ( $tf_property_month ) {
         $args['tax_query']['relation'] = $relation;
 
         if ( $filter_relation == "OR" ) {
             $args['tax_query'][] = array(
-                'taxonomy' => 'hotel_feature',
-                'terms'    => $filters,
+                'taxonomy' => 'hotel_month',
+                'terms'    => $tf_property_month,
             );
         } else {
             $args['tax_query']['tf_filters']['relation'] = 'AND';
 
-            foreach ($filters as $key => $term_id) {
+            foreach ($tf_property_month as $key => $term_id) {
                 $args['tax_query']['tf_filters'][] = array(
-                    'taxonomy' => 'hotel_feature',
+                    'taxonomy' => 'hotel_month',
                     'terms'    => array($term_id),
                 );
             }
 
         }
     }
+
     // hotel Property Type
 
     if ( $tf_property_type ) {
@@ -985,18 +1016,18 @@ function tf_search_result_ajax_sidebar(){
     }
     // Style of Property
 
-    if ( $tf_property ) {
+    if ( $tf_property_style ) {
         $args['tax_query']['relation'] = $relation;
 
         if ( $filter_relation == "OR" ) {
             $args['tax_query'][] = array(
                 'taxonomy' => 'hotel_style_property',
-                'terms'    => $tf_property,
+                'terms'    => $tf_property_style,
             );
         } else {
             $args['tax_query']['tf_filters']['relation'] = 'AND';
 
-            foreach ($tf_property as $key => $term_id) {
+            foreach ($tf_property_style as $key => $term_id) {
                 $args['tax_query']['tf_filters'][] = array(
                     'taxonomy' => 'hotel_style_property',
                     'terms'    => array($term_id),
@@ -1006,7 +1037,30 @@ function tf_search_result_ajax_sidebar(){
         }
     }
 
-    // Style of Property
+    // Stars
+
+    if ( $tf_stars ) {
+        $args['tax_query']['relation'] = $relation;
+
+        if ( $filter_relation == "OR" ) {
+            $args['tax_query'][] = array(
+                'taxonomy' => 'hotel_rating',
+                'terms'    => $tf_stars,
+            );
+        } else {
+            $args['tax_query']['tf_filters']['relation'] = 'AND';
+
+            foreach ($tf_stars as $key => $term_id) {
+                $args['tax_query']['tf_filters'][] = array(
+                    'taxonomy' => 'hotel_rating',
+                    'terms'    => array($term_id),
+                );
+            }
+
+        }
+    }
+
+    // HOtel Days
 
     if ( $tf_days ) {
         $args['tax_query']['relation'] = $relation;
@@ -1088,6 +1142,29 @@ function tf_search_result_ajax_sidebar(){
             foreach ($tf_activities as $key => $term_id) {
                 $args['tax_query']['tf_filters'][] = array(
                     'taxonomy' => 'hotel_activities',
+                    'terms'    => array($term_id),
+                );
+            }
+
+        }
+    }
+
+    // hotel feature
+
+    if ( $filters ) {
+        $args['tax_query']['relation'] = $relation;
+
+        if ( $filter_relation == "OR" ) {
+            $args['tax_query'][] = array(
+                'taxonomy' => 'hotel_feature',
+                'terms'    => $filters,
+            );
+        } else {
+            $args['tax_query']['tf_filters']['relation'] = 'AND';
+
+            foreach ($filters as $key => $term_id) {
+                $args['tax_query']['tf_filters'][] = array(
+                    'taxonomy' => 'hotel_feature',
                     'terms'    => array($term_id),
                 );
             }

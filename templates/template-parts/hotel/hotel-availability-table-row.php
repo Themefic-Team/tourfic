@@ -128,7 +128,7 @@
                     <?php 
                     if($days==7){
                     $tf8days  = !empty($room['tf-8-days']) ? $room['tf-8-days'] : ''; 
-                    if(!empty($tf8days)){
+                    if(!empty($tf8days['tf-room']) || !empty($tf8days['tf-breakfast']) || !empty($tf8days['tf-half-b']) || !empty($tf8days['tf-full-b']) || !empty($tf8days['tf-inclusive']) || !empty($tf8days['tf-inclusive-gold'])){
                     ?>
                     <div class="tf-single-prices">
                         <span><input type="radio" id="tf-hotel-duration" value="8" checked> <?php esc_html_e( '8 DAYS', 'tourfic' ); ?>  <?php echo $tf8days['tf-room'] ? wc_price($tf8days['tf-room']*$form_adult) : '';  ?></span>
@@ -152,7 +152,7 @@
                     <?php 
                     if($days==14){
                     $tf16days  = !empty($room['tf-16-days']) ? $room['tf-16-days'] : ''; 
-                    if(!empty($tf16days)){
+                    if(!empty($tf16days['tf-room']) || !empty($tf16days['tf-breakfast']) || !empty($tf16days['tf-half-b']) || !empty($tf16days['tf-full-b']) || !empty($tf16days['tf-inclusive']) || !empty($tf16days['tf-inclusive-gold'])){
                     ?>
                     <div class="tf-single-prices">
                         <span><input type="radio" id="tf-hotel-duration" value="16" checked> <?php esc_html_e( '16 DAYS', 'tourfic' ); ?>  <?php echo $tf16days['tf-room'] ? wc_price($tf16days['tf-room']*$form_adult) : '';  ?></span>
@@ -176,7 +176,7 @@
                     <?php 
                     if($days==21){
                     $tf24days  = !empty($room['tf-24-days']) ? $room['tf-24-days'] : ''; 
-                    if(!empty($tf24days)){
+                    if(!empty($tf24days['tf-room']) || !empty($tf24days['tf-breakfast']) || !empty($tf24days['tf-half-b']) || !empty($tf24days['tf-full-b']) || !empty($tf24days['tf-inclusive']) || !empty($tf24days['tf-inclusive-gold'])){
                     ?>
                     <div class="tf-single-prices">
                         <span><input type="radio" id="tf-hotel-duration" value="24" checked> <?php esc_html_e( '24 DAYS', 'tourfic' ); ?>  <?php echo $tf24days['tf-room'] ? wc_price($tf24days['tf-room']*$form_adult) : '';  ?></span>
@@ -201,7 +201,7 @@
                     <?php 
                     if($days==28){
                     $tf32days  = !empty($room['tf-32-days']) ? $room['tf-32-days'] : ''; 
-                    if(!empty($tf32days)){
+                    if(!empty($tf32days['tf-room']) || !empty($tf32days['tf-breakfast']) || !empty($tf32days['tf-half-b']) || !empty($tf32days['tf-full-b']) || !empty($tf32days['tf-inclusive']) || !empty($tf32days['tf-inclusive-gold'])){
                     ?>
                     <div class="tf-single-prices">
                         <span><input type="radio" id="tf-hotel-duration" value="32" checked> <?php esc_html_e( '32 DAYS', 'tourfic' ); ?>  <?php echo $tf32days['tf-room'] ? wc_price($tf32days['tf-room']*$form_adult) : '';  ?></span>

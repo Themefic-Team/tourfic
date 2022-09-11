@@ -422,6 +422,17 @@
 
             var posttype = $('.tf-post-type').val();
 
+            //property Month
+            var tf_property_month = [];
+
+            $('[name*=tf_property_month]').each(function () {
+                if ($(this).is(':checked')) {
+                    tf_property_month.push($(this).val());
+                }
+            });
+            var tf_property_month = tf_property_month.join();
+
+
             var filters = [];
 
             $('[name*=tf_filters]').each(function () {
@@ -453,14 +464,14 @@
             var tf_location = tf_location.join();
 
             // Property style
-            var tf_property = [];
+            var tf_property_style = [];
 
-            $('[name*=tf_property]').each(function () {
+            $('[name*=tf_property_style]').each(function () {
                 if ($(this).is(':checked')) {
-                    tf_property.push($(this).val());
+                    tf_property_style.push($(this).val());
                 }
             });
-            var tf_property = tf_property.join();
+            var tf_property_style = tf_property_style.join();
 
             // Meals
             var tf_meals = [];
@@ -516,8 +527,9 @@
             formData.append('children', children);
             formData.append('filters', filters);
             formData.append('tf_property_type', tf_property_type);
+            formData.append('tf_property_month', tf_property_month);
             formData.append('tf_location', tf_location);
-            formData.append('tf_property', tf_property);
+            formData.append('tf_property_style', tf_property_style);
             formData.append('tf_meals', tf_meals);
             formData.append('tf_theme', tf_theme);
             formData.append('tf_activities', tf_activities);
@@ -570,7 +582,7 @@
             e.preventDefault();
             makeFilter()
         });
-        $(document).on('change', '[name*=tf_property_type],[name*=tf_location],[name*=tf_property],[name*=tf_days],[name*=tf_meals],[name*=tf_theme],[name*=tf_activities],[name*=tf_stars],[name*=tf_filters]', function () {
+        $(document).on('change', '[name*=tf_property_month],[name*=tf_property_type],[name*=tf_location],[name*=tf_property_style],[name*=tf_days],[name*=tf_meals],[name*=tf_theme],[name*=tf_activities],[name*=tf_stars],[name*=tf_filters]', function () {
             makeFilter();
         })
 

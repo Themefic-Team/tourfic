@@ -503,7 +503,7 @@ span.tf-price .amount {
     padding: 0px;
 }
 .tf-single-prices {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 .tf-single-prices > span {
     text-align: center;
@@ -515,6 +515,7 @@ span.tf-price .amount {
 .tf-single-prices-item {
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
 }
 .tf-single-prices-item span {
     width: 70px;
@@ -558,7 +559,11 @@ span.tf-price .amount {
         display: none;
     }
 }
-
+@media all and (max-width: 827px){
+    .tf-single-pricebox{
+        width: 100% !important;
+    } 
+}
 @media only screen and (max-width: 830px) {
     .tf_booking-widget {
         margin-bottom: 0;

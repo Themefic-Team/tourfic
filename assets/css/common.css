@@ -318,6 +318,11 @@ h3.section-heading {
     font-size: 18px;
 }
 
+#tf-country-name,
+#tf-month-name{
+    text-transform: capitalize;
+}
+
 /***************** SLIDER ****************/
 
 .slick-slider {
