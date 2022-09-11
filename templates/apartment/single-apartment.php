@@ -89,7 +89,7 @@ $share_link = get_permalink($post_id);
     <?php do_action( 'tf_before_container' ); ?>
 
     <!-- Start title area -->
-    <div class="tf-title-area tf-hotel-title sp-20">
+    <div class="tf-title-area tf-apartment-title sp-40">
          <div class="tf-container">
              <div class="tf-title-wrap">
                 <div class="tf-title-left">
@@ -207,7 +207,7 @@ $share_link = get_permalink($post_id);
     <!-- End title area -->
 
     <!-- Start Hero Section -->
-    <div class="hero-section">
+    <div class="hero-section tf-apartment">
         <div class="tf-container">
             <div class="hero-wrapper">
                 <div class="hero-left">
@@ -221,8 +221,8 @@ $share_link = get_permalink($post_id);
                     </div>
                     <div class="hero-third-image">
                         <img src="https://cdn.pixabay.com/photo/2018/01/26/08/15/dining-room-3108037_960_720.jpg" alt="">
+                        <a href="#" class="tf_button btn-styled">All Photos</a>
                     </div>
-                    <a href="#" class="tf_button btn-styled">All Photos</a>
                 </div>
             </div>
         </div>
@@ -230,14 +230,14 @@ $share_link = get_permalink($post_id);
     <!-- End Hero Section -->
 
     <!-- Start Content & Feature Section -->
-    <div class="content-feature-section">
+    <div class="content-feature-section tf-apartment">
         <div class="tf-container">
             <div class="cf-wrapper">
                 <div class="cf-left">
                     <div class="apt-description">
                         <?php the_content(); ?>
                     </div>
-                    <div class="key-features">
+                    <div class="key-features sp-t-40">
                         <h2 class="section-heading">Key Features</h2>
                         <div class="features-details">
                             <ul>
@@ -252,9 +252,9 @@ $share_link = get_permalink($post_id);
                             </ul>
                         </div>
                     </div>
-                    <div class="apartment-amenities">
+                    <div class="apartment-amenities sp-t-40">
                         <h2 class="section-heading">Amenities</h2>
-                        <div class="amenities-details">
+                        <div class="features-details amenities-details">
                             <ul>
                                 <li><i class="fab fa-facebook-square"></i> 1500 sft</li>
                                 <li><i class="fab fa-facebook-square"></i> 1500 sft</li>
@@ -275,7 +275,7 @@ $share_link = get_permalink($post_id);
                             <div class="host-meta">
                                 <h4>Hosted by Jorina Bua</h4>
                                 <p>Joined in <span>January 2022</span></p>
-                                <p>Review: 4.5 (150 Reviews)</p>
+                                <p><i class="fas fa-star"></i> <span>4.5</span> (150 Reviews)</p>
                             </div>
                         </div>
                         <div class="host-bottom">
@@ -284,7 +284,7 @@ $share_link = get_permalink($post_id);
                                 <li>Language: <span>Bangla, English, Hindi</span></li>
                                 <li>Response Time: <span>Within a Day</span></li>
                             </ul>
-                            <a href="" class="tf_button btn-styled">Contact Host</a>
+                            <a href="" class="tf_button btn-styled"><i class="far fa-comments"></i> Contact Host</a>
                         </div>
                     </div>
                     <div class="apartment-booking-form">
