@@ -409,6 +409,9 @@ $tour_price = new Tour_Price($meta);
 
 		<!-- Travel Itinerary section Start -->
 		<?php if( $itineraries ) { ?>
+		<?php 
+		$itinerary_status = !empty(tfopt('itinerary-status')) ? tfopt('itinerary-status') : '';
+		?>
 		<div class="tf-travel-itinerary-wrapper gray-wrap sp-50">
 			<div class="tf-container">
 				<div class="tf-travel-itinerary-content">
@@ -418,15 +421,22 @@ $tour_price = new Tour_Price($meta);
 						<canvas id="myChart" width="400" height="200"></canvas>
 					</div>
 					</div>
+					<div class="tf-accordion-switcher">
+					<label class="switch">
+					<input type="checkbox" id="itinerary-switcher" <?php echo !empty($itinerary_status) ? 'checked' : ''; ?>>
+					<span class="switcher round"></span>
+					</label>
+					<span><?php _e( "Expand/Close", 'tourfic' ); ?></span>
+					</div>
 					<div class="tf-travel-itinerary-items-wrapper">
 						<?php foreach( $itineraries as $itinerary ){ ?>
 							<div id="tf-accordion-wrapper" class="tf-ininerary-accordion-wrapper" >
 								<div class="tf-accordion-head tf-ininerary-accordion-head">
 									
 								<h4><?php echo esc_html( $itinerary['title'] );  ?></h4>
-								<i class="fas fa-angle-down arrow"></i>
+								<i class="fas fa-angle-down arrow <?php echo !empty($itinerary_status) ? 'arrow-animate' : ''; ?>"></i>
 								</div>
-								<div class="tf-accordion-content tf-ininerary-content" >
+								<div class="tf-accordion-content tf-ininerary-content" style="<?php echo !empty($itinerary_status) ? 'display:block' : ''; ?>">
 									<div class="tf-travel-desc">
 										<div class="trav-cont">
 											<?php _e( $itinerary['desc'] ); ?>
