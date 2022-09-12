@@ -371,7 +371,9 @@ $tour_price = new Tour_Price($meta);
 			</div>
 		<?php } ?>
 		<!-- Include-Exclude section End -->
-
+		<?php 
+		if ( !defined( 'TF_PRO' ) ){ 
+		?>
 		<!-- Travel Itinerary section Start -->
 		<?php if( $itineraries ) { ?>
 		<div class="tf-travel-itinerary-wrapper gray-wrap sp-50">
@@ -404,96 +406,15 @@ $tour_price = new Tour_Price($meta);
 				</div>
 			</div>
 		</div>
-		<?php } ?>
+		<?php } }else{ 
+			do_action( 'after_itinerary_builder', $itineraries );
+		?>
 		<!-- Travel Itinerary section End -->
 
 		<!-- Travel Itinerary section Start -->
-		<?php if( $itineraries ) { ?>
-		<?php 
-		$itinerary_status = !empty(tfopt('itinerary-status')) ? tfopt('itinerary-status') : '';
-		?>
-		<div class="tf-travel-itinerary-wrapper gray-wrap sp-50">
-			<div class="tf-container">
-				<div class="tf-travel-itinerary-content">
-					<h2 class="section-heading"><?php _e( "Travel Itinerary", 'tourfic' ); ?></h2>
-					<div class="tf-itineraray-chart">
-					<div class="chart">
-						<canvas id="myChart" width="400" height="200"></canvas>
-					</div>
-					</div>
-					<div class="tf-accordion-switcher">
-					<label class="switch">
-					<input type="checkbox" id="itinerary-switcher" <?php echo !empty($itinerary_status) ? 'checked' : ''; ?>>
-					<span class="switcher round"></span>
-					</label>
-					<span><?php _e( "Expand/Close", 'tourfic' ); ?></span>
-					</div>
-					<div class="tf-travel-itinerary-items-wrapper">
-						<?php foreach( $itineraries as $itinerary ){ ?>
-							<div id="tf-accordion-wrapper" class="tf-ininerary-accordion-wrapper" >
-								<div class="tf-accordion-head tf-ininerary-accordion-head">
-									
-								<h4><?php echo esc_html( $itinerary['title'] );  ?></h4>
-								<i class="fas fa-angle-down arrow <?php echo !empty($itinerary_status) ? 'arrow-animate' : ''; ?>"></i>
-								</div>
-								<div class="tf-accordion-content tf-ininerary-content" style="<?php echo !empty($itinerary_status) ? 'display:block' : ''; ?>">
-									<div class="tf-travel-desc">
-										<div class="trav-cont">
-											<?php _e( $itinerary['desc'] ); ?>
-										</div>
-									</div>
-									<div class="ininerary-other-gallery">
-									<?php 
-									if ($itinerary['image']) {
-										$tf_itinerary_gallery_ids = explode( ',', $itinerary['image'] );
-									}   
-									?>
-									<?php 
-									if( !empty($itinerary['image']) && !empty($tf_itinerary_gallery_ids) ){ 
-									foreach ($tf_itinerary_gallery_ids as $key => $gallery_item_id) {	
-									?>
-										<div class="ininerary-gallery-single">
-										<?php 
-											$itinerary_gallery_image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
-											echo '<img src="'.$itinerary_gallery_image_url.'" alt="" />';
-										?>
-										</div>
-									<?php } } ?>
-									</div>
-									<div class="ininerary-other-info">
-										<ul>
-										<?php if( !empty($itinerary['duration']) && !empty($itinerary['timetype'])){ ?>
-											<li><i class="far fa-clock"></i> <?php _e( $itinerary['duration'] ); ?> <?php _e( $itinerary['timetype'] ); ?></li>
-										<?php } ?>
-										<?php if( !empty($itinerary['meals']) ){ ?>
-											<li><i class="fas fa-utensils"></i> 
-											<?php foreach($itinerary['meals'] as $smeal){ echo $smeal.', '; } ?>
-											</li>
-										<?php } ?>
-										<?php if( !empty($itinerary['sleepmode']) ){ ?>
-											<li><a data-fancybox data-src="#tour-itinerary-sleep" href="javascript:;"><i class="fas fa-bed"></i> <?php _e( $itinerary['sleepmode'] ); ?> <sup><i class="fas fa-exclamation-circle"></i></sup></a></li>
-											<?php 
-											if(!empty($itinerary['sleep'])){ ?>
-											<div style="display: none;" id="tour-itinerary-sleep">
-												<div class="tf-tours-booking-deposit">
-													<div class="tf-tours-booking-deposit-text">
-														<?php _e( $itinerary['sleep'] ); ?>
-													</div>
-													
-												</div>
-											</div>
-											<?php } ?>
-										<?php } ?>
-										</ul>
-									</div>
-								</div>
-							</div>
-						<?php } ?>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 		<?php } ?>
+
 		<!-- Travel Itinerary section End -->
 										
 		<!-- Map Section Start -->
