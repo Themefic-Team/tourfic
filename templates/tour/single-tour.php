@@ -372,7 +372,9 @@ $tour_price = new Tour_Price($meta);
 		<?php } ?>
 		<!-- Include-Exclude section End -->
 		<?php 
-		if ( !defined( 'TF_PRO' ) ){ 
+		if ( defined( 'TF_PRO' ) ){ 
+			do_action( 'after_itinerary_builder', $itineraries );
+		}else{
 		?>
 		<!-- Travel Itinerary section Start -->
 		<?php if( $itineraries ) { ?>
@@ -406,14 +408,8 @@ $tour_price = new Tour_Price($meta);
 				</div>
 			</div>
 		</div>
-		<?php } }else{ 
-			do_action( 'after_itinerary_builder', $itineraries );
-		?>
-		<!-- Travel Itinerary section End -->
-
-		<!-- Travel Itinerary section Start -->
-		
-		<?php } ?>
+				
+		<?php } } ?>
 
 		<!-- Travel Itinerary section End -->
 										
