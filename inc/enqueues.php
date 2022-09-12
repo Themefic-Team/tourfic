@@ -56,6 +56,9 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         if ( get_post_type() == 'tf_tours' ){
             wp_enqueue_style( 'tf-tour-style', TF_ASSETS_URL . 'css/tour' . $min_css . '.css', null, '' );
         }
+        if ( get_post_type() == 'tf_apartment' ){
+            wp_enqueue_style( 'tf-apartment-style', TF_ASSETS_URL . 'css/apartment' . '.css', null, '' );
+        }
         wp_enqueue_style( 'tf-search-style', TF_ASSETS_URL . 'css/search-result.css', null, '' );
         wp_enqueue_style( 'tf-shortcode-style', TF_ASSETS_URL . 'css/shortcode.css', null, '' );
 
@@ -272,12 +275,12 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'infant' => __('Infant', 'tourfic'),
                 'room' => __('Room', 'tourfic'),
                 'sending_ques' => __('Sending your question...', 'tourfic'),
-                'tf_hotellocationlists' => !empty($tf_hotellocationlists) ? $tf_hotellocationlists : '',
-                'tf_hotel_max_price' => !empty($hotel_max_price) ? $hotel_max_price : '',
-                'tf_hotel_min_price' => !empty($hotel_min_price) ? $hotel_min_price : '',
-                'tf_tourdestinationlists' => !empty($tf_tourdestinationlists) ? $tf_tourdestinationlists : '',
-                'tf_tour_max_price' => !empty($tour_max_price) ? $tour_max_price : '',
-                'tf_tour_min_price' => !empty($tour_min_price) ? $tour_min_price : '',
+                'tf_hotellocationlists' => isset($tf_hotellocationlists) ? $tf_hotellocationlists : '',
+                'tf_hotel_max_price' => isset($hotel_max_price) ? $hotel_max_price : '',
+                'tf_hotel_min_price' => isset($hotel_min_price) ? $hotel_min_price : '',
+                'tf_tourdestinationlists' => isset($tf_tourdestinationlists) ? $tf_tourdestinationlists : '',
+                'tf_tour_max_price' => isset($tour_max_price) ? $tour_max_price : '',
+                'tf_tour_min_price' => isset($tour_min_price) ? $tour_min_price : ''
             )
         );
         //wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/old/responsive.css', '', TOURFIC );

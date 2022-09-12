@@ -35,6 +35,18 @@ h3.section-heading {
     padding: 30px 0;
 }
 
+.sp-t-30 {
+    padding-top: 30px;
+}
+
+.sp-40 {
+    padding: 40px 0;
+}
+
+.sp-t-40 {
+    padding-top: 40px;
+}
+
 .sp-50 {
     padding: 50px 0;
 }
@@ -309,7 +321,7 @@ h3.section-heading {
 
 .tf-single-rating i {
     font-size: 14px;
-    color: #FFCD3D;
+    color: #FFBF00;
 }
 
 .tf-single-rating span {
@@ -319,7 +331,9 @@ h3.section-heading {
 }
 
 /***************** SLIDER ****************/
-
+.roomNameInner {
+    padding-top: 20px;
+}
 .slick-slider {
     position: relative;
     display: block;
@@ -1080,6 +1094,7 @@ h3.section-heading {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
+    margin-left:0 !important;
 }
 
 .tf-slider-content {

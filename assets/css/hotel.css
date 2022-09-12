@@ -180,8 +180,9 @@ a.slick-slide-item-link {
     background-color: #000;
     text-align: center;
     cursor: pointer;
-    padding: 3px 10px 0;
+    padding: 6px 13px 0px 12px;
     border-radius: 4px;
+    width: auto;
 }
 
 .swiper-button-prev i,
@@ -211,6 +212,9 @@ a.slick-slide-item-link {
 
 .show-on-map {
     margin-bottom: 20px;
+}
+.show-on-map iframe {
+    height: 130px;
 }
 
 .show-on-map .btn-styled {
