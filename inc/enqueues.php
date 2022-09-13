@@ -68,12 +68,12 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                         $itineraraymeter[] = !empty($itinerary['altitude']) ? intval($itinerary['altitude']) : '';
                     }
                 }
-                $showxaxis = !empty(tfopt( 'itinerary-x-axis' )) ? tfopt( 'itinerary-x-axis' ) : false;
-                $showyaxis = !empty(tfopt( 'itinerary-y-axis' )) ? tfopt( 'itinerary-y-axis' ) : false;
-                $showlinegraph = !empty(tfopt( 'itinerary-line-graph' )) ? tfopt( 'itinerary-line-graph' ) : false;
-                $showitinerarychart = !empty(tfopt( 'itinerary-chart' )) ? tfopt( 'itinerary-chart' ) : false;
-                $showitinerarystatus = !empty(tfopt( 'itinerary-status' )) ? tfopt( 'itinerary-status' ) : false;
-                $elevvationmode = !empty(tfopt('elevtion_type')=="Feet") ? "Feet" : "Meter";
+                $showxaxis = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-x-axis']) ? tfopt( 'itinerary-builder-setings' )['itinerary-x-axis'] : false;
+                $showyaxis = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-y-axis']) ? tfopt( 'itinerary-builder-setings' )['itinerary-y-axis'] : false;
+                $showlinegraph = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-line-graph']) ? tfopt( 'itinerary-builder-setings' )['itinerary-line-graph'] : false;
+                $showitinerarychart = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-chart']) ? tfopt( 'itinerary-builder-setings' )['itinerary-chart'] : false;
+                $showitinerarystatus = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-status']) ? tfopt( 'itinerary-builder-setings' )['itinerary-status'] : false;
+                $elevvationmode = !empty(tfopt( 'itinerary-builder-setings' )['elevtion_type']=="Feet") ? "Feet" : "Meter";
             }
         }
         wp_enqueue_style( 'tf-search-style', TF_ASSETS_URL . 'css/search-result.css', null, '' );
