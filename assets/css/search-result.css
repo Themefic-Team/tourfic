@@ -112,6 +112,7 @@
     justify-content: space-between;
     align-items: end;
     font-size: 14px;
+    align-items: center;
   }
 
 .roomName_flex {
@@ -158,6 +159,7 @@
     margin-bottom: 15px;
     border-bottom: 1px solid #ddd;
     border-top: 1px solid #ddd;
+    margin-top: 10px;
 }
 
 .tf-list-grid {
@@ -203,6 +205,7 @@
   .tf-archive-desc i {
     color: #549501;
     font-size: 15px;
+    margin-bottom: 10px;
   }
 
 

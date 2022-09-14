@@ -371,11 +371,7 @@ $tour_price = new Tour_Price($meta);
 			</div>
 		<?php } ?>
 		<!-- Include-Exclude section End -->
-		<?php 
-		if ( defined( 'TF_PRO' ) ){ 
-			do_action( 'after_itinerary_builder', $itineraries );
-		}else{
-		?>
+
 		<!-- Travel Itinerary section Start -->
 		<?php if( $itineraries ) { ?>
 		<div class="tf-travel-itinerary-wrapper gray-wrap sp-50">
@@ -408,9 +404,7 @@ $tour_price = new Tour_Price($meta);
 				</div>
 			</div>
 		</div>
-				
-		<?php } } ?>
-
+		<?php } ?>
 		<!-- Travel Itinerary section End -->
 										
 		<!-- Map Section Start -->

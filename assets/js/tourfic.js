@@ -1331,36 +1331,6 @@
             $(this).parent().find('.arrow').toggleClass('arrow-animate');
             $(this).parent().find('.tf-accordion-content').slideToggle();
             $(this).parents('#tf-accordion-wrapper').siblings().find('.tf-accordion-content').slideUp();
-            $(this).siblings().find('.ininerary-other-gallery').slick({
-                slidesToShow: 6,
-                slidesToScroll: 1,
-                arrows: true,
-                fade: false,
-                adaptiveHeight: true,
-                infinite: true,
-                useTransform: true,
-                speed: 400,
-                cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
-                responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 4,
-                        slidesToScroll: 1,
-                    }
-                }, {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                    }
-                }, {
-                    breakpoint: 420,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                    }
-                }]
-            });
           });
           
 
@@ -1372,7 +1342,6 @@
             $(this).parents('#tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
           });
 
-        
 
         
     });
