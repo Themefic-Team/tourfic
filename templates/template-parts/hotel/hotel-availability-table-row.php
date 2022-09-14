@@ -9,31 +9,27 @@
             }
             if (defined( 'TF_PRO' ) && $tour_room_details_gall){ 
             ?>	
-            <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'] : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: underline;">
+            <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'] : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: underline;">
                 <?php echo esc_html( $room['title'] ); ?>
-            </a>
+            </a></h3>
 
             <div id="tour_room_details_qv" class="tf-reg-wrap" >
                                                         
             </div>
             <?php } else{ ?>
-                <?php echo esc_html( $room['title'] ); ?>
+                <h3><?php echo esc_html( $room['title'] ); ?></h3>
                 <?php   
             }
             ?>
             </div>
-            <div class="bed-facilities"><?php echo $room['description']; ?></div>
-        </div>
-
-        <div class="tf-room-title">
-            <?php esc_html_e( 'Key Features', 'tourfic' );?>
+            <div class="bed-facilities"><?php _e( $room['description'] ); ?></div>
         </div>
 
         <?php if ( $footage ) {?>
             <div class="tf-tooltip tf-d-ib">
                 <div class="room-detail-icon">
                     <span class="room-icon-wrap"><i class="fas fa-ruler-combined"></i></span>
-                    <span class="icon-text tf-d-b"><?php echo $footage; ?> sft</span>
+                    <span class="icon-text tf-d-b"><?php echo $footage; ?> <?php _e( 'sft', 'tourfic' ); ?></span>
                 </div>
                 <div class="tf-top">
                     <?php _e( 'Room Footage', 'tourfic' );?>
@@ -55,10 +51,12 @@
         <?php }?>
 
         <div class="room-features">
-            <div class="tf-room-title"><?php esc_html_e( 'Amenities', 'tourfic' );?></div>
+            <div class="tf-room-title"><h4><?php esc_html_e( 'Amenities', 'tourfic' );?></h4></div>
             <ul class="room-feature-list">
 
-                <?php foreach ( $room['features'] as $feature ) {
+                <?php 
+                if( !empty( $room['features'] ) ){
+                foreach ( $room['features'] as $feature ) {
 
                         $room_f_meta = get_term_meta( $feature, 'hotel_feature', true );
 
@@ -76,7 +74,7 @@
                             <i class="tool-i"></i>
                         </div>
                     </li>
-                <?php }?>
+                <?php } } ?>
             </ul>
         </div>
     </td>
@@ -135,14 +133,13 @@
                     ?>
                 </select>
             </div>
-	        
             <div class="room-submit-wrap">
             <div class="roomselectissue"></div>
             <?php if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
                 
                 <div class="room-deposit-wrap">
                     <input type="checkbox" id="tf-make-deposit" name="make_deposit" value="<?php echo $room_id ?>">
-                    <label for="tf-make-deposit">I'll make a deposit</label><br>
+                    <label for="tf-make-deposit">I'll make a partial payment</label><br>
                 </div>
 	        <?php } ?>
 
@@ -164,7 +161,7 @@
                 
                 if(defined( 'TF_PRO' ) && !empty($tour_hotel_service_avail) && !empty($tour_hotel_service_type)){
                 ?>
-                <a class="tf_air_service" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
+                <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
                 
                 
                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap" data-id="<?php echo $room_id ?>">
@@ -199,13 +196,13 @@
                         </div>
                         <div class="tf-airport-pickup-response"> </div>
                         <div class="tf_button_group">
-                        <button class="hotel-room-book" type="submit"><?php _e(tfopt('hotel_service_popup_action', 'Continue to booking'), 'tourfic');?></button>
+                        <button class="hotel-room-book btn-styled" type="submit"><?php _e(tfopt('hotel_service_popup_action', 'Continue to booking'), 'tourfic');?></button>
                         </div>
                     </div>
                 </div>
                 
                 <?php }else{ ?>
-                <button class="hotel-room-book" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
+                <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
                 <?php } ?>
             </div>
             <div class="tf_desc"></div>

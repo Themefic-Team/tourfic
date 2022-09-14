@@ -122,7 +122,7 @@ if(!function_exists('tf_review_form')) {
             // The comment submit element class attribute. Default 'submit'.
             // 'class_submit' => 'tf_button',
             //Submit Button html
-            'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" value="%4$s" />',
+            'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" class="tf_button btn-styled" value="%4$s" />',
             'submit_field' => '<div class="tf-review-submit">%1$s %2$s</div>',
         ];
         comment_form($comments_args);
@@ -419,10 +419,13 @@ function tf_archive_single_rating() {
         ob_start();
         ?>
         
-        <div class="tf-archive-rating">
-            <span> 
-                <?php _e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
-            </span>
+        <div class="tf-archive-rating-wrapper">
+            <div class="tf-archive-rating">
+                <span>
+                    <?php _e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
+                </span>
+            </div>
+            <h6><?php tf_based_on_text(count($comments)); ?></h6>
         </div>
 
         <?php

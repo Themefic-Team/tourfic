@@ -26,13 +26,13 @@ if( $discount_type == 'percent' ){
 
 ?>
 
-<div class="tourfic-wrap" data-fullwidth="true">
+<div class="tf-main-wrapper" data-fullwidth="true">
 	<?php do_action( 'tf_before_container' ); ?>
-	<div class="tf_container">
+	<div class="tf-container">
 
-		<div class="tf_row">
+		<div class="search-result-inner">
 			<!-- Start Content -->
-			<div class="tf_content">
+			<div class="tf-search-left">
 				<div class="tf-action-top">
 		            <div class="tf-list-grid">
 		                <a href="#list-view" data-id="list-view" class="change-view" title="<?php _e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
@@ -59,7 +59,7 @@ if( $discount_type == 'percent' ){
 			<!-- End Content -->
 
 			<!-- Start Sidebar -->
-			<div class="tf_sidebar">
+			<div class="tf-search-right">
 				<?php tf_archive_sidebar_search_form('tf_tours'); ?>
 			</div>
 			<!-- End Sidebar -->

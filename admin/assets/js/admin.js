@@ -91,6 +91,7 @@
                 return false;
             }
         });
+
         /**
          * Hotel and Tour feature images required
          * 
@@ -99,10 +100,10 @@
         
         $(document).on('click', '.post-type-tf_tours #publish, .post-type-tf_tours #save-post', function(e) {
             if( $('#set-post-thumbnail').find('img').size() == 0) {
-                e.preventDefault;
-                e.stopImmediatePropagation();
-                notyf.error('Tour image is a required!');
-                return false;
+            e.preventDefault;
+            e.stopImmediatePropagation();
+            notyf.error('Tour image is a required!');
+            return false;
             }
         });
 
@@ -114,7 +115,7 @@
                 return false;
             }
         });
-
+        
         /**
          * Ajax install
          * 

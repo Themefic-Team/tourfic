@@ -86,7 +86,7 @@ if ( ! class_exists( 'CSF_Field_repeater' ) ) {
 
         echo '</div>';
 
-        echo '<div class="csf-repeater-alert csf-repeater-max">'. esc_html__( 'You cannot add more.', 'csf' ) .'</div>';
+        echo '<div class="csf-repeater-alert csf-repeater-max">'. esc_html__( 'Please upgrade to Pro to Add more.', 'csf' ) .'</div>';
         echo '<div class="csf-repeater-alert csf-repeater-min">'. esc_html__( 'You cannot remove more.', 'csf' ) .'</div>';
         echo '<a href="#" class="button button-primary csf-repeater-add">'. $args['button_title'] .'</a>';
 

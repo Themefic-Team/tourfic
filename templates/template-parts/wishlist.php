@@ -2,8 +2,7 @@
     <table class="table" data-type='<?php echo $type  ?>'>
         <thead>
             <tr>
-                <th></th>
-                <th>Name</th>
+                <th>Your Wishlist</th>
             </tr>
         </thead>
         <tbody>
@@ -12,8 +11,7 @@
                 $post = get_post($id);
             ?>
                 <tr>
-                    <td scope="row" class="tf-text-center"><i class="fas fa-trash remove-wishlist" data-id="<?php echo $post->ID ?>" data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>"></i></td>
-                    <td><a href="<?php echo get_post_permalink($post->ID)  ?>" target="_blank"><?php echo $post->post_title ?></a></td>
+                    <td><a href="<?php echo get_post_permalink($post->ID)  ?>" target="_blank"><?php echo $post->post_title ?></a><i title="Remove from Wishlist" class="fas fa-trash remove-wishlist" data-id="<?php echo $post->ID ?>" data-nonce="<?php echo wp_create_nonce("wishlist-nonce") ?>"></i></td>
                 </tr>
             <?php };  ?>
         </tbody>

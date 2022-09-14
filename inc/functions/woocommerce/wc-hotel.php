@@ -337,14 +337,14 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
         );
     }
 
-    if ( isset( $cart_item['tf_hotel_data']['adult'] ) && $cart_item['tf_hotel_data']['adult'] > 0 ) {
+    if ( isset( $cart_item['tf_hotel_data']['adult'] ) && $cart_item['tf_hotel_data']['adult'] >=1 ) {
         $item_data[] = array(
             'key'       => __('Adult Number', 'tourfic'),
             'value'     => $cart_item['tf_hotel_data']['adult'],
         );
     }
 
-    if ( isset( $cart_item['tf_hotel_data']['child'] ) && $cart_item['tf_hotel_data']['child'] > 0 ) {
+    if ( isset( $cart_item['tf_hotel_data']['child'] ) && $cart_item['tf_hotel_data']['child'] >=1 ) {
         $item_data[] = array(
             'key'       => __('Child Number', 'tourfic'),
             'value'     => $cart_item['tf_hotel_data']['child'],
@@ -428,8 +428,8 @@ add_filter ( 'woocommerce_cart_item_permalink', 'tf_hotel_cart_item_permalink' ,
 function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
 
     // Assigning data into variables
-    $order_type = $values['tf_hotel_data']['order_type'];
-    $post_author = $values['tf_hotel_data']['post_author'];
+    $order_type = !empty($values['tf_hotel_data']['order_type']) ? $values['tf_hotel_data']['order_type'] : '';
+    $post_author = !empty($values['tf_hotel_data']['post_author']) ? $values['tf_hotel_data']['post_author'] : '';
     $post_id = !empty($values['tf_hotel_data']['post_id']) ? $values['tf_hotel_data']['post_id'] : '';
     $unique_id = !empty($values['tf_hotel_data']['unique_id']) ? $values['tf_hotel_data']['unique_id'] : '';
     $room_name = !empty($values['tf_hotel_data']['room_name']) ? $values['tf_hotel_data']['room_name'] : '';
@@ -532,22 +532,24 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
         $new_rooms = []; 
 
         # Get and Loop Over Room Meta
-        foreach($rooms as $room) {
-            
-            # Check if order is for this room
-            if($room['unique_id'] == $unique_id){
+        if(!empty($rooms)){
+            foreach($rooms as $room) {
+                
+                # Check if order is for this room
+                if($room['unique_id'] == $unique_id){
 
-                $old_order_id = $room['order_id'];
+                    $old_order_id = $room['order_id'];
 
-                $old_order_id != "" && $old_order_id .= ",";
-                $old_order_id .= $order_id;
+                    $old_order_id != "" && $old_order_id .= ",";
+                    $old_order_id .= $order_id;
 
-                # set old + new data to the oder_id meta
-                $room['order_id']  = $old_order_id;
+                    # set old + new data to the oder_id meta
+                    $room['order_id']  = $old_order_id;
+                }
+
+                # Set whole room array
+                $new_rooms[] = $room; 
             }
-
-            # Set whole room array
-            $new_rooms[] = $room; 
         }
 
         # Set whole room array to the room meta

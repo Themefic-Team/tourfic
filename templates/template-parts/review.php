@@ -65,18 +65,21 @@ if (post_password_required()) {
                     if ($is_user_logged_in) {
                         if (in_array('li', $tf_ratings_for) && !tf_user_has_comments()) {
                         ?>
-                            <button data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
+                        <div class="tf-btn">
+                            <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
                                 <i class="fas fa-plus"></i> <?php _e('Add Review', 'tourfic'); ?>
                             </button>
-
+                        </div>
                         <?php
                         }
                     } else {
                         if (in_array('lo', $tf_ratings_for)) {
                         ?>
-                            <button data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
+                        <div class="tf-btn">
+                            <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
                                 <i class="fas fa-plus"></i> <?php _e('Add Review', 'tourfic') ?>
                             </button>
+                            </div>
                         <?php
                         }
                     }
@@ -134,16 +137,18 @@ if (post_password_required()) {
 
         echo '<div class="no-review">';
 
-        echo '<h3>' .__("No Review Available", "tourfic"). '</h3>';
+        echo '<h4>' .__("No Review Available", "tourfic"). '</h4>';
 
         if ($is_user_logged_in) {
 
             // Add Review button
             if (in_array('li', $tf_ratings_for) && !tf_user_has_comments()) {
                 ?>
-                <button data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
-                    <i class="fas fa-plus"></i> <?php _e('Add Review', 'tourfic'); ?>
-                </button>
+                <div class="tf-btn">
+                    <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
+                        <i class="fas fa-plus"></i> <?php _e('Add Review', 'tourfic'); ?>
+                    </button>
+                </div>
         
                 <?php
             } else {
@@ -155,9 +160,11 @@ if (post_password_required()) {
 
             if (in_array('lo', $tf_ratings_for)) {
             ?>
-                <button data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
+            <div class="tf-btn">
+                <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
                     <i class="fas fa-plus"></i> <?php _e('Add Review', 'tourfic') ?>
                 </button>
+                </div>
             <?php
             }
 

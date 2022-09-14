@@ -19,6 +19,7 @@ if ( class_exists( 'CSF' ) ) {
         }
     }
     
+    
     /**
      * Post Type: tf_tours
      */

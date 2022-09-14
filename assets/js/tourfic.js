@@ -169,17 +169,13 @@
                     var response = JSON.parse(data);
 
                     if (response.status == 'error') {
-                        var errorHtml = "";
 
                         if (response.errors) {
                             response.errors.forEach(function (text) {
-                                errorHtml += '<div class="woocommerce-error">' + text + '</div>';
+                                notyf.error(text);
                             });
                         }
 
-                        $('.tf_notice_wrapper').html(errorHtml).show();
-
-                        $("html, body").animate({ scrollTop: 0 }, 300);
                         return false;
                     } else {
 
@@ -234,7 +230,7 @@
             dots: false,
             centerMode: false,
             variableWidth: false,
-        });
+        }); 
 
         sbp.on("click", function () {
             $(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickPrev');
@@ -243,6 +239,14 @@
         sbn.on("click", function () {
             $(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickNext');
         });
+
+        /**
+         * Recent Hotel - Tour
+         * 
+         * Slick
+         */
+
+
 
         /**
          * Scroll to room reserve table
@@ -256,6 +260,24 @@
         //###############################
         //         Tour                 #
         //###############################
+
+         /**
+         * Scroll to Tour Review Section
+         */
+          $(".tf-top-review a").click(function () {
+            $('html, body').animate({
+                scrollTop: $("#tf-review").offset().top - 32
+            }, 1000);
+        });
+
+        /**
+         * Scroll to Map Section
+         */
+         $(".tf-map-link a").click(function () {
+            $('html, body').animate({
+                scrollTop: $("#tour-map").offset().top - 32
+            }, 1000);
+        });
         
         /**
          * Ajax tour booking
@@ -269,9 +291,7 @@
 
             var formData = new FormData(this);            
             formData.append('action', 'tf_tours_booking');
-            // for (var value of formData.values()) {
-            //     console.log(value);
-            // }
+            
 
             // Tour Extra
             var tour_extra_total = 0;
@@ -300,7 +320,7 @@
                         }
                     });
 
-                    $('.tf_notice_wrapper').html("").hide();
+                    $('.tf-notice-wrapper').html("").hide();
                 },
                 complete: function (data) {
                     $this.unblock();
@@ -311,17 +331,13 @@
                     var response = JSON.parse(data);
 
                     if (response.status == 'error') {
-                        var errorHtml = "";
-
+                        $.fancybox.close();
                         if (response.errors) {
                             response.errors.forEach(function (text) {
-                                errorHtml += '<div class="woocommerce-error">' + text + '</div>';
+                                notyf.error(text);
                             });
                         }
 
-                        $('.tf_notice_wrapper').html(errorHtml).show();
-
-                        $("html, body").animate({ scrollTop: 0 }, 300);
                         return false;
                     } else {
 
@@ -391,6 +407,8 @@
             var room = $('#room').val();
             var children = $('#children').val();
             var checked = $('#check-in-out-date').val();
+            var startprice = $('#startprice').val();
+            var endprice = $('#endprice').val();
             // split date range into dates
             var checkedArr = checked.split(' to ');
             var checkin = checkedArr[0];
@@ -427,7 +445,12 @@
             formData.append('filters', filters);
             formData.append('features', features);
             formData.append('checked', checked);
-
+            if(startprice){
+                formData.append('startprice', startprice);
+            }
+            if(endprice){
+                formData.append('endprice', endprice);
+            }
             // abort previous request
             if (filter_xhr && filter_xhr.readyState != 4) {
                 filter_xhr.abort();
@@ -529,8 +552,7 @@
             });
         }
 
-        // Usage DOM: <div data-fullwidth="true">...</div> in JS: fullwidthInit("[data-fullwidth=true]");
-        //fullwidthInit("[data-fullwidth=true]");
+        
 
         /**
          * Share buttons
@@ -551,26 +573,14 @@
             document.execCommand("copy");
         });
 
-        /**
-         * Toggle FAQ
-         */
-        $('.faq-head').click(function (e) {
-            $(this).parent().toggleClass('active').find('.faq-content').slideToggle('fast');
-        });
-
-        /**
-         * Toggle Itinerary
-         */
-         $('.itinerary-head').on('click', function (e) {
-            $(this).parent().toggleClass('active').find('.itinerary-content').slideToggle('fast');
-        });
+        
 
         /**
          * Related Tour
          * 
          * Slick
          */
-        $('.tf-suggestion-items-wrapper').slick({
+        $('.tf-slider-items-wrapper').slick({
             dots: true,
             arrows: false,
             infinite: true,
@@ -1167,8 +1177,6 @@
 
         });
 
-       
-
         /**
          * Mixed
          */
@@ -1240,20 +1248,100 @@
              });
          });
          // End Feed Click Trigger
- 
-         $(".tf-travel-text h4").click(function(){
-             $(this).siblings('.tf-travel-contetn').slideToggle();
-             $(this).parents('.tf-travel-itinerary-item').siblings().find('.tf-travel-contetn').slideUp();
+
+        // Hotel and Tour Advance Search form
+
+        $(".tf_selectdate-wrap.tf_more_info_selections .tf_input-inner").click(function(){
+            $('.tf-more-info').toggleClass('show');
          });
-         $(".tf-faq-title").click(function(){
-             $(this).siblings('.tf-faq-desc').slideToggle();
-             $(this).parents('.tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
-         });
- 
-         
-         $(".tf-header-menu-triger").click(function(){
-             $('.tf-header-menu-wrap').slideToggle();
-         });
+         // Hotel Min and Max Range
+         let tf_hotel_range_options = {
+            range: { 
+                min: parseInt(tf_params.tf_hotel_min_price), 
+                max: parseInt(tf_params.tf_hotel_max_price), 
+                step: 1 
+            },
+            initialSelectedValues: { 
+                from: parseInt(tf_params.tf_hotel_min_price), 
+                to: parseInt(tf_params.tf_hotel_max_price)/2 
+            },
+            grid: false,
+            theme: "dark",
+        };
+        $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
+
+        // Tour Min and Max Range
+        let tf_tour_range_options = {
+            range: { 
+                min: parseInt(tf_params.tf_tour_min_price), 
+                max: parseInt(tf_params.tf_tour_max_price), 
+                step: 1 
+            },
+            initialSelectedValues: { 
+                from: parseInt(tf_params.tf_tour_min_price), 
+                to: parseInt(tf_params.tf_tour_max_price)/2 
+            },
+            grid: false,
+            theme: "dark",
+        };
+        $('.tf-tour-filter-range').alRangeSlider(tf_tour_range_options);
+
+        // Hotel Location
+        var availablehotellocation = tf_params.tf_hotellocationlists;
+        $("#tf-destination-adv").autocomplete({
+            source: availablehotellocation,
+            minLength: 0,
+            open: function() {
+                $(this).autocomplete("widget")
+                       .appendTo(".tf-hotel-adv-results")
+                       .css("position", "absolute");
+            }
+        });
+        $("#tf-destination-adv").on('focus', function() {
+            if ($("#tf-destination-adv").val() == '') {
+            console.log('is empty, force search with blank terms...')
+            $("#tf-destination-adv").autocomplete("search", "");
+            }
+        });
+
+        // Tour Destination
+        var availabletourslocation = tf_params.tf_tourdestinationlists;
+
+        $("#tf-tour-location-adv").autocomplete({
+            source: availabletourslocation,
+            minLength: 0,
+            open: function() {
+                $(this).autocomplete("widget")
+                       .appendTo(".tf-tour-results")
+                       .css("position", "absolute");
+            }
+        });
+
+        $("#tf-tour-location-adv").on('focus', function() {
+            if ($("#tf-tour-location-adv").val() == '') {
+            console.log('is empty, force search with blank terms...')
+            $("#tf-tour-location-adv").autocomplete("search", "");
+            }
+        });
+
+
+         // Itinerary Accordion
+         $('.tf-accordion-head').click(function(){
+            $(this).toggleClass('active');
+            $(this).parent().find('.arrow').toggleClass('arrow-animate');
+            $(this).parent().find('.tf-accordion-content').slideToggle();
+            $(this).parents('#tf-accordion-wrapper').siblings().find('.tf-accordion-content').slideUp();
+          });
+          
+
+         // FAQ Accordion
+         $('.tf-faq-title').click(function(){
+            $(this).toggleClass('active');
+            $(this).parent().find('.arrow').toggleClass('arrow-animate');
+            $(this).parent().find('.tf-faq-desc').slideToggle();
+            $(this).parents('#tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
+          });
+
 
         
     });

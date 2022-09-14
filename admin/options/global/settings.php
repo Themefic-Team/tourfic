@@ -37,7 +37,7 @@ if( class_exists( 'CSF' ) ) {
      */
     CSF::createSection( $prefix, array(
         'id'    => 'hotel', // Set a unique slug-like ID
-        'title' => __( 'Hotel Options', 'instantio' ),
+        'title' => __( 'Hotel Options', 'tourfic' ),
         'icon'  => 'fas fa-hotel',
     ) );
     
@@ -55,7 +55,7 @@ if( class_exists( 'CSF' ) ) {
      */
     CSF::createSection( $prefix, array(
         'id'    => 'tour', // Set a unique slug-like ID
-        'title' => __( 'Tour Options', 'instantio' ),
+        'title' => __( 'Tour Options', 'tourfic' ),
         'icon'  => 'fas fa-umbrella-beach',
     ) );
 
@@ -86,6 +86,17 @@ if( class_exists( 'CSF' ) ) {
         require_once TF_OPTIONS_PATH . 'global/parts/search.php';
     } else {
         tf_file_missing(TF_OPTIONS_PATH . 'global/parts/search.php');
+    }
+
+    /**
+     * Design Options
+     * 
+     * Main menu
+     */
+    if ( file_exists( TF_OPTIONS_PATH . 'global/parts/design-panel.php' ) ) {
+        require_once TF_OPTIONS_PATH . 'global/parts/design-panel.php';
+    } else {
+        tf_file_missing(TF_OPTIONS_PATH . 'global/parts/design-panel.php');
     }
 
     /**

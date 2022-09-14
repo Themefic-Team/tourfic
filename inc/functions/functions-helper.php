@@ -59,8 +59,8 @@ function tf_tour_docs_callback(){
  */
 function tourfic_notice_wrapper() {
 	?>
-	<div class="tf_container">
-		<div class="tf_notice_wrapper"></div>
+	<div class="tf-container">
+		<div class="tf-notice-wrapper"></div>
 	</div>
 	<?php
 }
@@ -212,7 +212,7 @@ function tourfic_ask_question() {
 					</div>
 					<div class="tf-aq-field">
 						<button type="reset" class="screen-reader-text"><?php esc_html_e( 'Reset', 'tourfic' ); ?></button>
-						<button type="submit" form="ask-question" class="button tf_button"><?php esc_html_e( 'Submit', 'tourfic' ); ?></button>
+						<button type="submit" form="ask-question" class="button tf_button btn-styled"><?php esc_html_e( 'Submit', 'tourfic' ); ?></button>
 						<input type="hidden" name="post_id" value="<?php esc_attr_e( get_the_ID() ); ?>">
 						<?php wp_nonce_field( 'ask_question_nonce' ); ?>
 						<div class="response"></div>
@@ -245,19 +245,15 @@ function tourfic_ask_question_ajax() {
 
 	$post_id = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : null;
 	$post_title = get_the_title( $post_id );
-
-	$author_id = get_post_field('post_author', $post_id);
-
-	$send_email_to = get_post_meta( $post_id, 'send_email_to', true ) ? get_post_meta( $post_id, 'send_email_to', true ) : null;
-
-	$email_replace = array(
-	    "{{admin_email}}" => sanitize_email( get_option( 'admin_email' ) ),
-	    "{{author_email}}" => sanitize_email( get_the_author_meta( 'user_email' , $author_id ) ),
-	);
-
-    $send_email_to = strtr($send_email_to, $email_replace);
-
-
+	if (defined( 'TF_PRO' )){
+		if( "tf_hotel" == get_post_type( $post_id ) ){
+			$send_email_to = !empty( tfopt('h-enquiry-email') ) ? sanitize_email( tfopt('h-enquiry-email') ) : sanitize_email( get_option( 'admin_email' ) );
+		}else{
+			$send_email_to = !empty( tfopt('t-enquiry-email') ) ? sanitize_email( tfopt('t-enquiry-email') ) : sanitize_email( get_option( 'admin_email' ) );
+		}
+	}else{
+		$send_email_to = sanitize_email( get_option( 'admin_email' ) );
+	}
 	$subject     = sprintf( esc_html__( 'Someone asked question on: %s', 'tourfic' ), $post_title );
 	$message     = "{$question}";
 	$headers[]   = 'Reply-To: '.$name.' <'.$email.'>';
