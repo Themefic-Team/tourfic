@@ -4,3 +4,5 @@ tourfic
 *.zip
 /tourfic
 .idea
+.gitignore
+README.md
