@@ -18,7 +18,7 @@
 
         /**
          * Hotel room availability
-         * 
+         *
          * Ajax
          */
          $(document).on('click', '#tf-single-hotel-avail .tf-submit', function(e) {
@@ -94,7 +94,7 @@
 
         /**
          * Ajax hotel booking
-         * 
+         *
          * tf_hotel_booking
          */
          $(document).on('click', '.hotel-room-book', function (e) {
@@ -127,7 +127,7 @@
                 var deposit = $("#hotel_room_depo").val();
             }
             var airport_service= $('.fancybox-slide #airport-service').val();
-            
+
             var data = {
                 action: 'tf_hotel_booking',
                 tf_room_booking_nonce: tf_room_booking_nonce,
@@ -143,7 +143,7 @@
                 deposit: deposit,
                 airport_service: airport_service
             };
-             
+
 
             $.ajax({
                 type: 'post',
@@ -198,7 +198,7 @@
 
         /**
          * Single hotel Gallery
-         * 
+         *
          * Fancybox
          */
          $('[data-fancybox="hotel-gallery"]').fancybox({
@@ -214,13 +214,13 @@
 
         /**
          * Hotel slider
-         * 
+         *
          * Slick
          */
 
         var sbp = $('.swiper-button-prev'),
             sbn = $('.swiper-button-next');
-        
+
         $('.single-slider-wrapper .tf_slider-for').slick({
             slide: '.slick-slide-item',
             slidesToShow: 1,
@@ -230,7 +230,7 @@
             dots: false,
             centerMode: false,
             variableWidth: false,
-        }); 
+        });
 
         sbp.on("click", function () {
             $(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickPrev');
@@ -242,7 +242,7 @@
 
         /**
          * Recent Hotel - Tour
-         * 
+         *
          * Slick
          */
 
@@ -278,10 +278,10 @@
                 scrollTop: $("#tour-map").offset().top - 32
             }, 1000);
         });
-        
+
         /**
          * Ajax tour booking
-         * 
+         *
          * tf_tours_booking
          */
         $(document).on('submit', 'form.tf_tours_booking', function (e) {
@@ -289,15 +289,15 @@
 
             var $this = $(this);
 
-            var formData = new FormData(this);            
+            var formData = new FormData(this);
             formData.append('action', 'tf_tours_booking');
-            
+
 
             // Tour Extra
             var tour_extra_total = 0;
             jQuery('.tour-extra-single input:checkbox:checked').each(function(){
                 tour_extra_total += isNaN(parseInt(jQuery(this).val())) ? 0 : parseInt(jQuery(this).val());
-            });     
+            });
             formData.append('tour_extra_total', tour_extra_total);
 
             var tour_extra_title = $(".tour-extra-single input:checkbox:checked").map(function () {
@@ -356,11 +356,11 @@
                 },
 
             });
-        });   
+        });
 
         /**
          * Single Tour Gallery
-         * 
+         *
          * Fancybox
          */
         $('[data-fancybox="tour-gallery"]').fancybox({
@@ -376,7 +376,7 @@
 
         /**
          * Single Tour price change
-         * 
+         *
          * adult, child, infant
          */
          $('.tf-single-tour-pricing .tf-price-tab li').click(function(){
@@ -393,15 +393,15 @@
 
         /**
          * Ajax Search Result
-         * 
+         *
          * by search form submit
-         * 
+         *
          * by feature filter
          */
-        
+
         var filter_xhr;
          // Creating a function for reuse this filter in any where we needs.
-        const makeFilter = () => { 
+        const makeFilter = () => {
             var dest = $('#tf-place').val();
             var adults = $('#adults').val();
             var room = $('#room').val();
@@ -517,18 +517,18 @@
 
         $(window).load(function () {
             // Trigger Animation
-            jQuery('[data-width]').each(function () {  
-                var $this = jQuery(this);   
+            jQuery('[data-width]').each(function () {
+                var $this = jQuery(this);
                 var width = $this.attr('data-width');
-               
+
                 $this.inViewport(function(px) {
                     if( px > 0 ) {
                         $this.css('width', +width+'%');
                     } else {
                         $this.css('width', '0%');
                     }
-                });              
-            });    
+                });
+            });
         });
 
         /**
@@ -552,7 +552,7 @@
             });
         }
 
-        
+
 
         /**
          * Share buttons
@@ -573,11 +573,11 @@
             document.execCommand("copy");
         });
 
-        
+
 
         /**
          * Related Tour
-         * 
+         *
          * Slick
          */
         $('.tf-slider-items-wrapper').slick({
@@ -618,7 +618,7 @@
 
         /**
          * Customer Reviews
-         * 
+         *
          * Slick
          */
          $('.tf-review-items-wrapper').slick({
@@ -658,8 +658,8 @@
         });
 
         /**
-         * Wishlist Functionality 
-         * 
+         * Wishlist Functionality
+         *
          */
         /* get wishlist from localstorage  */
         const wishKey = 'wishlist_item';
@@ -996,7 +996,7 @@
         $(window).scroll(function(){
             var sticky = $('.tf-tour-booking-wrap'),
                 scroll = $(window).scrollTop();
-          
+
             if (scroll >= 800) sticky.addClass('tf-tours-fixed');
             else sticky.removeClass('tf-tours-fixed');
         });
@@ -1160,7 +1160,7 @@
 
         /**
          * Change archive item
-         * 
+         *
          * Grid/List
          */
         $(document).on('click', '.change-view', function (e) {
@@ -1182,63 +1182,63 @@
          */
          var flag = false;
          var main_xhr;
- 
+
          var amPushAjax = function (url) {
              if (main_xhr && main_xhr.readyState != 4) {
                  main_xhr.abort();
              }
- 
+
              main_xhr = $.ajax({
                  url: url,
                  contentType: false, // Not to set any content header
                  processData: false, // Not to process data
                  asynch: true,
                  beforeSend: function () {
- 
+
                      $(document).find('.tf_posts_navigation').addClass('loading');
                      flag = true;
                  },
                  success: function (data) {
                      //console.log(data);
                      $('.archive_ajax_result').append($('.archive_ajax_result', data).html());
- 
+
                      $('.tf_posts_navigation').html($('.tf_posts_navigation', data).html());
- 
+
                      //document.title = $(data).filter('title').text();
- 
+
                      flag = false;
- 
+
                      $(document).find('.tf_posts_navigation').removeClass('loading');
- 
+
                  }
              });
- 
+
              //console.log(main_xhr);
          };
- 
+
          // Feed Ajax Trigger
          $(document).on('click', '.tf_posts_navigation a.next.page-numbers', function (e) {
              e.preventDefault();
- 
+
              var targetUrl = (e.target.href) ? e.target.href : $(this).context.href;
              amPushAjax(targetUrl);
              window.history.pushState({ url: "" + targetUrl + "" }, "", targetUrl);
          });
          // End Feed Ajax Trigger
- 
+
          // Feed Click Trigger
          $(window).on('scroll', function (e) {
              $('.tf_posts_navigation a.next.page-numbers').each(function (i, el) {
- 
+
                  var $this = $(this);
- 
+
                  var H = $(window).height(),
                      r = el.getBoundingClientRect(),
                      t = r.top,
                      b = r.bottom;
- 
+
                  var tAdj = parseInt(t - (H / 2));
- 
+
                  if (flag === false && (H >= tAdj)) {
                      //console.log( 'inview' );
                      $this.trigger('click');
@@ -1256,14 +1256,14 @@
          });
          // Hotel Min and Max Range
          let tf_hotel_range_options = {
-            range: { 
-                min: parseInt(tf_params.tf_hotel_min_price), 
-                max: parseInt(tf_params.tf_hotel_max_price), 
-                step: 1 
+            range: {
+                min: parseInt(tf_params.tf_hotel_min_price),
+                max: parseInt(tf_params.tf_hotel_max_price),
+                step: 1
             },
-            initialSelectedValues: { 
-                from: parseInt(tf_params.tf_hotel_min_price), 
-                to: parseInt(tf_params.tf_hotel_max_price)/2 
+            initialSelectedValues: {
+                from: parseInt(tf_params.tf_hotel_min_price),
+                to: parseInt(tf_params.tf_hotel_max_price)/2
             },
             grid: false,
             theme: "dark",
@@ -1272,14 +1272,14 @@
 
         // Tour Min and Max Range
         let tf_tour_range_options = {
-            range: { 
-                min: parseInt(tf_params.tf_tour_min_price), 
-                max: parseInt(tf_params.tf_tour_max_price), 
-                step: 1 
+            range: {
+                min: parseInt(tf_params.tf_tour_min_price),
+                max: parseInt(tf_params.tf_tour_max_price),
+                step: 1
             },
-            initialSelectedValues: { 
-                from: parseInt(tf_params.tf_tour_min_price), 
-                to: parseInt(tf_params.tf_tour_max_price)/2 
+            initialSelectedValues: {
+                from: parseInt(tf_params.tf_tour_min_price),
+                to: parseInt(tf_params.tf_tour_max_price)/2
             },
             grid: false,
             theme: "dark",
@@ -1332,7 +1332,7 @@
             $(this).parent().find('.tf-accordion-content').slideToggle();
             $(this).parents('#tf-accordion-wrapper').siblings().find('.tf-accordion-content').slideUp();
           });
-          
+
 
          // FAQ Accordion
          $('.tf-faq-title').click(function(){
@@ -1343,7 +1343,7 @@
           });
 
 
-        
+
     });
 })(jQuery, window);
 
@@ -1355,7 +1355,7 @@
     tabcontent = document.getElementsByClassName("tf-tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
-    
+
     }
     tablinks = document.getElementsByClassName("tf-tablinks");
     for (i = 0; i < tablinks.length; i++) {
@@ -1365,7 +1365,6 @@
     document.getElementById(formName).style.transition = "all 0.2s";
     evt.currentTarget.className += " active";
 }
-jQuery('#tf-hotel-booking-form').css('display','block');
 
 /**
  * Show review form on popup

@@ -899,6 +899,7 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
                 enableTime: false,
                 mode: "range",
                 dateFormat: "Y/m/d",
+                minDate: "today",
                 onReady: function(selectedDates, dateStr, instance) {
                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                 },
@@ -1031,7 +1032,7 @@ if ( !function_exists('tf_hotel_advanced_search_form_horizontal') ) {
             <div class="tf_input-inner">
                 <label class="tf_label-row" style="width: 100%;">
                     <span class="tf-label"><?php _e('More', 'tourfic'); ?></span>
-                    <span style="text-decoration: none; display: block; cursor: pointer;"><?php _e('Filter', 'tourfic'); ?>  <i class="fas fa-angle-down"></i></a>
+                    <span style="text-decoration: none; display: block; cursor: pointer;"><?php _e('Filter', 'tourfic'); ?>  <i class="fas fa-angle-down"></i></span>
                 </label>
             </div>
             <div class="tf-more-info">
@@ -1076,6 +1077,7 @@ if ( !function_exists('tf_hotel_advanced_search_form_horizontal') ) {
                 enableTime: false,
                 mode: "range",
                 dateFormat: "Y/m/d",
+                minDate: "today",
                 onReady: function(selectedDates, dateStr, instance) {
                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                 },

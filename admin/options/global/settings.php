@@ -12,7 +12,8 @@ if( class_exists( 'CSF' ) ) {
     'menu_icon'               =>   'dashicons-palmtree',
     'menu_position'           =>   25,
     'show_sub_menu'           =>   true,
-    'theme'                   =>   'dark',   
+    'theme'                   =>   'dark',
+    'ajax_save'               =>   false,
     // footer
     'footer_text'             => '<a class="document-button" href="https://themefic.com/docs/tourfic/" target="_blank">Documentation</a>',
     'footer_credit'           =>   __( '<em>Enjoyed <strong>Tourfic</strong>? Please leave us a <a style="color:#e9570a;" href="https://wordpress.org/support/plugin/tourfic/reviews/?filter=5/#new-post" target="_blank">★★★★★</a> rating. We really appreciate your support!</em>', 'tourfic' ),  
