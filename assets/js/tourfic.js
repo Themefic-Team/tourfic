@@ -1048,48 +1048,52 @@
 
         // Adults change trigger
         $(document).on('change', '#adults', function () {
-            var thisVal = $(this).val();
+            let thisEml = $(this);
+            let thisVal = thisEml.val();
 
             if (thisVal > 1) {
-                $('.adults-text').text(thisVal + " " + tf_params.adult);
+                thisEml.closest('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult);
             } else {
-                $('.adults-text').text(thisVal + " " + tf_params.adult);
+                thisEml.closest('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult);
             }
 
         });
 
         // Children change trigger
         $(document).on('change', '#children', function () {
-            var thisVal = $(this).val();
+            let thisEml = $(this);
+            let thisVal = thisEml.val();
 
             if (thisVal > 1) {
-                $('.child-text').text(thisVal + " " + tf_params.children);
+                thisEml.closest('.tf_selectperson-wrap').find('.child-text').text(thisVal + " " + tf_params.children);
             } else {
-                $('.child-text').text(thisVal + " " + tf_params.children);
+                thisEml.closest('.tf_selectperson-wrap').find('.child-text').text(thisVal + " " + tf_params.children);
             }
 
         });
 
         // Infant change trigger
         $(document).on('change', '#infant', function () {
-            var thisVal = $(this).val();
+            let thisEml = $(this);
+            let thisVal = thisEml.val();
 
             if (thisVal > 1) {
-                $('.infant-text').text(thisVal + " " + tf_params.infant);
+                thisEml.closest('.tf_selectperson-wrap').find('.infant-text').text(thisVal + " " + tf_params.infant);
             } else {
-                $('.infant-text').text(thisVal + " " + tf_params.infant);
+                thisEml.closest('.tf_selectperson-wrap').find('.infant-text').text(thisVal + " " + tf_params.infant);
             }
 
         });
 
         // Room change trigger
         $(document).on('change', '#room', function () {
-            var thisVal = $(this).val();
+            let thisEml = $(this);
+            let thisVal = thisEml.val();
 
             if (thisVal > 1) {
-                $('.room-text').text(thisVal + " " + tf_params.room);
+                thisEml.closest('.tf_selectperson-wrap').find('.room-text').text(thisVal + " " + tf_params.room);
             } else {
-                $('.room-text').text(thisVal + " " + tf_params.room);
+                thisEml.closest('.tf_selectperson-wrap').find('.room-text').text(thisVal + " " + tf_params.room);
             }
         });
 

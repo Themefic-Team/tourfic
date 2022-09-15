@@ -56,9 +56,6 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         if ( get_post_type() == 'tf_tours' ){
             wp_enqueue_style( 'tf-tour-style', TF_ASSETS_URL . 'css/tour' . $min_css . '.css', null, '' );
         }
-        if ( get_post_type() == 'tf_apartment' ){
-            wp_enqueue_style( 'tf-apartment-style', TF_ASSETS_URL . 'css/apartment' . '.css', null, '' );
-        }
         wp_enqueue_style( 'tf-search-style', TF_ASSETS_URL . 'css/search-result.css', null, '' );
         wp_enqueue_style( 'tf-shortcode-style', TF_ASSETS_URL . 'css/shortcode.css', null, '' );
 
