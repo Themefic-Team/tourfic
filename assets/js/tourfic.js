@@ -21,13 +21,13 @@
          *
          * Ajax
          */
-         $(document).on('click', '#tf-single-hotel-avail .tf-submit', function(e) {
+        $(document).on('click', '#tf-single-hotel-avail .tf-submit', function (e) {
             e.preventDefault();
 
-            if($.trim($('input[name=check-in-out-date]').val()) == ''){
+            if ($.trim($('input[name=check-in-out-date]').val()) == '') {
 
-                if( $('#tf-required').length === 0 ) {
-                    $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" clss="required"><b>'+tf_params.field_required+'</b></span>');
+                if ($('#tf-required').length === 0) {
+                    $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" clss="required"><b>' + tf_params.field_required + '</b></span>');
                 }
                 return;
             }
@@ -84,7 +84,7 @@
         /**
          * Click to go back to hotel availability form
          */
-         $(document).on('click', '.hotel-room-availability', function(e) {
+        $(document).on('click', '.hotel-room-availability', function (e) {
             e.preventDefault();
 
             $('html, body').animate({
@@ -97,21 +97,21 @@
          *
          * tf_hotel_booking
          */
-         $(document).on('click', '.hotel-room-book', function (e) {
+        $(document).on('click', '.hotel-room-book', function (e) {
             e.preventDefault();
 
             var $this = $(this);
 
             var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
             var post_id = $('input[name=post_id]').val();
-            if($(this).closest('.room-submit-wrap').find('input[name=room_id]').val()){
+            if ($(this).closest('.room-submit-wrap').find('input[name=room_id]').val()) {
                 var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
-            }else{
+            } else {
                 var room_id = $("#hotel_roomid").val();
             }
-            if($(this).closest('.room-submit-wrap').find('input[name=unique_id]').val()){
+            if ($(this).closest('.room-submit-wrap').find('input[name=unique_id]').val()) {
                 var unique_id = $(this).closest('.room-submit-wrap').find('input[name=unique_id]').val();
-            }else{
+            } else {
                 var unique_id = $("#hotel_room_uniqueid").val();
             }
             var location = $('input[name=place]').val();
@@ -119,14 +119,14 @@
             var child = $('input[name=child]').val();
             var check_in_date = $('input[name=check_in_date]').val();
             var check_out_date = $('input[name=check_out_date]').val();
-            if($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()){
+            if ($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()) {
                 var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
                 var deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
-            }else{
+            } else {
                 var room = $("#hotel_room_number").val();
                 var deposit = $("#hotel_room_depo").val();
             }
-            var airport_service= $('.fancybox-slide #airport-service').val();
+            var airport_service = $('.fancybox-slide #airport-service').val();
 
             var data = {
                 action: 'tf_hotel_booking',
@@ -201,7 +201,7 @@
          *
          * Fancybox
          */
-         $('[data-fancybox="hotel-gallery"]').fancybox({
+        $('[data-fancybox="hotel-gallery"]').fancybox({
             loop: true,
             buttons: [
                 "zoom",
@@ -247,7 +247,6 @@
          */
 
 
-
         /**
          * Scroll to room reserve table
          */
@@ -261,10 +260,10 @@
         //         Tour                 #
         //###############################
 
-         /**
+        /**
          * Scroll to Tour Review Section
          */
-          $(".tf-top-review a").click(function () {
+        $(".tf-top-review a").click(function () {
             $('html, body').animate({
                 scrollTop: $("#tf-review").offset().top - 32
             }, 1000);
@@ -273,7 +272,7 @@
         /**
          * Scroll to Map Section
          */
-         $(".tf-map-link a").click(function () {
+        $(".tf-map-link a").click(function () {
             $('html, body').animate({
                 scrollTop: $("#tour-map").offset().top - 32
             }, 1000);
@@ -295,7 +294,7 @@
 
             // Tour Extra
             var tour_extra_total = 0;
-            jQuery('.tour-extra-single input:checkbox:checked').each(function(){
+            jQuery('.tour-extra-single input:checkbox:checked').each(function () {
                 tour_extra_total += isNaN(parseInt(jQuery(this).val())) ? 0 : parseInt(jQuery(this).val());
             });
             formData.append('tour_extra_total', tour_extra_total);
@@ -379,12 +378,12 @@
          *
          * adult, child, infant
          */
-         $('.tf-single-tour-pricing .tf-price-tab li').click(function(){
+        $('.tf-single-tour-pricing .tf-price-tab li').click(function () {
             var t = $(this).attr('id');
 
             $(this).addClass('active').siblings().removeClass('active');
             $('.tf-price').addClass('tf-d-n');
-            $('.'+ t + '-price').removeClass('tf-d-n');
+            $('.' + t + '-price').removeClass('tf-d-n');
         });
 
         //###############################
@@ -400,7 +399,7 @@
          */
 
         var filter_xhr;
-         // Creating a function for reuse this filter in any where we needs.
+        // Creating a function for reuse this filter in any where we needs.
         const makeFilter = () => {
             var dest = $('#tf-place').val();
             var adults = $('#adults').val();
@@ -445,10 +444,10 @@
             formData.append('filters', filters);
             formData.append('features', features);
             formData.append('checked', checked);
-            if(startprice){
+            if (startprice) {
                 formData.append('startprice', startprice);
             }
-            if(endprice){
+            if (endprice) {
                 formData.append('endprice', endprice);
             }
             // abort previous request
@@ -510,7 +509,9 @@
                     var H = $(this).height(),
                         r = el.getBoundingClientRect(), t = r.top, b = r.bottom;
                     return cb.call(el, Math.max(0, t > 0 ? H - t : (b < H ? b : H)));
-                } visPx();
+                }
+
+                visPx();
                 $(win).on("resize scroll", visPx);
             });
         };
@@ -521,9 +522,9 @@
                 var $this = jQuery(this);
                 var width = $this.attr('data-width');
 
-                $this.inViewport(function(px) {
-                    if( px > 0 ) {
-                        $this.css('width', +width+'%');
+                $this.inViewport(function (px) {
+                    if (px > 0) {
+                        $this.css('width', +width + '%');
                     } else {
                         $this.css('width', '0%');
                     }
@@ -537,21 +538,21 @@
         function fullwidthInit(selector) {
             function fullWidth(selector) {
                 $(selector).each(function () {
-                    $(this).width("100%").css({ marginLeft: "-0px" });
+                    $(this).width("100%").css({marginLeft: "-0px"});
 
                     var window_width = $(window).width();
 
                     var left_margin = "-" + $(this).offset().left + "px";
 
-                    $(this).width(window_width).css({ marginLeft: left_margin });
+                    $(this).width(window_width).css({marginLeft: left_margin});
                     console.log("Width:", window_width, "Margin Left:", left_margin);
                 });
             }
+
             $(window).on("resize load", function () {
                 fullWidth(selector);
             });
         }
-
 
 
         /**
@@ -568,11 +569,12 @@
         $('button#share_link_button').click(function () {
 
             $(this).addClass('copied');
-            setTimeout(function () { $('button#share_link_button').removeClass('copied'); }, 3000);
+            setTimeout(function () {
+                $('button#share_link_button').removeClass('copied');
+            }, 3000);
             $(this).parent().find("#share_link_input").select();
             document.execCommand("copy");
         });
-
 
 
         /**
@@ -621,7 +623,7 @@
          *
          * Slick
          */
-         $('.tf-review-items-wrapper').slick({
+        $('.tf-review-items-wrapper').slick({
             dots: true,
             arrows: false,
             infinite: true,
@@ -679,7 +681,8 @@
                 // save list
                 localStorage.setItem(wishKey, JSON.stringify(userLists));
                 return true;
-            } return false;
+            }
+            return false;
         }
         /* get all wishlist items */
         const getAllWish = () => {
@@ -816,7 +819,7 @@
             if ($('body').hasClass('logged-in')) {
                 let tableNode = targetNode.closest('table');
                 let type = tableNode.data('type');
-                let data = { id, action: 'tf_remove_wishlist', type, nonce: targetNode.data('nonce') }
+                let data = {id, action: 'tf_remove_wishlist', type, nonce: targetNode.data('nonce')}
                 $.get(tf_params.ajax_url, data,
                     function (data) {
                         if (data.success) {
@@ -836,7 +839,8 @@
                     notyf.success(tf_params.wishlist_removed);
                 } else {
                     notyf.error(tf_params.wishlist_remove_error);
-                };
+                }
+                ;
             }
 
         });
@@ -860,7 +864,9 @@
                 var a, b, i, val = this.value;
                 /*close any already open lists of autocompleted values*/
                 closeAllLists();
-                if (!val) { return false; }
+                if (!val) {
+                    return false;
+                }
                 currentFocus = -1;
                 /*create a DIV element that will contain the items (values):*/
                 a = document.createElement("DIV");
@@ -941,6 +947,7 @@
                     }
                 }
             });
+
             function addActive(x) {
                 /*a function to classify an item as "active":*/
                 if (!x) return false;
@@ -951,12 +958,14 @@
                 /*add class "autocomplete-active":*/
                 x[currentFocus].classList.add("autocomplete-active");
             }
+
             function removeActive(x) {
                 /*a function to remove the "active" class from all autocomplete items:*/
                 for (var i = 0; i < x.length; i++) {
                     x[i].classList.remove("autocomplete-active");
                 }
             }
+
             function closeAllLists(elmnt) {
                 /*close all autocomplete lists in the document,
                 except the one passed as an argument:*/
@@ -967,6 +976,7 @@
                     }
                 }
             }
+
             /*execute a function when someone clicks in the document:*/
             document.addEventListener("click", function (e) {
                 closeAllLists(e.target);
@@ -977,23 +987,23 @@
          * Initiate autocomplete on inputs
          */
 
-        // Hotel location autocomplete
+            // Hotel location autocomplete
         var hotel_location_input = document.getElementById("tf-location");
         var hotel_locations = tf_params.locations;
-        if(hotel_location_input){
+        if (hotel_location_input) {
             tourfic_autocomplete(hotel_location_input, hotel_locations);
         }
         // Tour destination autocomplete
         var tour_destination_input = document.getElementById("tf-destination");
         var tour_destinations = tf_params.tour_destinations;
-        if(tour_destination_input){
+        if (tour_destination_input) {
             tourfic_autocomplete(tour_destination_input, tour_destinations);
         }
 
         /**
          * Single tour sticky booking bar position fixed
          */
-        $(window).scroll(function(){
+        $(window).scroll(function () {
             var sticky = $('.tf-tour-booking-wrap'),
                 scroll = $(window).scrollTop();
 
@@ -1180,82 +1190,82 @@
         /**
          * Mixed
          */
-         var flag = false;
-         var main_xhr;
+        var flag = false;
+        var main_xhr;
 
-         var amPushAjax = function (url) {
-             if (main_xhr && main_xhr.readyState != 4) {
-                 main_xhr.abort();
-             }
+        var amPushAjax = function (url) {
+            if (main_xhr && main_xhr.readyState != 4) {
+                main_xhr.abort();
+            }
 
-             main_xhr = $.ajax({
-                 url: url,
-                 contentType: false, // Not to set any content header
-                 processData: false, // Not to process data
-                 asynch: true,
-                 beforeSend: function () {
+            main_xhr = $.ajax({
+                url: url,
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                asynch: true,
+                beforeSend: function () {
 
-                     $(document).find('.tf_posts_navigation').addClass('loading');
-                     flag = true;
-                 },
-                 success: function (data) {
-                     //console.log(data);
-                     $('.archive_ajax_result').append($('.archive_ajax_result', data).html());
+                    $(document).find('.tf_posts_navigation').addClass('loading');
+                    flag = true;
+                },
+                success: function (data) {
+                    //console.log(data);
+                    $('.archive_ajax_result').append($('.archive_ajax_result', data).html());
 
-                     $('.tf_posts_navigation').html($('.tf_posts_navigation', data).html());
+                    $('.tf_posts_navigation').html($('.tf_posts_navigation', data).html());
 
-                     //document.title = $(data).filter('title').text();
+                    //document.title = $(data).filter('title').text();
 
-                     flag = false;
+                    flag = false;
 
-                     $(document).find('.tf_posts_navigation').removeClass('loading');
+                    $(document).find('.tf_posts_navigation').removeClass('loading');
 
-                 }
-             });
+                }
+            });
 
-             //console.log(main_xhr);
-         };
+            //console.log(main_xhr);
+        };
 
-         // Feed Ajax Trigger
-         $(document).on('click', '.tf_posts_navigation a.next.page-numbers', function (e) {
-             e.preventDefault();
+        // Feed Ajax Trigger
+        $(document).on('click', '.tf_posts_navigation a.next.page-numbers', function (e) {
+            e.preventDefault();
 
-             var targetUrl = (e.target.href) ? e.target.href : $(this).context.href;
-             amPushAjax(targetUrl);
-             window.history.pushState({ url: "" + targetUrl + "" }, "", targetUrl);
-         });
-         // End Feed Ajax Trigger
+            var targetUrl = (e.target.href) ? e.target.href : $(this).context.href;
+            amPushAjax(targetUrl);
+            window.history.pushState({url: "" + targetUrl + ""}, "", targetUrl);
+        });
+        // End Feed Ajax Trigger
 
-         // Feed Click Trigger
-         $(window).on('scroll', function (e) {
-             $('.tf_posts_navigation a.next.page-numbers').each(function (i, el) {
+        // Feed Click Trigger
+        $(window).on('scroll', function (e) {
+            $('.tf_posts_navigation a.next.page-numbers').each(function (i, el) {
 
-                 var $this = $(this);
+                var $this = $(this);
 
-                 var H = $(window).height(),
-                     r = el.getBoundingClientRect(),
-                     t = r.top,
-                     b = r.bottom;
+                var H = $(window).height(),
+                    r = el.getBoundingClientRect(),
+                    t = r.top,
+                    b = r.bottom;
 
-                 var tAdj = parseInt(t - (H / 2));
+                var tAdj = parseInt(t - (H / 2));
 
-                 if (flag === false && (H >= tAdj)) {
-                     //console.log( 'inview' );
-                     $this.trigger('click');
-                 } else {
-                     //console.log( 'outview' );
-                 }
-             });
-         });
-         // End Feed Click Trigger
+                if (flag === false && (H >= tAdj)) {
+                    //console.log( 'inview' );
+                    $this.trigger('click');
+                } else {
+                    //console.log( 'outview' );
+                }
+            });
+        });
+        // End Feed Click Trigger
 
         // Hotel and Tour Advance Search form
 
-        $(".tf_selectdate-wrap.tf_more_info_selections .tf_input-inner").click(function(){
+        $(".tf_selectdate-wrap.tf_more_info_selections .tf_input-inner").click(function () {
             $('.tf-more-info').toggleClass('show');
-         });
-         // Hotel Min and Max Range
-         let tf_hotel_range_options = {
+        });
+        // Hotel Min and Max Range
+        let tf_hotel_range_options = {
             range: {
                 min: parseInt(tf_params.tf_hotel_min_price),
                 max: parseInt(tf_params.tf_hotel_max_price),
@@ -1263,7 +1273,7 @@
             },
             initialSelectedValues: {
                 from: parseInt(tf_params.tf_hotel_min_price),
-                to: parseInt(tf_params.tf_hotel_max_price)/2
+                to: parseInt(tf_params.tf_hotel_max_price) / 2
             },
             grid: false,
             theme: "dark",
@@ -1279,7 +1289,7 @@
             },
             initialSelectedValues: {
                 from: parseInt(tf_params.tf_tour_min_price),
-                to: parseInt(tf_params.tf_tour_max_price)/2
+                to: parseInt(tf_params.tf_tour_max_price) / 2
             },
             grid: false,
             theme: "dark",
@@ -1291,16 +1301,16 @@
         $("#tf-destination-adv").autocomplete({
             source: availablehotellocation,
             minLength: 0,
-            open: function() {
+            open: function () {
                 $(this).autocomplete("widget")
-                       .appendTo(".tf-hotel-adv-results")
-                       .css("position", "absolute");
+                    .appendTo(".tf-hotel-adv-results")
+                    .css("position", "absolute");
             }
         });
-        $("#tf-destination-adv").on('focus', function() {
+        $("#tf-destination-adv").on('focus', function () {
             if ($("#tf-destination-adv").val() == '') {
-            console.log('is empty, force search with blank terms...')
-            $("#tf-destination-adv").autocomplete("search", "");
+                console.log('is empty, force search with blank terms...')
+                $("#tf-destination-adv").autocomplete("search", "");
             }
         });
 
@@ -1310,60 +1320,62 @@
         $("#tf-tour-location-adv").autocomplete({
             source: availabletourslocation,
             minLength: 0,
-            open: function() {
+            open: function () {
                 $(this).autocomplete("widget")
-                       .appendTo(".tf-tour-results")
-                       .css("position", "absolute");
+                    .appendTo(".tf-tour-results")
+                    .css("position", "absolute");
             }
         });
 
-        $("#tf-tour-location-adv").on('focus', function() {
+        $("#tf-tour-location-adv").on('focus', function () {
             if ($("#tf-tour-location-adv").val() == '') {
-            console.log('is empty, force search with blank terms...')
-            $("#tf-tour-location-adv").autocomplete("search", "");
+                console.log('is empty, force search with blank terms...')
+                $("#tf-tour-location-adv").autocomplete("search", "");
             }
         });
 
 
-         // Itinerary Accordion
-         $('.tf-accordion-head').click(function(){
+        // Itinerary Accordion
+        $('.tf-accordion-head').click(function () {
             $(this).toggleClass('active');
             $(this).parent().find('.arrow').toggleClass('arrow-animate');
             $(this).parent().find('.tf-accordion-content').slideToggle();
             $(this).parents('#tf-accordion-wrapper').siblings().find('.tf-accordion-content').slideUp();
-          });
+        });
 
 
-         // FAQ Accordion
-         $('.tf-faq-title').click(function(){
+        // FAQ Accordion
+        $('.tf-faq-title').click(function () {
             $(this).toggleClass('active');
             $(this).parent().find('.arrow').toggleClass('arrow-animate');
             $(this).parent().find('.tf-faq-desc').slideToggle();
             $(this).parents('#tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
-          });
+        });
 
-
-
+        $(window).on('load', function () {
+            if($('.tf-tablinks').length > 0){
+                $('.tf-tablinks').first().trigger('click').addClass('active');
+            }
+        })
     });
 })(jQuery, window);
 
 /**
  * Horizontal Search Form Tab Control
  */
- function tfOpenForm(evt, formName) {
+function tfOpenForm(evt, formName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tf-tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-
+        tabcontent[i].style.display = "none";
     }
     tablinks = document.getElementsByClassName("tf-tablinks");
     for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     document.getElementById(formName).style.display = "block";
     document.getElementById(formName).style.transition = "all 0.2s";
-    evt.currentTarget.className += " active";
+    evt.target.className += " active";
 }
 
 /**

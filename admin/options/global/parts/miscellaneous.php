@@ -374,4 +374,59 @@ CSF::createSection( $prefix, array(
     )
     
 ) );
-?>
+
+/**
+ * Affiliate Settings
+ *
+ * Sub Menu
+ */
+CSF::createSection( $prefix, array(
+	'parent' => 'miscellaneous',
+	'title'  => __( 'Affiliate', 'tourfic' ),
+	'icon'   => 'fa fa-handshake-o',
+	'fields' => array(
+
+		array(
+			'type'    => 'subheading',
+			'content' => __( 'Affiliate Settings', 'tourfic' ),
+		),
+
+		array(
+			'id'         => 'affiliate-tabs',
+			'type'       => 'tabbed',
+			'class'    => 'tf-csf-disable tf-csf-pro',
+			'desc'   => __( $badge_pro, 'tourfic' ),
+			'attributes' => array(
+				'style' => 'flex-wrap: wrap;',
+			),
+			'tabs'       => array(
+				array(
+					'title'  => 'Booking.com',
+					'fields' => array(
+						array(
+							'id'       => 'enable-booking-dot-com',
+							'type'     => 'switcher',
+							'title'    => 'Enable Booking.com?',
+							'text_on'  => 'Yes',
+							'text_off' => 'No',
+							'default'  => true
+						),
+					)
+				),
+				array(
+					'title'  => 'TravelPayouts',
+					'fields' => array(
+						array(
+							'id'       => 'enable-travel-payouts',
+							'type'     => 'switcher',
+							'title'    => 'Enable TravelPayouts?',
+							'text_on'  => 'Yes',
+							'text_off' => 'No',
+							'default'  => true
+						),
+					)
+				),
+			)
+		),
+	)
+) );
