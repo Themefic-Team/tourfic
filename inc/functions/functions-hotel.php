@@ -548,6 +548,7 @@ function tf_room_availability_callback() {
                 if ( !empty( $rooms ) ) {
                     ob_start();
                     foreach ( $rooms as $room_id => $room ) {
+                        
                         // Check if room is enabled
                         $enable = !empty($room['enable']) && boolval($room['enable']);
 
@@ -682,7 +683,9 @@ function tf_room_availability_callback() {
                                         return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
 
                                     } ) );
-
+                                    echo "<pre>";
+                                    var_dump($available_rooms);
+                                    echo "</pre>";
                                     if ( is_iterable($available_rooms) && count( $available_rooms ) >=1) {
                                         
                                         $room_price    = !empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $room_price;
@@ -768,7 +771,7 @@ function tf_room_availability_callback() {
 }
 
 
-                #################################
+#################################
 # All the forms                 #
 # Search form, booking form     #
 #################################
