@@ -345,7 +345,6 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 			<?php do_action( 'tf_after_booking_form_tab', $type ) ?>
         </div>
 
-
         <!-- Booking Form tabs mobile version -->
         <div class="tf-booking-form-tab-mobile">
             <select name="tf-booking-form-tab-select" id="">
