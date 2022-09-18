@@ -1179,9 +1179,15 @@ function tf_room_availability_callback() {
                                     }
                                 }   
                                 
-                                # Calculate available room number after order
-                                $num_room_available = $num_room_available - $number_orders; // Calculate
-                                $num_room_available = max($num_room_available, 0); // If negetive value make that 0
+                                if(!empty($num_room_available)){
+                                    # Calculate available room number after order
+                                    $num_room_available = $num_room_available - $number_orders; // Calculate
+                                    $num_room_available = max($num_room_available, 0); // If negetive value make that 0
+                                }else{
+                                    $num_room_available = !empty($room['num-room']) ? $room['num-room'] : 1;
+                                    $num_room_available = $num_room_available - $number_orders; // Calculate
+                                    $num_room_available = max($num_room_available, 0); 
+                                }
 
                             }
 
