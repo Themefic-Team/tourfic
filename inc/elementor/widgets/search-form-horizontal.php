@@ -56,6 +56,22 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 		return [ 'tourfic' ];
 	}
 
+	public function tf_search_types() {
+		$types = array(
+			'all'   => __( 'All', 'tourfic' ),
+			'hotel' => __( 'Hotel', 'tourfic' ),
+			'tour'  => __( 'Tour', 'tourfic' ),
+		);
+
+		if ( defined( 'TF_PRO' ) ) {
+			$types['booking']   = __( 'Booking.com', 'tourfic' );
+			$types['tp-flight'] = __( 'TravelPayouts Flight', 'tourfic' );
+			$types['tp-hotel']  = __( 'TravelPayouts Hotel', 'tourfic' );
+		}
+
+		return $types;
+	}
+
 	/**
 	 * Register the widget controls.
 	 *
@@ -99,14 +115,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 				'type'     => \Elementor\Controls_Manager::SELECT2,
 				'label'    => esc_html__( 'Type', 'tourfic' ),
 				'multiple' => true,
-				'options'  => [
-					'all'       => esc_html__( 'All', 'tourfic' ),
-					'hotel'     => esc_html__( 'Hotel', 'tourfic' ),
-					'tour'      => esc_html__( 'Tour', 'tourfic' ),
-					'booking'   => esc_html__( 'Booking.com', 'tourfic' ),
-					'tp-flight' => esc_html__( 'TravelPayouts Flight', 'tourfic' ),
-					'tp-hotel'  => esc_html__( 'TravelPayouts Hotel', 'tourfic' ),
-				],
+				'options'  => $this->tf_search_types(),
 				'default'  => [ 'all' ],
 			]
 		);
@@ -203,8 +212,8 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 		$settings           = $this->get_settings_for_display();
 		$tf_search_title    = $settings['tf_search_title'];
 		$tf_search_subtitle = $settings['tf_search_subtitle'];
-		$type               = $settings['type'] ? implode( ',', $settings['type'] ) : implode( ',', ['all'] );
-		$full_width = $settings['full-width'];
+		$type               = $settings['type'] ? implode( ',', $settings['type'] ) : implode( ',', [ 'all' ] );
+		$full_width         = $settings['full-width'];
 
 		echo do_shortcode( '[tf_search_form title="' . $tf_search_title . '" subtitle="' . $tf_search_subtitle . '" type="' . $type . '" fullwidth="' . $full_width . '"]' );
 
