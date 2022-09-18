@@ -64,58 +64,62 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 	 * @access protected
 	 */
 	protected function register_controls() {
-        
-        
+
+
 		$this->start_controls_section(
 			'tf_search_content_section',
 			[
 				'label' => __( 'Content', 'tourfic' ),
-				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+				'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
-        
-        $this->add_control(
+
+		$this->add_control(
 			'tf_search_title',
 			[
 				'label' => __( 'Title', 'tourfic' ),
-				'type' => \Elementor\Controls_Manager::TEXTAREA,
-				'rows' => 1,
+				'type'  => \Elementor\Controls_Manager::TEXTAREA,
+				'rows'  => 1,
 			]
-		);        
+		);
 
 
 		$this->add_control(
 			'tf_search_subtitle',
 			[
 				'label' => __( 'Subtitle', 'tourfic' ),
-				'type' => \Elementor\Controls_Manager::TEXTAREA,
-				'rows' => 2,
+				'type'  => \Elementor\Controls_Manager::TEXTAREA,
+				'rows'  => 2,
 			]
 		);
-		
+
 		$this->add_control(
 			'type',
 			[
-				'type' => \Elementor\Controls_Manager::SELECT,
-				'label' => esc_html__( 'Type', 'tourfic' ),
-				'options' => [
-					'all' => esc_html__( 'All', 'tourfic' ),
-					'hotel' => esc_html__( 'Hotel', 'tourfic' ),
-					'tour' => esc_html__( 'Tour', 'tourfic' ),					
+				'type'     => \Elementor\Controls_Manager::SELECT2,
+				'label'    => esc_html__( 'Type', 'tourfic' ),
+				'multiple' => true,
+				'options'  => [
+					'all'       => esc_html__( 'All', 'tourfic' ),
+					'hotel'     => esc_html__( 'Hotel', 'tourfic' ),
+					'tour'      => esc_html__( 'Tour', 'tourfic' ),
+					'booking'   => esc_html__( 'Booking.com', 'tourfic' ),
+					'tp-flight' => esc_html__( 'TravelPayouts Flight', 'tourfic' ),
+					'tp-hotel'  => esc_html__( 'TravelPayouts Hotel', 'tourfic' ),
 				],
-				'default' => 'all',
+				'default'  => [ 'all' ],
 			]
 		);
 
 		$this->add_control(
 			'full-width',
 			[
-				'label' => esc_html__( 'Full Width', 'tourfic' ),
-				'type' => \Elementor\Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'Yes', 'tourfic' ),
-				'label_off' => esc_html__( 'No', 'tourfic' ),
+				'label'        => esc_html__( 'Full Width', 'tourfic' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'tourfic' ),
+				'label_off'    => esc_html__( 'No', 'tourfic' ),
 				'return_value' => true,
-				'default' => false,
+				'default'      => false,
 			]
 		);
 
@@ -126,25 +130,25 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			'tf_search_style_section',
 			[
 				'label' => __( 'Style', 'tourfic' ),
-				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'title_typography',
-				'label' => __( 'Title Typography', 'tourfic' ),
+				'name'     => 'title_typography',
+				'label'    => __( 'Title Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .tf_widget-title h2',
 			]
 		);
 		$this->add_control(
 			'tf_search_title_color',
 			[
-				'label' => __( 'Title Color', 'tourfic' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
+				'label'     => __( 'Title Color', 'tourfic' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'scheme'    => [
+					'type'  => \Elementor\Core\Schemes\Color::get_type(),
 					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
 				],
 				'selectors' => [
@@ -163,8 +167,8 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'subtitle_typography',
-				'label' => __( 'Subtitle Typography', 'tourfic' ),
+				'name'     => 'subtitle_typography',
+				'label'    => __( 'Subtitle Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .tf_widget-subtitle',
 			]
 		);
@@ -172,10 +176,10 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 		$this->add_control(
 			'tf_search_subtitle_color',
 			[
-				'label' => __( 'Subtitle Color', 'tourfic' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
+				'label'     => __( 'Subtitle Color', 'tourfic' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'scheme'    => [
+					'type'  => \Elementor\Core\Schemes\Color::get_type(),
 					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
 				],
 				'selectors' => [
@@ -196,13 +200,13 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$settings = $this->get_settings_for_display();
-        $tf_search_title = $settings['tf_search_title'];
-        $tf_search_subtitle = $settings['tf_search_subtitle'];
-		$type = $settings['type'];
+		$settings           = $this->get_settings_for_display();
+		$tf_search_title    = $settings['tf_search_title'];
+		$tf_search_subtitle = $settings['tf_search_subtitle'];
+		$type               = $settings['type'] ? implode( ',', $settings['type'] ) : implode( ',', ['all'] );
 		$full_width = $settings['full-width'];
-      
-        echo do_shortcode('[tf_search_form title="'.$tf_search_title.'" subtitle="'.$tf_search_subtitle.'" type="'.$type.'" fullwidth="'.$full_width.'"]');
+
+		echo do_shortcode( '[tf_search_form title="' . $tf_search_title . '" subtitle="' . $tf_search_subtitle . '" type="' . $type . '" fullwidth="' . $full_width . '"]' );
 
 	}
 
