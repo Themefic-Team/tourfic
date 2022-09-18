@@ -1372,7 +1372,6 @@
         */
         $(document).on('change', 'select[name="tf-booking-form-tab-select"]', function(){
             var tabId = $(this).val();
-            console.log(tabId)
             tfOpenForm(event, tabId);
         });
     });

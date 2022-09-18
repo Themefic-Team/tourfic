@@ -1009,4 +1009,29 @@ function tf_migrate_data() {
     
 }
 add_action( 'init', 'tf_migrate_data' );
-?>
+
+/*
+ * Search form tab type check
+ * @author: Foysal
+ * return: boolean
+ */
+function tf_is_search_form_tab_type($type, $type_arr) {
+	if ( in_array( $type, $type_arr ) || in_array( 'all', $type_arr ) ) {
+		return true;
+	}
+
+	return false;
+}
+
+/*
+ * Search form tab type check
+ * @author: Foysal
+ * return: boolean
+ */
+function tf_is_search_form_single_tab($type_arr) {
+	if(count($type_arr) === 1 && $type_arr[0] !== 'all') {
+		return true;
+	}
+
+	return false;
+}
