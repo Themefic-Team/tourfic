@@ -548,7 +548,6 @@ function tf_room_availability_callback() {
                 if ( !empty( $rooms ) ) {
                     ob_start();
                     foreach ( $rooms as $room_id => $room ) {
-                        
                         // Check if room is enabled
                         $enable = !empty($room['enable']) && boolval($room['enable']);
 
@@ -566,7 +565,31 @@ function tf_room_availability_callback() {
                             $room_adult_price = !empty( $room['adult_price'] ) ? $room['adult_price'] : 0;
                             $room_child_price = !empty( $room['child_price'] ) ? $room['child_price'] : 0;
                             $total_person     = $adult_number + $child_number;
-                            $price            = $pricing_by == '1' ? $room_price : $room_adult_price + $room_child_price;
+
+                            //pricing package
+                            $package_enabled = !empty( $room['enable_pricing_package']) ? $room['enable_pricing_package'] : 0;
+                            if( $package_enabled ){
+                           
+                                $packages = !empty( $room['pricing_packages'] ) ? $room['pricing_packages'] : array();
+                                foreach( $packages as $key => $package ){
+
+                                    $adult = $package['adult'];
+                                    $child = $package['child'];
+                                    //echo "<pre>";
+                                    //var_dump($adult,$child,$form_adult);
+                                    if( $form_adult == $adult && $form_child == $child ){                                    
+                                        $price = $package['price'];
+                                        var_dump($price);
+                                    }else{
+                                        $price  = $pricing_by == '1' ? $room_price : $room_adult_price + $room_child_price;
+                                    }
+                                    
+                                }
+                            }else{
+                                $price  = $pricing_by == '1' ? $room_price : $room_adult_price + $room_child_price;
+                            }   
+
+
                             $form_check_out = $form_end;
 
                             // Check availability by date option

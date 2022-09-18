@@ -87,7 +87,7 @@
                     <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
                 </div>
                 <div class="tf-top">
-                    <?php _e( 'No. Adults', 'tourfic' );?>
+                    <?php _e( 'No. of Adults', 'tourfic' );?>
                     <i class="tool-i"></i>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                     <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                 </div>
                 <div class="tf-top">
-                    <?php _e( 'No. Children', 'tourfic' );?>
+                    <?php _e( 'No. of Children', 'tourfic' );?>
                     <i class="tool-i"></i>
                 </div>
             </div>
