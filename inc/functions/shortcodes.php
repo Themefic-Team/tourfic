@@ -334,15 +334,31 @@ function tf_search_form_shortcode( $atts, $content = null ) {
         <div class="tf-booking-form-tab">
 			<?php do_action( 'tf_before_booking_form_tab', $type ) ?>
 
-			<?php if ( ! in_array( 'hotel', $disable_services ) && in_array( 'hotel', $type ) || in_array( 'all', $type ) ) : ?>
+			<?php if ( ! in_array( 'hotel', $disable_services ) && ( in_array( 'hotel', $type ) || in_array( 'all', $type ) ) ) : ?>
                 <button class="tf-tablinks active" onclick="tfOpenForm(event, 'tf-hotel-booking-form')"><?php _e( 'Hotel', 'tourfic' ); ?></button>
 			<?php endif; ?>
 
-			<?php if ( ! in_array( 'tour', $disable_services ) && in_array( 'tour', $type ) || in_array( 'all', $type ) ) : ?>
+			<?php if ( ! in_array( 'tour', $disable_services ) && ( in_array( 'tour', $type ) || in_array( 'all', $type ) ) ) : ?>
                 <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-tour-booking-form')"><?php _e( 'Tour', 'tourfic' ); ?></button>
 			<?php endif ?>
 
 			<?php do_action( 'tf_after_booking_form_tab', $type ) ?>
+        </div>
+
+        <!-- Booking Form tabs mobile version -->
+        <div class="tf-booking-form-tab-mobile">
+            <select name="tf-booking-form-tab-select" id="">
+	            <?php do_action( 'tf_before_booking_form_mobile_tab', $type ) ?>
+
+				<?php if ( ! in_array( 'hotel', $disable_services ) && ( in_array( 'hotel', $type ) || in_array( 'all', $type ) ) ) : ?>
+                    <option value="tf-hotel-booking-form"><?php _e( 'Hotel', 'tourfic' ); ?></option>
+				<?php endif; ?>
+				<?php if ( ! in_array( 'tour', $disable_services ) && ( in_array( 'tour', $type ) || in_array( 'all', $type ) ) ) : ?>
+                    <option value="tf-tour-booking-form"><?php _e( 'Tour', 'tourfic' ); ?></option>
+				<?php endif ?>
+
+	            <?php do_action( 'tf_after_booking_form_mobile_tab', $type ) ?>
+            </select>
         </div>
 
         <!-- Booking Forms -->
@@ -350,7 +366,7 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 			<?php
 			do_action( 'tf_before_booking_form', $classes, $title, $subtitle, $type );
 
-			if ( ! in_array( 'hotel', $disable_services ) && in_array( 'hotel', $type ) || in_array( 'all', $type ) ) {
+			if ( ! in_array( 'hotel', $disable_services ) && ( in_array( 'hotel', $type ) || in_array( 'all', $type ) ) ) {
 				?>
                 <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent">
 					<?php
@@ -363,7 +379,7 @@ function tf_search_form_shortcode( $atts, $content = null ) {
                 </div>
 				<?php
 			}
-			if ( ! in_array( 'tour', $disable_services ) && in_array( 'tour', $type ) || in_array( 'all', $type ) ) {
+			if ( ! in_array( 'tour', $disable_services ) && ( in_array( 'tour', $type ) || in_array( 'all', $type ) ) ) {
 				?>
                 <div id="tf-tour-booking-form" class="tf-tabcontent">
 					<?php

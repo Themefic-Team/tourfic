@@ -1356,11 +1356,25 @@
             $(this).parents('#tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
         });
 
+        /*
+        * Booking Form select first tab on load
+        * @author: Foysal
+        */
         $(window).on('load', function () {
             if($('.tf-tablinks').length > 0){
                 $('.tf-tablinks').first().trigger('click').addClass('active');
             }
-        })
+        });
+
+        /*
+        * Booking Form tab mobile version
+        * @author: Foysal
+        */
+        $(document).on('change', 'select[name="tf-booking-form-tab-select"]', function(){
+            var tabId = $(this).val();
+            console.log(tabId)
+            tfOpenForm(event, tabId);
+        });
     });
 })(jQuery, window);
 
