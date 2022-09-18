@@ -359,6 +359,12 @@ $share_link = get_permalink($post_id);
                                 <?php echo esc_html( $room['title'] ); ?>
                             </td>
                             <?php } ?>
+                            <?php 
+                            $tf8days  = !empty($room['tf-8-days']) ? $room['tf-8-days'] : ''; 
+                            $tf16days  = !empty($room['tf-16-days']) ? $room['tf-16-days'] : ''; 
+                            $tf24days  = !empty($room['tf-24-days']) ? $room['tf-24-days'] : ''; 
+                            $tf32days  = !empty($room['tf-32-days']) ? $room['tf-32-days'] : ''; 
+                            if( !empty($tf8days['tf-room']) || !empty($tf8days['tf-breakfast']) || !empty($tf8days['tf-half-b']) || !empty($tf8days['tf-full-b']) || !empty($tf8days['tf-inclusive']) || !empty($tf8days['tf-inclusive-gold']) || !empty($tf16days['tf-room']) || !empty($tf16days['tf-breakfast']) || !empty($tf16days['tf-half-b']) || !empty($tf16days['tf-full-b']) || !empty($tf16days['tf-inclusive']) || !empty($tf16days['tf-inclusive-gold']) || !empty($tf24days['tf-room']) || !empty($tf24days['tf-breakfast']) || !empty($tf24days['tf-half-b']) || !empty($tf24days['tf-full-b']) || !empty($tf24days['tf-inclusive']) || !empty($tf24days['tf-inclusive-gold']) || !empty($tf32days['tf-room']) || !empty($tf32days['tf-breakfast']) || !empty($tf32days['tf-half-b']) || !empty($tf32days['tf-full-b']) || !empty($tf32days['tf-inclusive']) || !empty($tf32days['tf-inclusive-gold']) ){ ?>
                             <td>
                                 <table>
                                     <tr>
@@ -384,8 +390,8 @@ $share_link = get_permalink($post_id);
                                     </tr>
                                 </table>
                             </td>
-                            <?php 
-                            $tf8days  = !empty($room['tf-8-days']) ? $room['tf-8-days'] : ''; 
+                            <?php } ?>
+                            <?php  
                             if(!empty($tf8days['tf-room']) || !empty($tf8days['tf-breakfast']) || !empty($tf8days['tf-half-b']) || !empty($tf8days['tf-full-b']) || !empty($tf8days['tf-inclusive']) || !empty($tf8days['tf-inclusive-gold'])){
                             ?>
                             <td>
@@ -416,7 +422,6 @@ $share_link = get_permalink($post_id);
                             <?php } ?>
 
                             <?php 
-                            $tf16days  = !empty($room['tf-16-days']) ? $room['tf-16-days'] : ''; 
                             if(!empty($tf16days['tf-room']) || !empty($tf16days['tf-breakfast']) || !empty($tf16days['tf-half-b']) || !empty($tf16days['tf-full-b']) || !empty($tf16days['tf-inclusive']) || !empty($tf16days['tf-inclusive-gold'])){
                             ?>
                             <td>
@@ -447,7 +452,6 @@ $share_link = get_permalink($post_id);
                             <?php } ?>
 
                             <?php 
-                            $tf24days  = !empty($room['tf-24-days']) ? $room['tf-24-days'] : ''; 
                             if(!empty($tf24days['tf-room']) || !empty($tf24days['tf-breakfast']) || !empty($tf24days['tf-half-b']) || !empty($tf24days['tf-full-b']) || !empty($tf24days['tf-inclusive']) || !empty($tf24days['tf-inclusive-gold'])){
                             ?>
                             <td>
@@ -478,7 +482,6 @@ $share_link = get_permalink($post_id);
                             <?php } ?>
 
                             <?php 
-                            $tf32days  = !empty($room['tf-32-days']) ? $room['tf-32-days'] : ''; 
                             if(!empty($tf32days['tf-room']) || !empty($tf32days['tf-breakfast']) || !empty($tf32days['tf-half-b']) || !empty($tf32days['tf-full-b']) || !empty($tf32days['tf-inclusive']) || !empty($tf32days['tf-inclusive-gold'])){
                             ?>
                             <td>
@@ -583,22 +586,22 @@ $share_link = get_permalink($post_id);
 									$pricing_by = !empty($room['pricing-by']) ? $room['pricing-by'] : '';
                                     $avil_by_date = !empty( $room['avil_by_date'] ) ? !empty( $room['avil_by_date'] ) : false;
 
-                                    if($avil_by_date == true) {
-                                        $repeat_by_date = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
-                                        if ($pricing_by == '1') {
-                                            $prices = wp_list_pluck( $repeat_by_date, 'price' );                                        
-                                        } else {
-                                            $prices = wp_list_pluck( $repeat_by_date, 'adult_price' );                                        
-                                        }
+                                    // if($avil_by_date == true) {
+                                    //     $repeat_by_date = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
+                                    //     if ($pricing_by == '1') {
+                                    //         $prices = wp_list_pluck( $repeat_by_date, 'price' );                                        
+                                    //     } else {
+                                    //         $prices = wp_list_pluck( $repeat_by_date, 'adult_price' );                                        
+                                    //     }
 
-                                    $price = min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) );
-                                    } else {
-                                        if ($pricing_by == '1') {
-                                            $price = wc_price( !empty($room['price']) ? $room['price'] : '0.0' );
-                                        } else {
-                                            $price = wc_price( !empty($room['adult_price']) ? $room['adult_price'] : '0.0' );
-                                        }
-                                    }									
+                                    // $price = min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) );
+                                    // } else {
+                                    //     if ($pricing_by == '1') {
+                                    //         $price = wc_price( !empty($room['price']) ? $room['price'] : '0.0' );
+                                    //     } else {
+                                    //         $price = wc_price( !empty($room['adult_price']) ? $room['adult_price'] : '0.0' );
+                                    //     }
+                                    // }									
 							    ?>
                                 <tr>
                                     <td class="description">
