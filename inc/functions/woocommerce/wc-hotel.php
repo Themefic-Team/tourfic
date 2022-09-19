@@ -45,7 +45,9 @@ function tf_hotel_booking_callback(){
     $airport_service = isset($_POST['airport_service']) ? sanitize_text_field($_POST['airport_service']) : '';
     $hotel_pack = isset($_POST['hotel_pack']) ? sanitize_text_field($_POST['hotel_pack']) : '';
     $hotel_meal = isset($_POST['mealinfo']) ? sanitize_text_field($_POST['mealinfo']) : '';
-
+    $quickorder = isset($_POST['quickorder']) ? sanitize_text_field($_POST['quickorder']) : '';
+    $clients_email = isset($_POST['clients_email']) ? sanitize_email($_POST['clients_email']) : '';
+    
     # Calculate night number
     if($check_in && $check_out) {
         $check_in_stt   = strtotime( $check_in . ' +1 day' );
@@ -294,13 +296,50 @@ function tf_hotel_booking_callback(){
                 
             }
         }
+        if($quickorder!="true"){
+            # Add product to cart with the custom cart item data
+            WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
 
-        # Add product to cart with the custom cart item data
-        WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
+            $response['product_id'] = $product_id;
+            $response['add_to_cart'] = 'true';
+            $response['redirect_to'] = wc_get_checkout_url();
+        }else{
+            $user = get_user_by('email', $clients_email);
+            if($user){
+                $customer = new WP_User($clients_email);
+            }else{
+                $email = strtolower($clients_email);
+                $password = sanitize_text_field("vx@@4321");
+                $customer = wp_create_user($email, $password, $email);
+                $customer = new WP_User($customer);
+            }
 
-        $response['product_id'] = $product_id;
-        $response['add_to_cart'] = 'true';
-        $response['redirect_to'] = wc_get_checkout_url();
+            
+            WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
+            
+            // $cart->empty_cart();
+            $response['product_id'] = $product_id;
+            $response['add_to_cart'] = 'true';
+
+            $checkout = WC()->checkout();
+            $order_id = $checkout->create_order(array(
+                'billing_email' => $customer->user_email,
+                'payment_method' => 'cash',
+                'billing_first_name' => $customer->first_name,
+                'billing_last_name' => $customer->last_name,
+            ));
+
+
+            $order = wc_get_order($order_id);
+            update_post_meta($order_id, '_customer_user', $customer->ID);
+            
+            $order->set_total($tf_room_data['tf_hotel_data']['price_total']);
+            
+            $order_status = apply_filters('qofw_order_status', 'processing');
+            $order->set_status($order_status);
+            WC()->cart->empty_cart();
+            return $order->save();
+        }
     } else {
         $response['status'] = 'error';
     }
