@@ -306,18 +306,14 @@ function tf_hotel_booking_callback(){
         }else{
             $user = get_user_by('email', $clients_email);
             if($user){
-                $customer = new WP_User($clients_email);
+                $customer = new WP_User($user->ID);
             }else{
                 $email = strtolower($clients_email);
                 $password = sanitize_text_field("vx@@4321");
                 $customer = wp_create_user($email, $password, $email);
                 $customer = new WP_User($customer);
             }
-
-            
             WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
-            
-            // $cart->empty_cart();
             $response['product_id'] = $product_id;
             $response['add_to_cart'] = 'true';
 
@@ -327,6 +323,12 @@ function tf_hotel_booking_callback(){
                 'payment_method' => 'cash',
                 'billing_first_name' => $customer->first_name,
                 'billing_last_name' => $customer->last_name,
+                'billing_address_1' => get_user_meta( $user->ID, 'billing_address_1', true ) ? get_user_meta( $user->ID, 'billing_address_1', true ) : '',
+                'billing_address_2' => get_user_meta( $user->ID, 'billing_address_2', true ) ? get_user_meta( $user->ID, 'billing_address_2', true ) : '',
+                'billing_city' => get_user_meta( $user->ID, 'billing_city', true ) ? get_user_meta( $user->ID, 'billing_city', true ) : '',
+                'billing_state' => get_user_meta( $user->ID, 'billing_state', true ) ? get_user_meta( $user->ID, 'billing_state', true ) : '',
+                'billing_country' => get_user_meta( $user->ID, 'billing_country', true ) ? get_user_meta( $user->ID, 'billing_country', true ) : '',
+                'billing_postcode' => get_user_meta( $user->ID, 'billing_postcode', true ) ? get_user_meta( $user->ID, 'billing_postcode', true ) : ''
             ));
 
 
