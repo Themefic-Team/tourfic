@@ -267,6 +267,9 @@ $share_link = get_permalink($post_id);
                             </ul>
                         </div>
                     </div>
+                    <div class="apartment-options">
+                        <h2 class="section-heading">What you will get here.</h2>
+                    </div>
                 </div>
                 <div class="cf-right">
                     <div class="host-details">
