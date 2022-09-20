@@ -1,3 +1,8 @@
+/**************** Global ****************/
+.tf-apartment .section-heading {
+  font-size: 22px;
+}
+
 /**************** TITLE ****************/
 .tf-map-link a.more-hotel {
     font-weight: bold;
@@ -265,6 +270,43 @@
     border: 1px solid #F0F2F4;
     border-radius: 4px;
     padding:10px 30px;
+  }
+
+  /**************** What you will get here ****************/
+
+  .tf-apartment-option-slider-wrapper .slick-prev::before, .tf-apartment-option-slider-wrapper .slick-next::before {
+    color: #2A3343;
+    font-size: 26px;
+    opacity: 1;
+  }
+  .tf-apartment-option-slider-wrapper .slick-arrow {
+    z-index: 999;
+  }
+
+  .tf-apartment-option-slider-wrapper .slick-next {
+    margin-right: 5px;
+  }
+
+  .tf-apartment-option-slider-item.slick-slide {
+    margin-left: 8px !important;
+    margin-right: 8px !important;
+  }
+
+  .tf-apartment-option-slider-wrapper img {
+    border-radius: 8px;
+    height: 171px;
+    object-fit: cover;
+    width: 100%;
+  }
+  
+  .tf-apartment-option-slider-desc h3 {
+    font-size: 18px;
+  }
+  .tf-apartment-option-slider-desc {
+    padding-top: 10px;
+  }
+  .tf-apartment-option-slider-desc p {
+    opacity: 0.85;
   }
 
 /**************** Host ****************/

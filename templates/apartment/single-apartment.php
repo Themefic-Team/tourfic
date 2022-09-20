@@ -267,8 +267,48 @@ $share_link = get_permalink($post_id);
                             </ul>
                         </div>
                     </div>
-                    <div class="apartment-options">
-                        <h2 class="section-heading">What you will get here.</h2>
+                    <div class="apartment-options sp-t-40">
+                        <h2 class="section-heading">What you will get here</h2>
+                            <div class="tf-apartment-option-slider-wrapper">
+                                <div class="tf-apartment-option-slider-item">
+                                    <div class="tf-apartment-option-slider-content">
+                                        <img src="https://cdn.pixabay.com/photo/2016/10/18/09/02/hotel-1749602_960_720.jpg" alt="">
+                                        <div class="tf-apartment-option-slider-desc">
+                                            <h3>Drawing Space</h3>
+                                            <p>2 Double Bed</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Remove all the below codes when you run the loop. These are added for demo purpose -->
+                                <div class="tf-apartment-option-slider-item">
+                                    <div class="tf-apartment-option-slider-content">
+                                        <img src="https://cdn.pixabay.com/photo/2016/04/15/11/48/hotel-1330850_960_720.jpg" alt="">
+                                        <div class="tf-apartment-option-slider-desc">
+                                            <h3>Library</h3>
+                                            <p>Awesome library space for guest</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-apartment-option-slider-item">
+                                    <div class="tf-apartment-option-slider-content">
+                                        <img src="https://cdn.pixabay.com/photo/2014/05/18/19/15/walkway-347319_960_720.jpg" alt="">
+                                        <div class="tf-apartment-option-slider-desc">
+                                            <h3>Deluxe Bathroom</h3>
+                                            <p>Watch Tiktok on Bathroom</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-apartment-option-slider-item">
+                                    <div class="tf-apartment-option-slider-content">
+                                        <img src="https://cdn.pixabay.com/photo/2015/01/10/11/39/hotel-595121_960_720.jpg" alt="">
+                                        <div class="tf-apartment-option-slider-desc">
+                                            <h3>Eita ekta hudai heading</h3>
+                                            <p>Kemon asen shobai, valo?</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <!-- Remove all the above codes when you run the loop. These are added for demo purpose -->
+                            </div>
                     </div>
                 </div>
                 <div class="cf-right">
