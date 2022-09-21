@@ -125,8 +125,8 @@ function tf_tours_booking_function() {
 	 */
 	if ( $tour_type == 'fixed' ) {
 
-		$min_text = sprintf( _n( '%s person', '%s persons', $min_people, 'tourfic' ), $min_people );
-		$max_text = sprintf( _n( '%s person', '%s persons', $max_people, 'tourfic' ), $max_people );
+		$min_text = sprintf( _n( '%s person', '%s people', $min_people, 'tourfic' ), $min_people );
+		$max_text = sprintf( _n( '%s person', '%s people', $max_people, 'tourfic' ), $max_people );
 
 		if ( $total_people < $min_people && $min_people > 0 ) {
 			$response['errors'][] = sprintf( __( 'Minimum %1$s required', 'tourfic' ), $min_text );
@@ -138,8 +138,8 @@ function tf_tours_booking_function() {
 
 	} elseif ( $tour_type == 'continuous' && $custom_avail == false ) {
 
-		$min_text = sprintf( _n( '%s person', '%s persons', $min_people, 'tourfic' ), $min_people );
-		$max_text = sprintf( _n( '%s person', '%s persons', $max_people, 'tourfic' ), $max_people );
+		$min_text = sprintf( _n( '%s person', '%s people', $min_people, 'tourfic' ), $min_people );
+		$max_text = sprintf( _n( '%s person', '%s people', $max_people, 'tourfic' ), $max_people );
 
 		if ( $total_people < $min_people && $min_people > 0 ) {
 			$response['errors'][] = sprintf( __( 'Minimum %1$s required', 'tourfic' ), $min_text );
@@ -163,8 +163,8 @@ function tf_tours_booking_function() {
 			// Backend continuous min/max people values
 			$min_people = ! empty( $item['min_people'] ) ? $item['min_people'] : '';
 			$max_people = ! empty( $item['max_people'] ) ? $item['max_people'] : '';
-			$min_text   = sprintf( _n( '%s person', '%s persons', $min_people, 'tourfic' ), $min_people );
-			$max_text   = sprintf( _n( '%s person', '%s persons', $max_people, 'tourfic' ), $max_people );
+			$min_text   = sprintf( _n( '%s person', '%s people', $min_people, 'tourfic' ), $min_people );
+			$max_text   = sprintf( _n( '%s person', '%s people', $max_people, 'tourfic' ), $max_people );
 
 
 			// Compare backend & frontend date values to show specific people number error

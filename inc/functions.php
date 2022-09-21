@@ -141,6 +141,7 @@ if ( !function_exists( 'tf_image_sizes' ) ) {
     function tf_image_sizes() {
         // Hotel gallery, hard crop
         add_image_size( 'tf_gallery_thumb', 900, 490, true );
+        add_image_size( 'tf-thumb-480-320', 480, 320, true );
     }
     add_filter( 'after_setup_theme', 'tf_image_sizes' );
 }

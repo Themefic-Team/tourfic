@@ -10,7 +10,7 @@ get_header();
  */
 while ( have_posts() ) : the_post();
 
-    // get post id
+	// get post id
 	$post_id = $post->ID;
 
 	/**
@@ -53,7 +53,7 @@ while ( have_posts() ) : the_post();
 	 *
 	 */
 
-    // Wishlist
+	// Wishlist
 	$post_type       = str_replace( 'tf_', '', get_post_type() );
 	$has_in_wishlist = tf_has_item_in_wishlist( $post_id );
 
@@ -78,21 +78,21 @@ while ( have_posts() ) : the_post();
 	 */
 	$features = ! empty( get_the_terms( $post_id, 'hotel_feature' ) ) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
 
-    // Location
+	// Location
 	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
 	$map     = ! empty( $meta['map'] ) ? $meta['map'] : '';
 
-    // Hotel Detail
+	// Hotel Detail
 	$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
 	if ( $gallery ) {
 		$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
 	}
 	$video = ! empty( $meta['video'] ) ? $meta['video'] : '';
-    // Room Details
+	// Room Details
 	$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-    // FAQ
+	// FAQ
 	$faqs = ! empty( $meta['faq'] ) ? $meta['faq'] : '';
-    // Terms & condition
+	// Terms & condition
 	$tc = ! empty( $meta['tc'] ) ? $meta['tc'] : '';
 
 	$share_text = get_the_title();
@@ -247,7 +247,7 @@ while ( have_posts() ) : the_post();
                                         <div class="tf_slider-for fl-wrap">
 											<?php foreach ( $gallery_ids as $attachment_id ) {
 												echo '<div class="slick-slide-item">';
-												echo '<a href="' . wp_get_attachment_url( $attachment_id, 'tf_gallery_thumb' ) . '" class="slick-slide-item-link" data-fancybox="hotel-gallery">';
+												echo '<a href="' . esc_url( wp_get_attachment_url( $attachment_id, 'tf_gallery_thumb' ) ) . '" class="slick-slide-item-link" data-fancybox="hotel-gallery">';
 												echo wp_get_attachment_image( $attachment_id, 'tf_gallery_thumb' );
 												echo '</a>';
 												echo '</div>';
@@ -265,14 +265,13 @@ while ( have_posts() ) : the_post();
                                         <div class="tf_slider-for fl-wrap">
 											<?php
 											echo '<div class="slick-slide-item">';
-											echo '<a href="' . get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) . '" class="slick-slide-item-link" data-fancybox="hotel-gallery">';
+											echo '<a href="' . esc_url( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) . '" class="slick-slide-item-link" data-fancybox="hotel-gallery">';
 											echo get_the_post_thumbnail( $post_id, 'tf_gallery_thumb' );
 											echo '</a>';
 											echo '</div>';
 											?>
+
                                         </div>
-                                        <div class="swiper-button-prev sw-btn"><i class="fa fa-angle-left"></i></div>
-                                        <div class="swiper-button-next sw-btn"><i class="fa fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
@@ -301,10 +300,10 @@ while ( have_posts() ) : the_post();
                                     <div class="tf-hotel-google-maps-container">
 										<?php
 										if ( ! empty( $map["address"] ) ) { ?>
-                                            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $map["address"] ) ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;"
+                                            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $map["address"] ) ); ?>&z=15&output=embed" width="100%" height="550" style="border:0;"
                                                     allowfullscreen="" loading="lazy"></iframe>
 										<?php } else { ?>
-                                            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=17&output=embed" width="100%"
+                                            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=15&output=embed" width="100%"
                                                     height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 										<?php } ?>
                                     </div>
@@ -388,10 +387,11 @@ while ( have_posts() ) : the_post();
             <div class="tf-divider"></div>
         </div>
 
-        <!-- Start Room Section -->
-        <div class="tf-room-section sp-50">
-            <div class="tf-container">
-				<?php if ( $rooms ) { ?>
+		<?php if ( $rooms ) : ?>
+            <!-- Start Room Section -->
+            <div class="tf-room-section sp-50">
+                <div class="tf-container">
+
                     <div class="tf-room-type" id="rooms">
                         <h2 class="section-heading"><?php esc_html_e( 'Available Rooms', 'tourfic' ); ?></h2>
                         <div class="tf-room-table hotel-room-wrap">
@@ -430,7 +430,7 @@ while ( have_posts() ) : the_post();
 												$prices = wp_list_pluck( $repeat_by_date, 'adult_price' );
 											}
 
-											$price = min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) );
+											$price = $prices ? (min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) )) : wc_price( 0 );
 										} else {
 											if ( $pricing_by == '1' ) {
 												$price = wc_price( ! empty( $room['price'] ) ? $room['price'] : '0.0' );
@@ -587,10 +587,10 @@ while ( have_posts() ) : the_post();
                             </table>
                         </div>
                     </div>
-				<?php } ?>
+                </div>
             </div>
-        </div>
-        <!-- End Room Section -->
+            <!-- End Room Section -->
+		<?php endif; ?>
 
         <!-- FAQ section Start -->
 		<?php if ( $faqs ): ?>

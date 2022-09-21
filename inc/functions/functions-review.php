@@ -541,7 +541,7 @@ function tf_user_has_comments() {
  */
 function tf_pending_review_notice($post_id) {
 
-    if (is_user_logged_in()) {
+//    if (is_user_logged_in()) {
 
         global $wpdb, $current_user;
         $logged_in_id = $current_user->ID;
@@ -560,7 +560,7 @@ function tf_pending_review_notice($post_id) {
                 }
             }
         }
-    }
+//    }
 }
 
 /**

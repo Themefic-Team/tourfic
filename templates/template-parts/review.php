@@ -162,10 +162,13 @@ if (post_password_required()) {
             ?>
             <div class="tf-btn">
                 <button class="tf_button tf-submit btn-styled" data-fancybox data-src="#tourfic-rating" onclick=" tf_load_rating()">
-                    <i class="fas fa-plus"></i> <?php _e('Add Review', 'tourfic') ?>
+                    <i class="fas fa-plus"></i> <?php _e('Add Reviewaaaaaaaaaa', 'tourfic') ?>
                 </button>
                 </div>
             <?php
+            } else {
+	            // Pending review notice
+	            echo tf_pending_review_notice($post_id);
             }
 
         }
