@@ -12,6 +12,7 @@ function hotel_locations_shortcode( $atts, $content = null ) {
 				'order'      => 'ASC',
 				'hide_empty' => 0,
 				'ids'        => '',
+				'limit'     => - 1,
 			),
 			$atts
 		)
@@ -22,12 +23,11 @@ function hotel_locations_shortcode( $atts, $content = null ) {
 		'taxonomy'     => 'hotel_location',
 		'orderby'      => $orderby,
 		'order'        => $order,
-		'hide_empty'   => $hide_empty, //can be 1, '1' too
-		'hierarchical' => 0, //can be 1, '1' too
+		'hide_empty'   => $hide_empty,
+		'hierarchical' => 0,
 		'search'       => '',
-		'number'       => 6,
+		'number'       => $limit == - 1 ? false : $limit,
 		'include'      => $ids,
-		//'name__like' => '',
 	) );
 
 	ob_start();
@@ -47,7 +47,7 @@ function hotel_locations_shortcode( $atts, $content = null ) {
                             <div class="single_recomended_content" style="background-image: url(<?php echo $image_url; ?>);">
                                 <div class="recomended_place_info_header">
                                     <h3><?php _e( $term->name ); ?></h3>
-                                    <p><?php printf( esc_html__( "%s hotels", 'tourfic' ), $term->count ); ?></p>
+                                    <p><?php printf( _n( '%s hotel', '%s hotels', $term->count, 'tourfic' ), $term->count ); ?></p>
                                 </div>
                             </div>
                         </a>
@@ -81,6 +81,7 @@ function shortcode_tour_destinations( $atts, $content = null ) {
 				'order'      => 'ASC',
 				'hide_empty' => 0,
 				'ids'        => '',
+				'limit'     => - 1,
 			),
 			$atts
 		)
@@ -91,12 +92,11 @@ function shortcode_tour_destinations( $atts, $content = null ) {
 		'taxonomy'     => 'tour_destination',
 		'orderby'      => $orderby,
 		'order'        => $order,
-		'hide_empty'   => $hide_empty, //can be 1, '1' too
-		'hierarchical' => 0, //can be 1, '1' too
+		'hide_empty'   => $hide_empty,
+		'hierarchical' => 0,
 		'search'       => '',
-		'number'       => 6,
+		'number'       => $limit == - 1 ? false : $limit,
 		'include'      => $ids,
-		//'name__like' => '',
 	) );
 
 	shuffle( $destinations );
@@ -121,7 +121,7 @@ function shortcode_tour_destinations( $atts, $content = null ) {
                             <div class="single_recomended_content" style="background-image: url(<?php echo $image_url; ?>);">
                                 <div class="recomended_place_info_header">
                                     <h3><?php _e( $term->name ); ?></h3>
-                                    <p><?php printf( esc_html__( "%s tours", 'tourfic' ), $term->count ); ?></p>
+                                    <p><?php printf( _n( '%s tour', '%s tours', $term->count, 'tourfic' ), $term->count ); ?></p>
                                 </div>
                             </div>
                         </a>
