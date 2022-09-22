@@ -411,7 +411,7 @@ while ( have_posts() ) : the_post();
                                 </thead>
                                 <tbody>
                                 <!-- Start Single Room -->
-								<?php foreach ( $rooms as $room ) {
+								<?php foreach ( $rooms as $key => $room ) {
 									$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
 									if ( $enable == '1' ) {
 										$footage      = ! empty( $room['footage'] ) ? $room['footage'] : '';
@@ -450,7 +450,7 @@ while ( have_posts() ) : the_post();
 														}
 														if ( defined( 'TF_PRO' ) && $tour_room_details_gall ){
 															?>
-                                                            <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] : '' ?>"
+                                                            <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'].$key : '' ?>"
                                                                    data-hotel="<?php echo $post_id; ?>" style="text-decoration: underline;">
 																	<?php echo esc_html( $room['title'] ); ?>
                                                                 </a></h3>
