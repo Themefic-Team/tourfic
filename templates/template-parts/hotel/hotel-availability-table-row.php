@@ -60,15 +60,17 @@
 
                         $room_f_meta = get_term_meta( $feature, 'hotel_feature', true );
 
-                        if ( $room_f_meta['icon-type'] == 'fa' ) {
-                            $room_feature_icon = '<i class="' . $room_f_meta['icon-fa'] . '"></i>';
-                        } elseif ( $room_f_meta['icon-type'] == 'c' ) {
-                            $room_feature_icon = '<img src="' . $room_f_meta['icon-c']["url"] . '" style="min-width: ' . $room_f_meta['dimention']["width"] . 'px; height: ' . $room_f_meta['dimention']["width"] . 'px;" />';
+                        if(!empty($room_f_meta)){
+                            if ( $room_f_meta['icon-type'] == 'fa' ) {
+                                $room_feature_icon = '<i class="' . $room_f_meta['icon-fa'] . '"></i>';
+                            } elseif ( $room_f_meta['icon-type'] == 'c' ) {
+                                $room_feature_icon = '<img src="' . $room_f_meta['icon-c']["url"] . '" style="min-width: ' . $room_f_meta['dimention']["width"] . 'px; height: ' . $room_f_meta['dimention']["width"] . 'px;" />';
+                            }
                         }
 
                     $room_term = get_term( $feature );?>
                     <li class="tf-tooltip">
-                        <?php echo $room_feature_icon; ?>
+                        <?php echo !empty($room_f_meta) ? $room_feature_icon : ''; ?>
                         <div class="tf-top">
                             <?php echo $room_term->name; ?>
                             <i class="tool-i"></i>
@@ -126,7 +128,7 @@
                 ?>
 
                     <?php 
-                    if($days==7){
+                    if($days==8){
                     $tf8days  = !empty($room['tf-8-days']) ? $room['tf-8-days'] : ''; 
                     if(!empty($tf8days['tf-room']) || !empty($tf8days['tf-breakfast']) || !empty($tf8days['tf-half-b']) || !empty($tf8days['tf-full-b']) || !empty($tf8days['tf-inclusive']) || !empty($tf8days['tf-inclusive-gold'])){
                     ?>
@@ -150,7 +152,7 @@
                     <?php } } ?>
 
                     <?php 
-                    if($days==14){
+                    if($days==15){
                     $tf16days  = !empty($room['tf-16-days']) ? $room['tf-16-days'] : ''; 
                     if(!empty($tf16days['tf-room']) || !empty($tf16days['tf-breakfast']) || !empty($tf16days['tf-half-b']) || !empty($tf16days['tf-full-b']) || !empty($tf16days['tf-inclusive']) || !empty($tf16days['tf-inclusive-gold'])){
                     ?>
@@ -174,7 +176,7 @@
                     <?php } } ?>
 
                     <?php 
-                    if($days==21){
+                    if($days==22){
                     $tf24days  = !empty($room['tf-24-days']) ? $room['tf-24-days'] : ''; 
                     if(!empty($tf24days['tf-room']) || !empty($tf24days['tf-breakfast']) || !empty($tf24days['tf-half-b']) || !empty($tf24days['tf-full-b']) || !empty($tf24days['tf-inclusive']) || !empty($tf24days['tf-inclusive-gold'])){
                     ?>
@@ -199,7 +201,7 @@
                     <?php } } ?>
 
                     <?php 
-                    if($days==28){
+                    if($days==29){
                     $tf32days  = !empty($room['tf-32-days']) ? $room['tf-32-days'] : ''; 
                     if(!empty($tf32days['tf-room']) || !empty($tf32days['tf-breakfast']) || !empty($tf32days['tf-half-b']) || !empty($tf32days['tf-full-b']) || !empty($tf32days['tf-inclusive']) || !empty($tf32days['tf-inclusive-gold'])){
                     ?>
@@ -273,14 +275,22 @@
                 if(defined( 'TF_PRO' ) && !empty($tour_hotel_service_avail) && !empty($tour_hotel_service_type)){
                 ?>
                 <?php 
+                if(!empty($order_ids)){
                 if(!empty($num_room_available)){ ?>
-                    <?php if($days<=28){ ?>
+                    <?php if($days<=29){ ?>
                         <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
                     <?php }else{ ?>
-                        <div class="price-per-night"><?php _e( 'Please Select Date within 28 days', 'tourfic' );?></div>
+                        <div class="price-per-night"><?php _e( 'Please Select Date within 29 days', 'tourfic' );?></div>
                     <?php } ?>
                 <?php }else{ ?>
                     <button class="btn-styled tf-sml-btn" disabled><?php _e( 'Room Not Available', 'tourfic' );?></button>
+                <?php } ?>
+                <?php }else{ ?>
+                    <?php if($days<=29){ ?>
+                        <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
+                    <?php }else{ ?>
+                        <div class="price-per-night"><?php _e( 'Please Select Date within 29 days', 'tourfic' );?></div>
+                    <?php } ?>
                 <?php } ?>
                 
                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap" data-id="<?php echo $room_id ?>">
@@ -322,16 +332,23 @@
                 
                 <?php }else{ ?>
                 <?php 
+                if(!empty($order_ids)){
                 if(!empty($num_room_available)){ ?>
-                    <?php if($days<=28){ ?>
+                    <?php if($days<=29){ ?>
                     <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
                     <?php }else{ ?>
-                        <div class="price-per-night"><?php _e( 'Please Select Date within 28 days', 'tourfic' );?></div>
+                        <div class="price-per-night"><?php _e( 'Please Select Date within 29 days', 'tourfic' );?></div>
                     <?php } ?>
                 <?php }else{ ?>
                     <button class="btn-styled tf-sml-btn" disabled><?php _e( 'Room Not Available', 'tourfic' );?></button>
                 <?php } ?>
-                <?php } ?>
+                <?php }else{ ?>
+                    <?php if($days<=29){ ?>
+                    <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
+                    <?php }else{ ?>
+                        <div class="price-per-night"><?php _e( 'Please Select Date within 29 days', 'tourfic' );?></div>
+                    <?php } ?>
+                <?php }} ?>
             </div>
             <div class="tf_desc"></div>
         </form>
