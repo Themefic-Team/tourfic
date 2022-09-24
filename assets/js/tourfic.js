@@ -106,12 +106,12 @@
             var post_id = $('input[name=post_id]').val();
             if($(this).closest('.room-submit-wrap').find('input[name=room_id]').val()){
                 var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
-                var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
-                var deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
+                //var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
+                //var deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
             }else{
                 var room_id = $("#hotel_roomid").val();
-                var room = $("#hotel_room_number").val();
-                var deposit = $("#hotel_room_depo").val();
+                // var room = $("#hotel_room_number").val();
+                // var deposit = $("#hotel_room_depo").val();
             }
             if($(this).closest('.room-submit-wrap').find('input[name=unique_id]').val()){
                 var unique_id = $(this).closest('.room-submit-wrap').find('input[name=unique_id]').val();
@@ -125,13 +125,13 @@
             var check_out_date = $('input[name=check_out_date]').val();
             var mealinfo = $('#hotel_meal_val').val();
 
-            // if($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()){
-                // var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
-                // var deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
-            // }else{
-            //     var room = $("#hotel_room_number").val();
-            //     var deposit = $("#hotel_room_depo").val();
-            // }
+            if($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()){
+                var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
+                var deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
+            }else{
+                var room = $("#hotel_room_number").val();
+                var deposit = $("#hotel_room_depo").val();
+            }
             var airport_service= $('.fancybox-slide #airport-service').val();
             var hotel_pack = $('#tf-hotel-duration').val();
             var data = {

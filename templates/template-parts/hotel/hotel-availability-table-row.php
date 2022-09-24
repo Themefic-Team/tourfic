@@ -235,16 +235,17 @@
     <td class="reserve">
         <form class="tf-room">
             <?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' );?>
-            
-            <!-- <div class="room-selection-wrap">
-                <select name="hotel_room_selected" id="hotel-room-selected">
-                    <?php
-                        foreach ( range( 0, $num_room_available) as $value ) {
-                            echo '<option>' . $value . '</option>';
-                        }
-                    ?>
-                </select>
-            </div> -->
+            <?php if(!empty($num_room_available)){ ?>
+                <div class="room-selection-wrap">
+                    <select name="hotel_room_selected" id="hotel-room-selected">
+                        <?php
+                            foreach ( range( 1, $num_room_available) as $value ) {
+                                echo '<option>' . $value . '</option>';
+                            }
+                        ?>
+                    </select>
+                </div>
+            <?php } ?>
             <div class="room-submit-wrap">
             <div class="roomselectissue"></div>
             <?php if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
