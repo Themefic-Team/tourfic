@@ -234,9 +234,12 @@ $share_link = get_permalink($post_id);
         <div class="tf-container">
             <div class="cf-wrapper">
                 <div class="cf-left">
+                     <!-- Start Description Section -->
                     <div class="apt-description">
                         <?php the_content(); ?>
                     </div>
+
+                     <!-- Start Key Features Section -->
                     <div class="key-features sp-t-40">
                         <h2 class="section-heading">Key Features</h2>
                         <div class="features-details">
@@ -252,6 +255,8 @@ $share_link = get_permalink($post_id);
                             </ul>
                         </div>
                     </div>
+
+                    <!-- Start Amenities Section -->
                     <div class="apartment-amenities sp-t-40">
                         <h2 class="section-heading">Amenities</h2>
                         <div class="features-details amenities-details">
@@ -267,48 +272,50 @@ $share_link = get_permalink($post_id);
                             </ul>
                         </div>
                     </div>
+
+                    <!-- Start What you will get here Section -->
                     <div class="apartment-options sp-t-40">
                         <h2 class="section-heading">What you will get here</h2>
-                            <div class="tf-apartment-option-slider-wrapper">
-                                <div class="tf-apartment-option-slider-item">
-                                    <div class="tf-apartment-option-slider-content">
-                                        <img src="https://cdn.pixabay.com/photo/2016/10/18/09/02/hotel-1749602_960_720.jpg" alt="">
-                                        <div class="tf-apartment-option-slider-desc">
-                                            <h3>Drawing Space</h3>
-                                            <p>2 Double Bed</p>
-                                        </div>
+                        <div class="tf-apartment-option-slider-wrapper">
+                            <div class="tf-apartment-option-slider-item">
+                                <div class="tf-apartment-option-slider-content">
+                                    <img src="https://cdn.pixabay.com/photo/2016/10/18/09/02/hotel-1749602_960_720.jpg" alt="">
+                                    <div class="tf-apartment-option-slider-desc">
+                                        <h3>Drawing Space</h3>
+                                        <p>2 Double Bed</p>
                                     </div>
                                 </div>
-                                <!-- Remove all the below codes when you run the loop. These are added for demo purpose -->
-                                <div class="tf-apartment-option-slider-item">
-                                    <div class="tf-apartment-option-slider-content">
-                                        <img src="https://cdn.pixabay.com/photo/2016/04/15/11/48/hotel-1330850_960_720.jpg" alt="">
-                                        <div class="tf-apartment-option-slider-desc">
-                                            <h3>Library</h3>
-                                            <p>Awesome library space for guest</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-apartment-option-slider-item">
-                                    <div class="tf-apartment-option-slider-content">
-                                        <img src="https://cdn.pixabay.com/photo/2014/05/18/19/15/walkway-347319_960_720.jpg" alt="">
-                                        <div class="tf-apartment-option-slider-desc">
-                                            <h3>Deluxe Bathroom</h3>
-                                            <p>Watch Tiktok on Bathroom</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-apartment-option-slider-item">
-                                    <div class="tf-apartment-option-slider-content">
-                                        <img src="https://cdn.pixabay.com/photo/2015/01/10/11/39/hotel-595121_960_720.jpg" alt="">
-                                        <div class="tf-apartment-option-slider-desc">
-                                            <h3>Eita ekta hudai heading</h3>
-                                            <p>Kemon asen shobai, valo?</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                 <!-- Remove all the above codes when you run the loop. These are added for demo purpose -->
                             </div>
+                            <!-- Remove all the below codes when you run the loop. These are added for demo purpose -->
+                            <div class="tf-apartment-option-slider-item">
+                                <div class="tf-apartment-option-slider-content">
+                                    <img src="https://cdn.pixabay.com/photo/2016/04/15/11/48/hotel-1330850_960_720.jpg" alt="">
+                                    <div class="tf-apartment-option-slider-desc">
+                                        <h3>Library</h3>
+                                        <p>Awesome library space for guest</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tf-apartment-option-slider-item">
+                                <div class="tf-apartment-option-slider-content">
+                                    <img src="https://cdn.pixabay.com/photo/2014/05/18/19/15/walkway-347319_960_720.jpg" alt="">
+                                    <div class="tf-apartment-option-slider-desc">
+                                        <h3>Deluxe Bathroom</h3>
+                                        <p>Watch Tiktok on Bathroom</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tf-apartment-option-slider-item">
+                                <div class="tf-apartment-option-slider-content">
+                                    <img src="https://cdn.pixabay.com/photo/2015/01/10/11/39/hotel-595121_960_720.jpg" alt="">
+                                    <div class="tf-apartment-option-slider-desc">
+                                        <h3>Eita ekta hudai heading</h3>
+                                        <p>Kemon asen shobai, valo?</p>
+                                    </div>
+                                </div>
+                            </div>
+                                <!-- Remove all the above codes when you run the loop. These are added for demo purpose -->
+                        </div>
                     </div>
                 </div>
                 <div class="cf-right">
@@ -339,6 +346,18 @@ $share_link = get_permalink($post_id);
     </div>
     <!-- End Content & Feature Section -->
 
+    <!-- Map Section Start -->
+    <div id="apartment-map" class="tf-map-wrapper sp-50">
+        <div class="tf-container">
+            <div class="tf-row">
+                <div class="tf-map-content-wrapper">
+                <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace("#","",$location) ); ?>&output=embed" width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Map Section End -->
+
     <!-- Start Review Section -->
     <?php if(!$disable_review_sec == 1) { ?>
     <div id="tf-review" class="review-section sp-50">
@@ -352,10 +371,115 @@ $share_link = get_permalink($post_id);
     <?php } ?>
     <!-- End Review Section -->
 
-    <div class="tf-container">
-        <div class="tf-divider"></div>
+    <!-- FAQ section Start -->
+    <div class="tf-faq-wrapper apartment-faq sp-50">
+        <div class="tf-container">
+            <div class="tf-faq-sec-title">
+                <h2 class="section-heading"><?php _e( "Frequently Asked Questions", 'tourfic' ); ?></h2>
+                <p><?php _e( "Let’s clarify your confusions. Here are some of the Frequently Asked Questions which most of our client asks.", 'tourfic' ); ?></p>
+            </div>
+            
+            <div class="tf-faq-content-wrapper">
+                <div class="tf-faq-items-wrapper">
+                    <?php foreach ( $faqs as $key => $faq ): ?>
+                        <div id="tf-faq-item">
+                            <div class="tf-faq-title">
+                                <h4><?php esc_html_e( $faq['title'] ); ?></h4>
+                                <i class="fas fa-angle-down arrow"></i>
+                            </div>
+                            <div class="tf-faq-desc">
+                                <p><?php _e( $faq['desc'] ); ?></p> 
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
     </div>
-    
+	<!-- FAQ section end -->
+
+    <!-- Start TOC Content -->
+    <div class="toc-section apartment-toc sp-50">
+        <div class="tf-container">
+            <div class="tf-toc-wrap gray-wrap">
+                <h2 class="section-heading"><?php esc_html_e( 'Tour Terms & Conditions', 'tourfic' ); ?></h2>
+                <div class="tf-toc-inner">
+                <?php echo wpautop($terms_and_conditions); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End TOC Content -->
+
+     <!-- Start Question Content -->
+    <div class="tf-ask-question apartment-question">
+        <div class="tf-container">
+            <div class="question-left">
+                <h3><?php _e( "Have a question in mind", 'tourfic' ); ?></h3>
+                <p><?php _e( "Looking for more info? Send a question to the property to find out more.", 'tourfic' ); ?></p>
+            </div>
+            <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled"><span><?php esc_html_e( 'Ask a Question', 'tourfic' ); ?></span></a> </div>
+        </div>
+    </div>
+     <!-- End Question Content -->
+
+     <!-- Apartment Suggestion section Start -->
+    <div class="apartment-options apartment-sugestion sp-t-40">
+        <div class="tf-container">
+            <h2 class="section-heading">What you will get here</h2>
+            <div class="tf-apartment-sugestion-slider-wrapper">
+                <div class="tf-apartment-option-slider-item">
+                    <div class="tf-apartment-option-slider-content">
+                        <img src="https://cdn.pixabay.com/photo/2016/10/18/09/02/hotel-1749602_960_720.jpg" alt="">
+                        <div class="tf-apartment-option-slider-desc">
+                            <h3>Drawing Space</h3>
+                            <p>2 Double Bed</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Remove all the below codes when you run the loop. These are added for demo purpose -->
+                <div class="tf-apartment-option-slider-item">
+                    <div class="tf-apartment-option-slider-content">
+                        <img src="https://cdn.pixabay.com/photo/2016/04/15/11/48/hotel-1330850_960_720.jpg" alt="">
+                        <div class="tf-apartment-option-slider-desc">
+                            <h3>Library</h3>
+                            <p>Awesome library space for guest</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tf-apartment-option-slider-item">
+                    <div class="tf-apartment-option-slider-content">
+                        <img src="https://cdn.pixabay.com/photo/2014/05/18/19/15/walkway-347319_960_720.jpg" alt="">
+                        <div class="tf-apartment-option-slider-desc">
+                            <h3>Deluxe Bathroom</h3>
+                            <p>Watch Tiktok on Bathroom</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tf-apartment-option-slider-item">
+                    <div class="tf-apartment-option-slider-content">
+                        <img src="https://cdn.pixabay.com/photo/2015/01/10/11/39/hotel-595121_960_720.jpg" alt="">
+                        <div class="tf-apartment-option-slider-desc">
+                            <h3>Eita ekta hudai heading</h3>
+                            <p>Kemon asen shobai, valo?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tf-apartment-option-slider-item">
+                    <div class="tf-apartment-option-slider-content">
+                        <img src="https://cdn.pixabay.com/photo/2015/01/10/11/39/hotel-595121_960_720.jpg" alt="">
+                        <div class="tf-apartment-option-slider-desc">
+                            <h3>Eita ekta hudai heading</h3>
+                            <p>Kemon asen shobai, valo?</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Remove all the above codes when you run the loop. These are added for demo purpose -->
+            </div>
+        </div>
+    </div>
+	<!-- Apartment suggestion section End -->
+
     <?php do_action( 'tf_after_container' ); ?>
 </div>
 <?php endwhile; ?>
