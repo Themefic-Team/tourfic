@@ -1248,7 +1248,7 @@ function tf_room_availability_callback() {
                                             $price = ($roompackageprice['tf-room']+$roompackageprice['tf-breakfast']+$roompackageprice['tf-half-b']+$roompackageprice['tf-full-b'])*$form_adult;
                                         }
                                         
-                                        $number_of_rooms = !empty($available_rooms[0]['num-room']) ? $available_rooms[0]['num-room'] : $room['num-room'];        
+                                        $num_room_available = !empty($available_rooms[0]['num-room']) ? $available_rooms[0]['num-room'] : $room['num-room'];        
 
                                         $has_room[] = 1; 
 
@@ -1725,6 +1725,14 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
     // Check-in & out date
     $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
     $eheckinout_date = !empty($meta['tf-ct-checkinout']) ? $meta['tf-ct-checkinout'] : '';
+
+    $hotels_rooms = !empty($meta['room']) ? $meta['room'] : '';
+    if(!empty($hotels_rooms[0]['adult'])){
+        $max_adults_numbers = $hotels_rooms[0]['adult'];
+    }else{
+        $max_adults_numbers = 1;
+    }
+
     ?>
 
     <!-- Start Booking widget -->
@@ -1737,10 +1745,8 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
                 <div class="tf_form-inner">
                     <i class="fas fa-user-friends"></i>
                     <select name="adults" id="adults" class="">
-                        <?php
-                        echo '<option value="1">1 ' .__("Adult", "tourfic"). '</option>';
-                        
-                        foreach (range(2,8) as $value) {
+                        <?php                        
+                        foreach (range(1,$max_adults_numbers) as $value) {
                             $selected = $value == $adults ? 'selected' : null;
                             echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __("Adults", "tourfic") . '</option>';
                         }

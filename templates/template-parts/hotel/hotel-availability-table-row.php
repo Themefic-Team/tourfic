@@ -235,11 +235,143 @@
     <td class="reserve">
         <form class="tf-room">
             <?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' );?>
-            <?php if(!empty($num_room_available)){ ?>
+            <?php 
+            
+            $custom_avil_by_date = !empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : '';
+            $custom_order_ids = !empty($room['order_id']) ? $room['order_id'] : '';
+            $custom_reduce_num_room  = !empty($room['reduce_num_room']) ? $room['reduce_num_room'] : '';
+            
+            if($custom_avil_by_date){
+                $custom_number_orders = 0;
+                if( !empty( $custom_order_ids ) && defined( 'TF_PRO' ) && $custom_reduce_num_room == true ) {
+
+                    # Convert order ids to array
+                    $custom_order_ids = explode(',', $custom_order_ids);
+
+                    # Run foreach loop through oder ids
+                    foreach( $custom_order_ids as $order_id ) {
+
+                        # Get $order object from order ID
+                        $order = wc_get_order( $order_id );
+
+                        # Get Only the completed orders
+                        if ( $order && $order->get_status() == 'completed' ) {
+
+                            # Get and Loop Over Order Items
+                            foreach ( $order->get_items() as $item_id => $item ) {
+
+                                /**
+                                 * Order item data
+                                 */                                          
+                                $custom_ordered_number_of_room = $item->get_meta( 'number_room_booked', true );
+
+                                $custom_repeat_by_date = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
+                
+                                foreach($custom_repeat_by_date as $custom_single_date_range) {               
+                                                                
+                                    $customstartdatesearch = array_search($custom_single_date_range["availability"]["from"],$durationdate,true);
+                                    $customenddatesearch = array_search($custom_single_date_range["availability"]["to"],$durationdate,true);
+
+                                    if( !empty($customstartdatesearch) || !empty($customenddatesearch) ) {
+                                        
+                                        $custom_num_room_available = !empty($custom_single_date_range['room_number']) ? $custom_single_date_range['room_number'] : 1;
+                                        
+                                        $custom_startorderdatesearch = array_search($item->get_meta( 'check_in', true ),$durationdate,true);
+                                        $custtom_enddateordersearch = array_search($item->get_meta( 'check_out', true ),$durationdate,true);
+                                        if( !empty($custom_startorderdatesearch) || !empty($custtom_enddateordersearch) ) {
+                                        $custom_number_orders = $custom_number_orders + $custom_ordered_number_of_room;
+                                        }
+                                                                                        
+                                    }
+                                }
+
+
+
+                            }
+                        }
+
+                    }   
+
+                    if(!empty($custom_num_room_available)){
+                        # Calculate available room number after order
+                        $custom_num_room_available = $custom_num_room_available - $custom_number_orders; // Calculate
+                        $custom_num_room_available = max($custom_num_room_available, 0); // If negetive value make that 0
+                    }else{
+                        $custom_num_room_available = !empty($room['num-room']) ? $room['num-room'] : 1;
+                        $custom_num_room_available = $custom_num_room_available - $custom_number_orders; // Calculate
+                        $custom_num_room_available = max($custom_num_room_available, 0); // If 
+                    }
+
+
+                }else{
+
+                    $custom_repeat_by_date = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
+                
+                    foreach($custom_repeat_by_date as $custom_single_date_range) {               
+                                                    
+                        $customstartdatesearch = array_search($custom_single_date_range["availability"]["from"],$durationdate,true);
+                        $customenddatesearch = array_search($custom_single_date_range["availability"]["to"],$durationdate,true);
+
+                        if( !empty($customstartdatesearch) || !empty($customenddatesearch) ) {
+                            $custom_num_room_available = !empty($custom_single_date_range['room_number']) ? $custom_single_date_range['room_number'] : 1;
+                                                                            
+                        }else{
+                            $custom_num_room_available = !empty($room['num-room']) ? $room['num-room'] : 1;
+                        }
+                    }
+
+
+                }
+            }else{
+
+                $custom_number_orders = 0;
+                if( !empty( $custom_order_ids ) && defined( 'TF_PRO' ) && $custom_reduce_num_room == true ) {
+
+                    # Convert order ids to array
+                    $custom_order_ids = explode(',', $custom_order_ids);
+
+                    # Run foreach loop through oder ids
+                    foreach( $custom_order_ids as $order_id ) {
+
+                        # Get $order object from order ID
+                        $order = wc_get_order( $order_id );
+
+                        # Get Only the completed orders
+                        if ( $order && $order->get_status() == 'completed' ) {
+
+                            # Get and Loop Over Order Items
+                            foreach ( $order->get_items() as $item_id => $item ) {
+
+                                /**
+                                 * Order item data
+                                 */                                          
+                                $custom_ordered_number_of_room = $item->get_meta( 'number_room_booked', true );
+
+                                $custom_num_room_available = !empty($room['num-room']) ? $room['num-room'] : 1;               
+                                          
+                                $custom_number_orders = $custom_number_orders + $custom_ordered_number_of_room;
+                                  
+                            }
+                        }
+
+                    }   
+
+                    if(!empty($custom_num_room_available)){
+                        # Calculate available room number after order
+                        $custom_num_room_available = $custom_num_room_available - $custom_number_orders; // Calculate
+                        $custom_num_room_available = max($custom_num_room_available, 0); // If negetive value make that 0
+                    }
+
+
+                }else{
+                    $custom_num_room_available = !empty($room['num-room']) ? $room['num-room'] : 1;
+                }
+            }
+            if(!empty($custom_num_room_available)){ ?>
                 <div class="room-selection-wrap">
                     <select name="hotel_room_selected" id="hotel-room-selected">
                         <?php
-                            foreach ( range( 1, $num_room_available) as $value ) {
+                            foreach ( range( 1, $custom_num_room_available) as $value ) {
                                 echo '<option>' . $value . '</option>';
                             }
                         ?>
@@ -277,7 +409,7 @@
                 ?>
                 <?php 
                 if(!empty($order_ids)){
-                if(!empty($num_room_available)){ ?>
+                if(!empty($custom_num_room_available)){ ?>
                     <?php if($days<=29){ ?>
                         <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
                     <?php }else{ ?>
@@ -334,7 +466,7 @@
                 <?php }else{ ?>
                 <?php 
                 if(!empty($order_ids)){
-                if(!empty($num_room_available)){ ?>
+                if(!empty($custom_num_room_available)){ ?>
                     <?php if($days<=29){ ?>
                     <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
                     <?php }else{ ?>
