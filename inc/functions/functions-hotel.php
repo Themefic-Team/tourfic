@@ -543,14 +543,14 @@ function tf_room_availability_callback() {
                 echo ob_get_clean();
                 $error = $rows = null;
                 $has_room = false;
-
+                $room_count =  0;
                 // generate table rows
                 if ( !empty( $rooms ) ) {
                     ob_start();
                     foreach ( $rooms as $room_id => $room ) {
                         // Check if room is enabled
                         $enable = !empty($room['enable']) && boolval($room['enable']);
-
+                        $room_count++;
                         if ( $enable )  {                         
                             
                             /*
@@ -565,31 +565,7 @@ function tf_room_availability_callback() {
                             $room_adult_price = !empty( $room['adult_price'] ) ? $room['adult_price'] : 0;
                             $room_child_price = !empty( $room['child_price'] ) ? $room['child_price'] : 0;
                             $total_person     = $adult_number + $child_number;
-
-                            //pricing package
-                            $package_enabled = !empty( $room['enable_pricing_package']) ? $room['enable_pricing_package'] : 0;
-                            if( $package_enabled ){
-                           
-                                $packages = !empty( $room['pricing_packages'] ) ? $room['pricing_packages'] : array();
-                                foreach( $packages as $key => $package ){
-
-                                    $adult = $package['adult'];
-                                    $child = $package['child'];
-                                    //echo "<pre>";
-                                    //var_dump($adult,$child,$form_adult);
-                                    if( $form_adult == $adult && $form_child == $child ){                                    
-                                        $price = $package['price'];
-                                        var_dump($price);
-                                    }else{
-                                        $price  = $pricing_by == '1' ? $room_price : $room_adult_price + $room_child_price;
-                                    }
-                                    
-                                }
-                            }else{
-                                $price  = $pricing_by == '1' ? $room_price : $room_adult_price + $room_child_price;
-                            }   
-
-
+                            //$price  = $pricing_by == '1' ? $room_price : $room_adult_price + $room_child_price;                            
                             $form_check_out = $form_end;
 
                             // Check availability by date option
@@ -602,7 +578,7 @@ function tf_room_availability_callback() {
                             $days = iterator_count( $period );
 
                             /**
-                             * Set room availability
+                             * Set room -
                              */
                             $unique_id          = !empty($room['unique_id']) ? $room['unique_id'] : '';
                             $order_ids          = !empty($room['order_id']) ? $room['order_id'] : '';
@@ -687,7 +663,54 @@ function tf_room_availability_callback() {
 
                             }
 
-                            if ( $avil_by_date && defined( 'TF_PRO' ) ) {
+                            //pricing package
+                            $package_enabled = !empty( $room['enable_pricing_package']) ? $room['enable_pricing_package'] : 0;
+                            if( $form_total_person <= $total_person ){
+                            if( ! $avil_by_date && defined( 'TF_PRO' ) && $package_enabled ){ 
+
+                                $packages = !empty( $room['pricing_packages'] ) ? $room['pricing_packages'] : array();
+                                $form_array = array($form_adult,$form_child);
+                                var_dump( $total_person , $form_total_person);
+                                    $matched_packs = array();
+                                    $pack_prices = array();
+                                    foreach( $packages as $key => $package ){
+                                        
+                                        $adult = $package['adult'];
+                                        $child = $package['child'];
+                                        $price = $package['price'];
+
+                                        //make an array of of packages adult and child
+                                        $pack_array = array($adult,$child);
+
+                                        //check if form input and package data are same
+                                       if( $form_array == $pack_array ){
+                                        $matched_packs[] = $pack_array;
+                                        $pack_prices[] = $price;
+                                       }
+                                        
+                                    }
+
+                                    //echo "<pre>";
+                                    //print_r($matched_packs); 
+                                    //print_r(count( $pack_prices ));
+                                    if( count( $pack_prices ) > 0  && !empty($pack_prices)){
+                                        foreach( $pack_prices as $pack){
+                                            $price = $pack;
+                                            include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';   
+                                        }
+                                    }
+                                    if(count( $pack_prices ) == 0 && empty($pack_prices)){ 
+                                        $price = $room_price;
+                                        include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php'; 
+                                    }
+                                } else {        
+                                    $error = __( 'No Room Available! Total person number exceeds!', 'tourfic' );
+                                }                                
+                                
+                            }
+
+                            //pricing package ended
+                            if ( $avil_by_date && defined( 'TF_PRO' ) && !$package_enabled ) {
 
                                 // split date range
                                 $check_in       = strtotime( $form_start . ' 00:00' );
@@ -706,9 +729,7 @@ function tf_room_availability_callback() {
                                         return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
 
                                     } ) );
-                                    echo "<pre>";
-                                    var_dump($available_rooms);
-                                    echo "</pre>";
+                                    
                                     if ( is_iterable($available_rooms) && count( $available_rooms ) >=1) {
                                         
                                         $room_price    = !empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $room_price;
@@ -742,7 +763,9 @@ function tf_room_availability_callback() {
                                 }
 
                             } else {
-                   
+                                
+                                if( !$package_enabled ){
+
                                 if ($pricing_by == '1') {
                                     $price_by_date = $room_price;
                                 } else {
@@ -764,6 +787,7 @@ function tf_room_availability_callback() {
                                 } 
 
                             }
+                        }
                 
                         } else {
 

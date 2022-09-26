@@ -119,6 +119,7 @@
             var child = $('input[name=child]').val();
             var check_in_date = $('input[name=check_in_date]').val();
             var check_out_date = $('input[name=check_out_date]').val();
+            var room_price = $(this).closest('.room-submit-wrap').find('input[name=room_price]').val();
             if($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()){
                 var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
                 var deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
@@ -127,7 +128,7 @@
                 var deposit = $("#hotel_room_depo").val();
             }
             var airport_service= $('.fancybox-slide #airport-service').val();
-            
+
             var data = {
                 action: 'tf_hotel_booking',
                 tf_room_booking_nonce: tf_room_booking_nonce,
@@ -139,11 +140,11 @@
                 child: child,
                 check_in_date: check_in_date,
                 check_out_date: check_out_date,
+                room_price: room_price,
                 room: room,
                 deposit: deposit,
                 airport_service: airport_service
             };
-             
 
             $.ajax({
                 type: 'post',
@@ -167,7 +168,7 @@
                     $this.unblock();
 
                     var response = JSON.parse(data);
-
+                    console.log(response);
                     if (response.status == 'error') {
 
                         if (response.errors) {
@@ -180,7 +181,7 @@
                     } else {
 
                         if (response.redirect_to) {
-                            window.location.replace(response.redirect_to);
+                            //window.location.replace(response.redirect_to);
                         } else {
                             jQuery(document.body).trigger('added_to_cart');
                         }

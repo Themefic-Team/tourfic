@@ -151,6 +151,7 @@
                 <input type="hidden" name="child" value="<?php echo $form_child; ?>">
                 <input type="hidden" name="check_in_date" value="<?php echo $form_check_in; ?>">
                 <input type="hidden" name="check_out_date" value="<?php echo $form_check_out; ?>">
+                <input type="hidden" name="room_price" value="<?php echo $price; ?>">
                 <input type="hidden" id="hotel_roomid">
                 <input type="hidden" id="hotel_room_number">
                 <input type="hidden" id="hotel_room_uniqueid">
