@@ -496,6 +496,21 @@
   color: #003162;
 }
 
+
+
+@media print{
+  .tf-pdf-titles{
+      padding-top: 25px;
+  }
+  .pdf-location img{
+    float: left !important;
+  }
+  .tf-pdf-image tr td img{
+    border-top-left-radius:     4em;
+  }
+}
+
+
 /**************** MAP Block ****************/
 
 .tf-map-wrapper .tf-container {
