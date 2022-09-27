@@ -1,3 +1,7 @@
+<?php 
+$custom_adult_number     = !empty( $room['adult'] ) ? $room['adult'] : 0;
+if($form_adult <= $custom_adult_number ){
+?>
 <tr>
     <td class="description">
         <div class="tf-room-type">
@@ -488,3 +492,4 @@
         </form>
     </td>
 </tr>
+<?php } ?>

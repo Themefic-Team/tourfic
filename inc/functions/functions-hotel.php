@@ -1726,9 +1726,14 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
     $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
     $eheckinout_date = !empty($meta['tf-ct-checkinout']) ? $meta['tf-ct-checkinout'] : '';
 
+    $maxadults = [];
     $hotels_rooms = !empty($meta['room']) ? $meta['room'] : '';
-    if(!empty($hotels_rooms[0]['adult'])){
-        $max_adults_numbers = $hotels_rooms[0]['adult'];
+    foreach($hotels_rooms as $singleroom){
+        $maxadults[]=$singleroom['adult'];
+    }
+
+    if(!empty($maxadults)){
+        $max_adults_numbers = max($maxadults);
     }else{
         $max_adults_numbers = 1;
     }
