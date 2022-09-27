@@ -106,7 +106,7 @@ while ( have_posts() ) : the_post();
             <div class="tf-container">
                 <div class="tf-title-wrap">
                     <div class="tf-title-left">
-                        <span class="post-type">Hotel</span>
+                        <span class="post-type"><?php _e('Hotel', 'tourfic') ?></span>
                         <h1><?php the_title(); ?></h1>
                         <!-- Start map link -->
 						<?php if ( $locations ) { ?>
@@ -140,7 +140,7 @@ while ( have_posts() ) : the_post();
 							} else {
 								if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {
 									?>
-                                    <a class="tf-wishlist-button" title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
+                                    <a class="tf-wishlist-button" title="<?php esc_attr_e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
                                                 class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
                                                 data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
 											echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
@@ -196,7 +196,7 @@ while ( have_posts() ) : the_post();
                                             </a>
                                         </li>
                                         <li>
-                                            <div class="share-center-copy-form tf-dropdown-item" title="Share this link"
+                                            <div class="share-center-copy-form tf-dropdown-item" title="<?php esc_attr_e( 'Share this link', 'tourfic' ); ?>"
                                                  aria-controls="share_link_button">
                                                 <label class="share-center-copy-label"
                                                        for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
@@ -217,7 +217,7 @@ while ( have_posts() ) : the_post();
                         <!-- End Share Section -->
 
                         <div class="reserve-button">
-                            <a href="#rooms" class="tf-btn-flip" data-back="View Rooms" data-front="Reserve Now"></a>
+                            <a href="#rooms" class="tf-btn-flip" data-back="<?php esc_attr_e('View Rooms', 'tourfic'); ?>" data-front="<?php esc_attr_e('Reserve Now', 'tourfic'); ?>"></a>
                         </div>
                     </div>
                 </div>

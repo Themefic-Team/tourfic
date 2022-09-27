@@ -132,7 +132,7 @@ function tf_load_textdomain() {
     load_plugin_textdomain( 'tourfic', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 
 }
-add_action( 'init', 'tf_load_textdomain' );
+add_action( 'plugins_loaded', 'tf_load_textdomain' );
 
 /**
  * Plugins Loaded Actions

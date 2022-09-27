@@ -158,18 +158,38 @@ function tf_get_review_fields( &$fields, $type = null ) {
 	 * Default fields until user save from option panel
 	 */
 	$default_hotels_field = [
-		[ "r-field-type" => "Staff" ],
-		[ "r-field-type" => "Facilities" ],
-		[ "r-field-type" => "Cleanliness" ],
-		[ "r-field-type" => "Comfort" ],
-		[ "r-field-type" => "Value for money" ],
-		[ "r-field-type" => "Location" ],
+		array(
+			'r-field-type' => __( 'Staff', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Facilities', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Cleanliness', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Comfort', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Value for money', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Location', 'tourfic' ),
+		),
 	];
 	$default_tours_field  = [
-		[ "r-field-type" => "Guide" ],
-		[ "r-field-type" => "Transportation" ],
-		[ "r-field-type" => "Value for money" ],
-		[ "r-field-type" => "Safety" ]
+		array(
+			'r-field-type' => __( 'Guide', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Transportation', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Value for money', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Safety', 'tourfic' ),
+		),
 	];
 
 	// If user does not have fields from settings, default fields will be loaded

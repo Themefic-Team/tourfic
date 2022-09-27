@@ -529,7 +529,7 @@ function tf_room_availability_callback() {
 	ob_start();
 	?>
 
-    <h2 class="section-heading"><?php esc_html_e( 'Available Rooms', 'tourfic' ); ?></h2>
+    <h2 class="section-heading"><?php _e( 'Available Rooms', 'tourfic' ); ?></h2>
     <div class="tf-room-table hotel-room-wrap">
     <div id="tour_room_details_loader">
         <div id="tour-room-details-loader-img">
@@ -561,8 +561,8 @@ function tf_room_availability_callback() {
 			if ( $enable ) {
 
 				/*
-						* Backend room options
-						*/
+                * Backend room options
+                */
 				$footage          = ! empty( $room['footage'] ) ? $room['footage'] : 0;
 				$bed              = ! empty( $room['bed'] ) ? $room['bed'] : 0;
 				$adult_number     = ! empty( $room['adult'] ) ? $room['adult'] : 0;
@@ -1172,7 +1172,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
         <div class="tf_booking-dates">
             <div class="tf_form-row">
                 <label class="tf_label-row">
-                    <span class="tf-label"><?php _e( 'Check-in &amp; Check-out date', 'tourfic' ); ?></span>
+                    <span class="tf-label"><?php _e( 'Check-in & Check-out date', 'tourfic' ); ?></span>
                     <div class="tf_form-inner">
                         <i class="far fa-calendar-alt"></i>
                         <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
@@ -1280,7 +1280,13 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	}
 
 	// Single link
-	$url = get_the_permalink() . '?adults=' . ( $adults ?? '' ) . '&children=' . ( $child ?? '' ) . '&room=' . ( $room ?? '' ) . '&check-in-out-date=' . ( $check_in_out ?? '' );
+	$url = get_the_permalink();
+    $url = add_query_arg( array(
+        'adults' => $adults,
+        'children' => $child,
+        'room' => $room,
+        'check-in-out-date' => $check_in_out,
+    ), $url );
 
 	// Check room check in/out time
 	$room_date_matched = array();

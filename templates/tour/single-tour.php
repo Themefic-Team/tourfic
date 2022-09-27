@@ -454,11 +454,11 @@ while ( have_posts() ) : the_post();
 							<?php foreach ( $faqs as $key => $faq ): ?>
                                 <div id="tf-faq-item">
                                     <div class="tf-faq-title">
-                                        <h4><?php esc_html_e( $faq['title'] ); ?></h4>
+                                        <h4><?php echo esc_html( $faq['title'] ); ?></h4>
                                         <i class="fas fa-angle-down arrow"></i>
                                     </div>
                                     <div class="tf-faq-desc">
-                                        <p><?php _e( $faq['desc'] ); ?></p>
+                                        <p><?php echo esc_html( $faq['desc'] ); ?></p>
                                     </div>
                                 </div>
 							<?php endforeach; ?>
@@ -474,7 +474,7 @@ while ( have_posts() ) : the_post();
             <div class="toc-section gray-wrap sp-50">
                 <div class="tf-container">
                     <div class="tf-toc-wrap">
-                        <h2 class="section-heading"><?php esc_html_e( 'Tour Terms & Conditions', 'tourfic' ); ?></h2>
+                        <h2 class="section-heading"><?php _e( 'Tour Terms & Conditions', 'tourfic' ); ?></h2>
                         <div class="tf-toc-inner">
 							<?php echo wpautop( $terms_and_conditions ); ?>
                         </div>
@@ -489,7 +489,7 @@ while ( have_posts() ) : the_post();
             <div id="tf-review" class="review-section sp-50">
                 <div class="tf-container">
                     <div class="reviews">
-                        <h2 class="section-heading"><?php esc_html_e( 'Guest Reviews', 'tourfic' ); ?></h2>
+                        <h2 class="section-heading"><?php _e( 'Guest Reviews', 'tourfic' ); ?></h2>
 						<?php comments_template(); ?>
                     </div>
                 </div>

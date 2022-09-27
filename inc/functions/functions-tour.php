@@ -842,7 +842,13 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
         $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
     }
     // Single link
-    $url = get_the_permalink() . '?adults=' . ($adults ?? '') . '&children=' . ($child ?? '') . '&infant=' . ($infant ?? '') . '&check-in-out-date=' . ($check_in_out ?? '');
+    $url = get_the_permalink();
+    $url = add_query_arg( array(
+            'adults' => $adults,
+            'children' => $child,
+            'infant' => $infant,
+            'check-in-out-date' => $check_in_out
+    ), $url );
 
     ?>
 <?php if($featured){ ?>

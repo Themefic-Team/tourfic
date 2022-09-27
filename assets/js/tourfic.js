@@ -56,7 +56,6 @@
                     $('html, body').animate({
                         scrollTop: $("#rooms").offset().top
                     }, 500);
-                    //console.log(data);
                     $("#rooms").html(data);
                 },
                 error: function (jqXHR, exception) {
@@ -478,7 +477,7 @@
                     $('.archive_ajax_result').unblock();
 
                     $('.archive_ajax_result').html(data);
-                    // @KK show notice in every success request 
+                    // @KK show notice in every success request
                     notyf.success(tf_params.ajax_result_success);
                 },
                 error: function (data) {
@@ -676,7 +675,7 @@
             let userLists = getWish()
             // Look if item is not already is in list
             if (userLists.filter(i => i.post == item.post).length === 0) {
-                // push to list 
+                // push to list
                 userLists.push(item)
                 // save list
                 localStorage.setItem(wishKey, JSON.stringify(userLists));
@@ -1361,7 +1360,7 @@
         * @author: Foysal
         */
         $(window).on('load', function () {
-            if($('.tf-tablinks').length > 0){
+            if ($('.tf-tablinks').length > 0) {
                 $('.tf-tablinks').first().trigger('click').addClass('active');
             }
         });
@@ -1370,12 +1369,13 @@
         * Booking Form tab mobile version
         * @author: Foysal
         */
-        $(document).on('change', 'select[name="tf-booking-form-tab-select"]', function(){
+        $(document).on('change', 'select[name="tf-booking-form-tab-select"]', function () {
             var tabId = $(this).val();
             tfOpenForm(event, tabId);
         });
     });
-})(jQuery, window);
+})
+(jQuery, window);
 
 /**
  * Horizontal Search Form Tab Control
