@@ -267,6 +267,15 @@ a.slick-slide-item-link {
     justify-content: flex-start;
     flex-wrap: wrap;
 }
+.availability-table td.reserve{
+    width: 180px;
+    text-align: center;
+}
+.availability-table td.reserve span.num-room-title{
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 14px;
+}
 
 /**************** FAQ ****************/
 

@@ -368,6 +368,7 @@
                 }
             }
             if(!empty($custom_num_room_available)){ ?>
+            <span class="num-room-title"><?php _e("Number of Rooms", "tourfic"); ?></span>
                 <div class="room-selection-wrap">
                     <select name="hotel_room_selected" id="hotel-room-selected">
                         <?php
