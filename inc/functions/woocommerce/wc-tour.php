@@ -484,6 +484,7 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	$infants_number   = ! empty( $values['tf_tours_data']['infants'] ) ? $values['tf_tours_data']['infants'] : '';
 	$start_date       = ! empty( $values['tf_tours_data']['start_date'] ) ? $values['tf_tours_data']['start_date'] : '';
 	$end_date         = ! empty( $values['tf_tours_data']['end_date'] ) ? $values['tf_tours_data']['end_date'] : '';
+	$tour_time        = ! empty( $values['tf_tours_data']['tour_time'] ) ? $values['tf_tours_data']['tour_time'] : '';
 	$tour_date        = ! empty( $values['tf_tours_data']['tour_date'] ) ? $values['tf_tours_data']['tour_date'] : '';
 	$tour_extra       = ! empty( $values['tf_tours_data']['tour_extra_title'] ) ? $values['tf_tours_data']['tour_extra_title'] : '';
 	$due              = ! empty( $values['tf_tours_data']['due'] ) ? $values['tf_tours_data']['due'] : null;
@@ -525,6 +526,9 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 		if ( $tour_date ) {
 			$item->update_meta_data( 'Tour Date', date( "F j, Y", strtotime( $tour_date ) ) );
 		}
+	}
+	if($tour_time){
+		$item->update_meta_data( 'Tour Time', $tour_time );
 	}
 
 	if ( $tour_extra ) {

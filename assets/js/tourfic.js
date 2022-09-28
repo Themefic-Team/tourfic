@@ -890,7 +890,7 @@
                             let source = this.getElementsByTagName("input")[0];
                             /*insert the value for the autocomplete text field:*/
                             inp.value = source.value;
-                            inp.closest('input').nextElementSibling.value = source.dataset.slug
+                            inp.closest('input').nextElementSibling.value = source.value //source.dataset.slug
                             /*close the list of autocompleted values,
                             (or any other open lists of autocompleted values:*/
                             closeAllLists();
