@@ -864,6 +864,19 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
                         </div>
                     </div>
                 </div>
+                <?php //apply_filters('tf_child_age_field'); ?>
+                <div class="tf-children-age-fields">
+                    <div class="tf-children-age">
+                        <label for="children-age">Select Children Age:</label>
+                        <select id="children-age">
+                            <option value="under_one">Under 1</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3" selected>3</option>
+                        </select>
+                    </div>
+
+                </div>
             </div>
 
         </div>
