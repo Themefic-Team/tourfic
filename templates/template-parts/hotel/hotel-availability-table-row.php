@@ -117,7 +117,7 @@ if($form_adult <= $custom_adult_number ){
                 if(!defined( 'TF_PRO' )){ echo wc_price( $price ); } ?></span>
             
                 <div class="price-per-night">
-                <b style="font-size: 14px">
+                <b style="font-size: 14px; text-transform: uppercase;">
                 <?php
                 if(defined( 'TF_PRO' )){ ?>
                     <?php $days > 0 ? esc_html_e( 'Per person and night', 'tourfic' ) :  esc_html_e( 'Per person and night', 'tourfic' );?>

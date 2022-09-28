@@ -718,7 +718,9 @@ $share_link = get_permalink($post_id);
                                         <div class="tf-price-column">
                                             
                                                 <div class="price-per-night">
-                                                    <?php esc_html_e( 'per person/night', 'tourfic' ); ?>
+                                                <b style="font-size: 14px; text-transform: uppercase;">
+                                                    <?php esc_html_e( 'Per person and night', 'tourfic' ); ?>
+                                                </b>
                                                 </div>
                                                 <?php 
                                                 if(defined( 'TF_PRO' )){ 
