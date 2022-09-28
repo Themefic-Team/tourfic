@@ -161,12 +161,13 @@ function tf_hotel_booking_callback(){
             // } elseif ( $pricing_by == '2' ) {
 
                 $roompackageprice = $rooms[$room_id]['tf-'.$hotel_pack.'-days'];
+                $room_total_price = $rooms[$room_id]['adult'];
                 if(!empty($hotel_meal)){
-                    $price_total = ($roompackageprice['tf-room'] + $roompackageprice[''.$hotel_meal.''])*$adult;
+                    $price_total = ($roompackageprice['tf-room'] + $roompackageprice[''.$hotel_meal.''])*$room_total_price;
                     $tf_room_data['tf_hotel_data']['tf-room'] = $roompackageprice['tf-room'];
                     $tf_room_data['tf_hotel_data'][''.$hotel_meal.''] = $roompackageprice[''.$hotel_meal.''];
                 }else{
-                    $price_total = $roompackageprice['tf-room']*$adult;
+                    $price_total = $roompackageprice['tf-room']*$room_total_price;
                     $tf_room_data['tf_hotel_data']['tf-room'] = $roompackageprice['tf-room'];
                 }
 

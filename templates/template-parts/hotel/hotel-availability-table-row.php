@@ -117,15 +117,12 @@ if($form_adult <= $custom_adult_number ){
                 if(!defined( 'TF_PRO' )){ echo wc_price( $price ); } ?></span>
             
                 <div class="price-per-night">
-                <?php
-                if(!defined( 'TF_PRO' )){ ?>
-                    <?php $days > 0 ? esc_html_e( 'for '.$days .' nights', 'tourfic' ) :  esc_html_e( 'per person/night', 'tourfic' );?>
-                <?php } ?>
+                <b style="font-size: 14px">
                 <?php
                 if(defined( 'TF_PRO' )){ ?>
-                    <?php $days > 0 ? esc_html_e( 'per person/night', 'tourfic' ) :  esc_html_e( 'per person/night', 'tourfic' );?>
+                    <?php $days > 0 ? esc_html_e( 'Per person and night', 'tourfic' ) :  esc_html_e( 'Per person and night', 'tourfic' );?>
                 <?php } ?>
-
+                </b>
                 </div>
                 <?php 
                 if(defined( 'TF_PRO' )){ 
@@ -269,26 +266,56 @@ if($form_adult <= $custom_adult_number ){
                                  */                                          
                                 $custom_ordered_number_of_room = $item->get_meta( 'number_room_booked', true );
 
-                                $custom_repeat_by_date = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
+                                // $custom_repeat_by_date = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
                 
-                                foreach($custom_repeat_by_date as $custom_single_date_range) {               
+                                // foreach($custom_repeat_by_date as $custom_single_date_range) {               
                                                                 
-                                    $customstartdatesearch = array_search($custom_single_date_range["availability"]["from"],$durationdate,true);
-                                    $customenddatesearch = array_search($custom_single_date_range["availability"]["to"],$durationdate,true);
+                                //     $customstartdatesearch = array_search($custom_single_date_range["availability"]["from"],$durationdate,true);
+                                //     $customenddatesearch = array_search($custom_single_date_range["availability"]["to"],$durationdate,true);
 
-                                    if( !empty($customstartdatesearch) || !empty($customenddatesearch) ) {
+                                //     if( !empty($customstartdatesearch) || !empty($customenddatesearch) ) {
                                         
-                                        $custom_num_room_available = !empty($custom_single_date_range['room_number']) ? $custom_single_date_range['room_number'] : 1;
+                                //         $custom_num_room_available = !empty($custom_single_date_range['room_number']) ? $custom_single_date_range['room_number'] : 1;
+                                        
+                                //         $custom_startorderdatesearch = array_search($item->get_meta( 'check_in', true ),$durationdate,true);
+                                //         $custtom_enddateordersearch = array_search($item->get_meta( 'check_out', true ),$durationdate,true);
+                                //         if( !empty($custom_startorderdatesearch) || !empty($custtom_enddateordersearch) ) {
+                                //         $custom_number_orders = $custom_number_orders + $custom_ordered_number_of_room;
+                                //         }
+                                                                                        
+                                //     }
+                                // }
+
+
+                                $tfcustom_repeat_by_date_period = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
+                                if(!empty($tfcustom_repeat_by_date_period)){
+                                    foreach($tfcustom_repeat_by_date_period as $custom_single_date_range) {               
+
+                                    $availbilityperiod = new DatePeriod(
+                                        new DateTime( $custom_single_date_range["availability"]["from"] . ' 00:00' ),
+                                        new DateInterval( 'P1D' ),
+                                        new DateTime( $custom_single_date_range["availability"]["to"] . ' 23:59' )
+                                    );
+
+                                    $availbilitydurationdate = [];
+                                    foreach ( $availbilityperiod as $date ) {
+                                        $availbilitydurationdate[$date->format( 'Y/m/d')] = $date->format( 'Y/m/d');
+                                    }
+                                    
+                                    $customavail_result = array_intersect($availbilitydurationdate,$durationdate);
+                                    
+                                    if( !empty($customavail_result) ) {
+                                        $custom_num_room_available = !empty($custom_single_date_range['room_number']) ? $custom_single_date_range['room_number'] : 1; 
                                         
                                         $custom_startorderdatesearch = array_search($item->get_meta( 'check_in', true ),$durationdate,true);
                                         $custtom_enddateordersearch = array_search($item->get_meta( 'check_out', true ),$durationdate,true);
                                         if( !empty($custom_startorderdatesearch) || !empty($custtom_enddateordersearch) ) {
                                         $custom_number_orders = $custom_number_orders + $custom_ordered_number_of_room;
                                         }
-                                                                                        
+                                    }
+
                                     }
                                 }
-
 
 
                             }
@@ -309,21 +336,52 @@ if($form_adult <= $custom_adult_number ){
 
                 }else{
 
-                    $custom_repeat_by_date = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
-                
-                    foreach($custom_repeat_by_date as $custom_single_date_range) {               
-                                                    
-                        $customstartdatesearch = array_search($custom_single_date_range["availability"]["from"],$durationdate,true);
-                        $customenddatesearch = array_search($custom_single_date_range["availability"]["to"],$durationdate,true);
+                    $tfcustom_repeat_by_date_period = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
+                    $tfcustom_rept_check = 0;
+                    if(!empty($tfcustom_repeat_by_date_period)){
+                        foreach($tfcustom_repeat_by_date_period as $custom_single_date_range) {               
 
-                        if( !empty($customstartdatesearch) || !empty($customenddatesearch) ) {
+                        $availbilityperiod = new DatePeriod(
+                            new DateTime( $custom_single_date_range["availability"]["from"] . ' 00:00' ),
+                            new DateInterval( 'P1D' ),
+                            new DateTime( $custom_single_date_range["availability"]["to"] . ' 23:59' )
+                        );
+
+                        $availbilitydurationdate = [];
+                        foreach ( $availbilityperiod as $date ) {
+                            $availbilitydurationdate[$date->format( 'Y/m/d')] = $date->format( 'Y/m/d');
+                        }
+                        
+                        $customavail_result = array_intersect($availbilitydurationdate,$durationdate);
+                        
+                        if( !empty($customavail_result) ) {
                             $custom_num_room_available = !empty($custom_single_date_range['room_number']) ? $custom_single_date_range['room_number'] : 1;
-                                                                            
-                        }else{
-                            $custom_num_room_available = !empty($room['num-room']) ? $room['num-room'] : 1;
+                            $tfcustom_rept_check+=1;                                               
+                        }
+
                         }
                     }
+                    if( $tfcustom_rept_check < 1 ){
+                        $custom_num_room_available = !empty($room['num-room']) ? $room['num-room'] : 1;
+                    }
 
+
+
+                    
+                    // $custom_repeat_by_date = !empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
+                    // foreach($custom_repeat_by_date as $custom_single_date_range) {               
+                                                    
+                    //     // $customstartdatesearch = array_search($custom_single_date_range["availability"]["from"],$durationdate,true);
+                    //     // $customenddatesearch = array_search($custom_single_date_range["availability"]["to"],$durationdate,true);
+
+                    //     if( !empty($customavail_result) ) {
+                    //         $custom_num_room_available = !empty($custom_single_date_range['room_number']) ? $custom_single_date_range['room_number'] : 1;
+                                                                            
+                    //     }else{
+                    //         $custom_num_room_available = !empty($room['num-room']) ? $room['num-room'] : 1;
+                    //     }
+                    
+                    // }
 
                 }
             }else{
