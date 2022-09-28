@@ -27,7 +27,7 @@ function register_tf_hotel_post_type() {
         'not_found_in_trash'    => __( 'No %2$s found in Trash', 'tourfic' ),
         'parent_item_colon'     => '',
         'menu_name'             => _x( 'Hotels', 'tourfic post type menu name', 'tourfic' ),
-        'featured_image'        => __( '%1$s Image', 'tourfic' ),
+        'featured_image'        => __( '%1$s Main Image', 'tourfic' ),
         'set_featured_image'    => __( 'Set %1$s Image', 'tourfic' ),
         'remove_featured_image' => __( 'Remove %1$s Image', 'tourfic' ),
         'use_featured_image'    => __( 'Use as %1$s Image', 'tourfic' ),
