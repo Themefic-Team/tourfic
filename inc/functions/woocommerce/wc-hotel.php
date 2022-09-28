@@ -178,7 +178,7 @@ function tf_hotel_booking_callback(){
                 // $child_price = $child_price * $child;
                 // $total_price = $adult_price + $child_price;    
                                 
-                $tf_room_data['tf_hotel_data']['adult']          = $adult;
+                $tf_room_data['tf_hotel_data']['adult']          = $room_total_price;
                 // $tf_room_data['tf_hotel_data']['child']          = $child;
             // }
 
