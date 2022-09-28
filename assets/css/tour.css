@@ -506,7 +506,31 @@
     float: left !important;
   }
   .tf-pdf-image tr td img{
-    border-top-left-radius:     4em;
+    border-top-left-radius: 4em;
+  }
+  .tour-pdf-fact-title{
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+  .tour-pdf-fact-details{
+    background: #EBF2FF;
+    padding: 16px;
+  }
+  .tf-tour-pdf-single-fact-details{
+    padding-bottom: 15px;
+  }
+  .tf-pdf-itinerary-title{
+    padding-bottom: 0px;
+  }
+  .tf-pdf-itinerary-description{
+    margin: 0;
+    padding-top: 0px;
+  }
+  .tf-pdf-itinerary-description img{
+    float: left !important;
+  }
+  .tf-pdf-itinerary-description span{
+    float: left;
   }
 }
 
