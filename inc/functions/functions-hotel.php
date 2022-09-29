@@ -252,7 +252,7 @@ if ( ! function_exists( 'get_hotel_locations' ) ) {
 
 		$location_terms = get_terms( array(
 			'taxonomy'   => 'hotel_location',
-			'hide_empty' => false,
+			'hide_empty' => true,
 		) );
 
 		foreach ( $location_terms as $location_term ) {

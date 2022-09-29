@@ -299,7 +299,8 @@ while ( have_posts() ) : the_post();
                                 <div style="display: none;" id="tf-hotel-google-maps">
                                     <div class="tf-hotel-google-maps-container">
 										<?php
-										if ( ! empty( $map["address"] ) ) { ?>
+										if ( ! empty( $map["address"] ) ) {
+                                            ?>
                                             <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $map["address"] ) ); ?>&z=15&output=embed" width="100%" height="550" style="border:0;"
                                                     allowfullscreen="" loading="lazy"></iframe>
 										<?php } else { ?>

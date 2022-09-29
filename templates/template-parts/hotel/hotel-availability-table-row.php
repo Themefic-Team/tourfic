@@ -109,9 +109,9 @@
         <div class="tf-price-column">
             <span class="tf-price"><?php echo wc_price( $price ); ?></span>
             <?php if ( $pricing_by == '1' ) { ?>
-                <div class="price-per-night"><?php $days > 0 ? esc_html_e( 'for '.$days .' nights', 'tourfic' ) :  esc_html_e( 'per night', 'tourfic' );?></div>
+                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  esc_html_e( 'per night', 'tourfic' );?></div>
             <?php } else {?>
-                <div class="price-per-night"><?php $days > 0 ? esc_html_e( 'for '.$days .' nights', 'tourfic' ) : esc_html_e( 'per person/night', 'tourfic' );?></div>
+                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : esc_html_e( 'per person/night', 'tourfic' );?></div>
             <?php }?>
 
             <?php if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount)) { ?>
@@ -139,7 +139,7 @@
                 
                 <div class="room-deposit-wrap">
                     <input type="checkbox" id="tf-make-deposit" name="make_deposit" value="<?php echo $room_id ?>">
-                    <label for="tf-make-deposit">I'll make a partial payment</label><br>
+                    <label for="tf-make-deposit"><?php _e("I'll make a partial payment", "tourfic") ?></label><br>
                 </div>
 	        <?php } ?>
 

@@ -818,7 +818,7 @@ function tf_search_result_ajax_sidebar() {
 				if ( empty( $check_in_out ) ) {
 
 					$not_found[] = 0;
-					tf_hotel_archive_single_item();
+					tf_hotel_archive_single_item($adults, $child, $room);
 
 				} else {
 					if ( ! empty( $startprice ) && ! empty( $endprice ) ) {

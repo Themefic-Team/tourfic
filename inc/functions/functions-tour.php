@@ -197,7 +197,7 @@ if ( !function_exists( 'get_tour_destinations' ) ) {
 
         $destination_terms = get_terms( array(
             'taxonomy'   => 'tour_destination',
-            'hide_empty' => false,
+            'hide_empty' => true,
         ) );
 
         foreach ( $destination_terms as $destination_term ) {
