@@ -499,6 +499,8 @@
 
 
 @media print{
+  
+  
   .tf-pdf-titles{
       padding-top: 25px;
   }
@@ -511,6 +513,9 @@
   .tour-pdf-fact-title{
     padding-top: 25px;
     padding-bottom: 25px;
+  }
+  .tour-pdf-fact-title-padding{
+    padding-left: 0px;
   }
   .tour-pdf-fact-details{
     background: #EBF2FF;
@@ -531,6 +536,24 @@
   }
   .tf-pdf-itinerary-description span{
     float: left;
+    width: 10% !important;
+  }
+  .tf-tour-pdf-description{
+    padding-bottom: 10px;
+  }
+  .tf-pdf-customer-info{
+    padding-top: 150px;
+  }
+  .tf-pdf-spacing{
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+  .tf-pdf-image.tf-pdf-spacing{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .tf-pdf-image img{
+    border-radius: 5px !important;
   }
 }
 
