@@ -72,6 +72,15 @@ button.tf-tablinks:focus {
     display: none;
 }
 
+.tf-children-age-fields {
+    display: flex;
+    flex-direction: row;
+}
+
+.tf-children-age {
+    display: flex;
+    flex-direction: column;
+}
 
 .single_recomended_content {
     height: 270px;

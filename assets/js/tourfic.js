@@ -1345,6 +1345,27 @@
 
         
     });
+
+    
+/**
+ * Children age field add when children added in search field
+ * @since 2.8.6
+ * @author Abu Hena
+ */
+$('.acr-select input#children').on('change',function(){
+    var child = $(this).val();
+    var age_field_el = $('div[id^="tf-age-field-"]:last');
+    // And increment that number by 1
+    var num = parseInt( age_field_el.prop("id").match(/\d+/g), 10 ) +1;
+    age_field_el = age_field_el.find("label").html('Child age ' + child);
+    // Clone it and assign the new ID 
+    //var age_field = age_field_el.clone().prop('id', 'tf-age-field-'+num );
+    //var label = age_field_el. $('#tf-age-field-'+num + ' label').html("hello"+num);
+    // Finally insert age_field
+    age_field_el.append( age_field_el);
+
+})
+
 })(jQuery, window);
 
 /**

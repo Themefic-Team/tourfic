@@ -768,7 +768,7 @@ function tf_room_availability_callback() {
 }
 
 
-                #################################
+#################################
 # All the forms                 #
 # Search form, booking form     #
 #################################
@@ -863,20 +863,7 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
                             <div class="acr-inc">+</div>
                         </div>
                     </div>
-                </div>
-                <?php //apply_filters('tf_child_age_field'); ?>
-                <div class="tf-children-age-fields">
-                    <div class="tf-children-age">
-                        <label for="children-age">Select Children Age:</label>
-                        <select id="children-age">
-                            <option value="under_one">Under 1</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3" selected>3</option>
-                        </select>
-                    </div>
-
-                </div>
+                </div>                
             </div>
 
         </div>
@@ -1022,6 +1009,22 @@ if ( !function_exists('tf_hotel_advanced_search_form_horizontal') ) {
                         </div>
                     </div>
                 </div>
+                
+                <!-- Children age input field based on children number -->
+                <?php $children_age = tfopt('children_age_limit');?>
+                <div class="tf-children-age-fields">
+                    <div class="tf-children-age" id="tf-age-field-1">
+                        <label for="children-age">Children Age:</label>
+                        <select id="children-age">
+                            <option value disabled class="tf-dummy-age-option"></option>
+                            <?php for($age = 0;$age <= $children_age;$age++){
+                                ?>
+                               <option value="<?php echo $age; ?>"><?php echo $age; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+
             </div>
 
         </div>
