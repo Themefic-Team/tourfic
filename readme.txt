@@ -212,11 +212,15 @@ Tourfic has a lot of built-in Shortcodes to make your life easy.
 <pre>[tf_search_form]</pre>
 Show search form for hotels/tours with Filters
 <pre>[tf_search advanced="enabled"]</pre>
+Show search form for booking.com
+<pre>[tf_search type="booking" ]</pre>
+Show search form for Travelpayout
+<pre>[tf_search type="tp-hotel,tp-flight" ]</pre>
 <strong>Attributes:</strong>
 <ul>
  	<li><strong>title</strong> - Title of the form. Default to blank.</li>
  	<li><strong>subtitle</strong> - Subtitle of the form. Default to blank.</li>
-    <li><strong>type</strong> - `all` or `hotel` or `tour` or `booking` or `tp-flight` or `tp-hotel`. Default to all</li>
+  <li><strong>type</strong> - `all` or `hotel` or `tour` or `booking` or `tp-flight` or `tp-hotel`. Default to all.Use (,) for multiple types like ` type="hotel,tour,booking" `</li>
  	<li><strong>fullwidth</strong> - For full width template where no container is present it should be true. Default to false.</li>
 </ul>
 
@@ -381,6 +385,26 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 * Added: Hotel Map show on Popup (Hotel Single Page) (Pro)
 * Added: Google Map Settings (Admin Hotel and Tour) (Pro)
 * Added: Enquiry Email Hotel and Tour (Tourfic Settings) (Pro)
+
+= 2.8.2 - 28 August 2022 =
+
+Fixed: css issue fixed on tour booking form
+Fixed: Email verification issue fixed
+
+= 2.8.1 - 18 August 2022 =
+
+Fixed: Responsive issue on tour
+Fixed: Review validation message issue fixed on tours
+Checked: Php 8.0 compatibility check
+
+= 2.7.3 - 08 August 2022 =
+
+Fixed: Responsive issue on tour
+Fixed: Review validation message issue fixed on tours
+Fixed: Review validation message issue fixed on hotels
+Fixed: Tour Booking validation issue
+Added: Linkedin and Pinterest share option
+Added: Feature image required hotel and tours
 
 = 2.7.2 - 23/07/2022 =
 
