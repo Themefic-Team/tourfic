@@ -197,7 +197,7 @@ if ( !function_exists( 'get_tour_destinations' ) ) {
 
         $destination_terms = get_terms( array(
             'taxonomy'   => 'tour_destination',
-            'hide_empty' => false,
+            'hide_empty' => true,
         ) );
 
         foreach ( $destination_terms as $destination_term ) {
@@ -320,6 +320,7 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
                 enableTime: false,
                 mode: "range",
                 dateFormat: "Y/m/d",
+                minDate: "today",
                 onReady: function(selectedDates, dateStr, instance) {
                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                 },
@@ -431,7 +432,7 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
                     <div class="tf_input-inner">
                         <label class="tf_label-row" style="width: 100%;">
                             <span class="tf-label"><?php _e('More', 'tourfic'); ?></span>
-                            <span style="text-decoration: none; display: block; cursor: pointer;"><?php _e('Filter', 'tourfic'); ?>  <i class="fas fa-angle-down"></i></a>
+                            <span style="text-decoration: none; display: block; cursor: pointer;"><?php _e('Filter', 'tourfic'); ?>  <i class="fas fa-angle-down"></i></span>
                         </label>
                     </div>
                     <div class="tf-more-info">
@@ -458,6 +459,7 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
                 enableTime: false,
                 mode: "range",
                 dateFormat: "Y/m/d",
+                minDate: "today",
                 onReady: function(selectedDates, dateStr, instance) {
                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                 },
@@ -840,7 +842,13 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
         $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
     }
     // Single link
-    $url = get_the_permalink() . '?adults=' . ($adults ?? '') . '&children=' . ($child ?? '') . '&infant=' . ($infant ?? '') . '&check-in-out-date=' . ($check_in_out ?? '');
+    $url = get_the_permalink();
+    $url = add_query_arg( array(
+            'adults' => $adults,
+            'children' => $child,
+            'infant' => $infant,
+            'check-in-out-date' => $check_in_out
+    ), $url );
 
     ?>
 <?php if($featured){ ?>

@@ -99,12 +99,6 @@ if ( class_exists( 'CSF' ) ) {
                 'subtitle' => __( 'E.g. 3 days', 'tourfic' ),
             ),
             array(
-                'id'       => 'info_type',
-                'type'     => 'text',
-                'title'    => __( 'Tour Type', 'tourfic' ),
-                'subtitle' => __( 'E.g. Fixed Tour', 'tourfic' ),
-            ),
-            array(
                 'id'       => 'group_size',
                 'type'     => 'text',
                 'title'    => __( 'Group Size', 'tourfic' ),
@@ -123,7 +117,12 @@ if ( class_exists( 'CSF' ) ) {
                 'title' => __( 'Tour Hightlights', 'tourfic' ),
 				'subtitle' => __( 'Enter a summary or full description of your tour', 'tourfic' ),
             ),
-
+	        array(
+		        'id'      => 'hightlights_thumbnail',
+		        'type'    => 'media',
+		        'title'   => 'Tour Hightlights Thumbnail',
+		        'library' => 'image',
+	        ),
         ),
     ) );
 
@@ -707,6 +706,13 @@ if ( class_exists( 'CSF' ) ) {
                     ),
                 ),
             ),
+	        array(
+		        'id'      => 'include-exclude-bg',
+		        'type'    => 'media',
+		        'title'   => 'Background Image',
+		        'library' => 'image',
+	        ),
+
         ),
     ) );
 

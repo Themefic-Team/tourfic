@@ -7,11 +7,11 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.8.5
- * Tested up to: 6.0
- * WC tested up to: 6.8
+ * Version:         2.8.6
+ * Tested up to: 6.0.2
+ * WC tested up to: 6.9.4
  * Requires PHP: 7.2
- * Elementor tested up to: 3.7
+ * Elementor tested up to: 3.7.7
  */
 
 // don't load directly
@@ -45,6 +45,15 @@ define( 'TF_TEMPLATE_PATH', TF_PATH.'templates/' );
 define( 'TF_TEMPLATE_PART_PATH', TF_TEMPLATE_PATH.'template-parts/' );
 define( 'TF_OPTIONS_PATH', TF_ADMIN_PATH.'options/' );
 define( 'TF_ASSETS_PATH', TF_PATH.'assets/' );
+
+/**
+ * Tourfic Define
+ *
+ * @since 1.0
+ */
+if ( !defined( 'TOURFIC' ) ) {
+	define( 'TOURFIC', '2.8.6' );
+}
 
 /**
  * Enqueue Main Admin scripts
@@ -86,15 +95,6 @@ if ( !is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 	return;
 }
 
-/**
- * Tourfic Define
- *
- * @since 1.0
- */
-if ( !defined( 'TOURFIC' ) ) {
-    define( 'TOURFIC', '2.6' );
-}
-
 // Styles & Scripts
 if (!defined( 'TOURFIC_PRO_SCRIPT' )) {
 	require_once TF_INC_PATH . 'style-script.php';
@@ -132,7 +132,7 @@ function tf_load_textdomain() {
     load_plugin_textdomain( 'tourfic', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 
 }
-add_action( 'init', 'tf_load_textdomain' );
+add_action( 'plugins_loaded', 'tf_load_textdomain' );
 
 /**
  * Plugins Loaded Actions
