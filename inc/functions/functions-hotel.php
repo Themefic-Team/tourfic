@@ -1013,9 +1013,9 @@ if ( !function_exists('tf_hotel_advanced_search_form_horizontal') ) {
                 <!-- Children age input field based on children number -->
                 <?php $children_age = tfopt('children_age_limit');?>
                 <div class="tf-children-age-fields">
-                    <div class="tf-children-age" id="tf-age-field-1">
-                        <label for="children-age">Children Age:</label>
-                        <select id="children-age">
+                    <div class="tf-children-age" id="tf-age-field-0" style="display:none">
+                        <label for="children-age">Children 0 Age:</label>
+                        <select>
                             <option value disabled class="tf-dummy-age-option"></option>
                             <?php for($age = 0;$age <= $children_age;$age++){
                                 ?>

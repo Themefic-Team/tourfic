@@ -1352,19 +1352,29 @@
  * @since 2.8.6
  * @author Abu Hena
  */
-$('.acr-select input#children').on('change',function(){
-    var child = $(this).val();
-    var age_field_el = $('div[id^="tf-age-field-"]:last');
-    // And increment that number by 1
-    var num = parseInt( age_field_el.prop("id").match(/\d+/g), 10 ) +1;
-    age_field_el = age_field_el.find("label").html('Child age ' + child);
-    // Clone it and assign the new ID 
-    //var age_field = age_field_el.clone().prop('id', 'tf-age-field-'+num );
-    //var label = age_field_el. $('#tf-age-field-'+num + ' label').html("hello"+num);
-    // Finally insert age_field
-    age_field_el.append( age_field_el);
+$('.acr-select .acr-inc').on('click',function(){
+    var first_element = $('div[id^="tf-age-field-0"]');
+    var ch_element = $('div[id^="tf-age-field-"]:last');
+    if(ch_element.length !=0){
+        var num = parseInt( ch_element.prop("id").match(/\d+/g), 10 ) +1;
+    }
+    var elements = ch_element.clone().prop('id', 'tf-age-field-'+num );
+    elements.find("label").html('Child age ' + num);
+    elements.find("select").attr('name','children_'+num+'_age');
+    ch_element.after(elements);
+    elements.show();
+    first_element.hide();
 
 })
+
+$('.acr-select .acr-dec').on('click',function(){
+    var total_age_input = $('.tf-children-age').length;
+    var ch_element = $('div[id^="tf-age-field-"]:last');
+    if(total_age_input != 1){
+        ch_element.remove();
+    }
+})
+
 
 })(jQuery, window);
 
