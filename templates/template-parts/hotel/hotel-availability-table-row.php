@@ -149,6 +149,7 @@
                 <input type="hidden" name="location" value="<?php echo $first_location_name; ?>">
                 <input type="hidden" name="adult" value="<?php echo $form_adult; ?>">
                 <input type="hidden" name="child" value="<?php echo $form_child; ?>">
+                <input type="hidden" name="children_ages" value="<?php echo $children_ages; ?>">
                 <input type="hidden" name="check_in_date" value="<?php echo $form_check_in; ?>">
                 <input type="hidden" name="check_out_date" value="<?php echo $form_check_out; ?>">
                 <input type="hidden" id="hotel_roomid">

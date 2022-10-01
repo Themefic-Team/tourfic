@@ -475,6 +475,8 @@ function tf_search_result_shortcode( $atts, $content = null ){
     $adults = isset( $_GET['adults'] ) ? sanitize_text_field($_GET['adults']) : '';
     // Get Child
     $child = isset( $_GET['children'] ) ? sanitize_text_field($_GET['children']) : '';
+    //get children ages
+    //$children_ages = isset( $_GET['children_ages'] ) ? sanitize_text_field($_GET['children_ages']) : '';
     // Get Room
     $room = isset( $_GET['room'] ) ? sanitize_text_field($_GET['room']) : '';
     // Get date

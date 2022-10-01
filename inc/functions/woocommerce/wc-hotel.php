@@ -37,12 +37,13 @@ function tf_hotel_booking_callback(){
     $unique_id = isset( $_POST['unique_id'] ) ? intval( sanitize_text_field( $_POST['unique_id'] ) ) : null;
     $location  = isset( $_POST['location'] ) ? sanitize_text_field( $_POST['location'] ) : '';
     // People number
-    $adult         = isset( $_POST['adult'] ) ? intval( sanitize_text_field( $_POST['adult'] ) ) : '0';
-    $child         = isset( $_POST['child'] ) ? intval( sanitize_text_field( $_POST['child'] ) ) : '0';
-    $room_selected = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
-    $check_in      = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
-    $check_out     = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
-    $deposit     = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
+    $adult          = isset( $_POST['adult'] ) ? intval( sanitize_text_field( $_POST['adult'] ) ) : '0';
+    $child          = isset( $_POST['child'] ) ? intval( sanitize_text_field( $_POST['child'] ) ) : '0';
+    $children_ages  = isset( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '0';
+    $room_selected  = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
+    $check_in       = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
+    $check_out      = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
+    $deposit        = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
     $airport_service = isset($_POST['airport_service']) ? sanitize_text_field($_POST['airport_service']) : '';
 
 
@@ -154,8 +155,9 @@ function tf_hotel_booking_callback(){
             if ( $pricing_by == '1' ) {
                 $total_price = $rooms[$room_id]['price'];
                 
-                $tf_room_data['tf_hotel_data']['adult']          = $adult;
-                $tf_room_data['tf_hotel_data']['child']          = $child;
+                $tf_room_data['tf_hotel_data']['adult']                  = $adult;
+                $tf_room_data['tf_hotel_data']['child']                  = $child;
+                $tf_room_data['tf_hotel_data']['children_ages']          = $children_ages;
             } elseif ( $pricing_by == '2' ) {
                 $adult_price = $rooms[$room_id]['adult_price'];
                 $adult_price = $adult_price * $adult;
@@ -350,6 +352,13 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
             'value'     => $cart_item['tf_hotel_data']['child'],
         );
     }
+    //Add children ages data to the cart item
+    if ( isset( $cart_item['tf_hotel_data']['children_ages'] ) && $cart_item['tf_hotel_data']['children_ages'] != '' ) {
+        $item_data[] = array(
+            'key'       => __('Children Ages', 'tourfic'),
+            'value'     => $cart_item['tf_hotel_data']['children_ages'],
+        );
+    }
 
     if ( isset( $cart_item['tf_hotel_data']['check_in'] ) ) {
         $item_data[] = array(
@@ -436,6 +445,7 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
     $room_selected = !empty($values['tf_hotel_data']['room']) ? $values['tf_hotel_data']['room'] : '';
     $adult = !empty($values['tf_hotel_data']['adult']) ? $values['tf_hotel_data']['adult'] : '';
     $child = !empty($values['tf_hotel_data']['child']) ? $values['tf_hotel_data']['child'] : '';
+    $children_ages = !empty($values['tf_hotel_data']['children_ages']) ? $values['tf_hotel_data']['children_ages'] : '';
     $check_in = !empty($values['tf_hotel_data']['check_in']) ? $values['tf_hotel_data']['check_in'] : '';
     $check_out = !empty($values['tf_hotel_data']['check_out']) ? $values['tf_hotel_data']['check_out'] : '';
     $due = !empty($values['tf_hotel_data']['due']) ? $values['tf_hotel_data']['due'] : '';
@@ -480,6 +490,10 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
     if ( $child && $child > 0 ) {
 
         $item->update_meta_data( 'child', $child );
+    }
+    if ( $children_ages && $children_ages != '' ) {
+
+        $item->update_meta_data( 'Children Ages', $children_ages );
     }
 
     if ( $check_in ) {

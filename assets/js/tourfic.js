@@ -36,6 +36,7 @@
             var post_id = $('input[name=post_id]').val();
             var adult = $('select[name=adults] option').filter(':selected').val();
             var child = $('select[name=children] option').filter(':selected').val();
+            var children_ages = $('input[name=children_ages]').val();
             var check_in_out = $('input[name=check-in-out-date]').val();
             //console.log(post_id);
 
@@ -45,6 +46,7 @@
                 post_id: post_id,
                 adult: adult,
                 child: child,
+                children_ages: children_ages,
                 check_in_out: check_in_out,
             };
 
@@ -117,6 +119,7 @@
             var location = $('input[name=place]').val();
             var adult = $('input[name=adult]').val();
             var child = $('input[name=child]').val();
+            var children_ages = $('input[name=children_ages]').val();
             var check_in_date = $('input[name=check_in_date]').val();
             var check_out_date = $('input[name=check_out_date]').val();
             if($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()){
@@ -137,6 +140,7 @@
                 location: location,
                 adult: adult,
                 child: child,
+                children_ages: children_ages,
                 check_in_date: check_in_date,
                 check_out_date: check_out_date,
                 room: room,
@@ -167,7 +171,7 @@
                     $this.unblock();
 
                     var response = JSON.parse(data);
-
+                    
                     if (response.status == 'error') {
 
                         if (response.errors) {
@@ -1352,7 +1356,7 @@
  * @since 2.8.6
  * @author Abu Hena
  */
-$('.acr-select .acr-inc').on('click',function(){
+$('.acr-select .child-inc').on('click',function(){
     var first_element = $('div[id^="tf-age-field-0"]');
     var ch_element = $('div[id^="tf-age-field-"]:last');
     if(ch_element.length !=0){
@@ -1360,14 +1364,15 @@ $('.acr-select .acr-inc').on('click',function(){
     }
     var elements = ch_element.clone().prop('id', 'tf-age-field-'+num );
     elements.find("label").html('Child age ' + num);
-    elements.find("select").attr('name','children_'+num+'_age');
+    //elements.find("select").attr('name','children_'+num+'_age');
+    elements.find("select").attr('name','children_ages[]');
     ch_element.after(elements);
     elements.show();
     first_element.hide();
 
 })
 
-$('.acr-select .acr-dec').on('click',function(){
+$('.acr-select .child-dec').on('click',function(){
     var total_age_input = $('.tf-children-age').length;
     var ch_element = $('div[id^="tf-age-field-"]:last');
     if(total_age_input != 1){
