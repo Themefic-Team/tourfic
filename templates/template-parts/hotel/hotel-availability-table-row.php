@@ -305,7 +305,7 @@ if($form_adult <= $custom_adult_number ){
                                     $customavail_result = array_intersect($availbilitydurationdate,$durationdate);
                                     
                                     if( !empty($customavail_result) ) {
-                                        $custom_num_room_available = !empty($custom_single_date_range['room_number']) ? $custom_single_date_range['room_number'] : 1; 
+                                        $custom_num_room_available = !empty($custom_single_date_range['room_number']) ? $custom_single_date_range['room_number'] : $room['num-room']; 
                                         
                                         $custom_startorderdatesearch = array_search($item->get_meta( 'check_in', true ),$durationdate,true);
                                         $custtom_enddateordersearch = array_search($item->get_meta( 'check_out', true ),$durationdate,true);
@@ -355,7 +355,7 @@ if($form_adult <= $custom_adult_number ){
                         $customavail_result = array_intersect($availbilitydurationdate,$durationdate);
                         
                         if( !empty($customavail_result) ) {
-                            $custom_num_room_available = !empty($custom_single_date_range['room_number']) ? $custom_single_date_range['room_number'] : 1;
+                            $custom_num_room_available = !empty($custom_single_date_range['room_number']) ? $custom_single_date_range['room_number'] : $room['num-room'];
                             $tfcustom_rept_check+=1;                                               
                         }
 
@@ -474,7 +474,8 @@ if($form_adult <= $custom_adult_number ){
                 if(!empty($order_ids)){
                 if(!empty($custom_num_room_available)){ ?>
                     <?php if($days<=29){ ?>
-                        <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
+                        <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'Add to Cart', 'tourfic' );?></a>
+                        <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
                     <?php }else{ ?>
                         <div class="price-per-night"><?php _e( 'Please Select Date within 29 days', 'tourfic' );?></div>
                     <?php } ?>
@@ -483,7 +484,8 @@ if($form_adult <= $custom_adult_number ){
                 <?php } ?>
                 <?php }else{ ?>
                     <?php if($days<=29){ ?>
-                        <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
+                        <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'Add to Cart', 'tourfic' );?></a>
+                        <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
                     <?php }else{ ?>
                         <div class="price-per-night"><?php _e( 'Please Select Date within 29 days', 'tourfic' );?></div>
                     <?php } ?>
@@ -531,7 +533,8 @@ if($form_adult <= $custom_adult_number ){
                 if(!empty($order_ids)){
                 if(!empty($custom_num_room_available)){ ?>
                     <?php if($days<=29){ ?>
-                    <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
+                    <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
+                    <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
                     <?php }else{ ?>
                         <div class="price-per-night"><?php _e( 'Please Select Date within 29 days', 'tourfic' );?></div>
                     <?php } ?>
@@ -540,7 +543,8 @@ if($form_adult <= $custom_adult_number ){
                 <?php } ?>
                 <?php }else{ ?>
                     <?php if($days<=29){ ?>
-                    <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
+                    <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
+                    <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
                     <?php }else{ ?>
                         <div class="price-per-night"><?php _e( 'Please Select Date within 29 days', 'tourfic' );?></div>
                     <?php } ?>

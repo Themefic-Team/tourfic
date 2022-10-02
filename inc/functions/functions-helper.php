@@ -18,14 +18,7 @@ function tf_booking_search_action() {
  * Go to Documentaion Menu Item 
  */
 
-add_action('admin_menu', 'tf_documentation_page_integration');
-function tf_documentation_page_integration() {
-	global $submenu;
-	$tfhoteldocumentation = sanitize_url('https://themefic.com/docs/tourfic/');
-	$tftourdocumentation = sanitize_url('https://themefic.com/docs/tourfic/');
-	$submenu['edit.php?post_type=tf_hotel'][] = array( '<span style=color:#ffba00;">Go to Documentation</span>', 'edit_tf_hotels', $tfhoteldocumentation );
-	$submenu['edit.php?post_type=tf_tours'][] = array( '<span style=color:#ffba00;">Go to Documentation</span>', 'edit_tf_tourss', $tftourdocumentation );
-}
+
 
 /**
  * Go to Documentaion Metabox

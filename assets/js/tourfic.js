@@ -188,7 +188,7 @@
                     } else {
 
                         if (response.redirect_to) {
-                            window.location.replace(response.redirect_to);
+                            notyf.success("Room successfully added on Your Cart");
                         } else {
                             jQuery(document.body).trigger('added_to_cart');
                         }
