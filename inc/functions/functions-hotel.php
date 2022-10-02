@@ -664,14 +664,15 @@ function tf_room_availability_callback() {
 
                             }
 
-                            //pricing package
+                            /**
+                             * pricing package start here for the client
+                             */
                             $package_enabled = !empty( $room['enable_pricing_package']) ? $room['enable_pricing_package'] : 0;
                             if( $form_total_person <= $total_person ){
                             if( ! $avil_by_date && defined( 'TF_PRO' ) && $package_enabled ){ 
 
                                 $packages = !empty( $room['pricing_packages'] ) ? $room['pricing_packages'] : array();
                                 $form_array = array($form_adult,$form_child);
-                                var_dump( $total_person , $form_total_person);
                                     $matched_packs = array();
                                     $pack_prices = array();
                                     foreach( $packages as $key => $package ){
@@ -691,9 +692,6 @@ function tf_room_availability_callback() {
                                         
                                     }
 
-                                    //echo "<pre>";
-                                    //print_r($matched_packs); 
-                                    //print_r(count( $pack_prices ));
                                     if( count( $pack_prices ) > 0  && !empty($pack_prices)){
                                         foreach( $pack_prices as $pack){
                                             $price = $pack;
@@ -711,6 +709,7 @@ function tf_room_availability_callback() {
                             }
 
                             //pricing package ended
+
                             if ( $avil_by_date && defined( 'TF_PRO' ) && !$package_enabled ) {
 
                                 // split date range

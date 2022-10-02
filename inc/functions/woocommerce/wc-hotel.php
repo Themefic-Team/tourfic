@@ -41,6 +41,7 @@ function tf_hotel_booking_callback(){
     $child          = isset( $_POST['child'] ) ? intval( sanitize_text_field( $_POST['child'] ) ) : '0';
     $children_ages  = isset( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '0';
     $room_selected  = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
+    $room_price         = isset( $_POST['room_price'] ) ? sanitize_text_field( $_POST['room_price'] ): '';
     $check_in       = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
     $check_out      = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
     $deposit        = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
@@ -305,7 +306,6 @@ function tf_hotel_booking_callback(){
         $response['product_id'] = $product_id;
         $response['add_to_cart'] = 'true';
         $response['redirect_to'] = wc_get_checkout_url();
-        $response['show'] = $tf_room_data;
     } else {
         $response['status'] = 'error';
     }
@@ -386,13 +386,6 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
         $item_data[] = array(
             'key'       => __('Check-out', 'tourfic'),
             'value'     => $cart_item['tf_hotel_data']['check_out'],
-        );
-    }
-    
-    if ( isset( $cart_item['tf_hotel_data']['enable_pricing_package'] ) ) {
-        $item_data[] = array(
-            'key'       => __('Package ', 'tourfic'),
-            'value'     => $cart_item['tf_hotel_data']['enable_pricing_package'],
         );
     }
 
