@@ -305,7 +305,7 @@ if($form_adult <= $custom_adult_number ){
                                     $customavail_result = array_intersect($availbilitydurationdate,$durationdate);
                                     
                                     if( !empty($customavail_result) ) {
-                                        $custom_num_room_available = !empty($custom_single_date_range['room_number']) ? $custom_single_date_range['room_number'] : $room['num-room']; 
+                                        $custom_num_room_available = !empty($custom_single_date_range['room_number']) ? $custom_single_date_range['room_number'] : 1; 
                                         
                                         $custom_startorderdatesearch = array_search($item->get_meta( 'check_in', true ),$durationdate,true);
                                         $custtom_enddateordersearch = array_search($item->get_meta( 'check_out', true ),$durationdate,true);
@@ -325,7 +325,7 @@ if($form_adult <= $custom_adult_number ){
 
                     if(!empty($custom_num_room_available)){
                         # Calculate available room number after order
-                        $custom_num_room_available = $custom_num_room_available - $custom_number_orders; // Calculate
+                        $custom_num_room_available = 0 - $custom_number_orders; // Calculate
                         $custom_num_room_available = max($custom_num_room_available, 0); // If negetive value make that 0
                     }else{
                         $custom_num_room_available = !empty($room['num-room']) ? $room['num-room'] : 1;
@@ -355,7 +355,7 @@ if($form_adult <= $custom_adult_number ){
                         $customavail_result = array_intersect($availbilitydurationdate,$durationdate);
                         
                         if( !empty($customavail_result) ) {
-                            $custom_num_room_available = !empty($custom_single_date_range['room_number']) ? $custom_single_date_range['room_number'] : $room['num-room'];
+                            $custom_num_room_available = !empty($custom_single_date_range['room_number']) ? $custom_single_date_range['room_number'] : 0;
                             $tfcustom_rept_check+=1;                                               
                         }
 
@@ -542,9 +542,15 @@ if($form_adult <= $custom_adult_number ){
                     <button class="btn-styled tf-sml-btn" disabled><?php _e( 'Room Not Available', 'tourfic' );?></button>
                 <?php } ?>
                 <?php }else{ ?>
-                    <?php if($days<=29){ ?>
+                    <?php if($days<=29){ 
+                    if(!empty($custom_num_room_available)){    
+                    ?>
                     <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
                     <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+                    <?php }else{ ?>
+                    <button class="btn-styled tf-sml-btn" disabled><?php _e( 'Room Not Available', 'tourfic' );?></button>
+                    <?php } ?>
+                    
                     <?php }else{ ?>
                         <div class="price-per-night"><?php _e( 'Please Select Date within 29 days', 'tourfic' );?></div>
                     <?php } ?>
