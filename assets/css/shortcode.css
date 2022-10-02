@@ -72,6 +72,19 @@ button.tf-tablinks:focus {
     display: none;
 }
 
+.tf-children-age-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tf-children-age {
+    flex-grow: 1;
+    width: 44%;
+    margin: 5px;
+}
+.tf-children-age select{
+    width: 100%;
+}
 
 .single_recomended_content {
     height: 270px;

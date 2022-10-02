@@ -503,6 +503,7 @@ function tf_room_availability_callback() {
     $form_post_id      = !empty( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
     $form_adult        = !empty( $_POST['adult'] ) ? sanitize_text_field( $_POST['adult'] ) : 0;
     $form_child        = !empty( $_POST['child'] ) ? sanitize_text_field( $_POST['child'] ) : 0;
+    $children_ages        = !empty( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '';
     $form_check_in_out = !empty( $_POST['check_in_out'] ) ? sanitize_text_field( $_POST['check_in_out'] ) : '';
     $form_total_person = $form_adult + $form_child;
     if ($form_check_in_out) {
@@ -913,7 +914,7 @@ if ( !function_exists('tf_hotel_search_form_horizontal') ) {
                             <div class="acr-inc">+</div>
                         </div>
                     </div>
-                </div>
+                </div>                
             </div>
 
         </div>
@@ -1045,9 +1046,9 @@ if ( !function_exists('tf_hotel_advanced_search_form_horizontal') ) {
                     <div class="tf_acrselection">
                         <div class="acr-label"><?php _e('Children', 'tourfic'); ?></div>
                         <div class="acr-select">
-                            <div class="acr-dec">-</div>
+                            <div class="acr-dec child-dec">-</div>
                             <input type="number" name="children" id="children" min="0" value="<?php echo !empty($child) ? $child : '0'; ?>">
-                            <div class="acr-inc">+</div>
+                            <div class="acr-inc child-inc">+</div>
                         </div>
                     </div>
                     <div class="tf_acrselection">
@@ -1059,6 +1060,22 @@ if ( !function_exists('tf_hotel_advanced_search_form_horizontal') ) {
                         </div>
                     </div>
                 </div>
+                
+                <!-- Children age input field based on children number -->
+                <?php $children_age = tfopt('children_age_limit');?>
+                <div class="tf-children-age-fields">
+                    <div class="tf-children-age" id="tf-age-field-0" style="display:none">
+                        <label for="children-age">Children 0 Age:</label>
+                        <select>
+                            <option value disabled class="tf-dummy-age-option"></option>
+                            <?php for($age = 0;$age <= $children_age;$age++){
+                                ?>
+                               <option value="<?php echo esc_attr( $age ); ?>"><?php echo esc_attr( $age ); ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -1150,6 +1167,9 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
     if ( isset( $_GET ) ) {
         $_GET = array_map( 'stripslashes_deep', $_GET );
     }
+    
+    //get children ages
+    $children_ages = isset($_GET['children_ages']) ? $_GET['children_ages'] : '';
     // Adults
     $adults = !empty($_GET['adults']) ? sanitize_text_field($_GET['adults']) : '';
     // children
@@ -1220,6 +1240,8 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
                 ?>
             <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type" />
             <input type="hidden" name="post_id" value="<?php echo get_the_ID(); ?>" />
+            <input type="hidden" name="children_ages" value="<?php echo $children_ages; ?>" />
+
             <div class="tf-btn"><button class="tf_button tf-submit btn-styled"
                 type="submit"><?php esc_html_e( 'Booking Availability', 'tourfic' );?></button></div>
 
@@ -1270,7 +1292,7 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
 /**
  * Hotel Archive Single Item Layout
  */
-function tf_hotel_archive_single_item($adults='', $child='', $room='', $check_in_out='', $startprice='', $endprice='') {
+function tf_hotel_archive_single_item($adults='', $child='',$children_ages_array='', $room='', $check_in_out='', $startprice='', $endprice='') {
 
     // get post id
     $post_id = get_the_ID();
@@ -1290,9 +1312,21 @@ function tf_hotel_archive_single_item($adults='', $child='', $room='', $check_in
     if(empty($adults)) {
         $adults = !empty($_GET['adults']) ? sanitize_text_field($_GET['adults']) : '';
     }
+    
     // children
     if(empty($child)) {
         $child = !empty($_GET['children']) ? sanitize_text_field($_GET['children']) : '';
+    }
+
+    /**
+     * get children ages
+     * @since 2.8.6
+     */
+    if(empty($children_ages_array)) {
+        $children_ages_array = isset($_GET['children_ages']) ? rest_sanitize_array($_GET['children_ages']) : '';
+        if( is_array($children_ages_array) ){            
+            $children_ages =  implode(',',$children_ages_array);
+        }
     }
     // room
     if(empty($room)) {
@@ -1310,7 +1344,7 @@ function tf_hotel_archive_single_item($adults='', $child='', $room='', $check_in
     }
 
     // Single link
-    $url = get_the_permalink() . '?adults=' . ($adults ?? '') . '&children=' . ($child ?? '') . '&room=' . ($room ?? '') . '&check-in-out-date=' . ($check_in_out ?? '');
+    $url = get_the_permalink() . '?adults=' . ($adults ?? '') . '&children=' . ($child ?? '') . '&children_ages=' . ( $children_ages ?? '' ) . '&room=' . ($room ?? '') . '&check-in-out-date=' . ($check_in_out ?? '');
 
     // Check room check in/out time
     $room_date_matched = array();
