@@ -84,6 +84,7 @@ button.tf-tablinks:focus {
 }
 .tf-children-age select{
     width: 100%;
+    background-position-y: center;
 }
 
 .single_recomended_content {
