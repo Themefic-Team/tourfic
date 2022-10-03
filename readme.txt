@@ -3,7 +3,7 @@ Contributors: fida02, themefic, devkabir, mdshuvo, codexa, kamrul0424, raihan143
 Tags: tour booking, tour operator, travel, tour, trip, travel-booking, travel agency, hotel booking, reservation, hotel, booking engine, booking, booking calendar, booking system, calendar, online booking, travel, airbnb, booking.com, homeaway, apartments, villa, hostel, reservation system, travel itinerary, trekking, tour itinerary, travel booking engine, tour accommodation listings, travel destinations, trip book, travel payment, woocommerce tour booking, woocommerce travel booking plugin, woocommerce tour, woocommerce travel, wordpress travel, wp travel plugin, wp travel, wordpress travel booking plugin, wordpress tour plugin, tour booking plugin wordpress, wordpress travel agency, travel tour wordpress, wordpress tour, tour-booking, travel wp, travel wordpress, tour wp, travel wordpress, hotel wp, hotel wordpress, tour website, travel website, trip website
 Requires at least: 5.4
 Tested up to: 6.0
-Stable tag: 3.7.2
+Stable tag: 90.7.2
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
