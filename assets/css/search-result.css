@@ -2,6 +2,10 @@
     display: grid;
     grid-template-columns: 75% 25%;
 }
+.tf-custom-search-results{
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
 
 .tf-search-left {
     padding-right: 15px;
