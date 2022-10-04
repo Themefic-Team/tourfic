@@ -851,14 +851,10 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
     ), $url );
 
     ?>
-<?php if($featured){ ?>
-	<div class="single-tour-wrap tf-featured">
-<?php } else {	?>
-    <div class="single-tour-wrap">
-<?php }	?>
+	<div class="single-tour-wrap <?php echo $featured ? esc_attr('tf-featured') : '' ?>">
 		<div class="single-tour-inner">
 			<div class="tourfic-single-left">
-                <a href="<?php echo $url; ?>">
+                <a href="<?php echo esc_url($url); ?>">
 				<?php
                 if (has_post_thumbnail()) {
 					the_post_thumbnail( 'full' );

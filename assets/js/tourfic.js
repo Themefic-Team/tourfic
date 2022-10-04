@@ -1378,7 +1378,7 @@
          * Location Search
          * @author: Foysal
          */
-        $(document).on('keyup', '.tf-hotel-side-booking #tf-location', function () {
+        $(document).on('keyup', '.tf-hotel-side-booking #tf-location, .tf-hotel-side-booking #tf-destination', function () {
             let search = $(this).val();
             console.log(search)
             $(this).next('input[name=place]').val(search);
