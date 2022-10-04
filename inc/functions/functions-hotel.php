@@ -984,11 +984,10 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                 </div>
 
                 <div class="tf_selectperson-wrap">
-
                     <div class="tf_input-inner">
-                <span class="tf_person-icon">
-                    <i class="fas fa-user"></i>
-                </span>
+						<span class="tf_person-icon">
+							<i class="fas fa-user"></i>
+						</span>
                         <div class="adults-text"><?php echo ( ! empty( $adults ) ? $adults : '1' ) . ' ' . __( 'Adults', 'tourfic' ); ?></div>
                         <div class="person-sep"></div>
                         <div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( 'Children', 'tourfic' ); ?></div>
@@ -1023,27 +1022,22 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                                 </div>
                             </div>
                         </div>
+						<!-- Children age input field based on children number -->
+						<?php $children_age = tfopt('children_age_limit');?>
+						<div class="tf-children-age-fields">
+							<div class="tf-children-age" id="tf-age-field-0" style="display:none">
+								<label for="children-age">Children 0 Age:</label>
+								<select>
+									<?php for($age = 0;$age <= $children_age;$age++){
+										?>
+									<option value="<?php echo esc_attr( $age ); ?>"><?php echo esc_attr( $age ); ?></option>
+									<?php } ?>
+								</select>
+							</div>
+						</div>
                     </div>
-
-                </div>
+                </div>                
                 
-                <!-- Children age input field based on children number -->
-                <?php $children_age = tfopt('children_age_limit');?>
-                <div class="tf-children-age-fields">
-                    <div class="tf-children-age" id="tf-age-field-0" style="display:none">
-                        <label for="children-age">Children 0 Age:</label>
-                        <select>
-                            <option value disabled class="tf-dummy-age-option"></option>
-                            <?php for($age = 0;$age <= $children_age;$age++){
-                                ?>
-                               <option value="<?php echo esc_attr( $age ); ?>"><?php echo esc_attr( $age ); ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                </div>
-
-            </div>
-
                 <div class="tf_selectdate-wrap">
                     <div class="tf_input-inner">
                         <div class="tf_form-row">

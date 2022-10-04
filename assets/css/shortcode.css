@@ -280,7 +280,9 @@ button.tf-tablinks:focus {
 .tf_form-inner .tf-hotel-results #ui-id-2 li:hover {
     background-color: #e9e9e9;
 }
-
+.tf-children-age select{
+    background-position-y: center;
+}
 .tf-more-info .form-group.form-check {
     width: 33%;
     float: left;
