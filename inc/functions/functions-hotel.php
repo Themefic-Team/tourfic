@@ -1251,7 +1251,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	// Location
 	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
 	// Rooms
-	$b_rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+	$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
 
 	/**
 	 * All values from URL
@@ -1275,93 +1275,25 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	if ( $check_in_out ) {
 		$form_check_in      = substr( $check_in_out, 0, 10 );
 		$form_check_in_stt  = strtotime( $form_check_in );
-		$form_check_out     = substr( $check_in_out, 14, 10 );
+		$form_check_out     = substr( $check_in_out, 13, 10 );
 		$form_check_out_stt = strtotime( $form_check_out );
 	}
 
 	// Single link
 	$url = get_the_permalink();
-    $url = add_query_arg( array(
-        'adults' => $adults,
-        'children' => $child,
-        'room' => $room,
-        'check-in-out-date' => $check_in_out,
-    ), $url );
+	$url = add_query_arg( array(
+		'adults'            => $adults,
+		'children'          => $child,
+		'room'              => $room,
+		'check-in-out-date' => $check_in_out,
+	), $url );
 
-	// Check room check in/out time
-	$room_date_matched = array();
-	if ( ! empty( $check_in_out ) ) {
-		if ( ! empty( $b_rooms ) ) {
-			$b_room_id = - 1;
-			foreach ( $b_rooms as $b_room ) {
+	$total_adults = tf_hotel_total_room_adult_child( get_the_ID(), 'adult' );
+	$total_child  = tf_hotel_total_room_adult_child( get_the_ID(), 'child' );
+	$total_room   = tf_hotel_total_room_adult_child( get_the_ID(), 'room' );
+    $room_matched = tf_hotel_room_matched_by_date($rooms, $form_check_in_stt, $form_check_out_stt);
 
-				$b_room_id ++;
-
-				$enable = ! empty( $b_room['enable'] ) ? $b_room['enable'] : '';
-
-				// Check if room is enabled
-				if ( $enable == '1' ) {
-
-					$b_check_in = ! empty( $b_room['availability']['from'] ) ? $b_room['availability']['from'] : '';
-					if ( $b_check_in ) {
-						$b_check_in_stt = strtotime( $b_check_in );
-					}
-					$b_check_out = ! empty( $b_room['availability']['to'] ) ? $b_room['availability']['to'] : '';
-					if ( $b_check_out ) {
-						$b_check_out_stt = strtotime( $b_check_out );
-					}
-
-					if ( empty( $b_check_in ) || empty( $b_check_out ) || ( $form_check_in_stt >= $b_check_in_stt && $form_check_out_stt <= $b_check_out_stt ) ) {
-						if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-							if ( ! empty( $b_room['price'] ) ) {
-								if ( $startprice <= $b_room['price'] && $b_room['price'] <= $endprice ) {
-									array_push( $room_date_matched, 'yes' );
-								}
-							}
-							if ( ! empty( $b_room['adult_price'] ) ) {
-								if ( $startprice <= $b_room['adult_price'] && $b_room['adult_price'] <= $endprice ) {
-									array_push( $room_date_matched, 'yes' );
-								}
-							}
-							if ( ! empty( $b_room['child_price'] ) ) {
-								if ( $startprice <= $b_room['child_price'] && $b_room['child_price'] <= $endprice ) {
-									array_push( $room_date_matched, 'yes' );
-								}
-							}
-							if ( ! empty( $b_room['repeat_by_date'] ) ) {
-								foreach ( $b_room['repeat_by_date'] as $singleavailroom ) {
-									if ( ! empty( $singleavailroom['price'] ) ) {
-										if ( $startprice <= $singleavailroom['price'] && $singleavailroom['price'] <= $endprice ) {
-											array_push( $room_date_matched, 'yes' );
-										}
-									}
-									if ( ! empty( $singleavailroom['adult_price'] ) ) {
-										if ( $startprice <= $singleavailroom['adult_price'] && $singleavailroom['adult_price'] <= $endprice ) {
-											array_push( $room_date_matched, 'yes' );
-										}
-									}
-									if ( ! empty( $singleavailroom['child_price'] ) ) {
-										if ( $startprice <= $singleavailroom['child_price'] && $singleavailroom['child_price'] <= $endprice ) {
-											array_push( $room_date_matched, 'yes' );
-										}
-									}
-								}
-							}
-						} else {
-							array_push( $room_date_matched, 'yes' );
-						}
-
-					}
-
-				}
-			}
-		} else {
-			array_push( $room_date_matched, 'yes' );
-		}
-	} else {
-		array_push( $room_date_matched, 'yes' );
-	}
-	if ( ! empty( $room_date_matched ) ) {
+	if ( $room <= $total_room && $adults <= $total_adults && $child <= $total_child && $room_matched ) :
 		?>
         <div class="single-tour-wrap">
             <div class="single-tour-inner">
@@ -1440,8 +1372,8 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                 </div>
             </div>
         </div>
-		<?php
-	}
+	<?php
+	endif;
 }
 
 /**
@@ -1638,7 +1570,7 @@ function tf_hotel_quickview_callback() {
 		$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
 		foreach ( $rooms as $key => $room ) :
 			$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
-			if ( $enable == '1' && $room['unique_id'].$key == $_POST['uniqid_id'] ) :
+			if ( $enable == '1' && $room['unique_id'] . $key == $_POST['uniqid_id'] ) :
 				$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 				?>
                 <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
@@ -1951,4 +1883,76 @@ function tf_update_meta_all_hotels_tours() {
 }
 
 add_action( 'wp_loaded', 'tf_update_meta_all_hotels_tours' );
-?>
+
+/*
+ * Hotel total room, adult, child
+ * @return int or array
+ * @since 2.8.7
+ * @author Mehedi Foysal
+ */
+if ( ! function_exists( 'tf_hotel_total_room_adult_child' ) ) {
+	function tf_hotel_total_room_adult_child( $hotel_id, $type = 'room' ) {
+		$meta         = get_post_meta( $hotel_id, 'tf_hotel', true );
+		$rooms        = ! empty( $meta['room'] ) ? $meta['room'] : '';
+		$total_room   = 0;
+		$total_adults = 0;
+		$total_child  = 0;
+		foreach ( $rooms as $room ) {
+			$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
+			if ( $enable ) {
+				$total_room   += $room['num-room'];
+				$total_adults += $room['adult'];
+				$total_child  += $room['child'];
+			}
+		}
+
+		if ( $type == 'room' ) {
+			return $total_room;
+		} elseif ( $type == 'adult' ) {
+			return $total_adults;
+		} elseif ( $type == 'child' ) {
+			return $total_child;
+		} else {
+			return array(
+				'room'  => $total_room,
+				'adult' => $total_adults,
+				'child' => $total_child,
+			);
+		}
+	}
+}
+
+
+/*
+ * Hotel room matched by date
+ * @return boolean
+ * @since 2.8.7
+ * @author Mehedi Foysal
+ */
+if ( ! function_exists( 'tf_hotel_room_matched_by_date' ) ) {
+	function tf_hotel_room_matched_by_date( $rooms, $check_in, $check_out ) {
+		$room_date_match = array();
+		if ( ! empty( $check_in ) && ! empty( $check_out ) ) {
+			foreach ( $rooms as $_room ) {
+
+				$enable = ! empty( $_room['enable'] ) ? $_room['enable'] : '';
+				if ( $enable == '1' ) {
+					if ( ! empty( $_room['repeat_by_date'] ) ) {
+						foreach ( $_room['repeat_by_date'] as $date ) {
+							$from = ! empty( $date['availability']['from'] ) ? strtotime( $date['availability']['from'] ) : '';
+							$to   = ! empty( $date['availability']['to'] ) ? strtotime( $date['availability']['to'] ) : '';
+							if ( $from <= $check_in && $to >= $check_out ) {
+								$room_date_match[] = 'matched';
+							} else {
+								$room_date_match[] = 'not matched';
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return in_array( 'matched', $room_date_match );
+	}
+}
+

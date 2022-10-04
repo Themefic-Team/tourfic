@@ -531,6 +531,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 			<?php
 			if ( $loop->have_posts() ) {
 				$not_found = [];
+
 				while ( $loop->have_posts() ) {
 					$loop->the_post();
 

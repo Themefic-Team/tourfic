@@ -1373,6 +1373,16 @@
             var tabId = $(this).val();
             tfOpenForm(event, tabId);
         });
+
+        /*
+         * Location Search
+         * @author: Foysal
+         */
+        $(document).on('keyup', '.tf-hotel-side-booking #tf-location', function () {
+            let search = $(this).val();
+            console.log(search)
+            $(this).next('input[name=place]').val(search);
+        })
     });
 })
 (jQuery, window);

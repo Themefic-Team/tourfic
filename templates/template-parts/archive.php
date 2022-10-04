@@ -20,6 +20,7 @@ $args = array(
 );
 
 $loop = new WP_Query( $args );
+
 ?>
 
 <div class="tf_search_result">
@@ -31,6 +32,7 @@ $loop = new WP_Query( $args );
     </div>
     <div class="archive_ajax_result">
         <?php
+        echo $loop->found_posts;
         if ( $loop->have_posts() ) {          
             while ( $loop->have_posts() ) {
 
