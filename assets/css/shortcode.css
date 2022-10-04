@@ -434,19 +434,29 @@ span.close-aq {
     width: 100%;
 }
 
+/*
+Booking form mobile version
+*/
+.tf-booking-form-tab-mobile {
+    display: none;
+}
+
 
 /**************************************** RESPONSIVE **************************************/
 
 @media screen and (max-width: 767px) {
     .tf_form-inner .autocomplete-items {
-        top: 70px!important;
+        top: 70px !important;
     }
+
     .tf-more-info {
         width: 100%;
     }
+
     .tf_form-inner .tf-hotel-results #ui-id-1, .tf_form-inner .tf-hotel-results #ui-id-2 {
-        top: -255px!important;
+        top: -255px !important;
     }
+
     .tf_destination-wrap {
         padding: 10px !important;
         border-bottom: 1px solid #ccc;
@@ -474,6 +484,25 @@ span.close-aq {
         padding-left: 15px;
         padding-right: 15px;
     }
+
+    /*
+    Booking form mobile version
+    */
+    .tf-booking-form-tab{
+        display: none;
+    }
+    .tf-booking-form-tab-mobile {
+        display: block;
+    }
+    select[name="tf-booking-form-tab-select"] {
+        width: 100%;
+        background: transparent;
+        height: 45px;
+        padding: 10px !important;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
 }
 
 @media screen and (max-width: 450px) {
