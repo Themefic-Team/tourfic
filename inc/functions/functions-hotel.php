@@ -1982,7 +1982,7 @@ function tf_hotel_archive_single_item($tf_stars='') {
                             <?php
                             if($address) {
                                 echo '<div class="tf-map-link">';
-                                echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' .$address. '</span>';
+                                echo '<span class="tf-d-ib"><a href="https://www.google.com/maps/search/<?php echo $address; ?>" target="_blank">Show on Map </a> <i class="fas fa-map-marker-alt"></i> ' .$address. '</span>';
                                 echo '</div>';
                             }
                             ?>	                    
@@ -1993,15 +1993,10 @@ function tf_hotel_archive_single_item($tf_stars='') {
                     <div class="sr_rooms_table_block">
                         <div class="room_details">
                             <div class="featuredRooms">
-                                <div class="prco-ltr-right-align-helper">
-                                    <div class="tf-archive-shortdesc">
-                                        <?php echo substr(wp_strip_all_tags(get_the_content()), 0, 160). '...'; ?>
-                                </div>
-                                </div>
+                                
                                 <div class="roomNameInner">
                                     <div class="room_link">
-                                        <div class="roomrow_flex">
-                                            <?php if( $features ) { ?>
+                                        <?php if( $features ) { ?>
                                             <div class="roomName_flex">
                                                 <ul class="tf-archive-desc">
                                                     <?php foreach($features as $feature) {
@@ -2023,9 +2018,72 @@ function tf_hotel_archive_single_item($tf_stars='') {
                                                 </ul>
                                             </div>
                                             <?php } ?>
+                                        <div class="roomrow_flex">
+                                            <div class="roomrow-price-details">
+                                            <?php 
+                                            $tf_8_min_price = [];
+                                            $tf_16_min_price = [];
+                                            $tf_24_min_price = [];
+                                            $tf_32_min_price = [];
+                                            foreach($b_rooms as $sroom){
+                                                $tf8days  = !empty($sroom['tf-8-days']) ? $sroom['tf-8-days'] : ''; 
+                                                $tf16days  = !empty($sroom['tf-16-days']) ? $sroom['tf-16-days'] : ''; 
+                                                $tf24days  = !empty($sroom['tf-24-days']) ? $sroom['tf-24-days'] : ''; 
+                                                $tf32days  = !empty($sroom['tf-32-days']) ? $sroom['tf-32-days'] : ''; 
+                                                
+                                                if(!empty($tf8days['tf-room'])){
+                                                    $tf_8_min_price[]=$tf8days['tf-room'];
+                                                }
+                                                if(!empty($tf16days['tf-room'])){
+                                                    $tf_16_min_price[]=$tf16days['tf-room'];
+                                                }
+                                                if(!empty($tf24days['tf-room'])){
+                                                    $tf_24_min_price[]=$tf24days['tf-room'];
+                                                }
+                                                if(!empty($tf32days['tf-room'])){
+                                                    $tf_32_min_price[]=$tf32days['tf-room'];
+                                                }
+                                            }
+                                            if( !empty($tf_8_min_price) ){
+                                                $hotel_8_min_price = min($tf_8_min_price);
+                                            }
+                                            if( !empty($tf_16_min_price) ){
+                                                $hotel_16_min_price = min($tf_16_min_price);
+                                            }
+                                            if( !empty($tf_24_min_price) ){
+                                                $hotel_24_min_price = min($tf_24_min_price);
+                                            }
+                                            if( !empty($tf_32_min_price) ){
+                                                $hotel_32_min_price = min($tf_32_min_price);
+                                            }
+                                            ?>
+                                            <ul>
+                                                <?php 
+                                                if( !empty($hotel_8_min_price) ){ ?>
+                                                <li><?php _e("8 Nights stay: Starting on ","tourfic"); ?> <?php echo wc_price($hotel_8_min_price); ?> </li>
+                                                <?php } ?>
+
+                                                <?php 
+                                                if( !empty($hotel_16_min_price) ){ ?>
+                                                <li><?php _e("16 Nights stay: Starting on ","tourfic"); ?> <?php echo wc_price($hotel_16_min_price); ?> </li>
+                                                <?php } ?>
+
+                                                <?php 
+                                                if( !empty($hotel_24_min_price) ){ ?>
+                                                <li><?php _e("24 Nights stay: Starting on ","tourfic"); ?> <?php echo wc_price($hotel_24_min_price); ?> </li>
+                                                <?php } ?>
+
+                                                <?php 
+                                                if( !empty($hotel_32_min_price) ){ ?>
+                                                <li><?php _e("32 Nights stay: Starting on ","tourfic"); ?> <?php echo wc_price($hotel_32_min_price); ?> </li>
+                                                <?php } ?>
+                                            </ul>
+
+                                        </div>  
+                                            
                                             <div class="roomPrice roomPrice_flex sr_discount">
                                                 <div class="availability-btn-area">
-                                                    <a href="<?php echo $url; ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' );?></a>
+                                                    <a href="<?php echo $url; ?>" class="tf_button btn-styled"><?php esc_html_e( 'See Availability', 'tourfic' );?> <i class="fas fa-angle-right"></i></a>
                                                 </div>
                                             </div>
                                         </div>

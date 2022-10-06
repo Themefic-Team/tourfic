@@ -154,6 +154,24 @@
     transition: all 0.3s ease-out;
 }
 
+.roomrow-price-details ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-top: 20px;
+}
+.roomrow-price-details ul li{
+    color: #222;
+    font-size: 15px;
+    padding: 2px 0px;
+}
+.tf-d-ib a{
+    text-decoration: underline;
+}
+.availability-btn-area a i {
+  margin-left: 10px;
+}
+
 .tf-action-top {
     display: flex;
     align-items: center;
