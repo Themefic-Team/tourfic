@@ -29,7 +29,51 @@ function tf_tours_booking_function() {
     $disable_child_price  = !empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
     $disable_infant_price = !empty( $meta['disable_infant_price'] ) ? $meta['disable_infant_price'] : false;
 
+    /**
+     * Tour Daily Booking limit
+     * 
+    */
     
+    $tf_tour_initial_date = date('Y-m-d');
+    $tf_tour_final_date = date('Y-m-d');
+    $tf_tour_query_orders = wc_get_orders(array(
+        'limit'=>-1,
+        'type'=> 'shop_order',
+        'status'=> array( 'wc-completed' ),
+        '_order_type' => 'tour',
+        'date_created'=> $tf_tour_initial_date .'...'. $tf_tour_final_date 
+        )
+    );
+    $tf_total_adults = 0;
+    $tf_total_childrens = 0;
+    $tf_total_infants = 0;
+    foreach( $tf_tour_query_orders as $order ){
+        foreach ($order->get_items() as $item_key => $item_values){
+        $adult     = !empty( wc_get_order_item_meta( $item_key, 'Adults', true ) ) ? wc_get_order_item_meta( $item_key, 'Adults', true ) : '';
+        if(!empty($adult)){
+            list( $tf_total_adult, $tf_adult_string ) = explode( ' x ', $adult );
+            $tf_total_adults += $tf_total_adult;
+        }
+
+        $children  = !empty( wc_get_order_item_meta( $item_key, 'Children', true ) ) ? wc_get_order_item_meta( $item_key, 'Children', true ) : '';
+        if(!empty($children)){
+            list( $tf_total_children, $tf_children_string ) = explode( ' x ', $children );
+            $tf_total_childrens += $tf_total_children;
+        }
+        $infant    = !empty( wc_get_order_item_meta( $item_key, 'Infants', true ) ) ? wc_get_order_item_meta( $item_key, 'Infants', true ) : '';
+
+        if(!empty($infant)){
+            list( $tf_total_infant, $tf_infant_string ) = explode( ' x ', $infant );
+            $tf_total_infants += $tf_total_infant;
+        }
+
+        }
+    }
+    $tf_total_people = $tf_total_adults+$tf_total_childrens+$tf_total_infants;
+    // echo "<pre>";
+    // var_dump($tf_total_people);
+
+    // exit();
     /**
      * If fixed is selected but pro is not activated
      * 
