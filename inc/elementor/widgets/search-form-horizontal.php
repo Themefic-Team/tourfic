@@ -212,7 +212,8 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 		$settings           = $this->get_settings_for_display();
 		$tf_search_title    = $settings['tf_search_title'];
 		$tf_search_subtitle = $settings['tf_search_subtitle'];
-		$type               = $settings['type'] ? implode( ',', $settings['type'] ) : implode( ',', [ 'all' ] );
+        $type_arr           = !is_array($settings['type']) ? array($settings['type']): $settings['type'];
+        $type               = $settings['type'] ? implode( ',', $type_arr ) : implode( ',', [ 'all' ] );
 		$full_width         = $settings['full-width'];
 
 		echo do_shortcode( '[tf_search_form title="' . $tf_search_title . '" subtitle="' . $tf_search_subtitle . '" type="' . $type . '" fullwidth="' . $full_width . '"]' );
