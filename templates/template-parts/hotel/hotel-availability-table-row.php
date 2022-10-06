@@ -51,7 +51,7 @@
         <?php }?>
 
         <div class="room-features">
-            <div class="tf-room-title"><h4><?php esc_html_e( 'Amenities', 'tourfic' );?></h4></div>
+            <div class="tf-room-title"><h4><?php _e( 'Amenities', 'tourfic' );?></h4></div>
             <ul class="room-feature-list">
 
                 <?php 

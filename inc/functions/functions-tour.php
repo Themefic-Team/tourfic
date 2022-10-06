@@ -255,11 +255,11 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
                         <span class="tf_person-icon">
                             <i class="fas fa-user"></i>
                         </span>
-                        <div class="adults-text">1 <?php _e('Adults', 'tourfic'); ?></div>
+                        <div class="adults-text"><?php _e('1 Adults', 'tourfic'); ?></div>
                         <div class="person-sep"></div>
-                        <div class="child-text">0 <?php _e('Children', 'tourfic'); ?></div>
+                        <div class="child-text"><?php _e('0 Children', 'tourfic'); ?></div>
                         <div class="person-sep"></div>
-                        <div class="infant-text">0 <?php _e('Infant', 'tourfic'); ?></div>
+                        <div class="infant-text"><?php _e('0 Infant', 'tourfic'); ?></div>
                     </div>
                     <div class="tf_acrselection-wrap">
                         <div class="tf_acrselection-inner">
@@ -380,11 +380,11 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
                         <span class="tf_person-icon">
                             <i class="fas fa-user"></i>
                         </span>
-                        <div class="adults-text">1 <?php _e('Adults', 'tourfic'); ?></div>
+                        <div class="adults-text"><?php _e('1 Adults', 'tourfic'); ?></div>
                         <div class="person-sep"></div>
-                        <div class="child-text">0 <?php _e('Children', 'tourfic'); ?></div>
+                        <div class="child-text"><?php _e('0 Children', 'tourfic'); ?></div>
                         <div class="person-sep"></div>
-                        <div class="infant-text">0 <?php _e('Infant', 'tourfic'); ?></div>
+                        <div class="infant-text"><?php _e('0 Infant', 'tourfic'); ?></div>
                     </div>
                     <div class="tf_acrselection-wrap">
                         <div class="tf_acrselection-inner">
