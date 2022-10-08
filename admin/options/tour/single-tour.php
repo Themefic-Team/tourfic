@@ -693,6 +693,12 @@ if ( class_exists( 'CSF' ) ) {
                 ),
             ),
             array(
+                'id' => 'inc_icon',
+                'type' => 'icon',
+                'title'    => __( 'Included item icon', 'tourfic' ),
+                'subtitle' => __( 'Choose icon', 'tourfic' ),
+            ),
+            array(
                 'id'     => 'exc',
                 'type'   => 'repeater',
                 'title'  => __( 'Exclude', 'tourfic' ),
@@ -705,6 +711,12 @@ if ( class_exists( 'CSF' ) ) {
                         'subtitle' => __( 'Excluded facilites', 'tourfic' ),
                     ),
                 ),
+            ),
+            array(
+                'id' => 'exc_icon',
+                'type' => 'icon',
+                'title'    => __( 'Excluded item icon', 'tourfic' ),
+                'subtitle' => __( 'Choose icon', 'tourfic' ),
             ),
 	        array(
 		        'id'      => 'include-exclude-bg',

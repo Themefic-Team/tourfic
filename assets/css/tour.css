@@ -405,6 +405,17 @@
     top: 8px;
 }
 
+.tf-inc-exc-content ul i.fas {
+    float: left;
+    vertical-align: middle;
+    margin-top: 6px;
+}   
+.tf-include-section.custom-inc-icon ul li:before {
+    display: none;
+}
+.tf-exclude-section.custom-exc-icon ul li:before {
+    display: none;
+}
 /**************** Travel Itinerary Block ****************/
 
 .tf-travel-itinerary-content h2 {
