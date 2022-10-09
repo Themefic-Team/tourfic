@@ -96,7 +96,7 @@ $share_link = get_permalink($post_id);
                     <h1><?php the_title(); ?></h1>
                     <!-- Start map link -->
                         <div class="tf-map-link"> 
-                            <p><span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> Aftab nagar, Badda, Dhaka, Bangladesh.</p>
+                            <p><a href="#tour-map"><i class="fas fa-map-marker-alt"></i> Aftab nagar, Badda, Dhaka, Bangladesh.</a></p>
                         </div>
                     <!-- End map link -->
                 </div>
@@ -241,40 +241,37 @@ $share_link = get_permalink($post_id);
 
                      <!-- Start Key Features Section -->
                     <div class="key-features sp-t-40">
-                        <h2 class="section-heading">Key Features</h2>
                         <div class="features-details">
                             <ul>
-                                <li><i class="fab fa-facebook-square"></i> 1500 sft</li>
-                                <li><i class="fab fa-facebook-square"></i> 1500 sft</li>
-                                <li><i class="fab fa-facebook-square"></i> 1500 sft</li>
-                                <li><i class="fab fa-facebook-square"></i> 3 Bedrooms</li>
-                                <li><i class="fab fa-facebook-square"></i> 1500 sft</li>
-                                <li><i class="fab fa-facebook-square"></i> 2 Attached Baths</li>
-                                <li><i class="fab fa-facebook-square"></i> 1500 sft</li>
-                                <li><i class="fab fa-facebook-square"></i> 1500 sft</li>
+                                <li><i class="fas fa-user-tie"></i> 1500 sft <span>Check yourself in with the keypad.</span></li>
+                                <li><i class="fas fa-user-clock"></i> 1500 sft <span>This is one of the few places in the area with free parking.</span></li>
+                                <li><i class="fas fa-undo-alt"></i> 1500 sft <span>Few places in the area with free parking.</span></li>
+                                <li><i class="fas fa-upload"></i> 3 Bedrooms <span>A natural paradise of true Canadian Shield</span></li>
+                                <li><i class="fas fa-tractor"></i> 1500 sft <span>This is one of the few places in the area with free parking.</span></li>
+                                <li><i class="fas fa-truck"></i> 2 Attached Baths <span>Very private get-a-way</span></li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- Start Amenities Section -->
-                    <div class="apartment-amenities sp-t-40">
-                        <h2 class="section-heading">Amenities</h2>
+                    <div class="apartment-amenities sp-t-50">
+                        <h2 class="section-heading">Property Amenities</h2>
                         <div class="features-details amenities-details">
                             <ul>
-                                <li><i class="fab fa-facebook-square"></i> 1500 sft</li>
-                                <li><i class="fab fa-facebook-square"></i> 1500 sft</li>
-                                <li><i class="fab fa-facebook-square"></i> 1500 sft</li>
-                                <li><i class="fab fa-facebook-square"></i> 3 Bedrooms</li>
-                                <li><i class="fab fa-facebook-square"></i> 1500 sft</li>
-                                <li><i class="fab fa-facebook-square"></i> 2 Attached Baths</li>
-                                <li><i class="fab fa-facebook-square"></i> 1500 sft</li>
-                                <li><i class="fab fa-facebook-square"></i> 1500 sft</li>
+                                <li><i class="fas fa-x-ray"></i> Beach access - Beachfront</li>
+                                <li><i class="fas fa-wrench"></i> Wifi</li>
+                                <li><i class="fas fa-wine-bottle"></i> TV</li>
+                                <li><i class="fas fa-wave-square"></i> 3 Bedrooms</li>
+                                <li><i class="fas fa-weight-hanging"></i> Free dryer – In unit</li>
+                                <li><i class="fas fa-vote-yea"></i> 2 Attached Baths</li>
+                                <li><i class="fas fa-warehouse"></i> Free driveway parking on premises</li>
+                                <li><i class="fas fa-virus"></i> Backyard</li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- Start What you will get here Section -->
-                    <div class="apartment-options sp-t-40">
+                    <div class="apartment-options sp-t-50">
                         <h2 class="section-heading">What you will get here</h2>
                         <div class="tf-apartment-option-slider-wrapper">
                             <div class="tf-apartment-option-slider-item">
@@ -347,11 +344,16 @@ $share_link = get_permalink($post_id);
     <!-- End Content & Feature Section -->
 
     <!-- Map Section Start -->
-    <div id="apartment-map" class="tf-map-wrapper sp-50">
+    <div id="tour-map" class="tf-map-wrapper sp-t-70">
         <div class="tf-container">
             <div class="tf-row">
                 <div class="tf-map-content-wrapper">
-                <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace("#","",$location) ); ?>&output=embed" width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <div class="about-location">
+                        <h2 class="section-heading">About the Location</h2>
+                        <h4>Verona, Ontario, Canada</h4>
+                        <p>This is true Canadian shield country in the "land of a thousand lakes". Kingston (population 165,000) is approximately 35 minutes away. Verona, a small town of 500 is approximately 8 to 10 minutes away for the conveniences of gas, grocery, liquor and beer outlet, farmer's food outlet, restaurants, golf course, bank (BMO), medical attention , churches, etc. The renowned Frontenac Provincial Park is less than an 8 minute drive away.</p>
+                    </div>
+                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace("#","",$location) ); ?>&output=embed" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -372,7 +374,7 @@ $share_link = get_permalink($post_id);
     <!-- End Review Section -->
 
     <!-- FAQ section Start -->
-    <div class="tf-faq-wrapper apartment-faq sp-50">
+    <div class="tf-faq-wrapper tf-apartment-faq sp-30">
         <div class="tf-container">
             <div class="tf-faq-sec-title">
                 <h2 class="section-heading"><?php _e( "Frequently Asked Questions", 'tourfic' ); ?></h2>
@@ -381,22 +383,46 @@ $share_link = get_permalink($post_id);
             
             <div class="tf-faq-content-wrapper">
                 <div class="tf-faq-items-wrapper">
-                    <?php foreach ( $faqs as $key => $faq ): ?>
-                        <div id="tf-faq-item">
-                            <div class="tf-faq-title">
-                                <h4><?php esc_html_e( $faq['title'] ); ?></h4>
-                                <i class="fas fa-angle-down arrow"></i>
-                            </div>
-                            <div class="tf-faq-desc">
-                                <p><?php _e( $faq['desc'] ); ?></p> 
-                            </div>
+                    <div id="tf-faq-item">
+                        <div class="tf-faq-title">
+                            <h4>Can we make sure the first accordion stays open?</h4>
+                            <i class="fas fa-angle-down arrow"></i>
                         </div>
-                    <?php endforeach; ?>
+                        <div class="tf-faq-desc">
+                            <p>There are many variatio of passage of Lorem for a Ipsum available  Lorem for a Ipsum available.There are many variatio of passage of lorem for a Ipsum available  Lorem for a Ipsum available.</p> 
+                        </div>
+                    </div>
+
+                    <div id="tf-faq-item">
+                        <div class="tf-faq-title">
+                            <h4>Tassage of Lorem for a Ipsum available</h4>
+                            <i class="fas fa-angle-down arrow"></i>
+                        </div>
+                        <div class="tf-faq-desc">
+                            <p>There are many variatio of passage of Lorem for a Ipsum available  Lorem for a Ipsum available.There are many variatio of passage of Lorem for a Ipsum available  Lorem for a Ipsum available.</p> 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 	<!-- FAQ section end -->
+
+    <!-- Start Question Content -->
+    <div class="tf-ask-question apartment-question sp-40">
+        <div class="tf-container">
+            <div class="apartment-qa-wrapper">
+                <div class="question-left">
+                    <h3><?php _e( "Have a question in mind", 'tourfic' ); ?></h3>
+                    <p><?php _e( "Looking for more info? Send a question to the property to find out more.", 'tourfic' ); ?></p>
+                </div>
+                <div class="tf-btn">
+                    <a href="#" id="tf-ask-question-trigger" class="btn-styled"><span><?php esc_html_e( 'Contact Host', 'tourfic' ); ?></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+     <!-- End Question Content -->
 
     <!-- Start TOC Content -->
     <div class="toc-section apartment-toc sp-50">
@@ -404,29 +430,18 @@ $share_link = get_permalink($post_id);
             <div class="tf-toc-wrap gray-wrap">
                 <h2 class="section-heading"><?php esc_html_e( 'Tour Terms & Conditions', 'tourfic' ); ?></h2>
                 <div class="tf-toc-inner">
-                <?php echo wpautop($terms_and_conditions); ?>
+                    <p>Lorem ipsum dolor sit amet consectetuer adipiscing elit sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p> 
+                    <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. </p>
                 </div>
             </div>
         </div>
     </div>
     <!-- End TOC Content -->
 
-     <!-- Start Question Content -->
-    <div class="tf-ask-question apartment-question">
-        <div class="tf-container">
-            <div class="question-left">
-                <h3><?php _e( "Have a question in mind", 'tourfic' ); ?></h3>
-                <p><?php _e( "Looking for more info? Send a question to the property to find out more.", 'tourfic' ); ?></p>
-            </div>
-            <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="btn-styled"><span><?php esc_html_e( 'Ask a Question', 'tourfic' ); ?></span></a> </div>
-        </div>
-    </div>
-     <!-- End Question Content -->
-
      <!-- Apartment Suggestion section Start -->
-    <div class="apartment-options apartment-sugestion sp-t-40">
+    <div class="apartment-options apartment-sugestion sp-40">
         <div class="tf-container">
-            <h2 class="section-heading">What you will get here</h2>
+            <h2 class="section-heading">Related Properties</h2>
             <div class="tf-apartment-sugestion-slider-wrapper">
                 <div class="tf-apartment-option-slider-item">
                     <div class="tf-apartment-option-slider-content">
