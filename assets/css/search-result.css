@@ -227,6 +227,51 @@
     font-size: 15px;
   }
 
+  /* Feature */
+  .tf-hide-feature {
+    display: none;
+  }
+  .tf-feature-all-show{
+    display: inline-block;
+    cursor: pointer;
+  }
+  .tf-hide-feature.active{
+    display: block;
+  }
+  .tf-hide-all-feature{
+    display: none;
+  }
+
+  /* Activities */
+  .tf-hide-activities {
+    display: none;
+  }
+  .tf-activities-all-show{
+    display: inline-block;
+    cursor: pointer;
+  }
+  .tf-hide-activities.active{
+    display: block;
+  }
+  .tf-hide-all-activities{
+    display: none;
+  }
+
+  
+  /* Theme */
+  .tf-hide-theme {
+    display: none;
+  }
+  .tf-theme-all-show{
+    display: inline-block;
+    cursor: pointer;
+  }
+  .tf-hide-theme.active{
+    display: block;
+  }
+  .tf-hide-all-theme{
+    display: none;
+  }
 
 /** GRID VIEW **/
 

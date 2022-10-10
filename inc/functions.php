@@ -687,11 +687,20 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                         'hierarchical' => 0,
                     ) );
                     if ( $tf_hotel_theme ) { 
+                    $total_hotel_themes = count($tf_hotel_theme);
+                    $tf_themes_count=1;
                     foreach( $tf_hotel_theme as $term ) {
                     ?>
-                    <li><label><input type="checkbox" name="tf_theme[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
-                    <?php } } ?>
+                    <li <?php echo $tf_themes_count>5 ? 'class="tf-hide-theme"' : ''; ?>><label><input type="checkbox" name="tf_theme[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
+                    <?php $tf_themes_count++; } } ?>
                 </ul>
+                <?php 
+                if(!empty($tf_hotel_theme) && $total_hotel_themes>5){ ?>
+                <div class="tf-theme-all-show">
+                    <span class="tf-show-all-theme"><?php _e("Show All", "tourfic" ); ?> <i class="fas fa-angle-down"></i></span>
+                    <span class="tf-hide-all-theme"><?php _e("Hide All", "tourfic" ); ?> <i class="fas fa-angle-up"></i></span>
+                </div>
+                <?php } ?>
             </div>
         </div>
 
@@ -708,11 +717,21 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                         'hierarchical' => 0,
                     ) );
                     if ( $tf_hotel_activities ) { 
+                        
+                    $total_hotel_activities = count($tf_hotel_activities);
+                    $tf_activities_count=1;
                     foreach( $tf_hotel_activities as $term ) {
                     ?>
-                    <li><label><input type="checkbox" name="tf_activities[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
-                    <?php } } ?>
+                    <li <?php echo $tf_activities_count>5 ? 'class="tf-hide-activities"' : ''; ?>><label><input type="checkbox" name="tf_activities[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
+                    <?php $tf_activities_count++; } } ?>
                 </ul>
+                <?php 
+                if(!empty($tf_hotel_activities) && $total_hotel_activities>5){ ?>
+                <div class="tf-activities-all-show">
+                    <span class="tf-show-all-activities"><?php _e("Show All", "tourfic" ); ?> <i class="fas fa-angle-down"></i></span>
+                    <span class="tf-hide-all-activities"><?php _e("Hide All", "tourfic" ); ?> <i class="fas fa-angle-up"></i></span>
+                </div>
+                <?php } ?>
             </div>
         </div>
         
@@ -729,11 +748,20 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                         'hierarchical' => 0,
                     ) );
                     if ( $tf_hotel_feature ) { 
+                    $total_hotel_fature = count($tf_hotel_feature);
+                    $tf_feature_count=1;
                     foreach( $tf_hotel_feature as $term ) {
                     ?>
-                    <li><label><input type="checkbox" name="tf_filters[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
-                    <?php } } ?>
+                    <li <?php echo $tf_feature_count>5 ? 'class="tf-hide-feature"' : ''; ?>><label><input type="checkbox" name="tf_filters[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
+                    <?php $tf_feature_count++; } } ?>
                 </ul>
+                <?php 
+                if(!empty($tf_hotel_feature) && $total_hotel_fature>5){ ?>
+                <div class="tf-feature-all-show">
+                    <span class="tf-show-all-feature"><?php _e("Show All", "tourfic" ); ?> <i class="fas fa-angle-down"></i></span>
+                    <span class="tf-hide-all-feature"><?php _e("Hide All", "tourfic" ); ?> <i class="fas fa-angle-up"></i></span>
+                </div>
+                <?php } ?>
             </div>
         </div>
         

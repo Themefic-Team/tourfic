@@ -1467,7 +1467,41 @@
             $(this).parents('#tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
           });
 
+        // adv_features show & hide
+         $('.tf-feature-all-show span.tf-show-all-feature').click(function(){
+            $(".tf-filter .tf-hide-feature").addClass('active');
+            $(".tf-show-all-feature").hide();
+            $(".tf-hide-all-feature").show();
+        });
+        $('.tf-feature-all-show span.tf-hide-all-feature').click(function(){
+            $(".tf-filter .tf-hide-feature").removeClass('active');
+            $(".tf-hide-all-feature").hide();
+            $(".tf-show-all-feature").show();
+        });
 
+        // adv_activities show & hide
+          $('.tf-activities-all-show span.tf-show-all-activities').click(function(){
+            $(".tf-filter .tf-hide-activities").addClass('active');
+            $(".tf-show-all-activities").hide();
+            $(".tf-hide-all-activities").show();
+        });
+        $('.tf-activities-all-show span.tf-hide-all-activities').click(function(){
+            $(".tf-filter .tf-hide-activities").removeClass('active');
+            $(".tf-hide-all-activities").hide();
+            $(".tf-show-all-activities").show();
+        });
+
+        // adv_theme show & hide
+        $('.tf-theme-all-show span.tf-show-all-theme').click(function(){
+            $(".tf-filter .tf-hide-theme").addClass('active');
+            $(".tf-show-all-theme").hide();
+            $(".tf-hide-all-theme").show();
+        });
+        $('.tf-theme-all-show span.tf-hide-all-theme').click(function(){
+            $(".tf-filter .tf-hide-theme").removeClass('active');
+            $(".tf-hide-all-theme").hide();
+            $(".tf-show-all-theme").show();
+        });
         
     });
 })(jQuery, window);
