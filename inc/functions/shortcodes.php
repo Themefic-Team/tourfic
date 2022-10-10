@@ -345,21 +345,23 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 			<?php do_action( 'tf_after_booking_form_tab', $type ) ?>
         </div>
 
-        <!-- Booking Form tabs mobile version -->
-        <div class="tf-booking-form-tab-mobile">
-            <select name="tf-booking-form-tab-select" id="">
-				<?php do_action( 'tf_before_booking_form_mobile_tab', $type ) ?>
+        <?php if(! tf_is_search_form_single_tab( $type )): ?>
+            <!-- Booking Form tabs mobile version -->
+            <div class="tf-booking-form-tab-mobile">
+                <select name="tf-booking-form-tab-select" id="">
+                    <?php do_action( 'tf_before_booking_form_mobile_tab', $type ) ?>
 
-				<?php if ( ! in_array( 'hotel', $disable_services ) && tf_is_search_form_tab_type( 'hotel', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                    <option value="tf-hotel-booking-form"><?php _e( 'Hotel', 'tourfic' ); ?></option>
-				<?php endif; ?>
-				<?php if ( ! in_array( 'tour', $disable_services ) && tf_is_search_form_tab_type( 'tour', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                    <option value="tf-tour-booking-form"><?php _e( 'Tour', 'tourfic' ); ?></option>
-				<?php endif ?>
+                    <?php if ( ! in_array( 'hotel', $disable_services ) && tf_is_search_form_tab_type( 'hotel', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
+                        <option value="tf-hotel-booking-form"><?php _e( 'Hotel', 'tourfic' ); ?></option>
+                    <?php endif; ?>
+                    <?php if ( ! in_array( 'tour', $disable_services ) && tf_is_search_form_tab_type( 'tour', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
+                        <option value="tf-tour-booking-form"><?php _e( 'Tour', 'tourfic' ); ?></option>
+                    <?php endif ?>
 
-				<?php do_action( 'tf_after_booking_form_mobile_tab', $type ) ?>
-            </select>
-        </div>
+                    <?php do_action( 'tf_after_booking_form_mobile_tab', $type ) ?>
+                </select>
+            </div>
+        <?php endif; ?>
 
         <!-- Booking Forms -->
         <div class="tf-booking-forms-wrapper">
