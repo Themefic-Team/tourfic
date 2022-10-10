@@ -3,7 +3,7 @@ Contributors: fida02, themefic, mdshuvo, codexa, kamrul0424, hasanet, jahidcse, 
 Tags: tour-booking, travel-booking, hotel-booking, trip-booking, tour booking, tour, travel booking, travel, trip booking, trip, hotel booking, hotel, travel-itinerary, tour-itinerary, travel-booking-engine, tour package payments, travel-agency, tour operator, travel agency, tour-operator, tour reservation, hotel reservation, airbnb, booking.com, agoda.com, agoda, woocommerce tour booking, woocommerce travel booking plugin, woocommerce hotel booking, woocommerce hotel, woocommerce tour, woocommerce travel, wordpress travel, wp travel plugin, wp travel, wp hotel, wordpress travel booking plugin, wordpress tour plugin, wordpress hotel booking
 Requires at least: 5.4
 Tested up to: 6.0.2
-Stable tag: 2.8.6
+Stable tag: 2.8.7
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -350,6 +350,10 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 25. Tour Option Panel
 
 == Changelog ==
+
+= 2.8.7 -  10 October 2022 =
+
+* Fixed: tf_search shortcode fixed
 
 = 2.8.6 - 29 September 2022 =
 
