@@ -337,7 +337,7 @@ while ( have_posts() ) : the_post();
                                 <h2 class="section-heading"><?php _e( 'Highlights', 'tourfic' ); ?></h2>
 								<?php echo $highlights; ?>
                             </div>
-							<?php if ( $meta['hightlights_thumbnail']['url'] ): ?>
+							<?php if ( !empty( $meta['hightlights_thumbnail']['url'] ) ): ?>
                                 <div class="tf-highlight-image">
                                     <?php echo wp_get_attachment_image($meta['hightlights_thumbnail']['id'], 'tf-thumb-480-320'); ?>
                                 </div>
