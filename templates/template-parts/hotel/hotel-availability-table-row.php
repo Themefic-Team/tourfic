@@ -9,7 +9,7 @@
             }
             if (defined( 'TF_PRO' ) && $tour_room_details_gall){ 
             ?>	
-            <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'] : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: underline;">
+            <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: underline;">
                 <?php echo esc_html( $room['title'] ); ?>
             </a></h3>
 

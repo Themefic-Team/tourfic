@@ -191,7 +191,14 @@ function tf_hotel_booking_callback(){
                     $tf_room_data['tf_hotel_data']['price_total'] += $airport_service_price_total;
                     if($child!=0){
                     
-                        $tf_room_data['tf_hotel_data']['air_service_info'] = "Adult ( ".$adult." × ".wc_price($airport_pickup_price['airport_service_fee_adult']). " ) + Child ( ".$child." × ".wc_price($airport_pickup_price['airport_service_fee_children'])." ) = ". wc_price($airport_service_price_total);
+//                        $tf_room_data['tf_hotel_data']['air_service_info'] = "Adult ( ".$adult." × ".wc_price($airport_pickup_price['airport_service_fee_adult']). " ) + Child ( ".$child." × ".wc_price($airport_pickup_price['airport_service_fee_children'])." ) = ". wc_price($airport_service_price_total);
+                        $tf_room_data['tf_hotel_data']['air_service_info'] = sprintf( __( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s', 'trav' ),
+	                        $adult,
+	                        wc_price($airport_pickup_price['airport_service_fee_adult']),
+	                        $child,
+	                        wc_price($airport_pickup_price['airport_service_fee_children']),
+	                        wc_price($airport_service_price_total)
+                        );
 
                     }else{
                         $tf_room_data['tf_hotel_data']['air_service_info'] = "Adult ( ".$adult." × ".wc_price($airport_pickup_price['airport_service_fee_adult'])." )= ". wc_price($airport_service_price_total);

@@ -25,33 +25,33 @@ CSF::createSection( $prefix, array(
 			'id'         => 'affiliate-tabs',
 			'type'       => 'tabbed',
 			'class'      => 'tf-csf-disable tf-csf-pro',
-			'desc'       => __( $badge_pro, 'tourfic' ),
+			'desc'       => $badge_pro,
 			'attributes' => array(
 				'style' => 'flex-wrap: wrap;',
 			),
 			'tabs'       => array(
 				array(
-					'title'  => 'Booking.com',
+					'title'  => __('Booking.com', 'tourfic'),
 					'fields' => array(
 						array(
 							'id'       => 'enable-booking-dot-com',
 							'type'     => 'switcher',
-							'title'    => 'Enable Booking.com?',
-							'text_on'  => 'Yes',
-							'text_off' => 'No',
+							'title'    => __( 'Enable Booking.com?', 'tourfic' ),
+							'text_on'  => __( 'Yes', 'tourfic' ),
+							'text_off' => __( 'No', 'tourfic' ),
 							'default'  => true
 						),
 					)
 				),
 				array(
-					'title'  => 'TravelPayouts',
+					'title'  => __('TravelPayouts', 'tourfic'),
 					'fields' => array(
 						array(
 							'id'       => 'enable-travel-payouts',
 							'type'     => 'switcher',
-							'title'    => 'Enable TravelPayouts?',
-							'text_on'  => 'Yes',
-							'text_off' => 'No',
+							'title'    => __( 'Enable TravelPayouts?', 'tourfic' ),
+							'text_on'  => __( 'Yes', 'tourfic' ),
+							'text_off' => __( 'No', 'tourfic' ),
 							'default'  => true
 						),
 					)
