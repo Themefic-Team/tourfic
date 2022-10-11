@@ -178,7 +178,14 @@ button.tf-tablinks:focus {
     min-width: 150px;
     width: 25%;
 }
-
+.tf_destination-wrap .ui-menu-item:before {
+    content: "\f3c5";
+    font-weight: 900;
+    font-family: "Font Awesome 5 Free";
+    float: left;
+    font-size: 1rem;
+    margin-right: 5px;
+}
 .tf_submit-wrap {
     border-right: 0;
     background: #003162;
