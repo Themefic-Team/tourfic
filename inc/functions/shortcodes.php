@@ -188,6 +188,14 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 					$hotel_loop->the_post();
 					$post_id                = get_the_ID();
 					$related_comments_hotel = get_comments( array( 'post_id' => $post_id ) );
+					$meta = get_post_meta( $post_id, 'tf_hotel', true );
+					$rooms = !empty($meta['room']) ? $meta['room'] : '';
+					//get and store all the prices for each room
+					$room_price = [];
+					foreach( $rooms as $room ){
+						$room_price[] = $room['price'];
+					}
+
 					?>
                     <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
                         <div class="tf-slider-content">
@@ -201,6 +209,16 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
                                     </div>
 								<?php } ?>
                                 <p><?php echo wp_trim_words( get_the_content(), 10 ); ?></p>
+								<?php if(!empty($rooms)): ?>
+								<div class="tf-recent-room-price">
+								<?php
+									//get the lowest price from all available room price
+									$lowest_price = wc_price( min($room_price) );
+									echo __("From ","tourfic") . $lowest_price; 
+										
+								?>
+								</div>
+								<?php endif; ?>
                             </div>
                         </div>
                     </div>

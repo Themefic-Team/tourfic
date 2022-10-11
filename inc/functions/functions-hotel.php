@@ -1293,10 +1293,14 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	if ( ! empty( $check_in_out ) ) {
 		if ( ! empty( $b_rooms ) ) {
 			$b_room_id = - 1;
+			$room_price = [];
 			foreach ( $b_rooms as $b_room ) {
 
 				$b_room_id ++;
 
+				//room price
+				$price = ! empty( $b_room['price'] ) ? $b_room['price'] : '';
+				$room_price[] = $price;
 				$enable = ! empty( $b_room['enable'] ) ? $b_room['enable'] : '';
 
 				// Check if room is enabled
@@ -1430,6 +1434,16 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                                 <div class="availability-btn-area">
                                                     <a href="<?php echo $url; ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
                                                 </div>
+												<div class="tf-room-price-area">
+													<div class="tf-room-price">
+														<?php
+														//get the lowest price from all available room price
+														 $lowest_price = wc_price( min( $room_price ) );
+														 echo __( "From ","tourfic" ) . $lowest_price; 
+														 
+														 ?>
+													</div>
+												</div>
                                             </div>
                                         </div>
                                     </div>

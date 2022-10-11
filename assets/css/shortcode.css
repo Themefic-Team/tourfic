@@ -186,7 +186,10 @@ button.tf-tablinks:focus {
 .tf-wishlists a {
     text-decoration: none !important;
 }
-
+.tf-recent-room-price .amount {
+    font-weight: bold;
+    margin-top: 5px;
+}
 .recent-tour-slider h3,
 .recent-hotel-slider h3 {
     margin-bottom: 0 !important;
