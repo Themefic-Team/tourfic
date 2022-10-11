@@ -771,7 +771,7 @@ if ( class_exists( 'CSF' ) ) {
                     ),
                     array(
                         'id'    => 'desc',
-                        'type'  => 'textarea',
+                        'type'  => 'wp_editor',
                         'title' => __( 'FAQ Description', 'tourfic' ),
                     ),
                 ),
