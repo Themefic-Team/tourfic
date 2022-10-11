@@ -354,8 +354,11 @@ while ( have_posts() ) : the_post();
         <!-- Highlight section end -->
 
         <!-- Include-Exclude section Start -->
-		<?php if ( $inc || $exc ) : ?>
-            <div class="tf-inc-exc-wrapper sp-70" style="background-image: url(<?php echo esc_url( $meta['include-exclude-bg']['url'] ); ?>);">
+		<?php
+			if ( $inc || $exc ) :
+				 $inc_exc_bg = !empty($meta['include-exclude-bg']['url']) ? $meta['include-exclude-bg']['url'] : '';
+		?>
+            <div class="tf-inc-exc-wrapper sp-70" style="background-image: url(<?php esc_url( $inc_exc_bg ) ?>);">
                 <div class="tf-container">
                     <div class="tf-inc-exc-content">
 						<?php if ( $inc ) { ?>
