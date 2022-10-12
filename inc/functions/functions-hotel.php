@@ -920,11 +920,11 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
 
 			<?php if ( $title ): ?>
-                <div class="tf_widget-title"><h2><?php esc_html_e( $title ); ?></h2></div>
+                <div class="tf_widget-title"><h2><?php echo esc_html( $title ); ?></h2></div>
 			<?php endif; ?>
 
 			<?php if ( $subtitle ): ?>
-                <div class="tf_widget-subtitle"><?php esc_html_e( $subtitle ); ?></div>
+                <div class="tf_widget-subtitle"><?php echo esc_html( $subtitle ); ?></div>
 			<?php endif; ?>
 
 
@@ -947,9 +947,9 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                 <div class="tf_selectperson-wrap">
 
                     <div class="tf_input-inner">
-                <span class="tf_person-icon">
-                    <i class="fas fa-user"></i>
-                </span>
+                        <span class="tf_person-icon">
+                            <i class="fas fa-user"></i>
+                        </span>
                         <div class="adults-text"><?php echo ( ! empty( $adults ) ? $adults : '1' ) . ' ' . __( 'Adults', 'tourfic' ); ?></div>
                         <div class="person-sep"></div>
                         <div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( 'Children', 'tourfic' ); ?></div>
@@ -996,7 +996,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="far fa-calendar-alt"></i>
                                     <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                           placeholder="<?php _e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
+                                           placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
                                 </div>
                             </label>
                         </div>
@@ -1005,7 +1005,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 
                 <div class="tf_submit-wrap">
                     <input type="hidden" name="type" value="tf_hotel" class="tf-post-type"/>
-                    <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
+                    <button class="tf_button tf-submit btn-styled" type="submit"><?php _e( 'Search', 'tourfic' ); ?></button>
                 </div>
 
             </div>
@@ -1065,11 +1065,11 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
 
 			<?php if ( $title ): ?>
-                <div class="tf_widget-title"><h2><?php esc_html_e( $title ); ?></h2></div>
+                <div class="tf_widget-title"><h2><?php echo esc_html( $title ); ?></h2></div>
 			<?php endif; ?>
 
 			<?php if ( $subtitle ): ?>
-                <div class="tf_widget-subtitle"><?php esc_html_e( $subtitle ); ?></div>
+                <div class="tf_widget-subtitle"><?php echo esc_html( $subtitle ); ?></div>
 			<?php endif; ?>
 
 
@@ -1093,9 +1093,9 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                 <div class="tf_selectperson-wrap">
 
                     <div class="tf_input-inner">
-                <span class="tf_person-icon">
-                    <i class="fas fa-user"></i>
-                </span>
+                        <span class="tf_person-icon">
+                            <i class="fas fa-user"></i>
+                        </span>
                         <div class="adults-text"><?php echo ( ! empty( $adults ) ? $adults : '1' ) . ' ' . __( 'Adults', 'tourfic' ); ?></div>
                         <div class="person-sep"></div>
                         <div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( 'Children', 'tourfic' ); ?></div>

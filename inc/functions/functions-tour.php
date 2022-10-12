@@ -739,7 +739,7 @@ function tf_single_tour_booking_form( $post_id ) {
                 if((!empty($tour_extras[0]['title']) && !empty($tour_extras[0]['desc']) && !empty($tour_extras[0]['price'])) || !empty($tour_extras[1]['title']) && !empty($tour_extras[1]['desc']) && !empty($tour_extras[1]['price'])){  
                 ?>
                 <div class="tour-extra">
-                    <a data-fancybox data-src="#tour-extra" href="javascript:;"><i class="far fa-plus-square"></i>Tour Extras</a>
+                    <a data-fancybox data-src="#tour-extra" href="javascript:;"><i class="far fa-plus-square"></i><?php _e('Tour Extras', 'tourfic') ?></a>
                     <div style="display: none;" id="tour-extra">
                         <div class="tour-extra-container">
                         <?php foreach( $tour_extras as $tour_extra ){ 
@@ -748,13 +748,13 @@ function tf_single_tour_booking_form( $post_id ) {
                             <div class="tour-extra-single">
                                 <div class="tour-extra-left">
                                     <h4><?php _e( $tour_extra['title'] ); ?></h4>
-                                    <?php if ($tour_extra['desc']) { ?><p><?php _e( $tour_extra['desc'] ); ?></p><?php } ?>
+                                    <?php if ($tour_extra['desc']) { ?><p><?php echo esc_html( $tour_extra['desc'] ); ?></p><?php } ?>
                                 </div>
                                 <div class="tour-extra-right">
                                     <span><?php echo wc_price( $tour_extra['price'] ); ?></span>
-                                    <input type="checkbox" value="<?php _e( $tour_extra['price'] ); ?>" data-title="<?php _e( $tour_extra['title'] ); ?>">
+                                    <input type="checkbox" value="<?php echo esc_attr( $tour_extra['price'] ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>">
                                 </div>												
-                            </div>					
+                            </div>
                         <?php } } ?>
                         </div>
                     </div>

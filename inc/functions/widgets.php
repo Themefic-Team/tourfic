@@ -16,7 +16,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
 
         parent::__construct(
             'tf_hotel_filter', // Base ID
-            'Tourfic - Hotels Filters by Feature', 
+            __('Tourfic - Hotels Filters by Feature', 'tourfic'),
             array('description' => __('Filter search result by hotel feature', 'tourfic'),) // Args
         );
     }
@@ -97,12 +97,12 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
 
     ?>
         <p class="tf-widget-field">
-            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'tourfic'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
         </p>
 
         <p class="tf-widget-field">
-            <label for="<?php echo $this->get_field_id('terms'); ?>">Select Terms:</label>
+            <label for="<?php echo $this->get_field_id('terms'); ?>"><?php _e('Select Terms:', 'tourfic') ?></label>
             <br>
             <?php
             wp_dropdown_categories(array(
@@ -123,11 +123,11 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
             <span>Leave this field empty if you want to show all terms.</span>
         </p>
         <p class="tf-widget-field">
-            <label for="<?php echo $this->get_field_id('show_count'); ?>">Show Count:</label>
+            <label for="<?php echo $this->get_field_id('show_count'); ?>"><?php _e('Show Count:', 'tourfic') ?></label>
             <input id="<?php echo $this->get_field_id('show_count'); ?>" name="<?php echo $this->get_field_name('show_count'); ?>" type="checkbox" <?php checked('on', $show_count); ?>>
         </p>
         <p class="tf-widget-field">
-            <label for="<?php echo $this->get_field_id('hide_empty'); ?>">Hide Empty Categories:</label>
+            <label for="<?php echo $this->get_field_id('hide_empty'); ?>"><?php _e('Hide Empty Categories:', 'tourfic') ?></label>
             <input id="<?php echo $this->get_field_id('hide_empty'); ?>" name="<?php echo $this->get_field_name('hide_empty'); ?>" type="checkbox" <?php checked('on', $hide_empty); ?>>
         </p>
         <style>
@@ -178,7 +178,7 @@ class Tourfic_Similar_Tours extends WP_Widget {
 
         parent::__construct(
             'tf_similar_tours', // Base ID
-            'Tourfic - Similar Tours', // Name
+            __('Tourfic - Similar Tours', 'tourfic'), // Name
             array( 'description' => __( 'Show more tours button on single tour page.', 'tourfic' ), ) // Args
         );
     }
@@ -278,7 +278,7 @@ class Tourfic_Ask_Question extends WP_Widget {
 
         parent::__construct(
             'tf_ask_question', // Base ID
-            'Tourfic - Ask Question', // Name
+            __('Tourfic - Ask Question', 'tourfic'), // Name
             array( 'description' => __( 'Ask a question button on single hotel page.', 'tourfic' ), ) // Args
         );
     }
@@ -319,7 +319,7 @@ class Tourfic_Ask_Question extends WP_Widget {
 				?>
 			</div>
 			<div class="ni-buttons">
-				<a href="#" id="tf-ask-question-trigger" class="button tf_button btn-outline"><?php esc_html_e( $btn_label ); ?></a>
+				<a href="#" id="tf-ask-question-trigger" class="button tf_button btn-outline"><?php echo esc_html( $btn_label ); ?></a>
 			</div>
 		</div>
 		<!-- End ask ques tour widget -->

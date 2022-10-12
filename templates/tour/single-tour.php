@@ -295,28 +295,28 @@ while ( have_posts() ) : the_post();
                                 <div class="tf-single-square-block first">
                                     <i class="fas fa-clock"></i>
                                     <h4><?php echo __( 'Duration', 'tourfic' ); ?></h4>
-                                    <p><?php echo __( $tour_duration, 'tourfic' ) ?></p>
+                                    <p><?php echo esc_html($tour_duration); ?></p>
                                 </div>
 							<?php } ?>
 							<?php if ( $tour_type ) { ?>
                                 <div class="tf-single-square-block second">
                                     <i class="fas fa-map"></i>
                                     <h4><?php echo __( 'Tour Type', 'tourfic' ); ?></h4>
-                                    <p><?php echo ucfirst( __( $tour_type, 'tourfic' ) ) ?></p>
+                                    <p><?php echo ucfirst( esc_html($tour_type) ) ?></p>
                                 </div>
 							<?php } ?>
 							<?php if ( $group_size ) { ?>
                                 <div class="tf-single-square-block third">
                                     <i class="fas fa-users"></i>
                                     <h4><?php echo __( 'Group Size', 'tourfic' ); ?></h4>
-                                    <p><?php echo __( $group_size, 'tourfic' ) ?></p>
+                                    <p><?php echo esc_html( $group_size ) ?></p>
                                 </div>
 							<?php } ?>
 							<?php if ( $language ) { ?>
                                 <div class="tf-single-square-block fourth">
                                     <i class="fas fa-language"></i>
                                     <h4><?php echo __( 'Language', 'tourfic' ); ?></h4>
-                                    <p><?php echo __( $language, 'tourfic' ) ?></p>
+                                    <p><?php echo esc_html( $language ) ?></p>
                                 </div>
 							<?php } ?>
                         </div>
@@ -523,9 +523,7 @@ while ( have_posts() ) : the_post();
                         <div class="tf-slider-content-wrapper">
                             <div class="tf-suggestion-sec-head">
                                 <h2 class="section-heading"><?php echo __( 'You might also like', 'tourfic' ) ?></h2>
-                                <p><?php echo __( 'Travel is my life. Since 1999, I’ve been traveling around the world nonstop.
-                        If you also love travel, you’re in the right place!
-                        ', 'tourfic' ) ?></p>
+                                <p><?php echo __( 'Travel is my life. Since 1999, I’ve been traveling around the world nonstop. If you also love travel, you’re in the right place!', 'tourfic' ) ?></p>
                             </div>
 
                             <div class="tf-slider-items-wrapper">

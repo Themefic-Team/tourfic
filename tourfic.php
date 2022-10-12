@@ -7,7 +7,7 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.8.8
+ * Version:         2.8.9
  * Tested up to: 6.0.2
  * WC tested up to: 6.9.4
  * Requires PHP: 7.2
@@ -52,7 +52,7 @@ define( 'TF_ASSETS_PATH', TF_PATH.'assets/' );
  * @since 1.0
  */
 if ( !defined( 'TOURFIC' ) ) {
-	define( 'TOURFIC', '2.8.6' );
+	define( 'TOURFIC', '2.8.9' );
 }
 
 /**
