@@ -1253,7 +1253,7 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
 /**
  * Hotel Archive Single Item Layout
  */
-function tf_hotel_archive_single_item( $adults = '', $child = '',$children_ages_array = '', $room = '', $check_in_out = '', $startprice = '', $endprice = '' ) {
+function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $check_in_out = '', $startprice = '', $endprice = '' ) {
 
 	// get post id
 	$post_id = get_the_ID();
@@ -1282,14 +1282,12 @@ function tf_hotel_archive_single_item( $adults = '', $child = '',$children_ages_
      * get children ages
      * @since 2.8.6
      */
-    if(empty($children_ages_array)) {
-        $children_ages_array = isset($_GET['children_ages']) ? rest_sanitize_array($_GET['children_ages']) : array();
-        if( is_array($children_ages_array) && !empty($children_ages_array) ){            
-            $children_ages =  implode(',',$children_ages_array);
-        }else{
-			$children_ages = '';
-		}
-    }
+	$children_ages_array = isset($_GET['children_ages']) ? rest_sanitize_array($_GET['children_ages']) : '';
+	if( is_array($children_ages_array) && !empty($children_ages_array) ){            
+		$children_ages =  implode(',',$children_ages_array);
+	}else{
+		$children_ages = '';
+	}
 	// room
 	if ( empty( $room ) ) {
 		$room = ! empty( $_GET['room'] ) ? sanitize_text_field( $_GET['room'] ) : '';
