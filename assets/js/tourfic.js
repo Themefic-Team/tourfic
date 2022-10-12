@@ -27,7 +27,7 @@
             if ($.trim($('input[name=check-in-out-date]').val()) == '') {
 
                 if ($('#tf-required').length === 0) {
-                    $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" clss="required"><b>' + tf_params.field_required + '</b></span>');
+                    $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required"><b>' + tf_params.field_required + '</b></span>');
                 }
                 return;
             }
@@ -58,24 +58,8 @@
                     }, 500);
                     $("#rooms").html(data);
                 },
-                error: function (jqXHR, exception) {
-                    var error_msg = '';
-                    if (jqXHR.status === 0) {
-                        var error_msg = 'Not connect.\n Verify Network.';
-                    } else if (jqXHR.status == 404) {
-                        var error_msg = 'Requested page not found. [404]';
-                    } else if (jqXHR.status == 500) {
-                        var error_msg = 'Internal Server Error [500].';
-                    } else if (exception === 'parsererror') {
-                        var error_msg = 'Requested JSON parse failed.';
-                    } else if (exception === 'timeout') {
-                        var error_msg = 'Time out error.';
-                    } else if (exception === 'abort') {
-                        var error_msg = 'Ajax request aborted.';
-                    } else {
-                        var error_msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                    }
-                    alert(error_msg);
+                error: function (data) {
+                    console.log(data);
                 }
             });
         });
@@ -188,7 +172,6 @@
                 },
                 error: function (data) {
                     console.log(data);
-
                 },
 
             });
@@ -350,7 +333,6 @@
                 },
                 error: function (data) {
                     console.log(data);
-
                 },
 
             });
@@ -544,7 +526,6 @@
                     var left_margin = "-" + $(this).offset().left + "px";
 
                     $(this).width(window_width).css({marginLeft: left_margin});
-                    console.log("Width:", window_width, "Margin Left:", left_margin);
                 });
             }
 
@@ -907,7 +888,7 @@
                     b = document.createElement("DIV");
                     /*make the matching letters bold:*/
 
-                    b.innerHTML += 'Not Found';
+                    b.innerHTML += tf_params.no_found;
                     /*insert a input field that will hold the current array item's value:*/
                     b.innerHTML += "<input type='hidden' value=''>";
                     /*execute a function when someone clicks on the item value (DIV element):*/
@@ -1164,7 +1145,6 @@
                 },
                 error: function (data) {
                     console.log(data);
-
                 },
 
             });
@@ -1212,7 +1192,6 @@
                     flag = true;
                 },
                 success: function (data) {
-                    //console.log(data);
                     $('.archive_ajax_result').append($('.archive_ajax_result', data).html());
 
                     $('.tf_posts_navigation').html($('.tf_posts_navigation', data).html());
@@ -1225,8 +1204,6 @@
 
                 }
             });
-
-            //console.log(main_xhr);
         };
 
         // Feed Ajax Trigger
@@ -1253,10 +1230,7 @@
                 var tAdj = parseInt(t - (H / 2));
 
                 if (flag === false && (H >= tAdj)) {
-                    //console.log( 'inview' );
                     $this.trigger('click');
-                } else {
-                    //console.log( 'outview' );
                 }
             });
         });
@@ -1312,7 +1286,6 @@
         });
         $("#tf-destination-adv").on('focus', function () {
             if ($("#tf-destination-adv").val() == '') {
-                console.log('is empty, force search with blank terms...')
                 $("#tf-destination-adv").autocomplete("search", "");
             }
         });
@@ -1332,7 +1305,6 @@
 
         $("#tf-tour-location-adv").on('focus', function () {
             if ($("#tf-tour-location-adv").val() == '') {
-                console.log('is empty, force search with blank terms...')
                 $("#tf-tour-location-adv").autocomplete("search", "");
             }
         });
@@ -1380,7 +1352,6 @@
          */
         $(document).on('keyup', '.tf-hotel-side-booking #tf-location, .tf-hotel-side-booking #tf-destination', function () {
             let search = $(this).val();
-            console.log(search)
             $(this).next('input[name=place]').val(search);
         })
     });

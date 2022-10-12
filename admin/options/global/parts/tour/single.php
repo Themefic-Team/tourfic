@@ -35,7 +35,7 @@ CSF::createSection( $prefix, array(
             'class'    => 'tf-csf-disable tf-csf-pro',
             'type'     => 'text',
             'title'    => __('Enquiry Email', 'tourfic' ), 
-            'subtitle'   => __( $badge_pro, 'tourfic' ),
+            'subtitle'   => $badge_pro,
         ),
 
     )

@@ -272,6 +272,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'infant' => __('Infant', 'tourfic'),
                 'room' => __('Room', 'tourfic'),
                 'sending_ques' => __('Sending your question...', 'tourfic'),
+                'no_found' => __('Not Found', 'tourfic'),
                 'tf_hotellocationlists' => isset($tf_hotellocationlists) ? $tf_hotellocationlists : '',
                 'tf_hotel_max_price' => isset($hotel_max_price) ? $hotel_max_price : '',
                 'tf_hotel_min_price' => isset($hotel_min_price) ? $hotel_min_price : '',

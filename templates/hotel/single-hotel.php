@@ -130,9 +130,9 @@ while ( have_posts() ) : the_post();
 							if ( is_user_logged_in() ) {
 								if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
 									?>
-                                    <a class="tf-wishlist-button" title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
+                                    <a class="tf-wishlist-button" title="<?php esc_attr_e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
                                                 class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
-                                                data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                                data-id="<?php echo $post_id ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( tfopt( 'wl-page' ) ) {
 											echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
 										} ?>></i></a>
 									<?php
@@ -142,7 +142,7 @@ while ( have_posts() ) : the_post();
 									?>
                                     <a class="tf-wishlist-button" title="<?php esc_attr_e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
                                                 class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
-                                                data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                                data-id="<?php echo $post_id ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( tfopt( 'wl-page' ) ) {
 											echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
 										} ?>></i></a>
 									<?php
@@ -159,7 +159,7 @@ while ( have_posts() ) : the_post();
                                 <div id="dropdown-share-center" class="share-tour-content">
                                     <ul class="tf-dropdown-content">
                                         <li>
-                                            <a href="http://www.facebook.com/share.php?u=<?php _e( $share_link ); ?>"
+                                            <a href="http://www.facebook.com/share.php?u=<?php echo esc_url( $share_link ); ?>"
                                                class="tf-dropdown-item" target="_blank">
                                         <span class="tf-dropdown-item-content">
                                             <i class="fab fa-facebook-square"></i>
@@ -168,7 +168,7 @@ while ( have_posts() ) : the_post();
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="http://twitter.com/share?text=<?php _e( $share_text ); ?>&url=<?php _e( $share_link ); ?>"
+                                            <a href="http://twitter.com/share?text=<?php echo esc_attr( $share_text ); ?>&url=<?php echo esc_url( $share_link ); ?>"
                                                class="tf-dropdown-item" target="_blank">
                                         <span class="tf-dropdown-item-content">
                                             <i class="fab fa-twitter-square"></i>
@@ -177,7 +177,7 @@ while ( have_posts() ) : the_post();
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="https://www.linkedin.com/cws/share?url=<?php _e( $share_link ); ?>"
+                                            <a href="https://www.linkedin.com/cws/share?url=<?php echo esc_url( $share_link ); ?>"
                                                class="tf-dropdown-item" target="_blank">
                                         <span class="tf-dropdown-item-content">
                                             <i class="fab fa-linkedin"></i>
@@ -187,7 +187,7 @@ while ( have_posts() ) : the_post();
                                         </li>
 										<?php $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' ); ?>
                                         <li>
-                                            <a href="http://pinterest.com/pin/create/button/?url=<?php _e( $share_link ); ?>&media=<?php _e( $share_image_link[0] ); ?>&description=<?php _e( $share_text ); ?>"
+                                            <a href="http://pinterest.com/pin/create/button/?url=<?php echo esc_url( $share_link ); ?>&media=<?php echo esc_url( $share_image_link[0] ); ?>&description=<?php echo esc_attr( $share_text ); ?>"
                                                class="tf-dropdown-item" target="_blank">
                                         <span class="tf-dropdown-item-content">
                                             <i class="fab fa-pinterest"></i>
@@ -202,7 +202,7 @@ while ( have_posts() ) : the_post();
                                                        for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
                                                 <input type="text" id="share_link_input"
                                                        class="share-center-url share-center-url-input"
-                                                       value="<?php _e( $share_link ); ?>" readonly>
+                                                       value="<?php echo esc_attr( $share_link ); ?>" readonly>
                                                 <button id="share_link_button" class="tf_button share-center-copy-cta" tabindex="0"
                                                         role="button">
                                                     <span class="tf-button-text share-center-copy-message"><?php esc_html_e( 'Copy link', 'tourfic' ); ?></span>

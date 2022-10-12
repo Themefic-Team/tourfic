@@ -7,7 +7,7 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.8.6
+ * Version:         2.8.9
  * Tested up to: 6.0.2
  * WC tested up to: 6.9.4
  * Requires PHP: 7.2
@@ -52,7 +52,7 @@ define( 'TF_ASSETS_PATH', TF_PATH.'assets/' );
  * @since 1.0
  */
 if ( !defined( 'TOURFIC' ) ) {
-	define( 'TOURFIC', '2.8.6' );
+	define( 'TOURFIC', '2.8.9' );
 }
 
 /**
@@ -70,6 +70,16 @@ if ( !function_exists('tf_enqueue_main_admin_scripts') ) {
             array(
                 'tf_nonce' => wp_create_nonce( 'updates' ),
                 'ajax_url' => admin_url( 'admin-ajax.php' ),
+                'deleting_old_review_fields' => __('Deleting old review fields...', 'tourfic'),
+                'deleting_room_order_ids' => __('Deleting order ids...', 'tourfic'),
+                'tour_location_required' => __('Tour Location is a required field!', 'tourfic'),
+                'tour_feature_image_required' => __('Tour image is a required!', 'tourfic'),
+                'hotel_feature_image_required' => __('Hotel image is a required!', 'tourfic'),
+                'installing' => __( 'Installing...', 'tourfic' ),
+                'activating' => __( 'Activating...', 'tourfic' ),
+                'installed' => __( 'Installed', 'tourfic' ),
+                'activated' => __( 'Activated', 'tourfic' ),
+                'install_failed' => __( 'Install failed', 'tourfic' ),
             )
         );    
     }
@@ -213,7 +223,7 @@ function tf_is_woo() {
 
             <div id="message" class="error">
                 <p><?php printf( __( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
-                <p><a class="install-now button" href="<?php echo esc_url( admin_url('/plugin-install.php?s=slug:woocommerce&tab=search&type=term') ); ?>"><?php esc_attr_e( 'Install Now', 'tourfic' ); ?></a></p>
+                <p><a class="install-now button" href="<?php echo esc_url( admin_url('/plugin-install.php?s=slug:woocommerce&tab=search&type=term') ); ?>"><?php _e( 'Install Now', 'tourfic' ); ?></a></p>
             </div>
 
         <?php 
@@ -222,7 +232,7 @@ function tf_is_woo() {
 
             <div id="message" class="error">
                 <p><?php printf( __( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
-                <p><a href="<?php echo get_admin_url(); ?>plugins.php?_wpnonce=<?php echo wp_create_nonce( 'activate-plugin_woocommerce/woocommerce.php' ); ?>&action=activate&plugin=woocommerce/woocommerce.php" class="button activate-now button-primary"><?php esc_attr_e( 'Activate', 'tourfic' ); ?></a></p>
+                <p><a href="<?php echo get_admin_url(); ?>plugins.php?_wpnonce=<?php echo wp_create_nonce( 'activate-plugin_woocommerce/woocommerce.php' ); ?>&action=activate&plugin=woocommerce/woocommerce.php" class="button activate-now button-primary"><?php _e( 'Activate', 'tourfic' ); ?></a></p>
             </div>
 
         <?php 

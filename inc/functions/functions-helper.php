@@ -23,8 +23,8 @@ function tf_documentation_page_integration() {
 	global $submenu;
 	$tfhoteldocumentation = sanitize_url('https://themefic.com/docs/tourfic/');
 	$tftourdocumentation = sanitize_url('https://themefic.com/docs/tourfic/');
-	$submenu['edit.php?post_type=tf_hotel'][] = array( '<span style=color:#ffba00;">Go to Documentation</span>', 'edit_tf_hotels', $tfhoteldocumentation );
-	$submenu['edit.php?post_type=tf_tours'][] = array( '<span style=color:#ffba00;">Go to Documentation</span>', 'edit_tf_tourss', $tftourdocumentation );
+	$submenu['edit.php?post_type=tf_hotel'][] = array( sprintf('<span style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_hotels', $tfhoteldocumentation );
+	$submenu['edit.php?post_type=tf_tours'][] = array( sprintf('<span style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_tourss', $tftourdocumentation );
 }
 
 /**
@@ -199,7 +199,7 @@ function tourfic_ask_question() {
 		<div class="tf-aq-outer">
 			<span class="close-aq">&times;</span>
 			<div class="tf-aq-inner">   
-				<h4><?php esc_html_e( 'Submit your question', 'tourfic' ); ?></h4>
+				<h4><?php _e( 'Submit your question', 'tourfic' ); ?></h4>
 				<form id="ask-question" action="" method="post">
 					<div class="tf-aq-field">
 						<input type="text" name="your-name" placeholder="<?php esc_attr_e( 'Your Name', 'tourfic' ); ?>" required />
@@ -213,7 +213,7 @@ function tourfic_ask_question() {
 					<div class="tf-aq-field">
 						<button type="reset" class="screen-reader-text"><?php esc_html_e( 'Reset', 'tourfic' ); ?></button>
 						<button type="submit" form="ask-question" class="button tf_button btn-styled"><?php esc_html_e( 'Submit', 'tourfic' ); ?></button>
-						<input type="hidden" name="post_id" value="<?php esc_attr_e( get_the_ID() ); ?>">
+						<input type="hidden" name="post_id" value="<?php esc_attr( get_the_ID() ); ?>">
 						<?php wp_nonce_field( 'ask_question_nonce' ); ?>
 						<div class="response"></div>
 					</div>
@@ -254,7 +254,7 @@ function tourfic_ask_question_ajax() {
 	}else{
 		$send_email_to = sanitize_email( get_option( 'admin_email' ) );
 	}
-	$subject     = sprintf( esc_html__( 'Someone asked question on: %s', 'tourfic' ), $post_title );
+	$subject     = sprintf( __( 'Someone asked question on: %s', 'tourfic' ), $post_title );
 	$message     = "{$question}";
 	$headers[]   = 'Reply-To: '.$name.' <'.$email.'>';
 	$attachments = array();

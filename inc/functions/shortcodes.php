@@ -46,7 +46,7 @@ function hotel_locations_shortcode( $atts, $content = null ) {
                         <a href="<?php echo $term_link; ?>">
                             <div class="single_recomended_content" style="background-image: url(<?php echo $image_url; ?>);">
                                 <div class="recomended_place_info_header">
-                                    <h3><?php _e( $term->name ); ?></h3>
+                                    <h3><?php echo esc_html( $term->name ); ?></h3>
                                     <p><?php printf( _n( '%s hotel', '%s hotels', $term->count, 'tourfic' ), $term->count ); ?></p>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@ function shortcode_tour_destinations( $atts, $content = null ) {
                         <a href="<?php echo $term_link; ?>">
                             <div class="single_recomended_content" style="background-image: url(<?php echo $image_url; ?>);">
                                 <div class="recomended_place_info_header">
-                                    <h3><?php _e( $term->name ); ?></h3>
+                                    <h3><?php echo esc_html( $term->name ); ?></h3>
                                     <p><?php printf( _n( '%s tour', '%s tours', $term->count, 'tourfic' ), $term->count ); ?></p>
                                 </div>
                             </div>
