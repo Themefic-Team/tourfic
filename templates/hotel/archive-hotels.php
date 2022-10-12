@@ -14,7 +14,7 @@ get_header(); ?>
 	<?php do_action( 'tf_before_container' ); ?>
 	<div class="tf-container">
 
-		<div class="search-result-inner">
+		<div class="search-result-inner tf-search-result-hotel">
 			<!-- Start Content -->
 			<div class="tf-search-left">
 				<div class="tf-action-top">
@@ -44,12 +44,12 @@ get_header(); ?>
 			<!-- End Content -->
 
 			<!-- Start Sidebar -->
-			<div class="tf-search-right">
+<!-- 			<div class="tf-search-right"> -->
 				<?php
 				// Location: functions.php
-				tf_archive_sidebar_search_form('tf_hotel');
+				//tf_archive_sidebar_search_form('tf_hotel');
 				?>
-			</div>
+<!-- 			</div> -->
 			<!-- End Sidebar -->
 		</div>
 	</div>

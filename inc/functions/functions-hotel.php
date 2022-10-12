@@ -1847,7 +1847,6 @@ function tf_hotel_archive_single_item($tf_stars='') {
     $post_id = get_the_ID();
     //Get hotel_feature
     $features = !empty(get_the_terms( $post_id, 'hotel_feature' )) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
-    
     $meta  = get_post_meta( $post_id, 'tf_hotel', true );
     // Location
     $address  = !empty($meta['address']) ? $meta['address'] : '';
@@ -1982,7 +1981,7 @@ function tf_hotel_archive_single_item($tf_stars='') {
                             <?php
                             if($address) {
                                 echo '<div class="tf-map-link">';
-                                echo '<span class="tf-d-ib"><a href="https://www.google.com/maps/search/<?php echo $address; ?>" target="_blank">Show on Map </a> <i class="fas fa-map-marker-alt"></i> ' .$address. '</span>';
+                                echo '<span class="tf-d-ib"><a href="https://www.google.com/maps/search/'.$address.'" target="_blank">Show on Map </a> <i class="fas fa-map-marker-alt"></i> ' .$address. '</span>';
                                 echo '</div>';
                             }
                             ?>	                    
@@ -1996,11 +1995,11 @@ function tf_hotel_archive_single_item($tf_stars='') {
                                 
                                 <div class="roomNameInner">
                                     <div class="room_link">
-                                        <?php if( $features ) { ?>
+										<?php if( $features ) { ?>
                                             <div class="roomName_flex">
                                                 <ul class="tf-archive-desc">
                                                     <?php foreach($features as $feature) {
-                                                    $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'hotel_feature', true );
+                                                    $feature_meta = get_term_meta( $feature->term_id, 'hotel_feature', true );
                                                     $f_icon_type = !empty($feature_meta['icon-type']) ? $feature_meta['icon-type'] : '';
                                                     if ($f_icon_type == 'fa') {
                                                         $feature_icon = '<i class="' .$feature_meta['icon-fa']. '"></i>';
@@ -2018,8 +2017,9 @@ function tf_hotel_archive_single_item($tf_stars='') {
                                                 </ul>
                                             </div>
                                             <?php } ?>
+										
                                         <div class="roomrow_flex">
-                                            <div class="roomrow-price-details">
+											<div class="roomrow-price-details">
                                             <?php 
                                             $tf_8_min_price = [];
                                             $tf_16_min_price = [];

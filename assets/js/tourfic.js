@@ -1467,7 +1467,7 @@
             $(this).parents('#tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
           });
 
-        // adv_features show & hide
+		// adv_features show & hide
          $('.tf-feature-all-show span.tf-show-all-feature').click(function(){
             $(".tf-filter .tf-hide-feature").addClass('active');
             $(".tf-show-all-feature").hide();
@@ -1501,6 +1501,11 @@
             $(".tf-filter .tf-hide-theme").removeClass('active');
             $(".tf-hide-all-theme").hide();
             $(".tf-show-all-theme").show();
+        });
+		
+		// Currency Conversion
+		$('#tf-currency a').click(function(){
+            $("#tf-currency-callback").toggleClass('active');
         });
         
     });

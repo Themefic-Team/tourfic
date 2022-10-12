@@ -106,7 +106,6 @@ $share_link = get_permalink($post_id);
          <div class="tf-container">
              <div class="tf-title-wrap">
                 <div class="tf-title-left">
-                    <span class="post-type">Properties</span>
                     <h1><?php the_title(); ?></h1>
                     <!-- Start map link -->
                     <?php if ($locations) { ?>
@@ -116,7 +115,7 @@ $share_link = get_permalink($post_id);
                             } ?>
 
                             <a href="<?php echo $first_location_url; ?>" class="more-hotel tf-d-ib">                      
-                                <?php printf(__('Show more Properties in %s', 'tourfic'),$first_location_name); ?>
+                                <?php printf(__('Show more Properties', 'tourfic')); ?>
                             </a>
                         </div>
                     <?php } ?>
@@ -213,9 +212,9 @@ $share_link = get_permalink($post_id);
                     <?php } ?>
                     <!-- End Share Section -->
                     
-                    <div class="reserve-button">
+<!--                     <div class="reserve-button">
                         <a href="#rooms" class="tf-btn-flip" data-back="View Rooms" data-front="Reserve Now"></a>
-                    </div>
+                    </div> -->
                 </div>
             </div>  
         </div>
@@ -527,7 +526,7 @@ $share_link = get_permalink($post_id);
                     <h3 class="section-heading"><?php esc_html_e( 'Popular Features', 'tourfic' ); ?></h3>
                     <div class="tf-feature-list">
                         <?php foreach($features as $feature) {
-                            $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'hotel_feature', true );
+                            $feature_meta = get_term_meta( $feature->term_id, 'hotel_feature', true );
                             $f_icon_type = !empty($feature_meta['icon-type']) ? $feature_meta['icon-type'] : '';
                             if ($f_icon_type == 'fa') {
                                 $feature_icon = '<i class="' .$feature_meta['icon-fa']. '"></i>';
@@ -663,7 +662,7 @@ $share_link = get_permalink($post_id);
                                             <ul class="room-feature-list">
 
                                                 <?php foreach ($room['features'] as $feature) {
-
+													
 													$room_f_meta = get_term_meta( $feature, 'hotel_feature', true );
 
                                                     $room_icon_type = !empty($room_f_meta['icon-type']) ? $room_f_meta['icon-type'] : '';

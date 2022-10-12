@@ -241,7 +241,7 @@ a.slick-slide-item-link {
     padding-left: 8px;
     text-transform: capitalize;
     letter-spacing: 0.5px;
-    font-size: 13px;
+    font-size: 18px;
 }
 
 .tf_features i {
@@ -498,6 +498,7 @@ span.tf-price .amount {
     color: #023169;
     font-weight: 600;
     border-right: 1px solid #023169;
+	padding: 10px;
 }
 .tf-single-pricebox tr td:last-child{
     border-right: 0px solid;
@@ -510,6 +511,7 @@ span.tf-price .amount {
     border: 0px solid;
     height: 30px;
     padding: 0px;
+	background: transparent;
 }
 .tf-single-prices {
     margin-bottom: 20px;
@@ -519,7 +521,7 @@ span.tf-price .amount {
     display: block;
     font-weight: bold;
     line-height: 18px;
-    font-size: 14px;
+    font-size: 15px;
   }
 .tf-single-prices-item {
     display: flex;
@@ -531,7 +533,7 @@ span.tf-price .amount {
     font-weight: bold;
     text-align: center;
     line-height: 18px;
-    font-size: 14px;
+    font-size: 15px;
 }
 .tf-single-prices-item span.inclusive{
     width: auto !important;

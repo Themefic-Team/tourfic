@@ -351,6 +351,7 @@ button.tf-tablinks:focus {
 .tf_form-inner .tf-hotel-results #ui-id-1 li,
 .tf_form-inner .tf-hotel-results #ui-id-2 li {
     text-transform: capitalize;
+	font-size: 18px;
 }
 
 .tf_tf_booking-widget-wrap {

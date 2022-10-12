@@ -171,7 +171,7 @@ h3.section-heading {
     display: block;
     transition: 0.5s;
     position: absolute;
-    background: #0054a8;
+    background: rgb(54,4,139);
     content: attr(data-back);
     transform: translateY(-50%) rotateX(90deg);
     border-radius: 4px;
@@ -186,7 +186,7 @@ h3.section-heading {
     display: block;
     transition: 0.5s;
     position: relative;
-    background: #003162;
+    background: rgb(54,4,139);
     content: attr(data-front);
     transform: translateY(0) rotateX(0);
     border-radius: 4px;
@@ -237,7 +237,7 @@ h3.section-heading {
 
 .btn-styled:hover {
     color: #fff;
-    background: #838383;
+    background: rgb(19,2,148);
 }
 
 .btn-styled:hover:after {
@@ -253,10 +253,13 @@ h3.section-heading {
 
 .tf_button:hover,
 .tf-sml-btn:hover {
-    background: #0054a8;
+    background: rgb(19,2,148);
     color: #fff;
     text-decoration: none;
-    border: 1px solid #006dda;
+    border: 1px solid rgb(19,2,148);
+}
+.availability-btn-area a {
+  font-size: 18px;
 }
 
 /**************** TITLE ****************/
@@ -279,8 +282,11 @@ h3.section-heading {
     font-size: 35px;
     margin-top: 0;
     margin-bottom: 6px;
+	color: rgb(121,121,121);
 }
-
+.reserve.tf-t-c button.tf-sml-btn {
+  font-size: 18px;
+}
 .tf-title-right {
     display: flex;
     align-items: center;
@@ -288,7 +294,7 @@ h3.section-heading {
 }
 
 .tf-map-link a {
-    font-size: 14px;
+    font-size: 17px;
     color: #393939;
 }
 
