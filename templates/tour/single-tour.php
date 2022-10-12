@@ -70,6 +70,10 @@ while ( have_posts() ) : the_post();
 	$faqs        = $meta['faqs'] ? $meta['faqs'] : null;
 	$inc         = $meta['inc'] ? $meta['inc'] : null;
 	$exc         = $meta['exc'] ? $meta['exc'] : null;
+	$inc_icon         = $meta['inc_icon'] ? $meta['inc_icon'] : null;
+	$exc_icon         = $meta['exc_icon'] ? $meta['exc_icon'] : null;
+	$custom_inc_icon = !empty($inc_icon) ? "custom-inc-icon" : '';
+	$custom_exc_icon = !empty($exc_icon) ? "custom-exc-icon" : '';
 	$itineraries = $meta['itinerary'] ? $meta['itinerary'] : null;
 	//continuous tour
 	$share_text = get_the_title();
@@ -335,7 +339,7 @@ while ( have_posts() ) : the_post();
                         <div class="tf-highlight-item">
                             <div class="tf-highlight-text">
                                 <h2 class="section-heading"><?php _e( 'Highlights', 'tourfic' ); ?></h2>
-								<?php echo $highlights; ?>
+								<?php echo $highlights; ?>custom_inc_icon
                             </div>
 							<?php if ( !empty( $meta['hightlights_thumbnail']['url'] ) ): ?>
                                 <div class="tf-highlight-image">
@@ -350,29 +354,32 @@ while ( have_posts() ) : the_post();
         <!-- Highlight section end -->
 
         <!-- Include-Exclude section Start -->
-		<?php if ( $inc || $exc ) : ?>
-            <div class="tf-inc-exc-wrapper sp-70" style="background-image: url(<?php echo esc_url( $meta['include-exclude-bg']['url'] ); ?>);">
+		<?php
+			if ( $inc || $exc ) :
+				 $inc_exc_bg = !empty($meta['include-exclude-bg']['url']) ? $meta['include-exclude-bg']['url'] : '';
+		?>
+            <div class="tf-inc-exc-wrapper sp-70" style="background-image: url(<?php esc_url( $inc_exc_bg ) ?>);">
                 <div class="tf-container">
                     <div class="tf-inc-exc-content">
 						<?php if ( $inc ) { ?>
-                            <div class="tf-include-section">
+                            <div class="tf-include-section <?php echo esc_attr( $custom_inc_icon );?>">
                                 <h4><?php _e( 'Included', 'tourfic' ); ?></h4>
                                 <ul>
 									<?php
 									foreach ( $inc as $key => $val ) {
-										echo "<li>" . $val['inc'] . "</li>";
+										echo "<i class='".esc_attr( $inc_icon )."'></i><li>" . $val['inc'] . "</li>";
 									}
 									?>
                                 </ul>
                             </div>
 						<?php } ?>
 						<?php if ( $exc ) { ?>
-                            <div class="tf-exclude-section">
+                            <div class="tf-exclude-section <?php echo esc_attr( $custom_exc_icon );?>">
                                 <h4><?php _e( 'Excluded', 'tourfic' ); ?></h4>
                                 <ul>
 									<?php
 									foreach ( $exc as $key => $val ) {
-										echo "<li>" . $val['exc'] . "</li>";
+										echo "<i class='".esc_attr( $exc_icon )."'></i><li>" . $val['exc'] . "</li>";
 									}
 									?>
                                 </ul>

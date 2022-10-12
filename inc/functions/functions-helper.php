@@ -23,8 +23,15 @@ function tf_documentation_page_integration() {
 	global $submenu;
 	$tfhoteldocumentation = sanitize_url('https://themefic.com/docs/tourfic/');
 	$tftourdocumentation = sanitize_url('https://themefic.com/docs/tourfic/');
+	$go_pro_link = sanitize_url('https://tourfic.com/go/upgrade');
+	//Booking Deatils menu in Free version
+	if(!defined( 'TF_PRO' )) :
+		$submenu['edit.php?post_type=tf_hotel'][] = array( 'Booking Details <span style=color:#ffba00;">(Pro)</span>', 'edit_tf_hotels', $go_pro_link );
+		$submenu['edit.php?post_type=tf_tours'][] = array( 'Booking Details <span style=color:#ffba00;">(Pro)</span>', 'edit_tf_tourss', $go_pro_link );
+	endif;
 	$submenu['edit.php?post_type=tf_hotel'][] = array( sprintf('<span style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_hotels', $tfhoteldocumentation );
 	$submenu['edit.php?post_type=tf_tours'][] = array( sprintf('<span style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_tourss', $tftourdocumentation );
+
 }
 
 /**
@@ -213,7 +220,7 @@ function tourfic_ask_question() {
 					<div class="tf-aq-field">
 						<button type="reset" class="screen-reader-text"><?php esc_html_e( 'Reset', 'tourfic' ); ?></button>
 						<button type="submit" form="ask-question" class="button tf_button btn-styled"><?php esc_html_e( 'Submit', 'tourfic' ); ?></button>
-						<input type="hidden" name="post_id" value="<?php esc_attr( get_the_ID() ); ?>">
+						<input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
 						<?php wp_nonce_field( 'ask_question_nonce' ); ?>
 						<div class="response"></div>
 					</div>

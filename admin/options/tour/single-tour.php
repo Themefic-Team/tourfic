@@ -675,43 +675,55 @@ if ( class_exists( 'CSF' ) ) {
 		),
 	) );
 
-	CSF::createSection( $prefix, array(
-		'title'  => __( 'Exclude/Include', 'tourfic' ),
-		'fields' => array(
-			array(
-				'id'     => 'inc',
-				'type'   => 'repeater',
-				'title'  => __( 'Include', 'tourfic' ),
-				'max'    => 5,
-				'fields' => array(
-					array(
-						'id'       => 'inc',
-						'type'     => 'text',
-						'title'    => __( 'Included', 'tourfic' ),
-						'subtitle' => __( 'Included facilites', 'tourfic' ),
-					),
-				),
-			),
-			array(
-				'id'     => 'exc',
-				'type'   => 'repeater',
-				'title'  => __( 'Exclude', 'tourfic' ),
-				'max'    => 5,
-				'fields' => array(
-					array(
-						'id'       => 'exc',
-						'type'     => 'text',
-						'title'    => __( 'Excluded', 'tourfic' ),
-						'subtitle' => __( 'Excluded facilites', 'tourfic' ),
-					),
-				),
-			),
-			array(
-				'id'      => 'include-exclude-bg',
-				'type'    => 'media',
-				'title'   => __( 'Background Image', 'tourfic' ),
-				'library' => 'image',
-			),
+    CSF::createSection( $prefix, array(
+        'title'  => __( 'Exclude/Include', 'tourfic' ),
+        'fields' => array(
+            array(
+                'id'     => 'inc',
+                'type'   => 'repeater',
+                'title'  => __( 'Include', 'tourfic' ),
+                'max' => 5,
+                'fields' => array(
+                    array(
+                        'id'       => 'inc',
+                        'type'     => 'text',
+                        'title'    => __( 'Included', 'tourfic' ),
+                        'subtitle' => __( 'Included facilites', 'tourfic' ),
+                    ),
+                ),
+            ),
+            array(
+                'id' => 'inc_icon',
+                'type' => 'icon',
+                'title'    => __( 'Included item icon', 'tourfic' ),
+                'subtitle' => __( 'Choose icon', 'tourfic' ),
+            ),
+            array(
+                'id'     => 'exc',
+                'type'   => 'repeater',
+                'title'  => __( 'Exclude', 'tourfic' ),
+                'max' => 5,
+                'fields' => array(
+                    array(
+                        'id'       => 'exc',
+                        'type'     => 'text',
+                        'title'    => __( 'Excluded', 'tourfic' ),
+                        'subtitle' => __( 'Excluded facilites', 'tourfic' ),
+                    ),
+                ),
+            ),
+            array(
+                'id' => 'exc_icon',
+                'type' => 'icon',
+                'title'    => __( 'Excluded item icon', 'tourfic' ),
+                'subtitle' => __( 'Choose icon', 'tourfic' ),
+            ),
+	        array(
+		        'id'      => 'include-exclude-bg',
+		        'type'    => 'media',
+		        'title'   => __( 'Background Image', 'tourfic' ),
+		        'library' => 'image',
+	        ),
 
 		),
 	) );
@@ -771,7 +783,7 @@ if ( class_exists( 'CSF' ) ) {
 					),
 					array(
 						'id'    => 'desc',
-						'type'  => 'textarea',
+						'type'  => 'wp_editor',
 						'title' => __( 'FAQ Description', 'tourfic' ),
 					),
 				),

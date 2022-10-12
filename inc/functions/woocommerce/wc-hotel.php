@@ -27,23 +27,24 @@ function tf_hotel_booking_callback() {
 	$tf_room_data = [];
 
 
-	/**
-	 * Data from booking form
-	 *
-	 * With errors
-	 */
-	$post_id   = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
-	$room_id   = isset( $_POST['room_id'] ) ? intval( sanitize_text_field( $_POST['room_id'] ) ) : null;
-	$unique_id = isset( $_POST['unique_id'] ) ? intval( sanitize_text_field( $_POST['unique_id'] ) ) : null;
-	$location  = isset( $_POST['location'] ) ? sanitize_text_field( $_POST['location'] ) : '';
-	// People number
-	$adult           = isset( $_POST['adult'] ) ? intval( sanitize_text_field( $_POST['adult'] ) ) : '0';
-	$child           = isset( $_POST['child'] ) ? intval( sanitize_text_field( $_POST['child'] ) ) : '0';
-	$room_selected   = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
-	$check_in        = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
-	$check_out       = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
-	$deposit         = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
-	$airport_service = isset( $_POST['airport_service'] ) ? sanitize_text_field( $_POST['airport_service'] ) : '';
+    /**
+     * Data from booking form
+     * 
+     * With errors
+     */
+    $post_id   = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
+    $room_id   = isset( $_POST['room_id'] ) ? intval( sanitize_text_field( $_POST['room_id'] ) ) : null;
+    $unique_id = isset( $_POST['unique_id'] ) ? intval( sanitize_text_field( $_POST['unique_id'] ) ) : null;
+    $location  = isset( $_POST['location'] ) ? sanitize_text_field( $_POST['location'] ) : '';
+    // People number
+    $adult          = isset( $_POST['adult'] ) ? intval( sanitize_text_field( $_POST['adult'] ) ) : '0';
+    $child          = isset( $_POST['child'] ) ? intval( sanitize_text_field( $_POST['child'] ) ) : '0';
+    $children_ages  = isset( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '0';
+    $room_selected  = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
+    $check_in       = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
+    $check_out      = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
+    $deposit        = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
+    $airport_service = isset($_POST['airport_service']) ? sanitize_text_field($_POST['airport_service']) : '';
 
 
 	# Calculate night number
@@ -152,21 +153,22 @@ function tf_hotel_booking_callback() {
 			$price_total = $total_price * $room_selected;
 		} else {
 
-			if ( $pricing_by == '1' ) {
-				$total_price = $rooms[ $room_id ]['price'];
-
-				$tf_room_data['tf_hotel_data']['adult'] = $adult;
-				$tf_room_data['tf_hotel_data']['child'] = $child;
-			} elseif ( $pricing_by == '2' ) {
-				$adult_price = $rooms[ $room_id ]['adult_price'];
-				$adult_price = $adult_price * $adult;
-				$child_price = $rooms[ $room_id ]['child_price'];
-				$child_price = $child_price * $child;
-				$total_price = $adult_price + $child_price;
-
-				$tf_room_data['tf_hotel_data']['adult'] = $adult . " × " . wc_price( $rooms[ $room_id ]['adult_price'] );
-				$tf_room_data['tf_hotel_data']['child'] = $child . " × " . wc_price( $rooms[ $room_id ]['child_price'] );
-			}
+            if ( $pricing_by == '1' ) {
+                $total_price = $rooms[$room_id]['price'];
+                
+                $tf_room_data['tf_hotel_data']['adult']                  = $adult;
+                $tf_room_data['tf_hotel_data']['child']                  = $child;
+                $tf_room_data['tf_hotel_data']['children_ages']          = $children_ages;
+            } elseif ( $pricing_by == '2' ) {
+                $adult_price = $rooms[$room_id]['adult_price'];
+                $adult_price = $adult_price * $adult;
+                $child_price = $rooms[$room_id]['child_price'];
+                $child_price = $child_price * $child;
+                $total_price = $adult_price + $child_price;    
+                                
+                $tf_room_data['tf_hotel_data']['adult']          = $adult." × ".wc_price($rooms[$room_id]['adult_price']);
+                $tf_room_data['tf_hotel_data']['child']          = $child." × ".wc_price($rooms[$room_id]['child_price']);
+            }
 
 			# Multiply pricing by night number
 			if ( ! empty( $day_difference ) && $price_multi_day == true ) {
@@ -383,12 +385,19 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 		);
 	}
 
-	if ( isset( $cart_item['tf_hotel_data']['child'] ) && $cart_item['tf_hotel_data']['child'] >= 1 ) {
-		$item_data[] = array(
-			'key'   => __( 'Child Number', 'tourfic' ),
-			'value' => $cart_item['tf_hotel_data']['child'],
-		);
-	}
+    if ( isset( $cart_item['tf_hotel_data']['child'] ) && $cart_item['tf_hotel_data']['child'] >=1 ) {
+        $item_data[] = array(
+            'key'       => __('Child Number', 'tourfic'),
+            'value'     => $cart_item['tf_hotel_data']['child'],
+        );
+    }
+    //Add children ages data to the cart item
+    if ( isset( $cart_item['tf_hotel_data']['children_ages'] ) && $cart_item['tf_hotel_data']['children_ages'] != '' ) {
+        $item_data[] = array(
+            'key'       => __('Children Ages', 'tourfic'),
+            'value'     => $cart_item['tf_hotel_data']['children_ages'],
+        );
+    }
 
 	if ( isset( $cart_item['tf_hotel_data']['check_in'] ) ) {
 		$item_data[] = array(
@@ -468,20 +477,21 @@ add_filter( 'woocommerce_cart_item_permalink', 'tf_hotel_cart_item_permalink', 1
  */
 function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
 
-	// Assigning data into variables
-	$order_type           = ! empty( $values['tf_hotel_data']['order_type'] ) ? $values['tf_hotel_data']['order_type'] : '';
-	$post_author          = ! empty( $values['tf_hotel_data']['post_author'] ) ? $values['tf_hotel_data']['post_author'] : '';
-	$post_id              = ! empty( $values['tf_hotel_data']['post_id'] ) ? $values['tf_hotel_data']['post_id'] : '';
-	$unique_id            = ! empty( $values['tf_hotel_data']['unique_id'] ) ? $values['tf_hotel_data']['unique_id'] : '';
-	$room_name            = ! empty( $values['tf_hotel_data']['room_name'] ) ? $values['tf_hotel_data']['room_name'] : '';
-	$room_selected        = ! empty( $values['tf_hotel_data']['room'] ) ? $values['tf_hotel_data']['room'] : '';
-	$adult                = ! empty( $values['tf_hotel_data']['adult'] ) ? $values['tf_hotel_data']['adult'] : '';
-	$child                = ! empty( $values['tf_hotel_data']['child'] ) ? $values['tf_hotel_data']['child'] : '';
-	$check_in             = ! empty( $values['tf_hotel_data']['check_in'] ) ? $values['tf_hotel_data']['check_in'] : '';
-	$check_out            = ! empty( $values['tf_hotel_data']['check_out'] ) ? $values['tf_hotel_data']['check_out'] : '';
-	$due                  = ! empty( $values['tf_hotel_data']['due'] ) ? $values['tf_hotel_data']['due'] : '';
-	$airport_service_type = ! empty( $values['tf_hotel_data']['air_serivicetype'] ) ? $values['tf_hotel_data']['air_serivicetype'] : null;
-	$airport_fees         = ! empty( $values['tf_hotel_data']['air_service_info'] ) ? $values['tf_hotel_data']['air_service_info'] : null;
+    // Assigning data into variables
+    $order_type = !empty($values['tf_hotel_data']['order_type']) ? $values['tf_hotel_data']['order_type'] : '';
+    $post_author = !empty($values['tf_hotel_data']['post_author']) ? $values['tf_hotel_data']['post_author'] : '';
+    $post_id = !empty($values['tf_hotel_data']['post_id']) ? $values['tf_hotel_data']['post_id'] : '';
+    $unique_id = !empty($values['tf_hotel_data']['unique_id']) ? $values['tf_hotel_data']['unique_id'] : '';
+    $room_name = !empty($values['tf_hotel_data']['room_name']) ? $values['tf_hotel_data']['room_name'] : '';
+    $room_selected = !empty($values['tf_hotel_data']['room']) ? $values['tf_hotel_data']['room'] : '';
+    $adult = !empty($values['tf_hotel_data']['adult']) ? $values['tf_hotel_data']['adult'] : '';
+    $child = !empty($values['tf_hotel_data']['child']) ? $values['tf_hotel_data']['child'] : '';
+    $children_ages = !empty($values['tf_hotel_data']['children_ages']) ? $values['tf_hotel_data']['children_ages'] : '';
+    $check_in = !empty($values['tf_hotel_data']['check_in']) ? $values['tf_hotel_data']['check_in'] : '';
+    $check_out = !empty($values['tf_hotel_data']['check_out']) ? $values['tf_hotel_data']['check_out'] : '';
+    $due = !empty($values['tf_hotel_data']['due']) ? $values['tf_hotel_data']['due'] : '';
+    $airport_service_type = !empty($values['tf_hotel_data']['air_serivicetype']) ? $values['tf_hotel_data']['air_serivicetype'] : null;
+    $airport_fees = !empty($values['tf_hotel_data']['air_service_info']) ? $values['tf_hotel_data']['air_service_info'] : null;
 
 	/**
 	 * Show data in order meta & email
@@ -520,8 +530,12 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
 
 	if ( $child && $child > 0 ) {
 
-		$item->update_meta_data( 'child', $child );
-	}
+        $item->update_meta_data( 'child', $child );
+    }
+    if ( $children_ages && $children_ages != '' ) {
+
+        $item->update_meta_data( 'Children Ages', $children_ages );
+    }
 
 	if ( $check_in ) {
 
