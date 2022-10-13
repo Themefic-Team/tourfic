@@ -2148,10 +2148,10 @@ if ( ! function_exists( 'tf_hotel_room_matched_by_date' ) ) {
 		$room_date_match = array();
 		if ( ! empty( $check_in ) && ! empty( $check_out ) ) {
 			foreach ( $rooms as $_room ) {
-
 				$enable = ! empty( $_room['enable'] ) ? $_room['enable'] : '';
 				if ( $enable == '1' ) {
-					if ( ! empty( $_room['repeat_by_date'] ) ) {
+					$avil_by_date = ! empty( $_room['avil_by_date'] ) ? $_room['avil_by_date'] : '';
+					if ( $avil_by_date == '1' && ! empty( $_room['repeat_by_date'] ) ) {
 						foreach ( $_room['repeat_by_date'] as $date ) {
 							$from = ! empty( $date['availability']['from'] ) ? strtotime( $date['availability']['from'] ) : '';
 							$to   = ! empty( $date['availability']['to'] ) ? strtotime( $date['availability']['to'] ) : '';
@@ -2161,7 +2161,9 @@ if ( ! function_exists( 'tf_hotel_room_matched_by_date' ) ) {
 								$room_date_match[] = 'not matched';
 							}
 						}
-					}
+					} else {
+                        $room_date_match[] = 'matched';
+                    }
 				}
 			}
 		} else {

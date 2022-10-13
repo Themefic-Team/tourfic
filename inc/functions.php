@@ -517,6 +517,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 
                 $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
                     enableTime: false,
+                    minDate: "today",
                     mode: "range",
                     dateFormat: "Y/m/d",
                     onReady: function (selectedDates, dateStr, instance) {
@@ -636,6 +637,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 
                 $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
                     enableTime: false,
+                    minDate: "today",
                     mode: "range",
                     dateFormat: "Y/m/d",
                     onChange: function (selectedDates, dateStr, instance) {
