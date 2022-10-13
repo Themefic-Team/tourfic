@@ -672,6 +672,27 @@ if ( class_exists( 'CSF' ) ) {
 				'title'    => __( 'Minimum days to book before departure', 'tourfic' ),
 				'subtitle' => __( 'Customer can not book after this date' . $badge_pro, 'tourfic' ),
 			),
+			array(
+				'id'    => 'daily_booking_status',
+				'class'    => 'tf-csf-disable tf-csf-pro',
+				'type'  => 'switcher',
+				'title' => __( 'Enable Daily Booking Limit', 'tourfic' ),
+                'subtitle' => __( 'Limit Daily Status' . $badge_pro, 'tourfic' ),
+				'default' => false,
+			),
+			array(
+                'id'    => 'daily_booking_limit',
+				'class'    => 'tf-csf-disable tf-csf-pro',
+                'type'  => 'number',
+                'title' => __('Daily Booking Limit', 'tourfic'),
+                'subtitle' => __( 'Person Limit Daily' . $badge_pro, 'tourfic' ),
+                'attributes' => array(
+                    'min' => '0',
+                ),
+                'dependency' => array(
+					array('daily_booking_status', '==', 'true'),
+				),
+            ),
 		),
 	) );
 
