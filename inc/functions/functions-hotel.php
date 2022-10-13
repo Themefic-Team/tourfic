@@ -2164,7 +2164,9 @@ if ( ! function_exists( 'tf_hotel_room_matched_by_date' ) ) {
 					}
 				}
 			}
-		}
+		} else {
+            $room_date_match[] = 'matched';
+        }
 
 		return in_array( 'matched', $room_date_match );
 	}
