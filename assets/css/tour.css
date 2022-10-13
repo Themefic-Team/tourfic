@@ -137,7 +137,7 @@
 
 .tf-tour-booking-wrap.tf-tours-fixed {
     width: 100%;
-    z-index: 999;
+    z-index: 9999;
     background-color: #003162eb;
     border-top: 4px solid #FB5A3B;
     padding: 8px 0;
@@ -382,9 +382,12 @@
 }
 
 .tf-inc-exc-content ul li {
-    padding-left: 30px;
+    padding-left: 0px;
     position: relative;
     margin-left: 0;
+}
+.tf-inc-exc-content ul li i{
+    margin-right: 20px;
 }
 
 .tf-include-section ul li:before {
@@ -509,82 +512,6 @@
 
 .tf-accordion-head h4:hover {
     color: #003162;
-}
-
-
-
-@media print{
-  
-  
-  .tf-pdf-titles{
-      padding-top: 25px;
-  }
-
-  .tf-pdf-image tr td img{
-    border-top-left-radius: 4em;
-  }
-  .tour-pdf-fact-title{
-    padding-top: 25px;
-    padding-bottom: 25px;
-  }
-  .tour-pdf-fact-title-padding{
-    padding-left: 0px;
-  }
-  .tf-pdf-tour-fact-details{
-    background: #EBF2FF;
-    padding: 16px;
-  }
-  .tf-tour-pdf-single-fact-details{
-    padding-bottom: 15px;
-  }
-  .tf-pdf-itinerary-title{
-    padding-bottom: 0px;
-  }
-  .tf-pdf-itinerary-description{
-    margin: 0;
-    padding-top: 0px;
-  }
-  .tf-pdf-itinerary-description img{
-    float: left !important;
-  }
-  .tf-pdf-itinerary-description span{
-    float: left;
-    width: 10% !important;
-  }
-  .tf-tour-pdf-description{
-    padding-bottom: 10px;
-  }
-  .tf-pdf-customer-info{
-    padding-top: 150px;
-    padding-bottom: 30px;
-  }
-  .tf-pdf-spacing{
-    margin-left: 60px;
-    margin-right: 60px;
-  }
-  .tf-pdf-image.tf-pdf-spacing{
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  .tf-pdf-image img{
-    border-radius: 5px !important;
-  }
-  .tf-pdf-tour-description{
-    padding-top: 20px;
-  }
-  .tf-customer-info-card{
-    background: #EBF2FF;
-    border-radius: 10px;
-    padding: 30px 20px;
-    width: 200px !important;
-    margin: 0 auto !important;
-  }
-  .tf-pdf-customer-image{
-    padding-bottom: 15px !important;
-  }
-  .tf-customer-online-contact img{
-    padding: 0px 5px !important;
-  }
 }
 
 

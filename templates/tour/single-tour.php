@@ -70,8 +70,8 @@ while ( have_posts() ) : the_post();
 	$faqs            = $meta['faqs'] ? $meta['faqs'] : null;
 	$inc             = $meta['inc'] ? $meta['inc'] : null;
 	$exc             = $meta['exc'] ? $meta['exc'] : null;
-	$inc_icon        = $meta['inc_icon'] ? $meta['inc_icon'] : null;
-	$exc_icon        = $meta['exc_icon'] ? $meta['exc_icon'] : null;
+	$inc_icon        = ! empty( $meta['inc_icon'] ) ? $meta['inc_icon'] : null;
+	$exc_icon        = ! empty( $meta['exc_icon'] ) ? $meta['exc_icon'] : null;
 	$custom_inc_icon = ! empty( $inc_icon ) ? "custom-inc-icon" : '';
 	$custom_exc_icon = ! empty( $exc_icon ) ? "custom-exc-icon" : '';
 	$itineraries     = $meta['itinerary'] ? $meta['itinerary'] : null;
@@ -367,7 +367,7 @@ while ( have_posts() ) : the_post();
                                 <ul>
 									<?php
 									foreach ( $inc as $key => $val ) {
-										echo "<i class='" . esc_attr( $inc_icon ) . "'></i><li>" . $val['inc'] . "</li>";
+										echo "<li><i class='" . esc_attr( $inc_icon ) . "'></i>" . $val['inc'] . "</li>";
 									}
 									?>
                                 </ul>
@@ -379,7 +379,7 @@ while ( have_posts() ) : the_post();
                                 <ul>
 									<?php
 									foreach ( $exc as $key => $val ) {
-										echo "<i class='" . esc_attr( $exc_icon ) . "'></i><li>" . $val['exc'] . "</li>";
+										echo "<li><i class='" . esc_attr( $exc_icon ) . "'></i>" . $val['exc'] . "</li>";
 									}
 									?>
                                 </ul>

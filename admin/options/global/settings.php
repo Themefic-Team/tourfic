@@ -49,6 +49,13 @@ if ( class_exists( 'CSF' ) ) {
 		tf_file_missing( TF_OPTIONS_PATH . 'global/parts/hotel/single.php' );
 	}
 
+	// Room Config
+    if ( file_exists( TF_OPTIONS_PATH . 'global/parts/hotel/room-config.php' ) ) {
+        require_once TF_OPTIONS_PATH . 'global/parts/hotel/room-config.php';
+    } else {
+        tf_file_missing(TF_OPTIONS_PATH . 'global/parts/hotel/room-config.php');
+    }
+
 	/**
 	 * Tour Parent
 	 *
