@@ -600,4 +600,71 @@ function tf_search_result_shortcode( $atts, $content = null ){
 
 
 add_shortcode( 'tf_search_result', 'tf_search_result_shortcode' );
+
+/**
+ * Hotel, Tour review slider shortcode
+ * @author Abu Hena
+ * @since 2.8.9
+ */
+add_shortcode( 'tf_reviews', 'tf_reviews_shortcode' );
+function tf_reviews_shortcode($atts, $content = null){
+	extract(
+		shortcode_atts(
+			array(
+				'type'      => 'tf_hotel',
+				'number' => '',
+				'per_slide' => '3'
+			),
+			$atts
+		)
+	);
+	$type == "hotel" ? $type = "tf_hotel" : $type == '';
+	$type == "tour" ? $type = "tf_tours" : $type == '';
+	ob_start();
+	?>
+	<div class="tf-single-review">
+		<?php
+		$args = array(
+			'post_type' => $type,
+			'number' => $number,
+		);
+		$comments = get_comments($args);
+		
+		
+		if ( $comments ) {
+			foreach ( $comments as $comment ) {
+				// Get rating details
+				$tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+				if ( $tf_overall_rate == false ) {
+					$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+					$tf_overall_rate = tf_average_ratings( $tf_comment_meta );
+				}
+				$base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+				$c_rating  = tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
+
+				// Comment details
+				$c_avatar      = get_avatar( $comment, '56' );
+				$c_author_name = $comment->comment_author;
+				$c_date        = $comment->comment_date;
+				$c_content     = $comment->comment_content;
+				?>
+				<div class="tf-single-details">
+					<div class="tf-review-avatar"><?php echo $c_avatar; ?></div>
+					<div class="tf-review-details">
+						<div class="tf-name"><?php echo $c_author_name; ?></div>
+						<div class="tf-date"><?php echo $c_date; ?></div>
+						<div class="tf-rating-stars">
+							<?php echo $c_rating; ?>
+						</div>
+						<div class="tf-description"><?php echo $c_content; ?></div>
+					</div>
+				</div>
+				<?php
+			}
+		}
+		?>
+	</div>
+	<?php 
+	return ob_get_clean();
+}
 ?>
