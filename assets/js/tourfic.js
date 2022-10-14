@@ -363,13 +363,15 @@
          *
          * adult, child, infant
          */
-        $('.tf-single-tour-pricing .tf-price-tab li').click(function () {
+        $(document).on('click', '.tf-single-tour-pricing .tf-price-tab li', function () {
             var t = $(this).attr('id');
 
             $(this).addClass('active').siblings().removeClass('active');
             $('.tf-price').addClass('tf-d-n');
             $('.' + t + '-price').removeClass('tf-d-n');
         });
+        //first li click
+        $('.tf-single-tour-pricing .tf-price-tab li:first-child').trigger('click');
 
         //###############################
         //        Search                #

@@ -170,7 +170,9 @@ if ( class_exists( 'CSF' ) ) {
 			array(
 				'id'     => 'tour-extra',
 				'type'   => 'repeater',
+                'class'    => 'tf-csf-disable tf-csf-pro',
 				'title'  => __( 'Extra Services on Tour', 'tourfic' ),
+                'subtitle' => $badge_pro,
 				'fields' => array(
 					array(
 						'id'       => '',
@@ -351,6 +353,7 @@ if ( class_exists( 'CSF' ) ) {
 				'id'         => 'custom_avail',
 				'type'       => 'switcher',
 				'title'      => __( 'Custom Availability', 'tourfic' ),
+                'class'    => 'tf-csf-disable tf-csf-pro',
 				'subtitle'   => $badge_pro,
 				'dependency' => array( 'type', '==', 'continuous' ),
 				'text_on'    => __( 'Yes', 'tourfic' ),
@@ -460,6 +463,7 @@ if ( class_exists( 'CSF' ) ) {
 						'id'       => 'allowed_time',
 						'type'     => 'repeater',
 						'title'    => __( 'Allowed Time', 'tourfic' ),
+                        'class'    => 'tf-csf-disable tf-csf-pro',
 						'subtitle' => $badge_pro,
 						'fields'   => array(
 
@@ -512,6 +516,7 @@ if ( class_exists( 'CSF' ) ) {
 				'id'         => 'allowed_time',
 				'type'       => 'repeater',
 				'title'      => __( 'Allowed Time', 'tourfic' ),
+                'class'    => 'tf-csf-disable tf-csf-pro',
 				'subtitle'   => $badge_pro,
 				'dependency' => array(
 					array( 'type', '==', 'continuous' ),
@@ -627,11 +632,10 @@ if ( class_exists( 'CSF' ) ) {
 				'fields'     => array(
 					array(
 						'id'         => '',
-						'class'      => 'tf-csf-disable tf-csf-pro',
+						'class'      => 'tf-csf-disable tf-csf-pro check-in',
 						'type'       => 'datetime',
 						'title'      => __( 'Check In', 'tourfic' ),
 						'subtitle'   => __( 'Select check in date' . $badge_pro, 'tourfic' ),
-						'class'      => 'check-in',
 						'settings'   => array(
 							'dateFormat' => 'Y/m/d'
 						),

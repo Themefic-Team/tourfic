@@ -1419,83 +1419,13 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 		'check-in-out-date' => $check_in_out,
 	), $url );
 
-	// Check room check in/out time
-	$room_date_matched = array();
-	if ( ! empty( $check_in_out ) ) {
-		if ( ! empty( $b_rooms ) ) {
-			$b_room_id  = - 1;
-			$room_price = [];
-			foreach ( $b_rooms as $b_room ) {
+    $room_price = [];
+    foreach ( $b_rooms as $b_room ) {
+        //room price
+        $price        = ! empty( $b_room['price'] ) ? $b_room['price'] : '';
+        $room_price[] = $price;
+    }
 
-				$b_room_id ++;
-
-				//room price
-				$price        = ! empty( $b_room['price'] ) ? $b_room['price'] : '';
-				$room_price[] = $price;
-				$enable       = ! empty( $b_room['enable'] ) ? $b_room['enable'] : '';
-
-				// Check if room is enabled
-				if ( $enable == '1' ) {
-
-					$b_check_in = ! empty( $b_room['availability']['from'] ) ? $b_room['availability']['from'] : '';
-					if ( $b_check_in ) {
-						$b_check_in_stt = strtotime( $b_check_in );
-					}
-					$b_check_out = ! empty( $b_room['availability']['to'] ) ? $b_room['availability']['to'] : '';
-					if ( $b_check_out ) {
-						$b_check_out_stt = strtotime( $b_check_out );
-					}
-
-					if ( empty( $b_check_in ) || empty( $b_check_out ) || ( $form_check_in_stt >= $b_check_in_stt && $form_check_out_stt <= $b_check_out_stt ) ) {
-						if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-							if ( ! empty( $b_room['price'] ) ) {
-								if ( $startprice <= $b_room['price'] && $b_room['price'] <= $endprice ) {
-									array_push( $room_date_matched, 'yes' );
-								}
-							}
-							if ( ! empty( $b_room['adult_price'] ) ) {
-								if ( $startprice <= $b_room['adult_price'] && $b_room['adult_price'] <= $endprice ) {
-									array_push( $room_date_matched, 'yes' );
-								}
-							}
-							if ( ! empty( $b_room['child_price'] ) ) {
-								if ( $startprice <= $b_room['child_price'] && $b_room['child_price'] <= $endprice ) {
-									array_push( $room_date_matched, 'yes' );
-								}
-							}
-							if ( ! empty( $b_room['repeat_by_date'] ) ) {
-								foreach ( $b_room['repeat_by_date'] as $singleavailroom ) {
-									if ( ! empty( $singleavailroom['price'] ) ) {
-										if ( $startprice <= $singleavailroom['price'] && $singleavailroom['price'] <= $endprice ) {
-											array_push( $room_date_matched, 'yes' );
-										}
-									}
-									if ( ! empty( $singleavailroom['adult_price'] ) ) {
-										if ( $startprice <= $singleavailroom['adult_price'] && $singleavailroom['adult_price'] <= $endprice ) {
-											array_push( $room_date_matched, 'yes' );
-										}
-									}
-									if ( ! empty( $singleavailroom['child_price'] ) ) {
-										if ( $startprice <= $singleavailroom['child_price'] && $singleavailroom['child_price'] <= $endprice ) {
-											array_push( $room_date_matched, 'yes' );
-										}
-									}
-								}
-							}
-						} else {
-							array_push( $room_date_matched, 'yes' );
-						}
-
-					}
-
-				}
-			}
-		} else {
-			array_push( $room_date_matched, 'yes' );
-		}
-	} else {
-		array_push( $room_date_matched, 'yes' );
-	}
 	?>
     <div class="single-tour-wrap">
         <div class="single-tour-inner">
@@ -1566,7 +1496,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                             </div>
                                             <!-- Show minimum price @author - Hena -->
                                             <div class="tf-room-price-area">
-												<?php if ( ! empty( $check_in_out ) ): ?>
+												<?php if ( ! empty( $room_price ) ): ?>
                                                     <div class="tf-room-price">
 														<?php
 														//get the lowest price from all available room price
