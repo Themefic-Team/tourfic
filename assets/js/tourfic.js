@@ -1420,7 +1420,6 @@ $('.acr-select .child-dec').on('click',function(){
     }
 })
 
-
 })(jQuery, window);
 
 /**
