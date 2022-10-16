@@ -171,6 +171,12 @@ if ( ! function_exists( 'tf_plugin_loaded_action' ) ) {
                 tf_file_missing(TF_OPTIONS_PATH . 'options.php');
             }          
         }
+
+		if ( file_exists( TF_ADMIN_PATH . 'tf-options/TF_Metabox.php' ) ) {
+			require_once TF_ADMIN_PATH . 'tf-options/TF_Metabox.php';
+		} else {
+			tf_file_missing(TF_ADMIN_PATH . 'tf-options/TF_Metabox.php');
+		}
 		
 	}
 }

@@ -1078,3 +1078,9 @@ function tf_is_search_form_single_tab( $type_arr ) {
 
 	return false;
 }
+
+function tf_var_dump( $var ) {
+    echo '<pre>';
+    var_dump( $var );
+    echo '</pre>';
+}
