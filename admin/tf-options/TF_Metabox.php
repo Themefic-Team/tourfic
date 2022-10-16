@@ -5,32 +5,24 @@ defined( 'ABSPATH' ) || exit;
 class TF_Metabox {
 
 	private static $instance = null;
-	public static $metaboxes = array();
 	public static $metabox_id = null;
 	public static $metabox_title = null;
 	public static $metabox_post_type = null;
 	public static $metabox_sections = array();
-	public static $metabox_fields = array();
 
-	/**
-	 * Singleton instance
-	 *
-	 * @since 1.0.0
-	 */
-	public static function instance() {
-		if ( self::$instance == null ) {
-			self::$instance = new self;
-		}
+	public function __construct($key, $params = array()) {
+		$defaults = array(
+			'title'     => '',
+			'post_type' => 'post',
+			'sections'  => array(),
+		);
 
-		return self::$instance;
-	}
+		$params = wp_parse_args( $params, $defaults );
 
-	public function __construct( $key, $params = array() ) {
 		self::$metabox_id        = $key;
 		self::$metabox_title     = $params['title'];
 		self::$metabox_post_type = $params['post_type'];
 		self::$metabox_sections  = $params['sections'];
-		self::$metabox_fields    = $params['fields'];
 
 		//load fields
 		$this->load_fields();
@@ -40,9 +32,15 @@ class TF_Metabox {
 		add_action( 'save_post', array( $this, 'save_metabox' ), 10, 2 );
 	}
 
+	public static function metabox($key, $params = array()) {
+		return new self( $key, $params );
+	}
 
-	// Include files
+	// Include fields
 	public function load_fields() {
+
+		// Fields Class
+		require_once TF_ADMIN_PATH . 'tf-options/fields/TF_Fields.php';
 
 		$fields = glob( TF_ADMIN_PATH . 'tf-options/fields/*/TF_*.php' );
 
@@ -63,15 +61,7 @@ class TF_Metabox {
 	 * @since 1.0.0
 	 */
 	public function tf_meta_box() {
-		add_meta_box(
-			self::$metabox_id,
-			self::$metabox_title,
-			array( $this, 'tf_meta_box_content' ),
-			self::$metabox_post_type,
-			'normal',
-			'high',
-
-		);
+		add_meta_box( self::$metabox_id, self::$metabox_title, array( $this, 'tf_meta_box_content' ), self::$metabox_post_type, 'normal', 'high', );
 	}
 
 	public function tf_meta_box_content( $post ) {
@@ -87,40 +77,45 @@ class TF_Metabox {
 		}
 
 		// Form fields.
-		echo '<table class="form-table">';
-		foreach ( self::$metabox_sections as $section ) {
-			echo '<tr>';
-			echo '<td><h2>' . $section['title'] . '</h2></td>';
-			echo '<td>';
-			echo '<table class="form-table">';
-			foreach ( $section['fields'] as $field ) {
-				$id    = self::$metabox_id . '[' . $field['id'] . ']';
-				$value = isset( $tf_meta_box_value[ $field['id'] ] ) ? $tf_meta_box_value[ $field['id'] ] : '';
+		?>
+        <table class="form-table">
+			<?php foreach ( self::$metabox_sections as $section ) : ?>
+                <tr>
+                    <td><h2><?php echo $section['title']; ?></h2></td>
+                    <td>
+                        <table class="form-table">
+							<?php foreach ( $section['fields'] as $field ) :
+								$id = self::$metabox_id . '[' . $field['id'] . ']';
+								$value = isset( $tf_meta_box_value[ $field['id'] ] ) ? $tf_meta_box_value[ $field['id'] ] : '';
+								?>
+                                <tr>
+                                    <th>
+                                        <label for="<?php echo esc_attr( $id ) ?>"><?php echo esc_html( $field['title'] ) ?></label>
+                                    </th>
+                                    <td>
+										<?php
+										$fieldClass = 'TF_' . $field['type'];
+										if ( class_exists( $fieldClass ) ) {
+											$_field = new $fieldClass( $field, $value, self::$metabox_id );
+											$_field->render();
+										} else {
+											echo '<p>' . __( 'Field not found!', 'tourfic' ) . '</p>';
+										}
+										?>
+                                        <p class="description"><?php echo wp_kses_post( $field['description'] ) ?></p>
+                                    </td>
+                                </tr>
+							<?php endforeach; ?>
+                        </table>
+                    </td>
+                </tr>
 
-				echo '<tr>';
-				echo '<th><label for="' . $id . '">' . $field['title'] . '</label></th>';
-				echo '<td>';
-
-				$fieldClass = 'TF_' . $field['type'];
-				if ( class_exists( $fieldClass ) ) {
-					$_field = new $fieldClass($field, $value);
-					$_field->render();
-				} else {
-					echo '<p>' . __( 'Field not found!', 'tourfic' ) . '</p>';
-				}
-				echo '<p class="description">' . $field['description'] . '</p>';
-				echo '</td>';
-				echo '</tr>';
-			}
-			echo '</table>';
-			echo '</td>';
-			echo '</tr>';
-
-		}
-		echo '</table>';
+			<?php endforeach; ?>
+        </table>
+		<?php
 	}
 
-	public function save_metabox( $post_id, $post ) {
+	public function save_metabox( $post_id ) {
 		// Add nonce for security and authentication.
 		$nonce_name   = isset( $_POST['tf_meta_box_nonce'] ) ? $_POST['tf_meta_box_nonce'] : '';
 		$nonce_action = 'tf_meta_box_nonce_action';
@@ -151,13 +146,11 @@ class TF_Metabox {
 		}
 
 		$tf_meta_box_value = array();
+		$metabox_request   = ( ! empty( $_POST[ self::$metabox_id ] ) ) ? $_POST[ self::$metabox_id ] : array();
 		foreach ( self::$metabox_sections as $section ) {
 			if ( ! empty( $section['fields'] ) ) {
 				foreach ( $section['fields'] as $field ) {
-					$id = self::$metabox_id . '[' . $field['id'] . ']';
-//					tf_var_dump( $_POST );
-//				exit();
-					$tf_meta_box_value[ $field['id'] ] = isset( $_POST[ $id ] ) ? $_POST[ $id ] : '';
+					$tf_meta_box_value[ $field['id'] ] = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : '';
 				}
 			}
 		}
@@ -168,36 +161,4 @@ class TF_Metabox {
 
 }
 
-new TF_Metabox( 'tf_hotels', array(
-	'title'     => 'Hotel Settings',
-	'post_type' => 'tf_hotel',
-	'sections'  => array(
-		'section_1' => array(
-			'title'  => 'Section 1',
-			'fields' => array(
-				array(
-					'id'    => 'address',
-					'title' => 'Address',
-					'type'  => 'text',
-					'description' => 'Address of the hotel',
-				),
-				array(
-					'id'    => 'phone',
-					'title' => 'Phone',
-					'type'  => 'textarea',
-					'description' => 'Phone of the hotel',
-				),
-				array(
-					'id'    => 'email',
-					'title' => 'Email',
-					'type'  => 'select',
-					'options' => array(
-						'1' => 'Option 1',
-						'2' => 'Option 2',
-						'3' => 'Option 3',
-					),
-				),
-			),
-		),
-	),
-) );
+

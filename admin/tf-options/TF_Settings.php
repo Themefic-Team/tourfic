@@ -2,7 +2,7 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-class TF_Options {
+class TF_Settings {
 
 	private static $instance = null;
 
@@ -25,4 +25,4 @@ class TF_Options {
 
 }
 
-TF_Options::instance();
+TF_Settings::instance();

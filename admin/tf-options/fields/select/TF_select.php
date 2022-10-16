@@ -2,22 +2,23 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-class TF_select {
+/**
+ * Field: select
+ */
+if ( ! class_exists( 'TF_select' ) ) {
+	class TF_select extends TF_Fields {
 
-	public $field;
-	public $value;
-
-	public function __construct( $field, $value = '' ) {
-		$this->field  = $field;
-		$this->value  = $value;
-	}
-
-	public function render() {
-		echo '<select name="'. esc_attr( $this->field['id'] ) .'">';
-		foreach ( $this->field['options'] as $key => $value ) {
-			echo '<option value="'. esc_attr( $key ) .'" '. selected( $this->value, $key, false ) .'>'. $value .'</option>';
+		public function __construct( $field, $value = '', $settings_id = '' ) {
+			parent::__construct( $field, $value, $settings_id );
 		}
-		echo '</select>';
-	}
 
+		public function render() {
+			echo '<select name="' . $this->field_name() . '" id="' . esc_attr( $this->field_name() ) . '" class="tf-select">';
+			foreach ( $this->field['options'] as $key => $value ) {
+				echo '<option value="' . esc_attr( $key ) . '" ' . selected( $this->value, $key, false ) . '>' . $value . '</option>';
+			}
+			echo '</select>';
+		}
+
+	}
 }
