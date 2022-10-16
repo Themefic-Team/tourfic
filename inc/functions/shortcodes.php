@@ -341,6 +341,12 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 
 	$type             = explode( ',', $type );
 	$disable_services = tfopt( 'disable-services' ) ? tfopt( 'disable-services' ) : array();
+	$child_age_limit = tfopt( 'enable_child_age_limit' ) ? tfopt( 'enable_child_age_limit' ) : '';
+	if($child_age_limit == '1'){
+		$child_age_limit = ' child-age-limited';
+	}else{
+		$child_age_limit = '';
+	}
 
 	ob_start();
 	?>
@@ -388,7 +394,7 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 
 			if ( ! in_array( 'hotel', $disable_services ) && tf_is_search_form_tab_type( 'hotel', $type ) ) {
 				?>
-                <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent">
+                <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent <?php echo esc_attr( $child_age_limit ); ?>">
 					<?php
 					if ( $advanced == "enabled" ) {
 						tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle );
@@ -401,7 +407,7 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 			}
 			if ( ! in_array( 'tour', $disable_services ) && tf_is_search_form_tab_type( 'tour', $type ) ) {
 				?>
-                <div id="tf-tour-booking-form" class="tf-tabcontent" <?php echo tf_is_search_form_single_tab( $type ) ? 'style="display:block"' : '' ?>>
+                <div id="tf-tour-booking-form" class="tf-tabcontent" <?php echo tf_is_search_form_single_tab( $type ) ? 'style="display:block"' : '' ?><?php echo esc_attr( $child_age_limit ); ?>>
 					<?php
 					if ( $advanced == "enabled" ) {
 						tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle );

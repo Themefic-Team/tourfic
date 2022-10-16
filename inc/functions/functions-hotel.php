@@ -1105,7 +1105,7 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                                 <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
-                                    <input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>">
+                                    <input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>" readonly>
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
@@ -1113,7 +1113,7 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                                 <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec child-dec">-</div>
-                                    <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+                                    <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>" readonly>
                                     <div class="acr-inc child-inc">+</div>
                                 </div>
                             </div>
@@ -1121,7 +1121,7 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                                 <div class="acr-label"><?php _e( 'Rooms', 'tourfic' ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
-                                    <input type="number" name="room" id="room" min="1" value="<?php echo ! empty( $room ) ? $room : '1'; ?>">
+                                    <input type="number" name="room" id="room" min="1" value="<?php echo ! empty( $room ) ? $room : '1'; ?>" readonly>
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
