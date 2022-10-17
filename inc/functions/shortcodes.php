@@ -621,6 +621,7 @@ function tf_reviews_shortcode($atts, $content = null){
 				'number' => '10',
 				'count' => '3',
 				'speed' => '2000',
+				'arrows' => 'false',
 				'autoplay' => 'false',
 				'slidesToShow' => '3',
 				'slidesToScroll' => 1,
@@ -634,6 +635,7 @@ function tf_reviews_shortcode($atts, $content = null){
 	ob_start();
 	?>
 	<div class="tf-single-review tf-reviews-slider">
+
 		<?php
 		$args = array(
 			'post_type' => $type,
@@ -681,8 +683,11 @@ function tf_reviews_shortcode($atts, $content = null){
 		 */
 		jQuery('document').ready(function($){
 
-			$(".tf-reviews-slider").slick({
+			$(".tf-reviews-slider").each(function(){
+				var $this = $(this);
+			$this.slick({
 				dots: true,
+				arrows: <?php echo esc_attr( $arrows ); ?>,
 				slidesToShow: <?php echo esc_attr( $count ); ?>,
 				infinite: <?php echo esc_attr( $infinite ); ?>,
 				speed: <?php echo esc_attr( $speed ); ?>,
@@ -716,7 +721,7 @@ function tf_reviews_shortcode($atts, $content = null){
 				]
 			});
 		})
-
+	})
 	</script>
 	<?php 
 	return ob_get_clean();

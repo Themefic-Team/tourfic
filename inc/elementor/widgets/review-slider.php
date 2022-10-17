@@ -4,7 +4,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Hotel Tour review slider
- * 
+ * @since 2.8.9
+ * @author Abu Hena
  */
 class TF_Reviews_Slider extends \Elementor\Widget_Base {
 
@@ -75,20 +76,16 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 		);
 
 		$this->add_control(
-			'title',
+			'type',
 			[
-				'label' => esc_html__( 'Title', 'tourfic' ),
-				'type' => \Elementor\Controls_Manager::TEXTAREA,
-				'rows' => 1,
-			]
-		);
-
-		$this->add_control(
-			'subtitle',
-			[
-				'label' => esc_html__( 'Sub-Title', 'tourfic' ),
-				'type' => \Elementor\Controls_Manager::TEXTAREA,
-				'rows' => 2,
+				'label' => esc_html__( 'Reviews Type', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'description' => __( 'Choose the reviews type you want to show.', 'tourfic' ),
+				'options' => [
+					'tf_hotel' => 'Hotel',
+					'tf_tours' => 'Tour',
+				],
+				'default' => 'tf_hotel'
 			]
 		);
 
@@ -98,20 +95,9 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Total Reviews', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
 				'description' => __( 'Number of total reviews to show. Min 3.', 'tourfic' ),
-				'min' => 3,
+				'min' => 1,
 				'step' => 1,
-				'default' => 10,
-			]
-		);
-
-        $this->add_control(
-			'slidestoshow',
-			[
-				'label' => esc_html__( 'Slides to show', 'tourfic' ),
-				'type' => \Elementor\Controls_Manager::NUMBER,
-				'description' => __( 'Slides to show', 'tourfic' ),
-				'min' => 3,
-				'default' => 10,
+				'default' => 3,
 			]
 		);
 
@@ -120,7 +106,14 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Autoplay', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::SWITCHER,
-				'description' => __( 'Enable Autoplay', 'tourfic' ),
+			]
+		);
+
+		$this->add_control(
+			'arrows',
+			[
+				'label' => esc_html__( 'Slider Arrows', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
 			]
 		);
 
@@ -129,7 +122,6 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Autoplay Speed', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
-				'description' => __( 'Autoplay Speed in milliseconds', 'tourfic' ),
 				'default' => 2000,
 			]
 		);
@@ -142,70 +134,7 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 				'description' => __( 'Enable Infinite Slider', 'tourfic' ),
 			]
 		);
-		$this->end_controls_section();
-
-		$this->start_controls_section(
-			'style_section',
-			[
-				'label' => __( 'Style', 'tourfic' ),
-				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name' => 'title_typography',
-				'label' => __( 'Title Typography', 'tourfic' ),
-				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading h2',
-			]
-		);
-		$this->add_control(
-			'title_color',
-			[
-				'label' => __( 'Title Color', 'tourfic' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .tf-widget-slider .tf-heading h2' => 'color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->add_control(
-			'tf_subhr',
-			[
-				'type' => \Elementor\Controls_Manager::DIVIDER,
-			]
-		);
-
-		$this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name' => 'subtitle_typography',
-				'label' => __( 'Subtitle Typography', 'tourfic' ),
-				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading p',
-			]
-		);
-
-		$this->add_control(
-			'subtitle_color',
-			[
-				'label' => __( 'Subtitle Color', 'tourfic' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .tf-widget-slider .tf-heading p' => 'color: {{VALUE}}',
-				],
-			]
-		);
-
+		
 		$this->end_controls_section();
 
 	}
@@ -219,17 +148,17 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-		$title = $settings['title'];
-		$subtitle = $settings['subtitle'];
+		$type = $settings['type'];
 		$count = $settings['count'];
-		$slidestoshow = $settings['slidestoshow'];
+		$arrows = $settings['arrows'];
+		$arrows == 'yes' ? $arrows = 'true' : $arrows = 'false';
 		$autoplay = $settings['autoplay'];
 		$autoplay == 'yes' ? $autoplay = 'true' : $autoplay = 'false';
 		$autoplay_speed = $settings['autoplay_speed'];
 		$infinite = $settings['infinite'];
 		$infinite == 'yes' ? $infinite = 'true' : $infinite = 'false';
 
-        echo do_shortcode('[tf_reviews title="' .$title. '" subtitle="' .$subtitle. '" count="' .$count. '" slidestoshow="' .$slidestoshow. '" autoplay="'.$autoplay.'" speed="'.$autoplay_speed.'" infinite="'.$infinite.'"]');
+        echo do_shortcode('[tf_reviews type="'.$type.'" count="' .$count. '" autoplay="'.$autoplay.'" arrows="'.$arrows.'" speed="'.$autoplay_speed.'" infinite="'.$infinite.'"]');
 
 
 	}
