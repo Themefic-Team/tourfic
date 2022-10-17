@@ -5,11 +5,10 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'TF_Metabox' ) ) {
 	class TF_Metabox {
 
-		private static $instance = null;
-		public static $metabox_id = null;
-		public static $metabox_title = null;
-		public static $metabox_post_type = null;
-		public static $metabox_sections = array();
+		public $metabox_id = null;
+		public $metabox_title = null;
+		public $metabox_post_type = null;
+		public $metabox_sections = array();
 
 		public function __construct( $key, $params = array() ) {
 			$defaults = array(
@@ -20,10 +19,10 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 
 			$params = wp_parse_args( $params, $defaults );
 
-			self::$metabox_id        = $key;
-			self::$metabox_title     = $params['title'];
-			self::$metabox_post_type = $params['post_type'];
-			self::$metabox_sections  = $params['sections'];
+			$this->metabox_id        = $key;
+			$this->metabox_title     = $params['title'];
+			$this->metabox_post_type = $params['post_type'];
+			$this->metabox_sections  = $params['sections'];
 
 			//load fields
 			$this->load_fields();
@@ -62,7 +61,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 		 * @since 1.0.0
 		 */
 		public function tf_meta_box() {
-			add_meta_box( self::$metabox_id, self::$metabox_title, array( $this, 'tf_meta_box_content' ), self::$metabox_post_type, 'normal', 'high', );
+			add_meta_box( $this->metabox_id, $this->metabox_title, array( $this, 'tf_meta_box_content' ), $this->metabox_post_type, 'normal', 'high', );
 		}
 
 		public function tf_meta_box_content( $post ) {
@@ -70,7 +69,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			wp_nonce_field( 'tf_meta_box_nonce_action', 'tf_meta_box_nonce' );
 
 			// Retrieve an existing value from the database.
-			$tf_meta_box_value = get_post_meta( $post->ID, self::$metabox_id, true );
+			$tf_meta_box_value = get_post_meta( $post->ID, $this->metabox_id, true );
 
 			// Set default values.
 			if ( empty( $tf_meta_box_value ) ) {
@@ -80,13 +79,13 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			// Form fields.
 			?>
             <table class="form-table">
-				<?php foreach ( self::$metabox_sections as $section ) : ?>
+				<?php foreach ( $this->metabox_sections as $section ) : ?>
                     <tr>
                         <td><h2><?php echo $section['title']; ?></h2></td>
                         <td>
                             <table class="form-table">
 								<?php foreach ( $section['fields'] as $field ) :
-									$id = self::$metabox_id . '[' . $field['id'] . ']';
+									$id = $this->metabox_id . '[' . $field['id'] . ']';
 									$value = isset( $tf_meta_box_value[ $field['id'] ] ) ? $tf_meta_box_value[ $field['id'] ] : '';
 									?>
                                     <tr>
@@ -97,7 +96,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 											<?php
 											$fieldClass = 'TF_' . $field['type'];
 											if ( class_exists( $fieldClass ) ) {
-												$_field = new $fieldClass( $field, $value, self::$metabox_id );
+												$_field = new $fieldClass( $field, $value, $this->metabox_id );
 												$_field->render();
 											} else {
 												echo '<p>' . __( 'Field not found!', 'tourfic' ) . '</p>';
@@ -147,22 +146,35 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			}
 
 			$tf_meta_box_value = array();
-			$metabox_request   = ( ! empty( $_POST[ self::$metabox_id ] ) ) ? $_POST[ self::$metabox_id ] : array();
-			foreach ( self::$metabox_sections as $section ) {
-				if ( ! empty( $section['fields'] ) ) {
-					foreach ( $section['fields'] as $field ) {
-						$data       = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : '';
-						$fieldClass = 'TF_' . $field['type'];
-						if ( class_exists( $fieldClass ) ) {
-							$_field                            = new $fieldClass( $field, $data, self::$metabox_id );
-							$tf_meta_box_value[ $field['id'] ] = $_field->sanitize();
+			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array();
+
+			if ( ! empty( $metabox_request ) && ! empty( $this->metabox_sections ) ) {
+				foreach ( $this->metabox_sections as $section ) {
+
+					if ( ! empty( $section['fields'] ) ) {
+						foreach ( $section['fields'] as $field ) {
+
+							if ( ! empty( $field['id'] ) ) {
+								$data       = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : '';
+
+                                $fieldClass = 'TF_' . $field['type'];
+								if ( class_exists( $fieldClass ) ) {
+									$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
+									$tf_meta_box_value[ $field['id'] ] = $_field->sanitize();
+								}
+							}
 						}
 					}
 				}
 			}
 
-			// Update the meta field in the database.
-			update_post_meta( $post_id, self::$metabox_id, $tf_meta_box_value );
+
+			if ( ! empty( $tf_meta_box_value ) ) {
+				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
+			} else {
+				delete_post_meta( $post_id, $this->metabox_id );
+			}
+
 		}
 
 	}

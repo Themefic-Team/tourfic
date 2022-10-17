@@ -31,6 +31,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 						'3' => 'Option 3',
 					),
 				),
+
 			),
 		),
 	),

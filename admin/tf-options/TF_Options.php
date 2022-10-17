@@ -23,12 +23,12 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			//load files
 			$this->load_files();
 
-			//load fields
+			//load metaboxes
 			$this->load_metaboxes();
 		}
 
 		/**
-		 * Load metaboxes
+		 * Load files
 		 * @since 1.0.0
 		 */
 		public function load_files() {
