@@ -339,7 +339,7 @@ while ( have_posts() ) : the_post();
                         <div class="tf-highlight-item">
                             <div class="tf-highlight-text">
                                 <h2 class="section-heading"><?php _e( 'Highlights', 'tourfic' ); ?></h2>
-								<?php echo $highlights; ?>custom_inc_icon
+								<?php echo $highlights; ?>
                             </div>
 							<?php if ( ! empty( $meta['hightlights_thumbnail']['url'] ) ): ?>
                                 <div class="tf-highlight-image">
@@ -358,7 +358,7 @@ while ( have_posts() ) : the_post();
 		if ( $inc || $exc ) :
 			$inc_exc_bg = ! empty( $meta['include-exclude-bg']['url'] ) ? $meta['include-exclude-bg']['url'] : '';
 			?>
-            <div class="tf-inc-exc-wrapper sp-70" style="background-image: url(<?php esc_url( $inc_exc_bg ) ?>);">
+            <div class="tf-inc-exc-wrapper sp-70" style="background-image: url(<?php echo esc_url( $inc_exc_bg ) ?>);">
                 <div class="tf-container">
                     <div class="tf-inc-exc-content">
 						<?php if ( $inc ) { ?>
@@ -473,7 +473,7 @@ while ( have_posts() ) : the_post();
                                         <i class="fas fa-angle-down arrow"></i>
                                     </div>
                                     <div class="tf-faq-desc">
-                                        <p><?php echo esc_html( $faq['desc'] ); ?></p>
+                                        <?php echo wp_kses_post( $faq['desc'] ); ?>
                                     </div>
                                 </div>
 							<?php endforeach; ?>

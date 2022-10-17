@@ -1071,7 +1071,7 @@ h3.section-heading {
 #tf-faq-item .tf-faq-desc {
     background-color: #FFFFFF;
     display: none;
-    padding: 20px 0;
+    padding: 20px;
     color: #333333;
     margin-top: -2px;
     z-index: 999;

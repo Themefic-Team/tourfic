@@ -363,13 +363,15 @@
          *
          * adult, child, infant
          */
-        $('.tf-single-tour-pricing .tf-price-tab li').click(function () {
+        $(document).on('click', '.tf-single-tour-pricing .tf-price-tab li', function () {
             var t = $(this).attr('id');
 
             $(this).addClass('active').siblings().removeClass('active');
             $('.tf-price').addClass('tf-d-n');
             $('.' + t + '-price').removeClass('tf-d-n');
         });
+        //first li click
+        $('.tf-single-tour-pricing .tf-price-tab li:first-child').trigger('click');
 
         //###############################
         //        Search                #
@@ -1396,29 +1398,32 @@
  * @since 2.8.6
  * @author Abu Hena
  */
-$('.acr-select .child-inc').on('click',function(){
-    var first_element = $('div[id^="tf-age-field-0"]');
-    var ch_element = $('div[id^="tf-age-field-"]:last');
-    if(ch_element.length !=0){
-        var num = parseInt( ch_element.prop("id").match(/\d+/g), 10 ) +1;
-    }
-    var elements = ch_element.clone().prop('id', 'tf-age-field-'+num );
-    elements.find("label").html('Child age ' + num);
-    //elements.find("select").attr('name','children_'+num+'_age');
-    elements.find("select").attr('name','children_ages[]');
-    ch_element.after(elements);
-    elements.show();
-    first_element.hide();
 
-})
+if($('.child-age-limited')[0]){
+    $('.acr-select .child-inc').on('click',function(){
+        var first_element = $('div[id^="tf-age-field-0"]');
+        var ch_element = $('div[id^="tf-age-field-"]:last');
+        if(ch_element.length !=0){
+            var num = parseInt( ch_element.prop("id").match(/\d+/g), 10 ) +1;
+        }
+        var elements = ch_element.clone().prop('id', 'tf-age-field-'+num );
+        elements.find("label").html('Child age ' + num);
+        //elements.find("select").attr('name','children_'+num+'_age');
+        elements.find("select").attr('name','children_ages[]');
+        ch_element.after(elements);
+        elements.show();
+        first_element.hide();
 
-$('.acr-select .child-dec').on('click',function(){
-    var total_age_input = $('.tf-children-age').length;
-    var ch_element = $('div[id^="tf-age-field-"]:last');
-    if(total_age_input != 1){
-        ch_element.remove();
-    }
-})
+    })
+
+    $('.acr-select .child-dec').on('click',function(){
+        var total_age_input = $('.tf-children-age').length;
+        var ch_element = $('div[id^="tf-age-field-"]:last');
+        if(total_age_input != 1){
+            ch_element.remove();
+        }
+    })
+}
 
 })(jQuery, window);
 

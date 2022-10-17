@@ -616,7 +616,7 @@ while ( have_posts() ) : the_post();
                                         <i class="fas fa-angle-down arrow"></i>
                                     </div>
                                     <div class="tf-faq-desc">
-                                        <p><?php _e( $faq['description'] ); ?></p>
+                                        <?php echo wp_kses_post( $faq['description'] ); ?>
                                     </div>
                                 </div>
 							<?php endforeach; ?>

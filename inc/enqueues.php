@@ -42,8 +42,8 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         $fancy_cdn = !empty(tfopt( 'fnybx_cdn' )) ? tfopt( 'fnybx_cdn' ) : false;
         $slick_cdn = !empty(tfopt( 'slick_cdn' )) ? tfopt( 'slick_cdn' ) : false;
         $fa_cdn = !empty(tfopt( 'fa_cdn' )) ? tfopt( 'fa_cdn' ) : false;
-        $min_css = !empty(tfopt( 'css_min' )) ? '.min' : '';
-		$min_js = !empty(tfopt( 'js_min' )) ? '.min' : '';
+        $min_css = (defined( 'TF_PRO' ) && !empty(tfopt( 'css_min' ))) ? '.min' : '';
+		$min_js = (defined( 'TF_PRO' ) && !empty(tfopt( 'js_min' ))) ? '.min' : '';
 
         //wp_enqueue_style( 'tourfic-styles', TF_ASSETS_URL . 'css/old/tourfic-styles.css', null, '' );
         //wp_enqueue_style( 'tf-style', TF_ASSETS_URL . 'css/old/style.css', null, '' );

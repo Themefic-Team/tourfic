@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
  * Hotel Tour review slider
  * 
  */
-class TF_Review_HOTEL extends \Elementor\Widget_Base {
+class TF_Reviews_Slider extends \Elementor\Widget_Base {
 
 	/**
 	 * Retrieve the widget name.
@@ -97,14 +97,51 @@ class TF_Review_HOTEL extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Total Reviews', 'tourfic' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
-				'description' => __( 'Number of total reviews to show. Min 3. Default to 7', 'tourfic' ),
+				'description' => __( 'Number of total reviews to show. Min 3.', 'tourfic' ),
 				'min' => 3,
 				'step' => 1,
-				'default' => 7,
+				'default' => 10,
 			]
 		);
-        
 
+        $this->add_control(
+			'slidestoshow',
+			[
+				'label' => esc_html__( 'Slides to show', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'description' => __( 'Slides to show', 'tourfic' ),
+				'min' => 3,
+				'default' => 10,
+			]
+		);
+
+		$this->add_control(
+			'autoplay',
+			[
+				'label' => esc_html__( 'Autoplay', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'description' => __( 'Enable Autoplay', 'tourfic' ),
+			]
+		);
+
+		$this->add_control(
+			'autoplay_speed',
+			[
+				'label' => esc_html__( 'Autoplay Speed', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'description' => __( 'Autoplay Speed in milliseconds', 'tourfic' ),
+				'default' => 2000,
+			]
+		);
+
+		$this->add_control(
+			'infinite',
+			[
+				'label' => esc_html__( 'Infinite Slider', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'description' => __( 'Enable Infinite Slider', 'tourfic' ),
+			]
+		);
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -186,8 +223,13 @@ class TF_Review_HOTEL extends \Elementor\Widget_Base {
 		$subtitle = $settings['subtitle'];
 		$count = $settings['count'];
 		$slidestoshow = $settings['slidestoshow'];
+		$autoplay = $settings['autoplay'];
+		$autoplay == 'yes' ? $autoplay = 'true' : $autoplay = 'false';
+		$autoplay_speed = $settings['autoplay_speed'];
+		$infinite = $settings['infinite'];
+		$infinite == 'yes' ? $infinite = 'true' : $infinite = 'false';
 
-        echo do_shortcode('[tf_reviews title="' .$title. '" subtitle="' .$subtitle. '" count="' .$count. '" slidestoshow="' .$slidestoshow. '"]');
+        echo do_shortcode('[tf_reviews title="' .$title. '" subtitle="' .$subtitle. '" count="' .$count. '" slidestoshow="' .$slidestoshow. '" autoplay="'.$autoplay.'" speed="'.$autoplay_speed.'" infinite="'.$infinite.'"]');
 
 
 	}

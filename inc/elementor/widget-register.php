@@ -37,6 +37,7 @@ function tf_register_widget( $widgets_manager ) {
 	require_once( __DIR__ . '/widgets/tour-destinations.php' );
 	require_once( __DIR__ . '/widgets/recent-hotels-slider.php' );
 	require_once( __DIR__ . '/widgets/recent-tours-slider.php' );
+	require_once( __DIR__ . '/widgets/review-slider.php' );
 
 	$widgets_manager->register( new \TF_Search_horizontal() );
 	$widgets_manager->register( new \TF_Wishlist() );
@@ -44,6 +45,7 @@ function tf_register_widget( $widgets_manager ) {
 	$widgets_manager->register( new \TF_Tour_Destinations() );
 	$widgets_manager->register( new \TF_Recent_Hotels_slider() );
 	$widgets_manager->register( new \TF_Recent_Tours_slider() );
+	$widgets_manager->register( new \TF_Reviews_Slider() );
 
 }
 add_action( 'elementor/widgets/register', 'tf_register_widget' );
