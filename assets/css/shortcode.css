@@ -183,7 +183,8 @@ button.tf-tablinks:focus {
     font-weight: 900;
     font-family: "Font Awesome 5 Free";
     float: left;
-    font-size: 1rem;
+    font-size: 15px;
+    line-height: 25px;
     margin-right: 5px;
 }
 .tf_submit-wrap {
