@@ -172,20 +172,10 @@ if ( ! function_exists( 'tf_plugin_loaded_action' ) ) {
             }          
         }
 
-		if ( file_exists( TF_ADMIN_PATH . 'tf-options/TF_Metabox.php' ) ) {
-			require_once TF_ADMIN_PATH . 'tf-options/TF_Metabox.php';
+		if ( file_exists( TF_ADMIN_PATH . 'tf-options/TF_Options.php' ) ) {
+			require_once TF_ADMIN_PATH . 'tf-options/TF_Options.php';
 		} else {
-			tf_file_missing(TF_ADMIN_PATH . 'tf-options/TF_Metabox.php');
-		}
-
-		$metaboxes = glob( TF_ADMIN_PATH . 'tf-options/metaboxes/*.php' );
-		if ( ! empty( $metaboxes ) ) {
-			foreach ( $metaboxes as $metabox ) {
-				$metabox_name = basename( $metabox, '.php' );
-				if ( ! class_exists( $metabox_name ) ) {
-					require_once $metabox;
-				}
-			}
+			tf_file_missing(TF_ADMIN_PATH . 'tf-options/TF_Options.php');
 		}
 		
 	}

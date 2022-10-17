@@ -6,7 +6,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 	'title'     => 'Hotel Settings',
 	'post_type' => 'tf_hotel',
 	'sections'  => array(
-		'section_1' => array(
+		'section_2' => array(
 			'title'  => 'Section 1',
 			'fields' => array(
 				array(
