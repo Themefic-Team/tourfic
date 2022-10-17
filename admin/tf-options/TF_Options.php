@@ -9,7 +9,6 @@ if ( ! class_exists( 'TF_Options' ) ) {
 
 		/**
 		 * Singleton instance
-		 *
 		 * @since 1.0.0
 		 */
 		public static function instance() {
@@ -28,7 +27,10 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			$this->load_metaboxes();
 		}
 
-		// Include files
+		/**
+		 * Load metaboxes
+		 * @since 1.0.0
+		 */
 		public function load_files() {
 			// Metaboxes Class
 			require_once TF_ADMIN_PATH . 'tf-options/Classes/TF_Metabox.php';
@@ -38,7 +40,6 @@ if ( ! class_exists( 'TF_Options' ) ) {
 
 		/**
 		 * Load metaboxes
-		 *
 		 * @since 1.0.0
 		 */
 		public function load_metaboxes() {
