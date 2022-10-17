@@ -150,7 +150,12 @@ class TF_Metabox {
 		foreach ( self::$metabox_sections as $section ) {
 			if ( ! empty( $section['fields'] ) ) {
 				foreach ( $section['fields'] as $field ) {
-					$tf_meta_box_value[ $field['id'] ] = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : '';
+                    $data = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : '';
+                    $fieldClass = 'TF_' . $field['type'];
+                    if ( class_exists( $fieldClass ) ) {
+                        $_field = new $fieldClass( $field, $data, self::$metabox_id );
+                        $tf_meta_box_value[ $field['id'] ] = $_field->sanitize();
+                    }
 				}
 			}
 		}

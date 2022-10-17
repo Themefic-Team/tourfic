@@ -19,5 +19,10 @@ if ( ! class_exists( 'TF_Fields' ) ) {
 			return $field_name;
 
 		}
+
+		//sanitize
+		public function sanitize() {
+			return sanitize_text_field( $this->value );
+		}
 	}
 }
