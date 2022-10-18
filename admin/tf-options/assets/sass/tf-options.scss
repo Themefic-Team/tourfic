@@ -1,8 +1,14 @@
-@import 'global/_variable.scss';
-@import 'global/_mixin.scss';
-@import 'global/_reset.scss';
-@import 'global/_global.scss';
-@import 'global/_animation.scss';
+@import 'global/variable';
+@import 'global/mixin';
+@import 'global/reset';
+@import 'global/global';
+@import 'global/animation';
+@import 'global/tabs';
+@import 'global/fileds';
 
 //fields
 @import 'fields/text';
+@import 'fields/textarea';
+@import 'fields/select';
+@import 'fields/radio';
+@import 'fields/checkbox';

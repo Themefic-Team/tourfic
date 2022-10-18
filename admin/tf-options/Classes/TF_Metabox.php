@@ -78,40 +78,49 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 
 			// Form fields.
 			?>
-            <table class="form-table">
-				<?php foreach ( $this->metabox_sections as $section ) : ?>
-                    <tr>
-                        <td><h2><?php echo $section['title']; ?></h2></td>
-                        <td>
-                            <table class="form-table">
-								<?php foreach ( $section['fields'] as $field ) :
-									$id = $this->metabox_id . '[' . $field['id'] . ']';
-									$value = isset( $tf_meta_box_value[ $field['id'] ] ) ? $tf_meta_box_value[ $field['id'] ] : '';
-									?>
-                                    <tr>
-                                        <th>
-                                            <label for="<?php echo esc_attr( $id ) ?>"><?php echo esc_html( $field['title'] ) ?></label>
-                                        </th>
-                                        <td>
-											<?php
-											$fieldClass = 'TF_' . $field['type'];
-											if ( class_exists( $fieldClass ) ) {
-												$_field = new $fieldClass( $field, $value, $this->metabox_id );
-												$_field->render();
-											} else {
-												echo '<p>' . __( 'Field not found!', 'tourfic' ) . '</p>';
-											}
-											?>
-                                            <p class="description"><?php echo wp_kses_post( $field['description'] ) ?></p>
-                                        </td>
-                                    </tr>
-								<?php endforeach; ?>
-                            </table>
-                        </td>
-                    </tr>
+            <div class="tf-admin-meta-box">
+                <div class="tf-admin-tab">
+					<?php foreach ( $this->metabox_sections as $key => $section ) : ?>
+                        <a class="tf-tablinks" onclick="openTab(event, '<?php echo esc_attr( $key ) ?>')"><?php echo esc_html( $section['title'] ); ?></a>
+					<?php endforeach; ?>
+                </div>
 
-				<?php endforeach; ?>
-            </table>
+                <div class="tf-tab-wrapper">
+					<?php foreach ( $this->metabox_sections as $key => $section ) : ?>
+                        <div id="<?php echo esc_attr( $key ) ?>" class="tf-tab-content">
+
+							<?php foreach ( $section['fields'] as $field ) :
+								$id = $this->metabox_id . '[' . $field['id'] . ']';
+								$value = isset( $tf_meta_box_value[ $field['id'] ] ) ? $tf_meta_box_value[ $field['id'] ] : '';
+								?>
+
+                                <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?>">
+                                    <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-title"><?php echo esc_html( $field['title'] ) ?></label>
+									<?php if ( $field['subtitle'] ) : ?>
+                                        <span class="tf-field-sub-title"><?php echo wp_kses_post( $field['subtitle'] ) ?></span>
+									<?php endif; ?>
+
+                                    <div class="tf-fieldset">
+										<?php
+										$fieldClass = 'TF_' . $field['type'];
+										if ( class_exists( $fieldClass ) ) {
+											$_field = new $fieldClass( $field, $value, $this->metabox_id );
+											$_field->render();
+										} else {
+											echo '<p>' . __( 'Field not found!', 'tourfic' ) . '</p>';
+										}
+										?>
+                                    </div>
+                                    <p class="description"><?php echo wp_kses_post( $field['description'] ) ?></p>
+                                </div>
+
+							<?php endforeach; ?>
+
+                        </div>
+					<?php endforeach; ?>
+                </div>
+
+            </div>
 			<?php
 		}
 
@@ -155,9 +164,9 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 						foreach ( $section['fields'] as $field ) {
 
 							if ( ! empty( $field['id'] ) ) {
-								$data       = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : '';
+								$data = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : '';
 
-                                $fieldClass = 'TF_' . $field['type'];
+								$fieldClass = 'TF_' . $field['type'];
 								if ( class_exists( $fieldClass ) ) {
 									$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
 									$tf_meta_box_value[ $field['id'] ] = $_field->sanitize();
@@ -167,7 +176,6 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 					}
 				}
 			}
-
 
 			if ( ! empty( $tf_meta_box_value ) ) {
 				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );

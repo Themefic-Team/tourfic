@@ -14,7 +14,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 
 		public function render() {
 			$type = ( ! empty( $this->field['type'] ) ) ? $this->field['type'] : 'text';
-			echo '<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" value="' . $this->value . '" />';
+			echo '<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" placeholder="'. $this->field['placeholder'] .'" value="' . $this->value . '" />';
 		}
 
 	}

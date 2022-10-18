@@ -22,7 +22,27 @@ if ( class_exists( 'CSF' ) ) {
 	CSF::createSection( $prefix, array(
 		'title'  => __( 'Location', 'tourfic' ),
 		'fields' => array(
-
+			array(
+				'id'            => 'featuressdas',
+				'type'          => 'select',
+				'title'         => __( 'Select Features', 'tourfic' ),
+				'placeholder'   => __( 'Select', 'tourfic' ),
+				'empty_message' => __( 'No feature available', 'tourfic' ),
+				'options'       => 'categories',
+				'query_args'    => array(
+					'taxonomy' => 'hotel_feature',
+				),
+			),
+			array(
+				'id'       => 'disable-services',
+				'type'     => 'checkbox',
+				'title'    => __( 'Disable Services', 'tourfic' ),
+				'subtitle' => __( 'Disable or hide the services you don\'t need by ticking the checkbox', 'tourfic' ),
+				'options'  => array(
+					'hotel' => __( 'Hotel', 'tourfic' ),
+					'tour'  => __( 'Tour', 'tourfic' ),
+				),
+			),
 			array(
 				'id'          => 'address',
 				'type'        => 'textarea',
@@ -330,19 +350,19 @@ if ( class_exists( 'CSF' ) ) {
 						'subtitle' => __( 'Room footage (sft)', 'tourfic' ),
 					),
 
-					array(
-						'id'            => 'features',
-						'type'          => 'select',
-						'title'         => __( 'Select Features', 'tourfic' ),
-						'placeholder'   => __( 'Select', 'tourfic' ),
-						'empty_message' => __( 'No feature available', 'tourfic' ),
-						'chosen'        => true,
-						'multiple'      => true,
-						'options'       => 'categories',
-						'query_args'    => array(
-							'taxonomy' => 'hotel_feature',
-						),
-					),
+//					array(
+//						'id'            => 'features',
+//						'type'          => 'select',
+//						'title'         => __( 'Select Features', 'tourfic' ),
+//						'placeholder'   => __( 'Select', 'tourfic' ),
+//						'empty_message' => __( 'No feature available', 'tourfic' ),
+//						'chosen'        => true,
+//						'multiple'      => true,
+//						'options'       => 'categories',
+//						'query_args'    => array(
+//							'taxonomy' => 'hotel_feature',
+//						),
+//					),
 
 					array(
 						'id'    => 'description',

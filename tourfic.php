@@ -66,7 +66,7 @@ if ( !function_exists('tf_enqueue_main_admin_scripts') ) {
         // Custom
         wp_enqueue_style('tf', TF_ADMIN_URL . 'assets/css/admin.css','', '2.1.0' );
         wp_enqueue_script( 'tf', TF_ADMIN_URL . 'assets/js/admin.js', array('jquery'), '2.1.0', true );   
-        wp_localize_script( 'tf', 'tf_params',
+        wp_localize_script( 'tf', 'tf_admin_params',
             array(
                 'tf_nonce' => wp_create_nonce( 'updates' ),
                 'ajax_url' => admin_url( 'admin-ajax.php' ),

@@ -1,0 +1,30 @@
+.tf-field-radio {
+
+  .tf-fieldset {
+
+    ul.tf-inline {
+      li {
+        display: inline-block;
+        margin-right: 10px;
+
+        input[type="radio"] {
+          margin-right: 5px;
+        }
+      }
+    }
+
+    label {
+      color: #607085;
+      font-size: 16px;
+      transition: .3s all ease;
+
+      input {
+        margin-right: 10px;
+      }
+
+      &:hover {
+        color: #434F60;
+      }
+    }
+  }
+}

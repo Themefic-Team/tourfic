@@ -25,6 +25,9 @@ if ( ! class_exists( 'TF_Options' ) ) {
 
 			//load metaboxes
 			$this->load_metaboxes();
+
+			//enqueue scripts
+			add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_enqueue_scripts' ) );
 		}
 
 		/**
@@ -52,6 +55,17 @@ if ( ! class_exists( 'TF_Options' ) ) {
 					}
 				}
 			}
+		}
+
+		/**
+		 * Enqueue scripts
+		 * @since 1.0.0
+		 */
+		public function tf_options_enqueue_scripts() {
+			//Css
+			wp_enqueue_style( 'tf-options', TF_ADMIN_URL . 'tf-options/assets/css/tf-options.css', array(), TOURFIC );
+			//Js
+			wp_enqueue_script( 'tf-options', TF_ADMIN_URL . 'tf-options/assets/js/tf-options.js', array( 'jquery' ), TOURFIC, true );
 		}
 
 	}

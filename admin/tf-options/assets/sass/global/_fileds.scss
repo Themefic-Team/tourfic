@@ -1,0 +1,16 @@
+.tf-field {
+  padding: 10px 20px;
+
+  .tf-field-title {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 14px;
+    color: $slate60;
+  }
+
+  .tf-field-sub-title{
+    color: #8997A9;
+    font-size: 12px;
+  }
+}

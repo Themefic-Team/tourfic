@@ -1,0 +1,47 @@
+.tf-admin-meta-box{
+  @include flexbox();
+  margin: -6px -12px -12px -12px;
+
+  .tf-admin-tab {
+    border-right: 1px solid $slate10;
+    background-color: $slate0;
+    min-width: 220px;
+
+    a.tf-tablinks {
+      display: block;
+      color: $slate80;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      cursor: pointer;
+      @include transition(all 0.3s ease);
+
+      &:hover {
+        background-color: #fff;
+      }
+      &.active {
+        background-color: $blue60;
+        color: #fff;
+        position: relative;
+
+        &::after {
+          position: absolute;
+          content: "";
+          height: 10px;
+          width: 10px;
+          background: #fff;
+          @include rotate(45);
+          right: -5px;
+          top: 50%;
+          margin-top: -5px;
+        }
+      }
+    }
+  }
+
+  .tf-tab-wrapper{
+    @include flex(0 0 calc(100% - 220px));
+  }
+}
