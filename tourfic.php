@@ -161,6 +161,15 @@ if ( ! function_exists( 'tf_plugin_loaded_action' ) ) {
                 tf_file_missing(TF_OPTIONS_PATH . 'options.php');
             }          
         }
+
+        // Custom Tourfic Metabox
+        
+        // if ( file_exists( TF_ADMIN_PATH . 'tourfic-metabox/tf-meta.php' ) ) {
+        //     require_once TF_ADMIN_PATH . 'tourfic-metabox/tf-meta.php';
+        // } else {
+        //     tf_file_missing(TF_ADMIN_PATH . 'tourfic-metabox/tf-meta.php');
+        // }          
+        
 		
 	}
 }
