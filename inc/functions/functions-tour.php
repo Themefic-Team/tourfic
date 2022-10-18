@@ -609,7 +609,7 @@ function tf_single_tour_booking_form( $post_id ) {
 			        </label>
 		        </div>
 
-                <?php if ($tour_type != 'fixed') { ?>
+                <?php if (defined( 'TF_PRO' ) && $tour_type != 'fixed') { ?>
                 <div class='tf_form-row' id="check-in-time-div" style="display: none;">
                     <label class='tf_label-row'>
                         <div class='tf_form-inner'>

@@ -1490,7 +1490,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                                 </ul>
                                             </div>
 										<?php } ?>
-                                        <div class="roomPrice roomPrice_flex sr_discount">
+                                        <div class="roomPrice roomPrice_flex sr_discount" style="<?php echo empty($features) ? 'text-align:left' : ''; ?>">
                                             <div class="availability-btn-area">
                                                 <a href="<?php echo $url; ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
                                             </div>

@@ -379,7 +379,7 @@ div#tf-locationautocomplete-list div:before,div#tf-destinationautocomplete-list 
     margin: 0 !important;
     list-style: none;
     top: 100% !important;
-    height: 225px;
+    max-height: 225px;
     z-index: 99999;
     overflow-y: scroll;
     padding-left: 0px !important;
