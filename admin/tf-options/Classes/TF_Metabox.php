@@ -96,7 +96,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 
                                 <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?>">
                                     <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-title"><?php echo esc_html( $field['title'] ) ?></label>
-									<?php if ( $field['subtitle'] ) : ?>
+									<?php if ( !empty( $field['subtitle'] ) ) : ?>
                                         <span class="tf-field-sub-title"><?php echo wp_kses_post( $field['subtitle'] ) ?></span>
 									<?php endif; ?>
 
@@ -111,7 +111,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 										}
 										?>
                                     </div>
-                                    <p class="description"><?php echo wp_kses_post( $field['description'] ) ?></p>
+                                    <p class="description"><?php echo !empty($field['description']) ? wp_kses_post( $field['description'] ) : '' ?></p>
                                 </div>
 
 							<?php endforeach; ?>
@@ -156,7 +156,8 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 
 			$tf_meta_box_value = array();
 			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array();
-
+			// var_dump($metabox_request);
+			// exit();
 			if ( ! empty( $metabox_request ) && ! empty( $this->metabox_sections ) ) {
 				foreach ( $this->metabox_sections as $section ) {
 

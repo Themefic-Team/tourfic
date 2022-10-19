@@ -1,0 +1,52 @@
+.tf-field-image {
+    .tf-fieldset {
+        .tf-fieldset-media-preview {
+            .tf-image-close {
+                display: inline;
+                position: absolute;
+                margin-left: 100px;
+                background: #fff;
+                padding: 2px;
+                cursor: pointer;
+                border-radius: 50%;
+                border: 1px solid #ddd;
+                margin-top: -7px;
+                width: 15px;
+                height: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img{
+                    background: #fff;
+                    width: 11px !important;
+                }
+            }
+            img{
+                height: 100px;
+                width: 100px;
+                border: 1px solid #ddd;
+                padding: 5px;
+            }
+        }
+        .tf-fieldset-media{
+            display: flex;
+            input{
+                width: 90%;
+                padding: 12px 8px 12px 12px;
+                border: none;
+                background: #f0f0f1;
+                border-radius: 4px;
+                height: 48px;
+                color: #363e4a;
+                font-size: 14px;
+            }
+            a.tf-media-upload{
+                height: 48px;
+                width: 9%;
+                line-height: 48px;
+                text-align: center;
+                text-transform: capitalize;
+            }
+            }
+    }
+  }

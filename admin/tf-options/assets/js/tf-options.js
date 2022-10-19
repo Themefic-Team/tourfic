@@ -27,3 +27,81 @@ function openTab(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.target.className += " active";
 }
+
+var frame, gframe;
+(function ($) {
+    $(document).on("click", ".tf-image-close", function () {
+        var fieldname = $(this).attr("tf-field-name");
+        var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
+    
+        $('input[name="'+fieldname+'"]').val('');
+        $('.'+tf_preview_class+'').html('');
+        
+    });
+
+    $(document).ready(function () {
+
+        $('body').on('click', '.tf-media-upload', function(e) {
+            var fieldname = $(this).attr("tf-field-name");
+            var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
+        
+            frame = wp.media({
+                title: "Select Image",
+                button: {
+                    text: "Insert Image"
+                },
+                multiple: false
+            });
+            frame.on('select', function () {
+                
+                var attachment = frame.state().get('selection').first().toJSON();
+                $('input[name="'+fieldname+'"]').val(attachment.url);
+                $('.'+tf_preview_class+'').html(`<div class="tf-image-close" tf-field-name='${fieldname}'>✖</div><img src='${attachment.sizes.thumbnail.url}' />`);
+            });
+
+
+            frame.open();
+            return false;
+        });
+
+        
+
+        // $("#upload_images").on("click", function () {
+
+        //     if (gframe) {
+        //         gframe.open();
+        //         return false;
+        //     }
+
+        //     gframe = wp.media({
+        //         title: "Select Image",
+        //         button: {
+        //             text: "Insert Image"
+        //         },
+        //         multiple: true
+        //     });
+
+        //     gframe.on('select', function () {
+        //         var image_ids = [];
+        //         var image_urls = [];
+        //         var attachments = gframe.state().get('selection').toJSON();
+        //         //console.log(attachments);
+        //         $("#images-container").html('');
+        //         for (i in attachments) {
+        //             var attachment = attachments[i];
+        //             image_ids.push(attachment.id);
+        //             image_urls.push(attachment.sizes.thumbnail.url);
+        //             $("#images-container").append(`<img style="margin-right: 10px;" src='${attachment.sizes.thumbnail.url}' />`);
+
+        //         }
+        //         $("#omb_images_id").val(image_ids.join(";"));
+        //         $("#omb_images_url").val(image_urls.join(";"));
+
+        //     });
+
+
+        //     gframe.open();
+        //     return false;
+        // });
+    });
+})(jQuery);

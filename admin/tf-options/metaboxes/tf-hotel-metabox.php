@@ -73,6 +73,18 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'placeholder' => 'Zip of the hotel',
 					'description' => 'Zip of the hotel',
 				),
+				array(
+					'id'          => 'image_update',
+					'title'       => 'Image Upload',
+					'type'        => 'image',
+					'placeholder' => 'Not Selected',
+				),
+				array(
+					'id'          => 'image_update_second',
+					'title'       => 'Image Upload',
+					'type'        => 'image',
+					'placeholder' => 'Not Selected',
+				),
 			),
 		),
 	),
