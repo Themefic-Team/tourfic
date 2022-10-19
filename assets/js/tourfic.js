@@ -568,7 +568,7 @@
          *
          * Slick
          */
-        $('.tf-slider-items-wrapper').slick({
+        $('.tf-slider-items-wrapper,.tf-slider-activated').slick({
             dots: true,
             arrows: false,
             infinite: true,
