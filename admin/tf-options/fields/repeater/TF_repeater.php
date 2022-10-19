@@ -73,13 +73,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 							</div>
 
 						<?php endforeach; ?>
-						<div class="tf-field tf-field-text">
-							<label for="tf_hotels[address]" class="tf-field-title">Address</label>
-							
-							<div class="tf-fieldset">
-								<input type="text" name="hello" id="hello" placeholder="Address of the hotel" value="Ut perspiciatis rec">                                    </div>
-							<p class="description">Address of the hotel</p>
-						</div>
+						 
 					</div>
 				</div>
 				

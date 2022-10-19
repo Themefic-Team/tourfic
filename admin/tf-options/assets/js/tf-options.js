@@ -10,6 +10,8 @@
                 $('.tf-admin-tab .tf-tablinks').first().trigger('click').addClass('active');
             }
         });
+
+
         $(".tf-repeater").each(function(){
             let $this = $(this);
             let tf_repeater_add = $this.find('.tf-repeater-icon-add');
@@ -26,6 +28,9 @@
             alert(1);
             let clone_value = $(this).closest('.tf-single-repeater').html();
             $(this).closest('.tf-repeater-wrap').append('<div class="tf-single-repeater">'+clone_value+'</div>').show(); 
+        });
+        $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function(){
+            $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').toggleClass("hide") 
         });
 
     });

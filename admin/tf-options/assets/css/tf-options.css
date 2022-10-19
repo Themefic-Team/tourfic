@@ -213,7 +213,8 @@
     padding: 8px 0;
     background: #F0F2F4;
     position: relative;
-    border-radius: 5px 5px 0px 0px; }
+    border-radius: 5px 5px 0px 0px;
+    cursor: pointer; }
     .tf-repeater .tf-repeater-header .tf-repeater-icon {
       padding: 8px;
       cursor: pointer;
@@ -243,8 +244,10 @@
       right: 8px;
       top: 5px; }
   .tf-repeater .tf-repeater-content-wrap {
-    border: 1px solid #F0F2F4;
-    margin-bottom: 8px; }
+    border: 1px solid #F0F2F4; }
+  .tf-repeater .hide {
+    display: none;
+    visibility: hidden; }
   .tf-repeater .tf-repeater-add .tf-repeater-icon {
     padding: 8px;
     cursor: pointer;
@@ -254,5 +257,7 @@
     line-height: 0.7;
     background-color: #ebf2ff;
     border-radius: 4px; }
+  .tf-repeater .tf-single-repeater {
+    margin-bottom: 8px; }
 
 /*# sourceMappingURL=tf-options.css.map */
