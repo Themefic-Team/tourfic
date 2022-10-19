@@ -107,7 +107,14 @@
   min-width: 220px;
 }
 .tf-admin-meta-box .tf-admin-tab a.tf-tablinks {
-  display: block;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   color: #363e4a;
   padding: 12px 16px;
   text-align: left;
@@ -115,10 +122,23 @@
   font-size: 16px;
   line-height: 24px;
   cursor: pointer;
-  -webkit-transition: all 0.3s ease 0.25s ease-in-out;
-  -moz-transition: all 0.3s ease 0.25s ease-in-out;
-  -o-transition: all 0.3s ease 0.25s ease-in-out;
-  transition: all 0.3s ease 0.25s ease-in-out;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.tf-admin-meta-box .tf-admin-tab a.tf-tablinks .tf-sec-icon {
+  margin-right: 10px;
+  color: #8997a9;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 .tf-admin-meta-box .tf-admin-tab a.tf-tablinks:hover {
   background-color: #fff;
@@ -127,6 +147,9 @@
   background-color: #2979ff;
   color: #fff;
   position: relative;
+}
+.tf-admin-meta-box .tf-admin-tab a.tf-tablinks.active .tf-sec-icon {
+  color: #fff;
 }
 .tf-admin-meta-box .tf-admin-tab a.tf-tablinks.active::after {
   position: absolute;
@@ -224,42 +247,221 @@
   outline: none;
 }
 
+.tf-field-radio .tf-fieldset ul li {
+  margin-bottom: 10px;
+}
 .tf-field-radio .tf-fieldset ul.tf-inline li {
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 20px;
 }
-.tf-field-radio .tf-fieldset ul.tf-inline li input[type=radio] {
-  margin-right: 5px;
+.tf-field-radio .tf-fieldset input[type=radio] {
+  display: none;
 }
-.tf-field-radio .tf-fieldset label {
+.tf-field-radio .tf-fieldset input[type=radio] + label {
   color: #607085;
   font-size: 16px;
-  transition: 0.3s all ease;
+  position: relative;
+  padding-left: 30px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
-.tf-field-radio .tf-fieldset label input {
-  margin-right: 10px;
+.tf-field-radio .tf-fieldset input[type=radio] + label:hover {
+  color: #4b5768;
 }
-.tf-field-radio .tf-fieldset label:hover {
-  color: #434F60;
+.tf-field-radio .tf-fieldset input[type=radio] + label:hover::before {
+  border-color: #76a9ff;
+}
+.tf-field-radio .tf-fieldset input[type=radio] + label::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #8997a9;
+  border-radius: 100%;
+  position: absolute;
+  top: 1px;
+  left: 0;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.tf-field-radio .tf-fieldset input[type=radio] + label::after {
+  content: "";
+  height: 14px;
+  width: 14px;
+  background-color: #2979ff;
+  border-radius: 100%;
+  position: absolute;
+  top: 4px;
+  left: 3px;
+  opacity: 0;
+  -webkit-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  transform: scale(0.5);
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.tf-field-radio .tf-fieldset input[type=radio]:checked + label::after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
+.tf-field-radio .tf-fieldset input[type=radio]:checked + label:before {
+  border-color: #2979ff;
 }
 
+.tf-field-checkbox .tf-fieldset ul li {
+  margin-bottom: 10px;
+}
 .tf-field-checkbox .tf-fieldset ul.tf-inline li {
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 20px;
 }
-.tf-field-checkbox .tf-fieldset ul.tf-inline li input[type=checkbox] {
-  margin-right: 5px;
+.tf-field-checkbox .tf-fieldset input[type=checkbox] {
+  display: none;
 }
-.tf-field-checkbox .tf-fieldset label {
+.tf-field-checkbox .tf-fieldset input[type=checkbox] + label {
   color: #607085;
   font-size: 16px;
-  transition: 0.3s all ease;
+  position: relative;
+  padding-left: 30px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
-.tf-field-checkbox .tf-fieldset label input {
-  margin-right: 10px;
+.tf-field-checkbox .tf-fieldset input[type=checkbox] + label:hover {
+  color: #4b5768;
 }
-.tf-field-checkbox .tf-fieldset label:hover {
-  color: #434F60;
+.tf-field-checkbox .tf-fieldset input[type=checkbox] + label:hover::before {
+  border-color: #76a9ff;
+}
+.tf-field-checkbox .tf-fieldset input[type=checkbox] + label::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #8997a9;
+  border-radius: 2px;
+  position: absolute;
+  top: 1px;
+  left: 0;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.tf-field-checkbox .tf-fieldset input[type=checkbox] + label::after {
+  content: "";
+  background-image: url(../icons/check.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 13px;
+  height: 18px;
+  width: 18px;
+  position: absolute;
+  top: 2px;
+  left: 1px;
+  opacity: 0;
+  -webkit-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  transform: scale(0.5);
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.tf-field-checkbox .tf-fieldset input[type=checkbox]:checked + label::after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
+.tf-field-checkbox .tf-fieldset input[type=checkbox]:checked + label:before {
+  background-color: #2979ff;
+  border-color: #2979ff;
+}
+
+.tf-field-text input {
+  width: 100%;
+  padding: 12px 8px 12px 12px;
+  border: none;
+  background: #F8F9FB;
+  border-radius: 4px;
+  height: 48px;
+  color: #363e4a;
+  font-size: 14px;
+}
+.tf-field-text input:focus {
+  background: #FFFFFF;
+  box-shadow: 0 0 0 2px #2979ff;
+  border-radius: 4px;
+}
+.tf-field-text input::-webkit-input-placeholder {
+  color: #a6b1bf;
+}
+.tf-field-text input::-ms-input-placeholder {
+  color: #a6b1bf;
+}
+.tf-field-text input input:-ms-input-placeholder {
+  color: #a6b1bf;
+}
+.tf-field-text input::-moz-placeholder {
+  opacity: 1;
+  color: #a6b1bf;
+}
+.tf-field-text input:-moz-placeholder {
+  opacity: 1;
+  color: #a6b1bf;
+}
+.tf-field-text input::placeholder {
+  color: #a6b1bf;
+}
+
+.tf-field-text input {
+  width: 100%;
+  padding: 12px 8px 12px 12px;
+  border: none;
+  background: #F8F9FB;
+  border-radius: 4px;
+  height: 48px;
+  color: #363e4a;
+  font-size: 14px;
+}
+.tf-field-text input:focus {
+  background: #FFFFFF;
+  box-shadow: 0 0 0 2px #2979ff;
+  border-radius: 4px;
+}
+.tf-field-text input::-webkit-input-placeholder {
+  color: #a6b1bf;
+}
+.tf-field-text input::-ms-input-placeholder {
+  color: #a6b1bf;
+}
+.tf-field-text input input:-ms-input-placeholder {
+  color: #a6b1bf;
+}
+.tf-field-text input::-moz-placeholder {
+  opacity: 1;
+  color: #a6b1bf;
+}
+.tf-field-text input:-moz-placeholder {
+  opacity: 1;
+  color: #a6b1bf;
+}
+.tf-field-text input::placeholder {
+  color: #a6b1bf;
 }
 
 /*# sourceMappingURL=tf-options.css.map */

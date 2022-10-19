@@ -2,8 +2,8 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'TF_text' ) ) {
-	class TF_text extends TF_Fields {
+if ( ! class_exists( 'TF_notice' ) ) {
+	class TF_notice extends TF_Fields {
 
 		public function __construct( $field, $value = '', $settings_id = '' ) {
 			parent::__construct( $field, $value, $settings_id );

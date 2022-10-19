@@ -75,13 +75,19 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			if ( empty( $tf_meta_box_value ) ) {
 				$tf_meta_box_value = array();
 			}
+			if ( empty( $this->metabox_sections ) ) {
+				return;
+			}
 
 			// Form fields.
 			?>
             <div class="tf-admin-meta-box">
                 <div class="tf-admin-tab">
 					<?php foreach ( $this->metabox_sections as $key => $section ) : ?>
-                        <a class="tf-tablinks" onclick="openTab(event, '<?php echo esc_attr( $key ) ?>')"><?php echo esc_html( $section['title'] ); ?></a>
+                        <a class="tf-tablinks" onclick="openTab(event, '<?php echo esc_attr( $key ) ?>')">
+                            <?php echo !empty($section['icon']) ? '<span class="tf-sec-icon"><i class="'.esc_attr($section['icon']).'"></i></span>' : ''; ?>
+                            <?php echo esc_html( $section['title'] ); ?>
+                        </a>
 					<?php endforeach; ?>
                 </div>
 
@@ -89,32 +95,37 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 					<?php foreach ( $this->metabox_sections as $key => $section ) : ?>
                         <div id="<?php echo esc_attr( $key ) ?>" class="tf-tab-content">
 
-							<?php foreach ( $section['fields'] as $field ) :
-								$id = $this->metabox_id . '[' . $field['id'] . ']';
-								$value = isset( $tf_meta_box_value[ $field['id'] ] ) ? $tf_meta_box_value[ $field['id'] ] : '';
-								?>
+							<?php
+							if ( ! empty( $section['fields'] ) ):
+								foreach ( $section['fields'] as $field ) :
+									$id = $this->metabox_id . '[' . $field['id'] . ']';
+									$value = isset( $tf_meta_box_value[ $field['id'] ] ) ? $tf_meta_box_value[ $field['id'] ] : '';
+									?>
 
-                                <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?>">
-                                    <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-title"><?php echo esc_html( $field['title'] ) ?></label>
-									<?php if ( $field['subtitle'] ) : ?>
-                                        <span class="tf-field-sub-title"><?php echo wp_kses_post( $field['subtitle'] ) ?></span>
-									<?php endif; ?>
+                                    <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?>">
+										<?php if ( ! empty( $field['title'] ) ): ?>
+                                            <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-title"><?php echo esc_html( $field['title'] ) ?></label>
+										<?php endif; ?>
+										<?php if ( ! empty( $field['subtitle'] ) ) : ?>
+                                            <span class="tf-field-sub-title"><?php echo wp_kses_post( $field['subtitle'] ) ?></span>
+										<?php endif; ?>
 
-                                    <div class="tf-fieldset">
-										<?php
-										$fieldClass = 'TF_' . $field['type'];
-										if ( class_exists( $fieldClass ) ) {
-											$_field = new $fieldClass( $field, $value, $this->metabox_id );
-											$_field->render();
-										} else {
-											echo '<p>' . __( 'Field not found!', 'tourfic' ) . '</p>';
-										}
-										?>
+                                        <div class="tf-fieldset">
+											<?php
+											$fieldClass = 'TF_' . $field['type'];
+											if ( class_exists( $fieldClass ) ) {
+												$_field = new $fieldClass( $field, $value, $this->metabox_id );
+												$_field->render();
+											} else {
+												echo '<p>' . __( 'Field not found!', 'tourfic' ) . '</p>';
+											}
+											?>
+                                        </div>
+                                        <p class="description"><?php echo wp_kses_post( $field['description'] ) ?></p>
                                     </div>
-                                    <p class="description"><?php echo wp_kses_post( $field['description'] ) ?></p>
-                                </div>
 
-							<?php endforeach; ?>
+								<?php endforeach;
+							endif; ?>
 
                         </div>
 					<?php endforeach; ?>

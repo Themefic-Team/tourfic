@@ -2,9 +2,6 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-/**
- * Field: select
- */
 if ( ! class_exists( 'TF_select' ) ) {
 	class TF_select extends TF_Fields {
 
