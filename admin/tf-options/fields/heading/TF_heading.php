@@ -10,7 +10,25 @@ if ( ! class_exists( 'TF_heading' ) ) {
 		}
 
 		public function render() {
-			echo !empty($this->field['content']) ? wp_kses_post( $this->field['content'] ) : '';
+			if ( empty( $this->field['content'] ) && empty( $this->field['title'] ) ) {
+				return;
+			}
+			?>
+            <div class="tf-field-heading-inner">
+				<?php if ( ! empty( $this->field['icon'] ) ): ?>
+                    <div class="tf-field-heading-icon">
+                        <i class="<?php echo esc_attr( $this->field['icon'] ); ?>"></i>
+                    </div>
+				<?php endif; ?>
+                <div class="tf-field-heading-content <?php echo !empty( $this->field['content']) ? 'has-content' : '' ?>">
+					<?php if ( ! empty( $this->field['title'] ) ): ?>
+                        <h3><?php echo esc_html( $this->field['title'] ); ?></h3>
+					<?php endif; ?>
+                    <?php echo wp_kses_post( $this->field['content'] ); ?>
+                </div>
+
+            </div>
+			<?php
 		}
 
 	}

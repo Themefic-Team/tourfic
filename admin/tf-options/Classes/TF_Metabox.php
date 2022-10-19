@@ -85,8 +85,8 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
                 <div class="tf-admin-tab">
 					<?php foreach ( $this->metabox_sections as $key => $section ) : ?>
                         <a class="tf-tablinks" onclick="openTab(event, '<?php echo esc_attr( $key ) ?>')">
-                            <?php echo !empty($section['icon']) ? '<span class="tf-sec-icon"><i class="'.esc_attr($section['icon']).'"></i></span>' : ''; ?>
-                            <?php echo esc_html( $section['title'] ); ?>
+							<?php echo ! empty( $section['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $section['icon'] ) . '"></i></span>' : ''; ?>
+							<?php echo esc_html( $section['title'] ); ?>
                         </a>
 					<?php endforeach; ?>
                 </div>
@@ -103,8 +103,8 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 									?>
 
                                     <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?>">
-										<?php if ( ! empty( $field['title'] ) ): ?>
-                                            <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-title"><?php echo esc_html( $field['title'] ) ?></label>
+										<?php if ( ! empty( $field['label'] ) ): ?>
+                                            <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label"><?php echo esc_html( $field['label'] ) ?></label>
 										<?php endif; ?>
 										<?php if ( ! empty( $field['subtitle'] ) ) : ?>
                                             <span class="tf-field-sub-title"><?php echo wp_kses_post( $field['subtitle'] ) ?></span>
@@ -121,7 +121,9 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 											}
 											?>
                                         </div>
-                                        <p class="description"><?php echo wp_kses_post( $field['description'] ) ?></p>
+										<?php if ( ! empty( $field['description'] ) ): ?>
+                                            <p class="description"><?php echo wp_kses_post( $field['description'] ) ?></p>
+										<?php endif; ?>
                                     </div>
 
 								<?php endforeach;

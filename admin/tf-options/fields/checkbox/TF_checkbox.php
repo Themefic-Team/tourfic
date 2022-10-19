@@ -19,7 +19,7 @@ if ( ! class_exists( 'TF_checkbox' ) ) {
 				}
 				echo '</ul>';
 			} else {
-				echo '<input type="checkbox" id="' . $this->field_name() . '" name="' . $this->field_name() . '" value="1" ' . checked( $this->value, 1, false ) . '/><label for="' . $this->field_name() . '">' . $this->field['label'] . '</label>';
+				echo '<input type="checkbox" id="' . $this->field_name() . '" name="' . $this->field_name() . '" value="1" ' . checked( $this->value, 1, false ) . '/><label for="' . $this->field_name() . '">' . $this->field['title'] . '</label>';
 			}
 		}
 

@@ -10,9 +10,26 @@ if ( ! class_exists( 'TF_notice' ) ) {
 		}
 
 		public function render() {
-			$type = ( ! empty( $this->field['type'] ) ) ? $this->field['type'] : 'text';
-			echo '<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" placeholder="'. $this->field['placeholder'] .'" value="' . $this->value . '" />';
-		}
+			if ( empty( $this->field['content'] ) && empty( $this->field['title'] ) ) {
+				return;
+			}
+			?>
+            <div class="tf-field-notice-inner tf-notice-<?php echo !empty( $this->field['notice']) ? $this->field['notice'] : 'info' ?>">
+				<?php if ( ! empty( $this->field['icon'] ) ): ?>
+                    <div class="tf-field-notice-icon">
+                        <i class="<?php echo esc_attr( $this->field['icon'] ); ?>"></i>
+                    </div>
+				<?php endif; ?>
 
+                <div class="tf-field-notice-content <?php echo !empty( $this->field['content']) ? 'has-content' : '' ?>">
+					<?php if ( ! empty( $this->field['title'] ) ): ?>
+                        <h6><?php echo esc_html( $this->field['title'] ); ?></h6>
+					<?php endif; ?>
+					<?php echo wp_kses_post( $this->field['content'] ); ?>
+                </div>
+
+            </div>
+			<?php
+		}
 	}
 }

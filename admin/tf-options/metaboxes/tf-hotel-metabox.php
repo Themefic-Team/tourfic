@@ -12,14 +12,14 @@ TF_Metabox::metabox( 'tf_hotels', array(
 			'fields' => array(
 				array(
 					'id'          => 'address',
-					'title'       => 'Address',
+					'label'       => 'Address',
 					'type'        => 'text',
 					'placeholder' => 'Address of the hotel',
 					'description' => 'Address of the hotel',
 				),
 				array(
 					'id'      => 'email',
-					'title'   => 'Email',
+					'label'   => 'Email',
 					'type'    => 'select',
 					'options' => array(
 						'1' => 'Option 1',
@@ -29,7 +29,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 				),
 				array(
 					'id'          => 'phone',
-					'title'       => 'Phone',
+					'label'       => 'Phone',
 					'type'        => 'textarea',
 					'description' => 'Phone of the hotel',
 				),
@@ -37,7 +37,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 				array(
 					'id'          => 'checky',
 					'type'        => 'checkbox',
-					'title'       => 'Checkbox',
+					'label'       => 'Checkbox',
 					'subtitle'    => 'Checkbox',
 					'description' => 'Checkbox',
 					'options'     => array(
@@ -49,16 +49,23 @@ TF_Metabox::metabox( 'tf_hotels', array(
 				array(
 					'id'          => 'check',
 					'type'        => 'checkbox',
-					'title'       => 'Checkbox',
-					'label'       => 'Single checkbox',
+					'label'       => 'Checkbox',
+					'title'       => 'Single checkbox',
 					'subtitle'    => 'Checkbox',
 					'description' => 'Checkbox',
 				),
+				//heading
+				array(
+					'type'  => 'heading',
+					'title' => 'Awesome heading',
+					'content' => 'gsdgsdfgfg gsdfg d<a href="http://localhost:8080">dsfgsdfgsdf</a>',
+				),
+
 				//radio
 				array(
 					'id'          => 'radio',
 					'type'        => 'radio',
-					'title'       => 'Radio',
+					'label'       => 'Radio',
 					'subtitle'    => 'Radio',
 					'description' => 'Radio',
 					'options'     => array(
@@ -68,16 +75,40 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					),
 					'inline'      => true,
 				),
-				//heading
+				//notice
 				array(
-					'type'  => 'heading',
-					'content' => 'gsdgsdfg dfg dfg fg <h3>Heading</h3>fg gsdfg d<a href="http://localhost:8080">dsfgsdfgsdf</a>',
+					'type'  => 'notice',
+					'icon'  => 'ri-information-fill',
+					'title' => 'Awesome heading',
+					'content' => 'gsdgsdfgfg gsdfg d<a href="http://localhost:8080">dsfgsdfgsdf</a>',
+					'notice' => 'info',
+				),
+				array(
+					'type'  => 'notice',
+					'icon'  => 'ri-information-fill',
+					'title' => 'Awesome heading',
+					'content' => 'gsdgsdfgfg gsdfg d<a href="http://localhost:8080">dsfgsdfgsdf</a>',
+					'notice' => 'success',
+				),
+				array(
+					'type'  => 'notice',
+					'icon'  => 'ri-information-fill',
+					'title' => 'Awesome heading',
+					'content' => 'gsdgsdfgfg gsdfg d<a href="http://localhost:8080">dsfgsdfgsdf</a>',
+					'notice' => 'warning',
+				),
+				array(
+					'type'  => 'notice',
+					'icon'  => 'ri-information-fill',
+					'title' => 'Awesome heading',
+					'content' => 'gsdgsdfgfg gsdfg d<a href="http://localhost:8080">dsfgsdfgsdf</a>',
+					'notice' => 'danger',
 				),
 				//switch
 				/*array(
 					'id'          => 'switch',
 					'type'        => 'switch',
-					'title'       => 'Switch',
+					'label'       => 'Switch',
 					'subtitle'    => 'Switch',
 					'description' => 'Switch',
 					'default'     => true,

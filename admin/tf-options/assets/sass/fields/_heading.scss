@@ -1,45 +1,38 @@
-.tf-field-text {
+.tf-field-heading {
+  padding: 16px 20px;
+  background-color: $slate5;
 
-  input {
-    width: 100%;
-    padding: 12px 8px 12px 12px;
-    border: none;
-    background: #F8F9FB;
-    border-radius: 4px;
-    height: 48px;
-    color: $slate80;
-    font-size: 14px;
+  .tf-field-heading-inner {
+    @include flexbox();
 
-    &:focus {
-      background: #FFFFFF;
-      box-shadow: 0 0 0 2px $blue60;
-      border-radius: 4px;
+    .tf-field-heading-icon {
+      margin-right: 10px;
+      width: 28px;
+      height: 28px;
+      font-size: 16px;
+      @include flexbox();
+      @include align-items(center);
+      @include justify-content(center);
+      background-color: $blue60;
+      color: #fff;
+      border-radius: 4px
     }
 
-    &::-webkit-input-placeholder {
-      color: $slate30;
+    .tf-field-heading-content {
+      color: $slate40;
+
+      h3 {
+        margin: 0;
+        font-weight: 600;
+        color: $slate80;
+      }
+
+      &.has-content {
+        h3 {
+          margin-bottom: 10px;
+        }
+      }
     }
 
-    &::-ms-input-placeholder {
-      color: $slate30;
-    }
-
-    input:-ms-input-placeholder {
-      color: $slate30;
-    }
-
-    &::-moz-placeholder {
-      opacity: 1;
-      color: $slate30;
-    }
-
-    &:-moz-placeholder {
-      opacity: 1;
-      color: $slate30;
-    }
-
-    &::placeholder {
-      color: $slate30;
-    }
   }
 }
