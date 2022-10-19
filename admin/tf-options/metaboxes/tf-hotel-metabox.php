@@ -10,6 +10,70 @@ TF_Metabox::metabox( 'tf_hotels', array(
 			'title'  => 'Section 1',
 			'fields' => array(
 				array(
+					'id'          => 'repeater',
+					'title'       => 'repeater',
+					'type'        => 'repeater',
+					'placeholder' => 'Zip of the hotel',
+					'description' => 'Zip of the hotel',
+					'fields' => array(
+
+						array(
+						  'id'    => 'opt-text',
+						  'type'  => 'text',
+						  'title' => 'Text'
+						),
+						array(
+							'id'          => 'address',
+							'title'       => 'Address',
+							'type'        => 'text',
+							'placeholder' => 'Address of the hotel',
+							'description' => 'Address of the hotel',
+						),
+						array(
+							'id'      => 'email',
+							'title'   => 'Email',
+							'type'    => 'select',
+							'options' => array(
+								'1' => 'Option 1',
+								'2' => 'Option 2',
+								'3' => 'Option 3',
+							),
+						),
+					)
+				), 
+				array(
+					'id'          => 'repeater 2',
+					'title'       => 'repeater',
+					'type'        => 'repeater',
+					'placeholder' => 'Zip of the hotel',
+					'description' => 'Zip of the hotel',
+					'fields' => array(
+
+						array(
+						  'id'    => 'opt-text',
+						  'type'  => 'text',
+						  'title' => 'Text'
+						),
+						array(
+							'id'          => 'address',
+							'title'       => 'Address',
+							'type'        => 'text',
+							'placeholder' => 'Address of the hotel',
+							'description' => 'Address of the hotel',
+						),
+						array(
+							'id'      => 'email',
+							'title'   => 'Email',
+							'type'    => 'select',
+							'options' => array(
+								'1' => 'Option 1',
+								'2' => 'Option 2',
+								'3' => 'Option 3',
+							),
+						),
+					)
+				), 
+				array(
 					'id'          => 'address',
 					'title'       => 'Address',
 					'type'        => 'text',
@@ -64,7 +128,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 			),
 		),
 		'section_3' => array(
-			'title'  => 'Section 1',
+			'title'  => 'Section 3',
 			'fields' => array(
 				array(
 					'id'          => 'zip',
@@ -73,6 +137,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'placeholder' => 'Zip of the hotel',
 					'description' => 'Zip of the hotel',
 				),
+				
 			),
 		),
 	),

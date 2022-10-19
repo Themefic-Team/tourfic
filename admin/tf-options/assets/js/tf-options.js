@@ -10,6 +10,24 @@
                 $('.tf-admin-tab .tf-tablinks').first().trigger('click').addClass('active');
             }
         });
+        $(".tf-repeater").each(function(){
+            let $this = $(this);
+            let tf_repeater_add = $this.find('.tf-repeater-icon-add');
+            tf_repeater_add.on('click', function(){
+                let add_value = $this.find('.tf-single-repeater-clone').html();
+                $this.find('.tf-repeater-wrap').append(add_value).show(); 
+            });
+             
+        });
+        $(document).on('click', '.tf-repeater-icon-delete', function(){
+            $(this).closest('.tf-single-repeater').remove();
+        });
+        $(document).on('click', '.tf-repeater-icon-clone', function(){
+            alert(1);
+            let clone_value = $(this).closest('.tf-single-repeater').html();
+            $(this).closest('.tf-repeater-wrap').append('<div class="tf-single-repeater">'+clone_value+'</div>').show(); 
+        });
+
     });
 })(jQuery);
 
