@@ -65,7 +65,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 
 								<div class="tf-field tf-field-<?php echo esc_attr( $re_field['type'] ); ?>">
 									<label for="<?php echo esc_attr( $id ) ?>" class="tf-field-title"><?php echo esc_html( $re_field['title'] ) ?></label>
-									<?php if ( $re_field['subtitle'] ) : ?>
+									<?php if ( !empty($re_field['subtitle']) ) : ?>
 										<span class="tf-field-sub-title"><?php echo wp_kses_post( $re_field['subtitle'] ) ?></span>
 									<?php endif; ?>
 
@@ -80,7 +80,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 										}
 										?>
 									</div>
-									<p class="description"><?php echo wp_kses_post( $field['description'] ) ?></p>
+									<p class="description"><?php echo wp_kses_post( $re_field['description'] ) ?></p>
 								</div>
 
 						<?php 
@@ -131,7 +131,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 
 							<div class="tf-field tf-field-<?php echo esc_attr( $re_field['type'] ); ?>">
 								<label for="<?php echo esc_attr( $id ) ?>" class="tf-field-title"><?php echo esc_html( $re_field['title'] ) ?></label>
-								<?php if ( $re_field['subtitle'] ) : ?>
+								<?php if ( !empty($re_field['subtitle']) ) : ?>
 									<span class="tf-field-sub-title"><?php echo wp_kses_post( $re_field['subtitle'] ) ?></span>
 								<?php endif; ?>
 
@@ -139,14 +139,14 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 									<?php
 									$fieldClass = 'TF_' . $re_field['type'];
 									if ( class_exists( $fieldClass ) ) {
-										$_field = new $fieldClass( $re_field, $value, $this->settings_id, $parent_field );
+										$_field = new $fieldClass( $re_field, $value, '_____'.$this->settings_id, $parent_field );
 										$_field->render();
 									} else {
 										echo '<p>' . __( 'Field not found!', 'tourfic' ) . '</p>';
 									}
 									?>
 								</div>
-								<p class="description"><?php echo wp_kses_post( $field['description'] ) ?></p>
+								<p class="description"><?php echo wp_kses_post( $re_field['description'] ) ?></p>
 							</div>
 
 						<?php endforeach; ?> 
