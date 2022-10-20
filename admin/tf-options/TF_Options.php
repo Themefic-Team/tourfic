@@ -63,10 +63,12 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		 */
 		public function tf_options_enqueue_scripts() {
 			//Css
-			wp_enqueue_style( 'tf-fontawesome', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css', array(), TOURFIC );
-			wp_enqueue_style( 'tf-remixicon', '//cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css', array(), TOURFIC );
+			wp_enqueue_style( 'tf-fontawesome', TF_ADMIN_URL . 'tf-options/assets/css/all.min.css', array(), TOURFIC );
+			wp_enqueue_style( 'tf-remixicon', TF_ADMIN_URL . 'tf-options/assets/css/remixicon.css', array(), TOURFIC );
+			wp_enqueue_style( 'tf-flatpickr', TF_ADMIN_URL . 'tf-options/assets/css/flatpickr.min.css', array(), TOURFIC );
 			wp_enqueue_style( 'tf-options', TF_ADMIN_URL . 'tf-options/assets/css/tf-options.css', array(), TOURFIC );
 			//Js
+			wp_enqueue_script( 'tf-flatpickr', TF_ADMIN_URL . 'tf-options/assets/js/flatpickr.min.js', array( 'jquery' ), TOURFIC, true );
 			wp_enqueue_script( 'tf-options', TF_ADMIN_URL . 'tf-options/assets/js/tf-options.js', array( 'jquery' ), TOURFIC, true );
 		}
 

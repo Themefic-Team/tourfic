@@ -23,7 +23,7 @@ if ( class_exists( 'CSF' ) ) {
 		'title'  => __( 'Location', 'tourfic' ),
 		'fields' => array(
 			array(
-				'id'            => 'featuressdas',
+				'id'            => 'features',
 				'type'          => 'select',
 				'title'         => __( 'Select Features', 'tourfic' ),
 				'placeholder'   => __( 'Select', 'tourfic' ),

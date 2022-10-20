@@ -10,6 +10,52 @@
                 $('.tf-admin-tab .tf-tablinks').first().trigger('click').addClass('active');
             }
         });
+
+        /*
+        * Each date field initialize flatpickr
+         */
+        $('.tf-field-date').each(function () {
+            let $this = $(this),
+                dateField = $this.find('input.flatpickr'),
+                format = dateField.data('format'),
+                multiple = dateField.data('multiple');
+
+            if (dateField.length === 2) {
+                let startDate = $this.find('.tf-date-from input.flatpickr').flatpickr({
+                    dateFormat: format,
+                    onChange: function (selectedDates, dateStr, instance) {
+                        endDate.set('minDate', dateStr);
+                        console.log('start', selectedDates, dateStr);
+                    }
+                });
+                let endDate = $this.find('.tf-date-to input.flatpickr').flatpickr({
+                    dateFormat: format,
+                    onChange: function (selectedDates, dateStr, instance) {
+                        startDate.set('maxDate', dateStr);
+                    }
+                });
+            } else {
+                dateField.flatpickr({
+                    dateFormat: format,
+                    mode: multiple ? 'multiple' : 'single',
+                });
+            }
+        });
+
+        /*
+        * Each time field initialize flatpickr
+         */
+        $('.tf-field-time').each(function () {
+            let $this = $(this),
+                timeField = $this.find('input.flatpickr'),
+                format = timeField.data('format');
+
+            timeField.flatpickr({
+                enableTime: true,
+                noCalendar: true,
+                dateFormat: format,
+            });
+        });
     });
 })(jQuery);
 

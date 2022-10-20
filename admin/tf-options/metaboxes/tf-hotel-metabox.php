@@ -21,6 +21,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'id'      => 'email',
 					'label'   => 'Email',
 					'type'    => 'select',
+					'placeholder' => 'Email of the hotel',
 					'options' => array(
 						'1' => 'Option 1',
 						'2' => 'Option 2',
@@ -82,7 +83,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'title' => 'Awesome heading',
 					'content' => 'gsdgsdfgfg gsdfg d<a href="http://localhost:8080">dsfgsdfgsdf</a>',
 					'notice' => 'info',
-				),*/
+				),
 				//switch
 				array(
 					'id'          => 'switch',
@@ -93,7 +94,57 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'label_off'   => 'Disable',
 					'width'       => 100,
 					'default'     => true,
+				),*/
+				//date
+				/*array(
+					'id'          => 'datedsd',
+					'type'        => 'date',
+					'label'       => 'Date',
+					'placeholder' => 'Select a date',
+					'description' => 'This is a description',
+					'format'      => 'Y/m/d',
+					'range'       => true,
+					'label_from'  => 'Start Date',
+					'label_to'    => 'End Date'
 				),
+				array(
+					'id'          => 'date',
+					'type'        => 'date',
+					'label'       => 'Date',
+					'placeholder' => 'Select a date',
+					'description' => 'This is a description',
+					'format'      => 'Y/m/d',
+					'multiple'    => true,
+				),
+				array(
+					'id'          => 'date1',
+					'type'        => 'date',
+					'label'       => 'Date 1',
+					'placeholder' => 'Select a date',
+					'description' => 'This is a description',
+					'format'      => 'd/m/Y',
+				),
+				//time
+				array(
+					'id'          => 'time',
+					'type'        => 'time',
+					'label'       => 'Time',
+					'placeholder' => 'Select a time',
+					'description' => 'This is a description',
+					'format'      => 'h:i K',
+				),*/
+				array(
+					'id'          => 'features',
+					'type'        => 'select2',
+					'label'       => 'Features',
+					'placeholder' => 'Select a time',
+					'description' => 'This is a description',
+					'options'     => array(
+						'1' => 'Option 1',
+						'2' => 'Option 2',
+						'3' => 'Option 3',
+					),
+				)
 
 			),
 		),

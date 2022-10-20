@@ -2,8 +2,8 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'TF_select' ) ) {
-	class TF_select extends TF_Fields {
+if ( ! class_exists( 'TF_select2' ) ) {
+	class TF_select2 extends TF_Fields {
 
 		public function __construct( $field, $value = '', $settings_id = '' ) {
 			parent::__construct( $field, $value, $settings_id );
@@ -11,7 +11,7 @@ if ( ! class_exists( 'TF_select' ) ) {
 
 		public function render() {
 
-			echo '<select name="' . $this->field_name() . '" id="' . esc_attr( $this->field_name() ) . '" class="tf-select">';
+			echo '<select name="' . $this->field_name() . '" id="' . esc_attr( $this->field_name() ) . '" class="tf-select" multiple="multiple">';
 			if ( ! empty( $this->field['placeholder'] ) ) {
 				echo '<option value="">' . esc_html( $this->field['placeholder'] ) . '</option>';
 			}

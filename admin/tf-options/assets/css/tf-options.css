@@ -558,4 +558,109 @@
   opacity: 0;
 }
 
+.tf-field-date .tf-fieldset {
+  position: relative;
+}
+.tf-field-date .tf-fieldset .tf-date-range {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  gap: 30px;
+}
+.tf-field-date .tf-fieldset .tf-date-range .tf-date-from, .tf-field-date .tf-fieldset .tf-date-range .tf-date-to {
+  width: 100%;
+}
+.tf-field-date input {
+  width: 100%;
+  padding: 12px 8px 12px 12px;
+  border: none;
+  background: #F8F9FB;
+  border-radius: 4px;
+  height: 48px;
+  color: #363e4a;
+  font-size: 14px;
+}
+.tf-field-date input:focus {
+  background: #FFFFFF;
+  box-shadow: 0 0 0 2px #2979ff;
+  border-radius: 4px;
+}
+.tf-field-date input::-webkit-input-placeholder {
+  color: #a6b1bf;
+}
+.tf-field-date input::-ms-input-placeholder {
+  color: #a6b1bf;
+}
+.tf-field-date input input:-ms-input-placeholder {
+  color: #a6b1bf;
+}
+.tf-field-date input::-moz-placeholder {
+  opacity: 1;
+  color: #a6b1bf;
+}
+.tf-field-date input:-moz-placeholder {
+  opacity: 1;
+  color: #a6b1bf;
+}
+.tf-field-date input::placeholder {
+  color: #a6b1bf;
+}
+.tf-field-date i {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  color: #a6b1bf;
+  font-size: 16px;
+}
+
+.tf-field-time .tf-fieldset {
+  position: relative;
+}
+.tf-field-time input {
+  width: 100%;
+  padding: 12px 8px 12px 12px;
+  border: none;
+  background: #F8F9FB;
+  border-radius: 4px;
+  height: 48px;
+  color: #363e4a;
+  font-size: 14px;
+}
+.tf-field-time input:focus {
+  background: #FFFFFF;
+  box-shadow: 0 0 0 2px #2979ff;
+  border-radius: 4px;
+}
+.tf-field-time input::-webkit-input-placeholder {
+  color: #a6b1bf;
+}
+.tf-field-time input::-ms-input-placeholder {
+  color: #a6b1bf;
+}
+.tf-field-time input input:-ms-input-placeholder {
+  color: #a6b1bf;
+}
+.tf-field-time input::-moz-placeholder {
+  opacity: 1;
+  color: #a6b1bf;
+}
+.tf-field-time input:-moz-placeholder {
+  opacity: 1;
+  color: #a6b1bf;
+}
+.tf-field-time input::placeholder {
+  color: #a6b1bf;
+}
+.tf-field-time i {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  color: #a6b1bf;
+  font-size: 16px;
+}
+
 /*# sourceMappingURL=tf-options.css.map */
