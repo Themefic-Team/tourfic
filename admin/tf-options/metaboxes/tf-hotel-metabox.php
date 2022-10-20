@@ -60,6 +60,16 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					),
 					'inline'  => true,
 				),
+				array(
+					'id'          => 'image_gallery',
+					'title'       => 'Image Gallery',
+					'type'        => 'gallery'
+				),
+				array(
+					'id'          => 'image_gallery_tew',
+					'title'       => '2nd Image Gallery',
+					'type'        => 'gallery'
+				),
 
 			),
 		),

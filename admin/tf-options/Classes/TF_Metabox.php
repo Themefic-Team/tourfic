@@ -156,8 +156,6 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 
 			$tf_meta_box_value = array();
 			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array();
-			// var_dump($metabox_request);
-			// exit();
 			if ( ! empty( $metabox_request ) && ! empty( $this->metabox_sections ) ) {
 				foreach ( $this->metabox_sections as $section ) {
 
