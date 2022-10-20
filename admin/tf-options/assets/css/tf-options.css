@@ -247,6 +247,58 @@
   outline: none;
 }
 
+.tf-field-select2 .select2-container {
+  width: 100% !important;
+}
+.tf-field-select2 .select2-container .select2-selection {
+  width: 100%;
+  padding: 12px 8px 12px 12px;
+  border: none;
+  background-color: #F8F9FB;
+  border-radius: 4px;
+  height: 48px;
+  color: #363e4a;
+  font-size: 14px;
+}
+.tf-field-select2 .select2-container .select2-selection .select2-selection__choice {
+  background-color: #e1e5ea;
+  border: none;
+  margin-left: 4px;
+  margin-top: 0;
+  padding: 4px 20px 4px 4px !important;
+  color: #363e4a;
+}
+.tf-field-select2 .select2-container .select2-selection .select2-selection__choice:first-child {
+  margin-left: 0;
+}
+.tf-field-select2 .select2-container .select2-selection .select2-selection__choice__remove {
+  border-right: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  color: #363e4a;
+  font-size: 16px;
+  padding: 0;
+  position: absolute;
+  left: auto;
+  top: 2px;
+  right: 4px;
+}
+.tf-field-select2 .select2-container .select2-selection .select2-selection__clear {
+  margin-top: 0;
+}
+.tf-field-select2 .select2-container .select2-search--inline .select2-search__field {
+  margin-top: 0px;
+  margin-left: 5px;
+  padding: 0;
+  max-width: 100%;
+  resize: none;
+  height: 30px;
+  vertical-align: middle;
+  font-family: sans-serif;
+  overflow: hidden;
+  word-break: keep-all;
+}
+
 .tf-field-radio .tf-fieldset ul li {
   margin-bottom: 10px;
 }

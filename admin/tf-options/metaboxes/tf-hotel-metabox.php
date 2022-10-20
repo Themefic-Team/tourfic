@@ -139,13 +139,14 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'label'       => 'Features',
 					'placeholder' => 'Select a time',
 					'description' => 'This is a description',
+					'multiple'    => true,
 					'options'     => array(
 						'1' => 'Option 1',
 						'2' => 'Option 2',
 						'3' => 'Option 3',
 					),
 				),
-				//image
+				/*//image
 				array(
 					'id'          => 'image',
 					'type'        => 'image',
@@ -182,7 +183,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 						),
 
 					)
-				),
+				),*/
 
 			),
 		),

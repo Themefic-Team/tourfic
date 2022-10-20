@@ -57,11 +57,25 @@
             });
         });
 
+        /*
+        * Each select2 field initialize select2
+         */
+        $('.tf-field-select2').each(function () {
+            let $this = $(this),
+                selectField = $this.find('select.tf-select2'),
+                placeholder = selectField.data('placeholder');
 
-        $(".tf-repeater").each(function(){
+            selectField.select2({
+                placeholder: placeholder,
+                allowClear: true,
+            });
+        });
+
+
+        $(".tf-repeater").each(function () {
             let $this = $(this);
             let tf_repeater_add = $this.find('.tf-repeater-icon-add');
-            tf_repeater_add.on('click', function(){
+            tf_repeater_add.on('click', function () {
                 let add_value = $this.find('.tf-single-repeater-clone').html();
                 // console.log(add_value)
                 // add_value.find(':input').each(function (){
@@ -72,15 +86,15 @@
             });
 
         });
-        $(document).on('click', '.tf-repeater-icon-delete', function(){
+        $(document).on('click', '.tf-repeater-icon-delete', function () {
             $(this).closest('.tf-single-repeater').remove();
         });
-        $(document).on('click', '.tf-repeater-icon-clone', function(){
+        $(document).on('click', '.tf-repeater-icon-clone', function () {
             alert(1);
             let clone_value = $(this).closest('.tf-single-repeater').html();
-            $(this).closest('.tf-repeater-wrap').append('<div class="tf-single-repeater">'+clone_value+'</div>').show();
+            $(this).closest('.tf-repeater-wrap').append('<div class="tf-single-repeater">' + clone_value + '</div>').show();
         });
-        $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function(){
+        $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
             $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').toggleClass("hide")
         });
 
@@ -110,8 +124,8 @@ var frame, gframe;
         var fieldname = $(this).attr("tf-field-name");
         var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
-        $('input[name="'+fieldname+'"]').val('');
-        $('.'+tf_preview_class+'').html('');
+        $('input[name="' + fieldname + '"]').val('');
+        $('.' + tf_preview_class + '').html('');
 
     });
 
@@ -121,9 +135,9 @@ var frame, gframe;
         var fieldname = $(this).attr("tf-field-name");
         var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
-        $('input[name="'+fieldname+'"]').val('');
-        $('.tf-fieldset > .'+tf_preview_class+'').html('');
-        $('a.'+tf_preview_class+'').css("display","none");
+        $('input[name="' + fieldname + '"]').val('');
+        $('.tf-fieldset > .' + tf_preview_class + '').html('');
+        $('a.' + tf_preview_class + '').css("display", "none");
 
     });
 
@@ -131,7 +145,7 @@ var frame, gframe;
 
         // Single Image Upload
 
-        $('body').on('click', '.tf-media-upload', function(e) {
+        $('body').on('click', '.tf-media-upload', function (e) {
             var fieldname = $(this).attr("tf-field-name");
             var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
@@ -145,8 +159,8 @@ var frame, gframe;
             frame.on('select', function () {
 
                 var attachment = frame.state().get('selection').first().toJSON();
-                $('input[name="'+fieldname+'"]').val(attachment.url);
-                $('.'+tf_preview_class+'').html(`<div class="tf-image-close" tf-field-name='${fieldname}'>✖</div><img src='${attachment.sizes.thumbnail.url}' />`);
+                $('input[name="' + fieldname + '"]').val(attachment.url);
+                $('.' + tf_preview_class + '').html(`<div class="tf-image-close" tf-field-name='${fieldname}'>✖</div><img src='${attachment.sizes.thumbnail.url}' />`);
             });
             frame.open();
             return false;
@@ -154,7 +168,7 @@ var frame, gframe;
 
         // Gallery Image Upload
 
-        $('body').on('click', '.tf-gallery-upload', function(e) {
+        $('body').on('click', '.tf-gallery-upload', function (e) {
             var fieldname = $(this).attr("tf-field-name");
             var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
             gframe = wp.media({
@@ -163,22 +177,22 @@ var frame, gframe;
                     text: "Insert Gallery"
                 },
                 multiple: true,
-                editable:   true
+                editable: true
             });
 
             gframe.on('select', function () {
                 var image_ids = [];
                 var image_urls = [];
                 var attachments = gframe.state().get('selection').toJSON();
-                $('.tf-fieldset > .'+tf_preview_class+'').html('');
+                $('.tf-fieldset > .' + tf_preview_class + '').html('');
                 for (i in attachments) {
                     var attachment = attachments[i];
                     image_ids.push(attachment.id);
                     image_urls.push(attachment.sizes.thumbnail.url);
-                    $('.tf-fieldset > .'+tf_preview_class+'').append(`<img src='${attachment.sizes.thumbnail.url}' />`);
+                    $('.tf-fieldset > .' + tf_preview_class + '').append(`<img src='${attachment.sizes.thumbnail.url}' />`);
                 }
-                $('input[name="'+fieldname+'"]').val(image_ids.join(","));
-                $('a.'+tf_preview_class+'').css("display","inline-block");
+                $('input[name="' + fieldname + '"]').val(image_ids.join(","));
+                $('a.' + tf_preview_class + '').css("display", "inline-block");
             });
 
             gframe.open();
