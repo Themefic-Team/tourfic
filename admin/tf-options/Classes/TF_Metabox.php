@@ -169,28 +169,34 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			}
 
 			$tf_meta_box_value = array();
-			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array();
-
+			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array(); 
+			// tf_var_dump($metabox_request);
+			// wp_die();
 			if ( ! empty( $metabox_request ) && ! empty( $this->metabox_sections ) ) {
-				foreach ( $this->metabox_sections as $section ) {
-
+				foreach ( $this->metabox_sections as $section ) { 
 					if ( ! empty( $section['fields'] ) ) {
+						
 						foreach ( $section['fields'] as $field ) {
-
 							if ( ! empty( $field['id'] ) ) {
-								$data = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : '';
-
+								$data = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : ''; 
 								$fieldClass = 'TF_' . $field['type'];
-								if ( class_exists( $fieldClass ) ) {
+								if($fieldClass == 'TF_repeater'){ 
+									$data = serialize($data);
 									$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
 									$tf_meta_box_value[ $field['id'] ] = $_field->sanitize();
+								}else{
+									if ( class_exists( $fieldClass ) ) {
+										$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
+										$tf_meta_box_value[ $field['id'] ] = $_field->sanitize();
+									}
 								}
+								
 							}
 						}
 					}
 				}
 			}
-
+			
 			if ( ! empty( $tf_meta_box_value ) ) {
 				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
 			} else {

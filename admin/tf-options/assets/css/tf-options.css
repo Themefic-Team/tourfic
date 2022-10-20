@@ -725,4 +725,74 @@
   font-size: 16px;
 }
 
+.tf-repeater {
+  margin-bottom: 8px;
+}
+.tf-repeater .tf-single-repeater-clone {
+  display: none;
+}
+.tf-repeater .tf-repeater-header {
+  display: flex;
+  width: 100%;
+  padding: 8px 0;
+  background: #F0F2F4;
+  position: relative;
+  border-radius: 5px 5px 0px 0px;
+  cursor: pointer;
+}
+.tf-repeater .tf-repeater-header .tf-repeater-icon {
+  padding: 8px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 0;
+  display: inline-block;
+  line-height: 0.7;
+  border-radius: 4px;
+}
+.tf-repeater .tf-repeater-header .tf-repeater-icon-move:hover {
+  background-color: #d8e6ff;
+  transition: 0.4s;
+}
+.tf-repeater .tf-repeater-header .tf-repeater-icon-clone:hover {
+  background-color: #d8e6ff;
+  transition: 0.4s;
+}
+.tf-repeater .tf-repeater-header .tf-repeater-icon-delete:hover {
+  background-color: #fddcda;
+  transition: 0.4s;
+}
+.tf-repeater .tf-repeater-header .tf-repeater-title {
+  display: inline-block;
+  width: 100%;
+  margin-right: 120px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+.tf-repeater .tf-repeater-header .tf-repeater-icon-absulate {
+  position: absolute;
+  right: 8px;
+  top: 5px;
+}
+.tf-repeater .tf-repeater-content-wrap {
+  border: 1px solid #F0F2F4;
+}
+.tf-repeater .hide {
+  display: none;
+  visibility: hidden;
+}
+.tf-repeater .tf-repeater-add .tf-repeater-icon {
+  padding: 8px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 0;
+  display: inline-block;
+  line-height: 0.7;
+  background-color: #ebf2ff;
+  border-radius: 4px;
+}
+.tf-repeater .tf-single-repeater {
+  margin-bottom: 8px;
+}
+
 /*# sourceMappingURL=tf-options.css.map */

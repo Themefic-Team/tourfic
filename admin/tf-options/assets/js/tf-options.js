@@ -56,6 +56,34 @@
                 dateFormat: format,
             });
         });
+
+
+        $(".tf-repeater").each(function(){
+            let $this = $(this);
+            let tf_repeater_add = $this.find('.tf-repeater-icon-add');
+            tf_repeater_add.on('click', function(){
+                let add_value = $this.find('.tf-single-repeater-clone').html();
+                // console.log(add_value)
+                // add_value.find(':input').each(function (){
+
+                //     this.name = this.name.replace( '_____', '' );
+                // });
+                $this.find('.tf-repeater-wrap').append(add_value).show();
+            });
+
+        });
+        $(document).on('click', '.tf-repeater-icon-delete', function(){
+            $(this).closest('.tf-single-repeater').remove();
+        });
+        $(document).on('click', '.tf-repeater-icon-clone', function(){
+            alert(1);
+            let clone_value = $(this).closest('.tf-single-repeater').html();
+            $(this).closest('.tf-repeater-wrap').append('<div class="tf-single-repeater">'+clone_value+'</div>').show();
+        });
+        $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function(){
+            $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').toggleClass("hide")
+        });
+
     });
 })(jQuery);
 
@@ -81,10 +109,10 @@ var frame, gframe;
         e.preventDefault();
         var fieldname = $(this).attr("tf-field-name");
         var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
-    
+
         $('input[name="'+fieldname+'"]').val('');
         $('.'+tf_preview_class+'').html('');
-        
+
     });
 
     // Gallery Image remove
@@ -92,11 +120,11 @@ var frame, gframe;
         e.preventDefault();
         var fieldname = $(this).attr("tf-field-name");
         var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
-    
+
         $('input[name="'+fieldname+'"]').val('');
         $('.tf-fieldset > .'+tf_preview_class+'').html('');
         $('a.'+tf_preview_class+'').css("display","none");
-        
+
     });
 
     $(document).ready(function () {
@@ -106,7 +134,7 @@ var frame, gframe;
         $('body').on('click', '.tf-media-upload', function(e) {
             var fieldname = $(this).attr("tf-field-name");
             var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
-        
+
             frame = wp.media({
                 title: "Select Image",
                 button: {
@@ -115,7 +143,7 @@ var frame, gframe;
                 multiple: false
             });
             frame.on('select', function () {
-                
+
                 var attachment = frame.state().get('selection').first().toJSON();
                 $('input[name="'+fieldname+'"]').val(attachment.url);
                 $('.'+tf_preview_class+'').html(`<div class="tf-image-close" tf-field-name='${fieldname}'>✖</div><img src='${attachment.sizes.thumbnail.url}' />`);

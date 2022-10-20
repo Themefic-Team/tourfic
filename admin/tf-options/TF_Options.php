@@ -72,6 +72,8 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			wp_enqueue_script( 'tf-options', TF_ADMIN_URL . 'tf-options/assets/js/tf-options.js', array( 'jquery' ), TOURFIC, true );
 		}
 
+
+		
 	}
 }
 
