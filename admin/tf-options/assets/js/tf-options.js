@@ -57,18 +57,23 @@
             });
         });
 
-
+        // Repeater jquery
         $(".tf-repeater").each(function(){
             let $this = $(this);
             let tf_repeater_add = $this.find('.tf-repeater-icon-add');
             tf_repeater_add.on('click', function(){
-                let add_value = $this.find('.tf-single-repeater-clone').html();
+                let add_value = $this.find('.tf-single-repeater-clone .tf-single-repeater').clone();
+                let count = $this.find('.tf-repeater-wrap .tf-single-repeater').length;
+                // count =  count+1;
                 // console.log(add_value)
-                // add_value.find(':input').each(function (){
+                add_value.find(':input').each(function (){
 
-                //     this.name = this.name.replace( '_____', '' );
-                // });
-                $this.find('.tf-repeater-wrap').append(add_value).show();
+                    this.name = this.name.replace( '_____', '' ).replace('[0]', '['+ count +']');
+                    this.id = this.id.replace( '_____', '' ).replace('[0]', '['+ count +']');
+                });
+                let append = $this.find('.tf-repeater-wrap');
+                add_value.appendTo(append).show();
+                // $this.find('.tf-repeater-wrap').append(add_value).show();
             });
 
         });

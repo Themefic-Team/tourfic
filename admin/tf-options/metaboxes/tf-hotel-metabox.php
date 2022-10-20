@@ -183,6 +183,31 @@ TF_Metabox::metabox( 'tf_hotels', array(
 
 					)
 				),
+				array(
+					'id'          => 'repeater3',
+					'title'       => 'repeater',
+					'type'        => 'repeater',
+					'placeholder' => 'Zip of the hotel',
+					'description' => 'Zip of the hotel',
+					'fields' => array(
+
+						array(
+							'id'          => 'name',
+							'title'       => 'Name ',
+							'type'        => 'text',
+							'placeholder' => 'Address of the hotel',
+							'description' => 'Address of the hotel',
+						),
+						array(
+							'id'          => 'address',
+							'title'       => 'Address',
+							'type'        => 'text',
+							'placeholder' => 'Address of the hotel',
+							'description' => 'Address of the hotel',
+						),
+
+					)
+				),
 
 			),
 		),
