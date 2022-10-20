@@ -73,3 +73,88 @@ function openTab(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.target.className += " active";
 }
+
+var frame, gframe;
+(function ($) {
+    // Single Image remove
+    $(document).on("click", ".tf-image-close", function (e) {
+        e.preventDefault();
+        var fieldname = $(this).attr("tf-field-name");
+        var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
+    
+        $('input[name="'+fieldname+'"]').val('');
+        $('.'+tf_preview_class+'').html('');
+        
+    });
+
+    // Gallery Image remove
+    $(document).on("click", ".tf-gallery-remove", function (e) {
+        e.preventDefault();
+        var fieldname = $(this).attr("tf-field-name");
+        var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
+    
+        $('input[name="'+fieldname+'"]').val('');
+        $('.tf-fieldset > .'+tf_preview_class+'').html('');
+        $('a.'+tf_preview_class+'').css("display","none");
+        
+    });
+
+    $(document).ready(function () {
+
+        // Single Image Upload
+
+        $('body').on('click', '.tf-media-upload', function(e) {
+            var fieldname = $(this).attr("tf-field-name");
+            var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
+        
+            frame = wp.media({
+                title: "Select Image",
+                button: {
+                    text: "Insert Image"
+                },
+                multiple: false
+            });
+            frame.on('select', function () {
+                
+                var attachment = frame.state().get('selection').first().toJSON();
+                $('input[name="'+fieldname+'"]').val(attachment.url);
+                $('.'+tf_preview_class+'').html(`<div class="tf-image-close" tf-field-name='${fieldname}'>✖</div><img src='${attachment.sizes.thumbnail.url}' />`);
+            });
+            frame.open();
+            return false;
+        });
+
+        // Gallery Image Upload
+
+        $('body').on('click', '.tf-gallery-upload', function(e) {
+            var fieldname = $(this).attr("tf-field-name");
+            var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
+            gframe = wp.media({
+                title: "Select Gallery",
+                button: {
+                    text: "Insert Gallery"
+                },
+                multiple: true,
+                editable:   true
+            });
+
+            gframe.on('select', function () {
+                var image_ids = [];
+                var image_urls = [];
+                var attachments = gframe.state().get('selection').toJSON();
+                $('.tf-fieldset > .'+tf_preview_class+'').html('');
+                for (i in attachments) {
+                    var attachment = attachments[i];
+                    image_ids.push(attachment.id);
+                    image_urls.push(attachment.sizes.thumbnail.url);
+                    $('.tf-fieldset > .'+tf_preview_class+'').append(`<img src='${attachment.sizes.thumbnail.url}' />`);
+                }
+                $('input[name="'+fieldname+'"]').val(image_ids.join(","));
+                $('a.'+tf_preview_class+'').css("display","inline-block");
+            });
+
+            gframe.open();
+            return false;
+        });
+    });
+})(jQuery);

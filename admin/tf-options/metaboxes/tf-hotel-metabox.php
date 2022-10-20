@@ -144,7 +144,20 @@ TF_Metabox::metabox( 'tf_hotels', array(
 						'2' => 'Option 2',
 						'3' => 'Option 3',
 					),
-				)
+				),
+				//image
+				array(
+					'id'          => 'image',
+					'type'        => 'image',
+					'label'       => 'Features',
+					'description' => 'This is a description',
+				),
+				array(
+					'id'          => 'gallery',
+					'type'        => 'gallery',
+					'label'       => 'Features',
+					'description' => 'This is a description',
+				),
 
 			),
 		),
