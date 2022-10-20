@@ -8,9 +8,9 @@ TF_Metabox::metabox( 'tf_hotels', array(
 	'sections'  => array(
 		'section_2' => array(
 			'title'  => 'Section 1',
-			'icon' => 'ri-home-2-line',
+			'icon'   => 'ri-home-2-line',
 			'fields' => array(
-				array(
+				/*array(
 					'id'          => 'address',
 					'label'       => 'Address',
 					'type'        => 'text',
@@ -82,43 +82,24 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'title' => 'Awesome heading',
 					'content' => 'gsdgsdfgfg gsdfg d<a href="http://localhost:8080">dsfgsdfgsdf</a>',
 					'notice' => 'info',
-				),
-				array(
-					'type'  => 'notice',
-					'icon'  => 'ri-information-fill',
-					'title' => 'Awesome heading',
-					'content' => 'gsdgsdfgfg gsdfg d<a href="http://localhost:8080">dsfgsdfgsdf</a>',
-					'notice' => 'success',
-				),
-				array(
-					'type'  => 'notice',
-					'icon'  => 'ri-information-fill',
-					'title' => 'Awesome heading',
-					'content' => 'gsdgsdfgfg gsdfg d<a href="http://localhost:8080">dsfgsdfgsdf</a>',
-					'notice' => 'warning',
-				),
-				array(
-					'type'  => 'notice',
-					'icon'  => 'ri-information-fill',
-					'title' => 'Awesome heading',
-					'content' => 'gsdgsdfgfg gsdfg d<a href="http://localhost:8080">dsfgsdfgsdf</a>',
-					'notice' => 'danger',
-				),
+				),*/
 				//switch
-				/*array(
+				array(
 					'id'          => 'switch',
 					'type'        => 'switch',
-					'label'       => 'Switch',
-					'subtitle'    => 'Switch',
-					'description' => 'Switch',
+					'label'       => 'Want to disable?',
+					'description' => 'This is a description',
+					'label_on'    => 'Enable',
+					'label_off'   => 'Disable',
+					'width'       => 100,
 					'default'     => true,
-				),*/
+				),
 
 			),
 		),
 		'section_3' => array(
 			'title'  => 'Section 1',
-			'icon' => 'fa-solid fa-user-pen',
+			'icon'   => 'fa-solid fa-user-pen',
 			'fields' => array(
 				array(
 					'id'          => 'zip',

@@ -99,7 +99,8 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 							if ( ! empty( $section['fields'] ) ):
 								foreach ( $section['fields'] as $field ) :
 									$id = $this->metabox_id . '[' . $field['id'] . ']';
-									$value = isset( $tf_meta_box_value[ $field['id'] ] ) ? $tf_meta_box_value[ $field['id'] ] : '';
+                                    $default = isset( $field['default'] ) ? $field['default'] : '';
+									$value = isset( $tf_meta_box_value[ $field['id'] ] ) ? $tf_meta_box_value[ $field['id'] ] : $default;
 									?>
 
                                     <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?>">
