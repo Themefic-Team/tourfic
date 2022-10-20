@@ -167,8 +167,22 @@ var frame, gframe;
                 button: {
                     text: "Insert Gallery"
                 },
-                multiple: true,
-                editable:   true
+                multiple: 'add'
+            });
+
+            gframe.on('open',function() {
+                var selection = gframe.state().get('selection');
+                var ids_value = jQuery('input[name="'+fieldname+'"]').val();
+              
+                if(ids_value.length > 0) {
+                  var ids = ids_value.split(',');
+              
+                  ids.forEach(function(id) {
+                    attachment = wp.media.attachment(id);
+                    attachment.fetch();
+                    selection.add(attachment ? [attachment] : []);
+                  });
+                }
             });
 
             gframe.on('select', function () {
