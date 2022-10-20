@@ -466,6 +466,11 @@ Booking form mobile version
     display: none;
 }
 
+/* Hotel Grid Slider */
+.tf-hotel-grid .tf-slider-item {
+    width: 31%;
+    float: left;
+}
 
 /**************************************** RESPONSIVE **************************************/
 
