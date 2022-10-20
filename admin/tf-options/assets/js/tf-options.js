@@ -17,6 +17,11 @@
             let tf_repeater_add = $this.find('.tf-repeater-icon-add');
             tf_repeater_add.on('click', function(){
                 let add_value = $this.find('.tf-single-repeater-clone').html();
+                // console.log(add_value)
+                // add_value.find(':input').each(function (){
+
+                //     this.name = this.name.replace( '_____', '' );
+                // }); 
                 $this.find('.tf-repeater-wrap').append(add_value).show(); 
             });
              
