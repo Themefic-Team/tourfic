@@ -162,8 +162,7 @@ var frame, gframe;
                 button: {
                     text: "Insert Gallery"
                 },
-                multiple: true,
-                editable:   true
+                multiple: 'add'
             });
 
             gframe.on('select', function () {
