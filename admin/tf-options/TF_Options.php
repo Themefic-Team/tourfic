@@ -63,6 +63,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		 */
 		public function tf_options_enqueue_scripts() {
 			//Css
+			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_style( 'tf-fontawesome', TF_ADMIN_URL . 'tf-options/assets/css/all.min.css', array(), TOURFIC );
 			wp_enqueue_style( 'tf-remixicon', TF_ADMIN_URL . 'tf-options/assets/css/remixicon.css', array(), TOURFIC );
 			wp_enqueue_style( 'tf-select2', TF_ADMIN_URL . 'tf-options/assets/css/select2.min.css', array(), TOURFIC );
@@ -71,11 +72,44 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			//Js
 			wp_enqueue_script( 'tf-flatpickr', TF_ADMIN_URL . 'tf-options/assets/js/flatpickr.min.js', array( 'jquery' ), TOURFIC, true );
 			wp_enqueue_script( 'tf-select2', TF_ADMIN_URL . 'tf-options/assets/js/select2.min.js', array( 'jquery' ), TOURFIC, true );
-			wp_enqueue_script( 'tf-options', TF_ADMIN_URL . 'tf-options/assets/js/tf-options.js', array( 'jquery' ), TOURFIC, true );
+			wp_enqueue_script( 'wp-color-picker-alpha', TF_ADMIN_URL . 'tf-options/assets/js/wp-color-picker-alpha.js', array( 'jquery', 'wp-color-picker' ), TOURFIC, true );
+			wp_enqueue_script( 'tf-options', TF_ADMIN_URL . 'tf-options/assets/js/tf-options.js', array( 'jquery', 'wp-color-picker' ), TOURFIC, true );
 		}
 
 
-		
+		public function field($field, $value, $settings_id = '', $parent = '') {
+            if($field['type'] == 'repeater') {
+	            $id = ( ! empty( $settings_id ) ) ? $settings_id . '[' . $field['id'] . '][0]' . '[' . $field['id'] . ']' : $field['id'] . '[0]' . '[' . $field['id'] . ']';
+            } else {
+	            $id = $settings_id . '[' . $field['id'] . ']';
+            }
+			?>
+            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?>">
+				<?php if ( ! empty( $field['label'] ) ): ?>
+                    <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label"><?php echo esc_html( $field['label'] ) ?></label>
+				<?php endif; ?>
+				<?php if ( ! empty( $field['subtitle'] ) ) : ?>
+                    <span class="tf-field-sub-title"><?php echo wp_kses_post( $field['subtitle'] ) ?></span>
+				<?php endif; ?>
+
+                <div class="tf-fieldset">
+					<?php
+					$fieldClass = 'TF_' . $field['type'];
+					if ( class_exists( $fieldClass ) ) {
+						$_field = new $fieldClass( $field, $value, $settings_id, $parent);
+						$_field->render();
+					} else {
+						echo '<p>' . __( 'Field not found!', 'tourfic' ) . '</p>';
+					}
+					?>
+                </div>
+				<?php if ( ! empty( $field['description'] ) ): ?>
+                    <p class="description"><?php echo wp_kses_post( $field['description'] ) ?></p>
+				<?php endif; ?>
+            </div>
+			<?php
+		}
+
 	}
 }
 

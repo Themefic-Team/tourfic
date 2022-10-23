@@ -19,11 +19,24 @@ if ( ! class_exists( 'TF_select2' ) ) {
 			$placeholder = ( ! empty( $args['placeholder'] ) ) ? $args['placeholder'] : '';
 			$multiple    = ( ! empty( $args['multiple'] ) ) ? 'multiple' : '';
 
-			echo '<select name="' . $this->field_name() . '" id="' . esc_attr( $this->field_name() ) . '" class="tf-select2" data-placeholder="' . esc_attr( $placeholder ) . '" ' . $multiple . '>';
+			echo '<select name="' . $this->field_name() . '[]" id="' . esc_attr( $this->field_name() ) . '" class="tf-select2" data-placeholder="' . esc_attr( $placeholder ) . '" ' . $multiple . '>';
 			foreach ( $this->field['options'] as $key => $value ) {
-				echo '<option value="' . esc_attr( $key ) . '" ' . selected( $this->value, $key, false ) . '>' . esc_html( $value ) . '</option>';
+				$selected = ( is_array( $this->value ) && in_array( $key, $this->value ) ) ? 'selected' : '';
+				echo '<option value="' . esc_attr( $key ) . '" ' . $selected . '>' . esc_html( $value ) . '</option>';
 			}
 			echo '</select>';
+		}
+
+		//sanitize
+		public function sanitize() {
+			$value = $this->value;
+			if ( ! empty( $this->field['multiple'] ) ) {
+				$value = array_map( 'sanitize_text_field', $value );
+			} else {
+				$value = sanitize_text_field( $value );
+			}
+
+			return $value;
 		}
 
 	}
