@@ -67,10 +67,14 @@ while ( have_posts() ) : the_post();
 
 	$min_days = ! empty( $meta['min_days'] ) ? $meta['min_days'] : '';
 
-	$faqs        = $meta['faqs'] ? $meta['faqs'] : null;
-	$inc         = $meta['inc'] ? $meta['inc'] : null;
-	$exc         = $meta['exc'] ? $meta['exc'] : null;
-	$itineraries = $meta['itinerary'] ? $meta['itinerary'] : null;
+	$faqs            = $meta['faqs'] ? $meta['faqs'] : null;
+	$inc             = $meta['inc'] ? $meta['inc'] : null;
+	$exc             = $meta['exc'] ? $meta['exc'] : null;
+	$inc_icon        = ! empty( $meta['inc_icon'] ) ? $meta['inc_icon'] : null;
+	$exc_icon        = ! empty( $meta['exc_icon'] ) ? $meta['exc_icon'] : null;
+	$custom_inc_icon = ! empty( $inc_icon ) ? "custom-inc-icon" : '';
+	$custom_exc_icon = ! empty( $exc_icon ) ? "custom-exc-icon" : '';
+	$itineraries     = $meta['itinerary'] ? $meta['itinerary'] : null;
 	//continuous tour
 	$share_text = get_the_title();
 	$share_link = esc_url( home_url( "/?p=" ) . $post_id );
@@ -295,28 +299,28 @@ while ( have_posts() ) : the_post();
                                 <div class="tf-single-square-block first">
                                     <i class="fas fa-clock"></i>
                                     <h4><?php echo __( 'Duration', 'tourfic' ); ?></h4>
-                                    <p><?php echo __( $tour_duration, 'tourfic' ) ?></p>
+                                    <p><?php echo esc_html( $tour_duration ); ?></p>
                                 </div>
 							<?php } ?>
 							<?php if ( $tour_type ) { ?>
                                 <div class="tf-single-square-block second">
                                     <i class="fas fa-map"></i>
                                     <h4><?php echo __( 'Tour Type', 'tourfic' ); ?></h4>
-                                    <p><?php echo ucfirst( __( $tour_type, 'tourfic' ) ) ?></p>
+                                    <p><?php echo ucfirst( esc_html( $tour_type ) ) ?></p>
                                 </div>
 							<?php } ?>
 							<?php if ( $group_size ) { ?>
                                 <div class="tf-single-square-block third">
                                     <i class="fas fa-users"></i>
                                     <h4><?php echo __( 'Group Size', 'tourfic' ); ?></h4>
-                                    <p><?php echo __( $group_size, 'tourfic' ) ?></p>
+                                    <p><?php echo esc_html( $group_size ) ?></p>
                                 </div>
 							<?php } ?>
 							<?php if ( $language ) { ?>
                                 <div class="tf-single-square-block fourth">
                                     <i class="fas fa-language"></i>
                                     <h4><?php echo __( 'Language', 'tourfic' ); ?></h4>
-                                    <p><?php echo __( $language, 'tourfic' ) ?></p>
+                                    <p><?php echo esc_html( $language ) ?></p>
                                 </div>
 							<?php } ?>
                         </div>
@@ -337,9 +341,9 @@ while ( have_posts() ) : the_post();
                                 <h2 class="section-heading"><?php _e( 'Highlights', 'tourfic' ); ?></h2>
 								<?php echo $highlights; ?>
                             </div>
-							<?php if ( !empty( $meta['hightlights_thumbnail']['url'] ) ): ?>
+							<?php if ( ! empty( $meta['hightlights_thumbnail']['url'] ) ): ?>
                                 <div class="tf-highlight-image">
-                                    <?php echo wp_get_attachment_image($meta['hightlights_thumbnail']['id'], 'tf-thumb-480-320'); ?>
+									<?php echo wp_get_attachment_image( $meta['hightlights_thumbnail']['id'], 'tf-thumb-480-320' ); ?>
                                 </div>
 							<?php endif; ?>
                         </div>
@@ -350,29 +354,32 @@ while ( have_posts() ) : the_post();
         <!-- Highlight section end -->
 
         <!-- Include-Exclude section Start -->
-		<?php if ( $inc || $exc ) : ?>
-            <div class="tf-inc-exc-wrapper sp-70" style="background-image: url(<?php echo esc_url( $meta['include-exclude-bg']['url'] ); ?>);">
+		<?php
+		if ( $inc || $exc ) :
+			$inc_exc_bg = ! empty( $meta['include-exclude-bg']['url'] ) ? $meta['include-exclude-bg']['url'] : '';
+			?>
+            <div class="tf-inc-exc-wrapper sp-70" style="background-image: url(<?php echo esc_url( $inc_exc_bg ) ?>);">
                 <div class="tf-container">
                     <div class="tf-inc-exc-content">
 						<?php if ( $inc ) { ?>
-                            <div class="tf-include-section">
+                            <div class="tf-include-section <?php echo esc_attr( $custom_inc_icon ); ?>">
                                 <h4><?php _e( 'Included', 'tourfic' ); ?></h4>
                                 <ul>
 									<?php
 									foreach ( $inc as $key => $val ) {
-										echo "<li>" . $val['inc'] . "</li>";
+										echo "<li><i class='" . esc_attr( $inc_icon ) . "'></i>" . $val['inc'] . "</li>";
 									}
 									?>
                                 </ul>
                             </div>
 						<?php } ?>
 						<?php if ( $exc ) { ?>
-                            <div class="tf-exclude-section">
+                            <div class="tf-exclude-section <?php echo esc_attr( $custom_exc_icon ); ?>">
                                 <h4><?php _e( 'Excluded', 'tourfic' ); ?></h4>
                                 <ul>
 									<?php
 									foreach ( $exc as $key => $val ) {
-										echo "<li>" . $val['exc'] . "</li>";
+										echo "<li><i class='" . esc_attr( $exc_icon ) . "'></i>" . $val['exc'] . "</li>";
 									}
 									?>
                                 </ul>
@@ -385,38 +392,46 @@ while ( have_posts() ) : the_post();
         <!-- Include-Exclude section End -->
 
         <!-- Travel Itinerary section Start -->
-		<?php if ( $itineraries ) { ?>
-            <div class="tf-travel-itinerary-wrapper gray-wrap sp-50">
-                <div class="tf-container">
-                    <div class="tf-travel-itinerary-content">
-                        <h2 class="section-heading"><?php _e( "Travel Itinerary", 'tourfic' ); ?></h2>
-                        <div class="tf-travel-itinerary-items-wrapper">
-							<?php foreach ( $itineraries as $itinerary ) { ?>
-                                <div id="tf-accordion-wrapper">
-                                    <div class="tf-accordion-head">
-                                        <div class="tf-travel-time">
-                                            <span><?php echo esc_html( $itinerary['time'] ) ?></span>
+		<?php
+		if ( defined( 'TF_PRO' ) ) {
+			do_action( 'after_itinerary_builder', $itineraries );
+		} else {
+			?>
+            <!-- Travel Itinerary section Start -->
+			<?php if ( $itineraries ) { ?>
+                <div class="tf-travel-itinerary-wrapper gray-wrap sp-50">
+                    <div class="tf-container">
+                        <div class="tf-travel-itinerary-content">
+                            <h2 class="section-heading"><?php _e( "Travel Itinerary", 'tourfic' ); ?></h2>
+                            <div class="tf-travel-itinerary-items-wrapper">
+								<?php foreach ( $itineraries as $itinerary ) { ?>
+                                    <div id="tf-accordion-wrapper">
+                                        <div class="tf-accordion-head">
+                                            <div class="tf-travel-time">
+                                                <span><?php echo esc_html( $itinerary['time'] ) ?></span>
+                                            </div>
+                                            <h4><?php echo esc_html( $itinerary['title'] ); ?></h4>
+                                            <i class="fas fa-angle-down arrow"></i>
                                         </div>
-                                        <h4><?php echo esc_html( $itinerary['title'] ); ?></h4>
-                                        <i class="fas fa-angle-down arrow"></i>
-                                    </div>
-                                    <div class="tf-accordion-content">
-                                        <div class="tf-travel-desc">
-											<?php if ( $itinerary['image'] ) {
-												echo '<img src="' . esc_url( $itinerary['image'] ) . '">';
-											} ?>
-                                            <div class="trav-cont">
-                                                <p><?php _e( $itinerary['desc'] ); ?></p>
+                                        <div class="tf-accordion-content">
+                                            <div class="tf-travel-desc">
+												<?php if ( $itinerary['image'] ) {
+													echo '<img src="' . esc_url( $itinerary['image'] ) . '">';
+												} ?>
+                                                <div class="trav-cont">
+                                                    <p><?php _e( $itinerary['desc'] ); ?></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-							<?php } ?>
+								<?php } ?>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-		<?php } ?>
+
+			<?php }
+		} ?>
         <!-- Travel Itinerary section End -->
 
         <!-- Map Section Start -->
@@ -458,7 +473,7 @@ while ( have_posts() ) : the_post();
                                         <i class="fas fa-angle-down arrow"></i>
                                     </div>
                                     <div class="tf-faq-desc">
-                                        <p><?php echo esc_html( $faq['desc'] ); ?></p>
+                                        <?php echo wp_kses_post( $faq['desc'] ); ?>
                                     </div>
                                 </div>
 							<?php endforeach; ?>
@@ -523,9 +538,7 @@ while ( have_posts() ) : the_post();
                         <div class="tf-slider-content-wrapper">
                             <div class="tf-suggestion-sec-head">
                                 <h2 class="section-heading"><?php echo __( 'You might also like', 'tourfic' ) ?></h2>
-                                <p><?php echo __( 'Travel is my life. Since 1999, I’ve been traveling around the world nonstop.
-                        If you also love travel, you’re in the right place!
-                        ', 'tourfic' ) ?></p>
+                                <p><?php echo __( 'Travel is my life. Since 1999, I’ve been traveling around the world nonstop. If you also love travel, you’re in the right place!', 'tourfic' ) ?></p>
                             </div>
 
                             <div class="tf-slider-items-wrapper">

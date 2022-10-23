@@ -15,7 +15,7 @@ if ( class_exists( 'CSF' ) ) {
 		'theme'           => 'dark',
 		'ajax_save'       => false,
 		// footer
-		'footer_text'     => '<a class="document-button" href="https://themefic.com/docs/tourfic/" target="_blank">Documentation</a>',
+		'footer_text'     => '<a class="document-button" href="https://themefic.com/docs/tourfic/" target="_blank">' . __( 'Documentation', 'tourfic' ) . '</a>',
 		'footer_credit'   => __( '<em>Enjoyed <strong>Tourfic</strong>? Please leave us a <a style="color:#e9570a;" href="https://wordpress.org/support/plugin/tourfic/reviews/?filter=5/#new-post" target="_blank">★★★★★</a> rating. We really appreciate your support!</em>', 'tourfic' ),
 	) );
 
@@ -48,6 +48,13 @@ if ( class_exists( 'CSF' ) ) {
 	} else {
 		tf_file_missing( TF_OPTIONS_PATH . 'global/parts/hotel/single.php' );
 	}
+
+	// Room Config
+    if ( file_exists( TF_OPTIONS_PATH . 'global/parts/hotel/room-config.php' ) ) {
+        require_once TF_OPTIONS_PATH . 'global/parts/hotel/room-config.php';
+    } else {
+        tf_file_missing(TF_OPTIONS_PATH . 'global/parts/hotel/room-config.php');
+    }
 
 	/**
 	 * Tour Parent

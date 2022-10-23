@@ -408,7 +408,8 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 		$place_value = $_GET[ $place_key ] ?? '';
 
 		$taxonomy   = $post_type == 'tf_hotel' ? 'hotel_location' : 'tour_destination';
-		$place_name = ! empty( $place_value ) ? get_term_by( 'slug', $place_value, $taxonomy )->name : '';
+		// $place_name = ! empty( $place_value ) ? get_term_by( 'slug', $place_value, $taxonomy )->name : '';
+		$place_name = ! empty( $place_value ) ? $place_value : '';
 
 		$room = $_GET['room'] ?? 0;
 	}
@@ -516,6 +517,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 
                 $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
                     enableTime: false,
+                    minDate: "today",
                     mode: "range",
                     dateFormat: "Y/m/d",
                     onReady: function (selectedDates, dateStr, instance) {
@@ -635,6 +637,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 
                 $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
                     enableTime: false,
+                    minDate: "today",
                     mode: "range",
                     dateFormat: "Y/m/d",
                     onChange: function (selectedDates, dateStr, instance) {
@@ -700,6 +703,12 @@ function tf_search_result_ajax_sidebar() {
 	} else {
 		$period = '';
 	}
+	if ( $check_in_out ) {
+		$form_check_in      = substr( $check_in_out, 0, 10 );
+		$form_check_in_stt  = strtotime( $form_check_in );
+		$form_check_out     = substr( $check_in_out, 13, 10 );
+		$form_check_out_stt = strtotime( $form_check_out );
+	}
 
 	// Properties args
 	$args = array(
@@ -707,7 +716,6 @@ function tf_search_result_ajax_sidebar() {
 		'post_status'    => 'publish',
 		'posts_per_page' => - 1,
 	);
-
 
 	if ( $search ) {
 
@@ -814,7 +822,18 @@ function tf_search_result_ajax_sidebar() {
 			$loop->the_post();
 
 			if ( $posttype == 'tf_hotel' ) {
+				$meta = get_post_meta( get_the_ID(), 'tf_hotel', true );
+				$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
 
+				$total_adults = tf_hotel_total_room_adult_child( get_the_ID(), 'adult' );
+				$total_child  = tf_hotel_total_room_adult_child( get_the_ID(), 'child' );
+				$total_room   = tf_hotel_total_room_adult_child( get_the_ID(), 'room' );
+				$room_matched = tf_hotel_room_matched_by_date($rooms, $form_check_in_stt, $form_check_out_stt);
+
+				if ( $room > $total_room || $adults > $total_adults || $child > $total_child || !$room_matched ) {
+                    $not_found[] = 1;
+                    continue;
+                }
 				if ( empty( $check_in_out ) ) {
 
 					$not_found[] = 0;

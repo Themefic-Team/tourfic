@@ -27,10 +27,10 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_params.ajax_url,
+                url: tf_admin_params.ajax_url,
                 data: data,
                 beforeSend: function (data) {
-                    notyf.success('Deleting old review fields...')
+                    notyf.success(tf_admin_params.deleting_old_review_fields);
                 },
                 success: function (data) {
                     notyf.success(data.data);
@@ -65,7 +65,7 @@
                 url: ajaxurl,
                 data: data,
                 beforeSend: function (data) {
-                    notyf.success('Deleting order ids...')
+                    notyf.success(tf_admin_params.deleting_room_order_ids);
                 },
                 success: function (data) {
                     notyf.success(data.data);
@@ -87,7 +87,21 @@
             if( $('textarea[name="tf_tours_option[text_location]"]').val().length === 0 ) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
-                notyf.error('Tour Location is a required field!');
+                notyf.error(tf_admin_params.tour_location_required);
+                return false;
+            }
+        });
+
+        /**
+         * Hotel location required
+         * 
+         * show notyf error
+         */
+         $(document).on('click', '.post-type-tf_hotel #publish, .post-type-tf_hotel #save-post', function(e) {
+            if( $('textarea[name="tf_hotel[address]"]').val().length === 0 ) {
+                e.preventDefault;
+                e.stopImmediatePropagation();
+                notyf.error(tf_admin_params.hotel_location_required);
                 return false;
             }
         });
@@ -100,10 +114,10 @@
         
         $(document).on('click', '.post-type-tf_tours #publish, .post-type-tf_tours #save-post', function(e) {
             if( $('#set-post-thumbnail').find('img').size() == 0) {
-            e.preventDefault;
-            e.stopImmediatePropagation();
-            notyf.error('Tour image is a required!');
-            return false;
+                e.preventDefault;
+                e.stopImmediatePropagation();
+                notyf.error(tf_admin_params.tour_feature_image_required);
+                return false;
             }
         });
 
@@ -111,7 +125,7 @@
             if( $('#set-post-thumbnail').find('img').size() == 0) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
-                notyf.error('Hotel image is a required!');
+                notyf.error(tf_admin_params.hotel_feature_image_required);
                 return false;
             }
         });
@@ -127,26 +141,24 @@
             var current = $(this);
             var plugin_slug = current.attr("data-plugin-slug");
 
-            current.addClass('updating-message').text('Installing...');
+            current.addClass('updating-message').text(tf_admin_params.installing);
 
             var data = {
                 action: 'tf_ajax_install_plugin',
-                _ajax_nonce: tf_params.tf_nonce,
+                _ajax_nonce: tf_admin_params.tf_nonce,
                 slug: plugin_slug,
             };
 
-            jQuery.post( tf_params.ajax_url, data, function(response) {
-                //console.log(response);
-                //console.log(response.data.activateUrl);
+            jQuery.post( tf_admin_params.ajax_url, data, function(response) {
                 current.removeClass('updating-message');
-                current.addClass('updated-message').text('Installed!');
+                current.addClass('updated-message').text(tf_admin_params.installed);
                 current.attr("href", response.data.activateUrl);
             })
             .fail(function() {
-                current.removeClass('updating-message').text('Failed!');
+                current.removeClass('updating-message').text(tf_admin_params.install_failed);
             })
             .always(function() {
-                current.removeClass('install-now updated-message').addClass('activate-now button-primary').text('Activating...');
+                current.removeClass('install-now updated-message').addClass('activate-now button-primary').text(tf_admin_params.activating);
                 current.unbind(e);
                 current[0].click();
             });

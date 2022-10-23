@@ -42,8 +42,8 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         $fancy_cdn = !empty(tfopt( 'fnybx_cdn' )) ? tfopt( 'fnybx_cdn' ) : false;
         $slick_cdn = !empty(tfopt( 'slick_cdn' )) ? tfopt( 'slick_cdn' ) : false;
         $fa_cdn = !empty(tfopt( 'fa_cdn' )) ? tfopt( 'fa_cdn' ) : false;
-        $min_css = !empty(tfopt( 'css_min' )) ? '.min' : '';
-		$min_js = !empty(tfopt( 'js_min' )) ? '.min' : '';
+        $min_css = (defined( 'TF_PRO' ) && !empty(tfopt( 'css_min' ))) ? '.min' : '';
+		$min_js = (defined( 'TF_PRO' ) && !empty(tfopt( 'js_min' ))) ? '.min' : '';
 
         //wp_enqueue_style( 'tourfic-styles', TF_ASSETS_URL . 'css/old/tourfic-styles.css', null, '' );
         //wp_enqueue_style( 'tf-style', TF_ASSETS_URL . 'css/old/style.css', null, '' );
@@ -55,6 +55,26 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         }
         if ( get_post_type() == 'tf_tours' ){
             wp_enqueue_style( 'tf-tour-style', TF_ASSETS_URL . 'css/tour' . $min_css . '.css', null, '' );
+
+            if(defined( 'TF_PRO' )){
+                wp_enqueue_script( 'Chart', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js', array( 'jquery' ), '2.6.0', true );
+                $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+                $itineraries = $meta['itinerary'] ? $meta['itinerary'] : null;
+                $itinerarayday = [];
+                $itineraraymeter = [];
+                if( $itineraries ) {
+                    foreach( $itineraries as $itinerary ){
+                        $itinerarayday[] = !empty($itinerary['time']) ? $itinerary['time'] : '';
+                        $itineraraymeter[] = !empty($itinerary['altitude']) ? intval($itinerary['altitude']) : '';
+                    }
+                }
+                $showxaxis = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-x-axis']) ? tfopt( 'itinerary-builder-setings' )['itinerary-x-axis'] : false;
+                $showyaxis = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-y-axis']) ? tfopt( 'itinerary-builder-setings' )['itinerary-y-axis'] : false;
+                $showlinegraph = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-line-graph']) ? tfopt( 'itinerary-builder-setings' )['itinerary-line-graph'] : false;
+                $showitinerarychart = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-chart']) ? tfopt( 'itinerary-builder-setings' )['itinerary-chart'] : false;
+                $showitinerarystatus = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-status']) ? tfopt( 'itinerary-builder-setings' )['itinerary-status'] : false;
+                $elevvationmode = !empty(tfopt( 'itinerary-builder-setings' )['elevtion_type']) && tfopt( 'itinerary-builder-setings' )['elevtion_type']=="Feet" ? "Feet" : "Meter";
+            }
         }
         wp_enqueue_style( 'tf-search-style', TF_ASSETS_URL . 'css/search-result.css', null, '' );
         wp_enqueue_style( 'tf-shortcode-style', TF_ASSETS_URL . 'css/shortcode.css', null, '' );
@@ -155,6 +175,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         $tfhotel_min_max = array(
             'posts_per_page'=> -1,
             'post_type'     => 'tf_hotel',
+            'post_status' => 'publish'
         );
         $tfhotel_min_max_query = new WP_Query( $tfhotel_min_max ); 
         $tfhotel_min_maxprices = array();
@@ -194,10 +215,26 @@ if ( !function_exists('tf_enqueue_scripts') ) {
             endwhile;
 
         endif; wp_reset_query(); 
-        if( !empty( $tfhotel_min_maxprices ) ){
-            $hotel_max_price = max($tfhotel_min_maxprices);
-            $hotel_min_price = min($tfhotel_min_maxprices);
+        if( !empty( $tfhotel_min_maxprices ) && count($tfhotel_min_maxprices) > 1 ){
+            $hotel_max_price_val = max($tfhotel_min_maxprices);
+            $hotel_min_price_val = min($tfhotel_min_maxprices);
+            if( $hotel_max_price_val==$hotel_min_price_val ){
+                $hotel_max_price = max($tfhotel_min_maxprices);
+                $hotel_min_price = 1;
+            }else{
+                $hotel_max_price = max($tfhotel_min_maxprices);
+                $hotel_min_price = min($tfhotel_min_maxprices);
+            }
         }
+        if( !empty( $tfhotel_min_maxprices ) && count($tfhotel_min_maxprices) == 1 ){
+            $hotel_max_price = max($tfhotel_min_maxprices);
+            $hotel_min_price = 1;
+        }
+        if( empty( $tfhotel_min_maxprices ) ){
+            $hotel_max_price = 0;
+            $hotel_min_price = 0;
+        }
+
         /**
          * Tour Destination
          */ 
@@ -218,6 +255,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         $tftours_min_max = array(
             'posts_per_page'=> -1,
             'post_type'     => 'tf_tours',
+            'post_status' => 'publish'
         );
         $tftours_min_max_query = new WP_Query( $tftours_min_max ); 
         $tftours_min_maxprices = array();
@@ -242,9 +280,24 @@ if ( !function_exists('tf_enqueue_scripts') ) {
             endwhile;
 
         endif; wp_reset_query(); 
-        if( !empty( $tftours_min_maxprices ) ){
+        if( !empty( $tftours_min_maxprices ) && count($tftours_min_maxprices) > 1 ){
+            $tour_max_price_val = max($tftours_min_maxprices);
+            $tour_min_price_val = min($tftours_min_maxprices);
+            if( $tour_max_price_val==$tour_min_price_val ){
+                $tour_max_price = max($tftours_min_maxprices);
+                $tour_min_price = 1;
+            }else{
+                $tour_max_price = max($tftours_min_maxprices);
+                $tour_min_price = min($tftours_min_maxprices);
+            }
+        }
+        if( !empty( $tftours_min_maxprices ) && count($tftours_min_maxprices) == 1 ){
             $tour_max_price = max($tftours_min_maxprices);
-            $tour_min_price = min($tftours_min_maxprices);
+            $tour_min_price = 1;
+        }
+        if( empty( $tftours_min_maxprices ) ){
+            $tour_max_price = 0;
+            $tour_min_price = 0;
         }
 
 
@@ -272,12 +325,21 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'infant' => __('Infant', 'tourfic'),
                 'room' => __('Room', 'tourfic'),
                 'sending_ques' => __('Sending your question...', 'tourfic'),
+                'no_found' => __('Not Found', 'tourfic'),
                 'tf_hotellocationlists' => isset($tf_hotellocationlists) ? $tf_hotellocationlists : '',
                 'tf_hotel_max_price' => isset($hotel_max_price) ? $hotel_max_price : '',
                 'tf_hotel_min_price' => isset($hotel_min_price) ? $hotel_min_price : '',
                 'tf_tourdestinationlists' => isset($tf_tourdestinationlists) ? $tf_tourdestinationlists : '',
                 'tf_tour_max_price' => isset($tour_max_price) ? $tour_max_price : '',
-                'tf_tour_min_price' => isset($tour_min_price) ? $tour_min_price : ''
+                'tf_tour_min_price' => isset($tour_min_price) ? $tour_min_price : '',
+                'itinerarayday' => isset($itinerarayday) ? $itinerarayday : '',
+                'itineraraymeter' => isset($itineraraymeter) ? $itineraraymeter : '',
+                'showxaxis' => isset($showxaxis) ? $showxaxis : '',
+                'showyaxis' => isset($showyaxis) ? $showyaxis : '',
+                'showlinegraph' => isset($showlinegraph) ? $showlinegraph : '',
+                'elevvationmode' => isset($elevvationmode) ? $elevvationmode : '',
+                'showitinerarychart' => isset($showitinerarychart) ? $showitinerarychart : '',
+                'showitinerarystatus' => isset($showitinerarystatus) ? $showitinerarystatus : ''
             )
         );
         //wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/old/responsive.css', '', TOURFIC );

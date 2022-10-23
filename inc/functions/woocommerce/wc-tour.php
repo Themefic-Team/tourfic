@@ -237,7 +237,7 @@ function tf_tours_booking_function() {
 
 	}
 
-	if ( $tour_type == 'continuous' ) {
+	if ( defined( 'TF_PRO' ) && $tour_type == 'continuous' ) {
 
 		if ( $custom_avail == false && ! empty( $meta['allowed_time'] ) && empty( $tour_time ) ) {
 			$response['errors'][] = __( 'Please select time', 'tourfic' );
@@ -288,7 +288,9 @@ function tf_tours_booking_function() {
 		$tf_tours_data['tf_tours_data']['end_date']         = $end_date;
 		$tf_tours_data['tf_tours_data']['tour_date']        = $tour_date;
 		$tf_tours_data['tf_tours_data']['tour_extra_total'] = $tour_extra_total;
-		$tf_tours_data['tf_tours_data']['tour_extra_title'] = $tour_extra_title;
+		if($tour_extra_title){
+			$tf_tours_data['tf_tours_data']['tour_extra_title'] = $tour_extra_title. " × " . wc_price( $tour_extra_total );
+		}
 		# Discount informations
 		$discount_type    = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 		$discounted_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
@@ -451,7 +453,7 @@ function tf_tours_cart_item_custom_data( $item_data, $cart_item ) {
 	// Tour extras
 	if ( $tour_extra ) {
 		$item_data[] = array(
-			'key'   => __( 'Tour Extra: ', 'tourfic' ),
+			'key'   => __( 'Tour Extra', 'tourfic' ),
 			'value' => $tour_extra,
 		);
 	}

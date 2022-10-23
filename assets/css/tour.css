@@ -137,7 +137,7 @@
 
 .tf-tour-booking-wrap.tf-tours-fixed {
     width: 100%;
-    z-index: 999;
+    z-index: 9999;
     background-color: #003162eb;
     border-top: 4px solid #FB5A3B;
     padding: 8px 0;
@@ -382,9 +382,12 @@
 }
 
 .tf-inc-exc-content ul li {
-    padding-left: 30px;
+    padding-left: 0px;
     position: relative;
     margin-left: 0;
+}
+.tf-inc-exc-content ul li i{
+    margin-right: 20px;
 }
 
 .tf-include-section ul li:before {
@@ -405,6 +408,17 @@
     top: 8px;
 }
 
+.tf-inc-exc-content ul i.fas {
+    float: left;
+    vertical-align: middle;
+    margin-top: 6px;
+}   
+.tf-include-section.custom-inc-icon ul li:before {
+    display: none;
+}
+.tf-exclude-section.custom-exc-icon ul li:before {
+    display: none;
+}
 /**************** Travel Itinerary Block ****************/
 
 .tf-travel-itinerary-content h2 {
@@ -499,6 +513,7 @@
 .tf-accordion-head h4:hover {
     color: #003162;
 }
+
 
 /**************** MAP Block ****************/
 

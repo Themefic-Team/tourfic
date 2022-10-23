@@ -41,8 +41,8 @@ CSF::createSection( $prefix, array(
 			'title'    => __( 'Select Map', 'tourfic' ),
 			'subtitle' => __( $badge_pro, 'tourfic' ),
 			'options'  => array(
-				'default'   => 'Default Map',
-				'googlemap' => 'Google Map',
+				'default'   => __( 'Default Map', 'tourfic' ),
+				'googlemap' => __( 'Google Map', 'tourfic' ),
 			),
 			'default'  => 'default'
 		),

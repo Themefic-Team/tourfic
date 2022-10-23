@@ -9,7 +9,7 @@
             }
             if (defined( 'TF_PRO' ) && $tour_room_details_gall){ 
             ?>	
-            <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'] : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: underline;">
+            <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: underline;">
                 <?php echo esc_html( $room['title'] ); ?>
             </a></h3>
 
@@ -51,7 +51,7 @@
         <?php }?>
 
         <div class="room-features">
-            <div class="tf-room-title"><h4><?php esc_html_e( 'Amenities', 'tourfic' );?></h4></div>
+            <div class="tf-room-title"><h4><?php _e( 'Amenities', 'tourfic' );?></h4></div>
             <ul class="room-feature-list">
 
                 <?php 
@@ -109,14 +109,14 @@
         <div class="tf-price-column">
             <span class="tf-price"><?php echo wc_price( $price ); ?></span>
             <?php if ( $pricing_by == '1' ) { ?>
-                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  esc_html_e( 'per night', 'tourfic' );?></div>
+                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  _e( 'per night', 'tourfic' );?></div>
             <?php } else {?>
-                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : esc_html_e( 'per person/night', 'tourfic' );?></div>
+                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );?></div>
             <?php }?>
 
             <?php if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount)) { ?>
                 <span class="tf-price tf-deposit-amount-<?php echo $room_id ?>" style="display: none;"><?php echo wc_price( $deposit_amount ); ?></span>
-                <div class="price-per-night tf-deposit-amount-<?php echo $room_id ?> " style="display: none;">need to be deposited</div>
+                <div class="price-per-night tf-deposit-amount-<?php echo $room_id ?> " style="display: none;"><?php _e('need to be deposited', 'tourfic') ?></div>
             <?php } ?>
         </div>
     </td>
@@ -149,6 +149,7 @@
                 <input type="hidden" name="location" value="<?php echo $first_location_name; ?>">
                 <input type="hidden" name="adult" value="<?php echo $form_adult; ?>">
                 <input type="hidden" name="child" value="<?php echo $form_child; ?>">
+                <input type="hidden" name="children_ages" value="<?php echo $children_ages; ?>">
                 <input type="hidden" name="check_in_date" value="<?php echo $form_check_in; ?>">
                 <input type="hidden" name="check_out_date" value="<?php echo $form_check_out; ?>">
                 <input type="hidden" id="hotel_roomid">
@@ -171,7 +172,7 @@
                             <p><?php _e(tfopt('deposit-subtitle', 'Select the services you want to add to your booking.'), 'tourfic');?></p>
                         </div>
                         <div class="tf-hotel-service">
-                            <label><?php _e('Pickup & Dropoff Service', 'tourfic');?></label>
+                            <label><?php _e('Pickup & Drop-off Service', 'tourfic');?></label>
                             <select id="airport-service" name="airport_service">
                                 <option value="none"><?php _e('No Service', 'tourfic');?></option>
                                 <?php 
@@ -182,10 +183,10 @@
                                     _e('Pickup Service', 'tourfic');
                                 }
                                 if("dropoff"==$single_service_type){
-                                    _e('Dropoff Service', 'tourfic');
+                                    _e('Drop-off Service', 'tourfic');
                                 }
                                 if("both"==$single_service_type){
-                                    _e('Pickup & Dropoff Service', 'tourfic');
+                                    _e('Pickup & Drop-off Service', 'tourfic');
                                 }
                                 ?>
                                 </option>

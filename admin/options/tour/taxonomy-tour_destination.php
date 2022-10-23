@@ -1,29 +1,29 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-if( class_exists( 'CSF' ) ) {
+if ( class_exists( 'CSF' ) ) {
 
-  $prefix = 'tour_destination';
+	$prefix = 'tour_destination';
 
-  // Create hotel_feature options
-  CSF::createTaxonomyOptions( $prefix, array(
-    'taxonomy'  => 'tour_destination',
-    'data_type' => 'serialize',
-  ) );
+	// Create hotel_feature options
+	CSF::createTaxonomyOptions( $prefix, array(
+		'taxonomy'  => 'tour_destination',
+		'data_type' => 'serialize',
+	) );
 
-  // Create a section
-  CSF::createSection( $prefix, array(
-    'fields' => array(
+	// Create a section
+	CSF::createSection( $prefix, array(
+		'fields' => array(
 
-        array(
-            'id'      => 'image',
-            'type'    => 'media',
-            'title'   => 'Upload destination photo',
-            'library' => 'image',
-          ),
+			array(
+				'id'      => 'image',
+				'type'    => 'media',
+				'title'   => __( 'Upload destination photo', 'tourfic' ),
+				'library' => 'image',
+			),
 
-    )
-  ) );
+		)
+	) );
 
 }
 
