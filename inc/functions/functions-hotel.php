@@ -1127,7 +1127,12 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                             </div>
                         </div>
                         <!-- Children age input field based on children number -->
-						<?php $children_age = tfopt( 'children_age_limit' ); ?>
+						<?php 
+						
+						$children_age = tfopt( 'children_age_limit' ); 
+						$children_age_status = tfopt( 'enable_child_age_limit' ); 
+						if( !empty($children_age_status) && $children_age_status=="1" ){
+						?>
                         <div class="tf-children-age-fields">
                             <div class="tf-children-age" id="tf-age-field-0" style="display:none">
                                 <label for="children-age"><?php __( 'Children 0 Age:', 'tourfic' ) ?></label>
@@ -1139,6 +1144,7 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                                 </select>
                             </div>
                         </div>
+						<?php } ?>
                     </div>
                 </div>
 

@@ -8,8 +8,8 @@
  * Text Domain:     tourfic
  * Domain Path:     /lang/
  * Version:         2.8.9
- * Tested up to: 6.0.2
- * WC tested up to: 6.9.4
+ * Tested up to: 6.0.3
+ * WC tested up to: 7.0.0
  * Requires PHP: 7.2
  * Elementor tested up to: 3.7.7
  */
@@ -73,6 +73,7 @@ if ( !function_exists('tf_enqueue_main_admin_scripts') ) {
                 'deleting_old_review_fields' => __('Deleting old review fields...', 'tourfic'),
                 'deleting_room_order_ids' => __('Deleting order ids...', 'tourfic'),
                 'tour_location_required' => __('Tour Location is a required field!', 'tourfic'),
+                'hotel_location_required' => __('Hotel Location is a required field!', 'tourfic'),
                 'tour_feature_image_required' => __('Tour image is a required!', 'tourfic'),
                 'hotel_feature_image_required' => __('Hotel image is a required!', 'tourfic'),
                 'installing' => __( 'Installing...', 'tourfic' ),

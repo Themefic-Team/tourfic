@@ -1261,7 +1261,9 @@
             grid: false,
             theme: "dark",
         };
-        $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
+        if(tf_params.tf_hotel_min_price!=0 && tf_params.tf_hotel_max_price!=0){
+            $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
+        }
 
         // Tour Min and Max Range
         let tf_tour_range_options = {
@@ -1277,7 +1279,9 @@
             grid: false,
             theme: "dark",
         };
-        $('.tf-tour-filter-range').alRangeSlider(tf_tour_range_options);
+        if(tf_params.tf_tour_min_price!=0 && tf_params.tf_tour_max_price!=0){
+            $('.tf-tour-filter-range').alRangeSlider(tf_tour_range_options);
+        }
 
         // Hotel Location
         var availablehotellocation = tf_params.tf_hotellocationlists;
