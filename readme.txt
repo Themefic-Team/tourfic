@@ -353,7 +353,6 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 = 2.8.9 -  23 October 2022 =
 
-* Fixed: Highlight warning issue.
 * Added: Advanced itinerary builder (Pro)
 * Added: Age limnit in hotels (Pro)
 * Added: Show prices in hotel search/archive page.
@@ -362,6 +361,9 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 * Added: Include/exclude icon change option in backend.
 * Added: Map icon change option in backend.
 * Fixed: Translation issues.
+* Fixed: User login issue.
+* Fixed: Search issue fixed.
+* Fixed: Location icon added in the search field.
 * Updated: Compatibility check with WooCommerce 7.0.0
 * Updated: Compatibility check with WordPress 6.0.3
 
