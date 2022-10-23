@@ -669,5 +669,5 @@ Added: Feature image required hotel and tours
 
 == Upgrade Notice ==
 
-= 2.8.5 =
-This is an important & big release. Please make sure you BACKUP your website before updating. You need to update the plugin to get next level updates & features of Tourfic. After you update the plugin, please go to "Tourfic Settings" and click the "Save Button". You can then go ahead and start editing.
+= 2.8.9 =
+This is an important & critical release. Please make sure you BACKUP your website before updating. You need to update the plugin to get next level updates & features of Tourfic. After you update the plugin, please go to "Tourfic Settings" and click the "Save Button". You can then go ahead and start editing.As changes in language strings are done in this version so please BACKUP your language files as well.
