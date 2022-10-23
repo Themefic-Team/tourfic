@@ -107,7 +107,7 @@ class TF_Tour_Grid_Slider extends \Elementor\Widget_Base {
 		$this->add_control(
 			'destinations',
 			[
-				'label'       => esc_html__( 'destinations', 'tourfic' ),
+				'label'       => esc_html__( 'Destinations', 'tourfic' ),
 				'type'        => \Elementor\Controls_Manager::SELECT2,
 				'description' => __( 'Choose destinations.', 'tourfic' ),
 				'options'     => $term_ids,
@@ -118,9 +118,9 @@ class TF_Tour_Grid_Slider extends \Elementor\Widget_Base {
 		$this->add_control(
 			'count',
 			[
-				'label'       => esc_html__( 'Total Hotels', 'tourfic' ),
+				'label'       => esc_html__( 'Total Tours', 'tourfic' ),
 				'type'        => \Elementor\Controls_Manager::NUMBER,
-				'description' => __( 'Number of total hotel. Min 3.', 'tourfic' ),
+				'description' => __( 'Number of total tours. Min 3.', 'tourfic' ),
 				'min'         => 1,
 				'default'     => 3,
 			]
@@ -128,9 +128,9 @@ class TF_Tour_Grid_Slider extends \Elementor\Widget_Base {
 		$this->add_control(
 			'style',
 			[
-				'label'       => esc_html__( 'Total Hotels', 'tourfic' ),
+				'label'       => esc_html__( 'Total Tours', 'tourfic' ),
 				'type'        => \Elementor\Controls_Manager::SELECT,
-				'description' => __( 'Hotel layout style', 'tourfic' ),
+				'description' => __( 'Tour layout style', 'tourfic' ),
 				'options'     => array(
 					'grid'   => __( 'Grid', 'tourfic' ),
 					'slider' => __( 'Slider', 'tourfic' ),

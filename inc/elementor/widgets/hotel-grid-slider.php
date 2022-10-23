@@ -223,7 +223,7 @@ $this->start_controls_section(
 		if(is_array($locations)){
 			$locations = implode(',',$locations);
 		}
-        echo do_shortcode('[tf_tour title="'.$title.'" subtitle="'.$subtitle.'" locations="'.$locations.'" style="'.$style.'" count="' .$count. '"]');
+        echo do_shortcode('[tf_hotel title="'.$title.'" subtitle="'.$subtitle.'" locations="'.$locations.'" style="'.$style.'" count="' .$count. '"]');
 
 
 	}

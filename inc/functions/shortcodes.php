@@ -797,10 +797,11 @@ function tf_hotels_grid_slider($atts, $content = null){
 					$rooms = !empty($meta['room']) ? $meta['room'] : '';
 					//get and store all the prices for each room
 					$room_price = [];
-					foreach( $rooms as $room ){
-						$room_price[] = $room['price'];
-					}
-
+					if($rooms){
+						foreach( $rooms as $room ){
+							$room_price[] = $room['price'];
+						}
+					}	
 					?>
                     <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
                         <div class="tf-slider-content">
@@ -862,9 +863,9 @@ function tf_tours_grid_slider($atts, $content = null){
 		'order'          => 'DESC',
 		'posts_per_page' => $count,
 	);
-
-	$destinations = explode(',',$destinations);
+	//Check if destination selected/choosen
 	if( !empty( $destinations )){
+		$destinations = explode(',',$destinations);
 		$args['tax_query'] = array(
 			'relation' => 'AND',
 			array(
