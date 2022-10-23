@@ -71,6 +71,23 @@
             });
         });
 
+        /*
+        * Each color field initialize wpColorPicker
+         */
+        $('.tf-field-color').each(function () {
+            let $this = $(this),
+                colorField = $this.find('input.tf-color');
+
+            colorField.wpColorPicker({
+                palettes: true,
+                controls: {
+                    horiz: 's', // horizontal defaults to saturation
+                    vert: 'l', // vertical defaults to lightness
+                    strip: 'h' // right strip defaults to hue
+                }
+            });
+        });
+
 
         // Repeater jquery
         $(".tf-repeater").each(function(){

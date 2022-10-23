@@ -147,7 +147,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					),
 				),
 				//image
-				array(
+				/*array(
 					'id'          => 'image',
 					'type'        => 'image',
 					'label'       => 'Features',
@@ -183,8 +183,21 @@ TF_Metabox::metabox( 'tf_hotels', array(
 						),
 
 					)
-				),
+				),*/
 
+				//color
+				array(
+					'id'          => 'color',
+					'type'        => 'color',
+					'label'       => 'Color',
+					'description' => 'This is a description',
+				),
+				array(
+					'id'          => 'color2',
+					'type'        => 'color',
+					'label'       => 'Color2',
+					'description' => 'This is a description',
+				),
 			),
 		),
 		'section_3' => array(

@@ -146,9 +146,8 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			}
 
 			$tf_meta_box_value = array();
-			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array(); 
-			// tf_var_dump($metabox_request);
-			// wp_die();
+			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array();
+
 			if ( ! empty( $metabox_request ) && ! empty( $this->metabox_sections ) ) {
 				foreach ( $this->metabox_sections as $section ) { 
 					if ( ! empty( $section['fields'] ) ) {
@@ -173,8 +172,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 					}
 				}
 			}
-//			tf_var_dump($tf_meta_box_value);
-//            die();
+
 			if ( ! empty( $tf_meta_box_value ) ) {
 				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
 			} else {
