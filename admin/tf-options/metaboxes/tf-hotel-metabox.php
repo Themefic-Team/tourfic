@@ -146,7 +146,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 						'3' => 'Option 3',
 					),
 				),
-				/*//image
+				//image
 				array(
 					'id'          => 'image',
 					'type'        => 'image',
@@ -161,7 +161,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 				),
 				array(
 					'id'          => 'repeater2',
-					'title'       => 'repeater',
+					'label'       => 'repeater',
 					'type'        => 'repeater',
 					'placeholder' => 'Zip of the hotel',
 					'description' => 'Zip of the hotel',
@@ -183,7 +183,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 						),
 
 					)
-				),*/
+				),
 
 			),
 		),

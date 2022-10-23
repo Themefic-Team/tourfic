@@ -391,7 +391,8 @@ if ( ! class_exists( 'CSF_Metabox' ) ) {
 			$data = apply_filters( "csf_{$this->unique}_save", $data, $post_id, $this );
 
 			do_action( "csf_{$this->unique}_save_before", $data, $post_id, $this );
-
+//tf_var_dump($data);
+//die();
 			if ( empty( $data ) || ! empty( $request['_reset'] ) ) {
 
 				if ( $this->args['data_type'] !== 'serialize' ) {

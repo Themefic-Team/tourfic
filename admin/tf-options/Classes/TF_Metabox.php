@@ -98,36 +98,13 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 							<?php
 							if ( ! empty( $section['fields'] ) ):
 								foreach ( $section['fields'] as $field ) :
-									$id = $this->metabox_id . '[' . $field['id'] . ']';
-                                    $default = isset( $field['default'] ) ? $field['default'] : '';
+
+									$default = isset( $field['default'] ) ? $field['default'] : '';
 									$value = isset( $tf_meta_box_value[ $field['id'] ] ) ? $tf_meta_box_value[ $field['id'] ] : $default;
-									?>
 
-                                    <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?>">
-										<?php if ( ! empty( $field['label'] ) ): ?>
-                                            <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label"><?php echo esc_html( $field['label'] ) ?></label>
-										<?php endif; ?>
-										<?php if ( ! empty( $field['subtitle'] ) ) : ?>
-                                            <span class="tf-field-sub-title"><?php echo wp_kses_post( $field['subtitle'] ) ?></span>
-										<?php endif; ?>
-
-                                        <div class="tf-fieldset">
-											<?php
-											$fieldClass = 'TF_' . $field['type'];
-											if ( class_exists( $fieldClass ) ) {
-												$_field = new $fieldClass( $field, $value, $this->metabox_id );
-												$_field->render();
-											} else {
-												echo '<p>' . __( 'Field not found!', 'tourfic' ) . '</p>';
-											}
-											?>
-                                        </div>
-										<?php if ( ! empty( $field['description'] ) ): ?>
-                                            <p class="description"><?php echo wp_kses_post( $field['description'] ) ?></p>
-										<?php endif; ?>
-                                    </div>
-
-								<?php endforeach;
+                                    $tf_option = new TF_Options();
+                                    $tf_option->field( $field, $value, $this->metabox_id );
+								endforeach;
 							endif; ?>
 
                         </div>
@@ -196,7 +173,8 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 					}
 				}
 			}
-			
+//			tf_var_dump($tf_meta_box_value);
+//            die();
 			if ( ! empty( $tf_meta_box_value ) ) {
 				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
 			} else {
