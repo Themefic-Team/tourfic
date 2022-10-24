@@ -213,7 +213,13 @@ TF_Metabox::metabox( 'tf_hotels', array(
 				),
 				array(
 					'id'          => 'googlemap',
-					'title'       => 'Textarea 2',
+					'label'       => 'Textarea 2',
+					'type'        => 'map',
+					'description' => 'room details hotel',
+				),
+				array(
+					'id'          => 'googlemap-testing',
+					'label'       => 'Textarea 2',
 					'type'        => 'map',
 					'description' => 'room details hotel',
 				),

@@ -147,7 +147,6 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 
 			$tf_meta_box_value = array();
 			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array();
-
 			if ( ! empty( $metabox_request ) && ! empty( $this->metabox_sections ) ) {
 				foreach ( $this->metabox_sections as $section ) { 
 					if ( ! empty( $section['fields'] ) ) {
@@ -156,7 +155,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 							if ( ! empty( $field['id'] ) ) {
 								$data = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : ''; 
 								$fieldClass = 'TF_' . $field['type'];
-								if($fieldClass == 'TF_repeater'){ 
+								if($fieldClass == 'TF_repeater' || $fieldClass == 'TF_map'){ 
 									$data = serialize($data);
 									$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
 									$tf_meta_box_value[ $field['id'] ] = $_field->sanitize();
