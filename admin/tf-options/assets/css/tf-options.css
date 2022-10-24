@@ -983,6 +983,34 @@ body.tf-modal-open:after {
   margin-bottom: 8px;
 }
 
+.tf-field-map .tf--map-search {
+  width: 100%;
+}
+.tf-field-map .tf--map-search input {
+  width: 100%;
+}
+.tf-field-map .tf--map-osm-wrap {
+  border: 1px solid #ddd;
+  padding: 5px;
+  margin-top: 10px;
+}
+.tf-field-map .tf--map-osm-wrap .tf--map-osm {
+  height: 250px !important;
+}
+.tf-field-map .tf--map-inputs {
+  display: flex;
+  justify-content: space-between;
+}
+.tf-field-map .tf--map-inputs .tf--map-input {
+  width: 48%;
+}
+.tf-field-map .tf--map-inputs .tf--map-input label {
+  width: 100%;
+}
+.tf-field-map .tf--map-inputs .tf--map-input input {
+  width: 100%;
+}
+
 .tf-field-color .tf-fieldset ul.tf-inline li {
   display: inline-flex;
   -webkit-flex-direction: column;

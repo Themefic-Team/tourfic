@@ -225,6 +225,18 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'placeholder' => 'Zip of the hotel',
 					'description' => 'Zip of the hotel',
 				),
+				array(
+					'id'          => 'googlemap',
+					'label'       => 'Textarea 2',
+					'type'        => 'map',
+					'description' => 'room details hotel',
+				),
+				array(
+					'id'          => 'googlemap-testing',
+					'label'       => 'Textarea 2',
+					'type'        => 'map',
+					'description' => 'room details hotel',
+				),
 			),
 		),
 	),
