@@ -1,3 +1,139 @@
+/*
+Button
+*/
+.tf-admin-btn {
+  display: inline-flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 7px 22px;
+  border: 1px solid #2979ff;
+  border-radius: 4px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+}
+.tf-admin-btn i {
+  margin-right: 8px;
+  font-size: 18px;
+}
+.tf-admin-btn.tf-btn-secondary {
+  background-color: #2979ff;
+  border-color: #2979ff;
+  color: #fff;
+}
+.tf-admin-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/*
+Custom Modal
+*/
+.tf-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  outline: 0;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  -o-transform: scale(0.7);
+  transform: scale(0.7);
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.tf-modal.tf-modal-show {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+.tf-modal .tf-modal-dialog {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: calc(100% - 40px);
+  max-width: 100%;
+  margin: 20px auto;
+  position: relative;
+  pointer-events: none;
+}
+@media only screen and (min-width: 576px) {
+  .tf-modal .tf-modal-dialog {
+    min-height: calc(100% - 40px);
+  }
+}
+.tf-modal .tf-modal-content {
+  position: relative;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 80%;
+  max-width: 1080px;
+  pointer-events: auto;
+  background-color: #f5f8ff;
+  outline: 0;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding: 30px;
+  overflow: hidden;
+}
+.tf-modal .tf-modal-close {
+  color: #003162;
+  cursor: pointer;
+  font-size: 22px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.tf-modal .tf-modal-close:hover {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+body.tf-modal-open {
+  overflow: hidden;
+}
+body.tf-modal-open .tf-modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+body.tf-modal-open:after {
+  content: "";
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.4);
+}
+
 /*========================================
    06. Animation CSS
 ========================================*/
@@ -845,6 +981,239 @@
 }
 .tf-repeater .tf-single-repeater {
   margin-bottom: 8px;
+}
+
+.tf-field-color .tf-fieldset ul.tf-inline li {
+  display: inline-flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-right: 20px;
+}
+.tf-field-color .tf-fieldset ul.tf-inline li label {
+  color: #8997A9;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.tf-field-icon .tf-icon-preview {
+  width: 120px;
+  height: 120px;
+  background: #f0f2f4;
+  border-radius: 8px;
+  text-align: center;
+  line-height: 125px;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+.tf-field-icon .tf-icon-preview .tf-icon-preview-wrap {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+.tf-field-icon .tf-icon-preview .tf-icon-preview-wrap i {
+  font-size: 40px;
+  color: #607085;
+}
+.tf-field-icon .tf-icon-preview .remove-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: #FFFFFF;
+  box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.08);
+  border-radius: 8px;
+  color: #f44336;
+  font-size: 14px;
+  text-align: center;
+  line-height: 20px;
+  cursor: pointer;
+}
+.tf-field-icon .tf-icon-preview.tf-hide {
+  display: none;
+}
+
+#tf-icon-modal .tf-modal-content .tf-modal-header {
+  margin-bottom: 20px;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-search {
+  text-align: center;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-search input.tf-icon-search-input {
+  width: 100%;
+  max-width: 720px;
+  padding: 12px 8px 12px 12px;
+  border: none;
+  background: #fff;
+  border-radius: 4px;
+  height: 48px;
+  color: #363e4a;
+  font-size: 14px;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-search input.tf-icon-search-input:focus {
+  background: #FFFFFF;
+  box-shadow: 0 0 0 2px #2979ff;
+  border-radius: 4px;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-search input.tf-icon-search-input::-webkit-input-placeholder {
+  color: #a6b1bf;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-search input.tf-icon-search-input::-ms-input-placeholder {
+  color: #a6b1bf;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-search input.tf-icon-search-input input:-ms-input-placeholder {
+  color: #a6b1bf;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-search input.tf-icon-search-input::-moz-placeholder {
+  opacity: 1;
+  color: #a6b1bf;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-search input.tf-icon-search-input:-moz-placeholder {
+  opacity: 1;
+  color: #a6b1bf;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-search input.tf-icon-search-input::placeholder {
+  color: #a6b1bf;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  margin: 0 -30px;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper ul.tf-icon-tab-list {
+  -webkit-flex: 0 0 200px;
+  -ms-flex: 0 0 200px;
+  flex: 0 0 200px;
+  margin: 0;
+  border-right: 1px solid #e1e5ea;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper ul.tf-icon-tab-list li {
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #363e4a;
+  font-weight: 500;
+  text-transform: capitalize;
+  padding: 12px 24px;
+  transition: all 0.3s ease;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper ul.tf-icon-tab-list li i {
+  margin-right: 8px;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper ul.tf-icon-tab-list li.active {
+  background: #2979ff;
+  color: #fff;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content {
+  flex-grow: 1;
+  padding: 0 24px 24px;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane {
+  display: none;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane.active {
+  display: block;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-gap: 12px;
+  max-height: calc(100vh - 300px);
+  overflow-y: auto;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list li {
+  background: #fff;
+  font-size: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  padding-bottom: 100%;
+  margin-bottom: 0;
+  color: #607085;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list li .tf-icon-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list li .tf-icon-inner span.check-icon {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  height: 16px;
+  width: 16px;
+  line-height: 16px;
+  font-size: 12px;
+  text-align: center;
+  border: 1px solid #8997a9;
+  border-radius: 100%;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list li .tf-icon-inner span.check-icon i {
+  color: #fff;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list li:hover {
+  box-shadow: -2px 2px 24px rgba(107, 125, 148, 0.2);
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list li:hover .tf-icon-inner span.check-icon {
+  opacity: 1;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list li.active {
+  box-shadow: -2px 2px 24px rgba(107, 125, 148, 0.2);
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list li.active .tf-icon-inner span.check-icon {
+  border-color: #2979ff;
+  background-color: #2979ff;
+  opacity: 1;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list li.active .tf-icon-inner span.check-icon i {
+  opacity: 1;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list::-webkit-scrollbar {
+  width: 10px;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list::-webkit-scrollbar-track {
+  background: #e1e5ea;
+  border-radius: 10px;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list::-webkit-scrollbar-thumb {
+  background: #76a9ff;
+  border-radius: 10px;
+}
+#tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list::-webkit-scrollbar-thumb:hover {
+  background: #2979ff;
+}
+#tf-icon-modal .tf-modal-content .tf-modal-footer {
+  padding: 24px;
+  margin: 0 -30px -30px;
+  background: #FFFFFF;
+  border-top: 1px solid #e1e5ea;
+  box-shadow: 0px -4px 16px rgba(137, 151, 169, 0.2);
+  text-align: right;
+}
+#tf-icon-modal .tf-modal-content .tf-modal-footer .tf-admin-btn {
+  padding: 10px 24px;
 }
 
 /*# sourceMappingURL=tf-options.css.map */

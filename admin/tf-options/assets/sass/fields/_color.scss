@@ -1,0 +1,20 @@
+.tf-field-color {
+
+  .tf-fieldset {
+
+    ul.tf-inline {
+      li {
+        display: inline-flex;
+        @include flex-direction(column);
+        margin-right: 20px;
+
+        label{
+          color: #8997A9;
+          font-size: 14px;
+          font-weight: 500;
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+}

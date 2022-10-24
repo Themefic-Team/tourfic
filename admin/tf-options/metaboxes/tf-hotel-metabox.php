@@ -186,16 +186,30 @@ TF_Metabox::metabox( 'tf_hotels', array(
 				),*/
 
 				//color
-				array(
+				/*array(
 					'id'          => 'color',
 					'type'        => 'color',
 					'label'       => 'Color',
 					'description' => 'This is a description',
 				),
 				array(
-					'id'          => 'color2',
+					'id'          => 'colorss',
 					'type'        => 'color',
 					'label'       => 'Color2',
+					'multiple'    => true,
+					'inline'      => true,
+					'colors'      => array(
+						'title' => 'Title',
+						'subtitle' => 'Subtitle',
+						'content' => 'Content',
+					),
+				),*/
+				//icon
+				array(
+					'id'          => 'icon',
+					'type'        => 'icon',
+					'label'       => 'Icon',
+					'default'     => 'fa fa-home',
 					'description' => 'This is a description',
 				),
 			),

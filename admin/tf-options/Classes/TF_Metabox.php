@@ -153,18 +153,16 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 					if ( ! empty( $section['fields'] ) ) {
 						
 						foreach ( $section['fields'] as $field ) {
+
 							if ( ! empty( $field['id'] ) ) {
-								$data = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : ''; 
+								$data = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : '';
+
 								$fieldClass = 'TF_' . $field['type'];
-								if($fieldClass == 'TF_repeater'){ 
-									$data = serialize($data);
+								$data = $fieldClass == 'TF_repeater' || $fieldClass == 'TF_color' ? serialize($data) : $data ;
+
+								if ( class_exists( $fieldClass ) ) {
 									$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
 									$tf_meta_box_value[ $field['id'] ] = $_field->sanitize();
-								}else{
-									if ( class_exists( $fieldClass ) ) {
-										$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
-										$tf_meta_box_value[ $field['id'] ] = $_field->sanitize();
-									}
 								}
 								
 							}
