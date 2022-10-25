@@ -92,14 +92,16 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			wp_enqueue_style( 'tf-options', TF_ADMIN_URL . 'tf-options/assets/css/tf-options.css', array(), TOURFIC );
 
             //Js
-			wp_enqueue_script( 'tf-flatpickr', TF_ADMIN_URL . 'tf-options/assets/js/flatpickr.min.js', array( 'jquery' ), TOURFIC, true );
-			wp_enqueue_script( 'tf-select2', TF_ADMIN_URL . 'tf-options/assets/js/select2.min.js', array( 'jquery' ), TOURFIC, true );
-			wp_enqueue_script( 'wp-color-picker-alpha', TF_ADMIN_URL . 'tf-options/assets/js/wp-color-picker-alpha.js', array( 'jquery', 'wp-color-picker' ), TOURFIC, true );
-			wp_enqueue_script( 'tf-options', TF_ADMIN_URL . 'tf-options/assets/js/tf-options.js', array( 'jquery', 'wp-color-picker' ), TOURFIC, true );
-
 			wp_enqueue_script( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.7.1' .'/dist/leaflet.js' ), array( 'jquery' ), '1.7.1', true );
 			wp_enqueue_style( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.7.1' .'/dist/leaflet.css' ), array(), '1.7.1' );
 			wp_enqueue_script( 'jquery-ui-autocomplete' );
+
+			wp_enqueue_script( 'tf-flatpickr', TF_ADMIN_URL . 'tf-options/assets/js/flatpickr.min.js', array( 'jquery' ), TOURFIC, true );
+			wp_enqueue_script( 'wp-color-picker-alpha', TF_ADMIN_URL . 'tf-options/assets/js/wp-color-picker-alpha.js', array( 'jquery', 'wp-color-picker' ), TOURFIC, true );
+			wp_enqueue_script( 'tf-select2', TF_ADMIN_URL . 'tf-options/assets/js/select2.min.js', array( 'jquery' ), TOURFIC, true );
+			wp_enqueue_script( 'tf-options', TF_ADMIN_URL . 'tf-options/assets/js/tf-options.js', array( 'jquery', 'wp-color-picker' ), TOURFIC, true );
+
+
 			
 		}
 
@@ -110,8 +112,10 @@ if ( ! class_exists( 'TF_Options' ) ) {
             } else {
 	            $id = $settings_id . '[' . $field['id'] . ']';
             }
+
+            $class = isset( $field['class'] ) ? $field['class'] : '';
 			?>
-            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?>">
+            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?>">
 				<?php if ( ! empty( $field['label'] ) ): ?>
                     <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label"><?php echo esc_html( $field['label'] ) ?></label>
 				<?php endif; ?>

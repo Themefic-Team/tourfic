@@ -16,13 +16,14 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'type'        => 'text',
 					'placeholder' => 'Address of the hotel',
 					'description' => 'Address of the hotel',
+					'class'       => 'tf-address',
 				),
 				array(
-					'id'      => 'email',
-					'label'   => 'Email',
-					'type'    => 'select',
+					'id'          => 'email',
+					'label'       => 'Email',
+					'type'        => 'select',
 					'placeholder' => 'Email of the hotel',
-					'options' => array(
+					'options'     => array(
 						'1' => 'Option 1',
 						'2' => 'Option 2',
 						'3' => 'Option 3',
@@ -32,6 +33,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'id'          => 'phone',
 					'label'       => 'Phone',
 					'type'        => 'textarea',
+					'placeholder' => 'Phone of the hotel',
 					'description' => 'Phone of the hotel',
 				),
 				//checkbox
@@ -57,9 +59,19 @@ TF_Metabox::metabox( 'tf_hotels', array(
 				),
 				//heading
 				array(
-					'type'  => 'heading',
-					'title' => 'Awesome heading',
+					'id'      => 'heading',
+					'type'    => 'heading',
+					'title'   => 'Awesome heading',
 					'content' => 'gsdgsdfgfg gsdfg d<a href="http://localhost:8080">dsfgsdfgsdf</a>',
+				),
+				//notice
+				array(
+					'id'      => 'heading',
+					'type'    => 'notice',
+					'icon'    => 'ri-information-fill',
+					'title'   => 'Awesome heading',
+					'content' => 'gsdgsdfgfg gsdfg d<a href="http://localhost:8080">dsfgsdfgsdf</a>',
+					'notice'  => 'info',
 				),
 
 				//radio
@@ -76,14 +88,6 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					),
 					'inline'      => true,
 				),
-				//notice
-				array(
-					'type'  => 'notice',
-					'icon'  => 'ri-information-fill',
-					'title' => 'Awesome heading',
-					'content' => 'gsdgsdfgfg gsdfg d<a href="http://localhost:8080">dsfgsdfgsdf</a>',
-					'notice' => 'info',
-				),
 				//switch
 				array(
 					'id'          => 'switch',
@@ -96,7 +100,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'default'     => true,
 				),*/
 				//date
-				/*array(
+				array(
 					'id'          => 'datedsd',
 					'type'        => 'date',
 					'label'       => 'Date',
@@ -107,22 +111,39 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'label_from'  => 'Start Date',
 					'label_to'    => 'End Date'
 				),
+//				array(
+//					'id'          => 'date',
+//					'type'        => 'date',
+//					'label'       => 'Date',
+//					'placeholder' => 'Select a date',
+//					'description' => 'This is a description',
+//					'format'      => 'Y/m/d',
+//					'multiple'    => true,
+//				),
 				array(
-					'id'          => 'date',
-					'type'        => 'date',
-					'label'       => 'Date',
-					'placeholder' => 'Select a date',
-					'description' => 'This is a description',
-					'format'      => 'Y/m/d',
-					'multiple'    => true,
+					'id'          => 'checky',
+					'type'        => 'checkbox',
+					'label'       => 'Checkbox',
+					'subtitle'    => 'Checkbox',
+					'description' => 'Checkbox',
+					'options'     => array(
+						'1' => 'Checkbox 1',
+						'2' => 'Checkbox 2',
+						'3' => 'Checkbox 3',
+					),
 				),
 				array(
-					'id'          => 'date1',
-					'type'        => 'date',
-					'label'       => 'Date 1',
-					'placeholder' => 'Select a date',
-					'description' => 'This is a description',
-					'format'      => 'd/m/Y',
+					'id'          => 'radio',
+					'type'        => 'radio',
+					'label'       => 'Radio',
+					'subtitle'    => 'Radio',
+					'description' => 'Radio',
+					'options'     => array(
+						'1' => 'Radio 1',
+						'2' => 'Radio 2',
+						'3' => 'Radio 3',
+					),
+					'inline'      => true,
 				),
 				//time
 				array(
@@ -132,11 +153,38 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'placeholder' => 'Select a time',
 					'description' => 'This is a description',
 					'format'      => 'h:i K',
-				),*/
+				),
+				//color
+				array(
+					'id'          => 'color',
+					'type'        => 'color',
+					'label'       => 'Color',
+					'description' => 'This is a description',
+				),
+				array(
+					'id'       => 'colorss',
+					'type'     => 'color',
+					'label'    => 'Color2',
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'title'    => 'Title',
+						'subtitle' => 'Subtitle',
+						'content'  => 'Content',
+					),
+				),
+				//icon
+				array(
+					'id'          => 'icon',
+					'type'        => 'icon',
+					'label'       => 'Icon',
+					'default'     => 'fa fa-home',
+					'description' => 'This is a description',
+				),
 				array(
 					'id'          => 'features',
 					'type'        => 'select2',
-					'label'       => 'Features',
+					'label'       => 'Select 2',
 					'placeholder' => 'Select a time',
 					'description' => 'This is a description',
 					'multiple'    => true,
@@ -147,7 +195,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					),
 				),
 				//image
-				 array(
+				/*array(
 					'id'          => 'image',
 					'type'        => 'image',
 					'label'       => 'Features',
@@ -158,113 +206,134 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'type'        => 'gallery',
 					'label'       => 'Features',
 					'description' => 'This is a description',
-				),
-				array(
-					'id'            => 'opt-tabbed-1',
-					'type'          => 'tab',
-					'title'         => 'Tabbed',
-					'tabs'          => array(
-					  array(
-						'id'     => 'tab-1',
-						'title'     => 'Tab 1',
-						'icon'      => 'fa fa-heart',
-						'fields'    => array(
-							array(
-								'id'          => 'name3',
-								'title'       => 'Name ',
-								'type'        => 'text',
-								'placeholder' => 'Address of the hotel',
-								'description' => 'Address of the hotel',
-							),
-						)
-					  ),
-					  array(
-						'id'     => 'tab-2',
-						'title'     => 'tab 2',
-						'icon'      => 'fa fa-gear',
-						'fields'    => array(
-							array(
-								'id'          => 'name',
-								'title'       => 'Name ',
-								'type'        => 'text',
-								'placeholder' => 'Address of the hotel',
-								'description' => 'Address of the hotel',
-							),
-							array(
-								'id'          => 'name2',
-								'title'       => 'Name 2 ',
-								'type'        => 'text',
-								'placeholder' => 'Address of the hotel',
-								'description' => 'Address of the hotel',
-							),
-						)
-					  ),
-					)
-				  ),
-				  array(
-					'id'            => 'opt-tabbed-2',
-					'type'          => 'tab',
-					'title'         => 'Tabbed',
-					'tabs'          => array(
-					  array(
-						'id'     => 'tab-1',
-						'title'     => 'Tab 1',
-						'icon'      => 'fa fa-heart',
-						'fields'    => array(
-							array(
-								'id'          => 'name3',
-								'title'       => 'Name ',
-								'type'        => 'text',
-								'placeholder' => 'Address of the hotel',
-								'description' => 'Address of the hotel',
-							),
-						)
-					  ),
-					  array(
-						'id'     => 'tab-2',
-						'title'     => 'tab 2',
-						'icon'      => 'fa fa-gear',
-						'fields'    => array(
-							array(
-								'id'          => 'name',
-								'title'       => 'Name ',
-								'type'        => 'text',
-								'placeholder' => 'Address of the hotel',
-								'description' => 'Address of the hotel',
-							),
-							array(
-								'id'          => 'name2',
-								'title'       => 'Name 2 ',
-								'type'        => 'text',
-								'placeholder' => 'Address of the hotel',
-								'description' => 'Address of the hotel',
-							),
-						)
-					  ),
-					)
-				  ),
-				array(
-					'id'          => 'repeater2',
-					'label'       => 'repeater 1',
-					'button_title' => 'Add New Room',
-					'type'        => 'repeater',
-					'placeholder' => 'Zip of the hotel',
-					'description' => 'Zip of the hotel',
-					'fields' => array(
+				),*/
 
+				//tab
+				array(
+					'id'    => 'opt-tabbed-1',
+					'type'  => 'tab',
+					'title' => 'Tabbed',
+					'tabs'  => array(
 						array(
-							'id'          => 'name',
-							'title'       => 'Name ',
-							'type'        => 'text',
-							'placeholder' => 'Address of the hotel',
-							'description' => 'Address of the hotel',
+							'id'     => 'tab-1',
+							'title'  => 'Tab 1',
+							'icon'   => 'fa fa-heart',
+							'fields' => array(
+								array(
+									'id'          => 'datedsd',
+									'type'        => 'date',
+									'label'       => 'Date',
+									'placeholder' => 'Select a date',
+									'description' => 'This is a description',
+									'format'      => 'Y/m/d',
+									'range'       => true,
+									'label_from'  => 'Start Date',
+									'label_to'    => 'End Date'
+								),
+							)
 						),
 						array(
-							'id'          => 'address',
-							'title'       => 'Address',
-							'type'        => 'text',
-							'placeholder' => 'Address of the hotel',
-							'description' => 'Address of the hotel',
+							'id'     => 'tab-2',
+							'title'  => 'tab 2',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'          => 'datedsd',
+									'type'        => 'date',
+									'label'       => 'Date',
+									'placeholder' => 'Select a date',
+									'description' => 'This is a description',
+									'format'      => 'Y/m/d',
+									'range'       => true,
+									'label_from'  => 'Start Date',
+									'label_to'    => 'End Date'
+								),
+							)
+						),
+					)
+				),
+
+				//repeater
+				array(
+					'id'           => 'repeater2',
+					'label'        => 'repeater 1',
+					'button_title' => 'Add New Room',
+					'type'         => 'repeater',
+					'placeholder'  => 'Zip of the hotel',
+					'description'  => 'Zip of the hotel',
+					'fields'       => array(
+						//date
+						array(
+							'id'          => 'datedsd',
+							'type'        => 'date',
+							'label'       => 'Date',
+							'placeholder' => 'Select a date',
+							'description' => 'This is a description',
+							'format'      => 'Y/m/d',
+							'range'       => true,
+							'label_from'  => 'Start Date',
+							'label_to'    => 'End Date'
+						),
+						//time
+						array(
+							'id'          => 'time',
+							'type'        => 'time',
+							'label'       => 'Time',
+							'placeholder' => 'Select a time',
+							'description' => 'This is a description',
+							'format'      => 'h:i K',
+						),
+						//color
+						array(
+							'id'          => 'color',
+							'type'        => 'color',
+							'label'       => 'Color',
+							'description' => 'This is a description',
+						),
+						array(
+							'id'       => 'colorss',
+							'type'     => 'color',
+							'label'    => 'Color2',
+							'multiple' => true,
+							'inline'   => true,
+							'colors'   => array(
+								'title'    => 'Title',
+								'subtitle' => 'Subtitle',
+								'content'  => 'Content',
+							),
+						),
+						array(
+							'id'          => 'checky',
+							'type'        => 'checkbox',
+							'label'       => 'Checkbox',
+							'subtitle'    => 'Checkbox',
+							'description' => 'Checkbox',
+							'options'     => array(
+								'1' => 'Checkbox 1',
+								'2' => 'Checkbox 2',
+								'3' => 'Checkbox 3',
+							),
+						),
+						array(
+							'id'          => 'radio',
+							'type'        => 'radio',
+							'label'       => 'Radio',
+							'subtitle'    => 'Radio',
+							'description' => 'Radio',
+							'options'     => array(
+								'1' => 'Radio 1',
+								'2' => 'Radio 2',
+								'3' => 'Radio 3',
+							),
+							'inline'      => true,
+						),
+						//icon
+						array(
+							'id'          => 'icon',
+							'type'        => 'icon',
+							'label'       => 'Icon',
+							'default'     => 'fa fa-home',
+							'description' => 'This is a description',
 						),
 						array(
 							'id'          => 'repeater_nested',
@@ -272,8 +341,8 @@ TF_Metabox::metabox( 'tf_hotels', array(
 							'type'        => 'repeater',
 							'placeholder' => 'Zip of the hotel',
 							'description' => 'Zip of the hotel',
-							'fields' => array(
-		
+							'fields'      => array(
+
 								array(
 									'id'          => 'name',
 									'title'       => 'Name ',
@@ -294,8 +363,8 @@ TF_Metabox::metabox( 'tf_hotels', array(
 									'type'        => 'repeater',
 									'placeholder' => 'Zip of the hotel',
 									'description' => 'Zip of the hotel',
-									'fields' => array(
-				
+									'fields'      => array(
+
 										array(
 											'id'          => 'name',
 											'title'       => 'Name ',
@@ -310,40 +379,12 @@ TF_Metabox::metabox( 'tf_hotels', array(
 											'placeholder' => 'Address of the hotel',
 											'description' => 'Address of the hotel',
 										),
-				
+
 									)
 								),
 							)
 						),
 					)
-				), 
-
-				//color
-				/*array(
-					'id'          => 'color',
-					'type'        => 'color',
-					'label'       => 'Color',
-					'description' => 'This is a description',
-				),
-				array(
-					'id'          => 'colorss',
-					'type'        => 'color',
-					'label'       => 'Color2',
-					'multiple'    => true,
-					'inline'      => true,
-					'colors'      => array(
-						'title' => 'Title',
-						'subtitle' => 'Subtitle',
-						'content' => 'Content',
-					),
-				),*/
-				//icon
-				array(
-					'id'          => 'icon',
-					'type'        => 'icon',
-					'label'       => 'Icon',
-					'default'     => 'fa fa-home',
-					'description' => 'This is a description',
 				),
 			),
 		),

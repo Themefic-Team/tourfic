@@ -10,7 +10,8 @@ if ( ! class_exists( 'TF_textarea' ) ) {
 		}
 
 		public function render() {
-			echo '<textarea name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" placeholder="'. esc_attr($this->field['placeholder']) .'">' . $this->value . '</textarea>';
+			$placeholder = ( ! empty( $this->field['placeholder'] ) ) ? 'placeholder="' . $this->field['placeholder'] . '"' : '';
+			echo '<textarea name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '"' . $placeholder . '>' . $this->value . '</textarea>';
 		}
 
 	}
