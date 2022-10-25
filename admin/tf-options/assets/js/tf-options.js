@@ -77,7 +77,7 @@
             $(colorSelector).each(function () {
                 let $this = $(this),
                     colorField = $this.find('input.tf-color');
-                console.log(colorField)
+
                 colorField.wpColorPicker();
             });
         }
