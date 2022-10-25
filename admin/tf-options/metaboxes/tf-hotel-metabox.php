@@ -147,7 +147,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					),
 				),
 				//image
-				/*array(
+				 array(
 					'id'          => 'image',
 					'type'        => 'image',
 					'label'       => 'Features',
@@ -160,8 +160,93 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'description' => 'This is a description',
 				),
 				array(
+					'id'            => 'opt-tabbed-1',
+					'type'          => 'tab',
+					'title'         => 'Tabbed',
+					'tabs'          => array(
+					  array(
+						'id'     => 'tab-1',
+						'title'     => 'Tab 1',
+						'icon'      => 'fa fa-heart',
+						'fields'    => array(
+							array(
+								'id'          => 'name3',
+								'title'       => 'Name ',
+								'type'        => 'text',
+								'placeholder' => 'Address of the hotel',
+								'description' => 'Address of the hotel',
+							),
+						)
+					  ),
+					  array(
+						'id'     => 'tab-2',
+						'title'     => 'tab 2',
+						'icon'      => 'fa fa-gear',
+						'fields'    => array(
+							array(
+								'id'          => 'name',
+								'title'       => 'Name ',
+								'type'        => 'text',
+								'placeholder' => 'Address of the hotel',
+								'description' => 'Address of the hotel',
+							),
+							array(
+								'id'          => 'name2',
+								'title'       => 'Name 2 ',
+								'type'        => 'text',
+								'placeholder' => 'Address of the hotel',
+								'description' => 'Address of the hotel',
+							),
+						)
+					  ),
+					)
+				  ),
+				  array(
+					'id'            => 'opt-tabbed-2',
+					'type'          => 'tab',
+					'title'         => 'Tabbed',
+					'tabs'          => array(
+					  array(
+						'id'     => 'tab-1',
+						'title'     => 'Tab 1',
+						'icon'      => 'fa fa-heart',
+						'fields'    => array(
+							array(
+								'id'          => 'name3',
+								'title'       => 'Name ',
+								'type'        => 'text',
+								'placeholder' => 'Address of the hotel',
+								'description' => 'Address of the hotel',
+							),
+						)
+					  ),
+					  array(
+						'id'     => 'tab-2',
+						'title'     => 'tab 2',
+						'icon'      => 'fa fa-gear',
+						'fields'    => array(
+							array(
+								'id'          => 'name',
+								'title'       => 'Name ',
+								'type'        => 'text',
+								'placeholder' => 'Address of the hotel',
+								'description' => 'Address of the hotel',
+							),
+							array(
+								'id'          => 'name2',
+								'title'       => 'Name 2 ',
+								'type'        => 'text',
+								'placeholder' => 'Address of the hotel',
+								'description' => 'Address of the hotel',
+							),
+						)
+					  ),
+					)
+				  ),
+				array(
 					'id'          => 'repeater2',
-					'label'       => 'repeater',
+					'label'       => 'repeater 1',
+					'button_title' => 'Add New Room',
 					'type'        => 'repeater',
 					'placeholder' => 'Zip of the hotel',
 					'description' => 'Zip of the hotel',
@@ -181,9 +266,57 @@ TF_Metabox::metabox( 'tf_hotels', array(
 							'placeholder' => 'Address of the hotel',
 							'description' => 'Address of the hotel',
 						),
-
+						array(
+							'id'          => 'repeater_nested',
+							'label'       => 'repeater 2',
+							'type'        => 'repeater',
+							'placeholder' => 'Zip of the hotel',
+							'description' => 'Zip of the hotel',
+							'fields' => array(
+		
+								array(
+									'id'          => 'name',
+									'title'       => 'Name ',
+									'type'        => 'text',
+									'placeholder' => 'Address of the hotel',
+									'description' => 'Address of the hotel',
+								),
+								array(
+									'id'          => 'address',
+									'title'       => 'Address',
+									'type'        => 'text',
+									'placeholder' => 'Address of the hotel',
+									'description' => 'Address of the hotel',
+								),
+								array(
+									'id'          => 'repeater_nested2',
+									'label'       => 'repeater 3',
+									'type'        => 'repeater',
+									'placeholder' => 'Zip of the hotel',
+									'description' => 'Zip of the hotel',
+									'fields' => array(
+				
+										array(
+											'id'          => 'name',
+											'title'       => 'Name ',
+											'type'        => 'text',
+											'placeholder' => 'Address of the hotel',
+											'description' => 'Address of the hotel',
+										),
+										array(
+											'id'          => 'address',
+											'title'       => 'Address',
+											'type'        => 'text',
+											'placeholder' => 'Address of the hotel',
+											'description' => 'Address of the hotel',
+										),
+				
+									)
+								),
+							)
+						),
 					)
-				),*/
+				), 
 
 				//color
 				/*array(

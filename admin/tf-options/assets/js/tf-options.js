@@ -1,16 +1,7 @@
 (function ($) {
     'use strict';
     $(document).ready(function () {
-        /*
-        * Section tab first one click on load
-        * @author: Foysal
-        */
-        $(window).on('load', function () {
-            if ($('.tf-admin-tab .tf-tablinks').length > 0) {
-                $('.tf-admin-tab .tf-tablinks').first().trigger('click').addClass('active');
-            }
-        });
-
+      
         /*
         * Each date field initialize flatpickr
          */
@@ -193,36 +184,75 @@
             iconLi.removeClass('active');
         })
 
-        // Repeater jquery
-        $(".tf-repeater").each(function () {
-            let $this = $(this);
-            let tf_repeater_add = $this.find('.tf-repeater-icon-add');
-            tf_repeater_add.on('click', function () {
-                let add_value = $this.find('.tf-single-repeater-clone .tf-single-repeater').clone();
-                let count = $this.find('.tf-repeater-wrap .tf-single-repeater').length;
-                // count =  count+1;
-                // console.log(add_value)
-                add_value.find(':input').each(function () {
-
-                    this.name = this.name.replace('_____', '').replace('[0]', '[' + count + ']');
-                    this.id = this.id.replace('_____', '').replace('[0]', '[' + count + ']');
-                });
-                let append = $this.find('.tf-repeater-wrap');
-                add_value.appendTo(append).show();
-                // $this.find('.tf-repeater-wrap').append(add_value).show();
+         // Repeater jquery 
+         
+         $(document).on('click', '.tf-repeater-icon-add', function(){
+            // $(this).closest('.tf-single-repeater').remove();
+           var $this = $(this);
+           var $this_parent = $this.parent().parent();
+           var id = $(this).attr("data-repeater-id");
+        //    alert(id);
+           var add_value = $this_parent.find('.tf-single-repeater-clone-'+id+' .tf-single-repeater-'+id+'').clone();
+           var count = $this_parent.find('.tf-repeater-wrap-'+id+' .tf-single-repeater-'+id+'').length;
+           var parent_field = add_value.find(':input[name="tf_parent_field"]').val();
+           var current_field = add_value.find(':input[name="tf_current_field"]').val();
+          
+           if(parent_field == ''){  
+                add_value.find(':input').each(function (){ 
+                    this.name = this.name.replace( '_____', '' ).replace('['+current_field+'][0]', '['+current_field+']['+ count +']');
+                    this.id = this.id.replace( '_____', '' ).replace('['+current_field+'][0]', '['+current_field+']['+ count +']');
+                 }); 
+             var update_paren  = add_value.find('.tf-repeater input[name="tf_parent_field"]').val();
+             var update_paren  = update_paren.replace('['+current_field+'][0]', '['+current_field+']['+ count +']');
+             add_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
+ 
+           }else{
+            var update_paren  = add_value.find(':input[name="tf_parent_field"]').val();
+            add_value.find(':input').each(function (){ 
+                this.name = this.name.replace( '_____', '' ).replace('['+current_field+'][0]', '['+current_field+']['+ count +']');
+                this.id = this.id.replace( '_____', '' ).replace('['+current_field+'][0]',  '['+current_field+']['+ count +']');
             });
-
+           }
+           
+           var append = $this_parent.find('.tf-repeater-wrap-'+id+'');
+            add_value.appendTo(append).show(); 
         });
-        $(document).on('click', '.tf-repeater-icon-delete', function () {
-            $(this).closest('.tf-single-repeater').remove();
+        $(document).on('click', '.tf-repeater-icon-delete', function(){
+            if (confirm("Are you sure to delete this item?")) { 
+                $(this).closest('.tf-single-repeater').remove();
+            }
+            return false;
         });
-        $(document).on('click', '.tf-repeater-icon-clone', function () {
-            alert(1);
+        $(document).on('click', '.tf-repeater-icon-clone', function(){ 
             let clone_value = $(this).closest('.tf-single-repeater').html();
             $(this).closest('.tf-repeater-wrap').append('<div class="tf-single-repeater">' + clone_value + '</div>').show();
         });
-        $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
-            $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').toggleClass("hide")
+        $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function(){
+            
+            $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').slideToggle();
+            $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').toggleClass('hide');
+            if($(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').hasClass('hide') == true){
+                $(this).closest('.tf-single-repeater').find('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-up"></i>');
+            }else{
+                $(this).closest('.tf-single-repeater').find('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-down"></i>');
+            }
+        });
+        $( ".tf-repeater-wrap" ).sortable(); 
+
+
+         // TAB jquery 
+         $(document).on('click', '.tf-tab-item', function(){
+            var $this = $(this);
+            var tab_id = $this.data('tab-id'); 
+            if($this.parent().parent().find('.tf-tab-item-content').hasClass("show") == true){  
+                $this.parent().parent().find('.tf-tab-item-content').removeClass('show');
+            }
+            
+            $this.parent().find('.tf-tab-item').removeClass('show');
+
+            $this.addClass('show'); 
+            $this.parent().parent().find('.tf-tab-item-content[data-tab-id = '+tab_id+']').addClass('show');
+          
         });
 
     });
