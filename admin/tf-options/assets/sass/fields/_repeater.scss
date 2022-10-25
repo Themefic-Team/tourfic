@@ -10,15 +10,18 @@
         background: #F0F2F4;
         position: relative;
         border-radius: 5px 5px 0px 0px;
+        align-items: center;
         cursor: pointer;
         .tf-repeater-icon{
-            padding: 8px; 
+            padding: 8px;
             cursor: pointer;
-            text-align: center;
-            line-height: 0;
-            display: inline-block;
-            line-height: 0.7;
-            border-radius: 4px;  
+            text-align: center; 
+            display: inline-block; 
+            border-radius: 4px;
+            font-size: 16px;
+            line-height: 24px;
+            height: 24px;
+            width: 24px;
             
         }
         .tf-repeater-icon-move{
@@ -43,41 +46,47 @@
             display: inline-block;
             width: 100%;
             margin-right: 120px;
+            font-family: 'Lato';
+            font-style: normal; 
             font-weight: 500;
             font-size: 16px;
             line-height: 24px;
+
         }
         .tf-repeater-icon-absulate {
             position: absolute;
             right: 8px;
-            top: 5px;
+            top: 8px;
           }
         
      }
 
      .tf-repeater-content-wrap{ 
         border: 1px solid #F0F2F4;
-       
-        
+        background-color: #fff; 
+        padding: 10px 0;
      }
-     .hide{
-        display: none;
-        visibility: hidden;
-     }
+    //  .hide{
+    //     display: none;
+    //     visibility: hidden;
+    //  }
 
      .tf-repeater-add{
         .tf-repeater-icon{
-            padding: 8px; 
+            padding: 14px;
             cursor: pointer;
             text-align: center;
             line-height: 0;
             display: inline-block;
             line-height: 0.7;
             background-color: $blue5;
-            border-radius: 4px;          
+            border-radius: 4px;    
+            font-size: 13px;
+            font-weight: 700;
+            color: #2979FF;      
         }
      }
      .tf-single-repeater{
-        margin-bottom: 8px;
+        margin-bottom: 24px;
      }
 }

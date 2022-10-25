@@ -157,7 +157,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 							if ( ! empty( $field['id'] ) ) {
 								$data = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : ''; 
 								$fieldClass = 'TF_' . $field['type'];
-								if($fieldClass == 'TF_repeater'){ 
+								if($fieldClass == 'TF_repeater' || $fieldClass == 'TF_tab'){ 
 									$data = serialize($data);
 									$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
 									$tf_meta_box_value[ $field['id'] ] = $_field->sanitize();
