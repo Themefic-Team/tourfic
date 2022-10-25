@@ -1,16 +1,18 @@
 (function ($) {
     'use strict';
     $(document).ready(function () {
-      
+
         /*
         * Each date field initialize flatpickr
          */
-        $('.tf-field-date').each(function () {
-            let $this = $(this),
-                dateField = $this.find('input.flatpickr'),
-                format = dateField.data('format'),
-                multiple = dateField.data('multiple');
+        const tfDateInt = dateSelector => {
+            $(dateSelector).each(function () {
+                let $this = $(this),
+                    dateField = $this.find('input.flatpickr'),
+                    format = dateField.data('format'),
+                    multiple = dateField.data('multiple');
 
+<<<<<<< HEAD
             if (dateField.length === 2) {
                 let startDate = $this.find('.tf-date-from input.flatpickr').flatpickr({
                     dateFormat: format,
@@ -35,45 +37,78 @@
         
  
         
+=======
+                if (dateField.length === 2) {
+                    let startDate = $this.find('.tf-date-from input.flatpickr').flatpickr({
+                        dateFormat: format,
+                        onChange: function (selectedDates, dateStr, instance) {
+                            endDate.set('minDate', dateStr);
+                        }
+                    });
+                    let endDate = $this.find('.tf-date-to input.flatpickr').flatpickr({
+                        dateFormat: format,
+                        onChange: function (selectedDates, dateStr, instance) {
+                            startDate.set('maxDate', dateStr);
+                        }
+                    });
+                } else {
+                    dateField.flatpickr({
+                        dateFormat: format,
+                        mode: multiple ? 'multiple' : 'single',
+                    });
+                }
+            });
+        }
+        tfDateInt('.tf-field-date');
+>>>>>>> 6323a4c355533a241e91b8ffb3d45d93d715eb91
 
         /*
         * Each time field initialize flatpickr
          */
-        $('.tf-field-time').each(function () {
-            let $this = $(this),
-                timeField = $this.find('input.flatpickr'),
-                format = timeField.data('format');
+        const tfTimeInt = timeSelector => {
+            $(timeSelector).each(function () {
+                let $this = $(this),
+                    timeField = $this.find('input.flatpickr'),
+                    format = timeField.data('format');
 
-            timeField.flatpickr({
-                enableTime: true,
-                noCalendar: true,
-                dateFormat: format,
+                timeField.flatpickr({
+                    enableTime: true,
+                    noCalendar: true,
+                    dateFormat: format,
+                });
             });
-        });
+        }
+        tfTimeInt('.tf-field-time');
 
         /*
         * Each select2 field initialize select2
          */
-        $('.tf-field-select2').each(function () {
-            let $this = $(this),
-                selectField = $this.find('select.tf-select2'),
-                placeholder = selectField.data('placeholder');
+        const tfSelect2Int = select2Selector => {
+            $(select2Selector).each(function () {
+                let $this = $(this),
+                    selectField = $this.find('select.tf-select2'),
+                    placeholder = selectField.data('placeholder');
 
-            selectField.select2({
-                placeholder: placeholder,
-                allowClear: true,
+                selectField.select2({
+                    placeholder: placeholder,
+                    allowClear: true,
+                });
             });
-        });
+        }
+        tfSelect2Int('.tf-field-select2');
 
         /*
         * Each color field initialize wpColorPicker
          */
-        $('.tf-field-color').each(function () {
-            let $this = $(this),
-                colorField = $this.find('input.tf-color');
-
-            colorField.wpColorPicker();
-        });
+        const tfColorInt = colorSelector => {
+            $(colorSelector).each(function () {
+                let $this = $(this),
+                    colorField = $this.find('input.tf-color');
+                console.log(colorField)
+                colorField.wpColorPicker();
+            });
+        }
+        tfColorInt('.tf-field-color');
 
         //Custom modal
         $(document).on('click', '.tf-modal-btn', function (e) {
@@ -187,81 +222,95 @@
             iconLi.removeClass('active');
         })
 
-         // Repeater jquery 
-         
-         $(document).on('click', '.tf-repeater-icon-add', function(){
+
+        // Repeater jquery
+        $(document).on('click', '.tf-repeater-icon-add', function () {
             // $(this).closest('.tf-single-repeater').remove();
-           var $this = $(this);
-           var $this_parent = $this.parent().parent();
-           var id = $(this).attr("data-repeater-id");
-        //    alert(id);
-           var add_value = $this_parent.find('.tf-single-repeater-clone-'+id+' .tf-single-repeater-'+id+'').clone();
-           var count = $this_parent.find('.tf-repeater-wrap-'+id+' .tf-single-repeater-'+id+'').length;
-           var parent_field = add_value.find(':input[name="tf_parent_field"]').val();
-           var current_field = add_value.find(':input[name="tf_current_field"]').val();
-          
-           if(parent_field == ''){  
-                add_value.find(':input').each(function (){ 
-                    this.name = this.name.replace( '_____', '' ).replace('['+current_field+'][0]', '['+current_field+']['+ count +']');
-                    this.id = this.id.replace( '_____', '' ).replace('['+current_field+'][0]', '['+current_field+']['+ count +']'); 
-                 }); 
-             var update_paren  = add_value.find('.tf-repeater input[name="tf_parent_field"]').val();
-             if (typeof update_paren !== "undefined") {
-                var update_paren  = update_paren.replace('['+current_field+'][0]', '['+current_field+']['+ count +']');
-            } 
-             add_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
- 
-           }else{
-            var update_paren  = add_value.find(':input[name="tf_parent_field"]').val();
-            add_value.find(':input').each(function (){ 
-                this.name = this.name.replace( '_____', '' ).replace('['+current_field+'][0]', '['+current_field+']['+ count +']');
-                this.id = this.id.replace( '_____', '' ).replace('['+current_field+'][0]',  '['+current_field+']['+ count +']'); 
-            });
-            add_value.find('label').each(function (){ 
-                this.name = this.name.replace( '_____', '' ).replace('['+current_field+'][0]', '['+current_field+']['+ count +']');
-                this.id = this.id.replace( '_____', '' ).replace('['+current_field+'][0]',  '['+current_field+']['+ count +']'); 
-            });
-           }
-           
-           var append = $this_parent.find('.tf-repeater-wrap-'+id+'');
-            add_value.appendTo(append).show(); 
+            var $this = $(this);
+            var $this_parent = $this.parent().parent();
+            var id = $(this).attr("data-repeater-id");
+            //    alert(id);
+            var add_value = $this_parent.find('.tf-single-repeater-clone-' + id + ' .tf-single-repeater-' + id + '').clone();
+            var count = $this_parent.find('.tf-repeater-wrap-' + id + ' .tf-single-repeater-' + id + '').length;
+            var parent_field = add_value.find(':input[name="tf_parent_field"]').val();
+            var current_field = add_value.find(':input[name="tf_current_field"]').val();
+
+            let repeatDateField = add_value.find('.tf-field-date');
+            if (repeatDateField.length > 0) {
+                tfDateInt(repeatDateField);
+            }
+
+            let repeatTimeField = add_value.find('.tf-field-time');
+            if (repeatTimeField.length > 0) {
+                tfTimeInt(repeatTimeField);
+            }
+
+            let repeatSelect2Field = add_value.find('.tf-field-select2');
+            if (repeatSelect2Field.length > 0) {
+                tfSelect2Int(repeatSelect2Field);
+            }
+
+            let repeatColorField = add_value.find('.tf-field-color');
+            if (repeatColorField.length > 0) {
+                tfColorInt(repeatColorField);
+            }
+
+            if (parent_field == '') {
+                add_value.find(':input').each(function () {
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                });
+                var update_paren = add_value.find('.tf-repeater input[name="tf_parent_field"]').val();
+                var update_paren = update_paren.replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                add_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
+
+            } else {
+                var update_paren = add_value.find(':input[name="tf_parent_field"]').val();
+                add_value.find(':input').each(function () {
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                });
+            }
+
+            var append = $this_parent.find('.tf-repeater-wrap-' + id + '');
+            add_value.appendTo(append).show();
         });
-        $(document).on('click', '.tf-repeater-icon-delete', function(){
-            if (confirm("Are you sure to delete this item?")) { 
+        $(document).on('click', '.tf-repeater-icon-delete', function () {
+            if (confirm("Are you sure to delete this item?")) {
                 $(this).closest('.tf-single-repeater').remove();
             }
             return false;
         });
-        $(document).on('click', '.tf-repeater-icon-clone', function(){ 
+        $(document).on('click', '.tf-repeater-icon-clone', function () {
             let clone_value = $(this).closest('.tf-single-repeater').html();
             $(this).closest('.tf-repeater-wrap').append('<div class="tf-single-repeater">' + clone_value + '</div>').show();
         });
-        $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function(){
-            
+        $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
+
             $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').slideToggle();
             $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').toggleClass('hide');
-            if($(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').hasClass('hide') == true){
+            if ($(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').hasClass('hide') == true) {
                 $(this).closest('.tf-single-repeater').find('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-up"></i>');
-            }else{
+            } else {
                 $(this).closest('.tf-single-repeater').find('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-down"></i>');
             }
         });
-        $( ".tf-repeater-wrap" ).sortable(); 
+        $(".tf-repeater-wrap").sortable();
 
 
-         // TAB jquery 
-         $(document).on('click', '.tf-tab-item', function(){
+        // TAB jquery
+        $(document).on('click', '.tf-tab-item', function () {
             var $this = $(this);
-            var tab_id = $this.data('tab-id'); 
-            if($this.parent().parent().find('.tf-tab-item-content').hasClass("show") == true){  
+            var tab_id = $this.data('tab-id');
+            if ($this.parent().parent().find('.tf-tab-item-content').hasClass("show") == true) {
                 $this.parent().parent().find('.tf-tab-item-content').removeClass('show');
             }
-            
+
             $this.parent().find('.tf-tab-item').removeClass('show');
 
-            $this.addClass('show'); 
-            $this.parent().parent().find('.tf-tab-item-content[data-tab-id = '+tab_id+']').addClass('show');
-          
+            $this.addClass('show');
+            $this.parent().parent().find('.tf-tab-item-content[data-tab-id = ' + tab_id + ']').addClass('show');
+
         });
 
     });
@@ -378,120 +427,120 @@ var frame, gframe;
             gframe.open();
             return false;
         });
-    
 
 
-    
-        $(".tf-field-map").each(function() {
-            var $this         = $(this),
-            $map          = $this.find('.tf--map-osm'),
-            $search_input = $this.find('.tf--map-search input'),
-            $latitude     = $this.find('.tf--latitude'),
-            $longitude    = $this.find('.tf--longitude'),
-            $zoom         = $this.find('.tf--zoom'),
-            map_data      = $map.data( 'map' );
-            
-          var mapInit = L.map( $map.get(0), map_data);
+        $(".tf-field-map").each(function () {
+            var $this = $(this),
+                $map = $this.find('.tf--map-osm'),
+                $search_input = $this.find('.tf--map-search input'),
+                $latitude = $this.find('.tf--latitude'),
+                $longitude = $this.find('.tf--longitude'),
+                $zoom = $this.find('.tf--zoom'),
+                map_data = $map.data('map');
 
-    
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          }).addTo(mapInit);
-    
-          var mapMarker = L.marker(map_data.center,{draggable: true}).addTo(mapInit);
-    
-          var update_latlng = function( data ) {
-            $latitude.val( data.lat );
-            $longitude.val( data.lng );
-            $zoom.val( mapInit.getZoom() );
-          };
-    
-          mapInit.on( 'click', function ( data ) {
-            mapMarker.setLatLng( data.latlng );
-            update_latlng( data.latlng );
-          });
-    
-          mapInit.on( 'zoom', function () {
-            update_latlng( mapMarker.getLatLng() );
-          });
-    
-          mapMarker.on( 'drag', function () {
-            update_latlng( mapMarker.getLatLng() );
-          });
-    
-          if ( ! $search_input.length ) {
-            $search_input = $( '[data-depend-id="'+ $this.find('.tf--address-field').data( 'address-field' ) +'"]' );
-          }
-    
-          var cache = {};
-    
-          $search_input.autocomplete({
-            source: function ( request, response ) {
-    
-              var term = request.term;
-    
-              if ( term in cache ) {
-                response( cache[term] );
-                return;
-              }
-    
-              $.get( 'https://nominatim.openstreetmap.org/search', {
-                format: 'json',
-                q: term,
-              }, function( results ) {
-    
-                var data;
-    
-                if ( results.length ) {
-                  data = results.map( function( item ) {
-                    return {
-                      value: item.display_name,
-                      label: item.display_name,
-                      lat: item.lat,
-                      lon: item.lon
-                    };
-                  }, 'json');
-                } else {
-                  data = [{
-                    value: 'no-data',
-                    label: 'No Results.'
-                  }];
-                }
-    
-                cache[term] = data;
-                response(data);
-    
-              });
-    
-            },
-            select: function ( event, ui ) {
-    
-              if ( ui.item.value === 'no-data' ) { return false; }
-    
-              var latLng = L.latLng( ui.item.lat, ui.item.lon );
-    
-              mapInit.panTo( latLng );
-              mapMarker.setLatLng( latLng );
-              update_latlng( latLng );
-    
-            },
-            create: function (event, ui) {
-              $(this).autocomplete('widget').addClass('tf-map-ui-autocomplate');
+            var mapInit = L.map($map.get(0), map_data);
+
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(mapInit);
+
+            var mapMarker = L.marker(map_data.center, {draggable: true}).addTo(mapInit);
+
+            var update_latlng = function (data) {
+                $latitude.val(data.lat);
+                $longitude.val(data.lng);
+                $zoom.val(mapInit.getZoom());
+            };
+
+            mapInit.on('click', function (data) {
+                mapMarker.setLatLng(data.latlng);
+                update_latlng(data.latlng);
+            });
+
+            mapInit.on('zoom', function () {
+                update_latlng(mapMarker.getLatLng());
+            });
+
+            mapMarker.on('drag', function () {
+                update_latlng(mapMarker.getLatLng());
+            });
+
+            if (!$search_input.length) {
+                $search_input = $('[data-depend-id="' + $this.find('.tf--address-field').data('address-field') + '"]');
             }
-          });
-    
-          var input_update_latlng = function() {
-    
-            var latLng = L.latLng( $latitude.val(), $longitude.val() );
-    
-            mapInit.panTo( latLng );
-            mapMarker.setLatLng( latLng );
-    
-          };
-    
-          $latitude.on('change', input_update_latlng );
-          $longitude.on('change', input_update_latlng );
-    
+
+            var cache = {};
+
+            $search_input.autocomplete({
+                source: function (request, response) {
+
+                    var term = request.term;
+
+                    if (term in cache) {
+                        response(cache[term]);
+                        return;
+                    }
+
+                    $.get('https://nominatim.openstreetmap.org/search', {
+                        format: 'json',
+                        q: term,
+                    }, function (results) {
+
+                        var data;
+
+                        if (results.length) {
+                            data = results.map(function (item) {
+                                return {
+                                    value: item.display_name,
+                                    label: item.display_name,
+                                    lat: item.lat,
+                                    lon: item.lon
+                                };
+                            }, 'json');
+                        } else {
+                            data = [{
+                                value: 'no-data',
+                                label: 'No Results.'
+                            }];
+                        }
+
+                        cache[term] = data;
+                        response(data);
+
+                    });
+
+                },
+                select: function (event, ui) {
+
+                    if (ui.item.value === 'no-data') {
+                        return false;
+                    }
+
+                    var latLng = L.latLng(ui.item.lat, ui.item.lon);
+
+                    mapInit.panTo(latLng);
+                    mapMarker.setLatLng(latLng);
+                    update_latlng(latLng);
+
+                },
+                create: function (event, ui) {
+                    $(this).autocomplete('widget').addClass('tf-map-ui-autocomplate');
+                }
+            });
+
+            var input_update_latlng = function () {
+
+                var latLng = L.latLng($latitude.val(), $longitude.val());
+
+                mapInit.panTo(latLng);
+                mapMarker.setLatLng(latLng);
+
+            };
+
+            $latitude.on('change', input_update_latlng);
+            $longitude.on('change', input_update_latlng);
+
         });
     });
 
