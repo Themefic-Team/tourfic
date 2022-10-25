@@ -12,32 +12,6 @@
                     format = dateField.data('format'),
                     multiple = dateField.data('multiple');
 
-<<<<<<< HEAD
-            if (dateField.length === 2) {
-                let startDate = $this.find('.tf-date-from input.flatpickr').flatpickr({
-                    dateFormat: format,
-                    onChange: function (selectedDates, dateStr, instance) {
-                        endDate.set('minDate', dateStr);
-                        console.log('start', selectedDates, dateStr);
-                    }
-                });
-                let endDate = $this.find('.tf-date-to input.flatpickr').flatpickr({
-                    dateFormat: format,
-                    onChange: function (selectedDates, dateStr, instance) {
-                        startDate.set('maxDate', dateStr);
-                    }
-                });
-            } else {
-                dateField.flatpickr({
-                    dateFormat: format,
-                    mode: multiple ? 'multiple' : 'single',
-                });
-            }
-        });
-        
- 
-        
-=======
                 if (dateField.length === 2) {
                     let startDate = $this.find('.tf-date-from input.flatpickr').flatpickr({
                         dateFormat: format,
@@ -60,7 +34,6 @@
             });
         }
         tfDateInt('.tf-field-date');
->>>>>>> 6323a4c355533a241e91b8ffb3d45d93d715eb91
 
         /*
         * Each time field initialize flatpickr
