@@ -634,7 +634,7 @@
                 {
                     breakpoint: 1024,
                     settings: {
-                        slidesToShow: 3,
+                        slidesToShow: 2,
                         slidesToScroll: 1,
                         infinite: true,
                         dots: true
@@ -1437,7 +1437,6 @@
     tabcontent = document.getElementsByClassName("tf-tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
-    
     }
     tablinks = document.getElementsByClassName("tf-tablinks");
     for (i = 0; i < tablinks.length; i++) {
