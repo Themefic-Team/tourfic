@@ -868,7 +868,14 @@ body.tf-modal-open {
 .tf-field-map .tf--map-search {
   width: 100%; }
   .tf-field-map .tf--map-search input {
-    width: 100%; }
+    width: 100%;
+    padding: 12px 8px 12px 12px;
+    border: none;
+    background: #F8F9FB;
+    border-radius: 4px;
+    height: 48px;
+    color: #363e4a;
+    font-size: 14px; }
 .tf-field-map .tf--map-osm-wrap {
   border: 1px solid #ddd;
   padding: 5px;
@@ -881,9 +888,21 @@ body.tf-modal-open {
   .tf-field-map .tf--map-inputs .tf--map-input {
     width: 48%; }
     .tf-field-map .tf--map-inputs .tf--map-input label {
-      width: 100%; }
+      width: 100%;
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      font-size: 14px;
+      color: #607085; }
     .tf-field-map .tf--map-inputs .tf--map-input input {
-      width: 100%; }
+      width: 100%;
+      padding: 12px 8px 12px 12px;
+      border: none;
+      background: #F8F9FB;
+      border-radius: 4px;
+      height: 48px;
+      color: #363e4a;
+      font-size: 14px; }
 
 .tf-field-color .tf-fieldset ul.tf-inline li {
   display: inline-flex;
