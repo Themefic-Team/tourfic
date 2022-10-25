@@ -893,7 +893,8 @@ body.tf-modal-open {
       margin-bottom: 5px;
       font-weight: 500;
       font-size: 14px;
-      color: #607085; }
+      color: #607085;
+      margin-top: 15px; }
     .tf-field-map .tf--map-inputs .tf--map-input input {
       width: 100%;
       padding: 12px 8px 12px 12px;
