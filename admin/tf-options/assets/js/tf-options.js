@@ -1,16 +1,7 @@
 (function ($) {
     'use strict';
     $(document).ready(function () {
-        /*
-        * Section tab first one click on load
-        * @author: Foysal
-        */
-        $(window).on('load', function () {
-            if ($('.tf-admin-tab .tf-tablinks').length > 0) {
-                $('.tf-admin-tab .tf-tablinks').first().trigger('click').addClass('active');
-            }
-        });
-
+      
         /*
         * Each date field initialize flatpickr
          */
@@ -71,6 +62,127 @@
             });
         });
 
+        /*
+        * Each color field initialize wpColorPicker
+         */
+        $('.tf-field-color').each(function () {
+            let $this = $(this),
+                colorField = $this.find('input.tf-color');
+
+            colorField.wpColorPicker();
+        });
+
+        //Custom modal
+        $(document).on('click', '.tf-modal-btn', function (e) {
+            e.preventDefault();
+            let $this = $(this),
+                modal = $('#tf-icon-modal');
+
+            if (modal.length > 0 && modal.hasClass('tf-modal-show')) {
+                modal.removeClass('tf-modal-show');
+                $('body').removeClass('tf-modal-open');
+            } else {
+                modal.addClass('tf-modal-show');
+                $('body').addClass('tf-modal-open');
+            }
+        });
+        $(document).on("click", '.tf-modal-close', function () {
+            $('.tf-modal').removeClass('tf-modal-show');
+            $('body').removeClass('tf-modal-open');
+        });
+        $(document).click(function (event) {
+            if (!$(event.target).closest(".tf-modal-content,.tf-modal-btn").length) {
+                $("body").removeClass("tf-modal-open");
+                $(".tf-modal").removeClass("tf-modal-show");
+            }
+        });
+
+        /*
+        * Icon tab
+        * */
+        $(document).on('click', '.tf-icon-tab', function (e) {
+            e.preventDefault();
+            let $this = $(this),
+                tab = $this.data('tab');
+
+            $('.tf-icon-tab').removeClass('active');
+            $this.addClass('active');
+
+            $('#' + tab).addClass('active').siblings().removeClass('active');
+        });
+
+        /*
+        * Icon select
+         */
+        $(document).on('click', '.tf-icon-select .tf-admin-btn, .tf-icon-select .tf-icon-preview', function (e) {
+            e.preventDefault();
+            let btn = $(this);
+
+            //icon select
+            $(document).on('click', '.tf-icon-list li', function (e) {
+                e.preventDefault();
+                let $this = $(this);
+
+                $('.tf-icon-list li').removeClass('active');
+                $this.addClass('active');
+
+                //remove disabled class
+                $('.tf-icon-insert').removeClass('disabled');
+            });
+
+            //insert btn click
+            $(document).on('click', '.tf-icon-insert', function (e) {
+                e.preventDefault();
+                let $this = $(this),
+                    preview = btn.closest('.tf-icon-select').find('.tf-icon-preview'),
+                    icon = $('.tf-icon-list li.active').data('icon');
+
+                if (icon) {
+                    preview.removeClass('tf-hide');
+                    btn.closest('.tf-icon-select').find('.tf-icon-preview-wrap i').attr('class', icon);
+                    btn.closest('.tf-icon-select').find('.tf-icon-value').val(icon).trigger('change');
+
+                    //Close modal
+                    $('.tf-modal').removeClass('tf-modal-show');
+                    $('body').removeClass('tf-modal-open');
+                }
+            })
+        });
+
+        $(document).on('change keyup', '.tf-icon-search-input', function () {
+
+            let searchVal = $(this).val(),
+                $icons = $('#tf-icon-modal').find('.tf-icon-list li');
+
+            $icons.each(function () {
+
+                var $this = $(this);
+
+                if ($this.data('icon').search(new RegExp(searchVal, 'i')) < 0) {
+                    $this.hide();
+                } else {
+                    $this.show();
+                }
+
+            });
+
+        });
+
+        //Icon remove
+        $(document).on('click', '.tf-icon-preview .remove-icon', function (e) {
+            e.preventDefault();
+            let $this = $(this),
+                preview = $this.closest('.tf-icon-preview'),
+                iconSelect = $this.closest('.tf-icon-select'),
+                iconLi = $('#tf-icon-modal').find('.tf-icon-list li');
+
+            preview.addClass('tf-hide');
+            iconSelect.find('.tf-icon-preview-wrap i').attr('class', '');
+            iconSelect.find('.tf-icon-value').val('').trigger('change');
+
+            //remove active class
+            iconLi.removeClass('active');
+        })
 
          // Repeater jquery 
          
@@ -113,7 +225,7 @@
         });
         $(document).on('click', '.tf-repeater-icon-clone', function(){ 
             let clone_value = $(this).closest('.tf-single-repeater').html();
-            $(this).closest('.tf-repeater-wrap').append('<div class="tf-single-repeater">'+clone_value+'</div>').show();
+            $(this).closest('.tf-repeater-wrap').append('<div class="tf-single-repeater">' + clone_value + '</div>').show();
         });
         $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function(){
             
@@ -169,8 +281,8 @@ var frame, gframe;
         var fieldname = $(this).attr("tf-field-name");
         var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
-        $('input[name="'+fieldname+'"]').val('');
-        $('.'+tf_preview_class+'').html('');
+        $('input[name="' + fieldname + '"]').val('');
+        $('.' + tf_preview_class + '').html('');
 
     });
 
@@ -180,9 +292,9 @@ var frame, gframe;
         var fieldname = $(this).attr("tf-field-name");
         var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
-        $('input[name="'+fieldname+'"]').val('');
-        $('.tf-fieldset > .'+tf_preview_class+'').html('');
-        $('a.'+tf_preview_class+'').css("display","none");
+        $('input[name="' + fieldname + '"]').val('');
+        $('.tf-fieldset > .' + tf_preview_class + '').html('');
+        $('a.' + tf_preview_class + '').css("display", "none");
 
     });
 
@@ -190,7 +302,7 @@ var frame, gframe;
 
         // Single Image Upload
 
-        $('body').on('click', '.tf-media-upload', function(e) {
+        $('body').on('click', '.tf-media-upload', function (e) {
             var fieldname = $(this).attr("tf-field-name");
             var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
@@ -204,8 +316,8 @@ var frame, gframe;
             frame.on('select', function () {
 
                 var attachment = frame.state().get('selection').first().toJSON();
-                $('input[name="'+fieldname+'"]').val(attachment.url);
-                $('.'+tf_preview_class+'').html(`<div class="tf-image-close" tf-field-name='${fieldname}'>✖</div><img src='${attachment.sizes.thumbnail.url}' />`);
+                $('input[name="' + fieldname + '"]').val(attachment.url);
+                $('.' + tf_preview_class + '').html(`<div class="tf-image-close" tf-field-name='${fieldname}'>✖</div><img src='${attachment.sizes.thumbnail.url}' />`);
             });
             frame.open();
             return false;
@@ -213,7 +325,7 @@ var frame, gframe;
 
         // Gallery Image Upload
 
-        $('body').on('click', '.tf-gallery-upload', function(e) {
+        $('body').on('click', '.tf-gallery-upload', function (e) {
             var fieldname = $(this).attr("tf-field-name");
             var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
             gframe = wp.media({
@@ -224,18 +336,18 @@ var frame, gframe;
                 multiple: 'add'
             });
 
-            gframe.on('open',function() {
+            gframe.on('open', function () {
                 var selection = gframe.state().get('selection');
-                var ids_value = jQuery('input[name="'+fieldname+'"]').val();
+                var ids_value = jQuery('input[name="' + fieldname + '"]').val();
 
-                if(ids_value.length > 0) {
-                  var ids = ids_value.split(',');
+                if (ids_value.length > 0) {
+                    var ids = ids_value.split(',');
 
-                  ids.forEach(function(id) {
-                    attachment = wp.media.attachment(id);
-                    attachment.fetch();
-                    selection.add(attachment ? [attachment] : []);
-                  });
+                    ids.forEach(function (id) {
+                        attachment = wp.media.attachment(id);
+                        attachment.fetch();
+                        selection.add(attachment ? [attachment] : []);
+                    });
                 }
             });
 
@@ -243,19 +355,136 @@ var frame, gframe;
                 var image_ids = [];
                 var image_urls = [];
                 var attachments = gframe.state().get('selection').toJSON();
-                $('.tf-fieldset > .'+tf_preview_class+'').html('');
+                $('.tf-fieldset > .' + tf_preview_class + '').html('');
                 for (i in attachments) {
                     var attachment = attachments[i];
                     image_ids.push(attachment.id);
                     image_urls.push(attachment.sizes.thumbnail.url);
-                    $('.tf-fieldset > .'+tf_preview_class+'').append(`<img src='${attachment.sizes.thumbnail.url}' />`);
+                    $('.tf-fieldset > .' + tf_preview_class + '').append(`<img src='${attachment.sizes.thumbnail.url}' />`);
                 }
-                $('input[name="'+fieldname+'"]').val(image_ids.join(","));
-                $('a.'+tf_preview_class+'').css("display","inline-block");
+                $('input[name="' + fieldname + '"]').val(image_ids.join(","));
+                $('a.' + tf_preview_class + '').css("display", "inline-block");
             });
 
             gframe.open();
             return false;
         });
+    
+
+
+    
+        $(".tf-field-map").each(function() {
+            var $this         = $(this),
+            $map          = $this.find('.tf--map-osm'),
+            $search_input = $this.find('.tf--map-search input'),
+            $latitude     = $this.find('.tf--latitude'),
+            $longitude    = $this.find('.tf--longitude'),
+            $zoom         = $this.find('.tf--zoom'),
+            map_data      = $map.data( 'map' );
+            
+          var mapInit = L.map( $map.get(0), map_data);
+
+    
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          }).addTo(mapInit);
+    
+          var mapMarker = L.marker(map_data.center,{draggable: true}).addTo(mapInit);
+    
+          var update_latlng = function( data ) {
+            $latitude.val( data.lat );
+            $longitude.val( data.lng );
+            $zoom.val( mapInit.getZoom() );
+          };
+    
+          mapInit.on( 'click', function ( data ) {
+            mapMarker.setLatLng( data.latlng );
+            update_latlng( data.latlng );
+          });
+    
+          mapInit.on( 'zoom', function () {
+            update_latlng( mapMarker.getLatLng() );
+          });
+    
+          mapMarker.on( 'drag', function () {
+            update_latlng( mapMarker.getLatLng() );
+          });
+    
+          if ( ! $search_input.length ) {
+            $search_input = $( '[data-depend-id="'+ $this.find('.tf--address-field').data( 'address-field' ) +'"]' );
+          }
+    
+          var cache = {};
+    
+          $search_input.autocomplete({
+            source: function ( request, response ) {
+    
+              var term = request.term;
+    
+              if ( term in cache ) {
+                response( cache[term] );
+                return;
+              }
+    
+              $.get( 'https://nominatim.openstreetmap.org/search', {
+                format: 'json',
+                q: term,
+              }, function( results ) {
+    
+                var data;
+    
+                if ( results.length ) {
+                  data = results.map( function( item ) {
+                    return {
+                      value: item.display_name,
+                      label: item.display_name,
+                      lat: item.lat,
+                      lon: item.lon
+                    };
+                  }, 'json');
+                } else {
+                  data = [{
+                    value: 'no-data',
+                    label: 'No Results.'
+                  }];
+                }
+    
+                cache[term] = data;
+                response(data);
+    
+              });
+    
+            },
+            select: function ( event, ui ) {
+    
+              if ( ui.item.value === 'no-data' ) { return false; }
+    
+              var latLng = L.latLng( ui.item.lat, ui.item.lon );
+    
+              mapInit.panTo( latLng );
+              mapMarker.setLatLng( latLng );
+              update_latlng( latLng );
+    
+            },
+            create: function (event, ui) {
+              $(this).autocomplete('widget').addClass('tf-map-ui-autocomplate');
+            }
+          });
+    
+          var input_update_latlng = function() {
+    
+            var latLng = L.latLng( $latitude.val(), $longitude.val() );
+    
+            mapInit.panTo( latLng );
+            mapMarker.setLatLng( latLng );
+    
+          };
+    
+          $latitude.on('change', input_update_latlng );
+          $longitude.on('change', input_update_latlng );
+    
+        });
     });
+
+
 })(jQuery);

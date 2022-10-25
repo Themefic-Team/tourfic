@@ -147,7 +147,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					),
 				),
 				//image
-				array(
+				 array(
 					'id'          => 'image',
 					'type'        => 'image',
 					'label'       => 'Features',
@@ -316,8 +316,35 @@ TF_Metabox::metabox( 'tf_hotels', array(
 							)
 						),
 					)
-				),
+				), 
 
+				//color
+				/*array(
+					'id'          => 'color',
+					'type'        => 'color',
+					'label'       => 'Color',
+					'description' => 'This is a description',
+				),
+				array(
+					'id'          => 'colorss',
+					'type'        => 'color',
+					'label'       => 'Color2',
+					'multiple'    => true,
+					'inline'      => true,
+					'colors'      => array(
+						'title' => 'Title',
+						'subtitle' => 'Subtitle',
+						'content' => 'Content',
+					),
+				),*/
+				//icon
+				array(
+					'id'          => 'icon',
+					'type'        => 'icon',
+					'label'       => 'Icon',
+					'default'     => 'fa fa-home',
+					'description' => 'This is a description',
+				),
 			),
 		),
 		'section_3' => array(
@@ -330,6 +357,18 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'type'        => 'text',
 					'placeholder' => 'Zip of the hotel',
 					'description' => 'Zip of the hotel',
+				),
+				array(
+					'id'          => 'googlemap',
+					'label'       => 'Textarea 2',
+					'type'        => 'map',
+					'description' => 'room details hotel',
+				),
+				array(
+					'id'          => 'googlemap-testing',
+					'label'       => 'Textarea 2',
+					'type'        => 'map',
+					'description' => 'room details hotel',
 				),
 			),
 		),

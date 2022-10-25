@@ -34,6 +34,16 @@ if ( class_exists( 'CSF' ) ) {
 				),
 			),
 			array(
+				'id'         => 'icon-fa',
+				'type'       => 'icon',
+				'title'      => __('Select Font Awesome Icon', 'tourfic'),
+			),
+			array(
+				'id'         => 'icon-fass',
+				'type'       => 'icon',
+				'title'      => __('Select Font Awesome Icon', 'tourfic'),
+			),
+			array(
 				'id'       => 'disable-services',
 				'type'     => 'checkbox',
 				'title'    => __( 'Disable Services', 'tourfic' ),

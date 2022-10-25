@@ -19,7 +19,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 						<?php endforeach; ?>
 					<?php endif; ?> 
 				</ul>
-				<div class="tf-tab-content">
+				<div class="tf-tab-field-content">
 					<?php if(isset($this->field['tabs']) && is_array($this->field['tabs'])): ?>
 						<?php foreach($this->field['tabs'] as $key => $value):  ?>
 							<div class="tf-tab-item-content <?php if($key == 0){echo "show";} ?>"  data-tab-id="<?php if(isset($value['id'])){ echo esc_attr($value['id']); }  ?>">

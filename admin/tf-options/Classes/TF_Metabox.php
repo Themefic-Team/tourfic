@@ -83,17 +83,19 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			?>
             <div class="tf-admin-meta-box">
                 <div class="tf-admin-tab">
-					<?php foreach ( $this->metabox_sections as $key => $section ) : ?>
-                        <a class="tf-tablinks" onclick="openTab(event, '<?php echo esc_attr( $key ) ?>')">
+					<?php 
+					$section_count = 0;
+					foreach ( $this->metabox_sections as $key => $section ) : ?>
+                        <a class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>" onclick="openTab(event, '<?php echo esc_attr( $key ) ?>')">
 							<?php echo ! empty( $section['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $section['icon'] ) . '"></i></span>' : ''; ?>
 							<?php echo esc_html( $section['title'] ); ?>
                         </a>
-					<?php endforeach; ?>
+					<?php $section_count++; endforeach; ?>
                 </div>
 
                 <div class="tf-tab-wrapper">
-					<?php foreach ( $this->metabox_sections as $key => $section ) : ?>
-                        <div id="<?php echo esc_attr( $key ) ?>" class="tf-tab-content">
+					<?php $content_count = 0; foreach ( $this->metabox_sections as $key => $section ) : ?>
+                        <div id="<?php echo esc_attr( $key ) ?>" class="tf-tab-content <?php echo $content_count == 0 ? 'active' : ''; ?>">
 
 							<?php
 							if ( ! empty( $section['fields'] ) ):
@@ -108,7 +110,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 							endif; ?>
 
                         </div>
-					<?php endforeach; ?>
+					<?php $content_count++; endforeach; ?>
                 </div>
 
             </div>
@@ -146,26 +148,23 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			}
 
 			$tf_meta_box_value = array();
-			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array(); 
-			// tf_var_dump($metabox_request);
-			// wp_die();
+			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array();
+
 			if ( ! empty( $metabox_request ) && ! empty( $this->metabox_sections ) ) {
 				foreach ( $this->metabox_sections as $section ) { 
 					if ( ! empty( $section['fields'] ) ) {
 						
 						foreach ( $section['fields'] as $field ) {
+
 							if ( ! empty( $field['id'] ) ) {
-								$data = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : ''; 
-								$fieldClass = 'TF_' . $field['type'];
-								if($fieldClass == 'TF_repeater' || $fieldClass == 'TF_tab'){ 
-									$data = serialize($data);
+								$data = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : '';
+
+								$fieldClass = 'TF_' . $field['type']; 
+								$data = $fieldClass == 'TF_repeater' || $fieldClass == 'TF_tab' || $fieldClass == 'TF_color' ? serialize($data) : $data ;
+
+								if ( class_exists( $fieldClass ) ) {
 									$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
 									$tf_meta_box_value[ $field['id'] ] = $_field->sanitize();
-								}else{
-									if ( class_exists( $fieldClass ) ) {
-										$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
-										$tf_meta_box_value[ $field['id'] ] = $_field->sanitize();
-									}
 								}
 								
 							}
@@ -173,8 +172,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 					}
 				}
 			}
-//			tf_var_dump($tf_meta_box_value);
-//            die();
+
 			if ( ! empty( $tf_meta_box_value ) ) {
 				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
 			} else {
