@@ -96,7 +96,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'default'     => true,
 				),*/
 				//date
-				/*array(
+				array(
 					'id'          => 'datedsd',
 					'type'        => 'date',
 					'label'       => 'Date',
@@ -132,7 +132,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'placeholder' => 'Select a time',
 					'description' => 'This is a description',
 					'format'      => 'h:i K',
-				),*/
+				),
 				array(
 					'id'          => 'features',
 					'type'        => 'select2',
@@ -252,68 +252,78 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'description' => 'Zip of the hotel',
 					'fields' => array(
 
+						//checkbox
 						array(
-							'id'          => 'name',
-							'title'       => 'Name ',
-							'type'        => 'text',
-							'placeholder' => 'Address of the hotel',
-							'description' => 'Address of the hotel',
+							'id'          => 'checky',
+							'type'        => 'checkbox',
+							'label'       => 'Checkbox',
+							'subtitle'    => 'Checkbox',
+							'description' => 'Checkbox',
+							'options'     => array(
+								'1' => 'Checkbox 1',
+								'2' => 'Checkbox 2',
+								'3' => 'Checkbox 3',
+							),
 						),
 						array(
-							'id'          => 'address',
-							'title'       => 'Address',
-							'type'        => 'text',
-							'placeholder' => 'Address of the hotel',
-							'description' => 'Address of the hotel',
+							'id'          => 'check',
+							'type'        => 'checkbox',
+							'label'       => 'Checkbox',
+							'title'       => 'Single checkbox',
+							'subtitle'    => 'Checkbox',
+							'description' => 'Checkbox',
+						), 
+
+						//date
+						array(
+							'id'          => 'datedsd',
+							'type'        => 'date',
+							'label'       => 'Date',
+							'placeholder' => 'Select a date',
+							'description' => 'This is a description',
+							'format'      => 'Y/m/d',
+							'range'       => true,
+							'label_from'  => 'Start Date',
+							'label_to'    => 'End Date'
 						),
 						array(
-							'id'          => 'repeater_nested',
-							'label'       => 'repeater 2',
-							'type'        => 'repeater',
-							'placeholder' => 'Zip of the hotel',
-							'description' => 'Zip of the hotel',
-							'fields' => array(
-		
-								array(
-									'id'          => 'name',
-									'title'       => 'Name ',
-									'type'        => 'text',
-									'placeholder' => 'Address of the hotel',
-									'description' => 'Address of the hotel',
-								),
-								array(
-									'id'          => 'address',
-									'title'       => 'Address',
-									'type'        => 'text',
-									'placeholder' => 'Address of the hotel',
-									'description' => 'Address of the hotel',
-								),
-								array(
-									'id'          => 'repeater_nested2',
-									'label'       => 'repeater 3',
-									'type'        => 'repeater',
-									'placeholder' => 'Zip of the hotel',
-									'description' => 'Zip of the hotel',
-									'fields' => array(
-				
-										array(
-											'id'          => 'name',
-											'title'       => 'Name ',
-											'type'        => 'text',
-											'placeholder' => 'Address of the hotel',
-											'description' => 'Address of the hotel',
-										),
-										array(
-											'id'          => 'address',
-											'title'       => 'Address',
-											'type'        => 'text',
-											'placeholder' => 'Address of the hotel',
-											'description' => 'Address of the hotel',
-										),
-				
-									)
-								),
-							)
+							'id'          => 'date',
+							'type'        => 'date',
+							'label'       => 'Date',
+							'placeholder' => 'Select a date',
+							'description' => 'This is a description',
+							'format'      => 'Y/m/d',
+							'multiple'    => true,
+						),
+						array(
+							'id'          => 'date1',
+							'type'        => 'date',
+							'label'       => 'Date 1',
+							'placeholder' => 'Select a date',
+							'description' => 'This is a description',
+							'format'      => 'd/m/Y',
+						),
+						//time
+						array(
+							'id'          => 'time',
+							'type'        => 'time',
+							'label'       => 'Time',
+							'placeholder' => 'Select a time',
+							'description' => 'This is a description',
+							'format'      => 'h:i K',
+						),
+						array(
+							'id'          => 'features',
+							'type'        => 'select2',
+							'label'       => 'Features',
+							'placeholder' => 'Select a time',
+							'description' => 'This is a description',
+							'multiple'    => true,
+							'options'     => array(
+								'1' => 'Option 1',
+								'2' => 'Option 2',
+								'3' => 'Option 3',
+							),
 						),
 					)
 				), 

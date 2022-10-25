@@ -28,10 +28,8 @@ if ( class_exists( 'CSF' ) ) {
 				'title'         => __( 'Select Features', 'tourfic' ),
 				'placeholder'   => __( 'Select', 'tourfic' ),
 				'empty_message' => __( 'No feature available', 'tourfic' ),
-				'options'       => 'categories',
-				'query_args'    => array(
-					'taxonomy' => 'hotel_feature',
-				),
+				'taxonomy'       => 'hotel_feature',
+				 
 			),
 			array(
 				'id'         => 'icon-fa',

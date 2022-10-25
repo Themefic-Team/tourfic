@@ -50,7 +50,6 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 									</div>
 								</div>
                                 <div class="tf-repeater-content-wrap">
-
 									<?php
 									foreach ( $this->field['fields'] as $re_field ) :
 										if(!empty($this->parent_field)){

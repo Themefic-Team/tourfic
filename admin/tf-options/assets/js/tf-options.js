@@ -32,6 +32,9 @@
                 });
             }
         });
+        
+ 
+        
 
         /*
         * Each time field initialize flatpickr
@@ -200,17 +203,23 @@
            if(parent_field == ''){  
                 add_value.find(':input').each(function (){ 
                     this.name = this.name.replace( '_____', '' ).replace('['+current_field+'][0]', '['+current_field+']['+ count +']');
-                    this.id = this.id.replace( '_____', '' ).replace('['+current_field+'][0]', '['+current_field+']['+ count +']');
+                    this.id = this.id.replace( '_____', '' ).replace('['+current_field+'][0]', '['+current_field+']['+ count +']'); 
                  }); 
              var update_paren  = add_value.find('.tf-repeater input[name="tf_parent_field"]').val();
-             var update_paren  = update_paren.replace('['+current_field+'][0]', '['+current_field+']['+ count +']');
+             if (typeof update_paren !== "undefined") {
+                var update_paren  = update_paren.replace('['+current_field+'][0]', '['+current_field+']['+ count +']');
+            } 
              add_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
  
            }else{
             var update_paren  = add_value.find(':input[name="tf_parent_field"]').val();
             add_value.find(':input').each(function (){ 
                 this.name = this.name.replace( '_____', '' ).replace('['+current_field+'][0]', '['+current_field+']['+ count +']');
-                this.id = this.id.replace( '_____', '' ).replace('['+current_field+'][0]',  '['+current_field+']['+ count +']');
+                this.id = this.id.replace( '_____', '' ).replace('['+current_field+'][0]',  '['+current_field+']['+ count +']'); 
+            });
+            add_value.find('label').each(function (){ 
+                this.name = this.name.replace( '_____', '' ).replace('['+current_field+'][0]', '['+current_field+']['+ count +']');
+                this.id = this.id.replace( '_____', '' ).replace('['+current_field+'][0]',  '['+current_field+']['+ count +']'); 
             });
            }
            

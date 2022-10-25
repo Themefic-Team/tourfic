@@ -5,8 +5,8 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'TF_checkbox' ) ) {
 	class TF_checkbox extends TF_Fields {
 
-		public function __construct( $field, $value = '', $settings_id = '' ) {
-			parent::__construct( $field, $value, $settings_id );
+		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
+			parent::__construct( $field, $value, $settings_id, $parent_field  );
 		}
 
 		public function render() {
@@ -21,8 +21,7 @@ if ( ! class_exists( 'TF_checkbox' ) ) {
 			} else {
 				echo '<input type="checkbox" id="' . $this->field_name() . '" name="' . $this->field_name() . '" value="1" ' . checked( $this->value, 1, false ) . '/><label for="' . $this->field_name() . '">' . $this->field['title'] . '</label>';
 			}
-		}
-
+		} 
 		public function sanitize() {
 			$value = ( is_array( $this->value ) ) ? array_map( 'sanitize_text_field', $this->value ) : sanitize_text_field( $this->value );
 
