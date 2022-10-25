@@ -26,6 +26,9 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			//load metaboxes
 			$this->load_metaboxes();
 
+            //load options
+            $this->load_options();
+
 			//enqueue scripts
 			add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_enqueue_scripts' ) );
 		}
@@ -58,6 +61,22 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		}
 
 		/**
+		 * Load Options
+         * @since 1.0.0
+		 */
+        public function load_options() {
+            $options = glob( TF_ADMIN_PATH . 'tf-options/options/*.php' );
+            if ( ! empty( $options ) ) {
+                foreach ( $options as $option ) {
+                    $option_name = basename( $option, '.php' );
+                    if ( ! class_exists( $option_name ) ) {
+                        require_once $option;
+                    }
+                }
+            }
+        }
+
+		/**
 		 * Enqueue scripts
 		 * @since 1.0.0
 		 */
@@ -71,7 +90,8 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			wp_enqueue_style( 'tf-select2', TF_ADMIN_URL . 'tf-options/assets/css/select2.min.css', array(), TOURFIC );
 			wp_enqueue_style( 'tf-flatpickr', TF_ADMIN_URL . 'tf-options/assets/css/flatpickr.min.css', array(), TOURFIC );
 			wp_enqueue_style( 'tf-options', TF_ADMIN_URL . 'tf-options/assets/css/tf-options.css', array(), TOURFIC );
-			//Js
+
+            //Js
 			wp_enqueue_script( 'tf-flatpickr', TF_ADMIN_URL . 'tf-options/assets/js/flatpickr.min.js', array( 'jquery' ), TOURFIC, true );
 			wp_enqueue_script( 'tf-select2', TF_ADMIN_URL . 'tf-options/assets/js/select2.min.js', array( 'jquery' ), TOURFIC, true );
 			wp_enqueue_script( 'wp-color-picker-alpha', TF_ADMIN_URL . 'tf-options/assets/js/wp-color-picker-alpha.js', array( 'jquery', 'wp-color-picker' ), TOURFIC, true );
