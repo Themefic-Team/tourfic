@@ -7,6 +7,18 @@
     font-weight: 500;
     font-size: 14px;
     color: $slate60;
+    display: flex !important;
+    align-items: center;
+    .tf-csf-badge{ 
+      margin-left: 13px; 
+      .tf-pro {
+        background-color: #F44336 !important;
+      }
+      .tf-upcoming {
+        background-color: #006600 !important;
+      }
+    }
+   
   }
 
   .tf-field-sub-title{

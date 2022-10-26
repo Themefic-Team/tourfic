@@ -112,10 +112,24 @@ if ( ! class_exists( 'TF_Options' ) ) {
             }
 
             $class = isset( $field['class'] ) ? $field['class'] : '';
+            $is_pro = isset( $field['is_pro'] ) ? $field['is_pro'] : '';
+            $badge_up_pro = isset( $field['badge_up_pro'] ) ? $field['badge_up_pro'] : '';
+
+			if(isset( $field['is_pro'] ) || isset( $field['badge_up_pro'] ) ){ 
+				$class .= 'tf-csf-disable tf-csf-pro';
+			}
 			?>
             <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?>">
 				<?php if ( ! empty( $field['label'] ) ): ?>
-                    <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label"><?php echo esc_html( $field['label'] ) ?></label>
+                    <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label">
+						<?php echo esc_html( $field['label'] ) ?>
+						<?php if($is_pro): ?>
+							<div class="tf-csf-badge"><span class="tf-pro"><?php _e( "Pro", "tourfic" ); ?></span></div>
+						<?php endif; ?>
+						<?php if($badge_up_pro): ?>
+							<div class="tf-csf-badge"><span class="tf-upcoming"><?php _e( "Upcoming", "tourfic" ); ?></span></div> 
+						<?php endif; ?>
+					</label>
 				<?php endif; ?>
 				<?php if ( ! empty( $field['subtitle'] ) ) : ?>
                     <span class="tf-field-sub-title"><?php echo wp_kses_post( $field['subtitle'] ) ?></span>
