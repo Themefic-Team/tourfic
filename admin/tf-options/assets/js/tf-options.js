@@ -76,7 +76,8 @@
         const tfColorInt = colorSelector => {
             $(colorSelector).each(function () {
                 let $this = $(this),
-                    colorField = $this.find('input.tf-color'); 
+                    colorField = $this.find('input.tf-color');
+
                 colorField.wpColorPicker();
             });
         }
