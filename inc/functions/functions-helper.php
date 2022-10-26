@@ -333,19 +333,19 @@ add_filter( 'excerpt_length', 'tf_custom_excerpt_length', 999 );
 /**
  * Pagination
  */
-function tourfic_posts_navigation($wp_query='') {
+function tourfic_posts_navigation($loop) {
 
-	if(empty($wp_query)) {
-		global $wp_query;
+	if(empty($loop)) {
+		global $loop;
 	}
-
-	$max_num_pages = $wp_query->max_num_pages;
+	$max_num_pages = $loop->max_num_pages;
+	var_dump($max_num_pages);
 	$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-
+	$big = 999999;
 	echo "<div id='am_posts_navigation'>";
 	echo paginate_links( array(
-		//'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-	    'format'  => 'page/%#%',
+		//'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+	    //'format'  => 'paged/%#%',
 	    'current' => $paged,
 	    'total'   => $max_num_pages,
 	    'mid_size'        => 2,

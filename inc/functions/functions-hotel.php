@@ -1426,12 +1426,13 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	), $url );
 
     $room_price = [];
-    foreach ( $b_rooms as $b_room ) {
-        //room price
-        $price        = ! empty( $b_room['price'] ) ? $b_room['price'] : '';
-        $room_price[] = $price;
-    }
-
+	if( !empty($b_rooms) ):
+		foreach ( $b_rooms as $b_room ) {
+			//room price
+			$price        = ! empty( $b_room['price'] ) ? $b_room['price'] : '';
+			$room_price[] = $price;
+		}
+	endif;
 	?>
     <div class="single-tour-wrap">
         <div class="single-tour-inner">
@@ -1838,7 +1839,7 @@ function tf_hotel_quickview_callback() {
                                     <span class="icon-text tf-d-b"><?php echo $num_room; ?></span>
                                 </div>
                                 <div class="tf-top">
-									<?php _e( 'No. Room', 'tourfic' ); ?>
+									<?php _e( 'Number of Room', 'tourfic' ); ?>
                                     <i class="tool-i"></i>
                                 </div>
                             </div>
@@ -1846,8 +1847,7 @@ function tf_hotel_quickview_callback() {
 						if ( $footage ) { ?>
                             <div class="tf-tooltip tf-d-ib">
                                 <div class="room-detail-icon">
-                        <span class="room-icon-wrap"><i
-                                    class="fas fa-ruler-combined"></i></span>
+                        		<span class="room-icon-wrap"><i class="fas fa-ruler-combined"></i></span>
                                     <span class="icon-text tf-d-b"><?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></span>
                                 </div>
                                 <div class="tf-top">
@@ -1863,7 +1863,7 @@ function tf_hotel_quickview_callback() {
                                     <span class="icon-text tf-d-b">x<?php echo $bed; ?></span>
                                 </div>
                                 <div class="tf-top">
-									<?php _e( 'No. Beds', 'tourfic' ); ?>
+									<?php _e( 'Number of Beds', 'tourfic' ); ?>
                                     <i class="tool-i"></i>
                                 </div>
                             </div>
@@ -1909,7 +1909,7 @@ function tf_hotel_quickview_callback() {
                                         <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
                                     </div>
                                     <div class="tf-top">
-										<?php _e( 'No. Adults', 'tourfic' ); ?>
+										<?php _e( 'Number of Adults', 'tourfic' ); ?>
                                         <i class="tool-i"></i>
                                     </div>
                                 </div>
@@ -1922,7 +1922,7 @@ function tf_hotel_quickview_callback() {
                                         <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                                     </div>
                                     <div class="tf-top">
-										<?php _e( 'No. Children', 'tourfic' ); ?>
+										<?php _e( 'Number of Children', 'tourfic' ); ?>
                                         <i class="tool-i"></i>
                                     </div>
                                 </div>

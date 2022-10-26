@@ -495,9 +495,10 @@ function tf_search_result_shortcode( $atts, $content = null ){
     
     // Main Query args
     $args = array(
-        'post_type'   => $post_type,
-        'post_status' => 'publish',
-        'paged'       => $paged,
+        'post_type'      => $post_type,
+        'post_status'    => 'publish',
+        'posts_per_page' => '2',
+        'paged'          => $paged,
     );
 
     $taxonomy_query = new WP_Term_Query(array(
@@ -546,7 +547,6 @@ function tf_search_result_shortcode( $atts, $content = null ){
     $loop = new WP_Query( $args );
 
     ob_start(); ?>
-
     <!-- Start Content -->
     <div class="tf_search_result">
         <div class="tf-action-top">
@@ -594,13 +594,16 @@ function tf_search_result_shortcode( $atts, $content = null ){
 			?>
         </div>
         <div class="tf_posts_navigation">
-			<?php tourfic_posts_navigation( $loop ); ?>
+			<?php 
+			tourfic_posts_navigation( $loop );
+			
+			 ?>
         </div>
 
     </div>
     <!-- End Content -->
 
-	<?php wp_reset_postdata(); ?>
+	<?php wp_reset_postdata();?>
 	<?php return ob_get_clean();
 }
 

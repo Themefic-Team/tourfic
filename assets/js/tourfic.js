@@ -1325,7 +1325,7 @@
             $(this).toggleClass('active');
             $(this).parent().find('.arrow').toggleClass('arrow-animate');
             $(this).parent().find('.tf-accordion-content').slideToggle();
-            $(this).parents('#tf-accordion-wrapper').siblings().find('.tf-accordion-content').slideUp();
+            //$(this).parents('#tf-accordion-wrapper').siblings().find('.tf-accordion-content').slideUp();
             $(this).siblings().find('.ininerary-other-gallery').slick({
                 slidesToShow: 6,
                 slidesToScroll: 1,
