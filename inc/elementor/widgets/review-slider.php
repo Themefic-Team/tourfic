@@ -116,7 +116,13 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::SWITCHER,
 			]
 		);
-
+		$this->add_control(
+			'dots',
+			[
+				'label' => esc_html__( 'Slider Dots', 'tourfic' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+			]
+		);
 		$this->add_control(
 			'autoplay_speed',
 			[
@@ -152,13 +158,15 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 		$count = $settings['count'];
 		$arrows = $settings['arrows'];
 		$arrows == 'yes' ? $arrows = 'true' : $arrows = 'false';
+		$dots = $settings['dots'];
+		$dots == 'yes' ? $dots = 'true' : $dots = 'false';
 		$autoplay = $settings['autoplay'];
 		$autoplay == 'yes' ? $autoplay = 'true' : $autoplay = 'false';
 		$autoplay_speed = $settings['autoplay_speed'];
 		$infinite = $settings['infinite'];
 		$infinite == 'yes' ? $infinite = 'true' : $infinite = 'false';
 
-        echo do_shortcode('[tf_reviews type="'.$type.'" count="' .$count. '" autoplay="'.$autoplay.'" arrows="'.$arrows.'" speed="'.$autoplay_speed.'" infinite="'.$infinite.'"]');
+        echo do_shortcode('[tf_reviews type="'.$type.'" count="' .$count. '" autoplay="'.$autoplay.'" arrows="'.$arrows.'" dots="'.$dots.'" speed="'.$autoplay_speed.'" infinite="'.$infinite.'"]');
 
 
 	}

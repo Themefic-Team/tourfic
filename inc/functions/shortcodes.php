@@ -621,6 +621,7 @@ function tf_reviews_shortcode($atts, $content = null){
 				'count' => '3',
 				'speed' => '2000',
 				'arrows' => 'false',
+				'dots' => 'true',
 				'autoplay' => 'false',
 				'slidesToShow' => '3',
 				'slidesToScroll' => 1,
@@ -668,7 +669,7 @@ function tf_reviews_shortcode($atts, $content = null){
 						<div class="tf-rating-stars">
 							<?php echo $c_rating; ?>
 						</div>
-						<div class="tf-description"><?php echo $c_content; ?></div>
+						<div class="tf-description"><?php echo wp_trim_words( $c_content, 25 ); ?></div>
 					</div>
 				</div>
 				<?php
@@ -685,7 +686,7 @@ function tf_reviews_shortcode($atts, $content = null){
 			$(".tf-reviews-slider").each(function(){
 				var $this = $(this);
 			$this.slick({
-				dots: true,
+				dots: <?php echo esc_attr( $dots ); ?>,
 				arrows: <?php echo esc_attr( $arrows ); ?>,
 				slidesToShow: <?php echo esc_attr( $count ); ?>,
 				infinite: <?php echo esc_attr( $infinite ); ?>,
