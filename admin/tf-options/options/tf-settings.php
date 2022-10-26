@@ -17,5 +17,24 @@ TF_Settings::option( 'tf-settings', array(
 				),
 			),
 		),
+		'advanced' => array(
+			'title'  => esc_html__( 'Advanced', 'tourfic' ),
+			'fields' => array(
+				array(
+					'id'          => 'search_page',
+					'label'       => 'Search Page',
+					'type'        => 'select2',
+					'placeholder' => 'Select a page',
+					'description' => 'Select a page for search',
+					'class'       => 'tf-search-page',
+					'options'     => 'terms',
+					'query_args'  => array(
+						'taxonomy'   => 'hotel_feature',
+						'hide_empty' => false,
+					),
+					'multiple'    => true,
+				),
+			),
+		),
 	),
 ) );

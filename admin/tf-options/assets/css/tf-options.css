@@ -254,6 +254,7 @@ body.tf-modal-open:after {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  text-decoration: none;
   color: #363e4a;
   padding: 12px 16px;
   text-align: left;
@@ -314,6 +315,31 @@ body.tf-modal-open:after {
   -webkit-flex: 0 0 calc(100% - 220px);
   -ms-flex: 0 0 calc(100% - 220px);
   flex: 0 0 calc(100% - 220px);
+}
+.tf-admin-option .tf-tab-wrapper .tf-tab-content,
+.tf-admin-meta-box .tf-tab-wrapper .tf-tab-content {
+  display: none;
+}
+.tf-admin-option .tf-tab-wrapper .tf-tab-content.active,
+.tf-admin-meta-box .tf-tab-wrapper .tf-tab-content.active {
+  display: block;
+}
+
+.tf-admin-option-wrapper {
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.tf-admin-option {
+  width: 100%;
+  margin: 0;
+}
+.tf-admin-option .tf-tab-wrapper {
+  -webkit-flex: 0 0 calc(100% - 260px);
+  -ms-flex: 0 0 calc(100% - 260px);
+  flex: 0 0 calc(100% - 260px);
+  background-color: #fff;
+  padding: 20px;
 }
 
 .tf-field {
@@ -1048,6 +1074,13 @@ body.tf-modal-open:after {
 }
 .tf-field-map .tf--map-search input {
   width: 100%;
+  padding: 12px 8px 12px 12px;
+  border: none;
+  background: #F8F9FB;
+  border-radius: 4px;
+  height: 48px;
+  color: #363e4a;
+  font-size: 14px;
 }
 .tf-field-map .tf--map-osm-wrap {
   border: 1px solid #ddd;
@@ -1066,9 +1099,22 @@ body.tf-modal-open:after {
 }
 .tf-field-map .tf--map-inputs .tf--map-input label {
   width: 100%;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #607085;
+  margin-top: 15px;
 }
 .tf-field-map .tf--map-inputs .tf--map-input input {
   width: 100%;
+  padding: 12px 8px 12px 12px;
+  border: none;
+  background: #F8F9FB;
+  border-radius: 4px;
+  height: 48px;
+  color: #363e4a;
+  font-size: 14px;
 }
 
 .tf-field-color .tf-fieldset ul.tf-inline li {

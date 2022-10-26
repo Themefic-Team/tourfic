@@ -3,8 +3,25 @@
     $(document).ready(function () {
 
         /*
+        * window url on change tab click
+        * @author: Foysal
+        */
+        $(window).on('hashchange load', function () {
+            let hash = window.location.hash;
+            let slug = hash.replace('#', '');
+
+            if (hash) {
+                $('.tf-tablinks').removeClass('active');
+                $('.tf-tab-content').removeClass('active');
+                $(hash).addClass('active');
+                $('[data-tab="' + slug + '"]').addClass('active');
+            }
+        });
+
+        /*
         * Each date field initialize flatpickr
-         */
+        * @author: Foysal
+        */
         const tfDateInt = dateSelector => {
             $(dateSelector).each(function () {
                 let $this = $(this),
@@ -37,7 +54,8 @@
 
         /*
         * Each time field initialize flatpickr
-         */
+        * @author: Foysal
+        */
         const tfTimeInt = timeSelector => {
             $(timeSelector).each(function () {
                 let $this = $(this),
@@ -55,7 +73,8 @@
 
         /*
         * Each select2 field initialize select2
-         */
+        * @author: Foysal
+        */
         const tfSelect2Int = select2Selector => {
             $(select2Selector).each(function () {
                 let $this = $(this),
@@ -72,7 +91,8 @@
 
         /*
         * Each color field initialize wpColorPicker
-         */
+        * @author: Foysal
+        */
         const tfColorInt = colorSelector => {
             $(colorSelector).each(function () {
                 let $this = $(this),
@@ -83,7 +103,10 @@
         }
         tfColorInt('.tf-field-color');
 
-        //Custom modal
+        /*
+        * Custom modal
+        * @author: Foysal
+        */
         $(document).on('click', '.tf-modal-btn', function (e) {
             e.preventDefault();
             let $this = $(this),
@@ -110,7 +133,8 @@
 
         /*
         * Icon tab
-        * */
+        * @author: Foysal
+        */
         $(document).on('click', '.tf-icon-tab', function (e) {
             e.preventDefault();
             let $this = $(this),
@@ -124,7 +148,8 @@
 
         /*
         * Icon select
-         */
+        * @author: Foysal
+        */
         $(document).on('click', '.tf-icon-select .tf-admin-btn, .tf-icon-select .tf-icon-preview', function (e) {
             e.preventDefault();
             let btn = $(this);
@@ -160,6 +185,10 @@
             })
         });
 
+        /*
+        * Icon search
+        * @author: Foysal
+        */
         $(document).on('change keyup', '.tf-icon-search-input', function () {
 
             let searchVal = $(this).val(),
@@ -179,7 +208,10 @@
 
         });
 
-        //Icon remove
+        /*
+        * Icon remove
+        * @author: Foysal
+        */
         $(document).on('click', '.tf-icon-preview .remove-icon', function (e) {
             e.preventDefault();
             let $this = $(this),
@@ -291,6 +323,7 @@
 
 
 function openTab(evt, tabName) {
+    evt.preventDefault();
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tf-tab-content");
     for (i = 0; i < tabcontent.length; i++) {

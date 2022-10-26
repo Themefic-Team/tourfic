@@ -36,7 +36,10 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			return new self( $key, $params );
 		}
 
-		// Include fields
+		/*
+		 * Load fields
+		 * @author Foysal
+         */
 		public function load_fields() {
 
 			// Fields Class
@@ -57,13 +60,16 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 
 		/**
 		 * Metaboxes
-		 *
-		 * @since 1.0.0
+         * @author Foysal
 		 */
 		public function tf_meta_box() {
 			add_meta_box( $this->metabox_id, $this->metabox_title, array( $this, 'tf_meta_box_content' ), $this->metabox_post_type, 'normal', 'high', );
 		}
 
+        /*
+         * Metabox Content
+         * @author Foysal
+         */
 		public function tf_meta_box_content( $post ) {
 			// Add nonce for security and authentication.
 			wp_nonce_field( 'tf_meta_box_nonce_action', 'tf_meta_box_nonce' );
@@ -117,6 +123,10 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			<?php
 		}
 
+        /*
+         * Save Metabox
+         * @author Foysal
+         */
 		public function save_metabox( $post_id ) {
 			// Add nonce for security and authentication.
 			$nonce_name   = isset( $_POST['tf_meta_box_nonce'] ) ? $_POST['tf_meta_box_nonce'] : '';

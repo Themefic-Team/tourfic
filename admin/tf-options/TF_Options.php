@@ -26,8 +26,8 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			//load metaboxes
 			$this->load_metaboxes();
 
-            //load options
-            $this->load_options();
+			//load options
+			$this->load_options();
 
 			//enqueue scripts
 			add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_enqueue_scripts' ) );
@@ -35,7 +35,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 
 		/**
 		 * Load files
-		 * @since 1.0.0
+		 * @author Foysal
 		 */
 		public function load_files() {
 			// Metaboxes Class
@@ -46,7 +46,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 
 		/**
 		 * Load metaboxes
-		 * @since 1.0.0
+		 * @author Foysal
 		 */
 		public function load_metaboxes() {
 			$metaboxes = glob( TF_ADMIN_PATH . 'tf-options/metaboxes/*.php' );
@@ -62,23 +62,23 @@ if ( ! class_exists( 'TF_Options' ) ) {
 
 		/**
 		 * Load Options
-         * @since 1.0.0
+		 * @author Foysal
 		 */
-        public function load_options() {
-            $options = glob( TF_ADMIN_PATH . 'tf-options/options/*.php' );
-            if ( ! empty( $options ) ) {
-                foreach ( $options as $option ) {
-                    $option_name = basename( $option, '.php' );
-                    if ( ! class_exists( $option_name ) ) {
-                        require_once $option;
-                    }
-                }
-            }
-        }
+		public function load_options() {
+			$options = glob( TF_ADMIN_PATH . 'tf-options/options/*.php' );
+			if ( ! empty( $options ) ) {
+				foreach ( $options as $option ) {
+					$option_name = basename( $option, '.php' );
+					if ( ! class_exists( $option_name ) ) {
+						require_once $option;
+					}
+				}
+			}
+		}
 
 		/**
 		 * Enqueue scripts
-		 * @since 1.0.0
+		 * @author Foysal
 		 */
 		public function tf_options_enqueue_scripts() {
 			//Css
@@ -87,31 +87,34 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			wp_enqueue_style( 'tf-fontawesome-5', '//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css', array(), TOURFIC );
 			wp_enqueue_style( 'tf-fontawesome-6', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css', array(), TOURFIC );
 			wp_enqueue_style( 'tf-remixicon', '//cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css', array(), TOURFIC );
-			wp_enqueue_style( 'tf-select2', TF_ADMIN_URL . 'tf-options/assets/css/select2.min.css', array(), TOURFIC );
-			wp_enqueue_style( 'tf-flatpickr', TF_ADMIN_URL . 'tf-options/assets/css/flatpickr.min.css', array(), TOURFIC );
+			wp_enqueue_style( 'tf-select2', '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', array(), TOURFIC );
+			wp_enqueue_style( 'tf-flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css', array(), TOURFIC );
 			wp_enqueue_style( 'tf-options', TF_ADMIN_URL . 'tf-options/assets/css/tf-options.css', array(), TOURFIC );
 
-            //Js
-			wp_enqueue_script( 'tf-flatpickr', TF_ADMIN_URL . 'tf-options/assets/js/flatpickr.min.js', array( 'jquery' ), TOURFIC, true );
-			wp_enqueue_script( 'tf-select2', TF_ADMIN_URL . 'tf-options/assets/js/select2.min.js', array( 'jquery' ), TOURFIC, true );
+			//Js
+			wp_enqueue_script( 'tf-flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js', array( 'jquery' ), TOURFIC, true );
+			wp_enqueue_script( 'tf-select2', '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array( 'jquery' ), TOURFIC, true );
 			wp_enqueue_script( 'wp-color-picker-alpha', TF_ADMIN_URL . 'tf-options/assets/js/wp-color-picker-alpha.js', array( 'jquery', 'wp-color-picker' ), TOURFIC, true );
 			wp_enqueue_script( 'tf-options', TF_ADMIN_URL . 'tf-options/assets/js/tf-options.js', array( 'jquery', 'wp-color-picker' ), TOURFIC, true );
 
-			wp_enqueue_script( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.9' .'/dist/leaflet.js' ), array( 'jquery' ), '1.9', true );
-			wp_enqueue_style( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.9' .'/dist/leaflet.css' ), array(), '1.9' );
+			wp_enqueue_script( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.js' ), array( 'jquery' ), '1.9', true );
+			wp_enqueue_style( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.css' ), array(), '1.9' );
 			wp_enqueue_script( 'jquery-ui-autocomplete' );
-			
+
 		}
 
+		/*
+		 * Field Base
+		 * @author Foysal
+		 */
+		public function field( $field, $value, $settings_id = '', $parent = '' ) {
+			if ( $field['type'] == 'repeater' ) {
+				$id = ( ! empty( $settings_id ) ) ? $settings_id . '[' . $field['id'] . '][0]' . '[' . $field['id'] . ']' : $field['id'] . '[0]' . '[' . $field['id'] . ']';
+			} else {
+				$id = $settings_id . '[' . $field['id'] . ']';
+			}
 
-		public function field($field, $value, $settings_id = '', $parent = '') {
-            if($field['type'] == 'repeater') {
-	            $id = ( ! empty( $settings_id ) ) ? $settings_id . '[' . $field['id'] . '][0]' . '[' . $field['id'] . ']' : $field['id'] . '[0]' . '[' . $field['id'] . ']';
-            } else {
-	            $id = $settings_id . '[' . $field['id'] . ']';
-            }
-
-            $class = isset( $field['class'] ) ? $field['class'] : '';
+			$class = isset( $field['class'] ) ? $field['class'] : '';
 			?>
             <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?>">
 				<?php if ( ! empty( $field['label'] ) ): ?>
@@ -125,7 +128,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 					<?php
 					$fieldClass = 'TF_' . $field['type'];
 					if ( class_exists( $fieldClass ) ) {
-						$_field = new $fieldClass( $field, $value, $settings_id, $parent);
+						$_field = new $fieldClass( $field, $value, $settings_id, $parent );
 						$_field->render();
 					} else {
 						echo '<p>' . __( 'Field not found!', 'tourfic' ) . '</p>';

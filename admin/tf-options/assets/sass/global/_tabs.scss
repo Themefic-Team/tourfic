@@ -1,5 +1,5 @@
 .tf-admin-option,
-.tf-admin-meta-box{
+.tf-admin-meta-box {
   @include flexbox();
   margin: -6px -12px -12px -12px;
 
@@ -11,6 +11,7 @@
     a.tf-tablinks {
       @include flexbox();
       @include align-items(center);
+      text-decoration: none;
       color: $slate80;
       padding: 12px 16px;
       text-align: left;
@@ -20,7 +21,7 @@
       cursor: pointer;
       @include transition(all, 0.3s, ease);
 
-      .tf-sec-icon{
+      .tf-sec-icon {
         margin-right: 10px;
         color: $slate40;
         @include flexbox();
@@ -30,12 +31,13 @@
       &:hover {
         background-color: #fff;
       }
+
       &.active {
         background-color: $blue60;
         color: #fff;
         position: relative;
 
-        .tf-sec-icon{
+        .tf-sec-icon {
           color: #fff;
         }
 
@@ -54,7 +56,31 @@
     }
   }
 
-  .tf-tab-wrapper{
+  .tf-tab-wrapper {
     @include flex(0 0 calc(100% - 220px));
+
+    .tf-tab-content {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+}
+
+.tf-admin-option-wrapper {
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.tf-admin-option {
+  width: 100%;
+  margin: 0;
+
+  .tf-tab-wrapper {
+    @include flex(0 0 calc(100% - 260px));
+    background-color: #fff;
+    padding: 20px;
   }
 }
