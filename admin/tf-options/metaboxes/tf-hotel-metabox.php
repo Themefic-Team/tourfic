@@ -50,6 +50,24 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					),
 				),
 				array(
+					'id' => 'tf-hotel',
+					'type' => 'text',
+					'label' => 'Hotel Info',
+					'subtitle' => 'Enter Hotel Info',
+					'placeholder' => 'Enter Hotel placeholder',
+					'description' => 'Enter Hotel description',
+					'dependency' => array( 'disable-services', '==', 'hotel' ),
+				),
+				array(
+					'id' => 'tf-tour',
+					'type' => 'text',
+					'label' => 'Tour Info',
+					'subtitle' => 'Enter Tour Info',
+					'placeholder' => 'Enter Tour placeholder',
+					'description' => 'Enter Tour description',
+					'dependency' => array( 'disable-services', '==', 'tour' ),
+				),
+				array(
 					'id'          => 'address',
 					'type'        => 'textarea',
 					'label'       => __( 'Hotel Address', 'tourfic' ),
@@ -112,9 +130,8 @@ TF_Metabox::metabox( 'tf_hotels', array(
 			'icon'   => 'ri-home-2-line',
 			'fields' => array(
 				array(
-					'id'       => '', 
+					'id'       => 'hotel-service', 
 					'type'     => 'switch',
-					'is_pro'     => true,
 					'label'    => __( 'Pickup Service', 'tourfic' ),
 					'subtitle' => __( 'Airport Service', 'tourfic' ),
 					'default'  => false,

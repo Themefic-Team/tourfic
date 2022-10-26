@@ -642,6 +642,44 @@ var frame, gframe;
                 });
             }
         });
+
+        $('.tf-group-checkbox').change(function () {
+           var controller_name =  $(this).attr("data-depend-id");
+           var ch_list=Array();
+            $("input.tf-group-checkbox:checked").each(function(){
+                ch_list.push($(this).val());
+                
+            });
+            if(ch_list.length==0){
+                $('[data-controller='+controller_name+']').each(function(){
+                    var controller = $(this).attr("data-controller");
+                    var condition = $(this).attr("data-condition");
+                    var data_val = $(this).attr("data-value");
+                    if(controller && condition && data_val){
+                        $(this).hide();
+                    }
+    
+                });
+                
+            }else{
+                $('[data-controller='+controller_name+']').each(function(){
+                    var controller = $(this).attr("data-controller");
+                    var condition = $(this).attr("data-condition");
+                    var data_val = $(this).attr("data-value");
+                    if(controller && condition && data_val){
+                        
+                        if(!!~jQuery.inArray(data_val, ch_list)){
+                            $(this).show();
+                        }else{
+                            $(this).hide();
+                        }
+                        
+                    }
+    
+                });
+            }
+        });
+
     });
 
 
