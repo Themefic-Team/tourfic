@@ -58,6 +58,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'attributes'  => array(
 						'required' => 'required',
 					),
+					'dependency' => array( 'features', '==', '18' ),
 				),
 				array(
 					'id'       => '',
@@ -90,10 +91,10 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					// 'is_pro'     => true,
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-   					'default' => true,
+   					'default' => false,
 				),
 				array(
-					'id'       => '', 
+					'id'       => 'hotel-video', 
 					'type'     => 'text',
 					'label'    => __( 'Hotel Video', 'tourfic' ),
 					'is_pro'     => true,
@@ -101,6 +102,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'desc'     => __( 'Enter YouTube/Vimeo URL here', 'tourfic' ),
 					'validate' => 'csf_validate_url',
 					'placeholder' => __( '', 'tourfic' ),
+					'dependency' => array( 'featured', '==', '1' ),
 				),
 			),
 		),

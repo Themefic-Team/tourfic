@@ -576,6 +576,72 @@ var frame, gframe;
             $longitude.on('change', input_update_latlng);
 
         });
+
+
+        $(".tf-select").change(function(){
+            var $this = $(this);
+            var value = $this.val();
+            var current_val = $this.attr("data-depend-id");
+            $('[data-controller='+current_val+']').each(function(){
+                var controller = $(this).attr("data-controller");
+                var condition = $(this).attr("data-condition");
+                var data_val = $(this).attr("data-value");
+                // console.log(controller);
+                if(controller && condition && data_val){
+                    
+                    if(value == data_val && current_val == controller){
+                        $(this).show();
+                    }else{
+                        $(this).hide();
+                    }
+                    
+                }
+
+            });
+        });
+
+        $('.tf-switch').change(function () {
+            var $this = $(this);
+            if (this.checked) {
+                var $this = $(this);
+                var value = $this.val(1);
+                var current_val = $this.attr("data-depend-id");
+                // console.log(current_val);
+                $('[data-controller='+current_val+']').each(function(){
+                    var controller = $(this).attr("data-controller");
+                    var condition = $(this).attr("data-condition");
+                    var data_val = $(this).attr("data-value");
+                    // console.log(controller);
+                    if(controller && condition && data_val){
+                        
+                        if(1 == data_val && current_val == controller){
+                            $(this).show();
+                        }
+                        
+                    }
+    
+                });
+            }else{
+                var $this = $(this);
+                var value = $this.val('');
+                var current_val = $this.attr("data-depend-id");
+                // console.log(current_val);
+                $('[data-controller='+current_val+']').each(function(){
+                    var controller = $(this).attr("data-controller");
+                    var condition = $(this).attr("data-condition");
+                    var data_val = $(this).attr("data-value");
+                    // console.log(controller);
+                    if(controller && condition && data_val){
+                        
+                        if(1 == data_val && current_val == controller){
+                            $(this).hide();
+                        }
+                        
+                    }
+    
+                });
+            }
+        });
     });
 
 
