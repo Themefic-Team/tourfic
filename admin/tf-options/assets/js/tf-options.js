@@ -264,9 +264,11 @@
                 add_value.find(':input').each(function () {
                     this.name = this.name.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
                     this.id = this.id.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
-                });
+                }); 
                 var update_paren = add_value.find('.tf-repeater input[name="tf_parent_field"]').val();
-                var update_paren = update_paren.replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                if (typeof update_paren !== "undefined") { 
+                    var update_paren = update_paren.replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                }
                 add_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
 
             } else {
@@ -276,6 +278,13 @@
                     this.id = this.id.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
                 });
             }
+            add_value.find('label').each(function () { 
+                var for_value =  $(this).attr("for");
+                if (typeof for_value !== "undefined") { 
+                 for_value = for_value.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');  
+                 var for_value =  $(this).attr("for", for_value);
+                }
+             });
 
             var append = $this_parent.find('.tf-repeater-wrap-' + id + '');
             add_value.appendTo(append).show();
@@ -287,8 +296,27 @@
             return false;
         });
         $(document).on('click', '.tf-repeater-icon-clone', function () {
-            let clone_value = $(this).closest('.tf-single-repeater').html();
-            $(this).closest('.tf-repeater-wrap').append('<div class="tf-single-repeater">' + clone_value + '</div>').show();
+            let clone_value = $(this).closest('.tf-single-repeater').clone();
+            let repeatDateField = clone_value.find('.tf-field-date');
+            if (repeatDateField.length > 0) {
+                tfDateInt(repeatDateField);
+            }
+
+            let repeatTimeField = clone_value.find('.tf-field-time');
+            if (repeatTimeField.length > 0) {
+                tfTimeInt(repeatTimeField);
+            }
+
+            let repeatSelect2Field = clone_value.find('.tf-field-select2');
+            if (repeatSelect2Field.length > 0) {
+                tfSelect2Int(repeatSelect2Field);
+            }
+
+            let repeatColorField = clone_value.find('.tf-field-color');
+            if (repeatColorField.length > 0) {
+                tfColorInt(repeatColorField);
+            } 
+            $(this).closest('.tf-repeater-wrap').append(clone_value).show();
         });
         $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
 
