@@ -87,10 +87,9 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'id'       => 'featured', 
 					'type'     => 'switch',
 					'label'    => __( 'Featured Hotel', 'tourfic' ),
-					'is_pro'     => true,
+					// 'is_pro'     => true,
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'width' => 100,
    					'default' => true,
 				),
 				array(
@@ -98,7 +97,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'type'     => 'text',
 					'label'    => __( 'Hotel Video', 'tourfic' ),
 					'is_pro'     => true,
-					'badge_up_pro' => true,
+					'badge_up' => true,
 					'desc'     => __( 'Enter YouTube/Vimeo URL here', 'tourfic' ),
 					'validate' => 'csf_validate_url',
 					'placeholder' => __( '', 'tourfic' ),
@@ -114,7 +113,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'id'       => '', 
 					'type'     => 'switch',
 					'is_pro'     => true,
-					'title'    => __( 'Pickup Service', 'tourfic' ),
+					'label'    => __( 'Pickup Service', 'tourfic' ),
 					'subtitle' => __( 'Airport Service', 'tourfic' ),
 					'default'  => false,
 				)
@@ -128,7 +127,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 				array(
 					'id'       => '', 
 					'type'     => 'switch',
-					'title'    => __( 'Allowed Full Day Booking', 'tourfic' ),
+					'label'    => __( 'Allowed Full Day Booking', 'tourfic' ),
 					'is_pro'     => true,
 					'badge_up_pro' => true,
 					'subtitle' => __( 'You can book room with full day', 'tourfic' ),
@@ -145,7 +144,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 				array(
 					'id' 			=> 'room',
 					'type' 			=> 'repeater',
-					'title'  		=> __( 'Room Details', 'tourfic' ), 
+					'label'  		=> __( 'Room Details', 'tourfic' ), 
 					'button_title' 	=> __( 'Add New Room', 'tourfic' ), 
 					'class' 		=> 'room-repeater',
 					'fields'		=> array(

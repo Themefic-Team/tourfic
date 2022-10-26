@@ -113,9 +113,9 @@ if ( ! class_exists( 'TF_Options' ) ) {
 
             $class = isset( $field['class'] ) ? $field['class'] : '';
             $is_pro = isset( $field['is_pro'] ) ? $field['is_pro'] : '';
-            $badge_up_pro = isset( $field['badge_up_pro'] ) ? $field['badge_up_pro'] : '';
+            $badge_up = isset( $field['badge_up'] ) ? $field['badge_up'] : '';
 
-			if(isset( $field['is_pro'] ) || isset( $field['badge_up_pro'] ) ){ 
+			if(isset( $field['is_pro'] ) || isset( $field['badge_up'] ) ){ 
 				$class .= 'tf-csf-disable tf-csf-pro';
 			}
 			?>
@@ -126,7 +126,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 						<?php if($is_pro): ?>
 							<div class="tf-csf-badge"><span class="tf-pro"><?php _e( "Pro", "tourfic" ); ?></span></div>
 						<?php endif; ?>
-						<?php if($badge_up_pro): ?>
+						<?php if($badge_up): ?>
 							<div class="tf-csf-badge"><span class="tf-upcoming"><?php _e( "Upcoming", "tourfic" ); ?></span></div> 
 						<?php endif; ?>
 					</label>
