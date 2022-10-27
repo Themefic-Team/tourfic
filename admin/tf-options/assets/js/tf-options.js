@@ -333,8 +333,14 @@
             return false;
         });
         $(document).on('click', '.tf-repeater-icon-clone', function () {
+            var $this_parent = $(this).closest('.tf-repeater-wrap');
             let clone_value = $(this).closest('.tf-single-repeater').clone();
             let repeatDateField = clone_value.find('.tf-field-date');
+
+            var parent_field = $this_parent.find(':input[name="tf_parent_field"]').val();
+            var current_field =$this_parent.find(':input[name="tf_current_field"]').val();
+            var count = $this_parent.find('.tf-single-repeater-'+current_field+'').length;
+
             if (repeatDateField.length > 0) {
                 tfDateInt(repeatDateField);
             }
@@ -353,6 +359,34 @@
             if (repeatColorField.length > 0) {
                 tfColorInt(repeatColorField);
             }
+            alert(parent_field);
+            if (parent_field == '') {
+                clone_value.find(':input').each(function () {
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                });
+                var update_paren = clone_value.find('.tf-repeater input[name="tf_parent_field"]').val();
+                if (typeof update_paren !== "undefined") {
+                    var update_paren = update_paren.replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                }
+                clone_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
+
+            } else {
+
+                clone_value.find(':input').each(function () {
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                });
+            }
+            clone_value.find('label').each(function () {
+                var for_value =  $(this).attr("for");
+                if (typeof for_value !== "undefined") {
+                 for_value = for_value.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                 var for_value =  $(this).attr("for", for_value);
+                }
+             });
+
+
             $(this).closest('.tf-repeater-wrap').append(clone_value).show();
         });
         $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
@@ -613,6 +647,110 @@ var frame, gframe;
             $longitude.on('change', input_update_latlng);
 
         });
+
+
+        $(".tf-select").change(function(){
+            var $this = $(this);
+            var value = $this.val();
+            var current_val = $this.attr("data-depend-id");
+            $('[data-controller='+current_val+']').each(function(){
+                var controller = $(this).attr("data-controller");
+                var condition = $(this).attr("data-condition");
+                var data_val = $(this).attr("data-value");
+                // console.log(controller);
+                if(controller && condition && data_val){
+
+                    if(value == data_val && current_val == controller){
+                        $(this).show();
+                    }else{
+                        $(this).hide();
+                    }
+
+                }
+
+            });
+        });
+
+        $('.tf-switch').change(function () {
+            var $this = $(this);
+            if (this.checked) {
+                var $this = $(this);
+                var value = $this.val(1);
+                var current_val = $this.attr("data-depend-id");
+                // console.log(current_val);
+                $('[data-controller='+current_val+']').each(function(){
+                    var controller = $(this).attr("data-controller");
+                    var condition = $(this).attr("data-condition");
+                    var data_val = $(this).attr("data-value");
+                    // console.log(controller);
+                    if(controller && condition && data_val){
+
+                        if(1 == data_val && current_val == controller){
+                            $(this).show();
+                        }
+
+                    }
+
+                });
+            }else{
+                var $this = $(this);
+                var value = $this.val('');
+                var current_val = $this.attr("data-depend-id");
+                // console.log(current_val);
+                $('[data-controller='+current_val+']').each(function(){
+                    var controller = $(this).attr("data-controller");
+                    var condition = $(this).attr("data-condition");
+                    var data_val = $(this).attr("data-value");
+                    // console.log(controller);
+                    if(controller && condition && data_val){
+
+                        if(1 == data_val && current_val == controller){
+                            $(this).hide();
+                        }
+
+                    }
+
+                });
+            }
+        });
+
+        $('.tf-group-checkbox').change(function () {
+           var controller_name =  $(this).attr("data-depend-id");
+           var ch_list=Array();
+            $("input.tf-group-checkbox:checked").each(function(){
+                ch_list.push($(this).val());
+
+            });
+            if(ch_list.length==0){
+                $('[data-controller='+controller_name+']').each(function(){
+                    var controller = $(this).attr("data-controller");
+                    var condition = $(this).attr("data-condition");
+                    var data_val = $(this).attr("data-value");
+                    if(controller && condition && data_val){
+                        $(this).hide();
+                    }
+
+                });
+
+            }else{
+                $('[data-controller='+controller_name+']').each(function(){
+                    var controller = $(this).attr("data-controller");
+                    var condition = $(this).attr("data-condition");
+                    var data_val = $(this).attr("data-value");
+                    if(controller && condition && data_val){
+
+                        if(!!~jQuery.inArray(data_val, ch_list)){
+                            $(this).show();
+                        }else{
+                            $(this).hide();
+                        }
+
+                    }
+
+                });
+            }
+        });
+
     });
 
 

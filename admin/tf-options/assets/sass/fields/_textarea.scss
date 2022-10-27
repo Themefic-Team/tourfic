@@ -8,5 +8,10 @@
     border-radius: 4px;
     color: $slate80;
     font-size: 14px;
+    &:focus {
+      background: #FFFFFF;
+      box-shadow: 0 0 0 2px $blue60;
+      border-radius: 4px;
+    }
   }
 }

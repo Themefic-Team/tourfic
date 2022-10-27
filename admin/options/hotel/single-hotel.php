@@ -463,7 +463,7 @@ if ( class_exists( 'CSF' ) ) {
 						'class'    => 'repeater-by-date',
 						'type'     => 'repeater',
 						'title'    => __( 'By Date', 'tourfic' ),
-						'subtitle' => __( $badge_pro, 'tourfic' ),
+						// 'subtitle' => __( $badge_pro, 'tourfic' ),
 						'fields'   => array(
 
 							array(

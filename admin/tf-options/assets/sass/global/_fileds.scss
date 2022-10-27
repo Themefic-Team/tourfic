@@ -1,24 +1,40 @@
 .tf-field {
-  padding: 10px 20px;
+  padding: 12px 24px;
 
   .tf-field-label {
     display: block;
-    margin-bottom: 5px;
+    font-family: 'Lato';
+    font-style: normal;
+    margin-bottom: 4px;
     font-weight: 500;
     font-size: 14px;
     color: $slate60;
     display: flex !important;
     align-items: center;
+    line-height: 20px;
+
     .tf-csf-badge{ 
       margin-left: 13px; 
+
       .tf-pro {
         background-color: #F44336 !important;
       }
+
       .tf-upcoming {
         background-color: #006600 !important;
       }
     }
    
+  }
+  .tf-fieldset{
+    font-family: 'Lato';
+    font-style: normal;
+    font-size: 14px;
+    a{
+      font-family: 'Lato';
+      font-style: normal; 
+      font-weight: 600;
+    }
   }
 
   .tf-field-sub-title{
