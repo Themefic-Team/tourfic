@@ -297,9 +297,10 @@
             //    alert(id);
             var add_value = $this_parent.find('.tf-single-repeater-clone-' + id + ' .tf-single-repeater-' + id + '').clone();
             var count = $this_parent.find('.tf-repeater-wrap-' + id + ' .tf-single-repeater-' + id + '').length;
-            var parent_field = add_value.find(':input[name="tf_parent_field"]').val();
+            var parent_field = add_value.find(':input[name="tf_parent_field"]').val(); 
             var current_field = add_value.find(':input[name="tf_current_field"]').val();
 
+            add_value.find(':input[name="tf_repeater_count"]').val(count);
             let repeatDateField = add_value.find('.tf-field-date');
             if (repeatDateField.length > 0) {
                 tfDateInt(repeatDateField);
@@ -358,11 +359,14 @@
         $(document).on('click', '.tf-repeater-icon-clone', function () {
             var $this_parent = $(this).closest('.tf-repeater-wrap');
             let clone_value = $(this).closest('.tf-single-repeater').clone();
-            let repeatDateField = clone_value.find('.tf-field-date');
 
-            var parent_field = $this_parent.find(':input[name="tf_parent_field"]').val();
-            var current_field = $this_parent.find(':input[name="tf_current_field"]').val();
-            var count = $this_parent.find('.tf-single-repeater-' + current_field + '').length;
+            var parent_field = clone_value.find('input[name="tf_parent_field"]').val();
+            var current_field =clone_value.find('input[name="tf_current_field"]').val();
+            var repeater_count = clone_value.find('input[name="tf_repeater_count"]').val();
+            var count = $this_parent.find('.tf-single-repeater-'+current_field+'').length;
+
+            
+            let repeatDateField = clone_value.find('.tf-field-date');
 
             if (repeatDateField.length > 0) {
                 tfDateInt(repeatDateField);
@@ -381,35 +385,34 @@
             let repeatColorField = clone_value.find('.tf-field-color');
             if (repeatColorField.length > 0) {
                 tfColorInt(repeatColorField);
-            }
-            alert(parent_field);
+            }  
             if (parent_field == '') {
                 clone_value.find(':input').each(function () {
-                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
-                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + ']['+repeater_count+']', '[' + current_field + '][' + count + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + ']['+repeater_count+']', '[' + current_field + '][' + count + ']');
                 });
                 var update_paren = clone_value.find('.tf-repeater input[name="tf_parent_field"]').val();
                 if (typeof update_paren !== "undefined") {
-                    var update_paren = update_paren.replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                    var update_paren = update_paren.replace('[' + current_field + ']['+repeater_count+']', '[' + current_field + '][' + count + ']');
                 }
                 clone_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
 
             } else {
 
                 clone_value.find(':input').each(function () {
-                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
-                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + ']['+repeater_count+']', '[' + current_field + '][' + count + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + ']['+repeater_count+']', '[' + current_field + '][' + count + ']');
                 });
             }
             clone_value.find('label').each(function () {
                 var for_value = $(this).attr("for");
                 if (typeof for_value !== "undefined") {
-                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
-                    var for_value = $(this).attr("for", for_value);
+                 for_value = for_value.replace('_____', '').replace('[' + current_field + ']['+repeater_count+']', '[' + current_field + '][' + count + ']');
+                 var for_value =  $(this).attr("for", for_value);
                 }
             });
 
-
+             clone_value.find('input[name="tf_repeater_count"]').val(count)
             $(this).closest('.tf-repeater-wrap').append(clone_value).show();
         });
         $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
@@ -555,7 +558,10 @@ var frame, gframe;
             gframe.open();
             return false;
         });
-
+        // Texonomy submit event
+        $('#addtag > .submit #submit').click(function(){
+            $(".tf-fieldset-media-preview").html("");
+        });
 
         $(".tf-field-map").each(function () {
             var $this = $(this),
