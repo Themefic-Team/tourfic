@@ -11,7 +11,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 	'sections'  => array(
 		'location' => array(
 			'title'  => 'Location',
-			'icon'   => 'ri-home-2-line',
+			'icon'   => 'fa-solid fa-location-dot',
 			'fields' => array( 
 				array(
 					'id' => 'features',
@@ -91,7 +91,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 		// Hotel Details
 		'hotel_details' => array(
 			'title'  => __( 'Hotel Details', 'tourfic' ),
-			'icon'   => 'ri-inbox-fill',
+			'icon'   => 'fa-solid fa-hotel',
 			'fields' => array(
 				array(
 					'id'       => 'gallery',
@@ -124,7 +124,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 		// Hotel Details
 		'hotel_service' => array(
 			'title'  => __( 'Hotel Services', 'tourfic' ),
-			'icon'   => 'ri-home-2-line',
+			'icon'   => 'fa-solid fa-van-shuttle',
 			'fields' => array(
 				array(
 					'id'       => 'hotel-service', 
@@ -138,7 +138,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 		// Check-in check-out
 		'check_time' => array(
 			'title'  => __( 'Check in/out Time', 'tourfic' ),
-			'icon'   => 'ri-home-2-line',
+			'icon'   => 'fa-solid fa-clock-rotate-left',
 			'fields' => array(
 				array(
 					'id'       => '', 
@@ -155,7 +155,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 		// Room Details
 		'room_details' => array(
 			'title'  => __( 'Room Details', 'tourfic' ),
-			'icon'   => 'ri-home-2-line',
+			'icon'   => 'fa-sharp fa-solid fa-door-open',
 			'fields' => array(
 				array(
 					'id' 			=> 'room',
@@ -412,7 +412,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 		// FAQ Details
 		'faq' => array(
 			'title'  => __( 'F.A.Q', 'tourfic' ),
-			'icon'   => 'ri-home-2-line',
+			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(
 				array(
 					'id'           => 'faq',
@@ -440,7 +440,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 		// Terms & conditions
 		'terms_conditions' => array(
 			'title'  => __( 'Terms & conditions', 'tourfic' ),
-			'icon'   => 'ri-home-2-line',
+			'icon'   => 'fa-regular fa-square-check',
 			'fields' => array(
 				array(
 					'id'    => 'tc',
@@ -452,7 +452,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 		// Settings
 		'settings' => array(
 			'title'  => __( 'Settings', 'tourfic' ),
-			'icon'   => 'ri-home-2-line',
+			'icon'   => 'fa-solid fa-viruses',
 			'fields' => array(
 				array(
 					'id' => 'Settings',
