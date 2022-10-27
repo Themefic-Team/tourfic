@@ -49,7 +49,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				if ( ! empty( $key ) && ! empty( $parents[ $key ] ) ) {
 					$section['sub_section'] = $parents[ $key ];
 				}
-				$result[] = $section;
+				$result[ $key ] = $section;
 			}
 
 			return $result;
@@ -112,7 +112,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						$section['title'],
 						$section['title'],
 						'manage_options',
-						$this->option_id . '#tab=' . sanitize_title( $section['title'] ),
+						$this->option_id . '#tab=' . esc_attr( $key ),
 						'__return_null'
 					);
 				}
@@ -138,6 +138,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			if ( empty( $this->option_sections ) ) {
 				return;
 			}
+//			tf_var_dump( $this->pre_tabs );
 			?>
             <div class="tf-option-wrapper">
                 <form method="post" action="" class="tf-option-form" enctype="multipart/form-data">
@@ -162,10 +163,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							$section_count = 0;
 							foreach ( $this->pre_tabs as $key => $section ) : ?>
                                 <div class="tf-admin-tab-item<?php echo ! empty( $section['sub_section'] ) ? ' tf-has-submenu' : '' ?>">
-                                    <a href="#<?php echo sanitize_title( $section['title'] ); ?>"
+                                    <a href="#<?php echo esc_attr( $key ); ?>"
                                        class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>"
-                                       onclick="openTab(event, '<?php echo esc_attr( sanitize_title( $section['title'] ) ) ?>')"
-                                       data-tab="<?php echo esc_attr( sanitize_title( $section['title'] ) ) ?>">
+                                       onclick="openTab(event, '<?php echo esc_attr( $key ) ?>')"
+                                       data-tab="<?php echo esc_attr( $key ) ?>">
 										<?php echo ! empty( $section['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $section['icon'] ) . '"></i></span>' : ''; ?>
 										<?php echo $section['title']; ?>
                                     </a>
@@ -174,7 +175,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                                         <ul class="tf-submenu">
 											<?php foreach ( $section['sub_section'] as $sub_key => $sub ): ?>
                                                 <li>
-                                                    <a href="#<?php echo $sub_key; ?>"
+                                                    <a href="#<?php echo esc_attr( $sub_key ); ?>"
                                                        class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>"
                                                        onclick="openTab(event, '<?php echo esc_attr( $sub_key ) ?>')"
                                                        data-tab="<?php echo esc_attr( $sub_key ) ?>">
@@ -195,7 +196,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<?php
 							$content_count = 0;
 							foreach ( $this->option_sections as $key => $section ) : ?>
-                                <div id="<?php echo $key; ?>" class="tf-tab-content <?php echo $content_count == 0 ? 'active' : ''; ?>">
+                                <div id="<?php echo esc_attr( $key ) ?>" class="tf-tab-content <?php echo $content_count == 0 ? 'active' : ''; ?>">
 
 									<?php
 									if ( ! empty( $section['fields'] ) ):

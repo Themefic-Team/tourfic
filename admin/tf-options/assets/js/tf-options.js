@@ -246,29 +246,12 @@
             e.preventDefault();
             let $this = $(this);
 
-            /*if ($this.hasClass('tf-has-submenu')) {
-                let submenu = $this.find('.tf-submenu');
-                submenu.addClass('tf-show').slideDown();
-                $this.addClass('tf-open');
-            } else {
-                $('.tf-admin-tab-item').removeClass('tf-open');
-                $('.tf-submenu').removeClass('tf-show').slideUp();
-            }*/
-
-            if ($this.hasClass('open')) {
-                $this.removeClass('open');
-                $this.find('li').removeClass('open');
-                $this.find('ul').slideUp();
-            } else {
-                $this.addClass('open');
-                $this.children('ul').slideDown();
-                $this.siblings('.tf-admin-tab-item').children('ul').slideUp();
-                $this.siblings('.tf-admin-tab-item').removeClass('open');
-                $this.siblings('.tf-admin-tab-item').find('li').removeClass('open');
-                $this.siblings('.tf-admin-tab-item').find('ul').slideUp();
-            }
-
-
+            $this.addClass('open');
+            $this.children('ul').slideDown();
+            $this.siblings('.tf-admin-tab-item').children('ul').slideUp();
+            $this.siblings('.tf-admin-tab-item').removeClass('open');
+            $this.siblings('.tf-admin-tab-item').find('li').removeClass('open');
+            $this.siblings('.tf-admin-tab-item').find('ul').slideUp();
         });
 
 
