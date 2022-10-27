@@ -578,11 +578,11 @@ TF_Metabox::metabox( 'tf_tours', array(
 				/**
 				 * Fixed Availability
 				 */
-				array(
+				/*array(
 					'id'         => 'fixed_availability',
 					'type'       => 'fieldset',
 					'label'      => __( 'Availability', 'tourfic' ),
-					'description'   => __( 'Input your availability' . $badge_pro, 'tourfic' ),
+					'description'   => __( 'Input your availability', 'tourfic' ),
 					'dependency' => array( 'type', '==', 'fixed' ),
 					'class'      => 'fixed_availability',
 					'fields'     => array(
@@ -618,7 +618,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 							'description' => __( 'Maximum seat number', 'tourfic' ),
 						),
 					),
-				),
+				),*/
 	
 			),
 		),

@@ -17,6 +17,7 @@ if ( ! class_exists( 'TF_date' ) ) {
 				'multiple'      => false,
 				'label_from' => esc_html__( 'From', 'tourfic' ),
 				'label_to'   => esc_html__( 'To', 'tourfic' ),
+                'placeholder' => esc_html__( 'Select Date', 'tourfic' ),
 			) );
 
 			$value = wp_parse_args( $this->value, array(
@@ -27,26 +28,27 @@ if ( ! class_exists( 'TF_date' ) ) {
 			$format = ( ! empty( $args['format'] ) ) ? $args['format'] : 'Y-m-d';
 			$range  = ( ! empty( $args['range'] ) ) ? $args['range'] : false;
 			$multiple  = ( ! empty( $args['multiple'] ) ) ? $args['multiple'] : false;
+			$placeholder  = ( ! empty( $args['placeholder'] ) ) ? $args['placeholder'] : esc_html__( 'Select Date', 'tourfic' );
 
 			if ( $range ): ?>
                 <div class="tf-date-range">
                     <div class="tf-date-from">
                         <label for="" class="tf-field-label"><?php echo esc_html( $args['label_from'] ) ?></label>
                         <div class="" style="position:relative;">
-                            <input type="text" name="<?php echo esc_attr( $this->field_name() ); ?>[from]" placeholder="<?php echo esc_attr( $this->field['placeholder'] ) ?>" value="<?php echo esc_attr( $value['from'] ); ?>" class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>"/>
+                            <input type="text" name="<?php echo esc_attr( $this->field_name() ); ?>[from]" placeholder="<?php echo esc_attr( $placeholder ) ?>" value="<?php echo esc_attr( $value['from'] ); ?>" class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>"/>
                             <i class="fa-solid fa-calendar-days"></i>
                         </div>
                     </div>
                     <div class="tf-date-to">
                         <label for="" class="tf-field-label"><?php echo esc_html( $args['label_to'] ) ?></label>
                         <div class="" style="position:relative;">
-                            <input type="text" name="<?php echo esc_attr( $this->field_name() ); ?>[to]" placeholder="<?php echo esc_attr( $this->field['placeholder'] ) ?>" value="<?php echo esc_attr( $value['to'] ); ?>" class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>"/>
+                            <input type="text" name="<?php echo esc_attr( $this->field_name() ); ?>[to]" placeholder="<?php echo esc_attr( $placeholder ) ?>" value="<?php echo esc_attr( $value['to'] ); ?>" class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>"/>
                             <i class="fa-solid fa-calendar-days"></i>
                         </div>
                     </div>
                 </div>
 			<?php else: ?>
-                <input type="text" name="<?php echo esc_attr( $this->field_name() ); ?>" placeholder="<?php echo esc_attr( $this->field['placeholder'] ) ?>" value="<?php echo esc_attr( $this->value ); ?>"
+                <input type="text" name="<?php echo esc_attr( $this->field_name() ); ?>" placeholder="<?php echo esc_attr( $placeholder ) ?>" value="<?php echo esc_attr( $this->value ); ?>"
                        class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>" data-multiple="<?php echo esc_attr( $multiple ); ?>"/>
                 <i class="fa-solid fa-calendar-days"></i>
 			<?php
