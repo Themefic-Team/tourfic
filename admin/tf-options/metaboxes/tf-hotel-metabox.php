@@ -12,58 +12,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 		'location' => array(
 			'title'  => 'Location',
 			'icon'   => 'fa-solid fa-location-dot',
-			'fields' => array( 
-				array(
-					'id' => 'features',
-					'type' => 'select',
-					'label' => __( 'Select Features', 'tourfic' ),
-					'placeholder' => __( 'Select', 'tourfic' ),
-					'class' => 'tf-field-class',
-					'options' => 'terms',
-					'query_args'  => array(
-						'taxonomy'   => 'hotel_feature',
-						'hide_empty' => false,
-					),
-					'multiple'    => true,
-				),
-				array(
-					'id'         => 'icon-fa',
-					'type'       => 'icon',
-					'label'      => __('Select Font Awesome Icon', 'tourfic'),
-				),
-				array(
-					'id'         => 'icon-fass',
-					'type'       => 'icon',
-					'label'      => __('Select Font Awesome Icon', 'tourfic'),
-				),
-				array(
-					'id'       => 'disable-services',
-					'type'     => 'checkbox',
-					'label'    => __( 'Disable Services', 'tourfic' ),
-					'description' => __( 'Disable or hide the services you don\'t need by ticking the checkbox', 'tourfic' ),
-					'options'  => array(
-						'hotel' => __( 'Hotel', 'tourfic' ),
-						'tour'  => __( 'Tour', 'tourfic' ),
-					),
-				),
-				array(
-					'id' => 'tf-hotel',
-					'type' => 'text',
-					'label' => 'Hotel Info',
-					'subtitle' => 'Enter Hotel Info',
-					'placeholder' => 'Enter Hotel placeholder',
-					'description' => 'Enter Hotel description',
-					'dependency' => array( 'disable-services', '==', 'hotel' ),
-				),
-				array(
-					'id' => 'tf-tour',
-					'type' => 'text',
-					'label' => 'Tour Info',
-					'subtitle' => 'Enter Tour Info',
-					'placeholder' => 'Enter Tour placeholder',
-					'description' => 'Enter Tour description',
-					'dependency' => array( 'disable-services', '==', 'tour' ),
-				),
+			'fields' => array(
 				array(
 					'id'          => 'address',
 					'type'        => 'textarea',
@@ -191,7 +140,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 							'description'   => __( 'Enable/disable this Room', 'tourfic' ),
 							'label_on'    => __( 'Enabled', 'tourfic' ),
 							'label_off'   => __( 'Disabled', 'tourfic' ),
-							'text_width' => 100,
+							'width' => 100,
 							'default'    => true,
 						),
 						array(
