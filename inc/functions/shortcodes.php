@@ -755,8 +755,9 @@ function tf_hotels_grid_slider($atts, $content = null){
 		'posts_per_page' => $count,
 	);
 
-	$locations = explode(',',$locations);
+	
 	if( !empty( $locations )){
+		$locations = explode(',',$locations);
 		$args['tax_query'] = array(
 			'relation' => 'AND',
 			array(
