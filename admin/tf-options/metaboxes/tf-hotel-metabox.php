@@ -75,7 +75,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 		// Hotel Details
 		'hotel_details' => array(
 			'title'  => __( 'Hotel Details', 'tourfic' ),
-			'icon'   => 'ri-home-2-line',
+			'icon'   => 'ri-inbox-fill',
 			'fields' => array(
 				array(
 					'id'       => 'gallery',

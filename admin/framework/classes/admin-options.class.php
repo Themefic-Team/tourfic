@@ -113,7 +113,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 			if ( $this->args['database'] === 'network' && ! empty( $this->args['show_in_network'] ) ) {
 				add_action( 'network_admin_menu', array( $this, 'add_admin_menu' ) );
 			}
-
+//tf_var_dump($this->pre_sections);
 			// wp enqeueu for typography and output css
 			parent::__construct();
 

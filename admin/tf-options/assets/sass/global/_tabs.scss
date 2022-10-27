@@ -1,4 +1,4 @@
-.tf-admin-option,
+.tf-option,
 .tf-admin-meta-box {
   @include flexbox();
   margin: -6px -12px -12px -12px;
@@ -30,6 +30,11 @@
 
       &:hover {
         background-color: #fff;
+        outline: none;
+      }
+      &:focus {
+        box-shadow: none;
+        outline: none;
       }
 
       &.active {
@@ -69,18 +74,79 @@
   }
 }
 
-.tf-admin-option-wrapper {
+.tf-option-wrapper {
   margin-top: 20px;
   margin-right: 20px;
+
+  .tf-option-header {
+    @include flexbox();
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(67, 79, 96, 0.08);
+    position: sticky;
+    top: 32px;
+    z-index: 9999;
+
+    .tf-option-header-left {
+      min-width: 220px;
+      padding: 24px;
+      @include flexbox();
+      @include align-items(flex-end);
+
+      h2 {
+        margin: 0 8px 0 0;
+        font-weight: 500;
+        font-size: 24px;
+        color: $slate80;
+        line-height: 24px;
+      }
+
+      span{
+        font-size: 16px;
+        color: $slate40;
+        display: inline-block;
+        margin-right: 4px;
+      }
+
+      a{
+        color: $slate40;
+        text-decoration: none;
+        font-size: 16px;
+        @include transition(all, 0.3s, ease);
+
+        &:hover{
+          color: $blue60;
+        }
+      }
+    }
+
+    .tf-option-header-right {
+      @include flex(1 1 auto);
+      padding: 24px;
+      @include flexbox();
+      @include justify-content(flex-end);
+      @include align-items(center);
+    }
+  }
+
+  .tf-option-footer{
+    @include flexbox();
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(67, 79, 96, 0.08);
+    position: relative;
+    padding: 24px;
+    @include flexbox();
+    @include justify-content(flex-end);
+    @include align-items(center);
+  }
 }
 
-.tf-admin-option {
+.tf-option {
   width: 100%;
   margin: 0;
 
   .tf-tab-wrapper {
-    @include flex(0 0 calc(100% - 260px));
+    @include flex(0 0 calc(100% - 221px));
     background-color: #fff;
-    padding: 20px;
+    padding: 12px 0;
   }
 }

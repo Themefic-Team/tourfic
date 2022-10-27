@@ -8,12 +8,12 @@
         */
         $(window).on('hashchange load', function () {
             let hash = window.location.hash;
-            let slug = hash.replace('#', '');
+            let slug = hash.replace('#tab=', '');
 
             if (hash) {
                 $('.tf-tablinks').removeClass('active');
                 $('.tf-tab-content').removeClass('active');
-                $(hash).addClass('active');
+                $('#' + slug).addClass('active');
                 $('[data-tab="' + slug + '"]').addClass('active');
             }
         });
@@ -154,36 +154,41 @@
             e.preventDefault();
             let btn = $(this);
 
-            //icon select
-            $(document).on('click', '.tf-icon-list li', function (e) {
-                e.preventDefault();
-                let $this = $(this);
-
-                $('.tf-icon-list li').removeClass('active');
-                $this.addClass('active');
-
-                //remove disabled class
-                $('.tf-icon-insert').removeClass('disabled');
-            });
-
-            //insert btn click
-            $(document).on('click', '.tf-icon-insert', function (e) {
-                e.preventDefault();
-                let $this = $(this),
-                    preview = btn.closest('.tf-icon-select').find('.tf-icon-preview'),
-                    icon = $('.tf-icon-list li.active').data('icon');
-
-                if (icon) {
-                    preview.removeClass('tf-hide');
-                    btn.closest('.tf-icon-select').find('.tf-icon-preview-wrap i').attr('class', icon);
-                    btn.closest('.tf-icon-select').find('.tf-icon-value').val(icon).trigger('change');
-
-                    //Close modal
-                    $('.tf-modal').removeClass('tf-modal-show');
-                    $('body').removeClass('tf-modal-open');
-                }
-            })
+            let fieldId = btn.closest('.tf-icon-select').attr('id');
+            $('#tf-icon-modal').data('icon-field', fieldId);
         });
+
+        //icon select
+        $(document).on('click', '.tf-icon-list li', function (e) {
+            e.preventDefault();
+            let $this = $(this);
+
+            $('.tf-icon-list li').removeClass('active');
+            $this.addClass('active');
+
+            //remove disabled class
+            $('.tf-icon-insert').removeClass('disabled');
+        });
+
+        //insert btn click
+        $(document).on('click', '.tf-icon-insert', function (e) {
+            e.preventDefault();
+            let $this = $(this),
+                fieldId = $('#tf-icon-modal').data('icon-field'),
+                field = $('#' + fieldId),
+                preview = field.find('.tf-icon-preview'),
+                icon = $('.tf-icon-list li.active').data('icon');
+
+            if (icon) {
+                preview.removeClass('tf-hide');
+                field.find('.tf-icon-preview-wrap i').attr('class', icon);
+                field.find('.tf-icon-value').val(icon).trigger('change');
+
+                //Close modal
+                $('.tf-modal').removeClass('tf-modal-show');
+                $('body').removeClass('tf-modal-open');
+            }
+        })
 
         /*
         * Icon search
@@ -227,6 +232,38 @@
             iconLi.removeClass('active');
         })
 
+        /*
+        * Options ajax save
+        * @author: Foysal
+        */
+        $(document).on('click', '.tf-ajax-save', function (e) {
+            e.preventDefault();
+            let $this = $(this),
+                form = $this.closest('form.tf-option-form'),
+                data = form.serializeArray();
+
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: {
+                    optionData: data,
+                    action: 'tf_options_save',
+                },
+                beforeSend: function () {
+                    $this.addClass('tf-loading');
+                },
+                success: function (response) {
+                    $this.removeClass('tf-loading');
+                    $this.addClass('tf-success');
+                    setTimeout(function () {
+                        $this.removeClass('tf-success');
+                    }, 2000);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
 
         // Repeater jquery
         $(document).on('click', '.tf-repeater-icon-add', function () {
@@ -264,9 +301,9 @@
                 add_value.find(':input').each(function () {
                     this.name = this.name.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
                     this.id = this.id.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
-                }); 
+                });
                 var update_paren = add_value.find('.tf-repeater input[name="tf_parent_field"]').val();
-                if (typeof update_paren !== "undefined") { 
+                if (typeof update_paren !== "undefined") {
                     var update_paren = update_paren.replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
                 }
                 add_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
@@ -278,13 +315,13 @@
                     this.id = this.id.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
                 });
             }
-            add_value.find('label').each(function () { 
-                var for_value =  $(this).attr("for");
-                if (typeof for_value !== "undefined") { 
-                 for_value = for_value.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');  
-                 var for_value =  $(this).attr("for", for_value);
+            add_value.find('label').each(function () {
+                var for_value = $(this).attr("for");
+                if (typeof for_value !== "undefined") {
+                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                    var for_value = $(this).attr("for", for_value);
                 }
-             });
+            });
 
             var append = $this_parent.find('.tf-repeater-wrap-' + id + '');
             add_value.appendTo(append).show();
@@ -315,7 +352,7 @@
             let repeatColorField = clone_value.find('.tf-field-color');
             if (repeatColorField.length > 0) {
                 tfColorInt(repeatColorField);
-            } 
+            }
             $(this).closest('.tf-repeater-wrap').append(clone_value).show();
         });
         $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {

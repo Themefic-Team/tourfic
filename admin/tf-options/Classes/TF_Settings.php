@@ -20,6 +20,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			//save options
 			add_action( 'admin_init', array( $this, 'save_options' ) );
 
+			//ajax save options
+			add_action( 'wp_ajax_tf_options_save', array( $this, 'tf_ajax_save_options' ) );
 		}
 
 		public static function option( $key, $params = array() ) {
@@ -49,7 +51,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						$section['title'],
 						$section['title'],
 						'manage_options',
-						$this->option_id . '#' . sanitize_title( $key ),
+						$this->option_id . '#tab=' . sanitize_title( $key ),
 						'__return_null'
 					);
 				}
@@ -76,18 +78,37 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				return;
 			}
 			?>
-            <div class="tf-admin-option-wrapper">
-                <form method="post" action="" enctype="multipart/form-data">
-                    <div class="tf-admin-option">
+            <div class="tf-option-wrapper">
+                <form method="post" action="" class="tf-option-form" enctype="multipart/form-data">
+                    <!-- Header -->
+                    <div class="tf-option-header">
+                        <div class="tf-option-header-left">
+                            <h2><?php echo esc_html( $this->option_title ); ?></h2>
+                            <span><?php _e( 'By', 'tourfic' ) ?></span>
+                            <a href="https://tourfic.com/" target="_blank"><?php _e( 'Themefic', 'tourfic' ) ?></a>
+                        </div>
+                        <div class="tf-option-header-right">
+                            <div class="tf-option-header-actions">
+                                <input type="submit" class="tf-admin-btn tf-btn-secondary" value="<?php esc_attr_e( 'Save', 'tourfic' ); ?>">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="tf-option">
                         <div class="tf-admin-tab tf-option-nav">
 							<?php
 							$section_count = 0;
 							foreach ( $this->option_sections as $key => $section ) : ?>
-                                <a href="#<?php echo $key; ?>" class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>" onclick="openTab(event, '<?php echo esc_attr( $key ) ?>')"
-                                   data-tab="<?php echo esc_attr( $key ) ?>">
-									<?php echo ! empty( $section['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $section['icon'] ) . '"></i></span>' : ''; ?>
-									<?php echo $section['title']; ?>
-                                </a>
+                                <div class="tf-admin-tab-item">
+                                    <a href="#<?php echo $key; ?>" class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>" onclick="openTab(event, '<?php echo esc_attr( $key ) ?>')"
+                                       data-tab="<?php echo esc_attr( $key ) ?>">
+										<?php echo ! empty( $section['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $section['icon'] ) . '"></i></span>' : ''; ?>
+										<?php echo $section['title']; ?>
+                                    </a>
+
+
+                                </div>
 								<?php $section_count ++; endforeach; ?>
                         </div>
 
@@ -114,9 +135,9 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                         </div>
                     </div>
 
-                    <!-- save -->
-                    <div class="tf-admin-option-footer">
-                        <button type="submit" class="button button-primary button-large"><?php _e( 'Save Changes', 'tourfic' ); ?></button>
+                    <!-- Footer -->
+                    <div class="tf-option-footer">
+                        <button type="submit" class="tf-admin-btn tf-btn-secondary"><?php _e( 'Save', 'tourfic' ); ?></button>
                     </div>
 
 					<?php wp_nonce_field( 'tf_option_nonce_action', 'tf_option_nonce' ); ?>
@@ -130,7 +151,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		 * Save Options
 		 * @author Foysal
 		 */
-		public function save_options() {
+		public function save_options( $option_data = array() ) {
 
 			// Add nonce for security and authentication.
 			$nonce_name   = isset( $_POST['tf_option_nonce'] ) ? $_POST['tf_option_nonce'] : '';
@@ -177,6 +198,23 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			} else {
 				delete_option( $this->option_id );
 			}
+		}
+
+		/*
+		 * Ajax Save Options
+		 * @author Foysal
+		 */
+		public function ajax_save_options() {
+			$response    = [
+				'status'  => 'error',
+				'message' => __( 'Something went wrong!', 'tourfic' ),
+			];
+			$option_data = isset( $_POST['optionData'] ) ? $_POST['optionData'] : array();
+
+			$response['sdasd'] = $option_data;
+
+			echo json_encode( $response );
+			wp_die();
 		}
 	}
 }

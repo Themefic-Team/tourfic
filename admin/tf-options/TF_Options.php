@@ -96,6 +96,10 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			wp_enqueue_script( 'tf-select2', '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array( 'jquery' ), TOURFIC, true );
 			wp_enqueue_script( 'wp-color-picker-alpha', TF_ADMIN_URL . 'tf-options/assets/js/wp-color-picker-alpha.js', array( 'jquery', 'wp-color-picker' ), TOURFIC, true );
 			wp_enqueue_script( 'tf-options', TF_ADMIN_URL . 'tf-options/assets/js/tf-options.js', array( 'jquery', 'wp-color-picker' ), TOURFIC, true );
+			wp_localize_script( 'tf-options', 'tf_options', array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'nonce'    => wp_create_nonce( 'tf_options_nonce' ),
+			) );
 
 			wp_enqueue_script( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.js' ), array( 'jquery' ), '1.9', true );
 			wp_enqueue_style( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.css' ), array(), '1.9' );
@@ -114,11 +118,11 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				$id = $settings_id . '[' . $field['id'] . ']';
 			}
 
-            $class = isset( $field['class'] ) ? $field['class'] : '';
-            $is_pro = isset( $field['is_pro'] ) ? $field['is_pro'] : '';
-            $badge_up = isset( $field['badge_up'] ) ? $field['badge_up'] : '';
+			$class    = isset( $field['class'] ) ? $field['class'] : '';
+			$is_pro   = isset( $field['is_pro'] ) ? $field['is_pro'] : '';
+			$badge_up = isset( $field['badge_up'] ) ? $field['badge_up'] : '';
 
-			if(isset( $field['is_pro'] ) || isset( $field['badge_up'] ) ){
+			if ( isset( $field['is_pro'] ) || isset( $field['badge_up'] ) ) {
 				$class .= 'tf-csf-disable tf-csf-pro';
 			}
 			?>
@@ -126,13 +130,13 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				<?php if ( ! empty( $field['label'] ) ): ?>
                     <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label">
 						<?php echo esc_html( $field['label'] ) ?>
-						<?php if($is_pro): ?>
-							<div class="tf-csf-badge"><span class="tf-pro"><?php _e( "Pro", "tourfic" ); ?></span></div>
+						<?php if ( $is_pro ): ?>
+                            <div class="tf-csf-badge"><span class="tf-pro"><?php _e( "Pro", "tourfic" ); ?></span></div>
 						<?php endif; ?>
-						<?php if($badge_up): ?>
-							<div class="tf-csf-badge"><span class="tf-upcoming"><?php _e( "Upcoming", "tourfic" ); ?></span></div>
+						<?php if ( $badge_up ): ?>
+                            <div class="tf-csf-badge"><span class="tf-upcoming"><?php _e( "Upcoming", "tourfic" ); ?></span></div>
 						<?php endif; ?>
-					</label>
+                    </label>
 				<?php endif; ?>
 				<?php if ( ! empty( $field['subtitle'] ) ) : ?>
                     <span class="tf-field-sub-title"><?php echo wp_kses_post( $field['subtitle'] ) ?></span>

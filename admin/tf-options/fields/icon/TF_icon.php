@@ -6,18 +6,24 @@ if ( ! class_exists( 'TF_icon' ) ) {
 	class TF_icon extends TF_Fields {
 
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
-			parent::__construct( $field, $value, $settings_id, $parent_field  );
+			parent::__construct( $field, $value, $settings_id, $parent_field );
 
-			add_action( 'admin_footer', array( $this, 'tf_icon_modal' ) );
+			//tf_icon_modal method load single time
+			static $tf_icon_modal;
+			if ( ! $tf_icon_modal ) {
+				$tf_icon_modal = true;
+				add_action( 'admin_footer', array( $this, 'tf_icon_modal' ) );
+			}
 		}
 
 		public function render() {
 
-			$default = isset( $this->field['default'] ) ? $this->field['default'] : '';
-			$value   = $this->value ? $this->value : '';
-            $preview_class = $value ? 'tf-icon-preview' : 'tf-icon-preview tf-hide';
+			$default       = isset( $this->field['default'] ) ? $this->field['default'] : '';
+			$value         = $this->value ? $this->value : '';
+			$preview_class = $value ? 'tf-icon-preview' : 'tf-icon-preview tf-hide';
+			$uniqueid      = uniqid();
 			?>
-            <div class="tf-icon-select">
+            <div class="tf-icon-select" id="tf-icon-<?php echo esc_attr( $this->field['id'] . $uniqueid ); ?>">
                 <div class="<?php echo esc_attr( $preview_class ); ?>">
                     <span class="tf-icon-preview-wrap tf-modal-btn">
                         <i class="<?php echo esc_attr( $value ); ?>"></i>
@@ -34,7 +40,7 @@ if ( ! class_exists( 'TF_icon' ) ) {
 
 		public function tf_icon_modal() {
 			?>
-            <div class="tf-modal" id="tf-icon-modal">
+            <div class="tf-modal" id="tf-icon-modal" data-icon-field="">
                 <div class="tf-modal-dialog">
                     <div class="container tf-modal-content">
                         <div class="tf-modal-header">
