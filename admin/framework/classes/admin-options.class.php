@@ -113,7 +113,6 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 			if ( $this->args['database'] === 'network' && ! empty( $this->args['show_in_network'] ) ) {
 				add_action( 'network_admin_menu', array( $this, 'add_admin_menu' ) );
 			}
-//tf_var_dump($this->pre_sections);
 			// wp enqeueu for typography and output css
 			parent::__construct();
 
@@ -441,7 +440,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 		public function add_admin_menu() {
 
 			extract( $this->args );
-
+//			tf_var_dump($this->pre_tabs);
 			if ( $menu_type === 'submenu' ) {
 
 				$menu_page = call_user_func( 'add_submenu_page', $menu_parent, esc_attr( $menu_title ), esc_attr( $menu_title ), $menu_capability, $menu_slug, array( $this, 'add_options_html' ) );

@@ -3,6 +3,12 @@
   @include flexbox();
   margin: -6px -12px -12px -12px;
 
+  &.tf-taxonomy-metabox{
+    display: block;
+    margin: 0;
+    max-width: 95%;
+  }
+
   .tf-admin-tab {
     border-right: 1px solid $slate10;
     background-color: $slate0;
@@ -10,7 +16,7 @@
 
     a.tf-tablinks {
       font-family: 'Lato';
-      font-style: normal;  
+      font-style: normal;
       @include flexbox();
       @include align-items(center);
       text-decoration: none;
@@ -34,6 +40,7 @@
         background-color: #fff;
         outline: none;
       }
+
       &:focus {
         box-shadow: none;
         outline: none;
@@ -58,6 +65,53 @@
           right: -5px;
           top: 50%;
           margin-top: -5px;
+        }
+      }
+    }
+
+    ul.tf-submenu {
+      margin: 0;
+      display: none;
+
+      li {
+        margin-bottom: 0;
+
+        a.tf-tablinks {
+          padding: 0;
+
+          span.tf-tablinks-inner {
+            @include flexbox();
+            @include align-items(center);
+            padding: 12px 20px;
+            margin-left: 24px;
+            border-left: 1px solid $slate20;
+            position: relative;
+
+            &::after {
+              position: absolute;
+              content: "";
+              height: 25px;
+              width: 14px;
+              border-width: 0 0 1px 1px;
+              border-style: solid;
+              border-color: $slate20;
+              left: -1px;
+              top: 0;
+              border-bottom-left-radius: 8px;
+            }
+          }
+        }
+
+        &:last-child {
+          a.tf-tablinks {
+            span.tf-tablinks-inner {
+              border-left: none;
+
+              &::after {
+                left: 0;
+              }
+            }
+          }
         }
       }
     }
@@ -102,20 +156,20 @@
         line-height: 24px;
       }
 
-      span{
+      span {
         font-size: 16px;
         color: $slate40;
         display: inline-block;
         margin-right: 4px;
       }
 
-      a{
+      a {
         color: $slate40;
         text-decoration: none;
         font-size: 16px;
         @include transition(all, 0.3s, ease);
 
-        &:hover{
+        &:hover {
           color: $blue60;
         }
       }
@@ -130,7 +184,7 @@
     }
   }
 
-  .tf-option-footer{
+  .tf-option-footer {
     @include flexbox();
     background-color: #fff;
     box-shadow: 0 0 10px rgba(67, 79, 96, 0.08);
