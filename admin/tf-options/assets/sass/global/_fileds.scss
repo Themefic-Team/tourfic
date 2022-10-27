@@ -13,8 +13,8 @@
     align-items: center;
     line-height: 20px;
 
-    .tf-csf-badge{ 
-      margin-left: 13px; 
+    .tf-csf-badge {
+      margin-left: 13px;
 
       .tf-pro {
         background-color: #F44336 !important;
@@ -24,21 +24,29 @@
         background-color: #006600 !important;
       }
     }
-   
+
   }
-  .tf-fieldset{
+
+  .tf-fieldset {
     font-family: 'Lato';
     font-style: normal;
     font-size: 14px;
-    a{
+
+    a {
       font-family: 'Lato';
-      font-style: normal; 
+      font-style: normal;
       font-weight: 600;
     }
   }
 
-  .tf-field-sub-title{
+  .tf-field-sub-title {
     color: #8997A9;
     font-size: 12px;
+  }
+}
+
+.tf-taxonomy-metabox {
+  .tf-field {
+    padding: 12px 0;
   }
 }

@@ -14,6 +14,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			$this->option_title    = $params['title'];
 			$this->option_sections = $params['sections'];
 
+			// run only is admin panel options, avoid performance loss
+			$this->pre_tabs     = $this->pre_tabs( $this->option_sections );
+			$this->pre_fields   = $this->pre_fields( $this->option_sections );
+			$this->pre_sections = $this->pre_sections( $this->option_sections );
+
 			//options
 			add_action( 'admin_menu', array( $this, 'tf_options' ) );
 
@@ -26,6 +31,62 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 		public static function option( $key, $params = array() ) {
 			return new self( $key, $params );
+		}
+
+		public function pre_tabs( $sections ) {
+
+			$result  = array();
+			$parents = array();
+
+			foreach ( $sections as $key => $section ) {
+				if ( ! empty( $section['parent'] ) ) {
+					$parents[ $section['parent'] ][ $key ] = $section;
+					unset( $sections[ $key ] );
+				}
+			}
+
+			foreach ( $sections as $key => $section ) {
+				if ( ! empty( $key ) && ! empty( $parents[ $key ] ) ) {
+					$section['sub_section'] = $parents[ $key ];
+				}
+				$result[] = $section;
+			}
+
+			return $result;
+		}
+
+		public function pre_fields( $sections ) {
+
+			$result = array();
+
+			foreach ( $sections as $key => $section ) {
+				if ( ! empty( $section['fields'] ) ) {
+					foreach ( $section['fields'] as $field ) {
+						$result[] = $field;
+					}
+				}
+			}
+
+			return $result;
+		}
+
+		public function pre_sections( $sections ) {
+
+			$result = array();
+
+			foreach ( $this->pre_tabs as $tab ) {
+				if ( ! empty( $tab['subs'] ) ) {
+					foreach ( $tab['subs'] as $sub ) {
+						$sub['ptitle'] = $tab['title'];
+						$result[]      = $sub;
+					}
+				}
+				if ( empty( $tab['subs'] ) ) {
+					$result[] = $tab;
+				}
+			}
+
+			return $result;
 		}
 
 		/**
@@ -44,14 +105,14 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			);
 
 			//sections as submenus
-			if ( ! empty( $this->option_sections ) ) {
-				foreach ( $this->option_sections as $key => $section ) {
+			if ( ! empty( $this->pre_tabs ) ) {
+				foreach ( $this->pre_tabs as $key => $section ) {
 					add_submenu_page(
 						$this->option_id,
 						$section['title'],
 						$section['title'],
 						'manage_options',
-						$this->option_id . '#tab=' . sanitize_title( $key ),
+						$this->option_id . '#tab=' . sanitize_title( $section['title'] ),
 						'__return_null'
 					);
 				}
@@ -99,15 +160,33 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                         <div class="tf-admin-tab tf-option-nav">
 							<?php
 							$section_count = 0;
-							foreach ( $this->option_sections as $key => $section ) : ?>
-                                <div class="tf-admin-tab-item">
-                                    <a href="#<?php echo $key; ?>" class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>" onclick="openTab(event, '<?php echo esc_attr( $key ) ?>')"
-                                       data-tab="<?php echo esc_attr( $key ) ?>">
+							foreach ( $this->pre_tabs as $key => $section ) : ?>
+                                <div class="tf-admin-tab-item<?php echo ! empty( $section['sub_section'] ) ? ' tf-has-submenu' : '' ?>">
+                                    <a href="#<?php echo sanitize_title( $section['title'] ); ?>"
+                                       class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>"
+                                       onclick="openTab(event, '<?php echo esc_attr( sanitize_title( $section['title'] ) ) ?>')"
+                                       data-tab="<?php echo esc_attr( sanitize_title( $section['title'] ) ) ?>">
 										<?php echo ! empty( $section['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $section['icon'] ) . '"></i></span>' : ''; ?>
 										<?php echo $section['title']; ?>
                                     </a>
 
-
+									<?php if ( ! empty( $section['sub_section'] ) ): ?>
+                                        <ul class="tf-submenu">
+											<?php foreach ( $section['sub_section'] as $sub_key => $sub ): ?>
+                                                <li>
+                                                    <a href="#<?php echo $sub_key; ?>"
+                                                       class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>"
+                                                       onclick="openTab(event, '<?php echo esc_attr( $sub_key ) ?>')"
+                                                       data-tab="<?php echo esc_attr( $sub_key ) ?>">
+														<span class="tf-tablinks-inner">
+                                                            <?php echo ! empty( $sub['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $sub['icon'] ) . '"></i></span>' : ''; ?>
+                                                            <?php echo $sub['title']; ?>
+                                                        </span>
+                                                    </a>
+                                                </li>
+											<?php endforeach; ?>
+                                        </ul>
+									<?php endif; ?>
                                 </div>
 								<?php $section_count ++; endforeach; ?>
                         </div>

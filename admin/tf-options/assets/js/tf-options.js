@@ -124,7 +124,7 @@
             $('.tf-modal').removeClass('tf-modal-show');
             $('body').removeClass('tf-modal-open');
         });
-        $(document).click(function (event) {
+        $(document).on('click', function (event) {
             if (!$(event.target).closest(".tf-modal-content,.tf-modal-btn").length) {
                 $("body").removeClass("tf-modal-open");
                 $(".tf-modal").removeClass("tf-modal-show");
@@ -158,7 +158,10 @@
             $('#tf-icon-modal').data('icon-field', fieldId);
         });
 
-        //icon select
+        /*
+        * Icon select
+        * @author: Foysal
+        */
         $(document).on('click', '.tf-icon-list li', function (e) {
             e.preventDefault();
             let $this = $(this);
@@ -170,7 +173,10 @@
             $('.tf-icon-insert').removeClass('disabled');
         });
 
-        //insert btn click
+        /*
+        * Icon insert
+        * @author: Foysal
+        */
         $(document).on('click', '.tf-icon-insert', function (e) {
             e.preventDefault();
             let $this = $(this),
@@ -231,6 +237,40 @@
             //remove active class
             iconLi.removeClass('active');
         })
+
+        /*
+        * Submenu toggle
+        * @author: Foysal
+        */
+        $(document).on('click', '.tf-admin-tab-item', function (e) {
+            e.preventDefault();
+            let $this = $(this);
+
+            /*if ($this.hasClass('tf-has-submenu')) {
+                let submenu = $this.find('.tf-submenu');
+                submenu.addClass('tf-show').slideDown();
+                $this.addClass('tf-open');
+            } else {
+                $('.tf-admin-tab-item').removeClass('tf-open');
+                $('.tf-submenu').removeClass('tf-show').slideUp();
+            }*/
+
+            if ($this.hasClass('open')) {
+                $this.removeClass('open');
+                $this.find('li').removeClass('open');
+                $this.find('ul').slideUp();
+            } else {
+                $this.addClass('open');
+                $this.children('ul').slideDown();
+                $this.siblings('.tf-admin-tab-item').children('ul').slideUp();
+                $this.siblings('.tf-admin-tab-item').removeClass('open');
+                $this.siblings('.tf-admin-tab-item').find('li').removeClass('open');
+                $this.siblings('.tf-admin-tab-item').find('ul').slideUp();
+            }
+
+
+        });
+
 
         /*
         * Options ajax save
@@ -382,12 +422,12 @@
                 });
             }
             clone_value.find('label').each(function () {
-                var for_value =  $(this).attr("for");
+                var for_value = $(this).attr("for");
                 if (typeof for_value !== "undefined") {
                  for_value = for_value.replace('_____', '').replace('[' + current_field + ']['+repeater_count+']', '[' + current_field + '][' + count + ']');
                  var for_value =  $(this).attr("for", for_value);
                 }
-             });
+            });
 
              clone_value.find('input[name="tf_repeater_count"]').val(count)
             $(this).closest('.tf-repeater-wrap').append(clone_value).show();
@@ -535,7 +575,10 @@ var frame, gframe;
             gframe.open();
             return false;
         });
-
+        // Texonomy submit event
+        $('#addtag > .submit #submit').click(function(){
+            $(".tf-fieldset-media-preview").html("");
+        });
 
         $(".tf-field-map").each(function () {
             var $this = $(this),
@@ -652,20 +695,20 @@ var frame, gframe;
         });
 
 
-        $(".tf-select").change(function(){
+        $(".tf-select").change(function () {
             var $this = $(this);
             var value = $this.val();
             var current_val = $this.attr("data-depend-id");
-            $('[data-controller='+current_val+']').each(function(){
+            $('[data-controller=' + current_val + ']').each(function () {
                 var controller = $(this).attr("data-controller");
                 var condition = $(this).attr("data-condition");
                 var data_val = $(this).attr("data-value");
                 // console.log(controller);
-                if(controller && condition && data_val){
+                if (controller && condition && data_val) {
 
-                    if(value == data_val && current_val == controller){
+                    if (value == data_val && current_val == controller) {
                         $(this).show();
-                    }else{
+                    } else {
                         $(this).hide();
                     }
 
@@ -681,33 +724,33 @@ var frame, gframe;
                 var value = $this.val(1);
                 var current_val = $this.attr("data-depend-id");
                 // console.log(current_val);
-                $('[data-controller='+current_val+']').each(function(){
+                $('[data-controller=' + current_val + ']').each(function () {
                     var controller = $(this).attr("data-controller");
                     var condition = $(this).attr("data-condition");
                     var data_val = $(this).attr("data-value");
                     // console.log(controller);
-                    if(controller && condition && data_val){
+                    if (controller && condition && data_val) {
 
-                        if(1 == data_val && current_val == controller){
+                        if (1 == data_val && current_val == controller) {
                             $(this).show();
                         }
 
                     }
 
                 });
-            }else{
+            } else {
                 var $this = $(this);
                 var value = $this.val('');
                 var current_val = $this.attr("data-depend-id");
                 // console.log(current_val);
-                $('[data-controller='+current_val+']').each(function(){
+                $('[data-controller=' + current_val + ']').each(function () {
                     var controller = $(this).attr("data-controller");
                     var condition = $(this).attr("data-condition");
                     var data_val = $(this).attr("data-value");
                     // console.log(controller);
-                    if(controller && condition && data_val){
+                    if (controller && condition && data_val) {
 
-                        if(1 == data_val && current_val == controller){
+                        if (1 == data_val && current_val == controller) {
                             $(this).hide();
                         }
 
@@ -718,33 +761,33 @@ var frame, gframe;
         });
 
         $('.tf-group-checkbox').change(function () {
-           var controller_name =  $(this).attr("data-depend-id");
-           var ch_list=Array();
-            $("input.tf-group-checkbox:checked").each(function(){
+            var controller_name = $(this).attr("data-depend-id");
+            var ch_list = Array();
+            $("input.tf-group-checkbox:checked").each(function () {
                 ch_list.push($(this).val());
 
             });
-            if(ch_list.length==0){
-                $('[data-controller='+controller_name+']').each(function(){
+            if (ch_list.length == 0) {
+                $('[data-controller=' + controller_name + ']').each(function () {
                     var controller = $(this).attr("data-controller");
                     var condition = $(this).attr("data-condition");
                     var data_val = $(this).attr("data-value");
-                    if(controller && condition && data_val){
+                    if (controller && condition && data_val) {
                         $(this).hide();
                     }
 
                 });
 
-            }else{
-                $('[data-controller='+controller_name+']').each(function(){
+            } else {
+                $('[data-controller=' + controller_name + ']').each(function () {
                     var controller = $(this).attr("data-controller");
                     var condition = $(this).attr("data-condition");
                     var data_val = $(this).attr("data-value");
-                    if(controller && condition && data_val){
+                    if (controller && condition && data_val) {
 
-                        if(!!~jQuery.inArray(data_val, ch_list)){
+                        if (!!~jQuery.inArray(data_val, ch_list)) {
                             $(this).show();
-                        }else{
+                        } else {
                             $(this).hide();
                         }
 

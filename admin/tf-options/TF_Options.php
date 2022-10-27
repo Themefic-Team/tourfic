@@ -29,6 +29,9 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			//load options
 			$this->load_options();
 
+			//load taxonomy
+			$this->load_taxonomy();
+
 			//enqueue scripts
 			add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_enqueue_scripts' ) );
 		}
@@ -42,6 +45,9 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			require_once TF_ADMIN_PATH . 'tf-options/Classes/TF_Metabox.php';
 			// Settings Class
 			require_once TF_ADMIN_PATH . 'tf-options/Classes/TF_Settings.php';
+            //Taxonomy Class
+			require_once TF_ADMIN_PATH . 'tf-options/Classes/TF_Taxonomy_Metabox.php';
+
 		}
 
 		/**
@@ -71,6 +77,22 @@ if ( ! class_exists( 'TF_Options' ) ) {
 					$option_name = basename( $option, '.php' );
 					if ( ! class_exists( $option_name ) ) {
 						require_once $option;
+					}
+				}
+			}
+		}
+
+		/**
+		 * Load Taxonomy
+		 * @author Foysal
+		 */
+		public function load_taxonomy() {
+			$taxonomies = glob( TF_ADMIN_PATH . 'tf-options/taxonomies/*.php' );
+			if ( ! empty( $taxonomies ) ) {
+				foreach ( $taxonomies as $taxonomy ) {
+					$taxonomy_name = basename( $taxonomy, '.php' );
+					if ( ! class_exists( $taxonomy_name ) ) {
+						require_once $taxonomy;
 					}
 				}
 			}
@@ -160,12 +182,8 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				$visible = ( ! empty( $depend_visible ) ) ? ' csf-depend-visible' : ' csf-depend-hidden';
 			}
 			?>
-			<?php 
-			if( !empty($data_value) ){  
-				$tfcheck_type = gettype($tf_meta_box_dep_value[$data_controller]);
-			}
-			?>
-            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo !empty($visible) ? $visible : ''; ?>" <?php echo !empty($depend) ? $depend : ''; ?> <?php echo !empty($data_value) && $tfcheck_type== "string" && $tf_meta_box_dep_value[$data_controller]!=$data_value ? 'style="display:none"' : ''; ?> <?php echo !empty($data_value) && $tfcheck_type== "array" && !in_array ( $data_value, $tf_meta_box_dep_value[$data_controller] ) ? 'style="display:none"' : ''; ?> >
+			
+            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo !empty($visible) ? $visible : ''; ?>" <?php echo !empty($depend) ? $depend : ''; ?> >
 
 				<?php if ( ! empty( $field['label'] ) ): ?>
                     <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label">

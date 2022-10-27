@@ -7,80 +7,31 @@ TF_Settings::option( 'tf-settings', array(
 	'sections' => array(
 		'general' => array(
 			'title'  => esc_html__( 'General', 'tourfic' ),
+			'icon' => 'fa fa-cog',
+		),
+		'general1' => array(
+			'title'  => esc_html__( 'General One', 'tourfic' ),
+			'parent' => 'general',
+			'icon' => 'fa fa-cog',
 			'fields' => array(
 				array(
-					'id'       => 'api_key',
-					'label'       => esc_html__( 'API Key', 'tourfic' ),
+					'id'       => 'api_key1',
+					'label'       => esc_html__( 'API Key One', 'tourfic' ),
 					'description' => esc_html__( 'Enter your TourFic API Key', 'tourfic' ),
-					'type'        => 'text',
-					'default'     => '',
-				),
-				array(
-					'id'       => 'api_secret',
-					'label'       => esc_html__( 'API Secret', 'tourfic' ),
-					'description' => esc_html__( 'Enter your TourFic API Secret', 'tourfic' ),
-					'type'        => 'text',
-					'default'     => '',
-				),
-				array(
-					'id'       => 'api_url',
-					'label'       => esc_html__( 'API URL', 'tourfic' ),
-					'description' => esc_html__( 'Enter your TourFic API URL', 'tourfic' ),
-					'type'        => 'text',
-					'default'     => '',
-				),
-				array(
-					'id'       => 'api_version',
-					'label'       => esc_html__( 'API Version', 'tourfic' ),
-					'description' => esc_html__( 'Enter your TourFic API Version', 'tourfic' ),
-					'type'        => 'text',
-					'default'     => '',
-				),
-				array(
-					'id'       => 'api_language',
-					'label'       => esc_html__( 'API Language', 'tourfic' ),
-					'description' => esc_html__( 'Enter your TourFic API Language', 'tourfic' ),
 					'type'        => 'text',
 					'default'     => '',
 				),
 			),
 		),
 		'general2' => array(
-			'title'  => esc_html__( 'General', 'tourfic' ),
+			'title'  => esc_html__( 'General Two', 'tourfic' ),
 			'parent' => 'general',
+			'icon' => 'fa fa-cog',
 			'fields' => array(
 				array(
-					'id'       => 'api_key',
-					'label'       => esc_html__( 'API Key', 'tourfic' ),
+					'id'       => 'api_key2',
+					'label'       => esc_html__( 'API Key Two', 'tourfic' ),
 					'description' => esc_html__( 'Enter your TourFic API Key', 'tourfic' ),
-					'type'        => 'text',
-					'default'     => '',
-				),
-				array(
-					'id'       => 'api_secret',
-					'label'       => esc_html__( 'API Secret', 'tourfic' ),
-					'description' => esc_html__( 'Enter your TourFic API Secret', 'tourfic' ),
-					'type'        => 'text',
-					'default'     => '',
-				),
-				array(
-					'id'       => 'api_url',
-					'label'       => esc_html__( 'API URL', 'tourfic' ),
-					'description' => esc_html__( 'Enter your TourFic API URL', 'tourfic' ),
-					'type'        => 'text',
-					'default'     => '',
-				),
-				array(
-					'id'       => 'api_version',
-					'label'       => esc_html__( 'API Version', 'tourfic' ),
-					'description' => esc_html__( 'Enter your TourFic API Version', 'tourfic' ),
-					'type'        => 'text',
-					'default'     => '',
-				),
-				array(
-					'id'       => 'api_language',
-					'label'       => esc_html__( 'API Language', 'tourfic' ),
-					'description' => esc_html__( 'Enter your TourFic API Language', 'tourfic' ),
 					'type'        => 'text',
 					'default'     => '',
 				),
@@ -88,6 +39,7 @@ TF_Settings::option( 'tf-settings', array(
 		),
 		'advanced' => array(
 			'title'  => esc_html__( 'Advanced', 'tourfic' ),
+			'icon' => 'fa fa-cog',
 			'fields' => array(
 				array(
 					'id'          => 'search_page',
@@ -102,6 +54,38 @@ TF_Settings::option( 'tf-settings', array(
 						'hide_empty' => false,
 					),
 					'multiple'    => true,
+				),
+			),
+		),
+		'new' => array(
+			'title'  => esc_html__( 'Advanced New', 'tourfic' ),
+			'icon' => 'fa fa-cog',
+		),
+		'new1' => array(
+			'title'  => esc_html__( 'New One', 'tourfic' ),
+			'parent' => 'new',
+			'icon' => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'       => 'api_key3',
+					'label'       => esc_html__( 'API Key three', 'tourfic' ),
+					'description' => esc_html__( 'Enter your TourFic API Key', 'tourfic' ),
+					'type'        => 'text',
+					'default'     => '',
+				),
+			),
+		),
+		'new2' => array(
+			'title'  => esc_html__( 'New Two', 'tourfic' ),
+			'parent' => 'new',
+			'icon' => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'       => 'api_key4',
+					'label'       => esc_html__( 'API Key four', 'tourfic' ),
+					'description' => esc_html__( 'Enter your TourFic API Key', 'tourfic' ),
+					'type'        => 'text',
+					'default'     => '',
 				),
 			),
 		),

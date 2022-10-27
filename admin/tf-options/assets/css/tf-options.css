@@ -195,6 +195,11 @@ body.tf-modal-open {
   display: -webkit-flex;
   display: flex;
   margin: -6px -12px -12px -12px; }
+  .tf-option.tf-taxonomy-metabox,
+  .tf-admin-meta-box.tf-taxonomy-metabox {
+    display: block;
+    margin: 0;
+    max-width: 95%; }
   .tf-option .tf-admin-tab,
   .tf-admin-meta-box .tf-admin-tab {
     border-right: 1px solid #e1e5ea;
@@ -267,6 +272,48 @@ body.tf-modal-open {
           right: -5px;
           top: 50%;
           margin-top: -5px; }
+    .tf-option .tf-admin-tab ul.tf-submenu,
+    .tf-admin-meta-box .tf-admin-tab ul.tf-submenu {
+      margin: 0;
+      display: none; }
+      .tf-option .tf-admin-tab ul.tf-submenu li,
+      .tf-admin-meta-box .tf-admin-tab ul.tf-submenu li {
+        margin-bottom: 0; }
+        .tf-option .tf-admin-tab ul.tf-submenu li a.tf-tablinks,
+        .tf-admin-meta-box .tf-admin-tab ul.tf-submenu li a.tf-tablinks {
+          padding: 0; }
+          .tf-option .tf-admin-tab ul.tf-submenu li a.tf-tablinks span.tf-tablinks-inner,
+          .tf-admin-meta-box .tf-admin-tab ul.tf-submenu li a.tf-tablinks span.tf-tablinks-inner {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 12px 20px;
+            margin-left: 24px;
+            border-left: 1px solid #c4cbd4;
+            position: relative; }
+            .tf-option .tf-admin-tab ul.tf-submenu li a.tf-tablinks span.tf-tablinks-inner::after,
+            .tf-admin-meta-box .tf-admin-tab ul.tf-submenu li a.tf-tablinks span.tf-tablinks-inner::after {
+              position: absolute;
+              content: "";
+              height: 25px;
+              width: 14px;
+              border-width: 0 0 1px 1px;
+              border-style: solid;
+              border-color: #c4cbd4;
+              left: -1px;
+              top: 0;
+              border-bottom-left-radius: 8px; }
+        .tf-option .tf-admin-tab ul.tf-submenu li:last-child a.tf-tablinks span.tf-tablinks-inner,
+        .tf-admin-meta-box .tf-admin-tab ul.tf-submenu li:last-child a.tf-tablinks span.tf-tablinks-inner {
+          border-left: none; }
+          .tf-option .tf-admin-tab ul.tf-submenu li:last-child a.tf-tablinks span.tf-tablinks-inner::after,
+          .tf-admin-meta-box .tf-admin-tab ul.tf-submenu li:last-child a.tf-tablinks span.tf-tablinks-inner::after {
+            left: 0; }
   .tf-option .tf-tab-wrapper,
   .tf-admin-meta-box .tf-tab-wrapper {
     -webkit-flex: 0 0 calc(100% - 220px);
@@ -401,6 +448,9 @@ body.tf-modal-open {
   .tf-field .tf-field-sub-title {
     color: #8997A9;
     font-size: 12px; }
+
+.tf-taxonomy-metabox .tf-field {
+  padding: 12px 0; }
 
 .tf-field-text input {
   width: 100%;
@@ -666,6 +716,45 @@ body.tf-modal-open {
     line-height: 48px;
     text-align: center;
     text-transform: capitalize; }
+
+.tf-taxonomy-metabox {
+  display: flow-root; }
+  .tf-taxonomy-metabox .tf-field-image .tf-fieldset .tf-fieldset-media {
+    display: flex; }
+    .tf-taxonomy-metabox .tf-field-image .tf-fieldset .tf-fieldset-media input {
+      width: 85%;
+      padding: 12px 8px 12px 12px;
+      border: none;
+      background: #f0f0f1;
+      border-radius: 4px;
+      height: 48px;
+      color: #363e4a;
+      font-size: 14px;
+      border: 1px solid #ddd; }
+    .tf-taxonomy-metabox .tf-field-image .tf-fieldset .tf-fieldset-media a.tf-media-upload {
+      height: 48px;
+      width: 14%;
+      line-height: 48px;
+      text-align: center;
+      text-transform: capitalize; }
+
+.taxonomy-hotel_location #edittag,
+.taxonomy-tour_destination #edittag,
+.taxonomy-hotel_feature #edittag {
+  display: flex;
+  flex-direction: column; }
+  .taxonomy-hotel_location #edittag .tf-admin-meta-box.tf-taxonomy-metabox,
+  .taxonomy-tour_destination #edittag .tf-admin-meta-box.tf-taxonomy-metabox,
+  .taxonomy-hotel_feature #edittag .tf-admin-meta-box.tf-taxonomy-metabox {
+    order: 2; }
+  .taxonomy-hotel_location #edittag table,
+  .taxonomy-tour_destination #edittag table,
+  .taxonomy-hotel_feature #edittag table {
+    order: 1; }
+  .taxonomy-hotel_location #edittag .edit-tag-actions,
+  .taxonomy-tour_destination #edittag .edit-tag-actions,
+  .taxonomy-hotel_feature #edittag .edit-tag-actions {
+    order: 3; }
 
 .tf-field-gallery .tf-fieldset .tf-fieldset-gallery-preview img {
   height: 60px;
