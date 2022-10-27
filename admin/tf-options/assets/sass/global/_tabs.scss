@@ -9,6 +9,8 @@
     min-width: 220px;
 
     a.tf-tablinks {
+      font-family: 'Lato';
+      font-style: normal;  
       @include flexbox();
       @include align-items(center);
       text-decoration: none;

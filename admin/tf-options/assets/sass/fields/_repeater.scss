@@ -25,18 +25,21 @@
             
         }
         .tf-repeater-icon-move{
+            color: $blue40;
             &:hover {
                 background-color: $blue10; 
                 transition: 0.4s;
               }
         }
         .tf-repeater-icon-clone{
+            color: $blue40;
             &:hover {
                 background-color: $blue10; 
                 transition: 0.4s;
               }
         }
         .tf-repeater-icon-delete{
+            color: $red40;
             &:hover {
                 background-color: $red10; 
                 transition: 0.4s;

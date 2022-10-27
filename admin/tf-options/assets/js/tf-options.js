@@ -296,8 +296,14 @@
             return false;
         });
         $(document).on('click', '.tf-repeater-icon-clone', function () {
+            var $this_parent = $(this).closest('.tf-repeater-wrap');
             let clone_value = $(this).closest('.tf-single-repeater').clone();
             let repeatDateField = clone_value.find('.tf-field-date');
+
+            var parent_field = $this_parent.find(':input[name="tf_parent_field"]').val();
+            var current_field =$this_parent.find(':input[name="tf_current_field"]').val();
+            var count = $this_parent.find('.tf-single-repeater-'+current_field+'').length;
+            
             if (repeatDateField.length > 0) {
                 tfDateInt(repeatDateField);
             }
@@ -316,6 +322,34 @@
             if (repeatColorField.length > 0) {
                 tfColorInt(repeatColorField);
             } 
+            alert(parent_field);
+            if (parent_field == '') {
+                clone_value.find(':input').each(function () {
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                }); 
+                var update_paren = clone_value.find('.tf-repeater input[name="tf_parent_field"]').val();
+                if (typeof update_paren !== "undefined") { 
+                    var update_paren = update_paren.replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                }
+                clone_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
+
+            } else { 
+                
+                clone_value.find(':input').each(function () {
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                });
+            }
+            clone_value.find('label').each(function () { 
+                var for_value =  $(this).attr("for");
+                if (typeof for_value !== "undefined") { 
+                 for_value = for_value.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');  
+                 var for_value =  $(this).attr("for", for_value);
+                }
+             });
+
+
             $(this).closest('.tf-repeater-wrap').append(clone_value).show();
         });
         $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
