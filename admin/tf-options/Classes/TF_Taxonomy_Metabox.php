@@ -28,10 +28,10 @@ if ( ! class_exists( 'TF_Taxonomy_Metabox' ) ) {
 			$this->load_fields();
 
 			//taxonomies
-			add_action( $this->taxonomy . '_add_form_fields', array( $this, 'tf_taxonomy_content' ) );
-			add_action( $this->taxonomy . '_edit_form_fields', array( $this, 'tf_taxonomy_content' ) );
-			add_action( 'created_' . $this->taxonomy, array( $this, 'save_taxonomy' ) );
-			add_action( 'edited_' . $this->taxonomy, array( $this, 'save_taxonomy' ) );
+			add_action( $this->taxonomy . '_edit_form_fields', array( $this, 'tf_taxonomy_content' ), 10, 2 );
+			add_action( $this->taxonomy . '_add_form_fields', array( $this, 'tf_taxonomy_content' ), 10, 2 );
+			add_action( 'created_' . $this->taxonomy, array( $this, 'save_taxonomy' ) , 10, 2);
+			add_action( 'edited_' . $this->taxonomy, array( $this, 'save_taxonomy' ) , 10, 2);
 
 		}
 
@@ -83,6 +83,7 @@ if ( ! class_exists( 'TF_Taxonomy_Metabox' ) ) {
 			}
 
 			// Form fields.
+			
 			?>
             <div class="tf-admin-meta-box tf-taxonomy-metabox">
                 <div class="tf-tab-wrapper">

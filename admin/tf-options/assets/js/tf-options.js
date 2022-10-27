@@ -572,7 +572,10 @@ var frame, gframe;
             gframe.open();
             return false;
         });
-
+        // Texonomy submit event
+        $('#addtag > .submit #submit').click(function(){
+            $(".tf-fieldset-media-preview").html("");
+        });
 
         $(".tf-field-map").each(function () {
             var $this = $(this),

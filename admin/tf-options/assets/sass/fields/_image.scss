@@ -50,3 +50,51 @@
             }
     }
   }
+
+.tf-taxonomy-metabox{
+    display: flow-root;
+
+    .tf-field-image {
+        .tf-fieldset {
+            
+            .tf-fieldset-media{
+                display: flex;
+                input{
+                    width: 85%;
+                    padding: 12px 8px 12px 12px;
+                    border: none;
+                    background: #f0f0f1;
+                    border-radius: 4px;
+                    height: 48px;
+                    color: #363e4a;
+                    font-size: 14px;
+                    border: 1px solid #ddd;
+                }
+                a.tf-media-upload{
+                    height: 48px;
+                    width: 14%;
+                    line-height: 48px;
+                    text-align: center;
+                    text-transform: capitalize;
+                }
+                }
+        }
+      }
+}
+.taxonomy-hotel_location,
+.taxonomy-tour_destination,
+.taxonomy-hotel_feature{
+    #edittag{
+        display: flex;
+        flex-direction: column;
+        .tf-admin-meta-box.tf-taxonomy-metabox{
+            order: 2;
+        }
+        table{
+            order: 1;
+        }
+        .edit-tag-actions{
+            order: 3;
+        }
+    }
+}

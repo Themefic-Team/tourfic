@@ -182,12 +182,8 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				$visible = ( ! empty( $depend_visible ) ) ? ' csf-depend-visible' : ' csf-depend-hidden';
 			}
 			?>
-			<?php 
-			if( !empty($data_value) ){  
-				$tfcheck_type = gettype($tf_meta_box_dep_value[$data_controller]);
-			}
-			?>
-            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo !empty($visible) ? $visible : ''; ?>" <?php echo !empty($depend) ? $depend : ''; ?> <?php echo !empty($data_value) && $tfcheck_type== "string" && $tf_meta_box_dep_value[$data_controller]!=$data_value ? 'style="display:none"' : ''; ?> <?php echo !empty($data_value) && $tfcheck_type== "array" && !in_array ( $data_value, $tf_meta_box_dep_value[$data_controller] ) ? 'style="display:none"' : ''; ?> >
+			
+            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo !empty($visible) ? $visible : ''; ?>" <?php echo !empty($depend) ? $depend : ''; ?> >
 
 				<?php if ( ! empty( $field['label'] ) ): ?>
                     <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label">
