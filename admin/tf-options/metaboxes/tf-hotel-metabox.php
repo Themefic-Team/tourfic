@@ -47,6 +47,24 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					),
 				),
 				array(
+					'id' => 'tf-hotel',
+					'type' => 'text',
+					'label' => 'Hotel Info',
+					'subtitle' => 'Enter Hotel Info',
+					'placeholder' => 'Enter Hotel placeholder',
+					'description' => 'Enter Hotel description',
+					'dependency' => array( 'disable-services', '==', 'hotel' ),
+				),
+				array(
+					'id' => 'tf-tour',
+					'type' => 'text',
+					'label' => 'Tour Info',
+					'subtitle' => 'Enter Tour Info',
+					'placeholder' => 'Enter Tour placeholder',
+					'description' => 'Enter Tour description',
+					'dependency' => array( 'disable-services', '==', 'tour' ),
+				),
+				array(
 					'id'          => 'address',
 					'type'        => 'textarea',
 					'label'       => __( 'Hotel Address', 'tourfic' ),
@@ -55,6 +73,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'attributes'  => array(
 						'required' => 'required',
 					),
+					'dependency' => array( 'features', '==', '18' ),
 				),
 				array(
 					'id'       => '',
@@ -87,10 +106,10 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'is_pro'     => true,
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-   					'default' => true,
+   					'default' => false,
 				),
 				array(
-					'id'       => '', 
+					'id'       => 'hotel-video', 
 					'type'     => 'text',
 					'label'    => __( 'Hotel Video', 'tourfic' ),
 					'is_pro'     => true,
@@ -98,6 +117,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'description'     => __( 'Enter YouTube/Vimeo URL here', 'tourfic' ),
 					'validate' => 'csf_validate_url',
 					'placeholder' => __( '', 'tourfic' ),
+					'dependency' => array( 'featured', '==', '1' ),
 				),
 			),
 		),
@@ -107,9 +127,8 @@ TF_Metabox::metabox( 'tf_hotels', array(
 			'icon'   => 'ri-home-2-line',
 			'fields' => array(
 				array(
-					'id'       => '', 
+					'id'       => 'hotel-service', 
 					'type'     => 'switch',
-					'is_pro'     => true,
 					'label'    => __( 'Pickup Service', 'tourfic' ),
 					'description' => __( 'Airport Service', 'tourfic' ),
 					'default'  => false,

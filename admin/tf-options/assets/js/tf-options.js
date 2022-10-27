@@ -610,6 +610,110 @@ var frame, gframe;
             $longitude.on('change', input_update_latlng);
 
         });
+
+
+        $(".tf-select").change(function(){
+            var $this = $(this);
+            var value = $this.val();
+            var current_val = $this.attr("data-depend-id");
+            $('[data-controller='+current_val+']').each(function(){
+                var controller = $(this).attr("data-controller");
+                var condition = $(this).attr("data-condition");
+                var data_val = $(this).attr("data-value");
+                // console.log(controller);
+                if(controller && condition && data_val){
+                    
+                    if(value == data_val && current_val == controller){
+                        $(this).show();
+                    }else{
+                        $(this).hide();
+                    }
+                    
+                }
+
+            });
+        });
+
+        $('.tf-switch').change(function () {
+            var $this = $(this);
+            if (this.checked) {
+                var $this = $(this);
+                var value = $this.val(1);
+                var current_val = $this.attr("data-depend-id");
+                // console.log(current_val);
+                $('[data-controller='+current_val+']').each(function(){
+                    var controller = $(this).attr("data-controller");
+                    var condition = $(this).attr("data-condition");
+                    var data_val = $(this).attr("data-value");
+                    // console.log(controller);
+                    if(controller && condition && data_val){
+                        
+                        if(1 == data_val && current_val == controller){
+                            $(this).show();
+                        }
+                        
+                    }
+    
+                });
+            }else{
+                var $this = $(this);
+                var value = $this.val('');
+                var current_val = $this.attr("data-depend-id");
+                // console.log(current_val);
+                $('[data-controller='+current_val+']').each(function(){
+                    var controller = $(this).attr("data-controller");
+                    var condition = $(this).attr("data-condition");
+                    var data_val = $(this).attr("data-value");
+                    // console.log(controller);
+                    if(controller && condition && data_val){
+                        
+                        if(1 == data_val && current_val == controller){
+                            $(this).hide();
+                        }
+                        
+                    }
+    
+                });
+            }
+        });
+
+        $('.tf-group-checkbox').change(function () {
+           var controller_name =  $(this).attr("data-depend-id");
+           var ch_list=Array();
+            $("input.tf-group-checkbox:checked").each(function(){
+                ch_list.push($(this).val());
+                
+            });
+            if(ch_list.length==0){
+                $('[data-controller='+controller_name+']').each(function(){
+                    var controller = $(this).attr("data-controller");
+                    var condition = $(this).attr("data-condition");
+                    var data_val = $(this).attr("data-value");
+                    if(controller && condition && data_val){
+                        $(this).hide();
+                    }
+    
+                });
+                
+            }else{
+                $('[data-controller='+controller_name+']').each(function(){
+                    var controller = $(this).attr("data-controller");
+                    var condition = $(this).attr("data-condition");
+                    var data_val = $(this).attr("data-value");
+                    if(controller && condition && data_val){
+                        
+                        if(!!~jQuery.inArray(data_val, ch_list)){
+                            $(this).show();
+                        }else{
+                            $(this).hide();
+                        }
+                        
+                    }
+    
+                });
+            }
+        });
+
     });
 
 

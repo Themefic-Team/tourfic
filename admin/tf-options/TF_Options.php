@@ -121,8 +121,48 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			if(isset( $field['is_pro'] ) || isset( $field['badge_up'] ) ){
 				$class .= 'tf-csf-disable tf-csf-pro';
 			}
+			$tf_meta_box_dep_value = get_post_meta( get_the_ID(  ), $settings_id, true );
+
+			$depend     = '';
+
+			if ( ! empty( $field['dependency'] ) ) {
+
+				$dependency      = $field['dependency'];
+				$depend_visible  = '';
+				$data_controller = '';
+				$data_condition  = '';
+				$data_value      = '';
+				$data_global     = '';
+
+				if ( is_array( $dependency[0] ) ) {
+					$data_controller = implode( '|', array_column( $dependency, 0 ) );
+					$data_condition  = implode( '|', array_column( $dependency, 1 ) );
+					$data_value      = implode( '|', array_column( $dependency, 2 ) );
+					$data_global     = implode( '|', array_column( $dependency, 3 ) );
+					$depend_visible  = implode( '|', array_column( $dependency, 4 ) );
+				} else {
+					$data_controller = ( ! empty( $dependency[0] ) ) ? $dependency[0] : '';
+					$data_condition  = ( ! empty( $dependency[1] ) ) ? $dependency[1] : '';
+					$data_value      = ( ! empty( $dependency[2] ) ) ? $dependency[2] : '';
+					$data_global     = ( ! empty( $dependency[3] ) ) ? $dependency[3] : '';
+					$depend_visible  = ( ! empty( $dependency[4] ) ) ? $dependency[4] : '';
+				}
+
+				$depend .= ' data-controller="' . esc_attr( $data_controller ) . '"';
+				$depend .= ' data-condition="' . esc_attr( $data_condition ) . '"';
+				$depend .= ' data-value="' . esc_attr( $data_value ) . '"';
+				$depend .= ( ! empty( $data_global ) ) ? ' data-depend-global="true"' : '';
+
+				$visible = ( ! empty( $depend_visible ) ) ? ' csf-depend-visible' : ' csf-depend-hidden';
+			}
 			?>
-            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?>">
+			<?php 
+			if( !empty($data_value) ){  
+				$tfcheck_type = gettype($tf_meta_box_dep_value[$data_controller]);
+			}
+			?>
+            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo !empty($visible) ? $visible : ''; ?>" <?php echo !empty($depend) ? $depend : ''; ?> <?php echo !empty($data_value) && $tfcheck_type== "string" && $tf_meta_box_dep_value[$data_controller]!=$data_value ? 'style="display:none"' : ''; ?> <?php echo !empty($data_value) && $tfcheck_type== "array" && !in_array ( $data_value, $tf_meta_box_dep_value[$data_controller] ) ? 'style="display:none"' : ''; ?> >
+
 				<?php if ( ! empty( $field['label'] ) ): ?>
                     <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label">
 						<?php echo esc_html( $field['label'] ) ?>
