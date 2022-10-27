@@ -129,10 +129,16 @@
     max-width: 50%;
 }
 
-#am_posts_navigation {
-    /*display: none;*/
+a.page-numbers {
+    background: #003162;
+    color: #fff;
+    padding: 5px 15px;
 }
 
+.tf_posts_navigation .page-numbers.current {
+    background: #c9ddfa;
+    padding: 5px 15px;
+}
 .tf-archive-shortdesc, .tf-tour-desc {
     line-height: 1.8;
     margin: 5px 0 10px;

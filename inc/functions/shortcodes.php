@@ -603,7 +603,8 @@ function tf_search_result_shortcode( $atts, $content = null ){
     </div>
     <!-- End Content -->
 
-	<?php wp_reset_postdata();?>
+	<?php
+	 wp_reset_postdata();?>
 	<?php return ob_get_clean();
 }
 
