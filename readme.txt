@@ -108,6 +108,9 @@ Tourfic is developed based on <strong>WooCommerce</strong>. You can easily manag
 * Tour Destinations
 * Recent Hotel Slider
 * Recent Tour Slider
+* Review slider
+* Tours
+* Hotels
 * Search Form (Horizontal)
 * Search Result
 * Wishlist
@@ -165,6 +168,52 @@ Tourfic has a lot of built-in Shortcodes to make your life easy.
  	<li><strong>ids</strong> - Specify the ids of the locations which you want to show. Default to blank</li>
  	<li><strong>hide_empty</strong> - 0 or 1. Don't show empty locations. Default to 0.</li>
  	<li><strong>limit</strong> - Number of locations to show. Default to -1 (show all).</li>
+</ul>
+
+<hr>
+
+<h4>Hotel Showcase Shortcode:</h4>
+<p>Show hotels in grid/slider layout.</p>
+<pre>[tf_hotel title="" subtitle="" locations="IDS_BY_COMMA" count="NUMBER" style="grid/slider" ]</pre>
+<strong>Attributes:</strong>
+<ul>
+ 	<li><strong>title</strong> - Show section title.Leave empty if you dont want to show a title.</li>
+  <li><strong>subtitle</strong> - Show section subtitle.Leave empty if you dont want to show a title.</li>
+ 	<li><strong>destinations</strong> - Add id of the destination which you want to show.Can add multiple destinations by separating them by comma.</li>
+ 	<li><strong>count</strong> - Number of hotels to show.</li>
+  <li><strong>style</strong> - Use grid/slide which layout you prefer to show.</li>
+</ul>
+
+<hr>
+
+<h4>Tour Showcase Shortcode:</h4>
+<p>Show tours in grid/slider layout.</p>
+<pre>[tf_tour title="" subtitle="" destinations="IDS_BY_COMMA" count="NUMBER" style="grid/slider" ]</pre>
+<strong>Attributes:</strong>
+<ul>
+ 	<li><strong>title</strong> - Show section title.Leave empty if you dont want to show a title.</li>
+  <li><strong>subtitle</strong> - Show section subtitle.Leave empty if you dont want to show a title.</li>
+ 	<li><strong>destinations</strong> - Add id of the destination which you want to show.Can add multiple destinations by separating them by comma.</li>
+ 	<li><strong>count</strong> - Number of hotels to show.</li>
+  <li><strong>style</strong> - Use grid/slide which layout you prefer to show.</li>
+</ul>
+
+<hr>
+
+<h4>Review slider Shortcode:</h4>
+<p>Show reviews in slider layout.</p>
+<pre>[tf_reviews type="hotel/tour" count="NUMBER" number="NUMBER" dots="true/false" arrows="true/false" autoplay="true/false" slidesToShow="NUMBER" infinite="TRUE/FALSE" ]</pre>
+<strong>Attributes:</strong>
+<ul>
+ 	<li><strong>type</strong> - Use hotel/tour .By default hotel is selected. </li>
+  <li><strong>subtitle</strong> - Show section subtitle.Leave empty if you dont want to show a title.</li>
+ 	<li><strong>destinations</strong> - Add id of the destination which you want to show.Can add multiple destinations by separating them by comma.</li>
+ 	<li><strong>count</strong> - Number of slides to show.</li>
+  <li><strong>number</strong> - Number of total reviews to show.</li>
+  <li><strong>dots</strong> - Use true/false.</li>
+  <li><strong>arrows</strong> - Use true/false.</li>
+  <li><strong>slidesToShow</strong> - Number of slides changes per scroll.</li>
+  <li><strong>infinite</strong> - Use true/false to enable/disable infinite scrolling.</li>
 </ul>
 
 <hr>
