@@ -8,6 +8,15 @@ TF_Settings::option( 'tf-settings', array(
 		'general' => array(
 			'title'  => esc_html__( 'General', 'tourfic' ),
 			'icon' => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'       => 'api_key23',
+					'label'       => esc_html__( 'API Key Parent', 'tourfic' ),
+					'description' => esc_html__( 'Enter your TourFic API Key', 'tourfic' ),
+					'type'        => 'text',
+					'default'     => '',
+				),
+			),
 		),
 		'general1' => array(
 			'title'  => esc_html__( 'General One', 'tourfic' ),

@@ -3,6 +3,52 @@
     $(document).ready(function () {
 
         /*
+        * Tab click
+        * @author: Foysal
+        */
+        $(document).on('click', '.tf-tablinks', function (e) {
+            e.preventDefault();
+            let $this = $(this),
+                tabcontent = $('.tf-tab-content'),
+                tablinks = $('.tf-tablinks');
+
+            tabcontent.hide();
+            tablinks.removeClass('active');
+
+            let tabId = $this.attr('data-tab');
+            $('#' + tabId).show();
+
+            if($this.next().hasClass('tf-submenu')) {
+
+                //check if .tf-submenu .tf-tablinks has tabId then add active class
+                $('.tf-submenu .tf-tablinks').each(function () {
+                    if ($(this).attr('data-tab') === tabId) {
+                        $(this).addClass('active');
+                        $this.removeClass('active');
+                    } else {
+                        $(this).removeClass('active');
+                    }
+                })
+            } else {
+                $this.addClass('active');
+            }
+
+            //url hash update
+            // let hash = $(this).attr('href');
+            window.location.hash = '#tab=' + tabId;
+        });
+
+        const matchTabId = tabId => {
+            $('.tf-submenu .tf-tablinks').each(function () {
+                if ($(this).attr('data-tab') === tabId) {
+                    return true;
+                }
+
+                return false;
+            })
+        }
+
+        /*
         * window url on change tab click
         * @author: Foysal
         */
@@ -11,11 +57,32 @@
             let slug = hash.replace('#tab=', '');
 
             if (hash) {
+                let selectedTab = $('.tf-tablinks[data-tab="' + slug + '"]'),
+                    parentDiv = selectedTab.closest('.tf-admin-tab-item');
+
                 $('.tf-tablinks').removeClass('active');
-                $('.tf-tab-content').removeClass('active');
-                $('#' + slug).addClass('active');
-                $('[data-tab="' + slug + '"]').addClass('active');
+                $('.tf-tab-content').hide();
+                $('#' + slug).show();
+                selectedTab.addClass('active');
+
+                parentDiv.trigger('click');
             }
+        });
+
+        /*
+        * Submenu toggle
+        * @author: Foysal
+        */
+        $(document).on('click', '.tf-admin-tab-item', function (e) {
+            e.preventDefault();
+            let $this = $(this);
+
+            $this.addClass('open');
+            $this.children('ul').slideDown();
+            $this.siblings('.tf-admin-tab-item').children('ul').slideUp();
+            $this.siblings('.tf-admin-tab-item').removeClass('open');
+            $this.siblings('.tf-admin-tab-item').find('li').removeClass('open');
+            $this.siblings('.tf-admin-tab-item').find('ul').slideUp();
         });
 
         /*
@@ -238,22 +305,6 @@
             iconLi.removeClass('active');
         })
 
-        /*
-        * Submenu toggle
-        * @author: Foysal
-        */
-        $(document).on('click', '.tf-admin-tab-item', function (e) {
-            e.preventDefault();
-            let $this = $(this);
-
-            $this.addClass('open');
-            $this.children('ul').slideDown();
-            $this.siblings('.tf-admin-tab-item').children('ul').slideUp();
-            $this.siblings('.tf-admin-tab-item').removeClass('open');
-            $this.siblings('.tf-admin-tab-item').find('li').removeClass('open');
-            $this.siblings('.tf-admin-tab-item').find('ul').slideUp();
-        });
-
 
         /*
         * Options ajax save
@@ -297,7 +348,7 @@
             //    alert(id);
             var add_value = $this_parent.find('.tf-single-repeater-clone-' + id + ' .tf-single-repeater-' + id + '').clone();
             var count = $this_parent.find('.tf-repeater-wrap-' + id + ' .tf-single-repeater-' + id + '').length;
-            var parent_field = add_value.find(':input[name="tf_parent_field"]').val(); 
+            var parent_field = add_value.find(':input[name="tf_parent_field"]').val();
             var current_field = add_value.find(':input[name="tf_current_field"]').val();
 
             add_value.find(':input[name="tf_repeater_count"]').val(count);
@@ -361,11 +412,11 @@
             let clone_value = $(this).closest('.tf-single-repeater').clone();
 
             var parent_field = clone_value.find('input[name="tf_parent_field"]').val();
-            var current_field =clone_value.find('input[name="tf_current_field"]').val();
+            var current_field = clone_value.find('input[name="tf_current_field"]').val();
             var repeater_count = clone_value.find('input[name="tf_repeater_count"]').val();
-            var count = $this_parent.find('.tf-single-repeater-'+current_field+'').length;
+            var count = $this_parent.find('.tf-single-repeater-' + current_field + '').length;
 
-            
+
             let repeatDateField = clone_value.find('.tf-field-date');
 
             if (repeatDateField.length > 0) {
@@ -385,34 +436,34 @@
             let repeatColorField = clone_value.find('.tf-field-color');
             if (repeatColorField.length > 0) {
                 tfColorInt(repeatColorField);
-            }  
+            }
             if (parent_field == '') {
                 clone_value.find(':input').each(function () {
-                    this.name = this.name.replace('_____', '').replace('[' + current_field + ']['+repeater_count+']', '[' + current_field + '][' + count + ']');
-                    this.id = this.id.replace('_____', '').replace('[' + current_field + ']['+repeater_count+']', '[' + current_field + '][' + count + ']');
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
                 });
                 var update_paren = clone_value.find('.tf-repeater input[name="tf_parent_field"]').val();
                 if (typeof update_paren !== "undefined") {
-                    var update_paren = update_paren.replace('[' + current_field + ']['+repeater_count+']', '[' + current_field + '][' + count + ']');
+                    var update_paren = update_paren.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
                 }
                 clone_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
 
             } else {
 
                 clone_value.find(':input').each(function () {
-                    this.name = this.name.replace('_____', '').replace('[' + current_field + ']['+repeater_count+']', '[' + current_field + '][' + count + ']');
-                    this.id = this.id.replace('_____', '').replace('[' + current_field + ']['+repeater_count+']', '[' + current_field + '][' + count + ']');
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
                 });
             }
             clone_value.find('label').each(function () {
                 var for_value = $(this).attr("for");
                 if (typeof for_value !== "undefined") {
-                 for_value = for_value.replace('_____', '').replace('[' + current_field + ']['+repeater_count+']', '[' + current_field + '][' + count + ']');
-                 var for_value =  $(this).attr("for", for_value);
+                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                    var for_value = $(this).attr("for", for_value);
                 }
             });
 
-             clone_value.find('input[name="tf_repeater_count"]').val(count)
+            clone_value.find('input[name="tf_repeater_count"]').val(count)
             $(this).closest('.tf-repeater-wrap').append(clone_value).show();
         });
         $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
@@ -560,7 +611,7 @@ var frame, gframe;
             return false;
         });
         // Texonomy submit event
-        $('#addtag > .submit #submit').click(function(){
+        $('#addtag > .submit #submit').click(function () {
             $(".tf-fieldset-media-preview").html("");
         });
 
