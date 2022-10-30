@@ -119,14 +119,19 @@ body.tf-modal-open {
     left: 0;
     z-index: 99999;
     background: rgba(0, 0, 0, 0.4); }
- 
+
+@media only screen and (max-width: 991.98px) {
+  #poststuff h2 {
+    justify-content: initial; } }
+
 #poststuff h2 a {
   color: #222;
   font-size: 20px;
   display: none; }
   @media only screen and (max-width: 991.98px) {
     #poststuff h2 a {
-      display: block; } }
+      display: inline-block;
+      margin-right: 15px; } }
 
 /*========================================
    06. Animation CSS
@@ -311,7 +316,8 @@ body.tf-modal-open {
           @media only screen and (max-width: 991.98px) {
             .tf-option .tf-admin-tab a.tf-tablinks.active::after,
             .tf-admin-meta-box .tf-admin-tab a.tf-tablinks.active::after {
-              position: static; } }
+              position: static;
+              display: none; } }
     .tf-option .tf-admin-tab ul.tf-submenu,
     .tf-admin-meta-box .tf-admin-tab ul.tf-submenu {
       margin: 0;
@@ -468,8 +474,8 @@ body.tf-modal-open {
     display: block;
     font-family: 'Lato';
     font-style: normal;
-    margin-bottom: 4px;
-    font-weight: 500;
+    margin-bottom: 3px;
+    font-weight: 600;
     font-size: 14px;
     color: #607085;
     display: flex !important;
@@ -478,20 +484,28 @@ body.tf-modal-open {
     .tf-field .tf-field-label .tf-csf-badge {
       margin-left: 13px; }
       .tf-field .tf-field-label .tf-csf-badge .tf-pro {
-        background-color: #F44336 !important; }
+        background-color: #F44336 !important;
+        margin: 0; }
       .tf-field .tf-field-label .tf-csf-badge .tf-upcoming {
-        background-color: #006600 !important; }
+        background-color: #006600 !important;
+        margin: 0; }
   .tf-field .tf-fieldset {
     font-family: 'Lato';
     font-style: normal;
-    font-size: 14px; }
+    font-size: 14px;
+    margin-top: 15px; }
     .tf-field .tf-fieldset a {
       font-family: 'Lato';
       font-style: normal;
       font-weight: 600; }
   .tf-field .tf-field-sub-title {
     color: #8997A9;
-    font-size: 12px; }
+    font-size: 12px;
+    margin-bottom: 0px;
+    display: block; }
+
+.tf-field.tf-field-heading .tf-fieldset {
+  margin-top: 0px; }
 
 .tf-taxonomy-metabox .tf-field {
   padding: 12px 0; }
@@ -529,7 +543,8 @@ body.tf-modal-open {
   height: 180px;
   padding: 12px 8px 12px 12px;
   border: none;
-  background: #F8F9FB;
+  border: 1px solid #C4CBD4;
+  background: #F5F8FF;
   border-radius: 4px;
   color: #363e4a;
   font-size: 14px; }
@@ -542,7 +557,8 @@ body.tf-modal-open {
   width: 100%;
   padding: 12px 8px 12px 12px;
   border: none;
-  background-color: #F8F9FB;
+  border: 1px solid #C4CBD4;
+  background: #F5F8FF;
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
@@ -556,7 +572,8 @@ body.tf-modal-open {
     width: 100%;
     padding: 12px 8px 12px 12px;
     border: none;
-    background-color: #F8F9FB;
+    border: 1px solid #C4CBD4;
+    background: #F5F8FF;
     border-radius: 4px;
     height: 48px;
     color: #363e4a;
@@ -749,7 +766,8 @@ body.tf-modal-open {
     width: 90%;
     padding: 12px 8px 12px 12px;
     border: none;
-    background: #f0f0f1;
+    background: #F5F8FF;
+    border: 1px solid #C4CBD4;
     border-radius: 4px;
     height: 48px;
     color: #363e4a;
@@ -759,7 +777,9 @@ body.tf-modal-open {
     width: 9%;
     line-height: 48px;
     text-align: center;
-    text-transform: capitalize; }
+    text-transform: capitalize;
+    background-color: #2979ff;
+    border-color: #2979ff; }
 
 .tf-taxonomy-metabox {
   display: flow-root; }
@@ -769,12 +789,12 @@ body.tf-modal-open {
       width: 85%;
       padding: 12px 8px 12px 12px;
       border: none;
-      background: #f0f0f1;
       border-radius: 4px;
       height: 48px;
       color: #363e4a;
       font-size: 14px;
-      border: 1px solid #ddd; }
+      background: #fff;
+      border: 1px solid #C4CBD4; }
     .tf-taxonomy-metabox .tf-field-image .tf-fieldset .tf-fieldset-media a.tf-media-upload {
       height: 48px;
       width: 14%;
@@ -806,9 +826,12 @@ body.tf-modal-open {
   border: 1px solid #ddd;
   padding: 5px;
   margin-right: 10px; }
+.tf-field-gallery .tf-fieldset .tf-fieldset-gallery a.button-primary {
+  background-color: #2979ff;
+  border-color: #2979ff; }
 .tf-field-gallery .tf-fieldset .tf-fieldset-gallery a.button-warning {
-  border-color: #dc3545;
-  background: #dc3545;
+  border-color: #F44336;
+  background: #F44336;
   margin-left: 5px;
   color: #fff;
   display: none; }
@@ -943,7 +966,7 @@ body.tf-modal-open {
       right: 12px;
       opacity: 1; }
   .tf-field-switch .tf-switch-label input:checked + .tf-switch-slider {
-    background-color: #43a047; }
+    background-color: #060; }
     .tf-field-switch .tf-switch-label input:checked + .tf-switch-slider:before {
       left: 100%;
       margin-left: -28px; }
@@ -1043,7 +1066,7 @@ body.tf-modal-open {
     display: flex;
     width: 100%;
     padding: 8px 0;
-    background: #F0F2F4;
+    background: #D8E6FF;
     position: relative;
     border-radius: 5px 5px 0px 0px;
     align-items: center;
@@ -1061,25 +1084,28 @@ body.tf-modal-open {
     .tf-repeater .tf-repeater-header .tf-repeater-icon-move {
       color: #76a9ff; }
       .tf-repeater .tf-repeater-header .tf-repeater-icon-move:hover {
-        background-color: #d8e6ff;
-        transition: 0.4s; }
+        background-color: #c4daff;
+        transition: 0.4s;
+        color: #2979ff; }
     .tf-repeater .tf-repeater-header .tf-repeater-icon-clone {
       color: #76a9ff; }
       .tf-repeater .tf-repeater-header .tf-repeater-icon-clone:hover {
-        background-color: #d8e6ff;
-        transition: 0.4s; }
+        background-color: #c4daff;
+        transition: 0.4s;
+        color: #2979ff; }
     .tf-repeater .tf-repeater-header .tf-repeater-icon-delete {
       color: #f8877f; }
       .tf-repeater .tf-repeater-header .tf-repeater-icon-delete:hover {
-        background-color: #fddcda;
-        transition: 0.4s; }
+        background-color: #fccbc8;
+        transition: 0.4s;
+        color: #f44336; }
     .tf-repeater .tf-repeater-header .tf-repeater-title {
       display: inline-block;
       width: 100%;
       margin-right: 120px;
       font-family: 'Lato';
       font-style: normal;
-      font-weight: 500;
+      font-weight: 600;
       font-size: 16px;
       line-height: 24px; }
     .tf-repeater .tf-repeater-header .tf-repeater-icon-absulate {
@@ -1089,19 +1115,22 @@ body.tf-modal-open {
   .tf-repeater .tf-repeater-content-wrap {
     border: 1px solid #F0F2F4;
     background-color: #fff;
-    padding: 10px 0; }
+    padding: 10px 0;
+    box-shadow: 0px 5px 10px 1px #f5f5f5; }
   .tf-repeater .tf-repeater-add .tf-repeater-icon {
-    padding: 14px;
+    padding: 8px 15px;
     cursor: pointer;
     text-align: center;
     line-height: 0;
     display: inline-block;
-    line-height: 0.7;
-    background-color: #ebf2ff;
+    line-height: 24px;
+    background-color: #2979ff;
     border-radius: 4px;
-    font-size: 13px;
-    font-weight: 700;
-    color: #2979FF; }
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.5px;
+    font-family: 'lato'; }
   .tf-repeater .tf-single-repeater {
     margin-bottom: 24px; }
 
@@ -1148,8 +1177,8 @@ body.tf-modal-open {
   .tf-field-map .tf--map-search input {
     width: 100%;
     padding: 12px 8px 12px 12px;
-    border: none;
-    background: #F8F9FB;
+    border: 1px solid #C4CBD4;
+    background: #F5F8FF;
     border-radius: 4px;
     height: 48px;
     color: #363e4a;
@@ -1176,8 +1205,8 @@ body.tf-modal-open {
     .tf-field-map .tf--map-inputs .tf--map-input input {
       width: 100%;
       padding: 12px 8px 12px 12px;
-      border: none;
-      background: #F8F9FB;
+      border: 1px solid #C4CBD4;
+      background: #F5F8FF;
       border-radius: 4px;
       height: 48px;
       color: #363e4a;
@@ -1378,8 +1407,8 @@ body.tf-modal-open {
 .tf-field-number input {
   width: 100%;
   padding: 12px 8px 12px 12px;
-  border: none;
-  background: #F8F9FB;
+  border: 1px solid #C4CBD4;
+  background: #F5F8FF;
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
