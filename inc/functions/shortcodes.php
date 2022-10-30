@@ -604,6 +604,331 @@ function tf_search_result_shortcode( $atts, $content = null ){
 	<?php return ob_get_clean();
 }
 
-
 add_shortcode( 'tf_search_result', 'tf_search_result_shortcode' );
-?>
+
+/**
+ * Hotel, Tour review slider shortcode
+ * @author Abu Hena
+ * @since 2.8.9
+ */
+add_shortcode( 'tf_reviews', 'tf_reviews_shortcode' );
+function tf_reviews_shortcode($atts, $content = null){
+	extract(
+		shortcode_atts(
+			array(
+				'type'      => 'tf_hotel',
+				'number' => '10',
+				'count' => '3',
+				'speed' => '2000',
+				'arrows' => 'false',
+				'dots' => 'true',
+				'autoplay' => 'false',
+				'slidesToShow' => '3',
+				'slidesToScroll' => 1,
+				'infinite' => 'false',
+			),
+			$atts
+		)
+	);
+	$type == "hotel" ? $type = "tf_hotel" : $type == '';
+	$type == "tour" ? $type = "tf_tours" : $type == '';
+	ob_start();
+	?>
+	<div class="tf-single-review tf-reviews-slider">
+
+		<?php
+		$args = array(
+			'post_type' => $type,
+			'number' => $number,
+		);
+		$comments = get_comments($args);
+		
+		
+		if ( $comments ) {
+			foreach ( $comments as $comment ) {
+				// Get rating details
+				$tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+				if ( $tf_overall_rate == false ) {
+					$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+					$tf_overall_rate = tf_average_ratings( $tf_comment_meta );
+				}
+				$base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+				$c_rating  = tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
+
+				// Comment details
+				$c_avatar      = get_avatar( $comment, '56' );
+				$c_author_name = $comment->comment_author;
+				$c_date        = $comment->comment_date;
+				$c_content     = $comment->comment_content;
+				?>
+				<div class="tf-single-details">
+					<div class="tf-review-avatar"><?php echo $c_avatar; ?></div>
+					<div class="tf-review-details">
+						<div class="tf-name"><?php echo $c_author_name; ?></div>
+						<div class="tf-date"><?php echo $c_date; ?></div>
+						<div class="tf-rating-stars">
+							<?php echo $c_rating; ?>
+						</div>
+						<div class="tf-description"><?php echo wp_trim_words( $c_content, 25 ); ?></div>
+					</div>
+				</div>
+				<?php
+			}
+		}
+		?>
+	</div>
+	<script>		
+		/**
+		 * Init the reviews slider
+		 */
+		jQuery('document').ready(function($){
+
+			$(".tf-reviews-slider").each(function(){
+				var $this = $(this);
+			$this.slick({
+				dots: <?php echo esc_attr( $dots ); ?>,
+				arrows: <?php echo esc_attr( $arrows ); ?>,
+				slidesToShow: <?php echo esc_attr( $count ); ?>,
+				infinite: <?php echo esc_attr( $infinite ); ?>,
+				speed: <?php echo esc_attr( $speed ); ?>,
+				autoplay: <?php echo esc_attr( $autoplay ); ?>,
+				autoplaySpeed: <?php echo esc_attr( $speed ); ?>,
+				slidesToScroll: <?php echo esc_attr( $slidesToScroll ); ?>,
+				responsive: [
+					{
+						breakpoint: 1024,
+						settings: {
+							slidesToShow: 3,
+							slidesToScroll: 1,
+							infinite: true,
+							dots: true
+						}
+					},
+					{
+						breakpoint: 600,
+						settings: {
+							slidesToShow: 2,
+							slidesToScroll: 1
+						}
+					},
+					{
+						breakpoint: 480,
+						settings: {
+							slidesToShow: 1,
+							slidesToScroll: 1
+						}
+					}
+				]
+			});
+		})
+	})
+	</script>
+	<?php 
+	return ob_get_clean();
+}
+
+/**
+ * Hotel Grid/Slider by locations shortcode
+ * @author Abu Hena
+ * @since 2.8.9
+ */
+add_shortcode( 'tf_hotel', 'tf_hotels_grid_slider' );
+function tf_hotels_grid_slider($atts, $content = null){
+	extract(
+		shortcode_atts(
+			array(
+				'title'   => '',
+				'subtitle'   => '',
+				'locations'   => '',
+				'count'       => '3',
+				'style'       => 'grid',
+			),
+			$atts
+		)
+	);
+	
+	$args = array(
+		'post_type'      => 'tf_hotel',
+		'post_status'    => 'publish',
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+		'posts_per_page' => $count,
+	);
+
+	
+	if( !empty( $locations )){
+		$locations = explode(',',$locations);
+		$args['tax_query'] = array(
+			'relation' => 'AND',
+			array(
+				'taxonomy' => 'hotel_location',
+				'field'    => 'term_id',
+				'terms'    => $locations,
+			)
+		);
+	}
+	ob_start();
+
+	if( $style == 'slider' ){
+		$slider_activate = 'tf-slider-activated';
+	}else{
+		$slider_activate = 'tf-hotel-grid';
+	}
+	$hotel_loop = new WP_Query( $args );
+
+	?>
+	<?php if ( $hotel_loop->have_posts() ) : ?>
+        <div class="tf-widget-slider recent-hotel-slider">
+            <div class="tf-heading">
+				<?php
+				if ( ! empty( $title ) ) {
+					echo '<h2>' . esc_html( $title ) . '</h2>';
+				}
+				if ( ! empty( $subtitle ) ) {
+					echo '<p>' . esc_html( $subtitle ) . '</p>';
+				}
+				?>
+            </div>
+
+            <div class="<?php echo esc_attr( $slider_activate ); ?>">
+				<?php while ( $hotel_loop->have_posts() ) {
+					$hotel_loop->the_post();
+					$post_id                = get_the_ID();
+					$related_comments_hotel = get_comments( array( 'post_id' => $post_id ) );
+					$meta = get_post_meta( $post_id, 'tf_hotel', true );
+					$rooms = !empty($meta['room']) ? $meta['room'] : '';
+					//get and store all the prices for each room
+					$room_price = [];
+					if($rooms){
+						foreach( $rooms as $room ){
+							$room_price[] = $room['price'];
+						}
+					}	
+					?>
+                    <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                        <div class="tf-slider-content">
+                            <div class="tf-slider-desc">
+                                <h3> 
+                                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+                                </h3>
+								<?php if ( $related_comments_hotel ) { ?>
+                                    <div class="tf-slider-rating-star">
+                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating( $related_comments_hotel ); ?></span>
+                                    </div>
+								<?php } ?>
+                                <p><?php echo wp_trim_words( get_the_content(), 10 ); ?></p>
+								<?php if(!empty($rooms)): ?>
+								<div class="tf-recent-room-price">
+								<?php
+									//get the lowest price from all available room price
+									$lowest_price = wc_price( min($room_price) );
+									echo __("From ","tourfic") . $lowest_price; 
+										
+								?>
+								</div>
+								<?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+				<?php } ?>
+            </div>
+        </div>
+	<?php endif;
+	wp_reset_postdata(); 
+	return ob_get_clean();
+}
+
+/**
+ * Tour Grid/Slider by locations shortcode
+ * @author Abu Hena
+ * @since 2.8.9
+ */
+add_shortcode( 'tf_tour', 'tf_tours_grid_slider' );
+function tf_tours_grid_slider($atts, $content = null){
+	extract(
+		shortcode_atts(
+			array(
+				'title'   => '',
+				'subtitle'   => '',
+				'destinations'   => '',
+				'count'       => '3',
+				'style'       => 'grid',
+			),
+			$atts
+		)
+	);
+	
+	$args = array(
+		'post_type'      => 'tf_tours',
+		'post_status'    => 'publish',
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+		'posts_per_page' => $count,
+	);
+	//Check if destination selected/choosen
+	if( !empty( $destinations )){
+		$destinations = explode(',',$destinations);
+		$args['tax_query'] = array(
+			'relation' => 'AND',
+			array(
+				'taxonomy' => 'tour_destination',
+				'field'    => 'term_id',
+				'terms'    => $destinations,
+			)
+		);
+	}
+	ob_start();
+
+	if( $style == 'slider' ){
+		$slider_activate = 'tf-slider-activated';
+	}else{
+		$slider_activate = 'tf-hotel-grid';
+	}
+	$tour_loop = new WP_Query( $args );
+
+	?>
+	<?php if ( $tour_loop->have_posts() ) : ?>
+        <div class="tf-widget-slider recent-tour-slider">
+            <div class="tf-heading">
+				<?php
+				if ( ! empty( $title ) ) {
+					echo '<h2>' . esc_html( $title ) . '</h2>';
+				}
+				if ( ! empty( $subtitle ) ) {
+					echo '<p>' . esc_html( $subtitle ) . '</p>';
+				}
+				?>
+            </div>
+
+
+            <div class="<?php echo esc_attr( $slider_activate ); ?>">
+				<?php while ( $tour_loop->have_posts() ) {
+					$tour_loop->the_post();
+					$post_id          = get_the_ID();
+					$related_comments = get_comments( array( 'post_id' => $post_id ) );
+					?>
+                    <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                        <div class="tf-slider-content">
+                            <div class="tf-slider-desc">
+                                <h3>
+                                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+                                </h3>
+								<?php if ( $related_comments ) { ?>
+                                    <div class="tf-slider-rating-star">
+                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating( $related_comments ); ?></span>
+                                    </div>
+								<?php } ?>
+                                <p><?php echo wp_trim_words( get_the_excerpt(), 10 ); ?></p>
+
+                            </div>
+                        </div>
+                    </div>
+				<?php } ?>
+            </div>
+        </div>
+	<?php endif;
+	wp_reset_postdata(); 
+	return ob_get_clean();
+}
+
+
