@@ -6,27 +6,16 @@ TF_Taxonomy_Metabox::taxonomy( 'tf_hotel_feature', array(
 	'title'    => 'Tour Settings',
 	'taxonomy' => 'hotel_feature',
 	'fields'   => array(
+		
 		array(
-			'id'          => 'address',
-			'title'       => 'Address',
-			'type'        => 'text',
-			'description' => 'Address of the hotel',
+			'id'          => 'font-icons',
+			'label'       => 'Select Font Awesome Icon',
+			'type'        => 'icon'
 		),
 		array(
-			'id'          => 'phone',
-			'title'       => 'Phone',
-			'type'        => 'textarea',
-			'description' => 'Phone of the hotel',
-		),
-		array(
-			'id'      => 'email',
-			'title'   => 'Email',
-			'type'    => 'select',
-			'options' => array(
-				'1' => 'Option 1',
-				'2' => 'Option 2',
-				'3' => 'Option 3',
-			),
+			'id'      => 'icons',
+			'label'   => 'Upload Custom Icon',
+			'type'    => 'image',
 		),
 	),
 ) );
