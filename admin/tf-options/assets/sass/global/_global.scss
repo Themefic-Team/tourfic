@@ -118,3 +118,11 @@ body.tf-modal-open {
     background: rgba(0, 0, 0, 0.4);
   }
 }
+#poststuff h2 a{
+  color: #222;
+  font-size: 20px;
+  display: none;
+  @media #{$max991}{
+    display: block;
+  }
+}
