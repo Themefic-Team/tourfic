@@ -1,18 +1,18 @@
-=== Travel and Hotel Booking Solution for WooCommerce - Tourfic ===
-Contributors: fida02, themefic, mdshuvo, codexa, kamrul0424, hasanet, jahidcse, mehedi890
-Tags: tour-booking, travel-booking, hotel-booking, trip-booking, tour booking, tour, travel booking, travel, trip booking, trip, hotel booking, hotel, travel-itinerary, tour-itinerary, travel-booking-engine, tour package payments, travel-agency, tour operator, travel agency, tour-operator, tour reservation, hotel reservation, airbnb, booking.com, agoda.com, agoda, woocommerce tour booking, woocommerce travel booking plugin, woocommerce hotel booking, woocommerce hotel, woocommerce tour, woocommerce travel, wordpress travel, wp travel plugin, wp travel, wp hotel, wordpress travel booking plugin, wordpress tour plugin, wordpress hotel booking
+=== Tourfic - Ultimate Hotel & Travel Booking WordPress Plugin ===
+Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet, fida02, mdshuvo
+Tags: wordpress travel, wordpress hotel, wordpress tour plugin, wordpress tour booking plugin, travel booking wordpress plugin, wordpress hotel booking plugin, wp hotel booking, hotel booking plugin, woocommerce accommodation bookings, woocommerce hotel booking, wordpress room booking plugin, best hotel booking plugin wordpress, hotel plugin, hotel plugin wordpress, tour booking, travel booking, trip booking, hotel booking, tour itinerary, tour operator, travel agency, tour reservation, hotel reservation, airbnb, booking.com, agoda.com, agoda, woocommerce tour booking, woocommerce travel booking plugin, woocommerce hotel booking, woocommerce hotel, woocommerce tour, woocommerce travel, wp travel engine, wp travel, wp hotel
 Requires at least: 5.4
 Tested up to: 6.0.3
-Stable tag: 2.8.9
+Stable tag: 2.8.10
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Ultimate Hotel, Tour & Travel booking plugin for WooCommerce. Build your own travel agency website like Agoda, Airbnb, Hotels.com, Booking.com
+Ultimate Tour, Travel & hotel booking WordPress plugin. Build your own travel agency website like Agoda, Booking.com, Airbnb, Hotels.com (WooCommerce Compatible)
 
 == Description ==
 
-= The easiest and fastest WooCommerce Travel & Hotel Booking Solution by Tourfic | Build Your own travel agency website like Agoda, Airbnb, Hotels.com, Booking.com =
+= The easiest and best WordPress Hotel & Tour Booking Plugin - Tourfic | Build Your own travel agency website like Agoda, Booking.com, Airbnb, Hotels.com =
 
 👉 Official Demo Link: [Tourfic Live Preview](https://tourfic.com)
 👉 Buy Pro Version: [Tourfic Pro](https://tourfic.com/pricing)
@@ -20,7 +20,7 @@ Ultimate Hotel, Tour & Travel booking plugin for WooCommerce. Build your own tra
 👉 Installation Guide: [Tourfic Documentation](https://themefic.com/docs/tourfic/)
 👉 Join Our FB Community: [Tourfic Facebook Group](https://www.facebook.com/groups/tourfic)
 
-Tourfic is fully powered by WooCommerce, you can easily manage all your online Booking system along with order system and any payment of WooCommerce. Allow visitors to register account and booking online. To be precise, you can easily develop a website similar to Booking.com, Agoda, Hotels.com, Airbnb etc in no time with the help of Tourfic. This All-in-One Travel Booking plugin consists almost all the basic to advanced options which you may need for your WordPress based Travel website:
+Tourfic is developed based on <strong>WooCommerce</strong>. You can easily manage all your online Booking system along with order system and any payment method of WooCommerce. In addition, you can allow customers to register account and book their hotel or tour packages online. To be precise, you can easily develop a website similar to Booking.com, Agoda, Hotels.com, Airbnb etc in no time with the help of Tourfic. This All-in-One Travel Booking WordPress plugin consists of almost all the basic to advanced options which you may need for your next WordPress based Hotel or Travel website:
 
 = 🎉  Hotel Booking & Management System =
 * Add Unlimited Hotels
@@ -130,7 +130,7 @@ Tourfic is fully powered by WooCommerce, you can easily manage all your online B
 <strong>Demo Link </strong>
 > <strong><a href="https://tourfic.com" target="_blank">Check out the demo</a></strong> to see it in action!
 
-Tourfic is the ultimate WordPress tour management plugin for hotel booking, tour operator and travel agency websites. It is designed to build your own professional hotel website, tour operator website or travel agency website where you can efficiently list your hotels, tour package and resorts for booking along with receiving payments for each booking.
+Tourfic is the ultimate WordPress tour booking plugin for hotel booking, tour operator and travel agency websites. It is designed to build your own professional WordPress hotel website, tour operator website or travel agency website where you can efficiently list your hotels, tour package and resorts for booking along with receiving payments for each booking.
 
 <strong>Pro Version </strong>
 
@@ -351,10 +351,19 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Changelog ==
 
+
+= 2.8.10 -  30 October 2022 =
+
+* Added: [tf_tour] shortecode added to show the tours with elementor widget
+* Added: [tf_hotel] shortcode added to show the hotels with elementor widget
+* Added: [[tf_reviews] shortcode added to view the reviews with elementor widget
+* Fixed: Css error fix in single hotel
+
+
 = 2.8.9 -  23 October 2022 =
 
-* Added: Advanced itinerary builder (Pro)
-* Added: Age limnit in hotels (Pro)
+* Added: Advanced Itinerary builder (Pro)
+* Added: Age limit in hotels (Pro)
 * Added: Show prices in hotel search/archive page.
 * Added: Show prices in tour search/archive page.
 * Added: Wp editor on FAQ description in free version.
