@@ -21,8 +21,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 					'placeholder' => __( 'Address', 'tourfic' ),
 					'attributes'  => array(
 						'required' => 'required',
-					),
-					'dependency' => array( 'features', '==', '18' ),
+					), 
 				),
 				array(
 					'id'       => '',

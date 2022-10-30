@@ -1039,51 +1039,54 @@ var frame, gframe;
   
         $('.tf-tab-content').each(function () {
         
-        var $this = $(this),
-        $tffields = $this.children('[data-controller]');
-        if ($tffields.length) {
-        
-                var normal_ruleset = $.csf_deps.createRuleset(),
-                global_ruleset = $.csf_deps.createRuleset(),
-                normal_depends = [],
-                global_depends = [];
-        
-                $tffields.each(function () {
-                
-                    var $field = $(this),
-                        controllers = $field.data('controller').split('|'),
-                        conditions = $field.data('condition').split('|'),
-                        values = $field.data('value').toString().split('|'),
-                        is_global = $field.data('depend-global') ? true : false,
-                        ruleset = normal_ruleset;
-                
-                    $.each(controllers, function (index, depend_id) {
-                
-                        var value = values[index] || '',
-                            condition = conditions[index] || conditions[0];
-                
-                        ruleset = ruleset.createRule('[data-depend-id="' + depend_id + '"]', condition, value);
-                
-                        ruleset.include($field);
-                
-                        if (is_global) {
-                            global_depends.push(depend_id);
-                        } else {
-                            normal_depends.push(depend_id);
-                        }
-                
+        var $this = $(this);
+        $this.find('[data-controller]').each(function (){
+           var $tffields = $(this);
+            if ($tffields.length) {
+                // alert($tffields.length);
+                    var normal_ruleset = $.csf_deps.createRuleset(),
+                    global_ruleset = $.csf_deps.createRuleset(),
+                    normal_depends = [],
+                    global_depends = [];
+            
+                    $tffields.each(function () {
+                    
+                        var $field = $(this),
+                            controllers = $field.data('controller').split('|'),
+                            conditions = $field.data('condition').split('|'),
+                            values = $field.data('value').toString().split('|'),
+                            is_global = $field.data('depend-global') ? true : false,
+                            ruleset = normal_ruleset;
+                    
+                        $.each(controllers, function (index, depend_id) {
+                    
+                            var value = values[index] || '',
+                                condition = conditions[index] || conditions[0];
+                    
+                            ruleset = ruleset.createRule('[data-depend-id="' + depend_id + '"]', condition, value);
+                    
+                            ruleset.include($field);
+                    
+                            if (is_global) {
+                                global_depends.push(depend_id);
+                            } else {
+                                normal_depends.push(depend_id);
+                            }
+                    
+                        });
+                    
                     });
-                
-                });
-        
-                if (normal_depends.length) {
-                    $.csf_deps.enable($this, normal_ruleset, normal_depends);
-                }
-                
-                if (global_depends.length) {
-                    $.csf_deps.enable(CSF.vars.$body, global_ruleset, global_depends);
-                }
-        }
+            
+                    if (normal_depends.length) {
+                        $.csf_deps.enable($this, normal_ruleset, normal_depends);
+                    }
+                    
+                    if (global_depends.length) {
+                        $.csf_deps.enable(CSF.vars.$body, global_ruleset, global_depends);
+                    }
+            }
+        });
+       
         
         });
     });
