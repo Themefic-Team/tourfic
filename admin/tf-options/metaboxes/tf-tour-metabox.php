@@ -578,48 +578,241 @@ TF_Metabox::metabox( 'tf_tours', array(
 				/**
 				 * Fixed Availability
 				 */
-				/*array(
-					'id'         => 'fixed_availability',
-					'type'       => 'fieldset',
-					'label'      => __( 'Availability', 'tourfic' ),
-					'description'   => __( 'Input your availability', 'tourfic' ),
-					'dependency' => array( 'type', '==', 'fixed' ),
-					'class'      => 'fixed_availability',
-					'fields'     => array(
+				array(
+					'id' => 'fixed_availability',
+					'type' => 'tab',
+					'label' => __( 'Availability', 'tourfic' ), 
+					'description' =>  __( 'Input your availability', 'tourfic' ),
+					'is_pro' 	=> true,
+					'class' => 'fixed_availability',
+					'tabs' => array(
 						array(
-							'id'         => '',
-							'class'      => 'tf-csf-disable tf-csf-pro check-in',
-							'type'       => 'date',
-							'label'      => __( 'Check In', 'tourfic' ),
-							'description'   => __( 'Select check in date', 'tourfic' ),
-							'is_pro' 		=> true,
-							'format' => 'Y/m/d',
-							'range' => true,
-							'label_from' => 'Start Date',
-							'label_to' => 'End Date',
-							'multiple' => true,
-							'attributes' => array(
-								'autocomplete' => 'off',
-							), 
-						),
+							'id' => 'tab-1',
+							'title' => 'Availability',
+							'icon' => 'fa fa-heart',
+							'fields' => array(
+								array(
+									'id'         => '', 
+									'type'       => 'date',
+									'label'      => __( 'Check In', 'tourfic' ),
+									'description'   => __( 'Select check in date', 'tourfic' ),
+									'is_pro'		=> true,
+									'format' => 'Y/m/d',
+									'range' => true,
+									'label_from' => 'Start Date',
+									'label_to' => 'End Date',
+									'attributes' => array(
+										'autocomplete' => 'off',
+									),
+									'from_to'    => true,
+								),
+								array(
+									'id'       => '', 
+									'type'     => 'number',
+									'label'    => __( 'Minimum People', 'tourfic' ),
+									'is_pro'	=> true,
+									'description' => __( 'Minimum seat number', 'tourfic' ),
+								),
+								array(
+									'id'       => '', 
+									'type'     => 'number',
+									'label'    => __( 'Maximum People', 'tourfic' ),
+									'is_pro'	=> true,
+									'description' => __( 'Maximum seat number', 'tourfic' ),
+								),
+							 ),
+						 ),
+						 
+					 ),
+				)
+	
+			),
+		),
+
+		// // Booking
+		'general' => array(
+			'title'  => __( 'General', 'tourfic' ),
+			'icon'   => 'fa-solid fa-location-dot',
+			'fields' => array(
+				array(
+					'id'       => '',
+					'class'    => 'tf-csf-disable tf-csf-pro',
+					'type'     => 'number', 
+					'label'    => __( 'Minimum days to book before departure', 'tourfic' ),
+					'is_pro' 	=> true,
+					'description' => __( 'Customer can not book after this date', 'tourfic' ),
+				),
+			),
+		),
+		// // Exclude/Include
+		'exclude_Include' => array(
+			'title'  => __( 'Exclude/Include', 'tourfic' ),
+			'icon'   => 'fa-solid fa-location-dot',
+			'fields' => array(
+				array(
+					'id'     => 'inc',
+					'type'   => 'repeater',
+					'label'  => __( 'Include', 'tourfic' ),
+					'max' => 5,
+					'fields' => array(
 						array(
-							'id'       => '',
-							'class'    => 'tf-csf-disable tf-csf-pro',
-							'type'     => 'number',
-							'label'    => __( 'Minimum People', 'tourfic' ),
-							'description' => __( 'Minimum seat number', 'tourfic' ),
-							'is_pro'	=> true,
-						),
-						array(
-							'id'       => '',
-							'class'    => 'tf-csf-disable tf-csf-pro',
-							'type'     => 'number',
-							'label'    => __( 'Maximum People', 'tourfic' ),
-							'description' => __( 'Maximum seat number', 'tourfic' ),
+							'id'       => 'inc',
+							'type'     => 'text',
+							'label'    => __( 'Included', 'tourfic' ),
+							'description' => __( 'Included facilites', 'tourfic' ),
 						),
 					),
-				),*/
-	
+				),
+				array(
+					'id' => 'inc_icon',
+					'type' => 'icon',
+					'label'    => __( 'Included item icon', 'tourfic' ),
+					'description' => __( 'Choose icon', 'tourfic' ),
+				),
+				array(
+					'id'     => 'exc',
+					'type'   => 'repeater',
+					'title'  => __( 'Exclude', 'tourfic' ),
+					'max' => 5,
+					'fields' => array(
+						array(
+							'id'       => 'exc',
+							'type'     => 'text',
+							'label'    => __( 'Excluded', 'tourfic' ),
+							'description' => __( 'Excluded facilites', 'tourfic' ),
+						),
+					),
+				),
+				array(
+					'id' => 'exc_icon',
+					'type' => 'icon',
+					'label'    => __( 'Excluded item icon', 'tourfic' ),
+					'description' => __( 'Choose icon', 'tourfic' ),
+				),
+				array(
+					'id'      => 'include-exclude-bg',
+					'type'    => 'image',
+					'label'   => __( 'Background Image', 'tourfic' ),
+					'library' => 'image',
+				),
+			),
+		),
+
+		// // Itinerary
+		'itinerary' => array(
+			'title'  => __( 'Itinerary', 'tourfic' ),
+			'icon'   => 'fa-solid fa-location-dot',
+			'fields' => array(
+				array(
+					'id'     => 'itinerary',
+					'type'   => 'repeater',
+					'label'  => __( 'Itinerary', 'tourfic' ),
+					'max'    => 5,
+					'fields' => array(
+						array(
+							'id'       => 'time',
+							'type'     => 'text',
+							'label'    => __( 'Time or Day', 'tourfic' ),
+							'description' => __( 'You can place the tour plan', 'tourfic' ),
+						),
+						array(
+							'id'       => 'title',
+							'type'     => 'text',
+							'label'    => __( 'Title', 'tourfic' ),
+							'description' => __( 'Input the title here', 'tourfic' ),
+						),
+						array(
+							'id'           => 'image',
+							'type'         => 'image',
+							'label'        => __( 'Upload Image', 'tourfic' ),
+							'library'      => 'image',
+							'placeholder'  => 'http://',
+							'button_title' => __( 'Add Image', 'tourfic' ),
+							'remove_title' => __( 'Remove Image', 'tourfic' ),
+						),
+						array(
+							'id'    => 'desc',
+							'type'  => 'textarea',
+							'title' => __( 'Description', 'tourfic' ),
+						),
+					),
+				),
+			),
+		),
+
+		// // General
+		'faqs' => array(
+			'title'  => __( 'FAQs', 'tourfic' ),
+			'icon'   => 'fa-solid fa-location-dot',
+			'fields' => array(
+				array(
+					'id'     => 'faqs',
+					'type'   => 'repeater',
+					'label'  => __( 'FAQs', 'tourfic' ),
+					'fields' => array(
+						array(
+							'id'    => 'title',
+							'type'  => 'text',
+							'label' => __( 'FAQ Title', 'tourfic' ),
+						),
+						array(
+							'id'    => 'desc',
+							'type'  => 'editor',
+							'label' => __( 'FAQ Description', 'tourfic' ),
+						),
+					),
+				),
+			),
+		),
+		
+
+		// // Terms & Conditions
+		'terms_and_conditions' => array(
+			'title'  => __( 'Terms & Conditions', 'tourfic' ),
+			'icon'   => 'fa-solid fa-location-dot',
+			'fields' => array(
+				array(
+					'id'    => 'terms_conditions',
+					'type'  => 'editor',
+					'title' => __( 'Terms & Conditions', 'tourfic' ),
+				),
+			),
+		),
+
+
+		// // General
+		'settings' => array(
+			'title'  => __( 'Settings', 'tourfic' ),
+			'icon'   => 'fa-solid fa-location-dot',
+			'fields' => array(
+				array(
+					'id' => 'settings_headding',
+					'type' => 'heading',
+					'label' => 'Settings',  
+				),
+				array(
+					'id'       => 't-review',
+					'type'     => 'switch',
+					'label'    => __( 'Disable Review Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'  => false
+				),
+				array(
+					'id'       => 't-related',
+					'type'     => 'switch',
+					'label'    => __( 'Disable Related Tour Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'  => false
+				), 
+
+				array(
+					'id' => 'notice',
+					'type'    => 'notice',
+					'notice'   => 'success',
+					'label' => __( 'These settings will overwrite global settings', 'tourfic' ),
+				),
 			),
 		),
 
@@ -631,5 +824,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 				 
 		// 	),
 		// ),
+
+
 	),
 ) );
