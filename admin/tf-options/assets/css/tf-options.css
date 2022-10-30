@@ -403,7 +403,7 @@ body.tf-modal-open:after {
   box-shadow: 0 4px 10px rgba(67, 79, 96, 0.08);
   position: sticky;
   top: 32px;
-  z-index: 9999;
+  z-index: 999;
 }
 .tf-option-wrapper .tf-option-header .tf-option-header-left {
   min-width: 220px;

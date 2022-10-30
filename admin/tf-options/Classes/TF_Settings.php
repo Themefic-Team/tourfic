@@ -107,12 +107,13 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			//sections as submenus
 			if ( ! empty( $this->pre_tabs ) ) {
 				foreach ( $this->pre_tabs as $key => $section ) {
+					$parent_tab_key = !empty($section['fields']) ? $key : array_key_first($section['sub_section']);
 					add_submenu_page(
 						$this->option_id,
 						$section['title'],
 						$section['title'],
 						'manage_options',
-						$this->option_id . '#tab=' . esc_attr( $key ),
+						$this->option_id . '#tab=' . esc_attr( $parent_tab_key ),
 						'__return_null'
 					);
 				}
@@ -161,12 +162,13 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                         <div class="tf-admin-tab tf-option-nav">
 							<?php
 							$section_count = 0;
-							foreach ( $this->pre_tabs as $key => $section ) : ?>
+							foreach ( $this->pre_tabs as $key => $section ) :
+                                $parent_tab_key = !empty($section['fields']) ? $key : array_key_first($section['sub_section']);
+                                ?>
                                 <div class="tf-admin-tab-item<?php echo ! empty( $section['sub_section'] ) ? ' tf-has-submenu' : '' ?>">
-                                    <a href="#<?php echo esc_attr( $key ); ?>"
+                                    <a href="#<?php echo esc_attr( $parent_tab_key ); ?>"
                                        class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>"
-                                       onclick="openTab(event, '<?php echo esc_attr( $key ) ?>')"
-                                       data-tab="<?php echo esc_attr( $key ) ?>">
+                                       data-tab="<?php echo esc_attr( $parent_tab_key ) ?>">
 										<?php echo ! empty( $section['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $section['icon'] ) . '"></i></span>' : ''; ?>
 										<?php echo $section['title']; ?>
                                     </a>
@@ -177,7 +179,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                                                 <li>
                                                     <a href="#<?php echo esc_attr( $sub_key ); ?>"
                                                        class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>"
-                                                       onclick="openTab(event, '<?php echo esc_attr( $sub_key ) ?>')"
                                                        data-tab="<?php echo esc_attr( $sub_key ) ?>">
 														<span class="tf-tablinks-inner">
                                                             <?php echo ! empty( $sub['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $sub['icon'] ) . '"></i></span>' : ''; ?>

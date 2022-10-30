@@ -92,7 +92,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 					<?php 
 					$section_count = 0;
 					foreach ( $this->metabox_sections as $key => $section ) : ?>
-                        <a class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>" onclick="openTab(event, '<?php echo esc_attr( $key ) ?>')">
+                        <a class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>" data-tab="<?php echo esc_attr($key) ?>">
 							<?php echo ! empty( $section['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $section['icon'] ) . '"></i></span>' : ''; ?>
 							<?php echo esc_html( $section['title'] ); ?>
                         </a>
