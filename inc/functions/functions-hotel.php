@@ -265,7 +265,7 @@ if ( ! function_exists( 'get_hotel_locations' ) ) {
 
 
 #################################
-# Air port Service Price        #
+# Air port Service          #
 #################################
 
 add_action( 'wp_ajax_tf_hotel_airport_service_price', 'tf_hotel_airport_service_callback' );

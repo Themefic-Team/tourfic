@@ -710,11 +710,13 @@ function tf_search_result_ajax_sidebar() {
 		$form_check_out_stt = strtotime( $form_check_out );
 	}
 
+	$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 	// Properties args
 	$args = array(
 		'post_type'      => $posttype,
 		'post_status'    => 'publish',
-		'posts_per_page' => - 1,
+		'posts_per_page' => 1,
+		'paged'			 => $paged
 	);
 
 	if ( $search ) {
@@ -813,7 +815,7 @@ function tf_search_result_ajax_sidebar() {
 
 	}
 
-	$loop        = new WP_Query( $args );
+	$loop = new WP_Query( $args );
 
 	if ( $loop->have_posts() ) {
 		$not_found = [];
@@ -880,7 +882,11 @@ function tf_search_result_ajax_sidebar() {
 
 			}
 		}
-
+		?>
+		<div class="tf_posts_navigation">
+			<?php tourfic_posts_navigation( $loop ); ?>
+		</div>
+		<?php
 		if ( ! in_array( 0, $not_found ) ) {
 			echo '<div class="tf-nothing-found">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 		}

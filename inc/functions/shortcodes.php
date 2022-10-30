@@ -497,7 +497,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
     $args = array(
         'post_type'      => $post_type,
         'post_status'    => 'publish',
-        'posts_per_page' => '2',
+        'posts_per_page' => '1',
         'paged'          => $paged,
     );
 

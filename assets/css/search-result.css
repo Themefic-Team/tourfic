@@ -134,7 +134,9 @@ a.page-numbers {
     color: #fff;
     padding: 5px 15px;
 }
-
+.archive_ajax_result.loading {
+    opacity: 0.3;
+}
 .tf_posts_navigation .page-numbers.current {
     background: #c9ddfa;
     padding: 5px 15px;

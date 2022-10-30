@@ -1195,6 +1195,7 @@
                 beforeSend: function () {
 
                     $(document).find('.tf_posts_navigation').addClass('loading');
+                    $(document).find('.archive_ajax_result').addClass('loading');
                     flag = true;
                 },
                 success: function (data) {
@@ -1207,6 +1208,7 @@
                     flag = false;
 
                     $(document).find('.tf_posts_navigation').removeClass('loading');
+                    $(document).find('.archive_ajax_result').removeClass('loading');
 
                 }
             });
