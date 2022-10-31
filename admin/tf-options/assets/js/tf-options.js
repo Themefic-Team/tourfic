@@ -174,6 +174,67 @@
         * Custom modal
         * @author: Foysal
         */
+        TF_dependency();
+        function TF_dependency (){
+            $('.tf-tab-content').each(function () {
+        
+                var $this = $(this);
+                $this.find('[data-controller]').each(function (){
+                   var $tffields = $(this);
+                    if ($tffields.length) {
+                        // alert($tffields.length);
+                            var normal_ruleset = $.csf_deps.createRuleset(),
+                            global_ruleset = $.csf_deps.createRuleset(),
+                            normal_depends = [],
+                            global_depends = [];
+                    
+                            $tffields.each(function () {
+                            
+                                var $field = $(this),
+                                    controllers = $field.data('controller').split('|'),
+                                    conditions = $field.data('condition').split('|'),
+                                    values = $field.data('value').toString().split('|'),
+                                    is_global = $field.data('depend-global') ? true : false,
+                                    ruleset = normal_ruleset;
+                            
+                                $.each(controllers, function (index, depend_id) {
+                            
+                                    var value = values[index] || '',
+                                        condition = conditions[index] || conditions[0];
+                            
+                                    ruleset = ruleset.createRule($this.find('[data-depend-id="' + depend_id + '"]'), condition, value);
+                            
+                                    ruleset.include($field);
+                            
+                                    if (is_global) {
+                                        global_depends.push(depend_id);
+                                    } else {
+                                        normal_depends.push(depend_id);
+                                    }
+                            
+                                });
+                            
+                            });
+                    
+                            if (normal_depends.length) {
+                                $.csf_deps.enable($this, normal_ruleset, normal_depends);
+                            }
+                            
+                            if (global_depends.length) {
+                                $.csf_deps.enable(CSF.vars.$body, global_ruleset, global_depends);
+                            }
+                    }
+                });
+               
+                
+            });
+        }
+
+
+        /*
+        * Custom modal
+        * @author: Foysal
+        */
         $(document).on('click', '.tf-modal-btn', function (e) {
             e.preventDefault();
             let $this = $(this),
@@ -394,13 +455,30 @@
                 var for_value = $(this).attr("for");
                 if (typeof for_value !== "undefined") {
                     for_value = for_value.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
-                    var for_value = $(this).attr("for", for_value);
+                    $(this).attr("for", for_value);
                 }
             });
+            add_value.find('[data-depend-id]').each(function () { 
+                var data_depend_id = $(this).attr("data-depend-id"); 
+                if (typeof data_depend_id !== "undefined") {
+                    data_depend_id = data_depend_id.replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']'); 
+                    $(this).attr("data-depend-id", data_depend_id);
+                }
+            });
+            add_value.find('[data-controller]').each(function () { 
+                var data_controller = $(this).attr("data-controller"); 
+                if (typeof data_controller !== "undefined") {
+                    data_controller = data_controller.replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']'); 
+                    $(this).attr("data-controller", data_controller);
+                }
+            });
+            
 
             var append = $this_parent.find('.tf-repeater-wrap-' + id + '');
             add_value.appendTo(append).show();
+            TF_dependency();
         });
+
         $(document).on('click', '.tf-repeater-icon-delete', function () {
             if (confirm("Are you sure to delete this item?")) {
                 $(this).closest('.tf-single-repeater').remove();
@@ -462,12 +540,26 @@
                     var for_value = $(this).attr("for", for_value);
                 }
             });
+            clone_value.find('[data-depend-id]').each(function () { 
+                var data_depend_id = $(this).attr("data-depend-id"); 
+                if (typeof data_depend_id !== "undefined") {
+                    data_depend_id = data_depend_id.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']'); 
+                    $(this).attr("data-depend-id", data_depend_id);
+                }
+            });
+            clone_value.find('[data-controller]').each(function () { 
+                var data_controller = $(this).attr("data-controller"); 
+                if (typeof data_controller !== "undefined") {
+                    data_controller = data_controller.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']'); 
+                    $(this).attr("data-controller", data_controller);
+                }
+            });
 
             clone_value.find('input[name="tf_repeater_count"]').val(count)
             $(this).closest('.tf-repeater-wrap').append(clone_value).show();
+            TF_dependency();
         });
-        $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
-
+        $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () { 
             $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').slideToggle();
             $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').toggleClass('hide');
             if ($(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').hasClass('hide') == true) {
@@ -1071,58 +1163,7 @@ var frame, gframe;
   (function ($) {
       'use strict';
       $(document).ready(function () {
-  
-        $('.tf-tab-content').each(function () {
         
-        var $this = $(this);
-        $this.find('[data-controller]').each(function (){
-           var $tffields = $(this);
-            if ($tffields.length) {
-                // alert($tffields.length);
-                    var normal_ruleset = $.csf_deps.createRuleset(),
-                    global_ruleset = $.csf_deps.createRuleset(),
-                    normal_depends = [],
-                    global_depends = [];
-            
-                    $tffields.each(function () {
-                    
-                        var $field = $(this),
-                            controllers = $field.data('controller').split('|'),
-                            conditions = $field.data('condition').split('|'),
-                            values = $field.data('value').toString().split('|'),
-                            is_global = $field.data('depend-global') ? true : false,
-                            ruleset = normal_ruleset;
-                    
-                        $.each(controllers, function (index, depend_id) {
-                    
-                            var value = values[index] || '',
-                                condition = conditions[index] || conditions[0];
-                    
-                            ruleset = ruleset.createRule('[data-depend-id="' + depend_id + '"]', condition, value);
-                    
-                            ruleset.include($field);
-                    
-                            if (is_global) {
-                                global_depends.push(depend_id);
-                            } else {
-                                normal_depends.push(depend_id);
-                            }
-                    
-                        });
-                    
-                    });
-            
-                    if (normal_depends.length) {
-                        $.csf_deps.enable($this, normal_ruleset, normal_depends);
-                    }
-                    
-                    if (global_depends.length) {
-                        $.csf_deps.enable(CSF.vars.$body, global_ruleset, global_depends);
-                    }
-            }
-        });
-       
         
-        });
     });
   })(jQuery);

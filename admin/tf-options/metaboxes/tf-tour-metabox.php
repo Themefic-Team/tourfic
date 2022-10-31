@@ -321,6 +321,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 						'fixed'      => __( 'Fixed (Pro)', 'tourfic' ),
 					],
 					'default'  => 'continuous',
+					 
 				),
 				array(
 					'id'         => 'custom_avail',
@@ -560,7 +561,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 				array(
 					'id'         => '', 
 					'type'       => 'date',
-					'title'      => __( 'Disable Specific Dates', 'tourfic' ),
+					'label'      => __( 'Disable Specific Dates', 'tourfic' ),
 					'is_pro'   => true,
 					'dependency' => array(
 						array( 'type', '==', 'continuous' ),
@@ -583,6 +584,9 @@ TF_Metabox::metabox( 'tf_tours', array(
 					'type' => 'tab',
 					'label' => __( 'Availability', 'tourfic' ), 
 					'description' =>  __( 'Input your availability', 'tourfic' ),
+					'dependency' => array(
+						array( 'type', '==', 'Fixed (Pro)' ), 
+					),
 					'is_pro' 	=> true,
 					'class' => 'fixed_availability',
 					'tabs' => array(
@@ -630,8 +634,8 @@ TF_Metabox::metabox( 'tf_tours', array(
 		),
 
 		// // Booking
-		'general' => array(
-			'title'  => __( 'General', 'tourfic' ),
+		'booking' => array(
+			'title'  => __( 'Booking', 'tourfic' ),
 			'icon'   => 'fa-solid fa-location-dot',
 			'fields' => array(
 				array(
@@ -672,7 +676,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 				array(
 					'id'     => 'exc',
 					'type'   => 'repeater',
-					'title'  => __( 'Exclude', 'tourfic' ),
+					'label'  => __( 'Exclude', 'tourfic' ),
 					'max' => 5,
 					'fields' => array(
 						array(
@@ -740,7 +744,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 			),
 		),
 
-		// // General
+		// // FAQs
 		'faqs' => array(
 			'title'  => __( 'FAQs', 'tourfic' ),
 			'icon'   => 'fa-solid fa-location-dot',
@@ -780,7 +784,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 		),
 
 
-		// // General
+		// // Settings
 		'settings' => array(
 			'title'  => __( 'Settings', 'tourfic' ),
 			'icon'   => 'fa-solid fa-location-dot',

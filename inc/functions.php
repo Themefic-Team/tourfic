@@ -904,67 +904,73 @@ function tf_search_result_ajax_sidebar() {
  */
 function tf_migrate_data() {
 
-	if ( get_option( 'tf_migrate_data_204_210' ) < 1 ) {
+	if ( get_option( 'tf_migrate_data_204_210' ) < 2 ) {
 
 		global $wpdb;
-		$wpdb->update( $wpdb->posts, [ 'post_type' => 'tf_hotel' ], [ 'post_type' => 'tourfic' ] );
-		$wpdb->update( $wpdb->term_taxonomy, [ 'taxonomy' => 'hotel_location' ], [ 'taxonomy' => 'destination' ] );
-		$wpdb->update( $wpdb->term_taxonomy, [ 'taxonomy' => 'hotel_feature' ], [ 'taxonomy' => 'tf_filters' ] );
+		// $wpdb->update( $wpdb->posts, [ 'post_type' => 'tf_hotel' ], [ 'post_type' => 'tourfic' ] );
+		// $wpdb->update( $wpdb->term_taxonomy, [ 'taxonomy' => 'hotel_location' ], [ 'taxonomy' => 'destination' ] );
+		// $wpdb->update( $wpdb->term_taxonomy, [ 'taxonomy' => 'hotel_feature' ], [ 'taxonomy' => 'tf_filters' ] );
 
 
 		/** Hotels Migrations */
 		$hotels = get_posts( [ 'post_type' => 'tf_hotel', 'numberposts' => - 1, ] );
+		
+		
+
+		
 		foreach ( $hotels as $hotel ) {
-			$old_meta = get_post_meta( $hotel->ID );
-			if ( ! empty( $old_meta['tf_hotel'] ) ) {
-				continue;
-			}
-			$new_meta = [];
-			if ( ! empty( $old_meta['formatted_location'] ) ) {
-				$new_meta['address'] = join( ',', $old_meta['formatted_location'] );
-			}
-			if ( ! empty( $old_meta['tf_gallery_ids'] ) ) {
-				$new_meta['gallery'] = join( ',', $old_meta['tf_gallery_ids'] );
-			}
-			if ( ! empty( $old_meta['additional_information'] ) ) {
-				$new_meta['highlights'] = $old_meta['additional_information'];
-			}
-			if ( ! empty( $old_meta['terms_and_conditions'] ) ) {
-				$new_meta['tc'] = join( ' ', $old_meta['terms_and_conditions'] );
-			}
+			// $old_meta = get_post_meta( $hotel->ID );
+			// echo "<h1>".$hotel->ID."</h1>";
+			// tf_var_dump($old_meta);
+			// if ( ! empty( $old_meta['tf_hotel'] ) ) {
+			// 	continue;
+			// }
+			// $new_meta = [];
+			// if ( ! empty( $old_meta['formatted_location'] ) ) {
+			// 	$new_meta['address'] = join( ',', $old_meta['formatted_location'] );
+			// }
+			// if ( ! empty( $old_meta['tf_gallery_ids'] ) ) {
+			// 	$new_meta['gallery'] = join( ',', $old_meta['tf_gallery_ids'] );
+			// }
+			// if ( ! empty( $old_meta['additional_information'] ) ) {
+			// 	$new_meta['highlights'] = $old_meta['additional_information'];
+			// }
+			// if ( ! empty( $old_meta['terms_and_conditions'] ) ) {
+			// 	$new_meta['tc'] = join( ' ', $old_meta['terms_and_conditions'] );
+			// }
 
-			if ( ! empty( $old_meta['tf_room'] ) ) {
-				$rooms = unserialize( $old_meta['tf_room'][0] );
-				foreach ( $rooms as $room ) {
-					$new_meta['room'][] = [
-						"enable"      => "1",
-						"title"       => $room['name'],
-						"adult"       => $room['pax'],
-						"description" => $room['short_desc'],
-						"pricing-by"  => "1",
-						"price"       => $room['sale_price'] ?? $room['price'],
-					];
-				}
-			}
+			// if ( ! empty( $old_meta['tf_room'] ) ) {
+			// 	$rooms = unserialize( $old_meta['tf_room'][0] );
+			// 	foreach ( $rooms as $room ) {
+			// 		$new_meta['room'][] = [
+			// 			"enable"      => "1",
+			// 			"title"       => $room['name'],
+			// 			"adult"       => $room['pax'],
+			// 			"description" => $room['short_desc'],
+			// 			"pricing-by"  => "1",
+			// 			"price"       => $room['sale_price'] ?? $room['price'],
+			// 		];
+			// 	}
+			// }
 
-			if ( ! empty( $old_meta['tf_faqs'] ) ) {
-				$faqs = unserialize( $old_meta['tf_faqs'][0] );
-				foreach ( $faqs as $faq ) {
-					$new_meta['faq'][] = [
-						'title'       => $faq['name'],
-						'description' => $faq['desc'],
-					];
-				}
-			}
+			// if ( ! empty( $old_meta['tf_faqs'] ) ) {
+			// 	$faqs = unserialize( $old_meta['tf_faqs'][0] );
+			// 	foreach ( $faqs as $faq ) {
+			// 		$new_meta['faq'][] = [
+			// 			'title'       => $faq['name'],
+			// 			'description' => $faq['desc'],
+			// 		];
+			// 	}
+			// }
 
-			update_post_meta(
-				$hotel->ID,
-				'tf_hotel',
-				$new_meta
-			);
+			// update_post_meta(
+			// 	$hotel->ID,
+			// 	'tf_hotel',
+			// 	$new_meta
+			// );
 
 		}
-
+		// wp_die();
 		/** Hotels Location Taxonomy Migration */
 		$hotel_locations = get_terms( [
 			'taxonomy'   => 'hotel_location',
