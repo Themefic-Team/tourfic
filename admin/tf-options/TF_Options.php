@@ -45,7 +45,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			require_once TF_ADMIN_PATH . 'tf-options/Classes/TF_Metabox.php';
 			// Settings Class
 			require_once TF_ADMIN_PATH . 'tf-options/Classes/TF_Settings.php';
-            //Taxonomy Class
+			//Taxonomy Class
 			require_once TF_ADMIN_PATH . 'tf-options/Classes/TF_Taxonomy_Metabox.php';
 
 		}
@@ -56,10 +56,15 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		 */
 		public function load_metaboxes() {
 			$metaboxes = glob( TF_ADMIN_PATH . 'tf-options/metaboxes/*.php' );
+            //pro metaboxes
+//            $pro_metaboxes = glob( TF_PRO_ADMIN_PATH . 'tf-options/metaboxes/*.php' );
+//
+//            if( !empty( $pro_metaboxes ) ) {
+//                $metaboxes = array_merge( $metaboxes, $pro_metaboxes );
+//            }
 			if ( ! empty( $metaboxes ) ) {
 				foreach ( $metaboxes as $metabox ) {
-					$metabox_name = basename( $metabox, '.php' );
-					if ( ! class_exists( $metabox_name ) ) {
+					if ( file_exists( $metabox ) ) {
 						require_once $metabox;
 					}
 				}
@@ -74,10 +79,9 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			$options = glob( TF_ADMIN_PATH . 'tf-options/options/*.php' );
 			if ( ! empty( $options ) ) {
 				foreach ( $options as $option ) {
-					$option_name = basename( $option, '.php' );
-					if ( ! class_exists( $option_name ) ) {
-						require_once $option;
-					}
+                    if ( file_exists( $option ) ) {
+                        require_once $option;
+                    }
 				}
 			}
 		}
@@ -90,8 +94,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			$taxonomies = glob( TF_ADMIN_PATH . 'tf-options/taxonomies/*.php' );
 			if ( ! empty( $taxonomies ) ) {
 				foreach ( $taxonomies as $taxonomy ) {
-					$taxonomy_name = basename( $taxonomy, '.php' );
-					if ( ! class_exists( $taxonomy_name ) ) {
+					if ( file_exists( $taxonomy ) ) {
 						require_once $taxonomy;
 					}
 				}
@@ -140,16 +143,20 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				$id = $settings_id . '[' . $field['id'] . ']';
 			}
 
-			$class    = isset( $field['class'] ) ? $field['class'] : '';
+			$class = isset( $field['class'] ) ? $field['class'] : '';
+
 			$is_pro   = isset( $field['is_pro'] ) ? $field['is_pro'] : '';
 			$badge_up = isset( $field['badge_up'] ) ? $field['badge_up'] : '';
 
-			if ( isset( $field['is_pro'] ) || isset( $field['badge_up'] ) ) {
+			if ( defined( 'TF_PRO' ) ) {
+				$is_pro = false;
+			}
+			if ( $is_pro == true || $badge_up == true ) {
 				$class .= 'tf-csf-disable tf-csf-pro';
 			}
-			$tf_meta_box_dep_value = get_post_meta( get_the_ID(  ), $settings_id, true );
+			$tf_meta_box_dep_value = get_post_meta( get_the_ID(), $settings_id, true );
 
-			$depend     = '';
+			$depend = '';
 
 			if ( ! empty( $field['dependency'] ) ) {
 
@@ -182,8 +189,8 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				$visible = ( ! empty( $depend_visible ) ) ? ' csf-depend-visible' : ' csf-depend-hidden';
 			}
 			?>
-			
-            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo !empty($visible) ? $visible : ''; ?>" <?php echo !empty($depend) ? $depend : ''; ?> >
+
+            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo ! empty( $visible ) ? $visible : ''; ?>" <?php echo ! empty( $depend ) ? $depend : ''; ?> >
 
 				<?php if ( ! empty( $field['label'] ) ): ?>
                     <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label">

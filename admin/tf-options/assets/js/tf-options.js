@@ -3,12 +3,32 @@
     $(document).ready(function () {
 
         /*
+        * window url on change tab click
+        * @author: Foysal
+        */
+        $(window).on('hashchange load', function () {
+            let firstTabId;
+            let hash = window.location.hash;
+            let slug = hash.replace('#tab=', '');
+
+            if (hash) {
+                let selectedTab = $('.tf-tablinks[data-tab="' + slug + '"]'),
+                    parentDiv = selectedTab.closest('.tf-admin-tab-item');
+
+                selectedTab.trigger('click');
+                parentDiv.trigger('click');
+            }
+        });
+
+        /*
         * Tab click
         * @author: Foysal
         */
         $(document).on('click', '.tf-tablinks', function (e) {
             e.preventDefault();
-            let $this = $(this),
+            let firstTabId,
+                $this = $(this),
+                parentDiv = $this.closest('.tf-admin-tab-item'),
                 tabcontent = $('.tf-tab-content'),
                 tablinks = $('.tf-tablinks');
 
@@ -19,54 +39,16 @@
             $('#' + tabId).show();
 
             if($this.next().hasClass('tf-submenu')) {
+                firstTabId = parentDiv.find('.tf-submenu li:first-child .tf-tablinks').data('tab');
+            }
 
-                //check if .tf-submenu .tf-tablinks has tabId then add active class
-                $('.tf-submenu .tf-tablinks').each(function () {
-                    if ($(this).attr('data-tab') === tabId) {
-                        $(this).addClass('active');
-                        $this.removeClass('active');
-                    } else {
-                        $(this).removeClass('active');
-                    }
-                })
+            if(firstTabId === tabId) {
+                parentDiv.find('.tf-submenu li:first-child .tf-tablinks').addClass('active');
             } else {
                 $this.addClass('active');
             }
-
-            //url hash update
-            // let hash = $(this).attr('href');
+            // url hash update
             window.location.hash = '#tab=' + tabId;
-        });
-
-        const matchTabId = tabId => {
-            $('.tf-submenu .tf-tablinks').each(function () {
-                if ($(this).attr('data-tab') === tabId) {
-                    return true;
-                }
-
-                return false;
-            })
-        }
-
-        /*
-        * window url on change tab click
-        * @author: Foysal
-        */
-        $(window).on('hashchange load', function () {
-            let hash = window.location.hash;
-            let slug = hash.replace('#tab=', '');
-
-            if (hash) {
-                let selectedTab = $('.tf-tablinks[data-tab="' + slug + '"]'),
-                    parentDiv = selectedTab.closest('.tf-admin-tab-item');
-
-                $('.tf-tablinks').removeClass('active');
-                $('.tf-tab-content').hide();
-                $('#' + slug).show();
-                selectedTab.addClass('active');
-
-                parentDiv.trigger('click');
-            }
         });
 
         /*
