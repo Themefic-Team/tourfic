@@ -174,7 +174,7 @@ a.page-numbers {
 .tf-action-top {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 10px 0;
     margin-bottom: 15px;
     border-bottom: 1px solid #ddd;

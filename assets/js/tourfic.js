@@ -1223,28 +1223,6 @@
         });
         // End Feed Ajax Trigger
 
-        // Feed Click Trigger
-        $(window).on('scroll', function (e) {
-            /*
-            $('.tf_posts_navigation a.next.page-numbers').each(function (i, el) {
-
-                var $this = $(this);
-
-                var H = $(window).height(),
-                    r = el.getBoundingClientRect(),
-                    t = r.top,
-                    b = r.bottom;
-
-                var tAdj = parseInt(t - (H / 2));
-
-                if (flag === false && (H >= tAdj)) {
-                    $this.trigger('click');
-                }
-            });
-            */
-        });
-        // End Feed Click Trigger
-
         // Hotel and Tour Advance Search form
 
         $(".tf_selectdate-wrap.tf_more_info_selections .tf_input-inner").click(function () {

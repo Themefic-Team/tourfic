@@ -23,6 +23,13 @@ CSF::createSection( $prefix, array(
 		),
 
 		array(
+			'id'          => 'posts_per_page',
+			'type'        => 'number',
+			'title'       => __( 'Input posts per page', 'tourfic' ),
+
+		),
+
+		array(
 			'id'       => 'date_hotel_search',
 			'class'    => 'tf-csf-disable tf-csf-pro',
 			'type'     => 'switcher',

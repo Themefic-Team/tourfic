@@ -492,12 +492,13 @@ function tf_search_result_shortcode( $atts, $content = null ){
     } else {
         $period = '';
     }
-    
+	
+    $post_per_page = tfopt('posts_per_page') ? tfopt('posts_per_page') : 10;
     // Main Query args
     $args = array(
         'post_type'      => $post_type,
         'post_status'    => 'publish',
-        'posts_per_page' => '1',
+        'posts_per_page' => $post_per_page,
         'paged'          => $paged,
     );
 
@@ -545,11 +546,14 @@ function tf_search_result_shortcode( $atts, $content = null ){
     }
 
     $loop = new WP_Query( $args );
-
+	$total_posts = $loop->found_posts;
     ob_start(); ?>
     <!-- Start Content -->
     <div class="tf_search_result">
         <div class="tf-action-top">
+			<div class="tf-total-results">
+				<span><?php echo esc_html__( 'Total Results ', 'tourfic' ) . '(' . $total_posts . ')'; ?> </span>
+			</div>
             <div class="tf-list-grid">
                 <a href="#list-view" data-id="list-view" class="change-view" title="<?php _e( 'List View', 'tourfic' ); ?>"><i class="fas fa-list"></i></a>
                 <a href="#grid-view" data-id="grid-view" class="change-view" title="<?php _e( 'Grid View', 'tourfic' ); ?>"><i class="fas fa-border-all"></i></a>
