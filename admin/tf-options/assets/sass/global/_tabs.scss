@@ -3,17 +3,32 @@
   @include flexbox();
   margin: -6px -12px -12px -12px;
 
+  @media #{$max991}{
+    position: relative;
+    min-height: 500px;
+  }
+
   &.tf-taxonomy-metabox{
     display: block;
     margin: 0;
     max-width: 95%;
   }
-
+  .tf-admin-tab.active{
+    display: block;
+    position: absolute;
+    z-index: 99999;
+    top: 0;
+    bottom: 0;
+    @include transition(all, 0.3s, ease);
+  }
   .tf-admin-tab {
     border-right: 1px solid $slate10;
     background-color: $slate0;
     min-width: 220px;
-
+    @include transition(all, 0.3s, ease);
+    @media #{$max991}{
+      display: none;
+    }
     a.tf-tablinks {
       font-family: 'Lato';
       font-style: normal;
@@ -51,6 +66,10 @@
         color: #fff;
         position: relative;
 
+        @media #{$max991}{
+          position: static;
+        }
+
         .tf-sec-icon {
           color: #fff;
         }
@@ -65,6 +84,10 @@
           right: -5px;
           top: 50%;
           margin-top: -5px;
+          @media #{$max991}{
+            position: static;
+            display: none;
+          }
         }
       }
     }
@@ -119,7 +142,9 @@
 
   .tf-tab-wrapper {
     @include flex(0 0 calc(100% - 220px));
-
+    @media #{$max991}{
+      flex: 0 0 calc(100% - 0px);
+    }
     .tf-tab-content {
       display: none;
 

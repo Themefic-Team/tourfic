@@ -181,7 +181,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 					$depend_visible  = ( ! empty( $dependency[4] ) ) ? $dependency[4] : '';
 				}
 
-				$depend .= ' data-controller="' . esc_attr( $data_controller ) . '"';
+				$depend .= ' data-controller="' . esc_attr( $data_controller ) . ''.$parent.'"';
 				$depend .= ' data-condition="' . esc_attr( $data_condition ) . '"';
 				$depend .= ' data-value="' . esc_attr( $data_value ) . '"';
 				$depend .= ( ! empty( $data_global ) ) ? ' data-depend-global="true"' : '';

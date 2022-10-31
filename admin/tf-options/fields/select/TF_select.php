@@ -31,7 +31,7 @@ if ( ! class_exists( 'TF_select' ) ) {
 				}
 			}
 
-			echo '<select name="' . $this->field_name() . '" id="' . esc_attr( $this->field_name() ) . '" data-depend-id="' . esc_attr( $this->field['id'] ) . '" class="tf-select">';
+			echo '<select name="' . $this->field_name() . '" id="' . esc_attr( $this->field_name() ) . '" data-depend-id="' . esc_attr( $this->field['id'] ) .''.$this->parent_field.'" class="tf-select">';
 			if ( ! empty( $this->field['placeholder'] ) ) {
 				echo '<option value="">' . esc_html( $this->field['placeholder'] ) . '</option>';
 			}

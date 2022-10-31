@@ -156,6 +156,67 @@
         * Custom modal
         * @author: Foysal
         */
+        TF_dependency();
+        function TF_dependency (){
+            $('.tf-tab-content').each(function () {
+        
+                var $this = $(this);
+                $this.find('[data-controller]').each(function (){
+                   var $tffields = $(this);
+                    if ($tffields.length) {
+                        // alert($tffields.length);
+                            var normal_ruleset = $.csf_deps.createRuleset(),
+                            global_ruleset = $.csf_deps.createRuleset(),
+                            normal_depends = [],
+                            global_depends = [];
+                    
+                            $tffields.each(function () {
+                            
+                                var $field = $(this),
+                                    controllers = $field.data('controller').split('|'),
+                                    conditions = $field.data('condition').split('|'),
+                                    values = $field.data('value').toString().split('|'),
+                                    is_global = $field.data('depend-global') ? true : false,
+                                    ruleset = normal_ruleset;
+                            
+                                $.each(controllers, function (index, depend_id) {
+                            
+                                    var value = values[index] || '',
+                                        condition = conditions[index] || conditions[0];
+                            
+                                    ruleset = ruleset.createRule($this.find('[data-depend-id="' + depend_id + '"]'), condition, value);
+                            
+                                    ruleset.include($field);
+                            
+                                    if (is_global) {
+                                        global_depends.push(depend_id);
+                                    } else {
+                                        normal_depends.push(depend_id);
+                                    }
+                            
+                                });
+                            
+                            });
+                    
+                            if (normal_depends.length) {
+                                $.csf_deps.enable($this, normal_ruleset, normal_depends);
+                            }
+                            
+                            if (global_depends.length) {
+                                $.csf_deps.enable(CSF.vars.$body, global_ruleset, global_depends);
+                            }
+                    }
+                });
+               
+                
+            });
+        }
+
+
+        /*
+        * Custom modal
+        * @author: Foysal
+        */
         $(document).on('click', '.tf-modal-btn', function (e) {
             e.preventDefault();
             let $this = $(this),
@@ -376,13 +437,30 @@
                 var for_value = $(this).attr("for");
                 if (typeof for_value !== "undefined") {
                     for_value = for_value.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
-                    var for_value = $(this).attr("for", for_value);
+                    $(this).attr("for", for_value);
                 }
             });
+            add_value.find('[data-depend-id]').each(function () { 
+                var data_depend_id = $(this).attr("data-depend-id"); 
+                if (typeof data_depend_id !== "undefined") {
+                    data_depend_id = data_depend_id.replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']'); 
+                    $(this).attr("data-depend-id", data_depend_id);
+                }
+            });
+            add_value.find('[data-controller]').each(function () { 
+                var data_controller = $(this).attr("data-controller"); 
+                if (typeof data_controller !== "undefined") {
+                    data_controller = data_controller.replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']'); 
+                    $(this).attr("data-controller", data_controller);
+                }
+            });
+            
 
             var append = $this_parent.find('.tf-repeater-wrap-' + id + '');
             add_value.appendTo(append).show();
+            TF_dependency();
         });
+
         $(document).on('click', '.tf-repeater-icon-delete', function () {
             if (confirm("Are you sure to delete this item?")) {
                 $(this).closest('.tf-single-repeater').remove();
@@ -444,12 +522,26 @@
                     var for_value = $(this).attr("for", for_value);
                 }
             });
+            clone_value.find('[data-depend-id]').each(function () { 
+                var data_depend_id = $(this).attr("data-depend-id"); 
+                if (typeof data_depend_id !== "undefined") {
+                    data_depend_id = data_depend_id.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']'); 
+                    $(this).attr("data-depend-id", data_depend_id);
+                }
+            });
+            clone_value.find('[data-controller]').each(function () { 
+                var data_controller = $(this).attr("data-controller"); 
+                if (typeof data_controller !== "undefined") {
+                    data_controller = data_controller.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']'); 
+                    $(this).attr("data-controller", data_controller);
+                }
+            });
 
             clone_value.find('input[name="tf_repeater_count"]').val(count)
             $(this).closest('.tf-repeater-wrap').append(clone_value).show();
+            TF_dependency();
         });
-        $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
-
+        $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () { 
             $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').slideToggle();
             $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').toggleClass('hide');
             if ($(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').hasClass('hide') == true) {
@@ -478,6 +570,23 @@
 
     });
 })(jQuery);
+
+
+function openTab(evt, tabName) {
+    evt.preventDefault();
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tf-tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tf-tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.target.className += " active";
+    jQuery(".tf-admin-tab").removeClass('active');
+}
 
 var frame, gframe;
 (function ($) {
@@ -694,109 +803,10 @@ var frame, gframe;
 
         });
 
-
-        // $(".tf-select").change(function () {
-        //     var $this = $(this);
-        //     var value = $this.val();
-        //     var current_val = $this.attr("data-depend-id");
-        //     $('[data-controller=' + current_val + ']').each(function () {
-        //         var controller = $(this).attr("data-controller");
-        //         var condition = $(this).attr("data-condition");
-        //         var data_val = $(this).attr("data-value");
-        //         // console.log(controller);
-        //         if (controller && condition && data_val) {
-
-        //             if (value == data_val && current_val == controller) {
-        //                 $(this).show();
-        //             } else {
-        //                 $(this).hide();
-        //             }
-
-        //         }
-
-        //     });
-        // });
-
-        // $('.tf-switch').change(function () {
-        //     var $this = $(this);
-        //     if (this.checked) {
-        //         var $this = $(this);
-        //         var value = $this.val(1);
-        //         var current_val = $this.attr("data-depend-id");
-        //         // console.log(current_val);
-        //         $('[data-controller=' + current_val + ']').each(function () {
-        //             var controller = $(this).attr("data-controller");
-        //             var condition = $(this).attr("data-condition");
-        //             var data_val = $(this).attr("data-value");
-        //             // console.log(controller);
-        //             if (controller && condition && data_val) {
-
-        //                 if (1 == data_val && current_val == controller) {
-        //                     $(this).show();
-        //                 }
-
-        //             }
-
-        //         });
-        //     } else {
-        //         var $this = $(this);
-        //         var value = $this.val('');
-        //         var current_val = $this.attr("data-depend-id");
-        //         // console.log(current_val);
-        //         $('[data-controller=' + current_val + ']').each(function () {
-        //             var controller = $(this).attr("data-controller");
-        //             var condition = $(this).attr("data-condition");
-        //             var data_val = $(this).attr("data-value");
-        //             // console.log(controller);
-        //             if (controller && condition && data_val) {
-
-        //                 if (1 == data_val && current_val == controller) {
-        //                     $(this).hide();
-        //                 }
-
-        //             }
-
-        //         });
-        //     }
-        // });
-
-        // $('.tf-group-checkbox').change(function () {
-        //     var controller_name = $(this).attr("data-depend-id");
-        //     var ch_list = Array();
-        //     $("input.tf-group-checkbox:checked").each(function () {
-        //         ch_list.push($(this).val());
-
-        //     });
-        //     if (ch_list.length == 0) {
-        //         $('[data-controller=' + controller_name + ']').each(function () {
-        //             var controller = $(this).attr("data-controller");
-        //             var condition = $(this).attr("data-condition");
-        //             var data_val = $(this).attr("data-value");
-        //             if (controller && condition && data_val) {
-        //                 $(this).hide();
-        //             }
-
-        //         });
-
-        //     } else {
-        //         $('[data-controller=' + controller_name + ']').each(function () {
-        //             var controller = $(this).attr("data-controller");
-        //             var condition = $(this).attr("data-condition");
-        //             var data_val = $(this).attr("data-value");
-        //             if (controller && condition && data_val) {
-
-        //                 if (!!~jQuery.inArray(data_val, ch_list)) {
-        //                     $(this).show();
-        //                 } else {
-        //                     $(this).hide();
-        //                 }
-
-        //             }
-
-        //         });
-        //     }
-        // });
-
+        $('.tf-mobile-tabs').click(function (e) {
+            e.preventDefault();
+            $(".tf-admin-tab").toggleClass('active');
+        });
     });
 
 
@@ -1053,55 +1063,7 @@ var frame, gframe;
   (function ($) {
       'use strict';
       $(document).ready(function () {
-  
-        $('.tf-tab-content').each(function () {
         
-        var $this = $(this),
-        $tffields = $this.children('[data-controller]');
-        if ($tffields.length) {
         
-                var normal_ruleset = $.csf_deps.createRuleset(),
-                global_ruleset = $.csf_deps.createRuleset(),
-                normal_depends = [],
-                global_depends = [];
-        
-                $tffields.each(function () {
-                
-                    var $field = $(this),
-                        controllers = $field.data('controller').split('|'),
-                        conditions = $field.data('condition').split('|'),
-                        values = $field.data('value').toString().split('|'),
-                        is_global = $field.data('depend-global') ? true : false,
-                        ruleset = normal_ruleset;
-                
-                    $.each(controllers, function (index, depend_id) {
-                
-                        var value = values[index] || '',
-                            condition = conditions[index] || conditions[0];
-                
-                        ruleset = ruleset.createRule('[data-depend-id="' + depend_id + '"]', condition, value);
-                
-                        ruleset.include($field);
-                
-                        if (is_global) {
-                            global_depends.push(depend_id);
-                        } else {
-                            normal_depends.push(depend_id);
-                        }
-                
-                    });
-                
-                });
-        
-                if (normal_depends.length) {
-                    $.csf_deps.enable($this, normal_ruleset, normal_depends);
-                }
-                
-                if (global_depends.length) {
-                    $.csf_deps.enable(CSF.vars.$body, global_ruleset, global_depends);
-                }
-        }
-        
-        });
     });
   })(jQuery);

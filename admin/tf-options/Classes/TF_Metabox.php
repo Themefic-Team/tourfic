@@ -68,7 +68,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
          * @author Foysal
 		 */
 		public function tf_meta_box() {
-			add_meta_box( $this->metabox_id, $this->metabox_title, array( $this, 'tf_meta_box_content' ), $this->metabox_post_type, 'normal', 'high', );
+			add_meta_box( $this->metabox_id, "<a href='#' class='tf-mobile-tabs'><i class='fa-solid fa-bars'></i></a>".$this->metabox_title, array( $this, 'tf_meta_box_content' ), $this->metabox_post_type, 'normal', 'high', );
 		}
 
         /*
