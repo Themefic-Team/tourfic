@@ -34,7 +34,8 @@
                 width: 90%;
                 padding: 12px 8px 12px 12px;
                 border: none;
-                background: #f0f0f1;
+                background: #F5F8FF;
+                border: 1px solid #C4CBD4;
                 border-radius: 4px;
                 height: 48px;
                 color: #363e4a;
@@ -46,6 +47,8 @@
                 line-height: 48px;
                 text-align: center;
                 text-transform: capitalize;
+                background-color: #2979ff;
+                border-color: #2979ff;
             }
             }
     }
@@ -63,12 +66,12 @@
                     width: 85%;
                     padding: 12px 8px 12px 12px;
                     border: none;
-                    background: #f0f0f1;
                     border-radius: 4px;
                     height: 48px;
                     color: #363e4a;
                     font-size: 14px;
-                    border: 1px solid #ddd;
+                    background: #fff;
+                    border: 1px solid #C4CBD4;
                 }
                 a.tf-media-upload{
                     height: 48px;
