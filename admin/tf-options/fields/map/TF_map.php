@@ -53,7 +53,6 @@ if ( ! class_exists( 'TF_map' ) ) {
                 }else{
                     echo '<input type="text" class="tf_gmap_address" name="'. esc_attr( $this->field_name( ) ). '[address]' .'" value="'. esc_attr( $value['address'] ) .'" placeholder="' . esc_attr( $args['placeholder'] ) . '" />';
                 }
-
                 echo '</div>';
               } else {
                 echo '<div class="tf--address-field" data-address-field="'. esc_attr( $args['address_field'] ) .'"></div>';
