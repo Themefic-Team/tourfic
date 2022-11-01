@@ -141,12 +141,218 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			}
 //			tf_var_dump( $this->pre_tabs );
 			?>
+			<div class="tf-deshboard-wrapper">
+				<div class="tf-deshboard-version">
+					<span><?php _e("Tourfic","tourfic"); ?><div class="version"><?php _e("2.8.9","tourfic"); ?></div><span><?php echo sprintf('There is a new version of Tourfic available for your update. <a href=""> View version 2.8.10 details </a> or <a href=""> update now</a>.'); ?></span></span>
+				</div>
+				<div class="tf-deshboard-overview">
+					<div class="tf-details-overview">
+						<span class="tf-details-overview-title">
+							<?php _e("Hotels Overview","tourfic"); ?>
+						</span>
+						<div class="tf-details-overview-items">
+							<div class="tf-details-single-items">
+								<h3><span><i class="fa-solid fa-hotel"></i></span><?php _e("Total Hotels","tourfic"); ?></h3>
+								<span>
+									<?php  
+									$tf_total_hotels = array(  
+										'post_type' => 'tf_hotel',
+										'post_status' => 'publish',
+										'posts_per_page' => -1
+									);
+									echo count($tf_total_hotels);
+									?>
+								</span>
+								<a target="_blank" href="<?php echo get_admin_url() . 'edit.php?post_type=tf_hotel'; ?>"><?php _e("View All","tourfic"); ?></a>
+							</div>
+							<div class="tf-details-single-items">
+								<h3><span><i class="fa-solid fa-hospital"></i></span><?php _e("Total Rooms","tourfic"); ?></h3>
+								<span>
+									<?php 
+									$totals_rooms_number = 0;
+									$total_room_details = new WP_Query( $tf_total_hotels ); 
+        
+									while ( $total_room_details->have_posts() ) : $total_room_details->the_post(); 
+										$tf_room_meta = get_post_meta( get_the_ID(), 'tf_hotel', true );
+										$tf_rooms = ! empty( $tf_room_meta['room'] ) ? $tf_room_meta['room'] : '';
+										foreach ( $tf_rooms as $key => $room ) {
+											$tf_room_no      = ! empty( $room['num-room'] ) ? $room['num-room'] : '';
+											$totals_rooms_number += $tf_room_no;
+										}
+									endwhile;
+								
+									wp_reset_postdata(); 
+
+									echo $totals_rooms_number;
+									?>
+								</span>
+								<a target="_blank" href="<?php echo get_admin_url() . 'edit.php?post_type=tf_hotel'; ?>"><?php _e("View All","tourfic"); ?></a>
+							</div>
+							<div class="tf-details-single-items">
+								<h3><span><i class="fa-solid fa-door-closed"></i></span><?php _e("Total Features","tourfic"); ?></h3>
+								<span>
+									<?php 
+										$tf_total_features = get_terms([
+											'taxonomy' => 'hotel_feature',
+											'hide_empty' => false,
+										]);
+										echo count($tf_total_features);
+									?>
+								</span>
+								<a target="_blank" href="<?php echo get_admin_url() . 'edit-tags.php?taxonomy=hotel_feature&post_type=tf_hotel'; ?>"><?php _e("View All","tourfic"); ?></a>
+							</div>
+							<div class="tf-details-single-items">
+								<h3><span><i class="fa-solid fa-door-open"></i></span><?php _e("Total Location","tourfic"); ?></h3>
+								<span>
+									<?php 
+										$tf_total_locations = get_terms([
+											'taxonomy' => 'hotel_location',
+											'hide_empty' => false,
+										]);
+										echo count($tf_total_locations);
+									?>	
+								</span>
+								<a target="_blank" href="<?php echo get_admin_url() . 'edit-tags.php?taxonomy=hotel_location&post_type=tf_hotel'; ?>"><?php _e("View All","tourfic"); ?></a>
+							</div>
+						</div>
+
+						
+						<span class="tf-details-overview-title">
+							<?php _e("Tours Overview","tourfic"); ?>
+						</span>
+						<div class="tf-details-overview-items">
+							<div class="tf-details-single-items">
+								<h3><span><i class="fa-solid fa-hiking"></i></span><?php _e("Total Tours","tourfic"); ?></h3>
+								<span>
+									<?php  
+										$tf_total_tours = array(  
+											'post_type' => 'tf_tours',
+											'post_status' => 'publish',
+											'posts_per_page' => -1
+										);
+										echo count($tf_total_tours);
+									?>	
+								</span>
+								<a target="_blank" href="<?php echo get_admin_url() . 'edit.php?post_type=tf_tours'; ?>"><?php _e("View All","tourfic"); ?></a>
+							</div>
+							<div class="tf-details-single-items">
+								<h3><span><i class="fa-solid fa-map-marker"></i></span><?php _e("Total Destinations","tourfic"); ?></h3>
+								<span>
+									<?php 
+										$tf_total_destinations = get_terms([
+											'taxonomy' => 'tour_destination',
+											'hide_empty' => false,
+										]);
+										echo count($tf_total_destinations);
+									?>	
+								</span>
+								<a target="_blank" href="<?php echo get_admin_url() . 'edit-tags.php?taxonomy=tour_destination&post_type=tf_tours'; ?>"><?php _e("View All","tourfic"); ?></a>
+							</div>
+							<div class="tf-details-single-items">
+								<h3><span><i class="fa-solid fa-heartbeat"></i></span><?php _e("Total Activities","tourfic"); ?><p><?php _e("Upcoming","tourfic"); ?></p></h3>
+								<span><?php echo esc_html( "0" ); ?></span>
+								<a href="#"><?php _e("View All","tourfic"); ?></a>
+							</div>
+							<div class="tf-details-single-items">
+								<h3><span><i class="fa-solid fa-clock"></i></span><?php _e("Total Duration","tourfic"); ?><p><?php _e("Upcoming","tourfic"); ?></p></h3>
+								<span><?php echo esc_html( "0" ); ?></span>
+								<a href="#"><?php _e("View All","tourfic"); ?></a>
+							</div>
+						</div>
+
+						
+						<span class="tf-details-overview-title">
+							<?php _e("Common Overview","tourfic"); ?>
+						</span>
+						<div class="tf-details-overview-items">
+							<div class="tf-details-single-items">
+								<h3><span><i class="fa-solid fa-book"></i></span><?php _e("Total Bookings","tourfic"); ?></h3>
+								<span>
+									<?php 
+									    $tf_order_query_orders = wc_get_orders(array(
+											'limit'=>-1,
+											'type'=> 'shop_order',
+											'status'=> array( 'wc-completed' ),
+											)
+										);
+										echo count($tf_order_query_orders);
+									?>	
+								</span>
+								<a target="_blank" href="<?php echo get_admin_url() . 'edit.php?post_status=wc-completed&post_type=shop_order'; ?>"><?php _e("View All","tourfic"); ?></a>
+							</div>
+							<div class="tf-details-single-items">
+								<h3><span><i class="fa-solid fa-user-alt"></i></span><?php _e("Total Customers","tourfic"); ?></h3>
+								<span>
+									<?php 
+									$tf_customer_query = new WP_User_Query(
+										array(
+										   'role' => 'customer',         
+										)
+									 );
+									 echo count($tf_customer_query->get_results());
+									?>
+								</span>
+								<a target="_blank" href="<?php echo get_admin_url() . 'users.php?role=customer'; ?>"><?php _e("View All","tourfic"); ?></a>
+							</div>
+							<div class="tf-details-single-items">
+								<h3><span><i class="fa-solid fa-money-bill-alt"></i></span><?php _e("Total Coupons","tourfic"); ?></h3>
+								<span>
+									<?php 
+									 $tf_coupon_posts = get_posts( array(
+										'posts_per_page'   => -1,
+										'orderby'          => 'name',
+										'order'            => 'asc',
+										'post_type'        => 'shop_coupon',
+										'post_status'      => 'publish',
+									) );
+									echo count($tf_coupon_posts);
+									?>	
+								</span>
+								<a target="_blank" href="<?php echo get_admin_url() . 'edit.php?post_type=shop_coupon'; ?>"><?php _e("View All","tourfic"); ?></a>
+							</div>
+							<div class="tf-details-single-items">
+								<h3><span><i class="fa-solid fa-question"></i></span><?php _e("Total Enquiries","tourfic"); ?><p><?php _e("Upcoming","tourfic"); ?></p></h3>
+								<span><?php echo esc_html( "0" ); ?></span>
+								<a href="#"><?php _e("View All","tourfic"); ?></a>
+							</div>
+						</div>
+					</div>
+					<div class="tf-details-instractions">
+						<span class="tf-details-overview-title">
+							<?php _e("Video Instruction","tourfic"); ?>
+						</span>
+						<iframe width="100%" height="345" src="https://www.youtube.com/embed/xeVkabWobDU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+						<span class="tf-details-overview-title">
+							<?php _e("Facebook Community","tourfic"); ?>
+						</span>
+						<div class="tf-facebook-community">
+							<div class="icon">
+							<i class="fab fa-facebook-f"></i>
+							</div>
+							<span><?php echo sprintf("Join our <a target='_blank' href='https://www.facebook.com/groups/tourfic'>Tourfic - Travel Booking Solution for Woocommerce Community </a> Facebook Group for your query or share your thoughts about the plugin with user and us."); ?></span>
+						</div>
+						<span class="tf-details-overview-title">
+							<?php _e("Plugin Documentation","tourfic"); ?>
+						</span>
+						<div class="tf-plugin-documentation">
+							<div class="tf-plugin-details-info">
+								<i class="fa-solid fa-file-alt"></i>
+								<span><?php _e("You’ll get every detailed document regarding the plugin in our documentation website described by our Engineers.","tourfic"); ?></span>
+							</div>
+							<div class="tf-plugin-document-link">
+								<?php echo sprintf("<a target='_blank' href='https://tourfic.com/'>Visit Documentation</a>"); ?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
             <div class="tf-option-wrapper">
                 <form method="post" action="" class="tf-option-form" enctype="multipart/form-data">
                     <!-- Header -->
                     <div class="tf-option-header">
                         <div class="tf-option-header-left">
-                            <h2><?php echo esc_html( $this->option_title ); ?></h2>
+                            <h2><a href="#" class="tf-mobile-tabs"><i class="fa-solid fa-bars"></i></a><?php echo esc_html( $this->option_title ); ?></h2>
                             <span><?php _e( 'By', 'tourfic' ) ?></span>
                             <a href="https://tourfic.com/" target="_blank"><?php _e( 'Themefic', 'tourfic' ) ?></a>
                         </div>
