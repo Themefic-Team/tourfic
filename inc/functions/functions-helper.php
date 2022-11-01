@@ -330,7 +330,9 @@ function tf_custom_excerpt_length( $length ) {
 }
 
 /**
- * Pagination
+ * Pagination for the search page
+ * @since 2.9.0
+ * @author Abu Hena
  */
 function tourfic_posts_navigation($wp_query = '') {
 	if(empty($wp_query)){

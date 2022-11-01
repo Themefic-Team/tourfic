@@ -27,13 +27,19 @@ if( $discount_type == 'percent' ){
 ?>
 
 <div class="tf-main-wrapper" data-fullwidth="true">
-	<?php do_action( 'tf_before_container' ); ?>
+	<?php
+		do_action( 'tf_before_container' );
+		$post_count = $GLOBALS['wp_query']->post_count;
+	?>
 	<div class="tf-container">
 
 		<div class="search-result-inner">
 			<!-- Start Content -->
-			<div class="tf-search-left">
+			<div class="tf-search-left">				
 				<div class="tf-action-top">
+					<div class="tf-total-results">
+						<span><?php echo esc_html__( 'Total Results ', 'tourfic' ) . '(' . $post_count . ')'; ?> </span>
+					</div>
 		            <div class="tf-list-grid">
 		                <a href="#list-view" data-id="list-view" class="change-view" title="<?php _e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
 		                <a href="#grid-view" data-id="grid-view" class="change-view" title="<?php _e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
