@@ -7,7 +7,6 @@
         * @author: Foysal
         */
         $(window).on('hashchange load', function () {
-            let firstTabId;
             let hash = window.location.hash;
             let slug = hash.replace('#tab=', '');
 
@@ -49,6 +48,8 @@
             }
             // url hash update
             window.location.hash = '#tab=' + tabId;
+            
+            $(".tf-admin-tab").removeClass('active');
         });
 
         /*
