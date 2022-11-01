@@ -162,10 +162,10 @@ a.page-numbers {
     margin-top: 10px;
 }
 
-.tf-room-price .amount {
+.tf-room-price .amount, .tf-tour-price .amount {
     font-weight: bold;
+    margin-left: 5px;
 }
-
 .single-tour-wrap,
 .single-tour-wrap * {
     transition: all 0.3s ease-out;
@@ -287,7 +287,10 @@ a.page-numbers {
     text-align: left;
     margin: 10px 0;
 }
-
+.archive_ajax_result .tf-tour-price {
+    display: flex;
+    justify-content: end;
+}
 @media only screen and (max-width: 991px) {
     .widget_tf_hotel_filter {
         margin-top: 20px;
