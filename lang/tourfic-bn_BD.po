@@ -4383,13 +4383,13 @@ msgstr ""
 #: tourfic/inc/functions/functions-hotel.php:1804
 #: tourfic/templates/hotel/single-hotel.php:506
 #: tourfic/templates/template-parts/hotel/hotel-availability-table-row.php:90
-msgid "No. Adults"
+msgid "Number of Adults"
 msgstr ""
 
 #: tourfic/inc/functions/functions-hotel.php:1817
 #: tourfic/templates/hotel/single-hotel.php:518
 #: tourfic/templates/template-parts/hotel/hotel-availability-table-row.php:102
-msgid "No. Children"
+msgid "Number of Children"
 msgstr ""
 
 #: tourfic/inc/functions/functions-notice_update.php:13

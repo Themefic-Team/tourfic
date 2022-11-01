@@ -328,24 +328,18 @@ function tf_custom_excerpt_length( $length ) {
     return 30;
 
 }
-add_filter( 'excerpt_length', 'tf_custom_excerpt_length', 999 );
 
 /**
  * Pagination
  */
-function tourfic_posts_navigation($wp_query='') {
-
-	if(empty($wp_query)) {
+function tourfic_posts_navigation($wp_query = '') {
+	if(empty($wp_query)){
 		global $wp_query;
 	}
-
 	$max_num_pages = $wp_query->max_num_pages;
 	$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-
-	echo "<div id='am_posts_navigation'>";
+	echo "<div id='tf_posts_navigation_bar'>";
 	echo paginate_links( array(
-		//'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-	    'format'  => 'page/%#%',
 	    'current' => $paged,
 	    'total'   => $max_num_pages,
 	    'mid_size'        => 2,

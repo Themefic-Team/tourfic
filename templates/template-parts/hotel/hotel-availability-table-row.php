@@ -44,7 +44,7 @@
                     <span class="icon-text tf-d-b">x<?php echo $bed; ?></span>
                 </div>
                 <div class="tf-top">
-                    <?php _e( 'No. Beds', 'tourfic' );?>
+                    <?php _e( 'Number of Beds', 'tourfic' );?>
                     <i class="tool-i"></i>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                     <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
                 </div>
                 <div class="tf-top">
-                    <?php _e( 'No. Adults', 'tourfic' );?>
+                    <?php _e( 'Number of Adults', 'tourfic' );?>
                     <i class="tool-i"></i>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                     <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                 </div>
                 <div class="tf-top">
-                    <?php _e( 'No. Children', 'tourfic' );?>
+                    <?php _e( 'Number of Children', 'tourfic' );?>
                     <i class="tool-i"></i>
                 </div>
             </div>

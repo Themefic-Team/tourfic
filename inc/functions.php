@@ -709,12 +709,15 @@ function tf_search_result_ajax_sidebar() {
 		$form_check_out     = substr( $check_in_out, 13, 10 );
 		$form_check_out_stt = strtotime( $form_check_out );
 	}
-
+	
+	$post_per_page = tfopt('posts_per_page') ? tfopt('posts_per_page') : 10;
+	$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 	// Properties args
 	$args = array(
 		'post_type'      => $posttype,
 		'post_status'    => 'publish',
-		'posts_per_page' => - 1,
+		'posts_per_page' =>  $post_per_page,
+		'paged' => $paged,
 	);
 
 	if ( $search ) {
@@ -813,8 +816,7 @@ function tf_search_result_ajax_sidebar() {
 
 	}
 
-	$loop        = new WP_Query( $args );
-
+	$loop = new WP_Query( $args );
 	if ( $loop->have_posts() ) {
 		$not_found = [];
 		while ( $loop->have_posts() ) {
@@ -853,12 +855,11 @@ function tf_search_result_ajax_sidebar() {
 			} else {
 				$total_person = intval( $adults ) + intval( $child );
 				$meta         = get_post_meta( get_the_ID(), 'tf_tours_option', true );
-
-				if ( $meta['cont_max_people'] < $total_person && $meta['cont_max_people'] != 0 ) {
+				if ( $meta['cont_max_people'] < $total_person && $meta['cont_max_people'] != 0 && !empty($meta['cont_max_people']) ) {
 					$not_found[] = 1;
 					continue;
 				}
-				if ( $meta['cont_min_people'] > $total_person && $meta['cont_min_people'] != 0 ) {
+				if ( $meta['cont_min_people'] > $total_person && $meta['cont_min_people'] != 0 && !empty($meta['cont_min_people'])) {
 					$not_found[] = 1;
 					continue;
 				}
@@ -880,7 +881,7 @@ function tf_search_result_ajax_sidebar() {
 
 			}
 		}
-
+		
 		if ( ! in_array( 0, $not_found ) ) {
 			echo '<div class="tf-nothing-found">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 		}

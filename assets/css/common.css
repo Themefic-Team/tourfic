@@ -1,6 +1,7 @@
 /**************** GLOBAL ITEMS ****************/
 .tf-main-wrapper {
     width: 100%;
+    padding: 30px 0;
 }
 
 .tf-container {
@@ -100,7 +101,6 @@ h3.section-heading {
     box-shadow: 0 1px 8px transparent;
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.8s;
     text-align: center;
     line-height: 1;
     white-space: nowrap;
@@ -108,7 +108,7 @@ h3.section-heading {
 
 .tf-tooltip:hover .tf-top {
     visibility: visible;
-    opacity: 1;
+    opacity: 1;   
 }
 
 .tf-tooltip .tf-top i.tool-i {
@@ -250,6 +250,10 @@ h3.section-heading {
 .btn-styled:hover {
     color: #fff;
     background: #838383;
+}
+
+a.tf_button.btn-styled:focus {
+    color: #fff;
 }
 
 .btn-styled:hover:after {
