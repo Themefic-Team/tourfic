@@ -376,9 +376,9 @@ TF_Metabox::metabox( 'tf_hotels', array(
 						),
 	
 						array(
-							'id'    => 'subtitle',
+							'id'    => 'description',
 							'type'  => 'textarea',
-							'label' => __( 'subtitle', 'tourfic' ),
+							'label' => __( 'Description', 'tourfic' ),
 						),
 	
 					),

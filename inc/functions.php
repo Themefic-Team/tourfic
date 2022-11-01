@@ -919,55 +919,53 @@ function tf_migrate_data() {
 
 		
 		foreach ( $hotels as $hotel ) {
-			// $old_meta = get_post_meta( $hotel->ID );
-			// echo "<h1>".$hotel->ID."</h1>";
-			// tf_var_dump($old_meta);
-			// if ( ! empty( $old_meta['tf_hotel'] ) ) {
-			// 	continue;
-			// }
-			// $new_meta = [];
-			// if ( ! empty( $old_meta['formatted_location'] ) ) {
-			// 	$new_meta['address'] = join( ',', $old_meta['formatted_location'] );
-			// }
-			// if ( ! empty( $old_meta['tf_gallery_ids'] ) ) {
-			// 	$new_meta['gallery'] = join( ',', $old_meta['tf_gallery_ids'] );
-			// }
-			// if ( ! empty( $old_meta['additional_information'] ) ) {
-			// 	$new_meta['highlights'] = $old_meta['additional_information'];
-			// }
-			// if ( ! empty( $old_meta['terms_and_conditions'] ) ) {
-			// 	$new_meta['tc'] = join( ' ', $old_meta['terms_and_conditions'] );
-			// }
+			$old_meta = get_post_meta( $hotel->ID ); 
+			if ( ! empty( $old_meta['tf_hotel'] ) ) {
+				continue;
+			}
+			$new_meta = [];
+			if ( ! empty( $old_meta['formatted_location'] ) ) {
+				$new_meta['address'] = join( ',', $old_meta['formatted_location'] );
+			}
+			if ( ! empty( $old_meta['tf_gallery_ids'] ) ) {
+				$new_meta['gallery'] = join( ',', $old_meta['tf_gallery_ids'] );
+			}
+			if ( ! empty( $old_meta['additional_information'] ) ) {
+				$new_meta['highlights'] = $old_meta['additional_information'];
+			}
+			if ( ! empty( $old_meta['terms_and_conditions'] ) ) {
+				$new_meta['tc'] = join( ' ', $old_meta['terms_and_conditions'] );
+			}
 
-			// if ( ! empty( $old_meta['tf_room'] ) ) {
-			// 	$rooms = unserialize( $old_meta['tf_room'][0] );
-			// 	foreach ( $rooms as $room ) {
-			// 		$new_meta['room'][] = [
-			// 			"enable"      => "1",
-			// 			"title"       => $room['name'],
-			// 			"adult"       => $room['pax'],
-			// 			"description" => $room['short_desc'],
-			// 			"pricing-by"  => "1",
-			// 			"price"       => $room['sale_price'] ?? $room['price'],
-			// 		];
-			// 	}
-			// }
+			if ( ! empty( $old_meta['tf_room'] ) ) {
+				$rooms = unserialize( $old_meta['tf_room'][0] );
+				foreach ( $rooms as $room ) {
+					$new_meta['room'][] = [
+						"enable"      => "1",
+						"title"       => $room['name'],
+						"adult"       => $room['pax'],
+						"description" => $room['short_desc'],
+						"pricing-by"  => "1",
+						"price"       => $room['sale_price'] ?? $room['price'],
+					];
+				}
+			}
 
-			// if ( ! empty( $old_meta['tf_faqs'] ) ) {
-			// 	$faqs = unserialize( $old_meta['tf_faqs'][0] );
-			// 	foreach ( $faqs as $faq ) {
-			// 		$new_meta['faq'][] = [
-			// 			'title'       => $faq['name'],
-			// 			'description' => $faq['desc'],
-			// 		];
-			// 	}
-			// }
+			if ( ! empty( $old_meta['tf_faqs'] ) ) {
+				$faqs = unserialize( $old_meta['tf_faqs'][0] );
+				foreach ( $faqs as $faq ) {
+					$new_meta['faq'][] = [
+						'title'       => $faq['name'],
+						'description' => $faq['desc'],
+					];
+				}
+			}
 
-			// update_post_meta(
-			// 	$hotel->ID,
-			// 	'tf_hotel',
-			// 	$new_meta
-			// );
+			update_post_meta(
+				$hotel->ID,
+				'tf_hotel',
+				$new_meta
+			);
 
 		}
 		// wp_die();
@@ -1058,6 +1056,56 @@ function tf_migrate_data() {
 }
 
 add_action( 'init', 'tf_migrate_data' );
+
+
+function tf_migrate_option_data(){
+	/** Tours Migrations */
+	$tours = get_posts( [ 'post_type' => 'tf_tours', 'numberposts' => - 1, ] ); 
+	foreach ( $tours as $tour ) {
+		if($tour->ID == '58738'){
+			$old_meta = get_post_meta( $tour->ID ); 
+			$tour_options         = unserialize( $old_meta['tf_tours_option'][0] );
+			
+			if(is_array($tour_options['hightlights_thumbnail'])){
+				$tour_options['hightlights_thumbnail'] = $tour_options['hightlights_thumbnail']['url'];
+			}
+			if(is_array($tour_options['include-exclude-bg'])){
+				$tour_options['include-exclude-bg'] = $tour_options['include-exclude-bg']['url'];
+			}
+			update_post_meta(
+				$tour->ID,
+				'tf_tours',
+				$tour_options
+			);
+		}
+		
+		
+	}
+	/** Hotel Migrations */
+	$hotels = get_posts( [ 'post_type' => 'tf_hotel', 'numberposts' => - 1, ] ); 
+	
+	foreach ( $hotels as $hotel ) {
+		if($hotel->ID == '59197'){
+			
+			$old_meta = get_post_meta( $hotel->ID ); 
+			$hotel_options         = unserialize( $old_meta['tf_hotel'][0] );
+		 
+			// $tour_options = serialize( $tour_options );
+			update_post_meta(
+				$hotel->ID,
+				'tf_hotels',
+				$hotel_options
+			);
+			tf_var_dump($hotel_options);
+		}
+		
+		
+	}
+	
+	wp_die();
+}
+// add_action( 'init', 'tf_migrate_option_data' );
+
 
 /*
  * Search form tab type check
