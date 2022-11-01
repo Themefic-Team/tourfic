@@ -49,9 +49,9 @@ if ( ! class_exists( 'TF_map' ) ) {
               if ( empty( $args['address_field'] ) ) {
                 echo '<div class="tf--map-search">';
                 if( !empty($mapdata['address']) ){
-                    echo '<input type="text" name="'. esc_attr( $this->field_name( ) ). '[address]' .'" value="'. esc_attr( $mapdata['address'] ) .'" placeholder="' . esc_attr( $args['placeholder'] ) . '" />';
+                    echo '<input type="text" class="tf_gmap_address" name="'. esc_attr( $this->field_name( ) ). '[address]' .'" value="'. esc_attr( $mapdata['address'] ) .'" placeholder="' . esc_attr( $args['placeholder'] ) . '" />';
                 }else{
-                    echo '<input type="text" name="'. esc_attr( $this->field_name( ) ). '[address]' .'" value="'. esc_attr( $value['address'] ) .'" placeholder="' . esc_attr( $args['placeholder'] ) . '" />';
+                    echo '<input type="text" class="tf_gmap_address" name="'. esc_attr( $this->field_name( ) ). '[address]' .'" value="'. esc_attr( $value['address'] ) .'" placeholder="' . esc_attr( $args['placeholder'] ) . '" />';
                 }
 
                 echo '</div>';

@@ -133,13 +133,16 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			wp_enqueue_script( 'tf-select2', '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array( 'jquery' ), TOURFIC, true );
 			wp_enqueue_script( 'wp-color-picker-alpha', TF_ADMIN_URL . 'tf-options/assets/js/wp-color-picker-alpha.js', array( 'jquery', 'wp-color-picker' ), TOURFIC, true );
 			wp_enqueue_script( 'tf-options', TF_ADMIN_URL . 'tf-options/assets/js/tf-options.js', array( 'jquery', 'wp-color-picker' ), TOURFIC, true );
+			$tf_google_map = defined( 'TF_PRO' ) && !empty(tfopt('google-page-option')) ? tfopt('google-page-option') : "false";
 			wp_localize_script( 'tf-options', 'tf_options', array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'nonce'    => wp_create_nonce( 'tf_options_nonce' ),
+				'gmaps'	   => $tf_google_map
 			) );
-
+      		if($tf_google_map!="googlemap"){
 			wp_enqueue_script( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.js' ), array( 'jquery' ), '1.9', true );
 			wp_enqueue_style( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.css' ), array(), '1.9' );
+			}
 			wp_enqueue_script( 'jquery-ui-autocomplete' );
 
 		}
