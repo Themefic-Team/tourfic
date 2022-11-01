@@ -165,8 +165,8 @@
                    var $tffields = $(this);
                     if ($tffields.length) {
                         // alert($tffields.length);
-                            var normal_ruleset = $.csf_deps.createRuleset(),
-                            global_ruleset = $.csf_deps.createRuleset(),
+                            var normal_ruleset = $.tf_deps.createRuleset(),
+                            global_ruleset = $.tf_deps.createRuleset(),
                             normal_depends = [],
                             global_depends = [];
                     
@@ -199,11 +199,11 @@
                             });
                     
                             if (normal_depends.length) {
-                                $.csf_deps.enable($this, normal_ruleset, normal_depends);
+                                $.tf_deps.enable($this, normal_ruleset, normal_depends);
                             }
                             
                             if (global_depends.length) {
-                                $.csf_deps.enable(CSF.vars.$body, global_ruleset, global_depends);
+                                $.tf_deps.enable(TF.vars.$body, global_ruleset, global_depends);
                             }
                     }
                 });
@@ -996,7 +996,7 @@ var frame, gframe;
         if( result ) {
   
           $(controls).each(function() {
-            $(this).removeClass('csf-depend-on');
+            $(this).removeClass('tf-depend-on');
           });
   
           $(this.rules).each(function() {
@@ -1006,7 +1006,7 @@ var frame, gframe;
         } else {
   
           $(controls).each(function() {
-            $(this).addClass('csf-depend-on');
+            $(this).addClass('tf-depend-on');
           });
   
           $(this.rules).each(function() {
@@ -1036,7 +1036,7 @@ var frame, gframe;
       }
     });
   
-    $.csf_deps = {
+    $.tf_deps = {
   
       createRuleset: function() {
         return new Ruleset();
