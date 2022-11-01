@@ -7,11 +7,13 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 		public $option_id = null;
 		public $option_title = null;
+		public $option_icon = null;
 		public $option_sections = array();
 
 		public function __construct( $key, $params = array() ) {
 			$this->option_id       = $key;
 			$this->option_title    = $params['title'];
+			$this->option_icon     = $params['icon'];
 			$this->option_sections = $params['sections'];
 
 			// run only is admin panel options, avoid performance loss
@@ -100,14 +102,14 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				'manage_options',
 				$this->option_id,
 				array( $this, 'tf_options_page' ),
-				'dashicons-admin-generic',
+				$this->option_icon,
 				5
 			);
 
 			//sections as submenus
 			if ( ! empty( $this->pre_tabs ) ) {
 				foreach ( $this->pre_tabs as $key => $section ) {
-					$parent_tab_key = !empty($section['fields']) ? $key : array_key_first($section['sub_section']);
+					$parent_tab_key = ! empty( $section['fields'] ) ? $key : array_key_first( $section['sub_section'] );
 					add_submenu_page(
 						$this->option_id,
 						$section['title'],
@@ -119,7 +121,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				}
 
 				//remove first submenu
-				remove_submenu_page( $this->option_id, $this->option_id );
+//				remove_submenu_page( $this->option_id, $this->option_id );
 			}
 		}
 
@@ -163,8 +165,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<?php
 							$section_count = 0;
 							foreach ( $this->pre_tabs as $key => $section ) :
-                                $parent_tab_key = !empty($section['fields']) ? $key : array_key_first($section['sub_section']);
-                                ?>
+								$parent_tab_key = ! empty( $section['fields'] ) ? $key : array_key_first( $section['sub_section'] );
+								?>
                                 <div class="tf-admin-tab-item<?php echo ! empty( $section['sub_section'] ) ? ' tf-has-submenu' : '' ?>">
                                     <a href="#<?php echo esc_attr( $parent_tab_key ); ?>"
                                        class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>"
