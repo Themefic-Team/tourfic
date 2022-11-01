@@ -24,6 +24,11 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			$this->metabox_post_type = $params['post_type'];
 			$this->metabox_sections  = $params['sections'];
 
+            //if metabox_post_type same then merge sections
+            if( $this->metabox_post_type == $params['post_type'] ){
+                $this->metabox_sections = array_merge( $this->metabox_sections, $params['sections'] );
+            }
+
 			//load fields
 			$this->load_fields();
 
@@ -161,7 +166,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array();
 
 			if ( ! empty( $metabox_request ) && ! empty( $this->metabox_sections ) ) {
-				foreach ( $this->metabox_sections as $section ) { 
+				foreach ( $this->metabox_sections as $section ) {
 					if ( ! empty( $section['fields'] ) ) {
 						
 						foreach ( $section['fields'] as $field ) {
