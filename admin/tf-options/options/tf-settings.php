@@ -5,6 +5,7 @@ defined( 'ABSPATH' ) || exit;
 TF_Settings::option( 'tf_settings', array(
 	'title'    => __( 'Tourfic Settings ', 'tourfic' ),
 	'icon'     => 'dashicons-palmtree',
+	'position' => 25,
 	'sections' => array(
 		'general'       => array(
 			'title'  => esc_html__( 'General', 'tourfic' ),
