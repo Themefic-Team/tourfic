@@ -338,7 +338,6 @@ function tourfic_posts_navigation($wp_query = '') {
 	}
 	$max_num_pages = $wp_query->max_num_pages;
 	$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-	$big = 999999999;
 	echo "<div id='tf_posts_navigation_bar'>";
 	echo paginate_links( array(
 	    'current' => $paged,

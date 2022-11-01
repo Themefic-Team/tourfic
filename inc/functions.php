@@ -881,11 +881,7 @@ function tf_search_result_ajax_sidebar() {
 
 			}
 		}
-		?>
-		<div class="tf_posts_navigation">
-			<?php tourfic_posts_navigation( $loop ); ?>
-		</div>
-		<?php
+		
 		if ( ! in_array( 0, $not_found ) ) {
 			echo '<div class="tf-nothing-found">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 		}

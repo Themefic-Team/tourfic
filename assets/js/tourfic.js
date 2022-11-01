@@ -442,6 +442,9 @@
                 filter_xhr.abort();
             }
 
+            
+            //var pagination_url = '/?place=' + dest + '&adults=' + adults + '&children=' + children + '&type=' + posttype;
+            //formData.append('pagination_url', pagination_url);
             filter_xhr = $.ajax({
                 type: 'post',
                 url: tf_params.ajax_url,
@@ -461,7 +464,7 @@
                 complete: function (data) {
                     $('.archive_ajax_result').unblock();
                 },
-                success: function (data) {
+                success: function (data,e) {
                     $('.archive_ajax_result').unblock();
 
                     $('.archive_ajax_result').html(data);

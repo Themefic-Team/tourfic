@@ -25,7 +25,7 @@ CSF::createSection( $prefix, array(
 		array(
 			'id'          => 'posts_per_page',
 			'type'        => 'number',
-			'title'       => __( 'Input posts per page', 'tourfic' ),
+			'title'       => __( 'Search result posts per page', 'tourfic' ),
 
 		),
 
