@@ -49,6 +49,8 @@
             }
             // url hash update
             window.location.hash = '#tab=' + tabId;
+            
+            $(".tf-admin-tab").removeClass('active');
         });
 
         /*
@@ -158,8 +160,7 @@
         */
         TF_dependency();
         function TF_dependency (){
-            $('.tf-tab-content').each(function () {
-        
+            $('.tf-tab-content, .tf-taxonomy-metabox').each(function () { 
                 var $this = $(this);
                 $this.find('[data-controller]').each(function (){
                    var $tffields = $(this);

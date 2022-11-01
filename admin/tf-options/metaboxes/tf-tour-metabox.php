@@ -9,7 +9,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 		// General
 		'general' => array(
 			'title'  => __( 'General', 'tourfic' ),
-			'icon'   => 'fa-solid fa-location-dot',
+			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
 					'id'       => 'tour_as_featured',
@@ -70,7 +70,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 		// Information
 		'information' => array(
 			'title'  => __( 'Information', 'tourfic' ),
-			'icon'   => 'fa-solid fa-location-dot',
+			'icon'   => 'fa-solid fa-circle-info',
 			'fields' => array(
 				array(
 					'id'       => 'duration',
@@ -108,7 +108,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 		// Contact Info
 		'contact_info' => array(
 			'title'  => __( 'Contact Info', 'tourfic' ),
-			'icon'   => 'fa-solid fa-location-dot',
+			'icon'   => 'fa-solid fa-address-book',
 			'fields' => array(
 				array(
 					'id'       => '',
@@ -143,7 +143,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 		// //  Tour Extra
 		'tour_extra' => array(
 			'title'  => __( 'Tour Extra', 'tourfic' ),
-			'icon'   => 'fa-solid fa-location-dot',
+			'icon'   => 'fa-solid fa-route',
 			'fields' => array(
 				array(
 					'id'     => 'tour-extra',
@@ -181,7 +181,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 		// // Price
 		'price' => array(
 			'title'  => __( 'Price Settings', 'tourfic' ),
-			'icon'   => 'fa-solid fa-location-dot',
+			'icon'   => 'fa-solid fa-money-check',
 			'fields' => array(
 				array(
 					'id'       => 'pricing',
@@ -308,7 +308,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 		// // Availability
 		'availability' => array(
 			'title'  => __( 'Availability', 'tourfic' ),
-			'icon'   => 'fa-solid fa-location-dot',
+			'icon'   => 'fa-solid fa-clipboard',
 			'fields' => array(
 				array(
 					'id'       => 'type',
@@ -636,7 +636,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 		// // Booking
 		'booking' => array(
 			'title'  => __( 'Booking', 'tourfic' ),
-			'icon'   => 'fa-solid fa-location-dot',
+			'icon'   => 'fa-solid fa-person-walking-luggage',
 			'fields' => array(
 				array(
 					'id'       => '',
@@ -651,7 +651,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 		// // Exclude/Include
 		'exclude_Include' => array(
 			'title'  => __( 'Exclude/Include', 'tourfic' ),
-			'icon'   => 'fa-solid fa-location-dot',
+			'icon'   => 'fa-solid fa-square-check',
 			'fields' => array(
 				array(
 					'id'     => 'inc',
@@ -705,7 +705,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 		// // Itinerary
 		'itinerary' => array(
 			'title'  => __( 'Itinerary', 'tourfic' ),
-			'icon'   => 'fa-solid fa-location-dot',
+			'icon'   => 'fa-solid fa-clipboard-list',
 			'fields' => array(
 				array(
 					'id'     => 'itinerary',
@@ -747,7 +747,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 		// // FAQs
 		'faqs' => array(
 			'title'  => __( 'FAQs', 'tourfic' ),
-			'icon'   => 'fa-solid fa-location-dot',
+			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(
 				array(
 					'id'     => 'faqs',
@@ -773,7 +773,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 		// // Terms & Conditions
 		'terms_and_conditions' => array(
 			'title'  => __( 'Terms & Conditions', 'tourfic' ),
-			'icon'   => 'fa-solid fa-location-dot',
+			'icon'   => 'fa-regular fa-square-check',
 			'fields' => array(
 				array(
 					'id'    => 'terms_conditions',
@@ -787,7 +787,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 		// // Settings
 		'settings' => array(
 			'title'  => __( 'Settings', 'tourfic' ),
-			'icon'   => 'fa-solid fa-location-dot',
+			'icon'   => 'fa-solid fa-viruses',
 			'fields' => array(
 				array(
 					'id' => 'settings_headding',

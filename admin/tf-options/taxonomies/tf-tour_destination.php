@@ -7,8 +7,8 @@ TF_Taxonomy_Metabox::taxonomy( 'tf_tour_destination', array(
 	'taxonomy' => 'tour_destination',
 	'fields'   => array(
 		array(
-			'id'          => 'tourfic-image',
-			'label'       => 'Upload Destination photo',
+			'id'          => 'image',
+			'label'       => __( 'Upload destination photo', 'tourfic' ),
 			'type'        => 'image',
 		),
 	),

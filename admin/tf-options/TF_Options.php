@@ -55,13 +55,15 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		 * @author Foysal
 		 */
 		public function load_metaboxes() {
-			$metaboxes = glob( TF_ADMIN_PATH . 'tf-options/metaboxes/*.php' );
-            //pro metaboxes
-//            $pro_metaboxes = glob( TF_PRO_ADMIN_PATH . 'tf-options/metaboxes/*.php' );
-//
-//            if( !empty( $pro_metaboxes ) ) {
-//                $metaboxes = array_merge( $metaboxes, $pro_metaboxes );
-//            }
+            if($this->is_tf_pro_active()){
+	            $metaboxes = glob( TF_PRO_ADMIN_PATH . 'tf-options/metaboxes/*.php' );
+            } else {
+	            $metaboxes = glob( TF_ADMIN_PATH . 'tf-options/metaboxes/*.php' );
+            }
+
+            /*if( !empty( $pro_metaboxes ) ) {
+                $metaboxes = array_merge( $metaboxes, $pro_metaboxes );
+            }*/
 			if ( ! empty( $metaboxes ) ) {
 				foreach ( $metaboxes as $metabox ) {
 					if ( file_exists( $metabox ) ) {
@@ -76,7 +78,12 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		 * @author Foysal
 		 */
 		public function load_options() {
-			$options = glob( TF_ADMIN_PATH . 'tf-options/options/*.php' );
+			if($this->is_tf_pro_active()){
+				$options = glob( TF_PRO_ADMIN_PATH . 'tf-options/options/*.php' );
+			} else {
+				$options = glob( TF_ADMIN_PATH . 'tf-options/options/*.php' );
+			}
+
 			if ( ! empty( $options ) ) {
 				foreach ( $options as $option ) {
                     if ( file_exists( $option ) ) {
@@ -91,7 +98,12 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		 * @author Foysal
 		 */
 		public function load_taxonomy() {
-			$taxonomies = glob( TF_ADMIN_PATH . 'tf-options/taxonomies/*.php' );
+			if($this->is_tf_pro_active()){
+				$taxonomies = glob( TF_PRO_ADMIN_PATH . 'tf-options/taxonomies/*.php' );
+			} else {
+				$taxonomies = glob( TF_ADMIN_PATH . 'tf-options/taxonomies/*.php' );
+			}
+
 			if ( ! empty( $taxonomies ) ) {
 				foreach ( $taxonomies as $taxonomy ) {
 					if ( file_exists( $taxonomy ) ) {
@@ -224,6 +236,13 @@ if ( ! class_exists( 'TF_Options' ) ) {
             </div>
 			<?php
 		}
+
+        public function is_tf_pro_active(){
+	        if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
+                return true;
+	        }
+            return false;
+        }
 
 	}
 }
