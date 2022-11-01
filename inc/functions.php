@@ -1081,6 +1081,12 @@ function tf_migrate_option_data(){
 		
 		
 	}
+	/** Tour Destinations Image Fix */
+	$tour_destinations = get_terms( [
+		'taxonomy'   => 'tour_destination',
+		'hide_empty' => false,
+	] );
+
 	/** Hotel Migrations */
 	$hotels = get_posts( [ 'post_type' => 'tf_hotel', 'numberposts' => - 1, ] ); 
 	
@@ -1101,7 +1107,11 @@ function tf_migrate_option_data(){
 		
 		
 	}
-	
+
+	/** settings option migration */
+	$old_setting_option = get_option( 'tourfic_opt' );
+	tf_var_dump($old_setting_option);
+	update_option( 'tf_settings', $old_setting_option );
 	wp_die();
 }
 // add_action( 'init', 'tf_migrate_option_data' );

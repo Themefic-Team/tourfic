@@ -40,6 +40,8 @@
                 height: 48px;
                 color: #363e4a;
                 font-size: 14px;
+                white-space: nowrap;
+                overflow: hidden;
             }
             a.tf-media-upload{
                 height: 48px;
@@ -72,6 +74,8 @@
                     font-size: 14px;
                     background: #fff;
                     border: 1px solid #C4CBD4;
+                    white-space: nowrap;
+                    overflow: hidden;
                 }
                 a.tf-media-upload{
                     height: 48px;

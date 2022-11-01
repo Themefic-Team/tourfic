@@ -6,11 +6,10 @@ TF_Taxonomy_Metabox::taxonomy( 'tf_hotel_feature', array(
 	'title'    => 'Tour Settings',
 	'taxonomy' => 'hotel_feature',
 	'fields'   => array( 
-
 		array(
 			'id'      => 'icon-type',
-			'type'    => 'button_set',
-			'label'   => __('Select Icon type', 'tourfic'),
+			'type'    => 'select',
+			'title'   => __('Select Icon type', 'tourfic'),
 			'options' => array(
 				'fa' => __('Font Awesome', 'tourfic'),
 				'c'  => __('Custom', 'tourfic'),
@@ -21,34 +20,29 @@ TF_Taxonomy_Metabox::taxonomy( 'tf_hotel_feature', array(
 		array(
 			'id'         => 'icon-fa',
 			'type'       => 'icon',
-			'label'      => __('Select Font Awesome Icon', 'tourfic'),
+			'title'      => __('Select Font Awesome Icon', 'tourfic'), 
 			'dependency' => array( 'icon-type', '==', 'fa' ),
 		),
-
 		array(
 			'id'             => 'icon-c',
 			'type'           => 'image',
-			'label'          => __('Upload Custom Icon', 'tourfic'),
-			'library'        => 'image',
+			'label'          => __('Upload Custom Icon', 'tourfic'), 
 			'placeholder'    => __('No Icon selected', 'tourfic'),
 			'button_title'   => __('Add Icon', 'tourfic'),
 			'remove_title'   => __('Remove Icon', 'tourfic'),
 			'preview_width'  => '50',
-			'preview_height' => '50',
+			'preview_height' => '50', 
 			'dependency'     => array( 'icon-type', '==', 'c' ),
 		),
-
 		array(
 			'id'         => 'dimention',
-			'type'       => 'dimensions',
-			'title'      => __('Custom Icon Size', 'tourfic'),
-			'desc'       => __( 'Size in "px"', 'tourfic' ),
+			'type'       => 'number',
+			'label'      => __('Custom Icon Size', 'tourfic'),
+			'description'       => __( 'Size in "px"', 'tourfic' ),
 			'show_units' => false,
 			'height'     => false,
-			'default'    => array(
-				'width' => '20',
-			),
+			'default'    => '20', 
 			'dependency' => array( 'icon-type', '==', 'c' ),
-		),
+		), 
 	),
 ) );

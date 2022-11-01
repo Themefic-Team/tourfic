@@ -558,11 +558,12 @@ body.tf-modal-open {
   padding: 12px 8px 12px 12px;
   border: none;
   border: 1px solid #C4CBD4;
-  background: #F5F8FF;
+  background-color: #F5F8FF;
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
-  font-size: 14px; }
+  font-size: 14px;
+  line-height: 14px; }
   .tf-field-select select.tf-select:focus {
     outline: none; }
 
@@ -771,7 +772,9 @@ body.tf-modal-open {
     border-radius: 4px;
     height: 48px;
     color: #363e4a;
-    font-size: 14px; }
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden; }
   .tf-field-image .tf-fieldset .tf-fieldset-media a.tf-media-upload {
     height: 48px;
     width: 9%;
@@ -794,7 +797,9 @@ body.tf-modal-open {
       color: #363e4a;
       font-size: 14px;
       background: #fff;
-      border: 1px solid #C4CBD4; }
+      border: 1px solid #C4CBD4;
+      white-space: nowrap;
+      overflow: hidden; }
     .tf-taxonomy-metabox .tf-field-image .tf-fieldset .tf-fieldset-media a.tf-media-upload {
       height: 48px;
       width: 14%;

@@ -2,7 +2,7 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-TF_Settings::option( 'tf-settings', array( 
+TF_Settings::option( 'tf_settings', array( 
 	'title' => __( 'Tourfic Settings ', 'tourfic' ),
 	'menu_title'      => __( 'Tourfic Settings', 'tourfic' ),
 	'menu_slug'       => 'tourfic',
@@ -161,7 +161,7 @@ TF_Settings::option( 'tf-settings', array(
 					'subtitle'   => __( 'Add class <code>tf-reg-popup</code> to trigger the popup', 'tourfic' ),
 					'label_on'    => __( 'Enabled', 'tourfic' ),
 					'label_off'   => __( 'Disabled', 'tourfic' ),
-					'text_width' => 100,
+					'width' => 100,
 					'default'    => true,
 				),
 
@@ -799,7 +799,7 @@ TF_Settings::option( 'tf-settings', array(
 					'is_pro'	=> true,
 					'label_on' => __( 'Enabled', 'tourfic' ),
    					'label_off' => __( 'Disabled', 'tourfic' ),
-					'text_width' => 100,
+					'width' => 100,
 					'default'    => false
 				),
 		
@@ -811,7 +811,7 @@ TF_Settings::option( 'tf-settings', array(
 					'is_pro'	=> true,
 					'label_on' => __( 'Enabled', 'tourfic' ),
    					'label_off' => __( 'Disabled', 'tourfic' ),
-					'text_width' => 100,
+					'width' => 100,
 					'default'    => false
 				),
 		
@@ -829,7 +829,7 @@ TF_Settings::option( 'tf-settings', array(
 					'is_pro'	=> true,
 					'label_on' => __( 'Enabled', 'tourfic' ),
    					'label_off' => __( 'Disabled', 'tourfic' ),
-					'text_width' => 100
+					'width' => 100
 				),
 		
 				array(
@@ -840,7 +840,7 @@ TF_Settings::option( 'tf-settings', array(
 					'is_pro'	=> true,
 					'label_on' => __( 'Enabled', 'tourfic' ),
    					'label_off' => __( 'Disabled', 'tourfic' ),
-					'text_width' => 100
+					'width' => 100
 				),
 		
 				array(
@@ -851,7 +851,7 @@ TF_Settings::option( 'tf-settings', array(
 					'is_pro'	=> true,
 					'label_on' => __( 'Enabled', 'tourfic' ),
    					'label_off' => __( 'Disabled', 'tourfic' ),
-					'text_width' => 100
+					'width' => 100
 				),
 		
 				array(
@@ -863,7 +863,7 @@ TF_Settings::option( 'tf-settings', array(
 					'is_pro'	=> true,
 					'label_on' => __( 'Enabled', 'tourfic' ),
    					'label_off' => __( 'Disabled', 'tourfic' ),
-					'text_width' => 100
+					'width' => 100
 				),
 		
 

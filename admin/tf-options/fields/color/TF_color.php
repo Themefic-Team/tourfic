@@ -10,7 +10,8 @@ if ( ! class_exists( 'TF_color' ) ) {
 		}
 
 		public function render() {
-			$color_value = unserialize( $this->value );
+			$color_value = $_value = ( ! is_array( $this->value ) ) ? unserialize( $this->value ) : $this->value; ;
+
 			if ( isset( $this->field['colors'] ) && $this->field['multiple'] ) {
 				$inline = ( isset( $this->field['inline'] ) && $this->field['inline'] ) ? 'tf-inline' : '';
 				echo '<ul class="tf-color-group ' . esc_attr( $inline ) . '">';
@@ -18,7 +19,7 @@ if ( ! class_exists( 'TF_color' ) ) {
 				foreach ( $this->field['colors'] as $key => $value ) {
 					$_value = ( ! empty( $color_value[ $key ] ) ) ? $color_value[ $key ] : '';
 					echo '<li>';
-					echo '<label for="' . esc_attr( $this->field_name() ) . '[' . $key . ']">' . esc_html( $value ) . '</label>';
+					echo '<label for="' . esc_attr( $this->field_name() ) . '[' . $key . ']">' . esc_html( $value ) .'</label>';
 					echo '<input type="text" name="' . esc_attr( $this->field_name() ) . '[' . $key . ']" id="' . esc_attr( $this->field_name() ) . '[' . $key . ']" value="' . esc_attr( $_value ) . '" class="tf-color" data-alpha-enabled="true" />';
 					echo '</li>';
 				}
