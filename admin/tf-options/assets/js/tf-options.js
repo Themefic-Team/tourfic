@@ -49,6 +49,8 @@
             }
             // url hash update
             window.location.hash = '#tab=' + tabId;
+            
+            $(".tf-admin-tab").removeClass('active');
         });
 
         /*
