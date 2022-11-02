@@ -939,4 +939,118 @@ function tf_tours_grid_slider($atts, $content = null){
 	return ob_get_clean();
 }
 
+/**
+ * Recent blog shortcode
+ * @author Abu Hena
+ * @since 2.9.0
+ */
+add_shortcode( 'tf_recent_blog', 'tf_recent_blog_callback' );
+function tf_recent_blog_callback($atts, $content = null){
+	extract(
+		shortcode_atts(
+			array(
+				'title'   => '',
+				'subtitle'   => '',
+				'count'       => '5',
+				'category'       => '',
+
+			),
+			$atts
+		)
+	);
+	
+	$args = array(
+		'post_type'      => 'post',
+		'post_status'    => 'publish',
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+		'posts_per_page' => $count,
+	);
+	//Check if destination selected/choosen
+	if( !empty( $categories )){
+		$categories = explode(',',$categories);
+		$args['tax_query'] = array(
+			'relation' => 'AND',
+			array(
+				'taxonomy' => 'category',
+				'field'    => 'term_id',
+				'terms'    => $categories,
+			)
+		);
+	}
+	$loop = new WP_Query($args);
+	ob_start();
+
+	?>
+	<?php if ( $loop->have_posts() ) { ?>
+        <div class="tf-recent-blog-wrapper">
+            <div class="tf-heading">
+				<?php
+				if ( ! empty( $title ) ) {
+					echo '<h2>' . esc_html( $title ) . '</h2>';
+				}
+				if ( ! empty( $subtitle ) ) {
+					echo '<p>' . esc_html( $subtitle ) . '</p>';
+				}
+				?>
+            </div>
+
+
+            <div class="recent-blogs">
+				<?php while ( $loop->have_posts() ) {
+					$loop->the_post();
+					$post_id = get_the_ID();
+					if($loop->current_post == 0){
+						echo  "<div class='post-section-one'>";
+					}
+
+					if($loop->current_post <= 2){
+
+					?>
+					
+                    <div class="tf-single-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                        <div class="tf-post-content">
+                            <div class="tf-post-desc">
+                                <h3>
+                                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+                                </h3>
+                                <p><?php echo wp_trim_words( get_the_excerpt(), 10 ); ?></p>
+
+                            </div>
+                        </div>
+                    </div>
+					<!-- </div> -->
+					<?php
+					if($loop->current_post == 2){
+						echo  "</div>";
+					}
+					if($loop->current_post == 3){
+						echo  "<div class='post-section-two'>";
+					}
+				}else{
+						?>
+						<!-- <div class="post-section-two"> -->
+							<div class="tf-single-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+								<div class="tf-post-content">
+									<div class="tf-post-desc">
+										<h3>
+											<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+										</h3>
+										<p><?php echo wp_trim_words( get_the_excerpt(), 10 ); ?></p>
+
+									</div>
+								</div>
+							</div>
+					<!-- </div> -->
+					<?php } ?>
+				<?php } ?>
+            </div>
+        </div>
+	<?php }else{
+		echo __( 'No posts found', 'tourfic' );
+	}
+	wp_reset_postdata(); 
+	return ob_get_clean();
+}
+
 
