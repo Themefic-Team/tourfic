@@ -103,23 +103,23 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				$this->option_title,
 				'manage_options',
 				$this->option_id,
-				array( $this, 'tf_dashboard_page' ),
+				array( $this, 'tf_options_page' ),
 				$this->option_icon,
 				$this->option_position
 			);
 
+            //Dashboard submenu
 			add_submenu_page(
 				$this->option_id,
-				'Dashboard',
-				'Dashboard',
+				__('Dashboard', 'tourfic'),
+				__('Dashboard', 'tourfic'),
 				'manage_options',
-				'tf_dashboard',
-				array( $this, 'tf_dashboard_page' )
+				$this->option_id . '#tab=dashboard',
+				'__return_null',
 			);
 
 			//sections as submenus
 			if ( ! empty( $this->pre_tabs ) ) {
-				$count = 0;
 				foreach ( $this->pre_tabs as $key => $section ) {
 					$parent_tab_key = ! empty( $section['fields'] ) ? $key : array_key_first( $section['sub_section'] );
 					add_submenu_page(
@@ -128,15 +128,14 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						$section['title'],
 						'manage_options',
 						$this->option_id . '#tab=' . esc_attr( $parent_tab_key ),
-						array( $this, 'tf_options_page' )
-//						'__return_null'
+						'__return_null',
 					);
-					$count ++;
 				}
+            }
 
-				// remove first submenu
-				// remove_submenu_page( $this->option_id, $this->option_id );
-			}
+			// remove first submenu
+			remove_submenu_page( $this->option_id, $this->option_id );
+
 		}
 
 		/**
@@ -147,8 +146,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			?>
             <div class="tf-deshboard-wrapper">
                 <div class="tf-deshboard-version">
-                    <span><?php _e( "Tourfic", "tourfic" ); ?><div
-                                class="version"><?php echo esc_attr( TOURFIC ); ?></div><span><?php echo sprintf( 'There is a new version of Tourfic available for your update. <a href=""> View version 2.8.10 details </a> or <a href=""> update now</a>.' ); ?></span></span>
+                    <span><?php _e( "Tourfic", "tourfic" ); ?><div class="version"><?php echo esc_attr( TOURFIC ); ?></div></span>
                 </div>
                 <div class="tf-deshboard-overview">
                     <div class="tf-details-overview">
@@ -369,94 +367,96 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			if ( empty( $tf_option_value ) ) {
 				$tf_option_value = array();
 			}
-			if ( empty( $this->option_sections ) ) {
-				return;
-			}
-			?>
-            <div class="tf-option-wrapper">
-                <form method="post" action="" class="tf-option-form" enctype="multipart/form-data">
-                    <!-- Header -->
-                    <div class="tf-option-header">
-                        <div class="tf-option-header-left">
-                            <h2><a href="#" class="tf-mobile-tabs"><i class="fa-solid fa-bars"></i></a><?php echo esc_html( $this->option_title ); ?></h2>
-                            <span><?php _e( 'By', 'tourfic' ) ?></span>
-                            <a href="https://tourfic.com/" target="_blank"><?php _e( 'Themefic', 'tourfic' ) ?></a>
-                        </div>
-                        <div class="tf-option-header-right">
-                            <div class="tf-option-header-actions">
-                                <input type="submit" class="tf-admin-btn tf-btn-secondary" value="<?php esc_attr_e( 'Save', 'tourfic' ); ?>">
+
+			$this->tf_dashboard_page();
+
+			if ( ! empty( $this->option_sections ) ) :
+				?>
+                <div class="tf-option-wrapper" style="display: none">
+                    <form method="post" action="" class="tf-option-form" enctype="multipart/form-data">
+                        <!-- Header -->
+                        <div class="tf-option-header">
+                            <div class="tf-option-header-left">
+                                <h2><a href="#" class="tf-mobile-tabs"><i class="fa-solid fa-bars"></i></a><?php echo esc_html( $this->option_title ); ?></h2>
+                                <span><?php _e( 'By', 'tourfic' ) ?></span>
+                                <a href="https://tourfic.com/" target="_blank"><?php _e( 'Themefic', 'tourfic' ) ?></a>
+                            </div>
+                            <div class="tf-option-header-right">
+                                <div class="tf-option-header-actions">
+                                    <input type="submit" class="tf-admin-btn tf-btn-secondary" value="<?php esc_attr_e( 'Save', 'tourfic' ); ?>">
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Body -->
-                    <div class="tf-option">
-                        <div class="tf-admin-tab tf-option-nav">
-							<?php
-							$section_count = 0;
-							foreach ( $this->pre_tabs as $key => $section ) :
-								$parent_tab_key = ! empty( $section['fields'] ) ? $key : array_key_first( $section['sub_section'] );
-								?>
-                                <div class="tf-admin-tab-item<?php echo ! empty( $section['sub_section'] ) ? ' tf-has-submenu' : '' ?>">
-                                    <a href="#<?php echo esc_attr( $parent_tab_key ); ?>"
-                                       class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>"
-                                       data-tab="<?php echo esc_attr( $parent_tab_key ) ?>">
-										<?php echo ! empty( $section['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $section['icon'] ) . '"></i></span>' : ''; ?>
-										<?php echo $section['title']; ?>
-                                    </a>
+                        <!-- Body -->
+                        <div class="tf-option">
+                            <div class="tf-admin-tab tf-option-nav">
+								<?php
+								$section_count = 0;
+								foreach ( $this->pre_tabs as $key => $section ) :
+									$parent_tab_key = ! empty( $section['fields'] ) ? $key : array_key_first( $section['sub_section'] );
+									?>
+                                    <div class="tf-admin-tab-item<?php echo ! empty( $section['sub_section'] ) ? ' tf-has-submenu' : '' ?>">
+                                        <a href="#<?php echo esc_attr( $parent_tab_key ); ?>"
+                                           class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>"
+                                           data-tab="<?php echo esc_attr( $parent_tab_key ) ?>">
+											<?php echo ! empty( $section['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $section['icon'] ) . '"></i></span>' : ''; ?>
+											<?php echo $section['title']; ?>
+                                        </a>
 
-									<?php if ( ! empty( $section['sub_section'] ) ): ?>
-                                        <ul class="tf-submenu">
-											<?php foreach ( $section['sub_section'] as $sub_key => $sub ): ?>
-                                                <li>
-                                                    <a href="#<?php echo esc_attr( $sub_key ); ?>"
-                                                       class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>"
-                                                       data-tab="<?php echo esc_attr( $sub_key ) ?>">
+										<?php if ( ! empty( $section['sub_section'] ) ): ?>
+                                            <ul class="tf-submenu">
+												<?php foreach ( $section['sub_section'] as $sub_key => $sub ): ?>
+                                                    <li>
+                                                        <a href="#<?php echo esc_attr( $sub_key ); ?>"
+                                                           class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>"
+                                                           data-tab="<?php echo esc_attr( $sub_key ) ?>">
 														<span class="tf-tablinks-inner">
                                                             <?php echo ! empty( $sub['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $sub['icon'] ) . '"></i></span>' : ''; ?>
                                                             <?php echo $sub['title']; ?>
                                                         </span>
-                                                    </a>
-                                                </li>
-											<?php endforeach; ?>
-                                        </ul>
-									<?php endif; ?>
-                                </div>
-								<?php $section_count ++; endforeach; ?>
+                                                        </a>
+                                                    </li>
+												<?php endforeach; ?>
+                                            </ul>
+										<?php endif; ?>
+                                    </div>
+									<?php $section_count ++; endforeach; ?>
+                            </div>
+
+                            <div class="tf-tab-wrapper">
+								<?php
+								$content_count = 0;
+								foreach ( $this->option_sections as $key => $section ) : ?>
+                                    <div id="<?php echo esc_attr( $key ) ?>" class="tf-tab-content <?php echo $content_count == 0 ? 'active' : ''; ?>">
+
+										<?php
+										if ( ! empty( $section['fields'] ) ):
+											foreach ( $section['fields'] as $field ) :
+
+												$default = isset( $field['default'] ) ? $field['default'] : '';
+												$value   = isset( $tf_option_value[ $field['id'] ] ) ? $tf_option_value[ $field['id'] ] : $default;
+
+												$tf_option = new TF_Options();
+												$tf_option->field( $field, $value, $this->option_id );
+											endforeach;
+										endif; ?>
+
+                                    </div>
+									<?php $content_count ++; endforeach; ?>
+                            </div>
                         </div>
 
-                        <div class="tf-tab-wrapper">
-							<?php
-							$content_count = 0;
-							foreach ( $this->option_sections as $key => $section ) : ?>
-                                <div id="<?php echo esc_attr( $key ) ?>" class="tf-tab-content <?php echo $content_count == 0 ? 'active' : ''; ?>">
-
-									<?php
-									if ( ! empty( $section['fields'] ) ):
-										foreach ( $section['fields'] as $field ) :
-
-											$default = isset( $field['default'] ) ? $field['default'] : '';
-											$value   = isset( $tf_option_value[ $field['id'] ] ) ? $tf_option_value[ $field['id'] ] : $default;
-
-											$tf_option = new TF_Options();
-											$tf_option->field( $field, $value, $this->option_id );
-										endforeach;
-									endif; ?>
-
-                                </div>
-								<?php $content_count ++; endforeach; ?>
+                        <!-- Footer -->
+                        <div class="tf-option-footer">
+                            <button type="submit" class="tf-admin-btn tf-btn-secondary"><?php _e( 'Save', 'tourfic' ); ?></button>
                         </div>
-                    </div>
 
-                    <!-- Footer -->
-                    <div class="tf-option-footer">
-                        <button type="submit" class="tf-admin-btn tf-btn-secondary"><?php _e( 'Save', 'tourfic' ); ?></button>
-                    </div>
-
-					<?php wp_nonce_field( 'tf_option_nonce_action', 'tf_option_nonce' ); ?>
-                </form>
-            </div>
+						<?php wp_nonce_field( 'tf_option_nonce_action', 'tf_option_nonce' ); ?>
+                    </form>
+                </div>
 			<?php
+			endif;
 		}
 
 		/**
@@ -528,5 +528,16 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			echo json_encode( $response );
 			wp_die();
 		}
+
+		/*
+		 * Get current page url
+		 * @return string
+		 * @author Foysal
+		 */
+		public function get_current_page_url() {
+            $page_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+            return $page_url;
+        }
 	}
 }

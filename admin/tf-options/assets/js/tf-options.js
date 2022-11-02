@@ -8,6 +8,14 @@
         */
         $(window).on('hashchange load', function () {
             let hash = window.location.hash;
+
+            if (hash.indexOf('tab=dashboard') > -1) {
+                $('.tf-deshboard-wrapper').show();
+                $('.tf-option-wrapper').hide();
+            } else {
+                $('.tf-deshboard-wrapper').hide();
+                $('.tf-option-wrapper').show();
+            }
             let slug = hash.replace('#tab=', '');
 
             if (hash) {
