@@ -207,7 +207,9 @@ body.tf-modal-open {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  margin: -6px -12px -12px -12px; }
+  margin: -6px -12px -12px -12px;
+  z-index: 10;
+  position: relative; }
   @media only screen and (max-width: 991.98px) {
     .tf-option,
     .tf-admin-meta-box {
@@ -1676,6 +1678,7 @@ body.tf-modal-open {
   #tf-icon-modal .tf-modal-content .tf-modal-footer .tf-admin-btn {
     padding: 10px 24px; }
 
+    
 .tf-field-number input {
   width: 100%;
   padding: 12px 8px 12px 12px;
