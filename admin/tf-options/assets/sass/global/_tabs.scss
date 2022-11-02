@@ -8,12 +8,13 @@
     min-height: 500px;
   }
 
-  &.tf-taxonomy-metabox{
+  &.tf-taxonomy-metabox {
     display: block;
     margin: 0;
     max-width: 95%;
   }
-  .tf-admin-tab.active{
+
+  .tf-admin-tab.active {
     display: block;
     position: absolute;
     z-index: 99999;
@@ -21,14 +22,16 @@
     bottom: 0;
     @include transition(all, 0.3s, ease);
   }
+
   .tf-admin-tab {
     border-right: 1px solid $slate10;
     background-color: $slate0;
-    min-width: 220px;
+    min-width: 280px;
     @include transition(all, 0.3s, ease);
     @media #{$max991}{
       display: none;
     }
+
     a.tf-tablinks {
       font-family: 'Lato';
       font-style: normal;
@@ -141,10 +144,11 @@
   }
 
   .tf-tab-wrapper {
-    @include flex(0 0 calc(100% - 220px));
+    @include flex(0 0 calc(100% - 280px));
     @media #{$max991}{
       flex: 0 0 calc(100% - 0px);
     }
+
     .tf-tab-content {
       display: none;
 
@@ -161,6 +165,7 @@
   @media #{$max991}{
     position: relative;
   }
+
   .tf-option-header {
     @include flexbox();
     background-color: #fff;
@@ -182,13 +187,15 @@
         color: $slate80;
         line-height: 24px;
 
-        a{
+        a {
           display: none;
-          i{
+
+          i {
             color: $slate80;
             font-size: 24px;
             margin-right: 10px;
           }
+
           @media #{$max991}{
             display: inline-block;
           }
@@ -240,294 +247,11 @@
   margin: 0;
 
   .tf-tab-wrapper {
-    @include flex(0 0 calc(100% - 221px));
+    @include flex(0 0 calc(100% - 281px));
     background-color: #fff;
     padding: 12px 0;
     @media #{$max991}{
       flex: 0 0 calc(100% - 0px);
-    }
-  }
-}
-
-.tf-deshboard-wrapper{
-  margin-top: 20px;
-  margin-right: 20px;
-  .tf-deshboard-version{
-    background-color: #fff;
-    padding: 16px;
-    box-shadow: inset 0px -1px 0px rgba(225, 229, 234, 0.5);
-    border-radius: 8px;
-    span{
-      display: flex;
-      align-items: center;
-      font-family: 'Lato';
-      font-style: normal;
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 28px;
-      color: $slate80;
-      letter-spacing: 0.02em;
-      .version{
-        font-family: 'Lato';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 14px;
-        line-height: 20px;
-        display: inline-block;
-        background-color: $blue60;
-        border-radius: 4px;
-        padding: 0px 8px;
-        color: #fff;
-        margin: 0px 5px;
-        
-      }
-      span{
-        font-family: 'Lato';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px !important;
-        line-height: 20px;
-        letter-spacing: 0.02em;
-        color: $slate60;
-        display: flow-root;
-        a{
-          color: $blue60;
-          font-weight: 600;
-        }
-      }
-    }
-  }
-
-  .tf-deshboard-overview{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    @media #{$maxmin1199}{
-      display: flow-root;
-    }
-    .tf-details-overview{
-      width: 69%;
-      @media #{$maxmin1199}{
-        width: 100%;
-      }
-      
-      span.tf-details-overview-title{
-        font-family: 'Lato';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 24px;
-        color: $slate60;
-        margin-top: 40px;
-        display: block;
-      }
-
-      .tf-details-overview-items{
-        display: flex;
-        justify-content: space-between;
-        @media #{$maxmin767}{
-          display: flow-root;
-        }
-        .tf-details-single-items{
-          background-color: #fff;
-          width: 24%;
-          box-shadow: 0px 24px 48px rgba(67, 79, 96, 0.16);
-          border-radius: 8px;
-          padding-bottom: 20px;
-          margin: 8px 0px;
-          @media #{$maxmin767}{
-            width: 48%;
-            float: left;
-            margin: 8px 1%;
-          }
-          h3{
-            span{
-              width: 40px;
-              margin: 0;
-              font-size: 20px;
-              font-weight: 400;
-              line-height: 0px;
-              margin-right: 10px;
-              font-size: 14px;
-              i{
-                width: 40px;
-                height: 40px;
-                background: $slate10;
-                border-radius: 20px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: $slate60;
-                margin-right: 10px;
-              }
-            }
-            p{
-              display: inline-block;
-              color: #fff;
-              padding: 3px 5px 3px 5px;
-              border-radius: 3px;
-              text-align: center;
-              font-size: 12px;
-              font-weight: 600;
-              line-height: 13px;
-              background: #006600;
-              margin-left: 3px;
-            }
-            text-align: center;
-            padding: 16px 5px;
-            font-family: 'Lato';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 16px;
-            line-height: 24px;
-            margin: 0;
-            color: $slate80;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: $slate5;
-            border-radius: 8px 8px 0px 0px;
-            transition: .3s all ease;
-            
-          }
-          span{
-            font-family: 'Lato';
-            font-weight: 700;
-            font-size: 30px;
-            line-height: 40px;
-            color: $slate80;
-            text-align: center;
-            display: block;
-            margin: 20px 0px;
-            @media #{$max1366}{
-              margin: 14px 0px;
-            }
-          }
-          a{
-            text-decoration: none;
-            color: $blue60;
-            font-weight: 600;
-            display: block;
-            text-align: center;
-            font-family: 'Lato';
-            font-size: 16px;
-            transition: .3s all ease;
-          }
-
-          &:hover {
-            h3{
-              background-color: $blue5;
-              i{
-                color: $blue60;
-                background-color: $blue10;
-              }
-            }
-            a{
-              text-decoration: underline;
-              &:focus {
-                outline: none;
-              }
-            }
-          }
-        }
-      }
-    }
-    .tf-details-instractions{
-      width: 30%;
-      @media #{$maxmin1199}{
-        width: 100%;
-      }
-      span.tf-details-overview-title{
-        font-family: 'Lato';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 24px;
-        color: $slate60;
-        margin-top: 40px;
-        display: block;
-      }
-      iframe{
-        margin: 8px 0px;
-        border-radius: 8px;
-
-        @media #{$max1366}{
-          height: 220px;
-        }
-      }
-      .tf-facebook-community{
-        background-color: $blue5;
-        padding: 16px;
-        border-radius: 8px;
-        display: flex;
-        justify-content: space-between;
-        margin: 8px 0px;
-        .icon{
-          width: 70px;
-          margin-right: 5px;
-          i{
-            background-color: $blue70;
-            height: 70px;
-            width: 70px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 70px;
-            color: #fff;
-            font-size: 31px;
-          }
-        }
-        span{
-          font-family: 'Lato';
-          font-style: normal;
-          font-weight: 400;
-          font-size: 15px;
-          line-height: 24px;
-          color: $slate60;
-          max-width: 85%;
-          a{
-            text-decoration: none;
-            color: $blue60;
-            font-weight: 600;
-          }
-        }
-      }
-      .tf-plugin-documentation{
-        background-color: #fff;
-        border-radius: 8px;
-        padding: 16px;
-        margin: 8px 0px;
-        .tf-plugin-details-info{
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          i{
-            color: $slate60;
-            font-size: 36px;
-            margin-right: 10px;
-          }
-          span{
-            font-family: 'Lato';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 24px;
-            color: $slate60;
-          }
-        }
-        .tf-plugin-document-link{
-          margin-top: 16px;
-          text-align: right;
-          a{
-            font-family: 'Lato';
-            font-style: normal;
-            font-weight: 600;
-            font-size: 16px;
-            line-height: 24px;
-            text-decoration: none;
-            color: $blue60;
-          }
-        }
-      }
     }
   }
 }
