@@ -58,7 +58,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 
             if(defined( 'TF_PRO' )){
                 wp_enqueue_script( 'Chart', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js', array( 'jquery' ), '2.6.0', true );
-                $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+                $meta = get_post_meta( get_the_ID(),'tf_tours_opt',true );
                 $itineraries = $meta['itinerary'] ? $meta['itinerary'] : null;
                 $itinerarayday = [];
                 $itineraraymeter = [];
@@ -182,7 +182,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         if( $tfhotel_min_max_query->have_posts() ):
             while( $tfhotel_min_max_query->have_posts() ) : $tfhotel_min_max_query->the_post();
                 
-                $meta = get_post_meta( get_the_ID( ), 'tf_hotel', true );
+                $meta = get_post_meta( get_the_ID( ), 'tf_tours_opt', true );
                 $rooms = !empty($meta['room']) ? $meta['room'] : '';
                 if(!empty($rooms)){
                     foreach($rooms as $singleroom){
@@ -245,7 +245,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         if( $tftours_min_max_query->have_posts() ):
             while( $tftours_min_max_query->have_posts() ) : $tftours_min_max_query->the_post();
                 
-                $meta = get_post_meta( get_the_ID( ), 'tf_tours_option', true );
+                $meta = get_post_meta( get_the_ID( ), 'tf_tours_opt', true );
                 if(!empty($meta['adult_price'])){
                     $tftours_min_maxprices[]=$meta['adult_price'];
                 }
@@ -317,7 +317,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         // Get single tour meta data
         global $post;
         if (!is_404() && !empty($post)) {
-            $meta = !empty(get_post_meta( $post->ID, 'tf_tours_option', true )) ? get_post_meta( $post->ID, 'tf_tours_option', true ) : '';
+            $meta = !empty(get_post_meta( $post->ID, 'tf_tours_opt', true )) ? get_post_meta( $post->ID, 'tf_tours_opt', true ) : '';
         }
         $tour_type = !empty($meta['type']) ? $meta['type'] : '';
 

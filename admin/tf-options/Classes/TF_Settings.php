@@ -176,7 +176,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									$total_room_details  = new WP_Query( $tf_total_hotels );
 
 									while ( $total_room_details->have_posts() ) : $total_room_details->the_post();
-										$tf_room_meta = get_post_meta( get_the_ID(), 'tf_hotel', true );
+										$tf_room_meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
 										$tf_rooms     = ! empty( $tf_room_meta['room'] ) ? $tf_room_meta['room'] : '';
 										if(!empty($tf_rooms )){
 											foreach ( $tf_rooms as $key => $room ) {

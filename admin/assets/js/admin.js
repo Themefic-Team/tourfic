@@ -84,7 +84,7 @@
          * show notyf error
          */
         $(document).on('click', '.post-type-tf_tours #publish, .post-type-tf_tours #save-post', function(e) {
-            if( $('textarea[name="tf_tours_option[text_location]"]').val().length === 0 ) {
+            if( $('textarea[name="tf_tours_opt[text_location]"]').val().length === 0 ) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
                 notyf.error(tf_admin_params.tour_location_required);

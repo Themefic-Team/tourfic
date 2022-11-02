@@ -8,7 +8,7 @@
 
 get_header('tourfic');
 
-$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+$meta = get_post_meta( get_the_ID(),'tf_tours_opt',true );
 $pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
 $tour_type = $meta['type'] ? $meta['type'] : null;
 if( $pricing_rule == 'group'){

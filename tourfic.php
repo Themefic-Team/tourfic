@@ -160,7 +160,7 @@ if ( ! function_exists( 'tf_plugin_loaded_action' ) ) {
          * @since 1.0
          */
 		// Options Framework
-        if( !class_exists( 'CSF' ) ) {
+        /*if( !class_exists( 'CSF' ) ) {
 		    require_once( TF_ADMIN_PATH .'framework/framework.php' );
         }
         // Options
@@ -170,7 +170,7 @@ if ( ! function_exists( 'tf_plugin_loaded_action' ) ) {
             } else {
                 tf_file_missing(TF_OPTIONS_PATH . 'options.php');
             }          
-        }
+        }*/
 
 		if ( file_exists( TF_ADMIN_PATH . 'tf-options/TF_Options.php' ) ) {
 			require_once TF_ADMIN_PATH . 'tf-options/TF_Options.php';
@@ -187,7 +187,7 @@ add_action( 'plugins_loaded', 'tf_plugin_loaded_action' );
  */
 if ( !function_exists( 'tfopt' ) ) {
     function tfopt( $option = '', $default = null ) {
-        $options = get_option( 'tourfic_opt' );
+        $options = get_option( 'tf_settings' );
         return ( isset( $options[$option] ) ) ? $options[$option] : $default;
     }
 }

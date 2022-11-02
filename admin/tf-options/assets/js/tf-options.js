@@ -10,11 +10,11 @@
             let hash = window.location.hash;
 
             if (hash.indexOf('tab=dashboard') > -1) {
-                $('.tf-deshboard-wrapper').css('display', 'flex');
+                $('.tf-deshboard-wrapper').show();
                 $('.tf-option-wrapper').hide();
             } else {
                 $('.tf-deshboard-wrapper').hide();
-                $('.tf-option-wrapper').css('display', 'flex');
+                $('.tf-option-wrapper').show();
             }
             let slug = hash.replace('#tab=', '');
 

@@ -58,7 +58,7 @@
                 if( !empty( $room['features'] ) ){
                 foreach ( $room['features'] as $feature ) {
 
-                        $room_f_meta = get_term_meta( $feature, 'hotel_feature', true );
+                        $room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
 
                         if ( $room_f_meta['icon-type'] == 'fa' ) {
                             $room_feature_icon = '<i class="' . $room_f_meta['icon-fa'] . '"></i>';

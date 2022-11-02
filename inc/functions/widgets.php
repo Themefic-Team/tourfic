@@ -60,7 +60,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
 
             echo "<div class='tf-filter'><ul>";
             foreach ($get_terms as $key => $term) {
-                $feature_meta = get_term_meta($term->term_taxonomy_id, 'hotel_feature', true);
+                $feature_meta = get_term_meta($term->term_taxonomy_id, 'tf_hotel_feature', true);
                 if ($feature_meta['icon-type'] == 'fa') {
                     $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
                 } elseif ($feature_meta['icon-type'] == 'c') {

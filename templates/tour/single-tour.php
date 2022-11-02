@@ -12,7 +12,7 @@ while ( have_posts() ) : the_post();
 	$post_id = get_the_ID();
 
 	// Get Tour Meta
-	$meta = get_post_meta( $post_id, 'tf_tours_option', true );
+	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
 
 	/**
 	 * Show/hide sections
@@ -550,7 +550,7 @@ while ( have_posts() ) : the_post();
 									$destinations           = get_the_terms( $post_id, 'tour_destination' );
 									$first_destination_name = $destinations[0]->name;
 									$related_comments       = get_comments( array( 'post_id' => $post_id ) );
-									$meta                   = get_post_meta( $post_id, 'tf_tours_option', true );
+									$meta                   = get_post_meta( $post_id, 'tf_tours_opt', true );
 									$pricing_rule           = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 									$disable_adult          = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
 									$disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;

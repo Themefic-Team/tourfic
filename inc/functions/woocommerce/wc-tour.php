@@ -22,7 +22,7 @@ function tf_tours_booking_function() {
 	$post_id              = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : '';
 	$product_id           = get_post_meta( $post_id, 'product_id', true );
 	$post_author          = get_post_field( 'post_author', $post_id );
-	$meta                 = get_post_meta( $post_id, 'tf_tours_option', true );
+	$meta                 = get_post_meta( $post_id, 'tf_tours_opt', true );
 	$tour_type            = ! empty( $meta['type'] ) ? $meta['type'] : '';
 	$pricing_rule         = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 	$disable_adult_price  = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;

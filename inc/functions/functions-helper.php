@@ -138,7 +138,7 @@ add_filter( 'tf_booking_search_action', 'tourfic_booking_set_search_result' );
 // Tours price with html format
 function tf_tours_price_html() {
 
-	$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+	$meta = get_post_meta( get_the_ID(),'tf_tours_opt',true );
 	$pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
 	$tour_type = $meta['type'] ? $meta['type'] : null;
 	if( $pricing_rule == 'group'){

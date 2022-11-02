@@ -800,12 +800,12 @@ function tf_search_result_ajax_sidebar() {
 		$args['tax_query']['relation'] = $relation;
 		$args['meta_query']            = array(
 			array(
-				'key'     => 'tf_tours_option',
+				'key'     => 'tf_tours_opt',
 				'value'   => str_replace( '-', '/', $tf_form_start ),
 				'compare' => 'LIKE',
 			),
 			array(
-				'key'     => 'tf_tours_option',
+				'key'     => 'tf_tours_opt',
 				'value'   => str_replace( '-', '/', $tf_form_end ),
 				'compare' => 'LIKE',
 			),
@@ -822,7 +822,7 @@ function tf_search_result_ajax_sidebar() {
 			$loop->the_post();
 
 			if ( $posttype == 'tf_hotel' ) {
-				$meta = get_post_meta( get_the_ID(), 'tf_hotel', true );
+				$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
 				$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
 
 				$total_adults = tf_hotel_total_room_adult_child( get_the_ID(), 'adult' );
@@ -852,7 +852,7 @@ function tf_search_result_ajax_sidebar() {
 
 			} else {
 				$total_person = intval( $adults ) + intval( $child );
-				$meta         = get_post_meta( get_the_ID(), 'tf_tours_option', true );
+				$meta         = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
 
 				if ( $meta['cont_max_people'] < $total_person && $meta['cont_max_people'] != 0 ) {
 					$not_found[] = 1;
@@ -1058,6 +1058,10 @@ function tf_migrate_data() {
 add_action( 'init', 'tf_migrate_data' );
 
 
+/*
+ * TF Options Migrator
+ * @author: Sydur Rahman
+ * */
 function tf_migrate_option_data(){
 
 	if ( get_option( 'tf_migrate_data_204_210' ) < 2 ) {
@@ -1077,7 +1081,7 @@ function tf_migrate_option_data(){
 			}
 			update_post_meta(
 				$tour->ID,
-				'tf_tours',
+				'tf_tours_opt',
 				$tour_options
 			); 
 			
@@ -1117,7 +1121,7 @@ function tf_migrate_option_data(){
 			// $tour_options = serialize( $tour_options );
 			update_post_meta(
 				$hotel->ID,
-				'tf_hotels',
+				'tf_hotels_opt',
 				$hotel_options
 			);   
 			
@@ -1130,8 +1134,8 @@ function tf_migrate_option_data(){
 		] );
 
 		
-		foreach ( $hotel_location as $hotel_location ) { 
-			$old_term_metadata = get_term_meta( $hotel_location->term_id, 'hotel_location', true); 
+		foreach ( $hotel_location as $_hotel_location ) {
+			$old_term_metadata = get_term_meta( $_hotel_location->term_id, 'hotel_location', true);
 			if ( ! empty( $old_term_metadata ) ) {
 				if(isset($old_term_metadata['image']) && is_array($old_term_metadata['image'])){
 					$old_term_metadata['image'] = $old_term_metadata['image']['url'];
@@ -1139,7 +1143,7 @@ function tf_migrate_option_data(){
 				
 				// If the meta field for the term does not exist, it will be added.
 				update_term_meta(
-					$hotel_location->term_id,
+					$_hotel_location->term_id,
 					"tf_hotel_location",
 					$old_term_metadata
 				);
@@ -1153,8 +1157,8 @@ function tf_migrate_option_data(){
 		] );
 
 		
-		foreach ( $hotel_feature as $hotel_feature ) { 
-				$old_term_metadata = get_term_meta( $hotel_feature->term_id, 'hotel_feature', true); 
+		foreach ( $hotel_feature as $_hotel_feature ) {
+				$old_term_metadata = get_term_meta( $_hotel_feature->term_id, 'hotel_feature', true);
 				if ( ! empty( $old_term_metadata ) ) {
 					if( isset($old_term_metadata['icon-c']) && is_array($old_term_metadata['icon-c'])){
 						$old_term_metadata['icon-c'] = $old_term_metadata['icon-c']['url'];
@@ -1165,7 +1169,7 @@ function tf_migrate_option_data(){
 					
 					// If the meta field for the term does not exist, it will be added.
 					update_term_meta(
-						$hotel_feature->term_id,
+						$_hotel_feature->term_id,
 						"tf_hotel_feature",
 						$old_term_metadata
 					); 

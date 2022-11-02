@@ -1472,7 +1472,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                             <div class="roomName_flex">
                                                 <ul class="tf-archive-desc">
 													<?php foreach ( $features as $feature ) {
-														$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'hotel_feature', true );
+														$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
 														$f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
 														if ( $f_icon_type == 'fa' ) {
 															$feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
@@ -1870,7 +1870,7 @@ function tf_hotel_quickview_callback() {
 
 									<?php foreach ( $room['features'] as $feature ) {
 
-										$room_f_meta = get_term_meta( $feature, 'hotel_feature', true );
+										$room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
 
 										$room_icon_type = ! empty( $room_f_meta['icon-type'] ) ? $room_f_meta['icon-type'] : '';
 

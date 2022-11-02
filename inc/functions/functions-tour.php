@@ -492,7 +492,7 @@ function tf_single_tour_booking_form( $post_id ) {
     // Check-in & out date
     $check_in_out = !empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
     
-    $meta = get_post_meta( $post_id, 'tf_tours_option', true );
+    $meta = get_post_meta( $post_id, 'tf_tours_opt', true );
     $tour_type = !empty( $meta['type'] ) ? $meta['type'] : '';
     // Continuous custom availability
     $custom_avail = !empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : '';
@@ -821,7 +821,7 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
     // get post id
     $post_id = get_the_ID();
     //Get hotel meta values
-    $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+    $meta = get_post_meta( get_the_ID(),'tf_tours_opt',true );
     // Location
     $location  = !empty($meta['text_location']) ? $meta['text_location'] : '';
     // Featured
@@ -925,7 +925,7 @@ function tf_filter_tour_by_date( $period, array &$not_found, array $data = [] ):
         [$adults, $child, $check_in_out] = $data;
     }
     // Get tour meta options
-    $meta = get_post_meta( get_the_ID(), 'tf_tours_option', true );
+    $meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
 
     // Set initial tour availability status
     $has_tour = false;

@@ -1,6 +1,10 @@
 .tf-field {
   padding: 12px 0;
 
+  @media #{$max991} {
+    width: 100% !important;
+  }
+
   .tf-field-label {
     display: block;
     font-family: 'Lato';

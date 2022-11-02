@@ -5,7 +5,7 @@ $badge_up     = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Up
 $badge_pro    = '<div class="tf-csf-badge"><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 $badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Upcoming", "tourfic" ) . '</span><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 
-TF_Metabox::metabox( 'tf_hotels', array(
+TF_Metabox::metabox( 'tf_hotels_opt', array(
 	'title'     => 'Hotel Settings',
 	'post_type' => 'tf_hotel',
 	'sections'  => array(
@@ -145,6 +145,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 						array(
 							'id'    => 'title',
 							'type'  => 'text',
+							'subtitle'   => __( 'Enter your room title', 'tourfic' ),
 							'label' => __( 'Room Title', 'tourfic' ),
 							'placeholder' => __( '', 'tourfic' ),
 							'field_width' => 50,
@@ -191,6 +192,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 							'attributes' => array(
 								'min' => '0',
 							),
+							'field_width' => 33.33,
 						),
 						array(
 							'id'         => 'adult',
@@ -200,6 +202,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 							'attributes' => array(
 								'min' => '0',
 							),
+							'field_width' => 33.33,
 						),
 						array(
 							'id'         => 'child',
@@ -209,12 +212,14 @@ TF_Metabox::metabox( 'tf_hotels', array(
 							'attributes' => array(
 								'min' => '0',
 							),
+							'field_width' => 33.33,
 						),
 						array(
 							'id'       => 'footage',
 							'type'     => 'text',
 							'label'    => __( 'Room Footage', 'tourfic' ),
 							'subtitle' => __( 'Room footage (sft)', 'tourfic' ),
+							'field_width' => 33.33,
 						),
 						array(
 							'id'    => 'subtitle',

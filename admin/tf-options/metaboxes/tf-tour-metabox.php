@@ -2,7 +2,7 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-TF_Metabox::metabox( 'tf_tours', array(
+TF_Metabox::metabox( 'tf_tours_opt', array(
 	'title'     => __( 'Tour Setting', 'tourfic' ),
 	'post_type' => 'tf_tours',
 	'sections'  => array(
