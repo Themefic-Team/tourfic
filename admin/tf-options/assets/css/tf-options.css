@@ -256,6 +256,8 @@ body.tf-modal-open:after {
   display: -webkit-flex;
   display: flex;
   margin: -6px -12px -12px -12px;
+  z-index: 10;
+  position: relative;
 }
 @media only screen and (max-width: 991.98px) {
   .tf-option,
