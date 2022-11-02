@@ -184,6 +184,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 												$totals_rooms_number += $tf_room_no;
 											}
 										}
+										
 									endwhile;
 
 									wp_reset_postdata();
