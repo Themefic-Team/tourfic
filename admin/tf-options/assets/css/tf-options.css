@@ -1360,7 +1360,8 @@ body.tf-modal-open {
     border: 1px solid #F0F2F4;
     background-color: #fff;
     padding: 10px 0;
-    box-shadow: 0px 5px 10px 1px #f5f5f5; }
+    box-shadow: 0px 5px 10px 1px #f5f5f5;
+    overflow: hidden; }
   .tf-repeater .tf-repeater-add .tf-repeater-icon {
     padding: 8px 15px;
     cursor: pointer;
@@ -1674,5 +1675,5 @@ body.tf-modal-open {
     color: #a6b1bf; }
   .tf-field-number input::placeholder {
     color: #a6b1bf; }
-
+ 
 /*# sourceMappingURL=tf-options.css.map */

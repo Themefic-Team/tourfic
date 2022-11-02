@@ -11,10 +11,18 @@ if ( ! class_exists( 'TF_select2' ) ) {
 
 		public function render() {
 
+			if(empty($this->field['options']) && empty($this->field['options_callback'])) {
+				return;
+			}
+
 			$args = wp_parse_args( $this->field, array(
 				'placeholder' => '',
 				'multiple'    => false,
 			) );
+
+			if(isset($this->field['options_callback']) && is_callable($this->field['options_callback'])) {
+				$this->field['options'] = call_user_func($this->field['options_callback']);
+			}
 
 			$placeholder = ( ! empty( $args['placeholder'] ) ) ? $args['placeholder'] : '';
 			$multiple    = ( ! empty( $args['multiple'] ) ) ? 'multiple' : '';
@@ -23,7 +31,7 @@ if ( ! class_exists( 'TF_select2' ) ) {
 				$posts = get_posts($args['query_args']);
 				$args['options'] = array();
 				foreach($posts as $post){
-					$args['options'][$post->ID] = $post->post_title;
+					$args['options'][$post->ID] = (empty($post->post_title)) ? 'No title ('.$post->ID.')' : $post->post_title;
 				}
 			}
 
