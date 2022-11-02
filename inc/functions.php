@@ -1184,9 +1184,9 @@ function tf_migrate_option_data(){
 		}
 		update_option( 'tf_settings', $old_setting_option );
 
-		// wp_cache_flush();
-		// flush_rewrite_rules( true );
-		// update_option( 'tf_migrate_data_204_210', 2 );
+		wp_cache_flush();
+		flush_rewrite_rules( true );
+		update_option( 'tf_migrate_data_204_210', 2 );
 	}
 	
 	
