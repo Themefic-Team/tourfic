@@ -131,12 +131,12 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 
 		}
 
-		public function enqueue() {
+		// public function enqueue() {
 
-			if ( ! wp_script_is( 'jquery-ui-sortable' ) ) {
-				wp_enqueue_script( 'jquery-ui-sortable' );
-			}
+		// 	if ( ! wp_script_is( 'jquery-ui-sortable' ) ) {
+		// 		wp_enqueue_script( 'jquery-ui-sortable' );
+		// 	}
 
-		}
+		// }
 	}
 }
