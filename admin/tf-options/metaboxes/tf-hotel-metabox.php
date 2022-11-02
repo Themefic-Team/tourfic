@@ -147,6 +147,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 							'type'  => 'text',
 							'label' => __( 'Room Title', 'tourfic' ),
 							'placeholder' => __( '', 'tourfic' ),
+							'field_width' => 50,
 						),
 						array(
 							'id'         => 'num-room',
@@ -154,6 +155,7 @@ TF_Metabox::metabox( 'tf_hotels', array(
 							'label'      => __( 'Number of Rooms', 'tourfic' ),
 							'subtitle'   => __( 'Number of available rooms for booking', 'tourfic' ),
 							'placeholder' => __( '', 'tourfic' ),
+							'field_width' => 50,
 							'attributes' => array(
 								'min' => '0',
 							),

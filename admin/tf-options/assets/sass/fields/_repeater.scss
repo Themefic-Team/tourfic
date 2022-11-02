@@ -81,9 +81,12 @@
   .tf-repeater-content-wrap {
     border: 1px solid #F0F2F4;
     background-color: #fff;
-    padding: 10px 0;
+    padding: 10px 24px;
     box-shadow: 0px 5px 10px 1px #f5f5f5;
     overflow: hidden;
+    @include flexbox();
+    @include flex-wrap(wrap);
+    @include justify-content(space-between);
   }
 
   //  .hide{

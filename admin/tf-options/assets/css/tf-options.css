@@ -449,10 +449,20 @@ body.tf-modal-open:after {
 .tf-option .tf-tab-wrapper .tf-tab-content,
 .tf-admin-meta-box .tf-tab-wrapper .tf-tab-content {
   display: none;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  padding: 0 24px;
 }
 .tf-option .tf-tab-wrapper .tf-tab-content.active,
 .tf-admin-meta-box .tf-tab-wrapper .tf-tab-content.active {
-  display: block;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
 }
 
 .tf-option-wrapper {
@@ -858,7 +868,7 @@ body.tf-modal-open:after {
 }
 
 .tf-field {
-  padding: 12px 24px;
+  padding: 12px 0;
 }
 .tf-field .tf-field-label {
   display: block;
@@ -1294,7 +1304,8 @@ body.tf-modal-open:after {
 }
 
 .tf-field-heading {
-  padding: 16px 20px;
+  padding: 16px 24px;
+  margin: 0 -24px;
   background-color: #f0f2f4;
 }
 .tf-field-heading .tf-field-heading-inner {
@@ -1633,9 +1644,19 @@ body.tf-modal-open:after {
 .tf-repeater .tf-repeater-content-wrap {
   border: 1px solid #F0F2F4;
   background-color: #fff;
-  padding: 10px 0;
+  padding: 10px 24px;
   box-shadow: 0px 5px 10px 1px #f5f5f5;
   overflow: hidden;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
 }
 .tf-repeater .tf-repeater-add .tf-repeater-icon {
   padding: 8px 15px;
