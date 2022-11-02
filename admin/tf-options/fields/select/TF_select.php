@@ -19,7 +19,7 @@ if ( ! class_exists( 'TF_select' ) ) {
 				$posts = get_posts($this->field['query_args']);
 				$this->field['options'] = array();
 				foreach($posts as $post){
-					$this->field['options'][$post->ID] = $post->post_title;
+					$args['options'][$post->ID] = (empty($post->post_title)) ? 'No title ('.$post->ID.')' : $post->post_title;
 				}
 			}
 
