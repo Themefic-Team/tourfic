@@ -904,7 +904,7 @@ function tf_search_result_ajax_sidebar() {
  */
 function tf_migrate_data() {
 
-	if ( get_option( 'tf_migrate_data_204_210' ) < 2 ) {
+	if ( get_option( 'tf_migrate_data_204_210' ) < 1 ) {
 
 		global $wpdb;
 		// $wpdb->update( $wpdb->posts, [ 'post_type' => 'tf_hotel' ], [ 'post_type' => 'tourfic' ] );
@@ -1059,10 +1059,13 @@ add_action( 'init', 'tf_migrate_data' );
 
 
 function tf_migrate_option_data(){
-	/** Tours Migrations */
-	$tours = get_posts( [ 'post_type' => 'tf_tours', 'numberposts' => - 1, ] ); 
-	foreach ( $tours as $tour ) {
-		if($tour->ID == '58738'){
+
+	if ( get_option( 'tf_migrate_data_204_210' ) < 2 ) {
+
+
+		/** Tours Migrations */
+		$tours = get_posts( [ 'post_type' => 'tf_tours', 'numberposts' => - 1, ] ); 
+		foreach ( $tours as $tour ) { 
 			$old_meta = get_post_meta( $tour->ID ); 
 			$tour_options         = unserialize( $old_meta['tf_tours_option'][0] );
 			
@@ -1076,66 +1079,58 @@ function tf_migrate_option_data(){
 				$tour->ID,
 				'tf_tours',
 				$tour_options
-			);
+			); 
+			
+			
 		}
-		
-		
-	}
-	/** Tour Destinations Image Fix */
-	$tour_destinations = get_terms( [
-		'taxonomy'   => 'tour_destination',
-		'hide_empty' => false,
-	] );
+		/** Tour Destinations Image Fix */
+		$tour_destinations = get_terms( [
+			'taxonomy'   => 'tour_destination',
+			'hide_empty' => false,
+		] );
 
-	
-	foreach ( $tour_destinations as $tour_destination ) {
-		if($tour_destination->term_id == 69){ 
+		
+		foreach ( $tour_destinations as $tour_destination ) { 
 			$old_term_metadata = get_term_meta( $tour_destination->term_id, 'tour_destination', true); 
-	
+
 			if ( ! empty( $old_term_metadata ) ) {
 				if(isset($old_term_metadata['image']) && is_array($old_term_metadata['image'])){
 					$old_term_metadata['image'] = $old_term_metadata['image']['url'];
 				}
-			 
+				
 				// If the meta field for the term does not exist, it will be added.
 				update_term_meta(
 					$tour_destination->term_id,
 					"tf_tour_destination",
 					$old_term_metadata
 				);
-			} 
-		} 
-	}
+			}  
+		}
 
-	/** Hotel Migrations */
-	$hotels = get_posts( [ 'post_type' => 'tf_hotel', 'numberposts' => - 1, ] ); 
-	
-	foreach ( $hotels as $hotel ) {
-		if($hotel->ID == '59197'){
-			
+		/** Hotel Migrations */
+		$hotels = get_posts( [ 'post_type' => 'tf_hotel', 'numberposts' => - 1, ] ); 
+		
+		foreach ( $hotels as $hotel ) {  
 			$old_meta = get_post_meta( $hotel->ID ); 
 			$hotel_options         = unserialize( $old_meta['tf_hotel'][0] );
-		 
+			
 			// $tour_options = serialize( $tour_options );
 			update_post_meta(
 				$hotel->ID,
 				'tf_hotels',
 				$hotel_options
-			); 
+			);   
+			
 		}
-		
-		
-	}
 
-	/** Hotel Location Image Fix */
-	$hotel_location = get_terms( [
-		'taxonomy'   => 'hotel_location',
-		'hide_empty' => false,
-	] );
+		/** Hotel Location Image Fix */
+		$hotel_location = get_terms( [
+			'taxonomy'   => 'hotel_location',
+			'hide_empty' => false,
+		] );
 
-	
-	foreach ( $hotel_location as $hotel_location ) {
-		if($hotel_location->term_id == 110){ 
+		
+		foreach ( $hotel_location as $hotel_location ) { 
 			$old_term_metadata = get_term_meta( $hotel_location->term_id, 'hotel_location', true); 
 			if ( ! empty( $old_term_metadata ) ) {
 				if(isset($old_term_metadata['image']) && is_array($old_term_metadata['image'])){
@@ -1148,45 +1143,55 @@ function tf_migrate_option_data(){
 					"tf_hotel_location",
 					$old_term_metadata
 				);
-			}  
-		} 
+			}    
+		}
+
+		/** Hotel Feature Image Fix */
+		$hotel_feature = get_terms( [
+			'taxonomy'   => 'hotel_feature',
+			'hide_empty' => false,
+		] );
+
+		
+		foreach ( $hotel_feature as $hotel_feature ) { 
+				$old_term_metadata = get_term_meta( $hotel_feature->term_id, 'hotel_feature', true); 
+				if ( ! empty( $old_term_metadata ) ) {
+					if( isset($old_term_metadata['icon-c']) && is_array($old_term_metadata['icon-c'])){
+						$old_term_metadata['icon-c'] = $old_term_metadata['icon-c']['url'];
+					}
+					if(isset($old_term_metadata['dimention']) && is_array($old_term_metadata['dimention'])){
+						$old_term_metadata['dimention'] = $old_term_metadata['dimention']['width'];
+					}
+					
+					// If the meta field for the term does not exist, it will be added.
+					update_term_meta(
+						$hotel_feature->term_id,
+						"tf_hotel_feature",
+						$old_term_metadata
+					); 
+				}   
+		}
+
+
+		/** settings option migration */ 
+		// company_logo
+		$old_setting_option = get_option( 'tourfic_opt' );
+		if(isset($old_setting_option['itinerary-builder-setings']['company_logo']) && is_array($old_setting_option['itinerary-builder-setings']['company_logo'])){
+			$old_setting_option['itinerary-builder-setings']['company_logo'] = $old_setting_option['itinerary-builder-setings']['company_logo']['url'];
+		}
+		if(isset($old_setting_option['itinerary-builder-setings']['expert_logo']) && is_array($old_setting_option['itinerary-builder-setings']['expert_logo'])){
+			$old_setting_option['itinerary-builder-setings']['expert_logo'] = $old_setting_option['itinerary-builder-setings']['expert_logo']['url'];
+		}
+		update_option( 'tf_settings', $old_setting_option );
+
+		// wp_cache_flush();
+		// flush_rewrite_rules( true );
+		// update_option( 'tf_migrate_data_204_210', 2 );
 	}
-
-	/** Hotel Feature Image Fix */
-	$hotel_feature = get_terms( [
-		'taxonomy'   => 'hotel_feature',
-		'hide_empty' => false,
-	] );
-
 	
-	foreach ( $hotel_feature as $hotel_feature ) {
-		if($hotel_feature->term_id == 298){ 
-			$old_term_metadata = get_term_meta( $hotel_feature->term_id, 'hotel_feature', true); 
-			if ( ! empty( $old_term_metadata ) ) {
-				if( isset($old_term_metadata['icon-c']) && is_array($old_term_metadata['icon-c'])){
-					$old_term_metadata['icon-c'] = $old_term_metadata['icon-c']['url'];
-				}
-				if(isset($old_term_metadata['dimention']) && is_array($old_term_metadata['dimention'])){
-					$old_term_metadata['dimention'] = $old_term_metadata['dimention']['width'];
-				}
-				
-				// If the meta field for the term does not exist, it will be added.
-				update_term_meta(
-					$hotel_feature->term_id,
-					"tf_hotel_feature",
-					$old_term_metadata
-				); 
-			}  
-		} 
-	}
-
-
-	/** settings option migration */
-	$old_setting_option = get_option( 'tourfic_opt' );
-	update_option( 'tf_settings', $old_setting_option );
 	
 }
-// add_action( 'init', 'tf_migrate_option_data' );
+add_action( 'init', 'tf_migrate_option_data' );
 
 
 /*
