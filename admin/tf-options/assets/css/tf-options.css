@@ -981,6 +981,7 @@ body.tf-modal-open:after {
   color: #363e4a;
   font-size: 14px;
   line-height: 14px;
+  font-family: "Lato";
 }
 .tf-field-select select.tf-select:focus {
   outline: none;
@@ -1036,6 +1037,10 @@ body.tf-modal-open:after {
   font-family: sans-serif;
   overflow: hidden;
   word-break: keep-all;
+}
+
+.tf-field.tf-field-select2 .tf-fieldset span.select2:nth-child(3) {
+  display: none;
 }
 
 .tf-field-radio .tf-fieldset ul li {

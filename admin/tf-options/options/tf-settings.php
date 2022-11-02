@@ -746,6 +746,7 @@ TF_Settings::option( 'tf_settings', array(
 						),
 					)
 				),
+				
 
 				array(
 					'id'       => 'tf_delete_old_review_fields_button',
