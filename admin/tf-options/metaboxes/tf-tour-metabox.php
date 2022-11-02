@@ -7,7 +7,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 	'post_type' => 'tf_tours',
 	'sections'  => array(
 		// General
-		'general' => array(
+		'general'              => array(
 			'title'  => __( 'General', 'tourfic' ),
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
@@ -25,23 +25,23 @@ TF_Metabox::metabox( 'tf_tours', array(
 						'instant' => __( 'Default', 'tourfic' ),
 					),
 				),
-	
+
 				array(
 					'id'    => 'tour_gallery',
 					'type'  => 'gallery',
 					'label' => __( 'Tour Gallery', 'tourfic' ),
 				),
-	
+
 				array(
-					'id'       => '', 
-					'type'     => 'text',
-					'label'    => __( 'Tour video', 'tourfic' ),
+					'id'     => '',
+					'type'   => 'text',
+					'label'  => __( 'Tour video', 'tourfic' ),
 					'is_pro' => true,
 				),
 			),
 		),
 		// Location
-		'location' => array(
+		'location'             => array(
 			'title'  => __( 'Location', 'tourfic' ),
 			'icon'   => 'fa-solid fa-location-dot',
 			'fields' => array(
@@ -55,11 +55,11 @@ TF_Metabox::metabox( 'tf_tours', array(
 					),
 				),
 				array(
-					'id'       => '', 
+					'id'       => '',
 					'type'     => 'map',
 					'label'    => __( 'Tour Location Pro (Auto Suggestion)', 'tourfic' ),
 					'subtitle' => __( 'Location suggestions will be provided from Google', 'tourfic' ),
-					'is_pro'	=> true,
+					'is_pro'   => true,
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,
@@ -68,7 +68,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 			),
 		),
 		// Information
-		'information' => array(
+		'information'          => array(
 			'title'  => __( 'Information', 'tourfic' ),
 			'icon'   => 'fa-solid fa-circle-info',
 			'fields' => array(
@@ -90,7 +90,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 					'label'    => __( 'Languages', 'tourfic' ),
 					'subtitle' => __( 'Input languages seperated by comma (,)', 'tourfic' ),
 				),
-	
+
 				array(
 					'id'       => 'additional_information',
 					'type'     => 'editor',
@@ -106,69 +106,69 @@ TF_Metabox::metabox( 'tf_tours', array(
 			),
 		),
 		// Contact Info
-		'contact_info' => array(
+		'contact_info'         => array(
 			'title'  => __( 'Contact Info', 'tourfic' ),
 			'icon'   => 'fa-solid fa-address-book',
 			'fields' => array(
 				array(
-					'id'       => '',
-					'class'    => 'tf-csf-disable tf-csf-pro',
-					'type'     => 'text',
-					'label'    => __( 'Email address', 'tourfic' ),
+					'id'     => '',
+					'class'  => 'tf-csf-disable tf-csf-pro',
+					'type'   => 'text',
+					'label'  => __( 'Email address', 'tourfic' ),
 					'is_pro' => true,
 				),
 				array(
-					'id'       => '',
-					'class'    => 'tf-csf-disable tf-csf-pro',
-					'type'     => 'text',
-					'label'    => __( 'Phone Number', 'tourfic' ),
+					'id'     => '',
+					'class'  => 'tf-csf-disable tf-csf-pro',
+					'type'   => 'text',
+					'label'  => __( 'Phone Number', 'tourfic' ),
 					'is_pro' => true,
 				),
 				array(
-					'id'       => '',
-					'class'    => 'tf-csf-disable tf-csf-pro',
-					'type'     => 'text',
-					'label'    => __( 'Website Url', 'tourfic' ),
+					'id'     => '',
+					'class'  => 'tf-csf-disable tf-csf-pro',
+					'type'   => 'text',
+					'label'  => __( 'Website Url', 'tourfic' ),
 					'is_pro' => true,
 				),
 				array(
-					'id'       => '',
-					'class'    => 'tf-csf-disable tf-csf-pro',
-					'type'     => 'text',
-					'label'    => __( 'Fax Number', 'tourfic' ),
+					'id'     => '',
+					'class'  => 'tf-csf-disable tf-csf-pro',
+					'type'   => 'text',
+					'label'  => __( 'Fax Number', 'tourfic' ),
 					'is_pro' => true,
 				),
 			),
 		),
 		// //  Tour Extra
-		'tour_extra' => array(
+		'tour_extra'           => array(
 			'title'  => __( 'Tour Extra', 'tourfic' ),
 			'icon'   => 'fa-solid fa-route',
 			'fields' => array(
 				array(
 					'id'     => 'tour-extra',
 					'type'   => 'repeater',
-					'class'    => 'tf-csf-disable tf-csf-pro',
+					'class'  => 'tf-csf-disable tf-csf-pro',
 					'label'  => __( 'Extra Services on Tour', 'tourfic' ),
 					'is_pro' => true,
 					'fields' => array(
 						array(
-							'id'       => '', 
-							'type'     => 'text',
-							'label'    => __( 'Title', 'tourfic' ),
+							'id'     => '',
+							'type'   => 'text',
+							'label'  => __( 'Title', 'tourfic' ),
 							'is_pro' => true,
 						),
 						array(
-							'id'       => '', 
-							'type'     => 'textarea',
-							'label'    => __( 'Short subtitle', 'tourfic' ),
+							'id'     => '',
+							'type'   => 'textarea',
+							'label'  => __( 'Short subtitle', 'tourfic' ),
 							'is_pro' => true,
 						),
 						array(
-							'id'         => '', 
+							'id'         => '',
 							'type'       => 'text',
 							'label'      => __( 'Price', 'tourfic' ),
-							'is_pro' => true,
+							'is_pro'     => true,
 							'attributes' => array(
 								'min' => '0',
 							),
@@ -179,7 +179,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 		),
 
 		// // Price
-		'price' => array(
+		'price'                => array(
 			'title'  => __( 'Price Settings', 'tourfic' ),
 			'icon'   => 'fa-solid fa-money-check',
 			'fields' => array(
@@ -242,7 +242,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 					'dependency' => array( 'pricing', '==', 'group' ),
 					'label'      => __( 'Group Price', 'tourfic' ),
 					'subtitle'   => __( 'Input group price', 'tourfic' ),
-					'is_pro'		=> true,
+					'is_pro'     => true,
 					'attributes' => array(
 						'min' => '0',
 					),
@@ -290,23 +290,23 @@ TF_Metabox::metabox( 'tf_tours', array(
 					'subtitle' => __( 'Hide No of infant in booking form', 'tourfic' ),
 				),
 				array(
-					'id'    => 'price_deposit',
+					'id'      => 'price_deposit',
 					'type'    => 'heading',
 					'content' => __( 'Deposit', 'tourfic' ),
 				),
-	
+
 				array(
-					'id'       => 'allow_deposit',
-					'type'     => 'switch',
-					'label'    => __( 'Enable Deposit', 'tourfic' ),
-					'is_pro' => true, 
-					'default'  => false,
+					'id'      => 'allow_deposit',
+					'type'    => 'switch',
+					'label'   => __( 'Enable Deposit', 'tourfic' ),
+					'is_pro'  => true,
+					'default' => false,
 				),
 			),
 		),
 
 		// // Availability
-		'availability' => array(
+		'availability'         => array(
 			'title'  => __( 'Availability', 'tourfic' ),
 			'icon'   => 'fa-solid fa-clipboard',
 			'fields' => array(
@@ -321,50 +321,50 @@ TF_Metabox::metabox( 'tf_tours', array(
 						'fixed'      => __( 'Fixed (Pro)', 'tourfic' ),
 					],
 					'default'  => 'continuous',
-					 
+
 				),
 				array(
 					'id'         => 'custom_avail',
 					'type'       => 'switch',
-					'label'      => __( 'Custom Availability', 'tourfic' ), 
-					'is_pro'   => true,
+					'label'      => __( 'Custom Availability', 'tourfic' ),
+					'is_pro'     => true,
 					'dependency' => array( 'type', '==', 'continuous' ),
-					'label_on'    => __( 'Yes', 'tourfic' ),
-					'label_off'   => __( 'No', 'tourfic' ),
+					'label_on'   => __( 'Yes', 'tourfic' ),
+					'label_off'  => __( 'No', 'tourfic' ),
 				),
 				array(
 					'id'         => 'cont_custom_date',
 					'type'       => 'repeater',
 					'label'      => __( 'Allowed Dates', 'tourfic' ),
-					'is_pro'   => true,
+					'is_pro'     => true,
 					'dependency' => array(
 						array( 'type', '==', 'continuous' ),
 						array( 'custom_avail', '==', 'true' ),
 					),
 					'fields'     => array(
 						array(
-							'id'         => '', 
+							'id'         => '',
 							'type'       => 'date',
 							'label'      => __( 'Date Range', 'tourfic' ),
-							'is_pro'   => true,
-							'format' => 'Y/m/d',
-							'range' => true,
+							'is_pro'     => true,
+							'format'     => 'Y/m/d',
+							'range'      => true,
 							'label_from' => 'Start Date',
-							'label_to' => 'End Date', 
+							'label_to'   => 'End Date',
 							'attributes' => array(
 								'autocomplete' => 'off',
 							),
 						),
 						array(
-							'id'       => '', 
-							'type'     => 'number',
-							'label'    => __( 'Min people', 'tourfic' ),
+							'id'     => '',
+							'type'   => 'number',
+							'label'  => __( 'Min people', 'tourfic' ),
 							'is_pro' => true,
 						),
 						array(
-							'id'       => '', 
-							'type'     => 'number',
-							'label'    => __( 'Maximum people', 'tourfic' ),
+							'id'     => '',
+							'type'   => 'number',
+							'label'  => __( 'Maximum people', 'tourfic' ),
 							'is_pro' => true,
 						),
 						array(
@@ -372,7 +372,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 							'type'     => 'select',
 							'label'    => __( 'Pricing rule', 'tourfic' ),
 							'subtitle' => __( 'Input pricing rule', 'tourfic' ),
-							'is_pro' => true,
+							'is_pro'   => true,
 							'class'    => 'pricing',
 							'options'  => [
 								'person' => __( 'Person', 'tourfic' ),
@@ -381,73 +381,73 @@ TF_Metabox::metabox( 'tf_tours', array(
 							'default'  => 'person',
 						),
 						array(
-							'id'         => '', 
+							'id'         => '',
 							'type'       => 'number',
 							'label'      => __( 'Price for Adult', 'tourfic' ),
 							'subtitle'   => __( 'Input adult price', 'tourfic' ),
-							'is_pro' => true,
+							'is_pro'     => true,
 							'dependency' => array( 'pricing', '==', 'person' ),
 							'attributes' => array(
 								'min' => '0',
 							),
 						),
 						array(
-							'id'         => '', 
+							'id'         => '',
 							'type'       => 'number',
 							'label'      => __( 'Price for Child', 'tourfic' ),
 							'subtitle'   => __( 'Input child price', 'tourfic' ),
-							'is_pro' => true,
+							'is_pro'     => true,
 							'dependency' => array( 'pricing', '==', 'person' ),
 							'attributes' => array(
 								'min' => '0',
 							),
 						),
 						array(
-							'id'         => '', 
+							'id'         => '',
 							'type'       => 'number',
 							'label'      => __( 'Price for Infant', 'tourfic' ),
 							'subtitle'   => __( 'Input infant price', 'tourfic' ),
-							'is_pro' => true,
+							'is_pro'     => true,
 							'dependency' => array( 'pricing', '==', 'person' ),
 							'attributes' => array(
 								'min' => '0',
 							),
 						),
 						array(
-							'id'         => '', 
+							'id'         => '',
 							'type'       => 'number',
 							'dependency' => array( 'pricing', '==', 'group' ),
 							'label'      => __( 'Group Price', 'tourfic' ),
 							'subtitle'   => __( 'Input group price', 'tourfic' ),
-							'is_pro' => true,
+							'is_pro'     => true,
 							'attributes' => array(
 								'min' => '0',
 							),
 						),
 						array(
-							'id'       => 'allowed_time',
-							'type'     => 'repeater',
-							'label'    => __( 'Allowed Time', 'tourfic' ), 
+							'id'     => 'allowed_time',
+							'type'   => 'repeater',
+							'label'  => __( 'Allowed Time', 'tourfic' ),
 							'is_pro' => true,
-							'fields'   => array(
-	
+							'fields' => array(
+
 								array(
-									'id'       => '', 
+									'id'       => '',
 									'type'     => 'date',
 									'label'    => __( 'Time', 'tourfic' ),
 									'subtitle' => __( 'Only Time', 'tourfic' ),
-									'is_pro' => true,
+									'is_pro'   => true,
 									'settings' => array(
 										'noCalendar' => true,
 										'enableTime' => true,
 										'dateFormat' => "h:i K"
 									),
 								),
-	
-	
+
+
 							),
 						),
-	
+
 					),
 				),
 				/**
@@ -478,32 +478,32 @@ TF_Metabox::metabox( 'tf_tours', array(
 				array(
 					'id'         => 'allowed_time',
 					'type'       => 'repeater',
-					'label'      => __( 'Allowed Time', 'tourfic' ), 
-					'is_pro'   => true,
+					'label'      => __( 'Allowed Time', 'tourfic' ),
+					'is_pro'     => true,
 					'dependency' => array(
 						array( 'type', '==', 'continuous' ),
 						array( 'custom_avail', '==', 'false' ),
 					),
 					'fields'     => array(
-	
+
 						array(
-							'id'       => '', 
+							'id'       => '',
 							'type'     => 'datetime',
 							'title'    => __( 'Time', 'tourfic' ),
 							'subtitle' => __( 'Only Time', 'tourfic' ),
-							'is_pro'	=> true,
+							'is_pro'   => true,
 							'settings' => array(
 								'noCalendar' => true,
 								'enableTime' => true,
 								'dateFormat' => "h:i K"
 							),
 						),
-	
-	
+
+
 					),
 				),
 				array(
-					'id'       => 'Disabled_Dates',
+					'id'         => 'Disabled_Dates',
 					'type'       => 'heading',
 					'content'    => __( 'Disabled Dates', 'tourfic' ),
 					'dependency' => array(
@@ -512,10 +512,10 @@ TF_Metabox::metabox( 'tf_tours', array(
 					),
 				),
 				array(
-					'id'         => '', 
+					'id'         => '',
 					'type'       => 'checkbox',
 					'label'      => __( 'Select day to disable', 'tourfic' ),
-					'is_pro'   => true,
+					'is_pro'     => true,
 					'dependency' => array(
 						array( 'type', '==', 'continuous' ),
 						array( 'custom_avail', '==', 'false' ),
@@ -541,37 +541,37 @@ TF_Metabox::metabox( 'tf_tours', array(
 						array( 'custom_avail', '==', 'false' ),
 					),
 					'fields'     => array(
-	
+
 						array(
 							'id'         => 'date',
 							'type'       => 'date',
 							'label'      => __( 'Select date range', 'tourfic' ),
-							'format' => 'Y/m/d',
-							'range' => true,
+							'format'     => 'Y/m/d',
+							'range'      => true,
 							'label_from' => 'Start Date',
-							'label_to' => 'End Date',
-							'multiple' => true,
+							'label_to'   => 'End Date',
+							'multiple'   => true,
 							'attributes' => array(
 								'autocomplete' => 'off',
 							),
 						),
-	
+
 					),
 				),
 				array(
-					'id'         => '', 
+					'id'         => '',
 					'type'       => 'date',
 					'label'      => __( 'Disable Specific Dates', 'tourfic' ),
-					'is_pro'   => true,
+					'is_pro'     => true,
 					'dependency' => array(
 						array( 'type', '==', 'continuous' ),
 						array( 'custom_avail', '==', 'false' ),
 					),
-					'format' => 'Y/m/d',
-					'range' => true,
+					'format'     => 'Y/m/d',
+					'range'      => true,
 					'label_from' => 'Start Date',
-					'label_to' => 'End Date',
-					'multiple' => true,
+					'label_to'   => 'End Date',
+					'multiple'   => true,
 					'attributes' => array(
 						'autocomplete' => 'off',
 					),
@@ -580,76 +580,76 @@ TF_Metabox::metabox( 'tf_tours', array(
 				 * Fixed Availability
 				 */
 				array(
-					'id' => 'fixed_availability',
-					'type' => 'tab',
-					'label' => __( 'Availability', 'tourfic' ), 
-					'description' =>  __( 'Input your availability', 'tourfic' ),
-					'dependency' => array(
-						array( 'type', '==', 'Fixed (Pro)' ), 
+					'id'          => 'fixed_availability',
+					'type'        => 'tab',
+					'label'       => __( 'Availability', 'tourfic' ),
+					'description' => __( 'Input your availability', 'tourfic' ),
+					'dependency'  => array(
+						array( 'type', '==', 'Fixed (Pro)' ),
 					),
-					'is_pro' 	=> true,
-					'class' => 'fixed_availability',
-					'tabs' => array(
+					'is_pro'      => true,
+					'class'       => 'fixed_availability',
+					'tabs'        => array(
 						array(
-							'id' => 'tab-1',
-							'title' => 'Availability',
-							'icon' => 'fa fa-heart',
+							'id'     => 'tab-1',
+							'title'  => 'Availability',
+							'icon'   => 'fa fa-heart',
 							'fields' => array(
 								array(
-									'id'         => '', 
+									'id'         => '',
 									'type'       => 'date',
 									'label'      => __( 'Check In', 'tourfic' ),
 									'subtitle'   => __( 'Select check in date', 'tourfic' ),
-									'is_pro'		=> true,
-									'format' => 'Y/m/d',
-									'range' => true,
+									'is_pro'     => true,
+									'format'     => 'Y/m/d',
+									'range'      => true,
 									'label_from' => 'Start Date',
-									'label_to' => 'End Date',
+									'label_to'   => 'End Date',
 									'attributes' => array(
 										'autocomplete' => 'off',
 									),
 									'from_to'    => true,
 								),
 								array(
-									'id'       => '', 
+									'id'       => '',
 									'type'     => 'number',
 									'label'    => __( 'Minimum People', 'tourfic' ),
-									'is_pro'	=> true,
+									'is_pro'   => true,
 									'subtitle' => __( 'Minimum seat number', 'tourfic' ),
 								),
 								array(
-									'id'       => '', 
+									'id'       => '',
 									'type'     => 'number',
 									'label'    => __( 'Maximum People', 'tourfic' ),
-									'is_pro'	=> true,
+									'is_pro'   => true,
 									'subtitle' => __( 'Maximum seat number', 'tourfic' ),
 								),
-							 ),
-						 ),
-						 
-					 ),
+							),
+						),
+
+					),
 				)
-	
+
 			),
 		),
 
 		// // Booking
-		'booking' => array(
+		'booking'              => array(
 			'title'  => __( 'Booking', 'tourfic' ),
 			'icon'   => 'fa-solid fa-person-walking-luggage',
 			'fields' => array(
 				array(
 					'id'       => '',
 					'class'    => 'tf-csf-disable tf-csf-pro',
-					'type'     => 'number', 
+					'type'     => 'number',
 					'label'    => __( 'Minimum days to book before departure', 'tourfic' ),
-					'is_pro' 	=> true,
+					'is_pro'   => true,
 					'subtitle' => __( 'Customer can not book after this date', 'tourfic' ),
 				),
 			),
 		),
 		// // Exclude/Include
-		'exclude_Include' => array(
+		'exclude_Include'      => array(
 			'title'  => __( 'Exclude/Include', 'tourfic' ),
 			'icon'   => 'fa-solid fa-square-check',
 			'fields' => array(
@@ -657,7 +657,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 					'id'     => 'inc',
 					'type'   => 'repeater',
 					'label'  => __( 'Include', 'tourfic' ),
-					'max' => 5,
+					'max'    => 5,
 					'fields' => array(
 						array(
 							'id'       => 'inc',
@@ -668,8 +668,8 @@ TF_Metabox::metabox( 'tf_tours', array(
 					),
 				),
 				array(
-					'id' => 'inc_icon',
-					'type' => 'icon',
+					'id'       => 'inc_icon',
+					'type'     => 'icon',
 					'label'    => __( 'Included item icon', 'tourfic' ),
 					'subtitle' => __( 'Choose icon', 'tourfic' ),
 				),
@@ -677,7 +677,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 					'id'     => 'exc',
 					'type'   => 'repeater',
 					'label'  => __( 'Exclude', 'tourfic' ),
-					'max' => 5,
+					'max'    => 5,
 					'fields' => array(
 						array(
 							'id'       => 'exc',
@@ -688,8 +688,8 @@ TF_Metabox::metabox( 'tf_tours', array(
 					),
 				),
 				array(
-					'id' => 'exc_icon',
-					'type' => 'icon',
+					'id'       => 'exc_icon',
+					'type'     => 'icon',
 					'label'    => __( 'Excluded item icon', 'tourfic' ),
 					'subtitle' => __( 'Choose icon', 'tourfic' ),
 				),
@@ -703,7 +703,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 		),
 
 		// // Itinerary
-		'itinerary' => array(
+		'itinerary'            => array(
 			'title'  => __( 'Itinerary', 'tourfic' ),
 			'icon'   => 'fa-solid fa-clipboard-list',
 			'fields' => array(
@@ -744,8 +744,8 @@ TF_Metabox::metabox( 'tf_tours', array(
 			),
 		),
 
-		// // FAQs
-		'faqs' => array(
+		// FAQs
+		'faqs'                 => array(
 			'title'  => __( 'FAQs', 'tourfic' ),
 			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(
@@ -768,7 +768,7 @@ TF_Metabox::metabox( 'tf_tours', array(
 				),
 			),
 		),
-		
+
 
 		// // Terms & Conditions
 		'terms_and_conditions' => array(
@@ -785,50 +785,40 @@ TF_Metabox::metabox( 'tf_tours', array(
 
 
 		// // Settings
-		'settings' => array(
+		'settings'             => array(
 			'title'  => __( 'Settings', 'tourfic' ),
 			'icon'   => 'fa-solid fa-viruses',
 			'fields' => array(
 				array(
-					'id' => 'settings_headding',
-					'type' => 'heading',
-					'label' => 'Settings',  
+					'id'    => 'settings_headding',
+					'type'  => 'heading',
+					'label' => 'Settings',
 				),
 				array(
-					'id'       => 't-review',
-					'type'     => 'switch',
-					'label'    => __( 'Disable Review Section', 'tourfic' ),
+					'id'        => 't-review',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Review Section', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'default'  => false
+					'default'   => false
 				),
 				array(
-					'id'       => 't-related',
-					'type'     => 'switch',
-					'label'    => __( 'Disable Related Tour Section', 'tourfic' ),
+					'id'        => 't-related',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Related Tour Section', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'default'  => false
-				), 
+					'default'   => false
+				),
 
 				array(
-					'id' => 'notice',
-					'type'    => 'notice',
-					'notice'   => 'success',
-					'label' => __( 'These settings will overwrite global settings', 'tourfic' ),
+					'id'     => 'notice',
+					'type'   => 'notice',
+					'notice' => 'success',
+					'label'  => __( 'These settings will overwrite global settings', 'tourfic' ),
 				),
 			),
 		),
-
-		// // General
-		// 'general' => array(
-		// 	'title'  => __( 'General', 'tourfic' ),
-		// 	'icon'   => 'fa-solid fa-location-dot',
-		// 	'fields' => array(
-				 
-		// 	),
-		// ),
-
 
 	),
 ) );

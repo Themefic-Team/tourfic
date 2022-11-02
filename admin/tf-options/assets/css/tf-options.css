@@ -1635,6 +1635,7 @@ body.tf-modal-open:after {
   background-color: #fff;
   padding: 10px 0;
   box-shadow: 0px 5px 10px 1px #f5f5f5;
+  overflow: hidden;
 }
 .tf-repeater .tf-repeater-add .tf-repeater-icon {
   padding: 8px 15px;
