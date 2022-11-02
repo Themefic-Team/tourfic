@@ -28,10 +28,16 @@ if ( ! class_exists( 'TF_text' ) ) {
 									$parent    = '[' . $this->field['id'] . ']';
 									
 									$value     = isset( $tf_meta_box_value[ $field['id'] ]) ? $tf_meta_box_value[ $field['id'] ] : '';
+									print_r($value);
 									if(! empty( $this->value ) ){
-										$data = unserialize( $this->value ); 
+										$data = ( !is_array( $this->value ) ) ? unserialize( $this->value ) : $this->value; 
 										if(is_array($data)){ 
-											$value = ( isset( $field['id'] ) ) ? $data[ $field['id'] ] : '';
+											if(isset( $data[ $field['id'] ])){
+
+												$value = ( isset( $field['id'] ) ) ? $data[ $field['id'] ] : '';
+											}else{
+												$value = '';
+											}
 										}
 									}  
 									$tf_option = new TF_Options();

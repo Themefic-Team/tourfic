@@ -80,7 +80,7 @@ TF_Settings::option( 'tf_settings', array(
 
 				array(
 					'id'       => 'children_age_limit',
-					'type'     => 'number',
+					'type'     => 'swich',
 					'label'    => __( 'Children age limit', 'tourfic' ),
 					'subtitle' => __( 'keep blank if don\'t want to add', 'tourfic' ),
 					'is_pro'   => true,
