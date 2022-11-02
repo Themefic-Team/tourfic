@@ -55,15 +55,15 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		 * @author Foysal
 		 */
 		public function load_metaboxes() {
-            if($this->is_tf_pro_active()){
-	            $metaboxes = glob( TF_PRO_ADMIN_PATH . 'tf-options/metaboxes/*.php' );
-            } else {
-	            $metaboxes = glob( TF_ADMIN_PATH . 'tf-options/metaboxes/*.php' );
-            }
+			if ( $this->is_tf_pro_active() ) {
+				$metaboxes = glob( TF_PRO_ADMIN_PATH . 'tf-options/metaboxes/*.php' );
+			} else {
+				$metaboxes = glob( TF_ADMIN_PATH . 'tf-options/metaboxes/*.php' );
+			}
 
-            /*if( !empty( $pro_metaboxes ) ) {
-                $metaboxes = array_merge( $metaboxes, $pro_metaboxes );
-            }*/
+			/*if( !empty( $pro_metaboxes ) ) {
+				$metaboxes = array_merge( $metaboxes, $pro_metaboxes );
+			}*/
 			if ( ! empty( $metaboxes ) ) {
 				foreach ( $metaboxes as $metabox ) {
 					if ( file_exists( $metabox ) ) {
@@ -78,7 +78,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		 * @author Foysal
 		 */
 		public function load_options() {
-			if($this->is_tf_pro_active()){
+			if ( $this->is_tf_pro_active() ) {
 				$options = glob( TF_PRO_ADMIN_PATH . 'tf-options/options/*.php' );
 			} else {
 				$options = glob( TF_ADMIN_PATH . 'tf-options/options/*.php' );
@@ -86,9 +86,9 @@ if ( ! class_exists( 'TF_Options' ) ) {
 
 			if ( ! empty( $options ) ) {
 				foreach ( $options as $option ) {
-                    if ( file_exists( $option ) ) {
-                        require_once $option;
-                    }
+					if ( file_exists( $option ) ) {
+						require_once $option;
+					}
 				}
 			}
 		}
@@ -98,7 +98,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		 * @author Foysal
 		 */
 		public function load_taxonomy() {
-			if($this->is_tf_pro_active()){
+			if ( $this->is_tf_pro_active() ) {
 				$taxonomies = glob( TF_PRO_ADMIN_PATH . 'tf-options/taxonomies/*.php' );
 			} else {
 				$taxonomies = glob( TF_ADMIN_PATH . 'tf-options/taxonomies/*.php' );
@@ -133,15 +133,15 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			wp_enqueue_script( 'tf-select2', '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array( 'jquery' ), TOURFIC, true );
 			wp_enqueue_script( 'wp-color-picker-alpha', TF_ADMIN_URL . 'tf-options/assets/js/wp-color-picker-alpha.js', array( 'jquery', 'wp-color-picker' ), TOURFIC, true );
 			wp_enqueue_script( 'tf-options', TF_ADMIN_URL . 'tf-options/assets/js/tf-options.js', array( 'jquery', 'wp-color-picker' ), TOURFIC, true );
-			$tf_google_map = defined( 'TF_PRO' ) && !empty(tfopt('google-page-option')) ? tfopt('google-page-option') : "false";
+			$tf_google_map = defined( 'TF_PRO' ) && ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "false";
 			wp_localize_script( 'tf-options', 'tf_options', array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'nonce'    => wp_create_nonce( 'tf_options_nonce' ),
-				'gmaps'	   => $tf_google_map
+				'gmaps'    => $tf_google_map
 			) );
-      		if($tf_google_map!="googlemap"){
-			wp_enqueue_script( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.js' ), array( 'jquery' ), '1.9', true );
-			wp_enqueue_style( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.css' ), array(), '1.9' );
+			if ( $tf_google_map != "googlemap" ) {
+				wp_enqueue_script( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.js' ), array( 'jquery' ), '1.9', true );
+				wp_enqueue_style( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.css' ), array(), '1.9' );
 			}
 			wp_enqueue_script( 'jquery-ui-autocomplete' );
 			
@@ -200,16 +200,25 @@ if ( ! class_exists( 'TF_Options' ) ) {
 					$depend_visible  = ( ! empty( $dependency[4] ) ) ? $dependency[4] : '';
 				}
 
-				$depend .= ' data-controller="' . esc_attr( $data_controller ) . ''.$parent.'"';
+				$depend .= ' data-controller="' . esc_attr( $data_controller ) . '' . $parent . '"';
 				$depend .= ' data-condition="' . esc_attr( $data_condition ) . '"';
 				$depend .= ' data-value="' . esc_attr( $data_value ) . '"';
 				$depend .= ( ! empty( $data_global ) ) ? ' data-depend-global="true"' : '';
 
 				$visible = ( ! empty( $depend_visible ) ) ? ' tf-depend-visible' : ' tf-depend-hidden';
 			}
+
+			//field width
+			$field_width = isset( $field['field_width'] ) && ! empty( $field['field_width'] ) ? esc_attr($field['field_width']) : '100';
+			$field_style = '';
+			if($field_width == '100'){
+                $field_style = 'width:100%;';
+            } else {
+                $field_style = 'width:calc('.$field_width.'% - 10px);';
+            }
 			?>
 
-            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo ! empty( $visible ) ? $visible : ''; ?>" <?php echo ! empty( $depend ) ? $depend : ''; ?> >
+            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo ! empty( $visible ) ? $visible : ''; ?>" <?php echo ! empty( $depend ) ? $depend : ''; ?> style="<?php echo esc_attr($field_style); ?>">
 
 				<?php if ( ! empty( $field['label'] ) ): ?>
                     <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label">
@@ -244,12 +253,13 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			<?php
 		}
 
-        public function is_tf_pro_active(){
-	        if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
-                return true;
-	        }
-            return false;
-        }
+		public function is_tf_pro_active() {
+			if ( is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) && defined( 'TF_PRO' ) ) {
+				return true;
+			}
+
+			return false;
+		}
 
 	}
 }

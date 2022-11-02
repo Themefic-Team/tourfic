@@ -149,11 +149,15 @@
       flex: 0 0 calc(100% - 0px);
     }
 
+
     .tf-tab-content {
       display: none;
+      @include flex-wrap(wrap);
+      @include justify-content(space-between);
+      padding: 0 24px;
 
       &.active {
-        display: block;
+        @include flexbox();
       }
     }
   }

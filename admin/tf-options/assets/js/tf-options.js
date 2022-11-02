@@ -10,11 +10,11 @@
             let hash = window.location.hash;
 
             if (hash.indexOf('tab=dashboard') > -1) {
-                $('.tf-deshboard-wrapper').show();
+                $('.tf-deshboard-wrapper').css('display', 'flex');
                 $('.tf-option-wrapper').hide();
             } else {
                 $('.tf-deshboard-wrapper').hide();
-                $('.tf-option-wrapper').show();
+                $('.tf-option-wrapper').css('display', 'flex');
             }
             let slug = hash.replace('#tab=', '');
 
@@ -43,7 +43,7 @@
             tablinks.removeClass('active');
 
             let tabId = $this.attr('data-tab');
-            $('#' + tabId).show();
+            $('#' + tabId).css('display', 'flex');
 
             if($this.next().hasClass('tf-submenu')) {
                 firstTabId = parentDiv.find('.tf-submenu li:first-child .tf-tablinks').data('tab');
