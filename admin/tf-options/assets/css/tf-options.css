@@ -233,7 +233,7 @@ body.tf-modal-open {
   .tf-admin-meta-box .tf-admin-tab {
     border-right: 1px solid #e1e5ea;
     background-color: #f8f9fb;
-    min-width: 220px;
+    min-width: 280px;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -362,9 +362,9 @@ body.tf-modal-open {
             left: 0; }
   .tf-option .tf-tab-wrapper,
   .tf-admin-meta-box .tf-tab-wrapper {
-    -webkit-flex: 0 0 calc(100% - 220px);
-    -ms-flex: 0 0 calc(100% - 220px);
-    flex: 0 0 calc(100% - 220px); }
+    -webkit-flex: 0 0 calc(100% - 280px);
+    -ms-flex: 0 0 calc(100% - 280px);
+    flex: 0 0 calc(100% - 280px); }
     @media only screen and (max-width: 991.98px) {
       .tf-option .tf-tab-wrapper,
       .tf-admin-meta-box .tf-tab-wrapper {
@@ -474,9 +474,9 @@ body.tf-modal-open {
   width: 100%;
   margin: 0; }
   .tf-option .tf-tab-wrapper {
-    -webkit-flex: 0 0 calc(100% - 221px);
-    -ms-flex: 0 0 calc(100% - 221px);
-    flex: 0 0 calc(100% - 221px);
+    -webkit-flex: 0 0 calc(100% - 281px);
+    -ms-flex: 0 0 calc(100% - 281px);
+    flex: 0 0 calc(100% - 281px);
     background-color: #fff;
     padding: 12px 0; }
     @media only screen and (max-width: 991.98px) {
@@ -494,7 +494,6 @@ body.tf-modal-open {
     .tf-deshboard-wrapper .tf-deshboard-version span {
       display: flex;
       align-items: center;
-      font-family: 'Lato';
       font-style: normal;
       font-weight: 700;
       font-size: 20px;
@@ -502,7 +501,6 @@ body.tf-modal-open {
       color: #363e4a;
       letter-spacing: 0.02em; }
       .tf-deshboard-wrapper .tf-deshboard-version span .version {
-        font-family: 'Lato';
         font-style: normal;
         font-weight: 700;
         font-size: 14px;
@@ -514,7 +512,6 @@ body.tf-modal-open {
         color: #fff;
         margin: 0px 5px; }
       .tf-deshboard-wrapper .tf-deshboard-version span span {
-        font-family: 'Lato';
         font-style: normal;
         font-weight: 400;
         font-size: 14px !important;
@@ -529,16 +526,15 @@ body.tf-modal-open {
     width: 100%;
     display: flex;
     justify-content: space-between; }
-    @media all and (max-width: 1199.98px) {
+    @media only screen and (max-width: 1199.98px) {
       .tf-deshboard-wrapper .tf-deshboard-overview {
         display: flow-root; } }
     .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview {
       width: 69%; }
-      @media all and (max-width: 1199.98px) {
+      @media only screen and (max-width: 1199.98px) {
         .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview {
           width: 100%; } }
       .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview span.tf-details-overview-title {
-        font-family: 'Lato';
         font-style: normal;
         font-weight: 600;
         font-size: 16px;
@@ -549,7 +545,7 @@ body.tf-modal-open {
       .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items {
         display: flex;
         justify-content: space-between; }
-        @media all and (max-width: 767.98px) {
+        @media only screen and (max-width: 767.98px) {
           .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items {
             display: flow-root; } }
         .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items .tf-details-single-items {
@@ -559,7 +555,7 @@ body.tf-modal-open {
           border-radius: 8px;
           padding-bottom: 20px;
           margin: 8px 0px; }
-          @media all and (max-width: 767.98px) {
+          @media only screen and (max-width: 767.98px) {
             .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items .tf-details-single-items {
               width: 48%;
               float: left;
@@ -567,7 +563,6 @@ body.tf-modal-open {
           .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items .tf-details-single-items h3 {
             text-align: center;
             padding: 16px 5px;
-            font-family: 'Lato';
             font-style: normal;
             font-weight: 700;
             font-size: 16px;
@@ -583,7 +578,6 @@ body.tf-modal-open {
             .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items .tf-details-single-items h3 span {
               width: 40px;
               margin: 0;
-              font-size: 20px;
               font-weight: 400;
               line-height: 0px;
               margin-right: 10px;
@@ -610,7 +604,6 @@ body.tf-modal-open {
               background: #006600;
               margin-left: 3px; }
           .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items .tf-details-single-items span {
-            font-family: 'Lato';
             font-weight: 700;
             font-size: 30px;
             line-height: 40px;
@@ -627,7 +620,6 @@ body.tf-modal-open {
             font-weight: 600;
             display: block;
             text-align: center;
-            font-family: 'Lato';
             font-size: 16px;
             transition: .3s all ease; }
           .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items .tf-details-single-items:hover h3 {
@@ -641,11 +633,10 @@ body.tf-modal-open {
               outline: none; }
     .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions {
       width: 30%; }
-      @media all and (max-width: 1199.98px) {
+      @media only screen and (max-width: 1199.98px) {
         .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions {
           width: 100%; } }
       .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions span.tf-details-overview-title {
-        font-family: 'Lato';
         font-style: normal;
         font-weight: 600;
         font-size: 16px;
@@ -679,7 +670,6 @@ body.tf-modal-open {
             color: #fff;
             font-size: 31px; }
         .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-facebook-community span {
-          font-family: 'Lato';
           font-style: normal;
           font-weight: 400;
           font-size: 15px;
@@ -704,7 +694,6 @@ body.tf-modal-open {
             font-size: 36px;
             margin-right: 10px; }
           .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-plugin-documentation .tf-plugin-details-info span {
-            font-family: 'Lato';
             font-style: normal;
             font-weight: 400;
             font-size: 16px;
@@ -714,7 +703,6 @@ body.tf-modal-open {
           margin-top: 16px;
           text-align: right; }
           .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-plugin-documentation .tf-plugin-document-link a {
-            font-family: 'Lato';
             font-style: normal;
             font-weight: 600;
             font-size: 16px;
@@ -767,8 +755,8 @@ body.tf-modal-open {
 .tf-field-text input {
   width: 100%;
   padding: 12px 8px 12px 12px;
-  border: 1px solid #C4CBD4;
-  background: #F5F8FF;
+  border: 1px solid #c4cbd4;
+  background-color: #f5f8ff;
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
@@ -796,9 +784,8 @@ body.tf-modal-open {
   width: 100%;
   height: 180px;
   padding: 12px 8px 12px 12px;
-  border: none;
-  border: 1px solid #C4CBD4;
-  background: #F5F8FF;
+  border: 1px solid #c4cbd4;
+  background-color: #f5f8ff;
   border-radius: 4px;
   color: #363e4a;
   font-size: 14px; }
@@ -810,9 +797,8 @@ body.tf-modal-open {
 .tf-field-select select.tf-select {
   width: 100%;
   padding: 12px 8px 12px 12px;
-  border: none;
-  border: 1px solid #C4CBD4;
-  background-color: #F5F8FF;
+  border: 1px solid #c4cbd4;
+  background-color: #f5f8ff;
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
@@ -826,9 +812,8 @@ body.tf-modal-open {
   .tf-field-select2 .select2-container .select2-selection {
     width: 100%;
     padding: 12px 8px 12px 12px;
-    border: none;
-    border: 1px solid #C4CBD4;
-    background: #F5F8FF;
+    border: 1px solid #c4cbd4;
+    background-color: #f5f8ff;
     border-radius: 4px;
     height: 48px;
     color: #363e4a;
@@ -1021,8 +1006,8 @@ body.tf-modal-open {
     width: 90%;
     padding: 12px 8px 12px 12px;
     border: none;
-    background: #F5F8FF;
-    border: 1px solid #C4CBD4;
+    background-color: #f5f8ff;
+    border: 1px solid #c4cbd4;
     border-radius: 4px;
     height: 48px;
     color: #363e4a;
@@ -1051,7 +1036,7 @@ body.tf-modal-open {
       color: #363e4a;
       font-size: 14px;
       background: #fff;
-      border: 1px solid #C4CBD4;
+      border: 1px solid #c4cbd4;
       white-space: nowrap;
       overflow: hidden; }
     .tf-taxonomy-metabox .tf-field-image .tf-fieldset .tf-fieldset-media a.tf-media-upload {
@@ -1249,7 +1234,7 @@ body.tf-modal-open {
   width: 100%;
   padding: 12px 8px 12px 12px;
   border: none;
-  background: #F8F9FB;
+  background-color: #f5f8ff;
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
@@ -1286,7 +1271,7 @@ body.tf-modal-open {
   width: 100%;
   padding: 12px 8px 12px 12px;
   border: none;
-  background: #F8F9FB;
+  background-color: #f5f8ff;
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
@@ -1399,7 +1384,6 @@ body.tf-modal-open {
   .tf-tablist ul.tf-nav-tabs li.tf-tab-item {
     display: inline-block;
     padding: 8px 24px;
-    font-family: 'Lato';
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -1422,7 +1406,7 @@ body.tf-modal-open {
     border-bottom: 4px solid #607085;
     color: #404040; }
 .tf-tablist .tf-tab-field-content .tf-tab-item-content {
-  border: 1px solid #F0F2F4;
+  border: 1px solid #f0f2f4;
   width: 100%;
   display: none;
   visibility: hidden;
@@ -1436,8 +1420,8 @@ body.tf-modal-open {
   .tf-field-map .tf--map-search input {
     width: 100%;
     padding: 12px 8px 12px 12px;
-    border: 1px solid #C4CBD4;
-    background: #F5F8FF;
+    border: 1px solid #c4cbd4;
+    background-color: #f5f8ff;
     border-radius: 4px;
     height: 48px;
     color: #363e4a;
@@ -1464,8 +1448,8 @@ body.tf-modal-open {
     .tf-field-map .tf--map-inputs .tf--map-input input {
       width: 100%;
       padding: 12px 8px 12px 12px;
-      border: 1px solid #C4CBD4;
-      background: #F5F8FF;
+      border: 1px solid #c4cbd4;
+      background-color: #f5f8ff;
       border-radius: 4px;
       height: 48px;
       color: #363e4a;
@@ -1666,8 +1650,8 @@ body.tf-modal-open {
 .tf-field-number input {
   width: 100%;
   padding: 12px 8px 12px 12px;
-  border: 1px solid #C4CBD4;
-  background: #F5F8FF;
+  border: 1px solid #c4cbd4;
+  background-color: #f5f8ff;
   border-radius: 4px;
   height: 48px;
   color: #363e4a;

@@ -11,9 +11,12 @@ if ( ! class_exists( 'TF_map' ) ) {
 
 		public function render() {
             if ( ! empty( $this->value ) ):
-                $mapdata = unserialize( $this->value );
+              $tf_map_serialized_data = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+              }, $this->value );
+            
+             $mapdata = unserialize( $tf_map_serialized_data );
             endif;
-            // var_dump($mapdata);
             $args              = wp_parse_args( $this->field, array(
                 'placeholder'    => esc_html__( 'Search Addres...', 'tourfic' ),
                 'latitude_text'  => esc_html__( 'Latitude', 'tourfic' ),
@@ -49,11 +52,10 @@ if ( ! class_exists( 'TF_map' ) ) {
               if ( empty( $args['address_field'] ) ) {
                 echo '<div class="tf--map-search">';
                 if( !empty($mapdata['address']) ){
-                    echo '<input type="text" name="'. esc_attr( $this->field_name( ) ). '[address]' .'" value="'. esc_attr( $mapdata['address'] ) .'" placeholder="' . esc_attr( $args['placeholder'] ) . '" />';
+                    echo '<input type="text" class="tf_gmap_address" name="'. esc_attr( $this->field_name( ) ). '[address]' .'" value="'. esc_attr( $mapdata['address'] ) .'" placeholder="' . esc_attr( $args['placeholder'] ) . '" />';
                 }else{
-                    echo '<input type="text" name="'. esc_attr( $this->field_name( ) ). '[address]' .'" value="'. esc_attr( $value['address'] ) .'" placeholder="' . esc_attr( $args['placeholder'] ) . '" />';
+                    echo '<input type="text" class="tf_gmap_address" name="'. esc_attr( $this->field_name( ) ). '[address]' .'" value="'. esc_attr( $value['address'] ) .'" placeholder="' . esc_attr( $args['placeholder'] ) . '" />';
                 }
-
                 echo '</div>';
               } else {
                 echo '<div class="tf--address-field" data-address-field="'. esc_attr( $args['address_field'] ) .'"></div>';

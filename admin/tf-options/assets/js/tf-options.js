@@ -8,6 +8,14 @@
         */
         $(window).on('hashchange load', function () {
             let hash = window.location.hash;
+
+            if (hash.indexOf('tab=dashboard') > -1) {
+                $('.tf-deshboard-wrapper').show();
+                $('.tf-option-wrapper').hide();
+            } else {
+                $('.tf-deshboard-wrapper').hide();
+                $('.tf-option-wrapper').show();
+            }
             let slug = hash.replace('#tab=', '');
 
             if (hash) {
@@ -165,8 +173,8 @@
                    var $tffields = $(this);
                     if ($tffields.length) {
                         // alert($tffields.length);
-                            var normal_ruleset = $.csf_deps.createRuleset(),
-                            global_ruleset = $.csf_deps.createRuleset(),
+                            var normal_ruleset = $.tf_deps.createRuleset(),
+                            global_ruleset = $.tf_deps.createRuleset(),
                             normal_depends = [],
                             global_depends = [];
                     
@@ -199,11 +207,11 @@
                             });
                     
                             if (normal_depends.length) {
-                                $.csf_deps.enable($this, normal_ruleset, normal_depends);
+                                $.tf_deps.enable($this, normal_ruleset, normal_depends);
                             }
                             
                             if (global_depends.length) {
-                                $.csf_deps.enable(CSF.vars.$body, global_ruleset, global_depends);
+                                $.tf_deps.enable(TF.vars.$body, global_ruleset, global_depends);
                             }
                     }
                 });
@@ -689,119 +697,121 @@ var frame, gframe;
             $(".tf-fieldset-media-preview").html("");
         });
 
-        $(".tf-field-map").each(function () {
-            var $this = $(this),
-                $map = $this.find('.tf--map-osm'),
-                $search_input = $this.find('.tf--map-search input'),
-                $latitude = $this.find('.tf--latitude'),
-                $longitude = $this.find('.tf--longitude'),
-                $zoom = $this.find('.tf--zoom'),
-                map_data = $map.data('map');
+        if(tf_options.gmaps!="googlemap"){
+            $(".tf-field-map").each(function () {
+                var $this = $(this),
+                    $map = $this.find('.tf--map-osm'),
+                    $search_input = $this.find('.tf--map-search input'),
+                    $latitude = $this.find('.tf--latitude'),
+                    $longitude = $this.find('.tf--longitude'),
+                    $zoom = $this.find('.tf--zoom'),
+                    map_data = $map.data('map');
 
-            var mapInit = L.map($map.get(0), map_data);
+                var mapInit = L.map($map.get(0), map_data);
 
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(mapInit);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(mapInit);
 
-            var mapMarker = L.marker(map_data.center, {draggable: true}).addTo(mapInit);
+                var mapMarker = L.marker(map_data.center, {draggable: true}).addTo(mapInit);
 
-            var update_latlng = function (data) {
-                $latitude.val(data.lat);
-                $longitude.val(data.lng);
-                $zoom.val(mapInit.getZoom());
-            };
+                var update_latlng = function (data) {
+                    $latitude.val(data.lat);
+                    $longitude.val(data.lng);
+                    $zoom.val(mapInit.getZoom());
+                };
 
-            mapInit.on('click', function (data) {
-                mapMarker.setLatLng(data.latlng);
-                update_latlng(data.latlng);
-            });
+                mapInit.on('click', function (data) {
+                    mapMarker.setLatLng(data.latlng);
+                    update_latlng(data.latlng);
+                });
 
-            mapInit.on('zoom', function () {
-                update_latlng(mapMarker.getLatLng());
-            });
+                mapInit.on('zoom', function () {
+                    update_latlng(mapMarker.getLatLng());
+                });
 
-            mapMarker.on('drag', function () {
-                update_latlng(mapMarker.getLatLng());
-            });
+                mapMarker.on('drag', function () {
+                    update_latlng(mapMarker.getLatLng());
+                });
 
-            if (!$search_input.length) {
-                $search_input = $('[data-depend-id="' + $this.find('.tf--address-field').data('address-field') + '"]');
-            }
+                if (!$search_input.length) {
+                    $search_input = $('[data-depend-id="' + $this.find('.tf--address-field').data('address-field') + '"]');
+                }
 
-            var cache = {};
+                var cache = {};
 
-            $search_input.autocomplete({
-                source: function (request, response) {
+                $search_input.autocomplete({
+                    source: function (request, response) {
 
-                    var term = request.term;
+                        var term = request.term;
 
-                    if (term in cache) {
-                        response(cache[term]);
-                        return;
-                    }
-
-                    $.get('https://nominatim.openstreetmap.org/search', {
-                        format: 'json',
-                        q: term,
-                    }, function (results) {
-
-                        var data;
-
-                        if (results.length) {
-                            data = results.map(function (item) {
-                                return {
-                                    value: item.display_name,
-                                    label: item.display_name,
-                                    lat: item.lat,
-                                    lon: item.lon
-                                };
-                            }, 'json');
-                        } else {
-                            data = [{
-                                value: 'no-data',
-                                label: 'No Results.'
-                            }];
+                        if (term in cache) {
+                            response(cache[term]);
+                            return;
                         }
 
-                        cache[term] = data;
-                        response(data);
+                        $.get('https://nominatim.openstreetmap.org/search', {
+                            format: 'json',
+                            q: term,
+                        }, function (results) {
 
-                    });
+                            var data;
 
-                },
-                select: function (event, ui) {
+                            if (results.length) {
+                                data = results.map(function (item) {
+                                    return {
+                                        value: item.display_name,
+                                        label: item.display_name,
+                                        lat: item.lat,
+                                        lon: item.lon
+                                    };
+                                }, 'json');
+                            } else {
+                                data = [{
+                                    value: 'no-data',
+                                    label: 'No Results.'
+                                }];
+                            }
 
-                    if (ui.item.value === 'no-data') {
-                        return false;
+                            cache[term] = data;
+                            response(data);
+
+                        });
+
+                    },
+                    select: function (event, ui) {
+
+                        if (ui.item.value === 'no-data') {
+                            return false;
+                        }
+
+                        var latLng = L.latLng(ui.item.lat, ui.item.lon);
+
+                        mapInit.panTo(latLng);
+                        mapMarker.setLatLng(latLng);
+                        update_latlng(latLng);
+
+                    },
+                    create: function (event, ui) {
+                        $(this).autocomplete('widget').addClass('tf-map-ui-autocomplate');
                     }
+                });
 
-                    var latLng = L.latLng(ui.item.lat, ui.item.lon);
+                var input_update_latlng = function () {
+
+                    var latLng = L.latLng($latitude.val(), $longitude.val());
 
                     mapInit.panTo(latLng);
                     mapMarker.setLatLng(latLng);
-                    update_latlng(latLng);
 
-                },
-                create: function (event, ui) {
-                    $(this).autocomplete('widget').addClass('tf-map-ui-autocomplate');
-                }
+                };
+
+                $latitude.on('change', input_update_latlng);
+                $longitude.on('change', input_update_latlng);
+
             });
-
-            var input_update_latlng = function () {
-
-                var latLng = L.latLng($latitude.val(), $longitude.val());
-
-                mapInit.panTo(latLng);
-                mapMarker.setLatLng(latLng);
-
-            };
-
-            $latitude.on('change', input_update_latlng);
-            $longitude.on('change', input_update_latlng);
-
-        });
+        }
 
         $('.tf-mobile-tabs').click(function (e) {
             e.preventDefault();
@@ -994,7 +1004,7 @@ var frame, gframe;
         if( result ) {
   
           $(controls).each(function() {
-            $(this).removeClass('csf-depend-on');
+            $(this).removeClass('tf-depend-on');
           });
   
           $(this.rules).each(function() {
@@ -1004,7 +1014,7 @@ var frame, gframe;
         } else {
   
           $(controls).each(function() {
-            $(this).addClass('csf-depend-on');
+            $(this).addClass('tf-depend-on');
           });
   
           $(this.rules).each(function() {
@@ -1034,7 +1044,7 @@ var frame, gframe;
       }
     });
   
-    $.csf_deps = {
+    $.tf_deps = {
   
       createRuleset: function() {
         return new Ruleset();

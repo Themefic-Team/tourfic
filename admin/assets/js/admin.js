@@ -154,10 +154,12 @@
          * Pro Feature button link
          */
         $(document).on('click', '.tf-pro', function(e) {
+            e.preventDefault();
             window.open('https://tourfic.com/');
         });
 
         $(document).on('click', '.tf-csf-pro', function(e) {
+            e.preventDefault();
             window.open('https://tourfic.com/');
         });
 
