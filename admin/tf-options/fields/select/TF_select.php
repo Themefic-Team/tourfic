@@ -11,15 +11,19 @@ if ( ! class_exists( 'TF_select' ) ) {
 
 		public function render() {
 
-			if(empty($this->field['options'])){
+			if(empty($this->field['options']) && empty($this->field['options_callback'])) {
 				return;
+			}
+
+			if(isset($this->field['options_callback']) && is_callable($this->field['options_callback'])) {
+				$this->field['options'] = call_user_func($this->field['options_callback']);
 			}
 
 			if(!empty($this->field['query_args']) && $this->field['options'] == 'posts'){
 				$posts = get_posts($this->field['query_args']);
 				$this->field['options'] = array();
 				foreach($posts as $post){
-					$this->field['options'][$post->ID] = $post->post_title;
+					$args['options'][$post->ID] = (empty($post->post_title)) ? 'No title ('.$post->ID.')' : $post->post_title;
 				}
 			}
 

@@ -144,6 +144,10 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			wp_enqueue_style( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.css' ), array(), '1.9' );
 			}
 			wp_enqueue_script( 'jquery-ui-autocomplete' );
+			
+			if ( ! wp_script_is( 'jquery-ui-sortable' ) ) {
+				wp_enqueue_script( 'jquery-ui-sortable' );
+			}
 
 		}
 

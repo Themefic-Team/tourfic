@@ -178,9 +178,9 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									while ( $total_room_details->have_posts() ) : $total_room_details->the_post();
 										$tf_room_meta = get_post_meta( get_the_ID(), 'tf_hotel', true );
 										$tf_rooms     = ! empty( $tf_room_meta['room'] ) ? $tf_room_meta['room'] : '';
-										if(!empty($tf_rooms)){
+										if(!empty($tf_rooms )){
 											foreach ( $tf_rooms as $key => $room ) {
-												$tf_room_no          = ! empty( $room['num-room'] ) ? $room['num-room'] : '';
+												$tf_room_no          = ! empty( $room['num-room'] ) ? $room['num-room'] : 0;
 												$totals_rooms_number += $tf_room_no;
 											}
 										}
