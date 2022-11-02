@@ -696,6 +696,18 @@ var frame, gframe;
         $('#addtag > .submit #submit').click(function () {
             $(".tf-fieldset-media-preview").html("");
         });
+        
+        // Switcher Value Changed
+        $('.tf-switch').change(function () {
+            var $this = $(this);
+            if (this.checked) {
+                var $this = $(this);
+                var value = $this.val(1);
+            } else {
+                var $this = $(this);
+                var value = $this.val('');
+            }
+        });
 
         if(tf_options.gmaps!="googlemap"){
             $(".tf-field-map").each(function () {
