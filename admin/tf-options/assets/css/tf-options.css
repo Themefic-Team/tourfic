@@ -203,6 +203,11 @@ body.tf-modal-open {
     transform: translateY(0px); }
   100% {
     transform: translateY(-15px); } }
+@media only screen and (max-width: 991.98px) {
+  #tf_tours_opt .tf-admin-meta-box {
+    position: relative;
+    min-height: 660px; } }
+
 .tf-option,
 .tf-admin-meta-box {
   display: -webkit-box;
