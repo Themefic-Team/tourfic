@@ -60,6 +60,12 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 wp_enqueue_script( 'Chart', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js', array( 'jquery' ), '2.6.0', true );
                 $meta = get_post_meta( get_the_ID(),'tf_tours_opt',true );
                 $itineraries = $meta['itinerary'] ? $meta['itinerary'] : null;
+                if( !empty($itineraries) && gettype($itineraries)=="string" ){
+                    $tf_hotel_itineraries_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                        return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+                    }, $itineraries );
+                    $itineraries = unserialize( $tf_hotel_itineraries_value );
+                }
                 $itinerarayday = [];
                 $itineraraymeter = [];
                 if( $itineraries ) {
