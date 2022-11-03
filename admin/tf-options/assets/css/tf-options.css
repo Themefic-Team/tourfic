@@ -1723,13 +1723,21 @@ body.tf-modal-open:after {
 }
 .tf-tablist .tf-tab-field-content .tf-tab-item-content {
   border: 1px solid #f0f2f4;
-  width: 100%;
   display: none;
   visibility: hidden;
-  padding: 10px 0;
+  padding: 10px 24px;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
 }
 .tf-tablist .tf-tab-field-content .show {
-  display: block;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
   visibility: visible;
 }
 

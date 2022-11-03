@@ -171,12 +171,12 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				$is_pro = false;
 			}
 			if ( $is_pro == true || $badge_up == true ) {
-				$class .= 'tf-csf-disable tf-csf-pro';
+				$class .= ' tf-csf-disable tf-csf-pro';
 			}
 			$tf_meta_box_dep_value = get_post_meta( get_the_ID(), $settings_id, true );
 
-			$depend = '';
 
+			$depend = '';
 			if ( ! empty( $field['dependency'] ) ) {
 
 				$dependency      = $field['dependency'];
@@ -210,7 +210,6 @@ if ( ! class_exists( 'TF_Options' ) ) {
 
 			//field width
 			$field_width = isset( $field['field_width'] ) && ! empty( $field['field_width'] ) ? esc_attr($field['field_width']) : '100';
-			$field_style = '';
 			if($field_width == '100'){
                 $field_style = 'width:100%;';
             } else {
