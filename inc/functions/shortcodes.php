@@ -952,7 +952,7 @@ function tf_recent_blog_callback($atts, $content = null){
 				'title'   => '',
 				'subtitle'   => '',
 				'count'       => '5',
-				'category'       => '',
+				'cats'       => '',
 
 			),
 			$atts
@@ -966,19 +966,21 @@ function tf_recent_blog_callback($atts, $content = null){
 		'order'          => 'DESC',
 		'posts_per_page' => $count,
 	);
-	//Check if destination selected/choosen
-	if( !empty( $categories )){
-		$categories = explode(',',$categories);
+
+	//Check if category selected/choosen
+	if( !empty( $cats )){
+		$cats = explode(',',$cats);
 		$args['tax_query'] = array(
 			'relation' => 'AND',
 			array(
 				'taxonomy' => 'category',
 				'field'    => 'term_id',
-				'terms'    => $categories,
+				'terms'    => $cats,
 			)
 		);
 	}
 	$loop = new WP_Query($args);
+
 	ob_start();
 
 	?>
@@ -1000,50 +1002,44 @@ function tf_recent_blog_callback($atts, $content = null){
 				<?php while ( $loop->have_posts() ) {
 					$loop->the_post();
 					$post_id = get_the_ID();
+
+					//different markup for first 3 posts
 					if($loop->current_post == 0){
 						echo  "<div class='post-section-one'>";
 					}
 
 					if($loop->current_post <= 2){
-
-					?>
+				?>
 					
-                    <div class="tf-single-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
-                        <div class="tf-post-content">
-                            <div class="tf-post-desc">
-                                <h3>
-                                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
-                                </h3>
-                                <p><?php echo wp_trim_words( get_the_excerpt(), 10 ); ?></p>
+				<div class="tf-single-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+					<div class="tf-post-content">
+						<div class="tf-post-desc">
+							<h3>
+								<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+							</h3>
+							<p><?php echo wp_trim_words( get_the_excerpt(), 10 ); ?></p>
 
-                            </div>
-                        </div>
-                    </div>
-					<!-- </div> -->
-					<?php
+						</div>
+					</div>
+				</div>
+				<?php
 					if($loop->current_post == 2){
 						echo  "</div>";
 					}
-					if($loop->current_post == 3){
-						echo  "<div class='post-section-two'>";
-					}
-				}else{
-						?>
-						<!-- <div class="post-section-two"> -->
-							<div class="tf-single-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
-								<div class="tf-post-content">
-									<div class="tf-post-desc">
-										<h3>
-											<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
-										</h3>
-										<p><?php echo wp_trim_words( get_the_excerpt(), 10 ); ?></p>
+				}else{ ?>						
+				<div class="tf-single-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+					<div class="tf-post-content">
+						<div class="tf-post-desc">
+							<h3>
+								<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+							</h3>
+							<p><?php echo wp_trim_words( get_the_excerpt(), 10 ); ?></p>
 
-									</div>
-								</div>
-							</div>
-					<!-- </div> -->
-					<?php } ?>
-				<?php } ?>
+						</div>
+					</div>
+				</div>
+
+				<?php } } ?>
             </div>
         </div>
 	<?php }else{
