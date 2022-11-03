@@ -171,7 +171,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				$is_pro = false;
 			}
 			if ( $is_pro == true || $badge_up == true ) {
-				$class .= ' tf-csf-disable tf-csf-pro';
+				$class .= ' tf-field-disable tf-field-pro';
 			}
 			$tf_meta_box_dep_value = get_post_meta( get_the_ID(), $settings_id, true );
 
@@ -230,6 +230,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 						<?php endif; ?>
                     </label>
 				<?php endif; ?>
+
 				<?php if ( ! empty( $field['subtitle'] ) ) : ?>
                     <span class="tf-field-sub-title"><?php echo wp_kses_post( $field['subtitle'] ) ?></span>
 				<?php endif; ?>

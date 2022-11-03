@@ -132,3 +132,7 @@ body.tf-modal-open {
     margin-right: 15px;
   }
 }
+
+.tf-field-disable {
+  user-select: none;
+}

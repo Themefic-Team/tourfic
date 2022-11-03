@@ -93,6 +93,20 @@
         });
 
         /**
+         * Hotel location required
+         *
+         * show notyf error
+         */
+        $(document).on('click', '.post-type-tf_hotel #publish, .post-type-tf_hotel #save-post', function(e) {
+            if( $('textarea[name="tf_hotels_opt[address]"]').val().length === 0 ) {
+                e.preventDefault;
+                e.stopImmediatePropagation();
+                notyf.error(tf_admin_params.hotel_location_required);
+                return false;
+            }
+        });
+
+        /**
          * Hotel and Tour feature images required
          * 
          * show notyf error
@@ -158,7 +172,11 @@
             window.open('https://tourfic.com/');
         });
 
-        $(document).on('click', '.tf-csf-pro', function(e) {
+        $(window).on('load', function() {
+            $('.tf-field-pro').find('input, select, textarea, button, div, span').attr('disabled', 'disabled');
+        });
+
+        $(document).on('click', '.tf-field-pro', function(e) {
             e.preventDefault();
             window.open('https://tourfic.com/');
         });

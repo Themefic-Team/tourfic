@@ -10,7 +10,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 	'post_type' => 'tf_hotel',
 	'sections'  => array(
 		'location'         => array(
-			'title'  => __('Location', 'tourfic'),
+			'title'  => __( 'Location', 'tourfic' ),
 			'icon'   => 'fa-solid fa-location-dot',
 			'fields' => array(
 				array(
@@ -51,7 +51,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'        => 'featured',
 					'type'      => 'switch',
 					'label'     => __( 'Featured Hotel', 'tourfic' ),
-					'is_pro'    => true,
+					'badge_up'  => true,
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false,
@@ -65,7 +65,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'subtitle'    => __( 'Enter YouTube/Vimeo URL here', 'tourfic' ),
 					'validate'    => 'csf_validate_url',
 					'placeholder' => __( '', 'tourfic' ),
-					'dependency'  => array( 'featured', '==', '1' ),
 				),
 			),
 		),
@@ -79,7 +78,8 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'type'     => 'switch',
 					'label'    => __( 'Pickup Service', 'tourfic' ),
 					'subtitle' => __( 'Airport Service', 'tourfic' ),
-					'default'  => false,
+					'default'  => true,
+					'is_pro'   => true,
 				)
 			),
 		),
@@ -89,13 +89,13 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 			'icon'   => 'fa-solid fa-clock-rotate-left',
 			'fields' => array(
 				array(
-					'id'           => '',
-					'type'         => 'switch',
-					'label'        => __( 'Allowed Full Day Booking', 'tourfic' ),
-					'is_pro'       => true,
-					'badge_up_pro' => true,
-					'subtitle'     => __( 'You can book room with full day', 'tourfic' ),
-					'desc'         => __( 'E.g: booking from 22 -23, then all days 22 and 23 are full, other people cannot book', 'tourfic' ),
+					'id'       => '',
+					'type'     => 'switch',
+					'label'    => __( 'Allowed Full Day Booking', 'tourfic' ),
+					'is_pro'   => true,
+					'badge_up' => true,
+					'subtitle' => __( 'You can book room with full day', 'tourfic' ),
+					'desc'     => __( 'E.g: booking from 22 -23, then all days 22 and 23 are full, other people cannot book', 'tourfic' ),
 				),
 
 			),
@@ -219,7 +219,21 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'type'        => 'text',
 							'label'       => __( 'Room Footage', 'tourfic' ),
 							'subtitle'    => __( 'Room footage (sft)', 'tourfic' ),
-							'field_width' => 33.33,
+							'field_width' => 50,
+						),
+						array(
+							'id'          => 'features',
+							'type'        => 'select2',
+							'label'       => __( 'Select Features', 'tourfic' ),
+							'subtitle'    => __( 'Please Select Features', 'tourfic' ),
+							'placeholder' => __( 'Select', 'tourfic' ),
+							'multiple'    => true,
+							'options'     => 'terms',
+							'query_args'  => array(
+								'taxonomy' => 'hotel_feature',
+								'hide_empty' => false,
+							),
+							'field_width' => 50,
 						),
 						array(
 							'id'    => 'description',
@@ -256,6 +270,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'is_pro'     => true,
 							'desc'       => __( 'The price of room per one night', 'tourfic' ),
 							'dependency' => array( 'pricing-by', '==', '2' ),
+							'field_width' => 50,
 						),
 
 						array(
@@ -265,6 +280,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'is_pro'     => true,
 							'desc'       => __( 'The price of room per one night', 'tourfic' ),
 							'dependency' => array( 'pricing-by', '==', '2' ),
+							'field_width' => 50,
 						),
 						array(
 							'id'        => 'price_multi_day',
@@ -434,8 +450,8 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'     => 'notice',
 					'type'   => 'notice',
-					'notice' => 'success',
-					'label'  => __( 'These settings will overwrite global settings', 'tourfic' ),
+					'notice' => 'info',
+					'content'  => __( 'These settings will overwrite global settings', 'tourfic' ),
 				),
 
 			),
