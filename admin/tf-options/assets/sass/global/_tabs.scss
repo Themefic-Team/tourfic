@@ -1,3 +1,9 @@
+#tf_tours_opt .tf-admin-meta-box {
+  @media #{$max991}{
+    position: relative;
+    min-height: 660px;
+  }
+}
 .tf-option,
 .tf-admin-meta-box {
   @include flexbox();

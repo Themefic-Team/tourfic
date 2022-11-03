@@ -425,40 +425,40 @@
 
             if (parent_field == '') {
                 add_value.find(':input').each(function () {
-                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
-                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
                 });
                 var update_paren = add_value.find('.tf-repeater input[name="tf_parent_field"]').val();
                 if (typeof update_paren !== "undefined") {
-                    var update_paren = update_paren.replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                    var update_paren = update_paren.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
                 }
                 add_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
 
             } else {
                 var update_paren = add_value.find(':input[name="tf_parent_field"]').val();
                 add_value.find(':input').each(function () {
-                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
-                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
                 });
             }
             add_value.find('label').each(function () {
                 var for_value = $(this).attr("for");
                 if (typeof for_value !== "undefined") {
-                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']');
+                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
                     $(this).attr("for", for_value);
                 }
             });
             add_value.find('[data-depend-id]').each(function () { 
                 var data_depend_id = $(this).attr("data-depend-id"); 
                 if (typeof data_depend_id !== "undefined") {
-                    data_depend_id = data_depend_id.replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']'); 
+                    data_depend_id = data_depend_id.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']'); 
                     $(this).attr("data-depend-id", data_depend_id);
                 }
             });
             add_value.find('[data-controller]').each(function () { 
                 var data_controller = $(this).attr("data-controller"); 
                 if (typeof data_controller !== "undefined") {
-                    data_controller = data_controller.replace('[' + current_field + '][0]', '[' + current_field + '][' + count + ']'); 
+                    data_controller = data_controller.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']'); 
                     $(this).attr("data-controller", data_controller);
                 }
             });

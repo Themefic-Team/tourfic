@@ -188,8 +188,14 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         if( $tfhotel_min_max_query->have_posts() ):
             while( $tfhotel_min_max_query->have_posts() ) : $tfhotel_min_max_query->the_post();
                 
-                $meta = get_post_meta( get_the_ID( ), 'tf_tours_opt', true );
+                $meta = get_post_meta( get_the_ID( ), 'tf_hotels_opt', true );
                 $rooms = !empty($meta['room']) ? $meta['room'] : '';
+                if( !empty($rooms) && gettype($rooms)=="string" ){
+                    $tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                        return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+                    }, $rooms );
+                    $rooms = unserialize( $tf_hotel_rooms_value );
+                }
                 if(!empty($rooms)){
                     foreach($rooms as $singleroom){
                         if(!empty($singleroom['price'])){
@@ -245,6 +251,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
             'posts_per_page'=> -1,
             'post_type'     => 'tf_tours',
         );
+        
         $tftours_min_max_query = new WP_Query( $tftours_min_max ); 
         $tftours_min_maxprices = array();
 

@@ -63,7 +63,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 										}else{ 
 											$parent_field = '[' . $this->field['id'] . '][' . $key . ']';
 										}
-										$id = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['id'] . '][0]' . '[' . $re_field['id'] . ']' : $this->field['id'] . '[0]' . '[' . $re_field['id'] . ']';
+										$id = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['id'] . '][00]' . '[' . $re_field['id'] . ']' : $this->field['id'] . '[00]' . '[' . $re_field['id'] . ']';
 										if ( isset( $tf_meta_box_value[ $id ] ) ) {
 											$value = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : '';
 										} else {
@@ -106,13 +106,12 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 
 							<?php foreach ( $this->field['fields'] as $key => $re_field ) {
 								if(!empty($this->parent_field)){
-									$parent = $this->parent_field.'[' . $this->field['id'] . '][0]';
+									$parent = $this->parent_field.'[' . $this->field['id'] . '][00]';
 								}else{ 
-									$parent    = '[' . $this->field['id'] . '][0]';
+									$parent    = '[' . $this->field['id'] . '][00]';
 								} 
-								$id        = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['id'] . '][0]' . '[' . $re_field['id'] . ']' : $this->field['id'] . '[0]' . '[' . $re_field['id'] . ']';
-								$default = isset( $re_field['default'] ) ? $re_field['default'] : '';
-								$value     = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : $default;
+								$id        = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['id'] . '][00]' . '[' . $re_field['id'] . ']' : $this->field['id'] . '[00]' . '[' . $re_field['id'] . ']';
+								$value     = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : '';
 								$tf_option = new TF_Options();
 								$tf_option->field( $re_field, $value, '_____' . $this->settings_id, $parent ); 
 							} ?>

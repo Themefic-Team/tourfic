@@ -252,6 +252,13 @@ body.tf-modal-open:after {
     transform: translateY(-15px);
   }
 }
+@media only screen and (max-width: 991.98px) {
+  #tf_tours_opt .tf-admin-meta-box {
+    position: relative;
+    min-height: 660px;
+  }
+}
+
 .tf-option,
 .tf-admin-meta-box {
   display: -webkit-box;
@@ -1246,7 +1253,7 @@ body.tf-modal-open:after {
 }
 .tf-field-image .tf-fieldset .tf-fieldset-media a.tf-media-upload {
   height: 48px;
-  width: 9%;
+  width: 100px;
   line-height: 48px;
   text-align: center;
   text-transform: capitalize;

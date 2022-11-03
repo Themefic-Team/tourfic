@@ -518,6 +518,13 @@ function tf_single_tour_booking_form( $post_id ) {
 
         $disabled_day = !empty( $meta['disabled_day'] ) ? $meta['disabled_day'] : '';
         $disable_range = !empty( $meta['disable_range'] ) ? $meta['disable_range'] : '';
+        if( !empty($disable_range) && gettype($disable_range)=="string" ){
+            $disable_range_unserial = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+            }, $disable_range );
+            $disable_range = unserialize( $disable_range_unserial );
+    
+        }
         $disable_specific = !empty( $meta['disable_specific'] ) ? $meta['disable_specific'] : '';
         $disable_specific = str_replace( ', ', '", "', $disable_specific );
 
@@ -569,12 +576,11 @@ function tf_single_tour_booking_form( $post_id ) {
                 }, $v['allowed_time'] ?? [])];
             }, $tf_tour_unserial_custom_date);
         }
-        var_dump($meta['allowed_time']);
-        if ( $custom_avail == false && !empty( $meta['allowed_time'] ) ) {
-            $allowed_times = array_map(function ($v) {
-                return $v['time'];          
-            }, $meta['allowed_time'] ?? []);
-        }
+        // if ( $custom_avail == false && !empty( $meta['allowed_time'] ) ) {
+        //     $allowed_times = array_map(function ($v) {
+        //         return $v['time'];          
+        //     }, $meta['allowed_time'] ?? []);
+        // }
     }else{
         if ( $custom_avail == true && !empty( $meta['cont_custom_date'] ) ) {
             $allowed_times = array_map(function ($v) {
@@ -584,6 +590,26 @@ function tf_single_tour_booking_form( $post_id ) {
             }, $meta['cont_custom_date']);
         }
         
+        // if ( $custom_avail == false && !empty( $meta['allowed_time'] ) ) {
+        //     $allowed_times = array_map(function ($v) {
+        //         return $v['time'];          
+        //     }, $meta['allowed_time'] ?? []);
+        // }
+    }
+
+    if( !empty($meta['allowed_time']) && gettype($meta['allowed_time'])=="string" ){
+
+        $tf_tour_unserial_custom_time = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+        }, $meta['allowed_time'] );
+        $tf_tour_unserial_custom_time = unserialize( $tf_tour_unserial_custom_time );
+
+        if ( $custom_avail == false && !empty( $meta['allowed_time'] ) ) {
+            $allowed_times = array_map(function ($v) {
+                return $v['time'];          
+            }, $tf_tour_unserial_custom_time ?? []);
+        }
+    }else{
         if ( $custom_avail == false && !empty( $meta['allowed_time'] ) ) {
             $allowed_times = array_map(function ($v) {
                 return $v['time'];          
