@@ -197,7 +197,12 @@ function tf_get_review_fields( &$fields, $type = null ) {
 	$tfopt_tours  = ! empty( tfopt( 'r-tour' ) ) ? tfopt( 'r-tour' ) : $default_tours_field;
 
 	$fields = 'tf_tours' === $type ? $tfopt_tours : $tfopt_hotels;
-
+	if( !empty($fields) && gettype($fields)=="string" ){
+        $tf_hotel_fields_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+        }, $fields );
+        $fields = unserialize( $tf_hotel_fields_value );
+    }
 	$fields = array_map( function ( $i ) {
 		return strtolower( $i['r-field-type'] );
 	}, $fields );

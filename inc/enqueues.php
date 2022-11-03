@@ -74,12 +74,12 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                         $itineraraymeter[] = !empty($itinerary['altitude']) ? intval($itinerary['altitude']) : '';
                     }
                 }
-                $showxaxis = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-x-axis']) ? tfopt( 'itinerary-builder-setings' )['itinerary-x-axis'] : false;
-                $showyaxis = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-y-axis']) ? tfopt( 'itinerary-builder-setings' )['itinerary-y-axis'] : false;
-                $showlinegraph = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-line-graph']) ? tfopt( 'itinerary-builder-setings' )['itinerary-line-graph'] : false;
-                $showitinerarychart = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-chart']) ? tfopt( 'itinerary-builder-setings' )['itinerary-chart'] : false;
-                $showitinerarystatus = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-status']) ? tfopt( 'itinerary-builder-setings' )['itinerary-status'] : false;
-                $elevvationmode = !empty(tfopt( 'itinerary-builder-setings' )['elevtion_type']=="Feet") ? "Feet" : "Meter";
+                $showxaxis = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-x-axis']) ? tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-x-axis'] : false;
+                $showyaxis = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-y-axis']) ? tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-y-axis'] : false;
+                $showlinegraph = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-line-graph']) ? tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-line-graph'] : false;
+                $showitinerarychart = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-chart']) ? tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-chart'] : false;
+                $showitinerarystatus = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-status']) ? tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-status'] : false;
+                $elevvationmode = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['elevtion_type']=="Feet") ? "Feet" : "Meter";
             }
         }
         wp_enqueue_style( 'tf-search-style', TF_ASSETS_URL . 'css/search-result.css', null, '' );

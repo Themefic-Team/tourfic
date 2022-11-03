@@ -132,12 +132,9 @@ body.tf-modal-open {
     #poststuff h2 a {
       display: inline-block;
       margin-right: 15px; } }
-<<<<<<< HEAD
-=======
 
 .tf-field-disable {
   user-select: none; }
->>>>>>> 975560884ea2d7728179200677f658cd4e1fd560
 
 /*========================================
    06. Animation CSS
@@ -218,13 +215,9 @@ body.tf-modal-open {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-<<<<<<< HEAD
-  margin: -6px -12px -12px -12px; }
-=======
   margin: -6px -12px -12px -12px;
   z-index: 10;
   position: relative; }
->>>>>>> 975560884ea2d7728179200677f658cd4e1fd560
   @media only screen and (max-width: 991.98px) {
     .tf-option,
     .tf-admin-meta-box {
@@ -842,19 +835,11 @@ body.tf-modal-open {
   width: 100% !important; }
   .tf-field-select2 .select2-container .select2-selection {
     width: 100%;
-<<<<<<< HEAD
-    padding: 12px 8px 12px 12px;
-    border: 1px solid #c4cbd4;
-    background-color: #f5f8ff;
-    border-radius: 4px;
-    height: 48px;
-=======
     padding: 10px 8px 0 12px;
     border: 1px solid #c4cbd4;
     background-color: #f5f8ff;
     border-radius: 4px;
     min-height: 48px;
->>>>>>> 975560884ea2d7728179200677f658cd4e1fd560
     color: #363e4a;
     font-size: 14px; }
     .tf-field-select2 .select2-container .select2-selection .select2-selection__choice {
@@ -882,11 +867,7 @@ body.tf-modal-open {
   .tf-field-select2 .select2-container .select2-search--inline .select2-search__field {
     margin-top: 0;
     margin-left: 5px;
-<<<<<<< HEAD
-    padding: 0;
-=======
     padding: 4px 0 0 0;
->>>>>>> 975560884ea2d7728179200677f658cd4e1fd560
     max-width: 100%;
     resize: none;
     height: 30px;
@@ -1062,11 +1043,7 @@ body.tf-modal-open {
     overflow: hidden; }
   .tf-field-image .tf-fieldset .tf-fieldset-media a.tf-media-upload {
     height: 48px;
-<<<<<<< HEAD
-    width: 9%;
-=======
     width: 100px;
->>>>>>> 975560884ea2d7728179200677f658cd4e1fd560
     line-height: 48px;
     text-align: center;
     text-transform: capitalize;
@@ -1469,14 +1446,6 @@ body.tf-modal-open {
     color: #404040; }
 .tf-tablist .tf-tab-field-content .tf-tab-item-content {
   border: 1px solid #f0f2f4;
-<<<<<<< HEAD
-  width: 100%;
-  display: none;
-  visibility: hidden;
-  padding: 10px 0; }
-.tf-tablist .tf-tab-field-content .show {
-  display: block;
-=======
   display: none;
   visibility: hidden;
   padding: 10px 24px;
@@ -1491,7 +1460,6 @@ body.tf-modal-open {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
->>>>>>> 975560884ea2d7728179200677f658cd4e1fd560
   visibility: visible; }
 
 .tf-field-map .tf--map-search {
