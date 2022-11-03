@@ -112,28 +112,24 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 			'fields' => array(
 				array(
 					'id'     => '',
-					'class'  => 'tf-csf-disable tf-csf-pro',
 					'type'   => 'text',
 					'label'  => __( 'Email address', 'tourfic' ),
 					'is_pro' => true,
 				),
 				array(
 					'id'     => '',
-					'class'  => 'tf-csf-disable tf-csf-pro',
 					'type'   => 'text',
 					'label'  => __( 'Phone Number', 'tourfic' ),
 					'is_pro' => true,
 				),
 				array(
 					'id'     => '',
-					'class'  => 'tf-csf-disable tf-csf-pro',
 					'type'   => 'text',
 					'label'  => __( 'Website Url', 'tourfic' ),
 					'is_pro' => true,
 				),
 				array(
 					'id'     => '',
-					'class'  => 'tf-csf-disable tf-csf-pro',
 					'type'   => 'text',
 					'label'  => __( 'Fax Number', 'tourfic' ),
 					'is_pro' => true,
@@ -148,7 +144,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'     => 'tour-extra',
 					'type'   => 'repeater',
-					'class'  => 'tf-csf-disable tf-csf-pro',
 					'label'  => __( 'Extra Services on Tour', 'tourfic' ),
 					'is_pro' => true,
 					'fields' => array(
@@ -237,7 +232,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				),
 				array(
 					'id'         => '',
-					'class'      => 'tf-csf-disable tf-csf-pro',
 					'type'       => 'number',
 					'dependency' => array( 'pricing', '==', 'group' ),
 					'label'      => __( 'Group Price', 'tourfic' ),
@@ -640,7 +634,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 			'fields' => array(
 				array(
 					'id'       => '',
-					'class'    => 'tf-csf-disable tf-csf-pro',
 					'type'     => 'number',
 					'label'    => __( 'Minimum days to book before departure', 'tourfic' ),
 					'is_pro'   => true,
@@ -792,7 +785,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'    => 'settings_headding',
 					'type'  => 'heading',
-					'label' => 'Settings',
+					'label' => __( 'Settings', 'tourfic' ),
 				),
 				array(
 					'id'        => 't-review',
