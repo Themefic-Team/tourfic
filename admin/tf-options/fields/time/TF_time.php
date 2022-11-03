@@ -19,7 +19,7 @@ if ( ! class_exists( 'TF_time' ) ) {
 			$format = ( ! empty( $args['format'] ) ) ? $args['format'] : 'Y-m-d';
 			$placeholder  = ( ! empty( $args['placeholder'] ) ) ? $args['placeholder'] : esc_html__( 'Select Date', 'tourfic' );
 			?>
-			<input type="text" name="<?php echo esc_attr( $this->field_name() ); ?>" placeholder="<?php echo esc_attr( $placeholder ) ?>" value="<?php echo esc_attr( $this->value ); ?>" class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>" />
+			<input type="text" name="<?php echo esc_attr( $this->field_name() ); ?>" placeholder="<?php echo esc_attr( $placeholder ) ?>" value="<?php echo esc_attr( $this->value ); ?>" class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>" <?php echo $this->field_attributes() ?>/>
             <i class="fa-regular fa-clock"></i>
             <?php
 		}

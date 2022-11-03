@@ -21,7 +21,7 @@ if ( ! class_exists( 'TF_switch' ) ) {
 			$width = ( ! empty( $this->field['width'] ) ) ? ' style="width: '. esc_attr( $this->field['width'] ) .'px;"': '';
 			?>
             <label class="tf-switch-label" <?php echo wp_kses_post($width); ?>>
-                <input type="checkbox" name="<?php echo esc_attr( $this->field_name() ); ?>" value="<?php echo $this->value; ?>" data-depend-id="<?php echo esc_attr( $this->field['id'] ); ?><?php echo esc_attr($this->parent_field); ?>" class="tf-switch" <?php checked( $this->value, 1 ); ?> />
+                <input type="checkbox" name="<?php echo esc_attr( $this->field_name() ); ?>" value="<?php echo $this->value; ?>" data-depend-id="<?php echo esc_attr( $this->field['id'] ); ?><?php echo esc_attr($this->parent_field); ?>" class="tf-switch" <?php checked( $this->value, 1 ); ?> <?php echo $this->field_attributes() ?>/>
                 <span class="tf-switch-slider">
                     <span class="tf-switch-on"><?php echo esc_html( $on ); ?></span>
                     <span class="tf-switch-off"><?php echo esc_html( $off ); ?></span>

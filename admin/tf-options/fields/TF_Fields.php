@@ -25,6 +25,21 @@ if ( ! class_exists( 'TF_Fields' ) ) {
 
 		}
 
+		public function field_attributes( $custom_atts = array() ) {
+
+			$attributes = ( ! empty( $this->field['attributes'] ) ) ? $this->field['attributes'] : array();
+			$attributes = wp_parse_args( $attributes, $custom_atts );
+
+			$atts = '';
+			if ( ! empty( $attributes ) ) {
+				foreach ( $attributes as $key => $value ) {
+					$atts .= ' ' . esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
+				}
+			}
+
+			return $atts;
+		}
+
 		//sanitize
 		public function sanitize() {
 			return sanitize_text_field( $this->value );

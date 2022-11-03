@@ -153,6 +153,10 @@ body.tf-modal-open:after {
   }
 }
 
+.tf-field-disable {
+  user-select: none;
+}
+
 /*========================================
    06. Animation CSS
 ========================================*/

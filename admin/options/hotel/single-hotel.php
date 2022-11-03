@@ -357,19 +357,19 @@ if ( class_exists( 'CSF' ) ) {
 						'subtitle' => __( 'Room footage (sft)', 'tourfic' ),
 					),
 
-//					array(
-//						'id'            => 'features',
-//						'type'          => 'select',
-//						'title'         => __( 'Select Features', 'tourfic' ),
-//						'placeholder'   => __( 'Select', 'tourfic' ),
-//						'empty_message' => __( 'No feature available', 'tourfic' ),
-//						'chosen'        => true,
-//						'multiple'      => true,
-//						'options'       => 'categories',
-//						'query_args'    => array(
-//							'taxonomy' => 'hotel_feature',
-//						),
-//					),
+					array(
+						'id'            => 'features',
+						'type'          => 'select',
+						'title'         => __( 'Select Features', 'tourfic' ),
+						'placeholder'   => __( 'Select', 'tourfic' ),
+						'empty_message' => __( 'No feature available', 'tourfic' ),
+						'chosen'        => true,
+						'multiple'      => true,
+						'options'       => 'categories',
+						'query_args'    => array(
+							'taxonomy' => 'hotel_feature',
+						),
+					),
 
 					array(
 						'id'    => 'description',

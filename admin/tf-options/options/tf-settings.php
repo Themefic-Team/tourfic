@@ -205,7 +205,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'vendor-tax-add',
 					'type'    => 'checkbox',
-					'title'   => __( 'Vendor Can Add', 'tourfic' ),
+					'label'   => __( 'Vendor Can Add', 'tourfic' ),
 					'is_pro'  => true,
 					'options' => array(
 						'hl' => __( 'Hotel Location', 'tourfic' ),
@@ -235,13 +235,19 @@ TF_Settings::option( 'tf_settings', array(
 				),
 
 				array(
+					'id'    => 'posts_per_page',
+					'type'  => 'number',
+					'label' => __( 'Search result posts per page', 'tourfic' ),
+				),
+
+				array(
 					'id'        => 'date_hotel_search',
 					'type'      => 'switch',
 					'label'     => __( 'Date Required in Hotel Search', 'tourfic' ),
 					'is_pro'    => true,
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => true,
+					'default'   => false,
 				),
 
 				array(
@@ -249,7 +255,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'      => 'switch',
 					'label'     => __( 'Date Required in Tour Search', 'tourfic' ),
 					'is_pro'    => true,
-					'label_off' => __( 'Yes', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 				),
 			),
@@ -536,7 +542,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'google-page-option',
 					'type'    => 'select',
-					'title'   => __( 'Select Map', 'tourfic' ),
+					'label'   => __( 'Select Map', 'tourfic' ),
 					'is_pro'  => true,
 					'options' => array(
 						'default'   => __( 'Default Map', 'tourfic' ),
@@ -547,7 +553,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'         => 'tf-googlemapapi',
 					'type'       => 'text',
-					'title'      => __( 'Google Map API Key', 'tourfic' ),
+					'label'      => __( 'Google Map API Key', 'tourfic' ),
 					'dependency' => array(
 						array( 'google-page-option', '==', 'googlemap' ),
 					),
@@ -595,12 +601,12 @@ TF_Settings::option( 'tf_settings', array(
 
 				array(
 					'id'          => 'wl-page',
-					'type'        => 'select',
+					'type'        => 'select2',
 					'label'       => __( 'Select Wishlist Page', 'tourfic' ),
 					'placeholder' => __( 'Select Wishlist Page', 'tourfic' ),
-					'ajax'        => true,
-					'options'     => 'pages',
+					'options'     => 'posts',
 					'query_args'  => array(
+						'post_type'      => 'page',
 						'posts_per_page' => - 1,
 						'orderby'        => 'post_title',
 						'order'          => 'ASC'
@@ -664,17 +670,17 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'        => 'r-auto-publish',
 					'type'      => 'switch',
-					'title'     => __( 'Auto Publish Review', 'tourfic' ),
+					'label'     => __( 'Auto Publish Review', 'tourfic' ),
 					'subtitle'  => __( 'By default review will be pending and waiting for admin approval', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => true
 				),
 
 				array(
 					'id'      => 'r-base',
 					'type'    => 'radio',
 					'label'   => __( 'Calculate Review Based on', 'tourfic' ),
+					'inlines' => true,
 					'options' => array(
 						'5'  => __( '5', 'tourfic' ),
 						'10' => __( '10', 'tourfic' ),
