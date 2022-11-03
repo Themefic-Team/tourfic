@@ -251,6 +251,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
             'posts_per_page'=> -1,
             'post_type'     => 'tf_tours',
         );
+        
         $tftours_min_max_query = new WP_Query( $tftours_min_max ); 
         $tftours_min_maxprices = array();
 
