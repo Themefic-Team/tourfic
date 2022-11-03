@@ -333,11 +333,14 @@ body.tf-modal-open:after {
 .tf-admin-meta-box .tf-admin-tab a.tf-tablinks .tf-sec-icon {
   margin-right: 10px;
   color: #8997a9;
+  min-width: 25px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;

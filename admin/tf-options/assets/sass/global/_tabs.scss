@@ -52,7 +52,9 @@
       .tf-sec-icon {
         margin-right: 10px;
         color: $slate40;
+        min-width: 25px;
         @include flexbox();
+        @include justify-content(center);
         @include transition(all, 0.3s, ease);
       }
 
