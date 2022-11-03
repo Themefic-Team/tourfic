@@ -222,9 +222,9 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'field_width' => 33.33,
 						),
 						array(
-							'id'    => 'subtitle',
+							'id'    => 'description',
 							'type'  => 'textarea',
-							'label' => __( 'Room subtitle', 'tourfic' ),
+							'label' => __( 'Room Description', 'tourfic' ),
 						),
 						array(
 							'id'      => 'Pricing',

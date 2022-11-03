@@ -273,9 +273,9 @@ add_action( 'wp_ajax_nopriv_tf_hotel_airport_service_price', 'tf_hotel_airport_s
 
 function tf_hotel_airport_service_callback() {
 
-	$meta            = get_post_meta( sanitize_key( $_POST['id'] ), 'tf_hotel', true );
+	$meta            = get_post_meta( sanitize_key( $_POST['id'] ), 'tf_hotels_opt', true );
 	$airport_service = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
-
+	var_dump($airport_service);
 	if ( 1 == $airport_service ) {
 
 		$post_id       = isset( $_POST['id'] ) ? intval( sanitize_text_field( $_POST['id'] ) ) : null;
@@ -296,8 +296,14 @@ function tf_hotel_airport_service_callback() {
 		}
 
 
-		$meta  = get_post_meta( $post_id, 'tf_hotel', true );
+		$meta  = get_post_meta( $post_id, 'tf_hotels_opt', true );
 		$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+		if( gettype($rooms)=="string" ){
+			$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+				return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+			}, $rooms );
+			$rooms = unserialize( $tf_hotel_rooms_value );
+		}
 
 		$avail_by_date = ! empty( $rooms[ $room_id ]['avil_by_date'] ) && $rooms[ $room_id ]['avil_by_date'];
 		if ( $avail_by_date ) {
@@ -625,8 +631,14 @@ function tf_room_availability_callback() {
 	/**
 	 * Backend data
 	 */
-	$meta                = get_post_meta( $form_post_id, 'tf_hotel', true );
-	$rooms               = ! empty( $meta['room'] ) ? $meta['room'] : '';
+	$meta                = get_post_meta( $form_post_id, 'tf_hotels_opt', true );
+	$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+    if( gettype($rooms)=="string" ){
+        $tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+          }, $rooms );
+        $rooms = unserialize( $tf_hotel_rooms_value );
+    }
 	$locations           = get_the_terms( $form_post_id, 'hotel_location' );
 	$first_location_name = ! empty( $locations ) ? $locations[0]->name : '';
 
