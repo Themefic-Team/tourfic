@@ -1377,7 +1377,6 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
 	// Rooms
 	$b_rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-
 	/**
 	 * All values from URL
 	 */
@@ -1425,15 +1424,27 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 		'check-in-out-date' => $check_in_out,
 	), $url );
 
+	/**
+	 * Calculate and get the minimum price 
+	 * @author - Hena
+	 */
     $room_price = [];
 	if( !empty($b_rooms) ):
 		foreach ( $b_rooms as $b_room ) {
 			//room price
-			$price        = ! empty( $b_room['price'] ) ? $b_room['price'] : '';
-			$room_price[] = $price;
+			
+			$pricing_by = $b_room['pricing-by'] ? $b_room['pricing-by'] : 1;
+			if($pricing_by == 1){
+				$price        = ! empty( $b_room['price'] ) ? $b_room['price'] : '';
+				$room_price[] = $price;
+			}else if($pricing_by == 2){
+				$adult_price = $b_room['adult_price'] ? $b_room['adult_price'] : 0;
+				$room_price[] = $adult_price;
+			}
 		}
 	endif;
 	?>
+	
     <div class="single-tour-wrap">
         <div class="single-tour-inner">
             <div class="tourfic-single-left">
@@ -1487,7 +1498,10 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 															$feature_icon = '<img src="' . $feature_meta['icon-c']["url"] . '" style="width: ' . $feature_meta['dimention']["width"] . 'px; height: ' . $feature_meta['dimention']["width"] . 'px;" />';
 														} ?>
                                                         <li class="tf-tooltip">
-															<?php echo $feature_icon; ?>
+															<?php
+															if(!empty( $feature_icon )){
+															 		echo $feature_icon;
+															 } ?>
                                                             <div class="tf-top">
 																<?php echo $feature->name; ?>
                                                                 <i class="tool-i"></i>
@@ -1503,7 +1517,10 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                             </div>
                                             <!-- Show minimum price @author - Hena -->
                                             <div class="tf-room-price-area">
-												<?php if ( ! empty( $room_price ) ): ?>
+												<?php
+												
+												 if ( ! empty( $room_price ) ): 
+												 ?>
                                                     <div class="tf-room-price">
 														<?php
 														//get the lowest price from all available room price
