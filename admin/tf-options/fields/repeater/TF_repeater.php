@@ -21,8 +21,13 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
                 <div class="tf-repeater-wrap tf-repeater-wrap-<?php echo $this->field['id'];?>"> 
 					<?php if ( ! empty( $this->value ) ):
 						$num = 0;
+						
 						if(!is_array($this->value)){
-							$data = unserialize( $this->value );
+							$tf_rep_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+								return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+							  }, $this->value );
+							  
+							$data = unserialize( $tf_rep_value );
 						}else{
 							$data = $this->value;
 						}
