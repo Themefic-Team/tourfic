@@ -232,12 +232,14 @@ TF_Settings::option( 'tf_settings', array(
 						'post_type'      => 'page',
 						'posts_per_page' => - 1,
 					),
+					'field_width' => 50
 				),
 
 				array(
 					'id'    => 'posts_per_page',
 					'type'  => 'number',
 					'label' => __( 'Search result posts per page', 'tourfic' ),
+					'field_width' => 50
 				),
 
 				array(
@@ -285,7 +287,6 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'tourfic-button-color',
 					'type'     => 'color',
-					'multiple' => true,
 					'label'    => __( 'Button Color', 'tourfic' ),
 					'subtitle' => __( 'Button Color of Tourfic (e.g. Blue color on our Demo)', 'tourfic' ),
 					'multiple' => true,

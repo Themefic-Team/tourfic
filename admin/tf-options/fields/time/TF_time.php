@@ -12,8 +12,8 @@ if ( ! class_exists( 'TF_time' ) ) {
 		public function render() {
 
 			$args = wp_parse_args( $this->field, array(
-				'format' => 'Y-m-d',
-				'placeholder' => esc_html__( 'Select Date', 'tourfic' ),
+				'format' => 'h:i K',
+				'placeholder' => esc_html__( 'Select Time', 'tourfic' ),
 			) );
 
 			$format = ( ! empty( $args['format'] ) ) ? $args['format'] : 'Y-m-d';

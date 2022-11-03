@@ -666,7 +666,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'           => 'inc',
 					'type'         => 'repeater',
 					'label'        => __( 'Include', 'tourfic' ),
-					'button_title' => __( 'Add Include', 'tourfic' ),
+					'button_title' => __( 'Add New Include', 'tourfic' ),
 					'max'          => 5,
 					'fields'       => array(
 						array(
@@ -687,7 +687,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'           => 'exc',
 					'type'         => 'repeater',
 					'label'        => __( 'Exclude', 'tourfic' ),
-					'button_title' => __( 'Add Exclude', 'tourfic' ),
+					'button_title' => __( 'Add New Exclude', 'tourfic' ),
 					'max'          => 5,
 					'fields'       => array(
 						array(
@@ -722,7 +722,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'           => 'itinerary',
 					'type'         => 'repeater',
 					'label'        => __( 'Itinerary', 'tourfic' ),
-					'button_title' => __( 'Add Itinerary', 'tourfic' ),
+					'button_title' => __( 'Add New Itinerary', 'tourfic' ),
 					'max'          => 5,
 					'fields'       => array(
 						array(

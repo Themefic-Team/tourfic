@@ -270,6 +270,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'is_pro'     => true,
 							'desc'       => __( 'The price of room per one night', 'tourfic' ),
 							'dependency' => array( 'pricing-by', '==', '2' ),
+							'field_width' => 50,
 						),
 
 						array(
@@ -279,6 +280,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'is_pro'     => true,
 							'desc'       => __( 'The price of room per one night', 'tourfic' ),
 							'dependency' => array( 'pricing-by', '==', '2' ),
+							'field_width' => 50,
 						),
 						array(
 							'id'        => 'price_multi_day',
