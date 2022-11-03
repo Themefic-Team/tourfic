@@ -877,7 +877,7 @@ TF_Settings::option( 'tf_settings', array(
 					'is_pro' => true,
 					'tabs'   => array(
 						array(
-							'id'     => 'booking.com',
+							'id'     => 'affiliate_booking',
 							'title'  => __( 'Booking.com', 'tourfic' ),
 							'fields' => array(
 								array(
