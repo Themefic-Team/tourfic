@@ -280,11 +280,14 @@ body.tf-modal-open {
       .tf-admin-meta-box .tf-admin-tab a.tf-tablinks .tf-sec-icon {
         margin-right: 10px;
         color: #8997a9;
+        min-width: 25px;
         display: -webkit-box;
         display: -moz-box;
         display: -ms-flexbox;
         display: -webkit-flex;
         display: flex;
+        -webkit-justify-content: center;
+        justify-content: center;
         -webkit-transition: all 0.3s ease;
         -moz-transition: all 0.3s ease;
         -o-transition: all 0.3s ease;
@@ -1694,6 +1697,7 @@ body.tf-modal-open {
   #tf-icon-modal .tf-modal-content .tf-modal-footer .tf-admin-btn {
     padding: 10px 24px; }
 
+    
 .tf-field-number input {
   width: 100%;
   padding: 12px 8px 12px 12px;
