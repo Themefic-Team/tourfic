@@ -35,13 +35,14 @@
     .tf-tab-field-content{
         .tf-tab-item-content{
             border: 1px solid $slate5;
-            width: 100%;
             display: none;
             visibility: hidden;
-            padding: 10px 0;
+            padding: 10px 24px;
+            @include flex-wrap(wrap);
+            @include justify-content(space-between);
         }
         .show{
-            display: block; 
+            @include flexbox();
             visibility: visible;
         }
     }

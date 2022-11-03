@@ -35,21 +35,21 @@ if ( ! class_exists( 'TF_date' ) ) {
                     <div class="tf-date-from">
                         <label for="" class="tf-field-label"><?php echo esc_html( $args['label_from'] ) ?></label>
                         <div class="" style="position:relative;">
-                            <input type="text" name="<?php echo esc_attr( $this->field_name() ); ?>[from]" placeholder="<?php echo esc_attr( $placeholder ) ?>" value="<?php echo esc_attr( $value['from'] ); ?>" class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>"/>
+                            <input type="text" name="<?php echo esc_attr( $this->field_name() ); ?>[from]" placeholder="<?php echo esc_attr( $placeholder ) ?>" value="<?php echo esc_attr( $value['from'] ); ?>" class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>" <?php echo $this->field_attributes() ?>/>
                             <i class="fa-solid fa-calendar-days"></i>
                         </div>
                     </div>
                     <div class="tf-date-to">
                         <label for="" class="tf-field-label"><?php echo esc_html( $args['label_to'] ) ?></label>
                         <div class="" style="position:relative;">
-                            <input type="text" name="<?php echo esc_attr( $this->field_name() ); ?>[to]" placeholder="<?php echo esc_attr( $placeholder ) ?>" value="<?php echo esc_attr( $value['to'] ); ?>" class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>"/>
+                            <input type="text" name="<?php echo esc_attr( $this->field_name() ); ?>[to]" placeholder="<?php echo esc_attr( $placeholder ) ?>" value="<?php echo esc_attr( $value['to'] ); ?>" class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>" <?php echo $this->field_attributes() ?>/>
                             <i class="fa-solid fa-calendar-days"></i>
                         </div>
                     </div>
                 </div>
 			<?php else: ?>
                 <input type="text" name="<?php echo esc_attr( $this->field_name() ); ?>" placeholder="<?php echo esc_attr( $placeholder ) ?>" value="<?php echo esc_attr( $this->value ); ?>"
-                       class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>" data-multiple="<?php echo esc_attr( $multiple ); ?>"/>
+                       class="flatpickr " data-format="<?php echo esc_attr( $format ); ?>" data-multiple="<?php echo esc_attr( $multiple ); ?>" <?php echo $this->field_attributes() ?>/>
                 <i class="fa-solid fa-calendar-days"></i>
 			<?php
 			endif;

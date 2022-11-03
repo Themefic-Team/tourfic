@@ -273,9 +273,8 @@ add_action( 'wp_ajax_nopriv_tf_hotel_airport_service_price', 'tf_hotel_airport_s
 
 function tf_hotel_airport_service_callback() {
 
-	$meta            = get_post_meta( sanitize_key( $_POST['id'] ), 'tf_hotel', true );
+	$meta            = get_post_meta( sanitize_key( $_POST['id'] ), 'tf_hotels_opt', true );
 	$airport_service = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
-
 	if ( 1 == $airport_service ) {
 
 		$post_id       = isset( $_POST['id'] ) ? intval( sanitize_text_field( $_POST['id'] ) ) : null;
@@ -296,8 +295,14 @@ function tf_hotel_airport_service_callback() {
 		}
 
 
-		$meta  = get_post_meta( $post_id, 'tf_hotel', true );
+		$meta  = get_post_meta( $post_id, 'tf_hotels_opt', true );
 		$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+		if( !empty($rooms) && gettype($rooms)=="string" ){
+			$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+				return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+			}, $rooms );
+			$rooms = unserialize( $tf_hotel_rooms_value );
+		}
 
 		$avail_by_date = ! empty( $rooms[ $room_id ]['avil_by_date'] ) && $rooms[ $room_id ]['avil_by_date'];
 		if ( $avail_by_date ) {
@@ -373,6 +378,12 @@ function tf_hotel_airport_service_callback() {
 
 		if ( "pickup" == $_POST['service_type'] ) {
 			$airport_pickup_price = ! empty( $meta['airport_pickup_price'] ) ? $meta['airport_pickup_price'] : '';
+			if( !empty($airport_pickup_price) && gettype($airport_pickup_price)=="string" ){
+				$tf_hotel_airport_pickup_price_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+					return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+				  }, $airport_pickup_price );
+				$airport_pickup_price = unserialize( $tf_hotel_airport_pickup_price_value );
+			}
 			if ( "per_person" == $airport_pickup_price['airport_pickup_price_type'] ) {
 				$service_fee = ( sanitize_key( $_POST['hoteladult'] ) * $airport_pickup_price['airport_service_fee_adult'] ) + ( sanitize_key( $_POST['hotelchildren'] ) * $airport_pickup_price['airport_service_fee_children'] );
 				if ( sanitize_key( $_POST['hotelchildren'] ) != 0 ) {
@@ -451,6 +462,12 @@ function tf_hotel_airport_service_callback() {
 		}
 		if ( "dropoff" == $_POST['service_type'] ) {
 			$airport_dropoff_price = ! empty( $meta['airport_dropoff_price'] ) ? $meta['airport_dropoff_price'] : '';
+			if( !empty($airport_dropoff_price) && gettype($airport_dropoff_price)=="string" ){
+				$tf_hotel_airport_dropoff_price_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+					return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+				  }, $airport_dropoff_price );
+				$airport_dropoff_price = unserialize( $tf_hotel_airport_dropoff_price_value );
+			}
 			if ( "per_person" == $airport_dropoff_price['airport_pickup_price_type'] ) {
 				$service_fee = ( sanitize_key( $_POST['hoteladult'] ) * $airport_dropoff_price['airport_service_fee_adult'] ) + ( sanitize_key( $_POST['hotelchildren'] ) * $airport_dropoff_price['airport_service_fee_children'] );
 				if ( sanitize_key( $_POST['hotelchildren'] ) != 0 ) {
@@ -519,6 +536,12 @@ function tf_hotel_airport_service_callback() {
 		}
 		if ( "both" == $_POST['service_type'] ) {
 			$airport_pickup_dropoff_price = ! empty( $meta['airport_pickup_dropoff_price'] ) ? $meta['airport_pickup_dropoff_price'] : '';
+			if( !empty($airport_pickup_dropoff_price) && gettype($airport_pickup_dropoff_price)=="string" ){
+				$tf_hotel_airport_pickup_dropoff_price_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+					return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+				  }, $airport_pickup_dropoff_price );
+				$airport_pickup_dropoff_price = unserialize( $tf_hotel_airport_pickup_dropoff_price_value );
+			}
 			if ( "per_person" == $airport_pickup_dropoff_price['airport_pickup_price_type'] ) {
 				$service_fee = ( sanitize_key( $_POST['hoteladult'] ) * $airport_pickup_dropoff_price['airport_service_fee_adult'] ) + ( sanitize_key( $_POST['hotelchildren'] ) * $airport_pickup_dropoff_price['airport_service_fee_children'] );
 				if ( sanitize_key( $_POST['hotelchildren'] ) != 0 ) {
@@ -625,8 +648,14 @@ function tf_room_availability_callback() {
 	/**
 	 * Backend data
 	 */
-	$meta                = get_post_meta( $form_post_id, 'tf_hotel', true );
-	$rooms               = ! empty( $meta['room'] ) ? $meta['room'] : '';
+	$meta                = get_post_meta( $form_post_id, 'tf_hotels_opt', true );
+	$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+    if( !empty($rooms) && gettype($rooms)=="string" ){
+        $tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+          }, $rooms );
+        $rooms = unserialize( $tf_hotel_rooms_value );
+    }
 	$locations           = get_the_terms( $form_post_id, 'hotel_location' );
 	$first_location_name = ! empty( $locations ) ? $locations[0]->name : '';
 
@@ -1371,6 +1400,12 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
 	// Rooms
 	$b_rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+	if( !empty($b_rooms) && gettype($b_rooms)=="string" ){
+        $tf_hotel_b_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+        }, $b_rooms );
+        $b_rooms = unserialize( $tf_hotel_b_rooms_value );
+    }
 
 	/**
 	 * All values from URL

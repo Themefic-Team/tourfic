@@ -2,6 +2,8 @@
 .tf-admin-meta-box {
   @include flexbox();
   margin: -6px -12px -12px -12px;
+  z-index: 10;
+  position: relative;
 
   @media #{$max991}{
     position: relative;

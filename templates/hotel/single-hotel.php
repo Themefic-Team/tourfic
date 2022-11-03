@@ -27,7 +27,7 @@ while ( have_posts() ) : the_post();
 	/**
 	 * Get hotel meta values
 	 */
-	$meta = get_post_meta( $post_id, 'tf_hotel', true );
+	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
 
 	$disable_share_opt  = ! empty( $meta['h-share'] ) ? $meta['h-share'] : '';
 	$disable_review_sec = ! empty( $meta['h-review'] ) ? $meta['h-review'] : '';
@@ -81,6 +81,12 @@ while ( have_posts() ) : the_post();
 	// Location
 	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
 	$map     = ! empty( $meta['map'] ) ? $meta['map'] : '';
+    if( !empty($map) && gettype($map)=="string" ){
+        $tf_hotel_map_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+          }, $map );
+        $map = unserialize( $tf_hotel_map_value );
+    }
 
 	// Hotel Detail
 	$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
@@ -90,8 +96,20 @@ while ( have_posts() ) : the_post();
 	$video = ! empty( $meta['video'] ) ? $meta['video'] : '';
 	// Room Details
 	$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+    if( !empty($rooms) && gettype($rooms)=="string" ){
+        $tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+        }, $rooms );
+        $rooms = unserialize( $tf_hotel_rooms_value );
+    }
 	// FAQ
 	$faqs = ! empty( $meta['faq'] ) ? $meta['faq'] : '';
+    if( !empty($faqs) &&  gettype($faqs)=="string" ){
+        $tf_hotel_faqs_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+          }, $faqs );
+        $faqs = unserialize( $tf_hotel_faqs_value );
+    }
 	// Terms & condition
 	$tc = ! empty( $meta['tc'] ) ? $meta['tc'] : '';
 

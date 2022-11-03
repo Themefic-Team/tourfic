@@ -14,14 +14,20 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field);
 		} 
-		public function render() { 
+		public function render() {
+            $label = ( ! empty( $this->field['label'] ) ) ? $this->field['label'] : '';
 			?>
             <div id="tf-repeater-1" class="tf-repeater <?php echo $this->field['id'];?>">
                 <div class="tf-repeater-wrap tf-repeater-wrap-<?php echo $this->field['id'];?>"> 
 					<?php if ( ! empty( $this->value ) ):
 						$num = 0;
+						
 						if(!is_array($this->value)){
-							$data = unserialize( $this->value );
+							$tf_rep_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+								return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+							  }, $this->value );
+							  
+							$data = unserialize( $tf_rep_value );
 						}else{
 							$data = $this->value;
 						}
@@ -36,7 +42,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 									<span class="tf-repeater-icon tf-repeater-icon-collapse">
 										<i class="fa-solid fa-angle-down"></i>
 									</span>
-									<span class="tf-repeater-title"><?php echo $this->field['label'] ?>  </span>
+									<span class="tf-repeater-title"><?php echo esc_html($label) ?>  </span>
 									<div class="tf-repeater-icon-absulate">
 										<span class="tf-repeater-icon tf-repeater-icon-move">
 											<i class="fa-solid fa-up-down-left-right"></i>

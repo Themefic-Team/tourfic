@@ -15,11 +15,11 @@ if ( ! class_exists( 'TF_checkbox' ) ) {
 				echo '<ul class="tf-checkbox-group ' . esc_attr( $inline ) . '">';
 				foreach ( $this->field['options'] as $key => $value ) {
 					$checked = ( is_array( $this->value ) && in_array( $key, $this->value ) ) ? ' checked' : '';
-					echo '<li><input type="checkbox" id="' . $this->field_name() . '[' . $key . ']" name="' . $this->field_name() . '[]" data-depend-id="'. esc_attr( $this->field['id'] ) .'" class="tf-group-checkbox" value="' . esc_attr( $key ) . '" ' . $checked . '/><label for="' . $this->field_name() . '[' . $key . ']">' . $value . '</label></li>';
+					echo '<li><input type="checkbox" id="' . $this->field_name() . '[' . $key . ']" name="' . $this->field_name() . '[]" data-depend-id="'. esc_attr( $this->field['id'] ) .'" class="tf-group-checkbox" value="' . esc_attr( $key ) . '" ' . $checked . ' '. $this->field_attributes() .'/><label for="' . $this->field_name() . '[' . $key . ']">' . $value . '</label></li>';
 				}
 				echo '</ul>';
 			} else {
-				echo '<input type="checkbox" id="' . $this->field_name() . '" name="' . $this->field_name() . '" value="1" ' . checked( $this->value, 1, false ) . '/><label for="' . $this->field_name() . '">' . $this->field['title'] . '</label>';
+				echo '<input type="checkbox" id="' . $this->field_name() . '" name="' . $this->field_name() . '" value="1" ' . checked( $this->value, 1, false ) . ' '. $this->field_attributes() .'/><label for="' . $this->field_name() . '">' . $this->field['title'] . '</label>';
 			}
 		} 
 		public function sanitize() {
