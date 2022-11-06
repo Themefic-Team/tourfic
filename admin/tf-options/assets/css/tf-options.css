@@ -400,8 +400,8 @@ body.tf-modal-open {
         display: flex; }
 
 .tf-option-wrapper {
-  margin-top: 20px;
-  margin-right: 20px; }
+  max-width: 70%;
+  margin: 30px auto; }
   @media only screen and (max-width: 991.98px) {
     .tf-option-wrapper {
       position: relative; } }
@@ -410,15 +410,10 @@ body.tf-modal-open {
     display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
-    display: flex;
-    background-color: #fff;
-    box-shadow: 0 4px 10px rgba(67, 79, 96, 0.08);
-    position: sticky;
-    top: 32px;
-    z-index: 999; }
+    display: flex; }
     .tf-option-wrapper .tf-option-header .tf-option-header-left {
       min-width: 220px;
-      padding: 24px;
+      padding: 24px 0px;
       display: -webkit-box;
       display: -moz-box;
       display: -ms-flexbox;
@@ -433,35 +428,28 @@ body.tf-modal-open {
         font-size: 24px;
         color: #363e4a;
         line-height: 24px; }
+        @media only screen and (max-width: 991.98px) {
+          .tf-option-wrapper .tf-option-header .tf-option-header-left h2 {
+            display: flex;
+            align-items: center; } }
         .tf-option-wrapper .tf-option-header .tf-option-header-left h2 a {
           display: none; }
+          .tf-option-wrapper .tf-option-header .tf-option-header-left h2 a:focus {
+            box-shadow: none; }
           .tf-option-wrapper .tf-option-header .tf-option-header-left h2 a i {
             color: #363e4a;
             font-size: 24px;
-            margin-right: 10px; }
+            margin-left: 10px; }
           @media only screen and (max-width: 991.98px) {
             .tf-option-wrapper .tf-option-header .tf-option-header-left h2 a {
               display: inline-block; } }
-      .tf-option-wrapper .tf-option-header .tf-option-header-left span {
-        font-size: 16px;
-        color: #8997a9;
-        display: inline-block;
-        margin-right: 4px; }
-      .tf-option-wrapper .tf-option-header .tf-option-header-left a {
-        color: #8997a9;
-        text-decoration: none;
-        font-size: 16px;
-        -webkit-transition: all 0.3s ease;
-        -moz-transition: all 0.3s ease;
-        -o-transition: all 0.3s ease;
-        transition: all 0.3s ease; }
-        .tf-option-wrapper .tf-option-header .tf-option-header-left a:hover {
-          color: #2979ff; }
+        .tf-option-wrapper .tf-option-header .tf-option-header-left h2 img {
+          width: 120px; }
     .tf-option-wrapper .tf-option-header .tf-option-header-right {
       -webkit-flex: 1 1 auto;
       -ms-flex: 1 1 auto;
       flex: 1 1 auto;
-      padding: 24px;
+      padding: 24px 0px;
       display: -webkit-box;
       display: -moz-box;
       display: -ms-flexbox;
@@ -473,25 +461,22 @@ body.tf-modal-open {
       -ms-flex-align: center;
       align-items: center; }
   .tf-option-wrapper .tf-option-footer {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(67, 79, 96, 0.08);
     position: relative;
-    padding: 24px;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: flex-end;
-    justify-content: flex-end;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center; }
+    padding: 24px 0px;
+    text-align: right; }
+    .tf-option-wrapper .tf-option-footer span {
+      display: block;
+      font-size: 16px;
+      color: #8997a9;
+      font-weight: 600;
+      margin-top: 5px; }
+      .tf-option-wrapper .tf-option-footer span a {
+        color: #8997a9;
+        display: inline;
+        margin-left: 5px; }
+        .tf-option-wrapper .tf-option-footer span a:focus {
+          outline: none;
+          box-shadow: none; }
 
 .tf-option {
   width: 100%;
@@ -507,8 +492,8 @@ body.tf-modal-open {
         flex: 0 0 calc(100% - 0px); } }
 
 .tf-deshboard-wrapper {
-  margin-top: 20px;
-  margin-right: 20px; }
+  margin: 20px auto;
+  max-width: 85%; }
   .tf-deshboard-wrapper .tf-deshboard-version {
     background-color: #fff;
     padding: 16px;
@@ -546,17 +531,13 @@ body.tf-modal-open {
           color: #2979ff;
           font-weight: 600; }
   .tf-deshboard-wrapper .tf-deshboard-overview {
-    width: 100%;
-    display: flex;
-    justify-content: space-between; }
+    width: 100%; }
     @media only screen and (max-width: 1199.98px) {
       .tf-deshboard-wrapper .tf-deshboard-overview {
         display: flow-root; } }
     .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview {
-      width: 69%; }
-      @media only screen and (max-width: 1199.98px) {
-        .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview {
-          width: 100%; } }
+      max-width: 90%;
+      margin: 0 auto; }
       .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview span.tf-details-overview-title {
         font-style: normal;
         font-weight: 600;
@@ -568,7 +549,7 @@ body.tf-modal-open {
       .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items {
         display: flex;
         justify-content: space-between; }
-        @media only screen and (max-width: 767.98px) {
+        @media only screen and (max-width: 1199.98px) {
           .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items {
             display: flow-root; } }
         .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items .tf-details-single-items {
@@ -578,11 +559,16 @@ body.tf-modal-open {
           border-radius: 8px;
           padding-bottom: 20px;
           margin: 8px 0px; }
-          @media only screen and (max-width: 767.98px) {
+          @media only screen and (max-width: 1199.98px) {
             .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items .tf-details-single-items {
               width: 48%;
               float: left;
               margin: 8px 1%; } }
+          @media only screen and (max-width: 575.98px) {
+            .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items .tf-details-single-items {
+              width: 100%;
+              float: left;
+              margin: 8px 0%; } }
           .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items .tf-details-single-items h3 {
             text-align: center;
             padding: 16px 5px;
@@ -655,83 +641,110 @@ body.tf-modal-open {
             .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items .tf-details-single-items:hover a:focus {
               outline: none; }
     .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions {
-      width: 30%; }
+      max-width: 90%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between; }
       @media only screen and (max-width: 1199.98px) {
         .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions {
           width: 100%; } }
-      .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions span.tf-details-overview-title {
-        font-style: normal;
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 24px;
-        color: #607085;
-        margin-top: 40px;
-        display: block; }
-      .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions iframe {
-        margin: 8px 0px;
-        border-radius: 8px; }
-        @media only screen and (max-width: 1366px) {
-          .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions iframe {
-            height: 220px; } }
-      .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-facebook-community {
-        background-color: #ebf2ff;
-        padding: 16px;
-        border-radius: 8px;
-        display: flex;
-        justify-content: space-between;
-        margin: 8px 0px; }
-        .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-facebook-community .icon {
-          width: 70px;
-          margin-right: 5px; }
-          .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-facebook-community .icon i {
-            background-color: #2264d1;
-            height: 70px;
-            width: 70px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 70px;
-            color: #fff;
-            font-size: 31px; }
-        .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-facebook-community span {
+      @media only screen and (max-width: 991.98px) {
+        .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions {
+          display: flow-root; } }
+      .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-video-instractions {
+        width: 49%; }
+        @media only screen and (max-width: 991.98px) {
+          .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-video-instractions {
+            width: 100%; } }
+        .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-video-instractions span.tf-details-overview-title {
           font-style: normal;
-          font-weight: 400;
-          font-size: 15px;
+          font-weight: 600;
+          font-size: 16px;
           line-height: 24px;
           color: #607085;
-          max-width: 85%; }
-          .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-facebook-community span a {
-            text-decoration: none;
-            color: #2979ff;
-            font-weight: 600; }
-      .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-plugin-documentation {
-        background-color: #fff;
-        border-radius: 8px;
-        padding: 16px;
-        margin: 8px 0px; }
-        .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-plugin-documentation .tf-plugin-details-info {
+          margin-top: 40px;
+          display: block; }
+        .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-video-instractions iframe {
+          margin: 8px 0px;
+          border-radius: 8px; }
+          @media only screen and (max-width: 1366px) {
+            .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-video-instractions iframe {
+              height: 340px; } }
+          @media only screen and (max-width: 991.98px) {
+            .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-video-instractions iframe {
+              height: 200px; } }
+      .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-community-info {
+        width: 49%; }
+        @media only screen and (max-width: 991.98px) {
+          .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-community-info {
+            width: 100%; } }
+        .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-community-info span.tf-details-overview-title {
+          font-style: normal;
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 24px;
+          color: #607085;
+          margin-top: 40px;
+          display: block; }
+        .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-community-info .tf-facebook-community {
+          background-color: #ebf2ff;
+          padding: 16px;
+          border-radius: 8px;
           display: flex;
           justify-content: space-between;
-          align-items: center; }
-          .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-plugin-documentation .tf-plugin-details-info i {
-            color: #607085;
-            font-size: 36px;
-            margin-right: 10px; }
-          .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-plugin-documentation .tf-plugin-details-info span {
+          margin: 8px 0px; }
+          .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-community-info .tf-facebook-community .icon {
+            width: 70px;
+            margin-right: 5px; }
+            .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-community-info .tf-facebook-community .icon i {
+              background-color: #2264d1;
+              height: 70px;
+              width: 70px;
+              border-radius: 50%;
+              text-align: center;
+              line-height: 70px;
+              color: #fff;
+              font-size: 31px; }
+          .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-community-info .tf-facebook-community span {
             font-style: normal;
             font-weight: 400;
-            font-size: 16px;
+            font-size: 15px;
             line-height: 24px;
-            color: #607085; }
-        .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-plugin-documentation .tf-plugin-document-link {
-          margin-top: 16px;
-          text-align: right; }
-          .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-plugin-documentation .tf-plugin-document-link a {
-            font-style: normal;
-            font-weight: 600;
-            font-size: 16px;
-            line-height: 24px;
-            text-decoration: none;
-            color: #2979ff; }
+            color: #607085;
+            max-width: 85%; }
+            .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-community-info .tf-facebook-community span a {
+              text-decoration: none;
+              color: #2979ff;
+              font-weight: 600; }
+        .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-community-info .tf-plugin-documentation {
+          background-color: #fff;
+          border-radius: 8px;
+          padding: 16px;
+          margin: 8px 0px; }
+          .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-community-info .tf-plugin-documentation .tf-plugin-details-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; }
+            .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-community-info .tf-plugin-documentation .tf-plugin-details-info i {
+              color: #607085;
+              font-size: 36px;
+              margin-right: 10px; }
+            .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-community-info .tf-plugin-documentation .tf-plugin-details-info span {
+              font-style: normal;
+              font-weight: 400;
+              font-size: 16px;
+              line-height: 24px;
+              color: #607085; }
+          .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-community-info .tf-plugin-documentation .tf-plugin-document-link {
+            margin-top: 16px;
+            text-align: right; }
+            .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-instractions .tf-community-info .tf-plugin-documentation .tf-plugin-document-link a {
+              font-style: normal;
+              font-weight: 600;
+              font-size: 16px;
+              line-height: 24px;
+              text-decoration: none;
+              color: #2979ff; }
 
 .tf-field {
   padding: 12px 0; }
@@ -1697,7 +1710,6 @@ body.tf-modal-open {
   #tf-icon-modal .tf-modal-content .tf-modal-footer .tf-admin-btn {
     padding: 10px 24px; }
 
-    
 .tf-field-number input {
   width: 100%;
   padding: 12px 8px 12px 12px;

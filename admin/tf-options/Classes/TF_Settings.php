@@ -324,33 +324,36 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                         </div>
                     </div>
                     <div class="tf-details-instractions">
-						<span class="tf-details-overview-title">
-							<?php _e( "Video Instruction", "tourfic" ); ?>
-						</span>
-                        <iframe width="100%" height="345" src="https://www.youtube.com/embed/xeVkabWobDU" title="YouTube video player" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-                        <span class="tf-details-overview-title">
-							<?php _e( "Facebook Community", "tourfic" ); ?>
-						</span>
-                        <div class="tf-facebook-community">
-                            <div class="icon">
-                                <i class="fab fa-facebook-f"></i>
-                            </div>
-                            <span><?php echo sprintf( "Join our <a target='_blank' href='https://www.facebook.com/groups/tourfic'>Tourfic - Travel Booking Solution for Woocommerce Community </a> Facebook Group for your query or share your thoughts about the plugin with user and us." ); ?></span>
-                        </div>
-                        <span class="tf-details-overview-title">
-							<?php _e( "Plugin Documentation", "tourfic" ); ?>
-						</span>
-                        <div class="tf-plugin-documentation">
-                            <div class="tf-plugin-details-info">
-                                <i class="fa-solid fa-file-alt"></i>
-                                <span><?php _e( "You’ll get every detailed document regarding the plugin in our documentation website described by our Engineers.", "tourfic" ); ?></span>
-                            </div>
-                            <div class="tf-plugin-document-link">
-								<?php echo sprintf( "<a target='_blank' href='https://tourfic.com/'>Visit Documentation</a>" ); ?>
-                            </div>
-                        </div>
+						<div class="tf-video-instractions">
+							<span class="tf-details-overview-title">
+								<?php _e( "Video Instruction", "tourfic" ); ?>
+							</span>
+							<iframe width="100%" height="300" src="https://www.youtube.com/embed/xeVkabWobDU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						</div>
+						
+						<div class="tf-community-info">
+							<span class="tf-details-overview-title">
+								<?php _e( "Facebook Community", "tourfic" ); ?>
+							</span>
+							<div class="tf-facebook-community">
+								<div class="icon">
+									<i class="fab fa-facebook-f"></i>
+								</div>
+								<span><?php echo sprintf( "Join our <a target='_blank' href='https://www.facebook.com/groups/tourfic'>Tourfic - Travel Booking Solution for Woocommerce Community </a> Facebook Group for your query or share your thoughts about the plugin with user and us." ); ?></span>
+							</div>
+							<span class="tf-details-overview-title">
+								<?php _e( "Plugin Documentation", "tourfic" ); ?>
+							</span>
+							<div class="tf-plugin-documentation">
+								<div class="tf-plugin-details-info">
+									<i class="fa-solid fa-file-alt"></i>
+									<span><?php _e( "You’ll get every detailed document regarding the plugin in our documentation website described by our Engineers.", "tourfic" ); ?></span>
+								</div>
+								<div class="tf-plugin-document-link">
+									<?php echo sprintf( "<a target='_blank' href='https://tourfic.com/'>Visit Documentation</a>" ); ?>
+								</div>
+							</div>
+						</div>
                     </div>
                 </div>
             </div>
@@ -380,9 +383,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                         <!-- Header -->
                         <div class="tf-option-header">
                             <div class="tf-option-header-left">
-                                <h2><a href="#" class="tf-mobile-tabs"><i class="fa-solid fa-bars"></i></a><?php echo esc_html( $this->option_title ); ?></h2>
-                                <span><?php _e( 'By', 'tourfic' ) ?></span>
-                                <a href="https://tourfic.com/" target="_blank"><?php _e( 'Themefic', 'tourfic' ) ?></a>
+                                <h2>
+								<img src="<?php echo TF_ASSETS_URL; ?>img/tourfic-logo.webp" alt="Tourfic">
+								<a href="#" class="tf-mobile-tabs"><i class="fa-solid fa-bars"></i></a>
+								</h2>
                             </div>
                             <div class="tf-option-header-right">
                                 <div class="tf-option-header-actions">
@@ -453,6 +457,9 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                         <!-- Footer -->
                         <div class="tf-option-footer">
                             <button type="submit" class="tf-admin-btn tf-btn-secondary"><?php _e( 'Save', 'tourfic' ); ?></button>
+							
+							<span><?php _e( 'By', 'tourfic' ) ?><a href="https://tourfic.com/" target="_blank"><?php _e( 'Themefic', 'tourfic' ) ?></a></span>
+                                
                         </div>
 
 						<?php wp_nonce_field( 'tf_option_nonce_action', 'tf_option_nonce' ); ?>
