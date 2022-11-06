@@ -1,6 +1,6 @@
 .tf-deshboard-wrapper {
-  margin-top: 20px;
-  margin-right: 20px;
+  margin: 20px auto;
+  max-width: 85%;
 
   .tf-deshboard-version {
     background-color: #fff;
@@ -51,18 +51,13 @@
 
   .tf-deshboard-overview {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
     @media #{$max1199}{
       display: flow-root;
     }
 
     .tf-details-overview {
-      width: 69%;
-      @media #{$max1199}{
-        width: 100%;
-      }
-
+      max-width: 90%;
+      margin: 0 auto;
       span.tf-details-overview-title {
         font-style: normal;
         font-weight: 600;
@@ -76,7 +71,7 @@
       .tf-details-overview-items {
         display: flex;
         justify-content: space-between;
-        @media #{$max767}{
+        @media #{$max1199}{
           display: flow-root;
         }
 
@@ -87,12 +82,16 @@
           border-radius: 8px;
           padding-bottom: 20px;
           margin: 8px 0px;
-          @media #{$max767}{
+          @media #{$max1199}{
             width: 48%;
             float: left;
             margin: 8px 1%;
           }
-
+          @media #{$max575}{
+            width: 100%;
+            float: left;
+            margin: 8px 0%;
+          }
           h3 {
             span {
               width: 40px;
@@ -191,107 +190,136 @@
     }
 
     .tf-details-instractions {
-      width: 30%;
+      max-width: 90%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
       @media #{$max1199}{
         width: 100%;
       }
-
-      span.tf-details-overview-title {
-        font-style: normal;
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 24px;
-        color: $slate60;
-        margin-top: 40px;
-        display: block;
+      @media #{$max991}{
+        display: flow-root;
       }
-
-      iframe {
-        margin: 8px 0px;
-        border-radius: 8px;
-
-        @media #{$max1366}{
-          height: 220px;
+      .tf-video-instractions{
+        width: 49%;
+        @media #{$max991}{
+          width: 100%;
         }
-      }
-
-      .tf-facebook-community {
-        background-color: $blue5;
-        padding: 16px;
-        border-radius: 8px;
-        display: flex;
-        justify-content: space-between;
-        margin: 8px 0px;
-
-        .icon {
-          width: 70px;
-          margin-right: 5px;
-
-          i {
-            background-color: $blue70;
-            height: 70px;
-            width: 70px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 70px;
-            color: #fff;
-            font-size: 31px;
-          }
-        }
-
-        span {
+        span.tf-details-overview-title {
           font-style: normal;
-          font-weight: 400;
-          font-size: 15px;
+          font-weight: 600;
+          font-size: 16px;
           line-height: 24px;
           color: $slate60;
-          max-width: 85%;
+          margin-top: 40px;
+          display: block;
+        }
 
-          a {
-            text-decoration: none;
-            color: $blue60;
-            font-weight: 600;
+        iframe {
+          margin: 8px 0px;
+          border-radius: 8px;
+
+          @media #{$max1366}{
+            height: 340px;
+          }
+          @media #{$max991}{
+            height: 200px;
           }
         }
       }
 
-      .tf-plugin-documentation {
-        background-color: #fff;
-        border-radius: 8px;
-        padding: 16px;
-        margin: 8px 0px;
-
-        .tf-plugin-details-info {
+      .tf-community-info{
+        width: 49%;
+        @media #{$max991}{
+          width: 100%;
+        }
+        span.tf-details-overview-title {
+          font-style: normal;
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 24px;
+          color: $slate60;
+          margin-top: 40px;
+          display: block;
+        }
+        .tf-facebook-community {
+          background-color: $blue5;
+          padding: 16px;
+          border-radius: 8px;
           display: flex;
           justify-content: space-between;
-          align-items: center;
+          margin: 8px 0px;
 
-          i {
-            color: $slate60;
-            font-size: 36px;
-            margin-right: 10px;
+          .icon {
+            width: 70px;
+            margin-right: 5px;
+
+            i {
+              background-color: $blue70;
+              height: 70px;
+              width: 70px;
+              border-radius: 50%;
+              text-align: center;
+              line-height: 70px;
+              color: #fff;
+              font-size: 31px;
+            }
           }
 
           span {
             font-style: normal;
             font-weight: 400;
-            font-size: 16px;
+            font-size: 15px;
             line-height: 24px;
             color: $slate60;
+            max-width: 85%;
+
+            a {
+              text-decoration: none;
+              color: $blue60;
+              font-weight: 600;
+            }
           }
         }
 
-        .tf-plugin-document-link {
-          margin-top: 16px;
-          text-align: right;
+        .tf-plugin-documentation {
+          background-color: #fff;
+          border-radius: 8px;
+          padding: 16px;
+          margin: 8px 0px;
 
-          a {
-            font-style: normal;
-            font-weight: 600;
-            font-size: 16px;
-            line-height: 24px;
-            text-decoration: none;
-            color: $blue60;
+          .tf-plugin-details-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            i {
+              color: $slate60;
+              font-size: 36px;
+              margin-right: 10px;
+            }
+
+            span {
+              font-style: normal;
+              font-weight: 400;
+              font-size: 16px;
+              line-height: 24px;
+              color: $slate60;
+            }
+          }
+
+          .tf-plugin-document-link {
+            margin-top: 16px;
+            text-align: right;
+
+            a {
+              font-style: normal;
+              font-weight: 600;
+              font-size: 16px;
+              line-height: 24px;
+              text-decoration: none;
+              color: $blue60;
+            }
           }
         }
       }

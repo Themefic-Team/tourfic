@@ -2,6 +2,17 @@
     'use strict';
     $(document).ready(function () {
 
+        // Create an instance of Notyf
+        const notyf = new Notyf({
+            ripple: true,
+            duration: 3000,
+            dismissable: true,
+            position: {
+                x: 'right',
+                y: 'bottom',
+            },
+        });
+
         /*
         * window url on change tab click
         * @author: Foysal
@@ -9,13 +20,13 @@
         $(window).on('hashchange load', function () {
             let hash = window.location.hash;
 
-            if (hash.indexOf('tab=dashboard') > -1) {
-                $('.tf-deshboard-wrapper').show();
-                $('.tf-option-wrapper').hide();
-            } else {
-                $('.tf-deshboard-wrapper').hide();
-                $('.tf-option-wrapper').show();
-            }
+            // if (hash.indexOf('tab=dashboard') > -1) {
+            //     $('.tf-deshboard-wrapper').show();
+            //     $('.tf-option-wrapper').hide();
+            // } else {
+            //     $('.tf-deshboard-wrapper').hide();
+            //     $('.tf-option-wrapper').show();
+            // }
             let slug = hash.replace('#tab=', '');
 
             if (hash) {
@@ -45,18 +56,18 @@
             let tabId = $this.attr('data-tab');
             $('#' + tabId).css('display', 'flex');
 
-            if($this.next().hasClass('tf-submenu')) {
+            if ($this.next().hasClass('tf-submenu')) {
                 firstTabId = parentDiv.find('.tf-submenu li:first-child .tf-tablinks').data('tab');
             }
 
-            if(firstTabId === tabId) {
+            if (firstTabId === tabId) {
                 parentDiv.find('.tf-submenu li:first-child .tf-tablinks').addClass('active');
             } else {
                 $this.addClass('active');
             }
             // url hash update
             window.location.hash = '#tab=' + tabId;
-            
+
             $(".tf-admin-tab").removeClass('active');
         });
 
@@ -166,57 +177,58 @@
         * @author: Foysal
         */
         TF_dependency();
-        function TF_dependency (){
-            $('.tf-tab-content, .tf-taxonomy-metabox').each(function () { 
+
+        function TF_dependency() {
+            $('.tf-tab-content, .tf-taxonomy-metabox').each(function () {
                 var $this = $(this);
-                $this.find('[data-controller]').each(function (){
-                   var $tffields = $(this);
+                $this.find('[data-controller]').each(function () {
+                    var $tffields = $(this);
                     if ($tffields.length) {
                         // alert($tffields.length);
-                            var normal_ruleset = $.tf_deps.createRuleset(),
+                        var normal_ruleset = $.tf_deps.createRuleset(),
                             global_ruleset = $.tf_deps.createRuleset(),
                             normal_depends = [],
                             global_depends = [];
-                    
-                            $tffields.each(function () {
-                            
-                                var $field = $(this),
-                                    controllers = $field.data('controller').split('|'),
-                                    conditions = $field.data('condition').split('|'),
-                                    values = $field.data('value').toString().split('|'),
-                                    is_global = $field.data('depend-global') ? true : false,
-                                    ruleset = normal_ruleset;
-                            
-                                $.each(controllers, function (index, depend_id) {
-                            
-                                    var value = values[index] || '',
-                                        condition = conditions[index] || conditions[0];
-                            
-                                    ruleset = ruleset.createRule($this.find('[data-depend-id="' + depend_id + '"]'), condition, value);
-                            
-                                    ruleset.include($field);
-                            
-                                    if (is_global) {
-                                        global_depends.push(depend_id);
-                                    } else {
-                                        normal_depends.push(depend_id);
-                                    }
-                            
-                                });
-                            
+
+                        $tffields.each(function () {
+
+                            var $field = $(this),
+                                controllers = $field.data('controller').split('|'),
+                                conditions = $field.data('condition').split('|'),
+                                values = $field.data('value').toString().split('|'),
+                                is_global = $field.data('depend-global') ? true : false,
+                                ruleset = normal_ruleset;
+
+                            $.each(controllers, function (index, depend_id) {
+
+                                var value = values[index] || '',
+                                    condition = conditions[index] || conditions[0];
+
+                                ruleset = ruleset.createRule($this.find('[data-depend-id="' + depend_id + '"]'), condition, value);
+
+                                ruleset.include($field);
+
+                                if (is_global) {
+                                    global_depends.push(depend_id);
+                                } else {
+                                    normal_depends.push(depend_id);
+                                }
+
                             });
-                    
-                            if (normal_depends.length) {
-                                $.tf_deps.enable($this, normal_ruleset, normal_depends);
-                            }
-                            
-                            if (global_depends.length) {
-                                $.tf_deps.enable(TF.vars.$body, global_ruleset, global_depends);
-                            }
+
+                        });
+
+                        if (normal_depends.length) {
+                            $.tf_deps.enable($this, normal_ruleset, normal_depends);
+                        }
+
+                        if (global_depends.length) {
+                            $.tf_deps.enable(TF.vars.$body, global_ruleset, global_depends);
+                        }
                     }
                 });
-               
-                
+
+
             });
         }
 
@@ -361,28 +373,32 @@
         * Options ajax save
         * @author: Foysal
         */
-        $(document).on('click', '.tf-ajax-save', function (e) {
+        $(document).on('submit', '.tf-option-form', function (e) {
             e.preventDefault();
             let $this = $(this),
-                form = $this.closest('form.tf-option-form'),
-                data = form.serializeArray();
+                submitBtn = $this.find('.tf-ajax-save'),
+                data = new FormData(this);
+
+            data.append('action', 'tf_options_save');
 
             $.ajax({
                 url: tf_options.ajax_url,
                 type: 'POST',
-                data: {
-                    optionData: data,
-                    action: 'tf_options_save',
-                },
+                data: data,
+                processData: false,
+                contentType: false,
                 beforeSend: function () {
-                    $this.addClass('tf-loading');
+                    submitBtn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
-                    $this.removeClass('tf-loading');
-                    $this.addClass('tf-success');
-                    setTimeout(function () {
-                        $this.removeClass('tf-success');
-                    }, 2000);
+                    let obj = JSON.parse(response);
+                    if(obj.status === 'success'){
+                        notyf.success(obj.message);
+                    } else {
+                        notyf.error(obj.message);
+                    }
+                    submitBtn.removeClass('tf-btn-loading');
+
                 },
                 error: function (error) {
                     console.log(error);
@@ -448,21 +464,21 @@
                     $(this).attr("for", for_value);
                 }
             });
-            add_value.find('[data-depend-id]').each(function () { 
-                var data_depend_id = $(this).attr("data-depend-id"); 
+            add_value.find('[data-depend-id]').each(function () {
+                var data_depend_id = $(this).attr("data-depend-id");
                 if (typeof data_depend_id !== "undefined") {
-                    data_depend_id = data_depend_id.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']'); 
+                    data_depend_id = data_depend_id.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
                     $(this).attr("data-depend-id", data_depend_id);
                 }
             });
-            add_value.find('[data-controller]').each(function () { 
-                var data_controller = $(this).attr("data-controller"); 
+            add_value.find('[data-controller]').each(function () {
+                var data_controller = $(this).attr("data-controller");
                 if (typeof data_controller !== "undefined") {
-                    data_controller = data_controller.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']'); 
+                    data_controller = data_controller.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
                     $(this).attr("data-controller", data_controller);
                 }
             });
-            
+
 
             var append = $this_parent.find('.tf-repeater-wrap-' + id + '');
             add_value.appendTo(append).show();
@@ -530,17 +546,17 @@
                     var for_value = $(this).attr("for", for_value);
                 }
             });
-            clone_value.find('[data-depend-id]').each(function () { 
-                var data_depend_id = $(this).attr("data-depend-id"); 
+            clone_value.find('[data-depend-id]').each(function () {
+                var data_depend_id = $(this).attr("data-depend-id");
                 if (typeof data_depend_id !== "undefined") {
-                    data_depend_id = data_depend_id.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']'); 
+                    data_depend_id = data_depend_id.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
                     $(this).attr("data-depend-id", data_depend_id);
                 }
             });
-            clone_value.find('[data-controller]').each(function () { 
-                var data_controller = $(this).attr("data-controller"); 
+            clone_value.find('[data-controller]').each(function () {
+                var data_controller = $(this).attr("data-controller");
                 if (typeof data_controller !== "undefined") {
-                    data_controller = data_controller.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']'); 
+                    data_controller = data_controller.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
                     $(this).attr("data-controller", data_controller);
                 }
             });
@@ -549,7 +565,7 @@
             $(this).closest('.tf-repeater-wrap').append(clone_value).show();
             TF_dependency();
         });
-        $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () { 
+        $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
             $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').slideToggle();
             $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').toggleClass('hide');
             if ($(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').hasClass('hide') == true) {
@@ -696,7 +712,7 @@ var frame, gframe;
         $('#addtag > .submit #submit').click(function () {
             $(".tf-fieldset-media-preview").html("");
         });
-        
+
         // Switcher Value Changed
         $('.tf-switch').change(function () {
             var $this = $(this);
@@ -709,7 +725,7 @@ var frame, gframe;
             }
         });
 
-        if(tf_options.gmaps!="googlemap"){
+        if (tf_options.gmaps != "googlemap") {
             $(".tf-field-map").each(function () {
                 var $this = $(this),
                     $map = $this.find('.tf--map-osm'),
@@ -837,255 +853,257 @@ var frame, gframe;
 
 // Field Dependency
 
-(function($) {
+(function ($) {
 
     'use strict';
-  
+
     function Rule(controller, condition, value) {
-      this.init(controller, condition, value);
+        this.init(controller, condition, value);
     }
-  
+
     $.extend(Rule.prototype, {
-  
-      init: function(controller, condition, value) {
-  
-        this.controller = controller;
-        this.condition  = condition;
-        this.value      = value;
-        this.rules      = [];
-        this.controls   = [];
-  
-      },
-  
-      evalCondition: function(context, control, condition, val1, val2) {
-  
-        if( condition == '==' ) {
-  
-          return this.checkBoolean(val1) == this.checkBoolean(val2);
-  
-        } else if( condition == '!=' ) {
-  
-          return this.checkBoolean(val1) != this.checkBoolean(val2);
-  
-        } else if( condition == '>=' ) {
-  
-          return Number(val2) >= Number(val1);
-  
-        } else if( condition == '<=' ) {
-  
-          return Number(val2) <= Number(val1);
-  
-        } else if( condition == '>' ) {
-  
-          return Number(val2) > Number(val1);
-  
-        } else if( condition == '<' ) {
-  
-          return Number(val2) < Number(val1);
-  
-        } else if( condition == '()' ) {
-  
-          return window[val1](context, control, val2);
-  
-        } else if( condition == 'any' ) {
-  
-          if( $.isArray( val2 ) ) {
-            for (var i = val2.length - 1; i >= 0; i--) {
-              if( $.inArray( val2[i], val1.split(',') ) !== -1 ) {
+
+        init: function (controller, condition, value) {
+
+            this.controller = controller;
+            this.condition = condition;
+            this.value = value;
+            this.rules = [];
+            this.controls = [];
+
+        },
+
+        evalCondition: function (context, control, condition, val1, val2) {
+
+            if (condition == '==') {
+
+                return this.checkBoolean(val1) == this.checkBoolean(val2);
+
+            } else if (condition == '!=') {
+
+                return this.checkBoolean(val1) != this.checkBoolean(val2);
+
+            } else if (condition == '>=') {
+
+                return Number(val2) >= Number(val1);
+
+            } else if (condition == '<=') {
+
+                return Number(val2) <= Number(val1);
+
+            } else if (condition == '>') {
+
+                return Number(val2) > Number(val1);
+
+            } else if (condition == '<') {
+
+                return Number(val2) < Number(val1);
+
+            } else if (condition == '()') {
+
+                return window[val1](context, control, val2);
+
+            } else if (condition == 'any') {
+
+                if ($.isArray(val2)) {
+                    for (var i = val2.length - 1; i >= 0; i--) {
+                        if ($.inArray(val2[i], val1.split(',')) !== -1) {
+                            return true;
+                        }
+                    }
+                } else {
+                    if ($.inArray(val2, val1.split(',')) !== -1) {
+                        return true;
+                    }
+                }
+
+            } else if (condition == 'not-any') {
+
+                if ($.isArray(val2)) {
+                    for (var i = val2.length - 1; i >= 0; i--) {
+                        if ($.inArray(val2[i], val1.split(',')) == -1) {
+                            return true;
+                        }
+                    }
+                } else {
+                    if ($.inArray(val2, val1.split(',')) == -1) {
+                        return true;
+                    }
+                }
+
+            }
+
+            return false;
+
+        },
+
+        checkBoolean: function (value) {
+
+            switch (value) {
+
+                case true:
+                case 'true':
+                case 1:
+                case '1':
+                    value = true;
+                    break;
+
+                case null:
+                case false:
+                case 'false':
+                case 0:
+                case '0':
+                    value = false;
+                    break;
+
+            }
+
+            return value;
+        },
+
+        checkCondition: function (context) {
+
+            if (!this.condition) {
                 return true;
-              }
             }
-          } else {
-            if( $.inArray( val2, val1.split(',') ) !== -1 ) {
-              return true;
+
+            var control = context.find(this.controller);
+
+            var control_value = this.getControlValue(context, control);
+
+            if (control_value === undefined) {
+                return false;
             }
-          }
-  
-        } else if( condition == 'not-any' ) {
-  
-          if( $.isArray( val2 ) ) {
-            for (var i = val2.length - 1; i >= 0; i--) {
-              if( $.inArray( val2[i], val1.split(',') ) == -1 ) {
-                return true;
-              }
+
+            control_value = this.normalizeValue(control, this.value, control_value);
+
+            return this.evalCondition(context, control, this.condition, this.value, control_value);
+        },
+
+        normalizeValue: function (control, baseValue, control_value) {
+
+            if (typeof baseValue == 'number') {
+                return parseFloat(control_value);
             }
-          } else {
-            if( $.inArray( val2, val1.split(',') ) == -1 ) {
-              return true;
+
+            return control_value;
+        },
+
+        getControlValue: function (context, control) {
+
+            if (control.length > 1 && (control.attr('type') == 'radio' || control.attr('type') == 'checkbox')) {
+
+                return control.filter(':checked').map(function () {
+                    return this.value;
+                }).get();
+
+            } else if (control.attr('type') == 'checkbox' || control.attr('type') == 'radio') {
+
+                return control.is(':checked');
+
             }
-          }
-  
+
+            return control.val();
+
+        },
+
+        createRule: function (controller, condition, value) {
+            var rule = new Rule(controller, condition, value);
+            this.rules.push(rule);
+            return rule;
+        },
+
+        include: function (input) {
+            this.controls.push(input);
+        },
+
+        applyRule: function (context, enforced) {
+
+            var result;
+
+            if (typeof (enforced) == 'undefined') {
+                result = this.checkCondition(context);
+            } else {
+                result = enforced;
+            }
+
+            var controls = $.map(this.controls, function (elem, idx) {
+                return context.find(elem);
+            });
+
+            if (result) {
+
+                $(controls).each(function () {
+                    $(this).removeClass('tf-depend-on');
+                });
+
+                $(this.rules).each(function () {
+                    this.applyRule(context);
+                });
+
+            } else {
+
+                $(controls).each(function () {
+                    $(this).addClass('tf-depend-on');
+                });
+
+                $(this.rules).each(function () {
+                    this.applyRule(context, false);
+                });
+
+            }
         }
-  
-        return false;
-  
-      },
-  
-      checkBoolean: function(value) {
-  
-        switch( value ) {
-  
-          case true:
-          case 'true':
-          case 1:
-          case '1':
-            value = true;
-          break;
-  
-          case null:
-          case false:
-          case 'false':
-          case 0:
-          case '0':
-            value = false;
-          break;
-  
-        }
-  
-        return value;
-      },
-  
-      checkCondition: function( context ) {
-  
-        if( !this.condition ) {
-          return true;
-        }
-  
-        var control = context.find(this.controller);
-  
-        var control_value = this.getControlValue(context, control);
-  
-        if( control_value === undefined ) {
-          return false;
-        }
-  
-        control_value = this.normalizeValue(control, this.value, control_value);
-  
-        return this.evalCondition(context, control, this.condition, this.value, control_value);
-      },
-  
-      normalizeValue: function( control, baseValue, control_value ) {
-  
-        if( typeof baseValue == 'number' ) {
-          return parseFloat( control_value );
-        }
-  
-        return control_value;
-      },
-  
-      getControlValue: function(context, control) {
-  
-        if( control.length > 1 && ( control.attr('type') == 'radio' || control.attr('type') == 'checkbox' ) ) {
-  
-          return control.filter(':checked').map(function() { return this.value; }).get();
-  
-        } else if ( control.attr('type') == 'checkbox' || control.attr('type') == 'radio' ) {
-  
-          return control.is(':checked');
-  
-        }
-  
-        return control.val();
-  
-      },
-  
-      createRule: function(controller, condition, value) {
-        var rule = new Rule(controller, condition, value);
-        this.rules.push(rule);
-        return rule;
-      },
-  
-      include: function(input) {
-        this.controls.push(input);
-      },
-  
-      applyRule: function(context, enforced) {
-  
-        var result;
-  
-        if( typeof( enforced ) == 'undefined' ) {
-          result = this.checkCondition(context);
-        } else {
-          result = enforced;
-        }
-  
-        var controls = $.map(this.controls, function(elem, idx) {
-          return context.find(elem);
-        });
-  
-        if( result ) {
-  
-          $(controls).each(function() {
-            $(this).removeClass('tf-depend-on');
-          });
-  
-          $(this.rules).each(function() {
-            this.applyRule(context);
-          });
-  
-        } else {
-  
-          $(controls).each(function() {
-            $(this).addClass('tf-depend-on');
-          });
-  
-          $(this.rules).each(function() {
-            this.applyRule(context, false);
-          });
-  
-        }
-      }
     });
-  
+
     function Ruleset() {
-      this.rules = [];
+        this.rules = [];
     };
-  
+
     $.extend(Ruleset.prototype, {
-  
-      createRule: function(controller, condition, value) {
-        var rule = new Rule(controller, condition, value);
-        this.rules.push(rule);
-        return rule;
-      },
-  
-      applyRules: function(context) {
-        $(this.rules).each(function() {
-          this.applyRule(context);
-        });
-      }
+
+        createRule: function (controller, condition, value) {
+            var rule = new Rule(controller, condition, value);
+            this.rules.push(rule);
+            return rule;
+        },
+
+        applyRules: function (context) {
+            $(this.rules).each(function () {
+                this.applyRule(context);
+            });
+        }
     });
-  
+
     $.tf_deps = {
-  
-      createRuleset: function() {
-        return new Ruleset();
-      },
-  
-      enable: function(selection, ruleset, depends) {
-  
-        selection.on('change keyup', function(elem) {
-  
-          var depend_id = elem.target.getAttribute('data-depend-id') || elem.target.getAttribute('data-sub-depend-id');
-  
-          if( depends.indexOf( depend_id ) !== -1 ) {
+
+        createRuleset: function () {
+            return new Ruleset();
+        },
+
+        enable: function (selection, ruleset, depends) {
+
+            selection.on('change keyup', function (elem) {
+
+                var depend_id = elem.target.getAttribute('data-depend-id') || elem.target.getAttribute('data-sub-depend-id');
+
+                if (depends.indexOf(depend_id) !== -1) {
+                    ruleset.applyRules(selection);
+                }
+
+            });
+
             ruleset.applyRules(selection);
-          }
-  
-        });
-  
-        ruleset.applyRules(selection);
-  
-        return true;
-      }
+
+            return true;
+        }
     };
-  
-  })(jQuery);
-  
-  (function ($) {
-      'use strict';
-      $(document).ready(function () {
-        
-        
+
+})(jQuery);
+
+(function ($) {
+    'use strict';
+    $(document).ready(function () {
+
+
     });
-  })(jQuery);
+})(jQuery);
