@@ -94,7 +94,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		}
 
 		/**
-		 * Options Page
+		 * Options Page menu
 		 * @author Foysal
 		 */
 		public function tf_options() {
@@ -114,7 +114,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				__('Dashboard', 'tourfic'),
 				__('Dashboard', 'tourfic'),
 				'manage_options',
-				$this->option_id . '#tab=dashboard',
+				$this->option_id . '&dashboard=1',
 				'__return_null',
 			);
 
@@ -143,8 +143,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		 * @author Jahid, Foysal
 		 */
 		public function tf_dashboard_page() {
+            $current_page_url = $this->get_current_page_url();
+            $query_string = $this->get_query_string($current_page_url);
+
 			?>
-            <div class="tf-deshboard-wrapper">
+            <div class="tf-deshboard-wrapper" style="display: <?php echo isset($query_string['dashboard']) ? 'block' : 'none' ?>">
                 <div class="tf-deshboard-version">
                     <span><?php _e( "Tourfic", "tourfic" ); ?><div class="version"><?php echo esc_attr( TOURFIC ); ?></div></span>
                 </div>
@@ -184,7 +187,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 												$totals_rooms_number += $tf_room_no;
 											}
 										}
-										
+
 									endwhile;
 
 									wp_reset_postdata();
@@ -330,7 +333,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							</span>
 							<iframe width="100%" height="300" src="https://www.youtube.com/embed/xeVkabWobDU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						</div>
-						
+
 						<div class="tf-community-info">
 							<span class="tf-details-overview-title">
 								<?php _e( "Facebook Community", "tourfic" ); ?>
@@ -368,6 +371,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			// Retrieve an existing value from the database.
 			$tf_option_value = get_option( $this->option_id );
+			$current_page_url = $this->get_current_page_url();
+			$query_string = $this->get_query_string($current_page_url);
 
 			// Set default values.
 			if ( empty( $tf_option_value ) ) {
@@ -378,7 +383,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			if ( ! empty( $this->option_sections ) ) :
 				?>
-                <div class="tf-option-wrapper" style="display: none">
+                <div class="tf-option-wrapper" style="display: <?php echo !isset($query_string['dashboard']) ? 'block' : 'none' ?>">
                     <form method="post" action="" class="tf-option-form" enctype="multipart/form-data">
                         <!-- Header -->
                         <div class="tf-option-header">
@@ -390,7 +395,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                             </div>
                             <div class="tf-option-header-right">
                                 <div class="tf-option-header-actions">
-                                    <input type="submit" class="tf-admin-btn tf-btn-secondary" value="<?php esc_attr_e( 'Save', 'tourfic' ); ?>">
+                                    <button type="submit" class="tf-admin-btn tf-btn-secondary tf-ajax-save"><?php esc_attr_e( 'Save', 'tourfic' ); ?></button>
                                 </div>
                             </div>
                         </div>
@@ -456,10 +461,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
                         <!-- Footer -->
                         <div class="tf-option-footer">
-                            <button type="submit" class="tf-admin-btn tf-btn-secondary"><?php _e( 'Save', 'tourfic' ); ?></button>
-							
+                            <button type="submit" class="tf-admin-btn tf-btn-secondary tf-ajax-save"><?php _e( 'Save', 'tourfic' ); ?></button>
+
 							<span><?php _e( 'By', 'tourfic' ) ?><a href="https://tourfic.com/" target="_blank"><?php _e( 'Themefic', 'tourfic' ) ?></a></span>
-                                
+
                         </div>
 
 						<?php wp_nonce_field( 'tf_option_nonce_action', 'tf_option_nonce' ); ?>
@@ -473,7 +478,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		 * Save Options
 		 * @author Foysal
 		 */
-		public function save_options( $option_data = array() ) {
+		public function save_options() {
 
 			// Add nonce for security and authentication.
 			$nonce_name   = isset( $_POST['tf_option_nonce'] ) ? $_POST['tf_option_nonce'] : '';
@@ -525,17 +530,22 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		 * Ajax Save Options
 		 * @author Foysal
 		 */
-		public function ajax_save_options() {
+		public function tf_ajax_save_options() {
 			$response    = [
 				'status'  => 'error',
 				'message' => __( 'Something went wrong!', 'tourfic' ),
 			];
-			$option_data = isset( $_POST['optionData'] ) ? $_POST['optionData'] : array();
 
-			$response['sdasd'] = $option_data;
+            if( ! empty( $_POST['tf_option_nonce'] ) && wp_verify_nonce( $_POST['tf_option_nonce'], 'tf_option_nonce_action' ) ) {
+                $this->save_options();
+                $response = [
+                    'status'  => 'success',
+                    'message' => __( 'Options saved successfully!', 'tourfic' ),
+                ];
+            }
 
-			echo json_encode( $response );
-			wp_die();
+            echo json_encode( $response );
+            wp_die();
 		}
 
 		/*
@@ -547,6 +557,18 @@ if ( ! class_exists( 'TF_Settings' ) ) {
             $page_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
             return $page_url;
+        }
+
+        /*
+         * Get query string from url
+         * @return array
+         * @author Foysal
+         */
+        public function get_query_string( $url ) {
+	        $url_parts = parse_url( $url );
+	        parse_str( $url_parts['query'], $query_string );
+
+            return $query_string;
         }
 	}
 }

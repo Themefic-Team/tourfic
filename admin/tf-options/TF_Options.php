@@ -144,11 +144,12 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				wp_enqueue_style( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.css' ), array(), '1.9' );
 			}
 			wp_enqueue_script( 'jquery-ui-autocomplete' );
-			
+
 			if ( ! wp_script_is( 'jquery-ui-sortable' ) ) {
 				wp_enqueue_script( 'jquery-ui-sortable' );
 			}
 			wp_enqueue_media();
+			wp_enqueue_editor();
 
 		}
 
@@ -210,15 +211,16 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			}
 
 			//field width
-			$field_width = isset( $field['field_width'] ) && ! empty( $field['field_width'] ) ? esc_attr($field['field_width']) : '100';
-			if($field_width == '100'){
-                $field_style = 'width:100%;';
-            } else {
-                $field_style = 'width:calc('.$field_width.'% - 10px);';
-            }
+			$field_width = isset( $field['field_width'] ) && ! empty( $field['field_width'] ) ? esc_attr( $field['field_width'] ) : '100';
+			if ( $field_width == '100' ) {
+				$field_style = 'width:100%;';
+			} else {
+				$field_style = 'width:calc(' . $field_width . '% - 10px);';
+			}
 			?>
 
-            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo ! empty( $visible ) ? $visible : ''; ?>" <?php echo ! empty( $depend ) ? $depend : ''; ?> style="<?php echo esc_attr($field_style); ?>">
+            <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo ! empty( $visible ) ? $visible : ''; ?>" <?php echo ! empty( $depend ) ? $depend : ''; ?>
+                 style="<?php echo esc_attr( $field_style ); ?>">
 
 				<?php if ( ! empty( $field['label'] ) ): ?>
                     <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label">

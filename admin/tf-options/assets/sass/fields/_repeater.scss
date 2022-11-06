@@ -116,3 +116,6 @@
     margin-bottom: 24px;
   }
 }
+.tf-field-disable .tf-repeater {
+  pointer-events: none;
+}

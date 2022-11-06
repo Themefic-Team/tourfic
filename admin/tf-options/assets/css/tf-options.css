@@ -105,6 +105,40 @@ Custom Modal
       -o-transform: rotate(180deg);
       transform: rotate(180deg); }
 
+/*
+Ajax Loader
+*/
+.tf-btn-loading {
+  padding-right: 40px;
+  position: relative; }
+
+.tf-btn-loading:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  margin-top: -7px;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fff;
+  border-left-color: transparent;
+  border-radius: 50%;
+  vertical-align: middle;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .2s ease, visibility .2s ease;
+  -webkit-animation: wd-rotate 450ms infinite linear;
+  animation: wd-rotate 450ms infinite linear; }
+
+@-webkit-keyframes wd-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+@keyframes wd-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
 body.tf-modal-open {
   overflow: hidden; }
   body.tf-modal-open .tf-modal {
@@ -820,14 +854,15 @@ body.tf-modal-open {
     color: #a6b1bf; }
 
 .tf-field-textarea textarea {
-  width: 100%;
+  width: 100% !important;
   height: 180px;
   padding: 12px 8px 12px 12px;
   border: 1px solid #c4cbd4;
   background-color: #f5f8ff;
   border-radius: 4px;
   color: #363e4a;
-  font-size: 14px; }
+  font-size: 14px;
+  width: 100%; }
   .tf-field-textarea textarea:focus {
     background: #FFFFFF;
     box-shadow: 0 0 0 2px #2979ff;
@@ -891,6 +926,8 @@ body.tf-modal-open {
     font-family: sans-serif;
     overflow: hidden;
     word-break: keep-all; }
+.tf-field-select2 .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 48px; }
 
 .tf-field.tf-field-select2 .tf-fieldset span.select2:nth-child(3) {
   display: none; }
@@ -1432,6 +1469,9 @@ body.tf-modal-open {
     font-family: 'lato'; }
   .tf-repeater .tf-single-repeater {
     margin-bottom: 24px; }
+
+.tf-field-disable .tf-repeater {
+  pointer-events: none; }
 
 .tf-tablist ul.tf-nav-tabs {
   list-style: none;
