@@ -1434,6 +1434,9 @@ body.tf-modal-open {
   .tf-repeater .tf-single-repeater {
     margin-bottom: 24px; }
 
+.tf-field-disable .tf-repeater {
+  pointer-events: none; }
+
 .tf-tablist ul.tf-nav-tabs {
   list-style: none;
   margin-bottom: 0; }
