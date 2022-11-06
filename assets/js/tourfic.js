@@ -216,6 +216,7 @@
             dots: false,
             centerMode: false,
             variableWidth: false,
+            adaptiveHeight: true
         });
 
         sbp.on("click", function () {
@@ -442,6 +443,9 @@
                 filter_xhr.abort();
             }
 
+            
+            //var pagination_url = '/?place=' + dest + '&adults=' + adults + '&children=' + children + '&type=' + posttype;
+            //formData.append('pagination_url', pagination_url);
             filter_xhr = $.ajax({
                 type: 'post',
                 url: tf_params.ajax_url,
@@ -461,7 +465,7 @@
                 complete: function (data) {
                     $('.archive_ajax_result').unblock();
                 },
-                success: function (data) {
+                success: function (data,e) {
                     $('.archive_ajax_result').unblock();
 
                     $('.archive_ajax_result').html(data);
@@ -1177,7 +1181,7 @@
         });
 
         /**
-         * Mixed
+         * ajax tour load pagination
          */
         var flag = false;
         var main_xhr;
@@ -1195,10 +1199,11 @@
                 beforeSend: function () {
 
                     $(document).find('.tf_posts_navigation').addClass('loading');
+                    $(document).find('.archive_ajax_result').addClass('loading');
                     flag = true;
                 },
                 success: function (data) {
-                    $('.archive_ajax_result').append($('.archive_ajax_result', data).html());
+                    $('.archive_ajax_result').html($('.archive_ajax_result', data).html());
 
                     $('.tf_posts_navigation').html($('.tf_posts_navigation', data).html());
 
@@ -1207,40 +1212,20 @@
                     flag = false;
 
                     $(document).find('.tf_posts_navigation').removeClass('loading');
+                    $(document).find('.archive_ajax_result').removeClass('loading');
 
                 }
             });
         };
 
         // Feed Ajax Trigger
-        $(document).on('click', '.tf_posts_navigation a.next.page-numbers', function (e) {
+        $(document).on('click', '#tf_posts_navigation_bar a.page-numbers', function (e) {
             e.preventDefault();
-
             var targetUrl = (e.target.href) ? e.target.href : $(this).context.href;
             amPushAjax(targetUrl);
             window.history.pushState({url: "" + targetUrl + ""}, "", targetUrl);
         });
         // End Feed Ajax Trigger
-
-        // Feed Click Trigger
-        $(window).on('scroll', function (e) {
-            $('.tf_posts_navigation a.next.page-numbers').each(function (i, el) {
-
-                var $this = $(this);
-
-                var H = $(window).height(),
-                    r = el.getBoundingClientRect(),
-                    t = r.top,
-                    b = r.bottom;
-
-                var tAdj = parseInt(t - (H / 2));
-
-                if (flag === false && (H >= tAdj)) {
-                    $this.trigger('click');
-                }
-            });
-        });
-        // End Feed Click Trigger
 
         // Hotel and Tour Advance Search form
 
@@ -1325,7 +1310,7 @@
             $(this).toggleClass('active');
             $(this).parent().find('.arrow').toggleClass('arrow-animate');
             $(this).parent().find('.tf-accordion-content').slideToggle();
-            $(this).parents('#tf-accordion-wrapper').siblings().find('.tf-accordion-content').slideUp();
+            //$(this).parents('#tf-accordion-wrapper').siblings().find('.tf-accordion-content').slideUp();
             $(this).siblings().find('.ininerary-other-gallery').slick({
                 slidesToShow: 6,
                 slidesToScroll: 1,
