@@ -216,6 +216,7 @@
             dots: false,
             centerMode: false,
             variableWidth: false,
+            adaptiveHeight: true
         });
 
         sbp.on("click", function () {
