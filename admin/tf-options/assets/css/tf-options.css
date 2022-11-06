@@ -807,14 +807,15 @@ body.tf-modal-open {
     color: #a6b1bf; }
 
 .tf-field-textarea textarea {
-  width: 100%;
+  width: 100% !important;
   height: 180px;
   padding: 12px 8px 12px 12px;
   border: 1px solid #c4cbd4;
   background-color: #f5f8ff;
   border-radius: 4px;
   color: #363e4a;
-  font-size: 14px; }
+  font-size: 14px;
+  width: 100%; }
   .tf-field-textarea textarea:focus {
     background: #FFFFFF;
     box-shadow: 0 0 0 2px #2979ff;
@@ -1697,7 +1698,6 @@ body.tf-modal-open {
   #tf-icon-modal .tf-modal-content .tf-modal-footer .tf-admin-btn {
     padding: 10px 24px; }
 
-    
 .tf-field-number input {
   width: 100%;
   padding: 12px 8px 12px 12px;

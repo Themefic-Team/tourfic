@@ -11,18 +11,15 @@ if ( ! class_exists( 'TF_editor' ) ) {
 
 		public function render() {
             $tf_editor_unique_id = str_replace( array("[","]"),"_",esc_attr( $this->field_name() ) );
-            ob_start();
-                wp_editor($this->value, $tf_editor_unique_id, array(
-                'wpautop' => true,
-                'media_buttons' => true,
-                'textarea_rows' => 10,
-                'textarea_name' => $this->field_name()
-                )
-            );
-            $output = ob_get_clean();
-            echo $output;
-		}
-
+            
+            $parent_class = ( ! empty( $this->parent_field ) ) ? 'parent_wp_editor' : 'wp_editor'; 
+            $parent_class = ( isset( $this->field['wp_editor'] ) ) ? 'wp_editor' : $parent_class ;  
+        ?>
+        <div class="tf-field-textarea">
+            <textarea name="<?php echo $this->field_name(); ?>" id="<?php echo $tf_editor_unique_id; ?>" class="<?php echo esc_attr( $parent_class )  ?> tf_wp_editor" cols="30"><?php echo $this->value; ?></textarea> 
+        </div>
+       <?php
+		} 
         public function sanitize() {
 			return wp_kses_post($this->value);
 		}

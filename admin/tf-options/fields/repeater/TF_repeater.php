@@ -58,6 +58,11 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
                                 <div class="tf-repeater-content-wrap">
 									<?php
 									foreach ( $this->field['fields'] as $re_field ) :
+										
+										if($re_field['type'] == 'editor'){ 
+											$re_field['wp_editor'] = 'wp_editor'; 
+										}
+										
 										if(!empty($this->parent_field)){
 											$parent_field = $this->parent_field.'[' . $this->field['id'] . '][' . $key . ']';
 										}else{ 

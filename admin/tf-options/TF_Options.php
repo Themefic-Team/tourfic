@@ -149,6 +149,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				wp_enqueue_script( 'jquery-ui-sortable' );
 			}
 			wp_enqueue_media();
+			wp_enqueue_editor();
 
 		}
 
