@@ -404,7 +404,7 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Changelog ==
 
-= 2.8.11 -  30 October 2022 =
+= 2.8.11 -  07 November 2022 =
 
 * Added: Tour List Pagination on the search page and Number of Search Results
 * Added: [[tf_reviews] shortcode added to view the reviews with elementor widget
