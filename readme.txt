@@ -407,13 +407,12 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 = 2.8.11 -  07 November 2022 =
 
 * Added: Tour List Pagination on the search page and Number of Search Results
-* Added: [[tf_reviews] shortcode added to view the reviews with elementor widget
 * Fixed: Tourfic Pro Hotel Room Gallery
 * Fixed: Tour Review and related tour setting option not working properly
 * Fixed: Hotel Review and Share option settings not working properly
 * Fixed: Single Hotel View Page image size issue
 * Fixed: Astra theme margin issue 
-* Fixed: Travel Itinerary  Tab responsvie issue
+* Fixed: Travel Itinerary  Tab responsive issue
 * Fixed: Spacing issues in listing pages
 * Fixed: Itinerary PDF downloader issue
 
