@@ -431,7 +431,16 @@ a.tf_button.btn-styled:focus {
     border: 0;
     outline: 0;
 }
-
+ul.tf-sidebar-checkbox {
+    display: block;
+    color: #000;
+}
+ul.tf-sidebar-checkbox label{
+    margin-left: 10px;
+}
+.tf-sidebar-filter .tf-sidebar-checkbox,.tf-sidebar-filter h3 {
+    color: #fff;
+}
 .tf_booking-widget {
     background: #FA5535;
     background: linear-gradient(to bottom, #FD6143 0, #FA5535 100%);

@@ -1247,6 +1247,9 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
 	// Check-in & out date
 	$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
+	//get features
+	$features = ! empty( $_GET['features'] ) ? sanitize_text_field( $_GET['features'] ) : '';
+	
 
 	?>
 
@@ -1270,6 +1273,32 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 						?>
 
                     </select>
+                </div>
+            </label>
+        </div>
+		<!-- Filter by feature  -->
+		<div class="tf_form-row">
+            <label class="tf_label-row">
+                <div class="tf-sidebar-filter">
+					<?php
+						$features = get_terms('hotel_feature',[
+							'hide_empty' => false,
+						]); 
+					
+					?>	
+					<h3 class="tf-sidebar-widget_title"><?php echo __( 'Choose Feature' , 'tourfic' ); ?></h3>
+					<ul class="tf-sidebar-checkbox">
+					<?php
+
+					foreach ( $features as $feature ) {
+						$selected = $feature->slug == $features ? 'selected' : null;
+						echo '<li>';
+						echo '<input type="checkbox" name="features[]" class="" value="'.$feature->slug .'" id="'.$feature->slug.'">';	
+						echo '<label for="'.$feature->slug.'"> '.$feature->name.'</label>';
+						echo "</li>";
+					}
+					?>
+					</ul>
                 </div>
             </label>
         </div>
