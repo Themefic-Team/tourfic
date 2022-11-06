@@ -55,6 +55,9 @@
       word-break: keep-all;
     }
   }
+  .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 48px;
+  }
 }
 .tf-field.tf-field-select2 .tf-fieldset span.select2:nth-child(3) {
   display: none;
