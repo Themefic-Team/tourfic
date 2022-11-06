@@ -413,9 +413,9 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 * Fixed: Hotel Review and Share option settings not working properly
 * Fixed: Single Hotel View Page image size issue
 * Fixed: Astra theme margin issue 
-* Fixed: Travel Itinerary  Tab resposvie issue
+* Fixed: Travel Itinerary  Tab responsvie issue
 * Fixed: Spacing issues in listing pages
-* Fixed: Itinary PDF downloader issue
+* Fixed: Itinerary PDF downloader issue
 
 
 
