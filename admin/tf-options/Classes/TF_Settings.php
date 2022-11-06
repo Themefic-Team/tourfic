@@ -491,7 +491,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			$tf_option_value = array();
 			$option_request  = ( ! empty( $_POST[ $this->option_id ] ) ) ? $_POST[ $this->option_id ] : array();
-
 			if ( ! empty( $option_request ) && ! empty( $this->option_sections ) ) {
 				foreach ( $this->option_sections as $section ) {
 					if ( ! empty( $section['fields'] ) ) {

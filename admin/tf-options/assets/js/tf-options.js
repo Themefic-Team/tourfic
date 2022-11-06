@@ -403,6 +403,10 @@
             var current_field = add_value.find(':input[name="tf_current_field"]').val();
 
             add_value.find(':input[name="tf_repeater_count"]').val(count);
+            var room_uniqueid = add_value.find('.unique-id input');
+            if(typeof room_uniqueid !== "undefined"){
+                add_value.find('.unique-id input').val(new Date().valueOf() + count);
+            }
             let repeatDateField = add_value.find('.tf-field-date');
             if (repeatDateField.length > 0) {
                 tfDateInt(repeatDateField);
@@ -484,6 +488,10 @@
             var repeater_count = clone_value.find('input[name="tf_repeater_count"]').val();
             var count = $this_parent.find('.tf-single-repeater-' + current_field + '').length;
 
+            var room_uniqueid = clone_value.find('.unique-id input');
+            if(typeof room_uniqueid !== "undefined"){
+                clone_value.find('.unique-id input').val(new Date().valueOf() + count);
+            }
 
             let repeatDateField = clone_value.find('.tf-field-date');
 

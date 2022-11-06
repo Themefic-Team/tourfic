@@ -607,8 +607,14 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 
 		$post_id   = $item->get_meta( '_post_id', true ); // Hotel id
 		$unique_id = $item->get_meta( '_unique_id', true ); // Unique id of rooms
-		$meta      = get_post_meta( $post_id, 'tf_hotel', true ); // Hotel meta
+		$meta      = get_post_meta( $post_id, 'tf_hotels_opt', true ); // Hotel meta
 		$rooms     = ! empty( $meta['room'] ) ? $meta['room'] : '';
+		if( !empty($rooms) && gettype($rooms)=="string" ){
+			$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+				return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+			}, $rooms );
+			$rooms = unserialize( $tf_hotel_rooms_value );
+		}
 		$new_rooms = [];
 
 		# Get and Loop Over Room Meta
@@ -635,7 +641,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 		# Set whole room array to the room meta
 		$meta['room'] = $new_rooms;
 		# Update hotel post meta with array values
-		update_post_meta( $post_id, 'tf_hotel', $meta );
+		update_post_meta( $post_id, 'tf_hotels_opt', $meta );
 
 	}
 }
