@@ -1045,7 +1045,7 @@ body.tf-modal-open:after {
 }
 
 .tf-field-textarea textarea {
-  width: 100%;
+  width: 100% !important;
   height: 180px;
   padding: 12px 8px 12px 12px;
   border: 1px solid #c4cbd4;
@@ -1053,6 +1053,7 @@ body.tf-modal-open:after {
   border-radius: 4px;
   color: #363e4a;
   font-size: 14px;
+  width: 100%;
 }
 .tf-field-textarea textarea:focus {
   background: #FFFFFF;
