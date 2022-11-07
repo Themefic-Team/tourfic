@@ -1399,7 +1399,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	// Location
 	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
 	// Rooms
-	$b_rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+	$b_rooms = ! empty( $meta['room'] ) ? $meta['room'] : array();
 	if( !empty($b_rooms) && gettype($b_rooms)=="string" ){
         $tf_hotel_b_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
             return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
