@@ -523,8 +523,7 @@
             // replace new editor
             add_value.find('textarea.parent_wp_editor').each(function () {
                 this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + count + '');
-                var parent_repeater_id = $(this).attr('id');
-                console.log(parent_repeater_id);
+                var parent_repeater_id = $(this).attr('id'); 
                 TF_wp_editor(parent_repeater_id);
             });
 
