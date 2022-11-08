@@ -1440,3 +1440,7 @@ function tfOpenForm(evt, formName) {
 function tf_load_rating() {
     jQuery('#commentform').show();
 }
+
+
+
+ 

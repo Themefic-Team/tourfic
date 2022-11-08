@@ -43,32 +43,65 @@ if(!function_exists('tf_black_friday_20222_admin_notice')){
 	function tf_black_friday_20222_admin_notice(){
 		$deal_link =sanitize_url('https://themefic.com/go/tourfic-bf-deal');
 		$get_current_screen = get_current_screen(); 
-		if($get_current_screen->post_type != 'tf_hotel' && $get_current_screen->post_type != 'tf_tours' ){ 
-		?>
-			<style> 
-				.tf_black_friday_20222_admin_notice a:focus {
-					box-shadow: none;
-				} 
-				.tf_black_friday_20222_admin_notice {
-					padding: 7px;
-				}
-			</style>
-			<div class="notice notice-success tf_black_friday_20222_admin_notice">
+		$black_friday_notice_dismiss = get_option( 'tf_black_friday_notice_dismiss' );
+		if($black_friday_notice_dismiss < 1 && !isset($_COOKIE['tf_dismiss_admin_notice'])){
+			if($get_current_screen->post_type != 'tf_hotel' && $get_current_screen->post_type != 'tf_tours' ){ 
+				?>
+				<style> 
+					.tf_black_friday_20222_admin_notice a:focus {
+						box-shadow: none;
+					} 
+					.tf_black_friday_20222_admin_notice {
+						padding: 7px;
+						position: relative;
+						z-index: 10;
+					}
+				</style>
+				<div class="notice notice-success tf_black_friday_20222_admin_notice"> 
+					<a href="<?php echo $deal_link; ?>" target="_blank" >
+						<img  style="width: auto; height: 100px;" src="<?php echo TOURFIC_PLUGIN_URL ?>/assets/img/BLACK_FRIDAY_BACKGROUND_GRUNGE.jpg" alt="">
+					</a> 
+					<button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
+				</div>
+				<script>
+					jQuery(document).ready(function($) {
+						$(document).on('click', '.tf_black_friday_notice_dismiss', function( event ) {
+							jQuery('.tf_black_friday_20222_admin_notice').css('display', 'none')
+							data = {
+								action : 'tf_black_friday_notice_dismiss_callback',
+							};
+
+							$.ajax({
+								url: ajaxurl,
+								type: 'post',
+								data: data,
+								success: function (data) { ;
+								},
+								error: function (data) { 
+								}
+							});
+						});
+					});
+				</script>
 			
-				<a href="<?php echo $deal_link; ?>" target="_blank" >
-					<img  style="width: auto; height: 100px;" src="<?php echo TOURFIC_PLUGIN_URL ?>/assets/img/BLACK_FRIDAY_BACKGROUND_GRUNGE.jpg" alt="">
-				</a> 
-			</div>
-		
-		<?php
+			<?php
+			}
 		}
+		
 	} 
-	
-	// add_action( 'admin_notices', 'tf_black_friday_20222_admin_notice' ); 
+	if (strtotime('2022-12-01') > time()) {
+		// add_action( 'admin_notices', 'tf_black_friday_20222_admin_notice' ); 
+	}   
 }
 
-
-
+function tf_black_friday_notice_dismiss_callback() { 
+	$cookie_name = "tf_dismiss_admin_notice";
+	$cookie_value = "1";
+	setcookie($cookie_name, $cookie_value, time() + (86400 * 3), "/"); 
+	wp_die();
+}
+add_action( 'wp_ajax_tf_black_friday_notice_dismiss_callback', 'tf_black_friday_notice_dismiss_callback' );
+ 
 if(!function_exists('tf_black_friday_20222_hotel_tour_docs')){
 	function tf_black_friday_20222_hotel_tour_docs() {
 	
@@ -76,7 +109,9 @@ if(!function_exists('tf_black_friday_20222_hotel_tour_docs')){
 	
 		add_meta_box( 'tftour_black_friday_docs', __( ' ', 'tourfic' ), 'tf_black_friday_2022_callback_tour','tf_tours','side' ,'high');  
 	}
-	add_action( 'add_meta_boxes', 'tf_black_friday_20222_hotel_tour_docs' );
+	if (strtotime('2022-12-01') > time()) { 
+		add_action( 'add_meta_boxes', 'tf_black_friday_20222_hotel_tour_docs' );
+	}   
 	function tf_black_friday_2022_callback_hotel(){
 		$deal_link =sanitize_url('https://themefic.com/go/tourfic-bf-deal');
 	?> 
@@ -91,10 +126,14 @@ if(!function_exists('tf_black_friday_20222_hotel_tour_docs')){
 				padding: 0;
 				margin-top: 0;
 			}
+			#tfhotel_black_friday_docs .postbox-header {
+				display: none;
+				visibility: hidden;
+			}
 		</style>
-		<div class="back_friday_2022_preview" style="text-align: center;">
+		<div class="back_friday_2022_preview" style="text-align: center; overflow: hidden;">
 			<a href="<?php echo $deal_link; ?>" target="_blank" >
-				<img  style="width: 100%;" src="<?php echo TOURFIC_PLUGIN_URL ?>/assets/img/BLACK_FRIDAY_BACKGROUND_GRUNGE.jpg" alt="">
+				<img  style="width: 100%; transform: scale(1.3);" src="<?php echo TOURFIC_PLUGIN_URL ?>/assets/img/BLACK_FRIDAY_BACKGROUND_GRUNGE.jpg" alt="">
 			</a> 
 		</div>
 	<?php
@@ -113,10 +152,14 @@ if(!function_exists('tf_black_friday_20222_hotel_tour_docs')){
 				padding: 0;
 				margin-top: 0;
 			}
+			#tftour_black_friday_docs .postbox-header {
+				display: none;
+				visibility: hidden;
+			}
 		</style>
-		<div class="back_friday_2022_preview" style="text-align: center;">
+		<div class="back_friday_2022_preview" style="text-align: center; overflow: hidden;">
 			<a href="<?php echo $deal_links; ?>" target="_blank" >
-				<img  style="width: 100%;" src="<?php echo TOURFIC_PLUGIN_URL ?>/assets/img/BLACK_FRIDAY_BACKGROUND_GRUNGE.jpg" alt="">
+				<img  style="width: 100%; transform: scale(1.3);" src="<?php echo TOURFIC_PLUGIN_URL ?>/assets/img/BLACK_FRIDAY_BACKGROUND_GRUNGE.jpg" alt="">
 			</a> 
 		</div>
 	<?php
