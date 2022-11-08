@@ -628,11 +628,11 @@
             });
            //Append Value
             $(this).closest('.tf-repeater-wrap').append(clone_value).show();
-            clone_value.find('textarea.parent_wp_editor').each(function () {
+            clone_value.find('textarea.parent_wp_editor, textarea.wp_editor').each(function () {
 
                 this.id = this.id.replace('' + current_field + '__'+repeater_count, '' + current_field + '__' + count + '');
                 var parent_repeater_id = $(this).attr('id');
-                console.log(parent_repeater_id);
+                console.log(this.id);
                 TF_wp_editor(parent_repeater_id);
             });
             // Dependency value
@@ -651,7 +651,7 @@
         });
 
         // Repeater Drag and  show
-        $(".tf-repeater-wrap").sortable();
+        $(".tf-repeater-wrap").sortable({handle:'.tf-repeater-icon-move'});
 
 
         // TAB jquery
