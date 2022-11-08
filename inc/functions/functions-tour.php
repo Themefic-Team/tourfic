@@ -603,11 +603,12 @@ function tf_single_tour_booking_form( $post_id ) {
             return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
         }, $meta['allowed_time'] );
         $tf_tour_unserial_custom_time = unserialize( $tf_tour_unserial_custom_time );
-
-        if ( $custom_avail == false && !empty( $meta['allowed_time'] ) ) {
-            $allowed_times = array_map(function ($v) {
-                return $v['time'];          
-            }, $tf_tour_unserial_custom_time ?? []);
+        if( !empty($tf_tour_unserial_custom_time) ){
+            if ( $custom_avail == false && !empty( $meta['allowed_time'] ) ) {
+                $allowed_times = array_map(function ($v) {
+                    return $v['time'];          
+                }, $tf_tour_unserial_custom_time ?? []);
+            }
         }
     }else{
         if ( $custom_avail == false && !empty( $meta['allowed_time'] ) ) {
