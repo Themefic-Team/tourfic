@@ -2,14 +2,14 @@
 /**
  * Plugin Name:     Tourfic - Travel and Hotel Booking Solution for WooCommerce
  * Plugin URI:      https://tourfic.com
- * Description:     The ultimate WordPress travel booking solution for hotel booking, travel booking and travel agency websites. Manage all your online Travel Booking system along with order system and any payment of WooCommerce.
+ * Description:     The ultimate WordPress travel booking Plugin for hotel booking, travel booking and travel agency websites. Manage all your online Travel Booking system along with order system and any payment of WooCommerce.
  * Author:          Themefic
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.8.9
- * Tested up to: 6.0.2
- * WC tested up to: 6.9.4
+ * Version:         2.8.11
+ * Tested up to: 6.1
+ * WC tested up to: 7.0.1
  * Requires PHP: 7.2
  * Elementor tested up to: 3.7.7
  */
@@ -46,6 +46,10 @@ define( 'TF_TEMPLATE_PART_PATH', TF_TEMPLATE_PATH . 'template-parts/' );
 define( 'TF_OPTIONS_PATH', TF_ADMIN_PATH . 'options/' );
 define( 'TF_ASSETS_PATH', TF_PATH . 'assets/' );
 
+if(!class_exists('Appsero\Client')){
+    require_once (TF_INC_PATH . 'app/src/Client.php');
+}
+
 /**
  * Tourfic Define
  *
@@ -63,29 +67,28 @@ if ( ! defined( 'TOURFIC' ) ) {
 if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
 	function tf_enqueue_main_admin_scripts() {
 
-		// Custom
-		wp_enqueue_style( 'tf', TF_ADMIN_URL . 'assets/css/admin.css', '', '2.1.0' );
-		wp_enqueue_script( 'tf', TF_ADMIN_URL . 'assets/js/admin.js', array( 'jquery' ), '2.1.0', true );
-		wp_localize_script( 'tf', 'tf_admin_params',
-			array(
-				'tf_nonce'                     => wp_create_nonce( 'updates' ),
-				'ajax_url'                     => admin_url( 'admin-ajax.php' ),
-				'deleting_old_review_fields'   => __( 'Deleting old review fields...', 'tourfic' ),
-				'deleting_room_order_ids'      => __( 'Deleting order ids...', 'tourfic' ),
-				'tour_location_required'       => __( 'Tour Location is a required field!', 'tourfic' ),
-				'hotel_location_required'      => __( 'Hotel Location is a required field!', 'tourfic' ),
-				'tour_feature_image_required'  => __( 'Tour image is a required!', 'tourfic' ),
-				'hotel_feature_image_required' => __( 'Hotel image is a required!', 'tourfic' ),
-				'installing'                   => __( 'Installing...', 'tourfic' ),
-				'activating'                   => __( 'Activating...', 'tourfic' ),
-				'installed'                    => __( 'Installed', 'tourfic' ),
-				'activated'                    => __( 'Activated', 'tourfic' ),
-				'install_failed'               => __( 'Install failed', 'tourfic' ),
-			)
-		);
-	}
-
-	add_action( 'admin_enqueue_scripts', 'tf_enqueue_main_admin_scripts' );
+        // Custom
+        wp_enqueue_style('tf', TF_ADMIN_URL . 'assets/css/admin.css','', '2.1.0' );
+        wp_enqueue_script( 'tf', TF_ADMIN_URL . 'assets/js/admin.js', array('jquery'), '2.1.0', true );   
+        wp_localize_script( 'tf', 'tf_admin_params',
+            array(
+                'tf_nonce' => wp_create_nonce( 'updates' ),
+                'ajax_url' => admin_url( 'admin-ajax.php' ),
+                'deleting_old_review_fields' => __('Deleting old review fields...', 'tourfic'),
+                'deleting_room_order_ids' => __('Deleting order ids...', 'tourfic'),
+                'tour_location_required' => __('Tour Location is a required field!', 'tourfic'),
+                'hotel_location_required' => __('Hotel Location is a required field!', 'tourfic'),
+                'tour_feature_image_required' => __('Tour image is a required!', 'tourfic'),
+                'hotel_feature_image_required' => __('Hotel image is a required!', 'tourfic'),
+                'installing' => __( 'Installing...', 'tourfic' ),
+                'activating' => __( 'Activating...', 'tourfic' ),
+                'installed' => __( 'Installed', 'tourfic' ),
+                'activated' => __( 'Activated', 'tourfic' ),
+                'install_failed' => __( 'Install failed', 'tourfic' ),
+            )
+        );    
+    }
+    add_action( 'admin_enqueue_scripts', 'tf_enqueue_main_admin_scripts' );
 }
 
 /**
@@ -259,3 +262,23 @@ function tf_is_woo() {
 		}
 	}
 }
+
+/**
+ * Initialize the plugin tracker
+ *
+ * @return void
+ */
+function appsero_init_tracker_tourfic() {
+
+    if ( ! class_exists( 'Appsero\Client' ) ) {
+	  require_once __DIR__ . '/app/src/Client.php';
+    }
+
+    $client = new Appsero\Client( '19134f1b-2838-4a45-ac05-772b7dfc9850', 'tourfic', __FILE__ );
+
+    // Active insights
+    $client->insights()->init();
+
+}
+
+appsero_init_tracker_tourfic();

@@ -265,7 +265,7 @@ if ( ! function_exists( 'get_hotel_locations' ) ) {
 
 
 #################################
-# Air port Service Price        #
+# Air port Service          #
 #################################
 
 add_action( 'wp_ajax_tf_hotel_airport_service_price', 'tf_hotel_airport_service_callback' );
@@ -275,6 +275,7 @@ function tf_hotel_airport_service_callback() {
 
 	$meta            = get_post_meta( sanitize_key( $_POST['id'] ), 'tf_hotels_opt', true );
 	$airport_service = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
+
 	if ( 1 == $airport_service ) {
 
 		$post_id       = isset( $_POST['id'] ) ? intval( sanitize_text_field( $_POST['id'] ) ) : null;
@@ -1134,7 +1135,7 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                                 <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
-                                    <input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>">
+                                    <input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>" readonly>
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
@@ -1142,7 +1143,7 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                                 <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec child-dec">-</div>
-                                    <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
+                                    <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>" readonly>
                                     <div class="acr-inc child-inc">+</div>
                                 </div>
                             </div>
@@ -1150,13 +1151,18 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                                 <div class="acr-label"><?php _e( 'Rooms', 'tourfic' ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
-                                    <input type="number" name="room" id="room" min="1" value="<?php echo ! empty( $room ) ? $room : '1'; ?>">
+                                    <input type="number" name="room" id="room" min="1" value="<?php echo ! empty( $room ) ? $room : '1'; ?>" readonly>
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
                         </div>
                         <!-- Children age input field based on children number -->
-						<?php $children_age = tfopt( 'children_age_limit' ); ?>
+						<?php
+
+						$children_age = tfopt( 'children_age_limit' );
+						$children_age_status = tfopt( 'enable_child_age_limit' );
+						if( !empty($children_age_status) && $children_age_status=="1" ){
+						?>
                         <div class="tf-children-age-fields">
                             <div class="tf-children-age" id="tf-age-field-0" style="display:none">
                                 <label for="children-age"><?php __( 'Children 0 Age:', 'tourfic' ) ?></label>
@@ -1168,6 +1174,7 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                                 </select>
                             </div>
                         </div>
+						<?php } ?>
                     </div>
                 </div>
 
@@ -1454,14 +1461,27 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 		'check-in-out-date' => $check_in_out,
 	), $url );
 
+	/**
+	 * Calculate and get the minimum price
+	 * @author - Hena
+	 */
     $room_price = [];
-    foreach ( $b_rooms as $b_room ) {
-        //room price
-        $price        = ! empty( $b_room['price'] ) ? $b_room['price'] : '';
-        $room_price[] = $price;
-    }
+	if( !empty($b_rooms) ):
+		foreach ( $b_rooms as $b_room ) {
+			//room price
 
+			$pricing_by = $b_room['pricing-by'] ? $b_room['pricing-by'] : 1;
+			if($pricing_by == 1){
+				$price        = ! empty( $b_room['price'] ) ? $b_room['price'] : '';
+				$room_price[] = $price;
+			}else if($pricing_by == 2){
+				$adult_price = $b_room['adult_price'] ? $b_room['adult_price'] : 0;
+				$room_price[] = $adult_price;
+			}
+		}
+	endif;
 	?>
+
     <div class="single-tour-wrap">
         <div class="single-tour-inner">
             <div class="tourfic-single-left">
@@ -1515,7 +1535,10 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 															$feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
 														} ?>
                                                         <li class="tf-tooltip">
-															<?php echo $feature_icon; ?>
+															<?php
+															if(!empty( $feature_icon )){
+															 		echo $feature_icon;
+															 } ?>
                                                             <div class="tf-top">
 																<?php echo $feature->name; ?>
                                                                 <i class="tool-i"></i>
@@ -1525,13 +1548,16 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                                 </ul>
                                             </div>
 										<?php } ?>
-                                        <div class="roomPrice roomPrice_flex sr_discount">
+                                        <div class="roomPrice roomPrice_flex sr_discount" style="<?php echo empty($features) ? 'text-align:left' : ''; ?>">
                                             <div class="availability-btn-area">
                                                 <a href="<?php echo $url; ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
                                             </div>
                                             <!-- Show minimum price @author - Hena -->
                                             <div class="tf-room-price-area">
-												<?php if ( ! empty( $room_price ) ): ?>
+												<?php
+
+												 if ( ! empty( $room_price ) ):
+												 ?>
                                                     <div class="tf-room-price">
 														<?php
 														//get the lowest price from all available room price
@@ -1724,12 +1750,12 @@ function tf_remove_room_order_ids() {
 	$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
 	# Get hotel meta
 	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
-	
+
 	$order_id_retrive = tf_data_types($meta['room']);
-	
+
 	# Set order id field's value to blank
 	$order_id_retrive[ $room_id ]['order_id'] = '';
-	
+
 	$meta['room'] = serialize($order_id_retrive);
 	# Update whole hotel meta
 	update_post_meta( $post_id, 'tf_hotels_opt', $meta );
@@ -1870,7 +1896,7 @@ function tf_hotel_quickview_callback() {
                                     <span class="icon-text tf-d-b"><?php echo $num_room; ?></span>
                                 </div>
                                 <div class="tf-top">
-									<?php _e( 'No. Room', 'tourfic' ); ?>
+									<?php _e( 'Number of Room', 'tourfic' ); ?>
                                     <i class="tool-i"></i>
                                 </div>
                             </div>
@@ -1878,8 +1904,7 @@ function tf_hotel_quickview_callback() {
 						if ( $footage ) { ?>
                             <div class="tf-tooltip tf-d-ib">
                                 <div class="room-detail-icon">
-                        <span class="room-icon-wrap"><i
-                                    class="fas fa-ruler-combined"></i></span>
+                        		<span class="room-icon-wrap"><i class="fas fa-ruler-combined"></i></span>
                                     <span class="icon-text tf-d-b"><?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></span>
                                 </div>
                                 <div class="tf-top">
@@ -1895,7 +1920,7 @@ function tf_hotel_quickview_callback() {
                                     <span class="icon-text tf-d-b">x<?php echo $bed; ?></span>
                                 </div>
                                 <div class="tf-top">
-									<?php _e( 'No. Beds', 'tourfic' ); ?>
+									<?php _e( 'Number of Beds', 'tourfic' ); ?>
                                     <i class="tool-i"></i>
                                 </div>
                             </div>
@@ -1941,7 +1966,7 @@ function tf_hotel_quickview_callback() {
                                         <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
                                     </div>
                                     <div class="tf-top">
-										<?php _e( 'No. Adults', 'tourfic' ); ?>
+										<?php _e( 'Number of Adults', 'tourfic' ); ?>
                                         <i class="tool-i"></i>
                                     </div>
                                 </div>
@@ -1954,7 +1979,7 @@ function tf_hotel_quickview_callback() {
                                         <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                                     </div>
                                     <div class="tf-top">
-										<?php _e( 'No. Children', 'tourfic' ); ?>
+										<?php _e( 'Number of Children', 'tourfic' ); ?>
                                         <i class="tool-i"></i>
                                     </div>
                                 </div>

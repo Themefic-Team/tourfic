@@ -35,11 +35,144 @@ function tf_documentation_page_integration() {
 }
 
 /**
+ * Black Friday Deals 2022
+ */
+
+
+if(!function_exists('tf_black_friday_20222_admin_notice')){
+	function tf_black_friday_20222_admin_notice(){
+		$deal_link =sanitize_url('https://themefic.com/go/tourfic-bf-deal');
+		$get_current_screen = get_current_screen(); 
+		if(!isset($_COOKIE['tf_dismiss_admin_notice'])){
+			if($get_current_screen->post_type != 'tf_hotel' && $get_current_screen->post_type != 'tf_tours' ){ 
+				?>
+				<style> 
+					.tf_black_friday_20222_admin_notice a:focus {
+						box-shadow: none;
+					} 
+					.tf_black_friday_20222_admin_notice {
+						padding: 7px;
+						position: relative;
+						z-index: 10;
+					}
+				</style>
+				<div class="notice notice-success tf_black_friday_20222_admin_notice"> 
+					<a href="<?php echo $deal_link; ?>" target="_blank" >
+						<img  style="width: auto; height: 100px;" src="<?php echo TOURFIC_PLUGIN_URL ?>/assets/img/BLACK_FRIDAY_BACKGROUND_GRUNGE.jpg" alt="">
+					</a> 
+					<button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
+				</div>
+				<script>
+					jQuery(document).ready(function($) {
+						$(document).on('click', '.tf_black_friday_notice_dismiss', function( event ) {
+							jQuery('.tf_black_friday_20222_admin_notice').css('display', 'none')
+							data = {
+								action : 'tf_black_friday_notice_dismiss_callback',
+							};
+
+							$.ajax({
+								url: ajaxurl,
+								type: 'post',
+								data: data,
+								success: function (data) { ;
+								},
+								error: function (data) { 
+								}
+							});
+						});
+					});
+				</script>
+			
+			<?php
+			}
+		}
+		
+	} 
+	if (strtotime('2022-12-01') > time()) {
+		// add_action( 'admin_notices', 'tf_black_friday_20222_admin_notice' ); 
+	}   
+}
+
+function tf_black_friday_notice_dismiss_callback() { 
+	$cookie_name = "tf_dismiss_admin_notice";
+	$cookie_value = "1";
+	setcookie($cookie_name, $cookie_value, time() + (86400 * 3), "/"); 
+	wp_die();
+}
+add_action( 'wp_ajax_tf_black_friday_notice_dismiss_callback', 'tf_black_friday_notice_dismiss_callback' );
+ 
+if(!function_exists('tf_black_friday_20222_hotel_tour_docs')){
+	function tf_black_friday_20222_hotel_tour_docs() {
+	
+		add_meta_box( 'tfhotel_black_friday_docs', __( ' ', 'tourfic' ), 'tf_black_friday_2022_callback_hotel','tf_hotel','side' ,'high');  
+	
+		add_meta_box( 'tftour_black_friday_docs', __( ' ', 'tourfic' ), 'tf_black_friday_2022_callback_tour','tf_tours','side' ,'high');  
+	}
+	if (strtotime('2022-12-01') > time()) { 
+		add_action( 'add_meta_boxes', 'tf_black_friday_20222_hotel_tour_docs' );
+	}   
+	function tf_black_friday_2022_callback_hotel(){
+		$deal_link =sanitize_url('https://themefic.com/go/tourfic-bf-deal');
+	?> 
+		<style> 
+			.back_friday_2022_preview a:focus {
+				box-shadow: none;
+			} 
+			.back_friday_2022_preview a {
+				display: inline-block;
+			}
+			#tfhotel_black_friday_docs .inside {
+				padding: 0;
+				margin-top: 0;
+			}
+			#tfhotel_black_friday_docs .postbox-header {
+				display: none;
+				visibility: hidden;
+			}
+		</style>
+		<div class="back_friday_2022_preview" style="text-align: center; overflow: hidden;">
+			<a href="<?php echo $deal_link; ?>" target="_blank" >
+				<img  style="width: 100%; transform: scale(1.3);" src="<?php echo TOURFIC_PLUGIN_URL ?>/assets/img/BLACK_FRIDAY_BACKGROUND_GRUNGE.jpg" alt="">
+			</a> 
+		</div>
+	<?php
+	} 
+	function tf_black_friday_2022_callback_tour(){
+		$deal_links =sanitize_url('https://themefic.com/go/tourfic-bf-deal');
+	?> 
+		<style> 
+			.back_friday_2022_preview a:focus {
+				box-shadow: none;
+			} 
+			.back_friday_2022_preview a {
+				display: inline-block;
+			}
+			#tftour_black_friday_docs .inside {
+				padding: 0;
+				margin-top: 0;
+			}
+			#tftour_black_friday_docs .postbox-header {
+				display: none;
+				visibility: hidden;
+			}
+		</style>
+		<div class="back_friday_2022_preview" style="text-align: center; overflow: hidden;">
+			<a href="<?php echo $deal_links; ?>" target="_blank" >
+				<img  style="width: 100%; transform: scale(1.3);" src="<?php echo TOURFIC_PLUGIN_URL ?>/assets/img/BLACK_FRIDAY_BACKGROUND_GRUNGE.jpg" alt="">
+			</a> 
+		</div>
+	<?php
+	}
+}
+
+
+
+/**
  * Go to Documentaion Metabox
  */
 
-function tf_hotel_tour_docs() {
-    add_meta_box( 'tfhotel_docs', __( 'Tourfic Documantation', 'tourfic' ), 'tf_hotel_docs_callback','tf_hotel','side' ,'high');
+function tf_hotel_tour_docs() { 
+    add_meta_box( 'tfhotel_docs', __( 'Tourfic Documantation', 'tourfic' ), 'tf_hotel_docs_callback','tf_hotel','side' ,'high');  
     add_meta_box( 'tftour_docs', __( 'Tourfic Documantation', 'tourfic' ), 'tf_tour_docs_callback','tf_tours','side' ,'high');
 }
 add_action( 'add_meta_boxes', 'tf_hotel_tour_docs' );
@@ -328,24 +461,20 @@ function tf_custom_excerpt_length( $length ) {
     return 30;
 
 }
-add_filter( 'excerpt_length', 'tf_custom_excerpt_length', 999 );
 
 /**
- * Pagination
+ * Pagination for the search page
+ * @since 2.9.0
+ * @author Abu Hena
  */
-function tourfic_posts_navigation($wp_query='') {
-
-	if(empty($wp_query)) {
+function tourfic_posts_navigation($wp_query = '') {
+	if(empty($wp_query)){
 		global $wp_query;
 	}
-
 	$max_num_pages = $wp_query->max_num_pages;
 	$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-
-	echo "<div id='am_posts_navigation'>";
+	echo "<div id='tf_posts_navigation_bar'>";
 	echo paginate_links( array(
-		//'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-	    'format'  => 'page/%#%',
 	    'current' => $paged,
 	    'total'   => $max_num_pages,
 	    'mid_size'        => 2,

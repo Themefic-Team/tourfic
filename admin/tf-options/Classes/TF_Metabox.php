@@ -105,7 +105,6 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			if ( empty( $this->metabox_sections ) ) {
 				return;
 			}
-
 			?>
             <div class="tf-admin-meta-box">
                 <div class="tf-admin-tab">

@@ -216,6 +216,7 @@
             dots: false,
             centerMode: false,
             variableWidth: false,
+            adaptiveHeight: true
         });
 
         sbp.on("click", function () {
@@ -442,6 +443,9 @@
                 filter_xhr.abort();
             }
 
+            
+            //var pagination_url = '/?place=' + dest + '&adults=' + adults + '&children=' + children + '&type=' + posttype;
+            //formData.append('pagination_url', pagination_url);
             filter_xhr = $.ajax({
                 type: 'post',
                 url: tf_params.ajax_url,
@@ -461,7 +465,7 @@
                 complete: function (data) {
                     $('.archive_ajax_result').unblock();
                 },
-                success: function (data) {
+                success: function (data,e) {
                     $('.archive_ajax_result').unblock();
 
                     $('.archive_ajax_result').html(data);
@@ -568,7 +572,7 @@
          *
          * Slick
          */
-        $('.tf-slider-items-wrapper').slick({
+        $('.tf-slider-items-wrapper,.tf-slider-activated').slick({
             dots: true,
             arrows: false,
             infinite: true,
@@ -1177,7 +1181,7 @@
         });
 
         /**
-         * Mixed
+         * ajax tour load pagination
          */
         var flag = false;
         var main_xhr;
@@ -1195,10 +1199,11 @@
                 beforeSend: function () {
 
                     $(document).find('.tf_posts_navigation').addClass('loading');
+                    $(document).find('.archive_ajax_result').addClass('loading');
                     flag = true;
                 },
                 success: function (data) {
-                    $('.archive_ajax_result').append($('.archive_ajax_result', data).html());
+                    $('.archive_ajax_result').html($('.archive_ajax_result', data).html());
 
                     $('.tf_posts_navigation').html($('.tf_posts_navigation', data).html());
 
@@ -1207,40 +1212,20 @@
                     flag = false;
 
                     $(document).find('.tf_posts_navigation').removeClass('loading');
+                    $(document).find('.archive_ajax_result').removeClass('loading');
 
                 }
             });
         };
 
         // Feed Ajax Trigger
-        $(document).on('click', '.tf_posts_navigation a.next.page-numbers', function (e) {
+        $(document).on('click', '#tf_posts_navigation_bar a.page-numbers', function (e) {
             e.preventDefault();
-
             var targetUrl = (e.target.href) ? e.target.href : $(this).context.href;
             amPushAjax(targetUrl);
             window.history.pushState({url: "" + targetUrl + ""}, "", targetUrl);
         });
         // End Feed Ajax Trigger
-
-        // Feed Click Trigger
-        $(window).on('scroll', function (e) {
-            $('.tf_posts_navigation a.next.page-numbers').each(function (i, el) {
-
-                var $this = $(this);
-
-                var H = $(window).height(),
-                    r = el.getBoundingClientRect(),
-                    t = r.top,
-                    b = r.bottom;
-
-                var tAdj = parseInt(t - (H / 2));
-
-                if (flag === false && (H >= tAdj)) {
-                    $this.trigger('click');
-                }
-            });
-        });
-        // End Feed Click Trigger
 
         // Hotel and Tour Advance Search form
 
@@ -1261,7 +1246,9 @@
             grid: false,
             theme: "dark",
         };
-        $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
+        if(tf_params.tf_hotel_min_price!=0 && tf_params.tf_hotel_max_price!=0){
+            $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
+        }
 
         // Tour Min and Max Range
         let tf_tour_range_options = {
@@ -1277,7 +1264,9 @@
             grid: false,
             theme: "dark",
         };
-        $('.tf-tour-filter-range').alRangeSlider(tf_tour_range_options);
+        if(tf_params.tf_tour_min_price!=0 && tf_params.tf_tour_max_price!=0){
+            $('.tf-tour-filter-range').alRangeSlider(tf_tour_range_options);
+        }
 
         // Hotel Location
         var availablehotellocation = tf_params.tf_hotellocationlists;
@@ -1321,7 +1310,7 @@
             $(this).toggleClass('active');
             $(this).parent().find('.arrow').toggleClass('arrow-animate');
             $(this).parent().find('.tf-accordion-content').slideToggle();
-            $(this).parents('#tf-accordion-wrapper').siblings().find('.tf-accordion-content').slideUp();
+            //$(this).parents('#tf-accordion-wrapper').siblings().find('.tf-accordion-content').slideUp();
             $(this).siblings().find('.ininerary-other-gallery').slick({
                 slidesToShow: 6,
                 slidesToScroll: 1,
@@ -1398,30 +1387,32 @@
  * @since 2.8.6
  * @author Abu Hena
  */
-$('.acr-select .child-inc').on('click',function(){
-    var first_element = $('div[id^="tf-age-field-0"]');
-    var ch_element = $('div[id^="tf-age-field-"]:last');
-    if(ch_element.length !=0){
-        var num = parseInt( ch_element.prop("id").match(/\d+/g), 10 ) +1;
-    }
-    var elements = ch_element.clone().prop('id', 'tf-age-field-'+num );
-    elements.find("label").html('Child age ' + num);
-    //elements.find("select").attr('name','children_'+num+'_age');
-    elements.find("select").attr('name','children_ages[]');
-    ch_element.after(elements);
-    elements.show();
-    first_element.hide();
 
-})
+if($('.child-age-limited')[0]){
+    $('.acr-select .child-inc').on('click',function(){
+        var first_element = $('div[id^="tf-age-field-0"]');
+        var ch_element = $('div[id^="tf-age-field-"]:last');
+        if(ch_element.length !=0){
+            var num = parseInt( ch_element.prop("id").match(/\d+/g), 10 ) +1;
+        }
+        var elements = ch_element.clone().prop('id', 'tf-age-field-'+num );
+        elements.find("label").html('Child age ' + num);
+        //elements.find("select").attr('name','children_'+num+'_age');
+        elements.find("select").attr('name','children_ages[]');
+        ch_element.after(elements);
+        elements.show();
+        first_element.hide();
 
-$('.acr-select .child-dec').on('click',function(){
-    var total_age_input = $('.tf-children-age').length;
-    var ch_element = $('div[id^="tf-age-field-"]:last');
-    if(total_age_input != 1){
-        ch_element.remove();
-    }
-})
+    })
 
+    $('.acr-select .child-dec').on('click',function(){
+        var total_age_input = $('.tf-children-age').length;
+        var ch_element = $('div[id^="tf-age-field-"]:last');
+        if(total_age_input != 1){
+            ch_element.remove();
+        }
+    })
+}
 
 })(jQuery, window);
 
@@ -1449,3 +1440,7 @@ function tfOpenForm(evt, formName) {
 function tf_load_rating() {
     jQuery('#commentform').show();
 }
+
+
+
+ 

@@ -178,14 +178,27 @@ button.tf-tablinks:focus {
     min-width: 150px;
     width: 25%;
 }
+
 .tf_destination-wrap .ui-menu-item:before {
     content: "\f3c5";
     font-weight: 900;
     font-family: "Font Awesome 5 Free";
     float: left;
-    font-size: 1rem;
+    font-size: 15px;
+    line-height: 25px;
     margin-right: 5px;
 }
+
+div#tf-locationautocomplete-list div:before,div#tf-destinationautocomplete-list div:before{
+    content: "\f3c5";
+    font-weight: 900;
+    font-family: "Font Awesome 5 Free";
+    float: left;
+    font-size: 15px;                                                                                                                                                                                                                  
+    margin-right: 5px;
+	line-height: 24px;
+}
+
 .tf_submit-wrap {
     border-right: 0;
     background: #003162;
@@ -366,7 +379,7 @@ button.tf-tablinks:focus {
     margin: 0 !important;
     list-style: none;
     top: 100% !important;
-    height: 225px;
+    max-height: 225px;
     z-index: 99999;
     overflow-y: scroll;
     padding-left: 0px !important;
@@ -430,7 +443,7 @@ span.close-aq {
     height: 25px;
     background: #e00d0d;
     color: #fff;
-    line-height: 25px;
+    line-height: 20px;
     font-size: 20px;
     cursor: pointer;
 }
@@ -453,6 +466,11 @@ Booking form mobile version
     display: none;
 }
 
+/* Hotel Grid Slider */
+.tf-hotel-grid .tf-slider-item {
+    width: 31%;
+    float: left;
+}
 
 /**************************************** RESPONSIVE **************************************/
 

@@ -181,6 +181,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         $tfhotel_min_max = array(
             'posts_per_page'=> -1,
             'post_type'     => 'tf_hotel',
+            'post_status' => 'publish'
         );
         $tfhotel_min_max_query = new WP_Query( $tfhotel_min_max ); 
         $tfhotel_min_maxprices = array();
@@ -226,10 +227,26 @@ if ( !function_exists('tf_enqueue_scripts') ) {
             endwhile;
 
         endif; wp_reset_query(); 
-        if( !empty( $tfhotel_min_maxprices ) ){
-            $hotel_max_price = max($tfhotel_min_maxprices);
-            $hotel_min_price = min($tfhotel_min_maxprices);
+        if( !empty( $tfhotel_min_maxprices ) && count($tfhotel_min_maxprices) > 1 ){
+            $hotel_max_price_val = max($tfhotel_min_maxprices);
+            $hotel_min_price_val = min($tfhotel_min_maxprices);
+            if( $hotel_max_price_val==$hotel_min_price_val ){
+                $hotel_max_price = max($tfhotel_min_maxprices);
+                $hotel_min_price = 1;
+            }else{
+                $hotel_max_price = max($tfhotel_min_maxprices);
+                $hotel_min_price = min($tfhotel_min_maxprices);
+            }
         }
+        if( !empty( $tfhotel_min_maxprices ) && count($tfhotel_min_maxprices) == 1 ){
+            $hotel_max_price = max($tfhotel_min_maxprices);
+            $hotel_min_price = 1;
+        }
+        if( empty( $tfhotel_min_maxprices ) ){
+            $hotel_max_price = 0;
+            $hotel_min_price = 0;
+        }
+
         /**
          * Tour Destination
          */ 
@@ -250,9 +267,10 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         $tftours_min_max = array(
             'posts_per_page'=> -1,
             'post_type'     => 'tf_tours',
+            'post_status' => 'publish'
         );
-        
-        $tftours_min_max_query = new WP_Query( $tftours_min_max ); 
+
+        $tftours_min_max_query = new WP_Query( $tftours_min_max );
         $tftours_min_maxprices = array();
 
         if( $tftours_min_max_query->have_posts() ):
@@ -275,9 +293,24 @@ if ( !function_exists('tf_enqueue_scripts') ) {
             endwhile;
 
         endif; wp_reset_query(); 
-        if( !empty( $tftours_min_maxprices ) ){
+        if( !empty( $tftours_min_maxprices ) && count($tftours_min_maxprices) > 1 ){
+            $tour_max_price_val = max($tftours_min_maxprices);
+            $tour_min_price_val = min($tftours_min_maxprices);
+            if( $tour_max_price_val==$tour_min_price_val ){
+                $tour_max_price = max($tftours_min_maxprices);
+                $tour_min_price = 1;
+            }else{
+                $tour_max_price = max($tftours_min_maxprices);
+                $tour_min_price = min($tftours_min_maxprices);
+            }
+        }
+        if( !empty( $tftours_min_maxprices ) && count($tftours_min_maxprices) == 1 ){
             $tour_max_price = max($tftours_min_maxprices);
-            $tour_min_price = min($tftours_min_maxprices);
+            $tour_min_price = 1;
+        }
+        if( empty( $tftours_min_maxprices ) ){
+            $tour_max_price = 0;
+            $tour_min_price = 0;
         }
 
 

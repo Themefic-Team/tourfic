@@ -1,18 +1,18 @@
-=== Travel and Hotel Booking Solution for WooCommerce - Tourfic ===
-Contributors: fida02, themefic, mdshuvo, codexa, kamrul0424, hasanet, jahidcse, mehedi890
-Tags: tour-booking, travel-booking, hotel-booking, trip-booking, tour booking, tour, travel booking, travel, trip booking, trip, hotel booking, hotel, travel-itinerary, tour-itinerary, travel-booking-engine, tour package payments, travel-agency, tour operator, travel agency, tour-operator, tour reservation, hotel reservation, airbnb, booking.com, agoda.com, agoda, woocommerce tour booking, woocommerce travel booking plugin, woocommerce hotel booking, woocommerce hotel, woocommerce tour, woocommerce travel, wordpress travel, wp travel plugin, wp travel, wp hotel, wordpress travel booking plugin, wordpress tour plugin, wordpress hotel booking
+=== Tourfic - Ultimate Hotel & Travel Booking WordPress Plugin | WooCommerce Booking ===
+Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet, fida02, mdshuvo
+Tags: travel, tour, trip, hotel, tour-booking, hotel-booking, travel-booking, trip-booking, woocommerce hotel, woocommerce tour, woocommerce travel, wordpress travel, wordpress hotel, wordpress tour plugin, woocommerce tour booking, woocommerce travel booking plugin, woocommerce hotel booking, wordpress tour booking plugin, travel booking wordpress plugin, wordpress hotel booking plugin, wp hotel booking, hotel booking plugin, woocommerce accommodation bookings, woocommerce hotel booking, wordpress room booking plugin, best hotel booking plugin wordpress, hotel plugin, hotel plugin wordpress, tour booking, travel booking, trip booking, hotel booking, tour itinerary, tour operator, travel agency, tour reservation, hotel reservation, airbnb, booking.com, agoda.com, agoda,  wp travel engine, wp travel, wp hotel
 Requires at least: 5.4
-Tested up to: 6.0.2
-Stable tag: 2.8.8
+Tested up to: 6.1
+Stable tag: 2.8.11
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Ultimate Hotel, Tour & Travel booking plugin for WooCommerce. Build your own travel agency website like Agoda, Airbnb, Hotels.com, Booking.com
+Ultimate Tour, Travel & hotel booking WordPress plugin. Build your own travel agency website like Agoda, Booking.com, Airbnb with WooCommerce.
 
 == Description ==
 
-= The easiest and fastest WooCommerce Travel & Hotel Booking Solution by Tourfic | Build Your own travel agency website like Agoda, Airbnb, Hotels.com, Booking.com =
+= The easiest and best WordPress Hotel & Tour Booking Plugin - Tourfic | Build Your own travel agency website like Agoda, Booking.com, Airbnb, Hotels.com =
 
 👉 Official Demo Link: [Tourfic Live Preview](https://tourfic.com)
 👉 Buy Pro Version: [Tourfic Pro](https://tourfic.com/pricing)
@@ -20,7 +20,7 @@ Ultimate Hotel, Tour & Travel booking plugin for WooCommerce. Build your own tra
 👉 Installation Guide: [Tourfic Documentation](https://themefic.com/docs/tourfic/)
 👉 Join Our FB Community: [Tourfic Facebook Group](https://www.facebook.com/groups/tourfic)
 
-Tourfic is fully powered by WooCommerce, you can easily manage all your online Booking system along with order system and any payment of WooCommerce. Allow visitors to register account and booking online. To be precise, you can easily develop a website similar to Booking.com, Agoda, Hotels.com, Airbnb etc in no time with the help of Tourfic. This All-in-One Travel Booking plugin consists almost all the basic to advanced options which you may need for your WordPress based Travel website:
+Tourfic is developed based on <strong>WooCommerce</strong>. You can easily manage all your online Booking system along with order system and any payment method of WooCommerce. In addition, you can allow customers to register account and book their hotel or tour packages online. To be precise, you can easily develop a website similar to Booking.com, Agoda, Hotels.com, Airbnb etc in no time with the help of Tourfic. This All-in-One Travel Booking WordPress plugin consists of almost all the basic to advanced options which you may need for your next WordPress based Hotel or Travel website:
 
 = 🎉  Hotel Booking & Management System =
 * Add Unlimited Hotels
@@ -108,6 +108,9 @@ Tourfic is fully powered by WooCommerce, you can easily manage all your online B
 * Tour Destinations
 * Recent Hotel Slider
 * Recent Tour Slider
+* Review slider
+* Tours
+* Hotels
 * Search Form (Horizontal)
 * Search Result
 * Wishlist
@@ -130,7 +133,7 @@ Tourfic is fully powered by WooCommerce, you can easily manage all your online B
 <strong>Demo Link </strong>
 > <strong><a href="https://tourfic.com" target="_blank">Check out the demo</a></strong> to see it in action!
 
-Tourfic is the ultimate WordPress tour management plugin for hotel booking, tour operator and travel agency websites. It is designed to build your own professional hotel website, tour operator website or travel agency website where you can efficiently list your hotels, tour package and resorts for booking along with receiving payments for each booking.
+Tourfic is the ultimate WordPress tour booking plugin for hotel booking, tour operator and travel agency websites. It is designed to build your own professional WordPress hotel website, tour operator website or travel agency website where you can efficiently list your hotels, tour package and resorts for booking along with receiving payments for each booking.
 
 <strong>Pro Version </strong>
 
@@ -165,6 +168,52 @@ Tourfic has a lot of built-in Shortcodes to make your life easy.
  	<li><strong>ids</strong> - Specify the ids of the locations which you want to show. Default to blank</li>
  	<li><strong>hide_empty</strong> - 0 or 1. Don't show empty locations. Default to 0.</li>
  	<li><strong>limit</strong> - Number of locations to show. Default to -1 (show all).</li>
+</ul>
+
+<hr>
+
+<h4>Hotel Showcase Shortcode:</h4>
+<p>Show hotels in grid/slider layout.</p>
+<pre>[tf_hotel title="" subtitle="" locations="IDS_BY_COMMA" count="NUMBER" style="grid/slider" ]</pre>
+<strong>Attributes:</strong>
+<ul>
+ 	<li><strong>title</strong> - Show section title.Leave empty if you dont want to show a title.</li>
+  <li><strong>subtitle</strong> - Show section subtitle.Leave empty if you dont want to show a title.</li>
+ 	<li><strong>destinations</strong> - Add id of the destination which you want to show.Can add multiple destinations by separating them by comma.</li>
+ 	<li><strong>count</strong> - Number of hotels to show.</li>
+  <li><strong>style</strong> - Use grid/slide which layout you prefer to show.</li>
+</ul>
+
+<hr>
+
+<h4>Tour Showcase Shortcode:</h4>
+<p>Show tours in grid/slider layout.</p>
+<pre>[tf_tour title="" subtitle="" destinations="IDS_BY_COMMA" count="NUMBER" style="grid/slider" ]</pre>
+<strong>Attributes:</strong>
+<ul>
+ 	<li><strong>title</strong> - Show section title.Leave empty if you dont want to show a title.</li>
+  <li><strong>subtitle</strong> - Show section subtitle.Leave empty if you dont want to show a title.</li>
+ 	<li><strong>destinations</strong> - Add id of the destination which you want to show.Can add multiple destinations by separating them by comma.</li>
+ 	<li><strong>count</strong> - Number of hotels to show.</li>
+  <li><strong>style</strong> - Use grid/slide which layout you prefer to show.</li>
+</ul>
+
+<hr>
+
+<h4>Review slider Shortcode:</h4>
+<p>Show reviews in slider layout.</p>
+<pre>[tf_reviews type="hotel/tour" count="NUMBER" number="NUMBER" dots="true/false" arrows="true/false" autoplay="true/false" slidesToShow="NUMBER" infinite="TRUE/FALSE" ]</pre>
+<strong>Attributes:</strong>
+<ul>
+ 	<li><strong>type</strong> - Use hotel/tour .By default hotel is selected. </li>
+  <li><strong>subtitle</strong> - Show section subtitle.Leave empty if you dont want to show a title.</li>
+ 	<li><strong>destinations</strong> - Add id of the destination which you want to show.Can add multiple destinations by separating them by comma.</li>
+ 	<li><strong>count</strong> - Number of slides to show.</li>
+  <li><strong>number</strong> - Number of total reviews to show.</li>
+  <li><strong>dots</strong> - Use true/false.</li>
+  <li><strong>arrows</strong> - Use true/false.</li>
+  <li><strong>slidesToShow</strong> - Number of slides changes per scroll.</li>
+  <li><strong>infinite</strong> - Use true/false to enable/disable infinite scrolling.</li>
 </ul>
 
 <hr>
@@ -310,6 +359,10 @@ Yes, You create your own professional hotel booking website easily with tourfic.
 
 Yes, You create your own professional travel or tour booking website easily with tourfic. Check this <a href="https://youtu.be/99jUEJQIxkg">video</a>.
 
+= Can Tourfic be used as WooCommerce Accommodation Bookings? =
+
+Yes, You create your own professional accommodation booking website easily with tourfic. Check this <a href="https://youtu.be/xeVkabWobDU">video</a>.
+
 = Can I create a website similar to Booking.com with Tourfic? =
 
 Yes, You can create your own professional tour operator and travel agency website within 5 minutes, just like Booking.com, Agoda, Hotels.com, Airbnb etc.
@@ -350,6 +403,45 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 25. Tour Option Panel
 
 == Changelog ==
+
+= 2.8.11 -  07 November 2022 =
+
+* Added: Tour List Pagination on the search page and Number of Search Results
+* Fixed: Tourfic Pro Hotel Room Gallery
+* Fixed: Tour Review and related tour setting option not working properly
+* Fixed: Hotel Review and Share option settings not working properly
+* Fixed: Single Hotel View Page image size issue
+* Fixed: Astra theme margin issue 
+* Fixed: Travel Itinerary  Tab responsive issue
+* Fixed: Spacing issues in listing pages
+* Fixed: Itinerary PDF downloader issue
+
+
+
+
+= 2.8.10 -  30 October 2022 =
+
+* Added: [tf_tour] shortecode added to show the tours with elementor widget
+* Added: [tf_hotel] shortcode added to show the hotels with elementor widget
+* Added: [[tf_reviews] shortcode added to view the reviews with elementor widget
+* Fixed: Css error fix in single hotel
+
+
+= 2.8.9 -  23 October 2022 =
+
+* Added: Advanced Itinerary builder (Pro)
+* Added: Age limit in hotels (Pro)
+* Added: Show prices in hotel search/archive page.
+* Added: Show prices in tour search/archive page.
+* Added: Wp editor on FAQ description in free version.
+* Added: Include/exclude icon change option in backend.
+* Added: Map icon change option in backend.
+* Fixed: Translation issues.
+* Fixed: User login issue.
+* Fixed: Search issue fixed.
+* Fixed: Location icon added in the search field.
+* Updated: Compatibility check with WooCommerce 7.0.0
+* Updated: Compatibility check with WordPress 6.0.3
 
 = 2.8.8 -  10 October 2022 =
 
@@ -653,5 +745,5 @@ Added: Feature image required hotel and tours
 
 == Upgrade Notice ==
 
-= 2.8.5 =
-This is an important & big release. Please make sure you BACKUP your website before updating. You need to update the plugin to get next level updates & features of Tourfic. After you update the plugin, please go to "Tourfic Settings" and click the "Save Button". You can then go ahead and start editing.
+= 2.8.9 =
+This is an important & critical release. Please make sure you BACKUP your website before updating. You need to update the plugin to get next level updates & features of Tourfic. After you update the plugin, please go to "Tourfic Settings" and click the "Save Button". You can then go ahead and start editing.As changes in language strings are done in this version so please BACKUP your language files as well.

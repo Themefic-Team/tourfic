@@ -683,7 +683,7 @@ function tf_single_tour_booking_form( $post_id ) {
 			        </label>
 		        </div>
 
-                <?php if ($tour_type != 'fixed') { ?>
+                <?php if (defined( 'TF_PRO' ) && $tour_type != 'fixed') { ?>
                 <div class='tf_form-row' id="check-in-time-div" style="display: none;">
                     <label class='tf_label-row'>
                         <div class='tf_form-inner'>
@@ -915,6 +915,16 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
     if(empty($check_in_out)) {
         $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
     }
+
+    $disable_adult_price  = !empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
+    $disable_child_price  = !empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
+    $disable_infant_price = !empty( $meta['disable_infant_price'] ) ? $meta['disable_infant_price'] : false;
+    $pricing_rule         = !empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+    $group_price          = !empty( $meta['group_price'] ) ? $meta['group_price'] : false;
+    $adult_price          = !empty( $meta['adult_price'] ) ? $meta['adult_price'] : false;
+    $child_price          = !empty( $meta['child_price'] ) ? $meta['child_price'] : false;
+    $infant_price         = !empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
+
     // Single link
     $url = get_the_permalink();
     $url = add_query_arg( array(
@@ -961,6 +971,22 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
 				<div class="availability-btn-area tour-search">
 					<a href="<?php echo $url; ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' );?></a>
 				</div>
+                    
+                <?php
+                    if( $pricing_rule  && $pricing_rule == 'group' ){
+                        $price = $group_price;
+                    }elseif( $pricing_rule && !$disable_adult_price && $pricing_rule == 'person'   ){
+                        $price = $adult_price;
+                    }else{
+                        $price = $child_price;
+                    }
+                    if( !empty($price) ):
+                ?>
+                        
+                <div class="tf-tour-price">
+                    <?php echo __('From','tourfic') . wc_price($price); ?>
+                </div>
+                <?php endif;?>
 			</div>
 		</div>
 	</div>
