@@ -386,7 +386,7 @@ while ( have_posts() ) : the_post();
 								if ( $f_icon_type == 'fa' ) {
 									$feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
 								} elseif ( $f_icon_type == 'c' ) {
-									$feature_icon = '<img src="' . $feature_meta['icon-c']["url"] . '" style="width: ' . $feature_meta['dimention']["width"] . 'px; height: ' . $feature_meta['dimention']["width"] . 'px;" />';
+									$feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
 								} ?>
 
                                 <div class="single-feature-box">
@@ -527,7 +527,7 @@ while ( have_posts() ) : the_post();
 																if ( $room_icon_type == 'fa' ) {
 																	$room_feature_icon = '<i class="' . $room_f_meta['icon-fa'] . '"></i>';
 																} elseif ( $room_icon_type == 'c' ) {
-																	$room_feature_icon = '<img src="' . $room_f_meta['icon-c']["url"] . '" style="min-width: ' . $room_f_meta['dimention']["width"] . 'px; height: ' . $room_f_meta['dimention']["width"] . 'px;" />';
+																	$room_feature_icon = '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />';
 																}
 
 																$room_term = get_term( $feature ); ?>
