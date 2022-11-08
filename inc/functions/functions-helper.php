@@ -43,8 +43,7 @@ if(!function_exists('tf_black_friday_20222_admin_notice')){
 	function tf_black_friday_20222_admin_notice(){
 		$deal_link =sanitize_url('https://themefic.com/go/tourfic-bf-deal');
 		$get_current_screen = get_current_screen(); 
-		$black_friday_notice_dismiss = get_option( 'tf_black_friday_notice_dismiss' );
-		if($black_friday_notice_dismiss < 1 && !isset($_COOKIE['tf_dismiss_admin_notice'])){
+		if(!isset($_COOKIE['tf_dismiss_admin_notice'])){
 			if($get_current_screen->post_type != 'tf_hotel' && $get_current_screen->post_type != 'tf_tours' ){ 
 				?>
 				<style> 

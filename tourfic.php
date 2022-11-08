@@ -46,6 +46,10 @@ define( 'TF_TEMPLATE_PART_PATH', TF_TEMPLATE_PATH.'template-parts/' );
 define( 'TF_OPTIONS_PATH', TF_ADMIN_PATH.'options/' );
 define( 'TF_ASSETS_PATH', TF_PATH.'assets/' );
 
+if(!class_exists('Appsero\Client')){ 
+    require_once (TF_INC_PATH . 'app/src/Client.php');
+}
+
 /**
  * Tourfic Define
  *
@@ -248,3 +252,23 @@ function tf_is_woo() {
         }
     }
 }
+
+/**
+ * Initialize the plugin tracker
+ *
+ * @return void
+ */
+function appsero_init_tracker_tourfic() {
+
+    if ( ! class_exists( 'Appsero\Client' ) ) { 
+	  require_once __DIR__ . '/app/src/Client.php';
+    }
+
+    $client = new Appsero\Client( '19134f1b-2838-4a45-ac05-772b7dfc9850', 'tourfic', __FILE__ );
+
+    // Active insights
+    $client->insights()->init();
+
+}
+
+appsero_init_tracker_tourfic();
