@@ -1399,7 +1399,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	// Location
 	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
 	// Rooms
-	$b_rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+	$b_rooms = ! empty( $meta['room'] ) ? $meta['room'] : array();
 	if( !empty($b_rooms) && gettype($b_rooms)=="string" ){
         $tf_hotel_b_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
             return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
@@ -1719,17 +1719,20 @@ function tf_remove_room_order_ids() {
 	# Get order id field's name
 	$meta_field = isset( $_POST['meta_field'] ) ? sanitize_text_field( $_POST['meta_field'] ) : '';
 	# Trim room id from order id name
-	$room_id = trim( $meta_field, "tf_hotel[room][][order_id" );
+	$room_id = trim( $meta_field, "tf_hotels_opt[room][][order_id" );
 	# Get post id
 	$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
 	# Get hotel meta
-	$meta = get_post_meta( $post_id, 'tf_hotel', true );
-
+	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+	
+	$order_id_retrive = tf_data_types($meta['room']);
+	
 	# Set order id field's value to blank
-	$meta['room'][ $room_id ]['order_id'] = '';
-
+	$order_id_retrive[ $room_id ]['order_id'] = '';
+	
+	$meta['room'] = serialize($order_id_retrive);
 	# Update whole hotel meta
-	update_post_meta( $post_id, 'tf_hotel', $meta );
+	update_post_meta( $post_id, 'tf_hotels_opt', $meta );
 
 	# Send success message
 	wp_send_json_success( __( 'Order ids have been removed!', 'tourfic' ) );

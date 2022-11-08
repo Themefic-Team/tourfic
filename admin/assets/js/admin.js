@@ -52,8 +52,8 @@
             e.preventDefault();
             
             var $this = $(this);
-            var meta_field = $this.closest( '.csf-repeater-content' ).find('.tf-order_id input').attr('name');
-
+            var post_id = $("#post_ID").val();
+            var meta_field = $this.closest( '.tf-repeater-content-wrap' ).find('.tf-order_id input').attr('name');
             var data = {
                 action: 'tf_remove_room_order_ids',
                 meta_field: meta_field,
@@ -179,22 +179,6 @@
         $(document).on('click', '.tf-field-pro', function(e) {
             e.preventDefault();
             window.open('https://tourfic.com/');
-        });
-
-        /**
-         * Generate & set unique id for hotel rooms
-         */
-        $(document).on('click', '.room-repeater > div.csf-fieldset > a.csf-repeater-add', function(e) {
-
-            var repeaterNumber = $('.room-repeater .csf-repeater-wrapper [data-depend-id="room"]').length - 2;
-
-            $('.room-repeater .unique-id input').each(function() {
-                repeaterNumber++;
-                if( $('.room-repeater [data-depend-id="room"] [data-depend-id="unique_id"]').val().length === 0 ) {
-                    $('.room-repeater [name="tf_hotel[room]['+repeaterNumber+'][unique_id]"]').val(new Date().valueOf() + repeaterNumber);
-                }
-            });
-
         });
 
     });

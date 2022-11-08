@@ -9,15 +9,15 @@
 get_header('tourfic');
 
 $meta = get_post_meta( get_the_ID(),'tf_tours_opt',true );
-$pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
-$tour_type = $meta['type'] ? $meta['type'] : null;
+$pricing_rule = !empty($meta['pricing']) ? $meta['pricing'] : null;
+$tour_type = !empty($meta['type']) ? $meta['type'] : null;
 if( $pricing_rule == 'group'){
-	$price = $meta['group_price'] ? $meta['group_price'] : null;
+	$price = !empty($meta['group_price']) ? $meta['group_price'] : null;
 }else{
-	$price = $meta['adult_price'] ? $meta['adult_price'] : null;
+	$price = !empty($meta['adult_price']) ? $meta['adult_price'] : null;
 }
-$discount_type = $meta['discount_type'] ? $meta['discount_type'] : null;
-$discounted_price = $meta['discount_price'] ? $meta['discount_price'] : NULL;
+$discount_type = !empty($meta['discount_type']) ? $meta['discount_type'] : null;
+$discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : NULL;
 if( $discount_type == 'percent' ){
 	$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 ); 
 }elseif( $discount_type == 'fixed'){
