@@ -1512,7 +1512,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 														if ( $f_icon_type == 'fa' ) {
 															$feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
 														} elseif ( $f_icon_type == 'c' ) {
-															$feature_icon = '<img src="' . $feature_meta['icon-c']["url"] . '" style="width: ' . $feature_meta['dimention']["width"] . 'px; height: ' . $feature_meta['dimention']["width"] . 'px;" />';
+															$feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
 														} ?>
                                                         <li class="tf-tooltip">
 															<?php echo $feature_icon; ?>

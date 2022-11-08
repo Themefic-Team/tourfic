@@ -824,6 +824,12 @@ function tf_search_result_ajax_sidebar() {
 			if ( $posttype == 'tf_hotel' ) {
 				$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
 				$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+				if( !empty($rooms) && gettype($rooms)=="string" ){
+					$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+						return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+					}, $rooms );
+					$rooms = unserialize( $tf_hotel_rooms_value );
+				}
 
 				$total_adults = tf_hotel_total_room_adult_child( get_the_ID(), 'adult' );
 				$total_child  = tf_hotel_total_room_adult_child( get_the_ID(), 'child' );
@@ -1244,3 +1250,60 @@ function tf_data_types( $var ) {
 		return $var;
 	}
 }
+
+
+
+# ================================== #
+# Custom Option Fields               #
+# ================================== #
+
+/**
+ * Custom permalink settings
+ * 
+ * @since 2.2.0
+ */
+/**
+ * Add settings field
+ */
+function tf_add_custom_permalink_fields() {
+    
+    add_settings_section( 'tf_permalink', __('Tourfic Permalinks', 'tourfic'), 'tf_permalink_section_callback', 'permalink' );
+    // Tour
+    add_settings_field( 'tour_slug', __('Tour slug', 'tourfic'), 'tf_tour_slug_field_callback', 'permalink', 'tf_permalink', array('label_for' => 'tour_slug'));
+    // Hotel
+    add_settings_field( 'hotel_slug', __('Hotel slug', 'tourfic'), 'tf_hotel_slug_field_callback', 'permalink', 'tf_permalink', array('label_for' => 'hotel_slug'));
+
+}
+add_action( 'admin_init', 'tf_add_custom_permalink_fields' );
+
+// Tourfic Permalinks settings section callback function
+function tf_permalink_section_callback() {
+    _e('If you like, you may enter custom structures for your archive & single URLs here.', 'tourfic');
+}
+
+// Tour slug callback
+function tf_tour_slug_field_callback() { ?>
+    <input name="tour_slug" id="tour_slug" type="text" value="<?php echo get_option( 'tour_slug' ) ? get_option( 'tour_slug' ) : ''; ?>" class="regular-text code">
+    <p class="description"><?php printf(__('Leave blank for default value: %1stours%2s', 'tourfic'), '<code>', '</code>'); ?></p>
+<?php }
+// Hotel slug callback
+function tf_hotel_slug_field_callback() { ?>
+    <input name="hotel_slug" id="hotel_slug" type="text" value="<?php echo get_option( 'hotel_slug' ) ? get_option( 'hotel_slug' ) : ''; ?>" class="regular-text code">
+    <p class="description"><?php printf(__('Leave blank for default value: %1shotels%2s', 'tourfic'), '<code>', '</code>'); ?></p>
+<?php }
+
+/**
+ * Register settings field
+ */
+function tf_save_custom_fields(){
+
+    // Tour
+    if( isset($_POST['tour_slug']) ){
+        update_option( 'tour_slug',  $_POST['tour_slug'] );
+    } 
+    // Hotel
+    if( isset($_POST['hotel_slug']) ){
+        update_option( 'hotel_slug',  $_POST['hotel_slug'] );
+    }
+}
+add_action( 'admin_init', 'tf_save_custom_fields' );

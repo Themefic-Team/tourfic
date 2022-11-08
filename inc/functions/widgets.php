@@ -64,7 +64,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
                 if ($feature_meta['icon-type'] == 'fa') {
                     $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
                 } elseif ($feature_meta['icon-type'] == 'c') {
-                    $feature_icon = '<img src="' . $feature_meta['icon-c']["url"] . '" style="width: ' . $feature_meta['dimention']["width"] . 'px; height: ' . $feature_meta['dimention']["width"] . 'px;" />';
+                    $feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
                 }
                 $id = $term->term_id;
                 $name = $term->name;
