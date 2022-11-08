@@ -141,7 +141,9 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 			<?php
 
 		}
-
+		public function sanitize() {
+			return wp_kses_post($this->value);
+		}
 		// public function enqueue() {
 
 		// 	if ( ! wp_script_is( 'jquery-ui-sortable' ) ) {
