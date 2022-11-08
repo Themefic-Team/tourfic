@@ -616,6 +616,9 @@ function tf_room_availability_callback() {
 	$form_child        = ! empty( $_POST['child'] ) ? sanitize_text_field( $_POST['child'] ) : 0;
 	$children_ages     = ! empty( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '';
 	$form_check_in_out = ! empty( $_POST['check_in_out'] ) ? sanitize_text_field( $_POST['check_in_out'] ) : '';
+
+	
+
 	$form_total_person = $form_adult + $form_child;
 	if ( $form_check_in_out ) {
 		list( $form_start, $form_end ) = explode( ' - ', $form_check_in_out );
@@ -774,7 +777,7 @@ function tf_room_availability_callback() {
 					$num_room_available = max( $num_room_available, 0 ); // If negetive value make that 0
 
 				}
-
+				
 				if ( $avil_by_date && defined( 'TF_PRO' ) ) {
 
 					// split date range
@@ -810,7 +813,7 @@ function tf_room_availability_callback() {
 						}
 
 					}
-
+					
 					// Check if date is provided and within date range
 					if ( ! in_array( 0, $has_room ) ) {
 						tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit );
@@ -828,9 +831,8 @@ function tf_room_availability_callback() {
 						$error = __( 'No Room Available within this Date Range!', 'tourfic' );
 
 					}
-
 				} else {
-
+					
 					if ( $pricing_by == '1' ) {
 						$price_by_date = $room_price;
 					} else {
@@ -840,17 +842,46 @@ function tf_room_availability_callback() {
 					$price = $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date;
 
 					tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit );
-
-					if ( $form_total_person <= $total_person ) {
-
-						include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
-
-					} else {
-
-						$error = __( 'No Room Available! Total person number exceeds!', 'tourfic' );
-
+					
+					/**
+					 * filter hotel room with features
+					 * @return array
+					 * @since 1.6.9
+					 * @author Abu Hena
+					 */
+					$filtered_features  = ! empty( $_POST['features'] ) ?  $_POST['features']  : array();	
+					$room_features = !empty($room['features']) ? $room['features'] : '';
+					if(!empty($room_features) && is_array($room_features)){
+						$feature_result = array_intersect($filtered_features,$room_features);
 					}
 
+					if( !empty( $filtered_features ) && defined( 'TF_PRO' ) ){
+						if($feature_result){
+							if ( $form_total_person <= $total_person ) {
+
+								include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+
+							} else {
+
+								$error = __( 'No Room Available! Total person number exceeds!', 'tourfic' );
+
+							}
+						}else{
+							$error = __( 'No Room Available!', 'tourfic' );
+						}
+						/* feature filter ended here */
+
+					}else{
+						if ( $form_total_person <= $total_person ) {
+
+							include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+
+						} else {
+
+							$error = __( 'No Room Available! Total person number exceeds!', 'tourfic' );
+
+						}
+					}
 				}
 
 			} else {
@@ -1275,33 +1306,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
                     </select>
                 </div>
             </label>
-        </div>
-		<!-- Filter by feature  -->
-		<div class="tf_form-row">
-            <label class="tf_label-row">
-                <div class="tf-sidebar-filter">
-					<?php
-						$features = get_terms('hotel_feature',[
-							'hide_empty' => false,
-						]); 
-					
-					?>	
-					<h3 class="tf-sidebar-widget_title"><?php echo __( 'Choose Feature' , 'tourfic' ); ?></h3>
-					<ul class="tf-sidebar-checkbox">
-					<?php
-
-					foreach ( $features as $feature ) {
-						$selected = $feature->slug == $features ? 'selected' : null;
-						echo '<li>';
-						echo '<input type="checkbox" name="features[]" class="" value="'.$feature->slug .'" id="'.$feature->slug.'">';	
-						echo '<label for="'.$feature->slug.'"> '.$feature->name.'</label>';
-						echo "</li>";
-					}
-					?>
-					</ul>
-                </div>
-            </label>
-        </div>
+        </div>		
 
         <div class="tf_form-row">
             <label class="tf_label-row">
@@ -1334,6 +1339,9 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
             </div>
         </div>
 
+		<!-- Hooked in feature filter action -->
+		<?php do_action( 'tf_hotel_features_filter', 10 ) ?>
+		
         <div class="tf_form-row">
 			<?php
 			$ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();

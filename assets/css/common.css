@@ -468,7 +468,11 @@ ul.tf-sidebar-checkbox label{
     color: #bfbfbf;
     font-size: 16px;
 }
-
+h3.tf-sidebar-widget_title {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+/********Booking Form End ********/
 .tf_acrselection-wrap {
     position: absolute;
     top: 100%;

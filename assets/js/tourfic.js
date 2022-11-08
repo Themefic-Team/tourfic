@@ -31,11 +31,16 @@
                 }
                 return;
             }
-
+            //get the checked values of features
+            var features = [];
+            $('.tf-sidebar-filter :checkbox:checked').each(function(i){
+                features[i] = $(this).val();
+            });
             var tf_room_avail_nonce = $("input[name=tf_room_avail_nonce]").val();
             var post_id = $('input[name=post_id]').val();
             var adult = $('select[name=adults] option').filter(':selected').val();
             var child = $('select[name=children] option').filter(':selected').val();
+            //var features = $('input[name=features]').filter(':checked').val();
             var children_ages = $('input[name=children_ages]').val();
             var check_in_out = $('input[name=check-in-out-date]').val();
             //console.log(post_id);
@@ -46,6 +51,7 @@
                 post_id: post_id,
                 adult: adult,
                 child: child,
+                features: features,
                 children_ages: children_ages,
                 check_in_out: check_in_out,
             };
@@ -55,6 +61,7 @@
                 type: 'post',
                 data: data,
                 success: function (data) {
+                    console.log(features,adult);
                     $('html, body').animate({
                         scrollTop: $("#rooms").offset().top
                     }, 500);
