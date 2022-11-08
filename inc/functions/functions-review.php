@@ -203,9 +203,11 @@ function tf_get_review_fields( &$fields, $type = null ) {
         }, $fields );
         $fields = unserialize( $tf_hotel_fields_value );
     }
-	$fields = array_map( function ( $i ) {
-		return strtolower( $i['r-field-type'] );
-	}, $fields );
+	if( !empty($fields) ){
+		$fields = array_map( function ( $i ) {
+			return strtolower( $i['r-field-type'] );
+		}, $fields );
+	}
 }
 
 /**

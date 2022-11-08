@@ -569,18 +569,16 @@ function tf_single_tour_booking_form( $post_id ) {
         }, $meta['cont_custom_date'] );
         $tf_tour_unserial_custom_date = unserialize( $tf_tour_unserial_custom_date );
         
-        if ( $custom_avail == true && !empty( $meta['cont_custom_date'] ) ) {
-            $allowed_times = array_map(function ($v) {
-                return $times[] = ['date' => $v['date'], 'times' => array_map(function ($v) {
-                    return $v['time'];
-                }, $v['allowed_time'] ?? [])];
-            }, $tf_tour_unserial_custom_date);
+        if( !empty($tf_tour_unserial_custom_date) ) {
+            if ( $custom_avail == true && !empty( $meta['cont_custom_date'] ) ) {
+                $allowed_times = array_map(function ($v) {
+                    return $times[] = ['date' => $v['date'], 'times' => array_map(function ($v) {
+                        return $v['time'];
+                    }, $v['allowed_time'] ?? [])];
+                }, $tf_tour_unserial_custom_date);
+            }
         }
-        // if ( $custom_avail == false && !empty( $meta['allowed_time'] ) ) {
-        //     $allowed_times = array_map(function ($v) {
-        //         return $v['time'];          
-        //     }, $meta['allowed_time'] ?? []);
-        // }
+        
     }else{
         if ( $custom_avail == true && !empty( $meta['cont_custom_date'] ) ) {
             $allowed_times = array_map(function ($v) {
@@ -590,11 +588,6 @@ function tf_single_tour_booking_form( $post_id ) {
             }, $meta['cont_custom_date']);
         }
         
-        // if ( $custom_avail == false && !empty( $meta['allowed_time'] ) ) {
-        //     $allowed_times = array_map(function ($v) {
-        //         return $v['time'];          
-        //     }, $meta['allowed_time'] ?? []);
-        // }
     }
 
     if( !empty($meta['allowed_time']) && gettype($meta['allowed_time'])=="string" ){
@@ -1032,7 +1025,16 @@ function tf_filter_tour_by_date( $period, array &$not_found, array $data = [] ):
 
     if ( $meta['type'] === 'fixed' ) {
 
-        $fixed_availability = !empty( $meta['fixed_availability'] ) ? $meta['fixed_availability']['date'] : [];
+        if( !empty($meta['fixed_availability']) && gettype($meta['fixed_availability'])=="string" ){
+            $tf_tour_unserial_fixed_date = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+            }, $meta['fixed_availability'] );
+            $tf_tour_unserial_fixed_date = unserialize( $tf_tour_unserial_fixed_date );
+            $fixed_availability = !empty( $tf_tour_unserial_fixed_date ) ? $tf_tour_unserial_fixed_date['date'] : [];
+        }else{
+            $fixed_availability = !empty( $meta['fixed_availability'] ) ? $meta['fixed_availability']['date'] : [];
+        }
+
         $show_fixed_tour    = [];
 
         foreach ( $period as $date ) {
@@ -1075,7 +1077,15 @@ function tf_filter_tour_by_date( $period, array &$not_found, array $data = [] ):
 
         if ($custom_availability) {
 
-            $custom_dates = wp_list_pluck( $meta['cont_custom_date'], 'date' );
+            if( !empty($meta['cont_custom_date']) && gettype($meta['cont_custom_date'])=="string" ){
+                $tf_tour_unserial_custom_date = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                    return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+                }, $meta['cont_custom_date'] );
+                $tf_tour_unserial_custom_date = unserialize( $tf_tour_unserial_custom_date );
+                $custom_dates = wp_list_pluck( $tf_tour_unserial_custom_date, 'date' );
+            }else{
+                $custom_dates = wp_list_pluck( $meta['cont_custom_date'], 'date' );
+            }
 
             foreach ( $custom_dates as $custom_date ) {
 

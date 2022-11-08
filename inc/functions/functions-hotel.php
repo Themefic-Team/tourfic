@@ -1774,8 +1774,14 @@ function tf_hotel_quickview_callback() {
 	?>
     <div class="tf-hotel-quick-view" style="display: flex">
 		<?php
-		$meta  = get_post_meta( $_POST['post_id'], 'tf_hotel', true );
+		$meta  = get_post_meta( $_POST['post_id'], 'tf_hotels_opt', true );
 		$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+		if( !empty($rooms) && gettype($rooms)=="string" ){
+			$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+				return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+			}, $rooms );
+			$rooms = unserialize( $tf_hotel_rooms_value );
+		}
 		foreach ( $rooms as $key => $room ) :
 			$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
 			if ( $enable == '1' && $room['unique_id'] . $key == $_POST['uniqid_id'] ) :
@@ -2033,6 +2039,12 @@ function tf_update_missing_room_id() {
 		foreach ( $posts_array as $post_array ) {
 			$meta      = get_post_meta( $post_array->ID, 'tf_hotel', true );
 			$rooms     = ! empty( $meta['room'] ) ? $meta['room'] : '';
+			if( !empty($rooms) && gettype($rooms)=="string" ){
+				$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+					return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+				}, $rooms );
+				$rooms = unserialize( $tf_hotel_rooms_value );
+			}
 			$new_rooms = [];
 			foreach ( $rooms as $room ) {
 
@@ -2101,6 +2113,12 @@ if ( ! function_exists( 'tf_hotel_total_room_adult_child' ) ) {
 	function tf_hotel_total_room_adult_child( $hotel_id, $type = 'room' ) {
 		$meta         = get_post_meta( $hotel_id, 'tf_hotel', true );
 		$rooms        = ! empty( $meta['room'] ) ? $meta['room'] : '';
+		if( !empty($rooms) && gettype($rooms)=="string" ){
+			$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+				return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+			}, $rooms );
+			$rooms = unserialize( $tf_hotel_rooms_value );
+		}
 		$total_room   = 0;
 		$total_adults = 0;
 		$total_child  = 0;
