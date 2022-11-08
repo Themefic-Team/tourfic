@@ -455,7 +455,7 @@ function tf_calculate_comments_rating($comments, &$tf_overall_rate, &$total_rati
  * Total Average Rating
  */
 function tf_total_avg_rating($comments) {
-
+	$total_rate = [];
     foreach ($comments as $comment) {
         $tf_comment_meta = get_comment_meta($comment->comment_ID, TF_COMMENT_META, true);
         $tf_base_rate = get_comment_meta($comment->comment_ID, TF_BASE_RATE, true);
