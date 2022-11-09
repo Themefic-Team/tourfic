@@ -381,10 +381,12 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			$this->tf_dashboard_page();
 
+            $ajax_save_class = 'tf-ajax-save';
+
 			if ( ! empty( $this->option_sections ) ) :
 				?>
                 <div class="tf-option-wrapper" style="display: <?php echo !isset($query_string['dashboard']) ? 'block' : 'none' ?>">
-                    <form method="post" action="" class="tf-option-form" enctype="multipart/form-data">
+                    <form method="post" action="" class="tf-option-form <?php echo esc_attr($ajax_save_class) ?>" enctype="multipart/form-data">
                         <!-- Header -->
                         <div class="tf-option-header">
                             <div class="tf-option-header-left">
@@ -395,7 +397,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                             </div>
                             <div class="tf-option-header-right">
                                 <div class="tf-option-header-actions">
-                                    <button type="submit" class="tf-admin-btn tf-btn-secondary tf-ajax-save"><?php esc_attr_e( 'Save', 'tourfic' ); ?></button>
+                                    <button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn"><?php esc_attr_e( 'Save', 'tourfic' ); ?></button>
                                 </div>
                             </div>
                         </div>
@@ -461,7 +463,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
                         <!-- Footer -->
                         <div class="tf-option-footer">
-                            <button type="submit" class="tf-admin-btn tf-btn-secondary tf-ajax-save"><?php _e( 'Save', 'tourfic' ); ?></button>
+                            <button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn"><?php _e( 'Save', 'tourfic' ); ?></button>
 
 							<span><?php _e( 'By', 'tourfic' ) ?><a href="https://tourfic.com/" target="_blank"><?php _e( 'Themefic', 'tourfic' ) ?></a></span>
 

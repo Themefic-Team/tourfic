@@ -373,10 +373,10 @@
         * Options ajax save
         * @author: Foysal
         */
-        $(document).on('submit', '.tf-option-form', function (e) {
+        $(document).on('submit', '.tf-option-form.tf-ajax-save', function (e) {
             e.preventDefault();
             let $this = $(this),
-                submitBtn = $this.find('.tf-ajax-save'),
+                submitBtn = $this.find('.tf-submit-btn'),
                 data = new FormData(this);
 
             data.append('action', 'tf_options_save');
