@@ -1079,3 +1079,27 @@ function tf_is_search_form_single_tab( $type_arr ) {
 
 	return false;
 }
+
+
+// /**
+//  * Initialize the plugin tracker
+//  *
+//  * @return void
+//  */
+// function appsero_init_tracker_tourfic() {
+
+//     if ( ! class_exists( 'Appsero\Client' ) ) {
+//     //   require_once __DIR__ . '/vendor/appsero/src/Client.php';
+// 	  require_once __DIR__ . '/app/src/Client.php';
+//     }
+
+//     $client = new Appsero\Client( '19134f1b-2838-4a45-ac05-772b7dfc9850', 'tourfic', __FILE__ );
+
+//     // Active insights
+//     $client->insights()->init();
+
+// }
+
+// appsero_init_tracker_tourfic();
+
+
