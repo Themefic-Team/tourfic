@@ -43,9 +43,15 @@ if ( ! class_exists( 'TF_select2' ) ) {
 				}
 			}
 
-			echo '<select name="' . $this->field_name() . '[]" id="' . esc_attr( $this->field_name() ) . '" class="tf-select2" data-placeholder="' . esc_attr( $placeholder ) . '" ' . $multiple . ' '. $this->field_attributes() .'>';
+			$field_name = !empty($this->field['multiple']) ? $this->field_name() . '[]' : $this->field_name();
+
+			echo '<select name="' . $field_name . '" id="' . esc_attr( $this->field_name() ) . '" class="tf-select2" data-placeholder="' . esc_attr( $placeholder ) . '" ' . $multiple . ' '. $this->field_attributes() .'>';
 			foreach ( $args['options'] as $key => $value ) {
-				$selected = ( is_array( $this->value ) && in_array( $key, $this->value ) ) ? 'selected' : '';
+				if(!empty($this->field['multiple']) && is_array( $this->value ) && in_array( $key, $this->value )){
+					$selected = 'selected';
+				} else {
+					$selected = selected( $this->value, $key, false );
+				}
 				echo '<option value="' . esc_attr( $key ) . '" ' . $selected . '>' . esc_html( $value ) . '</option>';
 			}
 			echo '</select>';
