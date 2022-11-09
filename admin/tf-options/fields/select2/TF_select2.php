@@ -44,8 +44,11 @@ if ( ! class_exists( 'TF_select2' ) ) {
 			}
 
 			$field_name = !empty($this->field['multiple']) ? $this->field_name() . '[]' : $this->field_name();
+			$tf_select2_unique_id = str_replace( array("[","]"),"_",esc_attr( $this->field_name() ) );
+			$parent_class = ( ! empty( $this->parent_field ) ) ? 'tf-select2-parent' : 'tf-select2'; 
+            $parent_class = ( isset( $this->field['select2'] ) ) ? 'tf-select2' : $parent_class ;  
 
-			echo '<select name="' . $field_name . '" id="' . esc_attr( $this->field_name() ) . '" class="tf-select2" data-placeholder="' . esc_attr( $placeholder ) . '" ' . $multiple . ' '. $this->field_attributes() .'>';
+			echo '<select name="' . $field_name . '" id="' . $tf_select2_unique_id . '" class=" tf-select-two '.$parent_class.' " data-placeholder="' . esc_attr( $placeholder ) . '" ' . $multiple . ' '. $this->field_attributes() .'>';
 			foreach ( $args['options'] as $key => $value ) {
 				if(!empty($this->field['multiple']) && is_array( $this->value ) && in_array( $key, $this->value )){
 					$selected = 'selected';
