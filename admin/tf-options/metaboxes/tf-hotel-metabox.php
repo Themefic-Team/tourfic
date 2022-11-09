@@ -140,7 +140,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'label_on'  => __( 'Enabled', 'tourfic' ),
 							'label_off' => __( 'Disabled', 'tourfic' ),
 							'width'     => 100,
-							'default'   => true,
+							'default'   => 1,
 						),
 						array(
 							'id'          => 'title',

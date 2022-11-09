@@ -140,23 +140,7 @@
         }
         tfTimeInt('.tf-field-time');
 
-        /*
-        * Each select2 field initialize select2
-        * @author: Foysal
-        */
-        const tfSelect2Int = select2Selector => {
-            $(select2Selector).each(function () {
-                let $this = $(this),
-                    selectField = $this.find('select.tf-select2'),
-                    placeholder = selectField.data('placeholder');
-
-                selectField.select2({
-                    placeholder: placeholder,
-                    allowClear: true,
-                });
-            });
-        }
-        tfSelect2Int('.tf-field-select2');
+       
 
         /*
         * Each color field initialize wpColorPicker
@@ -407,6 +391,27 @@
         });
 
         /*
+        * Each select2 field initialize select2
+        * @author: Foysal, Sydur
+        */
+         const tfSelect2Int = select2Selector => {
+            let $this = select2Selector, 
+                id = $this.attr('id'), 
+                placeholder = $this.data('placeholder');
+
+                $('#'+id+'').select2({
+                    placeholder: placeholder,
+                    allowClear: true,
+                });
+        }
+        
+        $('select.tf-select2').each(function () {
+            var $this = $(this);
+            tfSelect2Int($this);
+        });
+        
+
+        /*
         * Options WP editor
         * @author: Sydur
         */
@@ -426,9 +431,7 @@
         $('textarea.wp_editor').each(function () {
             let $id = $(this).attr('id');
             TF_wp_editor($id);
-        });
-
-
+        }); 
         /*
         * Options WP editor
         * @author: Sydur
@@ -458,12 +461,7 @@
             let repeatTimeField = add_value.find('.tf-field-time');
             if (repeatTimeField.length > 0) {
                 tfTimeInt(repeatTimeField);
-            }
-
-            let repeatSelect2Field = add_value.find('.tf-field-select2');
-            if (repeatSelect2Field.length > 0) {
-                tfSelect2Int(repeatSelect2Field);
-            }
+            } 
 
             let repeatColorField = add_value.find('.tf-field-color');
             if (repeatColorField.length > 0) {
@@ -527,6 +525,14 @@
                 TF_wp_editor(parent_repeater_id);
             });
 
+            // replace new Select 2
+            add_value.find('select.tf-select2-parent').each(function () {
+                this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + count + '');
+                var parent_repeater_id = $(this).attr('id'); 
+                var $this = $(this); 
+                tfSelect2Int($this);
+            });
+ 
             // repeater dependency repeater
             TF_dependency();
         });
@@ -565,12 +571,7 @@
             if (repeatTimeField.length > 0) {
                 tfTimeInt(repeatTimeField);
             }
-
-            let repeatSelect2Field = clone_value.find('.tf-field-select2');
-            if (repeatSelect2Field.length > 0) {
-                tfSelect2Int(repeatSelect2Field);
-            }
-
+ 
             let repeatColorField = clone_value.find('.tf-field-color');
             if (repeatColorField.length > 0) {
                 tfColorInt(repeatColorField);
@@ -626,15 +627,35 @@
                 $(this).closest('.tf-field-textarea').append(textarea);
                 $(this).remove();
             });
+
+            // Replace Old Select 2
+            clone_value.find('.tf-field-select2').each(function (){
+                $(this).find('select.tf-select-two').removeAttr("data-select2-id aria-hidden tabindex");
+                $(this).find('select.tf-select-two option').removeAttr("data-select2-id");
+                $(this).find('select.tf-select-two').removeClass("select2-hidden-accessible");
+               var select2 =  $(this).find('select.tf-select-two').show();
+                $(this).find('.tf-fieldset').append(select2);
+                $(this).find('span.select2-container').remove();
+            });
+
            //Append Value
             $(this).closest('.tf-repeater-wrap').append(clone_value).show();
+
+            // Clone Wp Editor
             clone_value.find('textarea.parent_wp_editor, textarea.wp_editor').each(function () {
 
                 this.id = this.id.replace('' + current_field + '__'+repeater_count, '' + current_field + '__' + count + '');
-                var parent_repeater_id = $(this).attr('id');
-                console.log(this.id);
+                var parent_repeater_id = $(this).attr('id'); 
                 TF_wp_editor(parent_repeater_id);
             });
+
+            // Clone Select 2
+            clone_value.find('select.tf-select2-parent, select.tf-select2').each(function () {
+                this.id = this.id.replace('' + current_field + '__'+repeater_count, '' + current_field + '__' + count + '');
+                var $this = $(this);
+                tfSelect2Int($this);
+            });
+
             // Dependency value
             TF_dependency();
         });

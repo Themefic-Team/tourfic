@@ -62,6 +62,9 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 										if($re_field['type'] == 'editor'){ 
 											$re_field['wp_editor'] = 'wp_editor'; 
 										}
+										if($re_field['type'] == 'select2'){ 
+											$re_field['select2'] = 'select2'; 
+										}
 										
 										if(!empty($this->parent_field)){
 											$parent_field = $this->parent_field.'[' . $this->field['id'] . '][' . $key . ']';
