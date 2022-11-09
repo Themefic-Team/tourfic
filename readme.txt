@@ -2,7 +2,7 @@
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet, fida02, mdshuvo
 Tags: travel, tour, trip, hotel, tour-booking, hotel-booking, travel-booking, trip-booking, woocommerce hotel, woocommerce tour, woocommerce travel, wordpress travel, wordpress hotel, wordpress tour plugin, woocommerce tour booking, woocommerce travel booking plugin, woocommerce hotel booking, wordpress tour booking plugin, travel booking wordpress plugin, wordpress hotel booking plugin, wp hotel booking, hotel booking plugin, woocommerce accommodation bookings, woocommerce hotel booking, wordpress room booking plugin, best hotel booking plugin wordpress, hotel plugin, hotel plugin wordpress, tour booking, travel booking, trip booking, hotel booking, tour itinerary, tour operator, travel agency, tour reservation, hotel reservation, airbnb, booking.com, agoda.com, agoda,  wp travel engine, wp travel, wp hotel
 Requires at least: 5.4
-Tested up to: 6.1
+Tested up to: 6.0.3
 Stable tag: 2.8.11
 Requires PHP: 7.2
 License: GPLv2 or later
@@ -14,8 +14,8 @@ Ultimate Tour, Travel & hotel booking WordPress plugin. Build your own travel ag
 
 = The easiest and best WordPress Hotel & Tour Booking Plugin - Tourfic | Build Your own travel agency website like Agoda, Booking.com, Airbnb, Hotels.com =
 
-👉 Official Demo Link: [Tourfic Live Preview](https://tourfic.com)
-👉 Buy Pro Version: [Tourfic Pro](https://tourfic.com/pricing)
+👉 Official Demo Link: [Tourfic Live Preview](https://themefic.com/tourfic)
+👉 Buy Pro Version: [Tourfic Pro](https://themefic.com/tourfic/pricing)
 👉 Video Guide: [Youtube Video](https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N)
 👉 Installation Guide: [Tourfic Documentation](https://themefic.com/docs/tourfic/)
 👉 Join Our FB Community: [Tourfic Facebook Group](https://www.facebook.com/groups/tourfic)
@@ -131,7 +131,7 @@ Tourfic is developed based on <strong>WooCommerce</strong>. You can easily manag
 * Speed Optimization (Minification of Tourfic CSS, JS & Use of CDN service for 3rd Party asset files) (Pro)
 
 <strong>Demo Link </strong>
-> <strong><a href="https://tourfic.com" target="_blank">Check out the demo</a></strong> to see it in action!
+> <strong><a href="https://themefic.com/tourfic" target="_blank">Check out the demo</a></strong> to see it in action!
 
 Tourfic is the ultimate WordPress tour booking plugin for hotel booking, tour operator and travel agency websites. It is designed to build your own professional WordPress hotel website, tour operator website or travel agency website where you can efficiently list your hotels, tour package and resorts for booking along with receiving payments for each booking.
 
@@ -139,7 +139,7 @@ Tourfic is the ultimate WordPress tour booking plugin for hotel booking, tour op
 
 We believe the free version is good enough for most business. However, we have a **Pro version** of this plugin which has more advanced features as mentioned above.
 
-> <strong><a href="https://tourfic.com/pricing" target="_blank">Buy Tourfic Pro</a></strong>
+> <strong><a href="https://themefic.com/tourfic/pricing" target="_blank">Buy Tourfic Pro</a></strong>
 
 ### How to create a Hotel Booking Website with WooCommerce  & Tourfic:
 
@@ -309,15 +309,20 @@ Want to know all the latest news and be a part of the Tourfic community? Join ou
 
 <hr>
 
-> <strong><a href="https://tourfic.com" target="_blank">Check out the demo</a></strong>
+> <strong><a href="https://themefic.com/tourfic" target="_blank">Check out the demo</a></strong>
 
 <strong>Premium Support</strong>
 
-We provide full support on the WordPress.org forums. In addition, please feel free to post questions or bug reports through our <a href="https://www.facebook.com/groups/tourfic/" target="_blank">Facebook group</a> or <a href="https://themefic.com/contact/" target="_blank">Our Website</a>. However, please note that, for free version’s support/replies, there can be delays upto 24-48 hours. So, if you need urgent support, we recommend purchasing <a href="https://tourfic.com/pricing">Pro Version</a>.
+We provide full support on the WordPress.org forums. In addition, please feel free to post questions or bug reports through our <a href="https://www.facebook.com/groups/tourfic/" target="_blank">Facebook group</a> or <a href="https://themefic.com/contact/" target="_blank">Our Website</a>. However, please note that, for free version’s support/replies, there can be delays upto 24-48 hours. So, if you need urgent support, we recommend purchasing <a href="https://themefic.com/tourfic/pricing">Pro Version</a>.
 
 <strong>Privacy Policy : </strong>
 
-This plugin doesn’t collect/store any user related information.
+
+Tourfic uses <a href="https://appsero.com/">Appsero</a> SDK to collect some telemetry data upon user’s confirmation. This helps us to troubleshoot problems faster & make product improvements.
+
+Appsero SDK does not gather any data by default. The SDK only starts gathering basic telemetry data when a user allows it via the admin notice. We collect the data to ensure great user experience for all our users.
+
+Integrating Appsero SDK DOES NOT IMMEDIATELY start gathering data, without confirmation from users in any case.
 
 <strong>Credits</strong>
 
@@ -415,9 +420,6 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 * Fixed: Travel Itinerary  Tab responsive issue
 * Fixed: Spacing issues in listing pages
 * Fixed: Itinerary PDF downloader issue
-
-
-
 
 = 2.8.10 -  30 October 2022 =
 
