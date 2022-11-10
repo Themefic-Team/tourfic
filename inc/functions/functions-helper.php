@@ -43,8 +43,9 @@ if(!function_exists('tf_black_friday_20222_admin_notice')){
 	function tf_black_friday_20222_admin_notice(){
 		$deal_link =sanitize_url('https://themefic.com/go/tourfic-bf-deal');
 		$get_current_screen = get_current_screen(); 
+	
 		if(!isset($_COOKIE['tf_dismiss_admin_notice'])){
-			if($get_current_screen->post_type != 'tf_hotel' && $get_current_screen->post_type != 'tf_tours' ){ 
+			if($get_current_screen->base == 'dashboard'){ 
 				?>
 				<style> 
 					.tf_black_friday_20222_admin_notice a:focus {
@@ -56,12 +57,18 @@ if(!function_exists('tf_black_friday_20222_admin_notice')){
 						z-index: 10;
 					}
 					.tf_black_friday_20222_admin_notice { 
-						max-width: 975px
+						max-width: 585px;
+					}
+					.tf_black_friday_20222_admin_notice button:before {
+						color: #fff !important;
+					}
+					.tf_black_friday_20222_admin_notice button:hover::before {
+						color: #d63638 !important;
 					}
 				</style>
 				<div class="notice notice-success tf_black_friday_20222_admin_notice"> 
 					<a href="<?php echo $deal_link; ?>" target="_blank" >
-						<img  style="width: 100%; height: 250px" src="<?php echo TOURFIC_PLUGIN_URL ?>/assets/img/BLACK_FRIDAY_BACKGROUND_GRUNGE_notice.png" alt="">
+						<img  style="width: 100%; height: 150px" src="<?php echo TOURFIC_PLUGIN_URL ?>/assets/img/BLACK_FRIDAY_BACKGROUND_GRUNGE_notice.png" alt="">
 					</a> 
 					<button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
 				</div>
