@@ -812,7 +812,7 @@ var frame, gframe;
         });
 
         // Switcher Value Changed
-        $('.tf-switch').change(function () {
+        $(document).on("change", ".tf-switch", function (e) {
             var $this = $(this);
             if (this.checked) {
                 var $this = $(this);
