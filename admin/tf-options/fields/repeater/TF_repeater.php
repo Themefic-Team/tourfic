@@ -72,12 +72,11 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 											$parent_field = '[' . $this->field['id'] . '][' . $key . ']';
 										}
 
-										$default = isset( $re_field['default'] ) ? $re_field['default'] : '';
 										$id = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['id'] . '][00]' . '[' . $re_field['id'] . ']' : $this->field['id'] . '[00]' . '[' . $re_field['id'] . ']';
 										if ( isset( $tf_meta_box_value[ $id ] ) ) {
-											$value = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : $default;
+											$value = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : '';
 										} else {
-											$value = ( isset( $re_field['id'] ) && isset( $data[ $key ][ $re_field['id'] ] ) ) ? $data[ $key ][ $re_field['id'] ] : $default;
+											$value = ( isset( $re_field['id'] ) && isset( $data[ $key ][ $re_field['id'] ] ) ) ? $data[ $key ][ $re_field['id'] ] : '';
 										}
 
 										$tf_option = new TF_Options();
