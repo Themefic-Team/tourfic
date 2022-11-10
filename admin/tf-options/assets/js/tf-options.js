@@ -269,6 +269,7 @@
             let btn = $(this);
 
             let fieldId = btn.closest('.tf-icon-select').attr('id');
+            console.log('feildId', fieldId)
             $('#tf-icon-modal').data('icon-field', fieldId);
         });
 
@@ -298,6 +299,8 @@
                 field = $('#' + fieldId),
                 preview = field.find('.tf-icon-preview'),
                 icon = $('.tf-icon-list li.active').data('icon');
+
+            console.log('fieldId2', fieldId);
 
             if (icon) {
                 preview.removeClass('tf-hide');
@@ -431,9 +434,11 @@
         $('textarea.wp_editor').each(function () {
             let $id = $(this).attr('id');
             TF_wp_editor($id);
-        }); 
+        });
+
+
         /*
-        * Options WP editor
+        * Add New Repeater Item
         * @author: Sydur
         */
         $(document).on('click', '.tf-repeater-icon-add', function () {
@@ -496,6 +501,15 @@
                     $(this).attr("for", for_value);
                 }
             });
+            // Update Icon select id
+            add_value.find('.tf-icon-select').each(function (index) {
+                var icon_id = $(this).attr("id");
+                if (typeof icon_id !== "undefined") {
+                    icon_id = icon_id+index+count;
+                    $(this).attr("id", icon_id)
+
+                }
+            });
              // Update Data depend id
             add_value.find('[data-depend-id]').each(function () {
                 var data_depend_id = $(this).attr("data-depend-id"); 
@@ -545,7 +559,10 @@
             return false;
         });
 
-        // Repeater Clone exiting Value
+        /*
+        * Clone Repeater Item
+        * @author: Sydur
+        */
         $(document).on('click', '.tf-repeater-icon-clone', function () {
             var $this_parent = $(this).closest('.tf-repeater-wrap');
             let clone_value = $(this).closest('.tf-single-repeater').clone();
@@ -600,6 +617,15 @@
                 if (typeof for_value !== "undefined") {
                     for_value = for_value.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
                     var for_value = $(this).attr("for", for_value);
+                }
+            });
+            // Update Icon select id
+            clone_value.find('.tf-icon-select').each(function (index) {
+                var icon_id = $(this).attr("id");
+                if (typeof icon_id !== "undefined") {
+                    icon_id = icon_id+index+count;
+                    $(this).attr("id", icon_id)
+
                 }
             });
             // Replace Data depend id ID
