@@ -780,7 +780,7 @@ var frame, gframe;
 
                 var attachment = frame.state().get('selection').first().toJSON();
                 $('input[name="' + fieldname + '"]').val(attachment.url);
-                $('.' + tf_preview_class + '').html(`<div class="tf-image-close" tf-field-name='${fieldname}'>✖</div><img src='${attachment.sizes.thumbnail.url}' />`);
+                $('.' + tf_preview_class + '').html(`<div class="tf-image-close" tf-field-name='${fieldname}'>✖</div><img src='${attachment.url}' />`);
             });
             frame.open();
             return false;
@@ -822,8 +822,8 @@ var frame, gframe;
                 for (i in attachments) {
                     var attachment = attachments[i];
                     image_ids.push(attachment.id);
-                    image_urls.push(attachment.sizes.thumbnail.url);
-                    $('.tf-fieldset > .' + tf_preview_class + '').append(`<img src='${attachment.sizes.thumbnail.url}' />`);
+                    image_urls.push(attachment.url);
+                    $('.tf-fieldset > .' + tf_preview_class + '').append(`<img src='${attachment.url}' />`);
                 }
                 $('input[name="' + fieldname + '"]').val(image_ids.join(","));
                 $('a.' + tf_preview_class + '').css("display", "inline-block");

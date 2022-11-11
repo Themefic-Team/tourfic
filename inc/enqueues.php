@@ -79,7 +79,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 $showlinegraph = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-line-graph']) ? tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-line-graph'] : false;
                 $showitinerarychart = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-chart']) ? tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-chart'] : false;
                 $showitinerarystatus = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-status']) ? tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-status'] : false;
-                $elevvationmode = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['elevtion_type']=="Feet") ? "Feet" : "Meter";
+                $elevvationmode = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['elevtion_type']) && tf_data_types(tfopt( 'itinerary-builder-setings' ))['elevtion_type']=="Feet" ? "Feet" : "Meter";
             }
         }
         wp_enqueue_style( 'tf-search-style', TF_ASSETS_URL . 'css/search-result.css', null, '' );
