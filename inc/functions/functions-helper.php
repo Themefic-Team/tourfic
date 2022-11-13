@@ -22,6 +22,7 @@ function tf_documentation_page_integration() {
 	global $submenu;
 	$tfhoteldocumentation = sanitize_url('https://themefic.com/docs/tourfic/');
 	$tftourdocumentation = sanitize_url('https://themefic.com/docs/tourfic/');
+
 	$submenu['edit.php?post_type=tf_hotel'][] = array( '<span style=color:#ffba00;">Go to Documentation</span>', 'edit_tf_hotels', $tfhoteldocumentation );
 	$submenu['edit.php?post_type=tf_tours'][] = array( '<span style=color:#ffba00;">Go to Documentation</span>', 'edit_tf_tourss', $tftourdocumentation );
 }
@@ -32,6 +33,7 @@ function tf_documentation_page_integration() {
 
 function tf_hotel_tour_docs() {
     add_meta_box( 'tfhotel_docs', __( 'Tourfic Documantation', 'tourfic' ), 'tf_hotel_docs_callback','tf_hotel','side' ,'high');
+
     add_meta_box( 'tftour_docs', __( 'Tourfic Documantation', 'tourfic' ), 'tf_tour_docs_callback','tf_tours','side' ,'high');
 }
 add_action( 'add_meta_boxes', 'tf_hotel_tour_docs' );
