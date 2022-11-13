@@ -1,5 +1,7 @@
 const {select, dispatch} = wp.data;
 
+//required taxonomies
+
 function TfPrePublishCheck() {
     let lockPost = false;
     tf_params.error = false;

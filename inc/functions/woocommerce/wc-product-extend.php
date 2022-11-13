@@ -6,6 +6,8 @@ defined( 'ABSPATH' ) || exit;
  * Enable tour and hotel add to cart
  * 
  * Extend WooCommerce Product data
+ *
+ * @since 1.0.0
  */
 class TF_Product_Data_Store_CPT extends WC_Product_Data_Store_CPT implements WC_Object_Data_Store_Interface, WC_Product_Data_Store_Interface {
 

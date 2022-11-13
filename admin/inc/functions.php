@@ -6,6 +6,8 @@ defined( 'ABSPATH' ) || exit;
  * Require some taxonomies
  * 
  * hotel_location, tour_destination
+ *
+ * @since 1.0.0
  */
 function tf_required_taxonomies( $hook ) {
 	if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ) ) ) {

@@ -3,8 +3,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Tour booking ajax function
- * 
  * @since 2.2.0
+ * @return void
  */
 add_action( 'wp_ajax_tf_tours_booking', 'tf_tours_booking_function' );
 add_action( 'wp_ajax_nopriv_tf_tours_booking', 'tf_tours_booking_function' );

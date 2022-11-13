@@ -1,13 +1,13 @@
 /**
  * Common
  */
-.tf-post-states{
+.tf-post-states {
     display: inline-block;
     font-size: 11px;
     padding: 1px 8px;
     border-radius: 10px;
     background: #333;
-    color: #fff; 
+    color: #fff;
 }
 
 /** 
@@ -46,10 +46,12 @@
     font-size: 12px;
     font-weight: 600;
 }
+
 .tf-csf-badge .tf-upcoming {
     background: #006600;
     margin-right: 5px;
 }
+
 .tf-csf-badge .tf-pro {
     background: #b30000;
 }
@@ -65,7 +67,7 @@
 /**
  * General Settings
  */
- .document-button {
+.document-button {
     display: block;
     background: #ddd;
     color: #050505;
@@ -78,6 +80,7 @@
     transition: 0.3s;
     text-decoration: none;
 }
+
 .document-button:hover {
     background: #135e96;
     color: #fff;
@@ -93,36 +96,45 @@
     display: -ms-flexbox;
     display: flex;
 }
+
 .tf-major-update-warning__separator {
     margin: 15px -12px;
 }
+
 .tf-major-update-warning__icon {
     margin-right: 9px;
     margin-left: 2px;
 }
-.tf-major-update-warning__icon svg{
+
+.tf-major-update-warning__icon svg {
     width: 18px;
     height: 18px;
     padding: 0;
     margin: 0;
     line-height: 1;
 }
+
 .tf-major-update-warning__title {
     font-weight: 600;
     margin-bottom: 10px;
 }
+
 .tf-major-update-warning + p {
     display: none;
 }
+
 .notice-success .tf-major-update-warning__separator {
     border: 1px solid #46b450;
 }
+
 .notice-success .tf-major-update-warning__icon {
     fill: #79ba49;
-} 
+}
+
 .notice-warning .tf-major-update-warning__separator {
     border: 1px solid #ffb900;
-} 
+}
+
 .notice-warning .tf-major-update-warning__icon {
     fill: #f56e28;
 }
@@ -134,28 +146,33 @@
 .disable-sortable .csf-repeater-clone {
     display: none !important;
 }
+
 /**
  * Override Codestar repeater for Hotel Room
  */
-.csf-section .room-repeater > .csf-title{
+.csf-section .room-repeater > .csf-title {
     width: 100%;
     margin: 0 0 20px 0;
     font-size: 18px;
 }
-.csf-section .room-repeater > .csf-fieldset{
+
+.csf-section .room-repeater > .csf-fieldset {
     width: 100%;
 }
+
 .csf-section .room-repeater .csf-repeater-wrapper .csf-repeater-item {
     margin: 0 0 20px 0;
     border-bottom: 2px solid #2271b1;
 }
 
-.csf-section .room-repeater .repeater-by-date > .csf-title{
+.csf-section .room-repeater .repeater-by-date > .csf-title {
     display: none;
 }
-.csf-section .room-repeater .repeater-by-date > .csf-fieldset{
+
+.csf-section .room-repeater .repeater-by-date > .csf-fieldset {
     width: 100%;
 }
+
 .csf-section .room-repeater .repeater-by-date .csf-repeater-wrapper .csf-repeater-item {
     margin: 0 0 20px 0;
     border-bottom: 1px solid #eee;
@@ -167,12 +184,15 @@
 #adminmenu .toplevel_page_tourfic .dashicons-before:before {
     color: #8bc34a;
 }
+
 #adminmenu .menu-icon-tf_hotel .dashicons-before:before {
     color: #03a9f4;
 }
+
 #adminmenu .menu-icon-tf_tours .dashicons-before:before {
     color: #ffc107;
 }
+
 #adminmenu .menu-icon-tf_apartment .dashicons-before:before {
     color: #f02348;
 }
