@@ -2,6 +2,7 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+
 /**
  * WC Product Extend
  */

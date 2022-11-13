@@ -138,4 +138,3 @@ function tf_save_custom_fields(){
 }
 add_action( 'admin_init', 'tf_save_custom_fields' );
 
-?>

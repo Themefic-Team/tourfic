@@ -18,7 +18,8 @@ if( class_exists( 'CSF' ) ) {
     'footer_credit'           =>   __( '<em>Enjoyed <strong>Tourfic</strong>? Please leave us a <a style="color:#e9570a;" href="https://wordpress.org/support/plugin/tourfic/reviews/?filter=5/#new-post" target="_blank">★★★★★</a> rating. We really appreciate your support!</em>', 'tourfic' ),  
   ) );
 
-  
+
+
     /**
      * General Options
      * 

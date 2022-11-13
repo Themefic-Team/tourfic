@@ -34,6 +34,7 @@ function TfPrePublishCheck() {
     } else {
         dispatch('core/editor').unlockPostSaving();
     }
+
 }
 
 TfPrePublishCheck();

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Price calculation for single tour
  */

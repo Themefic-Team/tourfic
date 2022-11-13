@@ -6,7 +6,8 @@ $badge_pro    = '<div class="tf-csf-badge"><span class="tf-pro">' .__("Pro Featu
 $badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' .__("Upcoming", "tourfic"). '</span><span class="tf-pro">' .__("Pro Feature", "tourfic"). '</span></div>';
 
 if( class_exists( 'CSF' ) ) {
-  
+
+
     // Hotel options
     $prefix = 'tf_hotel';
 

@@ -19,6 +19,7 @@
     user-select: none;
     border-top: 1px solid #eee;
 }
+
 .csf-section .csf-field.tf-csf-disable .clear:before {
     content: "";
     left: 0;

@@ -40,6 +40,7 @@ if ( class_exists( 'CSF' ) ) {
                 ),
             ),
 
+
             array(
                 'id'    => 'tour_gallery',
                 'type'  => 'gallery',

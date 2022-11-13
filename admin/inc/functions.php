@@ -11,6 +11,7 @@ function tf_required_taxonomies( $hook ) {
 	if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ) ) ) {
 		return;
 	}
+
 	global $post_type;
 
 	$tf_is_gutenberg_active = tf_is_gutenberg_active();

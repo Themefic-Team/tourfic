@@ -10,7 +10,8 @@ jQuery(function ($) {
 			y: 'bottom',
 		},
 	});
-	
+
+
     function tf_event_handler(e) {
         tf_params.error = false;
         $.each(tf_params.taxonomies, function (taxonomy, config) {
