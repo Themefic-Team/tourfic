@@ -1,3 +1,6 @@
+.search-result-wrapper{
+    padding: 30px 0;
+}
 .search-result-inner {
     display: grid;
     grid-template-columns: 75% 25%;
@@ -126,10 +129,18 @@
     max-width: 50%;
 }
 
-#am_posts_navigation {
-    display: none;
+a.page-numbers {
+    background: #003162;
+    color: #fff;
+    padding: 5px 15px;
 }
-
+.archive_ajax_result.loading {
+    opacity: 0.3;
+}
+.tf_posts_navigation .page-numbers.current {
+    background: #c9ddfa;
+    padding: 5px 15px;
+}
 .tf-archive-shortdesc, .tf-tour-desc {
     line-height: 1.8;
     margin: 5px 0 10px;
@@ -145,7 +156,16 @@
     max-width: 120px;
     line-height: 1;
     margin-left: auto;
-  }
+}
+
+.tf-room-price {
+    margin-top: 10px;
+}
+
+.tf-room-price .amount, .tf-tour-price .amount {
+    font-weight: bold;
+    margin-left: 5px;
+}
 .single-tour-wrap,
 .single-tour-wrap * {
     transition: all 0.3s ease-out;
@@ -154,12 +174,11 @@
 .tf-action-top {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 10px 0;
     margin-bottom: 15px;
     border-bottom: 1px solid #ddd;
     border-top: 1px solid #ddd;
-    margin-top: 10px;
 }
 
 .tf-list-grid {
@@ -268,7 +287,10 @@
     text-align: left;
     margin: 10px 0;
 }
-
+.archive_ajax_result .tf-tour-price {
+    display: flex;
+    justify-content: end;
+}
 @media only screen and (max-width: 991px) {
     .widget_tf_hotel_filter {
         margin-top: 20px;

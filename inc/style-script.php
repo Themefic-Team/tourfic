@@ -35,22 +35,22 @@ if( !function_exists( 'tf_custom_css' ) ){
 	function tf_custom_css(){
 		// Store as PHP variables
 		// Common CSS
-		$tf_primary_color_reg = !empty(tfopt( 'tourfic-button-color' )['regular']) ? tfopt( 'tourfic-button-color' )['regular'] : '';
-		$tf_primary_color_hov = !empty(tfopt( 'tourfic-button-color' )['hover']) ? tfopt( 'tourfic-button-color' )['hover'] : '';
-		$tf_primary_bg_color_reg = !empty(tfopt( 'tourfic-button-bg-color' )['regular']) ? tfopt( 'tourfic-button-bg-color' )['regular'] : '';
-		$tf_primary_bg_color_hov = !empty(tfopt( 'tourfic-button-bg-color' )['hover']) ? tfopt( 'tourfic-button-bg-color' )['hover'] : '';
-		$tf_sidebar_gradient_one_reg = !empty(tfopt( 'tourfic-sidebar-booking' )['gradient_one_reg']) ? tfopt( 'tourfic-sidebar-booking' )['gradient_one_reg'] : '';
-		$tf_sidebar_gradient_two_reg = !empty(tfopt( 'tourfic-sidebar-booking' )['gradient_two_reg']) ? tfopt( 'tourfic-sidebar-booking' )['gradient_two_reg'] : '';
-		$tf_faq_color = !empty(tfopt( 'tourfic-faq-style' )['faq_color']) ? tfopt( 'tourfic-faq-style' )['faq_color'] : '';
-		$tf_faq_icon_color = !empty(tfopt( 'tourfic-faq-style' )['faq_icon_color']) ? tfopt( 'tourfic-faq-style' )['faq_icon_color'] : '';
-		$tf_faq_border_color = !empty(tfopt( 'tourfic-faq-style' )['faq_border_color']) ? tfopt( 'tourfic-faq-style' )['faq_border_color'] : '';
-		$tf_rating_color = !empty(tfopt( 'tourfic-review-style' )['rating_color']) ? tfopt( 'tourfic-review-style' )['rating_color'] : '';
-		$tf_rating_bg_color = !empty(tfopt( 'tourfic-review-style' )['rating_bg_color']) ? tfopt( 'tourfic-review-style' )['rating_bg_color'] : '';
-		$tf_param_bg_color = !empty(tfopt( 'tourfic-review-style' )['param_bg_color']) ? tfopt( 'tourfic-review-style' )['param_bg_color'] : '';
-		$tf_param_txt_color = !empty(tfopt( 'tourfic-review-style' )['param_txt_color']) ? tfopt( 'tourfic-review-style' )['param_txt_color'] : '';
-		$tf_param_single_bg_color = !empty(tfopt( 'tourfic-review-style' )['param_single_bg_color']) ? tfopt( 'tourfic-review-style' )['param_single_bg_color'] : '';
-		$tf_review_color = !empty(tfopt( 'tourfic-review-style' )['review_color']) ? tfopt( 'tourfic-review-style' )['review_color'] : '';
-		$tf_review_bg_color = !empty(tfopt( 'tourfic-review-style' )['review_bg_color']) ? tfopt( 'tourfic-review-style' )['review_bg_color'] : '';
+		$tf_primary_color_reg = !empty(tf_data_types(tfopt( 'tourfic-button-color' ))['regular']) ? tf_data_types(tfopt( 'tourfic-button-color' ))['regular'] : '';
+		$tf_primary_color_hov = !empty(tf_data_types(tfopt( 'tourfic-button-color' ))['hover']) ? tf_data_types(tfopt( 'tourfic-button-color' ))['hover'] : '';
+		$tf_primary_bg_color_reg = !empty(tf_data_types(tfopt( 'tourfic-button-bg-color' ))['regular']) ? tf_data_types(tfopt( 'tourfic-button-bg-color' ))['regular'] : '';
+		$tf_primary_bg_color_hov = !empty(tf_data_types(tfopt( 'tourfic-button-bg-color' ))['hover']) ? tf_data_types(tfopt( 'tourfic-button-bg-color' ))['hover'] : '';
+		$tf_sidebar_gradient_one_reg = !empty(tf_data_types(tfopt( 'tourfic-sidebar-booking' ))['gradient_one_reg']) ? tf_data_types(tfopt( 'tourfic-sidebar-booking' ))['gradient_one_reg'] : '';
+		$tf_sidebar_gradient_two_reg = !empty(tf_data_types(tfopt( 'tourfic-sidebar-booking' ))['gradient_two_reg']) ? tf_data_types(tfopt( 'tourfic-sidebar-booking' ))['gradient_two_reg'] : '';
+		$tf_faq_color = !empty(tf_data_types(tfopt( 'tourfic-faq-style' ))['faq_color']) ? tf_data_types(tfopt( 'tourfic-faq-style' ))['faq_color'] : '';
+		$tf_faq_icon_color = !empty(tf_data_types(tfopt( 'tourfic-faq-style' ))['faq_icon_color']) ? tf_data_types(tfopt( 'tourfic-faq-style' ))['faq_icon_color'] : '';
+		$tf_faq_border_color = !empty(tf_data_types(tfopt( 'tourfic-faq-style' ))['faq_border_color']) ? tf_data_types(tfopt( 'tourfic-faq-style' ))['faq_border_color'] : '';
+		$tf_rating_color = !empty(tf_data_types(tfopt( 'tourfic-review-style' ))['rating_color']) ? tf_data_types(tfopt( 'tourfic-review-style' ))['rating_color'] : '';
+		$tf_rating_bg_color = !empty(tf_data_types(tfopt( 'tourfic-review-style' ))['rating_bg_color']) ? tf_data_types(tfopt( 'tourfic-review-style' ))['rating_bg_color'] : '';
+		$tf_param_bg_color = !empty(tf_data_types(tfopt( 'tourfic-review-style' ))['param_bg_color']) ? tf_data_types(tfopt( 'tourfic-review-style' ))['param_bg_color'] : '';
+		$tf_param_txt_color = !empty(tf_data_types(tfopt( 'tourfic-review-style' ))['param_txt_color']) ? tf_data_types(tfopt( 'tourfic-review-style' ))['param_txt_color'] : '';
+		$tf_param_single_bg_color = !empty(tf_data_types(tfopt( 'tourfic-review-style' ))['param_single_bg_color']) ? tf_data_types(tfopt( 'tourfic-review-style' ))['param_single_bg_color'] : '';
+		$tf_review_color = !empty(tf_data_types(tfopt( 'tourfic-review-style' ))['review_color']) ? tf_data_types(tfopt( 'tourfic-review-style' ))['review_color'] : '';
+		$tf_review_bg_color = !empty(tf_data_types(tfopt( 'tourfic-review-style' ))['review_bg_color']) ? tf_data_types(tfopt( 'tourfic-review-style' ))['review_bg_color'] : '';
 		
 		$output = '';
 		
@@ -117,18 +117,18 @@ if( !function_exists( 'tf_hotel_css' ) ){
 	function tf_hotel_css(){
 		// Store as PHP variables
 		// Hotel CSS
-		$tf_hotel_type_color = !empty(tfopt( 'tourfic-hotel-type-bg-color' )['regular']) ? tfopt( 'tourfic-hotel-type-bg-color' )['regular'] : '';
-		$tf_hotel_type_bg_color = !empty(tfopt( 'tourfic-hotel-type-bg-color' )['hover']) ? tfopt( 'tourfic-hotel-type-bg-color' )['hover'] : '';
-		$tf_share_color_reg = !empty(tfopt( 'tourfic-hotel-share-icon' )['regular']) ? tfopt( 'tourfic-hotel-share-icon' )['regular'] : '';
-		$tf_share_color_hov = !empty(tfopt( 'tourfic-hotel-share-icon' )['hover']) ? tfopt( 'tourfic-hotel-share-icon' )['hover'] : '';
-		$tf_gradient_one_reg = !empty(tfopt( 'tourfic-hotel-map-button' )['gradient_one_reg']) ? tfopt( 'tourfic-hotel-map-button' )['gradient_one_reg'] : '';
-		$tf_gradient_two_reg = !empty(tfopt( 'tourfic-hotel-map-button' )['gradient_two_reg']) ? tfopt( 'tourfic-hotel-map-button' )['gradient_two_reg'] : '';
-		$tf_gradient_one_hov = !empty(tfopt( 'tourfic-hotel-map-button' )['gradient_one_hov']) ? tfopt( 'tourfic-hotel-map-button' )['gradient_one_hov'] : '';
-		$tf_gradient_two_hov = !empty(tfopt( 'tourfic-hotel-map-button' )['gradient_two_hov']) ? tfopt( 'tourfic-hotel-map-button' )['gradient_two_hov'] : '';
-		$tf_hotel_features = !empty(tfopt( 'tourfic-hotel-features-color' )['regular']) ? tfopt( 'tourfic-hotel-features-color' )['regular'] : '';
-		$tf_hotel_table_color = !empty(tfopt( 'tourfic-hotel-table-style' )['table_color']) ? tfopt( 'tourfic-hotel-table-style' )['table_color'] : '';
-		$tf_hotel_table_bg_color = !empty(tfopt( 'tourfic-hotel-table-style' )['table_bg_color']) ? tfopt( 'tourfic-hotel-table-style' )['table_bg_color'] : '';
-		$tf_hotel_table_border_color = !empty(tfopt( 'tourfic-hotel-table-style' )['table_border_color']) ? tfopt( 'tourfic-hotel-table-style' )['table_border_color'] : '';
+		$tf_hotel_type_color = !empty(tf_data_types(tfopt( 'tourfic-hotel-type-bg-color' ))['regular']) ? tf_data_types(tfopt( 'tourfic-hotel-type-bg-color' ))['regular'] : '';
+		$tf_hotel_type_bg_color = !empty(tf_data_types(tfopt( 'tourfic-hotel-type-bg-color' ))['hover']) ? tf_data_types(tfopt( 'tourfic-hotel-type-bg-color' ))['hover'] : '';
+		$tf_share_color_reg = !empty(tf_data_types(tfopt( 'tourfic-hotel-share-icon' ))['regular']) ? tf_data_types(tfopt( 'tourfic-hotel-share-icon' ))['regular'] : '';
+		$tf_share_color_hov = !empty(tf_data_types(tfopt( 'tourfic-hotel-share-icon' ))['hover']) ? tf_data_types(tfopt( 'tourfic-hotel-share-icon' ))['hover'] : '';
+		$tf_gradient_one_reg = !empty(tf_data_types(tfopt( 'tourfic-hotel-map-button' ))['gradient_one_reg']) ? tf_data_types(tfopt( 'tourfic-hotel-map-button' ))['gradient_one_reg'] : '';
+		$tf_gradient_two_reg = !empty(tf_data_types(tfopt( 'tourfic-hotel-map-button' ))['gradient_two_reg']) ? tf_data_types(tfopt( 'tourfic-hotel-map-button' ))['gradient_two_reg'] : '';
+		$tf_gradient_one_hov = !empty(tf_data_types(tfopt( 'tourfic-hotel-map-button' ))['gradient_one_hov']) ? tf_data_types(tfopt( 'tourfic-hotel-map-button' ))['gradient_one_hov'] : '';
+		$tf_gradient_two_hov = !empty(tf_data_types(tfopt( 'tourfic-hotel-map-button' ))['gradient_two_hov']) ? tf_data_types(tfopt( 'tourfic-hotel-map-button' ))['gradient_two_hov'] : '';
+		$tf_hotel_features = !empty(tf_data_types(tfopt( 'tourfic-hotel-features-color' ))['regular']) ? tf_data_types(tfopt( 'tourfic-hotel-features-color' ))['regular'] : '';
+		$tf_hotel_table_color = !empty(tf_data_types(tfopt( 'tourfic-hotel-table-style' ))['table_color']) ? tf_data_types(tfopt( 'tourfic-hotel-table-style' ))['table_color'] : '';
+		$tf_hotel_table_bg_color = !empty(tf_data_types(tfopt( 'tourfic-hotel-table-style' ))['table_bg_color']) ? tf_data_types(tfopt( 'tourfic-hotel-table-style' ))['table_bg_color'] : '';
+		$tf_hotel_table_border_color = !empty(tf_data_types(tfopt( 'tourfic-hotel-table-style' ))['table_border_color']) ? tf_data_types(tfopt( 'tourfic-hotel-table-style' ))['table_border_color'] : '';
 		
 		$output = '';
 		
@@ -173,36 +173,36 @@ if( !function_exists( 'tf_tour_css' ) ){
 	function tf_tour_css(){
 		// Store as PHP variables
 		// Tour CSS
-		$tf_tour_sale_price = !empty(tfopt( 'tourfic-tour-pricing-color' )['sale_price']) ? tfopt( 'tourfic-tour-pricing-color' )['sale_price'] : '';
-		$tf_tour_org_price = !empty(tfopt( 'tourfic-tour-pricing-color' )['org_price']) ? tfopt( 'tourfic-tour-pricing-color' )['org_price'] : '';
-		$tf_tour_tab_text = !empty(tfopt( 'tourfic-tour-pricing-color' )['tab_text']) ? tfopt( 'tourfic-tour-pricing-color' )['tab_text'] : '';
-		$tf_tour_tab_bg = !empty(tfopt( 'tourfic-tour-pricing-color' )['tab_bg']) ? tfopt( 'tourfic-tour-pricing-color' )['tab_bg'] : '';
-		$tf_tour_active_tab_text = !empty(tfopt( 'tourfic-tour-pricing-color' )['active_tab_text']) ? tfopt( 'tourfic-tour-pricing-color' )['active_tab_text'] : '';
-		$tf_tour_active_tab_bg = !empty(tfopt( 'tourfic-tour-pricing-color' )['active_tab_bg']) ? tfopt( 'tourfic-tour-pricing-color' )['active_tab_bg'] : '';
-		$tf_tour_tab_border = !empty(tfopt( 'tourfic-tour-pricing-color' )['tab_border']) ? tfopt( 'tourfic-tour-pricing-color' )['tab_border'] : '';
-		$tf_tour_icon_color = !empty(tfopt( 'tourfic-tour-info-color' )['icon_color']) ? tfopt( 'tourfic-tour-info-color' )['icon_color'] : '';
-		$tf_tour_heading_color = !empty(tfopt( 'tourfic-tour-info-color' )['heading_color']) ? tfopt( 'tourfic-tour-info-color' )['heading_color'] : '';
-		$tf_tour_text_color = !empty(tfopt( 'tourfic-tour-info-color' )['text_color']) ? tfopt( 'tourfic-tour-info-color' )['text_color'] : '';
-		$tf_tour_bg_one = !empty(tfopt( 'tourfic-tour-info-color' )['bg_one']) ? tfopt( 'tourfic-tour-info-color' )['bg_one'] : '';
-		$tf_tour_bg_two = !empty(tfopt( 'tourfic-tour-info-color' )['bg_two']) ? tfopt( 'tourfic-tour-info-color' )['bg_two'] : '';
-		$tf_tour_bg_three = !empty(tfopt( 'tourfic-tour-info-color' )['bg_three']) ? tfopt( 'tourfic-tour-info-color' )['bg_three'] : '';
-		$tf_tour_bg_four = !empty(tfopt( 'tourfic-tour-info-color' )['bg_four']) ? tfopt( 'tourfic-tour-info-color' )['bg_four'] : '';
-		$tf_tour_btn_col = !empty(tfopt( 'tourfic-tour-sticky-booking' )['btn_col']) ? tfopt( 'tourfic-tour-sticky-booking' )['btn_col'] : '';
-		$tf_tour_btn_bg = !empty(tfopt( 'tourfic-tour-sticky-booking' )['btn_bg']) ? tfopt( 'tourfic-tour-sticky-booking' )['btn_bg'] : '';
-		$tf_tour_btn_hov_bg = !empty(tfopt( 'tourfic-tour-sticky-booking' )['btn_hov_bg']) ? tfopt( 'tourfic-tour-sticky-booking' )['btn_hov_bg'] : '';
-		$tf_tour_btn_hov_col = !empty(tfopt( 'tourfic-tour-sticky-booking' )['btn_hov_col']) ? tfopt( 'tourfic-tour-sticky-booking' )['btn_hov_col'] : '';
-		$tf_tour_form_background = !empty(tfopt( 'tourfic-tour-sticky-booking' )['form_background']) ? tfopt( 'tourfic-tour-sticky-booking' )['form_background'] : '';
-		$tf_tour_form_border = !empty(tfopt( 'tourfic-tour-sticky-booking' )['form_border']) ? tfopt( 'tourfic-tour-sticky-booking' )['form_border'] : '';
-		$tf_inc_gradient_one_reg = !empty(tfopt( 'tourfic-include-exclude' )['gradient_one_reg']) ? tfopt( 'tourfic-include-exclude' )['gradient_one_reg'] : '';
-		$tf_inc_gradient_two_reg = !empty(tfopt( 'tourfic-include-exclude' )['gradient_two_reg']) ? tfopt( 'tourfic-include-exclude' )['gradient_two_reg'] : '';
-		$tf_inc_heading_color = !empty(tfopt( 'tourfic-include-exclude' )['heading_color']) ? tfopt( 'tourfic-include-exclude' )['heading_color'] : '';
-		$tf_inc_text_color = !empty(tfopt( 'tourfic-include-exclude' )['text_color']) ? tfopt( 'tourfic-include-exclude' )['text_color'] : '';
-		$tf_itin_time_day_txt = !empty(tfopt( 'tourfic-tour-itinerary' )['time_day_txt']) ? tfopt( 'tourfic-tour-itinerary' )['time_day_txt'] : '';
-		$tf_itin_time_day_bg = !empty(tfopt( 'tourfic-tour-itinerary' )['time_day_bg']) ? tfopt( 'tourfic-tour-itinerary' )['time_day_bg'] : '';
-		$tf_itin_heading_color = !empty(tfopt( 'tourfic-tour-itinerary' )['heading_color']) ? tfopt( 'tourfic-tour-itinerary' )['heading_color'] : '';
-		$tf_itin_text_color = !empty(tfopt( 'tourfic-tour-itinerary' )['text_color']) ? tfopt( 'tourfic-tour-itinerary' )['text_color'] : '';
-		$tf_itin_bg_color = !empty(tfopt( 'tourfic-tour-itinerary' )['bg_color']) ? tfopt( 'tourfic-tour-itinerary' )['bg_color'] : '';
-		$tf_itin_icon_color = !empty(tfopt( 'tourfic-tour-itinerary' )['icon_color']) ? tfopt( 'tourfic-tour-itinerary' )['icon_color'] : '';
+		$tf_tour_sale_price = !empty(tf_data_types(tfopt( 'tourfic-tour-pricing-color' ))['sale_price']) ? tf_data_types(tfopt( 'tourfic-tour-pricing-color' ))['sale_price'] : '';
+		$tf_tour_org_price = !empty(tf_data_types(tfopt( 'tourfic-tour-pricing-color' ))['org_price']) ? tf_data_types(tfopt( 'tourfic-tour-pricing-color' ))['org_price'] : '';
+		$tf_tour_tab_text = !empty(tf_data_types(tfopt( 'tourfic-tour-pricing-color' ))['tab_text']) ? tf_data_types(tfopt( 'tourfic-tour-pricing-color' ))['tab_text'] : '';
+		$tf_tour_tab_bg = !empty(tf_data_types(tfopt( 'tourfic-tour-pricing-color' ))['tab_bg']) ? tf_data_types(tfopt( 'tourfic-tour-pricing-color' ))['tab_bg'] : '';
+		$tf_tour_active_tab_text = !empty(tf_data_types(tfopt( 'tourfic-tour-pricing-color' ))['active_tab_text']) ? tf_data_types(tfopt( 'tourfic-tour-pricing-color' ))['active_tab_text'] : '';
+		$tf_tour_active_tab_bg = !empty(tf_data_types(tfopt( 'tourfic-tour-pricing-color' ))['active_tab_bg']) ? tf_data_types(tfopt( 'tourfic-tour-pricing-color' ))['active_tab_bg'] : '';
+		$tf_tour_tab_border = !empty(tf_data_types(tfopt( 'tourfic-tour-pricing-color' ))['tab_border']) ? tf_data_types(tfopt( 'tourfic-tour-pricing-color' ))['tab_border'] : '';
+		$tf_tour_icon_color = !empty(tf_data_types(tfopt( 'tourfic-tour-info-color' ))['icon_color']) ? tf_data_types(tfopt( 'tourfic-tour-info-color' ))['icon_color'] : '';
+		$tf_tour_heading_color = !empty(tf_data_types(tfopt( 'tourfic-tour-info-color' ))['heading_color']) ? tf_data_types(tfopt( 'tourfic-tour-info-color' ))['heading_color'] : '';
+		$tf_tour_text_color = !empty(tf_data_types(tfopt( 'tourfic-tour-info-color' ))['text_color']) ? tf_data_types(tfopt( 'tourfic-tour-info-color' ))['text_color'] : '';
+		$tf_tour_bg_one = !empty(tf_data_types(tfopt( 'tourfic-tour-info-color' ))['bg_one']) ? tf_data_types(tfopt( 'tourfic-tour-info-color' ))['bg_one'] : '';
+		$tf_tour_bg_two = !empty(tf_data_types(tfopt( 'tourfic-tour-info-color' ))['bg_two']) ? tf_data_types(tfopt( 'tourfic-tour-info-color' ))['bg_two'] : '';
+		$tf_tour_bg_three = !empty(tf_data_types(tfopt( 'tourfic-tour-info-color' ))['bg_three']) ? tf_data_types(tfopt( 'tourfic-tour-info-color' ))['bg_three'] : '';
+		$tf_tour_bg_four = !empty(tf_data_types(tfopt( 'tourfic-tour-info-color' ))['bg_four']) ? tf_data_types(tfopt( 'tourfic-tour-info-color' ))['bg_four'] : '';
+		$tf_tour_btn_col = !empty(tf_data_types(tfopt( 'tourfic-tour-sticky-booking' ))['btn_col']) ? tf_data_types(tfopt( 'tourfic-tour-sticky-booking' ))['btn_col'] : '';
+		$tf_tour_btn_bg = !empty(tf_data_types(tfopt( 'tourfic-tour-sticky-booking' ))['btn_bg']) ? tf_data_types(tfopt( 'tourfic-tour-sticky-booking' ))['btn_bg'] : '';
+		$tf_tour_btn_hov_bg = !empty(tf_data_types(tfopt( 'tourfic-tour-sticky-booking' ))['btn_hov_bg']) ? tf_data_types(tfopt( 'tourfic-tour-sticky-booking' ))['btn_hov_bg'] : '';
+		$tf_tour_btn_hov_col = !empty(tf_data_types(tfopt( 'tourfic-tour-sticky-booking' ))['btn_hov_col']) ? tf_data_types(tfopt( 'tourfic-tour-sticky-booking' ))['btn_hov_col'] : '';
+		$tf_tour_form_background = !empty(tf_data_types(tfopt( 'tourfic-tour-sticky-booking' ))['form_background']) ? tf_data_types(tfopt( 'tourfic-tour-sticky-booking' ))['form_background'] : '';
+		$tf_tour_form_border = !empty(tf_data_types(tfopt( 'tourfic-tour-sticky-booking' ))['form_border']) ? tf_data_types(tfopt( 'tourfic-tour-sticky-booking' ))['form_border'] : '';
+		$tf_inc_gradient_one_reg = !empty(tf_data_types(tfopt( 'tourfic-include-exclude' ))['gradient_one_reg']) ? tf_data_types(tfopt( 'tourfic-include-exclude' ))['gradient_one_reg'] : '';
+		$tf_inc_gradient_two_reg = !empty(tf_data_types(tfopt( 'tourfic-include-exclude' ))['gradient_two_reg']) ? tf_data_types(tfopt( 'tourfic-include-exclude' ))['gradient_two_reg'] : '';
+		$tf_inc_heading_color = !empty(tf_data_types(tfopt( 'tourfic-include-exclude' ))['heading_color']) ? tf_data_types(tfopt( 'tourfic-include-exclude' ))['heading_color'] : '';
+		$tf_inc_text_color = !empty(tf_data_types(tfopt( 'tourfic-include-exclude' ))['text_color']) ? tf_data_types(tfopt( 'tourfic-include-exclude' ))['text_color'] : '';
+		$tf_itin_time_day_txt = !empty(tf_data_types(tfopt( 'tourfic-tour-itinerary' ))['time_day_txt']) ? tf_data_types(tfopt( 'tourfic-tour-itinerary' ))['time_day_txt'] : '';
+		$tf_itin_time_day_bg = !empty(tf_data_types(tfopt( 'tourfic-tour-itinerary' ))['time_day_bg']) ? tf_data_types(tfopt( 'tourfic-tour-itinerary' ))['time_day_bg'] : '';
+		$tf_itin_heading_color = !empty(tf_data_types(tfopt( 'tourfic-tour-itinerary' ))['heading_color']) ? tf_data_types(tfopt( 'tourfic-tour-itinerary' ))['heading_color'] : '';
+		$tf_itin_text_color = !empty(tf_data_types(tfopt( 'tourfic-tour-itinerary' ))['text_color']) ? tf_data_types(tfopt( 'tourfic-tour-itinerary' ))['text_color'] : '';
+		$tf_itin_bg_color = !empty(tf_data_types(tfopt( 'tourfic-tour-itinerary' ))['bg_color']) ? tf_data_types(tfopt( 'tourfic-tour-itinerary' ))['bg_color'] : '';
+		$tf_itin_icon_color = !empty(tf_data_types(tfopt( 'tourfic-tour-itinerary' ))['icon_color']) ? tf_data_types(tfopt( 'tourfic-tour-itinerary' ))['icon_color'] : '';
 		
 		$output = '';
 		

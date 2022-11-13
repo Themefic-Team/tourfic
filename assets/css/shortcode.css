@@ -72,6 +72,19 @@ button.tf-tablinks:focus {
     display: none;
 }
 
+.tf-children-age-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tf-children-age {
+    flex-grow: 1;
+    width: 44%;
+    margin: 5px;
+}
+.tf-children-age select{
+    width: 100%;
+}
 
 .single_recomended_content {
     height: 270px;
@@ -166,6 +179,26 @@ button.tf-tablinks:focus {
     width: 25%;
 }
 
+.tf_destination-wrap .ui-menu-item:before {
+    content: "\f3c5";
+    font-weight: 900;
+    font-family: "Font Awesome 5 Free";
+    float: left;
+    font-size: 15px;
+    line-height: 25px;
+    margin-right: 5px;
+}
+
+div#tf-locationautocomplete-list div:before,div#tf-destinationautocomplete-list div:before{
+    content: "\f3c5";
+    font-weight: 900;
+    font-family: "Font Awesome 5 Free";
+    float: left;
+    font-size: 15px;                                                                                                                                                                                                                  
+    margin-right: 5px;
+	line-height: 24px;
+}
+
 .tf_submit-wrap {
     border-right: 0;
     background: #003162;
@@ -186,7 +219,10 @@ button.tf-tablinks:focus {
 .tf-wishlists a {
     text-decoration: none !important;
 }
-
+.tf-recent-room-price .amount {
+    font-weight: bold;
+    margin-top: 5px;
+}
 .recent-tour-slider h3,
 .recent-hotel-slider h3 {
     margin-bottom: 0 !important;
@@ -267,7 +303,9 @@ button.tf-tablinks:focus {
 .tf_form-inner .tf-hotel-results #ui-id-2 li:hover {
     background-color: #e9e9e9;
 }
-
+.tf-children-age select{
+    background-position-y: center;
+}
 .tf-more-info .form-group.form-check {
     width: 33%;
     float: left;
@@ -341,7 +379,7 @@ button.tf-tablinks:focus {
     margin: 0 !important;
     list-style: none;
     top: 100% !important;
-    height: 225px;
+    max-height: 225px;
     z-index: 99999;
     overflow-y: scroll;
     padding-left: 0px !important;
@@ -405,7 +443,7 @@ span.close-aq {
     height: 25px;
     background: #e00d0d;
     color: #fff;
-    line-height: 25px;
+    line-height: 20px;
     font-size: 20px;
     cursor: pointer;
 }
@@ -421,19 +459,34 @@ span.close-aq {
     width: 100%;
 }
 
+/*
+Booking form mobile version
+*/
+.tf-booking-form-tab-mobile {
+    display: none;
+}
+
+/* Hotel Grid Slider */
+.tf-hotel-grid .tf-slider-item {
+    width: 31%;
+    float: left;
+}
 
 /**************************************** RESPONSIVE **************************************/
 
 @media screen and (max-width: 767px) {
     .tf_form-inner .autocomplete-items {
-        top: 70px!important;
+        top: 70px !important;
     }
+
     .tf-more-info {
         width: 100%;
     }
+
     .tf_form-inner .tf-hotel-results #ui-id-1, .tf_form-inner .tf-hotel-results #ui-id-2 {
-        top: -255px!important;
+        top: -255px !important;
     }
+
     .tf_destination-wrap {
         padding: 10px !important;
         border-bottom: 1px solid #ccc;
@@ -461,6 +514,25 @@ span.close-aq {
         padding-left: 15px;
         padding-right: 15px;
     }
+
+    /*
+    Booking form mobile version
+    */
+    .tf-booking-form-tab{
+        display: none;
+    }
+    .tf-booking-form-tab-mobile {
+        display: block;
+    }
+    select[name="tf-booking-form-tab-select"] {
+        width: 100%;
+        background: transparent;
+        height: 45px;
+        padding: 10px !important;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
 }
 
 @media screen and (max-width: 450px) {

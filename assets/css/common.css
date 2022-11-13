@@ -1,6 +1,7 @@
 /**************** GLOBAL ITEMS ****************/
 .tf-main-wrapper {
     width: 100%;
+    padding: 30px 0;
 }
 
 .tf-container {
@@ -15,7 +16,7 @@
 }
 
 .gray-wrap {
-    background: #F5F8FF;
+    background-color: $blue0;
 }
 
 .section-heading {
@@ -112,7 +113,6 @@ h3.section-heading {
     box-shadow: 0 1px 8px transparent;
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.8s;
     text-align: center;
     line-height: 1;
     white-space: nowrap;
@@ -120,7 +120,7 @@ h3.section-heading {
 
 .tf-tooltip:hover .tf-top {
     visibility: visible;
-    opacity: 1;
+    opacity: 1;   
 }
 
 .tf-tooltip .tf-top i.tool-i {
@@ -238,7 +238,7 @@ h3.section-heading {
     text-decoration: none;
     background: #003162;
     width: 100%;
-    padding: 10px 20px;
+    padding: 10px 18px;
 
 }
 
@@ -262,6 +262,10 @@ h3.section-heading {
 .btn-styled:hover {
     color: #fff;
     background: #838383;
+}
+
+a.tf_button.btn-styled:focus {
+    color: #fff;
 }
 
 .btn-styled:hover:after {
@@ -1083,7 +1087,7 @@ h3.section-heading {
 #tf-faq-item .tf-faq-desc {
     background-color: #FFFFFF;
     display: none;
-    padding: 20px 0;
+    padding: 20px;
     color: #333333;
     margin-top: -2px;
     z-index: 999;

@@ -18,7 +18,7 @@ if ( class_exists( 'CSF' ) ) {
 			array(
 				'id'      => 'image',
 				'type'    => 'media',
-				'title'   => 'Upload destination photo',
+				'title'   => __( 'Upload destination photo', 'tourfic' ),
 				'library' => 'image',
 			),
 

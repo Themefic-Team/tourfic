@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-
+$post_per_page = tfopt('posts_per_page') ? tfopt('posts_per_page') : 10;
 $args = array(
     'post_type' => $post_type,
     'orderby'   => 'date',
@@ -16,14 +16,19 @@ $args = array(
         )
     ),
     'post_status'    => 'publish',
-    'paged'          => $paged,
+    //'paged'          => $paged,
+    //'posts_per_page' => $post_per_page
 );
 
 $loop = new WP_Query( $args );
+$total_posts = $loop->found_posts;
 ?>
 
 <div class="tf_search_result">
     <div class="tf-action-top">
+        <div class="tf-total-results">
+            <span><?php echo esc_html__( 'Total Results ', 'tourfic' ) . '(' . $total_posts . ')'; ?> </span>
+        </div>
         <div class="tf-list-grid">
             <a href="#list-view" data-id="list-view" class="change-view" title="<?php _e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
             <a href="#grid-view" data-id="grid-view" class="change-view" title="<?php _e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>

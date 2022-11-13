@@ -79,10 +79,10 @@ function tf_required_taxonomies( $hook ) {
 
 		if ( ! isset( $config['message'] ) || $taxonomy === $config ) {
 			$post_type_labels  = get_post_type_labels( get_post_type_object( $post_type ) );
-			$config['message'] = "Please choose at least one {$taxonomy_labels->singular_name} before publishing this {$post_type_labels->singular_name}.";
+			$config['message'] = sprintf( __( 'Please choose at least one %s before publishing this %s.', 'tourfic' ), $taxonomy_labels->singular_name, $post_type_labels->singular_name );
 		}
 
-		$post_types[ $post_type ][ $taxonomy ]['message'] = __( $config['message'], 'require-post-category' );
+		$post_types[ $post_type ][ $taxonomy ]['message'] = $config['message'];
 
 		if ( $tf_is_gutenberg_active && !empty($taxonomy_object->rest_base) && $taxonomy !== $taxonomy_object->rest_base ) {
 			$post_types[ $post_type ][ $taxonomy_object->rest_base ] = $post_types[ $post_type ][ $taxonomy ];

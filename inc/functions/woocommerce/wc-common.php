@@ -21,7 +21,14 @@ function tf_change_meta_key_title( $key, $meta, $item ) {
     if ( 'check_out' === $meta->key ) { $key = __( 'Check-out Date', 'tourfic'); }
     if ( 'due' === $meta->key ) { $key = __( 'Due', 'tourfic'); }
     if ( '_tour_id' === $meta->key ) { $key = __( 'Tour ID', 'tourfic'); }
-     
+    if ( 'Adults' === $meta->key ) { $key = __( 'Adults', 'tourfic'); }
+	if ( 'Children' === $meta->key ) { $key = __( 'Children', 'tourfic'); }
+	if ( 'Infants' === $meta->key ) { $key = __( 'Infants', 'tourfic'); }
+	if ( 'Tour Date' === $meta->key ) { $key = __( 'Tour Date', 'tourfic'); }
+	if ( 'Tour Time' === $meta->key ) { $key = __( 'Tour Time', 'tourfic'); }
+	if ( 'Tour Extra' === $meta->key ) { $key = __( 'Tour Extra', 'tourfic'); }
+	if ( 'Due' === $meta->key ) { $key = __( 'Due', 'tourfic'); }
+
     return $key;
 }
 add_filter( 'woocommerce_order_item_display_meta_key', 'tf_change_meta_key_title', 20, 3 );

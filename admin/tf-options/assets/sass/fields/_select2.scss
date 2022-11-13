@@ -1,0 +1,64 @@
+.tf-field-select2{
+
+  .select2-container{
+    width: 100% !important;
+
+    .select2-selection{
+      width: 100%;
+      padding: 10px 8px 0 12px;
+      border: 1px solid $slate20;
+      background-color: $blue0;
+      border-radius: 4px;
+      min-height: 48px;
+      color: $slate80;
+      font-size: 14px;
+
+      .select2-selection__choice {
+        background-color: $slate10;
+        border: none;
+        margin-left: 4px;
+        margin-top: 0;
+        padding: 4px 20px 4px 4px !important;
+        color: $slate80;
+
+        &:first-child{
+          margin-left: 0;
+        }
+      }
+      .select2-selection__choice__remove {
+        border-right: none;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        color: $slate80;
+        font-size: 16px;
+        padding: 0;
+        position: absolute;
+        left: auto;
+        top: 2px;
+        right: 4px;
+      }
+
+      .select2-selection__clear {
+        margin-top: 0;
+      }
+    }
+    .select2-search--inline .select2-search__field {
+      margin-top: 0;
+      margin-left: 5px;
+      padding: 4px 0 0 0;
+      max-width: 100%;
+      resize: none;
+      height: 30px;
+      vertical-align: middle;
+      font-family: sans-serif;
+      overflow: hidden;
+      word-break: keep-all;
+    }
+  }
+  .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 48px;
+  }
+}
+.tf-field.tf-field-select2 .tf-fieldset span.select2:nth-child(3) {
+  display: none;
+}

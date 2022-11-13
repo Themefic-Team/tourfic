@@ -14,6 +14,13 @@
  * Meta field
  * Common
  */
+
+.tf-depend-hidden.tf-depend-on {
+    display: none;
+}
+.tf-depend-hidden{
+    display: block;
+}
 .csf-section .csf-field.tf-csf-disable {
     opacity: 1;
     user-select: none;
@@ -31,7 +38,9 @@
     opacity: 0.25;
     z-index: 10;
 }
-
+.tf-csf-disable.tf-csf-pro {
+    z-index: 9999999999;
+}
 .csf-section .csf-field.tf-csf-pro {
     cursor: pointer;
 }
@@ -45,6 +54,7 @@
     margin: 5px 0 0 0;
     font-size: 12px;
     font-weight: 600;
+    line-height: 13px;
 }
 
 .tf-csf-badge .tf-upcoming {

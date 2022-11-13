@@ -8,16 +8,16 @@
 
 get_header('tourfic');
 
-$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
-$pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
-$tour_type = $meta['type'] ? $meta['type'] : null;
+$meta = get_post_meta( get_the_ID(),'tf_tours_opt',true );
+$pricing_rule = !empty($meta['pricing']) ? $meta['pricing'] : null;
+$tour_type = !empty($meta['type']) ? $meta['type'] : null;
 if( $pricing_rule == 'group'){
-	$price = $meta['group_price'] ? $meta['group_price'] : null;
+	$price = !empty($meta['group_price']) ? $meta['group_price'] : null;
 }else{
-	$price = $meta['adult_price'] ? $meta['adult_price'] : null;
+	$price = !empty($meta['adult_price']) ? $meta['adult_price'] : null;
 }
-$discount_type = $meta['discount_type'] ? $meta['discount_type'] : null;
-$discounted_price = $meta['discount_price'] ? $meta['discount_price'] : NULL;
+$discount_type = !empty($meta['discount_type']) ? $meta['discount_type'] : null;
+$discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : NULL;
 if( $discount_type == 'percent' ){
 	$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 ); 
 }elseif( $discount_type == 'fixed'){
@@ -27,13 +27,19 @@ if( $discount_type == 'percent' ){
 ?>
 
 <div class="tf-main-wrapper" data-fullwidth="true">
-	<?php do_action( 'tf_before_container' ); ?>
+	<?php
+		do_action( 'tf_before_container' );
+		$post_count = $GLOBALS['wp_query']->post_count;
+	?>
 	<div class="tf-container">
 
 		<div class="search-result-inner">
 			<!-- Start Content -->
-			<div class="tf-search-left">
+			<div class="tf-search-left">				
 				<div class="tf-action-top">
+					<div class="tf-total-results">
+						<span><?php echo esc_html__( 'Total Results ', 'tourfic' ) . '(' . $post_count . ')'; ?> </span>
+					</div>
 		            <div class="tf-list-grid">
 		                <a href="#list-view" data-id="list-view" class="change-view" title="<?php _e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
 		                <a href="#grid-view" data-id="grid-view" class="change-view" title="<?php _e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>

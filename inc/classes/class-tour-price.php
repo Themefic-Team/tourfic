@@ -35,9 +35,17 @@ if(!class_exists('TourPrice')){
                  * Price calculation based on pricing rule
                  */
                 if($pricing_rule == 'group') {
-        
+                    if(!empty($meta['cont_custom_date']) && gettype($meta['cont_custom_date'])=="string"){
+                        $tf_tour_cont_custom_date = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+                        }, $meta['cont_custom_date'] );
+                        $tf_tour_custom_date = unserialize( $tf_tour_cont_custom_date );
+
+                        $group_prices_array = array_column($tf_tour_custom_date, 'group_price');
+                    }else{
                     # Get group price from all the arrays
                     $group_prices_array = array_column($meta['cont_custom_date'], 'group_price');
+                    }
                     # Get minimum group price
                     $min_group_price = min($group_prices_array);
                     # Get maximum group price
@@ -100,11 +108,21 @@ if(!class_exists('TourPrice')){
                     }
         
                 } else if($pricing_rule == 'person') {
-
+                    
                     # Get adult, child, infant price from all the arrays
-                    $adult_price_array  = array_column($meta['cont_custom_date'], 'adult_price');
-                    $child_price_array  = array_column($meta['cont_custom_date'], 'child_price');
-                    $infant_price_array = array_column($meta['cont_custom_date'], 'infant_price');
+                    if(!empty($meta['cont_custom_date']) && gettype($meta['cont_custom_date'])=="string"){
+                        $tf_tour_cont_custom_date = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+                        }, $meta['cont_custom_date'] );
+                        $tf_tour_custom_date = unserialize( $tf_tour_cont_custom_date );
+                        $adult_price_array  = array_column($tf_tour_custom_date, 'adult_price');
+                        $child_price_array  = array_column($tf_tour_custom_date, 'child_price');
+                        $infant_price_array = array_column($tf_tour_custom_date, 'infant_price');
+                    }else{
+                        $adult_price_array  = array_column($meta['cont_custom_date'], 'adult_price');
+                        $child_price_array  = array_column($meta['cont_custom_date'], 'child_price');
+                        $infant_price_array = array_column($meta['cont_custom_date'], 'infant_price');
+                    }
 
                     # Get minimum price of adult, child, infant
                     $min_adult_price  = min($adult_price_array);
