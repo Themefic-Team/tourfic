@@ -1074,4 +1074,4 @@ function tf_filter_tour_by_date( $period, array &$not_found, array $data = [] ):
     }
 
 }
-?>
+

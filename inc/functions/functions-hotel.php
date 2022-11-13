@@ -1923,4 +1923,3 @@ function tf_update_meta_all_hotels_tours() {
     }
 }
 add_action( 'wp_loaded', 'tf_update_meta_all_hotels_tours' );
-?>

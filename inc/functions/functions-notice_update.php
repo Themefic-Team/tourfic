@@ -117,4 +117,3 @@ function tf_plugin_action_links( $links ) {
 	}
 }
 add_filter( 'plugin_action_links_' . 'tourfic/tourfic.php', 'tf_plugin_action_links' );
-?>

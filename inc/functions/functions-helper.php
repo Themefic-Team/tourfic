@@ -453,6 +453,3 @@ if (!function_exists('tf_get_deposit_amount')) {
     }
 };
 
-
-
-?>

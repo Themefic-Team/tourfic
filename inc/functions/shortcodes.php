@@ -621,4 +621,3 @@ function tf_search_result_shortcode( $atts, $content = null ){
 
 
 add_shortcode('tf_search_result', 'tf_search_result_shortcode');
-?>
