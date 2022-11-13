@@ -94,6 +94,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 					<input type="hidden" name="tf_parent_field" value="<?php if(isset($this->parent_field)){ echo esc_attr($this->parent_field); }  ?>"> 
 					<input type="hidden" name="tf_repeater_count" value="0"> 
 					<input type="hidden" name="tf_current_field" value="<?php if(isset($this->field['id'])){ echo esc_attr($this->field['id']); }  ?>">
+					
 						<div class="tf-repeater-header">
 							<span class="tf-repeater-icon tf-repeater-icon-collapse">
 								<i class="fa-solid fa-angle-down"></i> 
@@ -103,7 +104,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 								<span class="tf-repeater-icon tf-repeater-icon-move">
 									<i class="fa-solid fa-up-down-left-right"></i>
 								</span>
-								<span class="tf-repeater-icon tf-repeater-icon-clone">
+								<span class="tf-repeater-icon tf-repeater-icon-clone" data-repeater-max = "<?php if(isset($this->field['max'])){ echo esc_attr($this->field['max']); }  ?>">
 									<i class="fa-solid fa-copy"></i> 
 								</span>
 								<span class="tf-repeater-icon tf-repeater-icon-delete">
@@ -131,7 +132,8 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
                 </div>
 
                 <div class="tf-repeater-add tf-repeater-add-<?php if(isset($this->field['id'])){ echo esc_attr($this->field['id']); }  ?>">
-					<span data-repeater-id = "<?php if(isset($this->field['id'])){ echo esc_attr($this->field['id']); }  ?>" class="tf-repeater-icon tf-repeater-icon-add tf-repeater-add-<?php if(isset($this->field['id'])){ echo esc_attr($this->field['id']); }  ?>">
+				
+					<span data-repeater-id = "<?php if(isset($this->field['id'])){ echo esc_attr($this->field['id']); }  ?>" data-repeater-max = "<?php if(isset($this->field['max'])){ echo esc_attr($this->field['max']); }  ?>" class="tf-repeater-icon tf-repeater-icon-add tf-repeater-add-<?php if(isset($this->field['id'])){ echo esc_attr($this->field['id']); }  ?>">
 						<?php 
 							if(isset($this->field['button_title']) && !empty($this->field['button_title'])){
 								echo  $this->field['button_title'];

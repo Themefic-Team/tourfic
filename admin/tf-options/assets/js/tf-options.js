@@ -440,10 +440,18 @@
             var $this = $(this);
             var $this_parent = $this.parent().parent();
             var id = $(this).attr("data-repeater-id");
+            var max = $(this).attr("data-repeater-max");
             var add_value = $this_parent.find('.tf-single-repeater-clone-' + id + ' .tf-single-repeater-' + id + '').clone();
             var count = $this_parent.find('.tf-repeater-wrap-' + id + ' .tf-single-repeater-' + id + '').length;
             var parent_field = add_value.find(':input[name="tf_parent_field"]').val();
             var current_field = add_value.find(':input[name="tf_current_field"]').val();
+
+            // Chacked maximum repeater
+            if(max != '' && count >= max){
+                $this_parent.find('.tf-repeater-wrap .tf-field-notice-inner').remove();
+                $this_parent.find('.tf-repeater-wrap').append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You cannot add more.</div>'); 
+                return false; 
+            }
 
             // Repeater Count Add Value
             add_value.find(':input[name="tf_repeater_count"]').val(count);
@@ -549,11 +557,19 @@
         $(document).on('click', '.tf-repeater-icon-clone', function () {
             var $this_parent = $(this).closest('.tf-repeater-wrap');
             let clone_value = $(this).closest('.tf-single-repeater').clone();
-
+            var max = $(this).attr("data-repeater-max");
             var parent_field = clone_value.find('input[name="tf_parent_field"]').val();
             var current_field = clone_value.find('input[name="tf_current_field"]').val();
             var repeater_count = clone_value.find('input[name="tf_repeater_count"]').val();
             var count = $this_parent.find('.tf-single-repeater-' + current_field + '').length;
+
+
+             // Chacked maximum repeater 
+             if(max != '' && count >= max){
+                $this_parent.find('.tf-field-notice-inner').remove();
+                $this_parent.append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You cannot add more.</div>'); 
+                return false; 
+            }
 
             // Repeater Room Unique ID
             var room_uniqueid = clone_value.find('.unique-id input');

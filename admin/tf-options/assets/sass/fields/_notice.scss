@@ -1,4 +1,4 @@
-.tf-field-notice {
+// .tf-field-notice {
 
   .tf-field-notice-inner {
     @include flexbox();
@@ -15,7 +15,7 @@
 
     .tf-field-notice-content {
       color: $slate40;
-
+ 
       h6 {
         margin: 0;
         font-weight: 500;
@@ -56,4 +56,4 @@
     }
 
   }
-}
+// }

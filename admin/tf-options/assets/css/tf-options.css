@@ -1197,7 +1197,7 @@ body.tf-modal-open {
       .tf-field-heading .tf-field-heading-inner .tf-field-heading-content.has-content h3 {
         margin-bottom: 10px; }
 
-.tf-field-notice .tf-field-notice-inner {
+.tf-field-notice-inner {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -1207,33 +1207,33 @@ body.tf-modal-open {
   border: 1px solid #d1ebec;
   border-radius: 8px;
   background-color: #f0fafa; }
-  .tf-field-notice .tf-field-notice-inner .tf-field-notice-icon {
+  .tf-field-notice-inner .tf-field-notice-icon {
     margin-right: 10px;
     font-size: 20px;
     color: #069697; }
-  .tf-field-notice .tf-field-notice-inner .tf-field-notice-content {
+  .tf-field-notice-inner .tf-field-notice-content {
     color: #8997a9; }
-    .tf-field-notice .tf-field-notice-inner .tf-field-notice-content h6 {
+    .tf-field-notice-inner .tf-field-notice-content h6 {
       margin: 0;
       font-weight: 500;
       color: #363e4a;
       font-size: 16px; }
-    .tf-field-notice .tf-field-notice-inner .tf-field-notice-content.has-content h6 {
+    .tf-field-notice-inner .tf-field-notice-content.has-content h6 {
       margin-bottom: 5px; }
-  .tf-field-notice .tf-field-notice-inner.tf-notice-success {
+  .tf-field-notice-inner.tf-notice-success {
     border-color: #dceddd;
     background-color: #f5faf5; }
-    .tf-field-notice .tf-field-notice-inner.tf-notice-success .tf-field-notice-icon {
+    .tf-field-notice-inner.tf-notice-success .tf-field-notice-icon {
       color: #43a047; }
-  .tf-field-notice .tf-field-notice-inner.tf-notice-warning {
+  .tf-field-notice-inner.tf-notice-warning {
     border-color: #ffecb3;
     background-color: #fffdf6; }
-    .tf-field-notice .tf-field-notice-inner.tf-notice-warning .tf-field-notice-icon {
+    .tf-field-notice-inner.tf-notice-warning .tf-field-notice-icon {
       color: #ffbf00; }
-  .tf-field-notice .tf-field-notice-inner.tf-notice-danger {
+  .tf-field-notice-inner.tf-notice-danger {
     border-color: #fddcda;
     background-color: #fef2f1; }
-    .tf-field-notice .tf-field-notice-inner.tf-notice-danger .tf-field-notice-icon {
+    .tf-field-notice-inner.tf-notice-danger .tf-field-notice-icon {
       color: #f44336; }
 
 .tf-field-switch .tf-switch-label {
@@ -1471,6 +1471,8 @@ body.tf-modal-open {
     margin-bottom: 24px;
     border-radius: 5px;
     overflow: hidden; }
+  .tf-repeater .tf-field-notice-inner {
+    margin-bottom: 24px; }
 
 .tf-field-disable .tf-repeater {
   pointer-events: none; }
