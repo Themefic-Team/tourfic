@@ -30,8 +30,8 @@ if ( ! class_exists( 'TF_Taxonomy_Metabox' ) ) {
 			//taxonomies
 			add_action( $this->taxonomy . '_edit_form_fields', array( $this, 'tf_taxonomy_content' ), 10, 2 );
 			add_action( $this->taxonomy . '_add_form_fields', array( $this, 'tf_taxonomy_content' ), 10, 2 );
-			add_action( 'created_' . $this->taxonomy, array( $this, 'save_taxonomy' ) , 10, 2);
-			add_action( 'edited_' . $this->taxonomy, array( $this, 'save_taxonomy' ) , 10, 2);
+			add_action( 'created_' . $this->taxonomy, array( $this, 'save_taxonomy' ), 10, 2 );
+			add_action( 'edited_' . $this->taxonomy, array( $this, 'save_taxonomy' ), 10, 2 );
 
 		}
 
@@ -83,22 +83,25 @@ if ( ! class_exists( 'TF_Taxonomy_Metabox' ) ) {
 			}
 
 			// Form fields.
-			
 			?>
-            <div class="tf-admin-meta-box tf-taxonomy-metabox">
-                <div class="tf-tab-wrapper">
-					<?php
-                    foreach ( $this->taxonomy_fields as $key => $field ) {
-						$default = isset( $field['default'] ) ? $field['default'] : '';
-						$value   = isset( $tf_taxonomy_value[ $field['id'] ] ) ? $tf_taxonomy_value[ $field['id'] ] : $default;
+            <tr>
+                <td colspan="2">
+                    <div class="tf-admin-meta-box tf-taxonomy-metabox">
+                        <div class="tf-tab-wrapper">
+			                <?php
+			                foreach ( $this->taxonomy_fields as $key => $field ) {
+				                $default = isset( $field['default'] ) ? $field['default'] : '';
+				                $value   = isset( $tf_taxonomy_value[ $field['id'] ] ) ? $tf_taxonomy_value[ $field['id'] ] : $default;
 
-						$tf_option = new TF_Options();
-						$tf_option->field( $field, $value, $this->taxonomy_id );
-					}
-                    ?>
-                </div>
+				                $tf_option = new TF_Options();
+				                $tf_option->field( $field, $value, $this->taxonomy_id );
+			                }
+			                ?>
+                        </div>
 
-            </div>
+                    </div>
+                </td>
+            </tr>
 			<?php
 		}
 

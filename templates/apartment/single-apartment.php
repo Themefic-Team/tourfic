@@ -277,19 +277,26 @@ while ( have_posts() ) : the_post();
 							<?php the_content(); ?>
                         </div>
 
-                        <!-- Start Key Features Section -->
-                        <div class="key-features sp-t-40">
-                            <div class="features-details">
-                                <ul>
-                                    <li><i class="fas fa-user-tie"></i> 1500 sft <span>Check yourself in with the keypad.</span></li>
-                                    <li><i class="fas fa-user-clock"></i> 1500 sft <span>This is one of the few places in the area with free parking.</span></li>
-                                    <li><i class="fas fa-undo-alt"></i> 1500 sft <span>Few places in the area with free parking.</span></li>
-                                    <li><i class="fas fa-upload"></i> 3 Bedrooms <span>A natural paradise of true Canadian Shield</span></li>
-                                    <li><i class="fas fa-tractor"></i> 1500 sft <span>This is one of the few places in the area with free parking.</span></li>
-                                    <li><i class="fas fa-truck"></i> 2 Attached Baths <span>Very private get-a-way</span></li>
-                                </ul>
+
+						<?php if ( $features ) : ?>
+                            <!-- Start Key Features Section -->
+                            <div class="key-features sp-t-40">
+                                <div class="features-details">
+                                    <ul>
+										<?php foreach ( $features as $feature ):
+											$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_apartment_feature', true );
+											$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+											if ( $f_icon_type == 'icon' ) {
+												$feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';
+											} elseif ( $f_icon_type == 'custom' ) {
+												$feature_icon = '<img src="' . esc_url($feature_meta['apartment-feature-icon-custom']) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
+											} ?>
+                                            <li><?php echo $feature_icon ?? ''; ?> <?php echo $feature->name; ?> <span><?php echo wp_kses_post($feature->description); ?></span></li>
+										<?php endforeach; ?>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+						<?php endif; ?>
 
                         <!-- Start Amenities Section -->
                         <div class="apartment-amenities sp-t-50">
