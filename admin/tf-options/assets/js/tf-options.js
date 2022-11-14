@@ -451,9 +451,9 @@
             var parent_field = add_value.find(':input[name="tf_parent_field"]').val();
             var current_field = add_value.find(':input[name="tf_current_field"]').val();
 
+            $this_parent.find('.tf-repeater-wrap .tf-field-notice-inner').remove();
             // Chacked maximum repeater
             if(max != '' && count >= max){
-                $this_parent.find('.tf-repeater-wrap .tf-field-notice-inner').remove();
                 $this_parent.find('.tf-repeater-wrap').append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You cannot add more.</div>'); 
                 return false; 
             }
@@ -560,8 +560,14 @@
         });
 
         // Repeater Delete Value
-        $(document).on('click', '.tf-repeater-icon-delete', function () {
-            if (confirm("Are you sure to delete this item?")) {
+        $(document).on('click', '.tf-repeater-icon-delete', function () { 
+            var max = $(this).attr("data-repeater-max");  
+            var $this_parent = $(this).closest('.tf-repeater-wrap'); 
+            var count = $this_parent.find('.tf-single-repeater').length; 
+            // Chacked maximum repeater
+            
+            if (confirm("Are you sure to delete this item?")) { 
+                $this_parent.find('.tf-field-notice-inner').remove();  
                 $(this).closest('.tf-single-repeater').remove();
             }
             return false;
@@ -581,9 +587,9 @@
             var count = $this_parent.find('.tf-single-repeater-' + current_field + '').length;
 
 
+            $this_parent.find('.tf-field-notice-inner').remove();
              // Chacked maximum repeater 
              if(max != '' && count >= max){
-                $this_parent.find('.tf-field-notice-inner').remove();
                 $this_parent.append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You cannot add more.</div>'); 
                 return false; 
             }
@@ -665,17 +671,24 @@
 
             // Replace Old editor
             clone_value.find('.wp-editor-wrap').each(function (){
-               var textarea =  $(this).find('textarea').show();
+               var textarea =  $(this).find('.tf_wp_editor').show();
+               // Get content of a specific editor:
+                var textarea_content = tinymce.get(textarea.attr('id')).getContent()
+                textarea.val(textarea_content);
                 $(this).closest('.tf-field-textarea').append(textarea);
                 $(this).remove();
             });
 
             // Replace Old Select 2
             clone_value.find('.tf-field-select2').each(function (){
+                
+              var get_selected_value =  $(this).find('select.tf-select-two').select2('val')
                 $(this).find('select.tf-select-two').removeAttr("data-select2-id aria-hidden tabindex");
                 $(this).find('select.tf-select-two option').removeAttr("data-select2-id");
                 $(this).find('select.tf-select-two').removeClass("select2-hidden-accessible");
-               var select2 =  $(this).find('select.tf-select-two').show();
+                var select2 =  $(this).find('select.tf-select-two').show();
+                 
+                select2.val(get_selected_value);
                 $(this).find('.tf-fieldset').append(select2);
                 $(this).find('span.select2-container').remove();
             });
@@ -714,7 +727,22 @@
         });
 
         // Repeater Drag and  show
-        $(".tf-repeater-wrap").sortable({handle:'.tf-repeater-icon-move'});
+        $(".tf-repeater-wrap").sortable({
+            handle:'.tf-repeater-icon-move',
+            start: function(event, ui) { // turn TinyMCE off while sorting (if not, it won't work when resorted)  
+                var textareaID = $(ui.item).find('.tf_wp_editor').attr('id'); 
+                
+            },
+            stop: function(event, ui) { // re-initialize TinyMCE when sort is completed
+                $(ui.item).find('.tf_wp_editor').each( function (){
+                    var textareaID = $(this).attr('id'); 
+                    tinyMCE.execCommand('mceRemoveEditor', false, textareaID);
+                    tinyMCE.execCommand('mceAddEditor', false, textareaID);
+                });
+                
+                // $(this).find('.update-warning').show();
+            }
+        });
 
 
         // TAB jquery

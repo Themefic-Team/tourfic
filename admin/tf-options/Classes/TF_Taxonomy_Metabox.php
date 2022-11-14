@@ -83,22 +83,22 @@ if ( ! class_exists( 'TF_Taxonomy_Metabox' ) ) {
 			}
 
 			// Form fields.
+
 			?>
             <tr>
                 <td colspan="2">
                     <div class="tf-admin-meta-box tf-taxonomy-metabox">
                         <div class="tf-tab-wrapper">
-			                <?php
-			                foreach ( $this->taxonomy_fields as $key => $field ) {
-				                $default = isset( $field['default'] ) ? $field['default'] : '';
-				                $value   = isset( $tf_taxonomy_value[ $field['id'] ] ) ? $tf_taxonomy_value[ $field['id'] ] : $default;
+							<?php
+							foreach ( $this->taxonomy_fields as $key => $field ) {
+								$default = isset( $field['default'] ) ? $field['default'] : '';
+								$value   = isset( $tf_taxonomy_value[ $field['id'] ] ) ? $tf_taxonomy_value[ $field['id'] ] : $default;
 
-				                $tf_option = new TF_Options();
-				                $tf_option->field( $field, $value, $this->taxonomy_id );
-			                }
-			                ?>
+								$tf_option = new TF_Options();
+								$tf_option->field( $field, $value, $this->taxonomy_id );
+							}
+							?>
                         </div>
-
                     </div>
                 </td>
             </tr>
