@@ -100,7 +100,7 @@ while ( have_posts() ) : the_post();
 	?>
 
     <div class="tf-main-wrapper apartment-wrap">
-		<?php do_action( 'tf_before_container' ); ?>
+		<?php do_action( 'tf_before_container' );tf_var_dump($meta); ?>
 
         <!-- Start title area -->
         <div class="tf-title-area tf-apartment-title sp-40">
@@ -278,7 +278,7 @@ while ( have_posts() ) : the_post();
                         </div>
 
 
-						<?php if ( $features ) : ?>
+						<?php if ( ! empty( $features ) ) : ?>
                             <!-- Start Key Features Section -->
                             <div class="key-features sp-t-40">
                                 <div class="features-details">
@@ -289,36 +289,43 @@ while ( have_posts() ) : the_post();
 											if ( $f_icon_type == 'icon' ) {
 												$feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';
 											} elseif ( $f_icon_type == 'custom' ) {
-												$feature_icon = '<img src="' . esc_url($feature_meta['apartment-feature-icon-custom']) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
+												$feature_icon = '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
 											} ?>
-                                            <li><?php echo $feature_icon ?? ''; ?> <?php echo $feature->name; ?> <span><?php echo wp_kses_post($feature->description); ?></span></li>
+                                            <li><?php echo $feature_icon ?? ''; ?> <?php echo $feature->name; ?> <span><?php echo wp_kses_post( $feature->description ); ?></span></li>
 										<?php endforeach; ?>
                                     </ul>
                                 </div>
                             </div>
 						<?php endif; ?>
 
-                        <!-- Start Amenities Section -->
-                        <div class="apartment-amenities sp-t-50">
-                            <h2 class="section-heading">Property Amenities</h2>
-                            <div class="features-details amenities-details">
-                                <ul>
-                                    <li><i class="fas fa-x-ray"></i> Beach access - Beachfront</li>
-                                    <li><i class="fas fa-wrench"></i> Wifi</li>
-                                    <li><i class="fas fa-wine-bottle"></i> TV</li>
-                                    <li><i class="fas fa-wave-square"></i> 3 Bedrooms</li>
-                                    <li><i class="fas fa-weight-hanging"></i> Free dryer – In unit</li>
-                                    <li><i class="fas fa-vote-yea"></i> 2 Attached Baths</li>
-                                    <li><i class="fas fa-warehouse"></i> Free driveway parking on premises</li>
-                                    <li><i class="fas fa-virus"></i> Backyard</li>
-                                </ul>
+						<?php if ( isset( $meta['amenities'] ) && ! empty( $meta['amenities'] ) ) : ?>
+                            <!-- Start Amenities Section -->
+                            <div class="apartment-amenities sp-t-50">
+								<?php if ( ! empty( $meta['amenities_title'] ) ): ?>
+                                    <h2 class="section-heading"><?php echo esc_html( $meta['amenities_title'] ) ?></h2>
+								<?php endif; ?>
+
+                                <div class="features-details amenities-details">
+                                    <ul>
+										<?php
+										foreach ( tf_data_types($meta['amenities']) as $amenity ) {
+											if ( empty( $amenity['title'] ) ) {
+												continue;
+											}
+											$amenity_icon = ! empty( $amenity['icon'] ) ? '<i class="' . esc_attr( $amenity['icon'] ) . '"  ></i>' : '';
+											echo '<li>' . $amenity_icon . esc_html( $amenity['title'] ) . '</li>';
+										}
+										?>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+						<?php endif; ?>
 
                         <!-- Start What you will get here Section -->
                         <div class="apartment-options sp-t-50">
                             <h2 class="section-heading">What you will get here</h2>
                             <div class="tf-apartment-option-slider-wrapper">
+
                                 <div class="tf-apartment-option-slider-item">
                                     <div class="tf-apartment-option-slider-content">
                                         <img src="https://cdn.pixabay.com/photo/2016/10/18/09/02/hotel-1749602_960_720.jpg" alt="">
@@ -328,35 +335,7 @@ while ( have_posts() ) : the_post();
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Remove all the below codes when you run the loop. These are added for demo purpose -->
-                                <div class="tf-apartment-option-slider-item">
-                                    <div class="tf-apartment-option-slider-content">
-                                        <img src="https://cdn.pixabay.com/photo/2016/04/15/11/48/hotel-1330850_960_720.jpg" alt="">
-                                        <div class="tf-apartment-option-slider-desc">
-                                            <h3>Library</h3>
-                                            <p>Awesome library space for guest</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-apartment-option-slider-item">
-                                    <div class="tf-apartment-option-slider-content">
-                                        <img src="https://cdn.pixabay.com/photo/2014/05/18/19/15/walkway-347319_960_720.jpg" alt="">
-                                        <div class="tf-apartment-option-slider-desc">
-                                            <h3>Deluxe Bathroom</h3>
-                                            <p>Watch Tiktok on Bathroom</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-apartment-option-slider-item">
-                                    <div class="tf-apartment-option-slider-content">
-                                        <img src="https://cdn.pixabay.com/photo/2015/01/10/11/39/hotel-595121_960_720.jpg" alt="">
-                                        <div class="tf-apartment-option-slider-desc">
-                                            <h3>Eita ekta hudai heading</h3>
-                                            <p>Kemon asen shobai, valo?</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Remove all the above codes when you run the loop. These are added for demo purpose -->
+
                             </div>
                         </div>
                     </div>

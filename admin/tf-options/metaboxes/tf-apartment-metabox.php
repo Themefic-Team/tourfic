@@ -83,7 +83,12 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			'title'  => __( 'Information', 'tourfic' ),
 			'icon'   => 'fa-solid fa-circle-info',
 			'fields' => array(
-
+				array(
+					'id'       => 'amenities_title',
+					'type'     => 'text',
+					'label'    => __( 'Amenities Title', 'tourfic' ),
+					'subtitle' => __( 'Enter amenities title', 'tourfic' ),
+				),
 				array(
 					'id'           => 'amenities',
 					'type'         => 'repeater',
@@ -99,6 +104,29 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'id'    => 'icon',
 							'type'  => 'icon',
 							'label' => __( 'Icon', 'tourfic' ),
+						),
+					),
+				),
+				array(
+					'id'           => 'facilities',
+					'type'         => 'repeater',
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'label'        => __( 'Facilities', 'tourfic' ),
+					'fields'       => array(
+						array(
+							'id'    => 'title',
+							'type'  => 'text',
+							'label' => __( 'Title', 'tourfic' ),
+						),
+						array(
+							'id'    => 'subtitle',
+							'type'  => 'text',
+							'label' => __( 'Sub Title', 'tourfic' ),
+						),
+						array(
+							'id'    => 'thumbnail',
+							'type'  => 'image',
+							'label' => __( 'Thumbnail', 'tourfic' ),
 						),
 					),
 				),

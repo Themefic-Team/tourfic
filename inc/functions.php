@@ -1267,7 +1267,7 @@ function tf_var_dump( $var ) {
     echo '</pre>';
 }
 /*
- * Data Retrive
+ * Data Retrieve
  * @author: Jahid
  * return: array
  */

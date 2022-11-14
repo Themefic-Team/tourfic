@@ -40,7 +40,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 							<input type="hidden" name="tf_current_field" value="<?php echo $this->field['id'];?>">
 								<div class="tf-repeater-header">
 									<span class="tf-repeater-icon tf-repeater-icon-collapse">
-										<i class="fa-solid fa-angle-down"></i>
+										<i class="fa-solid fa-angle-up"></i>
 									</span>
 									<span class="tf-repeater-title"><?php echo esc_html($label) ?>  </span>
 									<div class="tf-repeater-icon-absulate">
@@ -55,7 +55,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 										</span>
 									</div>
 								</div>
-                                <div class="tf-repeater-content-wrap">
+                                <div class="tf-repeater-content-wrap hide" style="display: none">
 									<?php
 									foreach ( $this->field['fields'] as $re_field ) :
 										
