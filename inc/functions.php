@@ -188,6 +188,23 @@ if ( ! function_exists( 'tf_single_page_template' ) ) {
 		}
 
 		/**
+		 * Apartment Single
+		 *
+		 * single-apartment.php
+		 */
+		if ( 'tf_apartment' === $post->post_type ) {
+
+			$theme_files = array( 'tourfic/apartment/single-apartment.php' );
+			$exists_in_theme = locate_template( $theme_files, false );
+
+			if ( $exists_in_theme ) {
+				return $exists_in_theme;
+			} else {
+				return TF_TEMPLATE_PATH . "apartment/single-apartment.php";
+			}
+		}
+
+		/**
 		 * Tour Single
 		 *
 		 * single-tour.php
