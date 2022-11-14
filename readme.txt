@@ -318,7 +318,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 <strong>Privacy Policy : </strong>
 
 
-Tourfic uses <a href="https://appsero.com/">Appsero</a> SDK to collect some telemetry data upon user’s confirmation. This helps us to troubleshoot problems faster & make product improvements.
+Tourfic - Travel and Hotel Booking Solution for WooCommerce uses <a href="https://appsero.com/">Appsero</a> SDK to collect some telemetry data upon user’s confirmation. This helps us to troubleshoot problems faster & make product improvements.
 
 Appsero SDK does not gather any data by default. The SDK only starts gathering basic telemetry data when a user allows it via the admin notice. We collect the data to ensure great user experience for all our users.
 
@@ -408,6 +408,12 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 25. Tour Option Panel
 
 == Changelog ==
+
+= 2.8.12 -  14 November 2022 =
+
+* Updated: Compatitibility check with WordPress 6.1
+* Updated: Compatitibility check with woocommerce 7.1.0
+
 
 = 2.8.11 -  07 November 2022 =
 
