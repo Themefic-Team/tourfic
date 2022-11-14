@@ -22,31 +22,68 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'  => 'gallery',
 					'label' => __( 'Apartment Gallery', 'tourfic' ),
 				),
+
+				array(
+					'id'        => 'disable-apartment-review',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Review Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false,
+					'field_width' => 50,
+				),
+
+				array(
+					'id'        => 'disable-apartment-share',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Share Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false,
+					'field_width' => 50,
+				),
+
+				array(
+					'id'     => 'notice',
+					'type'   => 'notice',
+					'notice' => 'info',
+					'content'  => __( 'These settings will overwrite global settings', 'tourfic' ),
+				),
 			)
+		),
+		'location'         => array(
+			'title'  => __( 'Location', 'tourfic' ),
+			'icon'   => 'fa-solid fa-location-dot',
+			'fields' => array(
+				array(
+					'id'          => 'address',
+					'type'        => 'textarea',
+					'label'       => __( 'Apartment Address', 'tourfic' ),
+					'subtitle'    => __( 'Enter apartment adress', 'tourfic' ),
+					'placeholder' => __( 'Address', 'tourfic' ),
+					'attributes'  => array(
+						'required' => 'required',
+					),
+				),
+				array(
+					'id'       => 'map',
+					'type'     => 'map',
+					'is_pro'   => true,
+					'label'    => __( 'Location on Map', 'tourfic' ),
+					'subtitle' => __( 'Select one location on the map to see latitude and longitude', 'tourfic' ),
+					'height'   => '250px',
+					'settings' => array(
+						'scrollWheelZoom' => true,
+					),
+				),
+			),
 		),
 		// Information
 		'information' => array(
 			'title'  => __( 'Information', 'tourfic' ),
 			'icon'   => 'fa-solid fa-circle-info',
 			'fields' => array(
-				array(
-					'id'           => 'key_features',
-					'type'         => 'repeater',
-					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'        => __( 'Key Features', 'tourfic' ),
-					'fields'       => array(
-						array(
-							'id'    => 'title',
-							'type'  => 'text',
-							'label' => __( 'Title', 'tourfic' ),
-						),
-						array(
-							'id'    => 'icon',
-							'type'  => 'icon',
-							'label' => __( 'Icon', 'tourfic' ),
-						),
-					),
-				),
+
 				array(
 					'id'           => 'amenities',
 					'type'         => 'repeater',

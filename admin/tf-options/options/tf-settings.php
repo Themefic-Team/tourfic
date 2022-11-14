@@ -91,6 +91,44 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
+
+		//Apartment Options
+		'apartment_option'  => array(
+			'title'  => esc_html__( 'Apartment Options', 'tourfic' ),
+			'icon'   => 'fa-solid fa-house-chimney',
+			'fields' => array(),
+		),
+		'apartment_single_page'   => array(
+			'title'  => esc_html__( 'Single Page', 'tourfic' ),
+			'parent' => 'apartment_option',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'    => 'label_off_heading',
+					'type'  => 'heading',
+					'label' => __( 'Single Apartment Settings', 'tourfic' ),
+				),
+
+				array(
+					'id'        => 'disable-apartment-review',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Review Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+
+				array(
+					'id'        => 'disable-apartment-share',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Share Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+			),
+		),
+
 		// Tour Options
 		'tour'          => array(
 			'title'  => __( 'Tour Options', 'tourfic' ),
@@ -132,6 +170,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
+
 		// Multi Vendor
 		'vendor'        => array(
 			'title'  => __( 'Multi Vendor', 'tourfic' ),

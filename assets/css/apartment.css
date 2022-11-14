@@ -200,12 +200,12 @@
     width: 100%;
   }
 
-  .tf-apartment .hero-right img {
-    height: 231px;
-  }
+  /*.tf-apartment .hero-right img {*/
+  /*  height: 231px;*/
+  /*}*/
 
   .tf-apartment .hero-first-image img {
-    height: 475px;
+    /*height: 475px;*/
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
   }
