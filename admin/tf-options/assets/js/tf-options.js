@@ -681,10 +681,14 @@
 
             // Replace Old Select 2
             clone_value.find('.tf-field-select2').each(function (){
+                
+              var get_selected_value =  $(this).find('select.tf-select-two').select2('val')
                 $(this).find('select.tf-select-two').removeAttr("data-select2-id aria-hidden tabindex");
                 $(this).find('select.tf-select-two option').removeAttr("data-select2-id");
                 $(this).find('select.tf-select-two').removeClass("select2-hidden-accessible");
-               var select2 =  $(this).find('select.tf-select-two').show();
+                var select2 =  $(this).find('select.tf-select-two').show();
+                 
+                select2.val(get_selected_value);
                 $(this).find('.tf-fieldset').append(select2);
                 $(this).find('span.select2-container').remove();
             });
