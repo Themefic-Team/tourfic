@@ -100,7 +100,7 @@ while ( have_posts() ) : the_post();
 	?>
 
     <div class="tf-main-wrapper apartment-wrap">
-		<?php do_action( 'tf_before_container' );tf_var_dump($meta); ?>
+		<?php do_action( 'tf_before_container' ); ?>
 
         <!-- Start title area -->
         <div class="tf-title-area tf-apartment-title sp-40">
@@ -308,7 +308,7 @@ while ( have_posts() ) : the_post();
                                 <div class="features-details amenities-details">
                                     <ul>
 										<?php
-										foreach ( tf_data_types($meta['amenities']) as $amenity ) {
+										foreach ( tf_data_types( $meta['amenities'] ) as $amenity ) {
 											if ( empty( $amenity['title'] ) ) {
 												continue;
 											}
@@ -321,24 +321,29 @@ while ( have_posts() ) : the_post();
                             </div>
 						<?php endif; ?>
 
-                        <!-- Start What you will get here Section -->
-                        <div class="apartment-options sp-t-50">
-                            <h2 class="section-heading">What you will get here</h2>
-                            <div class="tf-apartment-option-slider-wrapper">
-
-                                <div class="tf-apartment-option-slider-item">
-                                    <div class="tf-apartment-option-slider-content">
-                                        <img src="https://cdn.pixabay.com/photo/2016/10/18/09/02/hotel-1749602_960_720.jpg" alt="">
-                                        <div class="tf-apartment-option-slider-desc">
-                                            <h3>Drawing Space</h3>
-                                            <p>2 Double Bed</p>
+						<?php if ( isset( $meta['facilities'] ) && ! empty( $meta['facilities'] ) ) : ?>
+                            <!-- Start What you will get here Section -->
+                            <div class="apartment-options sp-t-50">
+								<?php if ( ! empty( $meta['facilities_title'] ) ): ?>
+                                    <h2 class="section-heading"><?php echo esc_html( $meta['facilities_title'] ) ?></h2>
+								<?php endif; ?>
+                                <div class="tf-apartment-option-slider-wrapper">
+									<?php foreach ( tf_data_types( $meta['facilities'] ) as $facility ) : ?>
+                                        <div class="tf-apartment-option-slider-item">
+                                            <div class="tf-apartment-option-slider-content">
+                                                <img src="<?php echo esc_url( $facility['thumbnail'] ) ?>" alt="">
+                                                <div class="tf-apartment-option-slider-desc">
+													<?php echo ! empty( $facility['title'] ) ? '<h3>' . esc_html( $facility['title'] ) . '</h3>' : ''; ?>
+													<?php echo ! empty( $facility['subtitle'] ) ? '<p>' . esc_html( $facility['subtitle'] ) . '</p>' : ''; ?>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+									<?php endforeach; ?>
                                 </div>
-
                             </div>
-                        </div>
+						<?php endif; ?>
                     </div>
+
                     <div class="cf-right">
                         <div class="host-details">
                             <div class="host-top">
@@ -374,32 +379,32 @@ while ( have_posts() ) : the_post();
                 <div class="tf-row">
                     <div class="tf-map-content-wrapper">
                         <div class="about-location">
-                            <h2 class="section-heading">About the Location</h2>
-                            <h4>Verona, Ontario, Canada</h4>
-                            <p>This is true Canadian shield country in the "land of a thousand lakes". Kingston (population 165,000) is approximately 35 minutes away. Verona, a small town of 500 is approximately 8 to 10
-                                minutes away for the conveniences of gas, grocery, liquor and beer outlet, farmer's food outlet, restaurants, golf course, bank (BMO), medical attention , churches, etc. The renowned
-                                Frontenac Provincial Park is less than an 8 minute drive away.</p>
+							<?php echo ! empty( $meta['location_sec_title'] ) ? '<h2 class="section-heading">' . esc_html( $meta['location_sec_title'] ) . '</h2>' : ''; ?>
+							<?php echo ! empty( $meta['location_title'] ) ? '<h4>' . esc_html( $meta['location_title'] ) . '</h4>' : ''; ?>
+							<?php echo ! empty( $meta['location_description'] ) ? '<p>' . esc_html( $meta['location_description'] ) . '</p>' : ''; ?>
                         </div>
-                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $location ) ); ?>&output=embed" width="100%" height="400" style="border:0;" allowfullscreen=""
-                                loading="lazy"></iframe>
+						<?php if ( ! empty( $map ) ): ?>
+                            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=15&output=embed" width="100%" height="400"
+                                    style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+						<?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Map Section End -->
 
-        <!-- Start Review Section -->
-		<?php if ( ! $disable_review_sec == 1 ) { ?>
+		<?php if ( ! $disable_review_sec == 1 ) : ?>
+            <!-- Start Review Section -->
             <div id="tf-review" class="review-section sp-50">
                 <div class="tf-container">
                     <div class="reviews">
-                        <h2 class="section-heading"><?php esc_html_e( 'Guest Reviews', 'tourfic' ); ?></h2>
+                        <h2 class="section-heading"><?php _e( 'Guest Reviews', 'tourfic' ); ?></h2>
 						<?php comments_template(); ?>
                     </div>
                 </div>
             </div>
-		<?php } ?>
-        <!-- End Review Section -->
+            <!-- End Review Section -->
+		<?php endif; ?>
 
         <!-- FAQ section Start -->
         <div class="tf-faq-wrapper tf-apartment-faq sp-30">

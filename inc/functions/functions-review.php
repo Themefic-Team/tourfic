@@ -177,6 +177,26 @@ function tf_get_review_fields( &$fields, $type = null ) {
 			'r-field-type' => __( 'Location', 'tourfic' ),
 		),
 	];
+	$default_apartments_field = [
+		array(
+			'r-field-type' => __( 'Staff', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Facilities', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Cleanliness', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Comfort', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Value for money', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Location', 'tourfic' ),
+		),
+	];
 	$default_tours_field  = [
 		array(
 			'r-field-type' => __( 'Guide', 'tourfic' ),
@@ -193,10 +213,11 @@ function tf_get_review_fields( &$fields, $type = null ) {
 	];
 
 	// If user does not have fields from settings, default fields will be loaded
-	$tfopt_hotels = ! empty( tfopt( 'r-hotel' ) ) ? tfopt( 'r-hotel' ) : $default_hotels_field;
-	$tfopt_tours  = ! empty( tfopt( 'r-tour' ) ) ? tfopt( 'r-tour' ) : $default_tours_field;
+	$tfopt_hotels = ! empty( tf_data_types(tfopt( 'r-hotel' )) ) ? tf_data_types(tfopt( 'r-hotel' )) : $default_hotels_field;
+	$tfopt_apartments = ! empty( tf_data_types(tfopt( 'r-apartment' )) ) ? tf_data_types(tfopt( 'r-apartment' )) : $default_apartments_field;
+	$tfopt_tours  = ! empty( tf_data_types(tfopt( 'r-tour' )) ) ? tf_data_types(tfopt( 'r-tour' )) : $default_tours_field;
 
-	$fields = 'tf_tours' === $type ? $tfopt_tours : $tfopt_hotels;
+	$fields = 'tf_tours' === $type ? $tfopt_tours : ( 'tf_hotel' === $type ? $tfopt_hotels : $tfopt_apartments );
 	if( !empty($fields) && gettype($fields)=="string" ){
         $tf_hotel_fields_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
             return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
@@ -220,7 +241,7 @@ function tf_get_review_fields( &$fields, $type = null ) {
 if ( ! function_exists( 'tf_generate_review_meta_fields' ) ) {
 	function tf_generate_review_meta_fields( $fields ) {
 
-		$limit = tfopt( 'r-base' ) ?? 5;
+		$limit = !empty(tfopt( 'r-base' )) ? tfopt( 'r-base' ) : 5;
 
 		$html = '<div class="tf-rating-wrapper">';
 		foreach ( $fields as $field ) {

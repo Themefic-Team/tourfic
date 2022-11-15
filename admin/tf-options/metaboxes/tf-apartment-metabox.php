@@ -57,7 +57,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			'fields' => array(
 				array(
 					'id'          => 'address',
-					'type'        => 'textarea',
+					'type'        => 'text',
 					'label'       => __( 'Apartment Address', 'tourfic' ),
 					'subtitle'    => __( 'Enter apartment adress', 'tourfic' ),
 					'placeholder' => __( 'Address', 'tourfic' ),
@@ -68,7 +68,6 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'       => 'map',
 					'type'     => 'map',
-					'is_pro'   => true,
 					'label'    => __( 'Location on Map', 'tourfic' ),
 					'subtitle' => __( 'Select one location on the map to see latitude and longitude', 'tourfic' ),
 					'height'   => '250px',
@@ -76,13 +75,41 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 						'scrollWheelZoom' => true,
 					),
 				),
+				array(
+					'id'      => 'loaction_heading',
+					'type'    => 'heading',
+					'content' => __( 'Location Details', 'tourfic' ),
+				),
+				array(
+					'id'       => 'location_sec_title',
+					'type'     => 'text',
+					'label'    => __( 'Section Title', 'tourfic' ),
+					'subtitle' => __( 'Enter location section title', 'tourfic' ),
+				),
+				array(
+					'id'       => 'location_title',
+					'type'     => 'text',
+					'label'    => __( 'Location Title', 'tourfic' ),
+					'subtitle' => __( 'Enter location title', 'tourfic' ),
+				),
+				array(
+					'id'       => 'location_description',
+					'type'     => 'textarea',
+					'label'    => __( 'Location Description', 'tourfic' ),
+					'subtitle' => __( 'Enter location description', 'tourfic' ),
+				),
 			),
 		),
 		// Information
 		'information' => array(
-			'title'  => __( 'Information', 'tourfic' ),
+			'title'  => __( 'Informations', 'tourfic' ),
 			'icon'   => 'fa-solid fa-circle-info',
 			'fields' => array(
+				array(
+					'id'      => 'Amenities_heading',
+					'type'    => 'heading',
+					'content' => __( 'Amenities', 'tourfic' ),
+				),
 				array(
 					'id'       => 'amenities_title',
 					'type'     => 'text',
@@ -106,6 +133,18 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'label' => __( 'Icon', 'tourfic' ),
 						),
 					),
+				),
+
+				array(
+					'id'      => 'facilities_heading',
+					'type'    => 'heading',
+					'content' => __( 'Facilities', 'tourfic' ),
+				),
+				array(
+					'id'       => 'facilities_title',
+					'type'     => 'text',
+					'label'    => __( 'Facilities Title', 'tourfic' ),
+					'subtitle' => __( 'Enter facilities title', 'tourfic' ),
 				),
 				array(
 					'id'           => 'facilities',

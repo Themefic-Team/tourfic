@@ -766,6 +766,43 @@ TF_Settings::option( 'tf_settings', array(
 					)
 				),
 				array(
+					'id'       => 'r-apartment',
+					'class'    => 'disable-sortable',
+					'type'     => 'repeater',
+					'label'    => __( 'Review Fields for Apartments', 'tourfic' ),
+					'subtitle' => __( 'Maximum 10 fields allowed', 'tourfic' ),
+					'is_pro'   => true,
+					'max'      => '6',
+					'fields'   => array(
+						array(
+							'id'    => 'r-field-type',
+							'type'  => 'text',
+							'label' => __( 'Review for', 'tourfic' ),
+						),
+
+					),
+					'default'  => array(
+						array(
+							'r-field-type' => __( 'Staff', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Facilities', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Cleanliness', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Comfort', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Value for money', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Location', 'tourfic' ),
+						),
+					)
+				),
+				array(
 					'id'       => 'r-tour',
 					'type'     => 'repeater',
 					'label'    => __( 'Review Fields for Tours', 'tourfic' ),
