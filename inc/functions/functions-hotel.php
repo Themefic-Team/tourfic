@@ -1470,12 +1470,12 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 		foreach ( $b_rooms as $b_room ) {
 			//room price
 
-			$pricing_by = $b_room['pricing-by'] ? $b_room['pricing-by'] : 1;
+			$pricing_by = ! empty( $b_room['pricing-by'] ) ? $b_room['pricing-by'] : 1;
 			if($pricing_by == 1){
 				$price        = ! empty( $b_room['price'] ) ? $b_room['price'] : '';
 				$room_price[] = $price;
 			}else if($pricing_by == 2){
-				$adult_price = $b_room['adult_price'] ? $b_room['adult_price'] : 0;
+				$adult_price = ! empty( $b_room['adult_price'] ) ? $b_room['adult_price'] : 0;
 				$room_price[] = $adult_price;
 			}
 		}
