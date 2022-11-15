@@ -22,11 +22,5 @@ if ( ! class_exists( 'TF_radio' ) ) {
 				echo '<input type="radio" id="' . $this->field_name() . '" name="' . $this->field_name() . '" value="1" ' . checked( $this->value, 1, false ) . ' '. $this->field_attributes() .'/><label for="' . $this->field_name() . '">' . $this->field['title'] . '</label>';
 			}
 		}
-
-		public function sanitize() {
-			$value = ( is_array( $this->value ) ) ? array_map( 'sanitize_text_field', $this->value ) : sanitize_text_field( $this->value );
-
-			return $value;
-		}
 	}
 }
