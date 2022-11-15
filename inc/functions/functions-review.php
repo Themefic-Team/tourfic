@@ -20,7 +20,7 @@ add_action( 'admin_init', 'tf_remove_comment_meta_box' );
  */
 function tf_review_script() {
 
-	if ( is_singular( array( 'tf_hotel', 'tf_tours' ) ) ) {
+	if ( is_singular( array( 'tf_hotel', 'tf_tours', 'tf_apartment' ) ) ) {
 
 		/**
 		 * jquery-validate
@@ -138,7 +138,7 @@ function tf_comments_open( $open, $post_id ) {
 
 	$post = get_post( $post_id );
 
-	if ( 'tf_hotel' == $post->post_type || 'tf_tours' == $post->post_type ) {
+	if ( 'tf_hotel' == $post->post_type || 'tf_tours' == $post->post_type || 'tf_apartment' == $post->post_type ) {
 		$open = true;
 	}
 
@@ -157,7 +157,7 @@ function tf_get_review_fields( &$fields, $type = null ) {
 	/**
 	 * Default fields until user save from option panel
 	 */
-	$default_hotels_field = [
+	$default_hotels_field     = [
 		array(
 			'r-field-type' => __( 'Staff', 'tourfic' ),
 		),
@@ -197,7 +197,7 @@ function tf_get_review_fields( &$fields, $type = null ) {
 			'r-field-type' => __( 'Location', 'tourfic' ),
 		),
 	];
-	$default_tours_field  = [
+	$default_tours_field      = [
 		array(
 			'r-field-type' => __( 'Guide', 'tourfic' ),
 		),
@@ -213,18 +213,18 @@ function tf_get_review_fields( &$fields, $type = null ) {
 	];
 
 	// If user does not have fields from settings, default fields will be loaded
-	$tfopt_hotels = ! empty( tf_data_types(tfopt( 'r-hotel' )) ) ? tf_data_types(tfopt( 'r-hotel' )) : $default_hotels_field;
-	$tfopt_apartments = ! empty( tf_data_types(tfopt( 'r-apartment' )) ) ? tf_data_types(tfopt( 'r-apartment' )) : $default_apartments_field;
-	$tfopt_tours  = ! empty( tf_data_types(tfopt( 'r-tour' )) ) ? tf_data_types(tfopt( 'r-tour' )) : $default_tours_field;
+	$tfopt_hotels     = ! empty( tf_data_types( tfopt( 'r-hotel' ) ) ) ? tf_data_types( tfopt( 'r-hotel' ) ) : $default_hotels_field;
+	$tfopt_apartments = ! empty( tf_data_types( tfopt( 'r-apartment' ) ) ) ? tf_data_types( tfopt( 'r-apartment' ) ) : $default_apartments_field;
+	$tfopt_tours      = ! empty( tf_data_types( tfopt( 'r-tour' ) ) ) ? tf_data_types( tfopt( 'r-tour' ) ) : $default_tours_field;
 
-	$fields = 'tf_tours' === $type ? $tfopt_tours : ( 'tf_hotel' === $type ? $tfopt_hotels : $tfopt_apartments );
-	if( !empty($fields) && gettype($fields)=="string" ){
-        $tf_hotel_fields_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
-            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
-        }, $fields );
-        $fields = unserialize( $tf_hotel_fields_value );
-    }
-	if( !empty($fields) ){
+	$fields = 'tf_tours' === $type ? $tfopt_tours : ( 'tf_apartment' === $type ? $tfopt_apartments : $tfopt_hotels );
+	if ( ! empty( $fields ) && gettype( $fields ) == "string" ) {
+		$tf_hotel_fields_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+		}, $fields );
+		$fields                = unserialize( $tf_hotel_fields_value );
+	}
+	if ( ! empty( $fields ) ) {
 		$fields = array_map( function ( $i ) {
 			return strtolower( $i['r-field-type'] );
 		}, $fields );
@@ -241,7 +241,7 @@ function tf_get_review_fields( &$fields, $type = null ) {
 if ( ! function_exists( 'tf_generate_review_meta_fields' ) ) {
 	function tf_generate_review_meta_fields( $fields ) {
 
-		$limit = !empty(tfopt( 'r-base' )) ? tfopt( 'r-base' ) : 5;
+		$limit = ! empty( tfopt( 'r-base' ) ) ? tfopt( 'r-base' ) : 5;
 
 		$html = '<div class="tf-rating-wrapper">';
 		foreach ( $fields as $field ) {
@@ -269,7 +269,7 @@ if ( ! function_exists( 'tf_generate_review_meta_fields' ) ) {
 if ( ! function_exists( 'tf_generate_stars' ) ) {
 	function tf_generate_stars( $key ) {
 
-		$limit = tfopt( 'r-base' ) ?? 5;
+		$limit = ! empty( tfopt( 'r-base' ) ) ? tfopt( 'r-base' ) : 5;
 		$html  = '';
 		foreach ( array_reverse( range( 1, $limit, 1 ) ) as $i ) {
 			$html .= "<input type=\"radio\" id=\"{$key}-{$i}\" name=\"tf_comment_meta[{$key}]\" value=\"{$i}\" required><label for=\"{$key}-{$i}\">{$i}</label>";
@@ -508,7 +508,7 @@ function tf_calculate_comments_rating( $comments, &$tf_overall_rate, &$total_rat
  * Total Average Rating
  */
 function tf_total_avg_rating( $comments ) {
-	$total_rate = [];
+
 	foreach ( $comments as $comment ) {
 		$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
 		$tf_base_rate    = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
@@ -621,10 +621,10 @@ function tf_pending_review_notice( $post_id ) {
 			foreach ( $comments as $comment ) {
 				$cookie_name = 'tf_review_' . $comment->comment_ID;
 				if ( $comment->comment_approved === '0' && isset( $_COOKIE[ $cookie_name ] ) ) {
-                    return '<div class="tf-review-pending">' . __( "Your review is waiting for approval", "tourfic" ) . '</div>';
+					return '<div class="tf-review-pending">' . __( "Your review is waiting for approval", "tourfic" ) . '</div>';
 				} else {
-                    return '';
-                }
+					return '';
+				}
 			}
 		}
 

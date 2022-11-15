@@ -1,14 +1,14 @@
 /**************** Global ****************/
 .tf-apartment .section-heading {
-  font-size: 22px;
+    font-size: 22px;
 }
 
 .tf-apartment-title h1 {
-  font-size: 30px;
+    font-size: 30px;
 }
 
 .tf-apartment-title .tf-map-link p {
-  font-size: 15px;
+    font-size: 15px;
 }
 
 /**************** TITLE ****************/
@@ -182,166 +182,170 @@
 }
 
 /**************** Hero ****************/
-  .tf-apartment .hero-wrapper {
+.tf-apartment .hero-wrapper {
     display: flex;
     gap: 11px;
-  }
+}
 
-  .tf-apartment .hero-left {
+.tf-apartment .hero-left {
     width: 70%;
-  }
+}
 
-  .tf-apartment  .hero-right {
+.tf-apartment .hero-right {
     width: 28.5%;
-  }
+}
 
-  .tf-apartment .hero-wrapper img {
+.tf-apartment .hero-wrapper img {
     object-fit: cover;
     width: 100%;
-  }
+}
 
-  /*.tf-apartment .hero-right img {*/
-  /*  height: 231px;*/
-  /*}*/
+/*.tf-apartment .hero-right img {*/
+/*  height: 231px;*/
+/*}*/
 
-  .tf-apartment .hero-first-image img {
+.tf-apartment .hero-first-image img {
     /*height: 475px;*/
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
-  }
+}
 
-  .tf-apartment .hero-wrapper .hero-second-image {
+.tf-apartment .hero-wrapper .hero-second-image {
     margin-bottom: 13px;
-  }
+}
 
-  .tf-apartment .hero-wrapper .hero-second-image img {
+.tf-apartment .hero-wrapper .hero-second-image img {
     border-top-right-radius: 8px;
-  }
+}
 
-  .tf-apartment .hero-third-image {
+.tf-apartment .hero-third-image {
     text-align: right;
-  }
+}
 
-  .tf-apartment .hero-third-image a {
+.tf-apartment .hero-third-image a {
     max-width: 130px;
     margin-right: 12px;
-    background: rgba(0,0,0,0.85);
-    border:none;
-  }
+    background: rgba(0, 0, 0, 0.85);
+    border: none;
+}
 
-  .tf-apartment .hero-third-image a:hover {
-    background:  #0054a8;
-  }
- 
-  .tf-apartment .hero-third-image img {
+.tf-apartment .hero-third-image a:hover {
+    background: #0054a8;
+}
+
+.tf-apartment .hero-third-image img {
     margin-bottom: -60px;
     border-bottom-right-radius: 8px;
-  }
-  
+}
+
 /**************** Content - Features ****************/
 .tf-apartment .cf-wrapper {
     display: flex;
     gap: 4%;
-  }
+}
 
-  .tf-apartment .cf-left {
+.tf-apartment .cf-left {
     width: 61%;
-  }
+}
 
-  .tf-apartment  .cf-right {
+.tf-apartment .cf-right {
     width: 35%;
-  }
+}
 
-  .apt-description p:last-child {
+.apt-description p:last-child {
     margin-bottom: 0;
-  }
+}
 
-  .content-feature-section {
+.content-feature-section {
     padding-top: 40px;
-  }
+}
 
-  .tf-apartment .features-details ul {
+.tf-apartment .features-details ul {
     margin: 0;
     list-style: none;
     display: grid;
     grid-template-columns: 50% 50%;
     gap: 1%;
-  }
-  .tf-apartment  .features-details ul li {
+}
+
+.tf-apartment .features-details ul li {
     margin-right: 1%;
     padding: 12px 0;
     font-weight: bold;
-  }
+}
 
-  .tf-apartment  .features-details ul li span {
+.tf-apartment .features-details ul li span {
     font-weight: normal;
-    font-size:14px;
+    font-size: 14px;
     opacity: 0.75;
     display: block;
-  }
-  
-  .tf-apartment  .features-details ul li i {
+}
+
+.tf-apartment .features-details ul li i {
     color: inherit;
     font-size: 18px;
     padding-right: 8px;
-  }
+}
 
-  .tf-apartment  .amenities-details {
+.tf-apartment .amenities-details {
     background: #F5F8FF;
     border: 1px solid #F0F2F4;
     border-radius: 4px;
-    padding:10px 30px;
-  }
+    padding: 10px 30px;
+}
 
 
-  .tf-apartment  .features-details.amenities-details ul li {
+.tf-apartment .features-details.amenities-details ul li {
     border-top: 1px solid #F0F2F4;
     padding: 12px 0;
     font-weight: normal;
-  }
+}
 
-  .tf-apartment .amenities-details ul li:nth-child(-n+2) {
-    border:none;
-  }
+.tf-apartment .amenities-details ul li:nth-child(-n+2) {
+    border: none;
+}
 
 
-  /**************** What you will get here ****************/
+/**************** What you will get here ****************/
 
-  .tf-apartment-option-slider-wrapper .slick-prev::before, .tf-apartment-option-slider-wrapper .slick-next::before {
+.tf-apartment-option-slider-wrapper .slick-prev::before, .tf-apartment-option-slider-wrapper .slick-next::before {
     color: #2A3343;
     font-size: 26px;
     opacity: 1;
-  }
-  .tf-apartment-option-slider-wrapper .slick-arrow {
+}
+
+.tf-apartment-option-slider-wrapper .slick-arrow {
     z-index: 999;
-  }
+}
 
-  .tf-apartment-option-slider-wrapper .slick-next {
+.tf-apartment-option-slider-wrapper .slick-next {
     margin-right: 5px;
-  }
+}
 
-  .tf-apartment-option-slider-item.slick-slide {
+.tf-apartment-option-slider-item.slick-slide {
     margin-left: 8px !important;
     margin-right: 8px !important;
-  }
+}
 
-  .tf-apartment-option-slider-wrapper img {
+.tf-apartment-option-slider-wrapper img {
     border-radius: 8px;
     height: 171px;
     object-fit: cover;
     width: 100%;
-  }
-  
-  .tf-apartment-option-slider-desc h3 {
+}
+
+.tf-apartment-option-slider-desc h3 {
     font-size: 18px;
-  }
-  .tf-apartment-option-slider-desc {
+}
+
+.tf-apartment-option-slider-desc {
     padding-top: 10px;
-  }
-  .tf-apartment-option-slider-desc p {
+}
+
+.tf-apartment-option-slider-desc p {
     opacity: 0.85;
     font-size: 14px;
-  }
+}
 
 /**************** Host ****************/
 .host-details {
@@ -350,306 +354,341 @@
     padding: 25px;
     border: 1px solid #EBF2FF;
     margin-bottom: 25px;
-  }
-  .host-top {
+}
+
+.host-top {
     display: flex;
     gap: 15px;
-  }
-  .host-top img {
+}
+
+.host-top img {
     width: 80px;
     height: 80px;
     object-fit: cover;
     border-radius: 50%;
-  }
-  .host-meta p {
+}
+
+.host-meta p {
     margin-bottom: 0;
-  }
+}
 
 .host-meta i {
     color: #FFC314;
-  }
-  .host-meta span {
+}
+
+.host-meta span {
     font-weight: bold;
-  }
+}
 
 .host-bottom p {
     margin-bottom: 0;
-  }
-  .host-desc {
+}
+
+.host-desc {
     padding: 25px 0;
-  }
-  .host-bottom ul {
+}
+
+.host-bottom ul {
     list-style: none;
     margin: 0;
     margin-bottom: 25px;
-  }
-  .host-bottom ul li span {
+}
+
+.host-bottom ul li span {
     text-align: right;
     font-weight: bold;
     float: right;
-  }
-  .host-bottom ul li {
-    padding-bottom: 10px;
-  }
-  .host-bottom ul li:last-child {
-    padding-bottom: 0;
-  }
-  .host-bottom a i {
-    padding-right: 8px;
-  }
+}
 
-  /**************** MAP ****************/
+.host-bottom ul li {
+    padding-bottom: 10px;
+}
+
+.host-bottom ul li:last-child {
+    padding-bottom: 0;
+}
+
+.host-bottom a i {
+    padding-right: 8px;
+}
+
+/**************** MAP ****************/
 
 .tf-map-content-wrapper {
-  display: flex;
-  gap: 30px;
+    display: flex;
+    gap: 30px;
 }
+
 .tf-map-content-wrapper .about-location {
-  width: 40%;
+    width: 40%;
 }
 
 #tour-map .tf-container {
-  border-top: 1px solid #e8e8e8;
-  padding: 60px 0;
-  border-bottom: 1px solid #e8e8e8;
+    border-top: 1px solid #e8e8e8;
+    padding: 60px 0;
+    border-bottom: 1px solid #e8e8e8;
 }
 
-  /**************** FAQ ****************/
-  .tf-apartment-faq .tf-faq-sec-title {
+/**************** FAQ ****************/
+.tf-apartment-faq .tf-faq-sec-title {
     margin-bottom: 20px;
     text-align: left;
-  }
+}
 
-  .tf-apartment-faq .tf-faq-sec-title p {
+.tf-apartment-faq .tf-faq-sec-title p {
     max-width: 100%;
-  }
+}
 
-  .tf-apartment-faq .tf-faq-content-wrapper {
+.tf-apartment-faq .tf-faq-content-wrapper {
     background: #F5F8FF;
     padding: 20px 25px;
     border-radius: 4px;
     border: 1px solid #F0F2F4;
-  }
-  .tf-apartment-faq #tf-faq-item {
+}
+
+.tf-apartment-faq #tf-faq-item {
     border-bottom: 1px solid #dfdfdf;
-  }
-  .tf-apartment-faq #tf-faq-item .tf-faq-desc {
+}
+
+.tf-apartment-faq #tf-faq-item .tf-faq-desc {
     background-color: transparent;
     padding-bottom: 0;
-  }
-  .tf-apartment-faq .tf-faq-desc p {
+}
+
+.tf-apartment-faq .tf-faq-desc p {
     margin-bottom: 20px;
-  }
-  .tf-apartment-faq .tf-faq-items-wrapper #tf-faq-item:last-child {
+}
+
+.tf-apartment-faq .tf-faq-items-wrapper #tf-faq-item:last-child {
     border-bottom: 0;
     margin-bottom: 0;
     padding-bottom: 0;
-  }
+}
 
 /** Ask Question **/
 
 .tf-ask-question.apartment-question h3::before {
-  display: none;
+    display: none;
 }
 
 .tf-ask-question.apartment-question {
-  background: transparent;
-  padding-top: 0;
-  text-align: left;
-  padding-top:10px;
+    background: transparent;
+    padding-top: 0;
+    text-align: left;
+    padding-top: 10px;
 }
+
 .apartment-question .question-left:before {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  content: "\f674";
-  padding-right: 7px;
-  color: #003162;
-  position: absolute;
-  font-size: 30px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f674";
+    padding-right: 7px;
+    color: #003162;
+    position: absolute;
+    font-size: 30px;
 }
 
 .apartment-question .question-left h3, .question-left p {
-  padding-left: 45px;
+    padding-left: 45px;
 }
 
 .apartment-question .apartment-qa-wrapper {
-  display: flex;
-  gap: 30px;
-  align-items: center;
+    display: flex;
+    gap: 30px;
+    align-items: center;
 }
 
 .apartment-question .tf-btn {
-  display: block;
-  width: auto;
-  margin-left: auto;
+    display: block;
+    width: auto;
+    margin-left: auto;
 }
+
 .apartment-question .question-left p {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .apartment-qa-wrapper .btn-styled {
-  display: inline-block;
+    display: inline-block;
 }
 
 /**************** Terms & Conditions ****************/
 .tf-toc-wrap {
-  padding: 40px;
-  border-radius: 4px;
-  border: 1px solid #F0F2F4;
+    padding: 40px;
+    border-radius: 4px;
+    border: 1px solid #F0F2F4;
 }
+
 .tf-toc-wrap p:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 /**************** Related Properties ****************/
 
 .tf-apartment-option-slider-content img {
-  border-radius: 8px;
-  height: 171px;
-  object-fit: cover;
-  width: 100%;
+    border-radius: 8px;
+    height: 171px;
+    object-fit: cover;
+    width: 100%;
 }
 
 .apartment-sugestion .section-heading {
-  font-size: 24px;
+    font-size: 24px;
+}
+
+.admin-bar .fancybox-infobar,
+.admin-bar .fancybox-toolbar {
+    top: 32px;
 }
 
 /**************************************** RESPONSIVE **************************************/
 @media only screen and (max-width: 1200px) {
-#tour-map .tf-container {
-  padding: 40px 15px;
-}
+    #tour-map .tf-container {
+        padding: 40px 15px;
+    }
 }
 
 @media only screen and (max-width: 991px) {
-  .tf-map-content-wrapper {
-    display: block;
-  }
-  .tf-map-content-wrapper .about-location {
-    width: 100%;
-  }
+    .tf-map-content-wrapper {
+        display: block;
+    }
+
+    .tf-map-content-wrapper .about-location {
+        width: 100%;
+    }
 }
 
 @media (min-width: 641px) and (max-width: 991px) {
-.host-top {
-  display: block;
-  text-align: center;
-}
-.host-top img {
-  margin-bottom: 15px;
-}
-.host-bottom ul li span {
-  float: none;
-}
-.tf-apartment .features-details ul {
-  display: block;
-}
+    .host-top {
+        display: block;
+        text-align: center;
+    }
+
+    .host-top img {
+        margin-bottom: 15px;
+    }
+
+    .host-bottom ul li span {
+        float: none;
+    }
+
+    .tf-apartment .features-details ul {
+        display: block;
+    }
 }
 
 @media only screen and (max-width: 640px) {
-  .tf-apartment-title .tf-title-wrap, .tf-apartment .hero-wrapper {
-    display: block;
-  }
-  .tf-apartment-title .tf-title-right {
-    margin-top: 15px;
-  }
-  .tf-apartment-title .tf-single-rating, .tf-apartment-title .tf-share a, .tf-apartment-title .tf-wishlist-button {
-    font-size: 14px;
-  }
+    .tf-apartment-title .tf-title-wrap, .tf-apartment .hero-wrapper {
+        display: block;
+    }
 
-  .tf-apartment .hero-left {
-    margin-bottom: 15px;
-    width: 100%;
-  }
+    .tf-apartment-title .tf-title-right {
+        margin-top: 15px;
+    }
 
-  .tf-apartment .hero-right {
-    width: 100%;
-    display: flex;
-    gap: 15px;
-  }
+    .tf-apartment-title .tf-single-rating, .tf-apartment-title .tf-share a, .tf-apartment-title .tf-wishlist-button {
+        font-size: 14px;
+    }
 
-  .tf-apartment .hero-first-image img {
-    height: 350px;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 8px;
-  }
+    .tf-apartment .hero-left {
+        margin-bottom: 15px;
+        width: 100%;
+    }
 
-  .tf-apartment .hero-wrapper .hero-second-image {
-    margin-bottom: 0;
-    width: 50%;
-  }
+    .tf-apartment .hero-right {
+        width: 100%;
+        display: flex;
+        gap: 15px;
+    }
 
-  .tf-apartment .hero-wrapper .hero-second-image img {
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 8px;
-  }
+    .tf-apartment .hero-first-image img {
+        height: 350px;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 8px;
+    }
 
-  .tf-apartment .hero-third-image {
-    width: 50%;
-  }
+    .tf-apartment .hero-wrapper .hero-second-image {
+        margin-bottom: 0;
+        width: 50%;
+    }
 
-  .share-tour-content .tf-dropdown-content {
-      min-width: 270px;
-      margin-left: -170px;
-  }
+    .tf-apartment .hero-wrapper .hero-second-image img {
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 8px;
+    }
 
-  .tf-dropdown-content li {
-      display: block;
-  }
+    .tf-apartment .hero-third-image {
+        width: 50%;
+    }
 
-  .share-tour-content input#share_link_input {
-      width: 100% !important;
-      margin: 5px 0;
-      max-width: 100%;
-      display: block;
-  }
+    .share-tour-content .tf-dropdown-content {
+        min-width: 270px;
+        margin-left: -170px;
+    }
 
-  .share-tour-content {
-      left: 50px;
-  }
+    .tf-dropdown-content li {
+        display: block;
+    }
 
-  .share-tour-content .share-center-copy-form {
-      display: block;
-  }
+    .share-tour-content input#share_link_input {
+        width: 100% !important;
+        margin: 5px 0;
+        max-width: 100%;
+        display: block;
+    }
 
-  .tf-apartment .cf-wrapper {
-    flex-direction: column;
-  }
+    .share-tour-content {
+        left: 50px;
+    }
 
-  .tf-apartment .cf-left {
-    width: 100%;
-    order: 2;
-  }
+    .share-tour-content .share-center-copy-form {
+        display: block;
+    }
 
-  .tf-apartment .cf-right {
-    width: 100%;
-    order: 1;
-    margin-bottom: 35px;
-  }
-  .tf-map-content-wrapper iframe {
-    height: 280px;
-  }
+    .tf-apartment .cf-wrapper {
+        flex-direction: column;
+    }
+
+    .tf-apartment .cf-left {
+        width: 100%;
+        order: 2;
+    }
+
+    .tf-apartment .cf-right {
+        width: 100%;
+        order: 1;
+        margin-bottom: 35px;
+    }
+
+    .tf-map-content-wrapper iframe {
+        height: 280px;
+    }
 }
 
 @media only screen and (max-width: 480px) {
-  .tf-apartment .hero-first-image img {
-    height: 220px;
-  }
-  .tf-apartment .hero-right img {
-    height: 140px;
-  }
-  .tf-apartment .features-details ul {
-    display: block;
-  }
-  .tf-map-content-wrapper iframe {
-    height: 200px;
-  }
-  .apartment-question .apartment-qa-wrapper {
-    flex-direction: column;
-  }
-  .apartment-question .tf-btn {
-    margin-left: 0;
-    width: 100%;
-  }
+    .tf-apartment .hero-first-image img {
+        height: 220px;
+    }
+
+    .tf-apartment .hero-right img {
+        height: 140px;
+    }
+
+    .tf-apartment .features-details ul {
+        display: block;
+    }
+
+    .tf-map-content-wrapper iframe {
+        height: 200px;
+    }
+
+    .apartment-question .apartment-qa-wrapper {
+        flex-direction: column;
+    }
+
+    .apartment-question .tf-btn {
+        margin-left: 0;
+        width: 100%;
+    }
 }

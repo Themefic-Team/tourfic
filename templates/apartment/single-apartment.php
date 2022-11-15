@@ -29,20 +29,23 @@ while ( have_posts() ) : the_post();
 	 */
 	$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
 
-	$disable_share_opt  = ! empty( $meta['disable-apartment-share'] ) ? $meta['disable-apartment-share'] : '';
-	$disable_review_sec = ! empty( $meta['disable-apartment-review'] ) ? $meta['disable-apartment-review'] : '';
+	$disable_share_opt   = ! empty( $meta['disable-apartment-share'] ) ? $meta['disable-apartment-share'] : '';
+	$disable_review_sec  = ! empty( $meta['disable-apartment-review'] ) ? $meta['disable-apartment-review'] : '';
+	$disable_related_sec = ! empty( $meta['disable-related-apartment'] ) ? $meta['disable-related-apartment'] : '';
 
 	/**
 	 * Get global settings value
 	 */
-	$s_share  = ! empty( tfopt( 'disable-apartment-share' ) ) ? tfopt( 'disable-apartment-share' ) : 0;
-	$s_review = ! empty( tfopt( 'disable-apartment-review' ) ) ? tfopt( 'disable-apartment-review' ) : 0;
+	$s_share   = ! empty( tfopt( 'disable-apartment-share' ) ) ? tfopt( 'disable-apartment-share' ) : 0;
+	$s_review  = ! empty( tfopt( 'disable-apartment-review' ) ) ? tfopt( 'disable-apartment-review' ) : 0;
+	$s_related = ! empty( tfopt( 'disable-related-apartment' ) ) ? tfopt( 'disable-related-apartment' ) : 0;
 
 	/**
 	 * Disable Share and Review section
 	 */
-	$disable_share_opt  = ! empty( $disable_share_opt ) ? $disable_share_opt : $s_share;
-	$disable_review_sec = ! empty( $disable_review_sec ) ? $disable_review_sec : $s_review;
+	$disable_share_opt   = ! empty( $disable_share_opt ) ? $disable_share_opt : $s_share;
+	$disable_review_sec  = ! empty( $disable_review_sec ) ? $disable_review_sec : $s_review;
+	$disable_related_sec = ! empty( $disable_related_sec ) ? $disable_related_sec : $s_related;
 
 	// Wishlist
 	$post_type       = str_replace( 'tf_', '', get_post_type() );
@@ -92,8 +95,6 @@ while ( have_posts() ) : the_post();
 		}, $faqs );
 		$faqs                    = unserialize( $tf_apartment_faqs_value );
 	}
-	// Terms & condition
-	$tc = ! empty( $meta['tc'] ) ? $meta['tc'] : '';
 
 	$share_text = get_the_title();
 	$share_link = get_permalink( $post_id );
@@ -231,27 +232,45 @@ while ( have_posts() ) : the_post();
             <div class="tf-container">
                 <div class="hero-wrapper">
 					<?php if ( ! empty( $gallery_ids ) ) :
-						$first_image = ! empty( $gallery_ids[0] ) ? wp_get_attachment_image_src( $gallery_ids[0], 'tf_apartment_gallery_large' ) : '';
-						$second_image = ! empty( $gallery_ids[1] ) ? wp_get_attachment_image_src( $gallery_ids[1], 'tf_apartment_gallery_small' ) : '';
-						$third_image = ! empty( $gallery_ids[2] ) ? wp_get_attachment_image_src( $gallery_ids[2], 'tf_apartment_gallery_small' ) : '';
+						$first_image = ! empty( $gallery_ids[0] ) ? wp_get_attachment_image_url( $gallery_ids[0], 'tf_apartment_gallery_large' ) : '';
+						$second_image = ! empty( $gallery_ids[1] ) ? wp_get_attachment_image_url( $gallery_ids[1], 'tf_apartment_gallery_small' ) : '';
+						$third_image = ! empty( $gallery_ids[2] ) ? wp_get_attachment_image_url( $gallery_ids[2], 'tf_apartment_gallery_small' ) : '';
 						?>
                         <div class="hero-left">
                             <div class="hero-first-image">
-                                <img src="<?php echo esc_url( $first_image[0] ); ?>" alt="<?php echo esc_attr( $first_image[1] ); ?>">
+                                <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[0], 'full' ) ); ?>" data-fancybox="hotel-gallery">
+                                    <img src="<?php echo esc_url( $first_image ); ?>" alt="">
+                                </a>
                             </div>
                         </div>
 						<?php if ( $second_image || $third_image ): ?>
                         <div class="hero-right">
-                            <div class="hero-second-image">
-                                <img src="<?php echo esc_url( $second_image[0] ); ?>" alt="<?php echo esc_attr( $second_image[1] ); ?>">
-                            </div>
-                            <div class="hero-third-image">
-                                <img src="<?php echo esc_url( $third_image[0] ); ?>" alt="<?php echo esc_attr( $third_image[1] ); ?>">
-
-								<?php if ( count( $gallery_ids ) > 3 ): ?>
-                                    <a href="#" class="tf_button btn-styled"><?php _e( 'All Photos', 'tourfic' ) ?></a>
-								<?php endif; ?>
-                            </div>
+							<?php if ( !empty($second_image) ): ?>
+                                <div class="hero-second-image">
+                                    <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[1], 'full' ) ); ?>" data-fancybox="hotel-gallery">
+                                        <img src="<?php echo esc_url( $second_image ); ?>" alt="">
+                                    </a>
+                                </div>
+							<?php endif; ?>
+							<?php if ( ! empty( $third_image ) ): ?>
+                                <div class="hero-third-image">
+                                    <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[2], 'full' ) ); ?>" data-fancybox="hotel-gallery">
+                                        <img src="<?php echo esc_url( $third_image ); ?>" alt="">
+                                    </a>
+									<?php if ( count( $gallery_ids ) > 3 ): ?>
+                                        <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[3], 'full' ) ); ?>" class="tf_button btn-styled" data-fancybox="hotel-gallery">
+											<?php _e( 'All Photos', 'tourfic' ) ?>
+                                        </a>
+										<?php foreach ( $gallery_ids as $key => $item ) :
+											if ( $key < 4 ) {
+												continue;
+											}
+											?>
+                                            <a href="<?php echo esc_url( wp_get_attachment_image_url( $item, 'full' ) ); ?>" data-fancybox="hotel-gallery"></a>
+										<?php endforeach; ?>
+									<?php endif; ?>
+                                </div>
+							<?php endif; ?>
                         </div>
 					<?php endif; ?>
 					<?php else: ?>
@@ -298,7 +317,7 @@ while ( have_posts() ) : the_post();
                             </div>
 						<?php endif; ?>
 
-						<?php if ( isset( $meta['amenities'] ) && ! empty( $meta['amenities'] ) ) : ?>
+						<?php if ( ! empty( tf_data_types( $meta['amenities'] ) ) ) : ?>
                             <!-- Start Amenities Section -->
                             <div class="apartment-amenities sp-t-50">
 								<?php if ( ! empty( $meta['amenities_title'] ) ): ?>
@@ -321,7 +340,7 @@ while ( have_posts() ) : the_post();
                             </div>
 						<?php endif; ?>
 
-						<?php if ( isset( $meta['facilities'] ) && ! empty( $meta['facilities'] ) ) : ?>
+						<?php if ( ! empty( tf_data_types( $meta['facilities'] ) ) ) : ?>
                             <!-- Start What you will get here Section -->
                             <div class="apartment-options sp-t-50">
 								<?php if ( ! empty( $meta['facilities_title'] ) ): ?>
@@ -373,25 +392,27 @@ while ( have_posts() ) : the_post();
         </div>
         <!-- End Content & Feature Section -->
 
-        <!-- Map Section Start -->
-        <div id="tour-map" class="tf-map-wrapper sp-t-70">
-            <div class="tf-container">
-                <div class="tf-row">
-                    <div class="tf-map-content-wrapper">
-                        <div class="about-location">
-							<?php echo ! empty( $meta['location_sec_title'] ) ? '<h2 class="section-heading">' . esc_html( $meta['location_sec_title'] ) . '</h2>' : ''; ?>
-							<?php echo ! empty( $meta['location_title'] ) ? '<h4>' . esc_html( $meta['location_title'] ) . '</h4>' : ''; ?>
-							<?php echo ! empty( $meta['location_description'] ) ? '<p>' . esc_html( $meta['location_description'] ) . '</p>' : ''; ?>
+		<?php if ( ! empty( $map['address'] ) || ( ! empty( $meta['location_title'] ) && ! empty( $meta['location_description'] ) ) ): ?>
+            <!-- Map Section Start -->
+            <div id="tour-map" class="tf-map-wrapper sp-t-70">
+                <div class="tf-container">
+                    <div class="tf-row">
+                        <div class="tf-map-content-wrapper">
+                            <div class="about-location">
+								<?php echo ! empty( $meta['location_sec_title'] ) ? '<h2 class="section-heading">' . esc_html( $meta['location_sec_title'] ) . '</h2>' : ''; ?>
+								<?php echo ! empty( $meta['location_title'] ) ? '<h4>' . esc_html( $meta['location_title'] ) . '</h4>' : ''; ?>
+								<?php echo ! empty( $meta['location_description'] ) ? '<p>' . esc_html( $meta['location_description'] ) . '</p>' : ''; ?>
+                            </div>
+							<?php if ( ! empty( $map['address'] ) ): ?>
+                                <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=15&output=embed" width="100%" height="400"
+                                        style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+							<?php endif; ?>
                         </div>
-						<?php if ( ! empty( $map ) ): ?>
-                            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=15&output=embed" width="100%" height="400"
-                                    style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-						<?php endif; ?>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Map Section End -->
+            <!-- Map Section End -->
+		<?php endif; ?>
 
 		<?php if ( ! $disable_review_sec == 1 ) : ?>
             <!-- Start Review Section -->
@@ -406,42 +427,34 @@ while ( have_posts() ) : the_post();
             <!-- End Review Section -->
 		<?php endif; ?>
 
-        <!-- FAQ section Start -->
-        <div class="tf-faq-wrapper tf-apartment-faq sp-30">
-            <div class="tf-container">
-                <div class="tf-faq-sec-title">
-                    <h2 class="section-heading"><?php _e( "Frequently Asked Questions", 'tourfic' ); ?></h2>
-                    <p><?php _e( "Let’s clarify your confusions. Here are some of the Frequently Asked Questions which most of our client asks.", 'tourfic' ); ?></p>
-                </div>
+		<?php if ( $faqs ): ?>
+            <!-- FAQ section Start -->
+            <div class="tf-faq-wrapper tf-apartment-faq sp-30">
+                <div class="tf-container">
+                    <div class="tf-faq-sec-title">
+						<?php echo ! empty( $meta['faq_title'] ) ? '<h2 class="section-heading">' . esc_html( $meta['faq_title'] ) . '</h2>' : ''; ?>
+						<?php echo ! empty( $meta['faq_desc'] ) ? '<p>' . wp_kses_post( $meta['faq_desc'] ) . '</p>' : ''; ?>
+                    </div>
 
-                <div class="tf-faq-content-wrapper">
-                    <div class="tf-faq-items-wrapper">
-                        <div id="tf-faq-item">
-                            <div class="tf-faq-title">
-                                <h4>Can we make sure the first accordion stays open?</h4>
-                                <i class="fas fa-angle-down arrow"></i>
-                            </div>
-                            <div class="tf-faq-desc">
-                                <p>There are many variatio of passage of Lorem for a Ipsum available Lorem for a Ipsum available.There are many variatio of passage of lorem for a Ipsum available Lorem for a Ipsum
-                                    available.</p>
-                            </div>
-                        </div>
-
-                        <div id="tf-faq-item">
-                            <div class="tf-faq-title">
-                                <h4>Tassage of Lorem for a Ipsum available</h4>
-                                <i class="fas fa-angle-down arrow"></i>
-                            </div>
-                            <div class="tf-faq-desc">
-                                <p>There are many variatio of passage of Lorem for a Ipsum available Lorem for a Ipsum available.There are many variatio of passage of Lorem for a Ipsum available Lorem for a Ipsum
-                                    available.</p>
-                            </div>
+                    <div class="tf-faq-content-wrapper">
+                        <div class="tf-faq-items-wrapper">
+							<?php foreach ( $faqs as $key => $faq ): ?>
+                                <div id="tf-faq-item">
+                                    <div class="tf-faq-title">
+                                        <h4><?php esc_html_e( $faq['title'] ); ?></h4>
+                                        <i class="fas fa-angle-down arrow"></i>
+                                    </div>
+                                    <div class="tf-faq-desc">
+										<?php echo wp_kses_post( $faq['description'] ); ?>
+                                    </div>
+                                </div>
+							<?php endforeach; ?>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- FAQ section end -->
+            <!-- FAQ section end -->
+		<?php endif; ?>
 
         <!-- Start Question Content -->
         <div class="tf-ask-question apartment-question sp-40">
@@ -459,79 +472,70 @@ while ( have_posts() ) : the_post();
         </div>
         <!-- End Question Content -->
 
-        <!-- Start TOC Content -->
-        <div class="toc-section apartment-toc sp-50">
-            <div class="tf-container">
-                <div class="tf-toc-wrap gray-wrap">
-                    <h2 class="section-heading"><?php esc_html_e( 'Tour Terms & Conditions', 'tourfic' ); ?></h2>
-                    <div class="tf-toc-inner">
-                        <p>Lorem ipsum dolor sit amet consectetuer adipiscing elit sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-                            tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
-                            feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
-                        <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit
-                            eorum claritatem. </p>
+		<?php if ( ! empty( $meta['terms_and_conditions'] ) ) : ?>
+            <!-- Start TOC Content -->
+            <div class="toc-section apartment-toc sp-50">
+                <div class="tf-container">
+                    <div class="tf-toc-wrap gray-wrap">
+						<?php echo ! empty( $meta['terms_title'] ) ? '<h2 class="section-heading">' . esc_html( $meta['terms_title'] ) . '</h2>' : ''; ?>
+                        <div class="tf-toc-inner">
+							<?php echo wp_kses_post( $meta['terms_and_conditions'] ); ?>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- End TOC Content -->
+            <!-- End TOC Content -->
+		<?php endif; ?>
 
-        <!-- Apartment Suggestion section Start -->
-        <div class="apartment-options apartment-sugestion sp-40">
-            <div class="tf-container">
-                <h2 class="section-heading">Related Properties</h2>
-                <div class="tf-apartment-sugestion-slider-wrapper">
-                    <div class="tf-apartment-option-slider-item">
-                        <div class="tf-apartment-option-slider-content">
-                            <img src="https://cdn.pixabay.com/photo/2016/10/18/09/02/hotel-1749602_960_720.jpg" alt="">
-                            <div class="tf-apartment-option-slider-desc">
-                                <h3>Drawing Space</h3>
-                                <p>2 Double Bed</p>
+
+		<?php
+		$args              = array(
+			'post_type'      => 'tf_apartment',
+			'post_status'    => 'publish',
+			'posts_per_page' => 8,
+			'orderby'        => 'title',
+			'order'          => 'ASC',
+			'post__not_in'   => array( $post_id ),
+			'tax_query'      => array(
+				array(
+					'taxonomy' => 'apartment_location',
+					'field'    => 'term_id',
+					'terms'    => wp_list_pluck( $locations, 'term_id' ),
+				),
+			),
+		);
+		$related_apartment = new WP_Query( $args );
+
+		if ( ! $disable_related_sec == '1' && $related_apartment->have_posts() ) : ?>
+            <!-- Apartment Suggestion section Start -->
+            <div class="apartment-options apartment-sugestion sp-40">
+                <div class="tf-container">
+                    <h2 class="section-heading">Related Properties</h2>
+                    <div class="tf-apartment-sugestion-slider-wrapper">
+
+						<?php while ( $related_apartment->have_posts() ) : $related_apartment->the_post(); ?>
+                            <div class="tf-apartment-option-slider-item">
+                                <div class="tf-apartment-option-slider-content">
+									<?php if ( has_post_thumbnail() ) : ?>
+                                        <div class="tf-apartment-option-slider-img">
+                                            <a href="<?php the_permalink(); ?>">
+												<?php the_post_thumbnail( 'tourfic-370x250' ); ?>
+                                            </a>
+                                        </div>
+									<?php endif; ?>
+                                    <div class="tf-apartment-option-slider-desc">
+                                        <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+						<?php endwhile;
+						wp_reset_query(); ?>
                     </div>
-                    <!-- Remove all the below codes when you run the loop. These are added for demo purpose -->
-                    <div class="tf-apartment-option-slider-item">
-                        <div class="tf-apartment-option-slider-content">
-                            <img src="https://cdn.pixabay.com/photo/2016/04/15/11/48/hotel-1330850_960_720.jpg" alt="">
-                            <div class="tf-apartment-option-slider-desc">
-                                <h3>Library</h3>
-                                <p>Awesome library space for guest</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tf-apartment-option-slider-item">
-                        <div class="tf-apartment-option-slider-content">
-                            <img src="https://cdn.pixabay.com/photo/2014/05/18/19/15/walkway-347319_960_720.jpg" alt="">
-                            <div class="tf-apartment-option-slider-desc">
-                                <h3>Deluxe Bathroom</h3>
-                                <p>Watch Tiktok on Bathroom</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tf-apartment-option-slider-item">
-                        <div class="tf-apartment-option-slider-content">
-                            <img src="https://cdn.pixabay.com/photo/2015/01/10/11/39/hotel-595121_960_720.jpg" alt="">
-                            <div class="tf-apartment-option-slider-desc">
-                                <h3>Eita ekta hudai heading</h3>
-                                <p>Kemon asen shobai, valo?</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tf-apartment-option-slider-item">
-                        <div class="tf-apartment-option-slider-content">
-                            <img src="https://cdn.pixabay.com/photo/2015/01/10/11/39/hotel-595121_960_720.jpg" alt="">
-                            <div class="tf-apartment-option-slider-desc">
-                                <h3>Eita ekta hudai heading</h3>
-                                <p>Kemon asen shobai, valo?</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Remove all the above codes when you run the loop. These are added for demo purpose -->
                 </div>
             </div>
-        </div>
-        <!-- Apartment suggestion section End -->
+            <!-- Apartment suggestion section End -->
+		<?php endif; ?>
 
 		<?php do_action( 'tf_after_container' ); ?>
     </div>

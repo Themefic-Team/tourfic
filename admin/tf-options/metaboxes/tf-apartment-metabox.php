@@ -44,6 +44,16 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				),
 
 				array(
+					'id'        => 'disable-related-apartment',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Related Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false,
+					'field_width' => 50,
+				),
+
+				array(
 					'id'     => 'notice',
 					'type'   => 'notice',
 					'notice' => 'info',
@@ -170,6 +180,65 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					),
 				),
 			),
-		)
+		),
+		// faq and terms and conditions
+		'faq' => array(
+			'title'  => __( 'FAQ & Terms', 'tourfic' ),
+			'icon'   => 'fa-solid fa-clipboard-question',
+			'fields' => array(
+				array(
+					'id'      => 'faq_heading',
+					'type'    => 'heading',
+					'content' => __( 'Frequently Asked Questions', 'tourfic' ),
+				),
+				array(
+					'id'       => 'faq_title',
+					'type'     => 'text',
+					'label'    => __( 'FAQ Title', 'tourfic' ),
+					'subtitle' => __( 'Enter FAQ title', 'tourfic' ),
+				),
+				array(
+					'id'       => 'faq_desc',
+					'type'     => 'textarea',
+					'label'    => __( 'FAQ Description', 'tourfic' ),
+					'subtitle' => __( 'Enter FAQ description', 'tourfic' ),
+				),
+				array(
+					'id'           => 'faq',
+					'type'         => 'repeater',
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'label'        => __( 'Frequently Asked Questions', 'tourfic' ),
+					'fields'       => array(
+						array(
+							'id'    => 'title',
+							'type'  => 'text',
+							'label' => __( 'Title', 'tourfic' ),
+						),
+						array(
+							'id'    => 'description',
+							'type'  => 'editor',
+							'label' => __( 'Description', 'tourfic' ),
+						),
+					),
+				),
+				array(
+					'id'      => 'terms_heading',
+					'type'    => 'heading',
+					'content' => __( 'Terms & Conditions', 'tourfic' ),
+				),
+				array(
+					'id'       => 'terms_title',
+					'type'     => 'text',
+					'label'    => __( 'Terms Title', 'tourfic' ),
+					'subtitle' => __( 'Enter terms title', 'tourfic' ),
+				),
+				array(
+					'id'       => 'terms_and_conditions',
+					'type'     => 'editor',
+					'label'    => __( 'Terms & Conditions', 'tourfic' ),
+					'subtitle' => __( 'Enter terms & conditions', 'tourfic' ),
+				),
+			),
+		),
 	),
 ) );

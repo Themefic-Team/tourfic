@@ -126,6 +126,15 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false
 				),
+
+				array(
+					'id'        => 'disable-related-apartment',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Related Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
 			),
 		),
 
