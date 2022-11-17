@@ -684,6 +684,7 @@ function tf_search_result_ajax_sidebar() {
 	$filters  = ( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
 	$features = ( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
 	$attractions = ( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
+	$activities = ( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
 	$posttype = $_POST['type'] ? sanitize_text_field( $_POST['type'] ) : 'tf_hotel';
 	# Separate taxonomy input for filter query
 	$place_taxonomy  = $posttype == 'tf_tours' ? 'tour_destination' : 'hotel_location';
@@ -820,6 +821,30 @@ function tf_search_result_ajax_sidebar() {
 		}
 
 	}
+
+	//Query for the activities filter of tours
+	if ( $activities ) {
+		$args['tax_query']['relation'] = $relation;
+
+		if ( $filter_relation == "OR" ) {
+			$args['tax_query'][] = array(
+				'taxonomy' => 'tour_activities',
+				'terms'    => $activities,
+			);
+		} else {
+			$args['tax_query']['tour_activities']['relation'] = 'AND';
+
+			foreach ( $activities as $key => $term_id ) {
+				$args['tax_query']['tour_activities'][] = array(
+					'taxonomy' => 'tour_activities',
+					'terms'    => array( $term_id ),
+				);
+			}
+
+		}
+
+	}
+
 	# Add meta if dates exists and post type is tours
 	if ( $checkin && $posttype == ' tf_tours' ) {
 

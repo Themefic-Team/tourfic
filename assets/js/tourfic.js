@@ -429,6 +429,15 @@
             });
             var attractions = attractions.join();
 
+            //get tour activities checked values
+            var activities = [];
+            $('[name*=tf_activities]').each(function () {
+                if ($(this).is(':checked')) {
+                    activities.push($(this).val());
+                }
+            });
+            var activities = activities.join();
+
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
             formData.append('type', posttype);
@@ -441,6 +450,7 @@
             formData.append('filters', filters);
             formData.append('features', features);
             formData.append('attractions', attractions);
+            formData.append('activities', activities);
             formData.append('checked', checked);
             if (startprice) {
                 formData.append('startprice', startprice);
@@ -493,7 +503,7 @@
             e.preventDefault();
             makeFilter()
         });
-        $(document).on('change', '[name*=tf_filters],[name*=tf_features],[name*=tf_attractions]', function () {
+        $(document).on('change', '[name*=tf_filters],[name*=tf_features],[name*=tf_attractions],[name*=tf_activities]', function () {
             makeFilter();
         })
 
