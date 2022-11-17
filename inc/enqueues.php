@@ -59,7 +59,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
             if(defined( 'TF_PRO' )){
                 wp_enqueue_script( 'Chart', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js', array( 'jquery' ), '2.6.0', true );
                 $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
-                $itineraries = $meta['itinerary'] ? $meta['itinerary'] : null;
+                $itineraries = !empty ( $meta['itinerary'] ) ? $meta['itinerary'] : null;
                 $itinerarayday = [];
                 $itineraraymeter = [];
                 if( $itineraries ) {

@@ -52,7 +52,7 @@ while ( have_posts() ) : the_post();
 		$location = $text_location;
 	}
 	// Gallery
-	$gallery = $meta['tour_gallery'] ? $meta['tour_gallery'] : array();
+	$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : array();
 	if ( $gallery ) {
 		$gallery_ids = explode( ',', $gallery );
 	}
@@ -67,19 +67,19 @@ while ( have_posts() ) : the_post();
 
 	$min_days = ! empty( $meta['min_days'] ) ? $meta['min_days'] : '';
 
-	$faqs            = $meta['faqs'] ? $meta['faqs'] : null;
-	$inc             = $meta['inc'] ? $meta['inc'] : null;
-	$exc             = $meta['exc'] ? $meta['exc'] : null;
+	$faqs            = ! empty( $meta['faqs'] ) ? $meta['faqs'] : null;
+	$inc             = ! empty( $meta['inc'] ) ? $meta['inc'] : null;
+	$exc             = ! empty( $meta['exc'] ) ? $meta['exc'] : null;
 	$inc_icon        = ! empty( $meta['inc_icon'] ) ? $meta['inc_icon'] : null;
 	$exc_icon        = ! empty( $meta['exc_icon'] ) ? $meta['exc_icon'] : null;
 	$custom_inc_icon = ! empty( $inc_icon ) ? "custom-inc-icon" : '';
 	$custom_exc_icon = ! empty( $exc_icon ) ? "custom-exc-icon" : '';
-	$itineraries     = $meta['itinerary'] ? $meta['itinerary'] : null;
+	$itineraries     = ! empty( $meta['itinerary'] ) ? $meta['itinerary'] : null;
 	//continuous tour
 	$share_text = get_the_title();
 	$share_link = esc_url( home_url( "/?p=" ) . $post_id );
 
-	$terms_and_conditions = $meta['terms_conditions'];
+	$terms_and_conditions = ! empty( $meta['terms_conditions'] ) ? $meta['terms_conditions'] : '';
 	$tf_faqs              = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $post->ID, 'tf_faqs', true ) : array();
 
 	/**
