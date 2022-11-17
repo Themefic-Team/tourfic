@@ -173,7 +173,7 @@
         });
 
         $(window).on('load', function() {
-            $('.tf-field-pro').find('input, select, textarea, button, div, span').attr('disabled', 'disabled');
+            $('.tf-field-disable').find('input, select, textarea, button, div, span').attr('disabled', 'disabled');
         });
 
         $(document).on('click', '.tf-field-pro', function(e) {

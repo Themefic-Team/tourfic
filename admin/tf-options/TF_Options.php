@@ -33,12 +33,13 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			$this->load_taxonomy();
 
 			//enqueue scripts
-			add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_enqueue_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_admin_enqueue_scripts' ) );
+			add_action( 'wp_enqueue_scripts', array( $this, 'tf_options_wp_enqueue_scripts' ) );
 		}
 
-        public function tf_options_version() {
-            return '1.0.0';
-        }
+		public function tf_options_version() {
+			return '1.0.0';
+		}
 
 		public function tf_options_file_path( $file_path = '' ) {
 			return plugin_dir_path( __FILE__ ) . $file_path;
@@ -126,10 +127,10 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		}
 
 		/**
-		 * Enqueue scripts
+		 * Admin Enqueue scripts
 		 * @author Foysal
 		 */
-		public function tf_options_enqueue_scripts() {
+		public function tf_options_admin_enqueue_scripts() {
 			//Css
 			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_style( 'tf-fontawesome-4', '//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css', array(), $this->tf_options_version() );
@@ -146,7 +147,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			wp_enqueue_script( 'wp-color-picker-alpha', $this->tf_options_file_url( 'assets/js/wp-color-picker-alpha.js' ), array( 'jquery', 'wp-color-picker' ), $this->tf_options_version(), true );
 			wp_enqueue_script( 'tf-options', $this->tf_options_file_url( 'assets/js/tf-options.js' ), array( 'jquery', 'wp-color-picker' ), $this->tf_options_version(), true );
 
-            $tf_google_map = defined( 'TF_PRO' ) && ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "false";
+			$tf_google_map = defined( 'TF_PRO' ) && ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "false";
 			wp_localize_script( 'tf-options', 'tf_options', array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'nonce'    => wp_create_nonce( 'tf_options_nonce' ),
@@ -164,6 +165,17 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			wp_enqueue_media();
 			wp_enqueue_editor();
 
+		}
+
+		/**
+		 * Enqueue scripts
+		 * @author Foysal
+		 */
+		public function tf_options_wp_enqueue_scripts() {
+			wp_enqueue_style( 'tf-fontawesome-4', '//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css', array(), $this->tf_options_version() );
+			wp_enqueue_style( 'tf-fontawesome-5', '//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css', array(), $this->tf_options_version() );
+			wp_enqueue_style( 'tf-fontawesome-6', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css', array(), $this->tf_options_version() );
+			wp_enqueue_style( 'tf-remixicon', '//cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css', array(), $this->tf_options_version() );
 		}
 
 		/*
@@ -185,8 +197,11 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			if ( defined( 'TF_PRO' ) ) {
 				$is_pro = false;
 			}
-			if ( $is_pro == true || $badge_up == true ) {
+			if ( $is_pro == true ) {
 				$class .= ' tf-field-disable tf-field-pro';
+			}
+			if ( $badge_up == true ) {
+				$class .= ' tf-field-disable tf-field-upcoming';
 			}
 			$tf_meta_box_dep_value = get_post_meta( get_the_ID(), $settings_id, true );
 

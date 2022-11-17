@@ -464,9 +464,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                         <!-- Footer -->
                         <div class="tf-option-footer">
                             <button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn"><?php _e( 'Save', 'tourfic' ); ?></button>
-
-							<span><?php _e( 'By', 'tourfic' ) ?><a href="https://tourfic.com/" target="_blank"><?php _e( 'Themefic', 'tourfic' ) ?></a></span>
-
                         </div>
 
 						<?php wp_nonce_field( 'tf_option_nonce_action', 'tf_option_nonce' ); ?>

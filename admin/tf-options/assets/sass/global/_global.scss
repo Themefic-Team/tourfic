@@ -176,4 +176,21 @@ body.tf-modal-open {
 
 .tf-field-disable {
   user-select: none;
+  opacity: .6;
+}
+
+.tf-field-disable.tf-field-upcoming {
+  user-select: none;
+  cursor: default;
+
+  * {
+    cursor: default !important;
+  }
+}
+
+/*
+Fontawesome
+*/
+.fa, .far, .fas {
+  font-family: "FontAwesome" !important;
 }

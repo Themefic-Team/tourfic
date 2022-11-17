@@ -16,7 +16,7 @@
 }
 
 .gray-wrap {
-    background-color: $blue0;
+    background-color: #f5f8ff;
 }
 
 .section-heading {
@@ -1184,6 +1184,12 @@ a.tf_button.btn-styled:focus {
     transition: 0.3s;
 }
 
+/*
+Fontawesome
+*/
+.fa, .far, .fas {
+    font-family: "FontAwesome" !important;
+}
 /**************************************** RESPONSIVE **************************************/
 @media only screen and (max-width: 1000px) {
     form.tf-review-form {
