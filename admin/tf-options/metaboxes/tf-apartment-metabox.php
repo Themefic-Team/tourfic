@@ -61,6 +61,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				),
 			)
 		),
+		// location
 		'location'         => array(
 			'title'  => __( 'Location', 'tourfic' ),
 			'icon'   => 'fa-solid fa-location-dot',
@@ -107,6 +108,83 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'     => 'textarea',
 					'label'    => __( 'Location Description', 'tourfic' ),
 					'subtitle' => __( 'Enter location description', 'tourfic' ),
+				),
+			),
+		),
+		// Booking
+		'booking'         => array(
+			'title'  => __( 'Booking', 'tourfic' ),
+			'icon'   => 'fa-solid fa-sack-dollar',
+			'fields' => array(
+				array(
+					'id'       => 'price_per_night',
+					'type'     => 'number',
+					'label'    => __( 'Price Per Night', 'tourfic' ),
+					'subtitle' => __( 'Enter price per night', 'tourfic' ),
+					'field_width' => 50,
+					'attributes' => array(
+						'min' => 0
+					)
+				),
+				array(
+					'id'       => 'min_stay',
+					'type'     => 'number',
+					'label'    => __( 'Minimum Night Stay', 'tourfic' ),
+					'subtitle' => __( 'Enter minimum night stay', 'tourfic' ),
+					'field_width' => 50,
+					'attributes' => array(
+						'min' => 0
+					)
+				),
+				array(
+					'id'       => 'max_adults',
+					'type'     => 'number',
+					'label'    => __( 'Maximum Adults', 'tourfic' ),
+					'subtitle' => __( 'Enter maximum adults', 'tourfic' ),
+					'field_width' => 33.33,
+					'attributes' => array(
+						'min' => 1
+					)
+				),
+				array(
+					'id'       => 'max_children',
+					'type'     => 'number',
+					'label'    => __( 'Maximum Children', 'tourfic' ),
+					'subtitle' => __( 'Enter maximum children', 'tourfic' ),
+					'field_width' => 33.33,
+					'attributes' => array(
+						'min' => 0
+					)
+				),
+				array(
+					'id'       => 'max_infants',
+					'type'     => 'number',
+					'label'    => __( 'Maximum Infants', 'tourfic' ),
+					'subtitle' => __( 'Enter maximum infants', 'tourfic' ),
+					'field_width' => 33.33,
+					'attributes' => array(
+						'min' => 0
+					)
+				),
+				array(
+					'id'       => 'service_fee',
+					'type'     => 'number',
+					'label'    => __( 'Service Fee', 'tourfic' ),
+					'subtitle' => __( 'Enter service fee', 'tourfic' ),
+					'field_width' => 50,
+					'attributes' => array(
+						'min' => 0
+					)
+				),
+				array(
+					'id'       => 'cleaning_fee',
+					'type'     => 'number',
+					'label'    => __( 'Cleaning Fee', 'tourfic' ),
+					'subtitle' => __( 'Enter cleaning fee', 'tourfic' ),
+					'field_width' => 50,
+					'attributes' => array(
+						'min' => 0
+					)
 				),
 			),
 		),

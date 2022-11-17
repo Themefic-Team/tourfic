@@ -465,7 +465,7 @@
                 complete: function (data) {
                     $('.archive_ajax_result').unblock();
                 },
-                success: function (data,e) {
+                success: function (data, e) {
                     $('.archive_ajax_result').unblock();
 
                     $('.archive_ajax_result').html(data);
@@ -613,7 +613,7 @@
          *
          * Slick
          */
-         $('.tf-apartment-option-slider-wrapper').slick({
+        $('.tf-apartment-option-slider-wrapper').slick({
             dots: true,
             arrows: false,
             infinite: true,
@@ -654,7 +654,7 @@
          *
          * Slick
          */
-         $('.tf-apartment-sugestion-slider-wrapper').slick({
+        $('.tf-apartment-sugestion-slider-wrapper').slick({
             dots: false,
             arrows: false,
             infinite: true,
@@ -1103,7 +1103,14 @@
         // Number Increment
         $('.acr-inc').on('click', function (e) {
             var input = $(this).parent().find('input');
-            input.val(parseInt(input.val()) + 1).change();
+            var max = input.attr('max');
+            var step = input.attr('step') ? input.attr('step') : 1;
+
+            if(input.val() < max){
+                input.val(parseInt(input.val()) + parseInt(step)).change();
+            }
+            // input focus disable
+            input.blur();
         });
 
         // Number Decrement
@@ -1111,11 +1118,11 @@
 
             var input = $(this).parent().find('input');
             var min = input.attr('min');
+            var step = input.attr('step') ? input.attr('step') : 1;
 
             if (input.val() > min) {
-                input.val(input.val() - 1).change();
+                input.val(input.val() - parseInt(step)).change();
             }
-
         });
 
         // Adults change trigger
@@ -1328,7 +1335,7 @@
             grid: false,
             theme: "dark",
         };
-        if(tf_params.tf_hotel_min_price!=0 && tf_params.tf_hotel_max_price!=0){
+        if (tf_params.tf_hotel_min_price != 0 && tf_params.tf_hotel_max_price != 0) {
             $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
         }
 
@@ -1346,7 +1353,7 @@
             grid: false,
             theme: "dark",
         };
-        if(tf_params.tf_tour_min_price!=0 && tf_params.tf_tour_max_price!=0){
+        if (tf_params.tf_tour_min_price != 0 && tf_params.tf_tour_max_price != 0) {
             $('.tf-tour-filter-range').alRangeSlider(tf_tour_range_options);
         }
 
@@ -1464,37 +1471,37 @@
     });
 
 
-/**
- * Children age field add when children added in search field
- * @since 2.8.6
- * @author Abu Hena
- */
+    /**
+     * Children age field add when children added in search field
+     * @since 2.8.6
+     * @author Abu Hena
+     */
 
-if($('.child-age-limited')[0]){
-    $('.acr-select .child-inc').on('click',function(){
-        var first_element = $('div[id^="tf-age-field-0"]');
-        var ch_element = $('div[id^="tf-age-field-"]:last');
-        if(ch_element.length !=0){
-            var num = parseInt( ch_element.prop("id").match(/\d+/g), 10 ) +1;
-        }
-        var elements = ch_element.clone().prop('id', 'tf-age-field-'+num );
-        elements.find("label").html('Child age ' + num);
-        //elements.find("select").attr('name','children_'+num+'_age');
-        elements.find("select").attr('name','children_ages[]');
-        ch_element.after(elements);
-        elements.show();
-        first_element.hide();
+    if ($('.child-age-limited')[0]) {
+        $('.acr-select .child-inc').on('click', function () {
+            var first_element = $('div[id^="tf-age-field-0"]');
+            var ch_element = $('div[id^="tf-age-field-"]:last');
+            if (ch_element.length != 0) {
+                var num = parseInt(ch_element.prop("id").match(/\d+/g), 10) + 1;
+            }
+            var elements = ch_element.clone().prop('id', 'tf-age-field-' + num);
+            elements.find("label").html('Child age ' + num);
+            //elements.find("select").attr('name','children_'+num+'_age');
+            elements.find("select").attr('name', 'children_ages[]');
+            ch_element.after(elements);
+            elements.show();
+            first_element.hide();
 
-    })
+        })
 
-    $('.acr-select .child-dec').on('click',function(){
-        var total_age_input = $('.tf-children-age').length;
-        var ch_element = $('div[id^="tf-age-field-"]:last');
-        if(total_age_input != 1){
-            ch_element.remove();
-        }
-    })
-}
+        $('.acr-select .child-dec').on('click', function () {
+            var total_age_input = $('.tf-children-age').length;
+            var ch_element = $('div[id^="tf-age-field-"]:last');
+            if (total_age_input != 1) {
+                ch_element.remove();
+            }
+        })
+    }
 
 })(jQuery, window);
 

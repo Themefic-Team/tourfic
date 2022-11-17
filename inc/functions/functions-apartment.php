@@ -180,3 +180,163 @@ function tf_apartment_rewrite_flush() {
 }
 
 register_activation_hook( TF_PATH . 'tourfic.php', 'tf_apartment_rewrite_flush' );
+
+/**
+ * Single Hotel Sidebar Booking Form
+ */
+function tf_apartment_single_booking_form( $b_check_in = '', $b_check_out = '' ) {
+
+	$meta            = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+	$max_adults      = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
+	$max_children    = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
+	$max_infants     = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
+	$price_per_night = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
+	$service_fee     = ! empty( $meta['service_fee'] ) ? $meta['service_fee'] : 0;
+	$cleaning_fee    = ! empty( $meta['cleaning_fee'] ) ? $meta['cleaning_fee'] : 0;
+	?>
+
+    <!-- Start Booking widget -->
+    <form id="tf-apartment-booking" class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off">
+
+		<?php wp_nonce_field( 'check_room_avail_nonce', 'tf_room_avail_nonce' ); ?>
+
+        <div class="tf-apartment-form-header">
+            <h3 class="tf-apartment-price-per-night"><?php echo wc_price( $price_per_night ) ?><span><?php _e( '/per night', 'tourfic' ) ?></span></h3>
+        </div>
+
+        <div class="tf_form-row">
+            <label class="tf_label-row">
+                <span class="tf-label"><?php _e( 'Guests', 'tourfic' ); ?></span>
+                <div class="tf_form-inner">
+                    <i class="fas fa-user-friends"></i>
+                    <div class="tf_selectperson-wrap">
+                        <div class="tf_input-inner">
+                            <div class="adults-text"><?php _e( '1 Adults', 'tourfic' ); ?></div>
+                            <div class="person-sep"></div>
+                            <div class="child-text"><?php _e( '0 Children', 'tourfic' ); ?></div>
+                            <div class="person-sep"></div>
+                            <div class="infant-text"><?php _e( '0 Infant', 'tourfic' ); ?></div>
+                        </div>
+                        <div class="tf_acrselection-wrap">
+                            <div class="tf_acrselection-inner">
+                                <div class="tf_acrselection">
+                                    <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
+                                    <div class="acr-select">
+                                        <div class="acr-dec">-</div>
+                                        <input type="number" name="adults" id="adults" min="1" value="1" max="<?php echo esc_attr( $max_adults ); ?>"/>
+                                        <div class="acr-inc">+</div>
+                                    </div>
+                                </div>
+                                <div class="tf_acrselection">
+                                    <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
+                                    <div class="acr-select">
+                                        <div class="acr-dec">-</div>
+                                        <input type="number" name="children" id="children" min="0" value="0" max="<?php echo esc_attr( $max_children ); ?>"/>
+                                        <div class="acr-inc">+</div>
+                                    </div>
+                                </div>
+                                <div class="tf_acrselection">
+                                    <div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
+                                    <div class="acr-select">
+                                        <div class="acr-dec">-</div>
+                                        <input type="number" name="infant" id="infant" min="0" value="0" max="<?php echo esc_attr( $max_infants ); ?>"/>
+                                        <div class="acr-inc">+</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </label>
+        </div>
+
+        <div class="tf_booking-dates">
+            <div class="tf_form-row">
+                <label class="tf_label-row">
+                    <span class="tf-label"><?php _e( 'Check-in & Check-out date', 'tourfic' ); ?></span>
+                    <div class="tf_form-inner">
+                        <i class="far fa-calendar-alt"></i>
+                        <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
+                               placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div class="tf_form-row">
+			<?php $ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type(); ?>
+            <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type"/>
+            <input type="hidden" name="post_id" value="<?php echo get_the_ID(); ?>"/>
+
+            <div class="tf-btn">
+                <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( 'Reserve', 'tourfic' ); ?></button>
+            </div>
+        </div>
+
+        <ul class="tf-apartment-price-list">
+            <li class="total-days-price-wrap">
+                <span class="total-days"></span>
+                <span class="days-total-price"></span>
+            </li>
+            <li class="service-fee-wrap">
+                <span class="service-fee-label"><?php _e( 'Service Fee', 'tourfic' ); ?></span>
+                <span class="service-fee"></span>
+            </li>
+
+			<?php if ( $cleaning_fee ): ?>
+                <li class="cleaning-fee-wrap">
+                    <span class="cleaning-fee-label"><?php _e( 'Cleaning Fee', 'tourfic' ); ?></span>
+                    <span class="cleaning-fee"><?php echo wc_price( $cleaning_fee ); ?></span>
+                </li>
+			<?php endif; ?>
+
+            <li class="total-price-wrap">
+                <span class="total-price-label"><?php _e( 'Total Price', 'tourfic' ); ?></span>
+                <span class="total-price"></span>
+            </li>
+        </ul>
+
+    </form>
+
+    <script>
+        (function ($) {
+            $(document).ready(function () {
+
+                const checkinoutdateange = flatpickr("#tf-apartment-booking #check-in-out-date", {
+                    enableTime: false,
+                    mode: "range",
+                    minDate: "today",
+                    dateFormat: "Y/m/d",
+                    onReady: function (selectedDates, dateStr, instance) {
+                        //minimum 5 days
+                    },
+                    onChange: function (selectedDates, dateStr, instance) {
+                        instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+
+                        //calculate total days
+                        if (selectedDates[0] && selectedDates[1]) {
+                            var diff = Math.abs(selectedDates[1] - selectedDates[0]);
+                            var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+                            var price_per_night = <?php echo $price_per_night; ?>;
+                            var total_price = price_per_night * days;
+                            var total_price_html = '<?php echo wc_price( 0 ); ?>';
+                            if (total_price > 0) {
+                                total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
+                            }
+                            $('.total-days-price-wrap .total-days').html(<?php echo $price_per_night; ?> +' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
+                            $('.total-days-price-wrap .days-total-price').html(total_price_html);
+                        }
+                    },
+
+					<?php
+					// Flatpickt locale for translation
+					tf_flatpickr_locale();
+					?>
+                });
+
+            });
+        })(jQuery);
+    </script>
+
+	<?php
+}

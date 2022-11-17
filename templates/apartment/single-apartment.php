@@ -384,7 +384,7 @@ while ( have_posts() ) : the_post();
                             </div>
                         </div>
                         <div class="apartment-booking-form">
-                            <h3>Form for Booking</h3>
+                            <?php tf_apartment_single_booking_form(); ?>
                         </div>
                     </div>
                 </div>
