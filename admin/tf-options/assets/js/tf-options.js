@@ -29,7 +29,7 @@
                 selectedTab.trigger('click');
                 parentDiv.trigger('click');
             }
-            console.log(query.indexOf('dashboard') > -1)
+
             if (query.indexOf('dashboard') > -1) {
                 let submenu = $("#toplevel_page_tf_settings").find(".wp-submenu");
                 submenu.find("a").filter(function (a, e) {
@@ -275,7 +275,6 @@
             let btn = $(this);
 
             let fieldId = btn.closest('.tf-icon-select').attr('id');
-            console.log('feildId', fieldId)
             $('#tf-icon-modal').data('icon-field', fieldId);
         });
 
@@ -305,8 +304,6 @@
                 field = $('#' + fieldId),
                 preview = field.find('.tf-icon-preview'),
                 icon = $('.tf-icon-list li.active').data('icon');
-
-            console.log('fieldId2', fieldId);
 
             if (icon) {
                 preview.removeClass('tf-hide');
