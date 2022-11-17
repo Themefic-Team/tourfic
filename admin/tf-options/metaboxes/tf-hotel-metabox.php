@@ -361,6 +361,9 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 									'label'    => __( 'Adult Pricing', 'tourfic' ),
 									'subtitle' => __( 'The price of room per one night', 'tourfic' ),
 									'is_pro'   => true,
+									'dependency' => array(
+										array( 'pricing-by', '==', '2' ),
+									),
 								),
 
 								array(
@@ -369,6 +372,9 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 									'title'    => __( 'Children Pricing', 'tourfic' ),
 									'subtitle' => __( 'The price of room per one night', 'tourfic' ),
 									'is_pro'   => true,
+									'dependency' => array(
+										array( 'pricing-by', '==', '2' ),
+									),
 								),
 
 							),

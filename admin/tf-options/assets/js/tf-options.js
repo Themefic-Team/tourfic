@@ -19,14 +19,7 @@
         */
         $(window).on('hashchange load', function () {
             let hash = window.location.hash;
-
-            // if (hash.indexOf('tab=dashboard') > -1) {
-            //     $('.tf-deshboard-wrapper').show();
-            //     $('.tf-option-wrapper').hide();
-            // } else {
-            //     $('.tf-deshboard-wrapper').hide();
-            //     $('.tf-option-wrapper').show();
-            // }
+            let query = window.location.search;
             let slug = hash.replace('#tab=', '');
 
             if (hash) {
@@ -35,6 +28,13 @@
 
                 selectedTab.trigger('click');
                 parentDiv.trigger('click');
+            }
+            console.log(query.indexOf('dashboard') > -1)
+            if (query.indexOf('dashboard') > -1) {
+                let submenu = $("#toplevel_page_tf_settings").find(".wp-submenu");
+                submenu.find("a").filter(function (a, e) {
+                    return e.href.indexOf(query) > -1;
+                }).parent().addClass("current");
             }
         });
 
@@ -47,6 +47,7 @@
             let firstTabId,
                 $this = $(this),
                 parentDiv = $this.closest('.tf-admin-tab-item'),
+                parentTabId = parentDiv.children('.tf-tablinks').attr('data-tab'),
                 tabcontent = $('.tf-tab-content'),
                 tablinks = $('.tf-tablinks');
 
@@ -69,6 +70,12 @@
             window.location.hash = '#tab=' + tabId;
 
             $(".tf-admin-tab").removeClass('active');
+
+            let submenu = $("#toplevel_page_tf_settings").find(".wp-submenu");
+            submenu.find("a").filter(function (a, e) {
+                let slug = e.hash.replace('#tab=', '');
+                return tabId === slug || parentTabId === slug;
+            }).parent().addClass("current").siblings().removeClass("current")
         });
 
         /*
@@ -140,7 +147,6 @@
         }
         tfTimeInt('.tf-field-time');
 
-       
 
         /*
         * Each color field initialize wpColorPicker
@@ -379,7 +385,7 @@
                 },
                 success: function (response) {
                     let obj = JSON.parse(response);
-                    if(obj.status === 'success'){
+                    if (obj.status === 'success') {
                         notyf.success(obj.message);
                     } else {
                         notyf.error(obj.message);
@@ -397,40 +403,41 @@
         * Each select2 field initialize select2
         * @author: Foysal, Sydur
         */
-         const tfSelect2Int = select2Selector => {
-            let $this = select2Selector, 
-                id = $this.attr('id'), 
+        const tfSelect2Int = select2Selector => {
+            let $this = select2Selector,
+                id = $this.attr('id'),
                 placeholder = $this.data('placeholder');
 
-                $('#'+id+'').select2({
-                    placeholder: placeholder,
-                    allowClear: true,
-                });
+            $('#' + id + '').select2({
+                placeholder: placeholder,
+                allowClear: true,
+            });
         }
-        
+
         $('select.tf-select2').each(function () {
             var $this = $(this);
             tfSelect2Int($this);
         });
-        
+
 
         /*
         * Options WP editor
         * @author: Sydur
         */
-        function TF_wp_editor($id){
+        function TF_wp_editor($id) {
             wp.editor.initialize($id, {
                 tinymce: {
-                  wpautop: true,
-                  plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
-                  toolbar1: 'formatselect,bold,italic,bullist,numlist,blockquote,alignleft,aligncenter,alignright,link,wp_more,spellchecker,fullscreen,wp_adv,listbuttons',
-                  toolbar2: 'styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
-                //   textarea_rows : 20
+                    wpautop: true,
+                    plugins: 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
+                    toolbar1: 'formatselect,bold,italic,bullist,numlist,blockquote,alignleft,aligncenter,alignright,link,wp_more,spellchecker,fullscreen,wp_adv,listbuttons',
+                    toolbar2: 'styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
+                    //   textarea_rows : 20
                 },
                 quicktags: {buttons: 'strong,em,link,block,del,ins,img,ul,ol,li,code,more,close'},
                 mediaButtons: false,
             });
         }
+
         $('textarea.wp_editor').each(function () {
             let $id = $(this).attr('id');
             TF_wp_editor($id);
@@ -453,9 +460,9 @@
 
             $this_parent.find('.tf-repeater-wrap .tf-field-notice-inner').remove();
             // Chacked maximum repeater
-            if(max != '' && count >= max){
-                $this_parent.find('.tf-repeater-wrap').append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You cannot add more.</div>'); 
-                return false; 
+            if (max != '' && count >= max) {
+                $this_parent.find('.tf-repeater-wrap').append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You cannot add more.</div>');
+                return false;
             }
 
             // Repeater Count Add Value
@@ -463,7 +470,7 @@
 
             // Repeater Room Unique ID
             var room_uniqueid = add_value.find('.unique-id input');
-            if(typeof room_uniqueid !== "undefined"){
+            if (typeof room_uniqueid !== "undefined") {
                 add_value.find('.unique-id input').val(new Date().valueOf() + count);
             }
             let repeatDateField = add_value.find('.tf-field-date');
@@ -474,7 +481,7 @@
             let repeatTimeField = add_value.find('.tf-field-time');
             if (repeatTimeField.length > 0) {
                 tfTimeInt(repeatTimeField);
-            } 
+            }
 
             let repeatColorField = add_value.find('.tf-field-color');
             if (repeatColorField.length > 0) {
@@ -513,28 +520,28 @@
             add_value.find('.tf-icon-select').each(function (index) {
                 var icon_id = $(this).attr("id");
                 if (typeof icon_id !== "undefined") {
-                    icon_id = icon_id+index+count;
+                    icon_id = icon_id + index + count;
                     $(this).attr("id", icon_id)
 
                 }
             });
-             // Update Data depend id
+            // Update Data depend id
             add_value.find('[data-depend-id]').each(function () {
-                var data_depend_id = $(this).attr("data-depend-id"); 
+                var data_depend_id = $(this).attr("data-depend-id");
                 if (typeof data_depend_id !== "undefined") {
-                    data_depend_id = data_depend_id.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']'); 
+                    data_depend_id = data_depend_id.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
                     $(this).attr("data-depend-id", data_depend_id);
                 }
             });
             // Update Data Controller
             add_value.find('[data-controller]').each(function () {
-                var data_controller = $(this).attr("data-controller"); 
+                var data_controller = $(this).attr("data-controller");
                 if (typeof data_controller !== "undefined") {
-                    data_controller = data_controller.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']'); 
+                    data_controller = data_controller.replace('[' + current_field + '][00]', '[' + current_field + '][' + count + ']');
                     $(this).attr("data-controller", data_controller);
                 }
             });
-            
+
             // Update Data Append value
             var append = $this_parent.find('.tf-repeater-wrap-' + id + '');
 
@@ -543,31 +550,31 @@
             // replace new editor
             add_value.find('textarea.parent_wp_editor').each(function () {
                 this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + count + '');
-                var parent_repeater_id = $(this).attr('id'); 
+                var parent_repeater_id = $(this).attr('id');
                 TF_wp_editor(parent_repeater_id);
             });
 
             // replace new Select 2
             add_value.find('select.tf-select2-parent').each(function () {
                 this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + count + '');
-                var parent_repeater_id = $(this).attr('id'); 
-                var $this = $(this); 
+                var parent_repeater_id = $(this).attr('id');
+                var $this = $(this);
                 tfSelect2Int($this);
             });
- 
+
             // repeater dependency repeater
             TF_dependency();
         });
 
         // Repeater Delete Value
-        $(document).on('click', '.tf-repeater-icon-delete', function () { 
-            var max = $(this).attr("data-repeater-max");  
-            var $this_parent = $(this).closest('.tf-repeater-wrap'); 
-            var count = $this_parent.find('.tf-single-repeater').length; 
+        $(document).on('click', '.tf-repeater-icon-delete', function () {
+            var max = $(this).attr("data-repeater-max");
+            var $this_parent = $(this).closest('.tf-repeater-wrap');
+            var count = $this_parent.find('.tf-single-repeater').length;
             // Chacked maximum repeater
-            
-            if (confirm("Are you sure to delete this item?")) { 
-                $this_parent.find('.tf-field-notice-inner').remove();  
+
+            if (confirm("Are you sure to delete this item?")) {
+                $this_parent.find('.tf-field-notice-inner').remove();
                 $(this).closest('.tf-single-repeater').remove();
             }
             return false;
@@ -588,15 +595,15 @@
 
 
             $this_parent.find('.tf-field-notice-inner').remove();
-             // Chacked maximum repeater 
-             if(max != '' && count >= max){
-                $this_parent.append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You cannot add more.</div>'); 
-                return false; 
+            // Chacked maximum repeater
+            if (max != '' && count >= max) {
+                $this_parent.append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You cannot add more.</div>');
+                return false;
             }
 
             // Repeater Room Unique ID
             var room_uniqueid = clone_value.find('.unique-id input');
-            if(typeof room_uniqueid !== "undefined"){
+            if (typeof room_uniqueid !== "undefined") {
                 clone_value.find('.unique-id input').val(new Date().valueOf() + count);
             }
 
@@ -610,7 +617,7 @@
             if (repeatTimeField.length > 0) {
                 tfTimeInt(repeatTimeField);
             }
- 
+
             let repeatColorField = clone_value.find('.tf-field-color');
             if (repeatColorField.length > 0) {
                 tfColorInt(repeatColorField);
@@ -645,24 +652,24 @@
             clone_value.find('.tf-icon-select').each(function (index) {
                 var icon_id = $(this).attr("id");
                 if (typeof icon_id !== "undefined") {
-                    icon_id = icon_id+index+count;
+                    icon_id = icon_id + index + count;
                     $(this).attr("id", icon_id)
 
                 }
             });
             // Replace Data depend id ID
             clone_value.find('[data-depend-id]').each(function () {
-                var data_depend_id = $(this).attr("data-depend-id"); 
+                var data_depend_id = $(this).attr("data-depend-id");
                 if (typeof data_depend_id !== "undefined") {
-                    data_depend_id = data_depend_id.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']'); 
+                    data_depend_id = data_depend_id.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
                     $(this).attr("data-depend-id", data_depend_id);
                 }
             });
             // Replace Data depend id ID
             clone_value.find('[data-controller]').each(function () {
-                var data_controller = $(this).attr("data-controller"); 
+                var data_controller = $(this).attr("data-controller");
                 if (typeof data_controller !== "undefined") {
-                    data_controller = data_controller.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']'); 
+                    data_controller = data_controller.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
                     $(this).attr("data-controller", data_controller);
                 }
             });
@@ -670,9 +677,9 @@
             clone_value.find('input[name="tf_repeater_count"]').val(count)
 
             // Replace Old editor
-            clone_value.find('.wp-editor-wrap').each(function (){
-               var textarea =  $(this).find('.tf_wp_editor').show();
-               // Get content of a specific editor:
+            clone_value.find('.wp-editor-wrap').each(function () {
+                var textarea = $(this).find('.tf_wp_editor').show();
+                // Get content of a specific editor:
                 var textarea_content = tinymce.get(textarea.attr('id')).getContent()
                 textarea.val(textarea_content);
                 $(this).closest('.tf-field-textarea').append(textarea);
@@ -680,33 +687,33 @@
             });
 
             // Replace Old Select 2
-            clone_value.find('.tf-field-select2').each(function (){
-                
-              var get_selected_value =  $(this).find('select.tf-select-two').select2('val')
+            clone_value.find('.tf-field-select2').each(function () {
+
+                var get_selected_value = $(this).find('select.tf-select-two').select2('val')
                 $(this).find('select.tf-select-two').removeAttr("data-select2-id aria-hidden tabindex");
                 $(this).find('select.tf-select-two option').removeAttr("data-select2-id");
                 $(this).find('select.tf-select-two').removeClass("select2-hidden-accessible");
-                var select2 =  $(this).find('select.tf-select-two').show();
-                 
+                var select2 = $(this).find('select.tf-select-two').show();
+
                 select2.val(get_selected_value);
                 $(this).find('.tf-fieldset').append(select2);
                 $(this).find('span.select2-container').remove();
             });
 
-           //Append Value
+            //Append Value
             $(this).closest('.tf-repeater-wrap').append(clone_value).show();
 
             // Clone Wp Editor
             clone_value.find('textarea.parent_wp_editor, textarea.wp_editor').each(function () {
 
-                this.id = this.id.replace('' + current_field + '__'+repeater_count, '' + current_field + '__' + count + '');
-                var parent_repeater_id = $(this).attr('id'); 
+                this.id = this.id.replace('' + current_field + '__' + repeater_count, '' + current_field + '__' + count + '');
+                var parent_repeater_id = $(this).attr('id');
                 TF_wp_editor(parent_repeater_id);
             });
 
             // Clone Select 2
             clone_value.find('select.tf-select2-parent, select.tf-select2').each(function () {
-                this.id = this.id.replace('' + current_field + '__'+repeater_count, '' + current_field + '__' + count + '');
+                this.id = this.id.replace('' + current_field + '__' + repeater_count, '' + current_field + '__' + count + '');
                 var $this = $(this);
                 tfSelect2Int($this);
             });
@@ -728,18 +735,18 @@
 
         // Repeater Drag and  show
         $(".tf-repeater-wrap").sortable({
-            handle:'.tf-repeater-icon-move',
-            start: function(event, ui) { // turn TinyMCE off while sorting (if not, it won't work when resorted)  
-                var textareaID = $(ui.item).find('.tf_wp_editor').attr('id'); 
-                
+            handle: '.tf-repeater-icon-move',
+            start: function (event, ui) { // turn TinyMCE off while sorting (if not, it won't work when resorted)
+                var textareaID = $(ui.item).find('.tf_wp_editor').attr('id');
+
             },
-            stop: function(event, ui) { // re-initialize TinyMCE when sort is completed
-                $(ui.item).find('.tf_wp_editor').each( function (){
-                    var textareaID = $(this).attr('id'); 
+            stop: function (event, ui) { // re-initialize TinyMCE when sort is completed
+                $(ui.item).find('.tf_wp_editor').each(function () {
+                    var textareaID = $(this).attr('id');
                     tinyMCE.execCommand('mceRemoveEditor', false, textareaID);
                     tinyMCE.execCommand('mceAddEditor', false, textareaID);
                 });
-                
+
                 // $(this).find('.update-warning').show();
             }
         });
