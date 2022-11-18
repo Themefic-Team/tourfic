@@ -492,6 +492,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			if ( ! wp_verify_nonce( $nonce_name, $nonce_action ) ) {
 				return;
 			}
+			// var_dump($_FILES['file']);
+			// exit();
 
 			$tf_option_value = array();
 			$option_request  = ( ! empty( $_POST[ $this->option_id ] ) ) ? $_POST[ $this->option_id ] : array();
@@ -505,7 +507,30 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								$data = isset( $option_request[ $field['id'] ] ) ? $option_request[ $field['id'] ] : '';
 
 								$fieldClass = 'TF_' . $field['type'];
-								$data       = $fieldClass == 'TF_repeater' || $fieldClass == 'TF_map' || $fieldClass == 'TF_tab' || $fieldClass == 'TF_color' ? serialize( $data ) : $data;
+								if($fieldClass != 'TF_file'){
+									$data       = $fieldClass == 'TF_repeater' || $fieldClass == 'TF_map' || $fieldClass == 'TF_tab' || $fieldClass == 'TF_color' ? serialize( $data ) : $data;
+								}
+								if($fieldClass == 'TF_file'){
+									$upload_dir = wp_upload_dir();
+
+									if ( ! empty( $upload_dir['basedir'] ) ) {
+									$user_dirname = $upload_dir['basedir'].'/itinerary-fonts';
+
+									if ( ! file_exists( $user_dirname ) ) {
+									wp_mkdir_p( $user_dirname );
+									}
+									
+									$arr_img_ext = array('image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'application/octet-stream');
+									for($i = 0; $i < count($_FILES['file']['name']); $i++) {
+									if (in_array($_FILES['file']['type'][$i], $arr_img_ext)) {
+									$filename = wp_unique_filename( $user_dirname, $_FILES['file']['name'][$i] );
+									move_uploaded_file($_FILES['file']['tmp_name'][$i], $user_dirname .'/'. $filename);
+
+									}
+									}
+
+									}
+								}
 
 								if ( class_exists( $fieldClass ) ) {
 									$_field                          = new $fieldClass( $field, $data, $this->option_id );
