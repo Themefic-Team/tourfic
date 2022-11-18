@@ -511,22 +511,22 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									$data       = $fieldClass == 'TF_repeater' || $fieldClass == 'TF_map' || $fieldClass == 'TF_tab' || $fieldClass == 'TF_color' ? serialize( $data ) : $data;
 								}
 								if($fieldClass == 'TF_file'){
-									$upload_dir = wp_upload_dir();
+									$tf_upload_dir = wp_upload_dir();
 
-									if ( ! empty( $upload_dir['basedir'] ) ) {
-									$user_dirname = $upload_dir['basedir'].'/itinerary-fonts';
+									if ( ! empty( $tf_upload_dir['basedir'] ) ) {
+									$tf_itinerary_fonts = $tf_upload_dir['basedir'].'/itinerary-fonts';
 
-									if ( ! file_exists( $user_dirname ) ) {
-									wp_mkdir_p( $user_dirname );
+									if ( ! file_exists( $tf_itinerary_fonts ) ) {
+									wp_mkdir_p( $tf_itinerary_fonts );
 									}
-									
-									$arr_img_ext = array('image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'application/octet-stream');
-									for($i = 0; $i < count($_FILES['file']['name']); $i++) {
-									if (in_array($_FILES['file']['type'][$i], $arr_img_ext)) {
-									$filename = wp_unique_filename( $user_dirname, $_FILES['file']['name'][$i] );
-									move_uploaded_file($_FILES['file']['tmp_name'][$i], $user_dirname .'/'. $filename);
-
-									}
+									if (!empty($_FILES['file'])) {
+										$tf_fonts_extantions = array('application/octet-stream');
+										for($i = 0; $i < count($_FILES['file']['name']); $i++) {
+										if (in_array($_FILES['file']['type'][$i], $tf_fonts_extantions)) {
+											$tf_font_filename = $_FILES['file']['name'][$i];
+											move_uploaded_file($_FILES['file']['tmp_name'][$i], $tf_itinerary_fonts .'/'. $tf_font_filename);
+											}
+										}
 									}
 
 									}
