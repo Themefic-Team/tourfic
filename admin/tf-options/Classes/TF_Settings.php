@@ -515,7 +515,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 									if ( ! empty( $tf_upload_dir['basedir'] ) ) {
 									$tf_itinerary_fonts = $tf_upload_dir['basedir'].'/itinerary-fonts';
-
 									if ( ! file_exists( $tf_itinerary_fonts ) ) {
 									wp_mkdir_p( $tf_itinerary_fonts );
 									}
@@ -528,7 +527,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 											}
 										}
 									}
-
 									}
 								}
 
