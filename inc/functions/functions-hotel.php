@@ -719,6 +719,11 @@ function tf_room_availability_callback() {
 
 				$days = iterator_count( $period );
 
+				$avail_durationdate = [];
+				foreach ( $period as $date ) {
+					$avail_durationdate[$date->format( 'Y/m/d')] = $date->format( 'Y/m/d');
+				}
+
 				/**
 				 * Set room availability
 				 */
@@ -772,33 +777,27 @@ function tf_room_availability_callback() {
 									$order_check_in_date  = strtotime( $item->get_meta( 'check_in', true ) );
 									$order_check_out_date = strtotime( $item->get_meta( 'check_out', true ) );
 
-									foreach ( $repeat_by_date as $single_date_range ) {
-
-										if ( strtotime( $single_date_range["availability"]["from"] ) <= strtotime( $form_start ) && strtotime( $single_date_range["availability"]["to"] ) >= strtotime( $form_end ) ) {
-
-											if ( strtotime( $single_date_range["availability"]["from"] ) <= $order_check_in_date && strtotime( $single_date_range["availability"]["to"] ) >= $order_check_out_date ) {
-
-												$number_orders = $number_orders + $ordered_number_of_room;
-
-											}
-
-										}
-
+									$tf_order_check_in_date  = $item->get_meta( 'check_in', true );
+									$tf_order_check_out_date = $item->get_meta( 'check_out', true );
+									if( !empty($avail_durationdate) && ( in_array( $tf_order_check_out_date, $avail_durationdate) || in_array( $tf_order_check_in_date, $avail_durationdate) ) ){
+										# Total number of room booked
+										$number_orders = $number_orders + $ordered_number_of_room;
 									}
-
 									array_push( $order_date_ranges, array( $order_check_in_date, $order_check_out_date ) );
 
 								} else {
-
-									# Total number of room booked
-									$number_orders = $number_orders + $ordered_number_of_room;
+									$order_check_in_date  = $item->get_meta( 'check_in', true );
+									$order_check_out_date = $item->get_meta( 'check_out', true );
+									if( !empty($avail_durationdate) && ( in_array( $order_check_out_date, $avail_durationdate) || in_array( $order_check_in_date, $avail_durationdate) ) ){
+										# Total number of room booked
+										$number_orders = $number_orders + $ordered_number_of_room;
+									}
 
 								}
 
 							}
 						}
 					}
-
 					# Calculate available room number after order
 					$num_room_available = $num_room_available - $number_orders; // Calculate
 					$num_room_available = max( $num_room_available, 0 ); // If negetive value make that 0
