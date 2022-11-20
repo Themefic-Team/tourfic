@@ -69,15 +69,17 @@
       }
 
       .tf-details-overview-items {
-        display: flex;
-        justify-content: space-between;
+        @include flexbox();
+        @include justify-content(space-between);
+        gap: 60px;
+
         @media #{$max1199}{
           display: flow-root;
         }
 
         .tf-details-single-items {
           background-color: #fff;
-          width: 24%;
+          width: 100%;
           box-shadow: 0px 24px 48px rgba(67, 79, 96, 0.16);
           border-radius: 8px;
           padding-bottom: 20px;

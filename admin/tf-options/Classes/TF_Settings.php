@@ -158,7 +158,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						</span>
                         <div class="tf-details-overview-items">
                             <div class="tf-details-single-items">
-                                <h3><span><i class="fa-solid fa-hotel"></i></span><?php _e( "Total Hotels", "tourfic" ); ?></h3>
+                                <h3><span><i class="fa-solid fa-hotel"></i></span><?php _e( "Hotels", "tourfic" ); ?></h3>
                                 <span>
 									<?php
 									$tf_total_hotels = array(
@@ -169,36 +169,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									echo count( $tf_total_hotels );
 									?>
 								</span>
-                                <a target="_blank" href="<?php echo get_admin_url() . 'edit.php?post_type=tf_hotel'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
+                                <a href="<?php echo get_admin_url() . 'edit.php?post_type=tf_hotel'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
                             </div>
                             <div class="tf-details-single-items">
-                                <h3><span><i class="fa-solid fa-hospital"></i></span><?php _e( "Total Rooms", "tourfic" ); ?></h3>
-                                <span>
-									<?php
-									$totals_rooms_number = 0;
-									$total_room_details  = new WP_Query( $tf_total_hotels );
-
-									while ( $total_room_details->have_posts() ) : $total_room_details->the_post();
-										$tf_room_meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
-										$tf_rooms     = ! empty( $tf_room_meta['room'] ) ? $tf_room_meta['room'] : '';
-										if(!empty($tf_rooms )){
-											foreach ( $tf_rooms as $key => $room ) {
-												$tf_room_no          = ! empty( $room['num-room'] ) ? $room['num-room'] : 0;
-												$totals_rooms_number += $tf_room_no;
-											}
-										}
-
-									endwhile;
-
-									wp_reset_postdata();
-
-									echo $totals_rooms_number;
-									?>
-								</span>
-                                <a target="_blank" href="<?php echo get_admin_url() . 'edit.php?post_type=tf_hotel'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
-                            </div>
-                            <div class="tf-details-single-items">
-                                <h3><span><i class="fa-solid fa-door-closed"></i></span><?php _e( "Total Features", "tourfic" ); ?></h3>
+                                <h3><span><i class="fa-solid fa-door-closed"></i></span><?php _e( "Features", "tourfic" ); ?></h3>
                                 <span>
 									<?php
 									$tf_total_features = get_terms( [
@@ -208,10 +182,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									echo count( $tf_total_features );
 									?>
 								</span>
-                                <a target="_blank" href="<?php echo get_admin_url() . 'edit-tags.php?taxonomy=hotel_feature&post_type=tf_hotel'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
+                                <a href="<?php echo get_admin_url() . 'edit-tags.php?taxonomy=hotel_feature&post_type=tf_hotel'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
                             </div>
                             <div class="tf-details-single-items">
-                                <h3><span><i class="fa-solid fa-door-open"></i></span><?php _e( "Total Location", "tourfic" ); ?></h3>
+                                <h3><span><i class="fa-solid fa-door-open"></i></span><?php _e( "Location", "tourfic" ); ?></h3>
                                 <span>
 									<?php
 									$tf_total_locations = get_terms( [
@@ -221,7 +195,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									echo count( $tf_total_locations );
 									?>
 								</span>
-                                <a target="_blank" href="<?php echo get_admin_url() . 'edit-tags.php?taxonomy=hotel_location&post_type=tf_hotel'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
+                                <a href="<?php echo get_admin_url() . 'edit-tags.php?taxonomy=hotel_location&post_type=tf_hotel'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
                             </div>
                         </div>
 
@@ -231,7 +205,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						</span>
                         <div class="tf-details-overview-items">
                             <div class="tf-details-single-items">
-                                <h3><span><i class="fa-solid fa-hiking"></i></span><?php _e( "Total Tours", "tourfic" ); ?></h3>
+                                <h3><span><i class="fa-solid fa-hiking"></i></span><?php _e( "Tours", "tourfic" ); ?></h3>
                                 <span>
 									<?php
 									$tf_total_tours = array(
@@ -242,10 +216,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									echo count( $tf_total_tours );
 									?>
 								</span>
-                                <a target="_blank" href="<?php echo get_admin_url() . 'edit.php?post_type=tf_tours'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
+                                <a href="<?php echo get_admin_url() . 'edit.php?post_type=tf_tours'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
                             </div>
                             <div class="tf-details-single-items">
-                                <h3><span><i class="fa-solid fa-map-marker"></i></span><?php _e( "Total Destinations", "tourfic" ); ?></h3>
+                                <h3><span><i class="fa-solid fa-map-marker"></i></span><?php _e( "Destinations", "tourfic" ); ?></h3>
                                 <span>
 									<?php
 									$tf_total_destinations = get_terms( [
@@ -255,17 +229,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									echo count( $tf_total_destinations );
 									?>
 								</span>
-                                <a target="_blank" href="<?php echo get_admin_url() . 'edit-tags.php?taxonomy=tour_destination&post_type=tf_tours'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
+                                <a href="<?php echo get_admin_url() . 'edit-tags.php?taxonomy=tour_destination&post_type=tf_tours'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
                             </div>
                             <div class="tf-details-single-items">
-                                <h3><span><i class="fa-solid fa-heartbeat"></i></span><?php _e( "Total Activities", "tourfic" ); ?><p><?php _e( "Upcoming", "tourfic" ); ?></p></h3>
+                                <h3><span><i class="fa-solid fa-heartbeat"></i></span><?php _e( "Activities", "tourfic" ); ?><p><?php _e( "Upcoming", "tourfic" ); ?></p></h3>
                                 <span><?php echo esc_html( "0" ); ?></span>
-                                <a href="#"><?php _e( "View All", "tourfic" ); ?></a>
-                            </div>
-                            <div class="tf-details-single-items">
-                                <h3><span><i class="fa-solid fa-clock"></i></span><?php _e( "Total Duration", "tourfic" ); ?><p><?php _e( "Upcoming", "tourfic" ); ?></p></h3>
-                                <span><?php echo esc_html( "0" ); ?></span>
-                                <a href="#"><?php _e( "View All", "tourfic" ); ?></a>
                             </div>
                         </div>
 
@@ -275,7 +243,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						</span>
                         <div class="tf-details-overview-items">
                             <div class="tf-details-single-items">
-                                <h3><span><i class="fa-solid fa-book"></i></span><?php _e( "Total Bookings", "tourfic" ); ?></h3>
+                                <h3><span><i class="fa-solid fa-book"></i></span><?php _e( "Bookings", "tourfic" ); ?></h3>
                                 <span>
 									<?php
 									$tf_order_query_orders = wc_get_orders( array(
@@ -287,10 +255,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									echo count( $tf_order_query_orders );
 									?>
 								</span>
-                                <a target="_blank" href="<?php echo get_admin_url() . 'edit.php?post_status=wc-completed&post_type=shop_order'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
+                                <a href="<?php echo get_admin_url() . 'edit.php?post_status=wc-completed&post_type=shop_order'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
                             </div>
                             <div class="tf-details-single-items">
-                                <h3><span><i class="fa-solid fa-user-alt"></i></span><?php _e( "Total Customers", "tourfic" ); ?></h3>
+                                <h3><span><i class="fa-solid fa-user-alt"></i></span><?php _e( "Customers", "tourfic" ); ?></h3>
                                 <span>
 									<?php
 									$tf_customer_query = new WP_User_Query(
@@ -301,28 +269,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									echo count( $tf_customer_query->get_results() );
 									?>
 								</span>
-                                <a target="_blank" href="<?php echo get_admin_url() . 'users.php?role=customer'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
+                                <a href="<?php echo get_admin_url() . 'users.php?role=customer'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
                             </div>
                             <div class="tf-details-single-items">
-                                <h3><span><i class="fa-solid fa-money-bill-alt"></i></span><?php _e( "Total Coupons", "tourfic" ); ?></h3>
-                                <span>
-									<?php
-									$tf_coupon_posts = get_posts( array(
-										'posts_per_page' => - 1,
-										'orderby'        => 'name',
-										'order'          => 'asc',
-										'post_type'      => 'shop_coupon',
-										'post_status'    => 'publish',
-									) );
-									echo count( $tf_coupon_posts );
-									?>
-								</span>
-                                <a target="_blank" href="<?php echo get_admin_url() . 'edit.php?post_type=shop_coupon'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
-                            </div>
-                            <div class="tf-details-single-items">
-                                <h3><span><i class="fa-solid fa-question"></i></span><?php _e( "Total Enquiries", "tourfic" ); ?><p><?php _e( "Upcoming", "tourfic" ); ?></p></h3>
+                                <h3><span><i class="fa-solid fa-question"></i></span><?php _e( "Enquiries", "tourfic" ); ?><p><?php _e( "Upcoming", "tourfic" ); ?></p></h3>
                                 <span><?php echo esc_html( "0" ); ?></span>
-                                <a href="#"><?php _e( "View All", "tourfic" ); ?></a>
                             </div>
                         </div>
                     </div>
@@ -353,7 +304,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									<span><?php _e( "You’ll get every detailed document regarding the plugin in our documentation website described by our Engineers.", "tourfic" ); ?></span>
 								</div>
 								<div class="tf-plugin-document-link">
-									<?php echo sprintf( "<a target='_blank' href='https://tourfic.com/'>Visit Documentation</a>" ); ?>
+									<?php echo sprintf( "<a target='_blank' href='https://themefic.com/docs/tourfic/'>Visit Documentation</a>" ); ?>
 								</div>
 							</div>
 						</div>
