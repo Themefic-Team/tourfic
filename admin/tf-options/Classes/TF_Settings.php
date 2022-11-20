@@ -492,8 +492,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			if ( ! wp_verify_nonce( $nonce_name, $nonce_action ) ) {
 				return;
 			}
-			// var_dump($_FILES['file']);
-			// exit();
 
 			$tf_option_value = array();
 			$option_request  = ( ! empty( $_POST[ $this->option_id ] ) ) ? $_POST[ $this->option_id ] : array();
