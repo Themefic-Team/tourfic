@@ -644,6 +644,15 @@ function tf_room_availability_callback() {
 	if ( $form_check_in_out ) {
 		list( $form_start, $form_end ) = explode( ' - ', $form_check_in_out );
 	}
+	
+	// Custom avail
+	$tf_startdate = $form_start;
+	$tf_enddate = $form_end;
+
+	if( empty($form_end) ){
+		$form_end = date('Y/m/d', strtotime($form_start . " + 1 day"));
+		$tf_enddate = date('Y/m/d', strtotime($form_start . " + 1 day"));
+	}
 	$form_check_in = $form_start;
 	$form_start    = date( 'Y/m/d', strtotime( $form_start . ' +1 day' ) );
 	/**
@@ -711,6 +720,7 @@ function tf_room_availability_callback() {
 				$form_check_out   = $form_end;
 
 				// Check availability by date option
+				
 				$period = new DatePeriod(
 					new DateTime( $form_start . ' 00:00' ),
 					new DateInterval( 'P1D' ),
@@ -718,6 +728,19 @@ function tf_room_availability_callback() {
 				);
 
 				$days = iterator_count( $period );
+
+				// Check availability by date option
+				
+				$tfperiod = new DatePeriod(
+					new DateTime( $tf_startdate . ' 00:00' ),
+					new DateInterval( 'P1D' ),
+					new DateTime( $tf_enddate . ' 23:59' )
+				);
+
+				$avail_durationdate = [];
+				foreach ( $tfperiod as $date ) {
+					$avail_durationdate[$date->format( 'Y/m/d')] = $date->format( 'Y/m/d');
+				}
 
 				/**
 				 * Set room availability
@@ -772,33 +795,27 @@ function tf_room_availability_callback() {
 									$order_check_in_date  = strtotime( $item->get_meta( 'check_in', true ) );
 									$order_check_out_date = strtotime( $item->get_meta( 'check_out', true ) );
 
-									foreach ( $repeat_by_date as $single_date_range ) {
-
-										if ( strtotime( $single_date_range["availability"]["from"] ) <= strtotime( $form_start ) && strtotime( $single_date_range["availability"]["to"] ) >= strtotime( $form_end ) ) {
-
-											if ( strtotime( $single_date_range["availability"]["from"] ) <= $order_check_in_date && strtotime( $single_date_range["availability"]["to"] ) >= $order_check_out_date ) {
-
-												$number_orders = $number_orders + $ordered_number_of_room;
-
-											}
-
-										}
-
+									$tf_order_check_in_date  = $item->get_meta( 'check_in', true );
+									$tf_order_check_out_date = $item->get_meta( 'check_out', true );
+									if( !empty($avail_durationdate) && ( in_array( $tf_order_check_out_date, $avail_durationdate) || in_array( $tf_order_check_in_date, $avail_durationdate) ) ){
+										# Total number of room booked
+										$number_orders = $number_orders + $ordered_number_of_room;
 									}
-
 									array_push( $order_date_ranges, array( $order_check_in_date, $order_check_out_date ) );
 
 								} else {
-
-									# Total number of room booked
-									$number_orders = $number_orders + $ordered_number_of_room;
+									$order_check_in_date  = $item->get_meta( 'check_in', true );
+									$order_check_out_date = $item->get_meta( 'check_out', true );
+									if( !empty($avail_durationdate) && ( in_array( $order_check_out_date, $avail_durationdate) || in_array( $order_check_in_date, $avail_durationdate) ) ){
+										# Total number of room booked
+										$number_orders = $number_orders + $ordered_number_of_room;
+									}
 
 								}
 
 							}
 						}
 					}
-
 					# Calculate available room number after order
 					$num_room_available = $num_room_available - $number_orders; // Calculate
 					$num_room_available = max( $num_room_available, 0 ); // If negetive value make that 0
@@ -809,7 +826,7 @@ function tf_room_availability_callback() {
 
 					// split date range
 					$check_in  = strtotime( $form_start . ' 00:00' );
-					$check_out = strtotime( $form_end . ' 23:59' );
+					$check_out = strtotime( $form_end . ' 00:00' );
 					$price     = 0;
 					$has_room  = [];
 
@@ -1730,7 +1747,7 @@ function tf_remove_order_ids_from_room() {
         <div class="csf-subtitle-text">' . __( "Remove order ids linked with this room.<br><b style='color: red;'>Be aware! It is irreversible!</b>", "tourfic" ) . '</div>
     </div>
     <div class="csf-fieldset">
-        <button type="button" class="button button-large csf-warning-primary remove-order-ids">' . __( "Reset", "tourfic" ) . '</button>
+        <button type="button" class="button button-large tf-order-remove remove-order-ids">' . __( "Reset", "tourfic" ) . '</button>
     </div>
     <div class="clear"></div>
     ';

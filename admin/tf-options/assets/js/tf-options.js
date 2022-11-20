@@ -368,7 +368,10 @@
             let $this = $(this),
                 submitBtn = $this.find('.tf-submit-btn'),
                 data = new FormData(this);
-
+                var fontsfile = $('.itinerary-fonts-file').prop("files");
+                for(var i=0; i<fontsfile.length; i++) {
+                data.append('file[]', fontsfile[i]);
+                }
             data.append('action', 'tf_options_save');
 
             $.ajax({

@@ -456,7 +456,28 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								$data = isset( $option_request[ $field['id'] ] ) ? $option_request[ $field['id'] ] : '';
 
 								$fieldClass = 'TF_' . $field['type'];
-								$data       = $fieldClass == 'TF_repeater' || $fieldClass == 'TF_map' || $fieldClass == 'TF_tab' || $fieldClass == 'TF_color' ? serialize( $data ) : $data;
+								if($fieldClass != 'TF_file'){
+									$data       = $fieldClass == 'TF_repeater' || $fieldClass == 'TF_map' || $fieldClass == 'TF_tab' || $fieldClass == 'TF_color' ? serialize( $data ) : $data;
+								}
+								if($fieldClass == 'TF_file'){
+									$tf_upload_dir = wp_upload_dir();
+
+									if ( ! empty( $tf_upload_dir['basedir'] ) ) {
+									$tf_itinerary_fonts = $tf_upload_dir['basedir'].'/itinerary-fonts';
+									if ( ! file_exists( $tf_itinerary_fonts ) ) {
+									wp_mkdir_p( $tf_itinerary_fonts );
+									}
+									if (!empty($_FILES['file'])) {
+										$tf_fonts_extantions = array('application/octet-stream');
+										for($i = 0; $i < count($_FILES['file']['name']); $i++) {
+										if (in_array($_FILES['file']['type'][$i], $tf_fonts_extantions)) {
+											$tf_font_filename = $_FILES['file']['name'][$i];
+											move_uploaded_file($_FILES['file']['tmp_name'][$i], $tf_itinerary_fonts .'/'. $tf_font_filename);
+											}
+										}
+									}
+									}
+								}
 
 								if ( class_exists( $fieldClass ) ) {
 									$_field                          = new $fieldClass( $field, $data, $this->option_id );
