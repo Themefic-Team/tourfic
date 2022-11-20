@@ -653,7 +653,7 @@ Fontawesome
 
 .tf-deshboard-wrapper {
   margin: 20px auto;
-  max-width: 85%;
+  max-width: 1120px;
 }
 .tf-deshboard-wrapper .tf-deshboard-version {
   background-color: #fff;
@@ -699,7 +699,7 @@ Fontawesome
 .tf-deshboard-wrapper .tf-deshboard-overview {
   width: 100%;
 }
-@media only screen and (max-width: 1199.98px) {
+@media only screen and (max-width: 991.98px) {
   .tf-deshboard-wrapper .tf-deshboard-overview {
     display: flow-root;
   }
@@ -725,9 +725,9 @@ Fontawesome
   display: flex;
   -webkit-justify-content: space-between;
   justify-content: space-between;
-  gap: 60px;
+  gap: 25px;
 }
-@media only screen and (max-width: 1199.98px) {
+@media only screen and (max-width: 991.98px) {
   .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items {
     display: flow-root;
   }
@@ -740,7 +740,7 @@ Fontawesome
   padding-bottom: 20px;
   margin: 8px 0px;
 }
-@media only screen and (max-width: 1199.98px) {
+@media only screen and (max-width: 991.98px) {
   .tf-deshboard-wrapper .tf-deshboard-overview .tf-details-overview .tf-details-overview-items .tf-details-single-items {
     width: 48%;
     float: left;
