@@ -257,7 +257,7 @@ function tf_apartment_single_booking_form( $b_check_in = '', $b_check_out = '' )
                     <div class="tf_form-inner">
                         <i class="far fa-calendar-alt"></i>
                         <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                               placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
+                               placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
                     </div>
                 </label>
             </div>
@@ -274,24 +274,26 @@ function tf_apartment_single_booking_form( $b_check_in = '', $b_check_out = '' )
         </div>
 
         <ul class="tf-apartment-price-list">
-            <li class="total-days-price-wrap">
-                <span class="total-days"></span>
+            <li class="total-days-price-wrap" style="display: none">
+                <span class="total-days tf-price-list-label"></span>
                 <span class="days-total-price"></span>
             </li>
-            <li class="service-fee-wrap">
-                <span class="service-fee-label"><?php _e( 'Service Fee', 'tourfic' ); ?></span>
-                <span class="service-fee"></span>
-            </li>
+			<?php if ( ! empty( $service_fee ) ): ?>
+                <li class="service-fee-wrap" style="display: none">
+                    <span class="service-fee-label tf-price-list-label"><?php _e( 'Service Fee', 'tourfic' ); ?></span>
+                    <span class="service-fee"></span>
+                </li>
+			<?php endif; ?>
 
 			<?php if ( $cleaning_fee ): ?>
-                <li class="cleaning-fee-wrap">
-                    <span class="cleaning-fee-label"><?php _e( 'Cleaning Fee', 'tourfic' ); ?></span>
+                <li class="cleaning-fee-wrap" style="display: none">
+                    <span class="cleaning-fee-label tf-price-list-label"><?php _e( 'Cleaning Fee', 'tourfic' ); ?></span>
                     <span class="cleaning-fee"><?php echo wc_price( $cleaning_fee ); ?></span>
                 </li>
 			<?php endif; ?>
 
-            <li class="total-price-wrap">
-                <span class="total-price-label"><?php _e( 'Total Price', 'tourfic' ); ?></span>
+            <li class="total-price-wrap" style="display: none">
+                <span class="total-price-label tf-price-list-label"><?php _e( 'Total Price', 'tourfic' ); ?></span>
                 <span class="total-price"></span>
             </li>
         </ul>
@@ -301,7 +303,9 @@ function tf_apartment_single_booking_form( $b_check_in = '', $b_check_out = '' )
     <script>
         (function ($) {
             $(document).ready(function () {
+                var minRangeDays = 3;
 
+                let startDate = null;
                 const checkinoutdateange = flatpickr("#tf-apartment-booking #check-in-out-date", {
                     enableTime: false,
                     mode: "range",
@@ -312,22 +316,61 @@ function tf_apartment_single_booking_form( $b_check_in = '', $b_check_out = '' )
                     },
                     onChange: function (selectedDates, dateStr, instance) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                        startDate = selectedDates[0] ? selectedDates[0] : null;
 
+						<?php if ( ! empty( $price_per_night ) ): ?>
                         //calculate total days
                         if (selectedDates[0] && selectedDates[1]) {
                             var diff = Math.abs(selectedDates[1] - selectedDates[0]);
                             var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-                            var price_per_night = <?php echo $price_per_night; ?>;
-                            var total_price = price_per_night * days;
-                            var total_price_html = '<?php echo wc_price( 0 ); ?>';
-                            if (total_price > 0) {
-                                total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
-                            }
-                            $('.total-days-price-wrap .total-days').html(<?php echo $price_per_night; ?> +' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
-                            $('.total-days-price-wrap .days-total-price').html(total_price_html);
-                        }
-                    },
+                            if(days > 0) {
+                                var price_per_night = <?php echo $price_per_night; ?>;
+                                var total_price = price_per_night * days;
+                                var total_price_html = '<?php echo wc_price( 0 ); ?>';
+                                if (total_price > 0) {
+                                    $('.total-days-price-wrap').show();
+                                    total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
+                                }
+                                $('.total-days-price-wrap .total-days').html(<?php echo $price_per_night; ?> +' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
+                                $('.total-days-price-wrap .days-total-price').html(total_price_html);
 
+                                //service fee per night
+	                            <?php if ( ! empty( $service_fee ) ): ?>
+                                var service_fee = <?php echo $service_fee; ?>;
+                                var service_fee_html = '<?php echo wc_price( 0 ); ?>';
+                                if (service_fee > 0) {
+                                    $('.service-fee-wrap').show();
+                                    service_fee_html = '<?php echo wc_price( 0 ); ?>'.replace('0', service_fee * days);
+                                }
+                                $('.service-fee-wrap .service-fee').html(service_fee_html);
+	                            <?php endif; ?>
+
+                                //cleaning fee
+	                            <?php if ( ! empty( $cleaning_fee ) ): ?>
+                                $('.cleaning-fee-wrap').show();
+	                            <?php endif; ?>
+
+                                //total price
+                                var total_price_html = '<?php echo wc_price( 0 ); ?>';
+                                if (total_price > 0) {
+                                    $('.total-price-wrap').show();
+                                    total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price + (service_fee * days) + <?php echo $cleaning_fee; ?>);
+                                }
+                                $('.total-price-wrap .total-price').html(total_price_html);
+                            } else {
+                                $('.total-days-price-wrap').hide();
+                                $('.service-fee-wrap').hide();
+                                $('.cleaning-fee-wrap').hide();
+                                $('.total-price-wrap').hide();
+                            }
+                        }
+						<?php endif; ?>
+                    },
+                    enable:[
+                        function(date) {
+                            return date.getDay() === 0; // 0 is sunday
+                        }
+                    ]
 					<?php
 					// Flatpickt locale for translation
 					tf_flatpickr_locale();

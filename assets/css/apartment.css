@@ -203,7 +203,11 @@
 /*.tf-apartment .hero-right img {*/
 /*  height: 231px;*/
 /*}*/
-
+.tf-apartment .hero-first-image a,
+.tf-apartment .hero-second-image a,
+.tf-apartment .hero-third-image a{
+    display: inline-block;
+}
 .tf-apartment .hero-first-image img {
     /*height: 475px;*/
     border-top-left-radius: 8px;
@@ -222,7 +226,7 @@
     text-align: right;
 }
 
-.tf-apartment .hero-third-image a {
+.tf-apartment .hero-third-image a.tf_button {
     max-width: 130px;
     margin-right: 12px;
     background: rgba(0, 0, 0, 0.85);
@@ -565,11 +569,20 @@ Apartment Booking Form
     font-weight: 400;
     color: #fff;
 }
+
+.tf-apartment-price-list{
+    margin-top: 15px !important;
+}
 .tf-apartment-price-list li{
     display: flex;
     justify-content: space-between;
+    color: #fff;
+    margin-bottom: 5px;
 }
 
+.tf-apartment-price-list li .tf-price-list-label{
+    font-weight: 600;
+}
 
 
 

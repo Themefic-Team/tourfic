@@ -169,7 +169,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'       => 'service_fee',
 					'type'     => 'number',
-					'label'    => __( 'Service Fee', 'tourfic' ),
+					'label'    => __( 'Service Fee (Per Night)', 'tourfic' ),
 					'subtitle' => __( 'Enter service fee', 'tourfic' ),
 					'field_width' => 50,
 					'attributes' => array(
