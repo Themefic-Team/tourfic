@@ -1604,10 +1604,11 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	// Get hotel meta options
 	$meta = get_post_meta( get_the_ID(), 'tf_hotel', true );
 	// Remove disabled rooms
-	$meta = array_filter( $meta['room'], function ( $value ) {
-		return ! empty( $value ) && $value['enable'] != '0';
-	} );
-
+	if(!empty($meta['room'])):
+		$meta = array_filter( $meta['room'], function ( $value ) {
+			return ! empty( $value ) && $value['enable'] != '0';
+		} );
+	endif;
 	// If no room return
 	if ( empty( $meta ) ) {
 		return;
@@ -2104,9 +2105,9 @@ if ( ! function_exists( 'tf_hotel_total_room_adult_child' ) ) {
 		foreach ( $rooms as $room ) {
 			$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
 			if ( $enable ) {
-				$total_room   += $room['num-room'];
-				$total_adults += $room['adult'];
-				$total_child  += $room['child'];
+				$total_room   += !empty($room['num-room']) ? $room['num-room'] : 0;
+				$total_adults += !empty($room['adult']) ? $room['adult'] : 0;
+				$total_child  += !empty($room['child'] ) ? $room['child'] : 0;
 			}
 		}
 

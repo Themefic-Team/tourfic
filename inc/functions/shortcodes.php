@@ -552,7 +552,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
     <div class="tf_search_result">
         <div class="tf-action-top">
 			<div class="tf-total-results">
-				<span><?php echo esc_html__( 'Total Results ', 'tourfic' ) . '(' . $total_posts . ')'; ?> </span>
+				<?php echo esc_html__( 'Total Results ', 'tourfic' ) . '(<span>' . $total_posts . '</span>)'; ?>
 			</div>
             <div class="tf-list-grid">
                 <a href="#list-view" data-id="list-view" class="change-view" title="<?php _e( 'List View', 'tourfic' ); ?>"><i class="fas fa-list"></i></a>
@@ -590,19 +590,18 @@ function tf_search_result_shortcode( $atts, $content = null ){
 				}
 
 				if ( ! in_array( 0, $not_found ) ) {
-					echo '<div class="tf-nothing-found">' . __( 'Nothing Found! Select another dates', 'tourfic' ) . '</div>';
+					echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found! Select another dates', 'tourfic' ) . '</div>';
 				}
 			} else {
-				echo '<div class="tf-nothing-found">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+				echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 			}
 			?>
         </div>
+		<?php if ( in_array( 0, $not_found ) ) {?>
         <div class="tf_posts_navigation">
-			<?php 
-			tourfic_posts_navigation( $loop );
-			
-			 ?>
+			<?php tourfic_posts_navigation( $loop ); ?>
         </div>
+		<?php } ?>
 
     </div>
     <!-- End Content -->

@@ -1421,6 +1421,14 @@ if($('.child-age-limited')[0]){
     })
 }
 
+// total posts 0 if not found
+if($('.tf-nothing-found')[0]){
+    var foundPosts = $('.tf-nothing-found').data('post-count');
+    $('.tf-total-results').find('span').html(foundPosts);
+    ('.tf_posts_navigation').hide();
+    console.log('hh');
+}
+
 })(jQuery, window);
 
 /**

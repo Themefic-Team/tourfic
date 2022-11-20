@@ -118,9 +118,9 @@ class TF_Recent_Blog extends \Elementor\Widget_Base {
 		$this->add_control(
 			'count',
 			[
-				'label'       => esc_html__( 'Total Hotels', 'tourfic' ),
+				'label'       => esc_html__( 'Total Blogs', 'tourfic' ),
 				'type'        => \Elementor\Controls_Manager::NUMBER,
-				'description' => __( 'Number of total hotel. Min 3.', 'tourfic' ),
+				'description' => __( 'Number of total blogs. Min 3.', 'tourfic' ),
 				'min'         => 1,
 				'default'     => 3,
 			]
@@ -139,8 +139,8 @@ class TF_Recent_Blog extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name' => 'title_typography',
-				'label' => __( 'Title Tdsypography', 'tourfic' ),
-				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading h2',
+				'label' => __( 'Title Typography', 'tourfic' ),
+				'selector' => '{{WRAPPER}} .tf-recent-blog-wrapper .tf-heading h2',
 			]
 		);
 		$this->add_control(
@@ -153,7 +153,7 @@ class TF_Recent_Blog extends \Elementor\Widget_Base {
 					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tf-widget-slider .tf-heading h2' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tf-recent-blog-wrapper .tf-heading h2' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -170,7 +170,7 @@ class TF_Recent_Blog extends \Elementor\Widget_Base {
 			[
 				'name' => 'subtitle_typography',
 				'label' => __( 'Subtitle Typography', 'tourfic' ),
-				'selector' => '{{WRAPPER}} .tf-widget-slider .tf-heading p',
+				'selector' => '{{WRAPPER}} .tf-recent-blog-wrapper .tf-heading p',
 			]
 		);
 
@@ -184,7 +184,7 @@ class TF_Recent_Blog extends \Elementor\Widget_Base {
 					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tf-widget-slider .tf-heading p' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tf-recent-blog-wrapper .tf-heading p' => 'color: {{VALUE}}',
 				],
 			]
 		);
