@@ -195,6 +195,22 @@ body.tf-modal-open:after {
 
 .tf-field-disable {
   user-select: none;
+  opacity: 0.6;
+}
+
+.tf-field-disable.tf-field-upcoming {
+  user-select: none;
+  cursor: default;
+}
+.tf-field-disable.tf-field-upcoming * {
+  cursor: default !important;
+}
+
+/*
+Fontawesome
+*/
+.fa, .far, .fas {
+  font-family: "FontAwesome" !important;
 }
 
 /*========================================
@@ -367,7 +383,6 @@ body.tf-modal-open:after {
   color: #363e4a;
   padding: 12px 16px;
   text-align: left;
-  font-weight: 600;
   font-size: 16px;
   line-height: 24px;
   cursor: pointer;
@@ -539,7 +554,7 @@ body.tf-modal-open:after {
 }
 .tf-option-wrapper .tf-option-header .tf-option-header-left {
   min-width: 220px;
-  padding: 24px 0px;
+  padding: 12px 0px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -585,7 +600,7 @@ body.tf-modal-open:after {
   -webkit-flex: 1 1 auto;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  padding: 24px 0px;
+  padding: 12px 0px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -599,7 +614,7 @@ body.tf-modal-open:after {
 }
 .tf-option-wrapper .tf-option-footer {
   position: relative;
-  padding: 24px 0px;
+  padding: 15px 0px;
   text-align: right;
 }
 .tf-option-wrapper .tf-option-footer span {
