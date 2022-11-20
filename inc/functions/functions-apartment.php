@@ -303,9 +303,7 @@ function tf_apartment_single_booking_form( $b_check_in = '', $b_check_out = '' )
     <script>
         (function ($) {
             $(document).ready(function () {
-                var minRangeDays = 3;
 
-                let startDate = null;
                 const checkinoutdateange = flatpickr("#tf-apartment-booking #check-in-out-date", {
                     enableTime: false,
                     mode: "range",
@@ -316,14 +314,13 @@ function tf_apartment_single_booking_form( $b_check_in = '', $b_check_out = '' )
                     },
                     onChange: function (selectedDates, dateStr, instance) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                        startDate = selectedDates[0] ? selectedDates[0] : null;
 
 						<?php if ( ! empty( $price_per_night ) ): ?>
                         //calculate total days
                         if (selectedDates[0] && selectedDates[1]) {
                             var diff = Math.abs(selectedDates[1] - selectedDates[0]);
                             var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-                            if(days > 0) {
+                            if (days > 0) {
                                 var price_per_night = <?php echo $price_per_night; ?>;
                                 var total_price = price_per_night * days;
                                 var total_price_html = '<?php echo wc_price( 0 ); ?>';
@@ -335,7 +332,7 @@ function tf_apartment_single_booking_form( $b_check_in = '', $b_check_out = '' )
                                 $('.total-days-price-wrap .days-total-price').html(total_price_html);
 
                                 //service fee per night
-	                            <?php if ( ! empty( $service_fee ) ): ?>
+								<?php if ( ! empty( $service_fee ) ): ?>
                                 var service_fee = <?php echo $service_fee; ?>;
                                 var service_fee_html = '<?php echo wc_price( 0 ); ?>';
                                 if (service_fee > 0) {
@@ -343,12 +340,12 @@ function tf_apartment_single_booking_form( $b_check_in = '', $b_check_out = '' )
                                     service_fee_html = '<?php echo wc_price( 0 ); ?>'.replace('0', service_fee * days);
                                 }
                                 $('.service-fee-wrap .service-fee').html(service_fee_html);
-	                            <?php endif; ?>
+								<?php endif; ?>
 
                                 //cleaning fee
-	                            <?php if ( ! empty( $cleaning_fee ) ): ?>
+								<?php if ( ! empty( $cleaning_fee ) ): ?>
                                 $('.cleaning-fee-wrap').show();
-	                            <?php endif; ?>
+								<?php endif; ?>
 
                                 //total price
                                 var total_price_html = '<?php echo wc_price( 0 ); ?>';
@@ -365,12 +362,22 @@ function tf_apartment_single_booking_form( $b_check_in = '', $b_check_out = '' )
                             }
                         }
 						<?php endif; ?>
-                    },
-                    enable:[
-                        function(date) {
-                            return date.getDay() === 0; // 0 is sunday
+
+                        //minimum 5 days
+                        if (selectedDates[0] && selectedDates[1]) {
+                            var diff = Math.abs(selectedDates[1] - selectedDates[0]);
+                            var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+                            if (days < 5) {
+                                $('.tf-submit').attr('disabled', 'disabled');
+                                $('.tf-submit').addClass('disabled');
+                                $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required"><b><?php _e( 'Minimum 5 days', 'tourfic' ); ?></b></span>');
+                            } else {
+                                $('.tf-submit').removeAttr('disabled');
+                                $('.tf-submit').removeClass('disabled');
+                                $('#tf-required').remove();
+                            }
                         }
-                    ]
+                    },
 					<?php
 					// Flatpickt locale for translation
 					tf_flatpickr_locale();
