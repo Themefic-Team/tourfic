@@ -61,10 +61,12 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
             echo "<div class='tf-filter'><ul>";
             foreach ($get_terms as $key => $term) {
                 $feature_meta = get_term_meta($term->term_taxonomy_id, 'hotel_feature', true);
-                if ($feature_meta['icon-type'] == 'fa') {
+                if ( !empty($feature_meta['icon-type']) && $feature_meta['icon-type'] == 'fa') {
                     $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
-                } elseif ($feature_meta['icon-type'] == 'c') {
+                } elseif (!empty($feature_meta['icon-type']) && $feature_meta['icon-type'] == 'c') {
                     $feature_icon = '<img src="' . $feature_meta['icon-c']["url"] . '" style="width: ' . $feature_meta['dimention']["width"] . 'px; height: ' . $feature_meta['dimention']["width"] . 'px;" />';
+                }else{
+                    $feature_icon = '';
                 }
                 $id = $term->term_id;
                 $name = $term->name;
@@ -158,7 +160,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
     {
         $instance = array();
         $instance['title'] = (!empty($new_instance['title'])) ? strip_tags($new_instance['title']) : '';
-        $instance['terms'] = (!empty($new_instance['terms'])) ? implode(",", $new_instance['terms']) : 'all';
+        $instance['terms'] = (!empty($new_instance['terms'])) ? implode(",", $new_instance['terms']) : '';
         $instance['show_count'] = (!empty($new_instance['show_count'])) ? strip_tags($new_instance['show_count']) : '';
         $instance['hide_empty'] = (!empty($new_instance['hide_empty'])) ? strip_tags($new_instance['hide_empty']) : '';
 
