@@ -892,7 +892,9 @@ function tf_search_result_ajax_sidebar() {
 		echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 
 	}
-
+	//get total posts count
+	$total_posts = $loop->found_posts;
+	echo "<span hidden=hidden class='tf-posts-count'>".$total_posts."</span>";
 	wp_reset_postdata();
 
 	die();
