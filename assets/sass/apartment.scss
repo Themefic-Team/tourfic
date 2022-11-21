@@ -1,0 +1,864 @@
+@import 'global/variable';
+@import 'global/mixin';
+@import 'global/reset';
+@import 'global/global';
+@import 'global/animation';
+
+
+.tf-apartment-title {
+  padding-bottom: 20px;
+
+  h1 {
+    color: $slate80;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 40px;
+    margin-bottom: 10px;
+  }
+
+  .tf-map-link {
+    color: $slate60;
+
+    .more-apartment {
+      color: $slate60;
+      font-weight: 600;
+    }
+  }
+
+  .tf-single-rating {
+    color: $slate60;
+    font-weight: 500;
+    background-color: transparent;
+    padding: 0;
+    @include flexbox();
+
+    i {
+      color: $yellow60;
+      font-size: 16px;
+    }
+
+    span {
+      font-size: 16px;
+    }
+  }
+
+  .tf-share {
+    a {
+      color: inherit;
+      font-size: 16px;
+    }
+
+    i {
+      padding-right: 5px;
+    }
+
+    margin-left: 8px;
+  }
+
+  .tf-wishlist-button {
+    color: inherit;
+    font-size: 16px;
+    margin-left: 8px;
+
+    i {
+      &:before {
+        padding-right: 5px;
+      }
+    }
+  }
+}
+
+// End of .tf-apartment-title
+
+.tf-apartment {
+  .section-heading {
+    font-size: 22px;
+  }
+
+  .hero-wrapper {
+    position: relative;
+
+    .hero-gallery {
+      @include flexbox();
+      gap: 15px;
+
+      img {
+        object-fit: cover;
+        width: 100%;
+        border-radius: 8px;
+      }
+
+      .hero-left {
+        //@include flex(0 0 70%);
+      }
+
+      .hero-right {
+        //@include flex(0 0 30%);
+        @include flexbox();
+        @include flex-direction(column);
+        gap: 15px;
+      }
+
+      .hero-first-image a,
+      .hero-second-image a,
+      .hero-third-image a {
+        display: inline-block;
+      }
+    }
+
+
+    .gallery-all-photos {
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      @include flexbox();
+      z-index: 2;
+
+      a.tf_button {
+        max-width: 130px;
+        background: rgba(0, 0, 0, 0.85);
+        border: none;
+      }
+    }
+
+  }
+
+
+  .cf-wrapper {
+    display: flex;
+    gap: 4%;
+  }
+
+  .cf-left {
+    width: 61%;
+  }
+
+  .cf-right {
+    width: 35%;
+  }
+
+  .features-details {
+    ul {
+      margin: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      gap: 1%;
+
+      li {
+        margin-right: 1%;
+        padding: 12px 0;
+        font-weight: bold;
+
+        span {
+          font-weight: normal;
+          font-size: 14px;
+          opacity: 0.75;
+          display: block;
+        }
+
+        i {
+          color: inherit;
+          font-size: 18px;
+          padding-right: 8px;
+        }
+      }
+    }
+  }
+
+  .amenities-details {
+    background: #F5F8FF;
+    border: 1px solid #F0F2F4;
+    border-radius: 4px;
+    padding: 10px 30px;
+
+    ul {
+      li {
+        &:nth-child(-n+2) {
+          border: none;
+        }
+      }
+    }
+  }
+
+  .features-details.amenities-details {
+    ul {
+      li {
+        border-top: 1px solid #F0F2F4;
+        padding: 12px 0;
+        font-weight: normal;
+      }
+    }
+  }
+}
+
+//End of .tf-apartment
+
+.tf-map-link {
+  a.more-hotel {
+    font-weight: bold;
+  }
+
+  p {
+    margin-bottom: 0;
+    font-size: 16px;
+  }
+}
+
+// End of .tf-map-link
+
+.tf-wishlist-button {
+  font-size: 24px;
+  cursor: pointer;
+  margin: 0 5px 0 0;
+  line-height: 1;
+}
+
+.tf-share {
+  position: relative;
+
+  a {
+    line-height: 1;
+    font-size: 22px;
+    display: block;
+    margin: 0 10px 0 0;
+    outline: none;
+  }
+
+  .share-tour-content {
+    display: none;
+    position: absolute;
+    min-width: 100%;
+    top: 100%;
+    transform: translateY(8px);
+    z-index: 200;
+    left: auto;
+    right: 0;
+
+    .tf-dropdown-content {
+      margin: 0;
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      min-width: 200px;
+      z-index: 100;
+      box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 3px -1px rgba(0, 0, 0, 0.2);
+
+      li {
+        display: inline-block;
+
+        a i {
+          color: #1D75E3;
+          font-size: 17px;
+        }
+
+        &:nth-child(2) a i {
+          color: #1D9BF0;
+        }
+
+        &:nth-child(3) a i {
+          color: #0A66C2;
+        }
+
+        &:nth-child(4) a i {
+          color: #CC0000;
+        }
+      }
+    }
+
+    .tf-dropdown-item-content {
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+    }
+
+    .tf-dropdown-item {
+      border: 0;
+      margin: 0;
+      cursor: pointer;
+      padding: 12px 16px;
+      white-space: nowrap;
+      text-decoration: none;
+      color: #333;
+      background-color: #fff;
+      fill: #333;
+      display: flex;
+      align-items: center;
+      font-weight: 400;
+      font-size: 14px;
+
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+
+    .share-center-copy-form {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+    }
+
+    .share-center-copy-label {
+      white-space: nowrap;
+    }
+
+    .share-center-copied-message {
+      display: none;
+    }
+
+    #share_link_button {
+      white-space: nowrap;
+      font-size: 13px;
+      padding: 5px 12px;
+    }
+
+    input#share_link_input {
+      width: auto !important;
+      flex-grow: 1;
+      margin: 0 8px;
+      background-color: #e6e6e6;
+      padding: 0;
+      border: 2px solid rgba(118, 118, 118, 0.3);
+    }
+  }
+
+  .share-center-copy-cta.copied {
+    .share-center-copied-message {
+      display: inline-block;
+      font-weight: bold;
+    }
+
+    .share-center-copy-message {
+      display: none;
+    }
+  }
+}
+
+// End of .tf-share
+
+.show-on-map {
+  .btn-styled {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}
+
+.apt-description p:last-child {
+  margin-bottom: 0;
+}
+
+.content-feature-section {
+  padding-top: 40px;
+}
+
+.tf-apartment-option-slider-wrapper {
+  .slick-prev {
+    &::before {
+      color: #2A3343;
+      font-size: 26px;
+      opacity: 1;
+    }
+  }
+
+  .slick-next {
+    &::before {
+      color: #2A3343;
+      font-size: 26px;
+      opacity: 1;
+    }
+
+    margin-right: 5px;
+  }
+
+  .slick-arrow {
+    z-index: 999;
+  }
+
+  img {
+    border-radius: 8px;
+    height: 171px;
+    object-fit: cover;
+    width: 100%;
+  }
+}
+
+.tf-apartment-option-slider-item.slick-slide {
+  margin-left: 8px !important;
+  margin-right: 8px !important;
+}
+
+.tf-apartment-option-slider-desc {
+  h3 {
+    font-size: 18px;
+  }
+
+  padding-top: 10px;
+
+  p {
+    opacity: 0.85;
+    font-size: 14px;
+  }
+}
+
+.host-details {
+  background: #EBF2FF;
+  border-radius: 4px;
+  padding: 25px;
+  border: 1px solid #EBF2FF;
+  margin-bottom: 25px;
+}
+
+.host-top {
+  display: flex;
+  gap: 15px;
+
+  img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.host-meta {
+  p {
+    margin-bottom: 0;
+  }
+
+  i {
+    color: #FFC314;
+  }
+
+  span {
+    font-weight: bold;
+  }
+}
+
+.host-bottom {
+  p {
+    margin-bottom: 0;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    margin-bottom: 25px;
+
+    li {
+      span {
+        text-align: right;
+        font-weight: bold;
+        float: right;
+      }
+
+      padding-bottom: 10px;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  a {
+    i {
+      padding-right: 8px;
+    }
+  }
+}
+
+.host-desc {
+  padding: 25px 0;
+}
+
+.tf-map-content-wrapper {
+  display: flex;
+  gap: 30px;
+
+  .about-location {
+    width: 40%;
+  }
+}
+
+#tour-map {
+  .tf-container {
+    border-top: 1px solid #e8e8e8;
+    padding: 60px 0;
+    border-bottom: 1px solid #e8e8e8;
+  }
+}
+
+.tf-apartment-faq {
+  .tf-faq-sec-title {
+    margin-bottom: 20px;
+    text-align: left;
+
+    p {
+      max-width: 100%;
+    }
+  }
+
+  .tf-faq-content-wrapper {
+    background: #F5F8FF;
+    padding: 20px 25px;
+    border-radius: 4px;
+    border: 1px solid #F0F2F4;
+  }
+
+  #tf-faq-item {
+    border-bottom: 1px solid #dfdfdf;
+
+    .tf-faq-desc {
+      background-color: transparent;
+      padding-bottom: 0;
+    }
+  }
+
+  .tf-faq-desc {
+    p {
+      margin-bottom: 20px;
+    }
+  }
+
+  .tf-faq-items-wrapper {
+    #tf-faq-item {
+      &:last-child {
+        border-bottom: 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+
+.tf-ask-question.apartment-question {
+  h3 {
+    &::before {
+      display: none;
+    }
+  }
+
+  background: transparent;
+  padding-top: 0;
+  text-align: left;
+  padding-top: 10px;
+}
+
+.apartment-question {
+  .question-left {
+    &:before {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f674";
+      padding-right: 7px;
+      color: #003162;
+      position: absolute;
+      font-size: 30px;
+    }
+
+    h3 {
+      padding-left: 45px;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .apartment-qa-wrapper {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .tf-btn {
+    display: block;
+    width: auto;
+    margin-left: auto;
+  }
+}
+
+.question-left {
+  p {
+    padding-left: 45px;
+  }
+}
+
+.apartment-qa-wrapper {
+  .btn-styled {
+    display: inline-block;
+  }
+}
+
+.tf-toc-wrap {
+  padding: 40px;
+  border-radius: 4px;
+  border: 1px solid #F0F2F4;
+
+  p {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.tf-apartment-option-slider-content {
+  img {
+    border-radius: 8px;
+    height: 171px;
+    object-fit: cover;
+    width: 100%;
+  }
+}
+
+.apartment-sugestion {
+  .section-heading {
+    font-size: 24px;
+  }
+}
+
+.admin-bar {
+  .fancybox-infobar {
+    top: 32px;
+  }
+
+  .fancybox-toolbar {
+    top: 32px;
+  }
+}
+
+#tf-apartment-booking {
+  .tf_selectperson-wrap {
+    padding: 0;
+    border: none;
+    width: 100%;
+  }
+
+  .tf_input-inner {
+    padding: 12px 3px;
+  }
+}
+
+.tf-apartment-form-header {
+  .tf-apartment-price-per-night {
+    margin-bottom: 10px;
+
+    bdi {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    span {
+      font-size: 16px;
+      font-weight: 400;
+      color: #fff;
+    }
+  }
+}
+
+.tf-apartment-price-list {
+  margin-top: 15px !important;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    margin-bottom: 5px;
+
+    .tf-price-list-label {
+      font-weight: 600;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  #tour-map {
+    .tf-container {
+      padding: 40px 15px;
+    }
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .tf-map-content-wrapper {
+    display: block;
+
+    .about-location {
+      width: 100%;
+    }
+  }
+}
+
+@media (min-width: 641px) and (max-width: 991px) {
+  .host-top {
+    display: block;
+    text-align: center;
+
+    img {
+      margin-bottom: 15px;
+    }
+  }
+  .host-bottom {
+    ul {
+      li {
+        span {
+          float: none;
+        }
+      }
+    }
+  }
+  .tf-apartment {
+    .features-details {
+      ul {
+        display: block;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .tf-apartment-title {
+    .tf-title-wrap {
+      display: block;
+    }
+
+    .tf-title-right {
+      margin-top: 15px;
+    }
+
+    .tf-single-rating {
+      font-size: 14px;
+    }
+
+    .tf-share {
+      a {
+        font-size: 14px;
+      }
+    }
+
+    .tf-wishlist-button {
+      font-size: 14px;
+    }
+  }
+  .tf-apartment {
+    .hero-wrapper {
+      display: block;
+
+      .hero-second-image {
+        margin-bottom: 0;
+        width: 50%;
+
+        img {
+          border-top-right-radius: 0;
+          border-bottom-left-radius: 8px;
+        }
+      }
+    }
+
+    .hero-left {
+      margin-bottom: 15px;
+      width: 100%;
+    }
+
+    .hero-right {
+      width: 100%;
+      display: flex;
+      gap: 15px;
+    }
+
+    .hero-first-image {
+      img {
+        height: 350px;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 8px;
+      }
+    }
+
+    .hero-third-image {
+      width: 50%;
+    }
+
+    .cf-wrapper {
+      flex-direction: column;
+    }
+
+    .cf-left {
+      width: 100%;
+      order: 2;
+    }
+
+    .cf-right {
+      width: 100%;
+      order: 1;
+      margin-bottom: 35px;
+    }
+  }
+  .share-tour-content {
+    .tf-dropdown-content {
+      min-width: 270px;
+      margin-left: -170px;
+    }
+
+    input#share_link_input {
+      width: 100% !important;
+      margin: 5px 0;
+      max-width: 100%;
+      display: block;
+    }
+
+    left: 50px;
+
+    .share-center-copy-form {
+      display: block;
+    }
+  }
+  .tf-dropdown-content {
+    li {
+      display: block;
+    }
+  }
+  .tf-map-content-wrapper {
+    iframe {
+      height: 280px;
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .tf-apartment {
+    .hero-first-image {
+      img {
+        height: 220px;
+      }
+    }
+
+    .hero-right {
+      img {
+        height: 140px;
+      }
+    }
+
+    .features-details {
+      ul {
+        display: block;
+      }
+    }
+  }
+  .tf-map-content-wrapper {
+    iframe {
+      height: 200px;
+    }
+  }
+  .apartment-question {
+    .apartment-qa-wrapper {
+      flex-direction: column;
+    }
+
+    .tf-btn {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+}

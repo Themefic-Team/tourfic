@@ -55,7 +55,7 @@ while ( have_posts() ) : the_post();
 	 * Get locations
 	 * apartment_location
 	 */
-	$locations = ! empty( get_the_terms( $post_id, 'apartment_location' ) ) ? get_the_terms( $post_id, 'apartment_location' ) : '';
+	$locations = ! empty( get_the_terms( $post_id, 'apartment_location' ) ) ? get_the_terms( $post_id, 'apartment_location' ) : array();
 	if ( $locations ) {
 		$first_location_id   = $locations[0]->term_id;
 		$first_location_term = get_term( $first_location_id );
@@ -100,7 +100,7 @@ while ( have_posts() ) : the_post();
 	$share_link = get_permalink( $post_id );
 	?>
 
-    <div class="tf-main-wrapper apartment-wrap">
+    <div class="tf-main-wrapper tf-apartment-wrap tf-apartment">
 		<?php do_action( 'tf_before_container' ); ?>
 
         <!-- Start title area -->
@@ -116,12 +116,11 @@ while ( have_posts() ) : the_post();
 									echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $address . ' – </span>';
 								} ?>
 
-                                <a href="<?php echo $first_location_url; ?>" class="more-hotel tf-d-ib">
+                                <a href="<?php echo $first_location_url; ?>" class="more-apartment tf-d-ib">
 									<?php printf( __( 'Show more hotels in %s', 'tourfic' ), $first_location_name ); ?>
                                 </a>
                             </div>
 						<?php } ?>
-                        <!-- End map link -->
                     </div>
 
                     <div class="tf-title-right">
@@ -138,8 +137,9 @@ while ( have_posts() ) : the_post();
 						<?php if ( ! $disable_share_opt == '1' ) : ?>
                             <!-- Share Section -->
                             <div class="tf-share">
-                                <a href="#dropdown-share-center" class="share-toggle"
-                                   data-toggle="true"><i class="fas fa-share-alt"></i> Share</a>
+                                <a href="#dropdown-share-center" class="share-toggle" data-toggle="true">
+                                    <i class="fas fa-share-alt"></i> <?php _e( 'Share', 'tourfic' ) ?>
+                                </a>
                                 <div id="dropdown-share-center" class="share-tour-content">
                                     <ul class="tf-dropdown-content">
                                         <li>
@@ -228,7 +228,7 @@ while ( have_posts() ) : the_post();
         <!-- End title area -->
 
         <!-- Start Hero Section -->
-        <div class="hero-section tf-apartment">
+        <div class="hero-section">
             <div class="tf-container">
                 <div class="hero-wrapper">
 					<?php if ( ! empty( $gallery_ids ) ) :
@@ -236,42 +236,40 @@ while ( have_posts() ) : the_post();
 						$second_image = ! empty( $gallery_ids[1] ) ? wp_get_attachment_image_url( $gallery_ids[1], 'tf_apartment_gallery_small' ) : '';
 						$third_image = ! empty( $gallery_ids[2] ) ? wp_get_attachment_image_url( $gallery_ids[2], 'tf_apartment_gallery_small' ) : '';
 						?>
+                        <div class="hero-gallery">
                         <div class="hero-left">
-                            <div class="hero-first-image">
-                                <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[0], 'full' ) ); ?>" data-fancybox="hotel-gallery">
-                                    <img src="<?php echo esc_url( $first_image ); ?>" alt="">
-                                </a>
-                            </div>
+                            <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[0], 'full' ) ); ?>" data-fancybox="hotel-gallery" class="hero-first-image">
+                                <img src="<?php echo esc_url( $first_image ); ?>" alt="">
+                            </a>
                         </div>
 						<?php if ( $second_image || $third_image ): ?>
                         <div class="hero-right">
-							<?php if ( !empty($second_image) ): ?>
-                                <div class="hero-second-image">
-                                    <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[1], 'full' ) ); ?>" data-fancybox="hotel-gallery">
-                                        <img src="<?php echo esc_url( $second_image ); ?>" alt="">
-                                    </a>
-                                </div>
+							<?php if ( ! empty( $second_image ) ): ?>
+                                <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[1], 'full' ) ); ?>" data-fancybox="hotel-gallery" class="hero-second-image">
+                                    <img src="<?php echo esc_url( $second_image ); ?>" alt="">
+                                </a>
 							<?php endif; ?>
 							<?php if ( ! empty( $third_image ) ): ?>
-                                <div class="hero-third-image">
-                                    <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[2], 'full' ) ); ?>" data-fancybox="hotel-gallery">
-                                        <img src="<?php echo esc_url( $third_image ); ?>" alt="">
-                                    </a>
-									<?php if ( count( $gallery_ids ) > 3 ): ?>
-                                        <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[3], 'full' ) ); ?>" class="tf_button btn-styled" data-fancybox="hotel-gallery">
-											<?php _e( 'All Photos', 'tourfic' ) ?>
-                                        </a>
-										<?php foreach ( $gallery_ids as $key => $item ) :
-											if ( $key < 4 ) {
-												continue;
-											}
-											?>
-                                            <a href="<?php echo esc_url( wp_get_attachment_image_url( $item, 'full' ) ); ?>" data-fancybox="hotel-gallery"></a>
-										<?php endforeach; ?>
-									<?php endif; ?>
-                                </div>
+                                <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[2], 'full' ) ); ?>" data-fancybox="hotel-gallery" class="hero-third-image">
+                                    <img src="<?php echo esc_url( $third_image ); ?>" alt="">
+                                </a>
 							<?php endif; ?>
                         </div>
+                        </div>
+						<?php if ( count( $gallery_ids ) > 3 ): ?>
+                            <div class="gallery-all-photos">
+                                <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[3], 'full' ) ); ?>" class="tf_button btn-styled" data-fancybox="hotel-gallery">
+									<?php _e( 'All Photos', 'tourfic' ) ?>
+                                </a>
+								<?php foreach ( $gallery_ids as $key => $item ) :
+									if ( $key < 4 ) {
+										continue;
+									}
+									?>
+                                    <a href="<?php echo esc_url( wp_get_attachment_image_url( $item, 'full' ) ); ?>" data-fancybox="hotel-gallery"></a>
+								<?php endforeach; ?>
+                            </div>
+						<?php endif; ?>
 					<?php endif; ?>
 					<?php else: ?>
 						<?php
@@ -287,17 +285,16 @@ while ( have_posts() ) : the_post();
         <!-- End Hero Section -->
 
         <!-- Start Content & Feature Section -->
-        <div class="content-feature-section tf-apartment">
+        <div class="content-feature-section">
             <div class="tf-container">
                 <div class="cf-wrapper">
                     <div class="cf-left">
-                        <!-- Start Description Section -->
                         <div class="apt-description">
 							<?php the_content(); ?>
                         </div>
 
 
-						<?php if ( ! empty( $features ) ) : ?>
+						<?php if ( isset( $features ) && ! empty( $features ) ) : ?>
                             <!-- Start Key Features Section -->
                             <div class="key-features sp-t-40">
                                 <div class="features-details">
@@ -310,29 +307,29 @@ while ( have_posts() ) : the_post();
 											} elseif ( $f_icon_type == 'custom' ) {
 												$feature_icon = '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
 											} ?>
-                                            <li><?php echo $feature_icon ?? ''; ?> <?php echo $feature->name; ?> <span><?php echo wp_kses_post( $feature->description ); ?></span></li>
+                                            <li><?php echo $feature_icon ?? ''; ?><?php echo $feature->name; ?></li>
 										<?php endforeach; ?>
                                     </ul>
                                 </div>
                             </div>
 						<?php endif; ?>
 
-						<?php if ( ! empty( tf_data_types( $meta['amenities'] ) ) ) : ?>
+						<?php if ( isset( $meta['key_features'] ) && ! empty( tf_data_types( $meta['key_features'] ) ) ) : ?>
                             <!-- Start Amenities Section -->
                             <div class="apartment-amenities sp-t-50">
-								<?php if ( ! empty( $meta['amenities_title'] ) ): ?>
-                                    <h2 class="section-heading"><?php echo esc_html( $meta['amenities_title'] ) ?></h2>
+								<?php if ( ! empty( $meta['key_features_title'] ) ): ?>
+                                    <h2 class="section-heading"><?php echo esc_html( $meta['key_features_title'] ) ?></h2>
 								<?php endif; ?>
 
                                 <div class="features-details amenities-details">
                                     <ul>
 										<?php
-										foreach ( tf_data_types( $meta['amenities'] ) as $amenity ) {
-											if ( empty( $amenity['title'] ) ) {
+										foreach ( tf_data_types( $meta['key_features'] ) as $key_feature ) {
+											if ( empty( $key_feature['title'] ) ) {
 												continue;
 											}
-											$amenity_icon = ! empty( $amenity['icon'] ) ? '<i class="' . esc_attr( $amenity['icon'] ) . '"  ></i>' : '';
-											echo '<li>' . $amenity_icon . esc_html( $amenity['title'] ) . '</li>';
+											$key_feature_icon = ! empty( $key_feature['icon'] ) ? '<i class="' . esc_attr( $key_feature['icon'] ) . '"  ></i>' : '';
+											echo '<li>' . $key_feature_icon . esc_html( $key_feature['title'] ) . '</li>';
 										}
 										?>
                                     </ul>
@@ -340,7 +337,7 @@ while ( have_posts() ) : the_post();
                             </div>
 						<?php endif; ?>
 
-						<?php if ( ! empty( tf_data_types( $meta['facilities'] ) ) ) : ?>
+						<?php if ( isset( $meta['facilities'] ) && ! empty( tf_data_types( $meta['facilities'] ) ) ) : ?>
                             <!-- Start What you will get here Section -->
                             <div class="apartment-options sp-t-50">
 								<?php if ( ! empty( $meta['facilities_title'] ) ): ?>
@@ -384,7 +381,7 @@ while ( have_posts() ) : the_post();
                             </div>
                         </div>
                         <div class="apartment-booking-form">
-                            <?php tf_apartment_single_booking_form(); ?>
+							<?php tf_apartment_single_booking_form(); ?>
                         </div>
                     </div>
                 </div>

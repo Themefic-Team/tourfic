@@ -194,21 +194,21 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			'icon'   => 'fa-solid fa-circle-info',
 			'fields' => array(
 				array(
-					'id'      => 'Amenities_heading',
+					'id'      => 'key_features_heading',
 					'type'    => 'heading',
-					'content' => __( 'Amenities', 'tourfic' ),
+					'content' => __( 'Key Features', 'tourfic' ),
 				),
 				array(
-					'id'       => 'amenities_title',
+					'id'       => 'key_features_title',
 					'type'     => 'text',
-					'label'    => __( 'Amenities Title', 'tourfic' ),
-					'subtitle' => __( 'Enter amenities title', 'tourfic' ),
+					'label'    => __( 'Key Features Title', 'tourfic' ),
+					'subtitle' => __( 'Enter key features title', 'tourfic' ),
 				),
 				array(
-					'id'           => 'amenities',
+					'id'           => 'key_features',
 					'type'         => 'repeater',
 					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'        => __( 'Amenities', 'tourfic' ),
+					'label'        => __( 'Key Features', 'tourfic' ),
 					'fields'       => array(
 						array(
 							'id'    => 'title',
