@@ -597,7 +597,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
 			}
 			?>
         </div>
-		<?php if ( in_array( 0, $not_found ) ) {?>
+		<?php if ( isset($not_found) && in_array( 0, $not_found ) ) {?>
         <div class="tf_posts_navigation">
 			<?php tourfic_posts_navigation( $loop ); ?>
         </div>
