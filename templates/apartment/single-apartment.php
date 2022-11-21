@@ -296,27 +296,26 @@ while ( have_posts() ) : the_post();
 
 						<?php if ( isset( $features ) && ! empty( $features ) ) : ?>
                             <!-- Start Key Features Section -->
-                            <div class="key-features sp-t-40">
-                                <div class="features-details">
-                                    <ul>
-										<?php foreach ( $features as $feature ):
-											$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_apartment_feature', true );
-											$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-											if ( $f_icon_type == 'icon' ) {
-												$feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';
-											} elseif ( $f_icon_type == 'custom' ) {
-												$feature_icon = '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
-											} ?>
-                                            <li><?php echo $feature_icon ?? ''; ?><?php echo $feature->name; ?></li>
-										<?php endforeach; ?>
-                                    </ul>
-                                </div>
+                            <div class="apartment-amenities sp-t-40">
+                                <h2 class="section-heading"><?php _e( 'Amenities', 'tourfic' ) ?></h2>
+                                <ul>
+									<?php foreach ( $features as $feature ):
+										$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_apartment_feature', true );
+										$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+										if ( $f_icon_type == 'icon' ) {
+											$feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';
+										} elseif ( $f_icon_type == 'custom' ) {
+											$feature_icon = '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
+										} ?>
+                                        <li><?php echo $feature_icon ?? ''; ?><?php echo $feature->name; ?></li>
+									<?php endforeach; ?>
+                                </ul>
                             </div>
 						<?php endif; ?>
 
 						<?php if ( isset( $meta['key_features'] ) && ! empty( tf_data_types( $meta['key_features'] ) ) ) : ?>
                             <!-- Start Amenities Section -->
-                            <div class="apartment-amenities sp-t-50">
+                            <div class="key-features sp-t-50">
 								<?php if ( ! empty( $meta['key_features_title'] ) ): ?>
                                     <h2 class="section-heading"><?php echo esc_html( $meta['key_features_title'] ) ?></h2>
 								<?php endif; ?>
@@ -361,6 +360,9 @@ while ( have_posts() ) : the_post();
                     </div>
 
                     <div class="cf-right">
+                        <div class="apartment-booking-form">
+		                    <?php tf_apartment_single_booking_form($comments, $disable_review_sec); ?>
+                        </div>
                         <div class="host-details">
                             <div class="host-top">
                                 <img src="https://cdn.pixabay.com/photo/2018/01/06/09/25/hijab-3064633_960_720.jpg" alt="">
@@ -379,9 +381,6 @@ while ( have_posts() ) : the_post();
                                 </ul>
                                 <a href="" class="tf_button btn-styled"><i class="far fa-comments"></i> Contact Host</a>
                             </div>
-                        </div>
-                        <div class="apartment-booking-form">
-							<?php tf_apartment_single_booking_form(); ?>
                         </div>
                     </div>
                 </div>
