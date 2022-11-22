@@ -1,3 +1,11 @@
+.tf_button_blue {
+  border: 1px solid #2979ff;
+  border-radius: 5px;
+  background: #2979ff;
+  padding: 12px 24px;
+  box-shadow: 0px 1px 1px rgba(0, 60, 121, 0.16);
+}
+
 .tf-apartment-title {
   padding-bottom: 20px;
 }
@@ -547,9 +555,7 @@
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-}
-#tf-apartment-booking .tf-apartment-form-header .tf-apartment-price-per-night {
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 }
 #tf-apartment-booking .tf-apartment-form-header .tf-apartment-price-per-night .woocommerce-Price-currencySymbol,
 #tf-apartment-booking .tf-apartment-form-header .tf-apartment-price-per-night bdi {
@@ -583,6 +589,7 @@
   background: #f5f8ff;
   border: 1px solid #f0f2f4;
   border-radius: 8px;
+  margin-bottom: 24px;
 }
 #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates {
   display: -webkit-box;
@@ -597,12 +604,11 @@
   text-align: center;
   padding: 8px;
 }
-#tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-date .tf-date-label,
-#tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-out-date .tf-date-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: #363e4a;
-  margin-bottom: 8px;
+#tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-date .tf-label,
+#tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-out-date .tf-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-date #check-in-date,
 #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-date #check-out-date,
@@ -613,6 +619,7 @@
   text-align: center;
   padding: 0;
   width: 100%;
+  color: #607085;
 }
 #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-date #check-in-date:focus,
 #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-date #check-out-date:focus,
@@ -620,24 +627,47 @@
 #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-out-date #check-out-date:focus {
   outline: none;
 }
-#tf-apartment-booking .tf_selectperson-wrap {
+#tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-date {
+  border-right: 1px solid #e1e5ea;
+}
+#tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row {
+  border-top: 1px solid #e1e5ea;
+  padding: 8px 16px;
+}
+#tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row label {
+  margin-bottom: 0;
+}
+#tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+#tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap {
   padding: 0;
   border: none;
   width: 100%;
+  color: #607085;
 }
-#tf-apartment-booking .tf_input-inner {
-  padding: 12px 3px;
+#tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap .tf_acrselection-wrap {
+  left: 0;
+  right: auto;
 }
 #tf-apartment-booking .tf-apartment-price-list {
-  margin-top: 15px !important;
+  margin: 15px 0 0 !important;
 }
 #tf-apartment-booking .tf-apartment-price-list li {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-justify-content: space-between;
   justify-content: space-between;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  color: #607085;
 }
 #tf-apartment-booking .tf-apartment-price-list li .tf-price-list-label {
-  font-weight: 600;
+  color: #607085;
 }
 
 @media only screen and (max-width: 1200px) {
