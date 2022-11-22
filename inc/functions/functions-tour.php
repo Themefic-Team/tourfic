@@ -943,8 +943,8 @@ if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-tour.php' ) ) {
  * @param array      $not_found collection of tour exists
  * @param array      $data      user input for sidebar form
  */
-function tf_filter_tour_by_date( $period, array &$not_found, array $data = [] ): void {
-
+function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, array $data = [] ): void {
+    
     if(isset($data[3]) && isset($data[4])){
         [$adults, $child, $check_in_out, $startprice, $endprice] = $data;
     }else{
@@ -1091,17 +1091,17 @@ function tf_filter_tour_by_date( $period, array &$not_found, array $data = [] ):
 
         } else {
 
+          
             tf_tour_archive_single_item();
 
         }
-
+        
         $not_found[] = 0;
 
     } else {
-
+        $total_posts--;
         $not_found[] = 1;
 
     }
-
 }
 ?>

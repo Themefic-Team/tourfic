@@ -1431,7 +1431,8 @@ if($('.child-age-limited')[0]){
         }
     })
 }
-
+var postsCount = $('.tf-posts-count').html();
+$('.tf-total-results').find('span').html(postsCount);
 
 })(jQuery, window);
 

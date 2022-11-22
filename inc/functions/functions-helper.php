@@ -43,9 +43,8 @@ if(!function_exists('tf_black_friday_20222_admin_notice')){
 	function tf_black_friday_20222_admin_notice(){
 		$deal_link =sanitize_url('https://themefic.com/go/tourfic-bf-deal');
 		$get_current_screen = get_current_screen(); 
-	
 		if(!isset($_COOKIE['tf_dismiss_admin_notice'])){
-			if($get_current_screen->base == 'dashboard'){ 
+			if($get_current_screen->post_type != 'tf_hotel' && $get_current_screen->post_type != 'tf_tours' ){ 
 				?>
 				<style> 
 					.tf_black_friday_20222_admin_notice a:focus {
@@ -56,19 +55,10 @@ if(!function_exists('tf_black_friday_20222_admin_notice')){
 						position: relative;
 						z-index: 10;
 					}
-					.tf_black_friday_20222_admin_notice { 
-						max-width: 585px;
-					}
-					.tf_black_friday_20222_admin_notice button:before {
-						color: #fff !important;
-					}
-					.tf_black_friday_20222_admin_notice button:hover::before {
-						color: #d63638 !important;
-					}
 				</style>
 				<div class="notice notice-success tf_black_friday_20222_admin_notice"> 
 					<a href="<?php echo $deal_link; ?>" target="_blank" >
-						<img  style="width: 100%; height: 150px" src="<?php echo TOURFIC_PLUGIN_URL ?>/assets/img/BLACK_FRIDAY_BACKGROUND_GRUNGE_notice.png" alt="">
+						<img  style="width: auto; height: 100px;" src="<?php echo TOURFIC_PLUGIN_URL ?>/assets/img/BLACK_FRIDAY_BACKGROUND_GRUNGE.jpg" alt="">
 					</a> 
 					<button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
 				</div>
@@ -99,7 +89,7 @@ if(!function_exists('tf_black_friday_20222_admin_notice')){
 		
 	} 
 	if (strtotime('2022-12-01') > time()) {
-		add_action( 'admin_notices', 'tf_black_friday_20222_admin_notice' ); 
+		// add_action( 'admin_notices', 'tf_black_friday_20222_admin_notice' ); 
 	}   
 }
 
@@ -281,7 +271,7 @@ add_filter( 'tf_booking_search_action', 'tourfic_booking_set_search_result' );
 // Tours price with html format
 function tf_tours_price_html() {
 
-	$meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+	$meta = get_post_meta( get_the_ID(),'tf_tours_opt',true );
 	$pricing_rule = $meta['pricing'] ? $meta['pricing'] : null;
 	$tour_type = $meta['type'] ? $meta['type'] : null;
 	if( $pricing_rule == 'group'){

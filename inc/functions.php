@@ -817,7 +817,11 @@ function tf_search_result_ajax_sidebar() {
 	}
 
 	$loop = new WP_Query( $args );
+	
+	//get total posts count
+	$total_posts = $loop->found_posts;
 	if ( $loop->have_posts() ) {
+
 		$not_found = [];
 		while ( $loop->have_posts() ) {
 
@@ -834,7 +838,9 @@ function tf_search_result_ajax_sidebar() {
 				if(!empty($check_in_out)):
 					if ( $room > $total_room || $adults > $total_adults || $child > $total_child || !$room_matched ) {
 						$not_found[] = 1;
+						$total_posts--;
 						continue;
+
 					}
 				endif;
 				if ( empty( $check_in_out ) ) {
@@ -858,10 +864,13 @@ function tf_search_result_ajax_sidebar() {
 				$meta         = get_post_meta( get_the_ID(), 'tf_tours_option', true );
 				if ( $meta['cont_max_people'] < $total_person && $meta['cont_max_people'] != 0 && !empty($meta['cont_max_people']) ) {
 					$not_found[] = 1;
+					$total_posts--;
 					continue;
 				}
+
 				if ( $meta['cont_min_people'] > $total_person && $meta['cont_min_people'] != 0 && !empty($meta['cont_min_people'])) {
 					$not_found[] = 1;
+					$total_posts--;
 					continue;
 				}
 
@@ -876,10 +885,9 @@ function tf_search_result_ajax_sidebar() {
 					} else {
 						$data = [ $adults, $child, $check_in_out ];
 					}
-					tf_filter_tour_by_date( $period, $not_found, $data );
+					tf_filter_tour_by_date( $period,$total_posts, $not_found, $data );
 
 				}
-
 			}
 		}
 		
@@ -892,8 +900,7 @@ function tf_search_result_ajax_sidebar() {
 		echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 
 	}
-	//get total posts count
-	$total_posts = $loop->found_posts;
+
 	echo "<span hidden=hidden class='tf-posts-count'>".$total_posts."</span>";
 	wp_reset_postdata();
 

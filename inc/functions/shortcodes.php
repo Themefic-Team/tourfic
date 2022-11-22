@@ -577,14 +577,32 @@ function tf_search_result_shortcode( $atts, $content = null ){
 						}
 
 					} else {
+						/**
+						 * Check if minimum and maximum people limit matches with the search query
+						 */
+						$total_person = intval( $adults ) + intval( $child );
+						$meta         = get_post_meta( get_the_ID(), 'tf_tours_option', true );
 
+						//skip the tour if the search form total people exceeds the maximum number of people in tour
+						if ( !empty($meta['cont_max_people']) && $meta['cont_max_people'] < $total_person && $meta['cont_max_people'] != 0  ) {
+							$not_found[] = 1;
+							$total_posts--;
+							continue;
+						}
+
+						//skip the tour if the search form total people less than the maximum number of people in tour
+						if ( !empty($meta['cont_min_people']) && $meta['cont_min_people'] > $total_person && $meta['cont_min_people'] != 0) {
+							$not_found[] = 1;
+							$total_posts--;
+							continue;
+						}
+		
 						if ( empty( $check_in_out ) ) {
 							$not_found[] = 0;
 							tf_tour_archive_single_item();
 						} else {
 							tf_filter_tour_by_date( $period, $not_found, $data );
 						}
-
 					}
 
 				}
@@ -595,10 +613,14 @@ function tf_search_result_shortcode( $atts, $content = null ){
 			} else {
 				echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 			}
+			echo "<span hidden=hidden class='tf-posts-count'>".$total_posts."</span>";
 			?>
         </div>
-		<?php if ( isset($not_found) && in_array( 0, $not_found ) ) {?>
-        <div class="tf_posts_navigation">
+		<?php 
+			if ( isset($not_found) && in_array( 0, $not_found ) ) {
+				$post_per_page > $total_posts ? $hide_pagination = 'tf-hide-pagination' : $hide_pagination = '';
+		?>
+        <div class="tf_posts_navigation <?php echo $hide_pagination; ?>">
 			<?php tourfic_posts_navigation( $loop ); ?>
         </div>
 		<?php } ?>
