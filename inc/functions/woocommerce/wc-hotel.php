@@ -513,6 +513,7 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
     $children_ages = !empty($values['tf_hotel_data']['children_ages']) ? $values['tf_hotel_data']['children_ages'] : '';
     $check_in = !empty($values['tf_hotel_data']['check_in']) ? $values['tf_hotel_data']['check_in'] : '';
     $check_out = !empty($values['tf_hotel_data']['check_out']) ? $values['tf_hotel_data']['check_out'] : '';
+    $price_total = !empty($values['tf_hotel_data']['price_total']) ? $values['tf_hotel_data']['price_total'] : '';
     $due = !empty($values['tf_hotel_data']['due']) ? $values['tf_hotel_data']['due'] : '';
     $airport_service_type = !empty($values['tf_hotel_data']['air_serivicetype']) ? $values['tf_hotel_data']['air_serivicetype'] : null;
     $airport_fees = !empty($values['tf_hotel_data']['air_service_info']) ? $values['tf_hotel_data']['air_service_info'] : null;
@@ -643,8 +644,93 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 		# Update hotel post meta with array values
 		update_post_meta( $post_id, 'tf_hotels_opt', $meta );
 
+		//Order Data Insert 
+		$billinginfo = [
+			'billing_first_name' => $order->get_billing_first_name(),
+			'billing_last_name' => $order->get_billing_last_name(),
+			'billing_company' => $order->get_billing_company(),
+			'billing_address_1' => $order->get_billing_address_1(),
+			'billing_address_2' => $order->get_billing_address_2(),
+			'billing_city' => $order->get_billing_city(),
+			'billing_state' => $order->get_billing_state(),
+			'billing_postcode' => $order->get_billing_postcode(),
+			'billing_country' => $order->get_billing_country(),
+			'billing_email' => $order->get_billing_email(),
+			'billing_phone' => $order->get_billing_phone()
+		];
+
+		// Retrive order data
+		$order_type = $item->get_meta( '_order_type', true );
+		$room_selected = $item->get_meta( 'number_room_booked', true );
+		$check_in = $item->get_meta( 'check_in', true );
+		$check_out = $item->get_meta( 'check_out', true );
+		$price = $item->get_subtotal();
+		$due = $item->get_meta( 'due', true );
+		$room_name = $item->get_meta( 'room_name', true );
+		$adult = $item->get_meta( 'adult', true );
+		$child = $item->get_meta( 'child', true );
+		$children_ages = $item->get_meta( 'Children Ages', true );
+		$airport_service_type = $item->get_meta( 'Airport Service', true );
+		$airport_service_fee = $item->get_meta( 'Airport Service Fee', true );
+
+		//Item Data Insert 
+		$iteminfo = [
+			'room' => $room_selected,
+			'check_in' => $check_in,
+			'check_out' => $check_out,
+			'room_name' => $room_name,
+			'adult' => $adult,
+			'child' => $child,
+			'children_ages' => $children_ages,
+			'airport_service_type' => $airport_service_type,
+			'airport_service_fee' => $airport_service_fee,
+			'total_price' => $price,
+			'due_price' => $due,
+		];
+
+		global $wpdb;     
+		$table_name = $wpdb->prefix.'tf_order_data';  
+		$wpdb->query(
+			$wpdb->prepare(
+			"INSERT INTO $table_name
+			( order_id, post_id, post_type, room_number, check_in, check_out, customer_details, order_details, customer_id, payment_method, ostatus, order_date )
+			VALUES ( %d, %d, %s, %d, %s, %s, %s, %s, %d, %s, %s, %s )",
+				array(
+					$order_id,
+					sanitize_key( $post_id ),
+					$order_type,
+					$room_selected,
+					$check_in,
+					$check_out,
+					json_encode($billinginfo),
+					json_encode($iteminfo),
+					$order->get_customer_id(),
+					$order->get_payment_method(),
+					$order->get_status(),
+					date('Y-m-d H:i:s')
+				)
+			)
+		);
+
 	}
 }
 
 add_action( 'woocommerce_checkout_order_processed', 'tf_add_order_id_room_checkout_order_processed', 10, 3 );
+
+
+add_action('woocommerce_order_status_changed', 'tf_order_status_changed', 10, 3);
+
+function tf_order_status_changed($order_id, $old_status, $new_status)
+{
+	global $wpdb;     
+	$table_name = $wpdb->prefix.'tf_order_data';  
+	$tf_order_checked = $wpdb->query($wpdb->prepare("SELECT * FROM $table_name WHERE order_id=%s",$order_id));
+	if( !empty($tf_order_checked) ){
+		$wpdb->query(
+			$wpdb->prepare("UPDATE $table_name SET ostatus=%s WHERE order_id=%s",$new_status,$order_id)
+		);
+	}
+
+}
+
 ?>
