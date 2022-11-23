@@ -291,6 +291,9 @@ a.page-numbers {
     display: flex;
     justify-content: end;
 }
+.tf-hide-pagination{
+    display: none !important;
+}
 @media only screen and (max-width: 991px) {
     .widget_tf_hotel_filter {
         margin-top: 20px;

@@ -32,7 +32,7 @@ get_header(); ?>
 							tf_hotel_archive_single_item();
 						}
 					} else {
-						echo '<div class="tf-nothing-found">' .__("No Hotels Found!", "tourfic"). '</div>';
+						echo '<div class="tf-nothing-found" data-post-count="0">' .__("No Hotels Found!", "tourfic"). '</div>';
 					}
 					?>
 				</div>

@@ -39,7 +39,19 @@ CSF::createSection( $prefix, array(
             'title'    => __('Enquiry Email', 'tourfic' ), 
             'subtitle'   => $badge_pro, 
         ),
-
+        /*
+        //Feature filter setting
+        array(
+            'id'       => '',
+            'type'     => 'switcher',
+            'title'    => __( 'Filter By Feature', 'tourfic' ),
+            'subtitle' => __( 'Filter by feature' . $badge_pro, 'tourfic' ),
+            'text_on'  => __( 'Yes', 'tourfic' ),
+            'text_off' => __( 'No', 'tourfic' ),
+            'default'  => true,
+            'disabled'  => true,
+        ),
+        */
     )
     
 ) );

@@ -16,7 +16,7 @@ $args = array(
         )
     ),
     'post_status'    => 'publish',
-    //'paged'          => $paged,
+    'paged'          => $paged,
     //'posts_per_page' => $post_per_page
 );
 
@@ -49,7 +49,7 @@ $total_posts = $loop->found_posts;
                     
             }           
         } else {
-            echo '<div class="tf-nothing-found">' .__("Nothing Found!", "tourfic"). '</div>';
+            echo '<div class="tf-nothing-found" data-post-count="0">' .__("Nothing Found!", "tourfic"). '</div>';
         }
         ?>
     </div>

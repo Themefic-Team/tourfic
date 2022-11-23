@@ -485,6 +485,7 @@ class TF_Tour_Activities_Filter extends WP_Widget {
         $instance = array();
         $instance['title'] = (!empty($new_instance['title'])) ? strip_tags($new_instance['title']) : '';
         $instance['terms'] = (!empty($new_instance['terms'])) ? implode(",", $new_instance['terms']) : '';
+        $instance['terms'] = (!empty($new_instance['terms'])) ? implode(",", array( $new_instance['terms']) ) : 'all';
         $instance['show_count'] = (!empty($new_instance['show_count'])) ? strip_tags($new_instance['show_count']) : '';
         $instance['hide_empty'] = (!empty($new_instance['hide_empty'])) ? strip_tags($new_instance['hide_empty']) : '';
 

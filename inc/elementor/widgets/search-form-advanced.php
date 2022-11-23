@@ -203,7 +203,6 @@ class TF_Search_advanced extends \Elementor\Widget_Base {
 		$tf_search_title    = $settings['tf_search_title'];
 		$tf_search_subtitle = $settings['tf_search_subtitle'];
 		$type               = implode( ',', $settings['type'] );
-		var_dump( $type );
 		$full_width = $settings['full-width'];
 
 		echo do_shortcode( '[tf_search_form title="' . $tf_search_title . '" subtitle="' . $tf_search_subtitle . '" type="' . $type . '" fullwidth="' . $full_width . '" advanced="enabled"]' );
