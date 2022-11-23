@@ -693,8 +693,10 @@ function tf_search_result_ajax_sidebar() {
 	$checkin    = isset( $_POST['checkin'] ) ? trim( $_POST['checkin'] ) : null;
 	$startprice = ! empty( $_POST['startprice'] ) ? $_POST['startprice'] : '';
 	$endprice   = ! empty( $_POST['endprice'] ) ? $_POST['endprice'] : '';
-
-	list( $tf_form_start, $tf_form_end ) = explode( ' - ', $checkin );
+	
+	if( !empty( $checkin ) ){
+		list( $tf_form_start, $tf_form_end ) = explode( ' - ', $checkin );
+	}
 
 	if ( ! empty( $checkin ) ) {
 		$period = new DatePeriod(
