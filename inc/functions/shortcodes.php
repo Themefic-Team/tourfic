@@ -552,7 +552,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
     <div class="tf_search_result">
         <div class="tf-action-top">
 			<div class="tf-total-results">
-				<span><?php echo esc_html__( 'Total Results ', 'tourfic' ) . '(' . $total_posts . ')'; ?> </span>
+				<?php echo esc_html__( 'Total Results ', 'tourfic' ) . '(<span>' . $total_posts . '</span>)'; ?>
 			</div>
             <div class="tf-list-grid">
                 <a href="#list-view" data-id="list-view" class="change-view" title="<?php _e( 'List View', 'tourfic' ); ?>"><i class="fas fa-list"></i></a>
@@ -577,32 +577,53 @@ function tf_search_result_shortcode( $atts, $content = null ){
 						}
 
 					} else {
+						/**
+						 * Check if minimum and maximum people limit matches with the search query
+						 */
+						$total_person = intval( $adults ) + intval( $child );
+						$meta         = get_post_meta( get_the_ID(), 'tf_tours_option', true );
 
+						//skip the tour if the search form total people exceeds the maximum number of people in tour
+						if ( !empty($meta['cont_max_people']) && $meta['cont_max_people'] < $total_person && $meta['cont_max_people'] != 0  ) {
+							$not_found[] = 1;
+							$total_posts--;
+							continue;
+						}
+
+						//skip the tour if the search form total people less than the maximum number of people in tour
+						if ( !empty($meta['cont_min_people']) && $meta['cont_min_people'] > $total_person && $meta['cont_min_people'] != 0) {
+							$not_found[] = 1;
+							$total_posts--;
+							continue;
+						}
+		
 						if ( empty( $check_in_out ) ) {
 							$not_found[] = 0;
 							tf_tour_archive_single_item();
 						} else {
 							tf_filter_tour_by_date( $period, $not_found, $data );
 						}
-
 					}
 
 				}
 
 				if ( ! in_array( 0, $not_found ) ) {
-					echo '<div class="tf-nothing-found">' . __( 'Nothing Found! Select another dates', 'tourfic' ) . '</div>';
+					echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found! Select another dates', 'tourfic' ) . '</div>';
 				}
 			} else {
-				echo '<div class="tf-nothing-found">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+				echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 			}
+			echo "<span hidden=hidden class='tf-posts-count'>".$total_posts."</span>";
 			?>
         </div>
-        <div class="tf_posts_navigation">
-			<?php 
-			tourfic_posts_navigation( $loop );
-			
-			 ?>
+		<?php 
+			if ( isset($not_found) && in_array( 0, $not_found ) ) {
+				$post_per_page > $total_posts ? $hide_pagination = 'tf-hide-pagination' : $hide_pagination = '';
+		?>
+        <div class="tf_posts_navigation <?php echo $hide_pagination; ?>">
+			<?php tourfic_posts_navigation( $loop ); ?>
         </div>
+		<?php } ?>
 
     </div>
     <!-- End Content -->
@@ -935,6 +956,116 @@ function tf_tours_grid_slider($atts, $content = null){
             </div>
         </div>
 	<?php endif;
+	wp_reset_postdata(); 
+	return ob_get_clean();
+}
+
+/**
+ * Recent blog shortcode
+ * @author Abu Hena
+ * @since 2.9.0
+ */
+add_shortcode( 'tf_recent_blog', 'tf_recent_blog_callback' );
+function tf_recent_blog_callback($atts, $content = null){
+	extract(
+		shortcode_atts(
+			array(
+				'title'   => '',
+				'subtitle'   => '',
+				'count'       => '5',
+				'cats'       => '',
+
+			),
+			$atts
+		)
+	);
+	
+	$args = array(
+		'post_type'      => 'post',
+		'post_status'    => 'publish',
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+		'posts_per_page' => $count,
+	);
+
+	//Check if category selected/choosen
+	if( !empty( $cats )){
+		$cats = explode(',',$cats);
+		$args['tax_query'] = array(
+			'relation' => 'AND',
+			array(
+				'taxonomy' => 'category',
+				'field'    => 'term_id',
+				'terms'    => $cats,
+			)
+		);
+	}
+	$loop = new WP_Query($args);
+
+	ob_start();
+
+	?>
+	<?php if ( $loop->have_posts() ) { ?>
+        <div class="tf-recent-blog-wrapper">
+            <div class="tf-heading">
+				<?php
+				if ( ! empty( $title ) ) {
+					echo '<h2>' . esc_html( $title ) . '</h2>';
+				}
+				if ( ! empty( $subtitle ) ) {
+					echo '<p>' . esc_html( $subtitle ) . '</p>';
+				}
+				?>
+            </div>
+
+
+            <div class="recent-blogs">
+				<?php while ( $loop->have_posts() ) {
+					$loop->the_post();
+					$post_id = get_the_ID();
+
+					//different markup for first 3 posts
+					if($loop->current_post == 0){
+						echo  "<div class='post-section-one'>";
+					}
+
+					if($loop->current_post <= 2){
+				?>
+					
+				<div class="tf-single-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+					<div class="tf-post-content">
+						<div class="tf-post-desc">
+							<h3>
+								<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+							</h3>
+							<p><?php echo wp_trim_words( get_the_excerpt(), 10 ); ?></p>
+
+						</div>
+					</div>
+				</div>
+				<?php
+					if($loop->current_post == 2){
+						echo  "</div>";
+					}
+				}else{ ?>						
+				<div class="tf-single-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+					<div class="tf-post-content">
+						<div class="tf-post-desc">
+							<h3>
+								<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+							</h3>
+							<p><?php echo wp_trim_words( get_the_excerpt(), 10 ); ?></p>
+
+						</div>
+					</div>
+				</div>
+
+				<?php } } ?>
+            </div>
+        </div>
+	<?php }else{
+		echo __( 'No posts found', 'tourfic' );
+	}
 	wp_reset_postdata(); 
 	return ob_get_clean();
 }

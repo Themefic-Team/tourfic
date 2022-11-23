@@ -2,8 +2,8 @@
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet, fida02, mdshuvo
 Tags: travel, tour, trip, hotel, tour-booking, hotel-booking, travel-booking, trip-booking, woocommerce hotel, woocommerce tour, woocommerce travel, wordpress travel, wordpress hotel, wordpress tour plugin, woocommerce tour booking, woocommerce travel booking plugin, woocommerce hotel booking, wordpress tour booking plugin, travel booking wordpress plugin, wordpress hotel booking plugin, wp hotel booking, hotel booking plugin, woocommerce accommodation bookings, woocommerce hotel booking, wordpress room booking plugin, best hotel booking plugin wordpress, hotel plugin, hotel plugin wordpress, tour booking, travel booking, trip booking, hotel booking, tour itinerary, tour operator, travel agency, tour reservation, hotel reservation, airbnb, booking.com, agoda.com, agoda,  wp travel engine, wp travel, wp hotel
 Requires at least: 5.4
-Tested up to: 6.1
-Stable tag: 2.8.12
+Tested up to: 6.1.1
+Stable tag: 2.8.13
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -408,6 +408,17 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 25. Tour Option Panel
 
 == Changelog ==
+
+
+= 2.8.13 -  23 November 2022 =
+
+* Updated: Compatitibility check with WordPress 6.1.1
+* Added: Recent blog shortcode
+* Fixed: Single tour page warning issue
+* Fixed: Single hotel warning issue
+* Fixed: Itinerary builder issue in multilanguage
+* Fixed: Empty value not showing in Itinerary builder
+
 
 = 2.8.12 -  14 November 2022 =
 

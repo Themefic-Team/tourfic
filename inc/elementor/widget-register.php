@@ -40,6 +40,7 @@ function tf_register_widget( $widgets_manager ) {
 	require_once( __DIR__ . '/widgets/review-slider.php' );
 	require_once( __DIR__ . '/widgets/hotel-grid-slider.php' );
 	require_once( __DIR__ . '/widgets/tour-grid-slider.php' );
+	require_once( __DIR__ . '/widgets/recent-blog.php' );
 
 	$widgets_manager->register( new \TF_Search_horizontal() );
 	$widgets_manager->register( new \TF_Wishlist() );
@@ -50,6 +51,7 @@ function tf_register_widget( $widgets_manager ) {
 	$widgets_manager->register( new \TF_Reviews_Slider() );
 	$widgets_manager->register( new \TF_Hotel_Grid_Slider() );
 	$widgets_manager->register( new \TF_Tour_Grid_Slider() );
+	$widgets_manager->register( new \TF_Recent_Blog() );
 
 }
 add_action( 'elementor/widgets/register', 'tf_register_widget' );

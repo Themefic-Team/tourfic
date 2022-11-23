@@ -616,6 +616,9 @@ function tf_room_availability_callback() {
 	$form_child        = ! empty( $_POST['child'] ) ? sanitize_text_field( $_POST['child'] ) : 0;
 	$children_ages     = ! empty( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '';
 	$form_check_in_out = ! empty( $_POST['check_in_out'] ) ? sanitize_text_field( $_POST['check_in_out'] ) : '';
+
+	
+
 	$form_total_person = $form_adult + $form_child;
 	if ( $form_check_in_out ) {
 		list( $form_start, $form_end ) = explode( ' - ', $form_check_in_out );
@@ -774,7 +777,7 @@ function tf_room_availability_callback() {
 					$num_room_available = max( $num_room_available, 0 ); // If negetive value make that 0
 
 				}
-
+				
 				if ( $avil_by_date && defined( 'TF_PRO' ) ) {
 
 					// split date range
@@ -810,7 +813,7 @@ function tf_room_availability_callback() {
 						}
 
 					}
-
+					
 					// Check if date is provided and within date range
 					if ( ! in_array( 0, $has_room ) ) {
 						tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit );
@@ -828,9 +831,8 @@ function tf_room_availability_callback() {
 						$error = __( 'No Room Available within this Date Range!', 'tourfic' );
 
 					}
-
 				} else {
-
+					
 					if ( $pricing_by == '1' ) {
 						$price_by_date = $room_price;
 					} else {
@@ -840,17 +842,46 @@ function tf_room_availability_callback() {
 					$price = $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date;
 
 					tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit );
-
-					if ( $form_total_person <= $total_person ) {
-
-						include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
-
-					} else {
-
-						$error = __( 'No Room Available! Total person number exceeds!', 'tourfic' );
-
+					
+					/**
+					 * filter hotel room with features
+					 * @return array
+					 * @since 1.6.9
+					 * @author Abu Hena
+					 */
+					$filtered_features  = ! empty( $_POST['features'] ) ?  $_POST['features']  : array();	
+					$room_features = !empty($room['features']) ? $room['features'] : '';
+					if(!empty($room_features) && is_array($room_features)){
+						$feature_result = array_intersect($filtered_features,$room_features);
 					}
 
+					if( !empty( $filtered_features ) && defined( 'TF_PRO' ) ){
+						if($feature_result){
+							if ( $form_total_person <= $total_person ) {
+
+								include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+
+							} else {
+
+								$error = __( 'No Room Available! Total person number exceeds!', 'tourfic' );
+
+							}
+						}else{
+							$error = __( 'No Room Available!', 'tourfic' );
+						}
+						/* feature filter ended here */
+
+					}else{
+						if ( $form_total_person <= $total_person ) {
+
+							include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
+
+						} else {
+
+							$error = __( 'No Room Available! Total person number exceeds!', 'tourfic' );
+
+						}
+					}
 				}
 
 			} else {
@@ -1247,6 +1278,9 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
 	// Check-in & out date
 	$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
+	//get features
+	$features = ! empty( $_GET['features'] ) ? sanitize_text_field( $_GET['features'] ) : '';
+	
 
 	?>
 
@@ -1272,7 +1306,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
                     </select>
                 </div>
             </label>
-        </div>
+        </div>		
 
         <div class="tf_form-row">
             <label class="tf_label-row">
@@ -1305,6 +1339,9 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
             </div>
         </div>
 
+		<!-- Hooked in feature filter action -->
+		<?php do_action( 'tf_hotel_features_filter', 10 ) ?>
+		
         <div class="tf_form-row">
 			<?php
 			$ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
@@ -1567,10 +1604,11 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	// Get hotel meta options
 	$meta = get_post_meta( get_the_ID(), 'tf_hotel', true );
 	// Remove disabled rooms
-	$meta = array_filter( $meta['room'], function ( $value ) {
-		return ! empty( $value ) && $value['enable'] != '0';
-	} );
-
+	if(!empty($meta['room'])):
+		$meta = array_filter( $meta['room'], function ( $value ) {
+			return ! empty( $value ) && $value['enable'] != '0';
+		} );
+	endif;
 	// If no room return
 	if ( empty( $meta ) ) {
 		return;
@@ -2067,9 +2105,9 @@ if ( ! function_exists( 'tf_hotel_total_room_adult_child' ) ) {
 		foreach ( $rooms as $room ) {
 			$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
 			if ( $enable ) {
-				$total_room   += $room['num-room'];
-				$total_adults += $room['adult'];
-				$total_child  += $room['child'];
+				$total_room   += !empty($room['num-room']) ? $room['num-room'] : 0;
+				$total_adults += !empty($room['adult']) ? $room['adult'] : 0;
+				$total_child  += !empty($room['child'] ) ? $room['child'] : 0;
 			}
 		}
 
