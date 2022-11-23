@@ -28,6 +28,11 @@ function tf_documentation_page_integration() {
 	if(!defined( 'TF_PRO' )) :
 		$submenu['edit.php?post_type=tf_hotel'][] = array( sprintf(__('Booking Details %s(Pro)%s', 'tourfic'), '<span style=color:#ffba00;">', '</span>'), 'edit_tf_hotels', $go_pro_link );
 		$submenu['edit.php?post_type=tf_tours'][] = array( sprintf(__('Booking Details %s(Pro)%s', 'tourfic'), '<span style=color:#ffba00;">', '</span>'), 'edit_tf_tourss', $go_pro_link );
+
+		// Enquiry Menu
+		$submenu['edit.php?post_type=tf_hotel'][] = array( sprintf(__('Enquiry Details %s(Pro)%s', 'tourfic'), '<span style=color:#ffba00;">', '</span>'), 'edit_tf_hotels', $go_pro_link );
+		$submenu['edit.php?post_type=tf_tours'][] = array( sprintf(__('Enquiry Details %s(Pro)%s', 'tourfic'), '<span style=color:#ffba00;">', '</span>'), 'edit_tf_tourss', $go_pro_link );
+
 	endif;
 	$submenu['edit.php?post_type=tf_hotel'][] = array( sprintf('<span style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_hotels', $tfhoteldocumentation );
 	$submenu['edit.php?post_type=tf_tours'][] = array( sprintf('<span style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_tourss', $tftourdocumentation );
