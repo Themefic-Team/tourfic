@@ -40,6 +40,7 @@ CSF::createSection( $prefix, array(
             'subtitle'   => $badge_pro,
 
         ),
+        /*
         //Feature filter setting
         array(
             'id'       => '',
@@ -51,6 +52,7 @@ CSF::createSection( $prefix, array(
             'default'  => true,
             'disabled'  => true,
         ),
+        */
     )
     
 ) );
