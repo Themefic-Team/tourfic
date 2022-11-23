@@ -550,7 +550,7 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 		}
 	} elseif ( $tour_type && $tour_type == 'continuous' ) {
 		if ( $tour_date ) {
-			$item->update_meta_data( 'Tour Date', date( "F j, Y", strtotime( $tour_date ) ) );
+			$item->update_meta_data( 'Tour Date', $tour_date );
 		}
 	}
 	if($tour_time){

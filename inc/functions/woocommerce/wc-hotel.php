@@ -605,45 +605,51 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 
 	# Get and Loop Over Order Line Items
 	foreach ( $order->get_items() as $item_id => $item ) {
-
-		$post_id   = $item->get_meta( '_post_id', true ); // Hotel id
-		$unique_id = $item->get_meta( '_unique_id', true ); // Unique id of rooms
-		$meta      = get_post_meta( $post_id, 'tf_hotels_opt', true ); // Hotel meta
-		$rooms     = ! empty( $meta['room'] ) ? $meta['room'] : '';
-		if( !empty($rooms) && gettype($rooms)=="string" ){
-			$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
-				return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
-			}, $rooms );
-			$rooms = unserialize( $tf_hotel_rooms_value );
-		}
-		$new_rooms = [];
-
-		# Get and Loop Over Room Meta
-		if ( ! empty( $rooms ) ) {
-			foreach ( $rooms as $room ) {
-
-				# Check if order is for this room
-				if ( $room['unique_id'] == $unique_id ) {
-
-					$old_order_id = $room['order_id'];
-
-					$old_order_id != "" && $old_order_id .= ",";
-					$old_order_id .= $order_id;
-
-					# set old + new data to the oder_id meta
-					$room['order_id'] = $old_order_id;
-				}
-
-				# Set whole room array
-				$new_rooms[] = $room;
+		
+		$order_type = $item->get_meta( '_order_type', true );
+		if("hotel"==$order_type){
+			$post_id   = $item->get_meta( '_post_id', true ); // Hotel id
+			$unique_id = $item->get_meta( '_unique_id', true ); // Unique id of rooms
+			$meta      = get_post_meta( $post_id, 'tf_hotels_opt', true ); // Hotel meta
+			$rooms     = ! empty( $meta['room'] ) ? $meta['room'] : '';
+			if( !empty($rooms) && gettype($rooms)=="string" ){
+				$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+					return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+				}, $rooms );
+				$rooms = unserialize( $tf_hotel_rooms_value );
 			}
+			$new_rooms = [];
+
+			# Get and Loop Over Room Meta
+			if ( ! empty( $rooms ) ) {
+				foreach ( $rooms as $room ) {
+
+					# Check if order is for this room
+					if ( $room['unique_id'] == $unique_id ) {
+
+						$old_order_id = $room['order_id'];
+
+						$old_order_id != "" && $old_order_id .= ",";
+						$old_order_id .= $order_id;
+
+						# set old + new data to the oder_id meta
+						$room['order_id'] = $old_order_id;
+					}
+
+					# Set whole room array
+					$new_rooms[] = $room;
+				}
+			}
+
+			# Set whole room array to the room meta
+			$meta['room'] = $new_rooms;
+			# Update hotel post meta with array values
+			update_post_meta( $post_id, 'tf_hotels_opt', $meta );
 		}
 
-		# Set whole room array to the room meta
-		$meta['room'] = $new_rooms;
-		# Update hotel post meta with array values
-		update_post_meta( $post_id, 'tf_hotels_opt', $meta );
-
+		if("tour"==$order_type){
+			$post_id   = $item->get_meta( '_tour_id', true ); // Tour id
+		}
 		//Order Data Insert 
 		$billinginfo = [
 			'billing_first_name' => $order->get_billing_first_name(),
@@ -659,58 +665,129 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			'billing_phone' => $order->get_billing_phone()
 		];
 
-		// Retrive order data
-		$order_type = $item->get_meta( '_order_type', true );
-		$room_selected = $item->get_meta( 'number_room_booked', true );
-		$check_in = $item->get_meta( 'check_in', true );
-		$check_out = $item->get_meta( 'check_out', true );
-		$price = $item->get_subtotal();
-		$due = $item->get_meta( 'due', true );
-		$room_name = $item->get_meta( 'room_name', true );
-		$adult = $item->get_meta( 'adult', true );
-		$child = $item->get_meta( 'child', true );
-		$children_ages = $item->get_meta( 'Children Ages', true );
-		$airport_service_type = $item->get_meta( 'Airport Service', true );
-		$airport_service_fee = $item->get_meta( 'Airport Service Fee', true );
-
-		//Item Data Insert 
-		$iteminfo = [
-			'room' => $room_selected,
-			'check_in' => $check_in,
-			'check_out' => $check_out,
-			'room_name' => $room_name,
-			'adult' => $adult,
-			'child' => $child,
-			'children_ages' => $children_ages,
-			'airport_service_type' => $airport_service_type,
-			'airport_service_fee' => $airport_service_fee,
-			'total_price' => $price,
-			'due_price' => $due,
+		$shippinginfo = [
+			'shipping_first_name' => $order->get_shipping_first_name(),
+			'shipping_last_name' => $order->get_shipping_last_name(),
+			'shipping_company' => $order->get_shipping_company(),
+			'shipping_address_1' => $order->get_shipping_address_1(),
+			'shipping_address_2' => $order->get_shipping_address_2(),
+			'shipping_city' => $order->get_shipping_city(),
+			'shipping_state' => $order->get_shipping_state(),
+			'shipping_postcode' => $order->get_shipping_postcode(),
+			'shipping_country' => $order->get_shipping_country(),
+			'shipping_phone' => $order->get_shipping_phone()
 		];
 
-		global $wpdb;     
-		$table_name = $wpdb->prefix.'tf_order_data';  
-		$wpdb->query(
-			$wpdb->prepare(
-			"INSERT INTO $table_name
-			( order_id, post_id, post_type, room_number, check_in, check_out, customer_details, order_details, customer_id, payment_method, ostatus, order_date )
-			VALUES ( %d, %d, %s, %d, %s, %s, %s, %s, %d, %s, %s, %s )",
-				array(
-					$order_id,
-					sanitize_key( $post_id ),
-					$order_type,
-					$room_selected,
-					$check_in,
-					$check_out,
-					json_encode($billinginfo),
-					json_encode($iteminfo),
-					$order->get_customer_id(),
-					$order->get_payment_method(),
-					$order->get_status(),
-					date('Y-m-d H:i:s')
+		// Order Type hotel/tour
+		
+		// Hotel Item Data Insert 
+		if("hotel"==$order_type){
+			$room_selected = $item->get_meta( 'number_room_booked', true );
+			$check_in = $item->get_meta( 'check_in', true );
+			$check_out = $item->get_meta( 'check_out', true );
+			$price = $item->get_subtotal();
+			$due = $item->get_meta( 'due', true );
+			$room_name = $item->get_meta( 'room_name', true );
+			$adult = $item->get_meta( 'adult', true );
+			$child = $item->get_meta( 'child', true );
+			$children_ages = $item->get_meta( 'Children Ages', true );
+			$airport_service_type = $item->get_meta( 'Airport Service', true );
+			$airport_service_fee = $item->get_meta( 'Airport Service Fee', true );
+			
+			$iteminfo = [
+				'room' => $room_selected,
+				'check_in' => $check_in,
+				'check_out' => $check_out,
+				'room_name' => $room_name,
+				'adult' => $adult,
+				'child' => $child,
+				'children_ages' => $children_ages,
+				'airport_service_type' => $airport_service_type,
+				'airport_service_fee' => $airport_service_fee,
+				'total_price' => $price,
+				'due_price' => $due,
+			];
+
+			
+			global $wpdb;     
+			$table_name = $wpdb->prefix.'tf_order_data';  
+			$wpdb->query(
+				$wpdb->prepare(
+				"INSERT INTO $table_name
+				( order_id, post_id, post_type, room_number, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
+				VALUES ( %d, %d, %s, %d, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
+					array(
+						$order_id,
+						sanitize_key( $post_id ),
+						$order_type,
+						$room_selected,
+						$check_in,
+						$check_out,
+						json_encode($billinginfo),
+						json_encode($shippinginfo),
+						json_encode($iteminfo),
+						$order->get_customer_id(),
+						$order->get_payment_method(),
+						$order->get_status(),
+						date('Y-m-d H:i:s')
+					)
 				)
-			)
-		);
+			);
+		}
+
+		// Tour Item Data Insert 
+		if("tour"==$order_type){
+			$tour_date = $item->get_meta( 'Tour Date', true );
+			$tour_time = $item->get_meta( 'Tour Time', true );
+			$price = $item->get_subtotal();
+			$due = $item->get_meta( 'Due', true );
+			$tour_extra = $item->get_meta( 'Tour Extra', true );
+			$adult = $item->get_meta( 'Adults', true );
+			$child = $item->get_meta( 'Children', true );
+			$infants = $item->get_meta( 'Infants', true );
+			
+			if ( $tour_date ) {
+				list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
+			}
+
+			$iteminfo = [
+				'tour_date' => $tour_date,
+				'tour_time' => $tour_time,
+				'tour_extra' => $tour_extra,
+				'adult' => $adult,
+				'child' => $child,
+				'infants' => $infants,
+				'total_price' => $price,
+				'due_price' => $due,
+			];
+
+			
+			global $wpdb;     
+			$table_name = $wpdb->prefix.'tf_order_data';  
+			$wpdb->query(
+				$wpdb->prepare(
+				"INSERT INTO $table_name
+				( order_id, post_id, post_type, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
+				VALUES ( %d, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
+					array(
+						$order_id,
+						sanitize_key( $post_id ),
+						$order_type,
+						$tour_in,
+						$tour_out,
+						json_encode($billinginfo),
+						json_encode($shippinginfo),
+						json_encode($iteminfo),
+						$order->get_customer_id(),
+						$order->get_payment_method(),
+						$order->get_status(),
+						date('Y-m-d H:i:s')
+					)
+				)
+			);
+		}
+
+
 
 	}
 }
@@ -731,6 +808,47 @@ function tf_order_status_changed($order_id, $old_status, $new_status)
 		);
 	}
 
+}
+
+
+add_action( 'woocommerce_saved_order_items', 'tf_woocommerce_before_save_order_items', 10, 2 );
+function tf_woocommerce_before_save_order_items( $order_id, $items ) {
+
+	$billinginfo = [
+		'billing_first_name' => $items['_billing_first_name'],
+		'billing_last_name' => $items['_billing_last_name'],
+		'billing_company' => $items['_billing_company'],
+		'billing_address_1' => $items['_billing_address_1'],
+		'billing_address_2' => $items['_billing_address_2'],
+		'billing_city' => $items['_billing_city'],
+		'billing_state' => $items['_billing_state'],
+		'billing_postcode' => $items['_billing_postcode'],
+		'billing_country' => $items['_billing_country'],
+		'billing_email' => $items['_billing_email'],
+		'billing_phone' => $items['_billing_phone']
+	];
+
+	$shippinginfo = [
+		'shipping_first_name' => $items['_shipping_first_name'],
+		'shipping_last_name' => $items['_shipping_last_name'],
+		'shipping_company' => $items['_shipping_company'],
+		'shipping_address_1' => $items['_shipping_address_1'],
+		'shipping_address_2' => $items['_shipping_address_2'],
+		'shipping_city' => $items['_shipping_city'],
+		'shipping_state' => $items['_shipping_state'],
+		'shipping_postcode' => $items['_shipping_postcode'],
+		'shipping_country' => $items['_shipping_country'],
+		'shipping_phone' => $items['_shipping_phone']
+	];
+	$tf_payment_method = $items['_payment_method'];
+	global $wpdb;     
+	$table_name = $wpdb->prefix.'tf_order_data';  
+	$tf_order_checked = $wpdb->query($wpdb->prepare("SELECT * FROM $table_name WHERE order_id=%s",$order_id));
+	if( !empty($tf_order_checked) ){
+		$wpdb->query(
+			$wpdb->prepare("UPDATE $table_name SET billing_details=%s, shipping_details=%s, payment_method=%s WHERE order_id=%s",json_encode($billinginfo),json_encode($shippinginfo),$tf_payment_method, $order_id)
+		);
+	}
 }
 
 ?>
