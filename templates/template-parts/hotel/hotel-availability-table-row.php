@@ -76,7 +76,7 @@
                             <i class="tool-i"></i>
                         </div>
                     </li>
-                <?php  }} } ?>
+                <?php  }} ?>
             </ul>
         </div>
     </td>
