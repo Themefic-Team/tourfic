@@ -62,7 +62,15 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false
 				),
-
+				array(
+					'id'       => 'feature-filter',
+					'type'     => 'switch',
+					'label'    => __( 'Filter By Feature', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'  => true,
+					'is_pro'   => true
+				),
 				array(
 					'id'     => 'h-enquiry-email',
 					'type'   => 'text',
