@@ -166,7 +166,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										'post_status'    => 'publish',
 										'posts_per_page' => - 1
 									);
-									echo count( $tf_total_hotels );
+									echo count( get_posts ($tf_total_hotels ) );
 									?>
 								</span>
                                 <a href="<?php echo get_admin_url() . 'edit.php?post_type=tf_hotel'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
@@ -213,7 +213,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										'post_status'    => 'publish',
 										'posts_per_page' => - 1
 									);
-									echo count( $tf_total_tours );
+									echo count( get_posts ($tf_total_tours ));
 									?>
 								</span>
                                 <a href="<?php echo get_admin_url() . 'edit.php?post_type=tf_tours'; ?>"><?php _e( "View All", "tourfic" ); ?></a>
