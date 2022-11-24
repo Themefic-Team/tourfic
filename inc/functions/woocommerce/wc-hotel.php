@@ -708,6 +708,14 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'due_price' => $due,
 			];
 
+			$iteminfo_keys = array_keys($iteminfo);
+			$iteminfo_keys = array_map('sanitize_key', $iteminfo_keys);
+
+			$iteminfo_values = array_values($iteminfo);
+			$iteminfo_values = array_map('sanitize_text_field', $iteminfo_values);
+
+			$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
+
 			
 			global $wpdb;     
 			$table_name = $wpdb->prefix.'tf_order_data';  
@@ -761,6 +769,13 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'due_price' => $due,
 			];
 
+			$iteminfo_keys = array_keys($iteminfo);
+			$iteminfo_keys = array_map('sanitize_key', $iteminfo_keys);
+
+			$iteminfo_values = array_values($iteminfo);
+			$iteminfo_values = array_map('sanitize_text_field', $iteminfo_values);
+
+			$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
 			
 			global $wpdb;     
 			$table_name = $wpdb->prefix.'tf_order_data';  
