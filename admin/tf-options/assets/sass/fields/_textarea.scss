@@ -1,0 +1,18 @@
+.tf-field-textarea {
+  textarea {
+    width: 100% !important;
+    height: 180px;
+    padding: 12px 8px 12px 12px;
+    border: 1px solid $slate20;
+    background-color: $blue0;
+    border-radius: 4px;
+    color: $slate80;
+    font-size: 14px;
+    width: 100%;
+    &:focus {
+      background: #FFFFFF;
+      box-shadow: 0 0 0 2px $blue60;
+      border-radius: 4px;
+    }
+  }
+} 

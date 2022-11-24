@@ -58,13 +58,14 @@
                 if( !empty( $room['features'] ) ){
                 foreach ( $room['features'] as $feature ) {
 
-                        $room_f_meta = get_term_meta( $feature, 'hotel_feature', true );
+                        $room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
                         if( !empty( $room_f_meta ) ){
                             if ( $room_f_meta['icon-type'] == 'fa' ) {
                                 $room_feature_icon = '<i class="' . $room_f_meta['icon-fa'] . '"></i>';
                             } elseif ( $room_f_meta['icon-type'] == 'c' ) {
-                                $room_feature_icon = '<img src="' . $room_f_meta['icon-c']["url"] . '" style="min-width: ' . $room_f_meta['dimention']["width"] . 'px; height: ' . $room_f_meta['dimention']["width"] . 'px;" />';
+                                $room_feature_icon = '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />';
                             }
+                        }
                        
 
                     $room_term = get_term( $feature );?>
@@ -75,7 +76,7 @@
                             <i class="tool-i"></i>
                         </div>
                     </li>
-                <?php  }} } ?>
+                <?php  }} ?>
             </ul>
         </div>
     </td>

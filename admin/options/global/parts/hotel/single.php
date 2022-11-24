@@ -37,8 +37,7 @@ CSF::createSection( $prefix, array(
             'class'    => 'tf-csf-disable tf-csf-pro',
             'type'     => 'text',
             'title'    => __('Enquiry Email', 'tourfic' ), 
-            'subtitle'   => $badge_pro,
-
+            'subtitle'   => $badge_pro, 
         ),
         /*
         //Feature filter setting

@@ -52,8 +52,8 @@
             e.preventDefault();
             
             var $this = $(this);
-            var meta_field = $this.closest( '.csf-repeater-content' ).find('.tf-order_id input').attr('name');
-
+            var post_id = $("#post_ID").val();
+            var meta_field = $this.closest( '.tf-repeater-content-wrap' ).find('.tf-order_id input').attr('name');
             var data = {
                 action: 'tf_remove_room_order_ids',
                 meta_field: meta_field,
@@ -84,7 +84,7 @@
          * show notyf error
          */
         $(document).on('click', '.post-type-tf_tours #publish, .post-type-tf_tours #save-post', function(e) {
-            if( $('textarea[name="tf_tours_option[text_location]"]').val().length === 0 ) {
+            if( $('textarea[name="tf_tours_opt[text_location]"]').val().length === 0 ) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
                 notyf.error(tf_admin_params.tour_location_required);
@@ -94,11 +94,11 @@
 
         /**
          * Hotel location required
-         * 
+         *
          * show notyf error
          */
-         $(document).on('click', '.post-type-tf_hotel #publish, .post-type-tf_hotel #save-post', function(e) {
-            if( $('textarea[name="tf_hotel[address]"]').val().length === 0 ) {
+        $(document).on('click', '.post-type-tf_hotel #publish, .post-type-tf_hotel #save-post', function(e) {
+            if( $('textarea[name="tf_hotels_opt[address]"]').val().length === 0 ) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
                 notyf.error(tf_admin_params.hotel_location_required);
@@ -168,10 +168,16 @@
          * Pro Feature button link
          */
         $(document).on('click', '.tf-pro', function(e) {
+            e.preventDefault();
             window.open('https://tourfic.com/');
         });
 
-        $(document).on('click', '.tf-csf-pro', function(e) {
+        $(window).on('load', function() {
+            $('.tf-field-disable').find('input, select, textarea, button, div, span').attr('disabled', 'disabled');
+        });
+
+        $(document).on('click', '.tf-field-pro', function(e) {
+            e.preventDefault();
             window.open('https://tourfic.com/');
         });
 

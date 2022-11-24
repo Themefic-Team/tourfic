@@ -22,7 +22,34 @@ if ( class_exists( 'CSF' ) ) {
 	CSF::createSection( $prefix, array(
 		'title'  => __( 'Location', 'tourfic' ),
 		'fields' => array(
-
+			array(
+				'id'            => 'features',
+				'type'          => 'select',
+				'title'         => __( 'Select Features', 'tourfic' ),
+				'placeholder'   => __( 'Select', 'tourfic' ),
+				'empty_message' => __( 'No feature available', 'tourfic' ),
+				'taxonomy'       => 'hotel_feature', 
+			),
+			array(
+				'id'         => 'icon-fa',
+				'type'       => 'icon',
+				'title'      => __('Select Font Awesome Icon', 'tourfic'),
+			),
+			array(
+				'id'         => 'icon-fass',
+				'type'       => 'icon',
+				'title'      => __('Select Font Awesome Icon', 'tourfic'),
+			),
+			array(
+				'id'       => 'disable-services',
+				'type'     => 'checkbox',
+				'title'    => __( 'Disable Services', 'tourfic' ),
+				'subtitle' => __( 'Disable or hide the services you don\'t need by ticking the checkbox', 'tourfic' ),
+				'options'  => array(
+					'hotel' => __( 'Hotel', 'tourfic' ),
+					'tour'  => __( 'Tour', 'tourfic' ),
+				),
+			),
 			array(
 				'id'          => 'address',
 				'type'        => 'textarea',
@@ -436,7 +463,7 @@ if ( class_exists( 'CSF' ) ) {
 						'class'    => 'repeater-by-date',
 						'type'     => 'repeater',
 						'title'    => __( 'By Date', 'tourfic' ),
-						'subtitle' => __( $badge_pro, 'tourfic' ),
+						// 'subtitle' => __( $badge_pro, 'tourfic' ),
 						'fields'   => array(
 
 							array(

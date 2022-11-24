@@ -1,0 +1,59 @@
+// .tf-field-notice {
+
+  .tf-field-notice-inner {
+    @include flexbox();
+    padding: 24px;
+    border: 1px solid $teal10;
+    border-radius: 8px;
+    background-color: $teal0;
+
+    .tf-field-notice-icon {
+      margin-right: 10px;
+      font-size: 20px;
+      color: $teal60;
+    }
+
+    .tf-field-notice-content {
+      color: $slate40;
+ 
+      h6 {
+        margin: 0;
+        font-weight: 500;
+        color: $slate80;
+        font-size: 16px;
+      }
+
+      &.has-content {
+        h6 {
+          margin-bottom: 5px;
+        }
+      }
+    }
+
+    &.tf-notice-success {
+      border-color: $green10;
+      background-color: $green0;
+
+      .tf-field-notice-icon {
+        color: $green60;
+      }
+    }
+    &.tf-notice-warning {
+      border-color: $yellow10;
+      background-color: $yellow0;
+
+      .tf-field-notice-icon {
+        color: $yellow60;
+      }
+    }
+    &.tf-notice-danger {
+      border-color: $red10;
+      background-color: $red0;
+
+      .tf-field-notice-icon {
+        color: $red60;
+      }
+    }
+
+  }
+// }

@@ -58,8 +58,14 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 
             if(defined( 'TF_PRO' )){
                 wp_enqueue_script( 'Chart', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js', array( 'jquery' ), '2.6.0', true );
-                $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
-                $itineraries = !empty ( $meta['itinerary'] ) ? $meta['itinerary'] : null;
+                $meta = get_post_meta( get_the_ID(),'tf_tours_opt',true );
+	            $itineraries = !empty($meta['itinerary']) ? $meta['itinerary'] : null;
+                if( !empty($itineraries) && gettype($itineraries)=="string" ){
+                    $tf_hotel_itineraries_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                        return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+                    }, $itineraries );
+                    $itineraries = unserialize( $tf_hotel_itineraries_value );
+                }
                 $itinerarayday = [];
                 $itineraraymeter = [];
                 if( $itineraries ) {
@@ -68,12 +74,12 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                         $itineraraymeter[] = !empty($itinerary['altitude']) ? intval($itinerary['altitude']) : '';
                     }
                 }
-                $showxaxis = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-x-axis']) ? tfopt( 'itinerary-builder-setings' )['itinerary-x-axis'] : false;
-                $showyaxis = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-y-axis']) ? tfopt( 'itinerary-builder-setings' )['itinerary-y-axis'] : false;
-                $showlinegraph = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-line-graph']) ? tfopt( 'itinerary-builder-setings' )['itinerary-line-graph'] : false;
-                $showitinerarychart = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-chart']) ? tfopt( 'itinerary-builder-setings' )['itinerary-chart'] : false;
-                $showitinerarystatus = !empty(tfopt( 'itinerary-builder-setings' )['itinerary-status']) ? tfopt( 'itinerary-builder-setings' )['itinerary-status'] : false;
-                $elevvationmode = !empty(tfopt( 'itinerary-builder-setings' )['elevtion_type']) && tfopt( 'itinerary-builder-setings' )['elevtion_type']=="Feet" ? "Feet" : "Meter";
+                $showxaxis = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-x-axis']) ? tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-x-axis'] : false;
+                $showyaxis = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-y-axis']) ? tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-y-axis'] : false;
+                $showlinegraph = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-line-graph']) ? tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-line-graph'] : false;
+                $showitinerarychart = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-chart']) ? tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-chart'] : false;
+                $showitinerarystatus = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-status']) ? tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-status'] : false;
+                $elevvationmode = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['elevtion_type']) && tf_data_types(tfopt( 'itinerary-builder-setings' ))['elevtion_type']=="Feet" ? "Feet" : "Meter";
             }
         }
         wp_enqueue_style( 'tf-search-style', TF_ASSETS_URL . 'css/search-result.css', null, '' );
@@ -183,8 +189,14 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         if( $tfhotel_min_max_query->have_posts() ):
             while( $tfhotel_min_max_query->have_posts() ) : $tfhotel_min_max_query->the_post();
                 
-                $meta = get_post_meta( get_the_ID( ), 'tf_hotel', true );
+                $meta = get_post_meta( get_the_ID( ), 'tf_hotels_opt', true );
                 $rooms = !empty($meta['room']) ? $meta['room'] : '';
+                if( !empty($rooms) && gettype($rooms)=="string" ){
+                    $tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                        return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+                    }, $rooms );
+                    $rooms = unserialize( $tf_hotel_rooms_value );
+                }
                 if(!empty($rooms)){
                     foreach($rooms as $singleroom){
                         if(!empty($singleroom['price'])){
@@ -257,13 +269,14 @@ if ( !function_exists('tf_enqueue_scripts') ) {
             'post_type'     => 'tf_tours',
             'post_status' => 'publish'
         );
-        $tftours_min_max_query = new WP_Query( $tftours_min_max ); 
+
+        $tftours_min_max_query = new WP_Query( $tftours_min_max );
         $tftours_min_maxprices = array();
 
         if( $tftours_min_max_query->have_posts() ):
             while( $tftours_min_max_query->have_posts() ) : $tftours_min_max_query->the_post();
                 
-                $meta = get_post_meta( get_the_ID( ), 'tf_tours_option', true );
+                $meta = get_post_meta( get_the_ID( ), 'tf_tours_opt', true );
                 if(!empty($meta['adult_price'])){
                     $tftours_min_maxprices[]=$meta['adult_price'];
                 }
@@ -350,7 +363,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         // Get single tour meta data
         global $post;
         if (!is_404() && !empty($post)) {
-            $meta = !empty(get_post_meta( $post->ID, 'tf_tours_option', true )) ? get_post_meta( $post->ID, 'tf_tours_option', true ) : '';
+            $meta = !empty(get_post_meta( $post->ID, 'tf_tours_opt', true )) ? get_post_meta( $post->ID, 'tf_tours_opt', true ) : '';
         }
         $tour_type = !empty($meta['type']) ? $meta['type'] : '';
 
