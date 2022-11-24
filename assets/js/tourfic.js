@@ -16,14 +16,12 @@
         //         Hotel                #
         //###############################
 
-        /**
+       /**
          * Hotel room availability
          *
-         * Ajax
+         * Ajax room filter 
          */
-        $(document).on('click', '#tf-single-hotel-avail .tf-submit', function (e) {
-            e.preventDefault();
-
+        const tfRoomFilter = () => {
             if ($.trim($('input[name=check-in-out-date]').val()) == '') {
 
                 if ($('#tf-required').length === 0) {
@@ -71,8 +69,17 @@
                     console.log(data);
                 }
             });
+        }
+
+        $(document).on('click', '#tf-single-hotel-avail .tf-submit', function (e) {
+            e.preventDefault();
+            tfRoomFilter();
+            
         });
 
+        $(document).on('change','.tf-room-checkbox :checkbox', function(){
+            tfRoomFilter();
+        });
         /**
          * Click to go back to hotel availability form
          */

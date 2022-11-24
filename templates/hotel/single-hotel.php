@@ -408,9 +408,10 @@ while ( have_posts() ) : the_post();
 
 		<?php if ( $rooms ) : ?>
             <!-- Start Room Section -->
+            <!-- Hooked in feature filter action -->
+            <?php do_action( 'tf_hotel_features_filter', 10 ) ?>
             <div class="tf-room-section sp-50">
                 <div class="tf-container">
-
                     <div class="tf-room-type" id="rooms">
                         <h2 class="section-heading"><?php esc_html_e( 'Available Rooms', 'tourfic' ); ?></h2>
                         <div class="tf-room-table hotel-room-wrap">
