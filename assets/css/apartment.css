@@ -164,7 +164,7 @@
 .tf-apartment .apartment-amenities ul li:nth-child(3n) {
   margin-right: 0;
 }
-.tf-apartment .apartment-amenities ul li:nth-last-child(-n+2) {
+.tf-apartment .apartment-amenities ul li:nth-last-child(-n+3) {
   border-bottom: none;
 }
 .tf-apartment .key-features ul {
@@ -374,13 +374,17 @@
 }
 
 .host-details {
-  background: #EBF2FF;
-  border-radius: 4px;
+  background: #f5f8ff;
+  border-radius: 8px;
   padding: 25px;
-  border: 1px solid #EBF2FF;
+  border: 1px solid #ebf2ff;
   margin-bottom: 25px;
 }
 .host-details .host-top {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   gap: 15px;
 }
@@ -406,6 +410,7 @@
   list-style: none;
   margin: 0;
   margin-bottom: 25px;
+  padding: 0;
 }
 .host-details .host-bottom ul li {
   padding-bottom: 10px;
@@ -426,11 +431,81 @@
 }
 
 .tf-map-content-wrapper {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   gap: 30px;
 }
+.tf-map-content-wrapper .tf-apartment-map {
+  -webkit-flex: 0 0 50%;
+  -ms-flex: 0 0 50%;
+  flex: 0 0 50%;
+}
+.tf-map-content-wrapper .tf-apartment-map h3 {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: #363e4a;
+  margin-bottom: 24px;
+}
+.tf-map-content-wrapper .tf-apartment-map iframe {
+  border-radius: 8px;
+}
 .tf-map-content-wrapper .about-location {
-  width: 40%;
+  -webkit-flex: 0 0 50%;
+  -ms-flex: 0 0 50%;
+  flex: 0 0 50%;
+}
+.tf-map-content-wrapper .about-location .surroundings_sec_title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: #363e4a;
+  margin-bottom: 8px;
+}
+.tf-map-content-wrapper .about-location .surroundings_subtitle {
+  color: #8997a9;
+  margin-bottom: 30px;
+}
+.tf-map-content-wrapper .about-location .tf-apartment-surronding-criteria {
+  margin-bottom: 30px;
+}
+.tf-map-content-wrapper .about-location .tf-apartment-surronding-criteria-label {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+}
+.tf-map-content-wrapper .about-location .tf-apartment-surronding-criteria-label i {
+  margin-right: 8px;
+}
+.tf-map-content-wrapper .about-location .tf-apartment-surronding-places {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tf-map-content-wrapper .about-location .tf-apartment-surronding-places li {
+  padding: 8px 0 8px 32px;
+  border-bottom: 1px solid #f0f2f4;
+  color: #607085;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
 }
 
 #tour-map .tf-container {
@@ -654,6 +729,7 @@
 }
 #tf-apartment-booking .tf-apartment-price-list {
   margin: 15px 0 0 !important;
+  padding: 0;
 }
 #tf-apartment-booking .tf-apartment-price-list li {
   display: -webkit-box;
@@ -691,9 +767,11 @@
   .host-top img {
     margin-bottom: 15px;
   }
+
   .host-bottom ul li span {
     float: none;
   }
+
   .tf-apartment .features-details ul {
     display: block;
   }
@@ -714,6 +792,7 @@
   .tf-apartment-title .tf-wishlist-button {
     font-size: 14px;
   }
+
   .tf-apartment .hero-wrapper {
     display: block;
   }
@@ -755,6 +834,7 @@
     order: 1;
     margin-bottom: 35px;
   }
+
   .share-tour-content {
     left: 50px;
   }
@@ -771,9 +851,11 @@
   .share-tour-content .share-center-copy-form {
     display: block;
   }
+
   .tf-dropdown-content li {
     display: block;
   }
+
   .tf-map-content-wrapper iframe {
     height: 280px;
   }
@@ -788,9 +870,11 @@
   .tf-apartment .features-details ul {
     display: block;
   }
+
   .tf-map-content-wrapper iframe {
     height: 200px;
   }
+
   .apartment-question .apartment-qa-wrapper {
     flex-direction: column;
   }

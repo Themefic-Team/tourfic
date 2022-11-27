@@ -169,7 +169,7 @@
           margin-right: 0;
         }
 
-        &:nth-last-child(-n+2) {
+        &:nth-last-child(-n+3) {
           border-bottom: none;
         }
       }
@@ -423,14 +423,14 @@
 
 
 .host-details {
-  background: #EBF2FF;
-  border-radius: 4px;
+  background: $blue0;
+  border-radius: 8px;
   padding: 25px;
-  border: 1px solid #EBF2FF;
+  border: 1px solid $blue5;
   margin-bottom: 25px;
 
   .host-top {
-    display: flex;
+    @include flexbox();
     gap: 15px;
 
     img {
@@ -464,6 +464,7 @@
       list-style: none;
       margin: 0;
       margin-bottom: 25px;
+      padding: 0;
 
       li {
         span {
@@ -496,11 +497,66 @@
 
 
 .tf-map-content-wrapper {
-  display: flex;
+  @include flexbox();
   gap: 30px;
 
+  .tf-apartment-map{
+    @include flex(0 0 50%);
+
+    h3{
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 32px;
+      color: $slate80;
+      margin-bottom: 24px;
+    }
+
+    iframe{
+      border-radius: 8px;
+    }
+  }
   .about-location {
-    width: 40%;
+    @include flex(0 0 50%);
+
+    .surroundings_sec_title{
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 32px;
+      color: $slate80;
+      margin-bottom: 8px;
+    }
+    .surroundings_subtitle{
+      color: $slate40;
+      margin-bottom: 30px;
+    }
+
+    .tf-apartment-surronding-criteria{
+      margin-bottom: 30px;
+    }
+    .tf-apartment-surronding-criteria-label{
+      @include flexbox();
+      @include align-items(center);
+      font-size: 18px;
+      font-weight: 500;
+
+      i{
+        margin-right: 8px;
+      }
+    }
+    .tf-apartment-surronding-places{
+      margin:0;
+      padding: 0;
+      list-style: none;
+
+      li{
+        padding: 8px 0 8px 32px;
+        border-bottom: 1px solid $slate5;
+        color: $slate60;
+        @include flexbox();
+        @include align-items(center);
+        @include justify-content(space-between);
+      }
+    }
   }
 }
 
@@ -767,6 +823,7 @@
 
   .tf-apartment-price-list {
     margin: 15px 0 0 !important;
+    padding: 0;
 
     li {
       @include flexbox();

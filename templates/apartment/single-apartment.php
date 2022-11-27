@@ -128,7 +128,9 @@ while ( have_posts() ) : the_post();
                             <div class="tf-top-review">
                                 <a href="#tf-review">
                                     <div class="tf-single-rating">
-                                        <i class="fas fa-star"></i> <span><?php echo tf_total_avg_rating( $comments ); ?></span> (<?php tf_based_on_text( count( $comments ) ); ?>)
+                                        <i class="fas fa-star"></i>
+                                        <span><?php echo tf_total_avg_rating( $comments ); ?></span>
+                                        (<?php tf_based_on_text( count( $comments ) ); ?>)
                                     </div>
                                 </a>
                             </div>
@@ -143,7 +145,8 @@ while ( have_posts() ) : the_post();
                                 <div id="dropdown-share-center" class="share-tour-content">
                                     <ul class="tf-dropdown-content">
                                         <li>
-                                            <a href="http://www.facebook.com/share.php?u=<?php _e( $share_link ); ?>" class="tf-dropdown-item" target="_blank">
+                                            <a href="http://www.facebook.com/share.php?u=<?php _e( $share_link ); ?>"
+                                               class="tf-dropdown-item" target="_blank">
                                                 <span class="tf-dropdown-item-content">
                                                     <i class="fab fa-facebook-square"></i>
                                                     <?php esc_html_e( 'Share on Facebook', 'tourfic' ); ?>
@@ -151,7 +154,8 @@ while ( have_posts() ) : the_post();
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="http://twitter.com/share?text=<?php _e( $share_text ); ?>&url=<?php _e( $share_link ); ?>" class="tf-dropdown-item" target="_blank">
+                                            <a href="http://twitter.com/share?text=<?php _e( $share_text ); ?>&url=<?php _e( $share_link ); ?>"
+                                               class="tf-dropdown-item" target="_blank">
                                                 <span class="tf-dropdown-item-content">
                                                     <i class="fab fa-twitter-square"></i>
                                                     <?php esc_html_e( 'Share on Twitter', 'tourfic' ); ?>
@@ -159,7 +163,8 @@ while ( have_posts() ) : the_post();
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="https://www.linkedin.com/cws/share?url=<?php _e( $share_link ); ?>" class="tf-dropdown-item" target="_blank">
+                                            <a href="https://www.linkedin.com/cws/share?url=<?php _e( $share_link ); ?>"
+                                               class="tf-dropdown-item" target="_blank">
                                                 <span class="tf-dropdown-item-content">
                                                     <i class="fab fa-linkedin"></i>
                                                     <?php esc_html_e( 'Share on Linkedin', 'tourfic' ); ?>
@@ -179,10 +184,15 @@ while ( have_posts() ) : the_post();
                                             </a>
                                         </li>
                                         <li>
-                                            <div class="share-center-copy-form tf-dropdown-item" title="Share this link" aria-controls="share_link_button">
-                                                <label class="share-center-copy-label" for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
-                                                <input type="text" id="share_link_input" class="share-center-url share-center-url-input" value="<?php _e( $share_link ); ?>" readonly>
-                                                <button id="share_link_button" class="tf_button share-center-copy-cta" tabindex="0" role="button">
+                                            <div class="share-center-copy-form tf-dropdown-item" title="Share this link"
+                                                 aria-controls="share_link_button">
+                                                <label class="share-center-copy-label"
+                                                       for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
+                                                <input type="text" id="share_link_input"
+                                                       class="share-center-url share-center-url-input"
+                                                       value="<?php _e( $share_link ); ?>" readonly>
+                                                <button id="share_link_button" class="tf_button share-center-copy-cta"
+                                                        tabindex="0" role="button">
                                                     <span class="tf-button-text share-center-copy-message"><?php _e( 'Copy link', 'tourfic' ); ?></span>
                                                     <span class="tf-button-text share-center-copied-message"><?php _e( 'Link Copied!', 'tourfic' ); ?></span>
                                                 </button>
@@ -200,9 +210,12 @@ while ( have_posts() ) : the_post();
 							if ( is_user_logged_in() ) {
 								if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
 									?>
-                                    <a class="tf-wishlist-button" title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
-                                                class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
-                                                data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                    <a class="tf-wishlist-button"
+                                       title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
+                                                class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
+                                                data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
+                                                data-id="<?php echo $post_id ?>"
+                                                data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
 											echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
 										} ?>> Save</i></a>
 									<?php
@@ -210,9 +223,12 @@ while ( have_posts() ) : the_post();
 							} else {
 								if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {
 									?>
-                                    <a class="tf-wishlist-button" title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
-                                                class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
-                                                data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                    <a class="tf-wishlist-button"
+                                       title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
+                                                class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
+                                                data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
+                                                data-id="<?php echo $post_id ?>"
+                                                data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
 											echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
 										} ?>> Save</i></a>
 									<?php
@@ -232,33 +248,37 @@ while ( have_posts() ) : the_post();
             <div class="tf-container">
                 <div class="hero-wrapper">
 					<?php if ( ! empty( $gallery_ids ) ) :
-						$first_image = ! empty( $gallery_ids[0] ) ? wp_get_attachment_image_url( $gallery_ids[0], 'tf_apartment_gallery_large' ) : '';
-						$second_image = ! empty( $gallery_ids[1] ) ? wp_get_attachment_image_url( $gallery_ids[1], 'tf_apartment_gallery_small' ) : '';
-						$third_image = ! empty( $gallery_ids[2] ) ? wp_get_attachment_image_url( $gallery_ids[2], 'tf_apartment_gallery_small' ) : '';
+						$first_image = ! empty( $gallery_ids[0] ) ? wp_get_attachment_image( $gallery_ids[0], 'tf_apartment_gallery_large' ) : '';
+						$second_image = ! empty( $gallery_ids[1] ) ? wp_get_attachment_image( $gallery_ids[1], 'tf_apartment_gallery_small' ) : '';
+						$third_image = ! empty( $gallery_ids[2] ) ? wp_get_attachment_image( $gallery_ids[2], 'tf_apartment_gallery_small' ) : '';
 						?>
                         <div class="hero-gallery">
                         <div class="hero-left">
-                            <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[0], 'full' ) ); ?>" data-fancybox="hotel-gallery" class="hero-first-image">
-                                <img src="<?php echo esc_url( $first_image ); ?>" alt="">
+                            <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[0], 'full' ) ); ?>"
+                               data-fancybox="hotel-gallery" class="hero-first-image">
+								<?php echo $first_image; ?>
                             </a>
                         </div>
 						<?php if ( $second_image || $third_image ): ?>
                         <div class="hero-right">
 							<?php if ( ! empty( $second_image ) ): ?>
-                                <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[1], 'full' ) ); ?>" data-fancybox="hotel-gallery" class="hero-second-image">
-                                    <img src="<?php echo esc_url( $second_image ); ?>" alt="">
+                                <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[1], 'full' ) ); ?>"
+                                   data-fancybox="hotel-gallery" class="hero-second-image">
+									<?php echo $second_image; ?>
                                 </a>
 							<?php endif; ?>
 							<?php if ( ! empty( $third_image ) ): ?>
-                                <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[2], 'full' ) ); ?>" data-fancybox="hotel-gallery" class="hero-third-image">
-                                    <img src="<?php echo esc_url( $third_image ); ?>" alt="">
+                                <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[2], 'full' ) ); ?>"
+                                   data-fancybox="hotel-gallery" class="hero-third-image">
+									<?php echo $third_image; ?>
                                 </a>
 							<?php endif; ?>
                         </div>
                         </div>
 						<?php if ( count( $gallery_ids ) > 3 ): ?>
                             <div class="gallery-all-photos">
-                                <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[3], 'full' ) ); ?>" class="tf_button btn-styled" data-fancybox="hotel-gallery">
+                                <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[3], 'full' ) ); ?>"
+                                   class="tf_button btn-styled" data-fancybox="hotel-gallery">
 									<?php _e( 'All Photos', 'tourfic' ) ?>
                                 </a>
 								<?php foreach ( $gallery_ids as $key => $item ) :
@@ -266,7 +286,8 @@ while ( have_posts() ) : the_post();
 										continue;
 									}
 									?>
-                                    <a href="<?php echo esc_url( wp_get_attachment_image_url( $item, 'full' ) ); ?>" data-fancybox="hotel-gallery"></a>
+                                    <a href="<?php echo esc_url( wp_get_attachment_image_url( $item, 'full' ) ); ?>"
+                                       data-fancybox="hotel-gallery"></a>
 								<?php endforeach; ?>
                             </div>
 						<?php endif; ?>
@@ -361,22 +382,31 @@ while ( have_posts() ) : the_post();
 
                     <div class="cf-right">
                         <div class="apartment-booking-form">
-		                    <?php tf_apartment_single_booking_form($comments, $disable_review_sec); ?>
+							<?php tf_apartment_single_booking_form( $comments, $disable_review_sec ); ?>
                         </div>
+						<?php
+						$post_author_id = get_post_field( 'post_author', get_the_ID() );
+						$author_info    = get_userdata( $post_author_id );
+						?>
                         <div class="host-details">
                             <div class="host-top">
-                                <img src="https://cdn.pixabay.com/photo/2018/01/06/09/25/hijab-3064633_960_720.jpg" alt="">
+                                <img src="<?php echo get_avatar_url( $post_author_id ); ?>" alt="">
                                 <div class="host-meta">
-                                    <h4>Hosted by Jorina Bua</h4>
-                                    <p>Joined in <span>January 2022</span></p>
+									<?php echo sprintf( '<h4>%s %s</h4>', esc_html__( 'Hosted by', 'tourfic' ), $author_info->display_name ); ?>
+									<?php echo sprintf( '<p>%s <span>%s</span></p>', esc_html__( 'Joined in', 'tourfic' ), date( 'F Y', strtotime( $author_info->user_registered ) ) ); ?>
                                     <p><i class="fas fa-star"></i> <span>4.5</span> (150 Reviews)</p>
                                 </div>
                             </div>
                             <div class="host-bottom">
-                                <p class="host-desc">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it
-                                    has a more-or-less normal distribution of letters.</p>
+                                <p class="host-desc">
+									<?php echo get_the_author_meta( 'description', $post_author_id ); ?>
+                                </p>
                                 <ul>
-                                    <li>Language: <span>Bangla, English, Hindi</span></li>
+									<?php
+									if ( ! empty( get_the_author_meta( 'language', $post_author_id ) ) ) {
+										echo sprintf( '<li>%s <span>%s</span></li>', __( 'Language: ', 'tourfic' ), get_the_author_meta( 'language', $post_author_id ) );
+									}
+									?>
                                     <li>Response Time: <span>Within a Day</span></li>
                                 </ul>
                                 <a href="" class="tf_button btn-styled"><i class="far fa-comments"></i> Contact Host</a>
@@ -394,15 +424,47 @@ while ( have_posts() ) : the_post();
                 <div class="tf-container">
                     <div class="tf-row">
                         <div class="tf-map-content-wrapper">
-                            <div class="about-location">
-								<?php echo ! empty( $meta['location_sec_title'] ) ? '<h2 class="section-heading">' . esc_html( $meta['location_sec_title'] ) . '</h2>' : ''; ?>
-								<?php echo ! empty( $meta['location_title'] ) ? '<h4>' . esc_html( $meta['location_title'] ) . '</h4>' : ''; ?>
-								<?php echo ! empty( $meta['location_description'] ) ? '<p>' . esc_html( $meta['location_description'] ) . '</p>' : ''; ?>
-                            </div>
 							<?php if ( ! empty( $map['address'] ) ): ?>
-                                <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=15&output=embed" width="100%" height="400"
-                                        style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                <div class="tf-apartment-map">
+                                    <h3><?php _e( 'Your staying location', 'tourfic' ); ?></h3>
+                                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=15&output=embed"
+                                            width="100%" height="400"
+                                            style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                </div>
 							<?php endif; ?>
+
+                            <div class="about-location">
+								<?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
+                                    <h3 class="surroundings_sec_title"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h3>
+								<?php endif; ?>
+								<?php if ( ! empty( $meta['surroundings_subtitle'] ) ): ?>
+                                    <p class="surroundings_subtitle"><?php echo esc_html( $meta['surroundings_subtitle'] ); ?></p>
+								<?php endif; ?>
+
+								<?php if ( ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
+                                    <div class="tf-apartment-surronding-wrapper">
+										<?php foreach ( tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
+                                            <div class="tf-apartment-surronding-criteria">
+                                                <div class="tf-apartment-surronding-criteria-label">
+                                                    <i class="<?php echo esc_attr( $surroundings_place['place_criteria_icon'] ); ?>"></i>
+													<?php echo esc_html( $surroundings_place['place_criteria_label'] ); ?>
+                                                </div>
+
+												<?php if ( ! empty( tf_data_types( $surroundings_place['places'] ) ) ): ?>
+                                                    <ul class="tf-apartment-surronding-places">
+														<?php foreach ( tf_data_types( $surroundings_place['places'] ) as $place ): ?>
+                                                            <li>
+                                                                <span class="tf-place-name"><?php echo esc_html( $place['place_name'] ) ?></span>
+                                                                <span class="tf-place-distance"><?php echo esc_html( $place['place_distance'] ) ?></span>
+                                                            </li>
+														<?php endforeach; ?>
+                                                    </ul>
+												<?php endif; ?>
+                                            </div>
+										<?php endforeach; ?>
+                                    </div>
+								<?php endif; ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -461,7 +523,9 @@ while ( have_posts() ) : the_post();
                         <p><?php _e( "Looking for more info? Send a question to the property to find out more.", 'tourfic' ); ?></p>
                     </div>
                     <div class="tf-btn">
-                        <a href="#" id="tf-ask-question-trigger" class="btn-styled"><span><?php esc_html_e( 'Contact Host', 'tourfic' ); ?></span></a>
+                        <a href="#" id="tf-ask-question-trigger" class="btn-styled">
+                            <span><?php _e( 'Contact Host', 'tourfic' ); ?></span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -506,7 +570,7 @@ while ( have_posts() ) : the_post();
             <!-- Apartment Suggestion section Start -->
             <div class="apartment-options apartment-sugestion sp-40">
                 <div class="tf-container">
-                    <h2 class="section-heading">Related Properties</h2>
+                    <h2 class="section-heading"><?php _e( 'Related Properties', 'tourfic' ); ?></h2>
                     <div class="tf-apartment-sugestion-slider-wrapper">
 
 						<?php while ( $related_apartment->have_posts() ) : $related_apartment->the_post(); ?>

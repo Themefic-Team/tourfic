@@ -24,45 +24,45 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				),
 
 				array(
-					'id'        => 'disable-apartment-review',
-					'type'      => 'switch',
-					'label'     => __( 'Disable Review Section', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false,
+					'id'          => 'disable-apartment-review',
+					'type'        => 'switch',
+					'label'       => __( 'Disable Review Section', 'tourfic' ),
+					'label_on'    => __( 'Yes', 'tourfic' ),
+					'label_off'   => __( 'No', 'tourfic' ),
+					'default'     => false,
 					'field_width' => 50,
 				),
 
 				array(
-					'id'        => 'disable-apartment-share',
-					'type'      => 'switch',
-					'label'     => __( 'Disable Share Option', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false,
+					'id'          => 'disable-apartment-share',
+					'type'        => 'switch',
+					'label'       => __( 'Disable Share Option', 'tourfic' ),
+					'label_on'    => __( 'Yes', 'tourfic' ),
+					'label_off'   => __( 'No', 'tourfic' ),
+					'default'     => false,
 					'field_width' => 50,
 				),
 
 				array(
-					'id'        => 'disable-related-apartment',
-					'type'      => 'switch',
-					'label'     => __( 'Disable Related Section', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false,
+					'id'          => 'disable-related-apartment',
+					'type'        => 'switch',
+					'label'       => __( 'Disable Related Section', 'tourfic' ),
+					'label_on'    => __( 'Yes', 'tourfic' ),
+					'label_off'   => __( 'No', 'tourfic' ),
+					'default'     => false,
 					'field_width' => 50,
 				),
 
 				array(
-					'id'     => 'notice',
-					'type'   => 'notice',
-					'notice' => 'info',
-					'content'  => __( 'These settings will overwrite global settings', 'tourfic' ),
+					'id'      => 'notice',
+					'type'    => 'notice',
+					'notice'  => 'info',
+					'content' => __( 'These settings will overwrite global settings', 'tourfic' ),
 				),
 			)
 		),
 		// location
-		'location'         => array(
+		'location'    => array(
 			'title'  => __( 'Location', 'tourfic' ),
 			'icon'   => 'fa-solid fa-location-dot',
 			'fields' => array(
@@ -86,103 +86,138 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 						'scrollWheelZoom' => true,
 					),
 				),
+				//Property Surroundings
 				array(
-					'id'      => 'loaction_heading',
+					'id'      => 'surroundings_heading',
 					'type'    => 'heading',
-					'content' => __( 'Location Details', 'tourfic' ),
+					'content' => __( 'Property Surroundings', 'tourfic' ),
 				),
 				array(
-					'id'       => 'location_sec_title',
+					'id'       => 'surroundings_sec_title',
 					'type'     => 'text',
 					'label'    => __( 'Section Title', 'tourfic' ),
-					'subtitle' => __( 'Enter location section title', 'tourfic' ),
+					'subtitle' => __( 'Enter surroundings section title', 'tourfic' ),
 				),
 				array(
-					'id'       => 'location_title',
+					'id'       => 'surroundings_subtitle',
 					'type'     => 'text',
-					'label'    => __( 'Location Title', 'tourfic' ),
-					'subtitle' => __( 'Enter location title', 'tourfic' ),
+					'label'    => __( 'Section sub title', 'tourfic' ),
+					'subtitle' => __( 'Enter surroundings section sub title', 'tourfic' ),
 				),
 				array(
-					'id'       => 'location_description',
-					'type'     => 'textarea',
-					'label'    => __( 'Location Description', 'tourfic' ),
-					'subtitle' => __( 'Enter location description', 'tourfic' ),
+					'id'       => 'surroundings_places',
+					'type'     => 'repeater',
+					'label'    => __( 'Surroundings Places', 'tourfic' ),
+					'subtitle' => __( 'Enter surroundings places', 'tourfic' ),
+					'fields'   => array(
+						array(
+							'id'       => 'place_criteria_label',
+							'type'     => 'text',
+							'label'    => __( 'Place Criteria Label', 'tourfic' ),
+							'subtitle' => __( 'Enter place criteria label', 'tourfic' ),
+						),
+						array(
+							'id'       => 'place_criteria_icon',
+							'type'     => 'icon',
+							'label'    => __( 'Criteria Icon', 'tourfic' ),
+							'subtitle' => __( 'Enter place criteria icon', 'tourfic' ),
+						),
+						array(
+							'id'       => 'places',
+							'type'     => 'repeater',
+							'label'    => __( 'Places', 'tourfic' ),
+							'subtitle' => __( 'Enter places', 'tourfic' ),
+							'fields'   => array(
+								array(
+									'id'       => 'place_name',
+									'type'     => 'text',
+									'label'    => __( 'Place Name', 'tourfic' ),
+									'subtitle' => __( 'Enter place name', 'tourfic' ),
+								),
+								array(
+									'id'       => 'place_distance',
+									'type'     => 'text',
+									'label'    => __( 'Place Distance', 'tourfic' ),
+									'subtitle' => __( 'Enter place distance', 'tourfic' ),
+								),
+							),
+						)
+					),
 				),
 			),
 		),
 		// Booking
-		'booking'         => array(
+		'booking'     => array(
 			'title'  => __( 'Booking', 'tourfic' ),
 			'icon'   => 'fa-solid fa-sack-dollar',
 			'fields' => array(
 				array(
-					'id'       => 'price_per_night',
-					'type'     => 'number',
-					'label'    => __( 'Price Per Night', 'tourfic' ),
-					'subtitle' => __( 'Enter price per night', 'tourfic' ),
+					'id'          => 'price_per_night',
+					'type'        => 'number',
+					'label'       => __( 'Price Per Night', 'tourfic' ),
+					'subtitle'    => __( 'Enter price per night', 'tourfic' ),
 					'field_width' => 50,
-					'attributes' => array(
+					'attributes'  => array(
 						'min' => 0
 					)
 				),
 				array(
-					'id'       => 'min_stay',
-					'type'     => 'number',
-					'label'    => __( 'Minimum Night Stay', 'tourfic' ),
-					'subtitle' => __( 'Enter minimum night stay', 'tourfic' ),
+					'id'          => 'min_stay',
+					'type'        => 'number',
+					'label'       => __( 'Minimum Night Stay', 'tourfic' ),
+					'subtitle'    => __( 'Enter minimum night stay', 'tourfic' ),
 					'field_width' => 50,
-					'attributes' => array(
+					'attributes'  => array(
 						'min' => 0
 					)
 				),
 				array(
-					'id'       => 'max_adults',
-					'type'     => 'number',
-					'label'    => __( 'Maximum Adults', 'tourfic' ),
-					'subtitle' => __( 'Enter maximum adults', 'tourfic' ),
+					'id'          => 'max_adults',
+					'type'        => 'number',
+					'label'       => __( 'Maximum Adults', 'tourfic' ),
+					'subtitle'    => __( 'Enter maximum adults', 'tourfic' ),
 					'field_width' => 33.33,
-					'attributes' => array(
+					'attributes'  => array(
 						'min' => 1
 					)
 				),
 				array(
-					'id'       => 'max_children',
-					'type'     => 'number',
-					'label'    => __( 'Maximum Children', 'tourfic' ),
-					'subtitle' => __( 'Enter maximum children', 'tourfic' ),
+					'id'          => 'max_children',
+					'type'        => 'number',
+					'label'       => __( 'Maximum Children', 'tourfic' ),
+					'subtitle'    => __( 'Enter maximum children', 'tourfic' ),
 					'field_width' => 33.33,
-					'attributes' => array(
+					'attributes'  => array(
 						'min' => 0
 					)
 				),
 				array(
-					'id'       => 'max_infants',
-					'type'     => 'number',
-					'label'    => __( 'Maximum Infants', 'tourfic' ),
-					'subtitle' => __( 'Enter maximum infants', 'tourfic' ),
+					'id'          => 'max_infants',
+					'type'        => 'number',
+					'label'       => __( 'Maximum Infants', 'tourfic' ),
+					'subtitle'    => __( 'Enter maximum infants', 'tourfic' ),
 					'field_width' => 33.33,
-					'attributes' => array(
+					'attributes'  => array(
 						'min' => 0
 					)
 				),
 				array(
-					'id'       => 'service_fee',
-					'type'     => 'number',
-					'label'    => __( 'Service Fee (Per Night)', 'tourfic' ),
-					'subtitle' => __( 'Enter service fee', 'tourfic' ),
+					'id'          => 'service_fee',
+					'type'        => 'number',
+					'label'       => __( 'Service Fee (Per Night)', 'tourfic' ),
+					'subtitle'    => __( 'Enter service fee', 'tourfic' ),
 					'field_width' => 50,
-					'attributes' => array(
+					'attributes'  => array(
 						'min' => 0
 					)
 				),
 				array(
-					'id'       => 'cleaning_fee',
-					'type'     => 'number',
-					'label'    => __( 'Cleaning Fee', 'tourfic' ),
-					'subtitle' => __( 'Enter cleaning fee', 'tourfic' ),
+					'id'          => 'cleaning_fee',
+					'type'        => 'number',
+					'label'       => __( 'Cleaning Fee', 'tourfic' ),
+					'subtitle'    => __( 'Enter cleaning fee', 'tourfic' ),
 					'field_width' => 50,
-					'attributes' => array(
+					'attributes'  => array(
 						'min' => 0
 					)
 				),
@@ -260,7 +295,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			),
 		),
 		// faq and terms and conditions
-		'faq' => array(
+		'faq'         => array(
 			'title'  => __( 'FAQ & Terms', 'tourfic' ),
 			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(

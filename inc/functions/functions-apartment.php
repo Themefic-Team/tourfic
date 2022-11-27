@@ -383,7 +383,7 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
                                     if (days < 5) {
                                         $('.tf-submit').attr('disabled', 'disabled');
                                         $('.tf-submit').addClass('disabled');
-                                        $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required"><b><?php _e( 'Minimum 5 days', 'tourfic' ); ?></b></span>');
+                                        $('.tf-check-out-date .tf_label-row').append('<span id="tf-required" class="required"><b><?php _e( 'Minimum 5 days', 'tourfic' ); ?></b></span>');
                                     } else {
                                         $('.tf-submit').removeAttr('disabled');
                                         $('.tf-submit').removeClass('disabled');
