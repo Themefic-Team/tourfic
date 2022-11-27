@@ -262,8 +262,15 @@ function tf_tours_booking_function() {
 	}
 
 	if ( defined( 'TF_PRO' ) && $tour_type == 'continuous' ) {
-
-		if ( $custom_avail == false && ! empty( $meta['allowed_time'] ) && empty( $tour_time ) ) {
+		$tf_allowed_times = ! empty( $meta['allowed_time'] ) ? $meta['allowed_time'] : '';
+		if( !empty($tf_allowed_times) && gettype($tf_allowed_times)=="string" ){
+			$tf_tour_conti_custom_date = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+				return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+			}, $tf_allowed_times );
+			$tf_allowed_times = unserialize( $tf_tour_conti_custom_date );
+		}
+		
+		if ( $custom_avail == false && ! empty( $tf_allowed_times ) && empty( $tour_time ) ) {
 			$response['errors'][] = __( 'Please select time', 'tourfic' );
 		}
 		if ( $custom_avail == true && ! empty( $seasional_price[0]['allowed_time'] ) && empty( $tour_time ) ) {

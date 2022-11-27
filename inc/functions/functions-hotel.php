@@ -1582,11 +1582,12 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                                 <ul class="tf-archive-desc">
 													<?php foreach ( $features as $feature ) {
 														$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
+														if(!empty($feature_meta)){
 														$f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
 														if ( $f_icon_type == 'fa' ) {
-															$feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
+															$feature_icon = !empty($feature_meta['icon-fa']) ? '<i class="' . $feature_meta['icon-fa'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
 														} elseif ( $f_icon_type == 'c' ) {
-															$feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
+															$feature_icon = !empty($feature_meta['icon-c']) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
 														} ?>
                                                         <li class="tf-tooltip">
 															<?php
@@ -1598,7 +1599,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                                                 <i class="tool-i"></i>
                                                             </div>
                                                         </li>
-													<?php } ?>
+													<?php } } ?>
                                                 </ul>
                                             </div>
 										<?php } ?>
@@ -1995,13 +1996,13 @@ function tf_hotel_quickview_callback() {
 									<?php foreach ( $room['features'] as $feature ) {
 
 										$room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
-
+										if(!empty($room_f_meta)){
 										$room_icon_type = ! empty( $room_f_meta['icon-type'] ) ? $room_f_meta['icon-type'] : '';
 
 										if ( $room_icon_type == 'fa' ) {
-											$room_feature_icon = '<i class="' . $room_f_meta['icon-fa'] . '"></i>';
+											$room_feature_icon = !empty($room_f_meta['icon-fa']) ? '<i class="' . $room_f_meta['icon-fa'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
 										} elseif ( $room_icon_type == 'c' ) {
-											$room_feature_icon = '<img src="' . $room_f_meta['icon-c']["url"] . '" style="min-width: ' . $room_f_meta['dimention']["width"] . 'px; height: ' . $room_f_meta['dimention']["width"] . 'px;" />';
+											$room_feature_icon = !empty($room_f_meta['icon-c']) ? '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
 										}
 
 										$room_term = get_term( $feature ); ?>
@@ -2012,7 +2013,7 @@ function tf_hotel_quickview_callback() {
                                                 <i class="tool-i"></i>
                                             </div>
                                         </li>
-									<?php } ?>
+									<?php } } ?>
                                 </ul>
                             </div>
 						<?php } ?>

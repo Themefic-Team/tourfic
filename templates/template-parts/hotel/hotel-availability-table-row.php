@@ -61,9 +61,9 @@
                         $room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
                         if( !empty( $room_f_meta ) ){
                             if ( $room_f_meta['icon-type'] == 'fa' ) {
-                                $room_feature_icon = '<i class="' . $room_f_meta['icon-fa'] . '"></i>';
+                                $room_feature_icon = !empty($room_f_meta['icon-fa']) ? '<i class="' . $room_f_meta['icon-fa'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
                             } elseif ( $room_f_meta['icon-type'] == 'c' ) {
-                                $room_feature_icon = '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />';
+                                $room_feature_icon = !empty($room_f_meta['icon-c']) ? '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
                             }
                         }
                        
@@ -171,7 +171,7 @@
                     <div class="tf-hotel-services">
                         <div class="tf-hotel-services-text">
                             <h3><?php _e(tfopt('hotel_service_popup_title', 'Add Service to your Booking.'), 'tourfic');?></h3>
-                            <p><?php _e(tfopt('deposit-subtitle', 'Select the services you want to add to your booking.'), 'tourfic');?></p>
+                            <p><?php _e(tfopt('hotel_service_popup_subtile', 'Select the services you want to add to your booking.'), 'tourfic');?></p>
                         </div>
                         <div class="tf-hotel-service">
                             <label><?php _e('Pickup & Drop-off Service', 'tourfic');?></label>

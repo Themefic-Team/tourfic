@@ -125,6 +125,7 @@ if( !function_exists( 'tf_hotel_css' ) ){
 		$tf_gradient_two_reg = !empty(tf_data_types(tfopt( 'tourfic-hotel-map-button' ))['gradient_two_reg']) ? tf_data_types(tfopt( 'tourfic-hotel-map-button' ))['gradient_two_reg'] : '';
 		$tf_gradient_one_hov = !empty(tf_data_types(tfopt( 'tourfic-hotel-map-button' ))['gradient_one_hov']) ? tf_data_types(tfopt( 'tourfic-hotel-map-button' ))['gradient_one_hov'] : '';
 		$tf_gradient_two_hov = !empty(tf_data_types(tfopt( 'tourfic-hotel-map-button' ))['gradient_two_hov']) ? tf_data_types(tfopt( 'tourfic-hotel-map-button' ))['gradient_two_hov'] : '';
+		$tf_map_text_color = !empty(tf_data_types(tfopt( 'tourfic-hotel-map-button-text' ))['regular']) ? tf_data_types(tfopt( 'tourfic-hotel-map-button-text' ))['regular'] : '';
 		$tf_hotel_features = !empty(tf_data_types(tfopt( 'tourfic-hotel-features-color' ))['regular']) ? tf_data_types(tfopt( 'tourfic-hotel-features-color' ))['regular'] : '';
 		$tf_hotel_table_color = !empty(tf_data_types(tfopt( 'tourfic-hotel-table-style' ))['table_color']) ? tf_data_types(tfopt( 'tourfic-hotel-table-style' ))['table_color'] : '';
 		$tf_hotel_table_bg_color = !empty(tf_data_types(tfopt( 'tourfic-hotel-table-style' ))['table_bg_color']) ? tf_data_types(tfopt( 'tourfic-hotel-table-style' ))['table_bg_color'] : '';
@@ -150,6 +151,9 @@ if( !function_exists( 'tf_hotel_css' ) ){
 		'; }
 		if( $tf_gradient_one_hov && $tf_gradient_two_hov  ) { $output .= '
 			.show-on-map .btn-styled:hover {background: linear-gradient(to bottom, '.$tf_gradient_one_hov.' 0, '.$tf_gradient_two_hov.' 100%);}
+		'; }
+		if( $tf_map_text_color  ) { $output .= '
+			.show-on-map .btn-styled {color: '.$tf_map_text_color.';}
 		'; }
 		if( $tf_hotel_features  ) { $output .= '
 			.tf_features i, .tf-archive-desc i {color: '.$tf_hotel_features.'!important;}

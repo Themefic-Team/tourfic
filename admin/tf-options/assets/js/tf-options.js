@@ -726,12 +726,13 @@
 
         // Repeater show hide
         $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
-            $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').slideToggle();
-            $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').toggleClass('hide');
-            if ($(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').hasClass('hide') == true) {
-                $(this).closest('.tf-single-repeater').find('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-up"></i>');
+            var tf_repater_fieldname = $(this).closest('.tf-single-repeater').find('input[name=tf_current_field]').val();
+            $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+'').find('.tf-repeater-content-wrap').slideToggle();
+            $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+'').children('.tf-repeater-content-wrap').toggleClass('hide');
+            if ($(this).closest('.tf-single-repeater-'+tf_repater_fieldname+'').children('.tf-repeater-content-wrap').hasClass('hide')== true) {
+                $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-down"></i>');
             } else {
-                $(this).closest('.tf-single-repeater').find('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-down"></i>');
+                $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-up"></i>');
             }
         });
 
@@ -885,6 +886,54 @@ var frame, gframe;
             gframe.open();
             return false;
         });
+
+        // Gallery Image Edit
+
+        $('body').on('click', '.tf-gallery-edit', function (e) {
+            var fieldname = $(this).attr("tf-field-name");
+            var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
+            gframe = wp.media({
+                title: "Select Gallery",
+                button: {
+                    text: "Insert Gallery"
+                },
+                multiple: 'add'
+            });
+
+            gframe.on('open', function () {
+                var selection = gframe.state().get('selection');
+                var ids_value = jQuery('input[name="' + fieldname + '"]').val();
+
+                if (ids_value.length > 0) {
+                    var ids = ids_value.split(',');
+
+                    ids.forEach(function (id) {
+                        attachment = wp.media.attachment(id);
+                        attachment.fetch();
+                        selection.add(attachment ? [attachment] : []);
+                    });
+                }
+            });
+
+            gframe.on('select', function () {
+                var image_ids = [];
+                var image_urls = [];
+                var attachments = gframe.state().get('selection').toJSON();
+                $('.tf-fieldset > .' + tf_preview_class + '').html('');
+                for (i in attachments) {
+                    var attachment = attachments[i];
+                    image_ids.push(attachment.id);
+                    image_urls.push(attachment.url);
+                    $('.tf-fieldset > .' + tf_preview_class + '').append(`<img src='${attachment.url}' />`);
+                }
+                $('input[name="' + fieldname + '"]').val(image_ids.join(","));
+                $('a.' + tf_preview_class + '').css("display", "inline-block");
+            });
+
+            gframe.open();
+            return false;
+        });
+
         // Texonomy submit event
         $('#addtag > .submit #submit').click(function () {
             $(".tf-fieldset-media-preview").html("");

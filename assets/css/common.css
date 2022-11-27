@@ -1073,6 +1073,9 @@ h3.tf-sidebar-widget_title {
     display: flex;
     align-items: center;
 }
+#tf-faq-item .tf-faq-title.active{
+    margin-bottom: 15px;
+}
 
 #tf-faq-item .arrow {
     transition: 0.25s ease;
@@ -1196,7 +1199,9 @@ h3.tf-sidebar-widget_title {
     padding: 10px 9px 7px 10px;
     transition: 0.3s;
 }
-
+.tf-text-red{
+    color: red !important;
+}
 /*
 Fontawesome
 */
