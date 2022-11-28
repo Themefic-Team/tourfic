@@ -1131,8 +1131,7 @@ add_action( 'init', 'tf_migrate_data' );
  * */
 function tf_migrate_option_data(){
 
-	if ( get_option( 'tf_migrate_data_204_210' ) < 2 ) {
-
+	if ( empty( get_option( 'tf_migrate_data_204_210_2022' ) ) ) {
 
 		/** Tours Migrations */
 		$tours = get_posts( [ 'post_type' => 'tf_tours', 'numberposts' => - 1, ] );
@@ -1257,7 +1256,7 @@ function tf_migrate_option_data(){
 
 		wp_cache_flush();
 		flush_rewrite_rules( true );
-		update_option( 'tf_migrate_data_204_210', 2 );
+		update_option( 'tf_migrate_data_204_210_2022', 2 );
 	}
 
 
