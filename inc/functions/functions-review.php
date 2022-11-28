@@ -620,7 +620,7 @@ function tf_delete_old_review_fields_button() {
         <div class="csf-subtitle-text">' . __( "Delete review fields that don't match with the present fields.<br><b style='color: red;'>Be aware! You will lose your old data!</b>", "tourfic" ) . '</div>
     </div>
     <div class="csf-fieldset">
-        <button type="button" data-delete-all="no" class="button button-large csf-warning-primary tf-del-old-review-fields">' . __( "Delete Fields", "tourfic" ) . '</button>
+        <button type="button" data-delete-all="no" class="button button-large csf-warning-primary tf-del-old-review-fields tf-order-remove">' . __( "Delete Fields", "tourfic" ) . '</button>
     </div>
     <div class="clear"></div>
     ';
@@ -637,7 +637,7 @@ function tf_delete_old_complete_review_button() {
         <div class="csf-subtitle-text">' . __( "Delete reviews that don't have any review (rating) fields.<br><b style='color: red;'>Be aware! You will lose your old data!</b>", "tourfic" ) . '</div>
     </div>
     <div class="csf-fieldset">
-        <button type="button" data-delete-all="yes" class="button button-large csf-warning-primary tf-del-old-review-fields">' . __( "Delete Reviews", "tourfic" ) . '</button>
+        <button type="button" data-delete-all="yes" class="button button-large csf-warning-primary tf-del-old-review-fields tf-order-remove">' . __( "Delete Reviews", "tourfic" ) . '</button>
     </div>
     <div class="clear"></div>
     ';

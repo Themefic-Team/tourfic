@@ -682,7 +682,6 @@ TF_Settings::option( 'tf_settings', array(
 					'label'   => __( 'Enable Review for', 'tourfic' ),
 					'options' => array(
 						'li' => __( 'Logged in User', 'tourfic' ),
-						''   => __( 'Log out User (Pro)', 'tourfic' ),
 					),
 					'default' => array( 'li' ),
 				),
