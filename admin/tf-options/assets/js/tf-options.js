@@ -1064,13 +1064,16 @@ var frame, gframe;
                 $latitude.on('change', input_update_latlng);
                 $longitude.on('change', input_update_latlng);
 
+                setInterval(function() {   
+                    mapInit.invalidateSize(); 
+                }, 100);
             });
         }
 
         $('.tf-mobile-tabs').click(function (e) {
             e.preventDefault();
             $(".tf-admin-tab").toggleClass('active');
-        });
+        }); 
     });
 
 
