@@ -563,7 +563,7 @@
                 var $this = $(this);
                 tfSelect2Int($this);
             });
-
+            
             // repeater dependency repeater
             TF_dependency();
         });

@@ -523,12 +523,14 @@ while ( have_posts() ) : the_post();
 																$room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
                                                                 if(!empty($room_f_meta)){
 																$room_icon_type = ! empty( $room_f_meta['icon-type'] ) ? $room_f_meta['icon-type'] : '';
-
-																if ( $room_icon_type == 'fa' ) {
+                                                                }
+																if ( !empty($room_icon_type) && $room_icon_type == 'fa' ) {
 																	$room_feature_icon = !empty($room_f_meta['icon-fa']) ? '<i class="' . $room_f_meta['icon-fa'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
-																} elseif ( $room_icon_type == 'c' ) {
+																} elseif ( !empty($room_icon_type) && $room_icon_type == 'c' ) {
 																	$room_feature_icon = !empty($room_f_meta['icon-c']) ? '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
-																}
+																}else{
+                                                                    $room_feature_icon = '<i class="fas fa-bread-slice"></i>';
+                                                                }
 
 																$room_term = get_term( $feature ); ?>
                                                                 <li class="tf-tooltip">
@@ -538,7 +540,7 @@ while ( have_posts() ) : the_post();
                                                                         <i class="tool-i"></i>
                                                                     </div>
                                                                 </li>
-															<?php } } ?>
+															<?php } ?>
                                                         </ul>
                                                     </div>
 												<?php } ?>
