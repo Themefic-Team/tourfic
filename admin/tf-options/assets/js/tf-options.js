@@ -463,7 +463,7 @@
             $this_parent.find('.tf-repeater-wrap .tf-field-notice-inner').remove();
             // Chacked maximum repeater
             if (max != '' && count >= max) {
-                $this_parent.find('.tf-repeater-wrap').append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You cannot add more.</div>');
+                $this_parent.find('.tf-repeater-wrap').append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You have reached limit in free version. Please subscribe to Pro for unlimited access</div>');
                 return false;
             }
 
@@ -599,7 +599,7 @@
             $this_parent.find('.tf-field-notice-inner').remove();
             // Chacked maximum repeater
             if (max != '' && count >= max) {
-                $this_parent.append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You cannot add more.</div>');
+                $this_parent.append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You have reached limit in free version. Please subscribe to Pro for unlimited access</div>');
                 return false;
             }
 

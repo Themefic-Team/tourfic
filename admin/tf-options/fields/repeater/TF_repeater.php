@@ -51,7 +51,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 										<span class="tf-repeater-icon tf-repeater-icon-move">
 											<i class="fa-solid fa-up-down-left-right"></i>
 										</span>
-										<span class="tf-repeater-icon tf-repeater-icon-clone">
+										<span class="tf-repeater-icon tf-repeater-icon-clone" data-repeater-max = "<?php if(isset($this->field['max'])){ echo esc_attr($this->field['max']); }  ?>">
 											<i class="fa-solid fa-copy"></i> 
 										</span>
 										<span class="tf-repeater-icon tf-repeater-icon-delete">
