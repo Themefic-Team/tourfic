@@ -682,7 +682,12 @@
             clone_value.find('.wp-editor-wrap').each(function () {
                 var textarea = $(this).find('.tf_wp_editor').show();
                 // Get content of a specific editor:
-                var textarea_content = tinymce.get(textarea.attr('id')).getContent()
+                var tf_editor_ex_data = $('#'+textarea.attr('id')+'').val();
+                if(tf_editor_ex_data && typeof tf_editor_ex_data !== "undefined"){
+                    var textarea_content = tinymce.get(textarea.attr('id')).getContent();
+                }else{
+                    var textarea_content = '';
+                }
                 textarea.val(textarea_content);
                 $(this).closest('.tf-field-textarea').append(textarea);
                 $(this).remove();
