@@ -800,23 +800,25 @@ var frame, gframe;
     // Single Image remove
     $(document).on("click", ".tf-image-close", function (e) {
         e.preventDefault();
+        $this = $(this);
         var fieldname = $(this).attr("tf-field-name");
         var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
-        $('input[name="' + fieldname + '"]').val('');
-        $('.' + tf_preview_class + '').html('');
+        $this.parent().parent().find('input').val(''); 
+        $this.parent().html('');
 
     });
 
     // Gallery Image remove
     $(document).on("click", ".tf-gallery-remove", function (e) {
         e.preventDefault();
+        $this = $(this);
         var fieldname = $(this).attr("tf-field-name");
         var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
-        $('input[name="' + fieldname + '"]').val('');
-        $('.tf-fieldset > .' + tf_preview_class + '').html('');
-        $('a.' + tf_preview_class + '').css("display", "none");
+        $this.parent().parent().find('input').val('');
+        $this.parent().parent().find('.tf-fieldset-gallery-preview').html('');
+        $('a.tf-gallery-edit, a.tf-gallery-remove').css("display", "none");
 
     });
 
@@ -825,6 +827,7 @@ var frame, gframe;
         // Single Image Upload
 
         $('body').on('click', '.tf-media-upload', function (e) {
+            var $this = $(this); 
             var fieldname = $(this).attr("tf-field-name");
             var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
@@ -838,8 +841,8 @@ var frame, gframe;
             frame.on('select', function () {
 
                 var attachment = frame.state().get('selection').first().toJSON();
-                $('input[name="' + fieldname + '"]').val(attachment.url);
-                $('.' + tf_preview_class + '').html(`<div class="tf-image-close" tf-field-name='${fieldname}'>✖</div><img src='${attachment.url}' />`);
+                $this.parent().parent().find('input').val(attachment.url);
+                $this.parent().parent().find('.tf-fieldset-media-preview').html(`<div class="tf-image-close" tf-field-name='${fieldname}'>✖</div><img src='${attachment.url}' />`);
             });
             frame.open();
             return false;
@@ -847,7 +850,8 @@ var frame, gframe;
 
         // Gallery Image Upload
 
-        $('body').on('click', '.tf-gallery-upload', function (e) {
+        $('body').on('click', '.tf-gallery-upload, .tf-gallery-edit', function (e) {
+            var $this = $(this);
             var fieldname = $(this).attr("tf-field-name");
             var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
             gframe = wp.media({
@@ -860,7 +864,7 @@ var frame, gframe;
 
             gframe.on('open', function () {
                 var selection = gframe.state().get('selection');
-                var ids_value = jQuery('input[name="' + fieldname + '"]').val();
+                var ids_value = $this.parent().parent().find('input').val();
 
                 if (ids_value.length > 0) {
                     var ids = ids_value.split(',');
@@ -877,67 +881,22 @@ var frame, gframe;
                 var image_ids = [];
                 var image_urls = [];
                 var attachments = gframe.state().get('selection').toJSON();
-                $('.tf-fieldset > .' + tf_preview_class + '').html('');
+                $this.parent().parent().find('.tf-fieldset-gallery-preview').html('');
                 for (i in attachments) {
                     var attachment = attachments[i];
                     image_ids.push(attachment.id);
                     image_urls.push(attachment.url);
-                    $('.tf-fieldset > .' + tf_preview_class + '').append(`<img src='${attachment.url}' />`);
+                    $this.parent().parent().find('.tf-fieldset-gallery-preview').append(`<img src='${attachment.url}' />`);
                 }
-                $('input[name="' + fieldname + '"]').val(image_ids.join(","));
-                $('a.' + tf_preview_class + '').css("display", "inline-block");
+                $this.parent().parent().find('input').val(image_ids.join(","));
+                $this.parent().find('a.tf-gallery-edit, a.tf-gallery-remove').css("display", "inline-block");
             });
 
             gframe.open();
             return false;
         });
 
-        // Gallery Image Edit
 
-        $('body').on('click', '.tf-gallery-edit', function (e) {
-            var fieldname = $(this).attr("tf-field-name");
-            var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
-            gframe = wp.media({
-                title: "Select Gallery",
-                button: {
-                    text: "Insert Gallery"
-                },
-                multiple: 'add'
-            });
-
-            gframe.on('open', function () {
-                var selection = gframe.state().get('selection');
-                var ids_value = jQuery('input[name="' + fieldname + '"]').val();
-
-                if (ids_value.length > 0) {
-                    var ids = ids_value.split(',');
-
-                    ids.forEach(function (id) {
-                        attachment = wp.media.attachment(id);
-                        attachment.fetch();
-                        selection.add(attachment ? [attachment] : []);
-                    });
-                }
-            });
-
-            gframe.on('select', function () {
-                var image_ids = [];
-                var image_urls = [];
-                var attachments = gframe.state().get('selection').toJSON();
-                $('.tf-fieldset > .' + tf_preview_class + '').html('');
-                for (i in attachments) {
-                    var attachment = attachments[i];
-                    image_ids.push(attachment.id);
-                    image_urls.push(attachment.url);
-                    $('.tf-fieldset > .' + tf_preview_class + '').append(`<img src='${attachment.url}' />`);
-                }
-                $('input[name="' + fieldname + '"]').val(image_ids.join(","));
-                $('a.' + tf_preview_class + '').css("display", "inline-block");
-            });
-
-            gframe.open();
-            return false;
-        });
 
         // Texonomy submit event
         $('#addtag > .submit #submit').click(function () {
