@@ -408,8 +408,8 @@
       h3 {
         font-size: 18px;
         color: $slate80;
+        margin: 0;
       }
-
 
       p {
         color: $slate40;
@@ -798,7 +798,7 @@
     font-size: 18px;
     line-height: 24px;
     text-align: center;
-    margin-bottom: 20px;
+    margin: 0 0 16px 0;
   }
 
   .tf-apartment-form-header {
@@ -808,6 +808,8 @@
     margin-bottom: 16px;
 
     .tf-apartment-price-per-night {
+      margin: 0;
+
       .woocommerce-Price-currencySymbol,
       bdi {
         font-size: 22px;
@@ -858,6 +860,8 @@
           font-size: 12px;
           font-weight: 700;
           text-transform: uppercase;
+          margin-bottom: 4px;
+          display: inline-block;
         }
 
         #check-in-date,
@@ -892,6 +896,8 @@
         font-size: 12px;
         font-weight: 700;
         text-transform: uppercase;
+        margin-bottom: 8px;
+        display: inline-block;
       }
 
       .tf_selectperson-wrap {

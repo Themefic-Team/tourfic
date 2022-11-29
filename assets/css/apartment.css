@@ -367,6 +367,7 @@
 .tf-apartment-option-slider-wrapper .tf-apartment-option-slider-item .tf-apartment-option-slider-desc h3 {
   font-size: 18px;
   color: #363e4a;
+  margin: 0;
 }
 .tf-apartment-option-slider-wrapper .tf-apartment-option-slider-item .tf-apartment-option-slider-desc p {
   color: #8997a9;
@@ -699,7 +700,7 @@
   font-size: 18px;
   line-height: 24px;
   text-align: center;
-  margin-bottom: 20px;
+  margin: 0 0 16px 0;
 }
 #tf-apartment-booking .tf-apartment-form-header {
   display: -webkit-box;
@@ -713,6 +714,9 @@
   -ms-flex-align: center;
   align-items: center;
   margin-bottom: 16px;
+}
+#tf-apartment-booking .tf-apartment-form-header .tf-apartment-price-per-night {
+  margin: 0;
 }
 #tf-apartment-booking .tf-apartment-form-header .tf-apartment-price-per-night .woocommerce-Price-currencySymbol,
 #tf-apartment-booking .tf-apartment-form-header .tf-apartment-price-per-night bdi {
@@ -766,6 +770,8 @@
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
+  margin-bottom: 4px;
+  display: inline-block;
 }
 #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-date #check-in-date,
 #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-date #check-out-date,
@@ -798,6 +804,8 @@
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
+  margin-bottom: 8px;
+  display: inline-block;
 }
 #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap {
   padding: 0;

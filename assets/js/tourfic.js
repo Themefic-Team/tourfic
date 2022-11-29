@@ -1198,7 +1198,6 @@
             } else {
                 thisEml.closest('.tf_selectperson-wrap').find('.infant-text').text(thisVal + " " + tf_params.infant);
             }
-
         });
 
         // Room change trigger

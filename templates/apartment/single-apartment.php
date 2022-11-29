@@ -407,9 +407,8 @@ while ( have_posts() ) : the_post();
 										echo sprintf( '<li>%s <span>%s</span></li>', __( 'Language: ', 'tourfic' ), get_the_author_meta( 'language', $post_author_id ) );
 									}
 									?>
-                                    <li>Response Time: <span>Within a Day</span></li>
                                 </ul>
-                                <a href="" class="tf_button btn-styled"><i class="far fa-comments"></i> Contact Host</a>
+                                <a href="" class="tf_button btn-styled"><i class="far fa-comments"></i><?php _e('Contact Host', 'tourfic') ?></a>
                             </div>
                         </div>
                     </div>
