@@ -226,7 +226,13 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'     => 'number',
 					'label'    => __( 'Weekly Discount Per Night', 'tourfic' ),
 					'subtitle' => __( 'Weekly discounts for stays longer than 7 days (per night)', 'tourfic' ),
-				)
+				),
+				array(
+					'id'       => 'monthly_discount',
+					'type'     => 'number',
+					'label'    => __( 'Monthly Discount Per Night', 'tourfic' ),
+					'subtitle' => __( 'Monthly discounts for stays longer than 30 days (per night)', 'tourfic' ),
+				),
 			),
 		),
 		// Information

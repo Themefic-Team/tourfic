@@ -192,14 +192,15 @@ register_activation_hook( TF_PATH . 'tourfic.php', 'tf_apartment_rewrite_flush' 
  */
 function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
 
-	$meta            = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
-	$max_adults      = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
-	$max_children    = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
-	$max_infants     = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
-	$price_per_night = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
-	$weekly_discount = ! empty( $meta['weekly_discount'] ) ? $meta['weekly_discount'] : 0;
-	$service_fee     = ! empty( $meta['service_fee'] ) ? $meta['service_fee'] : 0;
-	$cleaning_fee    = ! empty( $meta['cleaning_fee'] ) ? $meta['cleaning_fee'] : 0;
+	$meta             = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+	$max_adults       = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
+	$max_children     = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
+	$max_infants      = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
+	$price_per_night  = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
+	$weekly_discount  = ! empty( $meta['weekly_discount'] ) ? $meta['weekly_discount'] : 0;
+	$monthly_discount = ! empty( $meta['monthly_discount'] ) ? $meta['monthly_discount'] : 0;
+	$service_fee      = ! empty( $meta['service_fee'] ) ? $meta['service_fee'] : 0;
+	$cleaning_fee     = ! empty( $meta['cleaning_fee'] ) ? $meta['cleaning_fee'] : 0;
 	?>
 
     <!-- Start Booking widget -->
@@ -313,6 +314,13 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
                 </li>
 			<?php endif; ?>
 
+			<?php if ( ! empty( $monthly_discount ) ): ?>
+                <li class="monthly-discount-wrap" style="display: none">
+                    <span class="monthly-discount-label tf-price-list-label"><?php _e( 'Monthly discount', 'tourfic' ); ?></span>
+                    <span class="monthly-discount tf-price-list-price"></span>
+                </li>
+			<?php endif; ?>
+
 			<?php if ( ! empty( $service_fee ) ): ?>
                 <li class="service-fee-wrap" style="display: none">
                     <span class="service-fee-label tf-price-list-label"><?php _e( 'Service Fee', 'tourfic' ); ?></span>
@@ -370,7 +378,15 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
                                         $('.total-days-price-wrap .days-total-price').html(total_price_html);
 
                                         //weekly discount (if more than 7 days)
-                                        if (days >= 7) {
+                                        if (days >= 30) {
+                                            var monthly_discount = <?php echo $monthly_discount; ?>;
+                                            var monthly_discount_html = '<?php echo wc_price( 0 ); ?>';
+                                            if (monthly_discount > 0) {
+                                                $('.monthly-discount-wrap').show();
+                                                monthly_discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0', monthly_discount * days);
+                                            }
+                                            $('.monthly-discount-wrap .monthly-discount').html('-' + monthly_discount_html);
+                                        } else if (days >= 7) {
                                             var weekly_discount = <?php echo $weekly_discount; ?>;
                                             var weekly_discount_html = '<?php echo wc_price( 0 ); ?>';
                                             if (weekly_discount > 0) {
@@ -380,7 +396,7 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
                                             $('.weekly-discount-wrap .weekly-discount').html('-' + weekly_discount_html);
                                         } else {
                                             $('.weekly-discount-wrap').hide();
-                                            weekly_discount = 0;
+                                            $('.monthly-discount-wrap').hide();
                                         }
 
                                         //service fee per night
@@ -403,7 +419,10 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
                                         var total_price_html = '<?php echo wc_price( 0 ); ?>';
                                         if (total_price > 0) {
                                             $('.total-price-wrap').show();
-                                            total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price + (service_fee * days) + <?php echo $cleaning_fee; ?> - (weekly_discount * days));
+                                            total_price = total_price + (service_fee * days) + <?php echo $cleaning_fee; ?>;
+                                            console.log(total_price);
+                                            total_price = days >= 30 ? total_price - (monthly_discount * days) : (days >= 7 ? total_price - (weekly_discount * days) : total_price);
+                                            total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
                                         }
                                         $('.total-price-wrap .total-price').html(total_price_html);
                                     } else {
