@@ -441,15 +441,26 @@ while ( have_posts() ) : the_post();
 										$pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
 										$avil_by_date = ! empty( $room['avil_by_date'] ) ? ! empty( $room['avil_by_date'] ) : false;
 
-										if ( $avil_by_date == true ) {
+										if ( defined( 'TF_PRO' ) && $avil_by_date == true ) {
 											$repeat_by_date = ! empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
 											if ( $pricing_by == '1' ) {
 												$prices = wp_list_pluck( $repeat_by_date, 'price' );
 											} else {
 												$prices = wp_list_pluck( $repeat_by_date, 'adult_price' );
 											}
-
-											$price = $prices ? (min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) )) : wc_price( 0 );
+                                            if(!empty($prices)){
+                                                $range_price = [];
+                                                foreach($prices as $single){
+                                                    if(!empty($single)){
+                                                        $range_price[]= $single ;
+                                                    }
+                                                }
+                                                if(sizeof($range_price) > 1){
+                                                    $price = $prices ? (min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) )) : wc_price( 0 );
+                                                }else{
+                                                    $price = !empty($range_price[0]) ? wc_price($range_price[0]) : wc_price( 0 );
+                                                }
+                                            }
 										} else {
 											if ( $pricing_by == '1' ) {
 												$price = wc_price( ! empty( $room['price'] ) ? $room['price'] : '0.0' );

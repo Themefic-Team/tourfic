@@ -1339,7 +1339,8 @@ Fontawesome
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
-  font-size: 14px; }
+  font-size: 14px;
+  border: 1px solid #c4cbd4; }
   .tf-field-date input:focus {
     background: #FFFFFF;
     box-shadow: 0 0 0 2px #2979ff;
@@ -1376,7 +1377,8 @@ Fontawesome
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
-  font-size: 14px; }
+  font-size: 14px;
+  border: 1px solid #c4cbd4; }
   .tf-field-time input:focus {
     background: #FFFFFF;
     box-shadow: 0 0 0 2px #2979ff;
