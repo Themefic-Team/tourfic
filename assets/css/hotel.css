@@ -279,46 +279,6 @@ a.slick-slide-item-link {
     margin-bottom: 20px;
 }
 
-/*.tf-single-faq .tf-tours-single-faq-inner {
-    border-bottom: 1px solid #c8e2fc;
-    background: #fff;
-}
-
-.tf-single-faq .faq-content {
-    display: none;
-    padding-bottom: 20px;
-}
-
-.tf-single-faq .faq-head {
-    cursor: pointer;
-    padding: 10px 0;
-    position: relative;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.tf-single-faq .faq-head .faq-indicator {
-    position: absolute;
-    right: 15px;
-}
-
-.tf-single-faq .faq-head .faq-indicator i {
-    font-size: 14px;
-    color: #4F91FF;
-}
-
-.tf-single-faq .tf-tours-single-faq-inner .faq-indicator .fa-minus {
-    display: none;
-}
-
-.tf-single-faq .tf-tours-single-faq-inner.active .faq-indicator .fa-minus {
-    display: block;
-}
-
-.tf-single-faq .tf-tours-single-faq-inner.active .faq-indicator .fa-plus {
-    display: none;
-}*/
-
 /**************** ROOMS ****************/
 .availability-table {
     border: none;

@@ -62,7 +62,15 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false
 				),
-
+				array(
+					'id'       => 'feature-filter',
+					'type'     => 'switch',
+					'label'    => __( 'Filter By Feature', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'  => true,
+					'is_pro'   => true
+				),
 				array(
 					'id'     => 'h-enquiry-email',
 					'type'   => 'text',
@@ -437,7 +445,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'tourfic-hotel-map-button',
 					'type'     => 'color',
-					'label'    => __( 'Map Button', 'tourfic' ),
+					'label'    => __( 'Map Button Background', 'tourfic' ),
 					'subtitle' => __( 'The Gradient color of Map Button', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
@@ -446,6 +454,17 @@ TF_Settings::option( 'tf_settings', array(
 						'gradient_two_reg' => __( 'Gradient Two Color', 'tourfic' ),
 						'gradient_one_hov' => __( 'Gradient One Hover', 'tourfic' ),
 						'gradient_two_hov' => __( 'Gradient Two Hover', 'tourfic' ),
+					)
+				),
+				array(
+					'id'       => 'tourfic-hotel-map-button-text',
+					'type'     => 'color',
+					'label'    => __( 'Map Button Text Color', 'tourfic' ),
+					'subtitle' => __( 'The color of Map Button text', 'tourfic' ),
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'regular' => __( 'Text Color', 'tourfic' ),
 					)
 				),
 				array(
@@ -711,7 +730,6 @@ TF_Settings::option( 'tf_settings', array(
 					'label'   => __( 'Enable Review for', 'tourfic' ),
 					'options' => array(
 						'li' => __( 'Logged in User', 'tourfic' ),
-						''   => __( 'Log out User (Pro)', 'tourfic' ),
 					),
 					'default' => array( 'li' ),
 				),

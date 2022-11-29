@@ -472,6 +472,48 @@ Booking form mobile version
     float: left;
 }
 
+/*Recent Blog Widget*/
+.post-section-one{
+    overflow: hidden;
+    display: flex;
+}
+.post-section-one .tf-single-item {
+    width: 32%;
+    float: left;
+    margin: 10px;
+    padding: 15px;
+    display: flex;
+    border-radius: 5px;
+    height: 400px;
+    object-fit: cover;
+}
+.tf-single-item {
+    width: 48%;
+    float: left;
+    margin: 11px;
+    padding: 15px;
+    display: flex;
+    border-radius: 5px;
+    height: 400px;
+    object-fit: cover;
+}
+
+
+.tf-post-content {
+    flex-grow: 1;
+    align-self: flex-end;
+}
+
+.tf-post-desc a,.tf-post-desc p {
+    color: #fff;
+}
+.tf-post-desc a:hover {
+    color: #ddd;
+}
+
+
+
+
 /**************************************** RESPONSIVE **************************************/
 
 @media screen and (max-width: 767px) {
@@ -532,6 +574,16 @@ Booking form mobile version
         border: 1px solid #ccc;
         border-radius: 4px;
     }
+    /* Recent blog start */
+    .post-section-one {
+        flex-direction: column;
+    }
+    .post-section-one .tf-single-item, .tf-single-item{
+        width: 100%;
+        margin:unset;
+        margin-bottom: 10px;
+    }
+    /* Recent blog end */
 
 }
 

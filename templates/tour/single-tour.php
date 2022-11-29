@@ -52,7 +52,7 @@ while ( have_posts() ) : the_post();
 		$location = $text_location;
 	}
 	// Gallery
-	$gallery = !empty($meta['tour_gallery']) ? $meta['tour_gallery'] : array();
+	$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : array();
 	if ( $gallery ) {
 		$gallery_ids = explode( ',', $gallery );
 	}
@@ -88,6 +88,7 @@ while ( have_posts() ) : the_post();
         }, $exc );
         $exc = unserialize( $tf_hotel_exc_value );
 	}
+
 	$inc_icon        = ! empty( $meta['inc_icon'] ) ? $meta['inc_icon'] : null;
 	$exc_icon        = ! empty( $meta['exc_icon'] ) ? $meta['exc_icon'] : null;
 	$custom_inc_icon = ! empty( $inc_icon ) ? "custom-inc-icon" : '';
@@ -103,7 +104,7 @@ while ( have_posts() ) : the_post();
 	$share_text = get_the_title();
 	$share_link = esc_url( home_url( "/?p=" ) . $post_id );
 
-	$terms_and_conditions = !empty($meta['terms_conditions']) ? $meta['terms_conditions'] : null;
+	$terms_and_conditions = ! empty( $meta['terms_conditions'] ) ? $meta['terms_conditions'] : '';
 	$tf_faqs              = ( get_post_meta( $post->ID, 'tf_faqs', true ) ) ? get_post_meta( $post->ID, 'tf_faqs', true ) : array();
 
 	/**

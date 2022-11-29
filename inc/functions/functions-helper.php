@@ -22,9 +22,9 @@ function tf_booking_search_action() {
 add_action( 'admin_menu', 'tf_documentation_page_integration' );
 function tf_documentation_page_integration() {
 	global $submenu;
-	$tfhoteldocumentation = sanitize_url( 'https://themefic.com/docs/tourfic/' );
-	$tftourdocumentation  = sanitize_url( 'https://themefic.com/docs/tourfic/' );
-	$go_pro_link          = sanitize_url( 'https://tourfic.com/go/upgrade' );
+	$tfhoteldocumentation = sanitize_url('https://themefic.com/docs/tourfic/');
+	$tftourdocumentation = sanitize_url('https://themefic.com/docs/tourfic/');
+	$go_pro_link = sanitize_url('https://themefic.com/tourfic/pricing/');
 	//Booking Deatils menu in Free version
 	if ( ! defined( 'TF_PRO' ) ) :
 		$submenu['edit.php?post_type=tf_hotel'][] = array(

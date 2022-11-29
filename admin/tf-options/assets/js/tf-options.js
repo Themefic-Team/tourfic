@@ -368,7 +368,12 @@
             let $this = $(this),
                 submitBtn = $this.find('.tf-submit-btn'),
                 data = new FormData(this);
-
+                var fontsfile = $('.itinerary-fonts-file').prop("files");
+                if(typeof fontsfile !== "undefined"){
+                    for(var i=0; i<fontsfile.length; i++) {
+                    data.append('file[]', fontsfile[i]);
+                    }
+                }
             data.append('action', 'tf_options_save');
 
             $.ajax({
@@ -677,7 +682,12 @@
             clone_value.find('.wp-editor-wrap').each(function () {
                 var textarea = $(this).find('.tf_wp_editor').show();
                 // Get content of a specific editor:
-                var textarea_content = tinymce.get(textarea.attr('id')).getContent()
+                var tf_editor_ex_data = $('#'+textarea.attr('id')+'').val();
+                if(tf_editor_ex_data && typeof tf_editor_ex_data !== "undefined"){
+                    var textarea_content = tinymce.get(textarea.attr('id')).getContent();
+                }else{
+                    var textarea_content = '';
+                }
                 textarea.val(textarea_content);
                 $(this).closest('.tf-field-textarea').append(textarea);
                 $(this).remove();
@@ -721,12 +731,13 @@
 
         // Repeater show hide
         $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
-            $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').slideToggle();
-            $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').toggleClass('hide');
-            if ($(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').hasClass('hide') == true) {
-                $(this).closest('.tf-single-repeater').find('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-up"></i>');
+            var tf_repater_fieldname = $(this).closest('.tf-single-repeater').find('input[name=tf_current_field]').val();
+            $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+'').find('.tf-repeater-content-wrap').slideToggle();
+            $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+'').children('.tf-repeater-content-wrap').toggleClass('hide');
+            if ($(this).closest('.tf-single-repeater-'+tf_repater_fieldname+'').children('.tf-repeater-content-wrap').hasClass('hide')== true) {
+                $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-down"></i>');
             } else {
-                $(this).closest('.tf-single-repeater').find('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-down"></i>');
+                $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-up"></i>');
             }
         });
 
@@ -789,23 +800,25 @@ var frame, gframe;
     // Single Image remove
     $(document).on("click", ".tf-image-close", function (e) {
         e.preventDefault();
+        $this = $(this);
         var fieldname = $(this).attr("tf-field-name");
         var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
-        $('input[name="' + fieldname + '"]').val('');
-        $('.' + tf_preview_class + '').html('');
+        $this.parent().parent().find('input').val(''); 
+        $this.parent().html('');
 
     });
 
     // Gallery Image remove
     $(document).on("click", ".tf-gallery-remove", function (e) {
         e.preventDefault();
+        $this = $(this);
         var fieldname = $(this).attr("tf-field-name");
         var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
-        $('input[name="' + fieldname + '"]').val('');
-        $('.tf-fieldset > .' + tf_preview_class + '').html('');
-        $('a.' + tf_preview_class + '').css("display", "none");
+        $this.parent().parent().find('input').val('');
+        $this.parent().parent().find('.tf-fieldset-gallery-preview').html('');
+        $('a.tf-gallery-edit, a.tf-gallery-remove').css("display", "none");
 
     });
 
@@ -814,6 +827,7 @@ var frame, gframe;
         // Single Image Upload
 
         $('body').on('click', '.tf-media-upload', function (e) {
+            var $this = $(this); 
             var fieldname = $(this).attr("tf-field-name");
             var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
@@ -827,8 +841,8 @@ var frame, gframe;
             frame.on('select', function () {
 
                 var attachment = frame.state().get('selection').first().toJSON();
-                $('input[name="' + fieldname + '"]').val(attachment.url);
-                $('.' + tf_preview_class + '').html(`<div class="tf-image-close" tf-field-name='${fieldname}'>✖</div><img src='${attachment.url}' />`);
+                $this.parent().parent().find('input').val(attachment.url);
+                $this.parent().parent().find('.tf-fieldset-media-preview').html(`<div class="tf-image-close" tf-field-name='${fieldname}'>✖</div><img src='${attachment.url}' />`);
             });
             frame.open();
             return false;
@@ -836,7 +850,8 @@ var frame, gframe;
 
         // Gallery Image Upload
 
-        $('body').on('click', '.tf-gallery-upload', function (e) {
+        $('body').on('click', '.tf-gallery-upload, .tf-gallery-edit', function (e) {
+            var $this = $(this);
             var fieldname = $(this).attr("tf-field-name");
             var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
             gframe = wp.media({
@@ -849,7 +864,7 @@ var frame, gframe;
 
             gframe.on('open', function () {
                 var selection = gframe.state().get('selection');
-                var ids_value = jQuery('input[name="' + fieldname + '"]').val();
+                var ids_value = $this.parent().parent().find('input').val();
 
                 if (ids_value.length > 0) {
                     var ids = ids_value.split(',');
@@ -866,20 +881,23 @@ var frame, gframe;
                 var image_ids = [];
                 var image_urls = [];
                 var attachments = gframe.state().get('selection').toJSON();
-                $('.tf-fieldset > .' + tf_preview_class + '').html('');
+                $this.parent().parent().find('.tf-fieldset-gallery-preview').html('');
                 for (i in attachments) {
                     var attachment = attachments[i];
                     image_ids.push(attachment.id);
                     image_urls.push(attachment.url);
-                    $('.tf-fieldset > .' + tf_preview_class + '').append(`<img src='${attachment.url}' />`);
+                    $this.parent().parent().find('.tf-fieldset-gallery-preview').append(`<img src='${attachment.url}' />`);
                 }
-                $('input[name="' + fieldname + '"]').val(image_ids.join(","));
-                $('a.' + tf_preview_class + '').css("display", "inline-block");
+                $this.parent().parent().find('input').val(image_ids.join(","));
+                $this.parent().find('a.tf-gallery-edit, a.tf-gallery-remove').css("display", "inline-block");
             });
 
             gframe.open();
             return false;
         });
+
+
+
         // Texonomy submit event
         $('#addtag > .submit #submit').click(function () {
             $(".tf-fieldset-media-preview").html("");
@@ -1010,13 +1028,16 @@ var frame, gframe;
                 $latitude.on('change', input_update_latlng);
                 $longitude.on('change', input_update_latlng);
 
+                setInterval(function() {   
+                    mapInit.invalidateSize(); 
+                }, 100);
             });
         }
 
         $('.tf-mobile-tabs').click(function (e) {
             e.preventDefault();
             $(".tf-admin-tab").toggleClass('active');
-        });
+        }); 
     });
 
 

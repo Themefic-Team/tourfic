@@ -113,9 +113,11 @@ function tf_tours_plural_label( $lowercase = false ) {
 function tf_tours_taxonomies_register() {
 
     /**
-     * Taxonomy: tour_destination.
+     * Taxonomy: tour_destination,tour_attraction,tour_activities
      */
     $tour_destination_slug = apply_filters( 'tour_destination_slug', 'tour-destination' );
+    $tour_attraction_slug = apply_filters( 'tour_attraction_slug', 'tour-attraction' );
+    $tour_actvities_slug = apply_filters( 'tour_actvities_slug', 'tour-activities' );
 
     $tour_destination_labels = array(
         'name'                       => __( 'Tour Destinations', 'tourfic' ),
@@ -161,7 +163,101 @@ function tf_tours_taxonomies_register() {
             'edit_terms' => 'edit_tf_tours',
          ),
     );
+
+    $tour_attraction_labels = array(
+        'name'                       => __( 'Tour Attractions', 'tourfic' ),
+        'singular_name'              => __( 'Tour Attractions', 'tourfic' ),
+        'menu_name'                  => __( 'Attraction', 'tourfic' ),
+        'all_items'                  => __( 'All Attractions', 'tourfic' ),
+        'edit_item'                  => __( 'Edit Attractions', 'tourfic' ),
+        'view_item'                  => __( 'View Attractions', 'tourfic' ),
+        'update_item'                => __( 'Update Attractions name', 'tourfic' ),
+        'add_new_item'               => __( 'Add new Attractions', 'tourfic' ),
+        'new_item_name'              => __( 'New Attractions name', 'tourfic' ),
+        'parent_item'                => __( 'Parent Attractions', 'tourfic' ),
+        'parent_item_colon'          => __( 'Parent Attractions:', 'tourfic' ),
+        'search_items'               => __( 'Search Attractions', 'tourfic' ),
+        'popular_items'              => __( 'Popular Attractions', 'tourfic' ),
+        'separate_items_with_commas' => __( 'Separate Attraction with commas', 'tourfic' ),
+        'add_or_remove_items'        => __( 'Add or remove Attraction', 'tourfic' ),
+        'choose_from_most_used'      => __( 'Choose from the most used Attraction', 'tourfic' ),
+        'not_found'                  => __( 'No Attraction found', 'tourfic' ),
+        'no_terms'                   => __( 'No Attraction', 'tourfic' ),
+        'items_list_navigation'      => __( 'Attraction list navigation', 'tourfic' ),
+        'items_list'                 => __( 'Attraction list', 'tourfic' ),
+        'back_to_items'              => __( 'Back to Attraction', 'tourfic' ),
+    );
+    
+    $tour_attraction_args = array(
+        'labels'                => $tour_attraction_labels,
+        'public'                => true,
+        'publicly_queryable'    => true,
+        'hierarchical'          => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'show_in_nav_menus'     => true,
+        'query_var'             => true,
+        'rewrite'               => array('slug' => $tour_attraction_slug, 'with_front' => false ),
+        'show_admin_column'     => true,
+        'show_in_rest'          => true,
+        'rest_base'             => 'tour_attraction',
+        'rest_controller_class' => 'WP_REST_Terms_Controller',
+        'show_in_quick_edit'    => true,
+        'capabilities'          => array( 
+            'assign_terms' => 'edit_tf_tours',
+            'edit_terms' => 'edit_tf_tours',
+         ),
+    );
+    
+    //Tour Activities Taxonomy
+    $tour_activities_labels = array(
+        'name'                       => __( 'Tour Activities', 'tourfic' ),
+        'singular_name'              => __( 'Tour Activity', 'tourfic' ),
+        'menu_name'                  => __( 'Activities', 'tourfic' ),
+        'all_items'                  => __( 'All Activities', 'tourfic' ),
+        'edit_item'                  => __( 'Edit Activity', 'tourfic' ),
+        'view_item'                  => __( 'View Activity', 'tourfic' ),
+        'update_item'                => __( 'Update Activity name', 'tourfic' ),
+        'add_new_item'               => __( 'Add New Activity', 'tourfic' ),
+        'new_item_name'              => __( 'New Activity name', 'tourfic' ),
+        'parent_item'                => __( 'Parent Activity', 'tourfic' ),
+        'parent_item_colon'          => __( 'Parent Activity', 'tourfic' ),
+        'search_items'               => __( 'Search Activities', 'tourfic' ),
+        'popular_items'              => __( 'Popular Activities', 'tourfic' ),
+        'separate_items_with_commas' => __( 'Separate Activities with commas', 'tourfic' ),
+        'add_or_remove_items'        => __( 'Add or remove activity', 'tourfic' ),
+        'choose_from_most_used'      => __( 'Choose from the most used activity', 'tourfic' ),
+        'not_found'                  => __( 'No activity found', 'tourfic' ),
+        'no_terms'                   => __( 'No activity', 'tourfic' ),
+        'items_list_navigation'      => __( 'Activity list navigation', 'tourfic' ),
+        'items_list'                 => __( 'Activity list', 'tourfic' ),
+        'back_to_items'              => __( 'Back to Activities', 'tourfic' ),
+    );
+    
+    $tour_activities_args = array(
+        'labels'                => $tour_activities_labels,
+        'public'                => true,
+        'publicly_queryable'    => true,
+        'hierarchical'          => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'show_in_nav_menus'     => true,
+        'query_var'             => true,
+        'rewrite'               => array('slug' => $tour_actvities_slug, 'with_front' => false ),
+        'show_admin_column'     => true,
+        'show_in_rest'          => true,
+        'rest_base'             => 'tour_activities',
+        'rest_controller_class' => 'WP_REST_Terms_Controller',
+        'show_in_quick_edit'    => true,
+        'capabilities'          => array( 
+            'assign_terms' => 'edit_tf_tours',
+            'edit_terms' => 'edit_tf_tours',
+         ),
+    );
+
     register_taxonomy( 'tour_destination', 'tf_tours', apply_filters( 'tour_destination_args', $tour_destination_args ) );
+    register_taxonomy( 'tour_attraction', 'tf_tours', apply_filters( 'tour_attraction_args', $tour_attraction_args ) );
+    register_taxonomy( 'tour_activities', 'tf_tours', apply_filters( 'tour_activities_args', $tour_activities_args ) );
 
 }
 add_action( 'init', 'tf_tours_taxonomies_register' );
@@ -1010,8 +1106,8 @@ if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-tour.php' ) ) {
  * @param array      $not_found collection of tour exists
  * @param array      $data      user input for sidebar form
  */
-function tf_filter_tour_by_date( $period, array &$not_found, array $data = [] ): void {
-
+function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, array $data = [] ): void {
+    
     if(isset($data[3]) && isset($data[4])){
         [$adults, $child, $check_in_out, $startprice, $endprice] = $data;
     }else{
@@ -1175,17 +1271,17 @@ function tf_filter_tour_by_date( $period, array &$not_found, array $data = [] ):
 
         } else {
 
+          
             tf_tour_archive_single_item();
 
         }
-
+        
         $not_found[] = 0;
 
     } else {
-
+        $total_posts--;
         $not_found[] = 1;
 
     }
-
 }
 

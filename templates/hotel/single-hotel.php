@@ -521,13 +521,13 @@ while ( have_posts() ) : the_post();
 															<?php foreach ( $room['features'] as $feature ) {
 
 																$room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
-
+                                                                if(!empty($room_f_meta)){
 																$room_icon_type = ! empty( $room_f_meta['icon-type'] ) ? $room_f_meta['icon-type'] : '';
 
 																if ( $room_icon_type == 'fa' ) {
-																	$room_feature_icon = '<i class="' . $room_f_meta['icon-fa'] . '"></i>';
+																	$room_feature_icon = !empty($room_f_meta['icon-fa']) ? '<i class="' . $room_f_meta['icon-fa'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
 																} elseif ( $room_icon_type == 'c' ) {
-																	$room_feature_icon = '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />';
+																	$room_feature_icon = !empty($room_f_meta['icon-c']) ? '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
 																}
 
 																$room_term = get_term( $feature ); ?>
@@ -538,7 +538,7 @@ while ( have_posts() ) : the_post();
                                                                         <i class="tool-i"></i>
                                                                     </div>
                                                                 </li>
-															<?php } ?>
+															<?php } } ?>
                                                         </ul>
                                                     </div>
 												<?php } ?>

@@ -30,7 +30,7 @@ if ( ! class_exists( 'TF_map' ) ) {
                 'address'        => '',
                 'latitude'       => '20',
                 'longitude'      => '0',
-                'zoom'           => '2',
+                'zoom'           => '5',
               ) );
             if( !empty($mapdata) ){
               $default_settings   = array(

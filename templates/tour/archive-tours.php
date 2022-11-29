@@ -53,7 +53,7 @@ if( $discount_type == 'percent' ){
 							tf_tour_archive_single_item();
 						}
 					} else {
-						echo '<div class="tf-nothing-found">' .__("No Tours Found!", "tourfic"). '</div>';
+						echo '<div class="tf-nothing-found" data-post-count="0" >' .__("No Tours Found!", "tourfic"). '</div>';
 					}
 					?>
 				</div>

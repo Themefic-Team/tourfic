@@ -33,6 +33,10 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 						}
 					 	if(is_array($data)):
 							foreach ( $data as $key => $value ) :
+								$tf_repater_default_value = reset($value);
+								if($this->field['id']=="room"){
+									$tf_repater_default_value = $value['title'];
+								}
 							?>
                             <div class="tf-single-repeater tf-single-repeater-<?php echo $this->field['id'];?>">
 							<input type="hidden" name="tf_parent_field" value="<?php echo $this->parent_field; ?>"> 
@@ -40,9 +44,9 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 							<input type="hidden" name="tf_current_field" value="<?php echo $this->field['id'];?>">
 								<div class="tf-repeater-header">
 									<span class="tf-repeater-icon tf-repeater-icon-collapse">
-										<i class="fa-solid fa-angle-up"></i>
+										<i class="fa-solid fa-angle-down"></i>
 									</span>
-									<span class="tf-repeater-title"><?php echo esc_html($label) ?>  </span>
+									<span class="tf-repeater-title"><?php echo !empty($tf_repater_default_value) && gettype($tf_repater_default_value)=="string" ? $tf_repater_default_value : esc_html($label) ?>  </span>
 									<div class="tf-repeater-icon-absulate">
 										<span class="tf-repeater-icon tf-repeater-icon-move">
 											<i class="fa-solid fa-up-down-left-right"></i>
@@ -97,7 +101,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 					
 						<div class="tf-repeater-header">
 							<span class="tf-repeater-icon tf-repeater-icon-collapse">
-								<i class="fa-solid fa-angle-down"></i> 
+								<i class="fa-solid fa-angle-up"></i> 
 							</span>
 							<span class="tf-repeater-title"><?php if(isset($this->field['label'])){ echo esc_html($this->field['label']); }  ?></span>
 							<div class="tf-repeater-icon-absulate">

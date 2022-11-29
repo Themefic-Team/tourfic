@@ -443,7 +443,16 @@ a.tf_button.btn-styled:focus {
     border: 0;
     outline: 0;
 }
-
+ul.tf-sidebar-checkbox {
+    display: block;
+    color: #000;
+}
+ul.tf-sidebar-checkbox label{
+    margin-left: 10px;
+}
+.tf-sidebar-filter .tf-sidebar-checkbox,.tf-sidebar-filter h3 {
+    color: #fff;
+}
 .tf_booking-widget {
     background: #FA5535;
     background: linear-gradient(to bottom, #FD6143 0, #FA5535 100%);
@@ -471,7 +480,11 @@ a.tf_button.btn-styled:focus {
     color: #bfbfbf;
     font-size: 16px;
 }
-
+h3.tf-sidebar-widget_title {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+/********Booking Form End ********/
 .tf_acrselection-wrap {
     position: absolute;
     top: 100%;
@@ -1072,6 +1085,9 @@ a.tf_button.btn-styled:focus {
     display: flex;
     align-items: center;
 }
+#tf-faq-item .tf-faq-title.active{
+    margin-bottom: 15px;
+}
 
 #tf-faq-item .arrow {
     transition: 0.25s ease;
@@ -1195,7 +1211,9 @@ a.tf_button.btn-styled:focus {
     padding: 10px 9px 7px 10px;
     transition: 0.3s;
 }
-
+.tf-text-red{
+    color: red !important;
+}
 /*
 Fontawesome
 */
