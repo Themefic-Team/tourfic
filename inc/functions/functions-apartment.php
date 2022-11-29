@@ -207,8 +207,10 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
     <form id="tf-apartment-booking" class="tf-apartment-side-booking" method="get" autocomplete="off">
         <h4><?php _e( 'Book your Apartment', 'tourfic' ) ?></h4>
         <div class="tf-apartment-form-header">
-            <h3 class="tf-apartment-price-per-night"><?php echo wc_price( $price_per_night ) ?>
-                <span><?php _e( '/per night', 'tourfic' ) ?></span></h3>
+            <h3 class="tf-apartment-price-per-night">
+                <span class="tf-apartment-base-price"><?php echo wc_price( $price_per_night ) ?></span>
+                <span><?php _e( '/per night', 'tourfic' ) ?></span>
+            </h3>
 			<?php if ( $comments && ! $disable_review_sec == '1' ): ?>
                 <div class="tf-top-review">
                     <a href="#tf-review">
@@ -368,36 +370,49 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
                                     var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
                                     if (days > 0) {
                                         var price_per_night = <?php echo $price_per_night; ?>;
+                                        var wc_price_per_night = '<?php echo wc_price( $price_per_night ); ?>';
                                         var total_price = price_per_night * days;
                                         var total_price_html = '<?php echo wc_price( 0 ); ?>';
                                         if (total_price > 0) {
                                             $('.total-days-price-wrap').show();
                                             total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
                                         }
-                                        $('.total-days-price-wrap .total-days').html(<?php echo $price_per_night; ?> +' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
+                                        $('.total-days-price-wrap .total-days').html(wc_price_per_night +' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
                                         $('.total-days-price-wrap .days-total-price').html(total_price_html);
 
                                         //weekly discount (if more than 7 days)
+                                        let base_price_wrapper = $('.tf-apartment-base-price');
                                         if (days >= 30) {
+                                            $('.weekly-discount-wrap').hide();
                                             var monthly_discount = <?php echo $monthly_discount; ?>;
                                             var monthly_discount_html = '<?php echo wc_price( 0 ); ?>';
                                             if (monthly_discount > 0) {
                                                 $('.monthly-discount-wrap').show();
                                                 monthly_discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0', monthly_discount * days);
                                             }
+
                                             $('.monthly-discount-wrap .monthly-discount').html('-' + monthly_discount_html);
+                                            let base_price = (total_price - (monthly_discount * days)) / days;
+                                            base_price_wrapper.html('<?php echo wc_price( 0 ); ?>'.replace('0', base_price));
                                         } else if (days >= 7) {
+                                            $('.monthly-discount-wrap').hide();
                                             var weekly_discount = <?php echo $weekly_discount; ?>;
                                             var weekly_discount_html = '<?php echo wc_price( 0 ); ?>';
                                             if (weekly_discount > 0) {
                                                 $('.weekly-discount-wrap').show();
                                                 weekly_discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0', weekly_discount * days);
                                             }
+
                                             $('.weekly-discount-wrap .weekly-discount').html('-' + weekly_discount_html);
+                                            let base_price = (total_price - (weekly_discount * days)) / days;
+                                            base_price_wrapper.html('<?php echo wc_price( 0 ); ?>'.replace('0', base_price));
                                         } else {
                                             $('.weekly-discount-wrap').hide();
                                             $('.monthly-discount-wrap').hide();
                                         }
+
+                                        //base price update based on weekly discount/ monthly discount
+
 
                                         //service fee per night
 										<?php if ( ! empty( $service_fee ) ): ?>
