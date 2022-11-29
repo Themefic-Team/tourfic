@@ -500,10 +500,10 @@
   @include flexbox();
   gap: 30px;
 
-  .tf-apartment-map{
+  .tf-apartment-map {
     @include flex(0 0 50%);
 
-    h3{
+    h3 {
       font-weight: 600;
       font-size: 24px;
       line-height: 32px;
@@ -511,50 +511,138 @@
       margin-bottom: 24px;
     }
 
-    iframe{
+    iframe {
       border-radius: 8px;
     }
   }
+
   .about-location {
     @include flex(0 0 50%);
 
-    .surroundings_sec_title{
+    .surroundings_sec_title {
       font-weight: 600;
       font-size: 24px;
       line-height: 32px;
       color: $slate80;
       margin-bottom: 8px;
     }
-    .surroundings_subtitle{
+
+    .surroundings_subtitle {
       color: $slate40;
       margin-bottom: 30px;
     }
 
-    .tf-apartment-surronding-criteria{
+    .tf-apartment-surronding-criteria {
       margin-bottom: 30px;
     }
-    .tf-apartment-surronding-criteria-label{
+
+    .tf-apartment-surronding-criteria-label {
       @include flexbox();
       @include align-items(center);
       font-size: 18px;
       font-weight: 500;
 
-      i{
+      i {
         margin-right: 8px;
       }
     }
-    .tf-apartment-surronding-places{
-      margin:0;
+
+    .tf-apartment-surronding-places {
+      margin: 0;
       padding: 0;
       list-style: none;
 
-      li{
+      li {
         padding: 8px 0 8px 32px;
         border-bottom: 1px solid $slate5;
         color: $slate60;
         @include flexbox();
         @include align-items(center);
         @include justify-content(space-between);
+      }
+    }
+  }
+}
+
+.tf-house-rules {
+  .section-heading {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+    color: $slate80;
+    margin-bottom: 24px;
+  }
+
+  .tf-house-rules-wrapper {
+    @include flexbox();
+    gap: 30px;
+    padding: 24px;
+    background-color: $slate0;
+    border: 1px solid $slate5;
+    border-radius: 8px;
+
+    .tf-not-included-house-rules,
+    .tf-included-house-rules{
+      list-style: none;
+      @include flex(0 0 calc(50% - 15px));
+
+      li{
+        margin: 16px 0;
+        position: relative;
+
+        h6{
+          margin: 0 0 5px 0;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 24px;
+          color: $blue60
+        }
+
+        &::before{
+          content: '\f058';
+          font-family: 'Font Awesome 5 Free';
+          position: absolute;
+          top: 0;
+          left: -29px;
+          font-size: 20px;
+          color: $blue60;
+        }
+
+        &::after{
+          content: '';
+          position: absolute;
+          left: -20px;
+          top: 23px;
+          width: 2px;
+          height: 100%;
+          background: $blue60;
+        }
+
+        &:first-child{
+          margin-top: 0;
+        }
+
+        &:last-child{
+          margin-bottom: 0;
+          &::after{
+            display: none;
+          }
+        }
+      }
+    }
+
+    .tf-not-included-house-rules{
+      li{
+        h6{
+          color: $red60;
+        }
+        &::before{
+          content: '\f057';
+          color: $red60;
+        }
+        &::after{
+          background: $red60;
+        }
       }
     }
   }
@@ -833,6 +921,17 @@
 
       .tf-price-list-label {
         color: $slate60;
+      }
+      .tf-price-list-price{
+        font-weight: 500;
+      }
+
+      &.total-price-wrap{
+        padding-top: 10px;
+        margin-top: 16px;
+        border-top: 1px solid $stone5;
+        font-weight: 500;
+        color: $slate80;
       }
     }
   }

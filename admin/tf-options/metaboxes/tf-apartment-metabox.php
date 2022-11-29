@@ -221,6 +221,12 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 						'min' => 0
 					)
 				),
+				array(
+					'id'       => 'weekly_discount',
+					'type'     => 'number',
+					'label'    => __( 'Weekly Discount Per Night', 'tourfic' ),
+					'subtitle' => __( 'Weekly discounts for stays longer than 7 days (per night)', 'tourfic' ),
+				)
 			),
 		),
 		// Information
@@ -257,7 +263,6 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 						),
 					),
 				),
-
 				array(
 					'id'      => 'facilities_heading',
 					'type'    => 'heading',
@@ -289,6 +294,37 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'id'    => 'thumbnail',
 							'type'  => 'image',
 							'label' => __( 'Thumbnail', 'tourfic' ),
+						),
+					),
+				),
+				array(
+					'id'      => 'house_rules_heading',
+					'type'    => 'heading',
+					'content' => __( 'House Rules', 'tourfic' ),
+				),
+				array(
+					'id'           => 'house_rules',
+					'type'         => 'repeater',
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'label'        => __( 'House Rules', 'tourfic' ),
+					'fields'       => array(
+						array(
+							'id'        => 'include',
+							'type'      => 'switch',
+							'label'     => __( 'Include?', 'tourfic' ),
+							'label_on'  => __( 'Yes', 'tourfic' ),
+							'label_off' => __( 'No', 'tourfic' ),
+							'default'   => true,
+						),
+						array(
+							'id'    => 'title',
+							'type'  => 'text',
+							'label' => __( 'Title', 'tourfic' ),
+						),
+						array(
+							'id'    => 'desc',
+							'type'  => 'textarea',
+							'label' => __( 'Description', 'tourfic' ),
 						),
 					),
 				),

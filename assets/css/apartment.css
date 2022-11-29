@@ -508,6 +508,88 @@
   justify-content: space-between;
 }
 
+.tf-house-rules .section-heading {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: #363e4a;
+  margin-bottom: 24px;
+}
+.tf-house-rules .tf-house-rules-wrapper {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  gap: 30px;
+  padding: 24px;
+  background-color: #f8f9fb;
+  border: 1px solid #f0f2f4;
+  border-radius: 8px;
+}
+.tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules,
+.tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules {
+  list-style: none;
+  -webkit-flex: 0 0 calc(50% - 15px);
+  -ms-flex: 0 0 calc(50% - 15px);
+  flex: 0 0 calc(50% - 15px);
+}
+.tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li,
+.tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li {
+  margin: 16px 0;
+  position: relative;
+}
+.tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li h6,
+.tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li h6 {
+  margin: 0 0 5px 0;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #2979ff;
+}
+.tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li::before,
+.tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li::before {
+  content: "\f058";
+  font-family: "Font Awesome 5 Free";
+  position: absolute;
+  top: 0;
+  left: -29px;
+  font-size: 20px;
+  color: #2979ff;
+}
+.tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li::after,
+.tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li::after {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 23px;
+  width: 2px;
+  height: 100%;
+  background: #2979ff;
+}
+.tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li:first-child,
+.tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li:first-child {
+  margin-top: 0;
+}
+.tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li:last-child,
+.tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li:last-child {
+  margin-bottom: 0;
+}
+.tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li:last-child::after,
+.tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li:last-child::after {
+  display: none;
+}
+.tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li h6 {
+  color: #f44336;
+}
+.tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li::before {
+  content: "\f057";
+  color: #f44336;
+}
+.tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li::after {
+  background: #f44336;
+}
+
 #tour-map .tf-container {
   border-top: 1px solid #e8e8e8;
   padding: 60px 0;
@@ -744,6 +826,16 @@
 }
 #tf-apartment-booking .tf-apartment-price-list li .tf-price-list-label {
   color: #607085;
+}
+#tf-apartment-booking .tf-apartment-price-list li .tf-price-list-price {
+  font-weight: 500;
+}
+#tf-apartment-booking .tf-apartment-price-list li.total-price-wrap {
+  padding-top: 10px;
+  margin-top: 16px;
+  border-top: 1px solid #f5f5f4;
+  font-weight: 500;
+  color: #363e4a;
 }
 
 @media only screen and (max-width: 1200px) {

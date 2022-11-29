@@ -47,7 +47,13 @@ function register_tf_apartment_post_type() {
 		'has_archive'        => true,
 		'hierarchical'       => false,
 		'menu_position'      => 26.4,
-		'supports'           => apply_filters( 'tf_apartment_supports', array( 'title', 'editor', 'thumbnail', 'comments', 'author' ) ),
+		'supports'           => apply_filters( 'tf_apartment_supports', array(
+			'title',
+			'editor',
+			'thumbnail',
+			'comments',
+			'author'
+		) ),
 	);
 	register_post_type( 'tf_apartment', $apartment_args );
 }
@@ -105,10 +111,10 @@ function tf_apartment_taxonomies_register() {
 		'rest_base'             => 'apartment_location',
 		'rest_controller_class' => 'WP_REST_Terms_Controller',
 		'show_in_quick_edit'    => true,
-//		'capabilities'          => array(
-//			'assign_terms' => 'edit_tf_hotel',
-//			'edit_terms'   => 'edit_tf_hotel',
-//		),
+		//		'capabilities'          => array(
+		//			'assign_terms' => 'edit_tf_hotel',
+		//			'edit_terms'   => 'edit_tf_hotel',
+		//		),
 	);
 	register_taxonomy( 'apartment_location', 'tf_apartment', apply_filters( 'apartment_location_args', $apartment_location_args ) );
 
@@ -154,10 +160,10 @@ function tf_apartment_taxonomies_register() {
 		"rest_base"             => "apartment_feature",
 		"rest_controller_class" => "WP_REST_Terms_Controller",
 		"show_in_quick_edit"    => true,
-//		'capabilities'          => array(
-//			'assign_terms' => 'edit_tf_apartment',
-//			'edit_terms'   => 'edit_tf_apartment',
-//		),
+		//		'capabilities'          => array(
+		//			'assign_terms' => 'edit_tf_apartment',
+		//			'edit_terms'   => 'edit_tf_apartment',
+		//		),
 	];
 	register_taxonomy( 'apartment_feature', 'tf_apartment', apply_filters( 'apartment_feature_tax_args', $args ) );
 
@@ -184,13 +190,14 @@ register_activation_hook( TF_PATH . 'tourfic.php', 'tf_apartment_rewrite_flush' 
 /**
  * Single Hotel Sidebar Booking Form
  */
-function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
+function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
 
 	$meta            = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
 	$max_adults      = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
 	$max_children    = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
 	$max_infants     = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
 	$price_per_night = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
+	$weekly_discount = ! empty( $meta['weekly_discount'] ) ? $meta['weekly_discount'] : 0;
 	$service_fee     = ! empty( $meta['service_fee'] ) ? $meta['service_fee'] : 0;
 	$cleaning_fee    = ! empty( $meta['cleaning_fee'] ) ? $meta['cleaning_fee'] : 0;
 	?>
@@ -199,16 +206,18 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
     <form id="tf-apartment-booking" class="tf-apartment-side-booking" method="get" autocomplete="off">
         <h4><?php _e( 'Book your Apartment', 'tourfic' ) ?></h4>
         <div class="tf-apartment-form-header">
-            <h3 class="tf-apartment-price-per-night"><?php echo wc_price( $price_per_night ) ?><span><?php _e( '/per night', 'tourfic' ) ?></span></h3>
-	        <?php if ( $comments && ! $disable_review_sec == '1' ): ?>
+            <h3 class="tf-apartment-price-per-night"><?php echo wc_price( $price_per_night ) ?>
+                <span><?php _e( '/per night', 'tourfic' ) ?></span></h3>
+			<?php if ( $comments && ! $disable_review_sec == '1' ): ?>
                 <div class="tf-top-review">
                     <a href="#tf-review">
                         <div class="tf-single-rating">
-                            <i class="fas fa-star"></i> <span><?php echo tf_total_avg_rating( $comments ); ?></span> (<?php tf_based_on_text( count( $comments ) ); ?>)
+                            <i class="fas fa-star"></i> <span><?php echo tf_total_avg_rating( $comments ); ?></span>
+                            (<?php tf_based_on_text( count( $comments ) ); ?>)
                         </div>
                     </a>
                 </div>
-	        <?php endif; ?>
+			<?php endif; ?>
         </div>
 
         <div class="tf-apartment-form-fields">
@@ -216,13 +225,17 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
                 <div class="tf-check-in-date">
                     <label class="tf_label-row">
                         <span class="tf-label"><?php _e( 'Check in', 'tourfic' ); ?></span>
-                        <input type="text" name="check-in-date" id="check-in-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in ) ? 'value="' . $check_in . '"' : '' ?> required>
+                        <input type="text" name="check-in-date" id="check-in-date" onkeypress="return false;"
+                               placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in ) ? 'value="' . $check_in . '"' : '' ?>
+                               required>
                     </label>
                 </div>
                 <div class="tf-check-out-date">
                     <label class="tf_label-row">
                         <span class="tf-label"><?php _e( 'Check out', 'tourfic' ); ?></span>
-                        <input type="text" name="check-out-date" id="check-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in ) ? 'value="' . $check_in . '"' : '' ?> required>
+                        <input type="text" name="check-out-date" id="check-out-date" onkeypress="return false;"
+                               placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in ) ? 'value="' . $check_in . '"' : '' ?>
+                               required>
                     </label>
                 </div>
             </div>
@@ -245,7 +258,8 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
                                         <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
                                         <div class="acr-select">
                                             <div class="acr-dec">-</div>
-                                            <input type="number" name="adults" id="adults" min="1" value="1" max="<?php echo esc_attr( $max_adults ); ?>"/>
+                                            <input type="number" name="adults" id="adults" min="1" value="1"
+                                                   max="<?php echo esc_attr( $max_adults ); ?>"/>
                                             <div class="acr-inc">+</div>
                                         </div>
                                     </div>
@@ -253,7 +267,8 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
                                         <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
                                         <div class="acr-select">
                                             <div class="acr-dec">-</div>
-                                            <input type="number" name="children" id="children" min="0" value="0" max="<?php echo esc_attr( $max_children ); ?>"/>
+                                            <input type="number" name="children" id="children" min="0" value="0"
+                                                   max="<?php echo esc_attr( $max_children ); ?>"/>
                                             <div class="acr-inc">+</div>
                                         </div>
                                     </div>
@@ -261,7 +276,8 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
                                         <div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
                                         <div class="acr-select">
                                             <div class="acr-dec">-</div>
-                                            <input type="number" name="infant" id="infant" min="0" value="0" max="<?php echo esc_attr( $max_infants ); ?>"/>
+                                            <input type="number" name="infant" id="infant" min="0" value="0"
+                                                   max="<?php echo esc_attr( $max_infants ); ?>"/>
                                             <div class="acr-inc">+</div>
                                         </div>
                                     </div>
@@ -279,7 +295,8 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
             <input type="hidden" name="post_id" value="<?php echo get_the_ID(); ?>"/>
 
             <div class="tf-btn">
-                <button class="tf_button tf-submit btn-styled tf_button_blue" type="submit"><?php esc_html_e( 'Reserve', 'tourfic' ); ?></button>
+                <button class="tf_button tf-submit btn-styled tf_button_blue"
+                        type="submit"><?php esc_html_e( 'Reserve', 'tourfic' ); ?></button>
             </div>
         </div>
 
@@ -288,6 +305,14 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
                 <span class="total-days tf-price-list-label"></span>
                 <span class="days-total-price tf-price-list-price"></span>
             </li>
+
+			<?php if ( ! empty( $weekly_discount ) ): ?>
+                <li class="weekly-discount-wrap" style="display: none">
+                    <span class="weekly-discount-label tf-price-list-label"><?php _e( 'Weekly discount', 'tourfic' ); ?></span>
+                    <span class="weekly-discount tf-price-list-price"></span>
+                </li>
+			<?php endif; ?>
+
 			<?php if ( ! empty( $service_fee ) ): ?>
                 <li class="service-fee-wrap" style="display: none">
                     <span class="service-fee-label tf-price-list-label"><?php _e( 'Service Fee', 'tourfic' ); ?></span>
@@ -295,7 +320,7 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
                 </li>
 			<?php endif; ?>
 
-			<?php if ( $cleaning_fee ): ?>
+			<?php if ( ! empty( $cleaning_fee ) ): ?>
                 <li class="cleaning-fee-wrap" style="display: none">
                     <span class="cleaning-fee-label tf-price-list-label"><?php _e( 'Cleaning Fee', 'tourfic' ); ?></span>
                     <span class="cleaning-fee tf-price-list-price"><?php echo wc_price( $cleaning_fee ); ?></span>
@@ -308,7 +333,7 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
             </li>
         </ul>
 
-	    <?php wp_nonce_field( 'check_room_avail_nonce', 'tf_room_avail_nonce' ); ?>
+		<?php wp_nonce_field( 'check_room_avail_nonce', 'tf_room_avail_nonce' ); ?>
     </form>
 
     <script>
@@ -328,7 +353,7 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
                             minDate: new Date(inSelectedDates).fp_incr(1),
                             dateFormat: "Y/m/d",
                             onChange: function (outSelectedDates, dateStr, instance) {
-		                        <?php if ( ! empty( $price_per_night ) ): ?>
+								<?php if ( ! empty( $price_per_night ) ): ?>
                                 //calculate total days
                                 if (inSelectedDates[0] && outSelectedDates[0]) {
                                     var diff = Math.abs(outSelectedDates[0] - inSelectedDates[0]);
@@ -344,8 +369,22 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
                                         $('.total-days-price-wrap .total-days').html(<?php echo $price_per_night; ?> +' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
                                         $('.total-days-price-wrap .days-total-price').html(total_price_html);
 
+                                        //weekly discount (if more than 7 days)
+                                        if (days >= 7) {
+                                            var weekly_discount = <?php echo $weekly_discount; ?>;
+                                            var weekly_discount_html = '<?php echo wc_price( 0 ); ?>';
+                                            if (weekly_discount > 0) {
+                                                $('.weekly-discount-wrap').show();
+                                                weekly_discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0', weekly_discount * days);
+                                            }
+                                            $('.weekly-discount-wrap .weekly-discount').html('-' + weekly_discount_html);
+                                        } else {
+                                            $('.weekly-discount-wrap').hide();
+                                            weekly_discount = 0;
+                                        }
+
                                         //service fee per night
-				                        <?php if ( ! empty( $service_fee ) ): ?>
+										<?php if ( ! empty( $service_fee ) ): ?>
                                         var service_fee = <?php echo $service_fee; ?>;
                                         var service_fee_html = '<?php echo wc_price( 0 ); ?>';
                                         if (service_fee > 0) {
@@ -353,18 +392,18 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
                                             service_fee_html = '<?php echo wc_price( 0 ); ?>'.replace('0', service_fee * days);
                                         }
                                         $('.service-fee-wrap .service-fee').html(service_fee_html);
-				                        <?php endif; ?>
+										<?php endif; ?>
 
                                         //cleaning fee
-				                        <?php if ( ! empty( $cleaning_fee ) ): ?>
+										<?php if ( ! empty( $cleaning_fee ) ): ?>
                                         $('.cleaning-fee-wrap').show();
-				                        <?php endif; ?>
+										<?php endif; ?>
 
                                         //total price
                                         var total_price_html = '<?php echo wc_price( 0 ); ?>';
                                         if (total_price > 0) {
                                             $('.total-price-wrap').show();
-                                            total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price + (service_fee * days) + <?php echo $cleaning_fee; ?>);
+                                            total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price + (service_fee * days) + <?php echo $cleaning_fee; ?> - (weekly_discount * days));
                                         }
                                         $('.total-price-wrap .total-price').html(total_price_html);
                                     } else {
@@ -374,7 +413,7 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
                                         $('.total-price-wrap').hide();
                                     }
                                 }
-		                        <?php endif; ?>
+								<?php endif; ?>
 
                                 //minimum 5 days
                                 if (inSelectedDates[0] && outSelectedDates[0]) {
@@ -391,7 +430,7 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
                                     }
                                 }
                             },
-		                    <?php tf_flatpickr_locale();?>
+							<?php tf_flatpickr_locale();?>
 
 
                         });
@@ -404,7 +443,7 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec) {
                     enableTime: false,
                     minDate: "today",
                     dateFormat: "Y/m/d",
-		            <?php tf_flatpickr_locale();?>
+					<?php tf_flatpickr_locale();?>
                 });
 
             });

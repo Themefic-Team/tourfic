@@ -485,6 +485,36 @@ while ( have_posts() ) : the_post();
             <!-- End Review Section -->
 		<?php endif; ?>
 
+		<?php if ( ! empty( tf_data_types( $meta['house_rules'] ) ) ): ?>
+            <!-- Start House Rules -->
+            <div class="tf-house-rules sp-50">
+                <div class="tf-container">
+                    <h3 class="section-heading"><?php _e( 'House Rules', 'tourfic' ); ?></h3>
+                    <div class="tf-house-rules-wrapper">
+                        <ul class="tf-included-house-rules">
+							<?php
+							foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
+								if ( $house_rule['include'] == '1' ) {
+                                    echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $house_rule['title'] ), esc_html( $house_rule['desc'] ) );
+								}
+							}
+							?>
+                        </ul>
+                        <ul class="tf-not-included-house-rules">
+	                        <?php
+	                        foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
+		                        if ( $house_rule['include'] !== '1' ) {
+			                        echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $house_rule['title'] ), esc_html( $house_rule['desc'] ) );
+		                        }
+	                        }
+	                        ?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- End House Rules -->
+		<?php endif; ?>
+
 		<?php if ( $faqs ): ?>
             <!-- FAQ section Start -->
             <div class="tf-faq-wrapper tf-apartment-faq sp-30">
