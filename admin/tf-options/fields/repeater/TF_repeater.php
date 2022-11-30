@@ -153,7 +153,8 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 
 		}
 		public function sanitize() {
-			return wp_kses_post($this->value);
+			// return wp_kses_post($this->value);
+			return $this->value;
 		}
 		// public function enqueue() {
 
