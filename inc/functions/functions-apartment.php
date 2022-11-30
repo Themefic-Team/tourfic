@@ -346,11 +346,11 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
 		<?php wp_nonce_field( 'tf_apartment_booking', 'tf_apartment_nonce' ); ?>
     </form>
 
-    <?php
-    $booked_dates = tf_apartment_booked_days( get_the_ID() );
+	<?php
+	$booked_dates = tf_apartment_booked_days( get_the_ID() );
 
-    tf_var_dump($booked_dates);
-    ?>
+	tf_var_dump( $booked_dates );
+	?>
 
     <script>
         (function ($) {
@@ -390,7 +390,7 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
                                             $('.total-days-price-wrap').show();
                                             total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
                                         }
-                                        $('.total-days-price-wrap .total-days').html(wc_price_per_night +' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
+                                        $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
                                         $('.total-days-price-wrap .days-total-price').html(total_price_html);
 
                                         //weekly discount (if more than 7 days)
@@ -567,30 +567,38 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
 	<?php
 }
 
-if(!function_exists('tf_apartment_booked_days')){
-    function tf_apartment_booked_days($post_id){
-        $wc_orders = wc_get_orders( array(
-            'limit' => -1,
-            'status' => array('wc-processing', 'wc-completed'),
-            'type' => 'shop_order',
-//            'meta_key' => '_post_id',
-//            'meta_value' => $post_id,
-        ) );
+if ( ! function_exists( 'tf_apartment_booked_days' ) ) {
+	function tf_apartment_booked_days( $post_id ) {
+		//get wc orders _post_id = $post_id
+		$wc_orders = wc_get_orders( array(
+			'post_status' => array( 'wc-processing', 'wc-completed' ),
+			'limit'       => - 1,
+			'meta_query'  => array(
+				array(
+					'key'     => '_post_id',
+					'value'   => $post_id,
+					'compare' => '='
+				),
+			)
+		) );
 
-        tf_var_dump($wc_orders);
+		$booked_days = array();
+		foreach ( $wc_orders as $wc_order ) {
+			$order_id = $wc_order->get_id();
+            $order_items = $wc_order->get_items();
+            foreach ( $order_items as $item_id => $item ) {
+                $product_id = $item->get_product_id();
+                $check_in_date = get_post_meta( $item_id, 'check_in', true );
+                $check_out_date = get_post_meta( $item_id, 'check_out', true );
+                $booked_days[] = array(
+                    'from' => $check_in_date,
+                    'to'   => $check_out_date,
+                );
+            }
+		}
 
-        $booked_days = array();
-        foreach ($wc_orders as $wc_order){
-            $check_in_date = get_post_meta($wc_order->get_id(), 'check_in', true);
-            $check_out_date = get_post_meta($wc_order->get_id(), 'check_out', true);
-            $booked_days[] = array(
-                'check_in' => $check_in_date,
-                'check_out' => $check_out_date,
-            );
-        }
-
-        return $booked_days;
-    }
+		return $booked_days;
+	}
 }
 
 /**
