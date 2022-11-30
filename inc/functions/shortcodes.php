@@ -198,8 +198,10 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 					}
 					//get and store all the prices for each room
 					$room_price = [];
-					foreach( $rooms as $room ){
-						$room_price[] = ! empty( $room['price'] ) ? $room['price'] : 0;
+					if(!empty($rooms)){
+						foreach( $rooms as $room ){
+							$room_price[] = ! empty( $room['price'] ) ? $room['price'] : 0;
+						}
 					}
 
 					?>
