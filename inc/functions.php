@@ -1139,20 +1139,19 @@ function tf_migrate_option_data(){
 			$old_meta = get_post_meta( $tour->ID );
 			if(!empty($old_meta['tf_tours_option'])){
 				$tour_options         = unserialize( $old_meta['tf_tours_option'][0] );
+	
+				if(isset($tour_options['hightlights_thumbnail']) && is_array($tour_options['hightlights_thumbnail'])){
+					$tour_options['hightlights_thumbnail'] = $tour_options['hightlights_thumbnail']['url'];
+				}
+				if(isset($tour_options['include-exclude-bg']) && is_array($tour_options['include-exclude-bg'])){
+					$tour_options['include-exclude-bg'] = $tour_options['include-exclude-bg']['url'];
+				}
+				update_post_meta(
+					$tour->ID,
+					'tf_tours_opt',
+					$tour_options
+				);
 			}
-
-			if(isset($tour_options['hightlights_thumbnail']) && is_array($tour_options['hightlights_thumbnail'])){
-				$tour_options['hightlights_thumbnail'] = $tour_options['hightlights_thumbnail']['url'];
-			}
-			if(isset($tour_options['include-exclude-bg']) && is_array($tour_options['include-exclude-bg'])){
-				$tour_options['include-exclude-bg'] = $tour_options['include-exclude-bg']['url'];
-			}
-			update_post_meta(
-				$tour->ID,
-				'tf_tours_opt',
-				$tour_options
-			);
-
 
 		}
 		/** Tour Destinations Image Fix */
@@ -1186,14 +1185,15 @@ function tf_migrate_option_data(){
 			$old_meta = get_post_meta( $hotel->ID );
 			if(!empty($old_meta['tf_hotel'])){
 				$hotel_options         = unserialize( $old_meta['tf_hotel'][0] );
-			}
+			
 
-			// $tour_options = serialize( $tour_options );
-			update_post_meta(
-				$hotel->ID,
-				'tf_hotels_opt',
-				$hotel_options
-			);
+				// $tour_options = serialize( $tour_options );
+				update_post_meta(
+					$hotel->ID,
+					'tf_hotels_opt',
+					$hotel_options
+				);
+			}
 
 		}
 
