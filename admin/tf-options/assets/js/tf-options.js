@@ -544,6 +544,21 @@
                 }
             });
 
+             // Replace Old editor
+             add_value.find('.wp-editor-wrap').each(function () {
+                var textarea = $(this).find('.tf_wp_editor').show();
+                // Get content of a specific editor:
+                var tf_editor_ex_data = $('#'+textarea.attr('id')+'').val();
+                if(tf_editor_ex_data && typeof tf_editor_ex_data !== "undefined"){
+                    var textarea_content = tinymce.get(textarea.attr('id')).getContent();
+                }else{
+                    var textarea_content = '';
+                }
+                textarea.val(textarea_content);
+                $(this).closest('.tf-field-textarea').append(textarea);
+                $(this).remove();
+            });
+
             // Update Data Append value
             var append = $this_parent.find('.tf-repeater-wrap-' + id + '');
 
@@ -551,6 +566,7 @@
 
             // replace new editor
             add_value.find('textarea.parent_wp_editor').each(function () {
+                var count =  Math.random().toString(36).substring(3,9) + 1 ; 
                 this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + count + '');
                 var parent_repeater_id = $(this).attr('id');
                 TF_wp_editor(parent_repeater_id);
@@ -711,8 +727,8 @@
             $(this).closest('.tf-repeater-wrap').append(clone_value).show();
 
             // Clone Wp Editor
-            clone_value.find('textarea.parent_wp_editor, textarea.wp_editor').each(function () {
-
+            clone_value.find('textarea.parent_wp_editor, textarea.wp_editor').each(function () { 
+                var count =  Math.random().toString(36).substring(3,9) + 1 ; 
                 this.id = this.id.replace('' + current_field + '__' + repeater_count, '' + current_field + '__' + count + '');
                 var parent_repeater_id = $(this).attr('id');
                 TF_wp_editor(parent_repeater_id);
