@@ -343,8 +343,14 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
             </li>
         </ul>
 
-		<?php wp_nonce_field( 'check_room_avail_nonce', 'tf_room_avail_nonce' ); ?>
+		<?php wp_nonce_field( 'tf_apartment_booking', 'tf_apartment_nonce' ); ?>
     </form>
+
+    <?php
+    $booked_dates = tf_apartment_booked_days( get_the_ID() );
+
+    tf_var_dump($booked_dates);
+    ?>
 
     <script>
         (function ($) {
@@ -357,6 +363,13 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
                     onReady: function (selectedDates, dateStr, instance) {
                         //minimum 5 days
                     },
+                    disabled: [
+                        function (date) {
+                            // return true to disable
+                            return (date.getDay() === 0 || date.getDay() === 6);
+
+                        }
+                    ],
                     onChange: function (inSelectedDates, dateStr, instance) {
                         const checkOutDate = flatpickr("#tf-apartment-booking #check-out-date", {
                             enableTime: false,
@@ -409,10 +422,9 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
                                         } else {
                                             $('.weekly-discount-wrap').hide();
                                             $('.monthly-discount-wrap').hide();
+
+                                            base_price_wrapper.html(wc_price_per_night);
                                         }
-
-                                        //base price update based on weekly discount/ monthly discount
-
 
                                         //service fee per night
 										<?php if ( ! empty( $service_fee ) ): ?>
@@ -553,4 +565,41 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
     </script>
 
 	<?php
+}
+
+if(!function_exists('tf_apartment_booked_days')){
+    function tf_apartment_booked_days($post_id){
+        $wc_orders = wc_get_orders( array(
+            'limit' => -1,
+            'status' => array('wc-processing', 'wc-completed'),
+            'type' => 'shop_order',
+//            'meta_key' => '_post_id',
+//            'meta_value' => $post_id,
+        ) );
+
+        tf_var_dump($wc_orders);
+
+        $booked_days = array();
+        foreach ($wc_orders as $wc_order){
+            $check_in_date = get_post_meta($wc_order->get_id(), 'check_in', true);
+            $check_out_date = get_post_meta($wc_order->get_id(), 'check_out', true);
+            $booked_days[] = array(
+                'check_in' => $check_in_date,
+                'check_out' => $check_out_date,
+            );
+        }
+
+        return $booked_days;
+    }
+}
+
+/**
+ * WooCommerce hotel Functions
+ *
+ * @include
+ */
+if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-apartment.php' ) ) {
+	require_once TF_INC_PATH . 'functions/woocommerce/wc-apartment.php';
+} else {
+	tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-apartment.php' );
 }

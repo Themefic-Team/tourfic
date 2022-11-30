@@ -234,13 +234,6 @@
         });
 
         /**
-         * Recent Hotel - Tour
-         *
-         * Slick
-         */
-
-
-        /**
          * Scroll to room reserve table
          */
         $(".reserve-button a").click(function () {
@@ -379,6 +372,74 @@
         });
         //first li click
         $('.tf-single-tour-pricing .tf-price-tab li:first-child').trigger('click');
+
+        //###############################
+        //     Apartment                #
+        //###############################
+
+        /**
+         * Ajax apartment booking
+         *
+         * #tf-apartment-booking
+         */
+        $(document).on('submit', 'form#tf-apartment-booking', function (e) {
+            e.preventDefault();
+
+            var $this = $(this);
+
+            var formData = new FormData(this);
+            formData.append('action', 'tf_apartment_booking');
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (data) {
+                    $this.block({
+                        message: null,
+                        overlayCSS: {
+                            background: "#fff",
+                            opacity: .5
+                        }
+                    });
+
+                    $('.tf-notice-wrapper').html("").hide();
+                },
+                complete: function (data) {
+                    $this.unblock();
+                },
+                success: function (data) {
+                    $this.unblock();
+
+                    var response = JSON.parse(data);
+
+                    if (response.status === 'error') {
+                        $.fancybox.close();
+                        if (response.errors) {
+                            response.errors.forEach(function (text) {
+                                notyf.error(text);
+                            });
+                        }
+
+                        return false;
+                    } else {
+
+                        if (response.redirect_to) {
+                            window.location.replace(response.redirect_to);
+                        } else {
+                            jQuery(document.body).trigger('added_to_cart');
+                        }
+
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+        });
 
         //###############################
         //        Search                #
@@ -949,7 +1010,6 @@
                 } else {
                     notyf.error(tf_params.wishlist_remove_error);
                 }
-                ;
             }
 
         });
@@ -1545,6 +1605,8 @@
     }
     var postsCount = $('.tf-posts-count').html();
     $('.tf-total-results').find('span').html(postsCount);
+
+
 
 })(jQuery, window);
 
