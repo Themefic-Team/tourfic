@@ -1137,7 +1137,9 @@ function tf_migrate_option_data(){
 		$tours = get_posts( [ 'post_type' => 'tf_tours', 'numberposts' => - 1, ] );
 		foreach ( $tours as $tour ) {
 			$old_meta = get_post_meta( $tour->ID );
-			$tour_options         = unserialize( $old_meta['tf_tours_option'][0] );
+			if(!empty($old_meta['tf_tours_option'])){
+				$tour_options         = unserialize( $old_meta['tf_tours_option'][0] );
+			}
 
 			if(isset($tour_options['hightlights_thumbnail']) && is_array($tour_options['hightlights_thumbnail'])){
 				$tour_options['hightlights_thumbnail'] = $tour_options['hightlights_thumbnail']['url'];
@@ -1182,7 +1184,9 @@ function tf_migrate_option_data(){
 
 		foreach ( $hotels as $hotel ) {
 			$old_meta = get_post_meta( $hotel->ID );
-			$hotel_options         = unserialize( $old_meta['tf_hotel'][0] );
+			if(!empty($old_meta['tf_hotel'])){
+				$hotel_options         = unserialize( $old_meta['tf_hotel'][0] );
+			}
 
 			// $tour_options = serialize( $tour_options );
 			update_post_meta(
