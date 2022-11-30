@@ -894,6 +894,8 @@ function tf_admin_order_data_migration(){
 		foreach ( $order as $item_id => $item ) {
 			$itemmeta = wc_get_order( $item);
 
+			$tf_ordering_date =  $itemmeta->get_date_created();
+			
 			//Order Data Insert 
 			$billinginfo = [
 				'billing_first_name' => $itemmeta->get_billing_first_name(),
@@ -980,7 +982,7 @@ function tf_admin_order_data_migration(){
 								$itemmeta->get_customer_id(),
 								$itemmeta->get_payment_method(),
 								$itemmeta->get_status(),
-								date('Y-m-d H:i:s')
+								$tf_ordering_date->date('Y-m-d H:i:s')
 							)
 						)
 					);
@@ -996,7 +998,7 @@ function tf_admin_order_data_migration(){
 					$child = wc_get_order_item_meta( $item_key, 'Children', true );
 					$infants = wc_get_order_item_meta( $item_key, 'Infants', true );
 					
-					if ( $tour_date ) {
+					if ( !empty($tour_date) ) {
 						list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
 					}
 		
@@ -1038,7 +1040,7 @@ function tf_admin_order_data_migration(){
 								$itemmeta->get_customer_id(),
 								$itemmeta->get_payment_method(),
 								$itemmeta->get_status(),
-								date('Y-m-d H:i:s')
+								$tf_ordering_date->date('Y-m-d H:i:s')
 							)
 						)
 					);
