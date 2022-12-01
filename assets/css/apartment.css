@@ -770,7 +770,6 @@
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
-  margin-bottom: 4px;
   display: inline-block;
 }
 #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-date #check-in-date,
@@ -804,7 +803,6 @@
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
-  margin-bottom: 8px;
   display: inline-block;
 }
 #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap {
@@ -867,11 +865,9 @@
   .host-top img {
     margin-bottom: 15px;
   }
-
   .host-bottom ul li span {
     float: none;
   }
-
   .tf-apartment .features-details ul {
     display: block;
   }
@@ -892,7 +888,6 @@
   .tf-apartment-title .tf-wishlist-button {
     font-size: 14px;
   }
-
   .tf-apartment .hero-wrapper {
     display: block;
   }
@@ -934,7 +929,6 @@
     order: 1;
     margin-bottom: 35px;
   }
-
   .share-tour-content {
     left: 50px;
   }
@@ -951,11 +945,9 @@
   .share-tour-content .share-center-copy-form {
     display: block;
   }
-
   .tf-dropdown-content li {
     display: block;
   }
-
   .tf-map-content-wrapper iframe {
     height: 280px;
   }
@@ -970,11 +962,9 @@
   .tf-apartment .features-details ul {
     display: block;
   }
-
   .tf-map-content-wrapper iframe {
     height: 200px;
   }
-
   .apartment-question .apartment-qa-wrapper {
     flex-direction: column;
   }

@@ -87,15 +87,6 @@ while ( have_posts() ) : the_post();
 	}
 	$video = ! empty( $meta['video'] ) ? $meta['video'] : '';
 
-	// FAQ
-	$faqs = ! empty( $meta['faq'] ) ? $meta['faq'] : '';
-	if ( ! empty( $faqs ) && gettype( $faqs ) == "string" ) {
-		$tf_apartment_faqs_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-		}, $faqs );
-		$faqs                    = unserialize( $tf_apartment_faqs_value );
-	}
-
 	$share_text = get_the_title();
 	$share_link = get_permalink( $post_id );
 	?>
@@ -408,7 +399,7 @@ while ( have_posts() ) : the_post();
 									}
 									?>
                                 </ul>
-                                <a href="" class="tf_button btn-styled"><i class="far fa-comments"></i><?php _e('Contact Host', 'tourfic') ?></a>
+                                <a href="" class="tf_button btn-styled"><i class="far fa-comments"></i><?php _e( 'Contact Host', 'tourfic' ) ?></a>
                             </div>
                         </div>
                     </div>
@@ -440,7 +431,7 @@ while ( have_posts() ) : the_post();
                                     <p class="surroundings_subtitle"><?php echo esc_html( $meta['surroundings_subtitle'] ); ?></p>
 								<?php endif; ?>
 
-								<?php if ( ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
+								<?php if ( isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
                                     <div class="tf-apartment-surronding-wrapper">
 										<?php foreach ( tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
                                             <div class="tf-apartment-surronding-criteria">
@@ -449,7 +440,7 @@ while ( have_posts() ) : the_post();
 													<?php echo esc_html( $surroundings_place['place_criteria_label'] ); ?>
                                                 </div>
 
-												<?php if ( ! empty( tf_data_types( $surroundings_place['places'] ) ) ): ?>
+												<?php if ( isset( $surroundings_place['places'] ) && ! empty( tf_data_types( $surroundings_place['places'] ) ) ): ?>
                                                     <ul class="tf-apartment-surronding-places">
 														<?php foreach ( tf_data_types( $surroundings_place['places'] ) as $place ): ?>
                                                             <li>
@@ -484,7 +475,7 @@ while ( have_posts() ) : the_post();
             <!-- End Review Section -->
 		<?php endif; ?>
 
-		<?php if ( ! empty( tf_data_types( $meta['house_rules'] ) ) ): ?>
+		<?php if ( isset( $meta['house_rules'] ) && ! empty( tf_data_types( $meta['house_rules'] ) ) ): ?>
             <!-- Start House Rules -->
             <div class="tf-house-rules sp-50">
                 <div class="tf-container">
@@ -494,19 +485,19 @@ while ( have_posts() ) : the_post();
 							<?php
 							foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
 								if ( $house_rule['include'] == '1' ) {
-                                    echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $house_rule['title'] ), esc_html( $house_rule['desc'] ) );
+									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $house_rule['title'] ), esc_html( $house_rule['desc'] ) );
 								}
 							}
 							?>
                         </ul>
                         <ul class="tf-not-included-house-rules">
-	                        <?php
-	                        foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
-		                        if ( $house_rule['include'] !== '1' ) {
-			                        echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $house_rule['title'] ), esc_html( $house_rule['desc'] ) );
-		                        }
-	                        }
-	                        ?>
+							<?php
+							foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
+								if ( $house_rule['include'] !== '1' ) {
+									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $house_rule['title'] ), esc_html( $house_rule['desc'] ) );
+								}
+							}
+							?>
                         </ul>
                     </div>
                 </div>
@@ -514,7 +505,7 @@ while ( have_posts() ) : the_post();
             <!-- End House Rules -->
 		<?php endif; ?>
 
-		<?php if ( $faqs ): ?>
+		<?php if ( isset( $meta['faq'] ) && ! empty( tf_data_types( $meta['faq'] ) ) ): ?>
             <!-- FAQ section Start -->
             <div class="tf-faq-wrapper tf-apartment-faq sp-30">
                 <div class="tf-container">
@@ -525,7 +516,7 @@ while ( have_posts() ) : the_post();
 
                     <div class="tf-faq-content-wrapper">
                         <div class="tf-faq-items-wrapper">
-							<?php foreach ( $faqs as $key => $faq ): ?>
+							<?php foreach ( tf_data_types( $meta['faq'] ) as $key => $faq ): ?>
                                 <div id="tf-faq-item">
                                     <div class="tf-faq-title">
                                         <h4><?php esc_html_e( $faq['title'] ); ?></h4>

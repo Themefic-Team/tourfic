@@ -201,6 +201,7 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
 	$monthly_discount = ! empty( $meta['monthly_discount'] ) ? $meta['monthly_discount'] : 0;
 	$service_fee      = ! empty( $meta['service_fee'] ) ? $meta['service_fee'] : 0;
 	$cleaning_fee     = ! empty( $meta['cleaning_fee'] ) ? $meta['cleaning_fee'] : 0;
+	$booked_dates     = tf_apartment_booked_days( get_the_ID() );
 	?>
 
     <!-- Start Booking widget -->
@@ -346,12 +347,6 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
 		<?php wp_nonce_field( 'tf_apartment_booking', 'tf_apartment_nonce' ); ?>
     </form>
 
-	<?php
-	$booked_dates = tf_apartment_booked_days( get_the_ID() );
-
-	tf_var_dump( $booked_dates );
-	?>
-
     <script>
         (function ($) {
             $(document).ready(function () {
@@ -360,21 +355,27 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
                     enableTime: false,
                     minDate: "today",
                     dateFormat: "Y/m/d",
-                    onReady: function (selectedDates, dateStr, instance) {
-                        //minimum 5 days
-                    },
-                    disabled: [
-                        function (date) {
-                            // return true to disable
-                            return (date.getDay() === 0 || date.getDay() === 6);
-
-                        }
+                    disable: [
+						<?php foreach ( $booked_dates as $booked_date ) : ?>
+                        {
+                            from: "<?php echo $booked_date['check_in']; ?>",
+                            to: "<?php echo $booked_date['check_out']; ?>"
+                        },
+						<?php endforeach; ?>
                     ],
                     onChange: function (inSelectedDates, dateStr, instance) {
                         const checkOutDate = flatpickr("#tf-apartment-booking #check-out-date", {
                             enableTime: false,
                             minDate: new Date(inSelectedDates).fp_incr(1),
                             dateFormat: "Y/m/d",
+                            disable: [
+								<?php foreach ( $booked_dates as $booked_date ) : ?>
+                                {
+                                    from: "<?php echo $booked_date['check_in']; ?>",
+                                    to: "<?php echo $booked_date['check_out']; ?>"
+                                },
+								<?php endforeach; ?>
+                            ],
                             onChange: function (outSelectedDates, dateStr, instance) {
 								<?php if ( ! empty( $price_per_night ) ): ?>
                                 //calculate total days
@@ -477,8 +478,6 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
                                 }
                             },
 							<?php tf_flatpickr_locale();?>
-
-
                         });
                     }
 
@@ -495,106 +494,31 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
             });
         })(jQuery);
 
-        /*onChange: function (selectedDates, dateStr, instance) {
-            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-
-	        <?php if ( ! empty( $price_per_night ) ): ?>
-            //calculate total days
-            if (selectedDates[0] && selectedDates[1]) {
-                var diff = Math.abs(selectedDates[1] - selectedDates[0]);
-                var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-                if (days > 0) {
-                    var price_per_night = <?php echo $price_per_night; ?>;
-                    var total_price = price_per_night * days;
-                    var total_price_html = '<?php echo wc_price( 0 ); ?>';
-                    if (total_price > 0) {
-                        $('.total-days-price-wrap').show();
-                        total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
-                    }
-                    $('.total-days-price-wrap .total-days').html(<?php echo $price_per_night; ?> +' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
-                    $('.total-days-price-wrap .days-total-price').html(total_price_html);
-
-                    //service fee per night
-			        <?php if ( ! empty( $service_fee ) ): ?>
-                    var service_fee = <?php echo $service_fee; ?>;
-                    var service_fee_html = '<?php echo wc_price( 0 ); ?>';
-                    if (service_fee > 0) {
-                        $('.service-fee-wrap').show();
-                        service_fee_html = '<?php echo wc_price( 0 ); ?>'.replace('0', service_fee * days);
-                    }
-                    $('.service-fee-wrap .service-fee').html(service_fee_html);
-			        <?php endif; ?>
-
-                    //cleaning fee
-			        <?php if ( ! empty( $cleaning_fee ) ): ?>
-                    $('.cleaning-fee-wrap').show();
-			        <?php endif; ?>
-
-                    //total price
-                    var total_price_html = '<?php echo wc_price( 0 ); ?>';
-                    if (total_price > 0) {
-                        $('.total-price-wrap').show();
-                        total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price + (service_fee * days) + <?php echo $cleaning_fee; ?>);
-                    }
-                    $('.total-price-wrap .total-price').html(total_price_html);
-                } else {
-                    $('.total-days-price-wrap').hide();
-                    $('.service-fee-wrap').hide();
-                    $('.cleaning-fee-wrap').hide();
-                    $('.total-price-wrap').hide();
-                }
-            }
-	        <?php endif; ?>
-
-            //minimum 5 days
-            if (selectedDates[0] && selectedDates[1]) {
-                var diff = Math.abs(selectedDates[1] - selectedDates[0]);
-                var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-                if (days < 5) {
-                    $('.tf-submit').attr('disabled', 'disabled');
-                    $('.tf-submit').addClass('disabled');
-                    $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required"><b><?php _e( 'Minimum 5 days', 'tourfic' ); ?></b></span>');
-                } else {
-                    $('.tf-submit').removeAttr('disabled');
-                    $('.tf-submit').removeClass('disabled');
-                    $('#tf-required').remove();
-                }
-            }
-        },*/
-
     </script>
-
 	<?php
 }
 
 if ( ! function_exists( 'tf_apartment_booked_days' ) ) {
 	function tf_apartment_booked_days( $post_id ) {
-		//get wc orders _post_id = $post_id
 		$wc_orders = wc_get_orders( array(
-			'post_status' => array( 'wc-processing', 'wc-completed' ),
+			'post_status' => array( 'wc-processing' ),
 			'limit'       => - 1,
-			'meta_query'  => array(
-				array(
-					'key'     => '_post_id',
-					'value'   => $post_id,
-					'compare' => '='
-				),
-			)
 		) );
 
 		$booked_days = array();
 		foreach ( $wc_orders as $wc_order ) {
-			$order_id = $wc_order->get_id();
-            $order_items = $wc_order->get_items();
-            foreach ( $order_items as $item_id => $item ) {
-                $product_id = $item->get_product_id();
-                $check_in_date = get_post_meta( $item_id, 'check_in', true );
-                $check_out_date = get_post_meta( $item_id, 'check_out', true );
-                $booked_days[] = array(
-                    'from' => $check_in_date,
-                    'to'   => $check_out_date,
-                );
-            }
+			$order_items = $wc_order->get_items();
+			foreach ( $order_items as $item_id => $item ) {
+				$item_post_id = wc_get_order_item_meta( $item_id, '_post_id', true );
+				if ( $item_post_id == $post_id ) {
+					$check_in_date  = wc_get_order_item_meta( $item_id, 'check_in', true );
+					$check_out_date = wc_get_order_item_meta( $item_id, 'check_out', true );
+					$booked_days[]  = array(
+						'check_in'  => $check_in_date,
+						'check_out' => $check_out_date,
+					);
+				}
+			}
 		}
 
 		return $booked_days;
