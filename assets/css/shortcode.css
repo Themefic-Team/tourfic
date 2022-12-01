@@ -585,6 +585,10 @@ Booking form mobile version
     }
     /* Recent blog end */
 
+    .tf-hotel-grid .tf-slider-item {
+        width: 100%;
+        float: left;
+    }
 }
 
 @media screen and (max-width: 450px) {
