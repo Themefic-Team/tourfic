@@ -427,6 +427,24 @@
             });
             var features = features.join();
 
+            //get tour attraction checked values
+            var attractions = [];
+            $('[name*=tf_attractions]').each(function () {
+                if ($(this).is(':checked')) {
+                    attractions.push($(this).val());
+                }
+            });
+            var attractions = attractions.join();
+
+            //get tour activities checked values
+            var activities = [];
+            $('[name*=tf_activities]').each(function () {
+                if ($(this).is(':checked')) {
+                    activities.push($(this).val());
+                }
+            });
+            var activities = activities.join();
+
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
             formData.append('type', posttype);
@@ -438,6 +456,8 @@
             formData.append('checkout', checkout);
             formData.append('filters', filters);
             formData.append('features', features);
+            formData.append('attractions', attractions);
+            formData.append('activities', activities);
             formData.append('checked', checked);
             if (startprice) {
                 formData.append('startprice', startprice);
@@ -501,7 +521,7 @@
             e.preventDefault();
             makeFilter()
         });
-        $(document).on('change', '[name*=tf_filters],[name*=tf_features]', function () {
+        $(document).on('change', '[name*=tf_filters],[name*=tf_features],[name*=tf_attractions],[name*=tf_activities]', function () {
             makeFilter();
         })
 
@@ -1364,10 +1384,15 @@
 
         // FAQ Accordion
         $('.tf-faq-title').click(function () {
-            $(this).toggleClass('active');
-            $(this).parent().find('.arrow').toggleClass('arrow-animate');
-            $(this).parent().find('.tf-faq-desc').slideToggle();
-            $(this).parents('#tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
+            var $this = $(this);
+            if (!$this.hasClass("active")) {
+                $(".tf-faq-desc").slideUp(400);
+                $(".tf-faq-title").removeClass("active");
+                $('.arrow').removeClass('arrow-animate');
+            }
+            $this.toggleClass("active");
+            $this.next().slideToggle();
+            $('.arrow',this).toggleClass('arrow-animate');
         });
 
         /*

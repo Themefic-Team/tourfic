@@ -14,6 +14,13 @@
  * Meta field
  * Common
  */
+
+.tf-depend-hidden.tf-depend-on {
+    display: none;
+}
+.tf-depend-hidden{
+    display: block;
+}
 .csf-section .csf-field.tf-csf-disable {
     opacity: 1;
     user-select: none;
@@ -30,7 +37,9 @@
     opacity: 0.25;
     z-index: 10;
 }
-
+.tf-csf-disable.tf-csf-pro {
+    z-index: 9999999999;
+}
 .csf-section .csf-field.tf-csf-pro {
     cursor: pointer;
 }
@@ -44,6 +53,7 @@
     margin: 5px 0 0 0;
     font-size: 12px;
     font-weight: 600;
+    line-height: 13px;
 }
 .tf-csf-badge .tf-upcoming {
     background: #006600;
@@ -60,7 +70,14 @@
 .room-repeater .tf-order_id {
     display: none;
 }
-
+button.tf-order-remove{
+    background: #f44336 !important;
+    border: 1px solid #f44336 !important;
+    color: #fff !important;
+    padding: 2px 18px !important;
+    font-family: 'lato';
+    margin-top: 6px !important;
+}
 /**
  * General Settings
  */
@@ -127,40 +144,6 @@
 }
 
 /**
- * Codestar
- */
-.disable-sortable .csf-repeater-sort,
-.disable-sortable .csf-repeater-clone {
-    display: none !important;
-}
-/**
- * Override Codestar repeater for Hotel Room
- */
-.csf-section .room-repeater > .csf-title{
-    width: 100%;
-    margin: 0 0 20px 0;
-    font-size: 18px;
-}
-.csf-section .room-repeater > .csf-fieldset{
-    width: 100%;
-}
-.csf-section .room-repeater .csf-repeater-wrapper .csf-repeater-item {
-    margin: 0 0 20px 0;
-    border-bottom: 2px solid #2271b1;
-}
-
-.csf-section .room-repeater .repeater-by-date > .csf-title{
-    display: none;
-}
-.csf-section .room-repeater .repeater-by-date > .csf-fieldset{
-    width: 100%;
-}
-.csf-section .room-repeater .repeater-by-date .csf-repeater-wrapper .csf-repeater-item {
-    margin: 0 0 20px 0;
-    border-bottom: 1px solid #eee;
-}
-
-/**
  * Change admin menu color
  */
 #adminmenu .toplevel_page_tourfic .dashicons-before:before {
@@ -174,4 +157,13 @@
 }
 #adminmenu .menu-icon-tf_apartment .dashicons-before:before {
     color: #f02348;
+}
+/**
+ * License Button Color
+ */
+.tf-license-activate p.submit input,
+.el-license-active-btn p.submit input{
+    background-color: #2979ff !important;
+    border-color: #2979ff !important;
+    color: #fff;
 }

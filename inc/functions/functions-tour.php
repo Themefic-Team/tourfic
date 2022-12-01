@@ -113,9 +113,11 @@ function tf_tours_plural_label( $lowercase = false ) {
 function tf_tours_taxonomies_register() {
 
     /**
-     * Taxonomy: tour_destination.
+     * Taxonomy: tour_destination,tour_attraction,tour_activities
      */
     $tour_destination_slug = apply_filters( 'tour_destination_slug', 'tour-destination' );
+    $tour_attraction_slug = apply_filters( 'tour_attraction_slug', 'tour-attraction' );
+    $tour_actvities_slug = apply_filters( 'tour_actvities_slug', 'tour-activities' );
 
     $tour_destination_labels = array(
         'name'                       => __( 'Tour Destinations', 'tourfic' ),
@@ -161,7 +163,101 @@ function tf_tours_taxonomies_register() {
             'edit_terms' => 'edit_tf_tours',
          ),
     );
+
+    $tour_attraction_labels = array(
+        'name'                       => __( 'Tour Attractions', 'tourfic' ),
+        'singular_name'              => __( 'Tour Attractions', 'tourfic' ),
+        'menu_name'                  => __( 'Attraction', 'tourfic' ),
+        'all_items'                  => __( 'All Attractions', 'tourfic' ),
+        'edit_item'                  => __( 'Edit Attractions', 'tourfic' ),
+        'view_item'                  => __( 'View Attractions', 'tourfic' ),
+        'update_item'                => __( 'Update Attractions name', 'tourfic' ),
+        'add_new_item'               => __( 'Add new Attractions', 'tourfic' ),
+        'new_item_name'              => __( 'New Attractions name', 'tourfic' ),
+        'parent_item'                => __( 'Parent Attractions', 'tourfic' ),
+        'parent_item_colon'          => __( 'Parent Attractions:', 'tourfic' ),
+        'search_items'               => __( 'Search Attractions', 'tourfic' ),
+        'popular_items'              => __( 'Popular Attractions', 'tourfic' ),
+        'separate_items_with_commas' => __( 'Separate Attraction with commas', 'tourfic' ),
+        'add_or_remove_items'        => __( 'Add or remove Attraction', 'tourfic' ),
+        'choose_from_most_used'      => __( 'Choose from the most used Attraction', 'tourfic' ),
+        'not_found'                  => __( 'No Attraction found', 'tourfic' ),
+        'no_terms'                   => __( 'No Attraction', 'tourfic' ),
+        'items_list_navigation'      => __( 'Attraction list navigation', 'tourfic' ),
+        'items_list'                 => __( 'Attraction list', 'tourfic' ),
+        'back_to_items'              => __( 'Back to Attraction', 'tourfic' ),
+    );
+    
+    $tour_attraction_args = array(
+        'labels'                => $tour_attraction_labels,
+        'public'                => true,
+        'publicly_queryable'    => true,
+        'hierarchical'          => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'show_in_nav_menus'     => true,
+        'query_var'             => true,
+        'rewrite'               => array('slug' => $tour_attraction_slug, 'with_front' => false ),
+        'show_admin_column'     => true,
+        'show_in_rest'          => true,
+        'rest_base'             => 'tour_attraction',
+        'rest_controller_class' => 'WP_REST_Terms_Controller',
+        'show_in_quick_edit'    => true,
+        'capabilities'          => array( 
+            'assign_terms' => 'edit_tf_tours',
+            'edit_terms' => 'edit_tf_tours',
+         ),
+    );
+    
+    //Tour Activities Taxonomy
+    $tour_activities_labels = array(
+        'name'                       => __( 'Tour Activities', 'tourfic' ),
+        'singular_name'              => __( 'Tour Activity', 'tourfic' ),
+        'menu_name'                  => __( 'Activities', 'tourfic' ),
+        'all_items'                  => __( 'All Activities', 'tourfic' ),
+        'edit_item'                  => __( 'Edit Activity', 'tourfic' ),
+        'view_item'                  => __( 'View Activity', 'tourfic' ),
+        'update_item'                => __( 'Update Activity name', 'tourfic' ),
+        'add_new_item'               => __( 'Add New Activity', 'tourfic' ),
+        'new_item_name'              => __( 'New Activity name', 'tourfic' ),
+        'parent_item'                => __( 'Parent Activity', 'tourfic' ),
+        'parent_item_colon'          => __( 'Parent Activity', 'tourfic' ),
+        'search_items'               => __( 'Search Activities', 'tourfic' ),
+        'popular_items'              => __( 'Popular Activities', 'tourfic' ),
+        'separate_items_with_commas' => __( 'Separate Activities with commas', 'tourfic' ),
+        'add_or_remove_items'        => __( 'Add or remove activity', 'tourfic' ),
+        'choose_from_most_used'      => __( 'Choose from the most used activity', 'tourfic' ),
+        'not_found'                  => __( 'No activity found', 'tourfic' ),
+        'no_terms'                   => __( 'No activity', 'tourfic' ),
+        'items_list_navigation'      => __( 'Activity list navigation', 'tourfic' ),
+        'items_list'                 => __( 'Activity list', 'tourfic' ),
+        'back_to_items'              => __( 'Back to Activities', 'tourfic' ),
+    );
+    
+    $tour_activities_args = array(
+        'labels'                => $tour_activities_labels,
+        'public'                => true,
+        'publicly_queryable'    => true,
+        'hierarchical'          => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'show_in_nav_menus'     => true,
+        'query_var'             => true,
+        'rewrite'               => array('slug' => $tour_actvities_slug, 'with_front' => false ),
+        'show_admin_column'     => true,
+        'show_in_rest'          => true,
+        'rest_base'             => 'tour_activities',
+        'rest_controller_class' => 'WP_REST_Terms_Controller',
+        'show_in_quick_edit'    => true,
+        'capabilities'          => array( 
+            'assign_terms' => 'edit_tf_tours',
+            'edit_terms' => 'edit_tf_tours',
+         ),
+    );
+
     register_taxonomy( 'tour_destination', 'tf_tours', apply_filters( 'tour_destination_args', $tour_destination_args ) );
+    register_taxonomy( 'tour_attraction', 'tf_tours', apply_filters( 'tour_attraction_args', $tour_attraction_args ) );
+    register_taxonomy( 'tour_activities', 'tf_tours', apply_filters( 'tour_activities_args', $tour_activities_args ) );
 
 }
 add_action( 'init', 'tf_tours_taxonomies_register' );
@@ -492,28 +588,53 @@ function tf_single_tour_booking_form( $post_id ) {
     // Check-in & out date
     $check_in_out = !empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
     
-    $meta = get_post_meta( $post_id, 'tf_tours_option', true );
+    $meta = get_post_meta( $post_id, 'tf_tours_opt', true );
     $tour_type = !empty( $meta['type'] ) ? $meta['type'] : '';
     // Continuous custom availability
     $custom_avail = !empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : '';
 
     if ( $tour_type == 'fixed' ) {
-
-        $departure_date = !empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
-        $return_date = !empty( $meta['fixed_availability']['date']['to'] ) ? $meta['fixed_availability']['date']['to'] : '';
-        $min_people = !empty( $meta['fixed_availability']['min_seat'] ) ? $meta['fixed_availability']['min_seat'] : '';
-        $max_people = !empty( $meta['fixed_availability']['max_seat'] ) ? $meta['fixed_availability']['max_seat'] : '';
+        if( !empty($meta['fixed_availability']) && gettype($meta['fixed_availability'])=="string" ){
+            $tf_tour_fixed_avail = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+            }, $meta['fixed_availability'] );
+            $tf_tour_fixed_date = unserialize( $tf_tour_fixed_avail );
+            $departure_date = !empty( $tf_tour_fixed_date['date']['from'] ) ? $tf_tour_fixed_date['date']['from'] : '';
+            $return_date = !empty( $tf_tour_fixed_date['date']['to'] ) ? $tf_tour_fixed_date['date']['to'] : '';
+            $min_people = !empty( $tf_tour_fixed_date['min_seat'] ) ? $tf_tour_fixed_date['min_seat'] : '';
+            $max_people = !empty( $tf_tour_fixed_date['max_seat'] ) ? $tf_tour_fixed_date['max_seat'] : '';
+        }else{
+            $departure_date = !empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
+            $return_date = !empty( $meta['fixed_availability']['date']['to'] ) ? $meta['fixed_availability']['date']['to'] : '';
+            $min_people = !empty( $meta['fixed_availability']['min_seat'] ) ? $meta['fixed_availability']['min_seat'] : '';
+            $max_people = !empty( $meta['fixed_availability']['max_seat'] ) ? $meta['fixed_availability']['max_seat'] : '';
+        }
 
     } elseif ( $tour_type == 'continuous' ) {
 
         $disabled_day = !empty( $meta['disabled_day'] ) ? $meta['disabled_day'] : '';
         $disable_range = !empty( $meta['disable_range'] ) ? $meta['disable_range'] : '';
+        if( !empty($disable_range) && gettype($disable_range)=="string" ){
+            $disable_range_unserial = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+            }, $disable_range );
+            $disable_range = unserialize( $disable_range_unserial );
+    
+        }
         $disable_specific = !empty( $meta['disable_specific'] ) ? $meta['disable_specific'] : '';
         $disable_specific = str_replace( ', ', '", "', $disable_specific );
 
         if ( $custom_avail == true ) {
 
             $cont_custom_date = !empty( $meta['cont_custom_date'] ) ? $meta['cont_custom_date'] : '';
+
+            if( !empty($cont_custom_date) && gettype($cont_custom_date)=="string" ){
+                $cont_custom_date_unserial = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                    return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+                }, $cont_custom_date );
+                $cont_custom_date = unserialize( $cont_custom_date_unserial );
+        
+            }
 
         }     
 
@@ -528,20 +649,62 @@ function tf_single_tour_booking_form( $post_id ) {
     $child_price          = !empty( $meta['child_price'] ) ? $meta['child_price'] : false;
     $infant_price         = !empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
     $tour_extras          = isset( $meta['tour-extra'] ) ? $meta['tour-extra'] : null;
-    $times = [];
+    if( !empty($tour_extras) && gettype($tour_extras)=="string" ){
 
-    if ( $custom_avail == true && !empty( $meta['cont_custom_date'] ) ) {
-        $allowed_times = array_map(function ($v) {
-            return $times[] = ['date' => $v['date'], 'times' => array_map(function ($v) {
-                return $v['time'];
-            }, $v['allowed_time'] ?? [])];
-        }, $meta['cont_custom_date']);
+        $tour_extras_unserial = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+        }, $tour_extras );
+        $tour_extras = unserialize( $tour_extras_unserial );
+
     }
-    
-    if ( $custom_avail == false && !empty( $meta['allowed_time'] ) ) {
-        $allowed_times = array_map(function ($v) {
-            return $v['time'];          
-        }, $meta['allowed_time'] ?? []);
+    $times = [];
+    if( !empty($meta['cont_custom_date']) && gettype($meta['cont_custom_date'])=="string" ){
+
+        $tf_tour_unserial_custom_date = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+        }, $meta['cont_custom_date'] );
+        $tf_tour_unserial_custom_date = unserialize( $tf_tour_unserial_custom_date );
+        
+        if( !empty($tf_tour_unserial_custom_date) ) {
+            if ( $custom_avail == true && !empty( $meta['cont_custom_date'] ) ) {
+                $allowed_times = array_map(function ($v) {
+                    return $times[] = ['date' => $v['date'], 'times' => array_map(function ($v) {
+                        return $v['time'];
+                    }, $v['allowed_time'] ?? [])];
+                }, $tf_tour_unserial_custom_date);
+            }
+        }
+        
+    }else{
+        if ( $custom_avail == true && !empty( $meta['cont_custom_date'] ) ) {
+            $allowed_times = array_map(function ($v) {
+                return $times[] = ['date' => $v['date'], 'times' => array_map(function ($v) {
+                    return $v['time'];
+                }, $v['allowed_time'] ?? [])];
+            }, $meta['cont_custom_date']);
+        }
+        
+    }
+
+    if( !empty($meta['allowed_time']) && gettype($meta['allowed_time'])=="string" ){
+
+        $tf_tour_unserial_custom_time = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+        }, $meta['allowed_time'] );
+        $tf_tour_unserial_custom_time = unserialize( $tf_tour_unserial_custom_time );
+        if( !empty($tf_tour_unserial_custom_time) ){
+            if ( $custom_avail == false && !empty( $meta['allowed_time'] ) ) {
+                $allowed_times = array_map(function ($v) {
+                    return $v['time'];          
+                }, $tf_tour_unserial_custom_time ?? []);
+            }
+        }
+    }else{
+        if ( $custom_avail == false && !empty( $meta['allowed_time'] ) ) {
+            $allowed_times = array_map(function ($v) {
+                return $v['time'];          
+            }, $meta['allowed_time'] ?? []);
+        }
     }
 	
     ob_start();
@@ -821,7 +984,7 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
     // get post id
     $post_id = get_the_ID();
     //Get hotel meta values
-    $meta = get_post_meta( get_the_ID(),'tf_tours_option',true );
+    $meta = get_post_meta( get_the_ID(),'tf_tours_opt',true );
     // Location
     $location  = !empty($meta['text_location']) ? $meta['text_location'] : '';
     // Featured
@@ -951,14 +1114,23 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
         [$adults, $child, $check_in_out] = $data;
     }
     // Get tour meta options
-    $meta = get_post_meta( get_the_ID(), 'tf_tours_option', true );
+    $meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
 
     // Set initial tour availability status
     $has_tour = false;
 
     if ( $meta['type'] === 'fixed' ) {
 
-        $fixed_availability = !empty( $meta['fixed_availability'] ) ? $meta['fixed_availability']['date'] : [];
+        if( !empty($meta['fixed_availability']) && gettype($meta['fixed_availability'])=="string" ){
+            $tf_tour_unserial_fixed_date = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+            }, $meta['fixed_availability'] );
+            $tf_tour_unserial_fixed_date = unserialize( $tf_tour_unserial_fixed_date );
+            $fixed_availability = !empty( $tf_tour_unserial_fixed_date ) ? $tf_tour_unserial_fixed_date['date'] : [];
+        }else{
+            $fixed_availability = !empty( $meta['fixed_availability'] ) ? $meta['fixed_availability']['date'] : [];
+        }
+
         $show_fixed_tour    = [];
 
         foreach ( $period as $date ) {
@@ -1001,7 +1173,15 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
 
         if ($custom_availability) {
 
-            $custom_dates = wp_list_pluck( $meta['cont_custom_date'], 'date' );
+            if( !empty($meta['cont_custom_date']) && gettype($meta['cont_custom_date'])=="string" ){
+                $tf_tour_unserial_custom_date = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                    return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+                }, $meta['cont_custom_date'] );
+                $tf_tour_unserial_custom_date = unserialize( $tf_tour_unserial_custom_date );
+                $custom_dates = wp_list_pluck( $tf_tour_unserial_custom_date, 'date' );
+            }else{
+                $custom_dates = wp_list_pluck( $meta['cont_custom_date'], 'date' );
+            }
 
             foreach ( $custom_dates as $custom_date ) {
 

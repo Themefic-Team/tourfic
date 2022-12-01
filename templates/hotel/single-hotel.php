@@ -27,7 +27,7 @@ while ( have_posts() ) : the_post();
 	/**
 	 * Get hotel meta values
 	 */
-	$meta = get_post_meta( $post_id, 'tf_hotel', true );
+	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
 
 	$disable_share_opt  = ! empty( $meta['h-share'] ) ? $meta['h-share'] : '';
 	$disable_review_sec = ! empty( $meta['h-review'] ) ? $meta['h-review'] : '';
@@ -81,6 +81,12 @@ while ( have_posts() ) : the_post();
 	// Location
 	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
 	$map     = ! empty( $meta['map'] ) ? $meta['map'] : '';
+    if( !empty($map) && gettype($map)=="string" ){
+        $tf_hotel_map_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+          }, $map );
+        $map = unserialize( $tf_hotel_map_value );
+    }
 
 	// Hotel Detail
 	$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
@@ -90,8 +96,20 @@ while ( have_posts() ) : the_post();
 	$video = ! empty( $meta['video'] ) ? $meta['video'] : '';
 	// Room Details
 	$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+    if( !empty($rooms) && gettype($rooms)=="string" ){
+        $tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+        }, $rooms );
+        $rooms = unserialize( $tf_hotel_rooms_value );
+    }
 	// FAQ
 	$faqs = ! empty( $meta['faq'] ) ? $meta['faq'] : '';
+    if( !empty($faqs) &&  gettype($faqs)=="string" ){
+        $tf_hotel_faqs_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+          }, $faqs );
+        $faqs = unserialize( $tf_hotel_faqs_value );
+    }
 	// Terms & condition
 	$tc = ! empty( $meta['tc'] ) ? $meta['tc'] : '';
 
@@ -363,12 +381,12 @@ while ( have_posts() ) : the_post();
                         <h3 class="section-heading"><?php esc_html_e( 'Popular Features', 'tourfic' ); ?></h3>
                         <div class="tf-feature-list">
 							<?php foreach ( $features as $feature ) {
-								$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'hotel_feature', true );
+								$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
 								$f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
 								if ( $f_icon_type == 'fa' ) {
 									$feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
 								} elseif ( $f_icon_type == 'c' ) {
-									$feature_icon = '<img src="' . $feature_meta['icon-c']["url"] . '" style="width: ' . $feature_meta['dimention']["width"] . 'px; height: ' . $feature_meta['dimention']["width"] . 'px;" />';
+									$feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
 								} ?>
 
                                 <div class="single-feature-box">
@@ -423,15 +441,26 @@ while ( have_posts() ) : the_post();
 										$pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
 										$avil_by_date = ! empty( $room['avil_by_date'] ) ? ! empty( $room['avil_by_date'] ) : false;
 
-										if ( $avil_by_date == true ) {
+										if ( defined( 'TF_PRO' ) && $avil_by_date == true ) {
 											$repeat_by_date = ! empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
 											if ( $pricing_by == '1' ) {
 												$prices = wp_list_pluck( $repeat_by_date, 'price' );
 											} else {
 												$prices = wp_list_pluck( $repeat_by_date, 'adult_price' );
 											}
-
-											$price = $prices ? (min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) )) : wc_price( 0 );
+                                            if(!empty($prices)){
+                                                $range_price = [];
+                                                foreach($prices as $single){
+                                                    if(!empty($single)){
+                                                        $range_price[]= $single ;
+                                                    }
+                                                }
+                                                if(sizeof($range_price) > 1){
+                                                    $price = $prices ? (min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) )) : wc_price( 0 );
+                                                }else{
+                                                    $price = !empty($range_price[0]) ? wc_price($range_price[0]) : wc_price( 0 );
+                                                }
+                                            }
 										} else {
 											if ( $pricing_by == '1' ) {
 												$price = wc_price( ! empty( $room['price'] ) ? $room['price'] : '0.0' );
@@ -502,15 +531,17 @@ while ( have_posts() ) : the_post();
 
 															<?php foreach ( $room['features'] as $feature ) {
 
-																$room_f_meta = get_term_meta( $feature, 'hotel_feature', true );
-
+																$room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
+                                                                if(!empty($room_f_meta)){
 																$room_icon_type = ! empty( $room_f_meta['icon-type'] ) ? $room_f_meta['icon-type'] : '';
-
-																if ( $room_icon_type == 'fa' ) {
-																	$room_feature_icon = '<i class="' . $room_f_meta['icon-fa'] . '"></i>';
-																} elseif ( $room_icon_type == 'c' ) {
-																	$room_feature_icon = '<img src="' . $room_f_meta['icon-c']["url"] . '" style="min-width: ' . $room_f_meta['dimention']["width"] . 'px; height: ' . $room_f_meta['dimention']["width"] . 'px;" />';
-																}
+                                                                }
+																if ( !empty($room_icon_type) && $room_icon_type == 'fa' ) {
+																	$room_feature_icon = !empty($room_f_meta['icon-fa']) ? '<i class="' . $room_f_meta['icon-fa'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
+																} elseif ( !empty($room_icon_type) && $room_icon_type == 'c' ) {
+																	$room_feature_icon = !empty($room_f_meta['icon-c']) ? '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
+																}else{
+                                                                    $room_feature_icon = '<i class="fas fa-bread-slice"></i>';
+                                                                }
 
 																$room_term = get_term( $feature ); ?>
                                                                 <li class="tf-tooltip">

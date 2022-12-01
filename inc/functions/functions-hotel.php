@@ -273,7 +273,7 @@ add_action( 'wp_ajax_nopriv_tf_hotel_airport_service_price', 'tf_hotel_airport_s
 
 function tf_hotel_airport_service_callback() {
 
-	$meta            = get_post_meta( sanitize_key( $_POST['id'] ), 'tf_hotel', true );
+	$meta            = get_post_meta( sanitize_key( $_POST['id'] ), 'tf_hotels_opt', true );
 	$airport_service = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 
 	if ( 1 == $airport_service ) {
@@ -296,8 +296,14 @@ function tf_hotel_airport_service_callback() {
 		}
 
 
-		$meta  = get_post_meta( $post_id, 'tf_hotel', true );
+		$meta  = get_post_meta( $post_id, 'tf_hotels_opt', true );
 		$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+		if( !empty($rooms) && gettype($rooms)=="string" ){
+			$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+				return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+			}, $rooms );
+			$rooms = unserialize( $tf_hotel_rooms_value );
+		}
 
 		$avail_by_date = ! empty( $rooms[ $room_id ]['avil_by_date'] ) && $rooms[ $room_id ]['avil_by_date'];
 		if ( $avail_by_date ) {
@@ -373,6 +379,12 @@ function tf_hotel_airport_service_callback() {
 
 		if ( "pickup" == $_POST['service_type'] ) {
 			$airport_pickup_price = ! empty( $meta['airport_pickup_price'] ) ? $meta['airport_pickup_price'] : '';
+			if( !empty($airport_pickup_price) && gettype($airport_pickup_price)=="string" ){
+				$tf_hotel_airport_pickup_price_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+					return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+				  }, $airport_pickup_price );
+				$airport_pickup_price = unserialize( $tf_hotel_airport_pickup_price_value );
+			}
 			if ( "per_person" == $airport_pickup_price['airport_pickup_price_type'] ) {
 				$service_fee = ( sanitize_key( $_POST['hoteladult'] ) * $airport_pickup_price['airport_service_fee_adult'] ) + ( sanitize_key( $_POST['hotelchildren'] ) * $airport_pickup_price['airport_service_fee_children'] );
 				if ( sanitize_key( $_POST['hotelchildren'] ) != 0 ) {
@@ -451,6 +463,12 @@ function tf_hotel_airport_service_callback() {
 		}
 		if ( "dropoff" == $_POST['service_type'] ) {
 			$airport_dropoff_price = ! empty( $meta['airport_dropoff_price'] ) ? $meta['airport_dropoff_price'] : '';
+			if( !empty($airport_dropoff_price) && gettype($airport_dropoff_price)=="string" ){
+				$tf_hotel_airport_dropoff_price_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+					return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+				  }, $airport_dropoff_price );
+				$airport_dropoff_price = unserialize( $tf_hotel_airport_dropoff_price_value );
+			}
 			if ( "per_person" == $airport_dropoff_price['airport_pickup_price_type'] ) {
 				$service_fee = ( sanitize_key( $_POST['hoteladult'] ) * $airport_dropoff_price['airport_service_fee_adult'] ) + ( sanitize_key( $_POST['hotelchildren'] ) * $airport_dropoff_price['airport_service_fee_children'] );
 				if ( sanitize_key( $_POST['hotelchildren'] ) != 0 ) {
@@ -519,6 +537,12 @@ function tf_hotel_airport_service_callback() {
 		}
 		if ( "both" == $_POST['service_type'] ) {
 			$airport_pickup_dropoff_price = ! empty( $meta['airport_pickup_dropoff_price'] ) ? $meta['airport_pickup_dropoff_price'] : '';
+			if( !empty($airport_pickup_dropoff_price) && gettype($airport_pickup_dropoff_price)=="string" ){
+				$tf_hotel_airport_pickup_dropoff_price_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+					return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+				  }, $airport_pickup_dropoff_price );
+				$airport_pickup_dropoff_price = unserialize( $tf_hotel_airport_pickup_dropoff_price_value );
+			}
 			if ( "per_person" == $airport_pickup_dropoff_price['airport_pickup_price_type'] ) {
 				$service_fee = ( sanitize_key( $_POST['hoteladult'] ) * $airport_pickup_dropoff_price['airport_service_fee_adult'] ) + ( sanitize_key( $_POST['hotelchildren'] ) * $airport_pickup_dropoff_price['airport_service_fee_children'] );
 				if ( sanitize_key( $_POST['hotelchildren'] ) != 0 ) {
@@ -623,13 +647,28 @@ function tf_room_availability_callback() {
 	if ( $form_check_in_out ) {
 		list( $form_start, $form_end ) = explode( ' - ', $form_check_in_out );
 	}
+	
+	// Custom avail
+	$tf_startdate = $form_start;
+	$tf_enddate = $form_end;
+
+	if( empty($form_end) ){
+		$form_end = date('Y/m/d', strtotime($form_start . " + 1 day"));
+		$tf_enddate = date('Y/m/d', strtotime($form_start . " + 1 day"));
+	}
 	$form_check_in = $form_start;
 	$form_start    = date( 'Y/m/d', strtotime( $form_start . ' +1 day' ) );
 	/**
 	 * Backend data
 	 */
-	$meta                = get_post_meta( $form_post_id, 'tf_hotel', true );
-	$rooms               = ! empty( $meta['room'] ) ? $meta['room'] : '';
+	$meta                = get_post_meta( $form_post_id, 'tf_hotels_opt', true );
+	$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+    if( !empty($rooms) && gettype($rooms)=="string" ){
+        $tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+          }, $rooms );
+        $rooms = unserialize( $tf_hotel_rooms_value );
+    }
 	$locations           = get_the_terms( $form_post_id, 'hotel_location' );
 	$first_location_name = ! empty( $locations ) ? $locations[0]->name : '';
 
@@ -684,6 +723,7 @@ function tf_room_availability_callback() {
 				$form_check_out   = $form_end;
 
 				// Check availability by date option
+				
 				$period = new DatePeriod(
 					new DateTime( $form_start . ' 00:00' ),
 					new DateInterval( 'P1D' ),
@@ -691,6 +731,19 @@ function tf_room_availability_callback() {
 				);
 
 				$days = iterator_count( $period );
+
+				// Check availability by date option
+				
+				$tfperiod = new DatePeriod(
+					new DateTime( $tf_startdate . ' 00:00' ),
+					new DateInterval( 'P1D' ),
+					new DateTime( $tf_enddate . ' 23:59' )
+				);
+
+				$avail_durationdate = [];
+				foreach ( $tfperiod as $date ) {
+					$avail_durationdate[$date->format( 'Y/m/d')] = $date->format( 'Y/m/d');
+				}
 
 				/**
 				 * Set room availability
@@ -745,33 +798,27 @@ function tf_room_availability_callback() {
 									$order_check_in_date  = strtotime( $item->get_meta( 'check_in', true ) );
 									$order_check_out_date = strtotime( $item->get_meta( 'check_out', true ) );
 
-									foreach ( $repeat_by_date as $single_date_range ) {
-
-										if ( strtotime( $single_date_range["availability"]["from"] ) <= strtotime( $form_start ) && strtotime( $single_date_range["availability"]["to"] ) >= strtotime( $form_end ) ) {
-
-											if ( strtotime( $single_date_range["availability"]["from"] ) <= $order_check_in_date && strtotime( $single_date_range["availability"]["to"] ) >= $order_check_out_date ) {
-
-												$number_orders = $number_orders + $ordered_number_of_room;
-
-											}
-
-										}
-
+									$tf_order_check_in_date  = $item->get_meta( 'check_in', true );
+									$tf_order_check_out_date = $item->get_meta( 'check_out', true );
+									if( !empty($avail_durationdate) && ( in_array( $tf_order_check_out_date, $avail_durationdate) || in_array( $tf_order_check_in_date, $avail_durationdate) ) ){
+										# Total number of room booked
+										$number_orders = $number_orders + $ordered_number_of_room;
 									}
-
 									array_push( $order_date_ranges, array( $order_check_in_date, $order_check_out_date ) );
 
 								} else {
-
-									# Total number of room booked
-									$number_orders = $number_orders + $ordered_number_of_room;
+									$order_check_in_date  = $item->get_meta( 'check_in', true );
+									$order_check_out_date = $item->get_meta( 'check_out', true );
+									if( !empty($avail_durationdate) && ( in_array( $order_check_out_date, $avail_durationdate) || in_array( $order_check_in_date, $avail_durationdate) ) ){
+										# Total number of room booked
+										$number_orders = $number_orders + $ordered_number_of_room;
+									}
 
 								}
 
 							}
 						}
 					}
-
 					# Calculate available room number after order
 					$num_room_available = $num_room_available - $number_orders; // Calculate
 					$num_room_available = max( $num_room_available, 0 ); // If negetive value make that 0
@@ -782,7 +829,7 @@ function tf_room_availability_callback() {
 
 					// split date range
 					$check_in  = strtotime( $form_start . ' 00:00' );
-					$check_out = strtotime( $form_end . ' 23:59' );
+					$check_out = strtotime( $form_end . ' 00:00' );
 					$price     = 0;
 					$has_room  = [];
 
@@ -1158,10 +1205,10 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                             </div>
                         </div>
                         <!-- Children age input field based on children number -->
-						<?php 
-						
-						$children_age = tfopt( 'children_age_limit' ); 
-						$children_age_status = tfopt( 'enable_child_age_limit' ); 
+						<?php
+
+						$children_age = tfopt( 'children_age_limit' );
+						$children_age_status = tfopt( 'enable_child_age_limit' );
 						if( !empty($children_age_status) && $children_age_status=="1" ){
 						?>
                         <div class="tf-children-age-fields">
@@ -1413,7 +1460,14 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	// Location
 	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
 	// Rooms
-	$b_rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+	$b_rooms = ! empty( $meta['room'] ) ? $meta['room'] : array();
+	if( !empty($b_rooms) && gettype($b_rooms)=="string" ){
+        $tf_hotel_b_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+        }, $b_rooms );
+        $b_rooms = unserialize( $tf_hotel_b_rooms_value );
+    }
+
 	/**
 	 * All values from URL
 	 */
@@ -1462,26 +1516,26 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	), $url );
 
 	/**
-	 * Calculate and get the minimum price 
+	 * Calculate and get the minimum price
 	 * @author - Hena
 	 */
     $room_price = [];
 	if( !empty($b_rooms) ):
 		foreach ( $b_rooms as $b_room ) {
 			//room price
-			
-			$pricing_by = $b_room['pricing-by'] ? $b_room['pricing-by'] : 1;
+
+			$pricing_by = ! empty( $b_room['pricing-by'] ) ? $b_room['pricing-by'] : 1;
 			if($pricing_by == 1){
 				$price        = ! empty( $b_room['price'] ) ? $b_room['price'] : '';
 				$room_price[] = $price;
 			}else if($pricing_by == 2){
-				$adult_price = $b_room['adult_price'] ? $b_room['adult_price'] : 0;
+				$adult_price = ! empty( $b_room['adult_price'] ) ? $b_room['adult_price'] : 0;
 				$room_price[] = $adult_price;
 			}
 		}
 	endif;
 	?>
-	
+
     <div class="single-tour-wrap">
         <div class="single-tour-inner">
             <div class="tourfic-single-left">
@@ -1527,13 +1581,18 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                             <div class="roomName_flex">
                                                 <ul class="tf-archive-desc">
 													<?php foreach ( $features as $feature ) {
-														$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'hotel_feature', true );
+														$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
+														if(!empty($feature_meta)){
 														$f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-														if ( $f_icon_type == 'fa' ) {
-															$feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
-														} elseif ( $f_icon_type == 'c' ) {
-															$feature_icon = '<img src="' . $feature_meta['icon-c']["url"] . '" style="width: ' . $feature_meta['dimention']["width"] . 'px; height: ' . $feature_meta['dimention']["width"] . 'px;" />';
-														} ?>
+														}
+														if ( !empty($f_icon_type) && $f_icon_type == 'fa' ) {
+															$feature_icon = !empty($feature_meta['icon-fa']) ? '<i class="' . $feature_meta['icon-fa'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
+														} elseif ( !empty($f_icon_type) && $f_icon_type == 'c' ) {
+															$feature_icon = !empty($feature_meta['icon-c']) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
+														}else{
+															$feature_icon = '<i class="fas fa-bread-slice"></i>';
+														}
+														?>
                                                         <li class="tf-tooltip">
 															<?php
 															if(!empty( $feature_icon )){
@@ -1555,8 +1614,8 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                             <!-- Show minimum price @author - Hena -->
                                             <div class="tf-room-price-area">
 												<?php
-												
-												 if ( ! empty( $room_price ) ): 
+
+												 if ( ! empty( $room_price ) ):
 												 ?>
                                                     <div class="tf-room-price">
 														<?php
@@ -1731,7 +1790,7 @@ function tf_remove_order_ids_from_room() {
         <div class="csf-subtitle-text">' . __( "Remove order ids linked with this room.<br><b style='color: red;'>Be aware! It is irreversible!</b>", "tourfic" ) . '</div>
     </div>
     <div class="csf-fieldset">
-        <button type="button" class="button button-large csf-warning-primary remove-order-ids">' . __( "Reset", "tourfic" ) . '</button>
+        <button type="button" class="button button-large tf-order-remove remove-order-ids">' . __( "Reset", "tourfic" ) . '</button>
     </div>
     <div class="clear"></div>
     ';
@@ -1746,17 +1805,20 @@ function tf_remove_room_order_ids() {
 	# Get order id field's name
 	$meta_field = isset( $_POST['meta_field'] ) ? sanitize_text_field( $_POST['meta_field'] ) : '';
 	# Trim room id from order id name
-	$room_id = trim( $meta_field, "tf_hotel[room][][order_id" );
+	$room_id = trim( $meta_field, "tf_hotels_opt[room][][order_id" );
 	# Get post id
 	$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
 	# Get hotel meta
-	$meta = get_post_meta( $post_id, 'tf_hotel', true );
+	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+
+	$order_id_retrive = tf_data_types($meta['room']);
 
 	# Set order id field's value to blank
-	$meta['room'][ $room_id ]['order_id'] = '';
+	$order_id_retrive[ $room_id ]['order_id'] = '';
 
+	$meta['room'] = serialize($order_id_retrive);
 	# Update whole hotel meta
-	update_post_meta( $post_id, 'tf_hotel', $meta );
+	update_post_meta( $post_id, 'tf_hotels_opt', $meta );
 
 	# Send success message
 	wp_send_json_success( __( 'Order ids have been removed!', 'tourfic' ) );
@@ -1772,8 +1834,14 @@ function tf_hotel_quickview_callback() {
 	?>
     <div class="tf-hotel-quick-view" style="display: flex">
 		<?php
-		$meta  = get_post_meta( $_POST['post_id'], 'tf_hotel', true );
+		$meta  = get_post_meta( $_POST['post_id'], 'tf_hotels_opt', true );
 		$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+		if( !empty($rooms) && gettype($rooms)=="string" ){
+			$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+				return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+			}, $rooms );
+			$rooms = unserialize( $tf_hotel_rooms_value );
+		}
 		foreach ( $rooms as $key => $room ) :
 			$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
 			if ( $enable == '1' && $room['unique_id'] . $key == $_POST['uniqid_id'] ) :
@@ -1931,14 +1999,16 @@ function tf_hotel_quickview_callback() {
 
 									<?php foreach ( $room['features'] as $feature ) {
 
-										$room_f_meta = get_term_meta( $feature, 'hotel_feature', true );
-
+										$room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
+										if(!empty($room_f_meta)){
 										$room_icon_type = ! empty( $room_f_meta['icon-type'] ) ? $room_f_meta['icon-type'] : '';
-
-										if ( $room_icon_type == 'fa' ) {
-											$room_feature_icon = '<i class="' . $room_f_meta['icon-fa'] . '"></i>';
-										} elseif ( $room_icon_type == 'c' ) {
-											$room_feature_icon = '<img src="' . $room_f_meta['icon-c']["url"] . '" style="min-width: ' . $room_f_meta['dimention']["width"] . 'px; height: ' . $room_f_meta['dimention']["width"] . 'px;" />';
+										}
+										if ( !empty($room_icon_type) && $room_icon_type == 'fa' ) {
+											$room_feature_icon = !empty($room_f_meta['icon-fa']) ? '<i class="' . $room_f_meta['icon-fa'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
+										} elseif ( !empty($room_icon_type) && $room_icon_type == 'c' ) {
+											$room_feature_icon = !empty($room_f_meta['icon-c']) ? '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
+										}else{
+											$room_feature_icon = '<i class="fas fa-bread-slice"></i>';
 										}
 
 										$room_term = get_term( $feature ); ?>
@@ -2031,6 +2101,12 @@ function tf_update_missing_room_id() {
 		foreach ( $posts_array as $post_array ) {
 			$meta      = get_post_meta( $post_array->ID, 'tf_hotel', true );
 			$rooms     = ! empty( $meta['room'] ) ? $meta['room'] : '';
+			if( !empty($rooms) && gettype($rooms)=="string" ){
+				$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+					return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+				}, $rooms );
+				$rooms = unserialize( $tf_hotel_rooms_value );
+			}
 			$new_rooms = [];
 			foreach ( $rooms as $room ) {
 
@@ -2099,6 +2175,12 @@ if ( ! function_exists( 'tf_hotel_total_room_adult_child' ) ) {
 	function tf_hotel_total_room_adult_child( $hotel_id, $type = 'room' ) {
 		$meta         = get_post_meta( $hotel_id, 'tf_hotel', true );
 		$rooms        = ! empty( $meta['room'] ) ? $meta['room'] : '';
+		if( !empty($rooms) && gettype($rooms)=="string" ){
+			$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+				return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+			}, $rooms );
+			$rooms = unserialize( $tf_hotel_rooms_value );
+		}
 		$total_room   = 0;
 		$total_adults = 0;
 		$total_child  = 0;

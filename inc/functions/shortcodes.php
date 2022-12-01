@@ -38,8 +38,8 @@ function hotel_locations_shortcode( $atts, $content = null ) {
 
 				<?php foreach ( $locations as $term ) {
 
-					$meta      = get_term_meta( $term->term_id, 'hotel_location', true );
-					$image_url = ! empty( $meta['image']['url'] ) ? $meta['image']['url'] : TF_ASSETS_URL . 'img/img-not-available.svg';
+					$meta      = get_term_meta( $term->term_id, 'tf_hotel_location', true );
+					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : TF_ASSETS_URL . 'img/img-not-available.svg';
 					$term_link = get_term_link( $term ); ?>
 
                     <div class="single_recomended_item">
@@ -108,8 +108,8 @@ function shortcode_tour_destinations( $atts, $content = null ) {
 
 				<?php foreach ( $destinations as $term ) {
 
-					$meta      = get_term_meta( $term->term_id, 'tour_destination', true );
-					$image_url = ! empty( $meta['image']['url'] ) ? $meta['image']['url'] : TF_ASSETS_URL . 'img/img-not-available.svg';
+					$meta      = get_term_meta( $term->term_id, 'tf_tour_destination', true );
+					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : TF_ASSETS_URL . 'img/img-not-available.svg';
 					$term_link = get_term_link( $term );
 
 					if ( is_wp_error( $term_link ) ) {
@@ -190,10 +190,18 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 					$related_comments_hotel = get_comments( array( 'post_id' => $post_id ) );
 					$meta = get_post_meta( $post_id, 'tf_hotel', true );
 					$rooms = !empty($meta['room']) ? $meta['room'] : '';
+					if( !empty($rooms) && gettype($rooms)=="string" ){
+						$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+							return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+						}, $rooms );
+						$rooms = unserialize( $tf_hotel_rooms_value );
+					}
 					//get and store all the prices for each room
 					$room_price = [];
-					foreach( $rooms as $room ){
-						$room_price[] = $room['price'];
+					if(!empty($rooms)){
+						foreach( $rooms as $room ){
+							$room_price[] = ! empty( $room['price'] ) ? $room['price'] : 0;
+						}
 					}
 
 					?>

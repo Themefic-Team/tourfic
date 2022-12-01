@@ -12,7 +12,7 @@ while ( have_posts() ) : the_post();
 	$post_id = get_the_ID();
 
 	// Get Tour Meta
-	$meta = get_post_meta( $post_id, 'tf_tours_option', true );
+	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
 
 	/**
 	 * Show/hide sections
@@ -67,14 +67,39 @@ while ( have_posts() ) : the_post();
 
 	$min_days = ! empty( $meta['min_days'] ) ? $meta['min_days'] : '';
 
-	$faqs            = ! empty( $meta['faqs'] ) ? $meta['faqs'] : null;
-	$inc             = ! empty( $meta['inc'] ) ? $meta['inc'] : null;
-	$exc             = ! empty( $meta['exc'] ) ? $meta['exc'] : null;
+	$faqs            = !empty($meta['faqs']) ? $meta['faqs'] : null;
+	if( !empty($faqs) && gettype($faqs)=="string" ){
+        $tf_hotel_faqs_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+        }, $faqs );
+        $faqs = unserialize( $tf_hotel_faqs_value );
+    }
+	$inc             = !empty($meta['inc']) ? $meta['inc'] : null;
+	if( !empty($inc) && gettype($inc)=="string" ){
+        $tf_hotel_inc_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+        }, $inc );
+        $inc = unserialize( $tf_hotel_inc_value );
+    }
+	$exc             = !empty($meta['exc']) ? $meta['exc'] : null;
+	if( !empty($exc) && gettype($exc)=="string" ){
+        $tf_hotel_exc_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+        }, $exc );
+        $exc = unserialize( $tf_hotel_exc_value );
+	}
+
 	$inc_icon        = ! empty( $meta['inc_icon'] ) ? $meta['inc_icon'] : null;
 	$exc_icon        = ! empty( $meta['exc_icon'] ) ? $meta['exc_icon'] : null;
 	$custom_inc_icon = ! empty( $inc_icon ) ? "custom-inc-icon" : '';
 	$custom_exc_icon = ! empty( $exc_icon ) ? "custom-exc-icon" : '';
-	$itineraries     = ! empty( $meta['itinerary'] ) ? $meta['itinerary'] : null;
+	$itineraries     = !empty($meta['itinerary']) ? $meta['itinerary'] : null;
+	if( !empty($itineraries) && gettype($itineraries)=="string" ){
+        $tf_hotel_itineraries_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+        }, $itineraries );
+        $itineraries = unserialize( $tf_hotel_itineraries_value );
+    }
 	//continuous tour
 	$share_text = get_the_title();
 	$share_link = esc_url( home_url( "/?p=" ) . $post_id );
@@ -341,9 +366,9 @@ while ( have_posts() ) : the_post();
                                 <h2 class="section-heading"><?php _e( 'Highlights', 'tourfic' ); ?></h2>
 								<?php echo $highlights; ?>
                             </div>
-							<?php if ( ! empty( $meta['hightlights_thumbnail']['url'] ) ): ?>
+							<?php if ( ! empty( $meta['hightlights_thumbnail'] ) ): ?>
                                 <div class="tf-highlight-image">
-									<?php echo wp_get_attachment_image( $meta['hightlights_thumbnail']['id'], 'tf-thumb-480-320' ); ?>
+                                    <img src="<?php echo esc_url( $meta['hightlights_thumbnail'] ); ?>" alt="">
                                 </div>
 							<?php endif; ?>
                         </div>
@@ -356,7 +381,7 @@ while ( have_posts() ) : the_post();
         <!-- Include-Exclude section Start -->
 		<?php
 		if ( $inc || $exc ) :
-			$inc_exc_bg = ! empty( $meta['include-exclude-bg']['url'] ) ? $meta['include-exclude-bg']['url'] : '';
+			$inc_exc_bg = ! empty( $meta['include-exclude-bg'] ) ? $meta['include-exclude-bg'] : '';
 			?>
             <div class="tf-inc-exc-wrapper sp-70" style="background-image: url(<?php echo esc_url( $inc_exc_bg ) ?>);">
                 <div class="tf-container">
@@ -550,7 +575,7 @@ while ( have_posts() ) : the_post();
 									$destinations           = get_the_terms( $post_id, 'tour_destination' );
 									$first_destination_name = $destinations[0]->name;
 									$related_comments       = get_comments( array( 'post_id' => $post_id ) );
-									$meta                   = get_post_meta( $post_id, 'tf_tours_option', true );
+									$meta                   = get_post_meta( $post_id, 'tf_tours_opt', true );
 									$pricing_rule           = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 									$disable_adult          = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
 									$disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
