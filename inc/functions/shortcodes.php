@@ -372,6 +372,10 @@ function tf_search_form_shortcode( $atts, $content = null ) {
                 <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-tour-booking-form')"><?php _e( 'Tour', 'tourfic' ); ?></button>
 			<?php endif ?>
 
+			<?php if ( ! in_array( 'apartment', $disable_services ) && tf_is_search_form_tab_type( 'apartment', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
+                <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-apartment-booking-form')"><?php _e( 'Apartment', 'tourfic' ); ?></button>
+			<?php endif ?>
+
 			<?php do_action( 'tf_after_booking_form_tab', $type ) ?>
         </div>
 
@@ -386,6 +390,9 @@ function tf_search_form_shortcode( $atts, $content = null ) {
                     <?php endif; ?>
                     <?php if ( ! in_array( 'tour', $disable_services ) && tf_is_search_form_tab_type( 'tour', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
                         <option value="tf-tour-booking-form"><?php _e( 'Tour', 'tourfic' ); ?></option>
+                    <?php endif ?>
+                    <?php if ( ! in_array( 'apartment', $disable_services ) && tf_is_search_form_tab_type( 'apartment', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
+                        <option value="tf-apartment-booking-form"><?php _e( 'Apartment', 'tourfic' ); ?></option>
                     <?php endif ?>
 
                     <?php do_action( 'tf_after_booking_form_mobile_tab', $type ) ?>
@@ -419,6 +426,19 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 						tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle );
 					} else {
 						tf_tour_search_form_horizontal( $classes, $title, $subtitle );
+					}
+					?>
+                </div>
+				<?php
+			}
+			if ( ! in_array( 'apartment', $disable_services ) && tf_is_search_form_tab_type( 'apartment', $type ) ) {
+				?>
+                <div id="tf-apartment-booking-form" class="tf-tabcontent" <?php echo tf_is_search_form_single_tab( $type ) ? 'style="display:block"' : '' ?><?php echo esc_attr( $child_age_limit ); ?>>
+					<?php
+					if ( $advanced == "enabled" ) {
+						tf_apartment_advanced_search_form_horizontal( $classes, $title, $subtitle );
+					} else {
+						tf_apartment_search_form_horizontal( $classes, $title, $subtitle );
 					}
 					?>
                 </div>

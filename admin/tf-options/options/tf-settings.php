@@ -13,7 +13,7 @@ TF_Settings::option( 'tf_settings', array(
 	'icon'     => $menu_icon,
 	'position' => 25,
 	'sections' => array(
-		'general'       => array(
+		'general'               => array(
 			'title'  => esc_html__( 'General', 'tourfic' ),
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
@@ -23,18 +23,19 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Disable Services', 'tourfic' ),
 					'subtitle' => __( 'Disable or hide the services you don\'t need by ticking the checkbox', 'tourfic' ),
 					'options'  => array(
-						'hotel' => __( 'Hotel', 'tourfic' ),
-						'tour'  => __( 'Tour', 'tourfic' ),
+						'hotel'     => __( 'Hotel', 'tourfic' ),
+						'tour'      => __( 'Tour', 'tourfic' ),
+						'apartment' => __( 'Apartment', 'tourfic' ),
 					),
 				),
 			),
 		),
-		'hotel_option'  => array(
+		'hotel_option'          => array(
 			'title'  => esc_html__( 'Hotel Options', 'tourfic' ),
 			'icon'   => 'fas fa-hotel',
 			'fields' => array(),
 		),
-		'single_page'   => array(
+		'single_page'           => array(
 			'title'  => esc_html__( 'Single Page', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
@@ -63,13 +64,13 @@ TF_Settings::option( 'tf_settings', array(
 					'default'   => false
 				),
 				array(
-					'id'       => 'feature-filter',
-					'type'     => 'switch',
-					'label'    => __( 'Filter By Feature', 'tourfic' ),
+					'id'        => 'feature-filter',
+					'type'      => 'switch',
+					'label'     => __( 'Filter By Feature', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'default'  => true,
-					'is_pro'   => true
+					'default'   => true,
+					'is_pro'    => true
 				),
 				array(
 					'id'     => 'h-enquiry-email',
@@ -79,7 +80,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		'room_config'   => array(
+		'room_config'           => array(
 			'title'  => esc_html__( 'Room Config', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
@@ -101,12 +102,12 @@ TF_Settings::option( 'tf_settings', array(
 		),
 
 		//Apartment Options
-		'apartment_option'  => array(
+		'apartment_option'      => array(
 			'title'  => esc_html__( 'Apartment Options', 'tourfic' ),
 			'icon'   => 'fa-solid fa-house-chimney',
 			'fields' => array(),
 		),
-		'apartment_single_page'   => array(
+		'apartment_single_page' => array(
 			'title'  => esc_html__( 'Single Page', 'tourfic' ),
 			'parent' => 'apartment_option',
 			'icon'   => 'fa fa-cog',
@@ -143,16 +144,23 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false
 				),
+
+				array(
+					'id'     => 'apartment-enquiry-email',
+					'type'   => 'text',
+					'label'  => __( 'Enquiry Email', 'tourfic' ),
+					'is_pro' => true,
+				),
 			),
 		),
 
 		// Tour Options
-		'tour'          => array(
+		'tour'                  => array(
 			'title'  => __( 'Tour Options', 'tourfic' ),
 			'icon'   => 'fas fa-umbrella-beach',
 			'fields' => array(),
 		),
-		'single_tour'   => array(
+		'single_tour'           => array(
 			'title'  => esc_html__( 'Single Page', 'tourfic' ),
 			'parent' => 'tour',
 			'icon'   => 'fa fa-cog',
@@ -189,7 +197,7 @@ TF_Settings::option( 'tf_settings', array(
 		),
 
 		// Multi Vendor
-		'vendor'        => array(
+		'vendor'                => array(
 			'title'  => __( 'Multi Vendor', 'tourfic' ),
 			'icon'   => 'fas fa-handshake',
 			'fields' => array(
@@ -272,7 +280,7 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		// Search Options
-		'search'        => array(
+		'search'                => array(
 			'title'  => __( 'Search', 'tourfic' ),
 			'icon'   => 'fas fa-search',
 			'fields' => array(
@@ -292,9 +300,9 @@ TF_Settings::option( 'tf_settings', array(
 				),
 
 				array(
-					'id'    => 'posts_per_page',
-					'type'  => 'number',
-					'label' => __( 'Search result posts per page', 'tourfic' ),
+					'id'          => 'posts_per_page',
+					'type'        => 'number',
+					'label'       => __( 'Search result posts per page', 'tourfic' ),
 					'field_width' => 50
 				),
 
@@ -319,12 +327,12 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		// Design Options
-		'design-panel'  => array(
+		'design-panel'          => array(
 			'title'  => __( 'Design Panel', 'tourfic' ),
 			'icon'   => 'fas fa-palette',
 			'fields' => array(),
 		),
-		'global_design' => array(
+		'global_design'         => array(
 			'title'  => __( 'Global', 'tourfic' ),
 			'parent' => 'design-panel',
 			'icon'   => 'fas fa-cogs',
@@ -408,7 +416,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		'hotel_design'  => array(
+		'hotel_design'          => array(
 			'title'  => __( 'Hotel', 'tourfic' ),
 			'parent' => 'design-panel',
 			'icon'   => 'fas fa-hotel',
@@ -493,7 +501,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		'tour_design'   => array(
+		'tour_design'           => array(
 			'title'  => __( 'Tour', 'tourfic' ),
 			'parent' => 'design-panel',
 			'icon'   => 'fas fa-umbrella-beach',
@@ -587,7 +595,7 @@ TF_Settings::option( 'tf_settings', array(
 		),
 
 		// Miscellaneous Options
-		'miscellaneous' => array(
+		'miscellaneous'         => array(
 			'title'  => __( 'Miscellaneous', 'tourfic' ),
 			'icon'   => 'fas fa-globe',
 			'fields' => array(),
@@ -597,7 +605,7 @@ TF_Settings::option( 'tf_settings', array(
 		 *
 		 * Sub Menu
 		 */
-		'map_settings'  => array(
+		'map_settings'          => array(
 			'title'  => __( 'Map Settings', 'tourfic' ),
 			'parent' => 'miscellaneous',
 			'icon'   => 'fas fa-umbrella-beach',
@@ -634,7 +642,7 @@ TF_Settings::option( 'tf_settings', array(
 		 *
 		 * Sub Menu
 		 */
-		'wishlist'      => array(
+		'wishlist'              => array(
 			'title'  => __( 'Wishlist', 'tourfic' ),
 			'parent' => 'miscellaneous',
 			'icon'   => 'fas fa-heart',

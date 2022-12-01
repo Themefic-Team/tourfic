@@ -329,6 +329,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'ajax_url'     => admin_url( 'admin-ajax.php' ),
                 'single' => is_single(),
                 'locations' => get_hotel_locations(),
+                'apartment_locations' => get_apartment_locations(),
                 'tour_destinations' => get_tour_destinations(),
                 'ajax_result_success' => __('Refreshed Successfully!', 'tourfic'),
                 'wishlist_add' => __('Adding to wishlist...', 'tourfic'),

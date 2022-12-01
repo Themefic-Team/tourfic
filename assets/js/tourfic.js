@@ -1156,7 +1156,13 @@
          * Initiate autocomplete on inputs
          */
 
-            // Hotel location autocomplete
+        // Apartment location autocomplete
+        var apartment_location_input = document.getElementById("tf-apartment-location");
+        var apartment_locations = tf_params.apartment_locations;
+        if (apartment_location_input) {
+            tourfic_autocomplete(apartment_location_input, apartment_locations);
+        }
+        // Hotel location autocomplete
         var hotel_location_input = document.getElementById("tf-location");
         var hotel_locations = tf_params.locations;
         if (hotel_location_input) {
