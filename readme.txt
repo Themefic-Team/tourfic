@@ -413,13 +413,13 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 * Fixed: Date picker issue
 * Fixed: Booking API issue
+* Fixed: License Issue(pro)
 
 = 2.9.0 -  01 December 2022 =
 
-* Added : Removed redux framework and integrated custom metavox framework.
+* Added : Removed codestar framework and integrated custom metabox framework.
 * Added : New taxonomy "Attraction" added in tours.
 * Added : New taxonomy "Activities" added in tours.
-* Added : Removed redux framework and integrated custom metavox framework.
 * Added : Itinerary Multi Language Support ( By Fonts Upload )
 * Improved : New design integrated for Plugin settings panel.
 * Improved : New design integrated for tour option panel.
