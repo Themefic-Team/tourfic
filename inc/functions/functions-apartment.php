@@ -58,7 +58,8 @@ function register_tf_apartment_post_type() {
 	register_post_type( 'tf_apartment', $apartment_args );
 }
 
-if ( tfopt( 'disable-services' ) && in_array( 'apartment', tfopt( 'disable-services' ) ) ) {} else {
+if ( tfopt( 'disable-services' ) && in_array( 'apartment', tfopt( 'disable-services' ) ) ) {
+} else {
 	add_action( 'init', 'register_tf_apartment_post_type' );
 }
 
@@ -170,7 +171,9 @@ function tf_apartment_taxonomies_register() {
 	register_taxonomy( 'apartment_feature', 'tf_apartment', apply_filters( 'apartment_feature_tax_args', $args ) );
 
 }
-if ( tfopt( 'disable-services' ) && in_array( 'apartment', tfopt( 'disable-services' ) ) ) {} else {
+
+if ( tfopt( 'disable-services' ) && in_array( 'apartment', tfopt( 'disable-services' ) ) ) {
+} else {
 	add_action( 'init', 'tf_apartment_taxonomies_register' );
 }
 
@@ -323,7 +326,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
             (function ($) {
                 $(document).ready(function () {
 
-                    $("#tf_hotel_aval_check #check-in-out-date").flatpickr({
+                    $("#tf_apartment_booking #check-in-out-date").flatpickr({
                         enableTime: false,
                         mode: "range",
                         dateFormat: "Y/m/d",
@@ -439,9 +442,9 @@ if ( ! function_exists( 'tf_apartment_advanced_search_form_horizontal' ) ) {
                         <!-- Children age input field based on children number -->
 						<?php
 
-						$children_age = tfopt( 'children_age_limit' );
+						$children_age        = tfopt( 'children_age_limit' );
 						$children_age_status = tfopt( 'enable_child_age_limit' );
-						if( !empty($children_age_status) && $children_age_status=="1" ){
+						if ( ! empty( $children_age_status ) && $children_age_status == "1" ) {
 							?>
                             <div class="tf-children-age-fields">
                                 <div class="tf-children-age" id="tf-age-field-0" style="display:none">
@@ -541,7 +544,7 @@ if ( ! function_exists( 'tf_apartment_advanced_search_form_horizontal' ) ) {
 }
 
 /**
- * Single Hotel Sidebar Booking Form
+ * Single Apartment Sidebar Booking Form
  */
 function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
 
@@ -848,6 +851,83 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
         })(jQuery);
 
     </script>
+	<?php
+}
+
+/**
+ * Apartment Archive Single Item Layout
+ */
+function tf_apartment_archive_single_item( $period, array &$not_found, array $data = [] ): void {
+
+	// Form Data
+	if ( isset( $data[4] ) && isset( $data[5] ) ) {
+		[ $adults, $child, $infant, $check_in_out, $startprice, $endprice ] = $data;
+	} else {
+		[ $adults, $child, $infant, $check_in_out ] = $data;
+	}
+
+	// Get apartment meta options
+	$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+	if ( empty( $meta ) ) {
+		return;
+	}
+
+	// Location
+	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
+
+	/**
+	 * All values from URL
+	 */
+
+	// Check-in & out date
+	if ( ! empty( $check_in_out ) ) {
+		$form_check_in      = substr( $check_in_out, 0, 10 );
+		$form_check_in_stt  = strtotime( $form_check_in );
+		$form_check_out     = substr( $check_in_out, 14, 10 );
+		$form_check_out_stt = strtotime( $form_check_out );
+	}
+
+	// Single link
+	$url = get_the_permalink();
+	$url = add_query_arg( array(
+		'adults'            => $adults,
+		'children'          => $child,
+		'infant'            => $infant,
+		'check-in-out-date' => $check_in_out,
+	), $url );
+	?>
+    <div class="single-tour-wrap">
+        <div class="single-tour-inner">
+            <div class="tourfic-single-left">
+                <a href="<?php echo $url; ?>">
+					<?php
+					if ( has_post_thumbnail() ) {
+						the_post_thumbnail( 'full' );
+					} else {
+						echo '<img width="100%" height="100%" src="' . TF_ASSETS_URL . "img/img-not-available.svg" . '" class="attachment-full size-full wp-post-image">';
+					}
+					?>
+                </a>
+            </div>
+            <div class="tourfic-single-right">
+                <div class="tf_property_block_main_row">
+                    <div class="tf_item_main_block">
+                        <div class="tf-hotel__title-wrap">
+                            <a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php the_title(); ?></h3></a>
+                        </div>
+						<?php
+						if ( $address ) {
+							echo '<div class="tf-map-link">';
+							echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $address . '</span>';
+							echo '</div>';
+						}
+						?>
+                    </div>
+					<?php tf_archive_single_rating(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
 	<?php
 }
 
