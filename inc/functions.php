@@ -508,7 +508,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                             <option <?php echo 1 == $infant ? 'selected' : null ?> value="1">1 <?php _e( 'Infant', 'tourfic' ); ?></option>
 							<?php foreach ( range( 2, 8 ) as $value ) {
 								$selected = $value == $infant ? 'selected' : null;
-								echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __( "Children", "tourfic" ) . '</option>';
+								echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __( "Infant", "tourfic" ) . '</option>';
 							} ?>
 
                         </select>
@@ -723,7 +723,7 @@ function tf_search_result_ajax_sidebar() {
 	 */
 	$adults       = ! empty( $_POST['adults'] ) ? sanitize_text_field( $_POST['adults'] ) : '';
 	$child        = ! empty( $_POST['children'] ) ? sanitize_text_field( $_POST['children'] ) : '';
-	$infant        = ! empty( $_POST['infant'] ) ? sanitize_text_field( $_POST['infant'] ) : '';
+	$infant       = ! empty( $_POST['infant'] ) ? sanitize_text_field( $_POST['infant'] ) : '';
 	$room         = ! empty( $_POST['room'] ) ? sanitize_text_field( $_POST['room'] ) : '';
 	$check_in_out = ! empty( $_POST['checked'] ) ? sanitize_text_field( $_POST['checked'] ) : '';
 
@@ -737,7 +737,7 @@ function tf_search_result_ajax_sidebar() {
 	$activities  = ( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
 	$posttype    = $_POST['type'] ? sanitize_text_field( $_POST['type'] ) : 'tf_hotel';
 	# Separate taxonomy input for filter query
-	$place_taxonomy  = $posttype == 'tf_tours' ? 'tour_destination' : ($posttype == 'tf_apartment' ? 'apartment_location' : 'hotel_location');
+	$place_taxonomy  = $posttype == 'tf_tours' ? 'tour_destination' : ( $posttype == 'tf_apartment' ? 'apartment_location' : 'hotel_location' );
 	$filter_taxonomy = $posttype == 'tf_tours' ? 'null' : 'hotel_feature';
 	# Take dates for filter query
 	$checkin    = isset( $_POST['checkin'] ) ? trim( $_POST['checkin'] ) : array();
@@ -965,34 +965,30 @@ function tf_search_result_ajax_sidebar() {
 
 				}
 
-			}elseif ( $posttype == 'tf_apartment' ) {
-//				$meta  = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
-//				$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-//				if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
-//					$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-//						return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-//					}, $rooms );
-//					$rooms                = unserialize( $tf_hotel_rooms_value );
-//				}
-//
-//				$total_adults = tf_hotel_total_room_adult_child( get_the_ID(), 'adult' );
-//				$total_child  = tf_hotel_total_room_adult_child( get_the_ID(), 'child' );
-//				$total_room   = tf_hotel_total_room_adult_child( get_the_ID(), 'room' );
-//				$room_matched = tf_hotel_room_matched_by_date( $rooms, $form_check_in_stt, $form_check_out_stt );
-//				if ( ! empty( $check_in_out ) ):
-//					if ( $room > $total_room || $adults > $total_adults || $child > $total_child || ! $room_matched ) {
-//						$not_found[] = 1;
-//						$total_posts --;
-//						continue;
-//
-//					}
-//				endif;
+			} elseif ( $posttype == 'tf_apartment' ) {
+				if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
+					$data = [ $adults, $child, $room, $check_in_out, $startprice, $endprice ];
+				} else {
+					$data = [ $adults, $child, $room, $check_in_out ];
+				}
 
-                if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-                    $data = [ $adults, $child, $room, $check_in_out, $startprice, $endprice ];
-                } else {
-                    $data = [ $adults, $child, $room, $check_in_out ];
-                }
+				$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+				//skip the tour if the search form total people exceeds the maximum number of people in tour
+				if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] < $adults && $meta['max_adults'] != 0 ) {
+					$not_found[] = 1;
+					$total_posts --;
+					continue;
+				}
+				if ( ! empty( $meta['max_children'] ) && $meta['max_children'] < $child && $meta['max_children'] != 0 ) {
+					$not_found[] = 1;
+					$total_posts --;
+					continue;
+				}
+				if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] < $infant && $meta['max_infants'] != 0 ) {
+					$not_found[] = 1;
+					$total_posts --;
+					continue;
+				}
 
 				tf_apartment_archive_single_item( $period, $not_found, $data );
 

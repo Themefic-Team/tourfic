@@ -872,12 +872,9 @@ function tf_apartment_archive_single_item( $period, array &$not_found, array $da
 		return;
 	}
 
+
 	// Location
 	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
-
-	/**
-	 * All values from URL
-	 */
 
 	// Check-in & out date
 	if ( ! empty( $check_in_out ) ) {
@@ -897,6 +894,11 @@ function tf_apartment_archive_single_item( $period, array &$not_found, array $da
 	), $url );
 	?>
     <div class="single-tour-wrap">
+        <?php
+        echo 'Max adult: ' . $meta['max_adults'] . '<br>';
+        echo 'Max child: ' . $meta['max_children'] . '<br>';
+        echo 'Max infant: ' . $meta['max_infants'] . '<br>';
+        ?>
         <div class="single-tour-inner">
             <div class="tourfic-single-left">
                 <a href="<?php echo $url; ?>">
