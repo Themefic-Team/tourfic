@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet, fida02
 Tags: travel, tour, trip, hotel, tour-booking, hotel-booking, travel-booking, trip-booking, woocommerce hotel, woocommerce tour, woocommerce travel, wordpress travel, wordpress hotel, wordpress tour plugin, woocommerce tour booking, woocommerce travel booking plugin, woocommerce hotel booking, wordpress tour booking plugin, travel booking wordpress plugin, wordpress hotel booking plugin, wp hotel booking, hotel booking plugin, woocommerce accommodation bookings, woocommerce hotel booking, wordpress room booking plugin, best hotel booking plugin wordpress, hotel plugin, hotel plugin wordpress, tour booking, travel booking, trip booking, hotel booking, tour itinerary, tour operator, travel agency, tour reservation, hotel reservation, airbnb, booking.com, agoda.com, agoda,  wp travel engine, wp travel, wp hotel
 Requires at least: 5.4
 Tested up to: 6.1.1
-Stable tag: 2.8.13
+Stable tag: 2.9.0
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -410,6 +410,24 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 == Changelog ==
 
 
+
+
+= 2.9.0 -  01 December 2022 =
+
+* Added : Removed redux framework and integrated custom metavox framework.
+* Added : New taxonomy "Attraction" added in tours.
+* Added : New taxonomy "Activities" added in tours.
+* Added : Removed redux framework and integrated custom metavox framework.
+* Added : Itinerary Multi Language Support ( By Fonts Upload )
+* Improved : New design integrated for Plugin settings panel.
+* Improved : New design integrated for tour option panel.
+* Improved : New design integrated for hotel option panel.
+* Fixed : Issue with room availability after booking certain dates.
+* Fixed : Pagination issue in archive page.
+* Fixed : FAQ icon isssue in hotels and tours
+* Fixed : Hotel feature empty icon/image issue fixed.
+* Fixed : Vendor logout warning issue fixed.
+
 = 2.8.13 -  23 November 2022 =
 
 * Updated: Compatitibility check with WordPress 6.1.1
@@ -764,5 +782,6 @@ Added: Feature image required hotel and tours
 
 == Upgrade Notice ==
 
-= 2.8.9 =
-This is an important & critical release. Please make sure you BACKUP your website before updating. You need to update the plugin to get next level updates & features of Tourfic. After you update the plugin, please go to "Tourfic Settings" and click the "Save Button". You can then go ahead and start editing.As changes in language strings are done in this version so please BACKUP your language files as well.
+= 2.9.0 =
+
+This is an important & critical release. Please make sure you BACKUP your website before updating. You need to update the plugin to get next level updates & features of Tourfic. After you update the plugin, please go to "Tourfic Settings" and click the "Save Button". You can then go ahead and start editing.As a the complete upgradation in metaboxes framework has been done in this version so please BACKUP your both database and old version of Tourfic.

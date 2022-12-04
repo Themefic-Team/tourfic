@@ -111,6 +111,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'label'        => __( 'Room Details', 'tourfic' ),
 					'button_title' => __( 'Add New Room', 'tourfic' ),
 					'class'        => 'room-repeater',
+					'max'          => 5,
 					'fields'       => array(
 						array(
 							'id'          => 'unique_id',

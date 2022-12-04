@@ -35,7 +35,7 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-hotel.php' ) ) {
 }
 
 /**
- * Hotel Functions
+ * Apartment Functions
  */
 if ( file_exists( TF_INC_PATH . 'functions/functions-apartment.php' ) ) {
 	require_once TF_INC_PATH . 'functions/functions-apartment.php';
@@ -1390,6 +1390,7 @@ function tf_data_types( $var ) {
 }
 
 
+
 # ================================== #
 # Custom Option Fields               #
 # ================================== #
@@ -1432,7 +1433,7 @@ function tf_hotel_slug_field_callback() { ?>
     <p class="description"><?php printf( __( 'Leave blank for default value: %1shotels%2s', 'tourfic' ), '<code>', '</code>' ); ?></p>
 <?php }
 
-// Hotel slug callback
+// Apartment slug callback
 function tf_apartment_slug_field_callback() { ?>
     <input name="apartment_slug" id="apartment_slug" type="text" value="<?php echo get_option( 'apartment_slug' ) ? get_option( 'apartment_slug' ) : ''; ?>" class="regular-text code">
     <p class="description"><?php printf( __( 'Leave blank for default value: %1sapartments%2s', 'tourfic' ), '<code>', '</code>' ); ?></p>

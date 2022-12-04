@@ -441,15 +441,26 @@ while ( have_posts() ) : the_post();
 										$pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
 										$avil_by_date = ! empty( $room['avil_by_date'] ) ? ! empty( $room['avil_by_date'] ) : false;
 
-										if ( $avil_by_date == true ) {
+										if ( defined( 'TF_PRO' ) && $avil_by_date == true ) {
 											$repeat_by_date = ! empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
 											if ( $pricing_by == '1' ) {
 												$prices = wp_list_pluck( $repeat_by_date, 'price' );
 											} else {
 												$prices = wp_list_pluck( $repeat_by_date, 'adult_price' );
 											}
-
-											$price = $prices ? (min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) )) : wc_price( 0 );
+                                            if(!empty($prices)){
+                                                $range_price = [];
+                                                foreach($prices as $single){
+                                                    if(!empty($single)){
+                                                        $range_price[]= $single ;
+                                                    }
+                                                }
+                                                if(sizeof($range_price) > 1){
+                                                    $price = $prices ? (min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) )) : wc_price( 0 );
+                                                }else{
+                                                    $price = !empty($range_price[0]) ? wc_price($range_price[0]) : wc_price( 0 );
+                                                }
+                                            }
 										} else {
 											if ( $pricing_by == '1' ) {
 												$price = wc_price( ! empty( $room['price'] ) ? $room['price'] : '0.0' );
@@ -523,12 +534,14 @@ while ( have_posts() ) : the_post();
 																$room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
                                                                 if(!empty($room_f_meta)){
 																$room_icon_type = ! empty( $room_f_meta['icon-type'] ) ? $room_f_meta['icon-type'] : '';
-
-																if ( $room_icon_type == 'fa' ) {
+                                                                }
+																if ( !empty($room_icon_type) && $room_icon_type == 'fa' ) {
 																	$room_feature_icon = !empty($room_f_meta['icon-fa']) ? '<i class="' . $room_f_meta['icon-fa'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
-																} elseif ( $room_icon_type == 'c' ) {
+																} elseif ( !empty($room_icon_type) && $room_icon_type == 'c' ) {
 																	$room_feature_icon = !empty($room_f_meta['icon-c']) ? '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
-																}
+																}else{
+                                                                    $room_feature_icon = '<i class="fas fa-bread-slice"></i>';
+                                                                }
 
 																$room_term = get_term( $feature ); ?>
                                                                 <li class="tf-tooltip">
@@ -538,7 +551,7 @@ while ( have_posts() ) : the_post();
                                                                         <i class="tool-i"></i>
                                                                     </div>
                                                                 </li>
-															<?php } } ?>
+															<?php } ?>
                                                         </ul>
                                                     </div>
 												<?php } ?>

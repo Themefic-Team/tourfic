@@ -59,13 +59,15 @@
                 foreach ( $room['features'] as $feature ) {
 
                         $room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
-                        if( !empty( $room_f_meta ) ){
-                            if ( $room_f_meta['icon-type'] == 'fa' ) {
-                                $room_feature_icon = !empty($room_f_meta['icon-fa']) ? '<i class="' . $room_f_meta['icon-fa'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
-                            } elseif ( $room_f_meta['icon-type'] == 'c' ) {
-                                $room_feature_icon = !empty($room_f_meta['icon-c']) ? '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
-                            }
+                        
+                        if ( !empty($room_f_meta['icon-type']) && $room_f_meta['icon-type'] == 'fa' ) {
+                            $room_feature_icon = !empty($room_f_meta['icon-fa']) ? '<i class="' . $room_f_meta['icon-fa'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
+                        } elseif ( !empty($room_f_meta['icon-type']) && $room_f_meta['icon-type'] == 'c' ) {
+                            $room_feature_icon = !empty($room_f_meta['icon-c']) ? '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
+                        }else{
+                            $room_feature_icon = '<i class="fas fa-bread-slice"></i>';
                         }
+                        
                        
 
                     $room_term = get_term( $feature );?>
