@@ -603,7 +603,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 
 					} elseif ( $post_type == 'tf_apartment' ) {
 						$meta         = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
-						//skip the tour if the search form total people exceeds the maximum number of people in tour
+
 						if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] < $adults && $meta['max_adults'] != 0 ) {
 							$not_found[] = 1;
 							$total_posts --;
@@ -651,9 +651,9 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 
 				}
 
-				if ( ! in_array( 0, $not_found ) ) {
-					echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found! Select another dates', 'tourfic' ) . '</div>';
-				}
+//				if ( ! in_array( 0, $not_found ) ) {
+//					echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found! Select another dates', 'tourfic' ) . '</div>';
+//				}
 			} else {
 				echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 			}

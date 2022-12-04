@@ -460,6 +460,7 @@
             var adults = $('#adults').val();
             var room = $('#room').val();
             var children = $('#children').val();
+            var infant = $('#infant').val();
             var checked = $('#check-in-out-date').val();
             var startprice = $('#startprice').val();
             var endprice = $('#endprice').val();
@@ -512,6 +513,7 @@
             formData.append('adults', adults);
             formData.append('room', room);
             formData.append('children', children);
+            formData.append('infant', infant);
             formData.append('checkin', checkin);
             formData.append('checkout', checkout);
             formData.append('filters', filters);

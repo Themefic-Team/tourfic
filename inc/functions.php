@@ -973,7 +973,7 @@ function tf_search_result_ajax_sidebar() {
 				}
 
 				$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
-				//skip the tour if the search form total people exceeds the maximum number of people in tour
+
 				if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] < $adults && $meta['max_adults'] != 0 ) {
 					$not_found[] = 1;
 					$total_posts --;
