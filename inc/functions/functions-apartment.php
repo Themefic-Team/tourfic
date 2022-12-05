@@ -857,7 +857,7 @@ function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
 /**
  * Apartment Archive Single Item Layout
  */
-function tf_apartment_archive_single_item( $period, array &$not_found, array $data = [] ): void {
+function tf_apartment_archive_single_item( array $data = [] ): void {
 
 	// Form Data
 	if ( isset( $data[4] ) && isset( $data[5] ) ) {
@@ -894,11 +894,6 @@ function tf_apartment_archive_single_item( $period, array &$not_found, array $da
 	), $url );
 	?>
     <div class="single-tour-wrap">
-        <?php
-        echo 'Max adult: ' . $meta['max_adults'] . '<br>';
-        echo 'Max child: ' . $meta['max_children'] . '<br>';
-        echo 'Max infant: ' . $meta['max_infants'] . '<br>';
-        ?>
         <div class="single-tour-inner">
             <div class="tourfic-single-left">
                 <a href="<?php echo $url; ?>">
@@ -936,7 +931,7 @@ function tf_apartment_archive_single_item( $period, array &$not_found, array $da
 if ( ! function_exists( 'tf_apartment_booked_days' ) ) {
 	function tf_apartment_booked_days( $post_id ) {
 		$wc_orders = wc_get_orders( array(
-			'post_status' => array( 'wc-processing' ),
+			'post_status' => array( 'wc-completed' ),
 			'limit'       => - 1,
 		) );
 

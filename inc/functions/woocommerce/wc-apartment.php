@@ -74,7 +74,6 @@ function tf_apartment_booking_callback() {
 		$response['errors'][] = __( 'Unknown Error! Please try again.', 'tourfic' );
 	}
 
-	$response['$day_difference'] = $day_difference;
 	/**
 	 * If no errors then process
 	 */

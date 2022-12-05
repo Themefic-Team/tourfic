@@ -1208,7 +1208,7 @@
         // Number Increment
         $('.acr-inc').on('click', function (e) {
             var input = $(this).parent().find('input');
-            var max = input.attr('max') ? input.attr('max') : 100;
+            var max = input.attr('max') ? input.attr('max') : 999;
             var step = input.attr('step') ? input.attr('step') : 1;
 
             if (input.val() < max) {

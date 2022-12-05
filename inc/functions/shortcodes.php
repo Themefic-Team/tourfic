@@ -198,8 +198,8 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 					}
 					//get and store all the prices for each room
 					$room_price = [];
-					if(!empty($rooms)){
-						foreach( $rooms as $room ){
+					if ( ! empty( $rooms ) ) {
+						foreach ( $rooms as $room ) {
 							$room_price[] = ! empty( $room['price'] ) ? $room['price'] : 0;
 						}
 					}
@@ -602,7 +602,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 						}
 
 					} elseif ( $post_type == 'tf_apartment' ) {
-						$meta         = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+						$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
 
 						if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] < $adults && $meta['max_adults'] != 0 ) {
 							$not_found[] = 1;
@@ -619,7 +619,44 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 							$total_posts --;
 							continue;
 						}
-						tf_apartment_archive_single_item( $period, $not_found, $data );
+						if ( ! empty( $check_in_out ) ) {
+							$booked_dates   = tf_apartment_booked_days( get_the_ID() );
+							$checkInOutDate = explode( ' - ', $check_in_out );
+							if ( $checkInOutDate[0] && $checkInOutDate[1] ) {
+								$check_in_stt  = strtotime( $checkInOutDate[0] . ' +1 day' );
+								$check_out_stt = strtotime( $checkInOutDate[1] );
+								$days          = ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1;
+								//skip apartment if min stay is grater than selected days
+								if ( ! empty( $meta['min_stay'] ) && intval( $meta['min_stay'] ) > $days && $meta['min_stay'] != 0 ) {
+									$not_found[] = 1;
+									$total_posts --;
+									continue;
+								}
+
+								foreach ( $booked_dates as $booked_date ) {
+									$booked_from = strtotime( $booked_date['check_in'] );
+									$booked_to   = strtotime( $booked_date['check_out'] );
+
+									if ( $check_in_stt >= $booked_from && $check_in_stt <= $booked_to ) {
+										$not_found[] = 1;
+										$total_posts --;
+										continue 2;
+									}
+									if ( $check_out_stt >= $booked_from && $check_out_stt <= $booked_to ) {
+										$not_found[] = 1;
+										$total_posts --;
+										continue 2;
+									}
+									if ( $check_in_stt <= $booked_from && $check_out_stt >= $booked_to ) {
+										$not_found[] = 1;
+										$total_posts --;
+										continue 2;
+									}
+								}
+							}
+						}
+
+						tf_apartment_archive_single_item( $data );
 					} else {
 						/**
 						 * Check if minimum and maximum people limit matches with the search query
@@ -651,9 +688,9 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 
 				}
 
-//				if ( ! in_array( 0, $not_found ) ) {
-//					echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found! Select another dates', 'tourfic' ) . '</div>';
-//				}
+				if ( $total_posts == 0 ) {
+					echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+				}
 			} else {
 				echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 			}
