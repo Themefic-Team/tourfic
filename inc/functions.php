@@ -1025,6 +1025,28 @@ function tf_search_result_ajax_sidebar() {
 					}
 				}
 
+				if ( ! empty( $meta['price_per_night'] ) ) {
+					if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
+						if ( $meta['price_per_night'] < $startprice || $meta['price_per_night'] > $endprice ) {
+							$not_found[] = 1;
+							$total_posts --;
+							continue;
+						}
+					} elseif ( ! empty( $startprice ) ) {
+						if ( $meta['price_per_night'] < $startprice ) {
+							$not_found[] = 1;
+							$total_posts --;
+							continue;
+						}
+					} elseif ( ! empty( $endprice ) ) {
+						if ( $meta['price_per_night'] > $endprice ) {
+							$not_found[] = 1;
+							$total_posts --;
+							continue;
+						}
+					}
+				}
+
 				tf_apartment_archive_single_item( $data );
 
 			} else {

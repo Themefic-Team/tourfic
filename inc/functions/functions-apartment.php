@@ -314,7 +314,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                         </label>
                     </div>
                     <div class="tf-more-info">
-                        <span><?php _e( 'Filter Price', 'tourfic' ); ?></span>
+                        <span><?php _e( 'Filter Price (Per Night)', 'tourfic' ); ?></span>
                         <div class="tf-filter-price-range">
                             <div class="tf-apartment-filter-range"></div>
                         </div>
@@ -363,6 +363,12 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                         },
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                            //days
+                            var date1 = new Date(selectedDates[0]);
+                            var date2 = new Date(selectedDates[1]);
+                            var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                            console.log(diffDays);
                         },
                         defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
                     });

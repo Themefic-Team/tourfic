@@ -563,7 +563,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 			'taxonomy' => $post_type == 'tf_hotel' ? 'hotel_feature' : 'apartment_feature',
 			'field'    => 'slug',
 			'terms'    => $_GET['features'],
-        );
+		);
 	}
 
 	$loop        = new WP_Query( $args );
@@ -648,6 +648,29 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 										$total_posts --;
 										continue 2;
 									}
+								}
+							}
+						}
+
+                        //price filter per night based
+						if ( ! empty( $meta['price_per_night'] ) ) {
+							if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
+								if ( $meta['price_per_night'] < $startprice || $meta['price_per_night'] > $endprice ) {
+									$not_found[] = 1;
+									$total_posts --;
+									continue;
+								}
+							} elseif ( ! empty( $startprice ) ) {
+								if ( $meta['price_per_night'] < $startprice ) {
+									$not_found[] = 1;
+									$total_posts --;
+									continue;
+								}
+							} elseif ( ! empty( $endprice ) ) {
+								if ( $meta['price_per_night'] > $endprice ) {
+									$not_found[] = 1;
+									$total_posts --;
+									continue;
 								}
 							}
 						}
