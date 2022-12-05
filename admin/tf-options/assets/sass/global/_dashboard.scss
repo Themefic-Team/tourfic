@@ -91,8 +91,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media #{$max991}{
+      display: flow-root;
+    }
     .tf-setting-banner-content{
       width: 50%;
+      @media #{$max991}{
+        width: 100%;
+      }
       img{
         width: 120px;
         display: block
@@ -108,7 +114,10 @@
       }
     }
     .tf-setting-banner-image{
-      width: 50%;
+      width: 30%;
+      @media #{$max991}{
+        width: 100%;
+      }
       img{
         width: 100%;
       }
@@ -127,6 +136,9 @@
     .tf-performance-grid{
       display: flex;
       justify-content: space-between;
+      @media #{$max1199}{
+        display: flow-root;
+      }
       .tf-single-performance-grid{
         padding: 20px;
         border-radius: 8px;
@@ -135,6 +147,18 @@
         flex-wrap: wrap;
         margin-bottom: 15px;
         width: 21%;
+        @media #{$max1366}{
+          width: 20%;
+        }
+        @media #{$max1199}{
+          width: 42%;
+          margin: 15px 1%;
+          float: left;
+        }
+        @media #{$max767}{
+          width: 94%;
+          margin: 15px 0px;
+        }
         .tf-single-performance-icon{
           width: 70px;
           height: 70px;
@@ -143,10 +167,13 @@
         }
         .tf-single-performance-content{
           padding-left: 25px;
+          @media #{$max1366}{
+            padding-left: 15px;
+          }
           p{
             font-size: 16px;
-            font-weight: 400;
-            color: var(--wpc-gray-color);
+            font-weight: 600;
+            color: #222;
             margin: 0 0 10px;
           }
           h3{
@@ -161,6 +188,223 @@
     }
   }
 }
+
+// get Help page
+.tf-settings-help-center{
+  .tf-help-center-banner{
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 40px 40px 40px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 0px 0px 40px;
+    @media #{$max1199}{
+      padding-top: 20px;
+    }
+    @media #{$max575}{
+      display: flow-root;
+      padding: 25px;
+    }
+    .tf-help-center-content{
+      width: 45%;
+      @media #{$max575}{
+        width: 100%;
+      }
+      h2{
+        color: #000;
+        font-size: 34px;
+        margin: 0;
+      }
+      p{
+        font-size: 1rem;
+        color: #71787C;
+      }
+    }
+    .tf-help-center-image{
+      width: 35%;
+      @media #{$max575}{
+        width: 100%;
+      }
+      img{
+        max-width: 100%;
+      }
+    }
+  }
+  .tf-support-document{
+    margin: 40px 40px 40px 20px;
+    display: flex;
+    justify-content: space-between;
+    @media #{$max1199}{
+      display: flow-root;
+    }
+    .tf-single-support{
+      background-color: #fff;
+      border-radius: 10px;
+      width: 24%;
+      min-height: 270px;
+      @media #{$max1199}{
+        width: 48%;
+        margin: 15px 1%;
+        float: left;
+      }
+      @media #{$max767}{
+        width: 100%;
+        margin: 15px 0%;
+        float: left;
+      }
+      a{
+        display: block;
+        padding: 40px;
+        text-decoration: none;
+        img{
+          margin-bottom: 35px;
+        }
+        h3{
+          font-size: 20px;
+          margin: 0;
+          color: #000;
+          display: block;
+          line-height: 24px;
+        }
+        span{
+          display: inline-block;
+          margin-bottom: 0;
+          display: inline-block;
+          border: 2px solid #003c79;
+          border-radius: 6px;
+          padding: 9px 16px;
+          font-size: 15px;
+          font-weight: 600;
+          color: #003c79;
+          margin-top: 20px;
+          line-height: 1;
+          transition: .3s all ease;
+          &:hover{
+            background-color: #003c79;
+            color: #fff;
+            margin-top: 15px;
+          }
+        }
+      }
+    }
+  }
+  .tf-settings-faq{
+    margin: 40px 40px 40px 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 40px;
+    h2{
+      margin: 0 0 30px;
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 28px;
+      color: #000;
+    }
+    .tf-accordion-wrapper{
+      grid-template-columns: repeat(2, 1fr);
+      display: grid;
+      gap: 20px;
+      @media #{$max767}{
+        display: block;
+      }
+      .tf-single-faq{
+        padding: 25px 30px;
+        border: 1px solid #E4E6EB;
+        border-radius: 8px;
+        @media #{$max767}{
+          margin: 15px 0px;
+        }
+        .tf-faq-title{
+          display: flex;
+          align-items: center;
+          i{
+            font-size: 18px;
+            margin-right: 10px;
+            color: #000;
+          }
+          h4{
+            margin: 0;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: 600;
+            color: #1d2327;
+          }
+        }
+        .tf-faq-title.active{
+          i{
+            transform: rotate(180deg);
+          }
+        }
+        .tf-faq-desc{
+          display: none;
+          p{
+            font-size: 1rem;
+            color: #44464B;
+          }
+        }
+      }
+    }
+  }
+}
+
+.tf-setting-license{
+  margin: 40px 40px 40px 20px;
+  .tf-setting-license-tabs{
+    ul{
+      margin: 0;
+      margin-left: 40px;
+      li.active{
+        display: inline-block;
+        border: none;
+        margin: 0;
+        line-height: 18px;
+        text-decoration: none;
+        font-weight: 600;
+        position: relative;
+        background-color: #fff;
+        border-radius: 5px 5px 0px 0px;
+        &:before{
+          position: absolute;
+          content: "";
+          width: 16px;
+          height: 16px;
+          background-color: #fff;
+          bottom: -8px;
+          left: -5px;
+          transform: rotate(45deg);
+        }
+        &:after{
+          position: absolute;
+          content: "";
+          width: 16px;
+          height: 16px;
+          background-color: #fff;
+          bottom: -8px;
+          right: -5px;
+          transform: rotate(45deg);
+        }
+        span{
+          display: inline-block;
+          padding: 14px 22px;
+          color: #000;
+          font-size: 18px;
+          text-decoration: none;
+          i{
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+  .tf-setting-license-field{
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+  }
+}
+
+
 .tf-deshboard-wrapper {
   margin: 20px auto;
   max-width: 1120px;

@@ -1054,6 +1054,17 @@ var frame, gframe;
             e.preventDefault();
             $(".tf-admin-tab").toggleClass('active');
         }); 
+
+
+        $('.tf-faq-title').click(function () {
+            var $this = $(this);
+            if (!$this.hasClass("active")) {
+                $(".tf-faq-desc").slideUp(400);
+                $(".tf-faq-title").removeClass("active");
+            }
+            $this.toggleClass("active");
+            $this.next().slideToggle();
+        });
     });
 
 

@@ -613,8 +613,14 @@ Fontawesome
   display: flex;
   align-items: center;
   justify-content: space-between; }
+  @media only screen and (max-width: 991.98px) {
+    .tf-setting-dashboard .tf-setting-banner {
+      display: flow-root; } }
   .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content {
     width: 50%; }
+    @media only screen and (max-width: 991.98px) {
+      .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content {
+        width: 100%; } }
     .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content img {
       width: 120px;
       display: block; }
@@ -626,7 +632,10 @@ Fontawesome
         display: block;
         font-weight: 700; }
   .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-image {
-    width: 50%; }
+    width: 30%; }
+    @media only screen and (max-width: 991.98px) {
+      .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-image {
+        width: 100%; } }
     .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-image img {
       width: 100%; }
 .tf-setting-dashboard .tf-setting-performace-section {
@@ -640,6 +649,9 @@ Fontawesome
   .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid {
     display: flex;
     justify-content: space-between; }
+    @media only screen and (max-width: 1199.98px) {
+      .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid {
+        display: flow-root; } }
     .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid {
       padding: 20px;
       border-radius: 8px;
@@ -648,6 +660,18 @@ Fontawesome
       flex-wrap: wrap;
       margin-bottom: 15px;
       width: 21%; }
+      @media only screen and (max-width: 1366px) {
+        .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid {
+          width: 20%; } }
+      @media only screen and (max-width: 1199.98px) {
+        .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid {
+          width: 42%;
+          margin: 15px 1%;
+          float: left; } }
+      @media only screen and (max-width: 767.98px) {
+        .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid {
+          width: 94%;
+          margin: 15px 0px; } }
       .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-icon {
         width: 70px;
         height: 70px;
@@ -655,10 +679,13 @@ Fontawesome
         flex-shrink: 0; }
       .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content {
         padding-left: 25px; }
+        @media only screen and (max-width: 1366px) {
+          .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content {
+            padding-left: 15px; } }
         .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content p {
           font-size: 16px;
-          font-weight: 400;
-          color: var(--wpc-gray-color);
+          font-weight: 600;
+          color: #222;
           margin: 0 0 10px; }
         .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content h3 {
           margin: 0;
@@ -666,6 +693,183 @@ Fontawesome
           font-weight: 700;
           color: #000;
           line-height: 0.8; }
+
+.tf-settings-help-center .tf-help-center-banner {
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 40px 40px 40px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 0px 0px 40px; }
+  @media only screen and (max-width: 1199.98px) {
+    .tf-settings-help-center .tf-help-center-banner {
+      padding-top: 20px; } }
+  @media only screen and (max-width: 575.98px) {
+    .tf-settings-help-center .tf-help-center-banner {
+      display: flow-root;
+      padding: 25px; } }
+  .tf-settings-help-center .tf-help-center-banner .tf-help-center-content {
+    width: 45%; }
+    @media only screen and (max-width: 575.98px) {
+      .tf-settings-help-center .tf-help-center-banner .tf-help-center-content {
+        width: 100%; } }
+    .tf-settings-help-center .tf-help-center-banner .tf-help-center-content h2 {
+      color: #000;
+      font-size: 34px;
+      margin: 0; }
+    .tf-settings-help-center .tf-help-center-banner .tf-help-center-content p {
+      font-size: 1rem;
+      color: #71787C; }
+  .tf-settings-help-center .tf-help-center-banner .tf-help-center-image {
+    width: 35%; }
+    @media only screen and (max-width: 575.98px) {
+      .tf-settings-help-center .tf-help-center-banner .tf-help-center-image {
+        width: 100%; } }
+    .tf-settings-help-center .tf-help-center-banner .tf-help-center-image img {
+      max-width: 100%; }
+.tf-settings-help-center .tf-support-document {
+  margin: 40px 40px 40px 20px;
+  display: flex;
+  justify-content: space-between; }
+  @media only screen and (max-width: 1199.98px) {
+    .tf-settings-help-center .tf-support-document {
+      display: flow-root; } }
+  .tf-settings-help-center .tf-support-document .tf-single-support {
+    background-color: #fff;
+    border-radius: 10px;
+    width: 24%;
+    min-height: 270px; }
+    @media only screen and (max-width: 1199.98px) {
+      .tf-settings-help-center .tf-support-document .tf-single-support {
+        width: 48%;
+        margin: 15px 1%;
+        float: left; } }
+    @media only screen and (max-width: 767.98px) {
+      .tf-settings-help-center .tf-support-document .tf-single-support {
+        width: 100%;
+        margin: 15px 0%;
+        float: left; } }
+    .tf-settings-help-center .tf-support-document .tf-single-support a {
+      display: block;
+      padding: 40px;
+      text-decoration: none; }
+      .tf-settings-help-center .tf-support-document .tf-single-support a img {
+        margin-bottom: 35px; }
+      .tf-settings-help-center .tf-support-document .tf-single-support a h3 {
+        font-size: 20px;
+        margin: 0;
+        color: #000;
+        display: block;
+        line-height: 24px; }
+      .tf-settings-help-center .tf-support-document .tf-single-support a span {
+        display: inline-block;
+        margin-bottom: 0;
+        display: inline-block;
+        border: 2px solid #003c79;
+        border-radius: 6px;
+        padding: 9px 16px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #003c79;
+        margin-top: 20px;
+        line-height: 1;
+        transition: .3s all ease; }
+        .tf-settings-help-center .tf-support-document .tf-single-support a span:hover {
+          background-color: #003c79;
+          color: #fff;
+          margin-top: 15px; }
+.tf-settings-help-center .tf-settings-faq {
+  margin: 40px 40px 40px 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 40px; }
+  .tf-settings-help-center .tf-settings-faq h2 {
+    margin: 0 0 30px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #000; }
+  .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+    display: grid;
+    gap: 20px; }
+    @media only screen and (max-width: 767.98px) {
+      .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper {
+        display: block; } }
+    .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq {
+      padding: 25px 30px;
+      border: 1px solid #E4E6EB;
+      border-radius: 8px; }
+      @media only screen and (max-width: 767.98px) {
+        .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq {
+          margin: 15px 0px; } }
+      .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title {
+        display: flex;
+        align-items: center; }
+        .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title i {
+          font-size: 18px;
+          margin-right: 10px;
+          color: #000; }
+        .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title h4 {
+          margin: 0;
+          cursor: pointer;
+          font-size: 20px;
+          font-weight: 600;
+          color: #1d2327; }
+      .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title.active i {
+        transform: rotate(180deg); }
+      .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-desc {
+        display: none; }
+        .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-desc p {
+          font-size: 1rem;
+          color: #44464B; }
+
+.tf-setting-license {
+  margin: 40px 40px 40px 20px; }
+  .tf-setting-license .tf-setting-license-tabs ul {
+    margin: 0;
+    margin-left: 40px; }
+    .tf-setting-license .tf-setting-license-tabs ul li.active {
+      display: inline-block;
+      border: none;
+      margin: 0;
+      line-height: 18px;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+      background-color: #fff;
+      border-radius: 5px 5px 0px 0px; }
+      .tf-setting-license .tf-setting-license-tabs ul li.active:before {
+        position: absolute;
+        content: "";
+        width: 16px;
+        height: 16px;
+        background-color: #fff;
+        bottom: -8px;
+        left: -5px;
+        transform: rotate(45deg); }
+      .tf-setting-license .tf-setting-license-tabs ul li.active:after {
+        position: absolute;
+        content: "";
+        width: 16px;
+        height: 16px;
+        background-color: #fff;
+        bottom: -8px;
+        right: -5px;
+        transform: rotate(45deg); }
+      .tf-setting-license .tf-setting-license-tabs ul li.active span {
+        display: inline-block;
+        padding: 14px 22px;
+        color: #000;
+        font-size: 18px;
+        text-decoration: none; }
+        .tf-setting-license .tf-setting-license-tabs ul li.active span i {
+          margin-right: 5px; }
+  .tf-setting-license .tf-setting-license-field {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px; }
 
 .tf-deshboard-wrapper {
   margin: 20px auto;
