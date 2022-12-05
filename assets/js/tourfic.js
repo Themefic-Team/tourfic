@@ -1443,6 +1443,23 @@
             $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
         }
 
+        // Apartment Min and Max Range
+        if (tf_params.tf_apartment_min_price != 0 && tf_params.tf_apartment_max_price != 0) {
+            $('.tf-apartment-filter-range').alRangeSlider({
+                range: {
+                    min: parseInt(tf_params.tf_apartment_min_price),
+                    max: parseInt(tf_params.tf_apartment_max_price),
+                    step: 1
+                },
+                initialSelectedValues: {
+                    from: parseInt(tf_params.tf_apartment_min_price),
+                    to: parseInt(tf_params.tf_apartment_max_price) / 2
+                },
+                grid: false,
+                theme: "dark",
+            });
+        }
+
         // Tour Min and Max Range
         let tf_tour_range_options = {
             range: {

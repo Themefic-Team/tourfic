@@ -438,7 +438,7 @@ function tf_search_form_shortcode( $atts, $content = null ) {
                 <div id="tf-apartment-booking-form" class="tf-tabcontent" <?php echo tf_is_search_form_single_tab( $type ) ? 'style="display:block"' : '' ?><?php echo esc_attr( $child_age_limit ); ?>>
 					<?php
 					if ( $advanced == "enabled" ) {
-						tf_apartment_advanced_search_form_horizontal( $classes, $title, $subtitle );
+						tf_apartment_search_form_horizontal( $classes, $title, $subtitle, true );
 					} else {
 						tf_apartment_search_form_horizontal( $classes, $title, $subtitle );
 					}
@@ -558,16 +558,12 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 
 
 	// Hotel Features
-
 	if ( ! empty( $_GET['features'] ) ) {
-		$args['tax_query'] = array(
-			'relation' => 'AND',
-			array(
-				'taxonomy' => 'hotel_feature',
-				'field'    => 'slug',
-				'terms'    => $_GET['features'],
-			)
-		);
+		$args['tax_query'][] = array(
+			'taxonomy' => $post_type == 'tf_hotel' ? 'hotel_feature' : 'apartment_feature',
+			'field'    => 'slug',
+			'terms'    => $_GET['features'],
+        );
 	}
 
 	$loop        = new WP_Query( $args );
