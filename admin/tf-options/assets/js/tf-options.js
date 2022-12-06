@@ -1337,14 +1337,14 @@ var frame, gframe;
                         label : "Completed Booking",
                         borderColor: '#003C79',
                         tension: 0.1,
-                        data: [4,2,4,8,3,4,3,3,2,8,6,1],        
+                        data: tf_options.tf_complete_order,       
                         fill: false
                     },
                     {
                         label : "Cancelled Booking",
                         borderColor: 'red',
                         tension: 0.1,
-                        data: [0,2,1,2,3,4,2,3,2,1,3,2], 
+                        data: tf_options.tf_cancel_orders, 
                         fill: false
                     }
                 ]

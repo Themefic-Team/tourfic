@@ -131,6 +131,148 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		 * @author Foysal
 		 */
 		public function tf_options_admin_enqueue_scripts() {
+
+			//Order Data Retrive
+
+			$tf_old_order_limit = new WC_Order_Query( array (
+				'limit' => -1,
+				'orderby' => 'date',
+				'order' => 'ASC',
+				'return' => 'ids',
+			) );
+			$order = $tf_old_order_limit->get_orders();
+			// Booking Month
+			$tf_co1 = 0;
+			$tf_co2 = 0;
+			$tf_co3 = 0;
+			$tf_co4 = 0;
+			$tf_co5 = 0;
+			$tf_co6 = 0;
+			$tf_co7 = 0;
+			$tf_co8 = 0;
+			$tf_co9 = 0;
+			$tf_co10 = 0;
+			$tf_co11 = 0;
+			$tf_co12 = 0;
+			// Booking Cancel Month
+			$tf_cr1 = 0;
+			$tf_cr2 = 0;
+			$tf_cr3 = 0;
+			$tf_cr4 = 0;
+			$tf_cr5 = 0;
+			$tf_cr6 = 0;
+			$tf_cr7 = 0;
+			$tf_cr8 = 0;
+			$tf_cr9 = 0;
+			$tf_cr10 = 0;
+			$tf_cr11 = 0;
+			$tf_cr12 = 0;
+			foreach ( $order as $item_id => $item ) {
+				$itemmeta = wc_get_order( $item);
+				$tf_ordering_date =  $itemmeta->get_date_created();
+				if($tf_ordering_date->date('m')==1){
+					if("completed"==$itemmeta->get_status()){
+						$tf_co1+=1;
+					}
+					if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
+						$tf_cr1+=1;
+					}
+				}
+				if($tf_ordering_date->date('m')==2){
+					if("completed"==$itemmeta->get_status()){
+						$tf_co2+=1;
+					}
+					if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
+						$tf_cr2+=1;
+					}
+				}
+				if($tf_ordering_date->date('m')==3){
+					if("completed"==$itemmeta->get_status()){
+						$tf_co3+=1;
+					}
+					if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
+						$tf_cr3+=1;
+					}
+				}
+				if($tf_ordering_date->date('m')==4){
+					if("completed"==$itemmeta->get_status()){
+						$tf_co4+=1;
+					}
+					if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
+						$tf_cr4+=1;
+					}
+				}
+				if($tf_ordering_date->date('m')==5){
+					if("completed"==$itemmeta->get_status()){
+						$tf_co5+=1;
+					}
+					if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
+						$tf_cr5+=1;
+					}
+				}
+				if($tf_ordering_date->date('m')==6){
+					if("completed"==$itemmeta->get_status()){
+						$tf_co6+=1;
+					}
+					if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
+						$tf_cr6+=1;
+					}
+				}
+				if($tf_ordering_date->date('m')==7){
+					if("completed"==$itemmeta->get_status()){
+						$tf_co7+=1;
+					}
+					if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
+						$tf_cr7+=1;
+					}
+				}
+				if($tf_ordering_date->date('m')==8){
+					if("completed"==$itemmeta->get_status()){
+						$tf_co8+=1;
+					}
+					if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
+						$tf_cr8+=1;
+					}
+				}
+				if($tf_ordering_date->date('m')==9){
+					if("completed"==$itemmeta->get_status()){
+						$tf_co9+=1;
+					}
+					if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
+						$tf_cr9+=1;
+					}
+				}
+				if($tf_ordering_date->date('m')==10){
+					if("completed"==$itemmeta->get_status()){
+						$tf_co10+=1;
+					}
+					if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
+						$tf_cr10+=1;
+					}
+				}
+				if($tf_ordering_date->date('m')==11){
+					if("completed"==$itemmeta->get_status()){
+						$tf_co11+=1;
+					}
+					if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
+						$tf_cr11+=1;
+					}
+				}
+				if($tf_ordering_date->date('m')==12){
+					if("completed"==$itemmeta->get_status()){
+						$tf_co12+=1;
+					}
+					if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
+						$tf_cr12+=1;
+					}
+				}
+
+			}
+
+			$tf_complete_orders = [$tf_co1,$tf_co2,$tf_co3,$tf_co4,$tf_co5,$tf_co6,$tf_co7,$tf_co8,$tf_co9,$tf_co10,$tf_co11,$tf_co12];
+			$tf_cancel_orders = [$tf_cr1,$tf_cr2,$tf_cr3,$tf_cr4,$tf_cr5,$tf_cr6,$tf_cr7,$tf_cr8,$tf_cr9,$tf_cr10,$tf_cr11,$tf_cr12];
+
+
 			//Css
 			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_style( 'tf-fontawesome-4', '//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css', array(), $this->tf_options_version() );
@@ -144,7 +286,6 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			//Js
 			
 			wp_enqueue_script( 'Chart-js', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js', array( 'jquery' ), '2.6.0', true );
-			
 			wp_enqueue_script( 'tf-flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js', array( 'jquery' ), $this->tf_options_version(), true );
 			wp_enqueue_script( 'tf-select2', '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array( 'jquery' ), $this->tf_options_version(), true );
 			wp_enqueue_script( 'wp-color-picker-alpha', $this->tf_options_file_url( 'assets/js/wp-color-picker-alpha.js' ), array( 'jquery', 'wp-color-picker' ), $this->tf_options_version(), true );
@@ -154,7 +295,9 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			wp_localize_script( 'tf-options', 'tf_options', array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'nonce'    => wp_create_nonce( 'tf_options_nonce' ),
-				'gmaps'    => $tf_google_map
+				'gmaps'    => $tf_google_map,
+				'tf_complete_order' => $tf_complete_orders,
+				'tf_cancel_orders' => $tf_cancel_orders
 			) );
 			if ( $tf_google_map != "googlemap" ) {
 				wp_enqueue_script( 'tf-leaflet', esc_url( 'https://cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.js' ), array( 'jquery' ), '1.9', true );
