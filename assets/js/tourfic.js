@@ -373,14 +373,14 @@
         //first li click
         $('.tf-single-tour-pricing .tf-price-tab li:first-child').trigger('click');
 
+
         //###############################
         //     Apartment                #
         //###############################
 
         /**
          * Ajax apartment booking
-         *
-         * #tf-apartment-booking
+         * @author Foysal
          */
         $(document).on('submit', 'form#tf-apartment-booking', function (e) {
             e.preventDefault();
@@ -439,6 +439,116 @@
                 },
 
             });
+        });
+
+        /**
+         * Apartment location autocomplete
+         * @author Foysal
+         */
+        var apartment_location_input = document.getElementById("tf-apartment-location");
+        var apartment_locations = tf_params.apartment_locations;
+        if (apartment_location_input) {
+            tourfic_autocomplete(apartment_location_input, apartment_locations);
+        }
+
+        /**
+         * Apartment Min and Max Range
+         * @author Foysal
+         */
+        if (tf_params.tf_apartment_min_price != 0 && tf_params.tf_apartment_max_price != 0) {
+            $('.tf-apartment-filter-range').alRangeSlider({
+                range: {
+                    min: parseInt(tf_params.tf_apartment_min_price),
+                    max: parseInt(tf_params.tf_apartment_max_price),
+                    step: 1
+                },
+                initialSelectedValues: {
+                    from: parseInt(tf_params.tf_apartment_min_price),
+                    to: parseInt(tf_params.tf_apartment_max_price)
+                },
+                grid: false,
+                theme: "dark",
+            });
+        }
+
+        /**
+         * Apartment option slider
+         * @author Mirza
+         */
+        $('.tf-apartment-option-slider-wrapper').slick({
+            dots: true,
+            arrows: false,
+            infinite: true,
+            speed: 300,
+            autoplay: false,
+            autoplaySpeed: 3000,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+
+        /**
+         * Apartment Suggestion slider
+         * @author Mirza
+         */
+        $('.tf-related-apartment-slider').slick({
+            dots: false,
+            arrows: false,
+            infinite: true,
+            speed: 300,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
         });
 
         //###############################
@@ -680,88 +790,6 @@
             //autoplay: true,
             autoplaySpeed: 2000,
             slidesToShow: 3,
-            slidesToScroll: 1,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                        infinite: true,
-                        dots: true
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
-        });
-
-        /**
-         * Apartment option slider
-         *
-         * Slick
-         */
-        $('.tf-apartment-option-slider-wrapper').slick({
-            dots: true,
-            arrows: false,
-            infinite: true,
-            speed: 300,
-            autoplay: false,
-            autoplaySpeed: 3000,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                        infinite: true,
-                        dots: true
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
-        });
-
-        /**
-         * Apartment Suggestion slider
-         *
-         * Slick
-         */
-        $('.tf-apartment-sugestion-slider-wrapper').slick({
-            dots: false,
-            arrows: false,
-            infinite: true,
-            speed: 300,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            slidesToShow: 4,
             slidesToScroll: 1,
             responsive: [
                 {
@@ -1157,13 +1185,6 @@
         /**
          * Initiate autocomplete on inputs
          */
-
-        // Apartment location autocomplete
-        var apartment_location_input = document.getElementById("tf-apartment-location");
-        var apartment_locations = tf_params.apartment_locations;
-        if (apartment_location_input) {
-            tourfic_autocomplete(apartment_location_input, apartment_locations);
-        }
         // Hotel location autocomplete
         var hotel_location_input = document.getElementById("tf-location");
         var hotel_locations = tf_params.locations;
@@ -1446,23 +1467,6 @@
         };
         if (tf_params.tf_hotel_min_price != 0 && tf_params.tf_hotel_max_price != 0) {
             $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
-        }
-
-        // Apartment Min and Max Range
-        if (tf_params.tf_apartment_min_price != 0 && tf_params.tf_apartment_max_price != 0) {
-            $('.tf-apartment-filter-range').alRangeSlider({
-                range: {
-                    min: parseInt(tf_params.tf_apartment_min_price),
-                    max: parseInt(tf_params.tf_apartment_max_price),
-                    step: 1
-                },
-                initialSelectedValues: {
-                    from: parseInt(tf_params.tf_apartment_min_price),
-                    to: parseInt(tf_params.tf_apartment_max_price)
-                },
-                grid: false,
-                theme: "dark",
-            });
         }
 
         // Tour Min and Max Range

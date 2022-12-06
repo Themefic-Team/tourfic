@@ -592,7 +592,6 @@ while ( have_posts() ) : the_post();
                 <div class="tf-container">
                     <h2 class="section-heading"><?php _e( 'Related Properties', 'tourfic' ); ?></h2>
                     <div class="tf-related-apartment-slider">
-
 						<?php while ( $related_apartment->have_posts() ) : $related_apartment->the_post(); ?>
                             <div class="tf-apartment-option-slider-item">
                                 <div class="tf-apartment-option-slider-content">

@@ -582,15 +582,15 @@
     border-radius: 8px;
 
     .tf-not-included-house-rules,
-    .tf-included-house-rules{
+    .tf-included-house-rules {
       list-style: none;
       @include flex(0 0 calc(50% - 15px));
 
-      li{
+      li {
         margin: 16px 0;
         position: relative;
 
-        h6{
+        h6 {
           margin: 0 0 5px 0;
           font-weight: 500;
           font-size: 18px;
@@ -598,7 +598,7 @@
           color: $blue60
         }
 
-        &::before{
+        &::before {
           content: '\f058';
           font-family: 'Font Awesome 5 Free';
           position: absolute;
@@ -608,7 +608,7 @@
           color: $blue60;
         }
 
-        &::after{
+        &::after {
           content: '';
           position: absolute;
           left: -20px;
@@ -618,29 +618,32 @@
           background: $blue60;
         }
 
-        &:first-child{
+        &:first-child {
           margin-top: 0;
         }
 
-        &:last-child{
+        &:last-child {
           margin-bottom: 0;
-          &::after{
+
+          &::after {
             display: none;
           }
         }
       }
     }
 
-    .tf-not-included-house-rules{
-      li{
-        h6{
+    .tf-not-included-house-rules {
+      li {
+        h6 {
           color: $red60;
         }
-        &::before{
+
+        &::before {
           content: '\f057';
           color: $red60;
         }
-        &::after{
+
+        &::after {
           background: $red60;
         }
       }
@@ -774,7 +777,63 @@
 
 .related-apartment {
   .section-heading {
+    font-weight: 600;
     font-size: 24px;
+    line-height: 32px;
+    color: $slate80;
+  }
+
+  .slick-prev {
+    &::before {
+      color: #2A3343;
+      font-size: 26px;
+      opacity: 1;
+    }
+  }
+
+  .slick-next {
+    &::before {
+      color: #2A3343;
+      font-size: 26px;
+      opacity: 1;
+    }
+
+    margin-right: 5px;
+  }
+
+  .slick-arrow {
+    z-index: 999;
+  }
+
+  .tf-apartment-option-slider-item {
+    margin-left: 8px !important;
+    margin-right: 8px !important;
+
+    img {
+      border-radius: 8px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+
+    .tf-apartment-option-slider-desc {
+      padding-top: 10px;
+
+      h3 {
+        font-size: 18px;
+        color: $slate80;
+        margin: 0;
+
+        a {
+          color: $slate80;
+        }
+      }
+
+      p {
+        color: $slate40;
+        font-size: 14px;
+      }
+    }
   }
 }
 
@@ -926,11 +985,12 @@
       .tf-price-list-label {
         color: $slate60;
       }
-      .tf-price-list-price{
+
+      .tf-price-list-price {
         font-weight: 500;
       }
 
-      &.total-price-wrap{
+      &.total-price-wrap {
         padding-top: 10px;
         margin-top: 16px;
         border-top: 1px solid $stone5;

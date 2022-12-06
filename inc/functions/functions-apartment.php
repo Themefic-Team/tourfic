@@ -305,40 +305,40 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                     </div>
                 </div>
 
-                <?php if($advanced): ?>
-                <div class="tf_selectdate-wrap tf_more_info_selections">
-                    <div class="tf_input-inner">
-                        <label class="tf_label-row" style="width: 100%;">
-                            <span class="tf-label"><?php _e( 'More', 'tourfic' ); ?></span>
-                            <span style="text-decoration: none; display: block; cursor: pointer;"><?php _e( 'Filter', 'tourfic' ); ?>  <i class="fas fa-angle-down"></i></span>
-                        </label>
-                    </div>
-                    <div class="tf-more-info">
-                        <span><?php _e( 'Filter Price (Per Night)', 'tourfic' ); ?></span>
-                        <div class="tf-filter-price-range">
-                            <div class="tf-apartment-filter-range"></div>
+				<?php if ( $advanced ): ?>
+                    <div class="tf_selectdate-wrap tf_more_info_selections">
+                        <div class="tf_input-inner">
+                            <label class="tf_label-row" style="width: 100%;">
+                                <span class="tf-label"><?php _e( 'More', 'tourfic' ); ?></span>
+                                <span style="text-decoration: none; display: block; cursor: pointer;"><?php _e( 'Filter', 'tourfic' ); ?>  <i class="fas fa-angle-down"></i></span>
+                            </label>
                         </div>
+                        <div class="tf-more-info">
+                            <span><?php _e( 'Filter Price (Per Night)', 'tourfic' ); ?></span>
+                            <div class="tf-filter-price-range">
+                                <div class="tf-apartment-filter-range"></div>
+                            </div>
 
-                        <span><?php _e( 'Apartment Features', 'tourfic' ); ?></span>
-			            <?php
-			            $tf_hotelfeature = get_terms( array(
-				            'taxonomy'     => 'apartment_feature',
-				            'orderby'      => 'title',
-				            'order'        => 'ASC',
-				            'hide_empty'   => true,
-				            'hierarchical' => 0,
-			            ) );
-			            if ( $tf_hotelfeature ) { ?>
-				            <?php foreach ( $tf_hotelfeature as $term ) { ?>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" name="features[]" class="form-check-input" value="<?php _e( $term->slug ); ?>" id="<?php _e( $term->slug ); ?>">
-                                    <label class="form-check-label" for="<?php _e( $term->slug ); ?>"><?php _e( $term->name ); ?></label>
-                                </div>
-				            <?php }
-			            } ?>
+                            <span><?php _e( 'Apartment Features', 'tourfic' ); ?></span>
+							<?php
+							$tf_hotelfeature = get_terms( array(
+								'taxonomy'     => 'apartment_feature',
+								'orderby'      => 'title',
+								'order'        => 'ASC',
+								'hide_empty'   => true,
+								'hierarchical' => 0,
+							) );
+							if ( $tf_hotelfeature ) { ?>
+								<?php foreach ( $tf_hotelfeature as $term ) { ?>
+                                    <div class="form-group form-check">
+                                        <input type="checkbox" name="features[]" class="form-check-input" value="<?php _e( $term->slug ); ?>" id="<?php _e( $term->slug ); ?>">
+                                        <label class="form-check-label" for="<?php _e( $term->slug ); ?>"><?php _e( $term->name ); ?></label>
+                                    </div>
+								<?php }
+							} ?>
+                        </div>
                     </div>
-                </div>
-                <?php endif; ?>
+				<?php endif; ?>
 
                 <div class="tf_submit-wrap">
                     <input type="hidden" name="type" value="tf_apartment" class="tf-post-type"/>
@@ -363,12 +363,6 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                         },
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                            //days
-                            var date1 = new Date(selectedDates[0]);
-                            var date2 = new Date(selectedDates[1]);
-                            var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-                            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-                            console.log(diffDays);
                         },
                         defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
                     });
@@ -388,6 +382,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 	function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
 
 		$meta             = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+		$min_stay         = ! empty( $meta['min_stay'] ) ? $meta['min_stay'] : '';
 		$max_adults       = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
 		$max_children     = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
 		$max_infants      = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
@@ -398,14 +393,13 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$cleaning_fee     = ! empty( $meta['cleaning_fee'] ) ? $meta['cleaning_fee'] : 0;
 		$booked_dates     = tf_apartment_booked_days( get_the_ID() );
 
-
-		$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
-		$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
-		$infant = ! empty( $_GET['infant'] ) ? sanitize_text_field( $_GET['infant'] ) : '';
+		$adults       = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
+		$child        = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
+		$infant       = ! empty( $_GET['infant'] ) ? sanitize_text_field( $_GET['infant'] ) : '';
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
-        $check_in_out = explode( '-', $check_in_out );
-        $check_in = ! empty( $check_in_out[0] ) ? $check_in_out[0] : '';
-        $check_out = ! empty( $check_in_out[1] ) ? $check_in_out[1] : '';
+		$check_in_out = explode( '-', $check_in_out );
+		$check_in     = ! empty( $check_in_out[0] ) ? $check_in_out[0] : '';
+		$check_out    = ! empty( $check_in_out[1] ) ? $check_in_out[1] : '';
 		?>
 
         <!-- Start Booking widget -->
@@ -454,11 +448,11 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         <div class="tf_form-inner">
                             <div class="tf_selectperson-wrap">
                                 <div class="tf_input-inner">
-                                    <div class="adults-text"><?php echo sprintf(__('%s Adults', 'tourfic'), !empty($adults) ? $adults : 1); ?></div>
+                                    <div class="adults-text"><?php echo sprintf( __( '%s Adults', 'tourfic' ), ! empty( $adults ) ? $adults : 1 ); ?></div>
                                     <div class="person-sep"></div>
-                                    <div class="child-text"><?php echo sprintf(__('%s Children', 'tourfic'), !empty($child) ? $child : 0); ?></div>
+                                    <div class="child-text"><?php echo sprintf( __( '%s Children', 'tourfic' ), ! empty( $child ) ? $child : 0 ); ?></div>
                                     <div class="person-sep"></div>
-                                    <div class="infant-text"><?php echo sprintf(__('%s Infant', 'tourfic'), !empty($infant) ? $infant : 0); ?></div>
+                                    <div class="infant-text"><?php echo sprintf( __( '%s Infant', 'tourfic' ), ! empty( $infant ) ? $infant : 0 ); ?></div>
                                 </div>
                                 <div class="tf_acrselection-wrap">
                                     <div class="tf_acrselection-inner">
@@ -552,9 +546,9 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 
         <script>
             (function ($) {
-                $(document).ready(function () {
-
-                    const checInDate = flatpickr("#tf-apartment-booking #check-in-date", {
+                $(document).ready(function (){
+                    let minStay = <?php echo $min_stay; ?>;
+                    const checkInDate = flatpickr("#tf-apartment-booking #check-in-date", {
                         enableTime: false,
                         minDate: "today",
                         dateFormat: "Y/m/d",
@@ -569,7 +563,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         onChange: function (inSelectedDates, dateStr, instance) {
                             const checkOutDate = flatpickr("#tf-apartment-booking #check-out-date", {
                                 enableTime: false,
-                                minDate: new Date(inSelectedDates).fp_incr(1),
+                                minDate: new Date(inSelectedDates).fp_incr(minStay),
                                 dateFormat: "Y/m/d",
                                 disable: [
 									<?php foreach ( $booked_dates as $booked_date ) : ?>
@@ -669,10 +663,11 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                     if (inSelectedDates[0] && outSelectedDates[0]) {
                                         var diff = Math.abs(outSelectedDates[0] - inSelectedDates[0]);
                                         var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-                                        if (days < 5) {
+                                        if (days < minStay) {
                                             $('.tf-submit').attr('disabled', 'disabled');
                                             $('.tf-submit').addClass('disabled');
-                                            $('.tf-check-out-date .tf_label-row').append('<span id="tf-required" class="required"><b><?php _e( 'Minimum 5 days', 'tourfic' ); ?></b></span>');
+                                            $('.tf-check-out-date .tf_label-row #tf-required').remove();
+                                            $('.tf-check-out-date .tf_label-row').append('<span id="tf-required" class="required"><b><?php echo sprintf( __( 'Minimum stay is %s nights', 'tourfic' ), $min_stay ); ?></b></span>');
                                         } else {
                                             $('.tf-submit').removeAttr('disabled');
                                             $('.tf-submit').removeClass('disabled');
@@ -691,6 +686,116 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         enableTime: false,
                         minDate: "today",
                         dateFormat: "Y/m/d",
+                        disable: [
+							<?php foreach ( $booked_dates as $booked_date ) : ?>
+                            {
+                                from: "<?php echo $booked_date['check_in']; ?>",
+                                to: "<?php echo $booked_date['check_out']; ?>"
+                            },
+							<?php endforeach; ?>
+                        ],
+                        onChange: function (outSelectedDates, dateStr, instance) {
+		                    <?php if ( ! empty( $price_per_night ) ): ?>
+                            //calculate total days
+                            if (inSelectedDates[0] && outSelectedDates[0]) {
+                                var diff = Math.abs(outSelectedDates[0] - inSelectedDates[0]);
+                                var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+                                if (days > 0) {
+                                    var price_per_night = <?php echo $price_per_night; ?>;
+                                    var wc_price_per_night = '<?php echo wc_price( $price_per_night ); ?>';
+                                    var total_price = price_per_night * days;
+                                    var total_price_html = '<?php echo wc_price( 0 ); ?>';
+                                    if (total_price > 0) {
+                                        $('.total-days-price-wrap').show();
+                                        total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
+                                    }
+                                    $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
+                                    $('.total-days-price-wrap .days-total-price').html(total_price_html);
+
+                                    //weekly discount (if more than 7 days)
+                                    let base_price_wrapper = $('.tf-apartment-base-price');
+                                    if (days >= 30) {
+                                        $('.weekly-discount-wrap').hide();
+                                        var monthly_discount = <?php echo $monthly_discount; ?>;
+                                        var monthly_discount_html = '<?php echo wc_price( 0 ); ?>';
+                                        if (monthly_discount > 0) {
+                                            $('.monthly-discount-wrap').show();
+                                            monthly_discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0', monthly_discount * days);
+                                        }
+
+                                        $('.monthly-discount-wrap .monthly-discount').html('-' + monthly_discount_html);
+                                        let base_price = (total_price - (monthly_discount * days)) / days;
+                                        base_price_wrapper.html('<?php echo wc_price( 0 ); ?>'.replace('0', base_price));
+                                    } else if (days >= 7) {
+                                        $('.monthly-discount-wrap').hide();
+                                        var weekly_discount = <?php echo $weekly_discount; ?>;
+                                        var weekly_discount_html = '<?php echo wc_price( 0 ); ?>';
+                                        if (weekly_discount > 0) {
+                                            $('.weekly-discount-wrap').show();
+                                            weekly_discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0', weekly_discount * days);
+                                        }
+
+                                        $('.weekly-discount-wrap .weekly-discount').html('-' + weekly_discount_html);
+                                        let base_price = (total_price - (weekly_discount * days)) / days;
+                                        base_price_wrapper.html('<?php echo wc_price( 0 ); ?>'.replace('0', base_price));
+                                    } else {
+                                        $('.weekly-discount-wrap').hide();
+                                        $('.monthly-discount-wrap').hide();
+
+                                        base_price_wrapper.html(wc_price_per_night);
+                                    }
+
+                                    //service fee per night
+				                    <?php if ( ! empty( $service_fee ) ): ?>
+                                    var service_fee = <?php echo $service_fee; ?>;
+                                    var service_fee_html = '<?php echo wc_price( 0 ); ?>';
+                                    if (service_fee > 0) {
+                                        $('.service-fee-wrap').show();
+                                        service_fee_html = '<?php echo wc_price( 0 ); ?>'.replace('0', service_fee * days);
+                                    }
+                                    $('.service-fee-wrap .service-fee').html(service_fee_html);
+				                    <?php endif; ?>
+
+                                    //cleaning fee
+				                    <?php if ( ! empty( $cleaning_fee ) ): ?>
+                                    $('.cleaning-fee-wrap').show();
+				                    <?php endif; ?>
+
+                                    //total price
+                                    var total_price_html = '<?php echo wc_price( 0 ); ?>';
+                                    if (total_price > 0) {
+                                        $('.total-price-wrap').show();
+                                        total_price = total_price + (service_fee * days) + <?php echo $cleaning_fee; ?>;
+                                        console.log(total_price);
+                                        total_price = days >= 30 ? total_price - (monthly_discount * days) : (days >= 7 ? total_price - (weekly_discount * days) : total_price);
+                                        total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
+                                    }
+                                    $('.total-price-wrap .total-price').html(total_price_html);
+                                } else {
+                                    $('.total-days-price-wrap').hide();
+                                    $('.service-fee-wrap').hide();
+                                    $('.cleaning-fee-wrap').hide();
+                                    $('.total-price-wrap').hide();
+                                }
+                            }
+		                    <?php endif; ?>
+
+                            //minimum 5 days
+                            if (inSelectedDates[0] && outSelectedDates[0]) {
+                                var diff = Math.abs(outSelectedDates[0] - inSelectedDates[0]);
+                                var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+                                if (days < minStay) {
+                                    $('.tf-submit').attr('disabled', 'disabled');
+                                    $('.tf-submit').addClass('disabled');
+                                    $('.tf-check-out-date .tf_label-row #tf-required').remove();
+                                    $('.tf-check-out-date .tf_label-row').append('<span id="tf-required" class="required"><b><?php echo sprintf( __( 'Minimum stay is %s nights', 'tourfic' ), $min_stay ); ?></b></span>');
+                                } else {
+                                    $('.tf-submit').removeAttr('disabled');
+                                    $('.tf-submit').removeClass('disabled');
+                                    $('#tf-required').remove();
+                                }
+                            }
+                        },
 						<?php tf_flatpickr_locale();?>
                     });
 
@@ -829,30 +934,30 @@ if ( ! function_exists( 'get_apartment_locations' ) ) {
  * @author Foysal
  */
 if ( ! function_exists( 'get_apartment_min_max_price' ) ) {
-    function get_apartment_min_max_price() {
-        $min_max_price = array();
+	function get_apartment_min_max_price() {
+		$min_max_price = array();
 
-        $apartment_query = new WP_Query( array(
-            'post_type'      => 'tf_apartment',
-            'posts_per_page' => - 1,
-            'post_status'    => 'publish',
-        ) );
+		$apartment_query = new WP_Query( array(
+			'post_type'      => 'tf_apartment',
+			'posts_per_page' => - 1,
+			'post_status'    => 'publish',
+		) );
 
-        if ( $apartment_query->have_posts() ) {
-            while ( $apartment_query->have_posts() ) {
-                $apartment_query->the_post();
-                $meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
-                if ( ! empty( $meta ) ) {
-                    $min_max_price[] = $meta['price_per_night'];
-                }
-            }
-        }
+		if ( $apartment_query->have_posts() ) {
+			while ( $apartment_query->have_posts() ) {
+				$apartment_query->the_post();
+				$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+				if ( ! empty( $meta ) ) {
+					$min_max_price[] = $meta['price_per_night'];
+				}
+			}
+		}
 
-        wp_reset_query();
+		wp_reset_query();
 
-        return array(
-            'min' => min( $min_max_price ),
-            'max' => max( $min_max_price ),
-        );
-    }
+		return array(
+			'min' => min( $min_max_price ),
+			'max' => max( $min_max_price ),
+		);
+	}
 }
