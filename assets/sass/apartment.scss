@@ -909,7 +909,7 @@
     .tf_booking-dates {
       @include flexbox();
 
-      .tf-check-in-date,
+      /*.tf-check-in-date,
       .tf-check-out-date {
         width: 50%;
         text-align: center;
@@ -927,6 +927,33 @@
           border: none;
           background-color: transparent;
           text-align: center;
+          padding: 0;
+          width: 100%;
+          color: $slate60;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+
+      .tf-check-in-date {
+        border-right: 1px solid $slate10;
+      }*/
+      .tf-check-in-out-date{
+        width: 100%;
+        padding: 8px 16px;
+
+        .tf-label {
+          font-size: 12px;
+          font-weight: 700;
+          text-transform: uppercase;
+          display: inline-block;
+        }
+
+        #check-in-out-date{
+          border: none;
+          background-color: transparent;
           padding: 0;
           width: 100%;
           color: $slate60;
@@ -968,6 +995,11 @@
           right: auto;
         }
       }
+    }
+
+    .tf-err-msg{
+      color: $red60;
+      font-weight: 500;
     }
   }
 
