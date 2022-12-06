@@ -6,7 +6,7 @@ Button
   @include align-items(center);
   background-color: #fff;
   padding: 7px 22px;
-  border: 1px solid $blue60;
+  border: 1px solid #003c79;
   border-radius: 4px;
   font-weight: 500;
   text-decoration: none;
@@ -18,9 +18,10 @@ Button
   }
 
   &.tf-btn-secondary {
-    background-color: $blue60;
-    border-color: $blue60;
+    background-color: #003c79;
+    border-color: #003c79;
     color: #fff;
+    font-weight: 600;
   }
 
   //disabled

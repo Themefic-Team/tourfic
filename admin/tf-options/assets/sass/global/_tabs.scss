@@ -4,7 +4,6 @@
     min-height: 660px;
   }
 }
-.tf-option,
 .tf-admin-meta-box {
   @include flexbox();
   margin: -6px -12px -12px -12px;
@@ -41,7 +40,6 @@
     }
 
     a.tf-tablinks {
-      font-family: 'Lato';
       font-style: normal;
       @include flexbox();
       @include align-items(center);
@@ -74,7 +72,7 @@
       }
 
       &.active {
-        background-color: $blue60;
+        background-color: #003c79;
         color: #fff;
         position: relative;
 
@@ -173,65 +171,14 @@
 }
 
 .tf-option-wrapper {
-  max-width: 70%;
-  margin: 30px auto;
-  @media #{$max991}{
-    position: relative;
-  }
-
-  .tf-option-header {
-    @include flexbox();
-    .tf-option-header-left {
-      min-width: 220px;
-      padding: 12px 0px;
-      @include flexbox();
-      @include align-items(flex-end);
-
-      h2 {
-        margin: 0 8px 0 0;
-        font-weight: 500;
-        font-size: 24px;
-        color: $slate80;
-        line-height: 24px;
-        @media #{$max991}{
-          display: flex;
-          align-items: center;
-        }
-        a {
-          display: none;
-          &:focus{
-            box-shadow: none;
-          }
-          i {
-            color: $slate80;
-            font-size: 24px;
-            margin-left: 10px;
-          }
-
-          @media #{$max991}{
-            display: inline-block;
-          }
-        }
-        img{
-          width: 120px
-        }
-      }
-
-    }
-
-    .tf-option-header-right {
-      @include flex(1 1 auto);
-      padding: 12px 0px;
-      @include flexbox();
-      @include justify-content(flex-end);
-      @include align-items(center);
-    }
-  }
-
   .tf-option-footer {
     position: relative;
     padding: 15px 0px;
     text-align: right;
+    button{
+      padding: 10px 25px;
+      font-size: 1rem;
+    }
     span{
       display: block;
       font-size: 16px;

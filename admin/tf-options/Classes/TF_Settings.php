@@ -590,10 +590,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			if ( ! empty( $this->option_sections ) ) :
 				?>
-                <div class="tf-option-wrapper" style="display: <?php echo !isset($query_string['dashboard']) ? 'block' : 'none' ?>">
+                <div class="tf-option-wrapper tf-setting-wrapper" style="display: <?php echo !isset($query_string['dashboard']) ? 'block' : 'none' ?>">
                     <form method="post" action="" class="tf-option-form <?php echo esc_attr($ajax_save_class) ?>" enctype="multipart/form-data">
                         <!-- Header -->
-                        <div class="tf-option-header">
+                        <!-- <div class="tf-option-header">
                             <div class="tf-option-header-left">
                                 <h2>
 								<img src="<?php echo TF_ASSETS_URL; ?>img/tourfic-logo.webp" alt="Tourfic">
@@ -605,7 +605,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                                     <button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn"><?php esc_attr_e( 'Save', 'tourfic' ); ?></button>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Body -->
                         <div class="tf-option">
@@ -645,6 +645,9 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                             </div>
 
                             <div class="tf-tab-wrapper">
+								<div class="tf-mobile-setting">
+									<a href="#" class="tf-mobile-tabs"><i class="fa-solid fa-bars"></i></a>
+								</div>
 								<?php
 								$content_count = 0;
 								foreach ( $this->option_sections as $key => $section ) : ?>
@@ -666,13 +669,15 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
                                     </div>
 									<?php $content_count ++; endforeach; ?>
+
+									<!-- Footer -->
+									<div class="tf-option-footer">
+										<button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn"><?php _e( 'Save', 'tourfic' ); ?></button>
+									</div>
                             </div>
                         </div>
 
-                        <!-- Footer -->
-                        <div class="tf-option-footer">
-                            <button type="submit" class="tf-admin-btn tf-btn-secondary tf-submit-btn"><?php _e( 'Save', 'tourfic' ); ?></button>
-                        </div>
+                        
 
 						<?php wp_nonce_field( 'tf_option_nonce_action', 'tf_option_nonce' ); ?>
                     </form>
