@@ -966,9 +966,9 @@ function tf_search_result_ajax_sidebar() {
 
 			} elseif ( $posttype == 'tf_apartment' ) {
 				if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-					$data = [ $adults, $child, $room, $check_in_out, $startprice, $endprice ];
+					$data = [ $adults, $child, $infant, $check_in_out, $startprice, $endprice ];
 				} else {
-					$data = [ $adults, $child, $room, $check_in_out ];
+					$data = [ $adults, $child, $infant, $check_in_out ];
 				}
 				$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
 

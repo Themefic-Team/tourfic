@@ -397,6 +397,15 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$service_fee      = ! empty( $meta['service_fee'] ) ? $meta['service_fee'] : 0;
 		$cleaning_fee     = ! empty( $meta['cleaning_fee'] ) ? $meta['cleaning_fee'] : 0;
 		$booked_dates     = tf_apartment_booked_days( get_the_ID() );
+
+
+		$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
+		$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
+		$infant = ! empty( $_GET['infant'] ) ? sanitize_text_field( $_GET['infant'] ) : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
+        $check_in_out = explode( '-', $check_in_out );
+        $check_in = ! empty( $check_in_out[0] ) ? $check_in_out[0] : '';
+        $check_out = ! empty( $check_in_out[1] ) ? $check_in_out[1] : '';
 		?>
 
         <!-- Start Booking widget -->
@@ -433,7 +442,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         <label class="tf_label-row">
                             <span class="tf-label"><?php _e( 'Check out', 'tourfic' ); ?></span>
                             <input type="text" name="check-out-date" id="check-out-date" onkeypress="return false;"
-                                   placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in ) ? 'value="' . $check_in . '"' : '' ?>
+                                   placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_out ) ? 'value="' . $check_out . '"' : '' ?>
                                    required>
                         </label>
                     </div>
@@ -445,11 +454,11 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         <div class="tf_form-inner">
                             <div class="tf_selectperson-wrap">
                                 <div class="tf_input-inner">
-                                    <div class="adults-text"><?php _e( '1 Adults', 'tourfic' ); ?></div>
+                                    <div class="adults-text"><?php echo sprintf(__('%s Adults', 'tourfic'), !empty($adults) ? $adults : 1); ?></div>
                                     <div class="person-sep"></div>
-                                    <div class="child-text"><?php _e( '0 Children', 'tourfic' ); ?></div>
+                                    <div class="child-text"><?php echo sprintf(__('%s Children', 'tourfic'), !empty($child) ? $child : 0); ?></div>
                                     <div class="person-sep"></div>
-                                    <div class="infant-text"><?php _e( '0 Infant', 'tourfic' ); ?></div>
+                                    <div class="infant-text"><?php echo sprintf(__('%s Infant', 'tourfic'), !empty($infant) ? $infant : 0); ?></div>
                                 </div>
                                 <div class="tf_acrselection-wrap">
                                     <div class="tf_acrselection-inner">
@@ -457,7 +466,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                             <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
                                             <div class="acr-select">
                                                 <div class="acr-dec">-</div>
-                                                <input type="number" name="adults" id="adults" min="1" value="1"
+                                                <input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1' ?>"
                                                        max="<?php echo esc_attr( $max_adults ); ?>"/>
                                                 <div class="acr-inc">+</div>
                                             </div>
@@ -466,7 +475,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                             <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
                                             <div class="acr-select">
                                                 <div class="acr-dec">-</div>
-                                                <input type="number" name="children" id="children" min="0" value="0"
+                                                <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0' ?>"
                                                        max="<?php echo esc_attr( $max_children ); ?>"/>
                                                 <div class="acr-inc">+</div>
                                             </div>
@@ -475,7 +484,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                             <div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
                                             <div class="acr-select">
                                                 <div class="acr-dec">-</div>
-                                                <input type="number" name="infant" id="infant" min="0" value="0"
+                                                <input type="number" name="infant" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0' ?>"
                                                        max="<?php echo esc_attr( $max_infants ); ?>"/>
                                                 <div class="acr-inc">+</div>
                                             </div>

@@ -1425,6 +1425,11 @@
         $(".tf_selectdate-wrap.tf_more_info_selections .tf_input-inner").click(function () {
             $('.tf-more-info').toggleClass('show');
         });
+        $(document).click(function (event) {
+            if (!$(event.target).closest(".tf_selectdate-wrap.tf_more_info_selections .tf_input-inner, .tf-more-info").length) {
+                $('.tf-more-info').removeClass('show');
+            }
+        });
         // Hotel Min and Max Range
         let tf_hotel_range_options = {
             range: {
@@ -1453,7 +1458,7 @@
                 },
                 initialSelectedValues: {
                     from: parseInt(tf_params.tf_apartment_min_price),
-                    to: parseInt(tf_params.tf_apartment_max_price) / 2
+                    to: parseInt(tf_params.tf_apartment_max_price)
                 },
                 grid: false,
                 theme: "dark",

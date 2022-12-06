@@ -588,10 +588,10 @@ while ( have_posts() ) : the_post();
 
 		if ( ! $disable_related_sec == '1' && $related_apartment->have_posts() ) : ?>
             <!-- Apartment Suggestion section Start -->
-            <div class="apartment-options apartment-sugestion sp-40">
+            <div class="related-apartment sp-40">
                 <div class="tf-container">
                     <h2 class="section-heading"><?php _e( 'Related Properties', 'tourfic' ); ?></h2>
-                    <div class="tf-apartment-sugestion-slider-wrapper">
+                    <div class="tf-related-apartment-slider">
 
 						<?php while ( $related_apartment->have_posts() ) : $related_apartment->the_post(); ?>
                             <div class="tf-apartment-option-slider-item">
