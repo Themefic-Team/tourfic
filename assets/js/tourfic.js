@@ -374,6 +374,18 @@
         });
 
         /**
+         * Itinerary gallery init
+         */
+        $('.tf-itinerary-gallery').fancybox({
+            buttons: [
+                "zoom",
+                "slideShow",
+                "fullScreen",
+                "close"
+            ]
+        });
+        
+        /**
          * Single Tour price change
          *
          * adult, child, infant

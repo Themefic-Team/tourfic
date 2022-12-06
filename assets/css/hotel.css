@@ -301,7 +301,8 @@ ul.tf-room-checkbox label{
     margin-left: 5px;
 }
 .tf-room-filter {
-    padding: 0 20px;
+    padding: 0 15px;
+    overflow: hidden;
 }
 .availability-table {
     border: none;

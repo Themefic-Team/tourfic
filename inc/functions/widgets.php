@@ -73,7 +73,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
                 $default_count = $term->count;
                 $count = $show_count ? '<span>' . tf_term_count($term->slug, $destination_name, $default_count) . '</span>' : '';
 
-                echo "<li><label><input type='checkbox' name='tf_filters[]' value='{$id}'/> {$feature_icon} {$name}</label></li>";
+                echo "<li class='filter-item'><label><input type='checkbox' name='tf_filters[]' value='{$id}'/> {$feature_icon} {$name}</label> {$count}</li>";
             }
             echo "</ul></div>";
 
@@ -92,10 +92,10 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
     {
 
         $title = isset($instance['title']) ? $instance['title'] : __('Popular Filters', 'tourfic');
-        $terms = isset($instance['terms']) ? $instance['terms'] : 'all';
-
+        $terms = isset($instance['terms']) ? implode(',',array( $instance['terms']) )  : 'all';
         $show_count = isset($instance['show_count']) ? $instance['show_count'] : '';
         $hide_empty = isset($instance['hide_empty']) ? $instance['hide_empty'] : '';
+        var_dump($terms);
 
     ?>
         <p class="tf-widget-field">
@@ -114,7 +114,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
                 //'option_none_value' => '',
                 'name'              => $this->get_field_name('terms'),
                 'id'                => $this->get_field_id('terms'),
-                'selected'          => $terms, // e.x 86,110,786
+                'selected'          => $instance['terms'], //$terms, // e.x 86,110,786
                 'multiple'          => true,
                 'class'              => 'widefat tf-select2',
                 'show_count'         => true,
@@ -141,7 +141,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
             jQuery('#<?php echo $this->get_field_id('terms'); ?>').select2({
                 width: '100%'
             });
-            jQuery(document).trigger('tf_select2');
+            //jQuery(document).trigger('tf_select2');
         </script>
 <?php
     }
@@ -157,10 +157,12 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
      * @return array Updated safe values to be saved.
      */
     public function update($new_instance, $old_instance)
-    {
+    {   
         $instance = array();
+        //$new_instance = $old_instance;
         $instance['title'] = (!empty($new_instance['title'])) ? strip_tags($new_instance['title']) : '';
         $instance['terms'] = (!empty($new_instance['terms'])) ? implode(",", array($new_instance['terms'])) : 'all';
+        //$instance['terms'] = (!empty($new_instance['terms'])) ? $new_instance['terms'] : 'all';
         $instance['show_count'] = (!empty($new_instance['show_count'])) ? strip_tags($new_instance['show_count']) : '';
         $instance['hide_empty'] = (!empty($new_instance['hide_empty'])) ? strip_tags($new_instance['hide_empty']) : '';
 
@@ -257,7 +259,6 @@ class TF_Tour_Attraction_Filter extends WP_Widget {
 
         $title = isset($instance['title']) ? $instance['title'] : __('Popular Filters', 'tourfic');
         $terms = isset($instance['terms']) ? $instance['terms'] : 'all';
-
         $show_count = isset($instance['show_count']) ? $instance['show_count'] : '';
         $hide_empty = isset($instance['hide_empty']) ? $instance['hide_empty'] : '';
 
@@ -322,12 +323,13 @@ class TF_Tour_Attraction_Filter extends WP_Widget {
     {
         $instance = array();
         $instance['title'] = (!empty($new_instance['title'])) ? strip_tags($new_instance['title']) : '';
-        $instance['terms'] = (!empty($new_instance['terms'])) ? implode(",", $new_instance['terms']) : '';
+        $instance['terms'] = (!empty($new_instance['terms'])) ? implode(",", array( $new_instance['terms']) ) : 'all';
         $instance['show_count'] = (!empty($new_instance['show_count'])) ? strip_tags($new_instance['show_count']) : '';
         $instance['hide_empty'] = (!empty($new_instance['hide_empty'])) ? strip_tags($new_instance['hide_empty']) : '';
 
         return $instance;
     }
+    
 }
 
 /**
@@ -484,7 +486,6 @@ class TF_Tour_Activities_Filter extends WP_Widget {
     {
         $instance = array();
         $instance['title'] = (!empty($new_instance['title'])) ? strip_tags($new_instance['title']) : '';
-        $instance['terms'] = (!empty($new_instance['terms'])) ? implode(",", $new_instance['terms']) : '';
         $instance['terms'] = (!empty($new_instance['terms'])) ? implode(",", array( $new_instance['terms']) ) : 'all';
         $instance['show_count'] = (!empty($new_instance['show_count'])) ? strip_tags($new_instance['show_count']) : '';
         $instance['hide_empty'] = (!empty($new_instance['hide_empty'])) ? strip_tags($new_instance['hide_empty']) : '';
@@ -734,8 +735,8 @@ function tourfic_sidebar_widgets_init() {
         'description'   => __( 'Widgets in this area will be shown on tourfic search page', 'tourfic' ),
         'before_widget' => '<div id="%1$s" class="tf_widget widget %2$s">',
         'after_widget'  => '</div>',
-        'before_title'  => '<h4 class="tf_widgettitle">',
-        'after_title'   => '</h4>',
+        'before_title'  => '<div class="tf-widget-title"><h4>',
+        'after_title'   => '</h4><i class="fa fa-angle-up"></i></div>',
     ) );
 
     // Register Custom Widgets

@@ -439,9 +439,10 @@ while ( have_posts() ) : the_post();
                                             <i class="fas fa-angle-down arrow"></i>
                                         </div>
                                         <div class="tf-accordion-content">
+
                                             <div class="tf-travel-desc">
 												<?php if ( $itinerary['image'] ) {
-													echo '<img src="' . esc_url( $itinerary['image'] ) . '">';
+													echo '<a class="tf-itinerary-gallery" href="' . esc_url( $itinerary['image'] ) . '"><img src="' . esc_url( $itinerary['image'] ) . '"></a>';
 												} ?>
                                                 <div class="trav-cont">
                                                     <p><?php _e( $itinerary['desc'] ); ?></p>
@@ -454,6 +455,9 @@ while ( have_posts() ) : the_post();
                         </div>
                     </div>
                 </div>
+
+				<!-- Itinerary map -->
+				<div id="tf-map"></div>
 
 			<?php }
 		} ?>

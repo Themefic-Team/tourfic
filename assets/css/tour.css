@@ -501,7 +501,7 @@
     padding-top: 20px;
 }
 
-.tf-accordion-content img {
+.tf-accordion-content a {
     max-width: 350px;
     height: auto;
     object-fit: cover;
