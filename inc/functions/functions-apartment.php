@@ -382,7 +382,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 	function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
 
 		$meta             = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
-		$min_stay         = ! empty( $meta['min_stay'] ) ? $meta['min_stay'] : '';
+		$min_stay         = ! empty( $meta['min_stay'] ) ? $meta['min_stay'] : 1;
 		$max_adults       = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
 		$max_children     = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
 		$max_infants      = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
@@ -396,10 +396,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$adults       = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
 		$child        = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
 		$infant       = ! empty( $_GET['infant'] ) ? sanitize_text_field( $_GET['infant'] ) : '';
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
-		$check_in_out = explode( '-', $check_in_out );
-		$check_in     = ! empty( $check_in_out[0] ) ? $check_in_out[0] : '';
-		$check_out    = ! empty( $check_in_out[1] ) ? $check_in_out[1] : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? $_GET['check-in-out-date'] : '';
 		?>
 
         <!-- Start Booking widget -->
@@ -428,7 +425,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         <label class="tf_label-row">
                             <span class="tf-label"><?php _e( 'Check in & out date', 'tourfic' ); ?></span>
                             <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                   placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in ) ? 'value="' . $check_in . '"' : '' ?>
+                                   placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?>
                                    required>
                         </label>
                     </div>
@@ -539,116 +536,123 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
         <script>
             (function ($) {
                 $(document).ready(function () {
-                    let minStay = <?php echo $min_stay; ?>;
+                    let minStay = <?php echo $min_stay ?>;
+
+                    const bookingCalculation = (selectedDates, dateStr, instance) => {
+                        instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+
+		                <?php if ( ! empty( $price_per_night ) ): ?>
+                        //calculate total days
+                        if (selectedDates[0] && selectedDates[1]) {
+                            var diff = Math.abs(selectedDates[1] - selectedDates[0]);
+                            var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+                            if (days > 0) {
+                                var price_per_night = <?php echo $price_per_night; ?>;
+                                var wc_price_per_night = '<?php echo wc_price( $price_per_night ); ?>';
+                                var total_price = price_per_night * days;
+                                var total_price_html = '<?php echo wc_price( 0 ); ?>';
+                                if (total_price > 0) {
+                                    $('.total-days-price-wrap').show();
+                                    total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
+                                }
+                                $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
+                                $('.total-days-price-wrap .days-total-price').html(total_price_html);
+
+                                //weekly discount (if more than 7 days)
+                                let base_price_wrapper = $('.tf-apartment-base-price');
+                                if (days >= 30) {
+                                    $('.weekly-discount-wrap').hide();
+                                    var monthly_discount = <?php echo $monthly_discount; ?>;
+                                    var monthly_discount_html = '<?php echo wc_price( 0 ); ?>';
+                                    if (monthly_discount > 0) {
+                                        $('.monthly-discount-wrap').show();
+                                        monthly_discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0', monthly_discount * days);
+                                    }
+
+                                    $('.monthly-discount-wrap .monthly-discount').html('-' + monthly_discount_html);
+                                    let base_price = (total_price - (monthly_discount * days)) / days;
+                                    base_price_wrapper.html('<?php echo wc_price( 0 ); ?>'.replace('0', base_price));
+                                } else if (days >= 7) {
+                                    $('.monthly-discount-wrap').hide();
+                                    var weekly_discount = <?php echo $weekly_discount; ?>;
+                                    var weekly_discount_html = '<?php echo wc_price( 0 ); ?>';
+                                    if (weekly_discount > 0) {
+                                        $('.weekly-discount-wrap').show();
+                                        weekly_discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0', weekly_discount * days);
+                                    }
+
+                                    $('.weekly-discount-wrap .weekly-discount').html('-' + weekly_discount_html);
+                                    let base_price = (total_price - (weekly_discount * days)) / days;
+                                    base_price_wrapper.html('<?php echo wc_price( 0 ); ?>'.replace('0', base_price));
+                                } else {
+                                    $('.weekly-discount-wrap').hide();
+                                    $('.monthly-discount-wrap').hide();
+
+                                    base_price_wrapper.html(wc_price_per_night);
+                                }
+
+                                //service fee per night
+				                <?php if ( ! empty( $service_fee ) ): ?>
+                                var service_fee = <?php echo $service_fee; ?>;
+                                var service_fee_html = '<?php echo wc_price( 0 ); ?>';
+                                if (service_fee > 0) {
+                                    $('.service-fee-wrap').show();
+                                    service_fee_html = '<?php echo wc_price( 0 ); ?>'.replace('0', service_fee * days);
+                                }
+                                $('.service-fee-wrap .service-fee').html(service_fee_html);
+				                <?php endif; ?>
+
+                                //cleaning fee
+				                <?php if ( ! empty( $cleaning_fee ) ): ?>
+                                $('.cleaning-fee-wrap').show();
+				                <?php endif; ?>
+
+                                //total price
+                                var total_price_html = '<?php echo wc_price( 0 ); ?>';
+                                if (total_price > 0) {
+                                    $('.total-price-wrap').show();
+                                    total_price = total_price + (service_fee * days) + <?php echo $cleaning_fee; ?>;
+                                    total_price = days >= 30 ? total_price - (monthly_discount * days) : (days >= 7 ? total_price - (weekly_discount * days) : total_price);
+                                    total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
+                                }
+                                $('.total-price-wrap .total-price').html(total_price_html);
+                            } else {
+                                $('.total-days-price-wrap').hide();
+                                $('.service-fee-wrap').hide();
+                                $('.cleaning-fee-wrap').hide();
+                                $('.total-price-wrap').hide();
+                            }
+                        }
+		                <?php endif; ?>
+
+                        //minimum stay
+                        if (selectedDates[0] && selectedDates[1] && minStay > 0) {
+                            var diff = Math.abs(selectedDates[1] - selectedDates[0]);
+                            var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+                            if (days < minStay) {
+                                $('.tf-submit').attr('disabled', 'disabled');
+                                $('.tf-submit').addClass('disabled');
+                                $('.tf-check-in-out-date .tf_label-row .tf-err-msg').remove();
+                                $('.tf-check-in-out-date .tf_label-row').append('<span class="tf-err-msg"><?php echo sprintf( __( 'Minimum stay is %s nights', 'tourfic' ), $min_stay ); ?></span>');
+                            } else {
+                                $('.tf-submit').removeAttr('disabled');
+                                $('.tf-submit').removeClass('disabled');
+                                $('.tf-check-in-out-date .tf_label-row .tf-err-msg').remove();
+                            }
+                        }
+                    }
 
                     const checkinoutdateange = flatpickr("#tf-apartment-booking #check-in-out-date", {
                         enableTime: false,
                         mode: "range",
                         minDate: "today",
                         dateFormat: "Y/m/d",
+                        defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+                        onReady: function (selectedDates, dateStr, instance) {
+                            bookingCalculation(selectedDates, dateStr, instance);
+                        },
                         onChange: function (selectedDates, dateStr, instance) {
-                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-
-	                        <?php if ( ! empty( $price_per_night ) ): ?>
-                            //calculate total days
-                            if (selectedDates[0] && selectedDates[1]) {
-                                var diff = Math.abs(selectedDates[1] - selectedDates[0]);
-                                var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-                                if (days > 0) {
-                                    var price_per_night = <?php echo $price_per_night; ?>;
-                                    var wc_price_per_night = '<?php echo wc_price( $price_per_night ); ?>';
-                                    var total_price = price_per_night * days;
-                                    var total_price_html = '<?php echo wc_price( 0 ); ?>';
-                                    if (total_price > 0) {
-                                        $('.total-days-price-wrap').show();
-                                        total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
-                                    }
-                                    $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
-                                    $('.total-days-price-wrap .days-total-price').html(total_price_html);
-
-                                    //weekly discount (if more than 7 days)
-                                    let base_price_wrapper = $('.tf-apartment-base-price');
-                                    if (days >= 30) {
-                                        $('.weekly-discount-wrap').hide();
-                                        var monthly_discount = <?php echo $monthly_discount; ?>;
-                                        var monthly_discount_html = '<?php echo wc_price( 0 ); ?>';
-                                        if (monthly_discount > 0) {
-                                            $('.monthly-discount-wrap').show();
-                                            monthly_discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0', monthly_discount * days);
-                                        }
-
-                                        $('.monthly-discount-wrap .monthly-discount').html('-' + monthly_discount_html);
-                                        let base_price = (total_price - (monthly_discount * days)) / days;
-                                        base_price_wrapper.html('<?php echo wc_price( 0 ); ?>'.replace('0', base_price));
-                                    } else if (days >= 7) {
-                                        $('.monthly-discount-wrap').hide();
-                                        var weekly_discount = <?php echo $weekly_discount; ?>;
-                                        var weekly_discount_html = '<?php echo wc_price( 0 ); ?>';
-                                        if (weekly_discount > 0) {
-                                            $('.weekly-discount-wrap').show();
-                                            weekly_discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0', weekly_discount * days);
-                                        }
-
-                                        $('.weekly-discount-wrap .weekly-discount').html('-' + weekly_discount_html);
-                                        let base_price = (total_price - (weekly_discount * days)) / days;
-                                        base_price_wrapper.html('<?php echo wc_price( 0 ); ?>'.replace('0', base_price));
-                                    } else {
-                                        $('.weekly-discount-wrap').hide();
-                                        $('.monthly-discount-wrap').hide();
-
-                                        base_price_wrapper.html(wc_price_per_night);
-                                    }
-
-                                    //service fee per night
-			                        <?php if ( ! empty( $service_fee ) ): ?>
-                                    var service_fee = <?php echo $service_fee; ?>;
-                                    var service_fee_html = '<?php echo wc_price( 0 ); ?>';
-                                    if (service_fee > 0) {
-                                        $('.service-fee-wrap').show();
-                                        service_fee_html = '<?php echo wc_price( 0 ); ?>'.replace('0', service_fee * days);
-                                    }
-                                    $('.service-fee-wrap .service-fee').html(service_fee_html);
-			                        <?php endif; ?>
-
-                                    //cleaning fee
-			                        <?php if ( ! empty( $cleaning_fee ) ): ?>
-                                    $('.cleaning-fee-wrap').show();
-			                        <?php endif; ?>
-
-                                    //total price
-                                    var total_price_html = '<?php echo wc_price( 0 ); ?>';
-                                    if (total_price > 0) {
-                                        $('.total-price-wrap').show();
-                                        total_price = total_price + (service_fee * days) + <?php echo $cleaning_fee; ?>;
-                                        console.log(total_price);
-                                        total_price = days >= 30 ? total_price - (monthly_discount * days) : (days >= 7 ? total_price - (weekly_discount * days) : total_price);
-                                        total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
-                                    }
-                                    $('.total-price-wrap .total-price').html(total_price_html);
-                                } else {
-                                    $('.total-days-price-wrap').hide();
-                                    $('.service-fee-wrap').hide();
-                                    $('.cleaning-fee-wrap').hide();
-                                    $('.total-price-wrap').hide();
-                                }
-                            }
-	                        <?php endif; ?>
-
-                            //minimum stay
-                            if (selectedDates[0] && selectedDates[1]) {
-                                var diff = Math.abs(selectedDates[1] - selectedDates[0]);
-                                var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-                                if (days < minStay) {
-                                    $('.tf-submit').attr('disabled', 'disabled');
-                                    $('.tf-submit').addClass('disabled');
-                                    $('.tf-check-in-out-date .tf_label-row .tf-err-msg').remove();
-                                    $('.tf-check-in-out-date .tf_label-row').append('<span class="tf-err-msg"><?php echo sprintf( __( 'Minimum stay is %s nights', 'tourfic' ), $min_stay ); ?></span>');
-                                } else {
-                                    $('.tf-submit').removeAttr('disabled');
-                                    $('.tf-submit').removeClass('disabled');
-                                    $('.tf-check-in-out-date .tf_label-row .tf-err-msg').remove();
-                                }
-                            }
+                            bookingCalculation(selectedDates, dateStr, instance);
                         },
                         disable: [
 		                    <?php foreach ( $booked_dates as $booked_date ) : ?>
@@ -660,6 +664,8 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         ],
 						<?php tf_flatpickr_locale(); ?>
                     });
+
+
                 });
             })(jQuery);
 
@@ -667,6 +673,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		<?php
 	}
 }
+
 /**
  * Apartment Archive Single Item Layout
  * @author Foysal
