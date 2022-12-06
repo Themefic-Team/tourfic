@@ -610,6 +610,10 @@ Fontawesome
           font-weight: 700;
           color: #000;
           line-height: 0.8; }
+  .tf-setting-dashboard .tf-setting-performace-section .tf-order-report {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px; }
 
 .tf-settings-help-center .tf-help-center-banner {
   background-color: #fff;

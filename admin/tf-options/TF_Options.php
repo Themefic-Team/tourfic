@@ -142,6 +142,9 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			wp_enqueue_style( 'tf-options', $this->tf_options_file_url( 'assets/css/tf-options.css' ), array(), $this->tf_options_version() );
 
 			//Js
+			
+			wp_enqueue_script( 'Chart-js', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js', array( 'jquery' ), '2.6.0', true );
+			
 			wp_enqueue_script( 'tf-flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js', array( 'jquery' ), $this->tf_options_version(), true );
 			wp_enqueue_script( 'tf-select2', '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array( 'jquery' ), $this->tf_options_version(), true );
 			wp_enqueue_script( 'wp-color-picker-alpha', $this->tf_options_file_url( 'assets/js/wp-color-picker-alpha.js' ), array( 'jquery', 'wp-color-picker' ), $this->tf_options_version(), true );
@@ -164,6 +167,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			}
 			wp_enqueue_media();
 			wp_enqueue_editor();
+			
 
 		}
 

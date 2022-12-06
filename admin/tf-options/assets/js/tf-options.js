@@ -1321,9 +1321,49 @@ var frame, gframe;
 })(jQuery);
 
 (function ($) {
-    'use strict';
     $(document).ready(function () {
+    
+          var ctx = document.getElementById('tf_months'); // node
+            var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context
+            var ctx = $('#tf_months'); // jQuery instance
+            var ctx = 'tf_months'; // element id
 
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ["January","February","March","April","May","June","July","August","September","October","November","December"],
+                    // Information about the dataset
+                datasets: [{
+                        label : "Completed Booking",
+                        borderColor: '#003C79',
+                        tension: 0.1,
+                        data: [4,2,4,8,3,4,3,3,2,8,6,1],        
+                        fill: false
+                    },
+                    {
+                        label : "Cancelled Booking",
+                        borderColor: 'red',
+                        tension: 0.1,
+                        data: [0,2,1,2,3,4,2,3,2,1,3,2], 
+                        fill: false
+                    }
+                ]
+                },
 
+            // Configuration options
+            options: {
+            layout: {
+            padding: 10,
+            },
+                legend: {
+                    display: true
+                },
+                title: {
+                    display: true,
+                    text: ""
+                }
+            }
+
+        });
     });
 })(jQuery);

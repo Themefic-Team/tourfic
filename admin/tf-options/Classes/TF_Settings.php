@@ -312,6 +312,13 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						</div>
 					</div>
 				</div>
+				
+				<div class="tf-setting-performace-section">
+					<h2><?php _e("Reports","tourfic"); ?></h2>
+					<div class="tf-order-report">
+						<canvas id="tf_months" width="800" height="450"></canvas>
+					</div>
+				</div>
 
 				<!-- deshboar-performance-section -->
 
