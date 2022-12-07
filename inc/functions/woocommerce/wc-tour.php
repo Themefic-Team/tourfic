@@ -320,7 +320,7 @@ function tf_tours_booking_function() {
 		$tf_tours_data['tf_tours_data']['tour_date']        = $tour_date;
 		$tf_tours_data['tf_tours_data']['tour_extra_total'] = $tour_extra_total;
 		if($tour_extra_title){
-			$tf_tours_data['tf_tours_data']['tour_extra_title'] = $tour_extra_title. " × " . wc_price( $tour_extra_total );
+			$tf_tours_data['tf_tours_data']['tour_extra_title'] = $tour_extra_title. " × " . strip_tags( wc_price( $tour_extra_total ) );
 		}
 		# Discount informations
 		$discount_type    = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
@@ -360,9 +360,9 @@ function tf_tours_booking_function() {
 		} else {
 
 			$tf_tours_data['tf_tours_data']['price']     = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
-			$tf_tours_data['tf_tours_data']['adults']    = $adults . " × " . wc_price( $adult_price );
-			$tf_tours_data['tf_tours_data']['childrens'] = $children . " × " . wc_price( $children_price );
-			$tf_tours_data['tf_tours_data']['infants']   = $infant . " × " . wc_price( $infant_price );
+			$tf_tours_data['tf_tours_data']['adults']    = $adults . " × " . strip_tags(wc_price( $adult_price ));
+			$tf_tours_data['tf_tours_data']['childrens'] = $children . " × " . strip_tags(wc_price( $children_price ));
+			$tf_tours_data['tf_tours_data']['infants']   = $infant . " × " . strip_tags(wc_price( $infant_price ));
 		}
 
 		# Deposit information
@@ -493,7 +493,7 @@ function tf_tours_cart_item_custom_data( $item_data, $cart_item ) {
 	if ( ! empty( $due ) ) {
 		$item_data[] = [
 			'key'   => __( 'Due ', 'tourfic' ),
-			'value' => wc_price( $due ),
+			'value' => strip_tags(wc_price( $due )),
 		];
 	}
 
@@ -569,7 +569,7 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	}
 
 	if ( ! empty( $due ) ) {
-		$item->update_meta_data( 'Due', wc_price( $due ) );
+		$item->update_meta_data( 'Due', strip_tags(wc_price( $due ) ));
 	}
 
 }

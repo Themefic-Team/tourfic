@@ -550,7 +550,7 @@ Booking form mobile version
     }
 
     .recomended_inner .single_recomended_item {
-        width: 50%;
+        width: 49% !important;
         float: left;
         margin-right: 0;
         padding-left: 15px;
@@ -593,7 +593,7 @@ Booking form mobile version
 
 @media screen and (max-width: 450px) {
     .recomended_inner .single_recomended_item {
-        width: 100%;
+        width: 100% !important;
         float: none;
         margin-right: 0;
         padding-left: 0;

@@ -28,6 +28,11 @@ function tf_documentation_page_integration() {
 	if(!defined( 'TF_PRO' )) :
 		$submenu['edit.php?post_type=tf_hotel'][] = array( sprintf(__('Booking Details %s(Pro)%s', 'tourfic'), '<span style=color:#ffba00;">', '</span>'), 'edit_tf_hotels', $go_pro_link );
 		$submenu['edit.php?post_type=tf_tours'][] = array( sprintf(__('Booking Details %s(Pro)%s', 'tourfic'), '<span style=color:#ffba00;">', '</span>'), 'edit_tf_tourss', $go_pro_link );
+
+		// Enquiry Menu
+		$submenu['edit.php?post_type=tf_hotel'][] = array( sprintf(__('Enquiry Details %s(Pro)%s', 'tourfic'), '<span style=color:#ffba00;">', '</span>'), 'edit_tf_hotels', $go_pro_link );
+		$submenu['edit.php?post_type=tf_tours'][] = array( sprintf(__('Enquiry Details %s(Pro)%s', 'tourfic'), '<span style=color:#ffba00;">', '</span>'), 'edit_tf_tourss', $go_pro_link );
+
 	endif;
 	$submenu['edit.php?post_type=tf_hotel'][] = array( sprintf('<span style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_hotels', $tfhoteldocumentation );
 	$submenu['edit.php?post_type=tf_tours'][] = array( sprintf('<span style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_tourss', $tftourdocumentation );
@@ -385,6 +390,34 @@ function tourfic_ask_question_ajax() {
 
 	$post_id = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : null;
 	$post_title = get_the_title( $post_id );
+
+	// Enquiry Store on Database
+	if (defined( 'TF_PRO' )){
+		$tf_post_author_id = get_post_field( 'post_author', $post_id );
+		$tf_user_meta = get_userdata($tf_post_author_id);
+    	$tf_user_roles = $tf_user_meta->roles;
+		global $wpdb;     
+		$table_name = $wpdb->prefix.'tf_enquiry_data';  
+		$wpdb->query(
+			$wpdb->prepare(
+			"INSERT INTO $table_name
+			( post_id, post_type, uname, uemail, udescription, author_id, author_roles, created_at )
+			VALUES ( %d, %s, %s, %s, %s, %d, %s, %s )",
+				array(
+				  sanitize_key( $post_id ),
+				  get_post_type( $post_id ),
+				  $name,
+				  $email,
+				  $question,
+				  sanitize_key( $tf_post_author_id ),
+				  $tf_user_roles[0],
+				  date('Y-m-d H:i:s')
+			   	)
+			)
+		);
+	}
+
+	
 	if (defined( 'TF_PRO' )){
 		if( "tf_hotel" == get_post_type( $post_id ) ){
 			$send_email_to = !empty( tfopt('h-enquiry-email') ) ? sanitize_email( tfopt('h-enquiry-email') ) : sanitize_email( get_option( 'admin_email' ) );

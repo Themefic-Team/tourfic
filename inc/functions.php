@@ -1369,6 +1369,35 @@ function tf_save_custom_fields(){
     if( isset($_POST['hotel_slug']) ){
         update_option( 'hotel_slug',  $_POST['hotel_slug'] );
     }
+
+	/**
+	 * Order Data
+	 * Create Order Data Database   
+	 * @author jahid
+	 */
+
+	global $wpdb; 
+    $order_table_name = $wpdb->prefix.'tf_order_data';
+    $charset_collate = $wpdb->get_charset_collate();
+    require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+    $sql = "CREATE TABLE IF NOT EXISTS $order_table_name (
+        id bigint(20) NOT NULL AUTO_INCREMENT,
+        order_id bigint(20) NOT NULL,
+        post_id bigint(20) NOT NULL,
+        post_type varchar(255),
+        room_number varchar(255) NULL,
+        check_in date NOT NULL,  
+        check_out date NULL,  
+        billing_details text,
+        shipping_details text,
+        order_details text,
+        customer_id bigint(11) NOT NULL,
+        payment_method varchar(255),
+        ostatus varchar(255),
+        order_date datetime NOT NULL,
+        PRIMARY KEY  (id)
+    ) $charset_collate;";
+    dbDelta( $sql ); 
 }
 add_action( 'admin_init', 'tf_save_custom_fields' );
 
@@ -1432,3 +1461,4 @@ function tf_month_chart_filter_callback(){
 
 	die();
 }
+
