@@ -391,10 +391,13 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$discount        = ! empty( $meta['discount'] ) ? $meta['discount'] : 0;
 		$booked_dates    = tf_apartment_booked_days( get_the_ID() );
 
-		if ( ! defined( 'TF_PRO' ) ) {
+		if ( defined( 'TF_PRO' ) ) {
+			$additional_fees = ! empty( $meta['additional_fees'] ) ? $meta['additional_fees'] : array();
+		} else {
 			$additional_fee_label = ! empty( $meta['additional_fee_label'] ) ? $meta['additional_fee_label'] : '';
 			$additional_fee       = ! empty( $meta['additional_fee'] ) ? $meta['additional_fee'] : 0;
 			$fee_type             = ! empty( $meta['fee_type'] ) ? $meta['fee_type'] : '';
+
 		}
 
 		$adults       = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
@@ -500,19 +503,26 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                     <span class="days-total-price tf-price-list-price"></span>
                 </li>
 
-				<?php if ( ! empty( $additional_fee_label ) && ! empty( $additional_fee ) ): ?>
+				<?php if ( ! defined( 'TF_PRO' ) && ! empty( $additional_fee_label ) && ! empty( $additional_fee ) ): ?>
                     <li class="additional-fee-wrap" style="display: none">
                         <span class="additional-fee-label tf-price-list-label"><?php echo $additional_fee_label; ?></span>
                         <span class="additional-fee tf-price-list-price"></span>
                     </li>
+				<?php else: ?>
+					<?php foreach ( $additional_fees as $key => $additional_fee ) : ?>
+                        <li class="additional-fee-wrap" style="display: none">
+                            <span class="additional-fee-label tf-price-list-label"><?php echo $additional_fee['additional_fee_label']; ?></span>
+                            <span class="additional-fee-<?php echo esc_attr( $key ) ?> tf-price-list-price"></span>
+                        </li>
+					<?php endforeach; ?>
 				<?php endif; ?>
 
-	            <?php if ( ! empty( $discount ) ): ?>
+				<?php if ( ! empty( $discount ) ): ?>
                     <li class="apartment-discount-wrap" style="display: none">
                         <span class="apartment-discount-label tf-price-list-label"><?php _e( 'Discount', 'tourfic' ); ?></span>
                         <span class="apartment-discount tf-price-list-price"></span>
                     </li>
-	            <?php endif; ?>
+				<?php endif; ?>
 
                 <li class="total-price-wrap" style="display: none">
                     <span class="total-price-label tf-price-list-label"><?php _e( 'Total Price', 'tourfic' ); ?></span>
@@ -548,26 +558,50 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 
 
                                 let totalPerson = parseInt($('.tf_acrselection #adults').val()) + parseInt($('.tf_acrselection #children').val()) + parseInt($('.tf_acrselection #infant').val());
+
                                 //additional fee
-								<?php if ( ! empty( $additional_fee ) ): ?>
-                                let additional_fee = <?php echo $additional_fee; ?>;
-                                let additional_fee_html = '<?php echo wc_price( 0 ); ?>';
-                                let totalAdditionalFee = 0;
+								<?php if ( defined( 'TF_PRO' ) ): ?>
+                                    <?php foreach ($additional_fees as $key => $item) : ?>
+                                        let additional_fee_<?php echo $key ?> = <?php echo $item['additional_fee']; ?>;
+                                        let additional_fee_html_<?php echo $key ?> = '<?php echo wc_price( 0 ); ?>';
+                                        let totalAdditionalFee_<?php echo $key ?> = 0;
 
-								<?php if ( $fee_type == 'per_night' ): ?>
-                                totalAdditionalFee = additional_fee * days;
-								<?php elseif($fee_type == 'per_person'): ?>
-                                totalAdditionalFee = additional_fee * totalPerson;
+                                        <?php if ( $item['fee_type'] == 'per_night' ): ?>
+                                        totalAdditionalFee_<?php echo $key ?> = additional_fee_<?php echo $key ?> * days;
+                                        <?php elseif($item['fee_type'] == 'per_person'): ?>
+                                        totalAdditionalFee_<?php echo $key ?> = additional_fee_<?php echo $key ?> * totalPerson;
+                                        <?php else: ?>
+                                        totalAdditionalFee_<?php echo $key ?> = additional_fee_<?php echo $key ?>;
+                                        <?php endif; ?>
+
+                                        if (totalAdditionalFee_<?php echo $key ?> > 0) {
+                                            $('.additional-fee-wrap').show();
+                                            total_price = total_price + totalAdditionalFee_<?php echo $key ?>;
+                                            additional_fee_html_<?php echo $key ?> = '<?php echo wc_price( 0 ); ?>'.replace('0.00', totalAdditionalFee_<?php echo $key ?>.toFixed(2));
+                                        }
+                                        $('.additional-fee-wrap .additional-fee-<?php echo $key ?>').html(additional_fee_html_<?php echo $key ?>);
+                                    <?php endforeach; ?>
 								<?php else: ?>
-                                totalAdditionalFee = additional_fee;
-								<?php endif; ?>
+                                    <?php if ( ! empty( $additional_fee ) ): ?>
+                                    let additional_fee = <?php echo $additional_fee; ?>;
+                                    let additional_fee_html = '<?php echo wc_price( 0 ); ?>';
+                                    let totalAdditionalFee = 0;
 
-                                if (totalAdditionalFee > 0) {
-                                    $('.additional-fee-wrap').show();
-                                    total_price = total_price + totalAdditionalFee;
-                                    additional_fee_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', totalAdditionalFee.toFixed(2));
-                                }
-                                $('.additional-fee-wrap .additional-fee').html(additional_fee_html);
+                                    <?php if ( $fee_type == 'per_night' ): ?>
+                                    totalAdditionalFee = additional_fee * days;
+                                    <?php elseif($fee_type == 'per_person'): ?>
+                                    totalAdditionalFee = additional_fee * totalPerson;
+                                    <?php else: ?>
+                                    totalAdditionalFee = additional_fee;
+                                    <?php endif; ?>
+
+                                    if (totalAdditionalFee > 0) {
+                                        $('.additional-fee-wrap').show();
+                                        total_price = total_price + totalAdditionalFee;
+                                        additional_fee_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', totalAdditionalFee.toFixed(2));
+                                    }
+                                    $('.additional-fee-wrap .additional-fee').html(additional_fee_html);
+                                    <?php endif; ?>
 								<?php endif; ?>
 
                                 //discount
@@ -577,11 +611,11 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                     $('.apartment-discount-wrap').show();
                                     discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', (total_price * discount / 100).toFixed(2));
 
-	                                <?php if ( $discount_type == 'percent' ): ?>
+									<?php if ( $discount_type == 'percent' ): ?>
                                     total_price = total_price - (total_price * discount / 100);
-	                                <?php else: ?>
+									<?php else: ?>
                                     total_price = total_price - discount;
-	                                <?php endif; ?>
+									<?php endif; ?>
                                 }
                                 $('.apartment-discount-wrap .apartment-discount').html('-' + discount_html);
 
@@ -643,13 +677,13 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 						<?php tf_flatpickr_locale(); ?>
                     });
 
-					<?php if ( ! empty( $additional_fee ) && $fee_type == 'per_person' ): ?>
+					<?php //if ( ! empty( $additional_fee ) && $fee_type == 'per_person' ): ?>
                     $(document).on('change', '.tf_acrselection #adults, .tf_acrselection #children, .tf_acrselection #infant', function () {
                         if ($('#tf-apartment-booking #check-in-out-date').val() !== '') {
                             bookingCalculation(checkinoutdateange.selectedDates);
                         }
                     });
-					<?php endif; ?>
+					<?php //endif; ?>
                 });
             })(jQuery);
 
@@ -679,7 +713,8 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 		}
 
 		// Location
-		$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
+		$address  = ! empty( $meta['address'] ) ? $meta['address'] : '';
+		$featured = ! empty( $meta['apartment_as_featured'] ) ? $meta['apartment_as_featured'] : '';
 
 		// Single link
 		$url = get_the_permalink();
@@ -690,7 +725,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 			'check-in-out-date' => $check_in_out,
 		), $url );
 		?>
-        <div class="single-tour-wrap">
+        <div class="single-tour-wrap <?php echo $featured ? esc_attr( 'tf-featured' ) : '' ?>">
             <div class="single-tour-inner">
                 <div class="tourfic-single-left">
                     <a href="<?php echo $url; ?>">

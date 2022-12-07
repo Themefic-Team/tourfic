@@ -408,58 +408,60 @@ while ( have_posts() ) : the_post();
         </div>
         <!-- End Content & Feature Section -->
 
-		<?php if ( ! empty( $map['address'] ) || ( ! empty( $meta['location_title'] ) && ! empty( $meta['location_description'] ) ) ): ?>
-            <!-- Map Section Start -->
-            <div id="tour-map" class="tf-map-wrapper sp-t-70">
-                <div class="tf-container">
-                    <div class="tf-row">
-                        <div class="tf-map-content-wrapper">
-							<?php if ( ! empty( $map['address'] ) ): ?>
-                                <div class="tf-apartment-map">
-                                    <h3><?php _e( 'Your staying location', 'tourfic' ); ?></h3>
-                                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=15&output=embed"
-                                            width="100%" height="400"
-                                            style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                                </div>
-							<?php endif; ?>
-
-                            <div class="about-location">
-								<?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
-                                    <h3 class="surroundings_sec_title"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h3>
-								<?php endif; ?>
-								<?php if ( ! empty( $meta['surroundings_subtitle'] ) ): ?>
-                                    <p class="surroundings_subtitle"><?php echo esc_html( $meta['surroundings_subtitle'] ); ?></p>
-								<?php endif; ?>
-
-								<?php if ( isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
-                                    <div class="tf-apartment-surronding-wrapper">
-										<?php foreach ( tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
-                                            <div class="tf-apartment-surronding-criteria">
-                                                <div class="tf-apartment-surronding-criteria-label">
-                                                    <i class="<?php echo esc_attr( $surroundings_place['place_criteria_icon'] ); ?>"></i>
-													<?php echo esc_html( $surroundings_place['place_criteria_label'] ); ?>
-                                                </div>
-
-												<?php if ( isset( $surroundings_place['places'] ) && ! empty( tf_data_types( $surroundings_place['places'] ) ) ): ?>
-                                                    <ul class="tf-apartment-surronding-places">
-														<?php foreach ( tf_data_types( $surroundings_place['places'] ) as $place ): ?>
-                                                            <li>
-                                                                <span class="tf-place-name"><?php echo esc_html( $place['place_name'] ) ?></span>
-                                                                <span class="tf-place-distance"><?php echo esc_html( $place['place_distance'] ) ?></span>
-                                                            </li>
-														<?php endforeach; ?>
-                                                    </ul>
-												<?php endif; ?>
-                                            </div>
-										<?php endforeach; ?>
+		<?php if ( defined( 'TF_PRO' ) ): ?>
+			<?php if ( ! empty( $map['address'] ) || isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
+                <!-- Map Section Start -->
+                <div id="tour-map" class="tf-map-wrapper sp-t-70">
+                    <div class="tf-container">
+                        <div class="tf-row">
+                            <div class="tf-map-content-wrapper">
+								<?php if ( ! empty( $map['address'] ) ): ?>
+                                    <div class="tf-apartment-map">
+                                        <h3><?php _e( 'Your staying location', 'tourfic' ); ?></h3>
+                                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=15&output=embed"
+                                                width="100%" height="400"
+                                                style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                                     </div>
 								<?php endif; ?>
+
+                                <div class="about-location">
+									<?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
+                                        <h3 class="surroundings_sec_title"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h3>
+									<?php endif; ?>
+									<?php if ( ! empty( $meta['surroundings_subtitle'] ) ): ?>
+                                        <p class="surroundings_subtitle"><?php echo esc_html( $meta['surroundings_subtitle'] ); ?></p>
+									<?php endif; ?>
+
+									<?php if ( isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
+                                        <div class="tf-apartment-surronding-wrapper">
+											<?php foreach ( tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
+                                                <div class="tf-apartment-surronding-criteria">
+                                                    <div class="tf-apartment-surronding-criteria-label">
+                                                        <i class="<?php echo esc_attr( $surroundings_place['place_criteria_icon'] ); ?>"></i>
+														<?php echo esc_html( $surroundings_place['place_criteria_label'] ); ?>
+                                                    </div>
+
+													<?php if ( isset( $surroundings_place['places'] ) && ! empty( tf_data_types( $surroundings_place['places'] ) ) ): ?>
+                                                        <ul class="tf-apartment-surronding-places">
+															<?php foreach ( tf_data_types( $surroundings_place['places'] ) as $place ): ?>
+                                                                <li>
+                                                                    <span class="tf-place-name"><?php echo esc_html( $place['place_name'] ) ?></span>
+                                                                    <span class="tf-place-distance"><?php echo esc_html( $place['place_distance'] ) ?></span>
+                                                                </li>
+															<?php endforeach; ?>
+                                                        </ul>
+													<?php endif; ?>
+                                                </div>
+											<?php endforeach; ?>
+                                        </div>
+									<?php endif; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Map Section End -->
+                <!-- Map Section End -->
+			<?php endif; ?>
 		<?php endif; ?>
 
 		<?php if ( ! $disable_review_sec == 1 ) : ?>

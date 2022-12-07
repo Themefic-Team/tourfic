@@ -99,17 +99,20 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'     => 'text',
 					'label'    => __( 'Section Title', 'tourfic' ),
 					'subtitle' => __( 'Enter surroundings section title', 'tourfic' ),
+					'is_pro'   => true,
 				),
 				array(
 					'id'       => 'surroundings_subtitle',
 					'type'     => 'text',
 					'label'    => __( 'Section sub title', 'tourfic' ),
 					'subtitle' => __( 'Enter surroundings section sub title', 'tourfic' ),
+					'is_pro'   => true,
 				),
 				array(
 					'id'       => 'surroundings_places',
 					'type'     => 'repeater',
 					'label'    => __( 'Surroundings Places', 'tourfic' ),
+					'is_pro'   => true,
 					'subtitle' => __( 'Enter surroundings places', 'tourfic' ),
 					'fields'   => array(
 						array(
