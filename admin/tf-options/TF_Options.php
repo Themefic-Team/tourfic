@@ -169,7 +169,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				foreach ( $order as $item_id => $item ) {
 					$itemmeta = wc_get_order( $item);
 					$tf_ordering_date =  $itemmeta->get_date_created();
-					if($tf_ordering_date->date('m')==1){
+					if($tf_ordering_date->date('n-y')=='1-'.date('y')){
 						if("completed"==$itemmeta->get_status()){
 							$tf_co1+=1;
 						}
@@ -177,7 +177,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 							$tf_cr1+=1;
 						}
 					}
-					if($tf_ordering_date->date('m')==2){
+					if($tf_ordering_date->date('n-y')=='2-'.date('y')){
 						if("completed"==$itemmeta->get_status()){
 							$tf_co2+=1;
 						}
@@ -185,7 +185,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 							$tf_cr2+=1;
 						}
 					}
-					if($tf_ordering_date->date('m')==3){
+					if($tf_ordering_date->date('n-y')=='3-'.date('y')){
 						if("completed"==$itemmeta->get_status()){
 							$tf_co3+=1;
 						}
@@ -193,7 +193,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 							$tf_cr3+=1;
 						}
 					}
-					if($tf_ordering_date->date('m')==4){
+					if($tf_ordering_date->date('n-y')=='4-'.date('y')){
 						if("completed"==$itemmeta->get_status()){
 							$tf_co4+=1;
 						}
@@ -201,7 +201,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 							$tf_cr4+=1;
 						}
 					}
-					if($tf_ordering_date->date('m')==5){
+					if($tf_ordering_date->date('n-y')=='5-'.date('y')){
 						if("completed"==$itemmeta->get_status()){
 							$tf_co5+=1;
 						}
@@ -209,7 +209,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 							$tf_cr5+=1;
 						}
 					}
-					if($tf_ordering_date->date('m')==6){
+					if($tf_ordering_date->date('n-y')=='6-'.date('y')){
 						if("completed"==$itemmeta->get_status()){
 							$tf_co6+=1;
 						}
@@ -217,7 +217,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 							$tf_cr6+=1;
 						}
 					}
-					if($tf_ordering_date->date('m')==7){
+					if($tf_ordering_date->date('n-y')=='7-'.date('y')){
 						if("completed"==$itemmeta->get_status()){
 							$tf_co7+=1;
 						}
@@ -225,7 +225,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 							$tf_cr7+=1;
 						}
 					}
-					if($tf_ordering_date->date('m')==8){
+					if($tf_ordering_date->date('n-y')=='8-'.date('y')){
 						if("completed"==$itemmeta->get_status()){
 							$tf_co8+=1;
 						}
@@ -233,7 +233,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 							$tf_cr8+=1;
 						}
 					}
-					if($tf_ordering_date->date('m')==9){
+					if($tf_ordering_date->date('n-y')=='9-'.date('y')){
 						if("completed"==$itemmeta->get_status()){
 							$tf_co9+=1;
 						}
@@ -241,7 +241,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 							$tf_cr9+=1;
 						}
 					}
-					if($tf_ordering_date->date('m')==10){
+					if($tf_ordering_date->date('n-y')=='10-'.date('y')){
 						if("completed"==$itemmeta->get_status()){
 							$tf_co10+=1;
 						}
@@ -249,7 +249,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 							$tf_cr10+=1;
 						}
 					}
-					if($tf_ordering_date->date('m')==11){
+					if($tf_ordering_date->date('n-y')=='11-'.date('y')){
 						if("completed"==$itemmeta->get_status()){
 							$tf_co11+=1;
 						}
@@ -257,7 +257,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 							$tf_cr11+=1;
 						}
 					}
-					if($tf_ordering_date->date('m')==12){
+					if($tf_ordering_date->date('n-y')=='12-'.date('y')){
 						if("completed"==$itemmeta->get_status()){
 							$tf_co12+=1;
 						}

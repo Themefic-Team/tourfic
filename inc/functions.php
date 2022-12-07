@@ -1407,7 +1407,7 @@ function tf_month_chart_filter_callback(){
 		$itemmeta = wc_get_order( $item);
 		$tf_ordering_date =  $itemmeta->get_date_created();
 		for($i=1; $i<=$month_dates; $i++){
-			if($tf_ordering_date->date('m-j')==$search_month.'-'.$i){
+			if($tf_ordering_date->date('n-j-y')==$search_month.'-'.$i.'-'.date('y')){
 				if("completed"==$itemmeta->get_status()){
 					${"tf_co$i"}+=1;
 				}
