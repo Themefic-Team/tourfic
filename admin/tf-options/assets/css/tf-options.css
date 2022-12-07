@@ -1796,13 +1796,14 @@ Fontawesome
       font-size: 14px; }
 
 .tf-field-color .tf-fieldset ul.tf-inline li {
-  display: inline-flex;
+  display: block;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
   margin-right: 20px; }
   .tf-field-color .tf-fieldset ul.tf-inline li label {
     color: #8997A9;
+    display: block;
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 5px; }
