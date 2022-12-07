@@ -12,15 +12,16 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
+					'id'    => 'apartment_gallery',
+					'type'  => 'gallery',
+					'label' => __( 'Apartment Gallery', 'tourfic' ),
+				),
+				array(
 					'id'       => 'apartment_as_featured',
 					'type'     => 'switch',
 					'label'    => __( 'Set this apartment as featured', 'tourfic' ),
 					'subtitle' => __( 'Apartment will be shown under featured sections', 'tourfic' ),
-				),
-				array(
-					'id'    => 'apartment_gallery',
-					'type'  => 'gallery',
-					'label' => __( 'Apartment Gallery', 'tourfic' ),
+					'is_pro'   => true,
 				),
 
 				array(
@@ -85,6 +86,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'settings' => array(
 						'scrollWheelZoom' => true,
 					),
+					'is_pro'   => true,
 				),
 				//Property Surroundings
 				array(
@@ -157,9 +159,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'       => __( 'Price Per Night', 'tourfic' ),
 					'subtitle'    => __( 'Enter price per night', 'tourfic' ),
 					'field_width' => 50,
-					'attributes'  => array(
-						'min' => 0
-					)
+					'attributes'  => array( 'min' => 0 )
 				),
 				array(
 					'id'          => 'min_stay',
@@ -167,9 +167,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'       => __( 'Minimum Night Stay', 'tourfic' ),
 					'subtitle'    => __( 'Enter minimum night stay', 'tourfic' ),
 					'field_width' => 50,
-					'attributes'  => array(
-						'min' => 0
-					)
+					'attributes'  => array( 'min' => 0 )
 				),
 				array(
 					'id'          => 'max_adults',
@@ -177,9 +175,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'       => __( 'Maximum Adults', 'tourfic' ),
 					'subtitle'    => __( 'Enter maximum adults', 'tourfic' ),
 					'field_width' => 33.33,
-					'attributes'  => array(
-						'min' => 1
-					)
+					'attributes'  => array( 'min' => 1 )
 				),
 				array(
 					'id'          => 'max_children',
@@ -187,9 +183,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'       => __( 'Maximum Children', 'tourfic' ),
 					'subtitle'    => __( 'Enter maximum children', 'tourfic' ),
 					'field_width' => 33.33,
-					'attributes'  => array(
-						'min' => 0
-					)
+					'attributes'  => array( 'min' => 0 )
 				),
 				array(
 					'id'          => 'max_infants',
@@ -197,31 +191,57 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'       => __( 'Maximum Infants', 'tourfic' ),
 					'subtitle'    => __( 'Enter maximum infants', 'tourfic' ),
 					'field_width' => 33.33,
-					'attributes'  => array(
-						'min' => 0
-					)
+					'attributes'  => array( 'min' => 0 )
 				),
 				array(
-					'id'          => 'service_fee',
+					'id'          => 'additional_fee_label',
+					'type'        => 'text',
+					'label'       => __( 'Additional Fee Label', 'tourfic' ),
+					'subtitle'    => __( 'Enter additional fee', 'tourfic' ),
+					'field_width' => 33.33,
+				),
+				array(
+					'id'          => 'additional_fee',
 					'type'        => 'number',
-					'label'       => __( 'Service Fee (Per Night)', 'tourfic' ),
-					'subtitle'    => __( 'Enter service fee', 'tourfic' ),
-					'field_width' => 50,
-					'attributes'  => array(
-						'min' => 0
-					)
+					'label'       => __( 'Additional Fee', 'tourfic' ),
+					'subtitle'    => __( 'Enter additional fee', 'tourfic' ),
+					'field_width' => 33.33,
+					'attributes'  => array( 'min' => 0 )
 				),
 				array(
-					'id'          => 'cleaning_fee',
+					'id'          => 'fee_type',
+					'type'        => 'select',
+					'label'       => __( 'Fee Type', 'tourfic' ),
+					'subtitle'    => __( 'Select fee type', 'tourfic' ),
+					'options'     => array(
+						'per_stay'   => __( 'Per Stay', 'tourfic' ),
+						'per_night'  => __( 'Per Night', 'tourfic' ),
+						'per_person' => __( 'Per Person', 'tourfic' ),
+					),
+					'field_width' => 33.33,
+				),
+				array(
+					'id'          => 'discount_type',
+					'type'        => 'select',
+					'label'       => __( 'Discount Type', 'tourfic' ),
+					'subtitle'    => __( 'Select discount type', 'tourfic' ),
+					'options'     => array(
+						'none'    => __( 'None', 'tourfic' ),
+						'fixed'   => __( 'Fixed', 'tourfic' ),
+						'percent' => __( 'Percent', 'tourfic' ),
+					),
+					'field_width' => 50,
+				),
+				array(
+					'id'          => 'discount',
 					'type'        => 'number',
-					'label'       => __( 'Cleaning Fee', 'tourfic' ),
-					'subtitle'    => __( 'Enter cleaning fee', 'tourfic' ),
+					'label'       => __( 'Discount', 'tourfic' ),
+					'subtitle'    => __( 'Enter discount', 'tourfic' ),
+					'dependency' => array( 'discount_type', '!=', 'none' ),
+					'attributes'  => array( 'min' => 0 ),
 					'field_width' => 50,
-					'attributes'  => array(
-						'min' => 0
-					)
 				),
-				array(
+				/*array(
 					'id'       => 'weekly_discount',
 					'type'     => 'number',
 					'label'    => __( 'Weekly Discount Per Night', 'tourfic' ),
@@ -232,7 +252,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'     => 'number',
 					'label'    => __( 'Monthly Discount Per Night', 'tourfic' ),
 					'subtitle' => __( 'Monthly discounts for stays longer than 30 days (per night)', 'tourfic' ),
-				),
+				),*/
 			),
 		),
 		// Information

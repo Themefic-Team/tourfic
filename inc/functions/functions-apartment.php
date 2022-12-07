@@ -381,17 +381,21 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 	function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
 
-		$meta             = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
-		$min_stay         = ! empty( $meta['min_stay'] ) ? $meta['min_stay'] : 1;
-		$max_adults       = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
-		$max_children     = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
-		$max_infants      = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
-		$price_per_night  = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
-		$weekly_discount  = ! empty( $meta['weekly_discount'] ) ? $meta['weekly_discount'] : 0;
-		$monthly_discount = ! empty( $meta['monthly_discount'] ) ? $meta['monthly_discount'] : 0;
-		$service_fee      = ! empty( $meta['service_fee'] ) ? $meta['service_fee'] : 0;
-		$cleaning_fee     = ! empty( $meta['cleaning_fee'] ) ? $meta['cleaning_fee'] : 0;
-		$booked_dates     = tf_apartment_booked_days( get_the_ID() );
+		$meta            = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+		$min_stay        = ! empty( $meta['min_stay'] ) ? $meta['min_stay'] : 1;
+		$max_adults      = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
+		$max_children    = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
+		$max_infants     = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
+		$price_per_night = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
+		$discount_type   = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+		$discount        = ! empty( $meta['discount'] ) ? $meta['discount'] : 0;
+		$booked_dates    = tf_apartment_booked_days( get_the_ID() );
+
+		if ( ! defined( 'TF_PRO' ) ) {
+			$additional_fee_label = ! empty( $meta['additional_fee_label'] ) ? $meta['additional_fee_label'] : '';
+			$additional_fee       = ! empty( $meta['additional_fee'] ) ? $meta['additional_fee'] : 0;
+			$fee_type             = ! empty( $meta['fee_type'] ) ? $meta['fee_type'] : '';
+		}
 
 		$adults       = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
 		$child        = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
@@ -496,31 +500,17 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                     <span class="days-total-price tf-price-list-price"></span>
                 </li>
 
-				<?php if ( ! empty( $weekly_discount ) ): ?>
-                    <li class="weekly-discount-wrap" style="display: none">
-                        <span class="weekly-discount-label tf-price-list-label"><?php _e( 'Weekly discount', 'tourfic' ); ?></span>
-                        <span class="weekly-discount tf-price-list-price"></span>
+				<?php if ( ! empty( $discount ) ): ?>
+                    <li class="apartment-discount-wrap" style="display: none">
+                        <span class="apartment-discount-label tf-price-list-label"><?php _e( 'Discount', 'tourfic' ); ?></span>
+                        <span class="apartment-discount tf-price-list-price"></span>
                     </li>
 				<?php endif; ?>
 
-				<?php if ( ! empty( $monthly_discount ) ): ?>
-                    <li class="monthly-discount-wrap" style="display: none">
-                        <span class="monthly-discount-label tf-price-list-label"><?php _e( 'Monthly discount', 'tourfic' ); ?></span>
-                        <span class="monthly-discount tf-price-list-price"></span>
-                    </li>
-				<?php endif; ?>
-
-				<?php if ( ! empty( $service_fee ) ): ?>
-                    <li class="service-fee-wrap" style="display: none">
-                        <span class="service-fee-label tf-price-list-label"><?php _e( 'Service Fee', 'tourfic' ); ?></span>
-                        <span class="service-fee tf-price-list-price"></span>
-                    </li>
-				<?php endif; ?>
-
-				<?php if ( ! empty( $cleaning_fee ) ): ?>
-                    <li class="cleaning-fee-wrap" style="display: none">
-                        <span class="cleaning-fee-label tf-price-list-label"><?php _e( 'Cleaning Fee', 'tourfic' ); ?></span>
-                        <span class="cleaning-fee tf-price-list-price"><?php echo wc_price( $cleaning_fee ); ?></span>
+				<?php if ( ! empty( $additional_fee_label ) && ! empty( $additional_fee ) ): ?>
+                    <li class="additional-fee-wrap" style="display: none">
+                        <span class="additional-fee-label tf-price-list-label"><?php echo $additional_fee_label; ?></span>
+                        <span class="additional-fee tf-price-list-price"></span>
                     </li>
 				<?php endif; ?>
 
@@ -541,7 +531,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                     const bookingCalculation = (selectedDates, dateStr, instance) => {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 
-		                <?php if ( ! empty( $price_per_night ) ): ?>
+						<?php if ( ! empty( $price_per_night ) ): ?>
                         //calculate total days
                         if (selectedDates[0] && selectedDates[1]) {
                             var diff = Math.abs(selectedDates[1] - selectedDates[0]);
@@ -558,72 +548,58 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
                                 $('.total-days-price-wrap .days-total-price').html(total_price_html);
 
-                                //weekly discount (if more than 7 days)
-                                let base_price_wrapper = $('.tf-apartment-base-price');
-                                if (days >= 30) {
-                                    $('.weekly-discount-wrap').hide();
-                                    var monthly_discount = <?php echo $monthly_discount; ?>;
-                                    var monthly_discount_html = '<?php echo wc_price( 0 ); ?>';
-                                    if (monthly_discount > 0) {
-                                        $('.monthly-discount-wrap').show();
-                                        monthly_discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0', monthly_discount * days);
-                                    }
-
-                                    $('.monthly-discount-wrap .monthly-discount').html('-' + monthly_discount_html);
-                                    let base_price = (total_price - (monthly_discount * days)) / days;
-                                    base_price_wrapper.html('<?php echo wc_price( 0 ); ?>'.replace('0', base_price));
-                                } else if (days >= 7) {
-                                    $('.monthly-discount-wrap').hide();
-                                    var weekly_discount = <?php echo $weekly_discount; ?>;
-                                    var weekly_discount_html = '<?php echo wc_price( 0 ); ?>';
-                                    if (weekly_discount > 0) {
-                                        $('.weekly-discount-wrap').show();
-                                        weekly_discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0', weekly_discount * days);
-                                    }
-
-                                    $('.weekly-discount-wrap .weekly-discount').html('-' + weekly_discount_html);
-                                    let base_price = (total_price - (weekly_discount * days)) / days;
-                                    base_price_wrapper.html('<?php echo wc_price( 0 ); ?>'.replace('0', base_price));
-                                } else {
-                                    $('.weekly-discount-wrap').hide();
-                                    $('.monthly-discount-wrap').hide();
-
-                                    base_price_wrapper.html(wc_price_per_night);
+                                //discount
+                                var discount = <?php echo $discount; ?>;
+                                var discount_html = '<?php echo wc_price( 0 ); ?>';
+                                if (discount > 0) {
+                                    $('.apartment-discount-wrap').show();
+                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0', discount);
                                 }
+                                $('.apartment-discount-wrap .apartment-discount').html('-' + discount_html);
 
-                                //service fee per night
-				                <?php if ( ! empty( $service_fee ) ): ?>
-                                var service_fee = <?php echo $service_fee; ?>;
-                                var service_fee_html = '<?php echo wc_price( 0 ); ?>';
-                                if (service_fee > 0) {
-                                    $('.service-fee-wrap').show();
-                                    service_fee_html = '<?php echo wc_price( 0 ); ?>'.replace('0', service_fee * days);
+
+                                let totalPerson = parseInt($('.tf_acrselection #adults').val()) + parseInt($('.tf_acrselection #children').val()) + parseInt($('.tf_acrselection #infant').val());
+                                //additional fee
+								<?php if ( ! empty( $additional_fee ) ): ?>
+                                let additional_fee = <?php echo $additional_fee; ?>;
+                                let additional_fee_html = '<?php echo wc_price( 0 ); ?>';
+                                let totalAdditionalFee = 0;
+
+								<?php if ( $fee_type == 'per_night' ): ?>
+                                totalAdditionalFee = additional_fee * days;
+								<?php elseif($fee_type == 'per_person'): ?>
+                                totalAdditionalFee = additional_fee * totalPerson;
+								<?php else: ?>
+                                totalAdditionalFee = additional_fee;
+								<?php endif; ?>
+
+                                if (additional_fee > 0) {
+                                    $('.additional-fee-wrap').show();
+                                    additional_fee_html = '<?php echo wc_price( 0 ); ?>'.replace('0', totalAdditionalFee);
                                 }
-                                $('.service-fee-wrap .service-fee').html(service_fee_html);
-				                <?php endif; ?>
-
-                                //cleaning fee
-				                <?php if ( ! empty( $cleaning_fee ) ): ?>
-                                $('.cleaning-fee-wrap').show();
-				                <?php endif; ?>
+                                $('.additional-fee-wrap .additional-fee').html(additional_fee_html);
+								<?php endif; ?>
 
                                 //total price
                                 var total_price_html = '<?php echo wc_price( 0 ); ?>';
                                 if (total_price > 0) {
                                     $('.total-price-wrap').show();
-                                    total_price = total_price + (service_fee * days) + <?php echo $cleaning_fee; ?>;
-                                    total_price = days >= 30 ? total_price - (monthly_discount * days) : (days >= 7 ? total_price - (weekly_discount * days) : total_price);
+                                    total_price = total_price + totalAdditionalFee;
+	                                <?php if ( $discount_type == 'percent' ): ?>
+                                    total_price = total_price - (total_price * discount / 100);
+                                    <?php else: ?>
+                                    total_price = total_price - discount;
+                                    <?php endif; ?>
                                     total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
                                 }
                                 $('.total-price-wrap .total-price').html(total_price_html);
                             } else {
                                 $('.total-days-price-wrap').hide();
-                                $('.service-fee-wrap').hide();
-                                $('.cleaning-fee-wrap').hide();
+                                $('.additional-fee-wrap').hide();
                                 $('.total-price-wrap').hide();
                             }
                         }
-		                <?php endif; ?>
+						<?php endif; ?>
 
                         //minimum stay
                         if (selectedDates[0] && selectedDates[1] && minStay > 0) {
@@ -655,17 +631,40 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                             bookingCalculation(selectedDates, dateStr, instance);
                         },
                         disable: [
-		                    <?php foreach ( $booked_dates as $booked_date ) : ?>
+							<?php foreach ( $booked_dates as $booked_date ) : ?>
                             {
                                 from: "<?php echo $booked_date['check_in']; ?>",
                                 to: "<?php echo $booked_date['check_out']; ?>"
                             },
-		                    <?php endforeach; ?>
+							<?php endforeach; ?>
                         ],
 						<?php tf_flatpickr_locale(); ?>
                     });
 
+					<?php if ( ! empty( $additional_fee ) && $fee_type == 'per_person' ): ?>
+                    $(document).on('change', '.tf_acrselection #adults, .tf_acrselection #children, .tf_acrselection #infant', function () {
+                        if ($('#tf-apartment-booking #check-in-out-date').val() !== '') {
+                            let totalPerson = parseInt($('.tf_acrselection #adults').val()) + parseInt($('.tf_acrselection #children').val()) + parseInt($('.tf_acrselection #infant').val());
+                            let additional_fee = <?php echo $additional_fee; ?>;
+                            let additional_fee_html = '<?php echo wc_price( 0 ); ?>';
+                            if (additional_fee > 0) {
+                                $('.additional-fee-wrap').show();
+                                additional_fee_html = '<?php echo wc_price( 0 ); ?>'.replace('0', additional_fee * totalPerson);
+                            }
+                            $('.additional-fee-wrap .additional-fee').html(additional_fee_html);
 
+                            //total price
+                            var total_price_html = '<?php echo wc_price( 0 ); ?>';
+                            if (total_price > 0) {
+                                $('.total-price-wrap').show();
+                                total_price = total_price + (additional_fee * totalPerson);
+                                total_price = days >= 30 ? total_price - (monthly_discount * days) : (days >= 7 ? total_price - (weekly_discount * days) : total_price);
+                                total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
+                            }
+                            $('.total-price-wrap .total-price').html(total_price_html);
+                        }
+                    });
+					<?php endif; ?>
                 });
             })(jQuery);
 
