@@ -385,7 +385,8 @@ while ( have_posts() ) : the_post();
                                 <div class="host-meta">
 									<?php echo sprintf( '<h4>%s %s</h4>', esc_html__( 'Hosted by', 'tourfic' ), $author_info->display_name ); ?>
 									<?php echo sprintf( '<p>%s <span>%s</span></p>', esc_html__( 'Joined in', 'tourfic' ), date( 'F Y', strtotime( $author_info->user_registered ) ) ); ?>
-                                    <p><i class="fas fa-star"></i> <span>4.5</span> (150 Reviews)</p>
+                                    <p><i class="fas fa-star"></i> <?php tf_apartment_host_rating($post_author_id) ?></p>
+
                                 </div>
                             </div>
                             <div class="host-bottom">

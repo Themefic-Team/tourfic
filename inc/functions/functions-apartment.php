@@ -397,7 +397,6 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 			$additional_fee_label = ! empty( $meta['additional_fee_label'] ) ? $meta['additional_fee_label'] : '';
 			$additional_fee       = ! empty( $meta['additional_fee'] ) ? $meta['additional_fee'] : 0;
 			$fee_type             = ! empty( $meta['fee_type'] ) ? $meta['fee_type'] : '';
-
 		}
 
 		$adults       = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
@@ -846,5 +845,49 @@ if ( ! function_exists( 'get_apartment_min_max_price' ) ) {
 			'min' => min( $min_max_price ),
 			'max' => max( $min_max_price ),
 		);
+	}
+}
+
+/**
+ * Apartment host rating
+ */
+function tf_apartment_host_rating($author_id) {
+    $author_posts = get_posts(array(
+        'author' => $author_id,
+        'post_type' => 'tf_apartment',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+    ));
+
+    //get post comments
+    $comments_array = array();
+    foreach ($author_posts as $author_post) {
+        $comments_array[] = get_comments(array(
+            'post_id' => $author_post->ID,
+            'status' => 'approve',
+        ));
+    }
+
+	$tf_overall_rate = [];
+    $comment_count = 0;
+	foreach ( $comments_array as $comments ) {
+//		tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rate );
+        $comment_count += count( $comments );
+	}
+
+	if ( $comments ) {
+		ob_start();
+		?>
+        <div class="tf-archive-rating-wrapper">
+            <div class="tf-archive-rating">
+                <span>
+                    <?php _e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
+                </span>
+            </div>
+            <h6><?php tf_based_on_text( $comment_count ); ?></h6>
+        </div>
+
+		<?php
+		echo ob_get_clean();
 	}
 }

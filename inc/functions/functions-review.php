@@ -320,8 +320,7 @@ function tf_average_ratings( $ratings = [] ) {
 	// No sub collection of ratings
 	if ( count( $ratings ) == count( $ratings, COUNT_RECURSIVE ) ) {
 		$average = array_sum( $ratings ) / count( $ratings );
-	} // Has sub collection of ratings
-	else {
+	} else {
 		$average = 0;
 		foreach ( $ratings as $rating ) {
 			$average += array_sum( $rating ) / count( $rating );
