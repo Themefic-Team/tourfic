@@ -500,19 +500,19 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                     <span class="days-total-price tf-price-list-price"></span>
                 </li>
 
-				<?php if ( ! empty( $discount ) ): ?>
-                    <li class="apartment-discount-wrap" style="display: none">
-                        <span class="apartment-discount-label tf-price-list-label"><?php _e( 'Discount', 'tourfic' ); ?></span>
-                        <span class="apartment-discount tf-price-list-price"></span>
-                    </li>
-				<?php endif; ?>
-
 				<?php if ( ! empty( $additional_fee_label ) && ! empty( $additional_fee ) ): ?>
                     <li class="additional-fee-wrap" style="display: none">
                         <span class="additional-fee-label tf-price-list-label"><?php echo $additional_fee_label; ?></span>
                         <span class="additional-fee tf-price-list-price"></span>
                     </li>
 				<?php endif; ?>
+
+	            <?php if ( ! empty( $discount ) ): ?>
+                    <li class="apartment-discount-wrap" style="display: none">
+                        <span class="apartment-discount-label tf-price-list-label"><?php _e( 'Discount', 'tourfic' ); ?></span>
+                        <span class="apartment-discount tf-price-list-price"></span>
+                    </li>
+	            <?php endif; ?>
 
                 <li class="total-price-wrap" style="display: none">
                     <span class="total-price-label tf-price-list-label"><?php _e( 'Total Price', 'tourfic' ); ?></span>
@@ -528,9 +528,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                 $(document).ready(function () {
                     let minStay = <?php echo $min_stay ?>;
 
-                    const bookingCalculation = (selectedDates, dateStr, instance) => {
-                        instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-
+                    const bookingCalculation = (selectedDates) => {
 						<?php if ( ! empty( $price_per_night ) ): ?>
                         //calculate total days
                         if (selectedDates[0] && selectedDates[1]) {
@@ -540,22 +538,13 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 var price_per_night = <?php echo $price_per_night; ?>;
                                 var wc_price_per_night = '<?php echo wc_price( $price_per_night ); ?>';
                                 var total_price = price_per_night * days;
-                                var total_price_html = '<?php echo wc_price( 0 ); ?>';
+                                var total_days_price_html = '<?php echo wc_price( 0 ); ?>';
                                 if (total_price > 0) {
                                     $('.total-days-price-wrap').show();
-                                    total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
+                                    total_days_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
                                 }
                                 $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
-                                $('.total-days-price-wrap .days-total-price').html(total_price_html);
-
-                                //discount
-                                var discount = <?php echo $discount; ?>;
-                                var discount_html = '<?php echo wc_price( 0 ); ?>';
-                                if (discount > 0) {
-                                    $('.apartment-discount-wrap').show();
-                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0', discount);
-                                }
-                                $('.apartment-discount-wrap .apartment-discount').html('-' + discount_html);
+                                $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
 
 
                                 let totalPerson = parseInt($('.tf_acrselection #adults').val()) + parseInt($('.tf_acrselection #children').val()) + parseInt($('.tf_acrselection #infant').val());
@@ -573,24 +562,34 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 totalAdditionalFee = additional_fee;
 								<?php endif; ?>
 
-                                if (additional_fee > 0) {
+                                if (totalAdditionalFee > 0) {
                                     $('.additional-fee-wrap').show();
-                                    additional_fee_html = '<?php echo wc_price( 0 ); ?>'.replace('0', totalAdditionalFee);
+                                    total_price = total_price + totalAdditionalFee;
+                                    additional_fee_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', totalAdditionalFee.toFixed(2));
                                 }
                                 $('.additional-fee-wrap .additional-fee').html(additional_fee_html);
 								<?php endif; ?>
+
+                                //discount
+                                var discount = <?php echo $discount; ?>;
+                                var discount_html = '<?php echo wc_price( 0 ); ?>';
+                                if (discount > 0) {
+                                    $('.apartment-discount-wrap').show();
+                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', (total_price * discount / 100).toFixed(2));
+
+	                                <?php if ( $discount_type == 'percent' ): ?>
+                                    total_price = total_price - (total_price * discount / 100);
+	                                <?php else: ?>
+                                    total_price = total_price - discount;
+	                                <?php endif; ?>
+                                }
+                                $('.apartment-discount-wrap .apartment-discount').html('-' + discount_html);
 
                                 //total price
                                 var total_price_html = '<?php echo wc_price( 0 ); ?>';
                                 if (total_price > 0) {
                                     $('.total-price-wrap').show();
-                                    total_price = total_price + totalAdditionalFee;
-	                                <?php if ( $discount_type == 'percent' ): ?>
-                                    total_price = total_price - (total_price * discount / 100);
-                                    <?php else: ?>
-                                    total_price = total_price - discount;
-                                    <?php endif; ?>
-                                    total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
+                                    total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
                                 }
                                 $('.total-price-wrap .total-price').html(total_price_html);
                             } else {
@@ -625,10 +624,13 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         dateFormat: "Y/m/d",
                         defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
                         onReady: function (selectedDates, dateStr, instance) {
-                            bookingCalculation(selectedDates, dateStr, instance);
+                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                            bookingCalculation(selectedDates);
                         },
                         onChange: function (selectedDates, dateStr, instance) {
-                            bookingCalculation(selectedDates, dateStr, instance);
+                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                            bookingCalculation(selectedDates);
+                            console.log(JSON.stringify(selectedDates));
                         },
                         disable: [
 							<?php foreach ( $booked_dates as $booked_date ) : ?>
@@ -644,24 +646,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 					<?php if ( ! empty( $additional_fee ) && $fee_type == 'per_person' ): ?>
                     $(document).on('change', '.tf_acrselection #adults, .tf_acrselection #children, .tf_acrselection #infant', function () {
                         if ($('#tf-apartment-booking #check-in-out-date').val() !== '') {
-                            let totalPerson = parseInt($('.tf_acrselection #adults').val()) + parseInt($('.tf_acrselection #children').val()) + parseInt($('.tf_acrselection #infant').val());
-                            let additional_fee = <?php echo $additional_fee; ?>;
-                            let additional_fee_html = '<?php echo wc_price( 0 ); ?>';
-                            if (additional_fee > 0) {
-                                $('.additional-fee-wrap').show();
-                                additional_fee_html = '<?php echo wc_price( 0 ); ?>'.replace('0', additional_fee * totalPerson);
-                            }
-                            $('.additional-fee-wrap .additional-fee').html(additional_fee_html);
-
-                            //total price
-                            var total_price_html = '<?php echo wc_price( 0 ); ?>';
-                            if (total_price > 0) {
-                                $('.total-price-wrap').show();
-                                total_price = total_price + (additional_fee * totalPerson);
-                                total_price = days >= 30 ? total_price - (monthly_discount * days) : (days >= 7 ? total_price - (weekly_discount * days) : total_price);
-                                total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0', total_price);
-                            }
-                            $('.total-price-wrap .total-price').html(total_price_html);
+                            bookingCalculation(checkinoutdateange.selectedDates);
                         }
                     });
 					<?php endif; ?>
