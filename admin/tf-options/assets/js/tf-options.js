@@ -1376,6 +1376,7 @@ var frame, gframe;
             var monthTarget = $(this).val();
             if(monthTarget!=0){
                 $("#tf-report-loader").addClass('show');
+                $('.tf-order-report').find('iframe').remove();
                 jQuery.ajax({
                     type: 'post',
                     url: tf_options.ajax_url,
