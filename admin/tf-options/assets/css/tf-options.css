@@ -556,7 +556,8 @@ Fontawesome
     .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-image img {
       width: 100%; }
 .tf-setting-dashboard .tf-setting-performace-section {
-  margin: 40px 40px 40px 20px; }
+  margin: 40px 40px 40px 20px;
+  position: relative; }
   .tf-setting-dashboard .tf-setting-performace-section h2 {
     font-size: 26px;
     font-weight: 600;
@@ -610,10 +611,45 @@ Fontawesome
           font-weight: 700;
           color: #000;
           line-height: 0.8; }
+  .tf-setting-dashboard .tf-setting-performace-section #tf-report-loader {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden; }
+    .tf-setting-dashboard .tf-setting-performace-section #tf-report-loader img {
+      width: 120px; }
+  .tf-setting-dashboard .tf-setting-performace-section #tf-report-loader.show {
+    opacity: 1;
+    visibility: visible; }
   .tf-setting-dashboard .tf-setting-performace-section .tf-order-report {
     background: #fff;
     padding: 20px;
     border-radius: 10px; }
+  .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter {
+    display: flex;
+    justify-content: space-between; }
+    .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-month-filter {
+      margin-bottom: 15px; }
+      .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-month-filter span {
+        display: block;
+        font-size: 11px;
+        line-height: 13px;
+        font-weight: 600;
+        color: #77797E;
+        text-transform: uppercase;
+        margin-bottom: 5px; }
+      .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-month-filter select {
+        width: 180px;
+        color: #222;
+        border: 1px solid #ddd;
+        height: 40px; }
 
 .tf-settings-help-center .tf-help-center-banner {
   background-color: #fff;

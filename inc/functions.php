@@ -1371,3 +1371,64 @@ function tf_save_custom_fields(){
     }
 }
 add_action( 'admin_init', 'tf_save_custom_fields' );
+
+
+/**
+ * Monthwise Chart Ajax function
+ *
+ * @author Jahid
+ */
+add_action( 'wp_ajax_nopriv_tf_month_reports', 'tf_month_chart_filter_callback' );
+add_action( 'wp_ajax_tf_month_reports', 'tf_month_chart_filter_callback' );
+
+function tf_month_chart_filter_callback(){
+	$search_month = sanitize_key( $_POST['month'] );
+	$month_dates = cal_days_in_month( CAL_GREGORIAN, $search_month, date('Y') );
+	
+	//Order Data Retrive
+	$tf_old_order_limit = new WC_Order_Query( array (
+		'limit' => -1,
+		'orderby' => 'date',
+		'order' => 'ASC',
+		'return' => 'ids',
+	) );
+	$order = $tf_old_order_limit->get_orders();
+	$months_day_number = [];
+	for($i=1; $i<=$month_dates; $i++){
+		$months_day_number [] = $i;
+
+		// Booking Month
+		${"tf_co$i"} = 0;
+		// Booking Cancel Month
+		${"tf_cr$i"} = 0;
+	}
+	
+	foreach ( $order as $item_id => $item ) {
+		$itemmeta = wc_get_order( $item);
+		$tf_ordering_date =  $itemmeta->get_date_created();
+		for($i=1; $i<=$month_dates; $i++){
+			if($tf_ordering_date->date('m-d')==$search_month.'-'.$i){
+				if("completed"==$itemmeta->get_status()){
+					${"tf_co$i"}+=1;
+				}
+				if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
+					${"tf_cr$i"}+=1;
+				}
+			}
+		}
+	}
+	$tf_complete_orders = [];
+	$tf_cancel_orders = [];
+	for($i=1; $i<=$month_dates; $i++){
+		$tf_complete_orders [] = ${"tf_co$i"};
+		$tf_cancel_orders [] = ${"tf_cr$i"};
+	}
+
+	$response['months_day_number']  = $months_day_number;
+	$response['tf_complete_orders']  = $tf_complete_orders;
+	$response['tf_cancel_orders']  = $tf_cancel_orders;
+	$response['tf_search_month']  =	date("F", strtotime('2000-'.$search_month.'-01'));
+	echo wp_json_encode( $response );
+
+	die();
+}

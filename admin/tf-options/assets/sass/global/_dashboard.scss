@@ -127,6 +127,7 @@
 
   .tf-setting-performace-section{
     margin: 40px 40px 40px 20px;
+    position: relative;
     h2{
       font-size: 26px;
       font-weight: 600;
@@ -187,10 +188,52 @@
         }
       }
     }
+    #tf-report-loader{
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      img{
+        width: 120px;
+      }
+    }
+    #tf-report-loader.show{
+      opacity: 1;
+      visibility: visible;
+    }
     .tf-order-report {
       background: #fff;
       padding: 20px;
       border-radius: 10px;
+    }
+    .tf-report-filter{
+      display: flex;
+      justify-content: space-between;
+      .tf-month-filter{
+        margin-bottom: 15px;
+        span{
+          display: block;
+          font-size: 11px;
+          line-height: 13px;
+          font-weight: 600;
+          color: #77797E;
+          text-transform: uppercase;
+          margin-bottom: 5px;
+        }
+        select{
+          width: 180px;
+          color: #222;
+          border: 1px solid #ddd;
+          height: 40px;
+        }
+      }
     }
   }
 }
