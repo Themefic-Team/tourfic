@@ -694,7 +694,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
  * @author Foysal
  */
 if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
-	function tf_apartment_archive_single_item( array $data = [] ): void {
+	function tf_apartment_archive_single_item( array $data = [1, 0, 0, ''] ): void {
 
 		// Form Data
 		if ( isset( $data[4] ) && isset( $data[5] ) ) {

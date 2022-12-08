@@ -238,7 +238,6 @@ if ( ! function_exists( 'tf_single_page_template' ) ) {
 if ( ! function_exists( 'tourfic_archive_page_template' ) ) {
 	function tourfic_archive_page_template( $template ) {
 		if ( is_post_type_archive( 'tf_hotel' ) ) {
-
 			$theme_files     = array( 'tourfic/hotel/archive-hotels.php' );
 			$exists_in_theme = locate_template( $theme_files, false );
 			if ( $exists_in_theme ) {
@@ -246,7 +245,17 @@ if ( ! function_exists( 'tourfic_archive_page_template' ) ) {
 			} else {
 				return TF_TEMPLATE_PATH . 'hotel/archive-hotels.php';
 			}
+		}
 
+
+		if ( is_post_type_archive( 'tf_apartment' ) ) {
+			$theme_files     = array( 'tourfic/apartment/archive-apartments.php' );
+			$exists_in_theme = locate_template( $theme_files, false );
+			if ( $exists_in_theme ) {
+				return $exists_in_theme;
+			} else {
+				return TF_TEMPLATE_PATH . 'apartment/archive-apartments.php';
+			}
 		}
 
 		if ( is_post_type_archive( 'tf_tours' ) ) {
@@ -329,7 +338,6 @@ add_filter( 'template_include', 'taxonomy_template' );
 function taxonomy_template( $template ) {
 
 	if ( is_tax( 'hotel_location' ) ) {
-
 		$theme_files     = array( 'tourfic/hotel/taxonomy-hotel_locations.php' );
 		$exists_in_theme = locate_template( $theme_files, false );
 
@@ -338,7 +346,17 @@ function taxonomy_template( $template ) {
 		} else {
 			$template = TF_TEMPLATE_PATH . 'hotel/taxonomy-hotel_locations.php';
 		}
+	}
 
+	if ( is_tax( 'apartment_location' ) ) {
+		$theme_files     = array( 'tourfic/apartment/taxonomy-apartment_locations.php' );
+		$exists_in_theme = locate_template( $theme_files, false );
+
+		if ( $exists_in_theme ) {
+			$template = $exists_in_theme;
+		} else {
+			$template = TF_TEMPLATE_PATH . 'apartment/taxonomy-apartment_locations.php';
+		}
 	}
 
 	if ( is_tax( 'tour_destination' ) ) {
@@ -610,8 +628,8 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
  * Archive Sidebar Search Form
  */
 function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_name = '', $taxonomy_slug = '' ) {
-	$place      = $post_type == 'tf_hotel' ? 'tf-location' : 'tf-destination';
-	$place_text = $post_type == 'tf_hotel' ? __( 'Enter Location', 'tourfic' ) : __( 'Enter Destination', 'tourfic' );
+	$place      = $post_type == 'tf_hotel' ? 'tf-location' : ( $post_type == 'tf_apartment' ? 'tf-apartment-location' : 'tf-destination' );
+	$place_text = ( $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ) ? __( 'Enter Location', 'tourfic' ) : __( 'Enter Destination', 'tourfic' );
 	?>
 
     <form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
@@ -658,7 +676,25 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
                 </div>
             </label>
         </div>
-		<?php if ( $post_type !== 'tf_tours' ) { ?>
+
+	    <?php if ( $post_type == 'tf_apartment' ): ?>
+            <div class="tf_form-row">
+                <label class="tf_label-row">
+                    <div class="tf_form-inner">
+                        <i class="fas fa-child"></i>
+                        <select name="infant" id="infant" class="">
+                            <option value="0">0 <?php _e( 'Infant', 'tourfic' ); ?></option>
+						    <?php foreach ( range( 1, 8 ) as $value ) {
+							    echo '<option value="' . $value . '">' . $value . ' ' . __( "Infant", "tourfic" ) . '</option>';
+						    } ?>
+
+                        </select>
+                    </div>
+                </label>
+            </div>
+	    <?php endif; ?>
+
+		<?php if ( $post_type == 'tf_hotel' ) { ?>
             <div class="tf_form-row">
                 <label class="tf_label-row">
                     <div class="tf_form-inner">
@@ -675,6 +711,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
                 </label>
             </div>
 		<?php } ?>
+
         <div class="tf_booking-dates">
             <div class="tf_form-row">
                 <label class="tf_label-row">
