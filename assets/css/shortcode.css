@@ -522,6 +522,7 @@ Booking form mobile version
 /* Apartment Grid Slider */
 .tf-apartment-grid {
     display: flex;
+    flex-wrap: wrap;
     gap: 15px;
 }
 
@@ -615,10 +616,6 @@ Booking form mobile version
     }
 
     /* Apartment Grid Slider */
-    .tf-apartment-grid {
-        flex-wrap: wrap;
-    }
-
     .tf-apartment-grid .tf-slider-item {
         flex: 0 0 100%;
     }

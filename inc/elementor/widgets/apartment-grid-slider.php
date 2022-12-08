@@ -107,7 +107,6 @@ class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
 			[
 				'label'       => esc_html__( 'Locations', 'tourfic' ),
 				'type'        => \Elementor\Controls_Manager::SELECT2,
-				'description' => __( 'Choose locations.', 'tourfic' ),
 				'options'     => $term_ids,
 				'multiple'    => true,
 			]
@@ -118,7 +117,6 @@ class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
 			[
 				'label'       => esc_html__( 'Total Apartments', 'tourfic' ),
 				'type'        => \Elementor\Controls_Manager::NUMBER,
-				'description' => __( 'Number of total apartment. Min 3.', 'tourfic' ),
 				'min'         => 1,
 				'default'     => 3,
 			]
@@ -128,7 +126,6 @@ class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
 			[
 				'label'       => esc_html__( 'Apartment Layout', 'tourfic' ),
 				'type'        => \Elementor\Controls_Manager::SELECT,
-				'description' => __( 'Apartment layout style', 'tourfic' ),
 				'options'     => array(
 					'grid'   => __( 'Grid', 'tourfic' ),
 					'slider' => __( 'Slider', 'tourfic' ),
