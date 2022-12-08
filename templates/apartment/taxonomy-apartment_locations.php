@@ -1,12 +1,13 @@
 <?php
 /**
- * Template: Hotel Location Archive
+ * Template: Apartment Location Archive
+ * @author Foysal
  */
 
 get_header();
 
 $term = get_queried_object();
-$post_type = 'tf_hotel';
+$post_type = 'tf_apartment';
 $taxonomy = $term->taxonomy;
 $taxonomy_name = $term->name;
 $taxonomy_slug = $term->slug;
