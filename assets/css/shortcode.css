@@ -82,7 +82,8 @@ button.tf-tablinks:focus {
     width: 44%;
     margin: 5px;
 }
-.tf-children-age select{
+
+.tf-children-age select {
     width: 100%;
 }
 
@@ -189,14 +190,14 @@ button.tf-tablinks:focus {
     margin-right: 5px;
 }
 
-div#tf-locationautocomplete-list div:before,div#tf-destinationautocomplete-list div:before{
+div#tf-locationautocomplete-list div:before, div#tf-destinationautocomplete-list div:before {
     content: "\f3c5";
     font-weight: 900;
     font-family: "Font Awesome 5 Free";
     float: left;
-    font-size: 15px;                                                                                                                                                                                                                  
+    font-size: 15px;
     margin-right: 5px;
-	line-height: 24px;
+    line-height: 24px;
 }
 
 .tf_submit-wrap {
@@ -219,10 +220,12 @@ div#tf-locationautocomplete-list div:before,div#tf-destinationautocomplete-list 
 .tf-wishlists a {
     text-decoration: none !important;
 }
+
 .tf-recent-room-price .amount {
     font-weight: bold;
     margin-top: 5px;
 }
+
 .recent-tour-slider h3,
 .recent-hotel-slider h3 {
     margin-bottom: 0 !important;
@@ -303,9 +306,11 @@ div#tf-locationautocomplete-list div:before,div#tf-destinationautocomplete-list 
 .tf_form-inner .tf-hotel-results #ui-id-2 li:hover {
     background-color: #e9e9e9;
 }
-.tf-children-age select{
+
+.tf-children-age select {
     background-position-y: center;
 }
+
 .tf-more-info .form-group.form-check {
     width: 33%;
     float: left;
@@ -473,10 +478,11 @@ Booking form mobile version
 }
 
 /*Recent Blog Widget*/
-.post-section-one{
+.post-section-one {
     overflow: hidden;
     display: flex;
 }
+
 .post-section-one .tf-single-item {
     width: 32%;
     float: left;
@@ -487,6 +493,7 @@ Booking form mobile version
     height: 400px;
     object-fit: cover;
 }
+
 .tf-single-item {
     width: 48%;
     float: left;
@@ -504,15 +511,28 @@ Booking form mobile version
     align-self: flex-end;
 }
 
-.tf-post-desc a,.tf-post-desc p {
+.tf-post-desc a, .tf-post-desc p {
     color: #fff;
 }
+
 .tf-post-desc a:hover {
     color: #ddd;
 }
 
+/* Apartment Grid Slider */
+.tf-apartment-grid {
+    display: flex;
+    gap: 15px;
+}
 
+.tf-apartment-grid .tf-slider-item {
+    flex: 0 0 calc(100% / 3 - 10px);
+    margin-right: 0 !important;
+}
 
+.tf-widget-slider.recent-apartment-slider {
+    overflow: hidden;
+}
 
 /**************************************** RESPONSIVE **************************************/
 
@@ -560,12 +580,14 @@ Booking form mobile version
     /*
     Booking form mobile version
     */
-    .tf-booking-form-tab{
+    .tf-booking-form-tab {
         display: none;
     }
+
     .tf-booking-form-tab-mobile {
         display: block;
     }
+
     select[name="tf-booking-form-tab-select"] {
         width: 100%;
         background: transparent;
@@ -574,20 +596,31 @@ Booking form mobile version
         border: 1px solid #ccc;
         border-radius: 4px;
     }
+
     /* Recent blog start */
     .post-section-one {
         flex-direction: column;
     }
-    .post-section-one .tf-single-item, .tf-single-item{
+
+    .post-section-one .tf-single-item, .tf-single-item {
         width: 100%;
-        margin:unset;
+        margin: unset;
         margin-bottom: 10px;
     }
-    /* Recent blog end */
 
+    /* Recent blog end */
     .tf-hotel-grid .tf-slider-item {
         width: 100%;
         float: left;
+    }
+
+    /* Apartment Grid Slider */
+    .tf-apartment-grid {
+        flex-wrap: wrap;
+    }
+
+    .tf-apartment-grid .tf-slider-item {
+        flex: 0 0 100%;
     }
 }
 

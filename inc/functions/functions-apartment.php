@@ -676,13 +676,11 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 						<?php tf_flatpickr_locale(); ?>
                     });
 
-					<?php //if ( ! empty( $additional_fee ) && $fee_type == 'per_person' ): ?>
                     $(document).on('change', '.tf_acrselection #adults, .tf_acrselection #children, .tf_acrselection #infant', function () {
                         if ($('#tf-apartment-booking #check-in-out-date').val() !== '') {
                             bookingCalculation(checkinoutdateange.selectedDates);
                         }
                     });
-					<?php //endif; ?>
                 });
             })(jQuery);
 
