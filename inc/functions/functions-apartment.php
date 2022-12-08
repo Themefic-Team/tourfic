@@ -44,6 +44,7 @@ function register_tf_apartment_post_type() {
 		'query_var'          => true,
 		'menu_icon'          => 'dashicons-admin-home',
 		'rewrite'            => array( 'slug' => $apartment_slug, 'with_front' => false ),
+		'capability_type'    => array( 'tf_apartment', 'tf_apartments' ),
 		'has_archive'        => true,
 		'hierarchical'       => false,
 		'menu_position'      => 26.4,
@@ -114,10 +115,10 @@ function tf_apartment_taxonomies_register() {
 		'rest_base'             => 'apartment_location',
 		'rest_controller_class' => 'WP_REST_Terms_Controller',
 		'show_in_quick_edit'    => true,
-		//		'capabilities'          => array(
-		//			'assign_terms' => 'edit_tf_hotel',
-		//			'edit_terms'   => 'edit_tf_hotel',
-		//		),
+		'capabilities'          => array(
+			'assign_terms' => 'edit_tf_apartment',
+			'edit_terms'   => 'edit_tf_apartment',
+		),
 	);
 	register_taxonomy( 'apartment_location', 'tf_apartment', apply_filters( 'apartment_location_args', $apartment_location_args ) );
 
@@ -163,10 +164,10 @@ function tf_apartment_taxonomies_register() {
 		"rest_base"             => "apartment_feature",
 		"rest_controller_class" => "WP_REST_Terms_Controller",
 		"show_in_quick_edit"    => true,
-		//		'capabilities'          => array(
-		//			'assign_terms' => 'edit_tf_apartment',
-		//			'edit_terms'   => 'edit_tf_apartment',
-		//		),
+		'capabilities'          => array(
+			'assign_terms' => 'edit_tf_apartment',
+			'edit_terms'   => 'edit_tf_apartment',
+		),
 	];
 	register_taxonomy( 'apartment_feature', 'tf_apartment', apply_filters( 'apartment_feature_tax_args', $args ) );
 
@@ -775,15 +776,15 @@ if ( ! function_exists( 'tf_apartment_booked_days' ) ) {
 			foreach ( $order_items as $item_id => $item ) {
 				$item_post_id = wc_get_order_item_meta( $item_id, '_post_id', true );
 				if ( $item_post_id == $post_id ) {
-					$check_in_out_date  = wc_get_order_item_meta( $item_id, 'check_in_out_date', true );
+					$check_in_out_date = wc_get_order_item_meta( $item_id, 'check_in_out_date', true );
 
-					if(!empty($check_in_out_date)){
-	                    $check_in_out_date = explode( ' - ', $check_in_out_date );
-	                    $booked_days[] = array(
-                            'check_in'  => $check_in_out_date[0],
-                            'check_out' => $check_in_out_date[1],
-                        );
-                    }
+					if ( ! empty( $check_in_out_date ) ) {
+						$check_in_out_date = explode( ' - ', $check_in_out_date );
+						$booked_days[]     = array(
+							'check_in'  => $check_in_out_date[0],
+							'check_out' => $check_in_out_date[1],
+						);
+					}
 				}
 			}
 		}
