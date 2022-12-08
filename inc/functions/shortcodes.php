@@ -589,7 +589,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
 						 * Check if minimum and maximum people limit matches with the search query
 						 */
 						$total_person = intval( $adults ) + intval( $child );
-						$meta         = get_post_meta( get_the_ID(), 'tf_tours_option', true );
+						$meta         = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
 
 						//skip the tour if the search form total people exceeds the maximum number of people in tour
 						if ( !empty($meta['cont_max_people']) && $meta['cont_max_people'] < $total_person && $meta['cont_max_people'] != 0  ) {

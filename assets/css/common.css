@@ -1317,6 +1317,19 @@ Fontawesome
     .tf-container {
         width: 100%;
     }
+
+    #check-in-out-date {
+        width: 220px !important;
+    }
+    .tours-check-in-out.flatpickr-input.flatpickr-mobile {
+        width: 200px !important;
+        text-transform: uppercase;
+        height: 40px;
+        border: 1px solid #ddd;
+        color: #777;
+        text-align: center;
+        background: transparent !important;
+    }
 }
 
 @media only screen and (max-width: 600px) {
