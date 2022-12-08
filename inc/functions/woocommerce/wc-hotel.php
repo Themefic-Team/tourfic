@@ -118,7 +118,7 @@ function tf_hotel_booking_callback() {
 		/**
 		 * Calculate Pricing
 		 */
-		if ( $avail_by_date && defined( 'TF_PRO' ) ) {
+		if ( $avail_by_date && function_exists('is_tf_pro') && is_tf_pro() ) {
 
 			// Check availability by date option
 			$period = new DatePeriod(
@@ -190,7 +190,7 @@ function tf_hotel_booking_callback() {
 		$tf_room_data['tf_hotel_data']['price_total'] = $price_total;
 
 		# Airport Service Fee
-		if ( defined( 'TF_PRO' ) && ! empty( $tf_room_data['tf_hotel_data']['air_serivice_avail'] ) && 1 == $tf_room_data['tf_hotel_data']['air_serivice_avail'] ) {
+		if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $tf_room_data['tf_hotel_data']['air_serivice_avail'] ) && 1 == $tf_room_data['tf_hotel_data']['air_serivice_avail'] ) {
 			if ( "pickup" == $airport_service ) {
 				$airport_pickup_price                        = ! empty( $meta['airport_pickup_price'] ) ? $meta['airport_pickup_price'] : '';
 				if( !empty($airport_pickup_price) && gettype($airport_pickup_price)=="string" ){
@@ -334,7 +334,7 @@ function tf_hotel_booking_callback() {
 		if ( $deposit == "true" ) {
 
 			tf_get_deposit_amount( $rooms[ $room_id ], $price_total, $deposit_amount, $has_deposit );
-			if ( defined( 'TF_PRO' ) && $has_deposit == true && ! empty( $deposit_amount ) ) {
+			if ( function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) {
 				$tf_room_data['tf_hotel_data']['price_total'] = $deposit_amount;
 				if ( ! empty( $airport_service ) ) {
 					$tf_room_data['tf_hotel_data']['due'] = ( $price_total + $airport_service_price_total ) - $deposit_amount;

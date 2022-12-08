@@ -71,6 +71,10 @@ button.tf-tablinks:focus {
 .tf_booking-widget.default-form .tf-label {
     display: none;
 }
+.tf-widget-slider.recent-hotel-slider {
+    overflow: hidden;
+    width: 100%;
+}
 
 .tf-children-age-fields {
     display: flex;

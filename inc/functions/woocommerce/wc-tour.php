@@ -37,7 +37,7 @@ function tf_tours_booking_function() {
 	 *
 	 * @return
 	 */
-	if ( $tour_type == 'fixed' && ! defined( 'TF_PRO' ) ) {
+	if ( $tour_type == 'fixed' && function_exists('is_tf_pro') && ! is_tf_pro() ) {
 		$response['errors'][] = __( 'Fixed Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
 		$response['status']   = 'error';
 		echo wp_json_encode( $response );
@@ -95,7 +95,7 @@ function tf_tours_booking_function() {
 	 *
 	 * @return
 	 */
-	if ( $tour_type == 'continuous' && $custom_avail == true && ! defined( 'TF_PRO' ) ) {
+	if ( $tour_type == 'continuous' && $custom_avail == true && function_exists('is_tf_pro') && ! is_tf_pro() ) {
 		$response['errors'][] = __( 'Custom Continous Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
 		$response['status']   = 'error';
 		echo wp_json_encode( $response );
@@ -261,7 +261,7 @@ function tf_tours_booking_function() {
 
 	}
 
-	if ( defined( 'TF_PRO' ) && $tour_type == 'continuous' ) {
+	if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_type == 'continuous' ) {
 		$tf_allowed_times = ! empty( $meta['allowed_time'] ) ? $meta['allowed_time'] : '';
 		if( !empty($tf_allowed_times) && gettype($tf_allowed_times)=="string" ){
 			$tf_tour_conti_custom_date = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
@@ -367,7 +367,7 @@ function tf_tours_booking_function() {
 
 		# Deposit information
 		tf_get_deposit_amount( $meta, $tf_tours_data['tf_tours_data']['price'], $deposit_amount, $has_deposit );
-		if ( defined( 'TF_PRO' ) && $has_deposit == true && $make_deposit == true ) {
+		if ( function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true && $make_deposit == true ) {
 			$tf_tours_data['tf_tours_data']['due']   = $tf_tours_data['tf_tours_data']['price'] - $deposit_amount;
 			$tf_tours_data['tf_tours_data']['price'] = $deposit_amount;
 		}

@@ -290,7 +290,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			wp_enqueue_script( 'wp-color-picker-alpha', $this->tf_options_file_url( 'assets/js/wp-color-picker-alpha.js' ), array( 'jquery', 'wp-color-picker' ), $this->tf_options_version(), true );
 			wp_enqueue_script( 'tf-options', $this->tf_options_file_url( 'assets/js/tf-options.js' ), array( 'jquery', 'wp-color-picker' ), $this->tf_options_version(), true );
 
-			$tf_google_map = defined( 'TF_PRO' ) && ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "false";
+			$tf_google_map = function_exists('is_tf_pro') && is_tf_pro() && ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "false";
 			wp_localize_script( 'tf-options', 'tf_options', array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'nonce'    => wp_create_nonce( 'tf_options_nonce' ),
@@ -341,7 +341,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			$is_pro   = isset( $field['is_pro'] ) ? $field['is_pro'] : '';
 			$badge_up = isset( $field['badge_up'] ) ? $field['badge_up'] : '';
 
-			if ( defined( 'TF_PRO' ) ) {
+			if ( function_exists('is_tf_pro') && is_tf_pro() ) {
 				$is_pro = false;
 			}
 			if ( $is_pro == true ) {

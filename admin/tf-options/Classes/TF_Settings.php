@@ -138,30 +138,17 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				array( $this,'tf_get_help_callback'),
 			);
 
-			//License Info submenu
-			add_submenu_page(
-				$this->option_id,
-				__('License Info', 'tourfic'),
-				__('License Info', 'tourfic'),
-				'manage_options',
-				'tf_license_info',
-				array( $this,'tf_license_info_callback'),
-			);
-
-			//sections as submenus
-			// if ( ! empty( $this->pre_tabs ) ) {
-			// 	foreach ( $this->pre_tabs as $key => $section ) {
-			// 		$parent_tab_key = ! empty( $section['fields'] ) ? $key : array_key_first( $section['sub_section'] );
-			// 		add_submenu_page(
-			// 			$this->option_id,
-			// 			$section['title'],
-			// 			$section['title'],
-			// 			'manage_options',
-			// 			$this->option_id . '#tab=' . esc_attr( $parent_tab_key ),
-			// 			'__return_null',
-			// 		);
-			// 	}
-            // }
+			if ( function_exists('is_tf_pro') ) {
+				//License Info submenu
+				add_submenu_page(
+					$this->option_id,
+					__('License Info', 'tourfic'),
+					__('License Info', 'tourfic'),
+					'manage_options',
+					'tf_license_info',
+					array( $this,'tf_license_info_callback'),
+				);
+			}
 
 			// remove first submenu
 			remove_submenu_page( $this->option_id, $this->option_id );

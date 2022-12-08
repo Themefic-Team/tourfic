@@ -189,7 +189,7 @@ while ( have_posts() ) : the_post();
                     <div class="tf-hero-bottom-area">
 						<?php
 						$tour_video = ! empty( $meta['tour_video'] ) ? $meta['tour_video'] : '';
-						if ( defined( 'TF_PRO' ) && $tour_video ) {
+						if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_video ) {
 							?>
                             <div class="tf-hero-btm-icon tf-tour-video" data-fancybox="tour-video" href="<?php echo $tour_video; ?>">
                                 <i class="fab fa-youtube"></i>
@@ -418,7 +418,7 @@ while ( have_posts() ) : the_post();
 
         <!-- Travel Itinerary section Start -->
 		<?php
-		if ( defined( 'TF_PRO' ) ) {
+		if ( function_exists('is_tf_pro') && is_tf_pro() ) {
 			do_action( 'after_itinerary_builder', $itineraries );
 		} else {
 			?>
