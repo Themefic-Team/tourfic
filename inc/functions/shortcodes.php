@@ -1367,11 +1367,11 @@ function tf_recent_apartment_shortcode( $atts, $content = null ) {
 
 /**
  * Apartment location shortcode
- * shortcode: [apartment_locations]
+ * shortcode: [tf_apartment_locations]
  *
  * @author Foysal
  */
-add_shortcode( 'apartment_locations', 'shortcode_apartment_location' );
+add_shortcode( 'tf_apartment_locations', 'shortcode_apartment_location' );
 function shortcode_apartment_location( $atts, $content = null ) {
 
 	// Shortcode extract
