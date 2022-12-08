@@ -533,6 +533,9 @@ Fontawesome
   @media only screen and (max-width: 991.98px) {
     .tf-setting-dashboard .tf-setting-banner {
       display: flow-root; } }
+  @media only screen and (max-width: 767.98px) {
+    .tf-setting-dashboard .tf-setting-banner {
+      padding: 30px 40px; } }
   .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content {
     width: 50%; }
     @media only screen and (max-width: 991.98px) {

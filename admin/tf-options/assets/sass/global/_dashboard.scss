@@ -95,6 +95,9 @@
     @media #{$max991}{
       display: flow-root;
     }
+    @media #{$max767}{
+      padding: 30px 40px;
+    }
     .tf-setting-banner-content{
       width: 50%;
       @media #{$max991}{
