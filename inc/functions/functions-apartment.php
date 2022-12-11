@@ -508,7 +508,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         <span class="additional-fee-label tf-price-list-label"><?php echo $additional_fee_label; ?></span>
                         <span class="additional-fee tf-price-list-price"></span>
                     </li>
-				<?php else: ?>
+				<?php elseif ( defined( 'TF_PRO' ) ): ?>
 					<?php foreach ( $additional_fees as $key => $additional_fee ) : ?>
                         <li class="additional-fee-wrap" style="display: none">
                             <span class="additional-fee-label tf-price-list-label"><?php echo $additional_fee['additional_fee_label']; ?></span>
@@ -694,7 +694,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
  * @author Foysal
  */
 if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
-	function tf_apartment_archive_single_item( array $data = [1, 0, 0, ''] ): void {
+	function tf_apartment_archive_single_item( array $data = [ 1, 0, 0, '' ] ): void {
 
 		// Form Data
 		if ( isset( $data[4] ) && isset( $data[5] ) ) {
