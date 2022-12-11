@@ -870,23 +870,24 @@ function tf_apartment_host_rating( $author_id ) {
 		) );
 	}
 
-	$tf_overall_rate = [];
+	$total_comment_rating = [];
 	$comment_count   = 0;
 	foreach ( $comments_array as $comments ) {
-//		tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rate );
+        if(!empty($comments)){
+	        $total_comment_rating[] = tf_total_avg_rating( $comments );
+        }
 		$comment_count += count( $comments );
 	}
 
 	if ( $comments ) {
 		ob_start();
 		?>
-        <div class="tf-archive-rating-wrapper">
-            <div class="tf-archive-rating">
-                <span>
-                    <?php _e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
-                </span>
+        <div class="tf-host-rating-wrapper">
+            <i class="fas fa-star"></i>
+            <div class="tf-host-rating">
+                <?php echo tf_average_ratings( array_values( $total_comment_rating ?? [] ) ); ?>
             </div>
-            <h6><?php tf_based_on_text( $comment_count ); ?></h6>
+            <h6>(<?php tf_based_on_text( $comment_count ); ?>)</h6>
         </div>
 
 		<?php

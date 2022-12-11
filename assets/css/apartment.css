@@ -912,6 +912,27 @@
   color: #363e4a;
 }
 
+.tf-host-rating-wrapper {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 4px;
+}
+.tf-host-rating-wrapper .tf-host-rating {
+  font-weight: 600;
+}
+
+.single-tf_apartment .tf-title-right {
+  -webkit-flex: 0 0 300px;
+  -ms-flex: 0 0 300px;
+  flex: 0 0 300px;
+}
+
 @media only screen and (max-width: 1200px) {
   #tour-map .tf-container {
     padding: 40px 15px;

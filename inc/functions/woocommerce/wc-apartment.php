@@ -2,20 +2,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Hotel booking ajax function
- *
- * @since 2.2.0
+ * Apartment booking ajax function
+ * @author Foysal
  */
 add_action( 'wp_ajax_tf_apartment_booking', 'tf_apartment_booking_callback' );
 add_action( 'wp_ajax_nopriv_tf_apartment_booking', 'tf_apartment_booking_callback' );
-
-/**
- * Handles AJAX for Booking
- *
- * @return void
- * @throws Exception
- * @since 2.9.1
- */
 function tf_apartment_booking_callback() {
 	$response          = [];
 	$tf_apartment_data = [];
@@ -146,6 +137,7 @@ function tf_apartment_booking_callback() {
 
 /**
  * Override WooCommerce Price
+ * @author Foysal
  */
 function tf_aprtment_set_order_price( $cart ) {
 
@@ -168,7 +160,10 @@ function tf_aprtment_set_order_price( $cart ) {
 
 add_action( 'woocommerce_before_calculate_totals', 'tf_aprtment_set_order_price', 30, 1 );
 
-// Display custom cart item meta data (in cart and checkout)
+/*
+ * Display custom cart item meta data (in cart and checkout)
+ * @author Foysal
+ */
 function tf_apartment_cart_item_custom_meta_data( $item_data, $cart_item ) {
 
 	if ( isset( $cart_item['tf_apartment_data']['adults'] ) && $cart_item['tf_apartment_data']['adults'] >= 1 ) {
@@ -207,6 +202,7 @@ add_filter( 'woocommerce_get_item_data', 'tf_apartment_cart_item_custom_meta_dat
 
 /**
  * Change cart item permalink
+ * @author Foysal
  */
 function tf_apartment_cart_item_permalink( $permalink, $cart_item, $cart_item_key ) {
 
@@ -223,6 +219,7 @@ add_filter( 'woocommerce_cart_item_permalink', 'tf_apartment_cart_item_permalink
 
 /**
  * Show custom data in order details
+ * @author Foysal
  */
 function tf_apartment_custom_order_data( $item, $cart_item_key, $values, $order ) {
 

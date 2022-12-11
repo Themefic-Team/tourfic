@@ -1033,6 +1033,20 @@
   }
 }
 
+.tf-host-rating-wrapper{
+  @include flexbox();
+  @include align-items(center);
+  gap: 4px;
+
+  .tf-host-rating{
+    font-weight: 600;
+  }
+}
+
+.single-tf_apartment .tf-title-right{
+  @include flex(0 0 300px);
+}
+
 
 @media only screen and (max-width: 1200px) {
   #tour-map {

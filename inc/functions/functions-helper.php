@@ -22,12 +22,12 @@ function tf_booking_search_action() {
 add_action( 'admin_menu', 'tf_documentation_page_integration' );
 function tf_documentation_page_integration() {
 	global $submenu;
-	$tfhoteldocumentation = sanitize_url('https://themefic.com/docs/tourfic/');
-	$tftourdocumentation = sanitize_url('https://themefic.com/docs/tourfic/');
-	$go_pro_link = sanitize_url('https://themefic.com/tourfic/pricing/');
+	$tfhoteldocumentation = sanitize_url( 'https://themefic.com/docs/tourfic/' );
+	$tftourdocumentation  = sanitize_url( 'https://themefic.com/docs/tourfic/' );
+	$go_pro_link          = sanitize_url( 'https://themefic.com/tourfic/pricing/' );
 	//Booking Deatils menu in Free version
 	if ( ! defined( 'TF_PRO' ) ) :
-		$submenu['edit.php?post_type=tf_hotel'][] = array(
+		$submenu['edit.php?post_type=tf_hotel'][]     = array(
 			sprintf( __( 'Booking Details %s(Pro)%s', 'tourfic' ), '<span style=color:#ffba00;">', '</span>' ),
 			'edit_tf_hotels',
 			$go_pro_link
@@ -37,13 +37,13 @@ function tf_documentation_page_integration() {
 			'edit_tf_apartments',
 			$go_pro_link
 		);
-		$submenu['edit.php?post_type=tf_tours'][] = array(
+		$submenu['edit.php?post_type=tf_tours'][]     = array(
 			sprintf( __( 'Booking Details %s(Pro)%s', 'tourfic' ), '<span style=color:#ffba00;">', '</span>' ),
 			'edit_tf_tourss',
 			$go_pro_link
 		);
 	endif;
-	$submenu['edit.php?post_type=tf_hotel'][] = array(
+	$submenu['edit.php?post_type=tf_hotel'][]     = array(
 		sprintf( '<span style=color:#ffba00;">%s</span>', __( 'Go to Documentation', 'tourfic' ) ),
 		'edit_tf_hotels',
 		$tfhoteldocumentation
@@ -53,7 +53,7 @@ function tf_documentation_page_integration() {
 		'edit_tf_apartments',
 		$tfhoteldocumentation
 	);
-	$submenu['edit.php?post_type=tf_tours'][] = array(
+	$submenu['edit.php?post_type=tf_tours'][]     = array(
 		sprintf( '<span style=color:#ffba00;">%s</span>', __( 'Go to Documentation', 'tourfic' ) ),
 		'edit_tf_tourss',
 		$tftourdocumentation
@@ -453,14 +453,23 @@ function tourfic_ask_question_ajax() {
 
 	$post_id    = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : null;
 	$post_title = get_the_title( $post_id );
+	//post author mail
+	$author_id   = get_post_field( 'post_author', $post_id );
+	$author_mail = get_the_author_meta( 'user_email', $author_id );
 	if ( defined( 'TF_PRO' ) ) {
 		if ( "tf_hotel" == get_post_type( $post_id ) ) {
 			$send_email_to = ! empty( tfopt( 'h-enquiry-email' ) ) ? sanitize_email( tfopt( 'h-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
+		} elseif ( "tf_apartment" == get_post_type( $post_id ) ) {
+			$send_email_to = ! empty( $author_mail ) ? sanitize_email( $author_mail ) : sanitize_email( get_option( 'admin_email' ) );
 		} else {
 			$send_email_to = ! empty( tfopt( 't-enquiry-email' ) ) ? sanitize_email( tfopt( 't-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
 		}
 	} else {
-		$send_email_to = sanitize_email( get_option( 'admin_email' ) );
+		if ( "tf_apartment" == get_post_type( $post_id ) ) {
+			$send_email_to = ! empty( $author_mail ) ? sanitize_email( $author_mail ) : sanitize_email( get_option( 'admin_email' ) );
+		} else {
+			$send_email_to = sanitize_email( get_option( 'admin_email' ) );
+        }
 	}
 	$subject     = sprintf( __( 'Someone asked question on: %s', 'tourfic' ), $post_title );
 	$message     = "{$question}";

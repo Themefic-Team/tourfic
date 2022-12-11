@@ -1314,7 +1314,6 @@
         /**
          * Ask question
          */
-        // Ask question
         $(document).on('click', '#tf-ask-question-trigger', function (e) {
             e.preventDefault();
             $('#tf-ask-question').fadeIn().find('.response').html("");
