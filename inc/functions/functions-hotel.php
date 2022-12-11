@@ -1738,6 +1738,9 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
         $max_adults_numbers = 1;
     }
 
+    
+    $hotel_month  = !empty(get_the_terms( $post_id, 'hotel_month' )) ? get_the_terms( $post_id, 'hotel_month' ) : '';
+
     ?>
 
     <!-- Start Booking widget -->
@@ -1804,17 +1807,21 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
                 onChange: function(selectedDates, dateStr, instance) {
                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                 },
-               
-                defaultDate: <?php echo json_encode(explode('-', $check_in_out)) ?>,
-                "disable": [
-                <?php if ($eheckinout_date) { ?>
-                function(date) {
-                    return (date.getDay() != <?php echo $eheckinout_date;  ?>);
-                },
-                <?php }
-                
-                ?>
+                enable: [
+                    function (date) {
+                        //only monday in december
+                        <?php 
+                        if(!empty($hotel_month)){
+                        foreach($hotel_month as $month) {
+                            $selectedmonths = date( "m", strtotime( $month->name ) );
+                         ?>
+                        return (date.getDay() === <?php echo $eheckinout_date;  ?> && date.getMonth() === <?php echo intval($selectedmonths-1); ?>);
+                        <?php }} ?>
+                    }
                 ],
+
+                defaultDate: <?php echo json_encode(explode('-', $check_in_out)) ?>,
+                
                 
                 <?php
                 // Flatpickt locale for translation
