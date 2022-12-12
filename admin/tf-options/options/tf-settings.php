@@ -223,6 +223,144 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
+
+		// Multi-vendor Settings
+		'mvendor'     => array(
+			'title'  => esc_html__( 'Multi Vendor', 'tourfic' ),
+			'icon'   => 'fa fa-handshake',
+			'fields' => array(
+				array(
+					'id'   => 'multi-vendor-setings',
+					'type' => 'tab',
+					'tabs' => array(
+						array(
+							'id'     => 'general-setting',
+							'title'  => 'General Options',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'    => 'user_registration',
+									'type'  => 'switch',
+									'label' => __( 'Vendor Registration Option', 'tourfic' ),
+									'subtitle' => __('ON: Allow partner, OFF: Not allow partner','tourfic'),
+								),
+								array(
+									'id'    => 'user_approval',
+									'type'  => 'switch',
+									'label' => __( 'Automatic Approval', 'tourfic' ),
+									'subtitle' => __('Partner be automatic approval (register account).','tourfic'),
+								),
+								array(
+									'id'    => 'user_email_verify',
+									'type'  => 'switch',
+									'label' => __( 'Email Verification', 'tourfic' ),
+									'subtitle' => __('ON: Vendor must verify by email','tourfic'),
+								),
+								array(
+									'id'    => 'partner_feature',
+									'type'  => 'switch',
+									'label' => __( 'Enable Partner Feature', 'tourfic' ),
+									'subtitle' => __('ON: Show services for partner. OFF: Turn off services, partner is not allowed to register service, it is not displayed in dashboard','tourfic'),
+								),
+								array(
+									'id'    => 'partner_post',
+									'type'  => 'switch',
+									'label' => __( "Partner's Post Must be aprroved by Admin", 'tourfic' ),
+									'subtitle' => __('ON: When partner posts a service, it needs to be approved by administrator ','tourfic'),
+								),
+								array(
+									'id'    => 'partner_post',
+									'type'  => 'number',
+									'label' => __( 'Commission(%)', 'tourfic' ),
+									'subtitle' => __('Enter commission of partner for admin after each item is booked ','tourfic'),
+									'attributes'  => array(
+										'min' => '0',
+									),
+								),
+								array(
+									'id'    => 'partner_can_feature',
+									'type'  => 'switch',
+									'label' => __( 'Partner can set featured', 'tourfic' ),
+									'subtitle' => __('It allows partner to set an item to be featured','tourfic'),
+								),
+							),
+						),
+						array(
+							'id'     => 'layout-setting',
+							'title'  => 'Vendor Dashboard',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'    => 'vendor-config',
+									'type'  => 'switch',
+									'label' => __( 'Configuration Partner Profile info', 'tourfic' ),
+									'subtitle' => __('Show/hide sections for partner dashboard','tourfic'),
+								),
+								array(
+									'id'    => 'vendor-earning',
+									'type'  => 'switch',
+									'label' => __( 'Show total Earning', 'tourfic' ),
+									'subtitle' => __('ON: Display earnings information in accordance with time periods','tourfic'),
+								),
+								array(
+									'id'    => 'vendor-each-earning',
+									'type'  => 'switch',
+									'label' => __( 'Show each service Earning', 'tourfic' ),
+									'subtitle' => __('ON: Display earnings according to each service','tourfic'),
+								),
+								array(
+									'id'    => 'vendor-earning-chart',
+									'type'  => 'switch',
+									'label' => __( 'Show Chart info', 'tourfic' ),
+									'subtitle' => __('ON: Display visual graphs to follow your earnings through each time','tourfic'),
+								),
+								array(
+									'id'    => 'vendor-booking-history',
+									'type'  => 'switch',
+									'label' => __( 'Show Booking history', 'tourfic' ),
+									'subtitle' => __('ON: Show booking history of partner','tourfic'),
+								),
+								array(
+									'id'    => 'vendor-enquiry-history',
+									'type'  => 'switch',
+									'label' => __( 'Show Enquiry history', 'tourfic' ),
+									'subtitle' => __('ON: Show Enquiry history of partner','tourfic'),
+								),
+							),
+						),
+						array(
+							'id'     => 'withdraw-setting',
+							'title'  => 'Withdrawal Options',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'    => 'vendor-withdraw',
+									'type'  => 'switch',
+									'label' => __( 'Allow Request Withdrawal', 'tourfic' ),
+									'subtitle' => __('ON: Partner is allowed to withdraw money','tourfic'),
+								),
+								array(
+									'id'      => 'vendor_min_withdraw',
+									'type'    => 'number',
+									'label' => __( 'Minimum value request when withdrawal', 'tourfic' ),
+									'subtitle' => __('Enter minimum value when a withdrawal is conducted','tourfic'),
+									'attributes'  => array(
+										'min' => '0',
+									),
+								),
+								array(
+									'id'      => 'vendor_withdraw_date',
+									'type'    => 'text',
+									'label' => __( 'Date of sucessful payment in current month', 'tourfic' ),
+									'subtitle' => __('Enter the date monthly payment. Ex: 25','tourfic'),
+								),
+							),
+						),
+					),
+				)
+			),
+		),
+
 		// Search Options
 		'search'        => array(
 			'title'  => __( 'Search', 'tourfic' ),
