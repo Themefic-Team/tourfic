@@ -493,7 +493,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                 <input type="hidden" name="post_id" value="<?php echo get_the_ID(); ?>"/>
 
                 <div class="tf-btn">
-                    <button class="tf_button tf-submit btn-styled tf_button_blue" type="submit"><?php esc_html_e( 'Reserve', 'tourfic' ); ?></button>
+                    <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( 'Reserve', 'tourfic' ); ?></button>
                 </div>
             </div>
 
