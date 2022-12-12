@@ -268,6 +268,8 @@ TF_Settings::option( 'tf_settings', array(
 						'hl' => __( 'Hotel Location', 'tourfic' ),
 						'hf' => __( 'Hotel Feature', 'tourfic' ),
 						'td' => __( 'Tour Destination', 'tourfic' ),
+						'al' => __( 'Apartment Location', 'tourfic' ),
+						'af' => __( 'Apartment Feature', 'tourfic' ),
 					),
 				),
 			),
@@ -313,6 +315,15 @@ TF_Settings::option( 'tf_settings', array(
 					'id'        => 'date_tour_search',
 					'type'      => 'switch',
 					'label'     => __( 'Date Required in Tour Search', 'tourfic' ),
+					'is_pro'    => true,
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+
+				array(
+					'id'        => 'date_apartment_search',
+					'type'      => 'switch',
+					'label'     => __( 'Date Required in Apartment Search', 'tourfic' ),
 					'is_pro'    => true,
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
@@ -795,6 +806,37 @@ TF_Settings::option( 'tf_settings', array(
 					)
 				),
 				array(
+					'id'       => 'r-tour',
+					'type'     => 'repeater',
+					'label'    => __( 'Review Fields for Tours', 'tourfic' ),
+					'subtitle' => __( 'Maximum 10 fields allowed', 'tourfic' ),
+					'is_pro'   => true,
+					'max'      => '6',
+					'fields'   => array(
+
+						array(
+							'id'    => 'r-field-type',
+							'type'  => 'text',
+							'label' => __( 'Review for', 'tourfic' ),
+						),
+
+					),
+					'default'  => array(
+						array(
+							'r-field-type' => __( 'Guide', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Transportation', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Value for money', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Safety', 'tourfic' ),
+						),
+					)
+				),
+				array(
 					'id'       => 'r-apartment',
 					'class'    => 'disable-sortable',
 					'type'     => 'repeater',
@@ -828,37 +870,6 @@ TF_Settings::option( 'tf_settings', array(
 						),
 						array(
 							'r-field-type' => __( 'Location', 'tourfic' ),
-						),
-					)
-				),
-				array(
-					'id'       => 'r-tour',
-					'type'     => 'repeater',
-					'label'    => __( 'Review Fields for Tours', 'tourfic' ),
-					'subtitle' => __( 'Maximum 10 fields allowed', 'tourfic' ),
-					'is_pro'   => true,
-					'max'      => '6',
-					'fields'   => array(
-
-						array(
-							'id'    => 'r-field-type',
-							'type'  => 'text',
-							'label' => __( 'Review for', 'tourfic' ),
-						),
-
-					),
-					'default'  => array(
-						array(
-							'r-field-type' => __( 'Guide', 'tourfic' ),
-						),
-						array(
-							'r-field-type' => __( 'Transportation', 'tourfic' ),
-						),
-						array(
-							'r-field-type' => __( 'Value for money', 'tourfic' ),
-						),
-						array(
-							'r-field-type' => __( 'Safety', 'tourfic' ),
 						),
 					)
 				),

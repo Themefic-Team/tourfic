@@ -299,7 +299,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="far fa-calendar-alt"></i>
                                     <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                           placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
+                                           placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_apartment_search' ) ? 'required' : ''; ?>>
                                 </div>
                             </label>
                         </div>
