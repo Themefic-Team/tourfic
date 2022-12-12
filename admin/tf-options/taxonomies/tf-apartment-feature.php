@@ -11,8 +11,8 @@ TF_Taxonomy_Metabox::taxonomy( 'tf_apartment_feature', array(
 			'type'    => 'select',
 			'title'   => __( 'Select Icon type', 'tourfic' ),
 			'options' => array(
-				'icon' => __( 'Icon Library', 'tourfic' ),
-				'custom'  => __( 'Custom Icon', 'tourfic' ),
+				'icon'   => __( 'Icon Library', 'tourfic' ),
+				'custom' => __( 'Custom Icon', 'tourfic' ),
 			),
 			'default' => 'icon'
 		),

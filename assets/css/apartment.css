@@ -928,9 +928,11 @@
 }
 
 .single-tf_apartment .tf-title-right {
-  -webkit-flex: 0 0 300px;
-  -ms-flex: 0 0 300px;
-  flex: 0 0 300px;
+  -webkit-flex: 0 0 350px;
+  -ms-flex: 0 0 350px;
+  flex: 0 0 350px;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 @media only screen and (max-width: 1200px) {

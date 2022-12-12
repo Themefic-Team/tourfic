@@ -1044,7 +1044,8 @@
 }
 
 .single-tf_apartment .tf-title-right{
-  @include flex(0 0 300px);
+  @include flex(0 0 350px);
+  @include justify-content(flex-end);
 }
 
 

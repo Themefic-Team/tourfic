@@ -197,18 +197,16 @@ while ( have_posts() ) : the_post();
 
                         <!-- Wishlist Section -->
 						<?php
-						if ( tfopt( 'wl-bt-for' ) && in_array( '1', tfopt( 'wl-bt-for' ) ) ) {
+						if ( tfopt( 'wl-bt-for' ) && in_array( '3', tfopt( 'wl-bt-for' ) ) ) {
 							if ( is_user_logged_in() ) {
 								if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
 									?>
-                                    <a class="tf-wishlist-button"
-                                       title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
-                                                class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
-                                                data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
-                                                data-id="<?php echo $post_id ?>"
-                                                data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
-											echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
-										} ?>> Save</i></a>
+                                    <a class="tf-wishlist-button" title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>">
+                                        <i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
+                                           data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
+                                           data-id="<?php echo $post_id ?>"
+                                           data-type="<?php echo $post_type ?>" <?php echo tfopt( 'wl-page' ) ? 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"' : ''; ?>> <?php _e('Save', 'tourfic') ?></i>
+                                    </a>
 									<?php
 								}
 							} else {

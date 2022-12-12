@@ -144,13 +144,6 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false
 				),
-
-				array(
-					'id'     => 'apartment-enquiry-email',
-					'type'   => 'text',
-					'label'  => __( 'Enquiry Email', 'tourfic' ),
-					'is_pro' => true,
-				),
 			),
 		),
 
@@ -671,8 +664,9 @@ TF_Settings::option( 'tf_settings', array(
 					'options' => array(
 						'1' => __( 'Single Hotel Page', 'tourfic' ),
 						'2' => __( 'Single Tour Page', 'tourfic' ),
+						'3' => __( 'Single Apartment Page', 'tourfic' ),
 					),
-					'default' => array( '1', '2' ),
+					'default' => array( '1', '2', '3' ),
 				),
 
 				array(
