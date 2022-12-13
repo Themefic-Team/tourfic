@@ -208,8 +208,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				<!-- deshboard-banner-section -->
 				<div class="tf-setting-banner">
 					<div class="tf-setting-banner-content">
-						<img src="<?php echo TF_ASSETS_URL; ?>/img/tourfic-logo.webp" alt="logo">
-						<span>Express your <b>Hotel and Tour Booking Website</b>with Tourfic</span>
+						<img src="<?php echo TF_ASSETS_URL; ?>/img/tourfic-logo-white.png" alt="logo">
+						<span>Build & Manage Your Next <b>Travel or Hotel Booking Website</b>with Tourfic</span>
 					</div>
 					<div class="tf-setting-banner-image">
 						<img src="<?php echo TF_ASSETS_URL; ?>/img/hotel-booking-management-system@2x.webp" alt="Banner Image">
@@ -390,7 +390,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<p><?php _e("To help you to get started, we put together the documentation, support link, videos and FAQs here.","tourfic"); ?></p>
 					</div>
 					<div class="tf-help-center-image">
-						<img src="<?php echo TF_ASSETS_URL; ?>/img/help-center.png" alt="HELP Center Image">
+						<img src="<?php echo TF_ASSETS_URL; ?>/img/help-center.jpg" alt="HELP Center Image">
 					</div>
 				</div>
 
@@ -435,14 +435,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-single-faq">
 								<div class="tf-faq-title">
 									<i class="fas fa-angle-down"></i>
-									<h4><?php _e("How to create zoom event?","tourfic"); ?></h4>
+									<h4><?php _e("What is Tourfic? ","tourfic"); ?></h4>
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									You have to give valid connection details in Eventin=>Settings=>User data.
-									After fill up “Api key”, “Secret key” enter “Save changes” and then check connection. After successful connection navigate to Eventin=>Zoom to create a meeting.
-									Note: You must have successful connection to zoom api).You will get meeting id from zoom. Place your meeting id to shortcode (For instance: [etn_zoom_api_link meeting_id =’123456789′ link_only=’no’]
-									You can also create meeting and display from elementor widget.
+									<?php _e("Tourfic is the ultimate WordPress travel plugin for hotel booking, tour operator and travel agency websites.","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -451,14 +448,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-single-faq">
 								<div class="tf-faq-title">
 									<i class="fas fa-angle-down"></i>
-									<h4><?php _e("How to create zoom event?","tourfic"); ?></h4>
+									<h4><?php _e("How to install Tourfic? ","tourfic"); ?></h4>
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									You have to give valid connection details in Eventin=>Settings=>User data.
-									After fill up “Api key”, “Secret key” enter “Save changes” and then check connection. After successful connection navigate to Eventin=>Zoom to create a meeting.
-									Note: You must have successful connection to zoom api).You will get meeting id from zoom. Place your meeting id to shortcode (For instance: [etn_zoom_api_link meeting_id =’123456789′ link_only=’no’]
-									You can also create meeting and display from elementor widget.
+									<?php _e("See the installation tab.","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -467,14 +461,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-single-faq">
 								<div class="tf-faq-title">
 									<i class="fas fa-angle-down"></i>
-									<h4><?php _e("How to create zoom event?","tourfic"); ?></h4>
+									<h4><?php _e("Is Free version fully free or there is a gap? ","tourfic"); ?></h4>
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									You have to give valid connection details in Eventin=>Settings=>User data.
-									After fill up “Api key”, “Secret key” enter “Save changes” and then check connection. After successful connection navigate to Eventin=>Zoom to create a meeting.
-									Note: You must have successful connection to zoom api).You will get meeting id from zoom. Place your meeting id to shortcode (For instance: [etn_zoom_api_link meeting_id =’123456789′ link_only=’no’]
-									You can also create meeting and display from elementor widget.
+									<?php _e("Yes, Tourfic is fully free which is available on WordPress.org. This free version will always be free. It also has a pro version (under development) with additional features which you can purchase from our official website.","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -483,14 +474,63 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-single-faq">
 								<div class="tf-faq-title">
 									<i class="fas fa-angle-down"></i>
-									<h4><?php _e("How to create zoom event?","tourfic"); ?></h4>
+									<h4><?php _e("Can I create a hotel booking website with Tourfic? ","tourfic"); ?></h4>
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									You have to give valid connection details in Eventin=>Settings=>User data.
-									After fill up “Api key”, “Secret key” enter “Save changes” and then check connection. After successful connection navigate to Eventin=>Zoom to create a meeting.
-									Note: You must have successful connection to zoom api).You will get meeting id from zoom. Place your meeting id to shortcode (For instance: [etn_zoom_api_link meeting_id =’123456789′ link_only=’no’]
-									You can also create meeting and display from elementor widget.
+									<?php _e("Yes, You create your own professional hotel booking website easily with tourfic.","tourfic"); ?>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="tf-accrodian-item">
+							<div class="tf-single-faq">
+								<div class="tf-faq-title">
+									<i class="fas fa-angle-down"></i>
+									<h4><?php _e("Can I create a travel or tour booking website with Tourfic? ","tourfic"); ?></h4>
+								</div>
+								<div class="tf-faq-desc">
+									<p>
+									<?php _e("Yes, You create your own professional travel or tour booking website easily with tourfic.","tourfic"); ?>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="tf-accrodian-item">
+							<div class="tf-single-faq">
+								<div class="tf-faq-title">
+									<i class="fas fa-angle-down"></i>
+									<h4><?php _e("Can Tourfic be used as WooCommerce Accommodation Bookings? ","tourfic"); ?></h4>
+								</div>
+								<div class="tf-faq-desc">
+									<p>
+									<?php _e("Yes, You create your own professional accommodation booking website easily with tourfic.","tourfic"); ?>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="tf-accrodian-item">
+							<div class="tf-single-faq">
+								<div class="tf-faq-title">
+									<i class="fas fa-angle-down"></i>
+									<h4><?php _e("Can I create a website similar to Booking.com with Tourfic? ","tourfic"); ?></h4>
+								</div>
+								<div class="tf-faq-desc">
+									<p>
+									<?php _e("Yes, You can create your own professional tour operator and travel agency website within 5 minutes, just like Booking.com, Agoda, Hotels.com, Airbnb etc.","tourfic"); ?>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="tf-accrodian-item">
+							<div class="tf-single-faq">
+								<div class="tf-faq-title">
+									<i class="fas fa-angle-down"></i>
+									<h4><?php _e("Is free version supported? ","tourfic"); ?></h4>
+								</div>
+								<div class="tf-faq-desc">
+									<p>
+									<?php _e("Yes, We provide full support on the WordPress.org forums. You can also post questions or bug reports through our Facebook group! or our website. However, please note that, for free version’s support/replies, there can be delays upto 24-48 hours.","tourfic"); ?>
 									</p>
 								</div>
 							</div>

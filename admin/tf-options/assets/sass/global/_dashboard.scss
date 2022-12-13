@@ -85,13 +85,14 @@
   }
 
   .tf-setting-banner{
-    background-color: #003c79;
+    background-color: transparent;
     padding: 30px 100px;
     border-radius: 10px;
     margin: 40px 40px 40px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-image: radial-gradient(at center center, #004A9E 0%, #001C39 75%);
     @media #{$max991}{
       display: flow-root;
     }
@@ -104,13 +105,15 @@
         width: 100%;
       }
       img{
-        width: 120px;
-        display: block
+        width: 200px;
+        display: block;
+        margin-bottom: 15px;
       }
       span{
         color: #fff;
         font-size: 38px;
-        line-height: 44px;
+        line-height: 1.2;
+        font-weight: 200;
         b{
           display: block;
           font-weight: 700;
@@ -250,7 +253,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0px 0px 0px 40px;
+    padding: 0px 20px 0px 40px;
     @media #{$max1199}{
       padding-top: 20px;
     }
@@ -380,6 +383,7 @@
             font-size: 20px;
             font-weight: 600;
             color: #1d2327;
+            line-height: 24px;
           }
         }
         .tf-faq-title.active{
@@ -644,6 +648,10 @@
               font-size: 14px;
               margin-top: 10px;
             }
+          }
+          > .tf-field.tf-field-color{
+            background-color: transparent;
+            padding: 0px;
           }
         }
       }

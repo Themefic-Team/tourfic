@@ -523,13 +523,14 @@ Fontawesome
       visibility: visible;
       opacity: 1; }
 .tf-setting-dashboard .tf-setting-banner {
-  background-color: #003c79;
+  background-color: transparent;
   padding: 30px 100px;
   border-radius: 10px;
   margin: 40px 40px 40px 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between; }
+  justify-content: space-between;
+  background-image: radial-gradient(at center center, #004A9E 0%, #001C39 75%); }
   @media only screen and (max-width: 991.98px) {
     .tf-setting-dashboard .tf-setting-banner {
       display: flow-root; } }
@@ -542,12 +543,14 @@ Fontawesome
       .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content {
         width: 100%; } }
     .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content img {
-      width: 120px;
-      display: block; }
+      width: 200px;
+      display: block;
+      margin-bottom: 15px; }
     .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content span {
       color: #fff;
       font-size: 38px;
-      line-height: 44px; }
+      line-height: 1.2;
+      font-weight: 200; }
       .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content span b {
         display: block;
         font-weight: 700; }
@@ -661,7 +664,7 @@ Fontawesome
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 0px 0px 40px; }
+  padding: 0px 20px 0px 40px; }
   @media only screen and (max-width: 1199.98px) {
     .tf-settings-help-center .tf-help-center-banner {
       padding-top: 20px; } }
@@ -775,7 +778,8 @@ Fontawesome
           cursor: pointer;
           font-size: 20px;
           font-weight: 600;
-          color: #1d2327; }
+          color: #1d2327;
+          line-height: 24px; }
       .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title.active i {
         transform: rotate(180deg); }
       .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-desc {
@@ -1014,6 +1018,9 @@ Fontawesome
             .tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-tab-content > .tf-field p.description {
               font-size: 14px;
               margin-top: 10px; }
+          .tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-tab-content > .tf-field.tf-field-color {
+            background-color: transparent;
+            padding: 0px; }
 
 .tf-field {
   padding: 12px 0; }
@@ -1799,17 +1806,33 @@ Fontawesome
       font-size: 14px; }
 
 .tf-field-color .tf-fieldset ul.tf-inline li {
-  display: block;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  margin-right: 20px; }
-  .tf-field-color .tf-fieldset ul.tf-inline li label {
-    color: #8997A9;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  margin: 10px 0px;
+  border-radius: 8px;
+  padding: 20px 30px 13px 30px; }
+  @media only screen and (max-width: 767.98px) {
+    .tf-field-color .tf-fieldset ul.tf-inline li {
+      display: flow-root; } }
+  .tf-field-color .tf-fieldset ul.tf-inline li > label {
+    font-weight: 600;
+    font-size: 16px;
+    color: #000;
+    width: 45%;
+    margin-top: 5px; }
+    @media only screen and (max-width: 767.98px) {
+      .tf-field-color .tf-fieldset ul.tf-inline li > label {
+        margin-top: 0px;
+        margin-bottom: 10px;
+        display: block; } }
+  .tf-field-color .tf-fieldset ul.tf-inline li .wp-picker-container {
     display: block;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 5px; }
+    text-align: right; }
+    @media only screen and (max-width: 767.98px) {
+      .tf-field-color .tf-fieldset ul.tf-inline li .wp-picker-container {
+        text-align: left;
+        display: block; } }
 
 .tf-field-icon .tf-icon-preview {
   width: 120px;
