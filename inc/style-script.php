@@ -380,6 +380,7 @@ if ( ! function_exists( 'tf_apartment_css' ) ) {
 		$form_border_color  = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_border_color'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_border_color'] : '';
 		$form_text          = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_text'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_text'] : '';
 		$form_fields_bg     = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_bg'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_bg'] : '';
+		$form_fields_border = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_border'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_border'] : '';
 		$form_fields_text   = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_text'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_text'] : '';
 
 		$output = '';
@@ -411,7 +412,7 @@ if ( ! function_exists( 'tf_apartment_css' ) ) {
 			}
 		';
 		}
-		if ( $form_heading_color || $form_bg || $form_border_color || $form_text || $form_fields_bg || $form_fields_text ) {
+		if ( $form_heading_color || $form_bg || $form_border_color || $form_text || $form_fields_bg || $form_fields_border || $form_fields_text ) {
 			$output .= '
 			#tf-apartment-booking h4 {
 				color: ' . $form_heading_color . ';
@@ -420,8 +421,25 @@ if ( ! function_exists( 'tf_apartment_css' ) ) {
 				background-color: ' . $form_bg . ';
 				border-color: ' . $form_border_color . ';
 			}
+			#tf-apartment-booking .tf-apartment-form-header .tf-apartment-price-per-night span,
 			#tf-apartment-booking .tf-apartment-form-header .tf-single-rating {
 				color: ' . $form_text . ';
+			}
+			#tf-apartment-booking .tf-apartment-form-fields{
+				background-color: ' . $form_fields_bg . ';
+				border-color: ' . $form_fields_border . ';
+			}
+			#tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row{
+				border-top-color: ' . $form_fields_border . ';
+			}
+			#tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-out-date #check-in-out-date::-webkit-input-placeholder{
+				color: ' . $form_fields_text . ';
+			}
+			#tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf-label,
+			.adults-text, .person-sep, .child-text, .room-text, .infant-text,
+			#tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-out-date #check-in-out-date,
+			#tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-out-date .tf-label{
+				color: ' . $form_fields_text . ';
 			}
 			';
 		}
