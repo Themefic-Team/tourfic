@@ -18,7 +18,7 @@ if ( ! function_exists( 'tourfic_enqueue_scripts' ) ) {
 			wp_enqueue_style( 'tf-tour-style', TF_ASSETS_URL . 'css/tour' . $tf_min_css . '.css', null, '' );
 		}
 		if ( get_post_type() == 'tf_apartment' ) {
-			wp_enqueue_style( 'tf-apartment-style', TF_ASSETS_URL . 'css/apartment.css', null, '' );
+			wp_enqueue_style( 'tf-apartment-style', TF_ASSETS_URL . 'css/apartment' . $tf_min_css . '.css', null, '' );
 		}
 
 		// Inline script parent
