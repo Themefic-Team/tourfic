@@ -58,9 +58,10 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 
 	public function tf_search_types() {
 		$types = array(
-			'all'   => __( 'All', 'tourfic' ),
-			'hotel' => __( 'Hotel', 'tourfic' ),
-			'tour'  => __( 'Tour', 'tourfic' ),
+			'all'       => __( 'All', 'tourfic' ),
+			'hotel'     => __( 'Hotel', 'tourfic' ),
+			'tour'      => __( 'Tour', 'tourfic' ),
+			'apartment' => __( 'Apartment', 'tourfic' ),
 		);
 
 		if ( defined( 'TF_PRO' ) ) {
@@ -212,8 +213,8 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 		$settings           = $this->get_settings_for_display();
 		$tf_search_title    = $settings['tf_search_title'];
 		$tf_search_subtitle = $settings['tf_search_subtitle'];
-        $type_arr           = !is_array($settings['type']) ? array($settings['type']): $settings['type'];
-        $type               = $settings['type'] ? implode( ',', $type_arr ) : implode( ',', [ 'all' ] );
+		$type_arr           = ! is_array( $settings['type'] ) ? array( $settings['type'] ) : $settings['type'];
+		$type               = $settings['type'] ? implode( ',', $type_arr ) : implode( ',', [ 'all' ] );
 		$full_width         = $settings['full-width'];
 
 		echo do_shortcode( '[tf_search_form title="' . $tf_search_title . '" subtitle="' . $tf_search_subtitle . '" type="' . $type . '" fullwidth="' . $full_width . '"]' );
