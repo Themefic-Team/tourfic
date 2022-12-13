@@ -597,6 +597,87 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
+		'apartment_design'      => array(
+			'title'  => __( 'Apartment', 'tourfic' ),
+			'parent' => 'design-panel',
+			'icon'   => 'fa-solid fa-house-chimney',
+			'fields' => array(
+				array(
+					'id'      => 'apartment_design_heading',
+					'type'    => 'heading',
+					'content' => __( 'Apartment Settings', 'tourfic' )
+				),
+				array(
+					'id'       => 'apartment-amenities',
+					'type'     => 'color',
+					'label'    => __( 'Amenities Section', 'tourfic' ),
+					'subtitle' => __( 'Styling of the Amenities', 'tourfic' ),
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'amenities_bg'           => __( 'Background', 'tourfic' ),
+						'amenities_border_color' => __( 'Border Color', 'tourfic' ),
+						'amenities_text'         => __( 'Text Color', 'tourfic' ),
+						'amenities_icon'         => __( 'Icon Color', 'tourfic' ),
+					)
+				),
+				array(
+					'id'       => 'apartment-features',
+					'type'     => 'color',
+					'label'    => __( 'Key Features Section', 'tourfic' ),
+					'subtitle' => __( 'Styling of the Key Features', 'tourfic' ),
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'features_bg'           => __( 'Background', 'tourfic' ),
+						'features_border_color' => __( 'Border Color', 'tourfic' ),
+						'features_text'         => __( 'Text Color', 'tourfic' ),
+						'features_icon'         => __( 'Icon Color', 'tourfic' ),
+					)
+				),
+				array(
+					'id'      => 'apartment_form_heading',
+					'type'    => 'heading',
+					'content' => __( 'Booking Form Design', 'tourfic' )
+				),
+				array(
+					'id'       => 'booking-form-design',
+					'type'     => 'color',
+					'label'    => __( 'Booking Form', 'tourfic' ),
+					'subtitle' => __( 'Styling of the Booking Form', 'tourfic' ),
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'form_heading_color' => __( 'Heading Color', 'tourfic' ),
+						'form_bg'            => __( 'Background', 'tourfic' ),
+						'form_border_color'  => __( 'Border Color', 'tourfic' ),
+						'form_text'          => __( 'Text Color', 'tourfic' ),
+						'form_fields_bg'     => __( 'Fields Background', 'tourfic' ),
+						'form_fields_border' => __( 'Fields Border', 'tourfic' ),
+						'form_fields_text'   => __( 'Fields Text Color', 'tourfic' ),
+					)
+				),
+				array(
+					'id'      => 'apartment_host_heading',
+					'type'    => 'heading',
+					'content' => __( 'Apartment Host Design', 'tourfic' )
+				),
+				array(
+					'id'       => 'host-card-design',
+					'type'     => 'color',
+					'label'    => __( 'Apartment Host', 'tourfic' ),
+					'subtitle' => __( 'Styling of the Apartment Host', 'tourfic' ),
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'host_heading_color' => __( 'Heading Color', 'tourfic' ),
+						'host_bg'            => __( 'Background', 'tourfic' ),
+						'host_border_color'  => __( 'Border Color', 'tourfic' ),
+						'host_text'          => __( 'Text Color', 'tourfic' ),
+					)
+				),
+			),
+		),
 
 		// Miscellaneous Options
 		'miscellaneous'         => array(
