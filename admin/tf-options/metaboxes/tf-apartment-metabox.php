@@ -23,7 +23,12 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'subtitle' => __( 'Apartment will be shown under featured sections', 'tourfic' ),
 					'is_pro'   => true,
 				),
-
+				array(
+					'id'      => 'disable_options',
+					'type'    => 'heading',
+					'label'   => __( 'Disable Options', 'tourfic' ),
+					'content' => __( 'These settings will overwrite global settings', 'tourfic' ),
+				),
 				array(
 					'id'          => 'disable-apartment-review',
 					'type'        => 'switch',
@@ -52,13 +57,6 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label_off'   => __( 'No', 'tourfic' ),
 					'default'     => false,
 					'field_width' => 50,
-				),
-
-				array(
-					'id'      => 'notice',
-					'type'    => 'notice',
-					'notice'  => 'info',
-					'content' => __( 'These settings will overwrite global settings', 'tourfic' ),
 				),
 			)
 		),
@@ -90,9 +88,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				),
 				//Property Surroundings
 				array(
-					'id'      => 'surroundings_heading',
-					'type'    => 'heading',
-					'content' => __( 'Property Surroundings', 'tourfic' ),
+					'id'    => 'surroundings_heading',
+					'type'  => 'heading',
+					'label' => __( 'Property Surroundings', 'tourfic' ),
 				),
 				array(
 					'id'       => 'surroundings_sec_title',
@@ -240,7 +238,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'        => 'number',
 					'label'       => __( 'Discount', 'tourfic' ),
 					'subtitle'    => __( 'Enter discount', 'tourfic' ),
-					'dependency' => array( 'discount_type', '!=', 'none' ),
+					'dependency'  => array( 'discount_type', '!=', 'none' ),
 					'attributes'  => array( 'min' => 0 ),
 					'field_width' => 50,
 				),
@@ -264,9 +262,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			'icon'   => 'fa-solid fa-circle-info',
 			'fields' => array(
 				array(
-					'id'      => 'key_features_heading',
-					'type'    => 'heading',
-					'content' => __( 'Key Features', 'tourfic' ),
+					'id'    => 'key_features_heading',
+					'type'  => 'heading',
+					'label' => __( 'Key Features', 'tourfic' ),
 				),
 				array(
 					'id'       => 'key_features_title',
@@ -293,9 +291,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					),
 				),
 				array(
-					'id'      => 'facilities_heading',
-					'type'    => 'heading',
-					'content' => __( 'Facilities', 'tourfic' ),
+					'id'    => 'facilities_heading',
+					'type'  => 'heading',
+					'label' => __( 'Facilities', 'tourfic' ),
 				),
 				array(
 					'id'       => 'facilities_title',
@@ -327,9 +325,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					),
 				),
 				array(
-					'id'      => 'house_rules_heading',
-					'type'    => 'heading',
-					'content' => __( 'House Rules', 'tourfic' ),
+					'id'    => 'house_rules_heading',
+					'type'  => 'heading',
+					'label' => __( 'House Rules', 'tourfic' ),
 				),
 				array(
 					'id'           => 'house_rules',
@@ -365,9 +363,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(
 				array(
-					'id'      => 'faq_heading',
-					'type'    => 'heading',
-					'content' => __( 'Frequently Asked Questions', 'tourfic' ),
+					'id'    => 'faq_heading',
+					'type'  => 'heading',
+					'label' => __( 'Frequently Asked Questions', 'tourfic' ),
 				),
 				array(
 					'id'       => 'faq_title',
@@ -400,9 +398,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					),
 				),
 				array(
-					'id'      => 'terms_heading',
-					'type'    => 'heading',
-					'content' => __( 'Terms & Conditions', 'tourfic' ),
+					'id'    => 'terms_heading',
+					'type'  => 'heading',
+					'label' => __( 'Terms & Conditions', 'tourfic' ),
 				),
 				array(
 					'id'       => 'terms_title',
