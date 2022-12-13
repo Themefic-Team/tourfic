@@ -365,16 +365,17 @@ add_action( 'wp_enqueue_scripts', 'tf_tour_css', 99999 );
  */
 if ( ! function_exists( 'tf_apartment_css' ) ) {
 	function tf_apartment_css() {
-
+		//amenities
 		$amenities_bg           = ! empty( tf_data_types( tfopt( 'apartment-amenities' ) )['amenities_bg'] ) ? tf_data_types( tfopt( 'apartment-amenities' ) )['amenities_bg'] : '';
 		$amenities_border_color = ! empty( tf_data_types( tfopt( 'apartment-amenities' ) )['amenities_border_color'] ) ? tf_data_types( tfopt( 'apartment-amenities' ) )['amenities_border_color'] : '';
 		$amenities_text         = ! empty( tf_data_types( tfopt( 'apartment-amenities' ) )['amenities_text'] ) ? tf_data_types( tfopt( 'apartment-amenities' ) )['amenities_text'] : '';
 		$amenities_icon         = ! empty( tf_data_types( tfopt( 'apartment-amenities' ) )['amenities_icon'] ) ? tf_data_types( tfopt( 'apartment-amenities' ) )['amenities_icon'] : '';
-		$features_bg            = ! empty( tf_data_types( tfopt( 'apartment-features' ) )['features_bg'] ) ? tf_data_types( tfopt( 'apartment-features' ) )['features_bg'] : '';
-		$features_border_color  = ! empty( tf_data_types( tfopt( 'apartment-features' ) )['features_border_color'] ) ? tf_data_types( tfopt( 'apartment-features' ) )['features_border_color'] : '';
-		$features_text          = ! empty( tf_data_types( tfopt( 'apartment-features' ) )['features_text'] ) ? tf_data_types( tfopt( 'apartment-features' ) )['features_text'] : '';
-		$features_icon          = ! empty( tf_data_types( tfopt( 'apartment-features' ) )['features_icon'] ) ? tf_data_types( tfopt( 'apartment-features' ) )['features_icon'] : '';
-
+		//features
+		$features_bg           = ! empty( tf_data_types( tfopt( 'apartment-features' ) )['features_bg'] ) ? tf_data_types( tfopt( 'apartment-features' ) )['features_bg'] : '';
+		$features_border_color = ! empty( tf_data_types( tfopt( 'apartment-features' ) )['features_border_color'] ) ? tf_data_types( tfopt( 'apartment-features' ) )['features_border_color'] : '';
+		$features_text         = ! empty( tf_data_types( tfopt( 'apartment-features' ) )['features_text'] ) ? tf_data_types( tfopt( 'apartment-features' ) )['features_text'] : '';
+		$features_icon         = ! empty( tf_data_types( tfopt( 'apartment-features' ) )['features_icon'] ) ? tf_data_types( tfopt( 'apartment-features' ) )['features_icon'] : '';
+		//booking form
 		$form_heading_color = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_heading_color'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_heading_color'] : '';
 		$form_bg            = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_bg'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_bg'] : '';
 		$form_border_color  = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_border_color'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_border_color'] : '';
@@ -382,6 +383,11 @@ if ( ! function_exists( 'tf_apartment_css' ) ) {
 		$form_fields_bg     = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_bg'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_bg'] : '';
 		$form_fields_border = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_border'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_border'] : '';
 		$form_fields_text   = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_text'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_text'] : '';
+		//Host
+		$host_heading_color = ! empty( tf_data_types( tfopt( 'host-card-design' ) )['host_heading_color'] ) ? tf_data_types( tfopt( 'host-card-design' ) )['host_heading_color'] : '';
+		$host_bg            = ! empty( tf_data_types( tfopt( 'host-card-design' ) )['host_bg'] ) ? tf_data_types( tfopt( 'host-card-design' ) )['host_bg'] : '';
+		$host_border_color  = ! empty( tf_data_types( tfopt( 'host-card-design' ) )['host_border_color'] ) ? tf_data_types( tfopt( 'host-card-design' ) )['host_border_color'] : '';
+		$host_text          = ! empty( tf_data_types( tfopt( 'host-card-design' ) )['host_text'] ) ? tf_data_types( tfopt( 'host-card-design' ) )['host_text'] : '';
 
 		$output = '';
 		if ( $amenities_bg || $amenities_border_color || $amenities_text || $amenities_icon ) {
@@ -440,6 +446,21 @@ if ( ! function_exists( 'tf_apartment_css' ) ) {
 			#tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-out-date #check-in-out-date,
 			#tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-out-date .tf-label{
 				color: ' . $form_fields_text . ';
+			}
+			';
+		}
+		if ( $host_heading_color || $host_bg || $host_border_color || $host_text ) {
+			$output .= '
+			.host-details {
+				background-color: ' . $host_bg . ';
+				border-color: ' . $host_border_color . ';
+			}
+			.host-details .host-meta h4 {
+				color: ' . $host_heading_color . ';
+			}
+			.host-details,
+			.tf-host-rating-wrapper h6{
+				color: ' . $host_text . ';
 			}
 			';
 		}
