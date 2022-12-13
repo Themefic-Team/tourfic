@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet, fida02
 Tags: travel, tour, trip, hotel, tour-booking, hotel-booking, travel-booking, trip-booking, woocommerce hotel, woocommerce tour, woocommerce travel, wordpress travel, wordpress hotel, wordpress tour plugin, woocommerce tour booking, woocommerce travel booking plugin, woocommerce hotel booking, wordpress tour booking plugin, travel booking wordpress plugin, wordpress hotel booking plugin, wp hotel booking, hotel booking plugin, woocommerce accommodation bookings, woocommerce hotel booking, wordpress room booking plugin, best hotel booking plugin wordpress, hotel plugin, hotel plugin wordpress, tour booking, travel booking, trip booking, hotel booking, tour itinerary, tour operator, travel agency, tour reservation, hotel reservation, airbnb, booking.com, agoda.com, agoda,  wp travel engine, wp travel, wp hotel
 Requires at least: 5.4
 Tested up to: 6.1.1
-Stable tag: 2.9.0
+Stable tag: 2.9.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -409,15 +409,17 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Changelog ==
 
+= 2.9.1 -  04 December 2022 =
 
-
+* Fixed: Date picker issue
+* Fixed: Booking API issue
+* Fixed: License Issue(pro)
 
 = 2.9.0 -  01 December 2022 =
 
-* Added : Removed redux framework and integrated custom metavox framework.
+* Added : Removed codestar framework and integrated custom metabox framework.
 * Added : New taxonomy "Attraction" added in tours.
 * Added : New taxonomy "Activities" added in tours.
-* Added : Removed redux framework and integrated custom metavox framework.
 * Added : Itinerary Multi Language Support ( By Fonts Upload )
 * Improved : New design integrated for Plugin settings panel.
 * Improved : New design integrated for tour option panel.
