@@ -13,7 +13,6 @@ while ( have_posts() ) : the_post();
 
 	// Get Tour Meta
 	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
-
 	/**
 	 * Show/hide sections
 	 */
@@ -64,6 +63,11 @@ while ( have_posts() ) : the_post();
 	$tour_duration = ! empty( $meta['duration'] ) ? $meta['duration'] : '';
 	$group_size    = ! empty( $meta['group_size'] ) ? $meta['group_size'] : '';
 	$language      = ! empty( $meta['language'] ) ? $meta['language'] : '';
+	/**
+	 * Get features
+	 * hotel_feature
+	 */
+	$features = ! empty( get_the_terms( $post_id, 'tour_features' ) ) ? get_the_terms( $post_id, 'tour_features' ) : '';
 
 	$min_days = ! empty( $meta['min_days'] ) ? $meta['min_days'] : '';
 
@@ -357,27 +361,52 @@ while ( have_posts() ) : the_post();
         <!-- End description -->
 
         <!-- Highlight section Start -->
+		
+		<?php if ( $highlights ) : ?>
         <div class="tf-highlight-wrapper gray-wrap sp-50">
             <div class="tf-container">
                 <div class="tf-highlight-content">
-					<?php if ( $highlights ) : ?>
-                        <div class="tf-highlight-item">
-                            <div class="tf-highlight-text">
-                                <h2 class="section-heading"><?php _e( 'Highlights', 'tourfic' ); ?></h2>
-								<?php echo $highlights; ?>
-                            </div>
-							<?php if ( ! empty( $meta['hightlights_thumbnail'] ) ): ?>
-                                <div class="tf-highlight-image">
-                                    <img src="<?php echo esc_url( $meta['hightlights_thumbnail'] ); ?>" alt="">
-                                </div>
-							<?php endif; ?>
-                        </div>
-					<?php endif; ?>
+					<div class="tf-highlight-item">
+						<div class="tf-highlight-text">
+							<h2 class="section-heading"><?php _e( 'Highlights', 'tourfic' ); ?></h2>
+							<?php echo $highlights; ?>
+						</div>
+						<?php if ( ! empty( $meta['hightlights_thumbnail'] ) ): ?>
+							<div class="tf-highlight-image">
+								<img src="<?php echo esc_url( $meta['hightlights_thumbnail'] ); ?>" alt="">
+							</div>
+						<?php endif; ?>
+					</div>
                 </div>
             </div>
         </div>
+		<?php endif; ?>
         <!-- Highlight section end -->
+		<!-- Start features -->
+		<?php if ( $features ) { ?>
+			<div class="tf-container">
+				<div class="tf_features">
+					<h3 class="section-heading"><?php esc_html_e( 'Popular Features', 'tourfic' ); ?></h3>
+					<div class="tf-feature-list">
+						<?php foreach ( $features as $feature ) {
+							$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
+							$f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+							if ( $f_icon_type == 'fa' ) {
+								$feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
+							} elseif ( $f_icon_type == 'c' ) {
+								$feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
+							} ?>
 
+							<div class="single-feature-box">
+								<?php echo $feature_icon ?? ''; ?>
+								<p class="feature-list-title"><?php echo $feature->name; ?></p>
+							</div>
+						<?php } ?>
+					</div>
+				</div>`
+			</div>
+		<?php } ?>
+		<!-- End features -->
         <!-- Include-Exclude section Start -->
 		<?php
 		if ( $inc || $exc ) :
@@ -543,13 +572,14 @@ while ( have_posts() ) : the_post();
 
         <!-- Tours suggestion section Start -->
 		<?php if ( ! $disable_related_tour == '1' ) {
+
+			$related_tour_type = tfopt('rt_display');
 			$args  = array(
 				'post_type'      => 'tf_tours',
 				'post_status'    => 'publish',
 				'posts_per_page' => 8,
 				'orderby'        => 'title',
 				'order'          => 'ASC',
-				'post__not_in'   => array( $post_id ),
 				'tax_query'      => array(
 					array(
 						'taxonomy' => 'tour_destination',
@@ -558,6 +588,13 @@ while ( have_posts() ) : the_post();
 					),
 				),
 			);
+			//show related tour based on selected tours
+			$selected_ids = tfopt('tf-related-tours');
+			$args['post__not_in'] = array( $post_id );
+
+			if( $related_tour_type == 'selected' && defined( 'TF_PRO' ) ){
+				$args['post__in'] = $selected_ids;
+			}
 			$tours = new WP_Query( $args );
 			if ( $tours->have_posts() ) {
 				?>

@@ -73,7 +73,6 @@ while ( have_posts() ) : the_post();
 
 	/**
 	 * Get features
-	 *
 	 * hotel_feature
 	 */
 	$features = ! empty( get_the_terms( $post_id, 'hotel_feature' ) ) ? get_the_terms( $post_id, 'hotel_feature' ) : '';

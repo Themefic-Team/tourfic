@@ -63,7 +63,7 @@ if ( ! class_exists( 'TF_select2' ) ) {
 		//sanitize
 		public function sanitize() {
 			$value = $this->value;
-			if ( ! empty( $this->field['multiple'] ) ) {
+			if ( ! empty( $this->field['multiple'] ) && is_array( $this->value ) ) {
 				$value = array_map( 'sanitize_text_field', $value );
 			} else {
 				$value = sanitize_text_field( $value );

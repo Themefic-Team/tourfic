@@ -446,6 +446,15 @@
             });
             var features = features.join();
 
+            var tour_features = [];
+
+            $('[name*=tour_features]').each(function () {
+                if ($(this).is(':checked')) {
+                    tour_features.push($(this).val());
+                }
+            });
+            var tour_features = tour_features.join();
+
             //get tour attraction checked values
             var attractions = [];
             $('[name*=tf_attractions]').each(function () {
@@ -475,6 +484,7 @@
             formData.append('checkout', checkout);
             formData.append('filters', filters);
             formData.append('features', features);
+            formData.append('tour_features', tour_features);
             formData.append('attractions', attractions);
             formData.append('activities', activities);
             formData.append('checked', checked);
@@ -1489,8 +1499,9 @@ $('a.see-more').on('click',function(e){
 });
 
 $('.tf_widget').find('.filter-item').filter(function(index){
-    return index > 3;
+    return index > 4;
 }).addClass("hidden");
+
 var element = $('.filter-item')
 var numberOfChildren = element.children.length;
 if(numberOfChildren < 4 ){
