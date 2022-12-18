@@ -551,6 +551,9 @@ Fontawesome
       font-size: 38px;
       line-height: 1.2;
       font-weight: 200; }
+      @media only screen and (max-width: 575.98px) {
+        .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content span {
+          font-size: 26px; } }
       .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content span b {
         display: block;
         font-weight: 700; }
@@ -638,6 +641,9 @@ Fontawesome
     background: #fff;
     padding: 20px;
     border-radius: 10px; }
+    @media only screen and (max-width: 640px) {
+      .tf-setting-dashboard .tf-setting-performace-section .tf-order-report {
+        padding: 0; } }
   .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter {
     display: flex;
     justify-content: space-between; }
@@ -690,7 +696,9 @@ Fontawesome
       .tf-settings-help-center .tf-help-center-banner .tf-help-center-image {
         width: 100%; } }
     .tf-settings-help-center .tf-help-center-banner .tf-help-center-image img {
-      max-width: 100%; }
+      max-width: 100%;
+      bottom: -3px;
+      position: relative; }
 .tf-settings-help-center .tf-support-document {
   margin: 40px 40px 40px 20px;
   display: flex;

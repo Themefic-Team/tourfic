@@ -114,6 +114,9 @@
         font-size: 38px;
         line-height: 1.2;
         font-weight: 200;
+        @media #{$max575}{
+          font-size: 26px;
+        }
         b{
           display: block;
           font-weight: 700;
@@ -218,6 +221,9 @@
       background: #fff;
       padding: 20px;
       border-radius: 10px;
+      @media #{$max640}{
+        padding: 0;
+      }
     }
     .tf-report-filter{
       display: flex;
@@ -283,6 +289,8 @@
       }
       img{
         max-width: 100%;
+        bottom: -3px;
+        position: relative;
       }
     }
   }
