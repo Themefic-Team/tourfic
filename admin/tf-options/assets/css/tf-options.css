@@ -768,7 +768,6 @@ Fontawesome
       .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper {
         display: block; } }
     .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq {
-      padding: 25px 30px;
       border: 1px solid #E4E6EB;
       border-radius: 8px; }
       @media only screen and (max-width: 767.98px) {
@@ -776,14 +775,15 @@ Fontawesome
           margin: 15px 0px; } }
       .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title {
         display: flex;
-        align-items: center; }
+        align-items: center;
+        padding: 25px 30px;
+        cursor: pointer; }
         .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title i {
           font-size: 18px;
           margin-right: 10px;
           color: #000; }
         .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title h4 {
           margin: 0;
-          cursor: pointer;
           font-size: 20px;
           font-weight: 600;
           color: #1d2327;
@@ -791,7 +791,8 @@ Fontawesome
       .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title.active i {
         transform: rotate(180deg); }
       .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-desc {
-        display: none; }
+        display: none;
+        padding: 0px 30px 25px 30px; }
         .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-desc p {
           font-size: 1rem;
           color: #44464B; }
@@ -1813,6 +1814,10 @@ Fontawesome
       color: #363e4a;
       font-size: 14px; }
 
+.tf-field-color > label {
+  margin-top: 15px; }
+.tf-field-color > span.tf-field-sub-title {
+  margin-bottom: 30px; }
 .tf-field-color .tf-fieldset ul.tf-inline li {
   display: flex;
   justify-content: space-between;
@@ -1841,6 +1846,8 @@ Fontawesome
       .tf-field-color .tf-fieldset ul.tf-inline li .wp-picker-container {
         text-align: left;
         display: block; } }
+.tf-field-color .tf-fieldset ul.tf-inline li:last-child {
+  margin-bottom: 0px; }
 
 .tf-field-icon .tf-icon-preview {
   width: 120px;

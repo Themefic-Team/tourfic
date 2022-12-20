@@ -371,7 +371,6 @@
         display: block;
       }
       .tf-single-faq{
-        padding: 25px 30px;
         border: 1px solid #E4E6EB;
         border-radius: 8px;
         @media #{$max767}{
@@ -380,6 +379,8 @@
         .tf-faq-title{
           display: flex;
           align-items: center;
+          padding: 25px 30px;
+          cursor: pointer;
           i{
             font-size: 18px;
             margin-right: 10px;
@@ -387,7 +388,6 @@
           }
           h4{
             margin: 0;
-            cursor: pointer;
             font-size: 20px;
             font-weight: 600;
             color: #1d2327;
@@ -401,6 +401,7 @@
         }
         .tf-faq-desc{
           display: none;
+          padding: 0px 30px 25px 30px;
           p{
             font-size: 1rem;
             color: #44464B;

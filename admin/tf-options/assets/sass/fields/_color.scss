@@ -1,5 +1,10 @@
 .tf-field-color {
-
+  > label{
+    margin-top: 15px;
+  }
+  > span.tf-field-sub-title{
+    margin-bottom: 30px;
+  }
   .tf-fieldset {
 
     ul.tf-inline {
@@ -33,6 +38,9 @@
             display: block;
           }
         }
+      }
+      li:last-child{
+        margin-bottom: 0px;
       }
     }
   }
