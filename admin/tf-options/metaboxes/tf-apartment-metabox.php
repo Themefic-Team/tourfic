@@ -21,6 +21,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'     => 'switch',
 					'label'    => __( 'Set this apartment as featured', 'tourfic' ),
 					'subtitle' => __( 'Apartment will be shown under featured sections', 'tourfic' ),
+					'label_on'    => __( 'Yes', 'tourfic' ),
+					'label_off'   => __( 'No', 'tourfic' ),
 					'is_pro'   => true,
 				),
 				array(
