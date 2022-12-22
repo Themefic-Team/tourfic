@@ -337,7 +337,9 @@ a.page-numbers {
     align-items: end;
     justify-content: space-between;
 }
-
+.tf-widget-title i.fa.collapsed{
+    transform: rotate(180deg);
+}
 li.filter-item {
     display: flex;
     justify-content: space-between;

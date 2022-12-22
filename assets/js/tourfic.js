@@ -1485,8 +1485,8 @@ $('.tf-total-results').find('span').html(postsCount);
 
 //Sidebar widget js
 $('.tf-widget-title').on('click',function(){
-    $(this).find('i').css('rotate','180deg');
-    $(this).siblings('.tf-filter').slideToggle();
+    $(this).find('i').toggleClass('collapsed');
+    $(this).siblings('.tf-filter').slideToggle( 'medium' );
 })
 
 /* see more checkbox filter started */
