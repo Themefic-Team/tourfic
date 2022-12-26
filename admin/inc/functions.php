@@ -28,6 +28,11 @@ function tf_required_taxonomies( $hook ) {
 			'tour_destination' => array(
 				'message' => __( 'Please select a destination before publishing this tour', 'tourfic' )
         	)
+		),
+		'tf_apartment' => array(
+			'apartment_location' => array(
+				'message' => __( 'Please select a location before publishing this apartment', 'tourfic' )
+        	)
 		)
 	);
 
