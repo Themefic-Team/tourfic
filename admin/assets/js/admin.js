@@ -108,7 +108,21 @@
         });
 
         /**
-         * Hotel and Tour feature images required
+         * Apartment location required
+         *
+         * show notyf error
+         */
+        $(document).on('click', '.post-type-tf_apartment #publish, .post-type-tf_apartment #save-post', function(e) {
+            if( $('[name="tf_apartment_opt[address]"]').val().length === 0 ) {
+                e.preventDefault;
+                e.stopImmediatePropagation();
+                notyf.error(tf_admin_params.apartment_location_required);
+                return false;
+            }
+        });
+
+        /**
+         * Hotel, Tour, and apartment feature images required
          * 
          * show notyf error
          */
@@ -127,6 +141,15 @@
                 e.preventDefault;
                 e.stopImmediatePropagation();
                 notyf.error(tf_admin_params.hotel_feature_image_required);
+                return false;
+            }
+        });
+
+        $(document).on('click', '.post-type-tf_apartment #publish, .post-type-tf_apartment #save-post', function(e) {
+            if( $('#set-post-thumbnail').find('img').size() == 0) {
+                e.preventDefault;
+                e.stopImmediatePropagation();
+                notyf.error(tf_admin_params.apartment_feature_image_required);
                 return false;
             }
         });
