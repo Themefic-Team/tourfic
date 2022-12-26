@@ -595,30 +595,49 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					</ul>
 				</div>
 				<div class="tf-setting-license-field">
-				<div class="tf-tab-wrapper">
-					<?php
-					if ( ! empty( $this->option_sections ) ) {
-					$content_count = 0;
-					foreach ( $this->option_sections as $key => $section ) : ?>
-						<div id="<?php echo esc_attr( $key ) ?>" class="tf-tab-content <?php echo $content_count == 0 ? 'active' : ''; ?>">
+					<div class="tf-tab-wrapper">
+						<div id="license" class="tf-tab-content">
+							<div class="tf-field tf-field-callback" style="width: 100%;">
+								<div class="tf-fieldset"></div>
+							</div>
+							<?php 
+							$licenseKey = ! empty( tfliopt( 'license-key' ) ) ? tfliopt( 'license-key' ) : '';
+							$liceEmail  = ! empty( tfliopt( 'license-email' ) ) ? tfliopt( 'license-email' ) : '';
+							
+							if ( TourficProBase::CheckWPPlugin( $licenseKey, $liceEmail, $licenseMessage, $responseObj, TF_PRO_PATH . 'tourfic-pro.php' ) ) {
+								tf_license_info();
+							} else {
+							?>
+							<div class="tf-field tf-field-text" style="width: 100%;">
+								<label for="tf_settings[license-key]" class="tf-field-label"> <?php _e("License Key","tourfic"); ?></label>
 
-							<?php
-							if ( ! empty( $section['fields'] ) ):
-								foreach ( $section['fields'] as $field ) :
-									if($field['id']=="tf_license_msg" || $field['id']=="license-key" || $field['id']=="license-email" || $field['id']=="tf_license_activation" || $field['id']=="license_callback"){
+								<span class="tf-field-sub-title"><?php _e("Enter your license key here, to activate the product, and get full feature updates and premium support.","tourfic"); ?></span>
 
-									$default = isset( $field['default'] ) ? $field['default'] : '';
-									$value   = isset( $tf_option_value[ $field['id'] ] ) ? $tf_option_value[ $field['id'] ] : $default;
+								<div class="tf-fieldset">
+									<input type="text" name="tf_settings[license-key]" id="tf_settings[license-key]" value="" placeholder="xxxxxxxx-xxxxxxxx-xxxxxxxx-xxxxxxxx" />
+								</div>
+							</div>
 
-									$tf_option = new TF_Options();
-									$tf_option->field( $field, $value, $this->option_id );
-									}
-								endforeach;
-							endif; ?>
+							<div class="tf-field tf-field-text" style="width: 100%;">
+								<label for="tf_settings[license-email]" class="tf-field-label"> <?php _e("License Email ","tourfic"); ?></label>
 
+								<span class="tf-field-sub-title"><?php _e("We will send update news of this product by this email address, don't worry, we hate spam","tourfic"); ?></span>
+
+								<div class="tf-fieldset">
+									<input type="text" name="tf_settings[license-email]" id="tf_settings[license-email]" value="" />
+								</div>
+							</div>
+
+							<div class="tf-field tf-field-callback" style="width: 100%;">
+								<div class="tf-fieldset">
+									<div class="tf-license-activate">
+										<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Activate" /></p>
+									</div>
+								</div>
+							</div>
+							<?php } ?>
 						</div>
-					<?php $content_count ++; endforeach;  } ?>
-				</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -699,14 +718,14 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									$parent_tab_key = ! empty( $section['fields'] ) ? $key : array_key_first( $section['sub_section'] );
 									?>
                                     <div class="tf-admin-tab-item<?php echo ! empty( $section['sub_section'] ) ? ' tf-has-submenu' : '' ?>">
-									<?php if($parent_tab_key!="license"){ ?>
+									
                                         <a href="#<?php echo esc_attr( $parent_tab_key ); ?>"
                                            class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>"
                                            data-tab="<?php echo esc_attr( $parent_tab_key ) ?>">
 											<?php echo ! empty( $section['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $section['icon'] ) . '"></i></span>' : ''; ?>
 											<?php echo $section['title']; ?>
                                         </a>
-										<?php } ?>
+										
 										<?php if ( ! empty( $section['sub_section'] ) ): ?>
                                             <ul class="tf-submenu">
 												<?php foreach ( $section['sub_section'] as $sub_key => $sub ): ?>
@@ -739,14 +758,13 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										<?php
 										if ( ! empty( $section['fields'] ) ):
 											foreach ( $section['fields'] as $field ) :
-												if($field['id']!="tf_license_msg" || $field['id']!="license-key" || $field['id']!="license-email" || $field['id']!="tf_license_activation"){
-
+	
 												$default = isset( $field['default'] ) ? $field['default'] : '';
 												$value   = isset( $tf_option_value[ $field['id'] ] ) ? $tf_option_value[ $field['id'] ] : $default;
 
 												$tf_option = new TF_Options();
 												$tf_option->field( $field, $value, $this->option_id );
-												}
+												
 											endforeach;
 										endif; ?>
 

@@ -1264,6 +1264,28 @@ function tf_migrate_option_data(){
 	}
 
 
+	if ( empty( get_option( 'tf_license_data_migrate_data_204_210_2022' ) ) ) {
+
+		/** License Migrate */
+		
+		$old_setting_option = get_option( 'tourfic_opt' );
+		if(!empty($old_setting_option['license-key']) && !empty($old_setting_option['license-email'])){
+			$tf_settings['license-key']   = $old_setting_option['license-key'];
+			$tf_settings['license-email'] = $old_setting_option['license-email'];
+			update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
+		}else{
+			$tf_setting_option = get_option( 'tf_settings' );
+			$tf_settings['license-key']   = !empty($tf_setting_option['license-key']) ? $tf_setting_option['license-key'] : '';
+			$tf_settings['license-email'] = !empty($tf_setting_option['license-email']) ? $tf_setting_option['license-email'] : '';
+			update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
+		}
+		
+		wp_cache_flush();
+		flush_rewrite_rules( true );
+		update_option( 'tf_license_data_migrate_data_204_210_2022', 2 );
+	}
+
+
 }
 add_action( 'init', 'tf_migrate_option_data' );
 
