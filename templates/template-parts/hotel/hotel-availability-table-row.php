@@ -7,7 +7,7 @@
             if ($tour_room_details_gall) {
                 $tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
             }
-            if (defined( 'TF_PRO' ) && $tour_room_details_gall){ 
+            if (function_exists('is_tf_pro') && is_tf_pro() && $tour_room_details_gall){ 
             ?>	
             <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: underline;">
                 <?php echo esc_html( $room['title'] ); ?>
@@ -118,7 +118,7 @@
                 <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );?></div>
             <?php }?>
 
-            <?php if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount)) { ?>
+            <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount)) { ?>
                 <span class="tf-price tf-deposit-amount-<?php echo $room_id ?>" style="display: none;"><?php echo wc_price( $deposit_amount ); ?></span>
                 <div class="price-per-night tf-deposit-amount-<?php echo $room_id ?> " style="display: none;"><?php _e('need to be deposited', 'tourfic') ?></div>
             <?php } ?>
@@ -139,7 +139,7 @@
             </div>
             <div class="room-submit-wrap">
             <div class="roomselectissue"></div>
-            <?php if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
+            <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
                 
                 <div class="room-deposit-wrap">
                     <input type="checkbox" id="tf-make-deposit" name="make_deposit" value="<?php echo $room_id ?>">
@@ -164,7 +164,7 @@
                 $tour_hotel_service_avail = !empty($meta['airport_service']) ? $meta['airport_service'] : '';
                 $tour_hotel_service_type = !empty($meta['airport_service_type']) ? $meta['airport_service_type'] : '';
                 
-                if(defined( 'TF_PRO' ) && !empty($tour_hotel_service_avail) && !empty($tour_hotel_service_type)){
+                if(function_exists('is_tf_pro') && is_tf_pro() && !empty($tour_hotel_service_avail) && !empty($tour_hotel_service_type)){
                 ?>
                 <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
                 

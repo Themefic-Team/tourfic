@@ -296,14 +296,14 @@ while ( have_posts() ) : the_post();
 						<?php } ?>
                         <!-- End gallery-->
                         <div class="map-for-mobile">
-							<?php if ( ! defined( 'TF_PRO' ) && ( $address ) ) { ?>
+							<?php if ( function_exists('is_tf_pro') && ! is_tf_pro() && ( $address ) ) { ?>
                                 <div class="show-on-map">
                                     <div class="tf-btn"><a href="https://www.google.com/maps/search/<?php echo $address; ?>" target="_blank" class="btn-styled"><span><i
                                                         class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a></div>
                                 </div>
 							<?php } ?>
                         </div>
-						<?php if ( defined( 'TF_PRO' ) && ( ! empty( $map["address"] ) || ! empty( $map["latitude"] ) || ! empty( $map["longitude"] ) ) ) { ?>
+						<?php if ( function_exists('is_tf_pro') && is_tf_pro() && ( ! empty( $map["address"] ) || ! empty( $map["latitude"] ) || ! empty( $map["longitude"] ) ) ) { ?>
                             <div class="popupmap-for-mobile">
                                 <div class="tf-hotel-location-preview show-on-map">
                                     <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&output=embed" width="100%" height="150"
@@ -331,13 +331,13 @@ while ( have_posts() ) : the_post();
 						<?php } ?>
                     </div>
                     <div class="hero-right">
-						<?php if ( ! defined( 'TF_PRO' ) && ( $address ) ) { ?>
+						<?php if (function_exists('is_tf_pro') &&  ! is_tf_pro() && ( $address ) ) { ?>
                             <div class="show-on-map">
                                 <div class="tf-btn"><a href="https://www.google.com/maps/search/<?php echo $address; ?>" target="_blank" class="btn-styled"><span><i
                                                     class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a></div>
                             </div>
 						<?php } ?>
-						<?php if ( defined( 'TF_PRO' ) && ( ! empty( $map["address"] ) || ! empty( $map["latitude"] ) || ! empty( $map["longitude"] ) ) ) { ?>
+						<?php if ( function_exists('is_tf_pro') && is_tf_pro() && ( ! empty( $map["address"] ) || ! empty( $map["latitude"] ) || ! empty( $map["longitude"] ) ) ) { ?>
                             <div class="tf-hotel-location-preview show-on-map">
                                 <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&output=embed" width="100%" height="150"
                                         style="border:0;" allowfullscreen="" loading="lazy"></iframe>
@@ -441,7 +441,7 @@ while ( have_posts() ) : the_post();
 										$pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
 										$avil_by_date = ! empty( $room['avil_by_date'] ) ? ! empty( $room['avil_by_date'] ) : false;
 
-										if ( defined( 'TF_PRO' ) && $avil_by_date == true ) {
+										if ( function_exists('is_tf_pro') && is_tf_pro() && $avil_by_date == true ) {
 											$repeat_by_date = ! empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
 											if ( $pricing_by == '1' ) {
 												$prices = wp_list_pluck( $repeat_by_date, 'price' );
@@ -478,7 +478,7 @@ while ( have_posts() ) : the_post();
 														if ( $tour_room_details_gall ) {
 															$tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
 														}
-														if ( defined( 'TF_PRO' ) && $tour_room_details_gall ){
+														if (function_exists('is_tf_pro') && is_tf_pro() && $tour_room_details_gall ){
 															?>
                                                             <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'].$key : '' ?>"
                                                                    data-hotel="<?php echo $post_id; ?>" style="text-decoration: underline;">

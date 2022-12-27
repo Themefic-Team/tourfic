@@ -317,7 +317,7 @@ function tf_hotel_airport_service_callback() {
 		/**
 		 * Calculate Pricing
 		 */
-		if ( $avail_by_date && defined( 'TF_PRO' ) ) {
+		if ( $avail_by_date && function_exists('is_tf_pro') && is_tf_pro() ) {
 
 			// Check availability by date option
 			$period = new DatePeriod(
@@ -372,7 +372,7 @@ function tf_hotel_airport_service_callback() {
 
 		if ( $deposit == "true" ) {
 			tf_get_deposit_amount( $rooms[ $room_id ], $price_total, $deposit_amount, $has_deposit );
-			if ( defined( 'TF_PRO' ) && $has_deposit == true && ! empty( $deposit_amount ) ) {
+			if ( function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) {
 				$deposit_amount;
 			}
 		}
@@ -758,7 +758,7 @@ function tf_room_availability_callback() {
 					$repeat_by_date = ! empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
 				}
 
-				if ( ! empty( $order_ids ) && defined( 'TF_PRO' ) && $reduce_num_room == true ) {
+				if ( ! empty( $order_ids ) && function_exists('is_tf_pro') && is_tf_pro() && $reduce_num_room == true ) {
 
 					# Get backend available date range as an array
 					if ( $avil_by_date ) {
@@ -825,7 +825,7 @@ function tf_room_availability_callback() {
 
 				}
 				
-				if ( $avil_by_date && defined( 'TF_PRO' ) ) {
+				if ( $avil_by_date && function_exists('is_tf_pro') && is_tf_pro() ) {
 
 					// split date range
 					$check_in  = strtotime( $form_start . ' 00:00' );
@@ -902,7 +902,7 @@ function tf_room_availability_callback() {
 						$feature_result = array_intersect($filtered_features,$room_features);
 					}
 
-					if( !empty( $filtered_features ) && defined( 'TF_PRO' ) ){
+					if( !empty( $filtered_features ) && function_exists('is_tf_pro') && is_tf_pro() ){
 						if($feature_result){
 							if ( $form_total_person <= $total_person ) {
 
@@ -1456,7 +1456,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	//Get hotel_feature
 	$features = ! empty( get_the_terms( $post_id, 'hotel_feature' ) ) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
 
-	$meta = get_post_meta( $post_id, 'tf_hotel', true );
+	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
 	// Location
 	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
 	// Rooms
@@ -1661,7 +1661,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	}
 
 	// Get hotel meta options
-	$meta = get_post_meta( get_the_ID(), 'tf_hotel', true );
+	$meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
 	// Remove disabled rooms
 	if(!empty($meta['room'])):
 		$meta = array_filter( $meta['room'], function ( $value ) {

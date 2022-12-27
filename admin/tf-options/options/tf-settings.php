@@ -239,15 +239,13 @@ TF_Settings::option( 'tf_settings', array(
 					'query_args'  => array(
 						'post_type'      => 'page',
 						'posts_per_page' => - 1,
-					),
-					'field_width' => 50
+					)
 				),
 
 				array(
 					'id'    => 'posts_per_page',
 					'type'  => 'number',
-					'label' => __( 'Search result posts per page', 'tourfic' ),
-					'field_width' => 50
+					'label' => __( 'Search result posts per page', 'tourfic' )
 				),
 
 				array(

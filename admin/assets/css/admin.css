@@ -161,9 +161,19 @@ button.tf-order-remove{
 /**
  * License Button Color
  */
+ .tf-notice.tf-notice-danger{
+    color: red;
+    font-size: 1rem;
+ }
+ .tf-license-activate p.submit,
+ .el-license-active-btn p.submit{
+    margin: 0px !important;
+ }
 .tf-license-activate p.submit input,
 .el-license-active-btn p.submit input{
-    background-color: #2979ff !important;
-    border-color: #2979ff !important;
+    background-color: #003C79 !important;
+    border-color: #003C79 !important;
     color: #fff;
+    padding: 4px 25px;
+    font-size: 1rem;
 }
