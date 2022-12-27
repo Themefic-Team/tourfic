@@ -205,7 +205,7 @@ while ( have_posts() ) : the_post();
                                         <i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
                                            data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
                                            data-id="<?php echo $post_id ?>"
-                                           data-type="<?php echo $post_type ?>" <?php echo tfopt( 'wl-page' ) ? 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"' : ''; ?>> <?php _e('Save', 'tourfic') ?></i>
+                                           data-type="<?php echo $post_type ?>" <?php echo tfopt( 'wl-page' ) ? 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"' : ''; ?>> <?php _e( 'Save', 'tourfic' ) ?></i>
                                     </a>
 									<?php
 								}
@@ -383,7 +383,7 @@ while ( have_posts() ) : the_post();
                                 <div class="host-meta">
 									<?php echo sprintf( '<h4>%s %s</h4>', esc_html__( 'Hosted by', 'tourfic' ), $author_info->display_name ); ?>
 									<?php echo sprintf( '<p>%s <span>%s</span></p>', esc_html__( 'Joined in', 'tourfic' ), date( 'F Y', strtotime( $author_info->user_registered ) ) ); ?>
-                                    <?php tf_apartment_host_rating($post_author_id) ?>
+									<?php tf_apartment_host_rating( $post_author_id ) ?>
 
                                 </div>
                             </div>
@@ -485,7 +485,7 @@ while ( have_posts() ) : the_post();
                         <ul class="tf-included-house-rules">
 							<?php
 							foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
-								if ( $house_rule['include'] == '1' ) {
+								if ( isset( $house_rule['include'] ) && $house_rule['include'] == '1' ) {
 									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $house_rule['title'] ), esc_html( $house_rule['desc'] ) );
 								}
 							}
@@ -494,7 +494,7 @@ while ( have_posts() ) : the_post();
                         <ul class="tf-not-included-house-rules">
 							<?php
 							foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
-								if ( $house_rule['include'] !== '1' ) {
+								if ( !isset($house_rule['include']) ) {
 									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $house_rule['title'] ), esc_html( $house_rule['desc'] ) );
 								}
 							}
