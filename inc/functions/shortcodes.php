@@ -838,7 +838,7 @@ function tf_hotels_grid_slider($atts, $content = null){
 					$room_price = [];
 					if($rooms){
 						foreach( $rooms as $room ){
-							$room_price[] = $room['price'];
+							$room_price[] = !empty($room['price']) ? $room['price'] : '';
 						}
 					}	
 					?>

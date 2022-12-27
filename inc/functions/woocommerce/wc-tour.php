@@ -37,7 +37,7 @@ function tf_tours_booking_function() {
 	 *
 	 * @return
 	 */
-	if ( $tour_type == 'fixed' && ! defined( 'TF_PRO' ) ) {
+	if ( $tour_type == 'fixed' && function_exists('is_tf_pro') && ! is_tf_pro() ) {
 		$response['errors'][] = __( 'Fixed Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
 		$response['status']   = 'error';
 		echo wp_json_encode( $response );
@@ -95,7 +95,7 @@ function tf_tours_booking_function() {
 	 *
 	 * @return
 	 */
-	if ( $tour_type == 'continuous' && $custom_avail == true && ! defined( 'TF_PRO' ) ) {
+	if ( $tour_type == 'continuous' && $custom_avail == true && function_exists('is_tf_pro') && ! is_tf_pro() ) {
 		$response['errors'][] = __( 'Custom Continous Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
 		$response['status']   = 'error';
 		echo wp_json_encode( $response );
@@ -261,7 +261,7 @@ function tf_tours_booking_function() {
 
 	}
 
-	if ( defined( 'TF_PRO' ) && $tour_type == 'continuous' ) {
+	if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_type == 'continuous' ) {
 		$tf_allowed_times = ! empty( $meta['allowed_time'] ) ? $meta['allowed_time'] : '';
 		if( !empty($tf_allowed_times) && gettype($tf_allowed_times)=="string" ){
 			$tf_tour_conti_custom_date = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
@@ -320,7 +320,7 @@ function tf_tours_booking_function() {
 		$tf_tours_data['tf_tours_data']['tour_date']        = $tour_date;
 		$tf_tours_data['tf_tours_data']['tour_extra_total'] = $tour_extra_total;
 		if($tour_extra_title){
-			$tf_tours_data['tf_tours_data']['tour_extra_title'] = $tour_extra_title. " × " . wc_price( $tour_extra_total );
+			$tf_tours_data['tf_tours_data']['tour_extra_title'] = $tour_extra_title. " × " . strip_tags( wc_price( $tour_extra_total ) );
 		}
 		# Discount informations
 		$discount_type    = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
@@ -360,14 +360,14 @@ function tf_tours_booking_function() {
 		} else {
 
 			$tf_tours_data['tf_tours_data']['price']     = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
-			$tf_tours_data['tf_tours_data']['adults']    = $adults . " × " . wc_price( $adult_price );
-			$tf_tours_data['tf_tours_data']['childrens'] = $children . " × " . wc_price( $children_price );
-			$tf_tours_data['tf_tours_data']['infants']   = $infant . " × " . wc_price( $infant_price );
+			$tf_tours_data['tf_tours_data']['adults']    = $adults . " × " . strip_tags(wc_price( $adult_price ));
+			$tf_tours_data['tf_tours_data']['childrens'] = $children . " × " . strip_tags(wc_price( $children_price ));
+			$tf_tours_data['tf_tours_data']['infants']   = $infant . " × " . strip_tags(wc_price( $infant_price ));
 		}
 
 		# Deposit information
 		tf_get_deposit_amount( $meta, $tf_tours_data['tf_tours_data']['price'], $deposit_amount, $has_deposit );
-		if ( defined( 'TF_PRO' ) && $has_deposit == true && $make_deposit == true ) {
+		if ( function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true && $make_deposit == true ) {
 			$tf_tours_data['tf_tours_data']['due']   = $tf_tours_data['tf_tours_data']['price'] - $deposit_amount;
 			$tf_tours_data['tf_tours_data']['price'] = $deposit_amount;
 		}
@@ -493,7 +493,7 @@ function tf_tours_cart_item_custom_data( $item_data, $cart_item ) {
 	if ( ! empty( $due ) ) {
 		$item_data[] = [
 			'key'   => __( 'Due ', 'tourfic' ),
-			'value' => wc_price( $due ),
+			'value' => strip_tags(wc_price( $due )),
 		];
 	}
 
@@ -557,7 +557,7 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 		}
 	} elseif ( $tour_type && $tour_type == 'continuous' ) {
 		if ( $tour_date ) {
-			$item->update_meta_data( 'Tour Date', date( "F j, Y", strtotime( $tour_date ) ) );
+			$item->update_meta_data( 'Tour Date', date( "Y/m/d", strtotime( $tour_date ) ) );
 		}
 	}
 	if($tour_time){
@@ -569,7 +569,7 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	}
 
 	if ( ! empty( $due ) ) {
-		$item->update_meta_data( 'Due', wc_price( $due ) );
+		$item->update_meta_data( 'Due', strip_tags(wc_price( $due ) ));
 	}
 
 }

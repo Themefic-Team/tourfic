@@ -772,7 +772,7 @@ function tf_single_tour_booking_form( $post_id ) {
 			        </label>
 		        </div>
 
-                <?php if (defined( 'TF_PRO' ) && $tour_type != 'fixed') { ?>
+                <?php if (function_exists('is_tf_pro') && is_tf_pro() && $tour_type != 'fixed') { ?>
                 <div class='tf_form-row' id="check-in-time-div" style="display: none;">
                     <label class='tf_label-row'>
                         <div class='tf_form-inner'>
@@ -898,7 +898,7 @@ function tf_single_tour_booking_form( $post_id ) {
                     })(jQuery);
                 </script>
 
-                <?php if ( defined( 'TF_PRO' ) && $tour_extras ) { 
+                <?php if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) { 
                 if((!empty($tour_extras[0]['title']) && !empty($tour_extras[0]['desc']) && !empty($tour_extras[0]['price'])) || !empty($tour_extras[1]['title']) && !empty($tour_extras[1]['desc']) && !empty($tour_extras[1]['price'])){  
                 ?>
                 <div class="tour-extra">
@@ -926,7 +926,7 @@ function tf_single_tour_booking_form( $post_id ) {
                 <div class="tf-tours-booking-btn">
                     <input type="hidden" name="location" value="">
                     <input type="hidden" name="deposit" value="0">
-	                <?php if ( defined( 'TF_PRO' ) && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] )) { ?>
+	                <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] )) { ?>
                         <div class="tf-btn"><a data-fancybox class="tf_button btn-styled" data-src="#tour-deposit" href="javascript:;"><?php _e('Book Now', 'tourfic'); ?></a></div>
                         <div style="display: none;" id="tour-deposit">
                             <div class="tf-tours-booking-deposit">

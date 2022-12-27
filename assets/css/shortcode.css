@@ -71,6 +71,10 @@ button.tf-tablinks:focus {
 .tf_booking-widget.default-form .tf-label {
     display: none;
 }
+.tf-widget-slider.recent-hotel-slider {
+    overflow: hidden;
+    width: 100%;
+}
 
 .tf-children-age-fields {
     display: flex;
@@ -550,7 +554,7 @@ Booking form mobile version
     }
 
     .recomended_inner .single_recomended_item {
-        width: 50%;
+        width: 49% !important;
         float: left;
         margin-right: 0;
         padding-left: 15px;
@@ -593,7 +597,7 @@ Booking form mobile version
 
 @media screen and (max-width: 450px) {
     .recomended_inner .single_recomended_item {
-        width: 100%;
+        width: 100% !important;
         float: none;
         margin-right: 0;
         padding-left: 0;

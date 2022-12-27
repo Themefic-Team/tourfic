@@ -42,8 +42,8 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         $fancy_cdn = !empty(tfopt( 'fnybx_cdn' )) ? tfopt( 'fnybx_cdn' ) : false;
         $slick_cdn = !empty(tfopt( 'slick_cdn' )) ? tfopt( 'slick_cdn' ) : false;
         $fa_cdn = !empty(tfopt( 'fa_cdn' )) ? tfopt( 'fa_cdn' ) : false;
-        $min_css = (defined( 'TF_PRO' ) && !empty(tfopt( 'css_min' ))) ? '.min' : '';
-		$min_js = (defined( 'TF_PRO' ) && !empty(tfopt( 'js_min' ))) ? '.min' : '';
+        $min_css = (function_exists('is_tf_pro') && is_tf_pro() && !empty(tfopt( 'css_min' ))) ? '.min' : '';
+		$min_js = (function_exists('is_tf_pro') && is_tf_pro() && !empty(tfopt( 'js_min' ))) ? '.min' : '';
 
         //wp_enqueue_style( 'tourfic-styles', TF_ASSETS_URL . 'css/old/tourfic-styles.css', null, '' );
         //wp_enqueue_style( 'tf-style', TF_ASSETS_URL . 'css/old/style.css', null, '' );
@@ -56,7 +56,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         if ( get_post_type() == 'tf_tours' ){
             wp_enqueue_style( 'tf-tour-style', TF_ASSETS_URL . 'css/tour' . $min_css . '.css', null, '' );
 
-            if(defined( 'TF_PRO' )){
+            if(function_exists('is_tf_pro') && is_tf_pro()){
                 wp_enqueue_script( 'Chart', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js', array( 'jquery' ), '2.6.0', true );
                 $meta = get_post_meta( get_the_ID(),'tf_tours_opt',true );
 	            $itineraries = !empty($meta['itinerary']) ? $meta['itinerary'] : null;
@@ -90,7 +90,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
          * 
          * v4.6.13
          */
-        if ( $flatpickr_cdn == true && defined( 'TF_PRO' ) ) {
+        if ( $flatpickr_cdn == true && function_exists('is_tf_pro') && is_tf_pro() ) {
 			wp_enqueue_style( 'flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css', array(), '4.6.13' );
 			wp_enqueue_script( 'flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js', array( 'jquery' ), '4.6.13', true );
             if (in_array($flatpickr_locale, $allowed_locale)) {
@@ -119,7 +119,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
          * 
          * v3.5.7
          */
-        if ( $fancy_cdn == true && defined( 'TF_PRO' ) ) {
+        if ( $fancy_cdn == true && function_exists('is_tf_pro') && is_tf_pro() ) {
 			wp_enqueue_style( 'fancyBox', '//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css', array(), '3.5.7' );
 			wp_enqueue_script( 'fancyBox', '//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', array( 'jquery' ), '3.5.7', true );
 		} else {
@@ -132,7 +132,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
          * 
          * v1.8.1
          */
-        if ( $slick_cdn == true && defined( 'TF_PRO' ) ) {
+        if ( $slick_cdn == true && function_exists('is_tf_pro') && is_tf_pro() ) {
 			wp_enqueue_style( 'slick', '//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css', array(), '1.8.1' );
 			wp_enqueue_script( 'slick', '//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js', array( 'jquery' ), '1.8.1', true );
 		} else {
@@ -145,7 +145,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
          * 
          * v5.15.4
          */ 
-        if ( $fa_cdn == true && defined( 'TF_PRO' ) ) {
+        if ( $fa_cdn == true && function_exists('is_tf_pro') && is_tf_pro() ) {
             wp_enqueue_style( 'font-awesome-5', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css', '', '5.15.4' );
         } else {
             wp_enqueue_style( 'font-awesome-5', TF_ASSETS_URL . 'font-awesome/css/all.min.css', '', '5.15.4' );
