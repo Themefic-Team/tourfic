@@ -56,7 +56,7 @@ if(!class_exists('Appsero\Client')){
  * @since 1.0
  */
 if ( ! defined( 'TOURFIC' ) ) {
-	define( 'TOURFIC', '2.9.1' );
+	define( 'TOURFIC', '2.9.2' );
 }
 
 /**
