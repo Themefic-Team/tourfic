@@ -103,7 +103,7 @@ if ( !is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) ) {
 function tf_plugin_action_links( $links ) {
 
 	$settings_link = array(
-		'<a href="admin.php?page=tourfic">' . esc_html__( 'Settings', 'tourfic' ) . '</a>',
+		'<a href="admin.php?page=tf_dashboard">' . esc_html__( 'Settings', 'tourfic' ) . '</a>',
 	);
 
 	if ( !is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) ) {

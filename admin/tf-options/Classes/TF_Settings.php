@@ -220,7 +220,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				<!-- deshboar-performance-section -->
 
 				<div class="tf-setting-performace-section">
-					<h2><?php _e("Performance","tourfic"); ?></h2>
+					<h2><?php _e("Overview","tourfic"); ?></h2>
 					<div class="tf-performance-grid">
 						<div class="tf-single-performance-grid">
 							<div class="tf-single-performance-icon">
