@@ -7,11 +7,11 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.9.1
+ * Version:         2.9.2
  * Tested up to: 6.1.1
- * WC tested up to: 7.1.0
+ * WC tested up to: 7.2.2
  * Requires PHP: 7.2
- * Elementor tested up to: 3.8.2
+ * Elementor tested up to: 3.9.2
  */
 
 // don't load directly
