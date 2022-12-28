@@ -584,7 +584,7 @@
     .tf-not-included-house-rules,
     .tf-included-house-rules {
       list-style: none;
-      @include flex(0 0 calc(50% - 15px));
+      //@include flex(0 0 calc(50% - 15px));
 
       li {
         margin: 16px 0;
@@ -611,8 +611,8 @@
         &::after {
           content: '';
           position: absolute;
-          left: -20px;
-          top: 23px;
+          left: -21px;
+          top: 26px;
           width: 2px;
           height: 100%;
           background: $blue60;
