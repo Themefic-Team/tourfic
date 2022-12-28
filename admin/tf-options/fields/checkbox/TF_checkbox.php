@@ -10,6 +10,10 @@ if ( ! class_exists( 'TF_checkbox' ) ) {
 		}
 
 		public function render() {
+			//added 'options_callback' callback support @ah
+			if ( isset( $this->field['options_callback'] ) && is_callable( $this->field['options_callback'] ) ) {
+				$this->field['options'] = call_user_func( $this->field['options_callback'] );
+			}
 			if ( isset( $this->field['options'] ) ) {
 				$inline = ( isset( $this->field['inline'] ) && $this->field['inline'] ) ? 'tf-inline' : '';
 				echo '<ul class="tf-checkbox-group ' . esc_attr( $inline ) . '">';

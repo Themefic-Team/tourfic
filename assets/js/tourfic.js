@@ -16,14 +16,12 @@
         //         Hotel                #
         //###############################
 
-        /**
+       /**
          * Hotel room availability
          *
-         * Ajax
+         * Ajax room filter 
          */
-        $(document).on('click', '#tf-single-hotel-avail .tf-submit', function (e) {
-            e.preventDefault();
-
+        const tfRoomFilter = () => {
             if ($.trim($('input[name=check-in-out-date]').val()) == '') {
 
                 if ($('#tf-required').length === 0) {
@@ -70,8 +68,17 @@
                     console.log(data);
                 }
             });
+        }
+
+        $(document).on('click', '#tf-single-hotel-avail .tf-submit', function (e) {
+            e.preventDefault();
+            tfRoomFilter();
+            
         });
 
+        $(document).on('change','.tf-room-checkbox :checkbox', function(){
+            tfRoomFilter();
+        });
         /**
          * Click to go back to hotel availability form
          */
@@ -359,6 +366,18 @@
         });
 
         /**
+         * Itinerary gallery init
+         */
+        $('.tf-itinerary-gallery').fancybox({
+            buttons: [
+                "zoom",
+                "slideShow",
+                "fullScreen",
+                "close"
+            ]
+        });
+        
+        /**
          * Single Tour price change
          *
          * adult, child, infant
@@ -598,6 +617,15 @@
             });
             var features = features.join();
 
+            var tour_features = [];
+
+            $('[name*=tour_features]').each(function () {
+                if ($(this).is(':checked')) {
+                    tour_features.push($(this).val());
+                }
+            });
+            var tour_features = tour_features.join();
+
             //get tour attraction checked values
             var attractions = [];
             $('[name*=tf_attractions]').each(function () {
@@ -628,6 +656,7 @@
             formData.append('checkout', checkout);
             formData.append('filters', filters);
             formData.append('features', features);
+            formData.append('tour_features', tour_features);
             formData.append('attractions', attractions);
             formData.append('activities', activities);
             formData.append('checked', checked);
@@ -1639,6 +1668,39 @@
     var postsCount = $('.tf-posts-count').html();
     $('.tf-total-results').find('span').html(postsCount);
 
+
+
+//Sidebar widget js
+$('.tf-widget-title').on('click',function(){
+    $(this).find('i').toggleClass('collapsed');
+    $(this).siblings('.tf-filter').slideToggle( 'medium' );
+})
+
+/* see more checkbox filter started */
+$('a.see-more').on('click',function(e){
+    e.preventDefault();
+    $('.tf_widget').find('.filter-item').filter(function(index){
+        return index > 3;
+    }).removeClass("hidden");
+    $(this).hide();
+});
+
+$('.tf_widget').find('.filter-item').filter(function(index){
+    return index > 4;
+}).addClass("hidden");
+
+var element = $('.filter-item')
+var numberOfChildren = element.children.length;
+if(numberOfChildren < 4 ){
+    $('a.see-more').hide(); 
+}
+
+/* see more checkbox filter end */
+
+//active checkbox bg
+$('.tf_widget input').on('click',function(){
+    $(this).parent().parent().toggleClass('active');
+});
 
 
 })(jQuery, window);

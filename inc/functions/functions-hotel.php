@@ -1385,9 +1385,6 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
                 </label>
             </div>
         </div>
-
-		<!-- Hooked in feature filter action -->
-		<?php do_action( 'tf_hotel_features_filter', 10 ) ?>
 		
         <div class="tf_form-row">
 			<?php
