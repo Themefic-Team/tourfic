@@ -734,23 +734,4 @@ if ( ! function_exists( 'tf_extra_user_profile_fields' ) ) {
 	add_action( 'edit_user_profile', 'tf_extra_user_profile_fields' );
 }
 
-/*
- * Save user extra fields
- * @author Foysal
- */
-if ( ! function_exists( 'tf_save_extra_user_profile_fields' ) ) {
-	function tf_save_extra_user_profile_fields( $user_id ) {
-		if ( empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'update-user_' . $user_id ) ) {
-			return;
-		}
-
-		if ( ! current_user_can( 'edit_user', $user_id ) ) {
-			return false;
-		}
-		update_user_meta( $user_id, 'language', $_POST['language'] );
-	}
-
-	add_action( 'personal_options_update', 'tf_save_extra_user_profile_fields' );
-	add_action( 'edit_user_profile_update', 'tf_save_extra_user_profile_fields' );
-}
-
+?>

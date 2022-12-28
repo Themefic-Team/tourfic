@@ -379,12 +379,12 @@ function taxonomy_template( $template ) {
 /**
  * Add tour & hotel capabilities to admin & editor
  *
- * tf_tours & tf_hotel
+ * tf_tours & tf_hotel & tf_apartment
  */
 if ( ! function_exists( 'tf_admin_role_caps' ) ) {
 	function tf_admin_role_caps() {
 
-		if ( get_option( 'tf_admin_caps' ) < 1 ) {
+		if ( get_option( 'tf_admin_caps' ) < 2 ) {
 			$admin_role  = get_role( 'administrator' );
 			$editor_role = get_role( 'editor' );
 
@@ -442,7 +442,7 @@ if ( ! function_exists( 'tf_admin_role_caps' ) ) {
 				$editor_role->add_cap( $cap );
 			}
 
-			update_option( 'tf_admin_caps', 1 );
+			update_option( 'tf_admin_caps', 2 );
 		}
 	}
 
