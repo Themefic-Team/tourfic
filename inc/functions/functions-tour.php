@@ -1284,4 +1284,4 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
 
     }
 }
-?>
+

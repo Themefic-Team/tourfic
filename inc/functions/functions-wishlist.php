@@ -177,6 +177,8 @@ function tf_remove_wishlist()
     }
 }
 
+
+
 /**
  * Is this item in the list ? 
  * 

@@ -170,6 +170,9 @@ a.page-numbers {
 .single-tour-wrap * {
     transition: all 0.3s ease-out;
 }
+.tf-archive-rating-wrapper {
+    flex: 0 0 80px;
+}
 
 .tf-action-top {
     display: flex;

@@ -20,7 +20,7 @@ add_action( 'admin_init', 'tf_remove_comment_meta_box' );
  */
 function tf_review_script() {
 
-	if ( is_singular( array( 'tf_hotel', 'tf_tours' ) ) ) {
+	if ( is_singular( array( 'tf_hotel', 'tf_tours', 'tf_apartment' ) ) ) {
 
 		/**
 		 * jquery-validate
@@ -138,7 +138,7 @@ function tf_comments_open( $open, $post_id ) {
 
 	$post = get_post( $post_id );
 
-	if ( 'tf_hotel' == $post->post_type || 'tf_tours' == $post->post_type ) {
+	if ( 'tf_hotel' == $post->post_type || 'tf_tours' == $post->post_type || 'tf_apartment' == $post->post_type ) {
 		$open = true;
 	}
 
@@ -157,7 +157,7 @@ function tf_get_review_fields( &$fields, $type = null ) {
 	/**
 	 * Default fields until user save from option panel
 	 */
-	$default_hotels_field = [
+	$default_hotels_field     = [
 		array(
 			'r-field-type' => __( 'Staff', 'tourfic' ),
 		),
@@ -177,7 +177,27 @@ function tf_get_review_fields( &$fields, $type = null ) {
 			'r-field-type' => __( 'Location', 'tourfic' ),
 		),
 	];
-	$default_tours_field  = [
+	$default_apartments_field = [
+		array(
+			'r-field-type' => __( 'Staff', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Facilities', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Cleanliness', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Comfort', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Value for money', 'tourfic' ),
+		),
+		array(
+			'r-field-type' => __( 'Location', 'tourfic' ),
+		),
+	];
+	$default_tours_field      = [
 		array(
 			'r-field-type' => __( 'Guide', 'tourfic' ),
 		),
@@ -193,10 +213,11 @@ function tf_get_review_fields( &$fields, $type = null ) {
 	];
 
 	// If user does not have fields from settings, default fields will be loaded
-	$tfopt_hotels = ! empty( tf_data_types( tfopt( 'r-hotel' ) ) ) ? tf_data_types( tfopt( 'r-hotel' ) ) : $default_hotels_field;
-	$tfopt_tours  = ! empty( tf_data_types( tfopt( 'r-tour' ) ) ) ? tf_data_types( tfopt( 'r-tour' ) ) : $default_tours_field;
+	$tfopt_hotels     = ! empty( tf_data_types( tfopt( 'r-hotel' ) ) ) ? tf_data_types( tfopt( 'r-hotel' ) ) : $default_hotels_field;
+	$tfopt_apartments = ! empty( tf_data_types( tfopt( 'r-apartment' ) ) ) ? tf_data_types( tfopt( 'r-apartment' ) ) : $default_apartments_field;
+	$tfopt_tours      = ! empty( tf_data_types( tfopt( 'r-tour' ) ) ) ? tf_data_types( tfopt( 'r-tour' ) ) : $default_tours_field;
 
-	$fields = 'tf_tours' === $type ? $tfopt_tours : $tfopt_hotels;
+	$fields = 'tf_tours' === $type ? $tfopt_tours : ( 'tf_apartment' === $type ? $tfopt_apartments : $tfopt_hotels );
 	if ( ! empty( $fields ) && gettype( $fields ) == "string" ) {
 		$tf_hotel_fields_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
 			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
@@ -299,8 +320,7 @@ function tf_average_ratings( $ratings = [] ) {
 	// No sub collection of ratings
 	if ( count( $ratings ) == count( $ratings, COUNT_RECURSIVE ) ) {
 		$average = array_sum( $ratings ) / count( $ratings );
-	} // Has sub collection of ratings
-	else {
+	} else {
 		$average = 0;
 		foreach ( $ratings as $rating ) {
 			$average += array_sum( $rating ) / count( $rating );

@@ -8,6 +8,7 @@ defined( 'ABSPATH' ) || exit;
  * @param  WC_Meta_Data  $meta The meta object
  * @param  WC_Order_Item $item The order item object
  * @return string        The title
+ * @since  1.0.0
  */
 function tf_change_meta_key_title( $key, $meta, $item ) {
     

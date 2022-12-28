@@ -6,6 +6,8 @@ defined( 'ABSPATH' ) || exit;
  * Enable tour and hotel add to cart
  * 
  * Extend WooCommerce Product data
+ *
+ * @since 1.0.0
  */
 class TF_Product_Data_Store_CPT extends WC_Product_Data_Store_CPT implements WC_Object_Data_Store_Interface, WC_Product_Data_Store_Interface {
 
@@ -17,7 +19,7 @@ class TF_Product_Data_Store_CPT extends WC_Product_Data_Store_CPT implements WC_
     public function read( &$product ) {
         $product->set_defaults();
 
-        if ( (! $product->get_id() || ! ( $post_object = get_post( $product->get_id() ) ) || 'product' !== $post_object->post_type) && 'tf_tours' !== $post_object->post_type && 'tf_hotel' !== $post_object->post_type ) {
+        if ( (! $product->get_id() || ! ( $post_object = get_post( $product->get_id() ) ) || 'product' !== $post_object->post_type) && 'tf_tours' !== $post_object->post_type && 'tf_hotel' !== $post_object->post_type && 'tf_apartment' !== $post_object->post_type ) {
             throw new Exception( __( 'Invalid product.', 'tourfic' ) );
         }
 
@@ -64,6 +66,7 @@ add_filter( 'woocommerce_data_stores', 'tf_woocommerce_data_stores' );
 function tf_add_price_field_to_post($post_id, $post) {
     update_post_meta( $post_id, '_price', '0' );
 }
+add_action( 'publish_tf_apartment', 'tf_add_price_field_to_post', 10, 2 );
 add_action( 'publish_tf_hotel', 'tf_add_price_field_to_post', 10, 2 );
 add_action( 'publish_tf_tours', 'tf_add_price_field_to_post', 10, 2 );
 

@@ -78,8 +78,10 @@ if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
                 'deleting_room_order_ids' => __('Deleting order ids...', 'tourfic'),
                 'tour_location_required' => __('Tour Location is a required field!', 'tourfic'),
                 'hotel_location_required' => __('Hotel Location is a required field!', 'tourfic'),
+                'apartment_location_required' => __('Apartment Location is a required field!', 'tourfic'),
                 'tour_feature_image_required' => __('Tour image is a required!', 'tourfic'),
                 'hotel_feature_image_required' => __('Hotel image is a required!', 'tourfic'),
+                'apartment_feature_image_required' => __('Apartment image is a required!', 'tourfic'),
                 'installing' => __( 'Installing...', 'tourfic' ),
                 'activating' => __( 'Activating...', 'tourfic' ),
                 'installed' => __( 'Installed', 'tourfic' ),
@@ -160,24 +162,6 @@ add_action( 'plugins_loaded', 'tf_load_textdomain' );
  */
 if ( ! function_exists( 'tf_plugin_loaded_action' ) ) {
 	function tf_plugin_loaded_action() {
-
-		/**
-		 * Option Framework & options
-		 *
-		 * @since 1.0
-		 */
-		// Options Framework
-		/*if( !class_exists( 'CSF' ) ) {
-			require_once( TF_ADMIN_PATH .'framework/framework.php' );
-		}
-		// Options
-		if( class_exists( 'CSF' ) ) {
-			if ( file_exists( TF_OPTIONS_PATH . 'options.php' ) ) {
-				require_once TF_OPTIONS_PATH . 'options.php';
-			} else {
-				tf_file_missing(TF_OPTIONS_PATH . 'options.php');
-			}
-		}*/
 
 		if ( file_exists( TF_ADMIN_PATH . 'tf-options/TF_Options.php' ) ) {
 			require_once TF_ADMIN_PATH . 'tf-options/TF_Options.php';

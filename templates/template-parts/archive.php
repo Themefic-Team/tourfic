@@ -45,6 +45,8 @@ $total_posts = $loop->found_posts;
                     tf_hotel_archive_single_item();
                 } elseif( $post_type == 'tf_tours' ) {
                     tf_tour_archive_single_item();
+                } elseif( $post_type == 'tf_apartment' ) {
+                    tf_apartment_archive_single_item();
                 }
                     
             }           
