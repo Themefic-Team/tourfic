@@ -614,23 +614,6 @@ Fontawesome
           font-weight: 700;
           color: #000;
           line-height: 0.8; }
-  .tf-setting-dashboard .tf-setting-performace-section #tf-report-loader {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden; }
-    .tf-setting-dashboard .tf-setting-performace-section #tf-report-loader img {
-      width: 120px; }
-  .tf-setting-dashboard .tf-setting-performace-section #tf-report-loader.show {
-    opacity: 1;
-    visibility: visible; }
   .tf-setting-dashboard .tf-setting-performace-section .tf-order-report {
     background: #fff;
     padding: 20px;
@@ -653,6 +636,25 @@ Fontawesome
         color: #222;
         border: 1px solid #ddd;
         height: 40px; }
+
+#tf-report-loader {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden; }
+  #tf-report-loader img {
+    width: 120px; }
+
+#tf-report-loader.show {
+  opacity: 1;
+  visibility: visible; }
 
 .tf-settings-help-center .tf-help-center-banner {
   background-color: #fff;

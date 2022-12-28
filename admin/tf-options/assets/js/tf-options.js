@@ -1327,6 +1327,29 @@ var frame, gframe;
 
 (function ($) {
     $(document).ready(function () {
+
+        // Multivendor Bulk Action
+
+        $('.vendor-actions input#submit').click(function () {
+            var balkaction = $('#tf_vendor_bulk').find(":selected").val();
+            var vendorlist = $('input[name="vendor_id"]:checked').serializeArray();
+            if (balkaction !== "" && vendorlist.length > 0){
+                $("#tf-report-loader").addClass('show');
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_options.ajax_url,
+                    data: {
+                        action: 'tf_vendor_bulk',
+                        balkaction: balkaction,
+                        vendorlist: vendorlist,
+                    },
+                    success: function (data) {
+                        $("#tf-report-loader").removeClass('show');
+                    }
+                });
+            }
+        });
+
         if(tf_options.tf_chart_enable==1){    
             var ctx = document.getElementById('tf_months'); // node
             var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context

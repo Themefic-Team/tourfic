@@ -1462,3 +1462,25 @@ function tf_month_chart_filter_callback(){
 	die();
 }
 
+/**
+ * Monthwise Chart Ajax function
+ *
+ * @author Jahid
+ */
+add_action( 'wp_ajax_tf_vendor_bulk', 'tf_vendor_bulk_filter_callback' );
+
+function tf_vendor_bulk_filter_callback(){
+
+	if(sanitize_text_field( $_POST['balkaction'] )=="approved"){
+		foreach($_POST['vendorlist'] as $single){
+			update_user_meta($single['value'], "vendor_approval", "enabled");
+		}
+	}
+	if(sanitize_text_field( $_POST['balkaction'] )=="pending"){
+		foreach($_POST['vendorlist'] as $single){
+			update_user_meta($single['value'], "vendor_selling", "disabled");
+		}
+	}
+	// exit();
+	die();
+}
