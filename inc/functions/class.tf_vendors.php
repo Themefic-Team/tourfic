@@ -28,7 +28,13 @@ class TFVENDORTable extends WP_List_Table {
 		return "<input type='checkbox' name='vendor_id' value='{$item->ID}'>";
 	}
     function column_uname( $item ) {
-		return $item->display_name;
+		// return $item->display_name;
+
+		$actions = [
+			'edit'   => sprintf( '<a href="user-edit.php?user_id=%s">%s</a>', $item->ID, __( 'Edit', 'database-demo' ) ),
+		];
+
+		return sprintf('%s %s',$item->display_name,$this->row_actions($actions));
 	}
     function column_uemail( $item ) {
 		return $item->user_email;
@@ -37,43 +43,43 @@ class TFVENDORTable extends WP_List_Table {
 		return get_user_meta($item->ID,'user_phone',true);
 	}
     function column_selling( $item ) {
-		$vendor_sell_status = get_user_meta($item->ID,'vendor_selling',true);
+		$vendor_sell_status = get_user_meta($item->ID,'tf_vendor_selling',true);
         if(!empty($vendor_sell_status) && $vendor_sell_status=="enabled"){
-		return '
-        <div class="tf-users-switcher">
-            <label class="switch">
-            <input type="checkbox" id="status-switcher" checked="">
-            <span class="switcher round"></span>
+		return "
+        <div class='tf-users-switcher'>
+            <label class='switch'>
+            <input type='checkbox' class='vendor-selling-switcher' value='{$item->ID}' checked=''>
+            <span class='switcher round'></span>
             </label>
-        </div>';
+        </div>";
         }else{
-            return '
-            <div class="tf-users-switcher">
-                <label class="switch">
-                <input type="checkbox" id="status-switcher">
-                <span class="switcher round"></span>
+            return "
+            <div class='tf-users-switcher'>
+                <label class='switch'>
+                <input type='checkbox' value='{$item->ID}' class='vendor-selling-switcher'>
+                <span class='switcher round'></span>
                 </label>
-            </div>';
+            </div>";
         }
 	}
     function column_status( $item ) {
-        $vendor_status = get_user_meta($item->ID,'vendor_approval',true);
+        $vendor_status = get_user_meta($item->ID,'tf_vendor_approval',true);
         if(!empty($vendor_status) && $vendor_status=="enabled"){
-		return '
-        <div class="tf-users-switcher">
-            <label class="switch">
-            <input type="checkbox" id="status-switcher" checked="">
-            <span class="switcher round"></span>
-            </label>
-        </div>';
+			return "
+			<div class='tf-users-switcher'>
+				<label class='switch'>
+				<input type='checkbox' class='vendor-status-switcher' value='{$item->ID}' checked=''>
+				<span class='switcher round'></span>
+				</label>
+			</div>";
         }else{
-            return '
-            <div class="tf-users-switcher">
-                <label class="switch">
-                <input type="checkbox" id="status-switcher">
-                <span class="switcher round"></span>
+            return "
+            <div class='tf-users-switcher'>
+                <label class='switch'>
+                <input type='checkbox' value='{$item->ID}' class='vendor-status-switcher'>
+                <span class='switcher round'></span>
                 </label>
-            </div>';
+            </div>";
         }
 	}
     function column_created_at( $item ) {

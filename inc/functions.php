@@ -1463,7 +1463,7 @@ function tf_month_chart_filter_callback(){
 }
 
 /**
- * Monthwise Chart Ajax function
+ * Vendor Bulk Actions
  *
  * @author Jahid
  */
@@ -1473,14 +1473,47 @@ function tf_vendor_bulk_filter_callback(){
 
 	if(sanitize_text_field( $_POST['balkaction'] )=="approved"){
 		foreach($_POST['vendorlist'] as $single){
-			update_user_meta($single['value'], "vendor_approval", "enabled");
+			update_user_meta($single['value'], "tf_vendor_approval", "enabled");
 		}
 	}
 	if(sanitize_text_field( $_POST['balkaction'] )=="pending"){
 		foreach($_POST['vendorlist'] as $single){
-			update_user_meta($single['value'], "vendor_selling", "disabled");
+			update_user_meta($single['value'], "tf_vendor_selling", "disabled");
 		}
 	}
-	// exit();
+	die();
+}
+
+/**
+ * Vendor Activation Actions
+ *
+ * @author Jahid
+ */
+add_action( 'wp_ajax_tf_vendor_activation', 'tf_vendor_activation_filter_callback' );
+
+function tf_vendor_activation_filter_callback(){
+
+	if(sanitize_text_field( $_POST['status'] )=="enabled"){
+		update_user_meta($_POST['vendorid'], "tf_vendor_approval", "enabled");
+	}else{
+		update_user_meta($_POST['vendorid'], "tf_vendor_approval", "disabled");
+	}
+	die();
+}
+
+/**
+ * Vendor Selling Actions
+ *
+ * @author Jahid
+ */
+add_action( 'wp_ajax_tf_vendor_selling', 'tf_vendor_selling_filter_callback' );
+
+function tf_vendor_selling_filter_callback(){
+
+	if(sanitize_text_field( $_POST['status'] )=="enabled"){
+		update_user_meta($_POST['vendorid'], "tf_vendor_selling", "enabled");
+	}else{
+		update_user_meta($_POST['vendorid'], "tf_vendor_selling", "disabled");
+	}
 	die();
 }

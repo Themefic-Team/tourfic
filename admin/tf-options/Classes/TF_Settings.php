@@ -395,7 +395,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			<div class="wrap" style="margin-right: 20px;">
 				<h1 class="wp-heading-inline"><?php _e( 'Vendors', 'tourfic' ); ?></h1>
-				<button class="page-title-action">Add New</button>
+				<a href="user-new.php" class="page-title-action">Add New</a>
 
 				<div id="tf-report-loader">
 					<img src="<?php echo TF_ASSETS_URL; ?>/img/loader.gif" alt="Loader">
