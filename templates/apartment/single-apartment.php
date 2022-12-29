@@ -95,137 +95,138 @@ while ( have_posts() ) : the_post();
 		<?php do_action( 'tf_before_container' ); ?>
 
         <!-- Start title area -->
-        <div class="tf-title-area tf-apartment-title sp-40">
+        <div class="tf-title-area sp-40">
             <div class="tf-container">
-                <div class="tf-title-wrap">
-                    <div class="tf-title-left">
-                        <h1><?php the_title(); ?></h1>
-                        <!-- Start map link -->
-						<?php if ( $locations ) { ?>
-                            <div class="tf-map-link">
-								<?php if ( $address ) {
-									echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $address . ' – </span>';
-								} ?>
+                <div class="tf-apartment-title">
+                    <h1><?php the_title(); ?></h1>
+                    <div class="tf-apartment-meta">
+                        <div class="tf-apartment-meta-left">
+							<?php if ( ! $disable_review_sec == '1' ): ?>
+                                <div class="tf-top-review">
+                                    <a href="#tf-review">
+                                        <div class="tf-single-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span><?php echo tf_total_avg_rating( $comments ); ?></span>
+                                            (<?php tf_based_on_text( count( $comments ) ); ?>)
+                                        </div>
+                                    </a>
+                                </div>
+							<?php endif; ?>
+                            <!-- Start map link -->
+							<?php if ( $locations ) { ?>
+                                <div class="tf-map-link">
+									<?php if ( $address ) {
+										echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $address . ' – </span>';
+									} ?>
 
-                                <a href="<?php echo $first_location_url; ?>" class="more-apartment tf-d-ib">
-									<?php printf( __( 'Show more hotels in %s', 'tourfic' ), $first_location_name ); ?>
-                                </a>
-                            </div>
-						<?php } ?>
-                    </div>
+                                    <a href="<?php echo $first_location_url; ?>" class="more-apartment tf-d-ib">
+										<?php printf( __( 'Show more hotels in %s', 'tourfic' ), $first_location_name ); ?>
+                                    </a>
+                                </div>
+							<?php } ?>
+                        </div>
 
-                    <div class="tf-title-right">
-						<?php if ( $comments && ! $disable_review_sec == '1' ): ?>
-                            <div class="tf-top-review">
-                                <a href="#tf-review">
-                                    <div class="tf-single-rating">
-                                        <i class="fas fa-star"></i>
-                                        <span><?php echo tf_total_avg_rating( $comments ); ?></span>
-                                        (<?php tf_based_on_text( count( $comments ) ); ?>)
-                                    </div>
-                                </a>
-                            </div>
-						<?php endif; ?>
-
-						<?php if ( ! $disable_share_opt == '1' ) : ?>
-                            <!-- Share Section -->
-                            <div class="tf-share">
-                                <a href="#dropdown-share-center" class="share-toggle" data-toggle="true">
-                                    <i class="fas fa-share-alt"></i> <?php _e( 'Share', 'tourfic' ) ?>
-                                </a>
-                                <div id="dropdown-share-center" class="share-tour-content">
-                                    <ul class="tf-dropdown-content">
-                                        <li>
-                                            <a href="http://www.facebook.com/share.php?u=<?php _e( $share_link ); ?>"
-                                               class="tf-dropdown-item" target="_blank">
+                        <div class="tf-apartment-meta-right">
+							<?php if ( ! $disable_share_opt == '1' ) : ?>
+                                <!-- Share Section -->
+                                <div class="tf-share">
+                                    <a href="#dropdown-share-center" class="share-toggle" data-toggle="true">
+                                        <i class="fas fa-share-alt"></i> <?php _e( 'Share', 'tourfic' ) ?>
+                                    </a>
+                                    <div id="dropdown-share-center" class="share-tour-content">
+                                        <ul class="tf-dropdown-content">
+                                            <li>
+                                                <a href="http://www.facebook.com/share.php?u=<?php _e( $share_link ); ?>"
+                                                   class="tf-dropdown-item" target="_blank">
                                                 <span class="tf-dropdown-item-content">
                                                     <i class="fab fa-facebook-square"></i>
                                                     <?php esc_html_e( 'Share on Facebook', 'tourfic' ); ?>
                                                 </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="http://twitter.com/share?text=<?php _e( $share_text ); ?>&url=<?php _e( $share_link ); ?>"
-                                               class="tf-dropdown-item" target="_blank">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="http://twitter.com/share?text=<?php _e( $share_text ); ?>&url=<?php _e( $share_link ); ?>"
+                                                   class="tf-dropdown-item" target="_blank">
                                                 <span class="tf-dropdown-item-content">
                                                     <i class="fab fa-twitter-square"></i>
                                                     <?php esc_html_e( 'Share on Twitter', 'tourfic' ); ?>
                                                 </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.linkedin.com/cws/share?url=<?php _e( $share_link ); ?>"
-                                               class="tf-dropdown-item" target="_blank">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.linkedin.com/cws/share?url=<?php _e( $share_link ); ?>"
+                                                   class="tf-dropdown-item" target="_blank">
                                                 <span class="tf-dropdown-item-content">
                                                     <i class="fab fa-linkedin"></i>
                                                     <?php esc_html_e( 'Share on Linkedin', 'tourfic' ); ?>
                                                 </span>
-                                            </a>
-                                        </li>
-										<?php
-										$share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
-										?>
-                                        <li>
-                                            <a href="http://pinterest.com/pin/create/button/?url=<?php _e( $share_link ); ?>&media=<?php _e( $share_image_link[0] ); ?>&description=<?php _e( $share_text ); ?>"
-                                               class="tf-dropdown-item" target="_blank">
+                                                </a>
+                                            </li>
+											<?php
+											$share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' );
+											?>
+                                            <li>
+                                                <a href="http://pinterest.com/pin/create/button/?url=<?php _e( $share_link ); ?>&media=<?php _e( $share_image_link[0] ); ?>&description=<?php _e( $share_text ); ?>"
+                                                   class="tf-dropdown-item" target="_blank">
                                                 <span class="tf-dropdown-item-content">
                                                     <i class="fab fa-pinterest"></i>
                                                     <?php esc_html_e( 'Share on Pinterest', 'tourfic' ); ?>
                                                 </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <div class="share-center-copy-form tf-dropdown-item" title="Share this link"
-                                                 aria-controls="share_link_button">
-                                                <label class="share-center-copy-label"
-                                                       for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
-                                                <input type="text" id="share_link_input"
-                                                       class="share-center-url share-center-url-input"
-                                                       value="<?php _e( $share_link ); ?>" readonly>
-                                                <button id="share_link_button" class="tf_button share-center-copy-cta"
-                                                        tabindex="0" role="button">
-                                                    <span class="tf-button-text share-center-copy-message"><?php _e( 'Copy link', 'tourfic' ); ?></span>
-                                                    <span class="tf-button-text share-center-copied-message"><?php _e( 'Link Copied!', 'tourfic' ); ?></span>
-                                                </button>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <div class="share-center-copy-form tf-dropdown-item" title="Share this link"
+                                                     aria-controls="share_link_button">
+                                                    <label class="share-center-copy-label"
+                                                           for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
+                                                    <input type="text" id="share_link_input"
+                                                           class="share-center-url share-center-url-input"
+                                                           value="<?php _e( $share_link ); ?>" readonly>
+                                                    <button id="share_link_button" class="tf_button share-center-copy-cta"
+                                                            tabindex="0" role="button">
+                                                        <span class="tf-button-text share-center-copy-message"><?php _e( 'Copy link', 'tourfic' ); ?></span>
+                                                        <span class="tf-button-text share-center-copied-message"><?php _e( 'Link Copied!', 'tourfic' ); ?></span>
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- End Share Section -->
-						<?php endif; ?>
+                                <!-- End Share Section -->
+							<?php endif; ?>
 
-                        <!-- Wishlist Section -->
-						<?php
-						if ( tfopt( 'wl-bt-for' ) && in_array( '3', tfopt( 'wl-bt-for' ) ) ) {
-							if ( is_user_logged_in() ) {
-								if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
-									?>
-                                    <a class="tf-wishlist-button" title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>">
-                                        <i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
-                                           data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
-                                           data-id="<?php echo $post_id ?>"
-                                           data-type="<?php echo $post_type ?>" <?php echo tfopt( 'wl-page' ) ? 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"' : ''; ?>> <?php _e( 'Save', 'tourfic' ) ?></i>
-                                    </a>
-									<?php
-								}
-							} else {
-								if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {
-									?>
-                                    <a class="tf-wishlist-button"
-                                       title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
-                                                class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
-                                                data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
-                                                data-id="<?php echo $post_id ?>"
-                                                data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
-											echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
-										} ?>> Save</i></a>
-									<?php
+                            <!-- Wishlist Section -->
+							<?php
+							if ( tfopt( 'wl-bt-for' ) && in_array( '3', tfopt( 'wl-bt-for' ) ) ) {
+								if ( is_user_logged_in() ) {
+									if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
+										?>
+                                        <a class="tf-wishlist-button" title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>">
+                                            <i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
+                                               data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
+                                               data-id="<?php echo $post_id ?>"
+                                               data-type="<?php echo $post_type ?>" <?php echo tfopt( 'wl-page' ) ? 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"' : ''; ?>> <?php _e( 'Save', 'tourfic' ) ?></i>
+                                        </a>
+										<?php
+									}
+								} else {
+									if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {
+										?>
+                                        <a class="tf-wishlist-button"
+                                           title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
+                                                    class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
+                                                    data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
+                                                    data-id="<?php echo $post_id ?>"
+                                                    data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
+												echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+											} ?>> Save</i></a>
+										<?php
+									}
 								}
 							}
-						}
-						?>
-                        <!-- Wishlist Section -->
+							?>
+                            <!-- Wishlist Section -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -494,7 +495,7 @@ while ( have_posts() ) : the_post();
                         <ul class="tf-not-included-house-rules">
 							<?php
 							foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
-								if ( !isset($house_rule['include']) ) {
+								if ( ! isset( $house_rule['include'] ) ) {
 									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $house_rule['title'] ), esc_html( $house_rule['desc'] ) );
 								}
 							}
@@ -534,24 +535,6 @@ while ( have_posts() ) : the_post();
             </div>
             <!-- FAQ section end -->
 		<?php endif; ?>
-
-        <!-- Start Question Content -->
-        <div class="tf-ask-question apartment-question sp-40">
-            <div class="tf-container">
-                <div class="apartment-qa-wrapper">
-                    <div class="question-left">
-                        <h3><?php _e( "Have a question in mind", 'tourfic' ); ?></h3>
-                        <p><?php _e( "Looking for more info? Send a question to the property to find out more.", 'tourfic' ); ?></p>
-                    </div>
-                    <div class="tf-btn">
-                        <a href="#" id="tf-ask-question-trigger" class="btn-styled">
-                            <span><?php _e( 'Contact Host', 'tourfic' ); ?></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Question Content -->
 
 		<?php if ( ! empty( $meta['terms_and_conditions'] ) ) : ?>
             <!-- Start TOC Content -->

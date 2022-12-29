@@ -6,15 +6,36 @@
   box-shadow: 0px 1px 1px rgba(0, 60, 121, 0.16);
 }
 
-.tf-apartment-title {
-  padding-bottom: 20px;
-}
 .tf-apartment-title h1 {
   color: #363e4a;
   font-weight: 500;
-  font-size: 36px;
-  line-height: 40px;
+  font-size: 28px;
+  line-height: 34px;
   margin-bottom: 10px;
+}
+.tf-apartment-title .tf-apartment-meta {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.tf-apartment-title .tf-apartment-meta .tf-apartment-meta-left,
+.tf-apartment-title .tf-apartment-meta .tf-apartment-meta-right {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 15px;
 }
 .tf-apartment-title .tf-map-link {
   color: #607085;
@@ -41,9 +62,6 @@
 .tf-apartment-title .tf-single-rating span {
   font-size: 16px;
 }
-.tf-apartment-title .tf-share {
-  margin-left: 8px;
-}
 .tf-apartment-title .tf-share a {
   color: inherit;
   font-size: 16px;
@@ -54,10 +72,17 @@
 .tf-apartment-title .tf-wishlist-button {
   color: inherit;
   font-size: 16px;
-  margin-left: 8px;
+  margin: 0;
+}
+.tf-apartment-title .tf-wishlist-button i {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif !important;
+}
+.tf-apartment-title .tf-wishlist-button i.fas {
+  font-weight: 600;
 }
 .tf-apartment-title .tf-wishlist-button i:before {
   padding-right: 5px;
+  font-family: "FontAwesome";
 }
 
 .tf-apartment .section-heading {

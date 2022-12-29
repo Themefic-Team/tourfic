@@ -421,6 +421,7 @@ function tourfic_ask_question() {
                         <button type="submit" form="ask-question"
                                 class="button tf_button btn-styled"><?php esc_html_e( 'Submit', 'tourfic' ); ?></button>
                         <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
+                        <input type="hidden" name="question_type" value="">
 						<?php wp_nonce_field( 'ask_question_nonce' ); ?>
                         <div class="response"></div>
                     </div>
@@ -485,7 +486,7 @@ function tourfic_ask_question_ajax() {
 		if ( "tf_hotel" == get_post_type( $post_id ) ) {
 			$send_email_to = ! empty( tfopt( 'h-enquiry-email' ) ) ? sanitize_email( tfopt( 'h-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
 		} elseif ( "tf_apartment" == get_post_type( $post_id ) ) {
-			$send_email_to = ! empty( $author_mail ) ? sanitize_email( $author_mail ) : sanitize_email( get_option( 'admin_email' ) );
+			$send_email_to = ! empty( tfopt( 'apartment-enquiry-email' ) ) ? sanitize_email( tfopt( 'apartment-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
 		} else {
 			$send_email_to = ! empty( tfopt( 't-enquiry-email' ) ) ? sanitize_email( tfopt( 't-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
 		}

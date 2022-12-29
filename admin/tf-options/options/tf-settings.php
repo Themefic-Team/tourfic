@@ -7,7 +7,7 @@ if ( file_exists( TF_ADMIN_PATH . 'tf-options/options/tf-menu-icon.php' ) ) {
 } else {
 	$menu_icon = 'dashicons-palmtree';
 }
-function tf_tours_for_select2(){
+function tf_tours_for_select2() {
 
 }
 
@@ -147,6 +147,12 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false
 				),
+				array(
+					'id'     => 'apartment-enquiry-email',
+					'type'   => 'text',
+					'label'  => __( 'Enquiry Email', 'tourfic' ),
+					'is_pro' => true,
+				),
 			),
 		),
 
@@ -183,22 +189,22 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 				),
 				array(
-					'id'        => 'rt-display',
-					'type'      => 'radio',
-					'is_pro'      => true,
-					'label'     => __( 'Related tour display type', 'tourfic' ),
+					'id'      => 'rt-display',
+					'type'    => 'radio',
+					'is_pro'  => true,
+					'label'   => __( 'Related tour display type', 'tourfic' ),
 					'options' => array(
-						'auto' => __( 'Auto','tourfic' ),
-						'selected' => __( 'Selected','tourfic' )
-					 ),
+						'auto'     => __( 'Auto', 'tourfic' ),
+						'selected' => __( 'Selected', 'tourfic' )
+					),
 					'default' => 'auto',
-					'inline' => true,
+					'inline'  => true,
 				),
 				array(
-					'id'        => 'tf-ralated-tours',
-					'type'      => 'select2',
+					'id'          => 'tf-ralated-tours',
+					'type'        => 'select2',
 					'is_pro'      => true,
-					'label'     => __( 'Choose realted for single page', 'tourfic' ),
+					'label'       => __( 'Choose realted for single page', 'tourfic' ),
 					'options'     => 'posts',
 					'query_args'  => array(
 						'post_type'      => 'tf_tours',
