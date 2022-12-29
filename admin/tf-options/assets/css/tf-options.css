@@ -523,13 +523,14 @@ Fontawesome
       visibility: visible;
       opacity: 1; }
 .tf-setting-dashboard .tf-setting-banner {
-  background-color: #003c79;
+  background-color: transparent;
   padding: 30px 100px;
   border-radius: 10px;
   margin: 40px 40px 40px 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between; }
+  justify-content: space-between;
+  background-image: radial-gradient(at center center, #004A9E 0%, #001C39 75%); }
   @media only screen and (max-width: 991.98px) {
     .tf-setting-dashboard .tf-setting-banner {
       display: flow-root; } }
@@ -542,12 +543,17 @@ Fontawesome
       .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content {
         width: 100%; } }
     .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content img {
-      width: 120px;
-      display: block; }
+      width: 200px;
+      display: block;
+      margin-bottom: 15px; }
     .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content span {
       color: #fff;
       font-size: 38px;
-      line-height: 44px; }
+      line-height: 1.2;
+      font-weight: 200; }
+      @media only screen and (max-width: 575.98px) {
+        .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content span {
+          font-size: 26px; } }
       .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content span b {
         display: block;
         font-weight: 700; }
@@ -618,6 +624,9 @@ Fontawesome
     background: #fff;
     padding: 20px;
     border-radius: 10px; }
+    @media only screen and (max-width: 640px) {
+      .tf-setting-dashboard .tf-setting-performace-section .tf-order-report {
+        padding: 0; } }
   .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter {
     display: flex;
     justify-content: space-between; }
@@ -663,7 +672,7 @@ Fontawesome
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 0px 0px 40px; }
+  padding: 0px 20px 0px 40px; }
   @media only screen and (max-width: 1199.98px) {
     .tf-settings-help-center .tf-help-center-banner {
       padding-top: 20px; } }
@@ -689,7 +698,9 @@ Fontawesome
       .tf-settings-help-center .tf-help-center-banner .tf-help-center-image {
         width: 100%; } }
     .tf-settings-help-center .tf-help-center-banner .tf-help-center-image img {
-      max-width: 100%; }
+      max-width: 100%;
+      bottom: -3px;
+      position: relative; }
 .tf-settings-help-center .tf-support-document {
   margin: 40px 40px 40px 20px;
   display: flex;
@@ -759,7 +770,6 @@ Fontawesome
       .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper {
         display: block; } }
     .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq {
-      padding: 25px 30px;
       border: 1px solid #E4E6EB;
       border-radius: 8px; }
       @media only screen and (max-width: 767.98px) {
@@ -767,21 +777,24 @@ Fontawesome
           margin: 15px 0px; } }
       .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title {
         display: flex;
-        align-items: center; }
+        align-items: center;
+        padding: 25px 30px;
+        cursor: pointer; }
         .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title i {
           font-size: 18px;
           margin-right: 10px;
           color: #000; }
         .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title h4 {
           margin: 0;
-          cursor: pointer;
           font-size: 20px;
           font-weight: 600;
-          color: #1d2327; }
+          color: #1d2327;
+          line-height: 24px; }
       .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title.active i {
         transform: rotate(180deg); }
       .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-desc {
-        display: none; }
+        display: none;
+        padding: 0px 30px 25px 30px; }
         .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-desc p {
           font-size: 1rem;
           color: #44464B; }
@@ -1016,6 +1029,9 @@ Fontawesome
             .tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-tab-content > .tf-field p.description {
               font-size: 14px;
               margin-top: 10px; }
+          .tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-tab-content > .tf-field.tf-field-color {
+            background-color: transparent;
+            padding: 0px; }
 
 .tf-field {
   padding: 12px 0; }
@@ -1800,18 +1816,40 @@ Fontawesome
       color: #363e4a;
       font-size: 14px; }
 
+.tf-field-color > label {
+  margin-top: 15px; }
+.tf-field-color > span.tf-field-sub-title {
+  margin-bottom: 30px; }
 .tf-field-color .tf-fieldset ul.tf-inline li {
-  display: block;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  margin-right: 20px; }
-  .tf-field-color .tf-fieldset ul.tf-inline li label {
-    color: #8997A9;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  margin: 10px 0px;
+  border-radius: 8px;
+  padding: 20px 30px 13px 30px; }
+  @media only screen and (max-width: 767.98px) {
+    .tf-field-color .tf-fieldset ul.tf-inline li {
+      display: flow-root; } }
+  .tf-field-color .tf-fieldset ul.tf-inline li > label {
+    font-weight: 600;
+    font-size: 16px;
+    color: #000;
+    width: 45%;
+    margin-top: 5px; }
+    @media only screen and (max-width: 767.98px) {
+      .tf-field-color .tf-fieldset ul.tf-inline li > label {
+        margin-top: 0px;
+        margin-bottom: 10px;
+        display: block; } }
+  .tf-field-color .tf-fieldset ul.tf-inline li .wp-picker-container {
     display: block;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 5px; }
+    text-align: right; }
+    @media only screen and (max-width: 767.98px) {
+      .tf-field-color .tf-fieldset ul.tf-inline li .wp-picker-container {
+        text-align: left;
+        display: block; } }
+.tf-field-color .tf-fieldset ul.tf-inline li:last-child {
+  margin-bottom: 0px; }
 
 .tf-field-icon .tf-icon-preview {
   width: 120px;

@@ -188,21 +188,21 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 						<div class="dropdown">
 							<div class="list-item">
-								<a href="#" target="_blank">
+								<a href="https://portal.themefic.com/support/" target="_blank">
 									<svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path d="M10.0482 4.37109H4.30125C4.06778 4.37109 3.84329 4.38008 3.62778 4.40704C1.21225 4.6137 0 6.04238 0 8.6751V12.2693C0 15.8634 1.43674 16.5733 4.30125 16.5733H4.66044C4.85799 16.5733 5.1184 16.708 5.23514 16.8608L6.3127 18.2985C6.78862 18.9364 7.56087 18.9364 8.03679 18.2985L9.11435 16.8608C9.24904 16.6811 9.46456 16.5733 9.68905 16.5733H10.0482C12.6793 16.5733 14.107 15.3692 14.3136 12.9432C14.3405 12.7275 14.3495 12.5029 14.3495 12.2693V8.6751C14.3495 5.80876 12.9127 4.37109 10.0482 4.37109ZM4.04084 11.5594C3.53798 11.5594 3.14288 11.1551 3.14288 10.6609C3.14288 10.1667 3.54696 9.76233 4.04084 9.76233C4.53473 9.76233 4.93881 10.1667 4.93881 10.6609C4.93881 11.1551 4.53473 11.5594 4.04084 11.5594ZM7.17474 11.5594C6.67188 11.5594 6.27678 11.1551 6.27678 10.6609C6.27678 10.1667 6.68086 9.76233 7.17474 9.76233C7.66862 9.76233 8.07271 10.1667 8.07271 10.6609C8.07271 11.1551 7.6776 11.5594 7.17474 11.5594ZM10.3176 11.5594C9.81476 11.5594 9.41966 11.1551 9.41966 10.6609C9.41966 10.1667 9.82374 9.76233 10.3176 9.76233C10.8115 9.76233 11.2156 10.1667 11.2156 10.6609C11.2156 11.1551 10.8115 11.5594 10.3176 11.5594Z" fill="#003c79"></path>
 										<path d="M17.9423 5.08086V8.67502C17.9423 10.4721 17.3855 11.6941 16.272 12.368C16.0026 12.5298 15.6884 12.3141 15.6884 11.9996L15.6973 8.67502C15.6973 5.08086 13.641 3.0232 10.0491 3.0232L4.58048 3.03219C4.26619 3.03219 4.05067 2.7177 4.21231 2.44814C4.88578 1.33395 6.10702 0.776855 7.89398 0.776855H13.641C16.5055 0.776855 17.9423 2.21452 17.9423 5.08086Z" fill="#003c79"></path>
 									</svg> 
 								<span><?php _e("Need Help?","tourfic"); ?></span>
 								</a>
-								<a href="#" target="_blank">
+								<a href="https://themefic.com/docs/tourfic/" target="_blank">
 									<svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path d="M16.1896 7.57803H13.5902C11.4586 7.57803 9.72274 5.84103 9.72274 3.70803V1.10703C9.72274 0.612031 9.318 0.207031 8.82332 0.207031H5.00977C2.23956 0.207031 0 2.00703 0 5.22003V13.194C0 16.407 2.23956 18.207 5.00977 18.207H12.0792C14.8494 18.207 17.089 16.407 17.089 13.194V8.47803C17.089 7.98303 16.6843 7.57803 16.1896 7.57803ZM8.09478 14.382H4.4971C4.12834 14.382 3.82254 14.076 3.82254 13.707C3.82254 13.338 4.12834 13.032 4.4971 13.032H8.09478C8.46355 13.032 8.76935 13.338 8.76935 13.707C8.76935 14.076 8.46355 14.382 8.09478 14.382ZM9.89363 10.782H4.4971C4.12834 10.782 3.82254 10.476 3.82254 10.107C3.82254 9.73803 4.12834 9.43203 4.4971 9.43203H9.89363C10.2624 9.43203 10.5682 9.73803 10.5682 10.107C10.5682 10.476 10.2624 10.782 9.89363 10.782Z" fill="#003c79"></path>
 									</svg>
 									<span><?php _e("Documentation","tourfic"); ?></span>
 
 								</a>
-								<a href="#" target="_blank">
+								<a href="https://portal.themefic.com/support/" target="_blank">
 									<svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path fill-rule="evenodd" clip-rule="evenodd" d="M13.5902 7.57803H16.1896C16.6843 7.57803 17.089 7.98303 17.089 8.47803V13.194C17.089 16.407 14.8494 18.207 12.0792 18.207H5.00977C2.23956 18.207 0 16.407 0 13.194V5.22003C0 2.00703 2.23956 0.207031 5.00977 0.207031H8.82332C9.318 0.207031 9.72274 0.612031 9.72274 1.10703V3.70803C9.72274 5.84103 11.4586 7.57803 13.5902 7.57803ZM11.9613 0.396012C11.5926 0.0270125 10.954 0.279013 10.954 0.792013V3.93301C10.954 5.24701 12.0693 6.33601 13.4274 6.33601C14.2818 6.34501 15.4689 6.34501 16.4852 6.34501H16.4854C16.998 6.34501 17.2679 5.74201 16.9081 5.38201C16.4894 4.96018 15.9637 4.42927 15.3988 3.85888L15.3932 3.85325L15.3913 3.85133L15.3905 3.8505L15.3902 3.85016C14.2096 2.65803 12.86 1.29526 11.9613 0.396012ZM3.0145 12.0732C3.0145 11.7456 3.28007 11.48 3.60768 11.48H5.32132V9.76639C5.32132 9.43879 5.58689 9.17321 5.9145 9.17321C6.2421 9.17321 6.50768 9.43879 6.50768 9.76639V11.48H8.22131C8.54892 11.48 8.8145 11.7456 8.8145 12.0732C8.8145 12.4008 8.54892 12.6664 8.22131 12.6664H6.50768V14.38C6.50768 14.7076 6.2421 14.9732 5.9145 14.9732C5.58689 14.9732 5.32132 14.7076 5.32132 14.38V12.6664H3.60768C3.28007 12.6664 3.0145 12.4008 3.0145 12.0732Z" fill="#003c79"></path>
 									</svg>
@@ -218,8 +218,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				<!-- deshboard-banner-section -->
 				<div class="tf-setting-banner">
 					<div class="tf-setting-banner-content">
-						<img src="<?php echo TF_ASSETS_URL; ?>/img/tourfic-logo.webp" alt="logo">
-						<span>Express your <b>Hotel and Tour Booking Website</b>with Tourfic</span>
+						<img src="<?php echo TF_ASSETS_URL; ?>/img/tourfic-logo-white.png" alt="logo">
+						<span>Build & Manage Your Next <b>Travel or Hotel Booking Website</b>with Tourfic</span>
 					</div>
 					<div class="tf-setting-banner-image">
 						<img src="<?php echo TF_ASSETS_URL; ?>/img/hotel-booking-management-system@2x.webp" alt="Banner Image">
@@ -230,7 +230,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				<!-- deshboar-performance-section -->
 
 				<div class="tf-setting-performace-section">
-					<h2><?php _e("Performance","tourfic"); ?></h2>
+					<h2><?php _e("Overview","tourfic"); ?></h2>
 					<div class="tf-performance-grid">
 						<div class="tf-single-performance-grid">
 							<div class="tf-single-performance-icon">
@@ -439,21 +439,21 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 					<div class="dropdown">
 						<div class="list-item">
-							<a href="#" target="_blank">
+							<a href="https://portal.themefic.com/support/" target="_blank">
 								<svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M10.0482 4.37109H4.30125C4.06778 4.37109 3.84329 4.38008 3.62778 4.40704C1.21225 4.6137 0 6.04238 0 8.6751V12.2693C0 15.8634 1.43674 16.5733 4.30125 16.5733H4.66044C4.85799 16.5733 5.1184 16.708 5.23514 16.8608L6.3127 18.2985C6.78862 18.9364 7.56087 18.9364 8.03679 18.2985L9.11435 16.8608C9.24904 16.6811 9.46456 16.5733 9.68905 16.5733H10.0482C12.6793 16.5733 14.107 15.3692 14.3136 12.9432C14.3405 12.7275 14.3495 12.5029 14.3495 12.2693V8.6751C14.3495 5.80876 12.9127 4.37109 10.0482 4.37109ZM4.04084 11.5594C3.53798 11.5594 3.14288 11.1551 3.14288 10.6609C3.14288 10.1667 3.54696 9.76233 4.04084 9.76233C4.53473 9.76233 4.93881 10.1667 4.93881 10.6609C4.93881 11.1551 4.53473 11.5594 4.04084 11.5594ZM7.17474 11.5594C6.67188 11.5594 6.27678 11.1551 6.27678 10.6609C6.27678 10.1667 6.68086 9.76233 7.17474 9.76233C7.66862 9.76233 8.07271 10.1667 8.07271 10.6609C8.07271 11.1551 7.6776 11.5594 7.17474 11.5594ZM10.3176 11.5594C9.81476 11.5594 9.41966 11.1551 9.41966 10.6609C9.41966 10.1667 9.82374 9.76233 10.3176 9.76233C10.8115 9.76233 11.2156 10.1667 11.2156 10.6609C11.2156 11.1551 10.8115 11.5594 10.3176 11.5594Z" fill="#003c79"></path>
 									<path d="M17.9423 5.08086V8.67502C17.9423 10.4721 17.3855 11.6941 16.272 12.368C16.0026 12.5298 15.6884 12.3141 15.6884 11.9996L15.6973 8.67502C15.6973 5.08086 13.641 3.0232 10.0491 3.0232L4.58048 3.03219C4.26619 3.03219 4.05067 2.7177 4.21231 2.44814C4.88578 1.33395 6.10702 0.776855 7.89398 0.776855H13.641C16.5055 0.776855 17.9423 2.21452 17.9423 5.08086Z" fill="#003c79"></path>
 								</svg> 
 							<span><?php _e("Need Help?","tourfic"); ?></span>
 							</a>
-							<a href="#" target="_blank">
+							<a href="https://themefic.com/docs/tourfic/" target="_blank">
 								<svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M16.1896 7.57803H13.5902C11.4586 7.57803 9.72274 5.84103 9.72274 3.70803V1.10703C9.72274 0.612031 9.318 0.207031 8.82332 0.207031H5.00977C2.23956 0.207031 0 2.00703 0 5.22003V13.194C0 16.407 2.23956 18.207 5.00977 18.207H12.0792C14.8494 18.207 17.089 16.407 17.089 13.194V8.47803C17.089 7.98303 16.6843 7.57803 16.1896 7.57803ZM8.09478 14.382H4.4971C4.12834 14.382 3.82254 14.076 3.82254 13.707C3.82254 13.338 4.12834 13.032 4.4971 13.032H8.09478C8.46355 13.032 8.76935 13.338 8.76935 13.707C8.76935 14.076 8.46355 14.382 8.09478 14.382ZM9.89363 10.782H4.4971C4.12834 10.782 3.82254 10.476 3.82254 10.107C3.82254 9.73803 4.12834 9.43203 4.4971 9.43203H9.89363C10.2624 9.43203 10.5682 9.73803 10.5682 10.107C10.5682 10.476 10.2624 10.782 9.89363 10.782Z" fill="#003c79"></path>
 								</svg>
 								<span><?php _e("Documentation","tourfic"); ?></span>
 
 							</a>
-							<a href="#" target="_blank">
+							<a href="https://portal.themefic.com/support/" target="_blank">
 								<svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path fill-rule="evenodd" clip-rule="evenodd" d="M13.5902 7.57803H16.1896C16.6843 7.57803 17.089 7.98303 17.089 8.47803V13.194C17.089 16.407 14.8494 18.207 12.0792 18.207H5.00977C2.23956 18.207 0 16.407 0 13.194V5.22003C0 2.00703 2.23956 0.207031 5.00977 0.207031H8.82332C9.318 0.207031 9.72274 0.612031 9.72274 1.10703V3.70803C9.72274 5.84103 11.4586 7.57803 13.5902 7.57803ZM11.9613 0.396012C11.5926 0.0270125 10.954 0.279013 10.954 0.792013V3.93301C10.954 5.24701 12.0693 6.33601 13.4274 6.33601C14.2818 6.34501 15.4689 6.34501 16.4852 6.34501H16.4854C16.998 6.34501 17.2679 5.74201 16.9081 5.38201C16.4894 4.96018 15.9637 4.42927 15.3988 3.85888L15.3932 3.85325L15.3913 3.85133L15.3905 3.8505L15.3902 3.85016C14.2096 2.65803 12.86 1.29526 11.9613 0.396012ZM3.0145 12.0732C3.0145 11.7456 3.28007 11.48 3.60768 11.48H5.32132V9.76639C5.32132 9.43879 5.58689 9.17321 5.9145 9.17321C6.2421 9.17321 6.50768 9.43879 6.50768 9.76639V11.48H8.22131C8.54892 11.48 8.8145 11.7456 8.8145 12.0732C8.8145 12.4008 8.54892 12.6664 8.22131 12.6664H6.50768V14.38C6.50768 14.7076 6.2421 14.9732 5.9145 14.9732C5.58689 14.9732 5.32132 14.7076 5.32132 14.38V12.6664H3.60768C3.28007 12.6664 3.0145 12.4008 3.0145 12.0732Z" fill="#003c79"></path>
 								</svg>
@@ -471,39 +471,39 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<p><?php _e("To help you to get started, we put together the documentation, support link, videos and FAQs here.","tourfic"); ?></p>
 					</div>
 					<div class="tf-help-center-image">
-						<img src="<?php echo TF_ASSETS_URL; ?>/img/help-center.png" alt="HELP Center Image">
+						<img src="<?php echo TF_ASSETS_URL; ?>/img/help-center.jpg" alt="HELP Center Image">
 					</div>
 				</div>
 
 				<div class="tf-support-document">
 					<div class="tf-single-support">
-						<a href="">
+						<a href="https://themefic.com/docs/tourfic/">
 							<img src="<?php echo TF_ASSETS_URL; ?>/img/tf-documents.png" alt="Document">
 							<h3><?php _e("Documentation","tourfic"); ?></h3>
-							<span><?php _e("Learn More","tourfic"); ?></span>
+							<span><?php _e("Read More","tourfic"); ?></span>
 						</a>
 					</div>
 					<div class="tf-single-support">
-						<a href="">
+						<a href="https://portal.themefic.com/support/">
 							<img src="<?php echo TF_ASSETS_URL; ?>/img/tf-mail.png" alt="Document">
 							<h3><?php _e("Email Support","tourfic"); ?></h3>
-							<span><?php _e("Learn More","tourfic"); ?></span>
+							<span><?php _e("Contact Us","tourfic"); ?></span>
 						</a>
 					</div>
 					
 					<div class="tf-single-support">
-						<a href="">
+						<a href="https://themefic.com/tourfic/">
 							<img src="<?php echo TF_ASSETS_URL; ?>/img/tf-comment.png" alt="Document">
 							<h3><?php _e("Live Chat","tourfic"); ?></h3>
-							<span><?php _e("Learn More","tourfic"); ?></span>
+							<span><?php _e("Chat Now","tourfic"); ?></span>
 						</a>
 					</div>
 					
 					<div class="tf-single-support">
-						<a href="">
+						<a href="https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N">
 							<img src="<?php echo TF_ASSETS_URL; ?>/img/tf-tutorial.png" alt="Document">
 							<h3><?php _e("Video Tutorials","tourfic"); ?></h3>
-							<span><?php _e("Learn More","tourfic"); ?></span>
+							<span><?php _e("Watch Video","tourfic"); ?></span>
 						</a>
 					</div>
 				</div>
@@ -516,14 +516,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-single-faq">
 								<div class="tf-faq-title">
 									<i class="fas fa-angle-down"></i>
-									<h4><?php _e("How to create zoom event?","tourfic"); ?></h4>
+									<h4><?php _e("What is Tourfic? ","tourfic"); ?></h4>
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									You have to give valid connection details in Eventin=>Settings=>User data.
-									After fill up “Api key”, “Secret key” enter “Save changes” and then check connection. After successful connection navigate to Eventin=>Zoom to create a meeting.
-									Note: You must have successful connection to zoom api).You will get meeting id from zoom. Place your meeting id to shortcode (For instance: [etn_zoom_api_link meeting_id =’123456789′ link_only=’no’]
-									You can also create meeting and display from elementor widget.
+									<?php _e("Tourfic is the ultimate WordPress travel plugin for hotel booking, tour operator and travel agency websites.","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -532,14 +529,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-single-faq">
 								<div class="tf-faq-title">
 									<i class="fas fa-angle-down"></i>
-									<h4><?php _e("How to create zoom event?","tourfic"); ?></h4>
+									<h4><?php _e("How to install Tourfic? ","tourfic"); ?></h4>
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									You have to give valid connection details in Eventin=>Settings=>User data.
-									After fill up “Api key”, “Secret key” enter “Save changes” and then check connection. After successful connection navigate to Eventin=>Zoom to create a meeting.
-									Note: You must have successful connection to zoom api).You will get meeting id from zoom. Place your meeting id to shortcode (For instance: [etn_zoom_api_link meeting_id =’123456789′ link_only=’no’]
-									You can also create meeting and display from elementor widget.
+									<?php _e("See the installation tab.","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -548,14 +542,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-single-faq">
 								<div class="tf-faq-title">
 									<i class="fas fa-angle-down"></i>
-									<h4><?php _e("How to create zoom event?","tourfic"); ?></h4>
+									<h4><?php _e("Is Free version fully free or there is a gap? ","tourfic"); ?></h4>
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									You have to give valid connection details in Eventin=>Settings=>User data.
-									After fill up “Api key”, “Secret key” enter “Save changes” and then check connection. After successful connection navigate to Eventin=>Zoom to create a meeting.
-									Note: You must have successful connection to zoom api).You will get meeting id from zoom. Place your meeting id to shortcode (For instance: [etn_zoom_api_link meeting_id =’123456789′ link_only=’no’]
-									You can also create meeting and display from elementor widget.
+									<?php _e("Yes, Tourfic is fully free which is available on WordPress.org. This free version will always be free. It also has a pro version (under development) with additional features which you can purchase from our official website.","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -564,14 +555,63 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-single-faq">
 								<div class="tf-faq-title">
 									<i class="fas fa-angle-down"></i>
-									<h4><?php _e("How to create zoom event?","tourfic"); ?></h4>
+									<h4><?php _e("Can I create a hotel booking website with Tourfic? ","tourfic"); ?></h4>
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									You have to give valid connection details in Eventin=>Settings=>User data.
-									After fill up “Api key”, “Secret key” enter “Save changes” and then check connection. After successful connection navigate to Eventin=>Zoom to create a meeting.
-									Note: You must have successful connection to zoom api).You will get meeting id from zoom. Place your meeting id to shortcode (For instance: [etn_zoom_api_link meeting_id =’123456789′ link_only=’no’]
-									You can also create meeting and display from elementor widget.
+									<?php _e("Yes, You create your own professional hotel booking website easily with tourfic.","tourfic"); ?>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="tf-accrodian-item">
+							<div class="tf-single-faq">
+								<div class="tf-faq-title">
+									<i class="fas fa-angle-down"></i>
+									<h4><?php _e("Can I create a travel or tour booking website with Tourfic? ","tourfic"); ?></h4>
+								</div>
+								<div class="tf-faq-desc">
+									<p>
+									<?php _e("Yes, You create your own professional travel or tour booking website easily with tourfic.","tourfic"); ?>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="tf-accrodian-item">
+							<div class="tf-single-faq">
+								<div class="tf-faq-title">
+									<i class="fas fa-angle-down"></i>
+									<h4><?php _e("Can Tourfic be used as WooCommerce Accommodation Bookings? ","tourfic"); ?></h4>
+								</div>
+								<div class="tf-faq-desc">
+									<p>
+									<?php _e("Yes, You create your own professional accommodation booking website easily with tourfic.","tourfic"); ?>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="tf-accrodian-item">
+							<div class="tf-single-faq">
+								<div class="tf-faq-title">
+									<i class="fas fa-angle-down"></i>
+									<h4><?php _e("Can I create a website similar to Booking.com with Tourfic? ","tourfic"); ?></h4>
+								</div>
+								<div class="tf-faq-desc">
+									<p>
+									<?php _e("Yes, You can create your own professional tour operator and travel agency website within 5 minutes, just like Booking.com, Agoda, Hotels.com, Airbnb etc.","tourfic"); ?>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="tf-accrodian-item">
+							<div class="tf-single-faq">
+								<div class="tf-faq-title">
+									<i class="fas fa-angle-down"></i>
+									<h4><?php _e("Is free version supported? ","tourfic"); ?></h4>
+								</div>
+								<div class="tf-faq-desc">
+									<p>
+									<?php _e("Yes, We provide full support on the WordPress.org forums. You can also post questions or bug reports through our Facebook group! or our website. However, please note that, for free version’s support/replies, there can be delays upto 24-48 hours.","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -598,21 +638,21 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 					<div class="dropdown">
 						<div class="list-item">
-							<a href="#" target="_blank">
+							<a href="https://portal.themefic.com/support/" target="_blank">
 								<svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M10.0482 4.37109H4.30125C4.06778 4.37109 3.84329 4.38008 3.62778 4.40704C1.21225 4.6137 0 6.04238 0 8.6751V12.2693C0 15.8634 1.43674 16.5733 4.30125 16.5733H4.66044C4.85799 16.5733 5.1184 16.708 5.23514 16.8608L6.3127 18.2985C6.78862 18.9364 7.56087 18.9364 8.03679 18.2985L9.11435 16.8608C9.24904 16.6811 9.46456 16.5733 9.68905 16.5733H10.0482C12.6793 16.5733 14.107 15.3692 14.3136 12.9432C14.3405 12.7275 14.3495 12.5029 14.3495 12.2693V8.6751C14.3495 5.80876 12.9127 4.37109 10.0482 4.37109ZM4.04084 11.5594C3.53798 11.5594 3.14288 11.1551 3.14288 10.6609C3.14288 10.1667 3.54696 9.76233 4.04084 9.76233C4.53473 9.76233 4.93881 10.1667 4.93881 10.6609C4.93881 11.1551 4.53473 11.5594 4.04084 11.5594ZM7.17474 11.5594C6.67188 11.5594 6.27678 11.1551 6.27678 10.6609C6.27678 10.1667 6.68086 9.76233 7.17474 9.76233C7.66862 9.76233 8.07271 10.1667 8.07271 10.6609C8.07271 11.1551 7.6776 11.5594 7.17474 11.5594ZM10.3176 11.5594C9.81476 11.5594 9.41966 11.1551 9.41966 10.6609C9.41966 10.1667 9.82374 9.76233 10.3176 9.76233C10.8115 9.76233 11.2156 10.1667 11.2156 10.6609C11.2156 11.1551 10.8115 11.5594 10.3176 11.5594Z" fill="#003c79"></path>
 									<path d="M17.9423 5.08086V8.67502C17.9423 10.4721 17.3855 11.6941 16.272 12.368C16.0026 12.5298 15.6884 12.3141 15.6884 11.9996L15.6973 8.67502C15.6973 5.08086 13.641 3.0232 10.0491 3.0232L4.58048 3.03219C4.26619 3.03219 4.05067 2.7177 4.21231 2.44814C4.88578 1.33395 6.10702 0.776855 7.89398 0.776855H13.641C16.5055 0.776855 17.9423 2.21452 17.9423 5.08086Z" fill="#003c79"></path>
 								</svg> 
 							<span><?php _e("Need Help?","tourfic"); ?></span>
 							</a>
-							<a href="#" target="_blank">
+							<a href="https://themefic.com/docs/tourfic/" target="_blank">
 								<svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M16.1896 7.57803H13.5902C11.4586 7.57803 9.72274 5.84103 9.72274 3.70803V1.10703C9.72274 0.612031 9.318 0.207031 8.82332 0.207031H5.00977C2.23956 0.207031 0 2.00703 0 5.22003V13.194C0 16.407 2.23956 18.207 5.00977 18.207H12.0792C14.8494 18.207 17.089 16.407 17.089 13.194V8.47803C17.089 7.98303 16.6843 7.57803 16.1896 7.57803ZM8.09478 14.382H4.4971C4.12834 14.382 3.82254 14.076 3.82254 13.707C3.82254 13.338 4.12834 13.032 4.4971 13.032H8.09478C8.46355 13.032 8.76935 13.338 8.76935 13.707C8.76935 14.076 8.46355 14.382 8.09478 14.382ZM9.89363 10.782H4.4971C4.12834 10.782 3.82254 10.476 3.82254 10.107C3.82254 9.73803 4.12834 9.43203 4.4971 9.43203H9.89363C10.2624 9.43203 10.5682 9.73803 10.5682 10.107C10.5682 10.476 10.2624 10.782 9.89363 10.782Z" fill="#003c79"></path>
 								</svg>
 								<span><?php _e("Documentation","tourfic"); ?></span>
 
 							</a>
-							<a href="#" target="_blank">
+							<a href="https://portal.themefic.com/support/" target="_blank">
 								<svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path fill-rule="evenodd" clip-rule="evenodd" d="M13.5902 7.57803H16.1896C16.6843 7.57803 17.089 7.98303 17.089 8.47803V13.194C17.089 16.407 14.8494 18.207 12.0792 18.207H5.00977C2.23956 18.207 0 16.407 0 13.194V5.22003C0 2.00703 2.23956 0.207031 5.00977 0.207031H8.82332C9.318 0.207031 9.72274 0.612031 9.72274 1.10703V3.70803C9.72274 5.84103 11.4586 7.57803 13.5902 7.57803ZM11.9613 0.396012C11.5926 0.0270125 10.954 0.279013 10.954 0.792013V3.93301C10.954 5.24701 12.0693 6.33601 13.4274 6.33601C14.2818 6.34501 15.4689 6.34501 16.4852 6.34501H16.4854C16.998 6.34501 17.2679 5.74201 16.9081 5.38201C16.4894 4.96018 15.9637 4.42927 15.3988 3.85888L15.3932 3.85325L15.3913 3.85133L15.3905 3.8505L15.3902 3.85016C14.2096 2.65803 12.86 1.29526 11.9613 0.396012ZM3.0145 12.0732C3.0145 11.7456 3.28007 11.48 3.60768 11.48H5.32132V9.76639C5.32132 9.43879 5.58689 9.17321 5.9145 9.17321C6.2421 9.17321 6.50768 9.43879 6.50768 9.76639V11.48H8.22131C8.54892 11.48 8.8145 11.7456 8.8145 12.0732C8.8145 12.4008 8.54892 12.6664 8.22131 12.6664H6.50768V14.38C6.50768 14.7076 6.2421 14.9732 5.9145 14.9732C5.58689 14.9732 5.32132 14.7076 5.32132 14.38V12.6664H3.60768C3.28007 12.6664 3.0145 12.4008 3.0145 12.0732Z" fill="#003c79"></path>
 								</svg>
@@ -636,30 +676,49 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					</ul>
 				</div>
 				<div class="tf-setting-license-field">
-				<div class="tf-tab-wrapper">
-					<?php
-					if ( ! empty( $this->option_sections ) ) {
-					$content_count = 0;
-					foreach ( $this->option_sections as $key => $section ) : ?>
-						<div id="<?php echo esc_attr( $key ) ?>" class="tf-tab-content <?php echo $content_count == 0 ? 'active' : ''; ?>">
+					<div class="tf-tab-wrapper">
+						<div id="license" class="tf-tab-content">
+							<div class="tf-field tf-field-callback" style="width: 100%;">
+								<div class="tf-fieldset"></div>
+							</div>
+							<?php 
+							$licenseKey = ! empty( tfliopt( 'license-key' ) ) ? tfliopt( 'license-key' ) : '';
+							$liceEmail  = ! empty( tfliopt( 'license-email' ) ) ? tfliopt( 'license-email' ) : '';
+							
+							if ( TourficProBase::CheckWPPlugin( $licenseKey, $liceEmail, $licenseMessage, $responseObj, TF_PRO_PATH . 'tourfic-pro.php' ) ) {
+								tf_license_info();
+							} else {
+							?>
+							<div class="tf-field tf-field-text" style="width: 100%;">
+								<label for="tf_settings[license-key]" class="tf-field-label"> <?php _e("License Key","tourfic"); ?></label>
 
-							<?php
-							if ( ! empty( $section['fields'] ) ):
-								foreach ( $section['fields'] as $field ) :
-									if($field['id']=="tf_license_msg" || $field['id']=="license-key" || $field['id']=="license-email" || $field['id']=="tf_license_activation" || $field['id']=="license_callback"){
+								<span class="tf-field-sub-title"><?php _e("Enter your license key here, to activate the product, and get full feature updates and premium support.","tourfic"); ?></span>
 
-									$default = isset( $field['default'] ) ? $field['default'] : '';
-									$value   = isset( $tf_option_value[ $field['id'] ] ) ? $tf_option_value[ $field['id'] ] : $default;
+								<div class="tf-fieldset">
+									<input type="text" name="tf_settings[license-key]" id="tf_settings[license-key]" value="" placeholder="xxxxxxxx-xxxxxxxx-xxxxxxxx-xxxxxxxx" />
+								</div>
+							</div>
 
-									$tf_option = new TF_Options();
-									$tf_option->field( $field, $value, $this->option_id );
-									}
-								endforeach;
-							endif; ?>
+							<div class="tf-field tf-field-text" style="width: 100%;">
+								<label for="tf_settings[license-email]" class="tf-field-label"> <?php _e("License Email ","tourfic"); ?></label>
 
+								<span class="tf-field-sub-title"><?php _e("We will send update news of this product by this email address, don't worry, we hate spam","tourfic"); ?></span>
+
+								<div class="tf-fieldset">
+									<input type="text" name="tf_settings[license-email]" id="tf_settings[license-email]" value="" />
+								</div>
+							</div>
+
+							<div class="tf-field tf-field-callback" style="width: 100%;">
+								<div class="tf-fieldset">
+									<div class="tf-license-activate">
+										<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Activate" /></p>
+									</div>
+								</div>
+							</div>
+							<?php } ?>
 						</div>
-					<?php $content_count ++; endforeach;  } ?>
-				</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -701,21 +760,21 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 							<div class="dropdown">
 								<div class="list-item">
-									<a href="#" target="_blank">
+									<a href="https://portal.themefic.com/support/" target="_blank">
 										<svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M10.0482 4.37109H4.30125C4.06778 4.37109 3.84329 4.38008 3.62778 4.40704C1.21225 4.6137 0 6.04238 0 8.6751V12.2693C0 15.8634 1.43674 16.5733 4.30125 16.5733H4.66044C4.85799 16.5733 5.1184 16.708 5.23514 16.8608L6.3127 18.2985C6.78862 18.9364 7.56087 18.9364 8.03679 18.2985L9.11435 16.8608C9.24904 16.6811 9.46456 16.5733 9.68905 16.5733H10.0482C12.6793 16.5733 14.107 15.3692 14.3136 12.9432C14.3405 12.7275 14.3495 12.5029 14.3495 12.2693V8.6751C14.3495 5.80876 12.9127 4.37109 10.0482 4.37109ZM4.04084 11.5594C3.53798 11.5594 3.14288 11.1551 3.14288 10.6609C3.14288 10.1667 3.54696 9.76233 4.04084 9.76233C4.53473 9.76233 4.93881 10.1667 4.93881 10.6609C4.93881 11.1551 4.53473 11.5594 4.04084 11.5594ZM7.17474 11.5594C6.67188 11.5594 6.27678 11.1551 6.27678 10.6609C6.27678 10.1667 6.68086 9.76233 7.17474 9.76233C7.66862 9.76233 8.07271 10.1667 8.07271 10.6609C8.07271 11.1551 7.6776 11.5594 7.17474 11.5594ZM10.3176 11.5594C9.81476 11.5594 9.41966 11.1551 9.41966 10.6609C9.41966 10.1667 9.82374 9.76233 10.3176 9.76233C10.8115 9.76233 11.2156 10.1667 11.2156 10.6609C11.2156 11.1551 10.8115 11.5594 10.3176 11.5594Z" fill="#003c79"></path>
 											<path d="M17.9423 5.08086V8.67502C17.9423 10.4721 17.3855 11.6941 16.272 12.368C16.0026 12.5298 15.6884 12.3141 15.6884 11.9996L15.6973 8.67502C15.6973 5.08086 13.641 3.0232 10.0491 3.0232L4.58048 3.03219C4.26619 3.03219 4.05067 2.7177 4.21231 2.44814C4.88578 1.33395 6.10702 0.776855 7.89398 0.776855H13.641C16.5055 0.776855 17.9423 2.21452 17.9423 5.08086Z" fill="#003c79"></path>
 										</svg> 
 									<span><?php _e("Need Help?","tourfic"); ?></span>
 									</a>
-									<a href="#" target="_blank">
+									<a href="https://themefic.com/docs/tourfic/" target="_blank">
 										<svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M16.1896 7.57803H13.5902C11.4586 7.57803 9.72274 5.84103 9.72274 3.70803V1.10703C9.72274 0.612031 9.318 0.207031 8.82332 0.207031H5.00977C2.23956 0.207031 0 2.00703 0 5.22003V13.194C0 16.407 2.23956 18.207 5.00977 18.207H12.0792C14.8494 18.207 17.089 16.407 17.089 13.194V8.47803C17.089 7.98303 16.6843 7.57803 16.1896 7.57803ZM8.09478 14.382H4.4971C4.12834 14.382 3.82254 14.076 3.82254 13.707C3.82254 13.338 4.12834 13.032 4.4971 13.032H8.09478C8.46355 13.032 8.76935 13.338 8.76935 13.707C8.76935 14.076 8.46355 14.382 8.09478 14.382ZM9.89363 10.782H4.4971C4.12834 10.782 3.82254 10.476 3.82254 10.107C3.82254 9.73803 4.12834 9.43203 4.4971 9.43203H9.89363C10.2624 9.43203 10.5682 9.73803 10.5682 10.107C10.5682 10.476 10.2624 10.782 9.89363 10.782Z" fill="#003c79"></path>
 										</svg>
 										<span><?php _e("Documentation","tourfic"); ?></span>
 
 									</a>
-									<a href="#" target="_blank">
+									<a href="https://portal.themefic.com/support/" target="_blank">
 										<svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path fill-rule="evenodd" clip-rule="evenodd" d="M13.5902 7.57803H16.1896C16.6843 7.57803 17.089 7.98303 17.089 8.47803V13.194C17.089 16.407 14.8494 18.207 12.0792 18.207H5.00977C2.23956 18.207 0 16.407 0 13.194V5.22003C0 2.00703 2.23956 0.207031 5.00977 0.207031H8.82332C9.318 0.207031 9.72274 0.612031 9.72274 1.10703V3.70803C9.72274 5.84103 11.4586 7.57803 13.5902 7.57803ZM11.9613 0.396012C11.5926 0.0270125 10.954 0.279013 10.954 0.792013V3.93301C10.954 5.24701 12.0693 6.33601 13.4274 6.33601C14.2818 6.34501 15.4689 6.34501 16.4852 6.34501H16.4854C16.998 6.34501 17.2679 5.74201 16.9081 5.38201C16.4894 4.96018 15.9637 4.42927 15.3988 3.85888L15.3932 3.85325L15.3913 3.85133L15.3905 3.8505L15.3902 3.85016C14.2096 2.65803 12.86 1.29526 11.9613 0.396012ZM3.0145 12.0732C3.0145 11.7456 3.28007 11.48 3.60768 11.48H5.32132V9.76639C5.32132 9.43879 5.58689 9.17321 5.9145 9.17321C6.2421 9.17321 6.50768 9.43879 6.50768 9.76639V11.48H8.22131C8.54892 11.48 8.8145 11.7456 8.8145 12.0732C8.8145 12.4008 8.54892 12.6664 8.22131 12.6664H6.50768V14.38C6.50768 14.7076 6.2421 14.9732 5.9145 14.9732C5.58689 14.9732 5.32132 14.7076 5.32132 14.38V12.6664H3.60768C3.28007 12.6664 3.0145 12.4008 3.0145 12.0732Z" fill="#003c79"></path>
 										</svg>
@@ -740,14 +799,14 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									$parent_tab_key = ! empty( $section['fields'] ) ? $key : array_key_first( $section['sub_section'] );
 									?>
                                     <div class="tf-admin-tab-item<?php echo ! empty( $section['sub_section'] ) ? ' tf-has-submenu' : '' ?>">
-									<?php if($parent_tab_key!="license"){ ?>
+									
                                         <a href="#<?php echo esc_attr( $parent_tab_key ); ?>"
                                            class="tf-tablinks <?php echo $section_count == 0 ? 'active' : ''; ?>"
                                            data-tab="<?php echo esc_attr( $parent_tab_key ) ?>">
 											<?php echo ! empty( $section['icon'] ) ? '<span class="tf-sec-icon"><i class="' . esc_attr( $section['icon'] ) . '"></i></span>' : ''; ?>
 											<?php echo $section['title']; ?>
                                         </a>
-										<?php } ?>
+										
 										<?php if ( ! empty( $section['sub_section'] ) ): ?>
                                             <ul class="tf-submenu">
 												<?php foreach ( $section['sub_section'] as $sub_key => $sub ): ?>
@@ -780,14 +839,13 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										<?php
 										if ( ! empty( $section['fields'] ) ):
 											foreach ( $section['fields'] as $field ) :
-												if($field['id']!="tf_license_msg" || $field['id']!="license-key" || $field['id']!="license-email" || $field['id']!="tf_license_activation"){
-
+	
 												$default = isset( $field['default'] ) ? $field['default'] : '';
 												$value   = isset( $tf_option_value[ $field['id'] ] ) ? $tf_option_value[ $field['id'] ] : $default;
 
 												$tf_option = new TF_Options();
 												$tf_option->field( $field, $value, $this->option_id );
-												}
+												
 											endforeach;
 										endif; ?>
 

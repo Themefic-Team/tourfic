@@ -1264,6 +1264,28 @@ function tf_migrate_option_data(){
 	}
 
 
+	if ( empty( get_option( 'tf_license_data_migrate_data_204_210_2022' ) ) ) {
+
+		/** License Migrate */
+		
+		$old_setting_option = get_option( 'tourfic_opt' );
+		if(!empty($old_setting_option['license-key']) && !empty($old_setting_option['license-email'])){
+			$tf_settings['license-key']   = $old_setting_option['license-key'];
+			$tf_settings['license-email'] = $old_setting_option['license-email'];
+			update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
+		}else{
+			$tf_setting_option = get_option( 'tf_settings' );
+			$tf_settings['license-key']   = !empty($tf_setting_option['license-key']) ? $tf_setting_option['license-key'] : '';
+			$tf_settings['license-email'] = !empty($tf_setting_option['license-email']) ? $tf_setting_option['license-email'] : '';
+			update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
+		}
+		
+		wp_cache_flush();
+		flush_rewrite_rules( true );
+		update_option( 'tf_license_data_migrate_data_204_210_2022', 2 );
+	}
+
+
 }
 add_action( 'init', 'tf_migrate_option_data' );
 
@@ -1370,34 +1392,7 @@ function tf_save_custom_fields(){
         update_option( 'hotel_slug',  $_POST['hotel_slug'] );
     }
 
-	/**
-	 * Order Data
-	 * Create Order Data Database   
-	 * @author jahid
-	 */
-
-	global $wpdb; 
-    $order_table_name = $wpdb->prefix.'tf_order_data';
-    $charset_collate = $wpdb->get_charset_collate();
-    require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-    $sql = "CREATE TABLE IF NOT EXISTS $order_table_name (
-        id bigint(20) NOT NULL AUTO_INCREMENT,
-        order_id bigint(20) NOT NULL,
-        post_id bigint(20) NOT NULL,
-        post_type varchar(255),
-        room_number varchar(255) NULL,
-        check_in date NOT NULL,  
-        check_out date NULL,  
-        billing_details text,
-        shipping_details text,
-        order_details text,
-        customer_id bigint(11) NOT NULL,
-        payment_method varchar(255),
-        ostatus varchar(255),
-        order_date datetime NOT NULL,
-        PRIMARY KEY  (id)
-    ) $charset_collate;";
-    dbDelta( $sql ); 
+	
 }
 add_action( 'admin_init', 'tf_save_custom_fields' );
 
