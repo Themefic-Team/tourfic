@@ -1479,6 +1479,26 @@ function tf_vendor_bulk_filter_callback(){
 	if(sanitize_text_field( $_POST['balkaction'] )=="pending"){
 		foreach($_POST['vendorlist'] as $single){
 			update_user_meta($single['value'], "tf_vendor_selling", "disabled");
+
+			/** Vendor Tours */
+			$tours = get_posts( [ 'post_type' => 'tf_tours', 'numberposts' => - 1, 'author' =>  $single['value'], ] );
+			foreach ( $tours as $tour ) {
+				$vendor_tours_pending = array(
+					'ID'            => $tour->ID,
+					'post_status'   => 'pending',
+				);
+				wp_update_post( $vendor_tours_pending );
+			}
+
+			/** Vendor Hotels */
+			$hotels = get_posts( [ 'post_type' => 'tf_hotel', 'numberposts' => - 1, 'author' =>  $single['value'], ] );
+			foreach ( $hotels as $hotel ) {
+				$vendor_hotels_pending = array(
+					'ID'            => $hotel->ID,
+					'post_status'   => 'pending',
+				);
+				wp_update_post( $vendor_hotels_pending );
+			}
 		}
 	}
 	die();
@@ -1512,8 +1532,48 @@ function tf_vendor_selling_filter_callback(){
 
 	if(sanitize_text_field( $_POST['status'] )=="enabled"){
 		update_user_meta($_POST['vendorid'], "tf_vendor_selling", "enabled");
+
+		/** Vendor Tours */
+		$tours = get_posts( [ 'post_type' => 'tf_tours', 'numberposts' => - 1, 'author' =>  $_POST['vendorid'], 'post_status' => 'pending' ] );
+		foreach ( $tours as $tour ) {
+			$vendor_tours_publish = array(
+				'ID'            => $tour->ID,
+				'post_status'   => 'publish',
+			);
+			wp_update_post( $vendor_tours_publish );
+		}
+
+		/** Vendor Hotels */
+		$hotels = get_posts( [ 'post_type' => 'tf_hotel', 'numberposts' => - 1, 'author' =>  $_POST['vendorid'], 'post_status' => 'pending' ] );
+		foreach ( $hotels as $hotel ) {
+			$vendor_hotels_publish = array(
+				'ID'            => $hotel->ID,
+				'post_status'   => 'publish',
+			);
+			wp_update_post( $vendor_hotels_publish );
+		}
 	}else{
 		update_user_meta($_POST['vendorid'], "tf_vendor_selling", "disabled");
+
+		/** Vendor Tours */
+		$tours = get_posts( [ 'post_type' => 'tf_tours', 'numberposts' => - 1, 'author' =>  $_POST['vendorid'], ] );
+		foreach ( $tours as $tour ) {
+			$vendor_tours_pending = array(
+				'ID'            => $tour->ID,
+				'post_status'   => 'pending',
+			);
+			wp_update_post( $vendor_tours_pending );
+		}
+
+		/** Vendor Hotels */
+		$hotels = get_posts( [ 'post_type' => 'tf_hotel', 'numberposts' => - 1, 'author' =>  $_POST['vendorid'], ] );
+		foreach ( $hotels as $hotel ) {
+			$vendor_hotels_pending = array(
+				'ID'            => $hotel->ID,
+				'post_status'   => 'pending',
+			);
+			wp_update_post( $vendor_hotels_pending );
+		}
 	}
 	die();
 }

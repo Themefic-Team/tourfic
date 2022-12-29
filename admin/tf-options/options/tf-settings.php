@@ -269,11 +269,10 @@ TF_Settings::option( 'tf_settings', array(
 									'subtitle' => __('ON: When partner posts a service, it needs to be approved by administrator ','tourfic'),
 								),
 								array(
-									'id'    => 'partner_post',
+									'id'    => 'partner_commission',
 									'type'  => 'number',
 									'label' => __( 'Commission(%)', 'tourfic' ),
-									'subtitle' => __('Enter commission of partner for admin after each item is booked ','tourfic'),
-									'attributes'  => array(
+									'subtitle' => __('Enter commission of partner for admin after each item is booked ','tourfic'),'attributes'  => array(
 										'min' => '0',
 									),
 								),
@@ -356,8 +355,144 @@ TF_Settings::option( 'tf_settings', array(
 								),
 							),
 						),
+						array(
+							'id'     => 'login-setting',
+							'title'  => 'Social Login Options',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'    => 'vendor-google-login',
+									'type'  => 'switch',
+									'label' => __( 'Allow Google Login', 'tourfic' ),
+									'subtitle' => __('ON: Partner is allowed to Google Login','tourfic'),
+								),
+								array(
+									'id'      => 'app_id',
+									'type'    => 'text',
+									'label' => __( 'Google App Client ID', 'tourfic' ),
+									'subtitle' => __('Enter the App ID','tourfic'),
+									'dependency' => array(
+										array( 'vendor-google-login', '==', true ),
+									),
+								),
+								array(
+									'id'      => 'app_secret_id',
+									'type'    => 'text',
+									'label' => __( 'Google App Client Secret', 'tourfic' ),
+									'subtitle' => __('Enter the App Secret','tourfic'),
+									'dependency' => array(
+										array( 'vendor-google-login', '==', true ),
+									),
+								),
+								array(
+									'id'      => 'app_redirect_uri',
+									'type'    => 'text',
+									'label' => __( 'Google Redirect URI', 'tourfic' ),
+									'subtitle' => __('Enter the Redirect URI','tourfic'),
+									'dependency' => array(
+										array( 'vendor-google-login', '==', true ),
+									),
+								),
+							),
+						),
 					),
-				)
+				),
+				array(
+					'id'       => 'vendor-registration',
+					'class'    => 'disable-sortable',
+					'type'     => 'repeater',
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'label'    => __( 'Registration Fields for Vendor', 'tourfic' ),
+					'subtitle' => __( 'Custom fields allowed', 'tourfic' ),
+					'fields'   => array(
+						array(
+							'id'    => 'reg-field-label',
+							'type'  => 'text',
+							'label' => __( 'Label', 'tourfic' ),
+						),
+						array(
+							'id'    => 'reg-field-name',
+							'type'  => 'text',
+							'label' => __( 'Name', 'tourfic' ),
+							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
+						),
+						array(
+							'id'      => 'reg-fields-type',
+							'type'    => 'select',
+							'label'   => __( 'Field Type', 'tourfic' ),
+							'options' => array(
+								'text' => __( 'Text', 'tourfic' ),
+								'email' => __( 'Email', 'tourfic' ),
+								'password' => __( 'Password', 'tourfic' ),
+								'textarea' => __( 'Textarea', 'tourfic' ),
+								'radio' => __( 'Radio', 'tourfic' ),
+							),
+						),
+						array(
+							'id'     => 'reg-options',
+							'type'   => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'  => __( 'Option Label', 'tourfic' ),
+							'dependency' => array(
+								array( 'reg-fields-type', '==', 'radio' ),
+							),
+							'fields' => array(
+								array(
+									'label'   => __( 'Field Label', 'tourfic' ),
+									'id'      => 'option-label',
+									'type'    => 'text',
+								),
+								array(
+									'label'   => __( 'Field Value', 'tourfic' ),
+									'id'      => 'option-value',
+									'type'    => 'text',
+								),
+							),
+							
+						),
+						array(
+							'id'    => 'reg-field-placeholder',
+							'type'  => 'text',
+							'label' => __( 'Placeholder', 'tourfic' ),
+						),
+						array(
+							'id'    => 'reg-field-required',
+							'type'  => 'switch',
+							'label' => __( 'Required Field ?', 'tourfic' ),
+						),
+
+					),
+					// 'default'  => array(
+					// 	array(
+					// 		'reg-field-label' => __( 'Username', 'tourfic' ),
+					// 		'reg-field-name' => __( 'tf_user', 'tourfic' ),
+					// 		'reg-fields-type' => 'text',
+					// 		'reg-field-placeholder' => __( 'Enter Your Username', 'tourfic' ),
+					// 		'reg-field-required' => true,
+					// 	),
+					// 	array(
+					// 		'reg-field-label' => __( 'Email', 'tourfic' ),
+					// 		'reg-field-name' => __( 'tf_email', 'tourfic' ),
+					// 		'reg-fields-type' => 'email',
+					// 		'reg-field-placeholder' => __( 'Enter Your Email', 'tourfic' ),
+					// 		'reg-field-required' => true,
+					// 	),
+					// 	array(
+					// 		'reg-field-label' => __( 'Password', 'tourfic' ),
+					// 		'reg-field-name' => __( 'tf_pass', 'tourfic' ),
+					// 		'reg-field-placeholder' => __( 'Password', 'tourfic' ),
+					// 		'reg-fields-type' => 'password',
+					// 		'reg-field-required' => true,
+					// 	),
+					// 	array(
+					// 		'reg-field-label' => __( 'Confirm Password', 'tourfic' ),
+					// 		'reg-field-name' => __( 'tf_pass_confirm', 'tourfic' ),
+					// 		'reg-field-placeholder' => __( 'Confirm Password', 'tourfic' ),
+					// 		'reg-fields-type' => 'password',
+					// 		'reg-field-required' => true,
+					// 	)
+					// )
+				),
 			),
 		),
 
