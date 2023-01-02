@@ -18,6 +18,8 @@ class TFVENDORTable extends WP_List_Table {
 			'uname'   => __( 'Store', 'tourfic' ),
 			'uemail'  => __( 'Email', 'tourfic' ),
 			'uphone'  => __( 'Phone', 'tourfic' ),
+			'earns'  => __( 'Total Earns', 'tourfic' ),
+			'withdraw'  => __( 'Total Withdraw', 'tourfic' ),
 			'created_at'  => __( 'Registered', 'tourfic' ),
 			'status'  => __( 'Status', 'tourfic' ),
 		];
@@ -63,7 +65,7 @@ class TFVENDORTable extends WP_List_Table {
 		return date("M d, Y", strtotime($item->user_registered));
 	}
 	function column_default( $item, $column_name ) {
-		tf_var_dump($item);
+		
 	}
     function extra_tablenav( $which ) {
 		if('top'==$which):
