@@ -7,7 +7,6 @@
   input {
     width: 100%;
     padding: 12px 8px 12px 12px;
-    border: none;
     background-color: $blue0;
     border-radius: 4px;
     height: 48px;
@@ -48,7 +47,7 @@
     }
   }
 
-  i{
+  i {
     position: absolute;
     top: 50%;
     right: 8px;
