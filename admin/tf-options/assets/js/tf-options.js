@@ -368,12 +368,12 @@
             let $this = $(this),
                 submitBtn = $this.find('.tf-submit-btn'),
                 data = new FormData(this);
-                var fontsfile = $('.itinerary-fonts-file').prop("files");
-                if(typeof fontsfile !== "undefined"){
-                    for(var i=0; i<fontsfile.length; i++) {
+            var fontsfile = $('.itinerary-fonts-file').prop("files");
+            if (typeof fontsfile !== "undefined") {
+                for (var i = 0; i < fontsfile.length; i++) {
                     data.append('file[]', fontsfile[i]);
-                    }
                 }
+            }
             data.append('action', 'tf_options_save');
 
             $.ajax({
@@ -544,14 +544,14 @@
                 }
             });
 
-             // Replace Old editor
-             add_value.find('.wp-editor-wrap').each(function () {
+            // Replace Old editor
+            add_value.find('.wp-editor-wrap').each(function () {
                 var textarea = $(this).find('.tf_wp_editor').show();
                 // Get content of a specific editor:
-                var tf_editor_ex_data = $('#'+textarea.attr('id')+'').val();
-                if(tf_editor_ex_data && typeof tf_editor_ex_data !== "undefined"){
+                var tf_editor_ex_data = $('#' + textarea.attr('id') + '').val();
+                if (tf_editor_ex_data && typeof tf_editor_ex_data !== "undefined") {
                     var textarea_content = tinymce.get(textarea.attr('id')).getContent();
-                }else{
+                } else {
                     var textarea_content = '';
                 }
                 textarea.val(textarea_content);
@@ -566,7 +566,7 @@
 
             // replace new editor
             add_value.find('textarea.parent_wp_editor').each(function () {
-                var count =  Math.random().toString(36).substring(3,9) + 1 ; 
+                var count = Math.random().toString(36).substring(3, 9) + 1;
                 this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + count + '');
                 var parent_repeater_id = $(this).attr('id');
                 TF_wp_editor(parent_repeater_id);
@@ -579,7 +579,7 @@
                 var $this = $(this);
                 tfSelect2Int($this);
             });
-            
+
             // repeater dependency repeater
             TF_dependency();
         });
@@ -698,10 +698,10 @@
             clone_value.find('.wp-editor-wrap').each(function () {
                 var textarea = $(this).find('.tf_wp_editor').show();
                 // Get content of a specific editor:
-                var tf_editor_ex_data = $('#'+textarea.attr('id')+'').val();
-                if(tf_editor_ex_data && typeof tf_editor_ex_data !== "undefined"){
+                var tf_editor_ex_data = $('#' + textarea.attr('id') + '').val();
+                if (tf_editor_ex_data && typeof tf_editor_ex_data !== "undefined") {
                     var textarea_content = tinymce.get(textarea.attr('id')).getContent();
-                }else{
+                } else {
                     var textarea_content = '';
                 }
                 textarea.val(textarea_content);
@@ -727,8 +727,8 @@
             $(this).closest('.tf-repeater-wrap').append(clone_value).show();
 
             // Clone Wp Editor
-            clone_value.find('textarea.parent_wp_editor, textarea.wp_editor').each(function () { 
-                var count =  Math.random().toString(36).substring(3,9) + 1 ; 
+            clone_value.find('textarea.parent_wp_editor, textarea.wp_editor').each(function () {
+                var count = Math.random().toString(36).substring(3, 9) + 1;
                 this.id = this.id.replace('' + current_field + '__' + repeater_count, '' + current_field + '__' + count + '');
                 var parent_repeater_id = $(this).attr('id');
                 TF_wp_editor(parent_repeater_id);
@@ -748,12 +748,12 @@
         // Repeater show hide
         $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
             var tf_repater_fieldname = $(this).closest('.tf-single-repeater').find('input[name=tf_current_field]').val();
-            $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+'').find('.tf-repeater-content-wrap').slideToggle();
-            $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+'').children('.tf-repeater-content-wrap').toggleClass('hide');
-            if ($(this).closest('.tf-single-repeater-'+tf_repater_fieldname+'').children('.tf-repeater-content-wrap').hasClass('hide')== true) {
-                $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-down"></i>');
+            $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').find('.tf-repeater-content-wrap').slideToggle();
+            $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').toggleClass('hide');
+            if ($(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').hasClass('hide') == true) {
+                $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + ' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-down"></i>');
             } else {
-                $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-up"></i>');
+                $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + ' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-up"></i>');
             }
         });
 
@@ -820,7 +820,7 @@ var frame, gframe;
         var fieldname = $(this).attr("tf-field-name");
         var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
-        $this.parent().parent().find('input').val(''); 
+        $this.parent().parent().find('input').val('');
         $this.parent().html('');
 
     });
@@ -843,7 +843,7 @@ var frame, gframe;
         // Single Image Upload
 
         $('body').on('click', '.tf-media-upload', function (e) {
-            var $this = $(this); 
+            var $this = $(this);
             var fieldname = $(this).attr("tf-field-name");
             var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
@@ -911,7 +911,6 @@ var frame, gframe;
             gframe.open();
             return false;
         });
-
 
 
         // Texonomy submit event
@@ -1044,8 +1043,8 @@ var frame, gframe;
                 $latitude.on('change', input_update_latlng);
                 $longitude.on('change', input_update_latlng);
 
-                setInterval(function() {   
-                    mapInit.invalidateSize(); 
+                setInterval(function () {
+                    mapInit.invalidateSize();
                 }, 100);
             });
         }
@@ -1053,7 +1052,7 @@ var frame, gframe;
         $('.tf-mobile-tabs').click(function (e) {
             e.preventDefault();
             $(".tf-admin-tab").toggleClass('active');
-        }); 
+        });
 
 
         $('.tf-faq-title').click(function () {
@@ -1327,7 +1326,7 @@ var frame, gframe;
 
 (function ($) {
     $(document).ready(function () {
-        if(tf_options.tf_chart_enable==1){    
+        if (tf_options.tf_chart_enable == 1) {
             var ctx = document.getElementById('tf_months'); // node
             var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context
             var ctx = $('#tf_months'); // jQuery instance
@@ -1336,30 +1335,30 @@ var frame, gframe;
             var chart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ["January","February","March","April","May","June","July","August","September","October","November","December"],
+                    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                     // Information about the dataset
-                datasets: [{
-                        label : "Completed Booking",
+                    datasets: [{
+                        label: "Completed Booking",
                         borderColor: '#003C79',
                         tension: 0.1,
-                        data: tf_options.tf_complete_order,       
+                        data: tf_options.tf_complete_order,
                         fill: false
                     },
-                    {
-                        label : "Cancelled Booking",
-                        borderColor: 'red',
-                        tension: 0.1,
-                        data: tf_options.tf_cancel_orders, 
-                        fill: false
-                    }
-                ]
+                        {
+                            label: "Cancelled Booking",
+                            borderColor: 'red',
+                            tension: 0.1,
+                            data: tf_options.tf_cancel_orders,
+                            fill: false
+                        }
+                    ]
                 },
 
                 // Configuration options
                 options: {
-                layout: {
-                padding: 10,
-                },
+                    layout: {
+                        padding: 10,
+                    },
                     legend: {
                         display: true
                     },
@@ -1374,7 +1373,7 @@ var frame, gframe;
 
         $(document).on('change', '#tf-month-report', function () {
             var monthTarget = $(this).val();
-            if(monthTarget!=0){
+            if (monthTarget != 0) {
                 $("#tf-report-loader").addClass('show');
                 $('.tf-order-report').find('iframe').remove();
                 jQuery.ajax({
@@ -1396,28 +1395,28 @@ var frame, gframe;
                             data: {
                                 labels: response.months_day_number,
                                 // Information about the dataset
-                            datasets: [{
-                                    label : "Completed Booking",
+                                datasets: [{
+                                    label: "Completed Booking",
                                     borderColor: '#003C79',
                                     tension: 0.1,
-                                    data: response.tf_complete_orders,       
+                                    data: response.tf_complete_orders,
                                     fill: false
                                 },
-                                {
-                                    label : "Cancelled Booking",
-                                    borderColor: 'red',
-                                    tension: 0.1,
-                                    data: response.tf_cancel_orders, 
-                                    fill: false
-                                }
-                            ]
+                                    {
+                                        label: "Cancelled Booking",
+                                        borderColor: 'red',
+                                        tension: 0.1,
+                                        data: response.tf_cancel_orders,
+                                        fill: false
+                                    }
+                                ]
                             },
 
                             // Configuration options
                             options: {
-                            layout: {
-                            padding: 10,
-                            },
+                                layout: {
+                                    padding: 10,
+                                },
                                 legend: {
                                     display: true
                                 },

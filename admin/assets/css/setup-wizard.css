@@ -1,3 +1,71 @@
+/*
+Button
+*/
+.tf-admin-btn {
+  display: inline-flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 25px;
+  border: 1px solid #003c79;
+  border-radius: 4px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+}
+.tf-admin-btn i {
+  margin-right: 8px;
+  font-size: 18px;
+}
+.tf-admin-btn.tf-btn-secondary {
+  background-color: #003c79;
+  border-color: #003c79;
+  color: #fff;
+  font-weight: 600;
+}
+.tf-admin-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 
+body.admin_page_tf-setup-wizard {
+  background-color: #ecf5ff;
+}
+
+.admin_page_tf-setup-wizard #wpcontent {
+  margin-left: 0 !important;
+}
+
+.admin_page_tf-setup-wizard #wpbody-content, .admin_page_tf-setup-wizard #wpcontent {
+  padding: 0;
+  overflow-x: hidden !important;
+  min-height: calc(100vh - 32px);
+}
+
+.admin_page_tf-setup-wizard #adminmenumain, .admin_page_tf-setup-wizard .error, .admin_page_tf-setup-wizard .notice, .admin_page_tf-setup-wizard .update-nag, .admin_page_tf-setup-wizard .updated, .admin_page_tf-setup-wizard div#wpadminbar, .admin_page_tf-setup-wizard div#wpfooter {
+  display: none;
+}
+
+.tf-setup-wizard-wrapper {
+  max-width: 900px;
+  margin: auto;
+  width: calc(100% - 40px);
+}
+
+.tf-setup-header {
+  padding: 0 0 30px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
 
 /*# sourceMappingURL=setup-wizard.css.map */

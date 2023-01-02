@@ -49,9 +49,11 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		/**
 		 * Enqueue scripts
 		 */
-		public function tf_setup_wizard_enqueue_scripts() {
-			wp_enqueue_style( 'tf-setup-wizard', TF_URL . 'admin/assets/css/setup-wizard.css', [], TOURFIC );
-			wp_enqueue_script( 'tf-setup-wizard', TF_URL . 'admin/assets/js/setup-wizard.js', [ 'jquery' ], TOURFIC, true );
+		public function tf_setup_wizard_enqueue_scripts($screen) {
+            if ( $screen == 'admin_page_tf-setup-wizard' ) {
+	            wp_enqueue_style( 'tf-setup-wizard', TF_URL . 'admin/assets/css/setup-wizard.css', [], TOURFIC );
+	            wp_enqueue_script( 'tf-setup-wizard', TF_URL . 'admin/assets/js/setup-wizard.js', [ 'jquery' ], TOURFIC, true );
+            }
 		}
 
 		/**
@@ -64,7 +66,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                 <div class="tf-setup-container">
                     <div class="tf-setup-header">
                         <div class="tf-setup-header-left">
-                            <a href="http://tourfic.wp/wp-admin//admin.php?page=etn-event-settings" class="ant-btn ant-btn-default back-btn"><span>Back to dashboard</span></a>
+                            <a href="<?php echo esc_url(admin_url('admin.php?page=tf_settings')); ?>" class="tf-admin-btn tf-btn-secondary back-to-dashboard"><span><?php _e('Back to dashboard', 'tourfic') ?></span></a>
                         </div>
                         <div class="tf-setup-header-right">
                             <span class="get-help-link">Having troubles? <a class="" href="https://support.themewinter.com/docs/plugins/docs/eventin/"> Get help </a></span>
