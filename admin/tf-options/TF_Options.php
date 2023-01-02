@@ -55,11 +55,11 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		 */
 		public function load_files() {
 			// Metaboxes Class
-			require_once $this->tf_options_file_path( 'Classes/TF_Metabox.php' );
+			require_once $this->tf_options_file_path( 'classes/TF_Metabox.php' );
 			// Settings Class
-			require_once $this->tf_options_file_path( 'Classes/TF_Settings.php' );
+			require_once $this->tf_options_file_path( 'classes/TF_Settings.php' );
 			//Taxonomy Class
-			require_once $this->tf_options_file_path( 'Classes/TF_Taxonomy_Metabox.php' );
+			require_once $this->tf_options_file_path( 'classes/TF_Taxonomy_Metabox.php' );
 
 		}
 
