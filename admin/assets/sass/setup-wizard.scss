@@ -6,14 +6,17 @@
 body.admin_page_tf-setup-wizard {
   background-color: #ecf5ff;
 }
+
 .admin_page_tf-setup-wizard #wpcontent {
-  margin-left: 0!important;
+  margin-left: 0 !important;
 }
+
 .admin_page_tf-setup-wizard #wpbody-content, .admin_page_tf-setup-wizard #wpcontent {
   padding: 0;
-  overflow-x: hidden!important;
+  overflow-x: hidden !important;
   min-height: calc(100vh - 32px);
 }
+
 .admin_page_tf-setup-wizard #adminmenumain, .admin_page_tf-setup-wizard .error, .admin_page_tf-setup-wizard .notice, .admin_page_tf-setup-wizard .update-nag, .admin_page_tf-setup-wizard .updated, .admin_page_tf-setup-wizard div#wpadminbar, .admin_page_tf-setup-wizard div#wpfooter {
   display: none;
 }
@@ -23,9 +26,94 @@ body.admin_page_tf-setup-wizard {
   margin: auto;
   width: calc(100% - 40px);
 }
+
 .tf-setup-header {
   padding: 0 0 30px;
   @include flexbox();
   @include justify-content(space-between);
+  @include align-items(center);
+
+  .get-help-link a {
+    color: #000;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+}
+
+/*
+Welcome Step
+*/
+.tf-setup-content-layout {
+  padding: 40px 50px 25px;
+  box-shadow: 0 0 200px rgb(0 0 0 / 8%);
+  border-radius: 20px;
+  background-color: #fff;
+  text-align: center;
+  min-height: 700px;
+  display: none;
+  @include flex-direction(column);
+  @include justify-content(center);
+  @include align-items(center);
+
+  &.active{
+    @include flexbox();
+  }
+
+  .welcome-img {
+    margin-bottom: 50px;
+    min-height: 295px;
+  }
+
+  .tf-setup-welcome-title {
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 47px;
+    color: #11142e;
+    margin: 0 0 10px;
+  }
+
+  .tf-setup-welcome-description {
+    max-width: 450px;
+    margin: 14px auto 30px;
+  }
+
+  .tf-setup-welcome-footer {
+    @include flexbox();
+    @include flex-direction(column);
     @include align-items(center);
+
+    .tf-admin-btn {
+      margin-bottom: 10px;
+    }
+
+    .tf-link-btn {
+      color: #11142e;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+  }
+}
+
+/*
+Steps
+*/
+.tf-setup-step-container {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  .tf-setup-step-layout{
+    padding: 40px 50px 25px;
+    box-shadow: 0 0 200px rgb(0 0 0 / 8%);
+    border-radius: 20px;
+    background-color: #fff;
+    text-align: center;
+    min-height: 700px;
+    @include flexbox();
+    @include flex-direction(column);
+    @include justify-content(center);
+    @include align-items(center);
+  }
 }

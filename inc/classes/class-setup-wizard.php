@@ -9,6 +9,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 	class TF_Setup_Wizard {
 
 		private static $instance = null;
+		private static $current_step = null;
 
 		/**
 		 * Singleton instance
@@ -26,6 +27,8 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			add_action( 'admin_menu', [ $this, 'tf_wizard_menu' ], 100 );
 			add_action( 'after_setup_theme', [ $this, 'tf_activation_redirect' ], 99 );
 			add_action( 'admin_enqueue_scripts', [ $this, 'tf_setup_wizard_enqueue_scripts' ] );
+
+			self::$current_step = isset( $_GET['step'] ) ? sanitize_key( $_GET['step'] ) : 'welcome';
 		}
 
 		/**
@@ -49,39 +52,38 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		/**
 		 * Enqueue scripts
 		 */
-		public function tf_setup_wizard_enqueue_scripts($screen) {
-            if ( $screen == 'admin_page_tf-setup-wizard' ) {
-	            wp_enqueue_style( 'tf-setup-wizard', TF_URL . 'admin/assets/css/setup-wizard.css', [], TOURFIC );
-	            wp_enqueue_script( 'tf-setup-wizard', TF_URL . 'admin/assets/js/setup-wizard.js', [ 'jquery' ], TOURFIC, true );
-            }
+		public function tf_setup_wizard_enqueue_scripts( $screen ) {
+			if ( $screen == 'admin_page_tf-setup-wizard' ) {
+				wp_enqueue_style( 'tf-setup-wizard', TF_URL . 'admin/assets/css/setup-wizard.css', [], TOURFIC );
+				wp_enqueue_script( 'tf-setup-wizard', TF_URL . 'admin/assets/js/setup-wizard.js', [ 'jquery' ], TOURFIC, true );
+			}
 		}
 
 		/**
 		 * Setup wizard page
 		 */
 		public function tf_wizard_page() {
-			$step = isset( $_GET['step'] ) ? sanitize_text_field( $_GET['step'] ) : 'welcome';
 			?>
             <div class="tf-setup-wizard-wrapper" id="tf-setup-wizard-wrapper">
                 <div class="tf-setup-container">
                     <div class="tf-setup-header">
                         <div class="tf-setup-header-left">
-                            <a href="<?php echo esc_url(admin_url('admin.php?page=tf_settings')); ?>" class="tf-admin-btn tf-btn-secondary back-to-dashboard"><span><?php _e('Back to dashboard', 'tourfic') ?></span></a>
+                            <a href="<?php echo esc_url( admin_url( 'admin.php?page=tf_settings' ) ); ?>" class="tf-admin-btn tf-btn-secondary back-to-dashboard"><span><?php _e( 'Back to dashboard', 'tourfic' ) ?></span></a>
                         </div>
                         <div class="tf-setup-header-right">
                             <span class="get-help-link">Having troubles? <a class="" href="https://support.themewinter.com/docs/plugins/docs/eventin/"> Get help </a></span>
                         </div>
                     </div>
 					<?php
-					if ( $step == 'welcome' ) {
-						$this->tf_setup_welcome_step();
-					} elseif ( $step == 'step_one' ) {
-						$this->tf_setup_step_one();
-					} elseif ( $step == 'step_two' ) {
-						$this->setup_step_two();
-					} elseif ( $step == 'finish' ) {
-						$this->tf_setup_finish_step();
-					}
+					//					if ( $step == 'welcome' ) {
+					$this->tf_setup_welcome_step();
+					//					} elseif ( $step == 'step_one' ) {
+					$this->tf_setup_step_one();
+					//					} elseif ( $step == 'step_two' ) {
+					$this->setup_step_two();
+					//					} elseif ( $step == 'finish' ) {
+					$this->tf_setup_finish_step();
+					//					}
 					?>
                 </div>
             </div>
@@ -93,15 +95,15 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		 */
 		public function tf_setup_welcome_step() {
 			?>
-            <section class="ant-layout etn-onboard-content-layout">
-                <div class="welcome-img"><img src="http://tourfic.wp/wp-content/plugins/wp-event-solution/build/assets/images/welcome.png" alt="Welcome to Eventin!"></div>
-                <h1 class="ant-typography welcome-title">Welcome to Eventin!</h1>
-                <div class="ant-typography onboard-description welcome-desk">Thanks for choosing Eventin to manage your next events. Easily create and manage unlimited online and offline events.</div>
-                <div class="etn-button-group">
-                    <button type="button" class="ant-btn ant-btn-primary ant-btn-lg onboard-btn"><span>Let's Start</span></button>
-                    <div class="skip-link-wrap"><a href="http://tourfic.wp/wp-admin/edit.php?post_type=etn" class="ant-btn ant-btn-link link-btn"><span>I know about this, skip</span></a></div>
+            <div class="tf-setup-content-layout tf-welcome-step <?php echo self::$current_step == 'welcome' ? 'active' : ''; ?>">
+                <div class="welcome-img"><img src="http://tourfic.wp/wp-content/plugins/wp-event-solution/build/assets/images/welcome.png" alt="<?php esc_attr_e( 'Welcome to Tourfic!', 'tourfic' ) ?>"></div>
+                <h1 class="tf-setup-welcome-title"><?php _e( 'Welcome to Tourfic!', 'tourfic' ) ?></h1>
+                <div class="tf-setup-welcome-description"><?php _e( 'Thanks for choosing Tourfic to manage your next events. Easily create and manage unlimited online and offline events.', 'tourfic' ) ?></div>
+                <div class="tf-setup-welcome-footer">
+                    <button type="button" class="tf-admin-btn tf-btn-secondary tf-setup-start-btn"><span><?php _e( 'Get Started', 'tourfic' ) ?></span></button>
+                    <a href="<?php echo esc_url( admin_url( 'admin.php?page=tf_settings' ) ); ?>" class="tf-link-btn"><?php _e( 'Skip to dashboard', 'tourfic' ) ?></a>
                 </div>
-            </section>
+            </div>
 			<?php
 		}
 
@@ -110,133 +112,64 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		 */
 		public function tf_setup_step_one() {
 			?>
-            <div class="etn-onboard-container">
-                <div class="onboard-slider-wrapper" style="animation: 500ms ease-in 0s 1 normal none running inAnimation;">
-                    <section class="ant-layout etn-onboard-content-layout"><h1 class="ant-typography onboard-title">Create First Event in a Few Steps</h1>
-                        <div class="ant-steps ant-steps-horizontal etn-onboard-steps ant-steps-small ant-steps-label-vertical">
-                            <div class="ant-steps-item ant-steps-item-process ant-steps-item-custom ant-steps-item-active">
-                                <div class="ant-steps-item-container">
-                                    <div class="ant-steps-item-tail"></div>
-                                    <div class="ant-steps-item-icon"><span class="ant-steps-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12"
-                                                                                                                                                                                                         cy="12"
-                                                                                                                                                                                                         r="12"
-                                                                                                                                                                                                         fill="#5D5DFF"></circle><circle
-                                                        cx="12" cy="12" r="4" fill="white"></circle></svg></span></div>
-                                    <div class="ant-steps-item-content">
-                                        <div class="ant-steps-item-title">
-                                            <div class="ant-steps-item-title-color">Step 1</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ant-steps-item ant-steps-item-wait ant-steps-item-custom">
-                                <div class="ant-steps-item-container">
-                                    <div class="ant-steps-item-tail"></div>
-                                    <div class="ant-steps-item-icon"><span class="ant-steps-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12"
-                                                                                                                                                                                                         cy="12"
-                                                                                                                                                                                                         r="11"
-                                                                                                                                                                                                         stroke="#D8D9DF"
-                                                                                                                                                                                                         stroke-width="2"></circle></svg></span>
-                                    </div>
-                                    <div class="ant-steps-item-content">
-                                        <div class="ant-steps-item-title">
-                                            <div class="">Step 2</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ant-steps-item ant-steps-item-wait ant-steps-item-custom">
-                                <div class="ant-steps-item-container">
-                                    <div class="ant-steps-item-tail"></div>
-                                    <div class="ant-steps-item-icon"><span class="ant-steps-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12"
-                                                                                                                                                                                                         cy="12"
-                                                                                                                                                                                                         r="11"
-                                                                                                                                                                                                         stroke="#D8D9DF"
-                                                                                                                                                                                                         stroke-width="2"></circle></svg></span>
-                                    </div>
-                                    <div class="ant-steps-item-content">
-                                        <div class="ant-steps-item-title">
-                                            <div class="">Step 3</div>
-                                        </div>
+            <div class="tf-setup-step-container tf-setup-step-1 <?php echo self::$current_step == 'step_one' ? 'active' : ''; ?>">
+                <section class="tf-setup-step-layout">
+                    <div class="ant-steps ant-steps-horizontal etn-onboard-steps ant-steps-small ant-steps-label-vertical">
+                        <div class="ant-steps-item ant-steps-item-process ant-steps-item-custom ant-steps-item-active">
+                            <div class="ant-steps-item-container">
+                                <div class="ant-steps-item-tail"></div>
+                                <div class="ant-steps-item-icon"><span class="ant-steps-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12"
+                                                                                                                                                                                                     cy="12"
+                                                                                                                                                                                                     r="12"
+                                                                                                                                                                                                     fill="#5D5DFF"></circle><circle
+                                                    cx="12" cy="12" r="4" fill="white"></circle></svg></span></div>
+                                <div class="ant-steps-item-content">
+                                    <div class="ant-steps-item-title">
+                                        <div class="ant-steps-item-title-color">Step 1</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="ant-carousel">
-                            <div class="slick-slider onboard-slider-step slick-initialized" dir="ltr">
-                                <div class="slick-list">
-                                    <div class="slick-track" style="width: 5600px; opacity: 1; transform: translate3d(-800px, 0px, 0px);">
-                                        <div data-index="-1" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true" style="width: 800px;">
-                                            <div>
-                                                <div tabindex="-1" style="width: 100%; display: inline-block;"><img class="etn-onboard-slider-img"
-                                                                                                                    src="http://tourfic.wp/wp-content/plugins/wp-event-solution/build/assets/images/slider-event.png">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div data-index="0" class="slick-slide slick-active slick-current" tabindex="-1" aria-hidden="false" style="outline: none; width: 800px;">
-                                            <div>
-                                                <div tabindex="-1" style="width: 100%; display: inline-block;"><img class="etn-onboard-slider-img"
-                                                                                                                    src="http://tourfic.wp/wp-content/plugins/wp-event-solution/build/assets/images/slider-speaker.png">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div data-index="1" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 800px;">
-                                            <div>
-                                                <div tabindex="-1" style="width: 100%; display: inline-block;"><img class="etn-onboard-slider-img"
-                                                                                                                    src="http://tourfic.wp/wp-content/plugins/wp-event-solution/build/assets/images/slider-schedule.png">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div data-index="2" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 800px;">
-                                            <div>
-                                                <div tabindex="-1" style="width: 100%; display: inline-block;"><img class="etn-onboard-slider-img"
-                                                                                                                    src="http://tourfic.wp/wp-content/plugins/wp-event-solution/build/assets/images/slider-event.png">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div data-index="3" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true" style="width: 800px;">
-                                            <div>
-                                                <div tabindex="-1" style="width: 100%; display: inline-block;"><img class="etn-onboard-slider-img"
-                                                                                                                    src="http://tourfic.wp/wp-content/plugins/wp-event-solution/build/assets/images/slider-speaker.png">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div data-index="4" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true" style="width: 800px;">
-                                            <div>
-                                                <div tabindex="-1" style="width: 100%; display: inline-block;"><img class="etn-onboard-slider-img"
-                                                                                                                    src="http://tourfic.wp/wp-content/plugins/wp-event-solution/build/assets/images/slider-schedule.png">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div data-index="5" tabindex="-1" class="slick-slide slick-cloned" aria-hidden="true" style="width: 800px;">
-                                            <div>
-                                                <div tabindex="-1" style="width: 100%; display: inline-block;"><img class="etn-onboard-slider-img"
-                                                                                                                    src="http://tourfic.wp/wp-content/plugins/wp-event-solution/build/assets/images/slider-event.png">
-                                                </div>
-                                            </div>
-                                        </div>
+                        <div class="ant-steps-item ant-steps-item-wait ant-steps-item-custom">
+                            <div class="ant-steps-item-container">
+                                <div class="ant-steps-item-tail"></div>
+                                <div class="ant-steps-item-icon"><span class="ant-steps-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12"
+                                                                                                                                                                                                     cy="12"
+                                                                                                                                                                                                     r="11"
+                                                                                                                                                                                                     stroke="#D8D9DF"
+                                                                                                                                                                                                     stroke-width="2"></circle></svg></span>
+                                </div>
+                                <div class="ant-steps-item-content">
+                                    <div class="ant-steps-item-title">
+                                        <div class="">Step 2</div>
                                     </div>
                                 </div>
-                                <ul class="slick-dots slick-dots-bottom" style="display: block;">
-                                    <li class="slick-active">
-                                        <button>1</button>
-                                    </li>
-                                    <li class="">
-                                        <button>2</button>
-                                    </li>
-                                    <li class="">
-                                        <button>3</button>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
-                    </section>
-                </div>
+                        <div class="ant-steps-item ant-steps-item-wait ant-steps-item-custom">
+                            <div class="ant-steps-item-container">
+                                <div class="ant-steps-item-tail"></div>
+                                <div class="ant-steps-item-icon"><span class="ant-steps-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12"
+                                                                                                                                                                                                     cy="12"
+                                                                                                                                                                                                     r="11"
+                                                                                                                                                                                                     stroke="#D8D9DF"
+                                                                                                                                                                                                     stroke-width="2"></circle></svg></span>
+                                </div>
+                                <div class="ant-steps-item-content">
+                                    <div class="ant-steps-item-title">
+                                        <div class="">Step 3</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
                 <div class="etn-onboard-action-btn-wrapper">
                     <div></div>
                     <div class="etn-onboard-action-btn-next">
                         <button type="button" class="ant-btn ant-btn-link etn-onboard-action-btn-link"><span>Skip this step</span></button>
-                        <button type="button" class="ant-btn ant-btn-primary ant-btn-lg etn-onboard-action-btn etn-onboard-action-btn-primary"><span>Next</span></button>
+                        <button type="button" class="tf-setup-next-btn"><span>Next</span></button>
                     </div>
                 </div>
             </div>
@@ -248,8 +181,8 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		 */
 		public function setup_step_two() {
 			?>
-            <div class="etn-onboard-container">
-                <section class="ant-layout etn-onboard-content-layout" style="animation: 500ms ease-in 0s 1 normal none running inAnimation;"><h1 class="ant-typography onboard-title">Settings</h1>
+            <div class="tf-setup-step-container tf-setup-step-2">
+                <section class="ant-layout etn-onboard-content-layout"><h1 class="ant-typography onboard-title">Settings</h1>
                     <div class="ant-steps ant-steps-horizontal etn-onboard-steps ant-steps-label-vertical">
                         <div class="ant-steps-item ant-steps-item-finish ant-steps-item-custom">
                             <div class="ant-steps-item-container">
@@ -408,8 +341,8 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		 */
 		public function tf_setup_finish_step() {
 			?>
-            <div class="etn-onboard-container">
-                <section class="ant-layout etn-onboard-content-layout" style="animation: 500ms ease-in 0s 1 normal none running inAnimation;"><h1 class="ant-typography onboard-title">Eventin is Ready to
+            <div class="tf-setup-step-container tf-setup-step-3">
+                <section class="ant-layout etn-onboard-content-layout"><h1 class="ant-typography onboard-title">Eventin is Ready to
                         Go!</h1>
                     <div class="ant-steps ant-steps-horizontal etn-onboard-steps ant-steps-label-vertical">
                         <div class="ant-steps-item ant-steps-item-finish ant-steps-item-custom">
