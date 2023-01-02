@@ -250,6 +250,41 @@
   opacity: 1;
   visibility: visible;
 }
+// vendor page
+.tf-vendor-setting{
+  background-color: #fff;
+  padding: 20px 25px;
+  margin-top: 20px;
+  border-radius: 5px;
+  margin-right: 20px;
+  .tf-grid-view{
+    display: flex;
+    justify-content: space-between;
+    .tf-save-user{
+      padding: 8px 15px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-top: 10px;
+    }
+    .tf_user_approved{
+      margin-bottom: 10px;
+    }
+  }
+  .tf-vendor-reg-response {
+    .tf_errors{
+      color: red;
+      font-size: 16px;
+      line-height: 24px;
+    }
+    .tf_success{
+      color: green;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 600;
+    }
+  }
+}
 // get Help page
 .tf-settings-help-center{
   .tf-help-center-banner{

@@ -19,7 +19,6 @@ class TFVENDORTable extends WP_List_Table {
 			'uemail'  => __( 'Email', 'tourfic' ),
 			'uphone'  => __( 'Phone', 'tourfic' ),
 			'created_at'  => __( 'Registered', 'tourfic' ),
-			'selling'  => __( 'Selling', 'tourfic' ),
 			'status'  => __( 'Status', 'tourfic' ),
 		];
 	}
@@ -28,10 +27,8 @@ class TFVENDORTable extends WP_List_Table {
 		return "<input type='checkbox' name='vendor_id' value='{$item->ID}'>";
 	}
     function column_uname( $item ) {
-		// return $item->display_name;
-
 		$actions = [
-			'edit'   => sprintf( '<a href="user-edit.php?user_id=%s">%s</a>', $item->ID, __( 'Edit', 'database-demo' ) ),
+			'edit'   => sprintf( '<a href="admin.php?page=tf_vendor_list&user_id=%s&actions=%s">%s</a>', $item->ID, 'edit', __( 'Edit', 'database-demo' ) ),
 		];
 
 		return sprintf('%s %s',$item->display_name,$this->row_actions($actions));
@@ -40,27 +37,7 @@ class TFVENDORTable extends WP_List_Table {
 		return $item->user_email;
 	}
     function column_uphone( $item ) {
-		return get_user_meta($item->ID,'user_phone',true);
-	}
-    function column_selling( $item ) {
-		$vendor_sell_status = get_user_meta($item->ID,'tf_vendor_selling',true);
-        if(!empty($vendor_sell_status) && $vendor_sell_status=="enabled"){
-		return "
-        <div class='tf-users-switcher'>
-            <label class='switch'>
-            <input type='checkbox' class='vendor-selling-switcher' value='{$item->ID}' checked=''>
-            <span class='switcher round'></span>
-            </label>
-        </div>";
-        }else{
-            return "
-            <div class='tf-users-switcher'>
-                <label class='switch'>
-                <input type='checkbox' value='{$item->ID}' class='vendor-selling-switcher'>
-                <span class='switcher round'></span>
-                </label>
-            </div>";
-        }
+		return get_user_meta($item->ID,'tf_user_phone',true);
 	}
     function column_status( $item ) {
         $vendor_status = get_user_meta($item->ID,'tf_vendor_approval',true);

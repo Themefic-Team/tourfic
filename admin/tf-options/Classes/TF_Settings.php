@@ -141,8 +141,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			//Vendor List submenu
 			add_submenu_page(
 				$this->option_id,
-				__('Vendor List', 'tourfic'),
-				__('Vendor List', 'tourfic'),
+				__('Vendors', 'tourfic'),
+				__('Vendors', 'tourfic'),
 				'manage_options',
 				'tf_vendor_list',
 				array( $this,'tf_vendor_list_callback'),
@@ -392,29 +392,163 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					</div>
 				</div>
 			</div>
-
-			<div class="wrap" style="margin-right: 20px;">
-				<h1 class="wp-heading-inline"><?php _e( 'Vendors', 'tourfic' ); ?></h1>
-				<a href="user-new.php" class="page-title-action">Add New</a>
-
-				<div id="tf-report-loader">
-					<img src="<?php echo TF_ASSETS_URL; ?>/img/loader.gif" alt="Loader">
-				</div>
-				<?php 
-					/**
-					 *Vendor Class
-					*/
-					if ( file_exists( TF_INC_PATH . 'functions/class.tf_vendors.php' ) ) {
-						require_once TF_INC_PATH . 'functions/class.tf_vendors.php';
-					} else {
-						tf_file_missing( TF_INC_PATH . 'functions/class.tf_vendors.php' );
-					}
-					$tf_vendor_query = get_users( array( 'role__in' => array( 'tf_vendor' ) ) );
-					$tf_vendors_list = new TFVENDORTable( $tf_vendor_query );
-					$tf_vendors_list->prepare_items();
-					$tf_vendors_list->display();
+			<?php 
+			if(!empty($_GET['actions']) && $_GET['actions']=="add"){ 
 				?>
+				<div class="tf-vendor-setting tf-tab-content">
+				<div class="tf-vendor-reg-response"></div>
+				<form action="" id="tf-vendor-register">
+					<div class="tf-grid-view">
+						<?php wp_nonce_field( 'check_reg_nonce', 'tf_reg_nonce' ); ?>
+						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+							<label for="tf_username" class="tf-field-label"> <?php _e("Username", "tourfic"); ?> </label>
+							<div class="tf-fieldset">
+								<input type="text" name="tf_username" id="tf_username" />
+							</div>
+						</div>
+						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+							<label for="tf_first_name" class="tf-field-label"> <?php _e("First Name", "tourfic"); ?> </label>
+							<div class="tf-fieldset">
+								<input type="text" name="tf_first_name" id="tf_first_name"  />
+							</div>
+						</div>
+						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+							<label for="tf_last_name" class="tf-field-label"> <?php _e("Last Name", "tourfic"); ?> </label>
+							<div class="tf-fieldset">
+								<input type="text" name="tf_last_name" id="tf_last_name"  />
+							</div>
+						</div>
+					</div>
+					<div class="tf-grid-view">
+						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+							<label for="tf_user_email" class="tf-field-label"> <?php _e("Email", "tourfic"); ?> </label>
+							<div class="tf-fieldset">
+								<input type="text" name="tf_user_email" id="tf_user_email" />
+							</div>
+						</div>
+						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+							<label for="tf_user_phone" class="tf-field-label"> <?php _e("Phone", "tourfic"); ?> </label>
+							<div class="tf-fieldset">
+								<input type="text" name="tf_user_phone" id="tf_user_phone" />
+							</div>
+						</div>
+						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+							<label for="tf_user_password" class="tf-field-label"> <?php _e("New Password", "tourfic"); ?> </label>
+							<div class="tf-fieldset">
+								<input type="text" name="tf_user_password" id="tf_user_password" />
+							</div>
+						</div>
+					</div>
+					<div class="tf-grid-view">
+						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+							<label for="tf_user_approved" class="tf-field-label tf_user_approved"> <?php _e("Enable Selling and Approved", "tourfic"); ?> </label>
+							<div class="tf-users-switcher">
+								<label class="switch">
+								<input type="checkbox" class="tf_vendor_enabled" name="tf_vendor_enabled" checked="">
+								<span class="switcher round"></span>
+								</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="tf-grid-view">
+						<button class="tf-save-user tf-admin-btn tf-btn-secondary"><?php _e("Add New User", "tourfic"); ?></button>
+					</div>
+				</form>
+				</div>
+			<?php } ?>
+			<?php 
+			if(!empty($_GET['actions']) && !empty($_GET['user_id']) && $_GET['actions']=="edit"){ 
+				$tf_user_info = get_userdata(sanitize_key($_GET['user_id']));
+				$tf_user_phone = get_user_meta( sanitize_key($_GET['user_id']), 'tf_user_phone' , true );
+				$tf_user_status = get_user_meta( sanitize_key($_GET['user_id']), 'tf_vendor_approval' , true );
+				?>
+				<div class="tf-vendor-setting tf-tab-content">
+				<div class="tf-vendor-reg-response"></div>
+				<form action="" id="tf-vendor-update">
+					<div class="tf-grid-view">
+						<?php wp_nonce_field( 'check_reg_nonce', 'tf_reg_nonce' ); ?>
+						<input type="hidden" name="tf_vendor_id" id="tf_vendor_id" value="<?php echo sanitize_key($_GET['user_id']) ?>">
+						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+							<label for="tf_username" class="tf-field-label"> <?php _e("Username", "tourfic"); ?> </label>
+							<div class="tf-fieldset">
+								<input type="text" name="tf_username" id="tf_username" value="<?php echo !empty($tf_user_info->user_login) ? $tf_user_info->user_login : ''; ?>" disabled/>
+							</div>
+						</div>
+						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+							<label for="tf_first_name" class="tf-field-label"> <?php _e("First Name", "tourfic"); ?> </label>
+							<div class="tf-fieldset">
+								<input type="text" name="tf_first_name" id="tf_first_name" value="<?php echo !empty($tf_user_info->first_name) ? $tf_user_info->first_name : ''; ?>" />
+							</div>
+						</div>
+						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+							<label for="tf_last_name" class="tf-field-label"> <?php _e("Last Name", "tourfic"); ?> </label>
+							<div class="tf-fieldset">
+								<input type="text" name="tf_last_name" id="tf_last_name" value="<?php echo !empty($tf_user_info->last_name) ? $tf_user_info->last_name : ''; ?>" />
+							</div>
+						</div>
+					</div>
+					<div class="tf-grid-view">
+						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+							<label for="tf_user_email" class="tf-field-label"> <?php _e("Email", "tourfic"); ?> </label>
+							<div class="tf-fieldset">
+								<input type="text" name="tf_user_email" id="tf_user_email" value="<?php echo !empty($tf_user_info->user_email) ? $tf_user_info->user_email : ''; ?>" />
+							</div>
+						</div>
+						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+							<label for="tf_user_phone" class="tf-field-label"> <?php _e("Phone", "tourfic"); ?> </label>
+							<div class="tf-fieldset">
+								<input type="text" name="tf_user_phone" id="tf_user_phone" value="<?php echo !empty($tf_user_phone) ? $tf_user_phone : ''; ?>" />
+							</div>
+						</div>
+						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+							<label for="tf_user_password" class="tf-field-label"> <?php _e("New Password", "tourfic"); ?> </label>
+							<div class="tf-fieldset">
+								<input type="text" name="tf_user_password" id="tf_user_password" value="" />
+							</div>
+						</div>
+					</div>
+					<div class="tf-grid-view">
+						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+							<label for="tf_user_approved" class="tf-field-label tf_user_approved"> <?php _e("Enable Selling and Approved", "tourfic"); ?> </label>
+							<div class="tf-users-switcher">
+								<label class="switch">
+								<input type="checkbox" class="tf_vendor_enabled" name="tf_vendor_enabled" <?php echo !empty($tf_user_status) && $tf_user_status=="enabled" ? 'checked=""' : ''; ?>>
+								<span class="switcher round"></span>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="tf-grid-view">
+						<button class="tf-save-user tf-admin-btn tf-btn-secondary"><?php _e("Edit New User", "tourfic"); ?></button>
+					</div>
+				</form>
+				</div>
+			<?php } ?>
+			<div id="tf-report-loader">
+				<img src="<?php echo TF_ASSETS_URL; ?>/img/loader.gif" alt="Loader">
 			</div>
+			<?php 
+			if(empty($_GET['actions']) && empty($_GET['user_id']) && $_GET['actions']!="edit" && $_GET['actions']!="add"){ ?>
+				<div class="wrap" style="margin-right: 20px;">
+					<h1 class="wp-heading-inline"><?php _e( 'Vendors', 'tourfic' ); ?></h1>
+					<a href="admin.php?page=tf_vendor_list&actions=add" class="page-title-action"><?php _e("Add New","tourfic"); ?></a>
+					<?php 
+						/**
+						 *Vendor Class
+						*/
+						if ( file_exists( TF_INC_PATH . 'functions/class.tf_vendors.php' ) ) {
+							require_once TF_INC_PATH . 'functions/class.tf_vendors.php';
+						} else {
+							tf_file_missing( TF_INC_PATH . 'functions/class.tf_vendors.php' );
+						}
+						$tf_vendor_query = get_users( array( 'role__in' => array( 'tf_vendor' ) ) );
+						$tf_vendors_list = new TFVENDORTable( $tf_vendor_query );
+						$tf_vendors_list->prepare_items();
+						$tf_vendors_list->display();
+					?>
+				</div>
+			<?php } ?>
 		</div>
 		<?php
 		}

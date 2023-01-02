@@ -1391,40 +1391,98 @@ var frame, gframe;
 
         /*
         * Author @Jahid
-        * Vendor Selling
+        * Admin Vendor Registration
         */
-        $('.vendor-selling-switcher').click(function(){
-            if ($(this).is(':checked')) {
-                var vendorid= $(this).val();
-                $("#tf-report-loader").addClass('show');
-                jQuery.ajax({
-                    type: 'post',
-                    url: tf_options.ajax_url,
-                    data: {
-                        action: 'tf_vendor_selling',
-                        status: "enabled",
-                        vendorid: vendorid,
-                    },
-                    success: function (data) {
-                        $("#tf-report-loader").removeClass('show');
-                    }
-                });
-            }else{
-                var vendorid= $(this).val();
-                $("#tf-report-loader").addClass('show');
-                jQuery.ajax({
-                    type: 'post',
-                    url: tf_options.ajax_url,
-                    data: {
-                        action: 'tf_vendor_selling',
-                        status: "disabled",
-                        vendorid: vendorid,
-                    },
-                    success: function (data) {
-                        $("#tf-report-loader").removeClass('show');
-                    }
-                });
-            }
+        $(document).on('click', '#tf-vendor-register .tf-save-user', function (e) {
+            e.preventDefault();
+            var tf_reg_nonce = $("input[name=tf_reg_nonce]").val();
+            var user = $("input[name=tf_username]").val();
+            var first_name = $("input[name=tf_first_name]").val();
+            var last_name = $("input[name=tf_last_name]").val();
+            var email = $("input[name=tf_user_email]").val();
+            var phone = $("input[name=tf_user_phone]").val();
+            var pass = $("input[name=tf_user_password]").val();
+            var vendor_status = $('input[name="tf_vendor_enabled"]:checked');
+            var data = {
+                action: 'tf_vendor_registration',
+                tf_reg_nonce: tf_reg_nonce,
+                user: user,
+                email: email,
+                pass: pass,
+                first_name: first_name,
+                last_name: last_name,
+                phone: phone,
+                vendor_status: vendor_status.length,
+            };
+            $("#tf-report-loader").addClass('show');
+
+            $.ajax({
+                type: 'post',
+                url: tf_options.ajax_url,
+                data: data,
+                beforeSend: function (response) {
+                    //alert(response);
+                },
+                complete: function (response) {
+                    //alert(response);
+                },
+                success: function (response) {
+                    $("#tf-report-loader").removeClass('show');
+                    $(".tf-vendor-reg-response").html(response);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+
+        });
+
+        /*
+        * Author @Jahid
+        * Admin Vendor Update
+        */
+        $(document).on('click', '#tf-vendor-update .tf-save-user', function (e) {
+            e.preventDefault();
+            var tf_reg_nonce = $("input[name=tf_reg_nonce]").val();
+            var vendor_id = $("input[name=tf_vendor_id]").val();
+            var first_name = $("input[name=tf_first_name]").val();
+            var last_name = $("input[name=tf_last_name]").val();
+            var email = $("input[name=tf_user_email]").val();
+            var phone = $("input[name=tf_user_phone]").val();
+            var pass = $("input[name=tf_user_password]").val();
+            var vendor_status = $('input[name="tf_vendor_enabled"]:checked');
+            var data = {
+                action: 'tf_vendor_update',
+                tf_reg_nonce: tf_reg_nonce,
+                vendor_id: vendor_id,
+                email: email,
+                pass: pass,
+                first_name: first_name,
+                last_name: last_name,
+                phone: phone,
+                vendor_status: vendor_status.length,
+            };
+            $("#tf-report-loader").addClass('show');
+
+            $.ajax({
+                type: 'post',
+                url: tf_options.ajax_url,
+                data: data,
+                beforeSend: function (response) {
+                    //alert(response);
+                },
+                complete: function (response) {
+                    //alert(response);
+                },
+                success: function (response) {
+                    $("#tf-report-loader").removeClass('show');
+                    $(".tf-vendor-reg-response").html(response);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+
         });
 
         /*
