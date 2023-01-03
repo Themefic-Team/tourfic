@@ -648,13 +648,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			$post_author   = get_post_field( 'post_author', $post_id );
 			$user_meta_roles = get_userdata($post_author);
 			if($user_meta_roles->roles[0]=="tf_vendor"){
-				$tf_vendor_commision = !empty(tf_data_types(tfopt( 'multi-vendor-setings' ))["partner_commission"]) ? intval(tf_data_types(tfopt( 'multi-vendor-setings' ))["partner_commission"]) : '';
-				$tf_order_total=  intval($item->get_subtotal());
-				if(!empty($tf_vendor_commision)){
-					$total_commision = ($tf_order_total*$tf_vendor_commision)/100;
-					$item->update_meta_data( '_commission', strip_tags(wc_price( $total_commision )) );
-					$item->save();
-				}
+				$item->update_meta_data( '_vendor', 'yes' );
+				$item->save();
 			}
 		}
 
@@ -664,13 +659,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			$post_author   = get_post_field( 'post_author', $post_id );
 			$user_meta_roles = get_userdata($post_author);
 			if($user_meta_roles->roles[0]=="tf_vendor"){
-				$tf_vendor_commision = !empty(tf_data_types(tfopt( 'multi-vendor-setings' ))["partner_commission"]) ? intval(tf_data_types(tfopt( 'multi-vendor-setings' ))["partner_commission"]) : '';
-				$tf_order_total=  intval($item->get_subtotal());
-				if(!empty($tf_vendor_commision)){
-					$total_commision = ($tf_order_total*$tf_vendor_commision)/100;
-					$item->update_meta_data( '_commission', strip_tags(wc_price( $total_commision )) );
-					$item->save();
-				}
+				$item->update_meta_data( '_vendor', 'yes' );
+				$item->save();
 			}
 		}
 		//Order Data Insert 

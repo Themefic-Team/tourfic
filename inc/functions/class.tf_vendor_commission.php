@@ -15,16 +15,17 @@ class TFVENDORTable extends WP_List_Table {
 	function get_columns() {
 		return [
 			'cb'     => '<input type="checkbox">',
-			'uname'   => __( 'Store', 'tourfic' ),
-			'uemail'  => __( 'Email', 'tourfic' ),
-			'uphone'  => __( 'Phone', 'tourfic' ),
+			'uid'   => __( 'ID', 'tourfic' ),
+			'uname'   => __( 'Affiliate', 'tourfic' ),
 			'earns'  => __( 'Total Earns', 'tourfic' ),
-			'withdraw'  => __( 'Total Withdraw', 'tourfic' ),
-			'created_at'  => __( 'Registered', 'tourfic' ),
-			'status'  => __( 'Status', 'tourfic' ),
+			'type'  => __( 'Type', 'tourfic' ),
+			'created_at'  => __( 'Registered', 'tourfic' )
 		];
 	}
 
+    function column_uid( $item ) {
+		return $item->ID;
+	}
     function column_cb( $item ) {
 		return "<input type='checkbox' name='vendor_id' value='{$item->ID}'>";
 	}
@@ -41,6 +42,9 @@ class TFVENDORTable extends WP_List_Table {
     function column_uphone( $item ) {
 		return get_user_meta($item->ID,'tf_user_phone',true);
 	}
+    function column_type( $item ) {
+		return 'Booking';
+	}
 	function column_earns( $item ) {
 		$vendor_total_earning = 0;
 
@@ -55,7 +59,7 @@ class TFVENDORTable extends WP_List_Table {
 					$vendor_due = ! empty( wc_get_order_item_meta( $item_key, 'due', true ) ) ? wc_get_order_item_meta( $item_key, 'due', true ) : 0;
 					$vendor_item_total_earning = $item_values->get_subtotal() + $vendor_due;
 					$total_commision = ($vendor_item_total_earning*$tf_vendor_commision)/100;
-					$vendor_total_earning += $vendor_item_total_earning-$total_commision;
+					$vendor_total_earning += $total_commision;
 				}
 			}
 		}
@@ -69,56 +73,20 @@ class TFVENDORTable extends WP_List_Table {
 					$vendor_due = ! empty( wc_get_order_item_meta( $item_key, 'due', true ) ) ? wc_get_order_item_meta( $item_key, 'due', true ) : 0;
 					$vendor_item_total_earning = $item_values->get_subtotal() + $vendor_due;
 					$total_commision = ($vendor_item_total_earning*$tf_vendor_commision)/100;
-					$vendor_total_earning += $vendor_item_total_earning-$total_commision;
+					$vendor_total_earning += $total_commision;
 				}
 			}
 		}
 
 		return wc_price($vendor_total_earning);
 	}
-    function column_status( $item ) {
-        $vendor_status = get_user_meta($item->ID,'tf_vendor_approval',true);
-        if(!empty($vendor_status) && $vendor_status=="enabled"){
-			return "
-			<div class='tf-users-switcher'>
-				<label class='switch'>
-				<input type='checkbox' class='vendor-status-switcher' value='{$item->ID}' checked=''>
-				<span class='switcher round'></span>
-				</label>
-			</div>";
-        }else{
-            return "
-            <div class='tf-users-switcher'>
-                <label class='switch'>
-                <input type='checkbox' value='{$item->ID}' class='vendor-status-switcher'>
-                <span class='switcher round'></span>
-                </label>
-            </div>";
-        }
-	}
+    
     function column_created_at( $item ) {
 		return date("M d, Y", strtotime($item->user_registered));
 	}
 	function column_default( $item, $column_name ) {
 		
 	}
-    function extra_tablenav( $which ) {
-		if('top'==$which):
-		?>
-		<div class="actions alignleft vendor-actions">
-			<select name="tf_vendor_bulk" id="tf_vendor_bulk">
-				<option value="">Bulk Actions</option>
-				<option value="approved">Approve Vendors</option>
-				<option value="pending">Disable Selling</option>
-			</select>
-			<?php
-			submit_button(__('Apply','tourfic'),'button','submit',false);
-			?>
-		</div>
-    <?php
-	endif;
-	}
-
 	function prepare_items() {
 		$paged                 = !empty( $_REQUEST['paged'] ) ? $_REQUEST['paged'] : 1;
 		$per_page              = 10;
