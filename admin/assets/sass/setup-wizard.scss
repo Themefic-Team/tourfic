@@ -233,7 +233,7 @@ Steps
     }
 
     label {
-      border: 1px solid #fff;
+      //border: 2px solid #fff;
       background-color: #fff;
       box-shadow: 0 0 10px rgba(0, 0, 0, .08);
       padding: 10px;
@@ -242,7 +242,7 @@ Steps
       cursor: pointer;
       border-radius: 6px;
 
-      span{
+      span {
         font-weight: 600;
         font-size: 16px;
         display: inline-block;
@@ -262,22 +262,32 @@ Steps
       width: 25px;
       height: 25px;
       text-align: center;
-      line-height: 28px;
+      line-height: 26px;
       transition-duration: 0.4s;
       transform: scale(0);
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 700;
+      font-family: 'dashicons';
+      font-size: 20px;
     }
 
     label img {
       width: 100%;
     }
 
-    :checked + label:before {
-      content: "\f00c";
-      background-color: #003c79;
-      transform: scale(1);
+    :checked + label {
+      //border-color: #003c79;
+
+      &:before {
+        content: "\f15e";
+        background-color: #003c79;
+        transform: scale(1);
+      }
     }
+  }
+
+  .tf-setup-action-btn-wrapper{
+    @include flexbox();
+    @include justify-content(space-between);
+    margin: 30px 0 50px 0;
   }
 }
 

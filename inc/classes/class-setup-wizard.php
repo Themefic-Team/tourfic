@@ -109,7 +109,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		 */
 		private function tf_setup_step_one() {
 			?>
-            <div class="tf-setup-step-container tf-setup-step-1 <?php echo self::$current_step == 'step_one' ? 'active' : ''; ?>">
+            <div class="tf-setup-step-container tf-setup-step-1 <?php echo self::$current_step == 'step_1' ? 'active' : ''; ?>" data-step="1">
                 <section class="tf-setup-step-layout">
 					<?php $this->tf_setup_wizard_steps() ?>
                     <h1 class="tf-setup-step-title"><?php _e( 'Select your services', 'tourfic' ) ?></h1>
@@ -137,11 +137,11 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                         </li>
                     </ul>
                 </section>
-                <div class="etn-onboard-action-btn-wrapper">
+                <div class="tf-setup-action-btn-wrapper">
                     <div></div>
-                    <div class="etn-onboard-action-btn-next">
-                        <button type="button" class="ant-btn ant-btn-link etn-onboard-action-btn-link"><span>Skip this step</span></button>
-                        <button type="button" class="tf-setup-next-btn"><span>Next</span></button>
+                    <div class="tf-setup-action-btn-next">
+                        <button type="button" class="tf-setup-skip-btn tf-link-btn"><?php _e( 'Skip this step', 'tourfic' ) ?></button>
+                        <button type="button" class="tf-setup-next-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Next', 'tourfic' ) ?></button>
                     </div>
                 </div>
             </div>
@@ -153,17 +153,16 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		 */
 		private function setup_step_two() {
 			?>
-            <div class="tf-setup-step-container tf-setup-step-2 <?php echo self::$current_step == 'step_two' ? 'active' : ''; ?>">
+            <div class="tf-setup-step-container tf-setup-step-2 <?php echo self::$current_step == 'step_2' ? 'active' : ''; ?>" data-step="2">
                 <section class="tf-setup-step-layout">
 					<?php $this->tf_setup_wizard_steps( 2 ) ?>
                     <h1>2</h1>
                 </section>
-                <div class="etn-onboard-action-btn-wrapper">
-                    <button type="button" class="ant-btn ant-btn-default ant-btn-lg etn-onboard-action-btn onboard-prev-btn"><span>Previous</span></button>
-                    <div class="etn-onboard-action-btn-next">
-                        <button type="button" class="ant-btn ant-btn-link etn-onboard-action-btn-link"><span>Skip this step</span></button>
-                        <button type="button" class="ant-btn ant-btn-primary ant-btn-lg etn-onboard-action-btn etn-onboard-action-btn-primary" ant-click-animating-without-extra-node="false"><span>Next</span>
-                        </button>
+                <div class="tf-setup-action-btn-wrapper">
+                    <button type="button" class="tf-setup-prev-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Previous', 'tourfic' ) ?></button>
+                    <div class="tf-setup-action-btn-next">
+                        <button type="button" class="tf-setup-skip-btn tf-link-btn"><?php _e( 'Skip this step', 'tourfic' ) ?></button>
+                        <button type="button" class="tf-setup-next-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Next', 'tourfic' ) ?></button>
                     </div>
                 </div>
             </div>
@@ -175,17 +174,13 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		 */
 		private function tf_setup_finish_step() {
 			?>
-            <div class="tf-setup-step-container tf-setup-step-3">
+            <div class="tf-setup-step-container tf-setup-step-3 <?php echo self::$current_step == 'step_3' ? 'active' : ''; ?>" data-step="3">
                 <section class="tf-setup-step-layout">
 					<?php $this->tf_setup_wizard_steps( 3 ) ?>
                 </section>
-                <div class="etn-onboard-action-btn-wrapper">
-                    <button type="button" class="ant-btn ant-btn-default ant-btn-lg etn-onboard-action-btn onboard-prev-btn"><span>Previous</span></button>
-                    <div class="etn-onboard-action-btn-next">
-                        <button type="button" class="ant-btn ant-btn-link etn-onboard-action-btn-link"><span>Skip this step</span></button>
-                        <button type="button" class="ant-btn ant-btn-default ant-btn-lg etn-onboard-action-btn etn-onboard-action-btn-primary" ant-click-animating-without-extra-node="false">
-                            <span>Finish Setup</span></button>
-                    </div>
+                <div class="tf-setup-action-btn-wrapper">
+                    <button type="button" class="tf-setup-prev-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Previous', 'tourfic' ) ?></button>
+                    <button type="submit" class="tf-setup-submit-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Finish', 'tourfic' ) ?></button>
                 </div>
             </div>
 			<?php

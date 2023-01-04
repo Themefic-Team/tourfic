@@ -31,6 +31,26 @@ Button
   pointer-events: none;
 }
 
+.tf-link-btn {
+  display: inline-flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: transparent;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 0;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 16px;
+  color: #003c79;
+}
+.tf-link-btn i {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
 body.admin_page_tf-setup-wizard {
   background-color: #ecf5ff;
 }
@@ -267,7 +287,6 @@ Steps
   display: none;
 }
 .tf-setup-step-container .tf-select-service label {
-  border: 1px solid #fff;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
   padding: 10px;
@@ -294,19 +313,29 @@ Steps
   width: 25px;
   height: 25px;
   text-align: center;
-  line-height: 28px;
+  line-height: 26px;
   transition-duration: 0.4s;
   transform: scale(0);
-  font-family: "Font Awesome 5 Free";
-  font-weight: 700;
+  font-family: "dashicons";
+  font-size: 20px;
 }
 .tf-setup-step-container .tf-select-service label img {
   width: 100%;
 }
 .tf-setup-step-container .tf-select-service :checked + label:before {
-  content: "\f00c";
+  content: "\f15e";
   background-color: #003c79;
   transform: scale(1);
+}
+.tf-setup-step-container .tf-setup-action-btn-wrapper {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  margin: 30px 0 50px 0;
 }
 
 /*# sourceMappingURL=setup-wizard.css.map */
