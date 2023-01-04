@@ -410,19 +410,19 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				<form action="" id="tf-vendor-register">
 					<div class="tf-grid-view">
 						<?php wp_nonce_field( 'check_reg_nonce', 'tf_reg_nonce' ); ?>
-						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+						<div class="tf-field tf-field-text">
 							<label for="tf_username" class="tf-field-label"> <?php _e("Username", "tourfic"); ?> </label>
 							<div class="tf-fieldset">
 								<input type="text" name="tf_username" id="tf_username" />
 							</div>
 						</div>
-						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+						<div class="tf-field tf-field-text">
 							<label for="tf_first_name" class="tf-field-label"> <?php _e("First Name", "tourfic"); ?> </label>
 							<div class="tf-fieldset">
 								<input type="text" name="tf_first_name" id="tf_first_name"  />
 							</div>
 						</div>
-						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+						<div class="tf-field tf-field-text">
 							<label for="tf_last_name" class="tf-field-label"> <?php _e("Last Name", "tourfic"); ?> </label>
 							<div class="tf-fieldset">
 								<input type="text" name="tf_last_name" id="tf_last_name"  />
@@ -430,19 +430,19 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						</div>
 					</div>
 					<div class="tf-grid-view">
-						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+						<div class="tf-field tf-field-text">
 							<label for="tf_user_email" class="tf-field-label"> <?php _e("Email", "tourfic"); ?> </label>
 							<div class="tf-fieldset">
 								<input type="text" name="tf_user_email" id="tf_user_email" />
 							</div>
 						</div>
-						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+						<div class="tf-field tf-field-text">
 							<label for="tf_user_phone" class="tf-field-label"> <?php _e("Phone", "tourfic"); ?> </label>
 							<div class="tf-fieldset">
 								<input type="text" name="tf_user_phone" id="tf_user_phone" />
 							</div>
 						</div>
-						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+						<div class="tf-field tf-field-text">
 							<label for="tf_user_password" class="tf-field-label"> <?php _e("New Password", "tourfic"); ?> </label>
 							<div class="tf-fieldset">
 								<input type="text" name="tf_user_password" id="tf_user_password" />
@@ -450,7 +450,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						</div>
 					</div>
 					<div class="tf-grid-view">
-						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+						<div class="tf-field tf-field-text">
 							<label for="tf_user_approved" class="tf-field-label tf_user_approved"> <?php _e("Enable Selling and Approved", "tourfic"); ?> </label>
 							<div class="tf-users-switcher">
 								<label class="switch">
@@ -479,19 +479,19 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					<div class="tf-grid-view">
 						<?php wp_nonce_field( 'check_reg_nonce', 'tf_reg_nonce' ); ?>
 						<input type="hidden" name="tf_vendor_id" id="tf_vendor_id" value="<?php echo sanitize_key($_GET['user_id']) ?>">
-						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+						<div class="tf-field tf-field-text">
 							<label for="tf_username" class="tf-field-label"> <?php _e("Username", "tourfic"); ?> </label>
 							<div class="tf-fieldset">
 								<input type="text" name="tf_username" id="tf_username" value="<?php echo !empty($tf_user_info->user_login) ? $tf_user_info->user_login : ''; ?>" disabled/>
 							</div>
 						</div>
-						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+						<div class="tf-field tf-field-text">
 							<label for="tf_first_name" class="tf-field-label"> <?php _e("First Name", "tourfic"); ?> </label>
 							<div class="tf-fieldset">
 								<input type="text" name="tf_first_name" id="tf_first_name" value="<?php echo !empty($tf_user_info->first_name) ? $tf_user_info->first_name : ''; ?>" />
 							</div>
 						</div>
-						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+						<div class="tf-field tf-field-text">
 							<label for="tf_last_name" class="tf-field-label"> <?php _e("Last Name", "tourfic"); ?> </label>
 							<div class="tf-fieldset">
 								<input type="text" name="tf_last_name" id="tf_last_name" value="<?php echo !empty($tf_user_info->last_name) ? $tf_user_info->last_name : ''; ?>" />
@@ -499,19 +499,19 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						</div>
 					</div>
 					<div class="tf-grid-view">
-						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+						<div class="tf-field tf-field-text">
 							<label for="tf_user_email" class="tf-field-label"> <?php _e("Email", "tourfic"); ?> </label>
 							<div class="tf-fieldset">
 								<input type="text" name="tf_user_email" id="tf_user_email" value="<?php echo !empty($tf_user_info->user_email) ? $tf_user_info->user_email : ''; ?>" />
 							</div>
 						</div>
-						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+						<div class="tf-field tf-field-text">
 							<label for="tf_user_phone" class="tf-field-label"> <?php _e("Phone", "tourfic"); ?> </label>
 							<div class="tf-fieldset">
 								<input type="text" name="tf_user_phone" id="tf_user_phone" value="<?php echo !empty($tf_user_phone) ? $tf_user_phone : ''; ?>" />
 							</div>
 						</div>
-						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+						<div class="tf-field tf-field-text">
 							<label for="tf_user_password" class="tf-field-label"> <?php _e("New Password", "tourfic"); ?> </label>
 							<div class="tf-fieldset">
 								<input type="text" name="tf_user_password" id="tf_user_password" value="" />
@@ -519,7 +519,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						</div>
 					</div>
 					<div class="tf-grid-view">
-						<div class="tf-field tf-field-text" style="width: calc(33.33% - 10px);">
+						<div class="tf-field tf-field-text">
 							<label for="tf_user_approved" class="tf-field-label tf_user_approved"> <?php _e("Enable Selling and Approved", "tourfic"); ?> </label>
 							<div class="tf-users-switcher">
 								<label class="switch">

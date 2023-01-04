@@ -648,8 +648,30 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			$post_author   = get_post_field( 'post_author', $post_id );
 			$user_meta_roles = get_userdata($post_author);
 			if($user_meta_roles->roles[0]=="tf_vendor"){
-				$item->update_meta_data( '_vendor', 'yes' );
-				$item->save();
+
+				$tf_vendor_commision = !empty(tf_data_types(tfopt( 'multi-vendor-setings' ))["partner_commission"]) ? intval(tf_data_types(tfopt( 'multi-vendor-setings' ))["partner_commission"]) : '';
+				$vendor_due = ! empty( wc_get_order_item_meta( $item_id, 'due', true ) ) ? wc_get_order_item_meta( $item_id, 'due', true ) : 0;
+				$vendor_item_total_earning = $item->get_subtotal() + $vendor_due;
+				$total_commision = ($vendor_item_total_earning*$tf_vendor_commision)/100;
+				
+				// Data inserted to vendor Order History table
+				global $wpdb;     
+				$table_name_balance_history = $wpdb->prefix.'tf_vendor_balance_history';  
+				$wpdb->query(
+					$wpdb->prepare(
+					"INSERT INTO $table_name_balance_history
+					( vendor_id, order_id, amount, comission, wstatus, odate )
+					VALUES ( %d, %d, %s, %s, %s, %s )",
+						array(
+							$post_author,
+							$order_id,
+							$vendor_item_total_earning-$total_commision,
+							$total_commision,
+							$order->get_status(),
+							date('Y-m-d')
+						)
+					)
+				);
 			}
 		}
 
@@ -659,8 +681,29 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			$post_author   = get_post_field( 'post_author', $post_id );
 			$user_meta_roles = get_userdata($post_author);
 			if($user_meta_roles->roles[0]=="tf_vendor"){
-				$item->update_meta_data( '_vendor', 'yes' );
-				$item->save();
+				$tf_vendor_commision = !empty(tf_data_types(tfopt( 'multi-vendor-setings' ))["partner_commission"]) ? intval(tf_data_types(tfopt( 'multi-vendor-setings' ))["partner_commission"]) : '';
+				$vendor_due = ! empty( wc_get_order_item_meta( $item_id, 'due', true ) ) ? wc_get_order_item_meta( $item_id, 'due', true ) : 0;
+				$vendor_item_total_earning = $item->get_subtotal() + $vendor_due;
+				$total_commision = ($vendor_item_total_earning*$tf_vendor_commision)/100;
+				
+				// Data inserted to vendor Order History table
+				global $wpdb;     
+				$table_name_balance_history = $wpdb->prefix.'tf_vendor_balance_history';  
+				$wpdb->query(
+					$wpdb->prepare(
+					"INSERT INTO $table_name_balance_history
+					( vendor_id, order_id, amount, comission, wstatus, odate )
+					VALUES ( %d, %d, %s, %s, %s, %s )",
+						array(
+							$post_author,
+							$order_id,
+							$vendor_item_total_earning-$total_commision,
+							$total_commision,
+							$order->get_status(),
+							date('Y-m-d')
+						)
+					)
+				);
 			}
 		}
 		//Order Data Insert 
@@ -835,11 +878,43 @@ function tf_order_status_changed($order_id, $old_status, $new_status)
 {
 	global $wpdb;     
 	$table_name = $wpdb->prefix.'tf_order_data';  
+	$vendor_history_table_name = $wpdb->prefix.'tf_vendor_balance_history';  
 	$tf_order_checked = $wpdb->query($wpdb->prepare("SELECT * FROM $table_name WHERE order_id=%s",$order_id));
 	if( !empty($tf_order_checked) ){
 		$wpdb->query(
 			$wpdb->prepare("UPDATE $table_name SET ostatus=%s WHERE order_id=%s",$new_status,$order_id)
 		);
+	}
+	if("completed"==$new_status){
+		$tf_vendor_order_history = $wpdb->get_results($wpdb->prepare("SELECT * FROM $vendor_history_table_name WHERE order_id=%s",$order_id),ARRAY_A);
+		if(!empty($tf_vendor_order_history)){
+			
+			foreach($tf_vendor_order_history as $history_data){
+				$tf_vendor_checked = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_vendor_balance WHERE vendor_id = %s",$history_data["vendor_id"] ) );
+				if( !empty($tf_vendor_checked) ){
+					$tf_vendor_new_amount = $history_data['amount'] + $tf_vendor_checked->total_amount;
+					$wpdb->query(
+						$wpdb->prepare("UPDATE {$wpdb->prefix}tf_vendor_balance SET total_amount=%s WHERE vendor_id=%s",$tf_vendor_new_amount,$history_data["vendor_id"])
+					);
+				}
+			}
+		}
+	}
+
+	if("refunded"==$new_status){
+		$tf_vendor_order_history = $wpdb->get_results($wpdb->prepare("SELECT * FROM $vendor_history_table_name WHERE order_id=%s",$order_id),ARRAY_A);
+		if(!empty($tf_vendor_order_history)){
+			
+			foreach($tf_vendor_order_history as $history_data){
+				$tf_vendor_checked = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_vendor_balance WHERE vendor_id = %s",$history_data["vendor_id"] ) );
+				if( !empty($tf_vendor_checked) ){
+					$tf_vendor_new_amount = $tf_vendor_checked->total_amount-$history_data['amount'];
+					$wpdb->query(
+						$wpdb->prepare("UPDATE {$wpdb->prefix}tf_vendor_balance SET total_amount=%s WHERE vendor_id=%s",$tf_vendor_new_amount,$history_data["vendor_id"])
+					);
+				}
+			}
+		}
 	}
 
 }
@@ -924,6 +999,50 @@ function tf_admin_order_data_migration(){
 		 PRIMARY KEY  (id)
 	 ) $charset_collate;";
 	 dbDelta( $sql ); 
+
+	 // Multi vendor Tables
+	 // Withdraw table
+	 $tf_withdraw_table_name = $wpdb->prefix.'tf_vendor_withdraw';
+	 $sql = "CREATE TABLE IF NOT EXISTS $tf_withdraw_table_name (
+		id bigint(20) NOT NULL AUTO_INCREMENT,
+		vendor_id bigint(20) NOT NULL,
+		amount varchar(255),
+		udate date NOT NULL,  
+		payment_method varchar(255),
+		wstatus varchar(255),		
+		note varchar(255) NULL,
+		PRIMARY KEY  (id)
+	) $charset_collate;";
+	dbDelta( $sql ); 
+
+	// Vendor Balance History table
+	$tf_balance_history_table_name = $wpdb->prefix.'tf_vendor_balance_history';
+	$sql = "CREATE TABLE IF NOT EXISTS $tf_balance_history_table_name (
+		id bigint(20) NOT NULL AUTO_INCREMENT,
+		vendor_id bigint(20) NOT NULL,
+		order_id bigint(20) NOT NULL,
+		amount varchar(255),
+		comission varchar(255),
+		wstatus varchar(255),
+		odate date NOT NULL,  
+		PRIMARY KEY  (id)
+	) $charset_collate;";
+	dbDelta( $sql ); 
+
+	// Vendor Balance table
+	$tf_balance_table_name = $wpdb->prefix.'tf_vendor_balance';
+	$sql = "CREATE TABLE IF NOT EXISTS $tf_balance_table_name (
+		id bigint(20) NOT NULL AUTO_INCREMENT,
+		vendor_id bigint(20) NOT NULL,
+		total_amount varchar(255) NULL,
+		pending_amount varchar(255) NULL,
+		withdrawable_amount varchar(255) NULL,
+		total_withdraw varchar(255) NULL,
+		wstatus varchar(255),
+		created_date date NOT NULL,  
+		PRIMARY KEY  (id)
+	) $charset_collate;";
+	dbDelta( $sql ); 
 
 	if ( empty( get_option( 'tf_old_order_data_migrate' ) ) ) {
 

@@ -257,9 +257,9 @@
   margin-top: 20px;
   border-radius: 5px;
   margin-right: 20px;
+  width: 33%;
+  box-shadow: 0 0 0 1px rgba(200, 215, 225, 0.5), 0 1px 2px #e9eff3;
   .tf-grid-view{
-    display: flex;
-    justify-content: space-between;
     .tf-save-user{
       padding: 8px 15px;
       font-size: 16px;

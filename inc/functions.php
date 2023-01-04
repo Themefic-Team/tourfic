@@ -1703,6 +1703,23 @@ function tf_vendor_registration_callback() {
 			echo sprintf( '<div class="tf_success">%s</div>', __( 'Successfully registered. Please check your email and login.', 'tourfic' ) );
 		}
 
+		// Data inserted to vendor table
+
+		global $wpdb;     
+		$table_name = $wpdb->prefix.'tf_vendor_balance';  
+		$wpdb->query(
+			$wpdb->prepare(
+			"INSERT INTO $table_name
+			( vendor_id, wstatus, created_date )
+			VALUES ( %d, %s, %s )",
+				array(
+					$user_id,
+					!empty($vendor_status) && $vendor_status==1 ? 'enabled' : 'disabled',
+					date('Y-m-d')
+				)
+			)
+		);
+
 		wp_new_user_notification( $user_id, 'both' );
 	}
 
