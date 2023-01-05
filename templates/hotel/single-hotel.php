@@ -295,14 +295,14 @@ while ( have_posts() ) : the_post();
 						<?php } ?>
                         <!-- End gallery-->
                         <div class="map-for-mobile">
-							<?php if ( ! defined( 'TF_PRO' ) && ( $address ) ) { ?>
+							<?php if ( function_exists('is_tf_pro') && ! is_tf_pro() && ( $address ) ) { ?>
                                 <div class="show-on-map">
                                     <div class="tf-btn"><a href="https://www.google.com/maps/search/<?php echo $address; ?>" target="_blank" class="btn-styled"><span><i
                                                         class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a></div>
                                 </div>
 							<?php } ?>
                         </div>
-						<?php if ( defined( 'TF_PRO' ) && ( ! empty( $map["address"] ) || ! empty( $map["latitude"] ) || ! empty( $map["longitude"] ) ) ) { ?>
+						<?php if ( function_exists('is_tf_pro') && is_tf_pro() && ( ! empty( $map["address"] ) || ! empty( $map["latitude"] ) || ! empty( $map["longitude"] ) ) ) { ?>
                             <div class="popupmap-for-mobile">
                                 <div class="tf-hotel-location-preview show-on-map">
                                     <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&output=embed" width="100%" height="150"
@@ -330,13 +330,13 @@ while ( have_posts() ) : the_post();
 						<?php } ?>
                     </div>
                     <div class="hero-right">
-						<?php if ( ! defined( 'TF_PRO' ) && ( $address ) ) { ?>
+						<?php if (function_exists('is_tf_pro') &&  ! is_tf_pro() && ( $address ) ) { ?>
                             <div class="show-on-map">
                                 <div class="tf-btn"><a href="https://www.google.com/maps/search/<?php echo $address; ?>" target="_blank" class="btn-styled"><span><i
                                                     class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a></div>
                             </div>
 						<?php } ?>
-						<?php if ( defined( 'TF_PRO' ) && ( ! empty( $map["address"] ) || ! empty( $map["latitude"] ) || ! empty( $map["longitude"] ) ) ) { ?>
+						<?php if ( function_exists('is_tf_pro') && is_tf_pro() && ( ! empty( $map["address"] ) || ! empty( $map["latitude"] ) || ! empty( $map["longitude"] ) ) ) { ?>
                             <div class="tf-hotel-location-preview show-on-map">
                                 <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&output=embed" width="100%" height="150"
                                         style="border:0;" allowfullscreen="" loading="lazy"></iframe>
@@ -441,15 +441,26 @@ while ( have_posts() ) : the_post();
 										$pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
 										$avil_by_date = ! empty( $room['avil_by_date'] ) ? ! empty( $room['avil_by_date'] ) : false;
 
-										if ( $avil_by_date == true ) {
+										if ( function_exists('is_tf_pro') && is_tf_pro() && $avil_by_date == true ) {
 											$repeat_by_date = ! empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
 											if ( $pricing_by == '1' ) {
 												$prices = wp_list_pluck( $repeat_by_date, 'price' );
 											} else {
 												$prices = wp_list_pluck( $repeat_by_date, 'adult_price' );
 											}
-
-											$price = $prices ? (min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) )) : wc_price( 0 );
+                                            if(!empty($prices)){
+                                                $range_price = [];
+                                                foreach($prices as $single){
+                                                    if(!empty($single)){
+                                                        $range_price[]= $single ;
+                                                    }
+                                                }
+                                                if(sizeof($range_price) > 1){
+                                                    $price = $prices ? (min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) )) : wc_price( 0 );
+                                                }else{
+                                                    $price = !empty($range_price[0]) ? wc_price($range_price[0]) : wc_price( 0 );
+                                                }
+                                            }
 										} else {
 											if ( $pricing_by == '1' ) {
 												$price = wc_price( ! empty( $room['price'] ) ? $room['price'] : '0.0' );
@@ -467,7 +478,7 @@ while ( have_posts() ) : the_post();
 														if ( $tour_room_details_gall ) {
 															$tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
 														}
-														if ( defined( 'TF_PRO' ) && $tour_room_details_gall ){
+														if (function_exists('is_tf_pro') && is_tf_pro() && $tour_room_details_gall ){
 															?>
                                                             <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'].$key : '' ?>"
                                                                    data-hotel="<?php echo $post_id; ?>" style="text-decoration: underline;">
@@ -521,14 +532,16 @@ while ( have_posts() ) : the_post();
 															<?php foreach ( $room['features'] as $feature ) {
 
 																$room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
-
+                                                                if(!empty($room_f_meta)){
 																$room_icon_type = ! empty( $room_f_meta['icon-type'] ) ? $room_f_meta['icon-type'] : '';
-
-																if ( $room_icon_type == 'fa' ) {
-																	$room_feature_icon = '<i class="' . $room_f_meta['icon-fa'] . '"></i>';
-																} elseif ( $room_icon_type == 'c' ) {
-																	$room_feature_icon = '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />';
-																}
+                                                                }
+																if ( !empty($room_icon_type) && $room_icon_type == 'fa' ) {
+																	$room_feature_icon = !empty($room_f_meta['icon-fa']) ? '<i class="' . $room_f_meta['icon-fa'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
+																} elseif ( !empty($room_icon_type) && $room_icon_type == 'c' ) {
+																	$room_feature_icon = !empty($room_f_meta['icon-c']) ? '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
+																}else{
+                                                                    $room_feature_icon = '<i class="fas fa-bread-slice"></i>';
+                                                                }
 
 																$room_term = get_term( $feature ); ?>
                                                                 <li class="tf-tooltip">

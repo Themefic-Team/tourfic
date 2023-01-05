@@ -622,7 +622,6 @@ class TF_Tour_Activities_Filter extends WP_Widget {
      * @return array Updated safe values to be saved.
      */
     public function update( $new_instance, $old_instance ) {
-        //$instance = array();
         $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
         $instance['terms'] = ( !empty( $new_instance['terms'] ) ) ? $new_instance['terms'] : 'all';
         $instance['show_count'] = ( !empty( $new_instance['show_count'] ) ) ? strip_tags( $new_instance['show_count'] ) : '';

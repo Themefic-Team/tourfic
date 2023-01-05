@@ -1155,27 +1155,27 @@ add_action( 'init', 'tf_migrate_data' );
  * */
 function tf_migrate_option_data(){
 
-	if ( get_option( 'tf_migrate_data_204_210' ) < 2 ) {
-
+	if ( empty( get_option( 'tf_migrate_data_204_210_2022' ) ) ) {
 
 		/** Tours Migrations */
 		$tours = get_posts( [ 'post_type' => 'tf_tours', 'numberposts' => - 1, ] );
 		foreach ( $tours as $tour ) {
 			$old_meta = get_post_meta( $tour->ID );
-			$tour_options         = unserialize( $old_meta['tf_tours_option'][0] );
-
-			if(isset($tour_options['hightlights_thumbnail']) && is_array($tour_options['hightlights_thumbnail'])){
-				$tour_options['hightlights_thumbnail'] = $tour_options['hightlights_thumbnail']['url'];
+			if(!empty($old_meta['tf_tours_option'])){
+				$tour_options         = unserialize( $old_meta['tf_tours_option'][0] );
+	
+				if(isset($tour_options['hightlights_thumbnail']) && is_array($tour_options['hightlights_thumbnail'])){
+					$tour_options['hightlights_thumbnail'] = $tour_options['hightlights_thumbnail']['url'];
+				}
+				if(isset($tour_options['include-exclude-bg']) && is_array($tour_options['include-exclude-bg'])){
+					$tour_options['include-exclude-bg'] = $tour_options['include-exclude-bg']['url'];
+				}
+				update_post_meta(
+					$tour->ID,
+					'tf_tours_opt',
+					$tour_options
+				);
 			}
-			if(isset($tour_options['include-exclude-bg']) && is_array($tour_options['include-exclude-bg'])){
-				$tour_options['include-exclude-bg'] = $tour_options['include-exclude-bg']['url'];
-			}
-			update_post_meta(
-				$tour->ID,
-				'tf_tours_opt',
-				$tour_options
-			);
-
 
 		}
 		/** Tour Destinations Image Fix */
@@ -1207,14 +1207,17 @@ function tf_migrate_option_data(){
 
 		foreach ( $hotels as $hotel ) {
 			$old_meta = get_post_meta( $hotel->ID );
-			$hotel_options         = unserialize( $old_meta['tf_hotel'][0] );
+			if(!empty($old_meta['tf_hotel'])){
+				$hotel_options         = unserialize( $old_meta['tf_hotel'][0] );
+			
 
-			// $tour_options = serialize( $tour_options );
-			update_post_meta(
-				$hotel->ID,
-				'tf_hotels_opt',
-				$hotel_options
-			);
+				// $tour_options = serialize( $tour_options );
+				update_post_meta(
+					$hotel->ID,
+					'tf_hotels_opt',
+					$hotel_options
+				);
+			}
 
 		}
 
@@ -1281,7 +1284,29 @@ function tf_migrate_option_data(){
 
 		wp_cache_flush();
 		flush_rewrite_rules( true );
-		update_option( 'tf_migrate_data_204_210', 2 );
+		update_option( 'tf_migrate_data_204_210_2022', 2 );
+	}
+
+
+	if ( empty( get_option( 'tf_license_data_migrate_data_204_210_2022' ) ) ) {
+
+		/** License Migrate */
+		
+		$old_setting_option = get_option( 'tourfic_opt' );
+		if(!empty($old_setting_option['license-key']) && !empty($old_setting_option['license-email'])){
+			$tf_settings['license-key']   = $old_setting_option['license-key'];
+			$tf_settings['license-email'] = $old_setting_option['license-email'];
+			update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
+		}else{
+			$tf_setting_option = get_option( 'tf_settings' );
+			$tf_settings['license-key']   = !empty($tf_setting_option['license-key']) ? $tf_setting_option['license-key'] : '';
+			$tf_settings['license-email'] = !empty($tf_setting_option['license-email']) ? $tf_setting_option['license-email'] : '';
+			update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
+		}
+		
+		wp_cache_flush();
+		flush_rewrite_rules( true );
+		update_option( 'tf_license_data_migrate_data_204_210_2022', 2 );
 	}
 
 
@@ -1390,8 +1415,71 @@ function tf_save_custom_fields(){
     if( isset($_POST['hotel_slug']) ){
         update_option( 'hotel_slug',  $_POST['hotel_slug'] );
     }
+
+	
 }
 add_action( 'admin_init', 'tf_save_custom_fields' );
+
+
+/**
+ * Monthwise Chart Ajax function
+ *
+ * @author Jahid
+ */
+add_action( 'wp_ajax_nopriv_tf_month_reports', 'tf_month_chart_filter_callback' );
+add_action( 'wp_ajax_tf_month_reports', 'tf_month_chart_filter_callback' );
+
+function tf_month_chart_filter_callback(){
+	$search_month = sanitize_key( $_POST['month'] );
+	$month_dates = cal_days_in_month( CAL_GREGORIAN, $search_month, date('Y') );
+	
+	//Order Data Retrive
+	$tf_old_order_limit = new WC_Order_Query( array (
+		'limit' => -1,
+		'orderby' => 'date',
+		'order' => 'ASC',
+		'return' => 'ids',
+	) );
+	$order = $tf_old_order_limit->get_orders();
+	$months_day_number = [];
+	for($i=1; $i<=$month_dates; $i++){
+		$months_day_number [] = $i;
+
+		// Booking Month
+		${"tf_co$i"} = 0;
+		// Booking Cancel Month
+		${"tf_cr$i"} = 0;
+	}
+	
+	foreach ( $order as $item_id => $item ) {
+		$itemmeta = wc_get_order( $item);
+		$tf_ordering_date =  $itemmeta->get_date_created();
+		for($i=1; $i<=$month_dates; $i++){
+			if($tf_ordering_date->date('n-j-y')==$search_month.'-'.$i.'-'.date('y')){
+				if("completed"==$itemmeta->get_status()){
+					${"tf_co$i"}+=1;
+				}
+				if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
+					${"tf_cr$i"}+=1;
+				}
+			}
+		}
+	}
+	$tf_complete_orders = [];
+	$tf_cancel_orders = [];
+	for($i=1; $i<=$month_dates; $i++){
+		$tf_complete_orders [] = ${"tf_co$i"};
+		$tf_cancel_orders [] = ${"tf_cr$i"};
+	}
+
+	$response['months_day_number']  = $months_day_number;
+	$response['tf_complete_orders']  = $tf_complete_orders;
+	$response['tf_cancel_orders']  = $tf_cancel_orders;
+	$response['tf_search_month']  =	date("F", strtotime('2000-'.$search_month.'-01'));
+	echo wp_json_encode( $response );
+
+	die();
+}
 
 /**
  * Assign taxonomy(tour_features) from the single post metabox
@@ -1413,3 +1501,4 @@ function tf_assign_taxonomies( $post_id, $post, $old_status ){
 	die();
 	wp_set_object_terms( $post_id, $features, 'tour_features' );
 }
+

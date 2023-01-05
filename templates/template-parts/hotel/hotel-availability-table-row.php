@@ -7,7 +7,7 @@
             if ($tour_room_details_gall) {
                 $tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
             }
-            if (defined( 'TF_PRO' ) && $tour_room_details_gall){ 
+            if (function_exists('is_tf_pro') && is_tf_pro() && $tour_room_details_gall){ 
             ?>	
             <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: underline;">
                 <?php echo esc_html( $room['title'] ); ?>
@@ -59,13 +59,15 @@
                 foreach ( $room['features'] as $feature ) {
 
                         $room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
-                        if( !empty( $room_f_meta ) ){
-                            if ( $room_f_meta['icon-type'] == 'fa' ) {
-                                $room_feature_icon = '<i class="' . $room_f_meta['icon-fa'] . '"></i>';
-                            } elseif ( $room_f_meta['icon-type'] == 'c' ) {
-                                $room_feature_icon = '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />';
-                            }
+                        
+                        if ( !empty($room_f_meta['icon-type']) && $room_f_meta['icon-type'] == 'fa' ) {
+                            $room_feature_icon = !empty($room_f_meta['icon-fa']) ? '<i class="' . $room_f_meta['icon-fa'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
+                        } elseif ( !empty($room_f_meta['icon-type']) && $room_f_meta['icon-type'] == 'c' ) {
+                            $room_feature_icon = !empty($room_f_meta['icon-c']) ? '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
+                        }else{
+                            $room_feature_icon = '<i class="fas fa-bread-slice"></i>';
                         }
+                        
                        
 
                     $room_term = get_term( $feature );?>
@@ -116,7 +118,7 @@
                 <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );?></div>
             <?php }?>
 
-            <?php if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount)) { ?>
+            <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount)) { ?>
                 <span class="tf-price tf-deposit-amount-<?php echo $room_id ?>" style="display: none;"><?php echo wc_price( $deposit_amount ); ?></span>
                 <div class="price-per-night tf-deposit-amount-<?php echo $room_id ?> " style="display: none;"><?php _e('need to be deposited', 'tourfic') ?></div>
             <?php } ?>
@@ -137,7 +139,7 @@
             </div>
             <div class="room-submit-wrap">
             <div class="roomselectissue"></div>
-            <?php if (defined( 'TF_PRO' ) && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
+            <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
                 
                 <div class="room-deposit-wrap">
                     <input type="checkbox" id="tf-make-deposit" name="make_deposit" value="<?php echo $room_id ?>">
@@ -162,7 +164,7 @@
                 $tour_hotel_service_avail = !empty($meta['airport_service']) ? $meta['airport_service'] : '';
                 $tour_hotel_service_type = !empty($meta['airport_service_type']) ? $meta['airport_service_type'] : '';
                 
-                if(defined( 'TF_PRO' ) && !empty($tour_hotel_service_avail) && !empty($tour_hotel_service_type)){
+                if(function_exists('is_tf_pro') && is_tf_pro() && !empty($tour_hotel_service_avail) && !empty($tour_hotel_service_type)){
                 ?>
                 <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
                 
@@ -171,7 +173,7 @@
                     <div class="tf-hotel-services">
                         <div class="tf-hotel-services-text">
                             <h3><?php _e(tfopt('hotel_service_popup_title', 'Add Service to your Booking.'), 'tourfic');?></h3>
-                            <p><?php _e(tfopt('deposit-subtitle', 'Select the services you want to add to your booking.'), 'tourfic');?></p>
+                            <p><?php _e(tfopt('hotel_service_popup_subtile', 'Select the services you want to add to your booking.'), 'tourfic');?></p>
                         </div>
                         <div class="tf-hotel-service">
                             <label><?php _e('Pickup & Drop-off Service', 'tourfic');?></label>

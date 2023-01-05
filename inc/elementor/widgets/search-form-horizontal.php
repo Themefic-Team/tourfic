@@ -63,7 +63,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			'tour'  => __( 'Tour', 'tourfic' ),
 		);
 
-		if ( defined( 'TF_PRO' ) ) {
+		if ( function_exists('is_tf_pro') && is_tf_pro() ) {
 			$types['booking']   = __( 'Booking.com', 'tourfic' );
 			$types['tp-flight'] = __( 'TravelPayouts Flight', 'tourfic' );
 			$types['tp-hotel']  = __( 'TravelPayouts Hotel', 'tourfic' );

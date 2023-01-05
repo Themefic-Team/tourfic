@@ -463,7 +463,7 @@
             $this_parent.find('.tf-repeater-wrap .tf-field-notice-inner').remove();
             // Chacked maximum repeater
             if (max != '' && count >= max) {
-                $this_parent.find('.tf-repeater-wrap').append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You cannot add more.</div>');
+                $this_parent.find('.tf-repeater-wrap').append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You have reached limit in free version. Please subscribe to Pro for unlimited access</div>');
                 return false;
             }
 
@@ -544,6 +544,21 @@
                 }
             });
 
+             // Replace Old editor
+             add_value.find('.wp-editor-wrap').each(function () {
+                var textarea = $(this).find('.tf_wp_editor').show();
+                // Get content of a specific editor:
+                var tf_editor_ex_data = $('#'+textarea.attr('id')+'').val();
+                if(tf_editor_ex_data && typeof tf_editor_ex_data !== "undefined"){
+                    var textarea_content = tinymce.get(textarea.attr('id')).getContent();
+                }else{
+                    var textarea_content = '';
+                }
+                textarea.val(textarea_content);
+                $(this).closest('.tf-field-textarea').append(textarea);
+                $(this).remove();
+            });
+
             // Update Data Append value
             var append = $this_parent.find('.tf-repeater-wrap-' + id + '');
 
@@ -551,6 +566,7 @@
 
             // replace new editor
             add_value.find('textarea.parent_wp_editor').each(function () {
+                var count =  Math.random().toString(36).substring(3,9) + 1 ; 
                 this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + count + '');
                 var parent_repeater_id = $(this).attr('id');
                 TF_wp_editor(parent_repeater_id);
@@ -563,7 +579,7 @@
                 var $this = $(this);
                 tfSelect2Int($this);
             });
-
+            
             // repeater dependency repeater
             TF_dependency();
         });
@@ -599,7 +615,7 @@
             $this_parent.find('.tf-field-notice-inner').remove();
             // Chacked maximum repeater
             if (max != '' && count >= max) {
-                $this_parent.append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You cannot add more.</div>');
+                $this_parent.append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You have reached limit in free version. Please subscribe to Pro for unlimited access</div>');
                 return false;
             }
 
@@ -682,7 +698,12 @@
             clone_value.find('.wp-editor-wrap').each(function () {
                 var textarea = $(this).find('.tf_wp_editor').show();
                 // Get content of a specific editor:
-                var textarea_content = tinymce.get(textarea.attr('id')).getContent()
+                var tf_editor_ex_data = $('#'+textarea.attr('id')+'').val();
+                if(tf_editor_ex_data && typeof tf_editor_ex_data !== "undefined"){
+                    var textarea_content = tinymce.get(textarea.attr('id')).getContent();
+                }else{
+                    var textarea_content = '';
+                }
                 textarea.val(textarea_content);
                 $(this).closest('.tf-field-textarea').append(textarea);
                 $(this).remove();
@@ -706,8 +727,8 @@
             $(this).closest('.tf-repeater-wrap').append(clone_value).show();
 
             // Clone Wp Editor
-            clone_value.find('textarea.parent_wp_editor, textarea.wp_editor').each(function () {
-
+            clone_value.find('textarea.parent_wp_editor, textarea.wp_editor').each(function () { 
+                var count =  Math.random().toString(36).substring(3,9) + 1 ; 
                 this.id = this.id.replace('' + current_field + '__' + repeater_count, '' + current_field + '__' + count + '');
                 var parent_repeater_id = $(this).attr('id');
                 TF_wp_editor(parent_repeater_id);
@@ -726,12 +747,13 @@
 
         // Repeater show hide
         $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
-            $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').slideToggle();
-            $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').toggleClass('hide');
-            if ($(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').hasClass('hide') == true) {
-                $(this).closest('.tf-single-repeater').find('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-up"></i>');
+            var tf_repater_fieldname = $(this).closest('.tf-single-repeater').find('input[name=tf_current_field]').val();
+            $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+'').find('.tf-repeater-content-wrap').slideToggle();
+            $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+'').children('.tf-repeater-content-wrap').toggleClass('hide');
+            if ($(this).closest('.tf-single-repeater-'+tf_repater_fieldname+'').children('.tf-repeater-content-wrap').hasClass('hide')== true) {
+                $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-down"></i>');
             } else {
-                $(this).closest('.tf-single-repeater').find('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-down"></i>');
+                $(this).closest('.tf-single-repeater-'+tf_repater_fieldname+' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-up"></i>');
             }
         });
 
@@ -794,23 +816,25 @@ var frame, gframe;
     // Single Image remove
     $(document).on("click", ".tf-image-close", function (e) {
         e.preventDefault();
+        $this = $(this);
         var fieldname = $(this).attr("tf-field-name");
         var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
-        $('input[name="' + fieldname + '"]').val('');
-        $('.' + tf_preview_class + '').html('');
+        $this.parent().parent().find('input').val(''); 
+        $this.parent().html('');
 
     });
 
     // Gallery Image remove
     $(document).on("click", ".tf-gallery-remove", function (e) {
         e.preventDefault();
+        $this = $(this);
         var fieldname = $(this).attr("tf-field-name");
         var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
-        $('input[name="' + fieldname + '"]').val('');
-        $('.tf-fieldset > .' + tf_preview_class + '').html('');
-        $('a.' + tf_preview_class + '').css("display", "none");
+        $this.parent().parent().find('input').val('');
+        $this.parent().parent().find('.tf-fieldset-gallery-preview').html('');
+        $('a.tf-gallery-edit, a.tf-gallery-remove').css("display", "none");
 
     });
 
@@ -819,6 +843,7 @@ var frame, gframe;
         // Single Image Upload
 
         $('body').on('click', '.tf-media-upload', function (e) {
+            var $this = $(this); 
             var fieldname = $(this).attr("tf-field-name");
             var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
 
@@ -832,8 +857,8 @@ var frame, gframe;
             frame.on('select', function () {
 
                 var attachment = frame.state().get('selection').first().toJSON();
-                $('input[name="' + fieldname + '"]').val(attachment.url);
-                $('.' + tf_preview_class + '').html(`<div class="tf-image-close" tf-field-name='${fieldname}'>✖</div><img src='${attachment.url}' />`);
+                $this.parent().parent().find('input').val(attachment.url);
+                $this.parent().parent().find('.tf-fieldset-media-preview').html(`<div class="tf-image-close" tf-field-name='${fieldname}'>✖</div><img src='${attachment.url}' />`);
             });
             frame.open();
             return false;
@@ -841,7 +866,8 @@ var frame, gframe;
 
         // Gallery Image Upload
 
-        $('body').on('click', '.tf-gallery-upload', function (e) {
+        $('body').on('click', '.tf-gallery-upload, .tf-gallery-edit', function (e) {
+            var $this = $(this);
             var fieldname = $(this).attr("tf-field-name");
             var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
             gframe = wp.media({
@@ -854,7 +880,7 @@ var frame, gframe;
 
             gframe.on('open', function () {
                 var selection = gframe.state().get('selection');
-                var ids_value = jQuery('input[name="' + fieldname + '"]').val();
+                var ids_value = $this.parent().parent().find('input').val();
 
                 if (ids_value.length > 0) {
                     var ids = ids_value.split(',');
@@ -871,20 +897,23 @@ var frame, gframe;
                 var image_ids = [];
                 var image_urls = [];
                 var attachments = gframe.state().get('selection').toJSON();
-                $('.tf-fieldset > .' + tf_preview_class + '').html('');
+                $this.parent().parent().find('.tf-fieldset-gallery-preview').html('');
                 for (i in attachments) {
                     var attachment = attachments[i];
                     image_ids.push(attachment.id);
                     image_urls.push(attachment.url);
-                    $('.tf-fieldset > .' + tf_preview_class + '').append(`<img src='${attachment.url}' />`);
+                    $this.parent().parent().find('.tf-fieldset-gallery-preview').append(`<img src='${attachment.url}' />`);
                 }
-                $('input[name="' + fieldname + '"]').val(image_ids.join(","));
-                $('a.' + tf_preview_class + '').css("display", "inline-block");
+                $this.parent().parent().find('input').val(image_ids.join(","));
+                $this.parent().find('a.tf-gallery-edit, a.tf-gallery-remove').css("display", "inline-block");
             });
 
             gframe.open();
             return false;
         });
+
+
+
         // Texonomy submit event
         $('#addtag > .submit #submit').click(function () {
             $(".tf-fieldset-media-preview").html("");
@@ -1015,12 +1044,26 @@ var frame, gframe;
                 $latitude.on('change', input_update_latlng);
                 $longitude.on('change', input_update_latlng);
 
+                setInterval(function() {   
+                    mapInit.invalidateSize(); 
+                }, 100);
             });
         }
 
         $('.tf-mobile-tabs').click(function (e) {
             e.preventDefault();
             $(".tf-admin-tab").toggleClass('active');
+        }); 
+
+
+        $('.tf-faq-title').click(function () {
+            var $this = $(this);
+            if (!$this.hasClass("active")) {
+                $(".tf-faq-desc").slideUp(400);
+                $(".tf-faq-title").removeClass("active");
+            }
+            $this.toggleClass("active");
+            $this.next().slideToggle();
         });
     });
 
@@ -1277,10 +1320,118 @@ var frame, gframe;
 
 })(jQuery);
 
+/*
+* Author @Jahid
+* Report Chart
+*/
+
 (function ($) {
-    'use strict';
     $(document).ready(function () {
+        if(tf_options.tf_chart_enable==1){    
+            var ctx = document.getElementById('tf_months'); // node
+            var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context
+            var ctx = $('#tf_months'); // jQuery instance
+            var ctx = 'tf_months'; // element id
 
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ["January","February","March","April","May","June","July","August","September","October","November","December"],
+                    // Information about the dataset
+                datasets: [{
+                        label : "Completed Booking",
+                        borderColor: '#003C79',
+                        tension: 0.1,
+                        data: tf_options.tf_complete_order,       
+                        fill: false
+                    },
+                    {
+                        label : "Cancelled Booking",
+                        borderColor: 'red',
+                        tension: 0.1,
+                        data: tf_options.tf_cancel_orders, 
+                        fill: false
+                    }
+                ]
+                },
 
+                // Configuration options
+                options: {
+                layout: {
+                padding: 10,
+                },
+                    legend: {
+                        display: true
+                    },
+                    title: {
+                        display: true,
+                        text: ""
+                    }
+                }
+
+            });
+        }
+
+        $(document).on('change', '#tf-month-report', function () {
+            var monthTarget = $(this).val();
+            if(monthTarget!=0){
+                $("#tf-report-loader").addClass('show');
+                $('.tf-order-report').find('iframe').remove();
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_options.ajax_url,
+                    data: {
+                        action: 'tf_month_reports',
+                        month: monthTarget,
+                    },
+                    success: function (data) {
+                        var response = JSON.parse(data);
+                        var ctx = document.getElementById('tf_months'); // node
+                        var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context
+                        var ctx = $('#tf_months'); // jQuery instance
+                        var ctx = 'tf_months'; // element id
+
+                        var chart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: response.months_day_number,
+                                // Information about the dataset
+                            datasets: [{
+                                    label : "Completed Booking",
+                                    borderColor: '#003C79',
+                                    tension: 0.1,
+                                    data: response.tf_complete_orders,       
+                                    fill: false
+                                },
+                                {
+                                    label : "Cancelled Booking",
+                                    borderColor: 'red',
+                                    tension: 0.1,
+                                    data: response.tf_cancel_orders, 
+                                    fill: false
+                                }
+                            ]
+                            },
+
+                            // Configuration options
+                            options: {
+                            layout: {
+                            padding: 10,
+                            },
+                                legend: {
+                                    display: true
+                                },
+                                title: {
+                                    display: true,
+                                    text: response.tf_search_month
+                                }
+                            }
+
+                        });
+                        $("#tf-report-loader").removeClass('show');
+                    }
+                })
+            }
+        });
     });
 })(jQuery);

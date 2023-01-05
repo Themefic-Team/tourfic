@@ -144,40 +144,6 @@ button.tf-order-remove{
 }
 
 /**
- * Codestar
- */
-.disable-sortable .csf-repeater-sort,
-.disable-sortable .csf-repeater-clone {
-    display: none !important;
-}
-/**
- * Override Codestar repeater for Hotel Room
- */
-.csf-section .room-repeater > .csf-title{
-    width: 100%;
-    margin: 0 0 20px 0;
-    font-size: 18px;
-}
-.csf-section .room-repeater > .csf-fieldset{
-    width: 100%;
-}
-.csf-section .room-repeater .csf-repeater-wrapper .csf-repeater-item {
-    margin: 0 0 20px 0;
-    border-bottom: 2px solid #2271b1;
-}
-
-.csf-section .room-repeater .repeater-by-date > .csf-title{
-    display: none;
-}
-.csf-section .room-repeater .repeater-by-date > .csf-fieldset{
-    width: 100%;
-}
-.csf-section .room-repeater .repeater-by-date .csf-repeater-wrapper .csf-repeater-item {
-    margin: 0 0 20px 0;
-    border-bottom: 1px solid #eee;
-}
-
-/**
  * Change admin menu color
  */
 #adminmenu .toplevel_page_tourfic .dashicons-before:before {
@@ -191,4 +157,23 @@ button.tf-order-remove{
 }
 #adminmenu .menu-icon-tf_apartment .dashicons-before:before {
     color: #f02348;
+}
+/**
+ * License Button Color
+ */
+ .tf-notice.tf-notice-danger{
+    color: red;
+    font-size: 1rem;
+ }
+ .tf-license-activate p.submit,
+ .el-license-active-btn p.submit{
+    margin: 0px !important;
+ }
+.tf-license-activate p.submit input,
+.el-license-active-btn p.submit input{
+    background-color: #003C79 !important;
+    border-color: #003C79 !important;
+    color: #fff;
+    padding: 4px 25px;
+    font-size: 1rem;
 }
