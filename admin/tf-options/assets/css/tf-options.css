@@ -665,32 +665,6 @@ Fontawesome
   opacity: 1;
   visibility: visible; }
 
-.tf-vendor-setting {
-  background-color: #fff;
-  padding: 20px 25px;
-  margin-top: 20px;
-  border-radius: 5px;
-  margin-right: 20px;
-  width: 33%;
-  box-shadow: 0 0 0 1px rgba(200, 215, 225, 0.5), 0 1px 2px #e9eff3; }
-  .tf-vendor-setting .tf-grid-view .tf-save-user {
-    padding: 8px 15px;
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    margin-top: 10px; }
-  .tf-vendor-setting .tf-grid-view .tf_user_approved {
-    margin-bottom: 10px; }
-  .tf-vendor-setting .tf-vendor-reg-response .tf_errors {
-    color: red;
-    font-size: 16px;
-    line-height: 24px; }
-  .tf-vendor-setting .tf-vendor-reg-response .tf_success {
-    color: green;
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 600; }
-
 .tf-settings-help-center .tf-help-center-banner {
   background-color: #fff;
   border-radius: 10px;
