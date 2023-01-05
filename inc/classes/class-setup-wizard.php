@@ -71,10 +71,10 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             <a href="<?php echo esc_url( admin_url( 'admin.php?page=tf_settings' ) ); ?>" class="tf-admin-btn tf-btn-secondary back-to-dashboard"><span><?php _e( 'Back to dashboard', 'tourfic' ) ?></span></a>
                         </div>
                         <div class="tf-setup-header-right">
-                            <span class="get-help-link">Having troubles? <a class="" href="https://support.themewinter.com/docs/plugins/docs/eventin/"> Get help </a></span>
+                            <span class="get-help-link">Having troubles? <a class="" href=""> Get help </a></span>
                         </div>
                     </div>
-                    <form action="" class="tf-setup-form" id="msform">
+                    <form action="" class="tf-setup-form">
 						<?php
 						$this->tf_setup_welcome_step();
 						$this->tf_setup_step_one();
@@ -95,7 +95,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
             <div class="tf-setup-content-layout tf-welcome-step <?php echo self::$current_step == 'welcome' ? 'active' : ''; ?>">
                 <div class="welcome-img"><img src="http://tourfic.wp/wp-content/plugins/wp-event-solution/build/assets/images/welcome.png" alt="<?php esc_attr_e( 'Welcome to Tourfic!', 'tourfic' ) ?>"></div>
                 <h1 class="tf-setup-welcome-title"><?php _e( 'Welcome to Tourfic!', 'tourfic' ) ?></h1>
-                <div class="tf-setup-welcome-description"><?php _e( 'Thanks for choosing Tourfic to manage your next events. Easily create and manage unlimited online and offline events.', 'tourfic' ) ?></div>
+                <div class="tf-setup-welcome-description"><?php _e( 'Thanks for choosing Tourfic for your travel business. We are excited to have you on board. This quick setup wizard will help you configure the basic settings. It’s completely optional and shouldn’t take longer than five minutes.', 'tourfic' ) ?></div>
                 <div class="tf-setup-welcome-footer">
                     <button type="button" class="tf-admin-btn tf-btn-secondary tf-setup-start-btn"><span><?php _e( 'Get Started', 'tourfic' ) ?></span></button>
                     <a href="<?php echo esc_url( admin_url( 'admin.php?page=tf_settings' ) ); ?>" class="tf-link-btn"><?php _e( 'Skip to dashboard', 'tourfic' ) ?></a>
@@ -156,7 +156,44 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
             <div class="tf-setup-step-container tf-setup-step-2 <?php echo self::$current_step == 'step_2' ? 'active' : ''; ?>" data-step="2">
                 <section class="tf-setup-step-layout">
 					<?php $this->tf_setup_wizard_steps( 2 ) ?>
-                    <h1>2</h1>
+                    <!--<h1 class="tf-setup-step-title"><?php /*_e( 'Setup your pages', 'tourfic' ) */?></h1>
+                    <div class="tf-setup-step-description"><?php /*_e( 'Tourfic needs to create some pages for you to get started. The following pages will be created automatically:', 'tourfic' ) */?></div>
+-->
+                    <div class="tf-setup-form-item">
+                        <div class="tf-setup-form-item-label"><label class="" title="Set Date Format"><?php _e( 'Select Search Result Page', 'tourfic' ) ?></label></div>
+                        <div class="tf-setup-form-item-input">
+                            <select name="tf-search-result-page" id="tf-search-result-page">
+                                <option value=""><?php _e( 'Select a page', 'tourfic' ) ?></option>
+								<?php
+								$pages = get_pages();
+                                $search_result_page = get_option( 'tf_search_page_id' );
+								foreach ( $pages as $page ) {
+									echo '<option value="' . $page->ID . '" ' . selected( $search_result_page, $page->ID, false ) . '>' . $page->post_title . '</option>';
+								}
+								?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--wishlist page-->
+                    <div class="tf-setup-form-item">
+                        <div class="tf-setup-form-item-label"><label class="" title="Set Date Format"><?php _e( 'Select Wishlist Page', 'tourfic' ) ?></label></div>
+                        <div class="tf-setup-form-item-input">
+                            <select name="tf-wishlist-page" id="tf-wishlist-page">
+                                <option value=""><?php _e( 'Select a page', 'tourfic' ) ?></option>
+								<?php
+								$pages = get_pages();
+                                $wishlist_page = get_option( 'tf_wishlist_page_id' );
+								foreach ( $pages as $page ) {
+									echo '<option value="' . $page->ID . '" ' . selected( $wishlist_page, $page->ID, false ) . '>' . $page->post_title . '</option>';
+								}
+								?>
+                            </select>
+                        </div>
+                    </div>
+
+
+
                 </section>
                 <div class="tf-setup-action-btn-wrapper">
                     <button type="button" class="tf-setup-prev-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Previous', 'tourfic' ) ?></button>

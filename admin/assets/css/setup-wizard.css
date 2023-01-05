@@ -337,5 +337,57 @@ Steps
   justify-content: space-between;
   margin: 30px 0 50px 0;
 }
+.tf-setup-step-container .tf-setup-form-item {
+  text-align: end;
+  background: #f8f9fb;
+  padding: 14px 30px 14px 25px;
+  border-radius: 10px;
+  margin: 0 0 13px 0;
+  display: flex;
+  flex-flow: row wrap;
+  min-width: 0;
+}
+.tf-setup-step-container .tf-setup-form-item .tf-setup-form-item-label {
+  display: inline-block;
+  flex-grow: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: right;
+  vertical-align: middle;
+}
+.tf-setup-step-container .tf-setup-form-item .tf-setup-form-item-label label {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  height: 32px;
+  color: rgba(0, 0, 0, 0.85);
+}
+.tf-setup-step-container .tf-setup-form-item .tf-setup-form-item-input {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.tf-setup-step-container .tf-setup-form-item .tf-setup-form-item-input select {
+  border: 1px solid #e4e6eb;
+  border-radius: 5px;
+  height: 36px;
+  padding: 6px 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.85);
+  background-color: #fff;
+  transition: all 0.3s;
+}
+.tf-setup-step-container .tf-setup-form-item .tf-setup-form-item-input select:focus {
+  border-color: #1890ff;
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+.tf-setup-step-container .tf-setup-step-description {
+  margin-bottom: 30px;
+}
 
 /*# sourceMappingURL=setup-wizard.css.map */

@@ -40,20 +40,9 @@ if ( ! class_exists( 'TF_Deactivator' ) ) {
 		 * @since 1.0.0
 		 */
 		private function delete_pages() {
-			$pages = array(
-				'search'   => array(
-					'name'    => _x( 'tf-search', 'Page slug', 'tourfic' ),
-					'title'   => _x( 'TF Search', 'Page title', 'tourfic' ),
-					'content' => '[' . apply_filters( 'tf_search_shortcode_tag', 'tf_search' ) . ']',
-				),
-				'wishlist' => array(
-					'name'    => _x( 'tf-wishlist', 'Page slug', 'tourfic' ),
-					'title'   => _x( 'TF Wishlist', 'Page title', 'tourfic' ),
-					'content' => '[' . apply_filters( 'tf_wishlist_shortcode_tag', 'tf_wishlist' ) . ']',
-				),
-			);
+			$pages = array( 'tf-search', 'tf-wishlist' );
 			foreach ( $pages as $key => $page ) {
-				$page = get_page_by_path( $page['name'] );
+				$page = get_page_by_path( $page );
 				if ( $page ) {
 					wp_delete_post( $page->ID, true );
 				}
