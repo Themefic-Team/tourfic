@@ -156,17 +156,17 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
             <div class="tf-setup-step-container tf-setup-step-2 <?php echo self::$current_step == 'step_2' ? 'active' : ''; ?>" data-step="2">
                 <section class="tf-setup-step-layout">
 					<?php $this->tf_setup_wizard_steps( 2 ) ?>
-                    <!--<h1 class="tf-setup-step-title"><?php /*_e( 'Setup your pages', 'tourfic' ) */?></h1>
-                    <div class="tf-setup-step-description"><?php /*_e( 'Tourfic needs to create some pages for you to get started. The following pages will be created automatically:', 'tourfic' ) */?></div>
+                    <!--<h1 class="tf-setup-step-title"><?php /*_e( 'Setup your pages', 'tourfic' ) */ ?></h1>
+                    <div class="tf-setup-step-description"><?php /*_e( 'Tourfic needs to create some pages for you to get started. The following pages will be created automatically:', 'tourfic' ) */ ?></div>
 -->
                     <div class="tf-setup-form-item">
-                        <div class="tf-setup-form-item-label"><label class="" title="Set Date Format"><?php _e( 'Select Search Result Page', 'tourfic' ) ?></label></div>
+                        <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Select Search Result Page', 'tourfic' ) ?></label></div>
                         <div class="tf-setup-form-item-input">
                             <select name="tf-search-result-page" id="tf-search-result-page">
                                 <option value=""><?php _e( 'Select a page', 'tourfic' ) ?></option>
 								<?php
-								$pages = get_pages();
-                                $search_result_page = get_option( 'tf_search_page_id' );
+								$pages              = get_pages();
+								$search_result_page = get_option( 'tf_search_page_id' );
 								foreach ( $pages as $page ) {
 									echo '<option value="' . $page->ID . '" ' . selected( $search_result_page, $page->ID, false ) . '>' . $page->post_title . '</option>';
 								}
@@ -177,13 +177,13 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 
                     <!--wishlist page-->
                     <div class="tf-setup-form-item">
-                        <div class="tf-setup-form-item-label"><label class="" title="Set Date Format"><?php _e( 'Select Wishlist Page', 'tourfic' ) ?></label></div>
+                        <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Select Wishlist Page', 'tourfic' ) ?></label></div>
                         <div class="tf-setup-form-item-input">
                             <select name="tf-wishlist-page" id="tf-wishlist-page">
                                 <option value=""><?php _e( 'Select a page', 'tourfic' ) ?></option>
 								<?php
-								$pages = get_pages();
-                                $wishlist_page = get_option( 'tf_wishlist_page_id' );
+								$pages         = get_pages();
+								$wishlist_page = get_option( 'tf_wishlist_page_id' );
 								foreach ( $pages as $page ) {
 									echo '<option value="' . $page->ID . '" ' . selected( $wishlist_page, $page->ID, false ) . '>' . $page->post_title . '</option>';
 								}
@@ -192,7 +192,24 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                         </div>
                     </div>
 
+                    <!--Search result posts per page-->
+                    <div class="tf-setup-form-item">
+                        <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Search Result Posts Per Page', 'tourfic' ) ?></label></div>
+                        <div class="tf-setup-form-item-input">
+                            <input type="number" name="tf-search-result-posts-per-page" id="tf-search-result-posts-per-page" value="10">
+                        </div>
+                    </div>
 
+                    <!--Enable Email Verification-->
+                    <div class="tf-setup-form-item">
+                        <div class="tf-setup-form-item-label"><label class="" for="tf-email-verification"><?php _e( 'Enable Email Verification', 'tourfic' ) ?></label></div>
+                        <div class="tf-setup-form-item-input">
+                            <label for="tf-email-verification" class="tf-switch-label">
+                                <input type="checkbox" id="tf-email-verification" name="tf-email-verification" value="1" class="tf-switch"/>
+                                <span class="tf-switch-slider"></span>
+                            </label>
+                        </div>
+                    </div>
 
                 </section>
                 <div class="tf-setup-action-btn-wrapper">
