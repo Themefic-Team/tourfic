@@ -74,7 +74,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             <span class="get-help-link">Having troubles? <a class="" href=""> Get help </a></span>
                         </div>
                     </div>
-                    <form action="" class="tf-setup-form">
+                    <form method="post" class="tf-setup-wizardform">
 						<?php
 						$this->tf_setup_welcome_step();
 						$this->tf_setup_step_one();
@@ -111,7 +111,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			?>
             <div class="tf-setup-step-container tf-setup-step-1 <?php echo self::$current_step == 'step_1' ? 'active' : ''; ?>" data-step="1">
                 <section class="tf-setup-step-layout">
-					<?php $this->tf_setup_wizard_steps() ?>
+					<?php $this->tf_setup_wizard_steps_header() ?>
                     <h1 class="tf-setup-step-title"><?php _e( 'Select your services', 'tourfic' ) ?></h1>
                     <ul class="tf-select-service">
                         <li>
@@ -155,10 +155,9 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			?>
             <div class="tf-setup-step-container tf-setup-step-2 <?php echo self::$current_step == 'step_2' ? 'active' : ''; ?>" data-step="2">
                 <section class="tf-setup-step-layout">
-					<?php $this->tf_setup_wizard_steps( 2 ) ?>
-                    <!--<h1 class="tf-setup-step-title"><?php /*_e( 'Setup your pages', 'tourfic' ) */ ?></h1>
+					<?php $this->tf_setup_wizard_steps_header( 2 ) ?>
+                    <h1 class="tf-setup-step-title"><?php _e( 'Tourfic Settings', 'tourfic' ) ?></h1>
                     <div class="tf-setup-step-description"><?php /*_e( 'Tourfic needs to create some pages for you to get started. The following pages will be created automatically:', 'tourfic' ) */ ?></div>
--->
                     <div class="tf-setup-form-item">
                         <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Select Search Result Page', 'tourfic' ) ?></label></div>
                         <div class="tf-setup-form-item-input">
@@ -211,6 +210,17 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                         </div>
                     </div>
 
+                    <!-- Enable Vendor Registration -->
+                    <div class="tf-setup-form-item">
+                        <div class="tf-setup-form-item-label"><label class="" for="tf-vendor-registration"><?php _e( 'Enable Vendor Registration', 'tourfic' ) ?></label></div>
+                        <div class="tf-setup-form-item-input">
+                            <label for="tf-vendor-registration" class="tf-switch-label">
+                                <input type="checkbox" id="tf-vendor-registration" name="tf-vendor-registration" value="1" class="tf-switch"/>
+                                <span class="tf-switch-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
                 </section>
                 <div class="tf-setup-action-btn-wrapper">
                     <button type="button" class="tf-setup-prev-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Previous', 'tourfic' ) ?></button>
@@ -230,7 +240,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			?>
             <div class="tf-setup-step-container tf-setup-step-3 <?php echo self::$current_step == 'step_3' ? 'active' : ''; ?>" data-step="3">
                 <section class="tf-setup-step-layout">
-					<?php $this->tf_setup_wizard_steps( 3 ) ?>
+					<?php $this->tf_setup_wizard_steps_header( 3 ) ?>
                 </section>
                 <div class="tf-setup-action-btn-wrapper">
                     <button type="button" class="tf-setup-prev-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Previous', 'tourfic' ) ?></button>
@@ -251,7 +261,8 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			}
 		}
 
-		private function tf_setup_wizard_steps( $active_step = 1 ) {
+
+		private function tf_setup_wizard_steps_header( $active_step = 1 ) {
 			$inactive_icon = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" stroke="#D8D9DF" stroke-width="2"></circle></svg>';
 			$active_icon   = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#5D5DFF"></circle><circle cx="12" cy="12" r="4" fill="white"></circle></svg>';
 			$finish_icon   = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#5D5DFF"></circle><path fill-rule="evenodd" clip-rule="evenodd" d="M17.7077 8.29352C18.0979 8.68439 18.0974 9.31755 17.7065 9.70773L11.703 15.7007C11.3123 16.0906 10.6796 16.0903 10.2894 15.7L7.29289 12.7036C6.90237 12.3131 6.90237 11.6799 7.29289 11.2894C7.68342 10.8988 8.31658 10.8988 8.70711 11.2894L10.9971 13.5794L16.2935 8.29227C16.6844 7.90209 17.3176 7.90265 17.7077 8.29352Z" fill="white"></path></svg>';
