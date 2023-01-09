@@ -1,9 +1,10 @@
 <?php
-
+// don't load directly
+defined( 'ABSPATH' ) || exit;
 /**
  * Price calculation for single tour
  */
-if(!class_exists('TourPrice')){
+if(!class_exists('Tour_Price')){
     class Tour_Price {
 
         public $meta;
