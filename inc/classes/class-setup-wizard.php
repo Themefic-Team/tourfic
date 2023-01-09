@@ -233,67 +233,71 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
             <div class="tf-setup-step-container tf-setup-step-3 <?php echo self::$current_step == 'step_3' ? 'active' : ''; ?>" data-step="3">
                 <section class="tf-setup-step-layout">
 					<?php $this->tf_setup_wizard_steps_header( 3 ) ?>
-                    <h3 class="tf-setup-step-subtitle"><?php _e( 'Hotel settings', 'tourfic' ) ?></h3>
+                    <div class="tf-hotel-setup-wizard">
+                        <h3 class="tf-setup-step-subtitle"><?php _e( 'Hotel settings', 'tourfic' ) ?></h3>
 
-                    <!--Review Section-->
-                    <div class="tf-setup-form-item">
-                        <div class="tf-setup-form-item-label"><label class="" for="tf-hotel-review-section"><?php _e( 'Review Section', 'tourfic' ) ?></label></div>
-                        <div class="tf-setup-form-item-input">
-                            <label for="tf-hotel-review-section" class="tf-switch-label">
-                                <input type="checkbox" id="tf-hotel-review-section" name="tf-hotel-review-section" value="1" class="tf-switch" checked/>
-                                <span class="tf-switch-slider"></span>
-                            </label>
+                        <!--Review Section-->
+                        <div class="tf-setup-form-item">
+                            <div class="tf-setup-form-item-label"><label class="" for="tf-hotel-review-section"><?php _e( 'Review Section', 'tourfic' ) ?></label></div>
+                            <div class="tf-setup-form-item-input">
+                                <label for="tf-hotel-review-section" class="tf-switch-label">
+                                    <input type="checkbox" id="tf-hotel-review-section" name="tf-hotel-review-section" value="1" class="tf-switch" checked/>
+                                    <span class="tf-switch-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!--Share Option-->
+                        <div class="tf-setup-form-item">
+                            <div class="tf-setup-form-item-label"><label class="" for="tf-hotel-share-option"><?php _e( 'Share Option', 'tourfic' ) ?></label></div>
+                            <div class="tf-setup-form-item-input">
+                                <label for="tf-hotel-share-option" class="tf-switch-label">
+                                    <input type="checkbox" id="tf-hotel-share-option" name="tf-hotel-share-option" value="1" class="tf-switch" checked/>
+                                    <span class="tf-switch-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!--Hotel Permalink-->
+                        <div class="tf-setup-form-item">
+                            <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Hotel Permalink', 'tourfic' ) ?></label></div>
+                            <div class="tf-setup-form-item-input">
+                                <input type="text" name="tf-hotel-permalink" id="tf-hotel-permalink" value="hotels">
+                            </div>
                         </div>
                     </div>
 
-                    <!--Share Option-->
-                    <div class="tf-setup-form-item">
-                        <div class="tf-setup-form-item-label"><label class="" for="tf-hotel-share-option"><?php _e( 'Share Option', 'tourfic' ) ?></label></div>
-                        <div class="tf-setup-form-item-input">
-                            <label for="tf-hotel-share-option" class="tf-switch-label">
-                                <input type="checkbox" id="tf-hotel-share-option" name="tf-hotel-share-option" value="1" class="tf-switch" checked/>
-                                <span class="tf-switch-slider"></span>
-                            </label>
+                    <div class="tf-tour-setup-wizard">
+                        <h3 class="tf-setup-step-subtitle"><?php _e( 'Tour settings', 'tourfic' ) ?></h3>
+
+                        <!--Review Section-->
+                        <div class="tf-setup-form-item">
+                            <div class="tf-setup-form-item-label"><label class="" for="tf-tour-review-section"><?php _e( 'Review Section', 'tourfic' ) ?></label></div>
+                            <div class="tf-setup-form-item-input">
+                                <label for="tf-tour-review-section" class="tf-switch-label">
+                                    <input type="checkbox" id="tf-tour-review-section" name="tf-tour-review-section" value="1" class="tf-switch" checked/>
+                                    <span class="tf-switch-slider"></span>
+                                </label>
+                            </div>
                         </div>
-                    </div>
 
-                    <!--Hotel Permalink-->
-                    <div class="tf-setup-form-item">
-                        <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Hotel Permalink', 'tourfic' ) ?></label></div>
-                        <div class="tf-setup-form-item-input">
-                            <input type="text" name="tf-hotel-permalink" id="tf-hotel-permalink" value="hotels">
+                        <!--Related Section-->
+                        <div class="tf-setup-form-item">
+                            <div class="tf-setup-form-item-label"><label class="" for="tf-tour-related-section"><?php _e( 'Related Section', 'tourfic' ) ?></label></div>
+                            <div class="tf-setup-form-item-input">
+                                <label for="tf-tour-related-section" class="tf-switch-label">
+                                    <input type="checkbox" id="tf-tour-related-section" name="tf-tour-related-section" value="1" class="tf-switch" checked/>
+                                    <span class="tf-switch-slider"></span>
+                                </label>
+                            </div>
                         </div>
-                    </div>
 
-                    <h3 class="tf-setup-step-subtitle"><?php _e( 'Tour settings', 'tourfic' ) ?></h3>
-
-                    <!--Review Section-->
-                    <div class="tf-setup-form-item">
-                        <div class="tf-setup-form-item-label"><label class="" for="tf-tour-review-section"><?php _e( 'Review Section', 'tourfic' ) ?></label></div>
-                        <div class="tf-setup-form-item-input">
-                            <label for="tf-tour-review-section" class="tf-switch-label">
-                                <input type="checkbox" id="tf-tour-review-section" name="tf-tour-review-section" value="1" class="tf-switch" checked/>
-                                <span class="tf-switch-slider"></span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!--Related Section-->
-                    <div class="tf-setup-form-item">
-                        <div class="tf-setup-form-item-label"><label class="" for="tf-tour-related-section"><?php _e( 'Related Section', 'tourfic' ) ?></label></div>
-                        <div class="tf-setup-form-item-input">
-                            <label for="tf-tour-related-section" class="tf-switch-label">
-                                <input type="checkbox" id="tf-tour-related-section" name="tf-tour-related-section" value="1" class="tf-switch" checked/>
-                                <span class="tf-switch-slider"></span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!--Tour Permalink-->
-                    <div class="tf-setup-form-item">
-                        <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Tour Permalink', 'tourfic' ) ?></label></div>
-                        <div class="tf-setup-form-item-input">
-                            <input type="text" name="tf-tour-permalink" id="tf-tour-permalink" value="tours">
+                        <!--Tour Permalink-->
+                        <div class="tf-setup-form-item">
+                            <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Tour Permalink', 'tourfic' ) ?></label></div>
+                            <div class="tf-setup-form-item-input">
+                                <input type="text" name="tf-tour-permalink" id="tf-tour-permalink" value="tours">
+                            </div>
                         </div>
                     </div>
 
@@ -301,7 +305,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                 <div class="tf-setup-action-btn-wrapper">
                     <button type="button" class="tf-setup-prev-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Previous', 'tourfic' ) ?></button>
                     <div class="tf-setup-action-btn-next">
-                        <button type="submit" class="tf-setup-skip-btn tf-link-btn tf-admin-btn"><?php _e( 'Skip this step', 'tourfic' ) ?></button>
+                        <button type="submit" class="tf-setup-skip-btn tf-link-btn tf-setup-submit-btn"><?php _e( 'Skip this step', 'tourfic' ) ?></button>
                         <button type="submit" class="tf-setup-submit-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Finish', 'tourfic' ) ?></button>
                     </div>
                 </div>
@@ -428,8 +432,8 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			update_option( 'tf_settings', $tf_settings );
 
 			$response = [
-				'status'  => 'success',
-				'message' => __( 'Options saved successfully!', 'tourfic' ),
+				'success'      => true,
+				'redirect_url' => esc_url( admin_url( 'admin.php?page=tf_settings' ) )
 			];
 
 			echo json_encode( $response );

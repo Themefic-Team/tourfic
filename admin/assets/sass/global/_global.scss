@@ -12,6 +12,7 @@ Button
   text-decoration: none;
   cursor: pointer;
   font-size: 16px;
+  @include transition(all, 0.3s);
 
   i {
     margin-right: 8px;

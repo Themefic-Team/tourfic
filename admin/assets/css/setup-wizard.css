@@ -14,6 +14,10 @@ Button
   text-decoration: none;
   cursor: pointer;
   font-size: 16px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .tf-admin-btn i {
   margin-right: 8px;
@@ -244,6 +248,9 @@ Steps
 
 .tf-setup-step-container {
   display: none;
+  /*
+  Ajax Loader
+  */
 }
 .tf-setup-step-container.active {
   display: block;
@@ -444,6 +451,41 @@ Steps
 }
 .tf-setup-step-container .tf-setup-step-description {
   margin-bottom: 30px;
+}
+.tf-setup-step-container .tf-btn-loading {
+  padding-right: 40px;
+  position: relative;
+}
+.tf-setup-step-container .tf-btn-loading:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  margin-top: -7px;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fff;
+  border-left-color: transparent;
+  border-radius: 50%;
+  vertical-align: middle;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  -webkit-animation: wd-rotate 450ms infinite linear;
+  animation: wd-rotate 450ms infinite linear;
+}
+@-webkit-keyframes wd-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes wd-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 
 /*# sourceMappingURL=setup-wizard.css.map */
