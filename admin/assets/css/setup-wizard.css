@@ -214,7 +214,7 @@ Steps
   text-align: center;
   border-color: #1890ff;
 }
-.tf-setup-steps .tf-steps-item .tf-steps-item-icon .ant-steps-icon {
+.tf-setup-steps .tf-steps-item .tf-steps-item-icon .tf-steps-icon {
   font-size: 24px;
   line-height: 24px;
   transform: none;
@@ -272,16 +272,26 @@ Steps
   color: #003c79;
   margin: 0 0 15px;
 }
+.tf-setup-step-container .tf-setup-step-subtitle {
+  text-transform: capitalize;
+  color: #003c79;
+  margin: 20px 0 15px;
+  text-align: left;
+}
 .tf-setup-step-container .tf-select-service {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
   gap: 20px;
 }
 .tf-setup-step-container .tf-select-service li {
-  flex-basis: 100%;
+  -webkit-flex: 0 0 200px;
+  -ms-flex: 0 0 200px;
+  flex: 0 0 200px;
 }
 .tf-setup-step-container .tf-select-service input[type=checkbox] {
   display: none;
