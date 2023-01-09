@@ -1497,8 +1497,6 @@ function tf_assign_taxonomies( $post_id, $post, $old_status ){
 	}else{
 		$features = $meta['features'];	
 	}
-	var_dump($features);
-	die();
 	wp_set_object_terms( $post_id, $features, 'tour_features' );
 }
 
