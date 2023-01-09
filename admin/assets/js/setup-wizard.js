@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
 
     $(document).ready(function () {
 
@@ -10,11 +10,35 @@
 
         $(document).on('click', '.tf-setup-next-btn, .tf-setup-skip-btn', function (e) {
             e.preventDefault();
+            let form = $('#tf-setup-wizard-form');
+            let skipSteps = form.find('input[name="tf-skip-steps"]').val();
             let step = $(this).closest('.tf-setup-step-container').data('step');
             let nextStep = step + 1;
-            $('.tf-setup-step-' + step).fadeOut(300, function () {
-                $('.tf-setup-step-' + nextStep).fadeIn(300);
-            });
+
+            if (step === 1 && $(this).hasClass('tf-setup-next-btn')) {
+                let services = $('input[name="tf-services[]"]:checked').length;
+
+                if (!services) {
+                    alert(tf_setup_wizard.i18n.no_services_selected);
+                    return false;
+                }
+            }
+
+            if ($(this).hasClass('tf-setup-skip-btn')) {
+                skipSteps = !skipSteps ? step : skipSteps.indexOf(step) === -1 ? skipSteps + ',' + step : skipSteps;
+                form.find('input[name="tf-skip-steps"]').val(skipSteps);
+            }
+
+            if($(this).hasClass('tf-setup-next-btn') && skipSteps.indexOf(step) !== -1) {
+                skipSteps = skipSteps.replace(step, '');
+                form.find('input[name="tf-skip-steps"]').val(skipSteps);
+            }
+
+            if(!$(this).hasClass('tf-admin-btn')) {
+                $('.tf-setup-step-' + step).fadeOut(300, function () {
+                    $('.tf-setup-step-' + nextStep).fadeIn(300);
+                });
+            }
         });
 
         $(document).on('click', '.tf-setup-prev-btn', function (e) {

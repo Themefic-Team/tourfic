@@ -57,9 +57,13 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			if ( $screen == 'admin_page_tf-setup-wizard' ) {
 				wp_enqueue_style( 'tf-setup-wizard', TF_URL . 'admin/assets/css/setup-wizard.css', [], TOURFIC );
 				wp_enqueue_script( 'tf-setup-wizard', TF_URL . 'admin/assets/js/setup-wizard.js', [ 'jquery' ], TOURFIC, true );
+
 				wp_localize_script( 'tf-setup-wizard', 'tf_setup_wizard', [
 					'ajaxurl' => admin_url( 'admin-ajax.php' ),
 					'nonce'   => wp_create_nonce( 'tf-setup-wizard' ),
+					'i18n'    => array(
+						'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
+					)
 				] );
 			}
 		}
@@ -79,7 +83,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             <span class="get-help-link">Having troubles? <a class="" href=""> Get help </a></span>
                         </div>
                     </div>
-                    <form method="post" id="tf-setup-wizard-form">
+                    <form method="post" id="tf-setup-wizard-form" data-skip-steps="">
 						<?php
 						$this->tf_setup_welcome_step();
 						$this->tf_setup_step_one();
@@ -87,6 +91,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 						$this->tf_setup_finish_step();
 						?>
 						<?php wp_nonce_field( 'tf_setup_wizard_action', 'tf_setup_wizard_nonce' ); ?>
+                        <input type="hidden" name="tf-skip-steps">
                     </form>
                 </div>
             </div>
@@ -295,7 +300,10 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                 </section>
                 <div class="tf-setup-action-btn-wrapper">
                     <button type="button" class="tf-setup-prev-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Previous', 'tourfic' ) ?></button>
-                    <button type="submit" class="tf-setup-submit-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Finish', 'tourfic' ) ?></button>
+                    <div class="tf-setup-action-btn-next">
+                        <button type="submit" class="tf-setup-skip-btn tf-link-btn tf-admin-btn"><?php _e( 'Skip this step', 'tourfic' ) ?></button>
+                        <button type="submit" class="tf-setup-submit-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Finish', 'tourfic' ) ?></button>
+                    </div>
                 </div>
             </div>
 			<?php
