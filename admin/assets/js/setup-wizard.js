@@ -81,6 +81,14 @@
             e.preventDefault();
             let submitBtn = $('.tf-setup-submit-btn.tf-admin-btn');
             let form = $(this).closest('#tf-setup-wizard-form');
+            let step = $(this).closest('.tf-setup-step-container').data('step');
+            let skipSteps = form.find('input[name="tf-skip-steps"]').val();
+
+            if($(this).hasClass('tf-admin-btn') && skipSteps.indexOf(step) !== -1) {
+                skipSteps = skipSteps.replace(step, '');
+                form.find('input[name="tf-skip-steps"]').val(skipSteps);
+            }
+
             let formData = new FormData(form[0]);
             formData.append('action', 'tf_setup_wizard_submit');
 
@@ -97,7 +105,7 @@
                     let data = JSON.parse(response);
                     submitBtn.removeClass('tf-btn-loading');
                     if (data.success) {
-                        // window.location.href = data.redirect_url;
+                        window.location.href = data.redirect_url;
                     }
                 },
                 error: function (error) {

@@ -324,7 +324,6 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			}
 		}
 
-
 		private function tf_setup_wizard_steps_header( $active_step = 1 ) {
 			$inactive_icon = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" stroke="#D8D9DF" stroke-width="2"></circle></svg>';
 			$active_icon   = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#5D5DFF"></circle><circle cx="12" cy="12" r="4" fill="white"></circle></svg>';
@@ -370,10 +369,6 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		}
 
 		function tf_setup_wizard_submit_ajax() {
-			$response = [
-				'status'  => 'error',
-				'message' => __( 'Something went wrong!', 'tourfic' ),
-			];
 
 			// Add nonce for security and authentication.
 			$nonce_name   = isset( $_POST['tf_setup_wizard_nonce'] ) ? $_POST['tf_setup_wizard_nonce'] : '';
@@ -403,35 +398,49 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			$tour_related           = isset( $_POST['tf-tour-related-section'] ) ? $_POST['tf-tour-related-section'] : '';
 			$tour_permalink         = isset( $_POST['tf-tour-permalink'] ) ? $_POST['tf-tour-permalink'] : '';
 
-			$services = array_diff( $tf_services, $services );
-			$services = array_map( 'sanitize_text_field', $services );
+			//skip steps
+			$skip_steps = isset( $_POST['tf-skip-steps'] ) ? $_POST['tf-skip-steps'] : [];
+			$skip_steps = explode( ',', $skip_steps );
 
-			$tf_settings['disable-services'] = [];
-			if ( ! empty( $services ) ) {
-				foreach ( $services as $service ) {
-					$tf_settings['disable-services'][ $service ] = $service;
+			if ( ! in_array( 1, $skip_steps ) ) {
+				$services = array_diff( $tf_services, $services );
+				$services = array_map( 'sanitize_text_field', $services );
+
+				$tf_settings['disable-services'] = [];
+				if ( ! empty( $services ) ) {
+					foreach ( $services as $service ) {
+						$tf_settings['disable-services'][ $service ] = $service;
+					}
 				}
 			}
 
-			$tf_settings['search-result-page'] = ! empty( $search_page ) ? $search_page : '';
-			$tf_settings['posts_per_page']     = ! empty( $search_result_per_page ) ? $search_result_per_page : '';
-			$tf_settings['wl-page']            = ! empty( $wishlist_page ) ? $wishlist_page : '';
-			$tf_settings['r-auto-publish']     = ! empty( $auto_publish ) ? $auto_publish : '';
-			$tf_settings['h-review']           = ! empty( $hotel_review ) ? 0 : 1;
-			$tf_settings['h-share']            = ! empty( $hotel_share ) ? 0 : 1;
-			$tf_settings['t-review']           = ! empty( $tour_review ) ? 0 : 1;
-			$tf_settings['t-related']          = ! empty( $tour_related ) ? 0 : 1;
-
-			if ( ! empty( $hotel_permalink ) ) {
-				update_option( 'hotel_slug', $hotel_permalink );
+			if ( ! in_array( 2, $skip_steps ) ) {
+				$tf_settings['search-result-page'] = ! empty( $search_page ) ? $search_page : '';
+				$tf_settings['posts_per_page']     = ! empty( $search_result_per_page ) ? $search_result_per_page : '';
+				$tf_settings['wl-page']            = ! empty( $wishlist_page ) ? $wishlist_page : '';
+				$tf_settings['r-auto-publish']     = ! empty( $auto_publish ) ? $auto_publish : '';
 			}
-			if ( ! empty( $tour_permalink ) ) {
-				update_option( 'tour_slug', $tour_permalink );
+
+			if ( ! in_array( 3, $skip_steps ) && ! in_array( 'hotel', $services ) ) {
+				$tf_settings['h-review'] = ! empty( $hotel_review ) ? 0 : 1;
+				$tf_settings['h-share']  = ! empty( $hotel_share ) ? 0 : 1;
+
+				if ( ! empty( $hotel_permalink ) ) {
+					update_option( 'hotel_slug', $hotel_permalink );
+				}
+			}
+
+			if ( ! in_array( 3, $skip_steps ) && ! in_array( 'tour', $services ) ) {
+				$tf_settings['t-review']  = ! empty( $tour_review ) ? 0 : 1;
+				$tf_settings['t-related'] = ! empty( $tour_related ) ? 0 : 1;
+
+				if ( ! empty( $tour_permalink ) ) {
+					update_option( 'tour_slug', $tour_permalink );
+				}
 			}
 
 			update_option( 'tf_settings', $tf_settings );
-
-			$response = [
+			$response              = [
 				'success'      => true,
 				'redirect_url' => esc_url( admin_url( 'admin.php?page=tf_settings' ) )
 			];
