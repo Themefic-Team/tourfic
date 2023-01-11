@@ -93,13 +93,13 @@ function tf_required_taxonomies( $hook ) {
 
 	if ( $tf_is_gutenberg_active ) {
 
-		wp_enqueue_script( 'tf-required', TF_ADMIN_URL . 'assets/js/required-taxonomies-gutenberg.js', array(
+		wp_enqueue_script( 'tf-required', TF_ASSETS_URL . 'admin/js/tourfic-admin-scripts.min.js', array(
 			'jquery', 'wp-data', 'wp-editor', 'wp-edit-post'
 		));
 
 	} else {
 
-		wp_enqueue_script( 'tf-required', TF_ADMIN_URL . 'assets/js/required-taxonomies.js', array( 'jquery' ), false, true );
+		wp_enqueue_script( 'tf-required', TF_ASSETS_URL . 'admin/js/tourfic-admin-scripts.min.js', array( 'jquery' ), TOURFIC, true );
 
 	}
 

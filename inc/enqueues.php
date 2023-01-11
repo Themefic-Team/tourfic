@@ -47,11 +47,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 
         //Updated CSS
         wp_enqueue_style( 'tf-app-style', TF_ASSETS_URL . 'app/css/tourfic-style' . $min_css . '.css', null, TOURFIC );
-        /*if ( get_post_type() == 'tf_hotel' ){
-            wp_enqueue_style( 'tf-hotel-style', TF_ASSETS_URL . 'css/hotel' . $min_css . '.css', null, '' );
-        }*/
-        /*if ( get_post_type() == 'tf_tours' ){
-            wp_enqueue_style( 'tf-tour-style', TF_ASSETS_URL . 'css/tour' . $min_css . '.css', null, '' );
+        if ( get_post_type() == 'tf_tours' ){
 
             if(function_exists('is_tf_pro') && is_tf_pro()){
                 wp_enqueue_script( 'Chart', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js', array( 'jquery' ), '2.6.0', true );
@@ -78,9 +74,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 $showitinerarystatus = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-status']) ? tf_data_types(tfopt( 'itinerary-builder-setings' ))['itinerary-status'] : false;
                 $elevvationmode = !empty(tf_data_types(tfopt( 'itinerary-builder-setings' ))['elevtion_type']) && tf_data_types(tfopt( 'itinerary-builder-setings' ))['elevtion_type']=="Feet" ? "Feet" : "Meter";
             }
-        }*/
-//        wp_enqueue_style( 'tf-search-style', TF_ASSETS_URL . 'css/search-result.css', null, '' );
-//        wp_enqueue_style( 'tf-shortcode-style', TF_ASSETS_URL . 'css/shortcode.css', null, '' );
+        }
 
         /**
          * Flatpickr
@@ -306,7 +300,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
          * Custom
          */       
 
-        wp_enqueue_script( 'tourfic', TF_ASSETS_URL . 'js/tourfic' . $min_js . '.js', '', TOURFIC, true );
+        wp_enqueue_script( 'tourfic', TF_ASSETS_URL . 'app/js/tourfic-scripts' . $min_js . '.js', '', TOURFIC, true );
         wp_localize_script( 'tourfic', 'tf_params',
             array(
                 'nonce'        => wp_create_nonce( 'tf_ajax_nonce' ),
