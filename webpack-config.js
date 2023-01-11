@@ -1,29 +1,21 @@
 const path = require('path');
+const glob = require('glob');
+const entryPoints = {};
+
+const appJs = glob.sync('./sass/app/js/*.js');
+const adminJs = glob.sync('./sass/admin/js/*.js');
+
+entryPoints['app/js/tourfic-scripts'] = appJs;
+entryPoints['admin/js/tourfic-admin-scripts'] = adminJs;
 
 const config = {
-    entry: {
-        'tourfic-scripts': './sass/app/js/tourfic.js',
-        // admin: './sass/admin/js/admin-index.js'
-    },
+    entry: entryPoints,
 
     output: {
         path: path.resolve(__dirname, 'assets'),
-        filename: 'app/js/[name].js',
+        filename: '[name].js',
         clean: false
     },
-
-    module: {
-        rules: [
-            {
-                // Look for any .js files.
-                test: /\.js$/,
-                // Exclude the node_modules folder.
-                exclude: /node_modules/,
-                // Use babel loader to transpile the JS files.
-                loader: 'babel-loader'
-            }
-        ]
-    }
 }
 
 // Export the config object.
