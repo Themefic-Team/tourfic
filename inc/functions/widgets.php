@@ -557,7 +557,6 @@ class TF_Tour_Activities_Filter extends WP_Widget {
      * @param array $instance Previously saved values from database.
      */
     public function form( $instance ) {
-
         $title = isset( $instance['title'] ) ? $instance['title'] : __( 'Popular Activities', 'tourfic' );
         $terms = isset( $instance['terms'] ) ? $instance['terms'] : 'all';
 
@@ -580,7 +579,7 @@ class TF_Tour_Activities_Filter extends WP_Widget {
                 'name'         => $this->get_field_name( 'terms' ),
                 'id'           => $this->get_field_id( 'terms' ),
                 'selected'     => $terms, // e.x 86,110,786
-                'multiple' => true,
+                //'multiple' => true,
                 'class'        => 'widefat tf-select2',
                 'show_count'   => true,
                 'hide_empty'   => 0,

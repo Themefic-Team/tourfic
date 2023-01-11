@@ -453,15 +453,15 @@ add_action( 'wp_ajax_nopriv_tf_ask_question', 'tourfic_ask_question_ajax' );
  */
 add_filter( 'wp_dropdown_cats', 'tourfic_wp_dropdown_cats_multiple', 10, 2 );
 function tourfic_wp_dropdown_cats_multiple( $output, $r ) {
-
     if( isset( $r['multiple'] ) && $r['multiple'] ) {
 
         $output = preg_replace( '/^<select/i', '<select multiple', $output );
-
         $output = str_replace( "name='{$r['name']}'", "name='{$r['name']}[]'", $output );
-        foreach ( $r['selected']  as $value ){
-            $output = str_replace( "value=\"{$value}\"", "value=\"{$value}\" selected", $output );
-		}
+		if( is_array($r['selected']) ):
+			foreach ( $r['selected']  as $value ){
+				$output = str_replace( "value=\"{$value}\"", "value=\"{$value}\" selected", $output );
+			}
+		endif;
     }
 
     return $output;

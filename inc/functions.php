@@ -1488,15 +1488,14 @@ function tf_month_chart_filter_callback(){
  * @author Abu Hena
  * @since 2.9.2
  */
-add_action( 'publish_tf_tours', 'tf_assign_taxonomies', 10, 3 );
+
+add_action( 'wp_after_insert_post', 'tf_assign_taxonomies', 100, 3 );
 function tf_assign_taxonomies( $post_id, $post, $old_status ){
 
 	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
 	if( !empty( $meta['features'] ) && is_array( $meta['features'] ) ){
 		$features = array_map( 'intval',$meta['features']);		
-	}else{
-		$features = $meta['features'];	
 	}
-	wp_set_object_terms( $post_id, $features, 'tour_features' );
+	wp_set_object_terms( $post_id, $features, 'tour_features',true );
 }
 

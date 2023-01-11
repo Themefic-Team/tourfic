@@ -154,7 +154,7 @@ add_action( 'plugins_loaded', 'tf_load_textdomain' );
 /**
  * Plugins Loaded Actions
  *
- * Including Option Framework
+ * Including Option Panel
  *
  * Including Options
  */
@@ -162,23 +162,9 @@ if ( ! function_exists( 'tf_plugin_loaded_action' ) ) {
 	function tf_plugin_loaded_action() {
 
 		/**
-		 * Option Framework & options
-		 *
+		 * options panel including
 		 * @since 1.0
 		 */
-		// Options Framework
-		/*if( !class_exists( 'CSF' ) ) {
-			require_once( TF_ADMIN_PATH .'framework/framework.php' );
-		}
-		// Options
-		if( class_exists( 'CSF' ) ) {
-			if ( file_exists( TF_OPTIONS_PATH . 'options.php' ) ) {
-				require_once TF_OPTIONS_PATH . 'options.php';
-			} else {
-				tf_file_missing(TF_OPTIONS_PATH . 'options.php');
-			}
-		}*/
-
 		if ( file_exists( TF_ADMIN_PATH . 'tf-options/TF_Options.php' ) ) {
 			require_once TF_ADMIN_PATH . 'tf-options/TF_Options.php';
 		} else {
