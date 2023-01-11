@@ -179,7 +179,7 @@ button.tf-order-remove{
 }
 /* Classic editor/widget support */
 input.select2-search__field {
-    width: 100%;
+    width: 100% !important;
     min-width: 150px !important;
 }
 .wp-block input.select2-search__field{
