@@ -112,8 +112,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
                 'selected'   => $terms, // e.x 86,110,786
                 'multiple'   => true,
                 'class'      => 'widefat tf-select2', // tf-select2
-                'show_count' => true,
-                'hide_empty' => 0,
+                'show_count' => true
             ) );
         ?>
             <br>
@@ -269,8 +268,7 @@ class TF_Tour_Feature_Filter extends WP_Widget {
                 'selected'   => $terms, // e.x 86,110,786
                 'multiple'   => true,
                 'class'      => 'widefat tf-select2', // tf-select2
-                'show_count' => true,
-                'hide_empty' => 0,
+                'show_count' => true
             ) );
         ?>
             <br>
@@ -424,8 +422,7 @@ class TF_Tour_Attraction_Filter extends WP_Widget {
                 'selected'     => $terms, // e.x 86,110,786
                 'multiple' => true,
                 'class'        => 'widefat tf-select2',
-                'show_count'   => true,
-                'hide_empty'   => 0,
+                'show_count'   => true
             ) );
         ?>
             <br>
@@ -581,8 +578,7 @@ class TF_Tour_Activities_Filter extends WP_Widget {
                     'selected'     => $terms, // e.x 86,110,786
                     'multiple'     => true,
                     'class'        => 'widefat tf-select2',
-                    'show_count'   => true,
-                    //'hide_if_empty'   => 0,
+                    'show_count'   => true
                 ) );
             ?>
             <br>
