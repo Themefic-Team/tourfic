@@ -677,7 +677,7 @@
     background: #ededf8;
     border-radius: 8px;
     padding: 20px;
-  }
+  
   .tf-shortcode-generator-label{
     display: flex;
     align-items: center;
@@ -787,20 +787,40 @@
           box-shadow: none;
         }
       }
-    .tf-sg-close{
-      position: absolute;
-      right: -7px;
-      top: -5px;
-      width: 36px;
-      height: 36px;
-      line-height: 36px;
-      background: red;
-      color: #fff;
-      text-align: center;
-      font-size: 20px;
-      border-radius: 50%;
-      cursor: pointer;
-    }
+      .tf-sg-close{
+        position: absolute;
+        right: -7px;
+        top: -5px;
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        background: red;
+        color: #fff;
+        text-align: center;
+        font-size: 20px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .tf-shortcode-field.copy-shortcode {
+        align-self: start;
+        float: none;
+        display: flex;
+      }
+    
+      input.tf-shortcode-value {
+          width: 100%;
+          height: 45px;
+          background: #fff;
+          padding: 10px 15px;
+          border: 1px solid #ccc;
+      }
+      
+      .tf-copy-btn {
+        margin-left: 10px;
+        line-height: 24px;
+        vertical-align: middle;
+      }
     }
   }
+}
 }

@@ -1435,3 +1435,32 @@ var frame, gframe;
         });
     });
 })(jQuery);
+
+(function ($){
+    $(document).on('click', '.tf-generate-tour .tf-btn', function (event) {
+        event.preventDefault();
+        var arr = [];
+    
+        $(this).parents('.tf-shortcode-generators').find(".tf-sg-field-wrap").each(function () {
+            var $this = $(this);
+            var data = $this.find('.tf-setting-field').val();
+            var option_name = $this.find('.tf-setting-field').attr('data-cat');
+            var post_count = $this.find('.post-count').attr('data-count');
+    
+            if (option_name != undefined && option_name != '') {
+                data = option_name + '=' + (data.length ? data : '""');
+            }
+            if (post_count != undefined && post_count != '') {
+                data = post_count + '=' + (data.length ? data : '""');
+            }
+            arr.push(data);
+        });        
+        
+        var allData = arr.filter(Boolean);
+        var shortcode = "[" + allData.join(' ') + "]";
+    
+        $(this).parents('.tf-shortcode-generators').find('.tf-shortcode-value').val(shortcode);
+        $(this).parents('.tf-shortcode-generators').find('.tf-copy-btn').slideDown();
+    });
+})(jQuery);
+

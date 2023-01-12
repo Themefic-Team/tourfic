@@ -1315,7 +1315,7 @@ Fontawesome
   border-radius: 8px;
   padding: 20px;
 }
-.tf-shortcode-generator-section .tf-shortcode-generator-label {
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-shortcode-generator-label {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1328,7 +1328,7 @@ Fontawesome
   border-radius: 5px;
   -webkit-border-radius: 5px;
 }
-.tf-shortcode-generator-section .tf-shortcode-generator-label .tf-labels label {
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-shortcode-generator-label .tf-labels label {
   font-size: 14px;
   line-height: 22px;
   font-weight: 600;
@@ -1336,14 +1336,14 @@ Fontawesome
   display: inline-block;
   margin-bottom: 3px;
 }
-.tf-shortcode-generator-section .tf-shortcode-generator-label .tf-labels p {
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-shortcode-generator-label .tf-labels p {
   margin: 0;
   font-size: 13px;
   line-height: 18px;
   color: #838790;
   font-weight: 400;
 }
-.tf-shortcode-generator-section .tf-shortcode-btn button {
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-shortcode-btn button {
   font-size: 1rem;
   line-height: 20px;
   text-decoration: none;
@@ -1358,10 +1358,10 @@ Fontawesome
   outline: none;
   cursor: pointer;
 }
-.tf-shortcode-generator-section .tf-shortcode-btn button:hover {
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-shortcode-btn button:hover {
   background-color: #5d5dff;
 }
-.tf-shortcode-generator-section .tf-sg-form-wrapper {
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper {
   overflow-x: auto;
   overflow-y: scroll;
   position: fixed;
@@ -1373,7 +1373,7 @@ Fontawesome
   -webkit-overflow-scrolling: touch;
   outline: 0;
 }
-.tf-shortcode-generator-section .tf-sg-form-wrapper .tf-shortcode-generator-form {
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form {
   transform: translateY(10%);
   width: 600px;
   margin: 30px auto;
@@ -1382,14 +1382,14 @@ Fontawesome
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
   border-radius: 10px;
 }
-.tf-shortcode-generator-section .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-sg-row {
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-sg-row {
   display: flex;
   margin-right: 15px;
   margin-left: -15px;
   margin-bottom: 15px;
   flex-wrap: wrap;
 }
-.tf-shortcode-generator-section .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-col-lg-6 {
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-col-lg-6 {
   flex: 0 0 50%;
   max-width: 50%;
   position: relative;
@@ -1398,7 +1398,10 @@ Fontawesome
   padding-left: 15px;
   box-sizing: border-box;
 }
-.tf-shortcode-generator-section .tf-sg-form-wrapper .tf-shortcode-generator-form select.tf-select-field {
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-select-field {
+  height: auto;
+}
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-setting-field {
   width: 100%;
   box-shadow: none;
   height: 44px;
@@ -1409,14 +1412,14 @@ Fontawesome
   line-height: 16px;
   appearance: none;
 }
-.tf-shortcode-generator-section .tf-sg-form-wrapper .tf-shortcode-generator-form select.tf-select-field:hover {
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-setting-field:hover {
   color: #2271b1;
 }
-.tf-shortcode-generator-section .tf-sg-form-wrapper .tf-shortcode-generator-form select.tf-select-field:active {
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-setting-field:active {
   border-color: #8c8f94;
   box-shadow: none;
 }
-.tf-shortcode-generator-section .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-sg-close {
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-sg-close {
   position: absolute;
   right: -7px;
   top: -5px;
@@ -1429,6 +1432,23 @@ Fontawesome
   font-size: 20px;
   border-radius: 50%;
   cursor: pointer;
+}
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-shortcode-field.copy-shortcode {
+  align-self: start;
+  float: none;
+  display: flex;
+}
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form input.tf-shortcode-value {
+  width: 100%;
+  height: 45px;
+  background: #fff;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+}
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-copy-btn {
+  margin-left: 10px;
+  line-height: 24px;
+  vertical-align: middle;
 }
 
 .tf-field {
