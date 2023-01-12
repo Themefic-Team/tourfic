@@ -37,6 +37,8 @@ define( 'TF_URL', plugin_dir_url( __FILE__ ) );
 define( 'TF_TEMPLATES_URL', TF_URL . 'templates/' );
 define( 'TF_ADMIN_URL', TF_URL . 'admin/' );
 define( 'TF_ASSETS_URL', TF_URL . 'assets/' );
+define( 'TF_ASSETS_APP_URL', TF_ASSETS_URL . 'app/' );
+define( 'TF_ASSETS_ADMIN_URL', TF_ASSETS_URL . 'admin/' );
 // Paths
 define( 'TF_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TF_ADMIN_PATH', TF_PATH . 'admin/' );

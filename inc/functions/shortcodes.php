@@ -39,7 +39,7 @@ function hotel_locations_shortcode( $atts, $content = null ) {
 				<?php foreach ( $locations as $term ) {
 
 					$meta      = get_term_meta( $term->term_id, 'tf_hotel_location', true );
-					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : TF_ASSETS_URL . 'img/img-not-available.svg';
+					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : TF_ASSETS_APP_URL . 'images/img-not-available.svg';
 					$term_link = get_term_link( $term ); ?>
 
                     <div class="single_recomended_item">
@@ -109,7 +109,7 @@ function shortcode_tour_destinations( $atts, $content = null ) {
 				<?php foreach ( $destinations as $term ) {
 
 					$meta      = get_term_meta( $term->term_id, 'tf_tour_destination', true );
-					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : TF_ASSETS_URL . 'img/img-not-available.svg';
+					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : TF_ASSETS_APP_URL . 'images/img-not-available.svg';
 					$term_link = get_term_link( $term );
 
 					if ( is_wp_error( $term_link ) ) {

@@ -168,7 +168,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				<!-- deshboard-top-section -->
 				<div class="tf-setting-top-bar">
                     <div class="version">
-						<img src="<?php echo TF_ASSETS_URL; ?>/img/tourfic-logo.webp" alt="logo">
+						<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tourfic-logo.webp" alt="logo">
 						<span>v<?php echo esc_attr( TOURFIC ); ?></span>
 					</div>
 					<div class="other-document">
@@ -208,11 +208,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				<!-- deshboard-banner-section -->
 				<div class="tf-setting-banner">
 					<div class="tf-setting-banner-content">
-						<img src="<?php echo TF_ASSETS_URL; ?>/img/tourfic-logo-white.png" alt="logo">
+						<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tourfic-logo-white.png" alt="logo">
 						<span>Build & Manage Your Next <b>Travel or Hotel Booking Website</b>with Tourfic</span>
 					</div>
 					<div class="tf-setting-banner-image">
-						<img src="<?php echo TF_ASSETS_URL; ?>/img/hotel-booking-management-system@2x.webp" alt="Banner Image">
+						<img src="<?php echo TF_ASSETS_APP_URL; ?>images/hotel-booking-management-system@2x.webp" alt="Banner Image">
 					</div>
 				</div>
 				<!-- deshboard-banner-section -->
@@ -224,7 +224,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					<div class="tf-performance-grid">
 						<div class="tf-single-performance-grid">
 							<div class="tf-single-performance-icon">
-							<img src="<?php echo TF_ASSETS_URL; ?>/img/tf-hotel.png" alt="total Hotel">
+							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-hotel.png" alt="total Hotel">
 							</div>
 							<div class="tf-single-performance-content">
 								<p><?php _e("Total Hotels","tourfic"); ?></p>
@@ -243,7 +243,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						
 						<div class="tf-single-performance-grid">
 							<div class="tf-single-performance-icon">
-							<img src="<?php echo TF_ASSETS_URL; ?>/img/tf-tours.png" alt="total Tours">
+							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-tours.png" alt="total Tours">
 							</div>
 							<div class="tf-single-performance-content">
 								<p><?php _e("Total Tours","tourfic"); ?></p>
@@ -262,7 +262,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						
 						<div class="tf-single-performance-grid">
 							<div class="tf-single-performance-icon">
-							<img src="<?php echo TF_ASSETS_URL; ?>/img/tf-booking-online.png" alt="total Booking">
+							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-booking-online.png" alt="total Booking">
 							</div>
 							<div class="tf-single-performance-content">
 								<p><?php _e("Total Bookings","tourfic"); ?></p>
@@ -281,7 +281,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						</div>
 						<div class="tf-single-performance-grid">
 							<div class="tf-single-performance-icon">
-							<img src="<?php echo TF_ASSETS_URL; ?>/img/tf-add-user.png" alt="total Customer">
+							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-add-user.png" alt="total Customer">
 							</div>
 							<div class="tf-single-performance-content">
 								<p><?php _e("Total Customers","tourfic"); ?></p>
@@ -302,7 +302,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				
 				<div class="tf-setting-performace-section">
 					<div id="tf-report-loader">
-						<img src="<?php echo TF_ASSETS_URL; ?>/img/loader.gif" alt="Loader">
+						<img src="<?php echo TF_ASSETS_APP_URL; ?>images/loader.gif" alt="Loader">
 					</div>
 					<div class="tf-report-filter">
 						<h2><?php _e("Reports","tourfic"); ?></h2>
@@ -348,7 +348,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			<!-- deshboard-top-section -->
 			<div class="tf-setting-top-bar">
 				<div class="version">
-					<img src="<?php echo TF_ASSETS_URL; ?>/img/tourfic-logo.webp" alt="logo">
+					<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tourfic-logo.webp" alt="logo">
 					<span>v<?php echo esc_attr( TOURFIC ); ?></span>
 				</div>
 				<div class="other-document">
@@ -390,21 +390,21 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<p><?php _e("To help you to get started, we put together the documentation, support link, videos and FAQs here.","tourfic"); ?></p>
 					</div>
 					<div class="tf-help-center-image">
-						<img src="<?php echo TF_ASSETS_URL; ?>/img/help-center.jpg" alt="HELP Center Image">
+						<img src="<?php echo TF_ASSETS_APP_URL; ?>images/help-center.jpg" alt="HELP Center Image">
 					</div>
 				</div>
 
 				<div class="tf-support-document">
 					<div class="tf-single-support">
 						<a href="https://themefic.com/docs/tourfic/">
-							<img src="<?php echo TF_ASSETS_URL; ?>/img/tf-documents.png" alt="Document">
+							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-documents.png" alt="Document">
 							<h3><?php _e("Documentation","tourfic"); ?></h3>
 							<span><?php _e("Read More","tourfic"); ?></span>
 						</a>
 					</div>
 					<div class="tf-single-support">
 						<a href="https://portal.themefic.com/support/">
-							<img src="<?php echo TF_ASSETS_URL; ?>/img/tf-mail.png" alt="Document">
+							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-mail.png" alt="Document">
 							<h3><?php _e("Email Support","tourfic"); ?></h3>
 							<span><?php _e("Contact Us","tourfic"); ?></span>
 						</a>
@@ -412,7 +412,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					
 					<div class="tf-single-support">
 						<a href="https://themefic.com/tourfic/">
-							<img src="<?php echo TF_ASSETS_URL; ?>/img/tf-comment.png" alt="Document">
+							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-comment.png" alt="Document">
 							<h3><?php _e("Live Chat","tourfic"); ?></h3>
 							<span><?php _e("Chat Now","tourfic"); ?></span>
 						</a>
@@ -420,7 +420,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					
 					<div class="tf-single-support">
 						<a href="https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N">
-							<img src="<?php echo TF_ASSETS_URL; ?>/img/tf-tutorial.png" alt="Document">
+							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-tutorial.png" alt="Document">
 							<h3><?php _e("Video Tutorials","tourfic"); ?></h3>
 							<span><?php _e("Watch Video","tourfic"); ?></span>
 						</a>
@@ -547,7 +547,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			<!-- deshboard-top-section -->
 			<div class="tf-setting-top-bar">
 				<div class="version">
-					<img src="<?php echo TF_ASSETS_URL; ?>/img/tourfic-logo.webp" alt="logo">
+					<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tourfic-logo.webp" alt="logo">
 					<span>v<?php echo esc_attr( TOURFIC ); ?></span>
 				</div>
 				<div class="other-document">
@@ -669,7 +669,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				<div class="tf-setting-dashboard">
 					<div class="tf-setting-top-bar">
 						<div class="version">
-							<img src="<?php echo TF_ASSETS_URL; ?>/img/tourfic-logo.webp" alt="logo">
+							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tourfic-logo.webp" alt="logo">
 							<span>v<?php echo esc_attr( TOURFIC ); ?></span>
 						</div>
 						<div class="other-document">
