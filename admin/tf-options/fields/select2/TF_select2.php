@@ -53,7 +53,7 @@ if ( ! class_exists( 'TF_select2' ) ) {
 				if(!empty($this->field['multiple']) && is_array( $this->value ) && in_array( $key, $this->value )){
 					$selected = 'selected';
 				} else {
-					$selected = selected( $this->value, $key, false );
+					$selected = '';
 				}
 				echo '<option value="' . esc_attr( $key ) . '" ' . $selected . '>' . esc_html( $value ) . '</option>';
 			}

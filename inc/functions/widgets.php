@@ -557,7 +557,6 @@ class TF_Tour_Activities_Filter extends WP_Widget {
      * @param array $instance Previously saved values from database.
      */
     public function form( $instance ) {
-
         $title = isset( $instance['title'] ) ? $instance['title'] : __( 'Popular Activities', 'tourfic' );
         $terms = isset( $instance['terms'] ) ? $instance['terms'] : 'all';
 
@@ -574,20 +573,20 @@ class TF_Tour_Activities_Filter extends WP_Widget {
             <label for="<?php echo $this->get_field_id( 'terms' ); ?>"><?php _e( 'Select Terms:', 'tourfic' )?></label>
             <br>
             <?php
-            wp_dropdown_categories( array(
-                'taxonomy'     => 'tour_activities',
-                'hierarchical' => false,
-                'name'         => $this->get_field_name( 'terms' ),
-                'id'           => $this->get_field_id( 'terms' ),
-                'selected'     => $terms, // e.x 86,110,786
-                'multiple' => true,
-                'class'        => 'widefat tf-select2',
-                'show_count'   => true,
-                'hide_empty'   => 0,
-            ) );
-        ?>
+                wp_dropdown_categories( array(
+                    'taxonomy'     => 'tour_activities',
+                    'hierarchical' => false,
+                    'name'         => $this->get_field_name( 'terms' ),
+                    'id'           => $this->get_field_id( 'terms' ),
+                    'selected'     => $terms, // e.x 86,110,786
+                    'multiple'     => true,
+                    'class'        => 'widefat tf-select2',
+                    'show_count'   => true,
+                    //'hide_if_empty'   => 0,
+                ) );
+            ?>
             <br>
-            <span>Leave this field empty if you want to show all terms.</span>
+            <span><?php echo __( 'Leave this field empty if you want to show all terms.', 'tourfic' ); ?></span>
         </p>
         <p class="tf-widget-field">
             <label for="<?php echo $this->get_field_id( 'show_count' ); ?>"><?php _e( 'Show Count:', 'tourfic' )?></label>
