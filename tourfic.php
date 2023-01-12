@@ -70,9 +70,9 @@ if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
 	function tf_enqueue_main_admin_scripts() {
 
         // Custom
-        wp_enqueue_style('tf', TF_ADMIN_URL . 'assets/css/admin.css','', '2.1.0' );
-        wp_enqueue_script( 'tf', TF_ASSETS_URL . 'admin/js/tourfic-admin-scripts.min.js', array('jquery'), TOURFIC, true );
-        wp_localize_script( 'tf', 'tf_admin_params',
+        wp_enqueue_style('tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css','', TOURFIC );
+        wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts.min.js', array('jquery'), TOURFIC, true );
+        wp_localize_script( 'tf-admin', 'tf_admin_params',
             array(
                 'tf_nonce' => wp_create_nonce( 'updates' ),
                 'ajax_url' => admin_url( 'admin-ajax.php' ),
@@ -162,24 +162,6 @@ add_action( 'plugins_loaded', 'tf_load_textdomain' );
  */
 if ( ! function_exists( 'tf_plugin_loaded_action' ) ) {
 	function tf_plugin_loaded_action() {
-
-		/**
-		 * Option Framework & options
-		 *
-		 * @since 1.0
-		 */
-		// Options Framework
-		/*if( !class_exists( 'CSF' ) ) {
-			require_once( TF_ADMIN_PATH .'framework/framework.php' );
-		}
-		// Options
-		if( class_exists( 'CSF' ) ) {
-			if ( file_exists( TF_OPTIONS_PATH . 'options.php' ) ) {
-				require_once TF_OPTIONS_PATH . 'options.php';
-			} else {
-				tf_file_missing(TF_OPTIONS_PATH . 'options.php');
-			}
-		}*/
 
 		if ( file_exists( TF_ADMIN_PATH . 'tf-options/TF_Options.php' ) ) {
 			require_once TF_ADMIN_PATH . 'tf-options/TF_Options.php';
