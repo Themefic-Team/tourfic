@@ -284,7 +284,6 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				wp_enqueue_style( 'tf-remixicon', '//cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css', array(), $this->tf_options_version() );
 				wp_enqueue_style( 'tf-select2', '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', array(), $this->tf_options_version() );
 				wp_enqueue_style( 'tf-flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css', array(), $this->tf_options_version() );
-				wp_enqueue_style( 'tf-options', $this->tf_options_file_url( 'assets/css/tf-options.css' ), array(), $this->tf_options_version() );
 			}
 
 			//Js
@@ -293,10 +292,10 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				wp_enqueue_script( 'tf-flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js', array( 'jquery' ), $this->tf_options_version(), true );
 				wp_enqueue_script( 'tf-select2', '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array( 'jquery' ), $this->tf_options_version(), true );
 				wp_enqueue_script( 'wp-color-picker-alpha', $this->tf_options_file_url( 'assets/js/wp-color-picker-alpha.js' ), array( 'jquery', 'wp-color-picker' ), $this->tf_options_version(), true );
-				wp_enqueue_script( 'tf-options', $this->tf_options_file_url( 'assets/js/tf-options.js' ), array( 'jquery', 'wp-color-picker' ), $this->tf_options_version(), true );
+//				wp_enqueue_script( 'tf-options', TF_ASSETS_ADMIN_URL .'js/tourfic-admin-scripts.min.js', array( 'jquery', 'wp-color-picker' ), $this->tf_options_version(), true );
 
 				$tf_google_map = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "false";
-				wp_localize_script( 'tf-options', 'tf_options', array(
+				wp_localize_script( 'tf-admin', 'tf_options', array(
 					'ajax_url'          => admin_url( 'admin-ajax.php' ),
 					'nonce'             => wp_create_nonce( 'tf_options_nonce' ),
 					'gmaps'             => $tf_google_map,

@@ -71,7 +71,7 @@ if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
 
         // Custom
         wp_enqueue_style('tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css','', TOURFIC );
-        wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts.min.js', array('jquery'), TOURFIC, true );
+        wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts.min.js', array('jquery', 'wp-color-picker', 'wp-data', 'wp-editor', 'wp-edit-post'), TOURFIC, true );
         wp_localize_script( 'tf-admin', 'tf_admin_params',
             array(
                 'tf_nonce' => wp_create_nonce( 'updates' ),

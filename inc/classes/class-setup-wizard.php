@@ -104,7 +104,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		private function tf_setup_welcome_step() {
 			?>
             <div class="tf-setup-content-layout tf-welcome-step <?php echo self::$current_step == 'welcome' ? 'active' : ''; ?>">
-                <div class="welcome-img"><img src="<?php echo TF_URL . 'admin/assets/images/welcome.png' ?>" alt="<?php esc_attr_e( 'Welcome to Tourfic!', 'tourfic' ) ?>"></div>
+                <div class="welcome-img"><img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/welcome.png' ?>" alt="<?php esc_attr_e( 'Welcome to Tourfic!', 'tourfic' ) ?>"></div>
                 <h1 class="tf-setup-welcome-title"><?php _e( 'Welcome to Tourfic!', 'tourfic' ) ?></h1>
                 <div class="tf-setup-welcome-description"><?php _e( 'Thanks for choosing Tourfic for your travel business. We are excited to have you on board. This quick setup wizard will help you configure the basic settings. It’s completely optional and shouldn’t take longer than five minutes.', 'tourfic' ) ?></div>
                 <div class="tf-setup-welcome-footer">
@@ -128,14 +128,14 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                         <li>
                             <input type="checkbox" id="tf-hotel" name="tf-services[]" value="hotel" checked/>
                             <label for="tf-hotel">
-                                <img src="<?php echo TF_URL . 'admin/assets/images/hotel.png' ?>" alt="<?php esc_attr_e( 'Hotel', 'tourfic' ) ?>">
+                                <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/hotel.png' ?>" alt="<?php esc_attr_e( 'Hotel', 'tourfic' ) ?>">
                                 <span><?php _e( 'Hotel', 'tourfic' ) ?></span>
                             </label>
                         </li>
                         <li>
                             <input type="checkbox" id="tf-tour" name="tf-services[]" value="tour" checked/>
                             <label for="tf-tour">
-                                <img src="<?php echo TF_URL . 'admin/assets/images/tour.png' ?>" alt="<?php esc_attr_e( 'Tour', 'tourfic' ) ?>">
+                                <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/tour.png' ?>" alt="<?php esc_attr_e( 'Tour', 'tourfic' ) ?>">
                                 <span><?php _e( 'Tour', 'tourfic' ) ?></span>
                             </label>
                         </li>
