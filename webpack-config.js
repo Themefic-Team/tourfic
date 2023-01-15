@@ -17,6 +17,7 @@ const config = {
     output: {
         path: path.resolve(__dirname, 'assets'),
         filename: '[name].js',
+        clean: false
     },
     optimization: {
         minimize: true,
