@@ -1407,6 +1407,12 @@
             }
         });
 
+        // Form Tab click
+        $(document).on('click', '.tf-tablinks', function (e) {
+            let formId = $(this).data('form-id');
+            tfOpenForm(event, formId);
+        });
+
         /*
         * Booking Form tab mobile version
         * @author: Foysal
