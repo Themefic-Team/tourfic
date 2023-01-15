@@ -12,23 +12,23 @@ jQuery(function ($) {
 	});
 	
     function tf_event_handler(e) {
-        tf_params.error = false;
-        $.each(tf_params.taxonomies, function (taxonomy, config) {
+        tf_admin_params.error = false;
+        $.each(tf_admin_params.taxonomies, function (taxonomy, config) {
             if (config.type == 'hierarchical') {
                 if ($('#taxonomy-' + taxonomy + ' input:checked').length == 0) {
                     //alert(config.message);
 					notyf.error(config.message);
-                    tf_params.error = true;
+                    tf_admin_params.error = true;
                 }
             } else {
                 if ($('#tagsdiv-' + taxonomy + ' .tagchecklist').is(':empty')) {
                     //alert(config.message);
                     notyf.error(config.message);
-                    tf_params.error = true;
+                    tf_admin_params.error = true;
                 }
             }
         });
-        if (tf_params.error) {
+        if (tf_admin_params.error) {
             e.stopImmediatePropagation();
             return false;
         } else {

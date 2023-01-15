@@ -55,10 +55,9 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		 */
 		public function tf_setup_wizard_enqueue_scripts( $screen ) {
 			if ( $screen == 'admin_page_tf-setup-wizard' ) {
-				wp_enqueue_style( 'tf-setup-wizard', TF_URL . 'admin/assets/css/setup-wizard.css', [], TOURFIC );
-				wp_enqueue_script( 'tf-setup-wizard', TF_ASSETS_URL . 'admin/js/tourfic-admin-scripts.min.js', [ 'jquery' ], TOURFIC, true );
+//				wp_enqueue_script( 'tf-setup-wizard', TF_ASSETS_URL . 'admin/js/tourfic-admin-scripts.min.js', [ 'jquery' ], TOURFIC, true );
 
-				wp_localize_script( 'tf-setup-wizard', 'tf_setup_wizard', [
+				wp_localize_script( 'tf-admin', 'tf_setup_wizard', [
 					'ajaxurl' => admin_url( 'admin-ajax.php' ),
 					'nonce'   => wp_create_nonce( 'tf-setup-wizard' ),
 					'i18n'    => array(
