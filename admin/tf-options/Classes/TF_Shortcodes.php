@@ -57,10 +57,13 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Tour Count', 'tourfic' ) ?></h3>
-                                            <input type="number" data-count="count" class="post-count tf-setting-field">                                                
+                                            <input type="number" value="5" data-count="count" class="post-count tf-setting-field">                                                
                                         </div>
                                     </div>
                                 </div>
+                                <?php
+                                tf_terms_dropdown('tour_features','tf-setting-field');
+                                ?>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
@@ -79,11 +82,13 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                     </div>
                                     </div>
                                 </div>
-                                <div class="tf-shortcode-field copy-shortcode">
-                                    <input type="text" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly />
-                                    <button type="button" class="tf-copy-btn tf-btn">
-                                        <span class="dashicons dashicons-editor-code"></span>
-                                    </button>
+                                <div class="tf-copy-item">
+                                    <div class="tf-shortcode-field copy-shortcode">
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly />
+                                        <button type="button" class="tf-copy-btn tf-btn">
+                                            <span class="dashicons dashicons-category"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

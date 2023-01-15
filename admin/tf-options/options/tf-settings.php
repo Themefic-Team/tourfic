@@ -7,9 +7,6 @@ if ( file_exists( TF_ADMIN_PATH . 'tf-options/options/tf-menu-icon.php' ) ) {
 } else {
 	$menu_icon = 'dashicons-palmtree';
 }
-function tf_tours_for_select2(){
-
-}
 
 TF_Settings::option( 'tf_settings', array(
 	'title'    => __( 'Tourfic Settings ', 'tourfic' ),

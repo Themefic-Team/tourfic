@@ -730,7 +730,7 @@
     }
   }
   .tf-sg-form-wrapper{
-    // display: none;
+    display: none;
     overflow-x: auto;
     overflow-y: scroll;
     position: fixed;
@@ -801,6 +801,9 @@
         border-radius: 50%;
         cursor: pointer;
       }
+      .tf-copy-item{
+        display: none;
+      }
       .tf-shortcode-field.copy-shortcode {
         align-self: start;
         float: none;
@@ -814,10 +817,9 @@
           padding: 10px 15px;
           border: 1px solid #ccc;
       }
-      
       .tf-copy-btn {
         margin-left: 10px;
-        line-height: 24px;
+        line-height: 22px;
         vertical-align: middle;
       }
     }

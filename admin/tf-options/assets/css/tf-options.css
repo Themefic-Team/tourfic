@@ -1362,6 +1362,7 @@ Fontawesome
   background-color: #5d5dff;
 }
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper {
+  display: none;
   overflow-x: auto;
   overflow-y: scroll;
   position: fixed;
@@ -1433,6 +1434,9 @@ Fontawesome
   border-radius: 50%;
   cursor: pointer;
 }
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-copy-item {
+  display: none;
+}
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-shortcode-field.copy-shortcode {
   align-self: start;
   float: none;
@@ -1447,7 +1451,7 @@ Fontawesome
 }
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-copy-btn {
   margin-left: 10px;
-  line-height: 24px;
+  line-height: 22px;
   vertical-align: middle;
 }
 

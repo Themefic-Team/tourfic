@@ -1495,7 +1495,26 @@ function tf_assign_taxonomies( $post_id, $post, $old_status ){
 	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
 	if( !empty( $meta['features'] ) && is_array( $meta['features'] ) ){
 		$features = array_map( 'intval',$meta['features']);		
+		wp_set_object_terms( $post_id, $features, 'tour_features',true );
 	}
-	wp_set_object_terms( $post_id, $features, 'tour_features',true );
 }
+
+/** 
+ * Generate categories select dropdown
+ * @author Abu Hena
+ * @since 2.9.3
+ */
+function tf_terms_dropdown( $term, $class, $multi = false ){
+	$terms = get_terms( array(
+		'taxonomy' => 'tour_features',
+		'hide_empty' => false,
+	));
+	$select =  '<select name="" class="'.$class.'">';
+	foreach( $terms as $term ){
+		$select .= '<option value="'.$term->term_id.'">'.$term->name.'</option>';
+	}
+	$select .= "</select>";
+	echo $select;
+}
+
 

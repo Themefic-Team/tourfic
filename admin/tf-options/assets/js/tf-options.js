@@ -1436,7 +1436,13 @@ var frame, gframe;
     });
 })(jQuery);
 
+/**
+ * Shortcode generator js
+ * @author Abu Hena
+ * @since 2.9.3
+ */
 (function ($){
+    //get each of the field value
     $(document).on('click', '.tf-generate-tour .tf-btn', function (event) {
         event.preventDefault();
         var arr = [];
@@ -1460,7 +1466,34 @@ var frame, gframe;
         var shortcode = "[" + allData.join(' ') + "]";
     
         $(this).parents('.tf-shortcode-generators').find('.tf-shortcode-value').val(shortcode);
-        $(this).parents('.tf-shortcode-generators').find('.tf-copy-btn').slideDown();
+        $(this).parents('.tf-shortcode-generators').find('.tf-copy-item').slideDown();
     });
+
+    $(document).on('click', '.tf-sg-close', function (event) {
+        $(this).parents('.tf-shortcode-generators').find('.tf-sg-form-wrapper').fadeOut();
+    });
+
+    $(document).on('click', '.tf-shortcode-btn', function (event) {
+        var $this = $(this);
+        $($this).parents('.tf-shortcode-generators').find('.tf-sg-form-wrapper').fadeIn();
+  
+        $($this).parents('.tf-shortcode-generators').mouseup(function (e) {
+            var container = $(this).find(".tf-shortcode-generator-form");
+            var container_parent = container.parent(".tf-sg-form-wrapper");
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                container_parent.fadeOut();
+            }
+        });
+  
+    });
+
+    //Copy the shortcode value
+    $(document).on('click','.tf-copy-btn',function(){
+        var fieldIdValue = $(this).parent('.tf-shortcode-field').find('#tf-shortcode');
+        if (fieldIdValue) {
+            fieldIdValue.select();
+            document.execCommand("copy");
+        }
+    })
 })(jQuery);
 
