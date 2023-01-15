@@ -87,8 +87,11 @@ if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
                 'installed' => __( 'Installed', 'tourfic' ),
                 'activated' => __( 'Activated', 'tourfic' ),
                 'install_failed' => __( 'Install failed', 'tourfic' ),
+                'i18n'    => array(
+	                'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
+                )
             )
-        );    
+        );
     }
     add_action( 'admin_enqueue_scripts', 'tf_enqueue_main_admin_scripts' );
 }

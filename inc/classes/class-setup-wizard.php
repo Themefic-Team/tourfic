@@ -26,7 +26,6 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		public function __construct() {
 			add_action( 'admin_menu', [ $this, 'tf_wizard_menu' ], 100 );
 			add_action( 'after_setup_theme', [ $this, 'tf_activation_redirect' ], 99 );
-			add_action( 'admin_enqueue_scripts', [ $this, 'tf_setup_wizard_enqueue_scripts' ] );
 			add_action( 'wp_ajax_tf_setup_wizard_submit', [ $this, 'tf_setup_wizard_submit_ajax' ] );
 
 			self::$current_step = isset( $_GET['step'] ) ? sanitize_key( $_GET['step'] ) : 'welcome';
@@ -47,23 +46,6 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 					[ $this, 'tf_wizard_page' ],
 					99
 				);
-			}
-		}
-
-		/**
-		 * Enqueue scripts
-		 */
-		public function tf_setup_wizard_enqueue_scripts( $screen ) {
-			if ( $screen == 'admin_page_tf-setup-wizard' ) {
-//				wp_enqueue_script( 'tf-setup-wizard', TF_ASSETS_URL . 'admin/js/tourfic-admin-scripts.min.js', [ 'jquery' ], TOURFIC, true );
-
-				wp_localize_script( 'tf-admin', 'tf_setup_wizard', [
-					'ajaxurl' => admin_url( 'admin-ajax.php' ),
-					'nonce'   => wp_create_nonce( 'tf-setup-wizard' ),
-					'i18n'    => array(
-						'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
-					)
-				] );
 			}
 		}
 

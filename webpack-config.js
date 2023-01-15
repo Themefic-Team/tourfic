@@ -1,6 +1,5 @@
 const path = require('path');
 const glob = require('glob');
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const entryPoints = {};
 
 const appJs = glob.sync('./sass/app/js/*.js');
@@ -19,12 +18,6 @@ const config = {
         filename: '[name].js',
         clean: false
     },
-    optimization: {
-        minimize: true,
-        // minimizer: [new UglifyJsPlugin({
-        //     include: /\.min\.js$/
-        // })]
-    }
 }
 
 // Export the config object.
