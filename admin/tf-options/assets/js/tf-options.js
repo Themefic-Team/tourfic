@@ -405,21 +405,21 @@
         * Each select2 field initialize select2
         * @author: Foysal, Sydur
         */
-        const tfSelect2Int = select2Selector => {
-            let $this = select2Selector,
-                id = $this.attr('id'),
-                placeholder = $this.data('placeholder');
+        // const tfSelect2Int = select2Selector => {
+        //     let $this = select2Selector,
+        //         id = $this.attr('id'),
+        //         placeholder = $this.data('placeholder');
 
-            $('#' + id + '').select2({
-                placeholder: placeholder,
-                allowClear: true,
-            });
-        }
+        //     $('#' + id + '').select2({
+        //         placeholder: placeholder,
+        //         allowClear: true,
+        //     });
+        // }
 
-        $('select.tf-select2').each(function () {
-            var $this = $(this);
-            tfSelect2Int($this);
-        });
+        // $('select.tf-select2').each(function () {
+        //     var $this = $(this);
+        //     tfSelect2Int($this);
+        // });
 
 
         /*

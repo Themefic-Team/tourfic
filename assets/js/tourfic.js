@@ -1,4 +1,4 @@
-(function ($, win) {
+(function ($, win) { 
     $(document).ready(function () {
 
         // Create an instance of Notyf
@@ -1493,23 +1493,29 @@ $('.tf-widget-title').on('click',function(){
 })
 
 /* see more checkbox filter started */
+   
 $('a.see-more').on('click',function(e){
-    e.preventDefault();
-    $('.tf_widget').find('.filter-item').filter(function(index){
+    var $this = $(this);
+    e.preventDefault();  
+    $this.parent('.tf-filter').find('.filter-item').filter(function(index){
         return index > 3;
     }).removeClass("hidden");
-    $(this).hide();
+    $this.hide();
 });
 
-$('.tf_widget').find('.filter-item').filter(function(index){
-    return index > 4;
-}).addClass("hidden");
+$('.tf-filter').each(function(){
 
-var element = $('.filter-item')
-var numberOfChildren = element.children.length;
-if(numberOfChildren < 4 ){
-    $('a.see-more').hide(); 
-}
+    var len = $(this).find('ul').children().length;   
+    $(this).find('.see-more').hide();    
+    if(len > 4){
+        $(this).find('.see-more').show();
+    }
+    //hide items if crossed showing limit
+    $(this).find('.filter-item').filter(function(index){
+        return index > 3;
+    }).addClass("hidden");
+
+});
 
 /* see more checkbox filter end */
 
