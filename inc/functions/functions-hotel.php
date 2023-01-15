@@ -896,7 +896,7 @@ function tf_room_availability_callback() {
 					 * @since 1.6.9
 					 * @author Abu Hena
 					 */
-					$filtered_features  = ! empty( $_POST['features'] ) ?  $_POST['features']  : array();	
+					$filtered_features  = ! empty( $_POST['features'] ) ?  $_POST['features']  : array();
 					$room_features = !empty($room['features']) ? $room['features'] : '';
 					if(!empty($room_features) && is_array($room_features)){
 						$feature_result = array_intersect($filtered_features,$room_features);

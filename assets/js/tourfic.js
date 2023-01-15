@@ -31,7 +31,7 @@
             }
             //get the checked values of features
             var features = [];
-            $('.tf-sidebar-filter :checkbox:checked').each(function(i){
+            $('.tf-room-checkbox :checkbox:checked').each(function(i){
                 features[i] = $(this).val();
             });
             var tf_room_avail_nonce = $("input[name=tf_room_avail_nonce]").val();
@@ -41,7 +41,6 @@
             //var features = $('input[name=features]').filter(':checked').val();
             var children_ages = $('input[name=children_ages]').val();
             var check_in_out = $('input[name=check-in-out-date]').val();
-            //console.log(post_id);
 
             var data = {
                 action: 'tf_room_availability',
@@ -53,13 +52,12 @@
                 children_ages: children_ages,
                 check_in_out: check_in_out,
             };
-
+            
             jQuery.ajax({
                 url: tf_params.ajax_url,
                 type: 'post',
                 data: data,
                 success: function (data) {
-                    console.log(features,adult);
                     $('html, body').animate({
                         scrollTop: $("#rooms").offset().top
                     }, 500);
