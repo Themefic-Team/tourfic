@@ -405,7 +405,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 
 						array(
 							'id'    => 'description',
-							'type'  => 'textarea',
+							'type'  => 'editor',
 							'label' => __( 'Description', 'tourfic' ),
 						),
 

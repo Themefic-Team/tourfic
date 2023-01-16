@@ -185,6 +185,12 @@ input.select2-search__field {
 .wp-block input.select2-search__field{
     min-width: unset;
 }
-span.select2-dropdown.select2-dropdown--below {
+/* span.select2-dropdown.select2-dropdown--below {
     min-width: 150px;
+} */
+.widget-content .select2-selection__rendered {
+    display: none;
+}
+.tf-widget-field .select2-container:last-child{
+    display: none;
 }
