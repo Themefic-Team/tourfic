@@ -683,6 +683,7 @@ function tf_search_result_ajax_sidebar() {
 	$search   = ( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
 	$filters  = ( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
 	$features = ( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
+	$tour_features = ( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( $_POST['tour_features'] ) ) : null;
 	$attractions = ( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
 	$activities = ( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
 	$posttype = $_POST['type'] ? sanitize_text_field( $_POST['type'] ) : 'tf_hotel';
@@ -778,7 +779,7 @@ function tf_search_result_ajax_sidebar() {
 
 	}
 
-	//Query for the features filter of tours
+	//Query for the features filter of hotel
 	if ( $features ) {
 		$args['tax_query']['relation'] = $relation;
 
@@ -793,6 +794,29 @@ function tf_search_result_ajax_sidebar() {
 			foreach ( $filters as $key => $term_id ) {
 				$args['tax_query']['tf_feature'][] = array(
 					'taxonomy' => 'tf_feature',
+					'terms'    => array( $term_id ),
+				);
+			}
+
+		}
+
+	}
+
+	//Query for the features filter of Tour
+	if ( $tour_features ) {
+		$args['tax_query']['relation'] = $relation;
+
+		if ( $filter_relation == "OR" ) {
+			$args['tax_query'][] = array(
+				'taxonomy' => 'tour_features',
+				'terms'    => $tour_features,
+			);
+		} else {
+			$args['tax_query']['tour_features']['relation'] = 'AND';
+
+			foreach ( $tour_features as $key => $term_id ) {
+				$args['tax_query']['tour_features'][] = array(
+					'taxonomy' => 'tour_features',
 					'terms'    => array( $term_id ),
 				);
 			}
@@ -1455,5 +1479,24 @@ function tf_month_chart_filter_callback(){
 	echo wp_json_encode( $response );
 
 	die();
+}
+
+/**
+ * Assign taxonomy(tour_features) from the single post metabox
+ * to a Tour when updated or published
+ * @return array();
+ * @author Abu Hena
+ * @since 2.9.2
+ */
+
+add_action( 'wp_after_insert_post', 'tf_assign_taxonomies', 100, 3 );
+function tf_assign_taxonomies( $post_id, $post, $old_status ){
+
+	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+	if( !empty( $meta['features'] ) && is_array( $meta['features'] ) ){
+		$features = array_map( 'intval',$meta['features']);
+		wp_set_object_terms( $post_id, $features, 'tour_features',true );
+	}
+	
 }
 

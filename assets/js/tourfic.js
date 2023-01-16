@@ -1,4 +1,4 @@
-(function ($, win) {
+(function ($, win) { 
     $(document).ready(function () {
 
         // Create an instance of Notyf
@@ -16,14 +16,12 @@
         //         Hotel                #
         //###############################
 
-        /**
+       /**
          * Hotel room availability
          *
-         * Ajax
+         * Ajax room filter 
          */
-        $(document).on('click', '#tf-single-hotel-avail .tf-submit', function (e) {
-            e.preventDefault();
-
+        const tfRoomFilter = () => {
             if ($.trim($('input[name=check-in-out-date]').val()) == '') {
 
                 if ($('#tf-required').length === 0) {
@@ -33,7 +31,7 @@
             }
             //get the checked values of features
             var features = [];
-            $('.tf-sidebar-filter :checkbox:checked').each(function(i){
+            $('.tf-room-checkbox :checkbox:checked').each(function(i){
                 features[i] = $(this).val();
             });
             var tf_room_avail_nonce = $("input[name=tf_room_avail_nonce]").val();
@@ -43,7 +41,6 @@
             //var features = $('input[name=features]').filter(':checked').val();
             var children_ages = $('input[name=children_ages]').val();
             var check_in_out = $('input[name=check-in-out-date]').val();
-            //console.log(post_id);
 
             var data = {
                 action: 'tf_room_availability',
@@ -55,13 +52,12 @@
                 children_ages: children_ages,
                 check_in_out: check_in_out,
             };
-
+            
             jQuery.ajax({
                 url: tf_params.ajax_url,
                 type: 'post',
                 data: data,
                 success: function (data) {
-                    console.log(features,adult);
                     $('html, body').animate({
                         scrollTop: $("#rooms").offset().top
                     }, 500);
@@ -71,8 +67,17 @@
                     console.log(data);
                 }
             });
+        }
+
+        $(document).on('click', '#tf-single-hotel-avail .tf-submit', function (e) {
+            e.preventDefault();
+            tfRoomFilter();
+            
         });
 
+        $(document).on('change','.tf-room-checkbox :checkbox', function(){
+            tfRoomFilter();
+        });
         /**
          * Click to go back to hotel availability form
          */
@@ -367,6 +372,18 @@
         });
 
         /**
+         * Itinerary gallery init
+         */
+        $('.tf-itinerary-gallery').fancybox({
+            buttons: [
+                "zoom",
+                "slideShow",
+                "fullScreen",
+                "close"
+            ]
+        });
+        
+        /**
          * Single Tour price change
          *
          * adult, child, infant
@@ -427,6 +444,14 @@
             });
             var features = features.join();
 
+            var tour_features = [];
+
+            $('[name*=tour_features]').each(function () {
+                if ($(this).is(':checked')) {
+                    tour_features.push($(this).val());
+                }
+            });
+            tour_features = tour_features.join();
             //get tour attraction checked values
             var attractions = [];
             $('[name*=tf_attractions]').each(function () {
@@ -434,7 +459,7 @@
                     attractions.push($(this).val());
                 }
             });
-            var attractions = attractions.join();
+            attractions = attractions.join();
 
             //get tour activities checked values
             var activities = [];
@@ -443,7 +468,7 @@
                     activities.push($(this).val());
                 }
             });
-            var activities = activities.join();
+            activities = activities.join();
 
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
@@ -456,6 +481,7 @@
             formData.append('checkout', checkout);
             formData.append('filters', filters);
             formData.append('features', features);
+            formData.append('tour_features', tour_features);
             formData.append('attractions', attractions);
             formData.append('activities', activities);
             formData.append('checked', checked);
@@ -487,7 +513,6 @@
                             opacity: .5
                         }
                     });
-
                 },
                 complete: function (data) {
                     $('.archive_ajax_result').unblock();
@@ -521,7 +546,7 @@
             e.preventDefault();
             makeFilter()
         });
-        $(document).on('change', '[name*=tf_filters],[name*=tf_features],[name*=tf_attractions],[name*=tf_activities]', function () {
+        $(document).on('change', '[name*=tf_filters],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities]', function () {
             makeFilter();
         })
 
@@ -1458,6 +1483,45 @@ if($('.child-age-limited')[0]){
 }
 var postsCount = $('.tf-posts-count').html();
 $('.tf-total-results').find('span').html(postsCount);
+
+//Sidebar widget js
+$('.tf-widget-title').on('click',function(){
+    $(this).find('i').toggleClass('collapsed');
+    $(this).siblings('.tf-filter').slideToggle( 'medium' );
+})
+
+/* see more checkbox filter started */
+   
+$('a.see-more').on('click',function(e){
+    var $this = $(this);
+    e.preventDefault();  
+    $this.parent('.tf-filter').find('.filter-item').filter(function(index){
+        return index > 3;
+    }).removeClass("hidden");
+    $this.hide();
+});
+
+$('.tf-filter').each(function(){
+
+    var len = $(this).find('ul').children().length;   
+    $(this).find('.see-more').hide();    
+    if(len > 4){
+        $(this).find('.see-more').show();
+    }
+    //hide items if crossed showing limit
+    $(this).find('.filter-item').filter(function(index){
+        return index > 3;
+    }).addClass("hidden");
+
+});
+
+/* see more checkbox filter end */
+
+//active checkbox bg
+$('.tf_widget input').on('click',function(){
+    $(this).parent().parent().toggleClass('active');
+});
+
 
 })(jQuery, window);
 

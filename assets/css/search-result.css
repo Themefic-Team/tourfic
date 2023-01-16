@@ -1,6 +1,7 @@
-.search-result-wrapper{
+.search-result-wrapper {
     padding: 30px 0;
 }
+
 .search-result-inner {
     display: grid;
     grid-template-columns: 75% 25%;
@@ -40,11 +41,13 @@
     justify-content: space-between;
     position: relative;
 }
+
 .single-tour-wrap.tf-featured .single-tour-inner {
     background: #F5F9FF;
     border-color: #dbedff;
     box-shadow: 0px 2px 4px rgba(179, 180, 202, 0.48);
-  }
+}
+
 .tourfic-single-left {
     order: 1;
     flex-grow: 0;
@@ -94,11 +97,13 @@
     color: #003162;
 }
 
-.sr_rooms_table_block, .tf_search_result .tf-tour-desc {
+.sr_rooms_table_block,
+.tf_search_result .tf-tour-desc {
     margin-top: 8px;
 }
 
-.room_details, .tf_search_result .tf-tour-desc {
+.room_details,
+.tf_search_result .tf-tour-desc {
     border-top: 1px solid #bdbdbd;
     padding-top: 8px;
 }
@@ -116,7 +121,7 @@
     align-items: end;
     font-size: 14px;
     align-items: center;
-  }
+}
 
 .roomName_flex {
     flex-grow: 1;
@@ -134,23 +139,29 @@ a.page-numbers {
     color: #fff;
     padding: 5px 15px;
 }
+
 .archive_ajax_result.loading {
     opacity: 0.3;
 }
+
 .tf_posts_navigation .page-numbers.current {
     background: #c9ddfa;
     padding: 5px 15px;
 }
-.tf-archive-shortdesc, .tf-tour-desc {
+
+.tf-archive-shortdesc,
+.tf-tour-desc {
     line-height: 1.8;
     margin: 5px 0 10px;
     font-size: 14px;
     opacity: 0.85;
-  }
+}
+
 .tf-archive-desc li {
     display: inline-block;
     margin-right: 7px;
 }
+
 .availability-btn-area.tour-search {
     font-size: 14px;
     max-width: 120px;
@@ -162,10 +173,12 @@ a.page-numbers {
     margin-top: 10px;
 }
 
-.tf-room-price .amount, .tf-tour-price .amount {
+.tf-room-price .amount,
+.tf-tour-price .amount {
     font-weight: bold;
     margin-left: 5px;
 }
+
 .single-tour-wrap,
 .single-tour-wrap * {
     transition: all 0.3s ease-out;
@@ -208,24 +221,25 @@ a.page-numbers {
     color: #FFFFFF;
     font-weight: bold;
 }
+
 .tf-archive-rating-wrapper h6 {
     color: #737373;
     font-weight: 400;
     text-transform: capitalize;
     font-size: 14px;
     text-align: right;
-  }
+}
 
 
 .tf-archive-desc {
     margin: 0;
-  }
+}
 
-  .tf-archive-desc i {
+.tf-archive-desc i {
     color: #549501;
     font-size: 15px;
     margin-bottom: 10px;
-  }
+}
 
 
 /** GRID VIEW **/
@@ -287,18 +301,129 @@ a.page-numbers {
     text-align: left;
     margin: 10px 0;
 }
+
 .archive_ajax_result .tf-tour-price {
     display: flex;
     justify-content: end;
 }
-.tf-hide-pagination{
+
+/* Search result sidebar  */
+.tf_widget {
+    border: 1px solid #EDEDF0;
+    background: #fff;
+    border-radius: 10px;
+}
+.tf-widget-title {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    height: 48px;
+    background: #F5F8FF;
+    border: 1px solid #EDEDF0;
+    border-radius: 8px 8px 0px 0px;
+    justify-content: space-between;
+}
+
+.tf-widget-title h4 {
+    font-size: 16px;
+    line-height: 24px;
+    font-family: 'rubik', sans-serif;
+    cursor: pointer;
+    width: 100%;
+}
+
+.tf-widget-title i.fa {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+}
+.tf-widget-title i.fa.collapsed{
+    transform: rotate(180deg);
+}
+li.filter-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin: 5px;
+}
+
+/* Create a custom checkbox */
+.filter-item label{
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    display: inline-block;
+    padding-left: 25px;
+}
+.checkmark {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #D2D2D6;
+}
+.filter-item input[type=checkbox]{
+    display: none;
+}
+.filter-item.active{
+    background-color: #F5F8FF;
+}
+.filter-item label:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+.filter-item label input:checked~.checkmark {
+    background-color: #2196F3;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.filter-item label input:checked~.checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.filter-item label .checkmark:after {
+    left: 6px;
+    top: 3px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+a.see-more.btn-link {
+    text-align: center;
+    display: block;
+    font-weight: 600;
+}
+a.see-more span {
+    margin-left: 3px;
+    vertical-align: middle;
+}
+li.filter-item.hidden{
+    display: none;
+}
+.tf-hide-pagination {
     display: none !important;
 }
+
 @media only screen and (max-width: 991px) {
     .widget_tf_hotel_filter {
         margin-top: 20px;
         margin-bottom: 20px;
-      }
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -318,37 +443,46 @@ a.page-numbers {
         display: grid;
         grid-template-columns: 49% 49%;
         gap: 2%;
-      }
-      .archive_ajax_result .single-tour-wrap {
+    }
+
+    .archive_ajax_result .single-tour-wrap {
         margin-bottom: 0px;
-      }
-      .tf_property_block_main_row {
+    }
+
+    .tf_property_block_main_row {
         display: block;
-      }
-      .tf-archive-rating-wrapper {
+    }
+
+    .tf-archive-rating-wrapper {
         margin-top: 20px;
-      }
-      .tf-archive-rating {
+    }
+
+    .tf-archive-rating {
         float: none;
-      }
-      .tf-archive-rating-wrapper h6 {
+    }
+
+    .tf-archive-rating-wrapper h6 {
         text-align: left;
-      }
+    }
 }
 
 @media only screen and (max-width: 659px) {
     .search-result-inner {
         grid-template-columns: 100%;
     }
+
     .widget_tf_hotel_filter .tf-filter ul li {
-        display: inline-block;
         padding-right: 25px;
         margin-top: 5px;
-      }
-    .search-result-inner .tf-search-right {
-        grid-row: 1; /* NEW */
     }
-    .tf-search-right, .tf-search-left {
-        padding: 0!important;
+
+    .search-result-inner .tf-search-right {
+        grid-row: 1;
+        /* NEW */
+    }
+
+    .tf-search-right,
+    .tf-search-left {
+        padding: 0 !important;
     }
 }

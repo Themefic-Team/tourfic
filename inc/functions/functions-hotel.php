@@ -650,10 +650,10 @@ function tf_room_availability_callback() {
 	
 	// Custom avail
 	$tf_startdate = $form_start;
-	$tf_enddate = $form_end;
+	$tf_enddate   = $form_end;
 
 	if( empty($form_end) ){
-		$form_end = date('Y/m/d', strtotime($form_start . " + 1 day"));
+		$form_end   = date('Y/m/d', strtotime($form_start . " + 1 day"));
 		$tf_enddate = date('Y/m/d', strtotime($form_start . " + 1 day"));
 	}
 	$form_check_in = $form_start;
@@ -661,9 +661,9 @@ function tf_room_availability_callback() {
 	/**
 	 * Backend data
 	 */
-	$meta                = get_post_meta( $form_post_id, 'tf_hotels_opt', true );
+	$meta  = get_post_meta( $form_post_id, 'tf_hotels_opt', true );
 	$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-    if( !empty($rooms) && gettype($rooms)=="string" ){
+    if( !empty($rooms) && gettype($rooms) == "string" ){
         $tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
             return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
           }, $rooms );
@@ -896,13 +896,13 @@ function tf_room_availability_callback() {
 					 * @since 1.6.9
 					 * @author Abu Hena
 					 */
-					$filtered_features  = ! empty( $_POST['features'] ) ?  $_POST['features']  : array();	
+					$filtered_features  = ! empty( $_POST['features'] ) ?  $_POST['features']  : array();
 					$room_features = !empty($room['features']) ? $room['features'] : '';
 					if(!empty($room_features) && is_array($room_features)){
 						$feature_result = array_intersect($filtered_features,$room_features);
 					}
 
-					if( !empty( $filtered_features ) && function_exists('is_tf_pro') && is_tf_pro() ){
+					if( !empty( $filtered_features ) && defined( 'TF_PRO' ) ){
 						if($feature_result){
 							if ( $form_total_person <= $total_person ) {
 
@@ -1385,9 +1385,6 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
                 </label>
             </div>
         </div>
-
-		<!-- Hooked in feature filter action -->
-		<?php do_action( 'tf_hotel_features_filter', 10 ) ?>
 		
         <div class="tf_form-row">
 			<?php

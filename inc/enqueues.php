@@ -421,11 +421,11 @@ if ( !function_exists('tf_enqueue_admin_scripts') ) {
                 jQuery(document).ready(function() { ";
 
             $output .= "$(document).on('tf_select2 widget-added widget-updated', function() {
-
                         jQuery('.tf-select2').each(function(){
-                            if( !$(this).hasClass('select2-hidden-accessible') ){
-                                $(this).select2({ width: '100%' });
-                            }
+                            // if( !$(this).hasClass('select2-hidden-accessible') ){
+                            //     $(this).select2({ width: '100%' });
+                            // }
+                            $(this).select2({ width: '100%' });
                         });
 
                     });";

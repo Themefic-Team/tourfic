@@ -280,6 +280,34 @@ a.slick-slide-item-link {
 }
 
 /**************** ROOMS ****************/
+.tf-room-filter .tf-room-checkbox, .tf-room-filter h3 {
+    color: #000;
+    list-style: none;
+}
+ul.tf-room-checkbox li {
+    float: left;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+}
+h3.tf-room-feature-title {
+    font-size: 22px;
+    margin-bottom: 0px;
+}
+ul.tf-room-checkbox {
+    margin-left: 0px;
+}
+ul.tf-room-checkbox label{
+    margin-left: 5px;
+}
+.tf-room-filter {
+    padding: 0px 15px;
+    padding-top: 30px;
+    overflow: hidden;
+}
+.tf-room-section {
+    margin-top: -20px;
+}
 .availability-table {
     border: none;
     margin-bottom: 0;

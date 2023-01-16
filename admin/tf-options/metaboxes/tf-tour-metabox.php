@@ -106,6 +106,14 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'label'   => __( 'Tour Hightlights Thumbnail', 'tourfic' ),
 					'library' => 'image',
 				),
+				array(
+					'id'       => 'features',
+					'type'     => 'select2',
+					'multiple'     => true,
+					'is_pro'     => true,
+					'label'    => __( 'Select features', 'tourfic' ),
+					'subtitle' => __( 'Select features that are available in this tour', 'tourfic' ),
+				),
 			),
 		),
 		// Contact Info

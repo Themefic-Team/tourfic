@@ -340,7 +340,42 @@
     padding: 10px;
     box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
 }
+/**************** Features ****************/
+.tf_features {
+    padding-top: 15px;
+}
 
+.tf_features .feature-list-title {
+    margin: 0;
+    padding-left: 8px;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    font-size: 13px;
+}
+
+.tf_features i {
+    color: #549501;
+}
+
+.tf_features .single-feature-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-right: 10px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #0000002e;
+    box-shadow: -1px 1px 6px -1px #0000002e;
+    margin-top:10px;
+}
+
+.tf_features .tf-feature-list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
 /**************** Include Exclude Block ****************/
 .tf-inc-exc-wrapper {
     background-position: center center;
@@ -501,7 +536,7 @@
     padding-top: 20px;
 }
 
-.tf-accordion-content img {
+.tf-accordion-content a {
     max-width: 350px;
     height: auto;
     object-fit: cover;

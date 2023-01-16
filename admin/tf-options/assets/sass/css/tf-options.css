@@ -31,6 +31,34 @@ Button
   pointer-events: none;
 }
 
+.tf-btn {
+  font-size: 1rem;
+  color: #fff;
+  background-color: #5d5dff;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -ms-border-radius: 5px;
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  display: inline-block;
+  padding: 5px 20px;
+  font-weight: 500;
+  text-decoration: none;
+  line-height: 2.1875rem;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+.tf-btn:hover {
+  background-color: #4646d9;
+  color: #fff;
+  border: none;
+  box-shadow: none !important;
+  outline: none;
+}
+
 /*
 Custom Modal
 */
@@ -557,6 +585,7 @@ Fontawesome
   background-color: #fff;
   padding: 15px 40px;
   margin-left: -20px;
+  margin-bottom: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1273,6 +1302,136 @@ Fontawesome
 .tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-tab-content > .tf-field.tf-field-color {
   background-color: transparent;
   padding: 0px;
+}
+
+.tf-shortcode-generator-section {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+.tf-shortcode-generator-section .tf-shortcode-generators {
+  background: #ededf8;
+  border-radius: 8px;
+  padding: 20px;
+}
+.tf-shortcode-generator-section .tf-shortcode-generator-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 30px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  background-color: #fff;
+  padding: 20px 30px;
+  align-items: center;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+.tf-shortcode-generator-section .tf-shortcode-generator-label .tf-labels label {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 600;
+  color: #0d165e;
+  display: inline-block;
+  margin-bottom: 3px;
+}
+.tf-shortcode-generator-section .tf-shortcode-generator-label .tf-labels p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 18px;
+  color: #838790;
+  font-weight: 400;
+}
+.tf-shortcode-generator-section .tf-shortcode-btn button {
+  font-size: 1rem;
+  line-height: 20px;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0 20px;
+  margin-left: 15px;
+  height: 45px;
+  background-color: #5d5dff;
+  color: #fff;
+  border: none;
+  box-shadow: none !important;
+  outline: none;
+  cursor: pointer;
+}
+.tf-shortcode-generator-section .tf-shortcode-btn button:hover {
+  background-color: #5d5dff;
+}
+.tf-shortcode-generator-section .tf-sg-form-wrapper {
+  overflow-x: auto;
+  overflow-y: scroll;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+}
+.tf-shortcode-generator-section .tf-sg-form-wrapper .tf-shortcode-generator-form {
+  transform: translateY(10%);
+  width: 600px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  border-radius: 10px;
+}
+.tf-shortcode-generator-section .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-sg-row {
+  display: flex;
+  margin-right: 15px;
+  margin-left: -15px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+.tf-shortcode-generator-section .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-col-lg-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  box-sizing: border-box;
+}
+.tf-shortcode-generator-section .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-select-field {
+  height: auto;
+}
+.tf-shortcode-generator-section .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-setting-field {
+  width: 100%;
+  box-shadow: none;
+  height: 44px;
+  padding: 10px 25px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  line-height: 16px;
+  appearance: none;
+}
+.tf-shortcode-generator-section .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-setting-field:hover {
+  color: #2271b1;
+}
+.tf-shortcode-generator-section .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-setting-field:active {
+  border-color: #8c8f94;
+  box-shadow: none;
+}
+.tf-shortcode-generator-section .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-sg-close {
+  position: absolute;
+  right: -7px;
+  top: -5px;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  background: red;
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .tf-field {
