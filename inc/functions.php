@@ -1502,14 +1502,20 @@ function tf_assign_taxonomies( $post_id, $post, $old_status ){
 /** 
  * Generate categories select dropdown
  * @author Abu Hena
- * @since 2.9.3
+ * @since 2.9.4
  */
-function tf_terms_dropdown( $term, $class, $multi = false ){
+function tf_terms_dropdown( $term, $attr = false, $class, $multiple = false ){
+	
 	$terms = get_terms( array(
-		'taxonomy' => 'tour_features',
+		'taxonomy' => $term,
 		'hide_empty' => false,
 	));
-	$select =  '<select name="" class="'.$class.'">';
+	if( $multiple == true ){
+		$multiple = 'multiple';
+	}else{
+		$multiple = "";
+	}
+	$select =  '<select data-term="'.$attr.'" name="'.$term.'" class="'.$class.'" '.$multiple.'>';
 	foreach( $terms as $term ){
 		$select .= '<option value="'.$term->term_id.'">'.$term->name.'</option>';
 	}

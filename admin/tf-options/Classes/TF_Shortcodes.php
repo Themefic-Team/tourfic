@@ -61,10 +61,16 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                         </div>
                                     </div>
                                 </div>
-                                <?php
-                                tf_terms_dropdown('tour_features','tf-setting-field');
-                                ?>
                                 <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Tour', 'tourfic' ) ?></h3>
+                                            <?php
+                                            //Dynamic Taxonomy dropdown list
+                                            tf_terms_dropdown( 'tour_destination','destinations','tf-setting-field tf-select-field',true );
+                                            ?>
+                                        </div>
+                                    </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Tour style', 'tourfic' ) ?></h3>

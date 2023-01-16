@@ -1450,7 +1450,7 @@ var frame, gframe;
         $(this).parents('.tf-shortcode-generators').find(".tf-sg-field-wrap").each(function () {
             var $this = $(this);
             var data = $this.find('.tf-setting-field').val();
-            var option_name = $this.find('.tf-setting-field').attr('data-cat');
+            var option_name = $this.find('.tf-setting-field').attr('data-term');
             var post_count = $this.find('.post-count').attr('data-count');
     
             if (option_name != undefined && option_name != '') {
@@ -1494,6 +1494,9 @@ var frame, gframe;
             fieldIdValue.select();
             document.execCommand("copy");
         }
-    })
+    });
+
+
+
 })(jQuery);
 

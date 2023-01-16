@@ -677,7 +677,9 @@
     background: #ededf8;
     border-radius: 8px;
     padding: 20px;
-  
+    .tf-shortcode-generator-single:not(:last-child){
+      margin-bottom: 20px;
+    }
   .tf-shortcode-generator-label{
     display: flex;
     align-items: center;
@@ -717,7 +719,7 @@
       padding: 0 20px;
       margin-left: 15px;
       height: 45px;
-      background-color: #5d5dff;
+      background-color: #003c79;
       color: #fff;
       border: none;
       box-shadow: none !important;
@@ -725,7 +727,7 @@
       cursor: pointer;
 
       &:hover{
-        background-color: #5d5dff;
+        background-color: #002f5e;
       }
     }
   }
@@ -766,7 +768,7 @@
         padding-left: 15px;
         box-sizing: border-box;
       }
-      .tf-select-field{
+      select.tf-select-field[multiple]{
         height: auto;
       }
       .tf-setting-field{

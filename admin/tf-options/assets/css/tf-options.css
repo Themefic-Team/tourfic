@@ -34,7 +34,7 @@ Button
 .tf-btn {
   font-size: 1rem;
   color: #fff;
-  background-color: #5d5dff;
+  background-color: #003c79;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -ms-border-radius: 5px;
@@ -52,7 +52,7 @@ Button
   outline: none;
 }
 .tf-btn:hover {
-  background-color: #4646d9;
+  background-color: #002f5e;
   color: #fff;
   border: none;
   box-shadow: none !important;
@@ -1315,6 +1315,9 @@ Fontawesome
   border-radius: 8px;
   padding: 20px;
 }
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-shortcode-generator-single:not(:last-child) {
+  margin-bottom: 20px;
+}
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-shortcode-generator-label {
   display: flex;
   align-items: center;
@@ -1351,7 +1354,7 @@ Fontawesome
   padding: 0 20px;
   margin-left: 15px;
   height: 45px;
-  background-color: #5d5dff;
+  background-color: #003c79;
   color: #fff;
   border: none;
   box-shadow: none !important;
@@ -1359,7 +1362,7 @@ Fontawesome
   cursor: pointer;
 }
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-shortcode-btn button:hover {
-  background-color: #5d5dff;
+  background-color: #002f5e;
 }
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper {
   display: none;
@@ -1399,7 +1402,7 @@ Fontawesome
   padding-left: 15px;
   box-sizing: border-box;
 }
-.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-select-field {
+.tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form select.tf-select-field[multiple] {
   height: auto;
 }
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-setting-field {
