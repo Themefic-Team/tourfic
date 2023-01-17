@@ -1,0 +1,30 @@
+{
+  "name": "tourfic",
+  "version": "2.9.3",
+  "description": "Tourfic - Travel and Hotel Booking Solution for WooCommerce",
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "scripts": {
+    "watch": "webpack --mode=development --watch --config webpack-config.js",
+    "build": "webpack --mode=production --config webpack-config.js"
+  },
+  "keywords": [
+    "wordpress",
+    "webpack",
+    "javascript"
+  ],
+  "author": "Themefic",
+  "license": "GPL-2.0+",
+  "devDependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.2",
+    "lodash": "^4.17.21",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}

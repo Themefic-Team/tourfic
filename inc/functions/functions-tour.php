@@ -1080,7 +1080,7 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
                 if (has_post_thumbnail()) {
 					the_post_thumbnail( 'full' );
 				} else {
-                    echo '<img width="100%" height="100%" src="' .TF_ASSETS_URL . "img/img-not-available.svg". '" class="attachment-full size-full wp-post-image">';
+                    echo '<img width="100%" height="100%" src="' .TF_ASSETS_APP_URL . "images/img-not-available.svg". '" class="attachment-full size-full wp-post-image">';
                 }
                 ?>
                 </a>

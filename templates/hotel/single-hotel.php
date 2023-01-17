@@ -416,7 +416,7 @@ while ( have_posts() ) : the_post();
                         <div class="tf-room-table hotel-room-wrap">
                             <div id="tour_room_details_loader">
                                 <div id="tour-room-details-loader-img">
-                                    <img src="<?php echo TF_ASSETS_URL ?>img/loader.gif" alt="">
+                                    <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
                                 </div>
                             </div>
                             <table class="availability-table">
