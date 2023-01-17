@@ -7,7 +7,7 @@ if ( file_exists( TF_ADMIN_PATH . 'tf-options/options/tf-menu-icon.php' ) ) {
 } else {
 	$menu_icon = 'dashicons-palmtree';
 }
-function tf_tours_for_select2(){
+function tf_tours_for_select2() {
 
 }
 
@@ -66,13 +66,13 @@ TF_Settings::option( 'tf_settings', array(
 					'default'   => false
 				),
 				array(
-					'id'       => 'feature-filter',
-					'type'     => 'switch',
-					'label'    => __( 'Filter By Feature', 'tourfic' ),
+					'id'        => 'feature-filter',
+					'type'      => 'switch',
+					'label'     => __( 'Filter By Feature', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'default'  => true,
-					'is_pro'   => true
+					'default'   => true,
+					'is_pro'    => true
 				),
 				array(
 					'id'     => 'h-enquiry-email',
@@ -135,22 +135,22 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 				),
 				array(
-					'id'        => 'rt-display',
-					'type'      => 'radio',
-					'is_pro'      => true,
-					'label'     => __( 'Related tour display type', 'tourfic' ),
+					'id'      => 'rt-display',
+					'type'    => 'radio',
+					'is_pro'  => true,
+					'label'   => __( 'Related tour display type', 'tourfic' ),
 					'options' => array(
-						'auto' => __( 'Auto','tourfic' ),
-						'selected' => __( 'Selected','tourfic' )
-					 ),
+						'auto'     => __( 'Auto', 'tourfic' ),
+						'selected' => __( 'Selected', 'tourfic' )
+					),
 					'default' => 'auto',
-					'inline' => true,
+					'inline'  => true,
 				),
 				array(
-					'id'        => 'tf-ralated-tours',
-					'type'      => 'select2',
+					'id'          => 'tf-ralated-tours',
+					'type'        => 'select2',
 					'is_pro'      => true,
-					'label'     => __( 'Choose realted for single page', 'tourfic' ),
+					'label'       => __( 'Choose realted for single page', 'tourfic' ),
 					'options'     => 'posts',
 					'query_args'  => array(
 						'post_type'      => 'tf_tours',
@@ -923,41 +923,9 @@ TF_Settings::option( 'tf_settings', array(
 					'content' => __( 'Affiliate Settings', 'tourfic' ),
 				),
 				array(
-					'id'     => 'tf-tab',
-					'type'   => 'tab',
-					'label'  => 'Affiliate',
-					'is_pro' => true,
-					'tabs'   => array(
-						array(
-							'id'     => 'affiliate_booking',
-							'title'  => __( 'Booking.com', 'tourfic' ),
-							'fields' => array(
-								array(
-									'id'        => 'enable-booking-dot-com',
-									'type'      => 'switch',
-									'title'     => __( 'Enable Booking.com?', 'tourfic' ),
-									'label_on'  => __( 'Yes', 'tourfic' ),
-									'label_off' => __( 'No', 'tourfic' ),
-									'default'   => true
-								),
-							),
-						),
-						array(
-							'id'     => 'travelPayouts',
-							'title'  => __( 'TravelPayouts', 'tourfic' ),
-							'icon'   => 'fa fa-gear',
-							'fields' => array(
-								array(
-									'id'        => 'enable-travel-payouts',
-									'type'      => 'switch',
-									'title'     => __( 'Enable TravelPayouts?', 'tourfic' ),
-									'label_on'  => __( 'Yes', 'tourfic' ),
-									'label_off' => __( 'No', 'tourfic' ),
-									'default'   => true
-								),
-							),
-						),
-					),
+					'id'       => 'tf-affiliate',
+					'type'     => 'callback',
+					'function' => 'tf_affiliate_callback',
 				)
 			),
 		),
