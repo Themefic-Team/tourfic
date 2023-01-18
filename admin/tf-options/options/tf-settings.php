@@ -909,10 +909,7 @@ TF_Settings::option( 'tf_settings', array(
 
 		/**
 		 * Affiliate Options
-		 *
-		 * Main menu
 		 */
-
 		'affiliate' => array(
 			'title'  => __( 'Affiliate', 'tourfic' ),
 			'icon'   => 'fa fa-handshake-o',
@@ -929,22 +926,5 @@ TF_Settings::option( 'tf_settings', array(
 				)
 			),
 		),
-
-		/**
-		 * Import/Export
-		 *
-		 * Main menu
-		 */
-		// 'import_export' => array(
-		// 	'title' => __( 'Import/Export', 'tourfic' ),
-		// 	'icon' => 'fas fa-hdd',
-		// 	'fields' => array(
-		// 		array(
-		// 			'id' => 'backup',
-		// 			'type' => 'backup',
-		// 		),  
-
-		// 	),
-		// ),
 	),
 ) );

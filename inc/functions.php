@@ -1507,25 +1507,71 @@ function tf_assign_taxonomies( $post_id, $post, $old_status ) {
  * Affiliate callback function
  */
 if ( ! function_exists( 'tf_affiliate_callback' ) ) {
-    function tf_affiliate_callback(){
-	    if ( current_user_can( 'activate_plugins' ) ) {
-		    if ( ! is_plugin_active( 'tourfic-affiliate/tourfic-affiliate.php' ) && ! file_exists( WP_PLUGIN_DIR . '/tourfic-affiliate/tourfic-affiliate.php' ) ) {
-			    $plugin = 'tourfic-affiliate/tourfic-affiliate.php';
-                $url    = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $plugin ), 'install-plugin_' . $plugin );
-                $url    = add_query_arg( array(
-                    'tourfic' => 'affiliate',
-                    'TB_iframe' => 'true',
-                    'width' => '772',
-                    'height' => '600',
-                ), $url );
-                $button = '<a href="' . $url . '" class="thickbox button button-primary" title="' . __( 'Install Tourfic Affiliate', 'tourfic' ) . '">' . __( 'Install Tourfic Affiliate', 'tourfic' ) . '</a>';
-                echo '<div class="notice notice-warning is-dismissible"><p>' . __( 'Tourfic Affiliate is not installed. Please install and activate it to use this feature.', 'tourfic' ) . '</p>' . $button . '</div>';
-		    } elseif ( ! is_plugin_active( 'tourfic-affiliate/tourfic-affiliate.php' ) && file_exists( WP_PLUGIN_DIR . '/tourfic-affiliate/tourfic-affiliate.php' ) ) {
-                $plugin = 'tourfic-affiliate/tourfic-affiliate.php';
-                $url    = wp_nonce_url( self_admin_url( 'plugins.php?action=activate&plugin=' . $plugin ), 'activate-plugin_' . $plugin );
-                $button = '<a href="' . $url . '" class="button button-primary" title="' . __( 'Activate Tourfic Affiliate', 'tourfic' ) . '">' . __( 'Activate Tourfic Affiliate', 'tourfic' ) . '</a>';
-                echo '<div class="notice notice-warning is-dismissible"><p>' . __( 'Tourfic Affiliate is not activated. Please activate it to use this feature.', 'tourfic' ) . '</p>' . $button . '</div>';
-            }
-	    }
+	function tf_affiliate_callback() {
+		if ( current_user_can( 'activate_plugins' ) ) {
+			if ( ! is_plugin_active( 'tourfic-affiliate/tourfic-affiliate.php' ) && ! file_exists( WP_PLUGIN_DIR . '/tourfic-affiliate/tourfic-affiliate.php' ) ) {
+				$button = '<a href="#" class="tf-admin-btn tf-btn-secondary tf-affiliate-install" title="' . __( 'Install Tourfic Affiliate', 'tourfic' ) . '">' . __( 'Install Tourfic Affiliate', 'tourfic' ) . '</a>';
+				echo '<div class="tf-notice"><p>' . __( 'Tourfic Affiliate is not installed. Please install and activate it to use this feature.', 'tourfic' ) . '</p>' . $button . '</div>';
+			} elseif ( ! is_plugin_active( 'tourfic-affiliate/tourfic-affiliate.php' ) && file_exists( WP_PLUGIN_DIR . '/tourfic-affiliate/tourfic-affiliate.php' ) ) {
+				$button = '<a href="#" class="tf-admin-btn tf-btn-secondary tf-affiliate-active" title="' . __( 'Activate Tourfic Affiliate', 'tourfic' ) . '">' . __( 'Activate Tourfic Affiliate', 'tourfic' ) . '</a>';
+				echo '<div class="tf-notice"><p>' . __( 'Tourfic Affiliate is not activated. Please activate it to use this feature.', 'tourfic' ) . '</p>' . $button . '</div>';
+			}
+		}
+	}
+}
+
+/*
+ * Activate Tourfic Affiliate
+ */
+add_action( 'wp_ajax_tf_affiliate_active', 'tf_affiliate_active_callback' );
+function tf_affiliate_active_callback() {
+	$response = [
+		'status'  => 'error',
+		'message' => __( 'Something went wrong. Please try again.', 'tourfic' )
+	];
+    $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
+    if ( ! wp_verify_nonce( $nonce, 'tf_affiliate_active' ) ) {
+        wp_send_json_error( $response );
     }
+	if ( current_user_can( 'activate_plugins' ) ) {
+		$plugin = 'tourfic-affiliate/tourfic-affiliate.php';
+		$result = activate_plugin( $plugin );
+		if ( is_wp_error( $result ) ) {
+			$response['message'] = $result->get_error_message();
+		} else {
+			$response['status']  = 'success';
+			$response['message'] = __( 'Tourfic Affiliate activated successfully.', 'tourfic' );
+		}
+	}
+
+    echo wp_json_encode( $response );
+	die();
+}
+
+/*
+ * Install and active Tourfic Affiliate
+ */
+add_action( 'wp_ajax_tf_affiliate_install', 'tf_affiliate_install_callback' );
+function tf_affiliate_install_callback() {
+    $response = [
+        'status'  => 'error',
+        'message' => __( 'Something went wrong. Please try again.', 'tourfic' )
+    ];
+    $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
+    if ( ! wp_verify_nonce( $nonce, 'tf_affiliate_install' ) ) {
+        wp_send_json_error( $response );
+    }
+    if ( current_user_can( 'activate_plugins' ) ) {
+        $plugin = 'tourfic-affiliate';
+        $result = install_plugin_install_status( $plugin );
+        if ( is_wp_error( $result ) ) {
+            $response['message'] = $result->get_error_message();
+        } else {
+            $response['status']  = 'success';
+            $response['message'] = __( 'Tourfic Affiliate installed successfully.', 'tourfic' );
+        }
+    }
+
+    echo wp_json_encode( $response );
+    die();
 }
