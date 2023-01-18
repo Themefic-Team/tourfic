@@ -194,3 +194,37 @@ input.select2-search__field {
 .tf-widget-field .select2-container:last-child{
     display: none;
 }
+/* Review admin notice CSS */
+.themefic_review_notice ul li {
+    display: inline-block;
+}
+
+.themefic_review_notice ul {
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.themefic_review_notice ul li a {
+    text-decoration: none;
+    padding: 7px;
+    color: #00718A;
+    font-weight: 600;
+    transition: 0.4s;
+}
+
+.themefic_review_notice ul li:nth-child(1) a {
+    padding-left: 0 !important;
+}
+
+.themefic_review_notice ul li a span {
+    padding-right: 3px;
+    display: inline-block;
+}
+
+.themefic_review_notice ul li a:hover {
+    color: #218ea6;
+}
+
+.themefic_review_notice {
+    position: relative;
+}
