@@ -548,7 +548,9 @@
 .tf-accordion-head h4:hover {
     color: #003162;
 }
-
+.trav-cont {
+    display: flex;
+}
 
 /**************** MAP Block ****************/
 
