@@ -1,9 +1,7 @@
 //global css
-@import 'global/variable';
-@import 'global/mixin';
-@import 'global/reset';
+@import '../../../common/css/variable';
+@import '../../../common/css/mixin';
 @import 'global/global';
-@import 'global/animation';
 
 //core css
 @import 'core/admin';

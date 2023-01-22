@@ -2,13 +2,13 @@ const path = require('path');
 const glob = require('glob');
 const entryPoints = {};
 
-const appJs = glob.sync('./sass/app/js/*.js');
-const adminJs = glob.sync('./sass/admin/js/*.js');
+const freeAppJs = glob.sync('./sass/app/js/free/*.js');
+const freeAdminJs = glob.sync('./sass/admin/js/free/*.js');
 
-entryPoints['app/js/tourfic-scripts'] = appJs;
-entryPoints['app/js/tourfic-scripts.min'] = appJs;
-entryPoints['admin/js/tourfic-admin-scripts'] = adminJs;
-entryPoints['admin/js/tourfic-admin-scripts.min'] = adminJs;
+entryPoints['app/js/tourfic-scripts'] = freeAppJs;
+entryPoints['app/js/tourfic-scripts.min'] = freeAppJs;
+entryPoints['admin/js/tourfic-admin-scripts'] = freeAdminJs;
+entryPoints['admin/js/tourfic-admin-scripts.min'] = freeAdminJs;
 
 //scss entry points
 // const appScss = glob.sync('./sass/app/css/tourfic.scss');
