@@ -389,7 +389,7 @@ while ( have_posts() ) : the_post();
 					<h3 class="section-heading"><?php esc_html_e( 'Popular Features', 'tourfic' ); ?></h3>
 					<div class="tf-feature-list">
 						<?php foreach ( $features as $feature ) {
-							$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
+							$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tour_features', true );
 							$f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
 							if ( $f_icon_type == 'fa' ) {
 								$feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';

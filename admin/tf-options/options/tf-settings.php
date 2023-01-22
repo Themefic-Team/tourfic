@@ -94,12 +94,48 @@ TF_Settings::option( 'tf_settings', array(
 				),
 
 				array(
-					'id'       => 'children_age_limit',
+					'id'       => '',
 					'type'     => 'switch',
 					'label'    => __( 'Children age limit', 'tourfic' ),
 					'subtitle' => __( 'keep blank if don\'t want to add', 'tourfic' ),
 					'is_pro'   => true,
 				),
+			),
+		),
+		// Partial Payment Popup
+		'payment_popup'      => array(
+			'title'  => esc_html__( 'Partial Payment Popup', 'tourfic' ),
+			'parent' => 'hotel_option',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'    => 'hotel_popup_heading',
+					'type'  => 'heading',
+					'label' => __( 'Hotel service popup texts', 'tourfic' ),
+				),
+				array(
+					'id'      => '',
+					'type'    => 'text',
+					'label'   => __( 'Popup title', 'tourfic' ),
+					'default' => __( 'Add Service to your Booking.', 'tourfic' ),
+					'is_pro'   => true,
+				),
+
+				array(
+					'id'      => '',
+					'type'    => 'textarea',
+					'label'   => __( 'Popup subtitle', 'tourfic' ),
+					'default' => __( 'Select the services you want to add to your booking.', 'tourfic' ),
+					'is_pro'   => true,
+				),
+
+				array(
+					'id'      => '',
+					'type'    => 'text',
+					'label'   => __( 'Popup action', 'tourfic' ),
+					'default' => __( 'Continue to booking', 'tourfic' ),
+					'is_pro'   => true,
+				)
 			),
 		),
 		// Tour Options
@@ -150,7 +186,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'         => 'tf-ralated-tours',
 					'type'       => 'select2',
 					'is_pro'     => true,
-					'label'      => __( 'Choose related for single page', 'tourfic' ),
+					'label'      => __( 'Choose related tours for single page', 'tourfic' ),
 					'options'    => 'posts',
 					'query_args' => array(
 						'post_type'      => 'tf_tours',

@@ -242,7 +242,7 @@
 
 .tf-single-tour-pricing .tf-price-tab li:hover {
     color: #003162;
-    background-color: $blue0;
+    background-color: #D8E6FF;
 }
 
 .tf-single-tour-pricing .tf-price-tab li:nth-child(2) {
@@ -339,6 +339,7 @@
     background: #fff;
     padding: 10px;
     box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
+    width: 100%;
 }
 /**************** Features ****************/
 .tf_features {

@@ -755,7 +755,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						),
 						array(
 							'id'    => 'desc',
-							'type'  => 'textarea',
+							'type'  => 'editor',
 							'label' => __( 'Description', 'tourfic' ),
 						),
 					),
