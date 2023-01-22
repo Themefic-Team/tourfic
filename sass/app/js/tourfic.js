@@ -1,5 +1,3 @@
-import '../css/tourfic.scss';
-
 (function ($, win) {
     $(document).ready(function () {
 

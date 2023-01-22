@@ -26,7 +26,7 @@ const config = {
         clean: false
     },
 
-    module: {
+    /*module: {
         rules: [
             {
                 test: /\.s[ac]ss$/i,
@@ -40,7 +40,7 @@ const config = {
                 ],
             },
         ],
-    }
+    }*/
 }
 
 // Export the config object.
