@@ -4,11 +4,17 @@ const entryPoints = {};
 
 const freeAppJs = glob.sync('./sass/app/js/free/*.js');
 const freeAdminJs = glob.sync('./sass/admin/js/free/*.js');
+const proAppJs = glob.sync('./sass/app/js/pro/*.js');
+const proAdminJs = glob.sync('./sass/admin/js/pro/*.js');
 
 entryPoints['app/js/tourfic-scripts'] = freeAppJs;
 entryPoints['app/js/tourfic-scripts.min'] = freeAppJs;
 entryPoints['admin/js/tourfic-admin-scripts'] = freeAdminJs;
 entryPoints['admin/js/tourfic-admin-scripts.min'] = freeAdminJs;
+entryPoints['../admin/js/tourfic-admin-scripts.min'] = freeAdminJs;
+
+
+
 
 //scss entry points
 // const appScss = glob.sync('./sass/app/css/tourfic.scss');
