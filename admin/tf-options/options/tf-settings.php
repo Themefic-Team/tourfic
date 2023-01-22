@@ -118,7 +118,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'    => 'text',
 					'label'   => __( 'Popup title', 'tourfic' ),
 					'default' => __( 'Add Service to your Booking.', 'tourfic' ),
-					'is_pro'   => true,
+					'is_pro'  => true,
 				),
 
 				array(
@@ -126,7 +126,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'    => 'textarea',
 					'label'   => __( 'Popup subtitle', 'tourfic' ),
 					'default' => __( 'Select the services you want to add to your booking.', 'tourfic' ),
-					'is_pro'   => true,
+					'is_pro'  => true,
 				),
 
 				array(
@@ -134,7 +134,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'    => 'text',
 					'label'   => __( 'Popup action', 'tourfic' ),
 					'default' => __( 'Continue to booking', 'tourfic' ),
-					'is_pro'   => true,
+					'is_pro'  => true,
 				)
 			),
 		),
@@ -1033,6 +1033,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label'   => __( 'Enable Review for', 'tourfic' ),
 					'options' => array(
 						'li' => __( 'Logged in User', 'tourfic' ),
+						''   => __( 'Log out User (Pro)', 'tourfic' ),
 					),
 					'default' => array( 'li' ),
 				),
