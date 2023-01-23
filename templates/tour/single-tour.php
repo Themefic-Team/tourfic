@@ -384,8 +384,8 @@ while ( have_posts() ) : the_post();
 
 		<?php if ( $features ) { ?>
 			<!-- Start features -->
-			<div class="tf_features sp-30">
-			<div class="tf-container">
+			<div class="tf_features sp-50">
+			    <div class="tf-container">
 					<h3 class="section-heading"><?php esc_html_e( 'Popular Features', 'tourfic' ); ?></h3>
 					<div class="tf-feature-list">
 						<?php foreach ( $features as $feature ) {
