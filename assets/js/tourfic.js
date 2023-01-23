@@ -796,9 +796,9 @@
         /* fill icon class */
         const wishIconFill = targetNode => {
             targetNode.addClass('remove-wishlist');
-            targetNode.addClass('fas');
+            targetNode.addClass('fa-heart');
             targetNode.addClass('tf-text-red');
-            targetNode.removeClass('far');
+            targetNode.removeClass('fa-heart-o');
             targetNode.removeClass('add-wishlist');
 
 
@@ -806,8 +806,8 @@
         /* blank icon */
         const wishIcon = targetNode => {
             targetNode.addClass('add-wishlist');
-            targetNode.addClass('far');
-            targetNode.removeClass('fas');
+            targetNode.addClass('fa-heart-o');
+            targetNode.removeClass('fa-heart');
             targetNode.removeClass('tf-text-red');
             targetNode.removeClass('remove-wishlist');
         }
@@ -838,7 +838,7 @@
                         if (response.success) {
                             wishIconFill(targetNode);
                             notyf.success({
-                                message: response.data + wishlistpage,
+                                message: response.data,
                                 duration: 4e3
                             });
                         }
@@ -851,7 +851,7 @@
                     notyf.success(tf_params.wishlist_add)
                     wishIconFill(targetNode);
                     notyf.success({
-                        message: tf_params.wishlist_added + wishlistpage,
+                        message: tf_params.wishlist_added,
                         duration: 4e3
                     });
                 } else notyf.error(tf_params.wishlist_add_error);
