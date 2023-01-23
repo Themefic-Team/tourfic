@@ -62,6 +62,7 @@
                         scrollTop: $("#rooms").offset().top
                     }, 500);
                     $("#rooms").html(data);
+                    $('.tf-room-filter').show();
                 },
                 error: function (data) {
                     console.log(data);

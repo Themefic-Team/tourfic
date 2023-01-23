@@ -675,8 +675,6 @@ function tf_room_availability_callback() {
 	// start table
 	ob_start();
 	?>
-
-    <h2 class="section-heading"><?php _e( 'Available Rooms', 'tourfic' ); ?></h2>
     <div class="tf-room-table hotel-room-wrap">
     <div id="tour_room_details_loader">
         <div id="tour-room-details-loader-img">
