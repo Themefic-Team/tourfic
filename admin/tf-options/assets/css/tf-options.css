@@ -1360,6 +1360,7 @@ Fontawesome
   box-shadow: none !important;
   outline: none;
   cursor: pointer;
+  border-radius: 5px;
 }
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-shortcode-btn button:hover {
   background-color: #002f5e;

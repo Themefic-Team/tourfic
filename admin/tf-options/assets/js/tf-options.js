@@ -1447,7 +1447,7 @@ var frame, gframe;
         event.preventDefault();
         var arr = [];
     
-        $(this).parents('.tf-shortcode-generators').find(".tf-sg-field-wrap").each(function () {
+        $(this).parents('.tf-shortcode-generator-single').find(".tf-sg-field-wrap").each(function () {
             var $this = $(this);
             var data = $this.find('.tf-setting-field').val();
             var option_name = $this.find('.tf-setting-field').attr('data-term');
@@ -1465,8 +1465,8 @@ var frame, gframe;
         var allData = arr.filter(Boolean);
         var shortcode = "[" + allData.join(' ') + "]";
     
-        $(this).parents('.tf-shortcode-generators').find('.tf-shortcode-value').val(shortcode);
-        $(this).parents('.tf-shortcode-generators').find('.tf-copy-item').slideDown();
+        $(this).parents('.tf-shortcode-generator-single').find('.tf-shortcode-value').val(shortcode);
+        $(this).parents('.tf-shortcode-generator-single').find('.tf-copy-item').slideDown();
     });
 
     $(document).on('click', '.tf-sg-close', function (event) {
@@ -1475,9 +1475,9 @@ var frame, gframe;
 
     $(document).on('click', '.tf-shortcode-btn', function (event) {
         var $this = $(this);
-        $($this).parents('.tf-shortcode-generators').find('.tf-sg-form-wrapper').fadeIn();
+        $this.parents('.tf-shortcode-generator-single').find('.tf-sg-form-wrapper').fadeIn();
   
-        $($this).parents('.tf-shortcode-generators').mouseup(function (e) {
+        $this.parents('.tf-shortcode-generator-single').mouseup(function (e) {
             var container = $(this).find(".tf-shortcode-generator-form");
             var container_parent = container.parent(".tf-sg-form-wrapper");
             if (!container.is(e.target) && container.has(e.target).length === 0) {
