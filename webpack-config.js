@@ -7,14 +7,13 @@ const freeAdminJs = glob.sync('./sass/admin/js/free/*.js');
 const proAppJs = glob.sync('./sass/app/js/pro/*.js');
 const proAdminJs = glob.sync('./sass/admin/js/pro/*.js');
 
-entryPoints['app/js/tourfic-scripts'] = freeAppJs;
-entryPoints['app/js/tourfic-scripts.min'] = freeAppJs;
-entryPoints['admin/js/tourfic-admin-scripts'] = freeAdminJs;
-entryPoints['admin/js/tourfic-admin-scripts.min'] = freeAdminJs;
-entryPoints['../admin/js/tourfic-admin-scripts.min'] = freeAdminJs;
-
-
-
+//tourfic free
+entryPoints['tourfic/assets/app/js/tourfic-scripts'] = freeAppJs;
+entryPoints['tourfic/assets/app/js/tourfic-scripts.min'] = freeAppJs;
+entryPoints['tourfic/assets/admin/js/tourfic-admin-scripts.min'] = freeAdminJs;
+//tourfic pro
+entryPoints['tourfic-pro/assets/app/js/tourfic-pro'] = proAppJs;
+entryPoints['tourfic-pro/assets/admin/js/tourfic-pro-admin'] = proAdminJs;
 
 //scss entry points
 // const appScss = glob.sync('./sass/app/css/tourfic.scss');
@@ -27,7 +26,7 @@ const config = {
     entry: entryPoints,
 
     output: {
-        path: path.resolve(__dirname, 'assets'),
+        path: path.resolve(__dirname, '../'),
         filename: '[name].js',
         clean: false
     },
