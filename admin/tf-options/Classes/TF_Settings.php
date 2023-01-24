@@ -716,7 +716,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 							if ( ! empty( $field['id'] ) ) {
 								$data = isset( $option_request[ $field['id'] ] ) ? $option_request[ $field['id'] ] : '';
-								tf_var_dump($field);
 								$fieldClass = 'TF_' . $field['type'];
 								if($fieldClass != 'TF_file'){
 									$data       = $fieldClass == 'TF_repeater' || $fieldClass == 'TF_map' || $fieldClass == 'TF_tab' || $fieldClass == 'TF_color' ? serialize( $data ) : $data;
