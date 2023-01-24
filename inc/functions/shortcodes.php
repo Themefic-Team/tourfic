@@ -147,6 +147,8 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 			array(
 				'title'        => '',  //title populer section
 				'subtitle'     => '',   // Sub title populer section
+				'orderby'        => 'date',
+				'order'        => 'DESC',
 				'count'        => 10,
 				'slidestoshow' => 5,
 			),
@@ -157,8 +159,8 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 	$args = array(
 		'post_type'      => 'tf_hotel',
 		'post_status'    => 'publish',
-		'orderby'        => 'date',
-		'order'          => 'DESC',
+		'orderby'        => $orderby,
+		'order'          => $order,
 		'posts_per_page' => $count,
 	);
 
@@ -252,6 +254,8 @@ function tf_recent_tour_shortcode( $atts, $content = null ) {
 			array(
 				'title'        => '',  //title populer section
 				'subtitle'     => '',   // Sub title populer section
+				'orderby'        => 'date',
+				'order'        => 'DESC',
 				'count'        => 10,
 				'slidestoshow' => 5,
 			),
