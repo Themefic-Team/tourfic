@@ -5,7 +5,7 @@ const entryPoints = {};
 const freeAppJs = glob.sync('./sass/app/js/free/*.js');
 const freeAdminJs = glob.sync('./sass/admin/js/free/*.js');
 const proAppJs = glob.sync('./sass/app/js/pro/*.js');
-const proAdminJs = glob.sync('./sass/admin/js/pro/*.js');
+const proAdminJs = ['./sass/admin/js/pro/locationpicker.jquery.js','./sass/admin/js/pro/locationpicker-custom.js','./sass/admin/js/pro/admin.js'];
 
 //tourfic free
 entryPoints['tourfic/assets/app/js/tourfic-scripts'] = freeAppJs;

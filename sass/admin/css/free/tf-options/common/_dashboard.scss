@@ -284,12 +284,13 @@
     }
     .tf-help-center-image{
       width: 35%;
+      @include flexbox();
+
       @media #{$max575}{
         width: 100%;
       }
       img{
         max-width: 100%;
-        bottom: -3px;
         position: relative;
       }
     }

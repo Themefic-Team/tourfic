@@ -386,13 +386,24 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			<div class="tf-settings-help-center">
 				<div class="tf-help-center-banner">
 					<div class="tf-help-center-content">
-						<h2><?php _e("Help Center","tourfic"); ?></h2>
-						<p><?php _e("To help you to get started, we put together the documentation, support link, videos and FAQs here.","tourfic"); ?></p>
+						<h2><?php _e("Setup Wizard","tourfic"); ?></h2>
+						<p><?php _e("To know the eventin starting guide, run the setup wizard. Your existing settings will not change.","tourfic"); ?></p>
+                        <a href="<?php echo esc_url(admin_url( 'admin.php?page=tf-setup-wizard' )) ?>" class="tf-admin-btn tf-btn-secondary"><?php _e("Setup Wizard","tourfic"); ?></a>
 					</div>
 					<div class="tf-help-center-image">
-						<img src="<?php echo TF_ASSETS_APP_URL; ?>images/help-center.jpg" alt="HELP Center Image">
+						<img src="<?php echo TF_ASSETS_APP_URL; ?>images/setup_wizard.png" alt="setup wizard">
 					</div>
 				</div>
+
+                <div class="tf-help-center-banner">
+                    <div class="tf-help-center-content">
+                        <h2><?php _e("Help Center","tourfic"); ?></h2>
+                        <p><?php _e("To help you to get started, we put together the documentation, support link, videos and FAQs here.","tourfic"); ?></p>
+                    </div>
+                    <div class="tf-help-center-image">
+                        <img src="<?php echo TF_ASSETS_APP_URL; ?>images/help-center.jpg" alt="HELP Center Image">
+                    </div>
+                </div>
 
 				<div class="tf-support-document">
 					<div class="tf-single-support">
