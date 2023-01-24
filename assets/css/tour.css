@@ -541,6 +541,9 @@
     margin-right: 20px;
     margin-bottom: 20px;
 }
+.tf-accordion-content a:focus{
+    outline: none;
+}
 
 .tf-accordion-head h4:hover {
     color: #003162;
@@ -548,7 +551,15 @@
 .trav-cont {
     display: flex;
 }
-
+.tf-travel-description{
+    display: flow-root;
+}
+.ininerary-gallery-single.slick-slide.slick-active{
+    height: 130px !important;
+}
+.ininerary-gallery-single > a img{
+    height: 130px !important;
+}
 /**************** MAP Block ****************/
 
 .tf-map-wrapper .tf-container {

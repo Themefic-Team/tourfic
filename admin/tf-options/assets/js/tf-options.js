@@ -645,8 +645,10 @@
             if (parent_field == '') {
                 // Replace input id and name
                 clone_value.find(':input').each(function () {
+                    if($(this).closest('.tf-single-repeater-clone').length == 0){
                     this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
                     this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                    }
                 });
                 var update_paren = clone_value.find('.tf-repeater input[name="tf_parent_field"]').val();
                 if (typeof update_paren !== "undefined") {
@@ -655,11 +657,13 @@
                 clone_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
 
             } else {
-                // Replace input id and name
-                clone_value.find(':input').each(function () {
-                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
-                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
-                });
+                    // Replace input id and name
+                    clone_value.find(':input').each(function () {
+                        if($(this).closest('.tf-single-repeater-clone').length == 0){
+                        this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                        this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                        }
+                    });
             }
             clone_value.find('label').each(function () {
                 var for_value = $(this).attr("for");

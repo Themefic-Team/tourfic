@@ -472,7 +472,7 @@ while ( have_posts() ) : the_post();
 												<?php if ( $itinerary['image'] ) {
 													echo '<a class="tf-itinerary-gallery" href="' . esc_url( $itinerary['image'] ) . '"><img src="' . esc_url( $itinerary['image'] ) . '"></a>';
 												} ?>
-                                                <div class="trav-cont">
+                                                <div class="trav-cont tf-travel-description">
                                                     <p><?php _e( $itinerary['desc'] ); ?></p>
                                                 </div>
                                             </div>
