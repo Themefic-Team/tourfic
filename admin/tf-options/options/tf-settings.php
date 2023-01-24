@@ -474,22 +474,23 @@ TF_Settings::option( 'tf_settings', array(
 										array( 'itinerary-expert', '==', 'true' ),
 									),
 								),
+								array(
+									'id'    => 'signle_tour_fonts',
+									'type'  => 'heading',
+									'label' => __( 'PDF Downloader Multilanguage Support', 'tourfic' ),
+								),
+								array(
+									'id'       => '',
+									'type'     => 'file',
+									'label'    => __( 'Upload Fonts', 'tourfic' ),
+									'subtitle' => __( 'Upload Fonts for Multilanguage support', 'tourfic' ),
+									'is_pro'   => true,
+								),
 							),
 						),
 					),
 				),
-				array(
-					'id'    => 'signle_tour_fonts',
-					'type'  => 'heading',
-					'label' => __( 'PDF Downloader Multilanguage Support', 'tourfic' ),
-				),
-				array(
-					'id'       => '',
-					'type'     => 'file',
-					'label'    => __( 'Upload Fonts', 'tourfic' ),
-					'subtitle' => __( 'Upload Fonts for Multilanguage support', 'tourfic' ),
-					'is_pro'   => true,
-				),
+				
 			),
 		),
 
