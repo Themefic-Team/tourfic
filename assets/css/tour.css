@@ -539,7 +539,7 @@
     object-fit: cover;
     border-radius: 4px;
     margin-right: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 .tf-accordion-content a:focus{
     outline: none;
