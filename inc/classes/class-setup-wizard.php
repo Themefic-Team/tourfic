@@ -69,6 +69,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 						$this->tf_setup_welcome_step();
 						$this->tf_setup_step_one();
 						$this->setup_step_two();
+						$this->tf_setup_step_three();
 						$this->tf_setup_finish_step();
 						?>
 						<?php wp_nonce_field( 'tf_setup_wizard_action', 'tf_setup_wizard_nonce' ); ?>
@@ -207,9 +208,9 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		}
 
 		/**
-		 * Finish step
+		 * Setup step three
 		 */
-		private function tf_setup_finish_step() {
+		private function tf_setup_step_three() {
 			?>
             <div class="tf-setup-step-container tf-setup-step-3 <?php echo self::$current_step == 'step_3' ? 'active' : ''; ?>" data-step="3">
                 <section class="tf-setup-step-layout">
@@ -293,6 +294,24 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
             </div>
 			<?php
 		}
+
+        /*
+         * Finish setup wizard
+         */
+        private function tf_setup_finish_step() {
+            ?>
+            <div class="tf-setup-content-layout tf-finish-step <?php echo self::$current_step == 'finish' ? 'active' : ''; ?>">
+                <div class="welcome-img"><img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/welcome.png' ?>" alt="<?php esc_attr_e( 'Thank you', 'tourfic' ) ?>"></div>
+                <h1 class="tf-setup-welcome-title"><?php _e( 'Thank you for choosing Tourfic', 'tourfic' ) ?></h1>
+                <div class="tf-setup-welcome-description"><?php _e( 'Thanks for choosing Tourfic for your travel business. We are excited to have you on board. This quick setup wizard will help you configure the basic settings. It’s completely optional and shouldn’t take longer than five minutes.', 'tourfic' ) ?></div>
+                <div class="tf-setup-welcome-footer tf-setup-finish-footer">
+                    <a href="<?php echo admin_url( 'post-new.php?post_type=tf_hotel' ) ?>" class="tf-admin-btn tf-btn-secondary"><?php _e( 'Create new Hotel', 'tourfic' ) ?></a>
+                    <a href="<?php echo admin_url( 'post-new.php?post_type=tf_tours' ) ?>" class="tf-admin-btn"><?php _e( 'Create new Tour', 'tourfic' ) ?></a>
+                    <a href="<?php echo admin_url( 'admin.php?page=tf_settings' ) ?>" class="tf-admin-btn tf-btn-secondary"><?php _e( 'Tourfic Setting', 'tourfic' ) ?></a>
+                </div>
+            </div>
+        <?php
+        }
 
 		/**
 		 * redirect to set up wizard when active plugin

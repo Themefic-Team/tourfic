@@ -87,6 +87,15 @@ Welcome Step
       font-weight: 500;
       text-decoration: underline;
     }
+
+    &.tf-setup-finish-footer {
+      @include flex-direction(row);
+
+      .tf-admin-btn {
+        margin-bottom: 0;
+        margin-right: 10px;
+      }
+    }
   }
 }
 
@@ -374,7 +383,7 @@ Steps
           position: absolute;
           content: "";
           height: 18px;
-          width:18px;
+          width: 18px;
           border-radius: 12px;
           top: 4px;
           left: 4px;

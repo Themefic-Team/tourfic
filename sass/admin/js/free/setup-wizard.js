@@ -105,7 +105,8 @@
                     let data = JSON.parse(response);
                     submitBtn.removeClass('tf-btn-loading');
                     if (data.success) {
-                        window.location.href = data.redirect_url;
+                        $('.tf-finish-step').show();
+                        $('.tf-setup-step-' + step).hide();
                     }
                 },
                 error: function (error) {
