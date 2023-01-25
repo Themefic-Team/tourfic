@@ -177,8 +177,8 @@ if(!function_exists('tf_black_friday_20222_hotel_tour_docs')){
  */
 
 function tf_hotel_tour_docs() { 
-    add_meta_box( 'tfhotel_docs', __( 'Tourfic Documantation', 'tourfic' ), 'tf_hotel_docs_callback','tf_hotel','side' ,'high');  
-    add_meta_box( 'tftour_docs', __( 'Tourfic Documantation', 'tourfic' ), 'tf_tour_docs_callback','tf_tours','side' ,'high');
+    add_meta_box( 'tfhotel_docs', __( 'Tourfic Documentation', 'tourfic' ), 'tf_hotel_docs_callback','tf_hotel','side' ,'high');
+    add_meta_box( 'tftour_docs', __( 'Tourfic Documentation', 'tourfic' ), 'tf_tour_docs_callback','tf_tours','side' ,'high');
 }
 add_action( 'add_meta_boxes', 'tf_hotel_tour_docs' );
 

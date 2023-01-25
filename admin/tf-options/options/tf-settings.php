@@ -7,7 +7,7 @@ if ( file_exists( TF_ADMIN_PATH . 'tf-options/options/tf-menu-icon.php' ) ) {
 } else {
 	$menu_icon = 'dashicons-palmtree';
 }
-function tf_tours_for_select2(){
+function tf_tours_for_select2() {
 
 }
 
@@ -16,7 +16,7 @@ TF_Settings::option( 'tf_settings', array(
 	'icon'     => $menu_icon,
 	'position' => 25,
 	'sections' => array(
-		'general'       => array(
+		'general'            => array(
 			'title'  => esc_html__( 'General', 'tourfic' ),
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
@@ -32,12 +32,12 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		'hotel_option'  => array(
+		'hotel_option'       => array(
 			'title'  => esc_html__( 'Hotel Options', 'tourfic' ),
 			'icon'   => 'fas fa-hotel',
 			'fields' => array(),
 		),
-		'single_page'   => array(
+		'single_page'        => array(
 			'title'  => esc_html__( 'Single Page', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
@@ -66,13 +66,13 @@ TF_Settings::option( 'tf_settings', array(
 					'default'   => false
 				),
 				array(
-					'id'       => 'feature-filter',
-					'type'     => 'switch',
-					'label'    => __( 'Filter By Feature', 'tourfic' ),
+					'id'        => 'feature-filter',
+					'type'      => 'switch',
+					'label'     => __( 'Filter By Feature', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'default'  => true,
-					'is_pro'   => true
+					'default'   => true,
+					'is_pro'    => true
 				),
 				array(
 					'id'     => 'h-enquiry-email',
@@ -82,7 +82,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		'room_config'   => array(
+		'room_config'        => array(
 			'title'  => esc_html__( 'Room Config', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
@@ -94,7 +94,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 
 				array(
-					'id'       => 'children_age_limit',
+					'id'       => '',
 					'type'     => 'switch',
 					'label'    => __( 'Children age limit', 'tourfic' ),
 					'subtitle' => __( 'keep blank if don\'t want to add', 'tourfic' ),
@@ -102,13 +102,49 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
+		// Partial Payment Popup
+		'payment_popup'      => array(
+			'title'  => esc_html__( 'Partial Payment Popup', 'tourfic' ),
+			'parent' => 'hotel_option',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'    => 'hotel_popup_heading',
+					'type'  => 'heading',
+					'label' => __( 'Hotel service popup texts', 'tourfic' ),
+				),
+				array(
+					'id'      => '',
+					'type'    => 'text',
+					'label'   => __( 'Popup title', 'tourfic' ),
+					'default' => __( 'Add Service to your Booking.', 'tourfic' ),
+					'is_pro'  => true,
+				),
+
+				array(
+					'id'      => '',
+					'type'    => 'textarea',
+					'label'   => __( 'Popup subtitle', 'tourfic' ),
+					'default' => __( 'Select the services you want to add to your booking.', 'tourfic' ),
+					'is_pro'  => true,
+				),
+
+				array(
+					'id'      => '',
+					'type'    => 'text',
+					'label'   => __( 'Popup action', 'tourfic' ),
+					'default' => __( 'Continue to booking', 'tourfic' ),
+					'is_pro'  => true,
+				)
+			),
+		),
 		// Tour Options
-		'tour'          => array(
+		'tour'               => array(
 			'title'  => __( 'Tour Options', 'tourfic' ),
 			'icon'   => 'fas fa-umbrella-beach',
 			'fields' => array(),
 		),
-		'single_tour'   => array(
+		'single_tour'        => array(
 			'title'  => esc_html__( 'Single Page', 'tourfic' ),
 			'parent' => 'tour',
 			'icon'   => 'fa fa-cog',
@@ -135,28 +171,27 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 				),
 				array(
-					'id'        => 'rt-display',
-					'type'      => 'radio',
-					'is_pro'      => true,
-					'label'     => __( 'Related tour display type', 'tourfic' ),
+					'id'      => 'rt-display',
+					'type'    => 'radio',
+					'is_pro'  => true,
+					'label'   => __( 'Related tour display type', 'tourfic' ),
 					'options' => array(
-						'auto' => __( 'Auto','tourfic' ),
-						'selected' => __( 'Selected','tourfic' )
-					 ),
+						'auto'     => __( 'Auto', 'tourfic' ),
+						'selected' => __( 'Selected', 'tourfic' )
+					),
 					'default' => 'auto',
-					'inline' => true,
+					'inline'  => true,
 				),
 				array(
-					'id'        => 'tf-ralated-tours',
-					'type'      => 'select2',
-					'is_pro'      => true,
-					'label'     => __( 'Choose realted for single page', 'tourfic' ),
-					'options'     => 'posts',
-					'query_args'  => array(
+					'id'         => 'tf-ralated-tours',
+					'type'       => 'select2',
+					'is_pro'     => true,
+					'label'      => __( 'Choose related tours for single page', 'tourfic' ),
+					'options'    => 'posts',
+					'query_args' => array(
 						'post_type'      => 'tf_tours',
 						'posts_per_page' => - 1,
 					),
-					'field_width' => 50
 				),
 				array(
 					'id'     => 't-enquiry-email',
@@ -166,8 +201,301 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
+		// Partial Payment Popup
+		'tour_payment_popup' => array(
+			'title'  => esc_html__( 'Partial Payment Popup', 'tourfic' ),
+			'parent' => 'tour',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'    => 'signle_tour_heading',
+					'type'  => 'heading',
+					'label' => __( 'Text settings for the Partial Payment modal', 'tourfic' ),
+				),
+				array(
+					'id'      => '',
+					'type'    => 'text',
+					'label'   => __( 'Title', 'tourfic' ),
+					'is_pro'  => true,
+					'default' => __( 'Do you want to Partial Payment amount for booking the tour?', 'tourfic' ),
+				),
+				array(
+					'id'      => '',
+					'type'    => 'textarea',
+					'label'   => __( 'Subtitle', 'tourfic' ),
+					'is_pro'  => true,
+					'default' => __( 'You can Partial Payment amount for booking the tour. After booking the tour, you can pay the rest amount after the tour is completed.', 'tourfic' ),
+				),
+				array(
+					'id'      => '',
+					'type'    => 'text',
+					'label'   => __( 'Amount text', 'tourfic' ),
+					'is_pro'  => true,
+					'default' => __( 'Amount of Partial Payment on total price', 'tourfic' ),
+				),
+				array(
+					'id'      => '',
+					'type'    => 'text',
+					'label'   => __( 'Button text for full payment', 'tourfic' ),
+					'is_pro'  => true,
+					'default' => __( 'Pay full amount', 'tourfic' ),
+				),
+				array(
+					'id'      => '',
+					'type'    => 'text',
+					'label'   => __( 'Button text for deposit', 'tourfic' ),
+					'is_pro'  => true,
+					'default' => __( 'Make a Partial Payment', 'tourfic' ),
+				),
+			),
+		),
+		// Itinerary Settings
+		'tour_itinerary'     => array(
+			'title'  => esc_html__( 'Itinerary Settings', 'tourfic' ),
+			'parent' => 'tour',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'   => 'itinerary-builder-setings',
+					'type' => 'tab',
+					'tabs' => array(
+						array(
+							'id'     => 'itinerary-builder-setting',
+							'title'  => 'Itinerary Builder Setting',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'           => '',
+									'type'         => 'repeater',
+									'label'        => __( 'Itinerary options', 'tourfic' ),
+									'button_title' => __( 'Add New Options', 'tourfic' ),
+									'is_pro'       => true,
+									'fields'       => array(
+										array(
+											'id'    => 'sleep-mode-title',
+											'type'  => 'text',
+											'label' => __( 'Field Title', 'tourfic' ),
+										),
+										array(
+											'id'    => 'sleep-mode-icon',
+											'type'  => 'icon',
+											'label' => __( 'Field Icon', 'tourfic' ),
+										),
+									),
+								),
+								array(
+									'id'           => '',
+									'type'         => 'repeater',
+									'button_title' => __( 'Add New Meal', 'tourfic' ),
+									'label'        => __( 'Include Meal', 'tourfic' ),
+									'is_pro'       => true,
+									'fields'       => array(
+										array(
+											'id'    => 'meal',
+											'type'  => 'text',
+											'label' => __( 'Meal name', 'tourfic' ),
+										),
+									),
+								),
+								array(
+									'id'      => '',
+									'label'   => __( 'Elevation Input', 'tourfic' ),
+									'type'    => 'select',
+									'options' => [
+										'Meter' => __( 'Meter', 'tourfic' ),
+										'Feet'  => __( 'Feet', 'tourfic' ),
+									],
+									'is_pro'  => true,
+									'default' => 'Meter',
+								),
+								array(
+									'id'          => '',
+									'type'        => 'switch',
+									'is_pro'      => true,
+									'label'       => __( 'Show Chart on Trip Page', 'tourfic' ),
+									'field_width' => 50,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'switch',
+									'is_pro'      => true,
+									'label'       => __( 'Always Show All Itinerary', 'tourfic' ),
+									'field_width' => 50,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'switch',
+									'is_pro'      => true,
+									'label'       => __( 'Show X-Axis', 'tourfic' ),
+									'field_width' => 50,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'switch',
+									'is_pro'      => true,
+									'label'       => __( 'Show Y-Axis', 'tourfic' ),
+									'field_width' => 50,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'switch',
+									'is_pro'      => true,
+									'label'       => __( 'Show line Graph', 'tourfic' ),
+									'field_width' => 50,
+								),
+							),
+						),
+						array(
+							'id'     => 'itinerary-downloader-setting',
+							'title'  => 'Itinerary Downloader Setting',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'     => '',
+									'type'   => 'switch',
+									'is_pro' => true,
+									'label'  => __( 'Enable Itinerary Downloader', 'tourfic' ),
+								),
+								array(
+									'id'      => 'companey_info_heading',
+									'type'    => 'heading',
+									'content' => __( 'Company Info', 'tourfic' ),
+								),
+
+								array(
+									'id'     => '',
+									'type'   => 'image',
+									'is_pro' => true,
+									'label'  => __( 'Company Logo', 'tourfic' ),
+								),
+								array(
+									'id'     => '',
+									'type'   => 'textarea',
+									'is_pro' => true,
+									'label'  => __( 'Short Company Description', 'tourfic' ),
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'is_pro'      => true,
+									'label'       => __( 'Company Email Address', 'tourfic' ),
+									'field_width' => 33.33,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'is_pro'      => true,
+									'label'       => __( 'Company Address', 'tourfic' ),
+									'field_width' => 33.33,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'is_pro'      => true,
+									'label'       => __( 'Company Phone', 'tourfic' ),
+									'field_width' => 33.33,
+								),
+								array(
+									'id'    => 'export_heading',
+									'type'  => 'heading',
+									'label' => __( 'Talk to Expert', 'tourfic' ),
+								),
+								array(
+									'id'      => '',
+									'type'    => 'switch',
+									'is_pro'  => true,
+									'label'   => __( 'Enable Talk To Expert - Section in PDF', 'tourfic' ),
+									'default' => false,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'is_pro'      => true,
+									'label'       => __( 'Talk to Expert - Label', 'tourfic' ),
+									'field_width' => 25,
+									'dependency'  => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'label'       => __( 'Expert Name', 'tourfic' ),
+									'field_width' => 25,
+									'is_pro'      => true,
+									'dependency'  => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'label'       => __( 'Expert Email Address', 'tourfic' ),
+									'field_width' => 25,
+									'is_pro'      => true,
+									'dependency'  => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'label'       => __( 'Expert Phone Address', 'tourfic' ),
+									'field_width' => 25,
+									'is_pro'      => true,
+									'dependency'  => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'         => '',
+									'type'       => 'image',
+									'is_pro'     => true,
+									'label'      => __( 'Expert Avatar Image', 'tourfic' ),
+									'dependency' => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'         => '',
+									'type'       => 'switch',
+									'label'      => __( 'Viber Contact Available', 'tourfic' ),
+									'is_pro'     => true,
+									'dependency' => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'         => '',
+									'type'       => 'switch',
+									'is_pro'     => true,
+									'label'      => __( 'WhatsApp Contact Available', 'tourfic' ),
+									'dependency' => array(
+										array( 'itinerary-expert', '==', 'true' ),
+									),
+								),
+								array(
+									'id'    => 'signle_tour_fonts',
+									'type'  => 'heading',
+									'label' => __( 'PDF Downloader Multilanguage Support', 'tourfic' ),
+								),
+								array(
+									'id'       => '',
+									'type'     => 'file',
+									'label'    => __( 'Upload Fonts', 'tourfic' ),
+									'subtitle' => __( 'Upload Fonts for Multilanguage support', 'tourfic' ),
+									'is_pro'   => true,
+								),
+							),
+						),
+					),
+				),
+				
+			),
+		),
+
 		// Multi Vendor
-		'vendor'        => array(
+		'vendor'             => array(
 			'title'  => __( 'Multi Vendor', 'tourfic' ),
 			'icon'   => 'fas fa-handshake',
 			'fields' => array(
@@ -250,7 +578,7 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		// Search Options
-		'search'        => array(
+		'search'             => array(
 			'title'  => __( 'Search', 'tourfic' ),
 			'icon'   => 'fas fa-search',
 			'fields' => array(
@@ -295,12 +623,12 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		// Design Options
-		'design-panel'  => array(
+		'design-panel'       => array(
 			'title'  => __( 'Design Panel', 'tourfic' ),
 			'icon'   => 'fas fa-palette',
 			'fields' => array(),
 		),
-		'global_design' => array(
+		'global_design'      => array(
 			'title'  => __( 'Global', 'tourfic' ),
 			'parent' => 'design-panel',
 			'icon'   => 'fas fa-cogs',
@@ -384,7 +712,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		'hotel_design'  => array(
+		'hotel_design'       => array(
 			'title'  => __( 'Hotel', 'tourfic' ),
 			'parent' => 'design-panel',
 			'icon'   => 'fas fa-hotel',
@@ -469,7 +797,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		'tour_design'   => array(
+		'tour_design'        => array(
 			'title'  => __( 'Tour', 'tourfic' ),
 			'parent' => 'design-panel',
 			'icon'   => 'fas fa-umbrella-beach',
@@ -563,7 +891,7 @@ TF_Settings::option( 'tf_settings', array(
 		),
 
 		// Miscellaneous Options
-		'miscellaneous' => array(
+		'miscellaneous'      => array(
 			'title'  => __( 'Miscellaneous', 'tourfic' ),
 			'icon'   => 'fas fa-globe',
 			'fields' => array(),
@@ -573,7 +901,7 @@ TF_Settings::option( 'tf_settings', array(
 		 *
 		 * Sub Menu
 		 */
-		'map_settings'  => array(
+		'map_settings'       => array(
 			'title'  => __( 'Map Settings', 'tourfic' ),
 			'parent' => 'miscellaneous',
 			'icon'   => 'fas fa-umbrella-beach',
@@ -610,7 +938,7 @@ TF_Settings::option( 'tf_settings', array(
 		 *
 		 * Sub Menu
 		 */
-		'wishlist'      => array(
+		'wishlist'           => array(
 			'title'  => __( 'Wishlist', 'tourfic' ),
 			'parent' => 'miscellaneous',
 			'icon'   => 'fas fa-heart',
@@ -706,6 +1034,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label'   => __( 'Enable Review for', 'tourfic' ),
 					'options' => array(
 						'li' => __( 'Logged in User', 'tourfic' ),
+						''   => __( 'Log out User (Pro)', 'tourfic' ),
 					),
 					'default' => array( 'li' ),
 				),

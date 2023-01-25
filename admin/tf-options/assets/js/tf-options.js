@@ -566,8 +566,10 @@
 
             // replace new editor
             add_value.find('textarea.parent_wp_editor').each(function () {
-                var count =  Math.random().toString(36).substring(3,9) + 1 ; 
-                this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + count + '');
+                var count =  Math.random().toString(36).substring(3,9) + 1 ;
+                // this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + count + '');
+                $(this).attr('id', current_field+count);
+                $(this).attr('data-count-id', count);
                 var parent_repeater_id = $(this).attr('id');
                 TF_wp_editor(parent_repeater_id);
             });
@@ -643,8 +645,10 @@
             if (parent_field == '') {
                 // Replace input id and name
                 clone_value.find(':input').each(function () {
+                    if($(this).closest('.tf-single-repeater-clone').length == 0){
                     this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
                     this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                    }
                 });
                 var update_paren = clone_value.find('.tf-repeater input[name="tf_parent_field"]').val();
                 if (typeof update_paren !== "undefined") {
@@ -653,11 +657,13 @@
                 clone_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
 
             } else {
-                // Replace input id and name
-                clone_value.find(':input').each(function () {
-                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
-                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
-                });
+                    // Replace input id and name
+                    clone_value.find(':input').each(function () {
+                        if($(this).closest('.tf-single-repeater-clone').length == 0){
+                        this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                        this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + count + ']');
+                        }
+                    });
             }
             clone_value.find('label').each(function () {
                 var for_value = $(this).attr("for");
@@ -699,8 +705,10 @@
                 var textarea = $(this).find('.tf_wp_editor').show();
                 // Get content of a specific editor:
                 var tf_editor_ex_data = $('#'+textarea.attr('id')+'').val();
-                if(tf_editor_ex_data && typeof tf_editor_ex_data !== "undefined"){
-                    var textarea_content = tinymce.get(textarea.attr('id')).getContent();
+                var textarea_id = textarea.attr('id');
+                if(textarea_id != '' && typeof textarea_id !== "undefined"){
+                    // var textarea_content = tinymce.get(textarea.attr('id')).getContent();
+                    var textarea_content = tinymce.editors[textarea_id].getContent();
                 }else{
                     var textarea_content = '';
                 }
@@ -727,9 +735,10 @@
             $(this).closest('.tf-repeater-wrap').append(clone_value).show();
 
             // Clone Wp Editor
-            clone_value.find('textarea.parent_wp_editor, textarea.wp_editor').each(function () { 
-                var count =  Math.random().toString(36).substring(3,9) + 1 ; 
-                this.id = this.id.replace('' + current_field + '__' + repeater_count, '' + current_field + '__' + count + '');
+            clone_value.find('textarea.parent_wp_editor, textarea.wp_editor').each(function () {
+                var count =  Math.random().toString(36).substring(3,9) + 1 ;
+                $(this).attr('id', current_field+count);
+                $(this).attr('data-count-id', count);
                 var parent_repeater_id = $(this).attr('id');
                 TF_wp_editor(parent_repeater_id);
             });

@@ -242,7 +242,7 @@
 
 .tf-single-tour-pricing .tf-price-tab li:hover {
     color: #003162;
-    background-color: $blue0;
+    background-color: #D8E6FF;
 }
 
 .tf-single-tour-pricing .tf-price-tab li:nth-child(2) {
@@ -339,12 +339,9 @@
     background: #fff;
     padding: 10px;
     box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
+    width: 100%;
 }
 /**************** Features ****************/
-.tf_features {
-    padding-top: 15px;
-}
-
 .tf_features .feature-list-title {
     margin: 0;
     padding-left: 8px;
@@ -534,22 +531,33 @@
 .tf-travel-desc {
     display: flex;
     padding-top: 20px;
+    gap: 20px;
+    flex-direction: row;
+}
+.tf-ititnerary-img {
+    flex-basis: 30%;
 }
 
-.tf-accordion-content a {
-    max-width: 350px;
-    height: auto;
-    object-fit: cover;
-    border-radius: 4px;
-    margin-right: 20px;
-    margin-bottom: 20px;
+.tf-accordion-content a:focus{
+    outline: none;
 }
 
 .tf-accordion-head h4:hover {
     color: #003162;
 }
-
-
+.trav-cont {
+    display: flex;
+}
+.tf-travel-description{
+    display: flow-root;
+    flex-basis: 70%;
+}
+.ininerary-gallery-single.slick-slide.slick-active{
+    height: 130px !important;
+}
+.ininerary-gallery-single > a img{
+    height: 130px !important;
+}
 /**************** MAP Block ****************/
 
 .tf-map-wrapper .tf-container {

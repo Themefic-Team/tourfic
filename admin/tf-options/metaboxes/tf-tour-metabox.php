@@ -2,6 +2,23 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Get all the meals from glabal settings
+ * @author AbuHena
+ * @since 1.7.0
+ */
+function tf_tour_meals(){
+	$itinerary_options = ! empty( tf_data_types ( tfopt( 'itinerary-builder-setings' ) ) ) ? tf_data_types( tfopt( 'itinerary-builder-setings' ) ) : '';
+	$all_meals = [];
+	if( !empty( $itinerary_options['meals'] ) && is_array( $itinerary_options['meals'] ) ){
+		$meals = $itinerary_options['meals'];	
+		foreach ( $meals as $key => $meal ){
+			$all_meals[ $meal['meal'].$key ] = $meal['meal'];
+		}
+	}
+	return $all_meals;
+}
+
 TF_Metabox::metabox( 'tf_tours_opt', array(
 	'title'     => __( 'Tour Setting', 'tourfic' ),
 	'post_type' => 'tf_tours',
@@ -745,6 +762,26 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							'field_width' => '50',
 						),
 						array(
+							'id'          => 'duration',
+							'label'     => __( 'Duration', 'tourfic' ),
+							'type'        => 'text',
+							'placeholder' => 'Duration',
+							'field_width' => 50,
+							'is_pro' => true,
+						),
+						array(
+							'id'          => 'timetype',
+							'label'     => __( 'Duration Type', 'tourfic' ),
+							'type'        => 'select',
+							'options'     => [
+								'Hour'   => __( 'Hour', 'tourfic' ),
+								'Minute' => __( 'Minute', 'tourfic' ),
+							],
+							'default'     => 'Hour',
+							'field_width' => 50,
+							'is_pro' => true,
+						),
+						array(
 							'id'           => 'image',
 							'type'         => 'image',
 							'label'        => __( 'Upload Image', 'tourfic' ),
@@ -755,8 +792,69 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						),
 						array(
 							'id'    => 'desc',
-							'type'  => 'textarea',
+							'type'  => 'editor',
 							'label' => __( 'Description', 'tourfic' ),
+						),
+						array(
+							'id'    => 'gallery_image',
+							'type'  => 'gallery',
+							'label' => __( 'Gallery Image', 'tourfic' ),
+							'is_pro' => true,
+						),
+						array(
+							'id'     => 'itinerary-sleep-mode',
+							'type'   => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'  => __( 'Itinerary options', 'tourfic' ),
+							'is_pro' => true,
+							'fields' => array(
+								array(
+									'id'               => 'sleepmode',
+									'type'             => 'select',
+									'options_callback' => 'sleep_mode_option_callback'
+								),
+								array(
+									'id'            => 'sleep',
+									'type'          => 'editor',
+									'label'         => __( 'Itinerary options Info', 'tourfic' ),
+									'media_buttons' => false,
+								)
+							),
+						),
+						array(
+							'id'      => 'meals',
+							'type'    => 'checkbox',
+							'label'   => __( 'Meals Included', 'tourfic' ),
+							'inline'  => true,
+							'options_callback' => 'tf_tour_meals',
+							'is_pro' => true,
+						),
+						array(
+							'id'          => 'loacation',
+							'label'   => __( 'Location', 'tourfic' ),
+							'type'        => 'text',
+							'class'       => 'ininenary-group',
+							'placeholder' => 'Location',
+							'field_width' => 33,
+							'is_pro' => true,
+						),
+						array(
+							'id'          => 'altitude',
+							'label'   => __( 'Altitude', 'tourfic' ), 
+							'type'        => 'text',
+							'placeholder' => 'Altitude',
+							'class'       => 'ininenary-group',
+							'field_width' => 33,
+							'is_pro' => true,
+						),
+						array(
+							'id'               => 'valuetype',
+							'label'   => __( 'Elevation Input', 'tourfic' ), 
+							'type'             => 'select',
+							'class'            => 'ininenary-group',
+							'options_callback' => 'elevation_option_callback',
+							'field_width'      => 33,
+							'is_pro' => true,
 						),
 					),
 				),

@@ -290,8 +290,12 @@ ul.tf-room-checkbox li {
     display: flex;
     align-items: center;
 }
+ul.tf-room-checkbox li:first-child {
+    margin-left: 0;
+}
 h3.tf-room-feature-title {
-    font-size: 22px;
+    font-size: 18px;
+    font-weight: 600;
     margin-bottom: 0px;
 }
 ul.tf-room-checkbox {
@@ -301,8 +305,7 @@ ul.tf-room-checkbox label{
     margin-left: 5px;
 }
 .tf-room-filter {
-    padding: 0px 15px;
-    padding-top: 30px;
+    padding: 0 0 15px 0;
     overflow: hidden;
 }
 .tf-room-section {
