@@ -403,7 +403,7 @@ while ( have_posts() ) : the_post();
 							</div>
 						<?php } ?>
 					</div>
-				</div>`
+				</div>
 			</div>
 			<!-- End features -->
 		<?php } ?>
