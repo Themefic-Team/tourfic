@@ -405,13 +405,21 @@ while ( have_posts() ) : the_post();
             <div class="tf-divider"></div>
         </div>
 
-		<?php if ( $rooms ) : ?>
+		<?php if ( $rooms ) :
+        
+            //getting only selected features for rooms
+            $rm_features = [];
+            foreach ( $rooms as $key => $room ) {
+                //merge for each room's selected features
+                $rm_features = array_merge( $rm_features, $room['features']) ;
+            }
+            ?>
             <!-- Start Room Section -->
             <div class="tf-room-section sp-50">
                 <div class="tf-container">
                     <h2 class="section-heading"><?php esc_html_e( 'Available Rooms', 'tourfic' ); ?></h2>
                     <!-- Hooked in feature filter action -->
-					<?php do_action( 'tf_hotel_features_filter', 10 ) ?>
+					<?php do_action( 'tf_hotel_features_filter', $rm_features, 10 ) ?>
                     <div class="tf-room-type" id="rooms">
                         <div class="tf-room-table hotel-room-wrap">
                             <div id="tour_room_details_loader">
