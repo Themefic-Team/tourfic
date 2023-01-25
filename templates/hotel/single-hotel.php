@@ -412,7 +412,7 @@ while ( have_posts() ) : the_post();
             foreach ( $rooms as $key => $room ) {
                 //merge for each room's selected features
                 if(!empty($room['features'])){
-                    $rm_features = array_merge( $rm_features, $room['features']) ;
+                    $rm_features = array_unique(array_merge( $rm_features, $room['features'])) ;
                 }
             }
             ?>

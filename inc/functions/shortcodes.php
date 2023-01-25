@@ -609,7 +609,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
 							$not_found[] = 0;
 							tf_tour_archive_single_item();
 						} else {
-							tf_filter_tour_by_date( $period, $not_found, $data );
+							tf_filter_tour_by_date( $period, $total_posts, $not_found, $data );
 						}
 					}
 
