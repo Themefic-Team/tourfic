@@ -25,7 +25,8 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 
 		public function __construct() {
 			add_action( 'admin_menu', [ $this, 'tf_wizard_menu' ], 100 );
-			add_action( 'wp_loaded', [ $this, 'tf_activation_redirect' ] );
+			add_filter( 'woocommerce_enable_setup_wizard', '__return_false' );
+			add_action( 'admin_init', [ $this, 'tf_activation_redirect' ] );
 			add_action( 'wp_ajax_tf_setup_wizard_submit', [ $this, 'tf_setup_wizard_submit_ajax' ] );
 
 			self::$current_step = isset( $_GET['step'] ) ? sanitize_key( $_GET['step'] ) : 'welcome';
