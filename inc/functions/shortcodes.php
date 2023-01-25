@@ -664,7 +664,6 @@ function tf_reviews_shortcode($atts, $content = null){
 				'arrows' => 'false',
 				'dots' => 'true',
 				'autoplay' => 'false',
-				'slidesToShow' => '3',
 				'slidesToScroll' => 1,
 				'infinite' => 'false',
 			),
