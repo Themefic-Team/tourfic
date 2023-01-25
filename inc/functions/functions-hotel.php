@@ -1137,7 +1137,7 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
 
 		?>
-        <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
+        <form class="tf_booking-widget <?php esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
 
 			<?php if ( $title ): ?>
                 <div class="tf_widget-title"><h2><?php echo esc_html( $title ); ?></h2></div>

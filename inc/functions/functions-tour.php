@@ -1155,7 +1155,6 @@ if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-tour.php' ) ) {
  * @param array      $data      user input for sidebar form
  */
 function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, array $data = [] ): void {
-    
     if(isset($data[3]) && isset($data[4])){
         [$adults, $child, $check_in_out, $startprice, $endprice] = $data;
     }else{
