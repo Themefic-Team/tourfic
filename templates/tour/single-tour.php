@@ -470,7 +470,7 @@ while ( have_posts() ) : the_post();
                                         <div class="tf-accordion-content">
                                             <div class="tf-travel-desc">
 												<?php if ( $itinerary['image'] ) {
-													echo '<a class="tf-itinerary-gallery" href="' . esc_url( $itinerary['image'] ) . '"><img src="' . esc_url( $itinerary['image'] ) . '"></a>';
+													echo '<div class="tf-ititnerary-img"><a class="tf-itinerary-gallery" href="' . esc_url( $itinerary['image'] ) . '"><img src="' . esc_url( $itinerary['image'] ) . '"></a></div>';
 												} ?>
                                                 <div class="trav-cont tf-travel-description">
                                                     <p><?php _e( $itinerary['desc'] ); ?></p>

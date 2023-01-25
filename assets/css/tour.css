@@ -531,7 +531,12 @@
 .tf-travel-desc {
     display: flex;
     padding-top: 20px;
+    gap: 20px;
+    flex-direction: row;
 }
+.tf-ititnerary-img {
+    flex-basis: 30%;
+  }
 
 .tf-accordion-content a {
     max-width: 350px;
@@ -553,6 +558,7 @@
 }
 .tf-travel-description{
     display: flow-root;
+    flex-basis: 70%;
 }
 .ininerary-gallery-single.slick-slide.slick-active{
     height: 130px !important;
