@@ -432,6 +432,7 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 * Update: Room filter feature title update
 * Fixed: Tour Filter By Features(pro)
 * Fixed: Archive Search page warning
+* Fixed: Itinerary Download
 
 = 2.9.3 -  16 January 2023 =
 
