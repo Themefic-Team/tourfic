@@ -1,6 +1,6 @@
 {
   "name": "tourfic",
-  "version": "2.9.2",
+  "version": "2.9.5",
   "description": "Tourfic - Travel and Hotel Booking Solution for WooCommerce",
   "main": "tourfic.js",
   "babel": {

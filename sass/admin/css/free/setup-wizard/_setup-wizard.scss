@@ -285,7 +285,7 @@ Steps
     color: #003c79;
     margin: 20px 0 15px;
     text-align: left;
-    
+
     @media #{$max575} {
       text-align: center;
     }
@@ -379,7 +379,7 @@ Steps
     margin: 30px 0 50px 0;
 
     @media #{$max375} {
-      .tf-setup-action-btn-next{
+      .tf-setup-action-btn-next {
         @include flexbox();
       }
     }
@@ -407,7 +407,7 @@ Steps
       white-space: nowrap;
       text-align: right;
       vertical-align: middle;
-      
+
       @media #{$max575} {
         text-align: center;
       }
@@ -429,6 +429,9 @@ Steps
       flex: 1 1 0;
       min-width: 0;
 
+      input[type="text"],
+      input[type="email"],
+      input[type="number"],
       select {
         border: 1px solid #e4e6eb;
         border-radius: 5px;
@@ -439,12 +442,7 @@ Steps
         color: rgba(0, 0, 0, .85);
         background-color: #fff;
         transition: all .3s;
-
-        &:focus {
-          border-color: #1890ff;
-          outline: 0;
-          box-shadow: 0 0 0 2px rgba(24, 144, 255, .2);
-        }
+        outline: none;
       }
     }
 
