@@ -1049,7 +1049,7 @@ h3.tf-sidebar-widget_title {
     font-weight: 900;
     content: "\f059";
     padding-right: 7px;
-    color: #003162;
+    color: #003162 !important;
 }
 
 .tf-ask-question h3 {

@@ -411,7 +411,9 @@ while ( have_posts() ) : the_post();
             $rm_features = [];
             foreach ( $rooms as $key => $room ) {
                 //merge for each room's selected features
-                $rm_features = array_merge( $rm_features, $room['features']) ;
+                if(!empty($room['features'])){
+                    $rm_features = array_merge( $rm_features, $room['features']) ;
+                }
             }
             ?>
             <!-- Start Room Section -->
