@@ -1,0 +1,14 @@
+//global css
+@import '../../../common/css/variable';
+@import '../../../common/css/mixin';
+@import 'global/global';
+
+//core css
+@import 'core/admin';
+
+//setup wizard css
+@import 'setup-wizard/setup-wizard';
+
+//tf-options css
+@import 'tf-options/tf-options';
+
