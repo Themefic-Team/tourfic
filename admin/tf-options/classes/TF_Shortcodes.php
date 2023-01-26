@@ -65,7 +65,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
-                                            <h3><?php echo __( 'Tour', 'tourfic' ) ?></h3>
+                                            <h3><?php echo __( 'Tour Destination', 'tourfic' ) ?></h3>
                                             <?php
                                             //Dynamic Taxonomy dropdown list
                                             tf_terms_dropdown( 'tour_destination','destinations','tf-setting-field tf-select-field',true );
