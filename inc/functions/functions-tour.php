@@ -293,6 +293,7 @@ function tf_tours_taxonomies_register() {
         'rewrite'               => array( 'slug' => $tour_features_slug, 'with_front' => false ),
         'show_admin_column'     => true,
         'show_in_rest'          => true,
+        'meta_box_cb'          => false,
         'rest_base'             => 'tour_features',
         'rest_controller_class' => 'WP_REST_Terms_Controller',
         'show_in_quick_edit'    => true,

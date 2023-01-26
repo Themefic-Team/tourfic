@@ -165,7 +165,7 @@ while ( have_posts() ) : the_post();
 								if ( is_user_logged_in() ) {
 									if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
 										?>
-                                        <span class="single-tour-wish-bt"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart "
+                                        <span class="single-tour-wish-bt"><i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"
                                                                              data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>"
                                                                              data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
 												echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
@@ -175,7 +175,7 @@ while ( have_posts() ) : the_post();
 								} else {
 									if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {
 										?>
-                                        <span class="single-tour-wish-bt"><i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart "
+                                        <span class="single-tour-wish-bt"><i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"
                                                                              data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>"
                                                                              data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
 												echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
@@ -359,10 +359,9 @@ while ( have_posts() ) : the_post();
             </div>
         </div>
         <!-- End description -->
-
-        <!-- Highlight section Start -->
 		
 		<?php if ( $highlights ) : ?>
+		<!-- Highlight section Start -->
         <div class="tf-highlight-wrapper gray-wrap sp-50">
             <div class="tf-container">
                 <div class="tf-highlight-content">
@@ -380,16 +379,17 @@ while ( have_posts() ) : the_post();
                 </div>
             </div>
         </div>
-		<?php endif; ?>
         <!-- Highlight section end -->
-		<!-- Start features -->
+		<?php endif; ?>
+
 		<?php if ( $features ) { ?>
-			<div class="tf-container">
-				<div class="tf_features">
+			<!-- Start features -->
+			<div class="tf_features sp-50">
+			    <div class="tf-container">
 					<h3 class="section-heading"><?php esc_html_e( 'Popular Features', 'tourfic' ); ?></h3>
 					<div class="tf-feature-list">
 						<?php foreach ( $features as $feature ) {
-							$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
+							$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tour_features', true );
 							$f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
 							if ( $f_icon_type == 'fa' ) {
 								$feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
@@ -403,10 +403,10 @@ while ( have_posts() ) : the_post();
 							</div>
 						<?php } ?>
 					</div>
-				</div>`
+				</div>
 			</div>
+			<!-- End features -->
 		<?php } ?>
-		<!-- End features -->
         <!-- Include-Exclude section Start -->
 		<?php
 		if ( $inc || $exc ) :
@@ -468,12 +468,11 @@ while ( have_posts() ) : the_post();
                                             <i class="fas fa-angle-down arrow"></i>
                                         </div>
                                         <div class="tf-accordion-content">
-
                                             <div class="tf-travel-desc">
 												<?php if ( $itinerary['image'] ) {
-													echo '<a class="tf-itinerary-gallery" href="' . esc_url( $itinerary['image'] ) . '"><img src="' . esc_url( $itinerary['image'] ) . '"></a>';
+													echo '<div class="tf-ititnerary-img"><a class="tf-itinerary-gallery" href="' . esc_url( $itinerary['image'] ) . '"><img src="' . esc_url( $itinerary['image'] ) . '"></a></div>';
 												} ?>
-                                                <div class="trav-cont">
+                                                <div class="trav-cont tf-travel-description">
                                                     <p><?php _e( $itinerary['desc'] ); ?></p>
                                                 </div>
                                             </div>

@@ -88,7 +88,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
     public function form( $instance ) {
 
         $title = isset( $instance['title'] ) ? $instance['title'] : __( 'Popular Filters', 'tourfic' );
-        $terms = isset( $instance['terms'] ) ?  $instance['terms'] : 'all';
+        $terms = isset( $instance['terms']) && is_array( $instance['terms'] ) ? implode( ',', $instance['terms'] ) : 'all';
         $show_count = isset( $instance['show_count'] ) ? $instance['show_count'] : '';
         $hide_empty = isset( $instance['hide_empty'] ) ? $instance['hide_empty'] : '';
 
@@ -105,14 +105,12 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
             wp_dropdown_categories( array(
                 'taxonomy'     => 'hotel_feature',
                 'hierarchical' => false,
-                //'show_option_none'  => esc_html_x( '', 'All Terms', 'tourfic' ),
-                //'option_none_value' => '',
                 'name'       => $this->get_field_name( 'terms' ),
                 'id'         => $this->get_field_id( 'terms' ),
                 'selected'   => $terms, // e.x 86,110,786
                 'multiple'   => true,
-                'class'      => 'widefat tf-select2', // tf-select2
-                'show_count' => true,
+                'class'      => 'widefat tf-select2',
+                'show_count' => true
             ) );
         ?>
             <br>
@@ -172,7 +170,7 @@ class TF_Tour_Feature_Filter extends WP_Widget {
     public function __construct() {
 
         parent::__construct(
-            'tf_tour_filter', // Base ID
+            'tf_tour_feature_filter', // Base ID
             __( 'Tourfic - Tours Filters by Feature', 'tourfic' ),
             array( 'description' => __( 'Filter search result by tour feature', 'tourfic' ) ) // Args
         );
@@ -244,7 +242,7 @@ class TF_Tour_Feature_Filter extends WP_Widget {
     public function form( $instance ) {
 
         $title = isset( $instance['title'] ) ? $instance['title'] : __( 'Feature Filters', 'tourfic' );
-        $terms = isset( $instance['terms'] ) ?  $instance['terms'] : 'all';
+        $terms = isset( $instance['terms']) && is_array( $instance['terms'] ) ? implode( ',', $instance['terms'] ) : 'all';
         $show_count = isset( $instance['show_count'] ) ? $instance['show_count'] : '';
         $hide_empty = isset( $instance['hide_empty'] ) ? $instance['hide_empty'] : '';
 
@@ -261,14 +259,12 @@ class TF_Tour_Feature_Filter extends WP_Widget {
             wp_dropdown_categories( array(
                 'taxonomy'     => 'tour_features',
                 'hierarchical' => false,
-                //'show_option_none'  => esc_html_x( '', 'All Terms', 'tourfic' ),
-                //'option_none_value' => '',
                 'name'       => $this->get_field_name( 'terms' ),
                 'id'         => $this->get_field_id( 'terms' ),
                 'selected'   => $terms, // e.x 86,110,786
                 'multiple'   => true,
                 'class'      => 'widefat tf-select2', // tf-select2
-                'show_count' => true,
+                'show_count' => true
             ) );
         ?>
             <br>
@@ -398,9 +394,8 @@ class TF_Tour_Attraction_Filter extends WP_Widget {
      * @param array $instance Previously saved values from database.
      */
     public function form( $instance ) {
-
         $title = isset( $instance['title'] ) ? $instance['title'] : __( 'Popular Filters', 'tourfic' );
-        $terms = isset( $instance['terms'] ) ? $instance['terms'] : 'all';
+        $terms = isset( $instance['terms']) && is_array( $instance['terms'] ) ? implode( ',', $instance['terms'] ) : 'all';
         $show_count = isset( $instance['show_count'] ) ? $instance['show_count'] : '';
         $hide_empty = isset( $instance['hide_empty'] ) ? $instance['hide_empty'] : '';
 
@@ -415,14 +410,14 @@ class TF_Tour_Attraction_Filter extends WP_Widget {
             <br>
             <?php
             wp_dropdown_categories( array(
-                'taxonomy'     => 'tour_attraction',
+                'taxonomy'     => array( 'tour_attraction' ),
                 'hierarchical' => false,
                 'name'         => $this->get_field_name( 'terms' ),
                 'id'           => $this->get_field_id( 'terms' ),
-                'selected'     => $terms, // e.x 86,110,786
-                'multiple' => true,
+                'selected'     => $terms,  // e.x 86,110,786
                 'class'        => 'widefat tf-select2',
                 'show_count'   => true,
+                'multiple' => true
             ) );
         ?>
             <br>
@@ -441,12 +436,7 @@ class TF_Tour_Attraction_Filter extends WP_Widget {
                 font-weight: 600;
             }
         </style>
-        <script>
-            jQuery('#<?php echo $this->get_field_id( 'terms' ); ?>').select2({
-                width: '100%'
-            });
-            jQuery(document).trigger('tf_select2');
-        </script>
+        
 <?php
 }
 
@@ -555,7 +545,7 @@ class TF_Tour_Activities_Filter extends WP_Widget {
      */
     public function form( $instance ) {
         $title = isset( $instance['title'] ) ? $instance['title'] : __( 'Popular Activities', 'tourfic' );
-        $terms = isset( $instance['terms'] ) ? $instance['terms'] : 'all';
+        $terms = isset( $instance['terms']) && is_array( $instance['terms'] ) ? implode( ',', $instance['terms'] ) : 'all';
 
         $show_count = isset( $instance['show_count'] ) ? $instance['show_count'] : '';
         $hide_empty = isset( $instance['hide_empty'] ) ? $instance['hide_empty'] : '';
@@ -571,14 +561,14 @@ class TF_Tour_Activities_Filter extends WP_Widget {
             <br>
             <?php
                 wp_dropdown_categories( array(
-                    'taxonomy'     => 'tour_activities',
+                    'taxonomy'     => array( 'tour_activities' ),
                     'hierarchical' => false,
                     'name'         => $this->get_field_name( 'terms' ),
                     'id'           => $this->get_field_id( 'terms' ),
                     'selected'     => $terms, // e.x 86,110,786
                     'multiple'     => true,
                     'class'        => 'widefat tf-select2',
-                    'show_count'   => true,
+                    'show_count'   => true
                 ) );
             ?>
             <br>

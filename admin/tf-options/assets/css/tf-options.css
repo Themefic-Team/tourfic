@@ -1786,31 +1786,48 @@ Fontawesome
   border-color: #003c79;
 }
 
-.tf-field-image .tf-fieldset .tf-fieldset-media-preview .tf-image-close {
-  display: inline;
+.tf-field-image .tf-fieldset .tf-fieldset-media-preview:not(:empty) {
+  height: 100px;
+  width: 100px;
+  border: 1px solid #ddd;
+  padding: 5px;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  position: relative;
+}
+.tf-field-image .tf-fieldset .tf-fieldset-media-preview:not(:empty) .tf-image-close {
   position: absolute;
-  margin-left: 100px;
+  top: -10px;
+  right: -10px;
   background: #fff;
   padding: 2px;
   cursor: pointer;
   border-radius: 50%;
   border: 1px solid #ddd;
-  margin-top: -7px;
   width: 15px;
   height: 15px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
-  align-items: center;
+  -webkit-justify-content: center;
   justify-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
-.tf-field-image .tf-fieldset .tf-fieldset-media-preview .tf-image-close img {
+.tf-field-image .tf-fieldset .tf-fieldset-media-preview:not(:empty) .tf-image-close img {
   background: #fff;
   width: 11px !important;
 }
-.tf-field-image .tf-fieldset .tf-fieldset-media-preview img {
-  height: 100px;
-  width: 100px;
-  border: 1px solid #ddd;
-  padding: 5px;
+.tf-field-image .tf-fieldset .tf-fieldset-media-preview:not(:empty) img {
+  width: 100%;
+  object-fit: contain;
 }
 .tf-field-image .tf-fieldset .tf-fieldset-media {
   display: flex;
@@ -1818,7 +1835,6 @@ Fontawesome
 .tf-field-image .tf-fieldset .tf-fieldset-media input {
   width: 90%;
   padding: 12px 8px 12px 12px;
-  border: none;
   background-color: #f5f8ff;
   border: 1px solid #c4cbd4;
   border-radius: 4px;

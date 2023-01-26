@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet, fida02
 Tags: travel, tour, trip, hotel, tour-booking, hotel-booking, travel-booking, trip-booking, woocommerce hotel, woocommerce tour, woocommerce travel, wordpress travel, wordpress hotel, wordpress tour plugin, woocommerce tour booking, woocommerce travel booking plugin, woocommerce hotel booking, wordpress tour booking plugin, travel booking wordpress plugin, wordpress hotel booking plugin, wp hotel booking, hotel booking plugin, woocommerce accommodation bookings, woocommerce hotel booking, wordpress room booking plugin, best hotel booking plugin wordpress, hotel plugin, hotel plugin wordpress, tour booking, travel booking, trip booking, hotel booking, tour itinerary, tour operator, travel agency, tour reservation, hotel reservation, airbnb, booking.com, agoda.com, agoda,  wp travel engine, wp travel, wp hotel
 Requires at least: 5.4
 Tested up to: 6.1.1
-Stable tag: 2.9.2
+Stable tag: 2.9.4
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -408,6 +408,41 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 25. Tour Option Panel
 
 == Changelog ==
+
+= 2.9.4 -  25 January 2023 =
+
+* Fixed: Tourfic settings select2 data save issue fixed
+* Fixed: Tourfic settings repeater clone issue fixed
+* Fixed: Tourfic settings image preview design issue fixed
+* Added: Tourfic settings disable checkbox added
+* Added: Visual editor added on hotel room description
+* Added: Visual editor added on Itinerary description
+* Update: Tour highlight css update
+* Update: "Available Rooms" title position change
+* Update: Itinerary downloader section position change
+* Update: Itinerary downloader section design update
+* Fixed: Wishlist icon design issue fixed
+* Fixed: Wishlist popup message design issue fixed
+* Update: Pro fields demo added on Free
+* Fixed: Itinerary image width and gallery view issue
+* Fixed: Gallery Image upload section position order changed in Itinerary
+* Fixed: Typo fixed
+* Added: Visual editor added on hotel room description
+* Fixed: Tour features icon display issue fixed
+* Update: Room filter feature title update
+* Fixed: Tour Filter By Features(pro)
+* Fixed: Archive Search page warning
+* Fixed: Itinerary Download
+
+= 2.9.3 -  16 January 2023 =
+
+* Update: Search result page sidebar UI enhanced
+* Update: Hotel FAQ WP Editor support added
+* Fixed: Widget notice in classic widgets
+* Fixed: Filter sidebar in the search result page
+* Fixed: Discount price issue
+* Fixed: Hotel room filter by features
+* Removed: Old Codestar files and codes
 
 = 2.9.2 -  27 December 2022 =
 

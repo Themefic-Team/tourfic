@@ -1,4 +1,4 @@
-(function ($, win) {
+(function ($, win) { 
     $(document).ready(function () {
 
         // Create an instance of Notyf
@@ -31,7 +31,7 @@
             }
             //get the checked values of features
             var features = [];
-            $('.tf-sidebar-filter :checkbox:checked').each(function(i){
+            $('.tf-room-checkbox :checkbox:checked').each(function(i){
                 features[i] = $(this).val();
             });
             var tf_room_avail_nonce = $("input[name=tf_room_avail_nonce]").val();
@@ -41,7 +41,6 @@
             //var features = $('input[name=features]').filter(':checked').val();
             var children_ages = $('input[name=children_ages]').val();
             var check_in_out = $('input[name=check-in-out-date]').val();
-            //console.log(post_id);
 
             var data = {
                 action: 'tf_room_availability',
@@ -53,17 +52,17 @@
                 children_ages: children_ages,
                 check_in_out: check_in_out,
             };
-
+            
             jQuery.ajax({
                 url: tf_params.ajax_url,
                 type: 'post',
                 data: data,
                 success: function (data) {
-                    console.log(features,adult);
                     $('html, body').animate({
                         scrollTop: $("#rooms").offset().top
                     }, 500);
                     $("#rooms").html(data);
+                    $('.tf-room-filter').show();
                 },
                 error: function (data) {
                     console.log(data);
@@ -453,8 +452,7 @@
                     tour_features.push($(this).val());
                 }
             });
-            var tour_features = tour_features.join();
-
+            tour_features = tour_features.join();
             //get tour attraction checked values
             var attractions = [];
             $('[name*=tf_attractions]').each(function () {
@@ -462,7 +460,7 @@
                     attractions.push($(this).val());
                 }
             });
-            var attractions = attractions.join();
+            attractions = attractions.join();
 
             //get tour activities checked values
             var activities = [];
@@ -471,7 +469,7 @@
                     activities.push($(this).val());
                 }
             });
-            var activities = activities.join();
+            activities = activities.join();
 
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
@@ -516,7 +514,6 @@
                             opacity: .5
                         }
                     });
-
                 },
                 complete: function (data) {
                     $('.archive_ajax_result').unblock();
@@ -550,7 +547,7 @@
             e.preventDefault();
             makeFilter()
         });
-        $(document).on('change', '[name*=tf_filters],[name*=tf_features],[name*=tf_attractions],[name*=tf_activities]', function () {
+        $(document).on('change', '[name*=tf_filters],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities]', function () {
             makeFilter();
         })
 
@@ -799,9 +796,9 @@
         /* fill icon class */
         const wishIconFill = targetNode => {
             targetNode.addClass('remove-wishlist');
-            targetNode.addClass('fas');
+            targetNode.addClass('fa-heart');
             targetNode.addClass('tf-text-red');
-            targetNode.removeClass('far');
+            targetNode.removeClass('fa-heart-o');
             targetNode.removeClass('add-wishlist');
 
 
@@ -809,8 +806,8 @@
         /* blank icon */
         const wishIcon = targetNode => {
             targetNode.addClass('add-wishlist');
-            targetNode.addClass('far');
-            targetNode.removeClass('fas');
+            targetNode.addClass('fa-heart-o');
+            targetNode.removeClass('fa-heart');
             targetNode.removeClass('tf-text-red');
             targetNode.removeClass('remove-wishlist');
         }
@@ -841,7 +838,7 @@
                         if (response.success) {
                             wishIconFill(targetNode);
                             notyf.success({
-                                message: response.data + wishlistpage,
+                                message: response.data,
                                 duration: 4e3
                             });
                         }
@@ -854,7 +851,7 @@
                     notyf.success(tf_params.wishlist_add)
                     wishIconFill(targetNode);
                     notyf.success({
-                        message: tf_params.wishlist_added + wishlistpage,
+                        message: tf_params.wishlist_added,
                         duration: 4e3
                     });
                 } else notyf.error(tf_params.wishlist_add_error);
@@ -1495,23 +1492,29 @@ $('.tf-widget-title').on('click',function(){
 })
 
 /* see more checkbox filter started */
+   
 $('a.see-more').on('click',function(e){
-    e.preventDefault();
-    $('.tf_widget').find('.filter-item').filter(function(index){
+    var $this = $(this);
+    e.preventDefault();  
+    $this.parent('.tf-filter').find('.filter-item').filter(function(index){
         return index > 3;
     }).removeClass("hidden");
-    $(this).hide();
+    $this.hide();
 });
 
-$('.tf_widget').find('.filter-item').filter(function(index){
-    return index > 4;
-}).addClass("hidden");
+$('.tf-filter').each(function(){
 
-var element = $('.filter-item')
-var numberOfChildren = element.children.length;
-if(numberOfChildren < 4 ){
-    $('a.see-more').hide(); 
-}
+    var len = $(this).find('ul').children().length;   
+    $(this).find('.see-more').hide();    
+    if(len > 4){
+        $(this).find('.see-more').show();
+    }
+    //hide items if crossed showing limit
+    $(this).find('.filter-item').filter(function(index){
+        return index > 3;
+    }).addClass("hidden");
+
+});
 
 /* see more checkbox filter end */
 
