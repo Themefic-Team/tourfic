@@ -144,7 +144,7 @@ function tf_dashboard_header(){
 	<!-- deshboard-top-section -->
 	<div class="tf-setting-top-bar">
 		<div class="version">
-			<img src="<?php echo TF_ASSETS_URL; ?>/img/tourfic-logo.webp" alt="logo">
+			<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tourfic-logo.webp" alt="logo">
 			<span>v<?php echo esc_attr( TOURFIC ); ?></span>
 		</div>
 		<div class="other-document">
