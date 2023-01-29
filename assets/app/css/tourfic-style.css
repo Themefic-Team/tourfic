@@ -1426,6 +1426,10 @@ li.filter-item {
   font-family: "FontAwesome" !important;
 }
 
+.tf-single-review.tf-reviews-slider ul.slick-dots {
+  margin: 0;
+}
+
 @media only screen and (max-width: 1000px) {
   form.tf-review-form {
     gap: 20px;

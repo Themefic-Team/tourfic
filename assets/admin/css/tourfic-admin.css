@@ -2037,6 +2037,11 @@ Steps
   border-radius: 5px;
   -webkit-border-radius: 5px;
 }
+@media only screen and (max-width: 640px) {
+  .tf-shortcode-generator-section .tf-shortcode-generators .tf-shortcode-generator-label {
+    display: flow-root !important;
+  }
+}
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-shortcode-generator-label .tf-labels label {
   font-size: 14px;
   line-height: 22px;
@@ -2092,6 +2097,11 @@ Steps
   background-color: #fff;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
   border-radius: 10px;
+}
+@media only screen and (max-width: 640px) {
+  .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form {
+    width: 100%;
+  }
 }
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-sg-row {
   display: flex;

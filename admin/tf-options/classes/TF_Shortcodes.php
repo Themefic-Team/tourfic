@@ -45,7 +45,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                         </div>
                         <div class="tf-sg-form-wrapper">
                             <div class="tf-shortcode-generator-form">
-                                <div class="tf-sg-close"><i class="fa-thin fa-x"></i></div>
+                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
@@ -113,7 +113,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                         </div>
                         <div class="tf-sg-form-wrapper">
                             <div class="tf-shortcode-generator-form">
-                                <div class="tf-sg-close"><i class="fa-thin fa-x"></i></div>
+                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
@@ -182,7 +182,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                         </div>
                         <div class="tf-sg-form-wrapper">
                             <div class="tf-shortcode-generator-form">
-                                <div class="tf-sg-close"><i class="fa-thin fa-x"></i></div>
+                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
@@ -273,7 +273,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                         </div>
                         <div class="tf-sg-form-wrapper">
                             <div class="tf-shortcode-generator-form">
-                                <div class="tf-sg-close"><i class="fa-thin fa-x"></i></div>
+                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
@@ -364,7 +364,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                         </div>
                         <div class="tf-sg-form-wrapper">
                             <div class="tf-shortcode-generator-form">
-                                <div class="tf-sg-close"><i class="fa-thin fa-x"></i></div>
+                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
@@ -443,7 +443,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                         </div>
                         <div class="tf-sg-form-wrapper">
                             <div class="tf-shortcode-generator-form">
-                                <div class="tf-sg-close"><i class="fa-thin fa-x"></i></div>
+                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
@@ -523,7 +523,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                         </div>
                         <div class="tf-sg-form-wrapper">
                             <div class="tf-shortcode-generator-form">
-                                <div class="tf-sg-close"><i class="fa-thin fa-x"></i></div>
+                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
@@ -618,7 +618,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                         </div>
                         <div class="tf-sg-form-wrapper">
                             <div class="tf-shortcode-generator-form">
-                                <div class="tf-sg-close"><i class="fa-thin fa-x"></i></div>
+                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
@@ -731,7 +731,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                         </div>
                         <div class="tf-sg-form-wrapper">
                             <div class="tf-shortcode-generator-form">
-                                <div class="tf-sg-close"><i class="fa-thin fa-x"></i></div>
+                                <div class="tf-sg-close"><i class="far fa-times"></i></div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
