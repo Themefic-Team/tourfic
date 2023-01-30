@@ -366,6 +366,13 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 	<?php tourfic_fullwidth_container_start( $fullwidth ); ?>
     <div id="tf-booking-search-tabs">
 
+		<?php if ( $title ): ?>
+			<div class="tf_widget-title"><h2><?php echo esc_html( $title ); ?></h2></div>
+		<?php endif; ?>
+
+		<?php if ( $subtitle ): ?>
+			<div class="tf_widget-subtitle"><p><?php echo esc_html( $subtitle ); ?></p></div>
+		<?php endif; ?>
         <!-- Booking Form Tabs -->
         <div class="tf-booking-form-tab">
 			<?php do_action( 'tf_before_booking_form_tab', $type ) ?>

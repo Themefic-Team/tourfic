@@ -372,13 +372,6 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
         ?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
 
-        <?php if( $title ) { ?>
-            <div class="tf_widget-title"><h2><?php esc_html_e( $title ); ?></h2></div>
-        <?php } ?>
-
-        <?php if( $subtitle ) { ?>
-            <div class="tf_widget-subtitle"><?php esc_html_e( $subtitle ); ?></div>
-        <?php } ?>
 
             <div class="tf_homepage-booking">
                 <div class="tf_destination-wrap">
@@ -494,14 +487,6 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
 
         ?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
-
-        <?php if( $title ) { ?>
-            <div class="tf_widget-title"><h2><?php esc_html_e( $title ); ?></h2></div>
-        <?php } ?>
-
-        <?php if( $subtitle ) { ?>
-            <div class="tf_widget-subtitle"><?php esc_html_e( $subtitle ); ?></div>
-        <?php } ?>
 
             <div class="tf_homepage-booking">
                 <div class="tf_destination-wrap">
