@@ -1167,7 +1167,7 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
     // Set initial tour availability status
     $has_tour = false;
 
-    if ( $meta['type'] === 'fixed' ) {
+    if ( !empty($meta['type'] ) && $meta['type'] === 'fixed' ) {
 
         if( !empty($meta['fixed_availability']) && gettype($meta['fixed_availability'])=="string" ){
             $tf_tour_unserial_fixed_date = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
@@ -1215,7 +1215,7 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
 
     }
 
-    if ( $meta['type'] === 'continuous' ) {
+    if ( !empty($meta['type'] ) && $meta['type'] === 'continuous' ) {
 
         $custom_availability = !empty($meta['custom_avail']) ? $meta['custom_avail'] : false;
 

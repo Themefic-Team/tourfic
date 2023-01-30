@@ -284,6 +284,119 @@ a.page-numbers {
         justify-content: end;
     }
 }
+
+/* Search result sidebar  */
+.tf_widget {
+    border: 1px solid #EDEDF0;
+    background: #fff;
+    border-radius: 10px;
+
+    .tf-widget-title {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        height: 48px;
+        background: #F5F8FF;
+        border: 1px solid #EDEDF0;
+        border-radius: 8px 8px 0px 0px;
+        justify-content: space-between;
+
+        h4 {
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'rubik', sans-serif;
+            cursor: pointer;
+            width: 100%;
+        }
+        i.fa {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+        }
+
+        i.fa.collapsed{
+            transform: rotate(180deg);
+        }
+    }
+
+    .filter-item.active{
+        background-color: #F5F8FF;
+    }
+    li.filter-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 4px;
+        margin: 5px;
+         /* Create a custom checkbox */
+        label{
+            position: relative;
+            cursor: pointer;
+            width: 100%;
+            display: inline-block;
+            padding-left: 25px;
+        }
+        .checkmark {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            height: 20px;
+            width: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            border: 1px solid #D2D2D6;
+        }
+        input[type=checkbox]{
+            display: none;
+        }
+        label:hover input~.checkmark {
+            background-color: #ccc;
+        }
+
+        label input:checked~.checkmark {
+            background-color: #2196F3;
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        label input:checked~.checkmark:after {
+            display: block;
+        }
+
+        /* Style the checkmark/indicator */
+        label .checkmark:after {
+            left: 6px;
+            top: 3px;
+            width: 6px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+    }
+
+   
+    a.see-more.btn-link {
+        text-align: center;
+        display: block;
+        font-weight: 600;
+    }
+    a.see-more span {
+        margin-left: 3px;
+        vertical-align: middle;
+    }
+    li.filter-item.hidden{
+        display: none;
+    }
+
+}
 .tf-hide-pagination {
     display: none !important;
 }
