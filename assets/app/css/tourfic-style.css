@@ -1902,6 +1902,9 @@ a.page-numbers {
 }
 
 /* Create a custom checkbox */
+.filter-item, .tf-room-checkbox {
+  /* Style the checkmark/indicator */
+}
 .filter-item label, .tf-room-checkbox label {
   position: relative;
   cursor: pointer;
@@ -1909,8 +1912,7 @@ a.page-numbers {
   display: inline-block;
   padding-left: 25px;
 }
-
-.checkmark {
+.filter-item .checkmark, .tf-room-checkbox .checkmark {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -1920,31 +1922,24 @@ a.page-numbers {
   border-radius: 5px;
   border: 1px solid #D2D2D6;
 }
-
-input[type=checkbox] {
+.filter-item input[type=checkbox], .tf-room-checkbox input[type=checkbox] {
   display: none;
 }
-
-label:hover input ~ .checkmark {
+.filter-item label:hover input ~ .checkmark, .tf-room-checkbox label:hover input ~ .checkmark {
   background-color: #ccc;
 }
-
-label input:checked ~ .checkmark {
+.filter-item label input:checked ~ .checkmark, .tf-room-checkbox label input:checked ~ .checkmark {
   background-color: #2196F3;
 }
-
-.checkmark:after {
+.filter-item .checkmark:after, .tf-room-checkbox .checkmark:after {
   content: "";
   position: absolute;
   display: none;
 }
-
-label input:checked ~ .checkmark:after {
+.filter-item label input:checked ~ .checkmark:after, .tf-room-checkbox label input:checked ~ .checkmark:after {
   display: block;
 }
-
-/* Style the checkmark/indicator */
-label .checkmark:after {
+.filter-item label .checkmark:after, .tf-room-checkbox label .checkmark:after {
   left: 6px;
   top: 3px;
   width: 6px;
