@@ -1505,7 +1505,7 @@ function tf_assign_taxonomies( $post_id, $post, $old_status ){
  * @author Abu Hena
  * @since 2.9.4
  */
-function tf_terms_dropdown( $term, $attribute = false, $class, $multiple = false ){
+function tf_terms_dropdown( $term, $attribute, $class, $multiple = false ){
 	
 	//get the terms
 	$terms = get_terms( array(
