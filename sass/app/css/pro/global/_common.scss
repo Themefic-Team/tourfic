@@ -840,6 +840,10 @@
     border-radius: 5px;
     margin: 15px 0px;
     border: 1px solid #EDEDF0;
+    justify-content: space-between;
+    @media #{$max640}{
+        display: flow-root;
+    }
 }
 .tf-itinerary-downloader-icon {
     img {

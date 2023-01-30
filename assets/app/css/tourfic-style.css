@@ -2386,9 +2386,19 @@ span.close-aq {
   display: none;
 }
 
-.tf-hotel-grid .tf-slider-item {
-  width: 31%;
-  float: left;
+.tf-hotel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-hotel-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .tf-hotel-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .post-section-one {
@@ -3587,6 +3597,10 @@ span.tf-price .amount {
 .tf-travel-description {
   display: flow-root;
   flex-basis: 70%;
+}
+
+.ininerary-other-gallery {
+  margin-bottom: 20px;
 }
 
 .ininerary-gallery-single.slick-slide.slick-active {

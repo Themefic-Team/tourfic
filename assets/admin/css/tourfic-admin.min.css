@@ -2116,6 +2116,13 @@ Steps
   margin-bottom: 15px;
   flex-wrap: wrap;
 }
+@media only screen and (max-width: 640px) {
+  .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-sg-row {
+    display: flow-root;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-col-lg-6 {
   flex: 0 0 50%;
   max-width: 50%;
@@ -2124,6 +2131,11 @@ Steps
   padding-right: 15px;
   padding-left: 15px;
   box-sizing: border-box;
+}
+@media only screen and (max-width: 640px) {
+  .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-col-lg-6 {
+    max-width: 100%;
+  }
 }
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form select.tf-select-field[multiple] {
   height: auto;

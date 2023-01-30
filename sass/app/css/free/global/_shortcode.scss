@@ -473,11 +473,16 @@ span.close-aq {
     display: none;
 }
 .tf-hotel-grid {
-    .tf-slider-item {
-        width: 31%;
-        float: left;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    @media #{$max767}{
+        grid-template-columns: 1fr 1fr;
+    }
+    @media #{$max640}{
+        grid-template-columns: 1fr;
     }
 }
+
 .post-section-one {
     overflow: hidden;
     display: flex;

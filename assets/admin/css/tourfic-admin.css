@@ -2073,6 +2073,12 @@ Steps
   cursor: pointer;
   border-radius: 5px;
 }
+@media only screen and (max-width: 640px) {
+  .tf-shortcode-generator-section .tf-shortcode-generators .tf-shortcode-btn button {
+    margin-left: 0px !important;
+    margin-top: 10px !important;
+  }
+}
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-shortcode-btn button:hover {
   background-color: #002f5e;
 }
@@ -2100,7 +2106,7 @@ Steps
 }
 @media only screen and (max-width: 640px) {
   .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form {
-    width: 100%;
+    width: 320px;
   }
 }
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-sg-row {
@@ -2109,6 +2115,11 @@ Steps
   margin-left: -15px;
   margin-bottom: 15px;
   flex-wrap: wrap;
+}
+@media only screen and (max-width: 640px) {
+  .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-sg-row {
+    display: flow-root;
+  }
 }
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-col-lg-6 {
   flex: 0 0 50%;

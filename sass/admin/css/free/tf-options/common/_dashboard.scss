@@ -769,6 +769,11 @@
         margin-left: -15px;
         margin-bottom: 15px;
         flex-wrap: wrap;
+        @media #{$max640}{
+          display: flow-root;
+          margin-left: 0;
+          margin-right: 0;
+        }
       }
     
       .tf-col-lg-6 {
@@ -779,6 +784,9 @@
         padding-right: 15px;
         padding-left: 15px;
         box-sizing: border-box;
+        @media #{$max640}{
+          max-width: 100%;
+        }
       }
       select.tf-select-field[multiple]{
         height: auto;
