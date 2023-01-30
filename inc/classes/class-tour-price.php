@@ -20,7 +20,7 @@ if(!class_exists('Tour_Price')){
         
             # Get discounts
             $discount_type    = !empty($meta['discount_type']) ? $meta['discount_type'] : 'none';
-            $discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : '';
+            $discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : 0;
         
             /**
              * Price calculation based on custom availability
