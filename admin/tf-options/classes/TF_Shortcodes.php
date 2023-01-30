@@ -540,7 +540,9 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                                 <option value="style=default"><?php _e( 'Default', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div>                             
+                                </div>
+                                <div class="tf-sg-row">                                    
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Type', 'tourfic' ) ?></h3>
@@ -550,23 +552,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                                 <option value="type='tour'"><?php _e( 'Tour', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
-                                    </div>                                   
-                                </div>
-                                <div class="tf-sg-row">
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo __( 'Classes', 'tourfic' ) ?></h3>
-                                            <input type="text" value="" data-count="classes" placeholder="Input classes with space" class="post-count tf-setting-field">                                                
-                                        </div>
-                                    </div>   
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
-                                            <h3><?php echo __( 'Slides to show', 'tourfic' ) ?></h3>
-                                            <input type="number" value="5" data-count="slidestoshow" class="post-count tf-setting-field">                                                
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-sg-row">
+                                    </div>      
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Fullwidth', 'tourfic' ) ?></h3>
@@ -575,7 +561,15 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                                 <option value="fullwidth='false'"><?php _e( 'No', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
-                                    </div>      
+                                    </div> 
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Classes', 'tourfic' ) ?></h3>
+                                            <input type="text" value="" data-count="classes" placeholder="Input classes with space" class="post-count tf-setting-field">                                                
+                                        </div>
+                                    </div>                                         
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Advanced', 'tourfic' ) ?></h3>
