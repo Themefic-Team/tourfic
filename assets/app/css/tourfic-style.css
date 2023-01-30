@@ -1385,14 +1385,6 @@ h3.tf-sidebar-widget_title {
   padding-left: 25px;
   line-height: 1.3;
 }
-.filter-item label .checkmark:after {
-  left: 1px;
-  top: 1px;
-  width: 11px;
-  height: 11px;
-  background: #1f73be;
-  border-radius: 2px;
-}
 
 li.filter-item {
   display: flex;
@@ -1895,53 +1887,6 @@ a.page-numbers {
   padding: 6px 10px;
   border-radius: 4px;
   margin: 5px;
-  /* Create a custom checkbox */
-  /* Style the checkmark/indicator */
-}
-.tf_widget li.filter-item label {
-  position: relative;
-  cursor: pointer;
-  width: 100%;
-  display: inline-block;
-  padding-left: 25px;
-}
-.tf_widget li.filter-item .checkmark {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 20px;
-  width: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  border: 1px solid #D2D2D6;
-}
-.tf_widget li.filter-item input[type=checkbox] {
-  display: none;
-}
-.tf_widget li.filter-item label:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-.tf_widget li.filter-item label input:checked ~ .checkmark {
-  background-color: #2196F3;
-}
-.tf_widget li.filter-item .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-.tf_widget li.filter-item label input:checked ~ .checkmark:after {
-  display: block;
-}
-.tf_widget li.filter-item label .checkmark:after {
-  left: 6px;
-  top: 3px;
-  width: 6px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
 }
 .tf_widget a.see-more.btn-link {
   text-align: center;
@@ -1954,6 +1899,61 @@ a.page-numbers {
 }
 .tf_widget li.filter-item.hidden {
   display: none;
+}
+
+/* Create a custom checkbox */
+.filter-item label, .tf-room-checkbox label {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  display: inline-block;
+  padding-left: 25px;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #D2D2D6;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+label:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+label input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+label input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+label .checkmark:after {
+  left: 6px;
+  top: 3px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .tf-hide-pagination {
@@ -2930,6 +2930,7 @@ ul.tf-room-checkbox {
 
 ul.tf-room-checkbox label {
   margin-left: 5px;
+  line-height: 19px;
 }
 
 .tf-room-filter {
