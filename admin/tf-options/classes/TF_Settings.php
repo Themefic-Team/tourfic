@@ -389,14 +389,14 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 				<div class="tf-support-document">
 					<div class="tf-single-support">
-						<a href="https://themefic.com/docs/tourfic/">
+						<a href="https://themefic.com/docs/tourfic/" target="_blank">
 							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-documents.png" alt="Document">
 							<h3><?php _e("Documentation","tourfic"); ?></h3>
 							<span><?php _e("Read More","tourfic"); ?></span>
 						</a>
 					</div>
 					<div class="tf-single-support">
-						<a href="https://portal.themefic.com/support/">
+						<a href="https://portal.themefic.com/support/" target="_blank">
 							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-mail.png" alt="Document">
 							<h3><?php _e("Email Support","tourfic"); ?></h3>
 							<span><?php _e("Contact Us","tourfic"); ?></span>
@@ -404,7 +404,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					</div>
 					
 					<div class="tf-single-support">
-						<a href="https://themefic.com/tourfic/">
+						<a href="https://themefic.com/tourfic/" target="_blank">
 							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-comment.png" alt="Document">
 							<h3><?php _e("Live Chat","tourfic"); ?></h3>
 							<span><?php _e("Chat Now","tourfic"); ?></span>
@@ -412,7 +412,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					</div>
 					
 					<div class="tf-single-support">
-						<a href="https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N">
+						<a href="https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N" target="_blank">
 							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-tutorial.png" alt="Document">
 							<h3><?php _e("Video Tutorials","tourfic"); ?></h3>
 							<span><?php _e("Watch Video","tourfic"); ?></span>

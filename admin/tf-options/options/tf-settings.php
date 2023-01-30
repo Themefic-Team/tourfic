@@ -99,16 +99,16 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		// Partial Payment Popup
+		// Hotel service Popup
 		'payment_popup'      => array(
-			'title'  => esc_html__( 'Partial Payment Popup', 'tourfic' ),
+			'title'  => esc_html__( 'Hotel Service Popup', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
 					'id'    => 'hotel_popup_heading',
 					'type'  => 'heading',
-					'label' => __( 'Hotel service popup texts', 'tourfic' ),
+					'label' => __( 'Hotel Service Popup texts', 'tourfic' ),
 				),
 				array(
 					'id'      => '',
@@ -129,7 +129,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => '',
 					'type'    => 'text',
-					'label'   => __( 'Popup action', 'tourfic' ),
+					'label'   => __( 'Popup Action', 'tourfic' ),
 					'default' => __( 'Continue to booking', 'tourfic' ),
 					'is_pro'  => true,
 				)
