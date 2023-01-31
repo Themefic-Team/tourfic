@@ -277,6 +277,9 @@
       @media #{$max575}{
         width: 100%;
       }
+      @media #{$max480}{
+        margin-bottom: 20px;
+      }
       h2{
         color: #000;
         font-size: 34px;
@@ -387,6 +390,9 @@
           align-items: center;
           padding: 25px 30px;
           cursor: pointer;
+          @media #{$max480}{
+            padding: 15px 15px;
+          }
           i{
             font-size: 18px;
             margin-right: 10px;
@@ -398,6 +404,9 @@
             font-weight: 600;
             color: #1d2327;
             line-height: 24px;
+            @media #{$max480}{
+              font-size: 17px;
+            }
           }
         }
         .tf-faq-title.active{
