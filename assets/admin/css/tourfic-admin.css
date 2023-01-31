@@ -1558,6 +1558,12 @@ Steps
   justify-content: space-between;
   padding: 0px 20px 0px 40px;
 }
+@media only screen and (max-width: 1280px) {
+  .tf-settings-help-center .tf-help-center-banner {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
 @media only screen and (max-width: 1199.98px) {
   .tf-settings-help-center .tf-help-center-banner {
     padding-top: 20px;
@@ -1575,6 +1581,11 @@ Steps
 @media only screen and (max-width: 575.98px) {
   .tf-settings-help-center .tf-help-center-banner .tf-help-center-content {
     width: 100%;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .tf-settings-help-center .tf-help-center-banner .tf-help-center-content {
+    margin-bottom: 20px;
   }
 }
 .tf-settings-help-center .tf-help-center-banner .tf-help-center-content h2 {
@@ -1704,6 +1715,11 @@ Steps
   padding: 25px 30px;
   cursor: pointer;
 }
+@media only screen and (max-width: 480px) {
+  .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title {
+    padding: 15px 15px;
+  }
+}
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title i {
   font-size: 18px;
   margin-right: 10px;
@@ -1715,6 +1731,11 @@ Steps
   font-weight: 600;
   color: #1d2327;
   line-height: 24px;
+}
+@media only screen and (max-width: 480px) {
+  .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title h4 {
+    font-size: 17px;
+  }
 }
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title.active i {
   transform: rotate(180deg);

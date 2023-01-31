@@ -261,6 +261,10 @@
     align-items: center;
     justify-content: space-between;
     padding: 0px 20px 0px 40px;
+    @media #{$max1200}{
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
     @media #{$max1199}{
       padding-top: 20px;
     }
@@ -272,6 +276,9 @@
       width: 45%;
       @media #{$max575}{
         width: 100%;
+      }
+      @media #{$max480}{
+        margin-bottom: 20px;
       }
       h2{
         color: #000;
@@ -383,6 +390,9 @@
           align-items: center;
           padding: 25px 30px;
           cursor: pointer;
+          @media #{$max480}{
+            padding: 15px 15px;
+          }
           i{
             font-size: 18px;
             margin-right: 10px;
@@ -394,6 +404,9 @@
             font-weight: 600;
             color: #1d2327;
             line-height: 24px;
+            @media #{$max480}{
+              font-size: 17px;
+            }
           }
         }
         .tf-faq-title.active{
