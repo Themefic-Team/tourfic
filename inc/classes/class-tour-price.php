@@ -282,9 +282,9 @@ if(!class_exists('Tour_Price')){
                     $wc_infant_price = wc_price($infant_price, array('decimals'=>2));
 
                     if($discount_type == 'percent' || $discount_type == 'fixed') {
-                        $wc_sale_adult_price  = wc_price($sale_adult_price, array('decimals'=>2));
-                        $wc_sale_child_price  = wc_price($sale_child_price, array('decimals'=>2));
-                        $wc_sale_infant_price = wc_price($sale_infant_price, array('decimals'=>2));
+                        $wc_sale_adult_price  = !empty($sale_adult_price) ? wc_price($sale_adult_price, array('decimals'=>2)) : '';
+                        $wc_sale_child_price  = !empty($sale_child_price) ? wc_price($sale_child_price, array('decimals'=>2)) : '';
+                        $wc_sale_infant_price = !empty($sale_infant_price) ? wc_price($sale_infant_price, array('decimals'=>2)) : '';
                     }
         
                 }

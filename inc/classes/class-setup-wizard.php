@@ -62,7 +62,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             <a href="<?php echo esc_url( admin_url( 'admin.php?page=tf_settings' ) ); ?>" class="tf-admin-btn tf-btn-secondary back-to-dashboard"><span><?php _e( 'Back to dashboard', 'tourfic' ) ?></span></a>
                         </div>
                         <div class="tf-setup-header-right">
-                            <span class="get-help-link"><?php _e('Having troubles?', 'tourfic') ?> <a class="" href="https://portal.themefic.com/support/"><?php _e('Get help', 'torufic') ?></a></span>
+                            <span class="get-help-link"><?php _e('Having troubles?', 'tourfic') ?> <a class="" target="_blank" href="https://portal.themefic.com/support/"><?php _e('Get help', 'torufic') ?></a></span>
                         </div>
                     </div>
                     <form method="post" id="tf-setup-wizard-form" data-skip-steps="">

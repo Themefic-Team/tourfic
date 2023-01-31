@@ -116,7 +116,7 @@
             if( $('#set-post-thumbnail').find('img').size() == 0) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
-                notyf.error("Tour image is a required!");
+                notyf.error(tf_admin_params.tour_feature_image_required);
                 return false;
             }
         });
@@ -125,7 +125,7 @@
             if( $('#set-post-thumbnail').find('img').size() == 0) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
-                notyf.error("Hotel image is a required!");
+                notyf.error(tf_admin_params.hotel_feature_image_required);
                 return false;
             }
         });

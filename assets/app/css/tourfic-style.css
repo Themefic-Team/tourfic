@@ -3709,6 +3709,10 @@ span.tf-price .amount {
   height: 130px !important;
 }
 
+#tour-map {
+  margin-top: 25px;
+}
+
 .tf-map-wrapper .tf-container {
   max-width: 100%;
   padding: 0;
