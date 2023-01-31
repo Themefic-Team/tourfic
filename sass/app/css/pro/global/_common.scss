@@ -841,8 +841,9 @@
     margin-top: 25px;
     border: 1px solid #EDEDF0;
     justify-content: space-between;
+    flex-wrap: wrap;
     @media #{$max640}{
-        display: flow-root;
+        display: flow-root !important;
     }
 }
 .tf-itinerary-downloader-icon {
