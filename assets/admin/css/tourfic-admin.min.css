@@ -1558,6 +1558,12 @@ Steps
   justify-content: space-between;
   padding: 0px 20px 0px 40px;
 }
+@media only screen and (max-width: 1280px) {
+  .tf-settings-help-center .tf-help-center-banner {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
 @media only screen and (max-width: 1199.98px) {
   .tf-settings-help-center .tf-help-center-banner {
     padding-top: 20px;

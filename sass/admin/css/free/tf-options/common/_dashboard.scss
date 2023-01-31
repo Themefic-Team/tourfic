@@ -261,6 +261,10 @@
     align-items: center;
     justify-content: space-between;
     padding: 0px 20px 0px 40px;
+    @media #{$max1200}{
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
     @media #{$max1199}{
       padding-top: 20px;
     }
