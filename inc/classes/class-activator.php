@@ -23,7 +23,7 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 		}
 
 		public function __construct() {
-			register_activation_hook( TF_PATH . 'tourfic.php', array( $this, 'activate' ) );
+			add_action( 'init', array( $this, 'activate' ) );
 
 			// add post state
 			add_filter( 'display_post_states', array( $this, 'add_post_state' ), 10, 2 );
