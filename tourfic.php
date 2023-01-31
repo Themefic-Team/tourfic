@@ -8,9 +8,9 @@
  * Text Domain:     tourfic
  * Domain Path:     /lang/
  * Version:         2.9.5
- * Tested up to: 6.1.1
+ * Tested up to:    6.1.1
  * WC tested up to: 7.2.3
- * Requires PHP: 7.2
+ * Requires PHP:    7.2
  * Elementor tested up to: 3.10.1
  */
 
