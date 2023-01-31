@@ -196,6 +196,9 @@
             });
 
         });
+        
+        //documentation link open in new tab
+        $('.tf-go-docs').parent().attr('target','_blank');
 
     });
 
