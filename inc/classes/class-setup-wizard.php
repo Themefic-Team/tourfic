@@ -28,6 +28,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			add_filter( 'woocommerce_enable_setup_wizard', '__return_false' );
 			add_action( 'admin_init', [ $this, 'tf_activation_redirect' ] );
 			add_action( 'wp_ajax_tf_setup_wizard_submit', [ $this, 'tf_setup_wizard_submit_ajax' ] );
+			add_action( 'in_admin_header', [ $this, 'remove_notice' ], 1000 );
 
 			self::$current_step = isset( $_GET['step'] ) ? sanitize_key( $_GET['step'] ) : 'welcome';
 		}
@@ -47,6 +48,16 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 					[ $this, 'tf_wizard_page' ],
 					99
 				);
+			}
+		}
+
+		/**
+		 * Remove all notice in setup wizard page
+		 */
+		public function remove_notice() {
+			if ( isset( $_GET[ 'page' ] ) && $_GET[ 'page' ] == 'tf-setup-wizard' ) {
+				remove_all_actions( 'admin_notices' );
+				remove_all_actions( 'all_admin_notices' );
 			}
 		}
 
