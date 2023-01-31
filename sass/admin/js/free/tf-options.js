@@ -1503,6 +1503,13 @@ var frame, gframe;
             fieldIdValue.select();
             document.execCommand("copy");
         }
+        //show the copied message
+        $(this).parents('.tf-copy-item').append('<div><span class="tf-copied-msg">Copied<span></div>');
+        $("span.tf-copied-msg").animate({ opacity: 0 }, 1000, function(){
+            $(this).slideUp('slow',function(){
+                $(this).remove();
+            });
+        });
     });
 
 

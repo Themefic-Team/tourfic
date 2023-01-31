@@ -844,7 +844,6 @@
         float: none;
         display: flex;
       }
-          
       input.tf-shortcode-value {
           width: 100%;
           height: 45px;
@@ -861,3 +860,9 @@
   }
 }
 }
+.tf-copy-item span.tf-copied-msg{
+  display: flex;
+  justify-content: end;
+  margin-bottom: 9px;
+  padding-right: 10px;
+}  

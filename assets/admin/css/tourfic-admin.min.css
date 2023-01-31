@@ -2214,6 +2214,13 @@ Steps
   vertical-align: middle;
 }
 
+.tf-copy-item span.tf-copied-msg {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 9px;
+  padding-right: 10px;
+}
+
 .tf-field {
   padding: 12px 0;
 }
