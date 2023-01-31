@@ -34,8 +34,8 @@ function tf_documentation_page_integration() {
 		$submenu['edit.php?post_type=tf_tours'][] = array( sprintf(__('Enquiry Details %s(Pro)%s', 'tourfic'), '<span style=color:#ffba00;">', '</span>'), 'edit_tf_tourss', $go_pro_link );
 
 	endif;
-	$submenu['edit.php?post_type=tf_hotel'][] = array( sprintf('<span style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_hotels', $tfhoteldocumentation );
-	$submenu['edit.php?post_type=tf_tours'][] = array( sprintf('<span style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_tourss', $tftourdocumentation );
+	$submenu['edit.php?post_type=tf_hotel'][] = array( sprintf('<span class="tf-go-docs" style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_hotels', $tfhoteldocumentation );
+	$submenu['edit.php?post_type=tf_tours'][] = array( sprintf('<span class="tf-go-docs" style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_tourss', $tftourdocumentation );
 
 }
 

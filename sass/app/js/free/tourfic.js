@@ -1531,7 +1531,6 @@ $('.tf_widget input').on('click',function(){
     $(this).parent().parent().toggleClass('active');
 });
 
-
 })(jQuery, window);
 
 /**
