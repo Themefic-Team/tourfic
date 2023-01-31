@@ -744,7 +744,7 @@ Steps
   border-radius: 20px;
   background-color: #fff;
   text-align: center;
-  min-height: 700px;
+  min-height: 640px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -2119,6 +2119,8 @@ Steps
 @media only screen and (max-width: 640px) {
   .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-sg-row {
     display: flow-root;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-col-lg-6 {
@@ -2129,6 +2131,11 @@ Steps
   padding-right: 15px;
   padding-left: 15px;
   box-sizing: border-box;
+}
+@media only screen and (max-width: 640px) {
+  .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-col-lg-6 {
+    max-width: 100%;
+  }
 }
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form select.tf-select-field[multiple] {
   height: auto;
@@ -2184,6 +2191,13 @@ Steps
   margin-left: 10px;
   line-height: 22px;
   vertical-align: middle;
+}
+
+.tf-copy-item span.tf-copied-msg {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 9px;
+  padding-right: 10px;
 }
 
 .tf-field {
