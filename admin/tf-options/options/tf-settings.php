@@ -1062,7 +1062,7 @@ TF_Settings::option( 'tf_settings', array(
 					'class'    => 'disable-sortable',
 					'type'     => 'repeater',
 					'label'    => __( 'Review Fields for Hotels', 'tourfic' ),
-					'subtitle' => __( 'Maximum 10 fields allowed', 'tourfic' ),
+					'subtitle' => __( 'Add Custom Review Fields', 'tourfic' ),
 					'is_pro'   => true,
 					'max'      => '6',
 					'fields'   => array(
@@ -1098,7 +1098,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'r-tour',
 					'type'     => 'repeater',
 					'label'    => __( 'Review Fields for Tours', 'tourfic' ),
-					'subtitle' => __( 'Maximum 10 fields allowed', 'tourfic' ),
+					'subtitle' => __( 'Add Custom Review Fields', 'tourfic' ),
 					'is_pro'   => true,
 					'max'      => '6',
 					'fields'   => array(
