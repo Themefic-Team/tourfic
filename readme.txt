@@ -847,6 +847,6 @@ Added: Feature image required hotel and tours
 
 == Upgrade Notice ==
 
-= 2.9.0 =
+= 2.9.5 =
 
-This is an important & critical release. Please make sure you BACKUP your website before updating. You need to update the plugin to get next level updates & features of Tourfic. After you update the plugin, please go to "Tourfic Settings" and click the "Save Button". You can then go ahead and start editing.As a the complete upgradation in metaboxes framework has been done in this version so please BACKUP your both database and old version of Tourfic.
+This is an important & critical release. Please make sure you BACKUP your website before updating. You need to update the plugin to get next level updates & features of Tourfic. After you update the plugin, please go to "Tourfic Settings" and click the "Save Button". You can then go ahead and start editing.As a complete revamp of assets  has been done in this version so please BACKUP your both database and old version of Tourfic.
