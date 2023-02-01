@@ -295,14 +295,14 @@ while ( have_posts() ) : the_post();
 						<?php } ?>
                         <!-- End gallery-->
                         <div class="map-for-mobile">
-							<?php if ( function_exists( 'is_tf_pro' ) && ! is_tf_pro() && ( $address ) ) { ?>
+                            <?php if ( !defined( 'TF_PRO' ) && ( $address ) ) { ?>
                                 <div class="show-on-map">
                                     <div class="tf-btn"><a href="https://www.google.com/maps/search/<?php echo $address; ?>" target="_blank" class="btn-styled"><span><i
                                                         class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a></div>
                                 </div>
 							<?php } ?>
                         </div>
-						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( ! empty( $map["address"] ) || ! empty( $map["latitude"] ) || ! empty( $map["longitude"] ) ) ) { ?>
+                        <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( ! empty( $map["address"] ) || (! empty( $map["latitude"] ) && ! empty( $map["longitude"] ) ) ) ) { ?>
                             <div class="popupmap-for-mobile">
                                 <div class="tf-hotel-location-preview show-on-map">
                                     <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&output=embed" width="100%" height="150"
@@ -330,13 +330,13 @@ while ( have_posts() ) : the_post();
 						<?php } ?>
                     </div>
                     <div class="hero-right">
-						<?php if ( function_exists( 'is_tf_pro' ) && ! is_tf_pro() && ( $address ) ) { ?>
+						<?php if ( !defined( 'TF_PRO' ) && ( $address ) ) { ?>
                             <div class="show-on-map">
                                 <div class="tf-btn"><a href="https://www.google.com/maps/search/<?php echo $address; ?>" target="_blank" class="btn-styled"><span><i
                                                     class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a></div>
                             </div>
 						<?php } ?>
-						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( ! empty( $map["address"] ) || ! empty( $map["latitude"] ) || ! empty( $map["longitude"] ) ) ) { ?>
+						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( ! empty( $map["address"] ) || (! empty( $map["latitude"] ) && ! empty( $map["longitude"] ) ) ) ) { ?>
                             <div class="tf-hotel-location-preview show-on-map">
                                 <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&output=embed" width="100%" height="150"
                                         style="border:0;" allowfullscreen="" loading="lazy"></iframe>
@@ -426,7 +426,7 @@ while ( have_posts() ) : the_post();
                         <div class="tf-room-table hotel-room-wrap">
                             <div id="tour_room_details_loader">
                                 <div id="tour-room-details-loader-img">
-                                    <img src="<?php echo TF_ASSETS_URL ?>img/loader.gif" alt="">
+                                    <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
                                 </div>
                             </div>
                             <table class="availability-table">

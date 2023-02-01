@@ -1,9 +1,10 @@
 <?php
-
+// don't load directly
+defined( 'ABSPATH' ) || exit;
 /**
  * Price calculation for single tour
  */
-if(!class_exists('TourPrice')){
+if(!class_exists('Tour_Price')){
     class Tour_Price {
 
         public $meta;
@@ -19,7 +20,7 @@ if(!class_exists('TourPrice')){
         
             # Get discounts
             $discount_type    = !empty($meta['discount_type']) ? $meta['discount_type'] : 'none';
-            $discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : '';
+            $discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : 0;
         
             /**
              * Price calculation based on custom availability
@@ -281,9 +282,9 @@ if(!class_exists('TourPrice')){
                     $wc_infant_price = wc_price($infant_price, array('decimals'=>2));
 
                     if($discount_type == 'percent' || $discount_type == 'fixed') {
-                        $wc_sale_adult_price  = wc_price($sale_adult_price, array('decimals'=>2));
-                        $wc_sale_child_price  = wc_price($sale_child_price, array('decimals'=>2));
-                        $wc_sale_infant_price = wc_price($sale_infant_price, array('decimals'=>2));
+                        $wc_sale_adult_price  = !empty($sale_adult_price) ? wc_price($sale_adult_price, array('decimals'=>2)) : '';
+                        $wc_sale_child_price  = !empty($sale_child_price) ? wc_price($sale_child_price, array('decimals'=>2)) : '';
+                        $wc_sale_infant_price = !empty($sale_infant_price) ? wc_price($sale_infant_price, array('decimals'=>2)) : '';
                     }
         
                 }

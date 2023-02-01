@@ -1,30 +1,6 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-/**
- *	Enqueue frontend scripts
- */
-if ( !function_exists('tourfic_enqueue_scripts') ) {
-	function tourfic_enqueue_scripts(){
-
-		global $detect, $dedicated_mobile;
-
-        $tf_min_css = !empty(tfopt( 'css_min' )) ? '.min' : '';
-		wp_enqueue_style( 'tf-common-style', TF_ASSETS_URL . 'css/common.css', null, '' );
-		if ( get_post_type() == 'tf_hotel' ){
-			wp_enqueue_style( 'tf-hotel-style', TF_ASSETS_URL . 'css/hotel' . $tf_min_css . '.css', null, '' );
-		}
-		if ( get_post_type() == 'tf_tours' ){
-			wp_enqueue_style( 'tf-tour-style', TF_ASSETS_URL . 'css/tour' . $tf_min_css . '.css', null, '' );
-		}
-
-		// Inline script parent
-		wp_register_script( 'tourfic-inline-scripts', '' );
-		wp_enqueue_script( 'tourfic-inline-scripts' );
-	}
-	add_action( 'wp_enqueue_scripts', 'tourfic_enqueue_scripts', 9999 );
-}
-
 /*
  * 
  * CUSTOM CSS
@@ -108,7 +84,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			}
 		'; }
 		
-		wp_add_inline_style( 'tf-common-style', $output );
+		wp_add_inline_style( 'tf-app-style', $output );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'tf_custom_css', 99999 );
@@ -168,7 +144,7 @@ if( !function_exists( 'tf_hotel_css' ) ){
 			.availability-table td, .availability-table td.reserve {border-color: '.$tf_hotel_table_border_color.';}
 		'; }
 		
-		wp_add_inline_style( 'tf-hotel-style', $output );
+		wp_add_inline_style( 'tf-app-style', $output );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'tf_hotel_css', 99999 );
@@ -306,7 +282,7 @@ if( !function_exists( 'tf_tour_css' ) ){
 			}
 		'; }
 		
-		wp_add_inline_style( 'tf-tour-style', $output );
+		wp_add_inline_style( 'tf-app-style', $output );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'tf_tour_css', 99999 );

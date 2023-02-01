@@ -1500,3 +1500,37 @@ function tf_assign_taxonomies( $post_id, $post, $old_status ){
 	
 }
 
+/** 
+ * Generate custom taxonomies select dropdown
+ * @author Abu Hena
+ * @since 2.9.4
+ */
+function tf_terms_dropdown( $term, $attribute, $class, $multiple = false ){
+	
+	//get the terms
+	$terms = get_terms( array(
+		'taxonomy' => $term,
+		'hide_empty' => false,
+	));
+
+	//define if select field would be multiple or not
+	if( $multiple == true ){
+		$multiple = 'multiple';
+	}else{
+		$multiple = "";
+	}
+	$select = '';
+	//output the select field
+	if( !empty( $terms ) && is_array( $terms ) ){
+	$select .=  '<select data-term="'.$attribute.'" name="'.$term.'" class="'.$class.'" '.$multiple.'>';
+		foreach( $terms as $term ){
+			$select .= '<option value="'.$term->term_id.'">'.$term->name.'</option>';
+		}
+		$select .= "</select>";
+	}else{
+		$select .= __( "Invalid taxonomy!!", 'tourfic');
+	}
+	echo $select;
+}
+
+

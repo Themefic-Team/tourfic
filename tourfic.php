@@ -7,11 +7,11 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.9.4
- * Tested up to: 6.1.1
- * WC tested up to: 7.2.3
- * Requires PHP: 7.2
- * Elementor tested up to: 3.10.1
+ * Version:         2.9.5
+ * Tested up to:    6.1.1
+ * WC tested up to: 7.3.0
+ * Requires PHP:    7.2
+ * Elementor tested up to: 3.10.2
  */
 
 // don't load directly
@@ -37,6 +37,8 @@ define( 'TF_URL', plugin_dir_url( __FILE__ ) );
 define( 'TF_TEMPLATES_URL', TF_URL . 'templates/' );
 define( 'TF_ADMIN_URL', TF_URL . 'admin/' );
 define( 'TF_ASSETS_URL', TF_URL . 'assets/' );
+define( 'TF_ASSETS_APP_URL', TF_ASSETS_URL . 'app/' );
+define( 'TF_ASSETS_ADMIN_URL', TF_ASSETS_URL . 'admin/' );
 // Paths
 define( 'TF_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TF_ADMIN_PATH', TF_PATH . 'admin/' );
@@ -56,7 +58,7 @@ if(!class_exists('Appsero\Client')){
  * @since 1.0
  */
 if ( ! defined( 'TOURFIC' ) ) {
-	define( 'TOURFIC', '2.9.4' );
+	define( 'TOURFIC', '2.9.5' );
 }
 
 /**
@@ -68,9 +70,9 @@ if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
 	function tf_enqueue_main_admin_scripts() {
 
         // Custom
-        wp_enqueue_style('tf', TF_ADMIN_URL . 'assets/css/admin.css','', '2.1.0' );
-        wp_enqueue_script( 'tf', TF_ADMIN_URL . 'assets/js/admin.js', array('jquery'), '2.1.0', true );   
-        wp_localize_script( 'tf', 'tf_admin_params',
+        wp_enqueue_style('tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css','', TOURFIC );
+        wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts.min.js', array('jquery', 'wp-data', 'wp-editor', 'wp-edit-post'), TOURFIC, true );
+        wp_localize_script( 'tf-admin', 'tf_admin_params',
             array(
                 'tf_nonce' => wp_create_nonce( 'updates' ),
                 'ajax_url' => admin_url( 'admin-ajax.php' ),
@@ -85,8 +87,11 @@ if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
                 'installed' => __( 'Installed', 'tourfic' ),
                 'activated' => __( 'Activated', 'tourfic' ),
                 'install_failed' => __( 'Install failed', 'tourfic' ),
+                'i18n'    => array(
+	                'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
+                )
             )
-        );    
+        );
     }
     add_action( 'admin_enqueue_scripts', 'tf_enqueue_main_admin_scripts' );
 }
@@ -161,10 +166,6 @@ add_action( 'plugins_loaded', 'tf_load_textdomain' );
 if ( ! function_exists( 'tf_plugin_loaded_action' ) ) {
 	function tf_plugin_loaded_action() {
 
-		/**
-		 * options panel including
-		 * @since 1.0
-		 */
 		if ( file_exists( TF_ADMIN_PATH . 'tf-options/TF_Options.php' ) ) {
 			require_once TF_ADMIN_PATH . 'tf-options/TF_Options.php';
 		} else {

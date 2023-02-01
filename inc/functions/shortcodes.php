@@ -39,7 +39,7 @@ function hotel_locations_shortcode( $atts, $content = null ) {
 				<?php foreach ( $locations as $term ) {
 
 					$meta      = get_term_meta( $term->term_id, 'tf_hotel_location', true );
-					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : TF_ASSETS_URL . 'img/img-not-available.svg';
+					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : TF_ASSETS_APP_URL . 'images/img-not-available.svg';
 					$term_link = get_term_link( $term ); ?>
 
                     <div class="single_recomended_item">
@@ -109,7 +109,7 @@ function shortcode_tour_destinations( $atts, $content = null ) {
 				<?php foreach ( $destinations as $term ) {
 
 					$meta      = get_term_meta( $term->term_id, 'tf_tour_destination', true );
-					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : TF_ASSETS_URL . 'img/img-not-available.svg';
+					$image_url = ! empty( $meta['image'] ) ? $meta['image'] : TF_ASSETS_APP_URL . 'images/img-not-available.svg';
 					$term_link = get_term_link( $term );
 
 					if ( is_wp_error( $term_link ) ) {
@@ -147,6 +147,8 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 			array(
 				'title'        => '',  //title populer section
 				'subtitle'     => '',   // Sub title populer section
+				'orderby'        => 'date',
+				'order'        => 'DESC',
 				'count'        => 10,
 				'slidestoshow' => 5,
 			),
@@ -157,8 +159,8 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 	$args = array(
 		'post_type'      => 'tf_hotel',
 		'post_status'    => 'publish',
-		'orderby'        => 'date',
-		'order'          => 'DESC',
+		'orderby'        => $orderby,
+		'order'          => $order,
 		'posts_per_page' => $count,
 	);
 
@@ -252,6 +254,8 @@ function tf_recent_tour_shortcode( $atts, $content = null ) {
 			array(
 				'title'        => '',  //title populer section
 				'subtitle'     => '',   // Sub title populer section
+				'orderby'        => 'date',
+				'order'        => 'DESC',
 				'count'        => 10,
 				'slidestoshow' => 5,
 			),
@@ -362,16 +366,23 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 	<?php tourfic_fullwidth_container_start( $fullwidth ); ?>
     <div id="tf-booking-search-tabs">
 
+		<?php if ( $title ): ?>
+			<div class="tf_widget-title"><h2><?php echo esc_html( $title ); ?></h2></div>
+		<?php endif; ?>
+
+		<?php if ( $subtitle ): ?>
+			<div class="tf_widget-subtitle"><p><?php echo esc_html( $subtitle ); ?></p></div>
+		<?php endif; ?>
         <!-- Booking Form Tabs -->
         <div class="tf-booking-form-tab">
 			<?php do_action( 'tf_before_booking_form_tab', $type ) ?>
 
 			<?php if ( ! in_array( 'hotel', $disable_services ) && tf_is_search_form_tab_type( 'hotel', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                <button class="tf-tablinks active" onclick="tfOpenForm(event, 'tf-hotel-booking-form')"><?php _e( 'Hotel', 'tourfic' ); ?></button>
+                <button class="tf-tablinks active" data-form-id="tf-hotel-booking-form"><?php _e( 'Hotel', 'tourfic' ); ?></button>
 			<?php endif; ?>
 
 			<?php if ( ! in_array( 'tour', $disable_services ) && tf_is_search_form_tab_type( 'tour', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-tour-booking-form')"><?php _e( 'Tour', 'tourfic' ); ?></button>
+                <button class="tf-tablinks" data-form-id="tf-tour-booking-form"><?php _e( 'Tour', 'tourfic' ); ?></button>
 			<?php endif ?>
 
 			<?php do_action( 'tf_after_booking_form_tab', $type ) ?>
@@ -660,7 +671,6 @@ function tf_reviews_shortcode($atts, $content = null){
 				'arrows' => 'false',
 				'dots' => 'true',
 				'autoplay' => 'false',
-				'slidesToShow' => '3',
 				'slidesToScroll' => 1,
 				'infinite' => 'false',
 			),

@@ -372,13 +372,6 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
         ?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
 
-        <?php if( $title ) { ?>
-            <div class="tf_widget-title"><h2><?php esc_html_e( $title ); ?></h2></div>
-        <?php } ?>
-
-        <?php if( $subtitle ) { ?>
-            <div class="tf_widget-subtitle"><?php esc_html_e( $subtitle ); ?></div>
-        <?php } ?>
 
             <div class="tf_homepage-booking">
                 <div class="tf_destination-wrap">
@@ -494,14 +487,6 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
 
         ?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
-
-        <?php if( $title ) { ?>
-            <div class="tf_widget-title"><h2><?php esc_html_e( $title ); ?></h2></div>
-        <?php } ?>
-
-        <?php if( $subtitle ) { ?>
-            <div class="tf_widget-subtitle"><?php esc_html_e( $subtitle ); ?></div>
-        <?php } ?>
 
             <div class="tf_homepage-booking">
                 <div class="tf_destination-wrap">
@@ -1081,7 +1066,7 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
                 if (has_post_thumbnail()) {
 					the_post_thumbnail( 'full' );
 				} else {
-                    echo '<img width="100%" height="100%" src="' .TF_ASSETS_URL . "img/img-not-available.svg". '" class="attachment-full size-full wp-post-image">';
+                    echo '<img width="100%" height="100%" src="' .TF_ASSETS_APP_URL . "images/img-not-available.svg". '" class="attachment-full size-full wp-post-image">';
                 }
                 ?>
                 </a>
@@ -1156,7 +1141,6 @@ if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-tour.php' ) ) {
  * @param array      $data      user input for sidebar form
  */
 function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, array $data = [] ): void {
-    
     if(isset($data[3]) && isset($data[4])){
         [$adults, $child, $check_in_out, $startprice, $endprice] = $data;
     }else{
@@ -1168,7 +1152,7 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
     // Set initial tour availability status
     $has_tour = false;
 
-    if ( $meta['type'] === 'fixed' ) {
+    if ( !empty($meta['type'] ) && $meta['type'] === 'fixed' ) {
 
         if( !empty($meta['fixed_availability']) && gettype($meta['fixed_availability'])=="string" ){
             $tf_tour_unserial_fixed_date = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
@@ -1216,7 +1200,7 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
 
     }
 
-    if ( $meta['type'] === 'continuous' ) {
+    if ( !empty($meta['type'] ) && $meta['type'] === 'continuous' ) {
 
         $custom_availability = !empty($meta['custom_avail']) ? $meta['custom_avail'] : false;
 

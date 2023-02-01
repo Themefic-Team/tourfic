@@ -7,9 +7,6 @@ if ( file_exists( TF_ADMIN_PATH . 'tf-options/options/tf-menu-icon.php' ) ) {
 } else {
 	$menu_icon = 'dashicons-palmtree';
 }
-function tf_tours_for_select2() {
-
-}
 
 TF_Settings::option( 'tf_settings', array(
 	'title'    => __( 'Tourfic Settings ', 'tourfic' ),
@@ -102,16 +99,16 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		// Partial Payment Popup
+		// Hotel service Popup
 		'payment_popup'      => array(
-			'title'  => esc_html__( 'Partial Payment Popup', 'tourfic' ),
+			'title'  => esc_html__( 'Hotel Service Popup', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
 					'id'    => 'hotel_popup_heading',
 					'type'  => 'heading',
-					'label' => __( 'Hotel service popup texts', 'tourfic' ),
+					'label' => __( 'Hotel Service Popup texts', 'tourfic' ),
 				),
 				array(
 					'id'      => '',
@@ -132,7 +129,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => '',
 					'type'    => 'text',
-					'label'   => __( 'Popup action', 'tourfic' ),
+					'label'   => __( 'Popup Action', 'tourfic' ),
 					'default' => __( 'Continue to booking', 'tourfic' ),
 					'is_pro'  => true,
 				)
@@ -1065,7 +1062,7 @@ TF_Settings::option( 'tf_settings', array(
 					'class'    => 'disable-sortable',
 					'type'     => 'repeater',
 					'label'    => __( 'Review Fields for Hotels', 'tourfic' ),
-					'subtitle' => __( 'Maximum 10 fields allowed', 'tourfic' ),
+					'subtitle' => __( 'Add Custom Review Fields', 'tourfic' ),
 					'is_pro'   => true,
 					'max'      => '6',
 					'fields'   => array(
@@ -1101,7 +1098,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'r-tour',
 					'type'     => 'repeater',
 					'label'    => __( 'Review Fields for Tours', 'tourfic' ),
-					'subtitle' => __( 'Maximum 10 fields allowed', 'tourfic' ),
+					'subtitle' => __( 'Add Custom Review Fields', 'tourfic' ),
 					'is_pro'   => true,
 					'max'      => '6',
 					'fields'   => array(

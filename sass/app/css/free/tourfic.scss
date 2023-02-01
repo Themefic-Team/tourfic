@@ -1,0 +1,14 @@
+//global css
+@import '../../../common/css/variable';
+@import '../../../common/css/mixin';
+@import 'global/global';
+@import 'global/common';
+@import 'global/search-result';
+@import 'global/shortcode';
+
+//hotel css
+@import 'hotel/hotel';
+
+//tour css
+@import 'tour/tour';
+

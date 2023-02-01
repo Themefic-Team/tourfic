@@ -45,7 +45,15 @@ while ( have_posts() ) : the_post();
 	$has_in_wishlist = tf_has_item_in_wishlist( $post_id );
 
 	// Address
-	$location      = isset( $meta['location']['address'] ) ? $meta['location']['address'] : '';
+
+	if( !empty($meta['location']) && gettype($meta['location'])=="string" ){
+        $tf_tours_adv_loction = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+        }, $meta['location'] );
+        $tf_tour_loctions = unserialize( $tf_tours_adv_loction );
+		$location      = isset( $tf_tour_loctions['address'] ) ? $tf_tour_loctions['address'] : '';
+    }
+
 	$text_location = isset( $meta['text_location'] ) ? $meta['text_location'] : '';
 	if ( empty( $location ) ) {
 		$location = $text_location;
