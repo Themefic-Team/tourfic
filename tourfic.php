@@ -9,9 +9,9 @@
  * Domain Path:     /lang/
  * Version:         2.9.5
  * Tested up to:    6.1.1
- * WC tested up to: 7.2.3
+ * WC tested up to: 7.3.0
  * Requires PHP:    7.2
- * Elementor tested up to: 3.10.1
+ * Elementor tested up to: 3.10.2
  */
 
 // don't load directly
@@ -58,7 +58,7 @@ if(!class_exists('Appsero\Client')){
  * @since 1.0
  */
 if ( ! defined( 'TOURFIC' ) ) {
-	define( 'TOURFIC', '2.9.4' );
+	define( 'TOURFIC', '2.9.5' );
 }
 
 /**
