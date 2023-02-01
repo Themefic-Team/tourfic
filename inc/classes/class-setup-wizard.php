@@ -70,7 +70,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                 <div class="tf-setup-container">
                     <div class="tf-setup-header">
                         <div class="tf-setup-header-left">
-                            <a href="<?php echo esc_url( admin_url( 'admin.php?page=tf_settings' ) ); ?>" class="tf-admin-btn tf-btn-secondary back-to-dashboard"><span><?php _e( 'Back to dashboard', 'tourfic' ) ?></span></a>
+                            <a href="<?php echo esc_url( admin_url( 'admin.php?page=tf_settings' ) ); ?>" class="tf-admin-btn tf-btn-secondary back-to-dashboard"><span><?php _e( 'Back to Dashboard', 'tourfic' ) ?></span></a>
                         </div>
                         <div class="tf-setup-header-right">
                             <span class="get-help-link"><?php _e('Having troubles?', 'tourfic') ?> <a class="" target="_blank" href="https://portal.themefic.com/support/"><?php _e('Get help', 'torufic') ?></a></span>
@@ -100,10 +100,10 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
             <div class="tf-setup-content-layout tf-welcome-step <?php echo self::$current_step == 'welcome' ? 'active' : ''; ?>">
                 <div class="welcome-img"><img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/welcome.png' ?>" alt="<?php esc_attr_e( 'Welcome to Tourfic!', 'tourfic' ) ?>"></div>
                 <h1 class="tf-setup-welcome-title"><?php _e( 'Welcome to Tourfic!', 'tourfic' ) ?></h1>
-                <div class="tf-setup-welcome-description"><?php _e( 'Thanks for choosing Tourfic for your travel business. We are excited to have you on board. This quick setup wizard will help you configure the basic settings. It’s completely optional and shouldn’t take longer than five minutes.', 'tourfic' ) ?></div>
+                <div class="tf-setup-welcome-description"><?php _e( 'Thanks for choosing Tourfic for your travel/hotel business. We are excited to have you on board. This quick setup wizard is simple and straightforward and shouldn’t take longer than five minutes. It will help you configure the basic settings of Tourfic to get started. Please note that this setup guide is entirely optional.', 'tourfic' ) ?></div>
                 <div class="tf-setup-welcome-footer">
                     <button type="button" class="tf-admin-btn tf-btn-secondary tf-setup-start-btn"><span><?php _e( 'Get Started', 'tourfic' ) ?></span></button>
-                    <a href="<?php echo esc_url( admin_url( 'admin.php?page=tf_settings' ) ); ?>" class="tf-link-btn"><?php _e( 'Skip to dashboard', 'tourfic' ) ?></a>
+                    <a href="<?php echo esc_url( admin_url( 'admin.php?page=tf_settings' ) ); ?>" class="tf-link-btn"><?php _e( 'Skip to Dashboard', 'tourfic' ) ?></a>
                 </div>
             </div>
 			<?php
@@ -117,7 +117,8 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
             <div class="tf-setup-step-container tf-setup-step-1 <?php echo self::$current_step == 'step_1' ? 'active' : ''; ?>" data-step="1">
                 <section class="tf-setup-step-layout">
 					<?php $this->tf_setup_wizard_steps_header() ?>
-                    <h1 class="tf-setup-step-title"><?php _e( 'Select your services', 'tourfic' ) ?></h1>
+                    <h1 class="tf-setup-step-title"><?php _e( 'Select your service type', 'tourfic' ) ?></h1>
+                    <p class="tf-setup-step-desc"><?php _e( '(You can choose any one or both)', 'tourfic' ) ?></p>
                     <ul class="tf-select-service">
                         <li>
                             <input type="checkbox" id="tf-hotel" name="tf-services[]" value="hotel" checked/>
@@ -154,7 +155,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
             <div class="tf-setup-step-container tf-setup-step-2 <?php echo self::$current_step == 'step_2' ? 'active' : ''; ?>" data-step="2">
                 <section class="tf-setup-step-layout">
 					<?php $this->tf_setup_wizard_steps_header( 2 ) ?>
-                    <h1 class="tf-setup-step-title"><?php _e( 'Tourfic Settings', 'tourfic' ) ?></h1>
+                    <h1 class="tf-setup-step-title"><?php _e( 'General Settings', 'tourfic' ) ?></h1>
                     <div class="tf-setup-form-item">
                         <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Select Search Result Page', 'tourfic' ) ?></label></div>
                         <div class="tf-setup-form-item-input">
@@ -173,7 +174,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 
                     <!--Search result posts per page-->
                     <div class="tf-setup-form-item">
-                        <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Search Result Posts Per Page', 'tourfic' ) ?></label></div>
+                        <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Posts Per Page on Search Result', 'tourfic' ) ?></label></div>
                         <div class="tf-setup-form-item-input">
                             <input type="number" name="tf-search-result-posts-per-page" id="tf-search-result-posts-per-page" value="10">
                         </div>
@@ -229,6 +230,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 					<?php $this->tf_setup_wizard_steps_header( 3 ) ?>
                     <div class="tf-hotel-setup-wizard">
                         <h3 class="tf-setup-step-subtitle"><?php _e( 'Hotel settings', 'tourfic' ) ?></h3>
+                        <p class="tf-setup-step-desc"><?php _e( 'These settings can be overridden from <strong>Tourfic Settings > Hotel Settings</strong>', 'tourfic' ) ?></p>
 
                         <!--Review Section-->
                         <div class="tf-setup-form-item">
@@ -263,6 +265,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 
                     <div class="tf-tour-setup-wizard">
                         <h3 class="tf-setup-step-subtitle"><?php _e( 'Tour settings', 'tourfic' ) ?></h3>
+                        <p class="tf-setup-step-desc"><?php _e( 'These settings can be overridden from <strong>Tourfic Settings > Tour Settings</strong>', 'tourfic' ) ?></p>
 
                         <!--Review Section-->
                         <div class="tf-setup-form-item">
@@ -313,9 +316,9 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
         private function tf_setup_finish_step() {
             ?>
             <div class="tf-setup-content-layout tf-finish-step <?php echo self::$current_step == 'finish' ? 'active' : ''; ?>">
-                <div class="welcome-img"><img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/welcome.png' ?>" alt="<?php esc_attr_e( 'Thank you', 'tourfic' ) ?>"></div>
-                <h1 class="tf-setup-welcome-title"><?php _e( 'Congratulations! You’re all set.', 'tourfic' ) ?></h1>
-                <div class="tf-setup-welcome-description"><?php _e( 'Thanks for choosing Tourfic for your travel business. We are excited to have you on board. This quick setup wizard will help you configure the basic settings. It’s completely optional and shouldn’t take longer than five minutes.', 'tourfic' ) ?></div>
+                <div class="welcome-img"><img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/hooray.png' ?>" alt="<?php esc_attr_e( 'Thank you', 'tourfic' ) ?>"></div>
+                <h1 class="tf-setup-welcome-title"><?php _e( 'Hooray! You’re all set.', 'tourfic' ) ?></h1>
+                <div class="tf-setup-welcome-description"><?php _e( 'Let\'s get started and make the most out of Tourfic. With this plugin, you can manage your hotel or travel bookings with ease, and provide your customers with a seamless booking experience. So, let\'s dive in and start streamlining your hotel or travel business operations today!', 'tourfic' ) ?></div>
                 <div class="tf-setup-welcome-footer tf-setup-finish-footer">
                     <a href="<?php echo admin_url( 'post-new.php?post_type=tf_hotel' ) ?>" class="tf-admin-btn tf-btn-secondary"><?php _e( 'Create new Hotel', 'tourfic' ) ?></a>
                     <a href="<?php echo admin_url( 'post-new.php?post_type=tf_tours' ) ?>" class="tf-admin-btn"><?php _e( 'Create new Tour', 'tourfic' ) ?></a>

@@ -5,6 +5,7 @@ Button
   display: inline-flex;
   @include align-items(center);
   background-color: #fff;
+  color: #003c79;
   padding: 10px 25px;
   border: 1px solid #003c79;
   border-radius: 4px;
@@ -19,11 +20,22 @@ Button
     font-size: 18px;
   }
 
+  &:hover {
+    background-color: #003c79;
+    color: #fff;
+  }
+
   &.tf-btn-secondary {
     background-color: #003c79;
     border-color: #003c79;
     color: #fff;
     font-weight: 600;
+
+    &:hover {
+      background-color: #001f3e;
+      border-color: #001f3e;
+      color: #fff;
+    }
   }
 
   //disabled

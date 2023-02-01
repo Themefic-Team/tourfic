@@ -21,6 +21,7 @@ body.admin_page_tf-setup-wizard {
   max-width: 900px;
   margin: auto;
   width: calc(100% - 40px);
+  padding-top: 30px;
 }
 
 .tf-setup-header {
@@ -291,6 +292,11 @@ Steps
     }
   }
 
+  .tf-setup-step-desc{
+    margin: 0 0 15px;
+    font-size: 16px;
+  }
+
   .tf-select-service {
     @include flexbox();
     @include justify-content(center);
@@ -443,6 +449,8 @@ Steps
         background-color: #fff;
         transition: all .3s;
         outline: none;
+        min-width: 200px;
+        max-width: 200px;
       }
     }
 
@@ -497,6 +505,12 @@ Steps
 
   .tf-setup-step-description {
     margin-bottom: 30px;
+  }
+
+  &.tf-setup-step-3{
+    .tf-setup-step-desc{
+      text-align: left;
+    }
   }
 
   /*
