@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet, fida02
 Tags: travel, tour, trip, hotel, tour-booking, hotel-booking, travel-booking, trip-booking, woocommerce hotel, woocommerce tour, woocommerce travel, wordpress travel, wordpress hotel, wordpress tour plugin, woocommerce tour booking, woocommerce travel booking plugin, woocommerce hotel booking, wordpress tour booking plugin, travel booking wordpress plugin, wordpress hotel booking plugin, wp hotel booking, hotel booking plugin, woocommerce accommodation bookings, woocommerce hotel booking, wordpress room booking plugin, best hotel booking plugin wordpress, hotel plugin, hotel plugin wordpress, tour booking, travel booking, trip booking, hotel booking, tour itinerary, tour operator, travel agency, tour reservation, hotel reservation, airbnb, booking.com, agoda.com, agoda,  wp travel engine, wp travel, wp hotel
 Requires at least: 5.4
 Tested up to: 6.1.1
-Stable tag: 2.9.4
+Stable tag: 2.9.5
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -408,6 +408,26 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 25. Tour Option Panel
 
 == Changelog ==
+
+= 2.9.5 -  01 Februray 2023 =
+
+Added: Shortcode generator
+Added: Quick setup wizard
+Fixed: Deprecated variable issue
+Fixed: Undefined index of Hotel search page
+Fixed: Hotel and Tour Map issue
+Fixed: Hotel Service empty price
+Fixed: Checkout Page Warning
+Fixed: Review Slider dots overlap design
+Fixed: Tour Deposit Warning(pro)
+Fixed: Tour Pricing Warning
+Fixed: Tour, hotel image popup
+Fixed: Short-code Design
+Updated: Admin Hotel Popup label 
+Updated: Hotel and tours review subtitle
+Improvement: Filter checkbox CSS(pro)
+Improvement: Changed assets folder structure
+Improvement: TF Search and TF Wishlist page auto creation
 
 = 2.9.4 -  25 January 2023 =
 
