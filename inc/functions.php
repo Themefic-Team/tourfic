@@ -1540,6 +1540,9 @@ function tf_terms_dropdown( $term, $attribute, $class, $multiple = false ){
  */
 add_filter( 'woocommerce_cart_item_subtotal', 'tf_remove_icon_add_to_order_item', 10, 3 );
 function tf_remove_icon_add_to_order_item( $subtotal, $cart_item, $cart_item_key ){
+	if(!is_checkout()) {
+        return $subtotal;
+	}
 	$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
 	$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
     ?>
