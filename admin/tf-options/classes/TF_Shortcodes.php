@@ -537,7 +537,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Style', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="style=default"><?php _e( 'Default', 'tourfic' ); ?></option>
+                                                <option value="style='default'"><?php _e( 'Default', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>                             
@@ -550,6 +550,9 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                                 <option value="type='all'"><?php _e( 'All', 'tourfic' ); ?></option>
                                                 <option value="type='hotel'"><?php _e( 'Hotel', 'tourfic' ); ?></option>
                                                 <option value="type='tour'"><?php _e( 'Tour', 'tourfic' ); ?></option>
+                                                <option value="type='booking'"><?php _e( 'Booking', 'tourfic' ); ?></option>
+                                                <option value="type='tp-hotel'"><?php _e( 'Travel Payout Hotels', 'tourfic' ); ?></option>
+                                                <option value="type='tp-flight'"><?php _e( 'Travel Payout Flights', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>      
