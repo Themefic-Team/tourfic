@@ -13,10 +13,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 		public function __construct( $key, $params = array() ) {
 			$this->option_id       = $key;
-			$this->option_title    = ! empty( $params['title'] ) ? $params['title'] : '';
-			$this->option_icon     = ! empty( $params['icon'] ) ? $params['icon'] : '';
-			$this->option_position = ! empty( $params['position'] ) ? $params['position'] : 5;
-			$this->option_sections = ! empty( $params['sections'] ) ? $params['sections'] : array();
+			$this->option_title    = ! empty( $params['title'] ) ? apply_filters( $key . '_title', $params['title'] ) : '';
+			$this->option_icon     = ! empty( $params['icon'] ) ? apply_filters( $key . '_icon', $params['icon'] ) : '';
+			$this->option_position = ! empty( $params['position'] ) ? apply_filters( $key . '_position', $params['position'] ) : 5;
+			$this->option_sections = ! empty( $params['sections'] ) ? apply_filters( $key . '_sections', $params['sections'] ) : array();
 
 			// run only is admin panel options, avoid performance loss
 			$this->pre_tabs     = $this->pre_tabs( $this->option_sections );
