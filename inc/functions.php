@@ -694,7 +694,7 @@ function tf_search_result_ajax_sidebar() {
 	$checkin    = isset( $_POST['checkin'] ) ? trim( $_POST['checkin'] ) : array();
 	$startprice = ! empty( $_POST['startprice'] ) ? $_POST['startprice'] : '';
 	$endprice   = ! empty( $_POST['endprice'] ) ? $_POST['endprice'] : '';
-	
+
 	if( !empty( $checkin ) ){
 		list( $tf_form_start, $tf_form_end ) = explode( ' - ', $checkin );
 	}
@@ -891,7 +891,7 @@ function tf_search_result_ajax_sidebar() {
 	}
 
 	$loop = new WP_Query( $args );
-	
+
 	//get total posts count
 	$total_posts = $loop->found_posts;
 	if ( $loop->have_posts() ) {
@@ -1163,7 +1163,7 @@ function tf_migrate_option_data(){
 			$old_meta = get_post_meta( $tour->ID );
 			if(!empty($old_meta['tf_tours_option'])){
 				$tour_options         = unserialize( $old_meta['tf_tours_option'][0] );
-	
+
 				if(isset($tour_options['hightlights_thumbnail']) && is_array($tour_options['hightlights_thumbnail'])){
 					$tour_options['hightlights_thumbnail'] = $tour_options['hightlights_thumbnail']['url'];
 				}
@@ -1209,7 +1209,7 @@ function tf_migrate_option_data(){
 			$old_meta = get_post_meta( $hotel->ID );
 			if(!empty($old_meta['tf_hotel'])){
 				$hotel_options         = unserialize( $old_meta['tf_hotel'][0] );
-			
+
 
 				// $tour_options = serialize( $tour_options );
 				update_post_meta(
@@ -1291,7 +1291,7 @@ function tf_migrate_option_data(){
 	if ( empty( get_option( 'tf_license_data_migrate_data_204_210_2022' ) ) ) {
 
 		/** License Migrate */
-		
+
 		$old_setting_option = get_option( 'tourfic_opt' );
 		if(!empty($old_setting_option['license-key']) && !empty($old_setting_option['license-email'])){
 			$tf_settings['license-key']   = $old_setting_option['license-key'];
@@ -1303,7 +1303,7 @@ function tf_migrate_option_data(){
 			$tf_settings['license-email'] = !empty($tf_setting_option['license-email']) ? $tf_setting_option['license-email'] : '';
 			update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
 		}
-		
+
 		wp_cache_flush();
 		flush_rewrite_rules( true );
 		update_option( 'tf_license_data_migrate_data_204_210_2022', 2 );
@@ -1416,7 +1416,7 @@ function tf_save_custom_fields(){
         update_option( 'hotel_slug',  $_POST['hotel_slug'] );
     }
 
-	
+
 }
 add_action( 'admin_init', 'tf_save_custom_fields' );
 
@@ -1432,7 +1432,7 @@ add_action( 'wp_ajax_tf_month_reports', 'tf_month_chart_filter_callback' );
 function tf_month_chart_filter_callback(){
 	$search_month = sanitize_key( $_POST['month'] );
 	$month_dates = cal_days_in_month( CAL_GREGORIAN, $search_month, date('Y') );
-	
+
 	//Order Data Retrive
 	$tf_old_order_limit = new WC_Order_Query( array (
 		'limit' => -1,
@@ -1450,7 +1450,7 @@ function tf_month_chart_filter_callback(){
 		// Booking Cancel Month
 		${"tf_cr$i"} = 0;
 	}
-	
+
 	foreach ( $order as $item_id => $item ) {
 		$itemmeta = wc_get_order( $item);
 		$tf_ordering_date =  $itemmeta->get_date_created();
@@ -1497,16 +1497,16 @@ function tf_assign_taxonomies( $post_id, $post, $old_status ){
 		$features = array_map( 'intval',$meta['features']);
 		wp_set_object_terms( $post_id, $features, 'tour_features',true );
 	}
-	
+
 }
 
-/** 
+/**
  * Generate custom taxonomies select dropdown
  * @author Abu Hena
  * @since 2.9.4
  */
 function tf_terms_dropdown( $term, $attribute, $class, $multiple = false ){
-	
+
 	//get the terms
 	$terms = get_terms( array(
 		'taxonomy' => $term,
@@ -1533,4 +1533,46 @@ function tf_terms_dropdown( $term, $attribute, $class, $multiple = false ){
 	echo $select;
 }
 
+/**
+ * Remove icon add to order item
+ * @since 2.9.6
+ * @author Foysal
+ */
+add_filter( 'woocommerce_cart_item_subtotal', 'tf_remove_icon_add_to_order_item', 10, 3 );
+function tf_remove_icon_add_to_order_item( $subtotal, $cart_item, $cart_item_key ){
+	$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+	$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
+    ?>
+    <div class="tf-product-total">
+        <?php echo $subtotal; ?>
+        <?php
+        echo sprintf(
+		        '<a href="#" class="remove remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s">&times;</a>',
+//		        esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
+		        esc_attr__( 'Remove this item', 'woocommerce' ),
+		        esc_attr( $product_id ),
+		        esc_attr( $cart_item_key ),
+		        esc_attr( $_product->get_sku() )
+	        );
+        ?>
+    </div>
+    <?php
+}
 
+/**
+ * Remove cart item from checkout page
+ * @since 2.9.6
+ * @author Foysal
+ */
+add_action( 'wp_ajax_tf_checkout_cart_item_remove', 'tf_checkout_cart_item_remove' );
+add_action( 'wp_ajax_nopriv_tf_checkout_cart_item_remove', 'tf_checkout_cart_item_remove' );
+function tf_checkout_cart_item_remove() {
+	if ( isset( $_POST['cart_item_key'] ) ) {
+		$cart_item_key = sanitize_key( $_POST['cart_item_key'] );
+
+		// Remove cart item
+		WC()->cart->remove_cart_item( $cart_item_key );
+	}
+
+	die();
+}
