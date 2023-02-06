@@ -427,10 +427,16 @@
             var checkin = checkedArr[0];
             var checkout = checkedArr[1];
             var posttype = $('.tf-post-type').val();
-            console.log(tf_params.date_hotel_search)
-            console.log(posttype)
 
             if ($.trim(checkin) === '' && tf_params.date_hotel_search && posttype === 'tf_hotel') {
+
+                if ($('#tf-required').length === 0) {
+                    $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
+                }
+                return;
+            }
+
+            if ($.trim(checkin) === '' && tf_params.date_tour_search && posttype === 'tf_tours') {
 
                 if ($('#tf-required').length === 0) {
                     $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');

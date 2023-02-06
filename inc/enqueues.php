@@ -335,7 +335,8 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'elevvationmode' => isset($elevvationmode) ? $elevvationmode : '',
                 'showitinerarychart' => isset($showitinerarychart) ? $showitinerarychart : '',
                 'showitinerarystatus' => isset($showitinerarystatus) ? $showitinerarystatus : '',
-	            'date_hotel_search' => tfopt( 'date_hotel_search' )
+	            'date_hotel_search' => tfopt( 'date_hotel_search' ),
+	            'date_tour_search' => tfopt( 'date_tour_search' )
             )
         );
         //wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/old/responsive.css', '', TOURFIC );
