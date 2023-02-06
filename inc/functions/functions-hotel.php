@@ -2249,10 +2249,17 @@ if ( ! function_exists( 'tf_hotel_search_ajax_callback' ) ) {
 			$response['message'] = esc_html__( 'Please select check in and check out date', 'tourfic' );
 		}
 
-		if ( ! empty( $_POST['place'] ) && ! empty( $_POST['check-in-out-date'] ) ) {
-			$response['query_string'] = str_replace( '&action=tf_hotel_search', '', http_build_query( $_POST ) );
-			$response['status']       = 'success';
-		}
+        if(tfopt( 'date_hotel_search' )){
+	        if ( ! empty( $_POST['place'] ) && ! empty( $_POST['check-in-out-date'] ) ) {
+		        $response['query_string'] = str_replace( '&action=tf_hotel_search', '', http_build_query( $_POST ) );
+		        $response['status']       = 'success';
+	        }
+        } else {
+            if ( ! empty( $_POST['place'] ) ) {
+                $response['query_string'] = str_replace( '&action=tf_hotel_search', '', http_build_query( $_POST ) );
+                $response['status']       = 'success';
+            }
+        }
 
 		echo json_encode( $response );
 		wp_die();
