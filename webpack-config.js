@@ -25,7 +25,7 @@ const js = {
         'admin/js/tourfic-admin-scripts.min': glob.sync('./sass/admin/js/free/*.js'),
     },
     output: {
-        path: path.resolve(__dirname, './assets'),
+        path: path.resolve(__dirname, './assets/'),
         filename: '[name].js',
         clean: false
     }
