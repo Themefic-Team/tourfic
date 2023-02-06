@@ -1,5 +1,5 @@
 const path = require('path');
-// const defaultConfig = require('@wordpress/scripts/config/webpack.config');
+const defaultConfig = require('@wordpress/scripts/config/webpack.config');
 const glob = require('glob');
 const entryPoints = {};
 
@@ -16,39 +16,41 @@ entryPoints['tourfic/assets/admin/js/tourfic-admin-scripts.min'] = freeAdminJs;
 entryPoints['tourfic-pro/assets/app/js/tourfic-pro'] = proAppJs;
 entryPoints['tourfic-pro/assets/admin/js/tourfic-pro-admin'] = proAdminJs;
 
-//scss entry points
-// const appScss = glob.sync('./sass/app/css/tourfic.scss');
-// const adminScss = glob.sync('./sass/admin/css/tourfic-admin.scss');
-//
-// entryPoints['app/css/tourfic-style'] = appScss;
-// entryPoints['admin/css/tourfic-admin'] = adminScss;
 
-const config = {
-    // ...defaultConfig,
-    entry: entryPoints,
-
+const js = {
+    ...defaultConfig,
+    entry: {
+        'app/js/tourfic-scripts': glob.sync('./sass/app/js/free/*.js'),
+        'app/js/tourfic-scripts.min': glob.sync('./sass/app/js/free/*.js'),
+        'admin/js/tourfic-admin-scripts.min': glob.sync('./sass/admin/js/free/*.js'),
+    },
     output: {
-        path: path.resolve(__dirname, '../'),
+        path: path.resolve(__dirname, './assets'),
         filename: '[name].js',
         clean: false
-    },
-
-    /*module: {
-        rules: [
-            {
-                test: /\.s[ac]ss$/i,
-                use: [
-                    // Creates `style` nodes from JS strings
-                    'style-loader',
-                    // Translates CSS into CommonJS
-                    'css-loader',
-                    // Compiles Sass to CSS
-                    'sass-loader',
-                ],
-            },
-        ],
-    }*/
+    }
 }
 
-// Export the config object.
-module.exports = config;
+const scss = {
+    ...defaultConfig,
+    entry: {
+        'widgets': './resources/sass/widgets.scss',
+        'app': './resources/sass/app.scss',
+    },
+    output: {
+        path: path.resolve(__dirname, './assets/css/'),
+        clean: false
+    },
+    module: {
+        ...defaultConfig.module,
+        rules: [
+            ...defaultConfig.module.rules,
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
+        ],
+    }
+};
+
+module.exports = [js];
