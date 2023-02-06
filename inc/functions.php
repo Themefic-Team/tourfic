@@ -510,7 +510,6 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
         </div>
 
     </form>
-
     <script>
         (function ($) {
             $(document).ready(function () {
@@ -1532,5 +1531,3 @@ function tf_terms_dropdown( $term, $attribute, $class, $multiple = false ){
 	}
 	echo $select;
 }
-
-

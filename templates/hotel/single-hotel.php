@@ -470,7 +470,13 @@ while ( have_posts() ) : the_post();
 												} else {
 													$price = ! empty( $range_price[0] ) ? wc_price( $range_price[0] ) : wc_price( 0 );
 												}
-											}
+											}else{
+                                                if ( $pricing_by == '1' ) {
+                                                    $price = wc_price( ! empty( $room['price'] ) ? $room['price'] : '0.0' );
+                                                } else {
+                                                    $price = wc_price( ! empty( $room['adult_price'] ) ? $room['adult_price'] : '0.0' );
+                                                }
+                                            }
 										} else {
 											if ( $pricing_by == '1' ) {
 												$price = wc_price( ! empty( $room['price'] ) ? $room['price'] : '0.0' );

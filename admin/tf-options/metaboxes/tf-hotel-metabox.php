@@ -347,6 +347,20 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 									'is_pro'   => true,
 								),
 
+								//Disable specific dates within this date range
+								array(
+									'id'         => '',
+									'type'       => 'date',
+									'label'      => __( 'Disable Specific Dates', 'tourfic' ),
+									'is_pro'     => true,
+									'format'     => 'Y/m/d',
+									'label_from' => __( 'Start Date','tourfic'),
+									'label_to'   => __('End Date','tourfic'),
+									'multiple'   => true,
+									'attributes' => array(
+										'autocomplete' => 'off',
+									),
+								),
 
 								array(
 									'id'       => '',
