@@ -59,6 +59,7 @@
         $(document).on('click', '#tf-register .tf-submit', function (e) {
             e.preventDefault();
 
+            var tf_reg_data = $("#tf-register").serializeArray();
             var tf_reg_nonce = $("input[name=tf_reg_nonce]").val();
             var user = $("input[name=tf_user]").val();
             var email = $("input[name=tf_email]").val();
@@ -69,6 +70,7 @@
             var data = {
                 action: 'tf_registration',
                 tf_reg_nonce: tf_reg_nonce,
+                tf_reg_data: tf_reg_data,
                 user: user,
                 email: email,
                 pass: pass,

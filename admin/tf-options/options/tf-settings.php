@@ -493,83 +493,299 @@ TF_Settings::option( 'tf_settings', array(
 
 		// Multi Vendor
 		'vendor'             => array(
-			'title'  => __( 'Multi Vendor', 'tourfic' ),
-			'icon'   => 'fas fa-handshake',
+			'title'  => esc_html__( 'Multi Vendor', 'tourfic' ),
+			'icon'   => 'fa fa-handshake',
 			'fields' => array(
-				// Registration
 				array(
-					'id'      => 'Registration_heading',
-					'type'    => 'heading',
-					'content' => __( 'Registration', 'tourfic' ),
+					'id'   => 'multi-vendor-setings',
+					'type' => 'tab',
+					'tabs' => array(
+						array(
+							'id'     => 'general-setting',
+							'title'  => 'General Options',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'    => 'vendor-reg',
+									'type'  => 'switch',
+									'label' => __( 'Vendor Registration Option', 'tourfic' ),
+									'subtitle' => __('ON: Allow partner, OFF: Not allow partner','tourfic'),
+									'is_pro'   => true,
+								),
+								array(
+									'id'    => 'user_approval',
+									'type'  => 'switch',
+									'label' => __( 'Automatic Approval', 'tourfic' ),
+									'subtitle' => __('Partner be automatic approval (register account).','tourfic'),
+									'is_pro'   => true,
+								),
+								array(
+									'id'        => 'reg-pop',
+									'type'      => 'switch',
+									'label'     => __( 'Registration Form Popup', 'tourfic' ),
+									'subtitle'  => __( 'Add class <code>tf-reg-popup</code> to trigger the popup', 'tourfic' ),
+									'default'   => true,
+									'is_pro'   => true,
+								),
+				
+								array(
+									'id'      => 'notice',
+									'type'    => 'notice',
+									'content' => __( 'Use shortcode <code>[tf_registration_form]</code> to show registration form in post/page/widget.', 'tourfic' ),
+								),
+								array(
+									'id'    => 'email-verify',
+									'type'  => 'switch',
+									'label' => __( 'Email Verification', 'tourfic' ),
+									'subtitle' => __('ON: Vendor must verify by email','tourfic'),
+									'is_pro'   => true,
+								),
+								array(
+									'id'    => 'partner_feature',
+									'type'  => 'switch',
+									'label' => __( 'Enable Partner Feature', 'tourfic' ),
+									'subtitle' => __('ON: Show services for partner. OFF: Turn off services, partner is not allowed to register service, it is not displayed in dashboard','tourfic'),
+									'is_pro'   => true,
+								),
+								array(
+									'id'    => 'partner_post',
+									'type'  => 'switch',
+									'label' => __( "Partner's Post Must be Approved by Admin", 'tourfic' ),
+									'subtitle' => __('ON: When partner posts a service, it needs to be approved by administrator ','tourfic'),
+									'is_pro'   => true,
+								),
+								array(
+									'id'      => 'notice_shortcode',
+									'type'    => 'notice',
+									'content' => __( 'Use shortcode <code>[tf_login_form]</code> to show login form in post/page/widget.', 'tourfic' ),
+								),
+								array(
+									'id'    => 'partner_commission',
+									'type'  => 'number',
+									'label' => __( 'Commission(%)', 'tourfic' ),
+									'subtitle' => __('Enter commission of partner for admin after each item is booked ','tourfic'),'attributes'  => array(
+										'min' => '0',
+									),
+									'is_pro'   => true,
+								)
+							),
+						),
+						array(
+							'id'     => 'layout-setting',
+							'title'  => 'Vendor Dashboard',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'    => 'vendor-config',
+									'type'  => 'switch',
+									'label' => __( 'Configuration Partner Profile info', 'tourfic' ),
+									'subtitle' => __('Show/hide sections for partner dashboard','tourfic'),
+									'is_pro'   => true,
+								),
+								array(
+									'id'    => 'vendor-earning',
+									'type'  => 'switch',
+									'label' => __( 'Show total Earning', 'tourfic' ),
+									'subtitle' => __('ON: Display earnings information in accordance with time periods','tourfic'),
+									'is_pro'   => true,
+								),
+								array(
+									'id'    => 'vendor-each-earning',
+									'type'  => 'switch',
+									'label' => __( 'Show each service Earning', 'tourfic' ),
+									'subtitle' => __('ON: Display earnings according to each service','tourfic'),
+									'is_pro'   => true,
+								),
+								array(
+									'id'    => 'vendor-earning-chart',
+									'type'  => 'switch',
+									'label' => __( 'Show Chart info', 'tourfic' ),
+									'subtitle' => __('ON: Display visual graphs to follow your earnings through each time','tourfic'),
+									'is_pro'   => true,
+								),
+								array(
+									'id'    => 'vendor-booking-history',
+									'type'  => 'switch',
+									'label' => __( 'Show Booking history', 'tourfic' ),
+									'subtitle' => __('ON: Show booking history of partner','tourfic'),
+									'is_pro'   => true,
+								),
+								array(
+									'id'    => 'vendor-enquiry-history',
+									'type'  => 'switch',
+									'label' => __( 'Show Enquiry history', 'tourfic' ),
+									'subtitle' => __('ON: Show Enquiry history of partner','tourfic'),
+									'is_pro'   => true,
+								),
+							),
+						),
+						array(
+							'id'     => 'withdraw-setting',
+							'title'  => 'Withdrawal Options',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'    => 'vendor-withdraw',
+									'type'  => 'switch',
+									'label' => __( 'Allow Request Withdrawal', 'tourfic' ),
+									'subtitle' => __('ON: Partner is allowed to withdraw money','tourfic'),
+									'is_pro'   => true,
+								),
+								array(
+									'id'      => 'vendor_min_withdraw',
+									'type'    => 'number',
+									'label' => __( 'Minimum value request when withdrawal', 'tourfic' ),
+									'subtitle' => __('Enter minimum value when a withdrawal is conducted','tourfic'),
+									'attributes'  => array(
+										'min' => '0',
+									),
+									'is_pro'   => true,
+								),
+								array(
+									'id'      => 'vendor_withdraw_date',
+									'type'    => 'number',
+									'label' => __( 'Date of sucessful payment in current month', 'tourfic' ),
+									'subtitle' => __('Enter the date monthly payment. Ex: 25','tourfic'),
+									'attributes'  => array(
+										'min' => '1',
+										'max' => '28',
+									),
+									'is_pro'   => true,
+								),
+							),
+						),
+						array(
+							'id'     => 'login-setting',
+							'title'  => 'Social Login Options',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'    => 'vendor-google-login',
+									'type'  => 'switch',
+									'label' => __( 'Allow Google Login', 'tourfic' ),
+									'subtitle' => __('ON: Partner is allowed to Google Login','tourfic'),
+									'is_pro'   => true,
+								),
+								array(
+									'id'      => 'app_id',
+									'type'    => 'text',
+									'label' => __( 'Google App Client ID', 'tourfic' ),
+									'subtitle' => __('Enter the App ID','tourfic'),
+									'dependency' => array(
+										array( 'vendor-google-login', '==', true ),
+									),
+									'is_pro'   => true,
+								),
+								array(
+									'id'      => 'app_secret_id',
+									'type'    => 'text',
+									'label' => __( 'Google App Client Secret', 'tourfic' ),
+									'subtitle' => __('Enter the App Secret','tourfic'),
+									'dependency' => array(
+										array( 'vendor-google-login', '==', true ),
+									),
+									'is_pro'   => true,
+								),
+								array(
+									'id'      => 'app_redirect_uri',
+									'type'    => 'text',
+									'label' => __( 'Google Redirect URI', 'tourfic' ),
+									'subtitle' => __('Enter the Redirect URI','tourfic'),
+									'dependency' => array(
+										array( 'vendor-google-login', '==', true ),
+									),
+									'is_pro'   => true,
+								),
+							),
+						),
+					),
 				),
-
 				array(
-					'id'        => 'reg-pop',
-					'type'      => 'switch',
-					'label'     => __( 'Registration Form Popup', 'tourfic' ),
-					'is_pro'    => true,
-					'subtitle'  => __( 'Add class <code>tf-reg-popup</code> to trigger the popup', 'tourfic' ),
-					'label_on'  => __( 'Enabled', 'tourfic' ),
-					'label_off' => __( 'Disabled', 'tourfic' ),
-					'width'     => 100,
-					'default'   => true,
-				),
-
-				array(
-					'id'      => 'notice',
-					'type'    => 'notice',
-					'content' => __( 'Use shortcode <code>[tf_registration_form]</code> to show registration form in post/page/widget.', 'tourfic' ),
-				),
-
-				array(
-					'id'      => 'email-verify',
-					'type'    => 'switch',
-					'label'   => __( 'Enable Email Verification', 'tourfic' ),
-					'is_pro'  => true,
-					'default' => true,
-				),
-
-				array(
-					'id'         => 'prevent-login',
-					'type'       => 'switch',
-					'label'      => __( 'Login Restriction', 'tourfic' ),
-					'subtitle'   => __( 'Prevent unverified user to login', 'tourfic' ),
-					'is_pro'     => true,
-					'dependency' => array( 'email-verify', '==', 'true' ),
-					'default'    => true,
-				),
-
-				array(
-					'id'      => 'notice_shortcode',
-					'type'    => 'notice',
-					'content' => __( 'Use shortcode <code>[tf_login_form]</code> to show login form in post/page/widget.', 'tourfic' ),
-				),
-
-				// Vendor
-				array(
-					'id'      => 'Vendor_heading',
-					'type'    => 'heading',
-					'content' => __( 'Vendor', 'tourfic' ),
-				),
-
-				array(
-					'id'       => 'vendor-reg',
-					'type'     => 'switch',
-					'label'    => __( 'Enable Vendor Registration', 'tourfic' ),
-					'subtitle' => __( 'Visitor can register as vendor using the registration form', 'tourfic' ),
+					'id'       => 'vendor-registration',
+					'class'    => 'disable-sortable',
+					'type'     => 'repeater',
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'label'    => __( 'Registration Fields for Vendor', 'tourfic' ),
+					'subtitle' => __( 'Custom fields allowed', 'tourfic' ),
 					'is_pro'   => true,
-					'default'  => true,
-				),
-
-				array(
-					'id'      => 'vendor-tax-add',
-					'type'    => 'checkbox',
-					'label'   => __( 'Vendor Can Add', 'tourfic' ),
-					'is_pro'  => true,
-					'options' => array(
-						'hl' => __( 'Hotel Location', 'tourfic' ),
-						'hf' => __( 'Hotel Feature', 'tourfic' ),
-						'td' => __( 'Tour Destination', 'tourfic' ),
+					'fields'   => array(
+						array(
+							'id'    => 'reg-field-label',
+							'type'  => 'text',
+							'label' => __( 'Label', 'tourfic' ),
+						),
+						array(
+							'id'    => 'reg-field-name',
+							'type'  => 'text',
+							'label' => __( 'Name', 'tourfic' ),
+							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
+						),
+						array(
+							'id'      => 'reg-fields-type',
+							'type'    => 'select',
+							'label'   => __( 'Field Type', 'tourfic' ),
+							'options' => array(
+								'text' => __( 'Text', 'tourfic' ),
+								'email' => __( 'Email', 'tourfic' ),
+								'password' => __( 'Password', 'tourfic' ),
+								'textarea' => __( 'Textarea', 'tourfic' ),
+								'radio' => __( 'Radio', 'tourfic' ),
+								'select' => __( 'Select', 'tourfic' ),
+							),
+						),
+						array(
+							'id'     => 'reg-options',
+							'type'   => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'  => __( 'Option Label', 'tourfic' ),
+							'dependency' => array(
+								array( 'reg-fields-type', '==', 'radio' ),
+							),
+							'fields' => array(
+								array(
+									'label'   => __( 'Field Label', 'tourfic' ),
+									'id'      => 'option-label',
+									'type'    => 'text',
+								),
+								array(
+									'label'   => __( 'Field Value', 'tourfic' ),
+									'id'      => 'option-value',
+									'type'    => 'text',
+								),
+							),
+						),
+						array(
+							'id'     => 'reg-options',
+							'type'   => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'  => __( 'Option Label', 'tourfic' ),
+							'dependency' => array(
+								array( 'reg-fields-type', '==', 'select' ),
+							),
+							'fields' => array(
+								array(
+									'label'   => __( 'Field Label', 'tourfic' ),
+									'id'      => 'option-label',
+									'type'    => 'text',
+								),
+								array(
+									'label'   => __( 'Field Value', 'tourfic' ),
+									'id'      => 'option-value',
+									'type'    => 'text',
+								),
+							),
+						),
+						array(
+							'id'    => 'reg-field-placeholder',
+							'type'  => 'text',
+							'label' => __( 'Placeholder', 'tourfic' ),
+						),
+						array(
+							'id'    => 'reg-field-required',
+							'type'  => 'switch',
+							'label' => __( 'Required Field ?', 'tourfic' ),
+						),
+	
 					),
 				),
 			),
