@@ -1455,107 +1455,145 @@
             let search = $(this).val();
             $(this).next('input[name=place]').val(search);
         })
-    });
 
 
-    /**
-     * Children age field add when children added in search field
-     * @since 2.8.6
-     * @author Abu Hena
-     */
+        /**
+         * Children age field add when children added in search field
+         * @since 2.8.6
+         * @author Abu Hena
+         */
 
-    if ($('.child-age-limited')[0]) {
-        $('.acr-select .child-inc').on('click', function () {
-            var first_element = $('div[id^="tf-age-field-0"]');
-            var ch_element = $('div[id^="tf-age-field-"]:last');
-            if (ch_element.length != 0) {
-                var num = parseInt(ch_element.prop("id").match(/\d+/g), 10) + 1;
-            }
-            var elements = ch_element.clone().prop('id', 'tf-age-field-' + num);
-            elements.find("label").html('Child age ' + num);
-            //elements.find("select").attr('name','children_'+num+'_age');
-            elements.find("select").attr('name', 'children_ages[]');
-            ch_element.after(elements);
-            elements.show();
-            first_element.hide();
+        if ($('.child-age-limited')[0]) {
+            $('.acr-select .child-inc').on('click', function () {
+                var first_element = $('div[id^="tf-age-field-0"]');
+                var ch_element = $('div[id^="tf-age-field-"]:last');
+                if (ch_element.length != 0) {
+                    var num = parseInt(ch_element.prop("id").match(/\d+/g), 10) + 1;
+                }
+                var elements = ch_element.clone().prop('id', 'tf-age-field-' + num);
+                elements.find("label").html('Child age ' + num);
+                //elements.find("select").attr('name','children_'+num+'_age');
+                elements.find("select").attr('name', 'children_ages[]');
+                ch_element.after(elements);
+                elements.show();
+                first_element.hide();
 
-        })
+            })
 
-        $('.acr-select .child-dec').on('click', function () {
-            var total_age_input = $('.tf-children-age').length;
-            var ch_element = $('div[id^="tf-age-field-"]:last');
-            if (total_age_input != 1) {
-                ch_element.remove();
-            }
-        })
-    }
-    var postsCount = $('.tf-posts-count').html();
-    $('.tf-total-results').find('span').html(postsCount);
+            $('.acr-select .child-dec').on('click', function () {
+                var total_age_input = $('.tf-children-age').length;
+                var ch_element = $('div[id^="tf-age-field-"]:last');
+                if (total_age_input != 1) {
+                    ch_element.remove();
+                }
+            })
+        }
+        var postsCount = $('.tf-posts-count').html();
+        $('.tf-total-results').find('span').html(postsCount);
 
 //Sidebar widget js
-    $('.tf-widget-title').on('click', function () {
-        $(this).find('i').toggleClass('collapsed');
-        $(this).siblings('.tf-filter').slideToggle('medium');
-    })
+        $('.tf-widget-title').on('click', function () {
+            $(this).find('i').toggleClass('collapsed');
+            $(this).siblings('.tf-filter').slideToggle('medium');
+        })
 
-    /* see more checkbox filter started */
+        /* see more checkbox filter started */
 
-    $('a.see-more').on('click', function (e) {
-        var $this = $(this);
-        e.preventDefault();
-        $this.parent('.tf-filter').find('.filter-item').filter(function (index) {
-            return index > 3;
-        }).removeClass("hidden");
-        $this.hide();
-    });
+        $('a.see-more').on('click', function (e) {
+            var $this = $(this);
+            e.preventDefault();
+            $this.parent('.tf-filter').find('.filter-item').filter(function (index) {
+                return index > 3;
+            }).removeClass("hidden");
+            $this.hide();
+        });
 
-    $('.tf-filter').each(function () {
+        $('.tf-filter').each(function () {
 
-        var len = $(this).find('ul').children().length;
-        $(this).find('.see-more').hide();
-        if (len > 4) {
-            $(this).find('.see-more').show();
-        }
-        //hide items if crossed showing limit
-        $(this).find('.filter-item').filter(function (index) {
-            return index > 3;
-        }).addClass("hidden");
-
-    });
-
-    /* see more checkbox filter end */
-
-    //active checkbox bg
-    $('.tf_widget input').on('click', function () {
-        $(this).parent().parent().toggleClass('active');
-    });
-
-    /**
-     * Cart item remove from checkout page
-     * @since 2.9.6
-     * @author Foysal
-     */
-    $('form.checkout').on('click', '.cart_item a.remove', function (e) {
-        e.preventDefault();
-
-        var cart_item_key = $(this).attr("data-cart_item_key");
-
-        $.ajax({
-            type: 'POST',
-            url: tf_params.ajax_url,
-            data: {
-                action: 'tf_checkout_cart_item_remove',
-                cart_item_key: cart_item_key,
-            },
-            beforeSend: function () {
-                $('body').trigger('update_checkout');
-            },
-            success: function (result) {
-                $('body').trigger('update_checkout');
-            },
-            error: function (error) {
-
+            var len = $(this).find('ul').children().length;
+            $(this).find('.see-more').hide();
+            if (len > 4) {
+                $(this).find('.see-more').show();
             }
+            //hide items if crossed showing limit
+            $(this).find('.filter-item').filter(function (index) {
+                return index > 3;
+            }).addClass("hidden");
+
+        });
+
+        /* see more checkbox filter end */
+
+        //active checkbox bg
+        $('.tf_widget input').on('click', function () {
+            $(this).parent().parent().toggleClass('active');
+        });
+
+        /**
+         * Cart item remove from checkout page
+         * @since 2.9.7
+         * @author Foysal
+         */
+        $('form.checkout').on('click', '.cart_item a.remove', function (e) {
+            e.preventDefault();
+
+            var cart_item_key = $(this).attr("data-cart_item_key");
+
+            $.ajax({
+                type: 'POST',
+                url: tf_params.ajax_url,
+                data: {
+                    action: 'tf_checkout_cart_item_remove',
+                    cart_item_key: cart_item_key,
+                },
+                beforeSend: function () {
+                    $('body').trigger('update_checkout');
+                },
+                success: function (result) {
+                    $('body').trigger('update_checkout');
+                },
+                error: function (error) {
+
+                }
+            });
+        });
+
+        /*
+        * Hotel Search submit
+        * @since 2.9.7
+        * @author Foysal
+        */
+        $(document).on('submit', '#tf_hotel_aval_check', function (e) {
+            e.preventDefault();
+            let form = $(this),
+                submitBtn = form.find('.tf-submit'),
+                formData = new FormData(form[0]);
+
+            formData.append('action', 'tf_hotel_search');
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
+                    submitBtn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    let obj = JSON.parse(response);
+                    form.css({'opacity': '1', 'pointer-events': 'all'});
+                    submitBtn.removeClass('tf-btn-loading');
+                    if (obj.status === 'error') {
+                        notyf.error(obj.message);
+                    }
+                    if (obj.status === 'success') {
+                        //location redirect to form action url with query string
+                        location.href = form.attr('action') + '?' + obj.query_string;
+                    }
+                }
+            });
         });
     });
 

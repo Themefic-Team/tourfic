@@ -150,7 +150,7 @@
             }
         });
 
-        
+
         /**
          * Hotel Details Popup
          *
@@ -252,6 +252,7 @@
 
         /*
         * Affiliate booking form ajax
+        * @author Foysal
         */
         $(document).on('submit', '#tf_affiliate_booking_form', function (e) {
             e.preventDefault();
@@ -297,6 +298,7 @@
 
         /*
         * TravelPayouts Flight ajax
+        * @author Foysal
         */
         $(document).on('submit', '#tf_travelpayouts_flight_form', function (e) {
             e.preventDefault();
@@ -346,6 +348,7 @@
 
         /*
         * TravelPayouts Hotel ajax
+        * @author Foysal
         */
         $(document).on('submit', '#tf_travelpayouts_hotel_form', function (e) {
             e.preventDefault();
@@ -395,6 +398,7 @@
 
         /*
         * Custom Modal
+        * @author Foysal
         */
         $(document).on('click', '.tf-modal-btn', function () {
             var dataTarget = $(this).attr('data-target');
@@ -414,6 +418,7 @@
 
         /*
         * Trip Class checkbox
+        * @author Foysal
         */
         $(document).on('click', 'input[name=trip-class]', function () {
             let checked = $(this).is(':checked');
@@ -426,6 +431,10 @@
 
         });
 
+        /*
+        * DeBounce
+        * @author Foysal
+        */
         const deBounce = (fn, delay) => {
             let timer;
             return function () {
@@ -438,6 +447,7 @@
 
         /*
         * TravelPayouts Flight Autocomplete
+        * @author Foysal
         */
         $('.tf_travelpayouts_location').each(function () {
             let thisElm = $(this),
@@ -497,6 +507,7 @@
 
         /*
         * TravelPayouts Hotel Autocomplete
+        * @author Foysal
         */
         $('.tf_travelpayouts_hotel_location').each(function () {
             let thisElm = $(this),
@@ -548,7 +559,8 @@
 
         /*
         * Select Location
-        * */
+        * @author Foysal
+        */
         $(document).on('click', '.tf_travelpayouts_location_list li', function () {
             let text = $(this).data('text');
             let value = $(this).data('value');
@@ -561,15 +573,15 @@
         })
 
         //   Tour chart preview
-        if(tf_params.showitinerarychart==1){
+        if (tf_params.showitinerarychart == 1) {
             var ctx = document.getElementById('tour-itinerary-chart').getContext('2d');
             var chart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: tf_params.itinerarayday,
                     // Information about the dataset
-                datasets: [{
-                        label : tf_params.elevvationmode,
+                    datasets: [{
+                        label: tf_params.elevvationmode,
                         backgroundColor: 'lightblue',
                         borderColor: 'royalblue',
                         tension: 0.1,
@@ -577,20 +589,20 @@
                     }]
                 },
 
-            // Configuration options
-            options: {
-                tooltips: {
-                    enabled: true,
-                    mode: 'label',
-                    callbacks: {
-                        label: function(tooltipItems, data) {
-                            return tooltipItems.yLabel + ' ' +tf_params.elevvationmode;
+                // Configuration options
+                options: {
+                    tooltips: {
+                        enabled: true,
+                        mode: 'label',
+                        callbacks: {
+                            label: function (tooltipItems, data) {
+                                return tooltipItems.yLabel + ' ' + tf_params.elevvationmode;
+                            }
                         }
-                    }
-                },
-                layout: {
-                padding: 10,
-                },
+                    },
+                    layout: {
+                        padding: 10,
+                    },
                     legend: {
                         display: false
                     },
@@ -605,12 +617,12 @@
                                 labelString: ''
                             },
                             ticks: {
-                            display: tf_params.showyaxis==1 ? true : false
-                        },
-                        gridLines: {
-                            display: tf_params.showlinegraph==1 ? true : false,
-                            drawBorder: tf_params.showlinegraph==1 ? true : false,
-                        }
+                                display: tf_params.showyaxis == 1 ? true : false
+                            },
+                            gridLines: {
+                                display: tf_params.showlinegraph == 1 ? true : false,
+                                drawBorder: tf_params.showlinegraph == 1 ? true : false,
+                            }
                         }],
                         xAxes: [{
                             scaleLabel: {
@@ -618,11 +630,11 @@
                                 labelString: ''
                             },
                             ticks: {
-                            display: tf_params.showxaxis==1 ? true : false
-                        },
-                        gridLines: {
-                            display: tf_params.showlinegraph==1 ? true : false
-                        }
+                                display: tf_params.showxaxis == 1 ? true : false
+                            },
+                            gridLines: {
+                                display: tf_params.showlinegraph == 1 ? true : false
+                            }
                         }]
                     }
                 }
@@ -633,77 +645,77 @@
 
         //Tour Expand/Close
 
-        $('#itinerary-switcher').click(function(){
-          if ($(this).is(':checked')) {
-              $(".tf-ininerary-content").show();
-              $('.arrow').addClass('arrow-animate');
-              $('.ininerary-other-gallery').slick({
-                  slidesToShow: 6,
-                  slidesToScroll: 1,
-                  arrows: true,
-                  fade: false,
-                  adaptiveHeight: true,
-                  infinite: true,
-                  useTransform: true,
-                  speed: 400,
-                  cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
-                  responsive: [{
-                      breakpoint: 1024,
-                      settings: {
-                          slidesToShow: 4,
-                          slidesToScroll: 1,
-                      }
-                  }, {
-                      breakpoint: 640,
-                      settings: {
-                          slidesToShow: 2,
-                          slidesToScroll: 1,
-                      }
-                  }, {
-                      breakpoint: 420,
-                      settings: {
-                          slidesToShow: 2,
-                          slidesToScroll: 1,
-                      }
-                  }]
-              });
-          }else{
-              $(".tf-ininerary-content").hide();
-              $('.arrow').removeClass('arrow-animate');
-          }
+        $('#itinerary-switcher').click(function () {
+            if ($(this).is(':checked')) {
+                $(".tf-ininerary-content").show();
+                $('.arrow').addClass('arrow-animate');
+                $('.ininerary-other-gallery').slick({
+                    slidesToShow: 6,
+                    slidesToScroll: 1,
+                    arrows: true,
+                    fade: false,
+                    adaptiveHeight: true,
+                    infinite: true,
+                    useTransform: true,
+                    speed: 400,
+                    cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
+                    responsive: [{
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 4,
+                            slidesToScroll: 1,
+                        }
+                    }, {
+                        breakpoint: 640,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                        }
+                    }, {
+                        breakpoint: 420,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                        }
+                    }]
+                });
+            } else {
+                $(".tf-ininerary-content").hide();
+                $('.arrow').removeClass('arrow-animate');
+            }
         });
 
-        if(tf_params.showitinerarystatus==1){
-        $('.ininerary-other-gallery').slick({
-            slidesToShow: 6,
-            slidesToScroll: 1,
-            arrows: true,
-            fade: false,
-            adaptiveHeight: true,
-            infinite: true,
-            useTransform: true,
-            speed: 400,
-            cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
-            responsive: [{
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
-                }
-            }, {
-                breakpoint: 640,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                }
-            }, {
-                breakpoint: 420,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                }
-            }]
-        });
+        if (tf_params.showitinerarystatus == 1) {
+            $('.ininerary-other-gallery').slick({
+                slidesToShow: 6,
+                slidesToScroll: 1,
+                arrows: true,
+                fade: false,
+                adaptiveHeight: true,
+                infinite: true,
+                useTransform: true,
+                speed: 400,
+                cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
+                responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 1,
+                    }
+                }, {
+                    breakpoint: 640,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                    }
+                }, {
+                    breakpoint: 420,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                    }
+                }]
+            });
         }
 
     });
