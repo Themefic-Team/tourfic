@@ -4,6 +4,11 @@
   "description": "Tourfic - Travel and Hotel Booking Solution for WooCommerce",
   "author": "Themefic",
   "license": "GPL-2.0+",
+  "private": true,
+  "scripts": {
+    "start": "wp-scripts start",
+    "build": "wp-scripts build"
+  },
   "devDependencies": {
     "@wordpress/scripts": "^25.1.0",
     "css-loader": "^6.7.3",
