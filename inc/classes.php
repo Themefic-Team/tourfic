@@ -25,6 +25,16 @@ if ( file_exists( TF_INC_PATH . 'classes/class-deactivator.php' ) ) {
 	tf_file_missing(TF_INC_PATH . 'classes/class-deactivator.php');
 }
 
+/**
+ * TF_Frontend_Dashboard Class
+ * @author Foysal
+ */
+if ( file_exists( TF_INC_PATH . 'frontend-dashboard/classes/TF_Frontend_Dashboard.php' ) ) {
+	require_once TF_INC_PATH . 'frontend-dashboard/classes/TF_Frontend_Dashboard.php';
+} else {
+	tf_file_missing(TF_INC_PATH . 'frontend-dashboard/classes/TF_Frontend_Dashboard.php');
+}
+
 # Tour Price
 if ( file_exists( TF_INC_PATH . 'classes/class-tour-price.php' ) ) {
 	require_once TF_INC_PATH . 'classes/class-tour-price.php';
