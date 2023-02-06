@@ -1,5 +1,5 @@
 const path = require('path');
-const defaultConfig = require('@wordpress/scripts/config/webpack.config');
+// const defaultConfig = require('@wordpress/scripts/config/webpack.config');
 const glob = require('glob');
 const entryPoints = {};
 
@@ -24,7 +24,7 @@ entryPoints['tourfic-pro/assets/admin/js/tourfic-pro-admin'] = proAdminJs;
 // entryPoints['admin/css/tourfic-admin'] = adminScss;
 
 const config = {
-    ...defaultConfig,
+    // ...defaultConfig,
     entry: entryPoints,
 
     output: {
