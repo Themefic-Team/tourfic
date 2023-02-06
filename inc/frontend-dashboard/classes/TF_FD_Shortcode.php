@@ -35,9 +35,7 @@ if ( ! class_exists( 'TF_FD_Shortcode' ) ) {
 //			$tf_fd->tf_fd_load_template( $atts['page'] );
 
 			?>
-            <div class="tf_fd_wrapper">
-                <h1>Hello</h1>
-            </div>
+            <div id="tf-dashboard"></div>
 			<?php
 		}
 	}

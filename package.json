@@ -1,9 +1,4 @@
 {
-  "name": "tourfic",
-  "version": "2.9.7",
-  "description": "Tourfic - Travel and Hotel Booking Solution for WooCommerce",
-  "author": "Themefic",
-  "license": "GPL-2.0+",
   "private": true,
   "scripts": {
     "start": "wp-scripts start",
