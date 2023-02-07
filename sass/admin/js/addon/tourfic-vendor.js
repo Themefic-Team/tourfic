@@ -2,6 +2,35 @@
 (function ($) {
     $(document).ready(function () {
 
+        $(document).on('click', '.vtf-install', function(e) {
+            e.preventDefault();
+
+            var current = $(this);
+            var plugin_slug = current.attr("data-plugin-slug");
+
+            current.addClass('updating-message').text(tf_vendor_params.installing);
+
+            var data = {
+                action: 'tf_ajax_install_tourfic',
+                _ajax_nonce: tf_vendor_params.tf_vendor_nonce,
+                slug: plugin_slug,
+            };
+
+            jQuery.post( tf_vendor_params.ajax_url, data, function(response) {
+                current.removeClass('updating-message');
+                current.addClass('updated-message').text(tf_vendor_params.installed);
+                current.attr("href", response.data.activateUrl);
+            })
+            .fail(function() {
+                current.removeClass('updating-message').text(tf_vendor_params.install_failed);
+            })
+            .always(function() {
+                current.removeClass('install-now updated-message').addClass('activate-now button-primary').text(tf_vendor_params.activating);
+                current.unbind(e);
+                current[0].click();
+            });
+        });
+
         /*
         * Author @Jahid
         * Multivendor Bulk Action
