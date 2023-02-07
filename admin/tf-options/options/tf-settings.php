@@ -698,94 +698,101 @@ TF_Settings::option( 'tf_settings', array(
 								),
 							),
 						),
-					),
-				),
-				array(
-					'id'       => 'vendor-registration',
-					'class'    => 'disable-sortable',
-					'type'     => 'repeater',
-					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'    => __( 'Registration Fields for Vendor', 'tourfic' ),
-					'subtitle' => __( 'Custom fields allowed', 'tourfic' ),
-					'is_pro'   => true,
-					'fields'   => array(
 						array(
-							'id'    => 'reg-field-label',
-							'type'  => 'text',
-							'label' => __( 'Label', 'tourfic' ),
-						),
-						array(
-							'id'    => 'reg-field-name',
-							'type'  => 'text',
-							'label' => __( 'Name', 'tourfic' ),
-							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
-						),
-						array(
-							'id'      => 'reg-fields-type',
-							'type'    => 'select',
-							'label'   => __( 'Field Type', 'tourfic' ),
-							'options' => array(
-								'text' => __( 'Text', 'tourfic' ),
-								'email' => __( 'Email', 'tourfic' ),
-								'password' => __( 'Password', 'tourfic' ),
-								'textarea' => __( 'Textarea', 'tourfic' ),
-								'radio' => __( 'Radio', 'tourfic' ),
-								'select' => __( 'Select', 'tourfic' ),
-							),
-						),
-						array(
-							'id'     => 'reg-options',
-							'type'   => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'  => __( 'Option Label', 'tourfic' ),
-							'dependency' => array(
-								array( 'reg-fields-type', '==', 'radio' ),
-							),
+							'id'     => 'vendor-registration-fields',
+							'title'  => 'Custom Registration Fields',
+							'icon'   => 'fa fa-gear',
 							'fields' => array(
 								array(
-									'label'   => __( 'Field Label', 'tourfic' ),
-									'id'      => 'option-label',
-									'type'    => 'text',
-								),
-								array(
-									'label'   => __( 'Field Value', 'tourfic' ),
-									'id'      => 'option-value',
-									'type'    => 'text',
+									'id'       => 'vendor-registration',
+									'class'    => 'disable-sortable',
+									'type'     => 'repeater',
+									'button_title' => __( 'Add New', 'tourfic' ),
+									'label'    => __( 'Registration Fields for Vendor', 'tourfic' ),
+									'subtitle' => __( 'Custom fields allowed', 'tourfic' ),
+									'is_pro'   => true,
+									'fields'   => array(
+										array(
+											'id'    => 'reg-field-label',
+											'type'  => 'text',
+											'label' => __( 'Label', 'tourfic' ),
+										),
+										array(
+											'id'    => 'reg-field-name',
+											'type'  => 'text',
+											'label' => __( 'Name', 'tourfic' ),
+											'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
+										),
+										array(
+											'id'      => 'reg-fields-type',
+											'type'    => 'select',
+											'label'   => __( 'Field Type', 'tourfic' ),
+											'options' => array(
+												'text' => __( 'Text', 'tourfic' ),
+												'email' => __( 'Email', 'tourfic' ),
+												'password' => __( 'Password', 'tourfic' ),
+												'textarea' => __( 'Textarea', 'tourfic' ),
+												'radio' => __( 'Radio', 'tourfic' ),
+												'select' => __( 'Select', 'tourfic' ),
+											),
+										),
+										array(
+											'id'     => 'reg-options',
+											'type'   => 'repeater',
+											'button_title' => __( 'Add New Option', 'tourfic' ),
+											'label'  => __( 'Option Label', 'tourfic' ),
+											'dependency' => array(
+												array( 'reg-fields-type', '==', 'radio' ),
+											),
+											'fields' => array(
+												array(
+													'label'   => __( 'Field Label', 'tourfic' ),
+													'id'      => 'option-label',
+													'type'    => 'text',
+												),
+												array(
+													'label'   => __( 'Field Value', 'tourfic' ),
+													'id'      => 'option-value',
+													'type'    => 'text',
+												),
+											),
+										),
+										array(
+											'id'     => 'reg-options',
+											'type'   => 'repeater',
+											'button_title' => __( 'Add New Option', 'tourfic' ),
+											'label'  => __( 'Option Label', 'tourfic' ),
+											'dependency' => array(
+												array( 'reg-fields-type', '==', 'select' ),
+											),
+											'fields' => array(
+												array(
+													'label'   => __( 'Field Label', 'tourfic' ),
+													'id'      => 'option-label',
+													'type'    => 'text',
+												),
+												array(
+													'label'   => __( 'Field Value', 'tourfic' ),
+													'id'      => 'option-value',
+													'type'    => 'text',
+												),
+											),
+										),
+										array(
+											'id'    => 'reg-field-placeholder',
+											'type'  => 'text',
+											'label' => __( 'Placeholder', 'tourfic' ),
+										),
+										array(
+											'id'    => 'reg-field-required',
+											'type'  => 'switch',
+											'label' => __( 'Required Field ?', 'tourfic' ),
+										),
+					
+									),
 								),
 							),
 						),
-						array(
-							'id'     => 'reg-options',
-							'type'   => 'repeater',
-							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'  => __( 'Option Label', 'tourfic' ),
-							'dependency' => array(
-								array( 'reg-fields-type', '==', 'select' ),
-							),
-							'fields' => array(
-								array(
-									'label'   => __( 'Field Label', 'tourfic' ),
-									'id'      => 'option-label',
-									'type'    => 'text',
-								),
-								array(
-									'label'   => __( 'Field Value', 'tourfic' ),
-									'id'      => 'option-value',
-									'type'    => 'text',
-								),
-							),
-						),
-						array(
-							'id'    => 'reg-field-placeholder',
-							'type'  => 'text',
-							'label' => __( 'Placeholder', 'tourfic' ),
-						),
-						array(
-							'id'    => 'reg-field-required',
-							'type'  => 'switch',
-							'label' => __( 'Required Field ?', 'tourfic' ),
-						),
-	
 					),
 				),
 			),
