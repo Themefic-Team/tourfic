@@ -34,7 +34,7 @@ const js = {
 const ReactJs = {
     ...defaultConfig,
     entry: {
-        'dashboard': './src/dashboard.js',
+        'index': './src/index.js',
     },
     output: {
         path: path.resolve(__dirname, 'build/'),

@@ -3,7 +3,7 @@ import withReactMount from './utils/withReactMount';
 /**
  * React dashboard initial component
  */
-function Dashboard() {
+function Index() {
     return (
         <div className="hello">
             <h1>Hello hvjhgkgb World</h1>
@@ -12,4 +12,4 @@ function Dashboard() {
 }
 
 // call some api
-withReactMount('#tf-dashboard', Dashboard);
+withReactMount('#tf-dashboard', Index);

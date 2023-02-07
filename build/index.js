@@ -6753,14 +6753,14 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * React dashboard initial component
  */
-function Dashboard() {
+function Index() {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "hello"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "Hello hvjhgkgb World"));
 }
 
 // call some api
-(0,_utils_withReactMount__WEBPACK_IMPORTED_MODULE_1__["default"])('#tf-dashboard', Dashboard);
+(0,_utils_withReactMount__WEBPACK_IMPORTED_MODULE_1__["default"])('#tf-dashboard', Index);
 })();
 
 /******/ })()
