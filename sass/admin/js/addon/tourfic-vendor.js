@@ -473,6 +473,31 @@
         * Payout Added
         */
 
+        $(document).on('change', '.tf-vendor-unique-id', function () {
+            var vendor_id = $(this).val();
+ 
+            $("#tf-report-loader").addClass('show');
+            jQuery.ajax({
+                type: 'post',
+                url: tf_vendor_params.ajax_url,
+                data: {
+                    action: 'tf_vendor_payouts_amount_preview',
+                    vendor_id: vendor_id
+                },
+                success: function (data) {
+                    var response = JSON.parse(data);
+                    // console.log(response.vendor_amount);
+                    $(".tf-unique-vendor-amount").val(response.vendor_amount);
+                    if(response.vendor_amount==0){
+                        $(".tf-payout-submit-button").hide();
+                    }else{
+                        $(".tf-payout-submit-button").show();
+                    }
+                    $("#tf-report-loader").removeClass('show');
+                }
+            })
+        });
+
         $(document).on('click', '.tf-payout-submit-button', function () {
             var vendor = $("#tf-vendor-id").val();
             var amount = $("#tf-payment-amount").val();
