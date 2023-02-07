@@ -541,13 +541,6 @@ TF_Settings::option( 'tf_settings', array(
 									'is_pro'   => true,
 								),
 								array(
-									'id'    => 'partner_feature',
-									'type'  => 'switch',
-									'label' => __( 'Enable Partner Feature', 'tourfic' ),
-									'subtitle' => __('ON: Show services for partner. OFF: Turn off services, partner is not allowed to register service, it is not displayed in dashboard','tourfic'),
-									'is_pro'   => true,
-								),
-								array(
 									'id'    => 'partner_post',
 									'type'  => 'switch',
 									'label' => __( "Partner's Post Must be Approved by Admin", 'tourfic' ),
