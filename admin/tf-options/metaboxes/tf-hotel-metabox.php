@@ -51,7 +51,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'        => 'featured',
 					'type'      => 'switch',
 					'label'     => __( 'Featured Hotel', 'tourfic' ),
-					'badge_up'  => true,
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false,

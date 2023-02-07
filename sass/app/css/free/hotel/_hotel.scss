@@ -234,7 +234,60 @@ a.slick-slide-item-link {
 .hero-booking .widget {
     margin-bottom: 0;
 }
-
+.single-tour-wrap.tf-featured .single-tour-inner{
+    position: relative;
+}
+.tf-featured-badge {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+  }
+  .tf-featured-badge::before,
+  .tf-featured-badge::after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    display: block;
+    border: 5px solid #003162;    
+    border-top-color: transparent;
+    border-left-color: transparent;
+  }
+  .tf-featured-badge span {
+    position: absolute;
+    display: block;
+    width: 225px;
+    padding: 10px 0;
+    background-color: #3498db;
+    box-shadow: 0 5px 10px rgba(0,0,0,.1);
+    color: #fff;
+    font: 700 18px/1 'Lato', sans-serif;
+    text-shadow: 0 1px 1px rgba(0,0,0,.2);
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1rem;
+  }
+  
+  /* top left*/
+  .tf-featured-badge {
+    top: -10px;
+    left: -10px;
+  }
+  .tf-featured-badge::before {
+    top: 0;
+    right: 0;
+  }
+  .tf-featured-badge::after {
+    bottom: 0;
+    left: 0;
+  }
+  .tf-featured-badge span {
+    right: -12px;
+    top: 33px;
+    transform: rotate(-45deg);
+  }
 /**************** FEATURES ****************/
 .tf_features {
     padding-top: 15px;

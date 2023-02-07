@@ -1479,7 +1479,8 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
         }, $b_rooms );
         $b_rooms = unserialize( $tf_hotel_b_rooms_value );
     }
-
+	// Featured
+	$featured  = !empty($meta['featured']) ? $meta['featured'] : '';
 	/**
 	 * All values from URL
 	 */
@@ -1548,8 +1549,11 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	endif;
 	?>
 
-    <div class="single-tour-wrap">
+    <div class="single-tour-wrap <?php echo $featured ? esc_attr('tf-featured') : ''  ?>">			
         <div class="single-tour-inner">
+			<div class="tf-featured-badge">
+				<span><?php _e( 'Featured','tourfic' ) ?></span>
+			</div>
             <div class="tourfic-single-left">
                 <a href="<?php echo $url; ?>">
 					<?php
