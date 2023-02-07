@@ -46,11 +46,11 @@ const ReactJs = {
 const scss = {
     ...defaultConfig,
     entry: {
-        'widgets': './resources/sass/widgets.scss',
-        'app': './resources/sass/app.scss',
+        'app/css/tourfic-style': './sass/app/css/free/tourfic.scss',
+        'admin/css/tourfic-admin': './sass/admin/css/free/tourfic-admin.scss',
     },
     output: {
-        path: path.resolve(__dirname, './assets/css/'),
+        path: path.resolve(__dirname, 'assets/'),
         clean: false
     },
     module: {
@@ -65,4 +65,4 @@ const scss = {
     }
 };
 
-module.exports = [js, ReactJs];
+module.exports = [js, ReactJs, scss];

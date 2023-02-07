@@ -23,6 +23,8 @@ if ( ! class_exists( 'TF_Frontend_Dashboard' ) ) {
 		}
 
 		public function __construct() {
+			define( 'TF_BUILD_PATH', TF_PATH . 'build/' );
+			define( 'TF_BUILD_URL', TF_URL . 'build/' );
 			define( 'TF_FD_PATH', TF_PATH . 'inc/frontend-dashboard/' );
 			define( 'TF_FD_CLASSES_PATH', TF_PATH . 'inc/frontend-dashboard/classes/' );
 			define( 'TF_FD_TEMPLATE_PATH', TF_PATH . 'inc/frontend-dashboard/template-parts/' );
@@ -114,15 +116,9 @@ if ( ! class_exists( 'TF_Frontend_Dashboard' ) ) {
 		 * @author Foysal
 		 */
 		public function tf_frontend_dashboard_enqueue_scripts() {
-//			wp_enqueue_style( 'tf-fd-bootstrap', TF_FD_ASSETS_URL . '/css/bootstrap.min.css', null, TOURFIC );
-//			wp_enqueue_style( 'tf-fd-icons', TF_FD_ASSETS_URL . '/css/icons.min.css', null, TOURFIC );
-//			wp_enqueue_style( 'tf-fd-app', TF_FD_ASSETS_URL . '/css/app.min.css', null, TOURFIC );
-//
-//			wp_enqueue_script( 'tf-fd-bootstrap', TF_FD_ASSETS_URL . '/libs/bootstrap/js/bootstrap.bundle.min.js', array( 'jquery' ), TOURFIC, true );
-//			wp_enqueue_script( 'tf-fd-metisMenu', TF_FD_ASSETS_URL . '/libs/metismenu/metisMenu.min.js', array( 'jquery' ), TOURFIC, true );
-//			wp_enqueue_script( 'tf-fd-simplebar', TF_FD_ASSETS_URL . '/libs/simplebar/simplebar.min.js', array( 'jquery' ), TOURFIC, true );
-//			wp_enqueue_script( 'tf-fd-apexcharts', 'https://cdn.jsdelivr.net/npm/apexcharts', array( 'jquery' ), TOURFIC, true );
-//			wp_enqueue_script( 'tf-fd-app', TF_FD_ASSETS_URL . '/js/app.js', array( 'jquery' ), TOURFIC, true );
+			$dashboard_assets = include_once( TF_BUILD_PATH . 'index.asset.php' );
+
+			wp_enqueue_script( 'tf-fd-index', TF_BUILD_URL . 'index.js', $dashboard_assets['dependencies'], $dashboard_assets['version'], true );
 		}
 
 		/**
