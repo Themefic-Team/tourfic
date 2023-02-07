@@ -70,6 +70,24 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-review.php' ) ) {
 }
 
 /**
+ * inquiry Functions
+ */
+if ( file_exists( TF_INC_PATH . 'functions/functions_enquiry.php' ) ) {
+	require_once TF_INC_PATH . 'functions/functions_enquiry.php';
+} else {
+	tf_file_missing( TF_INC_PATH . 'functions/functions_enquiry.php' );
+}
+
+/**
+ * Order page Functions
+ */
+if ( file_exists( TF_INC_PATH . 'functions/functions_order.php' ) ) {
+	require_once TF_INC_PATH . 'functions/functions_order.php';
+} else {
+	tf_file_missing( TF_INC_PATH . 'functions/functions_order.php' );
+}
+
+/**
  * Including CSS & JS
  *
  * @since 1.0
