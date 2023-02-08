@@ -60,7 +60,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'type'        => 'text',
 					'label'       => __( 'Hotel Video', 'tourfic' ),
 					'is_pro'      => true,
-					'badge_up'    => true,
 					'subtitle'    => __( 'Enter YouTube/Vimeo URL here', 'tourfic' ),
 					'validate'    => 'csf_validate_url',
 					'placeholder' => __( '', 'tourfic' ),

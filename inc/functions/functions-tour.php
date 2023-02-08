@@ -1060,9 +1060,11 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
     ?>
 	<div class="single-tour-wrap <?php echo $featured ? esc_attr('tf-featured') : '' ?>">
 		<div class="single-tour-inner">
+            <?php if( $featured ): ?>
             <div class="tf-featured-badge">
 				<span><?php _e( 'Featured','tourfic' ) ?></span>
 			</div>
+            <?php endif; ?>
 			<div class="tourfic-single-left">
                 <a href="<?php echo esc_url($url); ?>">
 				<?php

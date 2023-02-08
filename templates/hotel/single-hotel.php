@@ -271,7 +271,14 @@ while ( have_posts() ) : the_post();
 											} ?>
                                         </div>
                                         <div class="swiper-button-prev sw-btn"><i class="fa fa-angle-left"></i></div>
-                                        <div class="swiper-button-next sw-btn"><i class="fa fa-angle-right"></i></div>
+                                        <div class="swiper-button-next sw-btn"><i class="fa fa-angle-right"></i></div>                                       
+                                        
+                                        <?php
+                                            /**
+                                             * Hotel video section in the hero
+                                             */
+                                            do_action( 'tf_gallery_video' );
+                                         ?>
                                     </div>
                                 </div>
                             </div>
@@ -286,9 +293,17 @@ while ( have_posts() ) : the_post();
 											echo get_the_post_thumbnail( $post_id, 'tf_gallery_thumb' );
 											echo '</a>';
 											echo '</div>';
-											?>
-
+                                            ?>
+                                            
                                         </div>
+                                        
+                                        <?php
+                                        /**
+                                         * Hotel video section in the hero
+                                         */
+                                        do_action( 'tf_gallery_video' );
+                                         ?>
+
                                     </div>
                                 </div>
                             </div>
