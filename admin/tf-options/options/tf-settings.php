@@ -638,11 +638,6 @@ TF_Settings::option( 'tf_settings', array(
 			'icon'   => 'fas fa-cogs',
 			'fields' => array(
 				array(
-					'id'      => 'global_design_heading',
-					'type'    => 'heading',
-					'content' => __( 'Global Settings', 'tourfic' ),
-				),
-				array(
 					'id'      => 'global_design_notice',
 					'type'    => 'notice',
 					'style'   => 'info',
@@ -652,7 +647,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'tourfic-button-color',
 					'type'     => 'color',
 					'label'    => __( 'Button Color', 'tourfic' ),
-					'subtitle' => __( 'Button Color of Tourfic (e.g. Blue color on our Demo)', 'tourfic' ),
+					'subtitle' => __( 'Colors of all buttons related to Tourfic', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'colors'   => array(
@@ -664,7 +659,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'tourfic-button-bg-color',
 					'type'     => 'color',
 					'label'    => __( 'Button Background Color', 'tourfic' ),
-					'subtitle' => __( 'Button Background Color of Tourfic ', 'tourfic' ),
+					'subtitle' => __( 'Background Colors of all buttons related to Tourfic ', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'colors'   => array(
@@ -676,7 +671,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'tourfic-sidebar-booking',
 					'type'     => 'color',
 					'label'    => __( 'Sidebar Booking Form', 'tourfic' ),
-					'subtitle' => __( 'The Gradient color of Sidebar Booking', 'tourfic' ),
+					'subtitle' => __( 'The Gradient color of Sidebar Booking (Available on Search Result and Single Hotel Page)', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'colors'   => array(
@@ -688,7 +683,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'tourfic-faq-style',
 					'type'     => 'color',
 					'label'    => __( 'FAQ Styles', 'tourfic' ),
-					'subtitle' => __( 'Style of FAQ Section', 'tourfic' ),
+					'subtitle' => __( 'Style of FAQ Section for both Hotels and Tours', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'colors'   => array(
@@ -701,7 +696,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'tourfic-review-style',
 					'type'     => 'color',
 					'label'    => __( 'Review Styles', 'tourfic' ),
-					'subtitle' => __( 'Style of Review Section', 'tourfic' ),
+					'subtitle' => __( 'Style of Review Section both Hotels and Tours', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'colors'   => array(
@@ -730,7 +725,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'tourfic-hotel-type-bg-color',
 					'type'     => 'color',
 					'label'    => __( 'Hotel Type Color', 'tourfic' ),
-					'subtitle' => __( 'The "Hotel" text above heading ', 'tourfic' ),
+					'subtitle' => __( 'The "Hotel" text above main heading of single hotel ', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'colors'   => array(
@@ -742,7 +737,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'tourfic-hotel-share-icon',
 					'type'     => 'color',
 					'label'    => __( 'Share Icon Color', 'tourfic' ),
-					'subtitle' => __( 'The color of Share Icon', 'tourfic' ),
+					'subtitle' => __( 'The color of the Share Icons', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'colors'   => array(
@@ -754,7 +749,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'tourfic-hotel-map-button',
 					'type'     => 'color',
 					'label'    => __( 'Map Button Background', 'tourfic' ),
-					'subtitle' => __( 'The Gradient color of Map Button', 'tourfic' ),
+					'subtitle' => __( 'Map Button Background Color (Gradient)', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'colors'   => array(
@@ -768,7 +763,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'tourfic-hotel-map-button-text',
 					'type'     => 'color',
 					'label'    => __( 'Map Button Text Color', 'tourfic' ),
-					'subtitle' => __( 'The color of Map Button text', 'tourfic' ),
+					'subtitle' => __( 'The text color of Map Button', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'colors'   => array(
@@ -779,7 +774,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'tourfic-hotel-features-color',
 					'type'     => 'color',
 					'label'    => __( 'Hotel Features Color', 'tourfic' ),
-					'subtitle' => __( 'The Color of Features Icon ', 'tourfic' ),
+					'subtitle' => __( 'Features section icon color', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'colors'   => array(
@@ -790,7 +785,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'tourfic-hotel-table-style',
 					'type'     => 'color',
 					'label'    => __( 'Room Table Styles', 'tourfic' ),
-					'subtitle' => __( 'The style of Room Table', 'tourfic' ),
+					'subtitle' => __( 'Hotel Room Table styling options', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'colors'   => array(
@@ -815,7 +810,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'tourfic-tour-pricing-color',
 					'type'     => 'color',
 					'label'    => __( 'Price Section', 'tourfic' ),
-					'subtitle' => __( 'Styling of the Pricing', 'tourfic' ),
+					'subtitle' => __( 'Styling of the Pricing Section', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
 					'colors'   => array(
