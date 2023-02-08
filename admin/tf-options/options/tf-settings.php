@@ -914,6 +914,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'      => 'google-page-option',
 					'type'    => 'select',
 					'label'   => __( 'Select Map', 'tourfic' ),
+					'subtitle' => __( 'This map is used to dynamically search your hotel/tour location on the option panel. The frontend map information is based on this data. We use "OpenStreetMap” by default. You can also use Google Map. To use Google map, you need to insert your Google Map API Key.', 'tourfic' ),
 					'options' => array(
 						'default' => __( 'Default Map', 'tourfic' ),
 						''        => __( 'Google Map (Pro)', 'tourfic' ),
@@ -1248,6 +1249,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'      => 'affiliate_heading',
 					'type'    => 'heading',
 					'content' => __( 'Affiliate Settings', 'tourfic' ),
+					'subtitle' => __( 'Use these options if you want to show 3rd party data and earn commission from them. Currently, we only allow Booking.com and TravelPayout. Gradually more options would be added.', 'tourfic' ),
 				),
 				array(
 					'id'     => 'tf-tab',
