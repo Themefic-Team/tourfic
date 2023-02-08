@@ -212,14 +212,14 @@ TF_Settings::option( 'tf_settings', array(
 		),
 		// Partial Payment Popup
 		'tour_payment_popup' => array(
-			'title'  => esc_html__( 'Partial Payment Popup', 'tourfic' ),
+			'title'  => esc_html__( 'Partial Payment', 'tourfic' ),
 			'parent' => 'tour',
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
 					'id'    => 'signle_tour_heading',
 					'type'  => 'heading',
-					'label' => __( 'Text settings for the Partial Payment modal', 'tourfic' ),
+					'label' => __( 'Settings for Partial Payment Popup', 'tourfic' ),
 				),
 				array(
 					'id'      => '',
@@ -231,28 +231,28 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => '',
 					'type'    => 'textarea',
-					'label'   => __( 'Subtitle', 'tourfic' ),
+					'label'   => __( 'Description', 'tourfic' ),
 					'is_pro'  => true,
 					'default' => __( 'You can Partial Payment amount for booking the tour. After booking the tour, you can pay the rest amount after the tour is completed.', 'tourfic' ),
 				),
 				array(
 					'id'      => '',
 					'type'    => 'text',
-					'label'   => __( 'Amount text', 'tourfic' ),
+					'label'   => __( 'Text before the Price Amount', 'tourfic' ),
 					'is_pro'  => true,
 					'default' => __( 'Amount of Partial Payment on total price', 'tourfic' ),
 				),
 				array(
 					'id'      => '',
 					'type'    => 'text',
-					'label'   => __( 'Button text for full payment', 'tourfic' ),
+					'label'   => __( 'Text for Button (Full Payment)', 'tourfic' ),
 					'is_pro'  => true,
 					'default' => __( 'Pay full amount', 'tourfic' ),
 				),
 				array(
 					'id'      => '',
 					'type'    => 'text',
-					'label'   => __( 'Button text for deposit', 'tourfic' ),
+					'label'   => __( 'Text for Button (Partial Payment)', 'tourfic' ),
 					'is_pro'  => true,
 					'default' => __( 'Make a Partial Payment', 'tourfic' ),
 				),
@@ -270,13 +270,18 @@ TF_Settings::option( 'tf_settings', array(
 					'tabs' => array(
 						array(
 							'id'     => 'itinerary-builder-setting',
-							'title'  => 'Itinerary Builder Setting',
+							'title'  => 'Itinerary Builder Settings',
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
 								array(
+									'id'       => 'itinerary-builder-heading',
+									'type'     => 'heading',
+									'subtitle' => __( 'You can create your own Itinerary using Tourfic\'s Itinerary builder. The builder can be found on Single Tour Settings', 'tourfic' ),
+								),
+								array(
 									'id'           => '',
 									'type'         => 'repeater',
-									'label'        => __( 'Itinerary options', 'tourfic' ),
+									'label'        => __( 'Create Custom Itinerary options', 'tourfic' ),
 									'button_title' => __( 'Add New Options', 'tourfic' ),
 									'is_pro'       => true,
 									'fields'       => array(
@@ -356,14 +361,15 @@ TF_Settings::option( 'tf_settings', array(
 						),
 						array(
 							'id'     => 'itinerary-downloader-setting',
-							'title'  => 'Itinerary Downloader Setting',
+							'title'  => 'Itinerary Downloader Settings',
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
 								array(
-									'id'     => '',
-									'type'   => 'switch',
-									'is_pro' => true,
-									'label'  => __( 'Enable Itinerary Downloader', 'tourfic' ),
+									'id'       => '',
+									'type'     => 'switch',
+									'is_pro'   => true,
+									'label'    => __( 'Enable Itinerary Downloader', 'tourfic' ),
+									'subtitle' => __( 'Enabling this will allow customers to download the itinerary plan in PDF format.', 'tourfic' ),
 								),
 								array(
 									'id'      => 'companey_info_heading',
@@ -484,16 +490,16 @@ TF_Settings::option( 'tf_settings', array(
 									),
 								),
 								array(
-									'id'    => 'signle_tour_fonts',
-									'type'  => 'heading',
-									'label' => __( 'PDF Downloader Multilanguage Support', 'tourfic' ),
+									'id'       => 'signle_tour_fonts',
+									'type'     => 'heading',
+									'label'    => __( 'PDF Downloader Font Support', 'tourfic' ),
+									'subtitle' => __( 'If your site\'s language is not English, then upload your language font. Otherwise, your Downloader PDF may not work properly.', 'tourfic' ),
 								),
 								array(
-									'id'       => '',
-									'type'     => 'file',
-									'label'    => __( 'Upload Fonts', 'tourfic' ),
-									'subtitle' => __( 'Upload Fonts for Multilanguage support', 'tourfic' ),
-									'is_pro'   => true,
+									'id'     => '',
+									'type'   => 'file',
+									'label'  => __( 'Upload Fonts', 'tourfic' ),
+									'is_pro' => true,
 								),
 							),
 						),
@@ -508,19 +514,12 @@ TF_Settings::option( 'tf_settings', array(
 			'title'  => __( 'Multi Vendor', 'tourfic' ),
 			'icon'   => 'fas fa-handshake',
 			'fields' => array(
-				// Registration
-				array(
-					'id'      => 'Registration_heading',
-					'type'    => 'heading',
-					'content' => __( 'Registration', 'tourfic' ),
-				),
-
 				array(
 					'id'        => 'reg-pop',
 					'type'      => 'switch',
 					'label'     => __( 'Registration Form Popup', 'tourfic' ),
 					'is_pro'    => true,
-					'subtitle'  => __( 'Add class <code>tf-reg-popup</code> to trigger the popup', 'tourfic' ),
+					'subtitle'  => __( 'Enable this options to show Registration Form as Popup. Add class <code>tf-reg-popup</code> on your button code to trigger the popup', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100,
@@ -545,7 +544,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'         => 'prevent-login',
 					'type'       => 'switch',
 					'label'      => __( 'Login Restriction', 'tourfic' ),
-					'subtitle'   => __( 'Prevent unverified user to login', 'tourfic' ),
+					'subtitle'   => __( 'Vendor can not login until Email is verified', 'tourfic' ),
 					'is_pro'     => true,
 					'dependency' => array( 'email-verify', '==', 'true' ),
 					'default'    => true,
@@ -555,13 +554,6 @@ TF_Settings::option( 'tf_settings', array(
 					'id'      => 'notice_shortcode',
 					'type'    => 'notice',
 					'content' => __( 'Use shortcode <code>[tf_login_form]</code> to show login form in post/page/widget.', 'tourfic' ),
-				),
-
-				// Vendor
-				array(
-					'id'      => 'Vendor_heading',
-					'type'    => 'heading',
-					'content' => __( 'Vendor', 'tourfic' ),
 				),
 
 				array(
@@ -597,7 +589,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'        => 'select2',
 					'placeholder' => __( 'Select a page', 'tourfic' ),
 					'label'       => __( 'Select Search Result Page', 'tourfic' ),
-					'description' => __( 'Page template: <code>Tourfic - Search Result</code> must be selected', 'tourfic' ),
+					'description' => __( 'This page will be used to show the Search form Results. Please make sure Page template: <code>Tourfic - Search Result</code> is selected while creating this page.', 'tourfic' ),
 					'options'     => 'posts',
 					'query_args'  => array(
 						'post_type'      => 'page',
@@ -606,15 +598,17 @@ TF_Settings::option( 'tf_settings', array(
 				),
 
 				array(
-					'id'    => 'posts_per_page',
-					'type'  => 'number',
-					'label' => __( 'Search result posts per page', 'tourfic' )
+					'id'       => 'posts_per_page',
+					'type'     => 'number',
+					'label'    => __( 'Search Items to show per page', 'tourfic' ),
+					'subtitle' => __( 'Add the total number of hotels/tours you want to show per page on the Search result.', 'tourfic' ),
 				),
 
 				array(
 					'id'        => 'date_hotel_search',
 					'type'      => 'switch',
 					'label'     => __( 'Date Required in Hotel Search', 'tourfic' ),
+					'subtitle'  => __( 'Enable this option if you want the user to select their Checkin/Checkout date to search', 'tourfic' ),
 					'is_pro'    => true,
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
@@ -625,6 +619,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'        => 'date_tour_search',
 					'type'      => 'switch',
 					'label'     => __( 'Date Required in Tour Search', 'tourfic' ),
+					'subtitle'  => __( 'Enable this option if you want the user to select their Tour date to search', 'tourfic' ),
 					'is_pro'    => true,
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
