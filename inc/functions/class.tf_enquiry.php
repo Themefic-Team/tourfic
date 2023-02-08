@@ -34,11 +34,17 @@ class DBTFTable extends WP_List_Table {
 	//if result more than 15 then add pro row
 	public function display_rows() {
 		foreach ( $this->items as $key => $item ) {
-			if ( $key > 14 ) {
-				echo '<tr class="pro-row" style="text-align: center; background-color: rgb(225 52 34)"><td colspan="5"><a href="https://tourfic.com/" target="_blank"><h3 style="color:#fff;margin: 5px 0;">' . __( 'Upgrade to Pro Version to see more', 'tourfic' ) . '</h3></a></td></tr>';
-			} else {
+			if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
 				$this->single_row( $item );
+			} else {
+				if ( $key == 14) {
+					$this->single_row( $item );
+					echo '<tr class="pro-row" style="text-align: center; background-color: rgb(225 52 34)"><td colspan="5"><a href="https://tourfic.com/" target="_blank"><h3 style="color:#fff;margin: 5px 0;">' . __( 'Upgrade to Pro Version to see more', 'tourfic' ) . '</h3></a></td></tr>';
+				} else {
+					$this->single_row( $item );
+				}
 			}
+
 		}
 	}
 
