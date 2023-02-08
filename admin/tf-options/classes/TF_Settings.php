@@ -445,7 +445,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									<?php _e("See the installation tab.","tourfic"); ?>
+									<?php _e("Please check our documentations","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -458,7 +458,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									<?php _e("Yes, Tourfic is fully free which is available on WordPress.org. This free version will always be free. It also has a pro version (under development) with additional features which you can purchase from our official website.","tourfic"); ?>
+									<?php _e("Yes, Tourfic is fully free which is available on WordPress.org. This free version will always be free. It also has a pro version with additional features which you can purchase from our official website.","tourfic"); ?>
 									</p>
 								</div>
 							</div>
