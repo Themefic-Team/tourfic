@@ -20,11 +20,11 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'disable-services',
 					'type'     => 'checkbox',
-					'label'    => __( 'Disable Services', 'tourfic' ),
-					'subtitle' => __( 'Disable or hide the services you don\'t need by ticking the checkbox', 'tourfic' ),
+					'label'    => __( 'Disable Post Types', 'tourfic' ),
+					'subtitle' => __( 'Tick the checkbox to disable the Post Type you don\'t need.', 'tourfic' ),
 					'options'  => array(
-						'hotel' => __( 'Hotel', 'tourfic' ),
-						'tour'  => __( 'Tour', 'tourfic' ),
+						'hotel' => __( 'Hotels', 'tourfic' ),
+						'tour'  => __( 'Tours', 'tourfic' ),
 					),
 				),
 			),
@@ -40,9 +40,10 @@ TF_Settings::option( 'tf_settings', array(
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
-					'id'    => 'label_off_heading',
-					'type'  => 'heading',
-					'label' => __( 'Single Hotel Settings', 'tourfic' ),
+					'id'        => 'label_off_heading',
+					'type'      => 'heading',
+					'label'     => __( 'Global Settings for Single Hotel Page', 'tourfic' ),
+					'sub_title' => __( 'These options can be overridden from Single Hotel Settings.', 'tourfic' ),
 				),
 
 				array(
@@ -72,10 +73,11 @@ TF_Settings::option( 'tf_settings', array(
 					'is_pro'    => true
 				),
 				array(
-					'id'     => 'h-enquiry-email',
-					'type'   => 'text',
-					'label'  => __( 'Enquiry Email', 'tourfic' ),
-					'is_pro' => true,
+					'id'       => 'h-enquiry-email',
+					'type'     => 'text',
+					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
+					'subtitle' => __( 'The Email to receive all enquiry form submissions', 'tourfic' ),
+					'is_pro'   => true,
 				),
 			),
 		),
@@ -87,49 +89,57 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'hotel_room_heading',
 					'type'  => 'heading',
-					'label' => __( 'Hotel Room Configuration', 'tourfic' ),
+					'label' => __( 'Global Configuration for Hotel Rooms', 'tourfic' ),
 				),
 
 				array(
 					'id'       => '',
 					'type'     => 'switch',
-					'label'    => __( 'Children age limit', 'tourfic' ),
-					'subtitle' => __( 'keep blank if don\'t want to add', 'tourfic' ),
+					'label'    => __( 'Children Age Limit', 'tourfic' ),
+					'subtitle' => __( 'Turn on this option to set the Maximum age limit for Children. This can be overridden from Single Hotel Settings.', 'tourfic' ),
 					'is_pro'   => true,
+				),
+				array(
+					'id'         => '',
+					'type'       => 'number',
+					'label'      => __( 'Insert your Maximum Age Limit', 'tourfic' ),
+					'subtitle'   => __( 'Numbers Only', 'tourfic' ),
+					'attributes' => array(
+						'min' => '0',
+					),
+					'is_pro'     => true,
 				),
 			),
 		),
 		// Hotel service Popup
 		'payment_popup'      => array(
-			'title'  => esc_html__( 'Hotel Service Popup', 'tourfic' ),
+			'title'  => esc_html__( 'Partial payment', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
 					'id'    => 'hotel_popup_heading',
 					'type'  => 'heading',
-					'label' => __( 'Hotel Service Popup texts', 'tourfic' ),
+					'label' => __( 'Settings for Partial Payment Popup', 'tourfic' ),
 				),
 				array(
-					'id'      => '',
-					'type'    => 'text',
-					'label'   => __( 'Popup title', 'tourfic' ),
-					'default' => __( 'Add Service to your Booking.', 'tourfic' ),
-					'is_pro'  => true,
+					'id'     => '',
+					'type'   => 'text',
+					'label'  => __( 'Popup Title', 'tourfic' ),
+					'is_pro' => true,
 				),
 
 				array(
-					'id'      => '',
-					'type'    => 'textarea',
-					'label'   => __( 'Popup subtitle', 'tourfic' ),
-					'default' => __( 'Select the services you want to add to your booking.', 'tourfic' ),
-					'is_pro'  => true,
+					'id'     => '',
+					'type'   => 'textarea',
+					'label'  => __( 'Popup Description', 'tourfic' ),
+					'is_pro' => true,
 				),
 
 				array(
 					'id'      => '',
 					'type'    => 'text',
-					'label'   => __( 'Popup Action', 'tourfic' ),
+					'label'   => __( 'Popup Button Text', 'tourfic' ),
 					'default' => __( 'Continue to booking', 'tourfic' ),
 					'is_pro'  => true,
 				)
@@ -147,9 +157,10 @@ TF_Settings::option( 'tf_settings', array(
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
-					'id'    => 'signle_tour_heading',
-					'type'  => 'heading',
-					'label' => __( 'Single Tour Settings', 'tourfic' ),
+					'id'       => 'signle_tour_heading',
+					'type'     => 'heading',
+					'label'    => __( 'Global Settings for Single Tours Page', 'tourfic' ),
+					'subtitle' => __( 'These options can be overridden from Single Hotel Settings.', 'tourfic' ),
 				),
 
 				array(
@@ -191,10 +202,11 @@ TF_Settings::option( 'tf_settings', array(
 					),
 				),
 				array(
-					'id'     => 't-enquiry-email',
-					'type'   => 'text',
-					'label'  => __( 'Enquiry Email', 'tourfic' ),
-					'is_pro' => true,
+					'id'       => 't-enquiry-email',
+					'type'     => 'text',
+					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
+					'subtitle' => __( 'The Email to receive all enquiry form submissions', 'tourfic' ),
+					'is_pro'   => true,
 				),
 			),
 		),
@@ -487,7 +499,7 @@ TF_Settings::option( 'tf_settings', array(
 						),
 					),
 				),
-				
+
 			),
 		),
 
@@ -913,8 +925,8 @@ TF_Settings::option( 'tf_settings', array(
 					'type'    => 'select',
 					'label'   => __( 'Select Map', 'tourfic' ),
 					'options' => array(
-						'default'   => __( 'Default Map', 'tourfic' ),
-						'' => __( 'Google Map (Pro)', 'tourfic' ),
+						'default' => __( 'Default Map', 'tourfic' ),
+						''        => __( 'Google Map (Pro)', 'tourfic' ),
 					),
 					'default' => 'default'
 				),
