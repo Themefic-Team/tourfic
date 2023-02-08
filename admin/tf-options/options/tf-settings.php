@@ -912,15 +912,14 @@ TF_Settings::option( 'tf_settings', array(
 					'id'      => 'google-page-option',
 					'type'    => 'select',
 					'label'   => __( 'Select Map', 'tourfic' ),
-					'is_pro'  => true,
 					'options' => array(
 						'default'   => __( 'Default Map', 'tourfic' ),
-						'googlemap' => __( 'Google Map', 'tourfic' ),
+						'' => __( 'Google Map (Pro)', 'tourfic' ),
 					),
 					'default' => 'default'
 				),
 				array(
-					'id'         => 'tf-googlemapapi',
+					'id'         => '',
 					'type'       => 'text',
 					'label'      => __( 'Google Map API Key', 'tourfic' ),
 					'dependency' => array(

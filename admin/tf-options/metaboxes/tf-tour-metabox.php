@@ -72,11 +72,11 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					),
 				),
 				array(
-					'id'       => '',
+					'id'       => 'location',
+					'class'    => 'gmaps',
 					'type'     => 'map',
-					'label'    => __( 'Tour Location Pro (Auto Suggestion)', 'tourfic' ),
+					'label'    => __( 'Tour Location on Map', 'tourfic' ),
 					'subtitle' => __( 'Location suggestions will be provided from Google', 'tourfic' ),
-					'is_pro'   => true,
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,

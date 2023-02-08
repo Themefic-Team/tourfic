@@ -24,9 +24,9 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					),
 				),
 				array(
-					'id'       => '',
+					'id'       => 'map',
+					'class'    => 'gmaps',
 					'type'     => 'map',
-					'is_pro'   => true,
 					'label'    => __( 'Location on Map', 'tourfic' ),
 					'subtitle' => __( 'Select one location on the map to see latitude and longitude', 'tourfic' ),
 					'height'   => '250px',
