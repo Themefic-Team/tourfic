@@ -1332,10 +1332,12 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 			if ( !empty( $room['repeat_by_date'] ) ) {
 				$disabled_dates = $room['repeat_by_date'];
 				//iterate all the available disabled dates
-				foreach ( $disabled_dates as $date ) {
-					$dateArr = explode( ',', $date['disabled_date'] );
-					$dateArr = sprintf( '"%s"', implode( '","', $dateArr ) );
-					$total_dis_dates[] = $dateArr;
+				if ( !empty( $disabled_dates ) ){
+					foreach ( $disabled_dates as $date ) {
+						$dateArr = explode( ',', $date['disabled_date'] ? $date['disabled_date'] : '' );
+						$dateArr = sprintf( '"%s"', implode( '","', $dateArr ) );
+						$total_dis_dates[] = $dateArr;
+					}
 				}
 			}
 		}
@@ -1343,6 +1345,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 		array_merge( $total_dis_dates, $total_dis_dates );
 		$total_dis_dates = implode( ',', $total_dis_dates );
 	endif;
+	$total_dis_dates = is_array($total_dis_dates) && empty($total_dis_dates) ? '' : $total_dis_dates;
 ?>
 
     <!-- Start Booking widget -->
@@ -1433,7 +1436,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                     },
                     defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
-					<?php if(class_exists('TF_PRO')) : ?>
+					<?php if( function_exists('is_tf_pro') && is_tf_pro()) : ?>
 						disable: [<?php echo $total_dis_dates; ?>],
 					<?php endif; ?>
 					<?php
