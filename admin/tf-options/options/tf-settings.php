@@ -1498,7 +1498,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'affiliate_heading',
 					'type'     => 'heading',
-					'content'  => __( 'Affiliate Settings', 'tourfic' ),
+					'label'  => __( 'Affiliate Settings', 'tourfic' ),
 					'subtitle' => __( 'Use these options if you want to show 3rd party data and earn commission from them. Currently, we only allow Booking.com and TravelPayout. Gradually more options would be added.', 'tourfic' ),
 				),
 				array(
