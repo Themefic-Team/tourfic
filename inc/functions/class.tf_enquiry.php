@@ -39,7 +39,7 @@ class DBTFTable extends WP_List_Table {
 			} else {
 				if ( $key == 14) {
 					$this->single_row( $item );
-					echo '<tr class="pro-row" style="text-align: center; background-color: rgb(225 52 34)"><td colspan="5"><a href="https://tourfic.com/" target="_blank"><h3 style="color:#fff;margin: 5px 0;">' . __( 'Upgrade to Pro Version to see more', 'tourfic' ) . '</h3></a></td></tr>';
+					echo '<tr class="pro-row" style="text-align: center; background-color: #ededf8"><td colspan="5"><a href="https://tourfic.com/" target="_blank"><h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;">' . __( 'Upgrade to Pro Version to see more', 'tourfic' ) . '</h3></a></td></tr>';
 				} else {
 					$this->single_row( $item );
 				}

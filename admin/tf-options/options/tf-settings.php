@@ -372,6 +372,25 @@ TF_Settings::option( 'tf_settings', array(
 									'subtitle' => __( 'Enabling this will allow customers to download the itinerary plan in PDF format.', 'tourfic' ),
 								),
 								array(
+									'id'      => 'tour_settings',
+									'type'    => 'heading',
+									'content' => __( 'Tour Settings in PDF', 'tourfic' ),
+								),
+								array(
+									'id'          => '',
+									'type'        => 'number',
+									'label'       => __( 'Tour Thumbnail Height', 'tourfic' ),
+									'field_width' => 50,
+									'is_pro'      => true,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'number',
+									'label'       => __( 'Tour Thumbnail Width', 'tourfic' ),
+									'field_width' => 50,
+									'is_pro'      => true,
+								),
+								array(
 									'id'      => 'companey_info_heading',
 									'type'    => 'heading',
 									'content' => __( 'Company Info', 'tourfic' ),
@@ -709,6 +728,7 @@ TF_Settings::option( 'tf_settings', array(
 						'review_bg_color'       => __( 'Review Background', 'tourfic' ),
 					)
 				),
+
 			),
 		),
 		'hotel_design'       => array(
@@ -911,15 +931,15 @@ TF_Settings::option( 'tf_settings', array(
 					'content' => __( 'Map Settings', 'tourfic' )
 				),
 				array(
-					'id'      => 'google-page-option',
-					'type'    => 'select',
-					'label'   => __( 'Select Map', 'tourfic' ),
+					'id'       => 'google-page-option',
+					'type'     => 'select',
+					'label'    => __( 'Select Map', 'tourfic' ),
 					'subtitle' => __( 'This map is used to dynamically search your hotel/tour location on the option panel. The frontend map information is based on this data. We use "OpenStreetMap” by default. You can also use Google Map. To use Google map, you need to insert your Google Map API Key.', 'tourfic' ),
-					'options' => array(
+					'options'  => array(
 						'default' => __( 'Default Map', 'tourfic' ),
 						''        => __( 'Google Map (Pro)', 'tourfic' ),
 					),
-					'default' => 'default'
+					'default'  => 'default'
 				),
 				array(
 					'id'         => '',
@@ -1246,9 +1266,9 @@ TF_Settings::option( 'tf_settings', array(
 			'icon'   => 'fa fa-handshake-o',
 			'fields' => array(
 				array(
-					'id'      => 'affiliate_heading',
-					'type'    => 'heading',
-					'content' => __( 'Affiliate Settings', 'tourfic' ),
+					'id'       => 'affiliate_heading',
+					'type'     => 'heading',
+					'content'  => __( 'Affiliate Settings', 'tourfic' ),
 					'subtitle' => __( 'Use these options if you want to show 3rd party data and earn commission from them. Currently, we only allow Booking.com and TravelPayout. Gradually more options would be added.', 'tourfic' ),
 				),
 				array(
