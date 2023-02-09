@@ -31,8 +31,8 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'       => 'tour_as_featured',
 					'type'     => 'switch',
-					'label'    => __( 'Set this tour as featured', 'tourfic' ),
-					'subtitle' => __( 'Tour will be shown under featured sections', 'tourfic' ),
+					'label'    => __( 'Set as featured', 'tourfic' ),
+					'subtitle' => __( 'This tour will be highlighted at the top of the search result and tour archive page', 'tourfic' ),
 				),
 				array(
 					'id'      => 'tour_single_page',
@@ -52,7 +52,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'     => '',
 					'type'   => 'text',
-					'label'  => __( 'Tour video', 'tourfic' ),
+					'label'  => __( 'Tour Video', 'tourfic' ),
 					'is_pro' => true,
 				),
 			),
@@ -67,6 +67,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'type'       => 'textarea',
 					'label'      => __( 'Tour Location', 'tourfic' ),
 					'subtitle'   => __( 'Manually enter your tour location', 'tourfic' ),
+					'placeholder' => __( 'e.g. 123 ABC Road, Toronto, Ontario 20100', 'tourfic' ),
 					'attributes' => array(
 						'required' => 'required',
 					),
@@ -75,8 +76,8 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'       => 'location',
 					'class'    => 'gmaps',
 					'type'     => 'map',
-					'label'    => __( 'Tour Location on Map', 'tourfic' ),
-					'subtitle' => __( 'Location suggestions will be provided from Google', 'tourfic' ),
+					'label'    => __( 'Dynamic Location Search', 'tourfic' ),
+					'subtitle' => __( 'Location suggestions will be provided from Google or OpenStreetMap (Depending on your selection from the Settings Panel)', 'tourfic' ),
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,
@@ -107,20 +108,20 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'          => 'language',
 					'type'        => 'text',
 					'label'       => __( 'Languages', 'tourfic' ),
-					'subtitle'    => __( 'Input languages seperated by comma (,)', 'tourfic' ),
+					'subtitle'    => __( 'Include multiple language seperated by comma (,)', 'tourfic' ),
 					'field_width' => '33.33',
 				),
 
 				array(
 					'id'       => 'additional_information',
 					'type'     => 'editor',
-					'label'    => __( 'Tour Hightlights', 'tourfic' ),
+					'label'    => __( 'Tour Highlights', 'tourfic' ),
 					'subtitle' => __( 'Enter a summary or full subtitle of your tour', 'tourfic' ),
 				),
 				array(
 					'id'      => 'hightlights_thumbnail',
 					'type'    => 'image',
-					'label'   => __( 'Tour Hightlights Thumbnail', 'tourfic' ),
+					'label'   => __( 'Tour Highlights Thumbnail', 'tourfic' ),
 					'library' => 'image',
 				),
 				array(
@@ -180,7 +181,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'     => 'tour-extra',
 					'type'   => 'repeater',
-					'label'  => __( 'Extra Services on Tour', 'tourfic' ),
+					'label'  => __( 'Extra Services Available on Your Tour', 'tourfic' ),
 					'is_pro' => true,
 					'fields' => array(
 						array(
@@ -218,11 +219,11 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'       => 'pricing',
 					'type'     => 'select',
 					'label'    => __( 'Pricing rule', 'tourfic' ),
-					'subtitle' => __( 'Input pricing rule', 'tourfic' ),
+					'subtitle' => __( 'Select your pricing logic', 'tourfic' ),
 					'class'    => 'pricing',
 					'options'  => [
-						'person' => __( 'Person', 'tourfic' ),
-						'group'  => __( 'Group (Pro)', 'tourfic' ),
+						'person' => __( 'Per Person', 'tourfic' ),
+						''  => __( 'Per Group (Pro)', 'tourfic' ),
 					],
 					'default'  => 'person',
 				),
@@ -230,7 +231,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'          => 'adult_price',
 					'type'        => 'number',
 					'label'       => __( 'Price for Adult', 'tourfic' ),
-					'subtitle'    => __( 'For no price use 00', 'tourfic' ),
+					'subtitle'    => __( 'Insert amount only', 'tourfic' ),
 					'dependency'  => [
 						array( 'pricing', '==', 'person' ),
 						[ 'disable_adult_price', '==', 'false' ]
@@ -248,7 +249,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						[ 'disable_child_price', '==', 'false' ]
 					],
 					'label'       => __( 'Price for Child', 'tourfic' ),
-					'subtitle'    => __( 'For no price use 00', 'tourfic' ),
+					'subtitle'    => __( 'Insert amount only', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '0',
 					),
@@ -263,7 +264,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						[ 'disable_adult_price', '==', 'false' ],
 					],
 					'label'       => __( 'Price for Infant', 'tourfic' ),
-					'subtitle'    => __( 'For no price use 00', 'tourfic' ),
+					'subtitle'    => __( 'Insert amount only', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '0',
 					),
@@ -273,8 +274,8 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'         => '',
 					'type'       => 'number',
 					'dependency' => array( 'pricing', '==', 'group' ),
-					'label'      => __( 'Group Price', 'tourfic' ),
-					'subtitle'   => __( 'Input group price', 'tourfic' ),
+					'label'      => __( 'Price per Group', 'tourfic' ),
+					'subtitle'   => __( 'Insert amount only', 'tourfic' ),
 					'is_pro'     => true,
 					'attributes' => array(
 						'min' => '0',
@@ -284,7 +285,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'       => 'discount_type',
 					'type'     => 'select',
 					'label'    => __( 'Discount Type', 'tourfic' ),
-					'subtitle' => __( 'Select discount type Percent or Fixed', 'tourfic' ),
+					'subtitle' => __( 'Select discount type: Percentage or Fixed', 'tourfic' ),
 					'options'  => array(
 						'none'    => __( 'None', 'tourfic' ),
 						'percent' => __( 'Percent', 'tourfic' ),
@@ -296,7 +297,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'         => 'discount_price',
 					'type'       => 'number',
 					'label'      => __( 'Discount Price', 'tourfic' ),
-					'subtitle'   => __( 'Input discount price in number', 'tourfic' ),
+					'subtitle'   => __( 'Insert amount only', 'tourfic' ),
 					'attributes' => array(
 						'min' => '0',
 					),
@@ -308,21 +309,18 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'          => 'disable_adult_price',
 					'type'        => 'switch',
 					'label'       => __( 'Disable adult price', 'tourfic' ),
-					'subtitle'    => __( 'Hide No of adult in booking form', 'tourfic' ),
 					'field_width' => '33.33',
 				),
 				array(
 					'id'          => 'disable_child_price',
 					'type'        => 'switch',
 					'label'       => __( 'Disable children price', 'tourfic' ),
-					'subtitle'    => __( 'Hide No of children in booking form', 'tourfic' ),
 					'field_width' => '33.33',
 				),
 				array(
 					'id'          => 'disable_infant_price',
 					'type'        => 'switch',
 					'label'       => __( 'Disable infant price', 'tourfic' ),
-					'subtitle'    => __( 'Hide No of infant in booking form', 'tourfic' ),
 					'field_width' => '33.33',
 				),
 				array(
