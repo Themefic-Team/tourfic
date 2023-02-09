@@ -17,18 +17,18 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'          => 'address',
 					'type'        => 'textarea',
 					'label'       => __( 'Hotel Address', 'tourfic' ),
-					'subtitle'    => __( 'Enter hotel adress', 'tourfic' ),
-					'placeholder' => __( 'Address', 'tourfic' ),
+					'subtitle'    => __( 'The address you want to show below the Hotel Title', 'tourfic' ),
+					'placeholder' => __( 'e.g. 123 ABC Road, Toronto, Ontario 20100', 'tourfic' ),
 					'attributes'  => array(
 						'required' => 'required',
 					),
 				),
 				array(
-					'id'       => '',
+					'id'       => 'map',
+					'class'    => 'gmaps',
 					'type'     => 'map',
-					'is_pro'   => true,
-					'label'    => __( 'Location on Map', 'tourfic' ),
-					'subtitle' => __( 'Select one location on the map to see latitude and longitude', 'tourfic' ),
+					'label'    => __( 'Dynamic Location Search', 'tourfic' ),
+					'subtitle' => __( 'Write your desired address and select the address from the suggestions. This address will be used to hyperlink the hotel address on the frontend.', 'tourfic' ),
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,
@@ -38,14 +38,14 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 		),
 		// Hotel Details
 		'hotel_details'    => array(
-			'title'  => __( 'Hotel Details', 'tourfic' ),
+			'title'  => __( 'Gallery & Video', 'tourfic' ),
 			'icon'   => 'fa-solid fa-hotel',
 			'fields' => array(
 				array(
 					'id'       => 'gallery',
 					'type'     => 'gallery',
 					'label'    => __( 'Hotel Gallery', 'tourfic' ),
-					'subtitle' => __( 'Upload one or many images to make a hotel image gallery for customers', 'tourfic' ),
+					'subtitle' => __( 'Upload one or many images to create a hotel image gallery for customers. This is common gallery visible at the top part of the hotel page', 'tourfic' ),
 				),
 				array(
 					'id'        => 'featured',
@@ -72,18 +72,17 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 			'icon'   => 'fa-solid fa-van-shuttle',
 			'fields' => array(
 				array(
-					'id'       => 'hotel-service',
-					'type'     => 'switch',
-					'label'    => __( 'Pickup Service', 'tourfic' ),
-					'subtitle' => __( 'Airport Service', 'tourfic' ),
-					'default'  => true,
-					'is_pro'   => true,
+					'id'      => 'hotel-service',
+					'type'    => 'switch',
+					'label'   => __( 'Airport Pickup Service', 'tourfic' ),
+					'default' => true,
+					'is_pro'  => true,
 				)
 			),
 		),
 		// Check-in check-out
 		'check_time'       => array(
-			'title'  => __( 'Check in/out Time', 'tourfic' ),
+			'title'  => __( 'Check in / Check out', 'tourfic' ),
 			'icon'   => 'fa-solid fa-clock-rotate-left',
 			'fields' => array(
 				array(
@@ -92,21 +91,20 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'label'    => __( 'Allowed Full Day Booking', 'tourfic' ),
 					'is_pro'   => true,
 					'badge_up' => true,
-					'subtitle' => __( 'You can book room with full day', 'tourfic' ),
-					'desc'     => __( 'E.g: booking from 22 -23, then all days 22 and 23 are full, other people cannot book', 'tourfic' ),
+					'subtitle' => __( 'Rooms will be booked for the whole day', 'tourfic' ),
 				),
 
 			),
 		),
 		// Room Details
 		'room_details'     => array(
-			'title'  => __( 'Room Details', 'tourfic' ),
+			'title'  => __( 'Room Management', 'tourfic' ),
 			'icon'   => 'fa-sharp fa-solid fa-door-open',
 			'fields' => array(
 				array(
 					'id'           => 'room',
 					'type'         => 'repeater',
-					'label'        => __( 'Room Details', 'tourfic' ),
+					'label'        => __( 'Insert / Create your hotel rooms', 'tourfic' ),
 					'button_title' => __( 'Add New Room', 'tourfic' ),
 					'class'        => 'room-repeater',
 					'max'          => 5,
@@ -144,17 +142,15 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 						array(
 							'id'          => 'title',
 							'type'        => 'text',
-							'subtitle'    => __( 'Enter your room title', 'tourfic' ),
+							'subtitle'    => __( 'e.g. Superior Queen Room with Two Queen Beds', 'tourfic' ),
 							'label'       => __( 'Room Title', 'tourfic' ),
-							'placeholder' => __( '', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'num-room',
 							'type'        => 'number',
-							'label'       => __( 'Number of Rooms', 'tourfic' ),
-							'subtitle'    => __( 'Number of available rooms for booking', 'tourfic' ),
-							'placeholder' => __( '', 'tourfic' ),
+							'label'       => __( 'Room Availability', 'tourfic' ),
+							'subtitle'    => __( 'Number of rooms available for booking', 'tourfic' ),
 							'field_width' => 50,
 							'attributes'  => array(
 								'min' => '0',
@@ -163,9 +159,9 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 						array(
 							'id'        => '',
 							'type'      => 'switch',
-							'label'     => __( 'Reduce Number of Rooms by Orders', 'tourfic' ),
 							'is_pro'    => true,
-							'subtitle'  => __( 'Reduce the number of available rooms for booking by WooCommerce orders details', 'tourfic' ),
+							'label'     => __( 'Room Inventory Management', 'tourfic' ),
+							'subtitle'  => __( 'Reduce total number of available rooms once a rooms is booked by a customer', 'tourfic' ),
 							'label_on'  => __( 'Yes', 'tourfic' ),
 							'label_off' => __( 'No', 'tourfic' ),
 							'default'   => false,
@@ -178,16 +174,17 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'class'   => 'tf-field-class',
 						),
 						array(
-							'id'     => 'gallery',
-							'type'   => 'gallery',
-							'label'  => __( 'Gallery', 'tourfic' ),
-							'is_pro' => true,
+							'id'       => 'gallery',
+							'type'     => 'gallery',
+							'label'    => __( 'Room Gallery', 'tourfic' ),
+							'subtitle' => __( 'Upload images specific to this room', 'tourfic' ),
+							'is_pro'   => true,
 						),
 						array(
 							'id'          => 'bed',
 							'type'        => 'number',
 							'label'       => __( 'Number of Beds', 'tourfic' ),
-							'subtitle'    => __( 'Number of beds present in the room', 'tourfic' ),
+							'subtitle'    => __( 'Number of beds available in the room', 'tourfic' ),
 							'attributes'  => array(
 								'min' => '0',
 							),
@@ -207,7 +204,19 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'id'          => 'child',
 							'type'        => 'number',
 							'label'       => __( 'Number of Children', 'tourfic' ),
-							'subtitle'    => __( 'Max number of persons allowed in the room', 'tourfic' ),
+							'subtitle'    => __( 'Max number of children allowed in the room', 'tourfic' ),
+							'attributes'  => array(
+								'min' => '0',
+							),
+							'field_width' => 33.33,
+						),
+						array(
+							'id'          => 'children_age_limit',
+							'type'        => 'number',
+							'is_pro'      => true,
+							'label'       => __( 'Children age limit', 'tourfic' ),
+							'subtitle'    => __( 'Maximum age of a children', 'tourfic' ),
+							'description' => __( 'keep blank if don\'t want to add', 'tourfic' ),
 							'attributes'  => array(
 								'min' => '0',
 							),
@@ -217,19 +226,19 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'id'          => 'footage',
 							'type'        => 'text',
 							'label'       => __( 'Room Footage', 'tourfic' ),
-							'subtitle'    => __( 'Room footage (sft)', 'tourfic' ),
+							'subtitle'    => __( 'Room footage (in sft)', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'features',
 							'type'        => 'select2',
 							'label'       => __( 'Select Features', 'tourfic' ),
-							'subtitle'    => __( 'Please Select Features', 'tourfic' ),
+							'subtitle'    => __( 'e.g. Coffee Machine, Microwave Oven (Select as many as applicable). You need to create these features from the “Features” tab.', 'tourfic' ),
 							'placeholder' => __( 'Select', 'tourfic' ),
 							'multiple'    => true,
 							'options'     => 'terms',
 							'query_args'  => array(
-								'taxonomy' => 'hotel_feature',
+								'taxonomy'   => 'hotel_feature',
 								'hide_empty' => false,
 							),
 							'field_width' => 50,
@@ -248,7 +257,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 						array(
 							'id'      => 'pricing-by',
 							'type'    => 'select',
-							'label'   => __( 'Pricing by', 'tourfic' ),
+							'label'   => __( 'Room Pricing Type', 'tourfic' ),
 							'options' => array(
 								'1' => __( 'Per room', 'tourfic' ),
 								'2' => __( 'Per person (Pro)', 'tourfic' ),
@@ -258,34 +267,32 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 						array(
 							'id'         => 'price',
 							'type'       => 'text',
-							'label'      => __( 'Pricing', 'tourfic' ),
+							'label'      => __( 'Insert Your Price', 'tourfic' ),
 							'subtitle'   => __( 'The price of room per one night', 'tourfic' ),
 							'dependency' => array( 'pricing-by', '==', '1' ),
 						),
 						array(
-							'id'         => '',
-							'type'       => 'text',
-							'label'      => __( 'Adult Pricing', 'tourfic' ),
-							'is_pro'     => true,
-							'desc'       => __( 'The price of room per one night', 'tourfic' ),
-							'dependency' => array( 'pricing-by', '==', '2' ),
+							'id'          => '',
+							'type'        => 'text',
+							'label'       => __( 'Price per Adult', 'tourfic' ),
+							'is_pro'      => true,
+							'dependency'  => array( 'pricing-by', '==', '2' ),
 							'field_width' => 50,
 						),
 
 						array(
-							'id'         => '',
-							'type'       => 'text',
-							'label'      => __( 'Children Pricing', 'tourfic' ),
-							'is_pro'     => true,
-							'desc'       => __( 'The price of room per one night', 'tourfic' ),
-							'dependency' => array( 'pricing-by', '==', '2' ),
+							'id'          => '',
+							'type'        => 'text',
+							'label'       => __( 'Price per Children', 'tourfic' ),
+							'is_pro'      => true,
+							'dependency'  => array( 'pricing-by', '==', '2' ),
 							'field_width' => 50,
 						),
 						array(
 							'id'        => 'price_multi_day',
 							'type'      => 'switch',
 							'label'     => __( 'Multiply Pricing By Night', 'tourfic' ),
-							'subtitle'  => __( 'During booking pricing will be multiplied by number of nights (Check-in to Check-out)', 'tourfic' ),
+							'subtitle'  => __( 'During booking, pricing will be multiplied by number of nights (Check-in to Check-out)', 'tourfic' ),
 							'label_on'  => __( 'Yes', 'tourfic' ),
 							'label_off' => __( 'No', 'tourfic' ),
 							'default'   => true,
@@ -369,22 +376,22 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 								),
 
 								array(
-									'id'       => '',
-									'type'     => 'text',
-									'label'    => __( 'Adult Pricing', 'tourfic' ),
-									'subtitle' => __( 'The price of room per one night', 'tourfic' ),
-									'is_pro'   => true,
+									'id'         => '',
+									'type'       => 'text',
+									'label'      => __( 'Adult Pricing', 'tourfic' ),
+									'subtitle'   => __( 'The price of room per one night', 'tourfic' ),
+									'is_pro'     => true,
 									'dependency' => array(
 										array( 'pricing-by', '==', '2' ),
 									),
 								),
 
 								array(
-									'id'       => '',
-									'type'     => 'text',
-									'title'    => __( 'Children Pricing', 'tourfic' ),
-									'subtitle' => __( 'The price of room per one night', 'tourfic' ),
-									'is_pro'   => true,
+									'id'         => '',
+									'type'       => 'text',
+									'title'      => __( 'Children Pricing', 'tourfic' ),
+									'subtitle'   => __( 'The price of room per one night', 'tourfic' ),
+									'is_pro'     => true,
 									'dependency' => array(
 										array( 'pricing-by', '==', '2' ),
 									),
@@ -427,13 +434,13 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 		),
 		// Terms & conditions
 		'terms_conditions' => array(
-			'title'  => __( 'Terms & conditions', 'tourfic' ),
+			'title'  => __( 'Terms & Conditions', 'tourfic' ),
 			'icon'   => 'fa-regular fa-square-check',
 			'fields' => array(
 				array(
 					'id'    => 'tc',
 					'type'  => 'editor',
-					'label' => __( 'Terms & Conditions', 'tourfic' ),
+					'label' => __( 'Hotel Terms & Conditions', 'tourfic' ),
 				),
 			),
 		),
@@ -467,10 +474,10 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				),
 
 				array(
-					'id'     => 'notice',
-					'type'   => 'notice',
-					'notice' => 'info',
-					'content'  => __( 'These settings will overwrite global settings', 'tourfic' ),
+					'id'      => 'notice',
+					'type'    => 'notice',
+					'notice'  => 'info',
+					'content' => __( 'These settings will overwrite global settings', 'tourfic' ),
 				),
 
 			),

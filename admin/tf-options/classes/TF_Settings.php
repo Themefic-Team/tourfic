@@ -369,7 +369,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				<div class="tf-help-center-banner">
 					<div class="tf-help-center-content">
 						<h2><?php _e("Setup Wizard","tourfic"); ?></h2>
-						<p><?php _e("To know the eventin starting guide, run the setup wizard. Your existing settings will not change.","tourfic"); ?></p>
+						<p><?php _e("To know the Tourfic starting guide, run the setup wizard. Your existing settings will not change.","tourfic"); ?></p>
                         <a href="<?php echo esc_url(admin_url( 'admin.php?page=tf-setup-wizard' )) ?>" class="tf-admin-btn tf-btn-secondary"><?php _e("Setup Wizard","tourfic"); ?></a>
 					</div>
 					<div class="tf-help-center-image">
@@ -445,7 +445,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									<?php _e("See the installation tab.","tourfic"); ?>
+									<?php _e("Please check our documentations","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -458,7 +458,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									<?php _e("Yes, Tourfic is fully free which is available on WordPress.org. This free version will always be free. It also has a pro version (under development) with additional features which you can purchase from our official website.","tourfic"); ?>
+									<?php _e("Yes, Tourfic is fully free which is available on WordPress.org. This free version will always be free. It also has a pro version with additional features which you can purchase from our official website.","tourfic"); ?>
 									</p>
 								</div>
 							</div>

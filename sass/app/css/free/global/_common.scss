@@ -1223,6 +1223,25 @@ li.filter-item {
 .tf-single-review.tf-reviews-slider ul.slick-dots {
     margin: 0;
 }
+.tf-product-total {
+    @include flexbox();
+    @include justify-content(flex-end);
+    gap: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media only screen and (max-width: 1000px) {
     form.tf-review-form {
         gap: 20px;
