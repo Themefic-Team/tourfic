@@ -51,7 +51,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'        => 'featured',
 					'type'      => 'switch',
 					'label'     => __( 'Featured Hotel', 'tourfic' ),
-					'badge_up'  => true,
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false,
@@ -61,7 +60,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'type'        => 'text',
 					'label'       => __( 'Hotel Video', 'tourfic' ),
 					'is_pro'      => true,
-					'badge_up'    => true,
 					'subtitle'    => __( 'Enter YouTube/Vimeo URL here', 'tourfic' ),
 					'validate'    => 'csf_validate_url',
 					'placeholder' => __( '', 'tourfic' ),
@@ -347,6 +345,20 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 									'is_pro'   => true,
 								),
 
+								//Disable specific dates within this date range
+								array(
+									'id'         => '',
+									'type'       => 'date',
+									'label'      => __( 'Disable Specific Dates', 'tourfic' ),
+									'is_pro'     => true,
+									'format'     => 'Y/m/d',
+									'label_from' => __( 'Start Date','tourfic'),
+									'label_to'   => __('End Date','tourfic'),
+									'multiple'   => true,
+									'attributes' => array(
+										'autocomplete' => 'off',
+									),
+								),
 
 								array(
 									'id'       => '',

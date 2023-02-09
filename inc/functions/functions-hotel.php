@@ -1317,9 +1317,33 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
 	//get features
 	$features = ! empty( $_GET['features'] ) ? sanitize_text_field( $_GET['features'] ) : '';
-	
 
-	?>
+	/**
+	 * Get each hotel room's disabled date from the available dates
+	 * @since 2.9.7
+	 * @author Abu Hena
+	 */
+	$meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
+	// Room Details
+	$rooms = !empty( $meta['room'] ) ? $meta['room'] : '';
+	$total_dis_dates = [];
+	if ( !empty( $rooms ) ):
+		foreach ( $rooms as $key => $room ) {
+			if ( !empty( $room['repeat_by_date'] ) ) {
+				$disabled_dates = $room['repeat_by_date'];
+				//iterate all the available disabled dates
+				foreach ( $disabled_dates as $date ) {
+					$dateArr = explode( ',', $date['disabled_date'] );
+					$dateArr = sprintf( '"%s"', implode( '","', $dateArr ) );
+					$total_dis_dates[] = $dateArr;
+				}
+			}
+		}
+		//merge the new arrays
+		array_merge( $total_dis_dates, $total_dis_dates );
+		$total_dis_dates = implode( ',', $total_dis_dates );
+	endif;
+?>
 
     <!-- Start Booking widget -->
     <form id="tf-single-hotel-avail" class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off">
@@ -1397,7 +1421,6 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
     <script>
         (function ($) {
             $(document).ready(function () {
-
                 const checkinoutdateange = flatpickr(".tf-hotel-side-booking #check-in-out-date", {
                     enableTime: false,
                     mode: "range",
@@ -1410,9 +1433,11 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                     },
                     defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
-
+					<?php if(class_exists('TF_PRO')) : ?>
+						disable: [<?php echo $total_dis_dates; ?>],
+					<?php endif; ?>
 					<?php
-					// Flatpickt locale for translation
+					// Flatpickr locale for translation
 					tf_flatpickr_locale();
 					?>
                 });
@@ -1454,7 +1479,8 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
         }, $b_rooms );
         $b_rooms = unserialize( $tf_hotel_b_rooms_value );
     }
-
+	// Featured
+	$featured  = !empty($meta['featured']) ? $meta['featured'] : '';
 	/**
 	 * All values from URL
 	 */
@@ -1523,10 +1549,15 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	endif;
 	?>
 
-    <div class="single-tour-wrap">
+    <div class="single-tour-wrap <?php echo $featured ? esc_attr('tf-featured') : ''  ?>">			
         <div class="single-tour-inner">
+			<?php if( $featured ): ?>
+				<div class="tf-featured-badge">
+					<span><?php _e( 'Featured','tourfic' ) ?></span>
+				</div>
+			<?php endif; ?>
             <div class="tourfic-single-left">
-                <a href="<?php echo $url; ?>">
+                <a href="<?php echo esc_url( $url ); ?>">
 					<?php
 					if ( has_post_thumbnail() ) {
 						the_post_thumbnail( 'full' );
