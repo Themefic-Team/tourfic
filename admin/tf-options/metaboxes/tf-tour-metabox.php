@@ -7,15 +7,16 @@ defined( 'ABSPATH' ) || exit;
  * @author AbuHena
  * @since 1.7.0
  */
-function tf_tour_meals(){
-	$itinerary_options = ! empty( tf_data_types ( tfopt( 'itinerary-builder-setings' ) ) ) ? tf_data_types( tfopt( 'itinerary-builder-setings' ) ) : '';
-	$all_meals = [];
-	if( !empty( $itinerary_options['meals'] ) && is_array( $itinerary_options['meals'] ) ){
-		$meals = $itinerary_options['meals'];	
-		foreach ( $meals as $key => $meal ){
-			$all_meals[ $meal['meal'].$key ] = $meal['meal'];
+function tf_tour_meals() {
+	$itinerary_options = ! empty( tf_data_types( tfopt( 'itinerary-builder-setings' ) ) ) ? tf_data_types( tfopt( 'itinerary-builder-setings' ) ) : '';
+	$all_meals         = [];
+	if ( ! empty( $itinerary_options['meals'] ) && is_array( $itinerary_options['meals'] ) ) {
+		$meals = $itinerary_options['meals'];
+		foreach ( $meals as $key => $meal ) {
+			$all_meals[ $meal['meal'] . $key ] = $meal['meal'];
 		}
 	}
+
 	return $all_meals;
 }
 
@@ -63,12 +64,12 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 			'icon'   => 'fa-solid fa-location-dot',
 			'fields' => array(
 				array(
-					'id'         => 'text_location',
-					'type'       => 'textarea',
-					'label'      => __( 'Tour Location', 'tourfic' ),
-					'subtitle'   => __( 'Manually enter your tour location', 'tourfic' ),
+					'id'          => 'text_location',
+					'type'        => 'textarea',
+					'label'       => __( 'Tour Location', 'tourfic' ),
+					'subtitle'    => __( 'Manually enter your tour location', 'tourfic' ),
 					'placeholder' => __( 'e.g. 123 ABC Road, Toronto, Ontario 20100', 'tourfic' ),
-					'attributes' => array(
+					'attributes'  => array(
 						'required' => 'required',
 					),
 				),
@@ -127,8 +128,8 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'       => 'features',
 					'type'     => 'select2',
-					'multiple'     => true,
-					'is_pro'     => true,
+					'multiple' => true,
+					'is_pro'   => true,
 					'label'    => __( 'Select features', 'tourfic' ),
 					'subtitle' => __( 'Select features that are available in this tour', 'tourfic' ),
 				),
@@ -223,7 +224,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'class'    => 'pricing',
 					'options'  => [
 						'person' => __( 'Per Person', 'tourfic' ),
-						''  => __( 'Per Group (Pro)', 'tourfic' ),
+						''       => __( 'Per Group (Pro)', 'tourfic' ),
 					],
 					'default'  => 'person',
 				),
@@ -405,12 +406,12 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							'id'       => 'pricing',
 							'type'     => 'select',
 							'label'    => __( 'Pricing rule', 'tourfic' ),
-							'subtitle' => __( 'Input pricing rule', 'tourfic' ),
+							'subtitle' => __( 'Select your pricing logic', 'tourfic' ),
 							'is_pro'   => true,
 							'class'    => 'pricing',
 							'options'  => [
-								'person' => __( 'Person', 'tourfic' ),
-								'group'  => __( 'Group', 'tourfic' ),
+								'person' => __( 'Per Person', 'tourfic' ),
+								'group'  => __( 'Per Group', 'tourfic' ),
 							],
 							'default'  => 'person',
 						),
@@ -418,7 +419,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							'id'         => '',
 							'type'       => 'number',
 							'label'      => __( 'Price for Adult', 'tourfic' ),
-							'subtitle'   => __( 'Input adult price', 'tourfic' ),
+							'subtitle'   => __( 'Insert amount only', 'tourfic' ),
 							'is_pro'     => true,
 							'dependency' => array( 'pricing', '==', 'person' ),
 							'attributes' => array(
@@ -429,7 +430,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							'id'         => '',
 							'type'       => 'number',
 							'label'      => __( 'Price for Child', 'tourfic' ),
-							'subtitle'   => __( 'Input child price', 'tourfic' ),
+							'subtitle'   => __( 'Insert amount only', 'tourfic' ),
 							'is_pro'     => true,
 							'dependency' => array( 'pricing', '==', 'person' ),
 							'attributes' => array(
@@ -440,7 +441,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							'id'         => '',
 							'type'       => 'number',
 							'label'      => __( 'Price for Infant', 'tourfic' ),
-							'subtitle'   => __( 'Input infant price', 'tourfic' ),
+							'subtitle'   => __( 'Insert amount only', 'tourfic' ),
 							'is_pro'     => true,
 							'dependency' => array( 'pricing', '==', 'person' ),
 							'attributes' => array(
@@ -452,7 +453,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							'type'       => 'number',
 							'dependency' => array( 'pricing', '==', 'group' ),
 							'label'      => __( 'Group Price', 'tourfic' ),
-							'subtitle'   => __( 'Input group price', 'tourfic' ),
+							'subtitle'   => __( 'Insert amount only', 'tourfic' ),
 							'is_pro'     => true,
 							'attributes' => array(
 								'min' => '0',
@@ -469,7 +470,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 									'id'       => '',
 									'type'     => 'date',
 									'label'    => __( 'Time', 'tourfic' ),
-									'subtitle' => __( 'Only Time', 'tourfic' ),
+									'subtitle' => __( 'Select your Time', 'tourfic' ),
 									'is_pro'   => true,
 									'settings' => array(
 										'noCalendar' => true,
@@ -493,7 +494,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'          => 'cont_min_people',
 					'type'        => 'number',
 					'label'       => __( 'Minimum Person', 'tourfic' ),
-					'subtitle'    => __( 'Minimum person to travel', 'tourfic' ),
+					'subtitle'    => __( 'Minimum person needed to travel', 'tourfic' ),
 					'dependency'  => array(
 						array( 'type', '==', 'continuous' ),
 						array( 'custom_avail', '==', 'false' ),
@@ -504,7 +505,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'          => 'cont_max_people',
 					'type'        => 'number',
 					'label'       => __( 'Maximum Person', 'tourfic' ),
-					'subtitle'    => __( 'Maximum person to travel', 'tourfic' ),
+					'subtitle'    => __( 'Maximum person allowed to travel', 'tourfic' ),
 					'dependency'  => array(
 						array( 'type', '==', 'continuous' ),
 						array( 'custom_avail', '==', 'false' ),
@@ -526,7 +527,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							'id'       => '',
 							'type'     => 'datetime',
 							'title'    => __( 'Time', 'tourfic' ),
-							'subtitle' => __( 'Only Time', 'tourfic' ),
+							'subtitle' => __( 'Select your Time', 'tourfic' ),
 							'is_pro'   => true,
 							'settings' => array(
 								'noCalendar' => true,
@@ -648,14 +649,14 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 									'type'     => 'number',
 									'label'    => __( 'Minimum People', 'tourfic' ),
 									'is_pro'   => true,
-									'subtitle' => __( 'Minimum seat number', 'tourfic' ),
+									'subtitle' => __( 'Minimum person needed to travel', 'tourfic' ),
 								),
 								array(
 									'id'       => '',
 									'type'     => 'number',
 									'label'    => __( 'Maximum People', 'tourfic' ),
 									'is_pro'   => true,
-									'subtitle' => __( 'Maximum seat number', 'tourfic' ),
+									'subtitle' => __( 'Maximum person allowed to travel', 'tourfic' ),
 								),
 							),
 						),
@@ -688,14 +689,13 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'           => 'inc',
 					'type'         => 'repeater',
-					'label'        => __( 'Include', 'tourfic' ),
-					'button_title' => __( 'Add New Include', 'tourfic' ),
+					'label'        => __( 'Items/Features included in this tour', 'tourfic' ),
+					'button_title' => __( 'Add New Item', 'tourfic' ),
 					'fields'       => array(
 						array(
-							'id'       => 'inc',
-							'type'     => 'text',
-							'label'    => __( 'Included', 'tourfic' ),
-							'subtitle' => __( 'Included facilites', 'tourfic' ),
+							'id'    => 'inc',
+							'type'  => 'text',
+							'label' => __( 'Insert your item', 'tourfic' ),
 						),
 					),
 				),
@@ -708,14 +708,13 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'           => 'exc',
 					'type'         => 'repeater',
-					'label'        => __( 'Exclude', 'tourfic' ),
-					'button_title' => __( 'Add New Exclude', 'tourfic' ),
+					'label'        => __( 'Items/Features exclude in this tour', 'tourfic' ),
+					'button_title' => __( 'Add New Item', 'tourfic' ),
 					'fields'       => array(
 						array(
-							'id'       => 'exc',
-							'type'     => 'text',
-							'label'    => __( 'Excluded', 'tourfic' ),
-							'subtitle' => __( 'Excluded facilites', 'tourfic' ),
+							'id'    => 'exc',
+							'type'  => 'text',
+							'label' => __( 'Insert your item', 'tourfic' ),
 						),
 					),
 				),
@@ -736,40 +735,40 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 
 		// // Itinerary
 		'itinerary'            => array(
-			'title'  => __( 'Itinerary', 'tourfic' ),
+			'title'  => __( 'Itinerary Builder', 'tourfic' ),
 			'icon'   => 'fa-solid fa-clipboard-list',
 			'fields' => array(
 				array(
 					'id'           => 'itinerary',
 					'type'         => 'repeater',
-					'label'        => __( 'Itinerary', 'tourfic' ),
+					'label'        => __( 'Create your Travel Itinerary', 'tourfic' ),
 					'button_title' => __( 'Add New Itinerary', 'tourfic' ),
 					'fields'       => array(
 						array(
-							'id'       => 'time',
-							'type'     => 'text',
-							'label'    => __( 'Time or Day', 'tourfic' ),
-							'subtitle' => __( 'You can place the tour plan', 'tourfic' ),
+							'id'          => 'time',
+							'type'        => 'text',
+							'label'       => __( 'Time or Day', 'tourfic' ),
+							'subtitle'    => __( 'e.g. Day 1 or 9:00 am', 'tourfic' ),
 							'field_width' => '50',
 						),
 						array(
-							'id'       => 'title',
-							'type'     => 'text',
-							'label'    => __( 'Title', 'tourfic' ),
-							'subtitle' => __( 'Input the title here', 'tourfic' ),
+							'id'          => 'title',
+							'type'        => 'text',
+							'label'       => __( 'Title', 'tourfic' ),
+							'subtitle'    => __( 'Input the title here', 'tourfic' ),
 							'field_width' => '50',
 						),
 						array(
 							'id'          => 'duration',
-							'label'     => __( 'Duration', 'tourfic' ),
+							'label'       => __( 'Duration', 'tourfic' ),
 							'type'        => 'text',
 							'placeholder' => 'Duration',
 							'field_width' => 50,
-							'is_pro' => true,
+							'is_pro'      => true,
 						),
 						array(
 							'id'          => 'timetype',
-							'label'     => __( 'Duration Type', 'tourfic' ),
+							'label'       => __( 'Duration Type', 'tourfic' ),
 							'type'        => 'select',
 							'options'     => [
 								'Hour'   => __( 'Hour', 'tourfic' ),
@@ -777,7 +776,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							],
 							'default'     => 'Hour',
 							'field_width' => 50,
-							'is_pro' => true,
+							'is_pro'      => true,
 						),
 						array(
 							'id'           => 'image',
@@ -794,65 +793,68 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							'label' => __( 'Description', 'tourfic' ),
 						),
 						array(
-							'id'    => 'gallery_image',
-							'type'  => 'gallery',
-							'label' => __( 'Gallery Image', 'tourfic' ),
+							'id'     => 'gallery_image',
+							'type'   => 'gallery',
+							'label'  => __( 'Gallery Image', 'tourfic' ),
 							'is_pro' => true,
 						),
 						array(
-							'id'     => 'itinerary-sleep-mode',
-							'type'   => 'repeater',
+							'id'           => 'itinerary-sleep-mode',
+							'type'         => 'repeater',
 							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'  => __( 'Itinerary options', 'tourfic' ),
-							'is_pro' => true,
-							'fields' => array(
+							'label'        => __( 'Custom Itinerary options', 'tourfic' ),
+							'subtitle'     => __( 'You can create these options from Tourfic Settings', 'tourfic' ),
+							'is_pro'       => true,
+							'fields'       => array(
 								array(
 									'id'               => 'sleepmode',
 									'type'             => 'select',
+									'is_pro'           => true,
 									'options_callback' => 'sleep_mode_option_callback'
 								),
 								array(
 									'id'            => 'sleep',
 									'type'          => 'editor',
-									'label'         => __( 'Itinerary options Info', 'tourfic' ),
+									'is_pro'        => true,
+									'label'         => __( 'Description', 'tourfic' ),
 									'media_buttons' => false,
 								)
 							),
 						),
 						array(
-							'id'      => 'meals',
-							'type'    => 'checkbox',
-							'label'   => __( 'Meals Included', 'tourfic' ),
-							'inline'  => true,
+							'id'               => 'meals',
+							'type'             => 'checkbox',
+							'label'            => __( 'Meals Included', 'tourfic' ),
+							'inline'           => true,
 							'options_callback' => 'tf_tour_meals',
-							'is_pro' => true,
+							'is_pro'           => true,
 						),
 						array(
 							'id'          => 'loacation',
-							'label'   => __( 'Location', 'tourfic' ),
+							'label'       => __( 'Location', 'tourfic' ),
 							'type'        => 'text',
 							'class'       => 'ininenary-group',
 							'placeholder' => 'Location',
 							'field_width' => 33,
-							'is_pro' => true,
+							'is_pro'      => true,
 						),
 						array(
 							'id'          => 'altitude',
-							'label'   => __( 'Altitude', 'tourfic' ), 
+							'label'       => __( 'Altitude', 'tourfic' ),
 							'type'        => 'text',
 							'placeholder' => 'Altitude',
 							'class'       => 'ininenary-group',
 							'field_width' => 33,
-							'is_pro' => true,
+							'is_pro'      => true,
 						),
 						array(
 							'id'               => 'valuetype',
-							'label'   => __( 'Elevation Input', 'tourfic' ), 
+							'label'            => __( 'Elevation Input', 'tourfic' ),
 							'type'             => 'select',
 							'class'            => 'ininenary-group',
 							'options_callback' => 'elevation_option_callback',
 							'field_width'      => 33,
-							'is_pro' => true,
+							'is_pro'           => true,
 						),
 					),
 				),
@@ -865,11 +867,11 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(
 				array(
-					'id'     => 'faqs',
-					'type'   => 'repeater',
-					'label'  => __( 'FAQs', 'tourfic' ),
+					'id'           => 'faqs',
+					'type'         => 'repeater',
+					'label'        => __( 'FAQs', 'tourfic' ),
 					'button_title' => __( 'Add New Faq', 'tourfic' ),
-					'fields' => array(
+					'fields'       => array(
 						array(
 							'id'    => 'title',
 							'type'  => 'text',
@@ -878,7 +880,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						array(
 							'id'    => 'desc',
 							'type'  => 'editor',
-							'label' => __( 'FAQ subtitle', 'tourfic' ),
+							'label' => __( 'FAQ Subtitle', 'tourfic' ),
 						),
 					),
 				),
@@ -894,7 +896,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'    => 'terms_conditions',
 					'type'  => 'editor',
-					'label' => __( 'Terms & Conditions', 'tourfic' ),
+					'label' => __( 'Terms & Conditions of this tour', 'tourfic' ),
 				),
 			),
 		),
@@ -928,10 +930,10 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				),
 
 				array(
-					'id'     => 'notice',
-					'type'   => 'notice',
-					'notice' => 'info',
-					'content'  => __( 'These settings will overwrite global settings', 'tourfic' ),
+					'id'      => 'notice',
+					'type'    => 'notice',
+					'notice'  => 'info',
+					'content' => __( 'These settings will overwrite global settings', 'tourfic' ),
 				),
 			),
 		),
