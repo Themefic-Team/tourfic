@@ -277,7 +277,7 @@ while ( have_posts() ) : the_post();
                                             /**
                                              * Hotel video section in the hero
                                              */
-                                            do_action( 'tf_gallery_video' );
+                                            do_action( 'tf_hotel_gallery_video' );
                                          ?>
                                     </div>
                                 </div>
@@ -301,7 +301,7 @@ while ( have_posts() ) : the_post();
                                         /**
                                          * Hotel video section in the hero
                                          */
-                                        do_action( 'tf_gallery_video' );
+                                        do_action( 'tf_hotel_gallery_video' );
                                          ?>
 
                                     </div>

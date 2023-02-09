@@ -1551,11 +1551,13 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 
     <div class="single-tour-wrap <?php echo $featured ? esc_attr('tf-featured') : ''  ?>">			
         <div class="single-tour-inner">
-			<div class="tf-featured-badge">
-				<span><?php _e( 'Featured','tourfic' ) ?></span>
-			</div>
+			<?php if( $featured ): ?>
+				<div class="tf-featured-badge">
+					<span><?php _e( 'Featured','tourfic' ) ?></span>
+				</div>
+			<?php endif; ?>
             <div class="tourfic-single-left">
-                <a href="<?php echo $url; ?>">
+                <a href="<?php echo esc_url( $url ); ?>">
 					<?php
 					if ( has_post_thumbnail() ) {
 						the_post_thumbnail( 'full' );
