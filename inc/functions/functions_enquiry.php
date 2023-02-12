@@ -12,11 +12,23 @@ function tf_add_enquiry_submenu() {
 	// get user role
 	$current_user_role = ! empty( $current_user->roles[0] ) ? $current_user->roles[0] : '';
 	if ( ! empty( $current_user_role ) && ( $current_user_role == 'administrator' || $current_user_role == 'tf_vendor' ) ) {
-		// Tour enquiry
-		add_submenu_page( 'edit.php?post_type=tf_tours', __( 'Tour Enquiry Details', 'tourfic' ), __( 'Enquiry Details', 'tourfic' ), 'edit_tf_tourss', 'tf_tours_enquiry', 'tf_tour_enquiry_page_callback' );
 
-		// Hotel enquiry
-		add_submenu_page( 'edit.php?post_type=tf_hotel', __( 'Hotel Enquiry Details', 'tourfic' ), __( 'Enquiry Details', 'tourfic' ), 'edit_tf_hotels', 'tf_hotel_enquiry', 'tf_hotel_enquiry_page_callback' );
+		if($current_user_role == 'administrator'){
+			// Tour enquiry
+			add_submenu_page( 'edit.php?post_type=tf_tours', __( 'Tour Enquiry Details', 'tourfic' ), __( 'Enquiry Details', 'tourfic' ), 'edit_tf_tourss', 'tf_tours_enquiry', 'tf_tour_enquiry_page_callback' );
+
+			// Hotel enquiry
+			add_submenu_page( 'edit.php?post_type=tf_hotel', __( 'Hotel Enquiry Details', 'tourfic' ), __( 'Enquiry Details', 'tourfic' ), 'edit_tf_hotels', 'tf_hotel_enquiry', 'tf_hotel_enquiry_page_callback' );
+		}
+		if($current_user_role == 'tf_vendor'){
+			if ( ! empty( tf_data_types(tfopt( 'multi-vendor-setings' ))['vendor-enquiry-history'] ) && tf_data_types(tfopt( 'multi-vendor-setings' ))['vendor-enquiry-history'] == '1' ) {
+				// Tour enquiry
+				add_submenu_page( 'edit.php?post_type=tf_tours', __( 'Tour Enquiry Details', 'tourfic' ), __( 'Enquiry Details', 'tourfic' ), 'edit_tf_tourss', 'tf_tours_enquiry', 'tf_tour_enquiry_page_callback' );
+
+				// Hotel enquiry
+				add_submenu_page( 'edit.php?post_type=tf_hotel', __( 'Hotel Enquiry Details', 'tourfic' ), __( 'Enquiry Details', 'tourfic' ), 'edit_tf_hotels', 'tf_hotel_enquiry', 'tf_hotel_enquiry_page_callback' );
+			}
+		}
 	}
 }
 

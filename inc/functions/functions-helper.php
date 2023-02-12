@@ -20,11 +20,15 @@ function tf_booking_search_action() {
 
 add_action('admin_menu', 'tf_documentation_page_integration', 999);
 function tf_documentation_page_integration() {
+	global $current_user;
+	$tf_current_role = $current_user->roles[0];
 	global $submenu;
 	$tfhoteldocumentation = sanitize_url('https://themefic.com/docs/tourfic/');
 	$tftourdocumentation = sanitize_url('https://themefic.com/docs/tourfic/');
-	$submenu['edit.php?post_type=tf_hotel'][] = array( sprintf('<span class="tf-go-docs" style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_hotels', $tfhoteldocumentation );
-	$submenu['edit.php?post_type=tf_tours'][] = array( sprintf('<span class="tf-go-docs" style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_tourss', $tftourdocumentation );
+	if($tf_current_role == "administrator"){
+		$submenu['edit.php?post_type=tf_hotel'][] = array( sprintf('<span class="tf-go-docs" style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_hotels', $tfhoteldocumentation );
+		$submenu['edit.php?post_type=tf_tours'][] = array( sprintf('<span class="tf-go-docs" style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_tourss', $tftourdocumentation );
+	}
 }
 
 /**

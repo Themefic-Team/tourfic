@@ -8,11 +8,25 @@ defined( 'ABSPATH' ) || exit;
  * tf_hotel
  */
 function tf_add_order_submenu() {
-	// Tour booking
-	add_submenu_page( 'edit.php?post_type=tf_tours', __( 'Tour Booking Details', 'tourfic' ), __( 'Booking Details', 'tourfic' ), 'edit_tf_tourss', 'tf_tours_booking', 'tf_tour_booking_page_callback' );
+	$current_user = wp_get_current_user();
+    // get user role
+    $current_user_role = !empty($current_user->roles[0]) ? $current_user->roles[0] : '';
+	if($current_user_role == 'administrator'){
+		// Tour booking
+		add_submenu_page( 'edit.php?post_type=tf_tours', __( 'Tour Booking Details', 'tourfic' ), __( 'Booking Details', 'tourfic' ), 'edit_tf_tourss', 'tf_tours_booking', 'tf_tour_booking_page_callback' );
 
-	// Hotel booking
-	add_submenu_page( 'edit.php?post_type=tf_hotel', __( 'Hotel Booking Details', 'tourfic' ), __( 'Booking Details', 'tourfic' ), 'edit_tf_hotels', 'tf_hotel_booking', 'tf_hotel_booking_page_callback' );
+		// Hotel booking
+		add_submenu_page( 'edit.php?post_type=tf_hotel', __( 'Hotel Booking Details', 'tourfic' ), __( 'Booking Details', 'tourfic' ), 'edit_tf_hotels', 'tf_hotel_booking', 'tf_hotel_booking_page_callback' );
+	}
+	if($current_user_role == 'tf_vendor'){
+		if ( ! empty( tf_data_types(tfopt( 'multi-vendor-setings' ))['vendor-booking-history'] ) && tf_data_types(tfopt( 'multi-vendor-setings' ))['vendor-booking-history'] == '1' ) {
+			// Tour booking
+			add_submenu_page( 'edit.php?post_type=tf_tours', __( 'Tour Booking Details', 'tourfic' ), __( 'Booking Details', 'tourfic' ), 'edit_tf_tourss', 'tf_tours_booking', 'tf_tour_booking_page_callback' );
+
+			// Hotel booking
+			add_submenu_page( 'edit.php?post_type=tf_hotel', __( 'Hotel Booking Details', 'tourfic' ), __( 'Booking Details', 'tourfic' ), 'edit_tf_hotels', 'tf_hotel_booking', 'tf_hotel_booking_page_callback' );
+		}
+	}
 }
 
 add_action( 'admin_menu', 'tf_add_order_submenu' );
