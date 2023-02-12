@@ -22,6 +22,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'attributes'  => array(
 						'required' => 'required',
 					),
+					'searchable' => true
 				),
 				array(
 					'id'       => 'map',
@@ -155,6 +156,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'attributes'  => array(
 								'min' => '0',
 							),
+							'searchable' => true
 						),
 						array(
 							'id'        => '',
@@ -199,6 +201,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 								'min' => '0',
 							),
 							'field_width' => 33.33,
+							'searchable' => true
 						),
 						array(
 							'id'          => 'child',
@@ -209,6 +212,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 								'min' => '0',
 							),
 							'field_width' => 33.33,
+							'searchable' => true
 						),
 						array(
 							'id'          => 'children_age_limit',

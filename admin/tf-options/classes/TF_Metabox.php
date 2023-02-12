@@ -195,19 +195,36 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 								if ( class_exists( $fieldClass ) ) {
 									$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
 									$tf_meta_box_value[ $field['id'] ] = $_field->sanitize();
+
+									if(!empty($field['searchable'])){
+										update_post_meta( $post_id, 'tf_'.$field['id'], $_field->sanitize() );
+									}
+
+									if($fieldClass == 'TF_repeater'){
+										// tf_var_dump($field['fields']);
+										foreach($field['fields'] as $sfield){
+											if(!empty($sfield['searchable'])){
+											tf_var_dump($data);
+
+											// tf_var_dump($data[0][$sfield['id']]);
+											}
+										}
+									}
+
 								}
+
 
 							}
 						}
 					}
 				}
 			}
-
-			if ( ! empty( $tf_meta_box_value ) ) {
-				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
-			} else {
-				delete_post_meta( $post_id, $this->metabox_id );
-			}
+			exit();
+			// if ( ! empty( $tf_meta_box_value ) ) {
+			// 	update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
+			// } else {
+			// 	delete_post_meta( $post_id, $this->metabox_id );
+			// }
 
 		}
 
