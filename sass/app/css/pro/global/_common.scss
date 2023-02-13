@@ -733,10 +733,18 @@
     @media #{$max640}{
         display: flow-root !important;
     }
+    .tf-itinerary-downloader-left{
+        width: 80%;
+        display: flex;
+        align-items: center;
+        @media #{$max640}{
+            display: block !important;
+        }
+    }
 }
 .tf-itinerary-downloader-icon {
     img {
-        width: 120px;
+        width: 100px;
     }
 }
 .tf-itinerary-downloader-title {
@@ -745,6 +753,9 @@
         display: block;
         font-size: 16px;
         font-weight: 600;
+    }
+    p{
+        margin-bottom: 5px;
     }
 }
 @media (min-width: 576px) {

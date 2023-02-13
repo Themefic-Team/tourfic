@@ -85,6 +85,7 @@ while ( have_posts() ) : the_post();
 			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
 		}, $map );
 		$map                = unserialize( $tf_hotel_map_value );
+        $address = !empty($map["address"]) ? $map["address"] : $address;
 	}
 
 	// Hotel Detail

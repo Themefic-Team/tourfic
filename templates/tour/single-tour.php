@@ -45,19 +45,11 @@ while ( have_posts() ) : the_post();
 	$has_in_wishlist = tf_has_item_in_wishlist( $post_id );
 
 	// Address
-
-	if( !empty($meta['location']) && gettype($meta['location'])=="string" ){
-        $tf_tours_adv_loction = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
-            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
-        }, $meta['location'] );
-        $tf_tour_loctions = unserialize( $tf_tours_adv_loction );
-		$location      = isset( $tf_tour_loctions['address'] ) ? $tf_tour_loctions['address'] : '';
+	$location = isset( $meta['text_location'] ) ? $meta['text_location'] : '';
+	
+	if( !empty($meta['location']) && tf_data_types($meta['location'])){
+		$location = !empty( tf_data_types($meta['location'])['address'] ) ? tf_data_types($meta['location'])['address'] : $location;
     }
-
-	$text_location = isset( $meta['text_location'] ) ? $meta['text_location'] : '';
-	if ( empty( $location ) ) {
-		$location = $text_location;
-	}
 	// Gallery
 	$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : array();
 	if ( $gallery ) {
@@ -201,7 +193,7 @@ while ( have_posts() ) : the_post();
                     <div class="tf-hero-bottom-area">
 						<?php
 						$tour_video = ! empty( $meta['tour_video'] ) ? $meta['tour_video'] : '';
-						if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_video ) {
+						if ( !empty($tour_video) ) {
 							?>
                             <div class="tf-hero-btm-icon tf-tour-video" data-fancybox="tour-video" href="<?php echo $tour_video; ?>">
                                 <i class="fab fa-youtube"></i>

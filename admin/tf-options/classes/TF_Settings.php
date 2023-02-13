@@ -369,7 +369,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				<div class="tf-help-center-banner">
 					<div class="tf-help-center-content">
 						<h2><?php _e("Setup Wizard","tourfic"); ?></h2>
-						<p><?php _e("To know the Tourfic starting guide, run the setup wizard. Your existing settings will not change.","tourfic"); ?></p>
+						<p><?php _e("Click the button below to run the setup wizard of Tourfic. Your existing settings will not change.","tourfic"); ?></p>
                         <a href="<?php echo esc_url(admin_url( 'admin.php?page=tf-setup-wizard' )) ?>" class="tf-admin-btn tf-btn-secondary"><?php _e("Setup Wizard","tourfic"); ?></a>
 					</div>
 					<div class="tf-help-center-image">

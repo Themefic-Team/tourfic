@@ -51,10 +51,9 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				),
 
 				array(
-					'id'     => '',
+					'id'     => 'tour_video',
 					'type'   => 'text',
 					'label'  => __( 'Tour Video', 'tourfic' ),
-					'is_pro' => true,
 				),
 			),
 		),
