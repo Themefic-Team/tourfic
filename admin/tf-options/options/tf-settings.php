@@ -545,8 +545,8 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'    => 'vendor-reg',
 									'type'  => 'switch',
-									'label' => __( 'Vendor Registration Option', 'tourfic' ),
-									'subtitle' => __('ON: Allow partner, OFF: Not allow partner','tourfic'),
+									'label' => __( 'Enable Vendor Registration', 'tourfic' ),
+									'subtitle' => __('Visitor can register as vendor using the registration form','tourfic'),
 									'is_pro'   => true,
 								),
 								array(
@@ -561,7 +561,6 @@ TF_Settings::option( 'tf_settings', array(
 									'type'      => 'switch',
 									'label'     => __( 'Registration Form Popup', 'tourfic' ),
 									'subtitle'  => __( 'Add class <code>tf-reg-popup</code> to trigger the popup', 'tourfic' ),
-									'default'   => true,
 									'is_pro'   => true,
 								),
 

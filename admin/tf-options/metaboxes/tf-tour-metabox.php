@@ -688,8 +688,8 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'           => 'inc',
 					'type'         => 'repeater',
-					'label'        => __( 'Items/Features included in this tour', 'tourfic' ),
-					'button_title' => __( 'Add New Item', 'tourfic' ),
+					'label'        => __( 'Items/Features Included in this tour', 'tourfic' ),
+					'button_title' => __( 'Add New Include', 'tourfic' ),
 					'fields'       => array(
 						array(
 							'id'    => 'inc',
@@ -707,8 +707,8 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'           => 'exc',
 					'type'         => 'repeater',
-					'label'        => __( 'Items/Features exclude in this tour', 'tourfic' ),
-					'button_title' => __( 'Add New Item', 'tourfic' ),
+					'label'        => __( 'Items/Features Excluded in this tour', 'tourfic' ),
+					'button_title' => __( 'Add New Exclude', 'tourfic' ),
 					'fields'       => array(
 						array(
 							'id'    => 'exc',

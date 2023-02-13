@@ -1437,7 +1437,6 @@ li.filter-item {
   form.tf-review-form {
     gap: 20px;
   }
-
   .tf-review-form-container {
     min-width: 500px;
   }
@@ -1483,7 +1482,6 @@ li.filter-item {
     width: 100%;
     margin-top: 15px;
   }
-
   .tf_search_result .tf-action-top {
     display: none;
   }
@@ -1492,7 +1490,6 @@ li.filter-item {
   .tf-review-container .tf-review-progress-bar {
     grid-template-columns: auto;
   }
-
   .tf-single-review {
     grid-template-columns: auto;
   }
@@ -1504,43 +1501,35 @@ li.filter-item {
   .tf-review-form-container .tf-rating-wrapper {
     grid-template-columns: 100%;
   }
-
   .tf_destination-wrap {
     width: 100%;
     display: block;
   }
-
   .tf_selectdate-wrap {
     width: 100%;
     display: block;
     padding: 10px 20px !important;
     border-bottom: 1px solid #ccc;
   }
-
   .tf_selectperson-wrap {
     width: 100%;
     display: block;
     padding: 20px !important;
     border-bottom: 1px solid #ccc;
   }
-
   .tf_submit-wrap {
     width: 100%;
     display: block;
   }
-
   .tf_selectdate-wrap.tf_more_info_selections {
     padding: 20px !important;
   }
-
   .tf-container {
     width: 100%;
   }
-
   #check-in-out-date {
     width: 220px !important;
   }
-
   .tours-check-in-out.flatpickr-input.flatpickr-mobile {
     width: 200px !important;
     text-transform: uppercase;
@@ -1555,11 +1544,9 @@ li.filter-item {
   .tf-review-container .tf-review-progress-bar {
     grid-template-columns: auto;
   }
-
   .tf-single-review {
     grid-template-columns: auto;
   }
-
   .tf-single-rating {
     font-size: 14px;
     padding: 6px;
@@ -2004,18 +1991,15 @@ a.page-numbers {
   .archive_ajax_result .single-tour-wrap {
     margin-bottom: 0px;
   }
-
   .tf_property_block_main_row {
     display: block;
   }
-
   .tf-archive-rating-wrapper {
     margin-top: 20px;
   }
   .tf-archive-rating-wrapper h6 {
     text-align: left;
   }
-
   .tf-archive-rating {
     float: none;
   }
@@ -2027,17 +2011,14 @@ a.page-numbers {
   .search-result-inner .tf-search-right {
     grid-row: 1;
   }
-
   .widget_tf_hotel_filter .tf-filter ul li {
     display: inline-block;
     padding-right: 25px;
     margin-top: 5px;
   }
-
   .tf-search-right {
     padding: 0 !important;
   }
-
   .tf-search-left {
     padding: 0 !important;
   }
@@ -2579,11 +2560,9 @@ span.close-aq {
   .tf_form-inner .tf-hotel-results #ui-id-2 {
     top: -255px !important;
   }
-
   .tf-more-info {
     width: 100%;
   }
-
   .tf_destination-wrap {
     padding: 10px !important;
     border-bottom: 1px solid #ccc;
@@ -2592,11 +2571,9 @@ span.close-aq {
   .tf_destination-wrap .tf_input-inner {
     padding: 0 10px;
   }
-
   .tf_submit-wrap {
     width: 100%;
   }
-
   .recomended_inner {
     margin-left: -15px;
     margin-right: -15px;
@@ -2609,15 +2586,12 @@ span.close-aq {
     padding-left: 15px;
     padding-right: 15px;
   }
-
   .tf-booking-form-tab {
     display: none;
   }
-
   .tf-booking-form-tab-mobile {
     display: block;
   }
-
   select[name=tf-booking-form-tab-select] {
     width: 100%;
     background: transparent;
@@ -2626,7 +2600,6 @@ span.close-aq {
     border: 1px solid #ccc;
     border-radius: 4px;
   }
-
   .post-section-one {
     flex-direction: column;
   }
@@ -2635,13 +2608,11 @@ span.close-aq {
     margin: unset;
     margin-bottom: 10px;
   }
-
   .tf-single-item {
     width: 100%;
     margin: unset;
     margin-bottom: 10px;
   }
-
   .tf-hotel-grid .tf-slider-item {
     width: 100%;
     float: left;
@@ -2681,6 +2652,12 @@ span.close-aq {
   z-index: 200;
   left: auto;
   right: 0;
+}
+
+.tf-hotel-video {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
 
 .share-tour-content .tf-dropdown-content {
@@ -2979,8 +2956,8 @@ a.slick-slide-item-link {
   margin-right: 10px;
   padding: 6px 10px;
   border-radius: 4px;
-  border: 1px solid #0000002e;
-  box-shadow: -1px 1px 6px -1px #0000002e;
+  border: 1px solid rgba(0, 0, 0, 0.1803921569);
+  box-shadow: -1px 1px 6px -1px rgba(0, 0, 0, 0.1803921569);
   margin-top: 10px;
 }
 
@@ -3192,11 +3169,9 @@ span.tf-price .amount {
   .hero-right .tf-hotel-location-preview {
     display: none;
   }
-
   .tf-hotel-location-preview iframe {
     height: 200px;
   }
-
   .popupmap-for-mobile {
     margin-top: 15px;
   }
@@ -3210,11 +3185,9 @@ span.tf-price .amount {
   .tf_booking-widget {
     margin-bottom: 0;
   }
-
   .hero-right .show-on-map {
     display: none;
   }
-
   .map-for-mobile {
     margin-top: 15px;
   }
@@ -3238,24 +3211,19 @@ span.tf-price .amount {
   .tf-title-area h1 {
     font-size: 28px;
   }
-
   .more-hotel.tf-d-ib {
     display: inline;
   }
-
   .hero-section-wrap {
     grid-template-columns: 60% 40%;
   }
-
   .hotel-room-wrap {
     width: auto;
     overflow-x: auto;
   }
-
   .description {
     min-width: 300px;
   }
-
   .single-feature-box {
     margin-bottom: 10px;
   }
@@ -3264,46 +3232,37 @@ span.tf-price .amount {
   .tf-title-wrap {
     display: block;
   }
-
   .hero-section-wrap {
     grid-template-columns: 100%;
   }
-
   .tf-title-right {
     margin-top: 15px;
     justify-content: end;
   }
-
   .hero-left {
     padding-right: 0;
   }
-
   .hero-right {
     padding-left: 0;
     max-width: 316px;
     margin: auto;
   }
-
   .share-tour-content .tf-dropdown-content {
     min-width: 270px;
     margin-left: -170px;
   }
-
   .tf-dropdown-content li {
     display: block;
   }
-
   .share-tour-content input#share_link_input {
     width: 100% !important;
     margin: 5px 0;
     max-width: 100%;
     display: block;
   }
-
   .share-tour-content {
     left: 50px;
   }
-
   .share-tour-content .share-center-copy-form {
     display: block;
   }
@@ -3363,7 +3322,7 @@ span.tf-price .amount {
   border-radius: 4px;
   padding: 10px;
   margin: 0 auto;
-  background: #FFFFFFF0;
+  background: rgba(255, 255, 255, 0.9411764706);
   box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
   width: 80%;
   font-size: 16px;
@@ -3467,7 +3426,7 @@ span.tf-price .amount {
 .tf-tour-booking-wrap.tf-tours-fixed {
   width: 100%;
   z-index: 9999;
-  background-color: #003162eb;
+  background-color: rgba(0, 49, 98, 0.9215686275);
   border-top: 4px solid #FB5A3B;
   padding: 8px 0;
 }
@@ -3576,19 +3535,19 @@ span.tf-price .amount {
 }
 
 .tf-single-square-block.first {
-  background-color: #007bff24;
+  background-color: rgba(0, 123, 255, 0.1411764706);
 }
 
 .tf-single-square-block.second {
-  background: #28a74524;
+  background: rgba(40, 167, 69, 0.1411764706);
 }
 
 .tf-single-square-block.third {
-  background: #ffc10724;
+  background: rgba(255, 193, 7, 0.1411764706);
 }
 
 .tf-single-square-block.fourth {
-  background: #dc354524;
+  background: rgba(220, 53, 69, 0.1411764706);
 }
 
 .tf-highlight-item {
@@ -3636,8 +3595,8 @@ span.tf-price .amount {
   margin-right: 10px;
   padding: 6px 10px;
   border-radius: 4px;
-  border: 1px solid #0000002e;
-  box-shadow: -1px 1px 6px -1px #0000002e;
+  border: 1px solid rgba(0, 0, 0, 0.1803921569);
+  box-shadow: -1px 1px 6px -1px rgba(0, 0, 0, 0.1803921569);
   margin-top: 10px;
 }
 .tf_features .tf-feature-list {
@@ -3695,8 +3654,8 @@ span.tf-price .amount {
 }
 
 .tf-include-section {
-  background: #000000a3;
-  background-image: linear-gradient(to right, rgba(253, 97, 67, 0), #003162);
+  background: rgba(0, 0, 0, 0.6392156863);
+  background-image: linear-gradient(to right, rgba(253, 97, 67, 0), rgb(0, 49, 98));
   border-radius: 4px;
   padding: 20px 30px 30px;
   color: #fff;
@@ -3704,8 +3663,8 @@ span.tf-price .amount {
   backdrop-filter: blur(3px);
 }
 .tf-exclude-section {
-  background: #000000a3;
-  background-image: linear-gradient(to right, rgba(253, 97, 67, 0), #003162);
+  background: rgba(0, 0, 0, 0.6392156863);
+  background-image: linear-gradient(to right, rgba(253, 97, 67, 0), rgb(0, 49, 98));
   border-radius: 4px;
   padding: 20px 30px 30px;
   color: #fff;
@@ -3892,27 +3851,22 @@ span.tf-price .amount {
   .tf-tour-booking-wrap {
     font-size: 14px;
   }
-
   .tf_form-inner input[type=text] {
     font-size: 14px;
   }
   .tf_form-inner select {
     font-size: 14px;
   }
-
   .tf_button {
     font-size: 14px;
   }
-
   .flatpickr-calendar {
     font-size: 14px;
   }
-
   .tf-square-block-content-wrapper {
     flex-wrap: wrap;
     justify-content: center;
   }
-
   .tf-single-square-block {
     width: 300px;
   }
@@ -3921,11 +3875,9 @@ span.tf-price .amount {
   .tf-faq-content-wrapper {
     display: grid;
   }
-
   .tf-slider-desc h3 {
     font-size: 18px;
   }
-
   .tf-suggestion-rating {
     font-size: 14px;
   }
@@ -3935,12 +3887,10 @@ span.tf-price .amount {
     width: 98%;
     margin: auto;
   }
-
   .tf-tour-booking-wrap .btn-styled {
     width: 98%;
     margin: auto;
   }
-
   .tf-slider-item {
     border: 7px solid #fff;
     height: 300px !important;
@@ -3952,15 +3902,12 @@ span.tf-price .amount {
   .tf-highlight-item {
     display: grid;
   }
-
   .tf-travel-desc {
     display: grid;
   }
-
   .tf-accordion-content img {
     max-width: 100%;
   }
-
   .tf-travel-time {
     height: 60px;
   }
@@ -3968,12 +3915,10 @@ span.tf-price .amount {
     font-size: 15px;
     text-align: center;
   }
-
   .tf-accordion-head h4 {
     font-size: 15px;
     padding-left: 20px;
   }
-
   .tf-tour-booking-wrap {
     max-width: 450px;
   }
@@ -3990,53 +3935,42 @@ span.tf-price .amount {
     width: 98%;
     margin: auto;
   }
-
   .tf_form-inner select {
     max-width: 100%;
   }
-
   .tf-faq-sec-title {
     margin-bottom: 20px;
   }
-
   .tf-inc-exc-content {
     gap: 15px;
   }
-
   .tf-square-block-content {
     display: grid;
     gap: 2%;
     grid-template-columns: 48% 48%;
   }
-
   .tf-single-square-block {
     width: auto;
   }
-
   .tf-tours-booking-btn {
     width: 98%;
     margin: auto;
   }
-
   .tf-slider-item {
     border: 7px solid #fff;
     height: 250px !important;
     padding: 15px;
     margin: 0 7px 15px !important;
   }
-
   .tf-include-section {
     padding: 15px 20px 20px;
   }
-
   .tf-exclude-section {
     padding: 15px 20px 20px;
   }
-
   .tf-tour-booking-wrap.tf-tours-fixed {
     max-width: 100%;
   }
-
   .tf-ask-question {
     max-width: 450px;
     margin: auto;
@@ -4046,11 +3980,9 @@ span.tf-price .amount {
   .tf-title-wrap {
     display: block;
   }
-
   .tf-title-area.tf-tour-title {
     text-align: center;
   }
-
   .tf-single-tour-pricing {
     margin: 20px auto 0;
   }
@@ -4059,35 +3991,27 @@ span.tf-price .amount {
   .tf-slider-desc h3 {
     font-size: 16px;
   }
-
   .tf-map-content-wrapper iframe {
     height: 320px;
   }
-
   .tf-suggestion-rating {
     font-size: 12px;
   }
-
   #tour-extra {
     padding: 10px;
   }
-
   .tf-single-square-block {
     padding: 30px 20px;
   }
-
   .tf-inc-exc-content {
     display: block;
   }
-
   .tf-include-section {
     margin-bottom: 15px;
   }
-
   #tf-accordion-wrapper {
     margin-bottom: 15px;
   }
-
   #tour-deposit .tf_button_group {
     display: block;
   }
