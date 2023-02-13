@@ -803,7 +803,7 @@ function tf_hotels_grid_slider($atts, $content = null){
 	);
 
 	
-	if( !empty( $locations )){
+	if( !empty( $locations ) && $locations !== 'all'){
 		$locations = explode(',',$locations);
 		$args['tax_query'] = array(
 			'relation' => 'AND',
@@ -913,7 +913,7 @@ function tf_tours_grid_slider($atts, $content = null){
 		'posts_per_page' => $count,
 	);
 	//Check if destination selected/choosen
-	if( !empty( $destinations )){
+	if( !empty( $destinations ) && $destinations !== 'all'){
 		$destinations = explode(',',$destinations);
 		$args['tax_query'] = array(
 			'relation' => 'AND',
@@ -1007,7 +1007,7 @@ function tf_recent_blog_callback($atts, $content = null){
 	);
 
 	//Check if category selected/choosen
-	if( !empty( $cats )){
+	if( !empty( $cats ) && $cats !== 'all'){
 		$cats = explode(',',$cats);
 		$args['tax_query'] = array(
 			'relation' => 'AND',
