@@ -20,7 +20,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_params.ajax_url,
+                url: tf_vendor_params.ajax_url,
                 data: data,
                 beforeSend: function (response) {
                     
@@ -80,7 +80,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_params.ajax_url,
+                url: tf_vendor_params.ajax_url,
                 data: data,
                 beforeSend: function (response) {
                     
@@ -114,7 +114,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_params.ajax_url,
+                url: tf_vendor_params.ajax_url,
                 data: data,
                 success: function (response) {
                     $(".tf-verification-msg").html(tf_pro_params.email_sent_success);
