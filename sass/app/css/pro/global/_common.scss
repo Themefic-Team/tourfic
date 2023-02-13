@@ -70,6 +70,7 @@
             font-size: 16px;
             line-height: 24px;
             color: #5A5B6A;
+            margin-bottom: 0px;
         }
     }
     >div {
@@ -83,6 +84,9 @@
                 height: 40px;
                 border: 1px solid #B4B4BB;
                 border-radius: 4px;
+                background-image: none !important;
+                -webkit-appearance: auto !important;
+                -moz-appearance: auto !important;
             }
         }
     }

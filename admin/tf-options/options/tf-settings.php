@@ -113,14 +113,14 @@ TF_Settings::option( 'tf_settings', array(
 		),
 		// Hotel service Popup
 		'payment_popup'      => array(
-			'title'  => esc_html__( 'Partial payment', 'tourfic' ),
+			'title'  => esc_html__( 'Popup Settings', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
 					'id'    => 'hotel_popup_heading',
 					'type'  => 'heading',
-					'label' => __( 'Settings for Partial Payment Popup', 'tourfic' ),
+					'label' => __( 'Settings for Popup', 'tourfic' ),
 				),
 				array(
 					'id'     => '',
