@@ -56,13 +56,11 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'default'   => false,
 				),
 				array(
-					'id'          => 'hotel-video',
+					'id'          => 'video',
 					'type'        => 'text',
 					'label'       => __( 'Hotel Video', 'tourfic' ),
-					'is_pro'      => true,
 					'subtitle'    => __( 'Enter YouTube/Vimeo URL here', 'tourfic' ),
-					'validate'    => 'csf_validate_url',
-					'placeholder' => __( '', 'tourfic' ),
+					'placeholder' => __( 'Input full url here', 'tourfic' ),
 				),
 			),
 		),
@@ -78,22 +76,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'default' => true,
 					'is_pro'  => true,
 				)
-			),
-		),
-		// Check-in check-out
-		'check_time'       => array(
-			'title'  => __( 'Check in / Check out', 'tourfic' ),
-			'icon'   => 'fa-solid fa-clock-rotate-left',
-			'fields' => array(
-				array(
-					'id'       => '',
-					'type'     => 'switch',
-					'label'    => __( 'Allowed Full Day Booking', 'tourfic' ),
-					'is_pro'   => true,
-					'badge_up' => true,
-					'subtitle' => __( 'Rooms will be booked for the whole day', 'tourfic' ),
-				),
-
 			),
 		),
 		// Room Details

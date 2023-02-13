@@ -1543,6 +1543,7 @@ function tf_terms_dropdown( $term, $attribute, $class, $multiple = false ){
 	//output the select field
 	if( !empty( $terms ) && is_array( $terms ) ){
 	$select .=  '<select data-term="'.$attribute.'" name="'.$term.'" class="'.$class.'" '.$multiple.'>';
+	$select .= '<option value="\'all\'">'.__( 'All', 'tourfic' ).'</option>';
 		foreach( $terms as $term ){
 			$select .= '<option value="'.$term->term_id.'">'.$term->name.'</option>';
 		}
@@ -1598,4 +1599,23 @@ function tf_checkout_cart_item_remove() {
 	}
 
 	die();
+}
+
+/**
+ * Hotel gallery video content initialize by this hook
+ * can be filtered the video url by "tf_hotel_gallery_video_url" Filter
+ * @since 2.9.7
+ * @author Abu Hena
+ */
+function tf_hotel_gallery_video( $meta ){
+
+	//Hotel video section in the hero
+	$url = ! empty( $meta['video'] ) ? $meta['video'] : '';
+	?>
+	<div class="tf-hotel-video">
+		<div class="tf-hero-btm-icon tf-hotel-video" data-fancybox="hotel-video" href="<?php echo apply_filters( 'tf_hotel_gallery_video_url', $url ) ; ?>">
+			<i class="fab fa-youtube"></i>
+		</div>
+	</div>
+	<?php
 }
