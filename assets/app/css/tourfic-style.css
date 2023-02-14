@@ -2525,6 +2525,21 @@ span.close-aq {
   border-radius: 5px;
   height: 400px;
   object-fit: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 0;
+}
+.post-section-one .tf-single-item:before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  border-radius: 5px;
 }
 
 .tf-single-item {
@@ -2536,6 +2551,21 @@ span.close-aq {
   border-radius: 5px;
   height: 400px;
   object-fit: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 0;
+}
+.tf-single-item:before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  border-radius: 5px;
 }
 
 .tf-post-content {
@@ -2936,7 +2966,7 @@ a.slick-slide-item-link {
 
 /**************** FEATURES ****************/
 .tf_features {
-  padding-top: 15px;
+  padding-top: 50px;
 }
 
 .tf_features .feature-list-title {
@@ -3791,7 +3821,7 @@ span.tf-price .amount {
 }
 
 #tour-map {
-  margin-top: 25px;
+  margin-top: 0px;
 }
 
 .tf-map-wrapper .tf-container {
