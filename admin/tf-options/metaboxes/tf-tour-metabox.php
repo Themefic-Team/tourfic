@@ -241,6 +241,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						'min' => '0',
 					),
 					'field_width' => '33.33',
+					'searchable' => true
 				),
 				array(
 					'id'          => 'child_price',
@@ -255,6 +256,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						'min' => '0',
 					),
 					'field_width' => '33.33',
+					'searchable' => true
 				),
 				array(
 					'id'          => 'infant_price',
@@ -270,6 +272,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						'min' => '0',
 					),
 					'field_width' => '33.33',
+					'searchable' => true
 				),
 				array(
 					'id'         => '',
@@ -500,6 +503,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						array( 'custom_avail', '==', 'false' ),
 					),
 					'field_width' => '50',
+					'searchable' => true
 				),
 				array(
 					'id'          => 'cont_max_people',
@@ -511,6 +515,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						array( 'custom_avail', '==', 'false' ),
 					),
 					'field_width' => '50',
+					'searchable' => true
 				),
 				array(
 					'id'           => 'allowed_time',

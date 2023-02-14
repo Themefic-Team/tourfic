@@ -201,13 +201,36 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 									}
 
 									if($fieldClass == 'TF_repeater'){
-										// tf_var_dump($field['fields']);
+										// tf_var_dump($data);
+										$searchabledata = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : '';
+										$searchable_key = [];
 										foreach($field['fields'] as $sfield){
 											if(!empty($sfield['searchable'])){
-											tf_var_dump($data);
-
-											// tf_var_dump($data[0][$sfield['id']]);
+												$searchable_key[] = $sfield['id'];
 											}
+											if(!empty($sfield['type']) && $sfield['type']=="repeater"){
+												foreach($sfield['fields'] as $repfield){
+													if(!empty($repfield['searchable'])){
+														$searchable_key[] = $repfield['id'];
+													}
+												}
+											}
+										}
+										// tf_var_dump($field['fields']);
+
+										foreach($searchable_key as $skey){
+											$tf_searchable_value = array_column($searchabledata, $skey);
+											$tf_s_max_value = !empty($tf_searchable_value) ? max($tf_searchable_value) : 1;
+											$tf_s_min_value = !empty($tf_searchable_value) ? min($tf_searchable_value): 0;
+											if( $tf_s_max_value==$tf_s_min_value ){
+												$tf_s_max_value = $tf_s_max_value;
+												$tf_s_min_value = 0;
+											}else{
+												$tf_s_max_value = $tf_s_max_value;
+												$tf_s_min_value = $tf_s_min_value;
+											}
+											update_post_meta( $post_id, 'tf_'.$skey.'_max', $tf_s_max_value );
+											update_post_meta( $post_id, 'tf_'.$skey.'_min', $tf_s_min_value );
 										}
 									}
 

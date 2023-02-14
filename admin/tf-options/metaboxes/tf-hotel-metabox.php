@@ -22,7 +22,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'attributes'  => array(
 						'required' => 'required',
 					),
-					'searchable' => true
 				),
 				array(
 					'id'       => 'map',
@@ -274,6 +273,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'label'      => __( 'Insert Your Price', 'tourfic' ),
 							'subtitle'   => __( 'The price of room per one night', 'tourfic' ),
 							'dependency' => array( 'pricing-by', '==', '1' ),
+							'searchable' => true
 						),
 						array(
 							'id'          => '',

@@ -457,6 +457,96 @@ add_shortcode( 'tf_search', 'tf_search_form_shortcode' );
  */
 function tf_search_result_shortcode( $atts, $content = null ){
 
+	$search_resuts = array(
+        'post_type'      => 'tf_hotel',
+        'post_status'    => 'publish',
+        'posts_per_page' => -1,
+    );
+	$search_resuts['tax_query'] = array(
+		'relation' => 'AND',
+		array(
+			'taxonomy' => 'hotel_location',
+			'field' => 'slug',
+			'terms'    => array('dhaka'),
+		)
+	);
+	$search_resuts['meta_query'] = array(
+		'relation' => 'AND',
+		array(
+			array(
+				'key' => 'tf_num-room_max',
+				'value' => 5,
+				'compare' => '>=',
+				'type' => 'DECIMAL',
+			)
+		),
+		array(
+			array(
+				'key' => 'tf_adult_max',
+				'value' => 3,
+				'compare' => '>=',
+				'type' => 'DECIMAL',
+			)
+		),
+		array(
+			array(
+				'key' => 'tf_child_max',
+				'value' => 80,
+				'compare' => '>=',
+				'type' => 'DECIMAL',
+			)
+		),
+		array(
+			'relation' => 'OR',
+			array(
+				'key' => 'tf_adult_price_max',
+				'value' => array( 20, 100 ),
+				'type'    => 'numeric',
+				'compare' => 'BETWEEN',
+			),
+			array(
+				'key' => 'tf_adult_price_min',
+				'value' => array( 1, 15 ),
+				'type'    => 'numeric',
+				'compare' => 'BETWEEN',
+			)
+		),
+		array(
+			'relation' => 'OR',
+			array(
+				'key' => 'tf_child_price_max',
+				'value' => array( 20, 67 ),
+				'type'    => 'numeric',
+				'compare' => 'BETWEEN',
+			),
+			array(
+				'key' => 'tf_child_price_min',
+				'value' => array( 1, 7 ),
+				'type'    => 'numeric',
+				'compare' => 'BETWEEN',
+			)
+		),
+		array(
+			'relation' => 'OR',
+			array(
+				'key' => 'tf_price_max',
+				'value' => array( 200, 260 ),
+				'type'    => 'numeric',
+				'compare' => 'BETWEEN',
+			),
+			array(
+				'key' => 'tf_price_min',
+				'value' => array( 1, 7 ),
+				'type'    => 'numeric',
+				'compare' => 'BETWEEN',
+			)
+		),
+	);
+
+	$search_loop = new WP_Query( $search_resuts );
+	$search_total_posts = $search_loop->found_posts;
+	tf_var_dump($search_total_posts);
+
     // Unwanted Slashes Remove
     if ( isset( $_GET ) ) {
         $_GET = array_map( 'stripslashes_deep', $_GET );
