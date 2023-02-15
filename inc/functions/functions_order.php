@@ -182,6 +182,7 @@ function tf_tour_booking_page_callback() {
 <?php }
 }
 
+if(!function_exists('tf_tour_order_single_row')){
 function tf_tour_order_single_row($order){
 	/**
 	 * Get current logged in user
@@ -300,6 +301,7 @@ function tf_tour_order_single_row($order){
 		<?php } ?>
     </tr>
 	<?php
+}
 }
 
 /**
@@ -450,6 +452,7 @@ function tf_hotel_booking_page_callback() {
 <?php }
 }
 
+if(!function_exists('tf_hotel_order_single_row')){
 function tf_hotel_order_single_row($order){
 
 	/**
@@ -582,32 +585,33 @@ function tf_hotel_order_single_row($order){
     </tr>
     <?php
 }
-
+}
 
 /**
  * Add _order_type order meta from line order meta
  */
-function tf_add_order_type_order_meta( $order_id ) {
+if(!function_exists('tf_add_order_type_order_meta')) {
+	function tf_add_order_type_order_meta( $order_id ) {
 
-	$order = wc_get_order( $order_id );
+		$order = wc_get_order( $order_id );
 
-	foreach ( $order->get_items() as $item_key => $item_values ) {
-		$item_data = $item_values->get_data();
+		foreach ( $order->get_items() as $item_key => $item_values ) {
+			$item_data = $item_values->get_data();
 
-		// Assign _order_type meta in line order meta
-		if ( wc_get_order_item_meta( $item_key, '_order_type', true ) == 'tour' ) {
-			update_post_meta( $order_id, '_order_type', 'tour' );
-		} elseif ( wc_get_order_item_meta( $item_key, '_order_type', true ) == 'hotel' ) {
-			update_post_meta( $order_id, '_order_type', 'hotel' );
+			// Assign _order_type meta in line order meta
+			if ( wc_get_order_item_meta( $item_key, '_order_type', true ) == 'tour' ) {
+				update_post_meta( $order_id, '_order_type', 'tour' );
+			} elseif ( wc_get_order_item_meta( $item_key, '_order_type', true ) == 'hotel' ) {
+				update_post_meta( $order_id, '_order_type', 'hotel' );
+			}
+
+			// Assign _post_author meta in line order meta
+			$post_author = wc_get_order_item_meta( $item_key, '_post_author', true );
+			update_post_meta( $order_id, '_post_author', $post_author );
 		}
-
-		// Assign _post_author meta in line order meta
-		$post_author = wc_get_order_item_meta( $item_key, '_post_author', true );
-		update_post_meta( $order_id, '_post_author', $post_author );
 	}
+	add_action( 'woocommerce_checkout_update_order_meta', 'tf_add_order_type_order_meta' );
 }
-
-add_action( 'woocommerce_checkout_update_order_meta', 'tf_add_order_type_order_meta' );
 
 /**
  * Add custom query var in WooCommerce get orders query
@@ -616,23 +620,25 @@ add_action( 'woocommerce_checkout_update_order_meta', 'tf_add_order_type_order_m
  *
  * https://github.com/woocommerce/woocommerce/wiki/wc_get_orders-and-WC_Order_Query#adding-custom-parameter-support
  */
-function tf_custom_query_var_get_orders( $query, $query_vars ) {
+if(!function_exists('tf_custom_query_var_get_orders')) {
+	function tf_custom_query_var_get_orders( $query, $query_vars ) {
 
-	if ( ! empty( $query_vars['_order_type'] ) ) {
-		$query['meta_query'][] = array(
-			'key'   => '_order_type',
-			'value' => esc_attr( $query_vars['_order_type'] ),
-		);
+		if ( ! empty( $query_vars['_order_type'] ) ) {
+			$query['meta_query'][] = array(
+				'key'   => '_order_type',
+				'value' => esc_attr( $query_vars['_order_type'] ),
+			);
+		}
+
+		if ( ! empty( $query_vars['_post_author'] ) ) {
+			$query['meta_query'][] = array(
+				'key'   => '_post_author',
+				'value' => esc_attr( $query_vars['_post_author'] ),
+			);
+		}
+
+		return $query;
 	}
 
-	if ( ! empty( $query_vars['_post_author'] ) ) {
-		$query['meta_query'][] = array(
-			'key'   => '_post_author',
-			'value' => esc_attr( $query_vars['_post_author'] ),
-		);
-	}
-
-	return $query;
+	add_filter( 'woocommerce_order_data_store_cpt_get_orders_query', 'tf_custom_query_var_get_orders', 10, 2 );
 }
-
-add_filter( 'woocommerce_order_data_store_cpt_get_orders_query', 'tf_custom_query_var_get_orders', 10, 2 );
