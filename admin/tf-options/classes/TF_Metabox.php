@@ -242,12 +242,12 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 					}
 				}
 			}
-			exit();
-			// if ( ! empty( $tf_meta_box_value ) ) {
-			// 	update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
-			// } else {
-			// 	delete_post_meta( $post_id, $this->metabox_id );
-			// }
+			// exit();
+			if ( ! empty( $tf_meta_box_value ) ) {
+				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
+			} else {
+				delete_post_meta( $post_id, $this->metabox_id );
+			}
 
 		}
 
