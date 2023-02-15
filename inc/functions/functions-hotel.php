@@ -1538,11 +1538,37 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 
 			$pricing_by = ! empty( $b_room['pricing-by'] ) ? $b_room['pricing-by'] : 1;
 			if ( $pricing_by == 1 ) {
-				$price        = ! empty( $b_room['price'] ) ? $b_room['price'] : '';
-				$room_price[] = $price;
+				if(! empty( $b_room['price'] )){
+					$room_price[] = $b_room['price'];
+				}
+				if( !empty($b_room['avil_by_date']) && $b_room['avil_by_date']=="1"){
+					if( !empty($b_room['repeat_by_date'])){
+						foreach ( $b_room['repeat_by_date'] as $repval ) {
+							if(! empty( $repval['price'] )){
+								$room_price[] = $repval['price'];
+							}
+						}
+					}
+				}
 			} else if ( $pricing_by == 2 ) {
-				$adult_price  = ! empty( $b_room['adult_price'] ) ? $b_room['adult_price'] : 0;
-				$room_price[] = $adult_price;
+				if(! empty( $b_room['adult_price'] )){
+					$room_price[] = $b_room['adult_price'];
+				}
+				if(! empty( $b_room['child_price'] )){
+					$room_price[] = $b_room['child_price'];
+				}
+				if( !empty($b_room['avil_by_date']) && $b_room['avil_by_date']=="1"){
+					if( !empty($b_room['repeat_by_date'])){
+						foreach ( $b_room['repeat_by_date'] as $repval ) {
+							if(! empty( $repval['adult_price'] )){
+								$room_price[] = $repval['adult_price'];
+							}
+							if(! empty( $repval['child_price'] )){
+								$room_price[] = $repval['child_price'];
+							}
+						}
+					}
+				}
 			}
 		}
 	endif;

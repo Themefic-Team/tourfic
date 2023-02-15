@@ -190,7 +190,7 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 					$hotel_loop->the_post();
 					$post_id                = get_the_ID();
 					$related_comments_hotel = get_comments( array( 'post_id' => $post_id ) );
-					$meta = get_post_meta( $post_id, 'tf_hotel', true );
+					$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
 					$rooms = !empty($meta['room']) ? $meta['room'] : '';
 					if( !empty($rooms) && gettype($rooms)=="string" ){
 						$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
@@ -202,7 +202,41 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 					$room_price = [];
 					if(!empty($rooms)){
 						foreach( $rooms as $room ){
-							$room_price[] = ! empty( $room['price'] ) ? $room['price'] : 0;
+
+							$pricing_by = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : 1;
+							if ( $pricing_by == 1 ) {
+								if(! empty( $room['price'] )){
+									$room_price[] = $room['price'];
+								}
+								if( !empty($room['avil_by_date']) && $room['avil_by_date']=="1"){
+									if( !empty($room['repeat_by_date'])){
+										foreach ( $room['repeat_by_date'] as $repval ) {
+											if(! empty( $repval['price'] )){
+												$room_price[] = $repval['price'];
+											}
+										}
+									}
+								}
+							} else if ( $pricing_by == 2 ) {
+								if(! empty( $room['adult_price'] )){
+									$room_price[] = $room['adult_price'];
+								}
+								if(! empty( $room['child_price'] )){
+									$room_price[] = $room['child_price'];
+								}
+								if( !empty($room['avil_by_date']) && $room['avil_by_date']=="1"){
+									if( !empty($room['repeat_by_date'])){
+										foreach ( $room['repeat_by_date'] as $repval ) {
+											if(! empty( $repval['adult_price'] )){
+												$room_price[] = $repval['adult_price'];
+											}
+											if(! empty( $repval['child_price'] )){
+												$room_price[] = $repval['child_price'];
+											}
+										}
+									}
+								}
+							}
 						}
 					}
 
@@ -222,10 +256,11 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 								<?php if(!empty($rooms)): ?>
 								<div class="tf-recent-room-price">
 								<?php
+								if(!empty($room_price)){
 									//get the lowest price from all available room price
 									$lowest_price = wc_price( min($room_price) );
 									echo __("From ","tourfic") . $lowest_price; 
-										
+								}
 								?>
 								</div>
 								<?php endif; ?>
@@ -842,13 +877,53 @@ function tf_hotels_grid_slider($atts, $content = null){
 					$hotel_loop->the_post();
 					$post_id                = get_the_ID();
 					$related_comments_hotel = get_comments( array( 'post_id' => $post_id ) );
-					$meta = get_post_meta( $post_id, 'tf_hotel', true );
-					$rooms = !empty($meta['room']) ? $meta['room'] : '';
+					$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+					$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+					if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
+						$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+							return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+						}, $rooms );
+						$rooms                = unserialize( $tf_hotel_rooms_value );
+					}
 					//get and store all the prices for each room
 					$room_price = [];
 					if($rooms){
 						foreach( $rooms as $room ){
-							$room_price[] = !empty($room['price']) ? $room['price'] : '';
+
+							$pricing_by = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : 1;
+							if ( $pricing_by == 1 ) {
+								if(! empty( $room['price'] )){
+									$room_price[] = $room['price'];
+								}
+								if( !empty($room['avil_by_date']) && $room['avil_by_date']=="1"){
+									if( !empty($room['repeat_by_date'])){
+										foreach ( $room['repeat_by_date'] as $repval ) {
+											if(! empty( $repval['price'] )){
+												$room_price[] = $repval['price'];
+											}
+										}
+									}
+								}
+							} else if ( $pricing_by == 2 ) {
+								if(! empty( $room['adult_price'] )){
+									$room_price[] = $room['adult_price'];
+								}
+								if(! empty( $room['child_price'] )){
+									$room_price[] = $room['child_price'];
+								}
+								if( !empty($room['avil_by_date']) && $room['avil_by_date']=="1"){
+									if( !empty($room['repeat_by_date'])){
+										foreach ( $room['repeat_by_date'] as $repval ) {
+											if(! empty( $repval['adult_price'] )){
+												$room_price[] = $repval['adult_price'];
+											}
+											if(! empty( $repval['child_price'] )){
+												$room_price[] = $repval['child_price'];
+											}
+										}
+									}
+								}
+							}
 						}
 					}	
 					?>
@@ -867,10 +942,11 @@ function tf_hotels_grid_slider($atts, $content = null){
 								<?php if(!empty($rooms)): ?>
 								<div class="tf-recent-room-price">
 								<?php
-									//get the lowest price from all available room price
-									$lowest_price = wc_price( min($room_price) );
-									echo __("From ","tourfic") . $lowest_price; 
-										
+									if(!empty($room_price)){
+										//get the lowest price from all available room price
+										$lowest_price = wc_price( min($room_price) );
+										echo __("From ","tourfic") . $lowest_price; 
+									}
 								?>
 								</div>
 								<?php endif; ?>
