@@ -128,16 +128,17 @@ if ( ! function_exists( 'tf_hotel_enquiry_page_callback' ) ) {
  *
  * @author jahid
  */
-add_action( 'admin_init', 'tf_create_v_enquiry_database_table' );
+if(!function_exists('tf_create_v_enquiry_database_table')) {
+	add_action( 'admin_init', 'tf_create_v_enquiry_database_table' );
 
-//Create Enquiry Database
-function tf_create_v_enquiry_database_table() {
-	global $wpdb;
-	$table_name      = $wpdb->prefix . 'tf_enquiry_data';
-	$charset_collate = $wpdb->get_charset_collate();
-	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+    //Create Enquiry Database
+	function tf_create_v_enquiry_database_table() {
+		global $wpdb;
+		$table_name      = $wpdb->prefix . 'tf_enquiry_data';
+		$charset_collate = $wpdb->get_charset_collate();
+		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
-	$sql = "CREATE TABLE IF NOT EXISTS $table_name (
+		$sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id bigint(20) NOT NULL AUTO_INCREMENT,
         post_id bigint(20) NOT NULL,
         post_type varchar(255),
@@ -149,6 +150,7 @@ function tf_create_v_enquiry_database_table() {
         created_at datetime NOT NULL,
         PRIMARY KEY  (id)
     ) $charset_collate;";
-	dbDelta( $sql );
+		dbDelta( $sql );
 
+	}
 }
