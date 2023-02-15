@@ -1525,35 +1525,36 @@ function tf_assign_taxonomies( $post_id, $post, $old_status ){
  * @author Abu Hena
  * @since 2.9.4
  */
-function tf_terms_dropdown( $term, $attribute, $class, $multiple = false ){
+if( ! function_exists( 'tf_terms_dropdown' ) ){
+	function tf_terms_dropdown( $term, $attribute, $class, $multiple = false ){
 
-	//get the terms
-	$terms = get_terms( array(
-		'taxonomy' => $term,
-		'hide_empty' => false,
-	));
+		//get the terms
+		$terms = get_terms( array(
+			'taxonomy' => $term,
+			'hide_empty' => false,
+		));
 
-	//define if select field would be multiple or not
-	if( $multiple == true ){
-		$multiple = 'multiple';
-	}else{
-		$multiple = "";
-	}
-	$select = '';
-	//output the select field
-	if( !empty( $terms ) && is_array( $terms ) ){
-	$select .=  '<select data-term="'.$attribute.'" name="'.$term.'" class="'.$class.'" '.$multiple.'>';
-	$select .= '<option value="\'all\'">'.__( 'All', 'tourfic' ).'</option>';
-		foreach( $terms as $term ){
-			$select .= '<option value="'.$term->term_id.'">'.$term->name.'</option>';
+		//define if select field would be multiple or not
+		if( $multiple == true ){
+			$multiple = 'multiple';
+		}else{
+			$multiple = "";
 		}
-		$select .= "</select>";
-	}else{
-		$select .= __( "Invalid taxonomy!!", 'tourfic');
+		$select = '';
+		//output the select field
+		if( !empty( $terms ) && is_array( $terms ) ){
+		$select .=  '<select data-term="'.$attribute.'" name="'.$term.'" class="'.$class.'" '.$multiple.'>';
+		$select .= '<option value="\'all\'">'.__( 'All', 'tourfic' ).'</option>';
+			foreach( $terms as $term ){
+				$select .= '<option value="'.$term->term_id.'">'.$term->name.'</option>';
+			}
+			$select .= "</select>";
+		}else{
+			$select .= __( "Invalid taxonomy!!", 'tourfic');
+		}
+		echo $select;
 	}
-	echo $select;
 }
-
 /**
  * Remove icon add to order item
  * @since 2.9.6
@@ -1607,15 +1608,17 @@ function tf_checkout_cart_item_remove() {
  * @since 2.9.7
  * @author Abu Hena
  */
-function tf_hotel_gallery_video( $meta ){
+if( ! function_exists( 'tf_hotel_gallery_video' ) ){
+	function tf_hotel_gallery_video( $meta ){
 
-	//Hotel video section in the hero
-	$url = ! empty( $meta['video'] ) ? $meta['video'] : '';
-	?>
-	<div class="tf-hotel-video">
-		<div class="tf-hero-btm-icon tf-hotel-video" data-fancybox="hotel-video" href="<?php echo apply_filters( 'tf_hotel_gallery_video_url', $url ) ; ?>">
-			<i class="fab fa-youtube"></i>
+		//Hotel video section in the hero
+		$url = ! empty( $meta['video'] ) ? $meta['video'] : '';
+		?>
+		<div class="tf-hotel-video">
+			<div class="tf-hero-btm-icon tf-hotel-video" data-fancybox="hotel-video" href="<?php echo apply_filters( 'tf_hotel_gallery_video_url', $url ) ; ?>">
+				<i class="fab fa-youtube"></i>
+			</div>
 		</div>
-	</div>
-	<?php
+		<?php
+	}
 }
