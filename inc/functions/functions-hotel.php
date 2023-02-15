@@ -44,6 +44,7 @@ function register_tf_hotel_post_type() {
 	$hotel_args = array(
 		'labels'             => $hotel_labels,
 		'public'             => true,
+        'show_in_rest'       => true,
 		'publicly_queryable' => true,
 		'show_ui'            => true,
 		'show_in_menu'       => true,

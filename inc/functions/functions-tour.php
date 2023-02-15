@@ -47,6 +47,7 @@ function register_tf_tours_post_type() {
     $tour_args = array(
         'labels'             => $tour_labels,
         'public'             => true,
+        'show_in_rest'       => true,
         'publicly_queryable' => true,
         'show_ui'            => true,
         'show_in_menu'       => true,
