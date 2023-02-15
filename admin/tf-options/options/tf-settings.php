@@ -179,6 +179,20 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 				),
 				array(
+					'id'       => 'rt-title',
+					'type'     => 'text',
+					'label'    => __( 'Related Tour Title', 'tourfic' ),
+					'subtitle' => __( 'This Title will show on single tour, Related tour Section as Section Title.', 'tourfic' ),
+					'default' => __( 'You might also like', 'tourfic' ),
+				),
+				array(
+					'id'       => 'rt-description',
+					'type'     => 'text',
+					'label'    => __( 'Related Tour Description', 'tourfic' ),
+					'subtitle' => __( 'This Description will show on single tour, Related tour Section as Section Description.', 'tourfic' ),
+					'default' => __( 'Travel is my life. Since 1999, I have been traveling around the world nonstop. If you also love travel, you are in the right place!', 'tourfic' ),
+				),
+				array(
 					'id'      => 'rt-display',
 					'type'    => 'radio',
 					'is_pro'  => true,

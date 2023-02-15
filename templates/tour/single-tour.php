@@ -602,8 +602,14 @@ while ( have_posts() ) : the_post();
                     <div class="tf-container">
                         <div class="tf-slider-content-wrapper">
                             <div class="tf-suggestion-sec-head">
-                                <h2 class="section-heading"><?php echo __( 'You might also like', 'tourfic' ) ?></h2>
-                                <p><?php echo __( 'Travel is my life. Since 1999, I’ve been traveling around the world nonstop. If you also love travel, you’re in the right place!', 'tourfic' ) ?></p>
+								<?php 
+								if( !empty( tfopt('rt-title') ) ){ ?>
+                                	<h2 class="section-heading"><?php esc_html_e( tfopt('rt-title'), "tourfic" ) ?></h2>
+								<?php } ?>
+								<?php 
+								if( !empty( tfopt('rt-description') ) ){ ?>
+                                	<p><?php esc_html_e( tfopt('rt-description'), "tourfic" ) ?></p>
+								<?php } ?>
                             </div>
 
                             <div class="tf-slider-items-wrapper">
