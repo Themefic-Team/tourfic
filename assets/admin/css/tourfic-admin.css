@@ -8,6 +8,7 @@ Button
   -ms-flex-align: center;
   align-items: center;
   background-color: #fff;
+  color: #003c79;
   padding: 10px 25px;
   border: 1px solid #003c79;
   border-radius: 4px;
@@ -24,11 +25,20 @@ Button
   margin-right: 8px;
   font-size: 18px;
 }
+.tf-admin-btn:hover {
+  background-color: #003c79;
+  color: #fff;
+}
 .tf-admin-btn.tf-btn-secondary {
   background-color: #003c79;
   border-color: #003c79;
   color: #fff;
   font-weight: 600;
+}
+.tf-admin-btn.tf-btn-secondary:hover {
+  background-color: #001f3e;
+  border-color: #001f3e;
+  color: #fff;
 }
 .tf-admin-btn.disabled {
   opacity: 0.5;
@@ -493,6 +503,7 @@ body.admin_page_tf-setup-wizard {
   max-width: 900px;
   margin: auto;
   width: calc(100% - 40px);
+  padding-top: 30px;
 }
 
 .tf-setup-header {
@@ -789,6 +800,10 @@ Steps
     text-align: center;
   }
 }
+.tf-setup-step-container .tf-setup-step-desc {
+  margin: 0 0 15px;
+  font-size: 16px;
+}
 .tf-setup-step-container .tf-select-service {
   display: -webkit-box;
   display: -moz-box;
@@ -953,6 +968,8 @@ Steps
   background-color: #fff;
   transition: all 0.3s;
   outline: none;
+  min-width: 200px;
+  max-width: 200px;
 }
 .tf-setup-step-container .tf-setup-form-item .tf-switch-label {
   position: relative;
@@ -1002,6 +1019,9 @@ Steps
 }
 .tf-setup-step-container .tf-setup-step-description {
   margin-bottom: 30px;
+}
+.tf-setup-step-container.tf-setup-step-3 .tf-setup-step-desc {
+  text-align: left;
 }
 .tf-setup-step-container .tf-btn-loading {
   padding-right: 40px;
@@ -2608,7 +2628,7 @@ Steps
 }
 .tf-field-image .tf-fieldset .tf-fieldset-media a.tf-media-upload {
   height: 48px;
-  width: 100px;
+  width: 100px !important;
   line-height: 48px;
   text-align: center;
   text-transform: capitalize;

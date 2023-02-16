@@ -1237,6 +1237,9 @@ h3.tf-sidebar-widget_title {
   display: flex;
   align-items: center;
 }
+#tf-faq-item .tf-faq-title h4 {
+  font-size: 18px !important;
+}
 #tf-faq-item .tf-faq-title.active {
   margin-bottom: 15px;
 }
@@ -1420,6 +1423,17 @@ li.filter-item {
 
 .tf-single-review.tf-reviews-slider ul.slick-dots {
   margin: 0;
+}
+
+.tf-product-total {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+  gap: 15px;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -2511,6 +2525,21 @@ span.close-aq {
   border-radius: 5px;
   height: 400px;
   object-fit: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 0;
+}
+.post-section-one .tf-single-item:before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  border-radius: 5px;
 }
 
 .tf-single-item {
@@ -2522,6 +2551,21 @@ span.close-aq {
   border-radius: 5px;
   height: 400px;
   object-fit: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 0;
+}
+.tf-single-item:before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  border-radius: 5px;
 }
 
 .tf-post-content {
@@ -2641,6 +2685,12 @@ span.close-aq {
   z-index: 200;
   left: auto;
   right: 0;
+}
+
+.tf-hotel-video {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
 
 .share-tour-content .tf-dropdown-content {
@@ -2853,9 +2903,70 @@ a.slick-slide-item-link {
   margin-bottom: 0;
 }
 
+.single-tour-wrap.tf-featured .single-tour-inner {
+  position: relative;
+}
+
+.tf-featured-badge {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+}
+
+.tf-featured-badge::before,
+.tf-featured-badge::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  display: block;
+  border: 5px solid #003162;
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+
+.tf-featured-badge span {
+  position: absolute;
+  display: block;
+  width: 225px;
+  padding: 10px 0;
+  background-color: #003162;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  font: 700 18px/1 "Lato", sans-serif;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* top left*/
+.tf-featured-badge {
+  top: -10px;
+  left: -10px;
+}
+
+.tf-featured-badge::before {
+  top: 0;
+  right: 0;
+}
+
+.tf-featured-badge::after {
+  bottom: 0;
+  left: 0;
+}
+
+.tf-featured-badge span {
+  right: -12px;
+  top: 33px;
+  transform: rotate(-45deg);
+}
+
 /**************** FEATURES ****************/
 .tf_features {
-  padding-top: 15px;
+  padding-top: 50px;
 }
 
 .tf_features .feature-list-title {
@@ -3710,7 +3821,7 @@ span.tf-price .amount {
 }
 
 #tour-map {
-  margin-top: 25px;
+  margin-top: 0px;
 }
 
 .tf-map-wrapper .tf-container {

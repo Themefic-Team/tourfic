@@ -85,6 +85,7 @@ while ( have_posts() ) : the_post();
 			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
 		}, $map );
 		$map                = unserialize( $tf_hotel_map_value );
+        $address = !empty($map["address"]) ? $map["address"] : $address;
 	}
 
 	// Hotel Detail
@@ -271,7 +272,14 @@ while ( have_posts() ) : the_post();
 											} ?>
                                         </div>
                                         <div class="swiper-button-prev sw-btn"><i class="fa fa-angle-left"></i></div>
-                                        <div class="swiper-button-next sw-btn"><i class="fa fa-angle-right"></i></div>
+                                        <div class="swiper-button-next sw-btn"><i class="fa fa-angle-right"></i></div>                                       
+                                        
+                                        <?php
+                                            /**
+                                             * Hotel video section in the hero
+                                             */
+                                            tf_hotel_gallery_video( $meta );
+                                         ?>
                                     </div>
                                 </div>
                             </div>
@@ -286,9 +294,17 @@ while ( have_posts() ) : the_post();
 											echo get_the_post_thumbnail( $post_id, 'tf_gallery_thumb' );
 											echo '</a>';
 											echo '</div>';
-											?>
-
+                                            ?>
+                                            
                                         </div>
+                                        
+                                        <?php
+                                        /**
+                                         * Hotel video section in the hero
+                                         */
+                                        tf_hotel_gallery_video( $meta );
+                                        ?>
+
                                     </div>
                                 </div>
                             </div>
@@ -470,7 +486,13 @@ while ( have_posts() ) : the_post();
 												} else {
 													$price = ! empty( $range_price[0] ) ? wc_price( $range_price[0] ) : wc_price( 0 );
 												}
-											}
+											}else{
+                                                if ( $pricing_by == '1' ) {
+                                                    $price = wc_price( ! empty( $room['price'] ) ? $room['price'] : '0.0' );
+                                                } else {
+                                                    $price = wc_price( ! empty( $room['adult_price'] ) ? $room['adult_price'] : '0.0' );
+                                                }
+                                            }
 										} else {
 											if ( $pricing_by == '1' ) {
 												$price = wc_price( ! empty( $room['price'] ) ? $room['price'] : '0.0' );

@@ -1101,6 +1101,3 @@ function tf_admin_order_data_migration(){
 }
 
 add_action( 'admin_init', 'tf_admin_order_data_migration' );
-
-
-?>

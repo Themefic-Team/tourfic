@@ -13,10 +13,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 		public function __construct( $key, $params = array() ) {
 			$this->option_id       = $key;
-			$this->option_title    = ! empty( $params['title'] ) ? $params['title'] : '';
-			$this->option_icon     = ! empty( $params['icon'] ) ? $params['icon'] : '';
-			$this->option_position = ! empty( $params['position'] ) ? $params['position'] : 5;
-			$this->option_sections = ! empty( $params['sections'] ) ? $params['sections'] : array();
+			$this->option_title    = ! empty( $params['title'] ) ? apply_filters( $key . '_title', $params['title'] ) : '';
+			$this->option_icon     = ! empty( $params['icon'] ) ? apply_filters( $key . '_icon', $params['icon'] ) : '';
+			$this->option_position = ! empty( $params['position'] ) ? apply_filters( $key . '_position', $params['position'] ) : 5;
+			$this->option_sections = ! empty( $params['sections'] ) ? apply_filters( $key . '_sections', $params['sections'] ) : array();
 
 			// run only is admin panel options, avoid performance loss
 			$this->pre_tabs     = $this->pre_tabs( $this->option_sections );
@@ -369,7 +369,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				<div class="tf-help-center-banner">
 					<div class="tf-help-center-content">
 						<h2><?php _e("Setup Wizard","tourfic"); ?></h2>
-						<p><?php _e("To know the eventin starting guide, run the setup wizard. Your existing settings will not change.","tourfic"); ?></p>
+						<p><?php _e("Click the button below to run the setup wizard of Tourfic. Your existing settings will not change.","tourfic"); ?></p>
                         <a href="<?php echo esc_url(admin_url( 'admin.php?page=tf-setup-wizard' )) ?>" class="tf-admin-btn tf-btn-secondary"><?php _e("Setup Wizard","tourfic"); ?></a>
 					</div>
 					<div class="tf-help-center-image">
@@ -445,7 +445,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									<?php _e("See the installation tab.","tourfic"); ?>
+									<?php _e("Please check our documentations","tourfic"); ?>
 									</p>
 								</div>
 							</div>
@@ -458,7 +458,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								</div>
 								<div class="tf-faq-desc">
 									<p>
-									<?php _e("Yes, Tourfic is fully free which is available on WordPress.org. This free version will always be free. It also has a pro version (under development) with additional features which you can purchase from our official website.","tourfic"); ?>
+									<?php _e("Yes, Tourfic is fully free which is available on WordPress.org. This free version will always be free. It also has a pro version with additional features which you can purchase from our official website.","tourfic"); ?>
 									</p>
 								</div>
 							</div>

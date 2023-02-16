@@ -1048,6 +1048,9 @@ h3.tf-sidebar-widget_title {
         transition: 0.2s ease;
         display: flex;
         align-items: center;
+        h4{
+            font-size: 18px !important;
+        }
     }
     .tf-faq-title.active {
         margin-bottom: 15px;
@@ -1223,6 +1226,25 @@ li.filter-item {
 .tf-single-review.tf-reviews-slider ul.slick-dots {
     margin: 0;
 }
+.tf-product-total {
+    @include flexbox();
+    @include justify-content(flex-end);
+    gap: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media only screen and (max-width: 1000px) {
     form.tf-review-form {
         gap: 20px;

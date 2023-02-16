@@ -1060,6 +1060,11 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
     ?>
 	<div class="single-tour-wrap <?php echo $featured ? esc_attr('tf-featured') : '' ?>">
 		<div class="single-tour-inner">
+            <?php if( $featured ): ?>
+            <div class="tf-featured-badge">
+				<span><?php _e( 'Featured','tourfic' ) ?></span>
+			</div>
+            <?php endif; ?>
 			<div class="tourfic-single-left">
                 <a href="<?php echo esc_url($url); ?>">
 				<?php
@@ -1317,4 +1322,40 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
 
     }
 }
-?>
+
+/*
+ * Tour search ajax
+ * @since 2.9.7
+ * @author Foysal
+ */
+add_action( 'wp_ajax_tf_tour_search', 'tf_tour_search_ajax_callback' );
+add_action( 'wp_ajax_nopriv_tf_tour_search', 'tf_tour_search_ajax_callback' );
+if ( ! function_exists( 'tf_tour_search_ajax_callback' ) ) {
+	function tf_tour_search_ajax_callback() {
+		$response = [
+			'status'  => 'error',
+			'message' => '',
+		];
+
+		if ( ! isset( $_POST['place'] ) || empty( $_POST['place'] ) ) {
+			$response['message'] = esc_html__( 'Please enter your location', 'tourfic' );
+		} elseif ( tfopt( 'date_tour_search' ) && ( ! isset( $_POST['check-in-out-date'] ) || empty( $_POST['check-in-out-date'] ) ) ) {
+			$response['message'] = esc_html__( 'Please select a date', 'tourfic' );
+		}
+
+		if(tfopt( 'date_tour_search' )){
+			if ( ! empty( $_POST['place'] ) && ! empty( $_POST['check-in-out-date'] ) ) {
+				$response['query_string'] = str_replace( '&action=tf_tour_search', '', http_build_query( $_POST ) );
+				$response['status']       = 'success';
+			}
+		} else {
+			if ( ! empty( $_POST['place'] ) ) {
+				$response['query_string'] = str_replace( '&action=tf_tour_search', '', http_build_query( $_POST ) );
+				$response['status']       = 'success';
+			}
+		}
+
+		echo json_encode( $response );
+		wp_die();
+	}
+}
