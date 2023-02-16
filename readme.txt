@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
 Tested up to: 6.1.1
-Stable tag: 2.9.6
+Stable tag: 2.9.7
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -416,13 +416,15 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 * Added: OptionStreetMap
 * Update: Settings and Metaboxes labels update
 * Improvment: Order item remove option add in woocommerce checkout page
-* Fixed: Quick setup typo issue fixed
-* Added: Hotel room availability disable date feature
+* Fixed: Quick setup typo issue
+* Added: Hotel room availability disable date 
 * Added: Hotel video
-* Added: Featured Hotel and Tour option feature
-== Pro Changelog: ==
-* Fixed: "Date Required in Hotel Search" issue
-* Fixed: "Date Required in Tour Search" issue
+* Added: Featured Hotel and Tour option
+* Added: Hotel room price by date 
+== Pro Changelog ==
+* Added: Multi Vendor Addon
+* Fixed: Date Required in Hotel Search
+* Fixed: Date Required in Tour Search
 * Update: Settings and Metaboxes labels
 * Added: Itinerary downloader in tour metabox
 * Improvement: Tour thumbnail ratio added in Itinerary downloader
