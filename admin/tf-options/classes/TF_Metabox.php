@@ -201,7 +201,6 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 									}
 
 									if($fieldClass == 'TF_repeater'){
-										// tf_var_dump($data);
 										$searchabledata = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : '';
 										$searchable_key = [];
 										if(!empty($field['fields'])){
@@ -224,60 +223,72 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 												}
 											}
 										}
-										// tf_var_dump($searchabledata);
-
-										foreach($searchable_key as $skey){
-											$tf_searchable_value = array_column($searchabledata, $skey['key']);
-											if($skey['type']=="number"){
-												$tf_s_max_value = !empty($tf_searchable_value) ? max($tf_searchable_value) : 1;
-												$tf_s_min_value = !empty($tf_searchable_value) ? min($tf_searchable_value): 0;
-												if( $tf_s_max_value==$tf_s_min_value ){
-													$tf_s_max_value = $tf_s_max_value;
-													$tf_s_min_value = 0;
+										tf_var_dump($searchabledata);
+										if(!empty($searchable_key)){
+											foreach($searchable_key as $skey){
+												$tf_searchable_value = array_column($searchabledata, $skey['key']);
+												if($skey['type']=="number"){
+													$tf_s_max_value = !empty($tf_searchable_value) ? max($tf_searchable_value) : 1;
+													$tf_s_min_value = !empty($tf_searchable_value) ? min($tf_searchable_value): 0;
+													if( $tf_s_max_value==$tf_s_min_value ){
+														$tf_s_max_value = $tf_s_max_value;
+														$tf_s_min_value = 0;
+													}else{
+														$tf_s_max_value = $tf_s_max_value;
+														$tf_s_min_value = $tf_s_min_value;
+													}
+													update_post_meta( $post_id, 'tf_'.$skey['key'].'_max', $tf_s_max_value );
+													update_post_meta( $post_id, 'tf_'.$skey['key'].'_min', $tf_s_min_value );
+												}elseif($skey['type']=="date"){
+													if(!empty($searchabledata[$skey['key']]) ){
+														update_post_meta( $post_id, 'tf_'.$skey['key'].'_max', $searchabledata[$skey['key']]['to'] );
+														update_post_meta( $post_id, 'tf_'.$skey['key'].'_min', $searchabledata[$skey['key']]['from'] );
+													}
 												}else{
-													$tf_s_max_value = $tf_s_max_value;
-													$tf_s_min_value = $tf_s_min_value;
+													update_post_meta( $post_id, 'tf_'.$skey['key'], serialize( $tf_searchable_value ) );
 												}
-												update_post_meta( $post_id, 'tf_'.$skey['key'].'_max', $tf_s_max_value );
-												update_post_meta( $post_id, 'tf_'.$skey['key'].'_min', $tf_s_min_value );
-											}else{
-												update_post_meta( $post_id, 'tf_'.$skey['key'], serialize( $tf_searchable_value ) );
 											}
 										}
 									}
 
 									if($fieldClass == 'TF_tab'){
-										tf_var_dump($data);
+										
 										$searchabledata = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : '';
 										$searchable_key = [];
 										if(!empty($field['tabs'])){
 											foreach($field['tabs'] as $sfield){
-												if(!empty($sfield['searchable'])){
-													$searchable_key[] = array(
-														'type' => $sfield['type'],
-														'key' => $sfield['id']
-													);
+												foreach($sfield['fields'] as $repfield){
+													if(!empty($repfield['searchable'])){
+														$searchable_key[] = array(
+															'type' => $repfield['type'],
+															'key' => $repfield['id']
+														);
+													}
 												}
 											}
 										}
-										// tf_var_dump($searchabledata);
-
-										foreach($searchable_key as $skey){
-											$tf_searchable_value = array_column($searchabledata, $skey['key']);
-											if($skey['type']=="number"){
-												$tf_s_max_value = !empty($tf_searchable_value) ? max($tf_searchable_value) : 1;
-												$tf_s_min_value = !empty($tf_searchable_value) ? min($tf_searchable_value): 0;
-												if( $tf_s_max_value==$tf_s_min_value ){
-													$tf_s_max_value = $tf_s_max_value;
+										if(!empty($searchable_key)){
+											foreach($searchable_key as $skey){
+												if($skey['type']=="number"){
+													$tf_s_max_value = !empty($searchabledata[$skey['key']]) ? $searchabledata[$skey['key']] : 1;
 													$tf_s_min_value = 0;
+													if( $tf_s_max_value==$tf_s_min_value ){
+														$tf_s_max_value = $tf_s_max_value;
+														$tf_s_min_value = 0;
+													}else{
+														$tf_s_max_value = $tf_s_max_value;
+														$tf_s_min_value = $tf_s_min_value;
+													}
+													update_post_meta( $post_id, 'tf_'.$skey['key'].'_max', $tf_s_max_value );
+													update_post_meta( $post_id, 'tf_'.$skey['key'].'_min', $tf_s_min_value );
+												}elseif($skey['type']=="date"){
+													if(!empty($searchabledata[$skey['key']]) ){
+														update_post_meta( $post_id, 'tf_'.$skey['key'].'_max', $searchabledata[$skey['key']]['to'] );
+														update_post_meta( $post_id, 'tf_'.$skey['key'].'_min', $searchabledata[$skey['key']]['from'] );
+													}
 												}else{
-													$tf_s_max_value = $tf_s_max_value;
-													$tf_s_min_value = $tf_s_min_value;
+													update_post_meta( $post_id, 'tf_'.$skey['key'], serialize( $tf_searchable_value ) );
 												}
-												update_post_meta( $post_id, 'tf_'.$skey['key'].'_max', $tf_s_max_value );
-												update_post_meta( $post_id, 'tf_'.$skey['key'].'_min', $tf_s_min_value );
-											}else{
-												update_post_meta( $post_id, 'tf_'.$skey['key'], serialize( $tf_searchable_value ) );
 											}
 										}
 									}
@@ -290,12 +301,12 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 					}
 				}
 			}
-			// exit();
-			if ( ! empty( $tf_meta_box_value ) ) {
-				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
-			} else {
-				delete_post_meta( $post_id, $this->metabox_id );
-			}
+			exit();
+			// if ( ! empty( $tf_meta_box_value ) ) {
+			// 	update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
+			// } else {
+			// 	delete_post_meta( $post_id, $this->metabox_id );
+			// }
 
 		}
 

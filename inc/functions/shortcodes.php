@@ -491,7 +491,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
 		array(
 			array(
 				'key' => 'tf_child_max',
-				'value' => 80,
+				'value' => 1,
 				'compare' => '>=',
 				'type' => 'DECIMAL',
 			)
@@ -509,10 +509,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
 				'value' => array( 1, 15 ),
 				'type'    => 'numeric',
 				'compare' => 'BETWEEN',
-			)
-		),
-		array(
-			'relation' => 'OR',
+			),
 			array(
 				'key' => 'tf_child_price_max',
 				'value' => array( 20, 67 ),
@@ -524,10 +521,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
 				'value' => array( 1, 7 ),
 				'type'    => 'numeric',
 				'compare' => 'BETWEEN',
-			)
-		),
-		array(
-			'relation' => 'OR',
+			),
 			array(
 				'key' => 'tf_price_max',
 				'value' => array( 200, 260 ),
