@@ -63,7 +63,12 @@ function tf_tour_booking_page_callback() {
 	// post per page limit
 	$limit = 20;
 	// Query
-	$query_orders = wc_get_orders( array( 'numberposts' => $limit, 'paginate' => true, '_order_type' => 'tour', '_post_author' => $current_user_id, 'paged' => $pagenum ) );
+	if ( $current_user_role == 'administrator' ) {
+		$query_orders = wc_get_orders( array( 'numberposts' => $limit, 'paginate' => true, '_order_type' => 'tour', 'paged' => $pagenum ) );
+	}
+	if ( $current_user_role == 'tf_vendor' ) {
+		$query_orders = wc_get_orders( array( 'numberposts' => $limit, 'paginate' => true, '_order_type' => 'tour', '_post_author' => $current_user_id, 'paged' => $pagenum ) );
+	}
 	$offset       = ( $pagenum - 1 ) * $limit;
 
 	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
@@ -238,9 +243,10 @@ function tf_tour_order_single_row($order){
         </td>
         <td><?php
 			// Get order item metas
-			$count = 0;
+
 			foreach ( $order->get_items() as $item_key => $item_values ) {
 				$tour_id   = wc_get_order_item_meta( $item_key, '_tour_id', true );
+				$order_type = $item_values->get_meta( '_order_type', true );
 				$tour_name = esc_html( get_the_title( $tour_id ) );
 				$tour_url  = esc_url( get_permalink( $tour_id ) );
 				$tour_date = ! empty( wc_get_order_item_meta( $item_key, 'Tour Date', true ) ) ? wc_get_order_item_meta( $item_key, 'Tour Date', true ) : '';
@@ -249,33 +255,29 @@ function tf_tour_order_single_row($order){
 				$children  = ! empty( wc_get_order_item_meta( $item_key, 'Children', true ) ) ? wc_get_order_item_meta( $item_key, 'Children', true ) : '';
 				$infant    = ! empty( wc_get_order_item_meta( $item_key, 'Infants', true ) ) ? wc_get_order_item_meta( $item_key, 'Infants', true ) : '';
 				$due       = ! empty( wc_get_order_item_meta( $item_key, 'Due', true ) ) ? wc_get_order_item_meta( $item_key, 'Due', true ) : false;
+				if(!empty($order_type) && "tour"==$order_type){
+					echo '<b>' . __( "Tour Name", "tourfic" ) . ': </b><a href="' . $tour_url . '" target="_blank">' . $tour_name . '</a><br>';
 
-				echo '<b>' . __( "Tour Name", "tourfic" ) . ': </b><a href="' . $tour_url . '" target="_blank">' . $tour_name . '</a><br>';
+					if ( $tour_date ) {
+						echo '<b>' . __( "Tour Date", "tourfic" ) . ': </b>' . $tour_date . '<br>';
+					}
 
-				if ( $tour_date ) {
-					echo '<b>' . __( "Tour Date", "tourfic" ) . ': </b>' . $tour_date . '<br>';
-				}
+					if ( $tour_time ) {
+						echo '<b>' . __( "Tour Time", "tourfic" ) . ': </b>' . $tour_time . '<br>';
+					}
 
-				if ( $tour_time ) {
-					echo '<b>' . __( "Tour Time", "tourfic" ) . ': </b>' . $tour_time . '<br>';
-				}
+					if ( $adult ) {
+						echo '<b>' . __( "Adult Number", "tourfic" ) . ': </b>' . $adult . '<br>';
+					}
 
-				if ( $adult ) {
-					echo '<b>' . __( "Adult Number", "tourfic" ) . ': </b>' . $adult . '<br>';
-				}
+					if ( $children ) {
+						echo '<b>' . __( "Children Number", "tourfic" ) . ': </b>' . $children . '<br>';
+					}
 
-				if ( $children ) {
-					echo '<b>' . __( "Children Number", "tourfic" ) . ': </b>' . $children . '<br>';
+					if ( $infant ) {
+						echo '<b>' . __( "Infant Number", "tourfic" ) . ': </b>' . $infant . '<br>';
+					}
 				}
-
-				if ( $infant ) {
-					echo '<b>' . __( "Infant Number", "tourfic" ) . ': </b>' . $infant . '<br>';
-				}
-				//divider if more than one tour
-				if ( $count < count( $order->get_items() ) - 1 ) {
-					echo '<hr>';
-				}
-				$count ++;
 			} ?>
         </td>
         <td><?php
@@ -334,7 +336,12 @@ function tf_hotel_booking_page_callback() {
 	// post per page limit
 	$limit = 20;
 	// Query
-	$query_orders = wc_get_orders( array( 'numberposts' => $limit, 'paginate' => true, '_order_type' => 'hotel', '_post_author' => $current_user_id, 'paged' => $pagenum ) );
+	if ( $current_user_role == 'administrator' ) {
+		$query_orders = wc_get_orders( array( 'numberposts' => $limit, 'paginate' => true, '_order_type' => 'hotel', 'paged' => $pagenum ) );
+	}
+	if ( $current_user_role == 'tf_vendor' ) {
+		$query_orders = wc_get_orders( array( 'numberposts' => $limit, 'paginate' => true, '_order_type' => 'hotel', '_post_author' => $current_user_id, 'paged' => $pagenum ) );
+	}
 	$offset       = ( $pagenum - 1 ) * $limit;
 
 	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
@@ -517,6 +524,7 @@ function tf_hotel_order_single_row($order){
 			foreach ( $order->get_items() as $item_key => $item_values ) {
 
 				$post_id             = wc_get_order_item_meta( $item_key, '_post_id', true );
+				$order_type 		 = $item_values->get_meta( '_order_type', true );
 				$hotel_name          = esc_html( get_the_title( $post_id ) );
 				$hotel_url           = esc_url( get_permalink( $post_id ) );
 				$room_name           = ! empty( wc_get_order_item_meta( $item_key, 'room_name', true ) ) ? wc_get_order_item_meta( $item_key, 'room_name', true ) : '';
@@ -528,36 +536,38 @@ function tf_hotel_order_single_row($order){
 				$due                 = ! empty( wc_get_order_item_meta( $item_key, 'due', true ) ) ? wc_get_order_item_meta( $item_key, 'due', true ) : null;
 				$airport_service     = ! empty( wc_get_order_item_meta( $item_key, 'Airport Service', true ) ) ? wc_get_order_item_meta( $item_key, 'Airport Service', true ) : 'No';
 				$airport_service_fee = ! empty( wc_get_order_item_meta( $item_key, 'Airport Service Fee', true ) ) ? wc_get_order_item_meta( $item_key, 'Airport Service Fee', true ) : '';
-				echo '<b>' . __( "Hotel Name", "tourfic" ) . ': </b><a href="' . $hotel_url . '" target="_blank">' . $hotel_name . '</a><br>';
+				if(!empty($order_type) && "hotel"==$order_type){
+					echo '<b>' . __( "Hotel Name", "tourfic" ) . ': </b><a href="' . $hotel_url . '" target="_blank">' . $hotel_name . '</a><br>';
 
-				if ( $room_name ) {
-					echo '<b>' . __( "Room", "tourfic" ) . ': </b>' . $room_name . '<br>';
-				}
+					if ( $room_name ) {
+						echo '<b>' . __( "Room", "tourfic" ) . ': </b>' . $room_name . '<br>';
+					}
 
-				if ( $room_booked ) {
-					echo '<b>' . __( "Room Booked", "tourfic" ) . ': </b>' . $room_booked . '<br>';
-				}
+					if ( $room_booked ) {
+						echo '<b>' . __( "Room Booked", "tourfic" ) . ': </b>' . $room_booked . '<br>';
+					}
 
-				if ( $adult ) {
-					echo '<b>' . __( "Adult Number", "tourfic" ) . ': </b>' . $adult . '<br>';
-				}
+					if ( $adult ) {
+						echo '<b>' . __( "Adult Number", "tourfic" ) . ': </b>' . $adult . '<br>';
+					}
 
-				if ( $child ) {
-					echo '<b>' . __( "Children Number", "tourfic" ) . ': </b>' . $child . '<br>';
-				}
+					if ( $child ) {
+						echo '<b>' . __( "Children Number", "tourfic" ) . ': </b>' . $child . '<br>';
+					}
 
-				if ( $check_in ) {
-					echo '<b>' . __( "Check-in", "tourfic" ) . ': </b>' . $check_in . '<br>';
-				}
+					if ( $check_in ) {
+						echo '<b>' . __( "Check-in", "tourfic" ) . ': </b>' . $check_in . '<br>';
+					}
 
-				if ( $check_out ) {
-					echo '<b>' . __( "Check-out", "tourfic" ) . ': </b>' . $check_out . '<br>';
-				}
-				if ( ! empty( $airport_service ) ) {
-					echo '<b>' . __( "Airport Service", "tourfic" ) . ': </b>' . $airport_service . '<br>';
-				}
-				if ( ! empty( $airport_service ) ) {
-					echo '<b>' . __( "Airport Service Fee", "tourfic" ) . ': </b>' . $airport_service_fee . '<br>';
+					if ( $check_out ) {
+						echo '<b>' . __( "Check-out", "tourfic" ) . ': </b>' . $check_out . '<br>';
+					}
+					if ( ! empty( $airport_service ) ) {
+						echo '<b>' . __( "Airport Service", "tourfic" ) . ': </b>' . $airport_service . '<br>';
+					}
+					if ( ! empty( $airport_service_fee ) ) {
+						echo '<b>' . __( "Airport Service Fee", "tourfic" ) . ': </b>' . $airport_service_fee . '<br>';
+					}
 				}
 
 			} ?>
