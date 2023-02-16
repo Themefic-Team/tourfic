@@ -9,7 +9,7 @@
  * Domain Path:     /lang/
  * Version:         2.9.7
  * Tested up to:    6.1.1
- * WC tested up to: 7.3.0
+ * WC tested up to: 7.4.0
  * Requires PHP:    7.2
  * Elementor tested up to: 3.10.2
  */
