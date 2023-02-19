@@ -457,85 +457,188 @@ add_shortcode( 'tf_search', 'tf_search_form_shortcode' );
  */
 function tf_search_result_shortcode( $atts, $content = null ){
 
-	$search_resuts = array(
-        'post_type'      => 'tf_hotel',
-        'post_status'    => 'publish',
-        'posts_per_page' => -1,
-    );
-	$search_resuts['tax_query'] = array(
-		'relation' => 'AND',
-		array(
-			'taxonomy' => 'hotel_location',
-			'field' => 'slug',
-			'terms'    => array('dhaka'),
-		)
-	);
-	$search_resuts['meta_query'] = array(
-		'relation' => 'AND',
-		array(
+	if(!empty($_GET['type']) && $_GET['type']=="tf_hotel"){
+		$search_resuts = array(
+			'post_type'      => 'tf_hotel',
+			'post_status'    => 'publish',
+			'posts_per_page' => -1,
+		);
+		$search_resuts['tax_query'] = array(
+			'relation' => 'AND',
 			array(
-				'key' => 'tf_num-room_max',
-				'value' => 5,
-				'compare' => '>=',
-				'type' => 'DECIMAL',
+				'taxonomy' => 'hotel_location',
+				'field' => 'slug',
+				'terms'    => array('dhaka'),
 			)
-		),
-		array(
+		);
+		$search_resuts['meta_query'] = array(
+			'relation' => 'AND',
 			array(
-				'key' => 'tf_adult_max',
-				'value' => 3,
-				'compare' => '>=',
-				'type' => 'DECIMAL',
+				array(
+					'key' => 'tf_num-room_max',
+					'value' => 5,
+					'compare' => '>=',
+					'type' => 'DECIMAL',
+				)
+			),
+			array(
+				array(
+					'key' => 'tf_adult_max',
+					'value' => 3,
+					'compare' => '>=',
+					'type' => 'DECIMAL',
+				)
+			),
+			array(
+				array(
+					'key' => 'tf_child_max',
+					'value' => 1,
+					'compare' => '>=',
+					'type' => 'DECIMAL',
+				)
+			),
+			array(
+				'relation' => 'OR',
+				array(
+					'key' => 'tf_adult_price_max',
+					'value' => array( 20, 100 ),
+					'type'    => 'numeric',
+					'compare' => 'BETWEEN',
+				),
+				array(
+					'key' => 'tf_adult_price_min',
+					'value' => array( 1, 15 ),
+					'type'    => 'numeric',
+					'compare' => 'BETWEEN',
+				),
+				array(
+					'key' => 'tf_child_price_max',
+					'value' => array( 20, 67 ),
+					'type'    => 'numeric',
+					'compare' => 'BETWEEN',
+				),
+				array(
+					'key' => 'tf_child_price_min',
+					'value' => array( 1, 7 ),
+					'type'    => 'numeric',
+					'compare' => 'BETWEEN',
+				),
+				array(
+					'key' => 'tf_price_max',
+					'value' => array( 200, 260 ),
+					'type'    => 'numeric',
+					'compare' => 'BETWEEN',
+				),
+				array(
+					'key' => 'tf_price_min',
+					'value' => array( 1, 7 ),
+					'type'    => 'numeric',
+					'compare' => 'BETWEEN',
+				)
+			),
+		);
+	}
+
+	if(!empty($_GET['type']) && $_GET['type']=="tf_tours"){
+		$search_resuts = array(
+			'post_type'      => 'tf_tours',
+			'post_status'    => 'publish',
+			'posts_per_page' => -1,
+		);
+		$search_resuts['tax_query'] = array(
+			'relation' => 'AND',
+			array(
+				'taxonomy' => 'tour_features',
+				'field' => 'slug',
+				'terms'    => array('bbq'),
 			)
-		),
-		array(
+		);
+
+		$search_resuts['meta_query'] = array(
+			'relation' => 'AND',
 			array(
-				'key' => 'tf_child_max',
-				'value' => 1,
-				'compare' => '>=',
-				'type' => 'DECIMAL',
-			)
-		),
-		array(
-			'relation' => 'OR',
-			array(
-				'key' => 'tf_adult_price_max',
-				'value' => array( 20, 100 ),
-				'type'    => 'numeric',
-				'compare' => 'BETWEEN',
+				'relation' => 'OR',
+				array(
+					'key' => 'tf_cont_max_people_max',
+					'value' => 5,
+					'compare' => '>=',
+					'type' => 'DECIMAL',
+				),
+				array(
+					'key' => 'tf_max_seat_max',
+					'value' => 5,
+					'compare' => '>=',
+					'type' => 'DECIMAL',
+				),
+				array(
+					'key' => 'tf_max_people_max',
+					'value' => 5,
+					'compare' => '>=',
+					'type' => 'DECIMAL',
+				),
+				array(
+					'key' => 'tf_date_min',
+					'value'   => array('2023/02/20','2023/02/30'),
+					'compare' => 'BETWEEN',
+					'type'    => 'DATE'
+				),
+				array(
+					'key' => 'tf_date_max',
+					'value'   => array('2023/02/20','2023/02/30'),
+					'compare' => 'BETWEEN',
+					'type'    => 'DATE'
+				),
+				array(
+					'key' => 'tf_adult_price_max',
+					'value' => array( 20, 300 ),
+					'type'    => 'numeric',
+					'compare' => 'BETWEEN',
+				),
+				array(
+					'key' => 'tf_adult_price_min',
+					'value' => array( 1, 15 ),
+					'type'    => 'numeric',
+					'compare' => 'BETWEEN',
+				),
+				array(
+					'key' => 'tf_child_price_max',
+					'value' => array( 20, 67 ),
+					'type'    => 'numeric',
+					'compare' => 'BETWEEN',
+				),
+				array(
+					'key' => 'tf_child_price_min',
+					'value' => array( 1, 7 ),
+					'type'    => 'numeric',
+					'compare' => 'BETWEEN',
+				),
+				array(
+					'key' => 'tf_infant_price_max',
+					'value' => array( 20, 67 ),
+					'type'    => 'numeric',
+					'compare' => 'BETWEEN',
+				),
+				array(
+					'key' => 'tf_infant_price_min',
+					'value' => array( 1, 7 ),
+					'type'    => 'numeric',
+					'compare' => 'BETWEEN',
+				),
+				array(
+					'key' => 'tf_group_price_max',
+					'value' => array( 200, 700 ),
+					'type'    => 'numeric',
+					'compare' => 'BETWEEN',
+				),
+				array(
+					'key' => 'tf_group_price_min',
+					'value' => array( 1, 7 ),
+					'type'    => 'numeric',
+					'compare' => 'BETWEEN',
+				)
 			),
-			array(
-				'key' => 'tf_adult_price_min',
-				'value' => array( 1, 15 ),
-				'type'    => 'numeric',
-				'compare' => 'BETWEEN',
-			),
-			array(
-				'key' => 'tf_child_price_max',
-				'value' => array( 20, 67 ),
-				'type'    => 'numeric',
-				'compare' => 'BETWEEN',
-			),
-			array(
-				'key' => 'tf_child_price_min',
-				'value' => array( 1, 7 ),
-				'type'    => 'numeric',
-				'compare' => 'BETWEEN',
-			),
-			array(
-				'key' => 'tf_price_max',
-				'value' => array( 200, 260 ),
-				'type'    => 'numeric',
-				'compare' => 'BETWEEN',
-			),
-			array(
-				'key' => 'tf_price_min',
-				'value' => array( 1, 7 ),
-				'type'    => 'numeric',
-				'compare' => 'BETWEEN',
-			)
-		),
-	);
+		);
+	}
 
 	$search_loop = new WP_Query( $search_resuts );
 	$search_total_posts = $search_loop->found_posts;

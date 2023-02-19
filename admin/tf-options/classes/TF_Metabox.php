@@ -223,7 +223,6 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 												}
 											}
 										}
-										tf_var_dump($searchabledata);
 										if(!empty($searchable_key)){
 											foreach($searchable_key as $skey){
 												$tf_searchable_value = array_column($searchabledata, $skey['key']);
