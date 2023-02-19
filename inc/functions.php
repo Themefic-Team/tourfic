@@ -1613,6 +1613,7 @@ if( ! function_exists( 'tf_hotel_gallery_video' ) ){
 
 		//Hotel video section in the hero
 		$url = ! empty( $meta['video'] ) ? $meta['video'] : '';
+		if(!empty($url)){
 		?>
 		<div class="tf-hotel-video">
 			<div class="tf-hero-btm-icon tf-hotel-video" data-fancybox="hotel-video" href="<?php echo apply_filters( 'tf_hotel_gallery_video_url', $url ) ; ?>">
@@ -1620,5 +1621,6 @@ if( ! function_exists( 'tf_hotel_gallery_video' ) ){
 			</div>
 		</div>
 		<?php
+		}
 	}
 }

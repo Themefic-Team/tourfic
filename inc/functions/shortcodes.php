@@ -241,7 +241,7 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 					}
 
 					?>
-                    <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                    <div class="tf-slider-item" style="background-image: url(<?php echo !empty(get_the_post_thumbnail_url( $post_id, 'full' )) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
@@ -334,7 +334,7 @@ function tf_recent_tour_shortcode( $atts, $content = null ) {
 					$post_id          = get_the_ID();
 					$related_comments = get_comments( array( 'post_id' => $post_id ) );
 					?>
-                    <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                    <div class="tf-slider-item" style="background-image: url(<?php echo !empty(get_the_post_thumbnail_url( $post_id, 'full' )) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
@@ -927,7 +927,7 @@ function tf_hotels_grid_slider($atts, $content = null){
 						}
 					}	
 					?>
-                    <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                    <div class="tf-slider-item" style="background-image: url(<?php echo !empty(get_the_post_thumbnail_url( $post_id, 'full' )) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3> 
@@ -1030,7 +1030,7 @@ function tf_tours_grid_slider($atts, $content = null){
 					$post_id          = get_the_ID();
 					$related_comments = get_comments( array( 'post_id' => $post_id ) );
 					?>
-                    <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
+                    <div class="tf-slider-item" style="background-image: url(<?php echo !empty(get_the_post_thumbnail_url( $post_id, 'full' )) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>);">
                         <div class="tf-slider-content">
                             <div class="tf-slider-desc">
                                 <h3>
