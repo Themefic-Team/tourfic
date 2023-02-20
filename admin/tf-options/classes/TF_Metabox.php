@@ -223,6 +223,8 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 												}
 											}
 										}
+										// tf_var_dump($searchabledata);
+										// tf_var_dump($searchable_key);
 										if(!empty($searchable_key)){
 											foreach($searchable_key as $skey){
 												$tf_searchable_value = array_column($searchabledata, $skey['key']);
@@ -239,10 +241,20 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 													update_post_meta( $post_id, 'tf_'.$skey['key'].'_max', $tf_s_max_value );
 													update_post_meta( $post_id, 'tf_'.$skey['key'].'_min', $tf_s_min_value );
 												}elseif($skey['type']=="date"){
-													if(!empty($searchabledata[$skey['key']]) ){
-														update_post_meta( $post_id, 'tf_'.$skey['key'].'_max', $searchabledata[$skey['key']]['to'] );
-														update_post_meta( $post_id, 'tf_'.$skey['key'].'_min', $searchabledata[$skey['key']]['from'] );
+												
+													$tf_data_from = array_column($tf_searchable_value, "from");
+													$tf_data_to = array_column($tf_searchable_value, "to");
+													if(!empty($tf_data_to)){
+														update_post_meta( $post_id, 'tf_'.$skey['key'].'_max', $tf_data_to );
 													}
+													if(!empty($tf_data_from)){
+														update_post_meta( $post_id, 'tf_'.$skey['key'].'_min', $tf_data_from );
+													}
+												}elseif($skey['type']=="repeater"){
+												
+													$tf_data_repeater = array_column($searchabledata, $skey['key']);
+													update_post_meta( $post_id, 'tf_'.$skey['key'], serialize( $tf_data_repeater ) );
+													
 												}else{
 													update_post_meta( $post_id, 'tf_'.$skey['key'], serialize( $tf_searchable_value ) );
 												}
@@ -300,12 +312,12 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 					}
 				}
 			}
-			exit();
-			// if ( ! empty( $tf_meta_box_value ) ) {
-			// 	update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
-			// } else {
-			// 	delete_post_meta( $post_id, $this->metabox_id );
-			// }
+			// exit();
+			if ( ! empty( $tf_meta_box_value ) ) {
+				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
+			} else {
+				delete_post_meta( $post_id, $this->metabox_id );
+			}
 
 		}
 
