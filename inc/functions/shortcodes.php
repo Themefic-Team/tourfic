@@ -521,13 +521,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
 				array(
 					'relation' => 'OR',
 					array(
-						'key' => 'tf_date_min',
-						'value'   => array($check_in_date, $check_out_date),
-						'compare' => 'BETWEEN',
-						'type'    => 'DATE'
-					),
-					array(
-						'key' => 'tf_date_max',
+						'key' => 'tf_repeat_by_date',
 						'value'   => array($check_in_date, $check_out_date),
 						'compare' => 'BETWEEN',
 						'type'    => 'DATE'
@@ -535,7 +529,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
 				),
 			);
 		}
-		
+
 		$price_range_start = isset( $_GET['from'] ) ? absint(sanitize_key($_GET['from'])) : '';
     	$price_range_end = isset( $_GET['to'] ) ? absint(sanitize_key($_GET['to'])) : '';
 
