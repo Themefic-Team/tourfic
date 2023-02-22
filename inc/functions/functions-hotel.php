@@ -1322,7 +1322,16 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	$meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
 	// Room Details
 	$rooms           = ! empty( $meta['room'] ) ? $meta['room'] : '';
+	if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
+		$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+		}, $rooms );
+		$rooms                = unserialize( $tf_hotel_rooms_value );
+	}
+
 	$total_dis_dates = [];
+	$maxadults = [];
+	$maxchilds = [];
 	if ( ! empty( $rooms ) ):
 		foreach ( $rooms as $key => $room ) {
 			if ( ! empty( $room['repeat_by_date'] ) ) {
@@ -1336,12 +1345,37 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 					}
 				}
 			}
+			// Adult Number Store
+			if(!empty($room['adult'])){
+				$maxadults[]=$room['adult'];
+			}
+
+			// Child Number Store
+			if(!empty($room['child'])){
+				$maxchilds[]=$room['child'];
+			}
+			
 		}
 		//merge the new arrays
 		array_merge( $total_dis_dates, $total_dis_dates );
 		$total_dis_dates = implode( ',', $total_dis_dates );
 	endif;
 	$total_dis_dates = is_array( $total_dis_dates ) && empty( $total_dis_dates ) ? '' : $total_dis_dates;
+
+	// Maximum Adults Number
+	if(!empty($maxadults)){
+        $max_adults_numbers = max($maxadults);
+    }else{
+        $max_adults_numbers = 1;
+    }
+
+	// Maximum Child Number
+	if(!empty($maxchilds)){
+        $max_childs_numbers = max($maxchilds);
+    }else{
+        $max_childs_numbers = 0;
+    }
+
 	?>
 
     <!-- Start Booking widget -->
@@ -1356,10 +1390,11 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
                     <select name="adults" id="adults" class="">
 						<?php
 						echo '<option value="1">1 ' . __( "Adult", "tourfic" ) . '</option>';
-
-						foreach ( range( 2, 8 ) as $value ) {
-							$selected = $value == $adults ? 'selected' : null;
-							echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __( "Adults", "tourfic" ) . '</option>';
+						if($max_adults_numbers > 1){
+							foreach ( range( 2, $max_adults_numbers ) as $value ) {
+								$selected = $value == $adults ? 'selected' : null;
+								echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __( "Adults", "tourfic" ) . '</option>';
+							}
 						}
 						?>
 
@@ -1375,10 +1410,11 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
                     <select name="children" id="children" class="">
 						<?php
 						echo '<option value="0">0 ' . __( "Children", "tourfic" ) . '</option>';
-
-						foreach ( range( 1, 8 ) as $value ) {
-							$selected = $value == $child ? 'selected' : null;
-							echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __( "Children", "tourfic" ) . '</option>';
+						if($max_childs_numbers > 0){
+							foreach ( range( 1, $max_childs_numbers ) as $value ) {
+								$selected = $value == $child ? 'selected' : null;
+								echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __( "Children", "tourfic" ) . '</option>';
+							}
 						}
 						?>
                     </select>
