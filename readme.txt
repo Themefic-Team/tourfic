@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
 Tested up to: 6.1.1
-Stable tag: 2.9.8
+Stable tag: 2.9.9
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -343,7 +343,7 @@ The icon and banner used on this plugin are taken from <a href="https://www.flat
 
 1. Download and unzip the plugin. Upload the unzipped folder to the wp-contents/plugins folder of your WordPress installation.
 2. Active the plugin from the WordPress Plugins administration page.
-3. OR, Go to WP admin panel, click 'Plugins' -> 'Add new'. In the search input box, type 'Ultimate Addons for Contact form 7'.
+3. OR, Go to WP admin panel, click 'Plugins' -> 'Add new'. In the search input box, type 'Tourfic'.
 4. Install and activate the plugin.
 5. Check our youtube video for further instruction
 
@@ -409,6 +409,15 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Changelog ==
 
+= 2.9.9 -  23 February 2023 =
+
+* Added: Hotel and Tour feature image required removed and added a default image
+* Added: Paypal, Payoneer, and Wise Payment fields added ( Tourfic Vendor Addon )
+* Added: Update Notice Script ( Tourfic Vendor Addon )
+* Added: Hotel/Tour Approval option added on Individual Vendor ( Tourfic Vendor Addon )
+* Changed: Multivendor Notice ( Pro )
+* Fixed: Single Hotel search page Adults and Childs maximum selection 
+
 = 2.9.8 -  16 February 2023 =
 
 * Updated: readme.text file
@@ -425,12 +434,12 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 * Update: Settings and Metaboxes labels update
 * Improvment: Order item remove option add in woocommerce checkout page
 * Fixed: Quick setup typo issue
-* Added: Multi Vendor Addon(pro)
-* Fixed: Date Required in Hotel Search(pro)
-* Fixed: Date Required in Tour Search(pro)
-* Update: Settings and Metaboxes labels(pro)
-* Added: Itinerary downloader in tour metabox(pro)
-* Improvement: Tour thumbnail ratio added in Itinerary downloader(pro)
+* Added: Multi Vendor Addon (Pro)
+* Fixed: Date Required in Hotel Search (Pro)
+* Fixed: Date Required in Tour Search (Pro)
+* Update: Settings and Metaboxes labels (Pro)
+* Added: Itinerary downloader in tour metabox (Pro)
+* Improvement: Tour thumbnail ratio added in Itinerary downloader (Pro)
 
 = 2.9.6 -  02 February 2023 =
 
@@ -447,13 +456,13 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 * Fixed: Hotel Service empty price
 * Fixed: Checkout Page Warning
 * Fixed: Review Slider dots overlap design
-* Fixed: Tour Deposit Warning(pro)
+* Fixed: Tour Deposit Warning (Pro)
 * Fixed: Tour Pricing Warning
 * Fixed: Tour, hotel image popup
 * Fixed: Short-code Design
 * Updated: Admin Hotel Popup label 
 * Updated: Hotel and tours review subtitle
-* Improvement: Filter checkbox CSS(pro)
+* Improvement: Filter checkbox CSS (Pro)
 * Improvement: Changed assets folder structure
 * Improvement: TF Search and TF Wishlist page auto creation
 
@@ -478,7 +487,7 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 * Added: Visual editor added on hotel room description
 * Fixed: Tour features icon display issue fixed
 * Update: Room filter feature title update
-* Fixed: Tour Filter By Features(pro)
+* Fixed: Tour Filter By Features (Pro)
 * Fixed: Archive Search page warning
 * Fixed: Itinerary Download
 
