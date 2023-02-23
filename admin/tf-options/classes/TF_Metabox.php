@@ -294,8 +294,12 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 													update_post_meta( $post_id, 'tf_'.$skey['key'].'_min', $tf_s_min_value );
 												}elseif($skey['type']=="date"){
 													if(!empty($searchabledata[$skey['key']]) ){
-														update_post_meta( $post_id, 'tf_'.$skey['key'].'_max', $searchabledata[$skey['key']]['to'] );
-														update_post_meta( $post_id, 'tf_'.$skey['key'].'_min', $searchabledata[$skey['key']]['from'] );
+														if(!empty($searchabledata[$skey['key']]['to'])){
+															update_post_meta( $post_id, 'tf_'.$skey['key'].'_max', $searchabledata[$skey['key']]['to'] );
+														}	
+														if(!empty($searchabledata[$skey['key']]['from'])){
+															update_post_meta( $post_id, 'tf_'.$skey['key'].'_min', $searchabledata[$skey['key']]['from'] );
+														}
 													}
 												}else{
 													update_post_meta( $post_id, 'tf_'.$skey['key'], serialize( $tf_searchable_value ) );

@@ -517,15 +517,17 @@ function tf_search_result_shortcode( $atts, $content = null ){
 			$check_out_date = $SearchcheckInOutDate[1];
 		}
 		if(!empty($check_in_date) && !empty($check_out_date)){
-			$search_resuts['meta_query'] = array(
+			$search_results['meta_query'] = array(
+				'relation' => 'OR',
 				array(
-					'relation' => 'OR',
-					array(
-						'key' => 'tf_repeat_by_date',
-						'value'   => array($check_in_date, $check_out_date),
-						'compare' => 'BETWEEN',
-						'type'    => 'DATE'
-					),
+					'key' => 'tf_repeat_by_date',
+					'value'   => sprintf(':"from";s:%d:"%s";', strlen($check_in_date), $check_in_date),
+					'compare' => 'LIKE'
+				),
+				array(
+					'key' => 'tf_repeat_by_date',
+					'value'   => sprintf(':"to";s:%d:"%s";', strlen($check_out_date), $check_out_date),
+					'compare' => 'LIKE'
 				),
 			);
 		}
