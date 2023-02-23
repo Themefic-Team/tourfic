@@ -713,6 +713,16 @@ function tf_search_result_ajax_sidebar() {
 	$startprice = ! empty( $_POST['startprice'] ) ? $_POST['startprice'] : '';
 	$endprice   = ! empty( $_POST['endprice'] ) ? $_POST['endprice'] : '';
 
+	if(!empty($startprice) && !empty($endprice)){
+        if($_GET['type']=="tf_tours"){
+            $data = array($adults, $child, $check_in_out, $startprice, $endprice);
+        }else{
+            $data = array($adults, $child, $room, $check_in_out, $startprice, $endprice);
+        }
+    }else{
+        $data = array($adults, $child, $room, $check_in_out);
+    }
+
 	if( !empty( $checkin ) ){
 		list( $tf_form_start, $tf_form_end ) = explode( ' - ', $checkin );
 	}
@@ -745,34 +755,14 @@ function tf_search_result_ajax_sidebar() {
 
 	if ( $search ) {
 
-		// 1st search on Destination taxonomy
-		$destinations = new WP_Term_Query( array(
-			'taxonomy'     => $place_taxonomy,
-			'orderby'      => 'name',
-			'order'        => 'ASC',
-			'hide_empty'   => 0,
-			'hierarchical' => 0,
-			'slug'         => sanitize_title( $search, '' ),
-		) );
-
-		if ( $destinations ) {
-			// Define Featured Category IDs first
-			$destinations_ids = array();
-
-			// Creating loop to insert IDs to array.
-			foreach ( $destinations->get_terms() as $cat ) {
-				$destinations_ids[] = $cat->term_id;
-			}
-
-			$args['tax_query']['relation'] = $relation;
-			$args['tax_query'][]           = array(
+		$args['tax_query'] = array(
+			'relation' => 'AND',
+			array(
 				'taxonomy' => $place_taxonomy,
-				'terms'    => $destinations_ids,
-			);
-
-		} else {
-			$args['s'] = $search;
-		}
+				'field' => 'slug',
+				'terms'    => sanitize_title($search, ''),
+			),
+		);
 	}
 
 	if ( $filters ) {
@@ -920,71 +910,41 @@ function tf_search_result_ajax_sidebar() {
 			$loop->the_post();
 
 			if ( $posttype == 'tf_hotel' ) {
-				$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
-				$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-				if( !empty($rooms) && gettype($rooms)=="string" ){
-					$tf_hotel_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
-						return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
-					}, $rooms );
-					$rooms = unserialize( $tf_hotel_rooms_value );
-				}
-
-				$total_adults = tf_hotel_total_room_adult_child( get_the_ID(), 'adult' );
-				$total_child  = tf_hotel_total_room_adult_child( get_the_ID(), 'child' );
-				$total_room   = tf_hotel_total_room_adult_child( get_the_ID(), 'room' );
-				$room_matched = tf_hotel_room_matched_by_date($rooms, $form_check_in_stt, $form_check_out_stt);
-				if(!empty($check_in_out)):
-					if ( $room > $total_room || $adults > $total_adults || $child > $total_child || !$room_matched ) {
-						$not_found[] = 1;
-						$total_posts--;
-						continue;
-
-					}
-				endif;
+				
 				if ( empty( $check_in_out ) ) {
-
 					$not_found[] = 0;
-					tf_hotel_archive_single_item($adults, $child, $room);
-
+					tf_hotel_archive_single_item();
 				} else {
-					if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-						$data = [ $adults, $child, $room, $check_in_out, $startprice, $endprice ];
-					} else {
-						$data = [ $adults, $child, $room, $check_in_out ];
-					}
-
 					tf_filter_hotel_by_date( $period, $not_found, $data );
-
 				}
 
 			} else {
+
+				/**
+				 * Check if minimum and maximum people limit matches with the search query
+				 */
 				$total_person = intval( $adults ) + intval( $child );
 				$meta         = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
-				if ( $meta['cont_max_people'] < $total_person && $meta['cont_max_people'] != 0 && !empty($meta['cont_max_people']) ) {
+
+				//skip the tour if the search form total people exceeds the maximum number of people in tour
+				if ( !empty($meta['cont_max_people']) && $meta['cont_max_people'] < $total_person && $meta['cont_max_people'] != 0  ) {
 					$not_found[] = 1;
 					$total_posts--;
 					continue;
 				}
 
-				if ( $meta['cont_min_people'] > $total_person && $meta['cont_min_people'] != 0 && !empty($meta['cont_min_people'])) {
+				//skip the tour if the search form total people less than the maximum number of people in tour
+				if ( !empty($meta['cont_min_people']) && $meta['cont_min_people'] > $total_person && $meta['cont_min_people'] != 0) {
 					$not_found[] = 1;
 					$total_posts--;
 					continue;
 				}
 
 				if ( empty( $check_in_out ) ) {
-
 					$not_found[] = 0;
-					tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
-
+					tf_tour_archive_single_item();
 				} else {
-					if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-						$data = [ $adults, $child, $check_in_out, $startprice, $endprice ];
-					} else {
-						$data = [ $adults, $child, $check_in_out ];
-					}
-					tf_filter_tour_by_date( $period,$total_posts, $not_found, $data );
-
+					tf_filter_tour_by_date( $period, $total_posts, $not_found, $data );
 				}
 			}
 		}

@@ -1744,7 +1744,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	// Remove disabled rooms
 	if ( ! empty( $meta['room'] ) ):
 		$meta = array_filter( $meta['room'], function ( $value ) {
-			return ! empty( $value ) && $value['enable'] != '0';
+			return ! empty( $value ) && !empty($value['enable']) ? $value['enable'] : '' != '0';
 		} );
 	endif;
 	// If no room return
