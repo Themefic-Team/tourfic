@@ -714,7 +714,7 @@ function tf_search_result_ajax_sidebar() {
 	$endprice   = ! empty( $_POST['endprice'] ) ? $_POST['endprice'] : '';
 
 	if(!empty($startprice) && !empty($endprice)){
-        if($_GET['type']=="tf_tours"){
+        if($posttype=="tf_tours"){
             $data = array($adults, $child, $check_in_out, $startprice, $endprice);
         }else{
             $data = array($adults, $child, $room, $check_in_out, $startprice, $endprice);
@@ -723,15 +723,15 @@ function tf_search_result_ajax_sidebar() {
         $data = array($adults, $child, $room, $check_in_out);
     }
 
-	if( !empty( $checkin ) ){
-		list( $tf_form_start, $tf_form_end ) = explode( ' - ', $checkin );
+	if( !empty( $check_in_out ) ){
+		list( $tf_form_start, $tf_form_end ) = explode( ' - ', $check_in_out );
 	}
 
-	if ( ! empty( $checkin ) ) {
+	if ( ! empty( $check_in_out ) ) {
 		$period = new DatePeriod(
 			new DateTime( $tf_form_start ),
 			new DateInterval( 'P1D' ),
-			new DateTime( $tf_form_end . '23:59' )
+			new DateTime( !empty($tf_form_end) ? $tf_form_end : $tf_form_start . '23:59' )
 		);
 	} else {
 		$period = '';
@@ -903,7 +903,6 @@ function tf_search_result_ajax_sidebar() {
 	//get total posts count
 	$total_posts = $loop->found_posts;
 	if ( $loop->have_posts() ) {
-
 		$not_found = [];
 		while ( $loop->have_posts() ) {
 
@@ -912,8 +911,7 @@ function tf_search_result_ajax_sidebar() {
 			if ( $posttype == 'tf_hotel' ) {
 				
 				if ( empty( $check_in_out ) ) {
-					$not_found[] = 0;
-					tf_hotel_archive_single_item();
+					tf_filter_hotel_without_date( $period, $not_found, $data );
 				} else {
 					tf_filter_hotel_by_date( $period, $not_found, $data );
 				}
@@ -948,7 +946,12 @@ function tf_search_result_ajax_sidebar() {
 				}
 			}
 		}
-
+		$tf_total_results = 0;
+		foreach($not_found as $not){
+			if($not!=1){
+				$tf_total_results = $tf_total_results+1;
+			}
+		}
 		if ( ! in_array( 0, $not_found ) ) {
 			echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 		}
@@ -959,7 +962,7 @@ function tf_search_result_ajax_sidebar() {
 
 	}
 
-	echo "<span hidden=hidden class='tf-posts-count'>".$total_posts."</span>";
+	echo "<span hidden=hidden class='tf-posts-count'>".$tf_total_results."</span>";
 	wp_reset_postdata();
 
 	die();

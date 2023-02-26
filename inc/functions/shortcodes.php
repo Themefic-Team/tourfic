@@ -617,15 +617,13 @@ function tf_search_result_shortcode( $atts, $content = null ){
 			<?php
 			if ( $loop->have_posts() ) {
 				$not_found = [];
-
 				while ( $loop->have_posts() ) {
 					$loop->the_post();
 
 					if ( $post_type == 'tf_hotel' ) {
 
 						if ( empty( $check_in_out ) ) {
-							$not_found[] = 0;
-							tf_hotel_archive_single_item();
+							tf_filter_hotel_without_date( $period, $not_found, $data );
 						} else {
 							tf_filter_hotel_by_date( $period, $not_found, $data );
 						}
@@ -660,14 +658,19 @@ function tf_search_result_shortcode( $atts, $content = null ){
 					}
 
 				}
-
+				$tf_total_results = 0;
+				foreach($not_found as $not){
+					if($not!=1){
+						$tf_total_results = $tf_total_results+1;
+					}
+				}
 				if ( ! in_array( 0, $not_found ) ) {
 					echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found! Select another dates', 'tourfic' ) . '</div>';
 				}
 			} else {
 				echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 			}
-			echo "<span hidden=hidden class='tf-posts-count'>".$total_posts."</span>";
+			echo "<span hidden=hidden class='tf-posts-count'>".$tf_total_results."</span>";
 			?>
         </div>
 		<?php 
