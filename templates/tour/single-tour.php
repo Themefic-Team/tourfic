@@ -61,6 +61,9 @@ while ( have_posts() ) : the_post();
 	$highlights = ! empty( $meta['additional_information'] ) ? $meta['additional_information'] : '';
 	// Informations
 	$tour_duration = ! empty( $meta['duration'] ) ? $meta['duration'] : '';
+	$duration_time = ! empty( $meta['duration_time'] ) ? $meta['duration_time'] : '';
+	$night         = ! empty( $meta['night'] ) ? $meta['night'] : 'false';
+	$night_count   = ! empty( $meta['night_count'] ) ? $meta['night_count'] : '';
 	$group_size    = ! empty( $meta['group_size'] ) ? $meta['group_size'] : '';
 	$language      = ! empty( $meta['language'] ) ? $meta['language'] : '';
 	/**
@@ -214,6 +217,14 @@ while ( have_posts() ) : the_post();
 							}
 						}
 						?>
+						<?php
+						$contact_info = ! empty( $meta['tour_video'] ) ? $meta['tour_video'] : '';
+						if ( !empty($tour_video) ) {
+							?>
+                            <div class="tf-hero-btm-icon tf-tour-video" data-fancybox="tour-video" href="<?php echo $tour_video; ?>">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+						<?php }
                     </div>
                 </div>
             </div>
@@ -328,7 +339,31 @@ while ( have_posts() ) : the_post();
                                 <div class="tf-single-square-block first">
                                     <i class="fas fa-clock"></i>
                                     <h4><?php echo __( 'Duration', 'tourfic' ); ?></h4>
-                                    <p><?php echo esc_html( $tour_duration ); ?></p>
+                                    <p><?php echo esc_html( $tour_duration ); ?>
+									<span> 
+										<?php
+										if( $tour_duration > 1  ){
+											$dur_string = 's';
+											$duration_time_html = $duration_time . $dur_string;
+										}else{
+											$duration_time_html = $duration_time;
+										}
+										 echo " " . esc_html( $duration_time_html )?>
+									</span></p>
+									<?php if( $night ){ ?>
+                                    <p>
+										<?php echo esc_html( $night_count ); ?>
+										<span>
+											<?php
+											if( $night_count > 1  ){
+												echo esc_html__( 'Nights', 'tourfic' );
+											}else{
+												echo esc_html__( 'Night', 'tourfic'  );
+											}											
+											?>
+										</span>
+									</p>
+									<?php } ?>
                                 </div>
 							<?php } ?>
 							<?php if ( $tour_type ) { ?>
