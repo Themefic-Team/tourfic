@@ -66,6 +66,10 @@ while ( have_posts() ) : the_post();
 	$night_count   = ! empty( $meta['night_count'] ) ? $meta['night_count'] : '';
 	$group_size    = ! empty( $meta['group_size'] ) ? $meta['group_size'] : '';
 	$language      = ! empty( $meta['language'] ) ? $meta['language'] : '';
+	$email         = ! empty( $meta['email'] ) ? $meta['email'] : '';
+	$phone         = ! empty( $meta['phone'] ) ? $meta['phone'] : '';
+	$fax           = ! empty( $meta['fax'] ) ? $meta['fax'] : '';
+	$website       = ! empty( $meta['website'] ) ? $meta['website'] : '';
 	/**
 	 * Get features
 	 * hotel_feature
@@ -218,13 +222,34 @@ while ( have_posts() ) : the_post();
 						}
 						?>
 						<?php
-						$contact_info = ! empty( $meta['tour_video'] ) ? $meta['tour_video'] : '';
-						if ( !empty($tour_video) ) {
-							?>
-                            <div class="tf-hero-btm-icon tf-tour-video" data-fancybox="tour-video" href="<?php echo $tour_video; ?>">
-                                <i class="fab fa-youtube"></i>
-                            </div>
-						<?php }
+
+							if (  $email || $phone || $fax || $website) {
+								?>
+								<div class="tf-hero-btm-icon tf-tour-info" data-fancybox data-src="#tf-contact-info" href="<?php echo $tour_video; ?>">
+								<i class="fa fa-circle-info"></i>
+								</div>
+								<div class="tf-contact-info-wrapper" id="tf-contact-info" style="display:none">
+									<div class="tf-contact-info">
+										<h3><?php echo __( 'Contact Information' , 'tourfic' ) ?></h3>
+										<div class="tf-email">
+											<strong><?php echo esc_html__( 'Email:', 'tourfic' ) ?></strong>
+											<p><?php echo esc_html( $email ) ?></p>
+										</div>
+										<div class="tf-phone">
+											<strong><?php echo esc_html__( 'Phone:', 'tourfic' ) ?></strong>
+											<p><?php echo esc_html( $phone ) ?></p>
+										</div>
+										<div class="tf-fax">
+											<strong><?php echo esc_html__( 'Fax:', 'tourfic' ) ?></strong>
+											<p><?php echo esc_html( $fax ) ?></p>
+										</div>
+										<div class="tf-website">
+											<strong><?php echo esc_html__( 'Website:', 'tourfic' ) ?></strong>
+											<p><?php echo esc_html( $website ) ?></p>
+										</div>
+									</div>
+								</div>
+							<?php }	?>
                     </div>
                 </div>
             </div>

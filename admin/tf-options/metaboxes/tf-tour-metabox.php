@@ -169,25 +169,25 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 			'icon'   => 'fa-solid fa-address-book',
 			'fields' => array(
 				array(
-					'id'          => '',
+					'id'          => 'email',
 					'type'        => 'text',
 					'label'       => __( 'Email address', 'tourfic' ),
 					'field_width' => '50',
 				),
 				array(
-					'id'          => '',
+					'id'          => 'phone',
 					'type'        => 'text',
 					'label'       => __( 'Phone Number', 'tourfic' ),
 					'field_width' => '50',
 				),
 				array(
-					'id'          => '',
+					'id'          => 'website',
 					'type'        => 'text',
 					'label'       => __( 'Website Url', 'tourfic' ),
 					'field_width' => '50',
 				),
 				array(
-					'id'          => '',
+					'id'          => 'fax',
 					'type'        => 'text',
 					'label'       => __( 'Fax Number', 'tourfic' ),
 					'field_width' => '50',
