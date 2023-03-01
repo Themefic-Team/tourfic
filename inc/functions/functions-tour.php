@@ -1294,29 +1294,168 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
 
     }
     if ( $has_tour ) {
+        
+        $not_found[] = array(
+            'post_id' => get_the_ID(),
+            'found'  => 0,
+        );
 
-        if ( !empty( $data ) ) {
+    } else {
+        $not_found[] = array(
+            'post_id' => get_the_ID(),
+            'found'  => 1,
+        );
 
-            if(isset($data[3]) && isset($data[4])){
-                [$adults, $child, $check_in_out, $startprice, $endprice] = $data;
-                tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+    }
+}
+
+/**
+ * Filter tours on search result page by without date dates set by backend
+ *
+ *
+ * @author Jahid
+ *
+ * @param DatePeriod $period    collection of dates by user input;
+ * @param array      $not_found collection of tour exists
+ * @param array      $data      user input for sidebar form
+ */
+function tf_filter_tour_by_without_date( $period, &$total_posts, array &$not_found, array $data = [] ): void {
+    if(isset($data[3]) && isset($data[4])){
+        [$adults, $child, $check_in_out, $startprice, $endprice] = $data;
+    }else{
+        [$adults, $child, $check_in_out] = $data;
+    }
+    // Get tour meta options
+    $meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
+
+    // Set initial tour availability status
+    $has_tour = false;
+
+    if ( !empty($meta['type'] ) && $meta['type'] === 'fixed' ) {
+
+        $show_fixed_tour    = [];
+        
+        if(!empty($startprice) && !empty($endprice)){
+            if(!empty($meta['adult_price'])){
+                if($startprice<=$meta['adult_price'] && $meta['adult_price']<=$endprice){
+                    $has_tour = !in_array( 0, $show_fixed_tour );
+                }
+            }
+            if(!empty($meta['child_price'])){
+                if($startprice<=$meta['child_price'] && $meta['child_price']<=$endprice){
+                    $has_tour = !in_array( 0, $show_fixed_tour );
+                }
+            }
+            if(!empty($meta['infant_price'])){
+                if($startprice<=$meta['infant_price'] && $meta['infant_price']<=$endprice){
+                    $has_tour = !in_array( 0, $show_fixed_tour );
+                }
+            }
+            if(!empty($meta['group_price'])){
+                if($startprice<=$meta['group_price'] && $meta['group_price']<=$endprice){
+                    $has_tour = !in_array( 0, $show_fixed_tour );
+                }
+            }
+        }else{
+            $has_tour = true;
+        }
+
+    }
+
+    if ( !empty($meta['type'] ) && $meta['type'] === 'continuous' ) {
+
+        $custom_availability = !empty($meta['custom_avail']) ? $meta['custom_avail'] : false;
+
+        if ($custom_availability) {
+
+            if( !empty($meta['cont_custom_date']) && gettype($meta['cont_custom_date'])=="string" ){
+                $tf_tour_unserial_custom_date = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                    return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+                }, $meta['cont_custom_date'] );
+                $tf_tour_unserial_custom_date = unserialize( $tf_tour_unserial_custom_date );
+                $custom_dates = wp_list_pluck( $tf_tour_unserial_custom_date, 'date' );
             }else{
-                [$adults, $child, $check_in_out] = $data;
-                tf_tour_archive_single_item( $adults, $child, $check_in_out );
+                $custom_dates = wp_list_pluck( $meta['cont_custom_date'], 'date' );
+            }
+
+            foreach ( $custom_dates as $custom_date ) {
+
+                $show_continuous_tour = [];
+
+                if ( !in_array( 0, $show_continuous_tour ) ) {
+                    if(!empty($startprice) && !empty($endprice)){
+                        if(!empty($meta['adult_price'])){
+                            if($startprice<=$meta['adult_price'] && $meta['adult_price']<=$endprice){
+                                $has_tour = true; 
+                            }
+                        }
+                        if(!empty($meta['child_price'])){
+                            if($startprice<=$meta['child_price'] && $meta['child_price']<=$endprice){
+                                $has_tour = true; 
+                            }
+                        }
+                        if(!empty($meta['infant_price'])){
+                            if($startprice<=$meta['infant_price'] && $meta['infant_price']<=$endprice){
+                                $has_tour = true; 
+                            }
+                        }
+                        if(!empty($meta['group_price'])){
+                            if($startprice<=$meta['group_price'] && $meta['group_price']<=$endprice){
+                                $has_tour = true; 
+                            }
+                        }
+                    }else{
+                        $has_tour = true;
+                    }
+                    
+                    break;
+
+                }
+
             }
 
         } else {
 
-          
-            tf_tour_archive_single_item();
+            if(!empty($startprice) && !empty($endprice)){
+                if(!empty($meta['adult_price'])){
+                    if($startprice<=$meta['adult_price'] && $meta['adult_price']<=$endprice){
+                        $has_tour = true; 
+                    }
+                }
+                if(!empty($meta['child_price'])){
+                    if($startprice<=$meta['child_price'] && $meta['child_price']<=$endprice){
+                        $has_tour = true; 
+                    }
+                }
+                if(!empty($meta['infant_price'])){
+                    if($startprice<=$meta['infant_price'] && $meta['infant_price']<=$endprice){
+                        $has_tour = true; 
+                    }
+                }
+                if(!empty($meta['group_price'])){
+                    if($startprice<=$meta['group_price'] && $meta['group_price']<=$endprice){
+                        $has_tour = true; 
+                    }
+                }
+            }else{
+                $has_tour = true;
+            }
 
         }
+
+    }
+    if ( $has_tour ) {
         
-        $not_found[] = 0;
+        $not_found[] = array(
+            'post_id' => get_the_ID(),
+            'found'  => 0,
+        );
 
     } else {
-        $total_posts--;
-        $not_found[] = 1;
+        $not_found[] = array(
+            'post_id' => get_the_ID(),
+            'found'  => 1,
+        );
 
     }
 }

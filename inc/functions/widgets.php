@@ -54,7 +54,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
             $get_terms = get_terms( $taxonomy );
 
             $destination_name = !empty( $_GET['destination'] ) ? $_GET['destination'] : '';
-
+            $search_features_query = !empty($_GET['features']) ? $_GET['features'] : array();
             echo "<div class='tf-filter'><ul>";
             foreach ( $get_terms as $key => $term ) {
                 $feature_meta = get_term_meta( $term->term_taxonomy_id, 'tf_hotel_feature', true );
@@ -67,10 +67,11 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
                 }
                 $id = $term->term_id;
                 $name = $term->name;
+                $fslug = $term->slug;
                 $default_count = $term->count;
                 $count = $show_count ? '<span>' . tf_term_count( $term->slug, $destination_name, $default_count ) . '</span>' : '';
-
-                echo "<li class='filter-item'><label><input type='checkbox' name='tf_filters[]' value='{$id}'/><span class='checkmark'></span> {$feature_icon} {$name}</label> {$count}</li>";
+                $defult_select =  in_array($fslug, $search_features_query) ? 'checked' : '';
+                echo "<li class='filter-item'><label><input type='checkbox' name='tf_filters[]' value='{$id}' {$defult_select}/><span class='checkmark'></span> {$feature_icon} {$name}</label> {$count}</li>";
             }
             echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a></div>";
 

@@ -552,8 +552,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
     $args = array(
         'post_type'      => $post_type,
         'post_status'    => 'publish',
-        'posts_per_page' => $post_per_page,
-        'paged'          => $paged,
+        'posts_per_page' => -1
     );
 
     $taxonomy_query = new WP_Term_Query(array(
@@ -637,21 +636,21 @@ function tf_search_result_shortcode( $atts, $content = null ){
 
 						//skip the tour if the search form total people exceeds the maximum number of people in tour
 						if ( !empty($meta['cont_max_people']) && $meta['cont_max_people'] < $total_person && $meta['cont_max_people'] != 0  ) {
-							$not_found[] = 1;
+							// $not_found[] = 1;
 							$total_posts--;
 							continue;
 						}
 
 						//skip the tour if the search form total people less than the maximum number of people in tour
 						if ( !empty($meta['cont_min_people']) && $meta['cont_min_people'] > $total_person && $meta['cont_min_people'] != 0) {
-							$not_found[] = 1;
+							// $not_found[] = 1;
 							$total_posts--;
 							continue;
 						}
 		
 						if ( empty( $check_in_out ) ) {
-							$not_found[] = 0;
-							tf_tour_archive_single_item();
+							// $not_found[] = 0;
+							tf_filter_tour_by_without_date( $period, $total_posts, $not_found, $data );
 						} else {
 							tf_filter_tour_by_date( $period, $total_posts, $not_found, $data );
 						}
@@ -659,28 +658,75 @@ function tf_search_result_shortcode( $atts, $content = null ){
 
 				}
 				$tf_total_results = 0;
+				$tf_total_filters = [];
 				foreach($not_found as $not){
-					if($not!=1){
+					if($not['found']!=1){
 						$tf_total_results = $tf_total_results+1;
+						$tf_total_filters[] = $not['post_id'];
 					}
 				}
-				if ( ! in_array( 0, $not_found ) ) {
-					echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found! Select another dates', 'tourfic' ) . '</div>';
+				if ( empty($tf_total_filters) ) {
+					echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 				}
+				$post_per_page = tfopt('posts_per_page') ? tfopt('posts_per_page') : 10;
+				// Main Query args
+				$filter_args = array(
+					'post_type'      => $post_type,
+					'post_status'    => 'publish',
+					'posts_per_page' => $post_per_page,
+					'paged'          => $paged,
+				);
+
+
+				$total_filtered_results = count( $tf_total_filters );
+				$current_page = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+				$offset = ( $current_page - 1 ) * $post_per_page;
+				$displayed_results = array_slice( $tf_total_filters, $offset, $post_per_page );
+
+				$filter_args = array(
+					'post_type'      => $post_type,
+					'post_status'    => 'publish',
+					'posts_per_page' => $post_per_page,
+					'post__in'  => $displayed_results,
+				);
+				
+				$result_query = new WP_Query( $filter_args );
+				if ( $result_query->have_posts() ) {
+					while ( $result_query->have_posts() ) {
+						$result_query->the_post();
+	
+						if ( $post_type == 'tf_hotel' ) {
+	
+						} else {
+							if ( !empty( $data ) ) {
+								if(isset($data[3]) && isset($data[4])){
+									[$adults, $child, $check_in_out, $startprice, $endprice] = $data;
+									tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+								}else{
+									[$adults, $child, $check_in_out] = $data;
+									tf_tour_archive_single_item( $adults, $child, $check_in_out );
+								}
+							} else {
+								tf_tour_archive_single_item();
+							}
+						}
+	
+					}
+				}
+				$total_pages = ceil( $total_filtered_results / $post_per_page );
+				echo "<div class='tf_posts_navigation'>";
+				echo paginate_links( array(
+					'total' => $total_pages,
+					'current' => $current_page
+				) );
+				echo "</div>";
+				
 			} else {
 				echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 			}
 			echo "<span hidden=hidden class='tf-posts-count'>".$tf_total_results."</span>";
 			?>
         </div>
-		<?php 
-			if ( isset($not_found) && in_array( 0, $not_found ) ) {
-				$post_per_page > $total_posts ? $hide_pagination = 'tf-hide-pagination' : $hide_pagination = '';
-		?>
-        <div class="tf_posts_navigation <?php echo $hide_pagination; ?>">
-			<?php tourfic_posts_navigation( $loop ); ?>
-        </div>
-		<?php } ?>
 
     </div>
     <!-- End Content -->
