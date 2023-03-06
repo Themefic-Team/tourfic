@@ -403,7 +403,7 @@
         //###############################
         //        Search                #
         //###############################
-
+        
         /**
          * Ajax Search Result
          *
@@ -563,6 +563,154 @@
 
             });
         };
+
+        // Search Result Ajax page number
+        function tf_page_pagination_number(element) {
+            element.find('span').remove();
+            return parseInt(element.html());
+        }
+
+        // Search Result Ajax pagination
+        $(document).on('click', '.tf_posts_ajax_navigation a.page-numbers', function (e) {
+            e.preventDefault();
+            page = tf_page_pagination_number($(this).clone());
+            PaginationmakeFilter(page);
+        });
+
+        // Creating a function for reuse this filter in any where we needs.
+        const PaginationmakeFilter = (page) => {
+            var dest = $('#tf-place').val();
+            var page = page;
+            var adults = $('#adults').val();
+            var room = $('#room').val();
+            var children = $('#children').val();
+            var checked = $('#check-in-out-date').val();
+            var startprice = $('#startprice').val();
+            var endprice = $('#endprice').val();
+            // split date range into dates
+            var checkedArr = checked.split(' - ');
+            var checkin = checkedArr[0];
+            var checkout = checkedArr[1];
+            var posttype = $('.tf-post-type').val();
+
+            var filters = [];
+
+            $('[name*=tf_filters]').each(function () {
+                if ($(this).is(':checked')) {
+                    filters.push($(this).val());
+                }
+            });
+            var filters = filters.join();
+
+            var features = [];
+
+            $('[name*=tf_features]').each(function () {
+                if ($(this).is(':checked')) {
+                    features.push($(this).val());
+                }
+            });
+            var features = features.join();
+
+            var tour_features = [];
+
+            $('[name*=tour_features]').each(function () {
+                if ($(this).is(':checked')) {
+                    tour_features.push($(this).val());
+                }
+            });
+            tour_features = tour_features.join();
+            //get tour attraction checked values
+            var attractions = [];
+            $('[name*=tf_attractions]').each(function () {
+                if ($(this).is(':checked')) {
+                    attractions.push($(this).val());
+                }
+            });
+            attractions = attractions.join();
+
+            //get tour activities checked values
+            var activities = [];
+            $('[name*=tf_activities]').each(function () {
+                if ($(this).is(':checked')) {
+                    activities.push($(this).val());
+                }
+            });
+            activities = activities.join();
+
+            var formData = new FormData();
+            formData.append('action', 'tf_trigger_filter');
+            formData.append('type', posttype);
+            formData.append('page', page);
+            formData.append('dest', dest);
+            formData.append('adults', adults);
+            formData.append('room', room);
+            formData.append('children', children);
+            formData.append('checkin', checkin);
+            formData.append('checkout', checkout);
+            formData.append('filters', filters);
+            formData.append('features', features);
+            formData.append('tour_features', tour_features);
+            formData.append('attractions', attractions);
+            formData.append('activities', activities);
+            formData.append('checked', checked);
+            if (startprice) {
+                formData.append('startprice', startprice);
+            }
+            if (endprice) {
+                formData.append('endprice', endprice);
+            }
+            // abort previous request
+            if (filter_xhr && filter_xhr.readyState != 4) {
+                filter_xhr.abort();
+            }
+
+            filter_xhr = $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (data) {
+                    $('.archive_ajax_result').block({
+                        message: null,
+                        overlayCSS: {
+                            background: "#fff",
+                            opacity: .5
+                        }
+                    });
+
+                    if($.trim(checkin) !== ''){
+                        $('.tf_booking-dates .tf_label-row').find('#tf-required').remove();
+                    }
+                },
+                complete: function (data) {
+                    $('.archive_ajax_result').unblock();
+
+                    // total posts 0 if not found by @hena
+                    if ($('.tf-nothing-found')[0]) {
+                        $('.tf_posts_navigation').hide();
+                        var foundPosts = $('.tf-nothing-found').data('post-count');
+                        $('.tf-total-results').find('span').html(foundPosts);
+                    } else {
+                        $('.tf_posts_navigation').show();
+                        var postsCount = $('.tf-posts-count').html();
+                        $('.tf-total-results').find('span').html(postsCount);
+                    }
+
+                },
+                success: function (data, e) {
+                    $('.archive_ajax_result').unblock();
+                    $('.archive_ajax_result').html(data);
+                    // @KK show notice in every success request
+                    notyf.success(tf_params.ajax_result_success);
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+        };
+
         // Look for submission and change on filter widgets
         $(document).on('submit', '#tf-widget-booking-search', function (e) {
             e.preventDefault();
@@ -571,6 +719,12 @@
         $(document).on('change', '[name*=tf_filters],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities]', function () {
             makeFilter();
         })
+
+        // Archive Page Filter
+        $(document).on('submit', '.tf_archive_search_result', function (e) {
+            e.preventDefault();
+            makeFilter()
+        });
 
         //###############################
         //        Common Functions      #
@@ -1304,7 +1458,7 @@
         };
 
         // Feed Ajax Trigger
-        $(document).on('click', '#tf_posts_navigation_bar a.page-numbers', function (e) {
+        $(document).on('click', '.tf_posts_page_navigation a.page-numbers', function (e) {
             e.preventDefault();
             var targetUrl = (e.target.href) ? e.target.href : $(this).context.href;
             amPushAjax(targetUrl);

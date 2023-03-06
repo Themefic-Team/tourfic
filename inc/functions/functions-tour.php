@@ -1226,11 +1226,9 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
                 $show_continuous_tour = [];
 
                 foreach ( $period as $date ) {
-
                     $show_continuous_tour[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $custom_date['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $custom_date['to'] ) );
 
                 }
-
                 if ( !in_array( 0, $show_continuous_tour ) ) {
                     if(!empty($startprice) && !empty($endprice)){
                         if(!empty($meta['adult_price'])){

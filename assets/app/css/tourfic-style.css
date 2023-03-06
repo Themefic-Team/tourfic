@@ -1777,6 +1777,12 @@ a.page-numbers {
   border-bottom: 1px solid #ddd;
   border-top: 1px solid #ddd;
 }
+.tf-action-top .tf-result-counter-info {
+  display: flex;
+}
+.tf-action-top .tf-result-counter-info .tf-counter-title {
+  margin-right: 5px;
+}
 
 .tf-list-grid {
   display: flex;
@@ -1865,6 +1871,7 @@ a.page-numbers {
   border: 1px solid #EDEDF0;
   background: #fff;
   border-radius: 10px;
+  margin-bottom: 20px;
 }
 .tf_widget .tf-widget-title {
   display: flex;

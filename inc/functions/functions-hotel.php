@@ -1847,24 +1847,17 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	// Conditional hotel showing
 	if ( $has_hotel ) {
 
-		if ( ! empty( $data ) ) {
-			if ( isset( $data[4] ) && isset( $data[5] ) ) {
-				[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
-				tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
-			} else {
-				[ $adults, $child, $room, $check_in_out ] = $data;
-				tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
-			}
-		} else {
-			tf_hotel_archive_single_item();
-		}
-
-		$not_found[] = 0;
+		$not_found[] = array(
+            'post_id' => get_the_ID(),
+            'found'  => 0,
+        );
 
 	} else {
 
-		$not_found[] = 1;
-
+		$not_found[] = array(
+            'post_id' => get_the_ID(),
+            'found'  => 1,
+        );
 	}
 
 }
@@ -1948,24 +1941,17 @@ function tf_filter_hotel_without_date( $period, array &$not_found, array $data =
 	// Conditional hotel showing
 	if ( $has_hotel ) {
 
-		if ( ! empty( $data ) ) {
-			if ( isset( $data[4] ) && isset( $data[5] ) ) {
-				[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
-				tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
-			} else {
-				[ $adults, $child, $room, $check_in_out ] = $data;
-				tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
-			}
-		} else {
-			tf_hotel_archive_single_item();
-		}
-
-		$not_found[] = 0;
+		$not_found[] = array(
+            'post_id' => get_the_ID(),
+            'found'  => 0,
+        );
 
 	} else {
 
-		$not_found[] = 1;
-
+		$not_found[] = array(
+            'post_id' => get_the_ID(),
+            'found'  => 1,
+        );
 	}
 
 }

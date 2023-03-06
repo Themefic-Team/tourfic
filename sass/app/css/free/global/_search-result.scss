@@ -237,6 +237,12 @@ a.page-numbers {
     margin-bottom: 15px;
     border-bottom: 1px solid #ddd;
     border-top: 1px solid #ddd;
+    .tf-result-counter-info{
+        display: flex;
+        .tf-counter-title{
+            margin-right: 5px;
+        }
+    }
 }
 
 .tf-list-grid {
@@ -341,7 +347,7 @@ a.page-numbers {
     border: 1px solid #EDEDF0;
     background: #fff;
     border-radius: 10px;
-
+    margin-bottom: 20px;
     .tf-widget-title {
         display: flex;
         align-items: center;

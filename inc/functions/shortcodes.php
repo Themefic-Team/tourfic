@@ -541,7 +541,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
         $period         = new DatePeriod(
             new DateTime( $checkInOutDate[0] ),
             new DateInterval( 'P1D' ),
-            new DateTime( $checkInOutDate[1] .  '23:59' )
+            new DateTime( !empty($checkInOutDate[1]) ? $checkInOutDate[1] : $checkInOutDate[0] .  '23:59' )
         );
     } else {
         $period = '';
@@ -682,13 +682,14 @@ function tf_search_result_shortcode( $atts, $content = null ){
 				$current_page = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 				$offset = ( $current_page - 1 ) * $post_per_page;
 				$displayed_results = array_slice( $tf_total_filters, $offset, $post_per_page );
-
-				$filter_args = array(
-					'post_type'      => $post_type,
-					'post_status'    => 'publish',
-					'posts_per_page' => $post_per_page,
-					'post__in'  => $displayed_results,
-				);
+				if(!empty($displayed_results)){
+					$filter_args = array(
+						'post_type'      => $post_type,
+						'post_status'    => 'publish',
+						'posts_per_page' => $post_per_page,
+						'post__in'  => $displayed_results,
+					);
+				}
 				
 				$result_query = new WP_Query( $filter_args );
 				if ( $result_query->have_posts() ) {
@@ -696,6 +697,18 @@ function tf_search_result_shortcode( $atts, $content = null ){
 						$result_query->the_post();
 	
 						if ( $post_type == 'tf_hotel' ) {
+
+							if ( ! empty( $data ) ) {
+								if ( isset( $data[4] ) && isset( $data[5] ) ) {
+									[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
+									tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
+								} else {
+									[ $adults, $child, $room, $check_in_out ] = $data;
+									tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
+								}
+							} else {
+								tf_hotel_archive_single_item();
+							}
 	
 						} else {
 							if ( !empty( $data ) ) {
@@ -714,7 +727,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
 					}
 				}
 				$total_pages = ceil( $total_filtered_results / $post_per_page );
-				echo "<div class='tf_posts_navigation'>";
+				echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
 				echo paginate_links( array(
 					'total' => $total_pages,
 					'current' => $current_page
