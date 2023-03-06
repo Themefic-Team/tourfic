@@ -3329,13 +3329,18 @@ span.tf-price .amount {
   font-size: 14px;
   margin-top: 20px;
 }
-.tf-hero-bottom-area .tf-contact-info div {
+
+.tf-contact-info h3 {
+  margin-bottom: 30px;
+}
+.tf-contact-info div {
   margin: 15px 0;
 }
-.tf-hero-bottom-area .tf-contact-info div p {
+.tf-contact-info div p {
   margin: 0;
 }
-.tf-hero-bottom-area div#tf-contact-info {
+
+div#tf-contact-info {
   border-radius: 8px;
 }
 

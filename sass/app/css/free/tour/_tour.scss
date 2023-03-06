@@ -23,15 +23,22 @@
     color: #fff;
     font-size: 14px;
     margin-top: 20px;
-    .tf-contact-info div {
-        margin: 15px 0;
-    }    
-    .tf-contact-info div p {
-        margin: 0;
-    }    
-    div#tf-contact-info {
-        border-radius: 8px;
+}
+ 
+.tf-contact-info{    
+    h3 {
+        margin-bottom: 30px;
     }
+    div {
+        margin: 15px 0;
+        p {
+            margin: 0;
+        }   
+    }
+}
+
+div#tf-contact-info {
+    border-radius: 8px;
 }
 .tf-hero-btm-icon {
     display: inline-block;
