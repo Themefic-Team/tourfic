@@ -70,6 +70,8 @@ while ( have_posts() ) : the_post();
 	$phone         = ! empty( $meta['phone'] ) ? $meta['phone'] : '';
 	$fax           = ! empty( $meta['fax'] ) ? $meta['fax'] : '';
 	$website       = ! empty( $meta['website'] ) ? $meta['website'] : '';
+	$itinerary_map = ! empty( $meta['itinerary_map'] ) ? $meta['itinerary_map'] : '';
+
 	/**
 	 * Get features
 	 * hotel_feature
@@ -518,7 +520,12 @@ while ( have_posts() ) : the_post();
                         <div class="tf-travel-itinerary-content">
                             <h2 class="section-heading"><?php _e( "Travel Itinerary", 'tourfic' ); ?></h2>
                             <div class="tf-travel-itinerary-items-wrapper">
-								<?php foreach ( $itineraries as $itinerary ) { ?>
+								<?php 
+								//store all the locations of itinerary
+								$itinerary_locations = [];
+								foreach ( $itineraries as $itinerary ) {
+									$locations = !empty($itinerary['loacation']) ? $itinerary['loacation'] : '';
+									array_push( $itinerary_locations, $locations );								?>
                                     <div id="tf-accordion-wrapper">
                                         <div class="tf-accordion-head">
                                             <div class="tf-travel-time">
@@ -543,12 +550,16 @@ while ( have_posts() ) : the_post();
                         </div>
                     </div>
                 </div>
-
+				<?php
+				 if( !empty( $itinerary_map ) && function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
 				<!-- Itinerary map -->
-				<div id="tf-map"></div>
+				<div id="tf-map" data-locations='<?php echo json_encode( $itinerary_locations ); ?>'></div>
 
-			<?php }
-		} ?>
+			<?php
+			endif;
+			 }
+		} 
+		?>
         <!-- Travel Itinerary section End -->
 
         <!-- Map Section Start -->

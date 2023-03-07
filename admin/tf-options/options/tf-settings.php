@@ -1193,6 +1193,17 @@ TF_Settings::option( 'tf_settings', array(
 					),
 					'is_pro'     => true,
 				),
+				array(
+					'id'         => '',
+					'type'       => 'switch',
+					'label'      => __( 'Enable Itinerary Map', 'tourfic' ),
+					'label_on'   => __( 'Yes', 'tourfic' ),
+					'label_off'  => __( 'No', 'tourfic' ),
+					'dependency' => array(
+						array( 'google-page-option', '==', 'googlemap' ),
+					),
+					'is_pro'     => true,
+				),
 			),
 		),
 		/**
