@@ -496,8 +496,27 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
                                 <span class="tf-label"><?php _e('Destination', 'tourfic'); ?>:</span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>            
-                                    <input type="text" name="place" required id="tf-tour-location-adv"  placeholder="<?php _e('Enter Location', 'tourfic'); ?>" value="">               
-                                    <div class="ui-widget ui-widget-content results tf-hotel-results tf-tour-results">
+                                    <input type="text" required id="tf-tour-location-adv" class="tf-tour-preview-place" placeholder="<?php _e('Enter Location', 'tourfic'); ?>" >
+                                    <input type="hidden" name="place" id="tf-tour-place">           
+                                    <div class="tf-hotel-results tf-tour-results">
+                                        <ul id="ui-id-2">
+                                            <?php 
+                                            $tf_tour_destination = get_terms( array(
+                                                'taxonomy' => 'tour_destination',
+                                                'orderby' => 'title',
+                                                'order' => 'ASC',
+                                                'hide_empty' => false,
+                                                'hierarchical' => 0,
+                                            ) );
+                                            if ( $tf_tour_destination ) { 
+                                            foreach( $tf_tour_destination as $term ) {
+                                            if( !empty($term->name) ){
+                                            ?>
+                                            <li data-name="<?php echo $term->name; ?>" data-slug="<?php echo $term->slug; ?>"><i class="fa fa-map-marker"></i><?php echo $term->name; ?></li>
+                                            <?php
+                                            } } }
+                                            ?>
+                                        </ul>
                                     </div>
                                 </div>
                             </label>

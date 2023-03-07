@@ -1508,39 +1508,49 @@
         }
 
         // Hotel Location
-        var availablehotellocation = tf_params.tf_hotellocationlists;
-        $("#tf-destination-adv").autocomplete({
-            source: availablehotellocation,
-            minLength: 0,
-            open: function () {
-                $(this).autocomplete("widget")
-                    .appendTo(".tf-hotel-adv-results")
-                    .css("position", "absolute");
+
+        $('#tf-destination-adv').click(function (e) {
+            var location = $(this).val();
+            if(location){
+                $(".tf-hotel-locations").removeClass('tf-locations-show');
+            }else{
+                $(".tf-hotel-locations").addClass('tf-locations-show');
             }
         });
-        $("#tf-destination-adv").on('focus', function () {
-            if ($("#tf-destination-adv").val() == '') {
-                $("#tf-destination-adv").autocomplete("search", "");
+        $(document).on('click', function (event) {
+            if (!$(event.target).closest("#tf-destination-adv").length) {
+                $(".tf-hotel-locations").removeClass('tf-locations-show');
             }
+        });
+        $('#ui-id-1 li').click(function (e) {
+            var dest_name = $(this).attr("data-name");
+            var dest_slug = $(this).attr("data-slug");
+            $(".tf-preview-destination").val(dest_name);
+            $("#tf-place-destination").val(dest_slug);
+            $(".tf-hotel-locations").removeClass('tf-locations-show');
         });
 
         // Tour Destination
-        var availabletourslocation = tf_params.tf_tourdestinationlists;
 
-        $("#tf-tour-location-adv").autocomplete({
-            source: availabletourslocation,
-            minLength: 0,
-            open: function () {
-                $(this).autocomplete("widget")
-                    .appendTo(".tf-tour-results")
-                    .css("position", "absolute");
+        $('#tf-tour-location-adv').click(function (e) {
+            var location = $(this).val();
+            if(location){
+                $(".tf-tour-results").removeClass('tf-destination-show');
+            }else{
+                $(".tf-tour-results").addClass('tf-destination-show');
             }
         });
-
-        $("#tf-tour-location-adv").on('focus', function () {
-            if ($("#tf-tour-location-adv").val() == '') {
-                $("#tf-tour-location-adv").autocomplete("search", "");
+        $(document).on('click', function (event) {
+            if (!$(event.target).closest("#tf-tour-location-adv").length) {
+                $(".tf-tour-results").removeClass('tf-destination-show');
             }
+        });
+        $('#ui-id-2 li').click(function (e) {
+            var dest_name = $(this).attr("data-name");
+            var dest_slug = $(this).attr("data-slug");
+            $(".tf-tour-preview-place").val(dest_name);
+            $("#tf-tour-place").val(dest_slug);
+            $(".tf-tour-results").removeClass('tf-destination-show');
         });
 
 

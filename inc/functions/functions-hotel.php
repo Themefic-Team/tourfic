@@ -1141,8 +1141,24 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                                 <span class="tf-label"><?php _e( 'Location', 'tourfic' ); ?>:</span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>
-                                    <input type="text" name="place" required id="tf-destination-adv" class="tf-advance-destination" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
-                                    <div class="ui-widget ui-widget-content results tf-hotel-results tf-hotel-adv-results">
+                                    <input type="text" required id="tf-destination-adv" class="tf-advance-destination tf-preview-destination" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>">
+									<input type="hidden" name="place" id="tf-place-destination" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" >
+                                    <div class="tf-hotel-locations tf-hotel-results">
+										<ul id="ui-id-1">
+										<?php 
+										$tf_hotel_location = get_terms( array(
+											'taxonomy' => 'hotel_location',
+											'orderby' => 'title',
+											'order' => 'ASC',
+											'hierarchical' => 0,
+										) );
+										if ( !empty($tf_hotel_location) ) {
+										foreach( $tf_hotel_location as $term ) {
+										if( !empty($term->name) ){
+										?>
+										<li data-name="<?php echo $term->name; ?>" data-slug="<?php echo $term->slug; ?>"><i class="fa fa-map-marker"></i><?php echo $term->name; ?></li>
+										<?php }}} ?>
+										</ul>
                                     </div>
                                 </div>
                             </label>

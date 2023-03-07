@@ -145,20 +145,8 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 
 
         /**
-         * Hotel Location
+         * Hotel Min and Max Price
          */
-        $tf_hotellocationlists=array();
-        $tf_hotellocation = get_terms( array(
-            'taxonomy' => 'hotel_location',
-            'orderby' => 'title',
-            'order' => 'ASC',
-            'hide_empty' => false,
-            'hierarchical' => 0,
-        ) );
-        if ( $tf_hotellocation ) { 
-        foreach( $tf_hotellocation as $term ) {
-             $tf_hotellocationlists[] = $term->slug;
-        } }
 
         $tfhotel_min_max = array(
             'posts_per_page'=> -1,
@@ -230,21 +218,8 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         }
 
         /**
-         * Tour Destination
+         * Tour Min and Max Price
          */ 
-
-        $tf_tourdestinationlists=array();
-        $tf_tourdestination = get_terms( array(
-            'taxonomy' => 'tour_destination',
-            'orderby' => 'title',
-            'order' => 'ASC',
-            'hide_empty' => false,
-            'hierarchical' => 0,
-        ) );
-        if ( $tf_tourdestination ) { 
-        foreach( $tf_tourdestination as $term ) {
-             $tf_tourdestinationlists[] = $term->slug;
-        } }
 
         $tftours_min_max = array(
             'posts_per_page'=> -1,
@@ -321,10 +296,8 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'room' => __('Room', 'tourfic'),
                 'sending_ques' => __('Sending your question...', 'tourfic'),
                 'no_found' => __('Not Found', 'tourfic'),
-                'tf_hotellocationlists' => isset($tf_hotellocationlists) ? $tf_hotellocationlists : '',
                 'tf_hotel_max_price' => isset($hotel_max_price) ? $hotel_max_price : '',
                 'tf_hotel_min_price' => isset($hotel_min_price) ? $hotel_min_price : '',
-                'tf_tourdestinationlists' => isset($tf_tourdestinationlists) ? $tf_tourdestinationlists : '',
                 'tf_tour_max_price' => isset($tour_max_price) ? $tour_max_price : '',
                 'tf_tour_min_price' => isset($tour_min_price) ? $tour_min_price : '',
                 'itinerarayday' => isset($itinerarayday) ? $itinerarayday : '',

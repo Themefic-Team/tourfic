@@ -2053,6 +2053,24 @@ a.page-numbers {
 .tf_form-inner .autocomplete-items div:hover {
   background-color: #e9e9e9;
 }
+.tf_form-inner .tf-hotel-locations {
+  display: none;
+}
+.tf_form-inner .tf-hotel-locations #ui-id-1 li i {
+  margin-right: 10px;
+}
+.tf_form-inner .tf-locations-show {
+  display: block;
+}
+.tf_form-inner .tf-tour-results {
+  display: none;
+}
+.tf_form-inner .tf-tour-results #ui-id-2 li i {
+  margin-right: 10px;
+}
+.tf_form-inner .tf-destination-show {
+  display: block;
+}
 .tf_form-inner .tf-hotel-results {
   position: absolute;
   border: 1px solid #d4d4d4;

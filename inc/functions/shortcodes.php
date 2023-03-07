@@ -737,7 +737,9 @@ function tf_search_result_shortcode( $atts, $content = null ){
 			} else {
 				echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 			}
-			echo "<span hidden=hidden class='tf-posts-count'>".$tf_total_results."</span>";
+			echo "<span hidden=hidden class='tf-posts-count'>";
+			echo !empty($tf_total_results) ? $tf_total_results : 0; 
+			echo "</span>";
 			?>
         </div>
 
