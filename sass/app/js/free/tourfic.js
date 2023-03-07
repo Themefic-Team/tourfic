@@ -1118,9 +1118,10 @@
                         /*execute a function when someone clicks on the item value (DIV element):*/
                         b.addEventListener("click", function (e) {
                             let source = this.getElementsByTagName("input")[0];
+                            console.log(source.dataset.slug);
                             /*insert the value for the autocomplete text field:*/
                             inp.value = source.value;
-                            inp.closest('input').nextElementSibling.value = source.value //source.dataset.slug
+                            inp.closest('input').nextElementSibling.value = source.dataset.slug //source.dataset.slug
                             /*close the list of autocompleted values,
                             (or any other open lists of autocompleted values:*/
                             closeAllLists();

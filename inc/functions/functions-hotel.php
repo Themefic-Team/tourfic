@@ -1008,7 +1008,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                                 <span class="tf-label"><?php _e( 'Location', 'tourfic' ); ?>:</span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>
-                                    <input type="text" required="" id="tf-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
+                                    <input type="text" name="place-name" required="" id="tf-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
                                     <input type="hidden" name="place" class="tf-place-input">
                                 </div>
                             </label>
@@ -1141,7 +1141,7 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                                 <span class="tf-label"><?php _e( 'Location', 'tourfic' ); ?>:</span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>
-                                    <input type="text" required id="tf-destination-adv" class="tf-advance-destination tf-preview-destination" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>">
+                                    <input type="text" name="place-name" required id="tf-destination-adv" class="tf-advance-destination tf-preview-destination" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>">
 									<input type="hidden" name="place" id="tf-place-destination" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" >
                                     <div class="tf-hotel-locations tf-hotel-results">
 										<ul id="ui-id-1">

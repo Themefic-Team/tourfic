@@ -424,7 +424,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 
 		$place_key   = 'place';
 		$place_value = $_GET[ $place_key ] ?? '';
-
+		$place_title = !empty($_GET['place-name']) ? $_GET['place-name'] : '';
 		$taxonomy   = $post_type == 'tf_hotel' ? 'hotel_location' : 'tour_destination';
 		// $place_name = ! empty( $place_value ) ? get_term_by( 'slug', $place_value, $taxonomy )->name : '';
 		$place_name = ! empty( $place_value ) ? $place_value : '';
@@ -448,7 +448,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                 <div class="tf_form-inner">
                     <i class="fas fa-map-marker-alt"></i>
                     <input type="text" id="<?php echo $place_input_id ?? ''; ?>" required="" class="" placeholder="<?php echo $place_placeholder ?? __( 'Location/Destination', 'tourfic' ); ?>"
-                           value="<?php echo $place_name ?? ''; ?>">
+                           value="<?php echo $place_title; ?>">
                     <input type="hidden" name="place" id="tf-place" value="<?php echo $place_value ?? ''; ?>"/>
                 </div>
             </label>
@@ -992,16 +992,6 @@ function tf_search_result_ajax_sidebar() {
 			'current' => $current_page
 		) );
 		echo "</div>";
-		
-		// $tf_total_results = 0;
-		// foreach($not_found as $not){
-		// 	if($not!=1){
-		// 		$tf_total_results = $tf_total_results+1;
-		// 	}
-		// }
-		// if ( ! in_array( 0, $not_found ) ) {
-		// 	echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
-		// }
 
 	} else {
 
@@ -1009,7 +999,9 @@ function tf_search_result_ajax_sidebar() {
 
 	}
 
-	echo "<span hidden=hidden class='tf-posts-count'>".$tf_total_results."</span>";
+	echo "<span hidden=hidden class='tf-posts-count'>";
+	echo !empty($tf_total_results) ? $tf_total_results : 0; 
+	echo "</span>";
 	wp_reset_postdata();
 
 	die();
