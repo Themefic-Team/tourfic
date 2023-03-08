@@ -79,6 +79,26 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle' => __( 'The Email to receive all enquiry form submissions', 'tourfic' ),
 					'is_pro'   => true,
 				),
+				array(
+					'id'        => 'h-enquiry-pabbly',
+					'type'      => 'switch',
+					'label'     => __( 'Enable Pabbly?', 'tourfic' ),
+					'subtitle' => __( 'Integrate Pabbly with Hotel Enquiry Form', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false,
+					'is_pro'    => true
+				),
+				array(
+					'id'       => 'h-enquiry-pabbly-webhook',
+					'type'     => 'text',
+					'label'    => __( 'Web Hook', 'tourfic' ),
+					'subtitle' => __( 'Enter Here Your Hotel Pabbly Web Hook', 'tourfic' ),
+					'is_pro'   => true,
+					'dependency'  => array(
+						array( 'h-enquiry-pabbly', '==', 'true' ),
+					),
+				),
 			),
 		),
 		'room_config'        => array(
@@ -221,6 +241,26 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
 					'subtitle' => __( 'The Email to receive all enquiry form submissions', 'tourfic' ),
 					'is_pro'   => true,
+				),
+				array(
+					'id'        => 't-enquiry-pabbly',
+					'type'      => 'switch',
+					'label'     => __( 'Enable Pabbly?', 'tourfic' ),
+					'subtitle' => __( 'Integrate Pabbly with Tour Enquiry Form', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false,
+					'is_pro'    => true
+				),
+				array(
+					'id'       => 't-enquiry-pabbly-webhook',
+					'type'     => 'text',
+					'label'    => __( 'Web Hook', 'tourfic' ),
+					'subtitle' => __( 'Enter Here Your Tour Pabbly Web Hook', 'tourfic' ),
+					'is_pro'   => true,
+					'dependency'  => array(
+						array( 't-enquiry-pabbly', '==', 'true' ),
+					),
 				),
 			),
 		),
