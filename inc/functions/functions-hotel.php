@@ -1008,7 +1008,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                                 <span class="tf-label"><?php _e( 'Location', 'tourfic' ); ?>:</span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>
-                                    <input type="text" required="" id="tf-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
+                                    <input type="text" name="place-name" required="" id="tf-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
                                     <input type="hidden" name="place" class="tf-place-input">
                                 </div>
                             </label>
@@ -1141,8 +1141,24 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                                 <span class="tf-label"><?php _e( 'Location', 'tourfic' ); ?>:</span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>
-                                    <input type="text" name="place" required id="tf-destination-adv" class="tf-advance-destination" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
-                                    <div class="ui-widget ui-widget-content results tf-hotel-results tf-hotel-adv-results">
+                                    <input type="text" name="place-name" required id="tf-destination-adv" class="tf-advance-destination tf-preview-destination" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>">
+									<input type="hidden" name="place" id="tf-place-destination" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" >
+                                    <div class="tf-hotel-locations tf-hotel-results">
+										<ul id="ui-id-1">
+										<?php 
+										$tf_hotel_location = get_terms( array(
+											'taxonomy' => 'hotel_location',
+											'orderby' => 'title',
+											'order' => 'ASC',
+											'hierarchical' => 0,
+										) );
+										if ( !empty($tf_hotel_location) ) {
+										foreach( $tf_hotel_location as $term ) {
+										if( !empty($term->name) ){
+										?>
+										<li data-name="<?php echo $term->name; ?>" data-slug="<?php echo $term->slug; ?>"><i class="fa fa-map-marker"></i><?php echo $term->name; ?></li>
+										<?php }}} ?>
+										</ul>
                                     </div>
                                 </div>
                             </label>
@@ -1744,7 +1760,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	// Remove disabled rooms
 	if ( ! empty( $meta['room'] ) ):
 		$meta = array_filter( $meta['room'], function ( $value ) {
-			return ! empty( $value ) && $value['enable'] != '0';
+			return ! empty( $value ) && !empty($value['enable']) ? $value['enable'] : '' != '0';
 		} );
 	endif;
 	// If no room return
@@ -1769,7 +1785,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	/**
 	 * Child Number Validation
 	 */
-	$back_childs   = array_column( $meta, 'adult' );
+	$back_childs   = array_column( $meta, 'child' );
 	$child_counter = 0;
 	foreach ( $back_childs as $back_child ) {
 		if ( $back_child >= $child ) {
@@ -1777,8 +1793,19 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 		}
 	}
 
+	/**
+	 * Room Number Validation
+	 */
+	$back_rooms   = array_column( $meta, 'num-room' );
+	$room_counter = 0;
+	foreach ( $back_rooms as $back_room ) {
+		if ( $back_room >= $room ) {
+			$room_counter ++;
+		}
+	}
+
 	// If adult and child number validation is true proceed
-	if ( $adult_counter > 0 && $child_counter > 0 ) {
+	if ( $adult_counter > 0 && $child_counter > 0 && $room_counter > 0 ) {
 
 		// Check custom date range status of room
 		$avil_by_date = array_column( $meta, 'avil_by_date' );
@@ -1816,7 +1843,6 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 				// Check if any date range match with search form date range and set them on array
 				if ( ! empty( $period ) ) {
 					foreach ( $period as $date ) {
-
 						$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
 
 					}
@@ -1837,24 +1863,111 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	// Conditional hotel showing
 	if ( $has_hotel ) {
 
-		if ( ! empty( $data ) ) {
-			if ( isset( $data[4] ) && isset( $data[5] ) ) {
-				[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
-				tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
-			} else {
-				[ $adults, $child, $room, $check_in_out ] = $data;
-				tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
-			}
-		} else {
-			tf_hotel_archive_single_item();
-		}
-
-		$not_found[] = 0;
+		$not_found[] = array(
+            'post_id' => get_the_ID(),
+            'found'  => 0,
+        );
 
 	} else {
 
-		$not_found[] = 1;
+		$not_found[] = array(
+            'post_id' => get_the_ID(),
+            'found'  => 1,
+        );
+	}
 
+}
+
+/**
+ * Filter hotels on search result page without checkin checkout dates
+ *
+ *
+ * @param DatePeriod $period collection of dates by user input;
+ * @param array $not_found collection of hotels exists
+ * @param array $data user input for sidebar form
+ *
+ * @author jahid
+ *
+ */
+function tf_filter_hotel_without_date( $period, array &$not_found, array $data = [] ): void {
+
+	// Form Data
+	if ( isset( $data[4] ) && isset( $data[5] ) ) {
+		[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
+	} else {
+		[ $adults, $child, $room, $check_in_out ] = $data;
+	}
+
+	// Get hotel meta options
+	$meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
+	// Remove disabled rooms
+	if ( ! empty( $meta['room'] ) ):
+		$meta = array_filter( $meta['room'], function ( $value ) {
+			return ! empty( $value ) && !empty($value['enable']) ? $value['enable'] : '' != '0';
+		} );
+	endif;
+	// If no room return
+	if ( empty( $meta ) ) {
+		return;
+	}
+
+	// Set initial room availability status
+	$has_hotel = false;
+
+	/**
+	 * Adult Number Validation
+	 */
+	$back_adults   = array_column( $meta, 'adult' );
+	$adult_counter = 0;
+	foreach ( $back_adults as $back_adult ) {
+		if ( $back_adult >= $adults ) {
+			$adult_counter ++;
+		}
+	}
+
+	/**
+	 * Child Number Validation
+	 */
+	$back_childs   = array_column( $meta, 'child' );
+	$child_counter = 0;
+	foreach ( $back_childs as $back_child ) {
+		if ( $back_child >= $child ) {
+			$child_counter ++;
+		}
+	}
+
+	/**
+	 * Room Number Validation
+	 */
+	$back_rooms   = array_column( $meta, 'num-room' );
+	$room_counter = 0;
+	foreach ( $back_rooms as $back_room ) {
+		if ( $back_room >= $room ) {
+			$room_counter ++;
+		}
+	}
+
+	// If adult and child number validation is true proceed
+	if ( $adult_counter > 0 && $child_counter > 0 && $room_counter > 0 ) {
+
+		$has_hotel = true; // Show that hotel
+
+	}
+
+	// Conditional hotel showing
+	if ( $has_hotel ) {
+
+		$not_found[] = array(
+            'post_id' => get_the_ID(),
+            'found'  => 0,
+        );
+
+	} else {
+
+		$not_found[] = array(
+            'post_id' => get_the_ID(),
+            'found'  => 1,
+        );
 	}
 
 }
