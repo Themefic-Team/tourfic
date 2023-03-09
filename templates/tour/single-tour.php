@@ -70,7 +70,7 @@ while ( have_posts() ) : the_post();
 	$phone         = ! empty( $meta['phone'] ) ? $meta['phone'] : '';
 	$fax           = ! empty( $meta['fax'] ) ? $meta['fax'] : '';
 	$website       = ! empty( $meta['website'] ) ? $meta['website'] : '';
-	$itinerary_map = ! empty( $meta['itinerary_map'] ) ? $meta['itinerary_map'] : '';
+	$itinerary_map = ! empty( tfopt('itinerary_map')) ? tfopt('itinerary_map') : 0;
 
 	/**
 	 * Get features
@@ -551,9 +551,9 @@ while ( have_posts() ) : the_post();
                     </div>
                 </div>
 				<?php
-				 if( !empty( $itinerary_map ) && function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
+				 if( $itinerary_map == 1 && function_exists( 'is_tf_pro' )): ?>
 				<!-- Itinerary map -->
-				<div id="tf-map" data-locations='<?php echo json_encode( $itinerary_locations ); ?>'></div>
+				<div id="tf-map" data-locations=<?php echo json_encode( $itinerary_locations  ); ?>></div>
 
 			<?php
 			endif;
@@ -563,7 +563,7 @@ while ( have_posts() ) : the_post();
         <!-- Travel Itinerary section End -->
 
         <!-- Map Section Start -->
-		<?php if ( $location ): ?>
+		<?php if ( $location && $itinerary_map != 1): ?>
             <div id="tour-map" class="tf-map-wrapper">
                 <div class="tf-container">
                     <div class="tf-row">
