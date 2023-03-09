@@ -551,7 +551,7 @@ while ( have_posts() ) : the_post();
                     </div>
                 </div>
 				<?php
-				 if( $itinerary_map == 1 && function_exists( 'is_tf_pro' )): ?>
+				 if( $itinerary_map == 1 && function_exists( 'is_tf_pro' ) && is_tf_pro()): ?>
 				<!-- Itinerary map -->
 				<div id="tf-map" data-locations=<?php echo json_encode( $itinerary_locations  ); ?>></div>
 
