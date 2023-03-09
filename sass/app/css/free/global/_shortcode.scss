@@ -19,6 +19,33 @@
             }
         }
     }
+    .tf-hotel-locations{
+        display: none;
+        #ui-id-1 {
+            li {
+                i{
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+    .tf-locations-show{
+        display: block;
+    }
+
+    .tf-tour-results{
+        display: none;
+        #ui-id-2 {
+            li {
+                i{
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+    .tf-destination-show{
+        display: block;
+    }
     .tf-hotel-results {
         position: absolute;
         border: 1px solid #d4d4d4;
