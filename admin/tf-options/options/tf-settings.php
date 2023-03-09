@@ -690,7 +690,27 @@ TF_Settings::option( 'tf_settings', array(
 										'min' => '0',
 									),
 									'is_pro'   => true,
-								)
+								),
+								array(
+									'id'        => 'vendor-integrate-pabbly',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Pabbly for New Vendor Registration?', 'tourfic' ),
+									'subtitle' => __( 'You can able to Integrate Pabbly with New Vendor Registration.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true,
+								),
+								array(
+									'id'       => 'vendor-integrate-pabbly-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Vendor Registration Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Vendor Registration Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'vendor-integrate-pabbly', '==', 'true' ),
+									),
+								),
 							),
 						),
 						array(
@@ -1623,6 +1643,74 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 'enable-travel-payouts',
 									'type'      => 'switch',
 									'title'     => __( 'Enable TravelPayouts?', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => true
+								),
+							),
+						),
+					),
+				)
+			),
+		),
+
+		/**
+		 * Integration
+		 *
+		 * Main menu
+		 */
+
+		 'integration' => array(
+			'title'  => __( 'Integration', 'tourfic' ),
+			'icon'   => 'fa fa-plus',
+			'fields' => array(
+				array(
+					'id'       => 'integration_heading',
+					'type'     => 'heading',
+					'label'  => __( 'Pabbly & Zapier Settings', 'tourfic' ),
+					'subtitle' => __( 'Use these options if you want to integrate with other platforms. Currently, we only allow Pabbly and Zapier.', 'tourfic' ),
+				),
+				array(
+					'id'     => 'tf-integration',
+					'type'   => 'tab',
+					'label'  => 'Pabbly & Zapier',
+					'is_pro' => true,
+					'tabs'   => array(
+						array(
+							'id'     => 'pabbly_integration',
+							'title'  => __( 'Pabbly', 'tourfic' ),
+							'fields' => array(
+								array(
+									'id'        => 't-enquiry-pabbly',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Pabbly?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Pabbly with Tour Enquiry Form', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true
+								),
+								array(
+									'id'       => 't-enquiry-pabbly-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Tour Enquiry Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 't-enquiry-pabbly', '==', 'true' ),
+									),
+								),
+							),
+						),
+						array(
+							'id'     => 'zapier_integration',
+							'title'  => __( 'Zapier', 'tourfic' ),
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'        => 'enable-travel-payouts',
+									'type'      => 'switch',
+									'title'     => __( 'Enable Zapier?', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => true
