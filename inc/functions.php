@@ -950,7 +950,6 @@ function tf_search_result_ajax_sidebar() {
 				'posts_per_page' => $post_per_page,
 				'post__in'  => $displayed_results,
 			);
-		}
 		
 		$result_query = new WP_Query( $filter_args );
 		if ( $result_query->have_posts() ) {
@@ -992,7 +991,7 @@ function tf_search_result_ajax_sidebar() {
 			'current' => $current_page
 		) );
 		echo "</div>";
-
+		}
 	} else {
 
 		echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
