@@ -1692,6 +1692,32 @@ TF_Settings::option( 'tf_settings', array(
 										array( 't-enquiry-pabbly', '==', 'true' ),
 									),
 								),
+								array(
+									'id'      => 'woocommerce-title',
+									'type'    => 'heading',
+									'content' => __( 'WooCommerce', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'        => 'tf-new-order-pabbly',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Pabbly for New Order?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Pabbly with WooCommerce New Order.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'   => true,
+								),
+								array(
+									'id'       => 'tf-new-order-pabbly-webhook',
+									'type'     => 'text',
+									'label'    => __( 'New Order Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your New Order Pabbly Web Hook.', 'tourfic' ),
+									'dependency'  => array(
+										array( 'tf-new-order-pabbly', '==', 'true' ),
+									),
+									'is_pro'   => true,
+								),
 							),
 						),
 						array(
