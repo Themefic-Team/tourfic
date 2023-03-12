@@ -26,47 +26,7 @@ TF_Settings::option( 'tf_settings', array(
 						'hotel' => __( 'Hotels', 'tourfic' ),
 						'tour'  => __( 'Tours', 'tourfic' ),
 					),
-				),
-				array(
-					'id'        => 'hotel-integrate-pabbly',
-					'type'      => 'switch',
-					'label'     => __( 'Enable Pabbly for Hotel?', 'tourfic' ),
-					'subtitle' => __( 'You can able to Integrate Pabbly with Hotel create and update.', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false,
-					'is_pro'    => true,
-				),
-				array(
-					'id'       => 'hotel-integrate-pabbly-webhook',
-					'type'     => 'text',
-					'label'    => __( 'Hotel Web Hook', 'tourfic' ),
-					'subtitle' => __( 'Enter Here Your Hotel Pabbly Web Hook', 'tourfic' ),
-					'is_pro'   => true,
-					'dependency'  => array(
-						array( 'hotel-integrate-pabbly', '==', 'true' ),
-					),
-				),
-				array(
-					'id'        => 'tour-integrate-pabbly',
-					'type'      => 'switch',
-					'label'     => __( 'Enable Pabbly for Tour?', 'tourfic' ),
-					'subtitle' => __( 'You can able to Integrate Pabbly with Tour create and update.', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false,
-					'is_pro'    => true,
-				),
-				array(
-					'id'       => 'tour-integrate-pabbly-webhook',
-					'type'     => 'text',
-					'label'    => __( 'Tour Web Hook', 'tourfic' ),
-					'subtitle' => __( 'Enter Here Your Tour Pabbly Web Hook', 'tourfic' ),
-					'is_pro'   => true,
-					'dependency'  => array(
-						array( 'tour-integrate-pabbly', '==', 'true' ),
-					),
-				),
+				)
 			),
 		),
 		'hotel_option'       => array(
@@ -118,27 +78,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
 					'subtitle' => __( 'The Email to receive all enquiry form submissions', 'tourfic' ),
 					'is_pro'   => true,
-				),
-				array(
-					'id'        => 'h-enquiry-pabbly',
-					'type'      => 'switch',
-					'label'     => __( 'Enable Pabbly?', 'tourfic' ),
-					'subtitle' => __( 'Integrate Pabbly with Hotel Enquiry Form', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false,
-					'is_pro'    => true
-				),
-				array(
-					'id'       => 'h-enquiry-pabbly-webhook',
-					'type'     => 'text',
-					'label'    => __( 'Web Hook', 'tourfic' ),
-					'subtitle' => __( 'Enter Here Your Hotel Enquiry Pabbly Web Hook.', 'tourfic' ),
-					'is_pro'   => true,
-					'dependency'  => array(
-						array( 'h-enquiry-pabbly', '==', 'true' ),
-					),
-				),
+				)
 			),
 		),
 		'room_config'        => array(
@@ -281,27 +221,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
 					'subtitle' => __( 'The Email to receive all enquiry form submissions', 'tourfic' ),
 					'is_pro'   => true,
-				),
-				array(
-					'id'        => 't-enquiry-pabbly',
-					'type'      => 'switch',
-					'label'     => __( 'Enable Pabbly?', 'tourfic' ),
-					'subtitle' => __( 'Integrate Pabbly with Tour Enquiry Form', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false,
-					'is_pro'    => true
-				),
-				array(
-					'id'       => 't-enquiry-pabbly-webhook',
-					'type'     => 'text',
-					'label'    => __( 'Web Hook', 'tourfic' ),
-					'subtitle' => __( 'Enter Here Your Tour Enquiry Pabbly Web Hook.', 'tourfic' ),
-					'is_pro'   => true,
-					'dependency'  => array(
-						array( 't-enquiry-pabbly', '==', 'true' ),
-					),
-				),
+				)
 			),
 		),
 		// Partial Payment Popup
@@ -1668,7 +1588,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'integration_heading',
 					'type'     => 'heading',
 					'label'  => __( 'Pabbly & Zapier Settings', 'tourfic' ),
-					'subtitle' => __( 'Use these options if you want to integrate with other platforms. Currently, we only allow Pabbly and Zapier.', 'tourfic' ),
+					'subtitle' => __( 'If you want to integrate your system with other platforms. Currently, we only allow Pabbly and Zapier.', 'tourfic' ),
 				),
 				array(
 					'id'     => 'tf-integration',
@@ -1681,10 +1601,82 @@ TF_Settings::option( 'tf_settings', array(
 							'title'  => __( 'Pabbly', 'tourfic' ),
 							'fields' => array(
 								array(
+									'id'      => 'hotel-title',
+									'type'    => 'heading',
+									'content' => __( 'Hotel', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'        => 'hotel-integrate-pabbly',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Pabbly for Hotel?', 'tourfic' ),
+									'subtitle' => __( 'You can able to Integrate Pabbly with Hotel create and update.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true,
+								),
+								array(
+									'id'       => 'hotel-integrate-pabbly-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Hotel Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Hotel Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'hotel-integrate-pabbly', '==', 'true' ),
+									),
+								),
+								array(
+									'id'        => 'h-enquiry-pabbly',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Pabbly for Hotel Enquiry?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Pabbly with Hotel Enquiry Form.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true
+								),
+								array(
+									'id'       => 'h-enquiry-pabbly-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Hotel Enquiry Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Hotel Enquiry Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'h-enquiry-pabbly', '==', 'true' ),
+									),
+								),
+								array(
+									'id'      => 'tour-title',
+									'type'    => 'heading',
+									'content' => __( 'Tour', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'        => 'tour-integrate-pabbly',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Pabbly for Tour?', 'tourfic' ),
+									'subtitle' => __( 'You can able to Integrate Pabbly with Tour create and update.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true,
+								),
+								array(
+									'id'       => 'tour-integrate-pabbly-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Tour Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Tour Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'tour-integrate-pabbly', '==', 'true' ),
+									),
+								),
+								array(
 									'id'        => 't-enquiry-pabbly',
 									'type'      => 'switch',
-									'label'     => __( 'Enable Pabbly?', 'tourfic' ),
-									'subtitle' => __( 'Integrate Pabbly with Tour Enquiry Form', 'tourfic' ),
+									'label'     => __( 'Enable Pabbly for Tour Enquiry?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Pabbly with Tour Enquiry Form.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
@@ -1693,7 +1685,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'       => 't-enquiry-pabbly-webhook',
 									'type'     => 'text',
-									'label'    => __( 'Web Hook', 'tourfic' ),
+									'label'    => __( 'Tour Enquiry Web Hook', 'tourfic' ),
 									'subtitle' => __( 'Enter Here Your Tour Enquiry Pabbly Web Hook.', 'tourfic' ),
 									'is_pro'   => true,
 									'dependency'  => array(
@@ -1707,14 +1699,7 @@ TF_Settings::option( 'tf_settings', array(
 							'title'  => __( 'Zapier', 'tourfic' ),
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
-								array(
-									'id'        => 'enable-travel-payouts',
-									'type'      => 'switch',
-									'title'     => __( 'Enable Zapier?', 'tourfic' ),
-									'label_on'  => __( 'Yes', 'tourfic' ),
-									'label_off' => __( 'No', 'tourfic' ),
-									'default'   => true
-								),
+								
 							),
 						),
 					),
