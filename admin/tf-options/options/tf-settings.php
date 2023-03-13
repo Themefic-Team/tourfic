@@ -1718,6 +1718,26 @@ TF_Settings::option( 'tf_settings', array(
 									),
 									'is_pro'   => true,
 								),
+								array(
+									'id'        => 'tf-new-customer-pabbly',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Pabbly for New Customer?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Pabbly with WooCommerce New Customer.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'   => true,
+								),
+								array(
+									'id'       => 'tf-new-customer-pabbly-webhook',
+									'type'     => 'text',
+									'label'    => __( 'New Customer Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your New Customer Pabbly Web Hook.', 'tourfic' ),
+									'dependency'  => array(
+										array( 'tf-new-customer-pabbly', '==', 'true' ),
+									),
+									'is_pro'   => true,
+								),
 							),
 						),
 						array(
