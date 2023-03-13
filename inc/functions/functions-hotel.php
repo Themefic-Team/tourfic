@@ -1009,7 +1009,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>
                                     <input type="text" name="place-name" required="" id="tf-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
-                                    <input type="hidden" name="place" class="tf-place-input">
+                                    <input type="hidden" name="place" id="tf-search-hotel" class="tf-place-input">
                                 </div>
                             </label>
                         </div>
@@ -1757,6 +1757,16 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 
 	// Get hotel meta options
 	$meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
+
+	// Get hotel Room meta options
+	$filters_rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+	if ( ! empty( $filters_rooms ) && gettype( $filters_rooms ) == "string" ) {
+		$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+		}, $filters_rooms );
+		$filters_rooms                = unserialize( $tf_hotel_rooms_value );
+	}
+
 	// Remove disabled rooms
 	if ( ! empty( $meta['room'] ) ):
 		$meta = array_filter( $meta['room'], function ( $value ) {
@@ -1850,7 +1860,31 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 
 				// If any date range matches show hotel
 				if ( ! in_array( 0, $show_hotel ) ) {
-					$has_hotel = true;
+					if(!empty($filters_rooms) && !empty($startprice) && !empty($endprice)){
+						foreach($filters_rooms as $room){
+							if(!empty($room['repeat_by_date'])){
+								foreach($room['repeat_by_date'] as $repat_date){
+									if(!empty($repat_date['adult_price'])){
+										if($startprice<=$repat_date['adult_price'] && $repat_date['adult_price']<=$endprice){
+											$has_hotel = true;
+										}
+									}
+									if(!empty($repat_date['child_price'])){
+										if($startprice<=$repat_date['child_price'] && $repat_date['child_price']<=$endprice){
+											$has_hotel = true;
+										}
+									}
+									if(!empty($repat_date['price'])){
+										if($startprice<=$repat_date['price'] && $repat_date['price']<=$endprice){
+											$has_hotel = true;
+										}
+									}
+								}
+							}
+						}
+					}else{
+						$has_hotel = true;
+					}
 					break;
 				}
 
@@ -1900,6 +1934,16 @@ function tf_filter_hotel_without_date( $period, array &$not_found, array $data =
 
 	// Get hotel meta options
 	$meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
+	
+	// Get hotel Room meta options
+	$filters_rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+	if ( ! empty( $filters_rooms ) && gettype( $filters_rooms ) == "string" ) {
+		$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+		}, $filters_rooms );
+		$filters_rooms                = unserialize( $tf_hotel_rooms_value );
+	}
+
 	// Remove disabled rooms
 	if ( ! empty( $meta['room'] ) ):
 		$meta = array_filter( $meta['room'], function ( $value ) {
@@ -1950,7 +1994,27 @@ function tf_filter_hotel_without_date( $period, array &$not_found, array $data =
 	// If adult and child number validation is true proceed
 	if ( $adult_counter > 0 && $child_counter > 0 && $room_counter > 0 ) {
 
-		$has_hotel = true; // Show that hotel
+		if(!empty($filters_rooms) && !empty($startprice) && !empty($endprice)){
+			foreach($filters_rooms as $room){
+				if(!empty($room['adult_price'])){
+					if($startprice<=$room['adult_price'] && $room['adult_price']<=$endprice){
+						$has_hotel = true;
+					}
+				}
+				if(!empty($room['child_price'])){
+					if($startprice<=$room['child_price'] && $room['child_price']<=$endprice){
+						$has_hotel = true;
+					}
+				}
+				if(!empty($room['price'])){
+					if($startprice<=$room['price'] && $room['price']<=$endprice){
+						$has_hotel = true;
+					}
+				}
+			}
+		}else{
+			$has_hotel = true; // Show that hotel
+		}
 
 	}
 

@@ -382,7 +382,7 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>
                                     <input type="text" name="place-name" required id="tf-destination" class="" placeholder="<?php _e('Enter Destination', 'tourfic'); ?>" value="">
-                                    <input type="hidden" name="place" class="tf-place-input" />                    </div>
+                                    <input type="hidden" name="place" id="tf-search-tour" class="tf-place-input" />                    </div>
                             </label>
                         </div>
                     </div>
@@ -1250,24 +1250,26 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
                 }
                 if ( !in_array( 0, $show_continuous_tour ) ) {
                     if(!empty($startprice) && !empty($endprice)){
-                        if(!empty($meta['adult_price'])){
-                            if($startprice<=$meta['adult_price'] && $meta['adult_price']<=$endprice){
-                                $has_tour = true; 
+                        foreach($meta['cont_custom_date'] as $single_avail){
+                            if(!empty($single_avail['adult_price'])){
+                                if($startprice<=$single_avail['adult_price'] && $single_avail['adult_price']<=$endprice){
+                                    $has_tour = true; 
+                                }
                             }
-                        }
-                        if(!empty($meta['child_price'])){
-                            if($startprice<=$meta['child_price'] && $meta['child_price']<=$endprice){
-                                $has_tour = true; 
+                            if(!empty($single_avail['child_price'])){
+                                if($startprice<=$single_avail['child_price'] && $single_avail['child_price']<=$endprice){
+                                    $has_tour = true; 
+                                }
                             }
-                        }
-                        if(!empty($meta['infant_price'])){
-                            if($startprice<=$meta['infant_price'] && $meta['infant_price']<=$endprice){
-                                $has_tour = true; 
+                            if(!empty($single_avail['infant_price'])){
+                                if($startprice<=$single_avail['infant_price'] && $single_avail['infant_price']<=$endprice){
+                                    $has_tour = true; 
+                                }
                             }
-                        }
-                        if(!empty($meta['group_price'])){
-                            if($startprice<=$meta['group_price'] && $meta['group_price']<=$endprice){
-                                $has_tour = true; 
+                            if(!empty($single_avail['group_price'])){
+                                if($startprice<=$single_avail['group_price'] && $single_avail['group_price']<=$endprice){
+                                    $has_tour = true; 
+                                }
                             }
                         }
                     }else{
@@ -1382,7 +1384,6 @@ function tf_filter_tour_by_without_date( $period, &$total_posts, array &$not_fou
     if ( !empty($meta['type'] ) && $meta['type'] === 'continuous' ) {
 
         $custom_availability = !empty($meta['custom_avail']) ? $meta['custom_avail'] : false;
-
         if ($custom_availability) {
 
             if( !empty($meta['cont_custom_date']) && gettype($meta['cont_custom_date'])=="string" ){

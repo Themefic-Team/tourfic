@@ -1518,6 +1518,14 @@
                 $(".tf-hotel-locations").addClass('tf-locations-show');
             }
         });
+        $('#tf-destination-adv').keyup(function (e) {
+            var location = $(this).val();
+            $("#tf-place-destination").val(location);
+        });
+        $('#tf-location').keyup(function (e) {
+            var tf_location = $(this).val();
+            $("#tf-search-hotel").val(tf_location);
+        });
         $(document).on('click', function (event) {
             if (!$(event.target).closest("#tf-destination-adv").length) {
                 $(".tf-hotel-locations").removeClass('tf-locations-show');
@@ -1540,6 +1548,14 @@
             }else{
                 $(".tf-tour-results").addClass('tf-destination-show');
             }
+        });
+        $('#tf-tour-location-adv').keyup(function (e) {
+            var location = $(this).val();
+            $("#tf-tour-place").val(location);
+        });
+        $('#tf-destination').keyup(function (e) {
+            var tf_location = $(this).val();
+            $("#tf-search-tour").val(tf_location);
         });
         $(document).on('click', function (event) {
             if (!$(event.target).closest("#tf-tour-location-adv").length) {
