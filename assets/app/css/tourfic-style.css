@@ -3364,6 +3364,10 @@ span.tf-price .amount {
 .tf-contact-info div p {
   margin: 0;
 }
+.tf-contact-info div p a {
+  text-decoration: none;
+  color: #222;
+}
 
 div#tf-contact-info {
   border-radius: 8px;

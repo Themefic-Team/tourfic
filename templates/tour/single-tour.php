@@ -233,22 +233,34 @@ while ( have_posts() ) : the_post();
 								<div class="tf-contact-info-wrapper" id="tf-contact-info" style="display:none">
 									<div class="tf-contact-info">
 										<h3><?php echo __( 'Contact Information' , 'tourfic' ) ?></h3>
-										<div class="tf-email">
-											<strong><?php echo esc_html__( 'Email:', 'tourfic' ) ?></strong>
-											<p><?php echo esc_html( $email ) ?></p>
-										</div>
-										<div class="tf-phone">
-											<strong><?php echo esc_html__( 'Phone:', 'tourfic' ) ?></strong>
-											<p><?php echo esc_html( $phone ) ?></p>
-										</div>
-										<div class="tf-fax">
-											<strong><?php echo esc_html__( 'Fax:', 'tourfic' ) ?></strong>
-											<p><?php echo esc_html( $fax ) ?></p>
-										</div>
-										<div class="tf-website">
-											<strong><?php echo esc_html__( 'Website:', 'tourfic' ) ?></strong>
-											<p><?php echo esc_html( $website ) ?></p>
-										</div>
+										<?php 
+										if(!empty($email)){ ?>
+											<div class="tf-email">
+												<strong><?php echo esc_html__( 'Email:', 'tourfic' ) ?></strong>
+												<p><a href="mailto:<?php echo esc_html( $email ) ?>"><?php echo esc_html( $email ) ?></a></p>
+											</div>
+										<?php } ?>
+										<?php 
+										if(!empty($phone)){ ?>
+											<div class="tf-phone">
+												<strong><?php echo esc_html__( 'Phone:', 'tourfic' ) ?></strong>
+												<p><a href="tel:<?php echo esc_html( $phone ) ?>"><?php echo esc_html( $phone ) ?></a></p>
+											</div>
+										<?php } ?>
+										<?php 
+										if(!empty($fax)){ ?>
+											<div class="tf-fax">
+												<strong><?php echo esc_html__( 'Fax:', 'tourfic' ) ?></strong>
+												<p><a href="tel:<?php echo esc_html( $fax ) ?>"><?php echo esc_html( $fax ) ?></a></p>
+											</div>
+										<?php } ?>
+										<?php 
+										if(!empty($website)){ ?>
+											<div class="tf-website">
+												<strong><?php echo esc_html__( 'Website:', 'tourfic' ) ?></strong>
+												<p><a target="_blank" href="<?php echo esc_html( $website ) ?>"><?php echo esc_html( $website ) ?></a></p>
+											</div>
+										<?php } ?>
 									</div>
 								</div>
 							<?php }	?>
@@ -382,11 +394,13 @@ while ( have_posts() ) : the_post();
 										<?php echo esc_html( $night_count ); ?>
 										<span>
 											<?php
-											if( $night_count > 1  ){
-												echo esc_html__( 'Nights', 'tourfic' );
-											}else{
-												echo esc_html__( 'Night', 'tourfic'  );
-											}											
+											if(!empty($night_count)){
+												if( $night_count > 1  ){
+													echo esc_html__( 'Nights', 'tourfic' );
+												}else{
+													echo esc_html__( 'Night', 'tourfic'  );
+												}	
+											}										
 											?>
 										</span>
 									</p>
@@ -510,7 +524,7 @@ while ( have_posts() ) : the_post();
         <!-- Travel Itinerary section Start -->
 		<?php
 		if ( function_exists('is_tf_pro') && is_tf_pro() ) {
-			do_action( 'after_itinerary_builder', $itineraries );
+			do_action( 'after_itinerary_builder', $itineraries, $itinerary_map );
 		} else {
 			?>
             <!-- Travel Itinerary section Start -->
@@ -521,11 +535,8 @@ while ( have_posts() ) : the_post();
                             <h2 class="section-heading"><?php _e( "Travel Itinerary", 'tourfic' ); ?></h2>
                             <div class="tf-travel-itinerary-items-wrapper">
 								<?php 
-								//store all the locations of itinerary
-								$itinerary_locations = [];
 								foreach ( $itineraries as $itinerary ) {
-									$locations = !empty($itinerary['loacation']) ? $itinerary['loacation'] : '';
-									array_push( $itinerary_locations, $locations );								?>
+								?>
                                     <div id="tf-accordion-wrapper">
                                         <div class="tf-accordion-head">
                                             <div class="tf-travel-time">
@@ -550,13 +561,8 @@ while ( have_posts() ) : the_post();
                         </div>
                     </div>
                 </div>
-				<?php
-				 if( $itinerary_map == 1 && function_exists( 'is_tf_pro' ) && is_tf_pro()): ?>
-				<!-- Itinerary map -->
-				<div id="tf-map" data-locations=<?php echo json_encode( $itinerary_locations  ); ?>></div>
 
 			<?php
-			endif;
 			 }
 		} 
 		?>
