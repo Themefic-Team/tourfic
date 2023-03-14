@@ -229,6 +229,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			);
 			if ( function_exists('is_tf_pro') && is_tf_pro() ) {
 				do_action( 'tf_services_pabbly_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
+				do_action( 'tf_services_zapier_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
 			}
 		}
 
