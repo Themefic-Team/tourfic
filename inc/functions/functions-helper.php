@@ -418,6 +418,7 @@ function tourfic_ask_question_ajax() {
 
 	if ( function_exists('is_tf_pro') && is_tf_pro() ) {
 		do_action( 'enquiry_pabbly_form_trigger', $post_id, $name, $email, $question );
+		do_action( 'enquiry_zapier_form_trigger', $post_id, $name, $email, $question );
 	} 
 	
 	
