@@ -538,6 +538,28 @@ TF_Settings::option( 'tf_settings', array(
 						),
 					),
 				),
+				array(
+					'id'         => '',
+					'type'       => 'switch',
+					'label'      => __( 'Enable Itinerary Map', 'tourfic' ),
+					'label_on'   => __( 'Yes', 'tourfic' ),
+					'label_off'  => __( 'No', 'tourfic' ),
+					'is_pro'     => true,
+					'field_width'     => 50,
+				),
+				array(
+					'id'       => '',
+					'type'     => 'select',
+					'label'    => __( 'Travel Mode', 'tourfic' ),
+					'options'  => array(
+						'DRIVING'   => __( 'Driving', 'tourfic' ),
+						'WALKING'   => __( 'Walking', 'tourfic' ),
+						'BICYCLING' => __( 'Bycycling', 'tourfic' ),
+					),
+					'default'    => 'driving',
+					'is_pro'     => true,
+					'field_width'     => 50,
+				),
 
 			),
 		),
@@ -1192,36 +1214,7 @@ TF_Settings::option( 'tf_settings', array(
 						array( 'google-page-option', '==', 'googlemap' ),
 					),
 					'is_pro'     => true,
-				),
-				array(
-					'id'         => '',
-					'type'       => 'switch',
-					'label'      => __( 'Enable Itinerary Map', 'tourfic' ),
-					'label_on'   => __( 'Yes', 'tourfic' ),
-					'label_off'  => __( 'No', 'tourfic' ),
-					'dependency' => array(
-						array( 'google-page-option', '==', 'googlemap' ),
-					),
-					'is_pro'     => true,
-					'field_width'     => 50,
-				),
-				array(
-					'id'       => '',
-					'type'     => 'select',
-					'label'    => __( 'Travel Mode', 'tourfic' ),
-					'options'  => array(
-						'DRIVING'   => __( 'Driving', 'tourfic' ),
-						'WALKING'   => __( 'Walking', 'tourfic' ),
-						'BYCYCLING' => __( 'Bycycling', 'tourfic' ),
-						'TRANSIT'   => __( 'Transit', 'tourfic' ),
-					),
-					'default'    => 'driving',
-					'dependency' => array(
-						array( 'google-page-option', '==', 'googlemap' ),
-					),
-					'is_pro'     => true,
-					'field_width'     => 50,
-				),
+				)
 			),
 		),
 		/**
