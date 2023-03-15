@@ -612,6 +612,12 @@ TF_Settings::option( 'tf_settings', array(
 									'is_pro'   => true,
 								),
 								array(
+									'id'      => 'pabbly-title',
+									'type'    => 'heading',
+									'content' => __( 'Pabbly', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
 									'id'        => 'vendor-integrate-pabbly',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Pabbly for New Vendor Registration?', 'tourfic' ),
@@ -629,6 +635,32 @@ TF_Settings::option( 'tf_settings', array(
 									'is_pro'   => true,
 									'dependency'  => array(
 										array( 'vendor-integrate-pabbly', '==', 'true' ),
+									),
+								),
+								array(
+									'id'      => 'zapier-title',
+									'type'    => 'heading',
+									'content' => __( 'Zapier', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'        => 'vendor-integrate-zapier',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Zapier for New Vendor Registration?', 'tourfic' ),
+									'subtitle' => __( 'You can able to Integrate Zapier with New Vendor Registration.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true,
+								),
+								array(
+									'id'       => 'vendor-integrate-zapier-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Vendor Registration Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Vendor Registration Zapier Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'vendor-integrate-zapier', '==', 'true' ),
 									),
 								),
 							),
