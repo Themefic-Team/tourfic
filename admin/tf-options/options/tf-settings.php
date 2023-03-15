@@ -1701,8 +1701,8 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'        => 'tf-new-order-pabbly',
 									'type'      => 'switch',
-									'label'     => __( 'Enable Pabbly for New Order?', 'tourfic' ),
-									'subtitle' => __( 'Integrate Pabbly with WooCommerce New Order.', 'tourfic' ),
+									'label'     => __( 'Enable Pabbly for Booking?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Pabbly with WooCommerce Booking.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
@@ -1711,8 +1711,8 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'       => 'tf-new-order-pabbly-webhook',
 									'type'     => 'text',
-									'label'    => __( 'New Order Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your New Order Pabbly Web Hook.', 'tourfic' ),
+									'label'    => __( 'Booking Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Booking Pabbly Web Hook.', 'tourfic' ),
 									'dependency'  => array(
 										array( 'tf-new-order-pabbly', '==', 'true' ),
 									),
@@ -1846,8 +1846,8 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'        => 'tf-new-order-zapier',
 									'type'      => 'switch',
-									'label'     => __( 'Enable Zapier for New Order?', 'tourfic' ),
-									'subtitle' => __( 'Integrate Zapier with WooCommerce New Order.', 'tourfic' ),
+									'label'     => __( 'Enable Zapier for Booking?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Zapier with WooCommerce Booking.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
@@ -1856,8 +1856,8 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'       => 'tf-new-order-zapier-webhook',
 									'type'     => 'text',
-									'label'    => __( 'New Order Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your New Order Zapier Web Hook.', 'tourfic' ),
+									'label'    => __( 'Booking Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Booking Zapier Web Hook.', 'tourfic' ),
 									'dependency'  => array(
 										array( 'tf-new-order-zapier', '==', 'true' ),
 									),

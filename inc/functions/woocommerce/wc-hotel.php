@@ -611,10 +611,10 @@ add_action( 'woocommerce_checkout_create_order_line_item', 'tf_hotel_custom_orde
  */
 function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data, $order ) {
 
-	$pabbly_order_data = array(
+	$tf_integration_order_data = array(
 		'order_id' => $order_id
 	);
-	$tf_pabbly_order_status = [];
+	$tf_integration_order_status = [];
 	# Get and Loop Over Order Line Items
 	foreach ( $order->get_items() as $item_id => $item ) {
 		
@@ -720,7 +720,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'due_price' => $due,
 			];
 
-			$pabbly_order_data[] = [
+			$tf_integration_order_data[] = [
 				'room' => $room_selected,
 				'check_in' => $check_in,
 				'check_out' => $check_out,
@@ -738,7 +738,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'order_date' => date('Y-m-d H:i:s')
 			];
 
-			$tf_pabbly_order_status = [
+			$tf_integration_order_status = [
 				'customer_id' => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status' => $order->get_status(),
@@ -806,7 +806,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'due_price' => $due,
 			];
 
-			$pabbly_order_data[] = [
+			$tf_integration_order_data[] = [
 				'tour_date' => $tour_date,
 				'tour_time' => $tour_time,
 				'tour_extra' => $tour_extra,
@@ -817,7 +817,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'due_price' => $due,
 			];
 
-			$tf_pabbly_order_status = [
+			$tf_integration_order_status = [
 				'customer_id' => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status' => $order->get_status(),
@@ -864,7 +864,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 	 */
 
 	if ( function_exists('is_tf_pro') && is_tf_pro() ) {
-		do_action( 'tf_new_order_pabbly_form_trigger', $pabbly_order_data, $billinginfo, $shippinginfo, $tf_pabbly_order_status);
+		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
+		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
 	} 
 }
 
@@ -890,10 +891,10 @@ function tf_order_status_changed($order_id, $old_status, $new_status, $order)
 		);
 	}
 
-	$pabbly_order_data = array(
+	$tf_integration_order_data = array(
 		'order_id' => $order_id
 	);
-	$tf_pabbly_order_status = [];
+	$tf_integration_order_status = [];
 	# Get and Loop Over Order Line Items
 	foreach ( $order->get_items() as $item_id => $item ) {
 		
@@ -943,7 +944,7 @@ function tf_order_status_changed($order_id, $old_status, $new_status, $order)
 			$airport_service_type = $item->get_meta( 'Airport Service', true );
 			$airport_service_fee = $item->get_meta( 'Airport Service Fee', true );
 			
-			$pabbly_order_data[] = [
+			$tf_integration_order_data[] = [
 				'room' => $room_selected,
 				'check_in' => $check_in,
 				'check_out' => $check_out,
@@ -961,7 +962,7 @@ function tf_order_status_changed($order_id, $old_status, $new_status, $order)
 				'order_date' => date('Y-m-d H:i:s')
 			];
 
-			$tf_pabbly_order_status = [
+			$tf_integration_order_status = [
 				'customer_id' => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status' => $order->get_status(),
@@ -985,7 +986,7 @@ function tf_order_status_changed($order_id, $old_status, $new_status, $order)
 				list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
 			}
 
-			$pabbly_order_data[] = [
+			$tf_integration_order_data[] = [
 				'tour_date' => $tour_date,
 				'tour_time' => $tour_time,
 				'tour_extra' => $tour_extra,
@@ -996,7 +997,7 @@ function tf_order_status_changed($order_id, $old_status, $new_status, $order)
 				'due_price' => $due,
 			];
 
-			$tf_pabbly_order_status = [
+			$tf_integration_order_status = [
 				'customer_id' => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status' => $order->get_status(),
@@ -1012,7 +1013,8 @@ function tf_order_status_changed($order_id, $old_status, $new_status, $order)
 	 */
 
 	 if ( function_exists('is_tf_pro') && is_tf_pro() ) {
-		do_action( 'tf_new_order_pabbly_form_trigger', $pabbly_order_data, $billinginfo, $shippinginfo, $tf_pabbly_order_status);
+		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
+		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
 	} 
 
 }
