@@ -246,7 +246,22 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 if(!empty($meta['group_price'])){
                     $tftours_min_maxprices[]=$meta['group_price'];
                 }
-                
+                if(!empty($meta['cont_custom_date'])){
+                    foreach($meta['cont_custom_date'] as $minmax){
+                        if(!empty($minmax['adult_price'])){
+                            $tftours_min_maxprices[]=$minmax['adult_price'];
+                        }
+                        if(!empty($minmax['child_price'])){
+                            $tftours_min_maxprices[]=$minmax['child_price'];
+                        }
+                        if(!empty($minmax['infant_price'])){
+                            $tftours_min_maxprices[]=$minmax['infant_price'];
+                        }
+                        if(!empty($minmax['group_price'])){
+                            $tftours_min_maxprices[]=$minmax['group_price'];
+                        }
+                    }
+                }
             endwhile;
 
         endif; wp_reset_query(); 
