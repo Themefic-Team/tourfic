@@ -278,7 +278,7 @@ while ( have_posts() ) : the_post();
                     <div class="tf-title-left">
                         <h1><?php the_title(); ?></h1>
                         <!-- Start map link -->
-                        <div class="tf-map-link">
+                        <div class="tf-map-link" id="tf-map-location" data-location="<?php echo esc_attr( $location ) ?>">
 							<?php if ( $location ) {
 								echo '<a href="#tour-map"><span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $location . '.</span></a>';
 							} ?>
@@ -570,7 +570,7 @@ while ( have_posts() ) : the_post();
         <!-- Travel Itinerary section End -->
 
         <!-- Map Section Start -->
-		<?php if ( $location && $itinerary_map != 1): ?>
+		<?php if ( ($location && $itinerary_map != 1) || ! $itineraries): ?>
             <div id="tour-map" class="tf-map-wrapper">
                 <div class="tf-container">
                     <div class="tf-row">
