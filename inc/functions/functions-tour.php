@@ -1067,6 +1067,21 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
     $child_price          = !empty( $meta['child_price'] ) ? $meta['child_price'] : false;
     $infant_price         = !empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
 
+    if( !empty( $check_in_out ) ){
+		list( $tf_form_start, $tf_form_end ) = explode( ' - ', $check_in_out );
+	}
+
+	if ( ! empty( $check_in_out ) ) {
+		$period = new DatePeriod(
+			new DateTime( $tf_form_start ),
+			new DateInterval( 'P1D' ),
+			new DateTime( !empty($tf_form_end) ? $tf_form_end : $tf_form_start . '23:59' )
+		);
+	} else {
+		$period = '';
+	}
+
+
     // Single link
     $url = get_the_permalink();
     $url = add_query_arg( array(
@@ -1119,21 +1134,91 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
 					<a href="<?php echo $url; ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' );?></a>
 				</div>
                     
-                <?php
-                    if( $pricing_rule  && $pricing_rule == 'group' ){
-                        $price = $group_price;
-                    }elseif( $pricing_rule && !$disable_adult_price && $pricing_rule == 'person'   ){
-                        $price = $adult_price;
+                <?php 
+                $tour_price = [];
+                if( $pricing_rule  && $pricing_rule == 'group' ){
+                    if(!empty($check_in_out)){
+                        if ( !empty($meta['type'] ) && $meta['type'] === 'continuous' ) {
+                            $custom_availability = !empty($meta['custom_avail']) ? $meta['custom_avail'] : false;
+                            if ($custom_availability) {
+                                foreach ( $meta['cont_custom_date'] as $repval ) {
+                                    //Initial matching date array
+                                    $show_tour = [];
+                                    $dates = $repval['date'];
+                                    // Check if any date range match with search form date range and set them on array
+                                    if ( ! empty( $period ) ) {
+                                        foreach ( $period as $date ) {
+                                            $show_tour[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
+                                        }
+                                    }
+                                    if ( ! in_array( 0, $show_tour ) ) {
+                                        if(! empty( $repval['group_price'] )){
+                                            $tour_price[] = $repval['group_price'];
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }else{
-                        $price = $child_price;
+                        if(!empty($meta['group_price'])){
+                            $tour_price[] = $meta['group_price'];
+                        }
                     }
-                    if( !empty($price) ):
+                }
+                if( $pricing_rule  && $pricing_rule == 'person' ){
+                    if(!empty($check_in_out)){
+                        if ( !empty($meta['type'] ) && $meta['type'] === 'continuous' ) {
+                            $custom_availability = !empty($meta['custom_avail']) ? $meta['custom_avail'] : false;
+                            if ($custom_availability) {
+                                foreach ( $meta['cont_custom_date'] as $repval ) {
+                                    //Initial matching date array
+                                    $show_tour = [];
+                                    $dates = $repval['date'];
+                                    // Check if any date range match with search form date range and set them on array
+                                    if ( ! empty( $period ) ) {
+                                        foreach ( $period as $date ) {
+                                            $show_tour[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
+                                        }
+                                    }
+                                    if ( ! in_array( 0, $show_tour ) ) {
+                                        if(!empty($repval['adult_price']) && !$disable_adult_price){
+                                            $tour_price[] = $repval['adult_price'];
+                                        }
+                                        if(!empty($repval['child_price']) && !$disable_child_price){
+                                            $tour_price[] = $repval['child_price'];
+                                        }
+                                        if(!empty($repval['infant_price']) && !$disable_infant_price){
+                                            $tour_price[] = $repval['infant_price'];
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        if(!empty($meta['adult_price']) && !$disable_adult_price){
+                            $tour_price[] = $meta['adult_price'];
+                        }
+                        if(!empty($meta['child_price']) && !$disable_child_price){
+                            $tour_price[] = $meta['child_price'];
+                        }
+                        if(!empty($meta['infant_price']) && !$disable_infant_price){
+                            $tour_price[] = $meta['infant_price'];
+                        }
+                    }
+                }
                 ?>
-                        
-                <div class="tf-tour-price">
-                    <?php echo __('From','tourfic') . wc_price($price); ?>
-                </div>
-                <?php endif;?>
+                <?php
+                if ( ! empty( $tour_price ) ):
+                    ?>
+                    <div class="tf-tour-price">
+                        <?php
+                        //get the lowest price from all available room price
+                        $lowest_price = wc_price( min( $tour_price ) );
+                        echo __( "From ", "tourfic" ) . $lowest_price;
+
+                        ?>
+                    </div>
+                <?php endif; ?>
 			</div>
 		</div>
 	</div>

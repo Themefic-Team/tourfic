@@ -530,7 +530,11 @@ function tf_search_result_shortcode( $atts, $content = null ){
             $data = array($adults, $child, $room, $check_in_out, $startprice, $endprice);
         }
     }else{
-        $data = array($adults, $child, $room, $check_in_out);
+		if($_GET['type']=="tf_tours"){
+        	$data = array($adults, $child, $check_in_out);
+		}else{
+			$data = array($adults, $child, $room, $check_in_out);
+		}
     }
 
 

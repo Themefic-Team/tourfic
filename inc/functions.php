@@ -720,7 +720,11 @@ function tf_search_result_ajax_sidebar() {
             $data = array($adults, $child, $room, $check_in_out, $startprice, $endprice);
         }
     }else{
-        $data = array($adults, $child, $room, $check_in_out);
+		if($posttype=="tf_tours"){
+        	$data = array($adults, $child, $check_in_out);
+		}else{
+			$data = array($adults, $child, $room, $check_in_out);
+		}
     }
 
 	if( !empty( $check_in_out ) ){

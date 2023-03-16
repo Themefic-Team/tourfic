@@ -1569,6 +1569,20 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 		$form_check_out_stt = strtotime( $form_check_out );
 	}
 
+	if( !empty( $check_in_out ) ){
+		list( $tf_form_start, $tf_form_end ) = explode( ' - ', $check_in_out );
+	}
+
+	if ( ! empty( $check_in_out ) ) {
+		$period = new DatePeriod(
+			new DateTime( $tf_form_start ),
+			new DateInterval( 'P1D' ),
+			new DateTime( !empty($tf_form_end) ? $tf_form_end : $tf_form_start . '23:59' )
+		);
+	} else {
+		$period = '';
+	}
+
 	// Single link
 	$url = get_the_permalink();
 	$url = add_query_arg( array(
@@ -1590,33 +1604,61 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 
 			$pricing_by = ! empty( $b_room['pricing-by'] ) ? $b_room['pricing-by'] : 1;
 			if ( $pricing_by == 1 ) {
-				if(! empty( $b_room['price'] )){
-					$room_price[] = $b_room['price'];
-				}
-				if( !empty($b_room['avil_by_date']) && $b_room['avil_by_date']=="1"){
-					if( !empty($b_room['repeat_by_date'])){
-						foreach ( $b_room['repeat_by_date'] as $repval ) {
-							if(! empty( $repval['price'] )){
-								$room_price[] = $repval['price'];
+				if(empty($check_in_out)){
+					if(! empty( $b_room['price'] )){
+						$room_price[] = $b_room['price'];
+					}
+				}else{
+					if( !empty($b_room['avil_by_date']) && $b_room['avil_by_date']=="1"){
+						if( !empty($b_room['repeat_by_date'])){
+							foreach ( $b_room['repeat_by_date'] as $repval ) {
+								//Initial matching date array
+								$show_hotel = [];
+								$dates = $repval['availability'];
+								// Check if any date range match with search form date range and set them on array
+								if ( ! empty( $period ) ) {
+									foreach ( $period as $date ) {
+										$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
+									}
+								}
+								if ( ! in_array( 0, $show_hotel ) ) {
+									if(! empty( $repval['price'] )){
+										$room_price[] = $repval['price'];
+									}
+								}
 							}
 						}
 					}
 				}
 			} else if ( $pricing_by == 2 ) {
-				if(! empty( $b_room['adult_price'] )){
-					$room_price[] = $b_room['adult_price'];
-				}
-				if(! empty( $b_room['child_price'] )){
-					$room_price[] = $b_room['child_price'];
-				}
-				if( !empty($b_room['avil_by_date']) && $b_room['avil_by_date']=="1"){
-					if( !empty($b_room['repeat_by_date'])){
-						foreach ( $b_room['repeat_by_date'] as $repval ) {
-							if(! empty( $repval['adult_price'] )){
-								$room_price[] = $repval['adult_price'];
-							}
-							if(! empty( $repval['child_price'] )){
-								$room_price[] = $repval['child_price'];
+				if(empty($check_in_out)){
+					if(! empty( $b_room['adult_price'] )){
+						$room_price[] = $b_room['adult_price'];
+					}
+					if(! empty( $b_room['child_price'] )){
+						$room_price[] = $b_room['child_price'];
+					}
+				}else{
+					if( !empty($b_room['avil_by_date']) && $b_room['avil_by_date']=="1"){
+						if( !empty($b_room['repeat_by_date'])){
+							foreach ( $b_room['repeat_by_date'] as $repval ) {
+								//Initial matching date array
+								$show_hotel = [];
+								$dates = $repval['availability'];
+								// Check if any date range match with search form date range and set them on array
+								if ( ! empty( $period ) ) {
+									foreach ( $period as $date ) {
+										$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
+									}
+								}
+								if ( ! in_array( 0, $show_hotel ) ) {
+									if(! empty( $repval['adult_price'] )){
+										$room_price[] = $repval['adult_price'];
+									}
+									if(! empty( $repval['child_price'] )){
+										$room_price[] = $repval['child_price'];
+									}
+								}
 							}
 						}
 					}
