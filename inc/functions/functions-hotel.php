@@ -1589,8 +1589,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 		'adults'            => $adults,
 		'children'          => $child,
 		'room'              => $room,
-		'children_ages'     => $children_ages,
-		'check-in-out-date' => $check_in_out,
+		'children_ages'     => $children_ages
 	), $url );
 
 	/**

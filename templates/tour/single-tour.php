@@ -62,7 +62,7 @@ while ( have_posts() ) : the_post();
 	// Informations
 	$tour_duration = ! empty( $meta['duration'] ) ? $meta['duration'] : '';
 	$duration_time = ! empty( $meta['duration_time'] ) ? $meta['duration_time'] : '';
-	$night         = ! empty( $meta['night'] ) ? $meta['night'] : 'false';
+	$night         = ! empty( $meta['night'] ) ? $meta['night'] : false;
 	$night_count   = ! empty( $meta['night_count'] ) ? $meta['night_count'] : '';
 	$group_size    = ! empty( $meta['group_size'] ) ? $meta['group_size'] : '';
 	$language      = ! empty( $meta['language'] ) ? $meta['language'] : '';
@@ -70,7 +70,7 @@ while ( have_posts() ) : the_post();
 	$phone         = ! empty( $meta['phone'] ) ? $meta['phone'] : '';
 	$fax           = ! empty( $meta['fax'] ) ? $meta['fax'] : '';
 	$website       = ! empty( $meta['website'] ) ? $meta['website'] : '';
-	$itinerary_map = ! empty( tfopt('itinerary_map')) ? tfopt('itinerary_map') : 0;
+	$itinerary_map = ! empty( tfopt('itinerary_map') ) && function_exists('is_tf_pro') && is_tf_pro() ? tfopt('itinerary_map') : 0;
 	$map_settings = ! empty( tfopt('google-page-option')) ? tfopt('google-page-option') : 0;
 
 	/**

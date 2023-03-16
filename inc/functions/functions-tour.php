@@ -1062,6 +1062,7 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
     $disable_child_price  = !empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
     $disable_infant_price = !empty( $meta['disable_infant_price'] ) ? $meta['disable_infant_price'] : false;
     $pricing_rule         = !empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+    $custom_pricing_by_rule = !empty( $meta['custom_pricing_by'] ) ? $meta['custom_pricing_by'] : '';
     $group_price          = !empty( $meta['group_price'] ) ? $meta['group_price'] : false;
     $adult_price          = !empty( $meta['adult_price'] ) ? $meta['adult_price'] : false;
     $child_price          = !empty( $meta['child_price'] ) ? $meta['child_price'] : false;
@@ -1087,8 +1088,7 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
     $url = add_query_arg( array(
             'adults' => $adults,
             'children' => $child,
-            'infant' => $infant,
-            'check-in-out-date' => $check_in_out
+            'infant' => $infant
     ), $url );
 
     ?>
@@ -1152,8 +1152,21 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
                                         }
                                     }
                                     if ( ! in_array( 0, $show_tour ) ) {
-                                        if(! empty( $repval['group_price'] )){
-                                            $tour_price[] = $repval['group_price'];
+                                        if( $custom_pricing_by_rule  && $custom_pricing_by_rule == 'group' ){
+                                            if(! empty( $repval['group_price'] )){
+                                                $tour_price[] = $repval['group_price'];
+                                            }
+                                        }
+                                        if( $custom_pricing_by_rule  && $custom_pricing_by_rule == 'person' ){
+                                            if(!empty($repval['adult_price']) && !$disable_adult_price){
+                                                $tour_price[] = $repval['adult_price'];
+                                            }
+                                            if(!empty($repval['child_price']) && !$disable_child_price){
+                                                $tour_price[] = $repval['child_price'];
+                                            }
+                                            if(!empty($repval['infant_price']) && !$disable_infant_price){
+                                                $tour_price[] = $repval['infant_price'];
+                                            }
                                         }
                                     }
                                 }
@@ -1181,14 +1194,21 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
                                         }
                                     }
                                     if ( ! in_array( 0, $show_tour ) ) {
-                                        if(!empty($repval['adult_price']) && !$disable_adult_price){
-                                            $tour_price[] = $repval['adult_price'];
+                                        if( $custom_pricing_by_rule  && $custom_pricing_by_rule == 'group' ){
+                                            if(! empty( $repval['group_price'] )){
+                                                $tour_price[] = $repval['group_price'];
+                                            }
                                         }
-                                        if(!empty($repval['child_price']) && !$disable_child_price){
-                                            $tour_price[] = $repval['child_price'];
-                                        }
-                                        if(!empty($repval['infant_price']) && !$disable_infant_price){
-                                            $tour_price[] = $repval['infant_price'];
+                                        if( $custom_pricing_by_rule  && $custom_pricing_by_rule == 'person' ){
+                                            if(!empty($repval['adult_price']) && !$disable_adult_price){
+                                                $tour_price[] = $repval['adult_price'];
+                                            }
+                                            if(!empty($repval['child_price']) && !$disable_child_price){
+                                                $tour_price[] = $repval['child_price'];
+                                            }
+                                            if(!empty($repval['infant_price']) && !$disable_infant_price){
+                                                $tour_price[] = $repval['infant_price'];
+                                            }
                                         }
                                     }
                                 }
