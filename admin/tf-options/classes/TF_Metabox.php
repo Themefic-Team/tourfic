@@ -208,7 +208,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			} else {
 				delete_post_meta( $post_id, $this->metabox_id );
 			}
-
+			
 		}
 
 	}

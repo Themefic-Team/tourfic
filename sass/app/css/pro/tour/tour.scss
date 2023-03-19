@@ -1,0 +1,8 @@
+#tf-map{
+    height: 600px;
+}
+@media only screen and (max-width: 480px){
+    #tf-map{
+        height: 320px;
+    }
+}

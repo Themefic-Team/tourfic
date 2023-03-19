@@ -54,23 +54,16 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
             $get_terms = get_terms( $taxonomy );
 
             $destination_name = !empty( $_GET['destination'] ) ? $_GET['destination'] : '';
-
+            $search_features_query = !empty($_GET['features']) ? $_GET['features'] : array();
             echo "<div class='tf-filter'><ul>";
             foreach ( $get_terms as $key => $term ) {
-                $feature_meta = get_term_meta( $term->term_taxonomy_id, 'tf_hotel_feature', true );
-                if ( !empty( $feature_meta['icon-type'] ) && $feature_meta['icon-type'] == 'fa' ) {
-                    $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
-                } elseif ( !empty( $feature_meta['icon-type'] ) && $feature_meta['icon-type'] == 'c' ) {
-                    $feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
-                } else {
-                    $feature_icon = '';
-                }
                 $id = $term->term_id;
                 $name = $term->name;
+                $fslug = $term->slug;
                 $default_count = $term->count;
                 $count = $show_count ? '<span>' . tf_term_count( $term->slug, $destination_name, $default_count ) . '</span>' : '';
-
-                echo "<li class='filter-item'><label><input type='checkbox' name='tf_filters[]' value='{$id}'/><span class='checkmark'></span> {$feature_icon} {$name}</label> {$count}</li>";
+                $defult_select =  in_array($fslug, $search_features_query) ? 'checked' : '';
+                echo "<li class='filter-item'><label><input type='checkbox' name='tf_filters[]' value='{$id}' {$defult_select}/><span class='checkmark'></span> {$name}</label> {$count}</li>";
             }
             echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a></div>";
 
@@ -211,20 +204,12 @@ class TF_Tour_Feature_Filter extends WP_Widget {
 
             echo "<div class='tf-filter'><ul>";
             foreach ( $get_terms as $key => $term ) {
-                $feature_meta = get_term_meta( $term->term_taxonomy_id, 'tour_features', true );
-                if ( !empty( $feature_meta['icon-type'] ) && $feature_meta['icon-type'] == 'fa' ) {
-                    $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
-                } elseif ( !empty( $feature_meta['icon-type'] ) && $feature_meta['icon-type'] == 'c' ) {
-                    $feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
-                } else {
-                    $feature_icon = '';
-                }
                 $id = $term->term_id;
                 $name = $term->name;
                 $default_count = $term->count;
                 $count = $show_count ? '<span>(' . $default_count . ')</span>' : '';
 
-                echo "<li class='filter-item'><label><input type='checkbox' name='tour_features[]' value='{$id}'/><span class='checkmark'></span> {$feature_icon} {$name}</label> {$count}</li>";
+                echo "<li class='filter-item'><label><input type='checkbox' name='tour_features[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>";
             }
             echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a></div>";
 
@@ -365,20 +350,12 @@ class TF_Tour_Attraction_Filter extends WP_Widget {
             echo "<div class='tf-filter'><ul>";
 
             foreach ( $get_terms as $key => $term ) {
-                $attraction_meta = get_term_meta( $term->term_taxonomy_id, 'tour_attraction', true );
-                if ( !empty( $attraction_meta['icon-type'] ) && $attraction_meta['icon-type'] == 'fa' ) {
-                    $attraction_icon = '<i class="' . $attraction_meta['icon-fa'] . '"></i>';
-                } elseif ( !empty( $attraction_meta['icon-type'] ) && $attraction_meta['icon-type'] == 'c' ) {
-                    $attraction_icon = '<img src="' . $attraction_meta['icon-c'] . '" style="width: ' . $attraction_meta['dimention'] . 'px; height: ' . $attraction_meta['dimention'] . 'px;" />';
-                } else {
-                    $attraction_icon = '';
-                }
                 $id = $term->term_id;
                 $name = $term->name;
                 $default_count = $term->count;
                 $count = $show_count ? '<span>(' . $default_count . ')</span>' : '';
 
-                echo "<li class='filter-item'><label><input type='checkbox' name='tf_attractions[]' value='{$id}'/><span class='checkmark'></span>  {$attraction_icon} {$name}</label> {$count}</li>";
+                echo "<li class='filter-item'><label><input type='checkbox' name='tf_attractions[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>";
             }
             echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a></div>";
 
@@ -515,20 +492,12 @@ class TF_Tour_Activities_Filter extends WP_Widget {
             echo "<div class='tf-filter'><ul>";
 
             foreach ( $get_terms as $key => $term ) {
-                $activities_meta = get_term_meta( $term->term_taxonomy_id, 'tour_activities', true );
-                if ( !empty( $activities_meta['icon-type'] ) && $activities_meta['icon-type'] == 'fa' ) {
-                    $activities_icon = '<i class="' . $activities_meta['icon-fa'] . '"></i>';
-                } elseif ( !empty( $activities_meta['icon-type'] ) && $activities_meta['icon-type'] == 'c' ) {
-                    $activities_icon = '<img src="' . $activities_meta['icon-c'] . '" style="width: ' . $activities_meta['dimention'] . 'px; height: ' . $activities_meta['dimention'] . 'px;" />';
-                } else {
-                    $activities_icon = '';
-                }
                 $id = $term->term_id;
                 $name = $term->name;
                 $default_count = $term->count;
                 $count = $show_count ? '<span>(' . $default_count . ')</span>' : '';
 
-                echo "<li class='filter-item'><label><input type='checkbox' name='tf_activities[]' value='{$id}'/><span class='checkmark'></span>  {$activities_icon} {$name}</label> {$count}</li>";
+                echo "<li class='filter-item'><label><input type='checkbox' name='tf_activities[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>";
             }
             echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a></div>";
 
