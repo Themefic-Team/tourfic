@@ -146,7 +146,7 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		// Tour Options
-		'tour'               => array(
+		'tour'	 => array(
 			'title'  => __( 'Tour Options', 'tourfic' ),
 			'icon'   => 'fas fa-umbrella-beach',
 			'fields' => array(),
@@ -562,6 +562,96 @@ TF_Settings::option( 'tf_settings', array(
 				),
 
 			),
+		),
+
+		//email settings
+		'emails'	 => array(
+			'title'  => __( 'Emails', 'tourfic' ),
+			'icon'   => 'fa fa-envelope',
+			'fields' => array(),
+		),
+		'tours_email'    => array(
+			'title'  => esc_html__( 'Tour Email', 'tourfic' ),
+			'icon'   => 'fa fa-cog',
+			'parent'   => 'emails',
+			'fields' => array(
+				array(
+					'id'   => 'email_settings',
+					'type' => 'tab',
+					'tabs' => array(
+						array(
+							'id'     => 'general_setting',
+							'title'  => 'General Options',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'    => 'email_heading',
+									'type'  => 'heading',
+									'label' => __( 'Email Settings', 'tourfic' ),
+								),
+								array(
+									'id'      => 'email_from',
+									'type'    => 'text',
+									'label'   => __( 'Email From', 'tourfic' ),
+									'default' => get_bloginfo( 'name' ),
+								),
+								array(
+									'id'      => 'email_from_email',
+									'type'    => 'text',
+									'label'   => __( 'Email From Email', 'tourfic' ),
+									'default' => get_bloginfo( 'admin_email' ),
+								),
+								array(
+									'id'      => 'email_reply_to',
+									'type'    => 'text',
+									'label'   => __( 'Email Reply To', 'tourfic' ),
+									'default' => get_bloginfo( 'admin_email' ),
+								),
+								array(
+									'id'      => 'email_reply_to_name',
+									'type'    => 'text',
+									'label'   => __( 'Email Reply To Name', 'tourfic' ),
+									'default' => get_bloginfo( 'name' ),
+								),
+								array(
+									'id'      => 'email_content_type',
+									'type'    => 'select',
+									'label'   => __( 'Email Content Type', 'tourfic' ),
+									'options' => array(
+										'text/html'  => __( 'HTML', 'tourfic' ),
+										'text/plain' => __( 'Plain Text', 'tourfic' ),
+									),
+								)
+							)
+						),
+						//customer email tab
+						array(
+							'id'     => 'customer_email',
+							'title'  => 'Customer Email',
+							'icon'   => 'fa fa-envelope',
+							'fields' => array(
+								array(
+									'id'    => 'customer_email_heading',
+									'type'  => 'heading',
+									'label' => __( 'Customer Email Settings', 'tourfic' ),
+								),
+								array(
+									'id'      => 'customer_email_subject',
+									'type'    => 'text',
+									'label'   => __( 'Customer Email Subject', 'tourfic' ),
+									'default' => __( 'Booking Confirmation', 'tourfic' ),
+								),
+								array(
+									'id'      => 'customer_email_body',
+									'type'    => 'textarea',
+									'label'   => __( 'Customer Email Body', 'tourfic' ),
+									'default' => __( 'Dear {customer_name},<br><br>Thank you for booking with us. Your booking details are as follows:<br><br>Booking ID: {booking_id}<br>Booking Date: {booking_date}<br>Booking Status: {booking_status}<br>Booking Total: {booking_total}<br><br>Thank you.', 'tourfic' ),
+								),
+							)
+						),
+					)	
+				)
+			)
 		),
 
 		// Multi Vendor
