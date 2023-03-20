@@ -576,18 +576,43 @@ TF_Settings::option( 'tf_settings', array(
 			'parent'   => 'emails',
 			'fields' => array(
 				array(
-					'id'   => 'email_settings',
+					'id'   => 'email-settings',
 					'type' => 'tab',
 					'tabs' => array(
 						array(
-							'id'     => 'general_setting',
-							'title'  => 'General Options',
+							'id'     => 'admin_email',
+							'title'  => __( 'Admin Email', 'tourfic' ),
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
 								array(
-									'id'    => 'email_heading',
-									'type'  => 'heading',
-									'label' => __( 'Email Settings', 'tourfic' ),
+									'id'      => 'send_notification',
+									'type'    => 'select',
+									'label'   => __( 'Send Notification', 'tourfic' ),
+									'options' => array(
+										'admin'        => __( 'Admin', 'tourfic' ),
+										'admin_vendor' => __( 'Admin + Vendor', 'tourfic' ),
+										'turn_off'     => __( 'Turn Off', 'tourfic' ),
+									),
+									'default' => 'admin',
+								),
+								array(
+									'id'      => 'sale_notification_email',
+									'type'    => 'text',
+									'label'   => __( 'Sale Notification Email', 'tourfic' ),
+									'default' => get_bloginfo( 'admin_email' ),
+								),
+								//enable disable admin email
+								array(
+									'id'      => 'admin_email_disable',
+									'type'    => 'switch',
+									'label'   => __( 'Disable Admin Email', 'tourfic' ),
+									'default' => 'false',
+								),
+								array(
+									'id'      => 'admin_email_subject',
+									'type'    => 'text',
+									'label'   => __( 'Admin Email Subject', 'tourfic' ),
+									'default' => __( 'New Tour Booking', 'tourfic' ),
 								),
 								array(
 									'id'      => 'email_from',
@@ -601,40 +626,31 @@ TF_Settings::option( 'tf_settings', array(
 									'label'   => __( 'Email From Email', 'tourfic' ),
 									'default' => get_bloginfo( 'admin_email' ),
 								),
+								//email body
 								array(
-									'id'      => 'email_reply_to',
-									'type'    => 'text',
-									'label'   => __( 'Email Reply To', 'tourfic' ),
-									'default' => get_bloginfo( 'admin_email' ),
-								),
-								array(
-									'id'      => 'email_reply_to_name',
-									'type'    => 'text',
-									'label'   => __( 'Email Reply To Name', 'tourfic' ),
-									'default' => get_bloginfo( 'name' ),
+									'id'      => 'email_body',
+									'type'    => 'editor',
+									'label'   => __( 'Email Body', 'tourfic' ),
+									'default' => __( 'You have received a new booking. The booking details are as follows:', 'tourfic' ),
 								),
 								array(
 									'id'      => 'email_content_type',
 									'type'    => 'select',
 									'label'   => __( 'Email Content Type', 'tourfic' ),
 									'options' => array(
-										'text/html'  => __( 'HTML', 'tourfic' ),
-										'text/plain' => __( 'Plain Text', 'tourfic' ),
+										'html'  => __( 'HTML', 'tourfic' ),
+										'plain' => __( 'Plain Text', 'tourfic' ),
 									),
-								)
-							)
+								),
+							),
 						),
+						
 						//customer email tab
 						array(
-							'id'     => 'customer_email',
-							'title'  => 'Customer Email',
+							'id'     => 'customer-email',
+							'title'  => __( 'Customer Email', 'tourfic' ),
 							'icon'   => 'fa fa-envelope',
 							'fields' => array(
-								array(
-									'id'    => 'customer_email_heading',
-									'type'  => 'heading',
-									'label' => __( 'Customer Email Settings', 'tourfic' ),
-								),
 								array(
 									'id'      => 'customer_email_subject',
 									'type'    => 'text',
@@ -647,11 +663,11 @@ TF_Settings::option( 'tf_settings', array(
 									'label'   => __( 'Customer Email Body', 'tourfic' ),
 									'default' => __( 'Dear {customer_name},<br><br>Thank you for booking with us. Your booking details are as follows:<br><br>Booking ID: {booking_id}<br>Booking Date: {booking_date}<br>Booking Status: {booking_status}<br>Booking Total: {booking_total}<br><br>Thank you.', 'tourfic' ),
 								),
-							)
+							),
 						),
-					)	
-				)
-			)
+					),	
+				),
+			),
 		),
 
 		// Multi Vendor
