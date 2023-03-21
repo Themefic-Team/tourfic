@@ -584,6 +584,12 @@ TF_Settings::option( 'tf_settings', array(
 							'title'  => __( 'Admin Email', 'tourfic' ),
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
+								//file upload
+								array(
+									'id'      => 'brand_logo',
+									'type'    => 'image',
+									'label'   => __( 'Admin Email Logo', 'tourfic' ),
+								),
 								array(
 									'id'      => 'send_notification',
 									'type'    => 'select',
@@ -615,9 +621,9 @@ TF_Settings::option( 'tf_settings', array(
 									'default' => __( 'New Tour Booking', 'tourfic' ),
 								),
 								array(
-									'id'      => 'email_from',
+									'id'      => 'email_from_name',
 									'type'    => 'text',
-									'label'   => __( 'Email From', 'tourfic' ),
+									'label'   => __( 'Email From Name', 'tourfic' ),
 									'default' => get_bloginfo( 'name' ),
 								),
 								array(
@@ -643,6 +649,7 @@ TF_Settings::option( 'tf_settings', array(
 									),
 								),
 							),
+							
 						),
 						
 						//customer email tab
@@ -666,6 +673,15 @@ TF_Settings::option( 'tf_settings', array(
 							),
 						),
 					),	
+				),
+				//notice field
+				array(
+					'id'      => 'notice',
+					'type'    => 'notice',
+					'class'   => 'info',
+					'title'   => __( 'Email Shortcodes', 'tourfic' ),
+					'content' => __( 'You can use the following placeholders in the email body:', 'tourfic' ) . '<br><br><strong>{booking_id} </strong> : To display the booking ID.<br>
+					 {customer_name}<br>{customer_email}<br>{customer_phone}<br>{customer_address}<br>{customer_city}<br>{customer_state}<br>{customer_country}<br>{customer_zip}<br>{customer_note}<br>{tour_name}<br>{tour_date}<br>{tour_time}<br>{tour_price}<br>{tour_quantity}<br>{tour_total_price}<br>{tour_payment_method}<br>{tour_payment_status}<br>{tour_payment_id}<br>{tour_payment_date}<br>{tour_payment_amount}<br>{tour_payment_currency}<br>{tour_payment_transaction_id}<br>{tour_payment_transaction_status}<br>{tour_payment_transaction_type}<br>{tour_payment_transaction_mode}<br>{tour_payment_transaction_time}<br>{tour_payment_transaction_response}',
 				),
 			),
 		),

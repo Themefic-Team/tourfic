@@ -61,6 +61,10 @@ if ( ! class_exists( 'TF_text' ) ) {
 			<?php
 
 		}
+		public function sanitize() {
+			// return wp_kses_post($this->value);
+			return $this->value;
+		}
 
 	}
 }
