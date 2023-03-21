@@ -1825,13 +1825,16 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	/**
 	 * Adult Number Validation
 	 */
+
 	$back_adults   = array_column( $meta, 'adult' );
 	$adult_counter = 0;
 	foreach ( $back_adults as $back_adult ) {
-		if ( $back_adult >= $adults ) {
+		if ( !empty($back_adult) && $back_adult >= $adults ) {
 			$adult_counter ++;
 		}
 	}
+
+	$adult_result = array_filter($back_adults);
 
 	/**
 	 * Child Number Validation
@@ -1839,10 +1842,12 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	$back_childs   = array_column( $meta, 'child' );
 	$child_counter = 0;
 	foreach ( $back_childs as $back_child ) {
-		if ( $back_child >= $child ) {
+		if ( !empty($back_child) && $back_child >= $child ) {
 			$child_counter ++;
 		}
 	}
+	
+	$childs_result = array_filter($back_childs);
 
 	/**
 	 * Room Number Validation
@@ -1850,13 +1855,95 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 	$back_rooms   = array_column( $meta, 'num-room' );
 	$room_counter = 0;
 	foreach ( $back_rooms as $back_room ) {
-		if ( $back_room >= $room ) {
+		if ( !empty($back_room) && $back_room >= $room ) {
 			$room_counter ++;
 		}
 	}
 
+	$room_result = array_filter($back_rooms);
+
 	// If adult and child number validation is true proceed
-	if ( $adult_counter > 0 && $child_counter > 0 && $room_counter > 0 ) {
+	if ( !empty($adult_result) && $adult_counter > 0 && !empty($childs_result) && $child_counter > 0 && !empty($room_result) && $room_counter > 0 ) {
+
+		// Check custom date range status of room
+		$avil_by_date = array_column( $meta, 'avil_by_date' );
+
+		// Check if any room available without custom date range
+		if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) ) {
+
+			$has_hotel = true; // Show that hotel
+
+		} else {
+			// If all the room has custom date range then filter the rooms by date
+
+			// Get custom date range repeater
+			$dates = array_column( $meta, 'repeat_by_date' );
+
+			// If no date range return
+			if ( empty( $dates ) ) {
+				return;
+			}
+
+			// Initial available dates array
+			$availability_dates = [];
+
+			// Run loop through custom date range repeater and filter out only the dates
+			foreach ( $dates as $date ) {
+				$availability_dates[] = array_column( $date, 'availability' );
+			}
+
+			// Run loop through custom dates & set custom dates on a single array
+			foreach ( tf_array_flatten( $availability_dates, 1 ) as $dates ) {
+
+				//Initial matching date array
+				$show_hotel = [];
+
+				// Check if any date range match with search form date range and set them on array
+				if ( ! empty( $period ) ) {
+					foreach ( $period as $date ) {
+						$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
+
+					}
+				}
+
+				// If any date range matches show hotel
+				if ( ! in_array( 0, $show_hotel ) ) {
+					if(!empty($filters_rooms) && !empty($startprice) && !empty($endprice)){
+						foreach($filters_rooms as $room){
+							if(!empty($room['repeat_by_date'])){
+								foreach($room['repeat_by_date'] as $repat_date){
+									if(!empty($repat_date['adult_price'])){
+										if($startprice<=$repat_date['adult_price'] && $repat_date['adult_price']<=$endprice){
+											$has_hotel = true;
+										}
+									}
+									if(!empty($repat_date['child_price'])){
+										if($startprice<=$repat_date['child_price'] && $repat_date['child_price']<=$endprice){
+											$has_hotel = true;
+										}
+									}
+									if(!empty($repat_date['price'])){
+										if($startprice<=$repat_date['price'] && $repat_date['price']<=$endprice){
+											$has_hotel = true;
+										}
+									}
+								}
+							}
+						}
+					}else{
+						$has_hotel = true;
+					}
+					break;
+				}
+
+			}
+
+		}
+
+	}
+
+	// If adult and child number validation is true proceed
+	if ( !empty($adult_result) && $adult_counter > 0 && empty($childs_result) && $child_counter == 0 && !empty($room_result) && $room_counter > 0 ) {
 
 		// Check custom date range status of room
 		$avil_by_date = array_column( $meta, 'avil_by_date' );
@@ -2005,10 +2092,12 @@ function tf_filter_hotel_without_date( $period, array &$not_found, array $data =
 	$back_adults   = array_column( $meta, 'adult' );
 	$adult_counter = 0;
 	foreach ( $back_adults as $back_adult ) {
-		if ( $back_adult >= $adults ) {
+		if ( !empty($back_adult) && $back_adult >= $adults ) {
 			$adult_counter ++;
 		}
 	}
+
+	$adult_result = array_filter($back_adults);
 
 	/**
 	 * Child Number Validation
@@ -2016,10 +2105,12 @@ function tf_filter_hotel_without_date( $period, array &$not_found, array $data =
 	$back_childs   = array_column( $meta, 'child' );
 	$child_counter = 0;
 	foreach ( $back_childs as $back_child ) {
-		if ( $back_child >= $child ) {
+		if ( !empty($back_child) && $back_child >= $child ) {
 			$child_counter ++;
 		}
 	}
+	
+	$childs_result = array_filter($back_childs);
 
 	/**
 	 * Room Number Validation
@@ -2027,13 +2118,15 @@ function tf_filter_hotel_without_date( $period, array &$not_found, array $data =
 	$back_rooms   = array_column( $meta, 'num-room' );
 	$room_counter = 0;
 	foreach ( $back_rooms as $back_room ) {
-		if ( $back_room >= $room ) {
+		if ( !empty($back_room) && $back_room >= $room ) {
 			$room_counter ++;
 		}
 	}
 
+	$room_result = array_filter($back_rooms);
+
 	// If adult and child number validation is true proceed
-	if ( $adult_counter > 0 && $child_counter > 0 && $room_counter > 0 ) {
+	if ( !empty($adult_result) && $adult_counter > 0 && !empty($childs_result) && $child_counter > 0 && !empty($room_result) && $room_counter > 0 ) {
 
 		if(!empty($filters_rooms) && !empty($startprice) && !empty($endprice)){
 			foreach($filters_rooms as $room){
@@ -2057,6 +2150,29 @@ function tf_filter_hotel_without_date( $period, array &$not_found, array $data =
 			$has_hotel = true; // Show that hotel
 		}
 
+	}
+	if ( !empty($adult_result) && $adult_counter > 0 && empty($childs_result) && !empty($room_result) && $room_counter > 0 ) {
+		if(!empty($filters_rooms) && !empty($startprice) && !empty($endprice)){
+			foreach($filters_rooms as $room){
+				if(!empty($room['adult_price'])){
+					if($startprice<=$room['adult_price'] && $room['adult_price']<=$endprice){
+						$has_hotel = true;
+					}
+				}
+				if(!empty($room['child_price'])){
+					if($startprice<=$room['child_price'] && $room['child_price']<=$endprice){
+						$has_hotel = true;
+					}
+				}
+				if(!empty($room['price'])){
+					if($startprice<=$room['price'] && $room['price']<=$endprice){
+						$has_hotel = true;
+					}
+				}
+			}
+		}else{
+			$has_hotel = true; // Show that hotel
+		}
 	}
 
 	// Conditional hotel showing

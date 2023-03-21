@@ -1,0 +1,129 @@
+@import '../base/variable';
+@import '../base/responsive';
+
+
+
+// Search Heading
+.tf-archive-head{
+    .tf-search-result{
+        color: $color-black;
+    }
+    .tf-icon{
+        background-color: #fff;
+        border-radius: 5px;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+    i{
+        color: $color-theme;
+    }
+    .active{
+        background-color: $color-theme;
+        i{
+            color: #fff;
+        }
+    }
+}
+
+.tf-search-results {
+
+    .tf-single-items{
+        flex-direction: column;
+        gap: $tf-space-24;
+    }
+    
+    .tf-layout-list{
+        .tf-single-item {
+            flex-basis: 100%;
+        }
+    }
+    .tf-layout-grid{
+        flex-direction: row;
+        flex-wrap: wrap;
+        .tf-single-item {
+            flex-basis: calc(100%/2 - 12px)
+        }
+        .tf-single-item{
+            flex-wrap: wrap;
+            .tf-item-featured{
+                flex-basis: 100%;
+            }
+            .tf-item-details{
+                flex-basis: 100%;
+            }
+            .tf-item-featured{
+                height: 240px;
+            }
+        }
+    }
+
+    .tf-single-item {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: $box-shadow-primary;
+        .tf-item-featured {
+            flex-basis: 41%;
+            position: relative;
+            img{
+                width: 100%;
+                object-fit: cover;
+                height: 100%;
+            }
+            .tf-discount {
+                position: absolute;
+                top: 20px;
+                background: #fff;
+                padding: 6px 12px;
+                border-radius: 50px;
+                left: 20px;
+                font-size: 12px;
+                font-weight: $font-weight-medium;
+                color: $color-black;
+                line-height: 1;
+            }
+            @media #{$max991}{
+                flex-basis: 100%;
+            }
+        }
+        .tf-item-details {
+            flex-basis: 59%;
+            padding: $tf-space-30;
+            i{
+                color: $color-theme;
+            }
+            
+            .tf-title{
+                h2{
+                    font-size: 22px;
+                    line-height: 1.3;
+                }
+            }
+            .tf-details{
+                p{
+                    line-height: 1.5;
+                }
+            }
+            .tf-post-footer{
+                .tf-pricing{
+                    font-size: $font-size-xs;
+                    font-weight: $font-weight-normal;
+                    span{
+                        font-size: 20px;
+                        color: $color-theme;
+                        font-weight: $font-weight-medium;
+                    }
+                }
+                .bttn-secondary{
+                    font-size: $font-size-small;
+                    color: $color-theme;
+                }
+            }
+
+            @media #{$max991}{
+                flex-basis: 100%;
+            }
+        }
+    }
+
+}
