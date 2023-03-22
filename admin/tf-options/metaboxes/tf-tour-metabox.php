@@ -94,7 +94,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'          => 'duration',
 					'type'        => 'text',
 					'label'       => __( 'Tour Duration', 'tourfic' ),
-					'subtitle'    => __( 'E.g. 3 days', 'tourfic' ),
+					'subtitle'    => __( 'E.g. 3', 'tourfic' ),
 					'field_width' => '50',
 				),				
 				array(

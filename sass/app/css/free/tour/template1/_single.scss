@@ -182,7 +182,7 @@
     border-radius: $tf-brds-default;
 
     // trip info -
-    .active {
+    .person-info.active {
         background: #F3F7FA;
     }
     ul {
@@ -194,7 +194,7 @@
         font-family: $font-primary;
         color: $color-primary;
         margin-top: $tf-space-8;
-        
+        align-items: center;
         i{
             margin-right: 10px;
             width: 10px;
@@ -212,7 +212,7 @@
         gap: 8px;
         width: 50px;
         height: 60px;
-        
+        margin-top: 0px;
         &:hover{
             cursor: pointer;
         }
@@ -223,6 +223,7 @@
         }
         i {
             color: $color-theme;
+            margin-right: 0px;
         }
     }
     //pricing
@@ -231,6 +232,7 @@
         text-align: right;
         color: $color-primary;
         font-size: $font-size-small;
+        display: none;
         @media #{$tfmax991}{
             text-align: left;
         }
@@ -244,6 +246,9 @@
                 font-size: 22px;
             }
         }
+    }
+    .tf-trip-pricing.active{
+        display: flex;
     }
 }
 
@@ -350,7 +355,7 @@
         }
 
         .tf-itinerary-content-box{
-           
+           display: none;
             @media #{$tfmax767}{
                 margin-left: -30px;
             }
@@ -389,6 +394,13 @@
             }
             .accordion-checke::after {
                 background: $color-theme;
+                width: 8px;
+                height: 8px;
+                border-radius: 50px;
+                position: absolute;
+                top: calc(50% + -6px);
+                left: -34px;
+                content: "";
             }
         }
         
@@ -408,32 +420,33 @@
             top: calc(50% - 12px);
             content: "";
         }
-        .accordion-checke::after {
-            width: 8px;
-            height: 8px;
-            background: $color-black;
-            border-radius: 50px;
-            position: absolute;
-            top: calc(50% + -6px);
-            left: -34px;
-            content: "";
-        }
         li{
             color: $color-black-light;
+            align-items: center;
+            a{
+                color: $color-black-light;
+                text-decoration: none;
+            }
+        }
+    }
+    .tf-single-itinerary-item.active{
+        .tf-itinerary-content-box{
+            display: block !important;
         }
     }
 }
-
-.tf-itinerary-downloader{
-    background-color: $color-theme;
-    border-radius: $tf-brds-default;
-    h3,p{
-        color: #fff;
+.tf-itinerary-wrapper.tf-mrtop-70{
+    .tf-itinerary-downloader-option{
+        background-color: $color-theme;
+        border-radius: $tf-brds-default;
+        h3,p{
+            color: #fff;
+        }
+        a{
+            color: $color-theme;
+        }
+        
     }
-    a{
-        color: $color-theme;
-    }
-    
 }
 
 // FAQ
@@ -459,7 +472,9 @@
                       } 
                     }
                 }
-                
+                .tf-faq-content{
+                    display: block;
+                }
             }
         }
         .tf-faq-single-inner{

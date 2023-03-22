@@ -1,154 +1,44 @@
-
 <!-- Tour itenarary -->
+<?php
+if ( function_exists('is_tf_pro') && is_tf_pro() ) {
+    do_action( 'after_itinerary_builder', $itineraries, $itinerary_map );
+} else {
+?>
+<!-- Travel Itinerary section Start -->
+<?php if ( $itineraries ) { ?>
 <div class="tf-itinerary-wrapper tf-mrtop-70">
     <div class="section-title">
-        <h2 class="tf-title">Travel Itinerary</h2>
+        <h2 class="tf-title"><?php _e("Travel Itinerary","tourfic"); ?></h2>
     </div>
     <div class="tf-itinerary-box tf-box tf-mrtop-30">
         <div class="tf-itinerary-items">
-            <div class="tf-single-itinerary-item active">
+            <?php 
+            $itineray_key = 1;
+            foreach ( $itineraries as $itinerary ) {
+            ?>
+            <div class="tf-single-itinerary-item <?php echo $itineray_key==1 ? esc_attr( 'active' ) : ''; ?>">
                 <div class="tf-itinerary-title">
                     <h3>
                         <span class="accordion-checke"></span>
-                        <span class="itinerary-day">Day 1 - </span> Arrive
-                        in Zurich, Switzerland
+                        <span class="itinerary-day"><?php echo esc_html( $itinerary['time'] ) ?> - </span> <?php echo esc_html( $itinerary['title'] ); ?>
                     </h3>
                 </div>
                 <div class="tf-itinerary-content-box">
                     <div class="tf-itinerary-content tf-mrtop-16 tf-flex-gap-16 tf-flex">
-                        <div class="tf-itinerary-content-img">
-                            <img src="/assets/img/itinerary.png" alt="" />
-                        </div>
-                        <div class="tf-itinerary-content-details">
-                            <p> Mollis et id phasellus aliquet metus massa vitae natoque
-                                euismod, ridiculus dapibus facilisis nascetur tincidunt accumsan
-                                blandit bibendum, magnis ad commodo mattis congue sollicitudin
-                                senectus tristique. Natoque conubia tristique sapien praesent
-                                sed augue a commodo sagittis porta.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="tf-itinerary-meta-data tf-flex tf-flex-gap-16 tf-mrtop-24">
-                        <div class="tf-itinerary-single-meta">
-                            <li class="tf-flex tf-flex-gap-8">
-                                <i class="fa-regular fa-clock"></i> 
-                                4 days
-                            </li>
-                        </div>
-                        <div class="tf-itinerary-single-meta">
-                            <li class="tf-flex tf-flex-gap-8">
-                                <i class="fa-solid fa-people-group"></i>
-                                Barbecue Party
-                            </li>
-                        </div>
-                        <div class="tf-itinerary-single-meta">
-                            <li class="tf-flex tf-flex-gap-8">
-                                <i class="fa-solid fa-person-walking-arrow-loop-left"></i>
-                                Full refund before 25 days
-                            </li>
+                        <?php if ( $itinerary['image'] ) { ?>
+                            <div class="tf-itinerary-content-img">
+                                <img src="<?php echo esc_url( $itinerary['image'] ); ?>" alt="<?php _e("Itinerary Image","tourfic"); ?>" />
+                            </div>
+                        <?php } ?>
+                        <div class="<?php echo !empty($itinerary['image']) ? esc_attr('tf-itinerary-content-details') : ''; ?>">
+                        <p><?php _e( $itinerary['desc'] ); ?></p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="tf-single-itinerary-item">
-                <div class="tf-itinerary-title">
-                    <h3>
-                        <span class="accordion-checke"></span>
-                        <span class="itinerary-day">Day 1 - </span> Arrive
-                        in Zurich, Switzerland
-                    </h3>
-                </div>
-                <div class="tf-itinerary-content-box">
-                    <div class="tf-itinerary-content tf-mrtop-16 tf-flex-gap-16 tf-flex">
-                        <div class="tf-itinerary-content-img">
-                            <img src="/assets/img/itinerary.png" alt="" />
-                        </div>
-                        <div class="tf-itinerary-content-details">
-                            <p> Mollis et id phasellus aliquet metus massa vitae natoque
-                                euismod, ridiculus dapibus facilisis nascetur tincidunt accumsan
-                                blandit bibendum, magnis ad commodo mattis congue sollicitudin
-                                senectus tristique. Natoque conubia tristique sapien praesent
-                                sed augue a commodo sagittis porta.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="tf-itinerary-meta-data tf-flex tf-flex-gap-16 tf-mrtop-24">
-                        <div class="tf-itinerary-single-meta">
-                            <li class="tf-flex tf-flex-gap-8">
-                                <i class="fa-regular fa-clock"></i> 
-                                4 days
-                            </li>
-                        </div>
-                        <div class="tf-itinerary-single-meta">
-                            <li class="tf-flex tf-flex-gap-8">
-                                <i class="fa-solid fa-people-group"></i>
-                                Barbecue Party
-                            </li>
-                        </div>
-                        <div class="tf-itinerary-single-meta">
-                            <li class="tf-flex tf-flex-gap-8">
-                                <i class="fa-solid fa-person-walking-arrow-loop-left"></i>
-                                Full refund before 25 days
-                            </li>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tf-single-itinerary-item">
-                <div class="tf-itinerary-title">
-                    <h3>
-                        <span class="accordion-checke"></span>
-                        <span class="itinerary-day">Day 1 - </span> Arrive
-                        in Zurich, Switzerland
-                    </h3>
-                </div>
-                <div class="tf-itinerary-content-box">
-                    <div class="tf-itinerary-content tf-mrtop-16 tf-flex-gap-16 tf-flex">
-                        <div class="tf-itinerary-content-img">
-                            <img src="/assets/img/itinerary.png" alt="" />
-                        </div>
-                        <div class="tf-itinerary-content-details">
-                            <p> Mollis et id phasellus aliquet metus massa vitae natoque
-                                euismod, ridiculus dapibus facilisis nascetur tincidunt accumsan
-                                blandit bibendum, magnis ad commodo mattis congue sollicitudin
-                                senectus tristique. Natoque conubia tristique sapien praesent
-                                sed augue a commodo sagittis porta.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="tf-itinerary-meta-data tf-flex tf-flex-gap-16 tf-mrtop-24">
-                        <div class="tf-itinerary-single-meta">
-                            <li class="tf-flex tf-flex-gap-8">
-                                <i class="fa-regular fa-clock"></i> 
-                                4 days
-                            </li>
-                        </div>
-                        <div class="tf-itinerary-single-meta">
-                            <li class="tf-flex tf-flex-gap-8">
-                                <i class="fa-solid fa-people-group"></i>
-                                Barbecue Party
-                            </li>
-                        </div>
-                        <div class="tf-itinerary-single-meta">
-                            <li class="tf-flex tf-flex-gap-8">
-                                <i class="fa-solid fa-person-walking-arrow-loop-left"></i>
-                                Full refund before 25 days
-                            </li>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="tf-itinerary-downloader tf-mrtop-30 tf-box">
-        <div class="tf-itinerary-downloader-inner tf-flex tf-flex-align-center tf-flex-gap-8 tf-flex-space-bttn">
-            <div class="itinerary-downloader-left">
-                <h3>Want to read it later?</h3>
-                <p>Download this tour's PDF brochure and start your planning offline.</p>
-            </div>
-            <div class="itinerary-downloader-right">
-                <a class="tf-bttn-normal" href="#">Download Now <i class="fa-solid fa-download"></i></a>
-            </div>
+            <?php $itineray_key++; } ?>
         </div>
     </div>
 </div>
+
+<?php }} ?>

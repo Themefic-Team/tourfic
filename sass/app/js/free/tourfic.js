@@ -400,6 +400,19 @@
         //first li click
         $('.tf-single-tour-pricing .tf-price-tab li:first-child').trigger('click');
 
+        /**
+         * Single Tour price change Template 1
+         *
+         * adult, child, infant
+         */
+        $(document).on('click', '.tf-trip-person-info ul li', function () {
+            var t = $(this).attr('data');
+
+            $(this).addClass('active').siblings().removeClass('active');
+            $('.tf-trip-pricing').removeClass('active');
+            $('.tf-' + t).addClass('active');
+        });
+
         //###############################
         //        Search                #
         //###############################
@@ -1623,7 +1636,10 @@
             $('.arrow', this).toggleClass('arrow-animate');
         });
 
-        // New Template FAQ Accordion
+        /*
+        * New Template FAQ Accordion
+        * @author: Jahid
+        */
         $('.tf-faq-collaps').click(function () {
             var $this = $(this);
             if (!$this.hasClass("active")) {
@@ -1633,6 +1649,22 @@
             }
             $this.toggleClass("active");
             $(this).closest('.tf-faq-single').toggleClass('active');
+            $this.next().slideToggle();
+        });
+
+        /*
+        * New Template Itinerary Accordion
+        * @author: Jahid
+        */
+        $('.tf-itinerary-title').click(function () {
+            var $this = $(this);
+            if (!$this.hasClass("active")) {
+                $(".tf-itinerary-content-box").slideUp(400);
+                $(".tf-itinerary-title").removeClass("active");
+                $('.tf-single-itinerary-item').removeClass('active');
+            }
+            $this.toggleClass("active");
+            $(this).closest('.tf-single-itinerary-item').toggleClass('active');
             $this.next().slideToggle();
         });
 

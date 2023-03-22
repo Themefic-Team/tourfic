@@ -4611,7 +4611,7 @@ div#tf-contact-info {
   background-color: #fff;
   border-radius: 5px;
 }
-.tf-trip-info .active {
+.tf-trip-info .person-info.active {
   background: #F3F7FA;
 }
 .tf-trip-info ul {
@@ -4623,6 +4623,7 @@ div#tf-contact-info {
   font-family: "Jost", sans-serif;
   color: #686E7A;
   margin-top: 8px;
+  align-items: center;
 }
 .tf-trip-info li i {
   margin-right: 10px;
@@ -4639,6 +4640,7 @@ div#tf-contact-info {
   gap: 8px;
   width: 50px;
   height: 60px;
+  margin-top: 0px;
 }
 .tf-trip-info .person-info:hover {
   cursor: pointer;
@@ -4650,12 +4652,14 @@ div#tf-contact-info {
 }
 .tf-trip-info .person-info i {
   color: #0E3DD8;
+  margin-right: 0px;
 }
 .tf-trip-info .tf-trip-pricing {
   flex-direction: column;
   text-align: right;
   color: #686E7A;
   font-size: 14px;
+  display: none;
 }
 @media only screen and (min-width: 767.99px) and (max-width: 991px) {
   .tf-trip-info .tf-trip-pricing {
@@ -4672,6 +4676,9 @@ div#tf-contact-info {
   .tf-trip-info .tf-trip-pricing .tf-price-amount {
     font-size: 22px;
   }
+}
+.tf-trip-info .tf-trip-pricing.active {
+  display: flex;
 }
 
 .tf-trip-description h2 {
@@ -4764,6 +4771,9 @@ div#tf-contact-info {
     padding-left: 30px;
   }
 }
+.tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box {
+  display: none;
+}
 @media only screen and (max-width: 767.98px) {
   .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box {
     margin-left: -30px;
@@ -4805,6 +4815,13 @@ div#tf-contact-info {
 }
 .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::after {
   background: #0E3DD8;
+  width: 8px;
+  height: 8px;
+  border-radius: 50px;
+  position: absolute;
+  top: calc(50% - 6px);
+  left: -34px;
+  content: "";
 }
 .tf-itinerary-wrapper .tf-single-itinerary-item .itinerary-day {
   color: #0E3DD8;
@@ -4822,28 +4839,26 @@ div#tf-contact-info {
   top: calc(50% - 12px);
   content: "";
 }
-.tf-itinerary-wrapper .tf-single-itinerary-item .accordion-checke::after {
-  width: 8px;
-  height: 8px;
-  background: #060D1C;
-  border-radius: 50px;
-  position: absolute;
-  top: calc(50% - 6px);
-  left: -34px;
-  content: "";
-}
 .tf-itinerary-wrapper .tf-single-itinerary-item li {
   color: #060D1C;
+  align-items: center;
+}
+.tf-itinerary-wrapper .tf-single-itinerary-item li a {
+  color: #060D1C;
+  text-decoration: none;
+}
+.tf-itinerary-wrapper .tf-single-itinerary-item.active .tf-itinerary-content-box {
+  display: block !important;
 }
 
-.tf-itinerary-downloader {
+.tf-itinerary-wrapper.tf-mrtop-70 .tf-itinerary-downloader-option {
   background-color: #0E3DD8;
   border-radius: 5px;
 }
-.tf-itinerary-downloader h3, .tf-itinerary-downloader p {
+.tf-itinerary-wrapper.tf-mrtop-70 .tf-itinerary-downloader-option h3, .tf-itinerary-wrapper.tf-mrtop-70 .tf-itinerary-downloader-option p {
   color: #fff;
 }
-.tf-itinerary-downloader a {
+.tf-itinerary-wrapper.tf-mrtop-70 .tf-itinerary-downloader-option a {
   color: #0E3DD8;
 }
 
@@ -4861,6 +4876,9 @@ div#tf-contact-info {
 }
 .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-minus {
   color: #0E3DD8;
+  display: block;
+}
+.tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-content {
   display: block;
 }
 .tf-faq-wrapper .tf-faq-inner .tf-faq-single-inner .tf-faq-content {

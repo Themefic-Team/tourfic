@@ -18,7 +18,8 @@
                         }else{
                             $duration_time_html = $duration_time;
                         }
-                            echo " " . esc_html( $duration_time_html )?>
+                        echo " " . esc_html( $duration_time_html ); 
+                        ?>
                     </p>
                     <?php if( $night ){ ?>
                     <p>

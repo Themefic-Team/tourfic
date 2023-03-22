@@ -4,8 +4,10 @@
     <h2 class="tf-title" ><?php _e( "Frequently Asked Questions", 'tourfic' ); ?></h2>
     <div class="tf-faq-inner tf-mrtop-30">
         <?php if ( $faqs ): ?>
-            <?php foreach ( $faqs as $key => $faq ): ?>
-            <div class="tf-faq-single">
+            <?php 
+            $faq_key = 1;    
+            foreach ( $faqs as $key => $faq ): ?>
+            <div class="tf-faq-single <?php echo $faq_key==1 ? esc_attr( 'active' ) : ''; ?>">
                 <div class="tf-faq-single-inner">
                     <div class="tf-faq-collaps tf-flex tf-flex-align-center tf-flex-space-bttn">
                         <h3><?php echo esc_html( $faq['title'] ); ?></h3> 
@@ -16,7 +18,7 @@
                     </div>
                 </div>
             </div>
-            <?php endforeach; ?>
+            <?php $faq_key++; endforeach; ?>
         <?php endif; ?>
     </div>
 </div>
