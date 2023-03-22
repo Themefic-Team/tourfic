@@ -576,11 +576,11 @@ TF_Settings::option( 'tf_settings', array(
 			'parent'   => 'emails',
 			'fields' => array(
 				array(
-					'id'   => 'email-settings',
+					'id'   => 'email-settingsss',
 					'type' => 'tab',
 					'tabs' => array(
 						array(
-							'id'     => 'admin_email',
+							'id'     => 'admin_emailss',
 							'title'  => __( 'Admin Email', 'tourfic' ),
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
@@ -634,10 +634,10 @@ TF_Settings::option( 'tf_settings', array(
 								),
 								//email body
 								array(
-									'id'      => 'email_body',
+									'id'      => 'admin_email_template',
 									'type'    => 'editor',
-									'label'   => __( 'Email Body', 'tourfic' ),
-									'default' => __( 'You have received a new booking. The booking details are as follows:', 'tourfic' ),
+									'label'   => __( 'Booking Notification Template', 'tourfic' ),
+									'default' => TF_Handle_Emails::get_email_template( 'order', '', 'admin' ),
 								),
 								array(
 									'id'      => 'email_content_type',
@@ -668,7 +668,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'customer_email_body',
 									'type'    => 'textarea',
 									'label'   => __( 'Customer Email Body', 'tourfic' ),
-									'default' => __( 'Dear {customer_name},<br><br>Thank you for booking with us. Your booking details are as follows:<br><br>Booking ID: {booking_id}<br>Booking Date: {booking_date}<br>Booking Status: {booking_status}<br>Booking Total: {booking_total}<br><br>Thank you.', 'tourfic' ),
+									'default' => TF_Handle_Emails::get_email_template( 'order', '', 'customer' ),
 								),
 							),
 						),

@@ -7,10 +7,6 @@
  * 
  */
 class TF_Handle_Emails{
-    
-        
-    public $email_settings;
-   
 
     /**
      * Constructor
@@ -19,53 +15,58 @@ class TF_Handle_Emails{
         //send mail after new woocommerce order thankyou page
         add_action( 'woocommerce_thankyou', array( $this, 'send_email' ), 10, 1 );
         //add_action( 'woocommerce_order_status_completed', array( $this, 'send_email' ), 10, 1 );
-        
-        $this->email_settings = tfopt('email-settings')  ? tfopt('email-settings') : array();
-        
+
     }
 
-    private static function get_email_template($template_type = 'order', $template = '', $sendto = 'admin'){
-        $templates = array(
-            'order' => array(
-                'admin' => tfopt(),
-                'customer'
-            ),
-            'order_confirmation' => array(
-                'admin',
-                'customer'
-            )
-		);
+    public static function get_email_template( $template_type = 'order', $template = '', $sendto = 'admin' ){
+    
+        $settings = tfopt('email-settings')  ? tfopt('email-settings') : array();
+        // $templates = array(
+        //     'order' => array(
+        //         'admin' => $settings['admin_email_template'],
+        //         'customer'
+        //     ),
+        //     'order_confirmation' => array(
+        //         'admin',
+        //         'customer'
+        //     )
+		// );
 
-		$content = empty( $templates[ $template_type ][ $sendto ] ) ? '' : $templates[ $template_type ][ $sendto ];
+		//$content = ! empty( $templates[ $template_type ][ $sendto ] ) ? $templates[ $template_type ][ $sendto ] : '';
 
-		if ( ! empty( $content ) ) {
-			return $content;
-		}
+		// if ( ! empty( $content ) ) {
+		// 	return $content;
+		// }
 		if ( empty( $template ) ) {
 			switch ( $template_type ) {
 				case 'order':
-					$template = 'emails/notification.php';
+					$template = 'booking/notification.php';
 					break;
 				case 'order_confirmation':
-					$template = 'emails/confirmation.php';
+					$template = 'booking/confirmation.php';
 					break;
 				default:
-					$template = 'emails/notification.php';
+					$template = 'booking/notification.php';
 					break;
 			}
 		}
+
+        $args = array(
+            'send_to' => $sendto,
+            'strings' => self::get_emails_strings( $template_type, $sendto ),
+        );
+
         //include email template
-        $template_path = TF_PATH . 'admin/emails/templates/' . $template_type . '/' . $template;
+        $template_path = TF_EMAIL_TEMPLATES_PATH . $template;
         ob_start();
         include $template_path;
         $template = ob_get_clean();
         return $template;
 
-
     }
 
     //method get strings
-    private static function get_emails_strings( $template_type, $sendto = 'admin' ){
+    public static function get_emails_strings( $template_type, $sendto = 'admin', $string = 'heading'  ){
         $strings = apply_filters(
             'tf_email_strings',
             array(
@@ -97,8 +98,8 @@ class TF_Handle_Emails{
         
             ), 
         );
-        if( isset( $strings[$template_type][$sendto] ) ){
-            return $strings[$template_type][$sendto];
+        if( isset( $strings[$template_type][$sendto][$string] ) ){
+            return $strings[$template_type][$sendto][$string];
         }
         return false;
 
@@ -146,9 +147,9 @@ class TF_Handle_Emails{
         $email_from_email = !empty($email_settings['email_from_email'] ) ? $email_settings['email_from_email'] : get_bloginfo('admin_email');
         $email_content_type = !empty($email_settings['email_content_type'] ) ? $email_settings['email_content_type'] : 'html';
         $email_body_open = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></head><body>';
-        $email_body = !empty($email_settings['email_body'] ) ? $email_settings['email_body'] : '';
+        $admin_email_template = !empty($email_settings['admin_email_template'] ) ? $email_settings['admin_email_template'] : '';
         $email_body_close = '</body></html>';
-        $email_body_full = $email_body_open . $email_body . $email_body_close;
+        $email_body_full = $email_body_open . $admin_email_template . $email_body_close;
         //mail headers
         $charset = apply_filters( 'tourfic_mail_charset','Content-Type: text/html; charset=UTF-8') ;
         $headers = $charset . "\r\n";
@@ -158,7 +159,7 @@ class TF_Handle_Emails{
         $headers.= "X-Mailer: PHP/" . phpversion() . "\r\n";
 
         wp_die( $email_body_full);
-        wp_mail( $sale_notification_email, $admin_email_subject, $email_body, $headers );
+        wp_mail( $sale_notification_email, $admin_email_subject, $admin_email_template, $headers );
 
         //customer email settings
         $customer_email_address =  $order_billing_email;
