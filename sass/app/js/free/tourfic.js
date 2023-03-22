@@ -1623,6 +1623,19 @@
             $('.arrow', this).toggleClass('arrow-animate');
         });
 
+        // New Template FAQ Accordion
+        $('.tf-faq-collaps').click(function () {
+            var $this = $(this);
+            if (!$this.hasClass("active")) {
+                $(".tf-faq-content").slideUp(400);
+                $(".tf-faq-collaps").removeClass("active");
+                $('.tf-faq-single').removeClass('active');
+            }
+            $this.toggleClass("active");
+            $(this).closest('.tf-faq-single').toggleClass('active');
+            $this.next().slideToggle();
+        });
+
         /*
         * Booking Form select first tab on load
         * @author: Foysal

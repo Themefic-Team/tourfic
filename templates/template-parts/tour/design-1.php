@@ -10,7 +10,7 @@
                                 <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                                     <i class="fa-solid fa-location-dot"></i>
                                     <?php if ( $location ) {
-                                        echo '<a href="#tour-map"><p>' . $location . '.</p></a>';
+                                        echo '<a href="#tf-tour-map"><p>' . $location . '.</p></a>';
                                     } ?>
                                 </div>
                             </div>
@@ -191,71 +191,98 @@
             </div>
         </div>
 
+        <?php
+        if ( ! $disable_related_tour == '1' ) {
+        $related_tour_type = tfopt('rt_display');
+        $args  = array(
+            'post_type'      => 'tf_tours',
+            'post_status'    => 'publish',
+            'posts_per_page' => 8,
+            'orderby'        => 'title',
+            'order'          => 'ASC',
+            'tax_query'      => array(
+                array(
+                    'taxonomy' => 'tour_destination',
+                    'field'    => 'slug',
+                    'terms'    => $first_destination_slug,
+                ),
+            ),
+        );
+        //show related tour based on selected tours
+        $selected_ids = tfopt('tf-related-tours');
+        $args['post__not_in'] = array( $post_id );
+
+        if( $related_tour_type == 'selected' && defined( 'TF_PRO' ) ){
+            $args['post__in'] = $selected_ids;
+        }
+        $tours = new WP_Query( $args );
+        if ( $tours->have_posts() ) {
+        ?>
+
         <!-- Tourfic upcomming tours tours -->
         <div class="upcomming-tours">
             <div class="tf-template-container">
                 <div class="tf-container-inner">
                     <div class="section-title">
-                        <h2 class="tf-title">Upcoming Tour</h2>
+                        <h2 class="tf-title"><?php !empty(tfopt('rt-title')) ? esc_html_e(tfopt('rt-title'), "tourfic") : _e("Related Tour","tourfic"); ?></h2>
+                        <?php 
+                        if( !empty( tfopt('rt-description') ) ){ ?>
+                            <p><?php esc_html_e( tfopt('rt-description'), "tourfic" ) ?></p>
+                        <?php } ?>
                     </div>
                     <div class="tf-upcomming-tours-list-outter tf-mrtop-40 tf-flex tf-flex-gap-24">
+                        <?php
+                        while ( $tours->have_posts() ) {
+                            $tours->the_post();
+
+                            $post_id                = get_the_ID();
+                            $destinations           = get_the_terms( $post_id, 'tour_destination' );
+                            $first_destination_name = $destinations[0]->name;
+                            $related_comments       = get_comments( array( 'post_id' => $post_id ) );
+                            $meta                   = get_post_meta( $post_id, 'tf_tours_opt', true );
+                            $pricing_rule           = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+                            $disable_adult          = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
+                            $disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
+                            $tour_price             = new Tour_Price( $meta );
+                        ?>
                         <div class="tf-post-box-lists">
                             <div class="tf-post-single-box">
                                 <div class="tf-image-data">
-                                    <img src="/assets/img/upcomming.png" alt="">
+                                    <img src="<?php echo !empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>" alt="">
                                     <div class="tf-meta-data-price">
-                                        From <span>$181</span> 
+                                        <?php _e("From", "tourfic"); ?> 
+                                        <span>
+                                        <?php if ( $pricing_rule == 'group' ) {
+                                            echo $tour_price->wc_sale_group ?? $tour_price->wc_group;
+                                        } else if ( $pricing_rule == 'person' ) {
+                                            if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
+                                                echo $tour_price->wc_sale_adult ?? $tour_price->wc_adult;
+                                            } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
+                                                echo $tour_price->wc_sale_child ?? $tour_price->wc_child;
+
+                                            }
+                                        }
+                                        ?>
+                                        </span> 
                                     </div>
                                 </div>
                                 <div class="tf-meta-info tf-mrtop-30">
                                     <div class="tf-meta-location">
-                                        <i class="fa-solid fa-location-dot"></i> Sigiriya, Colombo
+                                        <i class="fa-solid fa-location-dot"></i> <?php echo $first_destination_name; ?>
                                     </div>
                                     <div class="tf-meta-title">
-                                        <h2>Holiday Inn Dubai Al-Maktoum Airport, an IHG hotel</h2>
+                                        <h2><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h2>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="tf-post-box-lists">
-                            <div class="tf-post-single-box">
-                                <div class="tf-image-data">
-                                    <img src="/assets/img/itinerary.png" alt="">
-                                    <div class="tf-meta-data-price">
-                                        From <span>$181</span> 
-                                    </div>
-                                </div>
-                                <div class="tf-meta-info tf-mrtop-30">
-                                    <div class="tf-meta-location">
-                                        <i class="fa-solid fa-location-dot"></i> Sigiriya, Colombo
-                                    </div>
-                                    <div class="tf-meta-title">
-                                        <h2>Holiday Inn Dubai Al-Maktoum Airport, an IHG hotel</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tf-post-box-lists">
-                            <div class="tf-post-single-box">
-                                <div class="tf-image-data">
-                                    <img src="/assets/img/upcomming.png" alt="">
-                                    <div class="tf-meta-data-price">
-                                        From <span>$181</span> 
-                                    </div>
-                                </div>
-                                <div class="tf-meta-info tf-mrtop-30">
-                                    <div class="tf-meta-location">
-                                        <i class="fa-solid fa-location-dot"></i> Sigiriya, Colombo
-                                    </div>
-                                    <div class="tf-meta-title">
-                                        <h2>Holiday Inn Dubai Al-Maktoum Airport, an IHG hotel</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
         </div>
-        
+        <?php }
+        wp_reset_postdata();
+        ?>
+        <?php } ?>
     </div>

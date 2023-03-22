@@ -1,40 +1,35 @@
-
 <!-- Tour include exclude -->
 <div class="tf-inex-wrapper tf-mrtop-70">
     <div class="tf-inex-inner tf-flex tf-flex-gap-24">
+        <?php if ( $inc ) { ?>
         <div class="tf-inex tf-tour-include tf-box">
-            <h3>Included</h3>
+            <h3><?php _e( 'Included', 'tourfic' ); ?></h3>
             <ul class="tf-list">
+                <?php
+                foreach ( $inc as $key => $val ) {
+                ?>
                 <li>
-                    <i class="fa-regular fa-circle-check"></i>
-                    Accommodation
+                    <i class="<?php echo !empty($inc_icon) ? esc_attr( $inc_icon ) : 'fa-regular fa-circle-check'; ?>"></i>
+                    <?php echo $val['inc']; ?>
                 </li>
-                <li>
-                    <i class="fa-regular fa-circle-check"></i> Guide
-                </li>
-                <li>
-                    <i class="fa-regular fa-circle-check"></i> COVID-19
-                    Health & Safety Measures
-                </li>
-                <li>
-                    <i class="fa-regular fa-circle-check"></i> Meals
-                </li>
-                <li>
-                    <i class="fa-regular fa-circle-check"></i> Transport
-                </li>
+                <?php } ?>
             </ul>
         </div>
+        <?php } ?>
+        <?php if ( $exc ) { ?>
         <div class="tf-inex tf-tour-exclude tf-box">
-            <h3>Excluded</h3>
+            <h3><?php _e( 'Excluded', 'tourfic' ); ?></h3>
             <ul class="tf-list">
+                <?php
+                foreach ( $exc as $key => $val ) {
+                ?>
                 <li>
-                    <i class="fa-regular fa-circle-check"></i> Insurance
+                    <i class="<?php echo !empty($exc_icon) ? esc_attr( $exc_icon ) : 'fa-regular fa-circle-check'; ?>"></i>
+                    <?php echo $val['exc']; ?>
                 </li>
-                <li>
-                    <i class="fa-regular fa-circle-check"></i> Additional
-                    Services
-                </li>
+                <?php } ?>
             </ul>
         </div>
+        <?php } ?>
     </div>
 </div>

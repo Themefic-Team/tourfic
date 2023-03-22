@@ -4714,6 +4714,10 @@ div#tf-contact-info {
   gap: 40px;
   align-items: flex-start;
 }
+.tf-highlights-wrapper .tf-highlights-inner .tf-highlights-icon img {
+  height: 100%;
+  max-width: none;
+}
 .tf-highlights-wrapper .highlights-list ul {
   padding: 0;
   margin-top: 20px;
@@ -4824,8 +4828,8 @@ div#tf-contact-info {
   background: #060D1C;
   border-radius: 50px;
   position: absolute;
-  top: calc(50% - 5px);
-  left: -33px;
+  top: calc(50% - 6px);
+  left: -34px;
   content: "";
 }
 .tf-itinerary-wrapper .tf-single-itinerary-item li {
@@ -4852,14 +4856,27 @@ div#tf-contact-info {
   margin: 30px 0px;
   transition: all 0.6s ease;
 }
-.tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner i {
+.tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus {
+  display: none;
+}
+.tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-minus {
   color: #0E3DD8;
+  display: block;
+}
+.tf-faq-wrapper .tf-faq-inner .tf-faq-single-inner .tf-faq-content {
+  display: none;
 }
 .tf-faq-wrapper .tf-faq-single-inner {
   padding: 30px;
 }
-.tf-faq-wrapper .tf-faq-single-inner .tf-faq-title:hover {
+.tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps:hover {
   cursor: pointer;
+}
+.tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus {
+  display: block;
+}
+.tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-minus {
+  display: none;
 }
 .tf-faq-wrapper .tf-faq-single-inner h3 {
   line-height: 1.4;
@@ -5160,6 +5177,10 @@ div#tf-contact-info {
 .upcomming-tours .tf-meta-title h2 {
   font-size: 22px;
   line-height: 1.4;
+}
+.upcomming-tours .tf-meta-title h2 a {
+  text-decoration: none;
+  color: #060D1C;
 }
 
 /*# sourceMappingURL=tourfic-style.css.map */

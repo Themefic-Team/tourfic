@@ -289,6 +289,12 @@
     .tf-highlights-inner {
         gap: 40px;
         align-items: flex-start;
+        .tf-highlights-icon{
+            img{
+                height: 100%;
+                max-width: none;
+            }
+        }
     }
 
     .highlights-list {
@@ -408,26 +414,14 @@
             background: $color-black;
             border-radius: 50px;
             position: absolute;
-            top: calc(50% + -5px);
-            left: -33px;
+            top: calc(50% + -6px);
+            left: -34px;
             content: "";
         }
         li{
             color: $color-black-light;
         }
     }
-
-    
-    // .tf-itinerary-content-box {
-    //     height: 0;
-    //     overflow: hidden;
-    //     transition: height 0.5s ease-in-out;
-    // }
-    // .active .tf-itinerary-content-box{
-    //     height: auto;
-    //     overflow: visible;
-    //     transition: height 0.5s ease-in-out;
-    // }
 }
 
 .tf-itinerary-downloader{
@@ -454,19 +448,40 @@
                 border-radius: $tf-brds-default;
                 margin: 30px 0px;
                 transition: all .6s ease;
-
-                i {
-                    color: $color-theme;
+                .tf-faq-collaps{
+                    .faq-icon{
+                      i.fa-plus{
+                        display: none;
+                      } 
+                      i.fa-minus{
+                        color: $color-theme;
+                        display: block;
+                      } 
+                    }
                 }
+                
+            }
+        }
+        .tf-faq-single-inner{
+            .tf-faq-content{
+                display: none;
             }
         }
     }
     .tf-faq-single-inner{
         padding: $tf-space-30;
-        .tf-faq-title{
+        .tf-faq-collaps{
             &:hover{
                 cursor: pointer;
             }
+            .faq-icon{
+                i.fa-plus{
+                  display: block;
+                } 
+                i.fa-minus{
+                  display: none;
+                } 
+              }
         }
         h3{
             line-height: 1.4;
@@ -802,6 +817,10 @@
         h2 {
             font-size: 22px;
             line-height: 1.4;
+            a{
+                text-decoration: none;
+                color: #060D1C;
+            }
         }
     }
 }
