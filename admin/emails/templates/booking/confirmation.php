@@ -5,15 +5,15 @@
  *
  */
 
-$billing_details = array(
-	'{fullname}'        => __( 'Name', 'tourfic' ),
-	'{user_email}'      => __( 'Email', 'tourfic' ),
+ $billing_details = array(
+	'{name}'        => __( 'Name', 'tourfic' ),
+	'{email}'      => __( 'Email', 'tourfic' ),
 	'{billing_address}' => __( 'Billing Address', 'tourfic' ),
 	'{city}'            => __( 'City', 'tourfic' ),
 	'{country}'         => __( 'Country', 'tourfic' ),
 );
 $payment_details = array(
-	'{tprice}'     => __( 'Price', 'tourfic' ),
+	'{price}'     => __( 'Price', 'tourfic' ),
 	'{total_cost}' => __( 'Total Cost', 'tourfic' ),
 	'{due}'        => __( 'Due', 'tourfic' ),
 );
@@ -32,8 +32,8 @@ $payment_details = array(
 					<td class="content-block aligncenter">
 						<table class="invoice">
 							<tr>
-								<td style="margin: 0; padding: 5px 0;" valign="top"><?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', 'admin', 'greeting') ); ?><br><br>
-								<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting' ) ); ?>
+								<td style="margin: 0; padding: 5px 0;" valign="top"><?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting') ); ?><br><br>
+								<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting_byline' ) ); ?>
 								</td>
 							</tr>
 							<br>
@@ -52,14 +52,6 @@ $payment_details = array(
 												<td class="alignright"><?php echo esc_html( $tag ); ?></td>
 											</tr>
 										<?php endforeach; ?>
-										<!-- Bank Details -->
-										<tr>
-											<td colspan="2">{bank_details}</td>
-										</tr>
-										<!-- Check Payment Instructions -->
-										<tr>
-											<td colspan="2">{check_payment_instruction}</td>
-										</tr>
 									</table>
 								</td>
 							</tr>
@@ -75,7 +67,7 @@ $payment_details = array(
 				<?php endif; ?>
 				<tr>
 					<td class="content-block aligncenter">
-						{sitename}
+						{site_name}
 					</td>
 				</tr>
 			</table>

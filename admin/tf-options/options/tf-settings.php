@@ -576,11 +576,11 @@ TF_Settings::option( 'tf_settings', array(
 			'parent'   => 'emails',
 			'fields' => array(
 				array(
-					'id'   => 'email-settingsss',
+					'id'   => 'email-settings',
 					'type' => 'tab',
 					'tabs' => array(
 						array(
-							'id'     => 'admin_emailss',
+							'id'     => 'admin_emails',
 							'title'  => __( 'Admin Email', 'tourfic' ),
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
@@ -617,7 +617,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'admin_email_subject',
 									'type'    => 'text',
-									'label'   => __( 'Admin Email Subject', 'tourfic' ),
+									'label'   => __( 'Booking Email Subject', 'tourfic' ),
 									'default' => __( 'New Tour Booking', 'tourfic' ),
 								),
 								array(
@@ -634,7 +634,7 @@ TF_Settings::option( 'tf_settings', array(
 								),
 								//email body
 								array(
-									'id'      => 'admin_email_template',
+									'id'      => 'admin_booking_email_template',
 									'type'    => 'editor',
 									'label'   => __( 'Booking Notification Template', 'tourfic' ),
 									'default' => TF_Handle_Emails::get_email_template( 'order', '', 'admin' ),
@@ -665,10 +665,23 @@ TF_Settings::option( 'tf_settings', array(
 									'default' => __( 'Booking Confirmation', 'tourfic' ),
 								),
 								array(
-									'id'      => 'customer_email_body',
-									'type'    => 'textarea',
-									'label'   => __( 'Customer Email Body', 'tourfic' ),
+									'id'      => 'customer_booking_email_template',
+									'type'    => 'editor',
+									'label'   => __( 'Customer Booking Email Body', 'tourfic' ),
 									'default' => TF_Handle_Emails::get_email_template( 'order', '', 'customer' ),
+								),
+								//payment success email
+								array(
+									'id'      => 'customer_confirm_email_subject',
+									'type'    => 'text',
+									'label'   => __( 'Payment Success Email Subject', 'tourfic' ),
+									'default' => __( 'Payment Success', 'tourfic' ),
+								),
+								array(
+									'id'      => 'customer_confirm_email_template',
+									'type'    => 'editor',
+									'label'   => __( 'Payment Success Email Body', 'tourfic' ),
+									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'customer' ),
 								),
 							),
 						),
@@ -680,8 +693,27 @@ TF_Settings::option( 'tf_settings', array(
 					'type'    => 'notice',
 					'class'   => 'info',
 					'title'   => __( 'Email Shortcodes', 'tourfic' ),
-					'content' => __( 'You can use the following placeholders in the email body:', 'tourfic' ) . '<br><br><strong>{booking_id} </strong> : To display the booking ID.<br>
-					 {customer_name}<br>{customer_email}<br>{customer_phone}<br>{customer_address}<br>{customer_city}<br>{customer_state}<br>{customer_country}<br>{customer_zip}<br>{customer_note}<br>{tour_name}<br>{tour_date}<br>{tour_time}<br>{tour_price}<br>{tour_quantity}<br>{tour_total_price}<br>{tour_payment_method}<br>{tour_payment_status}<br>{tour_payment_id}<br>{tour_payment_date}<br>{tour_payment_amount}<br>{tour_payment_currency}<br>{tour_payment_transaction_id}<br>{tour_payment_transaction_status}<br>{tour_payment_transaction_type}<br>{tour_payment_transaction_mode}<br>{tour_payment_transaction_time}<br>{tour_payment_transaction_response}',
+					'content' => __( 'You can use the following placeholders in the email body:', 'tourfic' ) . '<br><br><strong>{order_id} </strong> : To display the booking ID.<br>
+					<strong>{booking_date} </strong> : To display the booking date.<br>
+					<strong>{name} </strong> : To display the customer name.<br>
+					<strong>{email} </strong> : To display the customer email.<br>
+					<strong>{phone} </strong> : To display the customer phone.<br>
+					<strong>{address} </strong> : To display the customer address.<br>
+					<strong>{city} </strong> : To display the customer city.<br>
+					<strong>{country} </strong> : To display the customer country.<br>
+					<strong>{zip} </strong> : To display the customer zip.<br>
+					<strong>{booking_details} </strong> : To display the booking details.<br>
+					<strong>{total_price} </strong> : To display the total price.<br>
+					<strong>{payment_method} </strong> : To display the payment method.<br>
+					<strong>{payment_status} </strong> : To display the payment status.<br>
+					<strong>{booking_status} </strong> : To display the booking status.<br>
+					<strong>{booking_url} </strong> : To display the booking url.<br>
+					<strong>{site_name} </strong> : To display the site name.<br>
+					<strong>{site_url} </strong> : To display the site url.<br>
+
+					'
+					
+					,
 				),
 			),
 		),
