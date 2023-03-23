@@ -54,7 +54,19 @@
         }
     }
 }
-
+.tf-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+        margin-top: 12px;
+        list-style: none;
+        i{
+            color: $color-theme;
+            width: 24px;
+        }
+    }
+}
 // Header Info Style 
 .tf-head-info{
     .tf-icon {
@@ -75,6 +87,13 @@
     }
     .tf-icon i {
         transition: all .3s ease;
+        height: 50px;
+        width: 50px;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
     }
 }
 .tf-head-title{
@@ -533,7 +552,7 @@
             margin-top: -8px;
         }
         p,li{
-            font-family: $font-secondary;
+            text-transform: capitalize;
         }
         .tf-review-data-average p {
             background: #ECF2FF;
@@ -563,7 +582,6 @@
 
         .tf-review-data-features {
             flex-basis: 80%;
-            padding-left: 30px;
 
             @media #{$tfmax991}{
                 flex-basis: 100%;
@@ -647,57 +665,119 @@
             }
         }
         .tf-review-author {
+            max-width: 15%;
             img {
                 object-fit: cover;
-                width: 120px;
-                height: 120px;
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+            }
+        }
+        .tf-review-details{
+            max-width: 85%;
+            .tf-review-author-name{
+                h3{
+                    font-size: 1.17rem;
+                }
+            }
+            .tf-review-message{
+                margin-top: 10px;
+            }
+            .tf-review-ratings{
+                display: flex;
+                div{
+                    margin-right: 5px;
+                }
             }
         }
     }
-
-    //Review form
     .tf-review-form{
-        .tf-review-feature-items{
-            column-gap: 40px;
-            flex-wrap: wrap;
-            row-gap: 24px;
-            @media #{$tfmax767}{
-                column-gap: 16px;
+        .tf-review-form-container{
+            background: transparent !important;
+            .tf-rating-wrapper{
+                column-gap: 40px;
+                flex-wrap: wrap;
                 row-gap: 24px;
-            }
-        }
-        .ratings-container{
-            input{
-                display: none;
-            }
-            span{
-                display: none;
-            }
-            i{
-                &:hover{
-                    color: $color-theme;
-                    cursor: pointer;
-                }
-                @media #{$tfmax767}{
-                    font-size: $font-size-small;
-                }
-            }
-        }
-        .tf-review-fields{
-            .tf-field{
-                padding: 15px 20px;
-                border: 1px solid #CDCFD0;
-                &::placeholder{
-                    color: $color-black;
+                margin: 20px 0 24px 0;
+                display: flex;
+                .tf-form-single-rating{
+                    display: initial;
+                    > label{
+                        font-family: "Jost", sans-serif;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 1.6;
+                        color: #686E7A;
+                        margin: 0px;
+                    }
+                    .ratings-container{
+                        margin-top: 8px;
+                        label{
+                            &:before{
+                            color: #686E7A;
+                            font-size: 15px;
+                            }
+                        }
+                    }
                 }
             }
-            .acceptance{
-                width: auto;
+            .review-desc{
+                textarea{
+                    padding: 15px 20px;
+                    border: 1px solid #CDCFD0;
+                    width: 100%;
+                    background-color: #F3F7FA;
+                    border-radius: 5px;
+                    font-size: 14px;
+                    color: #686E7A;
+                    font-family: "Jost", sans-serif;
+                    &::placeholder{
+                        color: $color-black;
+                    }
+                }
             }
-            .tf-bttn-normal{
-                border: none;
-                &:hover{
-                    cursor: pointer;
+            .tf-visitor-info{
+                margin-top: 24px;
+                div{
+                    input{
+                        padding: 15px 20px;
+                        border: 1px solid #CDCFD0;
+                        width: 100%;
+                        background-color: #F3F7FA;
+                        border-radius: 5px;
+                        font-size: 14px;
+                        color: #686E7A;
+                        font-family: "Jost", sans-serif;
+                        &::placeholder{
+                            color: $color-black;
+                        }
+                    }
+                }
+            }
+            .tf-review-submit{
+                input[type="submit"]{
+                    border-style: solid;
+                    border-top-width: 0;
+                    border-right-width: 0;
+                    border-left-width: 0;
+                    border-bottom-width: 0;
+                    color: #ffffff;
+                    border-color: var(--ast-global-color-0);
+                    background-color: var(--ast-global-color-0);
+                    border-radius: 2px;
+                    padding-top: 15px;
+                    padding-right: 30px;
+                    padding-bottom: 15px;
+                    padding-left: 30px;
+                    font-family: inherit;
+                    font-weight: inherit;
+                    line-height: 1em;
+                    display: inline-block;
+                    width: auto !important;
+                    transition: .3s all ease;
+                    &:hover{
+                        background-color: #0E2E96;
+                    }
                 }
             }
         }
@@ -776,6 +856,10 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+            }
+            a{
+                color: $color-black;
+                text-decoration: none;
             }
         }
     }

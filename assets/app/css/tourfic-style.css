@@ -4493,6 +4493,20 @@ div#tf-contact-info {
   }
 }
 
+.tf-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.tf-list li {
+  margin-top: 12px;
+  list-style: none;
+}
+.tf-list li i {
+  color: #0E3DD8;
+  width: 24px;
+}
+
 .tf-head-info .tf-icon {
   height: 50px;
   width: 50px;
@@ -4511,6 +4525,13 @@ div#tf-contact-info {
 }
 .tf-head-info .tf-icon i {
   transition: all 0.3s ease;
+  height: 50px;
+  width: 50px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
 }
 
 .tf-head-title h1 {
@@ -4928,7 +4949,7 @@ div#tf-contact-info {
   margin-top: -8px;
 }
 .tf-review-wrapper .tf-review-data p, .tf-review-wrapper .tf-review-data li {
-  font-family: "Ubuntu", sans-serif;
+  text-transform: capitalize;
 }
 .tf-review-wrapper .tf-review-data .tf-review-data-average p {
   background: #ECF2FF;
@@ -4953,7 +4974,6 @@ div#tf-contact-info {
 }
 .tf-review-wrapper .tf-review-data .tf-review-data-features {
   flex-basis: 80%;
-  padding-left: 30px;
 }
 @media only screen and (min-width: 767.99px) and (max-width: 991px) {
   .tf-review-wrapper .tf-review-data .tf-review-data-features {
@@ -5033,52 +5053,110 @@ div#tf-contact-info {
 .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li i {
   color: #060D1C;
 }
+.tf-review-wrapper .tf-review-reply .tf-review-author {
+  max-width: 15%;
+}
 .tf-review-wrapper .tf-review-reply .tf-review-author img {
   object-fit: cover;
-  width: 120px;
-  height: 120px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
 }
-.tf-review-wrapper .tf-review-form .tf-review-feature-items {
+.tf-review-wrapper .tf-review-reply .tf-review-details {
+  max-width: 85%;
+}
+.tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-author-name h3 {
+  font-size: 1.17rem;
+}
+.tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-message {
+  margin-top: 10px;
+}
+.tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-ratings {
+  display: flex;
+}
+.tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-ratings div {
+  margin-right: 5px;
+}
+.tf-review-wrapper .tf-review-form .tf-review-form-container {
+  background: transparent !important;
+}
+.tf-review-wrapper .tf-review-form .tf-review-form-container .tf-rating-wrapper {
   column-gap: 40px;
   flex-wrap: wrap;
   row-gap: 24px;
+  margin: 20px 0 24px 0;
+  display: flex;
 }
-@media only screen and (max-width: 767.98px) {
-  .tf-review-wrapper .tf-review-form .tf-review-feature-items {
-    column-gap: 16px;
-    row-gap: 24px;
-  }
+.tf-review-wrapper .tf-review-form .tf-review-form-container .tf-rating-wrapper .tf-form-single-rating {
+  display: initial;
 }
-.tf-review-wrapper .tf-review-form .ratings-container input {
-  display: none;
+.tf-review-wrapper .tf-review-form .tf-review-form-container .tf-rating-wrapper .tf-form-single-rating > label {
+  font-family: "Jost", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #686E7A;
+  margin: 0px;
 }
-.tf-review-wrapper .tf-review-form .ratings-container span {
-  display: none;
+.tf-review-wrapper .tf-review-form .tf-review-form-container .tf-rating-wrapper .tf-form-single-rating .ratings-container {
+  margin-top: 8px;
 }
-.tf-review-wrapper .tf-review-form .ratings-container i:hover {
-  color: #0E3DD8;
-  cursor: pointer;
+.tf-review-wrapper .tf-review-form .tf-review-form-container .tf-rating-wrapper .tf-form-single-rating .ratings-container label:before {
+  color: #686E7A;
+  font-size: 15px;
 }
-@media only screen and (max-width: 767.98px) {
-  .tf-review-wrapper .tf-review-form .ratings-container i {
-    font-size: 14px;
-  }
-}
-.tf-review-wrapper .tf-review-form .tf-review-fields .tf-field {
+.tf-review-wrapper .tf-review-form .tf-review-form-container .review-desc textarea {
   padding: 15px 20px;
   border: 1px solid #CDCFD0;
+  width: 100%;
+  background-color: #F3F7FA;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #686E7A;
+  font-family: "Jost", sans-serif;
 }
-.tf-review-wrapper .tf-review-form .tf-review-fields .tf-field::placeholder {
+.tf-review-wrapper .tf-review-form .tf-review-form-container .review-desc textarea::placeholder {
   color: #060D1C;
 }
-.tf-review-wrapper .tf-review-form .tf-review-fields .acceptance {
-  width: auto;
+.tf-review-wrapper .tf-review-form .tf-review-form-container .tf-visitor-info {
+  margin-top: 24px;
 }
-.tf-review-wrapper .tf-review-form .tf-review-fields .tf-bttn-normal {
-  border: none;
+.tf-review-wrapper .tf-review-form .tf-review-form-container .tf-visitor-info div input {
+  padding: 15px 20px;
+  border: 1px solid #CDCFD0;
+  width: 100%;
+  background-color: #F3F7FA;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #686E7A;
+  font-family: "Jost", sans-serif;
 }
-.tf-review-wrapper .tf-review-form .tf-review-fields .tf-bttn-normal:hover {
-  cursor: pointer;
+.tf-review-wrapper .tf-review-form .tf-review-form-container .tf-visitor-info div input::placeholder {
+  color: #060D1C;
+}
+.tf-review-wrapper .tf-review-form .tf-review-form-container .tf-review-submit input[type=submit] {
+  border-style: solid;
+  border-top-width: 0;
+  border-right-width: 0;
+  border-left-width: 0;
+  border-bottom-width: 0;
+  color: #ffffff;
+  border-color: var(--ast-global-color-0);
+  background-color: var(--ast-global-color-0);
+  border-radius: 2px;
+  padding-top: 15px;
+  padding-right: 30px;
+  padding-bottom: 15px;
+  padding-left: 30px;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: 1em;
+  display: inline-block;
+  width: auto !important;
+  transition: 0.3s all ease;
+}
+.tf-review-wrapper .tf-review-form .tf-review-form-container .tf-review-submit input[type=submit]:hover {
+  background-color: #0E2E96;
 }
 
 .tf-tour-details-right {
@@ -5147,6 +5225,10 @@ div#tf-contact-info {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.tf-tour-details-right .tf-tour-booking-advantages li a {
+  color: #060D1C;
+  text-decoration: none;
 }
 
 .upcomming-tours {

@@ -15,9 +15,26 @@
                                 </div>
                             </div>
                             <div class="tf-head-social tf-flex tf-flex-gap-8 tf-flex-align-center">
+                                <?php
+                                // Wishlist
+                                if ( tfopt( 'wl-bt-for' ) && in_array( '2', tfopt( 'wl-bt-for' ) ) ) { 
+                                    if ( is_user_logged_in() ) {
+                                    if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
+                                ?>
                                 <div class="tf-icon tf-wishlist-box">
-                                    <i class="fa-regular fa-heart"></i>
+                                <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
                                 </div>
+                                <?php } } else{ 
+                                if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {    
+                                ?>
+                                <div class="tf-icon tf-wishlist-box">
+                                <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"
+                                                                            data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>"
+                                                                            data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                                            echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+                                        } ?>></i>
+                                </div>
+                                <?php } } } ?>
                                 <div class="tf-icon tf-social-box">
                                     <i class="fa-solid fa-share-nodes"></i>
                                 </div>
@@ -50,7 +67,88 @@
                                     <div class="tf-booking-form-data">
                                         <div class="tf-booking-block">
                                             <div class="tf-booking-price tf-padbtm-12">
-                                                <p> <span>From</span> $634.00</p>
+                                            <?php 
+                                            $tour_price = [];
+                                            $tf_pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+                                            $custom_pricing_by_rule = !empty( $meta['custom_pricing_by'] ) ? $meta['custom_pricing_by'] : '';
+                                            if( $tf_pricing_rule  && $tf_pricing_rule == 'group' ){
+                                                
+                                                if ( !empty($meta['type'] ) && $meta['type'] === 'continuous' ) {
+                                                    $custom_availability = !empty($meta['custom_avail']) ? $meta['custom_avail'] : false;
+                                                    if ($custom_availability) {
+                                                        foreach ( $meta['cont_custom_date'] as $repval ) {
+                                        
+                                                            if( $custom_pricing_by_rule  && $custom_pricing_by_rule == 'group' ){
+                                                                if(! empty( $repval['group_price'] )){
+                                                                    $tour_price[] = $repval['group_price'];
+                                                                }
+                                                            }
+                                                            if( $custom_pricing_by_rule  && $custom_pricing_by_rule == 'person' ){
+                                                                if(!empty($repval['adult_price']) && !$disable_adult){
+                                                                    $tour_price[] = $repval['adult_price'];
+                                                                }
+                                                                if(!empty($repval['child_price']) && !$disable_child){
+                                                                    $tour_price[] = $repval['child_price'];
+                                                                }
+                                                                if(!empty($repval['infant_price']) && !$disable_infant){
+                                                                    $tour_price[] = $repval['infant_price'];
+                                                                }
+                                                            }
+                                                            
+                                                        }
+                                                    }else{
+                                                        if(!empty($meta['group_price'])){
+                                                            $tour_price[] = $meta['group_price'];
+                                                        }
+                                                    }
+                                                }
+                                                
+                                            }
+                                            if( $tf_pricing_rule  && $tf_pricing_rule == 'person' ){
+                                
+                                                if ( !empty($meta['type'] ) && $meta['type'] === 'continuous' ) {
+                                                    $custom_availability = !empty($meta['custom_avail']) ? $meta['custom_avail'] : false;
+                                                    if ($custom_availability) {
+                                                        foreach ( $meta['cont_custom_date'] as $repval ) {
+                                                            
+                                                            if( $custom_pricing_by_rule  && $custom_pricing_by_rule == 'group' ){
+                                                                if(! empty( $repval['group_price'] )){
+                                                                    $tour_price[] = $repval['group_price'];
+                                                                }
+                                                            }
+                                                            if( $custom_pricing_by_rule  && $custom_pricing_by_rule == 'person' ){
+                                                                if(!empty($repval['adult_price']) && !$disable_adult){
+                                                                    $tour_price[] = $repval['adult_price'];
+                                                                }
+                                                                if(!empty($repval['child_price']) && !$disable_child){
+                                                                    $tour_price[] = $repval['child_price'];
+                                                                }
+                                                                if(!empty($repval['infant_price']) && !$disable_infant){
+                                                                    $tour_price[] = $repval['infant_price'];
+                                                                }
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(!empty($meta['adult_price']) && !$disable_adult){
+                                                            $tour_price[] = $meta['adult_price'];
+                                                        }
+                                                        if(!empty($meta['child_price']) && !$disable_child){
+                                                            $tour_price[] = $meta['child_price'];
+                                                        }
+                                                        if(!empty($meta['infant_price']) && !$disable_infant){
+                                                            $tour_price[] = $meta['infant_price'];
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            ?>
+                                                <p> <span><?php _e("From","tourfic"); ?></span> 
+                                                <?php 
+                                                if(!empty($tour_price)){
+                                                    echo $lowest_price = strip_tags( wc_price( min( $tour_price ) ) );
+                                                }
+                                                ?>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -58,130 +156,41 @@
                                     <!-- Tourfic Booking form -->
                                     <div class="tf-booking-form">
                                         <div class="tf-booking-form-inner tf-mrtop-24">
-                                            <h3>Book This Tour</h3>
-                                            <form action="" class="tf-mrtop-16">
-    
-                                                <div class="tf-field-group tf-mrtop-8">
-                                                    <i class="fa-solid fa-location-dot"></i>
-                                                    <input type="text" class="tf-field location" name="location" placeholder="Select Date">
-                                                </div>
-                                                <div class="tf-field-group tf-mrtop-8">
-                                                    <i class="fa-regular fa-clock"></i>
-                                                    <input type="text" class="tf-field time" name="time" placeholder="Select Date">
-                                                </div>
-    
-                                                <div class="tf-booking-person tf-mrtop-30">
-                                                    <div class="tf-form-title">
-                                                        <p>Tickets</p>
-                                                    </div>
-                                                    <div class="tf-field-group tf-mrtop-16">
-                                                        <i class="fa-regular fa-user"></i>
-                                                        <select class="tf-field adult" id="adult">
-                                                            <option value="option1" selected>Option 1</option>
-                                                            <option value="option2">Option 2</option>
-                                                            <option value="option3">Option 3</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="tf-field-group tf-mrtop-16">
-                                                        <i class="fa-solid fa-child"></i>
-                                                        <select class="tf-field child" id="child">
-                                                            <option value="option1" selected>Option 1</option>
-                                                            <option value="option2">Option 2</option>
-                                                            <option value="option3">Option 3</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="tf-field-group tf-mrtop-16">
-                                                        <i class="fa-solid fa-baby"></i>
-                                                        <select class="tf-field child" id="child">
-                                                            <option value="option1" selected>Option 1</option>
-                                                            <option value="option2">Option 2</option>
-                                                            <option value="option3">Option 3</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="tf-tour-extra-area tf-mrtop-30">
-                                                    <div class="tf-form-title">
-                                                        <p>Tour Extra</p>
-                                                    </div>
-                                                    <div class="tf-tour-extra tf-mrtop-8">
-                                                        <div class="tf-tour-extra-price tf-flex tf-flex-align-top tf-flex-space-bttn">
-                                                            <div class="tf-tour-extra-input tf-flex tf-flex-align-top tf-flex-gap-8">
-                                                                <input type="checkbox" name="" id="">
-                                                                <p>Extra Service 1</p>
-                                                            </div>
-                                                            <div class="tf-tour-extra-price">
-                                                                $120.00
-                                                            </div>
-                                                        </div>
-                                                        <div class="tf-tour-extra-details tf-mrtop-8">
-                                                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tf-tour-extra tf-mrtop-8">
-                                                        <div class="tf-tour-extra-price tf-flex tf-flex-align-top tf-flex-space-bttn">
-                                                            <div class="tf-tour-extra-input tf-flex tf-flex-align-top tf-flex-gap-8">
-                                                                <input type="checkbox" name="" id="">
-                                                                <p>Extra Service 1</p>
-                                                            </div>
-                                                            <div class="tf-tour-extra-price">
-                                                                $120.00
-                                                            </div>
-                                                        </div>
-                                                        <div class="tf-tour-extra-details tf-mrtop-8">
-                                                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="tf-booking-bttns tf-mrtop-30">
-                                                    <a class="tf-bttn-normal bttn-primary" href="#">Book This Tour Now</a>
-                                                    <a class="tf-bttn-normal bttn-secondary" href="#">Make a Partial Payment</a>
-                                                </div>
-    
-                                                <div class="tf-booking-data-info tf-mrtop-30">
-                                                    <div class="tf-form-title">
-                                                        <p>Tour Extra</p>
-                                                    </div>
-                                                    <div class="tf-data-info">
-                                                        <div class="data-info-deails tf-flex tf-mrtop-8 tf-flex-space-bttn">
-                                                            <p>$15.00 X 1 Nights</p>
-                                                            <p>$15.00</p>
-                                                        </div>
-                                                        <div class="data-info-deails tf-flex tf-mrtop-8 tf-flex-space-bttn">
-                                                            <p>Service Fee</p>
-                                                            <p>$15.00</p>
-                                                        </div>
-                                                        <div class="data-info-deails tf-flex tf-mrtop-8 tf-flex-space-bttn">
-                                                            <p>Service Fee</p>
-                                                            <p>$15.00</p>
-                                                        </div>
-                                                        <div class="data-info-deails tf-flex tf-mrtop-8 tf-flex-space-bttn">
-                                                            <p>Service Fee</p>
-                                                            <p>$15.00</p>
-                                                        </div>
-                                                        <div class="data-info-deails tf-flex tf-mrtop-8 tf-flex-space-bttn">
-                                                            <p>Service Fee</p>
-                                                            <p>$15.00</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                            <h3><?php _e("Book This Tour","tourfic"); ?></h3>
+                                            <?php echo tf_single_tour_booking_form( $post->ID ); ?>
+                                            
                                         </div>
                                     </div>
                                </div>
+                               <?php
+                                if (  $email || $phone || $fax || $website) {
+                                ?>
                                <div class="tf-tour-booking-advantages tf-box tf-mrtop-30">
                                     <div class="tf-head-title">
-                                        <h3>Why Book With Us?</h3>
+                                        <h3><?php echo __( 'Contact Information' , 'tourfic' ) ?></h3>
                                     </div>
                                     <div class="tf-booking-advantage-items">
                                         <ul class="tf-list">
-                                            <li> <i class="fa-solid fa-headphones"></i> Customer care available 24/7 </li>
-                                            <li> <i class="fa-solid fa-plane"></i> Free Travel Insurance </li>
-                                            <li> <i class="fa-solid fa-sun"></i> Hand - picked Tours & Activities </li>
-                                            <li> <i class="fa-solid fa-bolt"></i> No - hassle best price guarantee </li>
+                                            <?php 
+                                            if(!empty($phone)){ ?>
+                                                <li> <i class="fa-solid fa-headphones"></i> <a href="tel:<?php echo esc_html( $phone ) ?>"><?php echo esc_html( $phone ) ?></a> </li>
+                                            <?php } ?>
+                                            <?php 
+                                            if(!empty($email)){ ?>
+                                                <li> <i class="fa-solid fa-envelope"></i> <a href="mailto:<?php echo esc_html( $email ) ?>"><?php echo esc_html( $email ) ?></a> </li>
+                                            <?php } ?>
+                                            <?php 
+                                            if(!empty($website)){ ?>
+                                                <li> <i class="fa-solid fa-link"></i> <a target="_blank" href="<?php echo esc_html( $website ) ?>"><?php echo esc_html( $website ) ?></a> </li>
+                                            <?php } ?>
+                                            <?php 
+                                            if(!empty($fax)){ ?>
+                                                <li> <i class="fa-solid fa-fax"></i> <a href="tel:<?php echo esc_html( $fax ) ?>"><?php echo esc_html( $fax ) ?></a> </li>
+                                            <?php } ?>
                                         </ul>
                                     </div>
                                 </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

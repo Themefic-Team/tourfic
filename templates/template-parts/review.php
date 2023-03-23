@@ -16,17 +16,186 @@ if ( post_password_required() ) {
 	return;
 }
 ?>
+<?php 
 
+global $current_user;
+
+// Check if user is logged in
+$is_user_logged_in = $current_user->exists();
+$post_id           = $post->ID;
+// Get settings value
+$tf_ratings_for = tfopt( 'r-for' ) ?? [ 'li', 'lo' ];
+
+if( ! empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) && tf_data_types(tfopt( 'tf-template' ))['single-tour']=="design-1"){
+
+if ( $comments ) {
+	$tf_overall_rate        = [];
+	tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
+	tf_get_review_fields( $fields );
+?>
+<div class="tf-review-data tf-box tf-mrtop-30">
+<div class="tf-review-data-inner tf-flex tf-flex-gap-24">
+	<div class="tf-review-data">
+		<div class="tf-review-data-average">
+			<p><?php _e( sprintf( '%.1f', $total_rating ) ); ?></p>
+		</div>
+		<div class="tf-review-all-info">
+			<ul class="tf-list">
+				<li><i class="fa-solid fa-circle-check"></i><?php _e("From", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></li>
+			</ul>
+		</div>
+	</div>
+	<div class="tf-review-data-features">
+		<div class="tf-percent-progress tf-flex tf-flex-space-bttn">
+			<?php 
+			if ( $tf_overall_rate ) {
+			foreach ( $tf_overall_rate as $key => $value ) {
+			if ( empty( $value ) || ! in_array( $key, $fields ) ) {
+				continue;
+			}
+			$value = tf_average_ratings( $value );
+			?>
+			<div class="tf-progress-item">
+				<div class="tf-progress-bar">
+					<span class="percent-progress" style="width: <?php echo tf_average_rating_percent( $value, tfopt( 'r-base' ) ); ?>%"></span>
+				</div>
+				<div class="tf-review-feature-label tf-flex tf-flex-space-bttn">
+					<p class="feature-label"><?php esc_html_e( $key, "tourfic" ); ?></p>
+					<p class="feature-rating"> <?php echo $value; ?></p>
+				</div>
+			</div>
+			<?php } } ?>
+		
+		</div>
+	</div>
+</div>
+</div>
+<!-- Tourfic review reply -->
+<div class="tf-review-reply tf-mrtop-70">
+	<div class="tf-section-head">
+		<h2 class="tf-title"><?php _e("Showing", "tourfic"); ?> <span><?php echo count($comments); ?></span> <?php _e("Review", "tourfic"); ?></h2>
+	</div>
+	<?php
+	foreach ( $comments as $comment ) {
+
+		// Get rating details
+		$tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+		if ( $tf_overall_rate == false ) {
+			$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+			$tf_overall_rate = tf_average_ratings( $tf_comment_meta );
+		}
+		$base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+		$c_rating  = tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
+
+		// Comment details
+		$c_avatar      = get_avatar( $comment, '56' );
+		$c_author_name = $comment->comment_author;
+		$c_date        = $comment->comment_date;
+		$c_content     = $comment->comment_content;
+		?>
+		<!-- reviews and replies -->
+		<div class="tf-review-reply-data tf-flex-gap-24 tf-mrtop-40 tf-flex">
+			<div class="tf-review-author">
+				<?php echo $c_avatar; ?>
+			</div>
+			<div class="tf-review-details">
+				<div class="tf-review-author-name">
+					<h3><?php echo $c_author_name; ?></h3>
+				</div>
+				<div class="tf-review-ratings tf-mrtop-8">
+				<?php echo $c_rating; ?>
+				</div>
+				<div class="tf-review-message">
+					<p><?php echo $c_content; ?></p>
+				</div>
+				<div class="tf-review-date">
+					<ul class="tf-list">
+						<li><i class="fa-regular fa-clock"></i> <?php echo date("F d, Y", strtotime($c_date)); ?></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
+	
+	?>
+</div>
+<?php
+// Review moderation notice
+echo tf_pending_review_notice( $post_id );
+?>
+<?php
+if ( ! empty( $tf_ratings_for ) ) {
+	if ( $is_user_logged_in ) {
+		if ( in_array( 'li', $tf_ratings_for ) && ! tf_user_has_comments() ) {
+			?>
+			<!-- Replay form  -->
+			<div class="tf-review-form tf-mrtop-40">
+				<div class="tf-section-head">
+					<h2 class="tf-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
+					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+				</div>
+				<?php tf_review_form(); ?>
+			</div>
+			<?php
+		}
+	} else {
+		if ( in_array( 'lo', $tf_ratings_for ) ) {
+			?>
+			<!-- Replay form  -->
+			<div class="tf-review-form tf-mrtop-40">
+				<div class="tf-section-head">
+					<h2 class="tf-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
+					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+				</div>
+				<?php tf_review_form(); ?>
+			</div>
+			<?php
+		}
+	}
+}
+}else{
+	echo '<div class="no-review tf-mrtop-24">';
+	echo '<h4>' . __( "No Review Available", "tourfic" ) . '</h4>';
+	if ( $is_user_logged_in ) {
+
+		// Add Review button
+		if ( is_array( $tf_ratings_for ) && in_array( 'li', $tf_ratings_for ) && ! tf_user_has_comments() ) {
+			?>
+			<!-- Replay form  -->
+			<div class="tf-review-form tf-mrtop-40">
+				<div class="tf-section-head">
+					<h2 class="tf-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
+					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+				</div>
+				<?php tf_review_form(); ?>
+			</div>
+
+			<?php
+		}
+	} else {
+
+		if ( is_array( $tf_ratings_for ) && in_array( 'lo', $tf_ratings_for ) ) {
+			?>
+			<!-- Replay form  -->
+			<div class="tf-review-form tf-mrtop-40">
+				<div class="tf-section-head">
+					<h2 class="tf-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
+					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+				</div>
+				<?php tf_review_form(); ?>
+			</div>
+			<?php
+		}
+	}
+	// Pending review notice
+	echo tf_pending_review_notice( $post_id );
+	echo '</div>';
+} 
+}else{
+?>
 <div class="tf-review-container">
 	<?php
-	global $current_user;
-
-	// Check if user is logged in
-	$is_user_logged_in = $current_user->exists();
-	$post_id           = $post->ID;
-	// Get settings value
-	$tf_ratings_for = tfopt( 'r-for' ) ?? [ 'li', 'lo' ];
-
 	if ( $comments ) {
 
 		$tf_rating_progress_bar = '';
@@ -176,3 +345,4 @@ if ( post_password_required() ) {
     <div id="tfreview-error-response"></div>
 	<?php tf_review_form(); ?>
 </div>
+<?php } ?>

@@ -1,4 +1,5 @@
 <!-- Tour include exclude -->
+<?php if($inc || $exc){ ?>
 <div class="tf-inex-wrapper tf-mrtop-70">
     <div class="tf-inex-inner tf-flex tf-flex-gap-24">
         <?php if ( $inc ) { ?>
@@ -33,3 +34,4 @@
         <?php } ?>
     </div>
 </div>
+<?php } ?>
