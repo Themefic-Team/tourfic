@@ -1,5 +1,5 @@
 <!-- Tour Highlights  -->
-<div class="tf-highlights-wrapper tf-mrtop-70 tf-box">
+<div class="tf-highlights-wrapper tf-mrbottom-70 tf-box">
     <div class="tf-highlights-inner tf-flex">
         <div class="tf-highlights-icon">
             <img src="<?php echo TF_ASSETS_APP_URL.'/images/tour-highlights.png' ?>" alt="<?php _e( 'Highlights Icon', 'tourfic' ); ?>" />

@@ -1,6 +1,6 @@
 
 <!-- tourfic FAQ -->
-<div class="tf-faq-wrapper tf-mrtop-70">
+<div class="tf-faq-wrapper tf-mrbottom-70">
     <h2 class="tf-title" ><?php _e( "Frequently Asked Questions", 'tourfic' ); ?></h2>
     <div class="tf-faq-inner tf-mrtop-30">
         <?php if ( $faqs ): ?>

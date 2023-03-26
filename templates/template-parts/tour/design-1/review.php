@@ -1,5 +1,5 @@
 <?php if ( ! $disable_review_sec == 1 ) { ?>
-<div class="tf-review-wrapper tf-mrtop-70">
+<div class="tf-review-wrapper tf-mrbottom-70">
     <!-- Tourfic review features ratting -->
     <div class="tf-average-review">
         <div class="tf-section-head">
