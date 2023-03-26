@@ -2810,6 +2810,8 @@ table.tf-table tr:last-child {
   font-size: 14px;
   color: #686E7A;
   font-family: "Jost", sans-serif;
+  background-image: none;
+  -moz-appearance: auto !important;
 }
 .tf-field-group input::placeholder {
   font-weight: 16px;
@@ -4538,6 +4540,19 @@ div#tf-contact-info {
   margin-bottom: 12px;
 }
 
+.tf-booking-form .tf-booking-person .tf-field {
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+.tf-booking-form .tf-booking-person .tf-field .acr-label {
+  align-items: center;
+}
+.tf-booking-form .tf-booking-person .tf-field .acr-label i {
+  position: static;
+  margin-right: 5px;
+}
+
 .tf-hero-gallery {
   width: 100%;
   display: inline-block;
@@ -5195,7 +5210,7 @@ div#tf-contact-info {
   line-height: 1.3;
   font-size: 14px;
 }
-.tf-tour-details-right .tf-booking-bttns a {
+.tf-tour-details-right .tf-booking-bttns button {
   margin-top: 8px;
   padding: 16px 24px;
 }

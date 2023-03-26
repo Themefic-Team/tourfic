@@ -102,6 +102,25 @@
     }
 }
 
+// Adult & Child & Infant Box
+
+.tf-booking-form{
+    .tf-booking-person{
+        .tf-field{
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            .acr-label{
+                align-items: center;
+                i{
+                    position: static;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+}
+
 // Tourfic Gallery 
 .tf-hero-gallery{
     width: 100%;
@@ -824,7 +843,7 @@
     }
     
     .tf-booking-bttns{
-        a{
+        button{
             margin-top: 8px;
             padding: 16px 24px;
         }
