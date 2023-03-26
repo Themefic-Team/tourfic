@@ -35,9 +35,73 @@
                                         } ?>></i>
                                 </div>
                                 <?php } } } ?>
-                                <div class="tf-icon tf-social-box">
+
+                                <!-- Share Section -->
+                                <?php if ( ! $disable_share_opt == '1' ) { ?>
+                                <div class="tf-share">
+                                    <a href="#dropdown-share-center" class="share-toggle tf-icon tf-social-box"
+                                    data-toggle="true">
                                     <i class="fa-solid fa-share-nodes"></i>
+                                    </a>
+                                    <div id="dropdown-share-center" class="share-tour-content">
+                                        <ul class="tf-dropdown-content">
+                                            <li>
+                                                <a href="http://www.facebook.com/share.php?u=<?php echo esc_url( $share_link ); ?>"
+                                                class="tf-dropdown-item" target="_blank">
+                                            <span class="tf-dropdown-item-content">
+                                                <i class="fab fa-facebook-square"></i>
+                                                <?php esc_html_e( 'Share on Facebook', 'tourfic' ); ?>
+                                            </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="http://twitter.com/share?text=<?php echo esc_attr( $share_text ); ?>&url=<?php echo esc_url( $share_link ); ?>"
+                                                class="tf-dropdown-item" target="_blank">
+                                            <span class="tf-dropdown-item-content">
+                                                <i class="fab fa-twitter-square"></i>
+                                                <?php esc_html_e( 'Share on Twitter', 'tourfic' ); ?>
+                                            </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.linkedin.com/cws/share?url=<?php echo esc_url( $share_link ); ?>"
+                                                class="tf-dropdown-item" target="_blank">
+                                            <span class="tf-dropdown-item-content">
+                                                <i class="fab fa-linkedin"></i>
+                                                <?php esc_html_e( 'Share on Linkedin', 'tourfic' ); ?>
+                                            </span>
+                                                </a>
+                                            </li>
+                                            <?php $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' ); ?>
+                                            <li>
+                                                <a href="http://pinterest.com/pin/create/button/?url=<?php echo esc_url( $share_link ); ?>&media=<?php echo esc_url( get_the_post_thumbnail_url() ); ?>&description=<?php echo esc_attr( $share_text ); ?>"
+                                                class="tf-dropdown-item" target="_blank">
+                                            <span class="tf-dropdown-item-content">
+                                                <i class="fab fa-pinterest"></i>
+                                                <?php esc_html_e( 'Share on Pinterest', 'tourfic' ); ?>
+                                            </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <div class="share-center-copy-form tf-dropdown-item" title="<?php esc_attr_e( 'Share this link', 'tourfic' ); ?>"
+                                                    aria-controls="share_link_button">
+                                                    <label class="share-center-copy-label"
+                                                        for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
+                                                    <input type="text" id="share_link_input"
+                                                        class="share-center-url share-center-url-input"
+                                                        value="<?php echo esc_attr( $share_link ); ?>" readonly>
+                                                    <button id="share_link_button" class="tf_button share-center-copy-cta" tabindex="0"
+                                                            role="button">
+                                                        <span class="tf-button-text share-center-copy-message"><?php esc_html_e( 'Copy link', 'tourfic' ); ?></span>
+                                                        <span class="tf-button-text share-center-copied-message"><?php esc_html_e( 'Link Copied!', 'tourfic' ); ?></span>
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
+                                <?php } ?>
+                                <!-- End Share Section -->
                             </div>
                         </div>
                     </div>
@@ -191,6 +255,16 @@
                                     </div>
                                 </div>
                                 <?php } ?>
+
+                                <!-- Enquiry box -->
+                                <div class="tf-tour-booking-advantages tf-box tf-mrtop-30">
+                                <div class="tf-ask-enquiry">
+                                <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                                <h3><?php _e( "Have a question in mind", 'tourfic' ); ?></h3>
+                                <p><?php _e( "Looking for more info? Send a question to the property to find out more.", 'tourfic' ); ?></p>
+                                <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-bttn-normal bttn-primary"><span><?php esc_html_e( 'Ask a Question', 'tourfic' ); ?></span></a></div>
+                            </div>
+                                </div>
                             </div>
                         </div>
                     </div>

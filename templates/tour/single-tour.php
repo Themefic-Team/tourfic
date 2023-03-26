@@ -46,6 +46,14 @@ while ( have_posts() ) : the_post();
 
 	// Address
 	$location = isset( $meta['text_location'] ) ? $meta['text_location'] : '';
+
+	//Social Share
+
+	$share_text = get_the_title();
+	$share_link = get_permalink( $post_id );
+	$disable_share_opt  = ! empty( $meta['t-share'] ) ? $meta['t-share'] : '';
+	$t_share  = ! empty( tfopt( 't-share' ) ) ? tfopt( 't-share' ) : 0;
+	$disable_share_opt = ! empty( $disable_share_opt ) ? $disable_share_opt : $t_share;
 	
 	if( !empty($meta['location']) && tf_data_types($meta['location'])){
 		$location = !empty( tf_data_types($meta['location'])['address'] ) ? tf_data_types($meta['location'])['address'] : $location;

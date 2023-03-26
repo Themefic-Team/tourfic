@@ -95,6 +95,11 @@
         justify-content: center;
         border-radius: 50px;
     }
+    .tf-share{
+        a{
+            font-size: 16px;
+        }
+    }
 }
 .tf-head-title{
     h1{
@@ -118,6 +123,27 @@
                 }
             }
         }
+    }
+}
+
+// Enquiry Box
+
+.tf-ask-enquiry{
+    text-align: center;
+    i{
+        height: 80px;
+        width: 80px;
+        text-align: center;
+        line-height: 80px;
+        background-color: #ECF2FF;
+        border-radius: 50%;
+        color: $color-theme;
+        margin-bottom: 25px;
+        font-size: 30px;
+    }
+    p{
+        margin-top: 5px;
+        margin-bottom: 25px;
     }
 }
 

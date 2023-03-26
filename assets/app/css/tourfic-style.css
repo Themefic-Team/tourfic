@@ -2490,23 +2490,29 @@ div#tf-destinationautocomplete-list div:before {
   background: #fff;
   padding: 40px;
   border-radius: 4px;
-  overflow: auto;
   transform: translateY(-50%);
-  max-height: 95%;
+  height: auto;
+}
+@media only screen and (max-width: 640px) {
+  .tf-aq-outer {
+    width: 90%;
+  }
 }
 
 span.close-aq {
   position: absolute;
-  right: 5px;
-  top: 5px;
-  width: 25px;
+  right: -15px;
+  top: -15px;
+  width: 45px;
   text-align: center;
-  height: 25px;
+  height: 45px;
   background: #e00d0d;
   color: #fff;
-  line-height: 20px;
   font-size: 20px;
   cursor: pointer;
+  line-height: 45px;
+  border-radius: 50%;
+  z-index: 9999;
 }
 
 .tf-aq-field {
@@ -4535,6 +4541,9 @@ div#tf-contact-info {
   justify-content: center;
   border-radius: 50px;
 }
+.tf-head-info .tf-share a {
+  font-size: 16px;
+}
 
 .tf-head-title h1 {
   margin-bottom: 12px;
@@ -4551,6 +4560,25 @@ div#tf-contact-info {
 .tf-booking-form .tf-booking-person .tf-field .acr-label i {
   position: static;
   margin-right: 5px;
+}
+
+.tf-ask-enquiry {
+  text-align: center;
+}
+.tf-ask-enquiry i {
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  line-height: 80px;
+  background-color: #ECF2FF;
+  border-radius: 50%;
+  color: #0E3DD8;
+  margin-bottom: 25px;
+  font-size: 30px;
+}
+.tf-ask-enquiry p {
+  margin-top: 5px;
+  margin-bottom: 25px;
 }
 
 .tf-hero-gallery {

@@ -311,7 +311,14 @@ TF_Settings::option( 'tf_settings', array(
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 				),
-
+				array(
+					'id'        => 't-share',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Share Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
 				array(
 					'id'        => 't-related',
 					'type'      => 'switch',
