@@ -1,5 +1,5 @@
 <!-- Tour Gallery Section -->
-<div class="tf-hero-gallery">
+<div class="tf-hero-gallery tf-mrbottom-30">
 <div class="tf-gallery-featured">
     <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>" alt="<?php _e( 'Tour Image', 'tourfic' ); ?>">
     <div class="featured-meta-gallery-videos">
