@@ -124,7 +124,9 @@ class TF_Handle_Emails{
         $order_data = $order->get_data();
         $order_items = $order->get_items();
         $order_items_data = array();
-
+        //payment method
+        $payment_method_title = $order->get_payment_method();
+        $get_post_edit_link = get_edit_post_link( $order_id );
         //get order items details as table format so we can use it in email template
         foreach( $order_items as $item_id => $item_data ){
             $item_name = $item_data->get_name();
@@ -153,30 +155,31 @@ class TF_Handle_Emails{
                 'item_meta_data'    => $item_meta_data_array,
             );
         }
-        echo '<pre>';
-        $booking_details = '<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%;"><tr><th>Item Name</th><th>Quantity</th><th>Subtotal</th><th>Subtotal Tax</th><th>Total</th><th>Total Tax</th><th>Taxes</th><th>Meta Data</th></tr>';
+        $booking_details = '<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%;"><thead><tr><th>Item Name</th><th>Quantity</th><th>Price</th></tr></thead>';
         foreach( $order_items_data as $item ){
-            $booking_details .= '<tr>';
-            $booking_details .= '<td>'.$item['item_name'].'</td>';
-            $booking_details .= '<td>'.$item['item_quantity'].'</td>';
-            $booking_details .= '<td>'.$item['item_subtotal'].'</td>';
-            $booking_details .= '<td>'.$item['item_subtotal_tax'].'</td>';
-            $booking_details .= '<td>'.$item['item_total'].'</td>';
-            $booking_details .= '<td>'.$item['item_total_tax'].'</td>';
-            $booking_details .= '<td>';
+            $booking_details .= '<tbody><tr>';
+            $booking_details .= '<td>'.$item['item_name'];
+            //item meta data except _order_type,_post_author,_tour_id php loop
             foreach( $item['item_meta_data'] as $meta_data ){
-                $booking_details .= '<p>'.$meta_data['key'].' : '.$meta_data['value'].'</p>';
+                if( $meta_data['key'] != '_order_type' && $meta_data['key'] != '_post_author' && $meta_data['key'] != '_tour_id' ){
+                    $booking_details .= '<br><strong>'.$meta_data['key'].'</strong>: '.$meta_data['value'];
+                }
             }
+
             $booking_details .= '</td>';
-            $booking_details .= '</tr>';
+            $booking_details .= '<td>'.$item['item_quantity'].'</td>';
+            $booking_details .= '<td>'.wc_price($item['item_subtotal']).'</td><tbody>';
         }
+            $booking_details .= '<tfoot><tr><th colspan="2" align="left">Subtotal</th>';
+            $booking_details .= '<td>'.wc_price($item['item_total']).'</td></tr>';
+            //payment method
+            $booking_details .= '<tr><th colspan="2" align="left">Payment Method</th>';
+            $booking_details .= '<td>'.$payment_method_title.'</td></tr>';
+            //total
+            $booking_details .= '<tr><th colspan="2" align="left">Total</th>';
+            $booking_details .= '<td>'.wc_price($item['item_total']).'</td></tr>';
+       
         $booking_details .= '</table>';
-        echo $booking_details;
-
-        //var_dump($order_items_data['0']['item_name']);
-
-
-
 
         $order_billing_email = $order->get_billing_email();
         $order_billing_phone = $order->get_billing_phone();
@@ -198,11 +201,13 @@ class TF_Handle_Emails{
         $email_from_name              = !empty($email_settings['email_from_name'] ) ? $email_settings['email_from_name'] : get_bloginfo('name');
         $email_from_email             = !empty($email_settings['email_from_email'] ) ? $email_settings['email_from_email'] : get_bloginfo('admin_email');
         $email_content_type           = !empty($email_settings['email_content_type'] ) ? $email_settings['email_content_type'] : 'html';
-        $email_body_open              = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></head><body>';
+        $email_body_open              = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></head><body><div style="line-height: 2em; margin: 0 auto; background: #fafafa; padding: 50px; width: 600px;">';
         $admin_booking_email_template = !empty($email_settings['admin_booking_email_template'] ) ? $email_settings['admin_booking_email_template'] : '';
         $admin_booking_email_template = str_replace( '{order_id}', $order_id, $admin_booking_email_template );
-        $admin_booking_email_template = str_replace( '{name}', $order_data['billing']['first_name'] . ' ' . $order_data['billing']['last_name'], $admin_booking_email_template );
-        $admin_booking_email_template = str_replace( '{email}', $order_billing_email, $admin_booking_email_template );
+        //booking details
+        $admin_booking_email_template = str_replace( '{booking_details}', $booking_details, $admin_booking_email_template );
+        $admin_booking_email_template = str_replace( '{fullname}', $order_data['billing']['first_name'] . ' ' . $order_data['billing']['last_name'], $admin_booking_email_template );
+        $admin_booking_email_template = str_replace( '{user_email}', $order_billing_email, $admin_booking_email_template );
         //billing_address
         $admin_booking_email_template = str_replace( '{billing_address}', $order_data['billing']['address_1'] . ' ' . $order_data['billing']['address_2'], $admin_booking_email_template );
         $admin_booking_email_template = str_replace( '{phone}', $order_billing_phone, $admin_booking_email_template );
@@ -214,15 +219,16 @@ class TF_Handle_Emails{
         $admin_booking_email_template = str_replace( '{order_date}', $order_date_created, $admin_booking_email_template );
         $admin_booking_email_template = str_replace( '{order_status}', $order_status, $admin_booking_email_template );
         $admin_booking_email_template = str_replace( '{total_cost}', $order_total, $admin_booking_email_template );
+        $admin_booking_email_template = str_replace( '{booking_url}', $get_post_edit_link, $admin_booking_email_template );
         $admin_booking_email_template = str_replace( '{order_currency}', $order_currency, $admin_booking_email_template );
         $admin_booking_email_template = str_replace( '{site_name}', get_bloginfo('name'), $admin_booking_email_template );
         $admin_booking_email_template = str_replace( '{site_url}', get_bloginfo('url'), $admin_booking_email_template );
 
 
         
-        $email_body_close = '</body></html>';
+        $email_body_close = '</div></body></html>';
         $admin_email_booking_body_full = $email_body_open . $admin_booking_email_template . $email_body_close;
-        $admin_email_booking_body_full = wpautop( html_entity_decode( $admin_email_booking_body_full ) );
+        $admin_email_booking_body_full = wpautop( html_entity_decode( $admin_email_booking_body_full, 3, 'UTF-8' ) );
         //mail headers
         $charset = apply_filters( 'tourfic_mail_charset','Content-Type: text/html; charset=UTF-8') ;
         $headers = $charset . "\r\n";
@@ -231,19 +237,29 @@ class TF_Handle_Emails{
         $headers.= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
         $headers.= "X-Mailer: PHP/" . phpversion() . "\r\n";
 
-        var_dump($order_status);
-        wp_die( $order_status, $admin_email_booking_body_full);
-        wp_mail( $sale_notification_email, $admin_email_subject, $admin_email_booking_body_full, $headers );
+        //check if admin emails disable
+        if( isset( $admin_email_disable ) && $admin_email_disable == false ){
+            //send multiple emails to multiple admins
+            if( strpos( $sale_notification_email, ',') !== false ){
+                $sale_notification_email = explode(',', $sale_notification_email);
+                $sale_notification_email = str_replace(' ', '', $sale_notification_email);
+                foreach ( $sale_notification_email as $key => $email_address ) {
+                    wp_mail( $email_address, $admin_email_subject, $admin_email_booking_body_full, $headers );
+                }            
+            }else{
+                //send admin email
+                wp_mail( $sale_notification_email, $admin_email_subject, $admin_email_booking_body_full, $headers );
+
+            }
+        }
+
+        //send mail to vendor
+
 
         //customer email settings
         $customer_email_address =  $order_billing_email;
         $customer_email_subject = !empty($email_settings['customer_email_subject'] ) ? $email_settings['customer_email_subject']  : '';
-        $customer_booking_email_template = !empty($email_settings['customer_booking_email_template'] ) ? $email_settings['customer_booking_email_template'] : '';
-        $customer_confirm_email_subject = !empty($email_settings['customer_confirm_email_subject'] ) ? $email_settings['customer_confirm_email_subject'] : '';
         $customer_confirm_email_template = !empty($email_settings['customer_confirm_email_template'] ) ? $email_settings['customer_confirm_email_template'] : '';
-
-        $customer_email_content_type = !empty($email_settings['customer_email_content_type'] ) ? $email_settings['customer_email_content_type'] : 'html';
-
        
     }
 }

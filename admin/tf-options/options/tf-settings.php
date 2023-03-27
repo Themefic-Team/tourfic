@@ -695,8 +695,8 @@ TF_Settings::option( 'tf_settings', array(
 					'title'   => __( 'Email Shortcodes', 'tourfic' ),
 					'content' => __( 'You can use the following placeholders in the email body:', 'tourfic' ) . '<br><br><strong>{order_id} </strong> : To display the booking ID.<br>
 					<strong>{booking_date} </strong> : To display the booking date.<br>
-					<strong>{name} </strong> : To display the customer name.<br>
-					<strong>{email} </strong> : To display the customer email.<br>
+					<strong>{fullname} </strong> : To display the customer name.<br>
+					<strong>{user_email} </strong> : To display the customer email.<br>
 					<strong>{phone} </strong> : To display the customer phone.<br>
 					<strong>{address} </strong> : To display the customer address.<br>
 					<strong>{city} </strong> : To display the customer city.<br>
