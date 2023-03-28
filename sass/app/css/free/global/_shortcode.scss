@@ -467,7 +467,7 @@ div#tf-destinationautocomplete-list {
     max-width: 428px;
     background: #fff;
     padding: 40px;
-    border-radius: 4px;
+    border-radius: 10px;
     transform: translateY(-50%);
     height: auto;
     @media #{$max640}{
@@ -478,14 +478,14 @@ span.close-aq {
     position: absolute;
     right: -15px;
     top: -15px;
-    width: 45px;
+    width: 35px;
     text-align: center;
-    height: 45px;
-    background: #e00d0d;
+    height: 35px;
+    background: #003162;
     color: #fff;
     font-size: 20px;
     cursor: pointer;
-    line-height: 45px;
+    line-height: 31px;
     border-radius: 50%;
     z-index: 9999;
 }

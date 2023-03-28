@@ -1,20 +1,30 @@
 body{
-    font-family: $font-primary;
-    color: $color-primary;
-}
-
-h2{
-    font-size: $font-size-large;
-}
-img {
-    display: inline-block;
-    border: none;
     margin: 0;
     padding: 0;
-    vertical-align: middle;
-    max-width: 100%;
-    height: auto;
 }
+
+.tf-template-global {
+    font-family: $font-primary;
+    color: $color-primary;
+    .tf-container{
+        width: auto;
+    }
+    
+    h2{
+        font-size: $font-size-large;
+    }
+    img {
+        display: inline-block;
+        border: none;
+        margin: 0;
+        padding: 0;
+        vertical-align: middle;
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+
 // Table style 
 table.tf-table {
     border-collapse: collapse;

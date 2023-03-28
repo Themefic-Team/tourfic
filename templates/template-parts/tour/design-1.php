@@ -313,7 +313,7 @@
                             <p><?php esc_html_e( tfopt('rt-description'), "tourfic" ) ?></p>
                         <?php } ?>
                     </div>
-                    <div class="tf-upcomming-tours-list-outter tf-mrtop-40 tf-flex tf-flex-gap-24">
+                    <div class="tf-slider-items-wrapper tf-upcomming-tours-list-outter tf-mrtop-40 tf-flex tf-flex-gap-24">
                         <?php
                         while ( $tours->have_posts() ) {
                             $tours->the_post();
@@ -328,7 +328,7 @@
                             $disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
                             $tour_price             = new Tour_Price( $meta );
                         ?>
-                        <div class="tf-post-box-lists">
+                        <div class="tf-slider-item tf-post-box-lists">
                             <div class="tf-post-single-box">
                                 <div class="tf-image-data">
                                     <img src="<?php echo !empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>" alt="">

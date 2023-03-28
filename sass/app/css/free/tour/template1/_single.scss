@@ -7,7 +7,7 @@
     padding: 60px 0px;
 }
 .tf-tour-single{
-    margin-bottom: 120px;
+    margin-bottom: 50px;
     @media #{$tfmax991}{
         margin-bottom: 60px;
     }
@@ -966,5 +966,18 @@
                 color: #060D1C;
             }
         }
+    }
+    .tf-upcomming-tours-list-outter{
+        .tf-slider-item{
+            border: 0px solid;
+            box-shadow: none;
+            border-radius: 0px;
+            height: auto !important;
+            padding: 0;
+            display: flow-root !important;
+            margin: 0 15px 15px !important;
+            margin-left: 15px;
+            margin-left: 0 !important;
+        }  
     }
 }
