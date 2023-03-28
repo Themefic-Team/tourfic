@@ -566,8 +566,55 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_name = '', $taxonomy_slug = '' ) {
 	$place      = $post_type == 'tf_hotel' ? 'tf-location' : 'tf-destination';
 	$place_text = $post_type == 'tf_hotel' ? __( 'Enter Location', 'tourfic' ) : __( 'Enter Destination', 'tourfic' );
+	if( ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1"){
 	?>
+	<div class="tf-box-wrapper tf-box">
+		<form action="<?php echo tf_booking_search_action(); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking">
+			<div class="tf-field-group tf-destination-box">
+				<i class="fa-solid fa-location-dot"></i>
+				<input type="text" required="" id="<?php echo $place; ?>" class="tf-field" placeholder="<?php echo $place_text; ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
+                    <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? $taxonomy_slug : ''; ?>"/>
+			</div>
+			<div class="tf-field-group tf-mrtop-8 tf_acrselection">
+                <div class="tf-field tf-flex">
+                    <div class="acr-label tf-flex">
+                        <i class="fa-regular fa-user"></i>
+                        <?php _e('Select Adults', 'tourfic'); ?>
+                    </div>
+                    <div class="acr-select">
+                        <div class="acr-dec">-</div>
+                            <input type="number" name="adults" id="adults" min="1" value="1">
+                        <div class="acr-inc">+</div>
+                    </div>
+                </div>
+            </div>
 
+			<div class="tf-field-group tf-mrtop-16 tf_acrselection">
+				<div class="tf-field tf-flex">
+					<div class="acr-label tf-flex">
+						<i class="fa-solid fa-child"></i>
+						<?php _e('Select Children', 'tourfic'); ?>
+					</div>
+					<div class="acr-select">
+						<div class="acr-dec">-</div>
+							<input type="number" name="childrens" id="children" min="0" value="0">
+						<div class="acr-inc">+</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="tf-field-group tf-mrtop-8">
+				<i class="fa-solid fa-calendar-days"></i>
+				<input type="text" class="tf-field time" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
+                               placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" required value="">
+			</div>
+			<div class="tf-booking-bttns tf-mrtop-30">
+            	<input type="hidden" name="type" value="<?php echo $post_type; ?>" class="tf-post-type"/>
+				<button class="tf-bttn-normal bttn-primary tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
+			</div>
+		</form>
+	</div>
+	<?php }else{ ?>
     <form class="tf_archive_search_result tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
           action="<?php echo tf_booking_search_action(); ?>">
 
@@ -648,7 +695,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
         </div>
 
     </form>
-
+	<?php } ?>
     <script>
         (function ($) {
             $(document).ready(function () {

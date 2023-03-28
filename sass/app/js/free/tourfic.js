@@ -1434,6 +1434,27 @@
         });
 
         /**
+         * Design 1 archive item
+         *
+         * Grid/List
+         */
+        $(document).on('click', '.tf-grid-list-layout', function (e) {
+            e.preventDefault();
+            $('.tf-grid-list-layout').removeClass('active');
+            $(this).addClass('active');
+
+            var dataid = $(this).data('id');
+            if (dataid == 'grid-view') {
+                $('.tf-item-cards').addClass('tf-layout-grid');
+                $('.tf-item-cards').removeClass('tf-layout-list');
+            } else {
+                $('.tf-item-cards').addClass('tf-layout-list');
+                $('.tf-item-cards').removeClass('tf-layout-grid');
+            }
+
+        });
+
+        /**
          * ajax tour load pagination
          */
         var flag = false;

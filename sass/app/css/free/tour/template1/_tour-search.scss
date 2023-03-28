@@ -61,13 +61,35 @@ i {
     .tf-item-details {
         flex-basis: 100%;
     }
-
-    .tf-item-featured {
-        height: 240px;
-    }
     }
 }
-
+.tf-layout-list{
+    .tf-item-card {
+        .tf-item-featured {
+            img {
+                width: 100%;
+                object-fit: cover;
+                height: 100%;
+                min-height: 350px;
+                border-radius: 5px 0px 0px 5px;
+            }
+        }
+    }
+}
+.tf-layout-grid{
+    .tf-item-card {
+        display: block;
+        .tf-item-featured {
+            img {
+                width: 100%;
+                object-fit: cover;
+                height: 100%;
+                border-radius: 5px 5px 0px 0px;
+                min-height: 280px;
+            }
+        }
+    }
+}
 .tf-item-card {
     background-color: #fff;
     border-radius: 5px;
@@ -76,14 +98,6 @@ i {
     .tf-item-featured {
     flex-basis: 41%;
     position: relative;
-
-    img {
-        width: 100%;
-        object-fit: cover;
-        height: 100%;
-        min-height: 350px;
-        border-radius: 5px 0px 0px 5px;
-    }
     .tf-features-box{
         position: absolute;
         top: 20px;
@@ -167,15 +181,17 @@ i {
 }
 
 .tf-pagination-outter{
-    .tf-page-numbers {
-        font-size: 14px;
-        color: $color-primary;
-        text-decoration: none;
-        padding: 12px 18px;
-        background: #fff;
-        box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
-        border-radius: 5px;
-        &.active{
+    .tf-pagination-bar{
+        .page-numbers {
+            font-size: 14px;
+            color: $color-primary;
+            text-decoration: none;
+            padding: 12px 18px;
+            background: #fff;
+            box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
+            border-radius: 5px;
+        }
+        .page-numbers.current{
             background: $color-theme;
             color: #fff;
         }
@@ -184,6 +200,44 @@ i {
 }
 
 .tf-archive-right{
+    .tf-destination-box{
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+            div{
+                padding: 10px;
+                cursor: pointer;
+                background-color: #fff;
+                border-bottom: 1px solid #d4d4d4;
+                color: #444;
+            }
+        }
+    }
+    .tf_acrselection{
+        .tf-field{
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px !important;
+            .acr-label{
+                align-items: center;
+                i{
+                    position: static;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+    .tf-booking-bttns{
+        button{
+            width: 100%;
+        }
+    }
     .tf-related-single{
         border-top: 1px solid #EAEFF3;
         margin-bottom: $tf-space-24;

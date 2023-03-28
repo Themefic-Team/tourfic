@@ -17,17 +17,17 @@
 						<span><?php echo ')'; ?> </span>
                     </div>
                     <div class="tf-search-layout tf-flex tf-flex-gap-12">
-                        <div class="tf-icon tf-serach-layout-list active">
+                        <div class="tf-icon tf-serach-layout-list tf-grid-list-layout active" data-id="list-view">
                             <i class="fa-solid fa-list-ul"></i>
                         </div>
-                        <div class="tf-icon tf-serach-layout-grid">
+                        <div class="tf-icon tf-serach-layout-grid tf-grid-list-layout" data-id="grid-view">
                             <i class="fa-solid fa-table-cells"></i>
                         </div>
                     </div>
                 </div>
 
                 <div class="tf-search-results-list tf-mrtop-30">
-                    <div class="tf-item-cards tf-flex tf-layout-list">
+                    <div class="archive_ajax_result tf-item-cards tf-flex tf-layout-list">
 
                     <?php
 					if ( have_posts() ) {
@@ -42,50 +42,17 @@
 
                     </div>
                     <div class="tf-pagination-outter tf-mrtop-40">
-                        <div class="tf_posts_navigation">
-                        <?php tourfic_posts_navigation(); ?>
-                    </div>
-                        <!-- <div class="tf-pagination-bar">
-                            <a class="tf-page-numbers active" href="#">1</a>
-                            <a class="tf-page-numbers" href="#">2</a>
-                            <a class="tf-page-numbers" href="#">3</a>
-                            <a class="tf-page-numbers" href="#">4</a>
-                            <a class="tf-page-numbers" href="#">5</a>
-                            <a class="tf-page-numbers" href="#"><i class="fa-solid fa-angle-right"></i></a>
-                        </div> -->
+                        <div class="tf-pagination-bar">
+                            <?php tourfic_posts_navigation(); ?>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- SideBar-->
             <div class="tf-column tf-sidebar tf-archive-right">
-                <div class="tf-box-wrapper tf-box">
 
-                <form action="" class="tf-mrtop-16">
-                    <div class="tf-field-group tf-mrtop-8">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <input type="text" class="tf-field location" name="location" placeholder="Bangkok">
-                    </div>
-                    <div class="tf-field-group tf-mrtop-8">
-                        <i class="fa-regular fa-user"></i>
-                        <input type="text" class="tf-field time" name="time" placeholder="1 Adult">
-                    </div>
-
-                    <div class="tf-field-group tf-mrtop-8">
-                        <i class="fa-solid fa-child"></i>
-                        <input type="text" class="tf-field time" name="time" placeholder="0 Children">
-                    </div>
-
-                    <div class="tf-field-group tf-mrtop-8">
-                        <i class="fa-solid fa-calendar-days"></i>
-                        <input type="text" class="tf-field time" name="time" placeholder="Select Date">
-                    </div>
-                    <div class="tf-booking-bttns tf-mrtop-30">
-                        <a class="tf-bttn-normal bttn-primary" href="#">Check Availablity</a>
-                    </div>
-                </form>
-
-                </div>
+                <?php tf_archive_sidebar_search_form('tf_tours'); ?>
 
                 <div class="tf-box-wrapper related-list-item tf-box tf-mrtop-30">
                 <div class="tf-form-title tf-padbtm-16">
