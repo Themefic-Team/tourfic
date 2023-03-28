@@ -6,16 +6,17 @@
  */
 
  $billing_details = array(
-	'{name}'        => __( 'Name', 'tourfic' ),
-	'{email}'      => __( 'Email', 'tourfic' ),
+	'{fullname}'        => __( 'Name', 'tourfic' ),
+	'{user_email}'      => __( 'Email', 'tourfic' ),
 	'{billing_address}' => __( 'Billing Address', 'tourfic' ),
 	'{city}'            => __( 'City', 'tourfic' ),
-	'{country}'         => __( 'Country', 'tourfic' ),
+	'{country}'         => __( 'Country', 'tourfic' ),	
+	'{phone}'         	=> __( 'Phone', 'tourfic' ),
 );
+
 $payment_details = array(
-	'{price}'     => __( 'Price', 'tourfic' ),
-	'{total_cost}' => __( 'Total Cost', 'tourfic' ),
-	'{due}'        => __( 'Due', 'tourfic' ),
+	'{price}'     	=> __( 'Price', 'tourfic' ),
+	'{total_cost}' 	=> __( 'Total Cost', 'tourfic' ),
 );
 
 ?>

@@ -639,6 +639,19 @@ TF_Settings::option( 'tf_settings', array(
 									'label'   => __( 'Booking Notification Template', 'tourfic' ),
 									'default' => TF_Handle_Emails::get_email_template( 'order', '', 'admin' ),
 								),
+								//heading
+								array(
+									'id'    => 'vendor_email_heading',
+									'type'  => 'heading',
+									'label' => __( 'Vendor Email', 'tourfic' ),
+								),
+								//vendor email template
+								array(
+									'id'      => 'vendor_booking_email_template',
+									'type'    => 'editor',
+									'label'   => __( 'Vendor Notification Template', 'tourfic' ),
+									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ),
+								),
 								array(
 									'id'      => 'email_content_type',
 									'type'    => 'select',
@@ -694,6 +707,7 @@ TF_Settings::option( 'tf_settings', array(
 					'class'   => 'info',
 					'title'   => __( 'Email Shortcodes', 'tourfic' ),
 					'content' => __( 'You can use the following placeholders in the email body:', 'tourfic' ) . '<br><br><strong>{order_id} </strong> : To display the booking ID.<br>
+					<strong>{booking_id} </strong> : To display the booking ID.<br>
 					<strong>{booking_date} </strong> : To display the booking date.<br>
 					<strong>{fullname} </strong> : To display the customer name.<br>
 					<strong>{user_email} </strong> : To display the customer email.<br>
@@ -703,6 +717,11 @@ TF_Settings::option( 'tf_settings', array(
 					<strong>{country} </strong> : To display the customer country.<br>
 					<strong>{zip} </strong> : To display the customer zip.<br>
 					<strong>{booking_details} </strong> : To display the booking details.<br>
+					<strong>{shipping_address} </strong> : To display the shipping address.<br>
+					<strong>{shipping_method} </strong> : To display the shipping method.<br>
+					<strong>{shipping_city} </strong> : To display the shipping city.<br>
+					<strong>{shipping_country} </strong> : To display the shipping country.<br>
+					<strong>{shipping_zip} </strong> : To display the shipping zip.<br>
 					<strong>{total_price} </strong> : To display the total price.<br>
 					<strong>{payment_method} </strong> : To display the payment method.<br>
 					<strong>{payment_status} </strong> : To display the payment status.<br>
