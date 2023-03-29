@@ -44,7 +44,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 
 												$value = ( isset( $field['id'] ) ) ? $data[ $field['id'] ] : '';
 											} else {
-												$value = '';
+												$value = 'test';
 											}
 										}
 									}
@@ -62,7 +62,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 
 		}
 		public function sanitize() {
-			// return wp_kses_post($this->value);
+			//return wp_kses_post($this->value);
 			return $this->value;
 		}
 

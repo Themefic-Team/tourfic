@@ -20,7 +20,14 @@ class TF_Handle_Emails{
         //add_action( 'woocommerce_order_status_completed', array( $this, 'send_email' ), 10, 1 );
 
     }
-
+    /**
+     * Get email template
+     * @param string $template_type
+     * @param string $template
+     * @param string $sendto
+     * @since 2.3.0
+     * 
+     */
     public static function get_email_template( $template_type = 'order', $template = '', $sendto = 'admin' ){
 
         $email_settings = self::$tf_email_settings;
@@ -229,7 +236,9 @@ class TF_Handle_Emails{
         $email_content_type           = !empty($email_settings['email_content_type'] ) ? $email_settings['email_content_type'] : 'html';
         $email_body_open              = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></head><body><div style="line-height: 2em; margin: 0 auto; background: #fafafa; padding: 50px; width: 600px;">';
         $admin_booking_email_template = !empty($email_settings['admin_booking_email_template'] ) ? $email_settings['admin_booking_email_template'] : '';
-
+        //send attachment to mail from settings image field
+        $email_attachment = !empty($email_settings['brand_logo'] ) ? $email_settings['brand_logo'] : '';
+        
         //all mail tags mapping
         $tf_all_mail_tags = array(
             '{booking_id}'         => $order_id,
@@ -264,7 +273,7 @@ class TF_Handle_Emails{
         
         $email_body_close = '</div></body></html>';
         $admin_email_booking_body_full = $email_body_open . $admin_booking_email_template . $email_body_close;
-        $admin_email_booking_body_full = wp_kses_post( $admin_email_booking_body_full );
+
         //mail headers
         $charset = apply_filters( 'tourfic_mail_charset','Content-Type: text/html; charset=UTF-8') ;
         $headers = $charset . "\r\n";
@@ -301,12 +310,9 @@ class TF_Handle_Emails{
             $vendor_booking_email_template = str_replace( array_keys( $tf_all_mail_tags ), array_values( $tf_all_mail_tags ), $vendor_booking_email_template );
 
             $vendor_email_booking_body_full = $email_body_open . $vendor_booking_email_template . $email_body_close;
-            //send mail in plain text and html conditionally
-            
-
+            //send mail in plain text and html conditionally 
             $vendor_email_booking_body_full = wp_kses_post( html_entity_decode( $vendor_email_booking_body_full, 3, 'UTF-8' ) );
-            // var_dump($vendors_email);
-            // wp_die();
+            
             //send mail to vendor
             if( ! empty( $vendors_email ) ){
                 foreach ( $vendors_email as $key => $vendor_email ) {
