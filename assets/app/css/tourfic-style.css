@@ -5358,6 +5358,7 @@ div#tf-contact-info {
 .tf-template-global {
   background-color: #ebf0f4;
   padding: 60px 0px;
+  width: 100%;
 }
 
 .tf-archive-head .tf-search-result {
@@ -5513,7 +5514,7 @@ div#tf-contact-info {
   color: #fff;
 }
 
-.tf-archive-right .tf-destination-box .autocomplete-items {
+.tf-archive-design-1 .tf-archive-right .tf-destination-box .autocomplete-items {
   position: absolute;
   border: 1px solid #d4d4d4;
   border-bottom: none;
@@ -5523,44 +5524,47 @@ div#tf-contact-info {
   left: 0;
   right: 0;
 }
-.tf-archive-right .tf-destination-box .autocomplete-items div {
+.tf-archive-design-1 .tf-archive-right .tf-destination-box .autocomplete-items div {
   padding: 10px;
   cursor: pointer;
   background-color: #fff;
   border-bottom: 1px solid #d4d4d4;
   color: #444;
 }
-.tf-archive-right .tf_acrselection .tf-field {
+.tf-archive-design-1 .tf-archive-right .tf_acrselection .tf-field {
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px !important;
 }
-.tf-archive-right .tf_acrselection .tf-field .acr-label {
+.tf-archive-design-1 .tf-archive-right .tf_acrselection .tf-field .acr-label {
   align-items: center;
 }
-.tf-archive-right .tf_acrselection .tf-field .acr-label i {
+.tf-archive-design-1 .tf-archive-right .tf_acrselection .tf-field .acr-label i {
   position: static;
   margin-right: 5px;
 }
-.tf-archive-right .tf-booking-bttns button {
+.tf-archive-design-1 .tf-archive-right .tf-booking-bttns button {
   width: 100%;
 }
-.tf-archive-right .tf-related-single {
+.tf-archive-design-1 .tf-archive-right .tf-related-single {
   border-top: 1px solid #EAEFF3;
   margin-bottom: 24px;
   padding-top: 24px;
 }
-.tf-archive-right .tf-related-single h2 {
+.tf-archive-design-1 .tf-archive-right .tf-related-single h2 {
   font-size: 16px;
 }
-.tf-archive-right .tf-related-single .tf-related-item-featured {
+.tf-archive-design-1 .tf-archive-right .tf-related-single .tf-related-item-featured {
   min-width: 100px;
   height: 85px;
 }
-.tf-archive-right .tf-related-single .tf-related-item-featured img {
+.tf-archive-design-1 .tf-archive-right .tf-related-single .tf-related-item-featured img {
   height: 100%;
   object-fit: cover;
   border-radius: 5px;
+}
+.tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-widget-title h4 {
+  font-family: "Jost", sans-serif !important;
 }
 
 /*# sourceMappingURL=tourfic-style.css.map */

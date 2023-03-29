@@ -167,13 +167,13 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'tour-title',
 									'type'    => 'heading',
-									'content' => __( 'Tour Archive Page', 'tourfic' ),
+									'content' => __( 'Tour Archive & Search Result Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
 									'id'       => 'tour-archive',
 									'type'     => 'select',
-									'label'    => __( 'Select Single Template', 'tourfic' ),
+									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
 									'options'  => array(
 										'default' => __( 'Default Template', 'tourfic' ),
 										'design-1' => __( 'Design 1', 'tourfic' ),

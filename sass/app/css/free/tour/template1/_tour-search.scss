@@ -1,6 +1,7 @@
 .tf-template-global {
 background-color: #ebf0f4;
 padding: 60px 0px;
+width: 100%;
 }
 
 // Search Heading
@@ -198,63 +199,73 @@ i {
     }
 }
 }
-
-.tf-archive-right{
-    .tf-destination-box{
-        .autocomplete-items {
-            position: absolute;
-            border: 1px solid #d4d4d4;
-            border-bottom: none;
-            border-top: none;
-            z-index: 99;
-            top: 100%;
-            left: 0;
-            right: 0;
-            div{
-                padding: 10px;
-                cursor: pointer;
-                background-color: #fff;
-                border-bottom: 1px solid #d4d4d4;
-                color: #444;
-            }
-        }
-    }
-    .tf_acrselection{
-        .tf-field{
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px !important;
-            .acr-label{
-                align-items: center;
-                i{
-                    position: static;
-                    margin-right: 5px;
+.tf-archive-design-1{
+    .tf-archive-right{
+        .tf-destination-box{
+            .autocomplete-items {
+                position: absolute;
+                border: 1px solid #d4d4d4;
+                border-bottom: none;
+                border-top: none;
+                z-index: 99;
+                top: 100%;
+                left: 0;
+                right: 0;
+                div{
+                    padding: 10px;
+                    cursor: pointer;
+                    background-color: #fff;
+                    border-bottom: 1px solid #d4d4d4;
+                    color: #444;
                 }
             }
         }
-    }
-    .tf-booking-bttns{
-        button{
-            width: 100%;
-        }
-    }
-    .tf-related-single{
-        border-top: 1px solid #EAEFF3;
-        margin-bottom: $tf-space-24;
-        padding-top: $tf-space-24;
-        
-        h2{
-            font-size: $font-size-normal;
-        }
-        .tf-related-item-featured {
-            min-width: 100px;
-            height: 85px;
-            img{
-                height: 100%;
-                object-fit: cover;
-                border-radius: $tf-brds-default;
+        .tf_acrselection{
+            .tf-field{
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px 20px !important;
+                .acr-label{
+                    align-items: center;
+                    i{
+                        position: static;
+                        margin-right: 5px;
+                    }
+                }
             }
         }
-        
+        .tf-booking-bttns{
+            button{
+                width: 100%;
+            }
+        }
+        .tf-related-single{
+            border-top: 1px solid #EAEFF3;
+            margin-bottom: $tf-space-24;
+            padding-top: $tf-space-24;
+            
+            h2{
+                font-size: $font-size-normal;
+            }
+            .tf-related-item-featured {
+                min-width: 100px;
+                height: 85px;
+                img{
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: $tf-brds-default;
+                }
+            }
+            
+        }
+        #tf__booking_sidebar{
+            .widget{
+                .tf-widget-title{
+                    h4{
+                        font-family: "Jost", sans-serif !important;
+                    }
+                }
+            }
+        }
     }
 }

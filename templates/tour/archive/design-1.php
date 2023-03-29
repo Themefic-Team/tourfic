@@ -1,4 +1,4 @@
-<div class="tf-archive-page tf-template-global">
+<div class="tf-archive-page tf-template-global tf-archive-design-1">
     <div class="tf-container">
         <div class="tf-row tf-archive-inner tf-flex">
             <div class="tf-column tf-page-content tf-archive-left">
@@ -54,90 +54,6 @@
 
                 <?php tf_archive_sidebar_search_form('tf_tours'); ?>
 
-                <div class="tf-box-wrapper related-list-item tf-box tf-mrtop-30">
-                <div class="tf-form-title tf-padbtm-16">
-                    <h3>You May Also Like</h3>
-                </div>
-                <div class="tf-related-items-outtter">
-                    
-                    <div class="tf-related-single tf-flex tf-flex-gap-12">
-                        <div class="tf-related-item-featured">
-                            <img src="/assets/img/related-tours.png" alt="">
-                        </div>
-                        <div class="tf-related-item-details">
-                            <h2>Holiday Dubai Maktoum Airport IHG hotel</h2>
-                            <div class="tf-related-meta-details tf-flex tf-flex-space-bttn tf-mrtop-16">
-                                <div class="tf-related-meta tf-price-meta">
-                                    From<span> $181</span>
-                                </div>
-                                <div class="tf-meta-review">
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(26 reviews)</span>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="tf-related-single tf-flex tf-flex-gap-12">
-                        <div class="tf-related-item-featured">
-                            <img src="/assets/img/related-tours.png" alt="">
-                        </div>
-                        <div class="tf-related-item-details">
-                            <h2>Holiday Dubai Maktoum Airport IHG hotel</h2>
-                            <div class="tf-related-meta-details tf-flex tf-flex-space-bttn tf-mrtop-16">
-                                <div class="tf-related-meta tf-price-meta">
-                                    From<span> $181</span>
-                                </div>
-                                <div class="tf-meta-review">
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(26 reviews)</span>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-
-                    <div class="tf-related-single tf-flex tf-flex-gap-12">
-                        <div class="tf-related-item-featured">
-                            <img src="/assets/img/related-tours.png" alt="">
-                        </div>
-                        <div class="tf-related-item-details">
-                            <h2>Holiday Dubai Maktoum Airport IHG hotel</h2>
-                            <div class="tf-related-meta-details tf-flex tf-flex-space-bttn tf-mrtop-16">
-                                <div class="tf-related-meta tf-price-meta">
-                                    From<span> $181</span>
-                                </div>
-                                <div class="tf-meta-review">
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(26 reviews)</span>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="tf-related-single tf-flex tf-flex-gap-12">
-                        <div class="tf-related-item-featured">
-                            <img src="/assets/img/related-tours.png" alt="">
-                        </div>
-                        <div class="tf-related-item-details">
-                            <h2>Holiday Dubai Maktoum Airport IHG hotel</h2>
-                            <div class="tf-related-meta-details tf-flex tf-flex-space-bttn tf-mrtop-16">
-                                <div class="tf-related-meta tf-price-meta">
-                                    From<span> $181</span>
-                                </div>
-                                <div class="tf-meta-review">
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>(26 reviews)</span>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-
-                </div>
             </div>
         </div>
     </div>

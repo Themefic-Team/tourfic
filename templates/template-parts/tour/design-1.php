@@ -1,4 +1,4 @@
-<div class="tf-single-page tf-template-global">
+<div class="tf-single-page tf-template-global tf-tour-design-1">
         <div class="tf-tour-single">
             <div class="tf-template-container">
                 <div class="tf-container-inner">
