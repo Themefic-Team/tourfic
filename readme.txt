@@ -411,9 +411,11 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 = 2.9.12 -  29 March 2023 =
 
-* Updated: Appsero update
 * Improved: Code Structure
-
+* Updated: Appsero update
+* Woocommerce Compatibility check 7.5.1
+* Elementor Compatibility check  3.12.0
+ 
 = 2.9.11 -  23 March 2023 =
 
 * Added: Pabbly integration 
