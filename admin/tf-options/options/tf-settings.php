@@ -48,7 +48,23 @@ TF_Settings::option( 'tf_settings', array(
 									'type'    => 'heading',
 									'content' => __( 'Hotel Single Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
-								)
+								),
+								array(
+									'id'      => 'hotel-title',
+									'type'    => 'heading',
+									'content' => __( 'Hotel Archive & Search Result Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'hotel-archive',
+									'type'     => 'select',
+									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
+									'options'  => array(
+										'default' => __( 'Default Template', 'tourfic' ),
+										'design-1' => __( 'Design 1', 'tourfic' ),
+									),
+									'default'  => 'default'
+								),
 							),
 						),
 						

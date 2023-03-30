@@ -40,8 +40,6 @@
 					}
 					?>
 
-                    </div>
-                    <div class="tf-pagination-outter tf-mrtop-40">
                         <div class="tf-pagination-bar">
                             <?php tourfic_posts_navigation(); ?>
                         </div>

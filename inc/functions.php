@@ -437,7 +437,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 	$date       = $_GET['check-in-out-date'] ?? '';
 	$startprice = $_GET['from'] ?? '';
 	$endprice   = $_GET['to'] ?? '';
-	if( !empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1"){
+	if( ( $post_type=="tf_tours" && ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) || ( $post_type=="tf_hotel" && ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['hotel-archive']=="design-1" ) ){
 	?>
 	<div class="tf-box-wrapper tf-box tf-mrbottom-30">
 		<form class="widget tf-hotel-side-booking" method="get" autocomplete="off"

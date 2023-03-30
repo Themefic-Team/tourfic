@@ -607,7 +607,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
     ob_start(); ?>
     <!-- Start Content -->
 	<?php 
-	if( ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1"){
+	if( ( $post_type=="tf_tours" && ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) || ( $post_type=="tf_hotel" && ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['hotel-archive']=="design-1" ) ){
 	?>
 	<div class="tf-column tf-page-content tf-archive-left">
 		<!-- Search Head Section -->
@@ -743,12 +743,12 @@ function tf_search_result_shortcode( $atts, $content = null ){
 					}
 				}
 				$total_pages = ceil( $total_filtered_results / $post_per_page );
-				echo "<div class='tf-pagination-outter tf-mrtop-40'><div class='tf-pagination-bar'>";
+				echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
 				echo paginate_links( array(
 					'total' => $total_pages,
 					'current' => $current_page
 				) );
-				echo "</div></div>";
+				echo "</div>";
 				}
 				
 			} else {
