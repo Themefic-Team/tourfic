@@ -1643,12 +1643,25 @@ TF_Settings::option( 'tf_settings', array(
 									'label'   => __( 'Email From Email', 'tourfic' ),
 									'default' => get_bloginfo( 'admin_email' ),
 								),
+								
+								array(
+									'id'    => 'order_email_heading',
+									'type'  => 'text',
+									'label' => __( 'Order Email Heading', 'tourfic' ),
+									'default' => __( 'You booking has been received', 'tourfic' ),
+								),
 								//email body
 								array(
 									'id'      => 'admin_booking_email_template',
 									'type'    => 'editor',
 									'label'   => __( 'Booking Notification Template', 'tourfic' ),
-									'default' => TF_Handle_Emails::get_email_template( 'order', '', 'admin' ),
+									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
+								),
+								array(
+									'id'      => 'aadmin_booking_email_template',
+									'type'    => 'editor',
+									'label'   => __( 'Booking Notification Template', 'tourfic' ),
+									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
 								),
 								//heading
 								array(
@@ -1661,7 +1674,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'vendor_booking_email_template',
 									'type'    => 'editor',
 									'label'   => __( 'Vendor Notification Template', 'tourfic' ),
-									//'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ),
+									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ),
 								),
 								array(
 									'id'      => 'email_content_type',
@@ -1692,7 +1705,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'customer_booking_email_template',
 									'type'    => 'editor',
 									'label'   => __( 'Customer Booking Email Body', 'tourfic' ),
-									'default' => TF_Handle_Emails::get_email_template( 'order', '', 'customer' ),
+									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'customer' ),
 								),
 								//payment success email
 								array(

@@ -20,59 +20,58 @@ $payment_details = array(
 );
 
 ?>
-<table class="main" width="100%" cellpadding="0" cellspacing="0">
-	<tr>
-		<td class="content-wrap aligncenter">
-			<table width="100%" cellpadding="0" cellspacing="0">
+
+<div class="content">
+	<h3 class="greeting">
+	<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting' ) ); ?>
+	</h3>
+	<p>
+	<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting_byline' ) ); ?>
+	</p>
+	<div class="order-table">
+		{booking_details}
+	</div>
+	<div class="customer-details" style="display: flex;flex-direction: row;justify-content:space-between; margin: 24px 0;">
+		<div class="billing-info" style=" background: #e0f0fc6e;padding: 25px;">
+			<h3><?php esc_html_e( 'Billing Details', 'tourfic' ); ?></h3>
+			<table>
+			<?php foreach ( $billing_details as $tag => $label ) : ?>
+			
 				<tr>
-					<td class="content-block">
-						<h1 class="aligncenter"><?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'heading' ) ); ?></h1>
-					</td>
+					<td><?php echo esc_html( $label ); ?></td>
+					<td class="alignright"><?php echo esc_html( $tag ); ?></td>
 				</tr>
-				<tr>
-					<td class="content-block aligncenter">
-						<table class="invoice">
-							<tr>
-								<td style="margin: 0; padding: 5px 0;" valign="top"><?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting') ); ?><br><br>
-								<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting_byline' ) ); ?>
-								</td>
-							</tr>
-							<br>
-							<tr>
-								<td style="margin: 0; padding: 5px 0;" valign="top">
-									<table class="invoice-items" cellpadding="0" cellspacing="0">
-										<tr><td colspan="2">{booking_details}</td></tr>
-										<tr>
-											<td class="title-holder" style="margin: 0;" valign="top">
-												<h3 class="alignleft"><?php echo esc_html__( 'Billing Details', 'tourfic' ); ?></h3>
-											</td>
-										</tr>
-										<?php foreach ( $billing_details as $tag => $label ) : ?>
-											<tr>
-												<td><?php echo esc_html( $label ); ?></td>
-												<td class="alignright"><?php echo esc_html( $tag ); ?></td>
-											</tr>
-										<?php endforeach; ?>
-									</table>
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<?php if ( 'admin' === $args['send_to'] ) : ?>
-				<tr>
-					<td class="content-block aligncenter">
-						<a href="{booking_url}"><?php esc_html_e( 'View booking on your website', 'tourfic' ); ?></a>
-					</td>
-				</tr>
-				<?php endif; ?>
-				<tr>
-					<td class="content-block aligncenter">
-						{site_name}
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
+			<?php endforeach; ?>
+			</table>             
+		</div>
+		<!--<div class="shipping-info" style=" background: #e0f0fc6e;padding: 25px;">
+			
+		</div>
+		-->
+	</div>
+	<div class="notice">
+		<p>
+			Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat
+			duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+		</p>
+	</div>
+	<p> <?php esc_html_e('Thank you for purchasing.','tourfic') ?></p>
+	<?php if ( 'admin' === $args['send_to'] ) : ?>
+		<div class="order-button">
+		<a href="{booking_url}"><?php esc_html_e( 'View booking on your website', 'tourfic' ); ?></a>
+		</div>
+	<?php endif; ?>
+	
+</div>
+<div class="footer">
+	<p><?php echo __('Sincerely','tourfic') ?>,</p>
+	<p><strong>{fullname}</strong></p>
+	<p>{site_name}</p>
+	<div class="social">
+		<a href="#">Facebook</a>
+		<a href="#">Twitter</a>
+		<a href="#">Instagram</a>
+	</div>
+</div>
+
 <?php

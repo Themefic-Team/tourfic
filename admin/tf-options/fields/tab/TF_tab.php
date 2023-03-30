@@ -44,7 +44,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 
 												$value = ( isset( $field['id'] ) ) ? $data[ $field['id'] ] : '';
 											} else {
-												$value = 'test';
+												$value = '';
 											}
 										}
 									}
