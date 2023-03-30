@@ -453,7 +453,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                 <div class="tf-field tf-flex">
                     <div class="acr-label tf-flex">
                         <i class="fa-regular fa-user"></i>
-                        <?php _e('Select Adults', 'tourfic'); ?>
+                        <?php _e('Adults', 'tourfic'); ?>
                     </div>
                     <div class="acr-select">
                         <div class="acr-dec">-</div>
@@ -467,7 +467,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 				<div class="tf-field tf-flex">
 					<div class="acr-label tf-flex">
 						<i class="fa-solid fa-child"></i>
-						<?php _e('Select Children', 'tourfic'); ?>
+						<?php _e('Children', 'tourfic'); ?>
 					</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
@@ -489,7 +489,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 					<div class="tf-field tf-flex">
 						<div class="acr-label tf-flex">
 							<i class="fa fa-building"></i>
-							<?php _e('Select Rooms', 'tourfic'); ?>
+							<?php _e('Rooms', 'tourfic'); ?>
 						</div>
 						<div class="acr-select">
 							<div class="acr-dec">-</div>
@@ -643,7 +643,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_name = '', $taxonomy_slug = '' ) {
 	$place      = $post_type == 'tf_hotel' ? 'tf-location' : 'tf-destination';
 	$place_text = $post_type == 'tf_hotel' ? __( 'Enter Location', 'tourfic' ) : __( 'Enter Destination', 'tourfic' );
-	if( is_post_type_archive('tf_tours') && ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1"){
+	if( ( is_post_type_archive('tf_hotel') && ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['hotel-archive']=="design-1" ) || ( is_post_type_archive('tf_tours') && ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) ){
 	?>
 	<div class="tf-box-wrapper tf-box tf-mrbottom-30">
 		<form action="<?php echo tf_booking_search_action(); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking">
@@ -656,7 +656,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
                 <div class="tf-field tf-flex">
                     <div class="acr-label tf-flex">
                         <i class="fa-regular fa-user"></i>
-                        <?php _e('Select Adults', 'tourfic'); ?>
+                        <?php _e('Adults', 'tourfic'); ?>
                     </div>
                     <div class="acr-select">
                         <div class="acr-dec">-</div>
@@ -670,7 +670,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 				<div class="tf-field tf-flex">
 					<div class="acr-label tf-flex">
 						<i class="fa-solid fa-child"></i>
-						<?php _e('Select Children', 'tourfic'); ?>
+						<?php _e('Children', 'tourfic'); ?>
 					</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
@@ -680,6 +680,23 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 				</div>
 			</div>
 
+			<?php if ( $post_type !== 'tf_tours' ) { ?>
+
+				<div class="tf-field-group tf-mrtop-16 tf_acrselection">
+					<div class="tf-field tf-flex">
+						<div class="acr-label tf-flex">
+							<i class="fa fa-building"></i>
+							<?php _e('Room', 'tourfic'); ?>
+						</div>
+						<div class="acr-select">
+							<div class="acr-dec">-</div>
+								<input type="number" name="room" id="room" min="1" value="1">
+							<div class="acr-inc">+</div>
+						</div>
+					</div>
+				</div>
+			<?php } ?>
+			
 			<div class="tf-field-group tf-mrtop-8">
 				<i class="fa-solid fa-calendar-days"></i>
 				<input type="text" class="tf-field time" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"

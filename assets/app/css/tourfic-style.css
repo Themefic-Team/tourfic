@@ -5410,6 +5410,13 @@ div#tf-contact-info {
   min-height: 350px;
   border-radius: 5px 0px 0px 5px;
 }
+.tf-search-results-list .tf-layout-list .tf-item-card.tf-item-hotel .tf-item-featured img {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+  min-height: 420px;
+  border-radius: 5px 0px 0px 5px;
+}
 .tf-search-results-list .tf-layout-grid .tf-item-card {
   display: block;
 }
@@ -5474,6 +5481,24 @@ div#tf-contact-info {
   font-size: 22px;
   line-height: 1.3;
 }
+.tf-search-results-list .tf-item-card .tf-item-details .tf-arachive-features ul {
+  margin: 0;
+  padding: 0;
+}
+.tf-search-results-list .tf-item-card .tf-item-details .tf-arachive-features ul li {
+  display: inline-block;
+  background-color: #F1F3F4;
+  padding: 6px 10px;
+  border-radius: 5px;
+  margin: 10px 10px 0px 0px;
+}
+.tf-search-results-list .tf-item-card .tf-item-details .tf-arachive-features ul li i {
+  margin-right: 5px;
+  color: #0E3DD8;
+}
+.tf-search-results-list .tf-item-card .tf-item-details .tf-arachive-features ul li img {
+  margin-right: 5px;
+}
 .tf-search-results-list .tf-item-card .tf-item-details .tf-details p {
   line-height: 1.5;
 }
@@ -5517,7 +5542,7 @@ div#tf-contact-info {
   color: #fff !important;
 }
 
-.tf-archive-design-1 .filter-item label input:checked ~ .checkmark {
+.tf-archive-design-1 label input:checked ~ .checkmark {
   background-color: #0E3DD8 !important;
 }
 .tf-archive-design-1 .tf-archive-right .tf-destination-box .autocomplete-items {
@@ -5569,8 +5594,70 @@ div#tf-contact-info {
   object-fit: cover;
   border-radius: 5px;
 }
+.tf-archive-design-1 .tf-archive-right #tf__booking_sidebar {
+  padding: 30px;
+  box-shadow: 0px 13px 30px 0px #e0e8ee;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget {
+  border: 0px solid;
+  background: inherit;
+  border-radius: 0px;
+  margin-bottom: 26px;
+  border-bottom: 1px solid #E3E6F0;
+}
+.tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-widget-title {
+  background-color: inherit;
+  border: 0px solid;
+  padding: 0px;
+  border-radius: 0px;
+  height: auto;
+  pointer-events: none;
+}
 .tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-widget-title h4 {
   font-family: "Jost", sans-serif !important;
+  font-size: 20px;
+  font-weight: 500;
+}
+.tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-widget-title i {
+  display: none;
+}
+.tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-filter {
+  padding: 0;
+}
+.tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-filter ul li {
+  padding: 6px 0px;
+  margin: 5px 0px;
+}
+.tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-filter ul li label {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  display: inline-block;
+  padding-left: 32px;
+  line-height: 1.3;
+  font-size: 16px;
+}
+.tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-filter ul li label input {
+  display: none;
+}
+.tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-filter ul li label .checkmark {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #D2D2D6;
+}
+.tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-filter a {
+  text-align: left;
+  color: #0E3DD8 !important;
+  text-transform: capitalize;
+  margin-bottom: 26px;
+  font-weight: 400;
 }
 
 /*# sourceMappingURL=tourfic-style.css.map */
