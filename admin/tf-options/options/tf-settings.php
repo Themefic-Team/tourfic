@@ -1575,16 +1575,10 @@ TF_Settings::option( 'tf_settings', array(
 				)
 			),
 		),
-		//email settings
-		'emails'	 => array(
-			'title'  => __( 'Emails', 'tourfic' ),
-			'icon'   => 'fa fa-envelope',
-			'fields' => array(),
-		),
-		'tours_email'    => array(
-			'title'  => esc_html__( 'Tour Email', 'tourfic' ),
+
+		'emails'    => array(
+			'title'  => esc_html__( 'Emails', 'tourfic' ),
 			'icon'   => 'fa fa-cog',
-			'parent'   => 'emails',
 			'fields' => array(
 				array(
 					'id'   => 'email-settings',
@@ -1652,16 +1646,11 @@ TF_Settings::option( 'tf_settings', array(
 								),
 								//email body
 								array(
-									'id'      => 'admin_booking_email_template',
+									'id'      => 'addmin_booking_email_template',
 									'type'    => 'editor',
 									'label'   => __( 'Booking Notification Template', 'tourfic' ),
-									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
-								),
-								array(
-									'id'      => 'aadmin_booking_email_template',
-									'type'    => 'editor',
-									'label'   => __( 'Booking Notification Template', 'tourfic' ),
-									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
+									//'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
+									'default' => 'something',
 								),
 								//heading
 								array(
@@ -1681,9 +1670,10 @@ TF_Settings::option( 'tf_settings', array(
 									'type'    => 'select',
 									'label'   => __( 'Email Content Type', 'tourfic' ),
 									'options' => array(
-										'html'  => __( 'HTML', 'tourfic' ),
-										'plain' => __( 'Plain Text', 'tourfic' ),
+										'text/html'  => __( 'HTML', 'tourfic' ),
+										'text/plain' => __( 'Plain Text', 'tourfic' ),
 									),
+									'default' => 'text/html',
 								),
 							),
 							
@@ -1694,12 +1684,13 @@ TF_Settings::option( 'tf_settings', array(
 							'id'     => 'customer-email',
 							'title'  => __( 'Customer Email', 'tourfic' ),
 							'icon'   => 'fa fa-envelope',
-							'fields' => array(
+							'fields' => array(								
+								//payment success email
 								array(
-									'id'      => 'customer_email_subject',
+									'id'      => 'customer_confirm_email_subject',
 									'type'    => 'text',
-									'label'   => __( 'Customer Email Subject', 'tourfic' ),
-									'default' => __( 'Booking Confirmation', 'tourfic' ),
+									'label'   => __( 'ooking Confirmation Email Subject', 'tourfic' ),
+									'default' => __( 'Your booking has been confirmed', 'tourfic' ),
 								),
 								array(
 									'id'      => 'customer_booking_email_template',
@@ -1707,17 +1698,10 @@ TF_Settings::option( 'tf_settings', array(
 									'label'   => __( 'Customer Booking Email Body', 'tourfic' ),
 									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'customer' ),
 								),
-								//payment success email
-								array(
-									'id'      => 'customer_confirm_email_subject',
-									'type'    => 'text',
-									'label'   => __( 'Payment Success Email Subject', 'tourfic' ),
-									'default' => __( 'Payment Success', 'tourfic' ),
-								),
 								array(
 									'id'      => 'customer_confirm_email_template',
 									'type'    => 'editor',
-									'label'   => __( 'Payment Success Email Body', 'tourfic' ),
+									'label'   => __( 'Booking Confirmation Email', 'tourfic' ),
 									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'customer' ),
 								),
 							),
@@ -1748,8 +1732,6 @@ TF_Settings::option( 'tf_settings', array(
 					<strong>{shipping_zip} </strong> : To display the shipping zip.<br>
 					<strong>{total_price} </strong> : To display the total price.<br>
 					<strong>{payment_method} </strong> : To display the payment method.<br>
-					<strong>{payment_status} </strong> : To display the payment status.<br>
-					<strong>{booking_status} </strong> : To display the booking status.<br>
 					<strong>{booking_url} </strong> : To display the booking url.<br>
 					<strong>{site_name} </strong> : To display the site name.<br>
 					<strong>{site_url} </strong> : To display the site url.<br>

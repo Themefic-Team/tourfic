@@ -21,57 +21,53 @@ $payment_details = array(
 
 ?>
 
-<div class="content">
-	<h3 class="greeting">
+<div style="padding-left:50px;padding-right:50px;width:100%;max-width:600px;margin: 0 auto;">
+	<h3 class="greeting" style="margin: 0; padding: 0;">
 	<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting' ) ); ?>
 	</h3>
-	<p>
-	<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting_byline' ) ); ?>
+	<p style="margin: 10px 0;">
+		<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting_byline' ) ); ?>
 	</p>
 	<div class="order-table">
-		{booking_details}
+		{booking_details}                
 	</div>
-	<div class="customer-details" style="display: flex;flex-direction: row;justify-content:space-between; margin: 24px 0;">
-		<div class="billing-info" style=" background: #e0f0fc6e;padding: 25px;">
-			<h3><?php esc_html_e( 'Billing Details', 'tourfic' ); ?></h3>
-			<table>
-			<?php foreach ( $billing_details as $tag => $label ) : ?>
-			
-				<tr>
-					<td><?php echo esc_html( $label ); ?></td>
-					<td class="alignright"><?php echo esc_html( $tag ); ?></td>
-				</tr>
-			<?php endforeach; ?>
-			</table>             
-		</div>
-		<!--<div class="shipping-info" style=" background: #e0f0fc6e;padding: 25px;">
-			
-		</div>
-		-->
+	<!-- Remaining code of the email template -->
+	<table style="width:100%;margin-top:15px;margin-bottom:15px">
+		<tr style="background: #e0f0fc6e;padding: 25px;width: 35%;float: left;margin-right: 20px;">
+			<td>
+				<h3 style="font-size: 16px; font-weight: bold; color: #0209AF; margin: 0;">Billing address</h3>
+				<?php foreach ( $billing_details as $tag => $label ) : ?>
+					<p style="margin: 0;"><?php echo esc_html( $tag ); ?></p>
+				<?php endforeach; ?>
+			</td>	
+		</tr>
+		<tr style="background: #e0f0fc6e;padding: 25px;width: 35%;float: right;margin-left: 20px;">
+			<td>	
+				<h3 style="font-size: 16px; font-weight: bold; color: #0209AF; margin: 0;">Shipping address</h3>
+				<?php foreach ( $billing_details as $tag => $label ) : ?>
+					<p style="margin: 0;"><?php echo esc_html( $tag ); ?></p>
+				<?php endforeach; ?>
+			</td>
+		</tr>
 	</div>
-	<div class="notice">
-		<p>
+	<div style="background: #e0f0fc6e; padding: 20px;">
+		<p style="margin: 0;">
 			Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat
 			duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
 		</p>
 	</div>
-	<p> <?php esc_html_e('Thank you for purchasing.','tourfic') ?></p>
+	<p style="margin: 0;">Thank you for purchasing.</p>
 	<?php if ( 'admin' === $args['send_to'] ) : ?>
-		<div class="order-button">
-		<a href="{booking_url}"><?php esc_html_e( 'View booking on your website', 'tourfic' ); ?></a>
-		</div>
+	<div style="margin: 10px 0;">
+		<a href="{booking_url}" style="display: inline-block; padding: 10px 15px; background-color: #0209AF; color: #fff; text-decoration: none;">View Order</a>
+	</div>
 	<?php endif; ?>
-	
-</div>
-<div class="footer">
-	<p><?php echo __('Sincerely','tourfic') ?>,</p>
-	<p><strong>{fullname}</strong></p>
-	<p>{site_name}</p>
-	<div class="social">
-		<a href="#">Facebook</a>
-		<a href="#">Twitter</a>
-		<a href="#">Instagram</a>
+	<div style="padding: 20px 0;">
+		<p style="margin: 5px 0;">{site_name}</p>
+		<div style="margin-top: 15px; padding-right: 10px;">
+			<a href="#" style="margin: 10px 0 10px; display: inline-block; text-decoration: none; color: #0209AF;">Facebook</a>
+			<a href="#" style="margin: 10px 0; display: inline-block; text-decoration: none; color: #0209AF;">Twitter</a>
+			<a href="#" style="margin: 10px 0; display: inline-block; text-decoration: none; color: #0209AF;">Instagram</a>
+		</div>
 	</div>
 </div>
-
-<?php
