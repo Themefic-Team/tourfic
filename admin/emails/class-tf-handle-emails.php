@@ -16,6 +16,7 @@ class TF_Handle_Emails{
     public function __construct(){
         self::$tf_email_settings = tfopt('email-settings')  ? tfopt('email-settings') : array(); 
         //send mail after new woocommerce order thankyou page
+        add_action( 'phpmailer_init', array( $this, 'tf_send_attachment' ) );
         add_action( 'woocommerce_thankyou', array( $this, 'send_email' ), 10, 1 );
         add_action( 'woocommerce_order_status_completed', array( $this, 'send_email' ), 10, 1 );
 
@@ -126,7 +127,16 @@ class TF_Handle_Emails{
 
 
     }
-    
+    public static function tf_send_attachment( ) {
+        $email_settings = self::$tf_email_settings;
+        $brand_logo = !empty($email_settings['brand_logo'] ) ? $email_settings['brand_logo'] : '';
+        $logo_id = attachment_url_to_postid( $brand_logo );
+        global $phpmailer;
+        $brand_logo_path = get_attached_file( $logo_id );; //phpmailer will load this file
+        $uid = 'logo-uid'; //will map it to this UID
+        $name = basename($brand_logo_path); //this will be the file name for the attachment
+        $phpmailer->AddEmbeddedImage($brand_logo_path, $uid);
+    } 
     /**
      * Send Email
      * @param string $to
@@ -232,11 +242,6 @@ class TF_Handle_Emails{
         //booking details end
       
         //admin email settings
-        $brand_logo = !empty($email_settings['brand_logo'] ) ? $email_settings['brand_logo'] : '';
-        $logo_id = attachment_url_to_postid( $brand_logo );
-        $brand_logo_path = get_attached_file( $logo_id );
-       
-        //Get the attachments
 
         // Set up the attachments for the brand logo and header image
         if( !empty($brand_logo_path) ){
@@ -256,7 +261,7 @@ class TF_Handle_Emails{
         $send_notifcation             = !empty($email_settings['send_notification'] ) ? $email_settings['send_notification'] : 'no';
         $sale_notification_email      = !empty($email_settings['sale_notification_email'] ) ? $email_settings['sale_notification_email'] : get_bloginfo('admin_email');
         $admin_email_disable          = !empty($email_settings['admin_email_disable'] ) ? $email_settings['admin_email_disable'] : false;
-        $admin_email_subject          = !empty($email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] . "#" . $order_id: '';
+        $admin_email_subject          = !empty($email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] . " # " . $order_id: '';
         $email_from_name              = !empty($email_settings['email_from_name'] ) ? $email_settings['email_from_name'] : get_bloginfo('name');
         $email_from_email             = !empty($email_settings['email_from_email'] ) ? $email_settings['email_from_email'] : get_bloginfo('admin_email');
         $email_content_type           = !empty($email_settings['email_content_type'] ) ? $email_settings['email_content_type'] : 'text/html';
@@ -273,8 +278,8 @@ class TF_Handle_Emails{
         $email_body_open              = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><body style="font-family: Work sans, sans-serif; font-size: 16px; color: #9C9C9C; margin: 0; padding: 0;">
         <div style="width: 100%; max-width: 600px; margin: 0 auto;">
             <div style="background-color: #0209AF; color: #fff; padding: 20px;">
-                <div class="brand-logo" style="text-align: left;width: 200px;">';
-        $email_body_open .= '<img src="cid:brand-logo" alt="logo" /></div>';
+                <div style="text-align:left;width:200px;">';
+        $email_body_open .= '<img src="cid:logo-uid" alt="logo" /></div>';
         $email_body_open .= '<div class="heading" style="text-align: center;">
         <h1 style="font-size: 32px; line-height: 40px; font-weight: 400; letter-spacing: 2px; margin: 20px 0; color: #ffffff;">
         '.$order_email_heading.'
@@ -322,13 +327,10 @@ class TF_Handle_Emails{
 
         
         $email_body_close = '</div></body></html>';
-        $admin_email_booking_body_full = $email_body_open . $admin_booking_email_template . $email_body_close;
-        $admin_email_booking_body_full = html_entity_decode( $admin_email_booking_body_full, '3', 'UTF-8' );
+        $vendor_booking_email_template = !empty($email_settings['vendor_booking_email_templates'] ) ? $email_settings['vendor_booking_email_templates'] : '';
+        $admin_email_booking_body_full = $email_body_open . $vendor_booking_email_template . $email_body_close;
+        //$admin_email_booking_body_full = $admin_email_booking_body_full;
         
-        
-        //send mail with image in the body
-
-
 
        
         //check if admin emails disable
@@ -339,11 +341,11 @@ class TF_Handle_Emails{
                     $sale_notification_email = explode(',', $sale_notification_email);
                     $sale_notification_email = str_replace(' ', '', $sale_notification_email);
                     foreach ( $sale_notification_email as $key => $email_address ) {
-                        wp_mail( $email_address, $admin_email_subject, $admin_email_booking_body_full, $headers, array($brand_logo_path) );
+                        wp_mail( $email_address, $admin_email_subject, $admin_email_booking_body_full, $headers );
                     }            
                 }else{
                     //send admin email
-                    wp_mail( $sale_notification_email, $admin_email_subject, $admin_email_booking_body_full, $headers, $attachments );
+                    wp_mail( $sale_notification_email, $admin_email_subject, $admin_email_booking_body_full, $headers );
 
                 }
             }
@@ -373,7 +375,7 @@ class TF_Handle_Emails{
 
         //customer email settings
         $customer_email_address =  $order_billing_email;
-        $customer_email_subject = !empty( $email_settings['customer_confirm_email_subject'] ) ? $email_settings['customer_email_subject']  : '';
+        $customer_email_subject = !empty( $email_settings['customer_confirm_email_subject'] ) ? $email_settings['customer_confirm_email_subject']  : '';
         $customer_email_subject = str_replace( '{booking_id}', $order_id, $customer_email_subject );
         $customer_confirm_email_template = !empty($email_settings['customer_confirm_email_template'] ) ? $email_settings['customer_confirm_email_template'] : '';
         //send mail to customer 

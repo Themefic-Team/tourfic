@@ -1646,11 +1646,10 @@ TF_Settings::option( 'tf_settings', array(
 								),
 								//email body
 								array(
-									'id'      => 'addmin_booking_email_template',
+									'id'      => 'admin_booking_email_template',
 									'type'    => 'editor',
 									'label'   => __( 'Booking Notification Template', 'tourfic' ),
-									//'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
-									'default' => 'something',
+									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
 								),
 								//heading
 								array(
@@ -1708,6 +1707,14 @@ TF_Settings::option( 'tf_settings', array(
 						),
 					),	
 				),
+				
+								//vendor email template
+								array(
+									'id'      => 'vendor_booking_email_templates',
+									'type'    => 'editor',
+									'label'   => __( 'Vendor Notification Template', 'tourfic' ),
+									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ),
+								),
 				//notice field
 				array(
 					'id'      => 'notice',
