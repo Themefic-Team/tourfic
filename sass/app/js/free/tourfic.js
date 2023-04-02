@@ -1564,6 +1564,27 @@
             $('.tf-tour-filter-range').alRangeSlider(tf_tour_range_options);
         }
 
+        // Tours Min and Max Range in Search Result
+        let tf_tours_search_range = {
+            range: {
+                min: parseInt(tf_params.tf_tour_min_price),
+                max: parseInt(tf_params.tf_tour_max_price),
+                step: 1
+            },
+            initialSelectedValues: {
+                from: tf_search_page_params.get('from')? tf_search_page_params.get('from') : parseInt(tf_params.tf_tour_min_price),
+                to: tf_search_page_params.get('to')? tf_search_page_params.get('to') : parseInt(tf_params.tf_tour_max_price) / 2
+            },
+            grid: false,
+            theme: "dark",
+            onFinish: function(){
+                makeFilter();
+            }
+        };
+        if (tf_params.tf_tour_min_price != 0 && tf_params.tf_tour_max_price != 0) {
+            $('.tf-tour-result-price-range').alRangeSlider(tf_tours_search_range);
+        }
+
         // Hotel Location
 
         $('#tf-destination-adv').click(function (e) {

@@ -502,11 +502,6 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 
 			<div class="tf-booking-bttns tf-mrtop-30">
 				<?php
-				if ( ! empty( $startprice ) && ! empty( $endprice ) ) { ?>
-					<input type="hidden" id="startprice" value="<?php echo $startprice; ?>">
-					<input type="hidden" id="endprice" value="<?php echo $endprice; ?>">
-				<?php } ?>
-				<?php
 				$ptype = $_GET['type'] ?? get_post_type();
 				?>
 				<input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type"/>
@@ -592,11 +587,6 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 
         <div class="tf_form-row">
 			<?php
-			if ( ! empty( $startprice ) && ! empty( $endprice ) ) { ?>
-                <input type="hidden" id="startprice" value="<?php echo $startprice; ?>">
-                <input type="hidden" id="endprice" value="<?php echo $endprice; ?>">
-			<?php } ?>
-			<?php
 			$ptype = $_GET['type'] ?? get_post_type();
 			?>
             <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type"/>
@@ -628,11 +618,21 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
         })(jQuery);
     </script>
 	<?php 
-	if( !empty($_GET['type']) && $_GET['type']=="tf_hotel" && !empty($_GET['type']) ){
+	if( !empty($_GET['type']) && $_GET['type']=="tf_hotel" && !empty($startprice) && !empty($endprice ) ){
 	?>
 	<div class="tf-box-wrapper tf-box tf-mrbottom-30">
 		<h4><?php _e("Hotel Price Range"); ?></h4>
 		<div class="tf-hotel-result-price-range">
+
+		</div>
+	</div>
+	<?php } ?>
+	<?php 
+	if( !empty($_GET['type']) && $_GET['type']=="tf_tours" && !empty($startprice) && !empty($endprice ) ){
+	?>
+	<div class="tf-box-wrapper tf-box tf-mrbottom-30">
+		<h4><?php _e("Tour Price Range"); ?></h4>
+		<div class="tf-tour-result-price-range">
 
 		</div>
 	</div>

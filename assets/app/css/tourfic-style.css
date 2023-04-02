@@ -1448,12 +1448,16 @@ li.filter-item {
   box-shadow: none !important;
   margin: 30px 0px 10px 0px;
 }
+.tf-box-wrapper .al-range-slider__track .al-range-slider__grid {
+  pointer-events: inherit !important;
+}
 .tf-box-wrapper .al-range-slider_dark {
   padding: 0px !important;
 }
 .tf-box-wrapper .al-range-slider_dark .al-range-slider__bar {
   background: #003162 !important;
   box-shadow: none !important;
+  pointer-events: none !important;
 }
 .tf-box-wrapper .al-range-slider__knob {
   background: #003162 !important;
