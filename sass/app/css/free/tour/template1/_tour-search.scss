@@ -294,6 +294,45 @@ i {
             }
             
         }
+        .tf-box-wrapper {
+            .al-range-slider__track {
+                background: #EEE;
+                height: 10px;
+                box-shadow: none !important;
+                margin: 30px 0px 10px 0px;
+            }
+            .al-range-slider_dark {
+                padding: 0px !important;
+                .al-range-slider__bar {
+                    background: $color-theme !important;
+                    box-shadow: none !important;
+                }
+            }
+            .al-range-slider__knob {
+                background: $color-theme !important;
+                height: 15px;
+                width: 15px;
+                box-shadow: none !important;
+                border: 3px solid $color-theme !important;
+                &:first-child {
+                    span {
+                        left: 10px !important;
+                    }
+                }
+            }
+            .al-range-slider__tooltip {
+                background: $color-theme !important;
+                border-radius: 5px;
+                box-shadow: none;
+                padding: 3px 10px;
+                color: #fff !important;
+                font-size: 13px !important;
+                margin-bottom: 0px !important;
+            }
+            .al-range-slider__input.js-al-range-slider__input {
+                display: none;
+            }
+        }
         #tf__booking_sidebar{
             padding: 30px;
             box-shadow: 0px 13px 30px 0px #e0e8ee;
@@ -357,6 +396,12 @@ i {
                         text-transform: capitalize;
                         margin-bottom: 26px;
                         font-weight: 400;
+                        span{
+                            margin-left: 8px;
+                        }
+                    }
+                    a.see-less{
+                        display: none;
                     }
                 }
             }

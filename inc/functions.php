@@ -627,7 +627,16 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
             });
         })(jQuery);
     </script>
+	<?php 
+	if( !empty($_GET['type']) && $_GET['type']=="tf_hotel" && !empty($_GET['type']) ){
+	?>
+	<div class="tf-box-wrapper tf-box tf-mrbottom-30">
+		<h4><?php _e("Hotel Price Range"); ?></h4>
+		<div class="tf-hotel-result-price-range">
 
+		</div>
+	</div>
+	<?php } ?>
 	<?php if ( is_active_sidebar( 'tf_search_result' ) ) { ?>
         <div id="tf__booking_sidebar">
 			<?php dynamic_sidebar( 'tf_search_result' ); ?>

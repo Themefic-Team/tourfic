@@ -1439,6 +1439,45 @@ li.filter-item {
   gap: 15px;
 }
 
+.tf-box-wrapper h4 {
+  margin-bottom: 20px !important;
+}
+.tf-box-wrapper .al-range-slider__track {
+  background: #EEE;
+  height: 10px;
+  box-shadow: none !important;
+  margin: 30px 0px 10px 0px;
+}
+.tf-box-wrapper .al-range-slider_dark {
+  padding: 0px !important;
+}
+.tf-box-wrapper .al-range-slider_dark .al-range-slider__bar {
+  background: #003162 !important;
+  box-shadow: none !important;
+}
+.tf-box-wrapper .al-range-slider__knob {
+  background: #003162 !important;
+  height: 15px;
+  width: 15px;
+  box-shadow: none !important;
+  border: 3px solid #003162 !important;
+}
+.tf-box-wrapper .al-range-slider__knob:first-child span {
+  left: 10px !important;
+}
+.tf-box-wrapper .al-range-slider__tooltip {
+  background: #003162 !important;
+  border-radius: 5px;
+  box-shadow: none;
+  padding: 3px 10px;
+  color: #fff !important;
+  font-size: 13px !important;
+  margin-bottom: 0px !important;
+}
+.tf-box-wrapper .al-range-slider__input.js-al-range-slider__input {
+  display: none;
+}
+
 @media only screen and (max-width: 1000px) {
   form.tf-review-form {
     gap: 20px;
@@ -5594,6 +5633,41 @@ div#tf-contact-info {
   object-fit: cover;
   border-radius: 5px;
 }
+.tf-archive-design-1 .tf-archive-right .tf-box-wrapper .al-range-slider__track {
+  background: #EEE;
+  height: 10px;
+  box-shadow: none !important;
+  margin: 30px 0px 10px 0px;
+}
+.tf-archive-design-1 .tf-archive-right .tf-box-wrapper .al-range-slider_dark {
+  padding: 0px !important;
+}
+.tf-archive-design-1 .tf-archive-right .tf-box-wrapper .al-range-slider_dark .al-range-slider__bar {
+  background: #0E3DD8 !important;
+  box-shadow: none !important;
+}
+.tf-archive-design-1 .tf-archive-right .tf-box-wrapper .al-range-slider__knob {
+  background: #0E3DD8 !important;
+  height: 15px;
+  width: 15px;
+  box-shadow: none !important;
+  border: 3px solid #0E3DD8 !important;
+}
+.tf-archive-design-1 .tf-archive-right .tf-box-wrapper .al-range-slider__knob:first-child span {
+  left: 10px !important;
+}
+.tf-archive-design-1 .tf-archive-right .tf-box-wrapper .al-range-slider__tooltip {
+  background: #0E3DD8 !important;
+  border-radius: 5px;
+  box-shadow: none;
+  padding: 3px 10px;
+  color: #fff !important;
+  font-size: 13px !important;
+  margin-bottom: 0px !important;
+}
+.tf-archive-design-1 .tf-archive-right .tf-box-wrapper .al-range-slider__input.js-al-range-slider__input {
+  display: none;
+}
 .tf-archive-design-1 .tf-archive-right #tf__booking_sidebar {
   padding: 30px;
   box-shadow: 0px 13px 30px 0px #e0e8ee;
@@ -5658,6 +5732,12 @@ div#tf-contact-info {
   text-transform: capitalize;
   margin-bottom: 26px;
   font-weight: 400;
+}
+.tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-filter a span {
+  margin-left: 8px;
+}
+.tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-filter a.see-less {
+  display: none;
 }
 
 /*# sourceMappingURL=tourfic-style.css.map */

@@ -65,7 +65,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
                 $defult_select =  in_array($fslug, $search_features_query) ? 'checked' : '';
                 echo "<li class='filter-item'><label><input type='checkbox' name='tf_filters[]' value='{$id}' {$defult_select}/><span class='checkmark'></span> {$name}</label> {$count}</li>";
             }
-            echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a></div>";
+            echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . __( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
             echo $after_widget;
         }
@@ -211,7 +211,7 @@ class TF_Tour_Feature_Filter extends WP_Widget {
 
                 echo "<li class='filter-item'><label><input type='checkbox' name='tour_features[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>";
             }
-            echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a></div>";
+            echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . __( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
             echo $after_widget;
         }
@@ -357,7 +357,7 @@ class TF_Tour_Attraction_Filter extends WP_Widget {
 
                 echo "<li class='filter-item'><label><input type='checkbox' name='tf_attractions[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>";
             }
-            echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a></div>";
+            echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . __( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
             echo $after_widget;
         }
@@ -499,7 +499,7 @@ class TF_Tour_Activities_Filter extends WP_Widget {
 
                 echo "<li class='filter-item'><label><input type='checkbox' name='tf_activities[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>";
             }
-            echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a></div>";
+            echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . __( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
             echo $after_widget;
         }

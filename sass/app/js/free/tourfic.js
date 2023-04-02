@@ -433,8 +433,8 @@
             var room = $('#room').val();
             var children = $('#children').val();
             var checked = $('#check-in-out-date').val();
-            var startprice = $('#startprice').val();
-            var endprice = $('#endprice').val();
+            var startprice = $('.tf-box-wrapper input[name="from"]').val();
+            var endprice = $('.tf-box-wrapper input[name="to"]').val();
             // split date range into dates
             var checkedArr = checked.split(' - ');
             var checkin = checkedArr[0];
@@ -598,8 +598,8 @@
             var room = $('#room').val();
             var children = $('#children').val();
             var checked = $('#check-in-out-date').val();
-            var startprice = $('#startprice').val();
-            var endprice = $('#endprice').val();
+            var startprice = $('.tf-box-wrapper input[name="from"]').val();
+            var endprice = $('.tf-box-wrapper input[name="to"]').val();
             // split date range into dates
             var checkedArr = checked.split(' - ');
             var checkin = checkedArr[0];
@@ -1524,6 +1524,28 @@
             $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
         }
 
+        // Hotel Min and Max Range in Search Result
+        var tf_search_page_params = new window.URLSearchParams(window.location.search);
+        let tf_hotel_search_range = {
+            range: {
+                min: parseInt(tf_params.tf_hotel_min_price),
+                max: parseInt(tf_params.tf_hotel_max_price),
+                step: 1
+            },
+            initialSelectedValues: {
+                from: tf_search_page_params.get('from')? tf_search_page_params.get('from') : parseInt(tf_params.tf_hotel_min_price),
+                to: tf_search_page_params.get('to')? tf_search_page_params.get('to') : parseInt(tf_params.tf_hotel_max_price) / 2
+            },
+            grid: false,
+            theme: "dark",
+            onFinish: function(){
+                makeFilter();
+            }
+        };
+        if (tf_params.tf_hotel_min_price != 0 && tf_params.tf_hotel_max_price != 0) {
+            $('.tf-hotel-result-price-range').alRangeSlider(tf_hotel_search_range);
+        }
+    
         // Tour Min and Max Range
         let tf_tour_range_options = {
             range: {
@@ -1773,6 +1795,20 @@
                 return index > 3;
             }).removeClass("hidden");
             $this.hide();
+
+            $this.parent('.tf-filter').find('.see-less').show();
+        });
+
+        /* see Sless checkbox filter started */
+
+        $('a.see-less').on('click', function (e) {
+            var $this = $(this);
+            e.preventDefault();
+            $this.parent('.tf-filter').find('.filter-item').filter(function (index) {
+                return index > 3;
+            }).addClass("hidden");
+            $this.hide();
+            $this.parent('.tf-filter').find('.see-more').show();
         });
 
         $('.tf-filter').each(function () {
