@@ -21,7 +21,7 @@ $payment_details = array(
 
 ?>
 
-<div style="padding-left:50px;padding-right:50px;width:100%;max-width:600px;margin: 0 auto;">
+<div style="padding-left:50px;padding-right:50px;margin: 0 auto;margin-top:30px;">
 	<h3 class="greeting" style="margin: 0; padding: 0;">
 	<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting' ) ); ?>
 	</h3>
@@ -32,17 +32,15 @@ $payment_details = array(
 		{booking_details}                
 	</div>
 	<!-- Remaining code of the email template -->
-	<table style="width:100%;margin-top:15px;margin-bottom:15px">
-		<tr style="background: #e0f0fc6e;padding: 25px;width: 35%;float: left;margin-right: 20px;">
-			<td>
+	<table style="margin-top:15px;margin-bottom:15px;border:none" >
+		<tr>
+			<td style="background: #e0f0fc6e;padding: 25px;width: 35%;float: left;margin-right: 20px;">			
 				<h3 style="font-size: 16px; font-weight: bold; color: #0209AF; margin: 0;">Billing address</h3>
 				<?php foreach ( $billing_details as $tag => $label ) : ?>
 					<p style="margin: 0;"><?php echo esc_html( $tag ); ?></p>
 				<?php endforeach; ?>
-			</td>	
-		</tr>
-		<tr style="background: #e0f0fc6e;padding: 25px;width: 35%;float: right;margin-left: 20px;">
-			<td>	
+			</td>
+			<td style="background: #e0f0fc6e;padding: 25px;width: 35%;float: right;margin-left: 20px;">
 				<h3 style="font-size: 16px; font-weight: bold; color: #0209AF; margin: 0;">Shipping address</h3>
 				<?php foreach ( $billing_details as $tag => $label ) : ?>
 					<p style="margin: 0;"><?php echo esc_html( $tag ); ?></p>

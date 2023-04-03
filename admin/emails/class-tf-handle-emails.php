@@ -130,12 +130,17 @@ class TF_Handle_Emails{
     public static function tf_send_attachment( ) {
         $email_settings = self::$tf_email_settings;
         $brand_logo = !empty($email_settings['brand_logo'] ) ? $email_settings['brand_logo'] : '';
-        $logo_id = attachment_url_to_postid( $brand_logo );
-        global $phpmailer;
-        $brand_logo_path = get_attached_file( $logo_id );; //phpmailer will load this file
-        $uid = 'logo-uid'; //will map it to this UID
-        $name = basename($brand_logo_path); //this will be the file name for the attachment
-        $phpmailer->AddEmbeddedImage($brand_logo_path, $uid);
+        if( ! empty( $brand_logo ) ){
+            $logo_id = attachment_url_to_postid( $brand_logo );
+       
+            $brand_logo_path = get_attached_file( $logo_id ); //phpmailer will load this file
+            $uid = 'logo-uid'; //will map it to this UID
+            global $phpmailer;
+            $phpmailer->AddEmbeddedImage($brand_logo_path, $uid);
+        }else{
+            return;
+        }
+        
     } 
     /**
      * Send Email
@@ -201,7 +206,7 @@ class TF_Handle_Emails{
         $booking_details = '<table width="100%" style="max-width: 600px;border-collapse: collapse; color: #5A5A5A;"><thead><tr><th align="left">Item Name</th><th align="center">Quantity</th><th align="right">Price</th></tr></thead><tbody style="border-bottom: 2px solid #D9D9D9">';
         foreach( $order_items_data as $item ){
             $booking_details .= '<tr>';
-            $booking_details .= '<td style="padding: 15px 0;text-align: left;">'.$item['item_name'];
+            $booking_details .= '<td style="padding-left:10px;adding: 15px 0;text-align: left;">'.$item['item_name'];
             //item meta data except _order_type,_post_author,_tour_id php loop
             foreach( $item['item_meta_data'] as $meta_data ){
                 if( $meta_data['key'] != '_order_type' && $meta_data['key'] != '_post_author' && $meta_data['key'] != '_tour_id' && $meta_data['key'] != '_post_id' && $meta_data['key'] != '_unique_id' ){
@@ -258,6 +263,7 @@ class TF_Handle_Emails{
         }else{
             $attachments = array();
         }
+        $brand_logo = ! empty(  $email_settings['brand_logo'] ) ? $email_settings['brand_logo'] : '';
         $send_notifcation             = !empty($email_settings['send_notification'] ) ? $email_settings['send_notification'] : 'no';
         $sale_notification_email      = !empty($email_settings['sale_notification_email'] ) ? $email_settings['sale_notification_email'] : get_bloginfo('admin_email');
         $admin_email_disable          = !empty($email_settings['admin_email_disable'] ) ? $email_settings['admin_email_disable'] : false;
@@ -277,9 +283,12 @@ class TF_Handle_Emails{
 
         $email_body_open              = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><body style="font-family: Work sans, sans-serif; font-size: 16px; color: #9C9C9C; margin: 0; padding: 0;">
         <div style="width: 100%; max-width: 600px; margin: 0 auto;">
-            <div style="background-color: #0209AF; color: #fff; padding: 20px;">
-                <div style="text-align:left;width:200px;">';
-        $email_body_open .= '<img src="cid:logo-uid" alt="logo" /></div>';
+            <div style="background-color: #0209AF; color: #fff; padding: 20px;">';
+        if( !empty( $brand_logo ) ){
+            $logo_id = attachment_url_to_postid( $brand_logo );
+            $brand_logo_path = file_get_contents( get_attached_file( $logo_id ) );
+            $email_body_open .= '<div style="text-align:left;width:200px;"><img src="data:'.mime_content_type($brand_logo_path).';base64,'.base64_encode($brand_logo_path).'" alt="logo" /></div>';
+        }
         $email_body_open .= '<div class="heading" style="text-align: center;">
         <h1 style="font-size: 32px; line-height: 40px; font-weight: 400; letter-spacing: 2px; margin: 20px 0; color: #ffffff;">
         '.$order_email_heading.'
@@ -291,6 +300,7 @@ class TF_Handle_Emails{
         $email_body_open .= '</div>';
         $email_body_open = str_replace( '{booking_id}', $order_id, $email_body_open );
         $admin_booking_email_template = !empty($email_settings['admin_booking_email_template'] ) ? $email_settings['admin_booking_email_template'] : '';
+        $vendor_booking_email_template = !empty($email_settings['vendor_booking_email_template'] ) ? $email_settings['vendor_booking_email_template'] : '';
         //send attachment to mail from settings image field
         
         //all mail tags mapping
@@ -327,10 +337,13 @@ class TF_Handle_Emails{
 
         
         $email_body_close = '</div></body></html>';
-        $vendor_booking_email_template = !empty($email_settings['vendor_booking_email_templates'] ) ? $email_settings['vendor_booking_email_templates'] : '';
-        $admin_email_booking_body_full = $email_body_open . $vendor_booking_email_template . $email_body_close;
-        //$admin_email_booking_body_full = $admin_email_booking_body_full;
-        
+        $admin_email_booking_body_full = $email_body_open . $admin_booking_email_template . $email_body_close;
+        //decode entity
+        $admin_email_booking_body_full = wp_kses_post(html_entity_decode( $admin_email_booking_body_full, '3' , 'UTF-8' ));
+    
+       // echo html_entity_decode( wp_kses_post($admin_email_booking_body_full) );
+        echo $admin_email_booking_body_full;
+        //wp_die();   
 
        
         //check if admin emails disable
@@ -362,7 +375,7 @@ class TF_Handle_Emails{
 
             $vendor_email_booking_body_full = $email_body_open . $vendor_booking_email_template . $email_body_close;
             //send mail in plain text and html conditionally 
-            $vendor_email_booking_body_full = wp_kses_post( html_entity_decode( $vendor_email_booking_body_full, 3, 'UTF-8' ) );
+            $vendor_email_booking_body_full =html_entity_decode( $vendor_email_booking_body_full, 3, 'UTF-8' ) ;
             
             //send mail to vendor
             if( ! empty( $vendors_email ) ){

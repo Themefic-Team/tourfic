@@ -31,15 +31,16 @@ if ( ! class_exists( 'TF_text' ) ) {
 						<?php foreach ( $this->field['tabs'] as $key => $value ): ?>
                             <div class="tf-tab-item-content <?php echo $key == 0 ? "show" : '' ?>" data-tab-id="<?php echo isset( $value['id'] ) ? esc_attr( $value['id'] ) : '' ?>">
 								<?php
-
+								
 								foreach ( $value['fields'] as $key => $field ) {
+									
 									$parent  = '[' . $this->field['id'] . ']';
 									$default = isset( $field['default'] ) ? $field['default'] : '';
 									$value   = isset( $tf_meta_box_value[ $field['id'] ] ) ? $tf_meta_box_value[ $field['id'] ] : $default;
 
 									if ( ! empty( $this->value ) ) {
-										$data = ( ! is_array( $this->value ) ) ? unserialize( $this->value ) : $this->value;
 										
+										$data = ( ! is_array( $this->value ) ) ? unserialize( $this->value ) : $this->value;
 										if ( is_array( $data ) ) {
 											if ( isset( $data[ $field['id'] ] ) ) {
 
@@ -49,7 +50,10 @@ if ( ! class_exists( 'TF_text' ) ) {
 											}
 										}
 									}
-									//print_r($value);
+									
+									// sanitize Wp Editor Field
+									$value = ( $field['type'] == 'editor' ) ? wp_kses_post($value) : $value;
+
 									$tf_option = new TF_Options();
 									$tf_option->field( $field, $value, $this->settings_id, $parent );
 								}
@@ -60,11 +64,10 @@ if ( ! class_exists( 'TF_text' ) ) {
                 </div>
             </div>
 			<?php
-
 		}
 		public function sanitize() {
 			return $this->value;
 		}
+	}		
 
-	}
 }
