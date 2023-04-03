@@ -26,7 +26,7 @@ $post_id           = $post->ID;
 // Get settings value
 $tf_ratings_for = tfopt( 'r-for' ) ?? [ 'li', 'lo' ];
 
-if( ! empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) && tf_data_types(tfopt( 'tf-template' ))['single-tour']=="design-1"){
+if( ( is_post_type_archive('tf_tours') && !empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) && tf_data_types(tfopt( 'tf-template' ))['single-tour']=="design-1") || ( is_post_type_archive('tf_hotel') && !empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) && tf_data_types(tfopt( 'tf-template' ))['single-hotel']=="design-1") ){
 
 if ( $comments ) {
 	$tf_overall_rate        = [];

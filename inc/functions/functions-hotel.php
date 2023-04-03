@@ -1393,7 +1393,83 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
     }
 
 	?>
+	<?php 
+	if( ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) && tf_data_types(tfopt( 'tf-template' ))['single-hotel']=="design-1"){
+	?>
+	<form id="tf-single-hotel-avail" class="widget tf-hotel-side-booking" method="get" autocomplete="off">
 
+		<?php wp_nonce_field( 'check_room_avail_nonce', 'tf_room_avail_nonce' ); ?>
+
+		<div class="tf_form-row">
+			<label class="tf_label-row">
+				<div class="tf_form-inner">
+					<i class="fas fa-user-friends"></i>
+					<select name="adults" id="adults" class="">
+						<?php
+						echo '<option value="1">1 ' . __( "Adult", "tourfic" ) . '</option>';
+						if($max_adults_numbers > 1){
+							foreach ( range( 2, $max_adults_numbers ) as $value ) {
+								$selected = $value == $adults ? 'selected' : null;
+								echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __( "Adults", "tourfic" ) . '</option>';
+							}
+						}
+						?>
+
+					</select>
+				</div>
+			</label>
+		</div>
+
+		<div class="tf_form-row">
+			<label class="tf_label-row">
+				<div class="tf_form-inner">
+					<i class="fas fa-child"></i>
+					<select name="children" id="children" class="">
+						<?php
+						echo '<option value="0">0 ' . __( "Children", "tourfic" ) . '</option>';
+						if($max_childs_numbers > 0){
+							foreach ( range( 1, $max_childs_numbers ) as $value ) {
+								$selected = $value == $child ? 'selected' : null;
+								echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __( "Children", "tourfic" ) . '</option>';
+							}
+						}
+						?>
+					</select>
+				</div>
+			</label>
+		</div>
+
+		<div class="tf_booking-dates">
+			<div class="tf_form-row">
+				<label class="tf_label-row">
+					<span class="tf-label"><?php _e( 'Check-in & Check-out date', 'tourfic' ); ?></span>
+					<div class="tf_form-inner">
+						<i class="far fa-calendar-alt"></i>
+						<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
+							placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
+					</div>
+				</label>
+			</div>
+		</div>
+
+		<div class="tf_form-row">
+			<?php
+			$ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
+			?>
+			<input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type"/>
+			<input type="hidden" name="post_id" value="<?php echo get_the_ID(); ?>"/>
+			<input type="hidden" name="children_ages" value="<?php echo $children_ages; ?>"/>
+
+			<div class="tf-btn">
+				<button class="tf_button tf-submit btn-styled"
+						type="submit"><?php esc_html_e( 'Booking Availability', 'tourfic' ); ?></button>
+			</div>
+
+
+		</div>
+
+	</form>
+	<?php }else{ ?>
     <!-- Start Booking widget -->
     <form id="tf-single-hotel-avail" class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off">
 
@@ -1468,7 +1544,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
         </div>
 
     </form>
-
+	<?php } ?>
     <script>
         (function ($) {
             $(document).ready(function () {

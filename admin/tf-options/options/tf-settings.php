@@ -50,6 +50,16 @@ TF_Settings::option( 'tf_settings', array(
 									'class'   => 'tf-field-class',
 								),
 								array(
+									'id'       => 'single-hotel',
+									'type'     => 'select',
+									'label'    => __( 'Select Single Template', 'tourfic' ),
+									'options'  => array(
+										'default' => __( 'Default Template', 'tourfic' ),
+										'design-1' => __( 'Design 1', 'tourfic' ),
+									),
+									'default'  => 'default'
+								),
+								array(
 									'id'      => 'hotel-title',
 									'type'    => 'heading',
 									'content' => __( 'Hotel Archive & Search Result Page', 'tourfic' ),

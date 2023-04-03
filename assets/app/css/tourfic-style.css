@@ -5756,4 +5756,32 @@ div#tf-contact-info {
   display: none;
 }
 
+.tf-hotel-design-1 {
+  background: inherit;
+}
+.tf-hotel-design-1 .tf-single-head .more-hotel {
+  color: #0E3DD8;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: underline;
+}
+.tf-hotel-design-1 .tf-hotel-single-features ul {
+  margin: 20px 0px 0px 0px;
+  padding: 0;
+}
+.tf-hotel-design-1 .tf-hotel-single-features ul li {
+  display: inline-flex;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  text-transform: capitalize;
+  margin: 5px 5px 5px 0px;
+}
+.tf-hotel-design-1 .tf-hotel-single-features ul li i {
+  margin-right: 8px;
+}
+.tf-hotel-design-1 .tf-hotel-single-features ul li img {
+  margin-right: 8px;
+}
+
 /*# sourceMappingURL=tourfic-style.css.map */
