@@ -398,7 +398,12 @@ a.page-numbers {
         display: block;
         font-weight: 600;
     }
-
+    a.see-less.btn-link {
+        text-align: center;
+        display: block;
+        font-weight: 600;
+        display: none
+    }
     a.see-more span {
         margin-left: 3px;
         vertical-align: middle;

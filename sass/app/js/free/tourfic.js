@@ -1686,6 +1686,14 @@
             });
         });
 
+        /*
+        * Star Rating Checkbox
+        * @author: Jahid
+        */
+        $('.tf-star-rating').click(function () {
+            var $this = $(this);
+            $this.toggleClass("active");
+        });
 
         // FAQ Accordion
         $('.tf-faq-title').click(function () {

@@ -617,26 +617,36 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
             });
         })(jQuery);
     </script>
-	<?php 
-	if( !empty($_GET['type']) && $_GET['type']=="tf_hotel" && !empty($startprice) && !empty($endprice ) ){
-	?>
+	
 	<div class="tf-box-wrapper tf-box tf-mrbottom-30">
-		<h4><?php _e("Hotel Price Range"); ?></h4>
-		<div class="tf-hotel-result-price-range">
+		<?php 
+		if( !empty($_GET['type']) && $_GET['type']=="tf_tours" && !empty($startprice) && !empty($endprice ) ){
+		?>
+			<h4><?php _e("Tour Price Range","tourfic"); ?></h4>
+			<div class="tf-tour-result-price-range"></div>
+		<?php } ?>
+		<?php 
+		if( !empty($_GET['type']) && $_GET['type']=="tf_hotel" && !empty($startprice) && !empty($endprice ) ){
+		?>
+			<h4><?php _e("Hotel Price Range","tourfic"); ?></h4>
+			<div class="tf-hotel-result-price-range"></div>
+		<?php } ?>
 
+		<h4><?php _e("Star Rating","tourfic"); ?></h4>
+		<div class="tf-search-star-rating">
+			<?php
+			$tf_ratings_for = !empty(tfopt( 'r-base' )) ? tfopt( 'r-base' ) : 5;
+			foreach ( range( 1, $tf_ratings_for ) as $value ) {
+			?>
+			<div class="tf-square-check-box">
+				<input type="checkbox" name="tf_star_review" value="<?php echo $value; ?>" id="star<?php echo $value; ?>">
+				<label for="star<?php echo $value; ?>" class="tf-star-rating"><?php echo $value; ?> <?php _e("Star","tourfic"); ?></label>
+			</div>
+			<?php
+			}
+			?>
 		</div>
 	</div>
-	<?php } ?>
-	<?php 
-	if( !empty($_GET['type']) && $_GET['type']=="tf_tours" && !empty($startprice) && !empty($endprice ) ){
-	?>
-	<div class="tf-box-wrapper tf-box tf-mrbottom-30">
-		<h4><?php _e("Tour Price Range"); ?></h4>
-		<div class="tf-tour-result-price-range">
-
-		</div>
-	</div>
-	<?php } ?>
 	<?php if ( is_active_sidebar( 'tf_search_result' ) ) { ?>
         <div id="tf__booking_sidebar">
 			<?php dynamic_sidebar( 'tf_search_result' ); ?>
