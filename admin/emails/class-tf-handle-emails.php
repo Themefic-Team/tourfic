@@ -12,7 +12,6 @@ class TF_Handle_Emails{
     /**
      * Constructor
      */
-    protected static $dd;
     public function __construct(){
         self::$tf_email_settings = tfopt('email-settings')  ? tfopt('email-settings') : array(); 
         //send mail after new woocommerce order thankyou page
@@ -159,8 +158,13 @@ class TF_Handle_Emails{
         $order_items = $order->get_items();
         $order_subtotal = $order->get_subtotal();
         $order_total = $order->get_total();        
+        $order_billing_name = $order->get_billing_first_name() .' '. $order->get_billing_last_name();
+        $order_billing_address = $order->get_billing_address_1() . ' ' . $order->get_billing_address_2();
         $order_billing_email = $order->get_billing_email();
         $order_billing_phone = $order->get_billing_phone();
+        $order_billing_city = $order->get_billing_city();
+        $order_billing_country = $order->get_billing_country();
+        $order_billing_postcode = $order->get_billing_postcode();
         $order_payment_method = $order->get_payment_method();
         $payment_method_title = $order->get_payment_method_title();
         $order_shipping_method = $order->get_shipping_method();
@@ -245,7 +249,18 @@ class TF_Handle_Emails{
        
         $booking_details .= '</table>';
         //booking details end
-      
+
+        //customer details
+        $customer_details = '<table style="max-width: 600px;border-collapse: collapse; color: #5A5A5A;"><tbody><tr><td style="padding: 15px 0;text-align: left;">';
+        $customer_details .= '<strong>Customer Name:</strong> '.$order_billing_name.'<br>';
+        $customer_details .= '<strong>Customer Address:</strong> '.$order_billing_address.'<br>';
+        $customer_details .= '<strong>Customer Email:</strong> '.$order_billing_email.'<br>';
+        $customer_details .= '<strong>Customer Phone:</strong> '.$order_billing_phone.'<br>';
+        $customer_details .= '<strong>Customer City:</strong> '.$order_billing_city.'<br>';
+        $customer_details .= '<strong>Customer Country:</strong> '.$order_billing_country.'<br>';
+        $customer_details .= '<strong>Customer Postcode:</strong> '.$order_billing_postcode.'<br>';
+        $customer_details .= '</td></tr></tbody></table>';
+        //customer details end
         //admin email settings
 
         // Set up the attachments for the brand logo and header image
@@ -263,14 +278,14 @@ class TF_Handle_Emails{
         }else{
             $attachments = array();
         }
-        $brand_logo = ! empty(  $email_settings['brand_logo'] ) ? $email_settings['brand_logo'] : '';
-        $send_notifcation             = !empty($email_settings['send_notification'] ) ? $email_settings['send_notification'] : 'no';
-        $sale_notification_email      = !empty($email_settings['sale_notification_email'] ) ? $email_settings['sale_notification_email'] : get_bloginfo('admin_email');
-        $admin_email_disable          = !empty($email_settings['admin_email_disable'] ) ? $email_settings['admin_email_disable'] : false;
-        $admin_email_subject          = !empty($email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] . " # " . $order_id: '';
-        $email_from_name              = !empty($email_settings['email_from_name'] ) ? $email_settings['email_from_name'] : get_bloginfo('name');
-        $email_from_email             = !empty($email_settings['email_from_email'] ) ? $email_settings['email_from_email'] : get_bloginfo('admin_email');
-        $email_content_type           = !empty($email_settings['email_content_type'] ) ? $email_settings['email_content_type'] : 'text/html';
+        $brand_logo              = !empty( $email_settings['brand_logo'] ) ? $email_settings['brand_logo'] : '';
+        $send_notifcation        = !empty( $email_settings['send_notification'] ) ? $email_settings['send_notification'] : 'no';
+        $sale_notification_email = !empty( $email_settings['sale_notification_email'] ) ? $email_settings['sale_notification_email'] : get_bloginfo( 'admin_email' );
+        $admin_email_disable     = !empty( $email_settings['admin_email_disable'] ) ? $email_settings['admin_email_disable'] : false;
+        $admin_email_subject     = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] . " # " . $order_id : '';
+        $email_from_name         = !empty( $email_settings['email_from_name'] ) ? $email_settings['email_from_name'] : get_bloginfo( 'name' );
+        $email_from_email        = !empty( $email_settings['email_from_email'] ) ? $email_settings['email_from_email'] : get_bloginfo( 'admin_email' );
+        $email_content_type      = !empty( $email_settings['email_content_type'] ) ? $email_settings['email_content_type'] : 'text/html';
 
         //mail headers
         $charset = apply_filters( 'tourfic_mail_charset','Content-Type: '.$email_content_type.'; charset=UTF-8') ;
@@ -287,7 +302,7 @@ class TF_Handle_Emails{
         if( !empty( $brand_logo ) ){
             $logo_id = attachment_url_to_postid( $brand_logo );
             $brand_logo_path = file_get_contents( get_attached_file( $logo_id ) );
-            $email_body_open .= '<div style="text-align:left;width:200px;"><img src="data:'.mime_content_type($brand_logo_path).';base64,'.base64_encode($brand_logo_path).'" alt="logo" /></div>';
+            $email_body_open .= '<div style="text-align:left;width:200px;"><img src="cid:logo-uid" alt="logo" /></div>';
         }
         $email_body_open .= '<div class="heading" style="text-align: center;">
         <h1 style="font-size: 32px; line-height: 40px; font-weight: 400; letter-spacing: 2px; margin: 20px 0; color: #ffffff;">
@@ -299,7 +314,7 @@ class TF_Handle_Emails{
     </div>';
         $email_body_open .= '</div>';
         $email_body_open = str_replace( '{booking_id}', $order_id, $email_body_open );
-        $admin_booking_email_template = !empty($email_settings['admin_booking_email_template'] ) ? $email_settings['admin_booking_email_template'] : '';
+        $admin_booking_email_template = !empty( $email_settings['admin_booking_email_template'] ) ? $email_settings['admin_booking_email_template'] : '';
         $vendor_booking_email_template = !empty($email_settings['vendor_booking_email_template'] ) ? $email_settings['vendor_booking_email_template'] : '';
         //send attachment to mail from settings image field
         
@@ -339,10 +354,10 @@ class TF_Handle_Emails{
         $email_body_close = '</div></body></html>';
         $admin_email_booking_body_full = $email_body_open . $admin_booking_email_template . $email_body_close;
         //decode entity
-        $admin_email_booking_body_full = wp_kses_post(html_entity_decode( $admin_email_booking_body_full, '3' , 'UTF-8' ));
+        $admin_email_booking_body_full = wp_kses_post( html_entity_decode( $admin_email_booking_body_full, '3' , 'UTF-8' ) );
     
        // echo html_entity_decode( wp_kses_post($admin_email_booking_body_full) );
-        echo $admin_email_booking_body_full;
+        //echo $admin_email_booking_body_full;
         //wp_die();   
 
        
@@ -358,9 +373,26 @@ class TF_Handle_Emails{
                     }            
                 }else{
                     //send admin email
-                    wp_mail( $sale_notification_email, $admin_email_subject, $admin_email_booking_body_full, $headers );
+                    wp_mail( $sale_notification_email, $admin_email_subject, $admin_email_booking_body_full, $headers, $attachments );
 
                 }
+            }else{
+                //send static default mail
+                $default_mail  = '<p>'. __( 'Dear Admin', 'tourfic' ) .'</p></br>';
+                $default_mail .= '<p>'. __( 'You have received a new booking. The details are as follows:', 'tourfic' ) .'</p></br>';
+                $default_mail .= __( '{booking_details}', 'tourfic' ) .'</br>';
+                $default_mail .= __( '<strong>Customer details</strong>', 'tourfic' ) .'</br>';
+                $default_mail .= __( '{customer_details}', 'tourfic' ) .'</br>';
+                $default_mail .= __( '<p>Thank you</p>', 'tourfic' ) ;
+                $default_mail .= __( 'Regards', 'tourfic' ) .'</br>';
+                $default_mail .= __( '{site_name}', 'tourfic' ) .'</br>';
+
+                $default_mail = str_replace( '{customer_details}', $customer_details, $default_mail );
+                $default_mail = str_replace( '{site_name}', get_bloginfo('name'), $default_mail );
+                $default_mail = str_replace( '{booking_details}', $booking_details, $default_mail );
+
+                wp_mail( $sale_notification_email, $admin_email_subject, $default_mail, $headers);
+
             }
         }
 
@@ -375,12 +407,34 @@ class TF_Handle_Emails{
 
             $vendor_email_booking_body_full = $email_body_open . $vendor_booking_email_template . $email_body_close;
             //send mail in plain text and html conditionally 
-            $vendor_email_booking_body_full =html_entity_decode( $vendor_email_booking_body_full, 3, 'UTF-8' ) ;
+            $vendor_email_booking_body_full = html_entity_decode( $vendor_email_booking_body_full, 3, 'UTF-8' ) ;
+            if( !empty( $vendor_booking_email_template ) ){
             
-            //send mail to vendor
-            if( ! empty( $vendors_email ) ){
-                foreach ( $vendors_email as $key => $vendor_email ) {
-                    wp_mail( $vendor_email, $vendor_email_subject, $vendor_email_booking_body_full, $headers);
+                //send mail to vendor
+                if( ! empty( $vendors_email ) ){
+                    foreach ( $vendors_email as $key => $vendor_email ) {
+                        wp_mail( $vendor_email, $vendor_email_subject, $vendor_email_booking_body_full, $headers);
+                    }
+                }
+            }else{
+                //send default mail
+                $default_mail = '<p>'. __( 'Dear Admin', 'tourfic' ) .'</p></br>';
+                $default_mail .= '<p>'. __( 'You have received a new booking. The details are as follows:', 'tourfic' ) .'</p></br>';
+                $default_mail .= __( '{booking_details}', 'tourfic' ) .'</br>';
+                $default_mail .= __( '<strong>Customer details</strong>', 'tourfic' ) .'</br>';
+                $default_mail .= __( '{customer_details}', 'tourfic' ) .'</br>';
+                $default_mail .= __( 'Thank you', 'tourfic' ) .'</br>';
+                $default_mail .= __( 'Regards', 'tourfic' ) .'</br>';
+                $default_mail .= __( '{site_name}', 'tourfic' ) .'</br>';
+
+                $default_mail = str_replace( '{customer_details}', $customer_details, $default_mail );
+                $default_mail = str_replace( '{booking_details}', $booking_details, $default_mail );
+                $default_mail = str_replace( '{site_name}', get_bloginfo('name'), $default_mail );
+
+                if( ! empty( $vendors_email ) ){
+                    foreach ( $vendors_email as $key => $vendor_email ) {
+                        wp_mail( $vendor_email, $vendor_email_subject, $default_mail, $headers);
+                    }
                 }
             }
 
@@ -399,14 +453,26 @@ class TF_Handle_Emails{
             $customer_email_body_full = $email_body_open . $customer_confirm_email_template . $email_body_close;
             $customer_email_body_full = $customer_email_body_full;
             wp_mail( $customer_email_address, $customer_email_subject, $customer_email_body_full, $headers );
+        }else{
+            //send default mail
+            $default_mail = '<p>'. __( 'Dear', 'tourfic' ) .' {fullname}</p></br>';
+            $default_mail .= '<p>'. __( 'Thank you for your booking. The details are as follows:', 'tourfic' ) .'</p></br>';
+            $default_mail .= __( '{booking_details}', 'tourfic' ) .'</br>';
+            $default_mail .= __( '<strong>Shipping Details</strong>', 'tourfic' ) .'</br>';
+            $default_mail .= __( '{customer_details}', 'tourfic' ) .'</br>';
+            $default_mail .= __( 'Thank you', 'tourfic' ) .'</br>';
+            $default_mail .= __( 'Regards', 'tourfic' ) .'</br>';
+            $default_mail .= __( '{site_name}', 'tourfic' ) .'</br>';
+
+            $default_mail = str_replace( '{customer_details}', $customer_details, $default_mail );
+            $default_mail = str_replace( '{fullname}', $order_billing_name, $default_mail );
+            $default_mail = str_replace( '{booking_details}', $booking_details, $default_mail );
+            $default_mail = str_replace( '{site_name}', get_bloginfo('name'), $default_mail );
+
+            wp_mail( $customer_email_address, $customer_email_subject, $default_mail, $headers );
         }
     }
-     //static function which will output the css style to the email template head
 
-
-
-
-   
 }
-//call the class
+//init the class
 new TF_Handle_Emails();
