@@ -5834,6 +5834,30 @@ div#tf-contact-info {
   font-weight: 500;
   font-family: "Jost", sans-serif;
 }
+.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .tf-features-infos ul {
+  margin: 0;
+  padding: 0;
+}
+.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .tf-features-infos ul li {
+  display: inline-block;
+  background: #F1F3F4;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px 10px 5px 0px;
+}
+.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .tf-features-infos ul li i,
+.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .tf-features-infos ul li img {
+  margin-right: 5px;
+}
+.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .tf-features-infos .tf-room-detail-qv {
+  color: #0E3DD8;
+}
+.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td.description {
+  width: 60%;
+  padding-left: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
 .tf-hotel-design-1 .tf-hotel-single-features ul {
   margin: 20px 0px 0px 0px;
   padding: 0;
