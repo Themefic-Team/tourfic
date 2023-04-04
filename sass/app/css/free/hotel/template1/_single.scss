@@ -8,22 +8,132 @@
             text-decoration: underline;
         }
     }
+    #tf-single-hotel-avail{
+        margin: 0px !important;
+        .tf_booking-dates{
+            #check-in-out-date{
+                background-color: #F3F7FA !important;
+            }
+            #tf-required {
+                text-align: center;
+                margin-top: 10px !important;
+                display: block;
+                b{
+                    font-family: "Jost", sans-serif;
+                    font-weight: 500;
+                }
+            }
+        }
+        .tf-bttn-normal{
+            padding: 16px 24px;
+        }
+    }
+    .tf-hotel-location-map{
+        margin-top: 25px;
+        .tf-hotel-location-preview{
+            position: relative;
+            margin-bottom: 0px;
+            iframe{
+                height: 260px !important;
+            }
+            a{
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                i{
+                   height: 80px;
+                   width: 80px;
+                   text-align: center;
+                   line-height: 80px;
+                   color: #fff; 
+                   background-color: $color-theme;
+                   border-radius: 50%;
+                   padding: 0;
+                   font-size: 20px;
+                }
+            }
+        }
+    }
+    .tf-rooms-sections{
+        .tf-rooms{
+            .tf-availability-table{
+                margin-top: 30px;
+                background-color: #fff;
+                box-shadow: 0px 13px 30px #E0E8EE;
+                border-radius: 5px;
+                margin-bottom: 0px;
+                thead{
+                    background-color: $color-theme;
+                    tr{
+                        th{
+                            text-align: left;
+                            color: #fff;
+                            border: 0px solid;
+                            border-radius: 5px 5px 0px 0px;
+                            padding: 13px 30px;
+                            font-size: 16px;
+                            font-weight: 500;
+                            font-family: "Jost", sans-serif;
+                        }
+                    }
+                }
+            }
+        }
+    }
     .tf-hotel-single-features{
         ul{
             margin: 20px 0px 0px 0px;
             padding: 0;
             li{
                 display: inline-flex;
+                align-items: center;
                 background-color: #fff;
                 border-radius: 5px;
                 padding: 10px;
                 text-transform: capitalize;
                 margin: 5px 5px 5px 0px;
+                box-shadow: 0px 13px 30px 0px #e0e8ee;
                 i{
                     margin-right: 8px;
                 }
                 img{
                     margin-right: 8px;
+                }
+            }
+        }
+    }
+
+    .tf-hotel-faqs-section{
+        h2{
+            margin-bottom: 30px;
+        }
+        .tf-hotel-enquiry{
+            flex-basis: 32%;
+            padding-right: 30px;
+            .tf-ask-enquiry{
+                background-color: #fff;
+                box-shadow: 0px 13px 30px 0px #e0e8ee;
+                padding: 30px;
+            }
+        }
+        .tf-hotel-faqs{
+            flex-basis: 68%;
+            .tf-faq-wrapper{
+                .tf-faq-single {
+                    border-bottom: 0px solid;
+                    .tf-faq-single-inner{
+                        margin: 0px 0px 30px 0px;
+                        background: #FFFFFF;
+                        box-shadow: 0px 13px 30px #E0E8EE;
+                        h3{
+                            font-size: 20px;
+                        }
+                    }
                 }
             }
         }

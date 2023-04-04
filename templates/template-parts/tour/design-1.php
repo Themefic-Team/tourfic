@@ -258,12 +258,12 @@
 
                                 <!-- Enquiry box -->
                                 <div class="tf-tour-booking-advantages tf-box tf-mrtop-30">
-                                <div class="tf-ask-enquiry">
-                                <i class="fa fa-question-circle-o" aria-hidden="true"></i>
-                                <h3><?php _e( "Have a question in mind", 'tourfic' ); ?></h3>
-                                <p><?php _e( "Looking for more info? Send a question to the property to find out more.", 'tourfic' ); ?></p>
-                                <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-bttn-normal bttn-primary"><span><?php esc_html_e( 'Ask a Question', 'tourfic' ); ?></span></a></div>
-                            </div>
+                                    <div class="tf-ask-enquiry">
+                                        <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                                        <h3><?php _e( "Have a question in mind", 'tourfic' ); ?></h3>
+                                        <p><?php _e( "Looking for more info? Send a question to the property to find out more.", 'tourfic' ); ?></p>
+                                        <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-bttn-normal bttn-primary"><span><?php esc_html_e( 'Ask a Question', 'tourfic' ); ?></span></a></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

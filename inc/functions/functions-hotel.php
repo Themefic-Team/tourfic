@@ -1396,56 +1396,44 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	<?php 
 	if( ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) && tf_data_types(tfopt( 'tf-template' ))['single-hotel']=="design-1"){
 	?>
-	<form id="tf-single-hotel-avail" class="widget tf-hotel-side-booking" method="get" autocomplete="off">
+	<form id="tf-single-hotel-avail" class="widget tf-hotel-booking-sidebar tf-booking-form" method="get" autocomplete="off">
 
 		<?php wp_nonce_field( 'check_room_avail_nonce', 'tf_room_avail_nonce' ); ?>
-
-		<div class="tf_form-row">
-			<label class="tf_label-row">
-				<div class="tf_form-inner">
-					<i class="fas fa-user-friends"></i>
-					<select name="adults" id="adults" class="">
-						<?php
-						echo '<option value="1">1 ' . __( "Adult", "tourfic" ) . '</option>';
-						if($max_adults_numbers > 1){
-							foreach ( range( 2, $max_adults_numbers ) as $value ) {
-								$selected = $value == $adults ? 'selected' : null;
-								echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __( "Adults", "tourfic" ) . '</option>';
-							}
-						}
-						?>
-
-					</select>
+		<div class="tf-booking-person">
+			<div class="tf-field-group tf_acrselection">
+				<div class="tf-field tf-flex">
+					<div class="acr-label tf-flex">
+						<i class="fa-regular fa-user"></i>
+						<?php _e('Adults', 'tourfic'); ?>
+					</div>
+					<div class="acr-select">
+						<div class="acr-dec">-</div>
+							<input type="number" name="adults" id="adults" min="0" value="<?php echo !empty($adults) ? $adults : '1'; ?>">
+						<div class="acr-inc">+</div>
+					</div>
 				</div>
-			</label>
-		</div>
-
-		<div class="tf_form-row">
-			<label class="tf_label-row">
-				<div class="tf_form-inner">
-					<i class="fas fa-child"></i>
-					<select name="children" id="children" class="">
-						<?php
-						echo '<option value="0">0 ' . __( "Children", "tourfic" ) . '</option>';
-						if($max_childs_numbers > 0){
-							foreach ( range( 1, $max_childs_numbers ) as $value ) {
-								$selected = $value == $child ? 'selected' : null;
-								echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __( "Children", "tourfic" ) . '</option>';
-							}
-						}
-						?>
-					</select>
+			</div>
+			<div class="tf-field-group tf_acrselection">
+				<div class="tf-field tf-flex">
+					<div class="acr-label tf-flex">
+						<i class="fa-solid fa-child"></i>
+						<?php _e('Children', 'tourfic'); ?>
+					</div>
+					<div class="acr-select">
+						<div class="acr-dec">-</div>
+							<input type="number" name="children" id="children" min="0" value="<?php echo !empty($child) ? $child : '0'; ?>">
+						<div class="acr-inc">+</div>
+					</div>
 				</div>
-			</label>
+			</div>
 		</div>
 
 		<div class="tf_booking-dates">
 			<div class="tf_form-row">
 				<label class="tf_label-row">
-					<span class="tf-label"><?php _e( 'Check-in & Check-out date', 'tourfic' ); ?></span>
-					<div class="tf_form-inner">
+					<div class="tf_form-inner tf-field-group">
 						<i class="far fa-calendar-alt"></i>
-						<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
+						<input type="text" name="check-in-out-date" id="check-in-out-date" class="tf-field" onkeypress="return false;"
 							placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
 					</div>
 				</label>
@@ -1461,7 +1449,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 			<input type="hidden" name="children_ages" value="<?php echo $children_ages; ?>"/>
 
 			<div class="tf-btn">
-				<button class="tf_button tf-submit btn-styled"
+				<button class="tf-bttn-normal bttn-primary tf-submit"
 						type="submit"><?php esc_html_e( 'Booking Availability', 'tourfic' ); ?></button>
 			</div>
 
@@ -1471,7 +1459,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	</form>
 	<?php }else{ ?>
     <!-- Start Booking widget -->
-    <form id="tf-single-hotel-avail" class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off">
+    <form id="tf-single-hotel-avail" class="tf_booking-widget widget tf-hotel-side-booking tf-hotel-booking-sidebar" method="get" autocomplete="off">
 
 		<?php wp_nonce_field( 'check_room_avail_nonce', 'tf_room_avail_nonce' ); ?>
 
@@ -1548,7 +1536,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
     <script>
         (function ($) {
             $(document).ready(function () {
-                const checkinoutdateange = flatpickr(".tf-hotel-side-booking #check-in-out-date", {
+                const checkinoutdateange = flatpickr(".tf-hotel-booking-sidebar #check-in-out-date", {
                     enableTime: false,
                     mode: "range",
                     minDate: "today",
