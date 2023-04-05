@@ -1639,17 +1639,18 @@ TF_Settings::option( 'tf_settings', array(
 								),
 								
 								array(
-									'id'    => 'order_email_heading',
-									'type'  => 'text',
-									'label' => __( 'Order Email Heading', 'tourfic' ),
+									'id'      => 'order_email_heading',
+									'type'    => 'text',
+									'label'   => __( 'Order Email Heading', 'tourfic' ),
 									'default' => __( 'You booking has been received', 'tourfic' ),
 								),
 								//email body
 								array(
-									'id'      => 'admin_booking_email_template',
-									'type'    => 'editor',
-									'label'   => __( 'Booking Notification Template', 'tourfic' ),
-									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
+									'id'          => 'admin_booking_email_template',
+									'type'        => 'editor',
+									'label'       => __( 'Booking Notification Template', 'tourfic' ),
+									'default'     => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
+									'description' => __( 'This template will be sent to admin', 'tourfic' )
 								),
 								//heading
 								array(
@@ -1663,6 +1664,7 @@ TF_Settings::option( 'tf_settings', array(
 									'type'    => 'editor',
 									'label'   => __( 'Vendor Notification Template', 'tourfic' ),
 									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ),
+									'description' => __( 'This template will be sent to vendor', 'tourfic' )
 								),
 								array(
 									'id'      => 'email_content_type',
@@ -1692,29 +1694,16 @@ TF_Settings::option( 'tf_settings', array(
 									'default' => __( 'Your booking has been confirmed', 'tourfic' ),
 								),
 								array(
-									'id'      => 'customer_booking_email_template',
-									'type'    => 'editor',
-									'label'   => __( 'Customer Booking Email Body', 'tourfic' ),
-									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'customer' ),
-								),
-								array(
 									'id'      => 'customer_confirm_email_template',
 									'type'    => 'editor',
 									'label'   => __( 'Booking Confirmation Email', 'tourfic' ),
 									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'customer' ),
+									'description' => __('This template will be sent to customer after booking is confirmed.', 'tourfic'),
 								),
 							),
 						),
 					),	
 				),
-				
-								//vendor email template
-								array(
-									'id'      => 'vendor_booking_email_templates',
-									'type'    => 'editor',
-									'label'   => __( 'Vendor Notification Template', 'tourfic' ),
-									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ),
-								),
 				//notice field
 				array(
 					'id'      => 'notice',
@@ -1737,7 +1726,10 @@ TF_Settings::option( 'tf_settings', array(
 					<strong>{shipping_city} </strong> : To display the shipping city.<br>
 					<strong>{shipping_country} </strong> : To display the shipping country.<br>
 					<strong>{shipping_zip} </strong> : To display the shipping zip.<br>
-					<strong>{total_price} </strong> : To display the total price.<br>
+					<strong>{order_total} </strong> : To display the total price.<br>
+					<strong>{order_subtotal} </strong> : To display the subtotal price.<br>
+					<strong>{order_date} </strong> : To display the order date.<br>
+					<strong>{order_status} </strong> : To display the order status.<br>
 					<strong>{payment_method} </strong> : To display the payment method.<br>
 					<strong>{booking_url} </strong> : To display the booking url.<br>
 					<strong>{site_name} </strong> : To display the site name.<br>

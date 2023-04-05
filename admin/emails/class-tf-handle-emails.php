@@ -16,7 +16,6 @@ class TF_Handle_Emails{
         self::$tf_email_settings = tfopt('email-settings')  ? tfopt('email-settings') : array(); 
         //send mail after new woocommerce order thankyou page
         add_action( 'phpmailer_init', array( $this, 'tf_send_attachment' ) );
-        add_action( 'woocommerce_thankyou', array( $this, 'send_email' ), 10, 1 );
         add_action( 'woocommerce_order_status_completed', array( $this, 'send_email' ), 10, 1 );
 
     }
@@ -296,7 +295,7 @@ class TF_Handle_Emails{
         $headers.= "X-Mailer: PHP/" . phpversion() . "\r\n";
         
 
-        $email_body_open              = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><body style="font-family: Work sans, sans-serif; font-size: 16px; color: #9C9C9C; margin: 0; padding: 0;">
+        $email_body_open    = '<html><head><meta http-equiv="Content-Type" content="'.$email_content_type.'; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><body style="font-family: Work sans, sans-serif; font-size: 16px; color: #9C9C9C; margin: 0; padding: 0;">
         <div style="width: 100%; max-width: 600px; margin: 0 auto;">
             <div style="background-color: #0209AF; color: #fff; padding: 20px;">';
         if( !empty( $brand_logo ) ){
@@ -344,7 +343,6 @@ class TF_Handle_Emails{
             '{order_status}'     => $order_status,
             '{site_name}'        => get_bloginfo('name'),
             '{site_url}'         => get_bloginfo('url'),
-            '{site_email}'       => get_bloginfo('admin_email'),
         );
 
         $admin_booking_email_template = str_replace( array_keys( $tf_all_mail_tags ), array_values( $tf_all_mail_tags ), $admin_booking_email_template );
