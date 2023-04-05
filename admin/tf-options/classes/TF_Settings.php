@@ -740,7 +740,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								$data = isset( $option_request[ $field['id'] ] ) ? $option_request[ $field['id'] ] : '';
 								$fieldClass = 'TF_' . $field['type'];
 								if($fieldClass != 'TF_file'){
-									$data       = $fieldClass == 'TF_repeater' || $fieldClass == 'TF_map' || $fieldClass == 'TF_tab' || $fieldClass == 'TF_color' ? serialize( $data ) : $data;
+									$data       = $fieldClass == 'TF_repeater' || $fieldClass == 'TF_map'  || $fieldClass == 'TF_color' ? serialize( $data ) : $data;
 								}
 								if(isset($_FILES) && !empty($_FILES['file'])){
 									$tf_upload_dir = wp_upload_dir();

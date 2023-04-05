@@ -146,7 +146,7 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		// Tour Options
-		'tour'               => array(
+		'tour'	 => array(
 			'title'  => __( 'Tour Options', 'tourfic' ),
 			'icon'   => 'fas fa-umbrella-beach',
 			'fields' => array(),
@@ -1627,6 +1627,173 @@ TF_Settings::option( 'tf_settings', array(
 				)
 			),
 		),
+
+		'emails'    => array(
+			'title'  => esc_html__( 'Emails', 'tourfic' ),
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'   => 'email-settings',
+					'type' => 'tab',
+					'tabs' => array(
+						array(
+							'id'     => 'admin_emails',
+							'title'  => __( 'Admin Email', 'tourfic' ),
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								//file upload
+								array(
+									'id'      => 'brand_logo',
+									'type'    => 'image',
+									'label'   => __( 'Admin Email Logo', 'tourfic' ),
+								),
+								array(
+									'id'      => 'send_notification',
+									'type'    => 'select',
+									'label'   => __( 'Send Notification', 'tourfic' ),
+									'options' => array(
+										'admin'        => __( 'Admin', 'tourfic' ),
+										'admin_vendor' => __( 'Admin + Vendor', 'tourfic' ),
+										'turn_off'     => __( 'Turn Off', 'tourfic' ),
+									),
+									'default' => 'admin',
+								),
+								array(
+									'id'      => 'sale_notification_email',
+									'type'    => 'text',
+									'label'   => __( 'Sale Notification Email', 'tourfic' ),
+									'default' => get_bloginfo( 'admin_email' ),
+								),
+								//enable disable admin email
+								array(
+									'id'      => 'admin_email_disable',
+									'type'    => 'switch',
+									'label'   => __( 'Disable Admin Email', 'tourfic' ),
+									'default' => 'false',
+								),
+								array(
+									'id'      => 'admin_email_subject',
+									'type'    => 'text',
+									'label'   => __( 'Booking Email Subject', 'tourfic' ),
+									'default' => __( 'New Tour Booking', 'tourfic' ),
+								),
+								array(
+									'id'      => 'email_from_name',
+									'type'    => 'text',
+									'label'   => __( 'Email From Name', 'tourfic' ),
+									'default' => get_bloginfo( 'name' ),
+								),
+								array(
+									'id'      => 'email_from_email',
+									'type'    => 'text',
+									'label'   => __( 'Email From Email', 'tourfic' ),
+									'default' => get_bloginfo( 'admin_email' ),
+								),
+								
+								array(
+									'id'      => 'order_email_heading',
+									'type'    => 'text',
+									'label'   => __( 'Order Email Heading', 'tourfic' ),
+									'default' => __( 'You booking has been received', 'tourfic' ),
+								),
+								//email body
+								array(
+									'id'          => 'admin_booking_email_template',
+									'type'        => 'editor',
+									'label'       => __( 'Booking Notification Template', 'tourfic' ),
+									'default'     => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
+									'description' => __( 'This template will be sent to admin', 'tourfic' )
+								),
+								//heading
+								array(
+									'id'    => 'vendor_email_heading',
+									'type'  => 'heading',
+									'label' => __( 'Vendor Email', 'tourfic' ),
+								),
+								//vendor email template
+								array(
+									'id'      => 'vendor_booking_email_template',
+									'type'    => 'editor',
+									'label'   => __( 'Vendor Notification Template', 'tourfic' ),
+									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ),
+									'description' => __( 'This template will be sent to vendor', 'tourfic' )
+								),
+								array(
+									'id'      => 'email_content_type',
+									'type'    => 'select',
+									'label'   => __( 'Email Content Type', 'tourfic' ),
+									'options' => array(
+										'text/html'  => __( 'HTML', 'tourfic' ),
+										'text/plain' => __( 'Plain Text', 'tourfic' ),
+									),
+									'default' => 'text/html',
+								),
+							),
+							
+						),
+						
+						//customer email tab
+						array(
+							'id'     => 'customer-email',
+							'title'  => __( 'Customer Email', 'tourfic' ),
+							'icon'   => 'fa fa-envelope',
+							'fields' => array(								
+								//payment success email
+								array(
+									'id'      => 'customer_confirm_email_subject',
+									'type'    => 'text',
+									'label'   => __( 'ooking Confirmation Email Subject', 'tourfic' ),
+									'default' => __( 'Your booking has been confirmed', 'tourfic' ),
+								),
+								array(
+									'id'      => 'customer_confirm_email_template',
+									'type'    => 'editor',
+									'label'   => __( 'Booking Confirmation Email', 'tourfic' ),
+									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'customer' ),
+									'description' => __('This template will be sent to customer after booking is confirmed.', 'tourfic'),
+								),
+							),
+						),
+					),	
+				),
+				//notice field
+				array(
+					'id'      => 'notice',
+					'type'    => 'notice',
+					'class'   => 'info',
+					'title'   => __( 'Email Shortcodes', 'tourfic' ),
+					'content' => __( 'You can use the following placeholders in the email body:', 'tourfic' ) . '<br><br><strong>{order_id} </strong> : To display the booking ID.<br>
+					<strong>{booking_id} </strong> : To display the booking ID.<br>
+					<strong>{booking_date} </strong> : To display the booking date.<br>
+					<strong>{fullname} </strong> : To display the customer name.<br>
+					<strong>{user_email} </strong> : To display the customer email.<br>
+					<strong>{phone} </strong> : To display the customer phone.<br>
+					<strong>{address} </strong> : To display the customer address.<br>
+					<strong>{city} </strong> : To display the customer city.<br>
+					<strong>{country} </strong> : To display the customer country.<br>
+					<strong>{zip} </strong> : To display the customer zip.<br>
+					<strong>{booking_details} </strong> : To display the booking details.<br>
+					<strong>{shipping_address} </strong> : To display the shipping address.<br>
+					<strong>{shipping_method} </strong> : To display the shipping method.<br>
+					<strong>{shipping_city} </strong> : To display the shipping city.<br>
+					<strong>{shipping_country} </strong> : To display the shipping country.<br>
+					<strong>{shipping_zip} </strong> : To display the shipping zip.<br>
+					<strong>{order_total} </strong> : To display the total price.<br>
+					<strong>{order_subtotal} </strong> : To display the subtotal price.<br>
+					<strong>{order_date} </strong> : To display the order date.<br>
+					<strong>{order_status} </strong> : To display the order status.<br>
+					<strong>{payment_method} </strong> : To display the payment method.<br>
+					<strong>{booking_url} </strong> : To display the booking url.<br>
+					<strong>{site_name} </strong> : To display the site name.<br>
+					<strong>{site_url} </strong> : To display the site url.<br>
+
+					'
+					
+					,
+				),
+			),
+		),
+		
 
 		/**
 		 * Integration

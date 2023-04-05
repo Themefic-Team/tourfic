@@ -190,7 +190,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 								$data = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : '';
 
 								$fieldClass = 'TF_' . $field['type'];
-								$data       = $fieldClass == 'TF_map' || $fieldClass == 'TF_tab' || $fieldClass == 'TF_color' ? serialize( $data ) : $data;
+								$data       = $fieldClass == 'TF_map' ||  $fieldClass == 'TF_color' ? serialize( $data ) : $data;
 
 								if ( class_exists( $fieldClass ) ) {
 									$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
