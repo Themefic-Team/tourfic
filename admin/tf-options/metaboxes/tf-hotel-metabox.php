@@ -156,6 +156,13 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'class'   => 'tf-field-class',
 						),
 						array(
+							'id'      => 'room_preview_img',
+							'type'    => 'image',
+							'label'   => __( 'Room Thumbnail', 'tourfic' ),
+							'subtitle' => __( 'Upload Thumbnail for this room', 'tourfic' ),
+							'library' => 'image',
+						),
+						array(
 							'id'       => 'gallery',
 							'type'     => 'gallery',
 							'label'    => __( 'Room Gallery', 'tourfic' ),

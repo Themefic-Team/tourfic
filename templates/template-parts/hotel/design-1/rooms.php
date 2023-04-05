@@ -13,14 +13,15 @@ foreach ( $rooms as $key => $room ) {
 <div class="tf-rooms-sections tf-mrbottom-70">
     <h2 class="section-heading"><?php esc_html_e( 'Available Rooms', 'tourfic' ); ?></h2>
     <?php do_action( 'tf_hotel_features_filter', $rm_features, 10 ) ?>
-    <div class="tf-rooms">
+    
+    <div class="tf-rooms" id="rooms">
         <!-- Loader Image -->
         <div id="tour_room_details_loader">
             <div id="tour-room-details-loader-img">
                 <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
             </div>
         </div>
-
+        
         <!-- Room Table -->
         <table class="tf-availability-table">
             <thead>
@@ -77,8 +78,16 @@ foreach ( $rooms as $key => $room ) {
                     ?>
                     <tr>
                         <td class="description">
-                            <div class="tf-room-description-box">
-                                <div class="tf-features-infos">
+                            <div class="tf-room-description-box tf-flex">
+                                <?php 
+                                $room_preview_img = ! empty( $room['room_preview_img'] ) ? $room['room_preview_img'] : '';
+                                if(!empty($room_preview_img)){ ?>
+                                <div class="tf-room-preview-img">
+                                    <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php _e("Room Image","tourfic"); ?>">
+                                    <span><?php _e("Best Offer", "tourfic"); ?></span>
+                                </div>
+                                <?php } ?>
+                                <div class="tf-features-infos" style="<?php echo !empty($room_preview_img) ? 'width: 70%' : ''; ?>">
                                     <div class="tf-room-type">
                                         <div class="tf-room-title">
                                             <h3><?php echo esc_html( $room['title'] ); ?><h3>

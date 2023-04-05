@@ -688,6 +688,16 @@ function tf_room_availability_callback() {
             <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
         </div>
     </div>
+	<?php 
+	if( ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) && tf_data_types(tfopt( 'tf-template' ))['single-hotel']=="design-1"){
+	?>
+	<table class="tf-availability-table">
+	<thead>
+		<tr>
+			<th class="description" colspan="4"><?php _e( 'Room Details', 'tourfic' ); ?></th>
+		</tr>
+	</thead>
+	<?php }else{ ?>
     <table class="availability-table">
     <thead>
     <tr>
@@ -697,6 +707,7 @@ function tf_room_availability_callback() {
         <th class="reserve"><?php _e( 'Select Rooms', 'tourfic' ); ?></th>
     </tr>
     </thead>
+	<?php } ?>
     <tbody>
 	<?php
 	echo ob_get_clean();
@@ -1408,7 +1419,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 					</div>
 					<div class="acr-select">
 						<div class="acr-dec">-</div>
-							<input type="number" name="adults" id="adults" min="0" value="<?php echo !empty($adults) ? $adults : '1'; ?>">
+							<input type="number" name="adults" id="adults" min="1" value="<?php echo !empty($adults) ? $adults : '1'; ?>">
 						<div class="acr-inc">+</div>
 					</div>
 				</div>
