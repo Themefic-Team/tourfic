@@ -1753,7 +1753,11 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
             ?>
             <div class="tf-features-box tf-flex">
                 <?php if( $featured ): ?>
-                    <div class="tf-feature"><?php _e("HOT DEAL", "tourfic"); ?></div>
+                    <div class="tf-feature">
+						<?php 
+						echo !empty( $meta['featured_text'] ) ? $meta['featured_text'] : esc_html( "HOT DEAL" );
+						?>
+					</div>
                 <?php endif; ?>
             </div>
         </div>

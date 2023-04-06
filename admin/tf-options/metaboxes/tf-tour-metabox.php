@@ -36,6 +36,15 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'subtitle' => __( 'This tour will be highlighted at the top of the search result and tour archive page', 'tourfic' ),
 				),
 				array(
+					'id'          => 'featured_text',
+					'type'        => 'text',
+					'label'       => __( 'Tour Featured Text', 'tourfic' ),
+					'subtitle'    => __( 'Enter Featured Tour Text', 'tourfic' ),
+					'placeholder' => __( 'Enter Featured Tour Text', 'tourfic' ),
+					'default' => __( 'Hot Deal', 'tourfic' ),
+					'dependency'  => array( 'tour_as_featured', '==', true ),
+				),
+				array(
 					'id'      => 'tour_single_page',
 					'type'    => 'select',
 					'label'   => __( 'Single Tour Page Layout', 'tourfic' ),

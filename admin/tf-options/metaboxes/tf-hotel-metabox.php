@@ -56,6 +56,15 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'default'   => false,
 				),
 				array(
+					'id'          => 'featured_text',
+					'type'        => 'text',
+					'label'       => __( 'Hotel Featured Text', 'tourfic' ),
+					'subtitle'    => __( 'Enter Featured Hotel Text', 'tourfic' ),
+					'placeholder' => __( 'Enter Featured Hotel Text', 'tourfic' ),
+					'default' => __( 'Hot Deal', 'tourfic' ),
+					'dependency'  => array( 'featured', '==', true ),
+				),
+				array(
 					'id'          => 'video',
 					'type'        => 'text',
 					'label'       => __( 'Hotel Video', 'tourfic' ),

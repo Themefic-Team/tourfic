@@ -1449,7 +1449,11 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
                 <?php } ?>
 
                 <?php if( $featured ): ?>
-                    <div class="tf-feature"><?php _e("HOT DEAL", "tourfic"); ?></div>
+                    <div class="tf-feature">
+                    <?php 
+						echo !empty( $meta['featured_text'] ) ? $meta['featured_text'] : esc_html( "HOT DEAL" );
+					?>    
+                    </div>
                 <?php endif; ?>
             </div>
         </div>
