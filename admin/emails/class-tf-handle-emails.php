@@ -277,7 +277,9 @@ class TF_Handle_Emails{
         }else{
             $attachments = array();
         }
+
         $brand_logo              = !empty( $email_settings['brand_logo'] ) ? $email_settings['brand_logo'] : '';
+        $email_heading_bg        = !empty( $email_settings['email_heading_bg'] ) ? $email_settings['email_heading_bg'] : '0209AF';
         $send_notifcation        = !empty( $email_settings['send_notification'] ) ? $email_settings['send_notification'] : 'no';
         $sale_notification_email = !empty( $email_settings['sale_notification_email'] ) ? $email_settings['sale_notification_email'] : get_bloginfo( 'admin_email' );
         $admin_email_disable     = !empty( $email_settings['admin_email_disable'] ) ? $email_settings['admin_email_disable'] : false;
@@ -297,7 +299,7 @@ class TF_Handle_Emails{
 
         $email_body_open    = '<html><head><meta http-equiv="Content-Type" content="'.$email_content_type.'; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><body style="font-family: Work sans, sans-serif; font-size: 16px; color: #9C9C9C; margin: 0; padding: 0;">
         <div style="width: 100%; max-width: 600px; margin: 0 auto;">
-            <div style="background-color: #0209AF; color: #fff; padding: 20px;">';
+            <div style="background-color: #'.esc_attr( $email_heading_bg ).'; color: #fff; padding: 20px;">';
         if( !empty( $brand_logo ) ){
             $logo_id = attachment_url_to_postid( $brand_logo );
             $brand_logo_path = file_get_contents( get_attached_file( $logo_id ) );
@@ -315,7 +317,6 @@ class TF_Handle_Emails{
         $email_body_open = str_replace( '{booking_id}', $order_id, $email_body_open );
         $admin_booking_email_template = !empty( $email_settings['admin_booking_email_template'] ) ? $email_settings['admin_booking_email_template'] : '';
         $vendor_booking_email_template = !empty($email_settings['vendor_booking_email_template'] ) ? $email_settings['vendor_booking_email_template'] : '';
-        //send attachment to mail from settings image field
         
         //all mail tags mapping
         $tf_all_mail_tags = array(
@@ -346,19 +347,12 @@ class TF_Handle_Emails{
         );
 
         $admin_booking_email_template = str_replace( array_keys( $tf_all_mail_tags ), array_values( $tf_all_mail_tags ), $admin_booking_email_template );
-        
 
-        
         $email_body_close = '</div></body></html>';
         $admin_email_booking_body_full = $email_body_open . $admin_booking_email_template . $email_body_close;
         //decode entity
         $admin_email_booking_body_full = wp_kses_post( html_entity_decode( $admin_email_booking_body_full, '3' , 'UTF-8' ) );
-    
-       // echo html_entity_decode( wp_kses_post($admin_email_booking_body_full) );
-        //echo $admin_email_booking_body_full;
-        //wp_die();   
-
-       
+ 
         //check if admin emails disable
         if( isset( $admin_email_disable ) && $admin_email_disable == false ){
             if( !empty( $admin_booking_email_template ) ){
@@ -440,11 +434,15 @@ class TF_Handle_Emails{
 
         //customer email settings
         $customer_email_address =  $order_billing_email;
+        $disable_customer_email = !empty( $email_settings['customer_email_disable'] ) ? $email_settings['customer_email_disable'] : false;
         $customer_email_subject = !empty( $email_settings['customer_confirm_email_subject'] ) ? $email_settings['customer_confirm_email_subject']  : '';
         $customer_email_subject = str_replace( '{booking_id}', $order_id, $customer_email_subject );
+        $customer_from_name = !empty( $email_settings['customer_from_name'] ) ? $email_settings['customer_from_name']  : '';
+        $customer_from_email = !empty( $email_settings['customer_from_email'] ) ? $email_settings['customer_from_email']  : '';
         $customer_confirm_email_template = !empty($email_settings['customer_confirm_email_template'] ) ? $email_settings['customer_confirm_email_template'] : '';
+        $headers .= "From: {$customer_from_name} <{$customer_from_email}>" . "\r\n";
         //send mail to customer 
-        if( !empty( $customer_confirm_email_template ) ){
+        if( !empty( $customer_confirm_email_template ) && $disable_customer_email == false){
             //replace mail tags to actual value
             $customer_confirm_email_template = str_replace( array_keys( $tf_all_mail_tags ), array_values( $tf_all_mail_tags ), $customer_confirm_email_template );
 

@@ -1671,6 +1671,12 @@ TF_Settings::option( 'tf_settings', array(
 									'label'   => __( 'Disable Admin Email', 'tourfic' ),
 									'default' => 'false',
 								),
+								//heading
+								array(
+									'id'      => 'admin_email_heading',
+									'type'    => 'heading',
+									'label'   => __( 'Admin Email Setting', 'tourfic' ),
+								),
 								array(
 									'id'      => 'admin_email_subject',
 									'type'    => 'text',
@@ -1688,13 +1694,24 @@ TF_Settings::option( 'tf_settings', array(
 									'type'    => 'text',
 									'label'   => __( 'Email From Email', 'tourfic' ),
 									'default' => get_bloginfo( 'admin_email' ),
-								),
-								
+								),								
 								array(
 									'id'      => 'order_email_heading',
 									'type'    => 'text',
 									'label'   => __( 'Order Email Heading', 'tourfic' ),
 									'default' => __( 'You booking has been received', 'tourfic' ),
+								),
+								//type color
+								array(
+									'id'      => 'email_heading_bg',
+									'type'    => 'color',
+									'label'   => __( 'Email header background color', 'tourfic' ),
+									'default' => '#0209AF',
+									'multiple' => true,
+									'inline' => true,
+									'colors'   => array(
+										'bg_color' => __( 'Background Color', 'tourfic' ),
+									)
 								),
 								//email body
 								array(
@@ -1709,6 +1726,20 @@ TF_Settings::option( 'tf_settings', array(
 									'id'    => 'vendor_email_heading',
 									'type'  => 'heading',
 									'label' => __( 'Vendor Email', 'tourfic' ),
+								),
+								//vendor email from name
+								array(
+									'id'      => 'vendor_email_from_name',
+									'type'    => 'text',
+									'label'   => __( 'Vendor Email From Name', 'tourfic' ),
+									'default' => get_bloginfo( 'name' ),
+								),
+								//vendor email from email
+								array(
+									'id'      => 'vendor_email_from_email',
+									'type'    => 'text',
+									'label'   => __( 'Vendor Email From Email', 'tourfic' ),
+									'default' => get_bloginfo( 'admin_email' ),
 								),
 								//vendor email template
 								array(
@@ -1737,13 +1768,33 @@ TF_Settings::option( 'tf_settings', array(
 							'id'     => 'customer-email',
 							'title'  => __( 'Customer Email', 'tourfic' ),
 							'icon'   => 'fa fa-envelope',
-							'fields' => array(								
-								//payment success email
+							'fields' => array(
+								//disable customer email
+								array(
+									'id'      => 'customer_email_disable',
+									'type'    => 'switch',
+									'label'   => __( 'Disable Customer Email', 'tourfic' ),
+									'default' => 'false',
+								),
 								array(
 									'id'      => 'customer_confirm_email_subject',
 									'type'    => 'text',
-									'label'   => __( 'ooking Confirmation Email Subject', 'tourfic' ),
+									'label'   => __( 'Booking Confirmation Email Subject', 'tourfic' ),
 									'default' => __( 'Your booking has been confirmed', 'tourfic' ),
+								),
+								//from name
+								array(
+									'id'      => 'customer_from_name',
+									'type'    => 'text',
+									'label'   => __( 'Email From Name', 'tourfic' ),
+									'default' => get_bloginfo( 'name' ),
+								),
+								//from email
+								array(
+									'id'      => 'customer_from_email',
+									'type'    => 'text',
+									'label'   => __( 'Email From Email', 'tourfic' ),
+									'default' => get_bloginfo( 'admin_email' ),
 								),
 								array(
 									'id'      => 'customer_confirm_email_template',
