@@ -451,7 +451,7 @@ function tf_archive_single_rating() {
 		ob_start();
 		?>
 		<?php
-		if( ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1"){
+		if( ( ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) ){
 		?>
 			<div class="tf-reviews tf-flex tf-mrtop-16 tf-flex-gap-12">
 				<div class="tf-review-items">
@@ -511,6 +511,19 @@ function tf_archive_single_rating() {
 		<?php
 		}
 		echo ob_get_clean();
+	}else{
+		if( ( ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) ){
+		?>
+		<div class="tf-reviews tf-flex tf-mrtop-16 tf-flex-gap-12">
+			<div class="tf-review-items">
+				<i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
+			</div>
+			<div class="tf-avarage-review">
+				<?php _e(" (No Review)", "tourfic"); ?>
+			</div>
+		</div>
+		<?php
+		}
 	}
 }
 

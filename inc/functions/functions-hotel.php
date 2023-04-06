@@ -1812,6 +1812,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                 if ( ! empty( $room_price ) ):
                     $lowest_price = wc_price( min( $room_price ) );
                     echo __( "From ", "tourfic" ) . $lowest_price;
+					echo __(" (Per Night)","tourfic"); 
                 endif; ?>
 
                 </div>

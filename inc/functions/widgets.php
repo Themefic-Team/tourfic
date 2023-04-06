@@ -719,13 +719,17 @@ class Tourfic_Price_Filter extends WP_Widget {
             echo $before_widget;
             if( is_post_type_archive('tf_hotel') ){
             ?>
-                <h4><?php _e("Hotel Price Range","tourfic"); ?></h4>
+                <div class="tf-widget-title">
+                    <h4><?php _e("Hotel Price Range","tourfic"); ?></h4></i>
+                </div>
                 <div class="tf-hotel-result-price-range"></div>
             <?php
             } 
             if( is_post_type_archive('tf_tours') ){
             ?>
-                <h4><?php _e("Tour Price Range","tourfic"); ?></h4>
+                <div class="tf-widget-title">
+                    <h4><?php _e("Tour Price Range","tourfic"); ?></h4></i>
+                </div>
                 <div class="tf-tour-result-price-range"></div>
             <?php
             }
@@ -735,12 +739,16 @@ class Tourfic_Price_Filter extends WP_Widget {
             echo $before_widget;
             if( !empty($_GET['type']) && $_GET['type']=="tf_tours" && !empty($_GET['from']) && !empty($_GET['to'] ) ){
             ?>
-                <h4><?php _e("Tour Price Range","tourfic"); ?></h4>
+                <div class="tf-widget-title">
+                    <h4><?php _e("Tour Price Range","tourfic"); ?></h4></i>
+                </div>
                 <div class="tf-tour-result-price-range"></div>
             <?php }
             if( !empty($_GET['type']) && $_GET['type']=="tf_hotel" && !empty($_GET['from']) && !empty($_GET['to'] ) ){
             ?>
-                <h4><?php _e("Hotel Price Range","tourfic"); ?></h4>
+                <div class="tf-widget-title">
+                    <h4><?php _e("Hotel Price Range","tourfic"); ?></h4></i>
+                </div>
                 <div class="tf-hotel-result-price-range"></div>
 		<?php } } ?>
 		<!-- End Price Range widget -->

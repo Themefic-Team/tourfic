@@ -349,6 +349,54 @@ a.page-numbers {
     background: #fff;
     border-radius: 10px;
     margin-bottom: 20px;
+    .tf-hotel-result-price-range,
+    .tf-tour-result-price-range{
+        margin-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    h4{
+        font-size: 20px;
+        font-weight: 500;
+    }
+    .al-range-slider__track {
+        background: #EEE;
+        height: 10px;
+        box-shadow: none !important;
+        margin: 30px 0px 10px 0px;
+    }
+    .al-range-slider_dark {
+        padding: 0px !important;
+        .al-range-slider__bar {
+            background: #003162 !important;
+            box-shadow: none !important;
+        }
+    }
+    .al-range-slider__knob {
+        background: #003162 !important;
+        height: 15px;
+        width: 15px;
+        box-shadow: none !important;
+        border: 3px solid #003162 !important;
+        &:first-child {
+            span {
+                left: 10px !important;
+            }
+        }
+    }
+    .al-range-slider__tooltip {
+        background: #003162 !important;
+        border-radius: 5px;
+        box-shadow: none;
+        padding: 3px 10px;
+        color: #fff !important;
+        font-size: 13px !important;
+        margin-bottom: 0px !important;
+    }
+    .al-range-slider__input.js-al-range-slider__input {
+        display: none;
+    }
+    
     .tf-widget-title {
         display: flex;
         align-items: center;

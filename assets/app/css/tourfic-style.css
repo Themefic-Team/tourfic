@@ -1921,6 +1921,51 @@ a.page-numbers {
   border-radius: 10px;
   margin-bottom: 20px;
 }
+.tf_widget .tf-hotel-result-price-range,
+.tf_widget .tf-tour-result-price-range {
+  margin-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.tf_widget h4 {
+  font-size: 20px;
+  font-weight: 500;
+}
+.tf_widget .al-range-slider__track {
+  background: #EEE;
+  height: 10px;
+  box-shadow: none !important;
+  margin: 30px 0px 10px 0px;
+}
+.tf_widget .al-range-slider_dark {
+  padding: 0px !important;
+}
+.tf_widget .al-range-slider_dark .al-range-slider__bar {
+  background: #003162 !important;
+  box-shadow: none !important;
+}
+.tf_widget .al-range-slider__knob {
+  background: #003162 !important;
+  height: 15px;
+  width: 15px;
+  box-shadow: none !important;
+  border: 3px solid #003162 !important;
+}
+.tf_widget .al-range-slider__knob:first-child span {
+  left: 10px !important;
+}
+.tf_widget .al-range-slider__tooltip {
+  background: #003162 !important;
+  border-radius: 5px;
+  box-shadow: none;
+  padding: 3px 10px;
+  color: #fff !important;
+  font-size: 13px !important;
+  margin-bottom: 0px !important;
+}
+.tf_widget .al-range-slider__input.js-al-range-slider__input {
+  display: none;
+}
 .tf_widget .tf-widget-title {
   display: flex;
   align-items: center;
