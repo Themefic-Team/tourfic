@@ -1,5 +1,5 @@
 .tf-template-global {
-background-color: #ebf0f4;
+background-color: inherit;
 padding: 60px 0px;
 width: 100%;
 }
@@ -154,6 +154,9 @@ i {
         h2 {
         font-size: 22px;
         line-height: 1.3;
+        a{
+            color: $color-black-light;
+        }
         }
     }
     .tf-arachive-features{

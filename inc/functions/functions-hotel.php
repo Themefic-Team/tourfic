@@ -1744,6 +1744,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	?>
 	<div class="tf-item-card tf-flex tf-item-hotel tf-flex-align-center">
         <div class="tf-item-featured">
+			<a href="<?php echo esc_url($url); ?>">
             <?php
                 if (has_post_thumbnail()) {
                     the_post_thumbnail( 'full' );
@@ -1751,6 +1752,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                     echo '<img src="' .TF_ASSETS_APP_URL . "images/feature-default.jpg". '" class="attachment-full size-full wp-post-image">';
                 }
             ?>
+			</a>
             <div class="tf-features-box tf-flex">
                 <?php if( $featured ): ?>
                     <div class="tf-feature">
@@ -1771,7 +1773,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
             </div>
             <?php } ?>
             <div class="tf-title tf-mrtop-16">
-                <h2><?php the_title();?></h2>
+				<h2><a href="<?php echo esc_url($url); ?>"><?php the_title();?></a></h2>
             </div>
             
             <?php if ( $features ) { ?>

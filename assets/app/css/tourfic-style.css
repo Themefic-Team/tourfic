@@ -4515,7 +4515,7 @@ div#tf-contact-info {
   }
 }
 .tf-template-global {
-  background-color: #EBF0F4;
+  background-color: inherit;
   padding: 60px 0px;
 }
 
@@ -5408,7 +5408,7 @@ div#tf-contact-info {
 }
 
 .tf-template-global {
-  background-color: #ebf0f4;
+  background-color: inherit;
   padding: 60px 0px;
   width: 100%;
 }
@@ -5533,6 +5533,9 @@ div#tf-contact-info {
 .tf-search-results-list .tf-item-card .tf-item-details .tf-title h2 {
   font-size: 22px;
   line-height: 1.3;
+}
+.tf-search-results-list .tf-item-card .tf-item-details .tf-title h2 a {
+  color: #060D1C;
 }
 .tf-search-results-list .tf-item-card .tf-item-details .tf-arachive-features ul {
   margin: 0;

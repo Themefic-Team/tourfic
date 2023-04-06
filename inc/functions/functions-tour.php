@@ -1430,6 +1430,7 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
     ?>
     <div class="tf-item-card tf-flex tf-flex-align-center">
         <div class="tf-item-featured">
+            <a href="<?php echo esc_url($url); ?>">
             <?php
                 if (has_post_thumbnail()) {
                     the_post_thumbnail( 'full' );
@@ -1437,6 +1438,7 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
                     echo '<img src="' .TF_ASSETS_APP_URL . "images/feature-default.jpg". '" class="attachment-full size-full wp-post-image">';
                 }
             ?>
+            </a>
             <?php 
             $tf_discount_type = !empty($meta['discount_type']) ? $meta['discount_type'] : '';
             $tf_discount_amount = !empty($meta['discount_price']) ? $meta['discount_price'] : '';
@@ -1467,7 +1469,7 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
             </div>
             <?php } ?>
             <div class="tf-title tf-mrtop-16">
-                <h2><?php the_title();?></h2>
+                <h2><a href="<?php echo esc_url($url); ?>"><?php the_title();?></a></h2>
             </div>
             
             <?php tf_archive_single_rating();?>
