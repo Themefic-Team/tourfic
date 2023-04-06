@@ -297,7 +297,11 @@ i {
             }
             
         }
-        .tf-box-wrapper {
+        .tf_widget {
+            .tf-hotel-result-price-range,
+            .tf-tour-result-price-range{
+                margin-top: 20px;
+            }
             h4{
                 font-size: 20px;
                 font-weight: 500;

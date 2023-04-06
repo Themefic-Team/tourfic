@@ -445,8 +445,8 @@
             var room = $('#room').val();
             var children = $('#children').val();
             var checked = $('#check-in-out-date').val();
-            var startprice = $('.tf-box-wrapper input[name="from"]').val();
-            var endprice = $('.tf-box-wrapper input[name="to"]').val();
+            var startprice = $('.widget_tf_price_filters input[name="from"]').val();
+            var endprice = $('.widget_tf_price_filters input[name="to"]').val();
             // split date range into dates
             var checkedArr = checked.split(' - ');
             var checkin = checkedArr[0];
@@ -610,8 +610,8 @@
             var room = $('#room').val();
             var children = $('#children').val();
             var checked = $('#check-in-out-date').val();
-            var startprice = $('.tf-box-wrapper input[name="from"]').val();
-            var endprice = $('.tf-box-wrapper input[name="to"]').val();
+            var startprice = $('.widget_tf_price_filters input[name="from"]').val();
+            var endprice = $('.widget_tf_price_filters input[name="to"]').val();
             // split date range into dates
             var checkedArr = checked.split(' - ');
             var checkin = checkedArr[0];

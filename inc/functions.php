@@ -618,20 +618,6 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
         })(jQuery);
     </script>
 	
-	<div class="tf-box-wrapper tf-box tf-mrbottom-30">
-		<?php 
-		if( !empty($_GET['type']) && $_GET['type']=="tf_tours" && !empty($startprice) && !empty($endprice ) ){
-		?>
-			<h4><?php _e("Tour Price Range","tourfic"); ?></h4>
-			<div class="tf-tour-result-price-range"></div>
-		<?php } ?>
-		<?php 
-		if( !empty($_GET['type']) && $_GET['type']=="tf_hotel" && !empty($startprice) && !empty($endprice ) ){
-		?>
-			<h4><?php _e("Hotel Price Range","tourfic"); ?></h4>
-			<div class="tf-hotel-result-price-range"></div>
-		<?php } ?>
-	</div>
 	<?php if ( is_active_sidebar( 'tf_search_result' ) ) { ?>
         <div id="tf__booking_sidebar">
 			<?php dynamic_sidebar( 'tf_search_result' ); ?>
