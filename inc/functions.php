@@ -800,7 +800,6 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 	<?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
         <div id="tf__booking_sidebar">
 			<?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
-            <br>
         </div>
 		<?php
 	}

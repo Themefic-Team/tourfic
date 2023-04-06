@@ -79,18 +79,46 @@ foreach ( $rooms as $key => $room ) {
                     <tr>
                         <td class="description">
                             <div class="tf-room-description-box tf-flex">
+                                <?php
+                                    $tour_room_details_gall = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
+                                    if ( $tour_room_details_gall ) {
+                                        $tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
+                                    }
+                                ?>
+
                                 <?php 
                                 $room_preview_img = ! empty( $room['room_preview_img'] ) ? $room['room_preview_img'] : '';
                                 if(!empty($room_preview_img)){ ?>
                                 <div class="tf-room-preview-img">
+                                    <?php 
+                                    if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ){
+                                    ?>
+                                    <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $key : '' ?>"
+                                                data-hotel="<?php echo $post_id; ?>">
+                                        <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php _e("Room Image","tourfic"); ?>">
+                                        <span><?php _e("Best Offer", "tourfic"); ?></span>
+                                    </a>
+                                    <?php 
+                                    }else{ ?>
                                     <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php _e("Room Image","tourfic"); ?>">
                                     <span><?php _e("Best Offer", "tourfic"); ?></span>
+                                    <?php } ?>
                                 </div>
                                 <?php } ?>
                                 <div class="tf-features-infos" style="<?php echo !empty($room_preview_img) ? 'width: 70%' : ''; ?>">
                                     <div class="tf-room-type">
                                         <div class="tf-room-title">
+                                            <?php 
+                                            if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ){
+                                            ?>
+                                            <h3>
+                                                <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $key : '' ?>"
+                                                data-hotel="<?php echo $post_id; ?>"><?php echo esc_html( $room['title'] ); ?></a>
+                                            <h3>
+                                            <?php 
+                                            }else{ ?>
                                             <h3><?php echo esc_html( $room['title'] ); ?><h3>
+                                            <?php } ?>
                                         </div>
                                         <div class="bed-facilities"><?php _e( $room['description'] ); ?></div>
                                     </div>
@@ -123,10 +151,6 @@ foreach ( $rooms as $key => $room ) {
                                     </ul>
 
                                     <?php
-                                    $tour_room_details_gall = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
-                                    if ( $tour_room_details_gall ) {
-                                        $tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
-                                    }
                                     if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ){
                                         ?>
                                         <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $key : '' ?>"

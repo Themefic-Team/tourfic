@@ -111,6 +111,13 @@
                                 
                             }
                             .tf-features-infos{
+                                .tf-room-type{
+                                    h3{
+                                        a{
+                                            color: $color-black-light;
+                                        }
+                                    }
+                                }
                                 ul{
                                     margin: 0;
                                     padding: 0;
@@ -126,7 +133,7 @@
                                         }
                                     }
                                 }
-                                .tf-room-detail-qv{
+                                > a{
                                     color: $color-theme;
                                 }
                             }

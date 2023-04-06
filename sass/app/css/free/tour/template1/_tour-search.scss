@@ -400,6 +400,9 @@ i {
                                 }
                             }
                         }
+                        li.active{
+                            background: transparent !important;
+                        }
                     }
                     a{
                         text-align: left;
