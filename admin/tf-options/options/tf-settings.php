@@ -1729,14 +1729,14 @@ TF_Settings::option( 'tf_settings', array(
 								),
 								//vendor email from name
 								array(
-									'id'      => 'vendor_email_from_name',
+									'id'      => 'vendor_from_name',
 									'type'    => 'text',
 									'label'   => __( 'Vendor Email From Name', 'tourfic' ),
 									'default' => get_bloginfo( 'name' ),
 								),
 								//vendor email from email
 								array(
-									'id'      => 'vendor_email_from_email',
+									'id'      => 'vendor_from_email',
 									'type'    => 'text',
 									'label'   => __( 'Vendor Email From Email', 'tourfic' ),
 									'default' => get_bloginfo( 'admin_email' ),
