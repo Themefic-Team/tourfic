@@ -1230,4 +1230,25 @@ function tf_recent_blog_callback($atts, $content = null){
 	return ob_get_clean();
 }
 
-
+/**
+ * Vendor Posts Shortcode
+ * @author Jahid
+ * @since 2.9.13
+ */
+add_shortcode( 'tf_vendor_post', 'tf_vendor_post_callback' );
+function tf_vendor_post_callback($atts, $content = null){
+	extract(
+		shortcode_atts(
+			array(
+				'type'   => '',
+				'style'   => '',
+				'count'       => '',
+				'vendor'       => '',
+			),
+			$atts
+		)
+	);
+	var_dump($type);
+	ob_start();
+	return ob_get_clean();
+}
