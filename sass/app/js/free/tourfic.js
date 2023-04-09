@@ -556,13 +556,14 @@
                             opacity: .5
                         }
                     });
-
+                    $('#tf_ajax_searchresult_loader').show();
                     if($.trim(checkin) !== ''){
                         $('.tf_booking-dates .tf_label-row').find('#tf-required').remove();
                     }
                 },
                 complete: function (data) {
                     $('.archive_ajax_result').unblock();
+                    $('#tf_ajax_searchresult_loader').hide();
 
                     // total posts 0 if not found by @hena
                     if ($('.tf-nothing-found')[0]) {
@@ -578,6 +579,7 @@
                 },
                 success: function (data, e) {
                     $('.archive_ajax_result').unblock();
+                    $('#tf_ajax_searchresult_loader').hide();
                     $('.archive_ajax_result').html(data);
                     // @KK show notice in every success request
                     notyf.success(tf_params.ajax_result_success);

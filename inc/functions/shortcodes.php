@@ -609,7 +609,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
 	<?php 
 	if( ( $post_type=="tf_tours" && ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) || ( $post_type=="tf_hotel" && ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['hotel-archive']=="design-1" ) ){
 	?>
-	<div class="tf-column tf-page-content tf-archive-left">
+	<div class="tf-column tf-page-content tf-archive-left tf-result-previews">
 		<!-- Search Head Section -->
 		<div class="tf-archive-head tf-flex tf-flex-align-center tf-flex-space-bttn">
 			<div class="tf-search-result tf-flex">
@@ -629,7 +629,12 @@ function tf_search_result_shortcode( $atts, $content = null ){
 				</div>
 			</div>
 		</div>
-
+		<!-- Loader Image -->
+		<div id="tf_ajax_searchresult_loader">
+			<div id="tf-searchresult-loader-img">
+				<img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+			</div>
+		</div>
 		<div class="tf-search-results-list tf-mrtop-30">
 			<div class="archive_ajax_result tf-item-cards tf-flex tf-layout-list">
 			<?php

@@ -5643,6 +5643,28 @@ div#tf-contact-info {
   color: #fff !important;
 }
 
+.tf-result-previews {
+  position: relative;
+}
+.tf-result-previews #tf_ajax_searchresult_loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 99999;
+  display: none;
+}
+.tf-result-previews #tf_ajax_searchresult_loader #tf-searchresult-loader-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.tf-result-previews #tf_ajax_searchresult_loader #tf-searchresult-loader-img img {
+  width: 120px;
+}
+
 .tf-archive-design-1 label input:checked ~ .checkmark {
   background-color: #0E3DD8 !important;
 }

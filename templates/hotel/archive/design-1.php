@@ -1,7 +1,7 @@
 <div class="tf-archive-page tf-template-global tf-archive-design-1">
     <div class="tf-container">
         <div class="tf-row tf-archive-inner tf-flex">
-            <div class="tf-column tf-page-content tf-archive-left">
+            <div class="tf-column tf-page-content tf-archive-left tf-result-previews">
                 <?php
                     do_action( 'tf_before_container' );
                     $post_count = $GLOBALS['wp_query']->post_count;
@@ -25,7 +25,12 @@
                         </div>
                     </div>
                 </div>
-
+                <!-- Loader Image -->
+                <div id="tf_ajax_searchresult_loader">
+                    <div id="tf-searchresult-loader-img">
+                        <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                    </div>
+                </div>
                 <div class="tf-search-results-list tf-mrtop-30">
                     <div class="archive_ajax_result tf-item-cards tf-flex tf-layout-list">
 
