@@ -4,7 +4,7 @@ body{
 }
 
 .tf-template-global {
-    font-family: $font-primary;
+    font-family: inherit;
     color: $color-primary;
     .tf-container{
         width: auto;
@@ -67,7 +67,7 @@ table.tf-table {
     display: block;
     text-align: center;
     transition: all .6s ease;
-    font-family: $font-primary;
+    font-family: inherit;
 
     &:hover{
         background: $color-hover-normal;
@@ -120,7 +120,7 @@ table.tf-table {
         border-radius: 5px;
         font-size: 14px;
         color: $color-primary;
-        font-family: $font-primary;
+        font-family: inherit;
         background-image: none;
         -moz-appearance: auto !important;
     }

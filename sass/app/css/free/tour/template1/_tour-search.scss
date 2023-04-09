@@ -1,7 +1,7 @@
 .tf-template-global {
-background-color: inherit;
-padding: 60px 0px;
-width: 100%;
+    background-color: inherit;
+    padding: 60px 0px;
+    width: 100%;
 }
 
 // Search Heading
@@ -389,7 +389,7 @@ i {
                     height: auto;
                     pointer-events: none;
                     h4{
-                        font-family: "Jost", sans-serif !important;
+                        font-family: inherit;
                         font-size: 20px;
                         font-weight: 500;
                     }

@@ -2,8 +2,6 @@
 /*
 Button
 */
-@import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap");
 .tf-admin-btn {
   display: inline-flex;
   -webkit-align-items: center;
@@ -2796,7 +2794,7 @@ body {
 }
 
 .tf-template-global {
-  font-family: "Jost", sans-serif;
+  font-family: inherit;
   color: #686E7A;
 }
 .tf-template-global .tf-container {
@@ -2861,7 +2859,7 @@ table.tf-table tr:last-child {
   display: block;
   text-align: center;
   transition: all 0.6s ease;
-  font-family: "Jost", sans-serif;
+  font-family: inherit;
 }
 .tf-bttn-normal:hover {
   background: #deddeb;
@@ -2916,7 +2914,7 @@ table.tf-table tr:last-child {
   border-radius: 5px;
   font-size: 14px;
   color: #686E7A;
-  font-family: "Jost", sans-serif;
+  font-family: inherit;
   background-image: none;
   -moz-appearance: auto !important;
 }
@@ -3132,7 +3130,7 @@ table.tf-table tr:last-child {
 .tf-template-global h4,
 .tf-template-global h5,
 .tf-template-global h6 {
-  font-family: "Jost", sans-serif;
+  font-family: inherit;
   font-weight: 500;
   color: #060D1C;
   margin: 0px;
@@ -3140,7 +3138,7 @@ table.tf-table tr:last-child {
 }
 
 .tf-template-global p {
-  font-family: "Jost", sans-serif;
+  font-family: inherit;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.6;
@@ -4799,7 +4797,7 @@ div#tf-contact-info {
 }
 .tf-trip-info li {
   font-size: 14px;
-  font-family: "Jost", sans-serif;
+  font-family: inherit;
   color: #686E7A;
   margin-top: 8px;
   align-items: center;
@@ -5214,6 +5212,16 @@ div#tf-contact-info {
 .tf-review-wrapper .tf-review-reply .tf-review-author {
   max-width: 15%;
 }
+@media only screen and (max-width: 1199.98px) {
+  .tf-review-wrapper .tf-review-reply .tf-review-author {
+    max-width: 20%;
+  }
+}
+@media only screen and (max-width: 991.98px) {
+  .tf-review-wrapper .tf-review-reply .tf-review-author {
+    max-width: 30%;
+  }
+}
 .tf-review-wrapper .tf-review-reply .tf-review-author img {
   object-fit: cover;
   width: 70px;
@@ -5222,6 +5230,16 @@ div#tf-contact-info {
 }
 .tf-review-wrapper .tf-review-reply .tf-review-details {
   max-width: 85%;
+}
+@media only screen and (max-width: 1199.98px) {
+  .tf-review-wrapper .tf-review-reply .tf-review-details {
+    max-width: 80%;
+  }
+}
+@media only screen and (max-width: 991.98px) {
+  .tf-review-wrapper .tf-review-reply .tf-review-details {
+    max-width: 70%;
+  }
 }
 .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-author-name h3 {
   font-size: 1.17rem;
@@ -5249,7 +5267,7 @@ div#tf-contact-info {
   display: initial;
 }
 .tf-review-wrapper .tf-review-form .tf-review-form-container .tf-rating-wrapper .tf-form-single-rating > label {
-  font-family: "Jost", sans-serif;
+  font-family: inherit;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.6;
@@ -5271,7 +5289,7 @@ div#tf-contact-info {
   border-radius: 5px;
   font-size: 14px;
   color: #686E7A;
-  font-family: "Jost", sans-serif;
+  font-family: inherit;
 }
 .tf-review-wrapper .tf-review-form .tf-review-form-container .review-desc textarea::placeholder {
   color: #060D1C;
@@ -5287,7 +5305,7 @@ div#tf-contact-info {
   border-radius: 5px;
   font-size: 14px;
   color: #686E7A;
-  font-family: "Jost", sans-serif;
+  font-family: inherit;
 }
 .tf-review-wrapper .tf-review-form .tf-review-form-container .tf-visitor-info div input::placeholder {
   color: #060D1C;
@@ -5782,7 +5800,7 @@ div#tf-contact-info {
   pointer-events: none;
 }
 .tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-widget-title h4 {
-  font-family: "Jost", sans-serif !important;
+  font-family: inherit;
   font-size: 20px;
   font-weight: 500;
 }
@@ -5856,7 +5874,7 @@ div#tf-contact-info {
   display: block;
 }
 .tf-hotel-design-1 #tf-single-hotel-avail .tf_booking-dates #tf-required b {
-  font-family: "Jost", sans-serif;
+  font-family: inherit;
   font-weight: 500;
 }
 .tf-hotel-design-1 #tf-single-hotel-avail .tf-bttn-normal {
@@ -5914,7 +5932,7 @@ div#tf-contact-info {
   padding: 13px 30px;
   font-size: 16px;
   font-weight: 500;
-  font-family: "Jost", sans-serif;
+  font-family: inherit;
 }
 .tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .tf-room-preview-img {
   width: 170px;

@@ -256,7 +256,7 @@
     }
     li {
         font-size: $font-size-small;
-        font-family: $font-primary;
+        font-family: inherit;
         color: $color-primary;
         margin-top: $tf-space-8;
         align-items: center;
@@ -712,6 +712,12 @@
         }
         .tf-review-author {
             max-width: 15%;
+            @media #{$max1199}{
+                max-width: 20%;
+            }
+            @media #{$max991}{
+                max-width: 30%;
+            }
             img {
                 object-fit: cover;
                 width: 70px;
@@ -721,6 +727,12 @@
         }
         .tf-review-details{
             max-width: 85%;
+            @media #{$max1199}{
+                max-width: 80%;
+            }
+            @media #{$max991}{
+                max-width: 70%;
+            }
             .tf-review-author-name{
                 h3{
                     font-size: 1.17rem;
@@ -749,7 +761,7 @@
                 .tf-form-single-rating{
                     display: initial;
                     > label{
-                        font-family: "Jost", sans-serif;
+                        font-family: inherit;
                         font-size: 16px;
                         font-weight: 400;
                         line-height: 1.6;
@@ -776,7 +788,7 @@
                     border-radius: 5px;
                     font-size: 14px;
                     color: #686E7A;
-                    font-family: "Jost", sans-serif;
+                    font-family: inherit;
                     &::placeholder{
                         color: $color-black;
                     }
@@ -793,7 +805,7 @@
                         border-radius: 5px;
                         font-size: 14px;
                         color: #686E7A;
-                        font-family: "Jost", sans-serif;
+                        font-family: inherit;
                         &::placeholder{
                             color: $color-black;
                         }
