@@ -147,6 +147,7 @@ table.tf-table {
     @media #{$tfmax767}{
         flex-basis: 100%;
         margin-top: 70px;
+        padding-left: 0px;
     }
     @media #{$tfmax991}{
         flex-basis: 40%;

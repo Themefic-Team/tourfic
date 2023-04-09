@@ -2918,6 +2918,11 @@ table.tf-table tr:last-child {
   background-image: none;
   -moz-appearance: auto !important;
 }
+@media only screen and (max-width: 767.98px) {
+  .tf-field-group .tf-field {
+    width: 100% !important;
+  }
+}
 .tf-field-group input::placeholder {
   font-weight: 16px;
   font-size: 14px;
@@ -2946,6 +2951,7 @@ table.tf-table tr:last-child {
   .tf-sidebar {
     flex-basis: 100%;
     margin-top: 70px;
+    padding-left: 0px;
   }
 }
 @media only screen and (min-width: 767.99px) and (max-width: 991px) {
@@ -5509,6 +5515,11 @@ div#tf-contact-info {
 }
 .tf-search-results-list .tf-layout-grid .tf-item-card {
   flex-basis: calc(50% - 12px);
+}
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-search-results-list .tf-layout-grid .tf-item-card {
+    flex-basis: calc(100% - 0px);
+  }
 }
 .tf-search-results-list .tf-layout-grid .tf-item-card {
   flex-wrap: wrap;

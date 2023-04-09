@@ -50,6 +50,9 @@ i {
 
     .tf-item-card {
     flex-basis: calc(100% / 2 - 12px);
+    @media #{$tfmax991}{
+        flex-basis: calc(100% - 0px);
+    }
     }
 
     .tf-item-card {

@@ -689,7 +689,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 			<div class="tf-field-group tf-mrtop-8">
 				<i class="fa-solid fa-calendar-days"></i>
 				<input type="text" class="tf-field time" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                               placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" required value="">
+                               placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" required value="" style="width: 100% !important">
 			</div>
 			<div class="tf-booking-bttns tf-mrtop-30">
             	<input type="hidden" name="type" value="<?php echo $post_type; ?>" class="tf-post-type"/>
