@@ -1445,7 +1445,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 					<div class="tf_form-inner tf-field-group">
 						<i class="far fa-calendar-alt"></i>
 						<input type="text" name="check-in-out-date" id="check-in-out-date" class="tf-field" onkeypress="return false;"
-							placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
+							placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required style="width: 100% !important;">
 					</div>
 				</label>
 			</div>

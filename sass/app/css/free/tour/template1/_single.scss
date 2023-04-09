@@ -50,7 +50,7 @@
         }
         @media #{$tfmax767}{
             flex-basis: 100%;
-            margin-top: 70px;
+            margin-top: 0px;
         }
     }
 }
@@ -111,6 +111,11 @@
 // Adult & Child & Infant Box
 
 .tf-booking-form{
+    .tf-field-group{
+         #check-in-out-date {
+            width: 100% !important;
+        }
+    }
     .tf-booking-person{
         .tf-field{
             align-items: center;
