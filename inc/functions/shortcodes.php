@@ -1241,14 +1241,46 @@ function tf_vendor_post_callback($atts, $content = null){
 		shortcode_atts(
 			array(
 				'type'   => '',
-				'style'   => '',
-				'count'       => '',
+				'style'   => 'grid',
+				'count'       => 4,
 				'vendor'       => '',
+				'vendor_id'       => '',
 			),
 			$atts
 		)
 	);
-	var_dump($type);
-	ob_start();
+	
+	$args = array(
+		'post_type'      => $type,
+		'post_status'    => 'publish',
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+		'posts_per_page' => $count,
+		'author' => sanitize_key( $vendor_id ),
+	);
+	
+	$tf_vendors_posts = new WP_Query($args);
+	?>
+	<div class="tf_search_result">
+		<div class="archive_ajax_result <?php echo $style=="grid" ? esc_attr( 'tours-grid' ) : ''; ?> ">
+			<?php
+			ob_start();
+			if ( $tf_vendors_posts->have_posts() ) {
+				while ( $tf_vendors_posts->have_posts() ) {
+					$tf_vendors_posts->the_post();
+					if($type=="tf_tours"){
+						tf_tour_archive_single_item();
+					}else{
+						tf_hotel_archive_single_item();
+					}
+				}
+			}else{
+				echo __( 'No posts found', 'tourfic' );
+			}
+			?>
+		</div>
+	</div>
+	<?php
+	wp_reset_postdata(); 
 	return ob_get_clean();
 }

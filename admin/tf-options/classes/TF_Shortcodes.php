@@ -811,8 +811,8 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Type', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="type='hotel'"><?php _e( 'Hotel', 'tourfic' ); ?></option>
-                                                <option value="type='tour'"><?php _e( 'Tour', 'tourfic' ); ?></option>
+                                                <option value="type='tf_hotel'"><?php _e( 'Hotel', 'tourfic' ); ?></option>
+                                                <option value="type='tf_tours'"><?php _e( 'Tour', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -846,7 +846,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                             <select class="tf-select-field tf-setting-field">
                                                 <?php 
                                                 foreach($tf_vendor_query_lists as $single){ ?>
-                                                <option value="vendor='<?php echo $single->user_nicename; ?>'"><?php echo $single->user_nicename; ?></option>
+                                                <option value="vendor='<?php echo $single->user_nicename; ?>' vendor_id='<?php echo $single->ID; ?>' "><?php echo $single->user_nicename; ?></option>
                                                 <?php } ?>
                                             </select>
                                             <?php }else{
