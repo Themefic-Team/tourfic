@@ -210,7 +210,7 @@ class TF_Handle_Emails{
         $booking_details = '<table width="100%" style="max-width: 600px;border-collapse: collapse; color: #5A5A5A;"><thead><tr><th align="left" style="color:#0209AF">Item Name</th><th align="center" style="color:#0209AF">Quantity</th><th align="right" style="color:#0209AF">Price</th></tr></thead><tbody style="border-bottom: 2px solid #D9D9D9">';
         foreach( $order_items_data as $item ){
             $booking_details .= '<tr>';
-            $booking_details .= '<td style="padding-left:10px;adding: 15px 0;text-align: left;">'.$item['item_name'];
+            $booking_details .= '<td style="adding: 15px 0;text-align: left;">'.$item['item_name'];
             //item meta data except _order_type,_post_author,_tour_id php loop
             foreach( $item['item_meta_data'] as $meta_data ){
                 if( $meta_data['key'] != '_order_type' && $meta_data['key'] != '_post_author' && $meta_data['key'] != '_tour_id' && $meta_data['key'] != '_post_id' && $meta_data['key'] != '_unique_id' ){
