@@ -1,3 +1,5 @@
+<?php 
+if($highlights){ ?>
 <!-- Tour Highlights  -->
 <div class="tf-highlights-wrapper tf-mrbottom-70 tf-box">
     <div class="tf-highlights-inner tf-flex">
@@ -12,3 +14,4 @@
         </div>
     </div>
 </div>
+<?php } ?>
