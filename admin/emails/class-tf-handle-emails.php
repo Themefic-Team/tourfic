@@ -354,8 +354,6 @@ class TF_Handle_Emails{
         $admin_email_booking_body_full = $email_body_open . $admin_booking_email_template . $email_body_close;
         //decode entity
         $admin_email_booking_body_full = wp_kses_post( html_entity_decode( $admin_email_booking_body_full, '3' , 'UTF-8' ) );
-        echo $admin_email_booking_body_full;
-        die();
  
         //check if admin emails disable
         if( isset( $admin_email_disable ) && $admin_email_disable == false ){
