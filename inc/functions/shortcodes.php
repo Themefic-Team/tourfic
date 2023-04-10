@@ -1249,7 +1249,7 @@ function tf_vendor_post_callback($atts, $content = null){
 			$atts
 		)
 	);
-	
+
 	$args = array(
 		'post_type'      => $type,
 		'post_status'    => 'publish',
@@ -1261,7 +1261,7 @@ function tf_vendor_post_callback($atts, $content = null){
 	
 	$tf_vendors_posts = new WP_Query($args);
 	?>
-	<div class="tf_search_result">
+	<div class="tf_search_result sp-50">
 		<div class="archive_ajax_result <?php echo $style=="grid" ? esc_attr( 'tours-grid' ) : ''; ?> ">
 			<?php
 			ob_start();
