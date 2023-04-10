@@ -22,7 +22,7 @@ if( ( $post_type == "tf_tours" && ! empty( tf_data_types(tfopt( 'tf-template' ))
 		<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
 		<!-- SideBar-->
 		<div class="tf-column tf-sidebar tf-archive-right">
-			<?php tf_archive_sidebar_search_form('tf_tours'); ?>
+			<?php tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
 		</div>
 		</div>
 	</div>
