@@ -303,7 +303,7 @@ class TF_Handle_Emails{
         <div style="width: 100%; max-width: 600px; margin: 0 auto;">
             <div style="background-color: '.esc_attr( $email_heading_bg ).'; color: #fff; padding: 20px;">';
         if( !empty( $brand_logo ) ){
-            $email_body_open .= '<div style="text-align:left;width:200px;"><img src="'.esc_url($brand_logo).'" alt="logo" /></div>';
+            $email_body_open .= '<div style="text-align:center;width:200px;"><img src="'.esc_url($brand_logo).'" alt="logo" /></div>';
         }
         $email_body_open .= '<div class="heading" style="text-align: center;">
         <h1 style="font-size: 32px; line-height: 40px; font-weight: 400; letter-spacing: 2px; margin: 20px 0; color: #ffffff;">

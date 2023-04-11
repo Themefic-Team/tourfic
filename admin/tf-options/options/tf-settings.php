@@ -1706,7 +1706,9 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'email_heading_bg',
 									'type'    => 'color',
 									'label'   => __( 'Email header background color', 'tourfic' ),
-									'default' => '#0209AF',
+									'default' => array(
+										'bg_color' => '#0209AF'
+									),
 									'multiple' => true,
 									'inline' => true,
 									'colors'   => array(
