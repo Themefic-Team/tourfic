@@ -107,12 +107,12 @@ class TF_Handle_Emails{
 					),
                     'vendor'   => array(
                         'heading'         => __( 'A Payment has been received for {booking_id}', 'tourfic' ),
-                        'greeting'        => __( 'Dear Vendor,', 'tourfic' ),
+                        'greeting'        => __( 'Dear {fullname},', 'tourfic' ),
                         'greeting_byline' => __( 'A payment has been received for {booking_id}. The payment details are listed below.', 'tourfic' ),
                     ),
 					'customer' => array(
 						'heading'         => __( 'Your booking has been confirmed.', 'tourfic' ),
-						'greeting'        => __( 'Dear {name},', 'tourfic' ),
+						'greeting'        => __( 'Dear {fullname},', 'tourfic' ),
 						'greeting_byline' => __( 'Your booking has been confirmed. Your booking and payment information is listed below.', 'tourfic' ),
 					),
                 )
@@ -303,7 +303,7 @@ class TF_Handle_Emails{
         <div style="width: 100%; max-width: 600px; margin: 0 auto;">
             <div style="background-color: '.esc_attr( $email_heading_bg ).'; color: #fff; padding: 20px;">';
         if( !empty( $brand_logo ) ){
-            $email_body_open .= '<div style="text-align:center;width:200px;"><img src="'.esc_url($brand_logo).'" alt="logo" /></div>';
+            $email_body_open .= '<div style="text-align:center;width:200px;margin: 0 auto;"><img src="'.esc_url($brand_logo).'" alt="logo" /></div>';
         }
         $email_body_open .= '<div class="heading" style="text-align: center;">
         <h1 style="font-size: 32px; line-height: 40px; font-weight: 400; letter-spacing: 2px; margin: 20px 0; color: #ffffff;">
