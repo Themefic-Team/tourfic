@@ -139,24 +139,24 @@ if(!class_exists('Tour_Price')){
                     if($discount_type == 'percent') {
         
                         # Minimum discounted price
-                        $sale_min_adult_price  = number_format( $min_adult_price - (( $min_adult_price / 100 ) * $discounted_price) , 2, '.', '' );
-                        $sale_min_child_price  = number_format( $min_child_price - (( $min_child_price / 100 ) * $discounted_price) , 2, '.', '' );
-                        $sale_min_infant_price = number_format( $min_infant_price - (( $min_infant_price / 100 ) * $discounted_price) , 2, '.', '' );
+                        $sale_min_adult_price  = !empty($min_adult_price) ? number_format( $min_adult_price - (( $min_adult_price / 100 ) * $discounted_price) , 2, '.', '' ) : '';
+                        $sale_min_child_price  = !empty($min_child_price) ? number_format( $min_child_price - (( $min_child_price / 100 ) * $discounted_price) , 2, '.', '' ) : '';
+                        $sale_min_infant_price = !empty($min_infant_price) ? number_format( $min_infant_price - (( $min_infant_price / 100 ) * $discounted_price) , 2, '.', '' ) : '';
                         # Maximum discounted price
-                        $sale_max_adult_price  = number_format( $max_adult_price - (( $max_adult_price / 100 ) * $discounted_price) , 2, '.', '' );
-                        $sale_max_child_price  = number_format( $max_child_price - (( $max_child_price / 100 ) * $discounted_price) , 2, '.', '' );
-                        $sale_max_infant_price = number_format( $max_infant_price - (( $max_infant_price / 100 ) * $discounted_price) , 2, '.', '' );
+                        $sale_max_adult_price  = !empty($max_adult_price) ? number_format( $max_adult_price - (( $max_adult_price / 100 ) * $discounted_price) , 2, '.', '' ) : '';
+                        $sale_max_child_price  = !empty($max_child_price) ? number_format( $max_child_price - (( $max_child_price / 100 ) * $discounted_price) , 2, '.', '' ) : '';
+                        $sale_max_infant_price = !empty($max_infant_price) ? number_format( $max_infant_price - (( $max_infant_price / 100 ) * $discounted_price) , 2, '.', '' ) : '';
         
                     } else if($discount_type == 'fixed') {
         
                         # Minimum discounted price
-                        $sale_min_adult_price  = number_format( ( $min_adult_price - $discounted_price ), 2, '.', '' );
-                        $sale_min_child_price  = number_format( ( $min_child_price - $discounted_price ), 2, '.', '' );
-                        $sale_min_infant_price = number_format( ( $min_infant_price - $discounted_price ), 2, '.', '' );
+                        $sale_min_adult_price  = !empty($min_adult_price) ? number_format( ( $min_adult_price - $discounted_price ), 2, '.', '' ) : '';
+                        $sale_min_child_price  = !empty($min_child_price) ? number_format( ( $min_child_price - $discounted_price ), 2, '.', '' ) : '';
+                        $sale_min_infant_price = !empty($min_infant_price) ? number_format( ( $min_infant_price - $discounted_price ), 2, '.', '' ) : '';
                         # Maximum discounted price
-                        $sale_max_adult_price  = number_format( ( $max_adult_price - $discounted_price ), 2, '.', '' );
-                        $sale_max_child_price  = number_format( ( $max_child_price - $discounted_price ), 2, '.', '' );
-                        $sale_max_infant_price = number_format( ( $max_infant_price - $discounted_price ), 2, '.', '' );
+                        $sale_max_adult_price  = !empty($max_adult_price) ? number_format( ( $max_adult_price - $discounted_price ), 2, '.', '' ) : '';
+                        $sale_max_child_price  = !empty($max_child_price) ? number_format( ( $max_child_price - $discounted_price ), 2, '.', '' ) : '';
+                        $sale_max_infant_price = !empty($max_infant_price) ? number_format( ( $max_infant_price - $discounted_price ), 2, '.', '' ) : '';
         
                     }
 
