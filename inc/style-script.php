@@ -138,31 +138,37 @@ if( !function_exists( 'tf_hotel_css' ) ){
 			.tf-title-left span.post-type {background: '.$tf_hotel_type_bg_color.';}
 		'; }
 		if( $tf_share_color_reg  ) { $output .= '
-			.tf-share .share-toggle i {color: '.$tf_share_color_reg.';}
+			.tf-share .share-toggle i, .tf-single-page .tf-section.tf-single-head .tf-share a i {color: '.$tf_share_color_reg.';}
 		'; }
 		if( $tf_share_color_hov  ) { $output .= '
-			.tf-share .share-toggle i:hover {color: '.$tf_share_color_hov.';}
+			.tf-share .share-toggle i:hover, .tf-single-page .tf-section.tf-single-head .tf-share a i:hover {color: '.$tf_share_color_hov.';}
 		'; }
 		if( $tf_gradient_one_reg && $tf_gradient_two_reg  ) { $output .= '
-			.show-on-map .btn-styled {background: linear-gradient(to bottom, '.$tf_gradient_one_reg.' 0, '.$tf_gradient_two_reg.' 100%);}
+			.show-on-map .btn-styled, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i {background: linear-gradient(to bottom, '.$tf_gradient_one_reg.' 0, '.$tf_gradient_two_reg.' 100%);}
 		'; }
 		if( $tf_gradient_one_hov && $tf_gradient_two_hov  ) { $output .= '
-			.show-on-map .btn-styled:hover {background: linear-gradient(to bottom, '.$tf_gradient_one_hov.' 0, '.$tf_gradient_two_hov.' 100%);}
+			.show-on-map .btn-styled:hover, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i:hover {background: linear-gradient(to bottom, '.$tf_gradient_one_hov.' 0, '.$tf_gradient_two_hov.' 100%);}
 		'; }
 		if( $tf_map_text_color  ) { $output .= '
-			.show-on-map .btn-styled {color: '.$tf_map_text_color.';}
+			.show-on-map .btn-styled, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i {color: '.$tf_map_text_color.';}
 		'; }
 		if( $tf_hotel_features  ) { $output .= '
-			.tf_features i, .tf-archive-desc i {color: '.$tf_hotel_features.'!important;}
+			.tf_features i, .tf-archive-desc i, .tf-single-page .tf-hotel-single-features ul li {color: '.$tf_hotel_features.'!important;}
 		'; }
 		if( $tf_hotel_table_color OR $tf_hotel_table_bg_color ) { $output .= '
-			.availability-table thead {
+			.availability-table thead,
+			.tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table thead {
 				color: '.$tf_hotel_table_color.';
 				background: '.$tf_hotel_table_bg_color.';
 			}
 		'; }
+		if( $tf_hotel_table_color ) { $output .= '
+			.tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table thead tr th{
+				color: '.$tf_hotel_table_color.';
+			}
+		'; }
 		if( $tf_hotel_table_border_color  ) { $output .= '
-			.availability-table td, .availability-table td.reserve {border-color: '.$tf_hotel_table_border_color.';}
+			.availability-table td, .availability-table td.reserve, .tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table tr td, .tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table {border-color: '.$tf_hotel_table_border_color.';}
 		'; }
 		
 		wp_add_inline_style( 'tf-app-style', $output );
