@@ -32,31 +32,34 @@ if( !function_exists( 'tf_custom_css' ) ){
 		
 		// Common CSS
 		if( $tf_primary_color_reg  ) { $output .= '
-			.tf_button, .tf-btn-flip:before, .tf-btn-flip, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"] {color: '.$tf_primary_color_reg.';}
-			.acr-inc, .tf-ask-question h3:before {color: '.$tf_primary_color_reg.';}
+			.tf_button, .tf-btn-flip:before, .tf-btn-flip, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"], .tf-bttn-normal.bttn-primary, .tf-bttn-normal.bttn-secondary, .tf-template-global .tf-archive-head .active, .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature {color: '.$tf_primary_color_reg.';}
+			.tf-ask-question h3:before {color: '.$tf_primary_color_reg.';}
 		'; }
 		if( $tf_primary_color_hov  ) { $output .= '
-			.tf_button:hover, .btn-styled:hover, .tf-btn-flip:after, .tf-review-form-container .tf-review-submit input[type="submit"]:hover {color: '.$tf_primary_color_hov.';}
+			.tf_button:hover, .btn-styled:hover, .tf-btn-flip:after, .tf-review-form-container .tf-review-submit input[type="submit"]:hover, .tf-bttn-normal.bttn-primary:hover, .tf-bttn-normal.bttn-secondary:hover {color: '.$tf_primary_color_hov.';}
 		'; }
 		if( $tf_primary_bg_color_reg  ) { $output .= '
-			.tf_button, .tf-btn-flip:before, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"] {background: '.$tf_primary_bg_color_reg.';}
-			.tf_button, .btn-styled, .acr-dec, .acr-inc, .tf-review-form-container .tf-review-submit input[type="submit"] {border-color: '.$tf_primary_bg_color_reg.';}
+			.tf_button, .tf-btn-flip:before, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"], .tf-bttn-normal.bttn-primary, .tf-bttn-normal.bttn-secondary, .tf-template-global .tf-archive-head .active, .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature {background: '.$tf_primary_bg_color_reg.';}
+			.tf_button, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"] {border-color: '.$tf_primary_bg_color_reg.';}
 		'; }
 		if( $tf_primary_bg_color_hov  ) { $output .= '
-			.tf_button:hover, .btn-styled:hover, .tf-btn-flip:after, .tf-review-form-container .tf-review-submit input[type="submit"]:hover {background: '.$tf_primary_bg_color_hov.';}
+			.tf_button:hover, .btn-styled:hover, .tf-btn-flip:after, .tf-review-form-container .tf-review-submit input[type="submit"]:hover, .tf-bttn-normal.bttn-primary:hover, .tf-bttn-normal.bttn-secondary:hover {background: '.$tf_primary_bg_color_hov.';}
 			.tf_button:hover, .btn-styled:hover, .tf-review-form-container .tf-review-submit input[type="submit"]:hover {border-color: '.$tf_primary_bg_color_hov.';}
 		'; }
 		if( $tf_sidebar_gradient_one_reg && $tf_sidebar_gradient_two_reg  ) { $output .= '
-			.tf_booking-widget {background: linear-gradient(to bottom, '.$tf_sidebar_gradient_one_reg.' 0, '.$tf_sidebar_gradient_two_reg.' 100%);}
+			.tf_booking-widget, .tf-tour-details-right .tf-tour-booking-box, .tf-template-global .tf-box-wrapper.tf-box {background: linear-gradient(to bottom, '.$tf_sidebar_gradient_one_reg.' 0, '.$tf_sidebar_gradient_two_reg.' 100%);}
 		'; }
 		if( $tf_faq_color OR $tf_faq_icon_color OR $tf_faq_border_color ) { $output .= '
-			.tf-faq-title h4 {
+			.tf-faq-title h4,
+			.tf-single-page .tf-faq-wrapper .tf-faq-single-inner h3 {
 				color: '.$tf_faq_color.';
 			}
-			#tf-faq-item {
+			#tf-faq-item,
+			.tf-single-page .tf-faq-wrapper .tf-faq-inner .tf-faq-single {
 				border-color: '.$tf_faq_border_color.';
 			}
-			#tf-faq-item .arrow {
+			#tf-faq-item .arrow,
+			.tf-single-page .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus {
 				color: '.$tf_faq_icon_color.';
 			}
 		'; }
@@ -68,19 +71,37 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-single-review .tf-review-details .tf-name, .tf-single-review .tf-review-details .tf-date, .tf-single-review .tf-review-details .tf-rating-stars, .tf-single-review .tf-review-details .tf-description {
 				color: '.$tf_review_color.';
 			}
-			.tf-review-container .tf-review-progress-bar .tf-single .tf-p-bar {
+			.tf-review-container .tf-review-progress-bar .tf-single .tf-p-bar,
+			.tf-single-page .tf-review-wrapper .tf-review-data .tf-review-data-features .tf-progress-bar {
 				background: '.$tf_param_single_bg_color.';
 			}
-			.tf-review-container .tf-review-progress-bar {
+			.tf-review-container .tf-review-progress-bar,
+			.tf-single-page .tf-review-wrapper .tf-review-data {
 				background: '.$tf_param_bg_color.';
 				border-color: '.$tf_param_bg_color.';
 			}
-			.tf-review-container .tf-review-progress-bar .tf-single .tf-text, .tf-review-container .tf-review-progress-bar .tf-single .tf-p-b-rating {
+			.tf-review-container .tf-review-progress-bar .tf-single .tf-text, .tf-review-container .tf-review-progress-bar .tf-single .tf-p-b-rating,
+			.tf-single-page .tf-review-wrapper .tf-review-data p,
+			.tf-single-page .tf-review-wrapper .tf-review-data .tf-review-all-info li,
+			.tf-single-page .tf-review-wrapper .tf-review-data .tf-review-all-info li i {
 				color: '.$tf_param_txt_color.';
 			}
-			.tf-review-container .tf-total-review .tf-total-average div, .tf-archive-rating {
+			.tf-review-container .tf-total-review .tf-total-average div, .tf-archive-rating, .tf-single-page .tf-review-wrapper .tf-review-data .tf-review-data-average p {
 				background: '.$tf_rating_bg_color.'!important;
 				color: '.$tf_rating_color.'!important;
+			}
+		'; }
+		if( $tf_review_bg_color) { $output .= '
+			.tf-single-page .tf-review-reply .tf-review-reply-data {
+				background: '.$tf_review_bg_color.';
+				padding: 20px;
+				border-radius: 5px;
+			}
+			.tf-single-page .tf-review-reply .tf-review-details h3,
+			.tf-single-page .tf-review-reply .tf-review-details p,
+			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li,
+			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li i{
+				color: '.$tf_review_color.';
 			}
 		'; }
 		
@@ -90,7 +111,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 add_action( 'wp_enqueue_scripts', 'tf_custom_css', 99999 );
 
 if( !function_exists( 'tf_hotel_css' ) ){
-	function tf_hotel_css(){
+	function tf_hotel_css(){ 
 		// Store as PHP variables
 		// Hotel CSS
 		$tf_hotel_type_color = !empty(tf_data_types(tfopt( 'tourfic-hotel-type-bg-color' ))['regular']) ? tf_data_types(tfopt( 'tourfic-hotel-type-bg-color' ))['regular'] : '';
