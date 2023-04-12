@@ -18,7 +18,6 @@ $payment_details = array(
 	'{price}'     	=> __( 'Price', 'tourfic' ),
 	'{total_cost}' 	=> __( 'Total Cost', 'tourfic' ),
 );
-
 ?>
 
 <div style="padding-left:50px;padding-right:50px;margin: 0 auto;margin-top:30px;">
@@ -34,14 +33,8 @@ $payment_details = array(
 	<!-- Remaining code of the email template -->
 	<table style="width:100%;max-width:600px;margin-top:15px;margin-bottom:15px;border:none" >
 		<tr>
-			<td style="background: #e0f0fc6e;padding: 25px;width: 35%;float: left;">			
+			<td style="background: #e0f0fc6e;padding: 20px;float: left;">			
 				<h3 style="font-size: 16px; font-weight: bold; color: #0209AF; margin: 0;">Billing address</h3>
-				<?php foreach ( $billing_details as $tag => $label ) : ?>
-					<p style="margin: 0;"><?php echo esc_html( $tag ); ?></p>
-				<?php endforeach; ?>
-			</td>
-			<td style="background: #e0f0fc6e;padding: 25px;width: 35%;float: right;">
-				<h3 style="font-size: 16px; font-weight: bold; color: #0209AF; margin: 0;">Shipping address</h3>
 				<?php foreach ( $billing_details as $tag => $label ) : ?>
 					<p style="margin: 0;"><?php echo esc_html( $tag ); ?></p>
 				<?php endforeach; ?>

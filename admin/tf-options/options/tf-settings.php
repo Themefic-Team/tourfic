@@ -1719,7 +1719,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'          => 'admin_booking_email_template',
 									'type'        => 'editor',
-									'label'       => __( 'Booking Notification Template', 'tourfic' ),
+									'label'       => __( 'Booking Confrimation Template', 'tourfic' ),
 									'default'     => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
 									'description' => __( 'This template will be sent to admin', 'tourfic' )
 								),
@@ -1757,7 +1757,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'   => __( 'Email Content Type', 'tourfic' ),
 									'options' => array(
 										'text/html'  => __( 'HTML', 'tourfic' ),
-										'text/plain' => __( 'Plain Text', 'tourfic' ),
+										'plain/text' => __( 'Plain Text', 'tourfic' ),
 									),
 									'default' => 'text/html',
 								),
