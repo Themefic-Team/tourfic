@@ -399,7 +399,6 @@ class TF_Handle_Emails{
             $vendor_email_subject           = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject']  : '';
             $vendor_from_name               = !empty( $email_settings['vendor_from_name'] ) ? $email_settings['vendor_from_name']  : '';
             $vendor_from_email              = !empty( $email_settings['vendor_from_email'] ) ? $email_settings['vendor_from_email']  : '';
-            $headers                       .= "From: $vendor_from_name <$vendor_from_email>" . "\r\n";
             $vendor_booking_email_template  = !empty($email_settings['vendor_booking_email_template'] ) ? $email_settings['vendor_booking_email_template'] : '';
             
             //replace mail tags to actual value

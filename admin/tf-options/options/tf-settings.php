@@ -1729,20 +1729,20 @@ TF_Settings::option( 'tf_settings', array(
 									'type'  => 'heading',
 									'label' => __( 'Vendor Email', 'tourfic' ),
 								),
-								//vendor email from name
-								array(
-									'id'      => 'vendor_from_name',
-									'type'    => 'text',
-									'label'   => __( 'Vendor Email From Name', 'tourfic' ),
-									'default' => get_bloginfo( 'name' ),
-								),
-								//vendor email from email
-								array(
-									'id'      => 'vendor_from_email',
-									'type'    => 'text',
-									'label'   => __( 'Vendor Email From Email', 'tourfic' ),
-									'default' => get_bloginfo( 'admin_email' ),
-								),
+								// //vendor email from name
+								// array(
+								// 	'id'      => 'vendor_from_name',
+								// 	'type'    => 'text',
+								// 	'label'   => __( 'Vendor Email From Name', 'tourfic' ),
+								// 	'default' => get_bloginfo( 'name' ),
+								// ),
+								// //vendor email from email
+								// array(
+								// 	'id'      => 'vendor_from_email',
+								// 	'type'    => 'text',
+								// 	'label'   => __( 'Vendor Email From Email', 'tourfic' ),
+								// 	'default' => get_bloginfo( 'admin_email' ),
+								// ),
 								//vendor email template
 								array(
 									'id'      => 'vendor_booking_email_template',
