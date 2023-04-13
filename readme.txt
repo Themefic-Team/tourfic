@@ -414,10 +414,10 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 * Added: Send a customizable email to Admin when the order is confirmed. 
 * Added: Send a customizable email to Vendor when the order is confirmed.
 * Added: Send a customizable email to the Customer when the order is confirmed.
-* Added: Choose whether you send mail to a vendor/customer or not.
+* Added: Choose vendor or customer to send mail
 * Fixed: Tour Custom Availability Discount issue 
 * Fixed: Hotel Single Page Deposit checkbox issue
-* Fixed: Discount Price added on tours archive & tearch result page
+* Fixed: Discount Price added on tours archive & search result page
 * Fixed: Vendor wise Hotels/tours shortcode Added
 
 = 2.9.13 -  31 March 2023 =
