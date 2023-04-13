@@ -17,7 +17,6 @@ class TF_Handle_Emails{
         //send mail after new woocommerce order thankyou page
         //add_action( 'phpmailer_init', array( $this, 'tf_send_attachment' ) );
         add_action( 'woocommerce_order_status_completed', array( $this, 'send_email' ), 10, 1 );
-        add_action( 'woocommerce_thankyou', array( $this, 'send_email' ), 10, 1 );
 
     }
 
@@ -261,6 +260,7 @@ class TF_Handle_Emails{
         $customer_details .= '<strong>Customer Postcode:</strong> '.$order_billing_postcode.'<br>';
         $customer_details .= '</td></tr></tbody></table>';
         //customer details end
+       
         //admin email settings
 
         // Set up the attachments for the brand logo and header image
@@ -282,7 +282,7 @@ class TF_Handle_Emails{
         $brand_logo              = !empty( $email_settings['brand_logo'] ) ? $email_settings['brand_logo'] : '';
         $email_heading_bg        = !empty( $email_settings['email_heading_bg'] ) ? $email_settings['email_heading_bg']['bg_color'] : '#0209AF';
         
-        $send_notifcation        = !empty( $email_settings['send_notification'] ) ? $email_settings['send_notification'] : 'no';
+        $send_notifcation        = !empty( $email_settings['send_notification'] ) ? $email_settings['send_notification'] : '';
         $sale_notification_email = !empty( $email_settings['sale_notification_email'] ) ? $email_settings['sale_notification_email'] : get_bloginfo( 'admin_email' );
         $admin_email_disable     = !empty( $email_settings['admin_email_disable'] ) ? $email_settings['admin_email_disable'] : false;
         $admin_email_subject     = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] . " # " . $order_id : '';
@@ -291,7 +291,7 @@ class TF_Handle_Emails{
         $email_content_type      = !empty( $email_settings['email_content_type'] ) ? $email_settings['email_content_type'] : 'text/html';
 
         //mail headers
-        $charset = apply_filters( 'tourfic_mail_charset','Content-Type: '.$email_content_type.'; charset=UTF-8') ;
+        $charset = apply_filters( 'tourfic_mail_charset','Content-Type: text/html; charset=UTF-8') ;
         $headers = $charset . "\r\n";
         $headers.= "MIME-Version: 1.0" . "\r\n";
         $headers.= "From: $email_from_name <$email_from_email>" . "\r\n";
@@ -299,7 +299,7 @@ class TF_Handle_Emails{
         $headers.= "X-Mailer: PHP/" . phpversion() . "\r\n";
         
 
-        $email_body_open    = '<html><head><meta http-equiv="Content-Type" content="'.$email_content_type.'; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><body style="font-family: Work sans, sans-serif; font-size: 16px; color: #9C9C9C; margin: 0; padding: 0;">
+        $email_body_open    = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><body style="font-family: Work sans, sans-serif; font-size: 16px; color: #9C9C9C; margin: 0; padding: 0;">
         <div style="width: 100%; max-width: 600px; margin: 0 auto;">
             <div style="background-color: '.esc_attr( $email_heading_bg ).'; color: #fff; padding: 20px;">';
         if( !empty( $brand_logo ) ){
@@ -412,10 +412,9 @@ class TF_Handle_Emails{
                 $vendor_email_booking_body_full = wp_kses_post( $vendor_email_booking_body_full ) ;
             }
             if( !empty( $vendor_booking_email_template ) ){
-            
                 //send mail to vendor
                 if( ! empty( $vendors_email ) ){
-                    foreach ( $vendors_email as $key => $vendor_email ) {
+                    foreach ( $vendors_email as $key => $vendor_email ) {                       
                         wp_mail( $vendor_email, $vendor_email_subject, $vendor_email_booking_body_full, $headers);
                     }
                 }
@@ -435,14 +434,13 @@ class TF_Handle_Emails{
                 $default_mail = str_replace( '{site_name}', get_bloginfo('name'), $default_mail );
 
                 if( ! empty( $vendors_email ) ){
-                    foreach ( $vendors_email as $key => $vendor_email ) {
+                    foreach ( $vendors_email as $key => $vendor_email ) {                       
                         wp_mail( $vendor_email, $vendor_email_subject, $default_mail, $headers);
                     }
                 }
             }
 
        }
-
         //customer email settings
         $customer_email_address           = $order_billing_email;
         $disable_customer_email           = !empty( $email_settings['customer_email_disable'] ) ? $email_settings['customer_email_disable'] : false;

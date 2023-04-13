@@ -1751,16 +1751,16 @@ TF_Settings::option( 'tf_settings', array(
 									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ),
 									'description' => __( 'This template will be sent to vendor', 'tourfic' )
 								),
-								array(
-									'id'      => 'email_content_type',
-									'type'    => 'select',
-									'label'   => __( 'Email Content Type', 'tourfic' ),
-									'options' => array(
-										'text/html'  => __( 'HTML', 'tourfic' ),
-										'plain/text' => __( 'Plain Text', 'tourfic' ),
-									),
-									'default' => 'text/html',
-								),
+								// array(
+								// 	'id'      => 'email_content_type',
+								// 	'type'    => 'select',
+								// 	'label'   => __( 'Email Content Type', 'tourfic' ),
+								// 	'options' => array(
+								// 		'text/html'  => __( 'HTML', 'tourfic' ),
+								// 		'plain/text' => __( 'Plain Text', 'tourfic' ),
+								// 	),
+								// 	'default' => 'text/html',
+								// ),
 							),
 							
 						),
