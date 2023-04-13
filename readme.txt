@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
 Tested up to: 6.2
-Stable tag: 2.9.13
+Stable tag: 2.9.14
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -408,6 +408,17 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.9.14 -  13 April 2023 =
+
+* Added: Send a customizable email to Admin when the order is confirmed. 
+* Added: Send a customizable email to Vendor when the order is confirmed.
+* Added: Send a customizable email to the Customer when the order is confirmed.
+* Added: Choose vendor or customer to send mail
+* Fixed: Tour Custom Availability Discount issue 
+* Fixed: Hotel Single Page Deposit checkbox issue
+* Fixed: Discount Price added on tours archive & search result page
+* Fixed: Vendor wise Hotels/tours shortcode Added
 
 = 2.9.13 -  31 March 2023 =
 

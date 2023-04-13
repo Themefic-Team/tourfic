@@ -1230,4 +1230,57 @@ function tf_recent_blog_callback($atts, $content = null){
 	return ob_get_clean();
 }
 
+/**
+ * Vendor Posts Shortcode
+ * @author Jahid
+ * @since 2.9.13
+ */
+add_shortcode( 'tf_vendor_post', 'tf_vendor_post_callback' );
+function tf_vendor_post_callback($atts, $content = null){
+	extract(
+		shortcode_atts(
+			array(
+				'type'   => '',
+				'style'   => 'grid',
+				'count'       => 4,
+				'vendor'       => '',
+				'vendor_id'       => '',
+			),
+			$atts
+		)
+	);
 
+	$args = array(
+		'post_type'      => $type,
+		'post_status'    => 'publish',
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+		'posts_per_page' => $count,
+		'author' => sanitize_key( $vendor_id ),
+	);
+	
+	$tf_vendors_posts = new WP_Query($args);
+	?>
+	<div class="tf_search_result sp-50">
+		<div class="archive_ajax_result <?php echo $style=="grid" ? esc_attr( 'tours-grid' ) : ''; ?> ">
+			<?php
+			ob_start();
+			if ( $tf_vendors_posts->have_posts() ) {
+				while ( $tf_vendors_posts->have_posts() ) {
+					$tf_vendors_posts->the_post();
+					if($type=="tf_tours"){
+						tf_tour_archive_single_item();
+					}else{
+						tf_hotel_archive_single_item();
+					}
+				}
+			}else{
+				echo __( 'No posts found', 'tourfic' );
+			}
+			?>
+		</div>
+	</div>
+	<?php
+	wp_reset_postdata(); 
+	return ob_get_clean();
+}
