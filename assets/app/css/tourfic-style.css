@@ -5497,7 +5497,7 @@ div#tf-contact-info {
   background-color: #0E3DD8;
 }
 .tf-archive-head .active i {
-  color: #fff;
+  color: #fff !important;
 }
 
 .tf-search-results-list .tf-item-cards {

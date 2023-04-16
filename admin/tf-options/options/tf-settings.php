@@ -1247,6 +1247,20 @@ TF_Settings::option( 'tf_settings', array(
 					'content' => __( "To ensure maximum compatiblity with your theme, all Heading (h1-h6), Paragraph & Link's Color-Font Styles are not controlled by Tourfic. Those need to be edited using your Theme's option Panel.", "tourfic" ),
 				),
 				array(
+					'id'       => 'tourfic-design1-global-color',
+					'type'     => 'color',
+					'label'    => __( 'Global Color for Design 1', 'tourfic' ),
+					'subtitle' => __( 'Global Colors of Design 1 related to Tourfic', 'tourfic' ),
+					'multiple' => true,
+					'inline'   => true,
+					'default' => array(
+						'gcolor' => '#0e3dd8'
+					),
+					'colors'   => array(
+						'gcolor' => __( 'Regular', 'tourfic' ),
+					),
+				),
+				array(
 					'id'       => 'tourfic-button-color',
 					'type'     => 'color',
 					'label'    => __( 'Button Color', 'tourfic' ),

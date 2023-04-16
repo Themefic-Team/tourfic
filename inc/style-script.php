@@ -10,6 +10,9 @@ defined( 'ABSPATH' ) || exit;
 if( !function_exists( 'tf_custom_css' ) ){
 	function tf_custom_css(){
 		// Store as PHP variables
+		// Template 1 Global CSS
+		$tf_template1_global_reg = !empty(tf_data_types(tfopt( 'tourfic-design1-global-color' ))['gcolor']) ? tf_data_types(tfopt( 'tourfic-design1-global-color' ))['gcolor'] : '';
+
 		// Common CSS
 		$tf_primary_color_reg = !empty(tf_data_types(tfopt( 'tourfic-button-color' ))['regular']) ? tf_data_types(tfopt( 'tourfic-button-color' ))['regular'] : '';
 		$tf_primary_color_hov = !empty(tf_data_types(tfopt( 'tourfic-button-color' ))['hover']) ? tf_data_types(tfopt( 'tourfic-button-color' ))['hover'] : '';
@@ -30,6 +33,41 @@ if( !function_exists( 'tf_custom_css' ) ){
 		
 		$output = '';
 		
+		// Template 1 Global CSS
+		if( !empty( $tf_template1_global_reg ) ){ $output .= '
+			.tf-template-global .tf-bttn-normal.bttn-primary,
+			.tf-template-global .tf-archive-head .active,
+			.tf-template-global .tf-item-featured .tf-features-box .tf-featur,
+			.tf-template-global .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::after,
+			.tf-template-global .tf-itinerary-wrapper.tf-mrbottom-70 .tf-itinerary-downloader-option,
+			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-data-features .percent-progress,
+			.tf-template-global .tf-rooms-sections .tf-rooms .tf-availability-table thead,
+			.tf-template-global .tf-hotel-location-map .tf-hotel-location-preview a i,
+			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature {
+				background: '.$tf_template1_global_reg.';
+			}';
+		}
+		if( !empty( $tf_template1_global_reg ) ){ $output .= '
+			.tf-template-global .tf-archive-head i,
+			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-details i,
+			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-details .tf-post-footer .tf-pricing span,
+			.tf-template-global .tf-single-head i,
+			.tf-template-global .tf-trip-info li i,
+			.tf-template-global .tf-trip-feature-blocks .tf-feature-block i,
+			.tf-template-global .tf-tour-details-right .tf-tour-booking-advantages li i,
+			.tf-template-global .tf-ask-enquiry i,
+			.tf-template-global .tf-list li i,
+			.tf-template-global .tf-itinerary-wrapper .tf-single-itinerary-item .itinerary-day,
+			.tf-template-global .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::before,
+			.tf-template-global .tf-itinerary-wrapper.tf-mrbottom-70 .tf-itinerary-downloader-option a,
+			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-data-average p,
+			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-all-info li,
+			.tf-template-global .tf-single-head .more-hotel
+			 {
+				color: '.$tf_template1_global_reg.';
+			}';
+		}
+
 		// Common CSS
 		if( $tf_primary_color_reg  ) { $output .= '
 			.tf_button, .tf-btn-flip:before, .tf-btn-flip, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"], .tf-bttn-normal.bttn-primary, .tf-bttn-normal.bttn-secondary, .tf-template-global .tf-archive-head .active, .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature, {color: '.$tf_primary_color_reg.' !important;}
