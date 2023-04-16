@@ -4,7 +4,7 @@
     <div class="tf-features-block-inner tf-column-4 tf-flex tf-flex-space-bttn tf-flex-gap-16">
         <?php if ( $tour_duration ) { ?>
         <div class="tf-column tf-flex tf-flex-gap-8">
-            <div class="tf-feature-block tf-flex tf-flex-gap-8">
+            <div class="tf-feature-block tf-flex tf-flex-gap-8 tf-first">
                 <div class="tf-feature-block-icon">
                 <i class="fa-regular fa-clock"></i>
                 </div>
@@ -41,7 +41,7 @@
         <?php } ?>
         <?php if ( $tour_type ) { ?>
         <div class="tf-column tf-flex tf-flex-gap-8">
-            <div class="tf-feature-block tf-flex tf-flex-gap-8">
+            <div class="tf-feature-block tf-flex tf-flex-gap-8  tf-second">
                 <div class="tf-feature-block-icon">
                     <i class="fa-regular fa-clock"></i>
                 </div>
@@ -54,7 +54,7 @@
         <?php } ?>
         <?php if ( $group_size ) { ?>
         <div class="tf-column tf-flex tf-flex-gap-8">
-            <div class="tf-feature-block tf-flex tf-flex-gap-8">
+            <div class="tf-feature-block tf-flex tf-flex-gap-8  tf-third">
                 <div class="tf-feature-block-icon">
                     <i class="fa-regular fa-clock"></i>
                 </div>
@@ -67,7 +67,7 @@
         <?php } ?>
         <?php if ( $language ) { ?>
         <div class="tf-column tf-flex tf-flex-gap-8">
-            <div class="tf-feature-block tf-flex tf-flex-gap-8">
+            <div class="tf-feature-block tf-flex tf-flex-gap-8  tf-tourth">
                 <div class="tf-feature-block-icon">
                     <i class="fa-regular fa-clock"></i>
                 </div>

@@ -32,18 +32,18 @@ if( !function_exists( 'tf_custom_css' ) ){
 		
 		// Common CSS
 		if( $tf_primary_color_reg  ) { $output .= '
-			.tf_button, .tf-btn-flip:before, .tf-btn-flip, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"], .tf-bttn-normal.bttn-primary, .tf-bttn-normal.bttn-secondary, .tf-template-global .tf-archive-head .active, .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature {color: '.$tf_primary_color_reg.';}
+			.tf_button, .tf-btn-flip:before, .tf-btn-flip, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"], .tf-bttn-normal.bttn-primary, .tf-bttn-normal.bttn-secondary, .tf-template-global .tf-archive-head .active, .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature, {color: '.$tf_primary_color_reg.' !important;}
 			.tf-ask-question h3:before {color: '.$tf_primary_color_reg.';}
 		'; }
 		if( $tf_primary_color_hov  ) { $output .= '
-			.tf_button:hover, .btn-styled:hover, .tf-btn-flip:after, .tf-review-form-container .tf-review-submit input[type="submit"]:hover, .tf-bttn-normal.bttn-primary:hover, .tf-bttn-normal.bttn-secondary:hover {color: '.$tf_primary_color_hov.';}
+			.tf_button:hover, .btn-styled:hover, .tf-btn-flip:after, .tf-review-form-container .tf-review-submit input[type="submit"]:hover, .tf-bttn-normal.bttn-primary:hover, .tf-bttn-normal.bttn-secondary:hover {color: '.$tf_primary_color_hov.' !important;}
 		'; }
 		if( $tf_primary_bg_color_reg  ) { $output .= '
-			.tf_button, .tf-btn-flip:before, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"], .tf-bttn-normal.bttn-primary, .tf-bttn-normal.bttn-secondary, .tf-template-global .tf-archive-head .active, .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature {background: '.$tf_primary_bg_color_reg.';}
+			.tf_button, .tf-btn-flip:before, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"], .tf-bttn-normal.bttn-primary, .tf-bttn-normal.bttn-secondary, .tf-template-global .tf-archive-head .active, .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature {background: '.$tf_primary_bg_color_reg.' !important;}
 			.tf_button, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"] {border-color: '.$tf_primary_bg_color_reg.';}
 		'; }
 		if( $tf_primary_bg_color_hov  ) { $output .= '
-			.tf_button:hover, .btn-styled:hover, .tf-btn-flip:after, .tf-review-form-container .tf-review-submit input[type="submit"]:hover, .tf-bttn-normal.bttn-primary:hover, .tf-bttn-normal.bttn-secondary:hover {background: '.$tf_primary_bg_color_hov.';}
+			.tf_button:hover, .btn-styled:hover, .tf-btn-flip:after, .tf-review-form-container .tf-review-submit input[type="submit"]:hover, .tf-bttn-normal.bttn-primary:hover, .tf-bttn-normal.bttn-secondary:hover {background: '.$tf_primary_bg_color_hov.' !important;;}
 			.tf_button:hover, .btn-styled:hover, .tf-review-form-container .tf-review-submit input[type="submit"]:hover {border-color: '.$tf_primary_bg_color_hov.';}
 		'; }
 		if( $tf_sidebar_gradient_one_reg && $tf_sidebar_gradient_two_reg  ) { $output .= '
@@ -215,22 +215,28 @@ if( !function_exists( 'tf_tour_css' ) ){
 		
 		// Tour CSS
 		if( $tf_tour_sale_price OR $tf_tour_org_price OR $tf_tour_tab_text OR $tf_tour_tab_bg OR $tf_tour_tab_border) { $output .= '
-			.tf-single-tour-pricing .tf-price span.sale-price {
+			.tf-single-tour-pricing .tf-price span.sale-price,
+			.tf-single-page .tf-trip-info .tf-trip-pricing .tf-price-amount {
 				color: '.$tf_tour_sale_price.';
 			}
 			.tf-single-tour-pricing .tf-price {
 				color: '.$tf_tour_org_price.';
 			}
-			.tf-single-tour-pricing .tf-price-tab li {
+			.tf-single-tour-pricing .tf-price-tab li,
+			.tf-single-page .tf-trip-info .person-info,
+			.tf-single-page .tf-trip-info .person-info p {
 				color: '.$tf_tour_tab_text.';
 			}
-			.tf-single-tour-pricing .tf-price-tab li {
+			.tf-single-tour-pricing .tf-price-tab li,
+			.tf-single-page .tf-trip-info .person-info {
 				background: '.$tf_tour_tab_bg.';
 			}
-			.tf-single-tour-pricing .tf-price-tab li.active {
+			.tf-single-tour-pricing .tf-price-tab li.active,
+			.tf-single-page .tf-trip-info .person-info.active {
 				color: '.$tf_tour_active_tab_text.';
 			}
-			.tf-single-tour-pricing .tf-price-tab li.active {
+			.tf-single-tour-pricing .tf-price-tab li.active,
+			.tf-single-page .tf-trip-info .person-info.active {
 				background: '.$tf_tour_active_tab_bg.';
 			}
 			.tf-single-tour-pricing .tf-price-tab, .tf-single-tour-pricing .tf-price-tab li:nth-child(2), .tf-single-tour-pricing .tf-price-tab li:nth-child(3) {
@@ -239,25 +245,32 @@ if( !function_exists( 'tf_tour_css' ) ){
 		'; }
 
 		if( $tf_tour_icon_color OR $tf_tour_heading_color OR $tf_tour_text_color OR $tf_tour_bg_one OR $tf_tour_bg_two OR $tf_tour_bg_three OR $tf_tour_bg_four) { $output .= '
-			.tf-single-square-block i {
+			.tf-single-square-block i,
+			.tf-single-page .tf-trip-feature-blocks .tf-feature-block i {
 				color: '.$tf_tour_icon_color.';
 			}
-			.tf-single-square-block h4 {
+			.tf-single-square-block h4,
+			.tf-single-page .tf-trip-feature-blocks .tf-feature-block h3 {
 				color: '.$tf_tour_heading_color.';
 			}
-			.tf-single-square-block {
+			.tf-single-square-block,
+			.tf-single-page .tf-trip-feature-blocks .tf-feature-block p {
 				color: '.$tf_tour_text_color.';
 			}
-			.tf-single-square-block.first {
+			.tf-single-square-block.first,
+			.tf-single-page .tf-trip-feature-blocks .tf-feature-block.tf-first {
 				background: '.$tf_tour_bg_one.';
 			}
-			.tf-single-square-block.second {
+			.tf-single-square-block.second,
+			.tf-single-page .tf-trip-feature-blocks .tf-feature-block.tf-second {
 				background: '.$tf_tour_bg_two.';
 			}
-			.tf-single-square-block.third {
+			.tf-single-square-block.third,
+			.tf-single-page .tf-trip-feature-blocks .tf-feature-block.tf-third {
 				background: '.$tf_tour_bg_three.';
 			}
-			.tf-single-square-block.fourth {
+			.tf-single-square-block.fourth,
+			.tf-single-page .tf-trip-feature-blocks .tf-feature-block.tf-tourth {
 				background: '.$tf_tour_bg_four.';
 			}
 		'; }

@@ -5322,7 +5322,7 @@ div#tf-contact-info {
   border-bottom-width: 0;
   color: #ffffff;
   border-color: var(--ast-global-color-0);
-  background-color: var(--ast-global-color-0);
+  background: var(--ast-global-color-0);
   border-radius: 2px;
   padding-top: 15px;
   padding-right: 30px;
