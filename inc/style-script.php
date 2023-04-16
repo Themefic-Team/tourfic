@@ -58,13 +58,20 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-global .tf-ask-enquiry i,
 			.tf-template-global .tf-list li i,
 			.tf-template-global .tf-itinerary-wrapper .tf-single-itinerary-item .itinerary-day,
-			.tf-template-global .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::before,
 			.tf-template-global .tf-itinerary-wrapper.tf-mrbottom-70 .tf-itinerary-downloader-option a,
 			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-data-average p,
 			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-all-info li,
-			.tf-template-global .tf-single-head .more-hotel
+			.tf-template-global .tf-single-head .more-hotel,
+			.tf-template-global .tf-head-info .tf-dropdown-share-content h4,
+			.tf-template-global .tf-head-info .tf-dropdown-share-content ul li button span
 			 {
 				color: '.$tf_template1_global_reg.';
+			}';
+		}
+
+		if( !empty( $tf_template1_global_reg ) ){ $output .= '
+			.tf-template-global .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::before{
+				border: 1px solid '.$tf_template1_global_reg.';
 			}';
 		}
 

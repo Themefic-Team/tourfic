@@ -101,6 +101,62 @@
             font-size: 16px;
         }
     }
+    .share-tour-content{
+        @media #{$max640}{
+            left: auto !important;
+            right: 0px;
+        }
+        @media #{$max480}{
+            left: 0 !important;
+            right: auto !important;
+        }
+        .tf-dropdown-share-content{
+            background: #FFFFFF;
+            border-radius: 8px;
+            padding: 16px 10px;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0px 13px 30px 0px #e0e8ee;
+            h4{
+                font-size: 15px;
+                color: $color-theme;
+                font-weight: 600;
+                margin-bottom: 20px;
+                display: block;
+            }
+            ul{
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                li{
+                    display: inline-block;
+                    a{
+                        display: inline-block;
+                        padding: 10px 6px;
+                        i{
+                            font-size: 16px;
+                        }
+                        &:hover{
+                            background: transparent !important;
+                        }
+                    }
+                    button{
+                        padding: 10px 6px;
+                        background-color: transparent !important;
+                        border: 0px solid;
+                        span{
+                            color: $color-theme;
+                        }
+                    }
+                    input{
+                        @media #{$max640}{
+                            display: contents !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 .tf-head-title{
     h1{
