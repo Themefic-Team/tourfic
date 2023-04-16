@@ -5032,14 +5032,14 @@ div#tf-contact-info {
   display: block !important;
 }
 
-.tf-itinerary-wrapper.tf-mrtop-70 .tf-itinerary-downloader-option {
+.tf-itinerary-wrapper.tf-mrbottom-70 .tf-itinerary-downloader-option {
   background-color: #0E3DD8;
   border-radius: 5px;
 }
-.tf-itinerary-wrapper.tf-mrtop-70 .tf-itinerary-downloader-option h3, .tf-itinerary-wrapper.tf-mrtop-70 .tf-itinerary-downloader-option p {
+.tf-itinerary-wrapper.tf-mrbottom-70 .tf-itinerary-downloader-option h3, .tf-itinerary-wrapper.tf-mrbottom-70 .tf-itinerary-downloader-option p {
   color: #fff;
 }
-.tf-itinerary-wrapper.tf-mrtop-70 .tf-itinerary-downloader-option a {
+.tf-itinerary-wrapper.tf-mrbottom-70 .tf-itinerary-downloader-option a {
   color: #0E3DD8;
 }
 

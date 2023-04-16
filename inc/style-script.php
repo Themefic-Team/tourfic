@@ -293,25 +293,30 @@ if( !function_exists( 'tf_tour_css' ) ){
 		'; }
 
 		if( $tf_inc_gradient_one_reg OR $tf_inc_gradient_two_reg OR $tf_inc_heading_color OR $tf_inc_text_color) { $output .= '
-			.tf-include-section, .tf-exclude-section {
+			.tf-include-section, .tf-exclude-section, .tf-single-page .tf-inex-wrapper .tf-inex {
 				background-image: linear-gradient(to right, '.$tf_inc_gradient_one_reg.', '.$tf_inc_gradient_two_reg.');
 				color: '.$tf_inc_text_color.';
 			}
-			.tf-inc-exc-content h4 {
+			.tf-inc-exc-content h4,
+			.tf-single-page .tf-inex-wrapper .tf-inex h3 {
 				color: '.$tf_inc_heading_color.';
 			}
 		'; }
 		if( $tf_itin_time_day_txt OR $tf_itin_time_day_bg OR $tf_itin_heading_color OR $tf_itin_text_color OR $tf_itin_bg_color OR $tf_itin_icon_color) { $output .= '
-			.tf-travel-time span {
+			.tf-travel-time span,
+			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item .itinerary-day {
 				color: '.$tf_itin_time_day_txt.';
 			}
 			.tf-travel-time {
 				background: '.$tf_itin_time_day_bg.';
 			}
-			.tf-accordion-head h4, .tf-accordion-head h4:hover {
+			.tf-accordion-head h4, 
+			.tf-accordion-head h4:hover,
+			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item h3 {
 				color: '.$tf_itin_heading_color.';
 			}
-			.tf-travel-desc {
+			.tf-travel-desc,
+			.tf-single-page .tf-itinerary-content-details p {
 				color: '.$tf_itin_text_color.';
 			}
 			#tf-accordion-wrapper .tf-accordion-content, #tf-accordion-wrapper .tf-accordion-head {
@@ -319,6 +324,13 @@ if( !function_exists( 'tf_tour_css' ) ){
 			}
 			#tf-accordion-wrapper .arrow-animate, #tf-accordion-wrapper .arrow {
 				color: '.$tf_itin_icon_color.';
+			}
+			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::before,
+			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item .accordion-checke::before {
+				border: 1px solid '.$tf_itin_icon_color.';
+			}
+			.tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::after {
+				background: '.$tf_itin_icon_color.';
 			}
 		'; }
 		
