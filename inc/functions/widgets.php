@@ -717,7 +717,7 @@ class Tourfic_Price_Filter extends WP_Widget {
             extract( $args );
             $title = apply_filters( 'widget_title', $instance['title'] );
             echo $before_widget;
-            if( is_post_type_archive('tf_hotel') || ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_hotel" ) ){
+            if( is_post_type_archive('tf_hotel') ){
             ?>
                 <div class="tf-widget-title">
                     <h4><?php _e("Hotel Price Range","tourfic"); ?></h4></i>
@@ -725,13 +725,29 @@ class Tourfic_Price_Filter extends WP_Widget {
                 <div class="tf-hotel-result-price-range"></div>
             <?php
             } 
-            if( is_post_type_archive('tf_tours') || ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_tours" ) ){
+            if( is_post_type_archive('tf_tours') ){
             ?>
                 <div class="tf-widget-title">
                     <h4><?php _e("Tour Price Range","tourfic"); ?></h4></i>
                 </div>
                 <div class="tf-tour-result-price-range"></div>
             <?php
+            }
+            if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_hotel" ) ){
+                ?>
+                    <div class="tf-widget-title">
+                        <h4><?php _e("Hotel Price Range","tourfic"); ?></h4></i>
+                    </div>
+                    <div class="tf-hotel-result-price-range"></div>
+                <?php
+            } 
+            if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_tours" ) ){
+                ?>
+                    <div class="tf-widget-title">
+                        <h4><?php _e("Tour Price Range","tourfic"); ?></h4></i>
+                    </div>
+                    <div class="tf-tour-result-price-range"></div>
+                <?php
             }
         }else{
             extract( $args );
