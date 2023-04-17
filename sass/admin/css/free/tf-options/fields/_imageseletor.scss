@@ -1,4 +1,6 @@
 .tf-image-radio-group{
+    display: flex;
+    align-items: initial;
     li{
         display: inline-block;
         .tf-image-checkbox img{

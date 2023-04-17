@@ -62,7 +62,7 @@ TF_Settings::option( 'tf_settings', array(
 										),
 										'design-1' 				=> array(
 											'title'			=> 'Design 1',
-											'url' 			=> TF_ASSETS_APP_URL."images/default-hotel.jpg",
+											'url' 			=> TF_ASSETS_APP_URL."images/design1-hotel.jpg",
 										),
 									),
 									'default'   	=> 'default',
@@ -153,7 +153,7 @@ TF_Settings::option( 'tf_settings', array(
 										),
 										'design-1' 				=> array(
 											'title'			=> 'Design 1',
-											'url' 			=> TF_ASSETS_APP_URL."images/hotel-archive-default.jpg",
+											'url' 			=> TF_ASSETS_APP_URL."images/hotel-archive-design1.jpg",
 										),
 									),
 									'default'   	=> 'default',
@@ -189,7 +189,7 @@ TF_Settings::option( 'tf_settings', array(
 										),
 										'design-1' 				=> array(
 											'title'			=> 'Design 1',
-											'url' 			=> TF_ASSETS_APP_URL."images/default-tour.jpg",
+											'url' 			=> TF_ASSETS_APP_URL."images/design1-tour.jpg",
 										),
 									),
 									'default'   	=> 'default',
@@ -305,7 +305,7 @@ TF_Settings::option( 'tf_settings', array(
 										),
 										'design-1' 				=> array(
 											'title'			=> 'Design 1',
-											'url' 			=> TF_ASSETS_APP_URL."images/tour-archive-default.jpg",
+											'url' 			=> TF_ASSETS_APP_URL."images/tour-archive-design-1.jpg",
 										),
 									),
 									'default'   	=> 'default',

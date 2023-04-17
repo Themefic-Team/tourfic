@@ -3506,6 +3506,10 @@ Steps
   color: #a6b1bf;
 }
 
+.tf-image-radio-group {
+  display: flex;
+  align-items: initial;
+}
 .tf-image-radio-group li {
   display: inline-block;
 }
