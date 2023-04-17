@@ -6130,4 +6130,28 @@ div#tf-contact-info {
   font-size: 20px;
 }
 
+.tf-template-1.tf-room-adv-info ul {
+  margin: 0;
+  padding: 0;
+}
+.tf-template-1.tf-room-adv-info ul li {
+  display: inline-block;
+  background: #f1f3f4;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 4px 5px 4px 0px;
+  color: #6B7280 !important;
+}
+.tf-template-1.tf-room-adv-info ul li i {
+  color: #6B7280 !important;
+}
+.tf-template-1.tf-room-adv-info p {
+  margin: 10px 0px;
+  color: #6B7280;
+}
+.tf-template-1.tf-room-adv-info h4 {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
 /*# sourceMappingURL=tourfic-style.css.map */
