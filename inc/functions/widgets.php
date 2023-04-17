@@ -65,7 +65,7 @@ class TF_Hotel_Feature_Filter extends WP_Widget {
                 $defult_select =  in_array($fslug, $search_features_query) ? 'checked' : '';
                 echo "<li class='filter-item'><label><input type='checkbox' name='tf_filters[]' value='{$id}' {$defult_select}/><span class='checkmark'></span> {$name}</label> {$count}</li>";
             }
-            echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a></div>";
+            echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . __( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
             echo $after_widget;
         }
@@ -211,7 +211,7 @@ class TF_Tour_Feature_Filter extends WP_Widget {
 
                 echo "<li class='filter-item'><label><input type='checkbox' name='tour_features[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>";
             }
-            echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a></div>";
+            echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . __( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
             echo $after_widget;
         }
@@ -357,7 +357,7 @@ class TF_Tour_Attraction_Filter extends WP_Widget {
 
                 echo "<li class='filter-item'><label><input type='checkbox' name='tf_attractions[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>";
             }
-            echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a></div>";
+            echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . __( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
             echo $after_widget;
         }
@@ -499,7 +499,7 @@ class TF_Tour_Activities_Filter extends WP_Widget {
 
                 echo "<li class='filter-item'><label><input type='checkbox' name='tf_activities[]' value='{$id}'/><span class='checkmark'></span> {$name}</label> {$count}</li>";
             }
-            echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a></div>";
+            echo "</ul><a href='#' class='see-more btn-link'>" . __( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . __( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
 
             echo $after_widget;
         }
@@ -683,6 +683,117 @@ if ( !empty( $title ) ) {
 
 }
 
+
+/**
+ * Hotel & Tour Price Filter
+ */
+class Tourfic_Price_Filter extends WP_Widget {
+
+    /**
+     * Register widget with WordPress.
+     */
+    public function __construct() {
+
+        parent::__construct(
+            'tf_price_filters', // Base ID
+            __( 'Tourfic - Hotel & Tour Price Range Filter', 'tourfic' ), // Name
+            array( 'description' => __( 'Show Price Range slider on Archive/Search Result page.', 'tourfic' ) ) // Args
+        );
+    }
+
+    /**
+     * Front-end display of widget.
+     *
+     * @see WP_Widget::widget()
+     *
+     * @param array $args     Widget arguments.
+     * @param array $instance Saved values from database.
+     */
+    public function widget( $args, $instance ) {
+        ?>
+		<!-- Start Price Range widget -->
+		<?php 
+        if( is_post_type_archive('tf_tours') || is_post_type_archive('tf_hotel') || ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) ) ){
+            extract( $args );
+            $title = apply_filters( 'widget_title', $instance['title'] );
+            echo $before_widget;
+            if( is_post_type_archive('tf_hotel') || ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_hotel" ) ){
+            ?>
+                <div class="tf-widget-title">
+                    <h4><?php _e("Hotel Price Range","tourfic"); ?></h4></i>
+                </div>
+                <div class="tf-hotel-result-price-range"></div>
+            <?php
+            } 
+            if( is_post_type_archive('tf_tours') || ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_tours" ) ){
+            ?>
+                <div class="tf-widget-title">
+                    <h4><?php _e("Tour Price Range","tourfic"); ?></h4></i>
+                </div>
+                <div class="tf-tour-result-price-range"></div>
+            <?php
+            }
+        }else{
+            extract( $args );
+            $title = apply_filters( 'widget_title', $instance['title'] );
+            echo $before_widget;
+            if( !empty($_GET['type']) && $_GET['type']=="tf_tours" && !empty($_GET['from']) && !empty($_GET['to'] ) ){
+            ?>
+                <div class="tf-widget-title">
+                    <h4><?php _e("Tour Price Range","tourfic"); ?></h4></i>
+                </div>
+                <div class="tf-tour-result-price-range"></div>
+            <?php }
+            if( !empty($_GET['type']) && $_GET['type']=="tf_hotel" && !empty($_GET['from']) && !empty($_GET['to'] ) ){
+            ?>
+                <div class="tf-widget-title">
+                    <h4><?php _e("Hotel Price Range","tourfic"); ?></h4></i>
+                </div>
+                <div class="tf-hotel-result-price-range"></div>
+		<?php } } ?>
+		<!-- End Price Range widget -->
+        <?php
+
+        echo $after_widget;
+    }
+
+    /**
+     * Back-end widget form.
+     *
+     * @see WP_Widget::form()
+     *
+     * @param array $instance Previously saved values from database.
+     */
+    public function form( $instance ) {
+
+        $title = isset( $instance['title'] ) ? $instance['title'] : __( 'Price Range Filter', 'tourfic' );
+        ?>
+        <p class="tf-widget-field">
+            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'tourfic' );?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+        </p>
+    <?php
+}
+
+    /**
+     * Sanitize widget form values as they are saved.
+     *
+     * @see WP_Widget::update()
+     *
+     * @param array $new_instance Values just sent to be saved.
+     * @param array $old_instance Previously saved values from database.
+     *
+     * @return array Updated safe values to be saved.
+     */
+    public function update( $new_instance, $old_instance ) {
+        $instance = array();
+        $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+
+        return $instance;
+    }
+
+}
+
 /**
  * Ask Question
  */
@@ -836,6 +947,7 @@ function tourfic_sidebar_widgets_init() {
         'TF_Tour_Feature_Filter',
         'TF_Tour_Attraction_Filter',
         'TF_Tour_Activities_Filter',
+        'Tourfic_Price_Filter'
     );
     foreach ( $custom_widgets as $key => $widget ) {
         register_widget( $widget );

@@ -36,6 +36,15 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'subtitle' => __( 'This tour will be highlighted at the top of the search result and tour archive page', 'tourfic' ),
 				),
 				array(
+					'id'          => 'featured_text',
+					'type'        => 'text',
+					'label'       => __( 'Tour Featured Text', 'tourfic' ),
+					'subtitle'    => __( 'Enter Featured Tour Text', 'tourfic' ),
+					'placeholder' => __( 'Enter Featured Tour Text', 'tourfic' ),
+					'default' => __( 'Hot Deal', 'tourfic' ),
+					'dependency'  => array( 'tour_as_featured', '==', true ),
+				),
+				array(
 					'id'      => 'tour_single_page',
 					'type'    => 'select',
 					'label'   => __( 'Single Tour Page Layout', 'tourfic' ),
@@ -94,7 +103,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'          => 'duration',
 					'type'        => 'text',
 					'label'       => __( 'Tour Duration', 'tourfic' ),
-					'subtitle'    => __( 'E.g. 3 days', 'tourfic' ),
+					'subtitle'    => __( 'E.g. 3', 'tourfic' ),
 					'field_width' => '50',
 				),				
 				array(
@@ -1064,6 +1073,14 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'        => 't-review',
 					'type'      => 'switch',
 					'label'     => __( 'Disable Review Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+				array(
+					'id'        => 't-share',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Share Option', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false

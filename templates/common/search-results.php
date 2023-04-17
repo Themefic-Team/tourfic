@@ -1,22 +1,9 @@
-<?php get_header('tourfic'); ?>
-<div class="tf-main-wrapper search-result-wrapper" data-fullwidth="true">
-    <?php do_action( 'tf_before_container' ); ?>
-	<div class="tf-container">
-        <div class="search-result-inner">
-            <!-- Start Content -->           
-			<div class="tf-search-left">
-				<?php echo do_shortcode("[tf_search_result]"); ?>
-			</div>
-			<!-- End Content -->
+<?php get_header('tourfic'); 
 
-			<!-- Start Sidebar -->
-			<div class="tf-search-right">
-				<?php tf_search_result_sidebar_form( 'archive' ); ?>
-			</div>
-			<!-- End Sidebar -->
-		</div>
-	</div>
-	<?php do_action( 'tf_after_container' ); ?>
-</div>
-<?php
+if( ( !empty($_GET['type']) && $_GET['type']=="tf_tours" && ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) || ( !empty($_GET['type']) && $_GET['type']=="tf_hotel" && ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['hotel-archive']=="design-1" ) ){
+	include TF_TEMPLATE_PART_PATH . 'search/design-1.php';
+}else{
+	include TF_TEMPLATE_PART_PATH . 'search/design-default.php';
+}
+
 get_footer('tourfic');

@@ -23,6 +23,10 @@
          * Ajax room filter
          */
         const tfRoomFilter = () => {
+            // Child & Child Type
+            var adult_field_type = $("#adults").attr('type');
+            var child_field_type = $("#children").attr('type');
+
             if ($.trim($('input[name=check-in-out-date]').val()) == '') {
 
                 if ($('#tf-required').length === 0) {
@@ -37,8 +41,16 @@
             });
             var tf_room_avail_nonce = $("input[name=tf_room_avail_nonce]").val();
             var post_id = $('input[name=post_id]').val();
-            var adult = $('select[name=adults] option').filter(':selected').val();
-            var child = $('select[name=children] option').filter(':selected').val();
+            if(adult_field_type=="number"){
+                var adult = $('#adults').val();
+            }else{
+                var adult = $('select[name=adults] option').filter(':selected').val();
+            }
+            if(child_field_type=="number"){
+                var child = $('#children').val();
+            }else{
+                var child = $('select[name=children] option').filter(':selected').val();
+            }
             //var features = $('input[name=features]').filter(':checked').val();
             var children_ages = $('input[name=children_ages]').val();
             var check_in_out = $('input[name=check-in-out-date]').val();
@@ -400,6 +412,19 @@
         //first li click
         $('.tf-single-tour-pricing .tf-price-tab li:first-child').trigger('click');
 
+        /**
+         * Single Tour price change Template 1
+         *
+         * adult, child, infant
+         */
+        $(document).on('click', '.tf-trip-person-info ul li', function () {
+            var t = $(this).attr('data');
+
+            $(this).addClass('active').siblings().removeClass('active');
+            $('.tf-trip-pricing').removeClass('active');
+            $('.tf-' + t).addClass('active');
+        });
+
         //###############################
         //        Search                #
         //###############################
@@ -420,8 +445,8 @@
             var room = $('#room').val();
             var children = $('#children').val();
             var checked = $('#check-in-out-date').val();
-            var startprice = $('#startprice').val();
-            var endprice = $('#endprice').val();
+            var startprice = $('.widget_tf_price_filters input[name="from"]').val();
+            var endprice = $('.widget_tf_price_filters input[name="to"]').val();
             // split date range into dates
             var checkedArr = checked.split(' - ');
             var checkin = checkedArr[0];
@@ -531,13 +556,14 @@
                             opacity: .5
                         }
                     });
-
+                    $('#tf_ajax_searchresult_loader').show();
                     if($.trim(checkin) !== ''){
                         $('.tf_booking-dates .tf_label-row').find('#tf-required').remove();
                     }
                 },
                 complete: function (data) {
                     $('.archive_ajax_result').unblock();
+                    $('#tf_ajax_searchresult_loader').hide();
 
                     // total posts 0 if not found by @hena
                     if ($('.tf-nothing-found')[0]) {
@@ -553,6 +579,7 @@
                 },
                 success: function (data, e) {
                     $('.archive_ajax_result').unblock();
+                    $('#tf_ajax_searchresult_loader').hide();
                     $('.archive_ajax_result').html(data);
                     // @KK show notice in every success request
                     notyf.success(tf_params.ajax_result_success);
@@ -585,8 +612,8 @@
             var room = $('#room').val();
             var children = $('#children').val();
             var checked = $('#check-in-out-date').val();
-            var startprice = $('#startprice').val();
-            var endprice = $('#endprice').val();
+            var startprice = $('.widget_tf_price_filters input[name="from"]').val();
+            var endprice = $('.widget_tf_price_filters input[name="to"]').val();
             // split date range into dates
             var checkedArr = checked.split(' - ');
             var checkin = checkedArr[0];
@@ -1421,6 +1448,27 @@
         });
 
         /**
+         * Design 1 archive item
+         *
+         * Grid/List
+         */
+        $(document).on('click', '.tf-grid-list-layout', function (e) {
+            e.preventDefault();
+            $('.tf-grid-list-layout').removeClass('active');
+            $(this).addClass('active');
+
+            var dataid = $(this).data('id');
+            if (dataid == 'grid-view') {
+                $('.tf-item-cards').addClass('tf-layout-grid');
+                $('.tf-item-cards').removeClass('tf-layout-list');
+            } else {
+                $('.tf-item-cards').addClass('tf-layout-list');
+                $('.tf-item-cards').removeClass('tf-layout-grid');
+            }
+
+        });
+
+        /**
          * ajax tour load pagination
          */
         var flag = false;
@@ -1490,6 +1538,28 @@
             $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
         }
 
+        // Hotel Min and Max Range in Search Result
+        var tf_search_page_params = new window.URLSearchParams(window.location.search);
+        let tf_hotel_search_range = {
+            range: {
+                min: parseInt(tf_params.tf_hotel_min_price),
+                max: parseInt(tf_params.tf_hotel_max_price),
+                step: 1
+            },
+            initialSelectedValues: {
+                from: tf_search_page_params.get('from')? tf_search_page_params.get('from') : parseInt(tf_params.tf_hotel_min_price),
+                to: tf_search_page_params.get('to')? tf_search_page_params.get('to') : parseInt(tf_params.tf_hotel_max_price) / 2
+            },
+            grid: false,
+            theme: "dark",
+            onFinish: function(){
+                makeFilter();
+            }
+        };
+        if (tf_params.tf_hotel_min_price != 0 && tf_params.tf_hotel_max_price != 0) {
+            $('.tf-hotel-result-price-range').alRangeSlider(tf_hotel_search_range);
+        }
+    
         // Tour Min and Max Range
         let tf_tour_range_options = {
             range: {
@@ -1506,6 +1576,27 @@
         };
         if (tf_params.tf_tour_min_price != 0 && tf_params.tf_tour_max_price != 0) {
             $('.tf-tour-filter-range').alRangeSlider(tf_tour_range_options);
+        }
+
+        // Tours Min and Max Range in Search Result
+        let tf_tours_search_range = {
+            range: {
+                min: parseInt(tf_params.tf_tour_min_price),
+                max: parseInt(tf_params.tf_tour_max_price),
+                step: 1
+            },
+            initialSelectedValues: {
+                from: tf_search_page_params.get('from')? tf_search_page_params.get('from') : parseInt(tf_params.tf_tour_min_price),
+                to: tf_search_page_params.get('to')? tf_search_page_params.get('to') : parseInt(tf_params.tf_tour_max_price) / 2
+            },
+            grid: false,
+            theme: "dark",
+            onFinish: function(){
+                makeFilter();
+            }
+        };
+        if (tf_params.tf_tour_min_price != 0 && tf_params.tf_tour_max_price != 0) {
+            $('.tf-tour-result-price-range').alRangeSlider(tf_tours_search_range);
         }
 
         // Hotel Location
@@ -1624,6 +1715,36 @@
         });
 
         /*
+        * New Template FAQ Accordion
+        * @author: Jahid
+        */
+        $('.tf-faq-collaps').click(function () {
+            var $this = $(this);
+            if (!$this.hasClass("active")) {
+                $(".tf-faq-collaps").removeClass("active");
+                $('.tf-faq-single').removeClass('active');
+            }
+            $this.toggleClass("active");
+            $(this).closest('.tf-faq-single').toggleClass('active');
+        });
+
+        /*
+        * New Template Itinerary Accordion
+        * @author: Jahid
+        */
+        $('.tf-itinerary-title').click(function () {
+            var $this = $(this);
+            if (!$this.hasClass("active")) {
+                $(".tf-itinerary-content-box").slideUp(400);
+                $(".tf-itinerary-title").removeClass("active");
+                $('.tf-single-itinerary-item').removeClass('active');
+            }
+            $this.toggleClass("active");
+            $(this).closest('.tf-single-itinerary-item').toggleClass('active');
+            $this.next().slideToggle();
+        });
+
+        /*
         * Booking Form select first tab on load
         * @author: Foysal
         */
@@ -1707,6 +1828,20 @@
                 return index > 3;
             }).removeClass("hidden");
             $this.hide();
+
+            $this.parent('.tf-filter').find('.see-less').show();
+        });
+
+        /* see Sless checkbox filter started */
+
+        $('a.see-less').on('click', function (e) {
+            var $this = $(this);
+            e.preventDefault();
+            $this.parent('.tf-filter').find('.filter-item').filter(function (index) {
+                return index > 3;
+            }).addClass("hidden");
+            $this.hide();
+            $this.parent('.tf-filter').find('.see-more').show();
         });
 
         $('.tf-filter').each(function () {

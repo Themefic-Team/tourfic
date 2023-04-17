@@ -10,6 +10,9 @@ defined( 'ABSPATH' ) || exit;
 if( !function_exists( 'tf_custom_css' ) ){
 	function tf_custom_css(){
 		// Store as PHP variables
+		// Template 1 Global CSS
+		$tf_template1_global_reg = !empty(tf_data_types(tfopt( 'tourfic-design1-global-color' ))['gcolor']) ? tf_data_types(tfopt( 'tourfic-design1-global-color' ))['gcolor'] : '';
+
 		// Common CSS
 		$tf_primary_color_reg = !empty(tf_data_types(tfopt( 'tourfic-button-color' ))['regular']) ? tf_data_types(tfopt( 'tourfic-button-color' ))['regular'] : '';
 		$tf_primary_color_hov = !empty(tf_data_types(tfopt( 'tourfic-button-color' ))['hover']) ? tf_data_types(tfopt( 'tourfic-button-color' ))['hover'] : '';
@@ -30,33 +33,78 @@ if( !function_exists( 'tf_custom_css' ) ){
 		
 		$output = '';
 		
+		// Template 1 Global CSS
+		if( !empty( $tf_template1_global_reg ) ){ $output .= '
+			.tf-template-global .tf-bttn-normal.bttn-primary,
+			.tf-template-global .tf-archive-head .active,
+			.tf-template-global .tf-item-featured .tf-features-box .tf-featur,
+			.tf-template-global .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::after,
+			.tf-template-global .tf-itinerary-wrapper.tf-mrbottom-70 .tf-itinerary-downloader-option,
+			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-data-features .percent-progress,
+			.tf-template-global .tf-rooms-sections .tf-rooms .tf-availability-table thead,
+			.tf-template-global .tf-hotel-location-map .tf-hotel-location-preview a i,
+			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature {
+				background: '.$tf_template1_global_reg.';
+			}';
+		}
+		if( !empty( $tf_template1_global_reg ) ){ $output .= '
+			.tf-template-global .tf-archive-head i,
+			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-details i,
+			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-details .tf-post-footer .tf-pricing span,
+			.tf-template-global .tf-single-head i,
+			.tf-template-global .tf-trip-info li i,
+			.tf-template-global .tf-trip-feature-blocks .tf-feature-block i,
+			.tf-template-global .tf-tour-details-right .tf-tour-booking-advantages li i,
+			.tf-template-global .tf-ask-enquiry i,
+			.tf-template-global .tf-list li i,
+			.tf-template-global .tf-itinerary-wrapper .tf-single-itinerary-item .itinerary-day,
+			.tf-template-global .tf-itinerary-wrapper.tf-mrbottom-70 .tf-itinerary-downloader-option a,
+			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-data-average p,
+			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-all-info li,
+			.tf-template-global .tf-single-head .more-hotel,
+			.tf-template-global .tf-head-info .tf-dropdown-share-content h4,
+			.tf-template-global .tf-head-info .tf-dropdown-share-content ul li button span
+			 {
+				color: '.$tf_template1_global_reg.';
+			}';
+		}
+
+		if( !empty( $tf_template1_global_reg ) ){ $output .= '
+			.tf-template-global .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::before{
+				border: 1px solid '.$tf_template1_global_reg.';
+			}';
+		}
+
 		// Common CSS
 		if( $tf_primary_color_reg  ) { $output .= '
-			.tf_button, .tf-btn-flip:before, .tf-btn-flip, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"] {color: '.$tf_primary_color_reg.';}
-			.acr-inc, .tf-ask-question h3:before {color: '.$tf_primary_color_reg.';}
+			.tf_button, .tf-btn-flip:before, .tf-btn-flip, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"], .tf-bttn-normal.bttn-primary, .tf-bttn-normal.bttn-secondary, .tf-template-global .tf-archive-head .active, .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature, {color: '.$tf_primary_color_reg.' !important;}
+			.tf-ask-question h3:before {color: '.$tf_primary_color_reg.';}
 		'; }
 		if( $tf_primary_color_hov  ) { $output .= '
-			.tf_button:hover, .btn-styled:hover, .tf-btn-flip:after, .tf-review-form-container .tf-review-submit input[type="submit"]:hover {color: '.$tf_primary_color_hov.';}
+			.tf_button:hover, .btn-styled:hover, .tf-btn-flip:after, .tf-review-form-container .tf-review-submit input[type="submit"]:hover, .tf-bttn-normal.bttn-primary:hover, .tf-bttn-normal.bttn-secondary:hover {color: '.$tf_primary_color_hov.' !important;}
 		'; }
 		if( $tf_primary_bg_color_reg  ) { $output .= '
-			.tf_button, .tf-btn-flip:before, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"] {background: '.$tf_primary_bg_color_reg.';}
-			.tf_button, .btn-styled, .acr-dec, .acr-inc, .tf-review-form-container .tf-review-submit input[type="submit"] {border-color: '.$tf_primary_bg_color_reg.';}
+			.tf_button, .tf-btn-flip:before, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"], .tf-bttn-normal.bttn-primary, .tf-bttn-normal.bttn-secondary, .tf-template-global .tf-archive-head .active, .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature {background: '.$tf_primary_bg_color_reg.' !important;}
+			.tf_button, .btn-styled, .tf-review-form-container .tf-review-submit input[type="submit"] {border-color: '.$tf_primary_bg_color_reg.';}
 		'; }
 		if( $tf_primary_bg_color_hov  ) { $output .= '
-			.tf_button:hover, .btn-styled:hover, .tf-btn-flip:after, .tf-review-form-container .tf-review-submit input[type="submit"]:hover {background: '.$tf_primary_bg_color_hov.';}
+			.tf_button:hover, .btn-styled:hover, .tf-btn-flip:after, .tf-review-form-container .tf-review-submit input[type="submit"]:hover, .tf-bttn-normal.bttn-primary:hover, .tf-bttn-normal.bttn-secondary:hover {background: '.$tf_primary_bg_color_hov.' !important;;}
 			.tf_button:hover, .btn-styled:hover, .tf-review-form-container .tf-review-submit input[type="submit"]:hover {border-color: '.$tf_primary_bg_color_hov.';}
 		'; }
 		if( $tf_sidebar_gradient_one_reg && $tf_sidebar_gradient_two_reg  ) { $output .= '
-			.tf_booking-widget {background: linear-gradient(to bottom, '.$tf_sidebar_gradient_one_reg.' 0, '.$tf_sidebar_gradient_two_reg.' 100%);}
+			.tf_booking-widget, .tf-tour-details-right .tf-tour-booking-box, .tf-template-global .tf-box-wrapper.tf-box {background: linear-gradient(to bottom, '.$tf_sidebar_gradient_one_reg.' 0, '.$tf_sidebar_gradient_two_reg.' 100%);}
 		'; }
 		if( $tf_faq_color OR $tf_faq_icon_color OR $tf_faq_border_color ) { $output .= '
-			.tf-faq-title h4 {
+			.tf-faq-title h4,
+			.tf-single-page .tf-faq-wrapper .tf-faq-single-inner h3 {
 				color: '.$tf_faq_color.';
 			}
-			#tf-faq-item {
+			#tf-faq-item,
+			.tf-single-page .tf-faq-wrapper .tf-faq-inner .tf-faq-single {
 				border-color: '.$tf_faq_border_color.';
 			}
-			#tf-faq-item .arrow {
+			#tf-faq-item .arrow,
+			.tf-single-page .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus {
 				color: '.$tf_faq_icon_color.';
 			}
 		'; }
@@ -68,19 +116,37 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-single-review .tf-review-details .tf-name, .tf-single-review .tf-review-details .tf-date, .tf-single-review .tf-review-details .tf-rating-stars, .tf-single-review .tf-review-details .tf-description {
 				color: '.$tf_review_color.';
 			}
-			.tf-review-container .tf-review-progress-bar .tf-single .tf-p-bar {
+			.tf-review-container .tf-review-progress-bar .tf-single .tf-p-bar,
+			.tf-single-page .tf-review-wrapper .tf-review-data .tf-review-data-features .tf-progress-bar {
 				background: '.$tf_param_single_bg_color.';
 			}
-			.tf-review-container .tf-review-progress-bar {
+			.tf-review-container .tf-review-progress-bar,
+			.tf-single-page .tf-review-wrapper .tf-review-data {
 				background: '.$tf_param_bg_color.';
 				border-color: '.$tf_param_bg_color.';
 			}
-			.tf-review-container .tf-review-progress-bar .tf-single .tf-text, .tf-review-container .tf-review-progress-bar .tf-single .tf-p-b-rating {
+			.tf-review-container .tf-review-progress-bar .tf-single .tf-text, .tf-review-container .tf-review-progress-bar .tf-single .tf-p-b-rating,
+			.tf-single-page .tf-review-wrapper .tf-review-data p,
+			.tf-single-page .tf-review-wrapper .tf-review-data .tf-review-all-info li,
+			.tf-single-page .tf-review-wrapper .tf-review-data .tf-review-all-info li i {
 				color: '.$tf_param_txt_color.';
 			}
-			.tf-review-container .tf-total-review .tf-total-average div, .tf-archive-rating {
+			.tf-review-container .tf-total-review .tf-total-average div, .tf-archive-rating, .tf-single-page .tf-review-wrapper .tf-review-data .tf-review-data-average p {
 				background: '.$tf_rating_bg_color.'!important;
 				color: '.$tf_rating_color.'!important;
+			}
+		'; }
+		if( $tf_review_bg_color) { $output .= '
+			.tf-single-page .tf-review-reply .tf-review-reply-data {
+				background: '.$tf_review_bg_color.';
+				padding: 20px;
+				border-radius: 5px;
+			}
+			.tf-single-page .tf-review-reply .tf-review-details h3,
+			.tf-single-page .tf-review-reply .tf-review-details p,
+			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li,
+			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li i{
+				color: '.$tf_review_color.';
 			}
 		'; }
 		
@@ -90,7 +156,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 add_action( 'wp_enqueue_scripts', 'tf_custom_css', 99999 );
 
 if( !function_exists( 'tf_hotel_css' ) ){
-	function tf_hotel_css(){
+	function tf_hotel_css(){ 
 		// Store as PHP variables
 		// Hotel CSS
 		$tf_hotel_type_color = !empty(tf_data_types(tfopt( 'tourfic-hotel-type-bg-color' ))['regular']) ? tf_data_types(tfopt( 'tourfic-hotel-type-bg-color' ))['regular'] : '';
@@ -117,31 +183,37 @@ if( !function_exists( 'tf_hotel_css' ) ){
 			.tf-title-left span.post-type {background: '.$tf_hotel_type_bg_color.';}
 		'; }
 		if( $tf_share_color_reg  ) { $output .= '
-			.tf-share .share-toggle i {color: '.$tf_share_color_reg.';}
+			.tf-share .share-toggle i, .tf-single-page .tf-section.tf-single-head .tf-share a i {color: '.$tf_share_color_reg.';}
 		'; }
 		if( $tf_share_color_hov  ) { $output .= '
-			.tf-share .share-toggle i:hover {color: '.$tf_share_color_hov.';}
+			.tf-share .share-toggle i:hover, .tf-single-page .tf-section.tf-single-head .tf-share a i:hover {color: '.$tf_share_color_hov.';}
 		'; }
 		if( $tf_gradient_one_reg && $tf_gradient_two_reg  ) { $output .= '
-			.show-on-map .btn-styled {background: linear-gradient(to bottom, '.$tf_gradient_one_reg.' 0, '.$tf_gradient_two_reg.' 100%);}
+			.show-on-map .btn-styled, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i {background: linear-gradient(to bottom, '.$tf_gradient_one_reg.' 0, '.$tf_gradient_two_reg.' 100%);}
 		'; }
 		if( $tf_gradient_one_hov && $tf_gradient_two_hov  ) { $output .= '
-			.show-on-map .btn-styled:hover {background: linear-gradient(to bottom, '.$tf_gradient_one_hov.' 0, '.$tf_gradient_two_hov.' 100%);}
+			.show-on-map .btn-styled:hover, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i:hover {background: linear-gradient(to bottom, '.$tf_gradient_one_hov.' 0, '.$tf_gradient_two_hov.' 100%);}
 		'; }
 		if( $tf_map_text_color  ) { $output .= '
-			.show-on-map .btn-styled {color: '.$tf_map_text_color.';}
+			.show-on-map .btn-styled, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i {color: '.$tf_map_text_color.';}
 		'; }
 		if( $tf_hotel_features  ) { $output .= '
-			.tf_features i, .tf-archive-desc i {color: '.$tf_hotel_features.'!important;}
+			.tf_features i, .tf-archive-desc i, .tf-single-page .tf-hotel-single-features ul li {color: '.$tf_hotel_features.'!important;}
 		'; }
 		if( $tf_hotel_table_color OR $tf_hotel_table_bg_color ) { $output .= '
-			.availability-table thead {
+			.availability-table thead,
+			.tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table thead {
 				color: '.$tf_hotel_table_color.';
 				background: '.$tf_hotel_table_bg_color.';
 			}
 		'; }
+		if( $tf_hotel_table_color ) { $output .= '
+			.tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table thead tr th{
+				color: '.$tf_hotel_table_color.';
+			}
+		'; }
 		if( $tf_hotel_table_border_color  ) { $output .= '
-			.availability-table td, .availability-table td.reserve {border-color: '.$tf_hotel_table_border_color.';}
+			.availability-table td, .availability-table td.reserve, .tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table tr td, .tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table {border-color: '.$tf_hotel_table_border_color.';}
 		'; }
 		
 		wp_add_inline_style( 'tf-app-style', $output );
@@ -188,22 +260,28 @@ if( !function_exists( 'tf_tour_css' ) ){
 		
 		// Tour CSS
 		if( $tf_tour_sale_price OR $tf_tour_org_price OR $tf_tour_tab_text OR $tf_tour_tab_bg OR $tf_tour_tab_border) { $output .= '
-			.tf-single-tour-pricing .tf-price span.sale-price {
+			.tf-single-tour-pricing .tf-price span.sale-price,
+			.tf-single-page .tf-trip-info .tf-trip-pricing .tf-price-amount {
 				color: '.$tf_tour_sale_price.';
 			}
 			.tf-single-tour-pricing .tf-price {
 				color: '.$tf_tour_org_price.';
 			}
-			.tf-single-tour-pricing .tf-price-tab li {
+			.tf-single-tour-pricing .tf-price-tab li,
+			.tf-single-page .tf-trip-info .person-info,
+			.tf-single-page .tf-trip-info .person-info p {
 				color: '.$tf_tour_tab_text.';
 			}
-			.tf-single-tour-pricing .tf-price-tab li {
+			.tf-single-tour-pricing .tf-price-tab li,
+			.tf-single-page .tf-trip-info .person-info {
 				background: '.$tf_tour_tab_bg.';
 			}
-			.tf-single-tour-pricing .tf-price-tab li.active {
+			.tf-single-tour-pricing .tf-price-tab li.active,
+			.tf-single-page .tf-trip-info .person-info.active {
 				color: '.$tf_tour_active_tab_text.';
 			}
-			.tf-single-tour-pricing .tf-price-tab li.active {
+			.tf-single-tour-pricing .tf-price-tab li.active,
+			.tf-single-page .tf-trip-info .person-info.active {
 				background: '.$tf_tour_active_tab_bg.';
 			}
 			.tf-single-tour-pricing .tf-price-tab, .tf-single-tour-pricing .tf-price-tab li:nth-child(2), .tf-single-tour-pricing .tf-price-tab li:nth-child(3) {
@@ -212,25 +290,32 @@ if( !function_exists( 'tf_tour_css' ) ){
 		'; }
 
 		if( $tf_tour_icon_color OR $tf_tour_heading_color OR $tf_tour_text_color OR $tf_tour_bg_one OR $tf_tour_bg_two OR $tf_tour_bg_three OR $tf_tour_bg_four) { $output .= '
-			.tf-single-square-block i {
+			.tf-single-square-block i,
+			.tf-single-page .tf-trip-feature-blocks .tf-feature-block i {
 				color: '.$tf_tour_icon_color.';
 			}
-			.tf-single-square-block h4 {
+			.tf-single-square-block h4,
+			.tf-single-page .tf-trip-feature-blocks .tf-feature-block h3 {
 				color: '.$tf_tour_heading_color.';
 			}
-			.tf-single-square-block {
+			.tf-single-square-block,
+			.tf-single-page .tf-trip-feature-blocks .tf-feature-block p {
 				color: '.$tf_tour_text_color.';
 			}
-			.tf-single-square-block.first {
+			.tf-single-square-block.first,
+			.tf-single-page .tf-trip-feature-blocks .tf-feature-block.tf-first {
 				background: '.$tf_tour_bg_one.';
 			}
-			.tf-single-square-block.second {
+			.tf-single-square-block.second,
+			.tf-single-page .tf-trip-feature-blocks .tf-feature-block.tf-second {
 				background: '.$tf_tour_bg_two.';
 			}
-			.tf-single-square-block.third {
+			.tf-single-square-block.third,
+			.tf-single-page .tf-trip-feature-blocks .tf-feature-block.tf-third {
 				background: '.$tf_tour_bg_three.';
 			}
-			.tf-single-square-block.fourth {
+			.tf-single-square-block.fourth,
+			.tf-single-page .tf-trip-feature-blocks .tf-feature-block.tf-tourth {
 				background: '.$tf_tour_bg_four.';
 			}
 		'; }
@@ -253,25 +338,30 @@ if( !function_exists( 'tf_tour_css' ) ){
 		'; }
 
 		if( $tf_inc_gradient_one_reg OR $tf_inc_gradient_two_reg OR $tf_inc_heading_color OR $tf_inc_text_color) { $output .= '
-			.tf-include-section, .tf-exclude-section {
+			.tf-include-section, .tf-exclude-section, .tf-single-page .tf-inex-wrapper .tf-inex {
 				background-image: linear-gradient(to right, '.$tf_inc_gradient_one_reg.', '.$tf_inc_gradient_two_reg.');
 				color: '.$tf_inc_text_color.';
 			}
-			.tf-inc-exc-content h4 {
+			.tf-inc-exc-content h4,
+			.tf-single-page .tf-inex-wrapper .tf-inex h3 {
 				color: '.$tf_inc_heading_color.';
 			}
 		'; }
 		if( $tf_itin_time_day_txt OR $tf_itin_time_day_bg OR $tf_itin_heading_color OR $tf_itin_text_color OR $tf_itin_bg_color OR $tf_itin_icon_color) { $output .= '
-			.tf-travel-time span {
+			.tf-travel-time span,
+			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item .itinerary-day {
 				color: '.$tf_itin_time_day_txt.';
 			}
 			.tf-travel-time {
 				background: '.$tf_itin_time_day_bg.';
 			}
-			.tf-accordion-head h4, .tf-accordion-head h4:hover {
+			.tf-accordion-head h4, 
+			.tf-accordion-head h4:hover,
+			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item h3 {
 				color: '.$tf_itin_heading_color.';
 			}
-			.tf-travel-desc {
+			.tf-travel-desc,
+			.tf-single-page .tf-itinerary-content-details p {
 				color: '.$tf_itin_text_color.';
 			}
 			#tf-accordion-wrapper .tf-accordion-content, #tf-accordion-wrapper .tf-accordion-head {
@@ -279,6 +369,13 @@ if( !function_exists( 'tf_tour_css' ) ){
 			}
 			#tf-accordion-wrapper .arrow-animate, #tf-accordion-wrapper .arrow {
 				color: '.$tf_itin_icon_color.';
+			}
+			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::before,
+			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item .accordion-checke::before {
+				border: 1px solid '.$tf_itin_icon_color.';
+			}
+			.tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::after {
+				background: '.$tf_itin_icon_color.';
 			}
 		'; }
 		

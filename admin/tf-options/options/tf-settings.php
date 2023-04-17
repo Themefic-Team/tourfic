@@ -26,6 +26,298 @@ TF_Settings::option( 'tf_settings', array(
 						'hotel' => __( 'Hotels', 'tourfic' ),
 						'tour'  => __( 'Tours', 'tourfic' ),
 					),
+				),
+				array(
+					'id'       => 'template_heading',
+					'type'     => 'heading',
+					'label'  => __( 'Template Settings', 'tourfic' ),
+					'subtitle' => __( 'You can able to change your hotel & tour template. Currently, we only allow 2 template.', 'tourfic' ),
+				),
+				array(
+					'id'     => 'tf-template',
+					'type'   => 'tab',
+					'label'  => 'Hotel & Tour',
+					'tabs'   => array(
+						array(
+							'id'     => 'hotel_template',
+							'title'  => __( 'Hotel', 'tourfic' ),
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'      => 'hotel-title',
+									'type'    => 'heading',
+									'content' => __( 'Hotel Single Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'single-hotel',
+									'type'     => 'imageselect',
+									'label'    => __( 'Select Single Template', 'tourfic' ),
+									'multiple' 		=> true,
+									'inline'   		=> true,
+									'options'   	=> array( 
+										'default' 			=> array(
+											'title'			=> 'Defult',
+											'url' 			=> TF_ASSETS_APP_URL."images/default-hotel.jpg",
+										),
+										'design-1' 				=> array(
+											'title'			=> 'Design 1',
+											'url' 			=> TF_ASSETS_APP_URL."images/default-hotel.jpg",
+										),
+									),
+									'default'   	=> 'default',
+								),
+								array(
+									'id'       => 'single-hotel-layout',
+									'class'    => 'disable-sortable',
+									'type'     => 'repeater',
+									'drag_only' => true,
+									'label'    => __( 'Single Hotel Template Sections', 'tourfic' ),
+									'subtitle' => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'dependency' => array( 'single-hotel', '==', 'design-1' ),
+									'fields'   => array(
+										array(
+											'id'    => 'hotel-section',
+											'class' => 'tf-section-name-hidden',
+											'type'  => 'text',
+											'label' => __( 'Section Name', 'tourfic' ),
+											'attributes'  => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'    => 'hotel-section-slug',
+											'class' => 'tf-section-name-hidden',
+											'type'  => 'text',
+											'label' => __( 'Section Slug', 'tourfic' ),
+											'attributes'  => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'    => 'hotel-section-status',
+											'type'  => 'switch',
+											'label' => __( 'Section Status', 'tourfic' ),
+											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
+										),
+									),
+									'default'  => array(
+										array(
+											'hotel-section' => __( 'Description', 'tourfic' ),
+											'hotel-section-slug' => __( 'description', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+										array(
+											'hotel-section' => __( 'Features', 'tourfic' ),
+											'hotel-section-slug' => __( 'features', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+										array(
+											'hotel-section' => __( 'Room', 'tourfic' ),
+											'hotel-section-slug' => __( 'rooms', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+										array(
+											'hotel-section' => __( 'FAQ', 'tourfic' ),
+											'hotel-section-slug' => __( 'faq', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+										array(
+											'hotel-section' => __( 'Review', 'tourfic' ),
+											'hotel-section-slug' => __( 'review', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+										array(
+											'hotel-section' => __( 'Trams & Condition', 'tourfic' ),
+											'hotel-section-slug' => __( 'trams-condition', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+									)
+								),
+								array(
+									'id'      => 'hotel-title',
+									'type'    => 'heading',
+									'content' => __( 'Hotel Archive & Search Result Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'hotel-archive',
+									'type'     => 'imageselect',
+									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
+									'multiple' 		=> true,
+									'inline'   		=> true,
+									'options'   	=> array( 
+										'default' 			=> array(
+											'title'			=> 'Defult',
+											'url' 			=> TF_ASSETS_APP_URL."images/hotel-archive-default.jpg",
+										),
+										'design-1' 				=> array(
+											'title'			=> 'Design 1',
+											'url' 			=> TF_ASSETS_APP_URL."images/hotel-archive-default.jpg",
+										),
+									),
+									'default'   	=> 'default',
+								),
+								array(
+									'id'      => 'hotel_archive_notice',
+									'type'    => 'notice',
+									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
+								),
+							),
+						),
+						
+						array(
+							'id'     => 'tour_template',
+							'title'  => __( 'Tour', 'tourfic' ),
+							'fields' => array(
+								array(
+									'id'      => 'tour-title',
+									'type'    => 'heading',
+									'content' => __( 'Tour Single Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'single-tour',
+									'type'     => 'imageselect',
+									'label'    => __( 'Select Single Template', 'tourfic' ),
+									'multiple' 		=> true,
+									'inline'   		=> true,
+									'options'   	=> array( 
+										'default' 			=> array(
+											'title'			=> 'Defult',
+											'url' 			=> TF_ASSETS_APP_URL."images/default-tour.jpg",
+										),
+										'design-1' 				=> array(
+											'title'			=> 'Design 1',
+											'url' 			=> TF_ASSETS_APP_URL."images/default-tour.jpg",
+										),
+									),
+									'default'   	=> 'default',
+								),
+								array(
+									'id'       => 'single-tour-layout',
+									'class'    => 'disable-sortable',
+									'type'     => 'repeater',
+									'drag_only' => true,
+									'label'    => __( 'Single Tour Template Sections', 'tourfic' ),
+									'subtitle' => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'dependency' => array( 'single-tour', '==', 'design-1' ),
+									'fields'   => array(
+										array(
+											'id'    => 'tour-section',
+											'class' => 'tf-section-name-hidden',
+											'type'  => 'text',
+											'label' => __( 'Section Name', 'tourfic' ),
+											'attributes'  => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'    => 'tour-section-slug',
+											'class' => 'tf-section-name-hidden',
+											'type'  => 'text',
+											'label' => __( 'Section Slug', 'tourfic' ),
+											'attributes'  => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'    => 'tour-section-status',
+											'type'  => 'switch',
+											'label' => __( 'Section Status', 'tourfic' ),
+											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
+										),
+									),
+									'default'  => array(
+										array(
+											'tour-section' => __( 'Gallery', 'tourfic' ),
+											'tour-section-slug' => __( 'gallery', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section' => __( 'Price', 'tourfic' ),
+											'tour-section-slug' => __( 'price', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section' => __( 'Description', 'tourfic' ),
+											'tour-section-slug' => __( 'description', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section' => __( 'Information', 'tourfic' ),
+											'tour-section-slug' => __( 'information', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section' => __( 'Highlights', 'tourfic' ),
+											'tour-section-slug' => __( 'highlights', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section' => __( 'Include Exclude', 'tourfic' ),
+											'tour-section-slug' => __( 'include-exclude', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section' => __( 'Itinerary', 'tourfic' ),
+											'tour-section-slug' => __( 'itinerary', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section' => __( 'Map', 'tourfic' ),
+											'tour-section-slug' => __( 'map', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section' => __( 'FAQ', 'tourfic' ),
+											'tour-section-slug' => __( 'faq', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section' => __( 'Trams & Condition', 'tourfic' ),
+											'tour-section-slug' => __( 'trams-condition', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+										array(
+											'tour-section' => __( 'Review', 'tourfic' ),
+											'tour-section-slug' => __( 'review', 'tourfic' ),
+											'tour-section-status' => true,
+										),
+									)
+								),
+								array(
+									'id'      => 'tour-title',
+									'type'    => 'heading',
+									'content' => __( 'Tour Archive & Search Result Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'tour-archive',
+									'type'     => 'imageselect',
+									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
+									'multiple' 		=> true,
+									'inline'   		=> true,
+									'options'   	=> array( 
+										'default' 			=> array(
+											'title'			=> 'Defult',
+											'url' 			=> TF_ASSETS_APP_URL."images/tour-archive-default.jpg",
+										),
+										'design-1' 				=> array(
+											'title'			=> 'Design 1',
+											'url' 			=> TF_ASSETS_APP_URL."images/tour-archive-default.jpg",
+										),
+									),
+									'default'   	=> 'default',
+								),
+								array(
+									'id'      => 'tour_archive_notice',
+									'type'    => 'notice',
+									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
+								),
+							),
+						),
+					),
 				)
 			),
 		),
@@ -170,7 +462,14 @@ TF_Settings::option( 'tf_settings', array(
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 				),
-
+				array(
+					'id'        => 't-share',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Share Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
 				array(
 					'id'        => 't-related',
 					'type'      => 'switch',
@@ -978,6 +1277,20 @@ TF_Settings::option( 'tf_settings', array(
 					'type'    => 'notice',
 					'style'   => 'info',
 					'content' => __( "To ensure maximum compatiblity with your theme, all Heading (h1-h6), Paragraph & Link's Color-Font Styles are not controlled by Tourfic. Those need to be edited using your Theme's option Panel.", "tourfic" ),
+				),
+				array(
+					'id'       => 'tourfic-design1-global-color',
+					'type'     => 'color',
+					'label'    => __( 'Global Color for Design 1', 'tourfic' ),
+					'subtitle' => __( 'Global Colors of Design 1 related to Tourfic', 'tourfic' ),
+					'multiple' => true,
+					'inline'   => true,
+					'default' => array(
+						'gcolor' => '#0e3dd8'
+					),
+					'colors'   => array(
+						'gcolor' => __( 'Regular', 'tourfic' ),
+					),
 				),
 				array(
 					'id'       => 'tourfic-button-color',

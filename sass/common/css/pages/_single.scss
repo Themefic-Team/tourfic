@@ -1,0 +1,785 @@
+
+@import '../base/variable';
+@import '../base/responsive';
+
+.tf-page-global {
+    background-color: #EBF0F4;
+    padding: 60px 0px;
+}
+.tf-tour-single{
+    margin-bottom: 120px;
+    @include breakpoint(tablet){
+        margin-bottom: 60px;
+    }
+}
+.tf-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0px 12px;
+}
+
+.tf-single-head{
+    h1{
+        color: #000;
+    }
+    i{
+        color: $color-theme;
+    }
+}
+
+.tf-single-details-wrapper{
+
+    .tf-tour-details-left {
+        flex-basis: 68%;
+
+        @include breakpoint(mobile){
+            flex-basis: 100%;
+        }
+        @include breakpoint(tablet){
+            flex-basis: 58%;
+        }
+    }
+    
+    .tf-tour-details-right {
+        flex-basis: 32%;
+        @include breakpoint(mobile){
+            flex-basis: 100%;
+            margin-top: 70px;
+        }
+        @include breakpoint(tablet){
+            flex-basis: 40%;
+            padding-left: $tf-space-12;
+        }
+    }
+}
+
+// Header Info Style 
+.tf-head-info{
+    .tf-icon {
+        height: 50px;
+        width: 50px;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+    }
+    .tf-icon:hover {
+        cursor: pointer;
+    }
+    .tf-icon:hover i {
+        transform: scale(1.2);
+        color: $color-theme;
+    }
+    .tf-icon i {
+        transition: all .3s ease;
+    }
+}
+.tf-head-title{
+    h1{
+        margin-bottom:$tf-space-12;
+    }
+}
+
+// Tourfic Gallery 
+.tf-hero-gallery{
+    width: 100%;
+    display: inline-block;
+
+    img{
+        width: 100%;
+        border-radius: 5px;
+    }
+    .tf-gallery-featured {
+        position: relative;
+        margin-bottom: 10px;
+        .featured-column {
+            background: #fff;
+            border-radius: 5px;
+            a {
+                display: flex;
+                gap: 8px;
+                text-decoration: none;
+                color: #000;
+                line-height: 1em;
+                padding: 10px 12px;
+                border-radius: 5px;
+                transition: all .6s ease;
+                &:hover{
+                    background-color: $color-hover-normal;
+                    transition: all .6s ease;
+                }
+            }
+        }
+        .featured-meta-gallery-videos{
+            display: flex;
+            position: absolute;
+            top: calc(0px - -25px);
+            right: calc(0px - -25px);
+            gap: 24px;
+        }
+    }
+    .tf-gallery{
+        display: flex;
+        gap: 10px;
+        a {
+            width: 20%;
+            display: inline-block;
+            float: left;
+            display: none;
+            position: relative;
+        }
+        a.tf-gallery-more {
+            position: relative;
+
+            &::before{
+                content: "View More → ";
+                position: absolute;
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                z-index: 1;
+                background: #0000009c;
+            }
+        }
+    }
+
+    .tf-gallery a:nth-child(1) {
+        display: block;
+    }
+    .tf-gallery a:nth-child(2) {
+        display: block;
+    }
+    .tf-gallery a:nth-child(3) {
+        display: block;
+    }
+    .tf-gallery a:nth-child(4) {
+        display: block;
+    }
+    .tf-gallery a:nth-child(5) {
+        display: block;
+    }
+}
+
+
+// Tour Details start
+.tf-trip-info{
+    background-color: #fff;
+    border-radius: $tf-brds-default;
+
+    // trip info -
+    .active {
+        background: #F3F7FA;
+    }
+    ul {
+        padding: 0;
+        list-style: none;
+    }
+    li {
+        font-size: $font-size-small;
+        font-family: $font-primary;
+        color: $color-primary;
+        margin-top: $tf-space-8;
+        
+        i{
+            margin-right: 10px;
+            width: 10px;
+        }
+    } 
+    // trip person info
+    .person-info {
+        border: 1px solid #E3E6F0;
+        border-radius: $tf-brds-default;
+        box-shadow: 0px 9px 12px 0px #0e132305;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 8px;
+        width: 50px;
+        height: 60px;
+        
+        &:hover{
+            cursor: pointer;
+        }
+        p {
+            font-size: 12px;
+            font-weight: $font-weight-medium;
+            color: #000;
+        }
+        i {
+            color: $color-theme;
+        }
+    }
+    //pricing
+    .tf-trip-pricing {
+        flex-direction: column;
+        text-align: right;
+        color: $color-primary;
+        font-size: $font-size-small;
+        @include breakpoint(tablet){
+            text-align: left;
+        }
+        .tf-price-amount {
+            color: #060D1C;
+            font-size: 26px;
+            margin: 4px 0px;
+            font-weight: $font-weight-medium;
+            
+            @include breakpoint(mobile){
+                font-size: 22px;
+            }
+        }
+    }
+}
+
+//trip details 
+.tf-trip-description{
+    h2 {
+        font-size: 30px;
+    }
+    p {
+        margin-top: 30px;
+    }
+
+}
+.tf-trip-feature-blocks{
+    .tf-feature-block {
+        background: #fff;
+        box-shadow: 0px 13px 30px 0px #e0e8ee;
+        border-radius: $tf-brds-default;
+        padding: 20px;
+        width: 100%;
+        @include breakpoint(tablet){
+            padding: 24px;
+        }
+        i{
+            color: $color-theme;
+        }
+        h3{
+            font-size: $font-size-small;
+            color: $color-black;
+        }
+        p{
+            font-size: $font-size-xs;
+            color: $color-primary;
+            margin-top: $tf-space-8;
+        }
+    }
+}
+
+//highlights
+.tf-highlights-wrapper {
+    background: #fff;
+    border-radius: $tf-brds-default;
+    .tf-highlights-inner {
+        gap: 40px;
+        align-items: flex-start;
+    }
+
+    .highlights-list {
+        ul {
+            padding: 0;
+            margin-top: 20px;
+        }
+        li {
+            margin-top: 12px;
+            list-style: none;
+            line-height: 1.3;
+            i{
+                color: $color-theme;
+                width: 24px;
+            }
+        }
+    }
+}
+
+// Tourfic include exclude 
+.tf-inex-wrapper {
+    .tf-inex {
+        width: 100%;
+        background: #fff;
+        border-radius: $tf-brds-default;
+        h3 {
+            font-size: $font-size-medium;
+        }
+    }
+}
+
+// Tourfic Itinenary
+.tf-itinerary-wrapper{
+    .tf-itinerary-box {
+        background: #fff;
+        border-radius: $tf-brds-default;
+        @include breakpoint(mobile){
+            padding: 40px 24px;
+        }
+    }
+    .tf-single-itinerary-item{
+        padding-left: 40px;
+        border-bottom: 1px solid #EBF0F4;
+        padding-bottom: 24px;
+        padding-top: 24px;
+        .tf-itinerary-title{
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        @include breakpoint(mobile){
+            padding-left: 30px;
+        }
+
+        .tf-itinerary-content-box{
+           
+            @include breakpoint(mobile){
+                margin-left: -30px;
+            }
+            .tf-itinerary-content-img{
+                flex-basis: 20%;
+                @include breakpoint(mobile){
+                    flex-basis: 100%;
+                }
+            }
+            .tf-itinerary-content-details{
+                flex-basis: 80%;
+                @include breakpoint(mobile){
+                    flex-basis: 100%;
+                }
+            }
+            img{
+                width: 100%;
+            }
+        }
+        &:first-child {
+            padding-top: 0px;
+        }
+        &:last-child {
+            border: none;
+            padding-bottom: 0;
+        }
+        h3 {
+            position: relative;
+            font-size: 18px;
+            line-height: 1.4;
+        }
+        
+        &.active{
+            .accordion-checke::before {
+                border: 1px solid $color-theme;
+            }
+            .accordion-checke::after {
+                background: $color-theme;
+            }
+        }
+        
+        .itinerary-day{
+            color: $color-theme;
+        }
+        .accordion-checke {
+            position: relative;
+        }
+        .accordion-checke::before {
+            width: 20px;
+            height: 20px;
+            border: 1px solid $color-black;
+            border-radius: 50px;
+            position: absolute;
+            left: -40px;
+            top: calc(50% - 12px);
+            content: "";
+        }
+        .accordion-checke::after {
+            width: 8px;
+            height: 8px;
+            background: $color-black;
+            border-radius: 50px;
+            position: absolute;
+            top: calc(50% + -5px);
+            left: -33px;
+            content: "";
+        }
+        li{
+            color: $color-black-light;
+        }
+    }
+
+    
+    // .tf-itinerary-content-box {
+    //     height: 0;
+    //     overflow: hidden;
+    //     transition: height 0.5s ease-in-out;
+    // }
+    // .active .tf-itinerary-content-box{
+    //     height: auto;
+    //     overflow: visible;
+    //     transition: height 0.5s ease-in-out;
+    // }
+}
+
+.tf-itinerary-downloader{
+    background-color: $color-theme;
+    border-radius: $tf-brds-default;
+    h3,p{
+        color: #fff;
+    }
+    a{
+        color: $color-theme;
+    }
+    
+}
+
+// FAQ
+.tf-faq-wrapper {
+    .tf-faq-inner{
+        .tf-faq-single{
+            border-bottom: 1px solid #D1DAE0;
+        }
+        .active{
+            .tf-faq-single-inner{
+                background: #fff;
+                border-radius: $tf-brds-default;
+                margin: 30px 0px;
+                transition: all .6s ease;
+
+                i {
+                    color: $color-theme;
+                }
+            }
+        }
+    }
+    .tf-faq-single-inner{
+        padding: $tf-space-30;
+        .tf-faq-title{
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        h3{
+            line-height: 1.4;
+        }
+        @include breakpoint(mobile){
+            padding: $tf-space-24;
+        }
+    }
+}
+
+// TOC Section
+.tf-toc-wrapper{
+    .tf-section-head{
+        p{
+            margin-top: $tf-space-8;
+        }
+    }
+}
+
+// Tourfic review section
+.tf-review-wrapper{
+    .tf-review-data {
+        background: #fff;
+        border-radius: $tf-brds-default;
+        flex-basis: 20%;
+        @include breakpoint(mobile){
+            flex-basis: 100%;
+        }
+        @include breakpoint(tablet){
+            flex-basis: 100%;
+        }
+
+        .tf-list{
+            margin-top: -8px;
+        }
+        p,li{
+            font-family: $font-secondary;
+        }
+        .tf-review-data-average p {
+            background: #ECF2FF;
+            text-align: center;
+            font-size: 30px;
+            color: $color-theme;
+            font-weight: $font-weight-medium;
+            border-radius: $tf-brds-default;
+            width: 100px;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tf-review-data-label{
+            p{
+                color: $color-black;
+                font-weight: $font-weight-medium;
+            }
+        }
+        .tf-review-all-info {
+            li {
+                font-size: 14px;
+                color: $color-theme;
+            }
+        }
+
+        .tf-review-data-features {
+            flex-basis: 80%;
+            padding-left: 30px;
+
+            @include breakpoint(mobile){
+                flex-basis: 100%;
+                padding-left: 0px;
+            }
+            @include breakpoint(tablet){
+                flex-basis: 100%;
+                padding-left: 0px;
+            }
+
+            .tf-percent-progress{
+                column-gap: 70px;
+                flex-wrap: wrap;
+                @include breakpoint(mobile){
+                    column-gap: 16px;
+                }
+                @include breakpoint(tablet){
+                    column-gap: 24px;
+                }
+            }
+            .tf-progress-bar {
+                height: 7px;
+                background: #EAEDF6;
+                border-radius: 7px;
+            }
+            
+            .tf-progress-item {
+                width: 240px;
+                margin-bottom: 16px;
+
+                @include breakpoint(mobile){
+                    width: 140px;
+                }
+                @include breakpoint(tablet){
+                    width: 178px;
+                }
+            }
+            
+            .tf-progress-bar {
+                position: relative;
+                margin-bottom: 4px;
+            }
+            
+            .percent-progress {
+                position: absolute;
+                background: $color-theme;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                border-radius: 7px;
+            }
+        }
+    }
+
+    //Tourfic review reply
+    .tf-review-reply{
+        border-bottom: 1px solid #D3DDE5;
+        padding-bottom: 30px;
+
+        .tf-review-details{
+            .tf-review-ratings {
+                i {
+                    color: #FF6B00;
+                }
+                h3{
+                    font-size: 20px;
+                }
+            }
+            .tf-review-date{
+                li{
+                    color: $color-black;
+                    i{
+                        color: $color-black;
+                    }
+                }
+            }
+        }
+        .tf-review-author {
+            img {
+                object-fit: cover;
+                width: 120px;
+                height: 120px;
+            }
+        }
+    }
+
+    //Review form
+    .tf-review-form{
+        .tf-review-feature-items{
+            column-gap: 40px;
+            flex-wrap: wrap;
+            row-gap: 24px;
+            @include breakpoint(mobile){
+                column-gap: 16px;
+                row-gap: 24px;
+            }
+        }
+        .ratings-container{
+            input{
+                display: none;
+            }
+            span{
+                display: none;
+            }
+            i{
+                &:hover{
+                    color: $color-theme;
+                    cursor: pointer;
+                }
+                @include breakpoint(mobile){
+                    font-size: $font-size-small;
+                }
+            }
+        }
+        .tf-review-fields{
+            .tf-field{
+                padding: 15px 20px;
+                border: 1px solid #CDCFD0;
+                &::placeholder{
+                    color: $color-black;
+                }
+            }
+            .acceptance{
+                width: auto;
+            }
+            .tf-bttn-normal{
+                border: none;
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+
+//Tourfic tour booking form/sidebar
+.tf-tour-details-right {
+    padding-left: 30px;
+    @include breakpoint(mobile){
+        padding-left: 0px;
+    }
+
+    .tf-tour-booking-box  {
+        background: #fff;
+        border-radius: $tf-brds-default;
+    }
+    .tf-booking-price{
+        border-bottom: 1px solid #EBF0F4;
+        p{
+            font-size: $font-size-large;
+            font-weight: $font-weight-medium;
+            color: $color-black;
+            span{
+                font-size: $font-size-small;
+                font-weight: $font-weight-normal;
+            }
+        }
+    }
+    .tf-form-title{
+        p{
+            color: $color-black;
+        }
+    }
+    .tf-tour-extra {
+        padding: 16px 24px;
+        border: 1px solid #EBF0F4;
+        border-radius: $tf-brds-default;
+        p{
+            line-height: 1.3;
+            font-size: $font-size-small;
+        }
+    }
+    
+    .tf-booking-bttns{
+        a{
+            margin-top: 8px;
+            padding: 16px 24px;
+        }
+    }
+    .tf-data-info{
+        p{
+            font-size: $font-size-small;
+        }
+    }
+    .tf-tour-booking-advantages{
+        background-color: #fff;
+        border-radius: $tf-brds-default;
+
+        ul{
+            margin: 0px;
+        }
+        li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: $color-black;
+            i {
+                height: 38px;
+                width: 38px;
+                background: #fff;
+                border: 1px solid #ECF0F3;
+                box-shadow: 0px 9px 24px rgba(224, 235, 243, 0.75);
+                border-radius: $tf-brds-default;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+}
+
+
+// upcomming-tours
+
+.upcomming-tours{
+    padding-top: 120px;
+    border-top: 1px solid #D0E0EC;
+    @include breakpoint(tablet){
+        padding-top: 60px;
+    }
+    .tf-image-data {
+        height: 300px;
+        overflow: hidden;
+        border-radius: 5px;
+        position: relative;
+        img{
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    .tf-meta-location{
+        i{
+            color: $color-theme;
+        }
+    }
+    .tf-meta-data-price {
+        position: absolute;
+        bottom: 0px;
+        background: #fff;
+        padding: 15px 22px;
+        font-size: 12px;
+        span {
+            color: $color-theme;
+            font-size: 20px;
+            font-weight: 500;
+
+        }
+    }
+    .tf-meta-title {
+        margin-top: $tf-space-8;
+        h2 {
+            font-size: 22px;
+            line-height: 1.4;
+        }
+    }
+}
