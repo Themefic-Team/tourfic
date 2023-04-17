@@ -2299,6 +2299,10 @@ Steps
   padding: 12px 0;
 }
 
+.tf-inline-list {
+  display: inline-block;
+}
+
 .tf-field-text input {
   width: 100%;
   padding: 12px 8px 12px 12px;
@@ -3496,6 +3500,24 @@ Steps
 }
 .tf-field-number input::placeholder {
   color: #a6b1bf;
+}
+
+.tf-image-radio-group li {
+  display: inline-block;
+}
+.tf-image-radio-group li .tf-image-checkbox img {
+  width: 240px;
+}
+.tf-image-radio-group li .tf-image-checkbox > input {
+  display: none;
+}
+.tf-image-radio-group li .tf-image-checkbox > img {
+  cursor: pointer;
+  border: 3px solid transparent;
+}
+.tf-image-radio-group li .tf-image-checkbox > input:checked + img {
+  border-color: #607085;
+  border-radius: 5px;
 }
 
 /*# sourceMappingURL=tourfic-admin.css.map */

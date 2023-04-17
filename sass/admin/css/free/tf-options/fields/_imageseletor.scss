@@ -1,0 +1,19 @@
+.tf-image-radio-group{
+    li{
+        display: inline-block;
+        .tf-image-checkbox img{
+            width:240px;
+          }
+          .tf-image-checkbox > input{
+            display:none
+          }
+          .tf-image-checkbox > img{
+            cursor:pointer;
+            border:3px solid transparent;
+          }
+          .tf-image-checkbox > input:checked + img{
+            border-color: #607085;
+            border-radius:5px;
+          }
+    }
+}
