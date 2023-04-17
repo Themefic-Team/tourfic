@@ -51,13 +51,21 @@ TF_Settings::option( 'tf_settings', array(
 								),
 								array(
 									'id'       => 'single-hotel',
-									'type'     => 'select',
+									'type'     => 'imageselect',
 									'label'    => __( 'Select Single Template', 'tourfic' ),
-									'options'  => array(
-										'default' => __( 'Default Template', 'tourfic' ),
-										'design-1' => __( 'Design 1', 'tourfic' ),
+									'multiple' 		=> true,
+									'inline'   		=> true,
+									'options'   	=> array( 
+										'default' 			=> array(
+											'title'			=> 'Defult',
+											'url' 			=> TF_ASSETS_APP_URL."images/default-hotel.jpg",
+										),
+										'design-1' 				=> array(
+											'title'			=> 'Design 1',
+											'url' 			=> TF_ASSETS_APP_URL."images/default-hotel.jpg",
+										),
 									),
-									'default'  => 'default'
+									'default'   	=> 'default',
 								),
 								array(
 									'id'       => 'single-hotel-layout',
@@ -134,13 +142,21 @@ TF_Settings::option( 'tf_settings', array(
 								),
 								array(
 									'id'       => 'hotel-archive',
-									'type'     => 'select',
+									'type'     => 'imageselect',
 									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
-									'options'  => array(
-										'default' => __( 'Default Template', 'tourfic' ),
-										'design-1' => __( 'Design 1', 'tourfic' ),
+									'multiple' 		=> true,
+									'inline'   		=> true,
+									'options'   	=> array( 
+										'default' 			=> array(
+											'title'			=> 'Defult',
+											'url' 			=> TF_ASSETS_APP_URL."images/hotel-archive-default.jpg",
+										),
+										'design-1' 				=> array(
+											'title'			=> 'Design 1',
+											'url' 			=> TF_ASSETS_APP_URL."images/hotel-archive-default.jpg",
+										),
 									),
-									'default'  => 'default'
+									'default'   	=> 'default',
 								),
 								array(
 									'id'      => 'hotel_archive_notice',
@@ -162,13 +178,21 @@ TF_Settings::option( 'tf_settings', array(
 								),
 								array(
 									'id'       => 'single-tour',
-									'type'     => 'select',
+									'type'     => 'imageselect',
 									'label'    => __( 'Select Single Template', 'tourfic' ),
-									'options'  => array(
-										'default' => __( 'Default Template', 'tourfic' ),
-										'design-1' => __( 'Design 1', 'tourfic' ),
+									'multiple' 		=> true,
+									'inline'   		=> true,
+									'options'   	=> array( 
+										'default' 			=> array(
+											'title'			=> 'Defult',
+											'url' 			=> TF_ASSETS_APP_URL."images/default-tour.jpg",
+										),
+										'design-1' 				=> array(
+											'title'			=> 'Design 1',
+											'url' 			=> TF_ASSETS_APP_URL."images/default-tour.jpg",
+										),
 									),
-									'default'  => 'default'
+									'default'   	=> 'default',
 								),
 								array(
 									'id'       => 'single-tour-layout',
@@ -270,13 +294,21 @@ TF_Settings::option( 'tf_settings', array(
 								),
 								array(
 									'id'       => 'tour-archive',
-									'type'     => 'select',
+									'type'     => 'imageselect',
 									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
-									'options'  => array(
-										'default' => __( 'Default Template', 'tourfic' ),
-										'design-1' => __( 'Design 1', 'tourfic' ),
+									'multiple' 		=> true,
+									'inline'   		=> true,
+									'options'   	=> array( 
+										'default' 			=> array(
+											'title'			=> 'Defult',
+											'url' 			=> TF_ASSETS_APP_URL."images/tour-archive-default.jpg",
+										),
+										'design-1' 				=> array(
+											'title'			=> 'Design 1',
+											'url' 			=> TF_ASSETS_APP_URL."images/tour-archive-default.jpg",
+										),
 									),
-									'default'  => 'default'
+									'default'   	=> 'default',
 								),
 								array(
 									'id'      => 'tour_archive_notice',
