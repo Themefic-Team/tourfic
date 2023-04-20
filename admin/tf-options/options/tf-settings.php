@@ -221,6 +221,14 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
 					'subtitle' => __( 'The Email to receive all enquiry form submissions', 'tourfic' ),
 					'is_pro'   => true,
+				),
+				array(
+					'id'        => 't-auto-draft',
+					'type'      => 'switch',
+					'label'     => __( 'Are You Want Hide Expired Tours ?', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the tour will be auto-drafted after the date expired.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
 				)
 			),
 		),

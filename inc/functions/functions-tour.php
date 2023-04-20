@@ -1639,3 +1639,67 @@ if ( ! function_exists( 'tf_tour_search_ajax_callback' ) ) {
 		wp_die();
 	}
 }
+
+/* 
+* Tour will be auto draft after Expire
+* Author: Jahid
+*/
+
+add_action( 'wp', 'tf_setup_everydate_cron_job' );
+function tf_setup_everydate_cron_job() {
+    if ( ! wp_next_scheduled( 'tf_everydate_cron_job' ) ) {
+        wp_schedule_event( time(), 'tf_every_days', 'tf_everydate_cron_job' );
+    }
+}
+
+$tf_tours_autodrafts = ! empty( tfopt( 't-auto-draft' ) ) ? tfopt( 't-auto-draft' ) : '';
+if(!empty($tf_tours_autodrafts)){
+    add_action( 'tf_everydate_cron_job', 'tf_every_date_function' );
+}
+function tf_every_date_function() {
+    
+    $args = array(  
+        'post_type' => 'tf_tours',
+        'post_status' => 'publish',
+        'posts_per_page' => -1, 
+    );
+    $tour_loop = new WP_Query( $args ); 
+    while ( $tour_loop->have_posts() ) : $tour_loop->the_post(); 
+    $post_id          = get_the_ID();
+    $meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+    
+        if($meta['type']=="fixed"){
+            if( !empty($meta['fixed_availability']) && gettype($meta['fixed_availability'])=="string" ){
+                $tf_tour_unserial_fixed_date = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                    return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+                }, $meta['fixed_availability'] );
+                $tf_tour_unserial_fixed_date = unserialize( $tf_tour_unserial_fixed_date );
+                $fixed_availability = !empty( $tf_tour_unserial_fixed_date ) ? $tf_tour_unserial_fixed_date['date'] : [];
+            }else{
+                $fixed_availability = !empty( $meta['fixed_availability'] ) ? $meta['fixed_availability']['date'] : [];
+            }
+            if(!empty($fixed_availability)){
+                $show_fixed_tour    = [];
+                $show_fixed_tour[] = intval( strtotime( date( 'Y-m-d' ) ) >= strtotime( $fixed_availability['from'] ) && strtotime( date( 'Y-m-d' ) ) <= strtotime( $fixed_availability['to'] ) );
+                if(empty($show_fixed_tour['0'])){
+                    $tf_tour_data = array(
+                        'ID'          => $post_id,
+                        'post_status' => 'draft',
+                    );
+                    wp_update_post( $tf_tour_data );
+                }
+            }
+        }
+    endwhile;
+    wp_reset_postdata(); 
+    
+}
+
+add_filter( 'cron_schedules', 'tf_every_date_custom_interval' );
+function tf_every_date_custom_interval( $schedules ) {
+    $schedules['tf_every_days'] = array(
+        'interval' => 3 * 60,
+        'display' => __( 'Every 3 Minutes' ),
+    );
+    return $schedules;
+}
