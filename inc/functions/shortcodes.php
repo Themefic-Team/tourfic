@@ -693,7 +693,6 @@ function tf_search_result_shortcode( $atts, $content = null ){
 				// Main Query args
 				$filter_args = array(
 					'post_type'      => $post_type,
-					'post_status'    => 'publish',
 					'posts_per_page' => $post_per_page,
 					'paged'          => $paged,
 				);
@@ -706,7 +705,6 @@ function tf_search_result_shortcode( $atts, $content = null ){
 				if(!empty($displayed_results)){
 					$filter_args = array(
 						'post_type'      => $post_type,
-						'post_status'    => 'publish',
 						'posts_per_page' => $post_per_page,
 						'post__in'  => $displayed_results,
 					);
