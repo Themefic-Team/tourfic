@@ -371,7 +371,10 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
 
         ?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
-
+            <?php 
+            $disable_child_search = ! empty( tfopt( 'disable_child_search' ) ) ? tfopt( 'disable_child_search' ) : '';
+            $disable_infant_search = ! empty( tfopt( 'disable_infant_search' ) ) ? tfopt( 'disable_infant_search' ) : '';
+            ?>
 
             <div class="tf_homepage-booking">
                 <div class="tf_destination-wrap">
@@ -394,10 +397,17 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
                             <i class="fas fa-user"></i>
                         </span>
                         <div class="adults-text"><?php _e('1 Adults', 'tourfic'); ?></div>
-                        <div class="person-sep"></div>
-                        <div class="child-text"><?php _e('0 Children', 'tourfic'); ?></div>
+                        <?php 
+                        if(empty($disable_child_search)){ 
+                        ?>
+                            <div class="person-sep"></div>
+                            <div class="child-text"><?php _e('0 Children', 'tourfic'); ?></div>
+                        <?php } 
+                        if(empty($disable_infant_search)){
+                        ?>
                         <div class="person-sep"></div>
                         <div class="infant-text"><?php _e('0 Infant', 'tourfic'); ?></div>
+                        <?php } ?>
                     </div>
                     <div class="tf_acrselection-wrap">
                         <div class="tf_acrselection-inner">
@@ -409,6 +419,9 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
+                            <?php 
+                            if(empty($disable_child_search)){ 
+                            ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php _e('Children', 'tourfic'); ?></div>
                                 <div class="acr-select">
@@ -417,6 +430,9 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
+                            <?php } 
+                            if(empty($disable_infant_search)){
+                            ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php _e('Infant', 'tourfic'); ?></div>
                                 <div class="acr-select">
@@ -425,6 +441,7 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -487,7 +504,10 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
 
         ?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
-
+            <?php 
+            $disable_child_search = ! empty( tfopt( 'disable_child_search' ) ) ? tfopt( 'disable_child_search' ) : '';
+            $disable_infant_search = ! empty( tfopt( 'disable_infant_search' ) ) ? tfopt( 'disable_infant_search' ) : '';
+            ?>
             <div class="tf_homepage-booking">
                 <div class="tf_destination-wrap">
                     <div class="tf_input-inner">
@@ -530,10 +550,17 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
                             <i class="fas fa-user"></i>
                         </span>
                         <div class="adults-text"><?php _e('1 Adults', 'tourfic'); ?></div>
+                        <?php 
+                        if(empty($disable_child_search)){ 
+                        ?>
                         <div class="person-sep"></div>
                         <div class="child-text"><?php _e('0 Children', 'tourfic'); ?></div>
+                        <?php } 
+                        if(empty($disable_infant_search)){
+                        ?>
                         <div class="person-sep"></div>
                         <div class="infant-text"><?php _e('0 Infant', 'tourfic'); ?></div>
+                        <?php } ?>
                     </div>
                     <div class="tf_acrselection-wrap">
                         <div class="tf_acrselection-inner">
@@ -545,6 +572,9 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
+                            <?php 
+                            if(empty($disable_child_search)){ 
+                            ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php _e('Children', 'tourfic'); ?></div>
                                 <div class="acr-select">
@@ -553,6 +583,9 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
+                            <?php } 
+                            if(empty($disable_infant_search)){
+                            ?>
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php _e('Infant', 'tourfic'); ?></div>
                                 <div class="acr-select">
@@ -561,6 +594,7 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

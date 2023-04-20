@@ -968,6 +968,22 @@ TF_Settings::option( 'tf_settings', array(
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 				),
+				array(
+					'id'        => 'disable_child_search',
+					'type'      => 'switch',
+					'label'     => __( 'Disabled Child in Tour Search', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the child is not showing on the Search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 'disable_infant_search',
+					'type'      => 'switch',
+					'label'     => __( 'Disabled Infant in Tour Search', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the Infant is not showing on the Search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				)
 			),
 		),
 		// Design Options
