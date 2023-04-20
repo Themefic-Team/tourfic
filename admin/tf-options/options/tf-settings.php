@@ -225,8 +225,16 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'        => 't-auto-draft',
 					'type'      => 'switch',
-					'label'     => __( 'Are You Want Hide Expired Tours ?', 'tourfic' ),
-					'subtitle'  => __( 'If you enable this option, then the tour will be auto-drafted after the date expired.', 'tourfic' ),
+					'label'     => __( 'Expired Tours for Backend', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the tour will be auto-expired after the date expired.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 't-show-expire-tour',
+					'type'      => 'switch',
+					'label'     => __( 'Show All Tours (Publish + Expired)', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, all tours whose status is Published and Expired will be displayed', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 				)

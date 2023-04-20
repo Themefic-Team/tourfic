@@ -438,6 +438,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 	$startprice = $_GET['from'] ?? '';
 	$endprice   = $_GET['to'] ?? '';
 
+	$disable_child_search = ! empty( tfopt( 'disable_child_search' ) ) ? tfopt( 'disable_child_search' ) : '';
 	?>
     <!-- Start Booking widget -->
     <form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
@@ -468,7 +469,9 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                 </div>
             </label>
         </div>
-
+		<?php if ( $post_type == 'tf_tours' ) { 
+		if(empty($disable_child_search)){ 	
+		?>
         <div class="tf_form-row">
             <label class="tf_label-row">
                 <div class="tf_form-inner">
@@ -485,6 +488,25 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                 </div>
             </label>
         </div>
+		<?php }} ?>
+		<?php if ( $post_type == 'tf_hotel' ) { ?>
+        <div class="tf_form-row">
+            <label class="tf_label-row">
+                <div class="tf_form-inner">
+                    <i class="fas fa-child"></i>
+                    <select name="children" id="children" class="">
+                        <option value="0">0 <?php _e( 'Children', 'tourfic' ); ?></option>
+                        <option <?php echo 1 == $children ? 'selected' : null ?> value="1">1 <?php _e( 'Children', 'tourfic' ); ?></option>
+						<?php foreach ( range( 2, 8 ) as $value ) {
+							$selected = $value == $children ? 'selected' : null;
+							echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __( "Children", "tourfic" ) . '</option>';
+						} ?>
+
+                    </select>
+                </div>
+            </label>
+        </div>
+		<?php } ?>
 		<?php if ( $post_type == 'tf_hotel' ) { ?>
             <div class="tf_form-row">
                 <label class="tf_label-row">
@@ -750,11 +772,26 @@ function tf_search_result_ajax_sidebar() {
 	$post_per_page = tfopt('posts_per_page') ? tfopt('posts_per_page') : 10;
 	// $paged = !empty($_POST['page']) ? absint( $_POST['page'] ) : 1;
 	// Properties args
-	$args = array(
-		'post_type'      => $posttype,
-		'post_status'    => 'publish',
-        'posts_per_page' => -1
-	);
+	if($posttype=="tf_tours"){
+		$tf_expired_tour_showing = ! empty( tfopt( 't-show-expire-tour' ) ) ? tfopt( 't-show-expire-tour' ) : '';
+		if(!empty($tf_expired_tour_showing )){
+			$tf_tour_posts_status = array('publish','expired');
+		}else{
+			$tf_tour_posts_status = array('publish');
+		}
+
+		$args = array(
+			'post_type'      => $posttype,
+			'post_status'    => $tf_tour_posts_status,
+			'posts_per_page' => -1
+		);
+	}else{
+		$args = array(
+			'post_type'      => $posttype,
+			'post_status'    => 'publish',
+			'posts_per_page' => -1
+		);
+	}
 
 	if ( $search ) {
 
@@ -945,7 +982,6 @@ function tf_search_result_ajax_sidebar() {
 		if(!empty($displayed_results)){
 			$filter_args = array(
 				'post_type'      => $posttype,
-				'post_status'    => 'publish',
 				'posts_per_page' => $post_per_page,
 				'post__in'  => $displayed_results,
 			);

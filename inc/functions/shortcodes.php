@@ -553,11 +553,25 @@ function tf_search_result_shortcode( $atts, $content = null ){
 	
     $post_per_page = tfopt('posts_per_page') ? tfopt('posts_per_page') : 10;
     // Main Query args
-    $args = array(
-        'post_type'      => $post_type,
-        'post_status'    => 'publish',
-        'posts_per_page' => -1
-    );
+	if($post_type=="tf_tours"){
+		$tf_expired_tour_showing = ! empty( tfopt( 't-show-expire-tour' ) ) ? tfopt( 't-show-expire-tour' ) : '';
+		if(!empty($tf_expired_tour_showing )){
+			$tf_tour_posts_status = array('publish','expired');
+		}else{
+			$tf_tour_posts_status = array('publish');
+		}
+		$args = array(
+			'post_type'      => $post_type,
+			'post_status'    => $tf_tour_posts_status,
+			'posts_per_page' => -1
+		);
+	}else{
+		$args = array(
+			'post_type'      => $post_type,
+			'post_status'    => 'publish',
+			'posts_per_page' => -1
+		);
+	}
 
     $taxonomy_query = new WP_Term_Query(array(
         'taxonomy'   => $taxonomy,

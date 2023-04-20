@@ -1690,7 +1690,7 @@ if ( ! function_exists( 'tf_tour_search_ajax_callback' ) ) {
 add_action( 'wp', 'tf_setup_everydate_cron_job' );
 function tf_setup_everydate_cron_job() {
     if ( ! wp_next_scheduled( 'tf_everydate_cron_job' ) ) {
-        wp_schedule_event( time(), 'tf_every_days', 'tf_everydate_cron_job' );
+        wp_schedule_event( strtotime( 'midnight' ), 'daily', 'tf_everydate_cron_job' );
     }
 }
 
@@ -1726,7 +1726,7 @@ function tf_every_date_function() {
                 if(empty($show_fixed_tour['0'])){
                     $tf_tour_data = array(
                         'ID'          => $post_id,
-                        'post_status' => 'draft',
+                        'post_status' => 'expired',
                     );
                     wp_update_post( $tf_tour_data );
                 }
@@ -1737,11 +1737,43 @@ function tf_every_date_function() {
     
 }
 
-add_filter( 'cron_schedules', 'tf_every_date_custom_interval' );
-function tf_every_date_custom_interval( $schedules ) {
-    $schedules['tf_every_days'] = array(
-        'interval' => 3 * 60,
-        'display' => __( 'Every 3 Minutes' ),
-    );
-    return $schedules;
+/* 
+* Tour Expired Status Add
+* Author: Jahid
+*/
+
+function tf_tours_custom_status_creation(){
+    register_post_status( 'expired', array(
+        'label'                     => _x( 'Expired', 'post' ),
+        'label_count'               => _n_noop( 'Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>'),
+        'public'                    => true,
+        'exclude_from_search'       => false,
+        'show_in_admin_all_list'    => true,
+        'show_in_admin_status_list' => true
+    ));
 }
+add_action( 'init', 'tf_tours_custom_status_creation' );
+
+function tf_tours_custom_status_add_in_quick_edit() {
+    global $post;
+    if($post->post_type == 'tf_tours'){
+    echo "<script>
+    jQuery(document).ready( function() {
+        jQuery( 'select[name=\"_status\"]' ).append( '<option value=\"expired\">Expired</option>' );      
+    }); 
+    </script>";
+    }
+}
+add_action('admin_footer-edit.php','tf_tours_custom_status_add_in_quick_edit');
+function tf_tours_custom_status_add_in_post_page() {
+    global $post;
+        if($post->post_type == 'tf_tours'){
+        echo "<script>
+        jQuery(document).ready( function() {        
+            jQuery( 'select[name=\"post_status\"]' ).append( '<option value=\"expired\">Expired</option>' );
+        });
+        </script>";
+    }
+}
+add_action('admin_footer-post.php', 'tf_tours_custom_status_add_in_post_page');
+add_action('admin_footer-post-new.php', 'tf_tours_custom_status_add_in_post_page');
