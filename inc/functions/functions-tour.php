@@ -646,6 +646,8 @@ function tf_single_tour_booking_form( $post_id ) {
     // Continuous custom availability
     $custom_avail = !empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : '';
 
+    // Same Day Booking
+    $disable_same_day = !empty( $meta['disable_same_day'] ) ? $meta['disable_same_day'] : '';
     if ( $tour_type == 'fixed' ) {
         if( !empty($meta['fixed_availability']) && gettype($meta['fixed_availability'])=="string" ){
             $tf_tour_fixed_avail = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
@@ -918,6 +920,12 @@ function tf_single_tour_booking_form( $post_id ) {
                                         }
                                     }
 
+                                    if ($disable_same_day) {
+                                        echo '"today"';
+                                        if ($disable_specific) {
+                                            echo ",";
+                                        }
+                                    }
                                     if ($disable_specific) {
                                         echo '"' .$disable_specific. '"';
                                     }
