@@ -367,7 +367,7 @@ if ( !function_exists( 'get_tour_destinations' ) ) {
  * Called in shortcodes
  */
 if ( !function_exists('tf_tour_search_form_horizontal') ) {
-    function tf_tour_search_form_horizontal( $classes, $title, $subtitle ) {
+    function tf_tour_search_form_horizontal( $classes, $title, $subtitle, $author ) {
 
         ?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
@@ -461,6 +461,10 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
 
                 <div class="tf_submit-wrap">
                     <input type="hidden" name="type" value="tf_tours" class="tf-post-type"/>
+                    <?php 
+                    if($author){ ?>
+                    <input type="hidden" name="tf-author" value="<?php echo $author; ?>" class="tf-post-type"/>
+                    <?php } ?>
                     <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
                 </div>
 
@@ -500,7 +504,7 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
  * Called in shortcodes
  */
 if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
-    function tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle ) {
+    function tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle, $author ) {
 
         ?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
@@ -628,6 +632,10 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
                 
                 <div class="tf_submit-wrap">
                     <input type="hidden" name="type" value="tf_tours" class="tf-post-type"/>
+                    <?php 
+                    if($author){ ?>
+                    <input type="hidden" name="tf-author" value="<?php echo $author; ?>" class="tf-post-type"/>
+                    <?php } ?>
                     <button class="tf_button tf-submit tf-tours-btn btn-styled" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
                 </div>
 

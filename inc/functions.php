@@ -542,6 +542,10 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                 <input type="hidden" id="endprice" value="<?php echo $endprice; ?>">
 			<?php } ?>
 			<?php
+			if ( ! empty( $_GET['tf-author'] ) ) { ?>
+                <input type="hidden" id="tf_author" value="<?php echo esc_html($_GET['tf-author']); ?>">
+			<?php } ?>
+			<?php
 			$ptype = $_GET['type'] ?? get_post_type();
 			?>
             <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type"/>
@@ -735,6 +739,9 @@ function tf_search_result_ajax_sidebar() {
 	$startprice = ! empty( $_POST['startprice'] ) ? $_POST['startprice'] : '';
 	$endprice   = ! empty( $_POST['endprice'] ) ? $_POST['endprice'] : '';
 
+	// Author Id if any
+	$tf_author_ids   = ! empty( $_POST['tf_author'] ) ? $_POST['tf_author'] : '';
+
 	if(!empty($startprice) && !empty($endprice)){
         if($posttype=="tf_tours"){
             $data = array($adults, $child, $check_in_out, $startprice, $endprice);
@@ -783,13 +790,15 @@ function tf_search_result_ajax_sidebar() {
 		$args = array(
 			'post_type'      => $posttype,
 			'post_status'    => $tf_tour_posts_status,
-			'posts_per_page' => -1
+			'posts_per_page' => -1,
+			'author' => $tf_author_ids,
 		);
 	}else{
 		$args = array(
 			'post_type'      => $posttype,
 			'post_status'    => 'publish',
-			'posts_per_page' => -1
+			'posts_per_page' => -1,
+			'author' => $tf_author_ids,
 		);
 	}
 

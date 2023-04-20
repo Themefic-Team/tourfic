@@ -983,7 +983,7 @@ function tf_room_availability_callback() {
  * Called in shortcodes
  */
 if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
-	function tf_hotel_search_form_horizontal( $classes, $title, $subtitle ) {
+	function tf_hotel_search_form_horizontal( $classes, $title, $subtitle, $author ) {
 		if ( isset( $_GET ) ) {
 			$_GET = array_map( 'stripslashes_deep', $_GET );
 		}
@@ -1075,6 +1075,10 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 
                 <div class="tf_submit-wrap">
                     <input type="hidden" name="type" value="tf_hotel" class="tf-post-type"/>
+					<?php 
+                    if($author){ ?>
+                    <input type="hidden" name="tf-author" value="<?php echo $author; ?>" class="tf-post-type"/>
+                    <?php } ?>
                     <button class="tf_button tf-submit btn-styled" type="submit"><?php _e( 'Search', 'tourfic' ); ?></button>
                 </div>
 
@@ -1116,7 +1120,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
  * Called in shortcodes
  */
 if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
-	function tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle ) {
+	function tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle, $author ) {
 		if ( isset( $_GET ) ) {
 			$_GET = array_map( 'stripslashes_deep', $_GET );
 		}
@@ -1277,6 +1281,10 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
 
                 <div class="tf_submit-wrap">
                     <input type="hidden" name="type" value="tf_hotel" class="tf-post-type"/>
+					<?php 
+                    if($author){ ?>
+                    <input type="hidden" name="tf-author" value="<?php echo $author; ?>" class="tf-post-type"/>
+                    <?php } ?>
                     <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
                 </div>
 

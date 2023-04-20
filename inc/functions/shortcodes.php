@@ -377,6 +377,7 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 				'classes'   => '',
 				'fullwidth' => '',
 				'advanced'  => '',
+				'author'  => '',
 			),
 			$atts
 		)
@@ -451,9 +452,9 @@ function tf_search_form_shortcode( $atts, $content = null ) {
                 <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent <?php echo esc_attr( $child_age_limit ); ?>">
 					<?php
 					if ( $advanced == "enabled" ) {
-						tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle );
+						tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle, $author );
 					} else {
-						tf_hotel_search_form_horizontal( $classes, $title, $subtitle );
+						tf_hotel_search_form_horizontal( $classes, $title, $subtitle, $author );
 					}
 					?>
                 </div>
@@ -464,9 +465,9 @@ function tf_search_form_shortcode( $atts, $content = null ) {
                 <div id="tf-tour-booking-form" class="tf-tabcontent" <?php echo tf_is_search_form_single_tab( $type ) ? 'style="display:block"' : '' ?><?php echo esc_attr( $child_age_limit ); ?>>
 					<?php
 					if ( $advanced == "enabled" ) {
-						tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle );
+						tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle, $author );
 					} else {
-						tf_tour_search_form_horizontal( $classes, $title, $subtitle );
+						tf_tour_search_form_horizontal( $classes, $title, $subtitle, $author );
 					}
 					?>
                 </div>
@@ -523,6 +524,9 @@ function tf_search_result_shortcode( $atts, $content = null ){
     $startprice = isset( $_GET['from'] ) ? absint(sanitize_key($_GET['from'])) : '';
     $endprice = isset( $_GET['to'] ) ? absint(sanitize_key($_GET['to'])) : '';
 
+	// Author Id if any
+	$tf_author_ids = isset( $_GET['tf-author'] ) ? sanitize_key($_GET['tf-author']) : '';
+
     if(!empty($startprice) && !empty($endprice)){
         if($_GET['type']=="tf_tours"){
             $data = array($adults, $child, $check_in_out, $startprice, $endprice);
@@ -563,13 +567,15 @@ function tf_search_result_shortcode( $atts, $content = null ){
 		$args = array(
 			'post_type'      => $post_type,
 			'post_status'    => $tf_tour_posts_status,
-			'posts_per_page' => -1
+			'posts_per_page' => -1,
+			'author' => $tf_author_ids,
 		);
 	}else{
 		$args = array(
 			'post_type'      => $post_type,
 			'post_status'    => 'publish',
-			'posts_per_page' => -1
+			'posts_per_page' => -1,
+			'author' => $tf_author_ids,
 		);
 	}
 
