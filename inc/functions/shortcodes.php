@@ -1278,27 +1278,30 @@ function tf_vendor_post_callback($atts, $content = null){
 	);
 	
 	$tf_vendors_posts = new WP_Query($args);
+	if ( $tf_vendors_posts->have_posts() ) :
 	?>
-	<div class="tf_search_result sp-50">
-		<div class="archive_ajax_result <?php echo $style=="grid" ? esc_attr( 'tours-grid' ) : ''; ?> ">
-			<?php
-			ob_start();
-			if ( $tf_vendors_posts->have_posts() ) {
-				while ( $tf_vendors_posts->have_posts() ) {
-					$tf_vendors_posts->the_post();
-					if($type=="tf_tours"){
-						tf_tour_archive_single_item();
-					}else{
-						tf_hotel_archive_single_item();
-					}
-				}
-			}else{
-				echo __( 'No posts found', 'tourfic' );
-			}
-			?>
+	<div class="tf-widget-slider recent-tour-slider">
+		<div class="tf-hotel-grid">
+			<?php while ( $tf_vendors_posts->have_posts() ) {
+				$tf_vendors_posts->the_post();
+				$post_id          = get_the_ID();
+				$related_comments = get_comments( array( 'post_id' => $post_id ) );
+				?>
+				<div class="tf-slider-item" style="background-image: url(<?php echo !empty(get_the_post_thumbnail_url( $post_id, 'full' )) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>);">
+					<div class="tf-slider-content">
+						<div class="tf-slider-desc">
+							<h3>
+								<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+							</h3>
+							<p><?php echo wp_trim_words( get_the_excerpt(), 10 ); ?></p>
+
+						</div>
+					</div>
+				</div>
+			<?php } ?>
 		</div>
 	</div>
-	<?php
+	<?php endif;
 	wp_reset_postdata(); 
 	return ob_get_clean();
 }
