@@ -1342,6 +1342,7 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
             $fixed_availability = !empty( $tf_tour_unserial_fixed_date ) ? $tf_tour_unserial_fixed_date['date'] : [];
         }else{
             $fixed_availability = !empty( $meta['fixed_availability'] ) ? $meta['fixed_availability']['date'] : [];
+            $tf_tour_unserial_fixed_date = $meta['fixed_availability'];
         }
 
         $people_counter = 0;
