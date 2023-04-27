@@ -941,10 +941,10 @@ function tf_single_tour_booking_form( $post_id ) {
                                 } ?>
 
                                 ],
-
+                           
                                 <?php }
                                 if ($custom_avail == false) {
-                                    if ($disabled_day || $disable_range || $disable_specific) {
+                                    if ($disabled_day || $disable_range || $disable_specific || $disable_same_day) {
                                 ?>
 
                                 "disable": [
@@ -1451,7 +1451,7 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
             }
 
         } else {
-
+            $tf_disable_dates = explode(", ",$meta['disable_specific']);
             $people_counter = 0;
 
             // Max & Min People Check
@@ -1459,29 +1459,70 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
                 $people_counter ++;
             }
             if($people_counter > 0){
-                if(!empty($startprice) && !empty($endprice)){
-                    if(!empty($meta['adult_price'])){
-                        if($startprice<=$meta['adult_price'] && $meta['adult_price']<=$endprice){
-                            $has_tour = true; 
+                if( !empty($tf_disable_dates) ){
+                    
+                    $tf_disable_found = false;
+                    
+                    foreach ( $period as $date ) {
+                        if (in_array($date->format( 'Y/m/d' ), $tf_disable_dates)) {
+                            $tf_disable_found = true;
+                            break;
                         }
                     }
-                    if(!empty($meta['child_price'])){
-                        if($startprice<=$meta['child_price'] && $meta['child_price']<=$endprice){
-                            $has_tour = true; 
-                        }
-                    }
-                    if(!empty($meta['infant_price'])){
-                        if($startprice<=$meta['infant_price'] && $meta['infant_price']<=$endprice){
-                            $has_tour = true; 
-                        }
-                    }
-                    if(!empty($meta['group_price'])){
-                        if($startprice<=$meta['group_price'] && $meta['group_price']<=$endprice){
-                            $has_tour = true; 
+                
+                    if ( $tf_disable_found ) {
+                        $has_tour = false;
+                    }else{
+                        if(!empty($startprice) && !empty($endprice)){
+                            if(!empty($meta['adult_price'])){
+                                if($startprice<=$meta['adult_price'] && $meta['adult_price']<=$endprice){
+                                    $has_tour = true; 
+                                }
+                            }
+                            if(!empty($meta['child_price'])){
+                                if($startprice<=$meta['child_price'] && $meta['child_price']<=$endprice){
+                                    $has_tour = true; 
+                                }
+                            }
+                            if(!empty($meta['infant_price'])){
+                                if($startprice<=$meta['infant_price'] && $meta['infant_price']<=$endprice){
+                                    $has_tour = true; 
+                                }
+                            }
+                            if(!empty($meta['group_price'])){
+                                if($startprice<=$meta['group_price'] && $meta['group_price']<=$endprice){
+                                    $has_tour = true; 
+                                }
+                            }
+                        }else{
+                            $has_tour = true;
                         }
                     }
                 }else{
-                    $has_tour = true;
+                    if(!empty($startprice) && !empty($endprice)){
+                        if(!empty($meta['adult_price'])){
+                            if($startprice<=$meta['adult_price'] && $meta['adult_price']<=$endprice){
+                                $has_tour = true; 
+                            }
+                        }
+                        if(!empty($meta['child_price'])){
+                            if($startprice<=$meta['child_price'] && $meta['child_price']<=$endprice){
+                                $has_tour = true; 
+                            }
+                        }
+                        if(!empty($meta['infant_price'])){
+                            if($startprice<=$meta['infant_price'] && $meta['infant_price']<=$endprice){
+                                $has_tour = true; 
+                            }
+                        }
+                        if(!empty($meta['group_price'])){
+                            if($startprice<=$meta['group_price'] && $meta['group_price']<=$endprice){
+                                $has_tour = true; 
+                            }
+                        }
+                    }else{
+                        $has_tour = true;
+                    }
                 }
             }
 
