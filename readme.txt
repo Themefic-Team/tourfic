@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
 Tested up to: 6.2
-Stable tag: 2.9.14
+Stable tag: 2.9.15
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -408,6 +408,13 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.9.15 -  30 April 2023 =
+
+* Added: Same day booking enable/disable option
+* Added: Auto Expired Tour Status
+* Added: Disable infant & child on search form
+* Added: Disabled date Exclude from the search results
 
 = 2.9.14 -  13 April 2023 =
 

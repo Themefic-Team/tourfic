@@ -221,6 +221,22 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
 					'subtitle' => __( 'The Email to receive all enquiry form submissions', 'tourfic' ),
 					'is_pro'   => true,
+				),
+				array(
+					'id'        => 't-auto-draft',
+					'type'      => 'switch',
+					'label'     => __( 'Expired Tours for Backend', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the tour will be auto-expired after the date expired. (Status will be change after every 24 hours)', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 't-show-expire-tour',
+					'type'      => 'switch',
+					'label'     => __( 'Show All Tours (Publish + Expired)', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, all tours whose status is Published and Expired will be displayed', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
 				)
 			),
 		),
@@ -960,6 +976,22 @@ TF_Settings::option( 'tf_settings', array(
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 				),
+				array(
+					'id'        => 'disable_child_search',
+					'type'      => 'switch',
+					'label'     => __( 'Disabled Child in Tour Search', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the child is not showing on the Search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 'disable_infant_search',
+					'type'      => 'switch',
+					'label'     => __( 'Disabled Infant in Tour Search', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the Infant is not showing on the Search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				)
 			),
 		),
 		// Design Options

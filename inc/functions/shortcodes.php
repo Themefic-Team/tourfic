@@ -377,6 +377,7 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 				'classes'   => '',
 				'fullwidth' => '',
 				'advanced'  => '',
+				'author'  => '',
 			),
 			$atts
 		)
@@ -451,9 +452,9 @@ function tf_search_form_shortcode( $atts, $content = null ) {
                 <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent <?php echo esc_attr( $child_age_limit ); ?>">
 					<?php
 					if ( $advanced == "enabled" ) {
-						tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle );
+						tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle, $author );
 					} else {
-						tf_hotel_search_form_horizontal( $classes, $title, $subtitle );
+						tf_hotel_search_form_horizontal( $classes, $title, $subtitle, $author );
 					}
 					?>
                 </div>
@@ -464,9 +465,9 @@ function tf_search_form_shortcode( $atts, $content = null ) {
                 <div id="tf-tour-booking-form" class="tf-tabcontent" <?php echo tf_is_search_form_single_tab( $type ) ? 'style="display:block"' : '' ?><?php echo esc_attr( $child_age_limit ); ?>>
 					<?php
 					if ( $advanced == "enabled" ) {
-						tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle );
+						tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle, $author );
 					} else {
-						tf_tour_search_form_horizontal( $classes, $title, $subtitle );
+						tf_tour_search_form_horizontal( $classes, $title, $subtitle, $author );
 					}
 					?>
                 </div>
@@ -523,6 +524,9 @@ function tf_search_result_shortcode( $atts, $content = null ){
     $startprice = isset( $_GET['from'] ) ? absint(sanitize_key($_GET['from'])) : '';
     $endprice = isset( $_GET['to'] ) ? absint(sanitize_key($_GET['to'])) : '';
 
+	// Author Id if any
+	$tf_author_ids = isset( $_GET['tf-author'] ) ? sanitize_key($_GET['tf-author']) : '';
+
     if(!empty($startprice) && !empty($endprice)){
         if($_GET['type']=="tf_tours"){
             $data = array($adults, $child, $check_in_out, $startprice, $endprice);
@@ -553,11 +557,27 @@ function tf_search_result_shortcode( $atts, $content = null ){
 	
     $post_per_page = tfopt('posts_per_page') ? tfopt('posts_per_page') : 10;
     // Main Query args
-    $args = array(
-        'post_type'      => $post_type,
-        'post_status'    => 'publish',
-        'posts_per_page' => -1
-    );
+	if($post_type=="tf_tours"){
+		$tf_expired_tour_showing = ! empty( tfopt( 't-show-expire-tour' ) ) ? tfopt( 't-show-expire-tour' ) : '';
+		if(!empty($tf_expired_tour_showing )){
+			$tf_tour_posts_status = array('publish','expired');
+		}else{
+			$tf_tour_posts_status = array('publish');
+		}
+		$args = array(
+			'post_type'      => $post_type,
+			'post_status'    => $tf_tour_posts_status,
+			'posts_per_page' => -1,
+			'author' => $tf_author_ids,
+		);
+	}else{
+		$args = array(
+			'post_type'      => $post_type,
+			'post_status'    => 'publish',
+			'posts_per_page' => -1,
+			'author' => $tf_author_ids,
+		);
+	}
 
     $taxonomy_query = new WP_Term_Query(array(
         'taxonomy'   => $taxonomy,
@@ -673,7 +693,6 @@ function tf_search_result_shortcode( $atts, $content = null ){
 				// Main Query args
 				$filter_args = array(
 					'post_type'      => $post_type,
-					'post_status'    => 'publish',
 					'posts_per_page' => $post_per_page,
 					'paged'          => $paged,
 				);
@@ -686,7 +705,6 @@ function tf_search_result_shortcode( $atts, $content = null ){
 				if(!empty($displayed_results)){
 					$filter_args = array(
 						'post_type'      => $post_type,
-						'post_status'    => 'publish',
 						'posts_per_page' => $post_per_page,
 						'post__in'  => $displayed_results,
 					);
@@ -1260,27 +1278,30 @@ function tf_vendor_post_callback($atts, $content = null){
 	);
 	
 	$tf_vendors_posts = new WP_Query($args);
+	if ( $tf_vendors_posts->have_posts() ) :
 	?>
-	<div class="tf_search_result sp-50">
-		<div class="archive_ajax_result <?php echo $style=="grid" ? esc_attr( 'tours-grid' ) : ''; ?> ">
-			<?php
-			ob_start();
-			if ( $tf_vendors_posts->have_posts() ) {
-				while ( $tf_vendors_posts->have_posts() ) {
-					$tf_vendors_posts->the_post();
-					if($type=="tf_tours"){
-						tf_tour_archive_single_item();
-					}else{
-						tf_hotel_archive_single_item();
-					}
-				}
-			}else{
-				echo __( 'No posts found', 'tourfic' );
-			}
-			?>
+	<div class="tf-widget-slider recent-tour-slider">
+		<div class="tf-hotel-grid">
+			<?php while ( $tf_vendors_posts->have_posts() ) {
+				$tf_vendors_posts->the_post();
+				$post_id          = get_the_ID();
+				$related_comments = get_comments( array( 'post_id' => $post_id ) );
+				?>
+				<div class="tf-slider-item" style="background-image: url(<?php echo !empty(get_the_post_thumbnail_url( $post_id, 'full' )) ? get_the_post_thumbnail_url( $post_id, 'full' ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>);">
+					<div class="tf-slider-content">
+						<div class="tf-slider-desc">
+							<h3>
+								<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+							</h3>
+							<p><?php echo wp_trim_words( get_the_excerpt(), 10 ); ?></p>
+
+						</div>
+					</div>
+				</div>
+			<?php } ?>
 		</div>
 	</div>
-	<?php
+	<?php endif;
 	wp_reset_postdata(); 
 	return ob_get_clean();
 }
