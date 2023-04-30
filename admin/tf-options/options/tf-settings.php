@@ -226,7 +226,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'        => 't-auto-draft',
 					'type'      => 'switch',
 					'label'     => __( 'Expired Tours for Backend', 'tourfic' ),
-					'subtitle'  => __( 'If you enable this option, then the tour will be auto-expired after the date expired.', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the tour will be auto-expired after the date expired. (Status will be change after every 24 hours)', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 				),
