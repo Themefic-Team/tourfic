@@ -1630,7 +1630,7 @@ TF_Settings::option( 'tf_settings', array(
 
 		'emails'    => array(
 			'title'  => esc_html__( 'Emails', 'tourfic' ),
-			'icon'   => 'fa fa-cog',
+			'icon'   => 'fa fa-envelope-o',
 			'fields' => array(
 				array(
 					'id'   => 'email-settings',
@@ -1745,10 +1745,10 @@ TF_Settings::option( 'tf_settings', array(
 								// ),
 								//vendor email template
 								array(
-									'id'      => 'vendor_booking_email_template',
-									'type'    => 'editor',
-									'label'   => __( 'Vendor Notification Template', 'tourfic' ),
-									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ),
+									'id'          => 'vendor_booking_email_template',
+									'type'        => 'editor',
+									'label'       => __( 'Vendor Notification Template', 'tourfic' ),
+									'default'     => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ),
 									'description' => __( 'This template will be sent to vendor', 'tourfic' )
 								),
 								// array(

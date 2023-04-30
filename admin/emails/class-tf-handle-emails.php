@@ -359,7 +359,9 @@ class TF_Handle_Emails {
 
         $email_template_settings = !empty( tfopt( 'email_template_settings' ) ) ? tfopt( 'email_template_settings' ) : '';
         $admin_template          = !empty( $email_template_settings['admin_email_template'] ) ? $email_template_settings['admin_email_template'] : '';
-        echo print_r( $email_template_settings );
+        $admin_template_content = get_post( $admin_template );
+        $admin_template_content = $admin_template_content->post_content;
+        echo $admin_template_content;
         wp_die();
 
         //check if admin emails disable
