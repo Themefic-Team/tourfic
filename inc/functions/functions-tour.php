@@ -1463,15 +1463,17 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
             }
             
             $tf_disable_ranges = [];
-            foreach($tf_disable_range_dates as $disable_range){
-                // Create DateTime objects for the start and end dates of the range
-                $start = new DateTime($disable_range["from"]);
-                $end = new DateTime($disable_range["to"]);
+            if( !empty($tf_disable_range_dates) ){
+                foreach($tf_disable_range_dates as $disable_range){
+                    // Create DateTime objects for the start and end dates of the range
+                    $start = new DateTime($disable_range["from"]);
+                    $end = new DateTime($disable_range["to"]);
 
-                // Iterate over each day in the range and add it to the tf_disable_ranges array
-                while ($start <= $end) {
-                    $tf_disable_ranges[] = $start->format("Y/m/d");
-                    $start->add(new DateInterval("P1D"));
+                    // Iterate over each day in the range and add it to the tf_disable_ranges array
+                    while ($start <= $end) {
+                        $tf_disable_ranges[] = $start->format("Y/m/d");
+                        $start->add(new DateInterval("P1D"));
+                    }
                 }
             }
             $people_counter = 0;
