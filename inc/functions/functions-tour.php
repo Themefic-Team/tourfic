@@ -1452,6 +1452,28 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
 
         } else {
             $tf_disable_dates = explode(", ",$meta['disable_specific']);
+            if( !empty($meta['disable_range']) && gettype($meta['disable_range'])=="string" ){
+                $tf_tour_unserial_disable_date_range = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                    return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+                }, $meta['disable_range'] );
+                $tf_tour_unserial_disable_date_range = unserialize( $tf_tour_unserial_disable_date_range );
+                $tf_disable_range_dates = wp_list_pluck( $tf_tour_unserial_disable_date_range, 'date' );
+            }else{
+                $tf_disable_range_dates = wp_list_pluck( $meta['disable_range'], 'date' );
+            }
+            
+            $tf_disable_ranges = [];
+            foreach($tf_disable_range_dates as $disable_range){
+                // Create DateTime objects for the start and end dates of the range
+                $start = new DateTime($disable_range["from"]);
+                $end = new DateTime($disable_range["to"]);
+
+                // Iterate over each day in the range and add it to the tf_disable_ranges array
+                while ($start <= $end) {
+                    $tf_disable_ranges[] = $start->format("Y/m/d");
+                    $start->add(new DateInterval("P1D"));
+                }
+            }
             $people_counter = 0;
 
             // Max & Min People Check
@@ -1459,12 +1481,12 @@ function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, arra
                 $people_counter ++;
             }
             if($people_counter > 0){
-                if( !empty($tf_disable_dates) ){
-                    
+                if( !empty($tf_disable_dates) || !empty($tf_disable_ranges) ){
+                    $tf_all_disable_dates = array_merge($tf_disable_dates,$tf_disable_ranges);
                     $tf_disable_found = false;
                     
                     foreach ( $period as $date ) {
-                        if (in_array($date->format( 'Y/m/d' ), $tf_disable_dates)) {
+                        if (in_array($date->format( 'Y/m/d' ), $tf_all_disable_dates)) {
                             $tf_disable_found = true;
                             break;
                         }
