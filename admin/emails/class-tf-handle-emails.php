@@ -499,36 +499,33 @@ class TF_Handle_Emails {
      *
      */
     public function send_mail_pro( $order_id ) {
+
+        $email_template_settings = $this::$tf_email_settings;
         
         $order = wc_get_order( $order_id );
         //get order details
-        $order_billing_name  = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
-        $order_billing_email = $order->get_billing_email();
-        $order_billing_phone = $order->get_billing_phone();
-        $order_billing_city  = $order->get_billing_city();
-        $order_billing_state = $order->get_billing_state();
-        $order_billing_zip   = $order->get_billing_postcode();
-        $order_billing_country = $order->get_billing_country();
-        $order_shipping_name  = $order->get_shipping_first_name() . ' ' . $order->get_shipping_last_name();
-        $order_shipping_email = $order->get_shipping_email();
-        $order_shipping_phone = $order->get_shipping_phone();
-        $order_shipping_city  = $order->get_shipping_city();
-        $order_shipping_state = $order->get_shipping_state();
-        $order_shipping_zip   = $order->get_shipping_postcode();
+        $order_billing_name     = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
+        $order_billing_email    = $order->get_billing_email();
+        $order_billing_phone    = $order->get_billing_phone();
+        $order_billing_city     = $order->get_billing_city();
+        $order_billing_state    = $order->get_billing_state();
+        $order_billing_zip      = $order->get_billing_postcode();
+        $order_billing_country  = $order->get_billing_country();
+        $order_shipping_name    = $order->get_shipping_first_name() . ' ' . $order->get_shipping_last_name();
+        $order_shipping_email   = $order->get_shipping_email();
+        $order_shipping_phone   = $order->get_shipping_phone();
+        $order_shipping_city    = $order->get_shipping_city();
+        $order_shipping_state   = $order->get_shipping_state();
+        $order_shipping_zip     = $order->get_shipping_postcode();
         $order_shipping_country = $order->get_shipping_country();
-        $order_total          = $order->get_total();
-        $order_currency       = $order->get_currency();
-        $order_date           = $order->get_date_created();
-        $order_date           = $order_date->date( 'Y-m-d H:i:s' );
-        $order_status         = $order->get_status();
-        $order_payment_method = $order->get_payment_method_title();
-        $order_payment_method = !empty( $order_payment_method ) ? $order_payment_method : __( 'N/A', 'tourfic' );
-        $order_payment_method = apply_filters( 'tf_order_payment_method', $order_payment_method, $order_id );
-        $order_payment_method = apply_filters( 'tf_order_payment_method_' . $order_payment_method, $order_payment_method, $order_id );
-        $order_payment_method = apply_filters( 'tf_order_payment_method_' . $order_payment_method . '_' . $order_status, $order_payment_method, $order_id );
-        $order_payment_method = apply_filters( 'tf_order_payment_method_' . $order_payment_method . '_' . $order_status . '_' . $order_currency, $order_payment_method, $order_id );
-        $order_payment_method = apply_filters( 'tf_order_payment_method_' . $order_payment_method . '_' . $order_status . '_' . $order_currency . '_' . $order_total, $order_payment_method, $order_id );
-
+        $order_total            = $order->get_total();
+        $order_currency         = $order->get_currency();
+        $order_date             = $order->get_date_created();
+        $order_date             = $order_date->date( 'Y-m-d H:i:s' );
+        $order_status           = $order->get_status();
+        $order_payment_method   = $order->get_payment_method_title();
+        $order_payment_method   = !empty( $order_payment_method ) ? $order_payment_method : __( 'N/A', 'tourfic' );
+        $order_payment_method   = apply_filters( 'tf_order_payment_method', $order_payment_method, $order_id );
 
     }
 
