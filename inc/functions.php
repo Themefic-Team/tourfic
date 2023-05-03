@@ -1753,3 +1753,40 @@ if( ! function_exists( 'tf_hotel_gallery_video' ) ){
 		}
 	}
 }
+
+if ( ! function_exists( 'tourfic_google_fonts_list' ) ) {
+	function tourfic_google_fonts_list(){
+		$google_api_key = 'AIzaSyAO60BBSFRsk3ylCaRjiQsKXLhfyZgANEQ'; // google fonts api key from joynal.9933 
+		$url = 'https://www.googleapis.com/webfonts/v1/webfonts?key='.$google_api_key;        
+		$data = file_get_contents($url);
+		if($data){
+			$fonts = json_decode($data, true);
+			$font_names = array();
+			foreach ($fonts['items'] as $font) {
+				$font_names[] = $font['family'];
+			}
+			$fonts_array = [];
+			foreach ($font_names as $font) {
+				$font_key = str_replace(" ", "_", $font);
+				$fonts_array[$font_key] = $font;
+			}
+			
+		}else{
+			$fonts_array = array();
+		}
+		return $fonts_array;
+	}
+}
+
+function tourfic_google_fonts_url(){
+	$tf_global_font = tfopt('global-body-fonts-family') ? tfopt('global-body-fonts-family') : 'Jost';
+	$tf_global_heading_font_family = tfopt('global-heading-fonts-family') ? tfopt('global-heading-fonts-family') : 'Jost';
+	$url = 'https://fonts.googleapis.com/css2?family='. $tf_global_font	.'&family='. $tf_global_heading_font_family .':wght@100;200;300;400;500;600;700;800;900&display=swap';
+	return $url;
+}
+
+function tourfic_google_fonts_scriptss() {
+	wp_enqueue_style( 'tourfic-google-fonts', tourfic_google_fonts_url(), array(), '' );
+}
+add_action( 'wp_enqueue_scripts', 'tourfic_google_fonts_scriptss', 9999999 );
+

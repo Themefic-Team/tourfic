@@ -31,6 +31,10 @@ if( !function_exists( 'tf_custom_css' ) ){
 		$tf_review_color = !empty(tf_data_types(tfopt( 'tourfic-review-style' ))['review_color']) ? tf_data_types(tfopt( 'tourfic-review-style' ))['review_color'] : '';
 		$tf_review_bg_color = !empty(tf_data_types(tfopt( 'tourfic-review-style' ))['review_bg_color']) ? tf_data_types(tfopt( 'tourfic-review-style' ))['review_bg_color'] : '';
 		
+		// Global Font Family
+		$tf_global_font_family = tfopt('global-body-fonts-family') ? tfopt('global-body-fonts-family') : 'Jost';
+		$tf_global_heading_font_family = tfopt('global-heading-fonts-family') ? tfopt('global-heading-fonts-family') : 'Jost';
+
 		$output = '';
 		
 		// Template 1 Global CSS
@@ -45,6 +49,19 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-global .tf-hotel-location-map .tf-hotel-location-preview a i,
 			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature {
 				background: '.$tf_template1_global_reg.';
+			}';
+		}
+		if( !empty($tf_global_font_family) ){
+			$output .= '
+			.tf-container-inner,
+			.tf-main-wrapper{
+				font-family: '.$tf_global_font_family.'
+			}';
+		}
+		if( !empty($tf_global_heading_font_family) ){
+			$output .= '
+			h1,h2,h3,h4,h5,h6{
+				font-family: '.$tf_global_heading_font_family.'
 			}';
 		}
 		if( !empty( $tf_template1_global_reg ) ){ $output .= '
