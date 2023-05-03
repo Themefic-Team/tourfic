@@ -68,7 +68,8 @@ table.tf-table {
     text-align: center;
     transition: all .6s ease;
     font-family: inherit;
-
+    border: 0px;
+    cursor: pointer;
     &:hover{
         background: $color-hover-normal;
     }

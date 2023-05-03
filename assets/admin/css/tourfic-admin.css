@@ -2054,6 +2054,9 @@ Steps
   font-size: 14px;
   margin-top: 10px;
 }
+.tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-tab-content > .tf-field.tf-field-heading {
+  border-radius: 0px;
+}
 .tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-tab-content > .tf-field.tf-field-color {
   background-color: transparent;
   padding: 0px;
