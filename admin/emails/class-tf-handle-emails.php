@@ -12,15 +12,18 @@ class TF_Handle_Emails {
     protected static $tf_email_settings;
     //Pro metabox email settings
     protected static $tf_mb_email_settings;
+    //Pro email template settings
+    protected static $tf_email_template_settings;
     /**
      * Constructor
      */
     public function __construct() {
         self::$tf_email_settings = tfopt( 'email-settings' ) ? tfopt( 'email-settings' ) : array();
+        self::$tf_email_template_settings = !empty( tfopt( 'email_template_settings' ) ) ? tfopt( 'email_template_settings' ) : array();
         //send mail after new woocommerce order thankyou page
         //add_action( 'phpmailer_init', array( $this, 'tf_send_attachment' ) );
         //add_action( 'woocommerce_order_status_completed', array( $this, 'send_email' ), 10, 1 );
-        add_action( 'woocommerce_thankyou', array( $this, 'send_email' ), 10, 1 );
+        add_action( 'woocommerce_thankyou', array( $this, 'send_mail_pro' ), 10, 1 );
 
     }
 
@@ -358,14 +361,7 @@ class TF_Handle_Emails {
             $admin_email_booking_body_full = wp_strip_all_tags( $admin_email_booking_body_full );
         } else {
             $admin_email_booking_body_full = wp_kses_post( html_entity_decode( $admin_email_booking_body_full, '3', 'UTF-8' ) );
-        }
-
-        $email_template_settings = !empty( tfopt( 'email_template_settings' ) ) ? tfopt( 'email_template_settings' ) : '';
-        $admin_template          = !empty( $email_template_settings['admin_email_template'] ) ? $email_template_settings['admin_email_template'] : '';
-        $admin_template_content  = get_post( $admin_template );
-        $admin_template_content  = $admin_template_content->post_content;
-        echo $admin_template_content;
-        wp_die();
+        }      
 
         //check if admin emails disable
         if ( isset( $admin_email_disable ) && $admin_email_disable == false ) {
@@ -499,8 +495,6 @@ class TF_Handle_Emails {
      *
      */
     public function send_mail_pro( $order_id ) {
-
-        $email_template_settings = $this::$tf_email_settings;
         
         $order = wc_get_order( $order_id );
         //get order details
@@ -512,7 +506,6 @@ class TF_Handle_Emails {
         $order_billing_zip      = $order->get_billing_postcode();
         $order_billing_country  = $order->get_billing_country();
         $order_shipping_name    = $order->get_shipping_first_name() . ' ' . $order->get_shipping_last_name();
-        $order_shipping_email   = $order->get_shipping_email();
         $order_shipping_phone   = $order->get_shipping_phone();
         $order_shipping_city    = $order->get_shipping_city();
         $order_shipping_state   = $order->get_shipping_state();
@@ -526,6 +519,23 @@ class TF_Handle_Emails {
         $order_payment_method   = $order->get_payment_method_title();
         $order_payment_method   = !empty( $order_payment_method ) ? $order_payment_method : __( 'N/A', 'tourfic' );
         $order_payment_method   = apply_filters( 'tf_order_payment_method', $order_payment_method, $order_id );
+
+        $email_template_settings = $this::$tf_email_template_settings;
+        $admin_template_id       = !empty( $email_template_settings['admin_email_template'] ) ? $email_template_settings['admin_email_template'] : '';
+        $admin_template_content  = get_post( $admin_template_id );
+        $admin_template_content  = !empty( $admin_template_content->post_content ) ? $admin_template_content->post_content : ' ';
+        echo $admin_template_content;
+        //email settings metabox value
+        $meta                    = get_post_meta( $admin_template_id, 'tf_email_templates_metabox', true );
+        $brand_logo              = !empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
+        $sale_notification_email = !empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
+        $email_subject           = !empty( $meta['email_subject'] ) ? $meta['email_subject'] : '';
+        $email_from_name         = !empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
+        $email_from_email        = !empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
+        $order_email_heading     = !empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
+        $email_bg                = !empty( $meta['email_bg'] ) ? $meta['email_bg'] : '';
+        echo '<pre>';
+        echo  print_r( $admin_email_template_settings );
 
     }
 
