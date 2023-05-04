@@ -288,7 +288,7 @@ if ( ! empty( $tf_ratings_for ) ) {
                             <div class="tf-rating-stars">
 								<?php echo $c_rating; ?>
                             </div>
-                            <div class="tf-description"><?php echo $c_content; ?></div>
+                            <div class="tf-description"><p><?php echo $c_content; ?></p></div>
                         </div>
                     </div>
 					<?php

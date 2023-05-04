@@ -1863,7 +1863,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                         <div class="featuredRooms">
                             <div class="prco-ltr-right-align-helper">
                                 <div class="tf-archive-shortdesc">
-									<?php echo substr( wp_strip_all_tags( get_the_content() ), 0, 160 ) . '...'; ?>
+									<p><?php echo substr( wp_strip_all_tags( get_the_content() ), 0, 160 ) . '...'; ?></p>
                                 </div>
                             </div>
                             <div class="roomNameInner">
