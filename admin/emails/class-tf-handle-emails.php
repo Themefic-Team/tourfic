@@ -23,7 +23,8 @@ class TF_Handle_Emails {
         //send mail after new woocommerce order thankyou page
         //add_action( 'phpmailer_init', array( $this, 'tf_send_attachment' ) );
         //add_action( 'woocommerce_order_status_completed', array( $this, 'send_email' ), 10, 1 );
-        add_action( 'woocommerce_thankyou', array( $this, 'send_mail_pro' ), 10, 1 );
+        //add_action( 'woocommerce_thankyou', array( $this, 'send_email' ), 10, 1 );
+        add_action( 'woocommerce_thankyou', array( $this, 'send_email_pro' ), 10, 1 );
 
     }
 
@@ -147,6 +148,57 @@ class TF_Handle_Emails {
 
     }
     /**
+     * Store the order details in a variable to reuse(for later use)
+     * @param  int $order_id
+     */
+    public static function order_details($order_id){
+        //get order details
+        $order                  = wc_get_order( $order_id );
+        $order_data             = $order->get_data();
+        $order_items            = $order->get_items();
+        $order_subtotal         = $order->get_subtotal();
+        $order_total            = $order->get_total();
+        $order_billing_name     = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
+        $order_billing_address  = $order->get_billing_address_1() . ' ' . $order->get_billing_address_2();
+        $order_billing_email    = $order->get_billing_email();
+        $order_billing_phone    = $order->get_billing_phone();
+        $order_billing_city     = $order->get_billing_city();
+        $order_billing_country  = $order->get_billing_country();
+        $order_billing_postcode = $order->get_billing_postcode();
+        $order_payment_method   = $order->get_payment_method();
+        $payment_method_title   = $order->get_payment_method_title();
+        $order_shipping_method  = $order->get_shipping_method();
+        $order_currency         = $order->get_currency();
+        $order_status           = $order->get_status();
+        $order_date_created     = $order->get_date_created();
+        $order_items_data       = array();
+        $order_url = get_edit_post_link( $order_id );
+
+        return array(
+            'order_id'              => $order_id,
+            'order_data'            => $order_data,
+            'order_items'           => $order_items,
+            'order_subtotal'        => $order_subtotal,
+            'order_total'           => $order_total,
+            'order_billing_name'    => $order_billing_name,
+            'order_billing_address' => $order_billing_address,
+            'order_billing_email'   => $order_billing_email,
+            'order_billing_phone'   => $order_billing_phone,
+            'order_billing_city'    => $order_billing_city,
+            'order_billing_country' => $order_billing_country,
+            'order_billing_postcode'=> $order_billing_postcode,
+            'order_payment_method'  => $order_payment_method,
+            'payment_method_title'  => $payment_method_title,
+            'order_shipping_method' => $order_shipping_method,
+            'order_currency'        => $order_currency,
+            'order_status'          => $order_status,
+            'order_date_created'    => $order_date_created,
+            'order_items_data'      => $order_items_data,
+            'order_url'             => $order_url,
+        );
+
+    }
+    /**
      * Send Email
      * @param string $to
      * @param string $subject
@@ -157,6 +209,8 @@ class TF_Handle_Emails {
 
         $email_settings      = self::$tf_email_settings;
         $order_email_heading = !empty( $email_settings['order_email_heading'] ) ? $email_settings['order_email_heading'] : '';
+
+        //$order_details = self::order_details($order_id); //later use
         //get order details
         $order                  = wc_get_order( $order_id );
         $order_data             = $order->get_data();
@@ -494,7 +548,7 @@ class TF_Handle_Emails {
      * @param  [int] $order_id [pass the order id]
      *
      */
-    public function send_mail_pro( $order_id ) {
+    public function send_email_pro( $order_id ) {
         
         $order = wc_get_order( $order_id );
         //get order details
@@ -521,9 +575,14 @@ class TF_Handle_Emails {
         $order_payment_method   = apply_filters( 'tf_order_payment_method', $order_payment_method, $order_id );
 
         $email_template_settings = $this::$tf_email_template_settings;
-        $admin_template_id       = !empty( $email_template_settings['admin_email_template'] ) ? $email_template_settings['admin_email_template'] : '';
-        $admin_template_content  = get_post( $admin_template_id );
-        $admin_template_content  = !empty( $admin_template_content->post_content ) ? $admin_template_content->post_content : ' ';
+        $admin_confirmation_template_id       = !empty( $email_template_settings['admin_confirmation_email_template'] ) ? $email_template_settings['admin_confirmation_email_template'] : '';
+        $admin_cancellation_template_id       = !empty( $email_template_settings['admin_cancellation_email_template'] ) ? $email_template_settings['admin_cancellation_email_template'] : '';
+        $vendor_confirmation_template_id      = !empty( $email_template_settings['vendor_confirmation_email_template'] ) ? $email_template_settings['vendor_confirmation_email_template'] : '';
+        $vendor_cancellation_template_id      = !empty( $email_template_settings['vendor_cancellation_email_template'] ) ? $email_template_settings['vendor_cancellation_email_template'] : '';
+        $customer_confirmation_template_id    = !empty( $email_template_settings['customer_confirmation_email_template'] ) ? $email_template_settings['customer_confirmation_email_template'] : '';
+        $customer_cancellation_template_id    = !empty( $email_template_settings['customer_cancellation_email_template'] ) ? $email_template_settings['customer_cancellation_email_template'] : '';
+        $admin_confirmation_email_template  = get_post( $admin_confirmation_template_id );
+        $admin_template_content  = !empty( $admin_confirmation_email_template->post_content ) ? $admin_confirmation_email_template->post_content : ' ';
         echo $admin_template_content;
         //email settings metabox value
         $meta                    = get_post_meta( $admin_template_id, 'tf_email_templates_metabox', true );
@@ -533,10 +592,64 @@ class TF_Handle_Emails {
         $email_from_name         = !empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
         $email_from_email        = !empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
         $order_email_heading     = !empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-        $email_bg                = !empty( $meta['email_bg'] ) ? $meta['email_bg'] : '';
+        $email_heading_bg                = !empty( $meta['email_heading_bg'] ) ? $meta['email_heading_bg'] : '';
         echo '<pre>';
         echo  print_r( $admin_email_template_settings );
 
+    }
+
+    /**
+     * Send email when order status is confirmed
+     * @param  [int] $order_id [pass the order id]
+     *
+     */
+    public function send_confirmation_mail($order_id){
+        $order = wc_get_order( $order_id );
+        //get order details
+        $order_billing_name     = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
+        $order_billing_email    = $order->get_billing_email();
+        $order_billing_phone    = $order->get_billing_phone();
+        $order_billing_city     = $order->get_billing_city();
+        $order_billing_state    = $order->get_billing_state();
+        $order_billing_zip      = $order->get_billing_postcode();
+        $order_billing_country  = $order->get_billing_country();
+        $order_shipping_name    = $order->get_shipping_first_name() . ' ' . $order->get_shipping_last_name();
+        $order_shipping_phone   = $order->get_shipping_phone();
+        $order_shipping_city    = $order->get_shipping_city();
+        $order_shipping_state   = $order->get_shipping_state();
+        $order_shipping_zip     = $order->get_shipping_postcode();
+        $order_shipping_country = $order->get_shipping_country();
+        $order_total            = $order->get_total();
+        $order_currency         = $order->get_currency();
+        $order_date             = $order->get_date_created();
+        $order_date             = $order_date->date( 'Y-m-d H:i:s' );
+        $order_status           = $order->get_status();
+        $order_payment_method   = $order->get_payment_method_title();
+        $order_payment_method   = !empty( $order_payment_method ) ? $order_payment_method : __( 'N/A', 'tourfic' );
+        $order_payment_method   = apply_filters( 'tf_order_payment_method', $order_payment_method, $order_id );
+
+        $email_template_settings = $this::$tf_email_template_settings;
+        $enable_admin_email      = !empty( $email_template_settings['enable_admin_email'] ) ? $email_template_settings['enable_admin_email'] : '';
+        $admin_confirmation_template_id       = !empty( $email_template_settings['admin_confirmation_email_template'] ) ? $email_template_settings['admin_confirmation_email_template'] : '';
+        $vendor_confirmation_template_id      = !empty( $email_template_settings['vendor_confirmation_email_template'] ) ? $email_template_settings['vendor_confirmation_email_template'] : '';
+        $customer_confirmation_template_id    = !empty( $email_template_settings['customer_confirmation_email_template'] ) ? $email_template_settings['customer_confirmation_email_template'] : '';
+        //email settings metabox value
+        if( ! empty ( $enable_admin_email ) && $enable_admin_email == 1 ){
+            if( ! empty ( $admin_confirmation_template_id ) ){
+                
+                $admin_confirmation_email_template  = get_post( $admin_confirmation_template_id );
+                
+                $admin_confirmation_template_content  = !empty( $admin_confirmation_email_template->post_content ) ? $admin_confirmation_email_template->post_content : ' ';
+                $meta = get_post_meta( $admin_confirmation_template_id, 'tf_email_templates_metabox', true );
+                $brand_logo              = !empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
+                $sale_notification_email = !empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
+                $email_subject           = !empty( $meta['email_subject'] ) ? $meta['email_subject'] : '';
+                $email_from_name         = !empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
+                $email_from_email        = !empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
+                $order_email_heading     = !empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
+                $email_heading_bg                = !empty( $meta['email_heading_bg'] ) ? $meta['email_heading_bg'] : '';
+            }
+        }
     }
 
 }
