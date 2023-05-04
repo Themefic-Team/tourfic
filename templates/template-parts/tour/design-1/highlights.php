@@ -9,7 +9,7 @@ if($highlights){ ?>
         <div class="ft-highlights-details">
             <h2><?php _e( 'Highlights', 'tourfic' ); ?></h2>
             <div class="highlights-list">
-            <?php echo $highlights; ?>
+            <p><?php echo $highlights; ?></p>
             </div>
         </div>
     </div>

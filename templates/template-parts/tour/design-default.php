@@ -291,7 +291,7 @@
                 <div class="tf-highlight-item">
                     <div class="tf-highlight-text">
                         <h2 class="section-heading"><?php _e( 'Highlights', 'tourfic' ); ?></h2>
-                        <?php echo $highlights; ?>
+                        <p><?php echo $highlights; ?></p>
                     </div>
                     <?php if ( ! empty( $meta['hightlights_thumbnail'] ) ): ?>
                         <div class="tf-highlight-image">

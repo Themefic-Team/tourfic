@@ -10,7 +10,7 @@
                                 <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                                     <i class="fa-solid fa-location-dot"></i>
                                     <?php if ( $location ) {
-                                        echo '<a href="#tf-tour-map"><p>' . $location . '.</p></a>';
+                                        echo '<a href="#tf-tour-map">' . $location . '.</a>';
                                     } ?>
                                 </div>
                             </div>

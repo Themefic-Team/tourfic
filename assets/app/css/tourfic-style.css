@@ -4590,6 +4590,10 @@ div#tf-contact-info {
 .tf-single-head i {
   color: #0E3DD8;
 }
+.tf-single-head a {
+  text-decoration: none;
+  color: #686E7A;
+}
 
 .tf-single-details-wrapper .tf-tour-details-left {
   flex-basis: 68%;

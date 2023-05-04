@@ -17,7 +17,7 @@ if( ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) && tf_data_
                     <div class="tf-room-title">
                         <h3><?php echo esc_html( $room['title'] ); ?><h3>
                     </div>
-                    <div class="bed-facilities"><?php _e( $room['description'] ); ?></div>
+                    <div class="bed-facilities"><p><?php _e( $room['description'] ); ?></p></div>
                 </div>
                 <ul>
                     <?php if ( $footage ) { ?>
@@ -224,7 +224,7 @@ if( ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) && tf_data_
             }
             ?>
             </div>
-            <div class="bed-facilities"><?php _e( $room['description'] ); ?></div>
+            <div class="bed-facilities"><p><?php _e( $room['description'] ); ?></p></div>
         </div>
 
         <?php if ( $footage ) {?>

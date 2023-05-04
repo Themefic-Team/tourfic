@@ -24,7 +24,7 @@
                                 <div class="faq-icon"><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i></div>
                             </div>
                             <div class="tf-faq-content tf-mrtop-24">
-                            <?php echo wp_kses_post( $faq['description'] ); ?>
+                            <p><?php echo wp_kses_post( $faq['description'] ); ?></p>
                             </div>
                         </div>
                     </div>

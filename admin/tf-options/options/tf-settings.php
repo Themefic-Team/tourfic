@@ -1349,7 +1349,7 @@ TF_Settings::option( 'tf_settings', array(
 						'800' => __( '800(Extra Bold)', 'tourfic' ),
 						'900' => __( '900(Black)', 'tourfic' ),
 					),
-					'default'  => '400',
+					'default'  => '500',
 					'field_width' => 29,
 				),
 				array(
@@ -1391,7 +1391,7 @@ TF_Settings::option( 'tf_settings', array(
 						'800' => __( '800(Extra Bold)', 'tourfic' ),
 						'900' => __( '900(Black)', 'tourfic' ),
 					),
-					'default'  => '400',
+					'default'  => '500',
 					'field_width' => 29,
 				),
 				array(
@@ -1433,7 +1433,7 @@ TF_Settings::option( 'tf_settings', array(
 						'800' => __( '800(Extra Bold)', 'tourfic' ),
 						'900' => __( '900(Black)', 'tourfic' ),
 					),
-					'default'  => '400',
+					'default'  => '500',
 					'field_width' => 29,
 				),
 				array(
@@ -1475,7 +1475,7 @@ TF_Settings::option( 'tf_settings', array(
 						'800' => __( '800(Extra Bold)', 'tourfic' ),
 						'900' => __( '900(Black)', 'tourfic' ),
 					),
-					'default'  => '400',
+					'default'  => '500',
 					'field_width' => 29,
 				),
 				array(
@@ -1517,7 +1517,7 @@ TF_Settings::option( 'tf_settings', array(
 						'800' => __( '800(Extra Bold)', 'tourfic' ),
 						'900' => __( '900(Black)', 'tourfic' ),
 					),
-					'default'  => '400',
+					'default'  => '500',
 					'field_width' => 29,
 				),
 				array(
@@ -1559,7 +1559,7 @@ TF_Settings::option( 'tf_settings', array(
 						'800' => __( '800(Extra Bold)', 'tourfic' ),
 						'900' => __( '900(Black)', 'tourfic' ),
 					),
-					'default'  => '400',
+					'default'  => '500',
 					'field_width' => 29,
 				),
 				array(

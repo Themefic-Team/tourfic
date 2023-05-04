@@ -285,7 +285,7 @@
 
                             <div class="single-feature-box">
                                 <?php echo $feature_icon ?? ''; ?>
-                                <p class="feature-list-title"><?php echo $feature->name; ?></p>
+                                <span class="feature-list-title"><?php echo $feature->name; ?></span>
                             </div>
                         <?php } ?>
                     </div>
@@ -405,7 +405,7 @@
                                                             }
                                                             ?>
                                                 </div>
-                                                <div class="bed-facilities"><?php _e( $room['description'] ); ?></div>
+                                                <div class="bed-facilities"><p><?php _e( $room['description'] ); ?></p></div>
                                             </div>
 
                                             <?php if ( $footage ) { ?>
@@ -558,7 +558,7 @@
                                     <i class="fas fa-angle-down arrow"></i>
                                 </div>
                                 <div class="tf-faq-desc">
-                                    <?php echo wp_kses_post( $faq['description'] ); ?>
+                                    <p><?php echo wp_kses_post( $faq['description'] ); ?></p>
                                 </div>
                             </div>
                         <?php endforeach; ?>

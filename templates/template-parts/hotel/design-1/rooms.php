@@ -120,7 +120,7 @@ foreach ( $rooms as $key => $room ) {
                                             <h3><?php echo esc_html( $room['title'] ); ?><h3>
                                             <?php } ?>
                                         </div>
-                                        <div class="bed-facilities"><?php _e( $room['description'] ); ?></div>
+                                        <div class="bed-facilities"><p><?php _e( $room['description'] ); ?></p></div>
                                     </div>
                                     <ul>
                                         <?php if ( $footage ) { ?>
