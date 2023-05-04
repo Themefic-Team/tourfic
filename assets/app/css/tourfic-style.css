@@ -4816,6 +4816,9 @@ div#tf-contact-info {
   display: none;
   position: relative;
 }
+.tf-hero-gallery .tf-gallery a img {
+  height: 100%;
+}
 .tf-hero-gallery .tf-gallery a.tf-gallery-more {
   position: relative;
 }

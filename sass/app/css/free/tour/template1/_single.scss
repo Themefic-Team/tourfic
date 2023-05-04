@@ -266,6 +266,9 @@
             float: left;
             display: none;
             position: relative;
+            img{
+                height: 100%;
+            }
         }
         a.tf-gallery-more {
             position: relative;
