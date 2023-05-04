@@ -45,19 +45,11 @@ while ( have_posts() ) : the_post();
 	$has_in_wishlist = tf_has_item_in_wishlist( $post_id );
 
 	// Address
-
-	if( !empty($meta['location']) && gettype($meta['location'])=="string" ){
-        $tf_tours_adv_loction = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
-            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
-        }, $meta['location'] );
-        $tf_tour_loctions = unserialize( $tf_tours_adv_loction );
-		$location      = isset( $tf_tour_loctions['address'] ) ? $tf_tour_loctions['address'] : '';
+	$location = isset( $meta['text_location'] ) ? $meta['text_location'] : '';
+	
+	if( !empty($meta['location']) && tf_data_types($meta['location'])){
+		$location = !empty( tf_data_types($meta['location'])['address'] ) ? tf_data_types($meta['location'])['address'] : $location;
     }
-
-	$text_location = isset( $meta['text_location'] ) ? $meta['text_location'] : '';
-	if ( empty( $location ) ) {
-		$location = $text_location;
-	}
 	// Gallery
 	$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : array();
 	if ( $gallery ) {
@@ -69,8 +61,18 @@ while ( have_posts() ) : the_post();
 	$highlights = ! empty( $meta['additional_information'] ) ? $meta['additional_information'] : '';
 	// Informations
 	$tour_duration = ! empty( $meta['duration'] ) ? $meta['duration'] : '';
+	$duration_time = ! empty( $meta['duration_time'] ) ? $meta['duration_time'] : '';
+	$night         = ! empty( $meta['night'] ) ? $meta['night'] : false;
+	$night_count   = ! empty( $meta['night_count'] ) ? $meta['night_count'] : '';
 	$group_size    = ! empty( $meta['group_size'] ) ? $meta['group_size'] : '';
 	$language      = ! empty( $meta['language'] ) ? $meta['language'] : '';
+	$email         = ! empty( $meta['email'] ) ? $meta['email'] : '';
+	$phone         = ! empty( $meta['phone'] ) ? $meta['phone'] : '';
+	$fax           = ! empty( $meta['fax'] ) ? $meta['fax'] : '';
+	$website       = ! empty( $meta['website'] ) ? $meta['website'] : '';
+	$itinerary_map = ! empty( tfopt('itinerary_map') ) && function_exists('is_tf_pro') && is_tf_pro() ? tfopt('itinerary_map') : 0;
+	$map_settings = ! empty( tfopt('google-page-option')) ? tfopt('google-page-option') : 0;
+
 	/**
 	 * Get features
 	 * hotel_feature
@@ -155,7 +157,7 @@ while ( have_posts() ) : the_post();
         <!-- Hero section Start -->
         <div class="tf-hero-wrapper">
             <div class="tf-container">
-                <div class="tf-hero-content" style="background-image: url(<?php echo esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ); ?>);">
+                <div class="tf-hero-content" style="background-image: url(<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>);">
                     <div class="tf-hero-top">
                         <div class="tf-top-review">
 							<?php if ( $comments && ! $disable_review_sec == '1' ) { ?>
@@ -201,7 +203,7 @@ while ( have_posts() ) : the_post();
                     <div class="tf-hero-bottom-area">
 						<?php
 						$tour_video = ! empty( $meta['tour_video'] ) ? $meta['tour_video'] : '';
-						if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_video ) {
+						if ( !empty($tour_video) ) {
 							?>
                             <div class="tf-hero-btm-icon tf-tour-video" data-fancybox="tour-video" href="<?php echo $tour_video; ?>">
                                 <i class="fab fa-youtube"></i>
@@ -222,6 +224,47 @@ while ( have_posts() ) : the_post();
 							}
 						}
 						?>
+						<?php
+
+							if (  $email || $phone || $fax || $website) {
+								?>
+								<div class="tf-hero-btm-icon tf-tour-info" data-fancybox data-src="#tf-contact-info" href="<?php echo $tour_video; ?>">
+								<i class="fa fa-circle-info"></i>
+								</div>
+								<div class="tf-contact-info-wrapper" id="tf-contact-info" style="display:none">
+									<div class="tf-contact-info">
+										<h3><?php echo __( 'Contact Information' , 'tourfic' ) ?></h3>
+										<?php 
+										if(!empty($email)){ ?>
+											<div class="tf-email">
+												<strong><?php echo esc_html__( 'Email:', 'tourfic' ) ?></strong>
+												<p><a href="mailto:<?php echo esc_html( $email ) ?>"><?php echo esc_html( $email ) ?></a></p>
+											</div>
+										<?php } ?>
+										<?php 
+										if(!empty($phone)){ ?>
+											<div class="tf-phone">
+												<strong><?php echo esc_html__( 'Phone:', 'tourfic' ) ?></strong>
+												<p><a href="tel:<?php echo esc_html( $phone ) ?>"><?php echo esc_html( $phone ) ?></a></p>
+											</div>
+										<?php } ?>
+										<?php 
+										if(!empty($fax)){ ?>
+											<div class="tf-fax">
+												<strong><?php echo esc_html__( 'Fax:', 'tourfic' ) ?></strong>
+												<p><a href="tel:<?php echo esc_html( $fax ) ?>"><?php echo esc_html( $fax ) ?></a></p>
+											</div>
+										<?php } ?>
+										<?php 
+										if(!empty($website)){ ?>
+											<div class="tf-website">
+												<strong><?php echo esc_html__( 'Website:', 'tourfic' ) ?></strong>
+												<p><a target="_blank" href="<?php echo esc_html( $website ) ?>"><?php echo esc_html( $website ) ?></a></p>
+											</div>
+										<?php } ?>
+									</div>
+								</div>
+							<?php }	?>
                     </div>
                 </div>
             </div>
@@ -235,7 +278,7 @@ while ( have_posts() ) : the_post();
                     <div class="tf-title-left">
                         <h1><?php the_title(); ?></h1>
                         <!-- Start map link -->
-                        <div class="tf-map-link">
+                        <div class="tf-map-link" id="tf-map-location" data-location="<?php echo esc_attr( $location ) ?>">
 							<?php if ( $location ) {
 								echo '<a href="#tour-map"><span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $location . '.</span></a>';
 							} ?>
@@ -336,7 +379,33 @@ while ( have_posts() ) : the_post();
                                 <div class="tf-single-square-block first">
                                     <i class="fas fa-clock"></i>
                                     <h4><?php echo __( 'Duration', 'tourfic' ); ?></h4>
-                                    <p><?php echo esc_html( $tour_duration ); ?></p>
+                                    <p><?php echo esc_html( $tour_duration ); ?>
+									<span> 
+										<?php
+										if( $tour_duration > 1  ){
+											$dur_string = 's';
+											$duration_time_html = $duration_time . $dur_string;
+										}else{
+											$duration_time_html = $duration_time;
+										}
+										 echo " " . esc_html( $duration_time_html )?>
+									</span></p>
+									<?php if( $night ){ ?>
+                                    <p>
+										<?php echo esc_html( $night_count ); ?>
+										<span>
+											<?php
+											if(!empty($night_count)){
+												if( $night_count > 1  ){
+													echo esc_html__( 'Nights', 'tourfic' );
+												}else{
+													echo esc_html__( 'Night', 'tourfic'  );
+												}	
+											}										
+											?>
+										</span>
+									</p>
+									<?php } ?>
                                 </div>
 							<?php } ?>
 							<?php if ( $tour_type ) { ?>
@@ -456,7 +525,7 @@ while ( have_posts() ) : the_post();
         <!-- Travel Itinerary section Start -->
 		<?php
 		if ( function_exists('is_tf_pro') && is_tf_pro() ) {
-			do_action( 'after_itinerary_builder', $itineraries );
+			do_action( 'after_itinerary_builder', $itineraries, $itinerary_map );
 		} else {
 			?>
             <!-- Travel Itinerary section Start -->
@@ -466,7 +535,9 @@ while ( have_posts() ) : the_post();
                         <div class="tf-travel-itinerary-content">
                             <h2 class="section-heading"><?php _e( "Travel Itinerary", 'tourfic' ); ?></h2>
                             <div class="tf-travel-itinerary-items-wrapper">
-								<?php foreach ( $itineraries as $itinerary ) { ?>
+								<?php 
+								foreach ( $itineraries as $itinerary ) {
+								?>
                                     <div id="tf-accordion-wrapper">
                                         <div class="tf-accordion-head">
                                             <div class="tf-travel-time">
@@ -492,15 +563,14 @@ while ( have_posts() ) : the_post();
                     </div>
                 </div>
 
-				<!-- Itinerary map -->
-				<div id="tf-map"></div>
-
-			<?php }
-		} ?>
+			<?php
+			 }
+		} 
+		?>
         <!-- Travel Itinerary section End -->
 
         <!-- Map Section Start -->
-		<?php if ( $location ): ?>
+		<?php if ( ($location && $itinerary_map != 1) || ! $itineraries): ?>
             <div id="tour-map" class="tf-map-wrapper">
                 <div class="tf-container">
                     <div class="tf-row">
@@ -610,8 +680,14 @@ while ( have_posts() ) : the_post();
                     <div class="tf-container">
                         <div class="tf-slider-content-wrapper">
                             <div class="tf-suggestion-sec-head">
-                                <h2 class="section-heading"><?php echo __( 'You might also like', 'tourfic' ) ?></h2>
-                                <p><?php echo __( 'Travel is my life. Since 1999, I’ve been traveling around the world nonstop. If you also love travel, you’re in the right place!', 'tourfic' ) ?></p>
+								<?php 
+								if( !empty( tfopt('rt-title') ) ){ ?>
+                                	<h2 class="section-heading"><?php esc_html_e( tfopt('rt-title'), "tourfic" ) ?></h2>
+								<?php } ?>
+								<?php 
+								if( !empty( tfopt('rt-description') ) ){ ?>
+                                	<p><?php esc_html_e( tfopt('rt-description'), "tourfic" ) ?></p>
+								<?php } ?>
                             </div>
 
                             <div class="tf-slider-items-wrapper">

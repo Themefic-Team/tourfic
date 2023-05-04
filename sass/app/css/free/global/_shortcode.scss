@@ -19,6 +19,33 @@
             }
         }
     }
+    .tf-hotel-locations{
+        display: none;
+        #ui-id-1 {
+            li {
+                i{
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+    .tf-locations-show{
+        display: block;
+    }
+
+    .tf-tour-results{
+        display: none;
+        #ui-id-2 {
+            li {
+                i{
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+    .tf-destination-show{
+        display: block;
+    }
     .tf-hotel-results {
         position: absolute;
         border: 1px solid #d4d4d4;
@@ -495,6 +522,21 @@ span.close-aq {
         border-radius: 5px;
         height: 400px;
         object-fit: cover;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        position: relative;
+        z-index: 0;
+        &:before{
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: rgba(0, 0, 0, .5);
+            z-index: -1;
+            border-radius: 5px;
+        }
     }
 }
 .tf-single-item {
@@ -506,6 +548,21 @@ span.close-aq {
     border-radius: 5px;
     height: 400px;
     object-fit: cover;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 0;
+    &:before{
+        position: absolute;
+        content: "";
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, .5);
+        z-index: -1;
+        border-radius: 5px;
+    }
 }
 .tf-post-content {
     flex-grow: 1;

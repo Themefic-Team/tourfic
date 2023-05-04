@@ -145,20 +145,8 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 
 
         /**
-         * Hotel Location
+         * Hotel Min and Max Price
          */
-        $tf_hotellocationlists=array();
-        $tf_hotellocation = get_terms( array(
-            'taxonomy' => 'hotel_location',
-            'orderby' => 'title',
-            'order' => 'ASC',
-            'hide_empty' => false,
-            'hierarchical' => 0,
-        ) );
-        if ( $tf_hotellocation ) { 
-        foreach( $tf_hotellocation as $term ) {
-             $tf_hotellocationlists[] = $term->slug;
-        } }
 
         $tfhotel_min_max = array(
             'posts_per_page'=> -1,
@@ -230,21 +218,8 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         }
 
         /**
-         * Tour Destination
+         * Tour Min and Max Price
          */ 
-
-        $tf_tourdestinationlists=array();
-        $tf_tourdestination = get_terms( array(
-            'taxonomy' => 'tour_destination',
-            'orderby' => 'title',
-            'order' => 'ASC',
-            'hide_empty' => false,
-            'hierarchical' => 0,
-        ) );
-        if ( $tf_tourdestination ) { 
-        foreach( $tf_tourdestination as $term ) {
-             $tf_tourdestinationlists[] = $term->slug;
-        } }
 
         $tftours_min_max = array(
             'posts_per_page'=> -1,
@@ -271,7 +246,22 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 if(!empty($meta['group_price'])){
                     $tftours_min_maxprices[]=$meta['group_price'];
                 }
-                
+                if(!empty($meta['cont_custom_date'])){
+                    foreach($meta['cont_custom_date'] as $minmax){
+                        if(!empty($minmax['adult_price'])){
+                            $tftours_min_maxprices[]=$minmax['adult_price'];
+                        }
+                        if(!empty($minmax['child_price'])){
+                            $tftours_min_maxprices[]=$minmax['child_price'];
+                        }
+                        if(!empty($minmax['infant_price'])){
+                            $tftours_min_maxprices[]=$minmax['infant_price'];
+                        }
+                        if(!empty($minmax['group_price'])){
+                            $tftours_min_maxprices[]=$minmax['group_price'];
+                        }
+                    }
+                }
             endwhile;
 
         endif; wp_reset_query(); 
@@ -321,10 +311,8 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'room' => __('Room', 'tourfic'),
                 'sending_ques' => __('Sending your question...', 'tourfic'),
                 'no_found' => __('Not Found', 'tourfic'),
-                'tf_hotellocationlists' => isset($tf_hotellocationlists) ? $tf_hotellocationlists : '',
                 'tf_hotel_max_price' => isset($hotel_max_price) ? $hotel_max_price : '',
                 'tf_hotel_min_price' => isset($hotel_min_price) ? $hotel_min_price : '',
-                'tf_tourdestinationlists' => isset($tf_tourdestinationlists) ? $tf_tourdestinationlists : '',
                 'tf_tour_max_price' => isset($tour_max_price) ? $tour_max_price : '',
                 'tf_tour_min_price' => isset($tour_min_price) ? $tour_min_price : '',
                 'itinerarayday' => isset($itinerarayday) ? $itinerarayday : '',
@@ -334,7 +322,9 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'showlinegraph' => isset($showlinegraph) ? $showlinegraph : '',
                 'elevvationmode' => isset($elevvationmode) ? $elevvationmode : '',
                 'showitinerarychart' => isset($showitinerarychart) ? $showitinerarychart : '',
-                'showitinerarystatus' => isset($showitinerarystatus) ? $showitinerarystatus : ''
+                'showitinerarystatus' => isset($showitinerarystatus) ? $showitinerarystatus : '',
+	            'date_hotel_search' => tfopt( 'date_hotel_search' ),
+	            'date_tour_search' => tfopt( 'date_tour_search' )
             )
         );
         //wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/old/responsive.css', '', TOURFIC );

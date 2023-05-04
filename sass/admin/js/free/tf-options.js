@@ -440,7 +440,7 @@
             });
         }
 
-        $('textarea.wp_editor').each(function () {
+        $('textarea.wp_editor, textarea.tf_wp_editor').each(function () {
             let $id = $(this).attr('id');
             TF_wp_editor($id);
         });

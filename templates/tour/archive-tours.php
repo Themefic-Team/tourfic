@@ -24,12 +24,25 @@ if( $discount_type == 'percent' ){
 	$sale_price = number_format( ( $price - $discounted_price ),1 );
 }
 
+$tf_expired_tour_showing = ! empty( tfopt( 't-show-expire-tour' ) ) ? tfopt( 't-show-expire-tour' ) : '';
+if(!empty($tf_expired_tour_showing )){
+	$tf_tour_posts_status = array('publish','expired');
+}else{
+	$tf_tour_posts_status = array('publish');
+}
+$args = array(
+    'post_type' => "tf_tours",
+    'orderby'   => 'date',
+    'order'     => 'DESC',
+    'post_status'    => $tf_tour_posts_status,
+);
+$loop = new WP_Query( $args );
+$total_posts = $loop->found_posts;
 ?>
 
 <div class="tf-main-wrapper" data-fullwidth="true">
 	<?php
 		do_action( 'tf_before_container' );
-		$post_count = $GLOBALS['wp_query']->post_count;
 	?>
 	<div class="tf-container">
 
@@ -37,8 +50,13 @@ if( $discount_type == 'percent' ){
 			<!-- Start Content -->
 			<div class="tf-search-left">				
 				<div class="tf-action-top">
-					<div class="tf-total-results">
-						<span><?php echo esc_html__( 'Total Results ', 'tourfic' ) . '(' . $post_count . ')'; ?> </span>
+					<div class="tf-result-counter-info">
+						<span class="tf-counter-title"><?php echo __( 'Total Results', 'tourfic' ); ?> </span>
+						<span><?php echo '('; ?> </span>
+						<div class="tf-total-results">
+							<span><?php echo $total_posts; ?> </span>
+						</div>
+						<span><?php echo ')'; ?> </span>
 					</div>
 		            <div class="tf-list-grid">
 		                <a href="#list-view" data-id="list-view" class="change-view" title="<?php _e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
@@ -47,9 +65,9 @@ if( $discount_type == 'percent' ){
 		        </div>
 				<div class="archive_ajax_result">
 					<?php
-					if ( have_posts() ) {
-						while ( have_posts() ) {
-							the_post();
+					if ( $loop->have_posts() ) {          
+						while ( $loop->have_posts() ) {
+							$loop->the_post();
 							tf_tour_archive_single_item();
 						}
 					} else {
