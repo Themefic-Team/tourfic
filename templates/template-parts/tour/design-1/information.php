@@ -9,7 +9,7 @@
                 <i class="fa-regular fa-clock"></i>
                 </div>
                 <div class="tf-feature-block-details">
-                    <h3><?php echo __( 'Duration', 'tourfic' ); ?></h3>
+                    <h5><?php echo __( 'Duration', 'tourfic' ); ?></h5>
                     <p><?php echo esc_html( $tour_duration ); ?>
                         <?php
                         if( $tour_duration > 1  ){
@@ -47,7 +47,7 @@
                     <i class="fa-regular fa-clock"></i>
                 </div>
                 <div class="tf-feature-block-details">
-                    <h3><?php echo __( 'Tour Type', 'tourfic' ); ?></h3>
+                    <h5><?php echo __( 'Tour Type', 'tourfic' ); ?></h5>
                     <p><?php echo ucfirst( esc_html( $tour_type ) ) ?></p>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                     <i class="fa-regular fa-clock"></i>
                 </div>
                 <div class="tf-feature-block-details">
-                    <h3><?php echo __( 'Group Size', 'tourfic' ); ?></h3>
+                    <h5><?php echo __( 'Group Size', 'tourfic' ); ?></h5>
                     <p><?php echo esc_html( $group_size ) ?></p>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                     <i class="fa-regular fa-clock"></i>
                 </div>
                 <div class="tf-feature-block-details">
-                    <h3><?php echo __( 'Language', 'tourfic' ); ?></h3>
+                    <h5><?php echo __( 'Language', 'tourfic' ); ?></h5>
                     <p><?php echo esc_html( $language ) ?></p>
                 </div>
             </div>

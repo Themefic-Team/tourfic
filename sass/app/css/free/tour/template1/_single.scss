@@ -69,6 +69,8 @@
     li {
         margin-top: 12px;
         list-style: none;
+        display: flex;
+        align-items: baseline;
         i{
             color: $color-theme;
             width: 24px;
@@ -165,6 +167,9 @@
                 }
             }
         }
+    }
+    .tf-title-meta{
+        align-items: baseline;
     }
 }
 .tf-head-title{
@@ -676,7 +681,7 @@
         .tf-review-data-average p {
             background: #ECF2FF;
             text-align: center;
-            font-size: 30px;
+            font-size: 30px !important;
             color: $color-theme;
             font-weight: $font-weight-medium;
             border-radius: $tf-brds-default;
