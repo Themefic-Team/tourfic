@@ -2365,6 +2365,7 @@ Steps
 
 .tf-field-select select.tf-select {
   width: 100%;
+  max-width: 100%;
   padding: 12px 8px 12px 12px;
   border: 1px solid #c4cbd4;
   background-color: #f5f8ff;
