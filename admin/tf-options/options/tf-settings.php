@@ -1305,13 +1305,20 @@ TF_Settings::option( 'tf_settings', array(
 					'class'   => 'tf-field-class',
 				),
 				array(
+					'id'          => 'global-fonts-api',
+					'type'        => 'text',
+					'label'       => __( 'Google Fonts API Key', 'tourfic' ),
+					'subtitle'    => __( 'If you want to all Google fonts List, You can add Google fonts API.', 'tourfic' ),
+					'field_width' => 29,
+				),
+				array(
 					'id'          => 'global-body-fonts-family',
 					'type'        => 'select',
 					'label'       => __( 'Global Body Fonts Family', 'tourfic' ),
 					'subtitle'    => __( 'Global Body Fonts Family of Tourfic', 'tourfic' ),
 					'options'  => tourfic_google_fonts_list(),
 					'default' => 'Jost',
-					'field_width' => 45,
+					'field_width' => 29,
 				),
 				array(
 					'id'          => 'global-heading-fonts-family',
@@ -1320,7 +1327,7 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'    => __( 'Global Heading Fonts Family of Tourfic', 'tourfic' ),
 					'options'  => tourfic_google_fonts_list(),
 					'default' => 'Jost',
-					'field_width' => 45,
+					'field_width' => 29,
 				),
 				array(
 					'id'          => 'global-h1',

@@ -1756,9 +1756,13 @@ if( ! function_exists( 'tf_hotel_gallery_video' ) ){
 
 if ( ! function_exists( 'tourfic_google_fonts_list' ) ) {
 	function tourfic_google_fonts_list(){
-		$google_api_key = 'AIzaSyAO60BBSFRsk3ylCaRjiQsKXLhfyZgANEQ'; // google fonts api key from joynal.9933 
-		$url = 'https://www.googleapis.com/webfonts/v1/webfonts?key='.$google_api_key;        
-		$data = file_get_contents($url);
+		$google_api_key = !empty( tfopt('global-fonts-api') ) ? tfopt('global-fonts-api') : '';
+		if(!empty($google_api_key)){
+			$url = 'https://www.googleapis.com/webfonts/v1/webfonts?key='.$google_api_key;
+		}else{
+			$url = 'https://www.googleapis.com/webfonts/v1/webfonts?key='; 
+		}
+		$data = @file_get_contents($url); 
 		if($data){
 			$fonts = json_decode($data, true);
 			$font_names = array();
@@ -1772,7 +1776,9 @@ if ( ! function_exists( 'tourfic_google_fonts_list' ) ) {
 			}
 			
 		}else{
-			$fonts_array = array();
+			$fonts_array = array(
+				'Jost' => 'Jost',
+			);
 		}
 		return $fonts_array;
 	}
