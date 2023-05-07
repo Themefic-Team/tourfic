@@ -761,8 +761,13 @@ function tf_single_tour_booking_form( $post_id ) {
             }, $meta['allowed_time'] ?? []);
         }
     }
+    // Single Template Check
+    $tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : '';
+	$tf_tour_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-tour'] : '';
+	$tf_tour_selected_template = !empty($tf_tour_single_template) ? $tf_tour_single_template : $tf_tour_global_template;
+
     ob_start();
-	if( ! empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) && tf_data_types(tfopt( 'tf-template' ))['single-tour']=="design-1"){
+	if( $tf_tour_selected_template == "design-1" ){
 	?>
     <form class="tf_tours_booking">
         <div class="tf-field-group tf-mrtop-8">
