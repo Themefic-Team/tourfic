@@ -10,7 +10,7 @@ if ( ! class_exists( 'TF_color' ) ) {
 		}
 
 		public function render() {
-			$color_value = $_value = ( ! is_array( $this->value ) ) ? unserialize( $this->value ) : $this->value; ;
+			$color_value  = ( ! is_array( $this->value ) ) ? unserialize( $this->value ) : $this->value;
 
 			if ( isset( $this->field['colors'] ) && $this->field['multiple'] ) {
 				$inline = ( isset( $this->field['inline'] ) && $this->field['inline'] ) ? 'tf-inline' : '';
