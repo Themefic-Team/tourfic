@@ -82,7 +82,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-data-features .percent-progress,
 			.tf-template-global .tf-rooms-sections .tf-rooms .tf-availability-table thead,
 			.tf-template-global .tf-hotel-location-map .tf-hotel-location-preview a i,
-			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature {
+			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature,
+			.tf-template-global .tf-review-wrapper .tf-review-form .tf-review-form-container .tf-review-submit input[type="submit"] {
 				background: '.$tf_template1_global_reg.';
 			}';
 		}

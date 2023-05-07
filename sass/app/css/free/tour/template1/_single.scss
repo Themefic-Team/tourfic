@@ -74,6 +74,7 @@
         i{
             color: $color-theme;
             width: 24px;
+            margin-right: 5px;
         }
     }
 }
@@ -550,9 +551,9 @@
         .itinerary-day{
             color: $color-theme;
         }
-        .accordion-checke {
-            position: relative;
-        }
+        // .accordion-checke {
+        //     position: relative;
+        // }
         .accordion-checke::before {
             width: 20px;
             height: 20px;
@@ -604,6 +605,7 @@
                 border-radius: $tf-brds-default;
                 margin: 30px 0px;
                 transition: all .6s ease;
+                box-shadow: 0px 13px 30px 0px #e0e8ee;
                 .tf-faq-collaps{
                     .faq-icon{
                       i.fa-plus{
@@ -898,8 +900,8 @@
                     border-left-width: 0;
                     border-bottom-width: 0;
                     color: #ffffff;
-                    border-color: var(--ast-global-color-0);
-                    background: var(--ast-global-color-0);
+                    border-color: $color-theme;
+                    background: $color-theme;
                     border-radius: 2px;
                     padding-top: 15px;
                     padding-right: 30px;
