@@ -9,6 +9,47 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 	'title'     => 'Hotel Settings',
 	'post_type' => 'tf_hotel',
 	'sections'  => array(
+		'general' => array(
+			'title'  => __( 'General', 'tourfic' ),
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'        => 'featured',
+					'type'      => 'switch',
+					'label'     => __( 'Featured Hotel', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false,
+				),
+				array(
+					'id'          => 'featured_text',
+					'type'        => 'text',
+					'label'       => __( 'Hotel Featured Text', 'tourfic' ),
+					'subtitle'    => __( 'Enter Featured Hotel Text', 'tourfic' ),
+					'placeholder' => __( 'Enter Featured Hotel Text', 'tourfic' ),
+					'default' => __( 'Hot Deal', 'tourfic' ),
+					'dependency'  => array( 'featured', '==', true ),
+				),
+				array(
+					'id'       => 'tf_single_hotel_template',
+					'type'     => 'imageselect',
+					'label'    => __( 'Single Hotel Page Layout', 'tourfic' ),
+					'multiple' 		=> true,
+					'inline'   		=> true,
+					'options'   	=> array( 
+						'default' 			=> array(
+							'title'			=> 'Defult',
+							'url' 			=> TF_ASSETS_APP_URL."images/default-hotel.jpg",
+						),
+						'design-1' 				=> array(
+							'title'			=> 'Design 1',
+							'url' 			=> TF_ASSETS_APP_URL."images/design1-hotel.jpg",
+						),
+					),
+					'default'   	=> 'design-1',
+				),
+			),
+		),
 		'location'         => array(
 			'title'  => __( 'Location', 'tourfic' ),
 			'icon'   => 'fa-solid fa-location-dot',

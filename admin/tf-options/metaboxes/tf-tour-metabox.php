@@ -45,12 +45,22 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'dependency'  => array( 'tour_as_featured', '==', true ),
 				),
 				array(
-					'id'      => 'tour_single_page',
-					'type'    => 'select',
-					'label'   => __( 'Single Tour Page Layout', 'tourfic' ),
-					'options' => array(
-						'instant' => __( 'Default', 'tourfic' ),
+					'id'       => 'tf_single_tour_template',
+					'type'     => 'imageselect',
+					'label'    => __( 'Single Tour Page Layout', 'tourfic' ),
+					'multiple' 		=> true,
+					'inline'   		=> true,
+					'options'   	=> array( 
+						'default' 			=> array(
+							'title'			=> 'Defult',
+							'url' 			=> TF_ASSETS_APP_URL."images/default-tour.jpg",
+						),
+						'design-1' 				=> array(
+							'title'			=> 'Design 1',
+							'url' 			=> TF_ASSETS_APP_URL."images/design1-tour.jpg",
+						),
 					),
+					'default'   	=> 'design-1',
 				),
 
 				array(

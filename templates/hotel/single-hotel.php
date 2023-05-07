@@ -116,7 +116,12 @@ while ( have_posts() ) : the_post();
 	$share_text = get_the_title();
 	$share_link = get_permalink( $post_id );
 	
-    if( ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) && tf_data_types(tfopt( 'tf-template' ))['single-hotel']=="design-1"){
+	// Single Template Style
+	$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
+	$tf_hotel_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
+	$tf_hotel_selected_template = !empty($tf_hotel_single_template) ? $tf_hotel_single_template : $tf_hotel_global_template;
+
+    if( $tf_hotel_selected_template == "design-1" ){
 		include TF_TEMPLATE_PART_PATH . 'hotel/design-1.php';
 	}else{
 		include TF_TEMPLATE_PART_PATH . 'hotel/design-default.php';

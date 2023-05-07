@@ -1405,7 +1405,12 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 
 	?>
 	<?php 
-	if( ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) && tf_data_types(tfopt( 'tf-template' ))['single-hotel']=="design-1"){
+	// Single Template Style
+	$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
+	$tf_hotel_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
+	$tf_hotel_selected_template = !empty($tf_hotel_single_template) ? $tf_hotel_single_template : $tf_hotel_global_template;
+
+	if( $tf_hotel_selected_template == "design-1" ){
 	?>
 	<form id="tf-single-hotel-avail" class="widget tf-hotel-booking-sidebar tf-booking-form" method="get" autocomplete="off">
 
@@ -2521,7 +2526,13 @@ function tf_hotel_quickview_callback() {
 					$adult_number = ! empty( $room['adult'] ) ? $room['adult'] : '0';
 					$child_number = ! empty( $room['child'] ) ? $room['child'] : '0';
 					$num_room     = ! empty( $room['num-room'] ) ? $room['num-room'] : '0';
-					if( ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) && tf_data_types(tfopt( 'tf-template' ))['single-hotel']=="design-1"){
+
+					// Single Template Style
+					$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
+					$tf_hotel_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
+					$tf_hotel_selected_template = !empty($tf_hotel_single_template) ? $tf_hotel_single_template : $tf_hotel_global_template;
+
+					if( $tf_hotel_selected_template == "design-1" ){
 					?>
 					<h3><?php echo esc_html( $room['title'] ); ?></h3>
 					<div class="tf-template-1 tf-room-adv-info">

@@ -161,8 +161,8 @@ while ( have_posts() ) : the_post();
 
 	// Single Template
 
-	$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : '';
-	$tf_tour_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-tour'] : '';
+	$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
+	$tf_tour_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-tour'] : 'design-1';
 	$tf_tour_selected_template = !empty($tf_tour_single_template) ? $tf_tour_single_template : $tf_tour_global_template;
 	if( $tf_tour_selected_template == "design-1" ){
 		include TF_TEMPLATE_PART_PATH . 'tour/design-1.php';
