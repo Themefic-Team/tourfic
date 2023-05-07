@@ -14,6 +14,7 @@ class TF_Handle_Emails {
     protected static $tf_mb_email_settings;
     //Pro email template settings
     protected static $tf_email_template_settings;
+
     /**
      * Constructor
      */
@@ -37,7 +38,6 @@ class TF_Handle_Emails {
      *
      */
     public static function get_email_template( $template_type = 'order', $template = '', $sendto = 'admin' ) {
-
         $email_settings = self::$tf_email_settings;
         $templates      = array(
             'order'              => array(
@@ -210,7 +210,6 @@ class TF_Handle_Emails {
         $email_settings      = self::$tf_email_settings;
         $order_email_heading = !empty( $email_settings['order_email_heading'] ) ? $email_settings['order_email_heading'] : '';
 
-        //$order_details = self::order_details($order_id); //later use
         //get order details
         $order                  = wc_get_order( $order_id );
         $order_data             = $order->get_data();
@@ -549,7 +548,7 @@ class TF_Handle_Emails {
      *
      */
     public function send_email_pro( $order_id ) {
-        
+
         $order = wc_get_order( $order_id );
         //get order details
         $order_billing_name     = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
@@ -594,7 +593,7 @@ class TF_Handle_Emails {
         $order_email_heading     = !empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
         $email_heading_bg                = !empty( $meta['email_heading_bg'] ) ? $meta['email_heading_bg'] : '';
         echo '<pre>';
-        echo  print_r( $admin_email_template_settings );
+        print_r( $admin_email_template_settings );
 
     }
 
