@@ -96,7 +96,18 @@ if( !function_exists( 'tf_custom_css' ) ){
 		}
 		if( !empty($tf_global_heading_font_family) ){
 			$output .= '
-			h1,h2,h3,h4,h5,h6{
+			.tf-container-inner h1,
+			.tf-main-wrapper h1,
+			.tf-container-inner h2,
+			.tf-main-wrapper h2,
+			.tf-container-inner h3,
+			.tf-main-wrapper h3,
+			.tf-container-inner h4,
+			.tf-main-wrapper h4,
+			.tf-container-inner h5,
+			.tf-main-wrapper h5,
+			.tf-container-inner h6,
+			.tf-main-wrapper h6{
 				font-family: '.$tf_global_heading_font_family.'
 			}';
 		}
@@ -104,7 +115,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		// Global typo for P
 		if( !empty($tf_global_font_p) || !empty($tf_global_font_weight_p) || !empty($tf_global_font_style_p) ){
 			$output .= '
-			p{
+			.tf-container-inner p,
+			.tf-main-wrapper p{
 				font-weight: '.$tf_global_font_weight_p.' !important;
 				font-size: '.$tf_global_font_p.'px !important;
 				font-style: '.$tf_global_font_style_p.' !important
@@ -114,7 +126,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		// Global typo for H1
 		if( !empty($tf_global_font_h1) || !empty($tf_global_font_weight_h1) || !empty($tf_global_font_style_h1) ){
 			$output .= '
-			h1{
+			.tf-container-inner h1,
+			.tf-main-wrapper h1{
 				font-weight: '.$tf_global_font_weight_h1.' !important;
 				font-size: '.$tf_global_font_h1.'px !important;
 				font-style: '.$tf_global_font_style_h1.' !important
@@ -124,7 +137,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		// Global typo for H2
 		if( !empty($tf_global_font_h2) || !empty($tf_global_font_weight_h2) || !empty($tf_global_font_style_h2) ){
 			$output .= '
-			h2{
+			.tf-container-inner h2,
+			.tf-main-wrapper h2{
 				font-weight: '.$tf_global_font_weight_h2.' !important;
 				font-size: '.$tf_global_font_h2.'px !important;
 				font-style: '.$tf_global_font_style_h2.' !important
@@ -134,7 +148,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		// Global typo for H3
 		if( !empty($tf_global_font_h3) || !empty($tf_global_font_weight_h3) || !empty($tf_global_font_style_h3) ){
 			$output .= '
-			h3{
+			.tf-container-inner h3,
+			.tf-main-wrapper h3{
 				font-weight: '.$tf_global_font_weight_h3.' !important;
 				font-size: '.$tf_global_font_h3.'px !important;
 				font-style: '.$tf_global_font_style_h3.' !important
@@ -144,7 +159,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		// Global typo for H4
 		if( !empty($tf_global_font_h4) || !empty($tf_global_font_weight_h4) || !empty($tf_global_font_style_h4) ){
 			$output .= '
-			h4{
+			.tf-container-inner h4,
+			.tf-main-wrapper h4{
 				font-weight: '.$tf_global_font_weight_h4.' !important;
 				font-size: '.$tf_global_font_h4.'px !important;
 				font-style: '.$tf_global_font_style_h4.' !important
@@ -154,7 +170,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		// Global typo for H5
 		if( !empty($tf_global_font_h5) || !empty($tf_global_font_weight_h5) || !empty($tf_global_font_style_h5) ){
 			$output .= '
-			h5{
+			.tf-container-inner h5,
+			.tf-main-wrapper h5{
 				font-weight: '.$tf_global_font_weight_h5.' !important;
 				font-size: '.$tf_global_font_h5.'px !important;
 				font-style: '.$tf_global_font_style_h5.' !important
@@ -164,7 +181,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		// Global typo for H6
 		if( !empty($tf_global_font_h6) || !empty($tf_global_font_weight_h6) || !empty($tf_global_font_style_h6) ){
 			$output .= '
-			h6{
+			.tf-container-inner h6,
+			.tf-main-wrapper h6{
 				font-weight: '.$tf_global_font_weight_h6.' !important;
 				font-size: '.$tf_global_font_h6.'px !important;
 				font-style: '.$tf_global_font_style_h6.' !important

@@ -1758,12 +1758,19 @@ if ( ! function_exists( 'tourfic_google_fonts_list' ) ) {
 	function tourfic_google_fonts_list(){
 		$google_api_key = !empty( tfopt('global-fonts-api') ) ? tfopt('global-fonts-api') : '';
 		if(!empty($google_api_key)){
-			$url = 'https://www.googleapis.com/webfonts/v1/webfonts?key='.$google_api_key;
+			$tf_google_url = 'https://www.googleapis.com/webfonts/v1/webfonts?key='.$google_api_key;
 		}else{
-			$url = 'https://www.googleapis.com/webfonts/v1/webfonts?key='; 
+			$tf_google_url = 'https://www.googleapis.com/webfonts/v1/webfonts?key='; 
 		}
-		$data = @file_get_contents($url); 
-		if($data){
+		
+		$tf_response_status = wp_remote_get( $tf_google_url );
+		$status_check = json_decode($tf_response_status['body'],true);
+		if( !empty($status_check["error"]) ){
+			$fonts_array = array(
+				'Jost' => 'Jost',
+			);
+		}else{
+			$data = @file_get_contents($url);
 			$fonts = json_decode($data, true);
 			$font_names = array();
 			foreach ($fonts['items'] as $font) {
@@ -1774,11 +1781,6 @@ if ( ! function_exists( 'tourfic_google_fonts_list' ) ) {
 				$font_key = str_replace(" ", "_", $font);
 				$fonts_array[$font_key] = $font;
 			}
-			
-		}else{
-			$fonts_array = array(
-				'Jost' => 'Jost',
-			);
 		}
 		return $fonts_array;
 	}
