@@ -1,5 +1,5 @@
 <?php 
-if( ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) && tf_data_types(tfopt( 'tf-template' ))['single-hotel']=="design-1"){
+if( $tf_hotel_selected_template_check == "design-1" ){
 ?>
 <tr>
     <td class="description">

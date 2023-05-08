@@ -1770,7 +1770,7 @@ if ( ! function_exists( 'tourfic_google_fonts_list' ) ) {
 				'Jost' => 'Jost',
 			);
 		}else{
-			$data = @file_get_contents($url);
+			$data = @file_get_contents($tf_google_url);
 			$fonts = json_decode($data, true);
 			$font_names = array();
 			foreach ($fonts['items'] as $font) {

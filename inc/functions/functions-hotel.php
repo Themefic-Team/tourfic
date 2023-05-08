@@ -689,7 +689,11 @@ function tf_room_availability_callback() {
         </div>
     </div>
 	<?php 
-	if( ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) && tf_data_types(tfopt( 'tf-template' ))['single-hotel']=="design-1"){
+	// Single Template Style
+	$tf_hotel_single_template_check = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
+	$tf_hotel_global_template_check = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
+	$tf_hotel_selected_template_check = !empty($tf_hotel_single_template_check) ? $tf_hotel_single_template_check : $tf_hotel_global_template_check;
+	if( $tf_hotel_selected_template_check == "design-1" ){
 	?>
 	<table class="tf-availability-table">
 	<thead>
