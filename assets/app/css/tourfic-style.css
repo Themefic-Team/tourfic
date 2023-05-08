@@ -5125,8 +5125,8 @@ div#tf-contact-info {
   background: #fff;
   border-radius: 5px;
   margin: 30px 0px;
-  transition: all 0.6s ease;
   box-shadow: 0px 13px 30px 0px #e0e8ee;
+  transition: 0.6s all ease;
 }
 .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus {
   display: none;
@@ -5137,9 +5137,11 @@ div#tf-contact-info {
 }
 .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-content {
   display: block;
+  transition: all 0.5s linear;
 }
 .tf-faq-wrapper .tf-faq-inner .tf-faq-single-inner .tf-faq-content {
   display: none;
+  transition: all 0.65s ease;
 }
 .tf-faq-wrapper .tf-faq-single-inner {
   padding: 30px;
