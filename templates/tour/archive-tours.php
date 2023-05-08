@@ -30,14 +30,18 @@ if(!empty($tf_expired_tour_showing )){
 }else{
 	$tf_tour_posts_status = array('publish');
 }
+
+$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 $args = array(
     'post_type' => "tf_tours",
     'orderby'   => 'date',
     'order'     => 'DESC',
     'post_status'    => $tf_tour_posts_status,
+	'paged'          => $paged,
 );
 $loop = new WP_Query( $args );
 $total_posts = $loop->found_posts;
+$tf_total_results = 0;
 ?>
 
 <div class="tf-main-wrapper" data-fullwidth="true">
@@ -54,7 +58,7 @@ $total_posts = $loop->found_posts;
 						<span class="tf-counter-title"><?php echo __( 'Total Results', 'tourfic' ); ?> </span>
 						<span><?php echo '('; ?> </span>
 						<div class="tf-total-results">
-							<span><?php echo $total_posts; ?> </span>
+							<span><?php echo $tf_total_results; ?> </span>
 						</div>
 						<span><?php echo ')'; ?> </span>
 					</div>
@@ -69,12 +73,17 @@ $total_posts = $loop->found_posts;
 						while ( $loop->have_posts() ) {
 							$loop->the_post();
 							tf_tour_archive_single_item();
+							$tf_total_results+=1;
 						}
 					} else {
 						echo '<div class="tf-nothing-found" data-post-count="0" >' .__("No Tours Found!", "tourfic"). '</div>';
 					}
 					?>
 				</div>
+				<span class="tf-posts-count" hidden="hidden">
+				<?php echo $tf_total_results; ?>
+				</span>
+				
 				<div class="tf_posts_navigation">
 					<?php tourfic_posts_navigation(); ?>
 				</div>
