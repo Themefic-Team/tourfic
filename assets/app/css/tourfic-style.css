@@ -1436,6 +1436,10 @@ li.filter-item {
   gap: 15px;
 }
 
+.woocommerce-product-gallery .ct-image-container {
+  width: 100% !important;
+}
+
 @media only screen and (max-width: 1000px) {
   form.tf-review-form {
     gap: 20px;
