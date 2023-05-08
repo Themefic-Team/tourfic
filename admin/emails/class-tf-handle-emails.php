@@ -26,16 +26,11 @@ class TF_Handle_Emails {
         
         
         //send mail if Tourfic pro is active
-        //if( defined( 'TF_PRO')) {
-            //send confirmation mail
-            add_action( 'woocommerce_thankyou', array( $this, 'send_confirmation_email_pro' ), 10, 1 );
-            //send cancellation mail
-            add_action( 'woocommerce_order_status_cancelled', array( $this, 'send_cancellation_email_pro' ), 10, 1 );
-        //}else{
-            //send confirmation mail
-            add_action( 'woocommerce_order_status_completed', array( $this, 'send_email' ), 10, 1 );
-        //}
-
+        //send confirmation mail
+        add_action( 'woocommerce_thankyou', array( $this, 'send_email' ), 10, 1 );
+        add_action( 'woocommerce_thankyou', array( $this, 'send_confirmation_email_pro' ), 10, 1 );
+        //send cancellation mail
+        add_action( 'woocommerce_order_status_cancelled', array( $this, 'send_cancellation_email_pro' ), 10, 1 );
     }
 
     /**
@@ -235,6 +230,10 @@ class TF_Handle_Emails {
                 'admin'    => !empty( $email_settings['admin_confirmation_email_template'] ) ? $email_settings['admin_confirmation_email_template'] : '',
                 'customer' => !empty( $email_settings['customer_confirmation_email_template'] ) ? $email_settings['customer_confirmation_email_template'] : '',
             ),
+            'cancellation'      => array(
+                'admin'    => !empty( $email_settings['admin_cancellation_email_template'] ) ? $email_settings['admin_cancellation_email_template'] : '',
+                'customer' => !empty( $email_settings['customer_cancellation_email_template'] ) ? $email_settings['customer_cancellation_email_template'] : '',
+            ),
         );
 
         $content = !empty( $templates[$template_type][$sendto] ) ? $templates[$template_type][$sendto] : '';
@@ -249,6 +248,9 @@ class TF_Handle_Emails {
                 break;
             case 'order_confirmation':
                 $template = 'booking/confirmation.php';
+                break;
+            case 'cancellation':
+                $template = 'booking/cancellation.php';
                 break;
             default:
                 $template = 'booking/notification.php';
@@ -310,6 +312,23 @@ class TF_Handle_Emails {
                         'greeting_byline' => __( 'Your booking has been confirmed. Your booking and payment information is listed below.', 'tourfic' ),
                     ),
                 ),
+                'cancellation'  => array(
+                    'admin'    => array(
+                        'heading'         => __( 'A booking has been cancelled', 'tourfic' ),
+                        'greeting'        => __( 'Dear Admin,', 'tourfic' ),
+                        'greeting_byline' => __( 'A booking has been cancelled. The booking details are listed below.', 'tourfic' ),
+                    ),
+                    'vendor'   => array(
+                        'heading'         => __( 'A booking has been cancelled', 'tourfic' ),
+                        'greeting'        => __( 'Dear {fullname},', 'tourfic' ),
+                        'greeting_byline' => __( 'A booking has been cancelled. The booking details are listed below.', 'tourfic' ),
+                    ),
+                    'customer' => array(
+                        'heading'         => __( 'Your booking has been cancelled.', 'tourfic' ),
+                        'greeting'        => __( 'Dear {fullname},', 'tourfic' ),
+                        'greeting_byline' => __( 'Your booking has been cancelled. Your booking and payment information is listed below.', 'tourfic' ),
+                    ),
+                ),
 
             ),
         );
@@ -343,172 +362,174 @@ class TF_Handle_Emails {
      * @return void
      */
     public function send_email( $order_id ) {
-        //get order details
-        $order = wc_get_order( $order_id );        
-        $order_billing_email     = $order->get_billing_email();
+        if( ! function_exists( 'is_tf_pro' ) && is_tf_pro() == false ):
+            //get order details
+            $order = wc_get_order( $order_id );        
+            $order_billing_email     = $order->get_billing_email();
 
-        $email_settings      = self::$tf_email_settings;
-        $order_email_heading = !empty( $email_settings['order_email_heading'] ) ? $email_settings['order_email_heading'] : '';
+            $email_settings      = self::$tf_email_settings;
+            $order_email_heading = !empty( $email_settings['order_email_heading'] ) ? $email_settings['order_email_heading'] : '';
 
-        $brand_logo       = !empty( $email_settings['brand_logo'] ) ? $email_settings['brand_logo'] : '';
-        $email_heading_bg = !empty( $email_settings['email_heading_bg'] ) ? $email_settings['email_heading_bg']['bg_color'] : '#0209AF';
+            $brand_logo       = !empty( $email_settings['brand_logo'] ) ? $email_settings['brand_logo'] : '';
+            $email_heading_bg = !empty( $email_settings['email_heading_bg'] ) ? $email_settings['email_heading_bg']['bg_color'] : '#0209AF';
 
-        $send_notifcation        = !empty( $email_settings['send_notification'] ) ? $email_settings['send_notification'] : '';
-        $sale_notification_email = !empty( $email_settings['sale_notification_email'] ) ? $email_settings['sale_notification_email'] : get_bloginfo( 'admin_email' );
-        $admin_email_disable     = !empty( $email_settings['admin_email_disable'] ) ? $email_settings['admin_email_disable'] : false;
-        $admin_email_subject     = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] . " # " . $order_id : '';
-        $email_from_name         = !empty( $email_settings['email_from_name'] ) ? $email_settings['email_from_name'] : get_bloginfo( 'name' );
-        $email_from_email        = !empty( $email_settings['email_from_email'] ) ? $email_settings['email_from_email'] : get_bloginfo( 'admin_email' );
-        $email_content_type      = !empty( $email_settings['email_content_type'] ) ? $email_settings['email_content_type'] : 'text/html';
+            $send_notifcation        = !empty( $email_settings['send_notification'] ) ? $email_settings['send_notification'] : '';
+            $sale_notification_email = !empty( $email_settings['sale_notification_email'] ) ? $email_settings['sale_notification_email'] : get_bloginfo( 'admin_email' );
+            $admin_email_disable     = !empty( $email_settings['admin_email_disable'] ) ? $email_settings['admin_email_disable'] : false;
+            $admin_email_subject     = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] . " # " . $order_id : '';
+            $email_from_name         = !empty( $email_settings['email_from_name'] ) ? $email_settings['email_from_name'] : get_bloginfo( 'name' );
+            $email_from_email        = !empty( $email_settings['email_from_email'] ) ? $email_settings['email_from_email'] : get_bloginfo( 'admin_email' );
+            $email_content_type      = !empty( $email_settings['email_content_type'] ) ? $email_settings['email_content_type'] : 'text/html';
 
-        //mail headers
-        $charset = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
-        $headers = $charset . "\r\n";
-        $headers .= "MIME-Version: 1.0" . "\r\n";
-        $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
-        $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
-        $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+            //mail headers
+            $charset = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
+            $headers = $charset . "\r\n";
+            $headers .= "MIME-Version: 1.0" . "\r\n";
+            $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
+            $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
+            $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
 
-        //email body started
-        $email_body_open = $this->email_body_open( $email_heading_bg, $brand_logo, $order_email_heading );
+            //email body started
+            $email_body_open = $this->email_body_open( $email_heading_bg, $brand_logo, $order_email_heading );
 
-        $email_body_open               = str_replace( '{booking_id}', $order_id, $email_body_open );
-        $admin_booking_email_template  = !empty( $email_settings['admin_booking_email_template'] ) ? $email_settings['admin_booking_email_template'] : '';
-        $vendor_booking_email_template = !empty( $email_settings['vendor_booking_email_template'] ) ? $email_settings['vendor_booking_email_template'] : '';
-
-        //replace mail tags
-        $admin_booking_email_template = $this->replace_mail_tags( $admin_booking_email_template , $order_id );
-        //email body ended
-        $email_body_close  = $this->email_body_close();       
-       
-        $admin_email_booking_body_full = $email_body_open . $admin_booking_email_template . $email_body_close;
-        //decode entity
-        if ( $email_content_type == 'text/plain' ) {
-            //$admin_email_booking_body_full = html_entity_decode( $admin_email_booking_body_full, '3' , 'UTF-8' );
-            $admin_email_booking_body_full = wp_strip_all_tags( $admin_email_booking_body_full );
-        } else {
-            $admin_email_booking_body_full = wp_kses_post( html_entity_decode( $admin_email_booking_body_full, '3', 'UTF-8' ) );
-        }      
-
-        //check if admin emails disable
-        if ( isset( $admin_email_disable ) && $admin_email_disable == false ) {
-            if ( !empty( $admin_booking_email_template ) ) {
-                //send multiple emails to multiple admins
-                if ( strpos( $sale_notification_email, ',' ) !== false ) {
-                    $sale_notification_email = explode( ',', $sale_notification_email );
-                    $sale_notification_email = str_replace( ' ', '', $sale_notification_email );
-                    foreach ( $sale_notification_email as $key => $email_address ) {
-                        wp_mail( $email_address, $admin_email_subject, $admin_email_booking_body_full, $headers );
-                    }
-                } else {
-                    //send admin email
-                    wp_mail( $sale_notification_email, $admin_email_subject, $admin_email_booking_body_full, $headers );
-
-                }
-            } else {
-                //send static default mail
-                $default_mail = '<p>' . __( 'Dear Admin', 'tourfic' ) . '</p></br>';
-                $default_mail .= '<p>' . __( 'You have received a new booking. The details are as follows:', 'tourfic' ) . '</p></br>';
-                $default_mail .= __( '{booking_details}', 'tourfic' ) . '</br>';
-                $default_mail .= __( '<strong>Customer details</strong>', 'tourfic' ) . '</br>';
-                $default_mail .= __( '{customer_details}', 'tourfic' ) . '</br>';
-                $default_mail .= __( '<p>Thank you</p>', 'tourfic' );
-                $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
-                $default_mail .= __( '{site_name}', 'tourfic' ) . '</br>';
-
-                $default_mail = $this->replace_mail_tags( $default_mail , $order_id );
-
-                wp_mail( $sale_notification_email, $admin_email_subject, $default_mail, $headers );
-
-            }
-        }
-
-        //send mail to vendor
-        if ( !empty( $send_notifcation ) && $send_notifcation == 'admin_vendor' ) {
-
-            $vendor_email_subject          = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] : '';
-            $vendor_from_name              = !empty( $email_settings['vendor_from_name'] ) ? $email_settings['vendor_from_name'] : '';
-            $vendor_from_email             = !empty( $email_settings['vendor_from_email'] ) ? $email_settings['vendor_from_email'] : '';
+            $email_body_open               = str_replace( '{booking_id}', $order_id, $email_body_open );
+            $admin_booking_email_template  = !empty( $email_settings['admin_booking_email_template'] ) ? $email_settings['admin_booking_email_template'] : '';
             $vendor_booking_email_template = !empty( $email_settings['vendor_booking_email_template'] ) ? $email_settings['vendor_booking_email_template'] : '';
 
-            //replace mail tags to actual value
-            $vendor_booking_email_template  = $this->replace_mail_tags( $vendor_booking_email_template , $order_id );
-            $vendor_email_booking_body_full = $email_body_open . $vendor_booking_email_template . $email_body_close;
-            //send mail in plain text and html conditionally
+            //replace mail tags
+            $admin_booking_email_template = $this->replace_mail_tags( $admin_booking_email_template , $order_id );
+            //email body ended
+            $email_body_close  = $this->email_body_close();       
+        
+            $admin_email_booking_body_full = $email_body_open . $admin_booking_email_template . $email_body_close;
+            //decode entity
             if ( $email_content_type == 'text/plain' ) {
-                $vendor_email_booking_body_full = wp_strip_all_tags( $vendor_email_booking_body_full );
+                //$admin_email_booking_body_full = html_entity_decode( $admin_email_booking_body_full, '3' , 'UTF-8' );
+                $admin_email_booking_body_full = wp_strip_all_tags( $admin_email_booking_body_full );
             } else {
-                $vendor_email_booking_body_full = wp_kses_post( $vendor_email_booking_body_full );
-            }
-            if ( !empty( $vendor_booking_email_template ) ) {
-                //send mail to vendor
-                if ( !empty( $vendors_email ) ) {
-                    foreach ( $vendors_email as $key => $vendor_email ) {
-                        wp_mail( $vendor_email, $vendor_email_subject, $vendor_email_booking_body_full, $headers );
+                $admin_email_booking_body_full = wp_kses_post( html_entity_decode( $admin_email_booking_body_full, '3', 'UTF-8' ) );
+            }      
+
+            //check if admin emails disable
+            if ( isset( $admin_email_disable ) && $admin_email_disable == false ) {
+                if ( !empty( $admin_booking_email_template ) ) {
+                    //send multiple emails to multiple admins
+                    if ( strpos( $sale_notification_email, ',' ) !== false ) {
+                        $sale_notification_email = explode( ',', $sale_notification_email );
+                        $sale_notification_email = str_replace( ' ', '', $sale_notification_email );
+                        foreach ( $sale_notification_email as $key => $email_address ) {
+                            wp_mail( $email_address, $admin_email_subject, $admin_email_booking_body_full, $headers );
+                        }
+                    } else {
+                        //send admin email
+                        wp_mail( $sale_notification_email, $admin_email_subject, $admin_email_booking_body_full, $headers );
+
                     }
-                }
-            } else {
-                //send default mail
-                $default_mail = '<p>' . __( 'Dear Admin', 'tourfic' ) . '</p></br>';
-                $default_mail .= '<p>' . __( 'You have received a new booking. The details are as follows:', 'tourfic' ) . '</p></br>';
-                $default_mail .= __( '{booking_details}', 'tourfic' ) . '</br>';
-                $default_mail .= __( '<strong>Customer details</strong>', 'tourfic' ) . '</br>';
-                $default_mail .= __( '{customer_details}', 'tourfic' ) . '</br>';
-                $default_mail .= __( 'Thank you', 'tourfic' ) . '</br>';
-                $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
-                $default_mail .= __( '{site_name}', 'tourfic' ) . '</br>';
+                } else {
+                    //send static default mail
+                    $default_mail = '<p>' . __( 'Dear Admin', 'tourfic' ) . '</p></br>';
+                    $default_mail .= '<p>' . __( 'You have received a new booking. The details are as follows:', 'tourfic' ) . '</p></br>';
+                    $default_mail .= __( '{booking_details}', 'tourfic' ) . '</br>';
+                    $default_mail .= __( '<strong>Customer details</strong>', 'tourfic' ) . '</br>';
+                    $default_mail .= __( '{customer_details}', 'tourfic' ) . '</br>';
+                    $default_mail .= __( '<p>Thank you</p>', 'tourfic' );
+                    $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
+                    $default_mail .= __( '{site_name}', 'tourfic' ) . '</br>';
 
-                $default_mail = str_replace( '{customer_details}', $customer_details, $default_mail );
-                $default_mail = str_replace( '{booking_details}', $booking_details, $default_mail );
-                $default_mail = str_replace( '{site_name}', get_bloginfo( 'name' ), $default_mail );
+                    $default_mail = $this->replace_mail_tags( $default_mail , $order_id );
 
-                if ( !empty( $vendors_email ) ) {
-                    foreach ( $vendors_email as $key => $vendor_email ) {
-                        wp_mail( $vendor_email, $vendor_email_subject, $default_mail, $headers );
-                    }
+                    wp_mail( $sale_notification_email, $admin_email_subject, $default_mail, $headers );
+
                 }
             }
 
-        }
-        //customer email settings
-        $customer_email_address          = $order_billing_email;
-        $disable_customer_email          = !empty( $email_settings['customer_email_disable'] ) ? $email_settings['customer_email_disable'] : false;
-        $customer_email_subject          = !empty( $email_settings['customer_confirm_email_subject'] ) ? $email_settings['customer_confirm_email_subject'] : '';
-        $customer_email_subject          = str_replace( '{booking_id}', $order_id, $customer_email_subject );
-        $customer_from_name              = !empty( $email_settings['customer_from_name'] ) ? $email_settings['customer_from_name'] : '';
-        $customer_from_email             = !empty( $email_settings['customer_from_email'] ) ? $email_settings['customer_from_email'] : '';
-        $customer_confirm_email_template = !empty( $email_settings['customer_confirm_email_template'] ) ? $email_settings['customer_confirm_email_template'] : '';
-        $headers .= "From: {$customer_from_name} <{$customer_from_email}>" . "\r\n";
-        //send mail to customer
-        if ( $disable_customer_email == false ) {
-            if ( !empty( $customer_confirm_email_template ) ) {
+            //send mail to vendor
+            if ( !empty( $send_notifcation ) && $send_notifcation == 'admin_vendor' ) {
+
+                $vendor_email_subject          = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] : '';
+                $vendor_from_name              = !empty( $email_settings['vendor_from_name'] ) ? $email_settings['vendor_from_name'] : '';
+                $vendor_from_email             = !empty( $email_settings['vendor_from_email'] ) ? $email_settings['vendor_from_email'] : '';
+                $vendor_booking_email_template = !empty( $email_settings['vendor_booking_email_template'] ) ? $email_settings['vendor_booking_email_template'] : '';
+
                 //replace mail tags to actual value
-                $customer_confirm_email_template = $this->replace_mail_tags( $customer_confirm_email_template , $order_id );
-
-                $customer_email_body_full = $email_body_open . $customer_confirm_email_template . $email_body_close;
+                $vendor_booking_email_template  = $this->replace_mail_tags( $vendor_booking_email_template , $order_id );
+                $vendor_email_booking_body_full = $email_body_open . $vendor_booking_email_template . $email_body_close;
                 //send mail in plain text and html conditionally
                 if ( $email_content_type == 'text/plain' ) {
-                    $customer_email_body_full = wp_strip_all_tags( $customer_email_body_full );
+                    $vendor_email_booking_body_full = wp_strip_all_tags( $vendor_email_booking_body_full );
                 } else {
-                    $customer_email_body_full = wp_kses_post( $customer_email_body_full );
+                    $vendor_email_booking_body_full = wp_kses_post( $vendor_email_booking_body_full );
                 }
-                wp_mail( $customer_email_address, $customer_email_subject, $customer_email_body_full, $headers );
-            } else {
-                //send default mail
-                $default_mail = '<p>' . __( 'Dear', 'tourfic' ) . ' {fullname}</p></br>';
-                $default_mail .= '<p>' . __( 'Thank you for your booking. The details are as follows:', 'tourfic' ) . '</p></br>';
-                $default_mail .= __( '{booking_details}', 'tourfic' ) . '</br>';
-                $default_mail .= __( '<strong>Shipping Details</strong>', 'tourfic' ) . '</br>';
-                $default_mail .= __( '{customer_details}', 'tourfic' ) . '</br>';
-                $default_mail .= __( 'Thank you', 'tourfic' ) . '</br>';
-                $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
-                $default_mail .= __( '{site_name}', 'tourfic' ) . '</br>';
+                if ( !empty( $vendor_booking_email_template ) ) {
+                    //send mail to vendor
+                    if ( !empty( $vendors_email ) ) {
+                        foreach ( $vendors_email as $key => $vendor_email ) {
+                            wp_mail( $vendor_email, $vendor_email_subject, $vendor_email_booking_body_full, $headers );
+                        }
+                    }
+                } else {
+                    //send default mail
+                    $default_mail = '<p>' . __( 'Dear Admin', 'tourfic' ) . '</p></br>';
+                    $default_mail .= '<p>' . __( 'You have received a new booking. The details are as follows:', 'tourfic' ) . '</p></br>';
+                    $default_mail .= __( '{booking_details}', 'tourfic' ) . '</br>';
+                    $default_mail .= __( '<strong>Customer details</strong>', 'tourfic' ) . '</br>';
+                    $default_mail .= __( '{customer_details}', 'tourfic' ) . '</br>';
+                    $default_mail .= __( 'Thank you', 'tourfic' ) . '</br>';
+                    $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
+                    $default_mail .= __( '{site_name}', 'tourfic' ) . '</br>';
 
-                $default_mail = $this->replace_mail_tags( $default_mail , $order_id );
+                    $default_mail = str_replace( '{customer_details}', $customer_details, $default_mail );
+                    $default_mail = str_replace( '{booking_details}', $booking_details, $default_mail );
+                    $default_mail = str_replace( '{site_name}', get_bloginfo( 'name' ), $default_mail );
 
-                wp_mail( $customer_email_address, $customer_email_subject, $default_mail, $headers );
+                    if ( !empty( $vendors_email ) ) {
+                        foreach ( $vendors_email as $key => $vendor_email ) {
+                            wp_mail( $vendor_email, $vendor_email_subject, $default_mail, $headers );
+                        }
+                    }
+                }
+
             }
-        }
+            //customer email settings
+            $customer_email_address          = $order_billing_email;
+            $disable_customer_email          = !empty( $email_settings['customer_email_disable'] ) ? $email_settings['customer_email_disable'] : false;
+            $customer_email_subject          = !empty( $email_settings['customer_confirm_email_subject'] ) ? $email_settings['customer_confirm_email_subject'] : '';
+            $customer_email_subject          = str_replace( '{booking_id}', $order_id, $customer_email_subject );
+            $customer_from_name              = !empty( $email_settings['customer_from_name'] ) ? $email_settings['customer_from_name'] : '';
+            $customer_from_email             = !empty( $email_settings['customer_from_email'] ) ? $email_settings['customer_from_email'] : '';
+            $customer_confirm_email_template = !empty( $email_settings['customer_confirm_email_template'] ) ? $email_settings['customer_confirm_email_template'] : '';
+            $headers .= "From: {$customer_from_name} <{$customer_from_email}>" . "\r\n";
+            //send mail to customer
+            if ( $disable_customer_email == false ) {
+                if ( !empty( $customer_confirm_email_template ) ) {
+                    //replace mail tags to actual value
+                    $customer_confirm_email_template = $this->replace_mail_tags( $customer_confirm_email_template , $order_id );
+
+                    $customer_email_body_full = $email_body_open . $customer_confirm_email_template . $email_body_close;
+                    //send mail in plain text and html conditionally
+                    if ( $email_content_type == 'text/plain' ) {
+                        $customer_email_body_full = wp_strip_all_tags( $customer_email_body_full );
+                    } else {
+                        $customer_email_body_full = wp_kses_post( $customer_email_body_full );
+                    }
+                    wp_mail( $customer_email_address, $customer_email_subject, $customer_email_body_full, $headers );
+                } else {
+                    //send default mail
+                    $default_mail = '<p>' . __( 'Dear', 'tourfic' ) . ' {fullname}</p></br>';
+                    $default_mail .= '<p>' . __( 'Thank you for your booking. The details are as follows:', 'tourfic' ) . '</p></br>';
+                    $default_mail .= __( '{booking_details}', 'tourfic' ) . '</br>';
+                    $default_mail .= __( '<strong>Shipping Details</strong>', 'tourfic' ) . '</br>';
+                    $default_mail .= __( '{customer_details}', 'tourfic' ) . '</br>';
+                    $default_mail .= __( 'Thank you', 'tourfic' ) . '</br>';
+                    $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
+                    $default_mail .= __( '{site_name}', 'tourfic' ) . '</br>';
+
+                    $default_mail = $this->replace_mail_tags( $default_mail , $order_id );
+
+                    wp_mail( $customer_email_address, $customer_email_subject, $default_mail, $headers );
+                }
+            }
+        endif;
     }
 
     /**
@@ -516,149 +537,150 @@ class TF_Handle_Emails {
      * @param  [int] $order_id [pass the order id]
      *
      */
-    public function send_confirmation_email_pro($order_id){
-        //get order details
-        $order = wc_get_order( $order_id );
-        //get customer email
-        $order_billing_email    = $order->get_billing_email();
+    public function send_confirmation_email_pro( $order_id ){
+        if( function_exists( 'is_tf_pro' ) && is_tf_pro() ):
+            //get order details
+            $order = wc_get_order( $order_id );
+            //get customer email
+            $order_billing_email    = $order->get_billing_email();
 
-        //email body ended
-        $email_template_settings           = $this::$tf_email_template_settings;
-        $enable_admin_email                = !empty( $email_template_settings['enable_admin_email'] ) ? $email_template_settings['enable_admin_email'] : '';
-        $enable_vendor_email               = !empty( $email_template_settings['enable_vendor_email'] ) ? $email_template_settings['enable_vendor_email'] : '';
-        $enable_customer_email             = !empty( $email_template_settings['enable_customer_email'] ) ? $email_template_settings['enable_customer_email'] : '';
-        $admin_confirmation_template_id    = !empty( $email_template_settings['admin_confirmation_email_template'] ) ? $email_template_settings['admin_confirmation_email_template'] : '';
-        $vendor_confirmation_template_id   = !empty( $email_template_settings['vendor_confirmation_email_template'] ) ? $email_template_settings['vendor_confirmation_email_template'] : '';
-        $customer_confirmation_template_id = !empty( $email_template_settings['customer_confirmation_email_template'] ) ? $email_template_settings['customer_confirmation_email_template'] : '';
-       
+            //email body ended
+            $email_template_settings           = $this::$tf_email_template_settings;
+            $enable_admin_conf_email           = !empty( $email_template_settings['enable_admin_conf_email'] ) ? $email_template_settings['enable_admin_conf_email'] : '';
+            $enable_vendor_conf_email          = !empty( $email_template_settings['enable_vendor_conf_email'] ) ? $email_template_settings['enable_vendor_conf_email'] : '';
+            $enable_customer_conf_email        = !empty( $email_template_settings['enable_customer_conf_email'] ) ? $email_template_settings['enable_customer_conf_email'] : '';
+            $admin_confirmation_template_id    = !empty( $email_template_settings['admin_confirmation_email_template'] ) ? $email_template_settings['admin_confirmation_email_template'] : '';
+            $vendor_confirmation_template_id   = !empty( $email_template_settings['vendor_confirmation_email_template'] ) ? $email_template_settings['vendor_confirmation_email_template'] : '';
+            $customer_confirmation_template_id = !empty( $email_template_settings['customer_confirmation_email_template'] ) ? $email_template_settings['customer_confirmation_email_template'] : '';
+        
 
-        if( ! empty ( $enable_admin_email ) && $enable_admin_email == 1 ){
-           //email settings metabox value
-            if( ! empty ( $admin_confirmation_template_id ) ){
+            if( ! empty ( $enable_admin_conf_email ) && $enable_admin_conf_email == 1 ){
+                //email settings metabox value
+                if( ! empty ( $admin_confirmation_template_id ) ){
 
-                //get the mail template content   
-                $admin_confirmation_email_template   = get_post( $admin_confirmation_template_id );
-                $admin_confirmation_template_content = !empty( $admin_confirmation_email_template->post_content ) ? $admin_confirmation_email_template->post_content : ' ';
-                $admin_confirmation_template_content = $this->replace_mail_tags( $admin_confirmation_template_content, $order_id );
-                
-                $meta                    = get_post_meta( $admin_confirmation_template_id, 'tf_email_templates_metabox', true );
-                $brand_logo              = !empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
-                $sale_notification_email = !empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                $email_subject           = !empty( $meta['email_subject'] ) ? $meta['email_subject'] : '';
-                $email_from_name         = !empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
-                $email_from_email        = !empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
-                $order_email_heading     = !empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                $email_header_bg         = !empty( $meta['email_header_bg'] ) ? unserialize($meta['email_header_bg']) : '';
-                $email_header_bg         = $email_header_bg['bg_color'];
-                //mail headers
-                $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
-                $headers  = $charset . "\r\n";
-                $headers .= "MIME-Version: 1.0" . "\r\n";
-                $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
-                $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
-                $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-                //email body open
-                $email_body_open = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg);
-                $email_body_open               = str_replace( '{booking_id}', $order_id, $email_body_open );
-                $admin_confirmation_template_content = $this->replace_mail_tags( $admin_confirmation_template_content, $order_id );
+                    //get the mail template content   
+                    $admin_confirmation_email_template   = get_post( $admin_confirmation_template_id );
+                    $admin_confirmation_template_content = !empty( $admin_confirmation_email_template->post_content ) ? $admin_confirmation_email_template->post_content : ' ';
+                    $admin_confirmation_template_content = $this->replace_mail_tags( $admin_confirmation_template_content, $order_id );
+                    
+                    $meta                    = get_post_meta( $admin_confirmation_template_id, 'tf_email_templates_metabox', true );
+                    $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
+                    $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : '';
+                    $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
+                    $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
+                    $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
+                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? unserialize($meta['email_header_bg']) : array();
+                    $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '';
+                    //mail headers
+                    $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
+                    $headers  = $charset . "\r\n";
+                    $headers .= "MIME-Version: 1.0" . "\r\n";
+                    $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
+                    $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
+                    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+                    //email body open
+                    $email_body_open                     = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg);
+                    $email_body_open                     = str_replace( '{booking_id}', $order_id, $email_body_open );
+                    $admin_confirmation_template_content = $this->replace_mail_tags( $admin_confirmation_template_content, $order_id );
+                    $email_body_close                    = $this->email_body_close();
+                    $admin_email_booking_body_full       = $email_body_open . $admin_confirmation_template_content . $email_body_close;
+                    $admin_email_booking_body_full       = wp_kses_post( html_entity_decode( $admin_email_booking_body_full, '3', 'UTF-8' ) );
+                    
+                    //send multiple emails to multiple admins
+                    if ( strpos( $sale_notification_email, ',' ) !== false ) {
+                        $sale_notification_email = explode( ',', $sale_notification_email );
+                        $sale_notification_email = str_replace( ' ', '', $sale_notification_email );
+                        foreach ( $sale_notification_email as $key => $email_address ) {
+                            wp_mail( $email_address, $email_subject, $admin_email_booking_body_full, $headers );
+                        }
+                    } else {
+                        //send admin email
+                        wp_mail( $sale_notification_email, $email_subject, $admin_email_booking_body_full, $headers );
 
-                $email_body_close  = $this->email_body_close();
-                $admin_email_booking_body_full = $email_body_open . $admin_confirmation_template_content . $email_body_close;
-                $admin_email_booking_body_full = wp_kses_post( html_entity_decode( $admin_email_booking_body_full, '3', 'UTF-8' ) );
-                
-                //send multiple emails to multiple admins
-                if ( strpos( $sale_notification_email, ',' ) !== false ) {
-                    $sale_notification_email = explode( ',', $sale_notification_email );
-                    $sale_notification_email = str_replace( ' ', '', $sale_notification_email );
-                    foreach ( $sale_notification_email as $key => $email_address ) {
-                        wp_mail( $email_address, $email_subject, $admin_email_booking_body_full, $headers );
                     }
-                } else {
-                    //send admin email
-                    wp_mail( $sale_notification_email, $email_subject, $admin_email_booking_body_full, $headers );
+                } 
+            }
 
-                }
-            } 
-        }
-
-        //send vendor confirmation email template
-        if( ! empty ( $enable_vendor_email ) && $enable_vendor_email == 1 ){
-            //email settings metabox value
-            if( ! empty ( $vendor_confirmation_template_id ) ){
-                //get the mail template content   
-                $vendor_confirmation_email_template   = get_post( $vendor_confirmation_template_id );
-                $vendor_confirmation_template_content = !empty( $vendor_confirmation_email_template->post_content ) ? $vendor_confirmation_email_template->post_content : ' ';
-                $vendor_confirmation_template_content = $this->replace_mail_tags( $vendor_confirmation_template_content, $order_id );
-                
-                $meta                    = get_post_meta( $vendor_confirmation_template_id, 'tf_email_templates_metabox', true );
-                $brand_logo              = !empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
-                $sale_notification_email = !empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                $email_subject           = !empty( $meta['email_subject'] ) ? $meta['email_subject'] : '';
-                $email_from_name         = !empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
-                $email_from_email        = !empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
-                $order_email_heading     = !empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                $email_header_bg         = !empty( $meta['email_header_bg'] ) ? unserialize($meta['email_header_bg']) : '';
-                $email_header_bg         = $email_header_bg['bg_color'];
-                //mail headers
-                $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
-                $headers  = $charset . "\r\n";
-                $headers .= "MIME-Version: 1.0" . "\r\n";
-                $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
-                $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
-                $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-                //email body open
-                $email_body_open                      = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg);
-                $email_body_open                      = str_replace( '{booking_id}', $order_id, $email_body_open );
-                $vendor_confirmation_template_content = $this->replace_mail_tags( $vendor_confirmation_template_content, $order_id );
-                $email_body_close                     = $this->email_body_close();
-                $vendor_email_booking_body_full       = $email_body_open . $vendor_confirmation_template_content . $email_body_close;
-                $vendor_email_booking_body_full       = wp_kses_post( html_entity_decode( $vendor_email_booking_body_full, '3', 'UTF-8' ) );
-                //send mail to vendor
-                if ( !empty( $this->vendors_email ) ) {
-                    foreach ( $this->vendors_email as $key => $vendor_email ) {
-                        wp_mail( $vendor_email, $email_subject, $vendor_email_booking_body_full, $headers );
+            //send vendor confirmation email template
+            if( ! empty ( $enable_vendor_conf_email ) && $enable_vendor_conf_email == 1 ){
+                //email settings metabox value
+                if( ! empty ( $vendor_confirmation_template_id ) ){
+                    //get the mail template content   
+                    $vendor_confirmation_email_template   = get_post( $vendor_confirmation_template_id );
+                    $vendor_confirmation_template_content = !empty( $vendor_confirmation_email_template->post_content ) ? $vendor_confirmation_email_template->post_content : ' ';
+                    $vendor_confirmation_template_content = $this->replace_mail_tags( $vendor_confirmation_template_content, $order_id );
+                    
+                    $meta                    = get_post_meta( $vendor_confirmation_template_id, 'tf_email_templates_metabox', true );
+                    $brand_logo              = !empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
+                    $sale_notification_email = !empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
+                    $email_subject           = !empty( $meta['email_subject'] ) ? $meta['email_subject'] : '';
+                    $email_from_name         = !empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
+                    $email_from_email        = !empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
+                    $order_email_heading     = !empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
+                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? unserialize($meta['email_header_bg']) : array();
+                    $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '';
+                    //mail headers
+                    $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
+                    $headers  = $charset . "\r\n";
+                    $headers .= "MIME-Version: 1.0" . "\r\n";
+                    $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
+                    $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
+                    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+                    //email body open
+                    $email_body_open                      = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg);
+                    $email_body_open                      = str_replace( '{booking_id}', $order_id, $email_body_open );
+                    $vendor_confirmation_template_content = $this->replace_mail_tags( $vendor_confirmation_template_content, $order_id );
+                    $email_body_close                     = $this->email_body_close();
+                    $vendor_email_booking_body_full       = $email_body_open . $vendor_confirmation_template_content . $email_body_close;
+                    $vendor_email_booking_body_full       = wp_kses_post( html_entity_decode( $vendor_email_booking_body_full, '3', 'UTF-8' ) );
+                    //send mail to vendor
+                    if ( !empty( $this->vendors_email ) ) {
+                        foreach ( $this->vendors_email as $key => $vendor_email ) {
+                            wp_mail( $vendor_email, $email_subject, $vendor_email_booking_body_full, $headers );
+                        }
                     }
                 }
             }
-        }
-        //send customer confirmation email template
-        if( ! empty ( $enable_customer_email ) && $enable_customer_email == 1 ){
-            //email settings metabox value
-            if( ! empty ( $customer_confirmation_template_id ) ){
-                //get the mail template content   
-                $customer_confirmation_email_template   = get_post( $customer_confirmation_template_id );
-                $customer_confirmation_template_content = !empty( $customer_confirmation_email_template->post_content ) ? $customer_confirmation_email_template->post_content : ' ';
-                $customer_confirmation_template_content = $this->replace_mail_tags( $customer_confirmation_template_content, $order_id );
-                
-                $meta                    = get_post_meta( $customer_confirmation_template_id, 'tf_email_templates_metabox', true );
-                $brand_logo              = !empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
-                $sale_notification_email = !empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                $email_subject           = !empty( $meta['email_subject'] ) ? $meta['email_subject'] : '';
-                $email_from_name         = !empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
-                $email_from_email        = !empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
-                $order_email_heading     = !empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                $email_header_bg         = !empty( $meta['email_header_bg'] ) ? unserialize($meta['email_header_bg']) : '';
-                $email_header_bg         = $email_header_bg['bg_color'];
-                //mail headers
-                $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
-                $headers  = $charset . "\r\n";
-                $headers .= "MIME-Version: 1.0" . "\r\n";
-                $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
-                $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
-                $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-                //email body open
-                $email_body_open                        = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg);
-                $email_body_open                        = str_replace( '{booking_id}', $order_id, $email_body_open );
-                $customer_confirmation_template_content = $this->replace_mail_tags( $customer_confirmation_template_content, $order_id );
-                $email_body_close                       = $this->email_body_close();
-                $customer_email_booking_body_full       = $email_body_open . $customer_confirmation_template_content . $email_body_close;
-                $customer_email_booking_body_full       = wp_kses_post( html_entity_decode( $customer_email_booking_body_full, '3', 'UTF-8' ) );
-                //send mail to customer
-                wp_mail( $order_billing_email, $email_subject, $customer_email_booking_body_full, $headers );
+            //send customer confirmation email template
+            if( ! empty ( $enable_customer_conf_email ) && $enable_customer_conf_email == 1 ){
+                //email settings metabox value
+                if( ! empty ( $customer_confirmation_template_id ) ){
+                    //echo "hels";
+                    //get the mail template content   
+                    $customer_confirmation_email_template   = get_post( $customer_confirmation_template_id );
+                    $customer_confirmation_template_content = !empty( $customer_confirmation_email_template->post_content ) ? $customer_confirmation_email_template->post_content : ' ';
+                    $customer_confirmation_template_content = $this->replace_mail_tags( $customer_confirmation_template_content, $order_id );
+                    $meta                    = get_post_meta( $customer_confirmation_template_id, 'tf_email_templates_metabox', true );
+                    $brand_logo              = !empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
+                    $sale_notification_email = !empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
+                    $email_subject           = !empty( $meta['email_subject'] ) ? $meta['email_subject'] : '';
+                    $email_from_name         = !empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
+                    $email_from_email        = !empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
+                    $order_email_heading     = !empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
+                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? unserialize($meta['email_header_bg']) : array();
+                    $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '';
+                    //mail headers
+                    $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
+                    $headers  = $charset . "\r\n";
+                    $headers .= "MIME-Version: 1.0" . "\r\n";
+                    $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
+                    $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
+                    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+                    //email body open
+                    $email_body_open                        = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg);
+                    $email_body_open                        = str_replace( '{booking_id}', $order_id, $email_body_open );
+                    $customer_confirmation_template_content = $this->replace_mail_tags( $customer_confirmation_template_content, $order_id );
+                    $email_body_close                       = $this->email_body_close();
+                    $customer_email_booking_body_full       = $email_body_open . $customer_confirmation_template_content . $email_body_close;
+                    $customer_email_booking_body_full       = wp_kses_post( html_entity_decode( $customer_email_booking_body_full, '3', 'UTF-8' ) );
+                    
+                    //send mail to customer
+                    wp_mail( $order_billing_email, $email_subject, $customer_email_booking_body_full, $headers );
+                }
             }
-        }
                
-
+        endif;
         
     }
 
@@ -668,129 +690,131 @@ class TF_Handle_Emails {
      * @return void
      */
     public function send_cancellation_email_pro( $order_id ){
-        //get order details
-        $order = wc_get_order( $order_id );
-        //get customer email
-        $order_billing_email    = $order->get_billing_email();
+        if( function_exists( 'is_tf_pro' ) && is_tf_pro() ):
+            //get order details
+            $order = wc_get_order( $order_id );
+            //get customer email
+            $order_billing_email    = $order->get_billing_email();
 
-        //email body ended
-        $email_template_settings           = $this::$tf_email_template_settings;
-        $enable_admin_email                = !empty( $email_template_settings['enable_admin_email'] ) ? $email_template_settings['enable_admin_email'] : '';
-        $enable_vendor_email               = !empty( $email_template_settings['enable_vendor_email'] ) ? $email_template_settings['enable_vendor_email'] : '';
-        $enable_customer_email             = !empty( $email_template_settings['enable_customer_email'] ) ? $email_template_settings['enable_customer_email'] : '';
-        $admin_cancellation_template_id    = !empty( $email_template_settings['admin_cancellation_template_id'] ) ? $email_template_settings['admin_cancellation_template_id'] : '';
-        $vendor_cancellation_template_id   = !empty( $email_template_settings['vendor_cancellation_template_id'] ) ? $email_template_settings['vendor_cancellation_template_id'] : '';
-        $customer_cancellation_template_id = !empty( $email_template_settings['customer_cancellation_template_id'] ) ? $email_template_settings['customer_cancellation_template_id'] : '';
-        //send admin cancellation email template
-        if( ! empty ( $enable_admin_email ) && $enable_admin_email == 1 ){
-            //email settings metabox value
-            if( ! empty ( $admin_cancellation_template_id ) ){
-                //get the mail template content   
-                $admin_cancellation_email_template   = get_post( $admin_cancellation_template_id );
-                $admin_cancellation_template_content = !empty( $admin_cancellation_email_template->post_content ) ? $admin_cancellation_email_template->post_content : ' ';
-                $admin_cancellation_template_content = $this->replace_mail_tags( $admin_cancellation_template_content, $order_id );
-                
-                $meta                    = get_post_meta( $admin_cancellation_template_id, 'tf_email_templates_metabox', true );
-                $brand_logo              = !empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
-                $sale_notification_email = !empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                $email_subject           = !empty( $meta['email_subject'] ) ? $meta['email_subject'] : '';
-                $email_from_name         = !empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
-                $email_from_email        = !empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
-                $order_email_heading     = !empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                $email_header_bg         = !empty( $meta['email_header_bg'] ) ? unserialize($meta['email_header_bg']) : '';
-                $email_header_bg         = $email_header_bg['bg_color'];
-                //mail headers
-                $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
-                $headers  = $charset . "\r\n";
-                $headers .= "MIME-Version: 1.0" . "\r\n";
-                $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
-                $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
-                $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-                //email body open
-                $email_body_open                     = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg);
-                $email_body_open                     = str_replace( '{booking_id}', $order_id, $email_body_open );
-                $admin_cancellation_template_content = $this->replace_mail_tags( $admin_cancellation_template_content, $order_id );
-                $email_body_close                    = $this->email_body_close();
-                $admin_email_cancellation_body_full  = $email_body_open . $admin_cancellation_template_content . $email_body_close;
-                $admin_email_cancellation_body_full  = wp_kses_post( html_entity_decode( $admin_email_cancellation_body_full, '3', 'UTF-8' ) );
-                //send mail to admin
-                wp_mail( $sale_notification_email, $email_subject, $admin_email_cancellation_body_full, $headers );            
-            }
-        }
-        //send vendor cancellation email template
-        if( ! empty ( $enable_vendor_email ) && $enable_vendor_email == 1 ){
-            //email settings metabox value
-            if( ! empty ( $vendor_cancellation_template_id ) ){
-                //get the mail template content   
-                $vendor_cancellation_email_template   = get_post( $vendor_cancellation_template_id );
-                $vendor_cancellation_template_content = !empty( $vendor_cancellation_email_template->post_content ) ? $vendor_cancellation_email_template->post_content : ' ';
-                $vendor_cancellation_template_content = $this->replace_mail_tags( $vendor_cancellation_template_content, $order_id );
-                
-                $meta                    = get_post_meta( $vendor_cancellation_template_id, 'tf_email_templates_metabox', true );
-                $brand_logo              = !empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
-                $sale_notification_email = !empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                $email_subject           = !empty( $meta['email_subject'] ) ? $meta['email_subject'] : '';
-                $email_from_name         = !empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
-                $email_from_email        = !empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
-                $order_email_heading     = !empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                $email_header_bg         = !empty( $meta['email_header_bg'] ) ? unserialize($meta['email_header_bg']) : '';
-                $email_header_bg         = $email_header_bg['bg_color'];
-                //mail headers
-                $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
-                $headers  = $charset . "\r\n";
-                $headers .= "MIME-Version: 1.0" . "\r\n";
-                $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
-                $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
-                $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-                //email body open
-                $email_body_open                      = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg);
-                $email_body_open                      = str_replace( '{booking_id}', $order_id, $email_body_open );
-                $vendor_cancellation_template_content = $this->replace_mail_tags( $vendor_cancellation_template_content, $order_id );
-                $email_body_close                     = $this->email_body_close();
-                $vendor_email_cancellation_body_full  = $email_body_open . $vendor_cancellation_template_content . $email_body_close;
-                $vendor_email_cancellation_body_full  = wp_kses_post( html_entity_decode( $vendor_email_cancellation_body_full, '3', 'UTF-8' ) );
-                //send mail to vendor
-                foreach( $this->vendors_email as $key => $vendor_email ){
-                    wp_mail( $vendor_email, $email_subject, $vendor_email_cancellation_body_full, $headers );
+            //email body ended
+            $email_template_settings           = $this::$tf_email_template_settings;
+            $enable_admin_canc_email           = !empty( $email_template_settings['enable_admin_canc_email'] ) ? $email_template_settings['enable_admin_canc_email'] : '';
+            $enable_vendor_canc_email          = !empty( $email_template_settings['enable_vendor_canc_email'] ) ? $email_template_settings['enable_vendor_canc_email'] : '';
+            $enable_customer_canc_email        = !empty( $email_template_settings['enable_customer_canc_email'] ) ? $email_template_settings['enable_customer_canc_email'] : '';
+            $admin_cancellation_template_id    = !empty( $email_template_settings['admin_cancellation_template_id'] ) ? $email_template_settings['admin_cancellation_template_id'] : '';
+            $vendor_cancellation_template_id   = !empty( $email_template_settings['vendor_cancellation_template_id'] ) ? $email_template_settings['vendor_cancellation_template_id'] : '';
+            $customer_cancellation_template_id = !empty( $email_template_settings['customer_cancellation_template_id'] ) ? $email_template_settings['customer_cancellation_template_id'] : '';
+            //send admin cancellation email template
+            if( ! empty ( $enable_admin_canc_email ) && $enable_admin_canc_email == 1 ){
+                //email settings metabox value
+                if( ! empty ( $admin_cancellation_template_id ) ){
+                    //get the mail template content   
+                    $admin_cancellation_email_template   = get_post( $admin_cancellation_template_id );
+                    $admin_cancellation_template_content = !empty( $admin_cancellation_email_template->post_content ) ? $admin_cancellation_email_template->post_content : ' ';
+                    $admin_cancellation_template_content = $this->replace_mail_tags( $admin_cancellation_template_content, $order_id );
+                    
+                    $meta                    = get_post_meta( $admin_cancellation_template_id, 'tf_email_templates_metabox', true );
+                    $brand_logo              = !empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
+                    $sale_notification_email = !empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
+                    $email_subject           = !empty( $meta['email_subject'] ) ? $meta['email_subject'] : '';
+                    $email_from_name         = !empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
+                    $email_from_email        = !empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
+                    $order_email_heading     = !empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
+                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? unserialize($meta['email_header_bg']) : array();
+                    $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '';
+                    //mail headers
+                    $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
+                    $headers  = $charset . "\r\n";
+                    $headers .= "MIME-Version: 1.0" . "\r\n";
+                    $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
+                    $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
+                    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+                    //email body open
+                    $email_body_open                     = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg);
+                    $email_body_open                     = str_replace( '{booking_id}', $order_id, $email_body_open );
+                    $admin_cancellation_template_content = $this->replace_mail_tags( $admin_cancellation_template_content, $order_id );
+                    $email_body_close                    = $this->email_body_close();
+                    $admin_email_cancellation_body_full  = $email_body_open . $admin_cancellation_template_content . $email_body_close;
+                    $admin_email_cancellation_body_full  = wp_kses_post( html_entity_decode( $admin_email_cancellation_body_full, '3', 'UTF-8' ) );
+                    //send mail to admin
+                    wp_mail( $sale_notification_email, $email_subject, $admin_email_cancellation_body_full, $headers );            
                 }
             }
-        }
-        //send customer cancellation email template
-        if( ! empty( $enable_customer_email ) && $enable_customer_email == 1 ){
-            if( ! empty( $customer_cancellation_template_id )){
-                //get the mail template content   
-                $customer_cancellation_email_template   = get_post( $customer_cancellation_template_id );
-                $customer_cancellation_template_content = !empty( $customer_cancellation_email_template->post_content ) ? $customer_cancellation_email_template->post_content : ' ';
-                $customer_cancellation_template_content = $this->replace_mail_tags( $customer_cancellation_template_content, $order_id );
-                
-                $meta                    = get_post_meta( $customer_cancellation_template_id, 'tf_email_templates_metabox', true );
-                $brand_logo              = !empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
-                $sale_notification_email = !empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                $email_subject           = !empty( $meta['email_subject'] ) ? $meta['email_subject'] : '';
-                $email_from_name         = !empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
-                $email_from_email        = !empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
-                $order_email_heading     = !empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                $email_header_bg         = !empty( $meta['email_header_bg'] ) ? unserialize($meta['email_header_bg']) : '';
-                $email_header_bg         = $email_header_bg['bg_color'];
-                //mail headers
-                $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
-                $headers  = $charset . "\r\n";
-                $headers .= "MIME-Version: 1.0" . "\r\n";
-                $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
-                $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
-                $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-                //email body open
-                $email_body_open                        = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg);
-                $email_body_open                        = str_replace( '{booking_id}', $order_id, $email_body_open );
-                $customer_cancellation_template_content = $this->replace_mail_tags( $customer_cancellation_template_content, $order_id );
-                $email_body_close                       = $this->email_body_close();
-                $customer_email_cancellation_body_full  = $email_body_open . $customer_cancellation_template_content . $email_body_close;
-                $customer_email_cancellation_body_full  = wp_kses_post( html_entity_decode( $customer_email_cancellation_body_full, '3', 'UTF-8' ) );
-                //send mail to customer
-                wp_mail( $order_billing_email, $email_subject, $customer_email_cancellation_body_full, $headers );
-
+            //send vendor cancellation email template
+            if( ! empty ( $enable_vendor_canc_email ) && $enable_vendor_canc_email == 1 ){
+                //email settings metabox value
+                if( ! empty ( $vendor_cancellation_template_id ) ){
+                    //get the mail template content   
+                    $vendor_cancellation_email_template   = get_post( $vendor_cancellation_template_id );
+                    $vendor_cancellation_template_content = !empty( $vendor_cancellation_email_template->post_content ) ? $vendor_cancellation_email_template->post_content : ' ';
+                    $vendor_cancellation_template_content = $this->replace_mail_tags( $vendor_cancellation_template_content, $order_id );
+                    
+                    $meta                    = get_post_meta( $vendor_cancellation_template_id, 'tf_email_templates_metabox', true );
+                    $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
+                    $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : '';
+                    $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
+                    $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
+                    $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
+                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? unserialize($meta['email_header_bg']) : array();
+                    $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '';
+                    //mail headers
+                    $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
+                    $headers  = $charset . "\r\n";
+                    $headers .= "MIME-Version: 1.0" . "\r\n";
+                    $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
+                    $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
+                    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+                    //email body open
+                    $email_body_open                      = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg);
+                    $email_body_open                      = str_replace( '{booking_id}', $order_id, $email_body_open );
+                    $vendor_cancellation_template_content = $this->replace_mail_tags( $vendor_cancellation_template_content, $order_id );
+                    $email_body_close                     = $this->email_body_close();
+                    $vendor_email_cancellation_body_full  = $email_body_open . $vendor_cancellation_template_content . $email_body_close;
+                    $vendor_email_cancellation_body_full  = wp_kses_post( html_entity_decode( $vendor_email_cancellation_body_full, '3', 'UTF-8' ) );
+                    //send mail to vendor
+                    foreach( $this->vendors_email as $key => $vendor_email ){
+                        wp_mail( $vendor_email, $email_subject, $vendor_email_cancellation_body_full, $headers );
+                    }
+                }
             }
-        }
+            //send customer cancellation email template
+            if( ! empty( $enable_customer_canc_email ) && $enable_customer_canc_email == 1 ){
+                if( ! empty( $customer_cancellation_template_id )){
+                    //get the mail template content   
+                    $customer_cancellation_email_template   = get_post( $customer_cancellation_template_id );
+                    $customer_cancellation_template_content = !empty( $customer_cancellation_email_template->post_content ) ? $customer_cancellation_email_template->post_content : ' ';
+                    $customer_cancellation_template_content = $this->replace_mail_tags( $customer_cancellation_template_content, $order_id );
+                    
+                    $meta                    = get_post_meta( $customer_cancellation_template_id, 'tf_email_templates_metabox', true );
+                    $brand_logo              = !empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
+                    $sale_notification_email = !empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
+                    $email_subject           = !empty( $meta['email_subject'] ) ? $meta['email_subject'] : '';
+                    $email_from_name         = !empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
+                    $email_from_email        = !empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
+                    $order_email_heading     = !empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
+                    $email_header_bg         = !empty( $meta['email_header_bg'] ) ? unserialize($meta['email_header_bg']) : '';
+                    $email_header_bg         = $email_header_bg['bg_color'];
+                    //mail headers
+                    $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
+                    $headers  = $charset . "\r\n";
+                    $headers .= "MIME-Version: 1.0" . "\r\n";
+                    $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
+                    $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
+                    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+                    //email body open
+                    $email_body_open                        = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg);
+                    $email_body_open                        = str_replace( '{booking_id}', $order_id, $email_body_open );
+                    $customer_cancellation_template_content = $this->replace_mail_tags( $customer_cancellation_template_content, $order_id );
+                    $email_body_close                       = $this->email_body_close();
+                    $customer_email_cancellation_body_full  = $email_body_open . $customer_cancellation_template_content . $email_body_close;
+                    $customer_email_cancellation_body_full  = wp_kses_post( html_entity_decode( $customer_email_cancellation_body_full, '3', 'UTF-8' ) );
+                    //send mail to customer
+                    wp_mail( $order_billing_email, $email_subject, $customer_email_cancellation_body_full, $headers );
+
+                }
+            }
+        endif;
 
     }
 
