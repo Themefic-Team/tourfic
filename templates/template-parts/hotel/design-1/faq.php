@@ -20,7 +20,7 @@
                     <div class="tf-faq-single <?php echo $faq_key==1 ? esc_attr( 'active' ) : ''; ?>">
                         <div class="tf-faq-single-inner">
                             <div class="tf-faq-collaps tf-flex tf-flex-align-center tf-flex-space-bttn <?php echo $faq_key==1 ? esc_attr( 'active' ) : ''; ?>">
-                                <h3><?php echo esc_html( $faq['title'] ); ?></h3> 
+                                <h4><?php echo esc_html( $faq['title'] ); ?></h4> 
                                 <div class="faq-icon"><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i></div>
                             </div>
                             <div class="tf-faq-content tf-mrtop-24">

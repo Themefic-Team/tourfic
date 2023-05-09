@@ -5064,7 +5064,7 @@ div#tf-contact-info {
   border: none;
   padding-bottom: 0;
 }
-.tf-itinerary-wrapper .tf-single-itinerary-item h3 {
+.tf-itinerary-wrapper .tf-single-itinerary-item h4 {
   position: relative;
   font-size: 18px;
   line-height: 1.4;
@@ -5155,7 +5155,7 @@ div#tf-contact-info {
 .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-minus {
   display: none;
 }
-.tf-faq-wrapper .tf-faq-single-inner h3 {
+.tf-faq-wrapper .tf-faq-single-inner h4 {
   line-height: 1.4;
 }
 @media only screen and (max-width: 767.98px) {
