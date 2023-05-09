@@ -1234,9 +1234,11 @@ li.filter-item {
 
 
 
+// Blocksy Theme Single Product image
 
-
-
+.woocommerce-product-gallery .ct-image-container {
+    width: 100% !important;
+}
 
 
 

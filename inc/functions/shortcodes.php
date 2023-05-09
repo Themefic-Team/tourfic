@@ -1255,6 +1255,7 @@ function tf_recent_blog_callback($atts, $content = null){
  */
 add_shortcode( 'tf_vendor_post', 'tf_vendor_post_callback' );
 function tf_vendor_post_callback($atts, $content = null){
+	ob_start();
 	extract(
 		shortcode_atts(
 			array(
