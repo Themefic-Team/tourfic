@@ -27,7 +27,7 @@ class TF_Handle_Emails {
         
         //send mail if Tourfic pro is active
         //send confirmation mail
-        add_action( 'woocommerce_thankyou', array( $this, 'send_email' ), 10, 1 );
+        //add_action( 'woocommerce_thankyou', array( $this, 'send_email' ), 10, 1 );
         add_action( 'woocommerce_thankyou', array( $this, 'send_confirmation_email_pro' ), 10, 1 );
         //send cancellation mail
         add_action( 'woocommerce_order_status_cancelled', array( $this, 'send_cancellation_email_pro' ), 10, 1 );
@@ -586,7 +586,8 @@ class TF_Handle_Emails {
                     $email_body_close                    = $this->email_body_close();
                     $admin_email_booking_body_full       = $email_body_open . $admin_confirmation_template_content . $email_body_close;
                     $admin_email_booking_body_full       = wp_kses_post( html_entity_decode( $admin_email_booking_body_full, '3', 'UTF-8' ) );
-                    
+                    // var_dump( $sale_notification_email );
+                    // die();
                     //send multiple emails to multiple admins
                     if ( strpos( $sale_notification_email, ',' ) !== false ) {
                         $sale_notification_email = explode( ',', $sale_notification_email );
