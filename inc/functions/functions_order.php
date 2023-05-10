@@ -94,6 +94,7 @@ function tf_tour_booking_page_callback() {
 
     <div class="wrap" style="margin-right: 20px;">
         <h1 class="wp-heading-inline"><?php _e( 'Tour Booking Details', 'tourfic' ); ?></h1>
+		<a href="<?php echo admin_url( 'admin.php?page=tf_tours_booking&export=csv&type=tour' ); ?>" class="button button-primary page-title-action"><?php _e( 'Export', 'tourfic' ); ?></a>
         <hr class="wp-header-end">
         <form id="posts-filter">
             <div class="tablenav top">
