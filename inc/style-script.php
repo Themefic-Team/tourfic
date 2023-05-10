@@ -39,36 +39,37 @@ if( !function_exists( 'tf_custom_css' ) ){
 		$tf_global_font_p = tfopt('global-p') ? tfopt('global-p') : 14;
 		$tf_global_font_weight_p = tfopt('global-p-weight') ? tfopt('global-p-weight') : 400;
 		$tf_global_font_style_p = tfopt('global-p-style') ? tfopt('global-p-style') : 'normal';
+		$tf_global_line_height_p = tfopt('global-p-line-height') ? tfopt('global-p-line-height') : 22;
 
 		// Global Typography H1
 		$tf_global_font_h1 = tfopt('global-h1') ? tfopt('global-h1') : 38;
 		$tf_global_font_weight_h1 = tfopt('global-h1-weight') ? tfopt('global-h1-weight') : 500;
-		$tf_global_font_style_h1 = tfopt('global-h1-style') ? tfopt('global-h1-style') : 'normal';
+		$tf_global_font_style_h1 = tfopt('global-h1-style') ? tfopt('global-h1-style') : 'normal';$tf_global_line_height_h1 = tfopt('global-h1-line-height') ? tfopt('global-h1-line-height') : 50;
 
 		// Global Typography H2
 		$tf_global_font_h2 = tfopt('global-h2') ? tfopt('global-h2') : 30;
 		$tf_global_font_weight_h2 = tfopt('global-h2-weight') ? tfopt('global-h2-weight') : 500;
-		$tf_global_font_style_h2 = tfopt('global-h2-style') ? tfopt('global-h2-style') : 'normal';
+		$tf_global_font_style_h2 = tfopt('global-h2-style') ? tfopt('global-h2-style') : 'normal';$tf_global_line_height_h2 = tfopt('global-h2-line-height') ? tfopt('global-h2-line-height') : 38;
 
 		// Global Typography H3
 		$tf_global_font_h3 = tfopt('global-h3') ? tfopt('global-h3') : 24;
 		$tf_global_font_weight_h3 = tfopt('global-h3-weight') ? tfopt('global-h3-weight') : 500;
-		$tf_global_font_style_h3 = tfopt('global-h3-style') ? tfopt('global-h3-style') : 'normal';
+		$tf_global_font_style_h3 = tfopt('global-h3-style') ? tfopt('global-h3-style') : 'normal';$tf_global_line_height_h3 = tfopt('global-h3-line-height') ? tfopt('global-h3-line-height') : 30;
 
 		// Global Typography H4
 		$tf_global_font_h4 = tfopt('global-h4') ? tfopt('global-h4') : 20;
 		$tf_global_font_weight_h4 = tfopt('global-h4-weight') ? tfopt('global-h4-weight') : 500;
-		$tf_global_font_style_h4 = tfopt('global-h4-style') ? tfopt('global-h4-style') : 'normal';
+		$tf_global_font_style_h4 = tfopt('global-h4-style') ? tfopt('global-h4-style') : 'normal';$tf_global_line_height_h4 = tfopt('global-h4-line-height') ? tfopt('global-h4-line-height') : 28;
 
 		// Global Typography H5
 		$tf_global_font_h5 = tfopt('global-h5') ? tfopt('global-h5') : 18;
 		$tf_global_font_weight_h5 = tfopt('global-h5-weight') ? tfopt('global-h5-weight') : 500;
-		$tf_global_font_style_h5 = tfopt('global-h5-style') ? tfopt('global-h5-style') : 'normal';
+		$tf_global_font_style_h5 = tfopt('global-h5-style') ? tfopt('global-h5-style') : 'normal';$tf_global_line_height_h5 = tfopt('global-h5-line-height') ? tfopt('global-h5-line-height') : 25;
 
 		// Global Typography H6
 		$tf_global_font_h6 = tfopt('global-h6') ? tfopt('global-h6') : 14;
 		$tf_global_font_weight_h6 = tfopt('global-h6-weight') ? tfopt('global-h6-weight') : 500;
-		$tf_global_font_style_h6 = tfopt('global-h6-style') ? tfopt('global-h6-style') : 'normal';
+		$tf_global_font_style_h6 = tfopt('global-h6-style') ? tfopt('global-h6-style') : 'normal';$tf_global_line_height_h6 = tfopt('global-h6-line-height') ? tfopt('global-h6-line-height') : 22;
 
 		$output = '';
 		
@@ -91,14 +92,14 @@ if( !function_exists( 'tf_custom_css' ) ){
 				background: '.$tf_template1_global_reg.' !important;
 			}';
 		}
-		if( !empty($tf_global_font_family) ){
+		if( !empty($tf_global_font_family) && $tf_global_font_family!="Default" && $tf_global_heading_font_family!="Default" ){
 			$output .= '
 			.tf-container-inner,
 			.tf-main-wrapper{
 				font-family: '.$tf_global_font_family.'
 			}';
 		}
-		if( !empty($tf_global_heading_font_family) ){
+		if( !empty($tf_global_heading_font_family) && $tf_global_heading_font_family!="Default" && $tf_global_font_family!="Default"){
 			$output .= '
 			.tf-container-inner h1,
 			.tf-main-wrapper h1,
@@ -117,79 +118,86 @@ if( !function_exists( 'tf_custom_css' ) ){
 		}
 
 		// Global typo for P
-		if( !empty($tf_global_font_p) || !empty($tf_global_font_weight_p) || !empty($tf_global_font_style_p) ){
+		if( !empty($tf_global_font_p) || !empty($tf_global_font_weight_p) || !empty($tf_global_font_style_p) || !empty($tf_global_line_height_p) ){
 			$output .= '
 			.tf-container-inner p,
 			.tf-main-wrapper p{
 				font-weight: '.$tf_global_font_weight_p.' !important;
 				font-size: '.$tf_global_font_p.'px !important;
-				font-style: '.$tf_global_font_style_p.' !important
+				font-style: '.$tf_global_font_style_p.' !important;
+				line-height: '.$tf_global_line_height_p.'px !important;
 			}';
 		}
 
 		// Global typo for H1
-		if( !empty($tf_global_font_h1) || !empty($tf_global_font_weight_h1) || !empty($tf_global_font_style_h1) ){
+		if( !empty($tf_global_font_h1) || !empty($tf_global_font_weight_h1) || !empty($tf_global_font_style_h1) || !empty($tf_global_line_height_h1) ){
 			$output .= '
 			.tf-container-inner h1,
 			.tf-main-wrapper h1{
 				font-weight: '.$tf_global_font_weight_h1.' !important;
 				font-size: '.$tf_global_font_h1.'px !important;
-				font-style: '.$tf_global_font_style_h1.' !important
+				font-style: '.$tf_global_font_style_h1.' !important;
+				line-height: '.$tf_global_line_height_h1.'px !important;
 			}';
 		}
 
 		// Global typo for H2
-		if( !empty($tf_global_font_h2) || !empty($tf_global_font_weight_h2) || !empty($tf_global_font_style_h2) ){
+		if( !empty($tf_global_font_h2) || !empty($tf_global_font_weight_h2) || !empty($tf_global_font_style_h2) || !empty($tf_global_line_height_h2) ){
 			$output .= '
 			.tf-container-inner h2,
 			.tf-main-wrapper h2{
 				font-weight: '.$tf_global_font_weight_h2.' !important;
 				font-size: '.$tf_global_font_h2.'px !important;
-				font-style: '.$tf_global_font_style_h2.' !important
+				font-style: '.$tf_global_font_style_h2.' !important;
+				line-height: '.$tf_global_line_height_h2.'px !important;
 			}';
 		}
 
 		// Global typo for H3
-		if( !empty($tf_global_font_h3) || !empty($tf_global_font_weight_h3) || !empty($tf_global_font_style_h3) ){
+		if( !empty($tf_global_font_h3) || !empty($tf_global_font_weight_h3) || !empty($tf_global_font_style_h3) || !empty($tf_global_line_height_h3) ){
 			$output .= '
 			.tf-container-inner h3,
 			.tf-main-wrapper h3{
 				font-weight: '.$tf_global_font_weight_h3.' !important;
 				font-size: '.$tf_global_font_h3.'px !important;
-				font-style: '.$tf_global_font_style_h3.' !important
+				font-style: '.$tf_global_font_style_h3.' !important;
+				line-height: '.$tf_global_line_height_h3.'px !important;
 			}';
 		}
 
 		// Global typo for H4
-		if( !empty($tf_global_font_h4) || !empty($tf_global_font_weight_h4) || !empty($tf_global_font_style_h4) ){
+		if( !empty($tf_global_font_h4) || !empty($tf_global_font_weight_h4) || !empty($tf_global_font_style_h4) || !empty($tf_global_line_height_h4) ){
 			$output .= '
 			.tf-container-inner h4,
 			.tf-main-wrapper h4{
 				font-weight: '.$tf_global_font_weight_h4.' !important;
 				font-size: '.$tf_global_font_h4.'px !important;
-				font-style: '.$tf_global_font_style_h4.' !important
+				font-style: '.$tf_global_font_style_h4.' !important;
+				line-height: '.$tf_global_line_height_h4.'px !important;
 			}';
 		}
 
 		// Global typo for H5
-		if( !empty($tf_global_font_h5) || !empty($tf_global_font_weight_h5) || !empty($tf_global_font_style_h5) ){
+		if( !empty($tf_global_font_h5) || !empty($tf_global_font_weight_h5) || !empty($tf_global_font_style_h5) || !empty($tf_global_line_height_h5) ){
 			$output .= '
 			.tf-container-inner h5,
 			.tf-main-wrapper h5{
 				font-weight: '.$tf_global_font_weight_h5.' !important;
 				font-size: '.$tf_global_font_h5.'px !important;
-				font-style: '.$tf_global_font_style_h5.' !important
+				font-style: '.$tf_global_font_style_h5.' !important;
+				line-height: '.$tf_global_line_height_h5.'px !important;
 			}';
 		}
 
 		// Global typo for H6
-		if( !empty($tf_global_font_h6) || !empty($tf_global_font_weight_h6) || !empty($tf_global_font_style_h6) ){
+		if( !empty($tf_global_font_h6) || !empty($tf_global_font_weight_h6) || !empty($tf_global_font_style_h6) || !empty($tf_global_line_height_h6) ){
 			$output .= '
 			.tf-container-inner h6,
 			.tf-main-wrapper h6{
 				font-weight: '.$tf_global_font_weight_h6.' !important;
 				font-size: '.$tf_global_font_h6.'px !important;
-				font-style: '.$tf_global_font_style_h6.' !important
+				font-style: '.$tf_global_font_style_h6.' !important;
+				line-height: '.$tf_global_line_height_h6.'px !important;
 			}';
 		}
 

@@ -1767,6 +1767,7 @@ if ( ! function_exists( 'tourfic_google_fonts_list' ) ) {
 		$status_check = json_decode($tf_response_status['body'],true);
 		if( !empty($status_check["error"]) ){
 			$fonts_array = array(
+				'Default' => 'Default',
 				'Jost' => 'Jost',
 			);
 		}else{
@@ -1787,9 +1788,14 @@ if ( ! function_exists( 'tourfic_google_fonts_list' ) ) {
 }
 
 function tourfic_google_fonts_url(){
-	$tf_global_font = tfopt('global-body-fonts-family') ? tfopt('global-body-fonts-family') : 'Jost';
-	$tf_global_heading_font_family = tfopt('global-heading-fonts-family') ? tfopt('global-heading-fonts-family') : 'Jost';
-	$url = 'https://fonts.googleapis.com/css2?family='. $tf_global_font	.'&family='. $tf_global_heading_font_family .':wght@100;200;300;400;500;600;700;800;900&display=swap';
+	$tf_global_font = tfopt('global-body-fonts-family') ? tfopt('global-body-fonts-family') : 'Default';
+	$tf_global_heading_font_family = tfopt('global-heading-fonts-family') ? tfopt('global-heading-fonts-family') : 'Default';
+	if($tf_global_font!="Default" && $tf_global_heading_font_family!="Default"){
+		$url = 'https://fonts.googleapis.com/css2?family='. $tf_global_font	.'&family='. $tf_global_heading_font_family .':wght@100;200;300;400;500;600;700;800;900&display=swap';
+	}else{
+		$url = "";
+	}
+	
 	return $url;
 }
 
