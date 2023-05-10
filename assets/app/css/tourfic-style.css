@@ -6056,6 +6056,7 @@ div#tf-contact-info {
   border-radius: 5px;
   margin-bottom: 0px;
   border-collapse: collapse;
+  width: 100%;
 }
 .tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table thead {
   background-color: #0E3DD8;

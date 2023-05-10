@@ -1,6 +1,6 @@
 <?php if ( $features ) { ?>
 <div class="tf-hotel-single-features tf-mrbottom-70">
-    <h2 class="tf-title"><?php echo __("Popular Features","tourfic"); ?></h2>
+    <h2 class="tf-title"><?php echo !empty($meta['popular-section-title']) ? esc_html($meta['popular-section-title']) : __("Popular Features","tourfic"); ?></h2>
     <ul>
     <?php foreach ( $features as $feature ) {
         $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );

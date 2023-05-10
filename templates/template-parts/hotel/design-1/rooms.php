@@ -11,7 +11,7 @@ foreach ( $rooms as $key => $room ) {
 ?>
 
 <div class="tf-rooms-sections tf-mrbottom-70">
-    <h2 class="section-heading"><?php esc_html_e( 'Available Rooms', 'tourfic' ); ?></h2>
+    <h2 class="section-heading"><?php echo !empty($meta['room-section-title']) ? esc_html($meta['room-section-title']) : __( 'Available Rooms', 'tourfic' ); ?></h2>
     <?php do_action( 'tf_hotel_features_filter', $rm_features, 10 ) ?>
     
     <div class="tf-rooms" id="rooms">
@@ -96,7 +96,7 @@ foreach ( $rooms as $key => $room ) {
                                     <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $key : '' ?>"
                                                 data-hotel="<?php echo $post_id; ?>">
                                         <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php _e("Room Image","tourfic"); ?>">
-                                        <span><?php _e("Best Offer", "tourfic"); ?></span>
+                                        <!-- <span><?php //_e("Best Offer", "tourfic"); ?></span> -->
                                     </a>
                                     <?php 
                                     }else{ ?>
