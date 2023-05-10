@@ -220,7 +220,7 @@
                                     <!-- Tourfic Booking form -->
                                     <div class="tf-booking-form">
                                         <div class="tf-booking-form-inner tf-mrtop-24">
-                                            <h3><?php _e("Book This Tour","tourfic"); ?></h3>
+                                            <h3><?php echo !empty($meta['booking-section-title']) ? esc_html($meta['booking-section-title']) : __("Book This Tour","tourfic"); ?></h3>
                                             <?php echo tf_single_tour_booking_form( $post->ID ); ?>
                                             
                                         </div>
@@ -231,7 +231,7 @@
                                 ?>
                                <div class="tf-tour-booking-advantages tf-box tf-mrtop-30">
                                     <div class="tf-head-title">
-                                        <h3><?php echo __( 'Contact Information' , 'tourfic' ) ?></h3>
+                                        <h3><?php echo !empty($meta['contact-info-section-title']) ? esc_html($meta['contact-info-section-title']) : __("Contact Information","tourfic"); ?></h3>
                                     </div>
                                     <div class="tf-booking-advantage-items">
                                         <ul class="tf-list">
