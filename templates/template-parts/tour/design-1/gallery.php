@@ -28,6 +28,20 @@
         </div>
         <?php } ?>
     </div>
+    <div class="tf-single-review-box">
+    <?php if ( ! $disable_review_sec == '1' ) { ?>
+        <?php
+        if($comments){ ?>
+        <div class="tf-single-rating">
+            <span><?php echo tf_total_avg_rating( $comments ); ?></span> (<?php tf_based_on_text( count( $comments ) ); ?>)
+        </div>
+        <?php }else{ ?>
+            <div class="tf-single-rating">
+                <span><?php _e( "0.0", "tourfic" ) ?></span> (<?php _e( "0 review", "tourfic" ) ?>)
+            </div>
+        <?php } ?>
+    <?php } ?>
+    </div>
 </div>
 <div class="tf-gallery">
     <?php 

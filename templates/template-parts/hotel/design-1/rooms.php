@@ -101,7 +101,7 @@ foreach ( $rooms as $key => $room ) {
                                     <?php 
                                     }else{ ?>
                                     <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php _e("Room Image","tourfic"); ?>">
-                                    <span><?php _e("Best Offer", "tourfic"); ?></span>
+                                    <!-- <span><?php //_e("Best Offer", "tourfic"); ?></span> -->
                                     <?php } ?>
                                 </div>
                                 <?php } ?>
@@ -120,7 +120,11 @@ foreach ( $rooms as $key => $room ) {
                                             <h3><?php echo esc_html( $room['title'] ); ?><h3>
                                             <?php } ?>
                                         </div>
-                                        <div class="bed-facilities"><p><?php _e( $room['description'] ); ?></p></div>
+                                        <div class="bed-facilities">
+                                            <p>
+                                            <?php echo substr(wp_strip_all_tags($room['description']), 0, 120). '...'; ?>    
+                                            </p>
+                                        </div>
                                     </div>
                                     <ul>
                                         <?php if ( $footage ) { ?>
