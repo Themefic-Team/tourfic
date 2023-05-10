@@ -261,6 +261,28 @@
             top: calc(0px - -25px);
             right: calc(0px - -25px);
             gap: 24px;
+            @media #{$tfmax767}{
+                gap: 5px;
+                right: calc(0px - -15px);
+            }
+        }
+        .tf-single-review-box{
+            position: absolute;
+            top: calc(0px - -25px);
+            left: calc(0px - -25px);
+            gap: 24px;
+            @media #{$tfmax767}{
+                gap: 5px;
+                left: calc(0px - -15px);
+            }
+            .tf-single-rating{
+                background-color: #5F79A1;
+                padding: 9px 8px !important;
+                font-size: 16px !important;
+                span{
+                    font-weight: 600;
+                }
+            }
         }
     }
     .tf-gallery{

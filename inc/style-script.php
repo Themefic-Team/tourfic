@@ -95,7 +95,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( !empty($tf_global_font_family) && $tf_global_font_family!="Default" && $tf_global_heading_font_family!="Default" ){
 			$output .= '
 			.tf-container-inner,
-			.tf-main-wrapper{
+			.tf-main-wrapper,
+			.tf-container{
 				font-family: '.$tf_global_font_family.'
 			}';
 		}
@@ -103,16 +104,22 @@ if( !function_exists( 'tf_custom_css' ) ){
 			$output .= '
 			.tf-container-inner h1,
 			.tf-main-wrapper h1,
+			.tf-container h1,
 			.tf-container-inner h2,
 			.tf-main-wrapper h2,
+			.tf-container h2,
 			.tf-container-inner h3,
 			.tf-main-wrapper h3,
+			.tf-container h3,
 			.tf-container-inner h4,
 			.tf-main-wrapper h4,
+			.tf-container h4,
 			.tf-container-inner h5,
 			.tf-main-wrapper h5,
+			.tf-container h5,
 			.tf-container-inner h6,
-			.tf-main-wrapper h6{
+			.tf-main-wrapper h6,
+			.tf-container h6{
 				font-family: '.$tf_global_heading_font_family.'
 			}';
 		}

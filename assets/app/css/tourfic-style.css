@@ -4811,6 +4811,32 @@ div#tf-contact-info {
   right: 25px;
   gap: 24px;
 }
+@media only screen and (max-width: 767.98px) {
+  .tf-hero-gallery .tf-gallery-featured .featured-meta-gallery-videos {
+    gap: 5px;
+    right: 15px;
+  }
+}
+.tf-hero-gallery .tf-gallery-featured .tf-single-review-box {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  gap: 24px;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-hero-gallery .tf-gallery-featured .tf-single-review-box {
+    gap: 5px;
+    left: 15px;
+  }
+}
+.tf-hero-gallery .tf-gallery-featured .tf-single-review-box .tf-single-rating {
+  background-color: #5F79A1;
+  padding: 9px 8px !important;
+  font-size: 16px !important;
+}
+.tf-hero-gallery .tf-gallery-featured .tf-single-review-box .tf-single-rating span {
+  font-weight: 600;
+}
 .tf-hero-gallery .tf-gallery {
   display: flex;
   gap: 10px;

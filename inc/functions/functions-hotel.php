@@ -1606,6 +1606,14 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
 	// Location
 	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
+	$map     = ! empty( $meta['map'] ) ? $meta['map'] : '';
+	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $map ) && gettype( $map ) == "string" ) {
+		$tf_hotel_map_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+		}, $map );
+		$map                = unserialize( $tf_hotel_map_value );
+        $address = !empty($map["address"]) ? $map["address"] : $address;
+	}
 	// Rooms
 	$b_rooms = ! empty( $meta['room'] ) ? $meta['room'] : array();
 	if( !empty($b_rooms) && gettype($b_rooms)=="string" ){
@@ -1774,21 +1782,21 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
         </div>
         <div class="tf-item-details">
             <?php 
-            if(!empty($location)){
+            if(!empty($address)){
             ?>
             <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                 <i class="fa-solid fa-location-dot"></i>
-                <p><?php echo $location; ?></p>
+                <p><?php echo $address; ?></p>
             </div>
             <?php } ?>
             <div class="tf-title tf-mrtop-16">
 				<h2><a href="<?php echo esc_url($url); ?>"><?php the_title();?></a></h2>
             </div>
-            
+            <?php tf_archive_single_rating();?>
             <?php if ( $features ) { ?>
 				<div class="tf-arachive-features tf-mrtop-16">
 					<ul>
-						<?php foreach ( $features as $feature ) {
+						<?php foreach ( $features as $tfkey=>$feature ) {
 							$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
 							if ( ! empty( $feature_meta ) ) {
 								$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
@@ -1798,6 +1806,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
 								$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
 							}
+							if( $tfkey < 6 ){
 							?>
 							<li class="tf-feature-lists">
 								<?php
@@ -1806,7 +1815,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 								} ?>
 								<?php echo $feature->name; ?>
 							</li>
-						<?php } ?>
+						<?php }} ?>
 					</ul>
 				</div>
 			<?php } ?>
