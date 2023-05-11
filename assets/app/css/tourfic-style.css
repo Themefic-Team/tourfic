@@ -6172,6 +6172,7 @@ div#tf-contact-info {
 @media only screen and (max-width: 767.98px) {
   .tf-hotel-design-1 .tf-hotel-faqs-section .tf-hotel-enquiry {
     flex-basis: 100%;
+    padding-right: 0px;
   }
 }
 .tf-hotel-design-1 .tf-hotel-faqs-section .tf-hotel-enquiry .tf-ask-enquiry {
@@ -6201,6 +6202,117 @@ div#tf-contact-info {
 }
 .tf-hotel-design-1 .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner h3 {
   font-size: 20px;
+}
+.tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box {
+  background: transparent;
+  border-radius: 0px;
+  flex-basis: 20%;
+  box-shadow: none;
+  padding: 0px;
+}
+.tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-inner {
+  gap: 0px;
+}
+.tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data {
+  flex-basis: 30%;
+  margin-right: 30px;
+  background-color: #fff;
+  box-shadow: 0px 13px 30px 0px #e0e8ee;
+  padding: 30px;
+}
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data {
+    flex-basis: 28%;
+    margin-right: 28px;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data {
+    flex-basis: 100%;
+    margin-right: 0px;
+    margin-bottom: 20px;
+  }
+}
+.tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-list {
+  margin-top: 0px;
+  text-align: center;
+  width: 100%;
+}
+.tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-list li {
+  display: block;
+}
+.tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box p, .tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box li {
+  text-transform: capitalize;
+}
+.tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-average p {
+  background: #ECF2FF;
+  text-align: center;
+  font-size: 30px !important;
+  color: #0E3DD8;
+  font-weight: 600 !important;
+  border-radius: 5px;
+  width: 100%;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-label p {
+  color: #060D1C;
+  font-weight: 500;
+}
+.tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-all-info li {
+  font-size: 14px;
+  color: #0E3DD8;
+}
+.tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features {
+  flex-basis: 68%;
+  background-color: #fff;
+  box-shadow: 0px 13px 30px 0px #e0e8ee;
+  padding: 30px;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features {
+    flex-basis: 100%;
+  }
+}
+.tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features .tf-percent-progress {
+  column-gap: 70px;
+  flex-wrap: wrap;
+}
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features .tf-percent-progress {
+    column-gap: 24px;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features .tf-percent-progress {
+    column-gap: 16px;
+  }
+}
+.tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features .tf-progress-bar {
+  height: 7px;
+  background: #EAEDF6;
+  border-radius: 7px;
+}
+.tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features .tf-progress-item {
+  width: 42%;
+  margin-bottom: 16px;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features .tf-progress-item {
+    width: 40%;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width:360px) {
+  .tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features .tf-progress-item {
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features .tf-progress-item {
+    width: 42%;
+  }
 }
 
 .tf-template-1.tf-room-adv-info ul {
