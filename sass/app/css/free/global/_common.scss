@@ -1281,7 +1281,46 @@ li.filter-item {
     }
 }
 
-
+/*
+Ajax Loader Booking Availability
+*/
+.tf-btn-booking-loading {
+    padding-right: 40px;
+    position: relative;
+  }
+  
+  .tf-btn-booking-loading:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -7px;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #fff;
+    border-left-color: transparent;
+    border-radius: 50%;
+    vertical-align: middle;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    -webkit-animation: tf-wd-rotate 450ms infinite linear;
+    animation: tf-wd-rotate 450ms infinite linear;
+  }
+  
+  @-webkit-keyframes tf-wd-rotate {
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes tf-wd-rotate {
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
 
 
 
