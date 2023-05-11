@@ -46,6 +46,7 @@ if ( ! function_exists( 'tf_tour_enquiry_page_callback' ) ) {
 		?>
 		<div class="wrap" style="margin-right: 20px;">
 			<h1 class="wp-heading-inline"><?php _e( 'Tour Enquiry Details', 'tourfic' ); ?></h1>
+			
 			<?php
 			if ( file_exists( TF_INC_PATH . 'functions/class.tf_enquiry.php' ) ) {
 				require_once TF_INC_PATH . 'functions/class.tf_enquiry.php';
