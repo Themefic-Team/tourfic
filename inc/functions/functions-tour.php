@@ -950,9 +950,13 @@ function tf_single_tour_booking_form( $post_id ) {
         if((!empty($tour_extras[0]['title']) && !empty($tour_extras[0]['desc']) && !empty($tour_extras[0]['price'])) || !empty($tour_extras[1]['title']) && !empty($tour_extras[1]['desc']) && !empty($tour_extras[1]['price'])){  
         ?>
         <div class="tf-tour-extra-area tf-mrtop-30">
-            <div class="tf-form-title">
-                <p><?php _e("Tour Extra","tourfic"); ?></p>
+            <div class="tf-form-title tf-tour-extra">
+                <p><?php _e("Tour Extra","tourfic"); ?>
+                <i class="fa-solid fa-plus"></i>
+                <i class="fa-solid fa-minus"></i>
+                </p>
             </div>
+            <div class="tf-tour-extra-box">
             <?php foreach( $tour_extras as $tour_extra ){ 
                 if(!empty($tour_extra['title']) && !empty($tour_extra['desc']) && !empty($tour_extra['price'])){
             ?>
@@ -973,6 +977,7 @@ function tf_single_tour_booking_form( $post_id ) {
                 <?php } ?>
             </div>
             <?php } } ?>
+            </div>
         </div>
         
         <?php } } ?>

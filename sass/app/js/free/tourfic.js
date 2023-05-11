@@ -1745,6 +1745,20 @@
         });
 
         /*
+        * New Template Tour Extra
+        * @author: Jahid
+        */
+        $('.tf-form-title.tf-tour-extra').click(function () {
+            var $this = $(this);
+            if (!$this.hasClass("active")) {
+                $(".tf-tour-extra-box").slideUp(400);
+                $(".tf-form-title.tf-tour-extra").removeClass("active");
+            }
+            $this.toggleClass("active");
+            $this.next().slideToggle();
+        });
+
+        /*
         * Booking Form select first tab on load
         * @author: Foysal
         */

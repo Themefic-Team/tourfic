@@ -4610,6 +4610,15 @@ div#tf-contact-info {
 }
 .tf-single-details-wrapper .tf-tour-details-right {
   flex-basis: 32%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-single-details-wrapper .tf-tour-details-right {
+    position: static;
+  }
 }
 @media only screen and (min-width: 767.99px) and (max-width: 991px) {
   .tf-single-details-wrapper .tf-tour-details-right {
@@ -5470,14 +5479,44 @@ div#tf-contact-info {
 .tf-tour-details-right .tf-form-title p {
   color: #060D1C;
 }
-.tf-tour-details-right .tf-tour-extra {
+.tf-tour-details-right .tf-form-title.tf-tour-extra p {
+  cursor: pointer;
+  background-color: #F3F7FA;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tf-tour-details-right .tf-form-title.tf-tour-extra p i {
+  float: right;
+}
+.tf-tour-details-right .tf-form-title.tf-tour-extra p .fa-minus {
+  display: none;
+}
+.tf-tour-details-right .tf-form-title.tf-tour-extra.active i {
+  display: none;
+}
+.tf-tour-details-right .tf-form-title.tf-tour-extra.active .fa-minus {
+  display: block;
+}
+.tf-tour-details-right .tf-tour-extra-box {
+  display: none;
+}
+.tf-tour-details-right .tf-tour-extra-box .tf-tour-extra {
   padding: 16px 24px;
   border: 1px solid #EBF0F4;
   border-radius: 5px;
 }
-.tf-tour-details-right .tf-tour-extra p {
+.tf-tour-details-right .tf-tour-extra-box .tf-tour-extra .tf-tour-extra-price {
+  align-items: center;
+}
+.tf-tour-details-right .tf-tour-extra-box .tf-tour-extra .tf-tour-extra-price p {
   line-height: 1.3;
   font-size: 14px;
+}
+.tf-tour-details-right .tf-tour-extra-box .tf-tour-extra .tf-tour-extra-price .tf-tour-extra-input > p {
+  line-height: 1 !important;
 }
 .tf-tour-details-right .tf-booking-bttns button {
   margin-top: 8px;
