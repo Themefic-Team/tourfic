@@ -32,8 +32,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		$tf_review_bg_color = !empty(tf_data_types(tfopt( 'tourfic-review-style' ))['review_bg_color']) ? tf_data_types(tfopt( 'tourfic-review-style' ))['review_bg_color'] : '';
 		
 		// Global Font Family
-		$tf_global_font_family = tfopt('global-body-fonts-family') ? tfopt('global-body-fonts-family') : 'Jost';
-		$tf_global_heading_font_family = tfopt('global-heading-fonts-family') ? tfopt('global-heading-fonts-family') : 'Jost';
+		$tf_global_font_family = tfopt('global-body-fonts-family') ? tfopt('global-body-fonts-family') : 'Default';
+		$tf_global_heading_font_family = tfopt('global-heading-fonts-family') ? tfopt('global-heading-fonts-family') : 'Default';
 
 		// Global Typography P
 		$tf_global_font_p = tfopt('global-p') ? tfopt('global-p') : 14;
