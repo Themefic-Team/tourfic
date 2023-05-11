@@ -255,16 +255,22 @@
                                     </div>
                                 </div>
                                 <?php } ?>
-
+                                <?php 
+                                $tf_enquiry_section_status = !empty($meta['t-enquiry-section']) ? $meta['t-enquiry-section'] : "";
+                                if(!empty($tf_enquiry_section_status)){
+                                ?>
                                 <!-- Enquiry box -->
                                 <div class="tf-tour-booking-advantages tf-box tf-mrtop-30">
                                     <div class="tf-ask-enquiry">
                                         <i class="fa fa-question-circle-o" aria-hidden="true"></i>
-                                        <h3><?php _e( "Have a question in mind", 'tourfic' ); ?></h3>
-                                        <p><?php _e( "Looking for more info? Send a question to the property to find out more.", 'tourfic' ); ?></p>
-                                        <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-bttn-normal bttn-primary"><span><?php esc_html_e( 'Ask a Question', 'tourfic' ); ?></span></a></div>
+                                        <h3><?php echo !empty($meta['t-enquiry-option-title']) ? esc_html($meta['t-enquiry-option-title']) : __("Have a question in mind","tourfic"); ?></h3>
+                                        <p><?php echo !empty($meta['t-enquiry-option-content']) ? esc_html($meta['t-enquiry-option-content']) : __("Looking for more info? Send a question to the property to find out more.","tourfic"); ?></p>
+                                        <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-bttn-normal bttn-primary"><span>
+                                        <?php echo !empty($meta['t-enquiry-option-btn']) ? esc_html($meta['t-enquiry-option-btn']) : __("Ask a Question","tourfic"); ?>    
+                                        </span></a></div>
                                     </div>
                                 </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
