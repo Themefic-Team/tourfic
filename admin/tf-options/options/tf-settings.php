@@ -1317,7 +1317,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label'       => __( 'Global Body Fonts Family', 'tourfic' ),
 					'subtitle'    => __( 'Global Body Fonts Family of Tourfic', 'tourfic' ),
 					'options'  => tourfic_google_fonts_list(),
-					'default' => 'Jost',
+					'default' => 'Default',
 					'field_width' => 29,
 				),
 				array(
@@ -1326,7 +1326,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label'       => __( 'Global Heading Fonts Family', 'tourfic' ),
 					'subtitle'    => __( 'Global Heading Fonts Family of Tourfic', 'tourfic' ),
 					'options'  => tourfic_google_fonts_list(),
-					'default' => 'Jost',
+					'default' => 'Default',
 					'field_width' => 29,
 				),
 				array(

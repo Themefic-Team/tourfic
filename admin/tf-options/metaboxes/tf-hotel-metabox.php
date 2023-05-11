@@ -89,23 +89,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'subtitle' => __( 'Upload one or many images to create a hotel image gallery for customers. This is common gallery visible at the top part of the hotel page', 'tourfic' ),
 				),
 				array(
-					'id'        => 'featured',
-					'type'      => 'switch',
-					'label'     => __( 'Featured Hotel', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false,
-				),
-				array(
-					'id'          => 'featured_text',
-					'type'        => 'text',
-					'label'       => __( 'Hotel Featured Text', 'tourfic' ),
-					'subtitle'    => __( 'Enter Featured Hotel Text', 'tourfic' ),
-					'placeholder' => __( 'Enter Featured Hotel Text', 'tourfic' ),
-					'default' => __( 'Hot Deal', 'tourfic' ),
-					'dependency'  => array( 'featured', '==', true ),
-				),
-				array(
 					'id'          => 'video',
 					'type'        => 'text',
 					'label'       => __( 'Hotel Video', 'tourfic' ),
