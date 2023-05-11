@@ -26,7 +26,7 @@ foreach ( $rooms as $key => $room ) {
         <table class="tf-availability-table">
             <thead>
                 <tr>
-                    <th class="description" colspan="4"><?php _e( 'Room Details', 'tourfic' ); ?></th>
+                    <th class="description" colspan="3"><?php _e( 'Room Details', 'tourfic' ); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -162,7 +162,7 @@ foreach ( $rooms as $key => $room ) {
                                                 <?php _e("Room Photos & Details","tourfic"); ?>
                                             </a>
 
-                                        <div id="tour_room_details_qv" class="tf-reg-wrap">
+                                        <div id="tour_room_details_qv" class="tf-reg-wrap <?php echo $tf_hotel_selected_template == "design-1" ? "tf-hotel-design-1-popup" : ""; ?>">
 
                                         </div>
                                     <?php } ?>
@@ -171,6 +171,7 @@ foreach ( $rooms as $key => $room ) {
                             
                         </td>
                         <td class="pax">
+                            <div style="text-align:center; width: 100%;"><?php echo __("Pax:", "tourfic"); ?></div>
                             <?php if ( $adult_number ) { ?>
                                 <div class="tf-tooltip tf-d-b">
                                     <div class="room-detail-icon">
@@ -197,28 +198,24 @@ foreach ( $rooms as $key => $room ) {
                                 </div>
                             <?php } ?>
                         </td>
-                        <td class="pricing">
-                            <div class="tf-price-column">
-                                <?php
-                                if ( $pricing_by == '1' ) {
-                                    ?>
-                                    <span class="tf-price"><?php echo $price; ?></span>
-                                    <div class="price-per-night">
-                                        <?php esc_html_e( 'per night', 'tourfic' ); ?>
-                                    </div>
-                                    <?php
-                                } else {
-                                    ?>
-                                    <span class="tf-price"><?php echo $price; ?></span>
-                                    <div class="price-per-night">
-                                        <?php esc_html_e( 'per person/night', 'tourfic' ); ?>
-                                    </div>
-                                    <?php
-                                }
-                                ?>
-                            </div>
-                        </td>
                         <td class="reserve tf-t-c">
+                            <?php
+                            if ( $pricing_by == '1' ) {
+                                ?>
+                                <span class="tf-price"><?php echo $price; ?></span>
+                                <div class="price-per-night">
+                                    <?php esc_html_e( 'per night', 'tourfic' ); ?>
+                                </div>
+                                <?php
+                            } else {
+                                ?>
+                                <span class="tf-price"><?php echo $price; ?></span>
+                                <div class="price-per-night">
+                                    <?php esc_html_e( 'per person/night', 'tourfic' ); ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
                             <div class="tf-btn">
                                 <button class="hotel-room-availability tf-bttn-normal bttn-secondary"
                                         type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>

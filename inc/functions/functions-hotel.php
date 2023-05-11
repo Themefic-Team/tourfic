@@ -698,7 +698,7 @@ function tf_room_availability_callback() {
 	<table class="tf-availability-table">
 	<thead>
 		<tr>
-			<th class="description" colspan="4"><?php _e( 'Room Details', 'tourfic' ); ?></th>
+			<th class="description" colspan="3"><?php _e( 'Room Details', 'tourfic' ); ?></th>
 		</tr>
 	</thead>
 	<?php }else{ ?>
@@ -2423,6 +2423,12 @@ function tf_hotel_quickview_callback() {
     <div class="tf-hotel-quick-view" style="display: flex">
 		<?php
 		$meta  = get_post_meta( $_POST['post_id'], 'tf_hotels_opt', true );
+
+		// Single Template Style
+		$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
+		$tf_hotel_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
+		$tf_hotel_selected_template = !empty($tf_hotel_single_template) ? $tf_hotel_single_template : $tf_hotel_global_template;
+
 		$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
 		if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
 			$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
@@ -2476,7 +2482,7 @@ function tf_hotel_quickview_callback() {
                         jQuery('.tf-details-qc-slider-single').slick({
                             slidesToShow: 1,
                             slidesToScroll: 1,
-                            arrows: true,
+                            arrows: <?php echo $tf_hotel_selected_template == "design-1" ? "false" : "true" ?>,
                             fade: false,
                             adaptiveHeight: true,
                             infinite: true,
@@ -2532,18 +2538,13 @@ function tf_hotel_quickview_callback() {
                     </script>
 
                 </div>
-                <div class="tf-hotel-details-info" style="width:440px; padding-left: 35px;">
+                <div class="tf-hotel-details-info" style="width:440px; padding-left: 35px;max-height: 470px;padding-top: 25px; overflow-y: scroll;">
 					<?php
 					$footage      = ! empty( $room['footage'] ) ? $room['footage'] : '';
 					$bed          = ! empty( $room['bed'] ) ? $room['bed'] : '';
 					$adult_number = ! empty( $room['adult'] ) ? $room['adult'] : '0';
 					$child_number = ! empty( $room['child'] ) ? $room['child'] : '0';
 					$num_room     = ! empty( $room['num-room'] ) ? $room['num-room'] : '0';
-
-					// Single Template Style
-					$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
-					$tf_hotel_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
-					$tf_hotel_selected_template = !empty($tf_hotel_single_template) ? $tf_hotel_single_template : $tf_hotel_global_template;
 
 					if( $tf_hotel_selected_template == "design-1" ){
 					?>
@@ -2569,7 +2570,7 @@ function tf_hotel_quickview_callback() {
 						<?php } ?>
 						</ul>
 						
-                    	<p><?php echo wp_trim_words( $room['description'], 50, '...' ); ?></p>
+                    	<p><?php echo $room['description']; ?></p>
 					</div>
 					<?php if(!empty($room['features'])){ ?>
 					

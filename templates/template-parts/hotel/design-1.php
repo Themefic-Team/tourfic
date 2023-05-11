@@ -222,6 +222,13 @@
                             include TF_TEMPLATE_PART_PATH . 'hotel/design-1/'.$section['hotel-section-slug'].'.php';
                         }
                     }
+                }else{
+                    include TF_TEMPLATE_PART_PATH . 'hotel/design-1/description.php';
+                    include TF_TEMPLATE_PART_PATH . 'hotel/design-1/features.php';
+                    include TF_TEMPLATE_PART_PATH . 'hotel/design-1/rooms.php';
+                    include TF_TEMPLATE_PART_PATH . 'hotel/design-1/faq.php';
+                    include TF_TEMPLATE_PART_PATH . 'hotel/design-1/review.php';
+                    include TF_TEMPLATE_PART_PATH . 'hotel/design-1/trams-condition.php';
                 }
                 ?>
             </div>

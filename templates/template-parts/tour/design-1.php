@@ -119,6 +119,18 @@
                                         include TF_TEMPLATE_PART_PATH . 'tour/design-1/'.$section['tour-section-slug'].'.php';
                                     }
                                 }
+                            }else{
+                                include TF_TEMPLATE_PART_PATH . 'tour/design-1/gallery.php';
+                                include TF_TEMPLATE_PART_PATH . 'tour/design-1/price.php';
+                                include TF_TEMPLATE_PART_PATH . 'tour/design-1/description.php';
+                                include TF_TEMPLATE_PART_PATH . 'tour/design-1/information.php';
+                                include TF_TEMPLATE_PART_PATH . 'tour/design-1/highlights.php';
+                                include TF_TEMPLATE_PART_PATH . 'tour/design-1/include-exclude.php';
+                                include TF_TEMPLATE_PART_PATH . 'tour/design-1/itinerary.php';
+                                include TF_TEMPLATE_PART_PATH . 'tour/design-1/map.php';
+                                include TF_TEMPLATE_PART_PATH . 'tour/design-1/faq.php';
+                                include TF_TEMPLATE_PART_PATH . 'tour/design-1/trams-condition.php';
+                                include TF_TEMPLATE_PART_PATH . 'tour/design-1/review.php';
                             }
                             ?>
                                 

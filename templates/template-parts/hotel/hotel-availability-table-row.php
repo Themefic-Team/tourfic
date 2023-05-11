@@ -6,16 +6,38 @@ if( $tf_hotel_selected_template_check == "design-1" ){
         <div class="tf-room-description-box tf-flex">
             <?php 
             $room_preview_img = ! empty( $room['room_preview_img'] ) ? $room['room_preview_img'] : '';
+            $tour_room_details_gall = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
+            if ( $tour_room_details_gall ) {
+                $tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
+            }
+            
             if(!empty($room_preview_img)){ ?>
             <div class="tf-room-preview-img">
+            <?php 
+            if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ){
+            ?>
+            <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: underline;">
                 <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php _e("Room Image","tourfic"); ?>">
+            </a>
+            <?php }else{ ?>
+                <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php _e("Room Image","tourfic"); ?>">
+            <?php } ?>
                 <!-- <span><?php //_e("Best Offer", "tourfic"); ?></span> -->
             </div>
             <?php } ?>
             <div class="tf-features-infos" style="<?php echo !empty($room_preview_img) ? 'width: 70%' : ''; ?>">
                 <div class="tf-room-type">
                     <div class="tf-room-title">
+                        <?php 
+                        if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ){
+                        ?>
+                        <h3>
+                        <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: none;"><?php echo esc_html( $room['title'] ); ?></a>
+                        <h3>
+                        <?php 
+                        }else{ ?>
                         <h3><?php echo esc_html( $room['title'] ); ?><h3>
+                        <?php } ?>
                     </div>
                     <div class="bed-facilities">
                         <p><?php echo substr(wp_strip_all_tags($room['description']), 0, 120). '...'; ?> </p>
@@ -50,10 +72,6 @@ if( $tf_hotel_selected_template_check == "design-1" ){
                 </ul>
 
                 <?php
-                $tour_room_details_gall = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
-                if ( $tour_room_details_gall ) {
-                    $tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
-                }
                 if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ){
                     ?>
                         <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: underline;">
@@ -68,6 +86,7 @@ if( $tf_hotel_selected_template_check == "design-1" ){
         
     </td>
     <td class="pax">
+        <div style="text-align:center; width: 100%;"><?php echo __("Pax:", "tourfic"); ?></div>
         <?php if ( $adult_number ) { ?>
             <div class="tf-tooltip tf-d-b">
                 <div class="room-detail-icon">
@@ -94,7 +113,7 @@ if( $tf_hotel_selected_template_check == "design-1" ){
             </div>
         <?php } ?>
     </td>
-    <td class="pricing">
+    <td class="reserve tf-t-c">
         <div class="tf-price-column">
             <span class="tf-price"><?php echo wc_price( $price ); ?></span>
             <?php if ( $pricing_by == '1' ) { ?>
@@ -108,8 +127,6 @@ if( $tf_hotel_selected_template_check == "design-1" ){
                 <div class="price-per-night tf-deposit-amount-<?php echo $room_id ?> " style="display: none;"><?php _e('Need to be deposited', 'tourfic') ?></div>
             <?php } ?>
         </div>
-    </td>
-    <td class="reserve tf-t-c">
         <form class="tf-room">
             <?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' );?>
 
