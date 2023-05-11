@@ -12,6 +12,10 @@ if( ! function_exists('tf_export_order_data') ){
             $genarate_date = date('Y-m-d');
             $filename = 'tourfic-order-data-'.$genarate_date.'.csv';
             $export_data = $wpdb->get_results("SELECT * FROM $table_name");
+            foreach($export_data as $row){
+                echo $row;
+
+            }
             var_dump($export_data);
             $csv_fields = array();
             $csv_fields[] = 'ID';
