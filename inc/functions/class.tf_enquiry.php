@@ -31,20 +31,6 @@ class DBTFTable extends WP_List_Table {
 		return $item[ $column_name ];
 	}
 
-	//table nav extra
-	function extra_tablenav($which)	{
-		
-		if( 'top' == $which ){			
-			/**
-			 * Before enquiry details table hook
-			 * @hooked tf_before_tour_booking_details - 10
-			 * @since 2.9.18
-			 */
-			do_action( 'tf_before_enquiry_details' );
-		}
-				
-	}
-
 	//if result more than 15 then add pro row
 	public function display_rows() {
 		foreach ( $this->items as $key => $item ) {
