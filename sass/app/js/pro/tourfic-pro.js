@@ -579,38 +579,74 @@
             });
         }
 
+        // QR Code Scan Open
+        $(document).on('click', '.tf_qr_open', function (e) {
+            e.preventDefault();
+            TFQRSCANER();
+        });
+
+        // QR Code Scan Verify
+        $(document).on('click', '.tf_qr_verify', function (e) {
+            e.preventDefault();
+            var qr_code = $(".tf_qr_code_number").val();
+            var data = {
+                action: 'tf_qr_code_verification',
+                tf_qr_code: qr_code,
+            };
+
+            jQuery.ajax({
+                url: tf_params.ajax_url,
+                type: 'post',
+                data: data,
+                success: function (data) {
+                    
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+         
     });
 })(jQuery);
 
-// QR Code
-// var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), scanPeriod: 5, mirror: false });
-// scanner.addListener('scan',function(content){
-//     alert(content);
-//     //window.location.href=content;
-// });
-// Instascan.Camera.getCameras().then(function (cameras){
-//     if(cameras.length>0){
-//         scanner.start(cameras[0]);
-//         $('[name="options"]').on('change',function(){
-//             if($(this).val()==1){
-//                 if(cameras[0]!=""){
-//                     scanner.start(cameras[0]);
-//                 }else{
-//                     alert('No Front camera found!');
-//                 }
-//             }else if($(this).val()==2){
-//                 if(cameras[1]!=""){
-//                     scanner.start(cameras[1]);
-//                 }else{
-//                     alert('No Back camera found!');
-//                 }
-//             }
-//         });
-//     }else{
-//         console.error('No cameras found.');
-//         alert('No cameras found.');
-//     }
-// }).catch(function(e){
-//     console.error(e);
-//     alert(e);
-// });
+// QR Code Scan Function
+const TFQRSCANER = () => {
+    var scanner = new Instascan.Scanner({ video: document.getElementById('tf-video-preview'), scanPeriod: 5, mirror: false });
+    scanner.addListener('scan',function(content){
+        alert(content);
+        //window.location.href=content;
+    });
+    Instascan.Camera.getCameras().then(function (cameras){
+        if(cameras.length>0){
+            scanner.start(cameras[0]);
+            $('[name="options"]').on('change',function(){
+                if($(this).val()==1){
+                    if(cameras[0]!=""){
+                        scanner.start(cameras[0]);
+                        jQuery(".tf-qr-code-preview").show();
+                    }else{
+                        alert('No Front camera found!');
+                    }
+                }else if($(this).val()==2){
+                    if(cameras[1]!=""){
+                        scanner.start(cameras[1]);
+                        jQuery(".tf-qr-code-preview").show();
+                    }else{
+                        alert('No Back camera found!');
+                    }
+                }
+            });
+        }else{
+            console.error('No cameras found.');
+            alert('No cameras found.');
+        }
+    }).catch(function(e){
+        console.error(e);
+        alert(e);
+        jQuery(".tf-qr-code-preview").show();
+        jQuery(".tf-qr-option").hide();
+        jQuery(".tf_qr_code_number").val(34);
+        
+    });
+}
