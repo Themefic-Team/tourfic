@@ -2201,16 +2201,16 @@ TF_Settings::option( 'tf_settings', array(
 		 *
 		 * Main menu
 		 */
-		// 'import_export' => array(
-		// 	'title' => __( 'Import/Export', 'tourfic' ),
-		// 	'icon' => 'fas fa-hdd',
-		// 	'fields' => array(
-		// 		array(
-		// 			'id' => 'backup',
-		// 			'type' => 'backup',
-		// 		),  
+		'import_export' => array(
+			'title' => __( 'Import/Export', 'tourfic' ),
+			'icon' => 'fas fa-hdd',
+			'fields' => array(
+				array(
+					'id' => 'backup',
+					'type' => 'backup',
+				),  
 
-		// 	),
-		// ),
+			),
+		),
 	),
 ) );
