@@ -93,20 +93,19 @@ function tf_tour_booking_page_callback() {
 	?>
 
     <div class="wrap" style="margin-right: 20px;">
-        <h1 class="wp-heading-inline"><?php _e( 'Tour Booking Details', 'tourfic' ); ?></h1>       
+        <h1 class="wp-heading-inline"><?php _e( 'Tour Booking Details', 'tourfic' ); ?></h1>
+		<?php
+			/**
+			 * Before Tour booking details table hook
+			 * @hooked tf_before_tour_booking_details - 10
+			 * @since 2.9.18
+			 */
+			do_action( 'tf_before_tour_booking_details' );
+
+		?>     
 		<hr class="wp-header-end">
         <form id="posts-filter">
-            <div class="tablenav top">
-
-				<?php
-				/**
-				 * Before Tour booking details table hook
-				 * @hooked tf_before_tour_booking_details - 10
-				 * @since 2.9.18
-				 */
-				do_action( 'tf_before_tour_booking_details' );
-
-				?>
+            <div class="tablenav top">				
 				<?php if ( $page_links ) { ?>
                     <div class="tablenav-pages">
                         <span class="displaying-num"><?php echo $query_orders->total; ?><?php _e( 'items', 'tourfic' ); ?></span>
