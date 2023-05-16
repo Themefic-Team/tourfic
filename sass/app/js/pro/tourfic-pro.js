@@ -622,7 +622,7 @@ const TFQRSCANER = () => {
     var scanner = new Instascan.Scanner({ video: document.getElementById('tf-video-preview'), scanPeriod: 5, mirror: false });
     scanner.addListener('scan',function(content){
         // alert(content);
-        jQuery(".tf-qr-code-preview").show();
+        jQuery(".tf-final-submission-form").show();
         jQuery(".tf-qr-option").hide();
         jQuery(".tf_qr_code_number").val(content);
 
@@ -630,19 +630,18 @@ const TFQRSCANER = () => {
     });
     Instascan.Camera.getCameras().then(function (cameras){
         if(cameras.length>0){
+            jQuery(".tf-qr-code-preview").show();
             scanner.start(cameras[0]);
-            $('[name="options"]').on('change',function(){
-                if($(this).val()==1){
+            jQuery('[name="options"]').on('change',function(){
+                if(jQuery(this).val()==1){
                     if(cameras[0]!=""){
                         scanner.start(cameras[0]);
-                        jQuery(".tf-qr-code-preview").show();
                     }else{
                         alert('No Front camera found!');
                     }
-                }else if($(this).val()==2){
+                }else if(jQuery(this).val()==2){
                     if(cameras[1]!=""){
                         scanner.start(cameras[1]);
-                        jQuery(".tf-qr-code-preview").show();
                     }else{
                         alert('No Back camera found!');
                     }
