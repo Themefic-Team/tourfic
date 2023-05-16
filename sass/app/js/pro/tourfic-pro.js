@@ -599,7 +599,14 @@
                 type: 'post',
                 data: data,
                 success: function (data) {
-                    
+                    var response = JSON.parse(data);
+                    if( response.qr_code_response== "true" ){
+                        $(".tf-final-submission-form").hide();
+                        $(".tf-final-submission-feedback").show();
+                    }
+                    if( response.qr_code_response== "false" ){
+                        
+                    }
                 },
                 error: function (data) {
                     console.log(data);
@@ -614,7 +621,11 @@
 const TFQRSCANER = () => {
     var scanner = new Instascan.Scanner({ video: document.getElementById('tf-video-preview'), scanPeriod: 5, mirror: false });
     scanner.addListener('scan',function(content){
-        alert(content);
+        // alert(content);
+        jQuery(".tf-qr-code-preview").show();
+        jQuery(".tf-qr-option").hide();
+        jQuery(".tf_qr_code_number").val(content);
+
         //window.location.href=content;
     });
     Instascan.Camera.getCameras().then(function (cameras){
@@ -644,9 +655,6 @@ const TFQRSCANER = () => {
     }).catch(function(e){
         console.error(e);
         alert(e);
-        jQuery(".tf-qr-code-preview").show();
-        jQuery(".tf-qr-option").hide();
-        jQuery(".tf_qr_code_number").val(34);
         
     });
 }
