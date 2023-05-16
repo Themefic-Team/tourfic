@@ -8,21 +8,10 @@
     min-width: 340px;
     width: 340px;
     text-align: center;
+    margin: 0 auto;
     a.tf_button{
-        padding: 10px 100px;
+        padding: 10px 30px;
         width: 230px;
-        font-size: 16px;
-    }
-    a.tf_secondary_btn{
-        padding: 10px 100px;
-        width: 230px;
-        text-align: center;
-        margin-top: 20px;
-        display: inline-block;
-        background-color: #fff;
-        box-shadow: 0px 13px 30px 0px #e0e8ee;
-        border-radius: 4px;
-        color: #222;
         font-size: 16px;
     }
     .tf-qr-option{
