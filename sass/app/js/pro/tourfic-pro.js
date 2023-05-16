@@ -585,6 +585,13 @@
             TFQRSCANER();
         });
 
+        // QR Code Scan Another
+        $(document).on('click', '.tf_scan_another', function (e) {
+            e.preventDefault();
+            $(".tf-final-submission-feedback").hide();
+            $(".tf-final-error-feedback").hide();
+        });
+
         // QR Code Scan Verify
         $(document).on('click', '.tf_qr_verify', function (e) {
             e.preventDefault();
@@ -605,7 +612,8 @@
                         $(".tf-final-submission-feedback").show();
                     }
                     if( response.qr_code_response== "false" ){
-                        
+                        $(".tf-final-submission-form").hide();
+                        $(".tf-final-error-feedback").show();
                     }
                 },
                 error: function (data) {
