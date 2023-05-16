@@ -46,7 +46,15 @@ if ( ! function_exists( 'tf_tour_enquiry_page_callback' ) ) {
 		?>
 		<div class="wrap" style="margin-right: 20px;">
 			<h1 class="wp-heading-inline"><?php _e( 'Tour Enquiry Details', 'tourfic' ); ?></h1>
-			<?php
+			
+			<?php 
+			/**
+			 * Before enquiry details table hook
+			 * @hooked tf_before_tour_booking_details - 10
+			 * @since 2.9.18
+			 */
+			do_action( 'tf_before_enquiry_details' );
+			
 			if ( file_exists( TF_INC_PATH . 'functions/class.tf_enquiry.php' ) ) {
 				require_once TF_INC_PATH . 'functions/class.tf_enquiry.php';
 			} else {
@@ -89,7 +97,13 @@ if ( ! function_exists( 'tf_hotel_enquiry_page_callback' ) ) {
 		?>
 		<div class="wrap" style="margin-right: 20px;">
 			<h1 class="wp-heading-inline"><?php _e( 'Hotel Enquiry Details', 'tourfic' ); ?></h1>
-			<?php
+			<?php 
+			/**
+			 * Before enquiry details table hook
+			 * @hooked tf_before_tour_booking_details - 10
+			 * @since 2.9.18
+			 */
+			do_action( 'tf_before_enquiry_details' );
 			if ( file_exists( TF_INC_PATH . 'functions/class.tf_enquiry.php' ) ) {
 				require_once TF_INC_PATH . 'functions/class.tf_enquiry.php';
 			} else {
