@@ -629,11 +629,11 @@
 const TFQRSCANER = () => {
     var scanner = new Instascan.Scanner({ video: document.getElementById('tf-video-preview'), scanPeriod: 5, mirror: false });
     scanner.addListener('scan',function(content){
-        // alert(content);
-        jQuery(".tf-final-submission-form").show();
-        jQuery(".tf-qr-option").hide();
-        jQuery(".tf_qr_code_number").val(content);
-
+        if(tf_pro_params.tour_qr==2){
+            jQuery(".tf-final-submission-form").show();
+            jQuery(".tf-qr-option").hide();
+            jQuery(".tf_qr_code_number").val(content);
+        }
         //window.location.href=content;
     });
     Instascan.Camera.getCameras().then(function (cameras){
