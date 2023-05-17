@@ -26,6 +26,7 @@
         border-radius: 5px;
         #tf-video-preview{
             width: 100%;
+            height: 230px;
         }
         .tf-final-submission-form{
             position: absolute;
@@ -117,6 +118,26 @@
             .tf-qr-submission-feedback{
                 i{
                     background-color: #F6AF39;
+                }
+            }
+        }
+        .tf-scanner-preloader{
+            position: absolute;
+            background-color: #fff;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 10px 30px;
+            border-radius: 4px;
+            display: none;
+            .tf-preloader{
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img{
+                    width: 130px;
                 }
             }
         }

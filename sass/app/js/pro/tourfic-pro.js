@@ -596,6 +596,7 @@
         $(document).on('click', '.tf_qr_verify', function (e) {
             e.preventDefault();
             var qr_code = $(".tf_qr_code_number").val();
+            $(".tf-scanner-preloader").show();
             var data = {
                 action: 'tf_qr_code_verification',
                 tf_qr_code: qr_code,
@@ -609,10 +610,12 @@
                     var response = JSON.parse(data);
                     if( response.qr_code_response== "true" ){
                         $(".tf-final-submission-form").hide();
+                        $(".tf-scanner-preloader").hide();
                         $(".tf-final-submission-feedback").show();
                     }
                     if( response.qr_code_response== "false" ){
                         $(".tf-final-submission-form").hide();
+                        $(".tf-scanner-preloader").hide();
                         $(".tf-final-error-feedback").show();
                     }
                 },
@@ -633,6 +636,35 @@ const TFQRSCANER = () => {
             jQuery(".tf-final-submission-form").show();
             jQuery(".tf-qr-option").hide();
             jQuery(".tf_qr_code_number").val(content);
+        }
+        if(tf_pro_params.tour_qr==1){
+            jQuery(".tf-qr-option").hide();
+            jQuery(".tf-scanner-preloader").show();
+            var data = {
+                action: 'tf_qr_code_verification',
+                tf_qr_code: content,
+            };
+            jQuery.ajax({
+                url: tf_params.ajax_url,
+                type: 'post',
+                data: data,
+                success: function (data) {
+                    var response = JSON.parse(data);
+                    if( response.qr_code_response== "true" ){
+                        jQuery(".tf-final-submission-form").hide();
+                        jQuery(".tf-scanner-preloader").hide();
+                        jQuery(".tf-final-submission-feedback").show();
+                    }
+                    if( response.qr_code_response== "false" ){
+                        jQuery(".tf-final-submission-form").hide();
+                        jQuery(".tf-scanner-preloader").hide();
+                        jQuery(".tf-final-error-feedback").show();
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
         }
         //window.location.href=content;
     });
