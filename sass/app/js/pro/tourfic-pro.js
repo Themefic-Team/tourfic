@@ -592,6 +592,14 @@
             $(".tf-final-error-feedback").hide();
         });
 
+        
+        // QR Code Scan Back
+        $(document).on('click', '.tf_scan_back', function (e) {
+            e.preventDefault();
+            $(".tf-qr-code-preview").hide();
+            $(".tf-qr-option").show();
+        });
+
         // QR Code Scan Verify
         $(document).on('click', '.tf_qr_verify', function (e) {
             e.preventDefault();
