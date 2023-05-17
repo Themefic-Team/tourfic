@@ -42,8 +42,19 @@
                 display: flex;
                 justify-content: center;
                 height: 100%;
-                align-items: center;
                 flex-direction: column;
+                .tf-scanner-quick-review{
+                   ul{
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    margin-bottom: 20px;
+                    li{
+                        display: block;
+                        font-size: 14px;
+                    }
+                   }
+                }
                 a{
                     width: 100%;
                     padding: 10px 30px;

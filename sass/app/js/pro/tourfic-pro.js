@@ -609,11 +609,13 @@
                 success: function (data) {
                     var response = JSON.parse(data);
                     if( response.qr_code_response== "true" ){
+                        $(".tf-scanner-quick-review").html("");
                         $(".tf-final-submission-form").hide();
                         $(".tf-scanner-preloader").hide();
-                        $(".tf-final-submission-feedback").show();
+                        $(".tf-final-submission-feedback").show(); 
                     }
                     if( response.qr_code_response== "false" ){
+                        $(".tf-scanner-quick-review").html("");
                         $(".tf-final-submission-form").hide();
                         $(".tf-scanner-preloader").hide();
                         $(".tf-final-error-feedback").show();
@@ -633,9 +635,36 @@ const TFQRSCANER = () => {
     var scanner = new Instascan.Scanner({ video: document.getElementById('tf-video-preview'), scanPeriod: 5, mirror: false });
     scanner.addListener('scan',function(content){
         if(tf_pro_params.tour_qr==2){
-            jQuery(".tf-final-submission-form").show();
-            jQuery(".tf-qr-option").hide();
+            jQuery(".tf-scanner-preloader").show();
             jQuery(".tf_qr_code_number").val(content);
+            var data = {
+                action: 'tf_qr_code_quick_info',
+                tf_qr_code: content,
+            };
+            jQuery.ajax({
+                url: tf_params.ajax_url,
+                type: 'post',
+                data: data,
+                success: function (data) {
+                    var response = JSON.parse(data);
+                    if( response.qr_code_response== "true" ){
+                        jQuery(".tf-scanner-quick-review").html(response.qr_code_result);
+                        jQuery(".tf-scanner-preloader").hide();
+                        jQuery(".tf-final-submission-form").show();
+                        jQuery(".tf-qr-option").hide();
+                    }
+                    if( response.qr_code_response== "false" ){
+                        jQuery(".tf-scanner-quick-review").html("");
+                        jQuery(".tf-scanner-preloader").hide();
+                        jQuery(".tf-final-error-feedback").show();
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+
+            
         }
         if(tf_pro_params.tour_qr==1){
             jQuery(".tf-qr-option").hide();
