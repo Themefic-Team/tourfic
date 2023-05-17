@@ -8,16 +8,24 @@ if ( ! class_exists( 'TF_Backup' ) ) {
             parent::__construct( $field, $value, $settings_id, $parent_field  );
         }
         public function render() {
-            $nonce = wp_create_nonce( 'tf_backup_nonce' );
-            $backup_url = admin_url( 'admin-ajax.php?action=tf_backup&nonce=' . $nonce );
-            $import_url = admin_url( 'admin-ajax.php?action=tf_import&nonce=' . $nonce );
+            global $wpdb;
+            $option_table     = $wpdb->prefix . 'options';
+            $export_url       = admin_url( 'admin-ajax.php');
+            $import_url       = admin_url( 'admin-ajax.php');
+            $current_settings = $wpdb->get_results( "SELECT option_value FROM $option_table WHERE option_name = 'tf_settings'" );
+            if( !empty( $current_settings ) ){
+                $current_settings = $current_settings[0]->option_value;
+            }else{
+                $current_settings = '';
+            }
+           
 
             $placeholder = ( ! empty( $this->field['placeholder'] ) ) ? 'placeholder="' . $this->field['placeholder'] . '"' : '';
-            echo '<textarea name="tf_import_option" id="' . esc_attr( $this->field_name() ) . '"' . $placeholder . ' '. $this->field_attributes() .'>' . $this->value . '</textarea>';
+            echo '<textarea class="tf-exp-imp-field" cols="50" rows="15" name="tf_import_option" id="' . esc_attr( $this->field_name() ) . '"' . $placeholder . ' '. $this->field_attributes() .'> </textarea>';
             echo '<a href="' . $import_url . '" class="tf-import-btn button button-primary">' . __( 'Import', 'tourfic' ) . '</a>';
             echo '<hr>';
-            echo '<textarea name="tf_export_option" id="' . esc_attr( $this->field_name() ) . '"' . $placeholder . ' '. $this->field_attributes() .'>' . json_encode( get_option('tf_settings'),JSON_FORCE_OBJECT ). '</textarea>';
-            echo '<a href="' . $backup_url . '" class="tf-backup-btn button button-primary">' . __( 'Export', 'tourfic' ) . '</a>';
+            echo '<textarea cols="50" rows="15" class="tf-exp-imp-field"  name="tf_export_option" id="' . esc_attr( $this->field_name() ) . '"' . $placeholder . ' '. $this->field_attributes() .'>' . $current_settings . '</textarea>';
+            echo '<a href="#" class="tf-export-btn button button-primary">' . __( 'Export', 'tourfic' ) . '</a>';
 
         }
     }

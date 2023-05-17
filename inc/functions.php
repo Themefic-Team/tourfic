@@ -86,6 +86,14 @@ if ( file_exists( TF_INC_PATH . 'functions/functions_order.php' ) ) {
 } else {
 	tf_file_missing( TF_INC_PATH . 'functions/functions_order.php' );
 }
+/**
+ * Include export import function file
+ */
+if( file_exists( TF_INC_PATH . 'functions/functions-settings-import-export.php' ) ){
+	require_once TF_INC_PATH . 'functions/functions-settings-import-export.php';
+}else{
+	tf_file_missing( TF_INC_PATH . 'functions/functions-settings-import-export.php' );
+}
 
 /**
  * Including CSS & JS
