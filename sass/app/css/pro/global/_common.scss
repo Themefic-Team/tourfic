@@ -846,6 +846,35 @@
             padding: 0px 5px !important;
         }
     }
+    .tf-qr-padding-10{
+        padding-right: 25px;
+    }
+    .tf-quick-contact-info{
+        vertical-align: top;
+    }
+    .tf-location-infos{
+        background: #F2F2F2;
+        border-radius: 16%;
+        padding: 16px;
+    }
+    .tf-qr-code-bar{
+        padding-left: 30px;
+    }
+    .tf-ticket-section{
+        padding: 30px;
+        .tf-ticket-area{
+            padding: 30px;
+            border: 1px dashed #002043;
+            background-image : url("http://tourfic.test/wp-content/plugins/tourfic/assets/app/images/ticket-banner.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            .tf-ticket-padding{
+                padding: 15px 0px;
+            }
+        }
+    }
+    
 }
 @media only screen and (max-width: 991px) {
     .tf-hotel-quick-view {
