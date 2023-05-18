@@ -1531,6 +1531,7 @@ var frame, gframe;
             },
             beforeSend: function ( ) {
                 $('.tf-import-btn').html('Importing...');
+                $('.tf-import-btn').attr('disabled', 'disabled');
             },
             success: function (response) {
                 console.log(response);
@@ -1538,6 +1539,7 @@ var frame, gframe;
                 //$(this).html('Import');
                 if (response.success) {
                     alert('Imported successfully!');
+                    $('.tf-import-btn').html('Import');
                     window.location.reload();
                 } else {
                     alert('Something went wrong!');
@@ -1563,9 +1565,9 @@ var frame, gframe;
             var url = window.URL.createObjectURL(blob);
     
             // Create a temporary link element
-            var link = document.createElement('a');
-            link.href = url;
-            link.download = 'tf-settings-export.txt';
+            var link          = document.createElement('a');
+                link.href     = url;
+                link.download = 'tf-settings-export.txt';
     
             // Programmatically click the link to initiate the file download
             link.click();

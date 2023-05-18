@@ -3504,4 +3504,14 @@ Steps
   color: #a6b1bf;
 }
 
+textarea.tf-exp-imp-field {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+a.tf-import-btn, a.tf-export-btn {
+  margin: 14px 0px !important;
+}
+
 /*# sourceMappingURL=tourfic-admin.css.map */

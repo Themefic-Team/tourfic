@@ -10,7 +10,6 @@ if ( ! class_exists( 'TF_Backup' ) ) {
         public function render() {
             global $wpdb;
             $option_table     = $wpdb->prefix . 'options';
-            $export_url       = admin_url( 'admin-ajax.php');
             $import_url       = admin_url( 'admin-ajax.php');
             $current_settings = $wpdb->get_results( "SELECT option_value FROM $option_table WHERE option_name = 'tf_settings'" );
             if( !empty( $current_settings ) ){
