@@ -1906,7 +1906,13 @@ TF_Settings::option( 'tf_settings', array(
 					'id'      => 'qr-ticket-title',
 					'type'    => 'text',
 					'label'   => __( 'Voucher Title', 'tourfic' ),
-					'default' => "Booking ID",
+					'default' => "Voucher ID",
+					'is_pro' => true,
+				),
+				array(
+					'id'      => 'qr-ticket-prefix',
+					'type'    => 'text',
+					'label'   => __( 'Voucher ID Prefix', 'tourfic' ),
 					'is_pro' => true,
 				),
 				array(
