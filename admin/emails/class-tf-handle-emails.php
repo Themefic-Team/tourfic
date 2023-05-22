@@ -318,6 +318,18 @@ class TF_Handle_Emails{
         $admin_booking_email_template = !empty( $email_settings['admin_booking_email_template'] ) ? $email_settings['admin_booking_email_template'] : '';
         $vendor_booking_email_template = !empty($email_settings['vendor_booking_email_template'] ) ? $email_settings['vendor_booking_email_template'] : '';
         
+        // QR Code PDF Downloader Button
+
+        $tf_order_id = get_option('tf_order_uni_'.$order_id );
+
+        $tf_ticket_download = '';
+        if(!empty($tf_order_id)){
+            $tf_order = wc_get_order( $order_id );
+		    if(!empty($tf_order)){
+                $tf_ticket_download .= '<a href="'. get_bloginfo('url').'?qr_id='.$tf_order_id.'" target="_blank">'.esc_html_e("Download Ticket","tourfic").'</a>';
+            }
+        }
+        
         //all mail tags mapping
         $tf_all_mail_tags = array(
             '{booking_id}'       => $order_id,
@@ -344,6 +356,7 @@ class TF_Handle_Emails{
             '{order_status}'     => $order_status,
             '{site_name}'        => get_bloginfo('name'),
             '{site_url}'         => get_bloginfo('url'),
+            '{tour_ticket_downloader}' => $tf_ticket_download,
         );
 
         $admin_booking_email_template = str_replace( array_keys( $tf_all_mail_tags ), array_values( $tf_all_mail_tags ), $admin_booking_email_template );
