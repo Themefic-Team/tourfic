@@ -865,8 +865,7 @@
         .tf-ticket-area{
             padding: 30px;
             border: 1px dashed #002043;
-            background-image : url("http://tourfic.test/wp-content/plugins/tourfic/assets/app/images/ticket-banner.png");
-            background-repeat: no-repeat;
+            background-repeat: repeat;
             background-size: cover;
             background-position: center;
             .tf-ticket-padding{
