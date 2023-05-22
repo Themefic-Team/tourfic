@@ -692,7 +692,7 @@ class TF_Handle_Emails {
      * @return void
      */
     public function send_cancellation_email_pro( $order_id ){
-        //if( function_exists( 'is_tf_pro' ) && is_tf_pro() ):
+        if( function_exists( 'is_tf_pro' ) && is_tf_pro() ):
             //get order details
             $order = wc_get_order( $order_id );
             //get customer email
@@ -813,11 +813,11 @@ class TF_Handle_Emails {
                     $customer_email_cancellation_body_full  = $email_body_open . $customer_cancellation_template_content . $email_body_close;
                     $customer_email_cancellation_body_full  = wp_kses_post( html_entity_decode( $customer_email_cancellation_body_full, '3', 'UTF-8' ) );
                     //send mail to customer
-                    wp_mail( 'onecustomer120@gmail.com', $email_subject, $customer_email_cancellation_body_full, $headers );
+                    wp_mail( $order_billing_email, $email_subject, $customer_email_cancellation_body_full, $headers );
 
                 }
             }
-        //endif;
+        endif;
 
     }
 
