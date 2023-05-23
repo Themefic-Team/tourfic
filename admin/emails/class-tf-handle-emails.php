@@ -326,7 +326,7 @@ class TF_Handle_Emails{
         if(!empty($tf_order_id)){
             $tf_order = wc_get_order( $order_id );
 		    if(!empty($tf_order)){
-                $tf_ticket_download .= '<a href="'. get_bloginfo('url').'?qr_id='.$tf_order_id.'" target="_blank">'.esc_html_e("Download Ticket","tourfic").'</a>';
+                $tf_ticket_download .= '<a href="'. get_bloginfo('url').'?qr_id='.$tf_order_id.'" target="_blank" style="display: inline-block; padding: 10px 15px; background-color: #0209AF; color: #fff; text-decoration: none;">'.esc_html_e("Download Ticket","tourfic").'</a>';
             }
         }
         
