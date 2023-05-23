@@ -131,6 +131,9 @@ function tf_tour_booking_page_callback() {
                     <th class="manage-column sortable" style="width: 8%;">
                         <a href="#"><?php _e( 'Status', 'tourfic' ); ?></a>
                     </th>
+                    <th class="manage-column sortable" style="width: 8%;">
+                        <a href="#"><?php _e( 'Booking Status', 'tourfic' ); ?></a>
+                    </th>
                     <th class="manage-column sortable" style="width: 12%;">
                         <a href="#"><span><?php _e( 'Payment Method', 'tourfic' ); ?></span><span class="sorting-indicator"></span></a>
                     </th>
@@ -293,6 +296,36 @@ function tf_tour_order_single_row($order){
         <td><?php
 			echo $order_status;
 			?></td>
+		<td>
+		<div class="tf-booking-status-swt">
+			<label class="switch">
+			<?php 
+			$total_tours = 1;
+			foreach ( $order->get_items() as $item_key => $item_values ) {
+				$order_type = $item_values->get_meta( '_order_type', true );
+				if("tour"==$order_type){
+					if( $total_tours < 2 ){
+						$tour_ides = $item_values->get_meta( '_tour_unique_id', true );
+						if( !empty($tour_ides) ){
+							$order_checkin_code = 'tf_'.$tour_ides;
+							$tf_order_checkin = get_option( $order_checkin_code );
+							if( empty($tf_order_checkin) ){
+								echo '<input type="checkbox" class="tf-ticket-status" value="'.$tour_ides.'">';
+							}else{
+								echo '<input type="checkbox" class="tf-ticket-status" value="'.$tour_ides.'" checked="">';
+							}
+						}else{
+							echo '<input type="checkbox" class="tf-ticket-status" value="'.$tour_ides.'">';
+						}
+						$total_tours++;
+					}
+				}
+			}
+			?>
+			<span class="switcher round"></span>
+			</label>
+		</div>
+		</td>
         <td><?php
 			echo $order_payment_method;
 			?></td>
