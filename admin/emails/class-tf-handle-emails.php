@@ -326,7 +326,16 @@ class TF_Handle_Emails{
         if(!empty($tf_order_id)){
             $tf_order = wc_get_order( $order_id );
 		    if(!empty($tf_order)){
-                $tf_ticket_download .= '<a href="'. get_bloginfo('url').'?qr_id='.$tf_order_id.'" target="_blank" style="display: inline-block; padding: 10px 15px; background-color: #0209AF; color: #fff; text-decoration: none;">'.esc_html_e("Download Ticket","tourfic").'</a>';
+                $total_tours = 1;
+                foreach ( $tf_order->get_items() as $item_id => $item ) {
+                $order_type = $item->get_meta( '_order_type', true );
+                    if("tour"==$order_type){
+                    if( $total_tours < 2 ){
+                        $tf_ticket_download .= '<div style="margin: 10px 0;"><a href="'. get_bloginfo('url').'?qr_id='.$tf_order_id.'" target="_blank" style="display: inline-block; padding: 10px 15px; background-color: #0209AF; color: #fff; text-decoration: none;">Download Ticket</a></div>';
+                        $total_tours++;
+                    }
+                    }
+                }
             }
         }
         
