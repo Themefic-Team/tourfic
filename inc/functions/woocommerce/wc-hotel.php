@@ -787,6 +787,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			$tour_ides = $item->get_meta( '_tour_unique_id', true );
 			update_option( $tour_ides, $order_id);
 			update_option( 'tf_order_uni_'.$order_id, $tour_ides);
+			update_option( 'tf_order_tour_'.$tour_ides, $post_id);
 			$tour_date = $item->get_meta( 'Tour Date', true );
 			$tour_time = $item->get_meta( 'Tour Time', true );
 			$price = $item->get_subtotal();

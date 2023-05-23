@@ -329,11 +329,10 @@ class TF_Handle_Emails{
                 $total_tours = 1;
                 foreach ( $tf_order->get_items() as $item_id => $item ) {
                 $order_type = $item->get_meta( '_order_type', true );
+				$tour_ides = $item->get_meta( '_tour_unique_id', true );
                     if("tour"==$order_type){
-                    if( $total_tours < 2 ){
-                        $tf_ticket_download .= '<div style="margin: 10px 0;"><a href="'. get_bloginfo('url').'?qr_id='.$tf_order_id.'" target="_blank" style="display: inline-block; padding: 10px 15px; background-color: #0209AF; color: #fff; text-decoration: none;">Download Ticket</a></div>';
+                        $tf_ticket_download .= '<div style="margin: 10px 0;"><a href="'. get_bloginfo('url').'?qr_id='.$tour_ides.'" target="_blank" style="display: inline-block; padding: 10px 15px; background-color: #0209AF; color: #fff; text-decoration: none;">Download Ticket '.$total_tours.'</a></div>';
                         $total_tours++;
-                    }
                     }
                 }
             }
