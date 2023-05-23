@@ -29,10 +29,9 @@ class TF_Handle_Emails {
         //send confirmation mail
         add_action( 'woocommerce_thankyou', array( $this, 'send_email' ), 10, 1 );
         //send pro confirmation mail
-        //add_action( 'woocommerce_thankyou', array( $this, 'send_confirmation_email_pro' ), 10, 1 );
+        add_action( 'woocommerce_thankyou', array( $this, 'send_confirmation_email_pro' ), 10, 1 );
         //send cancellation mail
-        //add_action( 'woocommerce_order_status_cancelled', array( $this, 'send_cancellation_email_pro' ), 10, 1 );
-        add_action( 'woocommerce_thankyou', array( $this, 'send_cancellation_email_pro' ), 10, 1 );
+        add_action( 'woocommerce_order_status_cancelled', array( $this, 'send_cancellation_email_pro' ), 10, 1 );
     }
 
     /**

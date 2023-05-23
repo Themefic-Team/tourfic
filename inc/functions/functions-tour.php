@@ -1830,7 +1830,7 @@ add_action( 'init', 'tf_tours_custom_status_creation' );
 
 function tf_tours_custom_status_add_in_quick_edit() {
     global $post;
-    if($post->post_type == 'tf_tours'){
+    if( !empty( $post->post_type ) && $post->post_type == 'tf_tours'){
     echo "<script>
     jQuery(document).ready( function() {
         jQuery( 'select[name=\"_status\"]' ).append( '<option value=\"expired\">Expired</option>' );      
