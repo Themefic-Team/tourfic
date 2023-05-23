@@ -333,6 +333,28 @@ Fontawesome
   transform: translateX(26px);
 }
 
+#tf-booking-status-loader {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+}
+#tf-booking-status-loader img {
+  width: 120px;
+}
+
+#tf-booking-status-loader.show {
+  visibility: visible;
+  opacity: 1;
+}
+
 .tf-post-states {
   display: inline-block;
   font-size: 11px;

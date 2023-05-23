@@ -93,6 +93,9 @@ function tf_tour_booking_page_callback() {
 	?>
 
     <div class="wrap" style="margin-right: 20px;">
+		<div id="tf-booking-status-loader">
+			<img src="<?php echo TF_ASSETS_URL; ?>app/images/loader.gif" alt="Loader">
+		</div>
         <h1 class="wp-heading-inline"><?php _e( 'Tour Booking Details', 'tourfic' ); ?></h1>
         <hr class="wp-header-end">
         <form id="posts-filter">
