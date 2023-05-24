@@ -262,29 +262,36 @@ Fontawesome
 /* admin switcher */
 
 .tf-booking-status-swt {
-  .switch {
-      position: relative;
-      display: inline-block;
-      width: 48px;
-      height: 20px;
-      input {
-          opacity: 0;
-          width: 0;
-          height: 0;
-      }
-  }
-  .switcher.round {
-      border-radius: 20px;
-  }
-  .switcher {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
+  .tf-booking-status{
+    margin-bottom: 15px;
+    span{
+      display: block;
+      font-weight: 600;
+    }
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 48px;
+        height: 20px;
+        input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+    }
+    .switcher.round {
+        border-radius: 20px;
+    }
+    .switcher {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+    }
   }
 }
 .tf-booking-status-swt .switcher.round::before {

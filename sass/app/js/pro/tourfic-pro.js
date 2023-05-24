@@ -616,13 +616,12 @@
                 data: data,
                 success: function (data) {
                     var response = JSON.parse(data);
-                    if( response.qr_code_response== "true" ){
+                    if( response.qr_code_response_checked== "true" ){
                         $(".tf-scanner-quick-review").html("");
                         $(".tf-final-submission-form").hide();
                         $(".tf-scanner-preloader").hide();
                         $(".tf-final-submission-feedback").show(); 
-                    }
-                    if( response.qr_code_response== "false" ){
+                    }else{
                         $(".tf-scanner-quick-review").html("");
                         $(".tf-final-submission-form").hide();
                         $(".tf-scanner-preloader").hide();
@@ -655,16 +654,16 @@ const TFQRSCANER = () => {
                 data: data,
                 success: function (data) {
                     var response = JSON.parse(data);
-                    if( response.qr_code_response== "true" ){
+                    if( response.qr_code_result ){
                         jQuery(".tf-scanner-quick-review").html(response.qr_code_result);
                         jQuery(".tf-scanner-preloader").hide();
                         jQuery(".tf-final-submission-form").show();
                         jQuery(".tf-qr-option").hide();
-                    }
-                    if( response.qr_code_response== "false" ){
+                    }else{
                         jQuery(".tf-scanner-quick-review").html("");
                         jQuery(".tf-scanner-preloader").hide();
                         jQuery(".tf-final-error-feedback").show();
+                        jQuery(".tf-qr-option").hide();
                     }
                 },
                 error: function (data) {
