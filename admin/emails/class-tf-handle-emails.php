@@ -321,7 +321,7 @@ class TF_Handle_Emails {
                     ),
                     'vendor'   => array(
                         'heading'         => __( 'A booking has been cancelled', 'tourfic' ),
-                        'greeting'        => __( 'Dear {fullname},', 'tourfic' ),
+                        'greeting'        => __( 'Dear Vendor,', 'tourfic' ),
                         'greeting_byline' => __( 'A booking has been cancelled. The booking details are listed below.', 'tourfic' ),
                     ),
                     'customer' => array(

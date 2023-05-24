@@ -47,7 +47,7 @@ $payment_details = array(
 			duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
 		</p>
 	</div>
-	<p style="margin: 0;">Thank you for purchasing.</p>
+	<p style="margin:10px 0;">Thank you for purchasing.</p>
 	<?php if ( 'admin' === $args['send_to'] ) : ?>
 	<div style="margin: 10px 0;">
 		<a href="{booking_url}" style="display: inline-block; padding: 10px 15px; background-color: #0209AF; color: #fff; text-decoration: none;">View Order</a>
