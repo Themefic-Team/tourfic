@@ -596,8 +596,7 @@
         // QR Code Scan Back
         $(document).on('click', '.tf_scan_back', function (e) {
             e.preventDefault();
-            $(".tf-qr-code-preview").hide();
-            $(".tf-qr-option").show();
+            location.reload();
         });
 
         // QR Code Scan Verify
