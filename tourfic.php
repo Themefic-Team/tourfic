@@ -8,10 +8,10 @@
  * Text Domain:     tourfic
  * Domain Path:     /lang/
  * Version:         2.9.18
- * Tested up to:    6.2.1
+ * Tested up to:    6.2.2
  * WC tested up to: 7.7.0
  * Requires PHP:    7.2
- * Elementor tested up to: 3.13.2
+ * Elementor tested up to: 3.13.3
  */
 
 // don't load directly
