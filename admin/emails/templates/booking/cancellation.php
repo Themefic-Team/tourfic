@@ -1,7 +1,8 @@
 <?php
 /**
  *
- * New Booking order template.
+ * New order cancellation template.
+ * @return string
  *
  */
 
@@ -22,10 +23,10 @@ $payment_details = array(
 
 <div style="padding-left:50px;padding-right:50px;margin: 0 auto;margin-top:30px;">
 	<h3 class="greeting" style="margin: 0; padding: 0;">
-	<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting' ) ); ?>
+	<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'cancellation', $args['send_to'], 'greeting' ) ); ?>
 	</h3>
 	<p style="margin: 10px 0;">
-		<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting_byline' ) ); ?>
+		<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'cancellation', $args['send_to'], 'greeting_byline' ) ); ?>
 	</p>
 	<div class="order-table">
 		{booking_details}                
@@ -47,7 +48,7 @@ $payment_details = array(
 			duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
 		</p>
 	</div>
-	<p style="margin:10px 0;">Thank you for purchasing.</p>
+	<p style="margin:10px 0">Thank you for purchasing.</p>
 	<?php if ( 'admin' === $args['send_to'] ) : ?>
 	<div style="margin: 10px 0;">
 		<a href="{booking_url}" style="display: inline-block; padding: 10px 15px; background-color: #0209AF; color: #fff; text-decoration: none;">View Order</a>
