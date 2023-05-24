@@ -707,6 +707,9 @@ const TFQRSCANER = () => {
     Instascan.Camera.getCameras().then(function (cameras){
         if(cameras.length>0){
             jQuery(".tf-qr-code-preview").show();
+            jQuery(".tf-final-submission-form").hide();
+            jQuery(".tf-final-submission-feedback").hide();
+            jQuery(".tf-final-error-feedback").hide();
             scanner.start(cameras[0]);
             jQuery('[name="options"]').on('change',function(){
                 if(jQuery(this).val()==1){
