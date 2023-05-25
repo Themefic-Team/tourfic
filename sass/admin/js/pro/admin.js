@@ -98,4 +98,21 @@
 
     });
 
+    //export hotel tour ajax
+    $(document).on('click', '.tf-export-ht-btn', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: tf_pro_params.ajax_url,
+            data: {
+                action: "tf_export_tours",
+                nonce: tf_pro_params.nonce,
+            },
+            success: function(response){
+                console.log(response);
+            }
+        });
+    })
+    
+
 })(jQuery);
