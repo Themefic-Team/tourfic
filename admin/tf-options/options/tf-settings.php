@@ -1919,7 +1919,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'      => 'qr-ticket-content',
 					'type'    => 'text',
 					'label'   => __( 'Voucher Policy', 'tourfic' ),
-					'default' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+					'default' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.",
 					'is_pro' => true,
 				),
 				array(
