@@ -143,9 +143,12 @@ function tf_tour_booking_page_callback() {
                     <th class="manage-column sortable" style="width: 8%;">
                         <a href="#"><?php _e( 'Status', 'tourfic' ); ?></a>
                     </th>
+					<?php 
+					if(function_exists( 'is_tf_pro' ) && is_tf_pro()){ ?>
                     <th class="manage-column sortable" style="width: 15%;">
                         <a href="#"><?php _e( 'Booking Status', 'tourfic' ); ?></a>
                     </th>
+					<?php } ?>
                     <th class="manage-column sortable" style="width: 12%;">
                         <a href="#"><span><?php _e( 'Payment Method', 'tourfic' ); ?></span><span class="sorting-indicator"></span></a>
                     </th>
@@ -308,6 +311,8 @@ function tf_tour_order_single_row($order){
         <td><?php
 			echo $order_status;
 			?></td>
+		<?php 
+		if(function_exists( 'is_tf_pro' ) && is_tf_pro()){ ?>
 		<td>
 		<div class="tf-booking-status-swt">
 			<?php 
@@ -336,6 +341,7 @@ function tf_tour_order_single_row($order){
 			?>
 		</div>
 		</td>
+		<?php } ?>
         <td><?php
 			echo $order_payment_method;
 			?></td>

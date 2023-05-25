@@ -190,16 +190,18 @@ class TF_Handle_Emails {
         $tf_order_id = get_option('tf_order_uni_'.$order_id );
 
         $tf_ticket_download = '';
-        if(!empty($tf_order_id)){
-            $tf_order = wc_get_order( $order_id );
-            if(!empty($tf_order)){
-                $total_tours = 1;
-                foreach ( $tf_order->get_items() as $item_id => $item ) {
-                $order_type = $item->get_meta( '_order_type', true );
-                $tour_ides = $item->get_meta( '_tour_unique_id', true );
-                    if("tour"==$order_type){
-                        $tf_ticket_download .= '<div style="margin: 10px 0;"><a href="'. get_bloginfo('url').'?qr_id='.$tour_ides.'" target="_blank" style="display: inline-block; padding: 10px 15px; background-color: #0209AF; color: #fff; text-decoration: none;">Download Ticket '.$total_tours.'</a></div>';
-                        $total_tours++;
+        if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
+            if(!empty($tf_order_id)){
+                $tf_order = wc_get_order( $order_id );
+                if(!empty($tf_order)){
+                    $total_tours = 1;
+                    foreach ( $tf_order->get_items() as $item_id => $item ) {
+                    $order_type = $item->get_meta( '_order_type', true );
+                    $tour_ides = $item->get_meta( '_tour_unique_id', true );
+                        if("tour"==$order_type){
+                            $tf_ticket_download .= '<div style="margin: 10px 0;"><a href="'. get_bloginfo('url').'?qr_id='.$tour_ides.'" target="_blank" style="display: inline-block; padding: 10px 15px; background-color: #0209AF; color: #fff; text-decoration: none;">Download Ticket '.$total_tours.'</a></div>';
+                            $total_tours++;
+                        }
                     }
                 }
             }
