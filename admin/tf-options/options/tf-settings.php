@@ -1871,7 +1871,6 @@ TF_Settings::option( 'tf_settings', array(
 					<strong>{booking_url} </strong> : To display the booking url.<br>
 					<strong>{site_name} </strong> : To display the site name.<br>
 					<strong>{site_url} </strong> : To display the site url.<br>
-					<strong>{tour_ticket_downloader} </strong> : To display the Tour Ticket Download Button.<br>
 
 					'
 					
