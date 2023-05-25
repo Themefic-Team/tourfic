@@ -264,11 +264,14 @@ Fontawesome
 .tf-booking-status-swt {
   .tf-booking-status{
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
     span{
-      display: block;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 15px;
     }
     .switch {
+        margin-left: 15px;
         position: relative;
         display: inline-block;
         width: 48px;

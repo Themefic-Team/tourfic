@@ -146,7 +146,7 @@ function tf_tour_booking_page_callback() {
 					<?php 
 					if(function_exists( 'is_tf_pro' ) && is_tf_pro()){ ?>
                     <th class="manage-column sortable" style="width: 15%;">
-                        <a href="#"><?php _e( 'Booking Status', 'tourfic' ); ?></a>
+                        <a href="#"><?php _e( 'Vouchers', 'tourfic' ); ?></a>
                     </th>
 					<?php } ?>
                     <th class="manage-column sortable" style="width: 12%;">
@@ -318,22 +318,22 @@ function tf_tour_order_single_row($order){
 			<?php 
 			foreach ( $order->get_items() as $item_key => $item_values ) {
 				$order_type = $item_values->get_meta( '_order_type', true );
-				$tour_ides = $item_values->get_meta( '_tour_unique_id', true );
-				$tour_id   = $item_values->get_meta( '_tour_id', true );
-				$tour_name = esc_html( get_the_title( $tour_id ) );
 				if("tour"==$order_type){
+					$tour_ides = $item_values->get_meta( '_tour_unique_id', true );
+					$tour_id   = $item_values->get_meta( '_tour_id', true );
+					$tour_name = esc_html( get_the_title( $tour_id ) );
 					if( !empty($tour_ides) ){
 						$order_checkin_code = 'tf_'.$tour_ides;
 						$tf_order_checkin = get_option( $order_checkin_code );
 						if( empty($tf_order_checkin) ){
-							echo '<div class="tf-booking-status"><span>#'.$tour_id.' - '.$tour_name.'</span><label class="switch"><input type="checkbox" class="tf-ticket-status" value="'.$tour_ides.'"><span class="switcher round"></span>
+							echo '<div class="tf-booking-status"><span>#'.$tour_ides.'</span><label class="switch"><input type="checkbox" class="tf-ticket-status" value="'.$tour_ides.'"><span class="switcher round"></span>
 							</label></div>';
 						}else{
-							echo '<div class="tf-booking-status"><span>#'.$tour_id.' - '.$tour_name.'</span><label class="switch"><input type="checkbox" class="tf-ticket-status" value="'.$tour_ides.'" checked=""><span class="switcher round"></span>
+							echo '<div class="tf-booking-status"><span>#'.$tour_ides.'</span><label class="switch"><input type="checkbox" class="tf-ticket-status" value="'.$tour_ides.'" checked=""><span class="switcher round"></span>
 							</label></div>';
 						}
 					}else{
-						echo '<div class="tf-booking-status"><span>#'.$tour_id.' - '.$tour_name.'</span><label class="switch"><input type="checkbox" class="tf-ticket-status" value="'.$tour_ides.'"><span class="switcher round"></span>
+						echo '<div class="tf-booking-status"><span>#'.$tour_ides.'</span><label class="switch"><input type="checkbox" class="tf-ticket-status" value="'.$tour_ides.'"><span class="switcher round"></span>
 						</label></div>';
 					}
 				}
