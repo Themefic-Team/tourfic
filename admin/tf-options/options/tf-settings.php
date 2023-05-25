@@ -1871,6 +1871,7 @@ TF_Settings::option( 'tf_settings', array(
 					<strong>{booking_url} </strong> : To display the booking url.<br>
 					<strong>{site_name} </strong> : To display the site name.<br>
 					<strong>{site_url} </strong> : To display the site url.<br>
+					<strong>{tour_ticket_downloader} </strong> : To display the Tour Ticket Download Button.<br>
 
 					'
 					
@@ -1879,6 +1880,62 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		
+		//QR Code settings
+		'qr_code'    => array(
+			'title'  => esc_html__( 'QR Code', 'tourfic' ),
+			'icon'   => 'fa fa-qrcode',
+			'fields' => array(
+				array(
+					'id'      => 'qr-code-title',
+					'type'    => 'heading',
+					'content' => __( 'Tour QR Code', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'      => 'qr_logo',
+					'type'    => 'image',
+					'label'   => __( 'Company Logo', 'tourfic' ),
+					'is_pro' => true,
+				),
+				array(
+					'id'      => 'qr_background',
+					'type'    => 'image',
+					'label'   => __( 'QR Code WaterMark', 'tourfic' ),
+					'is_pro' => true,
+				),
+				array(
+					'id'      => 'qr-ticket-title',
+					'type'    => 'text',
+					'label'   => __( 'Voucher Title', 'tourfic' ),
+					'default' => "Voucher ID",
+					'is_pro' => true,
+				),
+				array(
+					'id'      => 'qr-ticket-prefix',
+					'type'    => 'text',
+					'label'   => __( 'Voucher ID Prefix', 'tourfic' ),
+					'is_pro' => true,
+				),
+				array(
+					'id'      => 'qr-ticket-content',
+					'type'    => 'text',
+					'label'   => __( 'Voucher Policy', 'tourfic' ),
+					'default' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+					'is_pro' => true,
+				),
+				array(
+					'id'      => 'qr-ticket-verify',
+					'type'    => 'select',
+					'label'   => __( 'QR Code Verification', 'tourfic' ),
+					'options' => array(
+						'1'        => __( '1 Step', 'tourfic' ),
+						'2' => __( '2 Step', 'tourfic' ),
+					),
+					'default' => '2',
+					'is_pro' => true,
+				),
+			),
+		),
 
 		/**
 		 * Integration

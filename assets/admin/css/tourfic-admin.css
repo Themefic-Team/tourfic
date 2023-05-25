@@ -281,6 +281,87 @@ Fontawesome
   height: 400px;
 }
 
+/* admin switcher */
+.tf-booking-status-swt .tf-booking-status {
+  margin-bottom: 15px;
+}
+.tf-booking-status-swt .tf-booking-status span {
+  display: block;
+  font-weight: 600;
+}
+.tf-booking-status-swt .tf-booking-status .switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 20px;
+}
+.tf-booking-status-swt .tf-booking-status .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.tf-booking-status-swt .tf-booking-status .switcher.round {
+  border-radius: 20px;
+}
+.tf-booking-status-swt .tf-booking-status .switcher {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+}
+
+.tf-booking-status-swt .switcher.round::before {
+  border-radius: 50%;
+}
+
+.tf-booking-status-swt .switcher::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 2px;
+  bottom: 1px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.tf-booking-status-swt input:checked + .switcher {
+  background-color: #002C66;
+}
+
+.tf-booking-status-swt input:checked + .switcher::before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+#tf-booking-status-loader {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+}
+#tf-booking-status-loader img {
+  width: 120px;
+}
+
+#tf-booking-status-loader.show {
+  visibility: visible;
+  opacity: 1;
+}
+
 .tf-post-states {
   display: inline-block;
   font-size: 11px;
