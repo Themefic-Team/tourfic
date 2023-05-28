@@ -16,12 +16,59 @@
 						</div>
 						<span><?php echo ')'; ?> </span>
                     </div>
+                    <?php 
+                    $tf_defult_views = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel_archive_view'] ) ? tf_data_types(tfopt( 'tf-template' ))['hotel_archive_view'] : 'list';
+                    ?>
                     <div class="tf-search-layout tf-flex tf-flex-gap-12">
-                        <div class="tf-icon tf-serach-layout-list tf-grid-list-layout active" data-id="list-view">
-                            <i class="fa-solid fa-list-ul"></i>
+                        <div class="tf-icon tf-serach-layout-list tf-list-active tf-grid-list-layout <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" data-id="list-view">
+                            <div class="defult-view">
+                                <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="12" height="2" fill="white"/>
+                                <rect x="14" width="2" height="2" fill="white"/>
+                                <rect y="5" width="12" height="2" fill="white"/>
+                                <rect x="14" y="5" width="2" height="2" fill="white"/>
+                                <rect y="10" width="12" height="2" fill="white"/>
+                                <rect x="14" y="10" width="2" height="2" fill="white"/>
+                                </svg>
+                            </div>
+                            <div class="active-view">
+                                <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="12" height="2" fill="#0E3DD8"/>
+                                <rect x="14" width="2" height="2" fill="#0E3DD8"/>
+                                <rect y="5" width="12" height="2" fill="#0E3DD8"/>
+                                <rect x="14" y="5" width="2" height="2" fill="#0E3DD8"/>
+                                <rect y="10" width="12" height="2" fill="#0E3DD8"/>
+                                <rect x="14" y="10" width="2" height="2" fill="#0E3DD8"/>
+                                </svg>
+                            </div>
                         </div>
-                        <div class="tf-icon tf-serach-layout-grid tf-grid-list-layout" data-id="grid-view">
-                            <i class="fa-solid fa-table-cells"></i>
+                        <div class="tf-icon tf-serach-layout-grid tf-grid-list-layout <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" data-id="grid-view">
+                            <div class="defult-view">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="10" width="2" height="2" fill="#0E3DD8"/>
+                                <rect x="10" y="5" width="2" height="2" fill="#0E3DD8"/>
+                                <rect x="10" y="10" width="2" height="2" fill="#0E3DD8"/>
+                                <rect x="5" width="2" height="2" fill="#0E3DD8"/>
+                                <rect x="5" y="5" width="2" height="2" fill="#0E3DD8"/>
+                                <rect x="5" y="10" width="2" height="2" fill="#0E3DD8"/>
+                                <rect width="2" height="2" fill="#0E3DD8"/>
+                                <rect y="5" width="2" height="2" fill="#0E3DD8"/>
+                                <rect y="10" width="2" height="2" fill="#0E3DD8"/>
+                                </svg>
+                            </div>
+                            <div class="active-view">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="10" width="2" height="2" fill="white"/>
+                                <rect x="10" y="5" width="2" height="2" fill="white"/>
+                                <rect x="10" y="10" width="2" height="2" fill="white"/>
+                                <rect x="5" width="2" height="2" fill="white"/>
+                                <rect x="5" y="5" width="2" height="2" fill="white"/>
+                                <rect x="5" y="10" width="2" height="2" fill="white"/>
+                                <rect width="2" height="2" fill="white"/>
+                                <rect y="5" width="2" height="2" fill="white"/>
+                                <rect y="10" width="2" height="2" fill="white"/>
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -32,7 +79,7 @@
                     </div>
                 </div>
                 <div class="tf-search-results-list tf-mrtop-30">
-                    <div class="archive_ajax_result tf-item-cards tf-flex tf-layout-list">
+                    <div class="archive_ajax_result tf-item-cards tf-flex <?php echo $tf_defult_views=="list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?>">
 
                     <?php
 					if ( have_posts() ) {

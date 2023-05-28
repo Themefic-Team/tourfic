@@ -17,6 +17,9 @@
     &:hover {
     cursor: pointer;
     }
+    .active-view{
+        display: none;
+    }
 }
 
 i {
@@ -28,6 +31,28 @@ i {
 
     i {
     color: #fff !important;
+    }
+    .active-view{
+        display: block;
+    }
+    .defult-view{
+        display: none;
+    }
+}
+.tf-list-active{
+    .active-view{
+        display: block;
+    }
+    .defult-view{
+        display: none;
+    }
+}
+.tf-list-active.active{
+    .active-view{
+        display: none;
+    }
+    .defult-view{
+        display: block;
     }
 }
 }
@@ -145,14 +170,16 @@ i {
 
     .tf-item-details {
     flex-basis: 59%;
-    padding: $tf-space-8 $tf-space-30;
+    padding: 20px $tf-space-30;
     @media #{$max767} {
         padding: $tf-space-24 $tf-space-24;
     }
     i {
         color: $color-theme;
     }
-    
+    .tf-title-meta{
+        align-items: baseline;
+    }
     .tf-title {
         h2 {
         font-size: 22px;
@@ -334,6 +361,7 @@ i {
             .tf-hotel-result-price-range,
             .tf-tour-result-price-range{
                 margin-top: 20px;
+                padding-bottom: 20px;
             }
             h4{
                 font-size: 20px;

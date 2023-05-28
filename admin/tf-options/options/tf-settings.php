@@ -159,6 +159,17 @@ TF_Settings::option( 'tf_settings', array(
 									'default'   	=> 'design-1',
 								),
 								array(
+									'id'       => 'hotel_archive_view',
+									'type'     => 'select',
+									'label'    => __( 'Archive Layout', 'tourfic' ),
+									'options'  => array(
+										'list'   => __( 'List', 'tourfic' ),
+										'grid'   => __( 'Grid', 'tourfic' ),
+									),
+									'default'    => 'List',
+									'dependency' => array( 'hotel-archive', '==', 'design-1' ),
+								),
+								array(
 									'id'      => 'hotel_archive_notice',
 									'type'    => 'notice',
 									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
@@ -309,6 +320,17 @@ TF_Settings::option( 'tf_settings', array(
 										),
 									),
 									'default'   	=> 'design-1',
+								),
+								array(
+									'id'       => 'tour_archive_view',
+									'type'     => 'select',
+									'label'    => __( 'Archive Layout', 'tourfic' ),
+									'options'  => array(
+										'list'   => __( 'List', 'tourfic' ),
+										'grid'   => __( 'Grid', 'tourfic' ),
+									),
+									'default'    => 'List',
+									'dependency' => array( 'tour-archive', '==', 'design-1' ),
 								),
 								array(
 									'id'      => 'tour_archive_notice',

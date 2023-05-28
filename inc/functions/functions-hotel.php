@@ -1759,7 +1759,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	endif;
 	if( ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['hotel-archive']=="design-1"){
 	?>
-	<div class="tf-item-card tf-flex tf-item-hotel tf-flex-align-center">
+	<div class="tf-item-card tf-flex tf-item-hotel">
         <div class="tf-item-featured">
 			<a href="<?php echo esc_url($url); ?>">
             <?php

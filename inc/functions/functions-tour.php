@@ -1438,7 +1438,7 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
     }
     if( ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1"){
     ?>
-    <div class="tf-item-card tf-flex tf-flex-align-center">
+    <div class="tf-item-card tf-flex">
         <div class="tf-item-featured">
             <a href="<?php echo esc_url($url); ?>">
             <?php
