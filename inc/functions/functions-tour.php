@@ -985,7 +985,7 @@ function tf_single_tour_booking_form( $post_id ) {
         <input type="hidden" name="location" value="">
         <input type="hidden" name="deposit" value="0">
         <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] )) { ?>
-            <div class="tf-btn"><a data-fancybox class="tf-bttn-normal bttn-secondary" data-src="#tour-deposit" href="javascript:;"><?php _e('Make a Partial Payment', 'tourfic'); ?></a></div>
+            <div class="tf-btn"><a data-fancybox class="tf-btn-normal btn-secondary" data-src="#tour-deposit" href="javascript:;"><?php _e('Make a Partial Payment', 'tourfic'); ?></a></div>
             <div style="display: none;" id="tour-deposit">
                 <div class="tf-tours-booking-deposit">
                     <div class="tf-tours-booking-deposit-text">
@@ -1004,7 +1004,7 @@ function tf_single_tour_booking_form( $post_id ) {
             </div>
         <?php } else { ?>
             <div class="tf-btn ">
-                <button class="tf-bttn-normal bttn-primary" type="submit"><?php _e('Book Now', 'tourfic'); ?></button>
+                <button class="tf-btn-normal btn-primary" type="submit"><?php _e('Book Now', 'tourfic'); ?></button>
             </div>
         <?php } ?>
     </div>
@@ -1498,7 +1498,7 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
 
                 </div>
                 <div class="tf-booking-bttns">
-                    <a class="tf-bttn-normal bttn-secondary" href="<?php echo esc_url($url); ?>"><?php _e("View Details","tourfic"); ?></a>
+                    <a class="tf-btn-normal btn-secondary" href="<?php echo esc_url($url); ?>"><?php _e("View Details","tourfic"); ?></a>
                 </div>
             </div>
         </div>

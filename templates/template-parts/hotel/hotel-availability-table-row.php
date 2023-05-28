@@ -168,7 +168,7 @@ if( $tf_hotel_selected_template_check == "design-1" ){
                 
                 if(function_exists('is_tf_pro') && is_tf_pro() && !empty($tour_hotel_service_avail) && !empty($tour_hotel_service_type)){
                 ?>
-                <a class="tf_air_service tf-bttn-normal bttn-secondary" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
+                <a class="tf_air_service tf-btn-normal btn-secondary" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
                 
                 
                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap" data-id="<?php echo $room_id ?>">
@@ -203,13 +203,13 @@ if( $tf_hotel_selected_template_check == "design-1" ){
                         </div>
                         <div class="tf-airport-pickup-response"> </div>
                         <div class="tf_button_group">
-                        <button class="hotel-room-book tf-bttn-normal bttn-primary" type="submit" style="width: 100%"><?php _e(tfopt('hotel_service_popup_action', 'Continue to booking'), 'tourfic');?></button>
+                        <button class="hotel-room-book tf-btn-normal btn-primary" type="submit" style="width: 100%"><?php _e(tfopt('hotel_service_popup_action', 'Continue to booking'), 'tourfic');?></button>
                         </div>
                     </div>
                 </div>
                 
                 <?php }else{ ?>
-                <button class="hotel-room-book tf-bttn-normal bttn-primary" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
+                <button class="hotel-room-book tf-btn-normal btn-primary" type="submit"><?php _e( 'I\'ll reserve', 'tourfic' );?></button>
                 <?php } ?>
             </div>
             <div class="tf_desc"></div>

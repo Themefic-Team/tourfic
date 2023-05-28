@@ -2889,7 +2889,7 @@ table.tf-table tr:last-child {
   border-bottom: 0px solid #ddd;
 }
 
-.tf-bttn-normal {
+.tf-btn-normal {
   color: #0E3DD8;
   background-color: #fff;
   padding: 12px 24px;
@@ -2903,24 +2903,24 @@ table.tf-table tr:last-child {
   border: 0px;
   cursor: pointer;
 }
-.tf-bttn-normal:hover {
+.tf-btn-normal:hover {
   background: #deddeb;
 }
-.tf-bttn-normal.bttn-primary:hover {
+.tf-btn-normal.btn-primary:hover {
   background-color: #0e2e96;
   color: #fff;
   transition: all 0.6s ease;
 }
-.tf-bttn-normal.bttn-secondary:hover {
+.tf-btn-normal.btn-secondary:hover {
   background-color: #bbc4dd;
 }
 
-.bttn-primary {
+.btn-primary {
   background-color: #0E3DD8;
   color: #fff;
 }
 
-.bttn-secondary {
+.btn-secondary {
   background-color: #E3E7F2;
   color: #060D1C;
 }

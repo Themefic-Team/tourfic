@@ -57,7 +57,7 @@ table.tf-table {
 }
 
 // Buttons
-.tf-bttn-normal{
+.tf-btn-normal{
     color: $color-theme;
     background-color: #fff;
     padding: 12px 24px;
@@ -73,20 +73,20 @@ table.tf-table {
     &:hover{
         background: $color-hover-normal;
     }
-    &.bttn-primary:hover{
+    &.btn-primary:hover{
         background-color: $color-hover-primary;
         color: #fff;
         transition: all .6s ease;
     }
-    &.bttn-secondary:hover{
+    &.btn-secondary:hover{
         background-color: $color-hover-secondary;
     }
 }
-.bttn-primary{
+.btn-primary{
     background-color: $color-theme;
     color: #fff;
 }
-.bttn-secondary{
+.btn-secondary{
     background-color: $color-theme-light;
     color: $color-black;
 }

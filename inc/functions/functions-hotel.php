@@ -1469,7 +1469,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 			<input type="hidden" name="children_ages" value="<?php echo $children_ages; ?>"/>
 
 			<div class="tf-btn">
-				<button class="tf-bttn-normal bttn-primary tf-submit"
+				<button class="tf-btn-normal btn-primary tf-submit"
 						type="submit"><?php esc_html_e( 'Booking Availability', 'tourfic' ); ?></button>
 			</div>
 
@@ -1835,7 +1835,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 
                 </div>
                 <div class="tf-booking-bttns">
-                    <a class="tf-bttn-normal bttn-secondary" href="<?php echo esc_url($url); ?>"><?php _e("View Details","tourfic"); ?></a>
+                    <a class="tf-btn-normal btn-secondary" href="<?php echo esc_url($url); ?>"><?php _e("View Details","tourfic"); ?></a>
                 </div>
             </div>
         </div>

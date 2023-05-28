@@ -11,7 +11,7 @@
                 <i class="fa fa-question-circle-o" aria-hidden="true"></i>
                 <h3><?php echo !empty($meta['h-enquiry-option-title']) ? esc_html($meta['h-enquiry-option-title']) : __( "Have a question in mind", 'tourfic' ); ?></h3>
                 <p><?php echo !empty($meta['h-enquiry-option-content']) ? esc_html($meta['h-enquiry-option-content']) : __( "Looking for more info? Send a question to the property to find out more.", 'tourfic' ); ?></p>
-                <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-bttn-normal bttn-primary"><span><?php echo !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : __( 'Ask a Question', 'tourfic' ); ?></span></a></div>
+                <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary"><span><?php echo !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : __( 'Ask a Question', 'tourfic' ); ?></span></a></div>
             </div>
         </div>
         <?php } ?>

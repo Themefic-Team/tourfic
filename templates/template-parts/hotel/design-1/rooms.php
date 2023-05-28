@@ -217,7 +217,7 @@ foreach ( $rooms as $key => $room ) {
                             }
                             ?>
                             <div class="tf-btn">
-                                <button class="hotel-room-availability tf-bttn-normal bttn-secondary"
+                                <button class="hotel-room-availability tf-btn-normal btn-secondary"
                                         type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
                             </div>
                         </td>
