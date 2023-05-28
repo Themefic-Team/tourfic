@@ -52,7 +52,7 @@ if ( $comments ) {
 	tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
 	tf_get_review_fields( $fields );
 ?>
-<div class="tf-review-data tf-box tf-mt-30">
+<div class="tf-review-data tf-box">
 <div class="tf-review-data-inner tf-flex tf-flex-gap-24">
 	<div class="tf-review-data">
 		<div class="tf-review-data-average">
@@ -113,7 +113,7 @@ if ( $comments ) {
 		$c_content     = $comment->comment_content;
 		?>
 		<!-- reviews and replies -->
-		<div class="tf-review-reply-data tf-flex-gap-24 tf-mt-40 tf-flex">
+		<div class="tf-review-reply-data tf-flex-gap-24 tf-flex">
 			<div class="tf-review-author">
 				<?php echo $c_avatar; ?>
 			</div>
@@ -174,7 +174,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 	}
 }
 }else{
-	echo '<div class="no-review tf-mt-24">';
+	echo '<div class="no-review">';
 	echo '<h4>' . __( "No Review Available", "tourfic" ) . '</h4>';
 	if ( $is_user_logged_in ) {
 
