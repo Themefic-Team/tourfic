@@ -635,7 +635,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
 				<img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
 			</div>
 		</div>
-		<div class="tf-search-results-list tf-mrtop-30">
+		<div class="tf-search-results-list tf-mt-30">
 			<div class="archive_ajax_result tf-item-cards tf-flex tf-layout-list">
 			<?php
 			if ( $loop->have_posts() ) {

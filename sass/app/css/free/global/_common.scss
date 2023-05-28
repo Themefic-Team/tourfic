@@ -63,6 +63,10 @@ h3.section-heading {
         white-space: break-spaces;
     }
 }
+.fancybox-navigation .fancybox-button--arrow_left > div,
+.fancybox-navigation .fancybox-button--arrow_right > div{
+    background-color: #000;
+}
 .tf-tooltip {
     position: relative;
     .tf-top {

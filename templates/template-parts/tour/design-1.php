@@ -108,7 +108,7 @@
                     <!-- Single Tour Heading Section End -->
 
                     <!-- Single Tour Body details start -->
-                    <div class="tf-single-details-wrapper tf-mrtop-30">
+                    <div class="tf-single-details-wrapper tf-mt-30">
                         <div class="tf-single-details-inner tf-flex">
                             <div class="tf-column tf-tour-details-left">
 
@@ -231,7 +231,7 @@
     
                                     <!-- Tourfic Booking form -->
                                     <div class="tf-booking-form">
-                                        <div class="tf-booking-form-inner tf-mrtop-24">
+                                        <div class="tf-booking-form-inner tf-mt-24">
                                             <h3><?php echo !empty($meta['booking-section-title']) ? esc_html($meta['booking-section-title']) : __("Book This Tour","tourfic"); ?></h3>
                                             <?php echo tf_single_tour_booking_form( $post->ID ); ?>
                                             
@@ -241,7 +241,7 @@
                                <?php
                                 if (  $email || $phone || $fax || $website) {
                                 ?>
-                               <div class="tf-tour-booking-advantages tf-box tf-mrtop-30">
+                               <div class="tf-tour-booking-advantages tf-box tf-mt-30">
                                     <div class="tf-head-title">
                                         <h3><?php echo !empty($meta['contact-info-section-title']) ? esc_html($meta['contact-info-section-title']) : __("Contact Information","tourfic"); ?></h3>
                                     </div>
@@ -272,7 +272,7 @@
                                 if(!empty($tf_enquiry_section_status)){
                                 ?>
                                 <!-- Enquiry box -->
-                                <div class="tf-tour-booking-advantages tf-box tf-mrtop-30">
+                                <div class="tf-tour-booking-advantages tf-box tf-mt-30">
                                     <div class="tf-ask-enquiry">
                                         <i class="fa fa-question-circle-o" aria-hidden="true"></i>
                                         <h3><?php echo !empty($meta['t-enquiry-option-title']) ? esc_html($meta['t-enquiry-option-title']) : __("Have a question in mind","tourfic"); ?></h3>
@@ -331,7 +331,7 @@
                             <p><?php esc_html_e( tfopt('rt-description'), "tourfic" ) ?></p>
                         <?php } ?>
                     </div>
-                    <div class="tf-slider-items-wrapper tf-upcomming-tours-list-outter tf-mrtop-40 tf-flex tf-flex-gap-24">
+                    <div class="tf-slider-items-wrapper tf-upcomming-tours-list-outter tf-mt-40 tf-flex tf-flex-gap-24">
                         <?php
                         while ( $tours->have_posts() ) {
                             $tours->the_post();
@@ -367,7 +367,7 @@
                                         </span> 
                                     </div>
                                 </div>
-                                <div class="tf-meta-info tf-mrtop-30">
+                                <div class="tf-meta-info tf-mt-30">
                                     <div class="tf-meta-location">
                                         <i class="fa-solid fa-location-dot"></i> <?php echo $first_destination_name; ?>
                                     </div>

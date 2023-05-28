@@ -52,7 +52,7 @@ if ( $comments ) {
 	tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
 	tf_get_review_fields( $fields );
 ?>
-<div class="tf-review-data tf-box tf-mrtop-30">
+<div class="tf-review-data tf-box tf-mt-30">
 <div class="tf-review-data-inner tf-flex tf-flex-gap-24">
 	<div class="tf-review-data">
 		<div class="tf-review-data-average">
@@ -90,7 +90,7 @@ if ( $comments ) {
 </div>
 </div>
 <!-- Tourfic review reply -->
-<div class="tf-review-reply tf-mrtop-70">
+<div class="tf-review-reply tf-mt-50">
 	<div class="tf-section-head">
 		<h2 class="tf-title"><?php _e("Showing", "tourfic"); ?> <span><?php echo count($comments); ?></span> <?php _e("Review", "tourfic"); ?></h2>
 	</div>
@@ -113,7 +113,7 @@ if ( $comments ) {
 		$c_content     = $comment->comment_content;
 		?>
 		<!-- reviews and replies -->
-		<div class="tf-review-reply-data tf-flex-gap-24 tf-mrtop-40 tf-flex">
+		<div class="tf-review-reply-data tf-flex-gap-24 tf-mt-40 tf-flex">
 			<div class="tf-review-author">
 				<?php echo $c_avatar; ?>
 			</div>
@@ -121,7 +121,7 @@ if ( $comments ) {
 				<div class="tf-review-author-name">
 					<h3><?php echo $c_author_name; ?></h3>
 				</div>
-				<div class="tf-review-ratings tf-mrtop-8">
+				<div class="tf-review-ratings tf-mt-8">
 				<?php echo $c_rating; ?>
 				</div>
 				<div class="tf-review-message">
@@ -149,7 +149,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 		if ( in_array( 'li', $tf_ratings_for ) && ! tf_user_has_comments() ) {
 			?>
 			<!-- Replay form  -->
-			<div class="tf-review-form tf-mrtop-40">
+			<div class="tf-review-form tf-mt-40">
 				<div class="tf-section-head">
 					<h2 class="tf-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
 					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
@@ -162,7 +162,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 		if ( in_array( 'lo', $tf_ratings_for ) ) {
 			?>
 			<!-- Replay form  -->
-			<div class="tf-review-form tf-mrtop-40">
+			<div class="tf-review-form tf-mt-40">
 				<div class="tf-section-head">
 					<h2 class="tf-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
 					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
@@ -174,7 +174,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 	}
 }
 }else{
-	echo '<div class="no-review tf-mrtop-24">';
+	echo '<div class="no-review tf-mt-24">';
 	echo '<h4>' . __( "No Review Available", "tourfic" ) . '</h4>';
 	if ( $is_user_logged_in ) {
 
@@ -182,7 +182,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 		if ( is_array( $tf_ratings_for ) && in_array( 'li', $tf_ratings_for ) && ! tf_user_has_comments() ) {
 			?>
 			<!-- Replay form  -->
-			<div class="tf-review-form tf-mrtop-40">
+			<div class="tf-review-form tf-mt-40">
 				<div class="tf-section-head">
 					<h2 class="tf-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
 					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
@@ -197,7 +197,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 		if ( is_array( $tf_ratings_for ) && in_array( 'lo', $tf_ratings_for ) ) {
 			?>
 			<!-- Replay form  -->
-			<div class="tf-review-form tf-mrtop-40">
+			<div class="tf-review-form tf-mt-40">
 				<div class="tf-section-head">
 					<h2 class="tf-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
 					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>

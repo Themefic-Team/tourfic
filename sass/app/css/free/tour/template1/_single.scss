@@ -55,13 +55,6 @@
     
     .tf-tour-details-right {
         flex-basis: 32%;
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-        align-self: flex-start;
-        @media #{$tfmax767}{
-            position: static;
-        }
         @media #{$tfmax991}{
             flex-basis: 40%;
             padding-left: $tf-space-12;
@@ -69,6 +62,19 @@
         @media #{$tfmax767}{
             flex-basis: 100%;
             margin-top: 0px;
+        }
+    }
+}
+.tf-tour-design-1{
+    .tf-single-details-wrapper{
+        .tf-tour-details-right {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            align-self: flex-start;
+            @media #{$tfmax767}{
+                position: static;
+            }
         }
     }
 }
@@ -615,7 +621,7 @@
         }
     }
 }
-.tf-itinerary-wrapper.tf-mrbottom-70{
+.tf-itinerary-wrapper.tf-mb-50{
     .tf-itinerary-downloader-option{
         background-color: $color-theme;
         border-radius: $tf-brds-default;

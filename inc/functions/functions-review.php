@@ -453,7 +453,7 @@ function tf_archive_single_rating() {
 		<?php
 		if( ( ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) || ( ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['hotel-archive']=="design-1" ) ){
 		?>
-			<div class="tf-reviews tf-flex tf-mrtop-16 tf-flex-gap-12">
+			<div class="tf-reviews tf-flex tf-mt-16 tf-flex-gap-12">
 				<div class="tf-review-items">
 				<?php
 				$settings_base = ! empty ( tfopt( 'r-base' ) ) ? tfopt( 'r-base' ) : 5;
@@ -514,7 +514,7 @@ function tf_archive_single_rating() {
 	}else{
 		if( ( ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) || ( ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['hotel-archive']=="design-1" ) ){
 		?>
-		<div class="tf-reviews tf-flex tf-mrtop-16 tf-flex-gap-12">
+		<div class="tf-reviews tf-flex tf-mt-16 tf-flex-gap-12">
 			<div class="tf-review-items">
 				<i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
 			</div>

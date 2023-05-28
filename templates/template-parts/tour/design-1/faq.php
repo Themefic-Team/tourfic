@@ -1,8 +1,8 @@
 <?php if ( $faqs ): ?>
 <!-- tourfic FAQ -->
-<div class="tf-faq-wrapper tf-mrbottom-70">
+<div class="tf-faq-wrapper tf-mb-50">
     <h2 class="tf-title" ><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __("Frequently Asked Questions","tourfic"); ?></h2>
-    <div class="tf-faq-inner tf-mrtop-30">
+    <div class="tf-faq-inner tf-mt-30">
         <?php 
         $faq_key = 1;    
         foreach ( $faqs as $key => $faq ): ?>
@@ -12,7 +12,7 @@
                     <h4><?php echo esc_html( $faq['title'] ); ?></h4> 
                     <div class="faq-icon"><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i></div>
                 </div>
-                <div class="tf-faq-content tf-mrtop-24">
+                <div class="tf-faq-content tf-mt-24">
                     <p><?php echo wp_kses_post( $faq['desc'] ); ?></p>
                 </div>
             </div>

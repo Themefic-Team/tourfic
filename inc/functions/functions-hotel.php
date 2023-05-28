@@ -1789,12 +1789,12 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                 <p><?php echo $address; ?></p>
             </div>
             <?php } ?>
-            <div class="tf-title tf-mrtop-16">
+            <div class="tf-title tf-mt-16">
 				<h2><a href="<?php echo esc_url($url); ?>"><?php the_title();?></a></h2>
             </div>
             <?php tf_archive_single_rating();?>
             <?php if ( $features ) { ?>
-				<div class="tf-arachive-features tf-mrtop-16">
+				<div class="tf-arachive-features tf-mt-16">
 					<ul>
 						<?php foreach ( $features as $tfkey=>$feature ) {
 							$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
@@ -1820,10 +1820,10 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 				</div>
 			<?php } ?>
             
-            <div class="tf-details tf-mrtop-16">
+            <div class="tf-details tf-mt-16">
                 <p><?php echo substr(wp_strip_all_tags(get_the_content()), 0, 160). '...'; ?></p>
             </div>
-            <div class="tf-post-footer tf-flex tf-flex-align-center tf-flex-space-bttn tf-mrtop-16">
+            <div class="tf-post-footer tf-flex tf-flex-align-center tf-flex-space-bttn tf-mt-16">
                 <div class="tf-pricing">
 
                 <?php

@@ -449,7 +449,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 							value="<?php echo $place_title; ?>">
 				<input type="hidden" name="place" id="tf-place" value="<?php echo $place_value ?? ''; ?>"/>
 			</div>
-			<div class="tf-field-group tf-mrtop-8 tf_acrselection">
+			<div class="tf-field-group tf-mt-8 tf_acrselection">
                 <div class="tf-field tf-flex">
                     <div class="acr-label tf-flex">
                         <i class="fa-regular fa-user"></i>
@@ -463,7 +463,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                 </div>
             </div>
 
-			<div class="tf-field-group tf-mrtop-16 tf_acrselection">
+			<div class="tf-field-group tf-mt-16 tf_acrselection">
 				<div class="tf-field tf-flex">
 					<div class="acr-label tf-flex">
 						<i class="fa-solid fa-child"></i>
@@ -477,7 +477,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 				</div>
 			</div>
 
-			<div class="tf-field-group tf-mrtop-8">
+			<div class="tf-field-group tf-mt-8">
 				<i class="fa-solid fa-calendar-days"></i>
 				<input type="text" class="tf-field time" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
                                placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" required value="<?php echo $date ?>">
@@ -485,7 +485,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 
 
 			<?php if ( $post_type == 'tf_hotel' ) { ?>
-				<div class="tf-field-group tf-mrtop-16 tf_acrselection">
+				<div class="tf-field-group tf-mt-16 tf_acrselection">
 					<div class="tf-field tf-flex">
 						<div class="acr-label tf-flex">
 							<i class="fa fa-building"></i>
@@ -500,7 +500,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 				</div>
 			<?php } ?>
 
-			<div class="tf-booking-bttns tf-mrtop-30">
+			<div class="tf-booking-bttns tf-mt-30">
 				<?php
 				$ptype = $_GET['type'] ?? get_post_type();
 				?>
@@ -641,7 +641,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 				<input type="text" required="" id="<?php echo $place; ?>" class="tf-field" placeholder="<?php echo $place_text; ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
                     <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? $taxonomy_slug : ''; ?>"/>
 			</div>
-			<div class="tf-field-group tf-mrtop-8 tf_acrselection">
+			<div class="tf-field-group tf-mt-8 tf_acrselection">
                 <div class="tf-field tf-flex">
                     <div class="acr-label tf-flex">
                         <i class="fa-regular fa-user"></i>
@@ -655,7 +655,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
                 </div>
             </div>
 
-			<div class="tf-field-group tf-mrtop-16 tf_acrselection">
+			<div class="tf-field-group tf-mt-16 tf_acrselection">
 				<div class="tf-field tf-flex">
 					<div class="acr-label tf-flex">
 						<i class="fa-solid fa-child"></i>
@@ -671,7 +671,7 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 
 			<?php if ( $post_type !== 'tf_tours' ) { ?>
 
-				<div class="tf-field-group tf-mrtop-16 tf_acrselection">
+				<div class="tf-field-group tf-mt-16 tf_acrselection">
 					<div class="tf-field tf-flex">
 						<div class="acr-label tf-flex">
 							<i class="fa fa-building"></i>
@@ -686,12 +686,12 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 				</div>
 			<?php } ?>
 			
-			<div class="tf-field-group tf-mrtop-8">
+			<div class="tf-field-group tf-mt-8">
 				<i class="fa-solid fa-calendar-days"></i>
 				<input type="text" class="tf-field time" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
                                placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" required value="" style="width: 100% !important">
 			</div>
-			<div class="tf-booking-bttns tf-mrtop-30">
+			<div class="tf-booking-bttns tf-mt-30">
             	<input type="hidden" name="type" value="<?php echo $post_type; ?>" class="tf-post-type"/>
 				<button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
 			</div>

@@ -6,11 +6,11 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
 ?>
 <!-- Travel Itinerary section Start -->
 <?php if ( $itineraries ) { ?>
-<div class="tf-itinerary-wrapper tf-mrbottom-70">
+<div class="tf-itinerary-wrapper tf-mb-50">
     <div class="section-title">
         <h2 class="tf-title"><?php echo !empty($meta['itinerary-section-title']) ? esc_html($meta['itinerary-section-title']) : __("Travel Itinerary","tourfic"); ?></h2>
     </div>
-    <div class="tf-itinerary-box tf-box tf-mrtop-30">
+    <div class="tf-itinerary-box tf-box tf-mt-30">
         <div class="tf-itinerary-items">
             <?php 
             $itineray_key = 1;
@@ -24,7 +24,7 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
                     </h3>
                 </div>
                 <div class="tf-itinerary-content-box">
-                    <div class="tf-itinerary-content tf-mrtop-16 tf-flex-gap-16 tf-flex">
+                    <div class="tf-itinerary-content tf-mt-16 tf-flex-gap-16 tf-flex">
                         <?php if ( $itinerary['image'] ) { ?>
                             <div class="tf-itinerary-content-img">
                                 <img src="<?php echo esc_url( $itinerary['image'] ); ?>" alt="<?php _e("Itinerary Image","tourfic"); ?>" />

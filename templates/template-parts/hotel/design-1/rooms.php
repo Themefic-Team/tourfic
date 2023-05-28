@@ -10,7 +10,7 @@ foreach ( $rooms as $key => $room ) {
 }
 ?>
 
-<div class="tf-rooms-sections tf-mrbottom-70">
+<div class="tf-rooms-sections tf-mb-50">
     <h2 class="section-heading"><?php echo !empty($meta['room-section-title']) ? esc_html($meta['room-section-title']) : __( 'Available Rooms', 'tourfic' ); ?></h2>
     <?php do_action( 'tf_hotel_features_filter', $rm_features, 10 ) ?>
     

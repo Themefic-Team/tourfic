@@ -79,7 +79,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-global .tf-archive-head .active,
 			.tf-template-global .tf-item-featured .tf-features-box .tf-featur,
 			.tf-template-global .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::after,
-			.tf-template-global .tf-itinerary-wrapper.tf-mrbottom-70 .tf-itinerary-downloader-option,
+			.tf-template-global .tf-itinerary-wrapper.tf-mb-50 .tf-itinerary-downloader-option,
 			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-data-features .percent-progress,
 			.tf-template-global .tf-rooms-sections .tf-rooms .tf-availability-table thead,
 			.tf-template-global .tf-hotel-location-map .tf-hotel-location-preview a i,

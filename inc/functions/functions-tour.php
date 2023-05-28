@@ -770,12 +770,12 @@ function tf_single_tour_booking_form( $post_id ) {
 	if( $tf_tour_selected_template == "design-1" ){
 	?>
     <form class="tf_tours_booking">
-        <div class="tf-field-group tf-mrtop-8">
+        <div class="tf-field-group tf-mt-8">
             <i class="fa-sharp fa-solid fa-calendar-days"></i>
             <input type='text' name='check-in-out-date' id='check-in-out-date' class='tf-field tours-check-in-out' onkeypress="return false;" placeholder='<?php _e( "Select Date", "tourfic" ); ?>' value='' required />
         </div>
         <?php if (function_exists('is_tf_pro') && is_tf_pro() && $tour_type != 'fixed') { ?>
-        <div class="tf-field-group tf-mrtop-8" id="check-in-time-div" style="display: none;">
+        <div class="tf-field-group tf-mt-8" id="check-in-time-div" style="display: none;">
             <i class="fa-regular fa-clock"></i>
             <select class="tf-field" name="check-in-time" id="check-in-time" style="min-width: 100px;"></select>
         </div>
@@ -895,12 +895,12 @@ function tf_single_tour_booking_form( $post_id ) {
                 });
             })(jQuery);
         </script>
-        <div class="tf-booking-person tf-mrtop-30">
+        <div class="tf-booking-person tf-mt-30">
             <div class="tf-form-title">
                 <p><?php _e("Person Info","tourfic"); ?></p>
             </div>
             <?php if ($custom_avail == true || (!$disable_adult_price && $pricing_rule == 'person' && $adult_price != false) || (!$disable_adult_price && $pricing_rule == 'group' && $group_price != false)) { ?>
-            <div class="tf-field-group tf-mrtop-16 tf_acrselection">
+            <div class="tf-field-group tf-mt-16 tf_acrselection">
                 <div class="tf-field tf-flex">
                     <div class="acr-label tf-flex">
                         <i class="fa-regular fa-user"></i>
@@ -916,7 +916,7 @@ function tf_single_tour_booking_form( $post_id ) {
             <?php } ?>
 
             <?php if ($custom_avail == true || (!$disable_child_price && $pricing_rule == 'person' && $child_price != false) || (!$disable_child_price && $pricing_rule == 'group' && $group_price != false)) { ?>
-                <div class="tf-field-group tf-mrtop-16 tf_acrselection">
+                <div class="tf-field-group tf-mt-16 tf_acrselection">
                     <div class="tf-field tf-flex">
                         <div class="acr-label tf-flex">
                             <i class="fa-solid fa-child"></i>
@@ -931,7 +931,7 @@ function tf_single_tour_booking_form( $post_id ) {
                 </div>
             <?php } ?>
             <?php if ($custom_avail == true || (!$disable_infant_price && $pricing_rule == 'person' && $infant_price != false) || (!$disable_infant_price && $pricing_rule == 'group' && $group_price != false)) { ?>
-                <div class="tf-field-group tf-mrtop-16 tf_acrselection">
+                <div class="tf-field-group tf-mt-16 tf_acrselection">
                     <div class="tf-field tf-flex">
                         <div class="acr-label tf-flex">
                             <i class="fa-solid fa-baby"></i>
@@ -949,7 +949,7 @@ function tf_single_tour_booking_form( $post_id ) {
         <?php if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) { 
         if((!empty($tour_extras[0]['title']) && !empty($tour_extras[0]['desc']) && !empty($tour_extras[0]['price'])) || !empty($tour_extras[1]['title']) && !empty($tour_extras[1]['desc']) && !empty($tour_extras[1]['price'])){  
         ?>
-        <div class="tf-tour-extra-area tf-mrtop-30">
+        <div class="tf-tour-extra-area tf-mt-30">
             <div class="tf-form-title tf-tour-extra">
                 <p><?php _e("Tour Extra","tourfic"); ?>
                 <i class="fa-solid fa-plus"></i>
@@ -960,7 +960,7 @@ function tf_single_tour_booking_form( $post_id ) {
             <?php foreach( $tour_extras as $tour_extra ){ 
                 if(!empty($tour_extra['title']) && !empty($tour_extra['desc']) && !empty($tour_extra['price'])){
             ?>
-            <div class="tf-tour-extra tf-mrtop-8">
+            <div class="tf-tour-extra tf-mt-8">
                 <div class="tf-tour-extra-price tf-flex tf-flex-align-top tf-flex-space-bttn tour-extra-single">
                     <div class="tf-tour-extra-input tf-flex tf-flex-align-top tf-flex-gap-8">
                         <input type="checkbox" value="<?php echo esc_attr( $tour_extra['price'] ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>">
@@ -971,7 +971,7 @@ function tf_single_tour_booking_form( $post_id ) {
                     </div>
                 </div>
                 <?php if ($tour_extra['desc']) { ?>
-                <div class="tf-tour-extra-details tf-mrtop-8">
+                <div class="tf-tour-extra-details tf-mt-8">
                 <p><?php echo esc_html( $tour_extra['desc'] ); ?></p>
                 </div>
                 <?php } ?>
@@ -981,7 +981,7 @@ function tf_single_tour_booking_form( $post_id ) {
         </div>
         
         <?php } } ?>
-        <div class="tf-tours-booking-btn tf-booking-bttns tf-mrtop-30">
+        <div class="tf-tours-booking-btn tf-booking-bttns tf-mt-30">
         <input type="hidden" name="location" value="">
         <input type="hidden" name="deposit" value="0">
         <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] )) { ?>
@@ -1478,16 +1478,16 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
                 <p><?php echo $location; ?></p>
             </div>
             <?php } ?>
-            <div class="tf-title tf-mrtop-16">
+            <div class="tf-title tf-mt-16">
                 <h2><a href="<?php echo esc_url($url); ?>"><?php the_title();?></a></h2>
             </div>
             
             <?php tf_archive_single_rating();?>
             
-            <div class="tf-details tf-mrtop-16">
+            <div class="tf-details tf-mt-16">
                 <p><?php echo substr(wp_strip_all_tags(get_the_content()), 0, 160). '...'; ?></p>
             </div>
-            <div class="tf-post-footer tf-flex tf-flex-align-center tf-flex-space-bttn tf-mrtop-16">
+            <div class="tf-post-footer tf-flex tf-flex-align-center tf-flex-space-bttn tf-mt-16">
                 <div class="tf-pricing">
 
                 <?php

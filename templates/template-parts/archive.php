@@ -50,7 +50,7 @@ if( ( $post_type == "tf_hotel" && ! empty( tf_data_types(tfopt( 'tf-template' ))
             <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
         </div>
     </div>
-    <div class="tf-search-results-list tf-mrtop-30">
+    <div class="tf-search-results-list tf-mt-30">
         <div class="archive_ajax_result tf-item-cards tf-flex tf-layout-list">
 
         <?php
