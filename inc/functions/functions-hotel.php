@@ -1794,7 +1794,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
             </div>
             <?php tf_archive_single_rating();?>
             <?php if ( $features ) { ?>
-				<div class="tf-arachive-features tf-mt-16">
+				<div class="tf-archive-features tf-mt-16">
 					<ul>
 						<?php foreach ( $features as $tfkey=>$feature ) {
 							$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );

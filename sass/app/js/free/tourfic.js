@@ -71,7 +71,7 @@
                 type: 'post',
                 data: data,
                 beforeSend: function () {
-                    $("#tf-single-hotel-avail .bttn-primary.tf-submit").addClass('tf-btn-booking-loading');
+                    $("#tf-single-hotel-avail .btn-primary.tf-submit").addClass('tf-btn-booking-loading');
                 },
                 success: function (data) {
                     $('html, body').animate({
@@ -79,7 +79,7 @@
                     }, 500);
                     $("#rooms").html(data);
                     $('.tf-room-filter').show();
-                    $("#tf-single-hotel-avail .bttn-primary.tf-submit").removeClass('tf-btn-booking-loading');
+                    $("#tf-single-hotel-avail .btn-primary.tf-submit").removeClass('tf-btn-booking-loading');
                 },
                 error: function (data) {
                     console.log(data);

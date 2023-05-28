@@ -112,7 +112,7 @@
                 <!-- Single Hotel Heading Section End -->
 
                 <!-- Single Hotel Body details start -->
-                <div class="tf-single-details-wrapper tf-mt-30">
+                <div class="tf-single-details-wrapper tf-mt-30 tf-mb-40">
                     <div class="tf-single-details-inner tf-flex">
                         <div class="tf-column tf-tour-details-left">
                             <!-- Hotel Gallery Section -->

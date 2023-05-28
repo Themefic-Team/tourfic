@@ -34,6 +34,7 @@
         .tf-hotel-location-preview{
             position: relative;
             margin-bottom: 0px;
+            border: 1px solid #ddd;
             @media #{$tfmax767}{
                 margin-bottom: 30px;
             }
@@ -170,6 +171,17 @@
                             .tf-tooltip{
                                 @media #{$tfmax767}{
                                     width: 100px
+                                }
+                            }
+                        }
+                        td.reserve{
+                            .hotel-room-availability,
+                            .tf_air_service{
+                                color: $color-theme;
+                            }
+                            .room-selection-wrap{
+                                select{
+                                    border: 1px solid #ddd;
                                 }
                             }
                         }
@@ -362,30 +374,33 @@
     .fancybox-button.fancybox-close-small{
         right: 20px;
     }
-    .tf-template-1.tf-room-adv-info{
-        ul{
-            margin: 0;
-            padding: 0;
-            li{
-                display: inline-block;
-                border-radius: 5px;
-                padding: 5px 10px 5px 0px;
-                margin: 4px 5px 4px 0px;
-                color: #6B7280 !important;
-                font-size: 16px;
-                i{
+    .tf-hotel-details-info{
+        padding-right: 25px;
+        .tf-template-1.tf-room-adv-info{
+            ul{
+                margin: 0;
+                padding: 0;
+                li{
+                    display: inline-block;
+                    border-radius: 5px;
+                    padding: 5px 10px 5px 0px;
+                    margin: 4px 5px 4px 0px;
                     color: #6B7280 !important;
+                    font-size: 16px;
+                    i{
+                        color: #6B7280 !important;
+                    }
                 }
             }
-        }
-        p{
-            margin: 10px 0px;
-            color: #6B7280;
-        }
-        h4{
-            font-size: 20px;
-            margin: 15px 0px 10px 0px;
-            color: #1F2937;
+            p{
+                margin: 10px 0px;
+                color: #6B7280;
+            }
+            h4{
+                font-size: 20px;
+                margin: 15px 0px 10px 0px;
+                color: #1F2937;
+            }
         }
     }
 }

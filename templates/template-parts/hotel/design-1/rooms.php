@@ -10,8 +10,8 @@ foreach ( $rooms as $key => $room ) {
 }
 ?>
 
-<div class="tf-rooms-sections tf-mb-50">
-    <h2 class="section-heading"><?php echo !empty($meta['room-section-title']) ? esc_html($meta['room-section-title']) : __( 'Available Rooms', 'tourfic' ); ?></h2>
+<div class="tf-rooms-sections tf-mb-50 tf-template-section">
+    <h2 class="section-heading tf-section-title"><?php echo !empty($meta['room-section-title']) ? esc_html($meta['room-section-title']) : __( 'Available Rooms', 'tourfic' ); ?></h2>
     <?php do_action( 'tf_hotel_features_filter', $rm_features, 10 ) ?>
     
     <div class="tf-rooms" id="rooms">
@@ -114,10 +114,10 @@ foreach ( $rooms as $key => $room ) {
                                             <h3>
                                                 <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $key : '' ?>"
                                                 data-hotel="<?php echo $post_id; ?>"><?php echo esc_html( $room['title'] ); ?></a>
-                                            <h3>
+                                            </h3>
                                             <?php 
                                             }else{ ?>
-                                            <h3><?php echo esc_html( $room['title'] ); ?><h3>
+                                            <h3><?php echo esc_html( $room['title'] ); ?></h3>
                                             <?php } ?>
                                         </div>
                                         <div class="bed-facilities">
@@ -216,10 +216,11 @@ foreach ( $rooms as $key => $room ) {
                                 <?php
                             }
                             ?>
-                            <div class="tf-btn">
-                                <button class="hotel-room-availability tf-btn-normal btn-secondary"
-                                        type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
-                            </div>
+                            
+                            <button class="hotel-room-availability tf-btn-normal btn-secondary" type="submit" style="margin: 0 auto;">
+                                <?php esc_html_e( 'Check Availability', 'tourfic' ); ?>
+                            </button>
+                            
                         </td>
                     </tr>
                     <?php

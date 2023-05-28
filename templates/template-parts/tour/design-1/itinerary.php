@@ -6,9 +6,9 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
 ?>
 <!-- Travel Itinerary section Start -->
 <?php if ( $itineraries ) { ?>
-<div class="tf-itinerary-wrapper tf-mb-50">
+<div class="tf-itinerary-wrapper tf-mb-50 tf-template-section">
     <div class="section-title">
-        <h2 class="tf-title"><?php echo !empty($meta['itinerary-section-title']) ? esc_html($meta['itinerary-section-title']) : __("Travel Itinerary","tourfic"); ?></h2>
+        <h2 class="tf-title tf-section-title"><?php echo !empty($meta['itinerary-section-title']) ? esc_html($meta['itinerary-section-title']) : __("Travel Itinerary","tourfic"); ?></h2>
     </div>
     <div class="tf-itinerary-box tf-box tf-mt-30">
         <div class="tf-itinerary-items">

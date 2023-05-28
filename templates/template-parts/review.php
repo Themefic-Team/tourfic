@@ -92,7 +92,7 @@ if ( $comments ) {
 <!-- Tourfic review reply -->
 <div class="tf-review-reply tf-mt-50">
 	<div class="tf-section-head">
-		<h2 class="tf-title"><?php _e("Showing", "tourfic"); ?> <span><?php echo count($comments); ?></span> <?php _e("Review", "tourfic"); ?></h2>
+		<h2 class="tf-title tf-section-title"><?php _e("Showing", "tourfic"); ?> <span><?php echo count($comments); ?></span> <?php _e("Review", "tourfic"); ?></h2>
 	</div>
 	<?php
 	foreach ( $comments as $comment ) {
@@ -151,7 +151,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 			<!-- Replay form  -->
 			<div class="tf-review-form tf-mt-40">
 				<div class="tf-section-head">
-					<h2 class="tf-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
+					<h2 class="tf-title tf-section-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
 					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
 				</div>
 				<?php tf_review_form(); ?>
@@ -164,7 +164,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 			<!-- Replay form  -->
 			<div class="tf-review-form tf-mt-40">
 				<div class="tf-section-head">
-					<h2 class="tf-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
+					<h2 class="tf-title tf-section-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
 					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
 				</div>
 				<?php tf_review_form(); ?>
@@ -184,7 +184,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 			<!-- Replay form  -->
 			<div class="tf-review-form tf-mt-40">
 				<div class="tf-section-head">
-					<h2 class="tf-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
+					<h2 class="tf-title tf-section-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
 					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
 				</div>
 				<?php tf_review_form(); ?>
@@ -199,7 +199,7 @@ if ( ! empty( $tf_ratings_for ) ) {
 			<!-- Replay form  -->
 			<div class="tf-review-form tf-mt-40">
 				<div class="tf-section-head">
-					<h2 class="tf-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
+					<h2 class="tf-title tf-section-title"><?php _e("Leave a Reply", "tourfic"); ?></h2>
 					<p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
 				</div>
 				<?php tf_review_form(); ?>

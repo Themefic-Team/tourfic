@@ -1,6 +1,6 @@
 <!-- Trip Features -->
 <?php if ( $tour_duration || $tour_type || $group_size || $language ) { ?>
-<div class="tf-trip-feature-blocks tf-mb-40">
+<div class="tf-trip-feature-blocks tf-mb-40 tf-template-section">
     <div class="tf-features-block-inner tf-column-4 tf-flex tf-flex-space-bttn tf-flex-gap-16">
         <?php if ( $tour_duration ) { ?>
         <div class="tf-column tf-flex tf-flex-gap-8">

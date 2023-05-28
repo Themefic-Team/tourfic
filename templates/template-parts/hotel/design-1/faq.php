@@ -1,6 +1,6 @@
 <?php if ( $faqs ): ?>
-<div class="tf-hotel-faqs-section tf-mb-50">
-    <h2 class="tf-title" ><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __( "Faq’s", 'tourfic' ); ?></h2>
+<div class="tf-hotel-faqs-section tf-mb-50 tf-template-section">
+    <h2 class="tf-title tf-section-title" ><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __( "Faq’s", 'tourfic' ); ?></h2>
     <div class="tf-section-flex tf-flex">
         <?php 
         $tf_enquiry_section_status = !empty($meta['h-enquiry-section']) ? $meta['h-enquiry-section'] : "";

@@ -191,7 +191,7 @@
 }
 .tf-head-title{
     h1{
-        margin-bottom:$tf-space-12;
+        margin-bottom: 6px;
     }
 }
 
@@ -224,15 +224,13 @@
 .tf-ask-enquiry{
     text-align: center;
     i{
-        height: 80px;
-        width: 80px;
         text-align: center;
-        line-height: 80px;
         background-color: #ECF2FF;
         border-radius: 50%;
         color: $color-theme;
         margin-bottom: 25px;
         font-size: 30px;
+        padding: 25px;
     }
     p{
         margin-top: 5px;
@@ -253,6 +251,9 @@
     .tf-gallery-featured {
         position: relative;
         margin-bottom: 10px;
+        >img{
+            max-height: 480px; 
+        }
         .featured-column {
             background: #fff;
             border-radius: 5px;
@@ -514,6 +515,12 @@
         h3 {
             font-size: $font-size-medium;
         }
+        ul{
+            li{
+                margin-top: 0px;
+                margin-bottom: 12px;
+            }
+        }
     }
 }
 
@@ -549,6 +556,9 @@
                 flex-basis: 20%;
                 @media #{$tfmax767}{
                     flex-basis: 100%;
+                }
+                img{
+                    border-radius: 6px;
                 }
             }
             .tf-itinerary-content-details{
