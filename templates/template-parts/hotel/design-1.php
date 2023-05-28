@@ -123,15 +123,12 @@
                                     <div class="featured-column tf-gallery-box">
                                         <?php 
                                         if ( ! empty( $gallery_ids ) ) {
-                                        foreach ( $gallery_ids as $key => $gallery_item_id ) {
-                                        $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
-                                        if ( $key === array_key_first( $gallery_ids ) ) {
                                         ?>
-                                        <a id="featured-gallery" href="#" data-fancybox="tour-gallery" class="tf-tour-gallery" data-src="<?php echo esc_url($image_url); ?>">
+                                        <a id="featured-gallery" href="#" class="tf-tour-gallery">
                                             <i class="fa-solid fa-camera-retro"></i><?php echo __("Gallery","tourfic"); ?>
                                         </a>
                                         <?php 
-                                            }}}
+                                        }
                                         ?>
 
                                     </div>
@@ -149,13 +146,13 @@
                                 <?php if ( ! $disable_review_sec == '1' ) { ?>
                                     <?php
                                     if($comments){ ?>
-                                    <div class="tf-single-rating">
+                                    <a href="#tf-review" class="tf-single-rating">
                                         <span><?php echo tf_total_avg_rating( $comments ); ?></span> (<?php tf_based_on_text( count( $comments ) ); ?>)
-                                    </div>
+                                    </a>
                                     <?php }else{ ?>
-                                        <div class="tf-single-rating">
+                                        <a href="#tf-review" class="tf-single-rating">
                                             <span><?php _e( "0.0", "tourfic" ) ?></span> (<?php _e( "0 review", "tourfic" ) ?>)
-                                        </div>
+                                        </a>
                                     <?php } ?>
                                 <?php } ?>
                                 </div>
@@ -167,7 +164,7 @@
                                     foreach ( $gallery_ids as $key => $gallery_item_id ) {
                                     $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
                                 ?>
-                                <a class="<?php echo $gallery_count==5 ? esc_attr( 'tf-gallery-more' ) : ''; ?> " href="<?php echo esc_url($image_url); ?>" data-fancybox="tour-gallery"><img src="<?php echo esc_url($image_url); ?>"></a>
+                                <a class="<?php echo $gallery_count==5 ? esc_attr( 'tf-gallery-more' ) : ''; ?> " id="tour-gallery" href="<?php echo esc_url($image_url); ?>" data-fancybox="tour-gallery"><img src="<?php echo esc_url($image_url); ?>"></a>
                                 <?php $gallery_count++; } } ?>
                             </div>
                             </div>

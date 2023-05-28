@@ -1987,6 +1987,15 @@
                 }
             });
         });
+
+        /*
+        * Single Hotel Gallery
+        * @author Jahid
+        */
+        $(document).on('click', '#featured-gallery', function (e) {
+            e.preventDefault();
+            $("#tour-gallery").trigger("click");
+        });
     });
 
 })(jQuery, window);

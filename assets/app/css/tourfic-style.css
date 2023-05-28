@@ -4623,6 +4623,9 @@ div#tf-contact-info {
   padding: 0px 12px;
 }
 
+.tf-single-head .tf-head-info {
+  align-items: baseline;
+}
 .tf-single-head h1 {
   color: #000;
   font-size: 38px;
@@ -4715,7 +4718,7 @@ div#tf-contact-info {
   align-items: center;
   justify-content: center;
   border-radius: 50px;
-  box-shadow: 0px 13px 30px #E0E8EE;
+  box-shadow: 0px 0px 24px 5px #E0E8EE;
 }
 .tf-head-info .tf-share a {
   font-size: 16px;
@@ -4882,9 +4885,13 @@ div#tf-contact-info {
   background-color: #5F79A1;
   padding: 9px 8px !important;
   font-size: 16px !important;
+  text-decoration: none;
 }
 .tf-hero-gallery .tf-gallery-featured .tf-single-review-box .tf-single-rating span {
   font-weight: 600;
+}
+.tf-hero-gallery .tf-gallery-featured .tf-single-review-box .tf-single-rating:hover {
+  color: #fff;
 }
 .tf-hero-gallery .tf-gallery {
   display: flex;
@@ -5503,6 +5510,7 @@ div#tf-contact-info {
 .tf-tour-details-right .tf-tour-booking-box {
   background: #fff;
   border-radius: 5px;
+  box-shadow: 0px 0px 24px 5px #E0E8EE;
 }
 .tf-tour-details-right .tf-booking-price {
   border-bottom: 1px solid #EBF0F4;
