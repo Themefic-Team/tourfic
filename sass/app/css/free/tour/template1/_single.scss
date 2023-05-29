@@ -664,7 +664,6 @@
                 border-radius: $tf-brds-default;
                 margin: 0px 0px 30px 0px;
                 box-shadow: 0px 0px 24px 5px #E0E8EE;
-                transition: .6s all ease;
                 .tf-faq-collaps{
                     .faq-icon{
                       i.fa-plus{
@@ -678,20 +677,21 @@
                 }
                 .tf-faq-content{
                     display: block;
-                    transition: all .5s linear;
                 }
             }
         }
         .tf-faq-single-inner{
             .tf-faq-content{
                 display: none;
-                transition: all 0.65s ease;
             }
         }
     }
     .tf-faq-single-inner{
-        padding: $tf-space-30;
+        .tf-faq-content{
+            padding: 0px 30px 30px 30px;
+        }
         .tf-faq-collaps{
+            padding: $tf-space-30;
             &:hover{
                 cursor: pointer;
             }

@@ -28,7 +28,7 @@
                                 <h4><?php echo esc_html( $faq['title'] ); ?></h4> 
                                 <div class="faq-icon"><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i></div>
                             </div>
-                            <div class="tf-faq-content tf-mt-24">
+                            <div class="tf-faq-content">
                             <p><?php echo wp_kses_post( $faq['description'] ); ?></p>
                             </div>
                         </div>
