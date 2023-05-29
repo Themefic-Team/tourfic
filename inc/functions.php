@@ -1804,3 +1804,15 @@ function tourfic_google_fonts_scriptss() {
 }
 add_action( 'wp_enqueue_scripts', 'tourfic_google_fonts_scriptss', 9999999 );
 
+
+if ( ! function_exists( 'tourfic_template_settings' ) ) {
+	function tourfic_template_settings(){
+		$tf_plugin_installed = get_option('tourfic_template_installed'); 
+		if (!$tf_plugin_installed) {
+			$template = 'design-1';
+		}else{
+			$template = 'default';
+		}
+		return $template;
+	}
+}

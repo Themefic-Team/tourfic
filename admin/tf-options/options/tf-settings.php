@@ -65,7 +65,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url' 			=> TF_ASSETS_APP_URL."images/design1-hotel.jpg",
 										),
 									),
-									'default'   	=> 'design-1',
+									'default'   	=> tourfic_template_settings(),
 								),
 								array(
 									'id'       => 'single-hotel-layout',
@@ -156,7 +156,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url' 			=> TF_ASSETS_APP_URL."images/hotel-archive-design1.jpg",
 										),
 									),
-									'default'   	=> 'design-1',
+									'default'   	=> tourfic_template_settings(),
 								),
 								array(
 									'id'       => 'hotel_archive_view',
@@ -203,7 +203,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url' 			=> TF_ASSETS_APP_URL."images/design1-tour.jpg",
 										),
 									),
-									'default'   	=> 'design-1',
+									'default'   	=> tourfic_template_settings(),
 								),
 								array(
 									'id'       => 'single-tour-layout',
@@ -319,7 +319,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url' 			=> TF_ASSETS_APP_URL."images/tour-archive-design-1.jpg",
 										),
 									),
-									'default'   	=> 'design-1',
+									'default'   	=> tourfic_template_settings(),
 								),
 								array(
 									'id'       => 'tour_archive_view',
