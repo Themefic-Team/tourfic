@@ -199,7 +199,7 @@ class TF_Handle_Emails {
                     $order_type = $item->get_meta( '_order_type', true );
                     $tour_ides = $item->get_meta( '_tour_unique_id', true );
                         if("tour"==$order_type){
-                            $tf_ticket_download .= '<table width="100%" style="margin: 10px 0;"><tr><td style="padding-bottom:10px;padding-top:10px;"><a href="'. get_bloginfo('url').'?qr_id='.$tour_ides.'" target="_blank" style="display: inline-block; padding: 10px 15px; background-color: #0209AF; color: #fff; text-decoration: none;">Download Ticket '.$total_tours.'</a><tr><td></table>';
+                            $tf_ticket_download .= '<table width="100%" style="margin: 10px 0;"><tr><td style="padding-bottom:10px;padding-top:10px;"><a href="'. get_bloginfo('url').'?qr_id='.$tour_ides.'" target="_blank" style="display: inline-block; padding: 10px 15px; background-color: #0209AF; color: #fff; text-decoration: none;">Download Voucher '.$total_tours.'</a><tr><td></table>';
                             $total_tours++;
                         }
                     }
@@ -226,7 +226,7 @@ class TF_Handle_Emails {
             '{order_status}'     => $order_status,
             '{site_name}'        => get_bloginfo( 'name' ),
             '{site_url}'         => get_bloginfo( 'url' ),
-            '{tour_ticket_downloader}' => $tf_ticket_download,
+            '{tour_voucher_downloader}' => $tf_ticket_download,
         );
 
         $tags = array_keys($replacements);
