@@ -1321,6 +1321,20 @@ TF_Settings::option( 'tf_settings', array(
 					),
 				),
 				array(
+					'id'       => 'tourfic-design1-p-global-color',
+					'type'     => 'color',
+					'label'    => __( 'Global Color of P', 'tourfic' ),
+					'subtitle' => __( 'Global Colors of P, Design 2 related to Tourfic', 'tourfic' ),
+					'multiple' => true,
+					'inline'   => true,
+					'default' => array(
+						'pgcolor' => '#36383C'
+					),
+					'colors'   => array(
+						'pgcolor' => __( 'P Primary Color', 'tourfic' ),
+					),
+				),
+				array(
 					'id'      => 'typography',
 					'type'    => 'heading',
 					'content' => __( 'Typography', 'tourfic' ),
