@@ -12,6 +12,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 		// Store as PHP variables
 		// Template 1 Global CSS
 		$tf_template1_global_reg = !empty(tf_data_types(tfopt( 'tourfic-design1-global-color' ))['gcolor']) ? tf_data_types(tfopt( 'tourfic-design1-global-color' ))['gcolor'] : '';
+		$tf_template1_p_global_reg = !empty(tf_data_types(tfopt( 'tourfic-design1-p-global-color' ))['pgcolor']) ? tf_data_types(tfopt( 'tourfic-design1-p-global-color' ))['pgcolor'] : '#36383C';
 
 		// Common CSS
 		$tf_primary_color_reg = !empty(tf_data_types(tfopt( 'tourfic-button-color' ))['regular']) ? tf_data_types(tfopt( 'tourfic-button-color' ))['regular'] : '';
@@ -100,6 +101,15 @@ if( !function_exists( 'tf_custom_css' ) ){
 				font-family: '.$tf_global_font_family.'
 			}';
 		}
+		if( !empty($tf_template1_p_global_reg) ){
+			$output .= '
+			.tf-container-inner p,
+			.tf-main-wrapper p,
+			.tf-container p{
+				color: '.$tf_template1_p_global_reg.'
+			}';
+		}
+		
 		if( !empty($tf_global_heading_font_family) && $tf_global_heading_font_family!="Default" && $tf_global_font_family!="Default"){
 			$output .= '
 			.tf-container-inner h1,
@@ -210,7 +220,6 @@ if( !function_exists( 'tf_custom_css' ) ){
 
 		if( !empty( $tf_template1_global_reg ) ){ $output .= '
 			.tf-template-global .tf-archive-head i,
-			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-details i,
 			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-details .tf-post-footer .tf-pricing span,
 			.tf-template-global .tf-single-head i,
 			.tf-template-global .tf-trip-info li i,
@@ -361,7 +370,11 @@ if( !function_exists( 'tf_hotel_css' ) ){
 			.show-on-map .btn-styled, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i {color: '.$tf_map_text_color.';}
 		'; }
 		if( $tf_hotel_features  ) { $output .= '
-			.tf_features i, .tf-archive-desc i, .tf-single-page .tf-hotel-single-features ul li {color: '.$tf_hotel_features.'!important;}
+			.tf_features i, 
+			.tf-archive-desc i, 
+			.tf-single-page .tf-hotel-single-features ul li,
+			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-details .tf-archive-features i,
+			.tf-hotel-design-1 .tf-rooms .tf-features-infos ul li {color: '.$tf_hotel_features.'!important;}
 		'; }
 		if( $tf_hotel_table_color OR $tf_hotel_table_bg_color ) { $output .= '
 			.availability-table thead,

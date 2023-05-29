@@ -4966,6 +4966,7 @@ div#tf-contact-info {
 .tf-trip-info {
   background-color: #fff;
   border-radius: 5px;
+  box-shadow: 0px 0px 24px 5px #E0E8EE;
 }
 .tf-trip-info .person-info.active {
   background: #F3F7FA;
@@ -5043,7 +5044,7 @@ div#tf-contact-info {
 
 .tf-trip-feature-blocks .tf-feature-block {
   background: #fff;
-  box-shadow: 0px 13px 30px 0px #e0e8ee;
+  box-shadow: 0px 0px 24px 5px #E0E8EE;
   border-radius: 5px;
   padding: 20px;
   width: 100%;
@@ -5069,6 +5070,7 @@ div#tf-contact-info {
 .tf-highlights-wrapper {
   background: #fff;
   border-radius: 5px;
+  box-shadow: 0px 0px 24px 5px #E0E8EE;
 }
 .tf-highlights-wrapper .tf-highlights-inner {
   gap: 40px;
@@ -5096,6 +5098,7 @@ div#tf-contact-info {
   width: 100%;
   background: #fff;
   border-radius: 5px;
+  box-shadow: 0px 0px 24px 5px #E0E8EE;
 }
 .tf-inex-wrapper .tf-inex h3 {
   font-size: 24px;
@@ -5108,6 +5111,7 @@ div#tf-contact-info {
 .tf-itinerary-wrapper .tf-itinerary-box {
   background: #fff;
   border-radius: 5px;
+  box-shadow: 0px 0px 24px 5px #E0E8EE;
 }
 @media only screen and (max-width: 767.98px) {
   .tf-itinerary-wrapper .tf-itinerary-box {
@@ -5226,7 +5230,7 @@ div#tf-contact-info {
   background: #fff;
   border-radius: 5px;
   margin: 0px 0px 30px 0px;
-  box-shadow: 0px 13px 30px 0px #e0e8ee;
+  box-shadow: 0px 0px 24px 5px #E0E8EE;
   transition: 0.6s all ease;
 }
 .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus {
@@ -5269,6 +5273,9 @@ div#tf-contact-info {
   margin-top: 8px;
 }
 
+.tf-review-wrapper .tf-review-data.tf-box {
+  box-shadow: 0px 0px 24px 5px #E0E8EE;
+}
 .tf-review-wrapper .tf-review-data {
   background: #fff;
   border-radius: 5px;
@@ -5595,6 +5602,7 @@ div#tf-contact-info {
 .tf-tour-details-right .tf-tour-booking-advantages {
   background-color: #fff;
   border-radius: 5px;
+  box-shadow: 0px 0px 24px 5px #E0E8EE;
 }
 .tf-tour-details-right .tf-tour-booking-advantages ul {
   margin: 0px;
@@ -5858,7 +5866,7 @@ div#tf-contact-info {
 }
 .tf-search-results-list .tf-item-card .tf-item-details .tf-archive-features ul li i {
   margin-right: 5px;
-  color: #0E3DD8;
+  color: #686E7A;
 }
 .tf-search-results-list .tf-item-card .tf-item-details .tf-archive-features ul li img {
   margin-right: 5px;
