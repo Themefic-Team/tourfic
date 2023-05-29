@@ -98,8 +98,8 @@
 
     });
 
-    //export hotel tour ajax
-    $(document).on('click', '.tf-export-ht-btn', function(e){
+    //export tours ajax
+    $(document).on('click', '.tf-export-tours-btn', function(e){
         e.preventDefault();
         $.ajax({
             type: "post",
@@ -131,7 +131,41 @@
                 $('.tf-export-ht-btn').html('Export');
             }
         });
-    })
+    });
+    //export hotels ajax
+    $(document).on('click', '.tf-export-hotels-btn', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: tf_pro_params.ajax_url,
+            data: {
+                action: "tf_export_hotels",
+                nonce: tf_pro_params.nonce,
+            },
+            beforeSend: function(){
+                $('.tf-export-hotels-btn').html('Exporting...');
+            },
+            success: function(response){
+                var date = new Date();
+                var generated_date = date.getMonth() + '-' + date.getDate() + '-' + date.getFullYear();
+
+                var link               = document.createElement('a');
+                    link.href          = 'data:text/csv;charset=utf-8,' + encodeURI(response);
+                    link.download      = 'Tours_' + generated_date + '.csv';
+                    link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                //clean up
+                document.body.removeChild(link);
+                $('.tf-export-hotels-btn').html('Export');
+
+                console.log(response);
+            },
+            complete: function(){
+                $('.tf-export-hotels-btn').html('Export');
+            }
+        });
+    });
     
 
 })(jQuery);
