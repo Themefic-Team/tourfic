@@ -5208,9 +5208,6 @@ div#tf-contact-info {
   color: #060D1C;
   text-decoration: none;
 }
-.tf-itinerary-wrapper .tf-single-itinerary-item.active .tf-itinerary-content-box {
-  display: block !important;
-}
 
 .tf-itinerary-wrapper.tf-mb-50 .tf-itinerary-downloader-option {
   background-color: #0E3DD8;
@@ -5237,9 +5234,6 @@ div#tf-contact-info {
 }
 .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-minus {
   color: #0E3DD8;
-  display: block;
-}
-.tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-content {
   display: block;
 }
 .tf-faq-wrapper .tf-faq-inner .tf-faq-single-inner .tf-faq-content {

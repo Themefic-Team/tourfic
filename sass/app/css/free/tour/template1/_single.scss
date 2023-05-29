@@ -632,11 +632,6 @@
             }
         }
     }
-    .tf-single-itinerary-item.active{
-        .tf-itinerary-content-box{
-            display: block !important;
-        }
-    }
 }
 .tf-itinerary-wrapper.tf-mb-50{
     .tf-itinerary-downloader-option{
@@ -674,9 +669,6 @@
                         display: block;
                       } 
                     }
-                }
-                .tf-faq-content{
-                    display: block;
                 }
             }
         }

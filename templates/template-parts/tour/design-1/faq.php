@@ -12,7 +12,7 @@
                     <h4><?php echo esc_html( $faq['title'] ); ?></h4> 
                     <div class="faq-icon"><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i></div>
                 </div>
-                <div class="tf-faq-content">
+                <div class="tf-faq-content" style="<?php echo $faq_key==1 ? esc_attr( 'display: block;' ) : ''; ?>">
                     <p><?php echo wp_kses_post( $faq['desc'] ); ?></p>
                 </div>
             </div>

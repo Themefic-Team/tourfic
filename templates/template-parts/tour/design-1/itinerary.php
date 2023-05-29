@@ -23,7 +23,7 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
                         <span class="itinerary-day"><?php echo esc_html( $itinerary['time'] ) ?> - </span> <?php echo esc_html( $itinerary['title'] ); ?>
                     </h3>
                 </div>
-                <div class="tf-itinerary-content-box">
+                <div class="tf-itinerary-content-box" style="<?php echo $itineray_key==1 ? esc_attr( 'display: block;' ) : ''; ?>">
                     <div class="tf-itinerary-content tf-mt-16 tf-flex-gap-16 tf-flex">
                         <?php if ( $itinerary['image'] ) { ?>
                             <div class="tf-itinerary-content-img">
