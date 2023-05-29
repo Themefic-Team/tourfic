@@ -142,7 +142,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 				font-weight: '.$tf_global_font_weight_p.' !important;
 				font-size: '.$tf_global_font_p.'px !important;
 				font-style: '.$tf_global_font_style_p.' !important;
-				line-height: '.$tf_global_line_height_p.'px !important;
+				line-height: '.$tf_global_line_height_p.'rem !important;
 			}';
 		}
 
@@ -154,7 +154,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 				font-weight: '.$tf_global_font_weight_h1.' !important;
 				font-size: '.$tf_global_font_h1.'px !important;
 				font-style: '.$tf_global_font_style_h1.' !important;
-				line-height: '.$tf_global_line_height_h1.'px !important;
+				line-height: '.$tf_global_line_height_h1.'rem !important;
 			}';
 		}
 
@@ -166,7 +166,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 				font-weight: '.$tf_global_font_weight_h2.' !important;
 				font-size: '.$tf_global_font_h2.'px !important;
 				font-style: '.$tf_global_font_style_h2.' !important;
-				line-height: '.$tf_global_line_height_h2.'px !important;
+				line-height: '.$tf_global_line_height_h2.'rem !important;
 			}';
 		}
 
@@ -178,7 +178,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 				font-weight: '.$tf_global_font_weight_h3.' !important;
 				font-size: '.$tf_global_font_h3.'px !important;
 				font-style: '.$tf_global_font_style_h3.' !important;
-				line-height: '.$tf_global_line_height_h3.'px !important;
+				line-height: '.$tf_global_line_height_h3.'rem !important;
 			}';
 		}
 
@@ -190,7 +190,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 				font-weight: '.$tf_global_font_weight_h4.' !important;
 				font-size: '.$tf_global_font_h4.'px !important;
 				font-style: '.$tf_global_font_style_h4.' !important;
-				line-height: '.$tf_global_line_height_h4.'px !important;
+				line-height: '.$tf_global_line_height_h4.'rem !important;
 			}';
 		}
 
@@ -202,7 +202,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 				font-weight: '.$tf_global_font_weight_h5.' !important;
 				font-size: '.$tf_global_font_h5.'px !important;
 				font-style: '.$tf_global_font_style_h5.' !important;
-				line-height: '.$tf_global_line_height_h5.'px !important;
+				line-height: '.$tf_global_line_height_h5.'rem !important;
 			}';
 		}
 
@@ -214,7 +214,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 				font-weight: '.$tf_global_font_weight_h6.' !important;
 				font-size: '.$tf_global_font_h6.'px !important;
 				font-style: '.$tf_global_font_style_h6.' !important;
-				line-height: '.$tf_global_line_height_h6.'px !important;
+				line-height: '.$tf_global_line_height_h6.'rem !important;
 			}';
 		}
 

@@ -1384,14 +1384,14 @@ TF_Settings::option( 'tf_settings', array(
 				),
 				array(
 					'id'          => 'global-h1-line-height',
-					'type'        => 'number',
-					'label'       => __( 'Line Height (PX)', 'tourfic' ),
+					'type'        => 'text',
+					'label'       => __( 'Line Height (REM)', 'tourfic' ),
 					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 50
+					'default' => 3.12
 				),
 				array(
 					'id'       => 'global-h1-weight',
@@ -1443,14 +1443,14 @@ TF_Settings::option( 'tf_settings', array(
 				),
 				array(
 					'id'          => 'global-h2-line-height',
-					'type'        => 'number',
-					'label'       => __( 'Line Height (PX)', 'tourfic' ),
+					'type'        => 'text',
+					'label'       => __( 'Line Height (REM)', 'tourfic' ),
 					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 38
+					'default' => 2.37
 				),
 				array(
 					'id'       => 'global-h2-weight',
@@ -1502,14 +1502,14 @@ TF_Settings::option( 'tf_settings', array(
 				),
 				array(
 					'id'          => 'global-h3-line-height',
-					'type'        => 'number',
-					'label'       => __( 'Line Height (PX)', 'tourfic' ),
+					'type'        => 'text',
+					'label'       => __( 'Line Height (REM)', 'tourfic' ),
 					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 30
+					'default' => 1.87
 				),
 				array(
 					'id'       => 'global-h3-weight',
@@ -1561,14 +1561,14 @@ TF_Settings::option( 'tf_settings', array(
 				),
 				array(
 					'id'          => 'global-h4-line-height',
-					'type'        => 'number',
-					'label'       => __( 'Line Height (PX)', 'tourfic' ),
+					'type'        => 'text',
+					'label'       => __( 'Line Height (REM)', 'tourfic' ),
 					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 28
+					'default' => 1.75
 				),
 				array(
 					'id'       => 'global-h4-weight',
@@ -1620,14 +1620,14 @@ TF_Settings::option( 'tf_settings', array(
 				),
 				array(
 					'id'          => 'global-h5-line-height',
-					'type'        => 'number',
-					'label'       => __( 'Line Height (PX)', 'tourfic' ),
+					'type'        => 'text',
+					'label'       => __( 'Line Height (REM)', 'tourfic' ),
 					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 25
+					'default' => 1.56
 				),
 				array(
 					'id'       => 'global-h5-weight',
@@ -1679,14 +1679,14 @@ TF_Settings::option( 'tf_settings', array(
 				),
 				array(
 					'id'          => 'global-h6-line-height',
-					'type'        => 'number',
-					'label'       => __( 'Line Height (PX)', 'tourfic' ),
+					'type'        => 'text',
+					'label'       => __( 'Line Height (REM)', 'tourfic' ),
 					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 22
+					'default' => 1.37
 				),
 				array(
 					'id'       => 'global-h6-weight',
@@ -1738,14 +1738,14 @@ TF_Settings::option( 'tf_settings', array(
 				),
 				array(
 					'id'          => 'global-p-line-height',
-					'type'        => 'number',
-					'label'       => __( 'Line Height (PX)', 'tourfic' ),
+					'type'        => 'text',
+					'label'       => __( 'Line Height (REM)', 'tourfic' ),
 					'subtitle'    => __( 'Line Height of Tourfic', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 22
+					'default' => 1.37
 				),
 				array(
 					'id'       => 'global-p-weight',
