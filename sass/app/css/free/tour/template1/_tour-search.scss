@@ -78,6 +78,9 @@ i {
     @media #{$tfmax991}{
         flex-basis: calc(100% - 0px);
     }
+    @media #{$max480}{
+        flex-basis: calc(100% - 0px);
+    }
     }
 
     .tf-item-card {
@@ -248,6 +251,9 @@ i {
 .tf-pagination-bar{
     display: block;
     width: 100%;
+    @media #{$max767}{
+        margin-bottom: 30px;
+    }
     .tf_posts_navigation,#tf_posts_navigation_bar{
         margin-top: 40px;
         .page-numbers {
