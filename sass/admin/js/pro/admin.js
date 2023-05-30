@@ -146,12 +146,12 @@
                 $('.tf-export-hotels-btn').html('Exporting...');
             },
             success: function(response){
-                var date = new Date();
+                var date           = new Date();
                 var generated_date = date.getMonth() + '-' + date.getDate() + '-' + date.getFullYear();
 
                 var link               = document.createElement('a');
                     link.href          = 'data:text/csv;charset=utf-8,' + encodeURI(response);
-                    link.download      = 'Tours_' + generated_date + '.csv';
+                    link.download      = 'Hotels_' + generated_date + '.csv';
                     link.style.display = 'none';
                 document.body.appendChild(link);
                 link.click();
