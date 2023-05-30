@@ -50,13 +50,23 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 			$pages = array(
 				'search'   => array(
 					'name'    => _x( 'tf-search', 'Page slug', 'tourfic' ),
-					'title'   => _x( 'TF Search', 'Page title', 'tourfic' ),
+					'title'   => _x( 'Search', 'Page title', 'tourfic' ),
 					'content' => '[' . apply_filters( 'tf_search_shortcode_tag', 'tf_search' ) . ']',
 				),
 				'wishlist' => array(
 					'name'    => _x( 'tf-wishlist', 'Page slug', 'tourfic' ),
-					'title'   => _x( 'TF Wishlist', 'Page title', 'tourfic' ),
+					'title'   => _x( 'Wishlist', 'Page title', 'tourfic' ),
 					'content' => '[' . apply_filters( 'tf_wishlist_shortcode_tag', 'tf-wishlist' ) . ']',
+				),
+				'login'   => array(
+					'name'    => _x( 'tf-login', 'Page slug', 'tourfic' ),
+					'title'   => _x( 'Login', 'Page title', 'tourfic' ),
+					'content' => '[' . apply_filters( 'tf_login_shortcode_tag', 'tf_login_form' ) . ']',
+				),
+				'register'   => array(
+					'name'    => _x( 'tf-register', 'Page slug', 'tourfic' ),
+					'title'   => _x( 'Register', 'Page title', 'tourfic' ),
+					'content' => '[' . apply_filters( 'tf_register_shortcode_tag', 'tf_registration_form' ) . ']',
 				),
 			);
 
@@ -130,7 +140,7 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 		}
 
 		public function add_post_state( $post_states, $post ) {
-			if ( $post->ID == get_option( 'tf_search_page_id' )  || $post->ID == get_option( 'tf_wishlist_page_id' ) ) {
+			if ( $post->ID == get_option( 'tf_search_page_id' )  || $post->ID == get_option( 'tf_wishlist_page_id' ) || $post->ID == get_option( 'tf_login_page_id' ) || $post->ID == get_option( 'tf_register_page_id' ) ) {
 				$post_states[] = '<div class="tf-post-states">' . __( 'Tourfic', 'tourfic' ) . '</div>';
 			}
 
