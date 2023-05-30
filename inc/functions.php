@@ -1580,7 +1580,8 @@ add_action( 'wp_ajax_tf_month_reports', 'tf_month_chart_filter_callback' );
 
 function tf_month_chart_filter_callback(){
 	$search_month = sanitize_key( $_POST['month'] );
-	$month_dates = cal_days_in_month( CAL_GREGORIAN, $search_month, date('Y') );
+	$search_year = sanitize_key( $_POST['year'] );
+	$month_dates = cal_days_in_month( CAL_GREGORIAN, $search_month, $search_year );
 
 	//Order Data Retrive
 	$tf_old_order_limit = new WC_Order_Query( array (
@@ -1604,7 +1605,7 @@ function tf_month_chart_filter_callback(){
 		$itemmeta = wc_get_order( $item);
 		$tf_ordering_date =  $itemmeta->get_date_created();
 		for($i=1; $i<=$month_dates; $i++){
-			if($tf_ordering_date->date('n-j-y')==$search_month.'-'.$i.'-'.date('y')){
+			if($tf_ordering_date->date('n-j-y')==$search_month.'-'.$i.'-'.$search_year){
 				if("completed"==$itemmeta->get_status()){
 					${"tf_co$i"}+=1;
 				}

@@ -1560,6 +1560,7 @@ Steps
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-month-filter {
   margin-bottom: 15px;
+  display: inline-block;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-month-filter span {
   display: block;
