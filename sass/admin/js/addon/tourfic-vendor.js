@@ -335,6 +335,7 @@
 
         $(document).on('click', '.tf-vendor-submission', function () {
             var month = $(".tf-month").val();
+            var year = $(".tf-year").val();
             var chartval=[];
             $.each($("input[name='tf-chart-report']:checked"), function(){            
                 chartval.push($(this).val());
@@ -353,6 +354,7 @@
                 data: {
                     action: 'tf_vendor_month_reports',
                     month: month,
+                    year: year,
                     chartval: chartval,
                 },
                 success: function (data) {
