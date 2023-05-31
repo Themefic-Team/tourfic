@@ -82,6 +82,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 						$this->tf_setup_step_one();
 						$this->setup_step_two();
 						$this->tf_setup_step_three();
+						$this->tf_setup_step_four();
 						$this->tf_setup_finish_step();
 						?>
 						<?php wp_nonce_field( 'tf_setup_wizard_action', 'tf_setup_wizard_nonce' ); ?>
@@ -302,6 +303,136 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                 <div class="tf-setup-action-btn-wrapper">
                     <button type="button" class="tf-setup-prev-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Previous', 'tourfic' ) ?></button>
                     <div class="tf-setup-action-btn-next">
+                        <button type="button" class="tf-setup-skip-btn tf-link-btn"><?php _e( 'Skip this step', 'tourfic' ) ?></button>
+                        <button type="button" class="tf-setup-next-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Next', 'tourfic' ) ?></button>
+                    </div>
+                </div>
+            </div>
+			<?php
+		}
+
+        /**
+		 * Setup step four
+		 */
+		private function tf_setup_step_four() {
+			?>
+            <div class="tf-setup-step-container tf-setup-step-4 <?php echo self::$current_step == 'step_4' ? 'active' : ''; ?>" data-step="4">
+                <section class="tf-setup-step-layout tf-template-step">
+					<?php $this->tf_setup_wizard_steps_header( 4 ) ?>
+                    <div class="tf-hotel-setup-wizard">
+                        <div class="tf-field tf-field-heading tf-field-class " style="width:100%;">
+                        <div class="tf-fieldset">
+                            <div class="tf-field-heading-inner">
+                            <div class="tf-field-heading-content has-content">
+                                <div class="tf-field-heading-main-content"><?php _e( 'Hotel settings', 'tourfic' ) ?></div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                        <!--Hotel Single Template-->
+                        <div class="tf-field tf-field-imageselect  " style="width:100%;">
+                        <label for="tf_settings[single-hotel]" class="tf-field-label"> <?php echo __("Select Single Template", "tourfic"); ?> </label>
+                        <div class="tf-fieldset">
+                            <ul class="tf-image-radio-group tf-inline">
+                            <li>
+                                <label class="tf-image-checkbox">
+                                <input type="radio" name="tf_single_hotel" value="design-1" checked="">
+                                <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/design1-hotel.jpg" alt="Design 1">
+                                </label>
+                            </li>
+                            <li>
+                                <label class="tf-image-checkbox">
+                                <input type="radio" name="tf_single_hotel" value="default">
+                                <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/default-hotel.jpg" alt="Defult">
+                                </label>
+                            </li>
+                            </ul>
+                        </div>
+                        </div>
+
+                        <!--Hotel Archive Page-->
+                        <div class="tf-field tf-field-imageselect  " style="width:100%;">
+                        <label for="tf_settings[hotel-archive]" class="tf-field-label"> <?php echo __("Select Archive & Search Result Template ", "tourfic"); ?> </label>
+                        <div class="tf-fieldset">
+                            <ul class="tf-image-radio-group tf-inline">
+                            <li>
+                                <label class="tf-image-checkbox">
+                                <input type="radio" name="tf_hotel_archive" value="design-1" checked="">
+                                <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/hotel-archive-design1.jpg" alt="Design 1">
+                                </label>
+                            </li>
+                            <li>
+                                <label class="tf-image-checkbox">
+                                <input type="radio" name="tf_hotel_archive" value="default">
+                                <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/hotel-archive-default.jpg" alt="Defult">
+                                </label>
+                            </li>
+                            </ul>
+                        </div>
+                        </div>
+
+                    </div>
+
+                    <div class="tf-tour-setup-wizard">
+                        <div class="tf-field tf-field-heading tf-field-class " style="width:100%;">
+                        <div class="tf-fieldset">
+                            <div class="tf-field-heading-inner">
+                            <div class="tf-field-heading-content has-content">
+                                <div class="tf-field-heading-main-content"><?php _e( 'Tour settings', 'tourfic' ) ?></div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                        
+                        <!--Tour Single Template-->
+                        <div class="tf-field tf-field-imageselect  " style="width:100%;">
+                        <label for="tf_settings[single-tour]" class="tf-field-label"> <?php echo __("Select Single Template", "tourfic"); ?> </label>
+                        <div class="tf-fieldset">
+                            <ul class="tf-image-radio-group tf-inline">
+                            <li>
+                                <label class="tf-image-checkbox">
+                                <input type="radio" name="tf_single_tour" value="design-1" checked="">
+                                <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/design1-tour.jpg" alt="Design 1">
+                                </label>
+                            </li>
+                            <li>
+                                <label class="tf-image-checkbox">
+                                <input type="radio" name="tf_single_tour" value="default">
+                                <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/default-tour.jpg" alt="Defult">
+                                </label>
+                            </li>
+                            </ul>
+                        </div>
+                        </div>
+
+                        <!--Tour Archive Page-->
+                        <div class="tf-field tf-field-imageselect  " style="width:100%;">
+                        <label for="tf_settings[tour-archive]" class="tf-field-label"> <?php echo __("Select Archive & Search Result Template ", "tourfic"); ?> </label>
+                        <div class="tf-fieldset">
+                            <ul class="tf-image-radio-group tf-inline">
+                            <li>
+                                <label class="tf-image-checkbox">
+                                <input type="radio" name="tf_tour_archive" value="design-1" checked="">
+                                <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/tour-archive-design-1.jpg" alt="Design 1">
+                                </label>
+                            </li>
+                            <li>
+                                <label class="tf-image-checkbox">
+                                <input type="radio" name="tf_tour_archive" value="default">
+                                <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/tour-archive-default.jpg" alt="Defult">
+                                </label>
+                            </li>
+                            </ul>
+                        </div>
+                        </div>
+
+
+                    </div>
+
+                </section>
+                <div class="tf-setup-action-btn-wrapper">
+                    <button type="button" class="tf-setup-prev-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Previous', 'tourfic' ) ?></button>
+                    <div class="tf-setup-action-btn-next">
                         <button type="submit" class="tf-setup-skip-btn tf-link-btn tf-setup-submit-btn"><?php _e( 'Skip this step', 'tourfic' ) ?></button>
                         <button type="submit" class="tf-setup-submit-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Finish', 'tourfic' ) ?></button>
                     </div>
@@ -379,6 +510,18 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                         <div class="tf-steps-item-title"><?php _e( 'Step 3', 'tourfic' ); ?></div>
                     </div>
                 </div>
+
+                <div class="tf-steps-item <?php echo $active_step == 4 ? 'active' : ''; ?>">
+                    <div class="tf-steps-item-container">
+                        <div class="tf-steps-item-tail"></div>
+                        <div class="tf-steps-item-icon">
+                            <span class="tf-steps-icon">
+                                <?php echo $active_step == 4 ? $active_icon : ( $active_step > 4 ? $finish_icon : $inactive_icon ); ?>
+                            </span>
+                        </div>
+                        <div class="tf-steps-item-title"><?php _e( 'Step 4', 'tourfic' ); ?></div>
+                    </div>
+                </div>
             </div>
 			<?php
 		}
@@ -412,6 +555,12 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			$tour_review            = isset( $_POST['tf-tour-review-section'] ) ? $_POST['tf-tour-review-section'] : '';
 			$tour_related           = isset( $_POST['tf-tour-related-section'] ) ? $_POST['tf-tour-related-section'] : '';
 			$tour_permalink         = isset( $_POST['tf-tour-permalink'] ) ? $_POST['tf-tour-permalink'] : '';
+
+            // Template Step
+            $tf_hotel_single        = isset( $_POST['tf_single_hotel'] ) ? $_POST['tf_single_hotel'] : 'design-1';
+            $tf_hotel_archive       = isset( $_POST['tf_hotel_archive'] ) ? $_POST['tf_hotel_archive'] : 'design-1';
+            $tf_tour_single         = isset( $_POST['tf_single_tour'] ) ? $_POST['tf_single_tour'] : 'design-1';
+            $tf_tour_archive        = isset( $_POST['tf_tour_archive'] ) ? $_POST['tf_tour_archive'] : 'design-1';
 
 			//skip steps
 			$skip_steps = isset( $_POST['tf-skip-steps'] ) ? $_POST['tf-skip-steps'] : [];
@@ -452,6 +601,17 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 				if ( ! empty( $tour_permalink ) ) {
 					update_option( 'tour_slug', $tour_permalink );
 				}
+			}
+
+            // Settings Template
+            if ( ! in_array( 4, $skip_steps ) && ! in_array( 'hotel', $services ) ) {
+				$tf_settings['tf-template']['single-hotel'] = ! empty( $tf_hotel_single ) ? $tf_hotel_single : '';
+				$tf_settings['tf-template']['hotel-archive'] = ! empty( $tf_hotel_archive ) ? $tf_hotel_archive : '';
+			}
+
+			if ( ! in_array( 4, $skip_steps ) && ! in_array( 'tour', $services ) ) {
+				$tf_settings['tf-template']['single-tour'] = ! empty( $tf_tour_single ) ? $tf_tour_single : '';
+				$tf_settings['tf-template']['tour-archive'] = ! empty( $tf_tour_archive ) ? $tf_tour_archive : '';
 			}
 
 			update_option( 'tf_settings', $tf_settings );

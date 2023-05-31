@@ -1066,6 +1066,20 @@ Steps
     transform: rotate(360deg);
   }
 }
+.tf-setup-step-container .tf-template-step .tf-hotel-setup-wizard ul,
+.tf-setup-step-container .tf-template-step .tf-tour-setup-wizard ul {
+  margin-bottom: 0px;
+}
+.tf-setup-step-container .tf-template-step .tf-hotel-setup-wizard .tf-field-imageselect .tf-image-checkbox img,
+.tf-setup-step-container .tf-template-step .tf-tour-setup-wizard .tf-field-imageselect .tf-image-checkbox img {
+  width: 200px;
+  height: 140px;
+}
+.tf-setup-step-container .tf-template-step .tf-hotel-setup-wizard .tf-field-imageselect .tf-image-checkbox > input:checked + img,
+.tf-setup-step-container .tf-template-step .tf-tour-setup-wizard .tf-field-imageselect .tf-image-checkbox > input:checked + img {
+  border-color: #5D5DFF;
+  border-radius: 5px;
+}
 
 @media only screen and (max-width: 991.98px) {
   #tf_tours_opt .tf-admin-meta-box {
