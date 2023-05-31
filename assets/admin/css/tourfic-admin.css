@@ -3517,9 +3517,19 @@ Steps
 }
 .tf-image-radio-group li {
   display: inline-block;
+  margin-right: 20px;
+  cursor: n-resize;
+  border-radius: 5px;
 }
 .tf-image-radio-group li .tf-image-checkbox img {
   width: 240px;
+  object-fit: cover;
+  object-position: top;
+  height: 180px;
+  transition: 2s all ease;
+}
+.tf-image-radio-group li .tf-image-checkbox img:hover {
+  object-position: bottom;
 }
 .tf-image-radio-group li .tf-image-checkbox > input {
   display: none;

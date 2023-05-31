@@ -37,13 +37,13 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'multiple' 		=> true,
 					'inline'   		=> true,
 					'options'   	=> array( 
-						'default' 			=> array(
-							'title'			=> 'Defult',
-							'url' 			=> TF_ASSETS_APP_URL."images/default-hotel.jpg",
-						),
 						'design-1' 				=> array(
 							'title'			=> 'Design 1',
-							'url' 			=> TF_ASSETS_APP_URL."images/design1-hotel.jpg",
+							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design1-hotel.jpg",
+						),
+						'default' 			=> array(
+							'title'			=> 'Defult',
+							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-hotel.jpg",
 						),
 					),
 					'default'   	=> tourfic_template_settings(),

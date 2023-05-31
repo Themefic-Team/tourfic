@@ -3,8 +3,18 @@
     align-items: initial;
     li{
         display: inline-block;
+        margin-right: 20px;
+        cursor: n-resize;
+        border-radius: 5px;
         .tf-image-checkbox img{
             width:240px;
+            object-fit: cover;
+            object-position: top;
+            height: 180px;
+            transition: 2s all ease;
+            &:hover {
+              object-position: bottom;
+            }
           }
           .tf-image-checkbox > input{
             display:none

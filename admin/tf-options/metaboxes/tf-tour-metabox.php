@@ -51,13 +51,13 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'multiple' 		=> true,
 					'inline'   		=> true,
 					'options'   	=> array( 
-						'default' 			=> array(
-							'title'			=> 'Defult',
-							'url' 			=> TF_ASSETS_APP_URL."images/default-tour.jpg",
-						),
 						'design-1' 				=> array(
 							'title'			=> 'Design 1',
-							'url' 			=> TF_ASSETS_APP_URL."images/design1-tour.jpg",
+							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design1-tour.jpg",
+						),
+						'default' 			=> array(
+							'title'			=> 'Defult',
+							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-tour.jpg",
 						),
 					),
 					'default'   	=> tourfic_template_settings(),
