@@ -114,6 +114,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		 * Setup step one
 		 */
 		private function tf_setup_step_one() {
+            $tf_disable_services = !empty(tfopt( 'disable-services' )) ? tfopt( 'disable-services' ) : '';
 			?>
             <div class="tf-setup-step-container tf-setup-step-1 <?php echo self::$current_step == 'step_1' ? 'active' : ''; ?>" data-step="1">
                 <section class="tf-setup-step-layout">
@@ -122,14 +123,14 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <p class="tf-setup-step-desc"><?php _e( '(You can choose any one or both)', 'tourfic' ) ?></p>
                     <ul class="tf-select-service">
                         <li>
-                            <input type="checkbox" id="tf-hotel" name="tf-services[]" value="hotel" checked/>
+                            <input type="checkbox" id="tf-hotel" name="tf-services[]" value="hotel" <?php echo empty($tf_disable_services) || !in_array( 'hotel', $tf_disable_services ) ? esc_attr( 'checked' ) : ''; ?>/>
                             <label for="tf-hotel">
                                 <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/hotel.png' ?>" alt="<?php esc_attr_e( 'Hotel', 'tourfic' ) ?>">
                                 <span><?php _e( 'Hotel', 'tourfic' ) ?></span>
                             </label>
                         </li>
                         <li>
-                            <input type="checkbox" id="tf-tour" name="tf-services[]" value="tour" checked/>
+                            <input type="checkbox" id="tf-tour" name="tf-services[]" value="tour" <?php echo empty($tf_disable_services) || !in_array( 'tour', $tf_disable_services ) ? esc_attr( 'checked' ) : ''; ?>/>
                             <label for="tf-tour">
                                 <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/tour.png' ?>" alt="<?php esc_attr_e( 'Tour', 'tourfic' ) ?>">
                                 <span><?php _e( 'Tour', 'tourfic' ) ?></span>
@@ -152,6 +153,8 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		 * Setup step two
 		 */
 		private function setup_step_two() {
+            $tf_search_result = !empty(tfopt( 'posts_per_page' )) ? tfopt( 'posts_per_page' ) : 10;
+            $tf_review_autopublish = !empty(tfopt( 'r-auto-publish' )) ? tfopt( 'r-auto-publish' ) : '';
 			?>
             <div class="tf-setup-step-container tf-setup-step-2 <?php echo self::$current_step == 'step_2' ? 'active' : ''; ?>" data-step="2">
                 <section class="tf-setup-step-layout">
@@ -177,7 +180,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                     <div class="tf-setup-form-item">
                         <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Posts Per Page on Search Result', 'tourfic' ) ?></label></div>
                         <div class="tf-setup-form-item-input">
-                            <input type="number" name="tf-search-result-posts-per-page" id="tf-search-result-posts-per-page" value="10">
+                            <input type="number" name="tf-search-result-posts-per-page" id="tf-search-result-posts-per-page" value="<?php echo esc_attr( $tf_search_result ); ?>">
                         </div>
                     </div>
 
@@ -203,7 +206,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                         <div class="tf-setup-form-item-label"><label class="" for="tf-auto-publish-review"><?php _e( 'Auto Publish Review', 'tourfic' ) ?></label></div>
                         <div class="tf-setup-form-item-input">
                             <label for="tf-auto-publish-review" class="tf-switch-label">
-                                <input type="checkbox" id="tf-auto-publish-review" name="tf-auto-publish-review" value="1" class="tf-switch" checked/>
+                                <input type="checkbox" id="tf-auto-publish-review" name="tf-auto-publish-review" value="<?php echo !empty($tf_review_autopublish) ? esc_attr( '1' ) : ''; ?>" class="tf-switch" <?php echo !empty($tf_review_autopublish) ? esc_attr( 'checked' ) : ''; ?>/>
                                 <span class="tf-switch-slider"></span>
                             </label>
                         </div>
@@ -225,6 +228,12 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		 * Setup step three
 		 */
 		private function tf_setup_step_three() {
+            $tf_hotel_review = !empty(tfopt( 'h-review' )) ? tfopt( 'h-review' ) : '';
+            $tf_hotel_share = !empty(tfopt( 'h-share' )) ? tfopt( 'h-share' ) : '';
+            $tf_hotel_slug = !empty( get_option( 'hotel_slug' ) ) ? get_option( 'hotel_slug' ) : 'hotels';
+            $tf_tour_review = !empty(tfopt( 't-review' )) ? tfopt( 't-review' ) : '';
+            $tf_tour_related = !empty(tfopt( 't-related' )) ? tfopt( 't-related' ) : '';
+            $tf_tour_slug = !empty( get_option( 'tour_slug' ) ) ? get_option( 'tour_slug' ) : 'tours';
 			?>
             <div class="tf-setup-step-container tf-setup-step-3 <?php echo self::$current_step == 'step_3' ? 'active' : ''; ?>" data-step="3">
                 <section class="tf-setup-step-layout">
@@ -238,7 +247,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             <div class="tf-setup-form-item-label"><label class="" for="tf-hotel-review-section"><?php _e( 'Review Section', 'tourfic' ) ?></label></div>
                             <div class="tf-setup-form-item-input">
                                 <label for="tf-hotel-review-section" class="tf-switch-label">
-                                    <input type="checkbox" id="tf-hotel-review-section" name="tf-hotel-review-section" value="1" class="tf-switch" checked/>
+                                    <input type="checkbox" id="tf-hotel-review-section" name="tf-hotel-review-section" value="<?php echo empty($tf_hotel_review) ? esc_attr( '1' ) : ''; ?>" class="tf-switch" <?php echo empty($tf_hotel_review) ? esc_attr( 'checked' ) : ''; ?>/>
                                     <span class="tf-switch-slider"></span>
                                 </label>
                             </div>
@@ -249,7 +258,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             <div class="tf-setup-form-item-label"><label class="" for="tf-hotel-share-option"><?php _e( 'Share Option', 'tourfic' ) ?></label></div>
                             <div class="tf-setup-form-item-input">
                                 <label for="tf-hotel-share-option" class="tf-switch-label">
-                                    <input type="checkbox" id="tf-hotel-share-option" name="tf-hotel-share-option" value="1" class="tf-switch" checked/>
+                                    <input type="checkbox" id="tf-hotel-share-option" name="tf-hotel-share-option" value="<?php echo empty($tf_hotel_share) ? esc_attr( '1' ) : ''; ?>" class="tf-switch" <?php echo empty($tf_hotel_share) ? esc_attr( 'checked' ) : ''; ?>/>
                                     <span class="tf-switch-slider"></span>
                                 </label>
                             </div>
@@ -259,7 +268,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                         <div class="tf-setup-form-item">
                             <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Hotel Permalink', 'tourfic' ) ?></label></div>
                             <div class="tf-setup-form-item-input">
-                                <input type="text" name="tf-hotel-permalink" id="tf-hotel-permalink" value="hotels">
+                                <input type="text" name="tf-hotel-permalink" id="tf-hotel-permalink" value="<?php echo esc_attr( $tf_hotel_slug ); ?>">
                             </div>
                         </div>
                     </div>
@@ -273,7 +282,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             <div class="tf-setup-form-item-label"><label class="" for="tf-tour-review-section"><?php _e( 'Review Section', 'tourfic' ) ?></label></div>
                             <div class="tf-setup-form-item-input">
                                 <label for="tf-tour-review-section" class="tf-switch-label">
-                                    <input type="checkbox" id="tf-tour-review-section" name="tf-tour-review-section" value="1" class="tf-switch" checked/>
+                                    <input type="checkbox" id="tf-tour-review-section" name="tf-tour-review-section" value="<?php echo empty($tf_tour_review) ? esc_attr( '1' ) : ''; ?>" class="tf-switch" <?php echo empty($tf_tour_review) ? esc_attr( 'checked' ) : ''; ?>/>
                                     <span class="tf-switch-slider"></span>
                                 </label>
                             </div>
@@ -284,7 +293,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             <div class="tf-setup-form-item-label"><label class="" for="tf-tour-related-section"><?php _e( 'Related Section', 'tourfic' ) ?></label></div>
                             <div class="tf-setup-form-item-input">
                                 <label for="tf-tour-related-section" class="tf-switch-label">
-                                    <input type="checkbox" id="tf-tour-related-section" name="tf-tour-related-section" value="1" class="tf-switch" checked/>
+                                    <input type="checkbox" id="tf-tour-related-section" name="tf-tour-related-section" value="<?php echo empty($tf_tour_related) ? esc_attr( '1' ) : ''; ?>" class="tf-switch" <?php echo empty($tf_tour_related) ? esc_attr( 'checked' ) : ''; ?>/>
                                     <span class="tf-switch-slider"></span>
                                 </label>
                             </div>
@@ -294,7 +303,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                         <div class="tf-setup-form-item">
                             <div class="tf-setup-form-item-label"><label class=""><?php _e( 'Tour Permalink', 'tourfic' ) ?></label></div>
                             <div class="tf-setup-form-item-input">
-                                <input type="text" name="tf-tour-permalink" id="tf-tour-permalink" value="tours">
+                                <input type="text" name="tf-tour-permalink" id="tf-tour-permalink" value="<?php echo esc_attr( $tf_tour_slug ); ?>">
                             </div>
                         </div>
                     </div>
@@ -315,6 +324,10 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 		 * Setup step four
 		 */
 		private function tf_setup_step_four() {
+            $tf_hotel_single_template = !empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
+            $tf_hotel_archive_template = !empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ? tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
+            $tf_tour_single_template = !empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-tour'] : 'design-1';
+            $tf_tour_archive_template = !empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ? tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
 			?>
             <div class="tf-setup-step-container tf-setup-step-4 <?php echo self::$current_step == 'step_4' ? 'active' : ''; ?>" data-step="4">
                 <section class="tf-setup-step-layout tf-template-step">
@@ -336,13 +349,13 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             <ul class="tf-image-radio-group tf-inline">
                             <li>
                                 <label class="tf-image-checkbox">
-                                <input type="radio" name="tf_single_hotel" value="design-1" checked="">
+                                <input type="radio" name="tf_single_hotel" value="design-1" <?php echo !empty($tf_hotel_single_template) && $tf_hotel_single_template=="design-1" ? esc_attr( 'checked' ) : ''; ?> >
                                 <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/design1-hotel.jpg" alt="Design 1">
                                 </label>
                             </li>
                             <li>
                                 <label class="tf-image-checkbox">
-                                <input type="radio" name="tf_single_hotel" value="default">
+                                <input type="radio" name="tf_single_hotel" value="default" <?php echo !empty($tf_hotel_single_template) && $tf_hotel_single_template=="default" ? esc_attr( 'checked' ) : ''; ?> >
                                 <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/default-hotel.jpg" alt="Defult">
                                 </label>
                             </li>
@@ -357,13 +370,13 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             <ul class="tf-image-radio-group tf-inline">
                             <li>
                                 <label class="tf-image-checkbox">
-                                <input type="radio" name="tf_hotel_archive" value="design-1" checked="">
+                                <input type="radio" name="tf_hotel_archive" value="design-1" <?php echo !empty($tf_hotel_archive_template) && $tf_hotel_archive_template=="design-1" ? esc_attr( 'checked' ) : ''; ?> >
                                 <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/hotel-archive-design1.jpg" alt="Design 1">
                                 </label>
                             </li>
                             <li>
                                 <label class="tf-image-checkbox">
-                                <input type="radio" name="tf_hotel_archive" value="default">
+                                <input type="radio" name="tf_hotel_archive" value="default" <?php echo !empty($tf_hotel_archive_template) && $tf_hotel_archive_template=="default" ? esc_attr( 'checked' ) : ''; ?> >
                                 <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/hotel-archive-default.jpg" alt="Defult">
                                 </label>
                             </li>
@@ -391,13 +404,13 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             <ul class="tf-image-radio-group tf-inline">
                             <li>
                                 <label class="tf-image-checkbox">
-                                <input type="radio" name="tf_single_tour" value="design-1" checked="">
+                                <input type="radio" name="tf_single_tour" value="design-1" <?php echo !empty($tf_tour_single_template) && $tf_tour_single_template=="design-1" ? esc_attr( 'checked' ) : ''; ?> >
                                 <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/design1-tour.jpg" alt="Design 1">
                                 </label>
                             </li>
                             <li>
                                 <label class="tf-image-checkbox">
-                                <input type="radio" name="tf_single_tour" value="default">
+                                <input type="radio" name="tf_single_tour" value="default" <?php echo !empty($tf_tour_single_template) && $tf_tour_single_template=="default" ? esc_attr( 'checked' ) : ''; ?> >
                                 <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/default-tour.jpg" alt="Defult">
                                 </label>
                             </li>
@@ -412,13 +425,13 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             <ul class="tf-image-radio-group tf-inline">
                             <li>
                                 <label class="tf-image-checkbox">
-                                <input type="radio" name="tf_tour_archive" value="design-1" checked="">
+                                <input type="radio" name="tf_tour_archive" value="design-1" <?php echo !empty($tf_tour_archive_template) && $tf_tour_archive_template=="design-1" ? esc_attr( 'checked' ) : ''; ?> >
                                 <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/tour-archive-design-1.jpg" alt="Design 1">
                                 </label>
                             </li>
                             <li>
                                 <label class="tf-image-checkbox">
-                                <input type="radio" name="tf_tour_archive" value="default">
+                                <input type="radio" name="tf_tour_archive" value="default" <?php echo !empty($tf_tour_archive_template) && $tf_tour_archive_template=="default" ? esc_attr( 'checked' ) : ''; ?> >
                                 <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/tour-archive-default.jpg" alt="Defult">
                                 </label>
                             </li>
