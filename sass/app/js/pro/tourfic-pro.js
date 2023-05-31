@@ -1,6 +1,6 @@
 (function ($) {
     $(document).ready(function () {
-        
+
         /**
          * Hotel Details Popup
          *
@@ -592,15 +592,13 @@
                 beforeSend: function (response) {
 
                 },
-                complete: function (response) {
-
-                },
                 success: function (response) {
-                    $(".tf-login-response").html(response);
+                    const obj = JSON.parse(response);
+                    $(".tf-login-response").html(obj.data);
+                    if (obj.redirect_url) {
+                        window.location.href = obj.redirect_url;
+                    }
                 },
-                error: function (data) {
-
-                }
             });
 
         });
@@ -652,15 +650,13 @@
                 beforeSend: function (response) {
 
                 },
-                complete: function (response) {
-
-                },
                 success: function (response) {
-                    $(".tf-reg-response").html(response);
+                    const obj = JSON.parse(response);
+                    $(".tf-reg-response").html(obj.data);
+                    if (obj.redirect_url) {
+                        window.location.href = obj.redirect_url;
+                    }
                 },
-                error: function (data) {
-                    console.log(data);
-                }
             });
 
         });
