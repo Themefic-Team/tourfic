@@ -709,22 +709,14 @@ const TFQRSCANER = () => {
             jQuery(".tf-final-submission-form").hide();
             jQuery(".tf-final-submission-feedback").hide();
             jQuery(".tf-final-error-feedback").hide();
-            scanner.start(cameras[1]);
-            jQuery('[name="options"]').on('change',function(){
-                if(jQuery(this).val()==1){
-                    if(cameras[0]!=""){
-                        scanner.start(cameras[0]);
-                    }else{
-                        alert('No Front camera found!');
-                    }
-                }else if(jQuery(this).val()==2){
-                    if(cameras[1]!=""){
-                        scanner.start(cameras[1]);
-                    }else{
-                        alert('No Back camera found!');
-                    }
-                }
-            });
+            if(cameras.length==4){
+                scanner.start(cameras[2]);
+            }else if(cameras.length==2){
+                scanner.start(cameras[1]);
+            }else{
+                scanner.start(cameras[0]);
+            }
+            
         }else{
             console.error('No cameras found.');
             alert('No cameras found.');
