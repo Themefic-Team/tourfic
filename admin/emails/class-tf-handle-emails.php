@@ -40,13 +40,13 @@ class TF_Handle_Emails {
      * @param  string $order_email_heading
      * @param  string $email_heading_bg
      */
-    public function email_body_open($brand_logo, $order_email_heading, $email_heading_bg){
+    public function email_body_open( $brand_logo, $order_email_heading, $email_heading_bg){
         //email body open
         $email_body_open = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><body style="font-family: Work sans, sans-serif; font-size: 16px; color: #9C9C9C; margin: 0; padding: 0;">
            <div style="width: 100%; max-width: 600px; margin: 0 auto;">
-               <div style="background-color: ' . esc_attr($email_heading_bg) . '; color: #fff; padding: 20px;">';
-        if (!empty($brand_logo)) {
-            $email_body_open .= '<div style="text-align:center;width:200px;margin: 0 auto;"><img src="' . esc_url($brand_logo) . '" alt="logo" /></div>';
+               <div style="background-color: ' . esc_attr($email_heading_bg). '; color: #fff; padding: 20px;">';
+        if (!empty( $brand_logo ) && $brand_logo != '' ) {
+            $email_body_open .= '<div style="text-align:center;width:200px;margin: 0 auto;"><img src="' . esc_url( $brand_logo ) . '" alt="logo" /></div>';
         }
         $email_body_open .= '<div class="heading" style="text-align: center;">
            <h1 style="font-size: 32px; line-height: 40px; font-weight: 400; letter-spacing: 2px; margin: 20px 0; color: #ffffff;">
@@ -390,15 +390,12 @@ class TF_Handle_Emails {
             return;
         }
         //get order details
-        $order = wc_get_order( $order_id );        
+        $order                   = wc_get_order( $order_id );
         $order_billing_email     = $order->get_billing_email();
-
-        $email_settings      = self::$tf_email_settings;
-        $order_email_heading = !empty( $email_settings['order_email_heading'] ) ? $email_settings['order_email_heading'] : '';
-
-        $brand_logo       = !empty( $email_settings['brand_logo'] ) ? $email_settings['brand_logo'] : '';
-        $email_heading_bg = !empty( $email_settings['email_heading_bg'] ) ? $email_settings['email_heading_bg']['bg_color'] : '#0209AF';
-
+        $email_settings          = self::$tf_email_settings;
+        $order_email_heading     = !empty( $email_settings['order_email_heading'] ) ? $email_settings['order_email_heading'] : '';
+        $brand_logo              = !empty( $email_settings['brand_logo'] ) ? $email_settings['brand_logo'] : '';
+        $email_heading_bg        = !empty( $email_settings['email_heading_bg'] ) ? $email_settings['email_heading_bg']['bg_color'] : '#0209AF';
         $send_notifcation        = !empty( $email_settings['send_notification'] ) ? $email_settings['send_notification'] : '';
         $sale_notification_email = !empty( $email_settings['sale_notification_email'] ) ? $email_settings['sale_notification_email'] : get_bloginfo( 'admin_email' );
         $admin_email_disable     = !empty( $email_settings['admin_email_disable'] ) ? $email_settings['admin_email_disable'] : false;
@@ -408,15 +405,15 @@ class TF_Handle_Emails {
         $email_content_type      = !empty( $email_settings['email_content_type'] ) ? $email_settings['email_content_type'] : 'text/html';
 
         //mail headers
-        $charset = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
-        $headers = $charset . "\r\n";
+        $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
+        $headers  = $charset . "\r\n";
         $headers .= "MIME-Version: 1.0" . "\r\n";
         $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
         $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
         $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
 
         //email body started
-        $email_body_open = $this->email_body_open( $email_heading_bg, $brand_logo, $order_email_heading );
+        $email_body_open = $this->email_body_open( $brand_logo, $order_email_heading, $email_heading_bg );
 
         $email_body_open               = str_replace( '{booking_id}', $order_id, $email_body_open );
         $admin_booking_email_template  = !empty( $email_settings['admin_booking_email_template'] ) ? $email_settings['admin_booking_email_template'] : '';
@@ -425,8 +422,7 @@ class TF_Handle_Emails {
         //replace mail tags
         $admin_booking_email_template = $this->replace_mail_tags( $admin_booking_email_template , $order_id );
         //email body ended
-        $email_body_close  = $this->email_body_close();       
-    
+        $email_body_close  = $this->email_body_close();
         $admin_email_booking_body_full = $email_body_open . $admin_booking_email_template . $email_body_close;
         //decode entity
         if ( $email_content_type == 'text/plain' ) {
@@ -504,9 +500,7 @@ class TF_Handle_Emails {
                 $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
                 $default_mail .= __( '{site_name}', 'tourfic' ) . '</br>';
 
-                $default_mail = str_replace( '{customer_details}', $customer_details, $default_mail );
-                $default_mail = str_replace( '{booking_details}', $booking_details, $default_mail );
-                $default_mail = str_replace( '{site_name}', get_bloginfo( 'name' ), $default_mail );
+                $default_mail = $this->replace_mail_tags( $default_mail , $order_id );
 
                 if ( !empty( $vendors_email ) ) {
                     foreach ( $vendors_email as $key => $vendor_email ) {
