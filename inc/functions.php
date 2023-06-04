@@ -1669,3 +1669,35 @@ if( ! function_exists( 'tf_hotel_gallery_video' ) ){
 		}
 	}
 }
+
+/**
+ * Update options of email templates[admin,vendor, customer]
+ * 
+ * @since 2.9.19
+ * @return void
+ * 
+ * @auther Abu Hena
+ */
+add_action( 'admin_init', 'tf_update_email_template_default_content' );
+function tf_update_email_template_default_content(){
+	$tf_settings = get_option( 'tf_settings' );
+	
+	$tf_settings = $tf_settings['email-settings'] ;
+
+	if ( ! is_array( $tf_settings ) ) {
+		return;
+	}
+	
+	//update email template for admin
+	if( empty( $tf_settings['admin_booking_email_template'] ) ){
+		update_option( $tf_settings['admin_booking_email_template'], TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ) );
+	}
+	//update email template for vendor
+	if( empty( $tf_settings['vendor_booking_email_template'] ) ){
+		update_option( $tf_settings['vendor_booking_email_template'], TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ) );
+	}
+	//update email template for customer
+	if( empty( $tf_settings['customer_confirm_email_template'] ) ){
+		update_option( $tf_settings['customer_confirm_email_template'], TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'customer' ) );
+	}
+}

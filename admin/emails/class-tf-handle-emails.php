@@ -212,7 +212,7 @@ class TF_Handle_Emails {
             '{booking_url}'      => $order_url,
             '{booking_details}'  => $booking_details,
             '{fullname}'         => $order_data['billing']['first_name'] . ' ' . $order_data['billing']['last_name'],
-            '{user_email}'       => $order_data['billing']['email'],
+            '{customer_email}'   => $order_data['billing']['email'],
             '{billing_address}'  => $order_data['billing']['address_1'] . ' ' . $order_data['billing']['address_2'],
             '{city}'             => $order_data['billing']['city'],
             '{billing_state}'    => $order_data['billing']['state'],
@@ -557,7 +557,7 @@ class TF_Handle_Emails {
      *
      */
     public function send_confirmation_email_pro( $order_id ){
-        if( function_exists( 'is_tf_pro' ) && is_tf_pro() ):
+        if( is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) ) :
             //get order details
             $order = wc_get_order( $order_id );
             //get customer email
