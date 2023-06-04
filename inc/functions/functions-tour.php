@@ -1008,17 +1008,18 @@ function tf_single_tour_booking_form( $post_id ) {
                     <a data-fancybox data-src="#tour-extra" href="javascript:;"><i class="far fa-plus-square"></i><?php _e('Tour Extras', 'tourfic') ?></a>
                     <div style="display: none;" id="tour-extra">
                         <div class="tour-extra-container">
-                        <?php foreach( $tour_extras as $tour_extra ){ 
+                        <?php foreach( $tour_extras as $extrakey=>$tour_extra ){ 
                             if(!empty($tour_extra['title']) && !empty($tour_extra['desc']) && !empty($tour_extra['price'])){
+                            $tour_extra_pricetype = !empty($tour_extra['price_type']) ? $tour_extra['price_type'] : 'fixed';
                         ?>
                             <div class="tour-extra-single">
                                 <div class="tour-extra-left">
-                                    <h4><?php _e( $tour_extra['title'] ); ?></h4>
+                                    <h4><?php _e( $tour_extra['title'] ); ?> <?php echo $tour_extra_pricetype=="fixed" ? esc_html( "(Fixed Price)" ) : esc_html( "(Per Person Price)" ); ?></h4>
                                     <?php if ($tour_extra['desc']) { ?><p><?php echo esc_html( $tour_extra['desc'] ); ?></p><?php } ?>
                                 </div>
                                 <div class="tour-extra-right">
                                     <span><?php echo wc_price( $tour_extra['price'] ); ?></span>
-                                    <input type="checkbox" value="<?php echo esc_attr( $tour_extra['price'] ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>">
+                                    <input type="checkbox" value="<?php echo esc_attr( $extrakey ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>">
                                 </div>												
                             </div>
                         <?php } } ?>

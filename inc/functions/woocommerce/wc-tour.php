@@ -124,8 +124,28 @@ function tf_tours_booking_function() {
 	}
 
 	// Tour extra
-	$tour_extra_total = ! empty( $_POST['tour_extra_total'] ) ? sanitize_text_field( $_POST['tour_extra_total'] ) : '';
-	$tour_extra_title = ! empty( $_POST['tour_extra_title'] ) ? str_replace( ',', ', ', sanitize_text_field( $_POST['tour_extra_title'] ) ) : '';
+	$tour_extra_total = 0;
+	$tour_extra_title_arr = [];
+	$tour_extra_meta = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
+	if(!empty($tour_extra_meta)){
+		$tours_extra = explode(',', $_POST['tour_extra']);
+		foreach($tours_extra as $extra){
+			$tour_extra_pricetype = !empty( $tour_extra_meta[$extra]['price_type'] ) ? $tour_extra_meta[$extra]['price_type'] : 'fixed';
+			if( $tour_extra_pricetype=="fixed" ){
+				if(!empty($tour_extra_meta[$extra]['title']) && !empty($tour_extra_meta[$extra]['price'])){
+					$tour_extra_total += $tour_extra_meta[$extra]['price'];
+					$tour_extra_title_arr[] =  $tour_extra_meta[$extra]['title']." (Fixed: ".wc_price($tour_extra_meta[$extra]['price']).")";
+				}
+			}else{
+				if(!empty($tour_extra_meta[$extra]['price']) && !empty($tour_extra_meta[$extra]['title'])){
+					$tour_extra_total += ($tour_extra_meta[$extra]['price']*$total_people);
+					$tour_extra_title_arr[] =  $tour_extra_meta[$extra]['title']." (Per Person: ".wc_price($tour_extra_meta[$extra]['price']).'*'.$total_people."=".wc_price($tour_extra_meta[$extra]['price']*$total_people).")";
+				}
+			}
+		}
+	}
+
+	$tour_extra_title = ! empty( $tour_extra_title_arr ) ? implode(",",$tour_extra_title_arr) : '';
 
 	/**
 	 * People 0 number validation
@@ -320,7 +340,7 @@ function tf_tours_booking_function() {
 		$tf_tours_data['tf_tours_data']['tour_date']        = $tour_date;
 		$tf_tours_data['tf_tours_data']['tour_extra_total'] = $tour_extra_total;
 		if($tour_extra_title){
-			$tf_tours_data['tf_tours_data']['tour_extra_title'] = $tour_extra_title. " × " . strip_tags( wc_price( $tour_extra_total ) );
+			$tf_tours_data['tf_tours_data']['tour_extra_title'] = $tour_extra_title;
 		}
 		# Discount informations
 		$discount_type    = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
