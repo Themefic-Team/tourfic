@@ -119,8 +119,8 @@ function tf_tours_booking_function() {
 			$total_people = $adults + $children;
 			$tf_total_people = $tf_total_adults+$tf_total_childrens;
 			
-			$tf_today_limit = $tf_tour_booking_limit - $tf_total_people;
 			if( !empty($tf_tour_booking_limit) ){
+				$tf_today_limit = $tf_tour_booking_limit - $tf_total_people;
 				if( $tf_total_people > 0 && $tf_total_people==$tf_tour_booking_limit ){
 					$response['errors'][] = __( 'Booking limit is Reached', 'tourfic' );
 				}
@@ -149,10 +149,95 @@ function tf_tours_booking_function() {
 
 			$min_people = ! empty( $meta['cont_min_people'] ) ? $meta['cont_min_people'] : '';
 			$max_people = ! empty( $meta['cont_max_people'] ) ? $meta['cont_max_people'] : '';
+			$allowed_times_field = ! empty( $meta['allowed_time'] ) ? $meta['allowed_time'] : '';
 
+			// Daily Tour Booking Capacity
+			$tf_tour_initial_date = date('Y-m-d');
+			$tf_tour_final_date = date('Y-m-d');
+			$tf_tour_query_orders = wc_get_orders(array(
+				'limit'=>-1,
+				'type'=> 'shop_order',
+				'status'=> array( 'wc-completed' ),
+				'_order_type' => 'tour',
+				'date_created'=> $tf_tour_initial_date .'...'. $tf_tour_final_date 
+				)
+			);
+			$tf_total_adults = 0;
+			$tf_total_childrens = 0;
+			if( empty($allowed_times_field) || empty($tour_time) ){
+				$tf_tour_booking_limit = ! empty( $meta['cont_max_capacity'] ) ? $meta['cont_max_capacity'] : 0;
+				foreach( $tf_tour_query_orders as $order ){
+					foreach ($order->get_items() as $item_key => $item_values){
+						$order_type = $item_values->get_meta( '_order_type', true );
+						if("tour"==$order_type){
+							$tour_id   = $item_values->get_meta( '_tour_id', true );
+							if( !empty($tour_id) && $tour_id==$post_id ){
+								$adult     = !empty( wc_get_order_item_meta( $item_key, 'Adults', true ) ) ? wc_get_order_item_meta( $item_key, 'Adults', true ) : '';
+								if(!empty($adult)){
+									list( $tf_total_adult, $tf_adult_string ) = explode( ' x ', $adult );
+									$tf_total_adults += $tf_total_adult;
+								}
+
+								$children  = !empty( wc_get_order_item_meta( $item_key, 'Children', true ) ) ? wc_get_order_item_meta( $item_key, 'Children', true ) : '';
+								if(!empty($children)){
+									list( $tf_total_children, $tf_children_string ) = explode( ' x ', $children );
+									$tf_total_childrens += $tf_total_children;
+								}
+							}
+						}
+
+					}
+				}
+			}else{
+				if(!empty($allowed_times_field[$tour_time]['time'])){
+					$tour_time_title = $allowed_times_field[$tour_time]['time'];
+				}
+
+				if(!empty($allowed_times_field[$tour_time]['cont_max_capacity'])){
+					$tf_tour_booking_limit = $allowed_times_field[$tour_time]['cont_max_capacity'];
+
+					foreach( $tf_tour_query_orders as $order ){
+						foreach ($order->get_items() as $item_key => $item_values){
+							$order_type = $item_values->get_meta( '_order_type', true );
+							if("tour"==$order_type){
+								$tour_id   = $item_values->get_meta( '_tour_id', true );
+								if( !empty($tour_id) && $tour_id==$post_id ){
+									$adult     = !empty( wc_get_order_item_meta( $item_key, 'Adults', true ) ) ? wc_get_order_item_meta( $item_key, 'Adults', true ) : '';
+									if(!empty($adult)){
+										list( $tf_total_adult, $tf_adult_string ) = explode( ' x ', $adult );
+										$tf_total_adults += $tf_total_adult;
+									}
+	
+									$children  = !empty( wc_get_order_item_meta( $item_key, 'Children', true ) ) ? wc_get_order_item_meta( $item_key, 'Children', true ) : '';
+									if(!empty($children)){
+										list( $tf_total_children, $tf_children_string ) = explode( ' x ', $children );
+										$tf_total_childrens += $tf_total_children;
+									}
+								}
+							}
+	
+						}
+					}
+				}
+			}
+			$tf_total_people = $tf_total_adults+$tf_total_childrens;
+
+			if( !empty($tf_tour_booking_limit) ){
+				$tf_today_limit = $tf_tour_booking_limit - $tf_total_people;
+
+				if( $tf_total_people > 0 && $tf_total_people==$tf_tour_booking_limit ){
+					$response['errors'][] = __( 'Daily Booking limit is Reached', 'tourfic' );
+				}
+				if( $tf_total_people!=$tf_tour_booking_limit && $tf_today_limit < $total_people ){
+					$response['errors'][] = sprintf( __( 'Only %1$s Adult/Children/Infant are allowed Today', 'tourfic' ), $tf_today_limit );
+				}
+			}
+				
 		}
 
 	}
+
+	die();
 
 	/**
 	 * If continuous custom availability is selected but pro is not activated
@@ -342,10 +427,10 @@ function tf_tours_booking_function() {
 			$tf_allowed_times = unserialize( $tf_tour_conti_custom_date );
 		}
 		
-		if ( $custom_avail == false && ! empty( $tf_allowed_times ) && empty( $tour_time ) ) {
+		if ( $custom_avail == false && ! empty( $tf_allowed_times ) && empty( $tour_time_title ) ) {
 			$response['errors'][] = __( 'Please select time', 'tourfic' );
 		}
-		if ( $custom_avail == true && ! empty( $seasional_price[0]['allowed_time'] ) && empty( $tour_time ) ) {
+		if ( $custom_avail == true && ! empty( $seasional_price[0]['allowed_time'] ) && empty( $tour_time_title ) ) {
 			$response['errors'][] = __( 'Please select time', 'tourfic' );
 		}
 	}
@@ -399,7 +484,7 @@ function tf_tours_booking_function() {
 		$discounted_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
 
 		if ( $tour_type == 'continuous' ) {
-			$tf_tours_data['tf_tours_data']['tour_time'] = $tour_time;
+			$tf_tours_data['tf_tours_data']['tour_time'] = $tour_time_title;
 		}
 
 		# Calculate discounted price

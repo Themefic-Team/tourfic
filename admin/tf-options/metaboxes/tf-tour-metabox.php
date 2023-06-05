@@ -514,7 +514,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'          => 'cont_min_people',
 					'type'        => 'number',
 					'label'       => __( 'Minimum Person', 'tourfic' ),
-					'subtitle'    => __( 'Minimum person needed to travel', 'tourfic' ),
+					'subtitle'    => __( 'Minimum person allowed to travel Per Booking', 'tourfic' ),
 					'dependency'  => array(
 						array( 'type', '==', 'continuous' ),
 						array( 'custom_avail', '==', 'false' ),
@@ -525,12 +525,22 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'          => 'cont_max_people',
 					'type'        => 'number',
 					'label'       => __( 'Maximum Person', 'tourfic' ),
-					'subtitle'    => __( 'Maximum person allowed to travel', 'tourfic' ),
+					'subtitle'    => __( 'Maximum person allowed to travel Per Booking', 'tourfic' ),
 					'dependency'  => array(
 						array( 'type', '==', 'continuous' ),
 						array( 'custom_avail', '==', 'false' ),
 					),
 					'field_width' => '50',
+				),
+				array(
+					'id'          => 'cont_max_capacity',
+					'type'        => 'number',
+					'label'       => __( 'Maximum Capacity', 'tourfic' ),
+					'subtitle'    => __( 'Maximum Capacity allowed to travel this tour (Adult & Child)', 'tourfic' ),
+					'dependency'  => array(
+						array( 'type', '==', 'continuous' ),
+						array( 'custom_avail', '==', 'false' ),
+					),
 				),
 				array(
 					'id'           => 'allowed_time',

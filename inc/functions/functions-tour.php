@@ -898,7 +898,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                 if (times.length > 0) {
                                     timeSelect.append(`<option value="" selected hidden><?php _e( "Select Time", "tourfic" ); ?></option>`);
                                     $.each(times, function(i, v) {
-                                        timeSelect.append(`<option value="${v}">${v}</option>`);
+                                        timeSelect.append(`<option value="${i}">${v}</option>`);
                                     });
                                     timeSelectDiv.show();
                                 } else timeSelectDiv.hide();
