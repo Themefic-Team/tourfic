@@ -135,7 +135,7 @@ class TF_Handle_Emails {
             $booking_details .= '<td style="padding: 15px 0;text-align: left;padding-top: 15px;padding-bottom: 15px;line-height: 1.7;">' . $item['item_name'];
             //item meta data except _order_type,_post_author,_tour_id php loop
             foreach ( $item['item_meta_data'] as $meta_data ) {
-                if ( $meta_data['key'] != '_order_type' && $meta_data['key'] != '_post_author' && $meta_data['key'] != '_tour_id' && $meta_data['key'] != '_post_id' && $meta_data['key'] != '_unique_id' ) {
+                if ( $meta_data['key'] != '_order_type' && $meta_data['key'] != '_post_author' && $meta_data['key'] != '_tour_id' && $meta_data['key'] != '_post_id' && $meta_data['key'] != '_unique_id' && $meta_data['key'] != '_tour_unique_id' ) {
                     $booking_details .= '<br><strong>' . $meta_data['key'] . '</strong>: ' . $meta_data['value'];
                 }
                 //identify vendor details
@@ -212,7 +212,8 @@ class TF_Handle_Emails {
             '{booking_url}'      => $order_url,
             '{booking_details}'  => $booking_details,
             '{fullname}'         => $order_data['billing']['first_name'] . ' ' . $order_data['billing']['last_name'],
-            '{customer_email}'   => $order_data['billing']['email'],
+            '{user_email}'       => $order_data['billing']['email'],
+            '{customer_details}' => $customer_details,
             '{billing_address}'  => $order_data['billing']['address_1'] . ' ' . $order_data['billing']['address_2'],
             '{city}'             => $order_data['billing']['city'],
             '{billing_state}'    => $order_data['billing']['state'],
@@ -393,13 +394,13 @@ class TF_Handle_Emails {
         $order                   = wc_get_order( $order_id );
         $order_billing_email     = $order->get_billing_email();
         $email_settings          = self::$tf_email_settings;
-        $order_email_heading     = !empty( $email_settings['order_email_heading'] ) ? $email_settings['order_email_heading'] : '';
+        $order_email_heading     = !empty( $email_settings['order_email_heading'] ) ? $email_settings['order_email_heading'] : __( 'Your order received' , 'tourfic' );
         $brand_logo              = !empty( $email_settings['brand_logo'] ) ? $email_settings['brand_logo'] : '';
         $email_heading_bg        = !empty( $email_settings['email_heading_bg'] ) ? $email_settings['email_heading_bg']['bg_color'] : '#0209AF';
         $send_notifcation        = !empty( $email_settings['send_notification'] ) ? $email_settings['send_notification'] : '';
         $sale_notification_email = !empty( $email_settings['sale_notification_email'] ) ? $email_settings['sale_notification_email'] : get_bloginfo( 'admin_email' );
         $admin_email_disable     = !empty( $email_settings['admin_email_disable'] ) ? $email_settings['admin_email_disable'] : false;
-        $admin_email_subject     = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] . " # " . $order_id : '';
+        $admin_email_subject     = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] . " # " . $order_id : __( 'New order received','tourfic' );
         $email_from_name         = !empty( $email_settings['email_from_name'] ) ? $email_settings['email_from_name'] : get_bloginfo( 'name' );
         $email_from_email        = !empty( $email_settings['email_from_email'] ) ? $email_settings['email_from_email'] : get_bloginfo( 'admin_email' );
         $email_content_type      = !empty( $email_settings['email_content_type'] ) ? $email_settings['email_content_type'] : 'text/html';
@@ -416,8 +417,8 @@ class TF_Handle_Emails {
         $email_body_open = $this->email_body_open( $brand_logo, $order_email_heading, $email_heading_bg );
 
         $email_body_open               = str_replace( '{booking_id}', $order_id, $email_body_open );
-        $admin_booking_email_template  = !empty( $email_settings['admin_booking_email_template'] ) ? $email_settings['admin_booking_email_template'] : '';
-        $vendor_booking_email_template = !empty( $email_settings['vendor_booking_email_template'] ) ? $email_settings['vendor_booking_email_template'] : '';
+        $admin_booking_email_template  = !empty( $email_settings['admin_booking_email_template'] ) ? $email_settings['admin_booking_email_template'] : $this->get_email_template( 'order_confirmation', '', 'admin');
+        $vendor_booking_email_template = !empty( $email_settings['vendor_booking_email_template'] ) ? $email_settings['vendor_booking_email_template'] : $this->get_email_template( 'order_confirmation', '', 'vendor');
 
         //replace mail tags
         $admin_booking_email_template = $this->replace_mail_tags( $admin_booking_email_template , $order_id );
@@ -468,7 +469,7 @@ class TF_Handle_Emails {
         //send mail to vendor
         if ( !empty( $send_notifcation ) && $send_notifcation == 'admin_vendor' ) {
 
-            $vendor_email_subject          = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] : '';
+            $vendor_email_subject          = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] :  __( 'New order received','tourfic' );;
             $vendor_from_name              = !empty( $email_settings['vendor_from_name'] ) ? $email_settings['vendor_from_name'] : '';
             $vendor_from_email             = !empty( $email_settings['vendor_from_email'] ) ? $email_settings['vendor_from_email'] : '';
             $vendor_booking_email_template = !empty( $email_settings['vendor_booking_email_template'] ) ? $email_settings['vendor_booking_email_template'] : '';
@@ -513,11 +514,11 @@ class TF_Handle_Emails {
         //customer email settings
         $customer_email_address          = $order_billing_email;
         $disable_customer_email          = !empty( $email_settings['customer_email_disable'] ) ? $email_settings['customer_email_disable'] : false;
-        $customer_email_subject          = !empty( $email_settings['customer_confirm_email_subject'] ) ? $email_settings['customer_confirm_email_subject'] : '';
+        $customer_email_subject          = !empty( $email_settings['customer_confirm_email_subject'] ) ? $email_settings['customer_confirm_email_subject'] :  __( 'New order received','tourfic' );
         $customer_email_subject          = str_replace( '{booking_id}', $order_id, $customer_email_subject );
         $customer_from_name              = !empty( $email_settings['customer_from_name'] ) ? $email_settings['customer_from_name'] : '';
         $customer_from_email             = !empty( $email_settings['customer_from_email'] ) ? $email_settings['customer_from_email'] : '';
-        $customer_confirm_email_template = !empty( $email_settings['customer_confirm_email_template'] ) ? $email_settings['customer_confirm_email_template'] : '';
+        $customer_confirm_email_template = !empty( $email_settings['customer_confirm_email_template'] ) ? $email_settings['customer_confirm_email_template'] : $this->get_email_template( 'order_confirmation', '', 'customer');;
         $headers .= "From: {$customer_from_name} <{$customer_from_email}>" . "\r\n";
         //send mail to customer
         if ( $disable_customer_email == false ) {
