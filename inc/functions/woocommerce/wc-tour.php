@@ -41,7 +41,7 @@ function tf_tours_booking_function() {
 	$total_people = $adults + $children + $infant;
 	// Tour date
 	$tour_date    = ! empty( $_POST['check-in-out-date'] ) ? sanitize_text_field( $_POST['check-in-out-date'] ) : '';
-	$tour_time    = ! empty( $_POST['check-in-time'] ) ? sanitize_text_field( $_POST['check-in-time'] ) : null;
+	$tour_time    = isset( $_POST['check-in-time'] ) ? sanitize_text_field( $_POST['check-in-time'] ) : null;
 	$make_deposit = ! empty( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
 
 
@@ -102,13 +102,13 @@ function tf_tours_booking_function() {
 						if( !empty($tour_id) && $tour_id==$post_id ){
 							$adult     = !empty( wc_get_order_item_meta( $item_key, 'Adults', true ) ) ? wc_get_order_item_meta( $item_key, 'Adults', true ) : '';
 							if(!empty($adult)){
-								list( $tf_total_adult, $tf_adult_string ) = explode( ' x ', $adult );
+								list( $tf_total_adult, $tf_adult_string ) = explode( " × ", $adult );
 								$tf_total_adults += $tf_total_adult;
 							}
 
 							$children  = !empty( wc_get_order_item_meta( $item_key, 'Children', true ) ) ? wc_get_order_item_meta( $item_key, 'Children', true ) : '';
 							if(!empty($children)){
-								list( $tf_total_children, $tf_children_string ) = explode( ' x ', $children );
+								list( $tf_total_children, $tf_children_string ) = explode( " × ", $children );
 								$tf_total_childrens += $tf_total_children;
 							}
 						}
@@ -164,7 +164,7 @@ function tf_tours_booking_function() {
 			);
 			$tf_total_adults = 0;
 			$tf_total_childrens = 0;
-			if( empty($allowed_times_field) || empty($tour_time) ){
+			if( empty($allowed_times_field) || $tour_time==null ){
 				$tf_tour_booking_limit = ! empty( $meta['cont_max_capacity'] ) ? $meta['cont_max_capacity'] : 0;
 				foreach( $tf_tour_query_orders as $order ){
 					foreach ($order->get_items() as $item_key => $item_values){
@@ -174,13 +174,13 @@ function tf_tours_booking_function() {
 							if( !empty($tour_id) && $tour_id==$post_id ){
 								$adult     = !empty( wc_get_order_item_meta( $item_key, 'Adults', true ) ) ? wc_get_order_item_meta( $item_key, 'Adults', true ) : '';
 								if(!empty($adult)){
-									list( $tf_total_adult, $tf_adult_string ) = explode( ' x ', $adult );
+									list( $tf_total_adult, $tf_adult_string ) = explode( " × ", $adult );
 									$tf_total_adults += $tf_total_adult;
 								}
 
 								$children  = !empty( wc_get_order_item_meta( $item_key, 'Children', true ) ) ? wc_get_order_item_meta( $item_key, 'Children', true ) : '';
 								if(!empty($children)){
-									list( $tf_total_children, $tf_children_string ) = explode( ' x ', $children );
+									list( $tf_total_children, $tf_children_string ) = explode( " × ", $children );
 									$tf_total_childrens += $tf_total_children;
 								}
 							}
@@ -204,13 +204,13 @@ function tf_tours_booking_function() {
 								if( !empty($tour_id) && $tour_id==$post_id ){
 									$adult     = !empty( wc_get_order_item_meta( $item_key, 'Adults', true ) ) ? wc_get_order_item_meta( $item_key, 'Adults', true ) : '';
 									if(!empty($adult)){
-										list( $tf_total_adult, $tf_adult_string ) = explode( ' x ', $adult );
+										list( $tf_total_adult, $tf_adult_string ) = explode( " × ", $adult );
 										$tf_total_adults += $tf_total_adult;
 									}
 	
 									$children  = !empty( wc_get_order_item_meta( $item_key, 'Children', true ) ) ? wc_get_order_item_meta( $item_key, 'Children', true ) : '';
 									if(!empty($children)){
-										list( $tf_total_children, $tf_children_string ) = explode( ' x ', $children );
+										list( $tf_total_children, $tf_children_string ) = explode( " × ", $children );
 										$tf_total_childrens += $tf_total_children;
 									}
 								}
@@ -229,15 +229,13 @@ function tf_tours_booking_function() {
 					$response['errors'][] = __( 'Daily Booking limit is Reached', 'tourfic' );
 				}
 				if( $tf_total_people!=$tf_tour_booking_limit && $tf_today_limit < $total_people ){
-					$response['errors'][] = sprintf( __( 'Only %1$s Adult/Children/Infant are allowed Today', 'tourfic' ), $tf_today_limit );
+					$response['errors'][] = sprintf( __( 'Only %1$s Adult/Children are allowed Today', 'tourfic' ), $tf_today_limit );
 				}
 			}
 				
 		}
 
 	}
-
-	die();
 
 	/**
 	 * If continuous custom availability is selected but pro is not activated
