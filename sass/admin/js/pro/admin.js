@@ -109,7 +109,7 @@
                 nonce: tf_pro_params.nonce,
             },
             beforeSend: function(){
-               $('.tf-export-ht-btn').html('Exporting...');
+               $('.tf-export-tours-btn').html('Exporting...');
             },
             success: function(response){
                 var date = new Date();
