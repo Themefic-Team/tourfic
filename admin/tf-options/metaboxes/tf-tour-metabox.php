@@ -669,14 +669,23 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 									'type'     => 'number',
 									'label'    => __( 'Minimum People', 'tourfic' ),
 									'is_pro'   => true,
-									'subtitle' => __( 'Minimum person needed to travel', 'tourfic' ),
+									'subtitle' => __( 'Minimum person needed to travel Per Booking', 'tourfic' ),
+									'field_width' => 50
 								),
 								array(
 									'id'       => '',
 									'type'     => 'number',
 									'label'    => __( 'Maximum People', 'tourfic' ),
 									'is_pro'   => true,
-									'subtitle' => __( 'Maximum person allowed to travel', 'tourfic' ),
+									'subtitle' => __( 'Maximum person allowed to travel Per Booking', 'tourfic' ),
+									'field_width' => 50
+								),
+								array(
+									'id'          => '',
+									'type'        => 'number',
+									'label'       => __( 'Maximum Capacity', 'tourfic' ),
+									'subtitle'    => __( 'Maximum Capacity allowed to travel this tour (Adult & Child)', 'tourfic' ),
+									'is_pro'   => true,
 								),
 							),
 						),
