@@ -1851,7 +1851,7 @@ TF_Settings::option( 'tf_settings', array(
 					<strong>{booking_id} </strong> : To display the booking ID.<br>
 					<strong>{booking_date} </strong> : To display the booking date.<br>
 					<strong>{fullname} </strong> : To display the customer name.<br>
-					<strong>{customer_email} </strong> : To display the customer email.<br>
+					<strong>{user_email} </strong> : To display the customer email.<br>
 					<strong>{phone} </strong> : To display the customer phone.<br>
 					<strong>{address} </strong> : To display the customer address.<br>
 					<strong>{city} </strong> : To display the customer city.<br>

@@ -45,7 +45,7 @@ class TF_Handle_Emails {
         //email body open
         $email_body_open = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><body style="font-family: Work sans, sans-serif; font-size: 16px; color: #9C9C9C; margin: 0; padding: 0;">
            <div style="width: 100%; max-width: 600px; margin: 0 auto;">
-               <div style="background-color: ' . $email_heading_bg . '; color: #fff; padding: 20px;">';
+               <div style="background-color: ' . esc_attr( $email_heading_bg ) . '; color: #fff; padding: 20px;">';
         if (!empty( $brand_logo ) && $brand_logo != '' ) {
             $email_body_open .= '<div style="text-align:center;width:200px;margin: 0 auto;"><img src="' . esc_url( $brand_logo ) . '" alt="logo" /></div>';
         }
