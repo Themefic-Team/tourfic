@@ -309,14 +309,14 @@ class TF_Handle_Emails {
                 ),
                 'order_confirmation' => array(
                     'admin'    => array(
-                        'heading'         => __( 'A Payment has been received for {booking_id}', 'tourfic' ),
+                        'heading'         => __( 'A Payment has been received for #{booking_id}', 'tourfic' ),
                         'greeting'        => __( 'Dear Admin,', 'tourfic' ),
-                        'greeting_byline' => __( 'A payment has been received for {booking_id}. The payment details are listed below.', 'tourfic' ),
+                        'greeting_byline' => __( 'A payment has been received for #{booking_id}. The payment details are listed below.', 'tourfic' ),
                     ),
                     'vendor'   => array(
-                        'heading'         => __( 'A Payment has been received for {booking_id}', 'tourfic' ),
-                        'greeting'        => __( 'Dear {fullname},', 'tourfic' ),
-                        'greeting_byline' => __( 'A payment has been received for {booking_id}. The payment details are listed below.', 'tourfic' ),
+                        'heading'         => __( 'A Payment has been received for #{booking_id}', 'tourfic' ),
+                        'greeting'        => __( 'Dear Vendor,', 'tourfic' ),
+                        'greeting_byline' => __( 'A payment has been received for #{booking_id}. The payment details are listed below.', 'tourfic' ),
                     ),
                     'customer' => array(
                         'heading'         => __( 'Your booking has been confirmed.', 'tourfic' ),
