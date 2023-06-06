@@ -79,13 +79,13 @@ $tf_total_results = 0;
 						echo '<div class="tf-nothing-found" data-post-count="0" >' .__("No Tours Found!", "tourfic"). '</div>';
 					}
 					?>
-				</div>
-				<span class="tf-posts-count" hidden="hidden">
-				<?php echo $tf_total_results; ?>
-				</span>
-				
-				<div class="tf_posts_navigation">
-					<?php tourfic_posts_navigation(); ?>
+					<span class="tf-posts-count" hidden="hidden">
+					<?php echo $tf_total_results; ?>
+					</span>
+					
+					<div class="tf_posts_navigation">
+						<?php tourfic_posts_navigation(); ?>
+					</div>
 				</div>
 
 			</div>
