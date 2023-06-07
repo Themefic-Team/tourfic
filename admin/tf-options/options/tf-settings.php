@@ -542,6 +542,22 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
 					'subtitle' => __( 'The Email to receive all enquiry form submissions', 'tourfic' ),
 					'is_pro'   => true,
+				),
+				array(
+					'id'        => 't-auto-draft',
+					'type'      => 'switch',
+					'label'     => __( 'Expired Tours for Backend', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the tour will be auto-expired after the date expired. (Status will be change after every 24 hours)', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 't-show-expire-tour',
+					'type'      => 'switch',
+					'label'     => __( 'Show All Tours (Publish + Expired)', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, all tours whose status is Published and Expired will be displayed', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
 				)
 			),
 		),
@@ -1281,6 +1297,22 @@ TF_Settings::option( 'tf_settings', array(
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 				),
+				array(
+					'id'        => 'disable_child_search',
+					'type'      => 'switch',
+					'label'     => __( 'Disabled Child in Tour Search', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the child is not showing on the Search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 'disable_infant_search',
+					'type'      => 'switch',
+					'label'     => __( 'Disabled Infant in Tour Search', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the Infant is not showing on the Search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				)
 			),
 		),
 		// Design Options
@@ -2429,7 +2461,7 @@ TF_Settings::option( 'tf_settings', array(
 
 		'emails'    => array(
 			'title'  => esc_html__( 'Emails', 'tourfic' ),
-			'icon'   => 'fa fa-cog',
+			'icon'   => 'fa fa-envelope-o',
 			'fields' => array(
 				array(
 					'id'   => 'email-settings',
@@ -2544,10 +2576,10 @@ TF_Settings::option( 'tf_settings', array(
 								// ),
 								//vendor email template
 								array(
-									'id'      => 'vendor_booking_email_template',
-									'type'    => 'editor',
-									'label'   => __( 'Vendor Notification Template', 'tourfic' ),
-									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ),
+									'id'          => 'vendor_booking_email_template',
+									'type'        => 'editor',
+									'label'       => __( 'Vendor Notification Template', 'tourfic' ),
+									'default'     => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ),
 									'description' => __( 'This template will be sent to vendor', 'tourfic' )
 								),
 								// array(
@@ -2646,6 +2678,62 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		
+		//QR Code settings
+		'qr_code'    => array(
+			'title'  => esc_html__( 'QR Code', 'tourfic' ),
+			'icon'   => 'fa fa-qrcode',
+			'fields' => array(
+				array(
+					'id'      => 'qr-code-title',
+					'type'    => 'heading',
+					'content' => __( 'Tour QR Code', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'      => 'qr_logo',
+					'type'    => 'image',
+					'label'   => __( 'Company Logo', 'tourfic' ),
+					'is_pro' => true,
+				),
+				array(
+					'id'      => 'qr_background',
+					'type'    => 'image',
+					'label'   => __( 'QR Code WaterMark', 'tourfic' ),
+					'is_pro' => true,
+				),
+				array(
+					'id'      => 'qr-ticket-title',
+					'type'    => 'text',
+					'label'   => __( 'Voucher Title', 'tourfic' ),
+					'default' => "Voucher ID",
+					'is_pro' => true,
+				),
+				array(
+					'id'      => 'qr-ticket-prefix',
+					'type'    => 'text',
+					'label'   => __( 'Voucher ID Prefix', 'tourfic' ),
+					'is_pro' => true,
+				),
+				array(
+					'id'      => 'qr-ticket-content',
+					'type'    => 'text',
+					'label'   => __( 'Voucher Policy', 'tourfic' ),
+					'default' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.",
+					'is_pro' => true,
+				),
+				array(
+					'id'      => 'qr-ticket-verify',
+					'type'    => 'select',
+					'label'   => __( 'QR Code Verification', 'tourfic' ),
+					'options' => array(
+						'1'        => __( '1 Step', 'tourfic' ),
+						'2' => __( '2 Steps', 'tourfic' ),
+					),
+					'default' => '2',
+					'is_pro' => true,
+				),
+			),
+		),
 
 		/**
 		 * Integration

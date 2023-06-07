@@ -1527,6 +1527,10 @@ Ajax Loader Booking Availability
     transform: rotate(360deg);
   }
 }
+.woocommerce-product-gallery .ct-image-container {
+  width: 100% !important;
+}
+
 @media only screen and (max-width: 1000px) {
   form.tf-review-form {
     gap: 20px;

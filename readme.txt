@@ -2,8 +2,8 @@
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
-Tested up to: 6.2
-Stable tag: 2.9.14
+Tested up to: 6.2.2
+Stable tag: 2.9.18
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -408,6 +408,33 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.9.18 -  24 May 2023 =
+
+* Added: Email Templates for Admin ( Pro )
+* Added: Email Templates for Vendors ( Pro )
+* Added: Email Templates for Customers ( Pro )
+* Fixed: Vendor Commission issue
+* Compatibility: WordPress 6.2.2
+* Compatibility: WooCommerce 7.7.0
+* Compatibility: Elementor 3.13.3
+
+= 2.9.17 -  09 May 2023 =
+
+* Fixed: Fixed tour pagination issue
+* Fixed: Itinerary image issue 
+* Added: Blocksy theme compatibility
+
+= 2.9.16 -  02 May 2023 =
+
+* Added: Disable Date Range For Tours
+
+= 2.9.15 -  30 April 2023 =
+
+* Added: Same day booking enable/disable option
+* Added: Auto Expired Tour Status
+* Added: Disable infant & child on search form
+* Added: Disabled date Exclude from the search results
 
 = 2.9.14 -  13 April 2023 =
 

@@ -821,21 +821,10 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
-                                            <h3><?php echo __( 'View', 'tourfic' ) ?></h3>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <option value="style='grid'"><?php _e( 'Grid', 'tourfic' ); ?></option>
-                                                <option value="style='list'"><?php _e( 'List', 'tourfic' ); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="tf-col-lg-6">
-                                        <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Number of Posts', 'tourfic' ) ?></h3>
-                                            <input type="number" value="4" data-count="count" class="post-count tf-setting-field">                                                
+                                            <input type="number" value="4" data-count="count" class="post-count tf-setting-field">                     
                                         </div>
                                     </div>
-                                </div>
-                                <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Vendor Name', 'tourfic' ) ?></h3>
@@ -855,9 +844,11 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                             ?>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="tf-sg-row">
+                                    
                                     <div class="tf-col-lg-6">
                                     <div class="tf-generate-tour">
-                                        <h3 style="visibility: hidden"><?php echo __( 'Generate', 'tourfic' ) ?></h3>
                                         <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
                                     </div>
                                     </div>

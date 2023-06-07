@@ -451,6 +451,7 @@
             var checked = $('#check-in-out-date').val();
             var startprice = $('.widget_tf_price_filters input[name="from"]').val();
             var endprice = $('.widget_tf_price_filters input[name="to"]').val();
+            var tf_author = $('#tf_author').val();
             // split date range into dates
             var checkedArr = checked.split(' - ');
             var checkin = checkedArr[0];
@@ -538,6 +539,9 @@
             if (endprice) {
                 formData.append('endprice', endprice);
             }
+            if (tf_author) {
+                formData.append('tf_author', tf_author);
+            }
             // abort previous request
             if (filter_xhr && filter_xhr.readyState != 4) {
                 filter_xhr.abort();
@@ -618,6 +622,7 @@
             var checked = $('#check-in-out-date').val();
             var startprice = $('.widget_tf_price_filters input[name="from"]').val();
             var endprice = $('.widget_tf_price_filters input[name="to"]').val();
+            var tf_author = $('#tf_author').val();
             // split date range into dates
             var checkedArr = checked.split(' - ');
             var checkin = checkedArr[0];
@@ -689,6 +694,9 @@
             }
             if (endprice) {
                 formData.append('endprice', endprice);
+            }
+            if (tf_author) {
+                formData.append('tf_author', tf_author);
             }
             // abort previous request
             if (filter_xhr && filter_xhr.readyState != 4) {

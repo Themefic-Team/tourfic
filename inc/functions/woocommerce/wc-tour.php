@@ -570,6 +570,9 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 		$item->update_meta_data( 'Due', strip_tags(wc_price( $due ) ));
 	}
 
+	// Tour Unique ID 
+	$item->update_meta_data( '_tour_unique_id', rand());
+
 }
 
 ?>

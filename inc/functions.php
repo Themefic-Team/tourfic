@@ -438,6 +438,8 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 	$startprice = $_GET['from'] ?? '';
 	$endprice   = $_GET['to'] ?? '';
 	if( ( $post_type=="tf_tours" && ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) || ( $post_type=="tf_hotel" && ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['hotel-archive']=="design-1" ) ){
+
+	$disable_child_search = ! empty( tfopt( 'disable_child_search' ) ) ? tfopt( 'disable_child_search' ) : '';
 	?>
 	<div class="tf-box-wrapper tf-box tf-mrbottom-30">
 		<form class="widget tf-hotel-side-booking" method="get" autocomplete="off"
@@ -540,7 +542,9 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                 </div>
             </label>
         </div>
-
+		<?php if ( $post_type == 'tf_tours' ) { 
+		if(empty($disable_child_search)){ 	
+		?>
         <div class="tf_form-row">
             <label class="tf_label-row">
                 <div class="tf_form-inner">
@@ -557,6 +561,25 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                 </div>
             </label>
         </div>
+		<?php }} ?>
+		<?php if ( $post_type == 'tf_hotel' ) { ?>
+        <div class="tf_form-row">
+            <label class="tf_label-row">
+                <div class="tf_form-inner">
+                    <i class="fas fa-child"></i>
+                    <select name="children" id="children" class="">
+                        <option value="0">0 <?php _e( 'Children', 'tourfic' ); ?></option>
+                        <option <?php echo 1 == $children ? 'selected' : null ?> value="1">1 <?php _e( 'Children', 'tourfic' ); ?></option>
+						<?php foreach ( range( 2, 8 ) as $value ) {
+							$selected = $value == $children ? 'selected' : null;
+							echo '<option ' . $selected . ' value="' . $value . '">' . $value . ' ' . __( "Children", "tourfic" ) . '</option>';
+						} ?>
+
+                    </select>
+                </div>
+            </label>
+        </div>
+		<?php } ?>
 		<?php if ( $post_type == 'tf_hotel' ) { ?>
             <div class="tf_form-row">
                 <label class="tf_label-row">
@@ -586,6 +609,15 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
         </div>
 
         <div class="tf_form-row">
+			<?php
+			if ( ! empty( $startprice ) && ! empty( $endprice ) ) { ?>
+                <input type="hidden" id="startprice" value="<?php echo $startprice; ?>">
+                <input type="hidden" id="endprice" value="<?php echo $endprice; ?>">
+			<?php } ?>
+			<?php
+			if ( ! empty( $_GET['tf-author'] ) ) { ?>
+                <input type="hidden" id="tf_author" value="<?php echo esc_html($_GET['tf-author']); ?>">
+			<?php } ?>
 			<?php
 			$ptype = $_GET['type'] ?? get_post_type();
 			?>
@@ -842,6 +874,9 @@ function tf_search_result_ajax_sidebar() {
 	$startprice = ! empty( $_POST['startprice'] ) ? $_POST['startprice'] : '';
 	$endprice   = ! empty( $_POST['endprice'] ) ? $_POST['endprice'] : '';
 
+	// Author Id if any
+	$tf_author_ids   = ! empty( $_POST['tf_author'] ) ? $_POST['tf_author'] : '';
+
 	if(!empty($startprice) && !empty($endprice)){
         if($posttype=="tf_tours"){
             $data = array($adults, $child, $check_in_out, $startprice, $endprice);
@@ -879,11 +914,28 @@ function tf_search_result_ajax_sidebar() {
 	$post_per_page = tfopt('posts_per_page') ? tfopt('posts_per_page') : 10;
 	// $paged = !empty($_POST['page']) ? absint( $_POST['page'] ) : 1;
 	// Properties args
-	$args = array(
-		'post_type'      => $posttype,
-		'post_status'    => 'publish',
-        'posts_per_page' => -1
-	);
+	if($posttype=="tf_tours"){
+		$tf_expired_tour_showing = ! empty( tfopt( 't-show-expire-tour' ) ) ? tfopt( 't-show-expire-tour' ) : '';
+		if(!empty($tf_expired_tour_showing )){
+			$tf_tour_posts_status = array('publish','expired');
+		}else{
+			$tf_tour_posts_status = array('publish');
+		}
+
+		$args = array(
+			'post_type'      => $posttype,
+			'post_status'    => $tf_tour_posts_status,
+			'posts_per_page' => -1,
+			'author' => $tf_author_ids,
+		);
+	}else{
+		$args = array(
+			'post_type'      => $posttype,
+			'post_status'    => 'publish',
+			'posts_per_page' => -1,
+			'author' => $tf_author_ids,
+		);
+	}
 
 	if ( $search ) {
 
@@ -1074,7 +1126,6 @@ function tf_search_result_ajax_sidebar() {
 		if(!empty($displayed_results)){
 			$filter_args = array(
 				'post_type'      => $posttype,
-				'post_status'    => 'publish',
 				'posts_per_page' => $post_per_page,
 				'post__in'  => $displayed_results,
 			);
@@ -1815,5 +1866,38 @@ if ( ! function_exists( 'tourfic_template_settings' ) ) {
 			$template = 'default';
 		}
 		return $template;
+	}
+}
+/**
+ * Update options of email templates[admin,vendor, customer]
+ * 
+ * @since 2.9.19
+ * @return void
+ * 
+ * @author Abu Hena
+ */
+add_action( 'admin_init', 'tf_update_email_template_default_content' );
+function tf_update_email_template_default_content(){
+
+	$tf_settings = get_option( 'tf_settings' );
+	if ( isset( $tf_settings['email-settings'] ) ) {
+		$tf_settings = $tf_settings['email-settings'] ;
+
+		if ( ! is_array( $tf_settings ) ) {
+			return;
+		}
+		
+		//update email template for admin
+		if( empty( $tf_settings['admin_booking_email_template'] ) ){
+			update_option( $tf_settings['admin_booking_email_template'], TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ) );
+		}
+		//update email template for vendor
+		if( empty( $tf_settings['vendor_booking_email_template'] ) ){
+			update_option( $tf_settings['vendor_booking_email_template'], TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ) );
+		}
+		//update email template for customer
+		if( empty( $tf_settings['customer_confirm_email_template'] ) ){
+			update_option( $tf_settings['customer_confirm_email_template'], TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'customer' ) );
+		}
 	}
 }
