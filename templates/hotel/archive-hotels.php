@@ -47,9 +47,9 @@ get_header(); ?>
 						echo '<div class="tf-nothing-found" data-post-count="0">' .__("No Hotels Found!", "tourfic"). '</div>';
 					}
 					?>
-				</div>
-				<div class="tf_posts_navigation">
-					<?php tourfic_posts_navigation(); ?>
+					<div class="tf_posts_navigation">
+						<?php tourfic_posts_navigation(); ?>
+					</div>
 				</div>
 
 			</div>

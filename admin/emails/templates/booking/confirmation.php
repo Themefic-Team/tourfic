@@ -20,8 +20,8 @@ $payment_details = array(
 );
 ?>
 
-<div style="padding-left:50px;padding-right:50px;margin: 0 auto;margin-top:30px;">
-	<h3 class="greeting" style="margin: 0; padding: 0;">
+<div style="padding-left:40px;padding-right:40px;margin: 0 auto;margin-top:30px;">
+	<h3 class="greeting" style="margin: 0; padding: 0;color:#5a5a5a;font-family:Work Sans,sans-serif;font-size:24px;">
 	<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'order_confirmation', $args['send_to'], 'greeting' ) ); ?>
 	</h3>
 	<p style="margin: 10px 0;">
@@ -40,9 +40,9 @@ $payment_details = array(
 				<?php endforeach; ?>
 			</td>
 		</tr>
-	</div>
-	<div style="background: #e0f0fc6e; padding: 20px;">
-		<p style="margin: 0;">
+	</table>
+	<div style="background-color: #F5F5FC; padding: 20px;">
+		<p style="margin: 0;color:#81818F">
 			Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat
 			duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
 		</p>

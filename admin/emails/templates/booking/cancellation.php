@@ -22,7 +22,7 @@ $payment_details = array(
 ?>
 
 <div style="padding-left:50px;padding-right:50px;margin: 0 auto;margin-top:30px;">
-	<h3 class="greeting" style="margin: 0; padding: 0;">
+	<h3 class="greeting" style="margin: 0; padding: 0;color:#5a5a5a;font-size:24px;font-weight:500">
 	<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'cancellation', $args['send_to'], 'greeting' ) ); ?>
 	</h3>
 	<p style="margin: 10px 0;">
@@ -31,7 +31,6 @@ $payment_details = array(
 	<div class="order-table">
 		{booking_details}                
 	</div>
-	<!-- Remaining code of the email template -->
 	<table style="width:100%;max-width:600px;margin-top:15px;margin-bottom:15px;border:none" >
 		<tr>
 			<td style="background: #e0f0fc6e;padding: 20px;float: left;">			
@@ -41,7 +40,7 @@ $payment_details = array(
 				<?php endforeach; ?>
 			</td>
 		</tr>
-	</div>
+	</table>
 	<div style="background: #e0f0fc6e; padding: 20px;">
 		<p style="margin: 0;">
 			Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat
