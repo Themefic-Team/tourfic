@@ -22,7 +22,7 @@ $payment_details = array(
 ?>
 
 <div style="padding-left:50px;padding-right:50px;margin: 0 auto;margin-top:30px;">
-	<h3 class="greeting" style="margin: 0; padding: 0;color:#5c5c5c">
+	<h3 class="greeting" style="margin: 0; padding: 0;color:#5a5a5a;font-size:24px;font-weight:500">
 	<?php echo esc_html( TF_Handle_Emails::get_emails_strings( 'cancellation', $args['send_to'], 'greeting' ) ); ?>
 	</h3>
 	<p style="margin: 10px 0;">

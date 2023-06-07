@@ -43,14 +43,14 @@ class TF_Handle_Emails {
      */
     public function email_body_open( $brand_logo, $order_email_heading, $email_heading_bg){
         //email body open
-        $email_body_open = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1"></head><body style="font-family: Work sans, sans-serif; font-size: 16px; color: #9C9C9C; margin: 0; padding: 0;">
+        $email_body_open = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"></head><body style="font-family: Work sans,sans-serif;font-size: 16px; color: #9C9C9C; margin: 0; padding: 0;">
            <div style="width: 100%; max-width: 600px; margin: 0 auto;">
                <div style="background-color: ' . esc_attr( $email_heading_bg ) . '; color: #fff; padding: 20px;">';
         if (!empty( $brand_logo ) && $brand_logo != '' ) {
             $email_body_open .= '<div style="text-align:center;width:200px;margin: 0 auto;"><img src="' . esc_url( $brand_logo ) . '" alt="logo" /></div>';
         }
         $email_body_open .= '<div class="heading" style="text-align: center;">
-           <h1 style="font-size: 32px; line-height: 40px; font-weight: 400; letter-spacing: 2px; margin: 20px 0; color: #ffffff;">
+           <h1 style="font-size: 32px; line-height: 40px; font-weight: 500; letter-spacing: 2px; margin: 20px 0; color: #ffffff;">
            ' . $order_email_heading . '
            </h1>
            <h2 style="font-size:16px;font-weight:500;line-height:20px;color:#ffffff;">
@@ -130,14 +130,14 @@ class TF_Handle_Emails {
         }
        
 
-        $booking_details = '<table width="100%" style="max-width: 600px;border-collapse: collapse; color: #5A5A5A;"><thead><tr><th align="left" style="color:#0209AF">Item Name</th><th align="center" style="color:#0209AF">Quantity</th><th align="right" style="color:#0209AF">Price</th></tr></thead><tbody style="border-bottom: 2px solid #D9D9D9">';
+        $booking_details = '<table width="100%" style="max-width: 600px;border-collapse: collapse; color: #5A5A5A;"><thead><tr><th align="left" style="color:#0209AF;">Item Name</th><th align="center" style="color:#0209AF;">Quantity</th><th align="right" style="color:#0209AF;">Price</th></tr></thead><tbody style="border-bottom: 2px solid #D9D9D9">';
         foreach ( $order_items_data as $item ) {
             $booking_details .= '<tr>';
             $booking_details .= '<td style="padding: 15px 0;text-align: left;padding-top: 15px;padding-bottom: 15px;line-height: 1.7;">' . $item['item_name'];
             //item meta data except _order_type,_post_author,_tour_id php loop
             foreach ( $item['item_meta_data'] as $meta_data ) {
                 if ( $meta_data['key'] != '_order_type' && $meta_data['key'] != '_post_author' && $meta_data['key'] != '_tour_id' && $meta_data['key'] != '_post_id' && $meta_data['key'] != '_unique_id' && $meta_data['key'] != '_tour_unique_id' ) {
-                    $booking_details .= '<br><strong>' . $meta_data['key'] . '</strong>: ' . $meta_data['value'];
+                    $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">' . $meta_data['key'] . '</strong>: ' . $meta_data['value'];
                 }
             }
 
@@ -437,13 +437,6 @@ class TF_Handle_Emails {
         //email body ended
         $email_body_close  = $this->email_body_close();
         $admin_email_booking_body_full = $email_body_open . $admin_booking_email_template . $email_body_close;
-        //decode entity
-        if ( $email_content_type == 'text/plain' ) {
-            //$admin_email_booking_body_full = html_entity_decode( $admin_email_booking_body_full, '3' , 'UTF-8' );
-            $admin_email_booking_body_full = wp_strip_all_tags( $admin_email_booking_body_full );
-        } else {
-            $admin_email_booking_body_full = wp_kses_post( html_entity_decode( $admin_email_booking_body_full, '3', 'UTF-8' ) );
-        }      
 
         //check if admin emails disable
         if ( isset( $admin_email_disable ) && $admin_email_disable == false ) {
@@ -489,12 +482,7 @@ class TF_Handle_Emails {
             //replace mail tags to actual value
             $vendor_booking_email_template  = $this->replace_mail_tags( $vendor_booking_email_template , $order_id );
             $vendor_email_booking_body_full = $email_body_open . $vendor_booking_email_template . $email_body_close;
-            //send mail in plain text and html conditionally
-            if ( $email_content_type == 'text/plain' ) {
-                $vendor_email_booking_body_full = wp_strip_all_tags( $vendor_email_booking_body_full );
-            } else {
-                $vendor_email_booking_body_full = wp_kses_post( $vendor_email_booking_body_full );
-            }
+            
             if ( !empty( $vendor_booking_email_template ) ) {
                 //send mail to vendor
                 $vendors_email = $this->tf_get_vendor_emails( $order_id );
@@ -593,7 +581,7 @@ class TF_Handle_Emails {
 
                     //get the mail template content   
                     $admin_confirmation_email_template   = get_post( $admin_confirmation_template_id );
-                    $admin_confirmation_template_content = !empty( $admin_confirmation_email_template->post_content ) ? $admin_confirmation_email_template->post_content : ' ';
+                    $admin_confirmation_template_content = !empty( $admin_confirmation_email_template->post_content ) ? $admin_confirmation_email_template->post_content : $this->get_email_template( 'order_confirmation', '', 'admin' );
                     $admin_confirmation_template_content = $this->replace_mail_tags( $admin_confirmation_template_content, $order_id );
                     
                     $meta                    = get_post_meta( $admin_confirmation_template_id, 'tf_email_templates_metabox', true );
@@ -671,7 +659,14 @@ class TF_Handle_Emails {
                         //send mail to vendor
                         if ( !empty( $vendors_email ) ) {
                             foreach ( $vendors_email as $key => $vendor_email ) {
-                                wp_mail( $vendor_email, $email_subject, $vendor_email_booking_body_full, $headers );
+                               //get user role by email
+                                $user = get_user_by( 'email', $vendor_email );
+                                $user_role = !empty( $user->roles[0] ) ? $user->roles[0] : '';
+                                //check if user role is vendor
+                                if( $user_role == 'tf_vendor' ){
+                                    wp_mail( $vendor_email, $email_subject, $vendor_email_booking_body_full, $headers );
+                                }
+                               
                             }
                         }
                     }
