@@ -69,6 +69,7 @@ while ( have_posts() ) : the_post();
 	$highlights = ! empty( $meta['additional_information'] ) ? $meta['additional_information'] : '';
 	// Informations
 	$tour_duration = ! empty( $meta['duration'] ) ? $meta['duration'] : '';
+	$info_tour_type = ! empty( $meta['tour_types'] ) ? $meta['tour_types'] : 'Continues';
 	$duration_time = ! empty( $meta['duration_time'] ) ? $meta['duration_time'] : '';
 	$night         = ! empty( $meta['night'] ) ? $meta['night'] : false;
 	$night_count   = ! empty( $meta['night_count'] ) ? $meta['night_count'] : '';

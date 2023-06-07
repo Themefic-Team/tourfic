@@ -114,7 +114,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'type'        => 'text',
 					'label'       => __( 'Tour Duration', 'tourfic' ),
 					'subtitle'    => __( 'E.g. 3', 'tourfic' ),
-					'field_width' => '50',
+					'field_width' => 33.33,
 				),				
 				array(
 					'id'      => 'duration_time',
@@ -126,7 +126,15 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						'Hour' => __( 'Hours', 'tourfic' ),
 						'Minute' => __( 'Minutes', 'tourfic' ),
 					),
-					'field_width' => '50',
+					'field_width' => 33.33,
+				),	
+				array(
+					'id'      => 'tour_types',
+					'type'    => 'text',
+					'label'   => __( 'Tour Type', 'tourfic' ),
+					'subtitle'    => __( 'E.g. Fixed/Continues etc', 'tourfic' ),
+					'field_width' => 33.33,
+					'default' => "Continues"
 				),
 				array(
 					'id'          => 'night',

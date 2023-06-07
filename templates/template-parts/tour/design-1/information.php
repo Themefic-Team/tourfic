@@ -1,5 +1,5 @@
 <!-- Trip Features -->
-<?php if ( $tour_duration || $tour_type || $group_size || $language ) { ?>
+<?php if ( $tour_duration || $info_tour_type || $group_size || $language ) { ?>
 <div class="tf-trip-feature-blocks tf-mb-40 tf-template-section">
     <div class="tf-features-block-inner tf-column-4 tf-flex tf-flex-space-bttn tf-flex-gap-16">
         <?php if ( $tour_duration ) { ?>
@@ -40,7 +40,7 @@
             </div>
         </div>
         <?php } ?>
-        <?php if ( $tour_type ) { ?>
+        <?php if ( $info_tour_type ) { ?>
         <div class="tf-column tf-flex tf-flex-gap-8">
             <div class="tf-feature-block tf-flex tf-flex-gap-8  tf-second">
                 <div class="tf-feature-block-icon">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="tf-feature-block-details">
                     <h5><?php echo __( 'Tour Type', 'tourfic' ); ?></h5>
-                    <p><?php echo ucfirst( esc_html( $tour_type ) ) ?></p>
+                    <p><?php echo ucfirst( esc_html( $info_tour_type ) ) ?></p>
                 </div>
             </div>
         </div>

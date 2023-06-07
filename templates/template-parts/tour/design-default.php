@@ -218,7 +218,7 @@
             </div>
 
             <!-- Square block section Start -->
-            <?php if ( $tour_duration || $tour_type || $group_size || $language ) { ?>
+            <?php if ( $tour_duration || $info_tour_type || $group_size || $language ) { ?>
                 <div class="tf-square-block sp-20">
                     <div class="tf-square-block-content">
                         <?php if ( $tour_duration ) { ?>
@@ -254,11 +254,11 @@
                                 <?php } ?>
                             </div>
                         <?php } ?>
-                        <?php if ( $tour_type ) { ?>
+                        <?php if ( $info_tour_type ) { ?>
                             <div class="tf-single-square-block second">
                                 <i class="fas fa-map"></i>
                                 <h4><?php echo __( 'Tour Type', 'tourfic' ); ?></h4>
-                                <p><?php echo ucfirst( esc_html( $tour_type ) ) ?></p>
+                                <p><?php echo ucfirst( esc_html( $info_tour_type ) ) ?></p>
                             </div>
                         <?php } ?>
                         <?php if ( $group_size ) { ?>
