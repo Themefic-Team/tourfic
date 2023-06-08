@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
 Tested up to: 6.2.2
-Stable tag: 2.9.18
+Stable tag: 2.9.19
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -408,6 +408,15 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.9.19 -  07 June 2023 =
+
+* Added: Booking details export ( Pro )
+* Added: Enquiry details export ( Pro )
+* Added: Pre Build Email template set to default ( Pro )
+* Added: Tour QR Code Integration (Pro)
+* Fixed: Archive page pagination issue (Free)
+* Fixed: Email sending issue fixed ( Free and Pro )
 
 = 2.9.18 -  24 May 2023 =
 
