@@ -24,6 +24,26 @@ if( $discount_type == 'percent' ){
 	$sale_price = number_format( ( $price - $discounted_price ),1 );
 }
 
+
+$tf_expired_tour_showing = ! empty( tfopt( 't-show-expire-tour' ) ) ? tfopt( 't-show-expire-tour' ) : '';
+if(!empty($tf_expired_tour_showing )){
+	$tf_tour_posts_status = array('publish','expired');
+}else{
+	$tf_tour_posts_status = array('publish');
+}
+
+$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
+$args = array(
+    'post_type' => "tf_tours",
+    'orderby'   => 'date',
+    'order'     => 'DESC',
+    'post_status'    => $tf_tour_posts_status,
+	'paged'          => $paged,
+);
+$loop = new WP_Query( $args );
+$total_posts = $loop->found_posts;
+$tf_total_results = 0;
+
 if( ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1"){
 	include TF_TEMPLATE_PATH . 'tour/archive/design-1.php';
 }else{

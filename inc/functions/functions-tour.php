@@ -843,7 +843,7 @@ function tf_single_tour_booking_form( $post_id ) {
                         if (times.length > 0) {
                             timeSelect.append(`<option value="" selected hidden><?php _e( "Select Time", "tourfic" ); ?></option>`);
                             $.each(times, function(i, v) {
-                                timeSelect.append(`<option value="${v}">${v}</option>`);
+                                timeSelect.append(`<option value="${i}">${v}</option>`);
                             });
                             timeSelectDiv.show();
                         } else timeSelectDiv.hide();
@@ -1001,13 +1001,13 @@ function tf_single_tour_booking_form( $post_id ) {
                 </p>
             </div>
             <div class="tf-tour-extra-box">
-            <?php foreach( $tour_extras as $tour_extra ){ 
+            <?php foreach( $tour_extras as $extrakey=>$tour_extra ){ 
                 if(!empty($tour_extra['title']) && !empty($tour_extra['desc']) && !empty($tour_extra['price'])){
             ?>
             <div class="tf-tour-extra tf-mt-8">
                 <div class="tf-tour-extra-price tf-flex tf-flex-align-top tf-flex-space-bttn tour-extra-single">
                     <div class="tf-tour-extra-input tf-flex tf-flex-align-top tf-flex-gap-8">
-                        <input type="checkbox" value="<?php echo esc_attr( $tour_extra['price'] ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>">
+                        <input type="checkbox" value="<?php echo esc_attr( $extrakey ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>">
                         <p><?php _e( $tour_extra['title'] ); ?></p>
                     </div>
                     <div class="tf-tour-extra-price">
@@ -1148,7 +1148,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                 if (times.length > 0) {
                                     timeSelect.append(`<option value="" selected hidden><?php _e( "Select Time", "tourfic" ); ?></option>`);
                                     $.each(times, function(i, v) {
-                                        timeSelect.append(`<option value="${v}">${v}</option>`);
+                                        timeSelect.append(`<option value="${i}">${v}</option>`);
                                     });
                                     timeSelectDiv.show();
                                 } else timeSelectDiv.hide();
@@ -1258,7 +1258,7 @@ function tf_single_tour_booking_form( $post_id ) {
                     <a data-fancybox data-src="#tour-extra" href="javascript:;"><i class="far fa-plus-square"></i><?php _e('Tour Extras', 'tourfic') ?></a>
                     <div style="display: none;" id="tour-extra">
                         <div class="tour-extra-container">
-                        <?php foreach( $tour_extras as $tour_extra ){ 
+                        <?php foreach( $tour_extras as $extrakey=>$tour_extra ){ 
                             if(!empty($tour_extra['title']) && !empty($tour_extra['desc']) && !empty($tour_extra['price'])){
                         ?>
                             <div class="tour-extra-single">
@@ -1268,7 +1268,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                 </div>
                                 <div class="tour-extra-right">
                                     <span><?php echo wc_price( $tour_extra['price'] ); ?></span>
-                                    <input type="checkbox" value="<?php echo esc_attr( $tour_extra['price'] ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>">
+                                    <input type="checkbox" value="<?php echo esc_attr( $extrakey ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>">
                                 </div>												
                             </div>
                         <?php } } ?>
@@ -1326,7 +1326,7 @@ function tf_single_tour_booking_form( $post_id ) {
                 if (times.length > 0) {
                     timeSelect.append(`<option value="" selected hidden><?php _e( "Select Time", "tourfic" ); ?></option>`);
                     $.each(times, function(i, v) {
-                        timeSelect.append(`<option value="${v}">${v}</option>`);
+                        timeSelect.append(`<option value="${i}">${v}</option>`);
                     });
                     timeSelectDiv.show();
                 } else timeSelectDiv.hide();

@@ -4,7 +4,6 @@
             <div class="tf-column tf-page-content tf-archive-left tf-result-previews">
                 <?php
                     do_action( 'tf_before_container' );
-                    $post_count = $GLOBALS['wp_query']->post_count;
                 ?>
                 <!-- Search Head Section -->
                 <div class="tf-archive-head tf-flex tf-flex-align-center tf-flex-space-bttn">
@@ -12,7 +11,7 @@
                         <span class="tf-counter-title"><?php echo __( 'Total Results ', 'tourfic' ); ?> </span>
 						<span><?php echo ' ('; ?> </span>
 						<div class="tf-total-results">
-							<span><?php echo $post_count; ?> </span>
+							<span><?php echo $tf_total_results; ?> </span>
 						</div>
 						<span><?php echo ')'; ?> </span>
                     </div>
@@ -82,16 +81,19 @@
                     <div class="archive_ajax_result tf-item-cards tf-flex <?php echo $tf_defult_views=="list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?> ">
 
                     <?php
-					if ( have_posts() ) {
-						while ( have_posts() ) {
-							the_post();
+					if ( $loop->have_posts() ) {          
+						while ( $loop->have_posts() ) {
+							$loop->the_post();
 							tf_tour_archive_single_item();
+							$tf_total_results+=1;
 						}
 					} else {
 						echo '<div class="tf-nothing-found" data-post-count="0" >' .__("No Tours Found!", "tourfic"). '</div>';
 					}
 					?>
-
+                    <span class="tf-posts-count" hidden="hidden">
+					    <?php echo $tf_total_results; ?>
+					</span>
                         <div class="tf-pagination-bar">
                             <?php tourfic_posts_navigation(); ?>
                         </div>

@@ -310,16 +310,11 @@
 
 
             // Tour Extra
-            var tour_extra_total = 0;
+            var tour_extra_total = [];
             jQuery('.tour-extra-single input:checkbox:checked').each(function () {
-                tour_extra_total += isNaN(parseInt(jQuery(this).val())) ? 0 : parseInt(jQuery(this).val());
+                tour_extra_total.push(jQuery(this).val());
             });
-            formData.append('tour_extra_total', tour_extra_total);
-
-            var tour_extra_title = $(".tour-extra-single input:checkbox:checked").map(function () {
-                return $(this).data('title')
-            }).get();
-            formData.append('tour_extra_title', tour_extra_title);
+            formData.append('tour_extra', tour_extra_total);
 
             $.ajax({
                 type: 'post',
