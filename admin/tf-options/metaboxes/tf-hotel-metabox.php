@@ -46,7 +46,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-hotel.jpg",
 						),
 					),
-					'default'   	=> tourfic_template_settings(),
+					'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
 				),
 			),
 		),

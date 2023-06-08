@@ -60,7 +60,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-tour.jpg",
 						),
 					),
-					'default'   	=> tourfic_template_settings(),
+					'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
 				),
 
 				array(

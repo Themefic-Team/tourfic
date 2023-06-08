@@ -65,7 +65,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-hotel.jpg",
 										),
 									),
-									'default'   	=> tourfic_template_settings(),
+									'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
 								),
 								array(
 									'id'       => 'single-hotel-layout',
@@ -156,7 +156,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/hotel-archive-default.jpg",
 										),
 									),
-									'default'   	=> tourfic_template_settings(),
+									'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
 								),
 								array(
 									'id'       => 'hotel_archive_view',
@@ -203,7 +203,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-tour.jpg",
 										),
 									),
-									'default'   	=> tourfic_template_settings(),
+									'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
 								),
 								array(
 									'id'       => 'single-tour-layout',
@@ -319,7 +319,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/tour-archive-default.jpg",
 										),
 									),
-									'default'   	=> tourfic_template_settings(),
+									'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
 								),
 								array(
 									'id'       => 'tour_archive_view',
@@ -1384,7 +1384,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'        => 'select',
 					'label'       => __( 'Global Body Fonts Family', 'tourfic' ),
 					'subtitle'    => __( 'Global Body Fonts Family of Tourfic', 'tourfic' ),
-					'options'  => tourfic_google_fonts_list(),
+					'options'  => function_exists( 'tourfic_google_fonts_list' ) ? tourfic_google_fonts_list() : '',
 					'default' => 'Default',
 					'field_width' => 29,
 				),
@@ -1393,7 +1393,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'        => 'select',
 					'label'       => __( 'Global Heading Fonts Family', 'tourfic' ),
 					'subtitle'    => __( 'Global Heading Fonts Family of Tourfic', 'tourfic' ),
-					'options'  => tourfic_google_fonts_list(),
+					'options'  => function_exists( 'tourfic_google_fonts_list' ) ? tourfic_google_fonts_list() : '',
 					'default' => 'Default',
 					'field_width' => 29,
 				),
