@@ -723,6 +723,9 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 				<input type="text" class="tf-field time" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
                                placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" required value="" style="width: 100% !important">
 			</div>
+			<div class="tf_booking-dates">
+				<div class="tf_label-row"></div>
+			</div>
 			<div class="tf-booking-bttns tf-mt-30">
             	<input type="hidden" name="type" value="<?php echo $post_type; ?>" class="tf-post-type"/>
 				<button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>

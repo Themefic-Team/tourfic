@@ -3895,7 +3895,10 @@ div#tf-contact-info {
   border-radius: 50%;
   color: #fff;
   font-size: 18px;
-  padding: 11px 10px;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  line-height: 40px;
   transition: 0.3s;
   cursor: pointer;
 }
@@ -4834,7 +4837,10 @@ div#tf-contact-info {
   color: #0E3DD8;
   margin-bottom: 25px;
   font-size: 30px;
-  padding: 25px;
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  line-height: 80px;
 }
 .tf-ask-enquiry p {
   margin-top: 5px;
@@ -5694,6 +5700,12 @@ div#tf-contact-info {
   background-color: inherit;
   padding: 60px 0px;
   width: 100%;
+}
+.tf-template-global #tf-required {
+  text-align: center;
+  width: 100% !important;
+  color: red !important;
+  display: block;
 }
 
 .tf-archive-head .tf-search-result {

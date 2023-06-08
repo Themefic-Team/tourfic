@@ -2,6 +2,12 @@
     background-color: inherit;
     padding: 60px 0px;
     width: 100%;
+    #tf-required {
+        text-align: center;
+        width: 100% !important;
+        color: red !important;
+        display: block;
+    }
 }
 
 // Search Heading
