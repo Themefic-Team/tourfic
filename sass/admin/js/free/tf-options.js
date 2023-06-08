@@ -1386,12 +1386,14 @@ var frame, gframe;
             if(monthTarget!=0){
                 $("#tf-report-loader").addClass('show');
                 $('.tf-order-report').find('iframe').remove();
+                var yearTarget = $("#tf-year-report").val();
                 jQuery.ajax({
                     type: 'post',
                     url: tf_options.ajax_url,
                     data: {
                         action: 'tf_month_reports',
                         month: monthTarget,
+                        year: yearTarget,
                     },
                     success: function (data) {
                         var response = JSON.parse(data);
@@ -1442,6 +1444,72 @@ var frame, gframe;
                 })
             }
         });
+
+        
+        $(document).on('change', '#tf-year-report', function () {
+            var yearTarget = $(this).val();
+            var monthTarget = $("#tf-month-report").val();
+            if(yearTarget!=0 && monthTarget!=0){
+                $("#tf-report-loader").addClass('show');
+                $('.tf-order-report').find('iframe').remove();
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_options.ajax_url,
+                    data: {
+                        action: 'tf_month_reports',
+                        month: monthTarget,
+                        year: yearTarget,
+                    },
+                    success: function (data) {
+                        var response = JSON.parse(data);
+                        var ctx = document.getElementById('tf_months'); // node
+                        var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context
+                        var ctx = $('#tf_months'); // jQuery instance
+                        var ctx = 'tf_months'; // element id
+
+                        var chart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: response.months_day_number,
+                                // Information about the dataset
+                            datasets: [{
+                                    label : "Completed Booking",
+                                    borderColor: '#003C79',
+                                    tension: 0.1,
+                                    data: response.tf_complete_orders,       
+                                    fill: false
+                                },
+                                {
+                                    label : "Cancelled Booking",
+                                    borderColor: 'red',
+                                    tension: 0.1,
+                                    data: response.tf_cancel_orders, 
+                                    fill: false
+                                }
+                            ]
+                            },
+
+                            // Configuration options
+                            options: {
+                            layout: {
+                            padding: 10,
+                            },
+                                legend: {
+                                    display: true
+                                },
+                                title: {
+                                    display: true,
+                                    text: response.tf_search_month
+                                }
+                            }
+
+                        });
+                        $("#tf-report-loader").removeClass('show');
+                    }
+                })
+            }
+        });
+
     });
 })(jQuery);
 

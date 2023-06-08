@@ -230,8 +230,10 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 				'post_date' => get_the_date( 'Y-m-d H:i:s', $post_id )
 			);
 			if ( function_exists('is_tf_pro') && is_tf_pro() ) {
+				if( (!empty($_POST['post_type']) && $_POST['post_type']=="tf_hotel") || (!empty($_POST['post_type']) && $_POST['post_type']=="tf_tours") ){
 				do_action( 'tf_services_pabbly_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
 				do_action( 'tf_services_zapier_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
+				}
 			}
 		}
 

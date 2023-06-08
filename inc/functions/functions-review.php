@@ -453,18 +453,80 @@ function tf_archive_single_rating() {
 	if ( $comments ) {
 		ob_start();
 		?>
-
-        <div class="tf-archive-rating-wrapper">
-            <div class="tf-archive-rating">
-                <span>
-                    <?php _e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
-                </span>
-            </div>
-            <h6><?php tf_based_on_text( count( $comments ) ); ?></h6>
-        </div>
-
 		<?php
+		if( ( ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) || ( ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['hotel-archive']=="design-1" ) ){
+		?>
+			<div class="tf-reviews tf-flex tf-mt-16 tf-flex-gap-12">
+				<div class="tf-review-items">
+				<?php
+				$settings_base = ! empty ( tfopt( 'r-base' ) ) ? tfopt( 'r-base' ) : 5;
+				$base_rate     = 5;
+				$rating = tf_average_ratings( array_values( $tf_overall_rate ?? [] ) );
+				if ( $settings_base != $base_rate ) {
+					if ( $settings_base > 5 ) {
+						$rating = $rating * 2;
+					} else {
+						$rating = $rating / 2;
+					}
+				}
+				if ( $settings_base > 5 ) {
+					$rating_star = $rating / 2;
+				}else{
+					$rating_star = ceil( $rating / 0.5 ) * 0.5;
+				}
+				$icons = '';
+				if ( $rating_star > 1.5 ) {
+					if ( strpos( $rating_star, "." ) !== false ) {
+						foreach ( range( 0, abs( $rating_star - 1 ) ) as $i ) {
+							$icons .= '<i class="fa-solid fa-star"></i>';
+						}
+						$icons .= '<i class="fas fa-star-half-alt"></i>';
+					} else {
+						foreach ( range( 1, $rating_star ) as $i ) {
+							$icons .= '<i class="fa-solid fa-star"></i>';
+						}
+					}
+				} else if ( $rating_star == 1.5 ) {
+					$icons .= '<i class="fa-solid fa-star"></i>';
+					$icons .= '<i class="fas fa-star-half-alt"></i>';
+				} else if ( $rating_star == 1 ) {
+					$icons .= '<i class="fa-solid fa-star"></i>';
+				} else if ( $rating_star == 0.5 ) {
+					$icons .= '<i class="fas fa-star-half-alt"></i>';
+				}
+				echo $icons;
+				?>
+				</div>
+				<div class="tf-avarage-review">
+				<?php _e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
+				 (<?php tf_based_on_text( count( $comments ) ); ?>)
+				</div>
+			</div>
+		<?php }else{ ?>
+			<div class="tf-archive-rating-wrapper">
+				<div class="tf-archive-rating">
+					<span>
+						<?php _e( tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
+					</span>
+				</div>
+				<h6><?php tf_based_on_text( count( $comments ) ); ?></h6>
+			</div>
+		<?php
+		}
 		echo ob_get_clean();
+	}else{
+		if( ( ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) || ( ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['hotel-archive']=="design-1" ) ){
+		?>
+		<div class="tf-reviews tf-flex tf-mt-16 tf-flex-gap-12">
+			<div class="tf-review-items">
+				<i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
+			</div>
+			<div class="tf-avarage-review">
+				<?php _e(" (No Review)", "tourfic"); ?>
+			</div>
+		</div>
+		<?php
+		}
 	}
 }
 

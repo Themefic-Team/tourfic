@@ -51,12 +51,16 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 										<span class="tf-repeater-icon tf-repeater-icon-move">
 											<i class="fa-solid fa-up-down-left-right"></i>
 										</span>
+										<?php 
+										if(empty($this->field['drag_only']) || !$this->field['drag_only']){
+										?>
 										<span class="tf-repeater-icon tf-repeater-icon-clone" data-repeater-max = "<?php if(isset($this->field['max'])){ echo esc_attr($this->field['max']); }  ?>">
 											<i class="fa-solid fa-copy"></i> 
 										</span>
 										<span class="tf-repeater-icon tf-repeater-icon-delete">
 											<i class="fa-solid fa-trash"></i>
 										</span>
+										<?php } ?>
 									</div>
 								</div>
                                 <div class="tf-repeater-content-wrap hide" style="display: none">
@@ -108,12 +112,16 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 								<span class="tf-repeater-icon tf-repeater-icon-move">
 									<i class="fa-solid fa-up-down-left-right"></i>
 								</span>
+								<?php 
+								if(empty($this->field['drag_only']) || !$this->field['drag_only']){
+								?>
 								<span class="tf-repeater-icon tf-repeater-icon-clone" data-repeater-max = "<?php if(isset($this->field['max'])){ echo esc_attr($this->field['max']); }  ?>">
 									<i class="fa-solid fa-copy"></i> 
 								</span>
 								<span class="tf-repeater-icon tf-repeater-icon-delete">
 									<i class="fa-solid fa-trash"></i>
 								</span>
+								<?php } ?>
 							</div>
 						</div>
                         <div class="tf-repeater-content-wrap">
@@ -134,7 +142,9 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
                     </div>
 
                 </div>
-
+				<?php 
+				if(empty($this->field['drag_only']) || !$this->field['drag_only']){
+				?>
                 <div class="tf-repeater-add tf-repeater-add-<?php if(isset($this->field['id'])){ echo esc_attr($this->field['id']); }  ?>">
 				
 					<span data-repeater-id = "<?php if(isset($this->field['id'])){ echo esc_attr($this->field['id']); }  ?>" data-repeater-max = "<?php if(isset($this->field['max'])){ echo esc_attr($this->field['max']); }  ?>" class="tf-repeater-icon tf-repeater-icon-add tf-repeater-add-<?php if(isset($this->field['id'])){ echo esc_attr($this->field['id']); }  ?>">
@@ -148,6 +158,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 						
 					</span>
 				</div>
+				<?php } ?>
             </div>
 			<?php
 

@@ -177,6 +177,45 @@
         //documentation link open in new tab
         $('.tf-go-docs').parent().attr('target','_blank');
 
+        /*
+        * Author @Jahid
+        * Tour Booking Status
+        */
+
+        $('.tf-ticket-status').click(function(){
+            if ($(this).is(':checked')) {
+                var order_unique_id= $(this).val();
+                $("#tf-booking-status-loader").addClass('show');
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_ticket_status_change',
+                        status: "check in",
+                        order_unique_id: order_unique_id,
+                    },
+                    success: function (data) {
+                        $("#tf-booking-status-loader").removeClass('show');
+                    }
+                });
+            }else{
+                var order_unique_id= $(this).val();
+                $("#tf-booking-status-loader").addClass('show');
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_ticket_status_change',
+                        status: "",
+                        order_unique_id: order_unique_id,
+                    },
+                    success: function (data) {
+                        $("#tf-booking-status-loader").removeClass('show');
+                    }
+                });
+            }
+        });
+
     });
 
 })(jQuery);

@@ -231,6 +231,7 @@
       justify-content: space-between;
       .tf-month-filter{
         margin-bottom: 15px;
+        display: inline-block;
         span{
           display: block;
           font-size: 11px;
@@ -672,6 +673,9 @@
               font-size: 14px;
               margin-top: 10px;
             }
+          }
+          > .tf-field.tf-field-heading{
+            border-radius: 0px;
           }
           > .tf-field.tf-field-color{
             background-color: transparent;

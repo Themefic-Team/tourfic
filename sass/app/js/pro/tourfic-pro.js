@@ -714,5 +714,151 @@
 
         });
 
+        // QR Code Scan Open
+        $(document).on('click', '.tf_qr_open', function (e) {
+            e.preventDefault();
+            TFQRSCANER();
+        });
+
+        // QR Code Scan Another
+        $(document).on('click', '.tf_scan_another', function (e) {
+            e.preventDefault();
+            $(".tf-final-submission-feedback").hide();
+            $(".tf-final-error-feedback").hide();
+        });
+
+
+        // QR Code Scan Back
+        $(document).on('click', '.tf_scan_back', function (e) {
+            e.preventDefault();
+            location.reload();
+        });
+
+        // QR Code Scan Verify
+        $(document).on('click', '.tf_qr_verify', function (e) {
+            e.preventDefault();
+            var qr_code = $(".tf_qr_code_number").val();
+            $(".tf-scanner-preloader").show();
+            var data = {
+                action: 'tf_qr_code_verification',
+                tf_qr_code: qr_code,
+            };
+
+            jQuery.ajax({
+                url: tf_params.ajax_url,
+                type: 'post',
+                data: data,
+                success: function (data) {
+                    var response = JSON.parse(data);
+                    if( response.qr_code_response_checked== "true" ){
+                        $(".tf-scanner-quick-review").html("");
+                        $(".tf-final-submission-form").hide();
+                        $(".tf-scanner-preloader").hide();
+                        $(".tf-final-submission-feedback").show();
+                    }else{
+                        $(".tf-scanner-quick-review").html("");
+                        $(".tf-final-submission-form").hide();
+                        $(".tf-scanner-preloader").hide();
+                        $(".tf-final-error-feedback").show();
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+
     });
 })(jQuery);
+
+// QR Code Scan Function
+const TFQRSCANER = () => {
+    var scanner = new Instascan.Scanner({ video: document.getElementById('tf-video-preview'), scanPeriod: 5, mirror: false });
+    scanner.addListener('scan',function(content){
+        if(tf_pro_params.tour_qr==2){
+            jQuery(".tf-scanner-preloader").show();
+            jQuery(".tf_qr_code_number").val(content);
+            var data = {
+                action: 'tf_qr_code_quick_info',
+                tf_qr_code: content,
+            };
+            jQuery.ajax({
+                url: tf_params.ajax_url,
+                type: 'post',
+                data: data,
+                success: function (data) {
+                    var response = JSON.parse(data);
+                    if( response.qr_code_result ){
+                        jQuery(".tf-scanner-quick-review").html(response.qr_code_result);
+                        jQuery(".tf-scanner-preloader").hide();
+                        jQuery(".tf-final-submission-form").show();
+                        jQuery(".tf-qr-option").hide();
+                    }else{
+                        jQuery(".tf-scanner-quick-review").html("");
+                        jQuery(".tf-scanner-preloader").hide();
+                        jQuery(".tf-final-error-feedback").show();
+                        jQuery(".tf-qr-option").hide();
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+
+
+        }
+        if(tf_pro_params.tour_qr==1){
+            jQuery(".tf-qr-option").hide();
+            jQuery(".tf-scanner-preloader").show();
+            var data = {
+                action: 'tf_qr_code_verification',
+                tf_qr_code: content,
+            };
+            jQuery.ajax({
+                url: tf_params.ajax_url,
+                type: 'post',
+                data: data,
+                success: function (data) {
+                    var response = JSON.parse(data);
+                    if( response.qr_code_response== "true" ){
+                        jQuery(".tf-final-submission-form").hide();
+                        jQuery(".tf-scanner-preloader").hide();
+                        jQuery(".tf-final-submission-feedback").show();
+                    }
+                    if( response.qr_code_response== "false" ){
+                        jQuery(".tf-final-submission-form").hide();
+                        jQuery(".tf-scanner-preloader").hide();
+                        jQuery(".tf-final-error-feedback").show();
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+        //window.location.href=content;
+    });
+    Instascan.Camera.getCameras().then(function (cameras){
+        if(cameras.length>0){
+            jQuery(".tf-qr-code-preview").show();
+            jQuery(".tf-final-submission-form").hide();
+            jQuery(".tf-final-submission-feedback").hide();
+            jQuery(".tf-final-error-feedback").hide();
+            if(cameras.length==4){
+                scanner.start(cameras[2]);
+            }else if(cameras.length==2){
+                scanner.start(cameras[1]);
+            }else{
+                scanner.start(cameras[0]);
+            }
+
+        }else{
+            console.error('No cameras found.');
+            alert('No cameras found.');
+        }
+    }).catch(function(e){
+        console.error(e);
+        alert(e);
+
+    });
+}

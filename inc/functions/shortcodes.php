@@ -626,6 +626,212 @@ function tf_search_result_shortcode( $atts, $content = null ){
 	$total_posts = $loop->found_posts;
     ob_start(); ?>
     <!-- Start Content -->
+	<?php 
+	if( ( $post_type=="tf_tours" && ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) || ( $post_type=="tf_hotel" && ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['hotel-archive']=="design-1" ) ){
+	?>
+	<div class="tf-column tf-page-content tf-archive-left tf-result-previews">
+		<!-- Search Head Section -->
+		<div class="tf-archive-head tf-flex tf-flex-align-center tf-flex-space-bttn">
+			<div class="tf-search-result tf-flex">
+				<span class="tf-counter-title"><?php echo __( 'Total Results ', 'tourfic' ); ?> </span>
+				<span><?php echo ' ('; ?> </span>
+				<div class="tf-total-results">
+					<span><?php echo $total_posts; ?> </span>
+				</div>
+				<span><?php echo ')'; ?> </span>
+			</div>
+			<div class="tf-search-layout tf-flex tf-flex-gap-12">
+				<div class="tf-icon tf-serach-layout-list tf-grid-list-layout active" data-id="list-view">
+					<div class="defult-view">
+						<svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<rect width="12" height="2" fill="#0E3DD8"/>
+						<rect x="14" width="2" height="2" fill="#0E3DD8"/>
+						<rect y="5" width="12" height="2" fill="#0E3DD8"/>
+						<rect x="14" y="5" width="2" height="2" fill="#0E3DD8"/>
+						<rect y="10" width="12" height="2" fill="#0E3DD8"/>
+						<rect x="14" y="10" width="2" height="2" fill="#0E3DD8"/>
+						</svg>
+					</div>
+					<div class="active-view">
+						<svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<rect width="12" height="2" fill="white"/>
+						<rect x="14" width="2" height="2" fill="white"/>
+						<rect y="5" width="12" height="2" fill="white"/>
+						<rect x="14" y="5" width="2" height="2" fill="white"/>
+						<rect y="10" width="12" height="2" fill="white"/>
+						<rect x="14" y="10" width="2" height="2" fill="white"/>
+						</svg>
+					</div>
+				</div>
+				<div class="tf-icon tf-serach-layout-grid tf-grid-list-layout" data-id="grid-view">
+					<div class="defult-view">
+						<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<rect x="10" width="2" height="2" fill="#0E3DD8"/>
+						<rect x="10" y="5" width="2" height="2" fill="#0E3DD8"/>
+						<rect x="10" y="10" width="2" height="2" fill="#0E3DD8"/>
+						<rect x="5" width="2" height="2" fill="#0E3DD8"/>
+						<rect x="5" y="5" width="2" height="2" fill="#0E3DD8"/>
+						<rect x="5" y="10" width="2" height="2" fill="#0E3DD8"/>
+						<rect width="2" height="2" fill="#0E3DD8"/>
+						<rect y="5" width="2" height="2" fill="#0E3DD8"/>
+						<rect y="10" width="2" height="2" fill="#0E3DD8"/>
+						</svg>
+					</div>
+					<div class="active-view">
+						<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<rect x="10" width="2" height="2" fill="white"/>
+						<rect x="10" y="5" width="2" height="2" fill="white"/>
+						<rect x="10" y="10" width="2" height="2" fill="white"/>
+						<rect x="5" width="2" height="2" fill="white"/>
+						<rect x="5" y="5" width="2" height="2" fill="white"/>
+						<rect x="5" y="10" width="2" height="2" fill="white"/>
+						<rect width="2" height="2" fill="white"/>
+						<rect y="5" width="2" height="2" fill="white"/>
+						<rect y="10" width="2" height="2" fill="white"/>
+						</svg>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Loader Image -->
+		<div id="tf_ajax_searchresult_loader">
+			<div id="tf-searchresult-loader-img">
+				<img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+			</div>
+		</div>
+		<div class="tf-search-results-list tf-mt-30">
+			<div class="archive_ajax_result tf-item-cards tf-flex tf-layout-list">
+			<?php
+			if ( $loop->have_posts() ) {
+				$not_found = [];
+				while ( $loop->have_posts() ) {
+					$loop->the_post();
+
+					if ( $post_type == 'tf_hotel' ) {
+
+						if ( empty( $check_in_out ) ) {
+							tf_filter_hotel_without_date( $period, $not_found, $data );
+						} else {
+							tf_filter_hotel_by_date( $period, $not_found, $data );
+						}
+
+					} else {
+		
+						if ( empty( $check_in_out ) ) {
+							/**
+							 * Check if minimum and maximum people limit matches with the search query
+							 */
+							$total_person = intval( $adults ) + intval( $child );
+							$meta         = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
+
+							//skip the tour if the search form total people exceeds the maximum number of people in tour
+							if ( !empty($meta['cont_max_people']) && $meta['cont_max_people'] < $total_person && $meta['cont_max_people'] != 0  ) {
+								$total_posts--;
+								continue;
+							}
+
+							//skip the tour if the search form total people less than the maximum number of people in tour
+							if ( !empty($meta['cont_min_people']) && $meta['cont_min_people'] > $total_person && $meta['cont_min_people'] != 0) {
+								$total_posts--;
+								continue;
+							}
+							tf_filter_tour_by_without_date( $period, $total_posts, $not_found, $data );
+						} else {
+							tf_filter_tour_by_date( $period, $total_posts, $not_found, $data );
+						}
+					}
+
+				}
+				$tf_total_results = 0;
+				$tf_total_filters = [];
+				foreach($not_found as $not){
+					if($not['found']!=1){
+						$tf_total_results = $tf_total_results+1;
+						$tf_total_filters[] = $not['post_id'];
+					}
+				}
+				if ( empty($tf_total_filters) ) {
+					echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+				}
+				$post_per_page = tfopt('posts_per_page') ? tfopt('posts_per_page') : 10;
+				// Main Query args
+				$filter_args = array(
+					'post_type'      => $post_type,
+					'post_status'    => 'publish',
+					'posts_per_page' => $post_per_page,
+					'paged'          => $paged,
+				);
+
+
+				$total_filtered_results = count( $tf_total_filters );
+				$current_page = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+				$offset = ( $current_page - 1 ) * $post_per_page;
+				$displayed_results = array_slice( $tf_total_filters, $offset, $post_per_page );
+				if(!empty($displayed_results)){
+					$filter_args = array(
+						'post_type'      => $post_type,
+						'post_status'    => 'publish',
+						'posts_per_page' => $post_per_page,
+						'post__in'  => $displayed_results,
+					);
+				
+				
+				$result_query = new WP_Query( $filter_args );
+				if ( $result_query->have_posts() ) {
+					while ( $result_query->have_posts() ) {
+						$result_query->the_post();
+	
+						if ( $post_type == 'tf_hotel' ) {
+
+							if ( ! empty( $data ) ) {
+								if ( isset( $data[4] ) && isset( $data[5] ) ) {
+									[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
+									tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
+								} else {
+									[ $adults, $child, $room, $check_in_out ] = $data;
+									tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
+								}
+							} else {
+								tf_hotel_archive_single_item();
+							}
+	
+						} else {
+							if ( !empty( $data ) ) {
+								if(isset($data[3]) && isset($data[4])){
+									[$adults, $child, $check_in_out, $startprice, $endprice] = $data;
+									tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+								}else{
+									[$adults, $child, $check_in_out] = $data;
+									tf_tour_archive_single_item( $adults, $child, $check_in_out );
+								}
+							} else {
+								tf_tour_archive_single_item();
+							}
+						}
+	
+					}
+				}
+				$total_pages = ceil( $total_filtered_results / $post_per_page );
+				echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
+				echo paginate_links( array(
+					'total' => $total_pages,
+					'current' => $current_page
+				) );
+				echo "</div>";
+				}
+				
+			} else {
+				echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+			}
+			echo "<span hidden=hidden class='tf-posts-count'>";
+			echo !empty($tf_total_results) ? $tf_total_results : 0; 
+			echo "</span>";
+			?>
+
+			</div>
+		</div>
+	</div>
+	<?php }else{ ?>
     <div class="tf_search_result">
         <div class="tf-action-top">
 			<div class="tf-total-results">
@@ -764,6 +970,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
         </div>
 
     </div>
+	<?php } ?>
     <!-- End Content -->
 
 	<?php
@@ -1255,6 +1462,7 @@ function tf_recent_blog_callback($atts, $content = null){
  */
 add_shortcode( 'tf_vendor_post', 'tf_vendor_post_callback' );
 function tf_vendor_post_callback($atts, $content = null){
+	ob_start();
 	extract(
 		shortcode_atts(
 			array(
