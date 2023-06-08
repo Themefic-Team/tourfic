@@ -5936,10 +5936,12 @@ div#tf-contact-info {
   background: #0E3DD8 !important;
   color: #fff !important;
 }
-.tf-search-results-list .tf_posts_navigation.tf_posts_ajax_navigation {
+.tf-search-results-list .tf_posts_navigation.tf_posts_ajax_navigation,
+.tf-search-results-list .tf_posts_navigation.tf_posts_page_navigation {
   margin-top: 40px;
 }
-.tf-search-results-list .tf_posts_navigation.tf_posts_ajax_navigation .page-numbers {
+.tf-search-results-list .tf_posts_navigation.tf_posts_ajax_navigation .page-numbers,
+.tf-search-results-list .tf_posts_navigation.tf_posts_page_navigation .page-numbers {
   font-size: 14px;
   color: #686E7A !important;
   text-decoration: none;
@@ -5949,7 +5951,8 @@ div#tf-contact-info {
   border-radius: 5px;
   display: inline-block;
 }
-.tf-search-results-list .tf_posts_navigation.tf_posts_ajax_navigation .page-numbers.current {
+.tf-search-results-list .tf_posts_navigation.tf_posts_ajax_navigation .page-numbers.current,
+.tf-search-results-list .tf_posts_navigation.tf_posts_page_navigation .page-numbers.current {
   background: #0E3DD8 !important;
   color: #fff !important;
 }
@@ -6077,6 +6080,7 @@ div#tf-contact-info {
   box-shadow: 0px 13px 30px 0px #e0e8ee;
   background-color: #fff;
   border-radius: 5px;
+  margin-top: 30px;
 }
 .tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget {
   border: 0px solid;
