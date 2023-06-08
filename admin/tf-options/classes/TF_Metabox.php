@@ -190,7 +190,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 								$data = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : '';
 
 								$fieldClass = 'TF_' . $field['type'];
-								$data       = $fieldClass == 'TF_map' || $fieldClass == 'TF_tab' || $fieldClass == 'TF_color' ? serialize( $data ) : $data;
+								$data       = $fieldClass == 'TF_map' ||  $fieldClass == 'TF_color' ? serialize( $data ) : $data;
 
 								if ( class_exists( $fieldClass ) ) {
 									$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
@@ -204,11 +204,35 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			}
 
 			if ( ! empty( $tf_meta_box_value ) ) {
+//                tf_var_dump($tf_meta_box_value);
+//                die();
 				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
 			} else {
 				delete_post_meta( $post_id, $this->metabox_id );
 			}
 
+			/**
+			 * Hotel and Tour Pabbly Integration
+			 * @author Jahid
+			 */
+			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_hotel" ){
+				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_hotels_opt' ] ) ) ? $_POST[ 'tf_hotels_opt' ] : array();
+			}
+			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_tours" ){
+				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_tours_opt' ] ) ) ? $_POST[ 'tf_tours_opt' ] : array();
+			}
+			$post_basic_info = array(
+				'post_id' => sanitize_key( $post_id ),
+				'post_title' => sanitize_text_field( $_POST['post_title'] ),
+				'post_content' => sanitize_text_field( $_POST['content'] ),
+				'post_status' => sanitize_text_field( $_POST['post_status'] ),
+				'post_thumbnail' => !empty( get_the_post_thumbnail_url($post_id,'full') ) ?  get_the_post_thumbnail_url($post_id,'full') : '',
+				'post_date' => get_the_date( 'Y-m-d H:i:s', $post_id )
+			);
+			if ( function_exists('is_tf_pro') && is_tf_pro() ) {
+				do_action( 'tf_services_pabbly_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
+				do_action( 'tf_services_zapier_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
+			}
 		}
 
 	}

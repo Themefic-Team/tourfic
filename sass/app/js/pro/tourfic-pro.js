@@ -33,6 +33,17 @@
             });
         });
 
+        /**
+         * Deposit amount toggle
+        */
+        $(document).on("click", "input[name='make_deposit']", function () {
+            let id = $(this).val();
+            if ($(this).is(':checked')) {
+                $('.tf-deposit-amount-' + id).show();
+            } else {
+                $('.tf-deposit-amount-' + id).hide();
+            }
+        });
 
         /**
          * Airport Service Price

@@ -288,13 +288,10 @@ while ( have_posts() ) : the_post();
                                 <div class="list-single-main-media fl-wrap" id="sec1">
                                     <div class="single-slider-wrapper fl-wrap">
                                         <div class="tf_slider-for fl-wrap">
-											<?php
-											echo '<div class="slick-slide-item">';
-											echo '<a href="' . esc_url( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) . '" class="slick-slide-item-link" data-fancybox="hotel-gallery">';
-											echo get_the_post_thumbnail( $post_id, 'tf_gallery_thumb' );
-											echo '</a>';
-											echo '</div>';
-                                            ?>
+                                            
+                                        <a href="<?php echo !empty(get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' )) ? esc_url( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>" class="slick-slide-item-link" data-fancybox="hotel-gallery">
+                                            <img src="<?php echo !empty(get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' )) ? esc_url( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) : TF_ASSETS_APP_URL.'/images/feature-default.jpg'; ?>" alt="">
+                                        </a>
                                             
                                         </div>
                                         

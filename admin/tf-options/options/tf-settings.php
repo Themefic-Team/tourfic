@@ -26,7 +26,7 @@ TF_Settings::option( 'tf_settings', array(
 						'hotel' => __( 'Hotels', 'tourfic' ),
 						'tour'  => __( 'Tours', 'tourfic' ),
 					),
-				),
+				)
 			),
 		),
 		'hotel_option'       => array(
@@ -78,7 +78,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
 					'subtitle' => __( 'The Email to receive all enquiry form submissions', 'tourfic' ),
 					'is_pro'   => true,
-				),
+				)
 			),
 		),
 		'room_config'        => array(
@@ -146,7 +146,7 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		// Tour Options
-		'tour'               => array(
+		'tour'	 => array(
 			'title'  => __( 'Tour Options', 'tourfic' ),
 			'icon'   => 'fas fa-umbrella-beach',
 			'fields' => array(),
@@ -222,6 +222,22 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle' => __( 'The Email to receive all enquiry form submissions', 'tourfic' ),
 					'is_pro'   => true,
 				),
+				array(
+					'id'        => 't-auto-draft',
+					'type'      => 'switch',
+					'label'     => __( 'Expired Tours for Backend', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the tour will be auto-expired after the date expired. (Status will be change after every 24 hours)', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 't-show-expire-tour',
+					'type'      => 'switch',
+					'label'     => __( 'Show All Tours (Publish + Expired)', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, all tours whose status is Published and Expired will be displayed', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				)
 			),
 		),
 		// Partial Payment Popup
@@ -538,6 +554,28 @@ TF_Settings::option( 'tf_settings', array(
 						),
 					),
 				),
+				array(
+					'id'         => '',
+					'type'       => 'switch',
+					'label'      => __( 'Enable Itinerary Map', 'tourfic' ),
+					'label_on'   => __( 'Yes', 'tourfic' ),
+					'label_off'  => __( 'No', 'tourfic' ),
+					'is_pro'     => true,
+					'field_width'     => 50,
+				),
+				array(
+					'id'       => '',
+					'type'     => 'select',
+					'label'    => __( 'Travel Mode', 'tourfic' ),
+					'options'  => array(
+						'DRIVING'   => __( 'Driving', 'tourfic' ),
+						'WALKING'   => __( 'Walking', 'tourfic' ),
+						'BICYCLING' => __( 'Bycycling', 'tourfic' ),
+					),
+					'default'    => 'driving',
+					'is_pro'     => true,
+					'field_width'     => 50,
+				),
 
 			),
 		),
@@ -610,7 +648,59 @@ TF_Settings::option( 'tf_settings', array(
 										'min' => '0',
 									),
 									'is_pro'   => true,
-								)
+								),
+								array(
+									'id'      => 'pabbly-title',
+									'type'    => 'heading',
+									'content' => __( 'Pabbly', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'        => 'vendor-integrate-pabbly',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Pabbly for New Vendor Registration?', 'tourfic' ),
+									'subtitle' => __( 'You can able to Integrate Pabbly with New Vendor Registration.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true,
+								),
+								array(
+									'id'       => 'vendor-integrate-pabbly-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Vendor Registration Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Vendor Registration Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'vendor-integrate-pabbly', '==', 'true' ),
+									),
+								),
+								array(
+									'id'      => 'zapier-title',
+									'type'    => 'heading',
+									'content' => __( 'Zapier', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'        => 'vendor-integrate-zapier',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Zapier for New Vendor Registration?', 'tourfic' ),
+									'subtitle' => __( 'You can able to Integrate Zapier with New Vendor Registration.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true,
+								),
+								array(
+									'id'       => 'vendor-integrate-zapier-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Vendor Registration Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Vendor Registration Zapier Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'vendor-integrate-zapier', '==', 'true' ),
+									),
+								),
 							),
 						),
 						array(
@@ -886,6 +976,22 @@ TF_Settings::option( 'tf_settings', array(
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 				),
+				array(
+					'id'        => 'disable_child_search',
+					'type'      => 'switch',
+					'label'     => __( 'Disabled Child in Tour Search', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the child is not showing on the Search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 'disable_infant_search',
+					'type'      => 'switch',
+					'label'     => __( 'Disabled Infant in Tour Search', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the Infant is not showing on the Search form.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				)
 			),
 		),
 		// Design Options
@@ -1192,7 +1298,7 @@ TF_Settings::option( 'tf_settings', array(
 						array( 'google-page-option', '==', 'googlemap' ),
 					),
 					'is_pro'     => true,
-				),
+				)
 			),
 		),
 		/**
@@ -1546,6 +1652,542 @@ TF_Settings::option( 'tf_settings', array(
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => true
+								),
+							),
+						),
+					),
+				)
+			),
+		),
+
+		'emails'    => array(
+			'title'  => esc_html__( 'Emails', 'tourfic' ),
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'   => 'email-settings',
+					'type' => 'tab',
+					'tabs' => array(
+						array(
+							'id'     => 'admin_emails',
+							'title'  => __( 'Admin Email', 'tourfic' ),
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								//file upload
+								array(
+									'id'      => 'brand_logo',
+									'type'    => 'image',
+									'label'   => __( 'Admin Email Logo', 'tourfic' ),
+								),
+								array(
+									'id'      => 'send_notification',
+									'type'    => 'select',
+									'label'   => __( 'Send Notification', 'tourfic' ),
+									'options' => array(
+										'admin'        => __( 'Admin', 'tourfic' ),
+										'admin_vendor' => __( 'Admin + Vendor', 'tourfic' ),
+										'turn_off'     => __( 'Turn Off', 'tourfic' ),
+									),
+									'default' => 'admin',
+								),
+								array(
+									'id'      => 'sale_notification_email',
+									'type'    => 'text',
+									'label'   => __( 'Sale Notification Email', 'tourfic' ),
+									'default' => get_bloginfo( 'admin_email' ),
+								),
+								//enable disable admin email
+								array(
+									'id'      => 'admin_email_disable',
+									'type'    => 'switch',
+									'label'   => __( 'Disable Admin Email', 'tourfic' ),
+									'default' => 'false',
+								),
+								//heading
+								array(
+									'id'      => 'admin_email_heading',
+									'type'    => 'heading',
+									'label'   => __( 'Admin Email Setting', 'tourfic' ),
+								),
+								array(
+									'id'      => 'admin_email_subject',
+									'type'    => 'text',
+									'label'   => __( 'Booking Email Subject', 'tourfic' ),
+									'default' => __( 'New Tour Booking', 'tourfic' ),
+								),
+								array(
+									'id'      => 'email_from_name',
+									'type'    => 'text',
+									'label'   => __( 'Email From Name', 'tourfic' ),
+									'default' => get_bloginfo( 'name' ),
+								),
+								array(
+									'id'      => 'email_from_email',
+									'type'    => 'text',
+									'label'   => __( 'Email From Email', 'tourfic' ),
+									'default' => get_bloginfo( 'admin_email' ),
+								),								
+								array(
+									'id'      => 'order_email_heading',
+									'type'    => 'text',
+									'label'   => __( 'Order Email Heading', 'tourfic' ),
+									'default' => __( 'You booking has been received', 'tourfic' ),
+								),
+								//type color
+								array(
+									'id'      => 'email_heading_bg',
+									'type'    => 'color',
+									'label'   => __( 'Email header background color', 'tourfic' ),
+									'default' => array(
+										'bg_color' => '#0209AF'
+									),
+									'multiple' => true,
+									'inline' => true,
+									'colors'   => array(
+										'bg_color' => __( 'Background Color', 'tourfic' ),
+									)
+								),
+								//email body
+								array(
+									'id'          => 'admin_booking_email_template',
+									'type'        => 'editor',
+									'label'       => __( 'Booking Confrimation Template', 'tourfic' ),
+									'default'     => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
+									'description' => __( 'This template will be sent to admin', 'tourfic' )
+								),
+								//heading
+								array(
+									'id'    => 'vendor_email_heading',
+									'type'  => 'heading',
+									'label' => __( 'Vendor Email', 'tourfic' ),
+								),
+								// //vendor email from name
+								// array(
+								// 	'id'      => 'vendor_from_name',
+								// 	'type'    => 'text',
+								// 	'label'   => __( 'Vendor Email From Name', 'tourfic' ),
+								// 	'default' => get_bloginfo( 'name' ),
+								// ),
+								// //vendor email from email
+								// array(
+								// 	'id'      => 'vendor_from_email',
+								// 	'type'    => 'text',
+								// 	'label'   => __( 'Vendor Email From Email', 'tourfic' ),
+								// 	'default' => get_bloginfo( 'admin_email' ),
+								// ),
+								//vendor email template
+								array(
+									'id'      => 'vendor_booking_email_template',
+									'type'    => 'editor',
+									'label'   => __( 'Vendor Notification Template', 'tourfic' ),
+									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ),
+									'description' => __( 'This template will be sent to vendor', 'tourfic' )
+								),
+								// array(
+								// 	'id'      => 'email_content_type',
+								// 	'type'    => 'select',
+								// 	'label'   => __( 'Email Content Type', 'tourfic' ),
+								// 	'options' => array(
+								// 		'text/html'  => __( 'HTML', 'tourfic' ),
+								// 		'plain/text' => __( 'Plain Text', 'tourfic' ),
+								// 	),
+								// 	'default' => 'text/html',
+								// ),
+							),
+							
+						),
+						
+						//customer email tab
+						array(
+							'id'     => 'customer-email',
+							'title'  => __( 'Customer Email', 'tourfic' ),
+							'icon'   => 'fa fa-envelope',
+							'fields' => array(
+								//disable customer email
+								array(
+									'id'      => 'customer_email_disable',
+									'type'    => 'switch',
+									'label'   => __( 'Disable Customer Email', 'tourfic' ),
+									'default' => 'false',
+								),
+								array(
+									'id'      => 'customer_confirm_email_subject',
+									'type'    => 'text',
+									'label'   => __( 'Booking Confirmation Email Subject', 'tourfic' ),
+									'default' => __( 'Your booking has been confirmed', 'tourfic' ),
+								),
+								//from name
+								array(
+									'id'      => 'customer_from_name',
+									'type'    => 'text',
+									'label'   => __( 'Email From Name', 'tourfic' ),
+									'default' => get_bloginfo( 'name' ),
+								),
+								//from email
+								array(
+									'id'      => 'customer_from_email',
+									'type'    => 'text',
+									'label'   => __( 'Email From Email', 'tourfic' ),
+									'default' => get_bloginfo( 'admin_email' ),
+								),
+								array(
+									'id'      => 'customer_confirm_email_template',
+									'type'    => 'editor',
+									'label'   => __( 'Booking Confirmation Email', 'tourfic' ),
+									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'customer' ),
+									'description' => __('This template will be sent to customer after booking is confirmed.', 'tourfic'),
+								),
+							),
+						),
+					),	
+				),
+				//notice field
+				array(
+					'id'      => 'notice',
+					'type'    => 'notice',
+					'class'   => 'info',
+					'title'   => __( 'Email Shortcodes', 'tourfic' ),
+					'content' => __( 'You can use the following placeholders in the email body:', 'tourfic' ) . '<br><br><strong>{order_id} </strong> : To display the booking ID.<br>
+					<strong>{booking_id} </strong> : To display the booking ID.<br>
+					<strong>{booking_date} </strong> : To display the booking date.<br>
+					<strong>{fullname} </strong> : To display the customer name.<br>
+					<strong>{user_email} </strong> : To display the customer email.<br>
+					<strong>{phone} </strong> : To display the customer phone.<br>
+					<strong>{address} </strong> : To display the customer address.<br>
+					<strong>{city} </strong> : To display the customer city.<br>
+					<strong>{country} </strong> : To display the customer country.<br>
+					<strong>{zip} </strong> : To display the customer zip.<br>
+					<strong>{booking_details} </strong> : To display the booking details.<br>
+					<strong>{shipping_address} </strong> : To display the shipping address.<br>
+					<strong>{shipping_method} </strong> : To display the shipping method.<br>
+					<strong>{shipping_city} </strong> : To display the shipping city.<br>
+					<strong>{shipping_country} </strong> : To display the shipping country.<br>
+					<strong>{shipping_zip} </strong> : To display the shipping zip.<br>
+					<strong>{order_total} </strong> : To display the total price.<br>
+					<strong>{order_subtotal} </strong> : To display the subtotal price.<br>
+					<strong>{order_date} </strong> : To display the order date.<br>
+					<strong>{order_status} </strong> : To display the order status.<br>
+					<strong>{payment_method} </strong> : To display the payment method.<br>
+					<strong>{booking_url} </strong> : To display the booking url.<br>
+					<strong>{site_name} </strong> : To display the site name.<br>
+					<strong>{site_url} </strong> : To display the site url.<br>
+
+					'
+					
+					,
+				),
+			),
+		),
+		
+
+		/**
+		 * Integration
+		 *
+		 * Main menu
+		 */
+
+		 'integration' => array(
+			'title'  => __( 'Integration', 'tourfic' ),
+			'icon'   => 'fa fa-plus',
+			'fields' => array(
+				array(
+					'id'       => 'integration_heading',
+					'type'     => 'heading',
+					'label'  => __( 'Pabbly & Zapier Settings', 'tourfic' ),
+					'subtitle' => __( 'If you want to integrate your system with other platforms. Currently, we only allow Pabbly and Zapier.', 'tourfic' ),
+				),
+				array(
+					'id'     => 'tf-integration',
+					'type'   => 'tab',
+					'label'  => 'Pabbly & Zapier',
+					'is_pro' => true,
+					'tabs'   => array(
+						array(
+							'id'     => 'pabbly_integration',
+							'title'  => __( 'Pabbly', 'tourfic' ),
+							'fields' => array(
+								array(
+									'id'      => 'hotel-title',
+									'type'    => 'heading',
+									'content' => __( 'Hotel', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'        => 'hotel-integrate-pabbly',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Pabbly for Hotel?', 'tourfic' ),
+									'subtitle' => __( 'You can able to Integrate Pabbly with Hotel create and update.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true,
+								),
+								array(
+									'id'       => 'hotel-integrate-pabbly-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Hotel Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Hotel Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'hotel-integrate-pabbly', '==', 'true' ),
+									),
+								),
+								array(
+									'id'        => 'h-enquiry-pabbly',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Pabbly for Hotel Enquiry?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Pabbly with Hotel Enquiry Form.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true
+								),
+								array(
+									'id'       => 'h-enquiry-pabbly-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Hotel Enquiry Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Hotel Enquiry Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'h-enquiry-pabbly', '==', 'true' ),
+									),
+								),
+								array(
+									'id'      => 'tour-title',
+									'type'    => 'heading',
+									'content' => __( 'Tour', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'        => 'tour-integrate-pabbly',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Pabbly for Tour?', 'tourfic' ),
+									'subtitle' => __( 'You can able to Integrate Pabbly with Tour create and update.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true,
+								),
+								array(
+									'id'       => 'tour-integrate-pabbly-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Tour Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Tour Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'tour-integrate-pabbly', '==', 'true' ),
+									),
+								),
+								array(
+									'id'        => 't-enquiry-pabbly',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Pabbly for Tour Enquiry?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Pabbly with Tour Enquiry Form.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true
+								),
+								array(
+									'id'       => 't-enquiry-pabbly-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Tour Enquiry Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Tour Enquiry Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 't-enquiry-pabbly', '==', 'true' ),
+									),
+								),
+								array(
+									'id'      => 'woocommerce-title',
+									'type'    => 'heading',
+									'content' => __( 'WooCommerce', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'        => 'tf-new-order-pabbly',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Pabbly for Booking?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Pabbly with WooCommerce Booking.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'   => true,
+								),
+								array(
+									'id'       => 'tf-new-order-pabbly-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Booking Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Booking Pabbly Web Hook.', 'tourfic' ),
+									'dependency'  => array(
+										array( 'tf-new-order-pabbly', '==', 'true' ),
+									),
+									'is_pro'   => true,
+								),
+								array(
+									'id'        => 'tf-new-customer-pabbly',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Pabbly for New Customer?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Pabbly with WooCommerce New Customer.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'   => true,
+								),
+								array(
+									'id'       => 'tf-new-customer-pabbly-webhook',
+									'type'     => 'text',
+									'label'    => __( 'New Customer Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your New Customer Pabbly Web Hook.', 'tourfic' ),
+									'dependency'  => array(
+										array( 'tf-new-customer-pabbly', '==', 'true' ),
+									),
+									'is_pro'   => true,
+								),
+							),
+						),
+						array(
+							'id'     => 'zapier_integration',
+							'title'  => __( 'Zapier', 'tourfic' ),
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'      => 'hotel-title',
+									'type'    => 'heading',
+									'content' => __( 'Hotel', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'        => 'hotel-integrate-zapier',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Zapier for Hotel?', 'tourfic' ),
+									'subtitle' => __( 'You can able to Integrate Zapier with Hotel create and update.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true,
+								),
+								array(
+									'id'       => 'hotel-integrate-zapier-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Hotel Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Hotel Zapier Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'hotel-integrate-zapier', '==', 'true' ),
+									),
+								),
+								array(
+									'id'        => 'h-enquiry-zapier',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Zapier for Hotel Enquiry?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Zapier with Hotel Enquiry Form.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true
+								),
+								array(
+									'id'       => 'h-enquiry-zapier-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Hotel Enquiry Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Hotel Enquiry Zapier Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'h-enquiry-zapier', '==', 'true' ),
+									),
+								),
+								array(
+									'id'      => 'tour-title',
+									'type'    => 'heading',
+									'content' => __( 'Tour', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'        => 'tour-integrate-zapier',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Zapier for Tour?', 'tourfic' ),
+									'subtitle' => __( 'You can able to Integrate Zapier with Tour create and update.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true,
+								),
+								array(
+									'id'       => 'tour-integrate-zapier-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Tour Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Tour Zapier Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'tour-integrate-zapier', '==', 'true' ),
+									),
+								),
+								array(
+									'id'        => 't-enquiry-zapier',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Zapier for Tour Enquiry?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Zapier with Tour Enquiry Form.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true
+								),
+								array(
+									'id'       => 't-enquiry-zapier-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Tour Enquiry Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Tour Enquiry Zapier Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 't-enquiry-zapier', '==', 'true' ),
+									),
+								),
+								array(
+									'id'      => 'woocommerce-title',
+									'type'    => 'heading',
+									'content' => __( 'WooCommerce', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'        => 'tf-new-order-zapier',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Zapier for Booking?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Zapier with WooCommerce Booking.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'   => true,
+								),
+								array(
+									'id'       => 'tf-new-order-zapier-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Booking Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Booking Zapier Web Hook.', 'tourfic' ),
+									'dependency'  => array(
+										array( 'tf-new-order-zapier', '==', 'true' ),
+									),
+									'is_pro'   => true,
+								),
+								array(
+									'id'        => 'tf-new-customer-zapier',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Zapier for New Customer?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Zapier with WooCommerce New Customer.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'   => true,
+								),
+								array(
+									'id'       => 'tf-new-customer-zapier-webhook',
+									'type'     => 'text',
+									'label'    => __( 'New Customer Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your New Customer Zapier Web Hook.', 'tourfic' ),
+									'dependency'  => array(
+										array( 'tf-new-customer-zapier', '==', 'true' ),
+									),
+									'is_pro'   => true,
 								),
 							),
 						),

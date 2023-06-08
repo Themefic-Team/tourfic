@@ -22,8 +22,13 @@ get_header(); ?>
 			<!-- Start Content -->
 			<div class="tf-search-left">
 				<div class="tf-action-top">
-					<div class="tf-total-results">
-						<span><?php echo esc_html__( 'Total Results ', 'tourfic' ) . '(' . $post_count . ')'; ?> </span>
+					<div class="tf-result-counter-info">
+						<span class="tf-counter-title"><?php echo __( 'Total Results', 'tourfic' ); ?> </span>
+						<span><?php echo '('; ?> </span>
+						<div class="tf-total-results">
+							<span><?php echo $post_count; ?> </span>
+						</div>
+						<span><?php echo ')'; ?> </span>
 					</div>
 					<div class="tf-list-grid">
 		                <a href="#list-view" data-id="list-view" class="change-view" title="<?php _e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>

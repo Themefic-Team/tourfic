@@ -95,7 +95,36 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'type'        => 'text',
 					'label'       => __( 'Tour Duration', 'tourfic' ),
 					'subtitle'    => __( 'E.g. 3 days', 'tourfic' ),
+					'field_width' => '50',
+				),				
+				array(
+					'id'      => 'duration_time',
+					'type'    => 'select',
+					'label'   => __( 'Duration time', 'tourfic' ),
+					'subtitle'    => __( 'E.g. Days', 'tourfic' ),
+					'options' => array(
+						'Day' => __( 'Days', 'tourfic' ),
+						'Hour' => __( 'Hours', 'tourfic' ),
+						'Minute' => __( 'Minutes', 'tourfic' ),
+					),
+					'field_width' => '50',
+				),
+				array(
+					'id'          => 'night',
+					'type'        => 'switch',
+					'label'       => __( 'Night', 'tourfic' ),
 					'field_width' => '33.33',
+				),
+				
+				array(
+					'id'          => 'night_count',
+					'type'        => 'number',
+					'label'       => __( 'Total nights', 'tourfic' ),
+					'subtitle'    => __( 'E.g. 2', 'tourfic' ),
+					'field_width' => '33.33',
+					'dependency'  => array(
+						array( 'night', '==', 'true' ),
+					),
 				),
 				array(
 					'id'          => 'group_size',
@@ -140,35 +169,27 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 			'icon'   => 'fa-solid fa-address-book',
 			'fields' => array(
 				array(
-					'id'          => '',
+					'id'          => 'email',
 					'type'        => 'text',
 					'label'       => __( 'Email address', 'tourfic' ),
-					'is_pro'      => true,
-					'badge_up'    => true,
 					'field_width' => '50',
 				),
 				array(
-					'id'          => '',
+					'id'          => 'phone',
 					'type'        => 'text',
 					'label'       => __( 'Phone Number', 'tourfic' ),
-					'is_pro'      => true,
-					'badge_up'    => true,
 					'field_width' => '50',
 				),
 				array(
-					'id'          => '',
+					'id'          => 'website',
 					'type'        => 'text',
 					'label'       => __( 'Website Url', 'tourfic' ),
-					'is_pro'      => true,
-					'badge_up'    => true,
 					'field_width' => '50',
 				),
 				array(
-					'id'          => '',
+					'id'          => 'fax',
 					'type'        => 'text',
 					'label'       => __( 'Fax Number', 'tourfic' ),
-					'is_pro'      => true,
-					'badge_up'    => true,
 					'field_width' => '50',
 				),
 			),
@@ -678,6 +699,14 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'is_pro'   => true,
 					'subtitle' => __( 'Customer can not book after this date', 'tourfic' ),
 				),
+				array(
+					'id'        => 'disable_same_day',
+					'type'      => 'switch',
+					'label'     => __( 'Are You Want Disable Same Day Booking?', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the tour can not booking same day.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				)
 			),
 		),
 		// // Exclude/Include

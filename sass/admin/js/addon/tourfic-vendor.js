@@ -137,6 +137,7 @@
             var pass = $("input[name=tf_user_password]").val();
             var commission = $("input[name=tf_user_commission]").val();
             var vendor_status = $('input[name="tf_vendor_enabled"]:checked');
+            var vendor_posts = $('input[name="tf_vendor_posts"]:checked');
             var bio = $("textarea[name=tf_user_bio]").val();
             var vendor_image = $("input[name=tf_vendor_image]").val();
             var data = {
@@ -153,6 +154,7 @@
                 bio: bio,
                 vendor_image: vendor_image,
                 vendor_status: vendor_status.length,
+                vendor_posts: vendor_posts.length,
             };
             $("#tf-report-loader").addClass('show');
 
