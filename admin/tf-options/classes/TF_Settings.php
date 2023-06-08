@@ -322,23 +322,37 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					</div>
 					<div class="tf-report-filter">
 						<h2><?php _e("Reports","tourfic"); ?></h2>
-						<div class="tf-month-filter">
-							<span><?php _e("Month","tourfic"); ?></span>
-							<select name="tf-month-report" id="tf-month-report">
-								<option value=""><?php _e("Select Month","tourfic"); ?></option>
-								<option value="1"><?php _e("January","tourfic"); ?></option>
-								<option value="2"><?php _e("February","tourfic"); ?></option>
-								<option value="3"><?php _e("March","tourfic"); ?></option>
-								<option value="4"><?php _e("April","tourfic"); ?></option>
-								<option value="5"><?php _e("May","tourfic"); ?></option>
-								<option value="6"><?php _e("June","tourfic"); ?></option>
-								<option value="7"><?php _e("July","tourfic"); ?></option>
-								<option value="8"><?php _e("August","tourfic"); ?></option>
-								<option value="9"><?php _e("September","tourfic"); ?></option>
-								<option value="10"><?php _e("October","tourfic"); ?></option>
-								<option value="11"><?php _e("November","tourfic"); ?></option>
-								<option value="12"><?php _e("December","tourfic"); ?></option>
-							</select>
+						<div class="tf-dates-filter">
+							<div class="tf-month-filter">
+								<span><?php _e("Year","tourfic"); ?></span>
+								<select name="tf-year-report" id="tf-year-report">
+									<option value="23"><?php _e("2023","tourfic"); ?></option>
+									<option value="22"><?php _e("2022","tourfic"); ?></option>
+									<option value="21"><?php _e("2021","tourfic"); ?></option>
+									<option value="20"><?php _e("2020","tourfic"); ?></option>
+									<option value="19"><?php _e("2019","tourfic"); ?></option>
+									<option value="18"><?php _e("2018","tourfic"); ?></option>
+									<option value="17"><?php _e("2017","tourfic"); ?></option>
+								</select>
+							</div>
+							<div class="tf-month-filter">
+								<span><?php _e("Month","tourfic"); ?></span>
+								<select name="tf-month-report" id="tf-month-report">
+									<option value=""><?php _e("Select Month","tourfic"); ?></option>
+									<option value="1"><?php _e("January","tourfic"); ?></option>
+									<option value="2"><?php _e("February","tourfic"); ?></option>
+									<option value="3"><?php _e("March","tourfic"); ?></option>
+									<option value="4"><?php _e("April","tourfic"); ?></option>
+									<option value="5"><?php _e("May","tourfic"); ?></option>
+									<option value="6"><?php _e("June","tourfic"); ?></option>
+									<option value="7"><?php _e("July","tourfic"); ?></option>
+									<option value="8"><?php _e("August","tourfic"); ?></option>
+									<option value="9"><?php _e("September","tourfic"); ?></option>
+									<option value="10"><?php _e("October","tourfic"); ?></option>
+									<option value="11"><?php _e("November","tourfic"); ?></option>
+									<option value="12"><?php _e("December","tourfic"); ?></option>
+								</select>
+							</div>
 						</div>
 					</div>
 					<div class="tf-order-report">

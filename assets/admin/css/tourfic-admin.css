@@ -439,6 +439,10 @@ Fontawesome
   display: none;
 }
 
+.tf-section-name-hidden {
+  display: none;
+}
+
 button.tf-order-remove {
   background: #f44336 !important;
   border: 1px solid #f44336 !important;
@@ -1146,6 +1150,20 @@ Steps
     transform: rotate(360deg);
   }
 }
+.tf-setup-step-container .tf-template-step .tf-hotel-setup-wizard ul,
+.tf-setup-step-container .tf-template-step .tf-tour-setup-wizard ul {
+  margin-bottom: 0px;
+}
+.tf-setup-step-container .tf-template-step .tf-hotel-setup-wizard .tf-field-imageselect .tf-image-checkbox img,
+.tf-setup-step-container .tf-template-step .tf-tour-setup-wizard .tf-field-imageselect .tf-image-checkbox img {
+  width: 200px;
+  height: 140px;
+}
+.tf-setup-step-container .tf-template-step .tf-hotel-setup-wizard .tf-field-imageselect .tf-image-checkbox > input:checked + img,
+.tf-setup-step-container .tf-template-step .tf-tour-setup-wizard .tf-field-imageselect .tf-image-checkbox > input:checked + img {
+  border-color: #5D5DFF;
+  border-radius: 5px;
+}
 
 @media only screen and (max-width: 991.98px) {
   #tf_tours_opt .tf-admin-meta-box {
@@ -1640,6 +1658,7 @@ Steps
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-month-filter {
   margin-bottom: 15px;
+  display: inline-block;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-month-filter span {
   display: block;
@@ -2134,6 +2153,9 @@ Steps
   font-size: 14px;
   margin-top: 10px;
 }
+.tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-tab-content > .tf-field.tf-field-heading {
+  border-radius: 0px;
+}
 .tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-tab-content > .tf-field.tf-field-color {
   background-color: transparent;
   padding: 0px;
@@ -2383,6 +2405,10 @@ Steps
   padding: 12px 0;
 }
 
+.tf-inline-list {
+  display: inline-block;
+}
+
 .tf-field-text input {
   width: 100%;
   padding: 12px 8px 12px 12px;
@@ -2438,6 +2464,7 @@ Steps
 
 .tf-field-select select.tf-select {
   width: 100%;
+  max-width: 100%;
   padding: 12px 8px 12px 12px;
   border: 1px solid #c4cbd4;
   background-color: #f5f8ff;
@@ -3580,6 +3607,38 @@ Steps
 }
 .tf-field-number input::placeholder {
   color: #a6b1bf;
+}
+
+.tf-image-radio-group {
+  display: flex;
+  align-items: initial;
+}
+.tf-image-radio-group li {
+  display: inline-block;
+  margin-right: 20px;
+  cursor: n-resize;
+  border-radius: 5px;
+}
+.tf-image-radio-group li .tf-image-checkbox img {
+  width: 240px;
+  object-fit: cover;
+  object-position: top;
+  height: 180px;
+  transition: 2s all ease;
+}
+.tf-image-radio-group li .tf-image-checkbox img:hover {
+  object-position: bottom;
+}
+.tf-image-radio-group li .tf-image-checkbox > input {
+  display: none;
+}
+.tf-image-radio-group li .tf-image-checkbox > img {
+  cursor: pointer;
+  border: 3px solid transparent;
+}
+.tf-image-radio-group li .tf-image-checkbox > input:checked + img {
+  border-color: #607085;
+  border-radius: 5px;
 }
 
 /*# sourceMappingURL=tourfic-admin.css.map */

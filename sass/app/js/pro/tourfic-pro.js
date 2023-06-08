@@ -44,7 +44,7 @@
                 $('.tf-deposit-amount-' + id).hide();
             }
         });
-
+ 
         /**
          * Airport Service Price
          */

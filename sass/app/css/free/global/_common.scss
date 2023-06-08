@@ -63,6 +63,10 @@ h3.section-heading {
         white-space: break-spaces;
     }
 }
+.fancybox-navigation .fancybox-button--arrow_left > div,
+.fancybox-navigation .fancybox-button--arrow_right > div{
+    background-color: #000;
+}
 .tf-tooltip {
     position: relative;
     .tf-top {
@@ -1231,6 +1235,96 @@ li.filter-item {
     @include justify-content(flex-end);
     gap: 15px;
 }
+
+.tf-box-wrapper {
+    h4{
+        margin-bottom: 20px !important;
+        font-family: "rubik", sans-serif;
+        font-size: 16px;
+    }
+    .al-range-slider__track {
+        background: #EEE;
+        height: 10px;
+        box-shadow: none !important;
+        margin: 30px 0px 10px 0px;
+        .al-range-slider__grid{
+            pointer-events: inherit !important;
+        }
+    }
+    .al-range-slider_dark {
+        padding: 0px !important;
+        .al-range-slider__bar {
+            background: #003162 !important;
+            box-shadow: none !important;
+            pointer-events: none !important;
+        }
+    }
+    .al-range-slider__knob {
+        background: #003162 !important;
+        height: 15px;
+        width: 15px;
+        box-shadow: none !important;
+        border: 3px solid #003162 !important;
+        &:first-child {
+            span {
+                left: 10px !important;
+            }
+        }
+    }
+    .al-range-slider__tooltip {
+        background: #003162 !important;
+        border-radius: 5px;
+        box-shadow: none;
+        padding: 3px 10px;
+        color: #fff !important;
+        font-size: 13px !important;
+        margin-bottom: 0px !important;
+    }
+    .al-range-slider__input.js-al-range-slider__input {
+        display: none;
+    }
+}
+
+/*
+Ajax Loader Booking Availability
+*/
+.tf-btn-booking-loading {
+    padding-right: 40px;
+    position: relative;
+  }
+  
+  .tf-btn-booking-loading:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -7px;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #fff;
+    border-left-color: transparent;
+    border-radius: 50%;
+    vertical-align: middle;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    -webkit-animation: tf-wd-rotate 450ms infinite linear;
+    animation: tf-wd-rotate 450ms infinite linear;
+  }
+  
+  @-webkit-keyframes tf-wd-rotate {
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes tf-wd-rotate {
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
 
 
 
