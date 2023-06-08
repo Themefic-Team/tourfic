@@ -272,6 +272,23 @@ i {
         }
     }
 }
+.tf_posts_navigation.tf_posts_ajax_navigation{
+    margin-top: 40px;
+    .page-numbers {
+        font-size: 14px;
+        color: $color-primary !important;
+        text-decoration: none;
+        padding: 12px 18px;
+        background: #fff !important;
+        box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
+        border-radius: 5px;
+        display: inline-block;
+    }
+    .page-numbers.current{
+        background: $color-theme !important;
+        color: #fff !important;
+    }
+}
 
 }
 

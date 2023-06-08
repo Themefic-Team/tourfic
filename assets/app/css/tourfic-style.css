@@ -5924,6 +5924,23 @@ div#tf-contact-info {
   background: #0E3DD8 !important;
   color: #fff !important;
 }
+.tf-search-results-list .tf_posts_navigation.tf_posts_ajax_navigation {
+  margin-top: 40px;
+}
+.tf-search-results-list .tf_posts_navigation.tf_posts_ajax_navigation .page-numbers {
+  font-size: 14px;
+  color: #686E7A !important;
+  text-decoration: none;
+  padding: 12px 18px;
+  background: #fff !important;
+  box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
+  border-radius: 5px;
+  display: inline-block;
+}
+.tf-search-results-list .tf_posts_navigation.tf_posts_ajax_navigation .page-numbers.current {
+  background: #0E3DD8 !important;
+  color: #fff !important;
+}
 
 .tf-result-previews {
   position: relative;
