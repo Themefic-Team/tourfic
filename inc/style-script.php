@@ -40,37 +40,37 @@ if( !function_exists( 'tf_custom_css' ) ){
 		$tf_global_font_p = tfopt('global-p') ? tfopt('global-p') : 14;
 		$tf_global_font_weight_p = tfopt('global-p-weight') ? tfopt('global-p-weight') : 400;
 		$tf_global_font_style_p = tfopt('global-p-style') ? tfopt('global-p-style') : 'normal';
-		$tf_global_line_height_p = tfopt('global-p-line-height') ? tfopt('global-p-line-height') : 22;
+		$tf_global_line_height_p = tfopt('global-p-line-height') ? tfopt('global-p-line-height') : 1.37;
 
 		// Global Typography H1
 		$tf_global_font_h1 = tfopt('global-h1') ? tfopt('global-h1') : 38;
 		$tf_global_font_weight_h1 = tfopt('global-h1-weight') ? tfopt('global-h1-weight') : 500;
-		$tf_global_font_style_h1 = tfopt('global-h1-style') ? tfopt('global-h1-style') : 'normal';$tf_global_line_height_h1 = tfopt('global-h1-line-height') ? tfopt('global-h1-line-height') : 50;
+		$tf_global_font_style_h1 = tfopt('global-h1-style') ? tfopt('global-h1-style') : 'normal';$tf_global_line_height_h1 = tfopt('global-h1-line-height') ? tfopt('global-h1-line-height') : 3.12;
 
 		// Global Typography H2
 		$tf_global_font_h2 = tfopt('global-h2') ? tfopt('global-h2') : 30;
 		$tf_global_font_weight_h2 = tfopt('global-h2-weight') ? tfopt('global-h2-weight') : 500;
-		$tf_global_font_style_h2 = tfopt('global-h2-style') ? tfopt('global-h2-style') : 'normal';$tf_global_line_height_h2 = tfopt('global-h2-line-height') ? tfopt('global-h2-line-height') : 38;
+		$tf_global_font_style_h2 = tfopt('global-h2-style') ? tfopt('global-h2-style') : 'normal';$tf_global_line_height_h2 = tfopt('global-h2-line-height') ? tfopt('global-h2-line-height') : 2.37;
 
 		// Global Typography H3
 		$tf_global_font_h3 = tfopt('global-h3') ? tfopt('global-h3') : 24;
 		$tf_global_font_weight_h3 = tfopt('global-h3-weight') ? tfopt('global-h3-weight') : 500;
-		$tf_global_font_style_h3 = tfopt('global-h3-style') ? tfopt('global-h3-style') : 'normal';$tf_global_line_height_h3 = tfopt('global-h3-line-height') ? tfopt('global-h3-line-height') : 30;
+		$tf_global_font_style_h3 = tfopt('global-h3-style') ? tfopt('global-h3-style') : 'normal';$tf_global_line_height_h3 = tfopt('global-h3-line-height') ? tfopt('global-h3-line-height') : 1.87;
 
 		// Global Typography H4
 		$tf_global_font_h4 = tfopt('global-h4') ? tfopt('global-h4') : 20;
 		$tf_global_font_weight_h4 = tfopt('global-h4-weight') ? tfopt('global-h4-weight') : 500;
-		$tf_global_font_style_h4 = tfopt('global-h4-style') ? tfopt('global-h4-style') : 'normal';$tf_global_line_height_h4 = tfopt('global-h4-line-height') ? tfopt('global-h4-line-height') : 28;
+		$tf_global_font_style_h4 = tfopt('global-h4-style') ? tfopt('global-h4-style') : 'normal';$tf_global_line_height_h4 = tfopt('global-h4-line-height') ? tfopt('global-h4-line-height') : 1.75;
 
 		// Global Typography H5
 		$tf_global_font_h5 = tfopt('global-h5') ? tfopt('global-h5') : 18;
 		$tf_global_font_weight_h5 = tfopt('global-h5-weight') ? tfopt('global-h5-weight') : 500;
-		$tf_global_font_style_h5 = tfopt('global-h5-style') ? tfopt('global-h5-style') : 'normal';$tf_global_line_height_h5 = tfopt('global-h5-line-height') ? tfopt('global-h5-line-height') : 25;
+		$tf_global_font_style_h5 = tfopt('global-h5-style') ? tfopt('global-h5-style') : 'normal';$tf_global_line_height_h5 = tfopt('global-h5-line-height') ? tfopt('global-h5-line-height') : 1.56;
 
 		// Global Typography H6
 		$tf_global_font_h6 = tfopt('global-h6') ? tfopt('global-h6') : 14;
 		$tf_global_font_weight_h6 = tfopt('global-h6-weight') ? tfopt('global-h6-weight') : 500;
-		$tf_global_font_style_h6 = tfopt('global-h6-style') ? tfopt('global-h6-style') : 'normal';$tf_global_line_height_h6 = tfopt('global-h6-line-height') ? tfopt('global-h6-line-height') : 22;
+		$tf_global_font_style_h6 = tfopt('global-h6-style') ? tfopt('global-h6-style') : 'normal';$tf_global_line_height_h6 = tfopt('global-h6-line-height') ? tfopt('global-h6-line-height') : 1.37;
 
 		$output = '';
 		
