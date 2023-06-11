@@ -124,6 +124,10 @@ table.tf-table {
         font-family: inherit;
         background-image: none;
         -moz-appearance: auto !important;
+        &:focus{
+            outline: none;
+            border: none;
+        }
     }
     input::placeholder {
         font-weight: $font-size-normal;

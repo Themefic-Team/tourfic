@@ -262,6 +262,7 @@ i {
     }
     .tf_posts_navigation,#tf_posts_navigation_bar{
         margin-top: 40px;
+        width: 100%;
         .page-numbers {
             font-size: 14px;
             color: $color-primary !important;
@@ -281,6 +282,7 @@ i {
 .tf_posts_navigation.tf_posts_ajax_navigation,
 .tf_posts_navigation.tf_posts_page_navigation{
     margin-top: 40px;
+    width: 100%;
     .page-numbers {
         font-size: 14px;
         color: $color-primary !important;

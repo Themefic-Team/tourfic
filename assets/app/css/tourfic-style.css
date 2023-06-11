@@ -2969,6 +2969,10 @@ table.tf-table tr:last-child {
   background-image: none;
   -moz-appearance: auto !important;
 }
+.tf-field-group .tf-field:focus {
+  outline: none;
+  border: none;
+}
 .tf-field-group input::placeholder {
   font-weight: 16px;
   font-size: 14px;
@@ -5921,6 +5925,7 @@ div#tf-contact-info {
 }
 .tf-search-results-list .tf-pagination-bar .tf_posts_navigation, .tf-search-results-list .tf-pagination-bar #tf_posts_navigation_bar {
   margin-top: 40px;
+  width: 100%;
 }
 .tf-search-results-list .tf-pagination-bar .tf_posts_navigation .page-numbers, .tf-search-results-list .tf-pagination-bar #tf_posts_navigation_bar .page-numbers {
   font-size: 14px;
@@ -5939,6 +5944,7 @@ div#tf-contact-info {
 .tf-search-results-list .tf_posts_navigation.tf_posts_ajax_navigation,
 .tf-search-results-list .tf_posts_navigation.tf_posts_page_navigation {
   margin-top: 40px;
+  width: 100%;
 }
 .tf-search-results-list .tf_posts_navigation.tf_posts_ajax_navigation .page-numbers,
 .tf-search-results-list .tf_posts_navigation.tf_posts_page_navigation .page-numbers {
