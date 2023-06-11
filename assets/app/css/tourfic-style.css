@@ -5121,6 +5121,9 @@ div#tf-contact-info {
   margin-top: 0px;
   margin-bottom: 12px;
 }
+.tf-inex-wrapper .tf-inex ul li:last-child {
+  margin-bottom: 0px;
+}
 
 .tf-itinerary-wrapper .tf-itinerary-box {
   background: #fff;
@@ -5591,7 +5594,15 @@ div#tf-contact-info {
   border-radius: 5px;
 }
 .tf-tour-details-right .tf-tour-extra-box .tf-tour-extra .tf-tour-extra-price {
+  align-items: inherit;
+}
+.tf-tour-details-right .tf-tour-extra-box .tf-tour-extra .tf-tour-extra-price .tf-tour-extra-input {
   align-items: center;
+}
+.tf-tour-details-right .tf-tour-extra-box .tf-tour-extra .tf-tour-extra-price .woocommerce-Price-amount.amount {
+  font-weight: 600;
+  margin-left: 10px;
+  line-height: 18px;
 }
 .tf-tour-details-right .tf-tour-extra-box .tf-tour-extra .tf-tour-extra-price p {
   line-height: 1.3;

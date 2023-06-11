@@ -129,7 +129,7 @@ if( $tf_hotel_selected_template_check == "design-1" ){
         </div>
         <form class="tf-room">
             <?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' );?>
-
+            <span><?php _e('Select Rooms', 'tourfic'); ?></span>
             <div class="room-selection-wrap tf-field-group">
                 <select name="hotel_room_selected" class="tf-field" id="hotel-room-selected">
                     <?php

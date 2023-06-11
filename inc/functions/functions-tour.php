@@ -1011,9 +1011,7 @@ function tf_single_tour_booking_form( $post_id ) {
                         <input type="checkbox" value="<?php echo esc_attr( $extrakey ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>">
                         <p><?php _e( $tour_extra['title'] ); ?> <?php echo $tour_extra_pricetype=="fixed" ? esc_html( "(Fixed Price)" ) : esc_html( "(Per Person Price)" ); ?></p>
                     </div>
-                    <div class="tf-tour-extra-price">
                     <?php echo wc_price( $tour_extra['price'] ); ?>
-                    </div>
                 </div>
                 <?php if ($tour_extra['desc']) { ?>
                 <div class="tf-tour-extra-details tf-mt-8">
