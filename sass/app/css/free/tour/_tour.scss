@@ -611,6 +611,13 @@ div#tf-contact-info {
     font-size: 18px;
     margin-top: 30px;
 }
+
+// UNFOLD Compatibily
+#commentform label{
+    position: static !important;
+    display: inline-block !important;
+}
+
 @media only screen and (max-width: 1200px) {
     .tf-tour-booking-wrap {
         width: 95%;

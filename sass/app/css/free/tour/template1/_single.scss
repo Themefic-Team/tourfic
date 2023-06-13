@@ -686,10 +686,10 @@
     }
     .tf-faq-single-inner{
         .tf-faq-content{
-            padding: 0px 30px 30px 30px;
+            padding: 0px 24px 24px 24px;
         }
         .tf-faq-collaps{
-            padding: $tf-space-30;
+            padding: 24px;
             &:hover{
                 cursor: pointer;
             }
@@ -705,9 +705,9 @@
         h4{
             line-height: 1.4;
         }
-        @media #{$tfmax767}{
-            padding: $tf-space-24;
-        }
+        // @media #{$tfmax767}{
+        //     padding: $tf-space-24;
+        // }
     }
 }
 
@@ -904,11 +904,12 @@
                     display: initial;
                     > label{
                         font-family: inherit;
-                        font-size: 16px;
-                        font-weight: 400;
-                        line-height: 1.6;
+                        font-size: 16px !important;
+                        font-weight: 400 !important;
+                        line-height: 1.6 !important;
                         color: #686E7A;
                         margin: 0px;
+                        text-transform: capitalize !important;
                     }
                     .ratings-container{
                         margin-top: 8px;

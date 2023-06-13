@@ -107,6 +107,10 @@
                                 margin-right: 20px;
                                 border-radius: 4px;
                                 position: relative;
+                                @media #{$tfmax767}{
+                                    width: 100% !important;
+                                    margin-bottom: 10px;
+                                }
                                 img{
                                     border-radius: 4px;
                                 }
@@ -125,6 +129,12 @@
                                 
                             }
                             .tf-features-infos{
+                                @media #{$tfmax991}{
+                                    width: 60% !important;
+                                }
+                                @media #{$tfmax767}{
+                                    width: 100% !important;
+                                }
                                 .tf-room-type{
                                     h3{
                                         font-size: 25px;
@@ -372,6 +382,11 @@
     }
     .tf-hotel-details-info{
         padding-right: 25px;
+        @media #{$tfmax767}{
+            padding-right: 10px;
+            padding-left: 10px !important;
+            margin: 0 !important;
+        }
         .tf-template-1.tf-room-adv-info{
             ul{
                 margin: 0;

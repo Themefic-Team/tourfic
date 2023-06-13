@@ -253,6 +253,9 @@
         border-radius: 4px;
         padding: 30px;
         cursor: auto;
+        @media #{$tfmax767}{
+            height: 400px;
+        }
     }
 }
 .tf-hotel-room-title {
@@ -895,6 +898,9 @@
             img {
                 height: 350px;
                 object-fit: contain;
+                @media #{$tfmax767}{
+                    object-fit: cover;
+                }
             }
         }
     }

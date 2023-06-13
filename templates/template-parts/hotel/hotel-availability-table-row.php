@@ -153,8 +153,8 @@ if( $tf_hotel_selected_template_check == "design-1" ){
             <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
                 
                 <div class="room-deposit-wrap">
-                    <input type="checkbox" id="tf-make-deposit" name="make_deposit" value="<?php echo $room_id ?>">
-                    <label for="tf-make-deposit"><?php _e("I'll make a Partial Payment", "tourfic") ?></label><br>
+                    <input type="checkbox" id="tf-make-deposit<?php echo $room_id ?>" name="make_deposit" value="<?php echo $room_id ?>">
+                    <label for="tf-make-deposit<?php echo $room_id ?>"><?php _e("I'll make a Partial Payment", "tourfic") ?></label><br>
                 </div>
 	        <?php } ?>
 

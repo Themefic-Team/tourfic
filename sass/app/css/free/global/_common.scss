@@ -363,6 +363,9 @@ a.tf_button.btn-styled {
 .slick-initialized {
     .slick-slide {
         display: block;
+        @media #{$tfmax767}{
+            margin: 0px !important;
+        }
     }
 }
 .tf_form-row {
@@ -675,10 +678,10 @@ h3.tf-sidebar-widget_title {
             label {
                 color: #333;
                 font-style: normal;
-                font-weight: 500;
-                font-size: 16px;
-                line-height: 1;
-                text-transform: capitalize;
+                font-weight: 500 !important;
+                font-size: 16px !important;
+                line-height: 1 !important;
+                text-transform: capitalize !important;
             }
         }
     }
