@@ -58,8 +58,8 @@ table.tf-table {
 
 // Buttons
 .tf-btn-normal{
-    color: $color-theme;
-    background-color: #fff;
+    color: $color-theme !important;
+    background-color: #fff !important;
     padding: 12px 24px;
     text-decoration: none;
     border-radius: $tf-brds-default;
@@ -68,7 +68,7 @@ table.tf-table {
     text-align: center;
     transition: all .6s ease;
     font-family: inherit;
-    border: 0px;
+    border: 0px !important;
     cursor: pointer;
     &:hover{
         background: $color-hover-normal;
@@ -83,12 +83,12 @@ table.tf-table {
     }
 }
 .btn-primary{
-    background-color: $color-theme;
-    color: #fff;
+    background-color: $color-theme !important;
+    color: #fff !important;
 }
 .btn-secondary{
-    background-color: $color-theme-light;
-    color: $color-black;
+    background-color: $color-theme-light !important;
+    color: $color-black !important;
 }
 .tf-list {
     list-style: none;
@@ -114,13 +114,14 @@ table.tf-table {
         left: 18px;
     }
     .tf-field {
-        border: none;
+        border: none !important;
         padding: 15px 40px !important;
-        width: 100%;
-        background-color: #F3F7FA;
-        border-radius: 5px;
-        font-size: 14px;
-        color: $color-primary;
+        width: 100% !important;
+        background-color: #F3F7FA !important;
+        border-radius: 5px !important;
+        font-size: 14px !important;
+        margin: 0px !important;
+        color: $color-primary !important;
         font-family: inherit;
         background-image: none;
         -moz-appearance: auto !important;

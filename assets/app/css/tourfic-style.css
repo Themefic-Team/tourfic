@@ -392,17 +392,17 @@ h3.section-heading {
 }
 
 .btn-styled {
-  border: 1px solid #003162;
-  border-radius: 4px;
+  border: 1px solid #003162 !important;
+  border-radius: 4px !important;
   overflow: hidden;
   position: relative;
-  color: #fff;
+  color: #fff !important;
   cursor: pointer;
   position: relative;
   text-decoration: none;
-  background: #003162;
-  width: 100%;
-  padding: 10px 18px;
+  background: #003162 !important;
+  width: 100% !important;
+  padding: 10px 18px !important;
 }
 .btn-styled span {
   z-index: 20;
@@ -574,12 +574,13 @@ a.tf_button.btn-styled:focus {
 }
 
 .tf_form-inner input[type=text] {
-  width: 100%;
-  background: transparent;
-  border: 0;
+  width: 100% !important;
+  background: transparent !important;
+  border: 0 !important;
   box-shadow: none;
   height: 45px;
-  font-size: inherit;
+  font-size: inherit !important;
+  margin: 0px !important;
 }
 .tf_form-inner input[type=text]:focus {
   background: transparent;
@@ -587,12 +588,13 @@ a.tf_button.btn-styled:focus {
   outline: 0;
 }
 .tf_form-inner select {
-  width: 100%;
-  background: transparent;
-  border: 0;
+  width: 100% !important;
+  background: transparent !important;
+  border: 0 !important;
   box-shadow: none;
   height: 45px;
-  font-size: inherit;
+  font-size: inherit !important;
+  margin: 0px !important;
 }
 .tf_form-inner select:focus {
   background: transparent;
@@ -616,10 +618,10 @@ ul.tf-sidebar-checkbox label {
 }
 
 .tf_booking-widget {
-  background: #FA5535;
+  background: #FA5535 !important;
   background: linear-gradient(to bottom, #FD6143 0, #FA5535 100%);
   border-color: #FA5535;
-  padding: 20px;
+  padding: 20px !important;
   border-radius: 4px;
   font-size: 14px;
 }
@@ -754,14 +756,14 @@ h3.tf-sidebar-widget_title {
   width: 125px;
 }
 .acr-select input[type=number] {
-  width: 50px;
-  padding: 0;
-  margin: 0;
-  border: 0;
+  width: 50px !important;
+  padding: 0px !important;
+  margin: 0px !important;
+  border: 0px !important;
   box-shadow: none;
-  background: transparent;
+  background: transparent !important;
   text-align: center;
-  -moz-appearance: textfield;
+  -moz-appearance: textfield !important;
 }
 .acr-select input[type=number]:focus {
   outline: 0;
@@ -1832,6 +1834,7 @@ a.page-numbers {
 
 .tf-archive-desc {
   margin: 0;
+  padding: 0;
 }
 .tf-archive-desc li {
   display: inline-block;
@@ -1967,6 +1970,7 @@ a.page-numbers {
   background: #fff;
   border-radius: 10px;
   margin-bottom: 20px;
+  padding: 0px !important;
 }
 .tf_widget .tf-hotel-result-price-range,
 .tf_widget .tf-tour-result-price-range {
@@ -2011,7 +2015,7 @@ a.page-numbers {
   margin-bottom: 0px !important;
 }
 .tf_widget .al-range-slider__input.js-al-range-slider__input {
-  display: none;
+  display: none !important;
 }
 .tf_widget .tf-widget-title {
   display: flex;
@@ -2041,7 +2045,11 @@ a.page-numbers {
 .tf_widget .filter-item.active {
   background-color: #F5F8FF;
 }
-.tf_widget li.filter-item {
+.tf_widget ul {
+  margin: 0;
+  padding: 0;
+}
+.tf_widget ul li.filter-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2078,6 +2086,7 @@ a.page-numbers {
   width: 100%;
   display: inline-block;
   padding-left: 25px;
+  font-weight: 400 !important;
 }
 .filter-item .checkmark, .tf-room-checkbox .checkmark {
   position: absolute;
@@ -2090,7 +2099,7 @@ a.page-numbers {
   border: 1px solid #D2D2D6;
 }
 .filter-item input[type=checkbox], .tf-room-checkbox input[type=checkbox] {
-  display: none;
+  display: none !important;
 }
 .filter-item label:hover input ~ .checkmark, .tf-room-checkbox label:hover input ~ .checkmark {
   background-color: #ccc;
@@ -2899,8 +2908,8 @@ table.tf-table tr:last-child {
 }
 
 .tf-btn-normal {
-  color: #0E3DD8;
-  background-color: #fff;
+  color: #0E3DD8 !important;
+  background-color: #fff !important;
   padding: 12px 24px;
   text-decoration: none;
   border-radius: 5px;
@@ -2909,7 +2918,7 @@ table.tf-table tr:last-child {
   text-align: center;
   transition: all 0.6s ease;
   font-family: inherit;
-  border: 0px;
+  border: 0px !important;
   cursor: pointer;
 }
 .tf-btn-normal:hover {
@@ -2925,13 +2934,13 @@ table.tf-table tr:last-child {
 }
 
 .btn-primary {
-  background-color: #0E3DD8;
-  color: #fff;
+  background-color: #0E3DD8 !important;
+  color: #fff !important;
 }
 
 .btn-secondary {
-  background-color: #E3E7F2;
-  color: #060D1C;
+  background-color: #E3E7F2 !important;
+  color: #060D1C !important;
 }
 
 .tf-list {
@@ -2958,13 +2967,14 @@ table.tf-table tr:last-child {
   left: 18px;
 }
 .tf-field-group .tf-field {
-  border: none;
+  border: none !important;
   padding: 15px 40px !important;
-  width: 100%;
-  background-color: #F3F7FA;
-  border-radius: 5px;
-  font-size: 14px;
-  color: #686E7A;
+  width: 100% !important;
+  background-color: #F3F7FA !important;
+  border-radius: 5px !important;
+  font-size: 14px !important;
+  margin: 0px !important;
+  color: #686E7A !important;
   font-family: inherit;
   background-image: none;
   -moz-appearance: auto !important;
@@ -3482,6 +3492,7 @@ a.slick-slide-item-link {
   text-transform: uppercase;
   text-align: center;
   font-size: 1rem;
+  z-index: 9;
 }
 
 /* top left*/
@@ -3931,6 +3942,7 @@ div#tf-contact-info {
   display: flex;
   align-items: center;
   gap: 15px;
+  margin: 0 !important;
 }
 .tf-tour-booking-wrap .tf_selectperson-wrap {
   color: #152B47;
@@ -6085,7 +6097,7 @@ div#tf-contact-info {
   margin-bottom: 0px !important;
 }
 .tf-archive-design-1 .tf-archive-right .tf_widget .al-range-slider__input.js-al-range-slider__input {
-  display: none;
+  display: none !important;
 }
 .tf-archive-design-1 .tf-archive-right #tf__booking_sidebar {
   padding: 30px;
@@ -6100,6 +6112,7 @@ div#tf-contact-info {
   border-radius: 0px;
   margin-bottom: 26px;
   border-bottom: 1px solid #E3E6F0;
+  padding: 0px !important;
 }
 .tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-widget-title {
   background-color: inherit;
@@ -6135,6 +6148,7 @@ div#tf-contact-info {
   padding-left: 32px;
   line-height: 1.3;
   font-size: 16px;
+  font-weight: 400;
 }
 .tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-filter ul li label input {
   display: none;

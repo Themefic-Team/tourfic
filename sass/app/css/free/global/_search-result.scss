@@ -198,7 +198,7 @@ a.page-numbers {
     }
 
     margin: 0;
-
+    padding: 0;
     i {
         color: #549501;
         font-size: 15px;
@@ -349,6 +349,7 @@ a.page-numbers {
     background: #fff;
     border-radius: 10px;
     margin-bottom: 20px;
+    padding: 0px !important;
     .tf-hotel-result-price-range,
     .tf-tour-result-price-range{
         margin-top: 20px;
@@ -394,7 +395,7 @@ a.page-numbers {
         margin-bottom: 0px !important;
     }
     .al-range-slider__input.js-al-range-slider__input {
-        display: none;
+        display: none !important;
     }
     
     .tf-widget-title {
@@ -429,15 +430,18 @@ a.page-numbers {
     .filter-item.active {
         background-color: #F5F8FF;
     }
+    ul{
+        margin: 0;
+        padding: 0;
+        li.filter-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin: 5px;
 
-    li.filter-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 6px 10px;
-        border-radius: 4px;
-        margin: 5px;
-
+        }
     }
 
 
@@ -471,6 +475,7 @@ a.page-numbers {
         width: 100%;
         display: inline-block;
         padding-left: 25px;
+        font-weight: 400 !important;
     }
     .checkmark {
         position: absolute;
@@ -484,7 +489,7 @@ a.page-numbers {
     }
 
     input[type=checkbox] {
-        display: none;
+        display: none !important;
     }
 
     label:hover input~.checkmark {

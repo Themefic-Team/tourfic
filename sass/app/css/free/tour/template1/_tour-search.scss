@@ -434,7 +434,7 @@ i {
                 margin-bottom: 0px !important;
             }
             .al-range-slider__input.js-al-range-slider__input {
-                display: none;
+                display: none !important;
             }
         }
         #tf__booking_sidebar{
@@ -449,6 +449,7 @@ i {
                 border-radius: 0px;
                 margin-bottom: 26px;
                 border-bottom: 1px solid #E3E6F0;
+                padding: 0px !important;
                 .tf-widget-title{
                     background-color: inherit;
                     border: 0px solid;
@@ -480,6 +481,7 @@ i {
                                 padding-left: 32px;
                                 line-height: 1.3;
                                 font-size: 16px;
+                                font-weight: 400;
                                 input{
                                     display: none;
                                 }
