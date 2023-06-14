@@ -3239,7 +3239,7 @@ table.tf-table tr:last-child {
   min-width: 100%;
   top: 100%;
   transform: translateY(8px);
-  z-index: 200;
+  z-index: 9999;
   left: auto;
   right: 0;
 }
@@ -5117,7 +5117,6 @@ div#tf-contact-info {
 }
 .tf-highlights-wrapper .highlights-list li {
   margin-top: 12px;
-  list-style: none;
   line-height: 1.3;
 }
 .tf-highlights-wrapper .highlights-list li i {
@@ -5566,8 +5565,8 @@ div#tf-contact-info {
   border-bottom: 1px solid #EBF0F4;
 }
 .tf-tour-details-right .tf-booking-price p {
-  font-size: 30px;
-  font-weight: 500;
+  font-size: 30px !important;
+  font-weight: 500 !important;
   color: #060D1C;
 }
 .tf-tour-details-right .tf-booking-price p span {
