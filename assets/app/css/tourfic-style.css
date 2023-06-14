@@ -5195,6 +5195,50 @@ div#tf-contact-info {
 .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box img {
   width: 100%;
 }
+.tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+.tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a {
+  width: 20%;
+  display: inline-block;
+  float: left;
+  display: none;
+  position: relative;
+}
+.tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a img {
+  height: 100%;
+  border-radius: 5px;
+}
+.tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a:nth-child(1), .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a:nth-child(2), .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a:nth-child(3), .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a:nth-child(4), .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a:nth-child(5) {
+  display: block;
+}
+.tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a.tf-gallery-more {
+  position: relative;
+}
+.tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a.tf-gallery-more::before {
+  content: "View More → ";
+  position: absolute;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.6117647059);
+  font-size: 16px;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a.tf-gallery-more::before {
+    text-align: center;
+    font-size: 12px;
+  }
+}
 .tf-itinerary-wrapper .tf-single-itinerary-item:first-child {
   padding-top: 0px;
 }
