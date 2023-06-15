@@ -102,6 +102,8 @@
             display: flex;
         }
 
+        select,
+        textarea,
         input {
             outline: none;
             background: #F2F4F5;
@@ -109,11 +111,15 @@
             box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
             border-radius: 8px;
             height: 50px;
-            line-height: 34px;
+            line-height: 1;
             vertical-align: middle;
             padding: 10px 14px;
             margin: 5px 0 10px;
             width: 100%;
+        }
+
+        textarea{
+            height: 150px;
         }
 
         input[type="radio"] {
@@ -122,6 +128,18 @@
             height: 19px;
             line-height: 19px;
             border-radius: 50%;
+            border: 1px solid #c8e2fc;
+            outline: none;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"] {
+            width: 19px;
+            min-width: 19px;
+            height: 19px;
+            line-height: 19px;
+            border-radius: 2px;
             border: 1px solid #c8e2fc;
             outline: none;
             margin: 0;
