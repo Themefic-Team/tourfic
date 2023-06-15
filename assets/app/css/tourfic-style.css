@@ -6245,6 +6245,8 @@ div#tf-contact-info {
 }
 .tf-hotel-design-1 #tf-single-hotel-avail .tf_booking-dates #check-in-out-date {
   background-color: #F3F7FA !important;
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
 }
 .tf-hotel-design-1 #tf-single-hotel-avail .tf_booking-dates #tf-required {
   text-align: center;
