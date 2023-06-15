@@ -55,7 +55,12 @@
         */
         $(document).on('click', '#tf-vendor-register .tf-save-user', function (e) {
             e.preventDefault();
-            var tf_reg_nonce = $("input[name=tf_reg_nonce]").val();
+
+            let form = $(this).closest('#tf-vendor-register');
+            let formData = new FormData(form[0]);
+            formData.append('action', 'tf_vendor_registration');
+
+            /*var tf_reg_nonce = $("input[name=tf_reg_nonce]").val();
             var user = $("input[name=tf_username]").val();
             var first_name = $("input[name=tf_first_name]").val();
             var last_name = $("input[name=tf_last_name]").val();
@@ -79,17 +84,16 @@
                 bio: bio,
                 vendor_image: vendor_image,
                 vendor_status: vendor_status.length,
-            };
+            };*/
             $("#tf-report-loader").addClass('show');
 
             $.ajax({
-                type: 'post',
                 url: tf_vendor_params.ajax_url,
-                data: data,
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
                 beforeSend: function (response) {
-                    //alert(response);
-                },
-                complete: function (response) {
                     //alert(response);
                 },
                 success: function (response) {
@@ -233,10 +237,10 @@
         * @author Foysal
         */
         $('body').on('click', '.tf-cover-pic-edit', function (e) {
-            openMediaUploader('tf_cover_photo', 'full', '.tf-cover-pic');
+            openMediaUploader('.tf_cover_photo', 'full', '.tf-cover-pic');
         });
         $('body').on('click', '.tf-cover-pic-delete', function (e) {
-            removeImage('tf_cover_photo', '.tf-cover-pic');
+            removeImage('.tf_cover_photo', '.tf-cover-pic');
         });
 
         /*
@@ -244,10 +248,10 @@
         * @author Foysal
         */
         $('body').on('click', '.tf-profile-pic-edit', function (e) {
-            openMediaUploader('tf_user_image', 'thumbnail', '.tf-profile-image');
+            openMediaUploader('.tf_user_image', 'thumbnail', '.tf-profile-image');
         });
         $('body').on('click', '.tf-profile-pic-delete', function (e) {
-            removeImage('tf_user_image', '.tf-profile-image');
+            removeImage('.tf_user_image', '.tf-profile-image');
         });
 
         /*
