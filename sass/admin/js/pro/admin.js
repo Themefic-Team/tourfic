@@ -166,6 +166,37 @@
             }
         });
     });
+
+    //tf_import_tours_btn on click send ajax form data
+    $(document).on('submit', '#tf-import-tours', function(e){
+        e.preventDefault();
+        let formData = $(this).serializeArray();
+        //formData.append('action', 'tf_import_tours');
+        //formData.append('nonce', tf_pro_params.nonce);
+        console.log(tf_pro_params.ajax_url);
+        $.ajax({
+            type: "post",
+            url: tf_pro_params.ajax_url,
+            data: {
+                action: "tf_import_tours",
+                //nonce: tf_pro_params.nonce,
+                //formData: formData,
+            },
+            contentType: false,
+            processData: false,
+            beforeSend: function(){
+                $(this).html('Importing...');
+            },
+            success: function(response){
+                console.log(response);
+                $(this).html('imported');
+                //location.reload();
+            },
+            complete: function(){
+                $(this).html('Imported');
+            }
+        });
+    });
     
 
 })(jQuery);
