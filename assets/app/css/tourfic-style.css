@@ -6611,6 +6611,8 @@ div#tf-contact-info {
     padding-right: 10px;
     padding-left: 10px !important;
     margin: 0 !important;
+    overflow: auto !important;
+    max-height: none !important;
   }
 }
 .tf-hotel-design-1-popup .tf-hotel-details-info .tf-template-1.tf-room-adv-info ul {
