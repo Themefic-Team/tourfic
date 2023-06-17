@@ -158,8 +158,6 @@
                 //clean up
                 document.body.removeChild(link);
                 $('.tf-export-hotels-btn').html('Export');
-
-                console.log(response);
             },
             complete: function(){
                 $('.tf-export-hotels-btn').html('Export');
@@ -167,36 +165,35 @@
         });
     });
 
-    //tf_import_tours_btn on click send ajax form data
-    $(document).on('submit', '#tf-import-tours', function(e){
+    /**
+     * Import Tours ajax
+     * 
+     * @author Abu Hena
+     * @since 2.9.9
+     */
+    $(document).on('click', '.tf_import_tours_btn', function(e){
         e.preventDefault();
-        let formData = $(this).serializeArray();
-        //formData.append('action', 'tf_import_tours');
-        //formData.append('nonce', tf_pro_params.nonce);
-        console.log(tf_pro_params.ajax_url);
+        let formData = $('#tf-import-tours').serializeArray();
+        let tour_csv_file_url = $('#tf-import-tours').find('input[name="tour_csv_file_url"]').val();
+        let import_csv_nonce = $('#tf-import-tours').find('input[name="import_csv_nonce"]').val();
+        
         $.ajax({
-            type: "post",
-            url: tf_pro_params.ajax_url,
-            data: {
-                action: "tf_import_tours",
-                //nonce: tf_pro_params.nonce,
-                //formData: formData,
+            type: 'post',
+            url: ajaxurl,
+            data:{
+                action: 'tf_import_tours',
+                form_data: formData,
+                tour_csv_file_url: tour_csv_file_url,
+                import_csv_nonce: import_csv_nonce,
             },
-            contentType: false,
-            processData: false,
             beforeSend: function(){
-                $(this).html('Importing...');
+                $('.tf_import_tours_btn').html('Importing...');
             },
             success: function(response){
                 console.log(response);
-                $(this).html('imported');
-                //location.reload();
             },
-            complete: function(){
-                $(this).html('Imported');
-            }
         });
+
     });
-    
 
 })(jQuery);
