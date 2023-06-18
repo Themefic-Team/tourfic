@@ -93,3 +93,70 @@ a.tf-export-btn {
   margin-top: 10px !important;
   margin-left: 5px !important;
 }
+.tf-import-section-wrapper {
+  max-width: 700px;
+  margin: 50px auto;
+  background: #fff;
+  color: #828C99;
+    form {
+      overflow: hidden;
+    }
+}
+
+ol.tf-progress-steps {
+  list-style: none;
+  display: inline-flex;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+    li {
+      border-top: 2px solid #003c7a7d;
+      padding-top: 15px;
+      width: 25%;
+      position: relative;
+      text-align: center;
+    }
+    li.active{      
+      border-top: 2px solid #003C7A;
+    }
+    li:before {
+      content: "";
+      border: 2px solid #002043;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      margin-left: -10px;
+      margin-bottom: 22px;
+      background: #fff;
+    }
+    li.tf-step.active:before {
+      width: 20px;
+      height: 20px;
+      padding: 0px;
+      content: "\2713";
+      color: #002043;
+      font-weight: bold;
+  }
+}
+
+
+.upload-form {
+  padding: 20px;
+}
+
+table.tf-table-form {
+  padding-top: 20px;
+}
+
+.tf-table-form th {
+  width: 40%;
+  padding-right: 28px;
+  vertical-align: top;
+  line-height: 1.7;
+  text-align: left;
+  padding: 25px 20px 28px 0;
+  font-weight: 600;
+}
