@@ -851,7 +851,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
                     $("#check-in-out-date").flatpickr({  
                         enableTime: false,
-                        dateFormat: "Y/m/d",                               
+                        dateFormat: "Y/m/d",                        
                         <?php
                         // Flatpickt locale for translation
                         tf_flatpickr_locale();
@@ -873,6 +873,7 @@ function tf_single_tour_booking_form( $post_id ) {
                     <?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
 
                         minDate: "today",
+                        disableMobile: "true",   
 
                         <?php if ($custom_avail && $custom_avail == true){ ?>
 
@@ -1155,7 +1156,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
                             $("#check-in-out-date").flatpickr({  
                                 enableTime: false,
-                                dateFormat: "Y/m/d",                               
+                                dateFormat: "Y/m/d",                           
                                 <?php
                                 // Flatpickt locale for translation
                                 tf_flatpickr_locale();
@@ -1177,6 +1178,7 @@ function tf_single_tour_booking_form( $post_id ) {
                             <?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
 
                                 minDate: "today",
+                                disableMobile: "true",
 
                                 <?php if ($custom_avail && $custom_avail == true){ ?>
 
@@ -1356,6 +1358,7 @@ function tf_single_tour_booking_form( $post_id ) {
             <?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
 
                 minDate: "today",
+                disableMobile: "true",
 
                 <?php if ($custom_avail && $custom_avail == true){ ?>
 

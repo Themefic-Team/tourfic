@@ -4677,32 +4677,43 @@ div#tf-contact-info {
   color: #686E7A;
 }
 
-.tf-single-details-wrapper .tf-tour-details-left {
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-single-details-wrapper .tf-single-details-inner {
+    justify-content: space-between;
+  }
+}
+.tf-single-details-wrapper .tf-single-details-inner .tf-tour-details-left {
   flex-basis: 68%;
+  width: 68%;
 }
 @media only screen and (min-width: 767.99px) and (max-width: 991px) {
-  .tf-single-details-wrapper .tf-tour-details-left {
+  .tf-single-details-wrapper .tf-single-details-inner .tf-tour-details-left {
     flex-basis: 58%;
+    width: 58%;
   }
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-single-details-wrapper .tf-tour-details-left {
+  .tf-single-details-wrapper .tf-single-details-inner .tf-tour-details-left {
     flex-basis: 100%;
+    width: 58%;
   }
 }
-.tf-single-details-wrapper .tf-tour-details-right {
+.tf-single-details-wrapper .tf-single-details-inner .tf-tour-details-right {
   flex-basis: 32%;
+  width: 32%;
 }
 @media only screen and (min-width: 767.99px) and (max-width: 991px) {
-  .tf-single-details-wrapper .tf-tour-details-right {
+  .tf-single-details-wrapper .tf-single-details-inner .tf-tour-details-right {
     flex-basis: 40%;
     padding-left: 12px;
+    width: 40%;
   }
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-single-details-wrapper .tf-tour-details-right {
+  .tf-single-details-wrapper .tf-single-details-inner .tf-tour-details-right {
     flex-basis: 100%;
-    margin-top: 0px;
+    width: 58%;
+    margin-top: 30px;
   }
 }
 
@@ -5538,6 +5549,9 @@ div#tf-contact-info {
   color: #686E7A;
   font-size: 15px;
 }
+.tf-review-wrapper .tf-review-form .tf-review-form-container .review-desc {
+  display: flex;
+}
 .tf-review-wrapper .tf-review-form .tf-review-form-container .review-desc textarea {
   padding: 15px 20px;
   border: 1px solid #CDCFD0;
@@ -5777,6 +5791,11 @@ div#tf-contact-info {
   width: 100% !important;
   color: red !important;
   display: block;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-template-global {
+    padding-top: 0px;
+  }
 }
 
 .tf-archive-head .tf-search-result {
