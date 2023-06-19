@@ -950,6 +950,7 @@
     .tf-review-form{
         .tf-review-form-container{
             background: transparent !important;
+            min-width: auto !important;
             .tf-rating-wrapper{
                 column-gap: 40px;
                 flex-wrap: wrap;

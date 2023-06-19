@@ -5523,6 +5523,7 @@ div#tf-contact-info {
 }
 .tf-review-wrapper .tf-review-form .tf-review-form-container {
   background: transparent !important;
+  min-width: auto !important;
 }
 .tf-review-wrapper .tf-review-form .tf-review-form-container .tf-rating-wrapper {
   column-gap: 40px;
