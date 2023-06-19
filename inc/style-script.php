@@ -97,7 +97,17 @@ if( !function_exists( 'tf_custom_css' ) ){
 			$output .= '
 			.tf-container-inner,
 			.tf-main-wrapper,
-			.tf-container{
+			.tf-container,
+			#tour_room_details_qv,
+			#tf-hotel-services,
+			#tf-hotel-services span,
+			#tf-hotel-services select,
+			#tour-deposit,
+			#tour-deposit .tf_button_group button,
+			#tf-hotel-services .tf_button_group button,
+			#tf-ask-question button,
+			#tf-ask-question input,
+			#tf-ask-question textarea{
 				font-family: '.$tf_global_font_family.'
 			}';
 		}
@@ -105,7 +115,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			$output .= '
 			.tf-container-inner p,
 			.tf-main-wrapper p,
-			.tf-container p{
+			.tf-container p,
+			#tour_room_details_qv p{
 				color: '.$tf_template1_p_global_reg.'
 			}';
 		}
@@ -121,9 +132,12 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-container-inner h3,
 			.tf-main-wrapper h3,
 			.tf-container h3,
+			#tour_room_details_qv h3,
 			.tf-container-inner h4,
 			.tf-main-wrapper h4,
+			#tour_room_details_qv h4,
 			.tf-container h4,
+			#tf-ask-question h4,
 			.tf-container-inner h5,
 			.tf-main-wrapper h5,
 			.tf-container h5,
@@ -138,7 +152,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( !empty($tf_global_font_p) || !empty($tf_global_font_weight_p) || !empty($tf_global_font_style_p) || !empty($tf_global_line_height_p) ){
 			$output .= '
 			.tf-container-inner p,
-			.tf-main-wrapper p{
+			.tf-main-wrapper p,
+			#tour_room_details_qv p{
 				font-weight: '.$tf_global_font_weight_p.' !important;
 				font-size: '.$tf_global_font_p.'px !important;
 				font-style: '.$tf_global_font_style_p.' !important;
@@ -174,7 +189,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( !empty($tf_global_font_h3) || !empty($tf_global_font_weight_h3) || !empty($tf_global_font_style_h3) || !empty($tf_global_line_height_h3) ){
 			$output .= '
 			.tf-container-inner h3,
-			.tf-main-wrapper h3{
+			.tf-main-wrapper h3,
+			#tour_room_details_qv h3{
 				font-weight: '.$tf_global_font_weight_h3.' !important;
 				font-size: '.$tf_global_font_h3.'px !important;
 				font-style: '.$tf_global_font_style_h3.' !important;
@@ -186,7 +202,9 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( !empty($tf_global_font_h4) || !empty($tf_global_font_weight_h4) || !empty($tf_global_font_style_h4) || !empty($tf_global_line_height_h4) ){
 			$output .= '
 			.tf-container-inner h4,
-			.tf-main-wrapper h4{
+			.tf-main-wrapper h4,
+			#tf-ask-question h4,
+			#tour_room_details_qv h4{
 				font-weight: '.$tf_global_font_weight_h4.' !important;
 				font-size: '.$tf_global_font_h4.'px !important;
 				font-style: '.$tf_global_font_style_h4.' !important;

@@ -1666,7 +1666,7 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
             <?php tf_archive_single_rating();?>
             
             <div class="tf-details tf-mt-16">
-                <p><?php echo substr(wp_strip_all_tags(get_the_content()), 0, 160). '...'; ?></p>
+                <p><?php echo substr(wp_strip_all_tags(get_the_content()), 0, 100). '...'; ?></p>
             </div>
             <div class="tf-post-footer tf-flex tf-flex-align-center tf-flex-space-bttn tf-mt-16">
                 <div class="tf-pricing">

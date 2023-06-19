@@ -2676,6 +2676,7 @@ span.close-aq {
   position: relative;
   margin: 10px 0;
   overflow: hidden;
+  display: flex;
 }
 .tf-aq-field input {
   width: 100%;
@@ -5967,7 +5968,7 @@ div#tf-contact-info {
   padding: 6px 10px;
   border-radius: 5px;
   margin: 10px 10px 0px 0px;
-  font-size: 15px;
+  font-size: 13px;
 }
 .tf-search-results-list .tf-item-card .tf-item-details .tf-archive-features ul li i {
   margin-right: 5px;

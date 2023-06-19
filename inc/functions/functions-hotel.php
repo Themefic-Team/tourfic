@@ -1838,7 +1838,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
 								$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
 							}
-							if( $tfkey < 6 ){
+							if( $tfkey < 4 ){
 							?>
 							<li class="tf-feature-lists">
 								<?php
@@ -1848,12 +1848,19 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 								<?php echo $feature->name; ?>
 							</li>
 						<?php }} ?>
+						<?php 
+						if(!empty($features)){
+							if(count($features) > 4){
+								echo '<span>More....</span>';
+							}
+						}
+						?>
 					</ul>
 				</div>
 			<?php } ?>
             
             <div class="tf-details tf-mt-16">
-                <p><?php echo substr(wp_strip_all_tags(get_the_content()), 0, 160). '...'; ?></p>
+                <p><?php echo substr(wp_strip_all_tags(get_the_content()), 0, 100). '...'; ?></p>
             </div>
             <div class="tf-post-footer tf-flex tf-flex-align-center tf-flex-space-bttn tf-mt-16">
                 <div class="tf-pricing">
