@@ -120,6 +120,13 @@ if ( file_exists( TF_INC_PATH . 'functions/widgets.php' ) ) {
 	tf_file_missing( TF_INC_PATH . 'functions/widgets.php' );
 }
 
+# Google Fonts
+if ( file_exists( TF_INC_PATH . 'functions/functions-fonts.php' ) ) {
+	require_once TF_INC_PATH . 'functions/functions-fonts.php';
+} else {
+	tf_file_missing(TF_INC_PATH . 'functions/functions-fonts.php');
+}
+
 /**
  * Elementor Widgets
  *
@@ -1827,57 +1834,6 @@ if( ! function_exists( 'tf_hotel_gallery_video' ) ){
 		}
 	}
 }
-
-if ( ! function_exists( 'tourfic_google_fonts_list' ) ) {
-	function tourfic_google_fonts_list(){
-		$google_api_key = !empty( tfopt('global-fonts-api') ) ? tfopt('global-fonts-api') : '';
-		if(!empty($google_api_key)){
-			$tf_google_url = 'https://www.googleapis.com/webfonts/v1/webfonts?key='.$google_api_key;
-		}else{
-			$tf_google_url = 'https://www.googleapis.com/webfonts/v1/webfonts?key='; 
-		}
-		
-		$tf_response_status = wp_remote_get( $tf_google_url );
-		$status_check = json_decode($tf_response_status['body'],true);
-		if( !empty($status_check["error"]) ){
-			$fonts_array = array(
-				'Default' => 'Default',
-				'Jost' => 'Jost',
-			);
-		}else{
-			$data = @file_get_contents($tf_google_url);
-			$fonts = json_decode($data, true);
-			$font_names = array();
-			foreach ($fonts['items'] as $font) {
-				$font_names[] = $font['family'];
-			}
-			$fonts_array = [];
-			foreach ($font_names as $font) {
-				$font_key = str_replace(" ", "_", $font);
-				$fonts_array[$font_key] = $font;
-			}
-		}
-		return $fonts_array;
-	}
-}
-
-function tourfic_google_fonts_url(){
-	$tf_global_font = tfopt('global-body-fonts-family') ? tfopt('global-body-fonts-family') : 'Default';
-	$tf_global_heading_font_family = tfopt('global-heading-fonts-family') ? tfopt('global-heading-fonts-family') : 'Default';
-	if($tf_global_font!="Default" && $tf_global_heading_font_family!="Default"){
-		$url = 'https://fonts.googleapis.com/css2?family='. $tf_global_font	.'&family='. $tf_global_heading_font_family .':wght@100;200;300;400;500;600;700;800;900&display=swap';
-	}else{
-		$url = "";
-	}
-	
-	return $url;
-}
-
-function tourfic_google_fonts_scriptss() {
-	wp_enqueue_style( 'tourfic-google-fonts', tourfic_google_fonts_url(), array(), '' );
-}
-add_action( 'wp_enqueue_scripts', 'tourfic_google_fonts_scriptss', 9999999 );
-
 
 if ( ! function_exists( 'tourfic_template_settings' ) ) {
 	function tourfic_template_settings(){

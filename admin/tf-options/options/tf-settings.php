@@ -1373,20 +1373,13 @@ TF_Settings::option( 'tf_settings', array(
 					'class'   => 'tf-field-class',
 				),
 				array(
-					'id'          => 'global-fonts-api',
-					'type'        => 'text',
-					'label'       => __( 'Google Fonts API Key', 'tourfic' ),
-					'subtitle'    => __( 'For all Google fonts List, ', 'tourfic' ). '<a href="https://console.cloud.google.com/apis/library/webfonts.googleapis.com" target="_blank" style="margin-left: 10px;background-color: #003162;color: #fff;border-radius: 4px;text-align: center;font-size: 13px;padding: 7px 15px;text-decoration: none;"><strong>' . __( 'Get API KEY', 'tourfic' ) . '</strong></a>',
-					'field_width' => 29,
-				),
-				array(
 					'id'          => 'global-body-fonts-family',
 					'type'        => 'select',
 					'label'       => __( 'Global Body Fonts Family', 'tourfic' ),
 					'subtitle'    => __( 'Global Body Fonts Family of Tourfic', 'tourfic' ),
 					'options'  => function_exists( 'tourfic_google_fonts_list' ) ? tourfic_google_fonts_list() : '',
 					'default' => 'Default',
-					'field_width' => 29,
+					'field_width' => 45,
 				),
 				array(
 					'id'          => 'global-heading-fonts-family',
@@ -1395,7 +1388,7 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'    => __( 'Global Heading Fonts Family of Tourfic', 'tourfic' ),
 					'options'  => function_exists( 'tourfic_google_fonts_list' ) ? tourfic_google_fonts_list() : '',
 					'default' => 'Default',
-					'field_width' => 29,
+					'field_width' => 45,
 				),
 				array(
 					'id'      => 'h1-heading',
