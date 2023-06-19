@@ -173,9 +173,10 @@
      */
     $(document).on('click', '.tf_import_tours_btn', function(e){
         e.preventDefault();
-        let formData = $('#tf-import-tours').serializeArray();
+        let formData          = $('#tf-import-tours').serializeArray();
         let tour_csv_file_url = $('#tf-import-tours').find('input[name="tour_csv_file_url"]').val();
-        let import_csv_nonce = $('#tf-import-tours').find('input[name="import_csv_nonce"]').val();
+        let import_csv_nonce  = $('#tf-import-tours').find('input[name="import_csv_nonce"]').val();
+        $('.tf-column-mapping-form').hide();
         
         $.ajax({
             type: 'post',
@@ -187,13 +188,39 @@
                 import_csv_nonce: import_csv_nonce,
             },
             beforeSend: function(){
+                $('.tf-step-1').addClass('active');
                 $('.tf_import_tours_btn').html('Importing...');
             },
             success: function(response){
-                console.log(response);
+                //get the percentage value from response
+                if( response.success ){
+                    console.log(response);
+                    let percentage = response.data.imported_percentage;
+                    console.log(percentage);
+                    $('.tf-importing-progressbar-container').show();
+                    $('.tf-importing-progressbar').css('width', percentage + '%');
+
+                    if( percentage == 100 ){
+                        $('.tf-importing-progressbar-container').hide();
+                        $('.tf_import_tours_btn').html('Import');
+                        $('.tf-step-4').addClass('active');
+                    }
+                }
+            },
+            complete: function(){
+                $('.tf_import_tours_btn').html('Import');
             },
         });
 
     });
+
+    let urlParams = new URLSearchParams(window.location.search);
+    let mapping = urlParams.get('step');
+    if( mapping == 'tour_mapping' ){
+        $('.tf-step-1').addClass('active');
+        $('.tf-step-2').addClass('active');
+    }
+
+
 
 })(jQuery);
