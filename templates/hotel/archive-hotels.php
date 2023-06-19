@@ -14,7 +14,7 @@ $tf_plugin_installed = get_option('tourfic_template_installed');
 if (!empty($tf_plugin_installed)) {
 	$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
 }else{
-	$tf_hotel_arc_selected_template = 'default';
+	$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'default';
 }
 
 if( $tf_hotel_arc_selected_template=="design-1"){

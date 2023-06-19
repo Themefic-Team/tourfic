@@ -120,11 +120,13 @@ while ( have_posts() ) : the_post();
 	$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
 	$tf_hotel_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-hotel'] : 'design-1';
 
+	$tf_hotel_selected_check = !empty($tf_hotel_single_template) ? $tf_hotel_single_template : $tf_hotel_global_template;
+
 	$tf_plugin_installed = get_option('tourfic_template_installed'); 
 	if (!empty($tf_plugin_installed)) {
-	    $tf_hotel_selected_template = !empty($tf_hotel_single_template) ? $tf_hotel_single_template : $tf_hotel_global_template;
+	    $tf_hotel_selected_template = $tf_hotel_selected_check;
 	}else{
-	    $tf_hotel_selected_template = 'default';
+	    $tf_hotel_selected_template = $tf_hotel_selected_check ? $tf_hotel_selected_check : 'default';
 	}
 
     if( $tf_hotel_selected_template == "design-1" ){

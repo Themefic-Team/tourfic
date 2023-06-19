@@ -809,11 +809,13 @@ function tf_single_tour_booking_form( $post_id ) {
     $tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
 	$tf_tour_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-tour'] : 'design-1';
 
+    $tf_tour_selected_check = !empty($tf_tour_single_template) ? $tf_tour_single_template : $tf_tour_global_template;
+
     $tf_plugin_installed = get_option('tourfic_template_installed'); 
 	if (!empty($tf_plugin_installed)) {
-	    $tf_tour_selected_template = !empty($tf_tour_single_template) ? $tf_tour_single_template : $tf_tour_global_template;
+	    $tf_tour_selected_template = $tf_tour_selected_check;
 	}else{
-	    $tf_tour_selected_template = 'default';
+	    $tf_tour_selected_template = $tf_tour_selected_check ? $tf_tour_selected_check : 'default';
 	}
 
     ob_start();
@@ -1613,7 +1615,7 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
     if (!empty($tf_plugin_installed)) {
         $tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
     }else{
-        $tf_tour_arc_selected_template = 'default';
+        $tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'default';
     }
     if( $tf_tour_arc_selected_template=="design-1"){
     ?>
