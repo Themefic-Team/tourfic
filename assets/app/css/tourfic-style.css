@@ -2330,8 +2330,8 @@ button.tf-tablinks:focus {
 }
 
 .tf_booking-widget.default-form {
-  padding: 0;
-  background: none;
+  padding: 0 !important;
+  background: none !important;
   border: none;
 }
 .tf_booking-widget.default-form .tf_form-inner {

@@ -150,8 +150,8 @@ button.tf-tablinks {
     }
 }
 .tf_booking-widget.default-form {
-    padding: 0;
-    background: none;
+    padding: 0 !important;
+    background: none !important;
     border: none;
     .tf_form-inner {
         padding: 0;
