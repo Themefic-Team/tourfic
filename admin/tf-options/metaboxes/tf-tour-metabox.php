@@ -607,7 +607,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'          => 'cont_max_capacity',
 					'type'        => 'number',
 					'label'       => __( 'Maximum Capacity', 'tourfic' ),
-					'subtitle'    => __( 'Maximum Capacity allowed to travel this tour (Adult & Child)', 'tourfic' ),
+					'subtitle'    => __( 'Maximum Capacity allowed per day to travel this tour (Adult & Child)', 'tourfic' ),
 					'dependency'  => array(
 						array( 'type', '==', 'continuous' ),
 						array( 'custom_avail', '==', 'false' ),
