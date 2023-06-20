@@ -1,4 +1,4 @@
-<img src="https://ps.w.org/tourfic/assets/banner-772x250.jpg" alt="Tourfic" width="100%"/>
+<img src="https://ps.w.org/tourfic/assets/banner-772x250.png" alt="Tourfic" width="100%"/>
 
 
 # Tourfic
