@@ -419,6 +419,8 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 * Added: Tour Search page new template
 * Added: Tour Inventory 
 * Added: Dynamic pricing in tour extra
+* Checked: WooCommerce compatibility check 
+* Checked: Elementor compatibility check 
 
 = 2.9.19 -  07 June 2023 =
 
