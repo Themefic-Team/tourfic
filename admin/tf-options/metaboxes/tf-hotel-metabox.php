@@ -9,6 +9,61 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 	'title'     => 'Hotel Settings',
 	'post_type' => 'tf_hotel',
 	'sections'  => array(
+		'general' => array(
+			'title'  => __( 'General', 'tourfic' ),
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'        => 'featured',
+					'type'      => 'switch',
+					'label'     => __( 'Featured Hotel', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false,
+				),
+				array(
+					'id'          => 'featured_text',
+					'type'        => 'text',
+					'label'       => __( 'Hotel Featured Text', 'tourfic' ),
+					'subtitle'    => __( 'Enter Featured Hotel Text', 'tourfic' ),
+					'placeholder' => __( 'Enter Featured Hotel Text', 'tourfic' ),
+					'default' => __( 'Hot Deal', 'tourfic' ),
+					'dependency'  => array( 'featured', '==', true ),
+				),
+				array(
+					'id'       => 'tf_single_hotel_layout_opt',
+					'type'     => 'select',
+					'label'    => __( 'Hotel Page Layout', 'tourfic' ),
+					'subtitle' => __( 'Select your Layout logic', 'tourfic' ),
+					'options'  => [
+						'global' => __( 'Global Settings', 'tourfic' ),
+						'single' => __( 'Single Settings', 'tourfic' ),
+					],
+					'default'  => 'global',
+				),
+				array(
+					'id'       => 'tf_single_hotel_template',
+					'type'     => 'imageselect',
+					'label'    => __( 'Single Hotel Page Layout', 'tourfic' ),
+					'multiple' 		=> true,
+					'inline'   		=> true,
+					'options'   	=> array( 
+						'design-1' 				=> array(
+							'title'			=> 'Design 1',
+							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design1-hotel.jpg",
+						),
+						'default' 			=> array(
+							'title'			=> 'Defult',
+							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-hotel.jpg",
+						),
+					),
+					'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+					'dependency'  => [
+						array( 'tf_single_hotel_layout_opt', '==', 'single' )
+					],
+				),
+			),
+		),
 		'location'         => array(
 			'title'  => __( 'Location', 'tourfic' ),
 			'icon'   => 'fa-solid fa-location-dot',
@@ -48,14 +103,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'subtitle' => __( 'Upload one or many images to create a hotel image gallery for customers. This is common gallery visible at the top part of the hotel page', 'tourfic' ),
 				),
 				array(
-					'id'        => 'featured',
-					'type'      => 'switch',
-					'label'     => __( 'Featured Hotel', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => false,
-				),
-				array(
 					'id'          => 'video',
 					'type'        => 'text',
 					'label'       => __( 'Hotel Video', 'tourfic' ),
@@ -83,6 +130,12 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 			'title'  => __( 'Room Management', 'tourfic' ),
 			'icon'   => 'fa-sharp fa-solid fa-door-open',
 			'fields' => array(
+				array(
+					'id'    => 'room-section-title',
+					'type'  => 'text',
+					'label' => __( 'Section Title', 'tourfic' ),
+					'default' => "Available Rooms"
+				),
 				array(
 					'id'           => 'room',
 					'type'         => 'repeater',
@@ -154,6 +207,13 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'type'    => 'heading',
 							'content' => __( 'Details', 'tourfic' ),
 							'class'   => 'tf-field-class',
+						),
+						array(
+							'id'      => 'room_preview_img',
+							'type'    => 'image',
+							'label'   => __( 'Room Thumbnail', 'tourfic' ),
+							'subtitle' => __( 'Upload Thumbnail for this room', 'tourfic' ),
+							'library' => 'image',
 						),
 						array(
 							'id'       => 'gallery',
@@ -392,6 +452,12 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(
 				array(
+					'id'    => 'faq-section-title',
+					'type'  => 'text',
+					'label' => __( 'Section Title', 'tourfic' ),
+					'default' => "Faq’s"
+				),
+				array(
 					'id'           => 'faq',
 					'type'         => 'repeater',
 					'label'        => __( 'Frequently Asked Questions', 'tourfic' ),
@@ -419,6 +485,12 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 			'title'  => __( 'Terms & Conditions', 'tourfic' ),
 			'icon'   => 'fa-regular fa-square-check',
 			'fields' => array(
+				array(
+					'id'    => 'tc-section-title',
+					'type'  => 'text',
+					'label' => __( 'Section Title', 'tourfic' ),
+					'default' => "Hotel Terms & Conditions"
+				),
 				array(
 					'id'    => 'tc',
 					'type'  => 'editor',
@@ -461,7 +533,65 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'notice'  => 'info',
 					'content' => __( 'These settings will overwrite global settings', 'tourfic' ),
 				),
-
+				array(
+					'id'      => 'popular-feature',
+					'type'    => 'heading',
+					'content' => __( 'Popular Features', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'    => 'popular-section-title',
+					'type'  => 'text',
+					'label' => __( 'Popular Features Section Title', 'tourfic' ),
+					'default' => "Popular Features"
+				),
+				array(
+					'id'      => 'review-sections',
+					'type'    => 'heading',
+					'content' => __( 'Review', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'    => 'review-section-title',
+					'type'  => 'text',
+					'label' => __( 'Reviews Section Title', 'tourfic' ),
+					'default' => "Average Guest Reviews"
+				),
+				array(
+					'id'      => 'enquiry-section',
+					'type'    => 'heading',
+					'content' => __( 'Enquiry', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'        => 'h-enquiry-section',
+					'type'      => 'switch',
+					'label'     => __( 'Hotel Enquiry Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true
+				),
+				array(
+					'id'    => 'h-enquiry-option-title',
+					'type'  => 'text',
+					'label' => __( 'Hotel Enquiry Title Text', 'tourfic' ),
+					'default' => "Have a question in mind",
+					'dependency' => array( 'h-enquiry-section', '==', '1' ),
+				),
+				array(
+					'id'    => 'h-enquiry-option-content',
+					'type'  => 'text',
+					'label' => __( 'Hotel Enquiry Short Text', 'tourfic' ),
+					'default' => "Looking for more info? Send a question to the property to find out more.",
+					'dependency' => array( 'h-enquiry-section', '==', '1' ),
+				),
+				array(
+					'id'    => 'h-enquiry-option-btn',
+					'type'  => 'text',
+					'label' => __( 'Hotel Enquiry Button Text', 'tourfic' ),
+					'default' => "Ask a Question",
+					'dependency' => array( 'h-enquiry-section', '==', '1' ),
+				),
 			),
 		),
 	),

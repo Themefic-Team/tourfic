@@ -150,8 +150,8 @@ button.tf-tablinks {
     }
 }
 .tf_booking-widget.default-form {
-    padding: 0;
-    background: none;
+    padding: 0 !important;
+    background: none !important;
     border: none;
     .tf_form-inner {
         padding: 0;
@@ -434,6 +434,7 @@ div#tf-destinationautocomplete-list {
         display: none;
     }
 }
+
 .tf_tf_booking-widget-wrap {
     z-index: 999;
 }
@@ -467,28 +468,33 @@ div#tf-destinationautocomplete-list {
     max-width: 428px;
     background: #fff;
     padding: 40px;
-    border-radius: 4px;
-    overflow: auto;
+    border-radius: 10px;
     transform: translateY(-50%);
-    max-height: 95%;
+    height: auto;
+    @media #{$max640}{
+        width: 90%;
+    }
 }
 span.close-aq {
     position: absolute;
-    right: 5px;
-    top: 5px;
-    width: 25px;
+    right: -15px;
+    top: -15px;
+    width: 35px;
     text-align: center;
-    height: 25px;
-    background: #e00d0d;
+    height: 35px;
+    background: #003162;
     color: #fff;
-    line-height: 20px;
     font-size: 20px;
     cursor: pointer;
+    line-height: 31px;
+    border-radius: 50%;
+    z-index: 9999;
 }
 .tf-aq-field {
     position: relative;
     margin: 10px 0;
     overflow: hidden;
+    display: flex;
     input {
         width: 100%;
     }

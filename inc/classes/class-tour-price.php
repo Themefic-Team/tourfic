@@ -124,16 +124,16 @@ if(!class_exists('Tour_Price')){
                         $child_price_array  = array_column($meta['cont_custom_date'], 'child_price');
                         $infant_price_array = array_column($meta['cont_custom_date'], 'infant_price');
                     }
-
+                    
                     # Get minimum price of adult, child, infant
-                    $min_adult_price  = min($adult_price_array);
-                    $min_child_price  = min($child_price_array);
-                    $min_infant_price = min($infant_price_array);
+                    $min_adult_price  = !empty($adult_price_array) ? min($adult_price_array) : '';
+                    $min_child_price  = !empty($child_price_array) ? min($child_price_array) : '';
+                    $min_infant_price = !empty($infant_price_array) ? min($infant_price_array) : '';
 
                     # Get maximum price of adult, child, infant
-                    $max_adult_price  = max($adult_price_array);
-                    $max_child_price  = max($child_price_array);
-                    $max_infant_price = max($infant_price_array);
+                    $max_adult_price  = !empty($adult_price_array) ? max($adult_price_array) : '';
+                    $max_child_price  = !empty($child_price_array) ? max($child_price_array) : '';
+                    $max_infant_price = !empty($infant_price_array) ? max($infant_price_array): '';
 
                     # Discount price calculation
                     if($discount_type == 'percent') {

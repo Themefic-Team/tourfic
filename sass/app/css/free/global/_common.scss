@@ -63,6 +63,10 @@ h3.section-heading {
         white-space: break-spaces;
     }
 }
+.fancybox-navigation .fancybox-button--arrow_left > div,
+.fancybox-navigation .fancybox-button--arrow_right > div{
+    background-color: #000;
+}
 .tf-tooltip {
     position: relative;
     .tf-top {
@@ -191,17 +195,17 @@ h3.section-heading {
     width: 100%;
 }
 .btn-styled {
-    border: 1px solid #003162;
-    border-radius: 4px;
+    border: 1px solid #003162 !important;
+    border-radius: 4px !important;
     overflow: hidden;
     position: relative;
-    color: #fff;
+    color: #fff !important;
     cursor: pointer;
     position: relative;
     text-decoration: none;
-    background: #003162;
-    width: 100%;
-    padding: 10px 18px;
+    background: #003162 !important;
+    width: 100% !important;
+    padding: 10px 18px !important;
     span {
         z-index: 20;
     }
@@ -359,6 +363,9 @@ a.tf_button.btn-styled {
 .slick-initialized {
     .slick-slide {
         display: block;
+        @media #{$tfmax767}{
+            margin: 0px !important;
+        }
     }
 }
 .tf_form-row {
@@ -370,12 +377,13 @@ a.tf_button.btn-styled {
 }
 .tf_form-inner {
     input[type=text] {
-        width: 100%;
-        background: transparent;
-        border: 0;
+        width: 100% !important;
+        background: transparent !important;
+        border: 0 !important;
         box-shadow: none;
         height: 45px;
-        font-size: inherit;
+        font-size: inherit !important;
+        margin: 0px !important;
         &:focus {
             background: transparent;
             border: 0;
@@ -383,12 +391,13 @@ a.tf_button.btn-styled {
         }
     }
     select {
-        width: 100%;
-        background: transparent;
-        border: 0;
+        width: 100% !important;
+        background: transparent !important;
+        border: 0 !important;
         box-shadow: none;
         height: 45px;
-        font-size: inherit;
+        font-size: inherit !important;
+        margin: 0px !important;
         &:focus {
             background: transparent;
             border: 0;
@@ -412,10 +421,10 @@ ul.tf-sidebar-checkbox {
     }
 }
 .tf_booking-widget {
-    background: #FA5535;
+    background: #FA5535 !important;
     background: linear-gradient(to bottom, #FD6143 0, #FA5535 100%);
     border-color: #FA5535;
-    padding: 20px;
+    padding: 20px !important;
     border-radius: 4px;
     font-size: 14px;
     #check-in-out-date {
@@ -547,14 +556,14 @@ h3.tf-sidebar-widget_title {
     align-items: center;
     width: 125px;
     input[type=number] {
-        width: 50px;
-        padding: 0;
-        margin: 0;
-        border: 0;
+        width: 50px !important;
+        padding: 0px !important;
+        margin: 0px !important;
+        border: 0px !important;
         box-shadow: none;
-        background: transparent;
+        background: transparent !important;
         text-align: center;
-        -moz-appearance: textfield;
+        -moz-appearance: textfield !important;
         &:focus {
             outline: 0;
         }
@@ -669,10 +678,10 @@ h3.tf-sidebar-widget_title {
             label {
                 color: #333;
                 font-style: normal;
-                font-weight: 500;
-                font-size: 16px;
-                line-height: 1;
-                text-transform: capitalize;
+                font-weight: 500 !important;
+                font-size: 16px !important;
+                line-height: 1 !important;
+                text-transform: capitalize !important;
             }
         }
     }
@@ -1231,6 +1240,96 @@ li.filter-item {
     @include justify-content(flex-end);
     gap: 15px;
 }
+
+.tf-box-wrapper {
+    h4{
+        margin-bottom: 20px !important;
+        font-family: "rubik", sans-serif;
+        font-size: 16px;
+    }
+    .al-range-slider__track {
+        background: #EEE;
+        height: 10px;
+        box-shadow: none !important;
+        margin: 30px 0px 10px 0px;
+        .al-range-slider__grid{
+            pointer-events: inherit !important;
+        }
+    }
+    .al-range-slider_dark {
+        padding: 0px !important;
+        .al-range-slider__bar {
+            background: #003162 !important;
+            box-shadow: none !important;
+            pointer-events: none !important;
+        }
+    }
+    .al-range-slider__knob {
+        background: #003162 !important;
+        height: 15px;
+        width: 15px;
+        box-shadow: none !important;
+        border: 3px solid #003162 !important;
+        &:first-child {
+            span {
+                left: 10px !important;
+            }
+        }
+    }
+    .al-range-slider__tooltip {
+        background: #003162 !important;
+        border-radius: 5px;
+        box-shadow: none;
+        padding: 3px 10px;
+        color: #fff !important;
+        font-size: 13px !important;
+        margin-bottom: 0px !important;
+    }
+    .al-range-slider__input.js-al-range-slider__input {
+        display: none;
+    }
+}
+
+/*
+Ajax Loader Booking Availability
+*/
+.tf-btn-booking-loading {
+    padding-right: 40px;
+    position: relative;
+  }
+  
+  .tf-btn-booking-loading:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -7px;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #fff;
+    border-left-color: transparent;
+    border-radius: 50%;
+    vertical-align: middle;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    -webkit-animation: tf-wd-rotate 450ms infinite linear;
+    animation: tf-wd-rotate 450ms infinite linear;
+  }
+  
+  @-webkit-keyframes tf-wd-rotate {
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes tf-wd-rotate {
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
 
 
 
