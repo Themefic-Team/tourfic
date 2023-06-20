@@ -153,7 +153,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			$output .= '
 			.tf-container-inner p,
 			.tf-main-wrapper p,
-			#tour_room_details_qv p{
+			#tour_room_details_qv p,
+			.tf-container p{
 				font-weight: '.$tf_global_font_weight_p.' !important;
 				font-size: '.$tf_global_font_p.'px !important;
 				font-style: '.$tf_global_font_style_p.' !important;
@@ -165,7 +166,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( !empty($tf_global_font_h1) || !empty($tf_global_font_weight_h1) || !empty($tf_global_font_style_h1) || !empty($tf_global_line_height_h1) ){
 			$output .= '
 			.tf-container-inner h1,
-			.tf-main-wrapper h1{
+			.tf-main-wrapper h1,
+			.tf-container h1{
 				font-weight: '.$tf_global_font_weight_h1.' !important;
 				font-size: '.$tf_global_font_h1.'px !important;
 				font-style: '.$tf_global_font_style_h1.' !important;
@@ -177,7 +179,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( !empty($tf_global_font_h2) || !empty($tf_global_font_weight_h2) || !empty($tf_global_font_style_h2) || !empty($tf_global_line_height_h2) ){
 			$output .= '
 			.tf-container-inner h2,
-			.tf-main-wrapper h2{
+			.tf-main-wrapper h2,
+			.tf-container h2{
 				font-weight: '.$tf_global_font_weight_h2.' !important;
 				font-size: '.$tf_global_font_h2.'px !important;
 				font-style: '.$tf_global_font_style_h2.' !important;
@@ -190,7 +193,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			$output .= '
 			.tf-container-inner h3,
 			.tf-main-wrapper h3,
-			#tour_room_details_qv h3{
+			#tour_room_details_qv h3,
+			.tf-container h3{
 				font-weight: '.$tf_global_font_weight_h3.' !important;
 				font-size: '.$tf_global_font_h3.'px !important;
 				font-style: '.$tf_global_font_style_h3.' !important;
@@ -204,7 +208,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-container-inner h4,
 			.tf-main-wrapper h4,
 			#tf-ask-question h4,
-			#tour_room_details_qv h4{
+			#tour_room_details_qv h4,
+			.tf-container h4{
 				font-weight: '.$tf_global_font_weight_h4.' !important;
 				font-size: '.$tf_global_font_h4.'px !important;
 				font-style: '.$tf_global_font_style_h4.' !important;
@@ -216,7 +221,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( !empty($tf_global_font_h5) || !empty($tf_global_font_weight_h5) || !empty($tf_global_font_style_h5) || !empty($tf_global_line_height_h5) ){
 			$output .= '
 			.tf-container-inner h5,
-			.tf-main-wrapper h5{
+			.tf-main-wrapper h5,
+			.tf-container h5{
 				font-weight: '.$tf_global_font_weight_h5.' !important;
 				font-size: '.$tf_global_font_h5.'px !important;
 				font-style: '.$tf_global_font_style_h5.' !important;
@@ -228,7 +234,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( !empty($tf_global_font_h6) || !empty($tf_global_font_weight_h6) || !empty($tf_global_font_style_h6) || !empty($tf_global_line_height_h6) ){
 			$output .= '
 			.tf-container-inner h6,
-			.tf-main-wrapper h6{
+			.tf-main-wrapper h6,
+			.tf-container h6{
 				font-weight: '.$tf_global_font_weight_h6.' !important;
 				font-size: '.$tf_global_font_h6.'px !important;
 				font-style: '.$tf_global_font_style_h6.' !important;

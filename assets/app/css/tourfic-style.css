@@ -5948,6 +5948,9 @@ div#tf-contact-info {
 .tf-search-results-list .tf-item-card .tf-item-details i {
   color: #0E3DD8;
 }
+.tf-search-results-list .tf-item-card .tf-item-details p {
+  font-size: 12px !important;
+}
 .tf-search-results-list .tf-item-card .tf-item-details .tf-title-meta {
   align-items: baseline;
 }
@@ -5969,7 +5972,7 @@ div#tf-contact-info {
   padding: 6px 10px;
   border-radius: 5px;
   margin: 10px 10px 0px 0px;
-  font-size: 13px;
+  font-size: 12px;
 }
 .tf-search-results-list .tf-item-card .tf-item-details .tf-archive-features ul li i {
   margin-right: 5px;
@@ -5997,6 +6000,14 @@ div#tf-contact-info {
   .tf-search-results-list .tf-item-card .tf-item-details {
     flex-basis: 100%;
   }
+}
+.tf-search-results-list .tf-item-card .tf-item-details .tf-reviews {
+  gap: 8px;
+  align-items: center;
+}
+.tf-search-results-list .tf-item-card .tf-item-details .tf-reviews .tf-avarage-review {
+  font-size: 12px;
+  line-height: 1rem;
 }
 .tf-search-results-list .tf-item-card .tf-post-footer {
   border-top: 1px solid #ddd;
@@ -6409,6 +6420,8 @@ div#tf-contact-info {
   border-radius: 5px;
   padding: 10px;
   margin: 5px 10px 5px 0px;
+  line-height: 1rem;
+  font-size: 12px;
 }
 .tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .tf-features-infos ul li i,
 .tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .tf-features-infos ul li img {
