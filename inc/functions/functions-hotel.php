@@ -699,6 +699,12 @@ function tf_room_availability_callback() {
 	if (!empty($tf_plugin_installed)) {
 	    $tf_hotel_selected_template_check = $tf_hotel_selected_check;
 	}else{
+
+		$tf_hotel_single_template_check = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'default';
+		$tf_hotel_global_template_check = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-hotel'] : 'default';
+
+		$tf_hotel_selected_check = !empty($tf_hotel_single_template_check) ? $tf_hotel_single_template_check : $tf_hotel_global_template_check;
+		
 	    $tf_hotel_selected_template_check = $tf_hotel_selected_check ? $tf_hotel_selected_check : 'default';
 	}
 
@@ -1436,6 +1442,11 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	if (!empty($tf_plugin_installed)) {
 	    $tf_hotel_selected_template = $tf_hotel_selected_check;
 	}else{
+
+		$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'default';
+		$tf_hotel_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-hotel'] : 'default';
+
+		$tf_hotel_selected_check = !empty($tf_hotel_single_template) ? $tf_hotel_single_template : $tf_hotel_global_template;
 	    $tf_hotel_selected_template = $tf_hotel_selected_check ? $tf_hotel_selected_check : 'default';
 	}
 
@@ -2473,6 +2484,12 @@ function tf_hotel_quickview_callback() {
 		if (!empty($tf_plugin_installed)) {
 			$tf_hotel_selected_template = $tf_hotel_selected_check;
 		}else{
+
+			$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'default';
+			$tf_hotel_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-hotel'] : 'default';
+			
+			$tf_hotel_selected_check = !empty($tf_hotel_single_template) ? $tf_hotel_single_template : $tf_hotel_global_template;
+			
 			$tf_hotel_selected_template = $tf_hotel_selected_check ? $tf_hotel_selected_check : 'default';
 		}
 
