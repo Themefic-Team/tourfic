@@ -1416,7 +1416,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 3.12
+					'default' => 1.2
 				),
 				array(
 					'id'       => 'global-h1-weight',
@@ -1475,7 +1475,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 2.37
+					'default' => 1.2
 				),
 				array(
 					'id'       => 'global-h2-weight',
@@ -1534,7 +1534,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.87
+					'default' => 1.2
 				),
 				array(
 					'id'       => 'global-h3-weight',
@@ -1593,7 +1593,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.75
+					'default' => 1.2
 				),
 				array(
 					'id'       => 'global-h4-weight',
@@ -1652,7 +1652,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.56
+					'default' => 1.2
 				),
 				array(
 					'id'       => 'global-h5-weight',
@@ -1711,7 +1711,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.37
+					'default' => 1.2
 				),
 				array(
 					'id'       => 'global-h6-weight',
@@ -1770,7 +1770,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.37
+					'default' => 1.2
 				),
 				array(
 					'id'       => 'global-p-weight',
@@ -1826,6 +1826,28 @@ TF_Settings::option( 'tf_settings', array(
 						'regular' => __( 'Normal', 'tourfic' ),
 						'hover'   => __( 'Hover', 'tourfic' ),
 					),
+				),
+				array(
+					'id'          => 'button-font-size',
+					'type'        => 'number',
+					'label'       => __( 'Button Font Size (PX)', 'tourfic' ),
+					'subtitle'    => __( 'Button Font Size of Tourfic', 'tourfic' ),
+					'attributes'  => array(
+						'min' => '1',
+					),
+					'field_width' => 45,
+					'default' => 14
+				),
+				array(
+					'id'          => 'button-line-height',
+					'type'        => 'text',
+					'label'       => __( 'Button Line Height (REM)', 'tourfic' ),
+					'subtitle'    => __( 'Button Line Height of Tourfic', 'tourfic' ),
+					'attributes'  => array(
+						'min' => '1',
+					),
+					'field_width' => 45,
+					'default' => 1.2
 				),
 				array(
 					'id'       => 'tourfic-sidebar-booking',
