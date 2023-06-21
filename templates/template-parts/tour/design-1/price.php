@@ -23,14 +23,6 @@
                 ?>
             </li>
             <?php } ?>
-            <li class="tf-flex tf-flex-gap-8">
-                <i class="fa-solid fa-people-group"></i> From 2 to 20
-                people
-            </li>
-            <li class="tf-flex tf-flex-gap-8">
-                <i class="fa-solid fa-person-walking-arrow-loop-left"></i>
-                Full refund before 25 days
-            </li>
         </ul>
     </div>
     <!-- Single Tour Person details -->
