@@ -185,7 +185,7 @@ Custom Modal
 Ajax Loader
 */
 .tf-btn-loading {
-  padding-right: 40px;
+  padding-right: 40px !important;
   position: relative;
 }
 
