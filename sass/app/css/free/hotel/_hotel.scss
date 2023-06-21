@@ -20,7 +20,7 @@
     min-width: 100%;
     top: 100%;
     transform: translateY(8px);
-    z-index: 200;
+    z-index: 9999;
     left: auto;
     right: 0;
 }
@@ -273,6 +273,7 @@ a.slick-slide-item-link {
     text-transform: uppercase;
     text-align: center;
     font-size: 1rem;
+    z-index: 9;
   }
   
   /* top left*/

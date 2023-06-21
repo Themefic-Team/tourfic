@@ -40,37 +40,41 @@ if( !function_exists( 'tf_custom_css' ) ){
 		$tf_global_font_p = tfopt('global-p') ? tfopt('global-p') : 14;
 		$tf_global_font_weight_p = tfopt('global-p-weight') ? tfopt('global-p-weight') : 400;
 		$tf_global_font_style_p = tfopt('global-p-style') ? tfopt('global-p-style') : 'normal';
-		$tf_global_line_height_p = tfopt('global-p-line-height') ? tfopt('global-p-line-height') : 22;
+		$tf_global_line_height_p = tfopt('global-p-line-height') ? tfopt('global-p-line-height') : 1.2;
 
 		// Global Typography H1
 		$tf_global_font_h1 = tfopt('global-h1') ? tfopt('global-h1') : 38;
 		$tf_global_font_weight_h1 = tfopt('global-h1-weight') ? tfopt('global-h1-weight') : 500;
-		$tf_global_font_style_h1 = tfopt('global-h1-style') ? tfopt('global-h1-style') : 'normal';$tf_global_line_height_h1 = tfopt('global-h1-line-height') ? tfopt('global-h1-line-height') : 50;
+		$tf_global_font_style_h1 = tfopt('global-h1-style') ? tfopt('global-h1-style') : 'normal';$tf_global_line_height_h1 = tfopt('global-h1-line-height') ? tfopt('global-h1-line-height') : 1.2;
 
 		// Global Typography H2
 		$tf_global_font_h2 = tfopt('global-h2') ? tfopt('global-h2') : 30;
 		$tf_global_font_weight_h2 = tfopt('global-h2-weight') ? tfopt('global-h2-weight') : 500;
-		$tf_global_font_style_h2 = tfopt('global-h2-style') ? tfopt('global-h2-style') : 'normal';$tf_global_line_height_h2 = tfopt('global-h2-line-height') ? tfopt('global-h2-line-height') : 38;
+		$tf_global_font_style_h2 = tfopt('global-h2-style') ? tfopt('global-h2-style') : 'normal';$tf_global_line_height_h2 = tfopt('global-h2-line-height') ? tfopt('global-h2-line-height') : 1.2;
 
 		// Global Typography H3
 		$tf_global_font_h3 = tfopt('global-h3') ? tfopt('global-h3') : 24;
 		$tf_global_font_weight_h3 = tfopt('global-h3-weight') ? tfopt('global-h3-weight') : 500;
-		$tf_global_font_style_h3 = tfopt('global-h3-style') ? tfopt('global-h3-style') : 'normal';$tf_global_line_height_h3 = tfopt('global-h3-line-height') ? tfopt('global-h3-line-height') : 30;
+		$tf_global_font_style_h3 = tfopt('global-h3-style') ? tfopt('global-h3-style') : 'normal';$tf_global_line_height_h3 = tfopt('global-h3-line-height') ? tfopt('global-h3-line-height') : 1.2;
 
 		// Global Typography H4
 		$tf_global_font_h4 = tfopt('global-h4') ? tfopt('global-h4') : 20;
 		$tf_global_font_weight_h4 = tfopt('global-h4-weight') ? tfopt('global-h4-weight') : 500;
-		$tf_global_font_style_h4 = tfopt('global-h4-style') ? tfopt('global-h4-style') : 'normal';$tf_global_line_height_h4 = tfopt('global-h4-line-height') ? tfopt('global-h4-line-height') : 28;
+		$tf_global_font_style_h4 = tfopt('global-h4-style') ? tfopt('global-h4-style') : 'normal';$tf_global_line_height_h4 = tfopt('global-h4-line-height') ? tfopt('global-h4-line-height') : 1.2;
 
 		// Global Typography H5
 		$tf_global_font_h5 = tfopt('global-h5') ? tfopt('global-h5') : 18;
 		$tf_global_font_weight_h5 = tfopt('global-h5-weight') ? tfopt('global-h5-weight') : 500;
-		$tf_global_font_style_h5 = tfopt('global-h5-style') ? tfopt('global-h5-style') : 'normal';$tf_global_line_height_h5 = tfopt('global-h5-line-height') ? tfopt('global-h5-line-height') : 25;
+		$tf_global_font_style_h5 = tfopt('global-h5-style') ? tfopt('global-h5-style') : 'normal';$tf_global_line_height_h5 = tfopt('global-h5-line-height') ? tfopt('global-h5-line-height') : 1.2;
 
 		// Global Typography H6
 		$tf_global_font_h6 = tfopt('global-h6') ? tfopt('global-h6') : 14;
 		$tf_global_font_weight_h6 = tfopt('global-h6-weight') ? tfopt('global-h6-weight') : 500;
-		$tf_global_font_style_h6 = tfopt('global-h6-style') ? tfopt('global-h6-style') : 'normal';$tf_global_line_height_h6 = tfopt('global-h6-line-height') ? tfopt('global-h6-line-height') : 22;
+		$tf_global_font_style_h6 = tfopt('global-h6-style') ? tfopt('global-h6-style') : 'normal';$tf_global_line_height_h6 = tfopt('global-h6-line-height') ? tfopt('global-h6-line-height') : 1.2;
+
+		// Button
+		$tf_global_button_size = tfopt('button-font-size') ? tfopt('button-font-size') : 14;
+		$tf_global_button_line_height = tfopt('button-line-height') ? tfopt('button-line-height') : 1.2;
 
 		$output = '';
 		
@@ -97,7 +101,17 @@ if( !function_exists( 'tf_custom_css' ) ){
 			$output .= '
 			.tf-container-inner,
 			.tf-main-wrapper,
-			.tf-container{
+			.tf-container,
+			#tour_room_details_qv,
+			#tf-hotel-services,
+			#tf-hotel-services span,
+			#tf-hotel-services select,
+			#tour-deposit,
+			#tour-deposit .tf_button_group button,
+			#tf-hotel-services .tf_button_group button,
+			#tf-ask-question button,
+			#tf-ask-question input,
+			#tf-ask-question textarea{
 				font-family: '.$tf_global_font_family.'
 			}';
 		}
@@ -105,7 +119,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			$output .= '
 			.tf-container-inner p,
 			.tf-main-wrapper p,
-			.tf-container p{
+			.tf-container p,
+			#tour_room_details_qv p{
 				color: '.$tf_template1_p_global_reg.'
 			}';
 		}
@@ -121,9 +136,12 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-container-inner h3,
 			.tf-main-wrapper h3,
 			.tf-container h3,
+			#tour_room_details_qv h3,
 			.tf-container-inner h4,
 			.tf-main-wrapper h4,
+			#tour_room_details_qv h4,
 			.tf-container h4,
+			#tf-ask-question h4,
 			.tf-container-inner h5,
 			.tf-main-wrapper h5,
 			.tf-container h5,
@@ -138,11 +156,13 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( !empty($tf_global_font_p) || !empty($tf_global_font_weight_p) || !empty($tf_global_font_style_p) || !empty($tf_global_line_height_p) ){
 			$output .= '
 			.tf-container-inner p,
-			.tf-main-wrapper p{
+			.tf-main-wrapper p,
+			#tour_room_details_qv p,
+			.tf-container p{
 				font-weight: '.$tf_global_font_weight_p.' !important;
 				font-size: '.$tf_global_font_p.'px !important;
 				font-style: '.$tf_global_font_style_p.' !important;
-				line-height: '.$tf_global_line_height_p.'rem !important;
+				line-height: '.$tf_global_line_height_p.' !important;
 			}';
 		}
 
@@ -150,11 +170,12 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( !empty($tf_global_font_h1) || !empty($tf_global_font_weight_h1) || !empty($tf_global_font_style_h1) || !empty($tf_global_line_height_h1) ){
 			$output .= '
 			.tf-container-inner h1,
-			.tf-main-wrapper h1{
+			.tf-main-wrapper h1,
+			.tf-container h1{
 				font-weight: '.$tf_global_font_weight_h1.' !important;
 				font-size: '.$tf_global_font_h1.'px !important;
 				font-style: '.$tf_global_font_style_h1.' !important;
-				line-height: '.$tf_global_line_height_h1.'rem !important;
+				line-height: '.$tf_global_line_height_h1.' !important;
 			}';
 		}
 
@@ -162,11 +183,12 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( !empty($tf_global_font_h2) || !empty($tf_global_font_weight_h2) || !empty($tf_global_font_style_h2) || !empty($tf_global_line_height_h2) ){
 			$output .= '
 			.tf-container-inner h2,
-			.tf-main-wrapper h2{
+			.tf-main-wrapper h2,
+			.tf-container h2{
 				font-weight: '.$tf_global_font_weight_h2.' !important;
 				font-size: '.$tf_global_font_h2.'px !important;
 				font-style: '.$tf_global_font_style_h2.' !important;
-				line-height: '.$tf_global_line_height_h2.'rem !important;
+				line-height: '.$tf_global_line_height_h2.' !important;
 			}';
 		}
 
@@ -174,11 +196,13 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( !empty($tf_global_font_h3) || !empty($tf_global_font_weight_h3) || !empty($tf_global_font_style_h3) || !empty($tf_global_line_height_h3) ){
 			$output .= '
 			.tf-container-inner h3,
-			.tf-main-wrapper h3{
+			.tf-main-wrapper h3,
+			#tour_room_details_qv h3,
+			.tf-container h3{
 				font-weight: '.$tf_global_font_weight_h3.' !important;
 				font-size: '.$tf_global_font_h3.'px !important;
 				font-style: '.$tf_global_font_style_h3.' !important;
-				line-height: '.$tf_global_line_height_h3.'rem !important;
+				line-height: '.$tf_global_line_height_h3.' !important;
 			}';
 		}
 
@@ -186,11 +210,14 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( !empty($tf_global_font_h4) || !empty($tf_global_font_weight_h4) || !empty($tf_global_font_style_h4) || !empty($tf_global_line_height_h4) ){
 			$output .= '
 			.tf-container-inner h4,
-			.tf-main-wrapper h4{
+			.tf-main-wrapper h4,
+			#tf-ask-question h4,
+			#tour_room_details_qv h4,
+			.tf-container h4{
 				font-weight: '.$tf_global_font_weight_h4.' !important;
 				font-size: '.$tf_global_font_h4.'px !important;
 				font-style: '.$tf_global_font_style_h4.' !important;
-				line-height: '.$tf_global_line_height_h4.'rem !important;
+				line-height: '.$tf_global_line_height_h4.' !important;
 			}';
 		}
 
@@ -198,11 +225,12 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( !empty($tf_global_font_h5) || !empty($tf_global_font_weight_h5) || !empty($tf_global_font_style_h5) || !empty($tf_global_line_height_h5) ){
 			$output .= '
 			.tf-container-inner h5,
-			.tf-main-wrapper h5{
+			.tf-main-wrapper h5,
+			.tf-container h5{
 				font-weight: '.$tf_global_font_weight_h5.' !important;
 				font-size: '.$tf_global_font_h5.'px !important;
 				font-style: '.$tf_global_font_style_h5.' !important;
-				line-height: '.$tf_global_line_height_h5.'rem !important;
+				line-height: '.$tf_global_line_height_h5.' !important;
 			}';
 		}
 
@@ -210,11 +238,22 @@ if( !function_exists( 'tf_custom_css' ) ){
 		if( !empty($tf_global_font_h6) || !empty($tf_global_font_weight_h6) || !empty($tf_global_font_style_h6) || !empty($tf_global_line_height_h6) ){
 			$output .= '
 			.tf-container-inner h6,
-			.tf-main-wrapper h6{
+			.tf-main-wrapper h6,
+			.tf-container h6{
 				font-weight: '.$tf_global_font_weight_h6.' !important;
 				font-size: '.$tf_global_font_h6.'px !important;
 				font-style: '.$tf_global_font_style_h6.' !important;
-				line-height: '.$tf_global_line_height_h6.'rem !important;
+				line-height: '.$tf_global_line_height_h6.' !important;
+			}';
+		}
+
+		// Global Button
+		if( !empty($tf_global_button_size) || !empty($tf_global_button_line_height) ){
+			$output .= '
+			.tf-btn-normal,
+			.btn-styled{
+				font-size: '.$tf_global_button_size.'px !important;
+				line-height: '.$tf_global_button_line_height.' !important;
 			}';
 		}
 

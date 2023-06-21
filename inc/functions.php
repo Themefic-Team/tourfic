@@ -120,6 +120,13 @@ if ( file_exists( TF_INC_PATH . 'functions/widgets.php' ) ) {
 	tf_file_missing( TF_INC_PATH . 'functions/widgets.php' );
 }
 
+# Google Fonts
+if ( file_exists( TF_INC_PATH . 'functions/functions-fonts.php' ) ) {
+	require_once TF_INC_PATH . 'functions/functions-fonts.php';
+} else {
+	tf_file_missing(TF_INC_PATH . 'functions/functions-fonts.php');
+}
+
 /**
  * Elementor Widgets
  *
@@ -437,7 +444,17 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 	$date       = $_GET['check-in-out-date'] ?? '';
 	$startprice = $_GET['from'] ?? '';
 	$endprice   = $_GET['to'] ?? '';
-	if( ( $post_type=="tf_tours" && ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) || ( $post_type=="tf_hotel" && ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['hotel-archive']=="design-1" ) ){
+
+	$tf_plugin_installed = get_option('tourfic_template_installed'); 
+	if (!empty($tf_plugin_installed)) {
+		$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+		$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
+	}else{
+		$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'default';
+		$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'default';
+	}
+
+	if( ( $post_type=="tf_tours" && $tf_tour_arc_selected_template=="design-1" ) || ( $post_type=="tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ) ){
 
 	$disable_child_search = ! empty( tfopt( 'disable_child_search' ) ) ? tfopt( 'disable_child_search' ) : '';
 	?>
@@ -664,7 +681,16 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_name = '', $taxonomy_slug = '' ) {
 	$place      = $post_type == 'tf_hotel' ? 'tf-location' : 'tf-destination';
 	$place_text = $post_type == 'tf_hotel' ? __( 'Enter Location', 'tourfic' ) : __( 'Enter Destination', 'tourfic' );
-	if( ( is_post_type_archive('tf_hotel') && ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['hotel-archive']=="design-1" ) || ( is_post_type_archive('tf_tours') && ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) || ( $post_type == 'tf_hotel' && ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['hotel-archive']=="design-1" ) || ( $post_type == 'tf_tours' && ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) ){
+
+	$tf_plugin_installed = get_option('tourfic_template_installed'); 
+	if (!empty($tf_plugin_installed)) {
+		$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+		$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
+	}else{
+		$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'default';
+		$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'default';
+	}
+	if( ( is_post_type_archive('tf_hotel') && $tf_hotel_arc_selected_template=="design-1" ) || ( is_post_type_archive('tf_tours') && $tf_tour_arc_selected_template=="design-1" ) || ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template=="design-1" ) || ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template=="design-1" ) ){
 	?>
 	<div class="tf-box-wrapper tf-box tf-mrbottom-30">
 		<form action="<?php echo tf_booking_search_action(); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking">
@@ -1809,61 +1835,10 @@ if( ! function_exists( 'tf_hotel_gallery_video' ) ){
 	}
 }
 
-if ( ! function_exists( 'tourfic_google_fonts_list' ) ) {
-	function tourfic_google_fonts_list(){
-		$google_api_key = !empty( tfopt('global-fonts-api') ) ? tfopt('global-fonts-api') : '';
-		if(!empty($google_api_key)){
-			$tf_google_url = 'https://www.googleapis.com/webfonts/v1/webfonts?key='.$google_api_key;
-		}else{
-			$tf_google_url = 'https://www.googleapis.com/webfonts/v1/webfonts?key='; 
-		}
-		
-		$tf_response_status = wp_remote_get( $tf_google_url );
-		$status_check = json_decode($tf_response_status['body'],true);
-		if( !empty($status_check["error"]) ){
-			$fonts_array = array(
-				'Default' => 'Default',
-				'Jost' => 'Jost',
-			);
-		}else{
-			$data = @file_get_contents($tf_google_url);
-			$fonts = json_decode($data, true);
-			$font_names = array();
-			foreach ($fonts['items'] as $font) {
-				$font_names[] = $font['family'];
-			}
-			$fonts_array = [];
-			foreach ($font_names as $font) {
-				$font_key = str_replace(" ", "_", $font);
-				$fonts_array[$font_key] = $font;
-			}
-		}
-		return $fonts_array;
-	}
-}
-
-function tourfic_google_fonts_url(){
-	$tf_global_font = tfopt('global-body-fonts-family') ? tfopt('global-body-fonts-family') : 'Default';
-	$tf_global_heading_font_family = tfopt('global-heading-fonts-family') ? tfopt('global-heading-fonts-family') : 'Default';
-	if($tf_global_font!="Default" && $tf_global_heading_font_family!="Default"){
-		$url = 'https://fonts.googleapis.com/css2?family='. $tf_global_font	.'&family='. $tf_global_heading_font_family .':wght@100;200;300;400;500;600;700;800;900&display=swap';
-	}else{
-		$url = "";
-	}
-	
-	return $url;
-}
-
-function tourfic_google_fonts_scriptss() {
-	wp_enqueue_style( 'tourfic-google-fonts', tourfic_google_fonts_url(), array(), '' );
-}
-add_action( 'wp_enqueue_scripts', 'tourfic_google_fonts_scriptss', 9999999 );
-
-
 if ( ! function_exists( 'tourfic_template_settings' ) ) {
 	function tourfic_template_settings(){
 		$tf_plugin_installed = get_option('tourfic_template_installed'); 
-		if (!$tf_plugin_installed) {
+		if (!empty($tf_plugin_installed)) {
 			$template = 'design-1';
 		}else{
 			$template = 'default';

@@ -811,9 +811,27 @@ function tf_single_tour_booking_form( $post_id ) {
         }
     }
     // Single Template Check
-    $tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
+    $tf_tour_layout_conditions = ! empty( $meta['tf_single_tour_layout_opt'] ) ? $meta['tf_single_tour_layout_opt'] : 'global';
+    if("single"==$tf_tour_layout_conditions){
+        $tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
+    }
 	$tf_tour_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-tour'] : 'design-1';
-	$tf_tour_selected_template = !empty($tf_tour_single_template) ? $tf_tour_single_template : $tf_tour_global_template;
+
+    $tf_tour_selected_check = !empty($tf_tour_single_template) ? $tf_tour_single_template : $tf_tour_global_template;
+
+    $tf_plugin_installed = get_option('tourfic_template_installed'); 
+	if (!empty($tf_plugin_installed)) {
+	    $tf_tour_selected_template = $tf_tour_selected_check;
+	}else{
+        if("single"==$tf_tour_layout_conditions){
+            $tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'default';
+        }
+        $tf_tour_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-tour'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-tour'] : 'default';
+
+        $tf_tour_selected_check = !empty($tf_tour_single_template) ? $tf_tour_single_template : $tf_tour_global_template;
+        
+	    $tf_tour_selected_template = $tf_tour_selected_check ? $tf_tour_selected_check : 'default';
+	}
 
     ob_start();
 	if( $tf_tour_selected_template == "design-1" ){
@@ -856,7 +874,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
                     $("#check-in-out-date").flatpickr({  
                         enableTime: false,
-                        dateFormat: "Y/m/d",                               
+                        dateFormat: "Y/m/d",                        
                         <?php
                         // Flatpickt locale for translation
                         tf_flatpickr_locale();
@@ -878,6 +896,7 @@ function tf_single_tour_booking_form( $post_id ) {
                     <?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
 
                         minDate: "today",
+                        disableMobile: "true",   
 
                         <?php if ($custom_avail && $custom_avail == true){ ?>
 
@@ -1016,9 +1035,7 @@ function tf_single_tour_booking_form( $post_id ) {
                         <input type="checkbox" value="<?php echo esc_attr( $extrakey ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>">
                         <p><?php _e( $tour_extra['title'] ); ?> <?php echo $tour_extra_pricetype=="fixed" ? esc_html( "(Fixed Price)" ) : esc_html( "(Per Person Price)" ); ?></p>
                     </div>
-                    <div class="tf-tour-extra-price">
                     <?php echo wc_price( $tour_extra['price'] ); ?>
-                    </div>
                 </div>
                 <?php if ($tour_extra['desc']) { ?>
                 <div class="tf-tour-extra-details tf-mt-8">
@@ -1162,7 +1179,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
                             $("#check-in-out-date").flatpickr({  
                                 enableTime: false,
-                                dateFormat: "Y/m/d",                               
+                                dateFormat: "Y/m/d",                           
                                 <?php
                                 // Flatpickt locale for translation
                                 tf_flatpickr_locale();
@@ -1184,6 +1201,7 @@ function tf_single_tour_booking_form( $post_id ) {
                             <?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
 
                                 minDate: "today",
+                                disableMobile: "true",
 
                                 <?php if ($custom_avail && $custom_avail == true){ ?>
 
@@ -1363,6 +1381,7 @@ function tf_single_tour_booking_form( $post_id ) {
             <?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
 
                 minDate: "today",
+                disableMobile: "true",
 
                 <?php if ($custom_avail && $custom_avail == true){ ?>
 
@@ -1607,7 +1626,13 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
             }
         }
     }
-    if( ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1"){
+    $tf_plugin_installed = get_option('tourfic_template_installed'); 
+    if (!empty($tf_plugin_installed)) {
+        $tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+    }else{
+        $tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'default';
+    }
+    if( $tf_tour_arc_selected_template=="design-1"){
     ?>
     <div class="tf-item-card tf-flex">
         <div class="tf-item-featured">
@@ -1656,7 +1681,7 @@ function tf_tour_archive_single_item($adults='', $child='', $check_in_out='', $s
             <?php tf_archive_single_rating();?>
             
             <div class="tf-details tf-mt-16">
-                <p><?php echo substr(wp_strip_all_tags(get_the_content()), 0, 160). '...'; ?></p>
+                <p><?php echo substr(wp_strip_all_tags(get_the_content()), 0, 100). '...'; ?></p>
             </div>
             <div class="tf-post-footer tf-flex tf-flex-align-center tf-flex-space-bttn tf-mt-16">
                 <div class="tf-pricing">

@@ -627,7 +627,15 @@ function tf_search_result_shortcode( $atts, $content = null ){
     ob_start(); ?>
     <!-- Start Content -->
 	<?php 
-	if( ( $post_type=="tf_tours" && ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['tour-archive']=="design-1" ) || ( $post_type=="tf_hotel" && ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) && tf_data_types(tfopt( 'tf-template' ))['hotel-archive']=="design-1" ) ){
+	$tf_plugin_installed = get_option('tourfic_template_installed'); 
+	if (!empty($tf_plugin_installed)) {
+		$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+		$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
+	}else{
+		$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'default';
+		$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'default';
+	}
+	if( ( $post_type=="tf_tours" && $tf_tour_arc_selected_template=="design-1" ) || ( $post_type=="tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ) ){
 	?>
 	<div class="tf-column tf-page-content tf-archive-left tf-result-previews">
 		<!-- Search Head Section -->

@@ -52,7 +52,9 @@ if( $tf_hotel_selected_template_check == "design-1" ){
                     <?php } ?>
                     <?php 
                     if( !empty($room['features']) ){
+                    $tf_room_fec_key = 1;
                     foreach ( $room['features'] as $feature ) {
+                    if ( $tf_room_fec_key < 5 ) {
                     $room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
                     if ( ! empty( $room_f_meta ) ) {
                         $room_icon_type = ! empty( $room_f_meta['icon-type'] ) ? $room_f_meta['icon-type'] : '';
@@ -68,7 +70,14 @@ if( $tf_hotel_selected_template_check == "design-1" ){
                         <?php echo ! empty( $room_feature_icon ) ? $room_feature_icon : ''; ?>
                         <?php echo $room_term->name; ?>
                     </li>
-                    <?php } } ?>
+                    <?php } $tf_room_fec_key++; } } ?>
+                    <?php 
+                    if(!empty($room['features'])){
+                        if(count($room['features']) > 3){
+                            echo '<span>More....</span>';
+                        }
+                    }
+                    ?>
                 </ul>
 
                 <?php
@@ -129,7 +138,7 @@ if( $tf_hotel_selected_template_check == "design-1" ){
         </div>
         <form class="tf-room">
             <?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' );?>
-
+            <span><?php _e('Select Rooms', 'tourfic'); ?></span>
             <div class="room-selection-wrap tf-field-group">
                 <select name="hotel_room_selected" class="tf-field" id="hotel-room-selected">
                     <?php
@@ -144,8 +153,8 @@ if( $tf_hotel_selected_template_check == "design-1" ){
             <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
                 
                 <div class="room-deposit-wrap">
-                    <input type="checkbox" id="tf-make-deposit" name="make_deposit" value="<?php echo $room_id ?>">
-                    <label for="tf-make-deposit"><?php _e("I'll make a Partial Payment", "tourfic") ?></label><br>
+                    <input type="checkbox" id="tf-make-deposit<?php echo $room_id ?>" name="make_deposit" value="<?php echo $room_id ?>">
+                    <label for="tf-make-deposit<?php echo $room_id ?>"><?php _e("I'll make a Partial Payment", "tourfic") ?></label><br>
                 </div>
 	        <?php } ?>
 

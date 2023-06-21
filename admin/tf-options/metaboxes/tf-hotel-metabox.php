@@ -31,6 +31,17 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'dependency'  => array( 'featured', '==', true ),
 				),
 				array(
+					'id'       => 'tf_single_hotel_layout_opt',
+					'type'     => 'select',
+					'label'    => __( 'Hotel Page Layout', 'tourfic' ),
+					'subtitle' => __( 'Select your Layout logic', 'tourfic' ),
+					'options'  => [
+						'global' => __( 'Global Settings', 'tourfic' ),
+						'single' => __( 'Single Settings', 'tourfic' ),
+					],
+					'default'  => 'global',
+				),
+				array(
 					'id'       => 'tf_single_hotel_template',
 					'type'     => 'imageselect',
 					'label'    => __( 'Single Hotel Page Layout', 'tourfic' ),
@@ -47,6 +58,9 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 						),
 					),
 					'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+					'dependency'  => [
+						array( 'tf_single_hotel_layout_opt', '==', 'single' )
+					],
 				),
 			),
 		),

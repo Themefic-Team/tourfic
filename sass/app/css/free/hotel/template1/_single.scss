@@ -13,6 +13,8 @@
         .tf_booking-dates{
             #check-in-out-date{
                 background-color: #F3F7FA !important;
+                padding-top: 3px !important;
+                padding-bottom: 3px !important;
             }
             #tf-required {
                 text-align: center;
@@ -107,6 +109,10 @@
                                 margin-right: 20px;
                                 border-radius: 4px;
                                 position: relative;
+                                @media #{$tfmax767}{
+                                    width: 100% !important;
+                                    margin-bottom: 10px;
+                                }
                                 img{
                                     border-radius: 4px;
                                 }
@@ -125,6 +131,12 @@
                                 
                             }
                             .tf-features-infos{
+                                @media #{$tfmax991}{
+                                    width: 60% !important;
+                                }
+                                @media #{$tfmax767}{
+                                    width: 100% !important;
+                                }
                                 .tf-room-type{
                                     h3{
                                         font-size: 25px;
@@ -143,6 +155,8 @@
                                         border-radius: 5px;
                                         padding: 10px;
                                         margin: 5px 10px 5px 0px;
+                                        line-height: 1rem;
+                                        font-size: 12px;
                                         i,
                                         img{
                                             margin-right: 5px;
@@ -372,6 +386,13 @@
     }
     .tf-hotel-details-info{
         padding-right: 25px;
+        @media #{$tfmax767}{
+            padding-right: 10px;
+            padding-left: 10px !important;
+            margin: 0 !important;
+            overflow: auto !important;
+            max-height: none !important;
+        }
         .tf-template-1.tf-room-adv-info{
             ul{
                 margin: 0;

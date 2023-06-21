@@ -1,9 +1,9 @@
-=== Tourfic - Ultimate Hotel & Travel Booking WordPress Plugin | WooCommerce Booking ===
+=== Tourfic – Ultimate Hotel Booking & Travel Booking WordPress Plugin | WooCommerce Booking ===
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
 Tested up to: 6.2.2
-Stable tag: 2.9.19
+Stable tag: 2.9.20
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -409,6 +409,19 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 == Changelog ==
 
+= 2.9.20 -  20 June 2023 =
+
+* Added: Hotel single page new template
+* Added: Hotel Archive page new template
+* Added: Hotel Search page new template
+* Added: Tour single page new template
+* Added: Tour Archive page new template
+* Added: Tour Search page new template
+* Added: Tour Inventory 
+* Added: Dynamic pricing in tour extra
+* Checked: WooCommerce compatibility check 
+* Checked: Elementor compatibility check 
+
 = 2.9.19 -  07 June 2023 =
 
 * Added: Booking details export ( Pro )
@@ -796,7 +809,7 @@ Added: Feature image required hotel and tours
 * Fixed: Hotel booking calendar minimum date set to today date
 * Fixed: Tour and hotel permalink structure
 * Fixed: Tour and hotel's terms and conditions auto paragraph issue
-* Fixed: Compatible issue with Twenty Twenty Two theme
+* Fixed: Compatible issue with Twenty Twenty-Two theme
 * Fixed: PHP variable error while booking through WooCommerce
 * Removed: Hotel gallery thumbnails
 
@@ -855,7 +868,7 @@ Added: Feature image required hotel and tours
 = 2.0.1 - 7/1/2022 =
 
 * Updated Preview URL
-* WordPress 5.8.3 Compatiblity Check
+* WordPress 5.8.3 Compatibility Check
 * Fixed a Div Bug
 
 = 2.0.0 - 4/1/2022 =
@@ -865,7 +878,7 @@ Added: Feature image required hotel and tours
 * Added Tour Booking
 * Added tour in the search box
 * Modified Searchbox shortcode
-* Fixed Hotel single page layout
+* Fixed Hotel single-page layout
 
 = 1.7.3 - 18/12/2021 =
 
@@ -889,7 +902,7 @@ Added: Feature image required hotel and tours
 = 1.1.6 - 15/08/2021 =
 
 - Compress file size
-- Optimized redux framwork
+- Optimized redux framework
 - Elementor Pro conflict issue fixed
 
 = 1.1.5 - 15/08/2021 =
@@ -898,15 +911,15 @@ Added: Feature image required hotel and tours
 
 = 1.1.4 - 23/07/2021 =
 
-- WordPress 5.8 Compatiblity Check
-- WooCommerce 5.5.1 Compatiblity Check
+- WordPress 5.8 Compatibility Check
+- WooCommerce 5.5.1 Compatibility Check
 
 = 1.1.3 - 27/06/2021 =
 
-- Elementor compatibilty check
-- Elementor tour slider extention added
-- Elementor destination extention added
-- Elementor search extention added
+- Elementor compatibility check
+- Elementor tour slider extension added
+- Elementor destination extension added
+- Elementor search extension added
 
 = 1.1.2 - 27/06/2021 =
 
@@ -917,15 +930,15 @@ Added: Feature image required hotel and tours
 = 1.1.1 - 16/06/2021 =
 
 - Lightbox issue Fixed on Single Tour Gallery
-- Elementor Compatiblity Check
+- Elementor Compatibility Check
 - Slick Slider Margin Issue Fixed on Single Tour Gallery
-- Astra theme Compatiblity Check
+- Astra theme Compatibility Check
 
 
 = 1.1.0 - 15/06/2021 =
 
 - Added Lightbox on Single Tour Gallery
-- WooCommerce 5.4.1 Compatiblity Check
+- WooCommerce 5.4.1 Compatibility Check
 
 = 1.0.46 - 27/04/2021 =
 
@@ -958,6 +971,6 @@ Added: Feature image required hotel and tours
 
 == Upgrade Notice ==
 
-= 2.9.5 =
+= 2.9.20 =
 
-This is an important & critical release. Please make sure you BACKUP your website before updating. You need to update the plugin to get next level updates & features of Tourfic. After you update the plugin, please go to "Tourfic Settings" and click the "Save Button". You can then go ahead and start editing.As a complete revamp of assets  has been done in this version so please BACKUP your both database and old version of Tourfic.
+This is an important & critical release. Please make sure you BACKUP your website before updating. You need to update the plugin to get next-level updates & features of Tourfic. You can then go ahead and start editing. We releasing a new template for tours and hotel single-page, archive pages. You might face some adjustment issues in your existing single and archive page designs. Please go to the settings panel and adjust your font family, font size, line height, and color after the update. 

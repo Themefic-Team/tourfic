@@ -8,6 +8,9 @@
         color: red !important;
         display: block;
     }
+    @media #{$tfmax767}{
+        padding-top: 0px;
+    }
 }
 
 // Search Heading
@@ -186,12 +189,15 @@ i {
     i {
         color: $color-theme;
     }
+    p{
+        font-size: 12px !important;
+    }
     .tf-title-meta{
         align-items: baseline;
     }
     .tf-title {
         h2 {
-        font-size: 22px;
+        font-size: 22px !important;
         line-height: 1.3;
         a{
             color: $color-black-light;
@@ -209,7 +215,7 @@ i {
                 padding: 6px 10px;
                 border-radius: 5px;
                 margin: 10px 10px 0px 0px;
-                font-size: 15px;
+                font-size: 12px;
                 i{
                     margin-right: 5px;
                     color: #686E7A;
@@ -246,6 +252,14 @@ i {
     @media #{$max991} {
         flex-basis: 100%;
     }
+    .tf-reviews{
+        gap: 8px;
+        align-items: center;
+        .tf-avarage-review{
+            font-size: 12px;
+            line-height: 1rem;
+        }
+    }
     }
 
     .tf-post-footer {
@@ -262,6 +276,7 @@ i {
     }
     .tf_posts_navigation,#tf_posts_navigation_bar{
         margin-top: 40px;
+        width: 100%;
         .page-numbers {
             font-size: 14px;
             color: $color-primary !important;
@@ -281,6 +296,7 @@ i {
 .tf_posts_navigation.tf_posts_ajax_navigation,
 .tf_posts_navigation.tf_posts_page_navigation{
     margin-top: 40px;
+    width: 100%;
     .page-numbers {
         font-size: 14px;
         color: $color-primary !important;
@@ -432,7 +448,7 @@ i {
                 margin-bottom: 0px !important;
             }
             .al-range-slider__input.js-al-range-slider__input {
-                display: none;
+                display: none !important;
             }
         }
         #tf__booking_sidebar{
@@ -447,6 +463,7 @@ i {
                 border-radius: 0px;
                 margin-bottom: 26px;
                 border-bottom: 1px solid #E3E6F0;
+                padding: 0px !important;
                 .tf-widget-title{
                     background-color: inherit;
                     border: 0px solid;
@@ -478,6 +495,7 @@ i {
                                 padding-left: 32px;
                                 line-height: 1.3;
                                 font-size: 16px;
+                                font-weight: 400;
                                 input{
                                     display: none;
                                 }

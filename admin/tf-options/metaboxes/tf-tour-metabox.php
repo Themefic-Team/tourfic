@@ -45,6 +45,17 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'dependency'  => array( 'tour_as_featured', '==', true ),
 				),
 				array(
+					'id'       => 'tf_single_tour_layout_opt',
+					'type'     => 'select',
+					'label'    => __( 'Tour Page Layout', 'tourfic' ),
+					'subtitle' => __( 'Select your Layout logic', 'tourfic' ),
+					'options'  => [
+						'global' => __( 'Global Settings', 'tourfic' ),
+						'single' => __( 'Single Settings', 'tourfic' ),
+					],
+					'default'  => 'global',
+				),
+				array(
 					'id'       => 'tf_single_tour_template',
 					'type'     => 'imageselect',
 					'label'    => __( 'Single Tour Page Layout', 'tourfic' ),
@@ -61,6 +72,9 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						),
 					),
 					'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+					'dependency'  => [
+						array( 'tf_single_tour_layout_opt', '==', 'single' )
+					],
 				),
 
 				array(
@@ -593,7 +607,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'          => 'cont_max_capacity',
 					'type'        => 'number',
 					'label'       => __( 'Maximum Capacity', 'tourfic' ),
-					'subtitle'    => __( 'Maximum Capacity allowed to travel this tour (Adult & Child)', 'tourfic' ),
+					'subtitle'    => __( 'Maximum Capacity allowed per day to travel this tour (Adult & Child)', 'tourfic' ),
 					'dependency'  => array(
 						array( 'type', '==', 'continuous' ),
 						array( 'custom_avail', '==', 'false' ),

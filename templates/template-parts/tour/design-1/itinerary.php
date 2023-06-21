@@ -18,10 +18,10 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
             ?>
             <div class="tf-single-itinerary-item <?php echo $itineray_key==1 ? esc_attr( 'active' ) : ''; ?>">
                 <div class="tf-itinerary-title">
-                    <h3>
+                    <h4>
                         <span class="accordion-checke"></span>
                         <span class="itinerary-day"><?php echo esc_html( $itinerary['time'] ) ?> - </span> <?php echo esc_html( $itinerary['title'] ); ?>
-                    </h3>
+                    </h4>
                 </div>
                 <div class="tf-itinerary-content-box" style="<?php echo $itineray_key==1 ? esc_attr( 'display: block;' ) : ''; ?>">
                     <div class="tf-itinerary-content tf-mt-16 tf-flex-gap-16 tf-flex">

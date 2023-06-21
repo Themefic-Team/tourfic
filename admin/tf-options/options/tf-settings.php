@@ -1373,20 +1373,13 @@ TF_Settings::option( 'tf_settings', array(
 					'class'   => 'tf-field-class',
 				),
 				array(
-					'id'          => 'global-fonts-api',
-					'type'        => 'text',
-					'label'       => __( 'Google Fonts API Key', 'tourfic' ),
-					'subtitle'    => __( 'For all Google fonts List, ', 'tourfic' ). '<a href="https://console.cloud.google.com/apis/library/webfonts.googleapis.com" target="_blank" style="margin-left: 10px;background-color: #003162;color: #fff;border-radius: 4px;text-align: center;font-size: 13px;padding: 7px 15px;text-decoration: none;"><strong>' . __( 'Get API KEY', 'tourfic' ) . '</strong></a>',
-					'field_width' => 29,
-				),
-				array(
 					'id'          => 'global-body-fonts-family',
 					'type'        => 'select',
 					'label'       => __( 'Global Body Fonts Family', 'tourfic' ),
 					'subtitle'    => __( 'Global Body Fonts Family of Tourfic', 'tourfic' ),
 					'options'  => function_exists( 'tourfic_google_fonts_list' ) ? tourfic_google_fonts_list() : '',
 					'default' => 'Default',
-					'field_width' => 29,
+					'field_width' => 45,
 				),
 				array(
 					'id'          => 'global-heading-fonts-family',
@@ -1395,7 +1388,7 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'    => __( 'Global Heading Fonts Family of Tourfic', 'tourfic' ),
 					'options'  => function_exists( 'tourfic_google_fonts_list' ) ? tourfic_google_fonts_list() : '',
 					'default' => 'Default',
-					'field_width' => 29,
+					'field_width' => 45,
 				),
 				array(
 					'id'      => 'h1-heading',
@@ -1423,7 +1416,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 3.12
+					'default' => 1.2
 				),
 				array(
 					'id'       => 'global-h1-weight',
@@ -1482,7 +1475,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 2.37
+					'default' => 1.2
 				),
 				array(
 					'id'       => 'global-h2-weight',
@@ -1541,7 +1534,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.87
+					'default' => 1.2
 				),
 				array(
 					'id'       => 'global-h3-weight',
@@ -1600,7 +1593,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.75
+					'default' => 1.2
 				),
 				array(
 					'id'       => 'global-h4-weight',
@@ -1659,7 +1652,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.56
+					'default' => 1.2
 				),
 				array(
 					'id'       => 'global-h5-weight',
@@ -1718,7 +1711,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.37
+					'default' => 1.2
 				),
 				array(
 					'id'       => 'global-h6-weight',
@@ -1777,7 +1770,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.37
+					'default' => 1.2
 				),
 				array(
 					'id'       => 'global-p-weight',
@@ -1833,6 +1826,28 @@ TF_Settings::option( 'tf_settings', array(
 						'regular' => __( 'Normal', 'tourfic' ),
 						'hover'   => __( 'Hover', 'tourfic' ),
 					),
+				),
+				array(
+					'id'          => 'button-font-size',
+					'type'        => 'number',
+					'label'       => __( 'Button Font Size (PX)', 'tourfic' ),
+					'subtitle'    => __( 'Button Font Size of Tourfic', 'tourfic' ),
+					'attributes'  => array(
+						'min' => '1',
+					),
+					'field_width' => 45,
+					'default' => 14
+				),
+				array(
+					'id'          => 'button-line-height',
+					'type'        => 'text',
+					'label'       => __( 'Button Line Height (REM)', 'tourfic' ),
+					'subtitle'    => __( 'Button Line Height of Tourfic', 'tourfic' ),
+					'attributes'  => array(
+						'min' => '1',
+					),
+					'field_width' => 45,
+					'default' => 1.2
 				),
 				array(
 					'id'       => 'tourfic-sidebar-booking',

@@ -33,6 +33,10 @@
                     $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required"><b>' + tf_params.field_required + '</b></span>');
                 }
                 return;
+            }else{
+                if ($('#tf-required').length === 1) {
+                    $('.tf_booking-dates .tf_label-row .required').html('');
+                }
             }
             //get the checked values of features
             var features = [];

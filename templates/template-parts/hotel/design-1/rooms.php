@@ -135,7 +135,9 @@ foreach ( $rooms as $key => $room ) {
                                         <?php } ?>
                                         <?php 
                                         if( !empty($room['features']) ){
+                                        $tf_room_fec_key = 1;
                                         foreach ( $room['features'] as $feature ) {
+                                        if ( $tf_room_fec_key < 5 ) {
                                         $room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
                                         if ( ! empty( $room_f_meta ) ) {
                                             $room_icon_type = ! empty( $room_f_meta['icon-type'] ) ? $room_f_meta['icon-type'] : '';
@@ -151,7 +153,14 @@ foreach ( $rooms as $key => $room ) {
                                             <?php echo ! empty( $room_feature_icon ) ? $room_feature_icon : ''; ?>
                                             <?php echo $room_term->name; ?>
                                         </li>
-                                        <?php } } ?>
+                                        <?php } $tf_room_fec_key++; } } ?>
+                                        <?php 
+                                        if(!empty($room['features'])){
+                                            if(count($room['features']) > 3){
+                                                echo '<span>More....</span>';
+                                            }
+                                        }
+                                        ?>
                                     </ul>
 
                                     <?php
