@@ -191,7 +191,7 @@
                 $('.tf-step-1').addClass('active');
                 $('.tf-step-2').addClass('done');
                 $('.tf-step-3').addClass('done');
-                $('.tf_import_tours_btn').html('Importing...');
+                $('.tf-importing-progressbar-container').show();
             },
             success: function(response){
                 //get the percentage value from response
@@ -243,21 +243,13 @@
                 $('.tf-step-1').addClass('done');
                 $('.tf-step-2').addClass('done');
                 $('.tf-step-3').addClass('done');
-                $('.tf_import_hotels_btn').html('Importing...');
+                $('.tf-importing-progressbar-container').show();
             },
             success: function(response){
                 //get the percentage value from response
                 if( response.success ){
-                    console.log(response.data.room);
+                    console.log(response.data.post_meta);
                     let percentage = response.data.imported_percentage;
-                    $('.tf-importing-progressbar-container').show();
-                    $('.tf-importing-progressbar').css('width', percentage + '%');
-
-                    if( percentage == 100 ){
-                        $('.tf-importing-progressbar-container').hide();
-                        $('.tf_import_hotels_btn').html('Import');
-                        $('.tf-step-3').addClass('active');
-                    }
                 }
             },
             complete: function(){

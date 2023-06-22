@@ -212,21 +212,21 @@ input.tf_import_hotels_btn {
 table.tf-importer-mapping-table tr:nth-child(even) {
   background: #fafafa;
 }
+
 .tf-importing-progressbar-container{
-  width: 100%;
-  height: 30px;
-  background-color: #f1f1f1;
-  border-radius: 4px;
-  margin-top: 30px;
   display: none;
 }
-
-.tf-importing-progressbar {
-  height: 100%;
-  background-color: #003c79;
-  width: 0%;
-  border-radius: 4px;
-  transition: width 0.2s ease-in-out;
+.tf-importing-progressbar {  
+  text-align: center;
+  padding: 50px;
+  svg{
+    width: 150px;
+    height: 150px;
+  }
+  p{
+    font-size: 16px;
+    font-weight: bold;
+  }
 }
 .tf-import-complete-wrap{
   display: none;
