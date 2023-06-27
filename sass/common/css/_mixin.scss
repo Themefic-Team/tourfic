@@ -76,7 +76,11 @@
   -webkit-align-self: $align;
   align-self: $align;
 }
-
+@mixin flex-center() {
+  @include flexbox();
+  @include justify-content(center);
+  @include align-items(center);
+}
 //transform
 @mixin transform($transform) {
   -webkit-transform: $transform;
