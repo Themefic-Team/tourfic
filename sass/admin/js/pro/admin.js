@@ -123,12 +123,10 @@
                 link.click();
                 //clean up
                 document.body.removeChild(link);
-                $('.tf-export-ht-btn').html('Export');
-
-                console.log(response);
+                $('.tf-export-tours-btn').html('Export');
             },
             complete: function(){
-                $('.tf-export-ht-btn').html('Export');
+                $('.tf-export-tours-btn').html('Export');
             }
         });
     });
