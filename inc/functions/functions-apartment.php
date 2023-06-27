@@ -915,8 +915,8 @@ if ( ! function_exists( 'get_apartment_min_max_price' ) ) {
 		wp_reset_query();
 
 		return array(
-			'min' => min( $min_max_price ),
-			'max' => max( $min_max_price ),
+			'min' => !empty($min_max_price) ? min( $min_max_price ) : 0,
+			'max' => !empty($min_max_price) ? max( $min_max_price ) : 0,
 		);
 	}
 }

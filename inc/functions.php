@@ -384,7 +384,7 @@ function taxonomy_template( $template ) {
 if ( ! function_exists( 'tf_admin_role_caps' ) ) {
 	function tf_admin_role_caps() {
 
-		if ( get_option( 'tf_admin_caps' ) < 1 ) {
+		if ( get_option( 'tf_admin_caps' ) < 2 ) {
 			$admin_role  = get_role( 'administrator' );
 			$editor_role = get_role( 'editor' );
 
@@ -442,7 +442,7 @@ if ( ! function_exists( 'tf_admin_role_caps' ) ) {
 				$editor_role->add_cap( $cap );
 			}
 
-			update_option( 'tf_admin_caps', 1 );
+			update_option( 'tf_admin_caps', 2 );
 		}
 	}
 
@@ -1486,15 +1486,17 @@ function tf_var_dump( $var ) {
  * @author: Jahid
  * return: array
  */
-function tf_data_types( $var ) {
-	if ( ! empty( $var ) && gettype( $var ) == "string" ) {
-		$tf_serialize_date = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-		}, $var );
+if ( ! function_exists( 'tf_data_types' ) ) {
+	function tf_data_types( $var ) {
+		if ( ! empty( $var ) && gettype( $var ) == "string" ) {
+			$tf_serialize_date = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+				return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+			}, $var );
 
-		return unserialize( $tf_serialize_date );
-	} else {
-		return $var;
+			return unserialize( $tf_serialize_date );
+		} else {
+			return $var;
+		}
 	}
 }
 
