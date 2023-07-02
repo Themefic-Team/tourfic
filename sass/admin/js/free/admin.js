@@ -13,6 +13,7 @@
             },
         });
 
+
         /**
          * Delete old review fields
          * @author kabir, fida
@@ -106,6 +107,19 @@
             }
         });
 
+        /**
+         * Apartment location required
+         *
+         * show notyf error
+         */
+        $(document).on('click', '.post-type-tf_apartment #publish, .post-type-tf_apartment #save-post', function(e) {
+            if( $('[name="tf_apartment_opt[address]"]').val().length === 0 ) {
+                e.preventDefault;
+                e.stopImmediatePropagation();
+                notyf.error(tf_admin_params.apartment_location_required);
+                return false;
+            }
+        });
         
         /**
          * Ajax install
@@ -173,7 +187,7 @@
             });
 
         });
-        
+
         //documentation link open in new tab
         $('.tf-go-docs').parent().attr('target','_blank');
 

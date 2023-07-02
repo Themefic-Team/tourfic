@@ -112,8 +112,8 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 		} else {
             wp_enqueue_style( 'fancybox', TF_ASSETS_URL . 'app/libs/fancybox/jquery.fancybox.min.css', '', TOURFIC );
 			wp_enqueue_script( 'fancybox', TF_ASSETS_URL . 'app/libs/fancybox/jquery.fancybox.min.js', array( 'jquery' ), TOURFIC, true );
-		}  
-        
+		}
+
         /**
          * Slick
          * v1.8.1
@@ -129,7 +129,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         /**
          * Font Awesome Free
          * v5.15.4
-         */ 
+         */
         if ( $fa_cdn == true && function_exists('is_tf_pro') && is_tf_pro() ) {
             wp_enqueue_style( 'font-awesome-5', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css', '', TOURFIC );
         } else {
@@ -219,7 +219,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
 
         /**
          * Tour Min and Max Price
-         */ 
+         */
 
         $tftours_min_max = array(
             'posts_per_page'=> -1,
@@ -285,6 +285,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
             $tour_min_price = 0;
         }
 
+		$tf_apartment_min_max_price = get_apartment_min_max_price();
 
         /**
          * Custom
@@ -297,6 +298,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'ajax_url'     => admin_url( 'admin-ajax.php' ),
                 'single' => is_single(),
                 'locations' => get_hotel_locations(),
+                'apartment_locations'     => get_apartment_locations(),
                 'tour_destinations' => get_tour_destinations(),
                 'ajax_result_success' => __('Refreshed Successfully!', 'tourfic'),
                 'wishlist_add' => __('Adding to wishlist...', 'tourfic'),
@@ -324,8 +326,10 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                 'showitinerarychart' => isset($showitinerarychart) ? $showitinerarychart : '',
                 'showitinerarystatus' => isset($showitinerarystatus) ? $showitinerarystatus : '',
 	            'date_hotel_search' => tfopt( 'date_hotel_search' ),
-	            'date_tour_search' => tfopt( 'date_tour_search' )
-            )
+	            'date_tour_search' => tfopt( 'date_tour_search' ),
+                'tf_apartment_max_price'  => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['max'] : 0,
+				'tf_apartment_min_price'  => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['min'] : 0,
+			)
         );
         //wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/old/responsive.css', '', TOURFIC );
 
@@ -391,10 +395,9 @@ if ( !function_exists('tf_enqueue_admin_scripts') ) {
 
             $output .= "$(document).on('tf_select2 widget-added widget-updated', function() {
                         jQuery('.tf-select2').each(function(){
-                            // if( !$(this).hasClass('select2-hidden-accessible') ){
-                            //     $(this).select2({ width: '100%' });
-                            // }
-                            $(this).select2({ width: '100%' });
+                            if( !$(this).hasClass('select2-hidden-accessible') ){
+                                $(this).select2({ width: '100%' });
+                            }
                         });
 
                     });";

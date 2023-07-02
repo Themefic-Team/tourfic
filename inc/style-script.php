@@ -7,8 +7,8 @@ defined( 'ABSPATH' ) || exit;
  * 
  */
 
-if( !function_exists( 'tf_custom_css' ) ){
-	function tf_custom_css(){
+if ( ! function_exists( 'tf_custom_css' ) ) {
+	function tf_custom_css() {
 		// Store as PHP variables
 		// Template 1 Global CSS
 		$tf_template1_global_reg = !empty(tf_data_types(tfopt( 'tourfic-design1-global-color' ))['gcolor']) ? tf_data_types(tfopt( 'tourfic-design1-global-color' ))['gcolor'] : '';
@@ -31,7 +31,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 		$tf_param_single_bg_color = !empty(tf_data_types(tfopt( 'tourfic-review-style' ))['param_single_bg_color']) ? tf_data_types(tfopt( 'tourfic-review-style' ))['param_single_bg_color'] : '';
 		$tf_review_color = !empty(tf_data_types(tfopt( 'tourfic-review-style' ))['review_color']) ? tf_data_types(tfopt( 'tourfic-review-style' ))['review_color'] : '';
 		$tf_review_bg_color = !empty(tf_data_types(tfopt( 'tourfic-review-style' ))['review_bg_color']) ? tf_data_types(tfopt( 'tourfic-review-style' ))['review_bg_color'] : '';
-		
+
 		// Global Font Family
 		$tf_global_font_family = tfopt('global-body-fonts-family') ? tfopt('global-body-fonts-family') : 'Default';
 		$tf_global_heading_font_family = tfopt('global-heading-fonts-family') ? tfopt('global-heading-fonts-family') : 'Default';
@@ -77,7 +77,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 		$tf_global_button_line_height = tfopt('button-line-height') ? tfopt('button-line-height') : 1.2;
 
 		$output = '';
-		
+
 		// Template 1 Global CSS
 		if( !empty( $tf_template1_global_reg ) ){ $output .= '
 			.tf-template-global .tf-bttn-normal.bttn-primary,
@@ -124,7 +124,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 				color: '.$tf_template1_p_global_reg.'
 			}';
 		}
-		
+
 		if( !empty($tf_global_heading_font_family) && $tf_global_heading_font_family!="Default" && $tf_global_font_family!="Default"){
 			$output .= '
 			.tf-container-inner h1,
@@ -360,14 +360,14 @@ if( !function_exists( 'tf_custom_css' ) ){
 				color: '.$tf_review_color.';
 			}
 		'; }
-		
+
 		wp_add_inline_style( 'tf-app-style', $output );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'tf_custom_css', 99999 );
 
 if( !function_exists( 'tf_hotel_css' ) ){
-	function tf_hotel_css(){ 
+	function tf_hotel_css(){
 		// Store as PHP variables
 		// Hotel CSS
 		$tf_hotel_type_color = !empty(tf_data_types(tfopt( 'tourfic-hotel-type-bg-color' ))['regular']) ? tf_data_types(tfopt( 'tourfic-hotel-type-bg-color' ))['regular'] : '';
@@ -430,7 +430,7 @@ if( !function_exists( 'tf_hotel_css' ) ){
 		if( $tf_hotel_table_border_color  ) { $output .= '
 			.availability-table td, .availability-table td.reserve, .tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table tr td, .tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table {border-color: '.$tf_hotel_table_border_color.';}
 		'; }
-		
+
 		wp_add_inline_style( 'tf-app-style', $output );
 	}
 }
@@ -593,9 +593,120 @@ if( !function_exists( 'tf_tour_css' ) ){
 				background: '.$tf_itin_icon_color.';
 			}
 		'; }
-		
+
 		wp_add_inline_style( 'tf-app-style', $output );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'tf_tour_css', 99999 );
-?>
+
+/*
+ * Apartment Custom CSS
+ * @author: Foysal
+ */
+if ( ! function_exists( 'tf_apartment_css' ) ) {
+	function tf_apartment_css() {
+		//amenities
+		$amenities_bg           = ! empty( tf_data_types( tfopt( 'apartment-amenities' ) )['amenities_bg'] ) ? tf_data_types( tfopt( 'apartment-amenities' ) )['amenities_bg'] : '';
+		$amenities_border_color = ! empty( tf_data_types( tfopt( 'apartment-amenities' ) )['amenities_border_color'] ) ? tf_data_types( tfopt( 'apartment-amenities' ) )['amenities_border_color'] : '';
+		$amenities_text         = ! empty( tf_data_types( tfopt( 'apartment-amenities' ) )['amenities_text'] ) ? tf_data_types( tfopt( 'apartment-amenities' ) )['amenities_text'] : '';
+		$amenities_icon         = ! empty( tf_data_types( tfopt( 'apartment-amenities' ) )['amenities_icon'] ) ? tf_data_types( tfopt( 'apartment-amenities' ) )['amenities_icon'] : '';
+		//features
+		$features_bg           = ! empty( tf_data_types( tfopt( 'apartment-features' ) )['features_bg'] ) ? tf_data_types( tfopt( 'apartment-features' ) )['features_bg'] : '';
+		$features_border_color = ! empty( tf_data_types( tfopt( 'apartment-features' ) )['features_border_color'] ) ? tf_data_types( tfopt( 'apartment-features' ) )['features_border_color'] : '';
+		$features_text         = ! empty( tf_data_types( tfopt( 'apartment-features' ) )['features_text'] ) ? tf_data_types( tfopt( 'apartment-features' ) )['features_text'] : '';
+		$features_icon         = ! empty( tf_data_types( tfopt( 'apartment-features' ) )['features_icon'] ) ? tf_data_types( tfopt( 'apartment-features' ) )['features_icon'] : '';
+		//booking form
+		$form_heading_color = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_heading_color'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_heading_color'] : '';
+		$form_bg            = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_bg'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_bg'] : '';
+		$form_border_color  = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_border_color'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_border_color'] : '';
+		$form_text          = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_text'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_text'] : '';
+		$form_fields_bg     = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_bg'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_bg'] : '';
+		$form_fields_border = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_border'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_border'] : '';
+		$form_fields_text   = ! empty( tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_text'] ) ? tf_data_types( tfopt( 'booking-form-design' ) )['form_fields_text'] : '';
+		//Host
+		$host_heading_color = ! empty( tf_data_types( tfopt( 'host-card-design' ) )['host_heading_color'] ) ? tf_data_types( tfopt( 'host-card-design' ) )['host_heading_color'] : '';
+		$host_bg            = ! empty( tf_data_types( tfopt( 'host-card-design' ) )['host_bg'] ) ? tf_data_types( tfopt( 'host-card-design' ) )['host_bg'] : '';
+		$host_border_color  = ! empty( tf_data_types( tfopt( 'host-card-design' ) )['host_border_color'] ) ? tf_data_types( tfopt( 'host-card-design' ) )['host_border_color'] : '';
+		$host_text          = ! empty( tf_data_types( tfopt( 'host-card-design' ) )['host_text'] ) ? tf_data_types( tfopt( 'host-card-design' ) )['host_text'] : '';
+
+		$output = '';
+		if ( $amenities_bg || $amenities_border_color || $amenities_text || $amenities_icon ) {
+			$output .= '
+			.tf-apartment .apartment-amenities ul {
+				background-color: ' . $amenities_bg . ';
+				border-color: ' . $amenities_border_color . ';
+			}
+			.tf-apartment .apartment-amenities ul li {
+				color: ' . $amenities_text . ';
+			}
+			.tf-apartment .apartment-amenities ul li i {
+				color: ' . $amenities_icon . ';
+			}
+		';
+		}
+		if ( $features_bg || $features_border_color || $features_text || $features_icon ) {
+			$output .= '
+			.tf-apartment .key-features ul {
+				background-color: ' . $features_bg . ';
+				border-color: ' . $features_border_color . ';
+			}
+			.tf-apartment .key-features ul li {
+				color: ' . $features_text . ';
+			}
+			.tf-apartment .key-features ul li i {
+				color: ' . $features_icon . ';
+			}
+		';
+		}
+		if ( $form_heading_color || $form_bg || $form_border_color || $form_text || $form_fields_bg || $form_fields_border || $form_fields_text ) {
+			$output .= '
+			#tf-apartment-booking h4 {
+				color: ' . $form_heading_color . ';
+			}
+			#tf-apartment-booking {
+				background-color: ' . $form_bg . ';
+				border-color: ' . $form_border_color . ';
+			}
+			#tf-apartment-booking .tf-apartment-form-header .tf-apartment-price-per-night span,
+			#tf-apartment-booking .tf-apartment-form-header .tf-single-rating {
+				color: ' . $form_text . ';
+			}
+			#tf-apartment-booking .tf-apartment-form-fields{
+				background-color: ' . $form_fields_bg . ';
+				border-color: ' . $form_fields_border . ';
+			}
+			#tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row{
+				border-top-color: ' . $form_fields_border . ';
+			}
+			#tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-out-date #check-in-out-date::-webkit-input-placeholder{
+				color: ' . $form_fields_text . ';
+			}
+			#tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf-label,
+			.adults-text, .person-sep, .child-text, .room-text, .infant-text,
+			#tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-out-date #check-in-out-date,
+			#tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-out-date .tf-label{
+				color: ' . $form_fields_text . ';
+			}
+			';
+		}
+		if ( $host_heading_color || $host_bg || $host_border_color || $host_text ) {
+			$output .= '
+			.host-details {
+				background-color: ' . $host_bg . ';
+				border-color: ' . $host_border_color . ';
+			}
+			.host-details .host-meta h4 {
+				color: ' . $host_heading_color . ';
+			}
+			.host-details,
+			.tf-host-rating-wrapper h6{
+				color: ' . $host_text . ';
+			}
+			';
+		}
+
+		wp_add_inline_style( 'tf-apartment-style', $output );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'tf_apartment_css', 99999 );
+

@@ -20,11 +20,12 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'disable-services',
 					'type'     => 'checkbox',
-					'label'    => __( 'Disable Post Types', 'tourfic' ),
-					'subtitle' => __( 'Tick the checkbox to disable the Post Type you don\'t need.', 'tourfic' ),
+					'label'    => __( 'Disable Services', 'tourfic' ),
+					'subtitle' => __( 'Disable or hide the services you don\'t need by ticking the checkbox', 'tourfic' ),
 					'options'  => array(
 						'hotel' => __( 'Hotels', 'tourfic' ),
 						'tour'  => __( 'Tours', 'tourfic' ),
+						'apartment' => __( 'Apartment', 'tourfic' ),
 					),
 				),
 				array(
@@ -55,7 +56,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => __( 'Select Single Template', 'tourfic' ),
 									'multiple' 		=> true,
 									'inline'   		=> true,
-									'options'   	=> array( 
+									'options'   	=> array(
 										'design-1' 				=> array(
 											'title'			=> 'Design 1',
 											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design1-hotel.jpg",
@@ -146,7 +147,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
 									'multiple' 		=> true,
 									'inline'   		=> true,
-									'options'   	=> array( 
+									'options'   	=> array(
 										'design-1' 				=> array(
 											'title'			=> 'Design 1',
 											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/hotel-archive-design1.jpg",
@@ -176,7 +177,7 @@ TF_Settings::option( 'tf_settings', array(
 								),
 							),
 						),
-						
+
 						array(
 							'id'     => 'tour_template',
 							'title'  => __( 'Tour', 'tourfic' ),
@@ -193,7 +194,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => __( 'Select Single Template', 'tourfic' ),
 									'multiple' 		=> true,
 									'inline'   		=> true,
-									'options'   	=> array( 
+									'options'   	=> array(
 										'design-1' 				=> array(
 											'title'			=> 'Design 1',
 											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design1-tour.jpg",
@@ -309,7 +310,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
 									'multiple' 		=> true,
 									'inline'   		=> true,
-									'options'   	=> array( 
+									'options'   	=> array(
 										'design-1' 				=> array(
 											'title'			=> 'Design 1',
 											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/tour-archive-design-1.jpg",
@@ -348,16 +349,15 @@ TF_Settings::option( 'tf_settings', array(
 			'icon'   => 'fas fa-hotel',
 			'fields' => array(),
 		),
-		'single_page'        => array(
+		'single_page'   => array(
 			'title'  => esc_html__( 'Single Page', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
-					'id'        => 'label_off_heading',
-					'type'      => 'heading',
-					'label'     => __( 'Global Settings for Single Hotel Page', 'tourfic' ),
-					'sub_title' => __( 'These options can be overridden from Single Hotel Settings.', 'tourfic' ),
+					'id'    => 'label_off_heading',
+					'type'  => 'heading',
+					'label' => __( 'Single Hotel Settings', 'tourfic' ),
 				),
 
 				array(
@@ -378,21 +378,20 @@ TF_Settings::option( 'tf_settings', array(
 					'default'   => false
 				),
 				array(
-					'id'        => 'feature-filter',
-					'type'      => 'switch',
-					'label'     => __( 'Filter By Feature', 'tourfic' ),
+					'id'       => 'feature-filter',
+					'type'     => 'switch',
+					'label'    => __( 'Filter By Feature', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => true,
-					'is_pro'    => true
+					'default'  => true,
+					'is_pro'   => true
 				),
 				array(
-					'id'       => 'h-enquiry-email',
-					'type'     => 'text',
-					'label'    => __( 'Email for Enquiry Form', 'tourfic' ),
-					'subtitle' => __( 'The Email to receive all enquiry form submissions', 'tourfic' ),
-					'is_pro'   => true,
-				)
+					'id'     => 'h-enquiry-email',
+					'type'   => 'text',
+					'label'  => __( 'Enquiry Email', 'tourfic' ),
+					'is_pro' => true,
+				),
 			),
 		),
 		'room_config'        => array(
@@ -403,14 +402,14 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'hotel_room_heading',
 					'type'  => 'heading',
-					'label' => __( 'Global Configuration for Hotel Rooms', 'tourfic' ),
+					'label' => __( 'Hotel Room Configuration', 'tourfic' ),
 				),
 
 				array(
-					'id'       => '',
+					'id'       => 'children_age_limit',
 					'type'     => 'switch',
-					'label'    => __( 'Children Age Limit', 'tourfic' ),
-					'subtitle' => __( 'Turn on this option to set the Maximum age limit for Children. This can be overridden from Single Hotel Settings.', 'tourfic' ),
+					'label'    => __( 'Children age limit', 'tourfic' ),
+					'subtitle' => __( 'keep blank if don\'t want to add', 'tourfic' ),
 					'is_pro'   => true,
 				),
 				array(
@@ -459,6 +458,53 @@ TF_Settings::option( 'tf_settings', array(
 				)
 			),
 		),
+
+		//Apartment Options
+		'apartment_option'      => array(
+			'title'  => esc_html__( 'Apartment Options', 'tourfic' ),
+			'icon'   => 'fa-solid fa-house-chimney',
+			'fields' => array(),
+		),
+		'apartment_single_page' => array(
+			'title'  => esc_html__( 'Single Page', 'tourfic' ),
+			'parent' => 'apartment_option',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'    => 'label_off_heading',
+					'type'  => 'heading',
+					'label' => __( 'Single Apartment Settings', 'tourfic' ),
+				),
+
+				array(
+					'id'        => 'disable-apartment-review',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Review Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+
+				array(
+					'id'        => 'disable-apartment-share',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Share Option', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+
+				array(
+					'id'        => 'disable-related-apartment',
+					'type'      => 'switch',
+					'label'     => __( 'Disable Related Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+			),
+		),
+
 		// Tour Options
 		'tour'	 => array(
 			'title'  => __( 'Tour Options', 'tourfic' ),
@@ -1298,6 +1344,14 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => __( 'No', 'tourfic' ),
 				),
 				array(
+					'id'        => 'date_apartment_search',
+					'type'      => 'switch',
+					'label'     => __( 'Date Required in Apartment Search', 'tourfic' ),
+					'is_pro'    => true,
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
 					'id'        => 'disable_child_search',
 					'type'      => 'switch',
 					'label'     => __( 'Disabled Child in Tour Search', 'tourfic' ),
@@ -2071,6 +2125,87 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
+		'apartment_design'      => array(
+			'title'  => __( 'Apartment', 'tourfic' ),
+			'parent' => 'design-panel',
+			'icon'   => 'fa-solid fa-house-chimney',
+			'fields' => array(
+				array(
+					'id'      => 'apartment_design_heading',
+					'type'    => 'heading',
+					'content' => __( 'Apartment Settings', 'tourfic' )
+				),
+				array(
+					'id'       => 'apartment-amenities',
+					'type'     => 'color',
+					'label'    => __( 'Amenities Section', 'tourfic' ),
+					'subtitle' => __( 'Styling of the Amenities', 'tourfic' ),
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'amenities_bg'           => __( 'Background', 'tourfic' ),
+						'amenities_border_color' => __( 'Border Color', 'tourfic' ),
+						'amenities_text'         => __( 'Text Color', 'tourfic' ),
+						'amenities_icon'         => __( 'Icon Color', 'tourfic' ),
+					)
+				),
+				array(
+					'id'       => 'apartment-features',
+					'type'     => 'color',
+					'label'    => __( 'Key Features Section', 'tourfic' ),
+					'subtitle' => __( 'Styling of the Key Features', 'tourfic' ),
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'features_bg'           => __( 'Background', 'tourfic' ),
+						'features_border_color' => __( 'Border Color', 'tourfic' ),
+						'features_text'         => __( 'Text Color', 'tourfic' ),
+						'features_icon'         => __( 'Icon Color', 'tourfic' ),
+					)
+				),
+				array(
+					'id'      => 'apartment_form_heading',
+					'type'    => 'heading',
+					'content' => __( 'Booking Form Design', 'tourfic' )
+				),
+				array(
+					'id'       => 'booking-form-design',
+					'type'     => 'color',
+					'label'    => __( 'Booking Form', 'tourfic' ),
+					'subtitle' => __( 'Styling of the Booking Form', 'tourfic' ),
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'form_heading_color' => __( 'Heading Color', 'tourfic' ),
+						'form_bg'            => __( 'Background', 'tourfic' ),
+						'form_border_color'  => __( 'Border Color', 'tourfic' ),
+						'form_text'          => __( 'Text Color', 'tourfic' ),
+						'form_fields_bg'     => __( 'Fields Background', 'tourfic' ),
+						'form_fields_border' => __( 'Fields Border', 'tourfic' ),
+						'form_fields_text'   => __( 'Fields Text Color', 'tourfic' ),
+					)
+				),
+				array(
+					'id'      => 'apartment_host_heading',
+					'type'    => 'heading',
+					'content' => __( 'Apartment Host Design', 'tourfic' )
+				),
+				array(
+					'id'       => 'host-card-design',
+					'type'     => 'color',
+					'label'    => __( 'Apartment Host', 'tourfic' ),
+					'subtitle' => __( 'Styling of the Apartment Host', 'tourfic' ),
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'host_heading_color' => __( 'Heading Color', 'tourfic' ),
+						'host_bg'            => __( 'Background', 'tourfic' ),
+						'host_border_color'  => __( 'Border Color', 'tourfic' ),
+						'host_text'          => __( 'Text Color', 'tourfic' ),
+					)
+				),
+			),
+		),
 
 		// Miscellaneous Options
 		'miscellaneous'      => array(
@@ -2149,8 +2284,9 @@ TF_Settings::option( 'tf_settings', array(
 					'options' => array(
 						'1' => __( 'Single Hotel Page', 'tourfic' ),
 						'2' => __( 'Single Tour Page', 'tourfic' ),
+						'3' => __( 'Single Apartment Page', 'tourfic' ),
 					),
-					'default' => array( '1', '2' ),
+					'default' => array( '1', '2', '3' ),
 				),
 
 				array(
@@ -2307,6 +2443,43 @@ TF_Settings::option( 'tf_settings', array(
 						),
 						array(
 							'r-field-type' => __( 'Safety', 'tourfic' ),
+						),
+					)
+				),
+				array(
+					'id'       => 'r-apartment',
+					'class'    => 'disable-sortable',
+					'type'     => 'repeater',
+					'label'    => __( 'Review Fields for Apartments', 'tourfic' ),
+					'subtitle' => __( 'Maximum 10 fields allowed', 'tourfic' ),
+					'is_pro'   => true,
+					'max'      => '6',
+					'fields'   => array(
+						array(
+							'id'    => 'r-field-type',
+							'type'  => 'text',
+							'label' => __( 'Review for', 'tourfic' ),
+						),
+
+					),
+					'default'  => array(
+						array(
+							'r-field-type' => __( 'Staff', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Facilities', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Cleanliness', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Comfort', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Value for money', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => __( 'Location', 'tourfic' ),
 						),
 					)
 				),
@@ -2540,7 +2713,7 @@ TF_Settings::option( 'tf_settings', array(
 									'type'    => 'text',
 									'label'   => __( 'Email From Email', 'tourfic' ),
 									'default' => get_bloginfo( 'admin_email' ),
-								),								
+								),
 								array(
 									'id'      => 'order_email_heading',
 									'type'    => 'text',
@@ -2608,9 +2781,9 @@ TF_Settings::option( 'tf_settings', array(
 								// 	'default' => 'text/html',
 								// ),
 							),
-							
+
 						),
-						
+
 						//customer email tab
 						array(
 							'id'     => 'customer-email',
@@ -2653,7 +2826,7 @@ TF_Settings::option( 'tf_settings', array(
 								),
 							),
 						),
-					),	
+					),
 				),
 				//notice field
 				array(
@@ -2687,12 +2860,12 @@ TF_Settings::option( 'tf_settings', array(
 					<strong>{site_url} </strong> : To display the site url.<br>
 
 					'
-					
+
 					,
 				),
 			),
 		),
-		
+
 		//QR Code settings
 		'qr_code'    => array(
 			'title'  => esc_html__( 'QR Code', 'tourfic' ),

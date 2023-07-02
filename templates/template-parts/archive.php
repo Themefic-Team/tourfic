@@ -157,6 +157,8 @@ if( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ) 
                     tf_hotel_archive_single_item();
                 } elseif( $post_type == 'tf_tours' ) {
                     tf_tour_archive_single_item();
+                } elseif( $post_type == 'tf_apartment' ) {
+                    tf_apartment_archive_single_item();
                 }
                     
             }           

@@ -6,11 +6,14 @@ defined( 'ABSPATH' ) || exit;
  * Require some taxonomies
  *
  * hotel_location, tour_destination
+ *
+ * @since 1.0.0
  */
 function tf_required_taxonomies( $hook ) {
 	if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ) ) ) {
 		return;
 	}
+
 	global $post_type;
 
 	$tf_is_gutenberg_active = tf_is_gutenberg_active();
@@ -25,6 +28,11 @@ function tf_required_taxonomies( $hook ) {
 			'tour_destination' => array(
 				'message' => __( 'Please select a destination before publishing this tour', 'tourfic' )
 			)
+		),
+		'tf_apartment' => array(
+			'apartment_location' => array(
+				'message' => __( 'Please select a location before publishing this apartment', 'tourfic' )
+        	)
 		)
 	);
 

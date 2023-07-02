@@ -14,6 +14,7 @@ add_action( 'wp_ajax_nopriv_tf_hotel_booking', 'tf_hotel_booking_callback' );
  *
  * @return void
  * @throws Exception
+ * @since 2.2.0
  */
 function tf_hotel_booking_callback() {
 

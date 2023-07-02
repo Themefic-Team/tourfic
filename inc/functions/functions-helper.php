@@ -27,6 +27,7 @@ function tf_documentation_page_integration() {
 	$tftourdocumentation = sanitize_url('https://themefic.com/docs/tourfic/');
 	if($tf_current_role == "administrator"){
 		$submenu['edit.php?post_type=tf_hotel'][] = array( sprintf('<span class="tf-go-docs" style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_hotels', $tfhoteldocumentation );
+		$submenu['edit.php?post_type=tf_apartment'][] = array( sprintf( '<span class="tf-go-docs" style=color:#ffba00;">%s</span>', __( 'Go to Documentation', 'tourfic' ) ), 'edit_tf_apartments', $tfhoteldocumentation );
 		$submenu['edit.php?post_type=tf_tours'][] = array( sprintf('<span class="tf-go-docs" style=color:#ffba00;">%s</span>', __('Go to Documentation', 'tourfic')), 'edit_tf_tourss', $tftourdocumentation );
 	}
 }
@@ -173,6 +174,7 @@ function tf_hotel_tour_docs() {
 	$tf_current_role = $current_user->roles[0];
 	if($tf_current_role == "administrator"){
 		add_meta_box( 'tfhotel_docs', __( 'Tourfic Documentation', 'tourfic' ), 'tf_hotel_docs_callback','tf_hotel','side' ,'high');
+		add_meta_box( 'tfapartment_docs', __( 'Tourfic Documantation', 'tourfic' ), 'tf_apartment_docs_callback', 'tf_apartment', 'side', 'high' );
 		add_meta_box( 'tftour_docs', __( 'Tourfic Documentation', 'tourfic' ), 'tf_tour_docs_callback','tf_tours','side' ,'high');
 	}
 }
@@ -186,13 +188,25 @@ function tf_hotel_docs_callback(){
 	</div>
 <?php
 }
-function tf_tour_docs_callback(){
-	$tftourdocumentation =sanitize_url('https://themefic.com/docs/tourfic/');
-?>
-	<div class="tf_docs_preview" style="padding: 10px; text-align: center;">
-		<a href="<?php echo $tftourdocumentation; ?>" target="_blank" class="button button-primary button-large"><?php echo __('Go to Documentation','tourfic'); ?></a>
-	</div>
-<?php
+
+function tf_apartment_docs_callback() {
+	$tf_apartment_documentation = sanitize_url( 'https://themefic.com/docs/tourfic/' );
+	?>
+    <div class="tf_docs_preview" style="padding: 10px; text-align: center;">
+        <a href="<?php echo $tf_apartment_documentation; ?>" target="_blank"
+           class="button button-primary button-large"><?php echo __( 'Go to Documentation', 'tourfic' ); ?></a>
+    </div>
+	<?php
+}
+
+function tf_tour_docs_callback() {
+	$tf_tour_documentation = sanitize_url( 'https://themefic.com/docs/tourfic/' );
+	?>
+    <div class="tf_docs_preview" style="padding: 10px; text-align: center;">
+        <a href="<?php echo $tf_tour_documentation; ?>" target="_blank"
+           class="button button-primary button-large"><?php echo __( 'Go to Documentation', 'tourfic' ); ?></a>
+    </div>
+	<?php
 }
 
 /**
@@ -419,17 +433,23 @@ function tourfic_ask_question_ajax() {
 	if ( function_exists('is_tf_pro') && is_tf_pro() ) {
 		do_action( 'enquiry_pabbly_form_trigger', $post_id, $name, $email, $question );
 		do_action( 'enquiry_zapier_form_trigger', $post_id, $name, $email, $question );
-	} 
-	
-	
+	}
+
+
 	if (function_exists('is_tf_pro') && is_tf_pro()){
-		if( "tf_hotel" == get_post_type( $post_id ) ){
-			$send_email_to = !empty( tfopt('h-enquiry-email') ) ? sanitize_email( tfopt('h-enquiry-email') ) : sanitize_email( get_option( 'admin_email' ) );
-		}else{
-			$send_email_to = !empty( tfopt('t-enquiry-email') ) ? sanitize_email( tfopt('t-enquiry-email') ) : sanitize_email( get_option( 'admin_email' ) );
+		if ( "tf_hotel" == get_post_type( $post_id ) ) {
+			$send_email_to = ! empty( tfopt( 'h-enquiry-email' ) ) ? sanitize_email( tfopt( 'h-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
+		} elseif ( "tf_apartment" == get_post_type( $post_id ) ) {
+			$send_email_to = ! empty( $author_mail ) ? sanitize_email( $author_mail ) : sanitize_email( get_option( 'admin_email' ) );
+		} else {
+			$send_email_to = ! empty( tfopt( 't-enquiry-email' ) ) ? sanitize_email( tfopt( 't-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
 		}
 	}else{
-		$send_email_to = sanitize_email( get_option( 'admin_email' ) );
+		if ( "tf_apartment" == get_post_type( $post_id ) ) {
+			$send_email_to = ! empty( $author_mail ) ? sanitize_email( $author_mail ) : sanitize_email( get_option( 'admin_email' ) );
+		} else {
+			$send_email_to = sanitize_email( get_option( 'admin_email' ) );
+		}
 	}
 	$subject     = sprintf( __( 'Someone asked question on: %s', 'tourfic' ), $post_title );
 	$message     = "{$question}";
@@ -625,6 +645,48 @@ if (!function_exists('tf_get_deposit_amount')) {
     }
 };
 
+/*
+ * User extra fields
+ * @author Foysal
+ */
+if ( ! function_exists( 'tf_extra_user_profile_fields' ) ) {
+	function tf_extra_user_profile_fields( $user ) { ?>
+        <h3><?php _e( 'Tourfic Extra profile information', 'tourfic' ); ?></h3>
 
+        <table class="form-table">
+            <tr>
+                <th><label for="language"><?php _e( 'Language', 'tourfic' ); ?></label></th>
+                <td>
+                    <input type="text" name="language" id="language"
+                           value="<?php echo esc_attr( get_the_author_meta( 'language', $user->ID ) ); ?>"
+                           class="regular-text"/><br/>
+                    <span class="description"><?php _e( "Please enter your languages. Example: Bangla, English, Hindi" ); ?></span>
+                </td>
+            </tr>
+        </table>
+	<?php }
 
-?>
+	add_action( 'show_user_profile', 'tf_extra_user_profile_fields' );
+	add_action( 'edit_user_profile', 'tf_extra_user_profile_fields' );
+}
+
+/*
+ * Save user extra fields
+ * @author Foysal
+ */
+if ( ! function_exists( 'tf_save_extra_user_profile_fields' ) ) {
+	function tf_save_extra_user_profile_fields( $user_id ) {
+		if ( empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'update-user_' . $user_id ) ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'edit_user', $user_id ) ) {
+			return false;
+		}
+		update_user_meta( $user_id, 'language', $_POST['language'] );
+	}
+
+	add_action( 'personal_options_update', 'tf_save_extra_user_profile_fields' );
+	add_action( 'edit_user_profile_update', 'tf_save_extra_user_profile_fields' );
+}
+
