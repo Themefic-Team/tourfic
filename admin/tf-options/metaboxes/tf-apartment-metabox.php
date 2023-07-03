@@ -19,46 +19,11 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'        => 'apartment_as_featured',
 					'type'      => 'switch',
-					'label'     => __( 'Set this apartment as featured', 'tourfic' ),
-					'subtitle'  => __( 'Apartment will be shown under featured sections', 'tourfic' ),
+					'label'     => __( 'Featured Apartment', 'tourfic' ),
+					'subtitle'  => __( 'This apartment will be highlighted at the top of the search result and apartment archive page', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'is_pro'    => true,
-				),
-				array(
-					'id'      => 'disable_options',
-					'type'    => 'heading',
-					'label'   => __( 'Disable Options', 'tourfic' ),
-					'content' => __( 'These settings will overwrite global settings', 'tourfic' ),
-				),
-				array(
-					'id'          => 'disable-apartment-review',
-					'type'        => 'switch',
-					'label'       => __( 'Disable Review Section', 'tourfic' ),
-					'label_on'    => __( 'Yes', 'tourfic' ),
-					'label_off'   => __( 'No', 'tourfic' ),
-					'default'     => false,
-					'field_width' => 50,
-				),
-
-				array(
-					'id'          => 'disable-apartment-share',
-					'type'        => 'switch',
-					'label'       => __( 'Disable Share Option', 'tourfic' ),
-					'label_on'    => __( 'Yes', 'tourfic' ),
-					'label_off'   => __( 'No', 'tourfic' ),
-					'default'     => false,
-					'field_width' => 50,
-				),
-
-				array(
-					'id'          => 'disable-related-apartment',
-					'type'        => 'switch',
-					'label'       => __( 'Disable Related Section', 'tourfic' ),
-					'label_on'    => __( 'Yes', 'tourfic' ),
-					'label_off'   => __( 'No', 'tourfic' ),
-					'default'     => false,
-					'field_width' => 50,
 				),
 			)
 		),
@@ -154,7 +119,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 		// Booking
 		'booking'     => array(
 			'title'  => __( 'Booking', 'tourfic' ),
-			'icon'   => 'fa-solid fa-sack-dollar',
+			'icon'   => 'fa-solid fa-calendar-check',
 			'fields' => array(
 				array(
 					'id'          => 'price_per_night',
@@ -415,6 +380,43 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'     => 'editor',
 					'label'    => __( 'Terms & Conditions', 'tourfic' ),
 					'subtitle' => __( 'Enter terms & conditions', 'tourfic' ),
+				),
+			),
+		),
+		// Settings
+		'settings'    => array(
+			'title'  => __( 'Settings', 'tourfic' ),
+			'icon'   => 'fa-solid fa-viruses',
+			'fields' => array(
+				array(
+					'id'      => 'disable_options',
+					'type'    => 'heading',
+					'label'   => __( 'Disable Options', 'tourfic' ),
+					'content' => __( 'These settings will overwrite global settings', 'tourfic' ),
+				),
+				array(
+					'id'          => 'disable-apartment-review',
+					'type'        => 'switch',
+					'label'       => __( 'Disable Review Section', 'tourfic' ),
+					'label_on'    => __( 'Yes', 'tourfic' ),
+					'label_off'   => __( 'No', 'tourfic' ),
+					'default'     => false,
+				),
+				array(
+					'id'          => 'disable-apartment-share',
+					'type'        => 'switch',
+					'label'       => __( 'Disable Share Option', 'tourfic' ),
+					'label_on'    => __( 'Yes', 'tourfic' ),
+					'label_off'   => __( 'No', 'tourfic' ),
+					'default'     => false,
+				),
+				array(
+					'id'          => 'disable-related-apartment',
+					'type'        => 'switch',
+					'label'       => __( 'Disable Related Section', 'tourfic' ),
+					'label_on'    => __( 'Yes', 'tourfic' ),
+					'label_off'   => __( 'No', 'tourfic' ),
+					'default'     => false,
 				),
 			),
 		),

@@ -38,6 +38,7 @@ function register_tf_apartment_post_type() {
 	$apartment_args   = array(
 		'labels'             => $apartment_labels,
 		'public'             => true,
+		'show_in_rest'       => true,
 		'publicly_queryable' => true,
 		'show_ui'            => true,
 		'show_in_menu'       => true,
