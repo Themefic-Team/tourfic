@@ -275,7 +275,9 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-global .tf-head-info .tf-dropdown-share-content h4,
 			.tf-template-global .tf-head-info .tf-dropdown-share-content ul li button span,
 			.tf-template-global .itinerary-downloader-right a,
-			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .tf-features-infos > a {
+			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .tf-features-infos > a ,
+			.upcomming-tours .tf-meta-data-price span,
+			.upcomming-tours .tf-meta-location i{
 				color: '.$tf_template1_global_reg.' !important;
 			}';
 		}
