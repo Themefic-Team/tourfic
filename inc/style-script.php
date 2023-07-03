@@ -94,7 +94,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-global .tf-search-results-list #tf_posts_navigation_bar .page-numbers.current,
 			.tf-template-global .tf-archive-right .tf_widget .al-range-slider__tooltip,
 			.tf-template-global .tf-archive-right .tf_widget .al-range-slider_dark .al-range-slider__bar,
-			.tf-template-global .tf-btn .btn-primary {
+			.tf-template-global .tf-btn .btn-primary,
+			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .hotel-room-book {
 				background: '.$tf_template1_global_reg.' !important;
 			}';
 		}

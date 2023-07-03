@@ -6296,6 +6296,12 @@ div#tf-contact-info {
 .tf-hotel-design-1 .tf-hotel-location-map {
   margin-top: 25px;
 }
+.tf-hotel-design-1 .tf-hotel-location-map #hotel-location {
+  height: 258px;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
 .tf-hotel-design-1 .tf-hotel-location-map .tf-hotel-location-preview {
   position: relative;
   margin-bottom: 0px;
@@ -6309,7 +6315,7 @@ div#tf-contact-info {
 .tf-hotel-design-1 .tf-hotel-location-map .tf-hotel-location-preview iframe {
   height: 260px !important;
 }
-.tf-hotel-design-1 .tf-hotel-location-map .tf-hotel-location-preview a {
+.tf-hotel-design-1 .tf-hotel-location-map .tf-hotel-location-preview a.map-pre {
   position: absolute;
   top: 0;
   left: 0;
@@ -6320,7 +6326,7 @@ div#tf-contact-info {
   justify-content: center;
   text-decoration: none;
 }
-.tf-hotel-design-1 .tf-hotel-location-map .tf-hotel-location-preview a i {
+.tf-hotel-design-1 .tf-hotel-location-map .tf-hotel-location-preview a.map-pre i {
   height: 80px;
   width: 80px;
   text-align: center;
