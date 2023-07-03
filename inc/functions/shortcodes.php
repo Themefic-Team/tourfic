@@ -422,7 +422,7 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 			<?php endif ?>
 
 			<?php if ( ! in_array( 'apartment', $disable_services ) && tf_is_search_form_tab_type( 'apartment', $type ) && ! tf_is_search_form_single_tab( $type ) ) : ?>
-                <button class="tf-tablinks" onclick="tfOpenForm(event, 'tf-apartment-booking-form')"><?php _e( 'Apartment', 'tourfic' ); ?></button>
+                <button class="tf-tablinks" data-form-id="tf-apartment-booking-form"><?php _e( 'Apartment', 'tourfic' ); ?></button>
 			<?php endif ?>
 
 			<?php do_action( 'tf_after_booking_form_tab', $type ) ?>
