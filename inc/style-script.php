@@ -93,7 +93,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-global .tf-archive-right .tf_widget .al-range-slider__knob,
 			.tf-template-global .tf-search-results-list #tf_posts_navigation_bar .page-numbers.current,
 			.tf-template-global .tf-archive-right .tf_widget .al-range-slider__tooltip,
-			.tf-template-global .tf-archive-right .tf_widget .al-range-slider_dark .al-range-slider__bar {
+			.tf-template-global .tf-archive-right .tf_widget .al-range-slider_dark .al-range-slider__bar,
+			.tf-template-global .tf-btn .btn-primary {
 				background: '.$tf_template1_global_reg.' !important;
 			}';
 		}
@@ -272,9 +273,10 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-all-info li,
 			.tf-template-global .tf-single-head .more-hotel,
 			.tf-template-global .tf-head-info .tf-dropdown-share-content h4,
-			.tf-template-global .tf-head-info .tf-dropdown-share-content ul li button span
-			 {
-				color: '.$tf_template1_global_reg.';
+			.tf-template-global .tf-head-info .tf-dropdown-share-content ul li button span,
+			.tf-template-global .itinerary-downloader-right a,
+			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .tf-features-infos > a {
+				color: '.$tf_template1_global_reg.' !important;
 			}';
 		}
 
