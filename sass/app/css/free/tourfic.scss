@@ -8,11 +8,10 @@
 //Base for templates
 @import '../../../common/css/base';
 @import '../../../common/css/typography';
-//hotel css
-@import 'hotel/hotel';
 
-//tour css
+@import 'hotel/hotel';
 @import 'tour/tour';
+@import "apartment/apartment";
 
 //Tour Templates
 @import 'tour/template1/single';

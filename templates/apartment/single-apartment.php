@@ -108,7 +108,7 @@ while ( have_posts() ) : the_post();
 								} ?>
 
                                 <a href="<?php echo $first_location_url; ?>" class="more-apartment tf-d-ib">
-									<?php printf( __( 'Show more hotels in %s', 'tourfic' ), $first_location_name ); ?>
+									<?php printf( __( 'Show more apartments in %s', 'tourfic' ), $first_location_name ); ?>
                                 </a>
                             </div>
 						<?php } ?>
