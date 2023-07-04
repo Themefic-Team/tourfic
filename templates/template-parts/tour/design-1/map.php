@@ -1,5 +1,5 @@
 <!-- Tourfic Map -->
-<?php if ( ($location && $itinerary_map != 1) || ! $itineraries): ?>
+<?php if ( ($location && $itinerary_map != 1 && $tf_openstreet_map != "googlemap" && empty($tf_google_map_key) ) || ! $itineraries): ?>
 <div class="tf-trip-map-wrapper tf-mb-50 tf-template-section" id="tf-tour-map">
     <h2 class="tf-title tf-section-title"><?php echo !empty($meta['map-section-title']) ? esc_html($meta['map-section-title']) : __("Maps","tourfic"); ?></h2>
     <div class="tf-map-area">

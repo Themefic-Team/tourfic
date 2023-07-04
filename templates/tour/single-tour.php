@@ -72,6 +72,7 @@ while ( have_posts() ) : the_post();
 
 	// Map Type
 	$tf_openstreet_map = ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "default";
+	$tf_google_map_key = !empty( tfopt( 'tf-googlemapapi' ) ) ? tfopt( 'tf-googlemapapi' ) : '';
 
 	// Highlights
 	$highlights = ! empty( $meta['additional_information'] ) ? $meta['additional_information'] : '';
@@ -88,7 +89,6 @@ while ( have_posts() ) : the_post();
 	$fax           = ! empty( $meta['fax'] ) ? $meta['fax'] : '';
 	$website       = ! empty( $meta['website'] ) ? $meta['website'] : '';
 	$itinerary_map = ! empty( tfopt('itinerary_map') ) && function_exists('is_tf_pro') && is_tf_pro() ? tfopt('itinerary_map') : 0;
-	$map_settings = ! empty( tfopt('google-page-option')) ? tfopt('google-page-option') : 0;
 
 	/**
 	 * Get features
