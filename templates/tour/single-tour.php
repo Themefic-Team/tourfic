@@ -57,6 +57,11 @@ while ( have_posts() ) : the_post();
 	
 	if( !empty($meta['location']) && tf_data_types($meta['location'])){
 		$location = !empty( tf_data_types($meta['location'])['address'] ) ? tf_data_types($meta['location'])['address'] : $location;
+
+		$location_latitude = !empty( tf_data_types($meta['location'])['latitude'] ) ? tf_data_types($meta['location'])['latitude'] : '';
+		$location_longitude = !empty( tf_data_types($meta['location'])['longitude'] ) ? tf_data_types($meta['location'])['longitude'] : '';
+		$location_zoom = !empty( tf_data_types($meta['location'])['zoom'] ) ? tf_data_types($meta['location'])['zoom'] : '';
+
     }
 	// Gallery
 	$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : array();
@@ -64,6 +69,9 @@ while ( have_posts() ) : the_post();
 		$gallery_ids = explode( ',', $gallery );
 	}
 	$hero_title = ! empty( $meta['hero_title'] ) ? $meta['hero_title'] : '';
+
+	// Map Type
+	$tf_openstreet_map = ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "default";
 
 	// Highlights
 	$highlights = ! empty( $meta['additional_information'] ) ? $meta['additional_information'] : '';

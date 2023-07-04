@@ -5351,6 +5351,13 @@ div#tf-contact-info {
   margin-top: 8px;
 }
 
+#tf-tour-map .tf-map-area #tour-location {
+  height: 500px;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
 .tf-review-wrapper .tf-review-data.tf-box {
   box-shadow: 0px 0px 24px 5px #E0E8EE;
 }
