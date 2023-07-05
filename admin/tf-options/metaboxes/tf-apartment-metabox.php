@@ -36,8 +36,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'          => 'address',
 					'type'        => 'text',
 					'label'       => __( 'Apartment Address', 'tourfic' ),
-					'subtitle'    => __( 'Enter apartment adress', 'tourfic' ),
-					'placeholder' => __( 'Address', 'tourfic' ),
+					'subtitle'    => __( 'The address you want to show below the apartment title', 'tourfic' ),
+					'placeholder' => __( 'e.g. 123 ABC Road, Toronto, Ontario 20100', 'tourfic' ),
 					'attributes'  => array(
 						'required' => 'required',
 					),
@@ -45,8 +45,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'       => 'map',
 					'type'     => 'map',
-					'label'    => __( 'Location on Map', 'tourfic' ),
-					'subtitle' => __( 'Select one location on the map to see latitude and longitude', 'tourfic' ),
+					'label'    => __( 'Dynamic Location Search', 'tourfic' ),
+					'subtitle' => __( 'Write your desired address and select the address from the suggestions. This address will be used to hyperlink the apartment address on the frontend.', 'tourfic' ),
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,
@@ -69,8 +69,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'       => 'surroundings_subtitle',
 					'type'     => 'text',
-					'label'    => __( 'Section sub title', 'tourfic' ),
-					'subtitle' => __( 'Enter surroundings section sub title', 'tourfic' ),
+					'label'    => __( 'Section Subtitle', 'tourfic' ),
+					'subtitle' => __( 'Enter surroundings section subtitle', 'tourfic' ),
 					'is_pro'   => true,
 				),
 				array(
@@ -78,37 +78,34 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'     => 'repeater',
 					'label'    => __( 'Surroundings Places', 'tourfic' ),
 					'is_pro'   => true,
-					'subtitle' => __( 'Enter surroundings places', 'tourfic' ),
 					'fields'   => array(
 						array(
 							'id'       => 'place_criteria_label',
 							'type'     => 'text',
 							'label'    => __( 'Place Criteria Label', 'tourfic' ),
-							'subtitle' => __( 'Enter place criteria label', 'tourfic' ),
+							'placeholder' => __( 'Enter place criteria label', 'tourfic' ),
 						),
 						array(
 							'id'       => 'place_criteria_icon',
 							'type'     => 'icon',
 							'label'    => __( 'Criteria Icon', 'tourfic' ),
-							'subtitle' => __( 'Enter place criteria icon', 'tourfic' ),
 						),
 						array(
 							'id'       => 'places',
 							'type'     => 'repeater',
 							'label'    => __( 'Places', 'tourfic' ),
-							'subtitle' => __( 'Enter places', 'tourfic' ),
 							'fields'   => array(
 								array(
 									'id'       => 'place_name',
 									'type'     => 'text',
 									'label'    => __( 'Place Name', 'tourfic' ),
-									'subtitle' => __( 'Enter place name', 'tourfic' ),
+									'placeholder' => __( 'Enter place name', 'tourfic' ),
 								),
 								array(
 									'id'       => 'place_distance',
 									'type'     => 'text',
 									'label'    => __( 'Place Distance', 'tourfic' ),
-									'subtitle' => __( 'Enter place distance', 'tourfic' ),
+									'placeholder' => __( 'Enter place distance', 'tourfic' ),
 								),
 							),
 						)
@@ -192,7 +189,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'          => 'discount_type',
 					'type'        => 'select',
 					'label'       => __( 'Discount Type', 'tourfic' ),
-					'subtitle'    => __( 'Select discount type', 'tourfic' ),
+					'subtitle'    => __( 'Select Discount Type: Percentage or Fixed', 'tourfic' ),
 					'options'     => array(
 						'none'    => __( 'None', 'tourfic' ),
 						'fixed'   => __( 'Fixed', 'tourfic' ),
@@ -203,8 +200,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'          => 'discount',
 					'type'        => 'number',
-					'label'       => __( 'Discount', 'tourfic' ),
-					'subtitle'    => __( 'Enter discount', 'tourfic' ),
+					'label'       => __( 'Discount Amount', 'tourfic' ),
+					'subtitle'    => __( 'Insert your discount amount', 'tourfic' ),
 					'dependency'  => array( 'discount_type', '!=', 'none' ),
 					'attributes'  => array( 'min' => 0 ),
 					'field_width' => 50,
@@ -237,7 +234,6 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'       => 'key_features_title',
 					'type'     => 'text',
 					'label'    => __( 'Key Features Title', 'tourfic' ),
-					'subtitle' => __( 'Enter key features title', 'tourfic' ),
 				),
 				array(
 					'id'           => 'key_features',
@@ -266,7 +262,6 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'       => 'facilities_title',
 					'type'     => 'text',
 					'label'    => __( 'Facilities Title', 'tourfic' ),
-					'subtitle' => __( 'Enter facilities title', 'tourfic' ),
 				),
 				array(
 					'id'           => 'facilities',
@@ -337,14 +332,12 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'       => 'faq_title',
 					'type'     => 'text',
-					'label'    => __( 'FAQ Title', 'tourfic' ),
-					'subtitle' => __( 'Enter FAQ title', 'tourfic' ),
+					'label'    => __( 'Section Title', 'tourfic' ),
 				),
 				array(
 					'id'       => 'faq_desc',
 					'type'     => 'textarea',
-					'label'    => __( 'FAQ Description', 'tourfic' ),
-					'subtitle' => __( 'Enter FAQ description', 'tourfic' ),
+					'label'    => __( 'Section Description', 'tourfic' ),
 				),
 				array(
 					'id'           => 'faq',
@@ -372,14 +365,12 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'       => 'terms_title',
 					'type'     => 'text',
-					'label'    => __( 'Terms Title', 'tourfic' ),
-					'subtitle' => __( 'Enter terms title', 'tourfic' ),
+					'label'    => __( 'Section Title', 'tourfic' ),
 				),
 				array(
 					'id'       => 'terms_and_conditions',
 					'type'     => 'editor',
-					'label'    => __( 'Terms & Conditions', 'tourfic' ),
-					'subtitle' => __( 'Enter terms & conditions', 'tourfic' ),
+					'label'    => __( 'Apartment Terms & Conditions', 'tourfic' ),
 				),
 			),
 		),
