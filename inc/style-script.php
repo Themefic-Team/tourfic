@@ -95,11 +95,12 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-global .tf-archive-right .tf_widget .al-range-slider__tooltip,
 			.tf-template-global .tf-archive-right .tf_widget .al-range-slider_dark .al-range-slider__bar,
 			.tf-template-global .tf-btn .btn-primary,
-			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .hotel-room-book {
+			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .hotel-room-book,
+			.tf-template-global .tf-archive-right .tf-booking-bttns button {
 				background: '.$tf_template1_global_reg.' !important;
 			}';
 		}
-		if( !empty($tf_global_font_family) && $tf_global_font_family!="Default" && $tf_global_heading_font_family!="Default" ){
+		if( !empty($tf_global_font_family) && $tf_global_font_family!="Default" ){
 			$output .= '
 			.tf-container-inner,
 			.tf-main-wrapper,
@@ -127,7 +128,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			}';
 		}
 		
-		if( !empty($tf_global_heading_font_family) && $tf_global_heading_font_family!="Default" && $tf_global_font_family!="Default"){
+		if( !empty($tf_global_heading_font_family) && $tf_global_heading_font_family!="Default" ){
 			$output .= '
 			.tf-container-inner h1,
 			.tf-main-wrapper h1,
@@ -278,7 +279,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-global .itinerary-downloader-right a,
 			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .tf-features-infos > a ,
 			.upcomming-tours .tf-meta-data-price span,
-			.upcomming-tours .tf-meta-location i{
+			.upcomming-tours .tf-meta-location i,
+			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-details i{
 				color: '.$tf_template1_global_reg.' !important;
 			}';
 		}
