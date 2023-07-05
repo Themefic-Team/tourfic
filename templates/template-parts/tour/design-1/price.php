@@ -23,6 +23,44 @@
                 ?>
             </li>
             <?php } ?>
+            <?php 
+            if($tour_type == 'continuous' ){
+
+            }
+            ?>
+            <?php 
+            if($tour_type == 'fixed' ){
+            if( !empty($meta['fixed_availability']) && gettype($meta['fixed_availability'])=="string" ){
+                $tf_tour_fixed_avail = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                    return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+                }, $meta['fixed_availability'] );
+                $tf_tour_fixed_date = unserialize( $tf_tour_fixed_avail );
+                $max_people = ! empty( $tf_tour_fixed_date['max_seat'] ) ? $tf_tour_fixed_date['max_seat'] : '';
+                $tf_tour_booking_limit = ! empty( $tf_tour_fixed_date['max_capacity'] ) ? $tf_tour_fixed_date['max_capacity'] : 0;
+            }else{
+                $max_people = ! empty( $meta['fixed_availability']['max_seat'] ) ? $meta['fixed_availability']['max_seat'] : '';
+                $tf_tour_booking_limit = ! empty( $meta['fixed_availability']['max_capacity'] ) ? $meta['fixed_availability']['max_capacity'] : 0; 
+            }
+            }
+            ?>
+            <?php 
+            if( !empty($tf_tour_booking_limit) || !empty($max_people) ){ ?>
+            <li class="tf-flex tf-flex-gap-8">
+                <i class="fa-solid fa-people-group"></i> 
+                <?php if(!empty($tf_tour_booking_limit)){
+                    echo __("Maximum Capaciy: ", "tourfic"); echo $tf_tour_booking_limit;
+                }else{ 
+                    echo __("Maximum Allowed Per Booking: ", "tourfic"); echo $max_people;
+                } ?>
+            </li>
+            <?php } ?>
+            <?php 
+            if(!empty($tour_refund_policy)){ ?>
+            <li class="tf-flex tf-flex-gap-8">
+                <i class="fa-solid fa-person-walking-arrow-loop-left"></i>
+                <?php echo esc_html($tour_refund_policy); ?>
+            </li>
+            <?php } ?>
         </ul>
     </div>
     <!-- Single Tour Person details -->
