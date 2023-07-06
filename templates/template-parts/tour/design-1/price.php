@@ -25,7 +25,36 @@
             <?php } ?>
             <?php 
             if($tour_type == 'continuous' ){
-
+                if($custom_avail){
+                    $tf_max_people = array();
+                    $tf_max_capacity = array();
+                    $tf_custom_date = ! empty( $meta['cont_custom_date'] ) ? $meta['cont_custom_date'] : '';
+                    if( !empty($tf_custom_date) && gettype($tf_custom_date)=="string" ){
+                        $tf_tour_conti_avail = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+                            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+                        }, $tf_custom_date );
+                        $tf_custom_date = unserialize( $tf_tour_conti_avail );
+                    }
+                    foreach ( $tf_custom_date as $item ) {
+                        $max_people = ! empty( $item['max_people'] ) ? $item['max_people'] : '';
+                        if(!empty($max_people)){
+                            $tf_max_people [] = $max_people;
+                        }
+                        $max_capacity = ! empty( $item['max_capacity'] ) ? $item['max_capacity'] : '';
+                        if(!empty($max_capacity)){
+                            $tf_max_capacity [] = $max_capacity;
+                        }
+                    }
+                    if(!empty($tf_max_capacity)){
+                        $tf_tour_booking_limit = max($tf_max_capacity);
+                    }
+                    if(!empty($tf_max_people)){
+                        $max_people = max($tf_max_people);
+                    }
+                }else{
+                    $tf_tour_booking_limit  = ! empty( $meta['cont_max_capacity'] ) ? $meta['cont_max_capacity'] : 0;
+	                $max_people = ! empty( $meta['cont_max_people'] ) ? $meta['cont_max_people'] : 0;
+                }
             }
             ?>
             <?php 
@@ -48,7 +77,7 @@
             <li class="tf-flex tf-flex-gap-8">
                 <i class="fa-solid fa-people-group"></i> 
                 <?php if(!empty($tf_tour_booking_limit)){
-                    echo __("Maximum Capaciy: ", "tourfic"); echo $tf_tour_booking_limit;
+                    echo __("Maximum Capacity: ", "tourfic"); echo $tf_tour_booking_limit;
                 }else{ 
                     echo __("Maximum Allowed Per Booking: ", "tourfic"); echo $max_people;
                 } ?>
