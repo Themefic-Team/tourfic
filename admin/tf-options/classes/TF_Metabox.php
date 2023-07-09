@@ -204,8 +204,8 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			}
 
 			if ( ! empty( $tf_meta_box_value ) ) {
-                tf_var_dump($tf_meta_box_value);
-                die();
+//                tf_var_dump($tf_meta_box_value);
+//                die();
 				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
 			} else {
 				delete_post_meta( $post_id, $this->metabox_id );
