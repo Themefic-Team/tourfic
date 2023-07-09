@@ -1,6 +1,6 @@
 (function ($) {
     $(document).ready(function () {
-        
+
         /**
          * Hotel Details Popup
          *
@@ -44,7 +44,7 @@
                 $('.tf-deposit-amount-' + id).hide();
             }
         });
- 
+
         /**
          * Airport Service Price
          */
@@ -579,6 +579,141 @@
             });
         }
 
+        /**
+         * Ajax login
+         */
+        $(document).on('click', '#tf-login .tf-submit', function (e) {
+            e.preventDefault();
+
+            var tf_login_nonce = $("input[name=tf_login_nonce]").val();
+            var user = $("input[name=tf_log_user]").val();
+            var pass = $("input[name=tf_log_pass]").val();
+
+            var data = {
+                action: 'tf_login',
+                tf_login_nonce: tf_login_nonce,
+                user: user,
+                pass: pass,
+            };
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: data,
+                beforeSend: function (response) {
+
+                },
+                success: function (response) {
+                    const obj = JSON.parse(response);
+                    $(".tf-login-response").html(obj.data);
+                    if (obj.redirect_url) {
+                        window.location.href = obj.redirect_url;
+                    }
+                },
+            });
+
+        });
+
+        /**
+         * Open login popup
+         *
+         * add class "tf-login-popup" in button/link
+         */
+        $(document).on('click', '.tf-login-popup', function (e) {
+            e.preventDefault();
+
+            $.fancybox.open({
+                src: '#tf-login-popup',
+                type: 'inline',
+            });
+
+        });
+
+        /**
+         * Ajax registration
+         */
+        $(document).on('click', '#tf-register .tf-submit', function (e) {
+            e.preventDefault();
+
+            var tf_reg_data = $("#tf-register").serializeArray();
+            var tf_reg_nonce = $("input[name=tf_reg_nonce]").val();
+            var user = $("input[name=tf_user]").val();
+            var email = $("input[name=tf_email]").val();
+            var pass = $("input[name=tf_pass]").val();
+            var pass_confirm = $("input[name=tf_pass_confirm]").val();
+            var role = $('input[name="tf_role"]:checked').val();
+
+            var data = {
+                action: 'tf_registration',
+                tf_reg_nonce: tf_reg_nonce,
+                tf_reg_data: tf_reg_data,
+                user: user,
+                email: email,
+                pass: pass,
+                pass_confirm: pass_confirm,
+                role: role,
+            };
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: data,
+                beforeSend: function (response) {
+
+                },
+                success: function (response) {
+                    const obj = JSON.parse(response);
+                    $(".tf-reg-response").html(obj.data);
+                    if (obj.redirect_url) {
+                        window.location.href = obj.redirect_url;
+                    }
+                },
+            });
+
+        });
+
+        /**
+         * Resend email verification url
+         */
+        $(document).on('click', '.resend-email-verification', function (e) {
+            e.preventDefault();
+
+            var user_id = $(this).attr("data-id");
+            console.log(user_id);
+
+            var data = {
+                action: 'tf_resend_verification',
+                user_id: user_id,
+            };
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: data,
+                success: function (response) {
+                    $(".tf-verification-msg").html(tf_pro_params.email_sent_success);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+
+        /**
+         * Open registration popup
+         *
+         * add class "tf-reg-popup" in button/link
+         */
+        $(document).on('click', '.tf-reg-popup', function (e) {
+            e.preventDefault();
+
+            $.fancybox.open({
+                src: '#tf-reg-popup',
+                type: 'inline',
+            });
+
+        });
+
         // QR Code Scan Open
         $(document).on('click', '.tf_qr_open', function (e) {
             e.preventDefault();
@@ -592,7 +727,7 @@
             $(".tf-final-error-feedback").hide();
         });
 
-        
+
         // QR Code Scan Back
         $(document).on('click', '.tf_scan_back', function (e) {
             e.preventDefault();
@@ -619,7 +754,7 @@
                         $(".tf-scanner-quick-review").html("");
                         $(".tf-final-submission-form").hide();
                         $(".tf-scanner-preloader").hide();
-                        $(".tf-final-submission-feedback").show(); 
+                        $(".tf-final-submission-feedback").show();
                     }else{
                         $(".tf-scanner-quick-review").html("");
                         $(".tf-final-submission-form").hide();
@@ -632,7 +767,7 @@
                 }
             });
         });
-         
+
     });
 })(jQuery);
 
@@ -670,7 +805,7 @@ const TFQRSCANER = () => {
                 }
             });
 
-            
+
         }
         if(tf_pro_params.tour_qr==1){
             jQuery(".tf-qr-option").hide();
@@ -716,7 +851,7 @@ const TFQRSCANER = () => {
             }else{
                 scanner.start(cameras[0]);
             }
-            
+
         }else{
             console.error('No cameras found.');
             alert('No cameras found.');
@@ -724,6 +859,6 @@ const TFQRSCANER = () => {
     }).catch(function(e){
         console.error(e);
         alert(e);
-        
+
     });
 }

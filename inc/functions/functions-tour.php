@@ -47,6 +47,7 @@ function register_tf_tours_post_type() {
     $tour_args = array(
         'labels'             => $tour_labels,
         'public'             => true,
+        'show_in_rest'       => true,
         'publicly_queryable' => true,
         'show_ui'            => true,
         'show_in_menu'       => true,
@@ -66,6 +67,10 @@ function register_tf_tours_post_type() {
 if(tfopt('disable-services') && in_array('tour', tfopt('disable-services'))) {} else {
     add_action( 'init', 'register_tf_tours_post_type' );
 }
+
+add_filter( 'use_block_editor_for_post_type', function( $enabled, $post_type ) {
+	return ( 'tf_tours' === $post_type ) ? false : $enabled;
+}, 10, 2 );
 
 /**
  * Get Default Labels

@@ -40,11 +40,17 @@ if ( ! class_exists( 'TF_Deactivator' ) ) {
 		 * @since 1.0.0
 		 */
 		private function delete_pages() {
-			$pages = array( 'tf-search', 'tf-wishlist' );
+			$pages = array(
+				'search' => 'tf-search',
+				'wishlist' => 'tf-wishlist',
+				'login' => 'tf-login',
+				'register' => 'tf-register'
+			);
 			foreach ( $pages as $key => $page ) {
 				$page = get_page_by_path( $page );
 				if ( $page ) {
 					wp_delete_post( $page->ID, true );
+					delete_option( 'tf_' . $key . '_page_id' );
 				}
 			}
 		}
