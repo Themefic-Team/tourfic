@@ -70,6 +70,8 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		 * @author Foysal
 		 */
 		public function load_metaboxes() {
+			$license_status = apply_filters( 'tf_licence_reponse_functions','false' );
+			var_dump(tf_decrypt_is($license_status));
 			if ( $this->is_tf_pro_active() ) {
 				$metaboxes = glob( TF_PRO_ADMIN_PATH . 'tf-options/metaboxes/*.php' );
 			} else {

@@ -573,6 +573,21 @@ input.select2-search__field {
   display: none;
 }
 
+.tf_renewal_notice {
+  background: #F8D7DA;
+  display: block;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #F1AEB5;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+.tf_renewal_notice a {
+  background-color: #003c79 !important;
+  font-weight: 500 !important;
+}
+
 body.admin_page_tf-setup-wizard {
   background-color: #ecf5ff;
 }

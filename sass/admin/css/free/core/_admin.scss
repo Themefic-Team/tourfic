@@ -227,3 +227,17 @@ input.select2-search__field {
     }
   }
 }
+.tf_renewal_notice {
+  background: #F8D7DA;
+  display: block;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #F1AEB5;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: capitalize;
+  a{
+    background-color: #003c79 !important;
+    font-weight: 500 !important;
+  }
+}

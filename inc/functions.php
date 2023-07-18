@@ -1879,3 +1879,32 @@ function tf_update_email_template_default_content(){
 		}
 	}
 }
+if ( ! function_exists( 'tf_encrypt_is' ) ) {
+	function tf_encrypt_is() {
+		$key = 'abulhotel'; // Replace with your secret key
+		$encrypted_value = base64_encode(openssl_encrypt('1', 'AES-128-ECB', $key, OPENSSL_RAW_DATA));
+		return $encrypted_value;
+	}
+}
+if ( ! function_exists( 'tf_decrypt_is' ) ) {
+	function tf_decrypt_is($encrypted_value) {
+		$key = 'abulhotel'; // Replace with your secret key
+		$decrypted_value = openssl_decrypt(base64_decode($encrypted_value), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
+		return $decrypted_value === '1';
+	}
+}
+if ( ! function_exists( 'tf_encrypt_is' ) ) {
+	function tf_encrypt_is_not() {
+		$key = 'abulhotel2'; // Replace with your secret key
+		$encrypted_value = base64_encode(openssl_encrypt('0', 'AES-128-ECB', $key, OPENSSL_RAW_DATA));
+		return $encrypted_value;
+	}
+}
+
+if ( ! function_exists( 'tf_encrypt_is' ) ) {
+	function tf_decrypt_is_not($encrypted_value) {
+		$key = 'abulhotel2'; // Replace with your secret key
+		$decrypted_value = openssl_decrypt(base64_decode($encrypted_value), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
+		return $decrypted_value === '0';
+	}
+}
