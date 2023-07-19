@@ -87,6 +87,11 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 											$value = ( isset( $re_field['id'] ) && isset( $data[ $key ][ $re_field['id'] ] ) ) ? $data[ $key ][ $re_field['id'] ] : '';
 										}
 
+										if(isset($re_field['validate']) && $re_field['validate'] == 'no_space_no_special'){
+											//remove special characters, replace space with underscore and convert to lowercase
+											$value = sanitize_title(str_replace(' ', '_', strtolower($value)));
+										}
+
 										$tf_option = new TF_Options();
 										$tf_option->field( $re_field, $value, $this->settings_id, $parent_field); 
 									endforeach;
@@ -135,6 +140,10 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 								$id        = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['id'] . '][00]' . '[' . $re_field['id'] . ']' : $this->field['id'] . '[00]' . '[' . $re_field['id'] . ']';
 								$default = isset( $re_field['default'] ) ? $re_field['default'] : '';
                                 $value     = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : $default;
+								if(isset($re_field['validate']) && $re_field['validate'] == 'no_space_no_special'){
+									//remove special characters, replace space with underscore and convert to lowercase
+									$value = sanitize_title(str_replace(' ', '_', strtolower($value)));
+								}
 								$tf_option = new TF_Options();
 								$tf_option->field( $re_field, $value, '_____' . $this->settings_id, $parent ); 
 							} ?>
@@ -164,15 +173,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 
 		}
 		public function sanitize() {
-			// return wp_kses_post($this->value);
 			return $this->value;
 		}
-		// public function enqueue() {
-
-		// 	if ( ! wp_script_is( 'jquery-ui-sortable' ) ) {
-		// 		wp_enqueue_script( 'jquery-ui-sortable' );
-		// 	}
-
-		// }
 	}
 }

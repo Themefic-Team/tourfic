@@ -35,7 +35,7 @@
 
         /**
          * Deposit amount toggle
-        */
+         */
         $(document).on("click", "input[name='make_deposit']", function () {
             let id = $(this).val();
             if ($(this).is(':checked')) {
@@ -635,38 +635,70 @@
         $(document).on('click', '#tf-register .tf-submit', function (e) {
             e.preventDefault();
 
-            var tf_reg_data = $("#tf-register").serializeArray();
-            var tf_reg_nonce = $("input[name=tf_reg_nonce]").val();
-            var user = $("input[name=tf_user]").val();
-            var email = $("input[name=tf_email]").val();
-            var pass = $("input[name=tf_pass]").val();
-            var pass_confirm = $("input[name=tf_pass_confirm]").val();
-            var role = $('input[name="tf_role"]:checked').val();
+            let btn = $(this);
+            let form = $(this).closest('#tf-register');
+            let formData = new FormData(form[0]);
+            formData.append('action', 'tf_registration');
+            let requiredFields = ['tf_user', 'tf_email', 'tf_pass', 'tf_pass_confirm', 'tf_role'];
+            let extra_register_fields = form.find('[name=extra_register_fields]').val();
+            //json decode
+            if (extra_register_fields) {
+                let extra_register_fields_obj = JSON.parse(extra_register_fields);
+                for (const extra_register_field of extra_register_fields_obj) {
+                    requiredFields.push(extra_register_field);
+                }
+            }
 
-            var data = {
-                action: 'tf_registration',
-                tf_reg_nonce: tf_reg_nonce,
-                tf_reg_data: tf_reg_data,
-                user: user,
-                email: email,
-                pass: pass,
-                pass_confirm: pass_confirm,
-                role: role,
-            };
+            console.log('requiredFields', requiredFields)
 
             $.ajax({
-                type: 'post',
                 url: tf_params.ajax_url,
-                data: data,
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
                 beforeSend: function (response) {
-
+                    btn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     const obj = JSON.parse(response);
-                    $(".tf-reg-response").html(obj.data);
+                    console.log('obj', obj)
+                    if (!obj.success) {
+                        if (obj.message) {
+                            Swal.fire(
+                                'Error!',
+                                obj.message,
+                                'error'
+                            )
+                        } else {
+
+                            for (const requiredField of requiredFields) {
+                                const errorField = obj['fieldErrors'][requiredField + '_error'];
+
+                                form.find('[name=' + requiredField + ']').removeClass('error-input');
+                                form.find('[name=' + requiredField + ']').closest('.tf-reg-field').find('small.text-danger').remove();
+                                if (errorField) {
+                                    form.find('[name=' + requiredField + ']').addClass('error-input');
+                                    form.find('[name=' + requiredField + ']').closest('.tf-reg-field').append('<small class="text-danger">' + errorField + '</small>');
+                                }
+                            }
+                        }
+                    } else {
+                        Swal.fire(
+                            'Success!',
+                            obj.message,
+                            'success'
+                        )
+                        form[0].reset();
+                        form.find('input').removeClass('error-input');
+                        form.find('textarea').removeClass('error-input');
+                        form.find('input').closest('.tf-reg-field').find('small.text-danger').remove();
+                        form.find('textarea').closest('.tf-reg-field').find('small.text-danger').remove();
+                    }
                     if (obj.redirect_url) {
                         window.location.href = obj.redirect_url;
                     }
+                    btn.removeClass('tf-btn-loading');
                 },
             });
 
@@ -750,12 +782,12 @@
                 data: data,
                 success: function (data) {
                     var response = JSON.parse(data);
-                    if( response.qr_code_response_checked== "true" ){
+                    if (response.qr_code_response_checked == "true") {
                         $(".tf-scanner-quick-review").html("");
                         $(".tf-final-submission-form").hide();
                         $(".tf-scanner-preloader").hide();
                         $(".tf-final-submission-feedback").show();
-                    }else{
+                    } else {
                         $(".tf-scanner-quick-review").html("");
                         $(".tf-final-submission-form").hide();
                         $(".tf-scanner-preloader").hide();
@@ -773,9 +805,9 @@
 
 // QR Code Scan Function
 const TFQRSCANER = () => {
-    var scanner = new Instascan.Scanner({ video: document.getElementById('tf-video-preview'), scanPeriod: 5, mirror: false });
-    scanner.addListener('scan',function(content){
-        if(tf_pro_params.tour_qr==2){
+    var scanner = new Instascan.Scanner({video: document.getElementById('tf-video-preview'), scanPeriod: 5, mirror: false});
+    scanner.addListener('scan', function (content) {
+        if (tf_pro_params.tour_qr == 2) {
             jQuery(".tf-scanner-preloader").show();
             jQuery(".tf_qr_code_number").val(content);
             var data = {
@@ -788,12 +820,12 @@ const TFQRSCANER = () => {
                 data: data,
                 success: function (data) {
                     var response = JSON.parse(data);
-                    if( response.qr_code_result ){
+                    if (response.qr_code_result) {
                         jQuery(".tf-scanner-quick-review").html(response.qr_code_result);
                         jQuery(".tf-scanner-preloader").hide();
                         jQuery(".tf-final-submission-form").show();
                         jQuery(".tf-qr-option").hide();
-                    }else{
+                    } else {
                         jQuery(".tf-scanner-quick-review").html("");
                         jQuery(".tf-scanner-preloader").hide();
                         jQuery(".tf-final-error-feedback").show();
@@ -807,7 +839,7 @@ const TFQRSCANER = () => {
 
 
         }
-        if(tf_pro_params.tour_qr==1){
+        if (tf_pro_params.tour_qr == 1) {
             jQuery(".tf-qr-option").hide();
             jQuery(".tf-scanner-preloader").show();
             var data = {
@@ -820,12 +852,12 @@ const TFQRSCANER = () => {
                 data: data,
                 success: function (data) {
                     var response = JSON.parse(data);
-                    if( response.qr_code_response== "true" ){
+                    if (response.qr_code_response == "true") {
                         jQuery(".tf-final-submission-form").hide();
                         jQuery(".tf-scanner-preloader").hide();
                         jQuery(".tf-final-submission-feedback").show();
                     }
-                    if( response.qr_code_response== "false" ){
+                    if (response.qr_code_response == "false") {
                         jQuery(".tf-final-submission-form").hide();
                         jQuery(".tf-scanner-preloader").hide();
                         jQuery(".tf-final-error-feedback").show();
@@ -838,25 +870,25 @@ const TFQRSCANER = () => {
         }
         //window.location.href=content;
     });
-    Instascan.Camera.getCameras().then(function (cameras){
-        if(cameras.length>0){
+    Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
             jQuery(".tf-qr-code-preview").show();
             jQuery(".tf-final-submission-form").hide();
             jQuery(".tf-final-submission-feedback").hide();
             jQuery(".tf-final-error-feedback").hide();
-            if(cameras.length==4){
+            if (cameras.length == 4) {
                 scanner.start(cameras[2]);
-            }else if(cameras.length==2){
+            } else if (cameras.length == 2) {
                 scanner.start(cameras[1]);
-            }else{
+            } else {
                 scanner.start(cameras[0]);
             }
 
-        }else{
+        } else {
             console.error('No cameras found.');
             alert('No cameras found.');
         }
-    }).catch(function(e){
+    }).catch(function (e) {
         console.error(e);
         alert(e);
 

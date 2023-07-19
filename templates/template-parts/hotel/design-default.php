@@ -396,7 +396,7 @@
                                                                 <?php echo esc_html( $room['title'] ); ?>
                                                             </a></h3>
 
-                                                        <div id="tour_room_details_qv" class="tf-reg-wrap">
+                                                        <div id="tour_room_details_qv" class="">
 
                                                         </div>
                                                     <?php } else{ ?>
