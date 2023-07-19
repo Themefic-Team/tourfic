@@ -639,17 +639,19 @@
             let form = $(this).closest('#tf-register');
             let formData = new FormData(form[0]);
             formData.append('action', 'tf_registration');
-            let requiredFields = ['tf_user', 'tf_email', 'tf_pass', 'tf_pass_confirm', 'tf_role'];
+            let requiredFields = ['tf_user', 'tf_email', 'tf_pass', 'tf_pass_confirm'];
             let extra_register_fields = form.find('[name=extra_register_fields]').val();
-            //json decode
+            let vendor_reg = form.find('[name=vendor_reg]').val();
+
             if (extra_register_fields) {
                 let extra_register_fields_obj = JSON.parse(extra_register_fields);
                 for (const extra_register_field of extra_register_fields_obj) {
                     requiredFields.push(extra_register_field);
                 }
             }
-
-            console.log('requiredFields', requiredFields)
+            if(vendor_reg == 1){
+                requiredFields.push('tf_role');
+            }
 
             $.ajax({
                 url: tf_params.ajax_url,
@@ -662,7 +664,6 @@
                 },
                 success: function (response) {
                     const obj = JSON.parse(response);
-                    console.log('obj', obj)
                     if (!obj.success) {
                         if (obj.message) {
                             Swal.fire(
@@ -670,6 +671,10 @@
                                 obj.message,
                                 'error'
                             )
+                            form.find('input').removeClass('error-input');
+                            form.find('textarea').removeClass('error-input');
+                            form.find('input').closest('.tf-reg-field').find('small.text-danger').remove();
+                            form.find('textarea').closest('.tf-reg-field').find('small.text-danger').remove();
                         } else {
 
                             for (const requiredField of requiredFields) {
