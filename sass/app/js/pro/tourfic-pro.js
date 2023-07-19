@@ -585,30 +585,63 @@
         $(document).on('click', '#tf-login .tf-submit', function (e) {
             e.preventDefault();
 
-            var tf_login_nonce = $("input[name=tf_login_nonce]").val();
-            var user = $("input[name=tf_log_user]").val();
-            var pass = $("input[name=tf_log_pass]").val();
-
-            var data = {
-                action: 'tf_login',
-                tf_login_nonce: tf_login_nonce,
-                user: user,
-                pass: pass,
-            };
+            let btn = $(this);
+            let form = $(this).closest('#tf-login');
+            let formData = new FormData(form[0]);
+            formData.append('action', 'tf_login');
+            let requiredFields = ['tf_log_user', 'tf_log_pass'];
 
             $.ajax({
-                type: 'post',
                 url: tf_params.ajax_url,
-                data: data,
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
                 beforeSend: function (response) {
-
+                    btn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     const obj = JSON.parse(response);
-                    $(".tf-login-response").html(obj.data);
+                    console.log('obj', obj)
+                    if (!obj.success) {
+                        if (obj.message) {
+                            Swal.fire(
+                                'Error!',
+                                obj.message,
+                                'error'
+                            )
+                            form.find('input').removeClass('error-input');
+                            form.find('textarea').removeClass('error-input');
+                            form.find('input').closest('.tf-reg-field').find('small.text-danger').remove();
+                            form.find('textarea').closest('.tf-reg-field').find('small.text-danger').remove();
+                        } else {
+                            for (const requiredField of requiredFields) {
+                                const errorField = obj['fieldErrors'][requiredField + '_error'];
+
+                                form.find('[name=' + requiredField + ']').removeClass('error-input');
+                                form.find('[name=' + requiredField + ']').closest('.tf-reg-field').find('small.text-danger').remove();
+                                if (errorField) {
+                                    form.find('[name=' + requiredField + ']').addClass('error-input');
+                                    form.find('[name=' + requiredField + ']').closest('.tf-reg-field').append('<small class="text-danger">' + errorField + '</small>');
+                                }
+                            }
+                        }
+                    } else {
+                        Swal.fire(
+                            'Success!',
+                            obj.message,
+                            'success'
+                        )
+                        form[0].reset();
+                        form.find('input').removeClass('error-input');
+                        form.find('textarea').removeClass('error-input');
+                        form.find('input').closest('.tf-reg-field').find('small.text-danger').remove();
+                        form.find('textarea').closest('.tf-reg-field').find('small.text-danger').remove();
+                    }
                     if (obj.redirect_url) {
                         window.location.href = obj.redirect_url;
                     }
+                    btn.removeClass('tf-btn-loading');
                 },
             });
 
@@ -649,7 +682,7 @@
                     requiredFields.push(extra_register_field);
                 }
             }
-            if(vendor_reg == 1){
+            if (vendor_reg == 1) {
                 requiredFields.push('tf_role');
             }
 
