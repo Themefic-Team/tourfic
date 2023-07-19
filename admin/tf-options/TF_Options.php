@@ -344,7 +344,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			$is_pro   = isset( $field['is_pro'] ) ? $field['is_pro'] : '';
 			$badge_up = isset( $field['badge_up'] ) ? $field['badge_up'] : '';
 
-			if ( function_exists('is_tf_pro') && is_tf_pro() ) {
+			if ( tf_decrypt_is( apply_filters( 'tf_validation_reponse_functions','false' ) ) ) {
 				$is_pro = false;
 			}
 			if ( $is_pro == true ) {
