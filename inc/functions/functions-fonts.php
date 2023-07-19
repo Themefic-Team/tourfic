@@ -1551,8 +1551,12 @@ function tourfic_google_fonts_url(){
 	$tf_global_font = tfopt('global-body-fonts-family') ? tfopt('global-body-fonts-family') : 'Default';
 	$tf_global_heading_font_family = tfopt('global-heading-fonts-family') ? tfopt('global-heading-fonts-family') : 'Default';
 	if($tf_global_font!="Default" && $tf_global_heading_font_family!="Default"){
-		$url = 'https://fonts.googleapis.com/css2?family='. $tf_global_font	.'&family='. $tf_global_heading_font_family .':wght@100;200;300;400;500;600;700;800;900&display=swap';
-	}else{
+		$url = 'https://fonts.googleapis.com/css2?family='. str_replace("_","+",$tf_global_font) .'&family='. str_replace("_","+",$tf_global_heading_font_family) .':wght@100;200;300;400;500;600;700;800;900&display=swap';
+	}else if($tf_global_font=="Default" && $tf_global_heading_font_family!="Default"){
+        $url = 'https://fonts.googleapis.com/css2?family='. str_replace("_","+",$tf_global_heading_font_family) .':wght@100;200;300;400;500;600;700;800;900&display=swap';
+    }else if($tf_global_font!="Default" && $tf_global_heading_font_family=="Default"){
+        $url = 'https://fonts.googleapis.com/css2?family='. str_replace("_","+",$tf_global_font) .':wght@100;200;300;400;500;600;700;800;900&display=swap';
+    }else{
 		$url = "";
 	}
 	
