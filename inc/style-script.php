@@ -280,7 +280,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .tf-features-infos > a ,
 			.upcomming-tours .tf-meta-data-price span,
 			.upcomming-tours .tf-meta-location i,
-			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-details i{
+			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-details i,
+			.tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-filter a{
 				color: '.$tf_template1_global_reg.' !important;
 			}';
 		}
