@@ -1881,30 +1881,32 @@ function tf_update_email_template_default_content(){
 }
 if ( ! function_exists( 'tf_encrypt_is' ) ) {
 	function tf_encrypt_is() {
-		$key = 'abulhotel'; // Replace with your secret key
-		$encrypted_value = base64_encode(openssl_encrypt('1', 'AES-128-ECB', $key, OPENSSL_RAW_DATA));
-		return $encrypted_value;
+		$tf_encrypted_value = base64_encode(openssl_encrypt('1', 'AES-128-ECB', esc_html( 'tf-abulhotel' ), OPENSSL_RAW_DATA));
+		return $tf_encrypted_value;
 	}
 }
 if ( ! function_exists( 'tf_decrypt_is' ) ) {
-	function tf_decrypt_is($encrypted_value) {
-		$key = 'abulhotel'; // Replace with your secret key
-		$decrypted_value = openssl_decrypt(base64_decode($encrypted_value), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
-		return $decrypted_value === '1';
+	function tf_decrypt_is($tf_encrypted_value) {
+		$tf_decrypted_value = openssl_decrypt(base64_decode($tf_encrypted_value), 'AES-128-ECB', esc_html( 'tf-abulhotel' ), OPENSSL_RAW_DATA);
+		return $tf_decrypted_value === '1' ? true : false;
 	}
 }
-if ( ! function_exists( 'tf_encrypt_is' ) ) {
+if ( ! function_exists( 'tf_encrypt_is_not' ) ) {
 	function tf_encrypt_is_not() {
-		$key = 'abulhotel2'; // Replace with your secret key
-		$encrypted_value = base64_encode(openssl_encrypt('0', 'AES-128-ECB', $key, OPENSSL_RAW_DATA));
-		return $encrypted_value;
+		$tf_encrypted_value = base64_encode(openssl_encrypt('0', 'AES-128-ECB', esc_html( 'tf-abulhotel2' ), OPENSSL_RAW_DATA));
+		return $tf_encrypted_value;
 	}
 }
 
-if ( ! function_exists( 'tf_encrypt_is' ) ) {
-	function tf_decrypt_is_not($encrypted_value) {
-		$key = 'abulhotel2'; // Replace with your secret key
-		$decrypted_value = openssl_decrypt(base64_decode($encrypted_value), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
-		return $decrypted_value === '0';
+add_filter( 'tf_file_path_response', 'tf_file_path_response_functions'); 
+
+if ( ! function_exists( 'tf_file_path_response_functions' ) ) {
+	function tf_file_path_response_functions(){ 
+		if ( tf_decrypt_is( apply_filters( 'tf_validation_reponse_functions','false' ) ) ) {
+			$path = TF_PRO_ADMIN_PATH;
+		}else{
+			$path = TF_ADMIN_PATH;
+		}
+		return $path;
 	}
 }

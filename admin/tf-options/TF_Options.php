@@ -70,13 +70,8 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		 * @author Foysal
 		 */
 		public function load_metaboxes() {
-			$license_status = apply_filters( 'tf_licence_reponse_functions','false' );
-			var_dump(tf_decrypt_is($license_status));
-			if ( $this->is_tf_pro_active() ) {
-				$metaboxes = glob( TF_PRO_ADMIN_PATH . 'tf-options/metaboxes/*.php' );
-			} else {
-				$metaboxes = glob( $this->tf_options_file_path( 'metaboxes/*.php' ) );
-			}
+			
+			$metaboxes = glob( apply_filters( 'tf_file_path_response','' ) . 'tf-options/metaboxes/*.php' );
 
 			/*if( !empty( $pro_metaboxes ) ) {
 				$metaboxes = array_merge( $metaboxes, $pro_metaboxes );
@@ -95,12 +90,9 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		 * @author Foysal
 		 */
 		public function load_options() {
-			if ( $this->is_tf_pro_active() ) {
-				$options = glob( TF_PRO_ADMIN_PATH . 'tf-options/options/*.php' );
-			} else {
-				$options = glob( $this->tf_options_file_path( 'options/*.php' ) );
-			}
-
+			
+			$options = glob( apply_filters( 'tf_file_path_response','' ) . 'tf-options/options/*.php' );
+			
 			if ( ! empty( $options ) ) {
 				foreach ( $options as $option ) {
 					if ( file_exists( $option ) ) {
@@ -115,11 +107,8 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		 * @author Foysal
 		 */
 		public function load_taxonomy() {
-			if ( $this->is_tf_pro_active() ) {
-				$taxonomies = glob( TF_PRO_ADMIN_PATH . 'tf-options/taxonomies/*.php' );
-			} else {
-				$taxonomies = glob( $this->tf_options_file_path( 'taxonomies/*.php' ) );
-			}
+
+			$taxonomies = glob( apply_filters( 'tf_file_path_response','' ) . 'tf-options/taxonomies/*.php' );
 
 			if ( ! empty( $taxonomies ) ) {
 				foreach ( $taxonomies as $taxonomy ) {
