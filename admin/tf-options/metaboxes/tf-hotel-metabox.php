@@ -340,6 +340,23 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'default'   => true,
 						),
 						array(
+							'id'      => 'Booking-Type',
+							'type'    => 'heading',
+							'content' => __( 'Booking', 'tourfic' ),
+							'class'   => 'tf-field-class',
+						),
+						array(
+							'id'      => 'booking-by',
+							'type'    => 'select',
+							'label'   => __( 'Booking Type', 'tourfic' ),
+							'options' => array(
+								'1' => __( 'Internal', 'tourfic' ),
+								'2' => __( 'External', 'tourfic' ),
+							),
+							'default' => '1',
+							'is_pro'  => true,
+						),
+						array(
 							'id'      => 'Deposit',
 							'type'    => 'heading',
 							'content' => __( 'Deposit', 'tourfic' ),
