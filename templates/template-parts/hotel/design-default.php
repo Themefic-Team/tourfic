@@ -350,6 +350,7 @@
                                     $pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
                                     $avil_by_date = ! empty( $room['avil_by_date'] ) ? ! empty( $room['avil_by_date'] ) : false;
                                     $multi_by_date = ! empty( $room['price_multi_day'] ) ? ! empty( $room['price_multi_day'] ) : false;
+                                    $child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 
                                     if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avil_by_date == true ) {
                                         $repeat_by_date = ! empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
@@ -493,7 +494,13 @@
                                                         <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                                                     </div>
                                                     <div class="tf-top">
-                                                        <?php _e( 'Number of Children', 'tourfic' ); ?>
+                                                        <?php 
+                                                        if(!empty($child_age_limit)){
+                                                            printf(__('Children Age Limit %s Years', 'tourfic'), $child_age_limit);
+                                                        }else{
+                                                            _e( 'Number of Children', 'tourfic' ); 
+                                                        }
+                                                        ?>
                                                         <i class="tool-i"></i>
                                                     </div>
                                                 </div>

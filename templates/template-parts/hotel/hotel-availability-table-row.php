@@ -116,7 +116,13 @@ if( $tf_hotel_selected_template_check == "design-1" ){
                     <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                 </div>
                 <div class="tf-top">
-                    <?php _e( 'Number of Children', 'tourfic' ); ?>
+                    <?php 
+                    if(!empty($child_age_limit)){
+                        printf(__('Children Age Limit %s Years', 'tourfic'), $child_age_limit);
+                    }else{
+                        _e( 'Number of Children', 'tourfic' ); 
+                    }
+                    ?>
                     <i class="tool-i"></i>
                 </div>
             </div>
@@ -350,7 +356,13 @@ if( $tf_hotel_selected_template_check == "design-1" ){
                     <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                 </div>
                 <div class="tf-top">
-                    <?php _e( 'Number of Children', 'tourfic' );?>
+                    <?php 
+                    if(!empty($child_age_limit)){
+                        printf(__('Children Age Limit %s Years', 'tourfic'), $child_age_limit);
+                    }else{
+                        _e( 'Number of Children', 'tourfic' ); 
+                    }
+                    ?>
                     <i class="tool-i"></i>
                 </div>
             </div>

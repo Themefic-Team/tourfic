@@ -755,6 +755,7 @@ function tf_room_availability_callback() {
 				$child_number     = ! empty( $room['child'] ) ? $room['child'] : 0;
 				$pricing_by       = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
 				$multi_by_date_ck = ! empty( $room['price_multi_day'] ) ? ! empty( $room['price_multi_day'] ) : false;
+				$child_age_limit  = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 				$room_price       = ! empty( $room['price'] ) ? $room['price'] : 0;
 				$room_adult_price = ! empty( $room['adult_price'] ) ? $room['adult_price'] : 0;
 				$room_child_price = ! empty( $room['child_price'] ) ? $room['child_price'] : 0;
