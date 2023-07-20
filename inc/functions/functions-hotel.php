@@ -365,7 +365,7 @@ function tf_hotel_airport_service_callback() {
 			if ( ! empty( $day_difference ) && $price_multi_day == true ) {
 				$price_total = $total_price * $room_selected * $day_difference;
 			} else {
-				$price_total = $total_price * $room_selected;
+				$price_total = $total_price * ($room_selected * $day_difference+1);
 			}
 
 		}
@@ -659,9 +659,6 @@ function tf_room_availability_callback() {
 	$tf_startdate = $form_start;
 	$tf_enddate   = $form_end;
 
-	if ( !empty( $form_end ) ) {
-		$not_single_date = true;
-	}
 	if ( empty( $form_end ) ) {
 		$form_end   = date( 'Y/m/d', strtotime( $form_start . " + 1 day" ) );
 		$tf_enddate = date( 'Y/m/d', strtotime( $form_start . " + 1 day" ) );
@@ -930,11 +927,7 @@ function tf_room_availability_callback() {
 					}
 
 					if(!$multi_by_date_ck){
-						if($days>1 || $not_single_date){
-							$days = $days+1;
-						}else{
-							$days = $days;
-						}
+						$days = $days+1;
 					}
 
 					$price = $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date * $days;
