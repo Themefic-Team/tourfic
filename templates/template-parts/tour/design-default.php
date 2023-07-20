@@ -416,13 +416,30 @@
     <!-- Travel Itinerary section End -->
 
     <!-- Map Section Start -->
-    <?php if ( ($location && $itinerary_map != 1) || ! $itineraries): ?>
+    <?php if ( ($location && $itinerary_map != 1 && $tf_openstreet_map != "googlemap" && empty($tf_google_map_key) ) || ! $itineraries): ?>
         <div id="tour-map" class="tf-map-wrapper">
             <div class="tf-container">
                 <div class="tf-row">
                     <div class="tf-map-content-wrapper">
+                        <?php if( $tf_openstreet_map!="default" ){ ?>
                         <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $location ) ); ?>&output=embed" width="100%" height="600" style="border:0;" allowfullscreen=""
                                 loading="lazy"></iframe>
+                        <?php } ?>
+                        <?php if ( $tf_openstreet_map=="default" && !empty($location_latitude) && !empty($location_longitude) ) {  ?>
+                            <div id="tour-location" style="height: 500px;"></div>
+
+                            <script>
+                            const map = L.map('tour-location').setView([<?php echo $location_latitude; ?>, <?php echo $location_longitude; ?>], <?php echo $location_zoom; ?>);
+
+                            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                maxZoom: 20,
+                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                            }).addTo(map);
+
+                            const marker = L.marker([<?php echo $location_latitude; ?>, <?php echo $location_longitude; ?>], {alt: '<?php echo $location; ?>'}).addTo(map)
+                                .bindPopup('<?php echo $location; ?>');
+                            </script>
+                        <?php } ?>        
                     </div>
                 </div>
             </div>
