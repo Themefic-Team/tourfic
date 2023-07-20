@@ -1759,7 +1759,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 14
+					'default' => 16
 				),
 				array(
 					'id'          => 'global-p-line-height',
@@ -1770,7 +1770,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.2
+					'default' => 1.5
 				),
 				array(
 					'id'       => 'global-p-weight',

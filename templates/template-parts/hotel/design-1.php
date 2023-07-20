@@ -176,23 +176,60 @@
                                 <?php tf_hotel_sidebar_booking_form(); ?>
                             </div>
                             <div class="tf-hotel-location-map">
-                                <?php if ( !defined( 'TF_PRO' ) && ( $address ) ) { ?>
+                                <?php if ( !defined( 'TF_PRO' ) && ( $address ) && $tf_openstreet_map!="default" ) { ?>
                                     <div class="tf-hotel-location-preview show-on-map">
                                     <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="290"
                                                 style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                                        <a href="https://www.google.com/maps/search/<?php echo $address; ?>" target="_blank"><i class="fa-solid fa-location-dot"></i></a>
+                                        <a href="https://www.google.com/maps/search/<?php echo $address; ?>" class="map-pre" target="_blank"><i class="fa-solid fa-location-dot"></i></a>
                                     </div>
+                                <?php } if ( !defined( 'TF_PRO' ) && ( $address ) && $tf_openstreet_map=="default" ) {  ?>
+                                    <div class="tf-hotel-location-preview show-on-map">
+                                        <div id="hotel-location"></div>
+                                    </div>
+                                    <script>
+                                        const map = L.map('hotel-location').setView([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], <?php echo $address_zoom; ?>);
+
+                                        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                            maxZoom: 20,
+                                            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                                        }).addTo(map);
+
+                                        const marker = L.marker([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], {alt: '<?php echo $address; ?>'}).addTo(map)
+                                            .bindPopup('<?php echo $address; ?>');
+                                    </script>
                                 <?php } ?>
                                 <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( ! empty( $map["address"] ) || (! empty( $map["latitude"] ) && ! empty( $map["longitude"] ) ) ) ) { ?>
+                                    <?php 
+                                    if( $tf_openstreet_map!="default" ){ ?>
                                     <div class="tf-hotel-location-preview show-on-map">
                                         <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&output=embed" width="100%" height="290"
                                                 style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
-                                        <a data-fancybox data-src="#tf-hotel-google-maps" href="javascript:;">
+                                        <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="javascript:;">
                                             <i class="fa-solid fa-location-dot"></i>
                                         </a>
 
                                     </div>
+                                    <?php } ?>
+                                    <?php if (  $tf_openstreet_map=="default" ) {  ?>
+                                        <div class="tf-hotel-location-preview show-on-map">
+                                            <div id="hotel-location"></div>
+                                            <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="javascript:;">
+                                            <i class="fa-solid fa-location-dot"></i>
+                                        </a>
+                                        </div>
+                                        <script>
+                                            const map = L.map('hotel-location').setView([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], <?php echo $address_zoom; ?>);
+
+                                            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                                maxZoom: 20,
+                                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                                            }).addTo(map);
+
+                                            const marker = L.marker([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], {alt: '<?php echo $address; ?>'}).addTo(map)
+                                                .bindPopup('<?php echo $address; ?>');
+                                        </script>
+                                    <?php } ?>
                                     <div style="display: none;" id="tf-hotel-google-maps">
                                         <div class="tf-hotel-google-maps-container">
                                             <?php

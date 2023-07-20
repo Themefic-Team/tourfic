@@ -182,6 +182,13 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'field_width' => '33.33',
 				),
 				array(
+					'id'          => 'refund_des',
+					'type'        => 'text',
+					'label'       => __( 'Refund Text', 'tourfic' ),
+					'subtitle'    => __( 'Add, if you have any refund policy', 'tourfic' ),
+					'field_width' => '33.33',
+				),
+				array(
 					'id'      => 'highlights-sections',
 					'type'    => 'heading',
 					'content' => __( 'Tour Highlights', 'tourfic' ),

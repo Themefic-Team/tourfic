@@ -776,6 +776,19 @@
     }
 }
 
+// Map Section
+
+#tf-tour-map{
+    .tf-map-area{
+        #tour-location{
+            height: 500px;
+            width: 100%;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+}
+
 // Tourfic review section
 .tf-review-wrapper{
     .tf-review-data.tf-box{
