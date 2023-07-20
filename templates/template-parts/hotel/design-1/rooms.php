@@ -41,6 +41,7 @@ foreach ( $rooms as $key => $room ) {
                     $total_person = $adult_number + $child_number;
                     $pricing_by   = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
                     $avil_by_date = ! empty( $room['avil_by_date'] ) ? ! empty( $room['avil_by_date'] ) : false;
+                    $multi_by_date = ! empty( $room['price_multi_day'] ) ? ! empty( $room['price_multi_day'] ) : false;
 
                     if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avil_by_date == true ) {
                         $repeat_by_date = ! empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
@@ -213,14 +214,24 @@ foreach ( $rooms as $key => $room ) {
                                 ?>
                                 <span class="tf-price"><?php echo $price; ?></span>
                                 <div class="price-per-night">
-                                    <?php esc_html_e( 'per night', 'tourfic' ); ?>
+                                    <?php 
+                                    if($multi_by_date){
+                                        esc_html_e( 'per night', 'tourfic' );
+                                    }else{
+                                        esc_html_e( 'per day', 'tourfic' );
+                                    } ?>
                                 </div>
                                 <?php
                             } else {
                                 ?>
                                 <span class="tf-price"><?php echo $price; ?></span>
                                 <div class="price-per-night">
-                                    <?php esc_html_e( 'per person/night', 'tourfic' ); ?>
+                                    <?php 
+                                    if($multi_by_date){
+                                        esc_html_e( 'per person/night', 'tourfic' );
+                                    }else{
+                                        esc_html_e( 'per person/day', 'tourfic' );
+                                    } ?>
                                 </div>
                                 <?php
                             }

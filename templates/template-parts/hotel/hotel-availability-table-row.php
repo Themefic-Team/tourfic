@@ -125,10 +125,27 @@ if( $tf_hotel_selected_template_check == "design-1" ){
     <td class="reserve tf-t-c">
         <div class="tf-price-column">
             <span class="tf-price"><?php echo wc_price( $price ); ?></span>
-            <?php if ( $pricing_by == '1' ) { ?>
-                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  _e( 'per night', 'tourfic' );?></div>
+            <?php 
+            if ( $pricing_by == '1' ) { ?>
+                <div class="price-per-night">
+                    <?php 
+                    if($multi_by_date_ck){
+                        $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  _e( 'per night', 'tourfic' );
+                    }else{
+                        $days > 0 ? printf(__('for %s days', 'tourfic'), $days) :  _e( 'per day', 'tourfic' );
+                    }
+                    ?>
+                </div>
             <?php } else {?>
-                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );?></div>
+                <div class="price-per-night">
+                    <?php 
+                    if($multi_by_date_ck){
+                        $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );
+                    }else{
+                        $days > 0 ? printf(__('for %s days', 'tourfic'), $days) : _e( 'per person/day', 'tourfic' );
+                    }
+                    ?>
+                </div>
             <?php }?>
 
             <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount)) { ?>
@@ -342,10 +359,27 @@ if( $tf_hotel_selected_template_check == "design-1" ){
     <td class="pricing">
         <div class="tf-price-column">
             <span class="tf-price"><?php echo wc_price( $price ); ?></span>
-            <?php if ( $pricing_by == '1' ) { ?>
-                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  _e( 'per night', 'tourfic' );?></div>
+            <?php 
+            if ( $pricing_by == '1' ) { ?>
+                <div class="price-per-night">
+                    <?php 
+                    if($multi_by_date_ck){
+                        $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  _e( 'per night', 'tourfic' );
+                    }else{
+                        $days > 0 ? printf(__('for %s days', 'tourfic'), $days) :  _e( 'per day', 'tourfic' );
+                    }
+                    ?>
+                </div>
             <?php } else {?>
-                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );?></div>
+                <div class="price-per-night">
+                    <?php 
+                    if($multi_by_date_ck){
+                        $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );
+                    }else{
+                        $days > 0 ? printf(__('for %s days', 'tourfic'), $days) : _e( 'per person/day', 'tourfic' );
+                    }
+                    ?>
+                </div>
             <?php }?>
 
             <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount)) { ?>
@@ -372,8 +406,8 @@ if( $tf_hotel_selected_template_check == "design-1" ){
             <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
                 
                 <div class="room-deposit-wrap">
-                    <input type="checkbox" id="tf-make-deposit" name="make_deposit" value="<?php echo $room_id ?>">
-                    <label for="tf-make-deposit"><?php _e("I'll make a Partial Payment", "tourfic") ?></label><br>
+                    <input type="checkbox" id="tf-make-deposit<?php echo $room_id ?>" name="make_deposit" value="<?php echo $room_id ?>">
+                    <label for="tf-make-deposit<?php echo $room_id ?>"><?php _e("I'll make a Partial Payment", "tourfic") ?></label><br>
                 </div>
 	        <?php } ?>
 

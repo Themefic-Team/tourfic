@@ -659,6 +659,9 @@ function tf_room_availability_callback() {
 	$tf_startdate = $form_start;
 	$tf_enddate   = $form_end;
 
+	if ( !empty( $form_end ) ) {
+		$not_single_date = true;
+	}
 	if ( empty( $form_end ) ) {
 		$form_end   = date( 'Y/m/d', strtotime( $form_start . " + 1 day" ) );
 		$tf_enddate = date( 'Y/m/d', strtotime( $form_start . " + 1 day" ) );
@@ -754,6 +757,7 @@ function tf_room_availability_callback() {
 				$adult_number     = ! empty( $room['adult'] ) ? $room['adult'] : 0;
 				$child_number     = ! empty( $room['child'] ) ? $room['child'] : 0;
 				$pricing_by       = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
+				$multi_by_date_ck = ! empty( $room['price_multi_day'] ) ? ! empty( $room['price_multi_day'] ) : false;
 				$room_price       = ! empty( $room['price'] ) ? $room['price'] : 0;
 				$room_adult_price = ! empty( $room['adult_price'] ) ? $room['adult_price'] : 0;
 				$room_child_price = ! empty( $room['child_price'] ) ? $room['child_price'] : 0;
@@ -925,7 +929,15 @@ function tf_room_availability_callback() {
 						$price_by_date = ( ( $room_adult_price * $form_adult ) + ( $room_child_price * $form_child ) );
 					}
 
-					$price = $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date;
+					if(!$multi_by_date_ck){
+						if($days>1 || $not_single_date){
+							$days = $days+1;
+						}else{
+							$days = $days;
+						}
+					}
+
+					$price = $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date * $days;
 
 					tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit );
 
