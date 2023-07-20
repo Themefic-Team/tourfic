@@ -2523,6 +2523,7 @@ function tf_hotel_quickview_callback() {
 			$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
 			if ( $enable == '1' && $room['unique_id'] . $key == $_POST['uniqid_id'] ) :
 				$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
+				$child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 				?>
                 <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
 					<?php
@@ -2778,7 +2779,13 @@ function tf_hotel_quickview_callback() {
                                         <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                                     </div>
                                     <div class="tf-top">
-										<?php _e( 'Number of Children', 'tourfic' ); ?>
+										<?php 
+										if(!empty($child_age_limit)){
+											printf(__('Children Age Limit %s Years', 'tourfic'), $child_age_limit);
+										}else{
+											_e( 'Number of Children', 'tourfic' ); 
+										}
+										?>
                                         <i class="tool-i"></i>
                                     </div>
                                 </div>
