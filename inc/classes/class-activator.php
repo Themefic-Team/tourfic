@@ -49,35 +49,41 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 		 */
 		private function create_pages() {
 			$pages = array(
-				'search'          => array(
+				'search'             => array(
 					'name'    => _x( 'tf-search', 'Page slug', 'tourfic' ),
 					'title'   => _x( 'TF Search', 'Page title', 'tourfic' ),
 					'content' => '',
 				),
-				'wishlist'        => array(
+				'wishlist'           => array(
 					'name'    => _x( 'tf-wishlist', 'Page slug', 'tourfic' ),
 					'title'   => _x( 'TF Wishlist', 'Page title', 'tourfic' ),
 					'content' => '',
 				),
-				'login'           => array(
+				'login'              => array(
 					'name'    => _x( 'tf-login', 'Page slug', 'tourfic' ),
 					'title'   => _x( 'TF Login', 'Page title', 'tourfic' ),
 					'content' => '',
 					'pro'     => true,
 				),
-				'register'        => array(
+				'register'           => array(
 					'name'    => _x( 'tf-register', 'Page slug', 'tourfic' ),
 					'title'   => _x( 'TF Register', 'Page title', 'tourfic' ),
 					'content' => '',
 					'pro'     => true,
 				),
-				'dashboard'       => array(
+				'email_verification' => array(
+					'name'    => _x( 'tf-email-verification', 'Page slug', 'tourfic' ),
+					'title'   => _x( 'TF Email Verification', 'Page title', 'tourfic' ),
+					'content' => "Please don't edit this page or don't change title/slug. This page reserved for Tourfic Email Verification.",
+					'pro'     => true,
+				),
+				'dashboard'          => array(
 					'name'    => _x( 'tf-dashboard', 'Page slug', 'tourfic' ),
 					'title'   => _x( 'TF Dashboard', 'Page title', 'tourfic' ),
 					'content' => '',
 					'pro'     => true,
 				),
-				'qr_code_scanner' => array(
+				'qr_code_scanner'    => array(
 					'name'    => _x( 'tf-qr-code-scanner', 'Page slug', 'tourfic' ),
 					'title'   => _x( 'TF QR Code Scanner', 'Page title', 'tourfic' ),
 					'content' => '',
@@ -151,12 +157,13 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 		 * @since 1.0.0
 		 */
 		public function set_page_template( $templates, $wp_theme, $post, $post_type ) {
-			$templates['tf-search']          = 'Tourfic - Search Results';
-			$templates['tf-wishlist']        = 'Tourfic - Wishlist';
-			$templates['tf-login']           = 'Tourfic - Login';
-			$templates['tf-register']        = 'Tourfic - Register';
-			$templates['tf-dashboard']       = 'Tourfic - Dashboard';
-			$templates['tf-qr-code-scanner'] = 'Tourfic - QR Code Scanner';
+			$templates['tf-search']             = 'Tourfic - Search Results';
+			$templates['tf-wishlist']           = 'Tourfic - Wishlist';
+			$templates['tf-login']              = 'Tourfic - Login';
+			$templates['tf-register']           = 'Tourfic - Register';
+			$templates['tf-email-verification'] = 'Tourfic - Email Verification';
+			$templates['tf-dashboard']          = 'Tourfic - Dashboard';
+			$templates['tf-qr-code-scanner']    = 'Tourfic - QR Code Scanner';
 
 			return $templates;
 		}
@@ -207,6 +214,16 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 				}
 			}
 
+			if ( get_page_template_slug() == 'tf-email-verification' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				$theme_files     = TF_PRO_TEMP_PATH . '/email-verification.php';
+				$exists_in_theme = locate_template( $theme_files, false );
+				if ( $exists_in_theme ) {
+					return $exists_in_theme;
+				} else {
+					return TF_PRO_TEMP_PATH . '/email-verification.php';
+				}
+			}
+
 			if ( get_page_template_slug() == 'tf-dashboard' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 				$theme_files     = TF_FD_TEMPLATE_PATH . 'page-templates/frontend-dashboard.php';
 				$exists_in_theme = locate_template( $theme_files, false );
@@ -235,6 +252,7 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 			     $post->ID == get_option( 'tf_wishlist_page_id' ) ||
 			     $post->ID == get_option( 'tf_login_page_id' ) ||
 			     $post->ID == get_option( 'tf_register_page_id' ) ||
+			     $post->ID == get_option( 'tf_email_verification_page_id' ) ||
 			     $post->ID == get_option( 'tf_dashboard_page_id' ) ||
 			     $post->ID == get_option( 'tf_qr_code_scanner_page_id' )
 			) {

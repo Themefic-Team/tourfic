@@ -43,9 +43,11 @@ if ( ! class_exists( 'TF_Deactivator' ) ) {
 			$pages = array(
 				'search',
 				'wishlist',
-				'login'   ,
+				'login',
 				'register',
-				'dashboard'
+				'email_verification',
+				'dashboard',
+				'qr_code_scanner',
 			);
 			foreach ( $pages as $page ) {
 				if ( is_page( get_option( 'tf_' . $page . '_page_id' ) ) ) {
