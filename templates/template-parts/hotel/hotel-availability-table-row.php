@@ -86,7 +86,7 @@ if( $tf_hotel_selected_template_check == "design-1" ){
                         <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: underline;">
                         <?php _e("Room Photos & Details","tourfic"); ?>
                         </a>
-                        <div id="tour_room_details_qv" class="tf-reg-wrap <?php echo $tf_hotel_selected_template_check == "design-1" ? "tf-hotel-design-1-popup" : ""; ?>" >
+                        <div id="tour_room_details_qv" class=" <?php echo $tf_hotel_selected_template_check == "design-1" ? "tf-hotel-design-1-popup" : ""; ?>" >
                                                                     
                         </div>
                 <?php } ?>
@@ -243,7 +243,7 @@ if( $tf_hotel_selected_template_check == "design-1" ){
                 <?php echo esc_html( $room['title'] ); ?>
             </a></h3>
 
-            <div id="tour_room_details_qv" class="tf-reg-wrap" >
+            <div id="tour_room_details_qv" class="" >
                                                         
             </div>
             <?php } else{ ?>

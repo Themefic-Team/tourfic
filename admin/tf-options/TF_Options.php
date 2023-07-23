@@ -313,7 +313,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				wp_enqueue_editor();
 			}
 			//Color-Picker JS
-			wp_enqueue_script( 'wp-color-picker-alpha', '//raw.githubusercontent.com/kallookoo/wp-color-picker-alpha/master/src/wp-color-picker-alpha.js', array( 'jquery', 'wp-color-picker' ), $this->tf_options_version(), true );
+			wp_enqueue_script( 'wp-color-picker-alpha', TF_ASSETS_URL . 'admin/lib/js/wp-color-picker-alpha.js', array( 'jquery', 'wp-color-picker' ), $this->tf_options_version(), true );
 
 			$tf_google_map = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "false";
 			wp_localize_script( 'tf-admin', 'tf_options', array(

@@ -975,13 +975,13 @@ TF_Settings::option( 'tf_settings', array(
 									'subtitle' => __('Partner be automatic approval (register account).','tourfic'),
 									'is_pro'   => true,
 								),
-								array(
+								/*array(
 									'id'        => 'reg-pop',
 									'type'      => 'switch',
 									'label'     => __( 'Registration Form Popup', 'tourfic' ),
 									'subtitle'  => __( 'Add class <code>tf-reg-popup</code> to trigger the popup', 'tourfic' ),
 									'is_pro'   => true,
-								),
+								),*/
 
 								array(
 									'id'      => 'notice',
@@ -1813,7 +1813,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 14
+					'default' => 16
 				),
 				array(
 					'id'          => 'global-p-line-height',

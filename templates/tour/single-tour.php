@@ -57,6 +57,11 @@ while ( have_posts() ) : the_post();
 	
 	if( !empty($meta['location']) && tf_data_types($meta['location'])){
 		$location = !empty( tf_data_types($meta['location'])['address'] ) ? tf_data_types($meta['location'])['address'] : $location;
+
+		$location_latitude = !empty( tf_data_types($meta['location'])['latitude'] ) ? tf_data_types($meta['location'])['latitude'] : '';
+		$location_longitude = !empty( tf_data_types($meta['location'])['longitude'] ) ? tf_data_types($meta['location'])['longitude'] : '';
+		$location_zoom = !empty( tf_data_types($meta['location'])['zoom'] ) ? tf_data_types($meta['location'])['zoom'] : '';
+
     }
 	// Gallery
 	$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : array();
@@ -65,10 +70,15 @@ while ( have_posts() ) : the_post();
 	}
 	$hero_title = ! empty( $meta['hero_title'] ) ? $meta['hero_title'] : '';
 
+	// Map Type
+	$tf_openstreet_map = ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "default";
+	$tf_google_map_key = !empty( tfopt( 'tf-googlemapapi' ) ) ? tfopt( 'tf-googlemapapi' ) : '';
+
 	// Highlights
 	$highlights = ! empty( $meta['additional_information'] ) ? $meta['additional_information'] : '';
 	// Informations
 	$tour_duration = ! empty( $meta['duration'] ) ? $meta['duration'] : '';
+	$tour_refund_policy = ! empty( $meta['refund_des'] ) ? $meta['refund_des'] : '';
 	$info_tour_type = ! empty( $meta['tour_types'] ) ? $meta['tour_types'] : 'Continues';
 	$duration_time = ! empty( $meta['duration_time'] ) ? $meta['duration_time'] : '';
 	$night         = ! empty( $meta['night'] ) ? $meta['night'] : false;
@@ -80,7 +90,6 @@ while ( have_posts() ) : the_post();
 	$fax           = ! empty( $meta['fax'] ) ? $meta['fax'] : '';
 	$website       = ! empty( $meta['website'] ) ? $meta['website'] : '';
 	$itinerary_map = ! empty( tfopt('itinerary_map') ) && function_exists('is_tf_pro') && is_tf_pro() ? tfopt('itinerary_map') : 0;
-	$map_settings = ! empty( tfopt('google-page-option')) ? tfopt('google-page-option') : 0;
 
 	/**
 	 * Get features

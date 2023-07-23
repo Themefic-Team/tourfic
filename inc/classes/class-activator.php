@@ -29,7 +29,8 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 			add_filter( 'display_post_states', array( $this, 'add_post_state' ), 10, 2 );
 
 			// set page template
-			add_filter( 'page_template', array( $this, 'set_page_template' ) );
+			add_filter( 'theme_page_templates', array( $this, 'set_page_template' ), 10, 4 );
+			add_filter( 'page_template', array( $this, 'load_page_templates' ) );
 		}
 
 		/**
@@ -39,7 +40,7 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 		public function activate() {
 			// Create Tourfic Pages
 			$this->create_pages();
-
+			flush_rewrite_rules();
 		}
 
 		/**
@@ -48,32 +49,50 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 		 */
 		private function create_pages() {
 			$pages = array(
-				'search'   => array(
+				'search'             => array(
 					'name'    => _x( 'tf-search', 'Page slug', 'tourfic' ),
 					'title'   => _x( 'TF Search', 'Page title', 'tourfic' ),
-					'content' => '[' . apply_filters( 'tf_search_shortcode_tag', 'tf_search' ) . ']',
+					'content' => '',
 				),
-				'wishlist' => array(
+				'wishlist'           => array(
 					'name'    => _x( 'tf-wishlist', 'Page slug', 'tourfic' ),
 					'title'   => _x( 'TF Wishlist', 'Page title', 'tourfic' ),
-					'content' => '[' . apply_filters( 'tf_wishlist_shortcode_tag', 'tf-wishlist' ) . ']',
+					'content' => '',
 				),
-				'login'    => array(
+				'login'              => array(
 					'name'    => _x( 'tf-login', 'Page slug', 'tourfic' ),
 					'title'   => _x( 'TF Login', 'Page title', 'tourfic' ),
-					'content' => '[' . apply_filters( 'tf_login_shortcode_tag', 'tf_login_form' ) . ']',
+					'content' => '',
 					'pro'     => true,
 				),
-				'register' => array(
+				'register'           => array(
 					'name'    => _x( 'tf-register', 'Page slug', 'tourfic' ),
 					'title'   => _x( 'TF Register', 'Page title', 'tourfic' ),
-					'content' => '[' . apply_filters( 'tf_register_shortcode_tag', 'tf_registration_form' ) . ']',
+					'content' => '',
+					'pro'     => true,
+				),
+				'email_verification' => array(
+					'name'    => _x( 'tf-email-verification', 'Page slug', 'tourfic' ),
+					'title'   => _x( 'TF Email Verification', 'Page title', 'tourfic' ),
+					'content' => "Please don't edit this page or don't change title/slug. This page reserved for Tourfic Email Verification.",
+					'pro'     => true,
+				),
+				'dashboard'          => array(
+					'name'    => _x( 'tf-dashboard', 'Page slug', 'tourfic' ),
+					'title'   => _x( 'TF Dashboard', 'Page title', 'tourfic' ),
+					'content' => '',
+					'pro'     => true,
+				),
+				'qr_code_scanner'    => array(
+					'name'    => _x( 'tf-qr-code-scanner', 'Page slug', 'tourfic' ),
+					'title'   => _x( 'TF QR Code Scanner', 'Page title', 'tourfic' ),
+					'content' => '',
 					'pro'     => true,
 				),
 			);
 
 			foreach ( $pages as $key => $page ) {
-				if( ! empty( $page['pro'] ) && !function_exists( 'is_tf_pro' ) ) {
+				if ( ! empty( $page['pro'] ) && ! function_exists( 'is_tf_pro' ) ) {
 					continue;
 				}
 				$this->create_page( esc_sql( $page['name'] ), 'tf_' . $key . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? $page['parent'] : '' );
@@ -128,6 +147,7 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 			$page_id   = wp_insert_post( $page_data );
 
 			update_option( $option, $page_id );
+			update_post_meta( $page_id, '_wp_page_template', $slug );
 
 			return $page_id;
 		}
@@ -136,16 +156,106 @@ if ( ! class_exists( 'TF_Activator' ) ) {
 		 * Set page template
 		 * @since 1.0.0
 		 */
-		public function set_page_template( $page_template ) {
-			if ( is_page( 'tf-search' ) ) {
-				$page_template = TF_PATH . 'templates/common/search-results.php';
+		public function set_page_template( $templates, $wp_theme, $post, $post_type ) {
+			$templates['tf-search']             = 'Tourfic - Search Results';
+			$templates['tf-wishlist']           = 'Tourfic - Wishlist';
+			$templates['tf-login']              = 'Tourfic - Login';
+			$templates['tf-register']           = 'Tourfic - Register';
+			$templates['tf-email-verification'] = 'Tourfic - Email Verification';
+			$templates['tf-dashboard']          = 'Tourfic - Dashboard';
+			$templates['tf-qr-code-scanner']    = 'Tourfic - QR Code Scanner';
+
+			return $templates;
+		}
+
+		/**
+		 * Load page template
+		 * @since 1.0.0
+		 */
+		function load_page_templates( $page_template ) {
+
+			if ( get_page_template_slug() == 'tf-search' ) {
+				$theme_files     = TF_PATH . 'templates/common/search-results.php';
+				$exists_in_theme = locate_template( $theme_files, false );
+				if ( $exists_in_theme ) {
+					return $exists_in_theme;
+				} else {
+					return TF_PATH . 'templates/common/search-results.php';
+				}
+			}
+
+			if ( get_page_template_slug() == 'tf-wishlist' ) {
+				$theme_files     = TF_PATH . 'templates/common/tf-wishlist.php';
+				$exists_in_theme = locate_template( $theme_files, false );
+				if ( $exists_in_theme ) {
+					return $exists_in_theme;
+				} else {
+					return TF_PATH . 'templates/common/tf-wishlist.php';
+				}
+			}
+
+			if ( get_page_template_slug() == 'tf-login' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				$theme_files     = TF_PRO_INC_PATH . 'templates/tf-login.php';
+				$exists_in_theme = locate_template( $theme_files, false );
+				if ( $exists_in_theme ) {
+					return $exists_in_theme;
+				} else {
+					return TF_PRO_INC_PATH . 'templates/tf-login.php';
+				}
+			}
+
+			if ( get_page_template_slug() == 'tf-register' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				$theme_files     = TF_PRO_INC_PATH . 'templates/tf-register.php';
+				$exists_in_theme = locate_template( $theme_files, false );
+				if ( $exists_in_theme ) {
+					return $exists_in_theme;
+				} else {
+					return TF_PRO_INC_PATH . 'templates/tf-register.php';
+				}
+			}
+
+			if ( get_page_template_slug() == 'tf-email-verification' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				$theme_files     = TF_PRO_TEMP_PATH . '/email-verification.php';
+				$exists_in_theme = locate_template( $theme_files, false );
+				if ( $exists_in_theme ) {
+					return $exists_in_theme;
+				} else {
+					return TF_PRO_TEMP_PATH . '/email-verification.php';
+				}
+			}
+
+			if ( get_page_template_slug() == 'tf-dashboard' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				$theme_files     = TF_FD_TEMPLATE_PATH . 'page-templates/frontend-dashboard.php';
+				$exists_in_theme = locate_template( $theme_files, false );
+				if ( $exists_in_theme ) {
+					return $exists_in_theme;
+				} else {
+					return TF_FD_TEMPLATE_PATH . 'page-templates/frontend-dashboard.php';
+				}
+			}
+
+			if ( get_page_template_slug() == 'tf-qr-code-scanner' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				$theme_files     = TF_PRO_INC_PATH . 'templates/qr-code-scanner.php';
+				$exists_in_theme = locate_template( $theme_files, false );
+				if ( $exists_in_theme ) {
+					return $exists_in_theme;
+				} else {
+					return TF_PRO_INC_PATH . 'templates/qr-code-scanner.php';
+				}
 			}
 
 			return $page_template;
 		}
 
 		public function add_post_state( $post_states, $post ) {
-			if ( $post->ID == get_option( 'tf_search_page_id' ) || $post->ID == get_option( 'tf_wishlist_page_id' ) || $post->ID == get_option( 'tf_login_page_id' ) || $post->ID == get_option( 'tf_register_page_id' ) ) {
+			if ( $post->ID == get_option( 'tf_search_page_id' ) ||
+			     $post->ID == get_option( 'tf_wishlist_page_id' ) ||
+			     $post->ID == get_option( 'tf_login_page_id' ) ||
+			     $post->ID == get_option( 'tf_register_page_id' ) ||
+			     $post->ID == get_option( 'tf_email_verification_page_id' ) ||
+			     $post->ID == get_option( 'tf_dashboard_page_id' ) ||
+			     $post->ID == get_option( 'tf_qr_code_scanner_page_id' )
+			) {
 				$post_states[] = '<div class="tf-post-states">' . __( 'Tourfic', 'tourfic' ) . '</div>';
 			}
 

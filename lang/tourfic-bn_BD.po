@@ -8,7 +8,7 @@ msgstr ""
 "WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-08-27 10:58+0600\n"
-"PO-Revision-Date: 2022-10-10 12:10+0000\n"
+"PO-Revision-Date: 2023-07-03 02:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: Bengali (Bangladesh)\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz/\n"
 "Language: bn_BD\n"
-"X-Loco-Version: 2.6.2; wp-6.0.2"
+"X-Loco-Version: 2.6.4; wp-6.2.2"
 
 #: tourfic-pro/admin/options/global/parts/design-panel.php:5
 #: tourfic-pro/admin/options/global/parts/design-panel.php:7
@@ -3522,7 +3522,7 @@ msgstr ""
 
 #: tourfic/admin/options/options.php:102
 msgid "Tour slug"
-msgstr ""
+msgstr "ট্যুর স্লুগ"
 
 #: tourfic/admin/options/options.php:104
 msgid "Hotel slug"
@@ -4378,18 +4378,6 @@ msgstr ""
 #: tourfic/templates/hotel/single-hotel.php:468
 #: tourfic/templates/template-parts/hotel/hotel-availability-table-row.php:54
 msgid "Amenities"
-msgstr ""
-
-#: tourfic/inc/functions/functions-hotel.php:1804
-#: tourfic/templates/hotel/single-hotel.php:506
-#: tourfic/templates/template-parts/hotel/hotel-availability-table-row.php:90
-msgid "Number of Adults"
-msgstr ""
-
-#: tourfic/inc/functions/functions-hotel.php:1817
-#: tourfic/templates/hotel/single-hotel.php:518
-#: tourfic/templates/template-parts/hotel/hotel-availability-table-row.php:102
-msgid "Number of Children"
 msgstr ""
 
 #: tourfic/inc/functions/functions-notice_update.php:13

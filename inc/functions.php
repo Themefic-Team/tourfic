@@ -322,38 +322,6 @@ if ( ! function_exists( 'load_comment_template' ) ) {
 	add_filter( 'comments_template', 'load_comment_template' );
 }
 
-/**
- * Assign Search Result Template
- *
- * @since 1.0
- */
-// Show Page Template
-function page_templates( $templates, $wp_theme, $post, $post_type ) {
-	$templates['tf_search-result'] = 'Tourfic - Search Result';
-
-	return $templates;
-}
-
-add_filter( 'theme_page_templates', 'page_templates', 10, 4 );
-
-// Load Page Template
-function load_page_templates( $page_template ) {
-
-	if ( get_page_template_slug() == 'tf_search-result' ) {
-		$theme_files     = array( 'tourfic/common/search-results.php' );
-		$exists_in_theme = locate_template( $theme_files, false );
-		if ( $exists_in_theme ) {
-			return $exists_in_theme;
-		} else {
-			return TF_TEMPLATE_PATH . 'common/search-results.php';
-		}
-	}
-
-	return $page_template;
-}
-
-add_filter( 'page_template', 'load_page_templates' );
-
 /*
  * Asign Destination taxonomy template
  */
@@ -486,6 +454,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 
 	// Get post type
 	$post_type = $_GET['type'] ?? '';
+	$place_title = '';
 
 	if ( ! empty( $post_type ) ) {
 

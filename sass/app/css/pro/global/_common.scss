@@ -323,7 +323,7 @@
 .tf-hotel-location-preview {
     position: relative;
     margin-bottom: 15px;
-    a {
+    a.map-pre{
         position: absolute;
         top: 0;
         left: 0;
@@ -332,6 +332,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        z-index: 999;
         span {
             text-decoration: none;
             display: inline-block;
