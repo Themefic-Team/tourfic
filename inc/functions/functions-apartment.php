@@ -697,7 +697,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 	function tf_apartment_archive_single_item( array $data = [ 1, 0, 0, '' ] ): void {
 
-		$post_id = get_the_ID();
+		$post_id  = get_the_ID();
 		$features = ! empty( get_the_terms( $post_id, 'apartment_feature' ) ) ? get_the_terms( $post_id, 'apartment_feature' ) : '';
 
 		// Form Data
@@ -714,8 +714,8 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 		}
 
 		// Location
-		$address  = ! empty( $meta['address'] ) ? $meta['address'] : '';
-		$featured = ! empty( $meta['apartment_as_featured'] ) ? $meta['apartment_as_featured'] : '';
+		$address         = ! empty( $meta['address'] ) ? $meta['address'] : '';
+		$featured        = ! empty( $meta['apartment_as_featured'] ) ? $meta['apartment_as_featured'] : '';
 		$price_per_night = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
 
 		// Single link
@@ -731,13 +731,13 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
             <div class="single-tour-inner">
                 <div class="tourfic-single-left">
                     <a href="<?php echo $url; ?>">
-			            <?php
-			            if ( has_post_thumbnail() ) {
-				            the_post_thumbnail( 'full' );
-			            } else {
-				            echo '<img width="100%" height="100%" src="' . TF_ASSETS_URL . "img/img-not-available.svg" . '" class="attachment-full size-full wp-post-image">';
-			            }
-			            ?>
+						<?php
+						if ( has_post_thumbnail() ) {
+							the_post_thumbnail( 'full' );
+						} else {
+							echo '<img width="100%" height="100%" src="' . TF_ASSETS_URL . "img/img-not-available.svg" . '" class="attachment-full size-full wp-post-image">';
+						}
+						?>
                     </a>
                 </div>
                 <div class="tourfic-single-right">
@@ -746,15 +746,15 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
                             <div class="tf-hotel__title-wrap">
                                 <a href="<?php echo $url; ?>"><h3 class="tourfic_hotel-title"><?php the_title(); ?></h3></a>
                             </div>
-				            <?php
-				            if ( $address ) {
-					            echo '<div class="tf-map-link">';
-					            echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $address . '</span>';
-					            echo '</div>';
-				            }
-				            ?>
+							<?php
+							if ( $address ) {
+								echo '<div class="tf-map-link">';
+								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . $address . '</span>';
+								echo '</div>';
+							}
+							?>
                         </div>
-			            <?php tf_archive_single_rating(); ?>
+						<?php tf_archive_single_rating(); ?>
                     </div>
 
                     <div class="sr_rooms_table_block">
@@ -762,59 +762,59 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
                             <div class="featuredRooms">
                                 <div class="prco-ltr-right-align-helper">
                                     <div class="tf-archive-shortdesc">
-							            <?php echo substr( wp_strip_all_tags( get_the_content() ), 0, 160 ) . '...'; ?>
+										<?php echo substr( wp_strip_all_tags( get_the_content() ), 0, 160 ) . '...'; ?>
                                     </div>
                                 </div>
                                 <div class="roomNameInner">
                                     <div class="room_link">
                                         <div class="roomrow_flex">
-								            <?php if ( $features ) { ?>
+											<?php if ( $features ) { ?>
                                                 <div class="roomName_flex">
                                                     <ul class="tf-archive-desc">
-											            <?php foreach ( $features as $feature ) {
-												            $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_apartment_feature', true );
-												            if(!empty($feature_meta)){
-													            $f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-												            }
-												            if ( !empty($f_icon_type) && $f_icon_type == 'icon' ) {
-													            $feature_icon = !empty($feature_meta['apartment-feature-icon']) ? '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
-												            } elseif ( !empty($f_icon_type) && $f_icon_type == 'custom' ) {
-													            $feature_icon = !empty($feature_meta['apartment-feature-icon-custom']) ? '<img src="' . $feature_meta['apartment-feature-icon-custom'] . '" style="min-width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
-												            }else{
-													            $feature_icon = '<i class="fas fa-bread-slice"></i>';
-												            }
-												            ?>
+														<?php foreach ( $features as $feature ) {
+															$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_apartment_feature', true );
+															if ( ! empty( $feature_meta ) ) {
+																$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+															}
+															if ( ! empty( $f_icon_type ) && $f_icon_type == 'icon' ) {
+																$feature_icon = ! empty( $feature_meta['apartment-feature-icon'] ) ? '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
+															} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'custom' ) {
+																$feature_icon = ! empty( $feature_meta['apartment-feature-icon-custom'] ) ? '<img src="' . $feature_meta['apartment-feature-icon-custom'] . '" style="min-width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />' : '<i class="fas fa-bread-slice"></i>';
+															} else {
+																$feature_icon = '<i class="fas fa-bread-slice"></i>';
+															}
+															?>
                                                             <li class="tf-tooltip">
-													            <?php
-													            if(!empty( $feature_icon )){
-														            echo $feature_icon;
-													            } ?>
+																<?php
+																if ( ! empty( $feature_icon ) ) {
+																	echo $feature_icon;
+																} ?>
                                                                 <div class="tf-top">
-														            <?php echo $feature->name; ?>
+																	<?php echo $feature->name; ?>
                                                                     <i class="tool-i"></i>
                                                                 </div>
                                                             </li>
-											            <?php } ?>
+														<?php } ?>
                                                     </ul>
                                                 </div>
-								            <?php } ?>
-                                            <div class="roomPrice roomPrice_flex sr_discount" style="<?php echo empty($features) ? 'text-align:left' : ''; ?>">
+											<?php } ?>
+                                            <div class="roomPrice roomPrice_flex sr_discount" style="<?php echo empty( $features ) ? 'text-align:left' : ''; ?>">
                                                 <div class="availability-btn-area">
                                                     <a href="<?php echo $url; ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
                                                 </div>
                                                 <!-- Show minimum price @author - Hena -->
                                                 <div class="tf-room-price-area">
-										            <?php
+													<?php
 
-										            if ( ! empty( $price_per_night ) ):
-											            ?>
+													if ( ! empty( $price_per_night ) ):
+														?>
                                                         <div class="tf-room-price">
                                                             <h6 class="tf-apartment-price-per-night">
                                                                 <span class="tf-apartment-base-price"><?php echo wc_price( $price_per_night ) ?></span>
                                                                 <span><?php _e( '/per night', 'tourfic' ) ?></span>
                                                             </h6>
                                                         </div>
-										            <?php endif; ?>
+													<?php endif; ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -828,6 +828,169 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
         </div>
 		<?php
 	}
+}
+
+/**
+ * Filter apartments on search result page by checkin checkout dates set by backend
+ *
+ *
+ * @param DatePeriod $period collection of dates by user input;
+ * @param array $not_found collection of hotels exists
+ * @param array $data user input for sidebar form
+ *
+ * @author Foysal
+ *
+ */
+function tf_filter_apartment_by_date( $period, array &$not_found, array $data = [] ): void {
+
+    // Form Data
+	if ( isset( $data[4] ) && isset( $data[5] ) ) {
+		[ $adults, $child, $infant, $check_in_out, $startprice, $endprice ] = $data;
+	} else {
+		[ $adults, $child, $infant, $check_in_out ] = $data;
+	}
+
+	// Get apartment meta options
+	$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+
+	// Set initial status
+	$has_apartment = false;
+
+	if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
+		$has_apartment = true;
+	}
+	if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
+		$has_apartment = true;
+	}
+	if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
+		$has_apartment = true;
+	}
+
+	if ( ! empty( $check_in_out ) ) {
+		$booked_dates   = tf_apartment_booked_days( get_the_ID() );
+		$checkInOutDate = explode( ' - ', $check_in_out );
+		if ( $checkInOutDate[0] && $checkInOutDate[1] ) {
+			$check_in_stt  = strtotime( $checkInOutDate[0] . ' +1 day' );
+			$check_out_stt = strtotime( $checkInOutDate[1] );
+			$days          = ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1;
+			//skip apartment if min stay is grater than selected days
+			if ( ! empty( $meta['min_stay'] ) && intval( $meta['min_stay'] ) <= $days && $meta['min_stay'] != 0 ) {
+				$has_apartment = true;
+			}
+
+			foreach ( $booked_dates as $booked_date ) {
+				$booked_from = strtotime( $booked_date['check_in'] );
+				$booked_to   = strtotime( $booked_date['check_out'] );
+
+				if ( $check_in_stt >= $booked_from && $check_in_stt <= $booked_to ) {
+					$has_apartment = true;
+				}
+				if ( $check_out_stt >= $booked_from && $check_out_stt <= $booked_to ) {
+					$has_apartment = true;
+				}
+				if ( $check_in_stt <= $booked_from && $check_out_stt >= $booked_to ) {
+					$has_apartment = true;
+				}
+			}
+		}
+	}
+
+	if ( ! empty( $meta['price_per_night'] ) ) {
+		if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
+			if ( $startprice <= $meta['price_per_night'] || $meta['price_per_night'] <= $endprice ) {
+				$has_apartment = true;
+			}
+		} elseif ( ! empty( $startprice ) ) {
+			if ( $startprice <= $meta['price_per_night'] ) {
+				$has_apartment = true;
+			}
+		} elseif ( ! empty( $endprice ) ) {
+			if ( $meta['price_per_night'] <= $endprice ) {
+				$has_apartment = true;
+			}
+		}
+	}
+
+	// Conditional apartment showing
+	if ( $has_apartment ) {
+		$not_found[] = array(
+			'post_id' => get_the_ID(),
+			'found'   => 0,
+		);
+	} else {
+		$not_found[] = array(
+			'post_id' => get_the_ID(),
+			'found'   => 1,
+		);
+	}
+
+}
+
+/**
+ * Filter apartments on search result page without checkin checkout dates
+ *
+ *
+ * @param DatePeriod $period collection of dates by user input;
+ * @param array $not_found collection of hotels exists
+ * @param array $data user input for sidebar form
+ *
+ * @author Foysal
+ *
+ */
+function tf_filter_apartment_without_date( $period, array &$not_found, array $data = [] ): void {
+
+	// Form Data
+	if ( isset( $data[4] ) && isset( $data[5] ) ) {
+		[ $adults, $child, $infant, $check_in_out, $startprice, $endprice ] = $data;
+	} else {
+		[ $adults, $child, $infant, $check_in_out ] = $data;
+	}
+
+	// Get apartment meta options
+	$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+
+	// Set initial status
+	$has_apartment = false;
+
+	if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
+        $has_apartment = true;
+	}
+	if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
+        $has_apartment = true;
+	}
+	if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
+        $has_apartment = true;
+	}
+
+	if ( ! empty( $meta['price_per_night'] ) ) {
+		if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
+			if ( $startprice <= $meta['price_per_night'] || $meta['price_per_night'] <= $endprice ) {
+				$has_apartment = true;
+			}
+		} elseif ( ! empty( $startprice ) ) {
+			if ( $startprice <= $meta['price_per_night'] ) {
+				$has_apartment = true;
+			}
+		} elseif ( ! empty( $endprice ) ) {
+			if ( $meta['price_per_night'] <= $endprice ) {
+				$has_apartment = true;
+			}
+		}
+	}
+
+	// Conditional apartment showing
+	if ( $has_apartment ) {
+		$not_found[] = array(
+			'post_id' => get_the_ID(),
+			'found'   => 0,
+		);
+	} else {
+		$not_found[] = array(
+			'post_id' => get_the_ID(),
+			'found'   => 1,
+		);
+	}
+
 }
 
 /**
@@ -916,8 +1079,8 @@ if ( ! function_exists( 'get_apartment_min_max_price' ) ) {
 		wp_reset_query();
 
 		return array(
-			'min' => !empty($min_max_price) ? min( $min_max_price ) : 0,
-			'max' => !empty($min_max_price) ? max( $min_max_price ) : 0,
+			'min' => ! empty( $min_max_price ) ? min( $min_max_price ) : 0,
+			'max' => ! empty( $min_max_price ) ? max( $min_max_price ) : 0,
 		);
 	}
 }
@@ -943,11 +1106,11 @@ function tf_apartment_host_rating( $author_id ) {
 	}
 
 	$total_comment_rating = [];
-	$comment_count   = 0;
+	$comment_count        = 0;
 	foreach ( $comments_array as $comments ) {
-        if(!empty($comments)){
-	        $total_comment_rating[] = tf_total_avg_rating( $comments );
-        }
+		if ( ! empty( $comments ) ) {
+			$total_comment_rating[] = tf_total_avg_rating( $comments );
+		}
 		$comment_count += count( $comments );
 	}
 
@@ -957,7 +1120,7 @@ function tf_apartment_host_rating( $author_id ) {
         <div class="tf-host-rating-wrapper">
             <i class="fas fa-star"></i>
             <div class="tf-host-rating">
-                <?php echo tf_average_ratings( array_values( $total_comment_rating ?? [] ) ); ?>
+				<?php echo tf_average_ratings( array_values( $total_comment_rating ?? [] ) ); ?>
             </div>
             <h6>(<?php tf_based_on_text( $comment_count ); ?>)</h6>
         </div>
