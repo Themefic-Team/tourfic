@@ -435,8 +435,9 @@
     }
 
     .host-meta {
-        p {
+        h4, p {
             margin-bottom: 0;
+            margin-top: 0;
         }
 
         i {
@@ -478,6 +479,10 @@
             i {
                 padding-right: 8px;
             }
+        }
+        .btn-styled{
+            width: auto !important;
+            display: block;
         }
     }
 
@@ -578,6 +583,7 @@
         .tf-included-house-rules {
             list-style: none;
             @include flex(0 0 calc(50% - 15px));
+            padding-left: 30px;
 
             li {
                 margin: 16px 0;
@@ -819,6 +825,7 @@
 
                 a {
                     color: $slate80;
+                    text-decoration: none;
                 }
             }
 
@@ -873,6 +880,10 @@
                 font-weight: 400;
                 color: $slate60;
             }
+        }
+        
+        .tf-top-review a{
+            text-decoration: none;
         }
 
         .tf-single-rating {
@@ -1003,11 +1014,18 @@
     .tf-host-rating {
         font-weight: 600;
     }
+    h6{
+        margin-bottom: 0;
+    }
 }
 
 .single-tf_apartment .tf-title-right {
     @include flex(0 0 350px);
     @include justify-content(flex-end);
+    
+    a{
+        text-decoration: none;
+    }
 }
 
 

@@ -410,7 +410,7 @@ while ( have_posts() ) : the_post();
 		<?php if ( defined( 'TF_PRO' ) ): ?>
 			<?php if ( ! empty( $map['address'] ) || isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
                 <!-- Map Section Start -->
-                <div id="tour-map" class="tf-map-wrapper sp-t-70">
+                <div id="apartment-map" class="tf-apartment-map-wrapper sp-t-70">
                     <div class="tf-container">
                         <div class="tf-row">
                             <div class="tf-map-content-wrapper">
