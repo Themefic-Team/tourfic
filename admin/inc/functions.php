@@ -19,12 +19,12 @@ function tf_required_taxonomies( $hook ) {
 	$tf_is_gutenberg_active = tf_is_gutenberg_active();
 
 	$default_post_types = array(
-		'tf_hotel' => array(
+		'tf_hotel'     => array(
 			'hotel_location' => array(
 				'message' => __( 'Please select a location before publishing this hotel', 'tourfic' )
 			)
 		),
-		'tf_tours' => array(
+		'tf_tours'     => array(
 			'tour_destination' => array(
 				'message' => __( 'Please select a destination before publishing this tour', 'tourfic' )
 			)
@@ -32,7 +32,7 @@ function tf_required_taxonomies( $hook ) {
 		'tf_apartment' => array(
 			'apartment_location' => array(
 				'message' => __( 'Please select a location before publishing this apartment', 'tourfic' )
-        	)
+			)
 		)
 	);
 
@@ -100,25 +100,27 @@ function tf_required_taxonomies( $hook ) {
 	}
 
 	wp_localize_script( 'tf-admin', 'tf_admin_params', array(
-			'taxonomies'                   => $post_types[ $post_type ],
-			'error'                        => false,
-			'tf_nonce'                     => wp_create_nonce( 'updates' ),
-			'ajax_url'                     => admin_url( 'admin-ajax.php' ),
-			'deleting_old_review_fields'   => __( 'Deleting old review fields...', 'tourfic' ),
-			'deleting_room_order_ids'      => __( 'Deleting order ids...', 'tourfic' ),
-			'tour_location_required'       => __( 'Tour Location is a required field!', 'tourfic' ),
-			'hotel_location_required'      => __( 'Hotel Location is a required field!', 'tourfic' ),
-			'tour_feature_image_required'  => __( 'Tour image is a required!', 'tourfic' ),
-			'hotel_feature_image_required' => __( 'Hotel image is a required!', 'tourfic' ),
-			'installing'                   => __( 'Installing...', 'tourfic' ),
-			'activating'                   => __( 'Activating...', 'tourfic' ),
-			'installed'                    => __( 'Installed', 'tourfic' ),
-			'activated'                    => __( 'Activated', 'tourfic' ),
-			'install_failed'               => __( 'Install failed', 'tourfic' ),
-			'i18n'                         => array(
-				'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
-			)
-		) );
+		'taxonomies'                       => $post_types[ $post_type ],
+		'error'                            => false,
+		'tf_nonce'                         => wp_create_nonce( 'updates' ),
+		'ajax_url'                         => admin_url( 'admin-ajax.php' ),
+		'deleting_old_review_fields'       => __( 'Deleting old review fields...', 'tourfic' ),
+		'deleting_room_order_ids'          => __( 'Deleting order ids...', 'tourfic' ),
+		'tour_location_required'           => __( 'Tour Location is a required field!', 'tourfic' ),
+		'hotel_location_required'          => __( 'Hotel Location is a required field!', 'tourfic' ),
+		'apartment_location_required'      => __( 'Apartment Location is a required field!', 'tourfic' ),
+		'tour_feature_image_required'      => __( 'Tour image is a required!', 'tourfic' ),
+		'hotel_feature_image_required'     => __( 'Hotel image is a required!', 'tourfic' ),
+		'apartment_feature_image_required' => __( 'Apartment image is a required!', 'tourfic' ),
+		'installing'                       => __( 'Installing...', 'tourfic' ),
+		'activating'                       => __( 'Activating...', 'tourfic' ),
+		'installed'                        => __( 'Installed', 'tourfic' ),
+		'activated'                        => __( 'Activated', 'tourfic' ),
+		'install_failed'                   => __( 'Install failed', 'tourfic' ),
+		'i18n'                             => array(
+			'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
+		)
+	) );
 
 }
 

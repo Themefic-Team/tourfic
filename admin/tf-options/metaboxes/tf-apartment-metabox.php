@@ -34,7 +34,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			'fields' => array(
 				array(
 					'id'          => 'address',
-					'type'        => 'text',
+					'type'        => 'textarea',
 					'label'       => __( 'Apartment Address', 'tourfic' ),
 					'subtitle'    => __( 'The address you want to show below the apartment title', 'tourfic' ),
 					'placeholder' => __( 'e.g. 123 ABC Road, Toronto, Ontario 20100', 'tourfic' ),
@@ -44,6 +44,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				),
 				array(
 					'id'       => 'map',
+					'class'    => 'gmaps',
 					'type'     => 'map',
 					'label'    => __( 'Dynamic Location Search', 'tourfic' ),
 					'subtitle' => __( 'Write your desired address and select the address from the suggestions. This address will be used to hyperlink the apartment address on the frontend.', 'tourfic' ),

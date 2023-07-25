@@ -843,7 +843,7 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
  */
 function tf_filter_apartment_by_date( $period, array &$not_found, array $data = [] ): void {
 
-    // Form Data
+	// Form Data
 	if ( isset( $data[4] ) && isset( $data[5] ) ) {
 		[ $adults, $child, $infant, $check_in_out, $startprice, $endprice ] = $data;
 	} else {
@@ -855,16 +855,6 @@ function tf_filter_apartment_by_date( $period, array &$not_found, array $data = 
 
 	// Set initial status
 	$has_apartment = false;
-
-	if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
-		$has_apartment = true;
-	}
-	if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
-		$has_apartment = true;
-	}
-	if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
-		$has_apartment = true;
-	}
 
 	if ( ! empty( $check_in_out ) ) {
 		$booked_dates   = tf_apartment_booked_days( get_the_ID() );
@@ -895,7 +885,18 @@ function tf_filter_apartment_by_date( $period, array &$not_found, array $data = 
 		}
 	}
 
-	if ( ! empty( $meta['price_per_night'] ) ) {
+	if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
+		$has_apartment = true;
+	}
+	if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
+		$has_apartment = true;
+	}
+	if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
+		$has_apartment = true;
+	}
+
+
+	/*if ( ! empty( $meta['price_per_night'] ) ) {
 		if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
 			if ( $startprice <= $meta['price_per_night'] || $meta['price_per_night'] <= $endprice ) {
 				$has_apartment = true;
@@ -909,8 +910,8 @@ function tf_filter_apartment_by_date( $period, array &$not_found, array $data = 
 				$has_apartment = true;
 			}
 		}
-	}
-
+	}*/
+	tf_var_dump( '$has_apartment' . $has_apartment );
 	// Conditional apartment showing
 	if ( $has_apartment ) {
 		$not_found[] = array(
@@ -952,14 +953,29 @@ function tf_filter_apartment_without_date( $period, array &$not_found, array $da
 	// Set initial status
 	$has_apartment = false;
 
+	/**
+	 * Adult Number Validation
+	 */
+	$back_adults   = array_column( $meta, 'max_adults' );
+	$adult_counter = 0;
+	foreach ( $back_adults as $back_adult ) {
+		if ( !empty($back_adult) && $back_adult >= $adults ) {
+			$adult_counter ++;
+		}
+	}
+
+	$adult_result = array_filter($back_adults);
+	tf_var_dump($adult_result);
+
 	if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
-        $has_apartment = true;
-	}
-	if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
-        $has_apartment = true;
-	}
-	if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
-        $has_apartment = true;
+		$has_apartment = true;
+        //tf_var_dump( get_the_title(get_the_ID()));
+	} elseif ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
+		$has_apartment = true;
+        //tf_var_dump( get_the_title(get_the_ID()));
+	} elseif ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
+		$has_apartment = true;
+        //tf_var_dump( get_the_title(get_the_ID()));
 	}
 
 	if ( ! empty( $meta['price_per_night'] ) ) {
@@ -977,6 +993,8 @@ function tf_filter_apartment_without_date( $period, array &$not_found, array $da
 			}
 		}
 	}
+
+    //tf_var_dump('$has_apartment'.$has_apartment);
 
 	// Conditional apartment showing
 	if ( $has_apartment ) {

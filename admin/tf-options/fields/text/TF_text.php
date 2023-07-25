@@ -23,6 +23,8 @@ if ( ! class_exists( 'TF_text' ) ) {
 			if(isset($this->field['validate']) && $this->field['validate'] == 'no_space_no_special') {
 				//remove special characters, replace space with underscore and convert to lowercase
 				return sanitize_title(str_replace(' ', '_', strtolower($this->value)));
+			} else {
+				return sanitize_text_field( $this->value );
 			}
 		}
 	}
