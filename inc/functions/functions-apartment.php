@@ -729,6 +729,11 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 		?>
         <div class="single-tour-wrap <?php echo $featured ? esc_attr( 'tf-featured' ) : '' ?>">
             <div class="single-tour-inner">
+	            <?php if( $featured ): ?>
+                    <div class="tf-featured-badge">
+                        <span><?php echo !empty( $meta['featured_text'] ) ? $meta['featured_text'] : esc_html( "HOT DEAL" ); ?></span>
+                    </div>
+	            <?php endif; ?>
                 <div class="tourfic-single-left">
                     <a href="<?php echo $url; ?>">
 						<?php
@@ -911,7 +916,7 @@ function tf_filter_apartment_by_date( $period, array &$not_found, array $data = 
 			}
 		}
 	}*/
-	tf_var_dump( '$has_apartment' . $has_apartment );
+	//tf_var_dump( '$has_apartment' . $has_apartment );
 	// Conditional apartment showing
 	if ( $has_apartment ) {
 		$not_found[] = array(
@@ -952,20 +957,6 @@ function tf_filter_apartment_without_date( $period, array &$not_found, array $da
 
 	// Set initial status
 	$has_apartment = false;
-
-	/**
-	 * Adult Number Validation
-	 */
-	$back_adults   = array_column( $meta, 'max_adults' );
-	$adult_counter = 0;
-	foreach ( $back_adults as $back_adult ) {
-		if ( !empty($back_adult) && $back_adult >= $adults ) {
-			$adult_counter ++;
-		}
-	}
-
-	$adult_result = array_filter($back_adults);
-	tf_var_dump($adult_result);
 
 	if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
 		$has_apartment = true;

@@ -1908,7 +1908,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
         <div class="single-tour-inner">
 			<?php if( $featured ): ?>
 				<div class="tf-featured-badge">
-					<span><?php _e( 'Featured','tourfic' ) ?></span>
+                    <span><?php echo !empty( $meta['featured_text'] ) ? $meta['featured_text'] : esc_html( "HOT DEAL" ); ?></span>
 				</div>
 			<?php endif; ?>
             <div class="tourfic-single-left">
