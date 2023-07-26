@@ -221,6 +221,9 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_tours" ){
 				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_tours_opt' ] ) ) ? $_POST[ 'tf_tours_opt' ] : array();
 			}
+			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_apartment" ){
+				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_apartment_opt' ] ) ) ? $_POST[ 'tf_apartment_opt' ] : array();
+			}
 			$post_basic_info = array(
 				'post_id' => sanitize_key( $post_id ),
 				'post_title' => sanitize_text_field( $_POST['post_title'] ),
@@ -230,7 +233,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 				'post_date' => get_the_date( 'Y-m-d H:i:s', $post_id )
 			);
 			if ( function_exists('is_tf_pro') && is_tf_pro() ) {
-				if( (!empty($_POST['post_type']) && $_POST['post_type']=="tf_hotel") || (!empty($_POST['post_type']) && $_POST['post_type']=="tf_tours") ){
+				if( (!empty($_POST['post_type']) && $_POST['post_type']=="tf_hotel") || (!empty($_POST['post_type']) && $_POST['post_type']=="tf_tours") || (!empty($_POST['post_type']) && $_POST['post_type']=="tf_apartment") ){
 				do_action( 'tf_services_pabbly_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
 				do_action( 'tf_services_zapier_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
 				}
