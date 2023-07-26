@@ -3042,6 +3042,52 @@ TF_Settings::option( 'tf_settings', array(
 									),
 								),
 								array(
+									'id'      => 'apartment-title',
+									'type'    => 'heading',
+									'content' => __( 'Apartment', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'        => 'apartment-integrate-pabbly',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Pabbly for Apartment?', 'tourfic' ),
+									'subtitle' => __( 'You can able to Integrate Pabbly with Apartment create and update.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true,
+								),
+								array(
+									'id'       => 'apartment-integrate-pabbly-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Apartment Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Apartment Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'apartment-integrate-pabbly', '==', 'true' ),
+									),
+								),
+								array(
+									'id'        => 'a-enquiry-pabbly',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Pabbly for Apartment Enquiry?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Pabbly with Apartment Enquiry Form.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true
+								),
+								array(
+									'id'       => 'a-enquiry-pabbly-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Apartment Enquiry Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Apartment Enquiry Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'a-enquiry-pabbly', '==', 'true' ),
+									),
+								),
+								array(
 									'id'      => 'woocommerce-title',
 									'type'    => 'heading',
 									'content' => __( 'WooCommerce', 'tourfic' ),
@@ -3184,6 +3230,52 @@ TF_Settings::option( 'tf_settings', array(
 									'is_pro'   => true,
 									'dependency'  => array(
 										array( 't-enquiry-zapier', '==', 'true' ),
+									),
+								),
+								array(
+									'id'      => 'apartment-title',
+									'type'    => 'heading',
+									'content' => __( 'Apartment', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'        => 'apartment-integrate-zapier',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Zapier for Apartment?', 'tourfic' ),
+									'subtitle' => __( 'You can able to Integrate Zapier with Apartment create and update.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true,
+								),
+								array(
+									'id'       => 'apartment-integrate-zapier-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Apartment Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Apartment Zapier Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'apartment-integrate-zapier', '==', 'true' ),
+									),
+								),
+								array(
+									'id'        => 'a-enquiry-zapier',
+									'type'      => 'switch',
+									'label'     => __( 'Enable Zapier for Apartment Enquiry?', 'tourfic' ),
+									'subtitle' => __( 'Integrate Zapier with Apartment Enquiry Form.', 'tourfic' ),
+									'label_on'  => __( 'Yes', 'tourfic' ),
+									'label_off' => __( 'No', 'tourfic' ),
+									'default'   => false,
+									'is_pro'    => true
+								),
+								array(
+									'id'       => 'a-enquiry-zapier-webhook',
+									'type'     => 'text',
+									'label'    => __( 'Apartment Enquiry Web Hook', 'tourfic' ),
+									'subtitle' => __( 'Enter Here Your Apartment Enquiry Zapier Web Hook.', 'tourfic' ),
+									'is_pro'   => true,
+									'dependency'  => array(
+										array( 'a-enquiry-zapier', '==', 'true' ),
 									),
 								),
 								array(
