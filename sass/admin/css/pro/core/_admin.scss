@@ -205,7 +205,9 @@ input.tf_import_tours_btn,input.tf_import_hotels_btn,#tf_import_tours_csv,#tf_im
   float: right;
   margin-top: 30px;
 }
-
+.tf-form-footer {
+  float: right;
+}
 
 table.tf-importer-mapping-table tr:nth-child(even) {
   background: #fafafa;
