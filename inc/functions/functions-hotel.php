@@ -1361,7 +1361,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 			if ( ! empty( $room['repeat_by_date'] ) ) {
 				$disabled_dates = $room['repeat_by_date'];
 				//iterate all the available disabled dates
-				if ( ! empty( $disabled_dates ) ) {
+				if ( ! empty( $disabled_dates ) && is_array( $disabled_dates ) ) {
 					foreach ( $disabled_dates as $date ) {
 						$dateArr           = explode( ',', !empty($date['disabled_date']) ? $date['disabled_date'] : '' );
 						$dateArr           = sprintf( '"%s"', implode( '","', $dateArr ) );

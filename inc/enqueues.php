@@ -178,7 +178,7 @@ if ( !function_exists('tf_enqueue_scripts') ) {
                         if(!empty($singleroom['child_price'])){
                             $tfhotel_min_maxprices[]=$singleroom['child_price'];
                         }
-                        if(!empty($singleroom['repeat_by_date'])){
+                        if(!empty($singleroom['repeat_by_date']) && is_array($singleroom['repeat_by_date'])){
                             foreach($singleroom['repeat_by_date'] as $singleavailroom){
                                 if(!empty($singleavailroom['price'])){
                                     $tfhotel_min_maxprices[]=$singleavailroom['price'];
@@ -293,38 +293,38 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         wp_enqueue_script( 'tourfic', TF_ASSETS_APP_URL . 'js/tourfic-scripts' . $min_js . '.js', '', TOURFIC, true );
         wp_localize_script( 'tourfic', 'tf_params',
             array(
-                'nonce'        => wp_create_nonce( 'tf_ajax_nonce' ),
-                'ajax_url'     => admin_url( 'admin-ajax.php' ),
-                'single' => is_single(),
-                'locations' => get_hotel_locations(),
-                'tour_destinations' => get_tour_destinations(),
-                'ajax_result_success' => __('Refreshed Successfully!', 'tourfic'),
-                'wishlist_add' => __('Adding to wishlist...', 'tourfic'),
-                'wishlist_added' => __('Item added to wishlist.', 'tourfic'),
-                'wishlist_add_error' => __('Failed to add in wishlist!', 'tourfic'),
-                'wishlist_removed' => __('Item removed from wishlist', 'tourfic'),
+                'nonce'                 => wp_create_nonce( 'tf_ajax_nonce' ),
+                'ajax_url'              => admin_url( 'admin-ajax.php' ),
+                'single'                => is_single(),
+                'locations'             => get_hotel_locations(),
+                'tour_destinations'     => get_tour_destinations(),
+                'ajax_result_success'   => __('Refreshed Successfully!', 'tourfic'),
+                'wishlist_add'          => __('Adding to wishlist...', 'tourfic'),
+                'wishlist_added'        => __('Item added to wishlist.', 'tourfic'),
+                'wishlist_add_error'    => __('Failed to add in wishlist!', 'tourfic'),
+                'wishlist_removed'      => __('Item removed from wishlist', 'tourfic'),
                 'wishlist_remove_error' => __('Failed to remove from wishlist!', 'tourfic'),
-                'field_required' => __('This field is required!', 'tourfic'),
-                'adult' => __('Adult', 'tourfic'),
-                'children' => __('Children', 'tourfic'),
-                'infant' => __('Infant', 'tourfic'),
-                'room' => __('Room', 'tourfic'),
-                'sending_ques' => __('Sending your question...', 'tourfic'),
-                'no_found' => __('Not Found', 'tourfic'),
-                'tf_hotel_max_price' => isset($hotel_max_price) ? $hotel_max_price : '',
-                'tf_hotel_min_price' => isset($hotel_min_price) ? $hotel_min_price : '',
-                'tf_tour_max_price' => isset($tour_max_price) ? $tour_max_price : '',
-                'tf_tour_min_price' => isset($tour_min_price) ? $tour_min_price : '',
-                'itinerarayday' => isset($itinerarayday) ? $itinerarayday : '',
-                'itineraraymeter' => isset($itineraraymeter) ? $itineraraymeter : '',
-                'showxaxis' => isset($showxaxis) ? $showxaxis : '',
-                'showyaxis' => isset($showyaxis) ? $showyaxis : '',
-                'showlinegraph' => isset($showlinegraph) ? $showlinegraph : '',
-                'elevvationmode' => isset($elevvationmode) ? $elevvationmode : '',
-                'showitinerarychart' => isset($showitinerarychart) ? $showitinerarychart : '',
-                'showitinerarystatus' => isset($showitinerarystatus) ? $showitinerarystatus : '',
-	            'date_hotel_search' => tfopt( 'date_hotel_search' ),
-	            'date_tour_search' => tfopt( 'date_tour_search' )
+                'field_required'        => __('This field is required!', 'tourfic'),
+                'adult'                 => __('Adult', 'tourfic'),
+                'children'              => __('Children', 'tourfic'),
+                'infant'                => __('Infant', 'tourfic'),
+                'room'                  => __('Room', 'tourfic'),
+                'sending_ques'          => __('Sending your question...', 'tourfic'),
+                'no_found'              => __('Not Found', 'tourfic'),
+                'tf_hotel_max_price'    => isset($hotel_max_price) ? $hotel_max_price : '',
+                'tf_hotel_min_price'    => isset($hotel_min_price) ? $hotel_min_price : '',
+                'tf_tour_max_price'     => isset($tour_max_price) ? $tour_max_price : '',
+                'tf_tour_min_price'     => isset($tour_min_price) ? $tour_min_price : '',
+                'itinerarayday'         => isset($itinerarayday) ? $itinerarayday : '',
+                'itineraraymeter'       => isset($itineraraymeter) ? $itineraraymeter : '',
+                'showxaxis'             => isset($showxaxis) ? $showxaxis : '',
+                'showyaxis'             => isset($showyaxis) ? $showyaxis : '',
+                'showlinegraph'         => isset($showlinegraph) ? $showlinegraph : '',
+                'elevvationmode'        => isset($elevvationmode) ? $elevvationmode : '',
+                'showitinerarychart'    => isset($showitinerarychart) ? $showitinerarychart : '',
+                'showitinerarystatus'   => isset($showitinerarystatus) ? $showitinerarystatus : '',
+                'date_hotel_search'     => tfopt( 'date_hotel_search' ),
+                'date_tour_search'      => tfopt( 'date_tour_search' )
             )
         );
         //wp_enqueue_style( 'tf-responsive', TF_ASSETS_URL . 'css/old/responsive.css', '', TOURFIC );
