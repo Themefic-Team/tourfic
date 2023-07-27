@@ -204,7 +204,7 @@ if( $tf_hotel_selected_template_check == "design-1" ){
                 <a class="tf_air_service tf-btn-normal btn-secondary" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
                 
                 
-                <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap" data-id="<?php echo $room_id ?>">
+                <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1" data-id="<?php echo $room_id ?>">
                     <div class="tf-hotel-services">
                         <div class="tf-hotel-services-text">
                             <h3><?php _e(tfopt('hotel_service_popup_title', 'Add Service to your Booking.'), 'tourfic');?></h3>

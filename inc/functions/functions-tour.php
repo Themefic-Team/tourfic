@@ -1052,7 +1052,7 @@ function tf_single_tour_booking_form( $post_id ) {
         <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) && ($tf_booking_by!=2 || empty($tf_booking_url)) ) { ?>
             <div class="tf-btn"><a data-fancybox class="tf-btn-normal btn-secondary" data-src="#tour-deposit" href="javascript:;"><?php _e('Make a Partial Payment', 'tourfic'); ?></a></div>
             <div style="display: none;" id="tour-deposit">
-                <div class="tf-tours-booking-deposit">
+                <div class="tf-tours-booking-deposit tf-tours-booking-design-1">
                     <div class="tf-tours-booking-deposit-text">
                         <h3><?php _e(tfopt('deposit-title', 'Do you want to deposit amount for booking the tour?'), 'tourfic'); ?></h3>
                         <p><?php _e(tfopt('deposit-subtitle', 'You can deposit amount for booking the tour. After booking the tour, you can pay the rest amount after the tour is completed.'), 'tourfic'); ?></p>
