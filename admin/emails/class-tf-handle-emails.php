@@ -130,7 +130,7 @@ class TF_Handle_Emails {
         }
        
 
-        $booking_details = '<table width="100%" style="max-width: 600px;border-collapse: collapse; color: #5A5A5A;"><thead><tr><th align="left" style="color:#0209AF;">Item Name</th><th align="center" style="color:#0209AF;">Quantity</th><th align="right" style="color:#0209AF;">Price</th></tr></thead><tbody style="border-bottom: 2px solid #D9D9D9">';
+        $booking_details = '<table width="100%" style="max-width: 600px;border-collapse: collapse; color: #5A5A5A;"><thead><tr><th align="left" style="color:#0209AF;">Item Name</th><th align="center" style="color:#0209AF;">Quantity</th><th align="right" style="color:#0209AF;">Price</th></tr></thead><tbody style="border-bottom: 1px solid #D9D9D9">';
         foreach ( $order_items_data as $item ) {
             $booking_details .= '<tr>';
             $booking_details .= '<td style="padding: 15px 0;text-align: left;padding-top: 15px;padding-bottom: 15px;line-height: 1.7;">' . $item['item_name'];
@@ -143,19 +143,19 @@ class TF_Handle_Emails {
 
             $booking_details .= '</td>';
             $booking_details .= '<td align="center">' . $item['item_quantity'] . '</td>';
-            $booking_details .= '<td align="right">' . wc_price( $item['item_subtotal'] ) . '</td>';
+            $booking_details .= '<td align="right"><b>' . wc_price( $item['item_subtotal'] ) . '</b></td>';
             $booking_details .= '</tr>';
 
         }
         $booking_details .= '</tbody>';
-        $booking_details .= '<tfoot><tr><th colspan="2" align="left" style="padding-bottom:10px;padding-top:10px;">Subtotal</th>';
-        $booking_details .= '<td align="right">' . wc_price( $order_subtotal ) . '</td></tr>';
+        $booking_details .= '<tfoot><tr><th colspan="2" align="left" style="padding-bottom:10px;padding-top:10px;">Sub-Total</th>';
+        $booking_details .= '<td align="right"><b>' . wc_price( $order_subtotal ) . '</b></td></tr>';
         //payment method
-        $booking_details .= '<tr><th colspan="2" align="left" style="padding-bottom:10px">Payment Method</th>';
-        $booking_details .= '<td align="right">' . $payment_method_title . '</td></tr>';
+        $booking_details .= '<tr style="border-bottom: 1px solid #D9D9D9;"><th colspan="2" align="left" style="padding-bottom:10px">Payment Method</th>';
+        $booking_details .= '<td align="right"><b>' . $payment_method_title . '</b></td></tr>';
         //total
-        $booking_details .= '<tr><th colspan="2" align="left" style="padding-bottom:10px">Total</th>';
-        $booking_details .= '<td align="right">' . wc_price( $order_total ) . '</td></tr>';
+        $booking_details .= '<tr><th colspan="2" align="left" style="padding-bottom:10px; font-weight: 900;">Total Amount</th>';
+        $booking_details .= '<td align="right"><b style="font-weight: 900;">' . wc_price( $order_total ) . '</b></td></tr>';
         $booking_details .= '</tfoot>';
 
         $booking_details .= '</table>';
