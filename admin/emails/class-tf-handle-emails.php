@@ -43,7 +43,7 @@ class TF_Handle_Emails {
      */
     public function email_body_open( $brand_logo, $order_email_heading, $email_heading_bg){
         //email body open
-        $email_body_open = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"></head><body style="font-family: Work sans,sans-serif;font-size: 16px; color: #9C9C9C; margin: 0; padding: 0;">
+        $email_body_open = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"></head><body style="font-family: Inter,sans-serif;font-size: 16px; color: #9C9C9C; margin: 0; padding: 0;">
            <div style="width: 100%; max-width: 600px; margin: 0 auto;">
                <div style="background-color: ' . esc_attr( $email_heading_bg ) . '; color: #fff; padding: 20px;">';
         if (!empty( $brand_logo ) && $brand_logo != '' ) {
@@ -54,7 +54,7 @@ class TF_Handle_Emails {
            ' . $order_email_heading . '
            </h1>
            <h2 style="font-size:16px;font-weight:500;line-height:20px;color:#ffffff;">
-                ' . __('Order number : ', 'tourfic') . '#{booking_id}
+                ' . __('Order Number : ', 'tourfic') . '#{booking_id}
            </h2>
        </div>';
         $email_body_open .= '</div>';
@@ -130,14 +130,39 @@ class TF_Handle_Emails {
         }
        
 
-        $booking_details = '<table width="100%" style="max-width: 600px;border-collapse: collapse; color: #5A5A5A;"><thead><tr><th align="left" style="color:#0209AF;">Item Name</th><th align="center" style="color:#0209AF;">Quantity</th><th align="right" style="color:#0209AF;">Price</th></tr></thead><tbody style="border-bottom: 1px solid #D9D9D9">';
+        $booking_details = '<table width="100%" style="max-width: 600px;border-collapse: collapse; color: #5A5A5A; font-family: Inter,sans-serif;"><thead><tr><th align="left" style="color:#0209AF;">Item Name</th><th align="center" style="color:#0209AF;">Quantity</th><th align="right" style="color:#0209AF;">Price</th></tr></thead><tbody style="border-bottom: 1px solid #D9D9D9">';
         foreach ( $order_items_data as $item ) {
             $booking_details .= '<tr>';
             $booking_details .= '<td style="padding: 15px 0;text-align: left;padding-top: 15px;padding-bottom: 15px;line-height: 1.7;">' . $item['item_name'];
             //item meta data except _order_type,_post_author,_tour_id php loop
             foreach ( $item['item_meta_data'] as $meta_data ) {
                 if ( $meta_data['key'] != '_order_type' && $meta_data['key'] != '_post_author' && $meta_data['key'] != '_tour_id' && $meta_data['key'] != '_post_id' && $meta_data['key'] != '_unique_id' && $meta_data['key'] != '_tour_unique_id' ) {
-                    $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">' . $meta_data['key'] . '</strong>: ' . $meta_data['value'];
+                    if("room_name"==$meta_data['key']){
+                        $tf_email_key = "Room Name";
+                    }elseif("number_room_booked"==$meta_data['key']){
+                        $tf_email_key = "Booked Room";
+                    }elseif("adult"==$meta_data['key']){
+                        $tf_email_key = "Adult";
+                    }elseif("child"==$meta_data['key']){
+                        $tf_email_key = "Child";
+                    }elseif("check_in"==$meta_data['key']){
+                        $tf_email_key = "Check In";
+                    }elseif("check_out"==$meta_data['key']){
+                        $tf_email_key = "Check Out";
+                    }elseif("due"==$meta_data['key']){
+                        $tf_email_key = "Due";
+                    }elseif("adults"==$meta_data['key']){
+                        $tf_email_key = "Adult";
+                    }elseif("children"==$meta_data['key']){
+                        $tf_email_key = "Child";
+                    }elseif("infant"==$meta_data['key']){
+                        $tf_email_key = "Infant";
+                    }elseif("check_in_out_date"==$meta_data['key']){
+                        $tf_email_key = "Check In & Check Out";
+                    }else{
+                        $tf_email_key = $meta_data['key'];
+                    }
+                    $booking_details .= '<br><strong>' . $tf_email_key . '</strong>: ' . $meta_data['value'];
                 }
             }
 
@@ -162,7 +187,7 @@ class TF_Handle_Emails {
         //booking details end
 
         //customer details
-        $customer_details = '<table style="max-width: 600px;border-collapse: collapse; color: #5A5A5A;"><tbody><tr><td style="padding: 15px 0;text-align: left;">';
+        $customer_details = '<table style="max-width: 600px;border-collapse: collapse; color: #5A5A5A; font-family: Inter,sans-serif;"><tbody><tr><td style="padding: 15px 0;text-align: left;">';
         $customer_details .= '<strong>Customer Name:</strong> ' . $order_billing_name . '<br>';
         $customer_details .= '<strong>Customer Address:</strong> ' . $order_billing_address . '<br>';
         $customer_details .= '<strong>Customer Email:</strong> ' . $order_billing_email . '<br>';
@@ -187,7 +212,7 @@ class TF_Handle_Emails {
                     $order_type = $item->get_meta( '_order_type', true );
                     $tour_ides = $item->get_meta( '_tour_unique_id', true );
                         if("tour"==$order_type){
-                            $tf_ticket_download .= '<table width="100%" style="margin: 10px 0;"><tr><td style="padding-bottom:10px;padding-top:10px;"><a href="'. get_bloginfo('url').'?qr_id='.$tour_ides.'" target="_blank" style="display: inline-block; padding: 10px 15px; background-color: #0209AF; color: #fff; text-decoration: none;">Download Voucher '.$total_tours.'</a><tr><td></table>';
+                            $tf_ticket_download .= '<table width="100%" style="margin: 10px 0;font-family: Inter,sans-serif;"><tr><td style="padding-bottom:10px;padding-top:10px;"><a href="'. get_bloginfo('url').'?qr_id='.$tour_ides.'" target="_blank" style="display: inline-block; padding: 10px 15px; background-color: #0209AF; color: #fff; text-decoration: none;">Download Voucher '.$total_tours.'</a><tr><td></table>';
                             $total_tours++;
                         }
                     }
