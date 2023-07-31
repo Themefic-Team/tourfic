@@ -91,7 +91,6 @@
                 //console.log(response.data.activateUrl);
             })
             .success(function(response) {
-                //console.log(response);
                 location.reload();
             });
         });
@@ -108,6 +107,7 @@
                 action: "tf_export_tours",
                 nonce: tf_pro_params.nonce,
             },
+            dataType: 'json',
             beforeSend: function(){
                $('.tf-export-tours-btn').html('Exporting...');
             },
@@ -244,6 +244,7 @@
                 $('.tf-importing-progressbar-container').show();
             },
             success: function(response){
+                console.log(response);
                 //get the percentage value from response
                 if( response.success ){
                     console.log(response.data.post_meta);
