@@ -22,7 +22,7 @@ $payment_details = array(
 ?>
 <table class="main" width="100%" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="content-wrap aligncenter">
+		<td class="content-wrap aligncenter" style="font-family: Inter,sans-serif">
 			<table width="100%" cellpadding="0" cellspacing="0">
 				<tr>
 					<td class="content-block">
