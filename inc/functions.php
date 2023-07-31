@@ -614,7 +614,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     </div>
 				<?php }
 			} ?>
-			<?php if ( $post_type == 'tf_hotel' ) { ?>
+			<?php if ( $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ) { ?>
                 <div class="tf_form-row">
                     <label class="tf_label-row">
                         <div class="tf_form-inner">
@@ -1311,6 +1311,7 @@ function tf_search_result_ajax_sidebar() {
 			}
 		}
 
+		tf_var_dump($tf_total_filters);
 		if ( empty( $tf_total_filters ) ) {
 			echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 		}
