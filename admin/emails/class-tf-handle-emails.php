@@ -49,11 +49,11 @@ class TF_Handle_Emails {
         if (!empty( $brand_logo ) && $brand_logo != '' ) {
             $email_body_open .= '<div style="text-align:center;width:200px;margin: 0 auto;"><img src="' . esc_url( $brand_logo ) . '" alt="logo" /></div>';
         }
-        $email_body_open .= '<div class="heading" style="text-align: center;">
-           <h1 style="font-size: 32px; line-height: 40px; font-weight: 500; letter-spacing: 2px; margin: 20px 0; color: #ffffff;">
+        $email_body_open .= '<div class="heading" style="text-align: center;font-family: Inter,sans-serif">
+           <h1 style="font-size: 32px; line-height: 40px; font-weight: 500; letter-spacing: 2px; margin: 20px 0; color: #ffffff;font-family: Inter,sans-serif">
            ' . $order_email_heading . '
            </h1>
-           <h2 style="font-size:16px;font-weight:500;line-height:20px;color:#ffffff;">
+           <h2 style="font-size:16px;font-weight:500;line-height:20px;color:#ffffff;font-family: Inter,sans-serif">
                 ' . __('Order Number : ', 'tourfic') . '#{booking_id}
            </h2>
        </div>';
@@ -471,11 +471,11 @@ class TF_Handle_Emails {
                     $sale_notification_email = explode( ',', $sale_notification_email );
                     $sale_notification_email = str_replace( ' ', '', $sale_notification_email );
                     foreach ( $sale_notification_email as $key => $email_address ) {
-                        wp_mail( $email_address, $admin_email_subject, $admin_email_booking_body_full, $headers );
+                        wp_mail( $email_address, $admin_email_subject, wp_kses_post($admin_email_booking_body_full), $headers );
                     }
                 } else {
                     //send admin email
-                    wp_mail( $sale_notification_email, $admin_email_subject, $admin_email_booking_body_full, $headers );
+                    wp_mail( $sale_notification_email, $admin_email_subject, wp_kses_post($admin_email_booking_body_full), $headers );
 
                 }
             } else {
@@ -513,7 +513,7 @@ class TF_Handle_Emails {
                 $vendors_email = $this->tf_get_vendor_emails( $order_id );
                 if ( !empty( $vendors_email ) ) {
                     foreach ( $vendors_email as $key => $vendor_email ) {
-                        wp_mail( $vendor_email, $vendor_email_subject, $vendor_email_booking_body_full, $headers );
+                        wp_mail( $vendor_email, $vendor_email_subject, wp_kses_post($vendor_email_booking_body_full), $headers );
                     }
                 }
             } else {

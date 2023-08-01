@@ -1010,15 +1010,21 @@ function tf_filter_apartment_without_date( $period, array &$not_found, array $da
 	$has_apartment = false;
 
 	if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
-		$has_apartment = true;
-        //tf_var_dump( get_the_title(get_the_ID()));
-	} elseif ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
-		$has_apartment = true;
-        //tf_var_dump( get_the_title(get_the_ID()));
-	} elseif ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
-		$has_apartment = true;
-        //tf_var_dump( get_the_title(get_the_ID()));
-	}
+		if(!empty($child) && !empty($meta['max_children'])){
+			if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
+
+				if(!empty($infant) && !empty($meta['max_infants'])){
+					if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
+						$has_apartment = true;
+					}
+				}else{
+					$has_apartment = true;
+				}
+			} 
+		}else{
+			$has_apartment = true;
+		}
+	} 
 
 	if ( ! empty( $meta['price_per_night'] ) ) {
 		if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
