@@ -246,7 +246,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                                 <span class="tf-label"><?php _e( 'Location', 'tourfic' ); ?>:</span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>
-                                    <input type="text" required="" id="tf-apartment-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
+                                    <input type="text" required="" name="place-name" id="tf-apartment-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
                                     <input type="hidden" name="place" class="tf-place-input">
                                 </div>
                             </label>
@@ -870,53 +870,59 @@ function tf_filter_apartment_by_date( $period, array &$not_found, array $data = 
 			$days          = ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1;
 			//skip apartment if min stay is grater than selected days
 			if ( ! empty( $meta['min_stay'] ) && intval( $meta['min_stay'] ) <= $days && $meta['min_stay'] != 0 ) {
-				$has_apartment = true;
+				if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
+					if(!empty($child) && !empty($meta['max_children'])){
+						if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
+			
+							if(!empty($infant) && !empty($meta['max_infants'])){
+								if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
+									if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+										if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+											$has_apartment = true;
+										}
+									}else{
+										$has_apartment = true;
+									}
+								}
+							}else{
+								if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+									if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+										$has_apartment = true;
+									}
+								}else{
+									$has_apartment = true;
+								}
+							}
+						} 
+					}else{
+						if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+							if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+								$has_apartment = true;
+							}
+						}else{
+							$has_apartment = true;
+						}
+					}
+				}
 			}
 
-			foreach ( $booked_dates as $booked_date ) {
-				$booked_from = strtotime( $booked_date['check_in'] );
-				$booked_to   = strtotime( $booked_date['check_out'] );
+			// foreach ( $booked_dates as $booked_date ) {
+			// 	$booked_from = strtotime( $booked_date['check_in'] );
+			// 	$booked_to   = strtotime( $booked_date['check_out'] );
 
-				if ( $check_in_stt >= $booked_from && $check_in_stt <= $booked_to ) {
-					$has_apartment = true;
-				}
-				if ( $check_out_stt >= $booked_from && $check_out_stt <= $booked_to ) {
-					$has_apartment = true;
-				}
-				if ( $check_in_stt <= $booked_from && $check_out_stt >= $booked_to ) {
-					$has_apartment = true;
-				}
-			}
+			// 	if ( $check_in_stt >= $booked_from && $check_in_stt <= $booked_to ) {
+			// 		$has_apartment = true;
+			// 	}
+			// 	if ( $check_out_stt >= $booked_from && $check_out_stt <= $booked_to ) {
+			// 		$has_apartment = true;
+			// 	}
+			// 	if ( $check_in_stt <= $booked_from && $check_out_stt >= $booked_to ) {
+			// 		$has_apartment = true;
+			// 	}
+			// }
 		}
 	}
 
-	if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
-		$has_apartment = true;
-	}
-	if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
-		$has_apartment = true;
-	}
-	if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
-		$has_apartment = true;
-	}
-
-
-	/*if ( ! empty( $meta['price_per_night'] ) ) {
-		if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-			if ( $startprice <= $meta['price_per_night'] || $meta['price_per_night'] <= $endprice ) {
-				$has_apartment = true;
-			}
-		} elseif ( ! empty( $startprice ) ) {
-			if ( $startprice <= $meta['price_per_night'] ) {
-				$has_apartment = true;
-			}
-		} elseif ( ! empty( $endprice ) ) {
-			if ( $meta['price_per_night'] <= $endprice ) {
-				$has_apartment = true;
-			}
-		}
-	}*/
-	//tf_var_dump( '$has_apartment' . $has_apartment );
 	// Conditional apartment showing
 	if ( $has_apartment ) {
 		$not_found[] = array(
@@ -964,34 +970,35 @@ function tf_filter_apartment_without_date( $period, array &$not_found, array $da
 
 				if(!empty($infant) && !empty($meta['max_infants'])){
 					if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
-						$has_apartment = true;
+						if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+							if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+								$has_apartment = true;
+							}
+						}else{
+							$has_apartment = true;
+						}
 					}
 				}else{
-					$has_apartment = true;
+					if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+						if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+							$has_apartment = true;
+						}
+					}else{
+						$has_apartment = true;
+					}
 				}
 			} 
 		}else{
-			$has_apartment = true;
+			if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+				if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+					$has_apartment = true;
+				}
+			}else{
+				$has_apartment = true;
+			}
 		}
 	} 
 
-	if ( ! empty( $meta['price_per_night'] ) ) {
-		if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-			if ( $startprice <= $meta['price_per_night'] || $meta['price_per_night'] <= $endprice ) {
-				$has_apartment = true;
-			}
-		} elseif ( ! empty( $startprice ) ) {
-			if ( $startprice <= $meta['price_per_night'] ) {
-				$has_apartment = true;
-			}
-		} elseif ( ! empty( $endprice ) ) {
-			if ( $meta['price_per_night'] <= $endprice ) {
-				$has_apartment = true;
-			}
-		}
-	}
-
-    //tf_var_dump('$has_apartment'.$has_apartment);
 
 	// Conditional apartment showing
 	if ( $has_apartment ) {

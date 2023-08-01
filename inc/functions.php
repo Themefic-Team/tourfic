@@ -1215,91 +1215,6 @@ function tf_search_result_ajax_sidebar() {
 				} else {
 					tf_filter_apartment_by_date( $period, $not_found, $data );
 				}
-
-
-				/*if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-					$data = [ $adults, $child, $infant, $check_in_out, $startprice, $endprice ];
-				} else {
-					$data = [ $adults, $child, $infant, $check_in_out ];
-				}
-				$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
-
-				if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] < $adults && $meta['max_adults'] != 0 ) {
-					$not_found[] = 1;
-					$total_posts --;
-					continue;
-				}
-				if ( ! empty( $meta['max_children'] ) && $meta['max_children'] < $child && $meta['max_children'] != 0 ) {
-					$not_found[] = 1;
-					$total_posts --;
-					continue;
-				}
-				if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] < $infant && $meta['max_infants'] != 0 ) {
-					$not_found[] = 1;
-					$total_posts --;
-					continue;
-				}
-
-				if ( ! empty( $check_in_out ) ) {
-					$booked_dates   = tf_apartment_booked_days( get_the_ID() );
-					$checkInOutDate = explode( ' - ', $check_in_out );
-					if ( $checkInOutDate[0] && $checkInOutDate[1] ) {
-						$check_in_stt  = strtotime( $checkInOutDate[0] . ' +1 day' );
-						$check_out_stt = strtotime( $checkInOutDate[1] );
-						$days          = ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1;
-						//skip apartment if min stay is grater than selected days
-						if ( ! empty( $meta['min_stay'] ) && intval( $meta['min_stay'] ) > $days && $meta['min_stay'] != 0 ) {
-							$not_found[] = 1;
-							$total_posts --;
-							continue;
-						}
-
-						foreach ( $booked_dates as $booked_date ) {
-							$booked_from = strtotime( $booked_date['check_in'] );
-							$booked_to   = strtotime( $booked_date['check_out'] );
-
-							if ( $check_in_stt >= $booked_from && $check_in_stt <= $booked_to ) {
-								$not_found[] = 1;
-								$total_posts --;
-								continue 2;
-							}
-							if ( $check_out_stt >= $booked_from && $check_out_stt <= $booked_to ) {
-								$not_found[] = 1;
-								$total_posts --;
-								continue 2;
-							}
-							if ( $check_in_stt <= $booked_from && $check_out_stt >= $booked_to ) {
-								$not_found[] = 1;
-								$total_posts --;
-								continue 2;
-							}
-						}
-					}
-				}
-
-				if ( ! empty( $meta['price_per_night'] ) ) {
-					if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-						if ( $meta['price_per_night'] < $startprice || $meta['price_per_night'] > $endprice ) {
-							$not_found[] = 1;
-							$total_posts --;
-							continue;
-						}
-					} elseif ( ! empty( $startprice ) ) {
-						if ( $meta['price_per_night'] < $startprice ) {
-							$not_found[] = 1;
-							$total_posts --;
-							continue;
-						}
-					} elseif ( ! empty( $endprice ) ) {
-						if ( $meta['price_per_night'] > $endprice ) {
-							$not_found[] = 1;
-							$total_posts --;
-							continue;
-						}
-					}
-				}*/
-
-				//tf_apartment_archive_single_item( $data );
 			}
 		}
 		$tf_total_results = 0;
@@ -1311,7 +1226,6 @@ function tf_search_result_ajax_sidebar() {
 			}
 		}
 
-		tf_var_dump($tf_total_filters);
 		if ( empty( $tf_total_filters ) ) {
 			echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 		}
