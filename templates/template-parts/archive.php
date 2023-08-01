@@ -138,8 +138,13 @@ if( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ) 
 <?php }else { ?>
 <div class="tf_search_result">
     <div class="tf-action-top">
-        <div class="tf-total-results">
-            <span><?php echo esc_html__( 'Total Results ', 'tourfic' ) . '(' . $total_posts . ')'; ?> </span>
+        <div class="tf-result-counter-info">
+            <span class="tf-counter-title"><?php echo __( 'Total Results', 'tourfic' ); ?> </span>
+            <span><?php echo '('; ?> </span>
+            <div class="tf-total-results">
+                <span><?php echo $total_posts; ?> </span>
+            </div>
+            <span><?php echo ')'; ?> </span>
         </div>
         <div class="tf-list-grid">
             <a href="#list-view" data-id="list-view" class="change-view" title="<?php _e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
