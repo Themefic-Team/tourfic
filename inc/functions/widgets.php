@@ -713,7 +713,7 @@ class Tourfic_Price_Filter extends WP_Widget {
         ?>
 		<!-- Start Price Range widget -->
 		<?php 
-        if( is_post_type_archive('tf_tours') || is_post_type_archive('tf_hotel') || ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) ) ){
+        if( is_post_type_archive('tf_tours') || is_post_type_archive('tf_hotel') || is_post_type_archive('tf_apartment') || ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) ) ){
             extract( $args );
             $title = apply_filters( 'widget_title', $instance['title'] );
             echo $before_widget;
@@ -733,7 +733,15 @@ class Tourfic_Price_Filter extends WP_Widget {
                 <div class="tf-tour-result-price-range"></div>
             <?php
             }
-            if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_hotel" ) ){
+            if( is_post_type_archive('tf_apartment') ){
+            ?>
+            <div class="tf-widget-title">
+                <h4><?php _e("Apartment Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</h4></i>
+            </div>
+            <div class="tf-apartment-result-price-range"></div>
+            <?php 
+            }
+            if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && !is_post_type_archive('tf_apartment') && ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_hotel" ) ){
                 ?>
                     <div class="tf-widget-title">
                         <h4><?php _e("Hotel Price Range","tourfic"); ?></h4> (<?php echo get_woocommerce_currency_symbol(); ?>)</i>
@@ -741,12 +749,20 @@ class Tourfic_Price_Filter extends WP_Widget {
                     <div class="tf-hotel-result-price-range"></div>
                 <?php
             } 
-            if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_tours" ) ){
+            if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && !is_post_type_archive('tf_apartment') && ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_tours" ) ){
                 ?>
                     <div class="tf-widget-title">
                         <h4><?php _e("Tour Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</h4></i>
                     </div>
                     <div class="tf-tour-result-price-range"></div>
+                <?php
+            }
+            if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && !is_post_type_archive('tf_apartment') && ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_apartment" ) ){
+                ?>
+                    <div class="tf-widget-title">
+                        <h4><?php _e("Apartment Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</h4></i>
+                    </div>
+                    <div class="tf-apartment-result-price-range"></div>
                 <?php
             }
         }else{
@@ -766,6 +782,13 @@ class Tourfic_Price_Filter extends WP_Widget {
                     <h4><?php _e("Hotel Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</h4></i>
                 </div>
                 <div class="tf-hotel-result-price-range"></div>
+            <?php }
+            if( !empty($_GET['type']) && $_GET['type']=="tf_apartment" && !empty($_GET['from']) && !empty($_GET['to'] ) ){
+            ?>
+                <div class="tf-widget-title">
+                    <h4><?php _e("Apartment Price Range","tourfic"); ?> (<?php echo get_woocommerce_currency_symbol(); ?>)</h4></i>
+                </div>
+                <div class="tf-apartment-result-price-range"></div>
 		<?php } } ?>
 		<!-- End Price Range widget -->
         <?php
