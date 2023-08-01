@@ -68,7 +68,7 @@ if ( tfopt( 'disable-services' ) && in_array( 'apartment', tfopt( 'disable-servi
 /**
  * Register taxonomies for tf_apartment
  *
- * apartment_location, apartment_feature
+ * apartment_location, apartment_feature, apartment_type
  */
 function tf_apartment_taxonomies_register() {
 
@@ -76,7 +76,6 @@ function tf_apartment_taxonomies_register() {
 	 * Taxonomy: apartment_location
 	 */
 	$apartment_location_slug = apply_filters( 'apartment_location_slug', 'apartment-location' );
-
 	$apartment_location_labels = array(
 		'name'                       => __( 'Locations', 'tourfic' ),
 		'singular_name'              => __( 'Location', 'tourfic' ),
@@ -121,12 +120,12 @@ function tf_apartment_taxonomies_register() {
 			'edit_terms'   => 'edit_tf_apartment',
 		),
 	);
-	register_taxonomy( 'apartment_location', 'tf_apartment', apply_filters( 'apartment_location_args', $apartment_location_args ) );
 
 	/**
 	 * Taxonomy: apartment_feature
 	 */
-	$labels = [
+	$apartment_feature_slug = apply_filters( 'apartment_feature_slug', 'apartment-feature' );
+	$apartment_feature_labels = [
 		"name"                       => __( "Features", 'tourfic' ),
 		"singular_name"              => __( "Feature", 'tourfic' ),
 		"menu_name"                  => __( "Features", 'tourfic' ),
@@ -150,8 +149,8 @@ function tf_apartment_taxonomies_register() {
 		"back_to_items"              => __( "Back to Features", 'tourfic' ),
 	];
 
-	$args = [
-		"labels"                => $labels,
+	$apartment_feature_args = [
+		"labels"                => $apartment_feature_labels,
 		"public"                => true,
 		"publicly_queryable"    => true,
 		"hierarchical"          => true,
@@ -159,7 +158,7 @@ function tf_apartment_taxonomies_register() {
 		"show_in_menu"          => true,
 		"show_in_nav_menus"     => true,
 		"query_var"             => true,
-		"rewrite"               => [ 'slug' => 'apartment_feature', 'with_front' => true ],
+		"rewrite"               => [ 'slug' => $apartment_feature_slug, 'with_front' => true ],
 		"show_admin_column"     => true,
 		"show_in_rest"          => true,
 		"rest_base"             => "apartment_feature",
@@ -170,7 +169,59 @@ function tf_apartment_taxonomies_register() {
 			'edit_terms'   => 'edit_tf_apartment',
 		),
 	];
-	register_taxonomy( 'apartment_feature', 'tf_apartment', apply_filters( 'apartment_feature_tax_args', $args ) );
+
+	/**
+	 * Taxonomy: apartment_type
+	 */
+	$apartment_type_slug = apply_filters( 'apartment_type_slug', 'apartment-type' );
+	$apartment_type_labels = [
+		"name"                       => __( "Types", 'tourfic' ),
+		"singular_name"              => __( "Type", 'tourfic' ),
+		"menu_name"                  => __( "Types", 'tourfic' ),
+		"all_items"                  => __( "All Types", 'tourfic' ),
+		"edit_item"                  => __( "Edit Type", 'tourfic' ),
+		"view_item"                  => __( "View Type", 'tourfic' ),
+		"update_item"                => __( "Update Type", 'tourfic' ),
+		"add_new_item"               => __( "Add new Type", 'tourfic' ),
+		"new_item_name"              => __( "New Type name", 'tourfic' ),
+		"parent_item"                => __( "Parent Type", 'tourfic' ),
+		"parent_item_colon"          => __( "Parent Type:", 'tourfic' ),
+		"search_items"               => __( "Search Type", 'tourfic' ),
+		"popular_items"              => __( "Popular Types", 'tourfic' ),
+		"separate_items_with_commas" => __( "Separate Types with commas", 'tourfic' ),
+		"add_or_remove_items"        => __( "Add or remove Types", 'tourfic' ),
+		"choose_from_most_used"      => __( "Choose from the most used Types", 'tourfic' ),
+		"not_found"                  => __( "No Types found", 'tourfic' ),
+		"no_terms"                   => __( "No Types", 'tourfic' ),
+		"items_list_navigation"      => __( "Types list navigation", 'tourfic' ),
+		"items_list"                 => __( "Types list", 'tourfic' ),
+		"back_to_items"              => __( "Back to Types", 'tourfic' ),
+	];
+
+	$apartment_type_args = [
+		"labels"                => $apartment_type_labels,
+		"public"                => true,
+		"publicly_queryable"    => true,
+		"hierarchical"          => true,
+		"show_ui"               => true,
+		"show_in_menu"          => true,
+		"show_in_nav_menus"     => true,
+		"query_var"             => true,
+		"rewrite"               => [ 'slug' => $apartment_type_slug, 'with_front' => true ],
+		"show_admin_column"     => true,
+		"show_in_rest"          => true,
+		"rest_base"             => "apartment_type",
+		"rest_controller_class" => "WP_REST_Terms_Controller",
+		"show_in_quick_edit"    => true,
+		'capabilities'          => array(
+			'assign_terms' => 'edit_tf_apartment',
+			'edit_terms'   => 'edit_tf_apartment',
+		),
+	];
+
+	register_taxonomy( 'apartment_location', 'tf_apartment', apply_filters( 'apartment_location_args', $apartment_location_args ) );
+	register_taxonomy( 'apartment_feature', 'tf_apartment', apply_filters( 'apartment_feature_args', $apartment_feature_args ) );
+	register_taxonomy( 'apartment_type', 'tf_apartment', apply_filters( 'apartment_type_args', $apartment_type_args ) );
 
 }
 
