@@ -234,12 +234,7 @@
                 $('.tf-importing-progressbar-container').show();
             },
             success: function(response){
-                console.log(response);
-                //get the percentage value from response
-                if( response.success ){
-                    console.log(response.data.post_meta);
-                    let percentage = response.data.imported_percentage;
-                }
+                
             },
             complete: function(){
                 $('.tf_import_hotels_btn').html('Import');
