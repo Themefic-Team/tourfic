@@ -2005,6 +2005,38 @@
             e.preventDefault();
             $("#tour-gallery").trigger("click");
         });
+
+        /*
+        * Without Payment Booking
+        * @since 2.9.21
+        * @author Jahid
+        */
+        $(document).on('click', '.tf-tabs-control', function (e) {
+            e.preventDefault();
+            let step = $(this).attr("data-step"); 
+            if(step>1){
+                for(let i = 1; i <= step; i++){
+                    $('.tf-booking-step-' + i).removeClass("active");
+                    $('.tf-booking-step-' + i).addClass("done");
+                }
+                $('.tf-booking-step-' + step).addClass("active");
+                $('.tf-booking-content').hide();
+                $('.tf-booking-content-' + step).show();
+            }
+        });
+
+        $(document).on('click', '.tf-step-back', function (e) {
+            e.preventDefault();
+            let step = $(this).attr("data-step"); 
+            if(step==1){
+                $('.tf-booking-step').removeClass("active");
+                $('.tf-booking-step').removeClass("done");
+                $('.tf-booking-step-' + step).addClass("active");
+                $('.tf-booking-content').hide();
+                $('.tf-booking-content-' + step).show();
+            }
+        });
+
     });
 
 })(jQuery, window);

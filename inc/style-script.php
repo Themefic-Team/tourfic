@@ -114,7 +114,8 @@ if( !function_exists( 'tf_custom_css' ) ){
 			#tf-hotel-services .tf_button_group button,
 			#tf-ask-question button,
 			#tf-ask-question input,
-			#tf-ask-question textarea{
+			#tf-ask-question textarea,
+			.tf-withoutpayment-booking{
 				font-family: '.$tf_global_font_family.'
 			}';
 		}
