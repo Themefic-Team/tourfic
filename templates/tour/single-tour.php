@@ -79,7 +79,7 @@ while ( have_posts() ) : the_post();
 	// Informations
 	$tour_duration = ! empty( $meta['duration'] ) ? $meta['duration'] : '';
 	$tour_refund_policy = ! empty( $meta['refund_des'] ) ? $meta['refund_des'] : '';
-	$info_tour_type = ! empty( $meta['tour_types'] ) ? $meta['tour_types'] : 'Continues';
+	$info_tour_type = ! empty( $meta['tour_types'] ) ? $meta['tour_types'] : [];
 	$duration_time = ! empty( $meta['duration_time'] ) ? $meta['duration_time'] : '';
 	$night         = ! empty( $meta['night'] ) ? $meta['night'] : false;
 	$night_count   = ! empty( $meta['night_count'] ) ? $meta['night_count'] : '';

@@ -254,11 +254,25 @@
                                 <?php } ?>
                             </div>
                         <?php } ?>
-                        <?php if ( $info_tour_type ) { ?>
+                        <?php if ( $info_tour_type ) {
+
+	                        if ( gettype( $info_tour_type ) === 'string' ) {
+		                        $info_tour_type = ucfirst( esc_html( $info_tour_type ) );
+	                        } else if ( gettype( $info_tour_type ) === 'array' ) {
+		                        $tour_types =[];
+		                        $types = ! empty( get_the_terms( $post_id, 'tour_type' ) ) ? get_the_terms( $post_id, 'tour_type' ) : '';
+		                        if ( ! empty( $types ) ) {
+			                        foreach ( $types as $type ) {
+				                        $tour_types[] = $type->name;
+			                        }
+		                        }
+                                $info_tour_type = implode( ', ', $tour_types );
+	                        }
+                            ?>
                             <div class="tf-single-square-block second">
                                 <i class="fas fa-map"></i>
                                 <h4><?php echo __( 'Tour Type', 'tourfic' ); ?></h4>
-                                <p><?php echo ucfirst( esc_html( $info_tour_type ) ) ?></p>
+                                <p><?php echo esc_html( $info_tour_type ); ?></p>
                             </div>
                         <?php } ?>
                         <?php if ( $group_size ) { ?>

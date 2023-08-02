@@ -823,6 +823,15 @@
             });
             var filters = filters.join();
 
+            var tfHotelTypes = [];
+
+            $('[name*=tf_hotel_types]').each(function () {
+                if ($(this).is(':checked')) {
+                    tfHotelTypes.push($(this).val());
+                }
+            });
+            var tfHotelTypes = tfHotelTypes.join();
+
             var features = [];
 
             $('[name*=tf_features]').each(function () {
@@ -869,6 +878,7 @@
             formData.append('checkin', checkin);
             formData.append('checkout', checkout);
             formData.append('filters', filters);
+            formData.append('tf_hotel_types', tfHotelTypes);
             formData.append('features', features);
             formData.append('tour_features', tour_features);
             formData.append('attractions', attractions);
@@ -940,7 +950,7 @@
             e.preventDefault();
             makeFilter()
         });
-        $(document).on('change', '[name*=tf_filters],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities]', function () {
+        $(document).on('change', '[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities]', function () {
             makeFilter();
         })
 

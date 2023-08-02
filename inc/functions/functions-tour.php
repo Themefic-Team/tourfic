@@ -2473,3 +2473,41 @@ function tf_tours_custom_status_add_in_post_page() {
 }
 add_action('admin_footer-post.php', 'tf_tours_custom_status_add_in_post_page');
 add_action('admin_footer-post-new.php', 'tf_tours_custom_status_add_in_post_page');
+
+/**
+ * Assign taxonomy(tour_features) from the single post metabox
+ * to a Tour when updated or published
+ * @return array();
+ * @author Abu Hena
+ * @since 2.9.2
+ */
+
+add_action( 'wp_after_insert_post', 'tf_tour_features_assign_taxonomies', 100, 3 );
+function tf_tour_features_assign_taxonomies( $post_id, $post, $old_status ) {
+
+	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+	if ( ! empty( $meta['features'] ) && is_array( $meta['features'] ) ) {
+		$features = array_map( 'intval', $meta['features'] );
+		wp_set_object_terms( $post_id, $features, 'tour_features' );
+	}
+
+}
+
+/**
+ * Assign taxonomy(tour_type) from the single post metabox
+ * to a Tour when updated or published
+ * @return array();
+ * @author Foysal
+ * @since 2.9.23
+ */
+
+add_action( 'wp_after_insert_post', 'tf_tour_type_assign_taxonomies', 100, 3 );
+function tf_tour_type_assign_taxonomies( $post_id, $post, $old_status ) {
+
+	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+	if ( ! empty( $meta['tour_types'] ) && is_array( $meta['tour_types'] ) ) {
+		$tour_types = array_map( 'intval', $meta['tour_types'] );
+		wp_set_object_terms( $post_id, $tour_types, 'tour_type' );
+	}
+
+}

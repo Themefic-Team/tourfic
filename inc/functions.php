@@ -963,6 +963,7 @@ function tf_search_result_ajax_sidebar() {
 	$search        = ( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
 	$filters       = ( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
 	$features      = ( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
+	$tf_hotel_types      = ( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_hotel_types'] ) ) : null;
 	$tour_features = ( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( $_POST['tour_features'] ) ) : null;
 	$attractions   = ( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
 	$activities    = ( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
@@ -1091,6 +1092,29 @@ function tf_search_result_ajax_sidebar() {
 			foreach ( $filters as $key => $term_id ) {
 				$args['tax_query']['tf_feature'][] = array(
 					'taxonomy' => 'tf_feature',
+					'terms'    => array( $term_id ),
+				);
+			}
+
+		}
+
+	}
+
+	//Query for the types filter of hotel
+	if ( $tf_hotel_types ) {
+		$args['tax_query']['relation'] = $relation;
+
+		if ( $filter_relation == "OR" ) {
+			$args['tax_query'][] = array(
+				'taxonomy' => 'hotel_type',
+				'terms'    => $tf_hotel_types,
+			);
+		} else {
+			$args['tax_query']['hotel_type']['relation'] = 'AND';
+
+			foreach ( $filters as $key => $term_id ) {
+				$args['tax_query']['hotel_type'][] = array(
+					'taxonomy' => 'hotel_type',
 					'terms'    => array( $term_id ),
 				);
 			}
@@ -1311,7 +1335,6 @@ function tf_search_result_ajax_sidebar() {
 			}
 		}
 
-		tf_var_dump($tf_total_filters);
 		if ( empty( $tf_total_filters ) ) {
 			echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
 		}
@@ -1901,25 +1924,6 @@ function tf_month_chart_filter_callback() {
 	echo wp_json_encode( $response );
 
 	die();
-}
-
-/**
- * Assign taxonomy(tour_features) from the single post metabox
- * to a Tour when updated or published
- * @return array();
- * @author Abu Hena
- * @since 2.9.2
- */
-
-add_action( 'wp_after_insert_post', 'tf_assign_taxonomies', 100, 3 );
-function tf_assign_taxonomies( $post_id, $post, $old_status ) {
-
-	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
-	if ( ! empty( $meta['features'] ) && is_array( $meta['features'] ) ) {
-		$features = array_map( 'intval', $meta['features'] );
-		wp_set_object_terms( $post_id, $features, 'tour_features', true );
-	}
-
 }
 
 /**
