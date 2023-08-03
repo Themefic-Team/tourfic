@@ -1049,32 +1049,106 @@ function tf_single_tour_booking_form( $post_id ) {
         
         <?php } } ?>
         <div class="tf-tours-booking-btn tf-booking-bttns tf-mt-30">
-        <input type="hidden" name="location" value="">
-        <input type="hidden" name="deposit" value="0">
-        <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] )) { ?>
-            <div class="tf-btn"><a data-fancybox class="tf-btn-normal btn-secondary" data-src="#tour-deposit" href="javascript:;"><?php _e('Make a Partial Payment', 'tourfic'); ?></a></div>
-            <div style="display: none;" id="tour-deposit">
-                <div class="tf-tours-booking-deposit">
-                    <div class="tf-tours-booking-deposit-text">
-                        <h3><?php _e(tfopt('deposit-title', 'Do you want to deposit amount for booking the tour?'), 'tourfic'); ?></h3>
-                        <p><?php _e(tfopt('deposit-subtitle', 'You can deposit amount for booking the tour. After booking the tour, you can pay the rest amount after the tour is completed.'), 'tourfic'); ?></p>
+            <div class="tf-btn ">
+                <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e('Book Now', 'tourfic'); ?></a>
+            </div>
+            <div class="tf-withoutpayment-booking">
+                <div class="tf-withoutpayment-popup">
+                    <div class="tf-booking-tabs">
+                        <div class="tf-booking-tab-menu">
+                            <ul>
+                                <li class="tf-booking-step tf-booking-step-1 active">
+                                    <i class="ri-price-tag-3-line"></i> <?php echo __("Tour extra","tourfic"); ?>
+                                </li>
+                                <li class="tf-booking-step tf-booking-step-2">
+                                    <i class="ri-group-line"></i> <?php echo __("Traveler details","tourfic"); ?>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tf-booking-times">
+                            <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="#FCFDFF"/>
+                            <path d="M12 11.1111L15.1111 8L16 8.88889L12.8889 12L16 15.1111L15.1111 16L12 12.8889L8.88889 16L8 15.1111L11.1111 12L8 8.88889L8.88889 8L12 11.1111Z" fill="#666D74"/>
+                            <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" stroke="#FCFDFF"/>
+                            </svg>
+                            </span>
+                        </div>
                     </div>
-                    <div class="tf-tours-booking-deposit-amount">
-                            <span><?php _e(tfopt('deposit-amount','Amount of deposit on total price'), 'tourfic'); ?></span>
-                            <span><?php echo $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%'; ?> </span>
-                    </div>
-                    <div class="tf_button_group">
-                        <button class="tf_button btn-styled" type="submit" data-deposit="false"><?php _e(tfopt('deposit-full-payment','Pay full amount'), 'tourfic'); ?></button>
-                        <button class="tf_button btn-styled" type="submit" data-deposit="true"><?php _e(tfopt('deposit-payment','Make a partial payment'), 'tourfic'); ?></button>
+                    <div class="tf-booking-content-summery">
+                        <div class="tf-booking-content show tf-booking-content-1">
+                            <div class="tf-booking-content-extra">
+                                <p><?php echo __("Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural","tourfic"); ?></p>
+                                <div class="tf-single-tour-extra">
+                                    <input type="checkbox">
+                                    <label for="">
+                                        <h5>Premium service <span>$200</span></h5>
+                                        <p>Breakfast, pool, home service included</p>
+                                    </label>
+                                </div>
+                                <div class="tf-single-tour-extra">
+                                    <input type="checkbox">
+                                    <label for="">
+                                        <h5>Premium service <span>$200</span></h5>
+                                        <p>Breakfast, pool, home service included</p>
+                                    </label>
+                                </div>
+                                <div class="tf-single-tour-extra">
+                                    <input type="checkbox">
+                                    <label for="">
+                                        <h5>Premium service <span>$200</span></h5>
+                                        <p>Breakfast, pool, home service included</p>
+                                    </label>
+                                </div>
+                                <div class="tf-single-tour-extra">
+                                    <input type="checkbox">
+                                    <label for="">
+                                        <h5>Premium service <span>$200</span></h5>
+                                        <p>Breakfast, pool, home service included</p>
+                                    </label>
+                                </div>
+                                <div class="tf-single-tour-extra">
+                                    <input type="checkbox">
+                                    <label for="">
+                                        <h5>Premium service <span>$200</span></h5>
+                                        <p>Breakfast, pool, home service included</p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="tf-control-pagination">
+                                <a href="#" class="tf-next-control tf-tabs-control" data-step="2"><?php echo __("Continue", "tourfic"); ?></a>
+                            </div>
+                        </div>
+                        <div class="tf-booking-content tf-booking-content-2">
+                            <div class="tf-booking-content-traveller">
+                                <p><?php echo __("All of your information will be confidential and the reason of this is for your privacy purpose","tourfic"); ?></p>
+                                <div class="tf-traveller-info-box"></div>
+                            </div>
+                            <div class="tf-diposit-switcher">
+                                <label class="switch">
+                                    <input type="checkbox" class="diposit-status-switcher" value="49" checked="">
+                                    <span class="switcher round"></span>
+                                </label>
+                                <h4><?php echo __("Partial payment of 25% on total","tourfic"); ?></h4>
+                            </div>
+                            <div class="tf-control-pagination">
+                                <a href="#" class="tf-back-control tf-step-back" data-step="1"><i class="fa fa-angle-left"></i><?php echo __("Back", "tourfic"); ?></a>
+                                <a href="#" class="tf-next-control tf-tabs-control" data-step="2"><?php echo __("Continue", "tourfic"); ?></a>
+                            </div>
+                        </div>
+                        <div class="tf-booking-summery">
+                            <div class="tf-booking-fixed-summery">
+                                <h5><?php echo __("Booking summery","tourfic"); ?></h5>
+                                <h4><?php echo __("Ecstatic Shimla 4 Night 5 Day Tour Package","tourfic"); ?></h4>
+                            </div>
+                            <div class="tf-booking-traveller-info">
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        <?php } else { ?>
-            <div class="tf-btn ">
-                <button class="tf-btn-normal btn-primary" type="submit"><?php _e('Book Now', 'tourfic'); ?></button>
-            </div>
-        <?php } ?>
-    </div>
+        </div>
     </form>
 <?php
 	}else{
@@ -1302,31 +1376,9 @@ function tf_single_tour_booking_form( $post_id ) {
                 </div>	
                 <?php } } ?>	
                 <div class="tf-tours-booking-btn">
-                    <input type="hidden" name="location" value="">
-                    <input type="hidden" name="deposit" value="0">
-	                <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] )) { ?>
-                        <div class="tf-btn"><a data-fancybox class="tf_button btn-styled" data-src="#tour-deposit" href="javascript:;"><?php _e('Book Now', 'tourfic'); ?></a></div>
-                        <div style="display: none;" id="tour-deposit">
-                            <div class="tf-tours-booking-deposit">
-                                <div class="tf-tours-booking-deposit-text">
-                                    <h3><?php _e(tfopt('deposit-title', 'Do you want to deposit amount for booking the tour?'), 'tourfic'); ?></h3>
-                                    <p><?php _e(tfopt('deposit-subtitle', 'You can deposit amount for booking the tour. After booking the tour, you can pay the rest amount after the tour is completed.'), 'tourfic'); ?></p>
-                                </div>
-                                <div class="tf-tours-booking-deposit-amount">
-                                        <span><?php _e(tfopt('deposit-amount','Amount of deposit on total price'), 'tourfic'); ?></span>
-                                        <span><?php echo $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%'; ?> </span>
-                                </div>
-                                <div class="tf_button_group">
-                                    <button class="tf_button btn-styled" type="submit" data-deposit="false"><?php _e(tfopt('deposit-full-payment','Pay full amount'), 'tourfic'); ?></button>
-                                    <button class="tf_button btn-styled" type="submit" data-deposit="true"><?php _e(tfopt('deposit-payment','Make a partial payment'), 'tourfic'); ?></button>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } else { ?>
-                        <div class="tf-btn">
-                            <button class="tf_button btn-styled" type="submit"><?php _e('Book Now', 'tourfic'); ?></button>
-                        </div>
-                    <?php } ?>
+                    <div class="tf-btn">
+                        <a class="tf_button btn-styled" type="submit"><?php _e('Book Now', 'tourfic'); ?></a>
+                    </div>
                 </div>
             </form>
 	    </div>
@@ -2412,3 +2464,71 @@ function tf_tours_custom_status_add_in_post_page() {
 }
 add_action('admin_footer-post.php', 'tf_tours_custom_status_add_in_post_page');
 add_action('admin_footer-post-new.php', 'tf_tours_custom_status_add_in_post_page');
+
+add_action( 'wp_ajax_nopriv_tf_tour_booking_popup', 'tf_tour_booking_popup_callback' );
+add_action( 'wp_ajax_tf_tour_booking_popup', 'tf_tour_booking_popup_callback' );
+function tf_tour_booking_popup_callback() {
+    $response      = array();
+    $adults       = isset( $_POST['adults'] ) ? intval( sanitize_text_field( $_POST['adults'] ) ) : 0;
+	$children     = isset( $_POST['children'] ) ? intval( sanitize_text_field( $_POST['children'] ) ) : 0;
+	$infant       = isset( $_POST['infant'] ) ? intval( sanitize_text_field( $_POST['infant'] ) ) : 0;
+	$total_people = $adults + $children + $infant;
+	// Tour date
+	$tour_date    = ! empty( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
+
+
+    $response['traveller_info']  = '';
+    $response['traveller_summery']  = '';
+    for($traveller_in = 1; $traveller_in<=$total_people; $traveller_in++){
+        $response['traveller_info'] .= '<div class="tf-single-tour-traveller">
+            <h4>Traveler '.$traveller_in.'</h4>
+            <div class="traveller-info">
+                <div class="traveller-single-info">
+                    <label for="">Full Name</label>
+                    <input type="text">
+                </div>
+                <div class="traveller-single-info">
+                    <label for="">Date of birth</label>
+                    <input type="text">
+                </div>
+                <div class="traveller-single-info">
+                    <label for="">NID</label>
+                    <input type="text">
+                </div>
+            </div>
+        </div>';
+    }
+
+    $response['traveller_summery'] .='<h6>On '.$tour_date .'</h6>
+    <table class="table">
+        <thead>
+            <tr>
+                <th align="left">Traveller</th>
+                <th align="right">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td align="left">2 adults ($200/person)</td>
+                <td align="right">$400</td>
+            </tr>
+            <tr>
+                <td align="left">2 adults ($200/person)</td>
+                <td align="right">$400</td>
+            </tr>
+            <tr>
+                <td align="left">2 adults ($200/person)</td>
+                <td align="right">$400</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th align="left">Total</th>
+                <th align="right">$1200</th>
+            </tr>
+        </tfoot>
+    </table>';
+
+	echo wp_json_encode( $response );
+	die();
+}

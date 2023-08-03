@@ -2037,9 +2037,73 @@
             }
         });
 
+        // Popup Open
+        $(document).on('click', '.tf-booking-popup-btn', function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            let check_in_date = $('#check-in-out-date').val();
+            let adults = $('#adults').val();
+            let children = $('#children').val();
+            let infant = $('#infant').val();
+            var data = {
+                action: 'tf_tour_booking_popup',
+                adults: adults,
+                children: children,
+                infant: infant,
+                check_in_date: check_in_date
+            };
+
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: data,
+                beforeSend: function (data) {
+                    // $this.block({
+                    //     message: null,
+                    //     overlayCSS: {
+                    //         background: "#fff",
+                    //         opacity: .5
+                    //     }
+                    // });
+
+                    // $('.tf_notice_wrapper').html("").hide();
+                },
+                complete: function (data) {
+                    $this.unblock();
+                },
+                success: function (data) {
+                    $this.unblock();
+
+                    var response = JSON.parse(data);
+
+                    if (response.status == 'error') {
+
+                        if (response.errors) {
+                            response.errors.forEach(function (text) {
+                                notyf.error(text);
+                            });
+                        }
+
+                        return false;
+                    } else {
+
+                        $('.tf-traveller-info-box').html(response.traveller_info);
+                        $('.tf-booking-traveller-info').html(response.traveller_summery);
+                        $('.tf-withoutpayment-booking').addClass('show');
+
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+            
+        });
         // Popup Close
         $(document).on('click', '.tf-booking-times span', function (e) {
-            $('.tf-withoutpayment-booking').hide();
+            $('.tf-withoutpayment-booking').removeClass('show');
         });
 
     });
