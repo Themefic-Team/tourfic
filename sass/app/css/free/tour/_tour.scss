@@ -710,6 +710,17 @@ div#tf-contact-info {
                 width: calc(62% - 24px);
                 .tf-booking-content-extra,
                 .tf-booking-content-traveller{
+                    height: 360px;
+                    overflow-y: auto;
+                    scrollbar-width: thin;
+                    scrollbar-color: #aaa #eee;
+                    scrollbar {
+                        width: 5px; 
+                    }
+                    scrollbar-thumb {
+                        background-color: #aaa;
+                        border-radius: 4px;
+                    }
                     p{
                         color: #666D74;
                         font-family: inherit;
@@ -784,6 +795,66 @@ div#tf-contact-info {
                             }
                         }
                     }
+                }
+                .tf-diposit-switcher{
+                    padding-bottom: 16px;
+                    h4{
+                        margin: 0;
+                        display: inline-block;
+                        color: #333D46;
+                        font-family: inherit;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 24px;
+                    }
+                    .switch {
+                        position: relative;
+                        display: inline-block;
+                        width: 48px;
+                        height: 20px;
+                        input{
+                            opacity: 0;
+                            width: 0;
+                            height: 0;
+                        }
+                        .switcher {
+                            position: absolute;
+                            cursor: pointer;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            background-color: #ccc;
+                            transition: .4s;
+                            &::before{
+                                position: absolute;
+                                content: "";
+                                height: 18px;
+                                width: 18px;
+                                left: 2px;
+                                bottom: 1px;
+                                background-color: #fff;
+                                -webkit-transition: .4s;
+                                transition: .4s;
+                            }
+                        }
+                        .switcher.round {
+                            border-radius: 20px;
+                            &::before{
+                                border-radius: 50%;
+                            }
+                        }
+                    }
+                }
+                .tf-diposit-switcher input:checked + .switcher {
+                    background-color: #002C66;
+                }
+                
+                .tf-diposit-switcher input:checked + .switcher::before {
+                    -webkit-transform: translateX(26px);
+                    -ms-transform: translateX(26px);
+                    transform: translateX(26px);
                 }
                 .tf-control-pagination{
                     padding: 0px 0px 24px 0px;

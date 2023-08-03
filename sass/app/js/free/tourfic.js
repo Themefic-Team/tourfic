@@ -2021,7 +2021,7 @@
                 }
                 $('.tf-booking-step-' + step).addClass("active");
                 $('.tf-booking-content').hide();
-                $('.tf-booking-content-' + step).show();
+                $('.tf-booking-content-' + step).fadeIn(300);
             }
         });
 
@@ -2033,8 +2033,13 @@
                 $('.tf-booking-step').removeClass("done");
                 $('.tf-booking-step-' + step).addClass("active");
                 $('.tf-booking-content').hide();
-                $('.tf-booking-content-' + step).show();
+                $('.tf-booking-content-' + step).fadeIn(300);
             }
+        });
+
+        // Popup Close
+        $(document).on('click', '.tf-booking-times span', function (e) {
+            $('.tf-withoutpayment-booking').hide();
         });
 
     });

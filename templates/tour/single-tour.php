@@ -222,7 +222,7 @@ while ( have_posts() ) : the_post();
 		<div class="tf-booking-content-summery">
 			<div class="tf-booking-content show tf-booking-content-1">
 				<div class="tf-booking-content-extra">
-					<p>Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural</p>
+					<p><?php echo __("Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural","tourfic"); ?></p>
 					<div class="tf-single-tour-extra">
 						<input type="checkbox">
 						<label for="">
@@ -265,7 +265,7 @@ while ( have_posts() ) : the_post();
 			</div>
 			<div class="tf-booking-content tf-booking-content-2">
 				<div class="tf-booking-content-traveller">
-					<p>Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural</p>
+					<p><?php echo __("All of your information will be confidential and the reason of this is for your privacy purpose","tourfic"); ?></p>
 					<div class="tf-single-tour-traveller">
 						<h4><?php echo __("Traveler 01","tourfic"); ?></h4>
 						<div class="traveller-info">
@@ -301,6 +301,13 @@ while ( have_posts() ) : the_post();
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="tf-diposit-switcher">
+					<label class="switch">
+						<input type="checkbox" class="diposit-status-switcher" value="49" checked="">
+						<span class="switcher round"></span>
+					</label>
+					<h4><?php echo __("Partial payment of 25% on total","tourfic"); ?></h4>
 				</div>
 				<div class="tf-control-pagination">
 					<a href="#" class="tf-back-control tf-step-back" data-step="1"><i class="fa fa-angle-left"></i><?php echo __("Back", "tourfic"); ?></a>
