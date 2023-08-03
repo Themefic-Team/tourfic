@@ -527,7 +527,7 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 		return;
 	}
 	// Get hotel location or tour destination
-	$taxonomy     = $post_type == 'tf_hotel' ? 'hotel_location' : ( $post_type == 'tf_tour' ? 'tour_destination' : 'apartment_location' );
+	$taxonomy     = $post_type == 'tf_hotel' ? 'hotel_location' : ( $post_type == 'tf_tours' ? 'tour_destination' : 'apartment_location' );
 	$place        = isset( $_GET['place'] ) ? sanitize_text_field( $_GET['place'] ) : '';
 	$adults       = isset( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
 	$child        = isset( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
@@ -628,12 +628,20 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 	}
 
 
-	// Hotel Features
+	// Hotel/Apartment Features
 	if ( ! empty( $_GET['features'] ) ) {
 		$args['tax_query'][] = array(
 			'taxonomy' => $post_type == 'tf_hotel' ? 'hotel_feature' : 'apartment_feature',
 			'field'    => 'slug',
 			'terms'    => $_GET['features'],
+		);
+	}
+	// Hotel/Tour/Apartment Types
+	if ( ! empty( $_GET['types'] ) ) {
+		$args['tax_query'][] = array(
+			'taxonomy' => $post_type == 'tf_hotel' ? 'hotel_type' : ($post_type == 'tf_tours' ? 'tour_type' : 'apartment_type'),
+			'field'    => 'slug',
+			'terms'    => $_GET['types'],
 		);
 	}
 

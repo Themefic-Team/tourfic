@@ -960,14 +960,17 @@ function tf_search_result_ajax_sidebar() {
 	$relation        = tfopt( 'search_relation', 'AND' );
 	$filter_relation = tfopt( 'filter_relation', 'OR' );
 
-	$search        = ( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
-	$filters       = ( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
-	$features      = ( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
-	$tf_hotel_types      = ( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_hotel_types'] ) ) : null;
-	$tour_features = ( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( $_POST['tour_features'] ) ) : null;
-	$attractions   = ( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
-	$activities    = ( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
-	$posttype      = $_POST['type'] ? sanitize_text_field( $_POST['type'] ) : 'tf_hotel';
+	$search         = ( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
+	$filters        = ( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
+	$features       = ( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
+	$tf_hotel_types = ( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_hotel_types'] ) ) : null;
+	$tour_features  = ( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( $_POST['tour_features'] ) ) : null;
+	$attractions    = ( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
+	$activities     = ( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
+	$tf_tour_types  = ( $_POST['tf_tour_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_tour_types'] ) ) : null;
+	$tf_apartment_features  = ( $_POST['tf_apartment_features'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_features'] ) ) : null;
+	$tf_apartment_types  = ( $_POST['tf_apartment_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_types'] ) ) : null;
+	$posttype       = $_POST['type'] ? sanitize_text_field( $_POST['type'] ) : 'tf_hotel';
 	# Separate taxonomy input for filter query
 	$place_taxonomy  = $posttype == 'tf_tours' ? 'tour_destination' : ( $posttype == 'tf_apartment' ? 'apartment_location' : 'hotel_location' );
 	$filter_taxonomy = $posttype == 'tf_tours' ? 'null' : 'hotel_feature';
@@ -982,19 +985,19 @@ function tf_search_result_ajax_sidebar() {
 	if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
 		if ( $posttype == "tf_tours" ) {
 			$data = array( $adults, $child, $check_in_out, $startprice, $endprice );
-		} elseif( $posttype == "tf_hotel") {
+		} elseif ( $posttype == "tf_hotel" ) {
 			$data = array( $adults, $child, $room, $check_in_out, $startprice, $endprice );
 		} else {
-            $data = array( $adults, $child, $infant, $check_in_out, $startprice, $endprice );
-        }
+			$data = array( $adults, $child, $infant, $check_in_out, $startprice, $endprice );
+		}
 	} else {
 		if ( $posttype == "tf_tours" ) {
 			$data = array( $adults, $child, $check_in_out );
-		} elseif( $posttype == "tf_hotel") {
+		} elseif ( $posttype == "tf_hotel" ) {
 			$data = array( $adults, $child, $room, $check_in_out );
 		} else {
-            $data = array( $adults, $child, $infant, $check_in_out );
-        }
+			$data = array( $adults, $child, $infant, $check_in_out );
+		}
 	}
 
 	if ( ! empty( $check_in_out ) ) {
@@ -1072,9 +1075,7 @@ function tf_search_result_ajax_sidebar() {
 					'terms'    => array( $term_id ),
 				);
 			}
-
 		}
-
 	}
 
 	//Query for the features filter of hotel
@@ -1095,13 +1096,12 @@ function tf_search_result_ajax_sidebar() {
 					'terms'    => array( $term_id ),
 				);
 			}
-
 		}
-
 	}
 
 	//Query for the types filter of hotel
 	if ( $tf_hotel_types ) {
+
 		$args['tax_query']['relation'] = $relation;
 
 		if ( $filter_relation == "OR" ) {
@@ -1112,15 +1112,13 @@ function tf_search_result_ajax_sidebar() {
 		} else {
 			$args['tax_query']['hotel_type']['relation'] = 'AND';
 
-			foreach ( $filters as $key => $term_id ) {
+			foreach ( $tf_hotel_types as $key => $term_id ) {
 				$args['tax_query']['hotel_type'][] = array(
 					'taxonomy' => 'hotel_type',
 					'terms'    => array( $term_id ),
 				);
 			}
-
 		}
-
 	}
 
 	//Query for the features filter of Tour
@@ -1192,6 +1190,69 @@ function tf_search_result_ajax_sidebar() {
 
 	}
 
+	//Query for the types filter of tours
+	if ( $tf_tour_types ) {
+		$args['tax_query']['relation'] = $relation;
+
+		if ( $filter_relation == "OR" ) {
+			$args['tax_query'][] = array(
+				'taxonomy' => 'tour_type',
+				'terms'    => $tf_tour_types,
+			);
+		} else {
+			$args['tax_query']['tour_type']['relation'] = 'AND';
+
+			foreach ( $tf_tour_types as $key => $term_id ) {
+				$args['tax_query']['tour_type'][] = array(
+					'taxonomy' => 'tour_type',
+					'terms'    => array( $term_id ),
+				);
+			}
+		}
+	}
+
+	//Query for the features filter of apartments
+	if ( $tf_apartment_features ) {
+		$args['tax_query']['relation'] = $relation;
+
+		if ( $filter_relation == "OR" ) {
+			$args['tax_query'][] = array(
+				'taxonomy' => 'apartment_feature',
+				'terms'    => $tf_apartment_features,
+			);
+		} else {
+			$args['tax_query']['apartment_feature']['relation'] = 'AND';
+
+			foreach ( $tf_apartment_features as $key => $term_id ) {
+				$args['tax_query']['apartment_feature'][] = array(
+					'taxonomy' => 'apartment_feature',
+					'terms'    => array( $term_id ),
+				);
+			}
+		}
+	}
+
+	//Query for the types filter of apartments
+	if ( $tf_apartment_types ) {
+		$args['tax_query']['relation'] = $relation;
+
+		if ( $filter_relation == "OR" ) {
+			$args['tax_query'][] = array(
+				'taxonomy' => 'apartment_type',
+				'terms'    => $tf_apartment_types,
+			);
+		} else {
+			$args['tax_query']['apartment_type']['relation'] = 'AND';
+
+			foreach ( $tf_apartment_types as $key => $term_id ) {
+				$args['tax_query']['apartment_type'][] = array(
+					'taxonomy' => 'apartment_type',
+					'terms'    => array( $term_id ),
+				);
+			}
+		}
+	}
+
 	$loop = new WP_Query( $args );
 
 	//get total posts count
@@ -1239,91 +1300,6 @@ function tf_search_result_ajax_sidebar() {
 				} else {
 					tf_filter_apartment_by_date( $period, $not_found, $data );
 				}
-
-
-				/*if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-					$data = [ $adults, $child, $infant, $check_in_out, $startprice, $endprice ];
-				} else {
-					$data = [ $adults, $child, $infant, $check_in_out ];
-				}
-				$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
-
-				if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] < $adults && $meta['max_adults'] != 0 ) {
-					$not_found[] = 1;
-					$total_posts --;
-					continue;
-				}
-				if ( ! empty( $meta['max_children'] ) && $meta['max_children'] < $child && $meta['max_children'] != 0 ) {
-					$not_found[] = 1;
-					$total_posts --;
-					continue;
-				}
-				if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] < $infant && $meta['max_infants'] != 0 ) {
-					$not_found[] = 1;
-					$total_posts --;
-					continue;
-				}
-
-				if ( ! empty( $check_in_out ) ) {
-					$booked_dates   = tf_apartment_booked_days( get_the_ID() );
-					$checkInOutDate = explode( ' - ', $check_in_out );
-					if ( $checkInOutDate[0] && $checkInOutDate[1] ) {
-						$check_in_stt  = strtotime( $checkInOutDate[0] . ' +1 day' );
-						$check_out_stt = strtotime( $checkInOutDate[1] );
-						$days          = ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1;
-						//skip apartment if min stay is grater than selected days
-						if ( ! empty( $meta['min_stay'] ) && intval( $meta['min_stay'] ) > $days && $meta['min_stay'] != 0 ) {
-							$not_found[] = 1;
-							$total_posts --;
-							continue;
-						}
-
-						foreach ( $booked_dates as $booked_date ) {
-							$booked_from = strtotime( $booked_date['check_in'] );
-							$booked_to   = strtotime( $booked_date['check_out'] );
-
-							if ( $check_in_stt >= $booked_from && $check_in_stt <= $booked_to ) {
-								$not_found[] = 1;
-								$total_posts --;
-								continue 2;
-							}
-							if ( $check_out_stt >= $booked_from && $check_out_stt <= $booked_to ) {
-								$not_found[] = 1;
-								$total_posts --;
-								continue 2;
-							}
-							if ( $check_in_stt <= $booked_from && $check_out_stt >= $booked_to ) {
-								$not_found[] = 1;
-								$total_posts --;
-								continue 2;
-							}
-						}
-					}
-				}
-
-				if ( ! empty( $meta['price_per_night'] ) ) {
-					if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-						if ( $meta['price_per_night'] < $startprice || $meta['price_per_night'] > $endprice ) {
-							$not_found[] = 1;
-							$total_posts --;
-							continue;
-						}
-					} elseif ( ! empty( $startprice ) ) {
-						if ( $meta['price_per_night'] < $startprice ) {
-							$not_found[] = 1;
-							$total_posts --;
-							continue;
-						}
-					} elseif ( ! empty( $endprice ) ) {
-						if ( $meta['price_per_night'] > $endprice ) {
-							$not_found[] = 1;
-							$total_posts --;
-							continue;
-						}
-					}
-				}*/
-
-				//tf_apartment_archive_single_item( $data );
 			}
 		}
 		$tf_total_results = 0;
@@ -1368,7 +1344,7 @@ function tf_search_result_ajax_sidebar() {
 						} else {
 							tf_hotel_archive_single_item();
 						}
-					} elseif( $posttype == 'tf_tours') {
+					} elseif ( $posttype == 'tf_tours' ) {
 						if ( ! empty( $data ) ) {
 							if ( isset( $data[3] ) && isset( $data[4] ) ) {
 								[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
@@ -1390,7 +1366,7 @@ function tf_search_result_ajax_sidebar() {
 						} else {
 							tf_apartment_archive_single_item();
 						}
-                    }
+					}
 
 				}
 			}

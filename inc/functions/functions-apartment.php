@@ -75,7 +75,7 @@ function tf_apartment_taxonomies_register() {
 	/**
 	 * Taxonomy: apartment_location
 	 */
-	$apartment_location_slug = apply_filters( 'apartment_location_slug', 'apartment-location' );
+	$apartment_location_slug   = apply_filters( 'apartment_location_slug', 'apartment-location' );
 	$apartment_location_labels = array(
 		'name'                       => __( 'Locations', 'tourfic' ),
 		'singular_name'              => __( 'Location', 'tourfic' ),
@@ -124,7 +124,7 @@ function tf_apartment_taxonomies_register() {
 	/**
 	 * Taxonomy: apartment_feature
 	 */
-	$apartment_feature_slug = apply_filters( 'apartment_feature_slug', 'apartment-feature' );
+	$apartment_feature_slug   = apply_filters( 'apartment_feature_slug', 'apartment-feature' );
 	$apartment_feature_labels = [
 		"name"                       => __( "Features", 'tourfic' ),
 		"singular_name"              => __( "Feature", 'tourfic' ),
@@ -173,7 +173,7 @@ function tf_apartment_taxonomies_register() {
 	/**
 	 * Taxonomy: apartment_type
 	 */
-	$apartment_type_slug = apply_filters( 'apartment_type_slug', 'apartment-type' );
+	$apartment_type_slug   = apply_filters( 'apartment_type_slug', 'apartment-type' );
 	$apartment_type_labels = [
 		"name"                       => __( "Types", 'tourfic' ),
 		"singular_name"              => __( "Type", 'tourfic' ),
@@ -297,7 +297,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                                 <span class="tf-label"><?php _e( 'Location', 'tourfic' ); ?>:</span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>
-                                    <input type="text" required="" id="tf-apartment-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
+                                    <input type="text" required="" name="place-name" id="tf-apartment-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
                                     <input type="hidden" name="place" class="tf-place-input">
                                 </div>
                             </label>
@@ -367,28 +367,50 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                             </label>
                         </div>
                         <div class="tf-more-info">
-                            <span><?php _e( 'Filter Price (Per Night)', 'tourfic' ); ?></span>
+                            <h3><?php _e( 'Filter Price (Per Night)', 'tourfic' ); ?></h3>
                             <div class="tf-filter-price-range">
                                 <div class="tf-apartment-filter-range"></div>
                             </div>
 
-                            <span><?php _e( 'Apartment Features', 'tourfic' ); ?></span>
+                            <h3 style="margin-top: 20px"><?php _e( 'Apartment Features', 'tourfic' ); ?></h3>
 							<?php
-							$tf_hotelfeature = get_terms( array(
+							$tf_apartment_feature = get_terms( array(
 								'taxonomy'     => 'apartment_feature',
 								'orderby'      => 'title',
 								'order'        => 'ASC',
 								'hide_empty'   => true,
 								'hierarchical' => 0,
 							) );
-							if ( $tf_hotelfeature ) { ?>
-								<?php foreach ( $tf_hotelfeature as $term ) { ?>
-                                    <div class="form-group form-check">
-                                        <input type="checkbox" name="features[]" class="form-check-input" value="<?php _e( $term->slug ); ?>" id="<?php _e( $term->slug ); ?>">
-                                        <label class="form-check-label" for="<?php _e( $term->slug ); ?>"><?php _e( $term->name ); ?></label>
-                                    </div>
-								<?php }
-							} ?>
+							if ( $tf_apartment_feature ) : ?>
+                                <div class="tf-apartment-features" style="overflow: hidden">
+									<?php foreach ( $tf_apartment_feature as $term ) : ?>
+                                        <div class="form-group form-check">
+                                            <input type="checkbox" name="features[]" class="form-check-input" value="<?php _e( $term->slug ); ?>" id="<?php _e( $term->slug ); ?>">
+                                            <label class="form-check-label" for="<?php _e( $term->slug ); ?>"><?php _e( $term->name ); ?></label>
+                                        </div>
+									<?php endforeach; ?>
+                                </div>
+							<?php endif; ?>
+
+                            <h3 style="margin-top: 20px"><?php _e( 'Apartment Types', 'tourfic' ); ?></h3>
+							<?php
+							$tf_apartment_type = get_terms( array(
+								'taxonomy'     => 'apartment_type',
+								'orderby'      => 'title',
+								'order'        => 'ASC',
+								'hide_empty'   => true,
+								'hierarchical' => 0,
+							) );
+							if ( $tf_apartment_type ) : ?>
+                                <div class="tf-apartment-types" style="overflow: hidden">
+									<?php foreach ( $tf_apartment_type as $term ) : ?>
+                                        <div class="form-group form-check">
+                                            <input type="checkbox" name="types[]" class="form-check-input" value="<?php _e( $term->slug ); ?>" id="<?php _e( $term->slug ); ?>">
+                                            <label class="form-check-label" for="<?php _e( $term->slug ); ?>"><?php _e( $term->name ); ?></label>
+                                        </div>
+									<?php endforeach; ?>
+                                </div>
+							<?php endif; ?>
                         </div>
                     </div>
 				<?php endif; ?>
@@ -780,11 +802,11 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
 		?>
         <div class="single-tour-wrap <?php echo $featured ? esc_attr( 'tf-featured' ) : '' ?>">
             <div class="single-tour-inner">
-	            <?php if( $featured ): ?>
+				<?php if ( $featured ): ?>
                     <div class="tf-featured-badge">
-                        <span><?php echo !empty( $meta['featured_text'] ) ? $meta['featured_text'] : esc_html( "HOT DEAL" ); ?></span>
+                        <span><?php echo ! empty( $meta['featured_text'] ) ? $meta['featured_text'] : esc_html( "HOT DEAL" ); ?></span>
                     </div>
-	            <?php endif; ?>
+				<?php endif; ?>
                 <div class="tourfic-single-left">
                     <a href="<?php echo $url; ?>">
 						<?php
@@ -921,53 +943,59 @@ function tf_filter_apartment_by_date( $period, array &$not_found, array $data = 
 			$days          = ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1;
 			//skip apartment if min stay is grater than selected days
 			if ( ! empty( $meta['min_stay'] ) && intval( $meta['min_stay'] ) <= $days && $meta['min_stay'] != 0 ) {
-				$has_apartment = true;
+				if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
+					if ( ! empty( $child ) && ! empty( $meta['max_children'] ) ) {
+						if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
+
+							if ( ! empty( $infant ) && ! empty( $meta['max_infants'] ) ) {
+								if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
+									if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+										if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+											$has_apartment = true;
+										}
+									} else {
+										$has_apartment = true;
+									}
+								}
+							} else {
+								if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+									if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+										$has_apartment = true;
+									}
+								} else {
+									$has_apartment = true;
+								}
+							}
+						}
+					} else {
+						if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+							if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+								$has_apartment = true;
+							}
+						} else {
+							$has_apartment = true;
+						}
+					}
+				}
 			}
 
-			foreach ( $booked_dates as $booked_date ) {
-				$booked_from = strtotime( $booked_date['check_in'] );
-				$booked_to   = strtotime( $booked_date['check_out'] );
+			// foreach ( $booked_dates as $booked_date ) {
+			// 	$booked_from = strtotime( $booked_date['check_in'] );
+			// 	$booked_to   = strtotime( $booked_date['check_out'] );
 
-				if ( $check_in_stt >= $booked_from && $check_in_stt <= $booked_to ) {
-					$has_apartment = true;
-				}
-				if ( $check_out_stt >= $booked_from && $check_out_stt <= $booked_to ) {
-					$has_apartment = true;
-				}
-				if ( $check_in_stt <= $booked_from && $check_out_stt >= $booked_to ) {
-					$has_apartment = true;
-				}
-			}
+			// 	if ( $check_in_stt >= $booked_from && $check_in_stt <= $booked_to ) {
+			// 		$has_apartment = true;
+			// 	}
+			// 	if ( $check_out_stt >= $booked_from && $check_out_stt <= $booked_to ) {
+			// 		$has_apartment = true;
+			// 	}
+			// 	if ( $check_in_stt <= $booked_from && $check_out_stt >= $booked_to ) {
+			// 		$has_apartment = true;
+			// 	}
+			// }
 		}
 	}
 
-	if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
-		$has_apartment = true;
-	}
-	if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
-		$has_apartment = true;
-	}
-	if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
-		$has_apartment = true;
-	}
-
-
-	/*if ( ! empty( $meta['price_per_night'] ) ) {
-		if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-			if ( $startprice <= $meta['price_per_night'] || $meta['price_per_night'] <= $endprice ) {
-				$has_apartment = true;
-			}
-		} elseif ( ! empty( $startprice ) ) {
-			if ( $startprice <= $meta['price_per_night'] ) {
-				$has_apartment = true;
-			}
-		} elseif ( ! empty( $endprice ) ) {
-			if ( $meta['price_per_night'] <= $endprice ) {
-				$has_apartment = true;
-			}
-		}
-	}*/
-	//tf_var_dump( '$has_apartment' . $has_apartment );
 	// Conditional apartment showing
 	if ( $has_apartment ) {
 		$not_found[] = array(
@@ -1010,39 +1038,40 @@ function tf_filter_apartment_without_date( $period, array &$not_found, array $da
 	$has_apartment = false;
 
 	if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
-		if(!empty($child) && !empty($meta['max_children'])){
+		if ( ! empty( $child ) && ! empty( $meta['max_children'] ) ) {
 			if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
 
-				if(!empty($infant) && !empty($meta['max_infants'])){
+				if ( ! empty( $infant ) && ! empty( $meta['max_infants'] ) ) {
 					if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
+						if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+							if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+								$has_apartment = true;
+							}
+						} else {
+							$has_apartment = true;
+						}
+					}
+				} else {
+					if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+						if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+							$has_apartment = true;
+						}
+					} else {
 						$has_apartment = true;
 					}
-				}else{
+				}
+			}
+		} else {
+			if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+				if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
 					$has_apartment = true;
 				}
-			} 
-		}else{
-			$has_apartment = true;
-		}
-	} 
-
-	if ( ! empty( $meta['price_per_night'] ) ) {
-		if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-			if ( $startprice <= $meta['price_per_night'] || $meta['price_per_night'] <= $endprice ) {
-				$has_apartment = true;
-			}
-		} elseif ( ! empty( $startprice ) ) {
-			if ( $startprice <= $meta['price_per_night'] ) {
-				$has_apartment = true;
-			}
-		} elseif ( ! empty( $endprice ) ) {
-			if ( $meta['price_per_night'] <= $endprice ) {
+			} else {
 				$has_apartment = true;
 			}
 		}
 	}
 
-    //tf_var_dump('$has_apartment'.$has_apartment);
 
 	// Conditional apartment showing
 	if ( $has_apartment ) {
@@ -1137,7 +1166,7 @@ if ( ! function_exists( 'get_apartment_min_max_price' ) ) {
 				$apartment_query->the_post();
 				$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
 				if ( ! empty( $meta ) ) {
-					$min_max_price[] = $meta['price_per_night'];
+					$min_max_price[] = ! empty( $meta['price_per_night'] ) ? intval( $meta['price_per_night'] ) : 0;
 				}
 			}
 		}

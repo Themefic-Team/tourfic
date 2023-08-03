@@ -1985,7 +1985,8 @@ a.page-numbers {
   padding: 0px !important;
 }
 .tf_widget .tf-hotel-result-price-range,
-.tf_widget .tf-tour-result-price-range {
+.tf_widget .tf-tour-result-price-range,
+.tf_widget .tf-apartment-result-price-range {
   margin-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
@@ -5031,8 +5032,9 @@ div#tf-contact-info {
   object-fit: cover;
   border-radius: 50%;
 }
-.host-details .host-meta p {
+.host-details .host-meta h4, .host-details .host-meta p {
   margin-bottom: 0;
+  margin-top: 0;
 }
 .host-details .host-meta i {
   color: #FFC314;
@@ -5062,6 +5064,10 @@ div#tf-contact-info {
 }
 .host-details .host-bottom a i {
   padding-right: 8px;
+}
+.host-details .host-bottom .btn-styled {
+  width: auto !important;
+  display: block;
 }
 .host-details .host-desc {
   padding: 25px 0;
@@ -5170,6 +5176,7 @@ div#tf-contact-info {
   -webkit-flex: 0 0 calc(50% - 15px);
   -ms-flex: 0 0 calc(50% - 15px);
   flex: 0 0 calc(50% - 15px);
+  padding-left: 30px;
 }
 .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li,
 .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li {
@@ -5355,6 +5362,7 @@ div#tf-contact-info {
 }
 .related-apartment .tf-apartment-option-slider-item .tf-apartment-option-slider-desc h3 a {
   color: #363e4a;
+  text-decoration: none;
 }
 .related-apartment .tf-apartment-option-slider-item .tf-apartment-option-slider-desc p {
   color: #8997a9;
@@ -5406,6 +5414,9 @@ div#tf-contact-info {
   font-size: 16px;
   font-weight: 400;
   color: #607085;
+}
+#tf-apartment-booking .tf-apartment-form-header .tf-top-review a {
+  text-decoration: none;
 }
 #tf-apartment-booking .tf-apartment-form-header .tf-single-rating {
   color: #607085;
@@ -5531,6 +5542,9 @@ div#tf-contact-info {
 .tf-host-rating-wrapper .tf-host-rating {
   font-weight: 600;
 }
+.tf-host-rating-wrapper h6 {
+  margin-bottom: 0;
+}
 
 .single-tf_apartment .tf-title-right {
   -webkit-flex: 0 0 350px;
@@ -5538,6 +5552,9 @@ div#tf-contact-info {
   flex: 0 0 350px;
   -webkit-justify-content: flex-end;
   justify-content: flex-end;
+}
+.single-tf_apartment .tf-title-right a {
+  text-decoration: none;
 }
 
 @media only screen and (max-width: 1200px) {

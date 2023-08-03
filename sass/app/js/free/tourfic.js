@@ -32,7 +32,7 @@
                     $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required"><b>' + tf_params.field_required + '</b></span>');
                 }
                 return;
-            }else{
+            } else {
                 if ($('#tf-required').length === 1) {
                     $('.tf_booking-dates .tf_label-row .required').html('');
                 }
@@ -44,14 +44,14 @@
             });
             var tf_room_avail_nonce = $("input[name=tf_room_avail_nonce]").val();
             var post_id = $('input[name=post_id]').val();
-            if(adult_field_type=="number"){
+            if (adult_field_type == "number") {
                 var adult = $('#adults').val();
-            }else{
+            } else {
                 var adult = $('select[name=adults] option').filter(':selected').val();
             }
-            if(child_field_type=="number"){
+            if (child_field_type == "number") {
                 var child = $('#children').val();
-            }else{
+            } else {
                 var child = $('select[name=children] option').filter(':selected').val();
             }
             //var features = $('input[name=features]').filter(':checked').val();
@@ -187,7 +187,7 @@
                     $this.unblock();
 
                     var response = JSON.parse(data);
-                    
+
                     if (response.status == 'error') {
 
                         if (response.errors) {
@@ -508,7 +508,7 @@
          * Apartment Min and Max Range
          * @author Foysal
          */
-        if (tf_params.tf_apartment_min_price != 0 && tf_params.tf_apartment_max_price != 0) {
+        if (tf_params.tf_apartment_min_price >= 0 && tf_params.tf_apartment_max_price > 0) {
             $('.tf-apartment-filter-range').alRangeSlider({
                 range: {
                     min: parseInt(tf_params.tf_apartment_min_price),
@@ -658,49 +658,15 @@
                 return;
             }
 
-            var filters = [];
-
-            $('[name*=tf_filters]').each(function () {
-                if ($(this).is(':checked')) {
-                    filters.push($(this).val());
-                }
-            });
-            var filters = filters.join();
-
-            var features = [];
-
-            $('[name*=tf_features]').each(function () {
-                if ($(this).is(':checked')) {
-                    features.push($(this).val());
-                }
-            });
-            var features = features.join();
-
-            var tour_features = [];
-
-            $('[name*=tour_features]').each(function () {
-                if ($(this).is(':checked')) {
-                    tour_features.push($(this).val());
-                }
-            });
-            tour_features = tour_features.join();
-            //get tour attraction checked values
-            var attractions = [];
-            $('[name*=tf_attractions]').each(function () {
-                if ($(this).is(':checked')) {
-                    attractions.push($(this).val());
-                }
-            });
-            attractions = attractions.join();
-
-            //get tour activities checked values
-            var activities = [];
-            $('[name*=tf_activities]').each(function () {
-                if ($(this).is(':checked')) {
-                    activities.push($(this).val());
-                }
-            });
-            activities = activities.join();
+            let filters = termIdsByFeildName('tf_filters');
+            let tfHotelTypes = termIdsByFeildName('tf_hotel_types');
+            let features = termIdsByFeildName('tf_features');
+            let tour_features = termIdsByFeildName('tour_features');
+            let attractions = termIdsByFeildName('tf_attractions');
+            let activities = termIdsByFeildName('tf_activities');
+            let tfTourTypes = termIdsByFeildName('tf_tour_types');
+            let tfApartmentFeatures = termIdsByFeildName('tf_apartment_features');
+            let tfApartmentTypes = termIdsByFeildName('tf_apartment_types');
 
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
@@ -714,9 +680,13 @@
             formData.append('checkout', checkout);
             formData.append('filters', filters);
             formData.append('features', features);
+            formData.append('tf_hotel_types', tfHotelTypes);
             formData.append('tour_features', tour_features);
             formData.append('attractions', attractions);
             formData.append('activities', activities);
+            formData.append('tf_tour_types', tfTourTypes);
+            formData.append('tf_apartment_features', tfApartmentFeatures);
+            formData.append('tf_apartment_types', tfApartmentTypes);
             formData.append('checked', checked);
             if (startprice) {
                 formData.append('startprice', startprice);
@@ -750,7 +720,7 @@
                         }
                     });
                     $('#tf_ajax_searchresult_loader').show();
-                    if($.trim(checkin) !== ''){
+                    if ($.trim(checkin) !== '') {
                         $('.tf_booking-dates .tf_label-row').find('#tf-required').remove();
                     }
                 },
@@ -814,58 +784,15 @@
             var checkout = checkedArr[1];
             var posttype = $('.tf-post-type').val();
 
-            var filters = [];
-
-            $('[name*=tf_filters]').each(function () {
-                if ($(this).is(':checked')) {
-                    filters.push($(this).val());
-                }
-            });
-            var filters = filters.join();
-
-            var tfHotelTypes = [];
-
-            $('[name*=tf_hotel_types]').each(function () {
-                if ($(this).is(':checked')) {
-                    tfHotelTypes.push($(this).val());
-                }
-            });
-            var tfHotelTypes = tfHotelTypes.join();
-
-            var features = [];
-
-            $('[name*=tf_features]').each(function () {
-                if ($(this).is(':checked')) {
-                    features.push($(this).val());
-                }
-            });
-            var features = features.join();
-
-            var tour_features = [];
-
-            $('[name*=tour_features]').each(function () {
-                if ($(this).is(':checked')) {
-                    tour_features.push($(this).val());
-                }
-            });
-            tour_features = tour_features.join();
-            //get tour attraction checked values
-            var attractions = [];
-            $('[name*=tf_attractions]').each(function () {
-                if ($(this).is(':checked')) {
-                    attractions.push($(this).val());
-                }
-            });
-            attractions = attractions.join();
-
-            //get tour activities checked values
-            var activities = [];
-            $('[name*=tf_activities]').each(function () {
-                if ($(this).is(':checked')) {
-                    activities.push($(this).val());
-                }
-            });
-            activities = activities.join();
+            let filters = termIdsByFeildName('tf_filters');
+            let tfHotelTypes = termIdsByFeildName('tf_hotel_types');
+            let features = termIdsByFeildName('tf_features');
+            let tour_features = termIdsByFeildName('tour_features');
+            let attractions = termIdsByFeildName('tf_attractions');
+            let activities = termIdsByFeildName('tf_activities');
+            let tfTourTypes = termIdsByFeildName('tf_tour_types');
+            let tfApartmentFeatures = termIdsByFeildName('tf_apartment_features');
+            let tfApartmentTypes = termIdsByFeildName('tf_apartment_types');
 
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
@@ -883,6 +810,9 @@
             formData.append('tour_features', tour_features);
             formData.append('attractions', attractions);
             formData.append('activities', activities);
+            formData.append('tf_tour_types', tfTourTypes);
+            formData.append('tf_apartment_features', tfApartmentFeatures);
+            formData.append('tf_apartment_types', tfApartmentTypes);
             formData.append('checked', checked);
             if (startprice) {
                 formData.append('startprice', startprice);
@@ -913,7 +843,7 @@
                         }
                     });
 
-                    if($.trim(checkin) !== ''){
+                    if ($.trim(checkin) !== '') {
                         $('.tf_booking-dates .tf_label-row').find('#tf-required').remove();
                     }
                 },
@@ -950,7 +880,7 @@
             e.preventDefault();
             makeFilter()
         });
-        $(document).on('change', '[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities]', function () {
+        $(document).on('change', '[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types]', function () {
             makeFilter();
         })
 
@@ -959,6 +889,20 @@
             e.preventDefault();
             makeFilter()
         });
+
+        /*
+        * Get term ids by field name
+        * @auther Foysal
+        */
+        const termIdsByFeildName = (fieldName) => {
+            let termIds = [];
+            $(`[name*=${fieldName}]`).each(function () {
+                if ($(this).is(':checked')) {
+                    termIds.push($(this).val());
+                }
+            });
+            return termIds.join();
+        }
 
         //###############################
         //        Common Functions      #
@@ -1450,7 +1394,7 @@
          * Initiate autocomplete on inputs
          */
 
-        // Hotel location autocomplete
+            // Hotel location autocomplete
         var hotel_location_input = document.getElementById("tf-location");
         var hotel_locations = tf_params.locations;
         if (hotel_location_input) {
@@ -1764,12 +1708,12 @@
                 step: 1
             },
             initialSelectedValues: {
-                from: tf_search_page_params.get('from')? tf_search_page_params.get('from') : parseInt(tf_params.tf_hotel_min_price),
-                to: tf_search_page_params.get('to')? tf_search_page_params.get('to') : parseInt(tf_params.tf_hotel_max_price) / 2
+                from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_hotel_min_price),
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_hotel_max_price) / 2
             },
             grid: false,
             theme: "dark",
-            onFinish: function(){
+            onFinish: function () {
                 makeFilter();
             }
         };
@@ -1803,12 +1747,12 @@
                 step: 1
             },
             initialSelectedValues: {
-                from: tf_search_page_params.get('from')? tf_search_page_params.get('from') : parseInt(tf_params.tf_tour_min_price),
-                to: tf_search_page_params.get('to')? tf_search_page_params.get('to') : parseInt(tf_params.tf_tour_max_price) / 2
+                from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_tour_min_price),
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_tour_max_price) / 2
             },
             grid: false,
             theme: "dark",
-            onFinish: function(){
+            onFinish: function () {
                 makeFilter();
             }
         };
@@ -1816,13 +1760,34 @@
             $('.tf-tour-result-price-range').alRangeSlider(tf_tours_search_range);
         }
 
+        // Apartment Min and Max Range in Search Result
+        let tf_apartment_search_range = {
+            range: {
+                min: parseInt(tf_params.tf_apartment_min_price),
+                max: parseInt(tf_params.tf_apartment_max_price),
+                step: 1
+            },
+            initialSelectedValues: {
+                from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt(tf_params.tf_apartment_min_price),
+                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt(tf_params.tf_apartment_max_price) / 2
+            },
+            grid: false,
+            theme: "dark",
+            onFinish: function () {
+                makeFilter();
+            }
+        };
+        if (tf_params.tf_apartment_min_price != 0 && tf_params.tf_apartment_max_price != 0) {
+            $('.tf-apartment-result-price-range').alRangeSlider(tf_apartment_search_range);
+        }
+
         // Hotel Location
 
         $('#tf-destination-adv').click(function (e) {
             var location = $(this).val();
-            if(location){
+            if (location) {
                 $(".tf-hotel-locations").removeClass('tf-locations-show');
-            }else{
+            } else {
                 $(".tf-hotel-locations").addClass('tf-locations-show');
             }
         });
@@ -1851,9 +1816,9 @@
 
         $('#tf-tour-location-adv').click(function (e) {
             var location = $(this).val();
-            if(location){
+            if (location) {
                 $(".tf-tour-results").removeClass('tf-destination-show');
-            }else{
+            } else {
                 $(".tf-tour-results").addClass('tf-destination-show');
             }
         });

@@ -58,8 +58,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,
-					),
-					'is_pro'   => true,
+					)
 				),
 				//Property Surroundings
 				array(
