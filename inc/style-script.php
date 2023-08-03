@@ -311,7 +311,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf_button:hover, .btn-styled:hover, .tf-review-form-container .tf-review-submit input[type="submit"]:hover {border-color: '.$tf_primary_bg_color_hov.';}
 		'; }
 		if( $tf_sidebar_gradient_one_reg && $tf_sidebar_gradient_two_reg  ) { $output .= '
-			.tf_booking-widget, .tf-tour-details-right .tf-tour-booking-box, .tf-template-global .tf-box-wrapper.tf-box {background: linear-gradient(to bottom, '.$tf_sidebar_gradient_one_reg.' 0, '.$tf_sidebar_gradient_two_reg.' 100%);}
+			.tf_booking-widget, .tf-tour-details-right .tf-tour-booking-box, .tf-template-global .tf-box-wrapper.tf-box {background: linear-gradient(to bottom, '.$tf_sidebar_gradient_one_reg.' 0, '.$tf_sidebar_gradient_two_reg.' 100%) !important;}
 		'; }
 		if( $tf_faq_color OR $tf_faq_icon_color OR $tf_faq_border_color ) { $output .= '
 			.tf-faq-title h4,
