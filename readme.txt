@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
 Tested up to: 6.2.2
-Stable tag: 2.9.23
+Stable tag: 2.9.24
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -408,6 +408,13 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.9.24 -  04 August 2023 =
+
+* Improvement: Preloader updated
+* Improvement: Booking form background added
+* Fixed: Color picker source issue fixed
+* Compatibility: Elementor 3.15.1
 
 = 2.9.23 -  23 July 2023 =
 
