@@ -1095,7 +1095,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                 <div class="tf-single-tour-extra">
                                     <label for="extra<?php echo esc_attr( $extrakey ); ?>">
                                         <div class="tf-extra-check-box">
-                                        <input type="checkbox" value="<?php echo esc_attr( $extrakey ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>" id="extra<?php echo esc_attr( $extrakey ); ?>">
+                                        <input type="checkbox" value="<?php echo esc_attr( $extrakey ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>" id="extra<?php echo esc_attr( $extrakey ); ?>" name="tf-tour-extra">
                                         <span class="checkmark"></span>
                                         </div>
                                         <div class="tf-extra-content">

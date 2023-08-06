@@ -2038,8 +2038,7 @@
         });
 
         // Popup Open
-        $(document).on('click', '.tf-booking-popup-btn', function (e) {
-            e.preventDefault();
+        const makeBooking = () => {
             var $this = $(this);
             let check_in_date = $('#check-in-out-date').val();
             let adults = $('#adults').val();
@@ -2095,8 +2094,16 @@
                 },
 
             });
-            
+        }
+        $(document).on('click', '.tf-booking-popup-btn', function (e) {
+            e.preventDefault();
+            makeBooking();
         });
+
+        $(document).on('change', '[name*=tf-tour-extra]', function () {
+            makeBooking();
+        });
+
         // Popup Close
         $(document).on('click', '.tf-booking-times span', function (e) {
             $('.tf-withoutpayment-booking').removeClass('show');
