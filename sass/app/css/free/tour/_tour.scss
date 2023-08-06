@@ -708,12 +708,24 @@ div#tf-contact-info {
             .tf-booking-content{
                 display: none;
                 width: calc(62% - 24px);
+                p{
+                    color: #666D74;
+                    font-family: inherit;
+                    font-size: 16px !important;
+                    font-style: normal !important;
+                    font-weight: 400 !important;
+                    line-height: 24px !important;
+                    margin-top: 0px;
+                    margin-bottom: 24px;
+                }
                 .tf-booking-content-extra,
                 .tf-booking-content-traveller{
-                    height: 360px;
+                    height: 230px;
                     overflow-y: auto;
                     scrollbar-width: thin;
                     scrollbar-color: #aaa #eee;
+                    margin-bottom: 20px;
+                    padding-right: 10px;
                     scrollbar {
                         width: 5px; 
                     }
@@ -721,44 +733,80 @@ div#tf-contact-info {
                         background-color: #aaa;
                         border-radius: 4px;
                     }
-                    p{
-                        color: #666D74;
-                        font-family: inherit;
-                        font-size: 16px !important;
-                        font-style: normal !important;
-                        font-weight: 400 !important;
-                        line-height: 24px !important;
-                        margin-top: 0px;
-                        margin-bottom: 24px;
-                    }
                     .tf-single-tour-extra{
-                        display: flex;
-                        padding-bottom: 16px;
-                        align-items: baseline;
-                        input{
-                            margin-right: 10px;
-                        }
                         label{
-                            h5{
-                                color: #666D74;
-                                font-family: inherit;
-                                font-size: 16px !important;
-                                font-style: normal;
-                                font-weight: 500 !important;
-                                line-height: 20px !important;
-                                margin: 0;
-                                span{
-                                    font-weight: 700 !important;
+                            display: flex;
+                            padding-bottom: 16px;
+                            align-items: baseline;
+                            .tf-extra-check-box{
+                                position: relative;
+                                height: 13px;
+                                width: 20px;
+                                margin-right: 10px;
+                                input{
+                                    margin-right: 10px;
+                                    display: none;
+                                }
+                                .checkmark{
+                                    position: absolute;
+                                    top: 0px;
+                                    left: 0px;
+                                    height: 16px;
+                                    width: 16px;
+                                    background-color: #FCFDFF;
+                                    border-radius: 5px;
+                                    border: 1px solid #666D74;
+                                    cursor: pointer;
+                                    &::after{
+                                        left: 6px;
+                                        top: 3px;
+                                        width: 3px;
+                                        height: 7px;
+                                        border: solid white;
+                                        border-width: 0 3px 3px 0;
+                                        -webkit-transform: rotate(45deg);
+                                        -ms-transform: rotate(45deg);
+                                        transform: rotate(45deg);
+                                    }
+                                }
+                                
+                            
+                                input:checked~.checkmark {
+                                    background-color: #003C7A;
+                                }
+                            
+                                .checkmark:after {
+                                    content: "";
+                                    position: absolute;
+                                    display: none;
+                                }
+                            
+                                input:checked~.checkmark:after {
+                                    display: block;
                                 }
                             }
-                            p{
-                                color:  #666D74;                                
-                                font-family: inherit;
-                                font-size: 16px !important;
-                                font-style: normal !important;
-                                font-weight: 400 !important;
-                                line-height: 20px !important;
-                                margin: 0 !important;
+                            .tf-extra-content{
+                                h5{
+                                    color: #666D74;
+                                    font-family: inherit;
+                                    font-size: 16px !important;
+                                    font-style: normal;
+                                    font-weight: 500 !important;
+                                    line-height: 20px !important;
+                                    margin: 0;
+                                    span{
+                                        font-weight: 700 !important;
+                                    }
+                                }
+                                p{
+                                    color:  #666D74;                                
+                                    font-family: inherit;
+                                    font-size: 16px !important;
+                                    font-style: normal !important;
+                                    font-weight: 400 !important;
+                                    line-height: 20px !important;
+                                    margin: 0 !important;
+                                }
                             }
                         }
                     }
@@ -881,13 +929,15 @@ div#tf-contact-info {
                         border-radius: 4px;
                         background: #003C7A;
                         box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-                        padding: 10px 50px;
+                        padding: 10px 0px;
                         color: #FCFDFF;
                         font-family: inherit;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 500;
-                        line-height: 20px; /* 125% */
+                        line-height: 20px;
+                        width: 300px;
+                        text-align: center;
                     }
                 }
             }

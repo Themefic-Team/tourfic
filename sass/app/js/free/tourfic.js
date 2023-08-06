@@ -2045,12 +2045,16 @@
             let adults = $('#adults').val();
             let children = $('#children').val();
             let infant = $('#infant').val();
+            let post_id = $('input[name=post_id]').val();
+            let check_in_time = $('select[name=check-in-time] option').filter(':selected').val()
             var data = {
                 action: 'tf_tour_booking_popup',
+                post_id: post_id,
                 adults: adults,
                 children: children,
                 infant: infant,
-                check_in_date: check_in_date
+                check_in_date: check_in_date,
+                check_in_time: check_in_time
             };
 
 
@@ -2059,15 +2063,7 @@
                 url: tf_params.ajax_url,
                 data: data,
                 beforeSend: function (data) {
-                    // $this.block({
-                    //     message: null,
-                    //     overlayCSS: {
-                    //         background: "#fff",
-                    //         opacity: .5
-                    //     }
-                    // });
-
-                    // $('.tf_notice_wrapper').html("").hide();
+                    $('#tour_room_details_loader').show();
                 },
                 complete: function (data) {
                     $this.unblock();
@@ -2079,6 +2075,7 @@
 
                     if (response.status == 'error') {
 
+                        $('#tour_room_details_loader').hide();
                         if (response.errors) {
                             response.errors.forEach(function (text) {
                                 notyf.error(text);
@@ -2087,11 +2084,10 @@
 
                         return false;
                     } else {
-
+                        $('#tour_room_details_loader').hide();
                         $('.tf-traveller-info-box').html(response.traveller_info);
                         $('.tf-booking-traveller-info').html(response.traveller_summery);
                         $('.tf-withoutpayment-booking').addClass('show');
-
                     }
                 },
                 error: function (data) {
