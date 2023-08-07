@@ -1,6 +1,6 @@
 <?php 
 $total_dis_dates = [];
-if ( ! empty( $room['repeat_by_date'] ) ) {
+if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $room['repeat_by_date'] ) ) {
     $disabled_dates = $room['repeat_by_date'];
     //iterate all the available disabled dates
     if ( ! empty( $disabled_dates ) ) {
