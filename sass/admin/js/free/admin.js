@@ -230,6 +230,43 @@
             }
         });
 
+
+        /*
+        * Check available hotel room from date to date
+        * Author @Foysal
+        */
+        $(document).on('change', '[name="tf_booking_fields[tf_hotel_date][from]"], [name="tf_booking_fields[tf_hotel_date][to]"]', function(e) {
+            e.preventDefault();
+
+            var from = $('[name="tf_booking_fields[tf_hotel_date][from]"]').val();
+            var to = $('[name="tf_booking_fields[tf_hotel_date][to]"]').val();
+
+            if( from.length > 0 && to.length > 0 ) {
+
+                $("#tf-booking-status-loader").addClass('show');
+
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_check_available_hotel',
+                        from: from,
+                        to: to,
+                    },
+                    success: function (data) {
+                        //rerender the select2 field tf_booking_fields[tf_available_hotels]
+                        var select2 = $('[name="tf_booking_fields[tf_available_hotels]"]');
+                        select2.empty();
+                        select2.append('<option value="">'+tf_admin_params.select_hotel+'</option>');
+                        $.each(data, function(key, value) {
+                            select2.append('<option value="'+key+'">'+value+'</option>');
+                        });
+                        select2.select2();
+                        $("#tf-booking-status-loader").removeClass('show');
+                    }
+                });
+            }
+        });
     });
 
 })(jQuery);
