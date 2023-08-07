@@ -1117,13 +1117,17 @@ function tf_single_tour_booking_form( $post_id ) {
                             <div class="tf-booking-content-traveller">
                                 <div class="tf-traveller-info-box"></div>
                             </div>
+                            <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] )) { 
+                            $tf_deposit_amount =  $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%';
+                            ?>
                             <div class="tf-diposit-switcher">
                                 <label class="switch">
-                                    <input type="checkbox" class="diposit-status-switcher" value="49" checked="">
+                                    <input type="checkbox" name="make_deposit" class="diposit-status-switcher">
                                     <span class="switcher round"></span>
                                 </label>
-                                <h4><?php echo __("Partial payment of 25% on total","tourfic"); ?></h4>
+                                <h4><?php echo sprintf( __( 'Partial payment of %1$s on total', 'tourfic' ), $tf_deposit_amount ); ?></h4>
                             </div>
+                            <?php } ?>
                             <div class="tf-control-pagination">
                                 <a href="#" class="tf-back-control tf-step-back" data-step="1"><i class="fa fa-angle-left"></i><?php echo __("Back", "tourfic"); ?></a>
                                 <a href="#" class="tf-next-control tf-tabs-control" data-step="2"><?php echo __("Continue", "tourfic"); ?></a>
@@ -2984,10 +2988,24 @@ function tf_tour_booking_popup_callback() {
 
         # Set pricing based on pricing rule
 		if ( $pricing_rule == 'group' ) {
-			$tf_tours_data_price     = $group_price;
+			$tf_tours_data_price     = $group_price + $tour_extra_total;
 		} else {
-			$tf_tours_data_price     = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
+			$tf_tours_data_price     = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price ) + $tour_extra_total;
 		}
+        if(!empty($_POST['deposit']) && $_POST['deposit']=="true"){
+            if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] )) { 
+    
+                if(!empty($meta['deposit_type']) && $meta['deposit_type'] == 'fixed'){
+                    $tf_deposit_amount = !empty($meta['deposit_amount']) ? $meta['deposit_amount'] : 0;
+                    $tf_due_amount = $tf_tours_data_price - $tf_deposit_amount;
+                    $tf_tours_data_price = $tf_deposit_amount;
+                }else{
+                    $tf_deposit_amount = !empty($meta['deposit_amount']) ? ($tf_tours_data_price*$meta['deposit_amount'])/100 : 0;
+                    $tf_due_amount = $tf_tours_data_price - $tf_deposit_amount;
+                    $tf_tours_data_price = $tf_deposit_amount;
+                }
+            }
+        }
 
         $response['traveller_info']  = '';
         $response['traveller_summery']  = '';
@@ -3053,12 +3071,18 @@ function tf_tour_booking_popup_callback() {
                     <td align="right">'.wc_price($tour_extra_total).'</td>
                 </tr>';
             }
+            if(!empty($tf_due_amount)){
+                $response['traveller_summery'] .='<tr>
+                    <td align="left">'.sprintf( __( 'Due', 'tourfic' )).'</td>
+                    <td align="right">'.wc_price($tf_due_amount).'</td>
+                </tr>';
+            }
             
             $response['traveller_summery'] .='</tbody>
             <tfoot>
                 <tr>
                     <th align="left">'.sprintf( __( 'Total', 'tourfic' )).'</th>
-                    <th align="right">'.wc_price($tf_tours_data_price+$tour_extra_total).'</th>
+                    <th align="right">'.wc_price($tf_tours_data_price).'</th>
                 </tr>
             </tfoot>
         </table>';

@@ -2046,9 +2046,9 @@
             let infant = $('#infant').val();
             let post_id = $('input[name=post_id]').val();
             let check_in_time = $('select[name=check-in-time] option').filter(':selected').val();
-
+            var deposit = $('input[name=make_deposit]').is(':checked');
+            console.log(deposit);
             var extras = [];
-
             $('[name*=tf-tour-extra]').each(function () {
                 if ($(this).is(':checked')) {
                     extras.push($(this).val());
@@ -2063,7 +2063,8 @@
                 infant: infant,
                 check_in_date: check_in_date,
                 check_in_time: check_in_time,
-                tour_extra: extras
+                tour_extra: extras,
+                deposit: deposit
             };
 
 
@@ -2111,6 +2112,9 @@
         });
 
         $(document).on('change', '[name*=tf-tour-extra]', function () {
+            makeBooking();
+        });
+        $(document).on('change', '[name*=make_deposit]', function () {
             makeBooking();
         });
 
