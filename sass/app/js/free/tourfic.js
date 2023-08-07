@@ -2046,8 +2046,7 @@
             let infant = $('#infant').val();
             let post_id = $('input[name=post_id]').val();
             let check_in_time = $('select[name=check-in-time] option').filter(':selected').val();
-            var deposit = $('input[name=make_deposit]').is(':checked');
-            console.log(deposit);
+            var deposit = $('input[name=deposit]').is(':checked');
             var extras = [];
             $('[name*=tf-tour-extra]').each(function () {
                 if ($(this).is(':checked')) {
@@ -2114,7 +2113,7 @@
         $(document).on('change', '[name*=tf-tour-extra]', function () {
             makeBooking();
         });
-        $(document).on('change', '[name*=make_deposit]', function () {
+        $(document).on('change', '[name=deposit]', function () {
             makeBooking();
         });
 

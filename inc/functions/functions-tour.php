@@ -1122,7 +1122,7 @@ function tf_single_tour_booking_form( $post_id ) {
                             ?>
                             <div class="tf-diposit-switcher">
                                 <label class="switch">
-                                    <input type="checkbox" name="make_deposit" class="diposit-status-switcher">
+                                    <input type="checkbox" name="deposit" class="diposit-status-switcher">
                                     <span class="switcher round"></span>
                                 </label>
                                 <h4><?php echo sprintf( __( 'Partial payment of %1$s on total', 'tourfic' ), $tf_deposit_amount ); ?></h4>
@@ -3011,7 +3011,7 @@ function tf_tour_booking_popup_callback() {
         $response['traveller_summery']  = '';
         for($traveller_in = 1; $traveller_in<=$total_people; $traveller_in++){
             $response['traveller_info'] .= '<div class="tf-single-tour-traveller">
-                <h4>Traveler '.$traveller_in.'</h4>
+                <h4>'.sprintf( __( 'Traveler ', 'tourfic' )) .$traveller_in.'</h4>
                 <div class="traveller-info">
                     <div class="traveller-single-info">
                         <label for="fullname'.$traveller_in.'">'.sprintf( __( 'Full Name', 'tourfic' )).'</label>

@@ -657,6 +657,7 @@ div#tf-contact-info {
                     }
                     li.done{
                         background-color: #96AFCA; 
+                        color: #FCFDFF;
                         &:first-child{
                             border-radius: 8px 0px 0px 8px;
                         }
@@ -664,6 +665,7 @@ div#tf-contact-info {
                     li.active{
                         position: relative;
                         background-color: #96AFCA;
+                        color: #FCFDFF;
                         padding-right: 50px;
                         &:first-child{
                             border-radius: 8px 0px 0px 8px;
@@ -824,7 +826,7 @@ div#tf-contact-info {
                             display: flex;
                             justify-content: space-between;
                             .traveller-single-info{
-                                width: 30%;
+                                width: 32%;
                                 label{
                                     color: #CCCED1;
                                     font-family: inherit;
@@ -840,6 +842,11 @@ div#tf-contact-info {
                                     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
                                     height: 32px;
                                     width: 100%;
+                                    padding: 0px 5px;
+                                }
+                                input[type="date"]{
+                                    text-transform: uppercase;
+                                    font-size: 13px;
                                 }
                             }
                         }
