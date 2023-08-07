@@ -2045,7 +2045,16 @@
             let children = $('#children').val();
             let infant = $('#infant').val();
             let post_id = $('input[name=post_id]').val();
-            let check_in_time = $('select[name=check-in-time] option').filter(':selected').val()
+            let check_in_time = $('select[name=check-in-time] option').filter(':selected').val();
+
+            var extras = [];
+
+            $('[name*=tf-tour-extra]').each(function () {
+                if ($(this).is(':checked')) {
+                    extras.push($(this).val());
+                }
+            });
+            var extras = extras.join();
             var data = {
                 action: 'tf_tour_booking_popup',
                 post_id: post_id,
@@ -2053,7 +2062,8 @@
                 children: children,
                 infant: infant,
                 check_in_date: check_in_date,
-                check_in_time: check_in_time
+                check_in_time: check_in_time,
+                tour_extra: extras
             };
 
 

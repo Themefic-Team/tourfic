@@ -2955,6 +2955,31 @@ function tf_tour_booking_popup_callback() {
 		}
 
 	}
+
+    // Tour extra
+	$tour_extra_total = 0;
+	$tour_extra_title_arr = [];
+	$tour_extra_meta = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
+	if(!empty($tour_extra_meta)){
+		$tours_extra = explode(',', $_POST['tour_extra']);
+		foreach($tours_extra as $extra){
+			$tour_extra_pricetype = !empty( $tour_extra_meta[$extra]['price_type'] ) ? $tour_extra_meta[$extra]['price_type'] : 'fixed';
+			if( $tour_extra_pricetype=="fixed" ){
+				if(!empty($tour_extra_meta[$extra]['title']) && !empty($tour_extra_meta[$extra]['price'])){
+					$tour_extra_total += $tour_extra_meta[$extra]['price'];
+					$tour_extra_title_arr[] =  $tour_extra_meta[$extra]['title'];
+				}
+			}else{
+				if(!empty($tour_extra_meta[$extra]['price']) && !empty($tour_extra_meta[$extra]['title'])){
+					$tour_extra_total += ($tour_extra_meta[$extra]['price']*$total_people);
+					$tour_extra_title_arr[] =  $tour_extra_meta[$extra]['title'];
+				}
+			}
+		}
+	}
+
+	$tour_extra_title = ! empty( $tour_extra_title_arr ) ? implode(",",$tour_extra_title_arr) : '';
+
     if ( ! array_key_exists( 'errors', $response ) || count( $response['errors'] ) == 0 ) {
 
         # Set pricing based on pricing rule
@@ -2971,16 +2996,16 @@ function tf_tour_booking_popup_callback() {
                 <h4>Traveler '.$traveller_in.'</h4>
                 <div class="traveller-info">
                     <div class="traveller-single-info">
-                        <label for="">Full Name</label>
-                        <input type="text">
+                        <label for="fullname'.$traveller_in.'">'.sprintf( __( 'Full Name', 'tourfic' )).'</label>
+                        <input type="text" id="fullname'.$traveller_in.'">
                     </div>
                     <div class="traveller-single-info">
-                        <label for="">Date of birth</label>
-                        <input type="text">
+                        <label for="dob'.$traveller_in.'">'.sprintf( __( 'Date of birth', 'tourfic' )).'</label>
+                        <input type="date" id="dob'.$traveller_in.'">
                     </div>
                     <div class="traveller-single-info">
-                        <label for="">NID</label>
-                        <input type="text">
+                        <label for="nid'.$traveller_in.'">'.sprintf( __( 'NID', 'tourfic' )).'</label>
+                        <input type="text" id="nid'.$traveller_in.'">
                     </div>
                 </div>
             </div>';
@@ -2990,44 +3015,50 @@ function tf_tour_booking_popup_callback() {
         <table class="table">
             <thead>
                 <tr>
-                    <th align="left">Traveller</th>
-                    <th align="right">Price</th>
+                    <th align="left">'.sprintf( __( 'Traveller', 'tourfic' )).'</th>
+                    <th align="right">'.sprintf( __( 'Price', 'tourfic' )).'</th>
                 </tr>
             </thead>
             <tbody>';
             if(!empty($pricing_rule) && $pricing_rule=="person"){
                 if(!empty($adult_price) && !empty($adults)){
                     $response['traveller_summery'] .='<tr>
-                        <td align="left">'.$adults.' adults ('.wc_price($adult_price).'/'.$pricing_rule.')</td>
+                        <td align="left">'.$adults .sprintf( __( ' adults', 'tourfic' )).' ('.wc_price($adult_price).'/'.$pricing_rule.')</td>
                         <td align="right">'.wc_price($adult_price*$adults).'</td>
                     </tr>';
                 }
                 if(!empty($children_price) && !empty($children)){
                     $response['traveller_summery'] .='<tr>
-                        <td align="left">'.$children.' childrens ('.wc_price($children_price).'/'.$pricing_rule.')</td>
+                        <td align="left">'.$children .sprintf( __( ' childrens', 'tourfic' )).' ('.wc_price($children_price).'/'.$pricing_rule.')</td>
                         <td align="right">'.wc_price($children_price*$children).'</td>
                     </tr>';
                 }
                 if(!empty($infant_price) && !empty($infant)){
                     $response['traveller_summery'] .='<tr>
-                        <td align="left">'.$infant.' infants ('.wc_price($infant_price).'/'.$pricing_rule.')</td>
+                        <td align="left">'.$infant .sprintf( __( ' infants', 'tourfic' )).' ('.wc_price($infant_price).'/'.$pricing_rule.')</td>
                         <td align="right">'.wc_price($infant_price*$infant).'</td>
                     </tr>';
                 }
             }else{
                 if(!empty($group_price)){
                     $response['traveller_summery'] .='<tr>
-                        <td align="left">Group Price</td>
+                        <td align="left">'.sprintf( __( 'Group Price', 'tourfic' )).'</td>
                         <td align="right">'.wc_price($group_price).'</td>
                     </tr>';
                 }
+            }
+            if(!empty($tour_extra_title)){
+                $response['traveller_summery'] .='<tr>
+                    <td align="left">'.esc_html($tour_extra_title).'</td>
+                    <td align="right">'.wc_price($tour_extra_total).'</td>
+                </tr>';
             }
             
             $response['traveller_summery'] .='</tbody>
             <tfoot>
                 <tr>
-                    <th align="left">Total</th>
-                    <th align="right">'.wc_price($tf_tours_data_price).'</th>
+                    <th align="left">'.sprintf( __( 'Total', 'tourfic' )).'</th>
+                    <th align="right">'.wc_price($tf_tours_data_price+$tour_extra_total).'</th>
                 </tr>
             </tfoot>
         </table>';
