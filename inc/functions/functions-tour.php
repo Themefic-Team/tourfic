@@ -1113,33 +1113,12 @@ function tf_single_tour_booking_form( $post_id ) {
                                 <?php } ?>
                                 
                             </div>
-                            <div class="tf-control-pagination">
-                                <a href="#" class="tf-next-control tf-tabs-control" data-step="2"><?php echo __("Continue", "tourfic"); ?></a>
-                            </div>
                         </div>
                         <?php } ?>
                         <div class="tf-booking-content tf-booking-content-2 <?php echo empty($tour_extras) ? esc_attr( 'show' ) : ''; ?>">
                             <p><?php echo __("All of your information will be confidential and the reason of this is for your privacy purpose","tourfic"); ?></p>
                             <div class="tf-booking-content-traveller">
                                 <div class="tf-traveller-info-box"></div>
-                            </div>
-                            <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] )) { 
-                            $tf_deposit_amount =  $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%';
-                            ?>
-                            <div class="tf-diposit-switcher">
-                                <label class="switch">
-                                    <input type="checkbox" name="deposit" class="diposit-status-switcher">
-                                    <span class="switcher round"></span>
-                                </label>
-                                <h4><?php echo sprintf( __( 'Partial payment of %1$s on total', 'tourfic' ), $tf_deposit_amount ); ?></h4>
-                            </div>
-                            <?php } ?>
-                            <div class="tf-control-pagination">
-                                <?php 
-                                if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
-                                <a href="#" class="tf-back-control tf-step-back" data-step="1"><i class="fa fa-angle-left"></i><?php echo __("Back", "tourfic"); ?></a>
-                                <?php } ?>
-                                <a href="#" class="tf-next-control tf-tabs-control" data-step="2"><?php echo __("Continue", "tourfic"); ?></a>
                             </div>
                         </div>
                         <div class="tf-booking-summery">
@@ -1150,6 +1129,32 @@ function tf_single_tour_booking_form( $post_id ) {
                             <div class="tf-booking-traveller-info">
                                 
                             </div>
+                        </div>
+                    </div>
+                    <div class="tf-booking-pagination">
+                        
+                    
+                        <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] )) { 
+                            $tf_deposit_amount =  $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%';
+                            ?>
+                            <div class="tf-diposit-switcher">
+                                <label class="switch">
+                                    <input type="checkbox" name="deposit" class="diposit-status-switcher">
+                                    <span class="switcher round"></span>
+                                </label>
+                                <h4><?php echo sprintf( __( 'Partial payment of %1$s on total', 'tourfic' ), $tf_deposit_amount ); ?></h4>
+                            </div>
+                        <?php } ?>
+                        <div class="tf-control-pagination show tf-pagination-content-1">
+                            <a href="#" class="tf-next-control tf-tabs-control" data-step="2"><?php echo __("Continue", "tourfic"); ?></a>
+                        </div>
+                        
+                        <div class="tf-control-pagination tf-pagination-content-2">
+                            <?php 
+                            if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
+                            <a href="#" class="tf-back-control tf-step-back" data-step="1"><i class="fa fa-angle-left"></i><?php echo __("Back", "tourfic"); ?></a>
+                            <?php } ?>
+                            <a href="#" class="tf-next-control tf-tabs-control" data-step="2"><?php echo __("Continue", "tourfic"); ?></a>
                         </div>
                     </div>
                 </div>

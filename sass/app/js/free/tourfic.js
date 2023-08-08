@@ -2022,6 +2022,10 @@
                 $('.tf-booking-step-' + step).addClass("active");
                 $('.tf-booking-content').hide();
                 $('.tf-booking-content-' + step).fadeIn(300);
+
+                
+                $('.tf-control-pagination').hide();
+                $('.tf-pagination-content-' + step).fadeIn(300);
             }
         });
 
@@ -2034,6 +2038,9 @@
                 $('.tf-booking-step-' + step).addClass("active");
                 $('.tf-booking-content').hide();
                 $('.tf-booking-content-' + step).fadeIn(300);
+
+                $('.tf-control-pagination').hide();
+                $('.tf-pagination-content-' + step).fadeIn(300);
             }
         });
 
