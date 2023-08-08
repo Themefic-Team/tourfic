@@ -27,6 +27,7 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
 			add_action( 'admin_menu', array( $this, 'tf_backend_booking_menu' ) );
             add_action('wp_ajax_tf_check_available_hotel', array($this, 'tf_check_available_hotel'));
             add_action('wp_ajax_tf_check_available_room', array($this, 'tf_check_available_room'));
+            add_action('wp_ajax_tf_update_room_fields', array($this, 'tf_update_room_fields'));
 		}
 
 		function tf_hotel_backend_booking_button() {
@@ -225,19 +226,19 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
 							'id'          => 'tf_hotel_adults_number',
 							'label'       => __( 'Adults', 'tourfic' ),
 							'type'        => 'number',
-							'field_width' => 33,
+                            'attributes'  => array(
+                                'min' => '0',
+                            ),
+							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_hotel_children_number',
 							'label'       => __( 'Children', 'tourfic' ),
 							'type'        => 'number',
-							'field_width' => 33,
-						),
-						array(
-							'id'          => 'tf_hotel_infants_number',
-							'label'       => __( 'Infants', 'tourfic' ),
-							'type'        => 'number',
-							'field_width' => 33,
+							'attributes'  => array(
+								'min' => '0',
+							),
+							'field_width' => 50,
 						),
 					),
 				),
@@ -479,8 +480,49 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
             ) );
         }
 
+        /*
+         * Room adults, children, infants fields update on room change
+         * @since 2.9.26
+         */
+        public function tf_update_room_fields() {
+            $response = array(
+                'adults' => 0,
+                'children' => 0,
+            );
 
+	        $hotel_id = isset( $_POST['hotel_id'] ) ? $_POST['hotel_id'] : '';
+	        $room_id = isset( $_POST['room_id'] ) ? $_POST['room_id'] : '';
 
+	        if ( ! empty( $hotel_id ) && ! empty( $room_id ) ) {
+
+		        $meta  = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
+		        $rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+		        if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
+			        $tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+				        return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+			        }, $rooms );
+			        $rooms                = unserialize( $tf_hotel_rooms_value );
+		        }
+
+		        if ( ! empty( $rooms ) ) {
+			        foreach ( $rooms as $room ) {
+                        if ( $room['unique_id'] == $room_id ) {
+                            $response['adults']   = $room['adult'];
+                            $response['children'] = $room['child'];
+                        }
+			        }
+		        }
+
+                wp_send_json_success( $response );
+
+            } else {
+
+                wp_send_json_error( array(
+                    'message' => __( 'Something went wrong!', 'tourfic' ),
+                ) );
+
+            }
+        }
 
 	}
 }

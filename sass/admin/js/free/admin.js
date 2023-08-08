@@ -304,23 +304,27 @@
         * Room adults, children, infants fields update on room change
         * Author @Foysal
         */
-        $(document).on('change', '[name="tf_booking_fields[tf_available_rooms]', function(e) {
+        $(document).on('change', '[name="tf_booking_fields[tf_available_rooms]"]', function(e) {
             e.preventDefault();
 
-            var room_id = $('[name="tf_booking_fields[tf_available_rooms]"]').val();
+            let hotel_id = $('[name="tf_booking_fields[tf_available_hotels]"]').val();
+            let room_id = $('[name="tf_booking_fields[tf_available_rooms]"]').val();
+
+            console.log('hotel_id: ', hotel_id);
+            console.log('room_id: ', room_id);
 
             if( room_id.length > 0 ) {
                 jQuery.ajax({
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_check_available_room',
+                        action: 'tf_update_room_fields',
+                        hotel_id: hotel_id,
                         room_id: room_id,
                     },
                     success: function (response) {
-                        $('[name="tf_booking_fields[tf_adults]"]').val(response.data.adults);
-                        $('[name="tf_booking_fields[tf_children]"]').val(response.data.children);
-                        $('[name="tf_booking_fields[tf_infants]"]').val(response.data.infants);
+                        $('[name="tf_booking_fields[tf_hotel_adults_number]"]').val(response.data.adults).attr('max', response.data.adults);
+                        $('[name="tf_booking_fields[tf_hotel_children_number]"]').val(response.data.children).attr('max', response.data.children);
                     }
                 });
             }
