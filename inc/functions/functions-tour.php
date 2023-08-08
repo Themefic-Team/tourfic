@@ -1063,10 +1063,13 @@ function tf_single_tour_booking_form( $post_id ) {
                     <div class="tf-booking-tabs">
                         <div class="tf-booking-tab-menu">
                             <ul>
+                            <?php 
+                            if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
                                 <li class="tf-booking-step tf-booking-step-1 active">
                                     <i class="ri-price-tag-3-line"></i> <?php echo __("Tour extra","tourfic"); ?>
                                 </li>
-                                <li class="tf-booking-step tf-booking-step-2">
+                            <?php } ?>
+                                <li class="tf-booking-step tf-booking-step-2 <?php echo empty($tour_extras) ? esc_attr( 'active' ) : ''; ?> ">
                                     <i class="ri-group-line"></i> <?php echo __("Traveler details","tourfic"); ?>
                                 </li>
                             </ul>
@@ -1082,10 +1085,12 @@ function tf_single_tour_booking_form( $post_id ) {
                         </div>
                     </div>
                     <div class="tf-booking-content-summery">
+                        <?php 
+                        if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
                         <div class="tf-booking-content show tf-booking-content-1">
                             <p><?php echo __("Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural","tourfic"); ?></p>
                             <div class="tf-booking-content-extra">
-                                <?php if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) { 
+                                <?php
                                 if((!empty($tour_extras[0]['title']) && !empty($tour_extras[0]['desc']) && !empty($tour_extras[0]['price'])) || !empty($tour_extras[1]['title']) && !empty($tour_extras[1]['desc']) && !empty($tour_extras[1]['price'])){  
                                 ?>
                                 <?php foreach( $tour_extras as $extrakey=>$tour_extra ){ 
@@ -1105,14 +1110,15 @@ function tf_single_tour_booking_form( $post_id ) {
                                     </label>
                                 </div>
                                 <?php } } ?>
-                                <?php } } ?>
+                                <?php } ?>
                                 
                             </div>
                             <div class="tf-control-pagination">
                                 <a href="#" class="tf-next-control tf-tabs-control" data-step="2"><?php echo __("Continue", "tourfic"); ?></a>
                             </div>
                         </div>
-                        <div class="tf-booking-content tf-booking-content-2">
+                        <?php } ?>
+                        <div class="tf-booking-content tf-booking-content-2 <?php echo empty($tour_extras) ? esc_attr( 'show' ) : ''; ?>">
                             <p><?php echo __("All of your information will be confidential and the reason of this is for your privacy purpose","tourfic"); ?></p>
                             <div class="tf-booking-content-traveller">
                                 <div class="tf-traveller-info-box"></div>
@@ -1129,7 +1135,10 @@ function tf_single_tour_booking_form( $post_id ) {
                             </div>
                             <?php } ?>
                             <div class="tf-control-pagination">
+                                <?php 
+                                if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
                                 <a href="#" class="tf-back-control tf-step-back" data-step="1"><i class="fa fa-angle-left"></i><?php echo __("Back", "tourfic"); ?></a>
+                                <?php } ?>
                                 <a href="#" class="tf-next-control tf-tabs-control" data-step="2"><?php echo __("Continue", "tourfic"); ?></a>
                             </div>
                         </div>
