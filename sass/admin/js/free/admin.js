@@ -242,9 +242,6 @@
             var to = $('[name="tf_booking_fields[tf_hotel_date][to]"]').val();
 
             if( from.length > 0 && to.length > 0 ) {
-
-                $("#tf-booking-status-loader").addClass('show');
-
                 jQuery.ajax({
                     type: 'post',
                     url: tf_admin_params.ajax_url,
@@ -253,20 +250,83 @@
                         from: from,
                         to: to,
                     },
-                    success: function (data) {
-                        //rerender the select2 field tf_booking_fields[tf_available_hotels]
+                    success: function (response) {
+                        console.log(response.data.hotels)
                         var select2 = $('[name="tf_booking_fields[tf_available_hotels]"]');
                         select2.empty();
                         select2.append('<option value="">'+tf_admin_params.select_hotel+'</option>');
-                        $.each(data, function(key, value) {
+                        $.each(response.data.hotels, function(key, value) {
                             select2.append('<option value="'+key+'">'+value+'</option>');
                         });
                         select2.select2();
-                        $("#tf-booking-status-loader").removeClass('show');
+                        //select the first option
+                        select2.val(select2.find('option:eq(1)').val()).trigger('change');
                     }
                 });
             }
         });
+
+        /*
+        * Room filter on hotel change
+        * Author @Foysal
+        */
+        $(document).on('change', '[name="tf_booking_fields[tf_available_hotels]"]', function(e) {
+            e.preventDefault();
+
+            var hotel_id = $('[name="tf_booking_fields[tf_available_hotels]"]').val();
+
+            if( hotel_id.length > 0 ) {
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_check_available_room',
+                        hotel_id: hotel_id,
+                    },
+                    success: function (response) {
+                        var select2 = $('[name="tf_booking_fields[tf_available_rooms]"]');
+                        //remove disabled attr
+                        select2.removeAttr('disabled');
+                        select2.empty();
+                        select2.append('<option value="">'+tf_admin_params.select_room+'</option>');
+                        $.each(response.data.rooms, function(key, value) {
+                            select2.append('<option value="'+key+'">'+value+'</option>');
+                        });
+                        select2.select2();
+                        //auto select the first option
+                        select2.val(select2.find('option:eq(1)').val()).trigger('change');
+                    }
+                });
+            }
+        });
+
+        /*
+        * Room adults, children, infants fields update on room change
+        * Author @Foysal
+        */
+        $(document).on('change', '[name="tf_booking_fields[tf_available_rooms]', function(e) {
+            e.preventDefault();
+
+            var room_id = $('[name="tf_booking_fields[tf_available_rooms]"]').val();
+
+            if( room_id.length > 0 ) {
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_check_available_room',
+                        room_id: room_id,
+                    },
+                    success: function (response) {
+                        $('[name="tf_booking_fields[tf_adults]"]').val(response.data.adults);
+                        $('[name="tf_booking_fields[tf_children]"]').val(response.data.children);
+                        $('[name="tf_booking_fields[tf_infants]"]').val(response.data.infants);
+                    }
+                });
+            }
+        });
+
+
     });
 
 })(jQuery);
