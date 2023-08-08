@@ -3030,7 +3030,8 @@ function tf_tour_booking_popup_callback() {
                 }
             }
         }
-
+        $traveller_info_fields = !empty(tfopt( 'without-payment-field' )) ? tfopt( 'without-payment-field' ) : '';
+        tf_var_dump($traveller_info_fields);
         $response['traveller_info']  = '';
         $response['traveller_summery']  = '';
         for($traveller_in = 1; $traveller_in<=$total_people; $traveller_in++){
