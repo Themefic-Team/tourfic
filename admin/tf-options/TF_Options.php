@@ -34,6 +34,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 
 			//enqueue scripts
 			add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_admin_enqueue_scripts' ), 9 );
+			add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_admin_dequeue_scripts' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'tf_options_wp_enqueue_scripts' ) );
 		}
 
@@ -329,6 +330,18 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				'tf_cancel_orders'  => isset( $tf_cancel_orders ) ? $tf_cancel_orders : '',
 				'tf_chart_enable'   => isset( $tf_chart_enable ) ? $tf_chart_enable : ''
 			) );
+		}
+
+		/**
+		 * Dequeue scripts
+		 */
+		public function tf_options_admin_dequeue_scripts( $screen ) {
+			global $post_type;
+			$tf_options_post_type = array( 'tf_hotel', 'tf_tours', 'tf_apartment' );
+
+			if ( $screen == 'toplevel_page_tf_settings' || in_array( $post_type, $tf_options_post_type ) ) {
+				wp_dequeue_script( 'theplus-admin-js-pro' );
+			}
 		}
 
 		/**
