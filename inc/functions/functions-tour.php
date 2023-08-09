@@ -3030,27 +3030,32 @@ function tf_tour_booking_popup_callback() {
                 }
             }
         }
-        $traveller_info_fields = !empty(tfopt( 'without-payment-field' )) ? tfopt( 'without-payment-field' ) : '';
-        tf_var_dump($traveller_info_fields);
+        $traveller_info_fields = !empty(tfopt( 'without-payment-field' )) ? tf_data_types(tfopt( 'without-payment-field' )) : '';
+        tf_var_dump($traveller_info_fields); exit();
         $response['traveller_info']  = '';
         $response['traveller_summery']  = '';
         for($traveller_in = 1; $traveller_in<=$total_people; $traveller_in++){
             $response['traveller_info'] .= '<div class="tf-single-tour-traveller">
                 <h4>'.sprintf( __( 'Traveler ', 'tourfic' )) .$traveller_in.'</h4>
-                <div class="traveller-info">
-                    <div class="traveller-single-info">
-                        <label for="fullname'.$traveller_in.'">'.sprintf( __( 'Full Name', 'tourfic' )).'</label>
-                        <input type="text" id="fullname'.$traveller_in.'">
-                    </div>
-                    <div class="traveller-single-info">
-                        <label for="dob'.$traveller_in.'">'.sprintf( __( 'Date of birth', 'tourfic' )).'</label>
-                        <input type="date" id="dob'.$traveller_in.'">
-                    </div>
-                    <div class="traveller-single-info">
-                        <label for="nid'.$traveller_in.'">'.sprintf( __( 'NID', 'tourfic' )).'</label>
-                        <input type="text" id="nid'.$traveller_in.'">
-                    </div>
-                </div>
+                <div class="traveller-info">';
+                foreach($traveller_info_fields as $field){
+                    if("text"==$field['reg-fields-type'] || "email"==$field['reg-fields-type'] || "date"==$field['reg-fields-type']){
+                        $response['traveller_info'] .='
+                        <div class="traveller-single-info">
+                            <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
+                            <input type="'.$field['reg-fields-type'].'" id="'.$field['reg-field-name'].$traveller_in.'">
+                        </div>';
+                    }
+                    if("textarea"==$field['reg-fields-type']){
+                        $response['traveller_info'] .='
+                        <div class="traveller-single-info">
+                            <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
+                            <textarea id="'.$field['reg-field-name'].$traveller_in.'"></textarea>
+                        </div>';
+                    }
+                }
+                   
+                $response['traveller_info'] .='</div>
             </div>';
         }
 

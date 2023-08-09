@@ -823,10 +823,11 @@ div#tf-contact-info {
                             line-height: 20px !important;
                         }
                         .traveller-info{
-                            display: flex;
-                            justify-content: space-between;
+                            display: grid;
+                            grid-template-columns: repeat(3, 1fr);
+                            gap: 10px;
                             .traveller-single-info{
-                                width: 32%;
+                                width: 100%;
                                 label{
                                     color: #CCCED1;
                                     font-family: inherit;
