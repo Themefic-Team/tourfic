@@ -3031,7 +3031,7 @@ function tf_tour_booking_popup_callback() {
             }
         }
         $traveller_info_fields = !empty(tfopt( 'without-payment-field' )) ? tf_data_types(tfopt( 'without-payment-field' )) : '';
-        tf_var_dump($traveller_info_fields); exit();
+        // tf_var_dump($traveller_info_fields); exit();
         $response['traveller_info']  = '';
         $response['traveller_summery']  = '';
         for($traveller_in = 1; $traveller_in<=$total_people; $traveller_in++){
@@ -3051,6 +3051,51 @@ function tf_tour_booking_popup_callback() {
                         <div class="traveller-single-info">
                             <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
                             <textarea id="'.$field['reg-field-name'].$traveller_in.'"></textarea>
+                        </div>';
+                    }
+                    if("select"==$field['reg-fields-type'] && !empty($field['reg-options'])){
+                        $response['traveller_info'] .='
+                        <div class="traveller-single-info">
+                            <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
+                            <select id="'.$field['reg-field-name'].$traveller_in.'"><option value="">'.sprintf( __( 'Select One', 'tourfic' )).'</option>';
+                            foreach($field['reg-options'] as $sfield){
+                                if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
+                                    $response['traveller_info'] .='<option value="'.$sfield['option-value'].'">'.$sfield['option-label'].'</option>';
+                                }
+                            }
+                            $response['traveller_info'] .='</select>
+                        </div>';
+                    }
+                    if("checkbox"==$field['reg-fields-type'] && !empty($field['reg-options'])){
+                        $response['traveller_info'] .='
+                        <div class="traveller-single-info">
+                        <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
+                        ';
+                            foreach($field['reg-options'] as $sfield){
+                                if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
+                                    $response['traveller_info'] .='
+                                    <div class="tf-single-checkbox">
+                                    <input type="checkbox" id="'.$sfield['option-value'].$traveller_in.'" value="'.$sfield['option-value'].'" />
+                                    <label for="'.$sfield['option-value'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$sfield['option-label']).'</label></div>';
+                                }
+                            }
+                            $response['traveller_info'] .='
+                        </div>';
+                    }
+                    if("radio"==$field['reg-fields-type'] && !empty($field['reg-options'])){
+                        $response['traveller_info'] .='
+                        <div class="traveller-single-info">
+                        <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
+                        ';
+                            foreach($field['reg-options'] as $sfield){
+                                if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
+                                    $response['traveller_info'] .='
+                                    <div class="tf-single-checkbox">
+                                    <input type="radio" name="'.$field['reg-field-name'].$traveller_in.'" id="'.$sfield['option-value'].$traveller_in.'" value="'.$sfield['option-value'].'" />
+                                    <label for="'.$sfield['option-value'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$sfield['option-label']).'</label></div>';
+                                }
+                            }
+                            $response['traveller_info'] .='
                         </div>';
                     }
                 }
