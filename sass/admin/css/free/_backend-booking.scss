@@ -20,6 +20,16 @@
         @include flexbox();
         @include flex-wrap(wrap);
         @include justify-content(space-between);
+
+        .tf-fieldset{
+
+            .error-input{
+                border-color: #b30000;
+            }
+            .text-danger {
+                color: #b30000;
+            }
+        }
     }
 }
 
