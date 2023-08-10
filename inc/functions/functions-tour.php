@@ -1121,12 +1121,24 @@ function tf_single_tour_booking_form( $post_id ) {
                                             <input type="text" name="tf_phone" id="tf_phone">
                                         </div>
                                         <div class="traveller-single-info">
-                                            <label for="tf_address"><?php echo __("Address","tourfic"); ?></label>
+                                            <label for="tf_country"><?php echo __("Country","tourfic"); ?></label>
+                                            <input type="text" name="tf_country" id="tf_country">
+                                        </div>
+                                        <div class="traveller-single-info">
+                                            <label for="tf_address"><?php echo __("Street address","tourfic"); ?></label>
                                             <input type="text" name="tf_address" id="tf_address">
                                         </div>
                                         <div class="traveller-single-info">
-                                            <label for="tf_note"><?php echo __("Note","tourfic"); ?></label>
-                                            <input type="text" name="tf_note" id="tf_note">
+                                            <label for="tf_city"><?php echo __("Town / City","tourfic"); ?></label>
+                                            <input type="text" name="tf_city" id="tf_city">
+                                        </div>
+                                        <div class="traveller-single-info">
+                                            <label for="tf_state"><?php echo __("State / County","tourfic"); ?></label>
+                                            <input type="text" name="tf_state" id="tf_state">
+                                        </div>
+                                        <div class="traveller-single-info">
+                                            <label for="tf_zipcode"><?php echo __("Postcode / ZIP","tourfic"); ?></label>
+                                            <input type="text" name="tf_zipcode" id="tf_zipcode">
                                         </div>
                                     </div>
                                 </div>
