@@ -874,7 +874,7 @@ if ( ! function_exists( 'tf_apartment_order_single_row' ) ) {
 				?>
             </td>
             <td>
-                <?php
+				<?php
 				// Get order item metas
 				foreach ( $order->get_items() as $item_key => $item_values ) {
 
@@ -976,4 +976,78 @@ if ( ! function_exists( 'tf_custom_query_var_get_orders' ) ) {
 	}
 
 	add_filter( 'woocommerce_order_data_store_cpt_get_orders_query', 'tf_custom_query_var_get_orders', 10, 2 );
+}
+
+/*
+ * TF set order
+ * @author Foysal
+ * @since 2.9.26
+ */
+if ( ! function_exists( 'tf_set_order' ) ) {
+	function tf_set_order( $order_data ) {
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'tf_order_data';
+		$all_order_ids  = $wpdb->get_col( "SELECT order_id FROM $table_name" );
+		do {
+			$order_id = mt_rand( 10000000, 99999999 );
+		} while ( in_array( $order_id, $all_order_ids ) );
+
+		$defaults = array(
+			'order_id'         => $order_id,
+			'post_id'          => 0,
+			'post_type'        => '',
+			'room_number'      => 0,
+			'check_in'         => '',
+			'check_out'        => '',
+			'billing_details'  => '',
+			'shipping_details' => '',
+			'order_details'    => '',
+			'customer_id'      => 1,
+			'payment_method'   => 'cod',
+			'status'           => 'processing',
+			'order_date'       => date( 'Y-m-d H:i:s' ),
+		);
+
+		$order_data = wp_parse_args( $order_data, $defaults );
+
+		$wpdb->query(
+			$wpdb->prepare(
+				"INSERT INTO $table_name
+				( order_id, post_id, post_type, room_number, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
+				VALUES ( %d, %d, %s, %d, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
+				array(
+					$order_data['order_id'],
+					sanitize_key( $order_data['post_id'] ),
+					$order_data['post_type'],
+					$order_data['room_number'],
+					$order_data['check_in'],
+					$order_data['check_out'],
+					json_encode( $order_data['billing_details'] ),
+					json_encode( $order_data['shipping_details'] ),
+					json_encode( $order_data['order_details'] ),
+					$order_data['customer_id'],
+					$order_data['payment_method'],
+					$order_data['status'],
+					$order_data['order_date']
+				)
+			)
+		);
+
+        return $order_id;
+	}
+}
+
+/*
+ * TF get all order id
+ * @author Foysal
+ * @since 2.9.26
+ */
+if ( ! function_exists( 'tf_get_all_order_id' ) ) {
+	function tf_get_all_order_id() {
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'tf_order_data';
+		$order_ids  = $wpdb->get_col( "SELECT order_id FROM $table_name" );
+
+		return $order_ids;
+	}
 }

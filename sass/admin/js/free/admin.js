@@ -250,8 +250,10 @@
                         from: from,
                         to: to,
                     },
+                    beforeSend: function () {
+                        $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');
+                    },
                     success: function (response) {
-                        console.log(response.data.hotels)
                         var select2 = $('[name="tf_available_hotels"]');
                         select2.empty();
                         select2.append('<option value="">' + tf_admin_params.select_hotel + '</option>');
@@ -261,6 +263,7 @@
                         select2.select2();
                         //select the first option
                         select2.val(select2.find('option:eq(1)').val()).trigger('change');
+                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');
                     }
                 });
             }
@@ -283,6 +286,9 @@
                         action: 'tf_check_available_room',
                         hotel_id: hotel_id,
                     },
+                    beforeSend: function () {
+                        $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');
+                    },
                     success: function (response) {
                         var select2 = $('[name="tf_available_rooms"]');
                         //remove disabled attr
@@ -295,6 +301,7 @@
                         select2.select2();
                         //auto select the first option
                         select2.val(select2.find('option:eq(1)').val()).trigger('change');
+                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');
                     }
                 });
             }
@@ -309,6 +316,7 @@
 
             let hotel_id = $('[name="tf_available_hotels"]').val();
             let room_id = $('[name="tf_available_rooms"]').val();
+            console.log('room_id', room_id)
 
             if (room_id.length > 0) {
                 jQuery.ajax({
@@ -319,10 +327,15 @@
                         hotel_id: hotel_id,
                         room_id: room_id,
                     },
+                    beforeSend: function () {
+                        $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');
+                    },
                     success: function (response) {
                         $('[name="tf_hotel_rooms_number"]').val(response.data.rooms).attr('max', response.data.rooms);
-                        $('[name="tf_hotel_adults_number"]').val(response.data.adults).attr('max', response.data.adults);
-                        $('[name="tf_hotel_children_number"]').val(response.data.children).attr('max', response.data.children);
+                        $('[name="tf_hotel_adults_number"]').val(response.data.adults).attr('max', response.data.adults * response.data.rooms);
+                        $('[name="tf_hotel_children_number"]').val(response.data.children).attr('max', response.data.children * response.data.rooms);
+
+                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');
                     }
                 });
             }
@@ -339,7 +352,7 @@
             let form = btn.closest('form.tf-backend-hotel-booking');
             let formData = new FormData(form[0]);
             formData.append('action', 'tf_backend_hotel_booking');
-            let requiredFields = ['tf_hotel_booked_by', 'tf_customer_first_name', 'tf_customer_last_name', 'tf_customer_email', 'tf_customer_phone', 'tf_customer_address', 'tf_customer_city', 'tf_customer_state', 'tf_customer_zip', 'tf_hotel_date[from]', 'tf_hotel_date[to]', 'tf_available_hotels', 'tf_available_rooms', 'tf_hotel_rooms_number', 'tf_hotel_adults_number'];
+            let requiredFields = ['tf_hotel_booked_by', 'tf_customer_first_name', 'tf_customer_last_name', 'tf_customer_email', 'tf_customer_phone', 'tf_customer_country', 'tf_customer_address', 'tf_customer_city', 'tf_customer_state', 'tf_customer_zip', 'tf_hotel_date[from]', 'tf_hotel_date[to]', 'tf_available_hotels', 'tf_available_rooms', 'tf_hotel_rooms_number', 'tf_hotel_adults_number'];
 
             $.ajax({
                 type: 'post',
@@ -354,14 +367,16 @@
                     const obj = JSON.parse(response);
                     if (!obj.success) {
                         if (obj.message) {
-                            // Swal.fire(
-                            //     'Error!',
-                            //     obj.message,
-                            //     'error'
-                            // )
+                            Swal.fire(
+                                'Error!',
+                                obj.message,
+                                'error'
+                            )
                             form.find('input').removeClass('error-input');
+                            form.find('select').removeClass('error-input');
                             form.find('textarea').removeClass('error-input');
                             form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
+                            form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
                             form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
                         } else {
 
@@ -369,13 +384,19 @@
                                 const errorField = obj['fieldErrors'][requiredField + '_error'];
 
                                 form.find('[name="' + requiredField + '"]').removeClass('error-input');
-                                form.find('[name="' + requiredField + '"]').closest('.tf-fieldset').find('small.text-danger').remove();
+                                if (requiredField === 'tf_hotel_date[from]') {
+                                    form.find('[name="' + requiredField + '"]').closest('.tf-date-from').find('small.text-danger').remove();
+                                } else if (requiredField === 'tf_hotel_date[to]') {
+                                    form.find('[name="' + requiredField + '"]').closest('.tf-date-to').find('small.text-danger').remove();
+                                } else {
+                                    form.find('[name="' + requiredField + '"]').closest('.tf-fieldset').find('small.text-danger').remove();
+                                }
                                 if (errorField) {
                                     form.find('[name="' + requiredField + '"]').addClass('error-input');
                                     if (requiredField === 'tf_hotel_date[from]') {
-                                        form.find('[name="' + requiredField + '"]').closest('div').append('<small class="text-danger">' + errorField + '</small>');
+                                        form.find('[name="' + requiredField + '"]').closest('.tf-date-from').append('<small class="text-danger">' + errorField + '</small>');
                                     } else if (requiredField === 'tf_hotel_date[to]') {
-                                        form.find('[name="' + requiredField + '"]').closest('div').append('<small class="text-danger">' + errorField + '</small>');
+                                        form.find('[name="' + requiredField + '"]').closest('.tf-date-to').append('<small class="text-danger">' + errorField + '</small>');
                                     } else {
                                         form.find('[name="' + requiredField + '"]').closest('.tf-fieldset').append('<small class="text-danger">' + errorField + '</small>');
                                     }
@@ -383,15 +404,17 @@
                             }
                         }
                     } else {
-                        // Swal.fire(
-                        //     'Success!',
-                        //     obj.message,
-                        //     'success'
-                        // )
+                        Swal.fire(
+                            'Success!',
+                            obj.message,
+                            'success'
+                        )
                         form[0].reset();
                         form.find('input').removeClass('error-input');
+                        form.find('select').removeClass('error-input');
                         form.find('textarea').removeClass('error-input');
                         form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
                         form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
                     }
                     // if (obj.redirect_url) {

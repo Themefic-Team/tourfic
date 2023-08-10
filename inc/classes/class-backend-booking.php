@@ -29,6 +29,8 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
 			add_action( 'wp_ajax_tf_check_available_room', array( $this, 'tf_check_available_room' ) );
 			add_action( 'wp_ajax_tf_update_room_fields', array( $this, 'tf_update_room_fields' ) );
 			add_action( 'wp_ajax_tf_backend_hotel_booking', array( $this, 'tf_backend_hotel_booking' ) );
+
+
 		}
 
 		function tf_hotel_backend_booking_button() {
@@ -120,7 +122,6 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
 							'id'          => 'tf_customer_first_name',
 							'label'       => __( 'First Name', 'tourfic' ),
 							'type'        => 'text',
-							'default'     => '',
 							'placeholder' => __( 'Enter Customer First Name', 'tourfic' ),
 							'field_width' => 50,
 						),
@@ -128,7 +129,6 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
 							'id'          => 'tf_customer_last_name',
 							'label'       => __( 'Last Name', 'tourfic' ),
 							'type'        => 'text',
-							'default'     => '',
 							'placeholder' => __( 'Enter Customer Last Name', 'tourfic' ),
 							'field_width' => 50,
 						),
@@ -136,7 +136,6 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
 							'id'          => 'tf_customer_email',
 							'label'       => __( 'Email', 'tourfic' ),
 							'type'        => 'text',
-							'default'     => '',
 							'placeholder' => __( 'Enter Customer Email', 'tourfic' ),
 							'field_width' => 50,
 						),
@@ -144,31 +143,34 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
 							'id'          => 'tf_customer_phone',
 							'label'       => __( 'Phone', 'tourfic' ),
 							'type'        => 'text',
-							'default'     => '',
 							'placeholder' => __( 'Enter Customer Phone', 'tourfic' ),
 							'field_width' => 50,
+						),
+						array(
+							'id'          => 'tf_customer_country',
+							'label'       => __( 'Country / Region', 'tourfic' ),
+							'type'        => 'text',
+							'placeholder' => __( 'Enter Customer Country', 'tourfic' ),
+							'field_width' => 33.33,
 						),
 						array(
 							'id'          => 'tf_customer_address',
 							'label'       => __( 'Address', 'tourfic' ),
 							'type'        => 'text',
-							'default'     => '',
 							'placeholder' => __( 'Enter Customer Address', 'tourfic' ),
-							'field_width' => 50,
+							'field_width' => 33.33,
 						),
 						array(
 							'id'          => 'tf_customer_address_2',
 							'label'       => __( 'Address 2', 'tourfic' ),
 							'type'        => 'text',
-							'default'     => '',
 							'placeholder' => __( 'Enter Customer Address 2', 'tourfic' ),
-							'field_width' => 50,
+							'field_width' => 33.33,
 						),
 						array(
 							'id'          => 'tf_customer_city',
 							'label'       => __( 'Town / City', 'tourfic' ),
 							'type'        => 'text',
-							'default'     => '',
 							'placeholder' => __( 'Enter Customer City', 'tourfic' ),
 							'field_width' => 33,
 						),
@@ -176,7 +178,6 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
 							'id'          => 'tf_customer_state',
 							'label'       => __( 'State', 'tourfic' ),
 							'type'        => 'text',
-							'default'     => '',
 							'placeholder' => __( 'Enter Customer State', 'tourfic' ),
 							'field_width' => 33,
 						),
@@ -184,7 +185,6 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
 							'id'          => 'tf_customer_zip',
 							'label'       => __( 'Postcode / ZIP', 'tourfic' ),
 							'type'        => 'text',
-							'default'     => '',
 							'placeholder' => __( 'Enter Customer Zip', 'tourfic' ),
 							'field_width' => 33,
 						),
@@ -225,10 +225,14 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
 						array(
 							'id'          => 'tf_hotel_rooms_number',
 							'label'       => __( 'Number of Rooms', 'tourfic' ),
-							'type'        => 'number',
-							'attributes'  => array(
-								'min' => '0',
-							),
+							'type'        => 'select',
+							'options'     => array(
+                                '1' => __( '1 Room', 'tourfic' ),
+                                '2' => __( '2 Rooms', 'tourfic' ),
+                                '3' => __( '3 Rooms', 'tourfic' ),
+                                '4' => __( '4 Rooms', 'tourfic' ),
+                                '5' => __( '5 Rooms', 'tourfic' ),
+                            ),
 							'field_width' => 33.33,
 						),
 						array(
@@ -496,7 +500,12 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
 
 			$field = [];
 			foreach ( $_POST as $key => $value ) {
-				$field[ $key ] = sanitize_text_field( $value );
+				if ( $key === 'tf_hotel_date' ) {
+					$field[ $key ]['from'] = sanitize_text_field( $value['from'] );
+					$field[ $key ]['to']   = sanitize_text_field( $value['to'] );
+				} else {
+					$field[ $key ] = $value;
+				}
 			}
 
 			$required_fields = array(
@@ -505,12 +514,12 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
 				'tf_customer_last_name',
 				'tf_customer_email',
 				'tf_customer_phone',
+				'tf_customer_country',
 				'tf_customer_address',
 				'tf_customer_city',
 				'tf_customer_state',
 				'tf_customer_zip',
-				'tf_hotel_date[from]',
-				'tf_hotel_date[to]',
+				'tf_hotel_date',
 				'tf_available_hotels',
 				'tf_available_rooms',
 				'tf_hotel_rooms_number',
@@ -521,21 +530,196 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
 				$response['message'] = __( 'Sorry, your nonce did not verify.', 'tourfic' );
 			} else {
 				foreach ( $required_fields as $required_field ) {
-                    $response['sfdsd'] = $field;
-					if ( empty( $field[ $required_field ] ) ) {
-						$response['fieldErrors'][ $required_field . '_error' ] = __( 'The field is required', 'tourfic' );
+					if ( $required_field === 'tf_hotel_date' ) {
+						if ( empty( $field[ $required_field ]['from'] ) ) {
+							$response['fieldErrors'][ $required_field . '[from]_error' ] = __( 'The field is required', 'tourfic' );
+						}
+						if ( empty( $field[ $required_field ]['to'] ) ) {
+							$response['fieldErrors'][ $required_field . '[to]_error' ] = __( 'The field is required', 'tourfic' );
+						}
+					} else {
+						if ( empty( $field[ $required_field ] ) ) {
+							$response['fieldErrors'][ $required_field . '_error' ] = __( 'The field is required', 'tourfic' );
+						}
 					}
 				}
-			}
 
-			if ( ! $response['fieldErrors'] ) {
+				if ( ! $response['fieldErrors'] ) {
+					$room_data   = $this->tf_get_room_data( intval( $field['tf_available_hotels'] ), $field['tf_available_rooms'] );
+					$total_price = $this->tf_get_room_total_price( $room_data, $field['tf_hotel_date']['from'], $field['tf_hotel_date']['to'], $field['tf_hotel_rooms_number'], $field['tf_hotel_adults_number'], $field['tf_hotel_children_number'] );
 
+					if ( $field['tf_hotel_rooms_number'] * $room_data['adult'] < $field['tf_hotel_adults_number'] ) {
+						$response['message'] = __( "You can't book more than " . $field['tf_hotel_rooms_number'] * $room_data['adult'] . " adults", 'tourfic' );
+					} elseif ( $field['tf_hotel_rooms_number'] * $room_data['child'] < $field['tf_hotel_children_number'] ) {
+						$response['message'] = __( "You can't book more than " . $field['tf_hotel_rooms_number'] * $room_data['child'] . " children", 'tourfic' );
+					} else {
+						$billing_details  = array(
+							'billing_first_name' => $field['tf_customer_first_name'],
+							'billing_last_name'  => $field['tf_customer_last_name'],
+							'billing_company'    => '',
+							'billing_address_1'  => $field['tf_customer_address'],
+							'billing_address_2'  => $field['tf_customer_address_2'],
+							'billing_city'       => $field['tf_customer_city'],
+							'billing_state'      => $field['tf_customer_state'],
+							'billing_postcode'   => $field['tf_customer_zip'],
+							'billing_country'    => $field['tf_customer_country'],
+							'billing_email'      => $field['tf_customer_email'],
+							'billing_phone'      => $field['tf_customer_phone'],
+						);
+						$shipping_details = array(
+							'shipping_first_name' => $field['tf_customer_first_name'],
+							'shipping_last_name'  => $field['tf_customer_last_name'],
+							'shipping_company'    => '',
+							'shipping_address_1'  => $field['tf_customer_address'],
+							'shipping_address_2'  => $field['tf_customer_address_2'],
+							'shipping_city'       => $field['tf_customer_city'],
+							'shipping_state'      => $field['tf_customer_state'],
+							'shipping_postcode'   => $field['tf_customer_zip'],
+							'shipping_country'    => $field['tf_customer_country'],
+							'shipping_phone'      => $field['tf_customer_phone'],
+						);
+						$order_details    = [
+							'order_by'             => $field['tf_hotel_booked_by'],
+							'room'                 => $field['tf_hotel_rooms_number'],
+							'check_in'             => $field['tf_hotel_date']['from'],
+							'check_out'            => $field['tf_hotel_date']['to'],
+							'room_name'            => $room_data['title'],
+							'adult'                => $field['tf_hotel_adults_number'],
+							'child'                => $field['tf_hotel_children_number'],
+							'children_ages'        => '',
+							'airport_service_type' => '',
+							'airport_service_fee'  => '',
+							'total_price'          => $total_price,
+							'due_price'            => '',
+						];
+
+						$order_data = array(
+							'post_id'          => intval( $field['tf_available_hotels'] ),
+							'post_type'        => 'hotel',
+							'room_number'      => intval( $field['tf_hotel_rooms_number'] ),
+							'check_in'         => $field['tf_hotel_date']['from'],
+							'check_out'        => $field['tf_hotel_date']['to'],
+							'billing_details'  => $billing_details,
+							'shipping_details' => $shipping_details,
+							'order_details'    => $order_details,
+							'payment_method'   => 'cod',
+							'status'           => 'processing',
+							'order_date'       => date( 'Y-m-d H:i:s' ),
+						);
+
+						tf_set_order( $order_data );
+
+						$response['success'] = true;
+						$response['message'] = __( 'Your booking has been successfully submitted.', 'tourfic' );
+					}
+				}
 			}
 
 			echo json_encode( $response );
 			die();
 		}
 
+		/*
+		 * Room data from room and hotel id
+		 * @since 2.9.26
+		 */
+		public function tf_get_room_data( $hotel_id, $room_id ) {
+
+			if ( $hotel_id && $room_id ) {
+				$meta = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
+
+				$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+				if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
+					$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+						return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+					}, $rooms );
+					$rooms                = unserialize( $tf_hotel_rooms_value );
+				}
+
+				if ( ! empty( $rooms ) ) {
+					foreach ( $rooms as $room ) {
+						if ( $room['unique_id'] == $room_id ) {
+							return $room;
+						}
+					}
+				}
+			}
+
+		}
+
+		/*
+		 * Calculate room total price
+		 * @since 2.9.26
+		 */
+		public function tf_get_room_total_price( $room_data, $check_in, $check_out, $room_selected, $adult, $child ) {
+			$avail_by_date = ! empty( $room_data['avil_by_date'] ) ? $room_data['avil_by_date'] : '';
+			if ( $avail_by_date ) {
+				$repeat_by_date = ! empty( $room_data['repeat_by_date'] ) ? $room_data['repeat_by_date'] : [];
+			}
+			$pricing_by      = $room_data['pricing-by'];
+			$price_multi_day = ! empty( $room_data['price_multi_day'] ) ? $room_data['price_multi_day'] : false;
+
+			# Calculate night number
+			if ( $check_in && $check_out ) {
+				$check_in_stt   = strtotime( $check_in . ' +1 day' );
+				$check_out_stt  = strtotime( $check_out );
+				$day_difference = round( ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1 );
+			}
+
+			/**
+			 * Calculate Pricing
+			 */
+			if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+
+				// Check availability by date option
+				$period = new DatePeriod(
+					new DateTime( $check_in . ' 00:00' ),
+					new DateInterval( 'P1D' ),
+					new DateTime( $check_out . ' 00:00' )
+				);
+
+				$total_price = 0;
+				foreach ( $period as $date ) {
+
+					$available_rooms = array_values( array_filter( $repeat_by_date, function ( $date_availability ) use ( $date ) {
+						$date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
+						$date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
+
+						return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
+					} ) );
+
+					if ( is_iterable( $available_rooms ) && count( $available_rooms ) >= 1 ) {
+						$room_price  = ! empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $room_data['price'];
+						$adult_price = ! empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $room_data['adult_price'];
+						$child_price = ! empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $room_data['child_price'];
+						$total_price += $pricing_by == '1' ? $room_price : ( ( $adult_price * $adult ) + ( $child_price * $child ) );
+					};
+
+				}
+
+				$price_total = $total_price * $room_selected;
+			} else {
+
+				if ( $pricing_by == '1' ) {
+					$total_price = $room_data['price'];
+				} elseif ( $pricing_by == '2' ) {
+					$adult_price = $room_data['adult_price'];
+					$adult_price = $adult_price * $adult;
+					$child_price = $room_data['child_price'];
+					$child_price = $child_price * $child;
+					$total_price = $adult_price + $child_price;
+				}
+
+				# Multiply pricing by night number
+				if ( ! empty( $day_difference ) && $price_multi_day == true ) {
+					$price_total = $total_price * $room_selected * $day_difference;
+				} else {
+					$price_total = $total_price * $room_selected;
+				}
+			}
+
+			return $price_total;
+		}
 	}
 }
 
