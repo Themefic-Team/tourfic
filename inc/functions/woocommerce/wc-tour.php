@@ -44,7 +44,10 @@ function tf_tours_booking_function() {
 	$tour_time    = isset( $_POST['check-in-time'] ) ? sanitize_text_field( $_POST['check-in-time'] ) : null;
 	$make_deposit = ! empty( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
 
+	// Visitor Details
+	$tf_visitor_details = !empty($_POST['traveller']) ? $_POST['traveller'] : "";
 
+	tf_var_dump($tf_visitor_details); exit();
 	/**
 	 * If fixed is selected but pro is not activated
 	 *

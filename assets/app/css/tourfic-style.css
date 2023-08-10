@@ -4704,16 +4704,6 @@ div#tf-contact-info {
   text-transform: uppercase;
   font-size: 13px;
 }
-.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-traveller .traveller-info .traveller-single-info textarea,
-.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller .traveller-info .traveller-single-info textarea {
-  border-radius: 4px;
-  border: 0.5px solid #666D74;
-  background: #FCFDFF;
-  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-  height: 70px;
-  width: 100%;
-  padding: 0px 5px;
-}
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content.show {
   display: block;
 }
@@ -4871,6 +4861,22 @@ div#tf-contact-info {
   line-height: 20px;
   width: 300px;
   text-align: center;
+}
+.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination button {
+  border-radius: 4px;
+  background: #003C7A;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  padding: 10px 0px;
+  color: #FCFDFF;
+  font-family: inherit;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  width: 300px;
+  text-align: center;
+  border: 0px solid;
+  cursor: pointer;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination.show {
   display: flex;

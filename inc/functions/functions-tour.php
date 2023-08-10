@@ -1014,40 +1014,7 @@ function tf_single_tour_booking_form( $post_id ) {
                 </div>
             <?php } ?>
         </div>
-        <?php if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) { 
-        if((!empty($tour_extras[0]['title']) && !empty($tour_extras[0]['desc']) && !empty($tour_extras[0]['price'])) || !empty($tour_extras[1]['title']) && !empty($tour_extras[1]['desc']) && !empty($tour_extras[1]['price'])){  
-        ?>
-        <div class="tf-tour-extra-area tf-mt-30">
-            <div class="tf-form-title tf-tour-extra">
-                <p><?php _e("Tour Extra","tourfic"); ?>
-                <i class="fa-solid fa-plus"></i>
-                <i class="fa-solid fa-minus"></i>
-                </p>
-            </div>
-            <div class="tf-tour-extra-box">
-            <?php foreach( $tour_extras as $extrakey=>$tour_extra ){ 
-                if(!empty($tour_extra['title']) && !empty($tour_extra['desc']) && !empty($tour_extra['price'])){
-                $tour_extra_pricetype = !empty($tour_extra['price_type']) ? $tour_extra['price_type'] : 'fixed';
-            ?>
-            <div class="tf-tour-extra tf-mt-8">
-                <div class="tf-tour-extra-price tf-flex tf-flex-align-top tf-flex-space-bttn tour-extra-single">
-                    <div class="tf-tour-extra-input tf-flex tf-flex-align-top tf-flex-gap-8">
-                        <input type="checkbox" value="<?php echo esc_attr( $extrakey ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>">
-                        <p><?php _e( $tour_extra['title'] ); ?> <?php echo $tour_extra_pricetype=="fixed" ? esc_html( "(Fixed Price)" ) : esc_html( "(Per Person Price)" ); ?></p>
-                    </div>
-                    <?php echo wc_price( $tour_extra['price'] ); ?>
-                </div>
-                <?php if ($tour_extra['desc']) { ?>
-                <div class="tf-tour-extra-details tf-mt-8">
-                <p><?php echo esc_html( $tour_extra['desc'] ); ?></p>
-                </div>
-                <?php } ?>
-            </div>
-            <?php } } ?>
-            </div>
-        </div>
         
-        <?php } } ?>
         <div class="tf-tours-booking-btn tf-booking-bttns tf-mt-30">
             <div class="tf-btn ">
                 <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e('Book Now', 'tourfic'); ?></a>
@@ -1101,7 +1068,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                     if(!empty($tour_extra['title']) && !empty($tour_extra['desc']) && !empty($tour_extra['price'])){
                                     $tour_extra_pricetype = !empty($tour_extra['price_type']) ? $tour_extra['price_type'] : 'fixed';
                                 ?>
-                                <div class="tf-single-tour-extra">
+                                <div class="tf-single-tour-extra tour-extra-single">
                                     <label for="extra<?php echo esc_attr( $extrakey ); ?>">
                                         <div class="tf-extra-check-box">
                                         <input type="checkbox" value="<?php echo esc_attr( $extrakey ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>" id="extra<?php echo esc_attr( $extrakey ); ?>" name="tf-tour-extra">
@@ -1139,8 +1106,6 @@ function tf_single_tour_booking_form( $post_id ) {
                         </div>
                     </div>
                     <div class="tf-booking-pagination">
-                        
-                    
                         <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] )) { 
                             $tf_deposit_amount =  $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%';
                             ?>
@@ -1164,7 +1129,7 @@ function tf_single_tour_booking_form( $post_id ) {
                             if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
                             <a href="#" class="tf-back-control tf-step-back" data-step="1"><i class="fa fa-angle-left"></i><?php echo __("Back", "tourfic"); ?></a>
                             <?php } ?>
-                            <a href="#" class="tf-next-control tf-tabs-control" data-step="2"><?php echo __("Continue", "tourfic"); ?></a>
+                            <button type="submit"><?php echo __("Continue", "tourfic"); ?></button>
                         </div>
                     </div>
                 </div>
@@ -3010,11 +2975,34 @@ function tf_tour_booking_popup_callback() {
 
     if ( ! array_key_exists( 'errors', $response ) || count( $response['errors'] ) == 0 ) {
 
+
+        # Discount informations
+		$discount_type    = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+		$discounted_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
+
+		# Calculate discounted price
+		if ( $discount_type == 'percent' ) {
+
+			$adult_price    = floatval(preg_replace('/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $discounted_price ), 2 )));
+			$children_price = floatval(preg_replace('/[^\d.]/', '', number_format( $children_price - ( ( $children_price / 100 ) * $discounted_price ), 2 )));
+			$infant_price   = floatval(preg_replace('/[^\d.]/', '', number_format( $infant_price - ( ( $infant_price / 100 ) * $discounted_price ), 2 )));
+			$group_price    = floatval(preg_replace('/[^\d.]/', '', number_format( $group_price - ( ( $group_price / 100 ) * $discounted_price ), 2 )));
+
+		} elseif ( $discount_type == 'fixed' ) {
+
+			$adult_price    = floatval(preg_replace('/[^\d.]/', '', number_format( ( $adult_price - $discounted_price ), 2 )));
+			$children_price = floatval(preg_replace('/[^\d.]/', '', number_format( ( $children_price - $discounted_price ), 2 )));
+			$infant_price   = floatval(preg_replace('/[^\d.]/', '', number_format( ( $infant_price - $discounted_price ), 2 )));
+			$group_price    = floatval(preg_replace('/[^\d.]/', '', number_format( ( $group_price - $discounted_price ), 2 )));
+
+		}
+
+
         # Set pricing based on pricing rule
 		if ( $pricing_rule == 'group' ) {
-			$tf_tours_data_price     = $group_price + $tour_extra_total;
+			$tf_tours_data_price     = $group_price;
 		} else {
-			$tf_tours_data_price     = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price ) + $tour_extra_total;
+			$tf_tours_data_price     = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
 		}
         if(!empty($_POST['deposit']) && $_POST['deposit']=="true"){
             if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] )) { 
@@ -3037,27 +3025,33 @@ function tf_tour_booking_popup_callback() {
         for($traveller_in = 1; $traveller_in<=$total_people; $traveller_in++){
             $response['traveller_info'] .= '<div class="tf-single-tour-traveller">
                 <h4>'.sprintf( __( 'Traveler ', 'tourfic' )) .$traveller_in.'</h4>
-                <div class="traveller-info">';
+                <div class="traveller-info">
+                <div class="traveller-single-info">
+                    <label for="fullname'.$traveller_in.'">'.sprintf( __( 'Full Name', 'tourfic' )).'</label>
+                    <input type="text" name="traveller['.$traveller_in.'][fullname]" id="fullname'.$traveller_in.'">
+                </div>
+                <div class="traveller-single-info">
+                    <label for="dob'.$traveller_in.'">'.sprintf( __( 'Date of birth', 'tourfic' )).'</label>
+                    <input type="date" name="traveller['.$traveller_in.'][dob]" id="dob'.$traveller_in.'">
+                </div>
+                <div class="traveller-single-info">
+                    <label for="nid'.$traveller_in.'">'.sprintf( __( 'NID', 'tourfic' )).'</label>
+                    <input type="text" name="traveller['.$traveller_in.'][nid]" id="nid'.$traveller_in.'">
+                </div>
+                ';
                 foreach($traveller_info_fields as $field){
                     if("text"==$field['reg-fields-type'] || "email"==$field['reg-fields-type'] || "date"==$field['reg-fields-type']){
                         $response['traveller_info'] .='
                         <div class="traveller-single-info">
                             <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
-                            <input type="'.$field['reg-fields-type'].'" id="'.$field['reg-field-name'].$traveller_in.'">
-                        </div>';
-                    }
-                    if("textarea"==$field['reg-fields-type']){
-                        $response['traveller_info'] .='
-                        <div class="traveller-single-info">
-                            <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
-                            <textarea id="'.$field['reg-field-name'].$traveller_in.'"></textarea>
+                            <input type="'.$field['reg-fields-type'].'" name="traveller['.$traveller_in.']['.$field['reg-field-name'].']" id="'.$field['reg-field-name'].$traveller_in.'">
                         </div>';
                     }
                     if("select"==$field['reg-fields-type'] && !empty($field['reg-options'])){
                         $response['traveller_info'] .='
                         <div class="traveller-single-info">
                             <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
-                            <select id="'.$field['reg-field-name'].$traveller_in.'"><option value="">'.sprintf( __( 'Select One', 'tourfic' )).'</option>';
+                            <select id="'.$field['reg-field-name'].$traveller_in.'" name="traveller['.$traveller_in.']['.$field['reg-field-name'].']"><option value="">'.sprintf( __( 'Select One', 'tourfic' )).'</option>';
                             foreach($field['reg-options'] as $sfield){
                                 if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
                                     $response['traveller_info'] .='<option value="'.$sfield['option-value'].'">'.$sfield['option-label'].'</option>';
@@ -3075,7 +3069,7 @@ function tf_tour_booking_popup_callback() {
                                 if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
                                     $response['traveller_info'] .='
                                     <div class="tf-single-checkbox">
-                                    <input type="checkbox" id="'.$sfield['option-value'].$traveller_in.'" value="'.$sfield['option-value'].'" />
+                                    <input type="checkbox" name="traveller['.$traveller_in.']['.$field['reg-field-name'].'][]" id="'.$sfield['option-value'].$traveller_in.'" value="'.$sfield['option-value'].'" />
                                     <label for="'.$sfield['option-value'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$sfield['option-label']).'</label></div>';
                                 }
                             }
@@ -3091,7 +3085,7 @@ function tf_tour_booking_popup_callback() {
                                 if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
                                     $response['traveller_info'] .='
                                     <div class="tf-single-checkbox">
-                                    <input type="radio" name="'.$field['reg-field-name'].$traveller_in.'" id="'.$sfield['option-value'].$traveller_in.'" value="'.$sfield['option-value'].'" />
+                                    <input type="radio" name="traveller['.$traveller_in.']['.$field['reg-field-name'].']" id="'.$sfield['option-value'].$traveller_in.'" value="'.$sfield['option-value'].'" />
                                     <label for="'.$sfield['option-value'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$sfield['option-label']).'</label></div>';
                                 }
                             }
@@ -3157,7 +3151,7 @@ function tf_tour_booking_popup_callback() {
             <tfoot>
                 <tr>
                     <th align="left">'.sprintf( __( 'Total', 'tourfic' )).'</th>
-                    <th align="right">'.wc_price($tf_tours_data_price).'</th>
+                    <th align="right">'.wc_price($tf_tours_data_price+$tour_extra_total).'</th>
                 </tr>
             </tfoot>
         </table>';
