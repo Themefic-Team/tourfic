@@ -413,6 +413,7 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 - Compatibility check with WordPress 6.3
 - Compatibility check with WooCommerce 8.0.1
+- Compatibility check with Elementor 3.15.2
 
 = 2.9.24 -  04 August 2023 =
 
