@@ -47,7 +47,7 @@ function tf_tours_booking_function() {
 	// Visitor Details
 	$tf_visitor_details = !empty($_POST['traveller']) ? $_POST['traveller'] : "";
 
-	tf_var_dump($tf_visitor_details); exit();
+	// tf_var_dump($tf_visitor_details); exit();
 	/**
 	 * If fixed is selected but pro is not activated
 	 *

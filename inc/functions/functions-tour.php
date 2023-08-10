@@ -1043,6 +1043,9 @@ function tf_single_tour_booking_form( $post_id ) {
                                     <i class="ri-group-line"></i> <?php echo __("Traveler details","tourfic"); ?>
                                 </li>
                             <?php } ?>
+                                <li class="tf-booking-step tf-booking-step-3">
+                                <i class="ri-calendar-check-line"></i> <?php echo __("Booking Confirmation","tourfic"); ?>
+                                </li>
                             </ul>
                         </div>
                         <div class="tf-booking-times">
@@ -1095,6 +1098,40 @@ function tf_single_tour_booking_form( $post_id ) {
                             </div>
                         </div>
                         <?php } ?>
+                        <div class="tf-booking-content tf-booking-content-3">
+                            <p><?php echo __("All of your information will be confidential and the reason of this is for your privacy purpose","tourfic"); ?></p>
+                            <div class="tf-booking-content-traveller">
+                                <div class="tf-single-tour-traveller">
+                                    <h4><?php echo __("Billing details","tourfic"); ?></h4>
+                                    <div class="traveller-info">
+                                        <div class="traveller-single-info">
+                                            <label for="tf_firstname"><?php echo __("First Name","tourfic"); ?></label>
+                                            <input type="text" name="tf_firstname" id="tf_firstname">
+                                        </div>
+                                        <div class="traveller-single-info">
+                                            <label for="tf_lastname"><?php echo __("Last Name","tourfic"); ?></label>
+                                            <input type="text" name="tf_lastname" id="tf_lastname">
+                                        </div>
+                                        <div class="traveller-single-info">
+                                            <label for="tf_email"><?php echo __("Email","tourfic"); ?></label>
+                                            <input type="email" name="tf_email" id="tf_email">
+                                        </div>
+                                        <div class="traveller-single-info">
+                                            <label for="tf_phone"><?php echo __("Phone","tourfic"); ?></label>
+                                            <input type="text" name="tf_phone" id="tf_phone">
+                                        </div>
+                                        <div class="traveller-single-info">
+                                            <label for="tf_address"><?php echo __("Address","tourfic"); ?></label>
+                                            <input type="text" name="tf_address" id="tf_address">
+                                        </div>
+                                        <div class="traveller-single-info">
+                                            <label for="tf_note"><?php echo __("Note","tourfic"); ?></label>
+                                            <input type="text" name="tf_note" id="tf_note">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="tf-booking-summery" style="<?php echo empty($tour_extras) && empty($traveller_info_coll) ? esc_attr( "width: 100%;" ) : ''; ?>">
                             <div class="tf-booking-fixed-summery">
                                 <h5><?php echo __("Booking summery","tourfic"); ?></h5>
@@ -1128,6 +1165,14 @@ function tf_single_tour_booking_form( $post_id ) {
                             <?php 
                             if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
                             <a href="#" class="tf-back-control tf-step-back" data-step="1"><i class="fa fa-angle-left"></i><?php echo __("Back", "tourfic"); ?></a>
+                            <?php } ?>
+                            <a href="#" class="tf-next-control tf-tabs-control" data-step="3"><?php echo __("Continue", "tourfic"); ?></a>
+                        </div>
+
+                        <div class="tf-control-pagination tf-pagination-content-3">
+                            <?php 
+                            if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
+                            <a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo __("Back", "tourfic"); ?></a>
                             <?php } ?>
                             <button type="submit"><?php echo __("Continue", "tourfic"); ?></button>
                         </div>
