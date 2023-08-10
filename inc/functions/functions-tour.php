@@ -1103,7 +1103,7 @@ function tf_single_tour_booking_form( $post_id ) {
                             <div class="tf-booking-content-traveller">
                                 <div class="tf-single-tour-traveller">
                                     <h4><?php echo __("Billing details","tourfic"); ?></h4>
-                                    <div class="traveller-info">
+                                    <div class="traveller-info billing-details">
                                         <div class="traveller-single-info">
                                             <label for="tf_firstname"><?php echo __("First Name","tourfic"); ?></label>
                                             <input type="text" name="tf_firstname" id="tf_firstname">

@@ -854,6 +854,9 @@ div#tf-contact-info {
                                 }
                             }
                         }
+                        .billing-details{
+                            grid-template-columns: repeat(2, 1fr);
+                        }
                     }
                 }
             }
