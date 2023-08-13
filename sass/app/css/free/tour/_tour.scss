@@ -852,6 +852,10 @@ div#tf-contact-info {
                                     text-transform: uppercase;
                                     font-size: 13px;
                                 }
+                                input[type="checkbox"],
+                                input[type="radio"]{
+                                    margin: 0;
+                                }
                             }
                         }
                         .billing-details{

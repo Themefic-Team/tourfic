@@ -1183,7 +1183,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                 <h4><?php echo sprintf( __( 'Partial payment of %1$s on total', 'tourfic' ), $tf_deposit_amount ); ?></h4>
                             </div>
                         <?php } ?>
-                        <?php if ( function_exists('is_tf_pro') && is_tf_pro() && empty($tour_extras) && empty($is_without_payment) && empty($traveller_info_coll) ){ ?>
+                        <?php if ( empty($tour_extras) && empty($is_without_payment) && empty($traveller_info_coll) ){ ?>
                             <div class="tf-control-pagination show">
                                 <button type="submit"><?php echo __("Continue", "tourfic"); ?></button>
                             </div>

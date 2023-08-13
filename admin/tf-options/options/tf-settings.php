@@ -1024,11 +1024,6 @@ TF_Settings::option( 'tf_settings', array(
 							),
 						),
 						array(
-							'id'    => 'reg-field-placeholder',
-							'type'  => 'text',
-							'label' => __( 'Placeholder', 'tourfic' ),
-						),
-						array(
 							'id'    => 'reg-field-required',
 							'type'  => 'switch',
 							'label' => __( 'Required Field ?', 'tourfic' ),
