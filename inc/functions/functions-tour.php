@@ -1042,10 +1042,14 @@ function tf_single_tour_booking_form( $post_id ) {
                                 <li class="tf-booking-step tf-booking-step-2 <?php echo empty($tour_extras) ? esc_attr( 'active' ) : ''; ?> ">
                                     <i class="ri-group-line"></i> <?php echo __("Traveler details","tourfic"); ?>
                                 </li>
-                            <?php } ?>
+                            <?php } 
+                            $is_without_payment = !empty($meta['disable_payment']) ? $meta['disable_payment'] : '';
+                            if($is_without_payment){
+                            ?>
                                 <li class="tf-booking-step tf-booking-step-3">
                                 <i class="ri-calendar-check-line"></i> <?php echo __("Booking Confirmation","tourfic"); ?>
                                 </li>
+                            <?php } ?>
                             </ul>
                         </div>
                         <div class="tf-booking-times">
@@ -1059,6 +1063,8 @@ function tf_single_tour_booking_form( $post_id ) {
                         </div>
                     </div>
                     <div class="tf-booking-content-summery">
+
+                        <!-- Popup Tour Extra -->
                         <?php 
                         if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
                         <div class="tf-booking-content show tf-booking-content-1">
@@ -1091,14 +1097,20 @@ function tf_single_tour_booking_form( $post_id ) {
                         <?php } 
                         if($traveller_info_coll){
                         ?>
+
+                        <!-- Popup Traveler Info -->
                         <div class="tf-booking-content tf-booking-content-2 <?php echo empty($tour_extras) ? esc_attr( 'show' ) : ''; ?>">
                             <p><?php echo __("All of your information will be confidential and the reason of this is for your privacy purpose","tourfic"); ?></p>
                             <div class="tf-booking-content-traveller">
                                 <div class="tf-traveller-info-box"></div>
                             </div>
                         </div>
-                        <?php } ?>
-                        <div class="tf-booking-content tf-booking-content-3">
+                        <?php } 
+                        if($is_without_payment){
+                        ?>
+
+                        <!-- Popup Booking Confirmation -->
+                        <div class="tf-booking-content tf-booking-content-3 <?php echo empty($tour_extras) && empty($traveller_info_coll) ? esc_attr( 'show' ) : ''; ?>">
                             <p><?php echo __("All of your information will be confidential and the reason of this is for your privacy purpose","tourfic"); ?></p>
                             <div class="tf-booking-content-traveller">
                                 <div class="tf-single-tour-traveller">
@@ -1144,7 +1156,10 @@ function tf_single_tour_booking_form( $post_id ) {
                                 </div>
                             </div>
                         </div>
-                        <div class="tf-booking-summery" style="<?php echo empty($tour_extras) && empty($traveller_info_coll) ? esc_attr( "width: 100%;" ) : ''; ?>">
+                        <?php } ?>
+
+                        <!-- Popup Booking Summery -->
+                        <div class="tf-booking-summery" style="<?php echo empty($tour_extras) && empty($traveller_info_coll) && empty($is_without_payment) ? esc_attr( "width: 100%;" ) : ''; ?>">
                             <div class="tf-booking-fixed-summery">
                                 <h5><?php echo __("Booking summery","tourfic"); ?></h5>
                                 <h4><?php echo get_the_title( $post_id ); ?></h4>
@@ -1154,6 +1169,8 @@ function tf_single_tour_booking_form( $post_id ) {
                             </div>
                         </div>
                     </div>
+
+                    <!-- Popup Footer Control & Partial Payment -->
                     <div class="tf-booking-pagination">
                         <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] )) { 
                             $tf_deposit_amount =  $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%';
@@ -1166,28 +1183,50 @@ function tf_single_tour_booking_form( $post_id ) {
                                 <h4><?php echo sprintf( __( 'Partial payment of %1$s on total', 'tourfic' ), $tf_deposit_amount ); ?></h4>
                             </div>
                         <?php } ?>
+                        <?php if ( function_exists('is_tf_pro') && is_tf_pro() && empty($tour_extras) && empty($is_without_payment) && empty($traveller_info_coll) ){ ?>
+                            <div class="tf-control-pagination show">
+                                <button type="submit"><?php echo __("Continue", "tourfic"); ?></button>
+                            </div>
                         <?php 
-                        if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
+                        }
+                        if ( function_exists('is_tf_pro') && is_tf_pro() && ($tour_extras) ){ ?>
                         <div class="tf-control-pagination show tf-pagination-content-1">
+                            <?php
+                            if( empty($is_without_payment) && empty($traveller_info_coll) ){ ?>
+                                <button type="submit"><?php echo __("Continue", "tourfic"); ?></button>
+                            <?php }else{ ?>
                             <a href="#" class="tf-next-control tf-tabs-control" data-step="2"><?php echo __("Continue", "tourfic"); ?></a>
+                            <?php } ?>
                         </div>
-                        <?php } ?>
-                        
+                        <?php } 
+                        if($traveller_info_coll){ ?>
+
+                        <!-- Popup Traveler Info -->
                         <div class="tf-control-pagination tf-pagination-content-2 <?php echo empty($tour_extras) ? esc_attr( 'show' ) : ''; ?>">
                             <?php 
                             if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
                             <a href="#" class="tf-back-control tf-step-back" data-step="1"><i class="fa fa-angle-left"></i><?php echo __("Back", "tourfic"); ?></a>
-                            <?php } ?>
+                            <?php } 
+                            if($is_without_payment){
+                            ?>
                             <a href="#" class="tf-next-control tf-tabs-control" data-step="3"><?php echo __("Continue", "tourfic"); ?></a>
+                            <?php }else { ?>
+                                <button type="submit"><?php echo __("Continue", "tourfic"); ?></button>
+                            <?php } ?>
                         </div>
+                        <?php } 
+                        if($is_without_payment){
+                        ?>
 
-                        <div class="tf-control-pagination tf-pagination-content-3">
+                        <!-- Popup Booking Confirmation -->
+                        <div class="tf-control-pagination tf-pagination-content-3 <?php echo empty($tour_extras) && empty($traveller_info_coll) ? esc_attr( 'show' ) : ''; ?>">
                             <?php 
-                            if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
+                            if ( function_exists('is_tf_pro') && is_tf_pro() && ($tour_extras || $traveller_info_coll) ) {  ?>
                             <a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo __("Back", "tourfic"); ?></a>
                             <?php } ?>
                             <button type="submit"><?php echo __("Continue", "tourfic"); ?></button>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

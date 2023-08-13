@@ -2042,6 +2042,18 @@
                 $('.tf-control-pagination').hide();
                 $('.tf-pagination-content-' + step).fadeIn(300);
             }
+            if(step>1){
+                let next_step = parseInt(step)+1;
+                $('.tf-booking-step-' + next_step).removeClass("active");
+                $('.tf-booking-step-' + step).addClass("active");
+                $('.tf-booking-step-' + step).removeClass("done");
+                $('.tf-booking-step-' + next_step).removeClass("done");
+
+                $('.tf-booking-content').hide();
+                $('.tf-booking-content-' + step).fadeIn(300);
+                $('.tf-control-pagination').hide();
+                $('.tf-pagination-content-' + step).fadeIn(300);
+            }
         });
 
         // Popup Open

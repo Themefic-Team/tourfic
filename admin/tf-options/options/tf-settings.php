@@ -900,6 +900,144 @@ TF_Settings::option( 'tf_settings', array(
 
 			),
 		),
+		// Without Payment Popup
+		'without_payment_book' => array(
+			'title'  => esc_html__( 'Without Payment', 'tourfic' ),
+			'parent' => 'tour',
+			'icon'   => 'fa fa-cog',
+			'fields' => array(
+				array(
+					'id'    => 'booking_tour_heading',
+					'type'  => 'heading',
+					'label' => __( 'Settings for Without Payment Popup', 'tourfic' ),
+				),
+				array(
+					'id'        => 'disable_traveller_info',
+					'type'      => 'switch',
+					'label'     => __( 'Enable Traveler Info', 'tourfic' ),
+					'subtitle' => __( 'Disable this option, if you want to hide traveler info.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true,
+					'is_pro'       => true,
+				),
+				array(
+					'id'    => 'custom_fields_heading',
+					'type'  => 'heading',
+					'label' => __( 'Settings for Traveler Info Fields', 'tourfic' ),
+				),
+				array(
+					'id'       => 'without-payment-field',
+					'class'    => 'disable-sortable',
+					'type'     => 'repeater',
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'label'    => __( 'Fields for Traveler Info', 'tourfic' ),
+					'subtitle' => __( 'Custom fields allowed', 'tourfic' ),
+					'is_pro'       => true,
+					'fields'   => array(
+						array(
+							'id'    => 'reg-field-label',
+							'type'  => 'text',
+							'label' => __( 'Label', 'tourfic' ),
+						),
+						array(
+							'id'    => 'reg-field-name',
+							'type'  => 'text',
+							'label' => __( 'Name', 'tourfic' ),
+							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
+							'validate' => 'no_space_no_special',
+						),
+						array(
+							'id'      => 'reg-fields-type',
+							'type'    => 'select',
+							'label'   => __( 'Field Type', 'tourfic' ),
+							'options' => array(
+								'text' => __( 'Text', 'tourfic' ),
+								'email' => __( 'Email', 'tourfic' ),
+								'date' => __( 'Date', 'tourfic' ),
+								'radio' => __( 'Radio', 'tourfic' ),
+								'checkbox' => __( 'Checkbox', 'tourfic' ),
+								'select' => __( 'Select', 'tourfic' ),
+							),
+						),
+						array(
+							'id'     => 'reg-options',
+							'type'   => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'  => __( 'Option Label', 'tourfic' ),
+							'dependency' => array(
+								array( 'reg-fields-type', '==', 'radio' ),
+							),
+							'fields' => array(
+								array(
+									'label'   => __( 'Field Label', 'tourfic' ),
+									'id'      => 'option-label',
+									'type'    => 'text',
+								),
+								array(
+									'label'   => __( 'Field Value', 'tourfic' ),
+									'id'      => 'option-value',
+									'type'    => 'text',
+								),
+							),
+						),
+						array(
+							'id'     => 'reg-options',
+							'type'   => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'  => __( 'Option Label', 'tourfic' ),
+							'dependency' => array(
+								array( 'reg-fields-type', '==', 'select' ),
+							),
+							'fields' => array(
+								array(
+									'label'   => __( 'Field Label', 'tourfic' ),
+									'id'      => 'option-label',
+									'type'    => 'text',
+								),
+								array(
+									'label'   => __( 'Field Value', 'tourfic' ),
+									'id'      => 'option-value',
+									'type'    => 'text',
+								),
+							),
+						),
+						array(
+							'id'     => 'reg-options',
+							'type'   => 'repeater',
+							'button_title' => __( 'Add New Option', 'tourfic' ),
+							'label'  => __( 'Option Label', 'tourfic' ),
+							'dependency' => array(
+								array( 'reg-fields-type', '==', 'checkbox' ),
+							),
+							'fields' => array(
+								array(
+									'label'   => __( 'Field Label', 'tourfic' ),
+									'id'      => 'option-label',
+									'type'    => 'text',
+								),
+								array(
+									'label'   => __( 'Field Value', 'tourfic' ),
+									'id'      => 'option-value',
+									'type'    => 'text',
+								),
+							),
+						),
+						array(
+							'id'    => 'reg-field-placeholder',
+							'type'  => 'text',
+							'label' => __( 'Placeholder', 'tourfic' ),
+						),
+						array(
+							'id'    => 'reg-field-required',
+							'type'  => 'switch',
+							'label' => __( 'Required Field ?', 'tourfic' ),
+						),
+	
+					),
+				),
+			),
+		),
 		//Frontend Dashboard
 		'frontend_dashboard' => array(
 			'title'  => esc_html__( 'Frontend Dashboard', 'tourfic' ),

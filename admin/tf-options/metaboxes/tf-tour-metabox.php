@@ -801,6 +801,15 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'subtitle'  => __( 'If you enable this option, then the tour can not booking same day.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 'disable_payment',
+					'type'      => 'switch',
+					'label'     => __( 'Are You Want Without Payment Booking?', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the tour with booking withou payment.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'is_pro'   => true,
 				)
 			),
 		),
