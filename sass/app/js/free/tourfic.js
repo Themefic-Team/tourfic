@@ -2044,6 +2044,42 @@
                         }
                     }
                 });
+                $(this).find('input[type="radio"]').each(function() {
+                    if ($(this).attr('data-required')) {
+                        const radioName = $(this).attr('name');
+                        const isChecked = $('input[name="' + radioName + '"]:checked').length > 0;
+                
+                        if (!isChecked) {
+                            hasErrors.push(true);
+                            const errorContainer = $(this).parent().siblings('.error-text');
+                            errorContainer.text('This field is required.');
+                            if (errorContainer.text() !== '') {
+                                errorContainer.addClass('error-visible');
+                            } else {
+                                errorContainer.removeClass('error-visible');
+                            }
+                        }
+                    }
+                });
+
+                $(this).find('input[type="checkbox"]').each(function() {
+                    if ($(this).attr('data-required')) {
+                        const radioName = $(this).attr('name');
+                        const isChecked = $('input[name="' + radioName + '"]:checked').length > 0;
+                
+                        if (!isChecked) {
+                            hasErrors.push(true);
+                            const errorContainer = $(this).parent().siblings('.error-text');
+                            errorContainer.text('This field is required.');
+                            if (errorContainer.text() !== '') {
+                                errorContainer.addClass('error-visible');
+                            } else {
+                                errorContainer.removeClass('error-visible');
+                            }
+                        }
+                    }
+                });
+
             });
             if (hasErrors.includes(true)) {
                 tf_hasErrorsFlag = true;

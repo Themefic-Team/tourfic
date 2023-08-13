@@ -1063,7 +1063,7 @@ function tf_single_tour_booking_form( $post_id ) {
                         </div>
                     </div>
                     <div class="tf-booking-content-summery">
-                    <div id="error-messages"></div> <!-- Container for error messages -->
+                        
                         <!-- Popup Tour Extra -->
                         <?php 
                         if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
@@ -3177,7 +3177,7 @@ function tf_tour_booking_popup_callback() {
                                 if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
                                     $response['traveller_info'] .='
                                     <div class="tf-single-checkbox">
-                                    <input type="checkbox" name="traveller['.$traveller_in.']['.$field['reg-field-name'].'][]" id="'.$sfield['option-value'].$traveller_in.'" value="'.$sfield['option-value'].'" />
+                                    <input type="checkbox" name="traveller['.$traveller_in.']['.$field['reg-field-name'].'][]" id="'.$sfield['option-value'].$traveller_in.'" value="'.$sfield['option-value'].'" data-required="'.$field['reg-field-required'].'" />
                                     <label for="'.$sfield['option-value'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$sfield['option-label']).'</label></div>';
                                 }
                             }
@@ -3194,7 +3194,7 @@ function tf_tour_booking_popup_callback() {
                                 if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
                                     $response['traveller_info'] .='
                                     <div class="tf-single-checkbox">
-                                    <input type="radio" name="traveller['.$traveller_in.']['.$field['reg-field-name'].']" id="'.$sfield['option-value'].$traveller_in.'" value="'.$sfield['option-value'].'" />
+                                    <input type="radio" name="traveller['.$traveller_in.']['.$field['reg-field-name'].']" id="'.$sfield['option-value'].$traveller_in.'" value="'.$sfield['option-value'].'" data-required="'.$field['reg-field-required'].'"/>
                                     <label for="'.$sfield['option-value'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$sfield['option-label']).'</label></div>';
                                 }
                             }
