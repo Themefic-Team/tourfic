@@ -103,17 +103,20 @@
                 let $this = $(this),
                     dateField = $this.find('input.flatpickr'),
                     format = dateField.data('format'),
-                    multiple = dateField.data('multiple');
+                    multiple = dateField.data('multiple'),
+                    minDate = dateField.data('min-date');
 
                 if (dateField.length === 2) {
                     let startDate = $this.find('.tf-date-from input.flatpickr').flatpickr({
                         dateFormat: format,
+                        minDate: minDate,
                         onChange: function (selectedDates, dateStr, instance) {
                             endDate.set('minDate', dateStr);
                         }
                     });
                     let endDate = $this.find('.tf-date-to input.flatpickr').flatpickr({
                         dateFormat: format,
+                        minDate: minDate,
                         onChange: function (selectedDates, dateStr, instance) {
                             startDate.set('maxDate', dateStr);
                         }
@@ -121,6 +124,7 @@
                 } else {
                     dateField.flatpickr({
                         dateFormat: format,
+                        minDate: minDate,
                         mode: multiple ? 'multiple' : 'single',
                     });
                 }

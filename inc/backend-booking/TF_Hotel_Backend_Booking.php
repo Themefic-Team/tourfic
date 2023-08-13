@@ -197,6 +197,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 							'type'   => 'date',
 							'format' => 'Y/m/d',
 							'range'  => true,
+							'minDate' => 'today',
 						),
 						array(
 							'id'          => 'tf_available_hotels',
