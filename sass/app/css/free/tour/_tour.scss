@@ -856,6 +856,10 @@ div#tf-contact-info {
                                 input[type="radio"]{
                                     margin: 0;
                                 }
+                                .error-text.error-visible {
+                                    color: red;
+                                    font-size: 13px;
+                                }
                             }
                         }
                         .billing-details{

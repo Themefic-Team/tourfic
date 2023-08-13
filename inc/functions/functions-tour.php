@@ -1063,7 +1063,7 @@ function tf_single_tour_booking_form( $post_id ) {
                         </div>
                     </div>
                     <div class="tf-booking-content-summery">
-
+                    <div id="error-messages"></div> <!-- Container for error messages -->
                         <!-- Popup Tour Extra -->
                         <?php 
                         if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
@@ -1119,38 +1119,47 @@ function tf_single_tour_booking_form( $post_id ) {
                                         <div class="traveller-single-info">
                                             <label for="tf_firstname"><?php echo __("First Name","tourfic"); ?></label>
                                             <input type="text" name="tf_firstname" id="tf_firstname">
+                                            <div class="error-text" data-error-for="tf_firstname"></div>
                                         </div>
                                         <div class="traveller-single-info">
                                             <label for="tf_lastname"><?php echo __("Last Name","tourfic"); ?></label>
                                             <input type="text" name="tf_lastname" id="tf_lastname">
+                                            <div class="error-text" data-error-for="tf_lastname"></div>
                                         </div>
                                         <div class="traveller-single-info">
                                             <label for="tf_email"><?php echo __("Email","tourfic"); ?></label>
                                             <input type="email" name="tf_email" id="tf_email">
+                                            <div class="error-text" data-error-for="tf_email"></div>
                                         </div>
                                         <div class="traveller-single-info">
                                             <label for="tf_phone"><?php echo __("Phone","tourfic"); ?></label>
                                             <input type="text" name="tf_phone" id="tf_phone">
+                                            <div class="error-text" data-error-for="tf_phone"></div>
                                         </div>
                                         <div class="traveller-single-info">
                                             <label for="tf_country"><?php echo __("Country","tourfic"); ?></label>
                                             <input type="text" name="tf_country" id="tf_country">
+                                            <div class="error-text" data-error-for="tf_country"></div>
                                         </div>
                                         <div class="traveller-single-info">
                                             <label for="tf_address"><?php echo __("Street address","tourfic"); ?></label>
                                             <input type="text" name="tf_address" id="tf_address">
+                                            <div class="error-text" data-error-for="tf_address"></div>
                                         </div>
                                         <div class="traveller-single-info">
                                             <label for="tf_city"><?php echo __("Town / City","tourfic"); ?></label>
                                             <input type="text" name="tf_city" id="tf_city">
+                                            <div class="error-text" data-error-for="tf_city"></div>
                                         </div>
                                         <div class="traveller-single-info">
                                             <label for="tf_state"><?php echo __("State / County","tourfic"); ?></label>
                                             <input type="text" name="tf_state" id="tf_state">
+                                            <div class="error-text" data-error-for="tf_state"></div>
                                         </div>
                                         <div class="traveller-single-info">
                                             <label for="tf_zipcode"><?php echo __("Postcode / ZIP","tourfic"); ?></label>
                                             <input type="text" name="tf_zipcode" id="tf_zipcode">
+                                            <div class="error-text" data-error-for="tf_zipcode"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -1209,7 +1218,7 @@ function tf_single_tour_booking_form( $post_id ) {
                             <?php } 
                             if($is_without_payment){
                             ?>
-                            <a href="#" class="tf-next-control tf-tabs-control" data-step="3"><?php echo __("Continue", "tourfic"); ?></a>
+                            <a href="#" class="tf-next-control tf-tabs-control tf-traveller-error" data-step="3"><?php echo __("Continue", "tourfic"); ?></a>
                             <?php }else { ?>
                                 <button type="submit"><?php echo __("Continue", "tourfic"); ?></button>
                             <?php } ?>
@@ -3119,7 +3128,7 @@ function tf_tour_booking_popup_callback() {
         $response['traveller_info']  = '';
         $response['traveller_summery']  = '';
         for($traveller_in = 1; $traveller_in<=$total_people; $traveller_in++){
-            $response['traveller_info'] .= '<div class="tf-single-tour-traveller">
+            $response['traveller_info'] .= '<div class="tf-single-tour-traveller tf-single-travel">
                 <h4>'.sprintf( __( 'Traveler ', 'tourfic' )) .$traveller_in.'</h4>
                 <div class="traveller-info">
                 <div class="traveller-single-info">
@@ -3140,14 +3149,16 @@ function tf_tour_booking_popup_callback() {
                         $response['traveller_info'] .='
                         <div class="traveller-single-info">
                             <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
-                            <input type="'.$field['reg-fields-type'].'" name="traveller['.$traveller_in.']['.$field['reg-field-name'].']" id="'.$field['reg-field-name'].$traveller_in.'">
+                            <div class="error-text" data-error-for="'.$field['reg-field-name'].$traveller_in.'"></div>
+                            <input type="'.$field['reg-fields-type'].'" name="traveller['.$traveller_in.']['.$field['reg-field-name'].']" data-required="'.$field['reg-field-required'].'" id="'.$field['reg-field-name'].$traveller_in.'">
                         </div>';
                     }
                     if("select"==$field['reg-fields-type'] && !empty($field['reg-options'])){
                         $response['traveller_info'] .='
                         <div class="traveller-single-info">
                             <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
-                            <select id="'.$field['reg-field-name'].$traveller_in.'" name="traveller['.$traveller_in.']['.$field['reg-field-name'].']"><option value="">'.sprintf( __( 'Select One', 'tourfic' )).'</option>';
+                            <div class="error-text" data-error-for="'.$field['reg-field-name'].$traveller_in.'"></div>
+                            <select id="'.$field['reg-field-name'].$traveller_in.'" name="traveller['.$traveller_in.']['.$field['reg-field-name'].']" data-required="'.$field['reg-field-required'].'"><option value="">'.sprintf( __( 'Select One', 'tourfic' )).'</option>';
                             foreach($field['reg-options'] as $sfield){
                                 if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
                                     $response['traveller_info'] .='<option value="'.$sfield['option-value'].'">'.$sfield['option-label'].'</option>';
@@ -3160,6 +3171,7 @@ function tf_tour_booking_popup_callback() {
                         $response['traveller_info'] .='
                         <div class="traveller-single-info">
                         <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
+                        <div class="error-text" data-error-for="'.$field['reg-field-name'].$traveller_in.'"></div>
                         ';
                             foreach($field['reg-options'] as $sfield){
                                 if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
@@ -3176,6 +3188,7 @@ function tf_tour_booking_popup_callback() {
                         $response['traveller_info'] .='
                         <div class="traveller-single-info">
                         <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
+                        <div class="error-text" data-error-for="'.$field['reg-field-name'].$traveller_in.'"></div>
                         ';
                             foreach($field['reg-options'] as $sfield){
                                 if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){

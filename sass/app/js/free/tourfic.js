@@ -2011,8 +2011,51 @@
         * @since 2.9.21
         * @author Jahid
         */
+        let tf_hasErrorsFlag = false;
+        $(document).on('click', '.tf-traveller-error', function (e) {
+            let hasErrors = [];
+            $('.error-text').text("");
+            $('.tf-single-travel').each(function() {
+                $(this).find('input').each(function() {
+                    if($(this).attr('data-required')){
+                        if($(this).val() == ""){
+                            hasErrors.push(true);
+                            const errorContainer = $(this).siblings('.error-text');
+                            errorContainer.text('This field is required.');
+                            if (errorContainer.text() !== '') {
+                                errorContainer.addClass('error-visible');
+                            } else {
+                                errorContainer.removeClass('error-visible');
+                            }
+                        }
+                    }
+                });
+                $(this).find('select').each(function() {
+                    if($(this).attr('data-required')){
+                        if($(this).val() == ""){
+                            hasErrors.push(true);
+                            const errorContainer = $(this).siblings('.error-text');
+                            errorContainer.text('This field is required.');
+                            if (errorContainer.text() !== '') {
+                                errorContainer.addClass('error-visible');
+                            } else {
+                                errorContainer.removeClass('error-visible');
+                            }
+                        }
+                    }
+                });
+            });
+            if (hasErrors.includes(true)) {
+                tf_hasErrorsFlag = true;
+                return false;
+            }
+            tf_hasErrorsFlag = false;
+        });
         $(document).on('click', '.tf-tabs-control', function (e) {
             e.preventDefault();
+            if (tf_hasErrorsFlag) {
+                return false; 
+            }
             let step = $(this).attr("data-step"); 
             if(step>1){
                 for(let i = 1; i <= step; i++){
