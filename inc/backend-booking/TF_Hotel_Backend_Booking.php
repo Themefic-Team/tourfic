@@ -1,12 +1,12 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 /**
- * TF Backend Booking
+ * TF Hotel Backend Booking
  * @since 2.9.26
  * @author Foysal
  */
-if ( ! class_exists( 'TF_Backend_Booking' ) ) {
-	class TF_Backend_Booking {
+if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
+	class TF_Hotel_Backend_Booking {
 
 		private static $instance = null;
 
@@ -29,13 +29,11 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
 			add_action( 'wp_ajax_tf_check_available_room', array( $this, 'tf_check_available_room' ) );
 			add_action( 'wp_ajax_tf_update_room_fields', array( $this, 'tf_update_room_fields' ) );
 			add_action( 'wp_ajax_tf_backend_hotel_booking', array( $this, 'tf_backend_hotel_booking' ) );
-
-
 		}
 
 		function tf_hotel_backend_booking_button() {
 			?>
-            <a href="<?php echo admin_url( 'edit.php?post_type=tf_hotel&page=tf-backend-booking' ); ?>" class="button button-primary tf-export-btn"><?php _e( 'Add New Booking', 'tourfic' ); ?></a>
+            <a href="<?php echo admin_url( 'edit.php?post_type=tf_hotel&page=tf-hotel-backend-booking' ); ?>" class="button button-primary tf-export-btn"><?php _e( 'Add New Booking', 'tourfic' ); ?></a>
 			<?php
 		}
 
@@ -49,7 +47,7 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
 				__( 'Add New Booking', 'tourfic' ),
 				__( 'Add New Booking', 'tourfic' ),
 				'edit_tf_hotels',
-				'tf-backend-booking',
+				'tf-hotel-backend-booking',
 				array( $this, 'tf_backend_booking_page' ),
 			);
 		}
@@ -724,4 +722,4 @@ if ( ! class_exists( 'TF_Backend_Booking' ) ) {
 	}
 }
 
-TF_Backend_Booking::instance();
+TF_Hotel_Backend_Booking::instance();

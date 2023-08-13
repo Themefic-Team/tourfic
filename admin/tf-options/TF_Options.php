@@ -132,148 +132,160 @@ if ( ! class_exists( 'TF_Options' ) ) {
 		 * Admin Enqueue scripts
 		 * @author Foysal
 		 */
-		public function tf_options_admin_enqueue_scripts($screen) {
+		public function tf_options_admin_enqueue_scripts( $screen ) {
 			global $post_type;
-			$tf_options_screens   = array( 'toplevel_page_tf_settings', 'tourfic-settings_page_tf_get_help', 'tourfic-settings_page_tf_license_info', 'tourfic-settings_page_tf_dashboard', 'tourfic-settings_page_tf_shortcodes', 'tourfic-vendor_page_tf_vendor_reports','tourfic-vendor_page_tf_vendor_list','tourfic-vendor_page_tf_vendor_commissions','tourfic-vendor_page_tf_vendor_withdraw', 'tf_hotel_page_tf-backend-booking' );
+			$tf_options_screens   = array(
+				'toplevel_page_tf_settings',
+				'tourfic-settings_page_tf_get_help',
+				'tourfic-settings_page_tf_license_info',
+				'tourfic-settings_page_tf_dashboard',
+				'tourfic-settings_page_tf_shortcodes',
+				'tourfic-vendor_page_tf_vendor_reports',
+				'tourfic-vendor_page_tf_vendor_list',
+				'tourfic-vendor_page_tf_vendor_commissions',
+				'tourfic-vendor_page_tf_vendor_withdraw',
+				'tf_hotel_page_tf-hotel-backend-booking',
+				'tf_tours_page_tf-tour-backend-booking'
+			);
 			$tf_options_post_type = array( 'tf_hotel', 'tf_tours', 'tf_apartment' );
-			if("tourfic-settings_page_tf_dashboard"==$screen){
+			if ( "tourfic-settings_page_tf_dashboard" == $screen ) {
 				//Order Data Retrive
-				$tf_old_order_limit = new WC_Order_Query( array (
-					'limit' => -1,
+				$tf_old_order_limit = new WC_Order_Query( array(
+					'limit'   => - 1,
 					'orderby' => 'date',
-					'order' => 'ASC',
-					'return' => 'ids',
+					'order'   => 'ASC',
+					'return'  => 'ids',
 				) );
-				$order = $tf_old_order_limit->get_orders();
+				$order              = $tf_old_order_limit->get_orders();
 				// Booking Month
-				$tf_co1 = 0;
-				$tf_co2 = 0;
-				$tf_co3 = 0;
-				$tf_co4 = 0;
-				$tf_co5 = 0;
-				$tf_co6 = 0;
-				$tf_co7 = 0;
-				$tf_co8 = 0;
-				$tf_co9 = 0;
+				$tf_co1  = 0;
+				$tf_co2  = 0;
+				$tf_co3  = 0;
+				$tf_co4  = 0;
+				$tf_co5  = 0;
+				$tf_co6  = 0;
+				$tf_co7  = 0;
+				$tf_co8  = 0;
+				$tf_co9  = 0;
 				$tf_co10 = 0;
 				$tf_co11 = 0;
 				$tf_co12 = 0;
 				// Booking Cancel Month
-				$tf_cr1 = 0;
-				$tf_cr2 = 0;
-				$tf_cr3 = 0;
-				$tf_cr4 = 0;
-				$tf_cr5 = 0;
-				$tf_cr6 = 0;
-				$tf_cr7 = 0;
-				$tf_cr8 = 0;
-				$tf_cr9 = 0;
+				$tf_cr1  = 0;
+				$tf_cr2  = 0;
+				$tf_cr3  = 0;
+				$tf_cr4  = 0;
+				$tf_cr5  = 0;
+				$tf_cr6  = 0;
+				$tf_cr7  = 0;
+				$tf_cr8  = 0;
+				$tf_cr9  = 0;
 				$tf_cr10 = 0;
 				$tf_cr11 = 0;
 				$tf_cr12 = 0;
 				foreach ( $order as $item_id => $item ) {
-					$itemmeta = wc_get_order( $item);
-					$tf_ordering_date =  $itemmeta->get_date_created();
-					if($tf_ordering_date->date('n-y')=='1-'.date('y')){
-						if("completed"==$itemmeta->get_status()){
-							$tf_co1+=1;
+					$itemmeta         = wc_get_order( $item );
+					$tf_ordering_date = $itemmeta->get_date_created();
+					if ( $tf_ordering_date->date( 'n-y' ) == '1-' . date( 'y' ) ) {
+						if ( "completed" == $itemmeta->get_status() ) {
+							$tf_co1 += 1;
 						}
-						if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
-							$tf_cr1+=1;
-						}
-					}
-					if($tf_ordering_date->date('n-y')=='2-'.date('y')){
-						if("completed"==$itemmeta->get_status()){
-							$tf_co2+=1;
-						}
-						if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
-							$tf_cr2+=1;
+						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+							$tf_cr1 += 1;
 						}
 					}
-					if($tf_ordering_date->date('n-y')=='3-'.date('y')){
-						if("completed"==$itemmeta->get_status()){
-							$tf_co3+=1;
+					if ( $tf_ordering_date->date( 'n-y' ) == '2-' . date( 'y' ) ) {
+						if ( "completed" == $itemmeta->get_status() ) {
+							$tf_co2 += 1;
 						}
-						if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
-							$tf_cr3+=1;
-						}
-					}
-					if($tf_ordering_date->date('n-y')=='4-'.date('y')){
-						if("completed"==$itemmeta->get_status()){
-							$tf_co4+=1;
-						}
-						if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
-							$tf_cr4+=1;
+						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+							$tf_cr2 += 1;
 						}
 					}
-					if($tf_ordering_date->date('n-y')=='5-'.date('y')){
-						if("completed"==$itemmeta->get_status()){
-							$tf_co5+=1;
+					if ( $tf_ordering_date->date( 'n-y' ) == '3-' . date( 'y' ) ) {
+						if ( "completed" == $itemmeta->get_status() ) {
+							$tf_co3 += 1;
 						}
-						if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
-							$tf_cr5+=1;
-						}
-					}
-					if($tf_ordering_date->date('n-y')=='6-'.date('y')){
-						if("completed"==$itemmeta->get_status()){
-							$tf_co6+=1;
-						}
-						if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
-							$tf_cr6+=1;
+						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+							$tf_cr3 += 1;
 						}
 					}
-					if($tf_ordering_date->date('n-y')=='7-'.date('y')){
-						if("completed"==$itemmeta->get_status()){
-							$tf_co7+=1;
+					if ( $tf_ordering_date->date( 'n-y' ) == '4-' . date( 'y' ) ) {
+						if ( "completed" == $itemmeta->get_status() ) {
+							$tf_co4 += 1;
 						}
-						if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
-							$tf_cr7+=1;
-						}
-					}
-					if($tf_ordering_date->date('n-y')=='8-'.date('y')){
-						if("completed"==$itemmeta->get_status()){
-							$tf_co8+=1;
-						}
-						if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
-							$tf_cr8+=1;
+						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+							$tf_cr4 += 1;
 						}
 					}
-					if($tf_ordering_date->date('n-y')=='9-'.date('y')){
-						if("completed"==$itemmeta->get_status()){
-							$tf_co9+=1;
+					if ( $tf_ordering_date->date( 'n-y' ) == '5-' . date( 'y' ) ) {
+						if ( "completed" == $itemmeta->get_status() ) {
+							$tf_co5 += 1;
 						}
-						if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
-							$tf_cr9+=1;
-						}
-					}
-					if($tf_ordering_date->date('n-y')=='10-'.date('y')){
-						if("completed"==$itemmeta->get_status()){
-							$tf_co10+=1;
-						}
-						if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
-							$tf_cr10+=1;
+						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+							$tf_cr5 += 1;
 						}
 					}
-					if($tf_ordering_date->date('n-y')=='11-'.date('y')){
-						if("completed"==$itemmeta->get_status()){
-							$tf_co11+=1;
+					if ( $tf_ordering_date->date( 'n-y' ) == '6-' . date( 'y' ) ) {
+						if ( "completed" == $itemmeta->get_status() ) {
+							$tf_co6 += 1;
 						}
-						if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
-							$tf_cr11+=1;
+						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+							$tf_cr6 += 1;
 						}
 					}
-					if($tf_ordering_date->date('n-y')=='12-'.date('y')){
-						if("completed"==$itemmeta->get_status()){
-							$tf_co12+=1;
+					if ( $tf_ordering_date->date( 'n-y' ) == '7-' . date( 'y' ) ) {
+						if ( "completed" == $itemmeta->get_status() ) {
+							$tf_co7 += 1;
 						}
-						if("cancelled"==$itemmeta->get_status() || "refunded"==$itemmeta->get_status()){
-							$tf_cr12+=1;
+						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+							$tf_cr7 += 1;
+						}
+					}
+					if ( $tf_ordering_date->date( 'n-y' ) == '8-' . date( 'y' ) ) {
+						if ( "completed" == $itemmeta->get_status() ) {
+							$tf_co8 += 1;
+						}
+						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+							$tf_cr8 += 1;
+						}
+					}
+					if ( $tf_ordering_date->date( 'n-y' ) == '9-' . date( 'y' ) ) {
+						if ( "completed" == $itemmeta->get_status() ) {
+							$tf_co9 += 1;
+						}
+						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+							$tf_cr9 += 1;
+						}
+					}
+					if ( $tf_ordering_date->date( 'n-y' ) == '10-' . date( 'y' ) ) {
+						if ( "completed" == $itemmeta->get_status() ) {
+							$tf_co10 += 1;
+						}
+						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+							$tf_cr10 += 1;
+						}
+					}
+					if ( $tf_ordering_date->date( 'n-y' ) == '11-' . date( 'y' ) ) {
+						if ( "completed" == $itemmeta->get_status() ) {
+							$tf_co11 += 1;
+						}
+						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+							$tf_cr11 += 1;
+						}
+					}
+					if ( $tf_ordering_date->date( 'n-y' ) == '12-' . date( 'y' ) ) {
+						if ( "completed" == $itemmeta->get_status() ) {
+							$tf_co12 += 1;
+						}
+						if ( "cancelled" == $itemmeta->get_status() || "refunded" == $itemmeta->get_status() ) {
+							$tf_cr12 += 1;
 						}
 					}
 				}
-				$tf_complete_orders = [$tf_co1,$tf_co2,$tf_co3,$tf_co4,$tf_co5,$tf_co6,$tf_co7,$tf_co8,$tf_co9,$tf_co10,$tf_co11,$tf_co12];
-				$tf_cancel_orders = [$tf_cr1,$tf_cr2,$tf_cr3,$tf_cr4,$tf_cr5,$tf_cr6,$tf_cr7,$tf_cr8,$tf_cr9,$tf_cr10,$tf_cr11,$tf_cr12];
-				$tf_chart_enable = 1;
+				$tf_complete_orders = [ $tf_co1, $tf_co2, $tf_co3, $tf_co4, $tf_co5, $tf_co6, $tf_co7, $tf_co8, $tf_co9, $tf_co10, $tf_co11, $tf_co12 ];
+				$tf_cancel_orders   = [ $tf_cr1, $tf_cr2, $tf_cr3, $tf_cr4, $tf_cr5, $tf_cr6, $tf_cr7, $tf_cr8, $tf_cr9, $tf_cr10, $tf_cr11, $tf_cr12 ];
+				$tf_chart_enable    = 1;
 			}
 
 
@@ -282,7 +294,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			//Color-Picker Css
 			wp_enqueue_style( 'wp-color-picker' );
 			if ( in_array( $screen, $tf_options_screens ) || in_array( $post_type, $tf_options_post_type ) ) {
-				
+
 				wp_enqueue_style( 'tf-fontawesome-4', '//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css', array(), $this->tf_options_version() );
 				wp_enqueue_style( 'tf-fontawesome-5', '//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css', array(), $this->tf_options_version() );
 				wp_enqueue_style( 'tf-fontawesome-6', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css', array(), $this->tf_options_version() );
@@ -296,7 +308,6 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				wp_enqueue_script( 'Chart-js', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js', array( 'jquery' ), '2.6.0', true );
 				wp_enqueue_script( 'tf-flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js', array( 'jquery' ), $this->tf_options_version(), true );
 				wp_enqueue_script( 'tf-select2', '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array( 'jquery' ), $this->tf_options_version(), true );
-				
 
 
 				$tf_google_map = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "false";
@@ -353,7 +364,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			$is_pro   = isset( $field['is_pro'] ) ? $field['is_pro'] : '';
 			$badge_up = isset( $field['badge_up'] ) ? $field['badge_up'] : '';
 
-			if ( function_exists('is_tf_pro') && is_tf_pro() ) {
+			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 				$is_pro = false;
 			}
 			if ( $is_pro == true ) {

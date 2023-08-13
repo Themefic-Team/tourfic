@@ -426,9 +426,6 @@
                         form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
                         form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
                     }
-                    // if (obj.redirect_url) {
-                    //window.location.href = obj.redirect_url;
-                    // }
                     btn.removeClass('tf-btn-loading');
                 },
 
