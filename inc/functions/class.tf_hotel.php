@@ -1,0 +1,159 @@
+<?php
+
+if ( ! class_exists( "WP_List_Table" ) ) {
+	require_once( ABSPATH . "wp-admin/includes/class-wp-list-table.php" );
+}
+
+class DBTFHOTELTable extends WP_List_Table {
+
+	private $_items;
+
+	function __construct( $data ) {
+		parent::__construct();
+		$this->_items = $data;
+	}
+
+	function get_columns() {
+		return [
+			'cb'           => '<input type="checkbox">',
+			'order_id'        => __( 'Order ID', 'tourfic' ),
+			'cdetails'       => __( 'Customer Details', 'tourfic' ),
+			'odetails' => __( 'Order Details', 'tourfic' ),
+			'odate'   => __( 'Order Date', 'tourfic' ),
+			'tprice'   => __( 'Total Price', 'tourfic' ),
+			'status'   => __( 'Status', 'tourfic' ),
+			'pmethod'   => __( 'Payment Method', 'tourfic' ),
+		];
+	}
+
+	function column_cb( $item ) {
+		return "<input type='checkbox' value='{$item['id']}'>";
+	}
+    function column_cdetails( $item ) {
+		$billing_info = json_decode($item['billing_details']);
+        $billing_details = "";
+        $customer_name        = $billing_info->billing_first_name . ' ' . $billing_info->billing_last_name;
+        $customer_email       = $billing_info->billing_email;
+        $customer_phone       = $billing_info->billing_phone;
+        $customer_address     = $billing_info->billing_address_1 . ', ' . $billing_info->billing_address_2 . ',<br>' . $billing_info->billing_city . ', ' . WC()->countries->countries[ $billing_info->billing_country ];
+
+        if ( $customer_name ) {
+            $billing_details .= '<b>' . __( "Name", "tourfic" ) . ': </b>' . $customer_name . '<br>';
+        }
+        if ( $customer_email ) {
+            $billing_details .= '<b>' . __( "E-mail", "tourfic" ) . ': </b>' . $customer_email . '<br>';
+        }
+        if ( $customer_phone ) {
+            $billing_details .= '<b>' . __( "Phone", "tourfic" ) . ': </b>' . $customer_phone . '<br>';
+        }
+        if ( $customer_address ) {
+            $billing_details .= '<b>' . __( "Address", "tourfic" ) . ': </b>' . $customer_address . '<br>';
+        }
+        return $billing_details;
+	}
+    function column_odetails( $item ) {
+		$order_details = json_decode($item['order_details']);
+        $hotel_order_details = "";
+        if ( !empty($item['post_id']) ) {
+            $hotel_order_details .= '<b>' . __( "Hotel Name", "tourfic" ) . ': </b><a href="'.get_the_permalink($item['post_id']).'" target="_blank">' . get_the_title($item['post_id']) . '</a><br>';
+        }
+        if ( !empty($order_details->room_name) ) {
+            $hotel_order_details .= '<b>' . __( "Room", "tourfic" ) . ': </b>' . $order_details->room_name . '<br>';
+        }
+        if ( !empty($order_details->room) ) {
+            $hotel_order_details .= '<b>' . __( "Room Booked", "tourfic" ) . ': </b>' . $order_details->room . '<br>';
+        }
+        if ( !empty($order_details->adult) ) {
+            $hotel_order_details .= '<b>' . __( "Adult Number", "tourfic" ) . ': </b>' . $order_details->adult . '<br>';
+        }
+        if ( !empty($order_details->child) ) {
+            $hotel_order_details .= '<b>' . __( "Child Number", "tourfic" ) . ': </b>' . $order_details->child . '<br>';
+        }
+        if ( !empty($order_details->children_ages) ) {
+            $hotel_order_details .= '<b>' . __( "Child Age", "tourfic" ) . ': </b>' . $order_details->children_ages . '<br>';
+        }
+        if ( !empty($order_details->check_in) ) {
+            $hotel_order_details .= '<b>' . __( "Check-In", "tourfic" ) . ': </b>' . $order_details->check_in . '<br>';
+        }
+        if ( !empty($order_details->check_out) ) {
+            $hotel_order_details .= '<b>' . __( "Check-Out", "tourfic" ) . ': </b>' . $order_details->check_out . '<br>';
+        }
+        if ( !empty($order_details->airport_service_type) ) {
+            $hotel_order_details .= '<b>' . __( "Airport Service", "tourfic" ) . ': </b>' . $order_details->airport_service_type . '<br>';
+        }
+        if ( !empty($order_details->airport_service_fee) ) {
+            $hotel_order_details .= '<b>' . __( "Airport Service Fee", "tourfic" ) . ': </b>' . $order_details->airport_service_fee . '<br>';
+        }
+        return $hotel_order_details;
+	}
+    function column_tprice( $item ) {
+		$order_details = json_decode($item['order_details']);
+        $hotel_order_details = "";
+        if ( !empty($order_details->total_price) ) {
+            $hotel_order_details .= '<b>' . __( "Total", "tourfic" ) . ': </b>' . wc_price($order_details->total_price) . '<br>';
+        }
+        if ( !empty($order_details->due_price) ) {
+            $hotel_order_details .= '<b>' . __( "Due", "tourfic" ) . ': </b>' . $order_details->due_price . '<br>';
+        }
+        return $hotel_order_details;
+	}
+    function column_odate( $item ) {
+		return $item['order_date'];
+	}
+    function column_status( $item ) {
+		return $item['ostatus'];
+	}
+    function column_pmethod( $item ) {
+        if( ! function_exists( 'tf_get_payment_method_full_name' ) ){
+            function tf_get_payment_method_full_name($sort_name) {
+                $payment_gateways = WC_Payment_Gateways::instance()->get_available_payment_gateways();
+            
+                if (isset($payment_gateways[$sort_name])) {
+                    return $payment_gateways[$sort_name]->title;
+                } else {
+                    return 'Unknown Payment Method';
+                }
+            }
+        }
+        
+        $sort_name = $item['payment_method'];
+        $full_name = tf_get_payment_method_full_name($sort_name);
+        return $full_name;
+        
+	}
+
+	function column_default( $item, $column_name ) {
+		return $item[ $column_name ];
+	}
+
+	//if result more than 15 then add pro row
+	public function display_rows() {
+		foreach ( $this->items as $key => $item ) {
+			if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
+				$this->single_row( $item );
+			} else {
+				if ( $key == 14) {
+					$this->single_row( $item );
+					echo '<tr class="pro-row" style="text-align: center; background-color: #ededf8"><td colspan="5"><a href="https://tourfic.com/" target="_blank"><h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;">' . __( 'Upgrade to Pro Version to see more', 'tourfic' ) . '</h3></a></td></tr>';
+				} else {
+					$this->single_row( $item );
+				}
+			}
+
+		}
+	}
+
+	function prepare_items() {
+		$paged                 = ! empty( $_REQUEST['paged'] ) ? $_REQUEST['paged'] : 1;
+		$per_page              = 20;
+		$total_items           = count( $this->_items );
+		$this->_column_headers = array( $this->get_columns(), array(), $this->get_sortable_columns() );
+		$data_chunks           = array_chunk( $this->_items, $per_page );
+		$this->items           = ! empty( $data_chunks ) ? $data_chunks[ $paged - 1 ] : '';
+		$this->set_pagination_args( [
+			'total_items' => $total_items,
+			'per_page'    => $per_page,
+			'total_pages' => ceil( count( $this->_items ) / $per_page )
+		] );
+	}
+}

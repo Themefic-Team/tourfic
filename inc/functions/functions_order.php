@@ -365,6 +365,21 @@ function tf_hotel_booking_page_callback() {
 	/**
 	 * Get current logged in user
 	 */
+
+	if ( file_exists( TF_INC_PATH . 'functions/class.tf_hotel.php' ) ) {
+		require_once TF_INC_PATH . 'functions/class.tf_hotel.php';
+	} else {
+		tf_file_missing( TF_INC_PATH . 'functions/class.tf_hotel.php' );
+	}
+
+	global $wpdb;
+	$table_name = $wpdb->prefix . 'tf_order_data';
+	$hotel_orders_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY order_id DESC", 'hotel' ), ARRAY_A );
+	
+	$hotel_order_results = new DBTFHOTELTable( $hotel_orders_result );
+	$hotel_order_results->prepare_items();
+	$hotel_order_results->display();
+	
 	$current_user = wp_get_current_user();
 	// get user id
 	$current_user_id = $current_user->ID;
