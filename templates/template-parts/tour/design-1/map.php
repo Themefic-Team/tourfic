@@ -1,14 +1,10 @@
 <!-- Tourfic Map -->
-<?php if ( ($location && $itinerary_map != 1 && $tf_openstreet_map != "googlemap" && empty($tf_google_map_key) ) || ! $itineraries): ?>
+<?php if ( $location && $itinerary_map != 1 && ! $itineraries ): ?>
 <div class="tf-trip-map-wrapper tf-mb-50 tf-template-section" id="tf-tour-map">
     <h2 class="tf-title tf-section-title"><?php echo !empty($meta['map-section-title']) ? esc_html($meta['map-section-title']) : __("Maps","tourfic"); ?></h2>
     <div class="tf-map-area">
-        <?php if( $tf_openstreet_map!="default" ){ ?>
-            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $location ) ); ?>&output=embed" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        <?php } ?>
-        <?php if ( $tf_openstreet_map=="default" && !empty($location_latitude) && !empty($location_longitude) ) {  ?>
+        <?php if ( $tf_openstreet_map=="default" && !empty($location_latitude) && !empty($location_longitude) && empty($tf_google_map_key) ) {  ?>
             <div id="tour-location"></div>
-
             <script>
             const map = L.map('tour-location').setView([<?php echo $location_latitude; ?>, <?php echo $location_longitude; ?>], <?php echo $location_zoom; ?>);
 
@@ -20,6 +16,9 @@
             const marker = L.marker([<?php echo $location_latitude; ?>, <?php echo $location_longitude; ?>], {alt: '<?php echo $location; ?>'}).addTo(map)
                 .bindPopup('<?php echo $location; ?>');
             </script>
+        <?php } ?>
+        <?php if( $tf_openstreet_map!="default" && !empty($tf_google_map_key) ){ ?>
+        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $location ) ); ?>&output=embed" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         <?php } ?>
     </div>
 </div>
