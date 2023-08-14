@@ -602,7 +602,6 @@
                 },
                 success: function (response) {
                     const obj = JSON.parse(response);
-                    console.log('obj', obj)
                     if (!obj.success) {
                         if (obj.message) {
                             Swal.fire(
@@ -639,7 +638,7 @@
                         form.find('textarea').closest('.tf-reg-field').find('small.text-danger').remove();
                     }
                     if (obj.redirect_url) {
-                        window.location.href = obj.redirect_url;
+                        //window.location.href = obj.redirect_url;
                     }
                     btn.removeClass('tf-btn-loading');
                 },
