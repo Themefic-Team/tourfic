@@ -643,7 +643,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
                 <div class="tf-option-wrapper tf-setting-wrapper">
                     <form method="post" action="" class="tf-option-form <?php echo esc_attr($ajax_save_class) ?>" enctype="multipart/form-data">
-
                         <!-- Body -->
                         <div class="tf-option">
                             <div class="tf-admin-tab tf-option-nav">
@@ -712,9 +711,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									</div>
                             </div>
                         </div>
-
-                        
-
 						<?php wp_nonce_field( 'tf_option_nonce_action', 'tf_option_nonce' ); ?>
                     </form>
                 </div>
@@ -751,8 +747,38 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						foreach ( $section['fields'] as $field ) {
 
 							if ( ! empty( $field['id'] ) ) {
-								$data = isset( $option_request[ $field['id'] ] ) ? $option_request[ $field['id'] ] : '';
+
 								$fieldClass = 'TF_' . $field['type'];
+
+                                if($fieldClass == 'TF_tab'){
+	                                $data = isset( $option_request[ $field['id'] ] ) ? $option_request[ $field['id'] ] : '';
+	                                foreach ( $field['tabs'] as $tab ) {
+		                                foreach ( $tab['fields'] as $tab_fields ) {
+                                            if($tab_fields['type'] == 'repeater') {
+	                                            foreach ( $tab_fields['fields'] as $key => $tab_field ) {
+		                                            if ( isset( $tab_field['validate'] ) && $tab_field['validate'] == 'no_space_no_special' ) {
+                                                        $sanitize_data_array = [];
+			                                            foreach ( $data[$tab_fields['id']] as $_key=> $datum ) {
+                                                            //unique id 3 digit
+                                                            $unique_id = substr(uniqid(), -3);
+                                                            $sanitize_data = sanitize_title(str_replace(' ', '_', strtolower($datum[$tab_field['id']])));
+                                                            if(in_array($sanitize_data, $sanitize_data_array)){
+                                                                $sanitize_data = $sanitize_data . '_' . $unique_id;
+                                                            } else {
+                                                                $sanitize_data_array[] = $sanitize_data;
+                                                            }
+
+                                                            $data[$tab_fields['id']][$_key][$tab_field['id']] = $sanitize_data;
+                                                        }
+		                                            }
+	                                            }
+                                            }
+                                        }
+                                    }
+                                } else {
+	                                $data = isset( $option_request[ $field['id'] ] ) ? $option_request[ $field['id'] ] : '';
+                                }
+
 								if($fieldClass != 'TF_file'){
 									$data       = $fieldClass == 'TF_repeater' || $fieldClass == 'TF_map'  || $fieldClass == 'TF_color' ? serialize( $data ) : $data;
 								}
@@ -785,6 +811,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			}
 
 			if ( ! empty( $tf_option_value ) ) {
+//                tf_var_dump($tf_option_value);
+//                die();
 				update_option( $this->option_id, $tf_option_value );
 			} else {
 				delete_option( $this->option_id );

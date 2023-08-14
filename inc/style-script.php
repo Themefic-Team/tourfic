@@ -37,10 +37,10 @@ if( !function_exists( 'tf_custom_css' ) ){
 		$tf_global_heading_font_family = tfopt('global-heading-fonts-family') ? tfopt('global-heading-fonts-family') : 'Default';
 
 		// Global Typography P
-		$tf_global_font_p = tfopt('global-p') ? tfopt('global-p') : 16;
+		$tf_global_font_p = tfopt('global-p') ? tfopt('global-p') : 14;
 		$tf_global_font_weight_p = tfopt('global-p-weight') ? tfopt('global-p-weight') : 400;
 		$tf_global_font_style_p = tfopt('global-p-style') ? tfopt('global-p-style') : 'normal';
-		$tf_global_line_height_p = tfopt('global-p-line-height') ? tfopt('global-p-line-height') : 1.5;
+		$tf_global_line_height_p = tfopt('global-p-line-height') ? tfopt('global-p-line-height') : 1.2;
 
 		// Global Typography H1
 		$tf_global_font_h1 = tfopt('global-h1') ? tfopt('global-h1') : 38;
@@ -93,14 +93,11 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-template-global .tf-archive-right .tf_widget .al-range-slider__knob,
 			.tf-template-global .tf-search-results-list #tf_posts_navigation_bar .page-numbers.current,
 			.tf-template-global .tf-archive-right .tf_widget .al-range-slider__tooltip,
-			.tf-template-global .tf-archive-right .tf_widget .al-range-slider_dark .al-range-slider__bar,
-			.tf-template-global .tf-btn .btn-primary,
-			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td .hotel-room-book,
-			.tf-template-global .tf-archive-right .tf-booking-bttns button {
+			.tf-template-global .tf-archive-right .tf_widget .al-range-slider_dark .al-range-slider__bar {
 				background: '.$tf_template1_global_reg.' !important;
 			}';
 		}
-		if( !empty($tf_global_font_family) && $tf_global_font_family!="Default" ){
+		if( !empty($tf_global_font_family) && $tf_global_font_family!="Default" && $tf_global_heading_font_family!="Default" ){
 			$output .= '
 			.tf-container-inner,
 			.tf-main-wrapper,
@@ -115,7 +112,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			#tf-ask-question button,
 			#tf-ask-question input,
 			#tf-ask-question textarea{
-				font-family: '.$tf_global_font_family.'
+				font-family: '.$tf_global_font_family.' !important;
 			}';
 		}
 		if( !empty($tf_template1_p_global_reg) ){
@@ -128,7 +125,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			}';
 		}
 		
-		if( !empty($tf_global_heading_font_family) && $tf_global_heading_font_family!="Default" ){
+		if( !empty($tf_global_heading_font_family) && $tf_global_heading_font_family!="Default" && $tf_global_font_family!="Default"){
 			$output .= '
 			.tf-container-inner h1,
 			.tf-main-wrapper h1,
@@ -151,7 +148,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf-container-inner h6,
 			.tf-main-wrapper h6,
 			.tf-container h6{
-				font-family: '.$tf_global_heading_font_family.'
+				font-family: '.$tf_global_heading_font_family.' !important;
 			}';
 		}
 
@@ -311,7 +308,7 @@ if( !function_exists( 'tf_custom_css' ) ){
 			.tf_button:hover, .btn-styled:hover, .tf-review-form-container .tf-review-submit input[type="submit"]:hover {border-color: '.$tf_primary_bg_color_hov.';}
 		'; }
 		if( $tf_sidebar_gradient_one_reg && $tf_sidebar_gradient_two_reg  ) { $output .= '
-			.tf_booking-widget, .tf-tour-details-right .tf-tour-booking-box, .tf-template-global .tf-box-wrapper.tf-box {background: linear-gradient(to bottom, '.$tf_sidebar_gradient_one_reg.' 0, '.$tf_sidebar_gradient_two_reg.' 100%) !important;}
+			.tf_booking-widget, .tf-tour-details-right .tf-tour-booking-box, .tf-template-global .tf-box-wrapper.tf-box {background: linear-gradient(to bottom, '.$tf_sidebar_gradient_one_reg.' 0, '.$tf_sidebar_gradient_two_reg.' 100%);}
 		'; }
 		if( $tf_faq_color OR $tf_faq_icon_color OR $tf_faq_border_color ) { $output .= '
 			.tf-faq-title h4,

@@ -44,6 +44,7 @@ function register_tf_hotel_post_type() {
 	$hotel_args = array(
 		'labels'             => $hotel_labels,
 		'public'             => true,
+        'show_in_rest'       => true,
 		'publicly_queryable' => true,
 		'show_ui'            => true,
 		'show_in_menu'       => true,
@@ -65,6 +66,10 @@ if ( tfopt( 'disable-services' ) && in_array( 'hotel', tfopt( 'disable-services'
 } else {
 	add_action( 'init', 'register_tf_hotel_post_type' );
 }
+
+add_filter( 'use_block_editor_for_post_type', function( $enabled, $post_type ) {
+	return ( 'tf_hotel' === $post_type ) ? false : $enabled;
+}, 10, 2 );
 
 /**
  * Get Default Labels

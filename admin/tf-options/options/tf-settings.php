@@ -900,7 +900,226 @@ TF_Settings::option( 'tf_settings', array(
 
 			),
 		),
-
+		//Frontend Dashboard
+		'frontend_dashboard' => array(
+			'title'  => esc_html__( 'Frontend Dashboard', 'tourfic' ),
+			'icon'   => 'fa-solid fa-gauge-high',
+			'fields' => array(
+				//logo
+				array(
+					'id'    => '',
+					'type'  => 'image',
+					'label' => __( 'Logo', 'tourfic' ),
+					'library'      => 'image',
+					'placeholder'  => 'http://',
+					'button_title' => __( 'Add Image', 'tourfic' ),
+					'remove_title' => __( 'Remove Image', 'tourfic' ),
+					'is_pro'       => true,
+				),
+				//minified logo
+				array(
+					'id'    => '',
+					'type'  => 'image',
+					'label' => __( 'Minified Logo', 'tourfic' ),
+					'library'      => 'image',
+					'placeholder'  => 'http://',
+					'button_title' => __( 'Add Image', 'tourfic' ),
+					'remove_title' => __( 'Remove Image', 'tourfic' ),
+					'is_pro'       => true,
+				),
+				//mobile logo
+				array(
+					'id'    => '',
+					'type'  => 'image',
+					'label' => __( 'Mobile Logo', 'tourfic' ),
+					'library'      => 'image',
+					'placeholder'  => 'http://',
+					'button_title' => __( 'Add Image', 'tourfic' ),
+					'remove_title' => __( 'Remove Image', 'tourfic' ),
+					'is_pro'       => true,
+				),
+			),
+		),
+		//user options
+		'user_options'       => array(
+			'title'  => __( 'User Options', 'tourfic' ),
+			'icon'   => 'fas fa-user',
+			'fields' => array(
+				array(
+					'id'   => 'tf_user_permission',
+					'type' => 'tab',
+					'tabs' => array(
+						array(
+							'id'     => 'vendor_permission',
+							'title'  => 'Vendor Settings',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'       => '',
+									'type'     => 'checkbox',
+									'label'    => __( 'Vendor Can Add Post', 'tourfic' ),
+									'subtitle' => __( 'Select the post type that you want to allow vendor to add.', 'tourfic' ),
+									'is_pro'       => true,
+									'options'  => array(
+										'hotel' => __( 'Hotel', 'tourfic' ),
+										'tour'  => __( 'Tour', 'tourfic' ),
+									),
+									'default'  => array(
+										'hotel',
+										'tour',
+									),
+								),
+								array(
+									'id'       => '',
+									'type'     => 'checkbox',
+									'label'    => __( 'Vendor Can Add Taxonomy', 'tourfic' ),
+									'subtitle' => __( 'Select the taxonomy that you want to allow vendor to add.', 'tourfic' ),
+									'is_pro'       => true,
+									'options'  => array(
+										'hotel_location'   => __( 'Hotel Location', 'tourfic' ),
+										'hotel_feature'    => __( 'Hotel Feature', 'tourfic' ),
+										'tour_destination' => __( 'Tour Destination', 'tourfic' ),
+										'tour_attraction'  => __( 'Tour Attraction', 'tourfic' ),
+										'tour_activities'  => __( 'Tour Activities', 'tourfic' ),
+										'tour_features'    => __( 'Tour Features', 'tourfic' ),
+									),
+									'default'  => array(
+										'hotel_location',
+										'hotel_feature',
+										'tour_destination',
+										'tour_attraction',
+										'tour_activities',
+										'tour_features',
+									),
+								),
+								array(
+									'id'       => '',
+									'type'     => 'checkbox',
+									'label'    => __( 'Vendor Can Manage Options', 'tourfic' ),
+									'subtitle' => __( 'Select the options that you want to allow vendor to manage.', 'tourfic' ),
+									'is_pro'       => true,
+									'options'  => array(
+										'view_hotel_enquiry' => __( 'View Hotel Enquiry', 'tourfic' ),
+										'view_hotel_booking' => __( 'View Hotel Booking', 'tourfic' ),
+										'view_tour_enquiry'  => __( 'View Tour Enquiry', 'tourfic' ),
+										'view_tour_booking'  => __( 'View Tour Booking', 'tourfic' ),
+										'view_commission'    => __( 'View Commission', 'tourfic' ),
+										'view_payout'        => __( 'View Payout', 'tourfic' ),
+									),
+									'default'  => array(
+										'view_hotel_enquiry',
+										'view_hotel_booking',
+										'view_tour_enquiry',
+										'view_tour_booking',
+										'view_commission',
+										'view_payout',
+									),
+								),
+							)
+						),
+						array(
+							'id'     => 'manager_permission',
+							'title'  => 'Manager Settings',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'       => '',
+									'type'     => 'checkbox',
+									'label'    => __( 'Manager Can Add Post', 'tourfic' ),
+									'subtitle' => __( 'Select the post type that you want to allow manager to manage.', 'tourfic' ),
+									'is_pro'       => true,
+									'options'  => array(
+										'hotel' => __( 'Hotel', 'tourfic' ),
+										'tour'  => __( 'Tour', 'tourfic' ),
+									),
+									'default'  => array(
+										'hotel',
+										'tour',
+									),
+								),
+								array(
+									'id'       => '',
+									'type'     => 'checkbox',
+									'label'    => __( 'Manager Can Add Taxonomy', 'tourfic' ),
+									'subtitle' => __( 'Select the taxonomy that you want to allow manager to manage.', 'tourfic' ),
+									'is_pro'       => true,
+									'options'  => array(
+										'hotel_location'   => __( 'Hotel Location', 'tourfic' ),
+										'hotel_feature'    => __( 'Hotel Feature', 'tourfic' ),
+										'tour_destination' => __( 'Tour Destination', 'tourfic' ),
+										'tour_attraction'  => __( 'Tour Attraction', 'tourfic' ),
+										'tour_activities'  => __( 'Tour Activities', 'tourfic' ),
+										'tour_features'    => __( 'Tour Features', 'tourfic' ),
+									),
+									'default'  => array(
+										'hotel_location',
+										'hotel_feature',
+										'tour_destination',
+										'tour_attraction',
+										'tour_activities',
+										'tour_features',
+									),
+								),
+								array(
+									'id'       => '',
+									'type'     => 'checkbox',
+									'label'    => __( 'Manager Can Manage Options', 'tourfic' ),
+									'subtitle' => __( 'Select the options that you want to allow manager to manage.', 'tourfic' ),
+									'is_pro'       => true,
+									'options'  => array(
+										'approve_hotel'      => __( 'Approve Hotel', 'tourfic' ),
+										'add_hotel'          => __( 'Add Hotel', 'tourfic' ),
+										'edit_hotel'         => __( 'Edit Hotel', 'tourfic' ),
+										'delete_hotel'       => __( 'Delete Hotel', 'tourfic' ),
+										'approve_tour'       => __( 'Approve Tour', 'tourfic' ),
+										'add_tour'           => __( 'Add Tour', 'tourfic' ),
+										'edit_tour'          => __( 'Edit Tour', 'tourfic' ),
+										'delete_tour'        => __( 'Delete Tour', 'tourfic' ),
+										'approve_vendor'     => __( 'Approve Vendor', 'tourfic' ),
+										'add_vendor'         => __( 'Add Vendor', 'tourfic' ),
+										'edit_vendor'        => __( 'Edit Vendor', 'tourfic' ),
+										'delete_vendor'      => __( 'Delete Vendor', 'tourfic' ),
+										'approve_payout'     => __( 'Approve Payout', 'tourfic' ),
+										'add_payout'         => __( 'Add Payout', 'tourfic' ),
+										'edit_payout'        => __( 'Edit Payout', 'tourfic' ),
+										'view_hotel_enquiry' => __( 'View Hotel Enquiry', 'tourfic' ),
+										'view_hotel_booking' => __( 'View Hotel Booking', 'tourfic' ),
+										'view_tour_enquiry'  => __( 'View Tour Enquiry', 'tourfic' ),
+										'view_tour_booking'  => __( 'View Tour Booking', 'tourfic' ),
+										'view_commission'    => __( 'View Commission', 'tourfic' ),
+										'view_payout'        => __( 'View Payout', 'tourfic' ),
+									),
+									'default'  => array(
+										'approve_hotel',
+										'add_hotel',
+										'edit_hotel',
+										'delete_hotel',
+										'approve_tour',
+										'add_tour',
+										'edit_tour',
+										'delete_tour',
+										'approve_vendor',
+										'add_vendor',
+										'edit_vendor',
+										'delete_vendor',
+										'approve_payout',
+										'decline_payout',
+										'add_payout',
+										'edit_payout',
+										'view_hotel_enquiry',
+										'view_hotel_booking',
+										'view_tour_enquiry',
+										'view_tour_booking',
+										'view_commission',
+										'view_payout',
+									),
+								),
+							)
+						),
+					)
+				),
+			)
+		),
 		// Multi Vendor
 		'vendor'             => array(
 			'title'  => esc_html__( 'Multi Vendor', 'tourfic' ),
@@ -929,13 +1148,13 @@ TF_Settings::option( 'tf_settings', array(
 									'subtitle' => __('Partner be automatic approval (register account).','tourfic'),
 									'is_pro'   => true,
 								),
-								array(
+								/*array(
 									'id'        => 'reg-pop',
 									'type'      => 'switch',
 									'label'     => __( 'Registration Form Popup', 'tourfic' ),
 									'subtitle'  => __( 'Add class <code>tf-reg-popup</code> to trigger the popup', 'tourfic' ),
 									'is_pro'   => true,
-								),
+								),*/
 
 								array(
 									'id'      => 'notice',
@@ -1105,145 +1324,6 @@ TF_Settings::option( 'tf_settings', array(
 										'max' => '28',
 									),
 									'is_pro'   => true,
-								),
-							),
-						),
-						array(
-							'id'     => 'login-setting',
-							'title'  => 'Social Login Options',
-							'icon'   => 'fa fa-gear',
-							'fields' => array(
-								array(
-									'id'    => 'vendor-google-login',
-									'type'  => 'switch',
-									'label' => __( 'Allow Google Login', 'tourfic' ),
-									'subtitle' => __('ON: Partner is allowed to Google Login','tourfic'),
-									'is_pro'   => true,
-								),
-								array(
-									'id'      => 'app_id',
-									'type'    => 'text',
-									'label' => __( 'Google App Client ID', 'tourfic' ),
-									'subtitle' => __('Enter the App ID','tourfic'),
-									'dependency' => array(
-										array( 'vendor-google-login', '==', true ),
-									),
-									'is_pro'   => true,
-								),
-								array(
-									'id'      => 'app_secret_id',
-									'type'    => 'text',
-									'label' => __( 'Google App Client Secret', 'tourfic' ),
-									'subtitle' => __('Enter the App Secret','tourfic'),
-									'dependency' => array(
-										array( 'vendor-google-login', '==', true ),
-									),
-									'is_pro'   => true,
-								),
-								array(
-									'id'      => 'app_redirect_uri',
-									'type'    => 'text',
-									'label' => __( 'Google Redirect URI', 'tourfic' ),
-									'subtitle' => __('Enter the Redirect URI','tourfic'),
-									'dependency' => array(
-										array( 'vendor-google-login', '==', true ),
-									),
-									'is_pro'   => true,
-								),
-							),
-						),
-						array(
-							'id'     => 'vendor-registration-fields',
-							'title'  => 'Custom Registration Fields',
-							'icon'   => 'fa fa-gear',
-							'fields' => array(
-								array(
-									'id'       => 'vendor-registration',
-									'class'    => 'disable-sortable',
-									'type'     => 'repeater',
-									'button_title' => __( 'Add New', 'tourfic' ),
-									'label'    => __( 'Registration Fields for Vendor', 'tourfic' ),
-									'subtitle' => __( 'Custom fields allowed', 'tourfic' ),
-									'is_pro'   => true,
-									'fields'   => array(
-										array(
-											'id'    => 'reg-field-label',
-											'type'  => 'text',
-											'label' => __( 'Label', 'tourfic' ),
-										),
-										array(
-											'id'    => 'reg-field-name',
-											'type'  => 'text',
-											'label' => __( 'Name', 'tourfic' ),
-											'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
-										),
-										array(
-											'id'      => 'reg-fields-type',
-											'type'    => 'select',
-											'label'   => __( 'Field Type', 'tourfic' ),
-											'options' => array(
-												'text' => __( 'Text', 'tourfic' ),
-												'email' => __( 'Email', 'tourfic' ),
-												'password' => __( 'Password', 'tourfic' ),
-												'textarea' => __( 'Textarea', 'tourfic' ),
-												'radio' => __( 'Radio', 'tourfic' ),
-												'select' => __( 'Select', 'tourfic' ),
-											),
-										),
-										array(
-											'id'     => 'reg-options',
-											'type'   => 'repeater',
-											'button_title' => __( 'Add New Option', 'tourfic' ),
-											'label'  => __( 'Option Label', 'tourfic' ),
-											'dependency' => array(
-												array( 'reg-fields-type', '==', 'radio' ),
-											),
-											'fields' => array(
-												array(
-													'label'   => __( 'Field Label', 'tourfic' ),
-													'id'      => 'option-label',
-													'type'    => 'text',
-												),
-												array(
-													'label'   => __( 'Field Value', 'tourfic' ),
-													'id'      => 'option-value',
-													'type'    => 'text',
-												),
-											),
-										),
-										array(
-											'id'     => 'reg-options',
-											'type'   => 'repeater',
-											'button_title' => __( 'Add New Option', 'tourfic' ),
-											'label'  => __( 'Option Label', 'tourfic' ),
-											'dependency' => array(
-												array( 'reg-fields-type', '==', 'select' ),
-											),
-											'fields' => array(
-												array(
-													'label'   => __( 'Field Label', 'tourfic' ),
-													'id'      => 'option-label',
-													'type'    => 'text',
-												),
-												array(
-													'label'   => __( 'Field Value', 'tourfic' ),
-													'id'      => 'option-value',
-													'type'    => 'text',
-												),
-											),
-										),
-										array(
-											'id'    => 'reg-field-placeholder',
-											'type'  => 'text',
-											'label' => __( 'Placeholder', 'tourfic' ),
-										),
-										array(
-											'id'    => 'reg-field-required',
-											'type'  => 'switch',
-											'label' => __( 'Required Field ?', 'tourfic' ),
-										),
-
-									),
 								),
 							),
 						),
@@ -2077,6 +2157,304 @@ TF_Settings::option( 'tf_settings', array(
 			'title'  => __( 'Miscellaneous', 'tourfic' ),
 			'icon'   => 'fas fa-globe',
 			'fields' => array(),
+		),
+		/**
+		 * Login Register Settings
+		 *
+		 * Sub Menu
+		 */
+		'login_register'     => array(
+			'title'  => __( 'Login & Register', 'tourfic' ),
+			'parent' => 'miscellaneous',
+			'icon'   => 'fas fa-user',
+			'fields' => array(
+				array(
+					'id'   => 'log_reg_settings',
+					'type' => 'tab',
+					'tabs' => array(
+						array(
+							'id'     => 'login-setting',
+							'title'  => 'Login Settings',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'         => '',
+									'type'       => 'select',
+									'options'    => 'posts',
+									'query_args' => array(
+										'post_type'      => 'page',
+										'posts_per_page' => - 1,
+									),
+									'label'      => __( 'Login Page', 'tourfic' ),
+									'subtitle'   => __( 'Select a page for login', 'tourfic' ),
+									'default'    => get_option( 'tf_login_page_id' ),
+									'is_pro'       => true,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'select',
+									'label'       => __( 'Login Redirect', 'tourfic' ),
+									'subtitle'    => __( 'Select a type for login redirect', 'tourfic' ),
+									'options'     => array(
+										'page' => __( 'Page', 'tourfic' ),
+										'url'  => __( 'Custom URL', 'tourfic' ),
+									),
+									'field_width' => '50',
+									'is_pro'       => true,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'select',
+									'options'     => 'posts',
+									'query_args'  => array(
+										'post_type'      => 'page',
+										'posts_per_page' => - 1,
+									),
+									'label'       => __( 'Login Redirect Page', 'tourfic' ),
+									'subtitle'    => __( 'Select a page for login redirect', 'tourfic' ),
+									'default'     => get_option( 'tf_dashboard_page_id' ),
+									'field_width' => '50',
+									'dependency'  => array( 'login_redirect_type', '==', 'page' ),
+									'is_pro'       => true,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'label'       => __( 'Login Redirect Url', 'tourfic' ),
+									'subtitle'    => __( 'Enter a URL to redirect after login', 'tourfic' ),
+									'default'     => site_url() . '/tf-dashboard',
+									'field_width' => '50',
+									'dependency'  => array( 'login_redirect_type', '==', 'url' ),
+									'is_pro'       => true,
+								),
+							),
+						),
+						array(
+							'id'     => 'register-setting',
+							'title'  => 'Register Settings',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'         => '',
+									'type'       => 'select',
+									'options'    => 'posts',
+									'query_args' => array(
+										'post_type'      => 'page',
+										'posts_per_page' => - 1,
+									),
+									'label'      => __( 'Register Page', 'tourfic' ),
+									'subtitle'   => __( 'Select a page for register', 'tourfic' ),
+									'default'    => get_option( 'tf_register_page_id' ),
+									'is_pro'       => true,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'select',
+									'label'       => __( 'Register Redirect', 'tourfic' ),
+									'subtitle'    => __( 'Select a type for register redirect', 'tourfic' ),
+									'options'     => array(
+										'page' => __( 'Page', 'tourfic' ),
+										'url'  => __( 'Custom URL', 'tourfic' ),
+									),
+									'field_width' => '50',
+									'is_pro'       => true,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'select',
+									'options'     => 'posts',
+									'query_args'  => array(
+										'post_type'      => 'page',
+										'posts_per_page' => - 1,
+									),
+									'label'       => __( 'Register Redirect Page', 'tourfic' ),
+									'subtitle'    => __( 'Select a page for register redirect', 'tourfic' ),
+									'default'     => get_option( 'tf_login_page_id' ),
+									'field_width' => '50',
+									'dependency'  => array( 'register_redirect_type', '==', 'page' ),
+									'is_pro'       => true,
+								),
+								array(
+									'id'          => '',
+									'type'        => 'text',
+									'label'       => __( 'Register Redirect Url', 'tourfic' ),
+									'subtitle'    => __( 'Enter a URL to redirect after register', 'tourfic' ),
+									'default'     => site_url() . '/tf-login',
+									'field_width' => '50',
+									'dependency'  => array( 'register_redirect_type', '==', 'url' ),
+									'is_pro'       => true,
+								),
+							),
+						),
+						array(
+							'id'     => 'social-login-setting',
+							'title'  => 'Social Login Options',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'       => '',
+									'type'     => 'switch',
+									'label'    => __( 'Allow Google Login', 'tourfic' ),
+									'subtitle' => __( 'ON: Partner is allowed to Google Login', 'tourfic' ),
+									'badge_up' => true,
+									'is_pro'       => true,
+								),
+								array(
+									'id'         => '',
+									'type'       => 'text',
+									'label'      => __( 'Google App Client ID', 'tourfic' ),
+									'subtitle'   => __( 'Enter the App ID', 'tourfic' ),
+									'dependency' => array(
+										array( 'vendor-google-login', '==', true ),
+									),
+									'badge_up'   => true,
+									'is_pro'       => true,
+								),
+								array(
+									'id'         => '',
+									'type'       => 'text',
+									'label'      => __( 'Google App Client Secret', 'tourfic' ),
+									'subtitle'   => __( 'Enter the App Secret', 'tourfic' ),
+									'dependency' => array(
+										array( 'vendor-google-login', '==', true ),
+									),
+									'badge_up'   => true,
+									'is_pro'       => true,
+								),
+								array(
+									'id'         => '',
+									'type'       => 'text',
+									'label'      => __( 'Google Redirect URI', 'tourfic' ),
+									'subtitle'   => __( 'Enter the Redirect URI', 'tourfic' ),
+									'dependency' => array(
+										array( 'vendor-google-login', '==', true ),
+									),
+									'badge_up'   => true,
+									'is_pro'       => true,
+								),
+							),
+						),
+						array(
+							'id'     => 'registration-fields',
+							'title'  => 'Custom Registration Fields',
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'           => '',
+									'class'        => 'disable-sortable',
+									'type'         => 'repeater',
+									'button_title' => __( 'Add New', 'tourfic' ),
+									'label'        => __( 'Registration Fields for Vendor', 'tourfic' ),
+									'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
+									'is_pro'       => true,
+									'fields'       => array(
+										array(
+											'id'    => 'reg-field-label',
+											'type'  => 'text',
+											'label' => __( 'Label', 'tourfic' ),
+										),
+										array(
+											'id'       => 'reg-field-name',
+											'type'     => 'text',
+											'label'    => __( 'Name', 'tourfic' ),
+											'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
+											'validate' => 'no_space_no_special',
+										),
+										array(
+											'id'      => 'reg-fields-type',
+											'type'    => 'select',
+											'label'   => __( 'Field Type', 'tourfic' ),
+											'options' => array(
+												'text'     => __( 'Text', 'tourfic' ),
+												'email'    => __( 'Email', 'tourfic' ),
+												'password' => __( 'Password', 'tourfic' ),
+												'textarea' => __( 'Textarea', 'tourfic' ),
+												'radio'    => __( 'Radio', 'tourfic' ),
+												'checkbox' => __( 'Checkbox', 'tourfic' ),
+												'select'   => __( 'Select', 'tourfic' ),
+											),
+										),
+										array(
+											'id'           => 'radio-reg-options',
+											'type'         => 'repeater',
+											'button_title' => __( 'Add New Option', 'tourfic' ),
+											'label'        => __( 'Option Label', 'tourfic' ),
+											'dependency'   => array(
+												array( 'reg-fields-type', '==', 'radio' ),
+											),
+											'fields'       => array(
+												array(
+													'label' => __( 'Field Label', 'tourfic' ),
+													'id'    => 'option-label',
+													'type'  => 'text',
+												),
+												array(
+													'label' => __( 'Field Value', 'tourfic' ),
+													'id'    => 'option-value',
+													'type'  => 'text',
+												),
+											),
+										),
+										array(
+											'id'           => 'select-reg-options',
+											'type'         => 'repeater',
+											'button_title' => __( 'Add New Option', 'tourfic' ),
+											'label'        => __( 'Option Label', 'tourfic' ),
+											'dependency'   => array(
+												array( 'reg-fields-type', '==', 'select' ),
+											),
+											'fields'       => array(
+												array(
+													'label' => __( 'Field Label', 'tourfic' ),
+													'id'    => 'option-label',
+													'type'  => 'text',
+												),
+												array(
+													'label' => __( 'Field Value', 'tourfic' ),
+													'id'    => 'option-value',
+													'type'  => 'text',
+												),
+											),
+										),
+										array(
+											'id'           => 'checkbox-reg-options',
+											'type'         => 'repeater',
+											'button_title' => __( 'Add New Option', 'tourfic' ),
+											'label'        => __( 'Option Label', 'tourfic' ),
+											'dependency'   => array(
+												array( 'reg-fields-type', '==', 'checkbox' ),
+											),
+											'fields'       => array(
+												array(
+													'label' => __( 'Field Label', 'tourfic' ),
+													'id'    => 'option-label',
+													'type'  => 'text',
+												),
+												array(
+													'label' => __( 'Field Value', 'tourfic' ),
+													'id'    => 'option-value',
+													'type'  => 'text',
+												),
+											),
+										),
+										array(
+											'id'    => 'reg-field-placeholder',
+											'type'  => 'text',
+											'label' => __( 'Placeholder', 'tourfic' ),
+										),
+										array(
+											'id'    => 'reg-field-required',
+											'type'  => 'switch',
+											'label' => __( 'Required Field ?', 'tourfic' ),
+										),
+
+									),
+								),
+							),
+						),
+					),
+				),
+			)
 		),
 		/**
 		 * Google Map

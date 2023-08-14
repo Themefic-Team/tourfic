@@ -335,6 +335,9 @@ function tf_average_rating_percent( $rating = 0, $total = 5 ) {
  * @param array $overall_rating
  */
 function tf_calculate_user_ratings( $comment, &$overall_rating, &$total_rate ) {
+	if ( ! is_array( $total_rate ) ) {
+		$total_rate = array();
+	}
 	$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
 	$tf_base_rate    = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
 

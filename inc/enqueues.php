@@ -143,20 +143,20 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         wp_enqueue_style( 'notyf', TF_ASSETS_URL . 'app/libs/notyf/notyf.min.css', '', TOURFIC );
 		wp_enqueue_script( 'notyf', TF_ASSETS_URL . 'app/libs/notyf/notyf.min.js', array( 'jquery' ), TOURFIC, true );
 
-        /**
-         * Openstreet Map
-         * v1.9
-         */
+		/**
+		 * Openstreet Map
+		 * v1.9
+		 */
 
-         $tf_openstreet_map = ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "default";
-         if ( $tf_openstreet_map == "default" ) {
-             wp_enqueue_script( 'tf-leaflet', esc_url( '//cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.js' ), array( ), '1.9' );
-             wp_enqueue_style( 'tf-leaflet', esc_url( '//cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.css' ), array(), '1.9' );
-         }
-         
-        /**
-         * Hotel Min and Max Price
-         */
+		$tf_openstreet_map = ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "default";
+		if ( $tf_openstreet_map == "default" ) {
+			wp_enqueue_script( 'tf-leaflet', esc_url( '//cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.js' ), array(), '1.9' );
+			wp_enqueue_style( 'tf-leaflet', esc_url( '//cdn.jsdelivr.net/npm/leaflet@' . '1.9' . '/dist/leaflet.css' ), array(), '1.9' );
+		}
+
+		/**
+		 * Hotel Min and Max Price
+		 */
 
         $tfhotel_min_max = array(
             'posts_per_page'=> -1,

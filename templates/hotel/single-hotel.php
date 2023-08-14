@@ -80,7 +80,7 @@ while ( have_posts() ) : the_post();
 	// Location
 	$address = ! empty( $meta['address'] ) ? $meta['address'] : '';
 	$map     = ! empty( $meta['map'] ) ? $meta['map'] : '';
-	if ( ! empty( $map ) && gettype( $map ) == "string" ) {
+	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $map ) && gettype( $map ) == "string" ) {
 		$tf_hotel_map_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
 			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
 		}, $map );
@@ -120,7 +120,7 @@ while ( have_posts() ) : the_post();
 	$share_link = get_permalink( $post_id );
 	// Map Type
 	$tf_openstreet_map = ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "default";
-	
+
 	// Single Template Style
 	$tf_hotel_layout_conditions = ! empty( $meta['tf_single_hotel_layout_opt'] ) ? $meta['tf_single_hotel_layout_opt'] : 'global';
 	if("single"==$tf_hotel_layout_conditions){

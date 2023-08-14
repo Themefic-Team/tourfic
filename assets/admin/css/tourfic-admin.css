@@ -185,7 +185,7 @@ Custom Modal
 Ajax Loader
 */
 .tf-btn-loading {
-  padding-right: 40px;
+  padding-right: 40px !important;
   position: relative;
 }
 
@@ -3624,7 +3624,7 @@ Steps
   object-fit: cover;
   object-position: top;
   height: 180px;
-  transition: 2s all ease;
+  transition: object-position 2s ease-in-out, border-color 0.3s ease-in-out;
 }
 .tf-image-radio-group li .tf-image-checkbox img:hover {
   object-position: bottom;

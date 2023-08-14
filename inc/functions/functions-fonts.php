@@ -1546,24 +1546,20 @@ if ( ! function_exists( 'tourfic_google_fonts_list' ) ) {
     return $fonts_array;
     }
 }
-
-function tourfic_google_fonts_url(){
-	$tf_global_font = tfopt('global-body-fonts-family') ? tfopt('global-body-fonts-family') : 'Default';
-	$tf_global_heading_font_family = tfopt('global-heading-fonts-family') ? tfopt('global-heading-fonts-family') : 'Default';
-	if($tf_global_font!="Default" && $tf_global_heading_font_family!="Default"){
-		$url = 'https://fonts.googleapis.com/css2?family='. str_replace("_","+",$tf_global_font) .'&family='. str_replace("_","+",$tf_global_heading_font_family) .':wght@100;200;300;400;500;600;700;800;900&display=swap';
-	}else if($tf_global_font=="Default" && $tf_global_heading_font_family!="Default"){
-        $url = 'https://fonts.googleapis.com/css2?family='. str_replace("_","+",$tf_global_heading_font_family) .':wght@100;200;300;400;500;600;700;800;900&display=swap';
-    }else if($tf_global_font!="Default" && $tf_global_heading_font_family=="Default"){
-        $url = 'https://fonts.googleapis.com/css2?family='. str_replace("_","+",$tf_global_font) .':wght@100;200;300;400;500;600;700;800;900&display=swap';
-    }else{
-		$url = "";
-	}
-	
-	return $url;
-}
-
-function tourfic_google_fonts_scriptss() {
-	wp_enqueue_style( 'tourfic-google-fonts', tourfic_google_fonts_url(), array(), '' );
+if ( ! function_exists( 'tourfic_google_fonts_scriptss' ) ) {
+    function tourfic_google_fonts_scriptss() {
+        $tf_global_font = tfopt('global-body-fonts-family') ? tfopt('global-body-fonts-family') : 'Default';
+        $tf_global_heading_font_family = tfopt('global-heading-fonts-family') ? tfopt('global-heading-fonts-family') : 'Default';
+        
+        if($tf_global_heading_font_family!="Default"){
+            $heading_url = 'https://fonts.googleapis.com/css2?family='. str_replace("_","+",$tf_global_heading_font_family) .':wght@100;200;300;400;500;600;700;800;900&display=swap';
+            wp_enqueue_style( 'tourfic-google-'.$tf_global_heading_font_family, $heading_url, array(), '' );
+        }
+        
+        if($tf_global_font!="Default"){
+            $body_url = 'https://fonts.googleapis.com/css2?family='. str_replace("_","+",$tf_global_font) .':wght@100;200;300;400;500;600;700;800;900&display=swap';
+            wp_enqueue_style( 'tourfic-google-'.$tf_global_font, $body_url, array(), '' );
+        }
+    }
 }
 add_action( 'wp_enqueue_scripts', 'tourfic_google_fonts_scriptss', 9999999 );

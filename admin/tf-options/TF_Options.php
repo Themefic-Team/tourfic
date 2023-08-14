@@ -312,8 +312,9 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				wp_enqueue_media();
 				wp_enqueue_editor();
 			}
-			//Color-Picker JS
-			wp_enqueue_script( 'wp-color-picker-alpha', TF_ASSETS_URL . 'admin/js/lib/wp-color-picker-alpha.js', array( 'jquery', 'wp-color-picker' ), $this->tf_options_version(), true );
+
+			wp_enqueue_style( 'wp-color-picker' );
+			wp_enqueue_script( 'wp-color-picker' );
 
 			$tf_google_map = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "false";
 			wp_localize_script( 'tf-admin', 'tf_options', array(
@@ -324,6 +325,18 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				'tf_cancel_orders'  => isset( $tf_cancel_orders ) ? $tf_cancel_orders : '',
 				'tf_chart_enable'   => isset( $tf_chart_enable ) ? $tf_chart_enable : ''
 			) );
+		}
+
+		/**
+		 * Dequeue scripts
+		 */
+		public function tf_options_admin_dequeue_scripts( $screen ) {
+			global $post_type;
+			$tf_options_post_type = array( 'tf_hotel', 'tf_tours', 'tf_apartment' );
+
+			if ( $screen == 'toplevel_page_tf_settings' || in_array( $post_type, $tf_options_post_type ) ) {
+				wp_dequeue_script( 'theplus-admin-js-pro' );
+			}
 		}
 
 		/**

@@ -173,7 +173,7 @@ foreach ( $rooms as $key => $room ) {
                                                 <?php _e("Room Photos & Details","tourfic"); ?>
                                             </a>
 
-                                        <div id="tour_room_details_qv" class="tf-reg-wrap <?php echo $tf_hotel_selected_template == "design-1" ? "tf-hotel-design-1-popup" : ""; ?>">
+                                        <div id="tour_room_details_qv" class=" <?php echo $tf_hotel_selected_template == "design-1" ? "tf-hotel-design-1-popup" : ""; ?>">
 
                                         </div>
                                     <?php } ?>

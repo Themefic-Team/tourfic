@@ -14,5 +14,10 @@ if( ( !empty($_GET['type']) && $_GET['type']=="tf_tours" && $tf_tour_arc_selecte
 }else{
 	include TF_TEMPLATE_PART_PATH . 'search/design-default.php';
 }
+while ( have_posts() ) :
 
+	the_post();
+
+	the_content();
+endwhile;
 get_footer('tourfic');
