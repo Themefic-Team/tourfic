@@ -2016,7 +2016,7 @@
             let hasErrors = [];
             $('.error-text').text("");
             $('.tf-single-travel').each(function() {
-                $(this).find('input').each(function() {
+                $(this).find('input, select').each(function() {
                     if($(this).attr('data-required')){
                         if($(this).val() == ""){
                             hasErrors.push(true);
@@ -2030,39 +2030,7 @@
                         }
                     }
                 });
-                $(this).find('select').each(function() {
-                    if($(this).attr('data-required')){
-                        if($(this).val() == ""){
-                            hasErrors.push(true);
-                            const errorContainer = $(this).siblings('.error-text');
-                            errorContainer.text('This field is required.');
-                            if (errorContainer.text() !== '') {
-                                errorContainer.addClass('error-visible');
-                            } else {
-                                errorContainer.removeClass('error-visible');
-                            }
-                        }
-                    }
-                });
-                $(this).find('input[type="radio"]').each(function() {
-                    if ($(this).attr('data-required')) {
-                        const radioName = $(this).attr('name');
-                        const isChecked = $('input[name="' + radioName + '"]:checked').length > 0;
-                
-                        if (!isChecked) {
-                            hasErrors.push(true);
-                            const errorContainer = $(this).parent().siblings('.error-text');
-                            errorContainer.text('This field is required.');
-                            if (errorContainer.text() !== '') {
-                                errorContainer.addClass('error-visible');
-                            } else {
-                                errorContainer.removeClass('error-visible');
-                            }
-                        }
-                    }
-                });
-
-                $(this).find('input[type="checkbox"]').each(function() {
+                $(this).find('input[type="radio"], input[type="checkbox"]').each(function() {
                     if ($(this).attr('data-required')) {
                         const radioName = $(this).attr('name');
                         const isChecked = $('input[name="' + radioName + '"]:checked').length > 0;
@@ -2087,6 +2055,51 @@
             }
             tf_hasErrorsFlag = false;
         });
+
+        // Booking Confirmation Form Validation
+        $(document).on('click', '.tf-book-confirm-error', function (e) {
+            let hasErrors = [];
+            $('.error-text').text("");
+            $('.tf-confirm-fields').each(function() {
+                $(this).find('input, select').each(function() {
+                    if($(this).attr('data-required')){
+                        if($(this).val() == ""){
+                            hasErrors.push(true);
+                            const errorContainer = $(this).siblings('.error-text');
+                            errorContainer.text('This field is required.');
+                            if (errorContainer.text() !== '') {
+                                errorContainer.addClass('error-visible');
+                            } else {
+                                errorContainer.removeClass('error-visible');
+                            }
+                        }
+                    }
+                });
+                $(this).find('input[type="radio"], input[type="checkbox"]').each(function() {
+                    if ($(this).attr('data-required')) {
+                        const radioName = $(this).attr('name');
+                        const isChecked = $('input[name="' + radioName + '"]:checked').length > 0;
+                
+                        if (!isChecked) {
+                            hasErrors.push(true);
+                            const errorContainer = $(this).parent().siblings('.error-text');
+                            errorContainer.text('This field is required.');
+                            if (errorContainer.text() !== '') {
+                                errorContainer.addClass('error-visible');
+                            } else {
+                                errorContainer.removeClass('error-visible');
+                            }
+                        }
+                    }
+                });
+            });
+            if (hasErrors.includes(true)) {
+                tf_hasErrorsFlag = true;
+                return false;
+            }
+        });
+
+        // Navigation Next
         $(document).on('click', '.tf-tabs-control', function (e) {
             e.preventDefault();
             if (tf_hasErrorsFlag) {
@@ -2108,6 +2121,7 @@
             }
         });
 
+        // Navigation Back
         $(document).on('click', '.tf-step-back', function (e) {
             e.preventDefault();
             let step = $(this).attr("data-step"); 

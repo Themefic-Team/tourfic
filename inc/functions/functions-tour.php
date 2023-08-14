@@ -1116,51 +1116,98 @@ function tf_single_tour_booking_form( $post_id ) {
                                 <div class="tf-single-tour-traveller">
                                     <h4><?php echo __("Billing details","tourfic"); ?></h4>
                                     <div class="traveller-info billing-details">
-                                        <div class="traveller-single-info">
-                                            <label for="tf_firstname"><?php echo __("First Name","tourfic"); ?></label>
-                                            <input type="text" name="tf_firstname" id="tf_firstname">
-                                            <div class="error-text" data-error-for="tf_firstname"></div>
+                                        <?php 
+                                        $confirm_book_fields = !empty(tfopt( 'book-confirm-field' )) ? tf_data_types(tfopt( 'book-confirm-field' )) : '';
+                                        if(empty($confirm_book_fields)){
+                                        ?>
+                                        <div class="traveller-single-info tf-confirm-fields">
+                                            <label for="tf_first_name"><?php echo __("First Name","tourfic"); ?></label>
+                                            <input type="text" name="booking_confirm[tf_first_name]" id="tf_first_name" data-required="1" />
+                                            <div class="error-text" data-error-for="tf_first_name"></div>
                                         </div>
-                                        <div class="traveller-single-info">
-                                            <label for="tf_lastname"><?php echo __("Last Name","tourfic"); ?></label>
-                                            <input type="text" name="tf_lastname" id="tf_lastname">
-                                            <div class="error-text" data-error-for="tf_lastname"></div>
+                                        <div class="traveller-single-info tf-confirm-fields">
+                                            <label for="tf_last_name"><?php echo __("Last Name","tourfic"); ?></label>
+                                            <input type="text" name="booking_confirm[tf_last_name]" id="tf_last_name" data-required="1" />
+                                            <div class="error-text" data-error-for="tf_last_name"></div>
                                         </div>
-                                        <div class="traveller-single-info">
+                                        <div class="traveller-single-info tf-confirm-fields">
                                             <label for="tf_email"><?php echo __("Email","tourfic"); ?></label>
-                                            <input type="email" name="tf_email" id="tf_email">
+                                            <input type="email" name="booking_confirm[tf_email]" id="tf_email" data-required="1" />
                                             <div class="error-text" data-error-for="tf_email"></div>
                                         </div>
-                                        <div class="traveller-single-info">
+                                        <div class="traveller-single-info tf-confirm-fields">
                                             <label for="tf_phone"><?php echo __("Phone","tourfic"); ?></label>
-                                            <input type="text" name="tf_phone" id="tf_phone">
+                                            <input type="text" name="booking_confirm[tf_phone]" id="tf_phone" data-required="1" />
                                             <div class="error-text" data-error-for="tf_phone"></div>
                                         </div>
-                                        <div class="traveller-single-info">
+                                        <div class="traveller-single-info tf-confirm-fields">
                                             <label for="tf_country"><?php echo __("Country","tourfic"); ?></label>
-                                            <input type="text" name="tf_country" id="tf_country">
+                                            <input type="text" name="booking_confirm[tf_country]" id="tf_country" data-required="1" />
                                             <div class="error-text" data-error-for="tf_country"></div>
                                         </div>
-                                        <div class="traveller-single-info">
-                                            <label for="tf_address"><?php echo __("Street address","tourfic"); ?></label>
-                                            <input type="text" name="tf_address" id="tf_address">
-                                            <div class="error-text" data-error-for="tf_address"></div>
+                                        <div class="traveller-single-info tf-confirm-fields">
+                                            <label for="tf_street_address"><?php echo __("Street address","tourfic"); ?></label>
+                                            <input type="text" name="booking_confirm[tf_street_address]" id="tf_street_address" data-required="1" />
+                                            <div class="error-text" data-error-for="tf_street_address"></div>
                                         </div>
-                                        <div class="traveller-single-info">
-                                            <label for="tf_city"><?php echo __("Town / City","tourfic"); ?></label>
-                                            <input type="text" name="tf_city" id="tf_city">
-                                            <div class="error-text" data-error-for="tf_city"></div>
+                                        <div class="traveller-single-info tf-confirm-fields">
+                                            <label for="tf_town_city"><?php echo __("Town / City","tourfic"); ?></label>
+                                            <input type="text" name="booking_confirm[tf_town_city]" id="tf_town_city" data-required="1" />
+                                            <div class="error-text" data-error-for="tf_town_city"></div>
                                         </div>
-                                        <div class="traveller-single-info">
-                                            <label for="tf_state"><?php echo __("State / County","tourfic"); ?></label>
-                                            <input type="text" name="tf_state" id="tf_state">
-                                            <div class="error-text" data-error-for="tf_state"></div>
+                                        <div class="traveller-single-info tf-confirm-fields">
+                                            <label for="tf_state_country"><?php echo __("State / County","tourfic"); ?></label>
+                                            <input type="text" name="booking_confirm[tf_state_country]" id="tf_state_country" data-required="1" />
+                                            <div class="error-text" data-error-for="tf_state_country"></div>
                                         </div>
-                                        <div class="traveller-single-info">
-                                            <label for="tf_zipcode"><?php echo __("Postcode / ZIP","tourfic"); ?></label>
-                                            <input type="text" name="tf_zipcode" id="tf_zipcode">
-                                            <div class="error-text" data-error-for="tf_zipcode"></div>
+                                        <div class="traveller-single-info tf-confirm-fields">
+                                            <label for="tf_postcode"><?php echo __("Postcode / ZIP","tourfic"); ?></label>
+                                            <input type="text" name="booking_confirm[tf_postcode]" id="tf_postcode" data-required="1" />
+                                            <div class="error-text" data-error-for="tf_postcode"></div>
                                         </div>
+                                        <?php }else{
+                                        foreach($confirm_book_fields as $field){
+                                        if("text"==$field['reg-fields-type'] || "email"==$field['reg-fields-type'] || "date"==$field['reg-fields-type']){ ?>
+                                        <div class="traveller-single-info tf-confirm-fields">
+                                            <label for="<?php echo esc_attr($field['reg-field-name']); ?>"><?php echo esc_html( $field['reg-field-label'] ); ?></label>
+                                            <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="booking_confirm[<?php echo esc_attr($field['reg-field-name']); ?>]" id="<?php echo esc_attr($field['reg-field-name']); ?>" data-required="<?php echo $field['reg-field-required']; ?>" />
+                                            <div class="error-text" data-error-for="<?php echo esc_attr($field['reg-field-name']); ?>"></div>
+                                        </div>
+                                        <?php } if("select"==$field['reg-fields-type'] && !empty($field['reg-options'])){ ?>
+                                        <div class="traveller-single-info tf-confirm-fields">
+                                            <label for="<?php echo esc_attr($field['reg-field-name']); ?>">
+                                                <?php echo esc_html( $field['reg-field-label'] ); ?>
+                                            </label>
+                                            <select name="booking_confirm[<?php echo esc_attr($field['reg-field-name']); ?>]" id="<?php echo esc_attr($field['reg-field-name']); ?>" data-required="<?php echo $field['reg-field-required']; ?>">
+                                                <option value="">
+                                                    <?php echo sprintf( __( 'Select One', 'tourfic' )); ?>
+                                                </option>
+                                                <?php 
+                                                foreach($field['reg-options'] as $sfield){
+                                                if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){ ?>
+                                                    <option value="<?php echo esc_attr($sfield['option-value']); ?>"><?php echo esc_html( $sfield['option-label'] ); ?></option>
+                                                <?php }} ?>
+                                            </select>
+                                            <div class="error-text" data-error-for="<?php echo esc_attr($field['reg-field-name']); ?>"></div>
+                                        </div>
+                                        <?php } if(("checkbox"==$field['reg-fields-type'] || "radio"==$field['reg-fields-type']) && !empty($field['reg-options'])){ ?>
+                                        <div class="traveller-single-info tf-confirm-fields">
+                                            <label for="<?php echo esc_attr($field['reg-field-name']); ?>">
+                                                <?php echo esc_html( $field['reg-field-label'] ); ?>
+                                            </label>
+                                            <?php 
+                                            foreach($field['reg-options'] as $sfield){
+                                            if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){ ?>
+                                            <div class="tf-single-checkbox">
+                                                <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="booking_confirm[<?php echo esc_attr($field['reg-field-name']); ?>][]" id="<?php echo esc_attr($sfield['option-value']); ?>" value="<?php echo esc_html( $sfield['option-value'] ); ?>" data-required="<?php echo $field['reg-field-required']; ?>" />
+                                                <label for="<?php echo esc_attr($sfield['option-value']); ?>">
+                                                    <?php echo sprintf( __( '%s', 'tourfic' ),$sfield['option-label']); ?>
+                                                </label>
+                                            </div>
+                                            <?php }} ?>
+                                            <div class="error-text" data-error-for="<?php echo esc_attr($field['reg-field-name']); ?>"></div>
+                                        </div>
+                                        <?php } } } ?>
                                     </div>
                                 </div>
                             </div>
@@ -1233,7 +1280,7 @@ function tf_single_tour_booking_form( $post_id ) {
                             if ( function_exists('is_tf_pro') && is_tf_pro() && ($tour_extras || $traveller_info_coll) ) {  ?>
                             <a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo __("Back", "tourfic"); ?></a>
                             <?php } ?>
-                            <button type="submit"><?php echo __("Continue", "tourfic"); ?></button>
+                            <button type="submit" class="tf-book-confirm-error"><?php echo __("Continue", "tourfic"); ?></button>
                         </div>
                         <?php } ?>
                     </div>
@@ -3124,82 +3171,71 @@ function tf_tour_booking_popup_callback() {
             }
         }
         $traveller_info_fields = !empty(tfopt( 'without-payment-field' )) ? tf_data_types(tfopt( 'without-payment-field' )) : '';
-        // tf_var_dump($traveller_info_fields); exit();
+        
         $response['traveller_info']  = '';
         $response['traveller_summery']  = '';
         for($traveller_in = 1; $traveller_in<=$total_people; $traveller_in++){
             $response['traveller_info'] .= '<div class="tf-single-tour-traveller tf-single-travel">
                 <h4>'.sprintf( __( 'Traveler ', 'tourfic' )) .$traveller_in.'</h4>
-                <div class="traveller-info">
-                <div class="traveller-single-info">
-                    <label for="fullname'.$traveller_in.'">'.sprintf( __( 'Full Name', 'tourfic' )).'</label>
-                    <input type="text" name="traveller['.$traveller_in.'][fullname]" id="fullname'.$traveller_in.'">
-                </div>
-                <div class="traveller-single-info">
-                    <label for="dob'.$traveller_in.'">'.sprintf( __( 'Date of birth', 'tourfic' )).'</label>
-                    <input type="date" name="traveller['.$traveller_in.'][dob]" id="dob'.$traveller_in.'">
-                </div>
-                <div class="traveller-single-info">
-                    <label for="nid'.$traveller_in.'">'.sprintf( __( 'NID', 'tourfic' )).'</label>
-                    <input type="text" name="traveller['.$traveller_in.'][nid]" id="nid'.$traveller_in.'">
-                </div>
-                ';
-                foreach($traveller_info_fields as $field){
-                    if("text"==$field['reg-fields-type'] || "email"==$field['reg-fields-type'] || "date"==$field['reg-fields-type']){
-                        $response['traveller_info'] .='
-                        <div class="traveller-single-info">
-                            <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
-                            <div class="error-text" data-error-for="'.$field['reg-field-name'].$traveller_in.'"></div>
-                            <input type="'.$field['reg-fields-type'].'" name="traveller['.$traveller_in.']['.$field['reg-field-name'].']" data-required="'.$field['reg-field-required'].'" id="'.$field['reg-field-name'].$traveller_in.'">
-                        </div>';
-                    }
-                    if("select"==$field['reg-fields-type'] && !empty($field['reg-options'])){
-                        $response['traveller_info'] .='
-                        <div class="traveller-single-info">
-                            <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
-                            <div class="error-text" data-error-for="'.$field['reg-field-name'].$traveller_in.'"></div>
-                            <select id="'.$field['reg-field-name'].$traveller_in.'" name="traveller['.$traveller_in.']['.$field['reg-field-name'].']" data-required="'.$field['reg-field-required'].'"><option value="">'.sprintf( __( 'Select One', 'tourfic' )).'</option>';
-                            foreach($field['reg-options'] as $sfield){
-                                if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
-                                    $response['traveller_info'] .='<option value="'.$sfield['option-value'].'">'.$sfield['option-label'].'</option>';
-                                }
-                            }
-                            $response['traveller_info'] .='</select>
-                        </div>';
-                    }
-                    if("checkbox"==$field['reg-fields-type'] && !empty($field['reg-options'])){
-                        $response['traveller_info'] .='
-                        <div class="traveller-single-info">
-                        <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
-                        <div class="error-text" data-error-for="'.$field['reg-field-name'].$traveller_in.'"></div>
-                        ';
-                            foreach($field['reg-options'] as $sfield){
-                                if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
-                                    $response['traveller_info'] .='
-                                    <div class="tf-single-checkbox">
-                                    <input type="checkbox" name="traveller['.$traveller_in.']['.$field['reg-field-name'].'][]" id="'.$sfield['option-value'].$traveller_in.'" value="'.$sfield['option-value'].'" data-required="'.$field['reg-field-required'].'" />
-                                    <label for="'.$sfield['option-value'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$sfield['option-label']).'</label></div>';
-                                }
-                            }
+                <div class="traveller-info">';
+                if(empty($traveller_info_fields)){
+                    $response['traveller_info'] .= '<div class="traveller-single-info">
+                        <label for="tf_full_name'.$traveller_in.'">'.sprintf( __( 'Full Name', 'tourfic' )).'</label>
+                        <input type="text" name="traveller['.$traveller_in.'][tf_full_name]" id="tf_full_name'.$traveller_in.'" data-required="1" />
+                        <div class="error-text" data-error-for="tf_full_name'.$traveller_in.'"></div>
+                    </div>
+                    <div class="traveller-single-info">
+                        <label for="tf_dob'.$traveller_in.'">'.sprintf( __( 'Date of birth', 'tourfic' )).'</label>
+                        <input type="date" name="traveller['.$traveller_in.'][tf_dob]" id="tf_dob'.$traveller_in.'" data-required="1" />
+                        <div class="error-text" data-error-for="tf_dob'.$traveller_in.'"></div>
+                    </div>
+                    <div class="traveller-single-info">
+                        <label for="tf_nid'.$traveller_in.'">'.sprintf( __( 'NID', 'tourfic' )).'</label>
+                        <input type="text" name="traveller['.$traveller_in.'][tf_nid]" id="tf_nid'.$traveller_in.'" data-required="1" />
+                        <div class="error-text" data-error-for="tf_nid'.$traveller_in.'"></div>
+                    </div>
+                    ';
+                }else{
+                    foreach($traveller_info_fields as $field){
+                        if("text"==$field['reg-fields-type'] || "email"==$field['reg-fields-type'] || "date"==$field['reg-fields-type']){
                             $response['traveller_info'] .='
-                        </div>';
-                    }
-                    if("radio"==$field['reg-fields-type'] && !empty($field['reg-options'])){
-                        $response['traveller_info'] .='
-                        <div class="traveller-single-info">
-                        <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
-                        <div class="error-text" data-error-for="'.$field['reg-field-name'].$traveller_in.'"></div>
-                        ';
-                            foreach($field['reg-options'] as $sfield){
-                                if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
-                                    $response['traveller_info'] .='
-                                    <div class="tf-single-checkbox">
-                                    <input type="radio" name="traveller['.$traveller_in.']['.$field['reg-field-name'].']" id="'.$sfield['option-value'].$traveller_in.'" value="'.$sfield['option-value'].'" data-required="'.$field['reg-field-required'].'"/>
-                                    <label for="'.$sfield['option-value'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$sfield['option-label']).'</label></div>';
-                                }
-                            }
+                            <div class="traveller-single-info">
+                                <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
+                                <input type="'.$field['reg-fields-type'].'" name="traveller['.$traveller_in.']['.$field['reg-field-name'].']" data-required="'.$field['reg-field-required'].'" id="'.$field['reg-field-name'].$traveller_in.'" />
+                                <div class="error-text" data-error-for="'.$field['reg-field-name'].$traveller_in.'"></div>
+                            </div>';
+                        }
+                        if("select"==$field['reg-fields-type'] && !empty($field['reg-options'])){
                             $response['traveller_info'] .='
-                        </div>';
+                            <div class="traveller-single-info">
+                                <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
+                                <select id="'.$field['reg-field-name'].$traveller_in.'" name="traveller['.$traveller_in.']['.$field['reg-field-name'].']" data-required="'.$field['reg-field-required'].'"><option value="">'.sprintf( __( 'Select One', 'tourfic' )).'</option>';
+                                foreach($field['reg-options'] as $sfield){
+                                    if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
+                                        $response['traveller_info'] .='<option value="'.$sfield['option-value'].'">'.$sfield['option-label'].'</option>';
+                                    }
+                                }
+                                $response['traveller_info'] .='</select>
+                                <div class="error-text" data-error-for="'.$field['reg-field-name'].$traveller_in.'"></div>
+                            </div>';
+                        }
+                        if(("checkbox"==$field['reg-fields-type'] || "radio"==$field['reg-fields-type']) && !empty($field['reg-options'])){
+                            $response['traveller_info'] .='
+                            <div class="traveller-single-info">
+                            <label for="'.$field['reg-field-name'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']).'</label>
+                            ';
+                                foreach($field['reg-options'] as $sfield){
+                                    if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
+                                        $response['traveller_info'] .='
+                                        <div class="tf-single-checkbox">
+                                        <input type="'.esc_attr( $field['reg-fields-type'] ).'" name="traveller['.$traveller_in.']['.$field['reg-field-name'].'][]" id="'.$sfield['option-value'].$traveller_in.'" value="'.$sfield['option-value'].'" data-required="'.$field['reg-field-required'].'" />
+                                        <label for="'.$sfield['option-value'].$traveller_in.'">'.sprintf( __( '%s', 'tourfic' ),$sfield['option-label']).'</label></div>';
+                                    }
+                                }
+                                $response['traveller_info'] .='
+                            <div class="error-text" data-error-for="'.$field['reg-field-name'].$traveller_in.'"></div>
+                            </div>';
+                        }
                     }
                 }
                    
