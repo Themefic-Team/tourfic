@@ -49,7 +49,6 @@ function tf_tours_booking_function() {
 
 	// Booking Confirmation Details
 	$tf_confirmation_details = !empty($_POST['booking_confirm']) ? $_POST['booking_confirm'] : "";
-	tf_var_dump($tf_confirmation_details); exit();
 
 	// tf_var_dump($tf_visitor_details); exit();
 	/**
