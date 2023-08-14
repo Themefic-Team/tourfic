@@ -194,7 +194,6 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 							'label'   => __( 'Date', 'tourfic' ),
 							'type'    => 'date',
 							'format'  => 'Y/m/d',
-							'range'   => true,
 							'minDate' => 'today',
 						),
 						array(
@@ -247,8 +246,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 		 * @since 2.9.26
 		 */
 		public function tf_check_available_tour() {
-			$from     = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
-			$to       = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
+			$tourDate = isset( $_POST['tourDate'] ) ? sanitize_text_field( $_POST['tourDate'] ) : '';
 			$adults   = isset( $_POST['adults'] ) ? sanitize_text_field( $_POST['adults'] ) : '';
 			$children = isset( $_POST['children'] ) ? sanitize_text_field( $_POST['children'] ) : '';
 
@@ -259,11 +257,11 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 			) );
 
 			$period = '';
-			if ( ! empty( $from ) && ! empty( $to ) ) {
+			if ( ! empty( $tourDate ) ) {
 				$period = new DatePeriod(
-					new DateTime( $from ),
+					new DateTime( $tourDate ),
 					new DateInterval( 'P1D' ),
-					new DateTime( ! empty( $to ) ? $to : '23:59:59' )
+					new DateTime( '01:00:00' )
 				);
 			}
 
@@ -531,8 +529,8 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 					$allowed_times_field = ! empty( $meta['allowed_time'] ) ? $meta['allowed_time'] : '';
 
 					// Daily Tour Booking Capacity
-					$tf_total_adults      = 0;
-					$tf_total_childrens   = 0;
+					$tf_total_adults    = 0;
+					$tf_total_childrens = 0;
 					if ( empty( $allowed_times_field ) || $tour_time == null ) {
 						$tf_tour_booking_limit = ! empty( $meta['cont_max_capacity'] ) ? $meta['cont_max_capacity'] : 0;
 						foreach ( $tf_tour_query_orders as $order ) {
@@ -725,8 +723,8 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 						$allowed_times_field = ! empty( $item['allowed_time'] ) ? $item['allowed_time'] : '';
 
 						// Daily Tour Booking Capacity
-						$tf_total_adults      = 0;
-						$tf_total_childrens   = 0;
+						$tf_total_adults    = 0;
+						$tf_total_childrens = 0;
 						if ( empty( $allowed_times_field ) || $tour_time == null ) {
 							$tf_tour_booking_limit = ! empty( $item['max_capacity'] ) ? $item['max_capacity'] : '';
 							foreach ( $tf_tour_query_orders as $order ) {

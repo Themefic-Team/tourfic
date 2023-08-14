@@ -116,7 +116,7 @@
                         var select = $('[name="tf_hotel_rooms_number"]');
                         select.empty();
                         for (var i = 1; i <= response.data.rooms; i++) {
-                            if(i === 1){
+                            if (i === 1) {
                                 select.append('<option value="' + i + '" selected>' + i + ' Room</option>');
                             } else {
                                 select.append('<option value="' + i + '">' + i + ' Rooms</option>');
@@ -220,22 +220,20 @@
         * Check available tour by date
         * Author @Foysal
         */
-        $(document).on('change', '[name="tf_tour_date[from]"], [name="tf_tour_date[to]"], [name="tf_tour_adults_number"], [name="tf_tour_children_number"]', function (e) {
+        $(document).on('change', '[name="tf_tour_date"], [name="tf_tour_adults_number"], [name="tf_tour_children_number"]', function (e) {
             e.preventDefault();
 
-            var from = $('[name="tf_tour_date[from]"]').val();
-            var to = $('[name="tf_tour_date[to]"]').val();
+            var tourDate = $('[name="tf_tour_date"]').val();
             var adults = $('[name="tf_tour_adults_number"]').val();
             var children = $('[name="tf_tour_children_number"]').val();
 
-            if (from.length > 0 && to.length > 0 && adults.length > 0) {
+            if (tourDate.length > 0 && adults.length > 0) {
                 jQuery.ajax({
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
                         action: 'tf_check_available_tour',
-                        from: from,
-                        to: to,
+                        tourDate: tourDate,
                         adults: adults,
                         children: children
                     },
@@ -258,6 +256,8 @@
             }
         });
 
+
+
         /*
         * Backend Tour Booking
         * Author @Foysal
@@ -269,7 +269,7 @@
             let form = btn.closest('form.tf-backend-tour-booking');
             let formData = new FormData(form[0]);
             formData.append('action', 'tf_backend_tour_booking');
-            let requiredFields = ['tf_tour_booked_by', 'tf_customer_first_name', 'tf_customer_last_name', 'tf_customer_email', 'tf_customer_phone', 'tf_customer_country', 'tf_customer_address', 'tf_customer_city', 'tf_customer_state', 'tf_customer_zip', 'tf_tour_date[from]', 'tf_tour_date[to]', 'tf_available_tours', 'tf_tour_adults_number', 'tf_tour_children_number'];
+            let requiredFields = ['tf_tour_booked_by', 'tf_customer_first_name', 'tf_customer_last_name', 'tf_customer_email', 'tf_customer_phone', 'tf_customer_country', 'tf_customer_address', 'tf_customer_city', 'tf_customer_state', 'tf_customer_zip', 'tf_tour_date', 'tf_available_tours', 'tf_tour_adults_number', 'tf_tour_children_number'];
 
             $.ajax({
                 type: 'post',
@@ -301,22 +301,11 @@
                                 const errorField = obj['fieldErrors'][requiredField + '_error'];
 
                                 form.find('[name="' + requiredField + '"]').removeClass('error-input');
-                                if (requiredField === 'tf_tour_date[from]') {
-                                    form.find('[name="' + requiredField + '"]').closest('.tf-date-from').find('small.text-danger').remove();
-                                } else if (requiredField === 'tf_tour_date[to]') {
-                                    form.find('[name="' + requiredField + '"]').closest('.tf-date-to').find('small.text-danger').remove();
-                                } else {
-                                    form.find('[name="' + requiredField + '"]').closest('.tf-fieldset').find('small.text-danger').remove();
-                                }
+                                form.find('[name="' + requiredField + '"]').closest('.tf-fieldset').find('small.text-danger').remove();
+
                                 if (errorField) {
                                     form.find('[name="' + requiredField + '"]').addClass('error-input');
-                                    if (requiredField === 'tf_tour_date[from]') {
-                                        form.find('[name="' + requiredField + '"]').closest('.tf-date-from').append('<small class="text-danger">' + errorField + '</small>');
-                                    } else if (requiredField === 'tf_tour_date[to]') {
-                                        form.find('[name="' + requiredField + '"]').closest('.tf-date-to').append('<small class="text-danger">' + errorField + '</small>');
-                                    } else {
-                                        form.find('[name="' + requiredField + '"]').closest('.tf-fieldset').append('<small class="text-danger">' + errorField + '</small>');
-                                    }
+                                    form.find('[name="' + requiredField + '"]').closest('.tf-fieldset').append('<small class="text-danger">' + errorField + '</small>');
                                 }
                             }
                         }
