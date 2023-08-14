@@ -192,11 +192,11 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 					'title'  => __( 'Booking Information', 'tourfic' ),
 					'fields' => array(
 						array(
-							'id'     => 'tf_hotel_date',
-							'label'  => __( 'Date', 'tourfic' ),
-							'type'   => 'date',
-							'format' => 'Y/m/d',
-							'range'  => true,
+							'id'      => 'tf_hotel_date',
+							'label'   => __( 'Date', 'tourfic' ),
+							'type'    => 'date',
+							'format'  => 'Y/m/d',
+							'range'   => true,
 							'minDate' => 'today',
 						),
 						array(
@@ -209,6 +209,18 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 								'posts_per_page' => - 1,
 								'post_status'    => 'publish',
 							),
+							'field_width' => 50,
+						),
+						array(
+							'id'          => 'tf_hotel_service_type',
+							'label'       => __( 'Service Type', 'tourfic' ),
+							'type'        => 'select',
+							'options'     => array(
+								'pickup'  => __( 'Pickup Service', 'tourfic' ),
+								'dropoff' => __( 'Drop-off Service', 'tourfic' ),
+								'both'    => __( 'Pickup & Drop-off Service', 'tourfic' ),
+							),
+                            'placeholder' => __( 'Select Service Type', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
@@ -232,7 +244,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 								'4' => __( '4 Rooms', 'tourfic' ),
 								'5' => __( '5 Rooms', 'tourfic' ),
 							),
-							'field_width' => 33.33,
+							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_hotel_adults_number',
@@ -241,7 +253,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 							'attributes'  => array(
 								'min' => '0',
 							),
-							'field_width' => 33.33,
+							'field_width' => 50,
 						),
 						array(
 							'id'          => 'tf_hotel_children_number',
@@ -250,7 +262,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 							'attributes'  => array(
 								'min' => '0',
 							),
-							'field_width' => 33.33,
+							'field_width' => 50,
 						),
 					),
 				),
@@ -379,8 +391,29 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 				}
 			}
 
+			//hotel service
+			$hotel_services      = array(
+				'' => __( 'Select Service Type', 'tourfic' )
+			);
+			$hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
+			$hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
+			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $hotel_service_avail ) && ! empty( $hotel_service_type ) ) {
+				foreach ( $hotel_service_type as $single_service_type ) {
+					if ( "pickup" == $single_service_type ) {
+						$hotel_services['pickup'] = __( 'Pickup Service', 'tourfic' );
+					}
+					if ( "dropoff" == $single_service_type ) {
+						$hotel_services['dropoff'] = __( 'Drop-off Service', 'tourfic' );
+					}
+					if ( "both" == $single_service_type ) {
+						$hotel_services['both'] = __( 'Pickup & Drop-off Service', 'tourfic' );
+					}
+				}
+			}
+
 			wp_send_json_success( array(
-				'rooms' => $room_array
+				'rooms'    => $room_array,
+				'services' => $hotel_services,
 			) );
 		}
 
@@ -548,7 +581,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 				if ( $field['tf_hotel_rooms_number'] * $room_data['adult'] < $field['tf_hotel_adults_number'] ) {
 					$response['fieldErrors']['tf_hotel_adults_number_error'] = __( "You can't book more than " . $field['tf_hotel_rooms_number'] * $room_data['adult'] . " adults", 'tourfic' );
 				}
-                if ( $field['tf_hotel_rooms_number'] * $room_data['child'] < $field['tf_hotel_children_number'] ) {
+				if ( $field['tf_hotel_rooms_number'] * $room_data['child'] < $field['tf_hotel_children_number'] ) {
 					$response['fieldErrors']['tf_hotel_children_number_error'] = __( "You can't book more than " . $field['tf_hotel_rooms_number'] * $room_data['child'] . " children", 'tourfic' );
 				}
 

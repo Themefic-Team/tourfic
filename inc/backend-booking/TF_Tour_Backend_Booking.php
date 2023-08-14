@@ -418,6 +418,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 		 * @since 2.9.26
 		 */
 		public function tf_get_tour_total_price( $tour_id, $check_in, $check_out, $adults, $children, $infant ) {
+			$response = [];
 
 			$meta                 = get_post_meta( $tour_id, 'tf_tours_opt', true );
 			$tour_type            = ! empty( $meta['type'] ) ? $meta['type'] : '';
@@ -434,6 +435,16 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 //			$tour_time    = isset( $_POST['check-in-time'] ) ? sanitize_text_field( $_POST['check-in-time'] ) : null;
 //			$make_deposit = ! empty( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
 
+			if ( $tour_type == 'fixed' && function_exists( 'is_tf_pro' ) && ! is_tf_pro() ) {
+				$response['errors'][] = __( 'Fixed Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
+			}
+
+			$tf_tour_query_orders = wc_get_orders( array(
+				'limit'       => - 1,
+				'type'        => 'shop_order',
+				'status'      => array( 'wc-completed' ),
+				'_order_type' => 'tour'
+			) );
 
 			if ( $tour_type == 'fixed' ) {
 				if ( ! empty( $meta['fixed_availability'] ) && gettype( $meta['fixed_availability'] ) == "string" ) {
@@ -459,15 +470,8 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 
 				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $start_date ) && ! empty( $end_date ) ) {
 
-					$tf_tour_query_orders = wc_get_orders( array(
-							'limit'       => - 1,
-							'type'        => 'shop_order',
-							'status'      => array( 'wc-completed' ),
-							'_order_type' => 'tour'
-						)
-					);
-					$tf_total_adults      = 0;
-					$tf_total_childrens   = 0;
+					$tf_total_adults    = 0;
+					$tf_total_childrens = 0;
 					foreach ( $tf_tour_query_orders as $order ) {
 						foreach ( $order->get_items() as $item_key => $item_values ) {
 							$order_type = $item_values->get_meta( '_order_type', true );
@@ -526,15 +530,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 					$max_people          = ! empty( $meta['cont_max_people'] ) ? $meta['cont_max_people'] : '';
 					$allowed_times_field = ! empty( $meta['allowed_time'] ) ? $meta['allowed_time'] : '';
 
-
 					// Daily Tour Booking Capacity
-					$tf_tour_query_orders = wc_get_orders( array(
-							'limit'       => - 1,
-							'type'        => 'shop_order',
-							'status'      => array( 'wc-completed' ),
-							'_order_type' => 'tour',
-						)
-					);
 					$tf_total_adults      = 0;
 					$tf_total_childrens   = 0;
 					if ( empty( $allowed_times_field ) || $tour_time == null ) {
@@ -729,13 +725,6 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 						$allowed_times_field = ! empty( $item['allowed_time'] ) ? $item['allowed_time'] : '';
 
 						// Daily Tour Booking Capacity
-						$tf_tour_query_orders = wc_get_orders( array(
-								'limit'       => - 1,
-								'type'        => 'shop_order',
-								'status'      => array( 'wc-completed' ),
-								'_order_type' => 'tour',
-							)
-						);
 						$tf_total_adults      = 0;
 						$tf_total_childrens   = 0;
 						if ( empty( $allowed_times_field ) || $tour_time == null ) {

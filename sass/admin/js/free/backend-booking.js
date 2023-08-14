@@ -47,6 +47,8 @@
             e.preventDefault();
 
             var hotel_id = $('[name="tf_available_hotels"]').val();
+            var from = $('[name="tf_hotel_date[from]"]').val();
+            var to = $('[name="tf_hotel_date[to]"]').val();
 
             if (hotel_id.length > 0) {
                 jQuery.ajax({
@@ -55,13 +57,16 @@
                     data: {
                         action: 'tf_check_available_room',
                         hotel_id: hotel_id,
+                        from: from,
+                        to: to,
                     },
                     beforeSend: function () {
                         $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');
                     },
                     success: function (response) {
                         var select2 = $('[name="tf_available_rooms"]');
-                        //remove disabled attr
+                        var serviceSelect = $('[name="tf_hotel_service_type"]');
+
                         select2.removeAttr('disabled');
                         select2.empty();
                         select2.append('<option value="">' + tf_admin_params.select_room + '</option>');
@@ -71,6 +76,13 @@
                         select2.select2();
                         //auto select the first option
                         select2.val(select2.find('option:eq(1)').val()).trigger('change');
+
+                        //service type select
+                        serviceSelect.empty();
+                        $.each(response.data.services, function (key, value) {
+                            serviceSelect.append('<option value="' + key + '">' + value + '</option>');
+                        });
+
                         $('#tf-backend-hotel-book-btn').removeAttr('disabled');
                     }
                 });
