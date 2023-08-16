@@ -23,6 +23,7 @@ class DBTFHOTELTable extends WP_List_Table {
 			'tprice'   => __( 'Total Price', 'tourfic' ),
 			'status'   => __( 'Status', 'tourfic' ),
 			'pmethod'   => __( 'Payment Method', 'tourfic' ),
+			'oedit'   => '',
 		];
 	}
 
@@ -121,6 +122,16 @@ class DBTFHOTELTable extends WP_List_Table {
         return $full_name;
         
 	}
+    function column_oedit( $item ) {
+        $current_user = wp_get_current_user();
+        // get user id
+        $current_user_id = $current_user->ID;
+        // get user role
+        $current_user_role = $current_user->roles[0];
+        if ( $current_user_role == 'administrator' ) {
+            return '<a href="'.admin_url().'post.php?post='.$item['order_id'].'&amp;action=edit" class="button button-secondary">Edit</a>';
+        }
+	}
 
 	function column_default( $item, $column_name ) {
 		return $item[ $column_name ];
@@ -134,7 +145,7 @@ class DBTFHOTELTable extends WP_List_Table {
 			} else {
 				if ( $key == 14) {
 					$this->single_row( $item );
-					echo '<tr class="pro-row" style="text-align: center; background-color: #ededf8"><td colspan="5"><a href="https://tourfic.com/" target="_blank"><h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;">' . __( 'Upgrade to Pro Version to see more', 'tourfic' ) . '</h3></a></td></tr>';
+					echo '<tr class="pro-row" style="text-align: center; background-color: #ededf8"><td colspan="9"><a href="https://tourfic.com/" target="_blank"><h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;">' . __( 'Upgrade to Pro Version to see more', 'tourfic' ) . '</h3></a></td></tr>';
 				} else {
 					$this->single_row( $item );
 				}

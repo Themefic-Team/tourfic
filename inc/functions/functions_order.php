@@ -371,14 +371,6 @@ function tf_hotel_booking_page_callback() {
 	} else {
 		tf_file_missing( TF_INC_PATH . 'functions/class.tf_hotel.php' );
 	}
-
-	global $wpdb;
-	$table_name = $wpdb->prefix . 'tf_order_data';
-	$hotel_orders_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY order_id DESC", 'hotel' ), ARRAY_A );
-	
-	$hotel_order_results = new DBTFHOTELTable( $hotel_orders_result );
-	$hotel_order_results->prepare_items();
-	$hotel_order_results->display();
 	
 	$current_user = wp_get_current_user();
 	// get user id
@@ -392,41 +384,14 @@ function tf_hotel_booking_page_callback() {
 		wp_die( __( 'You are not allowed in this page', 'tourfic' ) );
 	}
 
-	/**
-	 * Main query
-	 */
-	// get current page number
-	$pagenum = isset( $_GET['pagenum'] ) ? absint( $_GET['pagenum'] ) : 1;
-	// post per page limit
-	$limit = 20;
-	// Query
-	if ( $current_user_role == 'administrator' ) {
-		$query_orders = wc_get_orders( array( 'numberposts' => $limit, 'paginate' => true, '_order_type' => 'hotel', 'paged' => $pagenum ) );
-	}
-	if ( $current_user_role == 'tf_vendor' ) {
-		$query_orders = wc_get_orders( array( 'numberposts' => $limit, 'paginate' => true, '_order_type' => 'hotel', '_post_author' => $current_user_id, 'paged' => $pagenum ) );
-	}
-	$offset       = ( $pagenum - 1 ) * $limit;
-
-	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-	} else {
-		$query_orders->orders = array_slice( $query_orders->orders, 0, 15 );
-		$query_orders->total  = count( $query_orders->orders );
+	global $wpdb;
+	$table_name = $wpdb->prefix . 'tf_order_data';
+	if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
+		$hotel_orders_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY order_id DESC", 'hotel' ), ARRAY_A );
+	}else{
+		$hotel_orders_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY order_id DESC LIMIT 15", 'hotel' ), ARRAY_A );
 	}
 
-	// Total number of items
-	$total = $query_orders->total;
-	// Number of pages
-	$num_of_pages = ceil( $total / $limit );
-	// Pagination
-	$page_links = paginate_links( array(
-		'base'      => add_query_arg( 'pagenum', '%#%' ),
-		'format'    => '',
-		'prev_text' => __( '&laquo;', 'tourfic' ),
-		'next_text' => __( '&raquo;', 'tourfic' ),
-		'total'     => $num_of_pages,
-		'current'   => $pagenum
-	) );
 	?>
 
     <div class="wrap" style="margin-right: 20px;">
@@ -441,95 +406,17 @@ function tf_hotel_booking_page_callback() {
 
 		?>
         <hr class="wp-header-end">
-        <form id="posts-filter">
-            <div class="tablenav top">
-			
-				<?php if ( $page_links ) { ?>
-                    <div class="tablenav-pages">
-                        <span class="displaying-num"><?php echo $query_orders->total; ?><?php _e( 'items', 'tourfic' ); ?></span>
-                        <span class="pagination-links">
-                        <?php echo $page_links; ?>
-                    </span>
-                    </div>
-                    <br class="clear">
-				<?php } ?>
-            </div>
-
-            <table class="wp-list-table widefat fixed striped table-view-list pages tf-order-data-table">
-                <thead>
-                <tr>
-                    <td id="cb" class="manage-column column-cb check-column"><label class="screen-reader-text" for="cb-select-all-1">Select All</label><input id="cb-select-all-1" type="checkbox"></td>
-                    <th class="manage-column column-title column-primary sortable desc" style="width: 4%;">
-                        <span><?php _e( 'Order ID', 'tourfic' ); ?></span>
-                    </th>
-                    <th class="manage-column sortable" style="width: 25%;">
-                        <a href="#"><span><?php _e( 'Customer Details', 'tourfic' ); ?></span><span class="sorting-indicator"></span></a>
-                    </th>
-                    <th class="manage-column sortable" style="width: 25%;">
-                        <a href="#"><span><?php _e( 'Order Details', 'tourfic' ); ?></span><span class="sorting-indicator"></span></a>
-                    </th>
-                    <th class="manage-column sortable" style="width: 10%;">
-                        <a href="#"><span><?php _e( 'Order Date', 'tourfic' ); ?></span><span class="sorting-indicator"></span></a>
-                    </th>
-                    <th class="manage-column sortable" style="width: 8%;">
-                        <a href="#"><?php _e( 'Total Price', 'tourfic' ); ?></a>
-                    </th>
-                    <th class="manage-column sortable" style="width: 8%;">
-                        <a href="#"><?php _e( 'Status', 'tourfic' ); ?></a>
-                    </th>
-                    <th class="manage-column sortable" style="width: 12%;">
-                        <a href="#"><span><?php _e( 'Payment Method', 'tourfic' ); ?></span><span class="sorting-indicator"></span></a>
-                    </th>
-					<?php if ( $current_user_role == 'administrator' ) { ?>
-                        <th class="manage-column sortable" style="width: 8%;"></th>
-					<?php } ?>
-                </tr>
-                </thead>
-
-                <tbody>
-
-				<?php
-				// Get orders
-				$orders = $query_orders->orders;
-				foreach ( $orders as $key=> $order ) {
-					if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
-						tf_hotel_order_single_row( $order );
-					} else {
-						if ( $key == 14) {
-							tf_hotel_order_single_row( $order );
-							echo '<tr class="pro-row" style="text-align: center; background-color: #ededf8"><td colspan="9"><a href="https://tourfic.com/" target="_blank"><h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;">' . __( 'Upgrade to Pro Version to see more', 'tourfic' ) . '</h3></a></td></tr>';
-						} else {
-							tf_hotel_order_single_row( $order );
-						}
-					}
-				}
-				?>
-
-                </tbody>
-            </table>
-
-            <div class="tablenav bottom">
-				<?php if ( $page_links ) { ?>
-                    <div class="tablenav-pages">
-                        <span class="displaying-num"><?php echo $query_orders->total; ?><?php _e( 'items', 'tourfic' ); ?></span>
-                        <span class="pagination-links">
-                        <?php echo $page_links; ?>
-                    </span>
-                    </div>
-                    <br class="clear">
-				<?php } ?>
-            </div>
-        </form>
+        <?php 
+			/**
+			 * Booking Data showing from tourfic table
+			 * @since 2.9.26
+			 */
+			$hotel_order_results = new DBTFHOTELTable( $hotel_orders_result );
+			$hotel_order_results->prepare_items();
+			$hotel_order_results->display();
+		?>
     </div>
 
-    <script>
-        jQuery(document).ready(function ($) {
-
-            $(".page-numbers").addClass("button tablenav-pages-navspan");
-            $(".current").addClass("disabled");
-
-        });
-    </script>
 <?php }
 }
 

@@ -810,6 +810,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'infants' => $infants,
 				'total_price' => $price,
 				'due_price' => $due,
+				'unique_id' => $tour_ides
 			];
 
 			$tf_integration_order_data[] = [
