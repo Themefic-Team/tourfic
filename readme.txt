@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
 Tested up to: 6.3
-Stable tag: 2.9.25
+Stable tag: 2.9.26
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -408,6 +408,28 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.9.26 -  14 August 2023 =
+
+- Added: Frontend Dashboard for admin, vendor and manager
+- Added: Vendor management for admin and manager in Frontend Dashboard
+- Added: Login & Register settings added in tourfic settings
+- Added: Manager role add
+- Added: User role permission add
+- Fixed: Custom vendor registration fields name issue fix
+- Fixed: Email verification url issue fix
+- Fixed: Email verification broken layout issue fix
+- Fixed: Issue with disable date
+- Fixed: Featured Hotel & Tour badge issue fix
+- Fixed: Design issue fix
+- Fixed: Tab issue in settings panel fixing
+- Fixed: Vendor earning fix in vendor list
+- Fixed: Vendor payout float price issue fix
+- Update: Login & Register settings moved to tourfic settings
+- Update: Remix icon update
+- Improved: Login & Register page design update
+- Improved: Login & Register page create automatically
+- Improved: Hotel & Tour Rest API enable
 
 = 2.9.25 -  10 August 2023 =
 
