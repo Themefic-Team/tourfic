@@ -1,5 +1,19 @@
 <?php 
+$total_dis_dates = [];
+if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $room['repeat_by_date'] ) ) {
+    $disabled_dates = $room['repeat_by_date'];
+    //iterate all the available disabled dates
+    if ( ! empty( $disabled_dates ) ) {
+        foreach ( $disabled_dates as $date ) {
+            $dateArr           = explode( ', ', !empty($date['disabled_date']) ? $date['disabled_date'] : '' );
+            $total_dis_dates = $dateArr;
+        }
+    }
+}
+
+$tf_room_disable_date = array_intersect($avail_durationdate, $total_dis_dates);
 if( $tf_hotel_selected_template_check == "design-1" ){
+if(empty($tf_room_disable_date)){
 ?>
 <tr>
     <td class="description">
@@ -249,7 +263,9 @@ if( $tf_hotel_selected_template_check == "design-1" ){
     </td>
 </tr>
 <?php
+}
 }else{
+if(empty($tf_room_disable_date)){
 ?>
 <tr>
     <td class="description">
@@ -490,4 +506,4 @@ if( $tf_hotel_selected_template_check == "design-1" ){
         </form>
     </td>
 </tr>
-<?php } ?>
+<?php }} ?>

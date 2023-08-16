@@ -1623,9 +1623,6 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                     },
                     defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
-					<?php if( function_exists('is_tf_pro') && is_tf_pro()) : ?>
-						disable: [<?php echo $total_dis_dates; ?>],
-					<?php endif; ?>
 					<?php
 					// Flatpickr locale for translation
 					tf_flatpickr_locale();
