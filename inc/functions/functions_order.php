@@ -386,10 +386,30 @@ function tf_hotel_booking_page_callback() {
 
 	global $wpdb;
 	$table_name = $wpdb->prefix . 'tf_order_data';
-	if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
-		$hotel_orders_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY order_id DESC", 'hotel' ), ARRAY_A );
-	}else{
-		$hotel_orders_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY order_id DESC LIMIT 15", 'hotel' ), ARRAY_A );
+	if ( $current_user_role == 'administrator' ) {
+		if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
+			$hotel_orders_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY order_id DESC", 'hotel' ), ARRAY_A );
+		}else{
+			$hotel_orders_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY order_id DESC LIMIT 15", 'hotel' ), ARRAY_A );
+		}
+	}
+	if ( $current_user_role == 'tf_vendor' ) {
+		if (function_exists('is_tf_pro') && is_tf_pro()) {
+			$query = $wpdb->prepare(
+				"SELECT * FROM $table_name WHERE post_type = %s AND post_id IN (
+					SELECT ID FROM {$wpdb->posts} WHERE post_author = %d
+				) ORDER BY order_id DESC",
+				'hotel', $current_user_id
+			);
+		} else {
+			$query = $wpdb->prepare(
+				"SELECT * FROM $table_name WHERE post_type = %s AND post_id IN (
+					SELECT ID FROM {$wpdb->posts} WHERE post_author = %d
+				) ORDER BY order_id DESC LIMIT 15",
+				'hotel', $current_user_id
+			);
+		}
+		$hotel_orders_result = $wpdb->get_results($query, ARRAY_A);
 	}
 
 	?>
