@@ -33,7 +33,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			$this->load_taxonomy();
 
 			//enqueue scripts
-			add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_admin_enqueue_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_admin_enqueue_scripts' ),9 );
 			add_action( 'wp_enqueue_scripts', array( $this, 'tf_options_wp_enqueue_scripts' ) );
 		}
 
