@@ -95,7 +95,7 @@ function tf_tours_booking_function() {
 			// Tour Order retrive from Tourfic Order Table
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'tf_order_data';
-			$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT post_id,order_details FROM $table_name WHERE post_type = %s ORDER BY order_id DESC", 'tour' ), ARRAY_A );
+			$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT post_id,order_details FROM $table_name WHERE post_type = %s AND ostatus = %s ORDER BY order_id DESC", 'tour', 'completed' ), ARRAY_A );
 
 			$tf_total_adults = 0;
 			$tf_total_childrens = 0;
@@ -409,7 +409,7 @@ function tf_tours_booking_function() {
                                 }
                             }
                         }
-						
+
 					}
 				}
 				$tf_total_people = $tf_total_adults+$tf_total_childrens;
