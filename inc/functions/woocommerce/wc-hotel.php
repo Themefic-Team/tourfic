@@ -796,6 +796,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			$adult = $item->get_meta( 'Adults', true );
 			$child = $item->get_meta( 'Children', true );
 			$infants = $item->get_meta( 'Infants', true );
+			$visitor_details = $item->get_meta( '_visitor_details', true );
 			
 			if ( $tour_date ) {
 				list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
@@ -810,7 +811,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'infants' => $infants,
 				'total_price' => $price,
 				'due_price' => $due,
-				'unique_id' => $tour_ides
+				'unique_id' => $tour_ides,
+				'visitor_details' => $visitor_details
 			];
 
 			$tf_integration_order_data[] = [

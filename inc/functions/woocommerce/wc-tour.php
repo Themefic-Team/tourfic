@@ -550,6 +550,8 @@ function tf_tours_booking_function() {
 		$tf_tours_data['tf_tours_data']['end_date']         = $end_date;
 		$tf_tours_data['tf_tours_data']['tour_date']        = $tour_date;
 		$tf_tours_data['tf_tours_data']['tour_extra_total'] = $tour_extra_total;
+		// Visitor Details
+		$tf_tours_data['tf_tours_data']['visitor_details'] = json_encode($tf_visitor_details);
 		if($tour_extra_title){
 			$tf_tours_data['tf_tours_data']['tour_extra_title'] = $tour_extra_title;
 		}
@@ -750,6 +752,7 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	$tour_date        = ! empty( $values['tf_tours_data']['tour_date'] ) ? $values['tf_tours_data']['tour_date'] : '';
 	$tour_extra       = ! empty( $values['tf_tours_data']['tour_extra_title'] ) ? $values['tf_tours_data']['tour_extra_title'] : '';
 	$due              = ! empty( $values['tf_tours_data']['due'] ) ? $values['tf_tours_data']['due'] : null;
+	$visitor_details  = ! empty( $values['tf_tours_data']['visitor_details'] ) ? $values['tf_tours_data']['visitor_details'] : '';
 
 
 	/**
@@ -803,6 +806,11 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 
 	// Tour Unique ID 
 	$item->update_meta_data( '_tour_unique_id', rand());
+
+	// visitor details
+	if ( $visitor_details ) {
+		$item->update_meta_data( '_visitor_details', $visitor_details );
+	}
 
 }
 
