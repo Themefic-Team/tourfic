@@ -28,6 +28,7 @@ function tf_tours_booking_function() {
 	$disable_adult_price  = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
 	$disable_child_price  = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
 	$disable_infant_price = ! empty( $meta['disable_infant_price'] ) ? $meta['disable_infant_price'] : false;
+	$tf_disable_payment = ! empty( $meta['disable_payment'] ) ? $meta['disable_payment'] : '';
 
 	/**
 	 * All form data
@@ -50,7 +51,6 @@ function tf_tours_booking_function() {
 	// Booking Confirmation Details
 	$tf_confirmation_details = !empty($_POST['booking_confirm']) ? $_POST['booking_confirm'] : "";
 
-	// tf_var_dump($tf_visitor_details); exit();
 	/**
 	 * If fixed is selected but pro is not activated
 	 *
@@ -538,24 +538,78 @@ function tf_tours_booking_function() {
 	 * Store custom data in array
 	 * Add to cart with custom data
 	 */
-	if ( ! array_key_exists( 'errors', $response ) || count( $response['errors'] ) == 0 ) {
 
-		$tf_tours_data['tf_tours_data']['order_type']     = 'tour';
-		$tf_tours_data['tf_tours_data']['post_author']    = $post_author;
-		$tf_tours_data['tf_tours_data']['tour_type']      = $tour_type;
-		$tf_tours_data['tf_tours_data']['tour_id']        = $post_id;
-		$tf_tours_data['tf_tours_data']['post_permalink'] = get_permalink( $post_id );
+	if($tf_disable_payment){
 
-		$tf_tours_data['tf_tours_data']['start_date']       = $start_date;
-		$tf_tours_data['tf_tours_data']['end_date']         = $end_date;
-		$tf_tours_data['tf_tours_data']['tour_date']        = $tour_date;
-		$tf_tours_data['tf_tours_data']['tour_extra_total'] = $tour_extra_total;
-		// Visitor Details
-		$tf_tours_data['tf_tours_data']['visitor_details'] = json_encode($tf_visitor_details);
-		if($tour_extra_title){
-			$tf_tours_data['tf_tours_data']['tour_extra_title'] = $tour_extra_title;
+		$tf_booking_fields = tfopt( 'book-confirm-field' ) ? tfopt( 'book-confirm-field' ) : '';
+		if(empty($tf_booking_fields)){
+			$billing_details  = array(
+				'billing_first_name' => sanitize_text_field($tf_confirmation_details['tf_first_name']),
+				'billing_last_name'  => sanitize_text_field($tf_confirmation_details['tf_last_name']),
+				'billing_company'    => '',
+				'billing_address_1'  => sanitize_text_field($tf_confirmation_details['tf_street_address']),
+				'billing_address_2'  => "",
+				'billing_city'       => sanitize_text_field($tf_confirmation_details['tf_town_city']),
+				'billing_state'      => sanitize_text_field($tf_confirmation_details['tf_state_country']),
+				'billing_postcode'   => sanitize_text_field($tf_confirmation_details['tf_postcode']),
+				'billing_country'    => sanitize_text_field($tf_confirmation_details['tf_country']),
+				'billing_email'      => sanitize_email($tf_confirmation_details['tf_email']),
+				'billing_phone'      => sanitize_text_field($tf_confirmation_details['tf_phone']),
+			);
+			$shipping_details = array(
+				'shipping_first_name' => sanitize_text_field($tf_confirmation_details['tf_first_name']),
+				'shipping_last_name'  => sanitize_text_field($tf_confirmation_details['tf_last_name']),
+				'shipping_company'    => '',
+				'shipping_address_1'  => sanitize_text_field($tf_confirmation_details['tf_street_address']),
+				'shipping_address_2'  => "",
+				'shipping_city'       => sanitize_text_field($tf_confirmation_details['tf_town_city']),
+				'shipping_state'      => sanitize_text_field($tf_confirmation_details['tf_state_country']),
+				'shipping_postcode'   => sanitize_text_field($tf_confirmation_details['tf_postcode']),
+				'shipping_country'    => sanitize_text_field($tf_confirmation_details['tf_country']),
+				'shipping_phone'      => sanitize_text_field($tf_confirmation_details['tf_phone']),
+			);
+		}else{
+			$billing_details = [];
+			$shipping_details = [];
+			
+			if(!empty($tf_confirmation_details)){
+				foreach( $tf_confirmation_details as $key => $details ){
+					if("tf_first_name"==$key){
+						$billing_details['billing_first_name'] = sanitize_text_field($details);
+						$billing_details['shipping_first_name'] = sanitize_text_field($details);
+					}else if("tf_last_name"==$key){
+						$billing_details['billing_last_name'] = sanitize_text_field($details);
+						$billing_details['shipping_last_name'] = sanitize_text_field($details);
+					}else if("tf_street_address"==$key){
+						$billing_details['billing_address_1'] = sanitize_text_field($details);
+						$billing_details['shipping_address_1'] = sanitize_text_field($details);
+					}else if("tf_town_city"==$key){
+						$billing_details['billing_city'] = sanitize_text_field($details);
+						$billing_details['shipping_city'] = sanitize_text_field($details);
+					}else if("tf_state_country"==$key){
+						$billing_details['billing_state'] = sanitize_text_field($details);
+						$billing_details['shipping_state'] = sanitize_text_field($details);
+					}else if("tf_postcode"==$key){
+						$billing_details['billing_postcode'] = sanitize_text_field($details);
+						$billing_details['shipping_postcode'] = sanitize_text_field($details);
+					}else if("tf_country"==$key){
+						$billing_details['billing_country'] = sanitize_text_field($details);
+						$billing_details['shipping_country'] = sanitize_text_field($details);
+					}else if("tf_email"==$key){
+						$billing_details['billing_email'] = sanitize_email($details);
+					}else if("tf_phone"==$key){
+						$billing_details['billing_phone'] = sanitize_text_field($details);
+						$billing_details['shipping_phone'] = sanitize_text_field($details);
+					}else{
+						$billing_details[$key] = $details;
+						$billing_details[$key] = $details;
+					}
+				}
+			}
 		}
-		# Discount informations
+
+		// Price Calculation
+		
 		$discount_type    = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 		$discounted_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
 
@@ -582,37 +636,117 @@ function tf_tours_booking_function() {
 
 		# Set pricing based on pricing rule
 		if ( $pricing_rule == 'group' ) {
+			$without_payment_price     = $group_price;
+		} else {
+			$without_payment_price     = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
+		}
 
-			$tf_tours_data['tf_tours_data']['price']     = $group_price;
-			$tf_tours_data['tf_tours_data']['adults']    = $adults;
-			$tf_tours_data['tf_tours_data']['childrens'] = $children;
-			$tf_tours_data['tf_tours_data']['infants']   = $infant;
+		$order_details = [
+			'order_by'    => '',
+			'tour_date'   => $tour_date,
+			'tour_time'   => $tour_time_title,
+			'tour_extra'  => $tour_extra_title,
+			'adult'       => $adults,
+			'child'       => $children,
+			'infants'     => $infant,
+			'total_price' => $without_payment_price,
+			'due_price'   => $without_payment_price,
+			'visitor_details' => json_encode($tf_visitor_details)
+		];
+
+		$order_data = array(
+			'post_id'          => $post_id,
+			'post_type'        => 'tour',
+			'room_number'      => null,
+			'check_in'         => $start_date,
+			'check_out'        => $end_date,
+			'billing_details'  => $billing_details,
+			'shipping_details' => $shipping_details,
+			'order_details'    => $order_details,
+			'payment_method'   => 'offline',
+			'status'           => 'processing',
+			'order_date'       => date( 'Y-m-d H:i:s' ),
+		);
+
+		tf_set_order( $order_data );
+
+	}else{
+		if ( ! array_key_exists( 'errors', $response ) || count( $response['errors'] ) == 0 ) {
+
+			$tf_tours_data['tf_tours_data']['order_type']     = 'tour';
+			$tf_tours_data['tf_tours_data']['post_author']    = $post_author;
+			$tf_tours_data['tf_tours_data']['tour_type']      = $tour_type;
+			$tf_tours_data['tf_tours_data']['tour_id']        = $post_id;
+			$tf_tours_data['tf_tours_data']['post_permalink'] = get_permalink( $post_id );
+
+			$tf_tours_data['tf_tours_data']['start_date']       = $start_date;
+			$tf_tours_data['tf_tours_data']['end_date']         = $end_date;
+			$tf_tours_data['tf_tours_data']['tour_date']        = $tour_date;
+			$tf_tours_data['tf_tours_data']['tour_extra_total'] = $tour_extra_total;
+			// Visitor Details
+			$tf_tours_data['tf_tours_data']['visitor_details'] = json_encode($tf_visitor_details);
+			if($tour_extra_title){
+				$tf_tours_data['tf_tours_data']['tour_extra_title'] = $tour_extra_title;
+			}
+			# Discount informations
+			$discount_type    = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+			$discounted_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
+
+			if ( $tour_type == 'continuous' ) {
+				$tf_tours_data['tf_tours_data']['tour_time'] = $tour_time_title;
+			}
+
+			# Calculate discounted price
+			if ( $discount_type == 'percent' ) {
+
+				$adult_price    = floatval(preg_replace('/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $discounted_price ), 2 )));
+				$children_price = floatval(preg_replace('/[^\d.]/', '', number_format( $children_price - ( ( $children_price / 100 ) * $discounted_price ), 2 )));
+				$infant_price   = floatval(preg_replace('/[^\d.]/', '', number_format( $infant_price - ( ( $infant_price / 100 ) * $discounted_price ), 2 )));
+				$group_price    = floatval(preg_replace('/[^\d.]/', '', number_format( $group_price - ( ( $group_price / 100 ) * $discounted_price ), 2 )));
+
+			} elseif ( $discount_type == 'fixed' ) {
+
+				$adult_price    = floatval(preg_replace('/[^\d.]/', '', number_format( ( $adult_price - $discounted_price ), 2 )));
+				$children_price = floatval(preg_replace('/[^\d.]/', '', number_format( ( $children_price - $discounted_price ), 2 )));
+				$infant_price   = floatval(preg_replace('/[^\d.]/', '', number_format( ( $infant_price - $discounted_price ), 2 )));
+				$group_price    = floatval(preg_replace('/[^\d.]/', '', number_format( ( $group_price - $discounted_price ), 2 )));
+
+			}
+
+			# Set pricing based on pricing rule
+			if ( $pricing_rule == 'group' ) {
+
+				$tf_tours_data['tf_tours_data']['price']     = $group_price;
+				$tf_tours_data['tf_tours_data']['adults']    = $adults;
+				$tf_tours_data['tf_tours_data']['childrens'] = $children;
+				$tf_tours_data['tf_tours_data']['infants']   = $infant;
+
+			} else {
+
+				$tf_tours_data['tf_tours_data']['price']     = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
+				$tf_tours_data['tf_tours_data']['adults']    = $adults . " × " . strip_tags(wc_price( $adult_price ));
+				$tf_tours_data['tf_tours_data']['childrens'] = $children . " × " . strip_tags(wc_price( $children_price ));
+				$tf_tours_data['tf_tours_data']['infants']   = $infant . " × " . strip_tags(wc_price( $infant_price ));
+			}
+
+			# Deposit information
+			tf_get_deposit_amount( $meta, $tf_tours_data['tf_tours_data']['price'], $deposit_amount, $has_deposit );
+			if ( function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true && $make_deposit == true ) {
+				$tf_tours_data['tf_tours_data']['due']   = $tf_tours_data['tf_tours_data']['price'] - $deposit_amount;
+				$tf_tours_data['tf_tours_data']['price'] = $deposit_amount;
+			}
+			// Add product to cart with the custom cart item data
+			WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_tours_data );
+
+			$response['product_id']  = $product_id;
+			$response['add_to_cart'] = 'true';
+			$response['redirect_to'] = wc_get_checkout_url();
 
 		} else {
+			# Show errors
+			$response['status'] = 'error';
 
-			$tf_tours_data['tf_tours_data']['price']     = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
-			$tf_tours_data['tf_tours_data']['adults']    = $adults . " × " . strip_tags(wc_price( $adult_price ));
-			$tf_tours_data['tf_tours_data']['childrens'] = $children . " × " . strip_tags(wc_price( $children_price ));
-			$tf_tours_data['tf_tours_data']['infants']   = $infant . " × " . strip_tags(wc_price( $infant_price ));
 		}
-
-		# Deposit information
-		tf_get_deposit_amount( $meta, $tf_tours_data['tf_tours_data']['price'], $deposit_amount, $has_deposit );
-		if ( function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true && $make_deposit == true ) {
-			$tf_tours_data['tf_tours_data']['due']   = $tf_tours_data['tf_tours_data']['price'] - $deposit_amount;
-			$tf_tours_data['tf_tours_data']['price'] = $deposit_amount;
-		}
-		// Add product to cart with the custom cart item data
-		WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_tours_data );
-
-		$response['product_id']  = $product_id;
-		$response['add_to_cart'] = 'true';
-		$response['redirect_to'] = wc_get_checkout_url();
-
-	} else {
-		# Show errors
-		$response['status'] = 'error';
-
 	}
 
 	// Json Response
