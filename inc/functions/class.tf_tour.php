@@ -137,10 +137,13 @@ class DBTFTOURTable extends WP_List_Table {
                 }
             }
         }
-        
-        $sort_name = $item['payment_method'];
-        $full_name = tf_get_payment_method_full_name($sort_name);
-        return $full_name;
+        if("offline"==$item['payment_method']){
+            return "Offline Payment";
+        }else{
+            $sort_name = $item['payment_method'];
+            $full_name = tf_get_payment_method_full_name($sort_name);
+            return $full_name;
+        }
         
 	}
     function column_oedit( $item ) {

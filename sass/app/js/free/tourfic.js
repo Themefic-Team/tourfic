@@ -345,25 +345,28 @@
 
                     var response = JSON.parse(data);
 
-                    if (response.status == 'error') {
-                        $.fancybox.close();
-                        if (response.errors) {
-                            response.errors.forEach(function (text) {
-                                notyf.error(text);
-                            });
-                        }
+                    if(response.without_payment == 'false'){
+                        if (response.status == 'error') {
+                            $.fancybox.close();
+                            if (response.errors) {
+                                response.errors.forEach(function (text) {
+                                    notyf.error(text);
+                                });
+                            }
 
-                        return false;
-                    } else {
-
-                        if (response.redirect_to) {
-                            window.location.replace(response.redirect_to);
+                            return false;
                         } else {
-                            jQuery(document.body).trigger('added_to_cart');
-                        }
 
+                            if (response.redirect_to) {
+                                window.location.replace(response.redirect_to);
+                            } else {
+                                jQuery(document.body).trigger('added_to_cart');
+                            }
+
+                        }
+                    }else{
+                        window.location.reload();
                     }
-                    console.log(response);
                 },
                 error: function (data) {
                     console.log(data);

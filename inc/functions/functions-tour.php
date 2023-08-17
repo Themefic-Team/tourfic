@@ -1228,7 +1228,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
                     <!-- Popup Footer Control & Partial Payment -->
                     <div class="tf-booking-pagination">
-                        <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] )) { 
+                        <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) && empty($is_without_payment) ) { 
                             $tf_deposit_amount =  $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%';
                             ?>
                             <div class="tf-diposit-switcher">

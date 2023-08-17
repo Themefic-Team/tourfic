@@ -576,33 +576,33 @@ function tf_tours_booking_function() {
 				foreach( $tf_confirmation_details as $key => $details ){
 					if("tf_first_name"==$key){
 						$billing_details['billing_first_name'] = sanitize_text_field($details);
-						$billing_details['shipping_first_name'] = sanitize_text_field($details);
+						$shipping_details['shipping_first_name'] = sanitize_text_field($details);
 					}else if("tf_last_name"==$key){
 						$billing_details['billing_last_name'] = sanitize_text_field($details);
-						$billing_details['shipping_last_name'] = sanitize_text_field($details);
+						$shipping_details['shipping_last_name'] = sanitize_text_field($details);
 					}else if("tf_street_address"==$key){
 						$billing_details['billing_address_1'] = sanitize_text_field($details);
-						$billing_details['shipping_address_1'] = sanitize_text_field($details);
+						$shipping_details['shipping_address_1'] = sanitize_text_field($details);
 					}else if("tf_town_city"==$key){
 						$billing_details['billing_city'] = sanitize_text_field($details);
-						$billing_details['shipping_city'] = sanitize_text_field($details);
+						$shipping_details['shipping_city'] = sanitize_text_field($details);
 					}else if("tf_state_country"==$key){
 						$billing_details['billing_state'] = sanitize_text_field($details);
-						$billing_details['shipping_state'] = sanitize_text_field($details);
+						$shipping_details['shipping_state'] = sanitize_text_field($details);
 					}else if("tf_postcode"==$key){
 						$billing_details['billing_postcode'] = sanitize_text_field($details);
-						$billing_details['shipping_postcode'] = sanitize_text_field($details);
+						$shipping_details['shipping_postcode'] = sanitize_text_field($details);
 					}else if("tf_country"==$key){
 						$billing_details['billing_country'] = sanitize_text_field($details);
-						$billing_details['shipping_country'] = sanitize_text_field($details);
+						$shipping_details['shipping_country'] = sanitize_text_field($details);
 					}else if("tf_email"==$key){
 						$billing_details['billing_email'] = sanitize_email($details);
 					}else if("tf_phone"==$key){
 						$billing_details['billing_phone'] = sanitize_text_field($details);
-						$billing_details['shipping_phone'] = sanitize_text_field($details);
+						$shipping_details['shipping_phone'] = sanitize_text_field($details);
 					}else{
 						$billing_details[$key] = $details;
-						$billing_details[$key] = $details;
+						$shipping_details[$key] = $details;
 					}
 				}
 			}
@@ -667,7 +667,7 @@ function tf_tours_booking_function() {
 			'status'           => 'processing',
 			'order_date'       => date( 'Y-m-d H:i:s' ),
 		);
-
+		$response['without_payment'] = 'true';
 		tf_set_order( $order_data );
 
 	}else{
@@ -747,6 +747,7 @@ function tf_tours_booking_function() {
 			$response['status'] = 'error';
 
 		}
+		$response['without_payment'] = 'false';
 	}
 
 	// Json Response

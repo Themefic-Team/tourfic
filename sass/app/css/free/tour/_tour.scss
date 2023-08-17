@@ -620,7 +620,7 @@ div#tf-contact-info {
 
 // Without Payment Booking Popup
 .tf-withoutpayment-booking{
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.6);
     position: fixed;
     top: 0;
     left: 0;
@@ -632,6 +632,9 @@ div#tf-contact-info {
     justify-content: center;
     .tf-withoutpayment-popup{
         width: 776px;
+        @media #{$max767}{
+            width: 100%;
+        }
         background-color: #FCFDFF;
         border-radius: 24px;
         .tf-booking-tabs{
@@ -700,6 +703,14 @@ div#tf-contact-info {
         }
         .tf-booking-content-summery{
             display: flex;
+            @media #{$max767}{
+                display: flow-root;
+                max-height: 360px;
+                overflow-y: auto;
+            }
+            @media #{$max575}{
+                max-height: 280px;
+            }
             padding: 0px 24px;
             align-items: flex-start;
             align-content: flex-start;
@@ -710,6 +721,9 @@ div#tf-contact-info {
             .tf-booking-content{
                 display: none;
                 width: calc(62% - 24px);
+                @media #{$max767}{
+                    width: calc(100% - 24px);
+                }
                 p{
                     color: #666D74;
                     font-family: inherit;
@@ -728,6 +742,10 @@ div#tf-contact-info {
                     scrollbar-color: #aaa #eee;
                     margin-bottom: 20px;
                     padding-right: 10px;
+                    @media #{$max767}{
+                        padding-right: 0px;
+                        height: auto;
+                    }
                     scrollbar {
                         width: 5px; 
                     }
@@ -829,7 +847,7 @@ div#tf-contact-info {
                             .traveller-single-info{
                                 width: 100%;
                                 label{
-                                    color: #CCCED1;
+                                    color: #A4A4A4;
                                     font-family: inherit;
                                     font-size: 14px;
                                     font-style: normal;
@@ -873,6 +891,9 @@ div#tf-contact-info {
             }
             .tf-booking-summery {
                 width: calc(38% - 24px);
+                @media #{$max767}{
+                    width: calc(100% - 24px);
+                }
                 .tf-booking-fixed-summery{
                     h5{
                         color: #666D74;

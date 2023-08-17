@@ -4454,7 +4454,7 @@ div#tf-contact-info {
 }
 
 .tf-withoutpayment-booking {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
   top: 0;
   left: 0;
@@ -4469,6 +4469,11 @@ div#tf-contact-info {
   width: 776px;
   background-color: #FCFDFF;
   border-radius: 24px;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-withoutpayment-booking .tf-withoutpayment-popup {
+    width: 100%;
+  }
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs {
   padding: 24px;
@@ -4539,9 +4544,26 @@ div#tf-contact-info {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+@media only screen and (max-width: 767.98px) {
+  .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery {
+    display: flow-root;
+    max-height: 360px;
+    overflow-y: auto;
+  }
+}
+@media only screen and (max-width: 575.98px) {
+  .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery {
+    max-height: 280px;
+  }
+}
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content {
   display: none;
   width: calc(62% - 24px);
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content {
+    width: calc(100% - 24px);
+  }
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content p {
   color: #666D74;
@@ -4561,6 +4583,13 @@ div#tf-contact-info {
   scrollbar-color: #aaa #eee;
   margin-bottom: 20px;
   padding-right: 10px;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra,
+  .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller {
+    padding-right: 0px;
+    height: auto;
+  }
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra scrollbar,
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller scrollbar {
@@ -4676,7 +4705,7 @@ div#tf-contact-info {
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-traveller .traveller-info .traveller-single-info label,
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller .traveller-info .traveller-single-info label {
-  color: #CCCED1;
+  color: #A4A4A4;
   font-family: inherit;
   font-size: 14px;
   font-style: normal;
@@ -4724,6 +4753,11 @@ div#tf-contact-info {
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery {
   width: calc(38% - 24px);
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery {
+    width: calc(100% - 24px);
+  }
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-fixed-summery h5 {
   color: #666D74;
