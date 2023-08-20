@@ -4502,6 +4502,7 @@ div#tf-contact-info {
   display: inline-block;
   padding: 16px 32px;
   cursor: pointer;
+  color: #96AFCA;
 }
 @media only screen and (max-width: 767.98px) {
   .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li {
