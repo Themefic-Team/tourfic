@@ -420,3 +420,19 @@ if ( !function_exists('tf_enqueue_admin_scripts') ) {
     }
     add_action( 'admin_enqueue_scripts', 'tf_enqueue_admin_scripts' );
 }
+
+/**
+ * The Plus Addons for Elementor Compatibility
+ * 
+ * @since 2.9.27
+ */
+
+function tf_dequeue_theplus_script_on_settings_page($screen) {
+
+    if ("toplevel_page_tf_settings"==$screen && wp_script_is('theplus-admin-js-pro', 'enqueued')) {
+        wp_dequeue_script('theplus-admin-js-pro');
+        wp_deregister_script('theplus-admin-js-pro');
+    }
+
+}
+add_action('admin_enqueue_scripts', 'tf_dequeue_theplus_script_on_settings_page', 9999);
