@@ -413,6 +413,7 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 
 - Fixed: Vendor login issue ( Pro )
 - Fixed: Vendor page setup ( Pro )
+- Updated: remix library
 - Fixed: Compatible with "The Plus Addons for Elementor"
 
 = 2.9.27 -  17 August 2023 =
