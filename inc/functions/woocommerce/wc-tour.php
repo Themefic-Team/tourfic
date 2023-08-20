@@ -541,7 +541,7 @@ function tf_tours_booking_function() {
 
 	if($tf_disable_payment){
 
-		$tf_booking_fields = tfopt( 'book-confirm-field' ) ? tfopt( 'book-confirm-field' ) : '';
+		$tf_booking_fields = !empty(tfopt( 'book-confirm-field' )) ? tf_data_types(tfopt( 'book-confirm-field' )) : '';
 		if(empty($tf_booking_fields)){
 			$billing_details  = array(
 				'billing_first_name' => sanitize_text_field($tf_confirmation_details['tf_first_name']),
@@ -557,16 +557,16 @@ function tf_tours_booking_function() {
 				'billing_phone'      => sanitize_text_field($tf_confirmation_details['tf_phone']),
 			);
 			$shipping_details = array(
-				'shipping_first_name' => sanitize_text_field($tf_confirmation_details['tf_first_name']),
-				'shipping_last_name'  => sanitize_text_field($tf_confirmation_details['tf_last_name']),
+				'tf_first_name' => sanitize_text_field($tf_confirmation_details['tf_first_name']),
+				'tf_last_name'  => sanitize_text_field($tf_confirmation_details['tf_last_name']),
 				'shipping_company'    => '',
-				'shipping_address_1'  => sanitize_text_field($tf_confirmation_details['tf_street_address']),
+				'tf_street_address'  => sanitize_text_field($tf_confirmation_details['tf_street_address']),
 				'shipping_address_2'  => "",
-				'shipping_city'       => sanitize_text_field($tf_confirmation_details['tf_town_city']),
-				'shipping_state'      => sanitize_text_field($tf_confirmation_details['tf_state_country']),
-				'shipping_postcode'   => sanitize_text_field($tf_confirmation_details['tf_postcode']),
-				'shipping_country'    => sanitize_text_field($tf_confirmation_details['tf_country']),
-				'shipping_phone'      => sanitize_text_field($tf_confirmation_details['tf_phone']),
+				'tf_town_city'       => sanitize_text_field($tf_confirmation_details['tf_town_city']),
+				'tf_state_country'      => sanitize_text_field($tf_confirmation_details['tf_state_country']),
+				'tf_postcode'   => sanitize_text_field($tf_confirmation_details['tf_postcode']),
+				'tf_country'    => sanitize_text_field($tf_confirmation_details['tf_country']),
+				'tf_phone'      => sanitize_text_field($tf_confirmation_details['tf_phone']),
 			);
 		}else{
 			$billing_details = [];
@@ -576,30 +576,30 @@ function tf_tours_booking_function() {
 				foreach( $tf_confirmation_details as $key => $details ){
 					if("tf_first_name"==$key){
 						$billing_details['billing_first_name'] = sanitize_text_field($details);
-						$shipping_details['shipping_first_name'] = sanitize_text_field($details);
+						$shipping_details[$key] = sanitize_text_field($details);
 					}else if("tf_last_name"==$key){
 						$billing_details['billing_last_name'] = sanitize_text_field($details);
-						$shipping_details['shipping_last_name'] = sanitize_text_field($details);
+						$shipping_details[$key] = sanitize_text_field($details);
 					}else if("tf_street_address"==$key){
 						$billing_details['billing_address_1'] = sanitize_text_field($details);
-						$shipping_details['shipping_address_1'] = sanitize_text_field($details);
+						$shipping_details[$key] = sanitize_text_field($details);
 					}else if("tf_town_city"==$key){
 						$billing_details['billing_city'] = sanitize_text_field($details);
-						$shipping_details['shipping_city'] = sanitize_text_field($details);
+						$shipping_details[$key] = sanitize_text_field($details);
 					}else if("tf_state_country"==$key){
 						$billing_details['billing_state'] = sanitize_text_field($details);
-						$shipping_details['shipping_state'] = sanitize_text_field($details);
+						$shipping_details[$key] = sanitize_text_field($details);
 					}else if("tf_postcode"==$key){
 						$billing_details['billing_postcode'] = sanitize_text_field($details);
-						$shipping_details['shipping_postcode'] = sanitize_text_field($details);
+						$shipping_details[$key] = sanitize_text_field($details);
 					}else if("tf_country"==$key){
 						$billing_details['billing_country'] = sanitize_text_field($details);
-						$shipping_details['shipping_country'] = sanitize_text_field($details);
+						$shipping_details[$key] = sanitize_text_field($details);
 					}else if("tf_email"==$key){
 						$billing_details['billing_email'] = sanitize_email($details);
 					}else if("tf_phone"==$key){
 						$billing_details['billing_phone'] = sanitize_text_field($details);
-						$shipping_details['shipping_phone'] = sanitize_text_field($details);
+						$shipping_details[$key] = sanitize_text_field($details);
 					}else{
 						$billing_details[$key] = $details;
 						$shipping_details[$key] = $details;
