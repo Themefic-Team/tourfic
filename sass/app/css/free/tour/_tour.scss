@@ -653,16 +653,33 @@ div#tf-contact-info {
                     border-radius: 8px;
                     background: #C8D6E4;
                     display: flex;
+                    @media #{$max767}{
+                        display: inline-block;
+                        background-color: transparent;
+                    }
                     li{
                         display: inline-block;
                         padding: 16px 32px;
                         cursor: pointer;
+                        @media #{$max767}{
+                            padding: 8px;
+                            border-radius: 16px;
+                            border: 1px solid #CCCED1;
+                            font-size: 13px;
+                            margin: 5px 0px;
+                        }
                     }
                     li.done{
                         background-color: #96AFCA; 
                         color: #FCFDFF;
                         &:first-child{
                             border-radius: 8px 0px 0px 8px;
+                            @media #{$max767}{
+                                border-radius: 16px !important;
+                                border: 1px solid #003C7A;
+                                background-color: transparent;
+                                color: #003C7A;
+                            }
                         }
                     }
                     li.active{
@@ -670,8 +687,17 @@ div#tf-contact-info {
                         background-color: #96AFCA;
                         color: #FCFDFF;
                         padding-right: 50px;
+                        @media #{$max767}{
+                            padding-right: 8px !important;
+                            border: 1px solid #003C7A;
+                            background-color: transparent;
+                            color: #003C7A;
+                        }
                         &:first-child{
                             border-radius: 8px 0px 0px 8px;
+                            @media #{$max767}{
+                                border-radius: 16px !important;
+                            }
                         }
                         &::before{
                             content: "";
@@ -684,12 +710,20 @@ div#tf-contact-info {
                             transform: rotate(45deg);
                             margin-top: -20px;
                             border-radius: 0px 10px 0px 0px;
-                           
+                            @media #{$max767}{
+                                position: static;
+                            }
                         }
                         &:last-child{
                             border-radius: 0px 8px 8px 0px;
                             &::before{
                                 position: static;
+                            }
+                            @media #{$max767}{
+                                border-radius: 16px !important;
+                                border: 1px solid #003C7A;
+                                background-color: transparent;
+                                color: #003C7A;
                             }
                         }
                     }
@@ -722,7 +756,7 @@ div#tf-contact-info {
                 display: none;
                 width: calc(62% - 24px);
                 @media #{$max767}{
-                    width: calc(100% - 24px);
+                    width: calc(100% - 0px);
                 }
                 p{
                     color: #666D74;
@@ -843,6 +877,9 @@ div#tf-contact-info {
                         .traveller-info{
                             display: grid;
                             grid-template-columns: repeat(3, 1fr);
+                            @media #{$max575}{
+                                grid-template-columns: repeat(1, 1fr);
+                            }
                             gap: 10px;
                             .traveller-single-info{
                                 width: 100%;
@@ -882,6 +919,9 @@ div#tf-contact-info {
                         }
                         .billing-details{
                             grid-template-columns: repeat(2, 1fr);
+                            @media #{$max575}{
+                                grid-template-columns: repeat(1, 1fr);
+                            }
                         }
                     }
                 }
@@ -892,7 +932,7 @@ div#tf-contact-info {
             .tf-booking-summery {
                 width: calc(38% - 24px);
                 @media #{$max767}{
-                    width: calc(100% - 24px);
+                    width: calc(100% - 0px);
                 }
                 .tf-booking-fixed-summery{
                     h5{
@@ -1064,6 +1104,9 @@ div#tf-contact-info {
                     line-height: 20px;
                     width: 300px;
                     text-align: center;
+                    @media #{$max575}{
+                        width: 100%;
+                    }
                 }
                 button{
                     border-radius: 4px;
@@ -1080,6 +1123,9 @@ div#tf-contact-info {
                     text-align: center;
                     border: 0px solid;
                     cursor: pointer;
+                    @media #{$max575}{
+                        width: 100%;
+                    }
                 }
             }
             .tf-control-pagination.show{
