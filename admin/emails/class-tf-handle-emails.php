@@ -944,7 +944,7 @@ class TF_Handle_Emails {
                     $booking_details .= '<strong>Postcode/ZIP:</strong> ' . $order_data['shipping_details']['tf_postcode'] . '<br>';
                 }
             }
-            $booking_details .= '</td></tr></tbody></table></div>';
+            $booking_details .= '</td></tr></tbody></table><p style="margin:10px 0;">Thank you for booking.</p></div>';
 
             //customer details end
             
