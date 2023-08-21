@@ -706,24 +706,24 @@ if ( ! function_exists( 'tf_tour_advanced_search_form_horizontal' ) ) {
                             <div class="tf-tour-filter-range"></div>
                         </div>
                         <h3 style="margin-top: 20px"><?php _e( 'Tour Types', 'tourfic' ); ?></h3>
-	                    <?php
-	                    $tf_tour_type = get_terms( array(
-		                    'taxonomy'     => 'tour_type',
-		                    'orderby'      => 'title',
-		                    'order'        => 'ASC',
-		                    'hide_empty'   => true,
-		                    'hierarchical' => 0,
-	                    ) );
-	                    if ( $tf_tour_type ) : ?>
+						<?php
+						$tf_tour_type = get_terms( array(
+							'taxonomy'     => 'tour_type',
+							'orderby'      => 'title',
+							'order'        => 'ASC',
+							'hide_empty'   => true,
+							'hierarchical' => 0,
+						) );
+						if ( $tf_tour_type ) : ?>
                             <div class="tf-tour-types" style="overflow: hidden">
-			                    <?php foreach ( $tf_tour_type as $term ) : ?>
+								<?php foreach ( $tf_tour_type as $term ) : ?>
                                     <div class="form-group form-check">
                                         <input type="checkbox" name="types[]" class="form-check-input" value="<?php _e( $term->slug ); ?>" id="<?php _e( $term->slug ); ?>">
                                         <label class="form-check-label" for="<?php _e( $term->slug ); ?>"><?php _e( $term->name ); ?></label>
                                     </div>
-			                    <?php endforeach; ?>
+								<?php endforeach; ?>
                             </div>
-	                    <?php endif; ?>
+						<?php endif; ?>
                     </div>
                 </div>
 
@@ -979,66 +979,64 @@ function tf_single_tour_booking_form( $post_id ) {
 
 							if ($tour_type && $tour_type == 'fixed') { ?>
 
-                            mode: "range",
-                            defaultDate: ["<?php echo $departure_date; ?>", "<?php echo $return_date; ?>"],
-                            enable: [
-                                {
-                                    from: "<?php echo $departure_date; ?>",
-                                    to: "<?php echo $return_date; ?>"
-                                }
-                            ],
-                            onReady: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                            },
+                                mode: "range",
+                                defaultDate: ["<?php echo $departure_date; ?>", "<?php echo $return_date; ?>"],
+                                enable: [
+                                    {
+                                        from: "<?php echo $departure_date; ?>",
+                                        to: "<?php echo $return_date; ?>"
+                                    }
+                                ],
+                                onReady: function (selectedDates, dateStr, instance) {
+                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                },
 
 							<?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
 
-                            minDate: "today",
-                            disableMobile: "true",
+                                minDate: "today",
+                                disableMobile: "true",
 
-							<?php if ($custom_avail && $custom_avail == true){ ?>
+                                <?php if ($custom_avail && $custom_avail == true){ ?>
 
-                            enable: [
+                                    enable: [
 
-								<?php foreach ( $cont_custom_date as $item ) {
-								echo '{
-                                    from: "' . $item["date"]["from"] . '",
-                                    to: "' . $item["date"]["to"] . '"
-                                },';
-							} ?>
+                                        <?php foreach ( $cont_custom_date as $item ) {
+                                        echo '{
+                                            from: "' . $item["date"]["from"] . '",
+                                            to: "' . $item["date"]["to"] . '"
+                                        },';
+                                    } ?>
+                                    ],
 
-                            ],
+                                <?php }
+                                if ($custom_avail == false) {
+                                    if ($disabled_day || $disable_range || $disable_specific) {
+                                    ?>
+                                        "disable": [
+                                            <?php if ($disabled_day) { ?>
+                                            function (date) {
+                                                return (date.getDay() === 8 <?php foreach ( $disabled_day as $dis_day ) {
+                                                    echo '|| date.getDay() === ' . $dis_day . ' ';
+                                                } ?>);
+                                            },
+                                            <?php }
+                                            if ( $disable_range ) {
+                                                foreach ( $disable_range as $d_item ) {
+                                                    echo '{
+                                                    from: "' . $d_item["date"]["from"] . '",
+                                                    to: "' . $d_item["date"]["to"] . '"
+                                                },';
+                                                }
+                                            }
 
-							<?php }
-							if ($custom_avail == false) {
-							if ($disabled_day || $disable_range || $disable_specific) {
-							?>
-
-                            "disable": [
-								<?php if ($disabled_day) { ?>
-                                function (date) {
-                                    return (date.getDay() === 8 <?php foreach ( $disabled_day as $dis_day ) {
-										echo '|| date.getDay() === ' . $dis_day . ' ';
-									} ?>);
-                                },
-								<?php }
-								if ( $disable_range ) {
-									foreach ( $disable_range as $d_item ) {
-										echo '{
-                                        from: "' . $d_item["date"]["from"] . '",
-                                        to: "' . $d_item["date"]["to"] . '"
-                                    },';
-									}
-								}
-
-								if ( $disable_specific ) {
-									echo '"' . $disable_specific . '"';
-								}
-								?>
-                            ],
-							<?php
-							}
-							}
+                                            if ( $disable_specific ) {
+                                                echo '"' . $disable_specific . '"';
+                                            }
+                                            ?>
+                                        ],
+                                    <?php
+                                    }
+                                }
 
 							}
 							?>

@@ -98,7 +98,6 @@
 
             let hotel_id = $('[name="tf_available_hotels"]').val();
             let room_id = $('[name="tf_available_rooms"]').val();
-            console.log('room_id', room_id)
 
             if (room_id.length > 0) {
                 jQuery.ajax({
@@ -220,7 +219,7 @@
         * Check available tour by date
         * Author @Foysal
         */
-        $(document).on('change', '[name="tf_tour_date"], [name="tf_tour_adults_number"], [name="tf_tour_children_number"]', function (e) {
+        /*$(document).on('change', '[name="tf_tour_date"], [name="tf_tour_adults_number"], [name="tf_tour_children_number"]', function (e) {
             e.preventDefault();
 
             var tourDate = $('[name="tf_tour_date"]').val();
@@ -254,9 +253,133 @@
                     }
                 });
             }
+        });*/
+
+        /*
+        * Tour time and extra fields update
+        * Author @Foysal
+        */
+        $(document).on('change', '[name="tf_available_tours"]', function (e) {
+            e.preventDefault();
+
+            var tourId = $('[name="tf_available_tours"]').val();
+
+            if (tourId.length > 0) {
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_tour_date_time_update',
+                        tour_id: tourId,
+                    },
+                    beforeSend: function () {
+                        $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');
+                    },
+                    success: function (response) {
+                        const obj = JSON.parse(response);
+                        console.log('obj', obj)
+
+                        if (obj.custom_avail !== '1' && obj?.allowed_times?.length > 0) {
+                            populateTimeSelect(obj.allowed_times)
+                        }
+
+                        let flatpickerObj = {
+                            enableTime: false,
+                            dateFormat: "Y/m/d",
+                        };
+                        if (obj.tour_type === 'fixed') {
+                            flatpickerObj.mode = "range";
+                            flatpickerObj.defaultDate = [obj.departure_date, obj.return_date];
+                            flatpickerObj.enable = [
+                                {
+                                    from: obj.departure_date,
+                                    to: obj.return_date
+                                }
+                            ];
+                            flatpickerObj.onReady = function (selectedDates, dateStr, instance) {
+                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                            };
+                        } else if (obj.tour_type === 'continuous') {
+                            flatpickerObj.minDate = "today";
+                            flatpickerObj.disableMobile = "true";
+                            if (obj.custom_avail === '1') {
+                                flatpickerObj.enable = [];
+                                if (obj.cont_custom_date) {
+                                    for (const item of obj.cont_custom_date) {
+                                        flatpickerObj.enable.push({
+                                            from: item.date.from,
+                                            to: item.date.to
+                                        });
+                                    }
+                                }
+                            }
+                            if (obj.custom_avail !== '1') {
+                                if (obj.disabled_day || obj.disable_range || obj.disable_specific) {
+                                    flatpickerObj.disable = [];
+                                    if (obj.disabled_day) {
+                                        flatpickerObj.disable.push(function (date) {
+                                            return (date.getDay() === 8 || obj.disabled_day.includes(date.getDay().toString()));
+                                        });
+                                    }
+                                    if (obj.disable_range) {
+                                        for (const d_item of obj.disable_range) {
+                                            flatpickerObj.disable.push({
+                                                from: d_item.date.from,
+                                                to: d_item.date.to
+                                            });
+                                        }
+                                    }
+                                    if (obj.disable_specific2) {
+                                        for (const d_item of obj.disable_specific2) {
+                                            flatpickerObj.disable.push(d_item);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        flatpickerObj.onChange = function (selectedDates, dateStr, instance) {
+                            if (obj.custom_avail === '1') {
+                                let times = obj.allowed_times.filter((v) => {
+                                    let date_str = Date.parse(dateStr);
+                                    let start_date = Date.parse(v.date.from);
+                                    let end_date = Date.parse(v.date.to);
+                                    return start_date <= date_str && end_date >= date_str;
+                                });
+                                times = times.length > 0 && times[0].times ? times[0].times : null;
+                                populateTimeSelect(times);
+                            }
+                        }
+
+                        $("[name='tf_tour_date']").flatpickr(flatpickerObj);
+
+                        let extras = $('[name="tf_tour_extras"]');
+                        extras.removeAttr('disabled');
+                        extras.empty();
+                        $.each(obj.tour_extras_array, function (key, value) {
+                            extras.append('<option value="' + key + '">' + value + '</option>');
+                        });
+                        extras.select2();
+
+
+                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                    }
+                });
+            }
         });
 
-
+        function populateTimeSelect(times) {
+            let timeSelect = $('[name="tf_tour_time"]');
+            // let timeSelectDiv = $("#check-in-time-div");
+            timeSelect.empty();
+            if (times.length > 0) {
+                timeSelect.append(`<option value="" selected>Select Time</option>`);
+                $.each(times, function (i, v) {
+                    timeSelect.append(`<option value="${i}">${v}</option>`);
+                });
+                // timeSelectDiv.show();
+            }
+        }
 
         /*
         * Backend Tour Booking
@@ -302,7 +425,6 @@
 
                                 form.find('[name="' + requiredField + '"]').removeClass('error-input');
                                 form.find('[name="' + requiredField + '"]').closest('.tf-fieldset').find('small.text-danger').remove();
-
                                 if (errorField) {
                                     form.find('[name="' + requiredField + '"]').addClass('error-input');
                                     form.find('[name="' + requiredField + '"]').closest('.tf-fieldset').append('<small class="text-danger">' + errorField + '</small>');
@@ -315,13 +437,13 @@
                             obj.message,
                             'success'
                         )
-                        form[0].reset();
-                        form.find('input').removeClass('error-input');
-                        form.find('select').removeClass('error-input');
-                        form.find('textarea').removeClass('error-input');
-                        form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
-                        form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
-                        form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
+                        // form[0].reset();
+                        // form.find('input').removeClass('error-input');
+                        // form.find('select').removeClass('error-input');
+                        // form.find('textarea').removeClass('error-input');
+                        // form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
+                        // form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
+                        // form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
                     }
                     btn.removeClass('tf-btn-loading');
                 },
