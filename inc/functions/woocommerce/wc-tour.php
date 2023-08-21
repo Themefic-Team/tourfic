@@ -93,9 +93,11 @@ function tf_tours_booking_function() {
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($start_date) && !empty($end_date) ) {
 			
 			// Tour Order retrive from Tourfic Order Table
-			global $wpdb;
-			$table_name = $wpdb->prefix . 'tf_order_data';
-			$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT post_id,order_details FROM $table_name WHERE post_type = %s AND ostatus = %s ORDER BY order_id DESC", 'tour', 'completed' ), ARRAY_A );
+			$tf_orders_select = array(
+				'select' => "post_id,order_details",
+				'query' => "post_type = 'tour' AND ostatus = 'completed' ORDER BY order_id DESC"
+			);
+			$tf_tour_book_orders = tourfic_order_table_data($tf_orders_select);
 
 			$tf_total_adults = 0;
 			$tf_total_childrens = 0;
@@ -156,9 +158,11 @@ function tf_tours_booking_function() {
 
 
 			// Daily Tour Booking Capacity && Tour Order retrive from Tourfic Order Table
-			global $wpdb;
-			$table_name = $wpdb->prefix . 'tf_order_data';
-			$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT post_id,order_details FROM $table_name WHERE post_type = %s AND ostatus = %s ORDER BY order_id DESC", 'tour', 'completed' ), ARRAY_A );
+			$tf_orders_select = array(
+				'select' => "post_id,order_details",
+				'query' => "post_type = 'tour' AND ostatus = 'completed' ORDER BY order_id DESC"
+			);
+			$tf_tour_book_orders = tourfic_order_table_data($tf_orders_select);
 
 			$tf_total_adults = 0;
 			$tf_total_childrens = 0;
@@ -350,9 +354,11 @@ function tf_tours_booking_function() {
 				$allowed_times_field = ! empty( $item['allowed_time'] ) ? $item['allowed_time'] : '';
 
 				// Daily Tour Booking Capacity && tour order retrive form tourfic order table
-				global $wpdb;
-                $table_name = $wpdb->prefix . 'tf_order_data';
-                $tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT post_id,order_details FROM $table_name WHERE post_type = %s AND ostatus = %s ORDER BY order_id DESC", 'tour', 'completed' ), ARRAY_A );
+				$tf_orders_select = array(
+					'select' => "post_id,order_details",
+					'query' => "post_type = 'tour' AND ostatus = 'completed' ORDER BY order_id DESC"
+				);
+				$tf_tour_book_orders = tourfic_order_table_data($tf_orders_select);
 
                 $tf_total_adults = 0;
                 $tf_total_childrens = 0;

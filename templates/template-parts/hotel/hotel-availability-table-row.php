@@ -505,8 +505,4 @@ if(empty($tf_room_disable_date)){
         </form>
     </td>
 </tr>
-<<<<<<< HEAD
-<?php } } ?>
-=======
 <?php }} ?>
->>>>>>> 2d613a69e87bb27fc6e00f188770654d8211e2ba

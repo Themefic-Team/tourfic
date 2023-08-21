@@ -66,28 +66,39 @@ function tf_tour_booking_page_callback() {
 	$table_name = $wpdb->prefix . 'tf_order_data';
 	if ( $current_user_role == 'administrator' ) {
 		if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
-			$tours_orders_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY order_id DESC", 'tour' ), ARRAY_A );
+			$tf_orders_select = array(
+				'select' => "*",
+				'query' => "post_type = 'tour' ORDER BY order_id DESC"
+			);
+			$tours_orders_result = tourfic_order_table_data($tf_orders_select);
 		}else{
-			$tours_orders_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY order_id DESC LIMIT 15", 'tour' ), ARRAY_A );
+			$tf_orders_select = array(
+				'select' => "*",
+				'query' => "post_type = 'tour' ORDER BY order_id DESC LIMIT 15"
+			);
+			$tours_orders_result = tourfic_order_table_data($tf_orders_select);
 		}
 	}
 	if ( $current_user_role == 'tf_vendor' ) {
 		if (function_exists('is_tf_pro') && is_tf_pro()) {
-			$query = $wpdb->prepare(
-				"SELECT * FROM $table_name WHERE post_type = %s AND post_id IN (
-					SELECT ID FROM {$wpdb->posts} WHERE post_author = %d
-				) ORDER BY order_id DESC",
-				'tour', $current_user_id
+
+			$tf_orders_select = array(
+				'select' => "*",
+				'post_type' => "tour",
+				'author' => $current_user_id,
+				'limit' => ""
 			);
+			$tours_orders_result = tourfic_vendor_order_table_data($tf_orders_select);
+
 		} else {
-			$query = $wpdb->prepare(
-				"SELECT * FROM $table_name WHERE post_type = %s AND post_id IN (
-					SELECT ID FROM {$wpdb->posts} WHERE post_author = %d
-				) ORDER BY order_id DESC LIMIT 15",
-				'tour', $current_user_id
+			$tf_orders_select = array(
+				'select' => "*",
+				'post_type' => "tour",
+				'author' => $current_user_id,
+				'limit' => "LIMIT 15"
 			);
+			$tours_orders_result = tourfic_vendor_order_table_data($tf_orders_select);
 		}
-		$tours_orders_result = $wpdb->get_results($query, ARRAY_A);
 	}
 
 	?>
@@ -151,32 +162,39 @@ function tf_hotel_booking_page_callback() {
 		wp_die( __( 'You are not allowed in this page', 'tourfic' ) );
 	}
 
-	global $wpdb;
-	$table_name = $wpdb->prefix . 'tf_order_data';
 	if ( $current_user_role == 'administrator' ) {
 		if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
-			$hotel_orders_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY order_id DESC", 'hotel' ), ARRAY_A );
+			$tf_orders_select = array(
+				'select' => "*",
+				'query' => "post_type = 'hotel' ORDER BY order_id DESC"
+			);
+			$hotel_orders_result = tourfic_order_table_data($tf_orders_select);
 		}else{
-			$hotel_orders_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY order_id DESC LIMIT 15", 'hotel' ), ARRAY_A );
+			$tf_orders_select = array(
+				'select' => "*",
+				'query' => "post_type = 'hotel' ORDER BY order_id DESC LIMIT 15"
+			);
+			$hotel_orders_result = tourfic_order_table_data($tf_orders_select);
 		}
 	}
 	if ( $current_user_role == 'tf_vendor' ) {
 		if (function_exists('is_tf_pro') && is_tf_pro()) {
-			$query = $wpdb->prepare(
-				"SELECT * FROM $table_name WHERE post_type = %s AND post_id IN (
-					SELECT ID FROM {$wpdb->posts} WHERE post_author = %d
-				) ORDER BY order_id DESC",
-				'hotel', $current_user_id
+			$tf_orders_select = array(
+				'select' => "*",
+				'post_type' => "hotel",
+				'author' => $current_user_id,
+				'limit' => ""
 			);
+			$hotel_orders_result = tourfic_vendor_order_table_data($tf_orders_select);
 		} else {
-			$query = $wpdb->prepare(
-				"SELECT * FROM $table_name WHERE post_type = %s AND post_id IN (
-					SELECT ID FROM {$wpdb->posts} WHERE post_author = %d
-				) ORDER BY order_id DESC LIMIT 15",
-				'hotel', $current_user_id
+			$tf_orders_select = array(
+				'select' => "*",
+				'post_type' => "hotel",
+				'author' => $current_user_id,
+				'limit' => "LIMIT 15"
 			);
+			$hotel_orders_result = tourfic_vendor_order_table_data($tf_orders_select);
 		}
-		$hotel_orders_result = $wpdb->get_results($query, ARRAY_A);
 	}
 
 	?>

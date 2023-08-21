@@ -826,9 +826,11 @@ function tf_room_availability_callback() {
 					foreach ( $order_ids as $order_id ) {
 
 					# Get Only the completed orders
-					global $wpdb;
-					$table_name = $wpdb->prefix . 'tf_order_data';
-					$tf_hotel_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT post_id,order_details FROM $table_name WHERE post_type = %s AND ostatus = %s AND order_id = %s", 'hotel', 'completed', $order_id ), ARRAY_A );
+					$tf_orders_select = array(
+						'select' => "post_id,order_details",
+						'query' => "post_type = 'hotel' AND ostatus = 'completed' AND order_id = ".$order_id
+					);
+					$tf_hotel_book_orders = tourfic_order_table_data($tf_orders_select);
 
 						# Get and Loop Over Order Items
 						foreach ( $tf_hotel_book_orders as $item ) {

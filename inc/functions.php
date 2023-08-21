@@ -1848,3 +1848,43 @@ function tf_update_email_template_default_content(){
 		}
 	}
 }
+
+/**
+ * Retrive Orders Data
+ * 
+ * @since 2.9.26
+ * @return void
+ * 
+ * @author Jahid
+ */
+
+if ( ! function_exists( 'tourfic_order_table_data' ) ) {
+	function tourfic_order_table_data($query){
+		global $wpdb;
+		$query_select = $query['select'];
+		$query_where = $query['query'];
+		$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE $query_where" ), ARRAY_A );
+		return $tf_tour_book_orders;
+	}
+}
+
+
+if ( ! function_exists( 'tourfic_vendor_order_table_data' ) ) {
+	function tourfic_vendor_order_table_data($query){
+		global $wpdb;
+		$query_select = $query['select'];
+		$query_type = $query['post_type'];
+		$query_author = $query['author'];
+		$query_limit = $query['limit'];
+
+		$vendor_query = $wpdb->prepare(
+			"SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s AND post_id IN (
+				SELECT ID FROM {$wpdb->posts} WHERE post_author = %d
+			) ORDER BY order_id DESC $query_limit",
+			$query_type, $query_author
+		);
+// var_dump($vendor_query); exit();
+		$orders_result = $wpdb->get_results($vendor_query, ARRAY_A);
+		return $orders_result;
+	}
+}
