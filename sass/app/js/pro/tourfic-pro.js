@@ -602,7 +602,6 @@
                 },
                 success: function (response) {
                     const obj = JSON.parse(response);
-                    console.log('obj', obj)
                     if (!obj.success) {
                         if (obj.message) {
                             Swal.fire(

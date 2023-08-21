@@ -6,11 +6,10 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $room['repeat_by_
     if ( ! empty( $disabled_dates ) ) {
         foreach ( $disabled_dates as $date ) {
             $dateArr           = explode( ', ', !empty($date['disabled_date']) ? $date['disabled_date'] : '' );
-            $total_dis_dates = $dateArr;
+            $total_dis_dates = array_merge($total_dis_dates, $dateArr);
         }
     }
 }
-
 $tf_room_disable_date = array_intersect($avail_durationdate, $total_dis_dates);
 if( $tf_hotel_selected_template_check == "design-1" ){
 if(empty($tf_room_disable_date)){
@@ -130,7 +129,13 @@ if(empty($tf_room_disable_date)){
                     <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                 </div>
                 <div class="tf-top">
-                    <?php _e( 'Number of Children', 'tourfic' ); ?>
+                    <?php 
+                    if(!empty($child_age_limit)){
+                        printf(__('Children Age Limit %s Years', 'tourfic'), $child_age_limit);
+                    }else{
+                        _e( 'Number of Children', 'tourfic' ); 
+                    }
+                    ?>
                     <i class="tool-i"></i>
                 </div>
             </div>
@@ -139,10 +144,27 @@ if(empty($tf_room_disable_date)){
     <td class="reserve tf-t-c">
         <div class="tf-price-column">
             <span class="tf-price"><?php echo wc_price( $price ); ?></span>
-            <?php if ( $pricing_by == '1' ) { ?>
-                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  _e( 'per night', 'tourfic' );?></div>
+            <?php 
+            if ( $pricing_by == '1' ) { ?>
+                <div class="price-per-night">
+                    <?php 
+                    if($multi_by_date_ck){
+                        $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  _e( 'per night', 'tourfic' );
+                    }else{
+                        $days > 0 ? printf(__('for %s days', 'tourfic'), $days) :  _e( 'per day', 'tourfic' );
+                    }
+                    ?>
+                </div>
             <?php } else {?>
-                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );?></div>
+                <div class="price-per-night">
+                    <?php 
+                    if($multi_by_date_ck){
+                        $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );
+                    }else{
+                        $days > 0 ? printf(__('for %s days', 'tourfic'), $days) : _e( 'per person/day', 'tourfic' );
+                    }
+                    ?>
+                </div>
             <?php }?>
 
             <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount)) { ?>
@@ -349,7 +371,13 @@ if(empty($tf_room_disable_date)){
                     <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                 </div>
                 <div class="tf-top">
-                    <?php _e( 'Number of Children', 'tourfic' );?>
+                    <?php 
+                    if(!empty($child_age_limit)){
+                        printf(__('Children Age Limit %s Years', 'tourfic'), $child_age_limit);
+                    }else{
+                        _e( 'Number of Children', 'tourfic' ); 
+                    }
+                    ?>
                     <i class="tool-i"></i>
                 </div>
             </div>
@@ -358,10 +386,27 @@ if(empty($tf_room_disable_date)){
     <td class="pricing">
         <div class="tf-price-column">
             <span class="tf-price"><?php echo wc_price( $price ); ?></span>
-            <?php if ( $pricing_by == '1' ) { ?>
-                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  _e( 'per night', 'tourfic' );?></div>
+            <?php 
+            if ( $pricing_by == '1' ) { ?>
+                <div class="price-per-night">
+                    <?php 
+                    if($multi_by_date_ck){
+                        $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  _e( 'per night', 'tourfic' );
+                    }else{
+                        $days > 0 ? printf(__('for %s days', 'tourfic'), $days) :  _e( 'per day', 'tourfic' );
+                    }
+                    ?>
+                </div>
             <?php } else {?>
-                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );?></div>
+                <div class="price-per-night">
+                    <?php 
+                    if($multi_by_date_ck){
+                        $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );
+                    }else{
+                        $days > 0 ? printf(__('for %s days', 'tourfic'), $days) : _e( 'per person/day', 'tourfic' );
+                    }
+                    ?>
+                </div>
             <?php }?>
 
             <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount)) { ?>
@@ -388,8 +433,8 @@ if(empty($tf_room_disable_date)){
             <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
                 
                 <div class="room-deposit-wrap">
-                    <input type="checkbox" id="tf-make-deposit" name="make_deposit" value="<?php echo $room_id ?>">
-                    <label for="tf-make-deposit"><?php _e("I'll make a Partial Payment", "tourfic") ?></label><br>
+                    <input type="checkbox" id="tf-make-deposit<?php echo $room_id ?>" name="make_deposit" value="<?php echo $room_id ?>">
+                    <label for="tf-make-deposit<?php echo $room_id ?>"><?php _e("I'll make a Partial Payment", "tourfic") ?></label><br>
                 </div>
 	        <?php } ?>
 
@@ -460,4 +505,8 @@ if(empty($tf_room_disable_date)){
         </form>
     </td>
 </tr>
+<<<<<<< HEAD
 <?php } } ?>
+=======
+<?php }} ?>
+>>>>>>> 2d613a69e87bb27fc6e00f188770654d8211e2ba

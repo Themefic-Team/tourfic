@@ -180,7 +180,7 @@ function tf_hotel_booking_callback() {
 			if ( ! empty( $day_difference ) && $price_multi_day == true ) {
 				$price_total = $total_price * $room_selected * $day_difference;
 			} else {
-				$price_total = $total_price * $room_selected;
+				$price_total = $total_price * ($room_selected * $day_difference+1);
 			}
 
 		}

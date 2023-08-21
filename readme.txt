@@ -2,8 +2,8 @@
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
-Tested up to: 6.2.2
-Stable tag: 2.9.21
+Tested up to: 6.3
+Stable tag: 2.9.28
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -408,6 +408,66 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.9.28 -  20 August 2023 =
+
+- Fixed: Vendor login issue ( Pro )
+- Fixed: Vendor page setup ( Pro )
+- Updated: Remix library
+- Fixed: Compatible with "The Plus Addons for Elementor"
+
+= 2.9.27 -  17 August 2023 =
+
+- Fixed: Hotel disabled date issue 
+- Fixed: Compatible with "Smash Balloon Instagram Feed"
+
+= 2.9.26 -  14 August 2023 =
+
+- Added: Frontend Dashboard for admin, vendor, and manager
+- Added: Vendor management for admin and manager in Frontend Dashboard
+- Added: Login & Register settings added in tourfic settings
+- Added: Manager role add
+- Added: User role permission add
+- Fixed: Custom vendor registration fields name issue fix
+- Fixed: Email verification url issue fix
+- Fixed: Email verification broken layout issue fix
+- Fixed: Issue with disabled date
+- Fixed: Featured Hotel & Tour badge issue fix
+- Fixed: Design issue fix
+- Fixed: Tab issue in settings panel fixing
+- Fixed: Vendor earning fix in the vendor list
+- Fixed: Vendor payout float price issue fix
+- Update: Login & Register settings moved to tourfic settings
+- Update: Remix icon update
+- Improved: Login & Register page design update
+- Improved: Login & Register page create automatically
+- Improved: Hotel & Tour Rest API enable
+
+= 2.9.25 -  10 August 2023 =
+
+- Compatibility check with WordPress 6.3
+- Compatibility check with WooCommerce 8.0.1
+- Compatibility check with Elementor 3.15.2
+
+= 2.9.24 -  04 August 2023 =
+
+* Improvement: Preloader updated
+* Improvement: Booking form background added
+* Fixed: Color picker source issue fixed
+* Compatibility: Elementor 3.15.1
+
+= 2.9.23 -  23 July 2023 =
+
+* Fixed: Map issue for tour itinerary 
+* Compatibility: WooCommerce 7.9.0
+* Compatibility: Elementor 3.14.1
+
+= 2.9.22 -  20 July 2023 =
+
+* Added: Openstreetmap added to frontend
+* Added: New template section dynamic
+* Fixed: Body Google Fonts Issue
+* Fixed: Per Day booking price
 
 = 2.9.21 -  22 June 2023 =
 

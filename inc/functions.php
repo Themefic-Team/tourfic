@@ -434,7 +434,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 			<div class="tf-field-group tf-destination-box">
 				<i class="fa-solid fa-location-dot"></i>
 				<input type="text" id="<?php echo $place_input_id ?? ''; ?>" required="" class="tf-field" placeholder="<?php echo $place_placeholder ?? __( 'Location/Destination', 'tourfic' ); ?>"
-							value="<?php echo $place_title; ?>">
+							value="<?php echo !empty($place_title) ? $place_title : ''; ?>">
 				<input type="hidden" name="place" id="tf-place" value="<?php echo $place_value ?? ''; ?>"/>
 			</div>
 			<div class="tf-field-group tf-mt-8 tf_acrselection">
@@ -508,7 +508,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                 <div class="tf_form-inner">
                     <i class="fas fa-map-marker-alt"></i>
                     <input type="text" id="<?php echo $place_input_id ?? ''; ?>" required="" class="" placeholder="<?php echo $place_placeholder ?? __( 'Location/Destination', 'tourfic' ); ?>"
-                           value="<?php echo $place_title; ?>">
+                           value="<?php echo !empty($place_title) ? $place_title : ''; ?>">
                     <input type="hidden" name="place" id="tf-place" value="<?php echo $place_value ?? ''; ?>"/>
                 </div>
             </label>
