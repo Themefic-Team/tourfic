@@ -1883,7 +1883,6 @@ if ( ! function_exists( 'tourfic_vendor_order_table_data' ) ) {
 			) ORDER BY order_id DESC $query_limit",
 			$query_type, $query_author
 		);
-// var_dump($vendor_query); exit();
 		$orders_result = $wpdb->get_results($vendor_query, ARRAY_A);
 		return $orders_result;
 	}
