@@ -619,7 +619,8 @@ div#tf-contact-info {
 }
 
 // Without Payment Booking Popup
-.tf-withoutpayment-booking{
+.tf-withoutpayment-booking,
+.tf-withoutpayment-booking-confirm{
     background-color: rgba(0, 0, 0, 0.6);
     position: fixed;
     top: 0;
@@ -630,6 +631,40 @@ div#tf-contact-info {
     display: none;
     align-items: center;
     justify-content: center;
+    .tf-confirm-popup{
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 776px;
+        @media #{$max767}{
+            width: 100%;
+        }
+        background-color: #FCFDFF;
+        border-radius: 24px;
+        position: relative;
+        img{
+            width: 320px;
+        }
+        h2{
+            color: #333D46;
+            font-family: inherit;
+            font-size: 48px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 30px;
+            letter-spacing: -0.96px;
+        }
+        .tf-booking-times {
+            position: absolute;
+            right: 24px;
+            top: 24px;
+            span{
+                cursor: pointer;
+            }
+        }
+    }
     .tf-withoutpayment-popup{
         width: 776px;
         @media #{$max767}{
@@ -957,6 +992,8 @@ div#tf-contact-info {
                     }
                 }
                 .tf-booking-traveller-info{
+                    max-height: 230px;
+                    overflow-y: auto;
                     h6{
                         color: #666D74;
                         font-family: inherit;
@@ -1135,7 +1172,8 @@ div#tf-contact-info {
         }
     }
 }
-.tf-withoutpayment-booking.show{
+.tf-withoutpayment-booking.show,
+.tf-withoutpayment-booking-confirm.show{
     display: flex;
 }
 

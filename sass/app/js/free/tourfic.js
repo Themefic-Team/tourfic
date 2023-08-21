@@ -334,7 +334,7 @@
                             opacity: .5
                         }
                     });
-
+                    $('#tour_room_details_loader').show();
                     $('.tf-notice-wrapper').html("").hide();
                 },
                 complete: function (data) {
@@ -365,7 +365,9 @@
 
                         }
                     }else{
-                        window.location.reload();
+                        $('#tour_room_details_loader').hide();
+                        $('.tf-withoutpayment-booking').removeClass('show');
+                        $('.tf-withoutpayment-booking-confirm').addClass('show');
                     }
                 },
                 error: function (data) {
@@ -2011,7 +2013,7 @@
 
         /*
         * Without Payment Booking
-        * @since 2.9.21
+        * @since 2.9.26
         * @author Jahid
         */
         let tf_hasErrorsFlag = false;
@@ -2209,7 +2211,9 @@
                         return false;
                     } else {
                         $('#tour_room_details_loader').hide();
-                        $('.tf-traveller-info-box').html(response.traveller_info);
+                        if($(".tf-traveller-info-box").html().trim() == ""){
+                            $('.tf-traveller-info-box').html(response.traveller_info);
+                        }
                         $('.tf-booking-traveller-info').html(response.traveller_summery);
                         $('.tf-withoutpayment-booking').addClass('show');
                     }
@@ -2222,6 +2226,7 @@
         }
         $(document).on('click', '.tf-booking-popup-btn', function (e) {
             e.preventDefault();
+            $(".tf-withoutpayment-booking input[type='text'], .tf-withoutpayment-booking input[type='email'], .tf-withoutpayment-booking input[type='date'], .tf-withoutpayment-booking select, .tf-withoutpayment-booking textarea").val("");
             makeBooking();
         });
 
@@ -2235,6 +2240,17 @@
         // Popup Close
         $(document).on('click', '.tf-booking-times span', function (e) {
             $('.tf-withoutpayment-booking').removeClass('show');
+            $('.tf-withoutpayment-booking-confirm').removeClass('show');
+            // Reset Tabs
+            $(".tf-booking-tab-menu ul li").removeClass("active");
+            $(".tf-booking-tab-menu ul li").removeClass("done");
+            $(".tf-booking-tab-menu ul li:first-child").addClass("active");
+            // Reset Content
+            $(".tf-booking-content").hide();
+            $(".tf-booking-content:first").show();
+            // Reset Pagination
+            $(".tf-control-pagination").hide();
+            $(".tf-control-pagination:first").show();
         });
 
     });
