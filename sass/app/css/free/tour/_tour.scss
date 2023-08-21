@@ -994,6 +994,19 @@ div#tf-contact-info {
                 .tf-booking-traveller-info{
                     max-height: 230px;
                     overflow-y: auto;
+                    scrollbar-width: thin;
+                    scrollbar-color: #aaa #eee;
+                    @media #{$max767}{
+                        padding-right: 0px;
+                        height: auto;
+                    }
+                    scrollbar {
+                        width: 5px; 
+                    }
+                    scrollbar-thumb {
+                        background-color: #aaa;
+                        border-radius: 4px;
+                    }
                     h6{
                         color: #666D74;
                         font-family: inherit;
