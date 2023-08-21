@@ -2211,10 +2211,14 @@
                         return false;
                     } else {
                         $('#tour_room_details_loader').hide();
-                        if($(".tf-traveller-info-box").html().trim() == ""){
-                            $('.tf-traveller-info-box').html(response.traveller_info);
+                        if ($('.tf-traveller-info-box').length > 0) {
+                            if($(".tf-traveller-info-box").html().trim() == ""){
+                                $('.tf-traveller-info-box').html(response.traveller_info);
+                            }
                         }
-                        $('.tf-booking-traveller-info').html(response.traveller_summery);
+                        if ($('.tf-booking-traveller-info').length > 0) {
+                            $('.tf-booking-traveller-info').html(response.traveller_summery);
+                        }
                         $('.tf-withoutpayment-booking').addClass('show');
                     }
                 },

@@ -862,7 +862,7 @@ function tf_single_tour_booking_form( $post_id ) {
                     <ul>
                     <?php 
                     $meta = get_post_meta( $post_id, 'tf_tours_opt', true );
-                    $tour_extras          = isset( $meta['tour-extra'] ) ? $meta['tour-extra'] : null;
+                    $tour_extras          = function_exists('is_tf_pro') && is_tf_pro() && isset( $meta['tour-extra'] ) ? $meta['tour-extra'] : null;
                     if( !empty($tour_extras) && gettype($tour_extras)=="string" ){
                 
                         $tour_extras_unserial = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
@@ -871,7 +871,7 @@ function tf_single_tour_booking_form( $post_id ) {
                         $tour_extras = unserialize( $tour_extras_unserial );
                 
                     }
-                    $traveller_info_coll = !empty(tfopt( 'disable_traveller_info' )) ? tfopt( 'disable_traveller_info' ) : '';
+                    $traveller_info_coll = function_exists('is_tf_pro') && is_tf_pro() && !empty(tfopt( 'disable_traveller_info' )) ? tfopt( 'disable_traveller_info' ) : '';
                     if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
                         <li class="tf-booking-step tf-booking-step-1 active">
                             <i class="ri-price-tag-3-line"></i> <?php echo __("Tour extra","tourfic"); ?>
@@ -883,7 +883,7 @@ function tf_single_tour_booking_form( $post_id ) {
                             <i class="ri-group-line"></i> <?php echo __("Traveler details","tourfic"); ?>
                         </li>
                     <?php } 
-                    $is_without_payment = !empty($meta['disable_payment']) ? $meta['disable_payment'] : '';
+                    $is_without_payment = function_exists('is_tf_pro') && is_tf_pro() && !empty($meta['disable_payment']) ? $meta['disable_payment'] : '';
                     if($is_without_payment){
                     ?>
                         <li class="tf-booking-step tf-booking-step-3">
