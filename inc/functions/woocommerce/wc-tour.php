@@ -315,6 +315,7 @@ function tf_tours_booking_function() {
 		$min_text = sprintf( _n( '%s person', '%s people', $min_people, 'tourfic' ), $min_people );
 		$max_text = sprintf( _n( '%s person', '%s people', $max_people, 'tourfic' ), $max_people );
 
+
 		if ( $total_people < $min_people && $min_people > 0 ) {
 			$response['errors'][] = sprintf( __( 'Minimum %1$s required', 'tourfic' ), $min_text );
 

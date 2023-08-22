@@ -1,6 +1,17 @@
 (function ($) {
     $(document).ready(function () {
 
+        // Create an instance of Notyf
+        const notyf = new Notyf({
+            ripple: true,
+            duration: 3000,
+            dismissable: true,
+            position: {
+                x: 'right',
+                y: 'bottom',
+            },
+        });
+
         /*
         * Check available hotel room from date to date
         * Author @Foysal
@@ -281,6 +292,8 @@
 
                         if (obj.custom_avail !== '1' && obj?.allowed_times?.length > 0) {
                             populateTimeSelect(obj.allowed_times)
+                        } else {
+                            populateTimeSelect([])
                         }
 
                         let flatpickerObj = {
@@ -349,17 +362,24 @@
                                 times = times.length > 0 && times[0].times ? times[0].times : null;
                                 populateTimeSelect(times);
                             }
+                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                         }
 
                         $("[name='tf_tour_date']").flatpickr(flatpickerObj);
 
-                        let extras = $('[name="tf_tour_extras"]');
-                        extras.removeAttr('disabled');
-                        extras.empty();
-                        $.each(obj.tour_extras_array, function (key, value) {
-                            extras.append('<option value="' + key + '">' + value + '</option>');
-                        });
-                        extras.select2();
+                        if(obj.tour_extras_array.length > 0) {
+                            let extras = $('[name="tf_tour_extras[]"]');
+                            extras.removeAttr('disabled');
+                            extras.empty();
+                            $.each(obj.tour_extras_array, function (key, value) {
+                                extras.append('<option value="' + key + '">' + value + '</option>');
+                            });
+                            extras.select2();
+                        } else {
+                            let extras = $('[name="tf_tour_extras[]"]');
+                            extras.empty();
+                            extras.attr('disabled', 'disabled');
+                        }
 
 
                         $('#tf-backend-hotel-book-btn').removeAttr('disabled');
@@ -370,16 +390,27 @@
 
         function populateTimeSelect(times) {
             let timeSelect = $('[name="tf_tour_time"]');
-            // let timeSelectDiv = $("#check-in-time-div");
             timeSelect.empty();
             if (times.length > 0) {
+                timeSelect.removeAttr('disabled');
                 timeSelect.append(`<option value="" selected>Select Time</option>`);
                 $.each(times, function (i, v) {
                     timeSelect.append(`<option value="${i}">${v}</option>`);
                 });
-                // timeSelectDiv.show();
+            } else {
+                timeSelect.append(`<option value="" selected>No Time Available</option>`);
+                timeSelect.attr('disabled', 'disabled');
             }
         }
+
+        /*$("[name='tf_tour_date']").flatpickr({
+            enableTime: false,
+            dateFormat: "Y/m/d",
+            //replace 'to' with '-'
+            onReady: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+            }
+        });*/
 
         /*
         * Backend Tour Booking
@@ -406,20 +437,21 @@
                 success: function (response) {
                     const obj = JSON.parse(response);
                     if (!obj.success) {
-                        if (obj.message) {
-                            Swal.fire(
-                                'Error!',
-                                obj.message,
-                                'error'
-                            )
-                            form.find('input').removeClass('error-input');
-                            form.find('select').removeClass('error-input');
-                            form.find('textarea').removeClass('error-input');
-                            form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
-                            form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
-                            form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
-                        } else {
 
+                        if (obj.errors) {
+                            obj.errors.forEach(function (text) {
+                                notyf.error(text);
+                            });
+                        }
+
+                        form.find('input').removeClass('error-input');
+                        form.find('select').removeClass('error-input');
+                        form.find('textarea').removeClass('error-input');
+                        form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
+
+                        if (obj['fieldErrors']) {
                             for (const requiredField of requiredFields) {
                                 const errorField = obj['fieldErrors'][requiredField + '_error'];
 
