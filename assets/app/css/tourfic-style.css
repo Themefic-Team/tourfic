@@ -4769,11 +4769,11 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-extra label .tf-extra-check-box .checkmark::after,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-extra label .tf-extra-check-box .checkmark::after,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-extra label .tf-extra-check-box .checkmark::after {
-  left: 6px;
-  top: 3px;
+  left: 5px;
+  top: 2px;
   width: 3px;
   height: 7px;
-  border: solid white;
+  border: solid #003C7A;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -4783,7 +4783,7 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-extra label .tf-extra-check-box input:checked ~ .checkmark,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-extra label .tf-extra-check-box input:checked ~ .checkmark,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-extra label .tf-extra-check-box input:checked ~ .checkmark {
-  background-color: #003C7A;
+  border: 1px solid #003C7A;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-extra label .tf-extra-check-box .checkmark:after,
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-extra label .tf-extra-check-box .checkmark:after,

@@ -848,11 +848,11 @@ div#tf-contact-info {
                                     border: 1px solid #666D74;
                                     cursor: pointer;
                                     &::after{
-                                        left: 6px;
-                                        top: 3px;
+                                        left: 5px;
+                                        top: 2px;
                                         width: 3px;
                                         height: 7px;
-                                        border: solid white;
+                                        border: solid #003C7A;
                                         border-width: 0 3px 3px 0;
                                         -webkit-transform: rotate(45deg);
                                         -ms-transform: rotate(45deg);
@@ -862,7 +862,7 @@ div#tf-contact-info {
                                 
                             
                                 input:checked~.checkmark {
-                                    background-color: #003C7A;
+                                    border: 1px solid #003C7A;
                                 }
                             
                                 .checkmark:after {
