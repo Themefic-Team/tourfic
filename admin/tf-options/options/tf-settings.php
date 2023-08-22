@@ -1077,6 +1077,7 @@ TF_Settings::option( 'tf_settings', array(
 							'label' => __( 'Name', 'tourfic' ),
 							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
 							'validate' => 'no_space_no_special',
+							'class' => 'tf_hidden_fields'
 						),
 						array(
 							'id'      => 'reg-fields-type',
@@ -1090,6 +1091,7 @@ TF_Settings::option( 'tf_settings', array(
 								'checkbox' => __( 'Checkbox', 'tourfic' ),
 								'select' => __( 'Select', 'tourfic' ),
 							),
+							'class' => 'tf_hidden_fields'
 						),
 						array(
 							'id'     => 'reg-options',
@@ -1158,6 +1160,7 @@ TF_Settings::option( 'tf_settings', array(
 							'id'    => 'reg-field-required',
 							'type'  => 'switch',
 							'label' => __( 'Required Field ?', 'tourfic' ),
+							'class' => 'tf_hidden_fields'
 						),
 	
 					),
