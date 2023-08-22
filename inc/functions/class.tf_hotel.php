@@ -94,7 +94,7 @@ class DBTFHOTELTable extends WP_List_Table {
             $hotel_order_details .= '<b>' . __( "Total", "tourfic" ) . ': </b>' . wc_price($order_details->total_price) . '<br>';
         }
         if ( !empty($order_details->due_price) ) {
-            $hotel_order_details .= '<b>' . __( "Due", "tourfic" ) . ': </b>' . wc_price($order_details->due_price) . '<br>';
+            $hotel_order_details .= '<b>' . __( "Due", "tourfic" ) . ': </b>' . $order_details->due_price . '<br>';
         }
         return $hotel_order_details;
 	}
