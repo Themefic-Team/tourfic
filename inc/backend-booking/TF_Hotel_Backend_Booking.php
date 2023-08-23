@@ -552,7 +552,6 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 			$required_fields = array(
 				'tf_hotel_booked_by',
 				'tf_customer_first_name',
-				'tf_customer_last_name',
 				'tf_customer_email',
 				'tf_customer_phone',
 				'tf_customer_country',
