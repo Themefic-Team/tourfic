@@ -355,3 +355,17 @@ if ( ! function_exists( 'tf_get_all_order_id' ) ) {
 		return $order_ids;
 	}
 }
+
+add_action( 'admin_head', 'tf_booking_order_table_column' );
+if ( ! function_exists( 'tf_booking_order_table_column' ) ) {
+	function tf_booking_order_table_column() {
+		$page = ( isset($_GET['page'] ) ) ? esc_attr( $_GET['page'] ) : false;
+		if( 'tf_hotel_booking' != $page && 'tf_tours_booking' != $page )
+		return; 
+
+		echo '<style type="text/css">';
+		echo '.wp-list-table .column-order_id { width: 90px; }';
+		echo '.wp-list-table .column-oedit { width: 50px; }';
+		echo '</style>';
+	}
+}
