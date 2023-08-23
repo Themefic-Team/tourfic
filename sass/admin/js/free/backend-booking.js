@@ -288,12 +288,9 @@
                     },
                     success: function (response) {
                         const obj = JSON.parse(response);
-                        console.log('obj', obj)
 
-                        if (obj.custom_avail !== '1' && obj?.allowed_times?.length > 0) {
+                        if (obj.custom_avail !== '1') {
                             populateTimeSelect(obj.allowed_times)
-                        } else {
-                            populateTimeSelect([])
                         }
 
                         let flatpickerObj = {
@@ -381,7 +378,6 @@
                             extras.attr('disabled', 'disabled');
                         }
 
-
                         $('#tf-backend-hotel-book-btn').removeAttr('disabled');
                     }
                 });
@@ -402,15 +398,6 @@
                 timeSelect.attr('disabled', 'disabled');
             }
         }
-
-        /*$("[name='tf_tour_date']").flatpickr({
-            enableTime: false,
-            dateFormat: "Y/m/d",
-            //replace 'to' with '-'
-            onReady: function (selectedDates, dateStr, instance) {
-                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-            }
-        });*/
 
         /*
         * Backend Tour Booking
@@ -469,17 +456,16 @@
                             obj.message,
                             'success'
                         )
-                        // form[0].reset();
-                        // form.find('input').removeClass('error-input');
-                        // form.find('select').removeClass('error-input');
-                        // form.find('textarea').removeClass('error-input');
-                        // form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
-                        // form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
-                        // form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form[0].reset();
+                        form.find('input').removeClass('error-input');
+                        form.find('select').removeClass('error-input');
+                        form.find('textarea').removeClass('error-input');
+                        form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
                     }
                     btn.removeClass('tf-btn-loading');
                 },
-
             })
 
         });

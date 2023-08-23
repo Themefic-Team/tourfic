@@ -469,32 +469,40 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 								$order_ids = explode( ',', $order_ids );
 
 								foreach ( $order_ids as $order_id ) {
-									$order = wc_get_order( $order_id );
+									# Get Only the completed orders
+									$tf_orders_select = array(
+										'select' => "post_id,order_details",
+										'query' => "post_type = 'hotel' AND ostatus = 'completed' AND order_id = ".$order_id
+									);
+									$tf_hotel_book_orders = tourfic_order_table_data($tf_orders_select);
 
-									//Get Only the completed orders
-									if ( $order && $order->get_status() == 'completed' ) {
-										foreach ( $order->get_items() as $item_id => $item ) {
-											$ordered_number_of_room = $item->get_meta( 'number_room_booked', true );
-											if ( $avil_by_date ) {
+									# Get and Loop Over Order Items
+									foreach ( $tf_hotel_book_orders as $item ) {
+										$order_details = json_decode($item['order_details']);
+										/**
+										 * Order item data
+										 */
+										$ordered_number_of_room = !empty($order_details->room) ? $order_details->room : 0;
 
-												$order_check_in_date     = strtotime( $item->get_meta( 'check_in', true ) );
-												$order_check_out_date    = strtotime( $item->get_meta( 'check_out', true ) );
-												$tf_order_check_in_date  = $item->get_meta( 'check_in', true );
-												$tf_order_check_out_date = $item->get_meta( 'check_out', true );
-												if ( ! empty( $avail_durationdate ) && ( in_array( $tf_order_check_out_date, $avail_durationdate ) || in_array( $tf_order_check_in_date, $avail_durationdate ) ) ) {
-													# Total number of room booked
-													$number_orders = $number_orders + $ordered_number_of_room;
-												}
-												array_push( $order_date_ranges, array( $order_check_in_date, $order_check_out_date ) );
+										if ( $avil_by_date ) {
 
-											} else {
-												$order_check_in_date  = $item->get_meta( 'check_in', true );
-												$order_check_out_date = $item->get_meta( 'check_out', true );
-												if ( ! empty( $avail_durationdate ) && ( in_array( $order_check_out_date, $avail_durationdate ) || in_array( $order_check_in_date, $avail_durationdate ) ) ) {
-													# Total number of room booked
-													$number_orders = $number_orders + $ordered_number_of_room;
-												}
+											$order_check_in_date  = strtotime( $order_details->check_in );
+											$order_check_out_date = strtotime( $order_details->check_out );
 
+											$tf_order_check_in_date  = $order_details->check_in;
+											$tf_order_check_out_date = $order_details->check_out;
+											if ( ! empty( $avail_durationdate ) && ( in_array( $tf_order_check_out_date, $avail_durationdate ) || in_array( $tf_order_check_in_date, $avail_durationdate ) ) ) {
+												# Total number of room booked
+												$number_orders = $number_orders + $ordered_number_of_room;
+											}
+											array_push( $order_date_ranges, array( $order_check_in_date, $order_check_out_date ) );
+
+										} else {
+											$order_check_in_date  = $order_details->check_in;
+											$order_check_out_date = $order_details->check_out;
+											if ( ! empty( $avail_durationdate ) && ( in_array( $order_check_out_date, $avail_durationdate ) || in_array( $order_check_in_date, $avail_durationdate ) ) ) {
+												# Total number of room booked
+												$number_orders = $number_orders + $ordered_number_of_room;
 											}
 										}
 									}
