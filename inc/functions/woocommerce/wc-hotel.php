@@ -353,13 +353,39 @@ function tf_hotel_booking_callback() {
 
 			}
 		}
+		// Booking Type
+		if ( function_exists('is_tf_pro') && is_tf_pro() ){
+			$tf_booking_type = !empty($rooms[$room_id]['booking-by']) ? $rooms[$room_id]['booking-by'] : 1;
+			$tf_booking_url = !empty($rooms[$room_id]['booking-url']) ? esc_url($rooms[$room_id]['booking-url']) : '';
+			$tf_booking_query_url = !empty($rooms[$room_id]['booking-query']) ? $rooms[$room_id]['booking-query'] : '';
+			$tf_booking_attribute = !empty($rooms[$room_id]['booking-attribute']) ? $rooms[$room_id]['booking-attribute'] : '';
+		}
+		if( 2==$tf_booking_type && !empty($tf_booking_url) ){
+			$external_search_info = array(
+				'{adult}'    => $adult,
+				'{child}'    => $child,
+				'{checkin}'  => $check_in,
+				'{checkout}' => $check_out,
+				'{room}'     => $room_selected
+			);
+			if(!empty($tf_booking_attribute)){
+				$tf_booking_query_url = str_replace(array_keys($external_search_info), array_values($external_search_info), $tf_booking_query_url);
+				if( !empty($tf_booking_query_url) ){
+					$tf_booking_url = $tf_booking_url.'/?'.$tf_booking_query_url;
+				}
+			}
 
-		# Add product to cart with the custom cart item data
-		WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
+			$response['product_id']  = $product_id;
+			$response['add_to_cart'] = 'true';
+			$response['redirect_to'] = $tf_booking_url;
+		}else{
+			# Add product to cart with the custom cart item data
+			WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
 
-		$response['product_id']  = $product_id;
-		$response['add_to_cart'] = 'true';
-		$response['redirect_to'] = wc_get_checkout_url();
+			$response['product_id']  = $product_id;
+			$response['add_to_cart'] = 'true';
+			$response['redirect_to'] = wc_get_checkout_url();
+		}
 	} else {
 		$response['status'] = 'error';
 	}

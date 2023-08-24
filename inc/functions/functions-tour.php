@@ -693,6 +693,9 @@ function tf_single_tour_booking_form( $post_id ) {
     // Continuous custom availability
     $custom_avail = !empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : '';
 
+    $tf_booking_by = !empty($meta['booking-by']) ? $meta['booking-by'] : 1;
+	$tf_booking_url = !empty($meta['booking-url']) ? esc_url($meta['booking-url']) : '';
+
     // Same Day Booking
     $disable_same_day = !empty( $meta['disable_same_day'] ) ? $meta['disable_same_day'] : '';
     if ( $tour_type == 'fixed' ) {
@@ -1311,7 +1314,7 @@ function tf_single_tour_booking_form( $post_id ) {
         </div>
         
         <div class="tf-tours-booking-btn tf-booking-bttns tf-mt-30">
-            <div class="tf-btn ">
+            <div class="tf-btn">
                 <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e('Book Now', 'tourfic'); ?></a>
             </div>
             <?php echo tf_booking_popup($post_id); ?>

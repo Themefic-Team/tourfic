@@ -787,7 +787,14 @@ function tf_room_availability_callback() {
 				);
 
 				$avail_durationdate = [];
+				$is_first = true;
 				foreach ( $tfperiod as $date ) {
+					if($multi_by_date_ck){
+						if ($is_first) {
+							$is_first = false;
+							continue; 
+						}
+					}
 					$avail_durationdate[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
 				}
 
