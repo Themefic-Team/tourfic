@@ -523,7 +523,7 @@ if ( ! class_exists( 'TF_Tour_Backend_Booking' ) ) {
 					foreach ( $tour_extras as $extrakey => $tour_extra ) {
 						$pricetype                             = ! empty( $tour_extra['price_type'] ) ? $tour_extra['price_type'] : 'fixed';
 						$tour_extra_pricetype                  = $pricetype === "fixed" ? esc_html( "(Fixed Price)" ) : esc_html( "(Per Person Price)" );
-						$tour_extras_select_array[ $extrakey ] = $tour_extra['title'] . $tour_extra_pricetype . ' - ' . wc_price( $tour_extra['price'] );
+						$tour_extras_select_array[ $extrakey ] = $tour_extra['title'] . $tour_extra_pricetype . ' - ' . strip_tags(wc_price( $tour_extra['price'] ));
 					}
 				}
 			}
