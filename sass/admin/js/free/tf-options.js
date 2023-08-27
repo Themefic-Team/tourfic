@@ -449,7 +449,23 @@
             TF_wp_editor($id);
         });
 
+        /*
+        * Booking Confirmation Field Fixed
+        * @since 2.9.28
+        * @author: Jahid
+        */
 
+        if ($('.tf-single-repeater-book-confirm-field').length > 0) {
+            $('.tf-single-repeater-book-confirm-field').each(function () {
+                let $this = $(this);
+                let repeaterCount = $this.find('input[name="tf_repeater_count"]').val();
+                if(0==repeaterCount || 1==repeaterCount || 2==repeaterCount){
+                    $this.find('.tf_hidden_fields').hide();
+                    $this.find('.tf-repeater-icon-clone').hide();
+                    $this.find('.tf-repeater-icon-delete').hide();
+                }
+            });
+        }
         /*
         * Add New Repeater Item
         * @author: Sydur

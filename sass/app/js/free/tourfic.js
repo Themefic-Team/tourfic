@@ -333,7 +333,7 @@
                             opacity: .5
                         }
                     });
-
+                    $('#tour_room_details_loader').show();
                     $('.tf-notice-wrapper').html("").hide();
                 },
                 complete: function (data) {
@@ -344,25 +344,30 @@
 
                     var response = JSON.parse(data);
 
-                    if (response.status == 'error') {
-                        $.fancybox.close();
-                        if (response.errors) {
-                            response.errors.forEach(function (text) {
-                                notyf.error(text);
-                            });
-                        }
+                    if(response.without_payment == 'false'){
+                        if (response.status == 'error') {
+                            $.fancybox.close();
+                            if (response.errors) {
+                                response.errors.forEach(function (text) {
+                                    notyf.error(text);
+                                });
+                            }
 
-                        return false;
-                    } else {
-
-                        if (response.redirect_to) {
-                            window.location.replace(response.redirect_to);
+                            return false;
                         } else {
-                            jQuery(document.body).trigger('added_to_cart');
-                        }
 
+                            if (response.redirect_to) {
+                                window.location.replace(response.redirect_to);
+                            } else {
+                                jQuery(document.body).trigger('added_to_cart');
+                            }
+
+                        }
+                    }else{
+                        $('#tour_room_details_loader').hide();
+                        $('.tf-withoutpayment-booking').removeClass('show');
+                        $('.tf-withoutpayment-booking-confirm').addClass('show');
                     }
-                    console.log(response);
                 },
                 error: function (data) {
                     console.log(data);
@@ -2176,6 +2181,253 @@
             e.preventDefault();
             $("#tour-gallery").trigger("click");
         });
+
+        /*
+        * Without Payment Booking
+        * @since 2.9.26
+        * @author Jahid
+        */
+        let tf_hasErrorsFlag = false;
+        $(document).on('click', '.tf-traveller-error', function (e) {
+            let hasErrors = [];
+            $('.error-text').text("");
+            $('.tf-single-travel').each(function() {
+                $(this).find('input, select').each(function() {
+                    if($(this).attr('data-required')){
+                        if($(this).val() == ""){
+                            hasErrors.push(true);
+                            const errorContainer = $(this).siblings('.error-text');
+                            errorContainer.text('This field is required.');
+                            if (errorContainer.text() !== '') {
+                                errorContainer.addClass('error-visible');
+                            } else {
+                                errorContainer.removeClass('error-visible');
+                            }
+                        }
+                    }
+                });
+                $(this).find('input[type="radio"], input[type="checkbox"]').each(function() {
+                    if ($(this).attr('data-required')) {
+                        const radioName = $(this).attr('name');
+                        const isChecked = $('input[name="' + radioName + '"]:checked').length > 0;
+                
+                        if (!isChecked) {
+                            hasErrors.push(true);
+                            const errorContainer = $(this).parent().siblings('.error-text');
+                            errorContainer.text('This field is required.');
+                            if (errorContainer.text() !== '') {
+                                errorContainer.addClass('error-visible');
+                            } else {
+                                errorContainer.removeClass('error-visible');
+                            }
+                        }
+                    }
+                });
+
+            });
+            if (hasErrors.includes(true)) {
+                tf_hasErrorsFlag = true;
+                return false;
+            }
+            tf_hasErrorsFlag = false;
+        });
+
+        // Booking Confirmation Form Validation
+        $(document).on('click', '.tf-book-confirm-error', function (e) {
+            let hasErrors = [];
+            $('.error-text').text("");
+            $('.tf-confirm-fields').each(function() {
+                $(this).find('input, select').each(function() {
+                    if($(this).attr('data-required')){
+                        if($(this).val() == ""){
+                            hasErrors.push(true);
+                            const errorContainer = $(this).siblings('.error-text');
+                            errorContainer.text('This field is required.');
+                            if (errorContainer.text() !== '') {
+                                errorContainer.addClass('error-visible');
+                            } else {
+                                errorContainer.removeClass('error-visible');
+                            }
+                        }
+                    }
+                });
+                $(this).find('input[type="radio"], input[type="checkbox"]').each(function() {
+                    if ($(this).attr('data-required')) {
+                        const radioName = $(this).attr('name');
+                        const isChecked = $('input[name="' + radioName + '"]:checked').length > 0;
+                
+                        if (!isChecked) {
+                            hasErrors.push(true);
+                            const errorContainer = $(this).parent().siblings('.error-text');
+                            errorContainer.text('This field is required.');
+                            if (errorContainer.text() !== '') {
+                                errorContainer.addClass('error-visible');
+                            } else {
+                                errorContainer.removeClass('error-visible');
+                            }
+                        }
+                    }
+                });
+            });
+            if (hasErrors.includes(true)) {
+                tf_hasErrorsFlag = true;
+                return false;
+            }
+        });
+
+        // Navigation Next
+        $(document).on('click', '.tf-tabs-control', function (e) {
+            e.preventDefault();
+            if (tf_hasErrorsFlag) {
+                return false; 
+            }
+            let step = $(this).attr("data-step"); 
+            if(step>1){
+                for(let i = 1; i <= step; i++){
+                    $('.tf-booking-step-' + i).removeClass("active");
+                    $('.tf-booking-step-' + i).addClass("done");
+                }
+                $('.tf-booking-step-' + step).addClass("active");
+                $('.tf-booking-content').hide();
+                $('.tf-booking-content-' + step).fadeIn(300);
+
+                
+                $('.tf-control-pagination').hide();
+                $('.tf-pagination-content-' + step).fadeIn(300);
+            }
+        });
+
+        // Navigation Back
+        $(document).on('click', '.tf-step-back', function (e) {
+            e.preventDefault();
+            let step = $(this).attr("data-step"); 
+            if(step==1){
+                $('.tf-booking-step').removeClass("active");
+                $('.tf-booking-step').removeClass("done");
+                $('.tf-booking-step-' + step).addClass("active");
+                $('.tf-booking-content').hide();
+                $('.tf-booking-content-' + step).fadeIn(300);
+
+                $('.tf-control-pagination').hide();
+                $('.tf-pagination-content-' + step).fadeIn(300);
+            }
+            if(step>1){
+                let next_step = parseInt(step)+1;
+                $('.tf-booking-step-' + next_step).removeClass("active");
+                $('.tf-booking-step-' + step).addClass("active");
+                $('.tf-booking-step-' + step).removeClass("done");
+                $('.tf-booking-step-' + next_step).removeClass("done");
+
+                $('.tf-booking-content').hide();
+                $('.tf-booking-content-' + step).fadeIn(300);
+                $('.tf-control-pagination').hide();
+                $('.tf-pagination-content-' + step).fadeIn(300);
+            }
+        });
+
+        // Popup Open
+        const makeBooking = () => {
+            var $this = $(this);
+            let check_in_date = $('#check-in-out-date').val();
+            let adults = $('#adults').val();
+            let children = $('#children').val();
+            let infant = $('#infant').val();
+            let post_id = $('input[name=post_id]').val();
+            let check_in_time = $('select[name=check-in-time] option').filter(':selected').val();
+            var deposit = $('input[name=deposit]').is(':checked');
+            var extras = [];
+            $('[name*=tf-tour-extra]').each(function () {
+                if ($(this).is(':checked')) {
+                    extras.push($(this).val());
+                }
+            });
+            var extras = extras.join();
+            var data = {
+                action: 'tf_tour_booking_popup',
+                post_id: post_id,
+                adults: adults,
+                children: children,
+                infant: infant,
+                check_in_date: check_in_date,
+                check_in_time: check_in_time,
+                tour_extra: extras,
+                deposit: deposit
+            };
+
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: data,
+                beforeSend: function (data) {
+                    $('#tour_room_details_loader').show();
+                },
+                complete: function (data) {
+                    $this.unblock();
+                },
+                success: function (data) {
+                    $this.unblock();
+
+                    var response = JSON.parse(data);
+
+                    if (response.status == 'error') {
+
+                        $('#tour_room_details_loader').hide();
+                        if (response.errors) {
+                            response.errors.forEach(function (text) {
+                                notyf.error(text);
+                            });
+                        }
+
+                        return false;
+                    } else {
+                        $('#tour_room_details_loader').hide();
+                        if ($('.tf-traveller-info-box').length > 0) {
+                            if($(".tf-traveller-info-box").html().trim() == ""){
+                                $('.tf-traveller-info-box').html(response.traveller_info);
+                            }
+                        }
+                        if ($('.tf-booking-traveller-info').length > 0) {
+                            $('.tf-booking-traveller-info').html(response.traveller_summery);
+                        }
+                        $('.tf-withoutpayment-booking').addClass('show');
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+        }
+        $(document).on('click', '.tf-booking-popup-btn', function (e) {
+            e.preventDefault();
+            $(".tf-withoutpayment-booking input[type='text'], .tf-withoutpayment-booking input[type='email'], .tf-withoutpayment-booking input[type='date'], .tf-withoutpayment-booking select, .tf-withoutpayment-booking textarea").val("");
+            makeBooking();
+        });
+
+        $(document).on('change', '[name*=tf-tour-extra]', function () {
+            makeBooking();
+        });
+        $(document).on('change', '[name=deposit]', function () {
+            makeBooking();
+        });
+
+        // Popup Close
+        $(document).on('click', '.tf-booking-times span', function (e) {
+            $('.tf-withoutpayment-booking').removeClass('show');
+            $('.tf-withoutpayment-booking-confirm').removeClass('show');
+            // Reset Tabs
+            $(".tf-booking-tab-menu ul li").removeClass("active");
+            $(".tf-booking-tab-menu ul li").removeClass("done");
+            $(".tf-booking-tab-menu ul li:first-child").addClass("active");
+            // Reset Content
+            $(".tf-booking-content").hide();
+            $(".tf-booking-content:first").show();
+            // Reset Pagination
+            $(".tf-control-pagination").hide();
+            $(".tf-control-pagination:first").show();
+        });
+
     });
 
 })(jQuery, window);

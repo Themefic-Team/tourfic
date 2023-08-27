@@ -181,7 +181,7 @@ function tf_hotel_booking_callback() {
 			if ( ! empty( $day_difference ) && $price_multi_day == true ) {
 				$price_total = $total_price * $room_selected * $day_difference;
 			} else {
-				$price_total = $total_price * $room_selected;
+				$price_total = $total_price * ($room_selected * $day_difference+1);
 			}
 
 		}
@@ -354,13 +354,39 @@ function tf_hotel_booking_callback() {
 
 			}
 		}
+		// Booking Type
+		if ( function_exists('is_tf_pro') && is_tf_pro() ){
+			$tf_booking_type = !empty($rooms[$room_id]['booking-by']) ? $rooms[$room_id]['booking-by'] : 1;
+			$tf_booking_url = !empty($rooms[$room_id]['booking-url']) ? esc_url($rooms[$room_id]['booking-url']) : '';
+			$tf_booking_query_url = !empty($rooms[$room_id]['booking-query']) ? $rooms[$room_id]['booking-query'] : '';
+			$tf_booking_attribute = !empty($rooms[$room_id]['booking-attribute']) ? $rooms[$room_id]['booking-attribute'] : '';
+		}
+		if( 2==$tf_booking_type && !empty($tf_booking_url) ){
+			$external_search_info = array(
+				'{adult}'    => $adult,
+				'{child}'    => $child,
+				'{checkin}'  => $check_in,
+				'{checkout}' => $check_out,
+				'{room}'     => $room_selected
+			);
+			if(!empty($tf_booking_attribute)){
+				$tf_booking_query_url = str_replace(array_keys($external_search_info), array_values($external_search_info), $tf_booking_query_url);
+				if( !empty($tf_booking_query_url) ){
+					$tf_booking_url = $tf_booking_url.'/?'.$tf_booking_query_url;
+				}
+			}
 
-		# Add product to cart with the custom cart item data
-		WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
+			$response['product_id']  = $product_id;
+			$response['add_to_cart'] = 'true';
+			$response['redirect_to'] = $tf_booking_url;
+		}else{
+			# Add product to cart with the custom cart item data
+			WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
 
-		$response['product_id']  = $product_id;
-		$response['add_to_cart'] = 'true';
-		$response['redirect_to'] = wc_get_checkout_url();
+			$response['product_id']  = $product_id;
+			$response['add_to_cart'] = 'true';
+			$response['redirect_to'] = wc_get_checkout_url();
+		}
 	} else {
 		$response['status'] = 'error';
 	}
@@ -797,6 +823,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			$adult = $item->get_meta( 'Adults', true );
 			$child = $item->get_meta( 'Children', true );
 			$infants = $item->get_meta( 'Infants', true );
+			$visitor_details = $item->get_meta( '_visitor_details', true );
 			
 			if ( $tour_date ) {
 				list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
@@ -811,6 +838,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'infants' => $infants,
 				'total_price' => $price,
 				'due_price' => $due,
+				'unique_id' => $tour_ides,
+				'visitor_details' => $visitor_details
 			];
 
 			$tf_integration_order_data[] = [

@@ -1,5 +1,20 @@
 <?php 
+$total_dis_dates = [];
+if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $room['repeat_by_date'] ) ) {
+    $disabled_dates = $room['repeat_by_date'];
+    //iterate all the available disabled dates
+    if ( ! empty( $disabled_dates ) ) {
+        foreach ( $disabled_dates as $date ) {
+            $dateArr           = explode( ', ', !empty($date['disabled_date']) ? $date['disabled_date'] : '' );
+            $total_dis_dates = array_merge($total_dis_dates, $dateArr);
+        }
+    }
+}
+$tf_room_disable_date = array_intersect($avail_durationdate, $total_dis_dates);
+$room_book_by = ! empty( $room['booking-by'] ) ? $room['booking-by'] : 1;
+$room_book_url = ! empty( $room['booking-url'] ) ? $room['booking-url'] : '';
 if( $tf_hotel_selected_template_check == "design-1" ){
+if(empty($tf_room_disable_date)){
 ?>
 <tr>
     <td class="description">
@@ -116,7 +131,13 @@ if( $tf_hotel_selected_template_check == "design-1" ){
                     <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                 </div>
                 <div class="tf-top">
-                    <?php _e( 'Number of Children', 'tourfic' ); ?>
+                    <?php 
+                    if(!empty($child_age_limit)){
+                        printf(__('Children Age Limit %s Years', 'tourfic'), $child_age_limit);
+                    }else{
+                        _e( 'Number of Children', 'tourfic' ); 
+                    }
+                    ?>
                     <i class="tool-i"></i>
                 </div>
             </div>
@@ -125,10 +146,27 @@ if( $tf_hotel_selected_template_check == "design-1" ){
     <td class="reserve tf-t-c">
         <div class="tf-price-column">
             <span class="tf-price"><?php echo wc_price( $price ); ?></span>
-            <?php if ( $pricing_by == '1' ) { ?>
-                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  _e( 'per night', 'tourfic' );?></div>
+            <?php 
+            if ( $pricing_by == '1' ) { ?>
+                <div class="price-per-night">
+                    <?php 
+                    if($multi_by_date_ck){
+                        $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  _e( 'per night', 'tourfic' );
+                    }else{
+                        $days > 0 ? printf(__('for %s days', 'tourfic'), $days) :  _e( 'per day', 'tourfic' );
+                    }
+                    ?>
+                </div>
             <?php } else {?>
-                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );?></div>
+                <div class="price-per-night">
+                    <?php 
+                    if($multi_by_date_ck){
+                        $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );
+                    }else{
+                        $days > 0 ? printf(__('for %s days', 'tourfic'), $days) : _e( 'per person/day', 'tourfic' );
+                    }
+                    ?>
+                </div>
             <?php }?>
 
             <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount)) { ?>
@@ -174,13 +212,12 @@ if( $tf_hotel_selected_template_check == "design-1" ){
                 <?php 
                 $tour_hotel_service_avail = !empty($meta['airport_service']) ? $meta['airport_service'] : '';
                 $tour_hotel_service_type = !empty($meta['airport_service_type']) ? $meta['airport_service_type'] : '';
-                
-                if(function_exists('is_tf_pro') && is_tf_pro() && !empty($tour_hotel_service_avail) && !empty($tour_hotel_service_type)){
+                if(function_exists('is_tf_pro') && is_tf_pro() && !empty($tour_hotel_service_avail) && !empty($tour_hotel_service_type) && ($room_book_by!=2 || empty($room_book_url))){
                 ?>
                 <a class="tf_air_service tf-btn-normal btn-secondary" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
                 
                 
-                <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap" data-id="<?php echo $room_id ?>">
+                <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1" data-id="<?php echo $room_id ?>">
                     <div class="tf-hotel-services">
                         <div class="tf-hotel-services-text">
                             <h3><?php _e(tfopt('hotel_service_popup_title', 'Add Service to your Booking.'), 'tourfic');?></h3>
@@ -226,7 +263,9 @@ if( $tf_hotel_selected_template_check == "design-1" ){
     </td>
 </tr>
 <?php
+}
 }else{
+if(empty($tf_room_disable_date)){
 ?>
 <tr>
     <td class="description">
@@ -333,7 +372,13 @@ if( $tf_hotel_selected_template_check == "design-1" ){
                     <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                 </div>
                 <div class="tf-top">
-                    <?php _e( 'Number of Children', 'tourfic' );?>
+                    <?php 
+                    if(!empty($child_age_limit)){
+                        printf(__('Children Age Limit %s Years', 'tourfic'), $child_age_limit);
+                    }else{
+                        _e( 'Number of Children', 'tourfic' ); 
+                    }
+                    ?>
                     <i class="tool-i"></i>
                 </div>
             </div>
@@ -342,10 +387,27 @@ if( $tf_hotel_selected_template_check == "design-1" ){
     <td class="pricing">
         <div class="tf-price-column">
             <span class="tf-price"><?php echo wc_price( $price ); ?></span>
-            <?php if ( $pricing_by == '1' ) { ?>
-                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  _e( 'per night', 'tourfic' );?></div>
+            <?php 
+            if ( $pricing_by == '1' ) { ?>
+                <div class="price-per-night">
+                    <?php 
+                    if($multi_by_date_ck){
+                        $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) :  _e( 'per night', 'tourfic' );
+                    }else{
+                        $days > 0 ? printf(__('for %s days', 'tourfic'), $days) :  _e( 'per day', 'tourfic' );
+                    }
+                    ?>
+                </div>
             <?php } else {?>
-                <div class="price-per-night"><?php $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );?></div>
+                <div class="price-per-night">
+                    <?php 
+                    if($multi_by_date_ck){
+                        $days > 0 ? printf(__('for %s nights', 'tourfic'), $days) : _e( 'per person/night', 'tourfic' );
+                    }else{
+                        $days > 0 ? printf(__('for %s days', 'tourfic'), $days) : _e( 'per person/day', 'tourfic' );
+                    }
+                    ?>
+                </div>
             <?php }?>
 
             <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount)) { ?>
@@ -372,8 +434,8 @@ if( $tf_hotel_selected_template_check == "design-1" ){
             <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
                 
                 <div class="room-deposit-wrap">
-                    <input type="checkbox" id="tf-make-deposit" name="make_deposit" value="<?php echo $room_id ?>">
-                    <label for="tf-make-deposit"><?php _e("I'll make a Partial Payment", "tourfic") ?></label><br>
+                    <input type="checkbox" id="tf-make-deposit<?php echo $room_id ?>" name="make_deposit" value="<?php echo $room_id ?>">
+                    <label for="tf-make-deposit<?php echo $room_id ?>"><?php _e("I'll make a Partial Payment", "tourfic") ?></label><br>
                 </div>
 	        <?php } ?>
 
@@ -394,7 +456,7 @@ if( $tf_hotel_selected_template_check == "design-1" ){
                 $tour_hotel_service_avail = !empty($meta['airport_service']) ? $meta['airport_service'] : '';
                 $tour_hotel_service_type = !empty($meta['airport_service_type']) ? $meta['airport_service_type'] : '';
                 
-                if(function_exists('is_tf_pro') && is_tf_pro() && !empty($tour_hotel_service_avail) && !empty($tour_hotel_service_type)){
+                if(function_exists('is_tf_pro') && is_tf_pro() && !empty($tour_hotel_service_avail) && !empty($tour_hotel_service_type) && ($room_book_by!=2 || empty($room_book_url))){
                 ?>
                 <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'I\'ll reserve', 'tourfic' );?></a>
                 
@@ -444,4 +506,4 @@ if( $tf_hotel_selected_template_check == "design-1" ){
         </form>
     </td>
 </tr>
-<?php } ?>
+<?php }} ?>

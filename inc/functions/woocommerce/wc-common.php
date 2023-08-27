@@ -42,7 +42,7 @@ add_filter( 'woocommerce_order_item_display_meta_key', 'tf_change_meta_key_title
  */
 function tf_hide_order_meta( $hidden_meta ) {
   
-  $hidden_meta = array('_order_type', '_post_author', '_post_id', '_unique_id', '_tour_unique_id');
+  $hidden_meta = array('_order_type', '_post_author', '_post_id', '_unique_id', '_tour_unique_id', '_visitor_details');
   
   return $hidden_meta;
 }

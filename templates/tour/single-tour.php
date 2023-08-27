@@ -196,7 +196,6 @@ while ( have_posts() ) : the_post();
 		include TF_TEMPLATE_PART_PATH . 'tour/design-default.php';
 	}
 	?>
-
 <?php
 endwhile;
 ?>

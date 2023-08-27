@@ -421,7 +421,7 @@ function tf_hotel_airport_service_callback() {
 			if ( ! empty( $day_difference ) && $price_multi_day == true ) {
 				$price_total = $total_price * $room_selected * $day_difference;
 			} else {
-				$price_total = $total_price * $room_selected;
+				$price_total = $total_price * ($room_selected * $day_difference+1);
 			}
 
 		}
@@ -810,6 +810,8 @@ function tf_room_availability_callback() {
 				$adult_number     = ! empty( $room['adult'] ) ? $room['adult'] : 0;
 				$child_number     = ! empty( $room['child'] ) ? $room['child'] : 0;
 				$pricing_by       = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
+				$multi_by_date_ck = ! empty( $room['price_multi_day'] ) ? ! empty( $room['price_multi_day'] ) : false;
+				$child_age_limit  = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 				$room_price       = ! empty( $room['price'] ) ? $room['price'] : 0;
 				$room_adult_price = ! empty( $room['adult_price'] ) ? $room['adult_price'] : 0;
 				$room_child_price = ! empty( $room['child_price'] ) ? $room['child_price'] : 0;
@@ -836,7 +838,14 @@ function tf_room_availability_callback() {
 				);
 
 				$avail_durationdate = [];
+				$is_first = true;
 				foreach ( $tfperiod as $date ) {
+					if($multi_by_date_ck){
+						if ($is_first) {
+							$is_first = false;
+							continue;
+						}
+					}
 					$avail_durationdate[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
 				}
 
@@ -874,43 +883,41 @@ function tf_room_availability_callback() {
 					# Run foreach loop through oder ids
 					foreach ( $order_ids as $order_id ) {
 
-						# Get $order object from order ID
-						$order = wc_get_order( $order_id );
+					# Get Only the completed orders
+					$tf_orders_select = array(
+						'select' => "post_id,order_details",
+						'query' => "post_type = 'hotel' AND ostatus = 'completed' AND order_id = ".$order_id
+					);
+					$tf_hotel_book_orders = tourfic_order_table_data($tf_orders_select);
 
-						# Get Only the completed orders
-						if ( $order && $order->get_status() == 'completed' ) {
+						# Get and Loop Over Order Items
+						foreach ( $tf_hotel_book_orders as $item ) {
+							$order_details = json_decode($item['order_details']);
+							/**
+							 * Order item data
+							 */
+							$ordered_number_of_room = !empty($order_details->room) ? $order_details->room : 0;
 
-							# Get and Loop Over Order Items
-							foreach ( $order->get_items() as $item_id => $item ) {
+							if ( $avil_by_date ) {
 
-								/**
-								 * Order item data
-								 */
-								$ordered_number_of_room = $item->get_meta( 'number_room_booked', true );
+								$order_check_in_date  = strtotime( $order_details->check_in );
+								$order_check_out_date = strtotime( $order_details->check_out );
 
-								if ( $avil_by_date ) {
-
-									$order_check_in_date  = strtotime( $item->get_meta( 'check_in', true ) );
-									$order_check_out_date = strtotime( $item->get_meta( 'check_out', true ) );
-
-									$tf_order_check_in_date  = $item->get_meta( 'check_in', true );
-									$tf_order_check_out_date = $item->get_meta( 'check_out', true );
-									if ( ! empty( $avail_durationdate ) && ( in_array( $tf_order_check_out_date, $avail_durationdate ) || in_array( $tf_order_check_in_date, $avail_durationdate ) ) ) {
-										# Total number of room booked
-										$number_orders = $number_orders + $ordered_number_of_room;
-									}
-									array_push( $order_date_ranges, array( $order_check_in_date, $order_check_out_date ) );
-
-								} else {
-									$order_check_in_date  = $item->get_meta( 'check_in', true );
-									$order_check_out_date = $item->get_meta( 'check_out', true );
-									if ( ! empty( $avail_durationdate ) && ( in_array( $order_check_out_date, $avail_durationdate ) || in_array( $order_check_in_date, $avail_durationdate ) ) ) {
-										# Total number of room booked
-										$number_orders = $number_orders + $ordered_number_of_room;
-									}
-
+								$tf_order_check_in_date  = $order_details->check_in;
+								$tf_order_check_out_date = $order_details->check_out;
+								if ( ! empty( $avail_durationdate ) && ( in_array( $tf_order_check_out_date, $avail_durationdate ) || in_array( $tf_order_check_in_date, $avail_durationdate ) ) ) {
+									# Total number of room booked
+									$number_orders = $number_orders + $ordered_number_of_room;
 								}
+								array_push( $order_date_ranges, array( $order_check_in_date, $order_check_out_date ) );
 
+							} else {
+								$order_check_in_date  = $order_details->check_in;
+								$order_check_out_date = $order_details->check_out;
+								if ( ! empty( $avail_durationdate ) && ( in_array( $order_check_out_date, $avail_durationdate ) || in_array( $order_check_in_date, $avail_durationdate ) ) ) {
+									# Total number of room booked
+									$number_orders = $number_orders + $ordered_number_of_room;
+								}
 							}
 						}
 					}
@@ -981,7 +988,11 @@ function tf_room_availability_callback() {
 						$price_by_date = ( ( $room_adult_price * $form_adult ) + ( $room_child_price * $form_child ) );
 					}
 
-					$price = $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date;
+					if(!$multi_by_date_ck){
+						$days = $days+1;
+					}
+
+					$price = $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date * $days;
 
 					tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit );
 
@@ -1692,9 +1703,6 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                     },
                     defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
-					<?php if( function_exists( 'is_tf_pro' ) && is_tf_pro()) : ?>
-                    disable: [<?php echo $total_dis_dates; ?>],
-					<?php endif; ?>
 					<?php
 					// Flatpickr locale for translation
 					tf_flatpickr_locale();
@@ -1802,10 +1810,11 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	// Single link
 	$url = get_the_permalink();
 	$url = add_query_arg( array(
-		'adults'        => $adults,
-		'children'      => $child,
-		'room'          => $room,
-		'children_ages' => $children_ages
+		'adults'            => $adults,
+		'children'          => $child,
+		'room'              => $room,
+		'children_ages'     => $children_ages,
+		'check-in-out-date' => $check_in_out
 	), $url );
 
 	/**
@@ -2597,6 +2606,7 @@ function tf_hotel_quickview_callback() {
 			$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
 			if ( $enable == '1' && $room['unique_id'] . $key == $_POST['uniqid_id'] ) :
 				$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
+				$child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 				?>
                 <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
 					<?php
@@ -2844,22 +2854,28 @@ function tf_hotel_quickview_callback() {
                                         </div>
                                     </div>
 
-								<?php }
-								if ( $child_number ) { ?>
-                                    <div class="tf-tooltip tf-d-ib">
-                                        <div class="room-detail-icon">
-                                            <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
-                                            <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
-                                        </div>
-                                        <div class="tf-top">
-											<?php _e( 'Number of Children', 'tourfic' ); ?>
-                                            <i class="tool-i"></i>
-                                        </div>
+							<?php }
+							if ( $child_number ) { ?>
+                                <div class="tf-tooltip tf-d-ib">
+                                    <div class="room-detail-icon">
+                                        <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
+                                        <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                                     </div>
-								<?php } ?>
-                            </div>
-
+                                    <div class="tf-top">
+										<?php
+										if(!empty($child_age_limit)){
+											printf(__('Children Age Limit %s Years', 'tourfic'), $child_age_limit);
+										}else{
+											_e( 'Number of Children', 'tourfic' );
+										}
+										?>
+                                        <i class="tool-i"></i>
+                                    </div>
+                                </div>
+							<?php } ?>
                         </div>
+
+                    </div>
 					<?php } ?>
                 </div>
 			<?php

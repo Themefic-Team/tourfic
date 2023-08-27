@@ -2444,6 +2444,14 @@ Steps
 .tf-field-text input::placeholder {
   color: #a6b1bf;
 }
+.tf-field-text input:read-only {
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  background-color: #ebf2ff;
+}
+.tf-field-text input:read-only:focus {
+  box-shadow: none;
+  border: 1px solid #c4cbd4;
+}
 
 .tf-field-textarea textarea {
   width: 100% !important;
@@ -3639,6 +3647,47 @@ Steps
 .tf-image-radio-group li .tf-image-checkbox > input:checked + img {
   border-color: #607085;
   border-radius: 5px;
+}
+
+.tf-backend-booking-card-wrap {
+  background: #fff;
+  margin-right: 20px;
+  border-radius: 6px;
+  margin-bottom: 30px;
+}
+.tf-backend-booking-card-wrap h3.tf-backend-booking-card-title {
+  margin: 0;
+  padding: 15px 24px;
+  background-color: #003c7a;
+  color: #fff;
+  border-radius: 6px 6px 0 0;
+}
+
+.tf-booking-fields-wrapper {
+  padding: 10px 24px 20px;
+}
+.tf-booking-fields-wrapper .tf-booking-fields {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.tf-booking-fields-wrapper .tf-booking-fields .tf-fieldset .error-input {
+  border-color: #b30000;
+}
+.tf-booking-fields-wrapper .tf-booking-fields .tf-fieldset .text-danger {
+  color: #b30000;
+}
+
+.tf-backend-booking-footer {
+  margin-right: 20px;
+  text-align: right;
 }
 
 /*# sourceMappingURL=tourfic-admin.css.map */
