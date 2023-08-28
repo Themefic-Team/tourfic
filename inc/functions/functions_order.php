@@ -46,21 +46,21 @@ if ( ! function_exists( 'tf_add_order_submenu' ) ) {
 if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 	function tf_tour_booking_page_callback() {
 
-	/**
-	 * Get current logged in user
-	 */
+		/**
+		 * Get current logged in user
+		 */
 
-	 if ( file_exists( TF_INC_PATH . 'functions/class.tf_tour.php' ) ) {
-		require_once TF_INC_PATH . 'functions/class.tf_tour.php';
-	} else {
-		tf_file_missing( TF_INC_PATH . 'functions/class.tf_tour.php' );
-	}
+		if ( file_exists( TF_INC_PATH . 'functions/class.tf_tour.php' ) ) {
+			require_once TF_INC_PATH . 'functions/class.tf_tour.php';
+		} else {
+			tf_file_missing( TF_INC_PATH . 'functions/class.tf_tour.php' );
+		}
 
-	$current_user = wp_get_current_user();
-	// get user id
-	$current_user_id = $current_user->ID;
-	// get user role
-	$current_user_role = $current_user->roles[0];
+		$current_user = wp_get_current_user();
+		// get user id
+		$current_user_id = $current_user->ID;
+		// get user role
+		$current_user_role = $current_user->roles[0];
 
 		// if is not desired user role die
 		if ( $current_user_role == 'administrator' || $current_user_role == 'tf_vendor' ) {
@@ -68,46 +68,46 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 			wp_die( __( 'You are not allowed in this page', 'tourfic' ) );
 		}
 
-	global $wpdb;
-	$table_name = $wpdb->prefix . 'tf_order_data';
-	if ( $current_user_role == 'administrator' ) {
-		if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
-			$tf_orders_select = array(
-				'select' => "*",
-				'query' => "post_type = 'tour' ORDER BY order_id DESC"
-			);
-			$tours_orders_result = tourfic_order_table_data($tf_orders_select);
-		}else{
-			$tf_orders_select = array(
-				'select' => "*",
-				'query' => "post_type = 'tour' ORDER BY order_id DESC LIMIT 15"
-			);
-			$tours_orders_result = tourfic_order_table_data($tf_orders_select);
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'tf_order_data';
+		if ( $current_user_role == 'administrator' ) {
+			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				$tf_orders_select    = array(
+					'select' => "*",
+					'query'  => "post_type = 'tour' ORDER BY order_id DESC"
+				);
+				$tours_orders_result = tourfic_order_table_data( $tf_orders_select );
+			} else {
+				$tf_orders_select    = array(
+					'select' => "*",
+					'query'  => "post_type = 'tour' ORDER BY order_id DESC LIMIT 15"
+				);
+				$tours_orders_result = tourfic_order_table_data( $tf_orders_select );
+			}
 		}
-	}
-	if ( $current_user_role == 'tf_vendor' ) {
-		if (function_exists('is_tf_pro') && is_tf_pro()) {
+		if ( $current_user_role == 'tf_vendor' ) {
+			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
-			$tf_orders_select = array(
-				'select' => "*",
-				'post_type' => "tour",
-				'author' => $current_user_id,
-				'limit' => ""
-			);
-			$tours_orders_result = tourfic_vendor_order_table_data($tf_orders_select);
+				$tf_orders_select    = array(
+					'select'    => "*",
+					'post_type' => "tour",
+					'author'    => $current_user_id,
+					'limit'     => ""
+				);
+				$tours_orders_result = tourfic_vendor_order_table_data( $tf_orders_select );
 
-		} else {
-			$tf_orders_select = array(
-				'select' => "*",
-				'post_type' => "tour",
-				'author' => $current_user_id,
-				'limit' => "LIMIT 15"
-			);
-			$tours_orders_result = tourfic_vendor_order_table_data($tf_orders_select);
+			} else {
+				$tf_orders_select    = array(
+					'select'    => "*",
+					'post_type' => "tour",
+					'author'    => $current_user_id,
+					'limit'     => "LIMIT 15"
+				);
+				$tours_orders_result = tourfic_vendor_order_table_data( $tf_orders_select );
+			}
 		}
-	}
 
-	?>
+		?>
 
         <div class="wrap" style="margin-right: 20px;">
             <div id="tf-booking-status-loader">
@@ -122,21 +122,21 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 			 */
 			do_action( 'tf_before_tour_booking_details' );
 
-		?>     
-		<hr class="wp-header-end">
+			?>
+            <hr class="wp-header-end">
 
-		<?php
-		/**
-		 * Booking Data showing from tourfic table
-		 * @since 2.9.26
-		 */
-		$tours_orders_result = new DBTFTOURTable( $tours_orders_result );
-		$tours_orders_result->prepare_items();
-		$tours_orders_result->display();
-		?>
-    </div>
+			<?php
+			/**
+			 * Booking Data showing from tourfic table
+			 * @since 2.9.26
+			 */
+			$tours_orders_result = new DBTFTOURTable( $tours_orders_result );
+			$tours_orders_result->prepare_items();
+			$tours_orders_result->display();
+			?>
+        </div>
 
-<?php }
+	<?php }
 }
 
 /**
@@ -145,68 +145,68 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
  * Display all the order details
  */
 if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
-function tf_hotel_booking_page_callback() {
-	/**
-	 * Get current logged in user
-	 */
-	if ( file_exists( TF_INC_PATH . 'functions/class.tf_hotel.php' ) ) {
-		require_once TF_INC_PATH . 'functions/class.tf_hotel.php';
-	} else {
-		tf_file_missing( TF_INC_PATH . 'functions/class.tf_hotel.php' );
-	}
-
-	$current_user = wp_get_current_user();
-	// get user id
-	$current_user_id = $current_user->ID;
-	// get user role
-	$current_user_role = $current_user->roles[0];
-
-	// if is not desired user role die
-	if ( $current_user_role == 'administrator' || $current_user_role == 'tf_vendor' ) {
-	} else {
-		wp_die( __( 'You are not allowed in this page', 'tourfic' ) );
-	}
-
-	if ( $current_user_role == 'administrator' ) {
-		if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
-			$tf_orders_select = array(
-				'select' => "*",
-				'query' => "post_type = 'hotel' ORDER BY order_id DESC"
-			);
-			$hotel_orders_result = tourfic_order_table_data($tf_orders_select);
-		}else{
-			$tf_orders_select = array(
-				'select' => "*",
-				'query' => "post_type = 'hotel' ORDER BY order_id DESC LIMIT 15"
-			);
-			$hotel_orders_result = tourfic_order_table_data($tf_orders_select);
-		}
-	}
-	if ( $current_user_role == 'tf_vendor' ) {
-		if (function_exists('is_tf_pro') && is_tf_pro()) {
-			$tf_orders_select = array(
-				'select' => "*",
-				'post_type' => "hotel",
-				'author' => $current_user_id,
-				'limit' => ""
-			);
-			$hotel_orders_result = tourfic_vendor_order_table_data($tf_orders_select);
+	function tf_hotel_booking_page_callback() {
+		/**
+		 * Get current logged in user
+		 */
+		if ( file_exists( TF_INC_PATH . 'functions/class.tf_hotel.php' ) ) {
+			require_once TF_INC_PATH . 'functions/class.tf_hotel.php';
 		} else {
-			$tf_orders_select = array(
-				'select' => "*",
-				'post_type' => "hotel",
-				'author' => $current_user_id,
-				'limit' => "LIMIT 15"
-			);
-			$hotel_orders_result = tourfic_vendor_order_table_data($tf_orders_select);
+			tf_file_missing( TF_INC_PATH . 'functions/class.tf_hotel.php' );
 		}
-	}
 
-	?>
+		$current_user = wp_get_current_user();
+		// get user id
+		$current_user_id = $current_user->ID;
+		// get user role
+		$current_user_role = $current_user->roles[0];
 
-    <div class="wrap" style="margin-right: 20px;">
-        <h1 class="wp-heading-inline"><?php _e( 'Hotel Booking Details', 'tourfic' ); ?></h1>
-		<?php
+		// if is not desired user role die
+		if ( $current_user_role == 'administrator' || $current_user_role == 'tf_vendor' ) {
+		} else {
+			wp_die( __( 'You are not allowed in this page', 'tourfic' ) );
+		}
+
+		if ( $current_user_role == 'administrator' ) {
+			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				$tf_orders_select    = array(
+					'select' => "*",
+					'query'  => "post_type = 'hotel' ORDER BY order_id DESC"
+				);
+				$hotel_orders_result = tourfic_order_table_data( $tf_orders_select );
+			} else {
+				$tf_orders_select    = array(
+					'select' => "*",
+					'query'  => "post_type = 'hotel' ORDER BY order_id DESC LIMIT 15"
+				);
+				$hotel_orders_result = tourfic_order_table_data( $tf_orders_select );
+			}
+		}
+		if ( $current_user_role == 'tf_vendor' ) {
+			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				$tf_orders_select    = array(
+					'select'    => "*",
+					'post_type' => "hotel",
+					'author'    => $current_user_id,
+					'limit'     => ""
+				);
+				$hotel_orders_result = tourfic_vendor_order_table_data( $tf_orders_select );
+			} else {
+				$tf_orders_select    = array(
+					'select'    => "*",
+					'post_type' => "hotel",
+					'author'    => $current_user_id,
+					'limit'     => "LIMIT 15"
+				);
+				$hotel_orders_result = tourfic_vendor_order_table_data( $tf_orders_select );
+			}
+		}
+
+		?>
+
+        <div class="wrap" style="margin-right: 20px;">
+            <h1 class="wp-heading-inline"><?php _e( 'Hotel Booking Details', 'tourfic' ); ?></h1>
+			<?php
 			/**
 			 * Before Tour booking details table hook
 			 * @hooked tf_before_hotel_booking_details - 10
@@ -214,9 +214,9 @@ function tf_hotel_booking_page_callback() {
 			 */
 			do_action( 'tf_before_hotel_booking_details' );
 
-		?>
-        <hr class="wp-header-end">
-        <?php
+			?>
+            <hr class="wp-header-end">
+			<?php
 			/**
 			 * Booking Data showing from tourfic table
 			 * @since 2.9.26
@@ -224,10 +224,10 @@ function tf_hotel_booking_page_callback() {
 			$hotel_order_results = new DBTFHOTELTable( $hotel_orders_result );
 			$hotel_order_results->prepare_items();
 			$hotel_order_results->display();
-		?>
-    </div>
+			?>
+        </div>
 
-<?php }
+	<?php }
 }
 
 
@@ -263,37 +263,37 @@ if ( ! function_exists( 'tf_apartment_booking_page_callback' ) ) {
 		}
 
 		if ( $current_user_role == 'administrator' ) {
-			if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
-				$tf_orders_select = array(
+			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				$tf_orders_select        = array(
 					'select' => "*",
-					'query' => "post_type = 'apartment' ORDER BY order_id DESC"
+					'query'  => "post_type = 'apartment' ORDER BY order_id DESC"
 				);
-				$apartment_orders_result = tourfic_order_table_data($tf_orders_select);
-			}else{
-				$tf_orders_select = array(
+				$apartment_orders_result = tourfic_order_table_data( $tf_orders_select );
+			} else {
+				$tf_orders_select        = array(
 					'select' => "*",
-					'query' => "post_type = 'apartment' ORDER BY order_id DESC LIMIT 15"
+					'query'  => "post_type = 'apartment' ORDER BY order_id DESC LIMIT 15"
 				);
-				$apartment_orders_result = tourfic_order_table_data($tf_orders_select);
+				$apartment_orders_result = tourfic_order_table_data( $tf_orders_select );
 			}
 		}
 		if ( $current_user_role == 'tf_vendor' ) {
-			if (function_exists('is_tf_pro') && is_tf_pro()) {
-				$tf_orders_select = array(
-					'select' => "*",
+			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				$tf_orders_select        = array(
+					'select'    => "*",
 					'post_type' => "apartment",
-					'author' => $current_user_id,
-					'limit' => ""
+					'author'    => $current_user_id,
+					'limit'     => ""
 				);
-				$apartment_orders_result = tourfic_vendor_order_table_data($tf_orders_select);
+				$apartment_orders_result = tourfic_vendor_order_table_data( $tf_orders_select );
 			} else {
-				$tf_orders_select = array(
-					'select' => "*",
+				$tf_orders_select        = array(
+					'select'    => "*",
 					'post_type' => "apartment",
-					'author' => $current_user_id,
-					'limit' => "LIMIT 15"
+					'author'    => $current_user_id,
+					'limit'     => "LIMIT 15"
 				);
-				$apartment_orders_result = tourfic_vendor_order_table_data($tf_orders_select);
+				$apartment_orders_result = tourfic_vendor_order_table_data( $tf_orders_select );
 			}
 		}
 		?>
@@ -327,7 +327,7 @@ if ( ! function_exists( 'tf_apartment_booking_page_callback' ) ) {
 /**
  * Add _order_type order meta from line order meta
  */
-if(!function_exists('tf_add_order_type_order_meta')) {
+if ( ! function_exists( 'tf_add_order_type_order_meta' ) ) {
 	function tf_add_order_type_order_meta( $order_id ) {
 
 		$order = wc_get_order( $order_id );
@@ -391,8 +391,8 @@ if ( ! function_exists( 'tf_custom_query_var_get_orders' ) ) {
 if ( ! function_exists( 'tf_set_order' ) ) {
 	function tf_set_order( $order_data ) {
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'tf_order_data';
-		$all_order_ids  = $wpdb->get_col( "SELECT order_id FROM $table_name" );
+		$table_name    = $wpdb->prefix . 'tf_order_data';
+		$all_order_ids = $wpdb->get_col( "SELECT order_id FROM $table_name" );
 		do {
 			$order_id = mt_rand( 10000000, 99999999 );
 		} while ( in_array( $order_id, $all_order_ids ) );
@@ -438,7 +438,7 @@ if ( ! function_exists( 'tf_set_order' ) ) {
 			)
 		);
 
-        return $order_id;
+		return $order_id;
 	}
 }
 
@@ -460,9 +460,10 @@ if ( ! function_exists( 'tf_get_all_order_id' ) ) {
 add_action( 'admin_head', 'tf_booking_order_table_column' );
 if ( ! function_exists( 'tf_booking_order_table_column' ) ) {
 	function tf_booking_order_table_column() {
-		$page = ( isset($_GET['page'] ) ) ? esc_attr( $_GET['page'] ) : false;
-		if( 'tf_hotel_booking' != $page && 'tf_tours_booking' != $page )
-		return;
+		$page = ( isset( $_GET['page'] ) ) ? esc_attr( $_GET['page'] ) : false;
+		if ( 'tf_hotel_booking' != $page && 'tf_tours_booking' != $page ) {
+			return;
+		}
 
 		echo '<style type="text/css">';
 		echo '.wp-list-table .column-order_id { width: 90px; }';
