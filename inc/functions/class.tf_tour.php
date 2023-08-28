@@ -46,12 +46,19 @@ class DBTFTOURTable extends WP_List_Table {
 		return "<input type='checkbox' value='{$item['id']}'>";
 	}
     function column_cdetails( $item ) {
-		$billing_info = json_decode($item['billing_details']);
+        $billing_info = json_decode($item['billing_details']);
         $billing_details = "";
-        $customer_name        = $billing_info->billing_first_name . ' ' . $billing_info->billing_last_name;
-        $customer_email       = $billing_info->billing_email;
-        $customer_phone       = $billing_info->billing_phone;
-        $customer_address     = $billing_info->billing_address_1 . ', ' . $billing_info->billing_address_2 . ',<br>' . $billing_info->billing_city . ', ' . WC()->countries->countries[ $billing_info->billing_country ];
+        $billing_first_name = !empty($billing_info->billing_first_name) ? $billing_info->billing_first_name : '';
+        $billing_last_name = !empty($billing_info->billing_last_name) ? $billing_info->billing_last_name : '';
+        $customer_name        = $billing_first_name . ' ' . $billing_last_name;
+        $customer_email       = !empty($billing_info->billing_email) ? $billing_info->billing_email : '';
+        $customer_phone       = !empty($billing_info->billing_phone) ? $billing_info->billing_phone : '';
+        $customer_address_1 = !empty($billing_info->billing_address_1) ? $billing_info->billing_address_1.',' : '';
+        $customer_address_2 = !empty($billing_info->billing_address_2) ? $billing_info->billing_address_2.',' : '';
+        $customer_address_city = !empty($billing_info->billing_city) ? $billing_info->billing_city.',' : '';
+        $customer_address_country = !empty(WC()->countries->countries[ $billing_info->billing_country ]) ? WC()->countries->countries[ $billing_info->billing_country ] : '';
+        
+        $customer_address     = $customer_address_1 . $customer_address_2 . '<br>' . $customer_address_city . $customer_address_country;
 
         if ( $customer_name ) {
             $billing_details .= '<b>' . __( "Name", "tourfic" ) . ': </b>' . $customer_name . '<br>';
