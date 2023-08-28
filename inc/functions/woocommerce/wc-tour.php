@@ -1133,4 +1133,61 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 add_action( 'woocommerce_checkout_order_processed', 'tf_add_order_tour_details_checkout_order_processed', 10, 4 );
 
 
+
+/*
+* Admin order data migration
+* @author Jahid
+* @since 2.9.28
+*/ 
+
+function tf_tour_unique_id_order_data_migration(){
+
+	if ( empty( get_option( 'tf_old_tour_order_unique_id_data_migrate' ) ) ) {
+
+		global $wpdb;     
+		$table_name = $wpdb->prefix.'tf_order_data'; 
+		$tf_old_order_limit = new WC_Order_Query( array (
+			'limit' => -1,
+			'orderby' => 'date',
+			'order' => 'ASC',
+			'return' => 'ids',
+		) );
+		$order = $tf_old_order_limit->get_orders();
+
+		foreach ( $order as $item_id => $item ) {
+			$itemmeta = wc_get_order( $item);
+			if ( is_a( $itemmeta, 'WC_Order_Refund' ) ) {
+				$itemmeta = wc_get_order( $itemmeta->get_parent_id() );
+			}
+
+			foreach ( $itemmeta->get_items() as $item_key => $item_values ) {
+				$order_type   = wc_get_order_item_meta( $item_key, '_order_type', true );
+				
+				if("tour"==$order_type){
+					$post_id   = wc_get_order_item_meta( $item_key, '_tour_id', true );
+					$unique_id   = wc_get_order_item_meta( $item_key, '_tour_unique_id', true );
+
+					$tf_order_checked = $wpdb->get_row( $wpdb->prepare("SELECT id,order_details FROM $table_name WHERE order_id=%s AND post_id=%s",$item,$post_id) );
+					if( !empty($tf_order_checked) && !empty($unique_id) ){
+						$order_details = json_decode($tf_order_checked->order_details);
+						if(empty($order_details->unique_id)){
+							$order_details->unique_id = $unique_id;
+							$wpdb->query(
+								$wpdb->prepare("UPDATE $table_name SET order_details=%s WHERE id=%d",json_encode($order_details), $tf_order_checked->id)
+							);
+
+						}
+					}
+				}
+			}
+				
+		}
+
+		wp_cache_flush();
+		flush_rewrite_rules( true );
+		update_option( 'tf_old_tour_order_unique_id_data_migrate', 1 );
+	}
+}
+
+add_action( 'admin_init', 'tf_tour_unique_id_order_data_migration' );
 ?>
