@@ -986,4 +986,151 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 
 }
 
+/**
+ * Add order id to the hotel room meta field
+ *
+ * runs during WooCommerce checkout process
+ *
+ * @author fida
+ */
+function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_data, $order ) {
+
+	$tf_integration_order_data = array(
+		'order_id' => $order_id
+	);
+	$tf_integration_order_status = [];
+	# Get and Loop Over Order Line Items
+	foreach ( $order->get_items() as $item_id => $item ) {
+		
+		$order_type = $item->get_meta( '_order_type', true );
+
+		if("tour"==$order_type){
+			$post_id   = $item->get_meta( '_tour_id', true ); // Tour id
+			
+			//Order Data Insert 
+			$billinginfo = [
+				'billing_first_name' => $order->get_billing_first_name(),
+				'billing_last_name' => $order->get_billing_last_name(),
+				'billing_company' => $order->get_billing_company(),
+				'billing_address_1' => $order->get_billing_address_1(),
+				'billing_address_2' => $order->get_billing_address_2(),
+				'billing_city' => $order->get_billing_city(),
+				'billing_state' => $order->get_billing_state(),
+				'billing_postcode' => $order->get_billing_postcode(),
+				'billing_country' => $order->get_billing_country(),
+				'billing_email' => $order->get_billing_email(),
+				'billing_phone' => $order->get_billing_phone()
+			];
+
+			$shippinginfo = [
+				'shipping_first_name' => $order->get_shipping_first_name(),
+				'shipping_last_name' => $order->get_shipping_last_name(),
+				'shipping_company' => $order->get_shipping_company(),
+				'shipping_address_1' => $order->get_shipping_address_1(),
+				'shipping_address_2' => $order->get_shipping_address_2(),
+				'shipping_city' => $order->get_shipping_city(),
+				'shipping_state' => $order->get_shipping_state(),
+				'shipping_postcode' => $order->get_shipping_postcode(),
+				'shipping_country' => $order->get_shipping_country(),
+				'shipping_phone' => $order->get_shipping_phone()
+			];
+
+			// Tour Unique ID Store to Option
+			$tour_ides = $item->get_meta( '_tour_unique_id', true );
+			update_option( $tour_ides, $order_id);
+			update_option( 'tf_order_uni_'.$order_id, $tour_ides);
+			update_option( 'tf_order_tour_'.$tour_ides, $post_id);
+			$tour_date = $item->get_meta( 'Tour Date', true );
+			$tour_time = $item->get_meta( 'Tour Time', true );
+			$price = $item->get_subtotal();
+			$due = $item->get_meta( 'Due', true );
+			$tour_extra = $item->get_meta( 'Tour Extra', true );
+			$adult = $item->get_meta( 'Adults', true );
+			$child = $item->get_meta( 'Children', true );
+			$infants = $item->get_meta( 'Infants', true );
+			$visitor_details = $item->get_meta( '_visitor_details', true );
+			
+			if ( $tour_date ) {
+				list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
+			}
+
+			$iteminfo = [
+				'tour_date' => $tour_date,
+				'tour_time' => $tour_time,
+				'tour_extra' => $tour_extra,
+				'adult' => $adult,
+				'child' => $child,
+				'infants' => $infants,
+				'total_price' => $price,
+				'due_price' => $due,
+				'unique_id' => $tour_ides,
+				'visitor_details' => $visitor_details
+			];
+
+			$tf_integration_order_data[] = [
+				'tour_date' => $tour_date,
+				'tour_time' => $tour_time,
+				'tour_extra' => $tour_extra,
+				'adult' => $adult,
+				'child' => $child,
+				'infants' => $infants,
+				'total_price' => $price,
+				'due_price' => $due,
+			];
+
+			$tf_integration_order_status = [
+				'customer_id' => $order->get_customer_id(),
+				'payment_method' => $order->get_payment_method(),
+				'order_status' => $order->get_status(),
+				'order_date' => date('Y-m-d H:i:s')
+			];
+
+			$iteminfo_keys = array_keys($iteminfo);
+			$iteminfo_keys = array_map('sanitize_key', $iteminfo_keys);
+
+			$iteminfo_values = array_values($iteminfo);
+			$iteminfo_values = array_map('sanitize_text_field', $iteminfo_values);
+
+			$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
+			
+			global $wpdb;     
+			$table_name = $wpdb->prefix.'tf_order_data';  
+			$wpdb->query(
+				$wpdb->prepare(
+				"INSERT INTO $table_name
+				( order_id, post_id, post_type, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
+				VALUES ( %d, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
+					array(
+						$order_id,
+						sanitize_key( $post_id ),
+						$order_type,
+						$tour_in,
+						$tour_out,
+						json_encode($billinginfo),
+						json_encode($shippinginfo),
+						json_encode($iteminfo),
+						$order->get_customer_id(),
+						$order->get_payment_method(),
+						$order->get_status(),
+						date('Y-m-d H:i:s')
+					)
+				)
+			);
+		}
+	}
+
+	/**
+	 * New Order Pabbly Integration
+	 * @author Jahid
+	 */
+
+	if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($tf_integration_order_status) ) {
+		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
+		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
+	} 
+}
+
+add_action( 'woocommerce_checkout_order_processed', 'tf_add_order_tour_details_checkout_order_processed', 10, 4 );
+
+
 ?>

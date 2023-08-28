@@ -32,12 +32,19 @@ class DBTFAPARTMENTTable extends WP_List_Table {
 	}
 
 	function column_cdetails( $item ) {
-		$billing_info     = json_decode( $item['billing_details'] );
-		$billing_details  = "";
-		$customer_name    = $billing_info->billing_first_name . ' ' . $billing_info->billing_last_name;
-		$customer_email   = $billing_info->billing_email;
-		$customer_phone   = $billing_info->billing_phone;
-		$customer_address = $billing_info->billing_address_1 . ', ' . $billing_info->billing_address_2 . ',<br>' . $billing_info->billing_city . ', ' . WC()->countries->countries[ $billing_info->billing_country ];
+		$billing_info = json_decode($item['billing_details']);
+        $billing_details = "";
+        $billing_first_name = !empty($billing_info->billing_first_name) ? $billing_info->billing_first_name : '';
+        $billing_last_name = !empty($billing_info->billing_last_name) ? $billing_info->billing_last_name : '';
+        $customer_name        = $billing_first_name . ' ' . $billing_last_name;
+        $customer_email       = !empty($billing_info->billing_email) ? $billing_info->billing_email : '';
+        $customer_phone       = !empty($billing_info->billing_phone) ? $billing_info->billing_phone : '';
+        $customer_address_1 = !empty($billing_info->billing_address_1) ? $billing_info->billing_address_1.',' : '';
+        $customer_address_2 = !empty($billing_info->billing_address_2) ? $billing_info->billing_address_2.',' : '';
+        $customer_address_city = !empty($billing_info->billing_city) ? $billing_info->billing_city.',' : '';
+        $customer_address_country = !empty(WC()->countries->countries[ $billing_info->billing_country ]) ? WC()->countries->countries[ $billing_info->billing_country ] : '';
+        
+        $customer_address     = $customer_address_1 . $customer_address_2 . '<br>' . $customer_address_city . $customer_address_country;
 
 		if ( $customer_name ) {
 			$billing_details .= '<b>' . __( "Name", "tourfic" ) . ': </b>' . $customer_name . '<br>';
@@ -64,14 +71,17 @@ class DBTFAPARTMENTTable extends WP_List_Table {
 		if ( ! empty( $order_details->adult ) ) {
 			$apartment_order_details .= '<b>' . __( "Adult Number", "tourfic" ) . ': </b>' . $order_details->adult . '<br>';
 		}
-		if ( ! empty( $order_details->children ) ) {
-			$apartment_order_details .= '<b>' . __( "Children Number", "tourfic" ) . ': </b>' . $order_details->children . '<br>';
+		if ( ! empty( $order_details->child ) ) {
+			$apartment_order_details .= '<b>' . __( "Children Number", "tourfic" ) . ': </b>' . $order_details->child . '<br>';
 		}
-		if ( ! empty( $order_details->infant ) ) {
-			$apartment_order_details .= '<b>' . __( "Infant Number", "tourfic" ) . ': </b>' . $order_details->infant . '<br>';
+		if ( ! empty( $order_details->infants ) ) {
+			$apartment_order_details .= '<b>' . __( "Infant Number", "tourfic" ) . ': </b>' . $order_details->infants . '<br>';
 		}
-		if ( ! empty( $order_details->check_in_out ) ) {
-			$apartment_order_details .= '<b>' . __( "Check-in-out", "tourfic" ) . ': </b>' . $order_details->check_in_out . '<br>';
+		if ( ! empty( $order_details->check_in ) ) {
+			$apartment_order_details .= '<b>' . __( "Check In", "tourfic" ) . ': </b>' . $order_details->check_in . '<br>';
+		}
+		if ( ! empty( $order_details->check_out ) ) {
+			$apartment_order_details .= '<b>' . __( "Check Out", "tourfic" ) . ': </b>' . $order_details->check_out . '<br>';
 		}
 
 		return $apartment_order_details;
