@@ -275,7 +275,26 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								</h3>
 							</div>
 						</div>
-						
+
+                        <div class="tf-single-performance-grid">
+                            <div class="tf-single-performance-icon">
+                                <img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-hotel.png" alt="total Hotel">
+                            </div>
+                            <div class="tf-single-performance-content">
+                                <p><?php _e("Total Apartments","tourfic"); ?></p>
+                                <h3>
+									<?php
+									$tf_total_apartments = array(
+										'post_type'      => 'tf_apartment',
+										'post_status'    => 'publish',
+										'posts_per_page' => - 1
+									);
+									echo count( get_posts ($tf_total_apartments ) );
+									?>
+                                </h3>
+                            </div>
+                        </div>
+
 						<div class="tf-single-performance-grid">
 							<div class="tf-single-performance-icon">
 							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-booking-online.png" alt="total Booking">

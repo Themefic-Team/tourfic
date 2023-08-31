@@ -1575,11 +1575,11 @@ Steps
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 15px;
-  width: 21%;
+  width: 16%;
 }
 @media only screen and (max-width: 1366px) {
   .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid {
-    width: 20%;
+    width: 15%;
   }
 }
 @media only screen and (max-width: 1199.98px) {

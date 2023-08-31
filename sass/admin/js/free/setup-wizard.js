@@ -41,6 +41,13 @@
                 } else {
                     $('.tf-tour-setup-wizard').show();
                 }
+
+                //if apartment service not checked, hide apartment settings
+                if (!$('input[name="tf-services[]"][value="apartment"]').is(':checked')) {
+                    $('.tf-apartment-setup-wizard').hide();
+                } else {
+                    $('.tf-apartment-setup-wizard').show();
+                }
             }
 
             //skip steps add to input[name="tf-skip-steps"]
