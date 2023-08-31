@@ -278,7 +278,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
                         <div class="tf-single-performance-grid">
                             <div class="tf-single-performance-icon">
-                                <img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-hotel.png" alt="total Hotel">
+                                <img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-apartment.png" alt="total apartment">
                             </div>
                             <div class="tf-single-performance-content">
                                 <p><?php _e("Total Apartments","tourfic"); ?></p>

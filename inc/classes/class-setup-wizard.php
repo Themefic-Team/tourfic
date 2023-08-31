@@ -141,7 +141,7 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                             <input type="checkbox" id="tf-apartment" name="tf-services[]"
                                    value="apartment" <?php echo empty( $tf_disable_services ) || ! in_array( 'apartment', $tf_disable_services ) ? esc_attr( 'checked' ) : ''; ?>/>
                             <label for="tf-apartment">
-                                <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/tour.png' ?>" alt="<?php esc_attr_e( 'Tour', 'tourfic' ) ?>">
+                                <img src="<?php echo TF_ASSETS_ADMIN_URL . 'images/apartment.png' ?>" alt="<?php esc_attr_e( 'Apartment', 'tourfic' ) ?>">
                                 <span><?php _e( 'Apartment', 'tourfic' ) ?></span>
                             </label>
                         </li>
