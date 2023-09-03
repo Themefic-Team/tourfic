@@ -1144,7 +1144,9 @@ if ( ! function_exists( 'get_apartment_locations' ) ) {
 		) );
 
 		foreach ( $location_terms as $location_term ) {
-			$locations[ $location_term->slug ] = $location_term->name;
+			if ( ! empty( $location_term->slug ) ) {
+				$locations[ $location_term->slug ] = $location_term->name;
+			}
 		}
 
 		return $locations;
