@@ -302,31 +302,31 @@ while ( have_posts() ) : the_post();
 
 						<?php if ( isset( $meta['highlights'] ) && ! empty( tf_data_types( $meta['highlights'] ) ) ) : ?>
                             <!-- Start highlights Section -->
-                            <div class="tf-highlights-wrapper">
+                            <div class="tf-apt-highlights-wrapper">
 								<?php if ( ! empty( $meta['highlights_title'] ) ): ?>
                                     <h2 class="section-heading"><?php echo esc_html( $meta['highlights_title'] ) ?></h2>
 								<?php endif; ?>
 
-                                <div class="tf-highlightss">
+                                <div class="tf-apt-highlights">
 									<?php
 									foreach ( tf_data_types( $meta['highlights'] ) as $highlight ) :
 										if ( empty( $highlight['title'] ) ) {
 											continue;
 										}
 										?>
-                                        <div class="tf-highlight">
-											<div class="tf-highlight-top">
-												<?php echo ! empty( $highlight['icon'] ) ? "<div class='tf-highlight-icon'><i class='" . esc_attr( $highlight['icon'] ) . "'></i></div>" : ''; ?>
+                                        <div class="tf-apt-highlight">
+                                            <div class="tf-apt-highlight-top">
+												<?php echo ! empty( $highlight['icon'] ) ? "<div class='tf-apt-highlight-icon'><i class='" . esc_attr( $highlight['icon'] ) . "'></i></div>" : ''; ?>
                                                 <h4><?php echo esc_html( $highlight['title'] ); ?></h4>
                                             </div>
-                                            <?php echo ! empty( $highlight['desc'] ) ? '<p>' . esc_html( $highlight['desc'] ) . '</p>' : ''; ?>
+											<?php echo ! empty( $highlight['subtitle'] ) ? '<p>' . esc_html( $highlight['subtitle'] ) . '</p>' : ''; ?>
                                         </div>
 									<?php endforeach; ?>
                                 </div>
                             </div>
 						<?php endif; ?>
 
-                        <h3 class="tf-apt-desc-title"><?php echo ! empty( $meta['description_title'] ) ? esc_html( $meta['description_title'] ) : __( 'About this place', 'tourfic' ); ?></h3>
+                        <h3 class="section-heading"><?php echo ! empty( $meta['description_title'] ) ? esc_html( $meta['description_title'] ) : __( 'About this place', 'tourfic' ); ?></h3>
                         <div class="apt-description">
 							<?php the_content(); ?>
                         </div>
@@ -350,7 +350,17 @@ while ( have_posts() ) : the_post();
 												<?php endif; ?>
                                             </div>
                                             <div class="tf-apartment-room-item-content">
-												<?php echo ! empty( $room['title'] ) ? '<h3>' . esc_html( $room['title'] ) . '</h3>' : ''; ?>
+												<?php if ( ! empty( $room['title'] ) && function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
+                                                    <a href="#" class="tf-apt-room-qv" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
+                                                        <h3><?php echo esc_html( $room['title'] ) ?></h3>
+                                                    </a>
+												<?php elseif ( ! empty( $room['title'] ) ): ?>
+                                                    <h3><?php echo esc_html( $room['title'] ) ?></h3>
+												<?php endif; ?>
+                                                <p class="tf-apartment-room-item-price">
+													<?php echo ! empty( $room['price'] ) ? '<span>' . esc_html( $room['price'] ) . '</span>' : ''; ?>
+													<?php echo ! empty( $room['price_label'] ) ? '<span>' . esc_html( $room['price_label'] ) . '</span>' : ''; ?>
+                                                </p>
 												<?php echo ! empty( $room['subtitle'] ) ? '<p>' . esc_html( $room['subtitle'] ) . '</p>' : ''; ?>
                                             </div>
                                         </div>

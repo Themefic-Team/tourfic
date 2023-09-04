@@ -134,37 +134,50 @@
         width: 33.33%;
     }
 
-    .tf-key-features {
+    .tf-apt-highlights {
         @include flexbox();
         @include flex-wrap(wrap);
-        gap: 24px;
+        gap: 16px;
         padding-bottom: 24px;
         border-bottom: 1px solid $slate10;
         margin-bottom: 24px;
 
-        .tf-key-feature {
-            @include flex(0 0 calc(100% / 3 - 16px));
+        .tf-apt-highlight {
+            @include flex(0 0 calc(100% / 3 - 11px));
             border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 16px 24px;
+            border-radius: 16px;
+            padding: 16px;
             min-height: 72px;
-            @include flexbox();
-            @include flex-wrap(wrap);
-            @include align-items(center);
             box-sizing: border-box;
 
-            .tf-key-feature-icon {
+            .tf-apt-highlight-top{
+                @include flexbox();
+                @include align-items(center);
+                gap: 16px;
+                margin-bottom: 8px;
+            }
+
+            .tf-apt-highlight-icon {
                 @include flex(0 0 25px);
-                margin-right: 16px;
 
                 i {
                     font-size: 24px;
+                    color: $slate80;
                 }
             }
 
             h4 {
-                margin-bottom: 0;
-                font-size: 16px !important;
+                color: $slate80;
+                margin: 0;
+                font-size: 20px !important;
+                font-weight: 500 !important;
+            }
+
+            p{
+                color: #828C99;
+                font-size: 16px;
+                font-weight: 400;
+                margin: 0;
             }
         }
     }

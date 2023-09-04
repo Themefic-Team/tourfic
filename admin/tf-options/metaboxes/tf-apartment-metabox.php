@@ -364,19 +364,19 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'        => __( 'Highlights', 'tourfic' ),
 					'fields'       => array(
 						array(
-							'id'    => 'icon',
-							'type'  => 'icon',
-							'label' => __( 'Icon', 'tourfic' ),
-						),
-						array(
 							'id'    => 'title',
 							'type'  => 'text',
 							'label' => __( 'Title', 'tourfic' ),
 						),
 						array(
-							'id'    => 'desc',
-							'type'  => 'textarea',
-							'label' => __( 'Description', 'tourfic' ),
+							'id'    => 'icon',
+							'type'  => 'icon',
+							'label' => __( 'Icon', 'tourfic' ),
+						),
+						array(
+							'id'    => 'subtitle',
+							'type'  => 'text',
+							'label' => __( 'Subtitle', 'tourfic' ),
 						),
 					),
 				),
