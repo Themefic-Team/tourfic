@@ -300,31 +300,26 @@ while ( have_posts() ) : the_post();
                 <div class="tf-apartment-hero-wrapper">
                     <div class="tf-apartment-left">
 
-						<?php if ( isset( $meta['key_features'] ) && ! empty( tf_data_types( $meta['key_features'] ) ) ) : ?>
+						<?php if ( isset( $meta['highlights'] ) && ! empty( tf_data_types( $meta['highlights'] ) ) ) : ?>
                             <!-- Start highlights Section -->
-                            <div class="tf-key-feature-wrapper">
-								<?php if ( ! empty( $meta['key_features_title'] ) ): ?>
-                                    <h2 class="section-heading"><?php echo esc_html( $meta['key_features_title'] ) ?></h2>
+                            <div class="tf-highlights-wrapper">
+								<?php if ( ! empty( $meta['highlights_title'] ) ): ?>
+                                    <h2 class="section-heading"><?php echo esc_html( $meta['highlights_title'] ) ?></h2>
 								<?php endif; ?>
 
-                                <div class="tf-key-features">
+                                <div class="tf-highlightss">
 									<?php
-									foreach ( tf_data_types( $meta['key_features'] ) as $feature_id ) :
-										$key_feature = get_term_by( 'id', $feature_id, 'apartment_feature' );
+									foreach ( tf_data_types( $meta['highlights'] ) as $highlight ) :
+										if ( empty( $highlight['title'] ) ) {
+											continue;
+										}
 										?>
-                                        <div class="tf-key-feature">
-											<?php
-											$key_feature_meta = get_term_meta( $key_feature->term_taxonomy_id, 'tf_apartment_feature', true );
-											$f_icon_type      = ! empty( $key_feature_meta['icon-type'] ) ? $key_feature_meta['icon-type'] : '';
-											$key_feature_icon = '';
-											if ( $f_icon_type == 'icon' ) {
-												$key_feature_icon = '<i class="' . $key_feature_meta['apartment-feature-icon'] . '"></i>';
-											} elseif ( $f_icon_type == 'custom' ) {
-												$key_feature_icon = '<img src="' . esc_url( $key_feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
-											}
-											?>
-											<?php echo ! empty( $key_feature_icon ) ? "<div class='tf-key-feature-icon'> $key_feature_icon </div>" : ''; ?>
-                                            <h4><?php echo esc_html( $key_feature->name ); ?></h4>
+                                        <div class="tf-highlight">
+											<div class="tf-highlight-top">
+												<?php echo ! empty( $highlight['icon'] ) ? "<div class='tf-highlight-icon'><i class='" . esc_attr( $highlight['icon'] ) . "'></i></div>" : ''; ?>
+                                                <h4><?php echo esc_html( $highlight['title'] ); ?></h4>
+                                            </div>
+                                            <?php echo ! empty( $highlight['desc'] ) ? '<p>' . esc_html( $highlight['desc'] ) . '</p>' : ''; ?>
                                         </div>
 									<?php endforeach; ?>
                                 </div>
