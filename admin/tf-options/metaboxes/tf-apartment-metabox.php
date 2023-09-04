@@ -227,11 +227,125 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				),*/
 			),
 		),
+		//Room Management
+		'room_management' => array(
+			'title' => __( 'Room Management', 'tourfic' ),
+			'icon'  => 'fa-solid fa-bed',
+			'fields' => array(
+				array(
+					'id'    => 'room_details_title',
+					'type'  => 'text',
+					'label' => __( 'Section Title', 'tourfic' ),
+				),
+				array(
+					'id'           => 'rooms',
+					'type'         => 'repeater',
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'label'        => __( 'Rooms', 'tourfic' ),
+					'fields'       => array(
+						array(
+							'id'    => 'title',
+							'type'  => 'text',
+							'label' => __( 'Room Title', 'tourfic' ),
+						),
+						array(
+							'id'    => 'subtitle',
+							'type'  => 'text',
+							'label' => __( 'Room Subtitle', 'tourfic' ),
+						),
+						array(
+							'id'    => 'description',
+							'type'  => 'editor',
+							'label' => __( 'Room Description', 'tourfic' ),
+							'is_pro' => true,
+						),
+						array(
+							'id'    => 'thumbnail',
+							'type'  => 'image',
+							'label' => __( 'Room Thumbnail', 'tourfic' ),
+						),
+						array(
+							'id'    => 'gallery',
+							'type'  => 'gallery',
+							'label' => __( 'Room Gallery', 'tourfic' ),
+							'is_pro' => true,
+						),
+						array(
+							'id'    => 'room_type',
+							'type'  => 'select',
+							'label' => __( 'Room Type', 'tourfic' ),
+							'options' => array(
+								'bedroom'     => __( 'Bedroom', 'tourfic' ),
+								'common_room' => __( 'Common Room', 'tourfic' ),
+								'kitchen'     => __( 'Kitchen', 'tourfic' ),
+								'bathroom'    => __( 'Bathroom', 'tourfic' ),
+							),
+							'field_width' => 50,
+							'is_pro' => true,
+						),
+						array(
+							'id'          => 'footage',
+							'type'        => 'text',
+							'label'       => __( 'Room Footage', 'tourfic' ),
+							'subtitle'    => __( 'Room footage (in sft)', 'tourfic' ),
+							'field_width' => 50,
+							'is_pro' => true,
+						),
+						array(
+							'id'          => 'bed',
+							'type'        => 'number',
+							'label'       => __( 'Number of Beds', 'tourfic' ),
+							'subtitle'    => __( 'Number of beds available in the room', 'tourfic' ),
+							'attributes'  => array(
+								'min' => '0',
+							),
+							'field_width' => 50,
+							'is_pro' => true,
+						),
+						array(
+							'id'          => 'adult',
+							'type'        => 'number',
+							'label'       => __( 'Number of Adults', 'tourfic' ),
+							'subtitle'    => __( 'Max number of persons allowed in the room', 'tourfic' ),
+							'attributes'  => array(
+								'min' => '0',
+							),
+							'field_width' => 50,
+							'is_pro' => true,
+						),
+						array(
+							'id'          => 'child',
+							'type'        => 'number',
+							'label'       => __( 'Number of Children', 'tourfic' ),
+							'subtitle'    => __( 'Max number of children allowed in the room', 'tourfic' ),
+							'attributes'  => array(
+								'min' => '0',
+							),
+							'field_width' => 50,
+							'is_pro' => true,
+						),
+						array(
+							'id'          => 'infant',
+							'type'        => 'number',
+							'label'       => __( 'Number of Infants', 'tourfic' ),
+							'subtitle'    => __( 'Max number of infants allowed in the room', 'tourfic' ),
+							'attributes'  => array(
+								'min' => '0',
+							),
+							'field_width' => 50,
+							'is_pro' => true,
+						),
+					),
+				),
+			),
+		),
+
 		// Information
 		'information' => array(
 			'title'  => __( 'Informations', 'tourfic' ),
 			'icon'   => 'fa-solid fa-circle-info',
 			'fields' => array(
+				//key features
 				array(
 					'id'    => 'key_features_heading',
 					'type'  => 'heading',
@@ -244,73 +358,17 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				),
 				array(
 					'id'           => 'key_features',
-					'type'         => 'repeater',
-					'button_title' => __( 'Add New', 'tourfic' ),
+					'type'         => 'select2',
 					'label'        => __( 'Key Features', 'tourfic' ),
-					'fields'       => array(
-						array(
-							'id'    => 'title',
-							'type'  => 'text',
-							'label' => __( 'Title', 'tourfic' ),
-						),
-						array(
-							'id'    => 'icon',
-							'type'  => 'icon',
-							'label' => __( 'Icon', 'tourfic' ),
-						),
+					'options'      => 'terms',
+					'query_args'   => array(
+						'taxonomy'   => 'apartment_feature',
+						'hide_empty' => false,
 					),
+					'multiple'     => true,
 				),
-				array(
-					'id'    => 'facilities_heading',
-					'type'  => 'heading',
-					'label' => __( 'Apartment Details', 'tourfic' ),
-				),
-				array(
-					'id'    => 'facilities_title',
-					'type'  => 'text',
-					'label' => __( 'Section Title', 'tourfic' ),
-				),
-				array(
-					'id'           => 'facilities',
-					'type'         => 'repeater',
-					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'        => __( 'Apartment Rooms', 'tourfic' ),
-					'fields'       => array(
-						array(
-							'id'    => 'title',
-							'type'  => 'text',
-							'label' => __( 'Title', 'tourfic' ),
-						),
-						array(
-							'id'    => 'subtitle',
-							'type'  => 'text',
-							'label' => __( 'Sub Title', 'tourfic' ),
-						),
-						array(
-							'id'    => 'thumbnail',
-							'type'  => 'image',
-							'label' => __( 'Thumbnail', 'tourfic' ),
-						),
-						//gallery
-						array(
-							'id'    => 'gallery',
-							'type'  => 'gallery',
-							'label' => __( 'Gallery', 'tourfic' ),
-						),
-						//room type
-						array(
-							'id'      => 'room_type',
-							'type'    => 'select',
-							'label'   => __( 'Room Type', 'tourfic' ),
-							'options' => array(
-								'bedroom'     => __( 'Bedroom', 'tourfic' ),
-								'common_room' => __( 'Common Room', 'tourfic' ),
-								'kitchen'     => __( 'Kitchen', 'tourfic' ),
-								'bathroom'    => __( 'Bathroom', 'tourfic' ),
-							),
-						),
-					),
-				),
+
+				//house rules
 				array(
 					'id'    => 'house_rules_heading',
 					'type'  => 'heading',
@@ -404,6 +462,18 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			'title'  => __( 'Settings', 'tourfic' ),
 			'icon'   => 'fa-solid fa-viruses',
 			'fields' => array(
+				//description
+				array(
+					'id'      => 'description',
+					'type'    => 'heading',
+					'label'   => __( 'Description', 'tourfic' ),
+				),
+				array(
+					'id'    => 'description_title',
+					'type'  => 'text',
+					'label' => __( 'Description Title', 'tourfic' ),
+					'default' => __( 'About this place', 'tourfic' ),
+				),
 				array(
 					'id'      => 'disable_options',
 					'type'    => 'heading',

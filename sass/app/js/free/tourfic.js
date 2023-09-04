@@ -531,9 +531,9 @@
 
         /**
          * Apartment option slider
-         * @author Mirza
+         * @author Foysal
          */
-        $('.tf-apartment-option-slider-wrapper').slick({
+        $('.tf-apartment-room-slider').slick({
             dots: true,
             arrows: false,
             infinite: true,

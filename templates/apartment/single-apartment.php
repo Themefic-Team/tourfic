@@ -297,12 +297,79 @@ while ( have_posts() ) : the_post();
         <!-- Start Content & Feature Section -->
         <div class="content-feature-section">
             <div class="tf-container">
-                <div class="cf-wrapper">
-                    <div class="cf-left">
+                <div class="tf-apartment-hero-wrapper">
+                    <div class="tf-apartment-left">
+
+						<?php if ( isset( $meta['key_features'] ) && ! empty( tf_data_types( $meta['key_features'] ) ) ) : ?>
+                            <!-- Start highlights Section -->
+                            <div class="tf-key-feature-wrapper">
+								<?php if ( ! empty( $meta['key_features_title'] ) ): ?>
+                                    <h2 class="section-heading"><?php echo esc_html( $meta['key_features_title'] ) ?></h2>
+								<?php endif; ?>
+
+                                <div class="tf-key-features">
+									<?php
+									foreach ( tf_data_types( $meta['key_features'] ) as $feature_id ) :
+										$key_feature = get_term_by( 'id', $feature_id, 'apartment_feature' );
+										?>
+                                        <div class="tf-key-feature">
+											<?php
+											$key_feature_meta = get_term_meta( $key_feature->term_taxonomy_id, 'tf_apartment_feature', true );
+											$f_icon_type      = ! empty( $key_feature_meta['icon-type'] ) ? $key_feature_meta['icon-type'] : '';
+											$key_feature_icon = '';
+											if ( $f_icon_type == 'icon' ) {
+												$key_feature_icon = '<i class="' . $key_feature_meta['apartment-feature-icon'] . '"></i>';
+											} elseif ( $f_icon_type == 'custom' ) {
+												$key_feature_icon = '<img src="' . esc_url( $key_feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
+											}
+											?>
+											<?php echo ! empty( $key_feature_icon ) ? "<div class='tf-key-feature-icon'> $key_feature_icon </div>" : ''; ?>
+                                            <h4><?php echo esc_html( $key_feature->name ); ?></h4>
+                                        </div>
+									<?php endforeach; ?>
+                                </div>
+                            </div>
+						<?php endif; ?>
+
+                        <h3 class="tf-apt-desc-title"><?php echo ! empty( $meta['description_title'] ) ? esc_html( $meta['description_title'] ) : __( 'About this place', 'tourfic' ); ?></h3>
                         <div class="apt-description">
 							<?php the_content(); ?>
                         </div>
 
+						<?php if ( isset( $meta['rooms'] ) && ! empty( tf_data_types( $meta['rooms'] ) ) ) : ?>
+                            <!-- Apartment Details (Room) -->
+                            <div class="tf-apartment-rooms">
+								<?php if ( ! empty( $meta['room_details_title'] ) ): ?>
+                                    <h2 class="section-heading"><?php echo esc_html( $meta['room_details_title'] ) ?></h2>
+								<?php endif; ?>
+                                <div class="tf-apartment-room-slider">
+									<?php foreach ( tf_data_types( $meta['rooms'] ) as $key => $room ) : ?>
+                                        <div class="tf-apartment-room-item">
+                                            <div class="tf-apartment-room-item-thumb">
+												<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
+                                                    <a href="#" class="tf-apt-room-qv" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
+                                                        <img src="<?php echo esc_url( $room['thumbnail'] ) ?>" alt="room-thumbnail">
+                                                    </a>
+												<?php else: ?>
+                                                    <img src="<?php echo esc_url( $room['thumbnail'] ) ?>" alt="room-thumbnail">
+												<?php endif; ?>
+                                            </div>
+                                            <div class="tf-apartment-room-item-content">
+												<?php echo ! empty( $room['title'] ) ? '<h3>' . esc_html( $room['title'] ) . '</h3>' : ''; ?>
+												<?php echo ! empty( $room['subtitle'] ) ? '<p>' . esc_html( $room['subtitle'] ) . '</p>' : ''; ?>
+                                            </div>
+                                        </div>
+									<?php endforeach; ?>
+                                </div>
+                                <div id="tf_apt_room_details_qv" class=""></div>
+                                <!-- Loader Image -->
+                                <div id="tour_room_details_loader">
+                                    <div id="tour-room-details-loader-img">
+                                        <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                                    </div>
+                                </div>
+                            </div>
+						<?php endif; ?>
 
 						<?php if ( isset( $features ) && ! empty( $features ) ) : ?>
                             <!-- Start Key Features Section -->
@@ -323,53 +390,11 @@ while ( have_posts() ) : the_post();
                             </div>
 						<?php endif; ?>
 
-						<?php if ( isset( $meta['key_features'] ) && ! empty( tf_data_types( $meta['key_features'] ) ) ) : ?>
-                            <!-- Start Amenities Section -->
-                            <div class="key-features sp-t-50">
-								<?php if ( ! empty( $meta['key_features_title'] ) ): ?>
-                                    <h2 class="section-heading"><?php echo esc_html( $meta['key_features_title'] ) ?></h2>
-								<?php endif; ?>
 
-                                <div class="features-details amenities-details">
-                                    <ul>
-										<?php
-										foreach ( tf_data_types( $meta['key_features'] ) as $key_feature ) {
-											if ( empty( $key_feature['title'] ) ) {
-												continue;
-											}
-											$key_feature_icon = ! empty( $key_feature['icon'] ) ? '<i class="' . esc_attr( $key_feature['icon'] ) . '"  ></i>' : '';
-											echo '<li>' . $key_feature_icon . esc_html( $key_feature['title'] ) . '</li>';
-										}
-										?>
-                                    </ul>
-                                </div>
-                            </div>
-						<?php endif; ?>
-
-						<?php if ( isset( $meta['facilities'] ) && ! empty( tf_data_types( $meta['facilities'] ) ) ) : ?>
-                            <!-- Start What you will get here Section -->
-                            <div class="apartment-options sp-t-50">
-								<?php if ( ! empty( $meta['facilities_title'] ) ): ?>
-                                    <h2 class="section-heading"><?php echo esc_html( $meta['facilities_title'] ) ?></h2>
-								<?php endif; ?>
-                                <div class="tf-apartment-option-slider-wrapper">
-									<?php foreach ( tf_data_types( $meta['facilities'] ) as $facility ) : ?>
-                                        <div class="tf-apartment-option-slider-item">
-                                            <div class="tf-apartment-option-slider-content">
-                                                <img src="<?php echo esc_url( $facility['thumbnail'] ) ?>" alt="">
-                                                <div class="tf-apartment-option-slider-desc">
-													<?php echo ! empty( $facility['title'] ) ? '<h3>' . esc_html( $facility['title'] ) . '</h3>' : ''; ?>
-													<?php echo ! empty( $facility['subtitle'] ) ? '<p>' . esc_html( $facility['subtitle'] ) . '</p>' : ''; ?>
-                                                </div>
-                                            </div>
-                                        </div>
-									<?php endforeach; ?>
-                                </div>
-                            </div>
-						<?php endif; ?>
                     </div>
 
-                    <div class="cf-right">
+                    <!-- Host details -->
+                    <div class="tf-apartment-right">
                         <div class="apartment-booking-form">
 							<?php tf_apartment_single_booking_form( $comments, $disable_review_sec ); ?>
                         </div>
@@ -463,19 +488,6 @@ while ( have_posts() ) : the_post();
 			<?php endif; ?>
 		<?php endif; ?>
 
-		<?php if ( ! $disable_review_sec == 1 ) : ?>
-            <!-- Start Review Section -->
-            <div id="tf-review" class="review-section sp-50">
-                <div class="tf-container">
-                    <div class="reviews">
-                        <h2 class="section-heading"><?php _e( 'Guest Reviews', 'tourfic' ); ?></h2>
-						<?php comments_template(); ?>
-                    </div>
-                </div>
-            </div>
-            <!-- End Review Section -->
-		<?php endif; ?>
-
 		<?php if ( isset( $meta['house_rules'] ) && ! empty( tf_data_types( $meta['house_rules'] ) ) ): ?>
             <!-- Start House Rules -->
             <div class="tf-house-rules sp-50">
@@ -494,7 +506,7 @@ while ( have_posts() ) : the_post();
                         <ul class="tf-not-included-house-rules">
 							<?php
 							foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
-								if ( !isset($house_rule['include']) ) {
+								if ( ! isset( $house_rule['include'] ) ) {
 									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $house_rule['title'] ), esc_html( $house_rule['desc'] ) );
 								}
 							}
@@ -568,6 +580,18 @@ while ( have_posts() ) : the_post();
             <!-- End TOC Content -->
 		<?php endif; ?>
 
+		<?php if ( $disable_review_sec !== '1' ) : ?>
+            <!-- Start Review Section -->
+            <div id="tf-review" class="review-section sp-50">
+                <div class="tf-container">
+                    <div class="reviews">
+                        <h2 class="section-heading"><?php _e( 'Guest Reviews', 'tourfic' ); ?></h2>
+						<?php comments_template(); ?>
+                    </div>
+                </div>
+            </div>
+            <!-- End Review Section -->
+		<?php endif; ?>
 
 		<?php
 		$args              = array(
@@ -587,7 +611,7 @@ while ( have_posts() ) : the_post();
 		);
 		$related_apartment = new WP_Query( $args );
 
-		if ( ! $disable_related_sec == '1' && $related_apartment->have_posts() ) : ?>
+		if ( $disable_related_sec !== '1' && $related_apartment->have_posts() ) : ?>
             <!-- Apartment Suggestion section Start -->
             <div class="related-apartment sp-40">
                 <div class="tf-container">

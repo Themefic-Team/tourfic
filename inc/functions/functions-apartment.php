@@ -923,36 +923,46 @@ if ( ! function_exists( 'tf_apartment_archive_single_item' ) ) {
  * @author Foysal
  *
  */
-function tf_filter_apartment_by_date( $period, array &$not_found, array $data = [] ): void {
+if ( ! function_exists( 'tf_filter_apartment_by_date' ) ) {
+	function tf_filter_apartment_by_date( $period, array &$not_found, array $data = [] ): void {
 
-	// Form Data
-	if ( isset( $data[4] ) && isset( $data[5] ) ) {
-		[ $adults, $child, $infant, $check_in_out, $startprice, $endprice ] = $data;
-	} else {
-		[ $adults, $child, $infant, $check_in_out ] = $data;
-	}
+		// Form Data
+		if ( isset( $data[4] ) && isset( $data[5] ) ) {
+			[ $adults, $child, $infant, $check_in_out, $startprice, $endprice ] = $data;
+		} else {
+			[ $adults, $child, $infant, $check_in_out ] = $data;
+		}
 
-	// Get apartment meta options
-	$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+		// Get apartment meta options
+		$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
 
-	// Set initial status
-	$has_apartment = false;
+		// Set initial status
+		$has_apartment = false;
 
-	if ( ! empty( $check_in_out ) ) {
-		$booked_dates   = tf_apartment_booked_days( get_the_ID() );
-		$checkInOutDate = explode( ' - ', $check_in_out );
-		if ( $checkInOutDate[0] && $checkInOutDate[1] ) {
-			$check_in_stt  = strtotime( $checkInOutDate[0] . ' +1 day' );
-			$check_out_stt = strtotime( $checkInOutDate[1] );
-			$days          = ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1;
-			//skip apartment if min stay is grater than selected days
-			if ( ! empty( $meta['min_stay'] ) && intval( $meta['min_stay'] ) <= $days && $meta['min_stay'] != 0 ) {
-				if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
-					if ( ! empty( $child ) && ! empty( $meta['max_children'] ) ) {
-						if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
+		if ( ! empty( $check_in_out ) ) {
+			$booked_dates   = tf_apartment_booked_days( get_the_ID() );
+			$checkInOutDate = explode( ' - ', $check_in_out );
+			if ( $checkInOutDate[0] && $checkInOutDate[1] ) {
+				$check_in_stt  = strtotime( $checkInOutDate[0] . ' +1 day' );
+				$check_out_stt = strtotime( $checkInOutDate[1] );
+				$days          = ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1;
+				//skip apartment if min stay is grater than selected days
+				if ( ! empty( $meta['min_stay'] ) && intval( $meta['min_stay'] ) <= $days && $meta['min_stay'] != 0 ) {
+					if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
+						if ( ! empty( $child ) && ! empty( $meta['max_children'] ) ) {
+							if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
 
-							if ( ! empty( $infant ) && ! empty( $meta['max_infants'] ) ) {
-								if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
+								if ( ! empty( $infant ) && ! empty( $meta['max_infants'] ) ) {
+									if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
+										if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+											if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+												$has_apartment = true;
+											}
+										} else {
+											$has_apartment = true;
+										}
+									}
+								} else {
 									if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 										if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
 											$has_apartment = true;
@@ -961,58 +971,50 @@ function tf_filter_apartment_by_date( $period, array &$not_found, array $data = 
 										$has_apartment = true;
 									}
 								}
-							} else {
-								if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-									if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
-										$has_apartment = true;
-									}
-								} else {
-									$has_apartment = true;
-								}
-							}
-						}
-					} else {
-						if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-							if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
-								$has_apartment = true;
 							}
 						} else {
-							$has_apartment = true;
+							if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+								if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+									$has_apartment = true;
+								}
+							} else {
+								$has_apartment = true;
+							}
 						}
 					}
 				}
+
+				// foreach ( $booked_dates as $booked_date ) {
+				// 	$booked_from = strtotime( $booked_date['check_in'] );
+				// 	$booked_to   = strtotime( $booked_date['check_out'] );
+
+				// 	if ( $check_in_stt >= $booked_from && $check_in_stt <= $booked_to ) {
+				// 		$has_apartment = true;
+				// 	}
+				// 	if ( $check_out_stt >= $booked_from && $check_out_stt <= $booked_to ) {
+				// 		$has_apartment = true;
+				// 	}
+				// 	if ( $check_in_stt <= $booked_from && $check_out_stt >= $booked_to ) {
+				// 		$has_apartment = true;
+				// 	}
+				// }
 			}
-
-			// foreach ( $booked_dates as $booked_date ) {
-			// 	$booked_from = strtotime( $booked_date['check_in'] );
-			// 	$booked_to   = strtotime( $booked_date['check_out'] );
-
-			// 	if ( $check_in_stt >= $booked_from && $check_in_stt <= $booked_to ) {
-			// 		$has_apartment = true;
-			// 	}
-			// 	if ( $check_out_stt >= $booked_from && $check_out_stt <= $booked_to ) {
-			// 		$has_apartment = true;
-			// 	}
-			// 	if ( $check_in_stt <= $booked_from && $check_out_stt >= $booked_to ) {
-			// 		$has_apartment = true;
-			// 	}
-			// }
 		}
-	}
 
-	// Conditional apartment showing
-	if ( $has_apartment ) {
-		$not_found[] = array(
-			'post_id' => get_the_ID(),
-			'found'   => 0,
-		);
-	} else {
-		$not_found[] = array(
-			'post_id' => get_the_ID(),
-			'found'   => 1,
-		);
-	}
+		// Conditional apartment showing
+		if ( $has_apartment ) {
+			$not_found[] = array(
+				'post_id' => get_the_ID(),
+				'found'   => 0,
+			);
+		} else {
+			$not_found[] = array(
+				'post_id' => get_the_ID(),
+				'found'   => 1,
+			);
+		}
 
+	}
 }
 
 /**
@@ -1026,27 +1028,37 @@ function tf_filter_apartment_by_date( $period, array &$not_found, array $data = 
  * @author Foysal
  *
  */
-function tf_filter_apartment_without_date( $period, array &$not_found, array $data = [] ): void {
+if ( ! function_exists( 'tf_filter_apartment_without_date' ) ) {
+	function tf_filter_apartment_without_date( $period, array &$not_found, array $data = [] ): void {
 
-	// Form Data
-	if ( isset( $data[4] ) && isset( $data[5] ) ) {
-		[ $adults, $child, $infant, $check_in_out, $startprice, $endprice ] = $data;
-	} else {
-		[ $adults, $child, $infant, $check_in_out ] = $data;
-	}
+		// Form Data
+		if ( isset( $data[4] ) && isset( $data[5] ) ) {
+			[ $adults, $child, $infant, $check_in_out, $startprice, $endprice ] = $data;
+		} else {
+			[ $adults, $child, $infant, $check_in_out ] = $data;
+		}
 
-	// Get apartment meta options
-	$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+		// Get apartment meta options
+		$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
 
-	// Set initial status
-	$has_apartment = false;
+		// Set initial status
+		$has_apartment = false;
 
-	if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
-		if ( ! empty( $child ) && ! empty( $meta['max_children'] ) ) {
-			if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
+		if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
+			if ( ! empty( $child ) && ! empty( $meta['max_children'] ) ) {
+				if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
 
-				if ( ! empty( $infant ) && ! empty( $meta['max_infants'] ) ) {
-					if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
+					if ( ! empty( $infant ) && ! empty( $meta['max_infants'] ) ) {
+						if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
+							if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+								if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+									$has_apartment = true;
+								}
+							} else {
+								$has_apartment = true;
+							}
+						}
+					} else {
 						if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 							if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
 								$has_apartment = true;
@@ -1055,41 +1067,33 @@ function tf_filter_apartment_without_date( $period, array &$not_found, array $da
 							$has_apartment = true;
 						}
 					}
-				} else {
-					if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-						if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
-							$has_apartment = true;
-						}
-					} else {
-						$has_apartment = true;
-					}
-				}
-			}
-		} else {
-			if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-				if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
-					$has_apartment = true;
 				}
 			} else {
-				$has_apartment = true;
+				if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
+					if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
+						$has_apartment = true;
+					}
+				} else {
+					$has_apartment = true;
+				}
 			}
 		}
+
+
+		// Conditional apartment showing
+		if ( $has_apartment ) {
+			$not_found[] = array(
+				'post_id' => get_the_ID(),
+				'found'   => 0,
+			);
+		} else {
+			$not_found[] = array(
+				'post_id' => get_the_ID(),
+				'found'   => 1,
+			);
+		}
+
 	}
-
-
-	// Conditional apartment showing
-	if ( $has_apartment ) {
-		$not_found[] = array(
-			'post_id' => get_the_ID(),
-			'found'   => 0,
-		);
-	} else {
-		$not_found[] = array(
-			'post_id' => get_the_ID(),
-			'found'   => 1,
-		);
-	}
-
 }
 
 /**
@@ -1188,45 +1192,255 @@ if ( ! function_exists( 'get_apartment_min_max_price' ) ) {
 
 /**
  * Apartment host rating
+ *
+ * @param $author_id
+ *
+ * @author Foysal
  */
-function tf_apartment_host_rating( $author_id ) {
-	$author_posts = get_posts( array(
-		'author'         => $author_id,
-		'post_type'      => 'tf_apartment',
-		'post_status'    => 'publish',
-		'posts_per_page' => - 1,
-	) );
-
-	//get post comments
-	$comments_array = array();
-	foreach ( $author_posts as $author_post ) {
-		$comments_array[] = get_comments( array(
-			'post_id' => $author_post->ID,
-			'status'  => 'approve',
+if ( ! function_exists( 'tf_apartment_host_rating' ) ) {
+	function tf_apartment_host_rating( $author_id ) {
+		$author_posts = get_posts( array(
+			'author'         => $author_id,
+			'post_type'      => 'tf_apartment',
+			'post_status'    => 'publish',
+			'posts_per_page' => - 1,
 		) );
-	}
 
-	$total_comment_rating = [];
-	$comment_count        = 0;
-	foreach ( $comments_array as $comments ) {
-		if ( ! empty( $comments ) ) {
-			$total_comment_rating[] = tf_total_avg_rating( $comments );
+		//get post comments
+		$comments_array = array();
+		foreach ( $author_posts as $author_post ) {
+			$comments_array[] = get_comments( array(
+				'post_id' => $author_post->ID,
+				'status'  => 'approve',
+			) );
 		}
-		$comment_count += count( $comments );
-	}
 
-	if ( $comments ) {
-		ob_start();
-		?>
-        <div class="tf-host-rating-wrapper">
-            <i class="fas fa-star"></i>
-            <div class="tf-host-rating">
-				<?php echo tf_average_ratings( array_values( $total_comment_rating ?? [] ) ); ?>
+		$total_comment_rating = [];
+		$comment_count        = 0;
+		foreach ( $comments_array as $comments ) {
+			if ( ! empty( $comments ) ) {
+				$total_comment_rating[] = tf_total_avg_rating( $comments );
+			}
+			$comment_count += count( $comments );
+		}
+
+		if ( $comments ) {
+			ob_start();
+			?>
+            <div class="tf-host-rating-wrapper">
+                <i class="fas fa-star"></i>
+                <div class="tf-host-rating">
+					<?php echo tf_average_ratings( array_values( $total_comment_rating ?? [] ) ); ?>
+                </div>
+                <h6>(<?php tf_based_on_text( $comment_count ); ?>)</h6>
             </div>
-            <h6>(<?php tf_based_on_text( $comment_count ); ?>)</h6>
-        </div>
 
-		<?php
-		echo ob_get_clean();
+			<?php
+			echo ob_get_clean();
+		}
 	}
+}
+
+/**
+ * Apartment room quick view
+ * @author Foysal
+ */
+if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
+	function tf_apartment_room_quick_view() {
+		?>
+        <div class="tf-hotel-quick-view" style="display: flex">
+			<?php
+			$meta  = get_post_meta( sanitize_text_field( $_POST['post_id'] ), 'tf_apartment_opt', true );
+			$rooms = ! empty( $meta['rooms'] ) ? $meta['rooms'] : '';
+
+			if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
+				$tf_apartment_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+				}, $rooms );
+				$rooms                    = unserialize( $tf_apartment_rooms_value );
+			}
+			foreach ( $rooms as $key => $room ) :
+				if ( $key == sanitize_text_field( $_POST['id'] ) ):
+					$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
+					?>
+                    <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
+						<?php
+						if ( $tf_room_gallery ) {
+							$tf_room_gallery_ids = explode( ',', $tf_room_gallery );
+						}
+						?>
+
+                        <div class="tf-details-qc-slider tf-details-qc-slider-single">
+							<?php
+							if ( ! empty( $tf_room_gallery_ids ) ) {
+								foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
+									?>
+                                    <div class="tf-details-qcs">
+										<?php
+										$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+										echo '<img src="' . $image_url . '" alt="">';
+										?>
+                                    </div>
+								<?php }
+							} ?>
+                        </div>
+                        <div class="tf-details-qc-slider tf-details-qc-slider-nav">
+							<?php
+							if ( ! empty( $tf_room_gallery_ids ) ) {
+								foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
+									?>
+                                    <div class="tf-details-qcs">
+										<?php
+										$image_url = wp_get_attachment_url( $gallery_item_id, 'thumbnail' );
+										echo '<img src="' . $image_url . '" alt="">';
+										?>
+                                    </div>
+								<?php }
+							} ?>
+                        </div>
+
+                        <script>
+                            jQuery('.tf-details-qc-slider-single').slick({
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                                arrows: true,
+                                fade: false,
+                                adaptiveHeight: true,
+                                infinite: true,
+                                useTransform: true,
+                                speed: 400,
+                                cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
+                            });
+
+                            jQuery('.tf-details-qc-slider-nav')
+                                .on('init', function (event, slick) {
+                                    jQuery('.tf-details-qc-slider-nav .slick-slide.slick-current').addClass('is-active');
+                                })
+                                .slick({
+                                    slidesToShow: 7,
+                                    slidesToScroll: 7,
+                                    dots: false,
+                                    focusOnSelect: false,
+                                    infinite: false,
+                                    responsive: [{
+                                        breakpoint: 1024,
+                                        settings: {
+                                            slidesToShow: 5,
+                                            slidesToScroll: 5,
+                                        }
+                                    }, {
+                                        breakpoint: 640,
+                                        settings: {
+                                            slidesToShow: 4,
+                                            slidesToScroll: 4,
+                                        }
+                                    }, {
+                                        breakpoint: 420,
+                                        settings: {
+                                            slidesToShow: 3,
+                                            slidesToScroll: 3,
+                                        }
+                                    }]
+                                });
+
+                            jQuery('.tf-details-qc-slider-single').on('afterChange', function (event, slick, currentSlide) {
+                                jQuery('.tf-details-qc-slider-nav').slick('slickGoTo', currentSlide);
+                                var currrentNavSlideElem = '.tf-details-qc-slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
+                                jQuery('.tf-details-qc-slider-nav .slick-slide.is-active').removeClass('is-active');
+                                jQuery(currrentNavSlideElem).addClass('is-active');
+                            });
+
+                            jQuery('.tf-details-qc-slider-nav').on('click', '.slick-slide', function (event) {
+                                event.preventDefault();
+                                var goToSingleSlide = jQuery(this).data('slick-index');
+
+                                jQuery('.tf-details-qc-slider-single').slick('slickGoTo', goToSingleSlide);
+                            });
+                        </script>
+
+                    </div>
+                    <div class="tf-hotel-details-info" style="width:440px; padding-left: 35px;max-height: 470px;padding-top: 25px; overflow-y: auto;">
+						<?php
+						$footage      = ! empty( $room['footage'] ) ? $room['footage'] : '';
+						$bed          = ! empty( $room['bed'] ) ? $room['bed'] : '';
+						$adult_number = ! empty( $room['adult'] ) ? $room['adult'] : '0';
+						$child_number = ! empty( $room['child'] ) ? $room['child'] : '0';
+						$infant_number = ! empty( $room['infant'] ) ? $room['infant'] : '0';
+						?>
+                        <h3><?php echo esc_html( $room['title'] ); ?></h3>
+                        <p><?php echo $room['description']; ?></p>
+                        <div class="tf-room-title description">
+							<?php if ( $footage ) { ?>
+                                <div class="tf-tooltip tf-d-ib">
+                                    <div class="room-detail-icon">
+                                        <span class="room-icon-wrap"><i class="fas fa-ruler-combined"></i></span>
+                                        <span class="icon-text tf-d-b"><?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></span>
+                                    </div>
+                                    <div class="tf-top">
+										<?php _e( 'Room Footage', 'tourfic' ); ?>
+                                        <i class="tool-i"></i>
+                                    </div>
+                                </div>
+							<?php }
+							if ( $bed ) { ?>
+                                <div class="tf-tooltip tf-d-ib">
+                                    <div class="room-detail-icon">
+                                        <span class="room-icon-wrap"><i class="fas fa-bed"></i></span>
+                                        <span class="icon-text tf-d-b">x<?php echo $bed; ?></span>
+                                    </div>
+                                    <div class="tf-top">
+										<?php _e( 'Number of Beds', 'tourfic' ); ?>
+                                        <i class="tool-i"></i>
+                                    </div>
+                                </div>
+							<?php } ?>
+	                        <?php if ( $adult_number ) { ?>
+                                <div class="tf-tooltip tf-d-ib">
+                                    <div class="room-detail-icon">
+                                        <span class="room-icon-wrap"><i class="fas fa-male"></i><i class="fas fa-female"></i></span>
+                                        <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
+                                    </div>
+                                    <div class="tf-top">
+				                        <?php _e( 'Number of Adults', 'tourfic' ); ?>
+                                        <i class="tool-i"></i>
+                                    </div>
+                                </div>
+	                        <?php }
+	                        if ( $child_number ) { ?>
+                                <div class="tf-tooltip tf-d-ib">
+                                    <div class="room-detail-icon">
+                                        <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
+                                        <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
+                                    </div>
+                                    <div class="tf-top">
+				                        <?php _e( 'Number of Children', 'tourfic' ); ?>
+                                        <i class="tool-i"></i>
+                                    </div>
+                                </div>
+	                        <?php }
+	                        if ( $infant_number ) { ?>
+                                <div class="tf-tooltip tf-d-ib">
+                                    <div class="room-detail-icon">
+                                        <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
+                                        <span class="icon-text tf-d-b">x<?php echo $infant_number; ?></span>
+                                    </div>
+                                    <div class="tf-top">
+				                        <?php _e( 'Number of Infants', 'tourfic' ); ?>
+                                        <i class="tool-i"></i>
+                                    </div>
+                                </div>
+	                        <?php } ?>
+                        </div>
+                    </div>
+				<?php
+				endif;
+			endforeach;
+			?>
+        </div>
+		<?php
+		wp_die();
+	}
+
+	add_action( 'wp_ajax_tf_apt_room_details_qv', 'tf_apartment_room_quick_view' );
+	add_action( 'wp_ajax_nopriv_tf_apt_room_details_qv', 'tf_apartment_room_quick_view' );
 }
