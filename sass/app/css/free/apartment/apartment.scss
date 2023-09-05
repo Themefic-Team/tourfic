@@ -224,6 +224,8 @@
 
     /* Rooms */
     .tf-apartment-rooms {
+        margin-bottom: 48px;
+
         .slick-track{
             margin: 0 !important;
         }
@@ -232,8 +234,12 @@
             z-index: 999;
         }
 
+        .slick-dotted.slick-slider{
+            margin-bottom: 0;
+            padding-bottom: 40px;
+        }
         .slick-dots {
-            bottom: -40px;
+            bottom: 0;
 
             li {
                 width: 16px;
@@ -315,7 +321,7 @@
     }
 }
 #tf_apt_room_details_qv {
-    padding: 32px;
+    //padding: 32px;
 
     .room-detail-icon .icon-text{
         margin-top: 5px;

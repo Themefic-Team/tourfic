@@ -14,7 +14,7 @@ TF_Settings::option( 'tf_settings', array(
 	'position' => 25,
 	'sections' => array(
 		'general'            => array(
-			'title'  => esc_html__( 'General', 'tourfic' ),
+			'title'  => __( 'General', 'tourfic' ),
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
@@ -345,12 +345,12 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		'hotel_option'       => array(
-			'title'  => esc_html__( 'Hotel Options', 'tourfic' ),
+			'title'  => __( 'Hotel Options', 'tourfic' ),
 			'icon'   => 'fas fa-hotel',
 			'fields' => array(),
 		),
 		'single_page'   => array(
-			'title'  => esc_html__( 'Single Page', 'tourfic' ),
+			'title'  => __( 'Single Page', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
@@ -395,7 +395,7 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		'room_config'        => array(
-			'title'  => esc_html__( 'Room Config', 'tourfic' ),
+			'title'  => __( 'Room Config', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
@@ -426,7 +426,7 @@ TF_Settings::option( 'tf_settings', array(
 		),
 		// Hotel service Popup
 		'payment_popup'      => array(
-			'title'  => esc_html__( 'Popup Settings', 'tourfic' ),
+			'title'  => __( 'Popup Settings', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
@@ -461,12 +461,12 @@ TF_Settings::option( 'tf_settings', array(
 
 		//Apartment Options
 		'apartment_option'      => array(
-			'title'  => esc_html__( 'Apartment Options', 'tourfic' ),
+			'title'  => __( 'Apartment Options', 'tourfic' ),
 			'icon'   => 'fa-solid fa-house-chimney',
 			'fields' => array(),
 		),
 		'apartment_single_page' => array(
-			'title'  => esc_html__( 'Single Page', 'tourfic' ),
+			'title'  => __( 'Single Page', 'tourfic' ),
 			'parent' => 'apartment_option',
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
@@ -474,6 +474,20 @@ TF_Settings::option( 'tf_settings', array(
 					'id'    => 'label_off_heading',
 					'type'  => 'heading',
 					'label' => __( 'Single Apartment Settings', 'tourfic' ),
+				),
+
+				array(
+					'id' => 'amenities_cats',
+					'type' => 'repeater',
+					'label' => __( 'Amenities Categories', 'tourfic' ),
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'fields' => array(
+						array(
+							'id' => 'amenities_cat_name',
+							'type' => 'text',
+							'label' => __( 'Category Name', 'tourfic' ),
+						),
+					),
 				),
 
 				array(
@@ -512,7 +526,7 @@ TF_Settings::option( 'tf_settings', array(
 			'fields' => array(),
 		),
 		'single_tour'        => array(
-			'title'  => esc_html__( 'Single Page', 'tourfic' ),
+			'title'  => __( 'Single Page', 'tourfic' ),
 			'parent' => 'tour',
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
@@ -609,7 +623,7 @@ TF_Settings::option( 'tf_settings', array(
 		),
 		// Partial Payment Popup
 		'tour_payment_popup' => array(
-			'title'  => esc_html__( 'Partial Payment', 'tourfic' ),
+			'title'  => __( 'Partial Payment', 'tourfic' ),
 			'parent' => 'tour',
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
@@ -657,7 +671,7 @@ TF_Settings::option( 'tf_settings', array(
 		),
 		// Itinerary Settings
 		'tour_itinerary'     => array(
-			'title'  => esc_html__( 'Itinerary Settings', 'tourfic' ),
+			'title'  => __( 'Itinerary Settings', 'tourfic' ),
 			'parent' => 'tour',
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
@@ -948,7 +962,7 @@ TF_Settings::option( 'tf_settings', array(
 		),
 		// Without Payment Popup
 		'without_payment_book' => array(
-			'title'  => esc_html__( 'Without Payment', 'tourfic' ),
+			'title'  => __( 'Without Payment', 'tourfic' ),
 			'parent' => 'tour',
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
@@ -1271,7 +1285,7 @@ TF_Settings::option( 'tf_settings', array(
 		),
 		//Frontend Dashboard
 		'frontend_dashboard' => array(
-			'title'  => esc_html__( 'Frontend Dashboard', 'tourfic' ),
+			'title'  => __( 'Frontend Dashboard', 'tourfic' ),
 			'icon'   => 'fa-solid fa-gauge-high',
 			'fields' => array(
 				//logo
@@ -1455,7 +1469,7 @@ TF_Settings::option( 'tf_settings', array(
 		),
 		// Multi Vendor
 		'vendor'             => array(
-			'title'  => esc_html__( 'Multi Vendor', 'tourfic' ),
+			'title'  => __( 'Multi Vendor', 'tourfic' ),
 			'icon'   => 'fa fa-handshake',
 			'fields' => array(
 				array(
@@ -3313,7 +3327,7 @@ TF_Settings::option( 'tf_settings', array(
 		),
 
 		'emails'    => array(
-			'title'  => esc_html__( 'Emails', 'tourfic' ),
+			'title'  => __( 'Emails', 'tourfic' ),
 			'icon'   => 'fa fa-envelope-o',
 			'fields' => array(
 				array(
@@ -3533,7 +3547,7 @@ TF_Settings::option( 'tf_settings', array(
 
 		//QR Code settings
 		'qr_code'    => array(
-			'title'  => esc_html__( 'QR Code', 'tourfic' ),
+			'title'  => __( 'QR Code', 'tourfic' ),
 			'icon'   => 'fa fa-qrcode',
 			'fields' => array(
 				array(

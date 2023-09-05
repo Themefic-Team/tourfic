@@ -5609,14 +5609,21 @@ div#tf-contact-info {
 .tf-apartment .apt-description {
   margin-bottom: 48px;
 }
+.tf-apartment .tf-apartment-rooms {
+  margin-bottom: 48px;
+}
 .tf-apartment .tf-apartment-rooms .slick-track {
   margin: 0 !important;
 }
 .tf-apartment .tf-apartment-rooms .slick-arrow {
   z-index: 999;
 }
+.tf-apartment .tf-apartment-rooms .slick-dotted.slick-slider {
+  margin-bottom: 0;
+  padding-bottom: 40px;
+}
 .tf-apartment .tf-apartment-rooms .slick-dots {
-  bottom: -40px;
+  bottom: 0;
 }
 .tf-apartment .tf-apartment-rooms .slick-dots li {
   width: 16px;
@@ -5680,9 +5687,6 @@ div#tf-contact-info {
   margin: 0;
 }
 
-#tf_apt_room_details_qv {
-  padding: 32px;
-}
 #tf_apt_room_details_qv .room-detail-icon .icon-text {
   margin-top: 5px;
 }

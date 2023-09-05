@@ -378,7 +378,7 @@ while ( have_posts() ) : the_post();
 
 						<?php if ( isset( $features ) && ! empty( $features ) ) : ?>
                             <!-- Start Key Features Section -->
-                            <div class="apartment-amenities sp-t-40">
+                            <div class="apartment-amenities">
                                 <h2 class="section-heading"><?php _e( 'Amenities', 'tourfic' ) ?></h2>
                                 <ul>
 									<?php foreach ( $features as $feature ):
@@ -394,10 +394,7 @@ while ( have_posts() ) : the_post();
                                 </ul>
                             </div>
 						<?php endif; ?>
-
-
                     </div>
-
                     <!-- Host details -->
                     <div class="tf-apartment-right">
                         <div class="apartment-booking-form">
@@ -440,7 +437,7 @@ while ( have_posts() ) : the_post();
 		<?php if ( defined( 'TF_PRO' ) ): ?>
 			<?php if ( ! empty( $map['address'] ) || isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
                 <!-- Map Section Start -->
-                <div id="apartment-map" class="tf-apartment-map-wrapper sp-t-70">
+                <div id="apartment-map" class="tf-apartment-map-wrapper">
                     <div class="tf-container">
                         <div class="tf-row">
                             <div class="tf-map-content-wrapper">
@@ -495,9 +492,9 @@ while ( have_posts() ) : the_post();
 
 		<?php if ( isset( $meta['house_rules'] ) && ! empty( tf_data_types( $meta['house_rules'] ) ) ): ?>
             <!-- Start House Rules -->
-            <div class="tf-house-rules sp-50">
+            <div class="tf-house-rules">
                 <div class="tf-container">
-                    <h3 class="section-heading"><?php _e( 'House Rules', 'tourfic' ); ?></h3>
+                    <h3 class="section-heading"><?php !empty($meta['house_rules_title']) ? esc_html_e( $meta['house_rules_title'] ) : _e( 'House Rules', 'tourfic' ); ?></h3>
                     <div class="tf-house-rules-wrapper">
                         <ul class="tf-included-house-rules">
 							<?php
@@ -525,7 +522,7 @@ while ( have_posts() ) : the_post();
 
 		<?php if ( isset( $meta['faq'] ) && ! empty( tf_data_types( $meta['faq'] ) ) ): ?>
             <!-- FAQ section Start -->
-            <div class="tf-faq-wrapper tf-apartment-faq sp-30">
+            <div class="tf-faq-wrapper tf-apartment-faq">
                 <div class="tf-container">
                     <div class="tf-faq-sec-title">
 						<?php echo ! empty( $meta['faq_title'] ) ? '<h2 class="section-heading">' . esc_html( $meta['faq_title'] ) . '</h2>' : ''; ?>
@@ -553,7 +550,7 @@ while ( have_posts() ) : the_post();
 		<?php endif; ?>
 
         <!-- Start Question Content -->
-        <div class="tf-ask-question apartment-question sp-40">
+        <div class="tf-ask-question apartment-question">
             <div class="tf-container">
                 <div class="apartment-qa-wrapper">
                     <div class="question-left">
@@ -572,7 +569,7 @@ while ( have_posts() ) : the_post();
 
 		<?php if ( ! empty( $meta['terms_and_conditions'] ) ) : ?>
             <!-- Start TOC Content -->
-            <div class="toc-section apartment-toc sp-50">
+            <div class="toc-section apartment-toc">
                 <div class="tf-container">
                     <div class="tf-toc-wrap gray-wrap">
 						<?php echo ! empty( $meta['terms_title'] ) ? '<h2 class="section-heading">' . esc_html( $meta['terms_title'] ) . '</h2>' : ''; ?>
@@ -587,7 +584,7 @@ while ( have_posts() ) : the_post();
 
 		<?php if ( $disable_review_sec !== '1' ) : ?>
             <!-- Start Review Section -->
-            <div id="tf-review" class="review-section sp-50">
+            <div id="tf-review" class="review-section">
                 <div class="tf-container">
                     <div class="reviews">
                         <h2 class="section-heading"><?php _e( 'Guest Reviews', 'tourfic' ); ?></h2>
@@ -618,7 +615,7 @@ while ( have_posts() ) : the_post();
 
 		if ( $disable_related_sec !== '1' && $related_apartment->have_posts() ) : ?>
             <!-- Apartment Suggestion section Start -->
-            <div class="related-apartment sp-40">
+            <div class="related-apartment">
                 <div class="tf-container">
                     <h2 class="section-heading"><?php _e( 'Related Properties', 'tourfic' ); ?></h2>
                     <div class="tf-related-apartment-slider">

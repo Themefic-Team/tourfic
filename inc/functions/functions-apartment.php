@@ -165,6 +165,7 @@ function tf_apartment_taxonomies_register() {
 		"rewrite"               => [ 'slug' => $apartment_feature_slug, 'with_front' => true ],
 		"show_admin_column"     => true,
 		"show_in_rest"          => true,
+		'meta_box_cb'           => false,
 		"rest_base"             => "apartment_feature",
 		"rest_controller_class" => "WP_REST_Terms_Controller",
 		"show_in_quick_edit"    => true,
@@ -1361,10 +1362,10 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
                     </div>
                     <div class="tf-hotel-details-info" style="width:440px; padding-left: 35px;max-height: 470px;padding-top: 25px; overflow-y: auto;">
 						<?php
-						$footage      = ! empty( $room['footage'] ) ? $room['footage'] : '';
-						$bed          = ! empty( $room['bed'] ) ? $room['bed'] : '';
-						$adult_number = ! empty( $room['adult'] ) ? $room['adult'] : '0';
-						$child_number = ! empty( $room['child'] ) ? $room['child'] : '0';
+						$footage       = ! empty( $room['footage'] ) ? $room['footage'] : '';
+						$bed           = ! empty( $room['bed'] ) ? $room['bed'] : '';
+						$adult_number  = ! empty( $room['adult'] ) ? $room['adult'] : '0';
+						$child_number  = ! empty( $room['child'] ) ? $room['child'] : '0';
 						$infant_number = ! empty( $room['infant'] ) ? $room['infant'] : '0';
 						?>
                         <h3><?php echo esc_html( $room['title'] ); ?></h3>
@@ -1394,42 +1395,42 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
                                     </div>
                                 </div>
 							<?php } ?>
-	                        <?php if ( $adult_number ) { ?>
+							<?php if ( $adult_number ) { ?>
                                 <div class="tf-tooltip tf-d-ib">
                                     <div class="room-detail-icon">
                                         <span class="room-icon-wrap"><i class="fas fa-male"></i><i class="fas fa-female"></i></span>
                                         <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
                                     </div>
                                     <div class="tf-top">
-				                        <?php _e( 'Number of Adults', 'tourfic' ); ?>
+										<?php _e( 'Number of Adults', 'tourfic' ); ?>
                                         <i class="tool-i"></i>
                                     </div>
                                 </div>
-	                        <?php }
-	                        if ( $child_number ) { ?>
+							<?php }
+							if ( $child_number ) { ?>
                                 <div class="tf-tooltip tf-d-ib">
                                     <div class="room-detail-icon">
                                         <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
                                         <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                                     </div>
                                     <div class="tf-top">
-				                        <?php _e( 'Number of Children', 'tourfic' ); ?>
+										<?php _e( 'Number of Children', 'tourfic' ); ?>
                                         <i class="tool-i"></i>
                                     </div>
                                 </div>
-	                        <?php }
-	                        if ( $infant_number ) { ?>
+							<?php }
+							if ( $infant_number ) { ?>
                                 <div class="tf-tooltip tf-d-ib">
                                     <div class="room-detail-icon">
                                         <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
                                         <span class="icon-text tf-d-b">x<?php echo $infant_number; ?></span>
                                     </div>
                                     <div class="tf-top">
-				                        <?php _e( 'Number of Infants', 'tourfic' ); ?>
+										<?php _e( 'Number of Infants', 'tourfic' ); ?>
                                         <i class="tool-i"></i>
                                     </div>
                                 </div>
-	                        <?php } ?>
+							<?php } ?>
                         </div>
                     </div>
 				<?php
@@ -1443,4 +1444,34 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 
 	add_action( 'wp_ajax_tf_apt_room_details_qv', 'tf_apartment_room_quick_view' );
 	add_action( 'wp_ajax_nopriv_tf_apt_room_details_qv', 'tf_apartment_room_quick_view' );
+}
+
+/**
+ * Assign taxonomy(tour_type) from the single post metabox
+ * to a Tour when updated or published
+ * @return array();
+ * @author Foysal
+ * @since 2.9.23
+ */
+if ( ! function_exists( 'tf_apartment_feature_assign_taxonomies' ) ) {
+	add_action( 'wp_after_insert_post', 'tf_apartment_feature_assign_taxonomies', 100, 3 );
+	function tf_apartment_feature_assign_taxonomies( $post_id, $post, $old_status ) {
+
+		$meta      = get_post_meta( $post_id, 'tf_apartment_opt', true );
+		$amenities = ! empty( $meta['amenities'] ) ? $meta['amenities'] : '';
+
+		if ( ! empty( $amenities ) && gettype( $amenities ) == "string" ) {
+			$tf_apartment_amenities_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+				return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+			}, $amenities );
+			$amenities                    = unserialize( $tf_apartment_amenities_value );
+		}
+		if ( ! empty( $amenities ) ) {
+			$apartment_features = array();
+			foreach ( $amenities as $amenity ) {
+				$apartment_features[] = intval( $amenity['feature'] );
+			}
+			wp_set_object_terms( $post_id, $apartment_features, 'apartment_feature' );
+		}
+	}
 }
