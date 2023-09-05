@@ -1243,7 +1243,7 @@ function tf_single_tour_booking_form( $post_id ) {
             <select class="tf-field" name="check-in-time" id="check-in-time" style="min-width: 100px;"></select>
         </div>
         <?php } ?>
-        
+
         <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
         <script>
             (function ($) {
@@ -2728,7 +2728,9 @@ add_action( 'admin_footer-post-new.php', 'tf_tours_custom_status_add_in_post_pag
 
 add_action( 'wp_after_insert_post', 'tf_tour_features_assign_taxonomies', 100, 3 );
 function tf_tour_features_assign_taxonomies( $post_id, $post, $old_status ) {
-
+	if ( 'tf_tours' !== $post->post_type ) {
+		return;
+	}
 	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
 	if ( ! empty( $meta['features'] ) && is_array( $meta['features'] ) ) {
 		$features = array_map( 'intval', $meta['features'] );
@@ -2747,7 +2749,9 @@ function tf_tour_features_assign_taxonomies( $post_id, $post, $old_status ) {
 
 add_action( 'wp_after_insert_post', 'tf_tour_type_assign_taxonomies', 100, 3 );
 function tf_tour_type_assign_taxonomies( $post_id, $post, $old_status ) {
-
+	if ( 'tf_tours' !== $post->post_type ) {
+		return;
+	}
 	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
 	if ( ! empty( $meta['tour_types'] ) && is_array( $meta['tour_types'] ) ) {
 		$tour_types = array_map( 'intval', $meta['tour_types'] );

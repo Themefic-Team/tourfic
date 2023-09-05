@@ -1254,13 +1254,7 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 			$meta  = get_post_meta( sanitize_text_field( $_POST['post_id'] ), 'tf_apartment_opt', true );
 			$rooms = ! empty( $meta['rooms'] ) ? $meta['rooms'] : '';
 
-			if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
-				$tf_apartment_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-				}, $rooms );
-				$rooms                    = unserialize( $tf_apartment_rooms_value );
-			}
-			foreach ( $rooms as $key => $room ) :
+			foreach ( tf_data_types($meta['rooms'] ) as $key => $room ) :
 				if ( $key == sanitize_text_field( $_POST['id'] ) ):
 					$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 					?>
@@ -1456,19 +1450,13 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 if ( ! function_exists( 'tf_apartment_feature_assign_taxonomies' ) ) {
 	add_action( 'wp_after_insert_post', 'tf_apartment_feature_assign_taxonomies', 100, 3 );
 	function tf_apartment_feature_assign_taxonomies( $post_id, $post, $old_status ) {
-
-		$meta      = get_post_meta( $post_id, 'tf_apartment_opt', true );
-		$amenities = ! empty( $meta['amenities'] ) ? $meta['amenities'] : '';
-
-		if ( ! empty( $amenities ) && gettype( $amenities ) == "string" ) {
-			$tf_apartment_amenities_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-				return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-			}, $amenities );
-			$amenities                    = unserialize( $tf_apartment_amenities_value );
-		}
-		if ( ! empty( $amenities ) ) {
+        if ( 'tf_apartment' !== $post->post_type ) {
+            return;
+        }
+		$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
+		if ( ! empty( tf_data_types( $meta['amenities'] ) ) ) {
 			$apartment_features = array();
-			foreach ( $amenities as $amenity ) {
+			foreach ( tf_data_types( $meta['amenities'] ) as $amenity ) {
 				$apartment_features[] = intval( $amenity['feature'] );
 			}
 			wp_set_object_terms( $post_id, $apartment_features, 'apartment_feature' );

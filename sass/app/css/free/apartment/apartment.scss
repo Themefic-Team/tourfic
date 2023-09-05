@@ -182,46 +182,6 @@
         }
     }
 
-    .apartment-amenities {
-
-        ul {
-            background: $slate0;
-            border: 1px solid $slate5;
-            border-radius: 8px;
-            padding: 20px 30px;
-            margin: 0;
-            @include flexbox();
-            @include flex-wrap(wrap);
-
-            li {
-                list-style: none;
-                @include flexbox();
-                @include align-items(center);
-                @include flex(0 0 calc(100% / 3 - 11px));
-                margin-right: 16px;
-                border-bottom: 1px solid $slate10;
-                padding: 12px 0;
-
-                i, img {
-                    margin-right: 12px;
-                    min-width: 18px;
-                }
-
-                &:nth-child(3n) {
-                    margin-right: 0;
-                }
-
-                &:nth-last-child(-n+3) {
-                    border-bottom: none;
-                }
-            }
-        }
-    }
-
-    .apt-description {
-        margin-bottom: 48px;
-    }
-
     /* Rooms */
     .tf-apartment-rooms {
         margin-bottom: 48px;
@@ -318,6 +278,59 @@
                 }
             }
         }
+    }
+
+    .tf-apartment-amenities-section{
+        margin-bottom: 48px;
+
+        .tf-apartment-amenities {
+            @include flexbox();
+            @include flex-wrap(wrap);
+            gap: 16px;
+            margin-bottom: 24px;
+
+            .tf-apt-amenity{
+                @include flex(0 0 calc(100% / 2 - 11px));
+                @include flexbox();
+                gap: 16px;
+                margin-bottom: 5px;
+
+                .tf-apt-amenity-icon {
+                    @include flexbox();
+                    @include align-items(center);
+                    @include flex(0 0 24px);
+                    height: 24px;
+
+                    i {
+                        font-size: 24px;
+                        color: $slate80;
+                    }
+                }
+            }
+        }
+    }
+
+    #tf-amenities-modal h2.section-heading{
+        margin-bottom: 24px;
+    }
+    .tf-apartment-amenity-cat{
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 24px;
+
+        &:last-child{
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        h3{
+            font-size: 20px !important;
+            color: $slate80;
+            margin-bottom: 16px;
+        }
+    }
+
+    .apt-description {
+        margin-bottom: 48px;
     }
 }
 #tf_apt_room_details_qv {
@@ -485,10 +498,6 @@
     padding-top: 40px;
 }
 
-
-// End of .tf-apartment-option-slider-wrapper
-
-
 .host-details {
     background: $blue0;
     border-radius: 8px;
@@ -566,9 +575,6 @@
     }
 }
 
-// End of .host-details
-
-
 .tf-map-content-wrapper {
     @include flexbox();
     gap: 30px;
@@ -638,13 +644,7 @@
 }
 
 .tf-house-rules {
-    .section-heading {
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 32px;
-        color: $slate80;
-        margin-bottom: 24px;
-    }
+    margin-bottom: 48px;
 
     .tf-house-rules-wrapper {
         @include flexbox();
@@ -734,9 +734,15 @@
 }
 
 .tf-apartment-faq {
+    margin-bottom: 48px;
+
     .tf-faq-sec-title {
         margin-bottom: 20px;
         text-align: left;
+
+        h4{
+            margin: 0;
+        }
 
         p {
             max-width: 100%;
@@ -755,7 +761,7 @@
 
         .tf-faq-desc {
             background-color: transparent;
-            padding-bottom: 0;
+            padding: 0;
         }
     }
 
@@ -776,18 +782,18 @@
     }
 }
 
-// End of .tf-apartment-faq
-
 .tf-ask-question.apartment-question {
+    background: transparent;
+    text-align: left;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 48px;
+
     h3 {
         &::before {
             display: none;
         }
     }
-
-    background: transparent;
-    text-align: left;
-    padding-top: 10px;
 }
 
 .apartment-question {
@@ -835,19 +841,21 @@
         display: inline-block;
     }
 }
+.apartment-toc{
+    margin-bottom: 48px;
 
-.tf-toc-wrap {
-    padding: 40px;
-    border-radius: 4px;
-    border: 1px solid #F0F2F4;
+    .tf-toc-wrap {
+        padding: 40px;
+        border-radius: 4px;
+        border: 1px solid #F0F2F4;
 
-    p {
-        &:last-child {
-            margin-bottom: 0;
+        p {
+            &:last-child {
+                margin-bottom: 0;
+            }
         }
     }
 }
-
 
 .related-apartment {
     .section-heading {

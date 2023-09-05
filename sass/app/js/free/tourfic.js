@@ -2428,6 +2428,25 @@
             $(".tf-control-pagination:first").show();
         });
 
+        /*
+        * Custom modal
+        * @author: Foysal
+        */
+        $(document).on('click', '.tf-modal-btn', function () {
+            var dataTarget = $(this).attr('data-target');
+            $(dataTarget).addClass('tf-modal-show');
+            $('body').addClass('tf-modal-open');
+        });
+        $(document).on("click", '.tf-modal-close', function () {
+            $('.tf-modal').removeClass('tf-modal-show');
+            $('body').removeClass('tf-modal-open');
+        });
+        $(document).click(function (event) {
+            if (!$(event.target).closest(".tf-modal-content,.tf-modal-btn").length) {
+                $("body").removeClass("tf-modal-open");
+                $(".tf-modal").removeClass("tf-modal-show");
+            }
+        });
     });
 
 })(jQuery, window);

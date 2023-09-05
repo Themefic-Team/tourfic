@@ -7,7 +7,7 @@ function tf_apt_amenities_cats() {
 	$all_cats       = [];
 	if ( ! empty( $amenities_cats ) && is_array( $amenities_cats ) ) {
 		foreach ( $amenities_cats as $key => $cat ) {
-			$all_cats[ sanitize_title( $cat['amenities_cat_name'] ) ] = $cat['amenities_cat_name'];
+			$all_cats[ $key ] = $cat['amenities_cat_name'];
 		}
 	}
 
