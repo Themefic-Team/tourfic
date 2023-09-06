@@ -1084,7 +1084,7 @@ function tf_room_availability_callback() {
  * Called in shortcodes
  */
 if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
-	function tf_hotel_search_form_horizontal( $classes, $title, $subtitle, $author ) {
+	function tf_hotel_search_form_horizontal( $classes, $title, $subtitle, $author, $advanced ) {
 		if ( isset( $_GET ) ) {
 			$_GET = array_map( 'stripslashes_deep', $_GET );
 		}
@@ -1109,8 +1109,33 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                                 <span class="tf-label"><?php _e( 'Location', 'tourfic' ); ?>:</span>
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="fas fa-search"></i>
+									<?php if ( empty($advanced) && "enabled"!=$advanced ){ ?>
                                     <input type="text" name="place-name" required="" id="tf-location" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
                                     <input type="hidden" name="place" id="tf-search-hotel" class="tf-place-input">
+									<?php } 
+									if ( !empty($advanced) && "enabled"==$advanced ){ ?>
+									<input type="text" name="place-name" required id="tf-destination-adv" class="tf-advance-destination tf-preview-destination" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>">
+                                    <input type="hidden" name="place" id="tf-place-destination" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>">
+									<div class="tf-hotel-locations tf-hotel-results">
+                                        <ul id="ui-id-1">
+											<?php
+											$tf_hotel_location = get_terms( array(
+												'taxonomy'     => 'hotel_location',
+												'orderby'      => 'title',
+												'order'        => 'ASC',
+												'hierarchical' => 0,
+											) );
+											if ( ! empty( $tf_hotel_location ) ) {
+												foreach ( $tf_hotel_location as $term ) {
+													if ( ! empty( $term->name ) ) {
+														?>
+                                                        <li data-name="<?php echo $term->name; ?>" data-slug="<?php echo $term->slug; ?>"><i class="fa fa-map-marker"></i><?php echo $term->name; ?></li>
+													<?php }
+												}
+											} ?>
+                                        </ul>
+                                    </div>
+									<?php } ?>
                                 </div>
                             </label>
                         </div>
@@ -1142,9 +1167,9 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                             <div class="tf_acrselection">
                                 <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
                                 <div class="acr-select">
-                                    <div class="acr-dec">-</div>
+                                    <div class="acr-dec child-dec">-</div>
                                     <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
-                                    <div class="acr-inc">+</div>
+                                    <div class="acr-inc child-inc">+</div>
                                 </div>
                             </div>
                             <div class="tf_acrselection">
@@ -1156,163 +1181,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="tf_selectdate-wrap">
-                    <div class="tf_input-inner">
-                        <div class="tf_form-row">
-                            <label class="tf_label-row">
-                                <span class="tf-label"><?php _e( 'Check-in & Check-out date', 'tourfic' ); ?></span>
-                                <div class="tf_form-inner tf-d-g">
-                                    <i class="far fa-calendar-alt"></i>
-                                    <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                           placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tf_submit-wrap">
-                    <input type="hidden" name="type" value="tf_hotel" class="tf-post-type"/>
-					<?php
-					if ( $author ) { ?>
-                        <input type="hidden" name="tf-author" value="<?php echo $author; ?>" class="tf-post-type"/>
-					<?php } ?>
-                    <button class="tf_button tf-submit btn-styled" type="submit"><?php _e( 'Search', 'tourfic' ); ?></button>
-                </div>
-
-            </div>
-
-        </form>
-
-        <script>
-            (function ($) {
-                $(document).ready(function () {
-
-                    $("#tf_hotel_aval_check #check-in-out-date").flatpickr({
-                        enableTime: false,
-                        mode: "range",
-                        dateFormat: "Y/m/d",
-                        minDate: "today",
-                        onReady: function (selectedDates, dateStr, instance) {
-                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                        },
-                        onChange: function (selectedDates, dateStr, instance) {
-                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                        },
-                        defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
-                    });
-
-                });
-            })(jQuery);
-        </script>
-		<?php
-	}
-}
-
-
-/**
- * Hotel Advance Search form
- *
- * Horizontal
- *
- * Called in shortcodes
- */
-if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
-	function tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle, $author ) {
-		if ( isset( $_GET ) ) {
-			$_GET = array_map( 'stripslashes_deep', $_GET );
-		}
-		// location
-		$location = ! empty( $_GET['place'] ) ? sanitize_text_field( $_GET['place'] ) : '';
-		// Adults
-		$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
-		// children
-		$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
-		// room
-		$room = ! empty( $_GET['room'] ) ? sanitize_text_field( $_GET['room'] ) : '';
-		// Check-in & out date
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
-
-		?>
-        <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
-            <div class="tf_homepage-booking">
-                <div class="tf_destination-wrap">
-                    <div class="tf_input-inner">
-                        <div class="tf_form-row">
-                            <label class="tf_label-row">
-                                <span class="tf-label"><?php _e( 'Location', 'tourfic' ); ?>:</span>
-                                <div class="tf_form-inner tf-d-g">
-                                    <i class="fas fa-search"></i>
-                                    <input type="text" name="place-name" required id="tf-destination-adv" class="tf-advance-destination tf-preview-destination" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>">
-                                    <input type="hidden" name="place" id="tf-place-destination" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>">
-                                    <div class="tf-hotel-locations tf-hotel-results">
-                                        <ul id="ui-id-1">
-											<?php
-											$tf_hotel_location = get_terms( array(
-												'taxonomy'     => 'hotel_location',
-												'orderby'      => 'title',
-												'order'        => 'ASC',
-												'hierarchical' => 0,
-											) );
-											if ( ! empty( $tf_hotel_location ) ) {
-												foreach ( $tf_hotel_location as $term ) {
-													if ( ! empty( $term->name ) ) {
-														?>
-                                                        <li data-name="<?php echo $term->name; ?>" data-slug="<?php echo $term->slug; ?>"><i class="fa fa-map-marker"></i><?php echo $term->name; ?></li>
-													<?php }
-												}
-											} ?>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tf_selectperson-wrap">
-                    <div class="tf_input-inner">
-                        <span class="tf_person-icon">
-                            <i class="fas fa-user"></i>
-                        </span>
-                        <div class="adults-text"><?php echo ( ! empty( $adults ) ? $adults : '1' ) . ' ' . __( 'Adults', 'tourfic' ); ?></div>
-                        <div class="person-sep"></div>
-                        <div class="child-text"><?php echo ( ! empty( $child ) ? $child : '0' ) . ' ' . __( 'Children', 'tourfic' ); ?></div>
-                        <div class="person-sep"></div>
-                        <div class="room-text"><?php echo ( ! empty( $room ) ? $room : '1' ) . ' ' . __( 'Room', 'tourfic' ); ?></div>
-                    </div>
-
-                    <div class="tf_acrselection-wrap">
-                        <div class="tf_acrselection-inner">
-                            <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
-                                <div class="acr-select">
-                                    <div class="acr-dec">-</div>
-                                    <input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>" readonly>
-                                    <div class="acr-inc">+</div>
-                                </div>
-                            </div>
-                            <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
-                                <div class="acr-select">
-                                    <div class="acr-dec child-dec">-</div>
-                                    <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>" readonly>
-                                    <div class="acr-inc child-inc">+</div>
-                                </div>
-                            </div>
-                            <div class="tf_acrselection">
-                                <div class="acr-label"><?php _e( 'Rooms', 'tourfic' ); ?></div>
-                                <div class="acr-select">
-                                    <div class="acr-dec">-</div>
-                                    <input type="number" name="room" id="room" min="1" value="<?php echo ! empty( $room ) ? $room : '1'; ?>" readonly>
-                                    <div class="acr-inc">+</div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Children age input field based on children number -->
+						<!-- Children age input field based on children number -->
 						<?php
 
 						$children_age        = tfopt( 'children_age_limit' );
@@ -1342,14 +1211,14 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                                 <div class="tf_form-inner tf-d-g">
                                     <i class="far fa-calendar-alt"></i>
                                     <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                           placeholder="<?php _e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
+                                           placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
                                 </div>
                             </label>
                         </div>
                     </div>
                 </div>
-
-                <div class="tf_selectdate-wrap tf_more_info_selections">
+				<?php if ( !empty($advanced) && "enabled"==$advanced ){ ?>
+				<div class="tf_selectdate-wrap tf_more_info_selections">
                     <div class="tf_input-inner">
                         <label class="tf_label-row" style="width: 100%;">
                             <span class="tf-label"><?php _e( 'More', 'tourfic' ); ?></span>
@@ -1403,14 +1272,14 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
 						<?php endif; ?>
                     </div>
                 </div>
-
+				<?php } ?>
                 <div class="tf_submit-wrap">
                     <input type="hidden" name="type" value="tf_hotel" class="tf-post-type"/>
 					<?php
 					if ( $author ) { ?>
                         <input type="hidden" name="tf-author" value="<?php echo $author; ?>" class="tf-post-type"/>
 					<?php } ?>
-                    <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e( 'Search', 'tourfic' ); ?></button>
+                    <button class="tf_button tf-submit btn-styled" type="submit"><?php _e( 'Search', 'tourfic' ); ?></button>
                 </div>
 
             </div>

@@ -459,11 +459,7 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 				?>
                 <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent <?php echo esc_attr( $child_age_limit ); ?>">
 					<?php
-					if ( $advanced == "enabled" ) {
-						tf_hotel_advanced_search_form_horizontal( $classes, $title, $subtitle, $author );
-					} else {
-						tf_hotel_search_form_horizontal( $classes, $title, $subtitle, $author );
-					}
+						tf_hotel_search_form_horizontal( $classes, $title, $subtitle, $author, $advanced );
 					?>
                 </div>
 				<?php
@@ -472,11 +468,7 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 				?>
                 <div id="tf-tour-booking-form" class="tf-tabcontent" <?php echo tf_is_search_form_single_tab( $type ) ? 'style="display:block"' : '' ?><?php echo esc_attr( $child_age_limit ); ?>>
 					<?php
-					if ( $advanced == "enabled" ) {
-						tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle, $author );
-					} else {
-						tf_tour_search_form_horizontal( $classes, $title, $subtitle, $author );
-					}
+						tf_tour_search_form_horizontal( $classes, $title, $subtitle, $author, $advanced );
 					?>
                 </div>
 				<?php
