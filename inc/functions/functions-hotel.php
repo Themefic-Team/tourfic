@@ -1084,7 +1084,7 @@ function tf_room_availability_callback() {
  * Called in shortcodes
  */
 if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
-	function tf_hotel_search_form_horizontal( $classes, $title, $subtitle, $author, $advanced ) {
+	function tf_hotel_search_form_horizontal( $classes, $title, $subtitle, $author, $advanced, $style ) {
 		if ( isset( $_GET ) ) {
 			$_GET = array_map( 'stripslashes_deep', $_GET );
 		}
@@ -1098,7 +1098,6 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 		$room = ! empty( $_GET['room'] ) ? sanitize_text_field( $_GET['room'] ) : '';
 		// Check-in & out date
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
-
 		?>
         <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
             <div class="tf_homepage-booking">
@@ -1307,7 +1306,117 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                 });
             })(jQuery);
         </script>
+
+		<?php 
+		if( !empty($style) && 2==$style ){
+		?>
+		<form class="tf_booking-widget-design-2" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
+			<div class="tf_hotel_searching">
+				<div class="tf_form_inner">
+					<div class="tf_form_fields">
+						<div class="tf_destination_fields">
+							<label class="tf_label_location">
+								<span class="tf-label"><?php _e( 'Location', 'tourfic' ); ?>:</span>
+								<div class="tf_form_inners">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+									<path d="M8 13.9317L11.2998 10.6318C13.1223 8.80943 13.1223 5.85464 11.2998 4.0322C9.4774 2.20975 6.52261 2.20975 4.70017 4.0322C2.87772 5.85464 2.87772 8.80943 4.70017 10.6318L8 13.9317ZM8 15.8173L3.75736 11.5747C1.41421 9.2315 1.41421 5.43254 3.75736 3.08939C6.10051 0.746245 9.89947 0.746245 12.2427 3.08939C14.5858 5.43254 14.5858 9.2315 12.2427 11.5747L8 15.8173ZM8 8.66536C8.7364 8.66536 9.33333 8.06843 9.33333 7.33203C9.33333 6.59565 8.7364 5.9987 8 5.9987C7.2636 5.9987 6.66667 6.59565 6.66667 7.33203C6.66667 8.06843 7.2636 8.66536 8 8.66536ZM8 9.9987C6.52724 9.9987 5.33333 8.80476 5.33333 7.33203C5.33333 5.85927 6.52724 4.66536 8 4.66536C9.47273 4.66536 10.6667 5.85927 10.6667 7.33203C10.6667 8.80476 9.47273 9.9987 8 9.9987Z" fill="#FAEEDD"/>
+									</svg>
+									<input type="text" name="place-name" required="" class="" placeholder="<?php _e( 'Enter Location', 'tourfic' ); ?>" value="">
+								</div>
+							</label>
+						</div>
+						
+						<div class="tf_checkin_date">
+							<label class="tf_label_checkin tf_check_inout_dates">
+								<span class="tf-label"><?php _e( 'Check in', 'tourfic' ); ?>:</span>
+								<div class="tf_form_inners">
+									<div class="tf_checkin_dates">
+										<span class="date">04</span>
+										<span class="month">Jun</span>
+									</div>
+									<div class="tf_check_arrow">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+										<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
+										</svg>
+									</div>
+								</div>
+								<input type="hidden" name="check-in-out-date" id="tf-check-in-out-date" onkeypress="return false;"
+                                           placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
+							</label>
+						</div>
+						
+						<div class="tf_checkin_date tf_check_inout_dates">
+							<label class="tf_label_checkin">
+								<span class="tf-label"><?php _e( 'Check Out', 'tourfic' ); ?>:</span>
+								<div class="tf_form_inners">
+									<div class="tf_checkout_dates">
+										<span class="date">04</span>
+										<span class="month">Jun</span>
+									</div>
+									<div class="tf_check_arrow">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+										<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
+										</svg>
+									</div>
+								</div>
+							</label>
+						</div>
+
+						<div class="tf_guest_info">
+							<label class="tf_label_checkin">
+								<span class="tf-label"><?php _e( 'Guests & rooms', 'tourfic' ); ?>:</span>
+								<div class="tf_form_inners">
+									<div class="tf_guest_calculation">
+										<div class="tf_guest_number">
+											<span class="guest">05</span>
+											<span class="label">guest</span>
+										</div>
+										<div class="tf_guest_number">
+											<span class="room">02</span>
+											<span class="label">room</span>
+										</div>
+									</div>
+									<div class="tf_check_arrow">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+										<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
+										</svg>
+									</div>
+								</div>
+							</label>
+						</div>
+					</div>
+					<div class="tf_availability_checker_box">
+						<button><?php echo _e("Check availability", "tourfic"); ?></button>
+					</div>
+				</div>
+			</div>
+
+        </form>
+		<script>
+            (function ($) {
+                $(document).ready(function () {
+					$(".tf_check_inout_dates").click(function(){
+						$("#tf-check-in-out-date").click();
+					});
+                    $("#tf-check-in-out-date").flatpickr({
+                        enableTime: false,
+                        mode: "range",
+                        dateFormat: "Y/m/d",
+                        minDate: "today",
+                        onReady: function (selectedDates, dateStr, instance) {
+                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                        },
+                        onChange: function (selectedDates, dateStr, instance) {
+                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                        },
+                        defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+                    });
+
+                });
+            })(jQuery);
+        </script>
 		<?php
+		}
 	}
 }
 

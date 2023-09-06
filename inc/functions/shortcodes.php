@@ -459,7 +459,7 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 				?>
                 <div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent <?php echo esc_attr( $child_age_limit ); ?>">
 					<?php
-						tf_hotel_search_form_horizontal( $classes, $title, $subtitle, $author, $advanced );
+						tf_hotel_search_form_horizontal( $classes, $title, $subtitle, $author, $advanced, $style );
 					?>
                 </div>
 				<?php
