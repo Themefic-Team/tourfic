@@ -530,7 +530,7 @@
         }
 
         /**
-         * Apartment option slider
+         * Apartment room slider
          * @author Foysal
          */
         $('.tf-apartment-room-slider').slick({
@@ -570,11 +570,11 @@
         });
 
         /**
-         * Apartment Suggestion slider
-         * @author Mirza
+         * Related Apartment slider
+         * @author Foysal
          */
         $('.tf-related-apartment-slider').slick({
-            dots: false,
+            dots: true,
             arrows: false,
             infinite: true,
             speed: 300,

@@ -487,7 +487,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 
         <!-- Start Booking widget -->
         <form id="tf-apartment-booking" class="tf-apartment-side-booking" method="get" autocomplete="off">
-            <h4><?php _e( 'Book your Apartment', 'tourfic' ) ?></h4>
+            <h4><?php !empty( $meta['booking_form_title'] ) ? _e( $meta['booking_form_title'] ) : _e( 'Book your Apartment', 'tourfic' ); ?></h4>
             <div class="tf-apartment-form-header">
                 <h3 class="tf-apartment-price-per-night">
                     <span class="tf-apartment-base-price"><?php echo wc_price( $price_per_night ) ?></span>
