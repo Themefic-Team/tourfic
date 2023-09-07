@@ -439,8 +439,9 @@ div#tf-destinationautocomplete-list {
 .tf_booking-widget-design-2{
     background: #000;
     backdrop-filter: blur(15px);
+    margin: 24px 0 16px;
     .tf_hotel_searching{
-        .tf_form_inner{
+        .tf_form_innerbody{
             display: flex;
             justify-content: space-between;
             .tf_form_fields{
@@ -524,26 +525,30 @@ div#tf-destinationautocomplete-list {
                 .tf_guest_info{
                     width: 35%;
                     padding-left: 40px;
-                    .tf_form_inners{
-                        .tf_guest_calculation{
-                            display: flex;
-                            justify-content: space-between;
-                            .tf_guest_number{
-                                span.guest,
-                                span.room{
-                                    font-size: 24px;
-                                    font-style: normal;
-                                    font-weight: 400;
-                                    line-height: 130%;
-                                    color: #FDF9F3;
-                                    margin-right: 16px;
-                                }
-                                span.label{
-                                    font-size: 16px;
-                                    font-style: normal;
-                                    font-weight: 400;
-                                    line-height: 130%;
-                                    color: #FDF9F3;
+                    border-right: 0px solid;
+                    .tf_input-inner{
+                        display: flow-root;
+                        .tf_form_inners{
+                            .tf_guest_calculation{
+                                display: flex;
+                                justify-content: space-between;
+                                .tf_guest_number{
+                                    span.guest,
+                                    span.room{
+                                        font-size: 24px;
+                                        font-style: normal;
+                                        font-weight: 400;
+                                        line-height: 130%;
+                                        color: #FDF9F3;
+                                        margin-right: 16px;
+                                    }
+                                    span.label{
+                                        font-size: 16px;
+                                        font-style: normal;
+                                        font-weight: 400;
+                                        line-height: 130%;
+                                        color: #FDF9F3;
+                                    }
                                 }
                             }
                         }

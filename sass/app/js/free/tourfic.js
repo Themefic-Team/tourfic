@@ -1504,6 +1504,25 @@
 
         });
 
+        // Shortcode Design 2 Adults change trigger
+        $(document).on('change', '.adults-style2', function () {
+            let thisEml = $(this);
+            let thisVal = thisEml.val();
+            let total_people = parseInt(thisEml.parent().parent().siblings().find('.childs-style2').val()) + parseInt(thisVal);
+            if (total_people > 1) {
+                $(".tf_hotel-shortcode-design-2 .tf_guest_number .guest").text(total_people);
+            }
+        });
+        // Shortcode Design 2 Childs change trigger
+        $(document).on('change', '.childs-style2', function () {
+            let thisEml = $(this);
+            let thisVal = thisEml.val();
+            let total_people = parseInt(thisEml.parent().parent().siblings().find('.adults-style2').val()) + parseInt(thisVal);
+            if (total_people > 1) {
+                $(".tf_hotel-shortcode-design-2 .tf_guest_number .guest").text(total_people);
+            }
+        });
+
         // Room change trigger
         $(document).on('change', '#room', function () {
             let thisEml = $(this);
@@ -1513,6 +1532,16 @@
                 thisEml.closest('.tf_selectperson-wrap').find('.room-text').text(thisVal + " " + tf_params.room);
             } else {
                 thisEml.closest('.tf_selectperson-wrap').find('.room-text').text(thisVal + " " + tf_params.room);
+            }
+        });
+
+        // Shortcode Design 2 Room change trigger
+        $(document).on('change', '.rooms-style2', function () {
+            let thisEml = $(this);
+            let thisVal = thisEml.val();
+            let total_room = parseInt(thisVal);
+            if (total_room > 1) {
+                $(".tf_hotel-shortcode-design-2 .tf_guest_number .room").text(total_room);
             }
         });
 
