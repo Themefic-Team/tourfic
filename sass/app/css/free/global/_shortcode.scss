@@ -460,6 +460,9 @@ div#tf-destinationautocomplete-list {
                     color: #D6D4D2;
                     margin-bottom: 8px;
                     display: block;
+                    @media #{$max1366}{
+                        font-size: 12px;
+                    }
                 }
                 .tf_destination_fields{
                     width: 25%;
@@ -597,6 +600,9 @@ div#tf-destinationautocomplete-list {
                     width: 100%;
                     border: 0px solid;
                     cursor: pointer;
+                    @media #{$max1366}{
+                        font-size: 12px;
+                    }
                 }
             }
         }

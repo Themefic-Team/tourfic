@@ -2647,6 +2647,11 @@ div#tf-destinationautocomplete-list div:before {
   margin-bottom: 8px;
   display: block;
 }
+@media only screen and (max-width: 1366px) {
+  .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf-label {
+    font-size: 12px;
+  }
+}
 .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_destination_fields {
   width: 25%;
   padding-right: 40px;
@@ -2788,6 +2793,11 @@ div#tf-destinationautocomplete-list div:before {
   width: 100%;
   border: 0px solid;
   cursor: pointer;
+}
+@media only screen and (max-width: 1366px) {
+  .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_availability_checker_box button {
+    font-size: 12px;
+  }
 }
 
 .tf_tf_booking-widget-wrap {
