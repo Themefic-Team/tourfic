@@ -448,17 +448,26 @@ div#tf-destinationautocomplete-list {
                 padding: 24px 40px;
                 display: flex;
                 width: calc(100% - 222px);
+                @media #{$max1366}{
+                    padding: 24px 24px;
+                    width: calc(100% - 150px);
+                }
                 .tf-label{
                     font-size: 16px;
                     font-style: normal;
                     font-weight: 600;
                     line-height: 130%;
                     color: #D6D4D2;
+                    margin-bottom: 8px;
+                    display: block;
                 }
                 .tf_destination_fields{
                     width: 25%;
                     padding-right: 40px;
                     border-right: 1px solid #D6D4D2;
+                    @media #{$max1366}{
+                        padding-right: 24px;
+                    }
                     .tf_label_location{
                         .tf_form_inners{
                             border: 1px solid #FCF4E8;
@@ -474,6 +483,7 @@ div#tf-destinationautocomplete-list {
                                 border: 0px solid;
                                 color: #D6D4D2;
                                 width: 80%;
+                                height: 30px;
                                 &:focus{
                                     outline: none;
                                     box-shadow: 0px 0px 0px 0px;
@@ -491,11 +501,16 @@ div#tf-destinationautocomplete-list {
                     padding-left: 40px;
                     padding-right: 40px;
                     border-right: 1px solid #D6D4D2;
+                    @media #{$max1366}{
+                        padding-left: 24px;
+                        padding-right: 24px;
+                    }
                     .tf-check-in-out-date{
                         visibility: hidden;
                         height: 0px;
                         padding: 0px !important;
                         width: 100%;
+                        position: absolute;
                     }
                     label{
                         display: block;
@@ -511,6 +526,9 @@ div#tf-destinationautocomplete-list {
                                 line-height: 130%;
                                 color: #FDF9F3;
                                 margin-right: 16px;
+                                @media #{$max1366}{
+                                    font-size: 20px;
+                                }
                             }
                             span.month{
                                 font-size: 16px;
@@ -518,6 +536,9 @@ div#tf-destinationautocomplete-list {
                                 font-weight: 400;
                                 line-height: 130%;
                                 color: #FDF9F3;
+                                @media #{$max1366}{
+                                    font-size: 12px;
+                                }
                             }
                         }
                     }
@@ -526,6 +547,10 @@ div#tf-destinationautocomplete-list {
                     width: 35%;
                     padding-left: 40px;
                     border-right: 0px solid;
+                    padding-right: 0px;
+                    @media #{$max1366}{
+                        padding-left: 24px;
+                    }
                     .tf_input-inner{
                         display: flow-root;
                         .tf_form_inners{
@@ -559,6 +584,9 @@ div#tf-destinationautocomplete-list {
                 width: 222px;
                 background-color: #B58E53;
                 display: flex;
+                @media #{$max1366}{
+                    width: 150px;
+                }
                 button{
                     background-color: #B58E53;
                     color: #FDF9F3;

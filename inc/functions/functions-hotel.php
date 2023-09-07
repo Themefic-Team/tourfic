@@ -1227,6 +1227,11 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 						</div>
 					</div>
 					<div class="tf_availability_checker_box">
+						<input type="hidden" name="type" value="tf_hotel" class="tf-post-type"/>
+						<?php
+						if ( $author ) { ?>
+							<input type="hidden" name="tf-author" value="<?php echo $author; ?>" class="tf-post-type"/>
+						<?php } ?>
 						<button><?php echo _e("Check availability", "tourfic"); ?></button>
 					</div>
 				</div>
