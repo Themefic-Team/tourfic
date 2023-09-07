@@ -490,6 +490,16 @@ div#tf-destinationautocomplete-list {
                     padding-left: 40px;
                     padding-right: 40px;
                     border-right: 1px solid #D6D4D2;
+                    .tf-check-in-out-date{
+                        visibility: hidden;
+                        height: 0px;
+                        padding: 0px !important;
+                        width: 100%;
+                    }
+                    label{
+                        display: block;
+                        cursor: pointer;
+                    }
                     .tf_form_inners{
                         .tf_checkin_dates,
                         .tf_checkout_dates{

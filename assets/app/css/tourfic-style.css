@@ -2673,6 +2673,16 @@ div#tf-destinationautocomplete-list div:before {
   padding-right: 40px;
   border-right: 1px solid #D6D4D2;
 }
+.tf_booking-widget-design-2 .tf_hotel_searching .tf_form_inner .tf_form_fields .tf_checkin_date .tf-check-in-out-date {
+  visibility: hidden;
+  height: 0px;
+  padding: 0px !important;
+  width: 100%;
+}
+.tf_booking-widget-design-2 .tf_hotel_searching .tf_form_inner .tf_form_fields .tf_checkin_date label {
+  display: block;
+  cursor: pointer;
+}
 .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_inner .tf_form_fields .tf_checkin_date .tf_form_inners .tf_checkin_dates span.date,
 .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_inner .tf_form_fields .tf_checkin_date .tf_form_inners .tf_checkout_dates span.date {
   font-size: 24px;
