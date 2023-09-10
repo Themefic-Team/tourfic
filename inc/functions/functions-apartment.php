@@ -1454,7 +1454,7 @@ if ( ! function_exists( 'tf_apartment_feature_assign_taxonomies' ) ) {
             return;
         }
 		$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
-		if ( ! empty( tf_data_types( $meta['amenities'] ) ) ) {
+		if ( isset($meta['amenities']) && ! empty( tf_data_types( $meta['amenities'] ) ) ) {
 			$apartment_features = array();
 			foreach ( tf_data_types( $meta['amenities'] ) as $amenity ) {
 				$apartment_features[] = intval( $amenity['feature'] );
