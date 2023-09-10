@@ -129,7 +129,7 @@ TF_Settings::option( 'tf_settings', array(
 											'hotel-section-status' => true,
 										),
 										array(
-											'hotel-section'        => __( 'Trams & Condition', 'tourfic' ),
+											'hotel-section'        => __( 'Terms & Conditions', 'tourfic' ),
 											'hotel-section-slug'   => __( 'trams-condition', 'tourfic' ),
 											'hotel-section-status' => true,
 										),
@@ -287,7 +287,7 @@ TF_Settings::option( 'tf_settings', array(
 											'tour-section-status' => true,
 										),
 										array(
-											'tour-section'        => __( 'Trams & Condition', 'tourfic' ),
+											'tour-section'        => __( 'Terms & Conditions', 'tourfic' ),
 											'tour-section-slug'   => __( 'trams-condition', 'tourfic' ),
 											'tour-section-status' => true,
 										),
