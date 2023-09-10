@@ -1068,6 +1068,10 @@
         background: #fff;
         border-radius: $tf-brds-default;
         box-shadow: 0px 0px 24px 5px #E0E8EE;
+
+        @media #{$tfmax767} {
+            display: none;
+        }
     }
     .tf-booking-price{
         border-bottom: 1px solid #EBF0F4;
@@ -1251,5 +1255,34 @@
             margin-left: 15px;
             margin-left: 0 !important;
         }  
+    }
+}
+
+/* bottom bar */
+.tf-tour-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 16px 24px;
+    z-index: 9999;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+    display: none;
+
+    @media #{$tfmax767}{
+        display: block;
+    }
+
+    .tf-tour-bottom-bar-left{
+        p{
+            font-weight: 700 !important;
+            font-size: 18px !important;
+
+            span{
+                font-size: 16px !important;
+                font-weight: 400 !important;
+            }
+        }
     }
 }
