@@ -374,6 +374,9 @@ if ( !function_exists( 'get_tour_destinations' ) ) {
 if ( !function_exists('tf_tour_search_form_horizontal') ) {
     function tf_tour_search_form_horizontal( $classes, $title, $subtitle, $author ) {
 
+        // date Format for User Output
+        $tour_date_format_for_users = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : __("Y/m/d", "tourfic");
+
         ?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
             <?php 
@@ -483,6 +486,8 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
             $("#tf_tour_aval_check #check-in-out-date").flatpickr({
                 enableTime: false,
                 mode: "range",
+                altInput: true,
+                altFormat: '<?php echo $tour_date_format_for_users; ?>',
                 dateFormat: "Y/m/d",
                 minDate: "today",
                 onReady: function(selectedDates, dateStr, instance) {
@@ -490,6 +495,7 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
                 },
                 onChange: function(selectedDates, dateStr, instance) {
                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                    instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                 },
             });
 
@@ -510,7 +516,7 @@ if ( !function_exists('tf_tour_search_form_horizontal') ) {
  */
 if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
     function tf_tour_advanced_search_form_horizontal( $classes, $title, $subtitle, $author ) {
-
+        $tour_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : __("Y/m/d", "tourfic");
         ?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
             <?php 
@@ -654,6 +660,8 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
             $("#tf_tour_aval_check #check-in-out-date").flatpickr({
                 enableTime: false,
                 mode: "range",
+                altInput: true,
+                altFormat: '<?php echo $tour_date_format_for_users; ?>',
                 dateFormat: "Y/m/d",
                 minDate: "today",
                 onReady: function(selectedDates, dateStr, instance) {
@@ -661,6 +669,7 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
                 },
                 onChange: function(selectedDates, dateStr, instance) {
                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                    instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                 },
             });
 
@@ -692,6 +701,9 @@ function tf_single_tour_booking_form( $post_id ) {
     $tour_type = !empty( $meta['type'] ) ? $meta['type'] : '';
     // Continuous custom availability
     $custom_avail = !empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : '';
+
+    // Date format for Users Oputput
+    $tour_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : __("Y/m/d", "tourfic");
 
     // Same Day Booking
     $disable_same_day = !empty( $meta['disable_same_day'] ) ? $meta['disable_same_day'] : '';
@@ -874,6 +886,8 @@ function tf_single_tour_booking_form( $post_id ) {
 
                     $("#check-in-out-date").flatpickr({  
                         enableTime: false,
+                        altInput: true,
+                        altFormat: '<?php echo $tour_date_format_for_users; ?>',
                         dateFormat: "Y/m/d",                        
                         <?php
                         // Flatpickt locale for translation
@@ -891,6 +905,7 @@ function tf_single_tour_booking_form( $post_id ) {
                         ],
                         onReady: function(selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                         },
 
                     <?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
@@ -1179,6 +1194,8 @@ function tf_single_tour_booking_form( $post_id ) {
 
                             $("#check-in-out-date").flatpickr({  
                                 enableTime: false,
+                                altInput: true,
+                                altFormat: '<?php echo $tour_date_format_for_users; ?>',
                                 dateFormat: "Y/m/d",                           
                                 <?php
                                 // Flatpickt locale for translation
@@ -1196,6 +1213,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                 ],
                                 onReady: function(selectedDates, dateStr, instance) {
                                     instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                    instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                                 },
 
                             <?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
@@ -1359,6 +1377,8 @@ function tf_single_tour_booking_form( $post_id ) {
 
             $("#check-in-out-date").flatpickr({  
                 enableTime: false,
+                altInput: true,
+                altFormat: '<?php echo $tour_date_format_for_users; ?>', 
                 dateFormat: "Y/m/d",                               
                 <?php
                 // Flatpickt locale for translation
@@ -1429,6 +1449,7 @@ function tf_single_tour_booking_form( $post_id ) {
             ?>
 
             onChange: function(selectedDates, dateStr, instance) {
+                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                 if (custom_avail == true) {
 
                     let times = allowed_times.filter((v) => {

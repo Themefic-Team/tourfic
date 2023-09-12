@@ -28,6 +28,21 @@ TF_Settings::option( 'tf_settings', array(
 					),
 				),
 				array(
+					'id'       => 'tf-date-format-for-users',
+					'type'     => 'select',
+					'label'    => __( 'Select Date Format', 'tourfic' ),
+					'subtitle' => __( 'Select a format, that will show when a user selct date', 'tourfic' ),
+					'options'  => array(
+						'Y/m/d'  => __( '2023/09/11', 'tourfic' ),
+						'Y-m-d' => __( '2023-09-11', 'tourfic' ),
+						'd-m-Y'  => __( '11-09-2023', 'tourfic' ),
+						'm/d/Y'  => __( '09/11/2023', 'tourfic' ),
+						'Y.m.d'  => __( '2023.09.11', 'tourfic' ),
+						'd.m.Y'  => __( '11.09.2023', 'tourfic' ),
+					),
+					'default'    => '2023/09/11',
+				),
+				array(
 					'id'       => 'template_heading',
 					'type'     => 'heading',
 					'label'  => __( 'Template Settings', 'tourfic' ),

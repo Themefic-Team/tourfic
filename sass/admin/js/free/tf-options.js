@@ -108,12 +108,16 @@
                 if (dateField.length === 2) {
                     let startDate = $this.find('.tf-date-from input.flatpickr').flatpickr({
                         dateFormat: format,
+                        altInput: true,
+                        altFormat: tf_options.tf_admin_date_format,
                         onChange: function (selectedDates, dateStr, instance) {
                             endDate.set('minDate', dateStr);
                         }
                     });
                     let endDate = $this.find('.tf-date-to input.flatpickr').flatpickr({
                         dateFormat: format,
+                        altInput: true,
+                        altFormat: tf_options.tf_admin_date_format,
                         onChange: function (selectedDates, dateStr, instance) {
                             startDate.set('maxDate', dateStr);
                         }
@@ -121,6 +125,8 @@
                 } else {
                     dateField.flatpickr({
                         dateFormat: format,
+                        altInput: true,
+                        altFormat: tf_options.tf_admin_date_format,
                         mode: multiple ? 'multiple' : 'single',
                     });
                 }
