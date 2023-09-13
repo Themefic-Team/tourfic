@@ -994,7 +994,7 @@ function tf_single_tour_booking_form( $post_id ) {
 								$tf_booking_by = !empty($meta['booking-by']) ? $meta['booking-by'] : 1;
 							    if( function_exists('is_tf_pro') && is_tf_pro() && 3==$tf_booking_by ){
 								    ?>
-                                    <li class="tf-booking-step tf-booking-step-3">
+                                    <li class="tf-booking-step tf-booking-step-3 <?php echo empty($tour_extras) && empty($traveller_info_coll) ? esc_attr( 'active' ) : ''; ?>">
                                         <i class="ri-calendar-check-line"></i> <?php echo __("Booking Confirmation","tourfic"); ?>
                                     </li>
 							    <?php } ?>
