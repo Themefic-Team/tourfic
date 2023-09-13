@@ -1294,6 +1294,13 @@ TF_Settings::option( 'tf_settings', array(
 						),
 					),
 				),
+				array(
+					'id'          => '',
+					'type'        => 'editor',
+					'label'       => __( 'Booking Confirmation Message', 'tourfic' ),
+					'default' 	  => 'Booked Successfully',
+					'is_pro'       => true,
+				),
 			),
 		),
 		//Frontend Dashboard

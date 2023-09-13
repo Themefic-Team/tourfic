@@ -952,7 +952,12 @@ function tf_single_tour_booking_form( $post_id ) {
 						</span>
                     </div>
                     <img src="<?php echo TF_ASSETS_APP_URL ?>images/thank-you.gif" alt="Thank You">
-                    <h2><?php echo __("Booked Successfully","tourfic"); ?></h2>
+                    <h2>
+					<?php 
+					$booking_confirmation_msg = !empty(tfopt( 'booking-confirmation-msg' )) ? tfopt( 'booking-confirmation-msg' ) : 'Booked Successfully';
+					echo $booking_confirmation_msg;
+					?>
+					</h2>
                 </div>
             </div>
             <div class="tf-withoutpayment-booking">
