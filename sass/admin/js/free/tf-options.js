@@ -483,6 +483,12 @@
             }
             let repeatDateField = add_value.find('.tf-field-date');
             if (repeatDateField.length > 0) {
+                repeatDateField.find('input').each(function () {
+                    
+                    if($(this).attr('name') == '' || typeof $(this).attr('name') === "undefined"){ 
+                     $(this).remove()
+                    }
+                 });
                 tfDateInt(repeatDateField);
             }
 
@@ -636,6 +642,11 @@
             let repeatDateField = clone_value.find('.tf-field-date');
 
             if (repeatDateField.length > 0) {
+                repeatDateField.find('input').each(function () {  
+                    if($(this).attr('name') == '' || typeof $(this).attr('name') === "undefined"){  
+                     $(this).remove();
+                    }
+                 }); 
                 tfDateInt(repeatDateField);
             }
 
