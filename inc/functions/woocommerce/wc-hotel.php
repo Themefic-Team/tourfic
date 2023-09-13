@@ -358,7 +358,7 @@ function tf_hotel_booking_callback() {
 		if ( function_exists('is_tf_pro') && is_tf_pro() ){
 			$tf_booking_type = !empty($rooms[$room_id]['booking-by']) ? $rooms[$room_id]['booking-by'] : 1;
 			$tf_booking_url = !empty($rooms[$room_id]['booking-url']) ? esc_url($rooms[$room_id]['booking-url']) : '';
-			$tf_booking_query_url = !empty($rooms[$room_id]['booking-query']) ? $rooms[$room_id]['booking-query'] : '';
+			$tf_booking_query_url = !empty($rooms[$room_id]['booking-query']) ? $rooms[$room_id]['booking-query'] : 'adult={adult}&child={child}&room={room}';
 			$tf_booking_attribute = !empty($rooms[$room_id]['booking-attribute']) ? $rooms[$room_id]['booking-attribute'] : '';
 		}
 		if( 2==$tf_booking_type && !empty($tf_booking_url) ){

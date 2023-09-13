@@ -209,13 +209,12 @@ class TF_Handle_Emails {
             if(!empty($tf_order_id)){
                 $tf_order = wc_get_order( $order_id );
                 if(!empty($tf_order)){
-                    $total_tours = 1;
                     foreach ( $tf_order->get_items() as $item_id => $item ) {
                     $order_type = $item->get_meta( '_order_type', true );
                     $tour_ides = $item->get_meta( '_tour_unique_id', true );
                         if("tour"==$order_type){
-                            $tf_ticket_download .= '<table width="100%" style="margin: 10px 0;font-family: Inter,sans-serif;"><tr><td style="padding-bottom:10px;padding-top:10px;"><a href="'. get_bloginfo('url').'?qr_id='.$tour_ides.'" target="_blank" style="display: inline-block; padding: 10px 15px; background-color: #0209AF; color: #fff; text-decoration: none;">Download Voucher '.$total_tours.'</a><tr><td></table>';
-                            $total_tours++;
+                            $tf_tour_id   = $item->get_meta( '_tour_id', true );
+                            $tf_ticket_download .= '<table width="100%" style="margin: 10px 0;font-family: Inter,sans-serif;"><tr><td style="padding-bottom:10px;padding-top:10px;"><a href="'. get_bloginfo('url').'?qr_id='.$tour_ides.'" target="_blank" style="display: inline-block; padding: 10px 15px; background-color: #0209AF; color: #fff; text-decoration: none;">Download Voucher '.get_the_title( $tf_tour_id ).'</a><tr><td></table>';
                         }
                     }
                 }

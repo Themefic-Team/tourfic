@@ -983,16 +983,18 @@ TF_Settings::option( 'tf_settings', array(
 					'id'        => 'disable_traveller_info',
 					'type'      => 'switch',
 					'label'     => __( 'Enable Traveler Info', 'tourfic' ),
-					'subtitle'  => __( 'Disable this option, if you want to hide traveler info.', 'tourfic' ),
+					'subtitle'  => __( 'Enable this option, if you want to add traveler info.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => true,
 					'is_pro'    => true
 				),
 				array(
 					'id'    => 'custom_fields_heading',
 					'type'  => 'heading',
 					'label' => __( 'Settings for Traveler Info Fields', 'tourfic' ),
+					'dependency' => array(
+						array( 'disable_traveller_info', '==', 'true' ),
+					),
 				),
 				array(
 					'id'           => 'without-payment-field',
@@ -1002,6 +1004,9 @@ TF_Settings::option( 'tf_settings', array(
 					'label'        => __( 'Fields for Traveler Info', 'tourfic' ),
 					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
 					'is_pro'       => true,
+					'dependency' => array(
+						array( 'disable_traveller_info', '==', 'true' ),
+					),
 					'fields'       => array(
 						array(
 							'id'    => 'reg-field-label',
@@ -1288,6 +1293,13 @@ TF_Settings::option( 'tf_settings', array(
 							'reg-field-required' => true,
 						),
 					),
+				),
+				array(
+					'id'          => '',
+					'type'        => 'editor',
+					'label'       => __( 'Booking Confirmation Message', 'tourfic' ),
+					'default' 	  => 'Booked Successfully',
+					'is_pro'       => true,
 				),
 			),
 		),

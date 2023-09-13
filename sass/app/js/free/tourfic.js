@@ -2408,6 +2408,8 @@
                         if ($('.tf-traveller-info-box').length > 0) {
                             if($(".tf-traveller-info-box").html().trim() == ""){
                                 $('.tf-traveller-info-box').html(response.traveller_info);
+                            }else{
+                                $('.tf-traveller-info-box').html(response.traveller_info);
                             }
                         }
                         if ($('.tf-booking-traveller-info').length > 0) {
@@ -2425,6 +2427,12 @@
         $(document).on('click', '.tf-booking-popup-btn', function (e) {
             e.preventDefault();
             $(".tf-withoutpayment-booking input[type='text'], .tf-withoutpayment-booking input[type='email'], .tf-withoutpayment-booking input[type='date'], .tf-withoutpayment-booking select, .tf-withoutpayment-booking textarea").val("");
+
+            $('.tf-booking-content-extra input[type="checkbox"]').each(function () {
+                if ($(this).prop('checked')==true){ 
+                    $(this).prop('checked',false);
+                }
+            });
             makeBooking();
         });
 

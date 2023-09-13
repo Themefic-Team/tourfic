@@ -454,17 +454,19 @@
         * @since 2.9.28
         * @author: Jahid
         */
-
-        if ($('.tf-single-repeater-book-confirm-field').length > 0) {
-            $('.tf-single-repeater-book-confirm-field').each(function () {
-                let $this = $(this);
-                let repeaterCount = $this.find('input[name="tf_repeater_count"]').val();
-                if(0==repeaterCount || 1==repeaterCount || 2==repeaterCount){
-                    $this.find('.tf_hidden_fields').hide();
-                    $this.find('.tf-repeater-icon-clone').hide();
-                    $this.find('.tf-repeater-icon-delete').hide();
-                }
-            });
+        TF_Booking_Confirmation();
+        function TF_Booking_Confirmation() {
+            if ($('.tf-repeater-wrap .tf-single-repeater-book-confirm-field').length > 0) {
+                $('.tf-repeater-wrap .tf-single-repeater-book-confirm-field').each(function () {
+                    let $this = $(this);
+                    let repeaterCount = $this.find('input[name="tf_repeater_count"]').val();
+                    if(0==repeaterCount || 1==repeaterCount || 2==repeaterCount){
+                        $this.find('.tf_hidden_fields').hide();
+                        $this.find('.tf-repeater-icon-clone').hide();
+                        $this.find('.tf-repeater-icon-delete').hide();
+                    }
+                });
+            }
         }
         /*
         * Add New Repeater Item
@@ -604,6 +606,9 @@
             
             // repeater dependency repeater
             TF_dependency();
+
+            // Booking Confirmation repeater Hidden field
+            TF_Booking_Confirmation();
         });
 
         // Repeater Delete Value
