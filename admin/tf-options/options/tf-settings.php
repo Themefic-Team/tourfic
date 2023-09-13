@@ -983,10 +983,9 @@ TF_Settings::option( 'tf_settings', array(
 					'id'        => 'disable_traveller_info',
 					'type'      => 'switch',
 					'label'     => __( 'Enable Traveler Info', 'tourfic' ),
-					'subtitle'  => __( 'Disable this option, if you want to hide traveler info.', 'tourfic' ),
+					'subtitle'  => __( 'Enable this option, if you want to add traveler info.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => true,
 					'is_pro'    => true
 				),
 				array(

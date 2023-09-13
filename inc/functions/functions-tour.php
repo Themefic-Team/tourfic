@@ -785,8 +785,6 @@ function tf_single_tour_booking_form( $post_id ) {
 	// Continuous custom availability
 	$custom_avail = ! empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : '';
 
-    $tf_booking_by = !empty($meta['booking-by']) ? $meta['booking-by'] : 1;
-	$tf_booking_url = !empty($meta['booking-url']) ? esc_url($meta['booking-url']) : '';
 
     // Same Day Booking
     $disable_same_day = !empty( $meta['disable_same_day'] ) ? $meta['disable_same_day'] : '';
@@ -945,13 +943,13 @@ function tf_single_tour_booking_form( $post_id ) {
             <div class="tf-withoutpayment-booking-confirm">
                 <div class="tf-confirm-popup">
                     <div class="tf-booking-times">
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="#FCFDFF"/>
-                    <path d="M12 11.1111L15.1111 8L16 8.88889L12.8889 12L16 15.1111L15.1111 16L12 12.8889L8.88889 16L8 15.1111L11.1111 12L8 8.88889L8.88889 8L12 11.1111Z" fill="#666D74"/>
-                    <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" stroke="#FCFDFF"/>
-                    </svg>
-                </span>
+						<span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="#FCFDFF"/>
+							<path d="M12 11.1111L15.1111 8L16 8.88889L12.8889 12L16 15.1111L15.1111 16L12 12.8889L8.88889 16L8 15.1111L11.1111 12L8 8.88889L8.88889 8L12 11.1111Z" fill="#666D74"/>
+							<rect x="0.5" y="0.5" width="23" height="23" rx="3.5" stroke="#FCFDFF"/>
+							</svg>
+						</span>
                     </div>
                     <img src="<?php echo TF_ASSETS_APP_URL ?>images/thank-you.gif" alt="Thank You">
                     <h2><?php echo __("Booked Successfully","tourfic"); ?></h2>
@@ -973,7 +971,10 @@ function tf_single_tour_booking_form( $post_id ) {
 								    $tour_extras = unserialize( $tour_extras_unserial );
 
 							    }
-							    $traveller_info_coll = function_exists('is_tf_pro') && is_tf_pro() && !empty(tfopt( 'disable_traveller_info' )) ? tfopt( 'disable_traveller_info' ) : '';
+							    $traveller_info_coll_global = function_exists('is_tf_pro') && is_tf_pro() && !empty(tfopt( 'disable_traveller_info' )) ? tfopt( 'disable_traveller_info' ) : '';
+
+							    $traveller_info_coll = function_exists('is_tf_pro') && is_tf_pro() && !empty($meta['tour-traveler-info']) ? $meta['tour-traveler-info'] : $traveller_info_coll_global;
+
 							    if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
                                     <li class="tf-booking-step tf-booking-step-1 active">
                                         <i class="ri-price-tag-3-line"></i> <?php echo __("Tour extra","tourfic"); ?>
@@ -985,8 +986,8 @@ function tf_single_tour_booking_form( $post_id ) {
                                         <i class="ri-group-line"></i> <?php echo __("Traveler details","tourfic"); ?>
                                     </li>
 							    <?php }
-							    $is_without_payment = function_exists('is_tf_pro') && is_tf_pro() && !empty($meta['disable_payment']) ? $meta['disable_payment'] : '';
-							    if($is_without_payment){
+								$tf_booking_by = !empty($meta['booking-by']) ? $meta['booking-by'] : 1;
+							    if( function_exists('is_tf_pro') && is_tf_pro() && 3==$tf_booking_by ){
 								    ?>
                                     <li class="tf-booking-step tf-booking-step-3">
                                         <i class="ri-calendar-check-line"></i> <?php echo __("Booking Confirmation","tourfic"); ?>
@@ -995,13 +996,13 @@ function tf_single_tour_booking_form( $post_id ) {
                             </ul>
                         </div>
                         <div class="tf-booking-times">
-                    <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="#FCFDFF"/>
-                    <path d="M12 11.1111L15.1111 8L16 8.88889L12.8889 12L16 15.1111L15.1111 16L12 12.8889L8.88889 16L8 15.1111L11.1111 12L8 8.88889L8.88889 8L12 11.1111Z" fill="#666D74"/>
-                    <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" stroke="#FCFDFF"/>
-                    </svg>
-                    </span>
+							<span>
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+								<rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="#FCFDFF"/>
+								<path d="M12 11.1111L15.1111 8L16 8.88889L12.8889 12L16 15.1111L15.1111 16L12 12.8889L8.88889 16L8 15.1111L11.1111 12L8 8.88889L8.88889 8L12 11.1111Z" fill="#666D74"/>
+								<rect x="0.5" y="0.5" width="23" height="23" rx="3.5" stroke="#FCFDFF"/>
+								</svg>
+							</span>
                         </div>
                     </div>
                     <div class="tf-booking-content-summery">
@@ -1048,7 +1049,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                 </div>
                             </div>
 					    <?php }
-					    if($is_without_payment){
+					    if( function_exists('is_tf_pro') && is_tf_pro() && 3==$tf_booking_by ){
 						    ?>
 
                             <!-- Popup Booking Confirmation -->
@@ -1157,7 +1158,7 @@ function tf_single_tour_booking_form( $post_id ) {
 					    <?php } ?>
 
                         <!-- Popup Booking Summery -->
-                        <div class="tf-booking-summery" style="<?php echo empty($tour_extras) && empty($traveller_info_coll) && empty($is_without_payment) ? esc_attr( "width: 100%;" ) : ''; ?>">
+                        <div class="tf-booking-summery" style="<?php echo empty($tour_extras) && empty($traveller_info_coll) && 3!=$tf_booking_by ? esc_attr( "width: 100%;" ) : ''; ?>">
                             <div class="tf-booking-fixed-summery">
                                 <h5><?php echo __("Booking summery","tourfic"); ?></h5>
                                 <h4><?php echo get_the_title( $post_id ); ?></h4>
@@ -1170,7 +1171,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
                     <!-- Popup Footer Control & Partial Payment -->
                     <div class="tf-booking-pagination">
-					    <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) && empty($is_without_payment) ) {
+					    <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) && 3!=$tf_booking_by ) {
 						    $tf_deposit_amount =  $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%';
 						    ?>
                             <div class="tf-diposit-switcher">
@@ -1181,7 +1182,7 @@ function tf_single_tour_booking_form( $post_id ) {
                                 <h4><?php echo sprintf( __( 'Partial payment of %1$s on total', 'tourfic' ), $tf_deposit_amount ); ?></h4>
                             </div>
 					    <?php } ?>
-					    <?php if ( empty($tour_extras) && empty($is_without_payment) && empty($traveller_info_coll) ){ ?>
+					    <?php if ( empty($tour_extras) && 3!=$tf_booking_by && empty($traveller_info_coll) ){ ?>
                             <div class="tf-control-pagination show">
                                 <button type="submit"><?php echo __("Continue", "tourfic"); ?></button>
                             </div>
@@ -1190,7 +1191,7 @@ function tf_single_tour_booking_form( $post_id ) {
 					    if ( function_exists('is_tf_pro') && is_tf_pro() && ($tour_extras) ){ ?>
                             <div class="tf-control-pagination show tf-pagination-content-1">
 							    <?php
-							    if( empty($is_without_payment) && empty($traveller_info_coll) ){ ?>
+							    if( 3!=$tf_booking_by && empty($traveller_info_coll) ){ ?>
                                     <button type="submit"><?php echo __("Continue", "tourfic"); ?></button>
 							    <?php }else{ ?>
                                     <a href="#" class="tf-next-control tf-tabs-control" data-step="2"><?php echo __("Continue", "tourfic"); ?></a>
@@ -1205,7 +1206,7 @@ function tf_single_tour_booking_form( $post_id ) {
 							    if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_extras ) {  ?>
                                     <a href="#" class="tf-back-control tf-step-back" data-step="1"><i class="fa fa-angle-left"></i><?php echo __("Back", "tourfic"); ?></a>
 							    <?php }
-							    if($is_without_payment){
+							    if( function_exists('is_tf_pro') && is_tf_pro() && 3==$tf_booking_by ){
 								    ?>
                                     <a href="#" class="tf-next-control tf-tabs-control tf-traveller-error" data-step="3"><?php echo __("Continue", "tourfic"); ?></a>
 							    <?php }else { ?>
@@ -1213,7 +1214,7 @@ function tf_single_tour_booking_form( $post_id ) {
 							    <?php } ?>
                             </div>
 					    <?php }
-					    if($is_without_payment){
+					    if( function_exists('is_tf_pro') && is_tf_pro() && 3==$tf_booking_by ){
 						    ?>
 
                             <!-- Popup Booking Confirmation -->
@@ -3258,18 +3259,22 @@ function tf_tour_booking_popup_callback() {
 			if( $tour_extra_pricetype=="fixed" ){
 				if(!empty($tour_extra_meta[$extra]['title']) && !empty($tour_extra_meta[$extra]['price'])){
 					$tour_extra_total += $tour_extra_meta[$extra]['price'];
-					$tour_extra_title_arr[] =  $tour_extra_meta[$extra]['title'];
+					$tour_extra_title_arr[] =  array(
+						'title' => $tour_extra_meta[$extra]['title'],
+						'price' => $tour_extra_meta[$extra]['price']
+					);
 				}
 			}else{
 				if(!empty($tour_extra_meta[$extra]['price']) && !empty($tour_extra_meta[$extra]['title'])){
 					$tour_extra_total += ($tour_extra_meta[$extra]['price']*$total_people);
-					$tour_extra_title_arr[] =  $tour_extra_meta[$extra]['title'];
+					$tour_extra_title_arr[] =  array(
+						'title' => $tour_extra_meta[$extra]['title'],
+						'price' => $tour_extra_meta[$extra]['price']*$total_people
+					);
 				}
 			}
 		}
 	}
-
-	$tour_extra_title = ! empty( $tour_extra_title_arr ) ? implode(",",$tour_extra_title_arr) : '';
 
 	if ( ! array_key_exists( 'errors', $response ) || count( $response['errors'] ) == 0 ) {
 
@@ -3425,11 +3430,15 @@ function tf_tour_booking_popup_callback() {
                     </tr>';
 			}
 		}
-		if(!empty($tour_extra_title)){
-			$response['traveller_summery'] .='<tr>
-                    <td align="left">'.esc_html($tour_extra_title).'</td>
-                    <td align="right">'.wc_price($tour_extra_total).'</td>
-                </tr>';
+		if(!empty($tour_extra_title_arr)){
+			foreach($tour_extra_title_arr as $extra_info){
+				if(!empty($extra_info['title']) && !empty($extra_info['price'])){
+					$response['traveller_summery'] .='<tr>
+						<td align="left">'.esc_html($extra_info['title']).'</td>
+						<td align="right">'.wc_price($extra_info['price']).'</td>
+					</tr>';
+				}
+			}
 		}
 		if(!empty($tf_due_amount)){
 			$response['traveller_summery'] .='<tr>
