@@ -84,8 +84,6 @@
 .tf-tour-design-1{
     .tf-single-details-wrapper{
         .tf-tour-details-right {
-            position: -webkit-sticky;
-            position: sticky;
             top: 0;
             align-self: flex-start;
             @media #{$tfmax767}{
@@ -1068,10 +1066,6 @@
         background: #fff;
         border-radius: $tf-brds-default;
         box-shadow: 0px 0px 24px 5px #E0E8EE;
-
-        @media #{$tfmax767} {
-            display: none;
-        }
     }
     .tf-booking-price{
         border-bottom: 1px solid #EBF0F4;
@@ -1259,30 +1253,155 @@
 }
 
 /* bottom bar */
-.tf-tour-bottom-bar {
+.tf-bottom-booking-bar {
     position: fixed;
+    width: calc(100% - 64px);
     bottom: 0;
     left: 0;
-    right: 0;
-    background: #fff;
-    padding: 16px 24px;
+    padding: 32px;
+    background-color: #EDF2F7;
+    box-shadow: 0px 0px 24px 5px #e0e8ee;
     z-index: 9999;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
-    display: none;
+    @include flexbox();
+    @include justify-content(center);
+    @include align-items(center);
+    gap: 64px;
+    transform-origin: bottom;
+    transform: rotateX(90deg);
+    transition: all 0.3s ease-in-out;
 
-    @media #{$tfmax767}{
-        display: block;
+    @media #{$max1199} {
+        @include flex-wrap();
+        padding: 16px;
+        gap: 8px;
+        width:calc(100% - 32px);
     }
 
-    .tf-tour-bottom-bar-left{
-        p{
-            font-weight: 700 !important;
-            font-size: 18px !important;
+    @media #{$max767} {
+        transform: rotateX(0);
+    }
+    &.active{
+        transform: rotateX(0deg);
+    }
 
-            span{
-                font-size: 16px !important;
-                font-weight: 400 !important;
+    &.mobile-active{
+        .tf-bottom-booking-fields{
+            @include flexbox();
+        }
+
+        .tf-booking-popup-btn{
+            display: block;
+        }
+        .tf-booking-mobile-btn{
+            display: none;
+        }
+    }
+
+    .tf-bottom-booking-fields{
+        @include flexbox();
+        gap: 32px;
+
+        @media #{$max1199} {
+            width: 100%;
+            gap: 16px;
+            @include justify-content(center);
+        }
+
+        @media #{$max767} {
+            @include flex-wrap();
+            display: none;
+        }
+    }
+
+    .tf-bottom-booking-field{
+        @include flexbox();
+        gap: 8px;
+
+        @media #{$max767} {
+            width: 100%;
+        }
+
+        input.tf-field, select.tf-field {
+            border-radius: 8px;
+            border: 1px solid var(--Primary, #003C7A);
+            padding: 0 16px;
+            background-color: transparent;
+            outline: none;
+            min-width: 220px;
+
+            @media #{$max767} {
+                flex-grow: 1;
             }
+        }
+    }
+
+    .tf-bottom-booking-field-icon{
+        height: 56px;
+        width: 56px;
+        line-height: 56px;
+        font-size: 24px;
+        border-radius: 8px;
+        background-color: #003C7A;
+        text-align: center;
+        color: #fff;
+
+        @media #{$max767} {
+            height: 44px;
+            width: 44px;
+            line-height: 44px;
+            font-size: 18px;
+        }
+    }
+
+    .tf_selectperson-wrap{
+        border-right: none;
+        padding: 0;
+
+        @media #{$max767} {
+            border-bottom: none;
+            padding: 0 !important;
+        }
+
+        .tf_input-inner{
+            border-radius: 8px;
+            border: 1px solid #003C7A;
+            padding: 0 16px;
+
+            @media #{$max767} {
+                flex-grow: 1;
+            }
+        }
+    }
+
+    .tf_acrselection-wrap{
+        left: 0;
+        right: auto;
+        top: -210px;
+        width: auto;
+    }
+
+    .tf-booking-mobile-btn{
+        display: none;
+
+        @media #{$max767} {
+            display: block;
+        }
+    }
+
+    .tf-btn-normal {
+        padding: 19px 32px;
+
+        @media #{$max767} {
+            padding: 12px 24px;
+        }
+    }
+
+    @media #{$max767} {
+        .tf-booking-popup-btn{
+            display: none;
+        }
+        .tf-tours-booking-btn{
+            width: 100%;
         }
     }
 }
