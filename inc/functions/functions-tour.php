@@ -1421,7 +1421,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
         <div class="tf-tours-booking-btn tf-booking-bttns tf-mt-30">
             <div class="tf-btn">
-                <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e('Book Now', 'tourfic'); ?></a>
+                <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn"><?php _e('Book Now', 'tourfic'); ?></a>
             </div>
             <?php echo tf_booking_popup($post_id); ?>
 
@@ -1630,7 +1630,7 @@ function tf_single_tour_booking_form( $post_id ) {
                 </script>
                 <div class="tf-tours-booking-btn">
                     <div class="tf-btn">
-                        <a href="#" class="tf_button btn-styled tf-booking-popup-btn" type="submit"><?php _e('Book Now', 'tourfic'); ?></a>
+                        <a href="#" class="tf_button btn-styled tf-booking-popup-btn"><?php _e('Book Now', 'tourfic'); ?></a>
                     </div>
                 </div>
                 <?php echo tf_booking_popup($post_id); ?>
