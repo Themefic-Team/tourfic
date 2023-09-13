@@ -993,6 +993,9 @@ TF_Settings::option( 'tf_settings', array(
 					'id'    => 'custom_fields_heading',
 					'type'  => 'heading',
 					'label' => __( 'Settings for Traveler Info Fields', 'tourfic' ),
+					'dependency' => array(
+						array( 'disable_traveller_info', '==', 'true' ),
+					),
 				),
 				array(
 					'id'           => 'without-payment-field',
@@ -1002,6 +1005,9 @@ TF_Settings::option( 'tf_settings', array(
 					'label'        => __( 'Fields for Traveler Info', 'tourfic' ),
 					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
 					'is_pro'       => true,
+					'dependency' => array(
+						array( 'disable_traveller_info', '==', 'true' ),
+					),
 					'fields'       => array(
 						array(
 							'id'    => 'reg-field-label',
