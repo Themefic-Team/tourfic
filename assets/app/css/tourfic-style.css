@@ -7729,7 +7729,7 @@ div#tf-contact-info {
   padding: 32px;
   background-color: #EDF2F7;
   box-shadow: 0px 0px 24px 5px #e0e8ee;
-  z-index: 9999;
+  z-index: 999;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
