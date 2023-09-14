@@ -392,7 +392,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 	// Get post type
 	$post_type = $_GET['type'] ?? '';
 	$place_title = '';
-	$date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : __("Y/m/d", "tourfic");
+	$date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 
 	if ( ! empty( $post_type ) ) {
 
@@ -655,7 +655,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_name = '', $taxonomy_slug = '' ) {
 	$place      = $post_type == 'tf_hotel' ? 'tf-location' : 'tf-destination';
 	$place_text = $post_type == 'tf_hotel' ? __( 'Enter Location', 'tourfic' ) : __( 'Enter Destination', 'tourfic' );
-	$date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : __("Y/m/d", "tourfic");
+	$date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 
 	$tf_plugin_installed = get_option('tourfic_template_installed'); 
 	if (!empty($tf_plugin_installed)) {

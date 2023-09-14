@@ -136,7 +136,7 @@ if ( ! class_exists( 'TF_Options' ) ) {
 			global $post_type;
 			$tf_options_screens   = array( 'toplevel_page_tf_settings', 'tourfic-settings_page_tf_get_help', 'tourfic-settings_page_tf_license_info', 'tourfic-settings_page_tf_dashboard', 'tourfic-settings_page_tf_shortcodes', 'tourfic-vendor_page_tf_vendor_reports','tourfic-vendor_page_tf_vendor_list','tourfic-vendor_page_tf_vendor_commissions','tourfic-vendor_page_tf_vendor_withdraw' );
 			$tf_options_post_type = array( 'tf_hotel', 'tf_tours', 'tf_apartment' );
-			$admin_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : __("Y/m/d", "tourfic");
+			$admin_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 			if("tourfic-settings_page_tf_dashboard"==$screen){
 				//Order Data Retrive
 				$tf_old_order_limit = new WC_Order_Query( array (
