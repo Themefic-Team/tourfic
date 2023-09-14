@@ -1403,7 +1403,7 @@ function tf_single_tour_booking_form( $post_id ) {
                         <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn" type="submit"><?php _e( 'Book Now', 'tourfic' ); ?></a>
                         <a href="#" class="tf-btn-normal btn-primary tf-booking-mobile-btn"><?php _e( 'Book Now', 'tourfic' ); ?></a>
                     </div>
-		            <?php echo tf_booking_popup( $post_id ); ?>
+		            <?php //echo tf_booking_popup( $post_id ); ?>
                 </div>
             </div>
 
@@ -1541,66 +1541,15 @@ function tf_single_tour_booking_form( $post_id ) {
                     });
                 })(jQuery);
             </script>
-            <div class="tf-booking-person tf-mt-30">
-                <div class="tf-form-title">
-                    <p><?php _e( "Person Info", "tourfic" ); ?></p>
-                </div>
-				<?php if ( $custom_avail == true || ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-                    <div class="tf-field-group tf-mt-16 tf_acrselection">
-                        <div class="tf-field tf-flex">
-                            <div class="acr-label tf-flex">
-                                <i class="fa-regular fa-user"></i>
-								<?php _e( 'Adults', 'tourfic' ); ?>
-                            </div>
-                            <div class="acr-select">
-                                <div class="acr-dec">-</div>
-                                <input type="number" name="adults" id="adults" min="0" value="<?php echo ! empty( $adults ) ? $adults : '0'; ?>">
-                                <div class="acr-inc">+</div>
-                            </div>
-                        </div>
-                    </div>
-				<?php } ?>
 
-            <?php if ($custom_avail == true || (!$disable_child_price && $pricing_rule == 'person' && $child_price != false) || (!$disable_child_price && $pricing_rule == 'group' && $group_price != false)) { ?>
-                <div class="tf-field-group tf-mt-16 tf_acrselection">
-                    <div class="tf-field tf-flex">
-                        <div class="acr-label tf-flex">
-                            <i class="fa-solid fa-child"></i>
-                            <?php _e('Children', 'tourfic'); ?>
-                        </div>
-                        <div class="acr-select">
-                            <div class="acr-dec">-</div>
-                                <input type="number" name="childrens" id="children" min="0" value="<?php echo !empty($child) ? $child : '0'; ?>">
-                            <div class="acr-inc">+</div>
-                        </div>
-                    </div>
+            <div class="tf-tours-booking-btn tf-booking-bttns tf-mt-30">
+                <div class="tf-btn">
+                    <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn"><?php _e('Book Now', 'tourfic'); ?></a>
                 </div>
-            <?php } ?>
-            <?php if ($custom_avail == true || (!$disable_infant_price && $pricing_rule == 'person' && $infant_price != false) || (!$disable_infant_price && $pricing_rule == 'group' && $group_price != false)) { ?>
-                <div class="tf-field-group tf-mt-16 tf_acrselection">
-                    <div class="tf-field tf-flex">
-                        <div class="acr-label tf-flex">
-                            <i class="fa-solid fa-baby"></i>
-                            <?php _e('Infant', 'tourfic'); ?>
-                        </div>
-                        <div class="acr-select">
-                            <div class="acr-dec">-</div>
-                                <input type="number" name="infants" id="infant" min="0" value="<?php echo !empty($infant) ? $infant : '0'; ?>">
-                            <div class="acr-inc">+</div>
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
+                <?php echo tf_booking_popup($post_id); ?>
 
-        <div class="tf-tours-booking-btn tf-booking-bttns tf-mt-30">
-            <div class="tf-btn">
-                <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn"><?php _e('Book Now', 'tourfic'); ?></a>
             </div>
-            <?php echo tf_booking_popup($post_id); ?>
-
-        </div>
-    </form>
+        </form>
 	<?php else : ?>
         <div class="tf-tour-booking-wrap">
             <form class="tf_tours_booking">
