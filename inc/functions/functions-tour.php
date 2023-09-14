@@ -1541,14 +1541,6 @@ function tf_single_tour_booking_form( $post_id ) {
                     });
                 })(jQuery);
             </script>
-
-            <div class="tf-tours-booking-btn tf-booking-bttns tf-mt-30">
-                <div class="tf-btn">
-                    <a href="#" class="tf-btn-normal btn-primary tf-booking-popup-btn"><?php _e('Book Now', 'tourfic'); ?></a>
-                </div>
-                <?php echo tf_booking_popup($post_id); ?>
-
-            </div>
         </form>
 	<?php else : ?>
         <div class="tf-tour-booking-wrap">
