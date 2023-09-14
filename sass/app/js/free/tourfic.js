@@ -1508,18 +1508,30 @@
         $(document).on('change', '.adults-style2', function () {
             let thisEml = $(this);
             let thisVal = thisEml.val();
-            let total_people = parseInt(thisEml.parent().parent().siblings().find('.childs-style2').val()) + parseInt(thisVal);
+            let $this = $(this).closest('.tf_hotel-shortcode-design-2');
+            let total_people = parseInt(thisEml.parent().parent().siblings().find('.childs-style2').val()) + parseInt(thisEml.parent().parent().siblings().find('.infant-style2').val()) + parseInt(thisVal);
             if (total_people > 1) {
-                $(".tf_hotel-shortcode-design-2 .tf_guest_number .guest").text(total_people);
+                $this.find(".tf_guest_number .guest").text(total_people);
             }
         });
         // Shortcode Design 2 Childs change trigger
         $(document).on('change', '.childs-style2', function () {
             let thisEml = $(this);
             let thisVal = thisEml.val();
-            let total_people = parseInt(thisEml.parent().parent().siblings().find('.adults-style2').val()) + parseInt(thisVal);
+            let $this = $(this).closest('.tf_hotel-shortcode-design-2');
+            let total_people = parseInt(thisEml.parent().parent().siblings().find('.adults-style2').val()) + parseInt(thisEml.parent().parent().siblings().find('.infant-style2').val()) + parseInt(thisVal);
             if (total_people > 1) {
-                $(".tf_hotel-shortcode-design-2 .tf_guest_number .guest").text(total_people);
+                $this.find(".tf_guest_number .guest").text(total_people);
+            }
+        });
+        // Shortcode Design 2 Infants change trigger
+        $(document).on('change', '.infant-style2', function () {
+            let thisEml = $(this);
+            let thisVal = thisEml.val();
+            let $this = $(this).closest('.tf_hotel-shortcode-design-2');
+            let total_people = parseInt(thisEml.parent().parent().siblings().find('.adults-style2').val()) + parseInt(thisEml.parent().parent().siblings().find('.childs-style2').val()) + parseInt(thisVal);
+            if (total_people > 1) {
+                $this.find(".tf_guest_number .guest").text(total_people);
             }
         });
 

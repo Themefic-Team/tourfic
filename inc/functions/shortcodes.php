@@ -469,7 +469,7 @@ function tf_search_form_shortcode( $atts, $content = null ) {
 				?>
                 <div id="tf-tour-booking-form" class="tf-tabcontent" <?php echo tf_is_search_form_single_tab( $type ) ? 'style="display:block"' : '' ?><?php echo esc_attr( $child_age_limit ); ?>>
 					<?php
-						tf_tour_search_form_horizontal( $classes, $title, $subtitle, $author, $advanced );
+						tf_tour_search_form_horizontal( $classes, $title, $subtitle, $author, $advanced, $design );
 					?>
                 </div>
 				<?php
