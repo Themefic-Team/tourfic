@@ -1261,23 +1261,23 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                     });
 
 					function dateSetToFields(selectedDates, instance) {
-					if (selectedDates.length === 2) {
-						const monthNames = [
-							"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-							"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-						];
-						if(selectedDates[0]){
-							const startDate = selectedDates[0];
-							$(".tf_checkin_dates span.date").html(startDate.getDate());
-							$(".tf_checkin_dates span.month").html(monthNames[startDate.getMonth()+1]);
-						}
-						if(selectedDates[1]){
-							const endDate = selectedDates[1];
-							$(".tf_checkout_dates span.date").html(endDate.getDate());
-							$(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()+1]);
+						if (selectedDates.length === 2) {
+							const monthNames = [
+								"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+								"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+							];
+							if(selectedDates[0]){
+								const startDate = selectedDates[0];
+								$(".tf_checkin_dates span.date").html(startDate.getDate());
+								$(".tf_checkin_dates span.month").html(monthNames[startDate.getMonth()+1]);
+							}
+							if(selectedDates[1]){
+								const endDate = selectedDates[1];
+								$(".tf_checkout_dates span.date").html(endDate.getDate());
+								$(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()+1]);
+							}
 						}
 					}
-				}
 
                 });
             })(jQuery);

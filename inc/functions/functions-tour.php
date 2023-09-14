@@ -466,8 +466,8 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 						</div>
 						
 						<div class="tf_checkin_date">
-							<label class="tf_label_checkin tf_check_inout_dates">
-								<span class="tf-label"><?php _e( 'Check in', 'tourfic' ); ?></span>
+							<label class="tf_label_checkin tf_tour_check_in_out_date">
+								<span class="tf-label"><?php _e( 'Start Date', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkin_dates">
 										<span class="date"><?php _e( 'Day', 'tourfic' ); ?></span>
@@ -480,13 +480,14 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 									</div>
 								</div>
 							</label>
-							
-							<input type="hidden" name="check-in-out-date" class="tf-check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo tfopt( 'date_hotel_search' ) ? 'required' : ''; ?>>
+
+							<input type="text" name="check-in-out-date" class="tf-tour-check-in-out-date" id="check-in-out-date" onkeypress="return false;"
+                                       placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo tfopt( 'date_tour_search' ) ? 'required' : ''; ?>>
 						</div>
 						
-						<div class="tf_checkin_date tf_check_inout_dates">
+						<div class="tf_checkin_date tf_tour_check_in_out_date">
 							<label class="tf_label_checkin">
-								<span class="tf-label"><?php _e( 'Check Out', 'tourfic' ); ?></span>
+								<span class="tf-label"><?php _e( 'End Date', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkout_dates">
 										<span class="date"><?php _e( 'Day', 'tourfic' ); ?></span>
@@ -572,10 +573,10 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 		<script>
             (function ($) {
                 $(document).ready(function () {
-					$(".tf_check_inout_dates").click(function(){
-						$(".tf-check-in-out-date").click();
+					$(".tf_tour_check_in_out_date").click(function(){
+						$(".tf-tour-check-in-out-date").click();
 					});
-                    $(".tf-check-in-out-date").flatpickr({
+                    $(".tf-tour-check-in-out-date").flatpickr({
                         enableTime: false,
                         mode: "range",
                         dateFormat: "Y/m/d",
@@ -588,27 +589,26 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							dateSetToFields(selectedDates, instance);
                         },
-                        defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
                     });
 
 					function dateSetToFields(selectedDates, instance) {
-					if (selectedDates.length === 2) {
-						const monthNames = [
-							"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-							"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-						];
-						if(selectedDates[0]){
-							const startDate = selectedDates[0];
-							$(".tf_checkin_dates span.date").html(startDate.getDate());
-							$(".tf_checkin_dates span.month").html(monthNames[startDate.getMonth()+1]);
-						}
-						if(selectedDates[1]){
-							const endDate = selectedDates[1];
-							$(".tf_checkout_dates span.date").html(endDate.getDate());
-							$(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()+1]);
+						if (selectedDates.length === 2) {
+							const monthNames = [
+								"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+								"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+							];
+							if(selectedDates[0]){
+								const startDate = selectedDates[0];
+								$(".tf_tour_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
+								$(".tf_tour_check_in_out_date .tf_checkin_dates span.month").html(monthNames[startDate.getMonth()+1]);
+							}
+							if(selectedDates[1]){
+								const endDate = selectedDates[1];
+								$(".tf_tour_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
+								$(".tf_tour_check_in_out_date .tf_checkout_dates span.month").html(monthNames[endDate.getMonth()+1]);
+							}
 						}
 					}
-				}
 
                 });
             })(jQuery);

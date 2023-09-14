@@ -2699,7 +2699,8 @@ div#tf-destinationautocomplete-list div:before {
     padding-right: 24px;
   }
 }
-.tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf-check-in-out-date {
+.tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf-check-in-out-date,
+.tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf-tour-check-in-out-date {
   visibility: hidden;
   height: 0px;
   padding: 0px !important;
