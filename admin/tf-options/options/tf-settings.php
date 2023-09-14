@@ -185,6 +185,17 @@ TF_Settings::option( 'tf_settings', array(
 									'dependency' => array( 'hotel-archive', '==', 'design-1' ),
 								),
 								array(
+									'id'       => 'hotel_archive_price_minimum_settings',
+									'type'     => 'select',
+									'label'    => __( 'Select Minimum Price to Show?', 'tourfic' ),
+									'options'  => array(
+										'all'   => __( 'All', 'tourfic' ),
+										'adult'   => __( 'Adult', 'tourfic' ),
+										'child'   => __( 'Child', 'tourfic' ),
+									),
+									'default'    => 'All',
+								), 
+								array(
 									'id'      => 'hotel_archive_notice',
 									'type'    => 'notice',
 									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
@@ -346,6 +357,17 @@ TF_Settings::option( 'tf_settings', array(
 									),
 									'default'    => 'List',
 									'dependency' => array( 'tour-archive', '==', 'design-1' ),
+								),
+								array(
+									'id'       => 'tour_archive_price_minimum_settings',
+									'type'     => 'select',
+									'label'    => __( 'Select Minimum Price to Show?', 'tourfic' ),
+									'options'  => array(
+										'all'   => __( 'All', 'tourfic' ),
+										'adult'   => __( 'Adult', 'tourfic' ),
+										'child'   => __( 'Child', 'tourfic' ),
+									),
+									'default'    => 'All',
 								),
 								array(
 									'id'      => 'tour_archive_notice',

@@ -1693,6 +1693,10 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
         }, $b_rooms );
         $b_rooms = unserialize( $tf_hotel_b_rooms_value );
     }
+
+	// Archive Page Minimum Price
+    $archive_page_price_settings = !empty(tfopt('tf-template')["hotel_archive_price_minimum_settings"]) ? tfopt('tf-template')["hotel_archive_price_minimum_settings"] : 'all';
+
 	// Featured
 	$featured  = !empty($meta['featured']) ? $meta['featured'] : '';
 	/**
@@ -1795,11 +1799,23 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 				}
 			} else if ( $pricing_by == 2 ) {
 				if(empty($check_in_out)){
-					if(! empty( $b_room['adult_price'] )){
-						$room_price[] = $b_room['adult_price'];
+					if ($archive_page_price_settings == "all") {
+						if (!empty($b_room['adult_price'])) {
+							$room_price[] = $b_room['adult_price'];
+						}
+						if (!empty($b_room['child_price'])) {
+							$room_price[] = $b_room['child_price'];
+						}
+                	}
+					if ($archive_page_price_settings == "adult") {
+						if (!empty($b_room['adult_price'])) {
+							$room_price[] = $b_room['adult_price'];
+						}
 					}
-					if(! empty( $b_room['child_price'] )){
-						$room_price[] = $b_room['child_price'];
+					if ($archive_page_price_settings == "child") {
+						if (!empty($b_room['child_price'])) {
+							$room_price[] = $b_room['child_price'];
+						}
 					}
 				}else{
 					if( !empty($b_room['avil_by_date']) && $b_room['avil_by_date']=="1"){
@@ -1815,11 +1831,23 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 									}
 								}
 								if ( ! in_array( 0, $show_hotel ) ) {
-									if(! empty( $repval['adult_price'] )){
-										$room_price[] = $repval['adult_price'];
+									if($archive_page_price_settings == "all") {
+										if (!empty($repval['adult_price'])) {
+											$room_price[] = $repval['adult_price'];
+										}
+										if (!empty($repval['child_price'])) {
+											$room_price[] = $repval['child_price'];
+										}
+                                	}
+									if($archive_page_price_settings == "adult") {
+										if (!empty($repval['adult_price'])) {
+											$room_price[] = $repval['adult_price'];
+										}
 									}
-									if(! empty( $repval['child_price'] )){
-										$room_price[] = $repval['child_price'];
+									if($archive_page_price_settings == "child") {
+										if (!empty($repval['child_price']) ) {
+											$room_price[] = $repval['child_price'];
+										}
 									}
 								}
 							}
