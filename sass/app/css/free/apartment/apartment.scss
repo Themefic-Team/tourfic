@@ -1162,6 +1162,7 @@
                     padding: 0;
                     width: 100% !important;
                     color: $slate60;
+                    font-size: 16px;
 
                     &:focus {
                         outline: none;
@@ -1198,6 +1199,10 @@
                 .tf_acrselection-wrap {
                     left: 0;
                     right: auto;
+                }
+
+                .tf_input-inner {
+                    font-size: 16px;
                 }
             }
         }

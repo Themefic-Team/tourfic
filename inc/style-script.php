@@ -685,6 +685,7 @@ if ( ! function_exists( 'tf_apartment_css' ) ) {
 				background-color: ' . $form_bg . ';
 				border-color: ' . $form_border_color . ';
 			}
+			#tf-apartment-booking .tf-apartment-form-header .tf-apartment-price-per-night span:not(.woocommerce-Price-amount,.woocommerce-Price-currencySymbol),
 			#tf-apartment-booking .tf-apartment-form-header .tf-apartment-price-per-night span,
 			#tf-apartment-booking .tf-apartment-form-header .tf-single-rating {
 				color: ' . $form_text . ';
@@ -717,13 +718,14 @@ if ( ! function_exists( 'tf_apartment_css' ) ) {
 				color: ' . $host_heading_color . ';
 			}
 			.host-details,
+			.host-details .host-bottom p,
 			.tf-host-rating-wrapper h6{
 				color: ' . $host_text . ';
 			}
 			';
 		}
 
-		wp_add_inline_style( 'tf-apartment-style', $output );
+		wp_add_inline_style( 'tf-app-style', $output );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'tf_apartment_css', 99999 );

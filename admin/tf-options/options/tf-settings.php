@@ -2533,39 +2533,6 @@ TF_Settings::option( 'tf_settings', array(
 			'icon'   => 'fa-solid fa-house-chimney',
 			'fields' => array(
 				array(
-					'id'      => 'apartment_design_heading',
-					'type'    => 'heading',
-					'content' => __( 'Apartment Settings', 'tourfic' )
-				),
-				array(
-					'id'       => 'apartment-amenities',
-					'type'     => 'color',
-					'label'    => __( 'Amenities Section', 'tourfic' ),
-					'subtitle' => __( 'Styling of the Amenities', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'amenities_bg'           => __( 'Background', 'tourfic' ),
-						'amenities_border_color' => __( 'Border Color', 'tourfic' ),
-						'amenities_text'         => __( 'Text Color', 'tourfic' ),
-						'amenities_icon'         => __( 'Icon Color', 'tourfic' ),
-					)
-				),
-				array(
-					'id'       => 'apartment-features',
-					'type'     => 'color',
-					'label'    => __( 'Key Features Section', 'tourfic' ),
-					'subtitle' => __( 'Styling of the Key Features', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'features_bg'           => __( 'Background', 'tourfic' ),
-						'features_border_color' => __( 'Border Color', 'tourfic' ),
-						'features_text'         => __( 'Text Color', 'tourfic' ),
-						'features_icon'         => __( 'Icon Color', 'tourfic' ),
-					)
-				),
-				array(
 					'id'      => 'apartment_form_heading',
 					'type'    => 'heading',
 					'content' => __( 'Booking Form Design', 'tourfic' )

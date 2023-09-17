@@ -6526,6 +6526,7 @@ div#tf-contact-info {
   padding: 0;
   width: 100% !important;
   color: #607085;
+  font-size: 16px;
 }
 #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-out-date #check-in-out-date:focus {
   outline: none;
@@ -6555,6 +6556,9 @@ div#tf-contact-info {
 #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap .tf_acrselection-wrap {
   left: 0;
   right: auto;
+}
+#tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap .tf_input-inner {
+  font-size: 16px;
 }
 #tf-apartment-booking .tf-apartment-form-fields .tf-err-msg {
   color: #f44336;

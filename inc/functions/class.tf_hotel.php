@@ -134,7 +134,11 @@ class DBTFHOTELTable extends WP_List_Table {
 		}
 
 		$sort_name = $item['payment_method'];
-		$full_name = tf_get_payment_method_full_name( $sort_name );
+		if( strpos( $sort_name, 'Booked by' ) !== false ) {
+			$full_name = $item['payment_method'];
+		} else {
+			$full_name = tf_get_payment_method_full_name( $sort_name );
+		}
 
 		return $full_name;
 

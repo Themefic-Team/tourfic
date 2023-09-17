@@ -3668,6 +3668,14 @@ Steps
   border-radius: 5px;
 }
 
+.tf-backend-tour-booking h1,
+.tf-backend-hotel-booking h1 {
+  font-size: 24px;
+  line-height: 28px;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+
 .tf-backend-booking-card-wrap {
   background: #fff;
   margin-right: 20px;
