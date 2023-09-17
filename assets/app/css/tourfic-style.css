@@ -2627,6 +2627,11 @@ div#tf-destinationautocomplete-list div:before {
   display: flex;
   justify-content: space-between;
 }
+@media only screen and (max-width: 830px) {
+  .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody {
+    display: flow-root;
+  }
+}
 .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields {
   padding: 24px 40px;
   display: flex;
@@ -2636,6 +2641,16 @@ div#tf-destinationautocomplete-list div:before {
   .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields {
     padding: 24px 24px;
     width: calc(100% - 150px);
+  }
+}
+@media only screen and (max-width: 830px) {
+  .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields {
+    display: flow-root;
   }
 }
 .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf-label {
@@ -2660,6 +2675,14 @@ div#tf-destinationautocomplete-list div:before {
 @media only screen and (max-width: 1366px) {
   .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_destination_fields {
     padding-right: 24px;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_destination_fields {
+    width: 100%;
+    padding-right: 0px;
+    border-right: 0px solid;
+    padding-bottom: 24px;
   }
 }
 .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_destination_fields .tf_label_location .tf_form_inners {
@@ -2697,6 +2720,13 @@ div#tf-destinationautocomplete-list div:before {
   .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date {
     padding-left: 24px;
     padding-right: 24px;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date {
+    width: 30%;
+    float: left;
+    padding-left: 0px;
   }
 }
 .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf-check-in-out-date,
@@ -2740,6 +2770,9 @@ div#tf-destinationautocomplete-list div:before {
     font-size: 12px;
   }
 }
+.tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date.tf_check_inout_dates {
+  padding-left: 24px;
+}
 .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info {
   width: 31%;
   padding-left: 40px;
@@ -2749,6 +2782,16 @@ div#tf-destinationautocomplete-list div:before {
 @media only screen and (max-width: 1366px) {
   .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info {
     padding-left: 24px;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info {
+    width: 40%;
+    float: left;
+    border: 0px solid;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    padding-right: 0px !important;
   }
 }
 .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info .tf_input-inner {
@@ -2784,6 +2827,11 @@ div#tf-destinationautocomplete-list div:before {
     width: 150px;
   }
 }
+@media only screen and (max-width: 830px) {
+  .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_availability_checker_box {
+    width: 100%;
+  }
+}
 .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_availability_checker_box button {
   background-color: #B58E53;
   color: #FDF9F3;
@@ -2798,6 +2846,11 @@ div#tf-destinationautocomplete-list div:before {
 @media only screen and (max-width: 1366px) {
   .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_availability_checker_box button {
     font-size: 12px;
+  }
+}
+@media only screen and (max-width: 830px) {
+  .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_availability_checker_box button {
+    padding: 15px 32px;
   }
 }
 

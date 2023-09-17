@@ -444,6 +444,9 @@ div#tf-destinationautocomplete-list {
         .tf_form_innerbody{
             display: flex;
             justify-content: space-between;
+            @media #{$max830}{
+                display: flow-root;
+            }
             .tf_form_fields{
                 padding: 24px 40px;
                 display: flex;
@@ -451,6 +454,12 @@ div#tf-destinationautocomplete-list {
                 @media #{$max1366}{
                     padding: 24px 24px;
                     width: calc(100% - 150px);
+                }
+                @media #{$max830}{
+                    width: 100%;
+                }
+                @media #{$max767}{
+                    display: flow-root;
                 }
                 .tf-label{
                     font-size: 16px;
@@ -470,6 +479,12 @@ div#tf-destinationautocomplete-list {
                     border-right: 1px solid #D6D4D2;
                     @media #{$max1366}{
                         padding-right: 24px;
+                    }
+                    @media #{$max767}{
+                        width: 100%;
+                        padding-right: 0px;
+                        border-right: 0px solid;
+                        padding-bottom: 24px;
                     }
                     .tf_label_location{
                         .tf_form_inners{
@@ -507,6 +522,11 @@ div#tf-destinationautocomplete-list {
                     @media #{$max1366}{
                         padding-left: 24px;
                         padding-right: 24px;
+                    }
+                    @media #{$max767}{
+                        width: 30%;
+                        float: left;
+                        padding-left: 0px;
                     }
                     .tf-check-in-out-date,
                     .tf-tour-check-in-out-date{
@@ -547,6 +567,9 @@ div#tf-destinationautocomplete-list {
                         }
                     }
                 }
+                .tf_checkin_date.tf_check_inout_dates{
+                    padding-left: 24px;
+                }
                 .tf_guest_info{
                     width: 31%;
                     padding-left: 40px;
@@ -554,6 +577,14 @@ div#tf-destinationautocomplete-list {
                     padding-right: 0px;
                     @media #{$max1366}{
                         padding-left: 24px;
+                    }
+                    @media #{$max767}{
+                        width: 40%;
+                        float: left;
+                        border: 0px solid;
+                        padding-top: 0px !important;
+                        padding-bottom: 0px !important;
+                        padding-right: 0px !important;
                     }
                     .tf_input-inner{
                         display: flow-root;
@@ -588,8 +619,12 @@ div#tf-destinationautocomplete-list {
                 width: 222px;
                 background-color: #B58E53;
                 display: flex;
+                
                 @media #{$max1366}{
                     width: 150px;
+                }
+                @media #{$max830}{
+                    width: 100%;
                 }
                 button{
                     background-color: #B58E53;
@@ -603,6 +638,9 @@ div#tf-destinationautocomplete-list {
                     cursor: pointer;
                     @media #{$max1366}{
                         font-size: 12px;
+                    }
+                    @media #{$max830}{
+                        padding: 15px 32px;
                     }
                 }
             }
