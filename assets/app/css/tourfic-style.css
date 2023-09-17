@@ -8035,14 +8035,14 @@ div#tf-contact-info {
   width: 100%;
   object-fit: cover;
   height: 100%;
-  min-height: 350px;
+  min-height: 250px;
   border-radius: 5px 0px 0px 5px;
 }
 .tf-search-results-list .tf-layout-list .tf-item-card.tf-item-hotel .tf-item-featured img {
   width: 100%;
   object-fit: cover;
   height: 100%;
-  min-height: 420px;
+  min-height: 250px;
   border-radius: 5px 0px 0px 5px;
 }
 .tf-search-results-list .tf-layout-grid .tf-item-card {

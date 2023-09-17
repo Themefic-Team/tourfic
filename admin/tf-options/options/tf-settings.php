@@ -29,6 +29,21 @@ TF_Settings::option( 'tf_settings', array(
 					),
 				),
 				array(
+					'id'       => 'tf-date-format-for-users',
+					'type'     => 'select',
+					'label'    => __( 'Select Date Format', 'tourfic' ),
+					'subtitle' => __( 'Select a format, that will show when a user selct date', 'tourfic' ),
+					'options'  => array(
+						'Y/m/d'  => __( 'YYYY/MM/DD', 'tourfic' ),
+						'Y-m-d' => __( 'YYYY-MM-DD', 'tourfic' ),
+						'd-m-Y'  => __( 'DD-MM-YYYY', 'tourfic' ),
+						'm/d/Y'  => __( 'DD/MM/YYYY', 'tourfic' ),
+						'Y.m.d'  => __( 'YYYY.MM.DD', 'tourfic' ),
+						'd.m.Y'  => __( 'DD.MM.YYYY', 'tourfic' ),
+					),
+					'default'    => 'Y/m/d',
+				),
+				array(
 					'id'       => 'template_heading',
 					'type'     => 'heading',
 					'label'    => __( 'Template Settings', 'tourfic' ),
@@ -170,6 +185,17 @@ TF_Settings::option( 'tf_settings', array(
 									'default'    => 'List',
 									'dependency' => array( 'hotel-archive', '==', 'design-1' ),
 								),
+								array(
+									'id'       => 'hotel_archive_price_minimum_settings',
+									'type'     => 'select',
+									'label'    => __( 'Select Minimum Price to Show?', 'tourfic' ),
+									'options'  => array(
+										'all'   => __( 'All', 'tourfic' ),
+										'adult'   => __( 'Adult', 'tourfic' ),
+										'child'   => __( 'Child', 'tourfic' ),
+									),
+									'default'    => 'All',
+								), 
 								array(
 									'id'      => 'hotel_archive_notice',
 									'type'    => 'notice',
@@ -332,6 +358,17 @@ TF_Settings::option( 'tf_settings', array(
 									),
 									'default'    => 'List',
 									'dependency' => array( 'tour-archive', '==', 'design-1' ),
+								),
+								array(
+									'id'       => 'tour_archive_price_minimum_settings',
+									'type'     => 'select',
+									'label'    => __( 'Select Minimum Price to Show?', 'tourfic' ),
+									'options'  => array(
+										'all'   => __( 'All', 'tourfic' ),
+										'adult'   => __( 'Adult', 'tourfic' ),
+										'child'   => __( 'Child', 'tourfic' ),
+									),
+									'default'    => 'All',
 								),
 								array(
 									'id'      => 'tour_archive_notice',
