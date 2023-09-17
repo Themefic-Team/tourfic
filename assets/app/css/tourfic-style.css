@@ -4911,7 +4911,6 @@ div#tf-contact-info {
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   height: 32px;
   width: 100%;
-  padding: 0px 5px;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-traveller .traveller-info .traveller-single-info input[type=date],
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller .traveller-info .traveller-single-info input[type=date],
@@ -5019,6 +5018,10 @@ div#tf-contact-info {
   line-height: 20px !important;
   margin-bottom: 16px;
 }
+.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table,
+.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table {
+  border: 0px solid;
+}
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table thead tr th,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table thead tr th {
   color: #666D74;
@@ -5027,6 +5030,8 @@ div#tf-contact-info {
   font-style: normal;
   font-weight: 600;
   line-height: 28px;
+  border: 0px solid;
+  padding: 0px;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table tbody tr td,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table tbody tr td {
@@ -5036,6 +5041,8 @@ div#tf-contact-info {
   font-style: normal;
   font-weight: 400;
   line-height: 26px;
+  border: 0px solid;
+  padding: 0px;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table tfoot tr th,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table tfoot tr th {
@@ -5047,7 +5054,10 @@ div#tf-contact-info {
   line-height: 20px; /* 125% */
   padding-top: 15px;
   margin-top: 15px;
+  border: 0px solid;
   border-top: 0.3px solid #CCCED1;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination {

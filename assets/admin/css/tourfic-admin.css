@@ -1493,7 +1493,7 @@ Steps
   background-color: transparent;
   padding: 30px 100px;
   border-radius: 10px;
-  margin: 40px 40px 40px 20px;
+  margin: 40px 20px 40px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1549,7 +1549,7 @@ Steps
   width: 100%;
 }
 .tf-setting-dashboard .tf-setting-performace-section {
-  margin: 40px 40px 40px 20px;
+  margin: 40px 20px 40px 0;
   position: relative;
 }
 .tf-setting-dashboard .tf-setting-performace-section h2 {
@@ -1575,11 +1575,11 @@ Steps
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 15px;
-  width: 16%;
+  width: 16.5%;
 }
-@media only screen and (max-width: 1366px) {
+@media only screen and (max-width: 1650px) {
   .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid {
-    width: 15%;
+    padding: 12px;
   }
 }
 @media only screen and (max-width: 1199.98px) {
@@ -1601,12 +1601,21 @@ Steps
   border-radius: 50%;
   flex-shrink: 0;
 }
+.tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-icon img {
+  width: 100%;
+}
+@media only screen and (max-width: 1650px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-icon {
+    width: 42px;
+    height: 42px;
+  }
+}
 .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content {
   padding-left: 25px;
 }
-@media only screen and (max-width: 1366px) {
+@media only screen and (max-width: 1650px) {
   .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content {
-    padding-left: 15px;
+    padding-left: 10px;
   }
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content p {
@@ -1615,12 +1624,22 @@ Steps
   color: #222;
   margin: 0 0 10px;
 }
+@media only screen and (max-width: 1650px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content p {
+    font-size: 14px;
+  }
+}
 .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content h3 {
   margin: 0;
   font-size: 30px;
   font-weight: 700;
   color: #000;
   line-height: 0.8;
+}
+@media only screen and (max-width: 1650px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content h3 {
+    font-size: 24px;
+  }
 }
 .tf-setting-dashboard .tf-setting-performace-section #tf-report-loader {
   position: absolute;
@@ -1679,7 +1698,7 @@ Steps
 .tf-settings-help-center .tf-help-center-banner {
   background-color: #fff;
   border-radius: 10px;
-  margin: 40px 40px 40px 20px;
+  margin: 40px 20px 40px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1742,7 +1761,7 @@ Steps
   position: relative;
 }
 .tf-settings-help-center .tf-support-document {
-  margin: 40px 40px 40px 20px;
+  margin: 40px 20px 40px 0;
   display: flex;
   justify-content: space-between;
 }
