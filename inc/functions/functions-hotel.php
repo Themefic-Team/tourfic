@@ -1099,6 +1099,9 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 		// Check-in & out date
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
 
+		// date format for users output
+		$hotel_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+
 		?>
         <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
             <div class="tf_homepage-booking">
@@ -1195,12 +1198,15 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                         enableTime: false,
                         mode: "range",
                         dateFormat: "Y/m/d",
+						altInput: true,
+						altFormat: '<?php echo $hotel_date_format_for_users; ?>',
                         minDate: "today",
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                         },
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                         },
                         defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
                     });
@@ -1236,6 +1242,8 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
 		// Check-in & out date
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
 
+		// date format setting
+		$hotel_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 		?>
         <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
             <div class="tf_homepage-booking">
@@ -1426,11 +1434,14 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                         mode: "range",
                         dateFormat: "Y/m/d",
                         minDate: "today",
+						altInput: true,
+						altFormat: '<?php echo $hotel_date_format_for_users; ?>',
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                         },
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                         },
                         defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
                     });
@@ -1461,6 +1472,9 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
 	//get features
 	$features = ! empty( $_GET['features'] ) ? sanitize_text_field( $_GET['features'] ) : '';
+
+	// date format for users output
+	$hotel_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 
 
 	/**
@@ -1695,12 +1709,16 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
                     enableTime: false,
                     mode: "range",
                     minDate: "today",
+					altInput: true,
+					altFormat: '<?php echo $hotel_date_format_for_users; ?>',
                     dateFormat: "Y/m/d",
                     onReady: function (selectedDates, dateStr, instance) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                     },
                     onChange: function (selectedDates, dateStr, instance) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                     },
                     defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
 					<?php
@@ -1748,12 +1766,16 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	}
 	// Rooms
 	$b_rooms = ! empty( $meta['room'] ) ? $meta['room'] : array();
-	if ( ! empty( $b_rooms ) && gettype( $b_rooms ) == "string" ) {
-		$tf_hotel_b_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-		}, $b_rooms );
-		$b_rooms                = unserialize( $tf_hotel_b_rooms_value );
-	}
+	if( !empty($b_rooms) && gettype($b_rooms)=="string" ){
+        $tf_hotel_b_rooms_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+            return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+        }, $b_rooms );
+        $b_rooms = unserialize( $tf_hotel_b_rooms_value );
+    }
+
+	// Archive Page Minimum Price
+    $archive_page_price_settings = !empty(tfopt('tf-template')["hotel_archive_price_minimum_settings"]) ? tfopt('tf-template')["hotel_archive_price_minimum_settings"] : 'all';
+
 	// Featured
 	$featured = ! empty( $meta['featured'] ) ? $meta['featured'] : '';
 	/**
@@ -1855,12 +1877,24 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					}
 				}
 			} else if ( $pricing_by == 2 ) {
-				if ( empty( $check_in_out ) ) {
-					if ( ! empty( $b_room['adult_price'] ) ) {
-						$room_price[] = $b_room['adult_price'];
+				if(empty($check_in_out)){
+					if ($archive_page_price_settings == "all") {
+						if (!empty($b_room['adult_price'])) {
+							$room_price[] = $b_room['adult_price'];
+						}
+						if (!empty($b_room['child_price'])) {
+							$room_price[] = $b_room['child_price'];
+						}
+                	}
+					if ($archive_page_price_settings == "adult") {
+						if (!empty($b_room['adult_price'])) {
+							$room_price[] = $b_room['adult_price'];
+						}
 					}
-					if ( ! empty( $b_room['child_price'] ) ) {
-						$room_price[] = $b_room['child_price'];
+					if ($archive_page_price_settings == "child") {
+						if (!empty($b_room['child_price'])) {
+							$room_price[] = $b_room['child_price'];
+						}
 					}
 				} else {
 					if ( ! empty( $b_room['avil_by_date'] ) && $b_room['avil_by_date'] == "1" ) {
@@ -1876,11 +1910,23 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 									}
 								}
 								if ( ! in_array( 0, $show_hotel ) ) {
-									if ( ! empty( $repval['adult_price'] ) ) {
-										$room_price[] = $repval['adult_price'];
+									if($archive_page_price_settings == "all") {
+										if (!empty($repval['adult_price'])) {
+											$room_price[] = $repval['adult_price'];
+										}
+										if (!empty($repval['child_price'])) {
+											$room_price[] = $repval['child_price'];
+										}
+                                	}
+									if($archive_page_price_settings == "adult") {
+										if (!empty($repval['adult_price'])) {
+											$room_price[] = $repval['adult_price'];
+										}
 									}
-									if ( ! empty( $repval['child_price'] ) ) {
-										$room_price[] = $repval['child_price'];
+									if($archive_page_price_settings == "child") {
+										if (!empty($repval['child_price']) ) {
+											$room_price[] = $repval['child_price'];
+										}
 									}
 								}
 							}

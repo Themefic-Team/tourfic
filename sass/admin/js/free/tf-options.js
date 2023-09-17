@@ -110,6 +110,8 @@
                     let startDate = $this.find('.tf-date-from input.flatpickr').flatpickr({
                         dateFormat: format,
                         minDate: minDate,
+                        altInput: true,
+                        altFormat: tf_options.tf_admin_date_format,
                         onChange: function (selectedDates, dateStr, instance) {
                             endDate.set('minDate', dateStr);
                         }
@@ -117,6 +119,8 @@
                     let endDate = $this.find('.tf-date-to input.flatpickr').flatpickr({
                         dateFormat: format,
                         minDate: minDate,
+                        altInput: true,
+                        altFormat: tf_options.tf_admin_date_format,
                         onChange: function (selectedDates, dateStr, instance) {
                             startDate.set('maxDate', dateStr);
                         }
@@ -125,6 +129,8 @@
                     dateField.flatpickr({
                         dateFormat: format,
                         minDate: minDate,
+                        altInput: true,
+                        altFormat: tf_options.tf_admin_date_format,
                         mode: multiple ? 'multiple' : 'single',
                     });
                 }
@@ -499,6 +505,12 @@
             }
             let repeatDateField = add_value.find('.tf-field-date');
             if (repeatDateField.length > 0) {
+                repeatDateField.find('input').each(function () {
+                    
+                    if($(this).attr('name') == '' || typeof $(this).attr('name') === "undefined"){ 
+                     $(this).remove()
+                    }
+                 });
                 tfDateInt(repeatDateField);
             }
 
@@ -655,6 +667,11 @@
             let repeatDateField = clone_value.find('.tf-field-date');
 
             if (repeatDateField.length > 0) {
+                repeatDateField.find('input').each(function () {  
+                    if($(this).attr('name') == '' || typeof $(this).attr('name') === "undefined"){  
+                     $(this).remove();
+                    }
+                 }); 
                 tfDateInt(repeatDateField);
             }
 
