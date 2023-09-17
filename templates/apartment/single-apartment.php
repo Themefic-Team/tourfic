@@ -121,9 +121,7 @@ while ( have_posts() ) : the_post();
 
 						<?php if ( ! $disable_share_opt == '1' ) : ?>
                             <div class="tf-share">
-                                <a href="#dropdown-share-center" class="share-toggle" data-toggle="true">
-                                    <i class="fas fa-share-alt"></i> <?php _e( 'Share', 'tourfic' ) ?>
-                                </a>
+                                <a href="#dropdown-share-center" class="share-toggle" data-toggle="true"><i class="far fa-share-alt"></i></a>
                                 <div id="dropdown-share-center" class="share-tour-content">
                                     <ul class="tf-dropdown-content">
                                         <li>
@@ -194,7 +192,7 @@ while ( have_posts() ) : the_post();
                                         <i class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
                                            data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
                                            data-id="<?php echo $post_id ?>"
-                                           data-type="<?php echo $post_type ?>" <?php echo tfopt( 'wl-page' ) ? 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"' : ''; ?>> <?php _e( 'Save', 'tourfic' ) ?></i>
+                                           data-type="<?php echo $post_type ?>" <?php echo tfopt( 'wl-page' ) ? 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"' : ''; ?>></i>
                                     </a>
 									<?php
 								}
@@ -203,7 +201,7 @@ while ( have_posts() ) : the_post();
 									?>
                                     <a class="tf-wishlist-button"
                                        title="<?php _e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
-                                                class="<?php echo $has_in_wishlist ? 'fas tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart"
+                                                class="<?php echo $has_in_wishlist ? 'far tf-text-red remove-wishlist' : 'far add-wishlist' ?> fa-heart-o"
                                                 data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>"
                                                 data-id="<?php echo $post_id ?>"
                                                 data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
@@ -291,7 +289,7 @@ while ( have_posts() ) : the_post();
                                     <h2 class="section-heading"><?php echo esc_html( $meta['highlights_title'] ) ?></h2>
 								<?php endif; ?>
 
-                                <div class="tf-apt-highlights">
+                                <div class="tf-apt-highlights <?php echo count( tf_data_types( $meta['highlights'] ) ) > 3 ? 'tf-apt-highlights-slider' : ''; ?>">
 									<?php
 									foreach ( tf_data_types( $meta['highlights'] ) as $highlight ) :
 										if ( empty( $highlight['title'] ) ) {
@@ -496,7 +494,7 @@ while ( have_posts() ) : the_post();
                 <div id="apartment-map" class="tf-apartment-map-wrapper">
                     <div class="tf-container">
                         <div class="tf-row">
-                            <div class="tf-map-content-wrapper">
+                            <div class="tf-map-content-wrapper <?php echo empty( $map['address'] ) || empty( $meta['surroundings_places'] ) ? 'tf-map-content-full' : ''; ?>">
 								<?php if ( ! empty( $map['address'] ) ): ?>
                                     <div class="tf-apartment-map">
                                         <h2 class="section-heading"><?php ! empty( $meta['location_title'] ) ? esc_html_e( $meta['location_title'] ) : _e( 'Your staying location', 'tourfic' ); ?></h2>
@@ -506,15 +504,15 @@ while ( have_posts() ) : the_post();
                                     </div>
 								<?php endif; ?>
 
-                                <div class="about-location">
-									<?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
-                                        <h2 class="section-heading"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h2>
-									<?php endif; ?>
-									<?php if ( ! empty( $meta['surroundings_subtitle'] ) ): ?>
-                                        <p class="surroundings_subtitle"><?php echo esc_html( $meta['surroundings_subtitle'] ); ?></p>
-									<?php endif; ?>
+								<?php if ( isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
+                                    <div class="about-location">
+										<?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
+                                            <h2 class="section-heading"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h2>
+										<?php endif; ?>
+										<?php if ( ! empty( $meta['surroundings_subtitle'] ) ): ?>
+                                            <p class="surroundings_subtitle"><?php echo esc_html( $meta['surroundings_subtitle'] ); ?></p>
+										<?php endif; ?>
 
-									<?php if ( isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
                                         <div class="tf-apartment-surronding-wrapper">
 											<?php foreach ( tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
                                                 <div class="tf-apartment-surronding-criteria">
@@ -536,8 +534,8 @@ while ( have_posts() ) : the_post();
                                                 </div>
 											<?php endforeach; ?>
                                         </div>
-									<?php endif; ?>
-                                </div>
+                                    </div>
+								<?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -669,7 +667,7 @@ while ( have_posts() ) : the_post();
 		if ( $disable_related_sec !== '1' && $related_apartment->have_posts() ) : ?>
             <div class="tf-related-apartment">
                 <div class="tf-container">
-                    <h2 class="section-heading"><?php echo !empty( $meta['related_apartment_title'] ) ? esc_html( $meta['related_apartment_title'] ) : __( 'You may also like', 'tourfic' ); ?></h2>
+                    <h2 class="section-heading"><?php echo ! empty( $meta['related_apartment_title'] ) ? esc_html( $meta['related_apartment_title'] ) : __( 'You may also like', 'tourfic' ); ?></h2>
                     <div class="tf-related-apartment-slider">
 						<?php while ( $related_apartment->have_posts() ) : $related_apartment->the_post(); ?>
                             <div class="tf-apartment-item">

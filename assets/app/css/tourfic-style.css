@@ -5443,24 +5443,6 @@ div#tf-contact-info {
 .tf-apartment-title .tf-single-rating span {
   font-size: 16px;
 }
-.tf-apartment-title .tf-share {
-  margin-left: 8px;
-}
-.tf-apartment-title .tf-share a {
-  color: inherit;
-  font-size: 16px;
-}
-.tf-apartment-title .tf-share i {
-  padding-right: 5px;
-}
-.tf-apartment-title .tf-wishlist-button {
-  color: inherit;
-  font-size: 16px;
-  margin-left: 8px;
-}
-.tf-apartment-title .tf-wishlist-button i:before {
-  padding-right: 5px;
-}
 
 .tf-apartment {
   /* Rooms */
@@ -5477,6 +5459,10 @@ div#tf-contact-info {
 }
 .tf-apartment .tf-apt-hero-wrapper {
   position: relative;
+}
+.tf-apartment .tf-apt-hero-wrapper > img {
+  width: 100%;
+  border-radius: 8px;
 }
 .tf-apartment .tf-apt-hero-wrapper .tf-apt-hero-gallery {
   display: -webkit-box;
@@ -5617,6 +5603,41 @@ div#tf-contact-info {
   padding-bottom: 24px;
   border-bottom: 1px solid #e1e5ea;
   margin-bottom: 24px;
+}
+.tf-apartment .tf-apt-highlights.slick-dotted {
+  padding-bottom: 52px;
+}
+.tf-apartment .tf-apt-highlights .slick-dots {
+  bottom: 16px;
+}
+.tf-apartment .tf-apt-highlights .slick-dots li {
+  width: 16px;
+  height: 16px;
+}
+.tf-apartment .tf-apt-highlights .slick-dots li button {
+  background: #ddd;
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  height: 16px;
+  width: 16px;
+}
+.tf-apartment .tf-apt-highlights .slick-dots li button:before {
+  opacity: 0;
+  font-size: 0;
+  width: 6px;
+  height: 6px;
+  background: #003162;
+  top: 50%;
+  left: 50%;
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+}
+.tf-apartment .tf-apt-highlights .slick-dots li.slick-active button {
+  background: transparent;
+  border: 1px solid #003162;
+}
+.tf-apartment .tf-apt-highlights .slick-dots li.slick-active button:before {
+  opacity: 1;
 }
 .tf-apartment .tf-apt-highlights .tf-apt-highlight {
   -webkit-flex: 0 0 calc(33.3333333333% - 11px);
@@ -6011,6 +6032,16 @@ div#tf-contact-info {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   gap: 32px;
+}
+.tf-map-content-wrapper.tf-map-content-full .tf-apartment-map {
+  -webkit-flex: 0 0 100%;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+}
+.tf-map-content-wrapper.tf-map-content-full .about-location {
+  -webkit-flex: 0 0 100%;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
 }
 .tf-map-content-wrapper .tf-apartment-map {
   -webkit-flex: 0 0 calc(50% - 16px);

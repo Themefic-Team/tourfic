@@ -54,31 +54,6 @@
             font-size: 16px;
         }
     }
-
-    .tf-share {
-        a {
-            color: inherit;
-            font-size: 16px;
-        }
-
-        i {
-            padding-right: 5px;
-        }
-
-        margin-left: 8px;
-    }
-
-    .tf-wishlist-button {
-        color: inherit;
-        font-size: 16px;
-        margin-left: 8px;
-
-        i {
-            &:before {
-                padding-right: 5px;
-            }
-        }
-    }
 }
 
 .tf-apartment {
@@ -95,6 +70,11 @@
     }
     .tf-apt-hero-wrapper {
         position: relative;
+
+        &>img{
+            width: 100%;
+            border-radius: 8px;
+        }
 
         .tf-apt-hero-gallery {
             @include flexbox();
@@ -153,7 +133,6 @@
             }
         }
 
-
         .gallery-all-photos {
             position: absolute;
             right: 15px;
@@ -203,6 +182,49 @@
         padding-bottom: 24px;
         border-bottom: 1px solid $slate10;
         margin-bottom: 24px;
+
+        &.slick-dotted{
+            padding-bottom: 52px;
+        }
+        .slick-dots {
+            bottom: 16px;
+
+            li {
+                width: 16px;
+                height: 16px;
+
+                button {
+                    background: #ddd;
+                    border-radius: 30px;
+                    border: 1px solid #ddd;
+                    height: 16px;
+                    width: 16px;
+
+                    &:before {
+                        opacity: 0;
+                        font-size: 0;
+                        width: 6px;
+                        height: 6px;
+                        background: #003162;
+                        top: 50%;
+                        left: 50%;
+                        border-radius: 100%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+
+                &.slick-active {
+                    button {
+                        background: transparent;
+                        border: 1px solid #003162;
+
+                        &:before {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
 
         .tf-apt-highlight {
             @include flex(0 0 calc(100% / 3 - 11px));
@@ -638,6 +660,15 @@
     @include flexbox();
     @include flex-wrap(wrap);
     gap: 32px;
+
+    &.tf-map-content-full{
+        .tf-apartment-map{
+            @include flex(0 0 100%);
+        }
+        .about-location{
+            @include flex(0 0 100%);
+        }
+    }
 
     .tf-apartment-map {
         @include flex(0 0 calc(50% - 16px));

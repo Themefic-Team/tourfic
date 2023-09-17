@@ -487,7 +487,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 
         <!-- Start Booking widget -->
         <form id="tf-apartment-booking" class="tf-apartment-side-booking" method="get" autocomplete="off">
-            <h4><?php !empty( $meta['booking_form_title'] ) ? _e( $meta['booking_form_title'] ) : _e( 'Book your Apartment', 'tourfic' ); ?></h4>
+            <h4><?php ! empty( $meta['booking_form_title'] ) ? _e( $meta['booking_form_title'] ) : _e( 'Book your Apartment', 'tourfic' ); ?></h4>
             <div class="tf-apartment-form-header">
                 <h3 class="tf-apartment-price-per-night">
                     <span class="tf-apartment-base-price"><?php echo wc_price( $price_per_night ) ?></span>
@@ -535,8 +535,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                             <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
                                             <div class="acr-select">
                                                 <div class="acr-dec">-</div>
-                                                <input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1' ?>"
-                                                       max="<?php echo esc_attr( $max_adults ); ?>"/>
+                                                <input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1' ?>"/>
                                                 <div class="acr-inc">+</div>
                                             </div>
                                         </div>
@@ -544,8 +543,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                             <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
                                             <div class="acr-select">
                                                 <div class="acr-dec">-</div>
-                                                <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0' ?>"
-                                                       max="<?php echo esc_attr( $max_children ); ?>"/>
+                                                <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0' ?>"/>
                                                 <div class="acr-inc">+</div>
                                             </div>
                                         </div>
@@ -553,8 +551,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                             <div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
                                             <div class="acr-select">
                                                 <div class="acr-dec">-</div>
-                                                <input type="number" name="infant" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0' ?>"
-                                                       max="<?php echo esc_attr( $max_infants ); ?>"/>
+                                                <input type="number" name="infant" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0' ?>"/>
                                                 <div class="acr-inc">+</div>
                                             </div>
                                         </div>
@@ -688,11 +685,12 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 var discount_html = '<?php echo wc_price( 0 ); ?>';
                                 if (discount > 0) {
                                     $('.apartment-discount-wrap').show();
-                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', (total_price * discount / 100).toFixed(2));
 
 									<?php if ( $discount_type == 'percent' ): ?>
+                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', (total_price * discount / 100).toFixed(2));
                                     total_price = total_price - (total_price * discount / 100);
 									<?php else: ?>
+                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', discount.toFixed(2));
                                     total_price = total_price - discount;
 									<?php endif; ?>
                                 }
@@ -1251,108 +1249,107 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 		?>
         <div class="tf-hotel-quick-view" style="display: flex">
 			<?php
-			$meta  = get_post_meta( sanitize_text_field( $_POST['post_id'] ), 'tf_apartment_opt', true );
-			$rooms = ! empty( $meta['rooms'] ) ? $meta['rooms'] : '';
+			$meta = get_post_meta( sanitize_text_field( $_POST['post_id'] ), 'tf_apartment_opt', true );
 
-			foreach ( tf_data_types($meta['rooms'] ) as $key => $room ) :
+			foreach ( tf_data_types( $meta['rooms'] ) as $key => $room ) :
 				if ( $key == sanitize_text_field( $_POST['id'] ) ):
 					$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 					?>
                     <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
-						<?php
-						if ( $tf_room_gallery ) {
+						<?php if ( ! empty( $tf_room_gallery ) ) :
 							$tf_room_gallery_ids = explode( ',', $tf_room_gallery );
-						}
-						?>
+							?>
 
-                        <div class="tf-details-qc-slider tf-details-qc-slider-single">
-							<?php
-							if ( ! empty( $tf_room_gallery_ids ) ) {
-								foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
-									?>
-                                    <div class="tf-details-qcs">
-										<?php
-										$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
-										echo '<img src="' . $image_url . '" alt="">';
+                            <div class="tf-details-qc-slider tf-details-qc-slider-single">
+								<?php
+								if ( ! empty( $tf_room_gallery_ids ) ) {
+									foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
 										?>
-                                    </div>
-								<?php }
-							} ?>
-                        </div>
-                        <div class="tf-details-qc-slider tf-details-qc-slider-nav">
-							<?php
-							if ( ! empty( $tf_room_gallery_ids ) ) {
-								foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
-									?>
-                                    <div class="tf-details-qcs">
-										<?php
-										$image_url = wp_get_attachment_url( $gallery_item_id, 'thumbnail' );
-										echo '<img src="' . $image_url . '" alt="">';
+                                        <div class="tf-details-qcs">
+											<?php
+											$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+											echo '<img src="' . $image_url . '" alt="">';
+											?>
+                                        </div>
+									<?php }
+								} ?>
+                            </div>
+                            <div class="tf-details-qc-slider tf-details-qc-slider-nav">
+								<?php
+								if ( ! empty( $tf_room_gallery_ids ) ) {
+									foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
 										?>
-                                    </div>
-								<?php }
-							} ?>
-                        </div>
+                                        <div class="tf-details-qcs">
+											<?php
+											$image_url = wp_get_attachment_url( $gallery_item_id, 'thumbnail' );
+											echo '<img src="' . $image_url . '" alt="">';
+											?>
+                                        </div>
+									<?php }
+								} ?>
+                            </div>
 
-                        <script>
-                            jQuery('.tf-details-qc-slider-single').slick({
-                                slidesToShow: 1,
-                                slidesToScroll: 1,
-                                arrows: true,
-                                fade: false,
-                                adaptiveHeight: true,
-                                infinite: true,
-                                useTransform: true,
-                                speed: 400,
-                                cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
-                            });
-
-                            jQuery('.tf-details-qc-slider-nav')
-                                .on('init', function (event, slick) {
-                                    jQuery('.tf-details-qc-slider-nav .slick-slide.slick-current').addClass('is-active');
-                                })
-                                .slick({
-                                    slidesToShow: 7,
-                                    slidesToScroll: 7,
-                                    dots: false,
-                                    focusOnSelect: false,
-                                    infinite: false,
-                                    responsive: [{
-                                        breakpoint: 1024,
-                                        settings: {
-                                            slidesToShow: 5,
-                                            slidesToScroll: 5,
-                                        }
-                                    }, {
-                                        breakpoint: 640,
-                                        settings: {
-                                            slidesToShow: 4,
-                                            slidesToScroll: 4,
-                                        }
-                                    }, {
-                                        breakpoint: 420,
-                                        settings: {
-                                            slidesToShow: 3,
-                                            slidesToScroll: 3,
-                                        }
-                                    }]
+                            <script>
+                                jQuery('.tf-details-qc-slider-single').slick({
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                    arrows: true,
+                                    fade: false,
+                                    adaptiveHeight: true,
+                                    infinite: true,
+                                    useTransform: true,
+                                    speed: 400,
+                                    cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
                                 });
 
-                            jQuery('.tf-details-qc-slider-single').on('afterChange', function (event, slick, currentSlide) {
-                                jQuery('.tf-details-qc-slider-nav').slick('slickGoTo', currentSlide);
-                                var currrentNavSlideElem = '.tf-details-qc-slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
-                                jQuery('.tf-details-qc-slider-nav .slick-slide.is-active').removeClass('is-active');
-                                jQuery(currrentNavSlideElem).addClass('is-active');
-                            });
+                                jQuery('.tf-details-qc-slider-nav')
+                                    .on('init', function (event, slick) {
+                                        jQuery('.tf-details-qc-slider-nav .slick-slide.slick-current').addClass('is-active');
+                                    })
+                                    .slick({
+                                        slidesToShow: 7,
+                                        slidesToScroll: 7,
+                                        dots: false,
+                                        focusOnSelect: false,
+                                        infinite: false,
+                                        responsive: [{
+                                            breakpoint: 1024,
+                                            settings: {
+                                                slidesToShow: 5,
+                                                slidesToScroll: 5,
+                                            }
+                                        }, {
+                                            breakpoint: 640,
+                                            settings: {
+                                                slidesToShow: 4,
+                                                slidesToScroll: 4,
+                                            }
+                                        }, {
+                                            breakpoint: 420,
+                                            settings: {
+                                                slidesToShow: 3,
+                                                slidesToScroll: 3,
+                                            }
+                                        }]
+                                    });
 
-                            jQuery('.tf-details-qc-slider-nav').on('click', '.slick-slide', function (event) {
-                                event.preventDefault();
-                                var goToSingleSlide = jQuery(this).data('slick-index');
+                                jQuery('.tf-details-qc-slider-single').on('afterChange', function (event, slick, currentSlide) {
+                                    jQuery('.tf-details-qc-slider-nav').slick('slickGoTo', currentSlide);
+                                    var currrentNavSlideElem = '.tf-details-qc-slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
+                                    jQuery('.tf-details-qc-slider-nav .slick-slide.is-active').removeClass('is-active');
+                                    jQuery(currrentNavSlideElem).addClass('is-active');
+                                });
 
-                                jQuery('.tf-details-qc-slider-single').slick('slickGoTo', goToSingleSlide);
-                            });
-                        </script>
+                                jQuery('.tf-details-qc-slider-nav').on('click', '.slick-slide', function (event) {
+                                    event.preventDefault();
+                                    var goToSingleSlide = jQuery(this).data('slick-index');
 
+                                    jQuery('.tf-details-qc-slider-single').slick('slickGoTo', goToSingleSlide);
+                                });
+                            </script>
+						<?php else : ?>
+                            <img src="<?php echo esc_url( $room['thumbnail'] ) ?>" alt="room-thumbnail">
+						<?php endif; ?>
                     </div>
                     <div class="tf-hotel-details-info" style="width:440px; padding-left: 35px;max-height: 470px;padding-top: 25px; overflow-y: auto;">
 						<?php
@@ -1450,11 +1447,11 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 if ( ! function_exists( 'tf_apartment_feature_assign_taxonomies' ) ) {
 	add_action( 'wp_after_insert_post', 'tf_apartment_feature_assign_taxonomies', 100, 3 );
 	function tf_apartment_feature_assign_taxonomies( $post_id, $post, $old_status ) {
-        if ( 'tf_apartment' !== $post->post_type ) {
-            return;
-        }
+		if ( 'tf_apartment' !== $post->post_type ) {
+			return;
+		}
 		$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
-		if ( isset($meta['amenities']) && ! empty( tf_data_types( $meta['amenities'] ) ) ) {
+		if ( isset( $meta['amenities'] ) && ! empty( tf_data_types( $meta['amenities'] ) ) ) {
 			$apartment_features = array();
 			foreach ( tf_data_types( $meta['amenities'] ) as $amenity ) {
 				$apartment_features[] = intval( $amenity['feature'] );

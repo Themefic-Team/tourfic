@@ -7,8 +7,12 @@ function tf_apt_amenities_cats() {
 	$all_cats       = [];
 	if ( ! empty( $amenities_cats ) && is_array( $amenities_cats ) ) {
 		foreach ( $amenities_cats as $key => $cat ) {
-			$all_cats[ $key ] = $cat['amenities_cat_name'];
+			$all_cats[ (string) $key ] = $cat['amenities_cat_name'];
 		}
+	}
+
+	if(empty($all_cats)){
+		$all_cats[''] = __( 'Select Category', 'tourfic' );
 	}
 
 	return $all_cats;
@@ -56,6 +60,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'     => 'text',
 					'label'    => __( 'Section Title', 'tourfic' ),
 					'subtitle' => __( 'Enter location section title', 'tourfic' ),
+					'default'  => __( 'Where you’ll be', 'tourfic' ),
 				),
 				array(
 					'id'          => 'address',
@@ -102,6 +107,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'     => 'surroundings_places',
 					'type'   => 'repeater',
 					'label'  => __( 'Surroundings Places', 'tourfic' ),
+					'button_title' => __( 'Add New Criteria', 'tourfic' ),
 					'is_pro' => true,
 					'fields' => array(
 						array(
@@ -119,6 +125,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'id'     => 'places',
 							'type'   => 'repeater',
 							'label'  => __( 'Places', 'tourfic' ),
+							'button_title' => __( 'Add New Place', 'tourfic' ),
 							'fields' => array(
 								array(
 									'id'          => 'place_name',
@@ -147,6 +154,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'    => 'booking_form_title',
 					'type'  => 'text',
 					'label' => __( 'Form Title', 'tourfic' ),
+					'default' => __( 'Book your apartment', 'tourfic' ),
 				),
 				array(
 					'id'          => 'price_per_night',
@@ -259,6 +267,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'    => 'room_details_title',
 					'type'  => 'text',
 					'label' => __( 'Section Title', 'tourfic' ),
+					'default' => __( 'Where you\'ll sleep', 'tourfic' ),
 				),
 				array(
 					'id'           => 'rooms',
@@ -379,6 +388,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'    => 'highlights_title',
 					'type'  => 'text',
 					'label' => __( 'Highlights Title', 'tourfic' ),
+					'default' => __( 'Discover Our Top Features', 'tourfic' ),
 				),
 				array(
 					'id'           => 'highlights',
@@ -413,6 +423,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'    => 'amenities_title',
 					'type'  => 'text',
 					'label' => __( 'Amenities Title', 'tourfic' ),
+					'default' => __( 'What this place offers', 'tourfic' ),
 				),
 				array(
 					'id'           => 'amenities',
@@ -438,6 +449,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'label'       => __( 'Category', 'tourfic' ),
 							'placeholder' => __( 'Select category', 'tourfic' ),
 							'options'     => tf_apt_amenities_cats(),
+							'description' => __( 'Add new category from <a target="_blank" href="'.admin_url('admin.php?page=tf_settings#tab=apartment_single_page').'">Amenities Categories</a>', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
@@ -460,6 +472,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'    => 'house_rules_title',
 					'type'  => 'text',
 					'label' => __( 'House Rules Title', 'tourfic' ),
+					'default' => __( 'House Rules', 'tourfic' ),
 				),
 				array(
 					'id'           => 'house_rules',
@@ -480,7 +493,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 						array(
 							'id'        => 'include',
 							'type'      => 'switch',
-							'label'     => __( 'Include?', 'tourfic' ),
+							'label'     => __( 'Allowed?', 'tourfic' ),
 							'label_on'  => __( 'Yes', 'tourfic' ),
 							'label_off' => __( 'No', 'tourfic' ),
 							'default'   => true,
@@ -503,6 +516,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'    => 'faq_title',
 					'type'  => 'text',
 					'label' => __( 'Section Title', 'tourfic' ),
+					'default' => __( 'Frequently Asked Questions', 'tourfic' ),
 				),
 				array(
 					'id'    => 'faq_desc',
@@ -536,6 +550,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'    => 'terms_title',
 					'type'  => 'text',
 					'label' => __( 'Section Title', 'tourfic' ),
+					'default' => __( 'Terms & Conditions', 'tourfic' ),
 				),
 				array(
 					'id'    => 'terms_and_conditions',
