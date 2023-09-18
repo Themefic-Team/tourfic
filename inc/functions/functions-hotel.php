@@ -1491,6 +1491,17 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 		}, $rooms );
 		$rooms                = unserialize( $tf_hotel_rooms_value );
 	}
+	
+	//minimum and maximum stay requirements values
+	$room_stay_requirements = array( );
+	foreach($rooms as $key => $room) {
+		$room_stay_requirements[] = array(
+			'min_stay' => $room["minimum_stay_requirement"], 
+			"max_stay" => $room["maximum_stay_requirement"]
+		);
+	}
+
+	
 
 	$total_dis_dates = [];
 	$maxadults       = [];
@@ -1705,6 +1716,17 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
     <script>
         (function ($) {
             $(document).ready(function () {
+
+				const dateCalc = function(selectedDates) {
+					var stayRequiremets = <?php echo json_encode($room_stay_requirements) ?>;
+					if(selectedDates[0] && selectedDates[1]) {
+						var diff = Math.abs(selectedDates[1] - selectedDates[0]);
+                        var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+						console.log(stayRequiremets)
+					}
+					//TODO1: find a way to get the array values here
+				}
+
                 const checkinoutdateange = flatpickr(".tf-hotel-booking-sidebar #check-in-out-date", {
                     enableTime: false,
                     mode: "range",
@@ -1719,6 +1741,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
                     onChange: function (selectedDates, dateStr, instance) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+						dateCalc(selectedDates)
                     },
                     defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
 					<?php

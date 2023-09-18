@@ -291,6 +291,29 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'label' => __( 'Room Description', 'tourfic' ),
 						),
 						array(
+							'id'      => 'minimum_maximum_stay_requirements',
+							'type'    => 'heading',
+							'content' => __( 'Minimum and Maximum Stay Requirements', 'tourfic' ),
+							'class'   => 'tf-field-class',
+						),
+						array(
+							'id'          => 'minimum_stay_requirement',
+							'type'        => 'number',
+							'label'       => __( 'Minimum Stay Requiremet', 'tourfic' ),
+							'subtitle'    => __( 'The number of days is minimum to stay in this room', 'tourfic' ),
+							'attributes'  => array(
+								'min' => '1',
+							),
+							'field_width' => 50,
+						),
+						array(
+							'id'          => 'maximum_stay_requirement',
+							'type'        => 'number',
+							'label'       => __( 'Maximum Stay Requiremet', 'tourfic' ),
+							'subtitle'    => __( 'The number of days is maximum to stay in this room', 'tourfic' ),
+							'field_width' => 50,
+						),
+						array(
 							'id'      => 'Pricing',
 							'type'    => 'heading',
 							'content' => __( 'Pricing', 'tourfic' ),
