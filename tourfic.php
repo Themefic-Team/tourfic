@@ -70,6 +70,9 @@ if ( ! defined( 'TOURFIC' ) ) {
 if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
 	function tf_enqueue_main_admin_scripts() {
 
+		//date format
+		$date_format_change  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+
 		// Custom
 		wp_enqueue_style( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css', '', TOURFIC );
 		wp_enqueue_style( 'tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css', '', TOURFIC );
@@ -92,6 +95,7 @@ if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
 				'installed'                        => __( 'Installed', 'tourfic' ),
 				'activated'                        => __( 'Activated', 'tourfic' ),
 				'install_failed'                   => __( 'Install failed', 'tourfic' ),
+				'date_format_change_backend' 	   => $date_format_change,
 				'i18n'                             => array(
 					'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
 				)
