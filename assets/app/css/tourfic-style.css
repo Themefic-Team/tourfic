@@ -2734,7 +2734,7 @@ div#tf-destinationautocomplete-list div:before {
   visibility: hidden;
   height: 0px;
   padding: 0px !important;
-  width: 100%;
+  width: 0px;
   position: absolute;
 }
 .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date label {
