@@ -678,7 +678,7 @@ function tf_tours_booking_function() {
 			'shipping_details' => $shipping_details,
 			'order_details'    => $order_details,
 			'payment_method'   => 'offline',
-			'status'           => 'processing',
+			'status'           => 'completed',
 			'order_date'       => date( 'Y-m-d H:i:s' ),
 		);
 		$response['without_payment'] = 'true';
