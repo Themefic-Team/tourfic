@@ -405,6 +405,16 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'default' => false,
 						),
 						array(
+							'id'      => 'ical',
+							'type'    => 'heading',
+							'content' => __( 'iCal Sync', 'tourfic' ),
+						),
+						array(
+							'id'      => 'ical_url',
+							'type'    => 'text',
+							'label'   => __( 'iCal URL', 'tourfic' ),
+						),
+						array(
 							'id'      => 'Availability',
 							'type'    => 'heading',
 							'content' => __( 'Availability', 'tourfic' ),
