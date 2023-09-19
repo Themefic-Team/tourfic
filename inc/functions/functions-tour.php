@@ -1030,10 +1030,10 @@ function tf_single_tour_booking_form( $post_id ) {
                                 <p><?php echo __( "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural", "tourfic" ); ?></p>
                                 <div class="tf-booking-content-extra">
 									<?php
-									if ( ( ! empty( $tour_extras[0]['title'] ) && ! empty( $tour_extras[0]['desc'] ) && ! empty( $tour_extras[0]['price'] ) ) || ! empty( $tour_extras[1]['title'] ) && ! empty( $tour_extras[1]['desc'] ) && ! empty( $tour_extras[1]['price'] ) ) {
+									if ( ( ! empty( $tour_extras[0]['title'] ) && ! empty( $tour_extras[0]['price'] ) ) || ! empty( $tour_extras[1]['title'] ) && ! empty( $tour_extras[1]['price'] ) ) {
 										?>
 										<?php foreach ( $tour_extras as $extrakey => $tour_extra ) {
-											if ( ! empty( $tour_extra['title'] ) && ! empty( $tour_extra['desc'] ) && ! empty( $tour_extra['price'] ) ) {
+											if ( ! empty( $tour_extra['title'] ) && ! empty( $tour_extra['price'] ) ) {
 												$tour_extra_pricetype = ! empty( $tour_extra['price_type'] ) ? $tour_extra['price_type'] : 'fixed';
 												?>
                                                 <div class="tf-single-tour-extra tour-extra-single">
@@ -1046,7 +1046,10 @@ function tf_single_tour_booking_form( $post_id ) {
                                                         <div class="tf-extra-content">
                                                             <h5><?php _e( $tour_extra['title'] ); ?> <?php echo $tour_extra_pricetype == "fixed" ? esc_html( "(Fixed Price)" ) : esc_html( "(Per Person Price)" ); ?>
                                                                 <span><?php echo wc_price( $tour_extra['price'] ); ?></span></h5>
+															<?php
+															if(!empty($tour_extra['desc'])){ ?>
                                                             <p><?php echo esc_html( $tour_extra['desc'] ); ?></p>
+															<?php } ?>
                                                         </div>
                                                     </label>
                                                 </div>
@@ -1223,7 +1226,7 @@ function tf_single_tour_booking_form( $post_id ) {
 							    if( 3!=$tf_booking_by && empty($traveller_info_coll) ){ ?>
                                     <button type="submit"><?php echo __("Continue", "tourfic"); ?></button>
 							    <?php }else{ ?>
-                                    <a href="#" class="tf-next-control tf-tabs-control" data-step="2"><?php echo __("Continue", "tourfic"); ?></a>
+                                    <a href="#" class="tf-next-control tf-tabs-control" data-step="<?php echo 3==$tf_booking_by && empty($traveller_info_coll) ? esc_attr("3") : esc_attr("2"); ?>"><?php echo __("Continue", "tourfic"); ?></a>
 							    <?php } ?>
                             </div>
 						<?php }

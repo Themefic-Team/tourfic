@@ -406,12 +406,12 @@ function tf_hotel_airport_service_callback() {
 		} else {
 
 			if ( $pricing_by == '1' ) {
-				$total_price = $rooms[ $room_id ]['price'];
+				$total_price = !empty($rooms[ $room_id ]['price']) ? $rooms[ $room_id ]['price'] : 0;
 
 			} elseif ( $pricing_by == '2' ) {
-				$adult_price = $rooms[ $room_id ]['adult_price'];
+				$adult_price = !empty($rooms[ $room_id ]['adult_price']) ? $rooms[ $room_id ]['adult_price'] : 0;
 				$adult_price = $adult_price * $adult;
-				$child_price = $rooms[ $room_id ]['child_price'];
+				$child_price = !empty($rooms[ $room_id ]['child_price']) ? $rooms[ $room_id ]['child_price'] : 0;
 				$child_price = $child_price * $child;
 				$total_price = $adult_price + $child_price;
 

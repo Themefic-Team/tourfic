@@ -498,10 +498,10 @@ span.close-aq {
     flex-direction: column;
 
     input {
-        width: 100%;
+        max-width: 100%;
     }
     textarea {
-        width: 100%;
+        max-width: 100%;
     }
 }
 .tf-booking-form-tab-mobile {

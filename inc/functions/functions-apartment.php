@@ -282,6 +282,9 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 		// Check-in & out date
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
 
+		// date format for appartments
+		$date_format_change_appartments  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+
 		?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
 
@@ -437,12 +440,16 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                         enableTime: false,
                         mode: "range",
                         dateFormat: "Y/m/d",
+						altInput: true,
+						altFormat: '<?php echo $date_format_change_appartments; ?>',
                         minDate: "today",
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                         },
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                         },
                         defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
                     });
@@ -470,6 +477,9 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$discount_type   = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 		$discount        = ! empty( $meta['discount'] ) ? $meta['discount'] : 0;
 		$booked_dates    = tf_apartment_booked_days( get_the_ID() );
+
+		// date format for apartment
+		$date_format_change_appartments  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 
 		if ( defined( 'TF_PRO' ) ) {
 			$additional_fees = ! empty( $meta['additional_fees'] ) ? $meta['additional_fees'] : array();
@@ -732,14 +742,18 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         enableTime: false,
                         mode: "range",
                         minDate: "today",
+						altInput: true,
+						altFormat: '<?php echo $date_format_change_appartments; ?>',
                         dateFormat: "Y/m/d",
                         defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                             bookingCalculation(selectedDates);
                         },
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                             bookingCalculation(selectedDates);
                         },
                         disable: [

@@ -295,6 +295,8 @@
 
                         let flatpickerObj = {
                             enableTime: false,
+                            // altInput: true,
+                            // altFormat: tf_admin_params.date_format_change_backend,
                             dateFormat: "Y/m/d",
                         };
                         if (obj.tour_type === 'fixed') {
