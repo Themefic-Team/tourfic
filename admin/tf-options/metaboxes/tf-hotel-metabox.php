@@ -293,7 +293,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 						array(
 							'id'      => 'minimum_maximum_stay_requirements',
 							'type'    => 'heading',
-							'content' => __( 'Minimum and Maximum Stay Requirements', 'tourfic' ),
+							'content' => __( 'Stay Requirements', 'tourfic' ),
 							'class'   => 'tf-field-class',
 						),
 						array(
