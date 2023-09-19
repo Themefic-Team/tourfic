@@ -1226,7 +1226,7 @@ function tf_single_tour_booking_form( $post_id ) {
 							    if( 3!=$tf_booking_by && empty($traveller_info_coll) ){ ?>
                                     <button type="submit"><?php echo __("Continue", "tourfic"); ?></button>
 							    <?php }else{ ?>
-                                    <a href="#" class="tf-next-control tf-tabs-control" data-step="2"><?php echo __("Continue", "tourfic"); ?></a>
+                                    <a href="#" class="tf-next-control tf-tabs-control" data-step="<?php echo 3==$tf_booking_by && empty($traveller_info_coll) ? esc_attr("3") : esc_attr("2"); ?>"><?php echo __("Continue", "tourfic"); ?></a>
 							    <?php } ?>
                             </div>
 						<?php }
