@@ -983,20 +983,20 @@ if ( ! function_exists( 'tf_filter_apartment_by_date' ) ) {
 					}
 				}
 
-				// foreach ( $booked_dates as $booked_date ) {
-				// 	$booked_from = strtotime( $booked_date['check_in'] );
-				// 	$booked_to   = strtotime( $booked_date['check_out'] );
+                /*foreach ( $booked_dates as $booked_date ) {
+                    $booked_from = strtotime( $booked_date['check_in'] );
+                    $booked_to   = strtotime( $booked_date['check_out'] );
 
-				// 	if ( $check_in_stt >= $booked_from && $check_in_stt <= $booked_to ) {
-				// 		$has_apartment = true;
-				// 	}
-				// 	if ( $check_out_stt >= $booked_from && $check_out_stt <= $booked_to ) {
-				// 		$has_apartment = true;
-				// 	}
-				// 	if ( $check_in_stt <= $booked_from && $check_out_stt >= $booked_to ) {
-				// 		$has_apartment = true;
-				// 	}
-				// }
+                    if ( $check_in_stt >= $booked_from && $check_in_stt <= $booked_to ) {
+                        $has_apartment = true;
+                    }
+                    if ( $check_out_stt >= $booked_from && $check_out_stt <= $booked_to ) {
+                        $has_apartment = true;
+                    }
+                    if ( $check_in_stt <= $booked_from && $check_out_stt >= $booked_to ) {
+                        $has_apartment = true;
+                    }
+                }*/
 			}
 		}
 
