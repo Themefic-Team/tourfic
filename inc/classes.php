@@ -61,3 +61,15 @@ if(is_admin()){
 		tf_file_missing(TF_INC_PATH . 'backend-booking/TF_Tour_Backend_Booking.php');
 	}
 }
+
+/**
+ * TF iCal sync
+ * @author Foysal
+ */
+if(is_admin()){
+	if ( file_exists( TF_INC_PATH . 'ical/TF_Ical.php' ) ) {
+		require_once TF_INC_PATH . 'ical/TF_Ical.php';
+	} else {
+		tf_file_missing(TF_INC_PATH . 'ical/TF_Ical.php');
+	}
+}
