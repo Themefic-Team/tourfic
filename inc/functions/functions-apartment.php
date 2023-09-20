@@ -1087,7 +1087,6 @@ if ( ! function_exists( 'tf_filter_apartment_by_date' ) ) {
 					}
 				}
 
-				
 			}
 		}
 

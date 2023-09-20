@@ -74,6 +74,7 @@
         &>img{
             width: 100%;
             border-radius: 8px;
+            height: auto;
         }
 
         .tf-apt-hero-gallery {
@@ -84,6 +85,7 @@
                 object-fit: cover;
                 width: 100%;
                 border-radius: 8px;
+                height: auto;
             }
 
             .tf-apt-hero-left {
@@ -759,6 +761,8 @@
             list-style: none;
             @include flex(0 0 calc(50% - 15px));
             padding-left: 30px;
+            margin: 0;
+            box-sizing: border-box;
 
             @media #{$max767} {
                 @include flex(0 0 100%);

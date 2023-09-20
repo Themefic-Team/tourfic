@@ -5473,6 +5473,7 @@ div#tf-contact-info {
 .tf-apartment .tf-apt-hero-wrapper > img {
   width: 100%;
   border-radius: 8px;
+  height: auto;
 }
 .tf-apartment .tf-apt-hero-wrapper .tf-apt-hero-gallery {
   display: -webkit-box;
@@ -5486,6 +5487,7 @@ div#tf-contact-info {
   object-fit: cover;
   width: 100%;
   border-radius: 8px;
+  height: auto;
 }
 .tf-apartment .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-left {
   -webkit-flex: 0 0 100%;
@@ -6162,6 +6164,8 @@ div#tf-contact-info {
   -ms-flex: 0 0 calc(50% - 15px);
   flex: 0 0 calc(50% - 15px);
   padding-left: 30px;
+  margin: 0;
+  box-sizing: border-box;
 }
 @media only screen and (max-width: 767.98px) {
   .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules,
