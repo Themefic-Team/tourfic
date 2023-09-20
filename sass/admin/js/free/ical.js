@@ -33,21 +33,22 @@
                 data: {
                     action: 'tf_import_ical',
                     ical_url: iCalUrl,
-                    security: tf_admin_params.tf_nonce,
                 },
-                processData: false,
-                contentType: false,
                 beforeSend: function (response) {
                     btn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     const obj = JSON.parse(response);
                     console.log('obj', obj);
+
                     btn.removeClass('tf-btn-loading');
                 },
+                error: function (response) {
+                    btn.removeClass('tf-btn-loading');
+                    console.log('error', response);
+                }
             })
 
-            console.log('clicked');
         });
     });
 

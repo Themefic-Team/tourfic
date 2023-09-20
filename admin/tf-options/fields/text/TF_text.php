@@ -20,7 +20,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 
 			if ( isset( $this->field['button_text'] ) && ! empty( $this->field['button_text'] ) ) {
 				$button_id = isset( $this->field['button_id'] ) ? 'id="' . $this->field['button_id'] . '"' : '';
-				echo '<button class="button button-primary button-large" ' . $button_id . ' style="margin-top:12px;">' . $this->field['button_text'] . '</button>';
+				echo '<a class="button button-primary button-large" ' . $button_id . ' style="margin-top:12px;">' . $this->field['button_text'] . '</a>';
 			}
 		}
 
