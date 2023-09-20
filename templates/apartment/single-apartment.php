@@ -206,7 +206,7 @@ while ( have_posts() ) : the_post();
                                                 data-id="<?php echo $post_id ?>"
                                                 data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
 											echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
-										} ?>> Save</i></a>
+										} ?>></i></a>
 									<?php
 								}
 							}
@@ -543,29 +543,40 @@ while ( have_posts() ) : the_post();
 			<?php endif; ?>
 		<?php endif; ?>
 
-		<?php if ( isset( $meta['house_rules'] ) && ! empty( tf_data_types( $meta['house_rules'] ) ) ): ?>
+		<?php if ( isset( $meta['house_rules'] ) && ! empty( tf_data_types( $meta['house_rules'] ) ) ):
+			$included_house_rules = array();
+			$not_included_house_rules = array();
+			foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
+				if ( isset( $house_rule['include'] ) && $house_rule['include'] == '1' ) {
+					$included_house_rules[] = $house_rule;
+				} else {
+					$not_included_house_rules[] = $house_rule;
+				}
+			}
+			?>
             <div class="tf-house-rules">
                 <div class="tf-container">
                     <h3 class="section-heading"><?php ! empty( $meta['house_rules_title'] ) ? esc_html_e( $meta['house_rules_title'] ) : _e( 'House Rules', 'tourfic' ); ?></h3>
-                    <div class="tf-house-rules-wrapper">
-                        <ul class="tf-included-house-rules">
-							<?php
-							foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
-								if ( isset( $house_rule['include'] ) && $house_rule['include'] == '1' ) {
-									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $house_rule['title'] ), esc_html( $house_rule['desc'] ) );
+                    <div class="tf-house-rules-wrapper <?php echo empty( $included_house_rules ) || empty( $not_included_house_rules ) ? 'tf-house-rules-full' : ''; ?>">
+						<?php if ( ! empty( $included_house_rules ) ): ?>
+                            <ul class="tf-included-house-rules">
+								<?php
+								foreach ( $included_house_rules as $item ) {
+									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $item['title'] ), esc_html( $item['desc'] ) );
 								}
-							}
-							?>
-                        </ul>
-                        <ul class="tf-not-included-house-rules">
-							<?php
-							foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
-								if ( ! isset( $house_rule['include'] ) ) {
-									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $house_rule['title'] ), esc_html( $house_rule['desc'] ) );
+								?>
+                            </ul>
+						<?php endif; ?>
+
+						<?php if ( ! empty( $not_included_house_rules ) ): ?>
+                            <ul class="tf-not-included-house-rules">
+								<?php
+								foreach ( $not_included_house_rules as $item ) {
+									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $item['title'] ), esc_html( $item['desc'] ) );
 								}
-							}
-							?>
-                        </ul>
+								?>
+                            </ul>
+						<?php endif; ?>
                     </div>
                 </div>
             </div>
