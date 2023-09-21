@@ -577,7 +577,7 @@
         );
         //show related tour based on selected tours
         $selected_ids = tfopt('tf-related-tours');
-        $args['post__not_in'] = array( $post_id );
+        $args['post__not_in'] = array($post_id);
 
         if( $related_tour_type == 'selected' && defined( 'TF_PRO' ) ){
             $args['post__in'] = $selected_ids;
@@ -605,54 +605,58 @@
                             while ( $tours->have_posts() ) {
                                 $tours->the_post();
 
-                                $post_id                = get_the_ID();
-                                $destinations           = get_the_terms( $post_id, 'tour_destination' );
-                                $first_destination_name = $destinations[0]->name;
-                                $related_comments       = get_comments( array( 'post_id' => $post_id ) );
-                                $meta                   = get_post_meta( $post_id, 'tf_tours_opt', true );
-                                $pricing_rule           = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-                                $disable_adult          = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
-                                $disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
-                                $tour_price             = new Tour_Price( $meta );
-                                ?>
-
-                                <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post_id, 'full' ); ?>);">
-                                    <div class="tf-slider-content">
-                                        <div class="tf-slider-desc">
-                                            <h3>
-                                                <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
-                                                <span><?php echo $first_destination_name; ?></span>
-                                            </h3>
-                                        </div>
-                                        <div class="tf-suggestion-rating">
-                                            <div class="tf-suggestion-price">
-                                    <span>
-                                    <?php if ( $pricing_rule == 'group' ) {
-                                        echo $tour_price->wc_sale_group ?? $tour_price->wc_group;
-                                    } else if ( $pricing_rule == 'person' ) {
-                                        if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
-                                            echo $tour_price->wc_sale_adult ?? $tour_price->wc_adult;
-                                        } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
-                                            echo $tour_price->wc_sale_child ?? $tour_price->wc_child;
-
-                                        }
-                                    }
-                                    ?>
-                                    </span>
-                                            </div>
-                                            <?php
-                                            if ( $related_comments ) {
-                                                ?>
-                                                <div class="tf-slider-rating-star">
-                                                    <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating( $related_comments ); ?></span>
+                                foreach($selected_ids as $selected_id) {
+                                    if($selected_id != $post_id) {
+                                        $selected_post_id       = $selected_id;
+                                        $destinations           = get_the_terms( $selected_post_id, 'tour_destination' );
+                                        $first_destination_name = $destinations[0]->name;
+                                        $related_comments       = get_comments( array( 'post_id' => $selected_post_id ) );
+                                        $meta                   = get_post_meta( $selected_post_id, 'tf_tours_opt', true );
+                                        $pricing_rule           = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+                                        $disable_adult          = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
+                                        $disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
+                                        $tour_price             = new Tour_Price( $meta );                                    
+                                        ?>
+                                        <div class="tf-slider-item" style="background-image: url(<?php echo get_the_post_thumbnail_url( $selected_post_id, 'full' ); ?>);">
+                                            <div class="tf-slider-content">
+                                                <div class="tf-slider-desc">
+                                                    <h3>
+                                                        <a href="<?php echo get_permalink($selected_post_id) ?>"><?php echo get_the_title($selected_post_id) ?></a>
+                                                        <span><?php echo $first_destination_name; ?></span>
+                                                    </h3>
                                                 </div>
-                                                <?php
+                                                <div class="tf-suggestion-rating">
+                                                    <div class="tf-suggestion-price">
+                                            <span>
+                                            <?php if ( $pricing_rule == 'group' ) {
+                                                echo $tour_price->wc_sale_group ?? $tour_price->wc_group;
+                                            } else if ( $pricing_rule == 'person' ) {
+                                                if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
+                                                    echo $tour_price->wc_sale_adult ?? $tour_price->wc_adult;
+                                                } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
+                                                    echo $tour_price->wc_sale_child ?? $tour_price->wc_child;
+
+                                                }
                                             }
                                             ?>
+                                            </span>
+                                                    </div>
+                                                    <?php
+                                                    if ( $related_comments ) {
+                                                        ?>
+                                                        <div class="tf-slider-rating-star">
+                                                            <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo tf_total_avg_rating( $related_comments ); ?></span>
+                                                        </div>
+                                                        <?php
+                                                    }
+                                                    ?>
 
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    <?php } ?>
+                                <?php } ?>
+                                <?php break; ?>
                             <?php } ?>
                         </div>
                     </div>
