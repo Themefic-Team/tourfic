@@ -50,12 +50,6 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 		 * Get current logged in user
 		 */
 
-		if ( file_exists( TF_INC_PATH . 'functions/class.tf_tour.php' ) ) {
-			require_once TF_INC_PATH . 'functions/class.tf_tour.php';
-		} else {
-			tf_file_missing( TF_INC_PATH . 'functions/class.tf_tour.php' );
-		}
-
 		$current_user = wp_get_current_user();
 		// get user id
 		$current_user_id = $current_user->ID;
@@ -109,30 +103,35 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 
 		?>
 
-        <div class="wrap" style="margin-right: 20px;">
+        <div class="wrap tf_booking_details_wrap" style="margin-right: 20px;">
             <div id="tf-booking-status-loader">
                 <img src="<?php echo TF_ASSETS_URL; ?>app/images/loader.gif" alt="Loader">
             </div>
-            <h1 class="wp-heading-inline"><?php _e( 'Tour Booking Details', 'tourfic' ); ?></h1>
-			<?php
-			/**
-			 * Before Tour booking details table hook
-			 * @hooked tf_before_tour_booking_details - 10
-			 * @since 2.9.18
-			 */
-			do_action( 'tf_before_tour_booking_details' );
-
-			?>
+			<div class="tf_booking_wrap_header">
+				<h1 class="wp-heading-inline"><?php _e( 'Tour Booking Details', 'tourfic' ); ?></h1>
+				<div class="tf_header_wrap_button">
+					<?php
+					/**
+					 * Before Tour booking details table hook
+					 * @hooked tf_before_tour_booking_details - 10
+					 * @since 2.9.18
+					 */
+					do_action( 'tf_before_tour_booking_details' );
+					?>
+				</div>
+			</div>
             <hr class="wp-header-end">
 
 			<?php
 			/**
-			 * Booking Data showing from tourfic table
+			 * Booking Data showing new template
 			 * @since 2.9.26
 			 */
-			$tours_orders_result = new DBTFTOURTable( $tours_orders_result );
-			$tours_orders_result->prepare_items();
-			$tours_orders_result->display();
+			if ( file_exists( TF_INC_PATH . 'functions/tour-booking-data-template.php' ) ) {
+				require_once TF_INC_PATH . 'functions/tour-booking-data-template.php';
+			} else {
+				tf_file_missing( TF_INC_PATH . 'functions/tour-booking-data-template.php' );
+			}
 			?>
         </div>
 
@@ -454,19 +453,5 @@ if ( ! function_exists( 'tf_get_all_order_id' ) ) {
 		$order_ids  = $wpdb->get_col( "SELECT order_id FROM $table_name" );
 
 		return $order_ids;
-	}
-}
-
-add_action( 'admin_head', 'tf_booking_order_table_column' );
-if ( ! function_exists( 'tf_booking_order_table_column' ) ) {
-	function tf_booking_order_table_column() {
-		$page = ( isset($_GET['page'] ) ) ? esc_attr( $_GET['page'] ) : false;
-		if( 'tf_hotel_booking' != $page && 'tf_tours_booking' != $page && 'tf_apartment_booking' != $page )
-		return;
-
-		echo '<style type="text/css">';
-		echo '.wp-list-table .column-order_id { width: 90px; }';
-		echo '.wp-list-table .column-oedit { width: 50px; }';
-		echo '</style>';
 	}
 }

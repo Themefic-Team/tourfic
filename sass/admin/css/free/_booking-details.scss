@@ -1,0 +1,133 @@
+.tf_booking_details_wrap{
+    .tf_booking_wrap_header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h1{
+            color: #1D2327;
+            font-family: Segoe UI;
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            padding: 0;
+        }
+        .tf_header_wrap_button{
+            a.tf-export-btn{
+                padding: 10px 32px;
+                border-radius: 8px;
+                border: 1px solid #003C79;
+                background: #FFF;
+                margin: 0 !important;
+                color: #003C79;
+                font-family: Segoe UI;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 24px; /* 150% */
+            }
+            a.tf-booking-btn{
+                padding: 10px 32px;
+                border-radius: 8px;
+                border: 1px solid #003C79;
+                background: #003C79;
+                margin: 0;
+                box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
+                font-family: Segoe UI;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 24px; /* 150% */
+                color: #F0F0F1;
+                margin-left: 15px;
+            }
+        }
+    }
+
+    .wp-list-table{
+        border-radius: 12px;
+        background: #EDEDF8;
+        box-shadow: 0px 8px 25px 10px rgba(29, 35, 39, 0.10);
+        border: 0px solid;
+        width: 100%;
+        thead{
+            tr{
+                #order_id,
+                #action{ 
+                    width: 100px; 
+                }
+                th, td{
+                    color: #87888B;
+                    font-family: Segoe UI;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 18px;
+                    padding: 13px 24px;
+                    border-bottom: 0px solid;
+                    text-align: left;
+                    input{
+                        border-radius: 4px;
+                        border: 1px solid #1d2327;
+                        background: #f0f0f1;
+                        width: 18px;
+                        height: 18px;
+                    }
+                }
+            }
+        }
+        tbody{
+            tr{
+                .ostatus{
+                    text-transform: capitalize;
+                }
+                th, td{
+                    padding: 16px 24px;
+                    color: #1D2327;
+                    font-family: Segoe UI;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 18px;
+                    background-color: #fff;
+                    border-bottom: 1px solid #F0F0F1;
+                    text-align: left;
+                    span{
+                        color: #87888B;
+                        font-family: Segoe UI;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 18px; /* 112.5% */
+                    }
+                    input{
+                        border-radius: 4px;
+                        border: 1px solid #1d2327;
+                        background: #f0f0f1;
+                        width: 18px;
+                        height: 18px;
+                    }
+                    .checkinout{
+                        padding: 3px 8px;
+                        border-radius: 16px;
+                        background: #ECFDF3;
+                        color: #027A48;
+                        text-align: center;
+                        font-family: Segoe UI;
+                        font-size: 12px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 18px;
+                    }
+                    .checkinout.checkout{
+                        background: #FFFAEB;
+                        color: #B54708;
+                    }
+                    a.tf_booking_email_sending{
+                        margin-right: 15px;
+                    }
+                }
+            }
+        }
+    }
+}
