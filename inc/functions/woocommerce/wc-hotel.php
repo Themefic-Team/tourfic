@@ -47,7 +47,6 @@ function tf_hotel_booking_callback() {
     $deposit        = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
     $airport_service = isset($_POST['airport_service']) ? sanitize_text_field($_POST['airport_service']) : '';
 
-
 	# Calculate night number
 	if ( $check_in && $check_out ) {
 		$check_in_stt   = strtotime( $check_in . ' +1 day' );
@@ -95,6 +94,9 @@ function tf_hotel_booking_callback() {
 	$pricing_by      = $rooms[ $room_id ]['pricing-by'];
 	$price_multi_day = ! empty( $rooms[ $room_id ]['price_multi_day'] ) ? $rooms[ $room_id ]['price_multi_day'] : false;
 
+	// Hotel Room Discount Data
+	$hotel_discount_type = !empty($rooms[$room_id]["discount_hotel_type"]) ? $rooms[$room_id]["discount_hotel_type"] : "none";
+	$hotel_discount_amount = !empty($rooms[$room_id]["discount_hotel_price"]) ? $rooms[$room_id]["discount_hotel_price"] : '';
 
 	/**
 	 * If no errors then process
@@ -161,20 +163,32 @@ function tf_hotel_booking_callback() {
 		} else {
 
             if ( $pricing_by == '1' ) {
-                $total_price = $rooms[$room_id]['price'];
+
+				$total_price = $rooms[$room_id]['price'];
+
+                if($hotel_discount_type == "percent") {
+					$total_price = $total_price - (($hotel_discount_amount / 100) * $total_price);
+				}else if($hotel_discount_type == "fixed") {
+					$total_price = $total_price - $hotel_discount_amount;
+				}
                 
                 $tf_room_data['tf_hotel_data']['adult']                  = $adult;
                 $tf_room_data['tf_hotel_data']['child']                  = $child;
                 $tf_room_data['tf_hotel_data']['children_ages']          = $children_ages;
             } elseif ( $pricing_by == '2' ) {
-                $adult_price = $rooms[$room_id]['adult_price'];
-                $adult_price = $adult_price * $adult;
+				$adult_price = $rooms[$room_id]['adult_price'];
                 $child_price = $rooms[$room_id]['child_price'];
+
+                if ($hotel_discount_type == "percent") {
+					$adult_price = $adult_price - (($hotel_discount_amount / 100) * $adult_price);
+					$child_price = $child_price - (($hotel_discount_amount / 100) * $child_price);
+				}
+                $adult_price = $adult_price * $adult;
                 $child_price = $child_price * $child;
-                $total_price = $adult_price + $child_price;    
+                $total_price = $adult_price + $child_price;  
                                 
                 $tf_room_data['tf_hotel_data']['adult']          = $adult." × ".strip_tags(wc_price($rooms[$room_id]['adult_price']));
-                $tf_room_data['tf_hotel_data']['child']          = $child." × ".strip_tags(wc_price($rooms[$room_id]['child_price']));
+                $tf_room_data['tf_hotel_data']['child']          = $child." × ".strip_tags(wc_price($rooms[$room_id]['child_price'])); 
             }
 
 			# Multiply pricing by night number
