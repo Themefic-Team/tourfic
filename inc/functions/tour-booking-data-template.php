@@ -1,3 +1,100 @@
+<div class="tf-booking-details-preview">
+    <div class="tf-details-preview-header">
+        <div class="tf-back">
+            <a href="">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 18L9 12L15 6" stroke="#003C79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+                <?php _e("Back", "tourfic"); ?>
+            </a>
+        </div>
+        <div class="tf-title">
+            <h2>Start in Los Angeles and end in San Francisco</h2>
+        </div>
+        <div class="tf-booking-id-author">
+            <ul>
+                <li>Booking ID: #256005164630630</li>
+                <li>|</li>
+                <li>Booking created: January 12, 2023 : 12:00:40 AM</li>
+                <li>|</li>
+                <li>Booking by: Customer / Admin / Store manager</li>
+            </ul>
+        </div>
+    </div>
+    <div class="tf-booking-details-preview-box">
+        <div class="tf-booking-details">
+            <div class="customers-order-date details-box">
+                <h4>
+                    <?php _e("Booking details", "tourfic"); ?>
+                </h4>
+                <div class="tf-grid-box">
+
+                    <div class="tf-grid-single">
+                        <h3><?php _e("Customer details", "tourfic"); ?></h3>
+                        <div class="tf-single-box">
+                            <table class="table" cellpadding="0" callspacing="0">
+                                <tr>
+                                    <th>Name</th>
+                                    <td>:</td>
+                                    <td>Jahid Hasan</td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>:</td>
+                                    <td>Jahid Hasan</td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>:</td>
+                                    <td>Jahid Hasan</td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>:</td>
+                                    <td>Jahid Hasan</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tf-grid-single">
+                        <h3><?php _e("Other details", "tourfic"); ?></h3>
+                        <div class="tf-single-box">
+                            <table class="table">
+                                <tr>
+                                    <th>Name</th>
+                                    <td>:</td>
+                                    <td>Jahid Hasan</td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>:</td>
+                                    <td>Jahid Hasan</td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>:</td>
+                                    <td>Jahid Hasan</td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>:</td>
+                                    <td>Jahid Hasan</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="tf-booking-actions">
+asdfsdf
+        </div>
+    </div>
+</div>
+
+
 <div class="tf-booking-header-filter">
     <div class="tf-left-search-filter">
 
@@ -147,7 +244,6 @@
                         echo '<span class="checkinout checkout">Checked out</span>';
                     }
                 }
-                echo '<span class="checkinout checkin">Checked in</span>';
                 ?>
             </td>
             <td>
@@ -171,4 +267,33 @@
         </tr>
         <?php } ?>
     </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="8">
+                <ul class="tf-booking-details-pagination">
+                    <?php if($paged>=2){ ?>
+                        <li><a href="<?php echo esc_url(strtok(home_url($_SERVER['REQUEST_URI']), '?')); ?>?post_type=tf_tours&page=tf_tours_booking&paged=<?php echo $paged-1; ?>"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M15.8333 10.0001H4.16663M4.16663 10.0001L9.99996 15.8334M4.16663 10.0001L9.99996 4.16675" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg><?php _e("Previous", "tourfic"); ?></a></li>
+                    <?php } for ($i=1; $i<=$total_pages; $i++) {
+                        if ($i == $paged) {  
+                    ?>
+                        <li class="active">
+                            <a href="<?php echo esc_url(strtok(home_url($_SERVER['REQUEST_URI']), '?')); ?>?post_type=tf_tours&page=tf_tours_booking&paged=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php } else{ ?>
+                        <li>
+                        <a href="<?php echo esc_url(strtok(home_url($_SERVER['REQUEST_URI']), '?')); ?>?post_type=tf_tours&page=tf_tours_booking&paged=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php }} 
+                    if($paged < $total_pages){    
+                    ?>
+                        <li><a href="<?php echo esc_url(strtok(home_url($_SERVER['REQUEST_URI']), '?')); ?>?post_type=tf_tours&page=tf_tours_booking&paged=<?php echo $paged+1; ?>"><?php _e("Next", "tourfic"); ?> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M4.16669 10.0001H15.8334M15.8334 10.0001L10 4.16675M15.8334 10.0001L10 15.8334" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg></a></li>
+                    <?php } ?>
+                </ul>
+            </th>
+        </tr>
+    </tfoot>
 </table>

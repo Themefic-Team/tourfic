@@ -220,6 +220,57 @@
                 }
             }
         }
+        tfoot{
+            tr{
+                th{
+                    text-align: right;
+                    padding: 12px 24px 16px 24px;
+                    .tf-booking-details-pagination{
+                        margin: 0;
+                        padding: 0;
+                        display: flex;
+                        justify-content: right;
+                        li{
+                            a{
+                                display: flex;
+                                padding: 10px;
+                                color: #1D2327;
+                                font-family: Segoe UI;
+                                font-size: 14px;
+                                font-style: normal;
+                                font-weight: 600;
+                                line-height: 20px;
+                                text-decoration: none;
+                                min-width: 20px;
+                                text-align: center;
+                                justify-content: center;
+                            }
+                            border-right: 1px solid #F0F0F1;
+                            background: #FFF;
+                            &:last-child{
+                                border-right: 0px solid;
+                                border-radius: 0px 8px 8px 0px;
+                                svg{
+                                    margin-left: 8px;
+                                }
+                            }
+                            &:first-child{
+                                border-radius: 8px 0px 0px 8px;
+                                svg{
+                                    margin-right: 8px;
+                                }
+                            }
+                        }
+                        li.active{
+                            a{
+                                background-color: #003C79;
+                                color: #fff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -266,6 +317,129 @@
                     color: #B54708;; 
                 }
             }
+        }
+    }
+}
+
+
+// Booking Details Single Page
+.tf-booking-details-preview{
+    .tf-details-preview-header{
+        .tf-back{
+            a{
+                color: #003C79;
+                font-family: Segoe UI;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 24px;
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                svg{
+                    margin-right: 8px;
+                }
+            }
+        }
+        .tf-title{
+            h2{
+                color: #1D2327;
+                font-family: Segoe UI;
+                font-size: 32px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                margin: 0px 0px 16px 0px;
+            }
+        }
+        .tf-booking-id-author{
+            ul{
+                li{
+                    display: inline-block;
+                    color: #1D2327;
+                    font-family: Segoe UI;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 18px;
+                    padding: 0px 12px;
+                    &:first-child{
+                        padding-left: 0px;
+                    }
+                }
+            }
+        }
+    }
+
+    .tf-booking-details-preview-box{
+        display: flex;
+        align-items: flex-start;
+        align-self: stretch;
+        gap: 12px;
+        .tf-booking-details{
+            width: calc(100% - 260px);
+            .details-box{
+                border-radius: 8px;
+                background: #FFF;
+                box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.10);
+                padding: 24px;
+                h4{
+                    color: #003C79;
+                    font-family: Segoe UI;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 24px; /* 150% */
+                    margin: 0px 0px 16px 0px;
+                }
+
+                .tf-grid-box{
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 24px;
+                    h3{
+                        color: #87888B;
+                        font-family: Segoe UI;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 24px; /* 150% */ 
+                        margin: 0px 0px 8px 0px;
+                    }
+                    .tf-single-box{
+                        border-radius: 8px;
+                        border: 1px solid #F0F0F1;
+                        background: #EDEDF8;
+                        padding: 8px 16px;
+                        table{
+                            border: 0px solid;
+                            tr{
+                                td{
+                                    padding: 8px;
+                                    color: #1D2327;
+                                    font-family: Segoe UI;
+                                    font-size: 14px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: 18px; /* 128.571% */
+                                }
+                                th{
+                                    padding: 8px 8px 8px 0px;
+                                    color: #1D2327;
+                                    font-family: Segoe UI;
+                                    font-size: 14px;
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    line-height: 18px; /* 128.571% */
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .tf-booking-actions{
+            width: 268px;
         }
     }
 }
