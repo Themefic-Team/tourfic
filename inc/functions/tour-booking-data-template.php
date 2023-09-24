@@ -23,6 +23,7 @@
     </div>
     <div class="tf-booking-details-preview-box">
         <div class="tf-booking-details">
+
             <div class="customers-order-date details-box">
                 <h4>
                     <?php _e("Booking details", "tourfic"); ?>
@@ -87,6 +88,71 @@
 
                 </div>
             </div>
+
+            
+            <div class="customers-order-date details-box">
+                <h4>
+                    <?php _e("Pricing details", "tourfic"); ?>
+                </h4>
+                <div class="tf-grid-box">
+
+                    <div class="tf-grid-single">
+                        <div class="tf-single-box">
+                            <table class="table" cellpadding="0" callspacing="0">
+                                <tr>
+                                    <th>Name</th>
+                                    <td>:</td>
+                                    <td>Jahid Hasan</td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>:</td>
+                                    <td>Jahid Hasan</td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>:</td>
+                                    <td>Jahid Hasan</td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>:</td>
+                                    <td>Jahid Hasan</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tf-grid-single">
+                        <div class="tf-single-box">
+                            <table class="table">
+                                <tr>
+                                    <th>Name</th>
+                                    <td>:</td>
+                                    <td>Jahid Hasan</td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>:</td>
+                                    <td>Jahid Hasan</td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>:</td>
+                                    <td>Jahid Hasan</td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>:</td>
+                                    <td>Jahid Hasan</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
         <div class="tf-booking-actions">
 asdfsdf

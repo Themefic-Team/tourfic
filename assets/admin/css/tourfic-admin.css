@@ -4023,6 +4023,9 @@ Steps
   line-height: normal;
   margin: 0px 0px 16px 0px;
 }
+.tf-booking-details-preview .tf-details-preview-header .tf-booking-id-author ul {
+  margin: 0px;
+}
 .tf-booking-details-preview .tf-details-preview-header .tf-booking-id-author ul li {
   display: inline-block;
   color: #1D2327;
@@ -4050,6 +4053,7 @@ Steps
   background: #FFF;
   box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.1);
   padding: 24px;
+  margin-top: 24px;
 }
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box h4 {
   color: #003C79;
