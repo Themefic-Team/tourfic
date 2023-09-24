@@ -63,6 +63,25 @@ if ( ! defined( 'TOURFIC' ) ) {
 }
 
 /**
+ * Check if WooCommerce is active, and if it isn't, disable the plugin.
+ *
+ * @since 1.0
+ */
+if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+	add_action( 'admin_notices', 'tf_is_woo' );
+
+	/**
+	 * Ajax install & activate WooCommerce
+	 *
+	 * @since 1.0
+	 * @link https://developer.wordpress.org/reference/functions/wp_ajax_install_plugin/
+	 */
+	add_action( "wp_ajax_tf_ajax_install_plugin", "wp_ajax_install_plugin" );
+
+	return;
+}
+
+/**
  * Enqueue Main Admin scripts
  *
  * @since 1.0
@@ -104,25 +123,6 @@ if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
 	}
 
 	add_action( 'admin_enqueue_scripts', 'tf_enqueue_main_admin_scripts', 9 );
-}
-
-/**
- * Check if WooCommerce is active, and if it isn't, disable the plugin.
- *
- * @since 1.0
- */
-if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
-	add_action( 'admin_notices', 'tf_is_woo' );
-
-	/**
-	 * Ajax install & activate WooCommerce
-	 *
-	 * @since 1.0
-	 * @link https://developer.wordpress.org/reference/functions/wp_ajax_install_plugin/
-	 */
-	add_action( "wp_ajax_tf_ajax_install_plugin", "wp_ajax_install_plugin" );
-
-	return;
 }
 
 // Styles & Scripts
