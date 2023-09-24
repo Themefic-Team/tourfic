@@ -686,6 +686,8 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			$tf_hotel_archive = isset( $_POST['tf_hotel_archive'] ) ? $_POST['tf_hotel_archive'] : 'design-1';
 			$tf_tour_single   = isset( $_POST['tf_single_tour'] ) ? $_POST['tf_single_tour'] : 'design-1';
 			$tf_tour_archive  = isset( $_POST['tf_tour_archive'] ) ? $_POST['tf_tour_archive'] : 'design-1';
+			$tf_apartment_single  = isset( $_POST['tf_single_apartment'] ) ? $_POST['tf_single_apartment'] : 'default';
+			$tf_apartment_archive = isset( $_POST['tf_apartment_archive'] ) ? $_POST['tf_apartment_archive'] : 'default';
 
 			//skip steps
 			$skip_steps = isset( $_POST['tf-skip-steps'] ) ? $_POST['tf-skip-steps'] : [];
@@ -746,6 +748,11 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			if ( ! in_array( 4, $skip_steps ) && ! in_array( 'tour', $services ) ) {
 				$tf_settings['tf-template']['single-tour']  = ! empty( $tf_tour_single ) ? $tf_tour_single : '';
 				$tf_settings['tf-template']['tour-archive'] = ! empty( $tf_tour_archive ) ? $tf_tour_archive : '';
+			}
+
+			if ( ! in_array( 4, $skip_steps ) && ! in_array( 'apartment', $services ) ) {
+				$tf_settings['tf-template']['single-apartment']  = ! empty( $tf_apartment_single ) ? $tf_apartment_single : '';
+				$tf_settings['tf-template']['apartment-archive'] = ! empty( $tf_apartment_archive ) ? $tf_apartment_archive : '';
 			}
 
 			update_option( 'tf_settings', $tf_settings );
