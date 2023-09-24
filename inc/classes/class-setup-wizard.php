@@ -382,6 +382,8 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 			$tf_hotel_archive_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
 			$tf_tour_single_template   = ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-tour'] ) ? tf_data_types( tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
 			$tf_tour_archive_template  = ! empty( tf_data_types( tfopt( 'tf-template' ) )['tour-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
+			$tf_apartment_single_template  = ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-apartment'] ) ? tf_data_types( tfopt( 'tf-template' ) )['single-apartment'] : 'default';
+			$tf_apartment_archive_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['apartment-archive'] ) ? tf_data_types( tfopt( 'tf-template' ) )['apartment-archive'] : 'default';
 			?>
             <div class="tf-setup-step-container tf-setup-step-4 <?php echo self::$current_step == 'step_4' ? 'active' : ''; ?>" data-step="4">
                 <section class="tf-setup-step-layout tf-template-step">
@@ -504,6 +506,50 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
 
                     </div>
 
+                    <div class="tf-apartment-setup-wizard">
+                        <div class="tf-field tf-field-heading tf-field-class " style="width:100%;">
+                            <div class="tf-fieldset">
+                                <div class="tf-field-heading-inner">
+                                    <div class="tf-field-heading-content has-content">
+                                        <div class="tf-field-heading-main-content"><?php _e( 'Apartment settings', 'tourfic' ) ?></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Hotel Single Template-->
+                        <div class="tf-field tf-field-imageselect  " style="width:100%;">
+                            <label for="tf_settings[single-apartment]" class="tf-field-label"> <?php echo __( "Select Single Template", "tourfic" ); ?> </label>
+                            <div class="tf-fieldset">
+                                <ul class="tf-image-radio-group tf-inline">
+                                    <li>
+                                        <label class="tf-image-checkbox">
+                                            <input type="radio" name="tf_single_apartment"
+                                                   value="default" <?php echo ! empty( $tf_apartment_single_template ) && $tf_apartment_single_template == "default" ? esc_attr( 'checked' ) : ''; ?> >
+                                            <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/default-apartment.jpg" alt="Defult">
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!--Hotel Archive Page-->
+                        <div class="tf-field tf-field-imageselect  " style="width:100%;">
+                            <label for="tf_settings[apartment-archive]" class="tf-field-label"> <?php echo __( "Select Archive & Search Result Template ", "tourfic" ); ?> </label>
+                            <div class="tf-fieldset">
+                                <ul class="tf-image-radio-group tf-inline">
+                                    <li>
+                                        <label class="tf-image-checkbox">
+                                            <input type="radio" name="tf_apartment_archive"
+                                                   value="default" <?php echo ! empty( $tf_apartment_archive_template ) && $tf_apartment_archive_template == "default" ? esc_attr( 'checked' ) : ''; ?> >
+                                            <img src="<?php echo TF_ASSETS_ADMIN_URL; ?>images/template/apartment-archive-default.jpg" alt="Defult">
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </section>
                 <div class="tf-setup-action-btn-wrapper">
                     <button type="button" class="tf-setup-prev-btn tf-admin-btn tf-btn-secondary"><?php _e( 'Previous', 'tourfic' ) ?></button>
@@ -526,10 +572,10 @@ if ( ! class_exists( 'TF_Setup_Wizard' ) ) {
                 <h1 class="tf-setup-welcome-title"><?php _e( 'Hooray! You’re all set.', 'tourfic' ) ?></h1>
                 <div class="tf-setup-welcome-description"><?php _e( 'Let\'s get started and make the most out of Tourfic. With this plugin, you can manage your hotel or travel bookings with ease, and provide your customers with a seamless booking experience. So, let\'s dive in and start streamlining your hotel or travel business operations today!', 'tourfic' ) ?></div>
                 <div class="tf-setup-welcome-footer tf-setup-finish-footer">
-                    <a href="<?php echo admin_url( 'post-new.php?post_type=tf_hotel' ) ?>" class="tf-admin-btn tf-btn-secondary"><?php _e( 'Create new Hotel', 'tourfic' ) ?></a>
-                    <a href="<?php echo admin_url( 'post-new.php?post_type=tf_tours' ) ?>" class="tf-admin-btn"><?php _e( 'Create new Tour', 'tourfic' ) ?></a>
-                    <a href="<?php echo admin_url( 'post-new.php?post_type=tf_apartment' ) ?>" class="tf-admin-btn"><?php _e( 'Create new Apartment', 'tourfic' ) ?></a>
-                    <a href="<?php echo admin_url( 'admin.php?page=tf_settings' ) ?>" class="tf-admin-btn tf-btn-secondary"><?php _e( 'Tourfic Setting', 'tourfic' ) ?></a>
+                    <a href="<?php echo admin_url( 'post-new.php?post_type=tf_hotel' ) ?>" class="tf-admin-btn tf-btn-secondary tf-add-new-hotel"><?php _e( 'Create new Hotel', 'tourfic' ) ?></a>
+                    <a href="<?php echo admin_url( 'post-new.php?post_type=tf_tours' ) ?>" class="tf-admin-btn tf-add-new-tour"><?php _e( 'Create new Tour', 'tourfic' ) ?></a>
+                    <a href="<?php echo admin_url( 'post-new.php?post_type=tf_apartment' ) ?>" class="tf-admin-btn tf-btn-secondary tf-add-new-apartment"><?php _e( 'Create new Apartment', 'tourfic' ) ?></a>
+                    <a href="<?php echo admin_url( 'admin.php?page=tf_settings' ) ?>" class="tf-admin-btn"><?php _e( 'Tourfic Setting', 'tourfic' ) ?></a>
                 </div>
             </div>
 			<?php
