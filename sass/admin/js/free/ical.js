@@ -21,6 +21,8 @@
 
             let btn = $(this);
             let iCalUrl = btn.closest('.tf-fieldset').find('.ical_url_input').val();
+            let postId = $('#post_ID').val();
+            let roomId = btn.closest('.tf-single-repeater').find('.unique-id .tf-fieldset input').val();
 
             if (iCalUrl === '') {
                 notyf.error('Please enter iCal Url');
@@ -33,6 +35,8 @@
                 data: {
                     action: 'tf_import_ical',
                     ical_url: iCalUrl,
+                    post_id: postId,
+                    room_id: roomId,
                 },
                 beforeSend: function (response) {
                     btn.addClass('tf-btn-loading');

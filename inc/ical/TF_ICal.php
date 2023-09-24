@@ -31,60 +31,61 @@ if ( ! class_exists( 'TF_ICal' ) ) {
 			$response = array();
 			$tfNonce  = isset( $_POST['tf_nonce'] ) ? sanitize_text_field( $_POST['tf_nonce'] ) : '';
 			$ical_url = isset( $_POST['ical_url'] ) ? sanitize_url( $_POST['ical_url'] ) : '';
-
-			//check nonce
-//			if ( ! wp_verify_nonce( $tfNonce, 'updates' ) ) {
-//				$response['status']  = 'error';
-//				$response['message'] = esc_html__( 'Invalid nonce', 'tourfic' );
-//			}
+			$post_id  = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
+			$room_id  = isset( $_POST['room_id'] ) ? sanitize_text_field( $_POST['room_id'] ) : '';
 
 			if ( trim( $ical_url ) == '' ) {
 				$response['status']  = 'error';
 				$response['message'] = esc_html__( 'Ical url is required field', 'tourfic' );
 			}
 
+			$meta  = get_post_meta( $post_id, 'tf_hotels_opt', true );
+			$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+			if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
+				$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+				}, $rooms );
+				$rooms                = unserialize( $tf_hotel_rooms_value );
+			}
+
 			if ( ! empty( $ical_url ) ) {
 				$ical = new TF_ICal_Reader( $ical_url );
+				$response['$ical'] = $ical;
 				if ( ! empty( $ical ) ) {
-					$events       = $ical->events();
-					$events_count = count( $events );
-					$response['eventsgg'] = $events;
+					$events               = $ical->events();
 
 					if ( ! empty( $events ) && is_array( $events ) ) {
 						foreach ( $events as $key => $event ) {
-							$sumary    = explode( '|', $event['SUMMARY'] );
+							$summary                      = explode( '-', $event['SUMMARY'] );
+							$response['$event'. $key] = $event;
+							if ( in_array( ' Not available', $summary ) || in_array( 'Blocked', $summary ) ) {
 
-							if ( in_array('Not available', $sumary) || in_array('Blocked', $sumary) ) {
-								$available = 'unavailable';
-							} else {
-								$price = (float) $sumary[0];
-								if ( $price < 0 ) {
-									$price = 0;
+								if ( isset( $event['DTSTART'] ) && isset( $event['DTEND'] ) ) {
+									if ( strlen( $event['DTSTART'] ) > 8 ) {
+										$event['DTSTART'] = substr( $event['DTSTART'], 0, 8 );
+									}
+									if ( strlen( $event['DTEND'] ) > 8 ) {
+										$event['DTEND'] = substr( $event['DTEND'], 0, 8 );
+									}
+									$start                      = DateTime::createFromFormat( 'Ymd', $event['DTSTART'] );
+									$start                      = strtotime( $start->format( 'Y-m-d' ) );
+									$end                        = DateTime::createFromFormat( 'Ymd', $event['DTEND'] );
+									$end                        = strtotime( $end->format( 'Y-m-d' ) );
+
+									//all date between start and end if start is 2023-09-22 and end is 2023-09-26 then all date between 2023-09-22 to 2023-09-26 will be in array like 2023-09-22, 2023-09-23, 2023-09-24, 2023-09-25, 2023-09-26
+									$periods = new DatePeriod(
+										new DateTime( date( 'Y-m-d', $start ) ),
+										new DateInterval( 'P1D' ),
+										new DateTime( date( 'Y-m-d', $end ) )
+									);
+
+									$all_dates = array();
+									foreach ( $periods as $period ) {
+										$all_dates[] = $period->format( 'Y-m-d' );
+									}
+
+									$response['period'.$key] = $all_dates;
 								}
-								if ( isset( $sumary[1] ) ) {
-									$adult_price = floatval( $sumary[1] );
-								}
-								if ( isset( $sumary[2] ) ) {
-									$child_price = floatval( $sumary[2] );
-								}
-							}
-							if ( isset( $sumary[1] ) && ! empty( $sumary[1] ) && strtolower( $sumary[1] ) == 'unavailable' ) {
-								$available = 'unavailable';
-							}
-							if ( isset( $event['DTSTART'] ) && isset( $event['DTEND'] ) ) {
-								if ( strlen( $event['DTSTART'] ) > 8 ) {
-									$event['DTSTART'] = substr( $event['DTSTART'], 0, 8 );
-								}
-								if ( strlen( $event['DTEND'] ) > 8 ) {
-									$event['DTEND'] = substr( $event['DTEND'], 0, 8 );
-								}
-								$start        = DateTime::createFromFormat( 'Ymd', $event['DTSTART'] );
-								$start        = strtotime( $start->format( 'Y-m-d' ) );
-								$end          = DateTime::createFromFormat( 'Ymd', $event['DTEND'] );
-								$end          = strtotime( $end->format( 'Y-m-d' ) );
-								$end          = strtotime( '-1 day', $end );
-//								$res          = $this->import_event_hotel_room( $post_id, $post_type, $price, $start, $end, $available, $adult_price, $child_price );
-//								$result_total += $res;
 							}
 						}
 					}
