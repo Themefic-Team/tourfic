@@ -12,6 +12,14 @@
             let selected_label = $(this).text();
             $this.find('label span').text(selected_label);
         });
+
+        // Tour Filter Section
+        $('.tf-tour-filter-options').select2({
+            dropdownCssClass: 'tf-booking-filter-modal'
+        });
+        $('.tf-tour-checkinout-options').select2({
+            dropdownCssClass: 'tf-booking-checkinout-filter-modal'
+        });
     });
 
 })(jQuery);

@@ -3759,17 +3759,21 @@ Steps
 .tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter {
   display: flex;
 }
-.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-selection {
+.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-options {
+  margin-right: 16px;
+}
+.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-options span.select2 {
+  height: 48px;
   border-radius: 6px;
   background: #FFF;
   box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
-  position: relative;
-  padding: 8px 16px;
-  margin-right: 16px;
-  cursor: pointer;
+  min-width: 160px !important;
 }
-.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-selection label {
-  color: #1D2327;
+.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-options span.selection span.select2-selection {
+  height: 48px;
+  border: 0px solid;
+  background: transparent;
+  color: #1d2327;
   font-family: Segoe UI;
   font-size: 16px;
   font-style: normal;
@@ -3779,52 +3783,8 @@ Steps
   align-items: center;
   justify-content: space-between;
 }
-.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-selection ul {
-  position: absolute;
-  border-radius: 8px;
-  background: #F0F2F4;
-  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.1);
-  padding: 8px;
-  margin: 0;
-  left: 0;
-  z-index: 99;
-  top: 100%;
-  display: none;
-  width: 100%;
-}
-.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-selection ul li {
-  display: block;
-  color: #1D2327;
-  font-family: Segoe UI;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px;
-  margin-bottom: 4px;
-  padding: 8px 16px;
-  background-color: #fff;
-  background: #FFF;
-  cursor: pointer;
-}
-.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-selection ul li:last-child {
-  margin-bottom: 0px;
-}
-.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-selection ul li.checkin {
-  background: #ECFDF3;
-  color: #027A48;
-}
-.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-selection ul li.checkout {
-  background: #FFFAEB;
-  color: #B54708;
-}
-.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-selection .tf-order-status-filter {
-  min-width: 110px;
-}
-.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-selection.active label svg {
-  transform: rotate(180deg);
-}
-.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-selection.active ul {
-  display: block;
+.tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-options span.selection span.select2-selection span.select2-selection__arrow {
+  height: 48px;
 }
 .tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-order-status-filter-btn {
   padding: 10px 32px;
@@ -3952,6 +3912,47 @@ Steps
 }
 .tf_booking_details_wrap .wp-list-table tbody tr th a.tf_booking_email_sending, .tf_booking_details_wrap .wp-list-table tbody tr td a.tf_booking_email_sending {
   margin-right: 15px;
+}
+
+.select2-dropdown.tf-booking-filter-modal,
+.select2-dropdown.tf-booking-checkinout-filter-modal {
+  border: 0px solid;
+  border-radius: 8px;
+  background: #f0f2f4;
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.1);
+}
+.select2-dropdown.tf-booking-filter-modal .select2-results ul,
+.select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.select2-dropdown.tf-booking-filter-modal .select2-results ul li,
+.select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul li {
+  display: block;
+  color: #1D2327;
+  font-family: Segoe UI;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  margin-bottom: 4px;
+  padding: 8px 16px;
+  background-color: #fff;
+  background: #FFF;
+  cursor: pointer;
+}
+.select2-dropdown.tf-booking-filter-modal .select2-results ul li:last-child,
+.select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul li:last-child {
+  margin-bottom: 0px;
+}
+
+.select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul li:nth-child(2) {
+  background: #ECFDF3;
+  color: #027A48;
+}
+.select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul li:last-child {
+  background: #FFFAEB;
+  color: #B54708;
 }
 
 /*# sourceMappingURL=tourfic-admin.css.map */

@@ -1,21 +1,17 @@
 <div class="tf-booking-header-filter">
     <div class="tf-left-search-filter">
-        <div class="tf-filter-selection">
+
+        <div class="tf-filter-options">
             <div class="tf-order-status-filter">
-            <label>
-                <span><?php _e("Bulk action", "tourfic"); ?></span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
-                <path d="M5.5 7.5L10.5 12.5L15.5 7.5" stroke="#1D2327" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </label>
+                <select class="tf-tour-filter-options" name="tours">
+                    <option value=""><?php _e("Bulk action", "tourfic"); ?></option>
+                    <option value=""><?php _e("Trash", "tourfic"); ?></option>
+                    <option value=""><?php _e("Processing", "tourfic"); ?></option>
+                    <option value=""><?php _e("On Hold", "tourfic"); ?></option>
+                    <option value=""><?php _e("Complete", "tourfic"); ?></option>
+                    <option value=""><?php _e("Cancelled", "tourfic"); ?></option>
+                </select>
             </div>
-            <ul>
-                <li><?php _e("Trash", "tourfic"); ?></li>
-                <li><?php _e("Processing", "tourfic"); ?></li>
-                <li><?php _e("On Hold", "tourfic"); ?></li>
-                <li><?php _e("Complete", "tourfic"); ?></li>
-                <li><?php _e("Cancelled", "tourfic"); ?></li>
-            </ul>
         </div>
         <button class="tf-order-status-filter-btn">
             <?php _e("Apply", "tourfic"); ?>
@@ -34,39 +30,38 @@
             </a>
         </div>
 
-        <div class="tf-filter-selection">
+        <div class="tf-filter-options">
             <div class="tf-order-status-filter">
-            <label>
-                <span><?php _e("Payment status", "tourfic"); ?></span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
-                <path d="M5.5 7.5L10.5 12.5L15.5 7.5" stroke="#1D2327" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </label>
+                <select class="tf-tour-filter-options" name="tours">
+                    <option value=""><?php _e("Payment status", "tourfic"); ?></option>
+                    <option value=""><?php _e("Trash", "tourfic"); ?></option>
+                    <option value=""><?php _e("Processing", "tourfic"); ?></option>
+                    <option value=""><?php _e("On Hold", "tourfic"); ?></option>
+                    <option value=""><?php _e("Complete", "tourfic"); ?></option>
+                    <option value=""><?php _e("Cancelled", "tourfic"); ?></option>
+                </select>
             </div>
-            <ul>
-                <li><?php _e("Trash", "tourfic"); ?></li>
-                <li><?php _e("Processing", "tourfic"); ?></li>
-                <li><?php _e("On Hold", "tourfic"); ?></li>
-                <li><?php _e("Complete", "tourfic"); ?></li>
-                <li><?php _e("Cancelled", "tourfic"); ?></li>
-            </ul>
         </div>
 
-        <div class="tf-filter-selection">
+        <div class="tf-filter-options">
             <div class="tf-order-status-filter">
-            <label>
-                <span><?php _e("Checked in status", "tourfic"); ?></span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
-                <path d="M5.5 7.5L10.5 12.5L15.5 7.5" stroke="#1D2327" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </label>
+                <select class="tf-tour-checkinout-options" name="tours">
+                    <option value=""><?php _e("Checked in status", "tourfic"); ?></option>
+                    <option value="checkin"><?php _e("Checked in", "tourfic"); ?></option>
+                    <option value="checkout"><?php _e("Checked out", "tourfic"); ?></option>
+                </select>
             </div>
-            <ul>
-                <li class="checkin"><?php _e("Checked in", "tourfic"); ?></li>
-                <li class="checkout"><?php _e("Checked out", "tourfic"); ?></li>
-            </ul>
         </div>
 
+        <div class="tf-filter-options">
+            <div class="tf-order-status-filter">
+                <select class="tf-tour-filter-options" name="tours">
+                    <option value=""><?php _e("Tour name", "tourfic"); ?></option>
+                    <option value="AL">Alabama</option>
+                    <option value="WY">Wyoming</option>
+                </select>
+            </div>
+        </div>
     </div>
     <div class="tf-right-search-filter">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

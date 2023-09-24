@@ -50,77 +50,37 @@
         margin: 32px 0px;
         .tf-left-search-filter{
             display: flex;
-            .tf-filter-selection{
-                border-radius: 6px;
-                background: #FFF;
-                box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
-                position: relative;
-                padding: 8px 16px;
+            
+            .tf-filter-options{
                 margin-right: 16px;
-                cursor: pointer;
-                label{
-                    color: #1D2327;
-                    font-family: Segoe UI;
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 600;
-                    line-height: 24px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
+                span.select2{
+                    height: 48px;
+                    border-radius: 6px;
+                    background: #FFF;
+                    box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
+                    min-width: 160px !important;
                 }
-                ul{
-                    position: absolute;
-                    border-radius: 8px;
-                    background: #F0F2F4;
-                    box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
-                    padding: 8px;
-                    margin: 0;
-                    left: 0;
-                    z-index: 99;
-                    top: 100%;
-                    display: none;
-                    width: 100%;
-                    li{
-                        display: block;
-                        color: #1D2327;
+                span.selection{
+                    span.select2-selection{
+                        height: 48px;
+                        border: 0px solid;
+                        background: transparent;
+                        color: #1d2327;
                         font-family: Segoe UI;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 600;
                         line-height: 24px;
-                        margin-bottom: 4px;
-                        padding: 8px 16px;
-                        background-color: #fff;
-                        background: #FFF;
-                        cursor: pointer;
-                        &:last-child{
-                            margin-bottom: 0px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        span.select2-selection__arrow{
+                            height: 48px;
                         }
                     }
-                    li.checkin{
-                        background: #ECFDF3;
-                        color: #027A48;
-                    }
-                    li.checkout{
-                        background: #FFFAEB;
-                        color: #B54708;
-                    }
-                }
-                .tf-order-status-filter{
-                    min-width: 110px;
                 }
             }
-            .tf-filter-selection.active{
-                label{
-                    svg{
-                        transform: rotate(180deg);
-                    }
-                }
-                ul{
-                    display: block;
-                }
-            }
+            
             .tf-order-status-filter-btn{
                 padding: 10px 32px;
                 border-radius: 8px;
@@ -257,6 +217,53 @@
                     a.tf_booking_email_sending{
                         margin-right: 15px;
                     }
+                }
+            }
+        }
+    }
+}
+
+.select2-dropdown.tf-booking-filter-modal,
+.select2-dropdown.tf-booking-checkinout-filter-modal{
+    border: 0px solid;
+    border-radius: 8px;
+    background: #f0f2f4;
+    box-shadow: 0px 20px 40px 0px rgba(0,0,0,.1);
+    .select2-results{
+        ul{
+            padding-left: 4px;
+            padding-right: 4px;
+            li{
+                display: block;
+                color: #1D2327;
+                font-family: Segoe UI;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 24px;
+                margin-bottom: 4px;
+                padding: 8px 16px;
+                background-color: #fff;
+                background: #FFF;
+                cursor: pointer;
+                &:last-child{
+                    margin-bottom: 0px;
+                }
+            }
+        }
+    }
+}
+.select2-dropdown.tf-booking-checkinout-filter-modal{
+    .select2-results{
+        ul{
+            li{
+                &:nth-child(2){
+                    background: #ECFDF3;
+                    color: #027A48; 
+                }
+                &:last-child{
+                    background: #FFFAEB;
+                    color: #B54708;; 
                 }
             }
         }
