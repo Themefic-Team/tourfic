@@ -417,10 +417,11 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 - Added: Hotel and tour Backend/Admin booking add( Pro ).
 - Added: Hotel and tour External Booking( Pro ).
 - Added: Without payment option in tour( Pro ).
-- Added: Date formate settings.
+- Added: Date format settings.
 - Fixed: Settings page saving issue.
 - Fixed: Tour single responsive issue.
 - Improvement: Tour start price hide option added to tourfic settings.
+- Updated: Appsero updated Version 1.2.4
 
 = 2.9.28 -  20 August 2023 =
 
