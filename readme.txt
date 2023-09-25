@@ -416,10 +416,11 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 - Added: Hotel and tour type filter widget.
 - Added: Hotel and tour Backend/Admin booking add( Pro ).
 - Added: Hotel and tour External Booking( Pro ).
-- Added: Without payment option in tour( Pro ).
+- Added: Without payment option in the tour( Pro ).
 - Added: Date format settings.
 - Fixed: Settings page saving issue.
 - Fixed: Tour single responsive issue.
+- Fixed: Map issue
 - Improvement: Tour start price hide option added to tourfic settings.
 - Updated: Appsero updated Version 1.2.4
 
