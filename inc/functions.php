@@ -741,6 +741,9 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
  */
 function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_name = '', $taxonomy_slug = '' ) {
 	$place      = $post_type == 'tf_hotel' ? 'tf-location' : 'tf-destination';
+	if($post_type == 'tf_apartment'){
+		$place = 'tf-apartment-location';
+	}
 	$place_text = $post_type == 'tf_hotel' ? __( 'Enter Location', 'tourfic' ) : __( 'Enter Destination', 'tourfic' );
 	$date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 
