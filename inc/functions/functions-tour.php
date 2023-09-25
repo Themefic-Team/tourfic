@@ -1486,7 +1486,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
 					        <?php }
 					        if ($custom_avail == false) {
-					        if ($disabled_day || $disable_range || $disable_specific) {
+					        if ($disabled_day || $disable_range || $disable_specific || $disable_same_day) {
 					        ?>
                             "disable": [
 						        <?php if ($disabled_day) { ?>
@@ -1504,7 +1504,12 @@ function tf_single_tour_booking_form( $post_id ) {
                                                 },';
 							        }
 						        }
-
+								if ($disable_same_day) {
+									echo '"today"';
+									if ($disable_specific) {
+										echo ",";
+									}
+								}
 						        if ( $disable_specific ) {
 							        echo '"' . $disable_specific . '"';
 						        }
@@ -1708,7 +1713,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
 					<?php }
 					if ($custom_avail == false) {
-					if ($disabled_day || $disable_range || $disable_specific) {
+					if ($disabled_day || $disable_range || $disable_specific || $disable_same_day) {
 					?>
 
                     "disable": [
@@ -1727,7 +1732,12 @@ function tf_single_tour_booking_form( $post_id ) {
                             },';
 							}
 						}
-
+						if ($disable_same_day) {
+							echo '"today"';
+							if ($disable_specific) {
+								echo ",";
+							}
+						}
 						if ( $disable_specific ) {
 							echo '"' . $disable_specific . '"';
 						}
