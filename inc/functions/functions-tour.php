@@ -1486,7 +1486,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
 					        <?php }
 					        if ($custom_avail == false) {
-					        if ($disabled_day || $disable_range || $disable_specific) {
+					        if ($disabled_day || $disable_range || $disable_specific || $disable_same_day) {
 					        ?>
                             "disable": [
 						        <?php if ($disabled_day) { ?>
@@ -1504,7 +1504,12 @@ function tf_single_tour_booking_form( $post_id ) {
                                                 },';
 							        }
 						        }
-
+								if ($disable_same_day) {
+									echo '"today"';
+									if ($disable_specific) {
+										echo ",";
+									}
+								}
 						        if ( $disable_specific ) {
 							        echo '"' . $disable_specific . '"';
 						        }
@@ -1549,11 +1554,7 @@ function tf_single_tour_booking_form( $post_id ) {
                             $(".acr-select input[type='number'][name='" + inputName + "']").val(selectedValue)
                         });
 
-                        // $(".tours-check-in-out").on('change', function () {
-                        //     var selectedDate = $(this).val();
-                        //     console.log('selectedDate', selectedDate)
-                        //     $(".tours-check-in-out").not(this).val(selectedDate);
-                        // });
+
                     });
                 })(jQuery);
             </script>
@@ -1710,7 +1711,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
 						<?php }
 						if ($custom_avail == false) {
-						if ($disabled_day || $disable_range || $disable_specific) {
+						if ($disabled_day || $disable_range || $disable_specific || $disable_same_day) {
 						?>
 
                         "disable": [
@@ -1729,7 +1730,12 @@ function tf_single_tour_booking_form( $post_id ) {
                             },';
 								}
 							}
-
+							if ($disable_same_day) {
+								echo '"today"';
+								if ($disable_specific) {
+									echo ",";
+								}
+							}
 							if ( $disable_specific ) {
 								echo '"' . $disable_specific . '"';
 							}
@@ -1744,6 +1750,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                            $(".tours-check-in-out").not(this).val(instance.altInput.value); // Todo: change the Input Value
                             if (custom_avail == true) {
 
                                 let times = allowed_times.filter((v) => {
