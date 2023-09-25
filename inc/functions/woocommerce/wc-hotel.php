@@ -117,6 +117,24 @@ function tf_hotel_booking_callback() {
 		$tf_room_data['tf_hotel_data']['air_serivicetype']   = $airport_service;
 		$tf_room_data['tf_hotel_data']['air_serivice_avail'] = $meta['airport_service'] ?? null;
 
+		// Discount Calculation and Checking
+
+		$adult_price = $rooms[$room_id]['adult_price'];
+		$child_price = $rooms[$room_id]['child_price'];
+		$room_price = $rooms[$room_id];
+
+		if($hotel_discount_type == "percent") {
+			$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+			$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $child_price - ( ( $child_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+			// $room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $room_price - ( ( $room_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+		}
+
+		//TODO: This generates a 500 error
+
+		// echo "<pre>";
+		// print_r($room_price);
+		// echo "</pre>";
+		// die(); // added by - Sunvi
 
 		/**
 		 * Calculate Pricing
