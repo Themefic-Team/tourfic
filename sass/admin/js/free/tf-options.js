@@ -103,17 +103,24 @@
                 let $this = $(this),
                     dateField = $this.find('input.flatpickr'),
                     format = dateField.data('format'),
-                    multiple = dateField.data('multiple');
+                    multiple = dateField.data('multiple'),
+                    minDate = dateField.data('min-date');
 
                 if (dateField.length === 2) {
                     let startDate = $this.find('.tf-date-from input.flatpickr').flatpickr({
                         dateFormat: format,
+                        minDate: minDate,
+                        altInput: true,
+                        altFormat: tf_options.tf_admin_date_format,
                         onChange: function (selectedDates, dateStr, instance) {
                             endDate.set('minDate', dateStr);
                         }
                     });
                     let endDate = $this.find('.tf-date-to input.flatpickr').flatpickr({
                         dateFormat: format,
+                        minDate: minDate,
+                        altInput: true,
+                        altFormat: tf_options.tf_admin_date_format,
                         onChange: function (selectedDates, dateStr, instance) {
                             startDate.set('maxDate', dateStr);
                         }
@@ -121,6 +128,9 @@
                 } else {
                     dateField.flatpickr({
                         dateFormat: format,
+                        minDate: minDate,
+                        altInput: true,
+                        altFormat: tf_options.tf_admin_date_format,
                         mode: multiple ? 'multiple' : 'single',
                     });
                 }
@@ -445,7 +455,25 @@
             TF_wp_editor($id);
         });
 
-
+        /*
+        * Booking Confirmation Field Fixed
+        * @since 2.9.28
+        * @author: Jahid
+        */
+        TF_Booking_Confirmation();
+        function TF_Booking_Confirmation() {
+            if ($('.tf-repeater-wrap .tf-single-repeater-book-confirm-field').length > 0) {
+                $('.tf-repeater-wrap .tf-single-repeater-book-confirm-field').each(function () {
+                    let $this = $(this);
+                    let repeaterCount = $this.find('input[name="tf_repeater_count"]').val();
+                    if(0==repeaterCount || 1==repeaterCount || 2==repeaterCount){
+                        $this.find('.tf_hidden_fields').hide();
+                        $this.find('.tf-repeater-icon-clone').hide();
+                        $this.find('.tf-repeater-icon-delete').hide();
+                    }
+                });
+            }
+        }
         /*
         * Add New Repeater Item
         * @author: Sydur
@@ -477,6 +505,12 @@
             }
             let repeatDateField = add_value.find('.tf-field-date');
             if (repeatDateField.length > 0) {
+                repeatDateField.find('input').each(function () {
+                    
+                    if($(this).attr('name') == '' || typeof $(this).attr('name') === "undefined"){ 
+                     $(this).remove()
+                    }
+                 });
                 tfDateInt(repeatDateField);
             }
 
@@ -584,6 +618,9 @@
             
             // repeater dependency repeater
             TF_dependency();
+
+            // Booking Confirmation repeater Hidden field
+            TF_Booking_Confirmation();
         });
 
         // Repeater Delete Value
@@ -630,6 +667,11 @@
             let repeatDateField = clone_value.find('.tf-field-date');
 
             if (repeatDateField.length > 0) {
+                repeatDateField.find('input').each(function () {  
+                    if($(this).attr('name') == '' || typeof $(this).attr('name') === "undefined"){  
+                     $(this).remove();
+                    }
+                 }); 
                 tfDateInt(repeatDateField);
             }
 

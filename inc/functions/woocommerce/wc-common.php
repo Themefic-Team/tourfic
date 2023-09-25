@@ -8,6 +8,7 @@ defined( 'ABSPATH' ) || exit;
  * @param  WC_Meta_Data  $meta The meta object
  * @param  WC_Order_Item $item The order item object
  * @return string        The title
+ * @since  1.0.0
  */
 function tf_change_meta_key_title( $key, $meta, $item ) {
     
@@ -41,7 +42,7 @@ add_filter( 'woocommerce_order_item_display_meta_key', 'tf_change_meta_key_title
  */
 function tf_hide_order_meta( $hidden_meta ) {
   
-  $hidden_meta = array('_order_type', '_post_author', '_post_id', '_unique_id', '_tour_unique_id');
+  $hidden_meta = array('_order_type', '_post_author', '_post_id', '_unique_id', '_tour_unique_id', '_visitor_details');
   
   return $hidden_meta;
 }

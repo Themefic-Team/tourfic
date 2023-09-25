@@ -43,3 +43,21 @@ if(is_admin()){
 		tf_file_missing(TF_INC_PATH . 'classes/class-setup-wizard.php');
 	}
 }
+
+/**
+ * TF Backend Booking
+ * @author Foysal
+ */
+if(is_admin()){
+	if ( file_exists( TF_INC_PATH . 'backend-booking/TF_Hotel_Backend_Booking.php' ) ) {
+		require_once TF_INC_PATH . 'backend-booking/TF_Hotel_Backend_Booking.php';
+	} else {
+		tf_file_missing(TF_INC_PATH . 'backend-booking/TF_Hotel_Backend_Booking.php');
+	}
+
+	if ( file_exists( TF_INC_PATH . 'backend-booking/TF_Tour_Backend_Booking.php' ) ) {
+		require_once TF_INC_PATH . 'backend-booking/TF_Tour_Backend_Booking.php';
+	} else {
+		tf_file_missing(TF_INC_PATH . 'backend-booking/TF_Tour_Backend_Booking.php');
+	}
+}

@@ -495,11 +495,13 @@ span.close-aq {
     margin: 10px 0;
     overflow: hidden;
     display: flex;
+    flex-direction: column;
+
     input {
-        width: 100%;
+        max-width: 100%;
     }
     textarea {
-        width: 100%;
+        max-width: 100%;
     }
 }
 .tf-booking-form-tab-mobile {

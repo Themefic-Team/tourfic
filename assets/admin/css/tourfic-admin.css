@@ -1493,7 +1493,7 @@ Steps
   background-color: transparent;
   padding: 30px 100px;
   border-radius: 10px;
-  margin: 40px 40px 40px 20px;
+  margin: 40px 20px 40px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1549,7 +1549,7 @@ Steps
   width: 100%;
 }
 .tf-setting-dashboard .tf-setting-performace-section {
-  margin: 40px 40px 40px 20px;
+  margin: 40px 20px 40px 0;
   position: relative;
 }
 .tf-setting-dashboard .tf-setting-performace-section h2 {
@@ -1575,11 +1575,11 @@ Steps
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 15px;
-  width: 21%;
+  width: 16.5%;
 }
-@media only screen and (max-width: 1366px) {
+@media only screen and (max-width: 1650px) {
   .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid {
-    width: 20%;
+    padding: 12px;
   }
 }
 @media only screen and (max-width: 1199.98px) {
@@ -1601,12 +1601,21 @@ Steps
   border-radius: 50%;
   flex-shrink: 0;
 }
+.tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-icon img {
+  width: 100%;
+}
+@media only screen and (max-width: 1650px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-icon {
+    width: 42px;
+    height: 42px;
+  }
+}
 .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content {
   padding-left: 25px;
 }
-@media only screen and (max-width: 1366px) {
+@media only screen and (max-width: 1650px) {
   .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content {
-    padding-left: 15px;
+    padding-left: 10px;
   }
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content p {
@@ -1615,12 +1624,22 @@ Steps
   color: #222;
   margin: 0 0 10px;
 }
+@media only screen and (max-width: 1650px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content p {
+    font-size: 14px;
+  }
+}
 .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content h3 {
   margin: 0;
   font-size: 30px;
   font-weight: 700;
   color: #000;
   line-height: 0.8;
+}
+@media only screen and (max-width: 1650px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content h3 {
+    font-size: 24px;
+  }
 }
 .tf-setting-dashboard .tf-setting-performace-section #tf-report-loader {
   position: absolute;
@@ -1679,7 +1698,7 @@ Steps
 .tf-settings-help-center .tf-help-center-banner {
   background-color: #fff;
   border-radius: 10px;
-  margin: 40px 40px 40px 20px;
+  margin: 40px 20px 40px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1742,7 +1761,7 @@ Steps
   position: relative;
 }
 .tf-settings-help-center .tf-support-document {
-  margin: 40px 40px 40px 20px;
+  margin: 40px 20px 40px 0;
   display: flex;
   justify-content: space-between;
 }
@@ -2443,6 +2462,14 @@ Steps
 }
 .tf-field-text input::placeholder {
   color: #a6b1bf;
+}
+.tf-field-text input:read-only {
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  background-color: #ebf2ff;
+}
+.tf-field-text input:read-only:focus {
+  box-shadow: none;
+  border: 1px solid #c4cbd4;
 }
 
 .tf-field-textarea textarea {
@@ -3639,6 +3666,55 @@ Steps
 .tf-image-radio-group li .tf-image-checkbox > input:checked + img {
   border-color: #607085;
   border-radius: 5px;
+}
+
+.tf-backend-tour-booking h1,
+.tf-backend-hotel-booking h1 {
+  font-size: 24px;
+  line-height: 28px;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+
+.tf-backend-booking-card-wrap {
+  background: #fff;
+  margin-right: 20px;
+  border-radius: 6px;
+  margin-bottom: 30px;
+}
+.tf-backend-booking-card-wrap h3.tf-backend-booking-card-title {
+  margin: 0;
+  padding: 15px 24px;
+  background-color: #003c7a;
+  color: #fff;
+  border-radius: 6px 6px 0 0;
+}
+
+.tf-booking-fields-wrapper {
+  padding: 10px 24px 20px;
+}
+.tf-booking-fields-wrapper .tf-booking-fields {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.tf-booking-fields-wrapper .tf-booking-fields .tf-fieldset .error-input {
+  border-color: #b30000;
+}
+.tf-booking-fields-wrapper .tf-booking-fields .tf-fieldset .text-danger {
+  color: #b30000;
+}
+
+.tf-backend-booking-footer {
+  margin-right: 20px;
+  text-align: right;
 }
 
 /*# sourceMappingURL=tourfic-admin.css.map */

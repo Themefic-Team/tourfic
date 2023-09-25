@@ -35,7 +35,7 @@ if ( ! class_exists( 'TF_map' ) ) {
             if( !empty($mapdata) ){
               $default_settings   = array(
                 'center'          => array( $mapdata['latitude'], $mapdata['longitude'] ),
-                'zoom'            => $mapdata['zoom'],
+                'zoom'            => !empty($mapdata['zoom']) ? $mapdata['zoom'] : '5',
                 'scrollWheelZoom' => true,
               );
             }else{

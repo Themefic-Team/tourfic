@@ -141,14 +141,15 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						'Minute' => __( 'Minutes', 'tourfic' ),
 					),
 					'field_width' => 33.33,
-				),	
+				),
 				array(
-					'id'      => 'tour_types',
-					'type'    => 'text',
-					'label'   => __( 'Tour Type', 'tourfic' ),
-					'subtitle'    => __( 'E.g. Fixed/Continues etc', 'tourfic' ),
+					'id'       => 'tour_types',
+					'type'     => 'select2',
+					'multiple' => true,
+					'is_pro'   => true,
 					'field_width' => 33.33,
-					'default' => "Continues"
+					'label'    => __( 'Select Tour Types', 'tourfic' ),
+					'subtitle' => __( 'Select your tour types', 'tourfic' ),
 				),
 				array(
 					'id'          => 'night',
@@ -801,7 +802,68 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'subtitle'  => __( 'If you enable this option, then the tour can not booking same day.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-				)
+				),
+				array(
+					'id'      => 'Booking-Type',
+					'type'    => 'heading',
+					'content' => __( 'Booking', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'        => '',
+					'type'      => 'switch',
+					'label'     => __( 'Enable Traveler Info', 'tourfic' ),
+					'subtitle'  => __( 'Enable this option, if you want to add traveler info.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true,
+					'is_pro'  => true,
+				),
+				array(
+					'id'      => '',
+					'type'    => 'select',
+					'label'   => __( 'Booking Type', 'tourfic' ),
+					'options' => array(
+						'1' => __( 'Internal', 'tourfic' ),
+						'2' => __( 'External + Without Payment', 'tourfic' ),
+					),
+					'default' => '2',
+					'is_pro'  => true,
+				),
+				array(
+					'id'          => '',
+					'type'        => 'text',
+					'label'       => __( 'External URL', 'tourfic' ),
+					'placeholder' => __( 'https://website.com', 'tourfic' ),
+					'is_pro'  => true
+				),
+				array(
+					'id'        => '',
+					'type'      => 'switch',
+					'label'     => __( 'Allow Attribute', 'tourfic' ),
+					'subtitle'  => __( 'If attribute allow, You can able to add custom Attribute', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'is_pro'  => true
+				),
+				array(
+					'id'          => '',
+					'type'        => 'textarea',
+					'label'       => __( 'Query Attribute', 'tourfic' ),
+					'placeholder' => __( 'adult={adult}&child={child}&infant={infant}', 'tourfic' ),
+					'is_pro'  => true
+				),
+				array(
+					'id'      => 'booking-notice',
+					'type'    => 'notice',
+					'class'   => 'info',
+					'title'   => __( 'Query Attribute List', 'tourfic' ),
+					'content' => __( 'You can use the following placeholders in the Query Attribute body:', 'tourfic' ) . '<br><br><strong>{adult} </strong> : To Display Adult Number from Search.<br>
+					<strong>{child} </strong> : To Display Child Number from Search.<br>
+					<strong>{booking_date} </strong> : To display the Booking date from Search.<br>
+					<strong>{infant} </strong> : To display the infant number from Search.<br>',
+					'is_pro'  => true
+				),
 			),
 		),
 		// // Exclude/Include

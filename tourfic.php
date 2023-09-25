@@ -7,11 +7,11 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.9.28
+ * Version:         2.10.0
  * Tested up to:    6.3
- * WC tested up to: 8.0.2
+ * WC tested up to: 8.1.1
  * Requires PHP:    7.2
- * Elementor tested up to: 3.15.2
+ * Elementor tested up to: 3.16.4
  */
 
 // don't load directly
@@ -59,43 +59,7 @@ if ( ! class_exists( 'Appsero\Client' ) ) {
  * @since 1.0
  */
 if ( ! defined( 'TOURFIC' ) ) {
-	define( 'TOURFIC', '2.9.28' );
-}
-
-/**
- * Enqueue Main Admin scripts
- *
- * @since 1.0
- */
-if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
-	function tf_enqueue_main_admin_scripts() {
-
-		// Custom
-		wp_enqueue_style( 'tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css', '', TOURFIC );
-		wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts.min.js', array( 'jquery', 'wp-data', 'wp-editor', 'wp-edit-post' ), TOURFIC, true );
-		wp_localize_script( 'tf-admin', 'tf_admin_params',
-			array(
-				'tf_nonce'                     => wp_create_nonce( 'updates' ),
-				'ajax_url'                     => admin_url( 'admin-ajax.php' ),
-				'deleting_old_review_fields'   => __( 'Deleting old review fields...', 'tourfic' ),
-				'deleting_room_order_ids'      => __( 'Deleting order ids...', 'tourfic' ),
-				'tour_location_required'       => __( 'Tour Location is a required field!', 'tourfic' ),
-				'hotel_location_required'      => __( 'Hotel Location is a required field!', 'tourfic' ),
-				'tour_feature_image_required'  => __( 'Tour image is a required!', 'tourfic' ),
-				'hotel_feature_image_required' => __( 'Hotel image is a required!', 'tourfic' ),
-				'installing'                   => __( 'Installing...', 'tourfic' ),
-				'activating'                   => __( 'Activating...', 'tourfic' ),
-				'installed'                    => __( 'Installed', 'tourfic' ),
-				'activated'                    => __( 'Activated', 'tourfic' ),
-				'install_failed'               => __( 'Install failed', 'tourfic' ),
-				'i18n'                         => array(
-					'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
-				)
-			)
-		);
-	}
-
-	add_action( 'admin_enqueue_scripts', 'tf_enqueue_main_admin_scripts', 9 );
+	define( 'TOURFIC', '2.10.0' );
 }
 
 /**
@@ -115,6 +79,50 @@ if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 	add_action( "wp_ajax_tf_ajax_install_plugin", "wp_ajax_install_plugin" );
 
 	return;
+}
+
+/**
+ * Enqueue Main Admin scripts
+ *
+ * @since 1.0
+ */
+if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
+	function tf_enqueue_main_admin_scripts() {
+
+		//date format
+		$date_format_change  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+
+		// Custom
+		wp_enqueue_style( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css', '', TOURFIC );
+		wp_enqueue_style( 'tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css', '', TOURFIC );
+		wp_enqueue_script( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js', array( 'jquery' ), TOURFIC, true );
+		wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts.min.js', array( 'jquery', 'wp-data', 'wp-editor', 'wp-edit-post' ), TOURFIC, true );
+		wp_localize_script( 'tf-admin', 'tf_admin_params',
+			array(
+				'tf_nonce'                         => wp_create_nonce( 'updates' ),
+				'ajax_url'                         => admin_url( 'admin-ajax.php' ),
+				'deleting_old_review_fields'       => __( 'Deleting old review fields...', 'tourfic' ),
+				'deleting_room_order_ids'          => __( 'Deleting order ids...', 'tourfic' ),
+				'tour_location_required'           => __( 'Tour Location is a required field!', 'tourfic' ),
+				'hotel_location_required'          => __( 'Hotel Location is a required field!', 'tourfic' ),
+				'apartment_location_required'      => __( 'Apartment Location is a required field!', 'tourfic' ),
+				'tour_feature_image_required'      => __( 'Tour image is a required!', 'tourfic' ),
+				'hotel_feature_image_required'     => __( 'Hotel image is a required!', 'tourfic' ),
+				'apartment_feature_image_required' => __( 'Apartment image is a required!', 'tourfic' ),
+				'installing'                       => __( 'Installing...', 'tourfic' ),
+				'activating'                       => __( 'Activating...', 'tourfic' ),
+				'installed'                        => __( 'Installed', 'tourfic' ),
+				'activated'                        => __( 'Activated', 'tourfic' ),
+				'install_failed'                   => __( 'Install failed', 'tourfic' ),
+				'date_format_change_backend' 	   => $date_format_change,
+				'i18n'                             => array(
+					'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
+				)
+			)
+		);
+	}
+
+	add_action( 'admin_enqueue_scripts', 'tf_enqueue_main_admin_scripts', 9 );
 }
 
 // Styles & Scripts

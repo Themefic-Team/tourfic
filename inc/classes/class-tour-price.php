@@ -3,6 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 /**
  * Price calculation for single tour
+ * @since 1.0.0
  */
 if(!class_exists('Tour_Price')){
     class Tour_Price {
@@ -124,7 +125,7 @@ if(!class_exists('Tour_Price')){
                         $child_price_array  = array_column($meta['cont_custom_date'], 'child_price');
                         $infant_price_array = array_column($meta['cont_custom_date'], 'infant_price');
                     }
-                    
+
                     # Get minimum price of adult, child, infant
                     $min_adult_price  = !empty($adult_price_array) ? min($adult_price_array) : '';
                     $min_child_price  = !empty($child_price_array) ? min($child_price_array) : '';

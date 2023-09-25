@@ -275,7 +275,26 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								</h3>
 							</div>
 						</div>
-						
+
+                        <div class="tf-single-performance-grid">
+                            <div class="tf-single-performance-icon">
+                                <img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-apartment.png" alt="total apartment">
+                            </div>
+                            <div class="tf-single-performance-content">
+                                <p><?php _e("Total Apartments","tourfic"); ?></p>
+                                <h3>
+									<?php
+									$tf_total_apartments = array(
+										'post_type'      => 'tf_apartment',
+										'post_status'    => 'publish',
+										'posts_per_page' => - 1
+									);
+									echo count( get_posts ($tf_total_apartments ) );
+									?>
+                                </h3>
+                            </div>
+                        </div>
+
 						<div class="tf-single-performance-grid">
 							<div class="tf-single-performance-icon">
 							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-booking-online.png" alt="total Booking">
@@ -758,18 +777,20 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 	                                            foreach ( $tab_fields['fields'] as $key => $tab_field ) {
 		                                            if ( isset( $tab_field['validate'] ) && $tab_field['validate'] == 'no_space_no_special' ) {
                                                         $sanitize_data_array = [];
-			                                            foreach ( $data[$tab_fields['id']] as $_key=> $datum ) {
-                                                            //unique id 3 digit
-                                                            $unique_id = substr(uniqid(), -3);
-                                                            $sanitize_data = sanitize_title(str_replace(' ', '_', strtolower($datum[$tab_field['id']])));
-                                                            if(in_array($sanitize_data, $sanitize_data_array)){
-                                                                $sanitize_data = $sanitize_data . '_' . $unique_id;
-                                                            } else {
-                                                                $sanitize_data_array[] = $sanitize_data;
-                                                            }
+														if(!empty($data[$tab_fields['id']])){
+															foreach ( $data[$tab_fields['id']] as $_key=> $datum ) {
+																//unique id 3 digit
+																$unique_id = substr(uniqid(), -3);
+																$sanitize_data = sanitize_title(str_replace(' ', '_', strtolower($datum[$tab_field['id']])));
+																if(in_array($sanitize_data, $sanitize_data_array)){
+																	$sanitize_data = $sanitize_data . '_' . $unique_id;
+																} else {
+																	$sanitize_data_array[] = $sanitize_data;
+																}
 
-                                                            $data[$tab_fields['id']][$_key][$tab_field['id']] = $sanitize_data;
-                                                        }
+																$data[$tab_fields['id']][$_key][$tab_field['id']] = $sanitize_data;
+															}
+														}
 		                                            }
 	                                            }
                                             }
