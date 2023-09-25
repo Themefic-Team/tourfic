@@ -459,7 +459,7 @@
         <div class="tf-map-wrapper">
             <div class="tf-container">
                 <div class="tf-row">
-                    <?php if ( $tf_openstreet_map=="default" && !empty($location_latitude) && !empty($location_longitude) && empty($tf_google_map_key) ) {  ?>
+                    <?php if ( $tf_openstreet_map=="default" && !empty($location_latitude) && !empty($location_longitude) ) {  ?>
                         <div id="tour-location" style="height: 500px;"></div>
                         <script>
                         const map = L.map('tour-location').setView([<?php echo $location_latitude; ?>, <?php echo $location_longitude; ?>], <?php echo $location_zoom; ?>);
