@@ -176,13 +176,13 @@
                                 <?php tf_hotel_sidebar_booking_form(); ?>
                             </div>
                             <div class="tf-hotel-location-map">
-                                <?php if ( !defined( 'TF_PRO' ) && ( $address ) && $tf_openstreet_map!="default" ) { ?>
+                                <?php if ( !defined( 'TF_PRO' ) && ( $address ) && $tf_openstreet_map!="default" && (empty($address_latitude) || empty($address_longitude)) ) { ?>
                                     <div class="tf-hotel-location-preview show-on-map">
                                     <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="290"
                                                 style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                                         <a href="https://www.google.com/maps/search/<?php echo $address; ?>" class="map-pre" target="_blank"><i class="fa-solid fa-location-dot"></i></a>
                                     </div>
-                                <?php } if ( !defined( 'TF_PRO' ) && ( $address ) && $tf_openstreet_map=="default" ) {  ?>
+                                <?php } if ( !defined( 'TF_PRO' ) && ( $address ) && $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude)) {  ?>
                                     <div class="tf-hotel-location-preview show-on-map">
                                         <div id="hotel-location"></div>
                                     </div>
@@ -211,7 +211,7 @@
 
                                     </div>
                                     <?php } ?>
-                                    <?php if (  $tf_openstreet_map=="default" ) {  ?>
+                                    <?php if (  $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude) ) {  ?>
                                         <div class="tf-hotel-location-preview show-on-map">
                                             <div id="hotel-location"></div>
                                             <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="javascript:;">
@@ -230,6 +230,19 @@
                                                 .bindPopup('<?php echo $address; ?>');
                                         </script>
                                     <?php } ?>
+
+                                    <?php if (  $tf_openstreet_map=="default" && (empty($address_latitude) || empty($address_longitude)) ) {  ?>
+                                        <div class="tf-hotel-location-preview show-on-map">
+                                            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&output=embed" width="100%" height="290"
+                                                    style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+                                            <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="javascript:;">
+                                                <i class="fa-solid fa-location-dot"></i>
+                                            </a>
+
+                                        </div>
+                                    <?php } ?>
+
                                     <div style="display: none;" id="tf-hotel-google-maps">
                                         <div class="tf-hotel-google-maps-container">
                                             <?php
