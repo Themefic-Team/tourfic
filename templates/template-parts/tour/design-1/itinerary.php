@@ -58,6 +58,9 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
                 .bindPopup('<?php echo $location; ?>');
             </script>
         <?php } ?>
+        <?php if ( $tf_openstreet_map=="default" && (empty($location_latitude) || empty($location_longitude)) && empty($tf_google_map_key) ) {  ?>
+            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $location ) ); ?>&output=embed" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <?php } ?>
         <?php if( $tf_openstreet_map!="default" && !empty($tf_google_map_key) ){ ?>
         <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $location ) ); ?>&output=embed" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         <?php } ?>
