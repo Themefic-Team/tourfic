@@ -52,7 +52,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'tf-template',
 					'type'  => 'tab',
-					'label' => 'Hotel & Tour',
+					'label' => 'Hotel, Tour & Apartment Template',
 					'tabs'  => array(
 						array(
 							'id'     => 'hotel_template',
@@ -203,7 +203,6 @@ TF_Settings::option( 'tf_settings', array(
 								),
 							),
 						),
-
 						array(
 							'id'     => 'tour_template',
 							'title'  => __( 'Tour', 'tourfic' ),
@@ -372,6 +371,58 @@ TF_Settings::option( 'tf_settings', array(
 								),
 								array(
 									'id'      => 'tour_archive_notice',
+									'type'    => 'notice',
+									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
+								),
+							),
+						),
+						array(
+							'id'     => 'apartment_template',
+							'title'  => __( 'Apartment', 'tourfic' ),
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'      => 'apartment-title',
+									'type'    => 'heading',
+									'content' => __( 'Apartment Single Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'single-apartment',
+									'type'     => 'imageselect',
+									'label'    => __( 'Select Single Template', 'tourfic' ),
+									'multiple' => true,
+									'inline'   => true,
+									'options'  => array(
+										'default'  => array(
+											'title' => 'Default',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-apartment.jpg",
+										),
+									),
+									'default'  => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+								),
+								array(
+									'id'      => 'apartment-title',
+									'type'    => 'heading',
+									'content' => __( 'Apartment Archive & Search Result Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'apartment-archive',
+									'type'     => 'imageselect',
+									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
+									'multiple' => true,
+									'inline'   => true,
+									'options'  => array(
+										'default'  => array(
+											'title' => 'Default',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/apartment-archive-default.jpg",
+										),
+									),
+									'default'  => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+								),
+								array(
+									'id'      => 'apartment_archive_notice',
 									'type'    => 'notice',
 									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
 								),
