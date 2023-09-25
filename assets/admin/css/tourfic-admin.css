@@ -3954,8 +3954,10 @@ Steps
 .tf_booking_details_wrap .wp-list-table tfoot tr th .tf-booking-details-pagination li:first-child svg {
   margin-right: 8px;
 }
-.tf_booking_details_wrap .wp-list-table tfoot tr th .tf-booking-details-pagination li.active a {
+.tf_booking_details_wrap .wp-list-table tfoot tr th .tf-booking-details-pagination li.active {
   background-color: #003C79;
+}
+.tf_booking_details_wrap .wp-list-table tfoot tr th .tf-booking-details-pagination li.active a {
   color: #fff;
 }
 
@@ -4063,6 +4065,16 @@ Steps
   font-weight: 600;
   line-height: 24px; /* 150% */
   margin: 0px 0px 16px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box h4 .others-button span {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box h4 .others-button span svg {
+  margin-right: 8px;
 }
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box {
   display: grid;
@@ -4105,8 +4117,85 @@ Steps
   font-weight: 600;
   line-height: 18px; /* 128.571% */
 }
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-visitor-grid-box {
+  grid-template-columns: 1fr 1fr 1fr;
+}
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions {
   width: 268px;
+  padding: 24px;
+  border-radius: 8px;
+  background: #FFF;
+  margin-top: 24px;
+}
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection h3 {
+  color: #1D2327;
+  font-family: Segoe UI;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 150% */
+  margin: 0px 0px 16px 0px;
+}
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-order-status-filter {
+  position: relative;
+}
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-order-status-filter label {
+  background: #003C79;
+  color: #F0F0F1;
+  font-family: Segoe UI;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-order-status-filter ul {
+  position: absolute;
+  border-radius: 8px;
+  background: #F0F2F4;
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  margin: 0;
+  left: 0;
+  z-index: 99;
+  top: 100%;
+  display: none;
+  width: 100%;
+}
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-order-status-filter ul li {
+  display: block;
+  color: #1D2327;
+  margin: 0px 8px 4px 8px;
+  padding: 8px 16px;
+  background-color: #fff;
+  background: #FFF;
+  cursor: pointer;
+  font-family: Segoe UI;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 150% */
+}
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-order-status-filter ul li:last-child {
+  margin-bottom: 0px;
+}
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-order-status-filter ul li.checkin {
+  background: #ECFDF3;
+  color: #027A48;
+}
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-order-status-filter ul li.checkout {
+  background: #FFFAEB;
+  color: #B54708;
+}
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection.active label svg {
+  transform: rotate(180deg);
+}
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection.active ul {
+  display: block;
 }
 
 /*# sourceMappingURL=tourfic-admin.css.map */
