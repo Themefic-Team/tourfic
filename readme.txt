@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
 Tested up to: 6.3
-Stable tag: 2.9.28
+Stable tag: 2.10.0
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -408,6 +408,19 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.10.0 -  25 September 2023 =
+
+- Added: Apartment Booking feature.
+- Added: Hotel, Tour, Apartment type Taxonomy.
+- Added: Hotel and tour type filter widget.
+- Added: Hotel and tour Backend/Admin booking add( Pro ).
+- Added: Hotel and tour External Booking( Pro ).
+- Added: Without payment option in tour( Pro ).
+- Added: Date formate settings.
+- Fixed: Settings page saving issue.
+- Fixed: Tour single responsive issue.
+- Improvement: Tour start price hide option added to tourfic settings.
 
 = 2.9.28 -  20 August 2023 =
 
