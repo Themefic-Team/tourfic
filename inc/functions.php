@@ -459,7 +459,10 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 
 	if ( ! empty( $post_type ) ) {
 
-		$place_input_id    = $post_type == 'tf_hotel' ? 'tf-location' : ( $post_type == 'tf_apartment' ? 'tf-apartment-location' : 'tf-destination' );
+		$place_input_id    = $post_type == 'tf_hotel' ? 'tf-location' : 'tf-destination';
+		if($post_type == 'tf_apartment'){
+			$place_input_id = 'tf-apartment-location';
+		}
 		$place_placeholder = ( $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ) ? __( 'Enter Location', 'tourfic' ) : __( 'Enter Destination', 'tourfic' );
 
 		$place_key   = 'place';
