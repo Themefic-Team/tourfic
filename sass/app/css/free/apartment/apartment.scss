@@ -74,6 +74,7 @@
         &>img{
             width: 100%;
             border-radius: 8px;
+            height: auto;
         }
 
         .tf-apt-hero-gallery {
@@ -84,6 +85,7 @@
                 object-fit: cover;
                 width: 100%;
                 border-radius: 8px;
+                height: auto;
             }
 
             .tf-apt-hero-left {
@@ -759,6 +761,8 @@
             list-style: none;
             @include flex(0 0 calc(50% - 15px));
             padding-left: 30px;
+            margin: 0;
+            box-sizing: border-box;
 
             @media #{$max767} {
                 @include flex(0 0 100%);
@@ -810,6 +814,13 @@
             }
         }
 
+        &.tf-house-rules-full{
+            .tf-not-included-house-rules,
+            .tf-included-house-rules {
+                @include flex(0 0 100%);
+            }
+        }
+
         .tf-not-included-house-rules {
             li {
                 h6 {
@@ -855,6 +866,10 @@
     #tf-faq-item {
         border-bottom: 1px solid #dfdfdf;
 
+        .tf-faq-title h4{
+            margin: 4px 0;
+        }
+
         .tf-faq-desc {
             background-color: transparent;
             padding: 0;
@@ -893,6 +908,33 @@
     h3 {
         &::before {
             display: none;
+        }
+    }
+}
+
+.single-tf_apartment{
+    #tf-ask-question{
+        input[type="text"],
+        input[type="email"],
+        textarea{
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            background-color: #fff;
+            color: $slate60;
+            font-size: 16px;
+            font-weight: 400;
+            transition: all 0.3s ease-in-out;
+
+            &:focus{
+                outline: none;
+                border-color: $blue60;
+            }
+        }
+
+        textarea{
+            height: 120px;
         }
     }
 }
@@ -1156,6 +1198,7 @@
                     display: inline-block;
                 }
 
+                .form-control,
                 #check-in-out-date {
                     border: none;
                     background-color: transparent;

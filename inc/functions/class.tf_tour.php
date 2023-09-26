@@ -163,7 +163,7 @@ class DBTFTOURTable extends WP_List_Table {
         $current_user_id = $current_user->ID;
         // get user role
         $current_user_role = $current_user->roles[0];
-        if ( $current_user_role == 'administrator' ) {
+        if ( $current_user_role == 'administrator' && (strpos( $item['payment_method'], 'Booked by' ) === false || $item['payment_method'] == "offline")) {
             return '<a href="'.admin_url().'post.php?post='.$item['order_id'].'&amp;action=edit" class="button button-secondary">Edit</a>';
         }
 	}

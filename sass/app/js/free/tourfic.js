@@ -1467,19 +1467,21 @@
          * Single tour sticky booking bar - template 1
          * @author Foysal
          */
-        $(window).scroll(function () {
-            let bookingBox = $('.tf-tour-booking-box');
-            let bottomBar = $('.tf-bottom-booking-bar');
-            let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();
+        if($('.tf-tour-booking-box').length > 0) {
+            $(window).scroll(function () {
+                let bookingBox = $('.tf-tour-booking-box');
+                let bottomBar = $('.tf-bottom-booking-bar');
+                let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();
 
-            var scrollTop = $(window).scrollTop();
+                var scrollTop = $(window).scrollTop();
 
-            if (scrollTop > boxOffset) {
-                bottomBar.addClass('active'); // Add your class name here
-            } else {
-                bottomBar.removeClass('active'); // Remove the class if scrolling back up
-            }
-        });
+                if (scrollTop > boxOffset) {
+                    bottomBar.addClass('active'); // Add your class name here
+                } else {
+                    bottomBar.removeClass('active'); // Remove the class if scrolling back up
+                }
+            });
+        }
 
         $(document).on('click', '.tf-booking-mobile-btn', function (e) {
             e.preventDefault();

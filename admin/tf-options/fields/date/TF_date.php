@@ -12,7 +12,7 @@ if ( ! class_exists( 'TF_date' ) ) {
 		public function render() {
 
 			$args = wp_parse_args( $this->field, array(
-				'format'      => 'Y-m-d',
+				// 'format'      => 'Y-m-d',
 				'range'       => false,
 				'multiple'    => false,
 				'minDate'     => '',

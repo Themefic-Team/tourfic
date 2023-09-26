@@ -31,22 +31,28 @@
                 //if hotel service not checked, hide hotel settings
                 if (!$('input[name="tf-services[]"][value="hotel"]').is(':checked')) {
                     $('.tf-hotel-setup-wizard').hide();
+                    $('.tf-add-new-hotel').hide();
                 } else {
                     $('.tf-hotel-setup-wizard').show();
+                    $('.tf-add-new-hotel').show();
                 }
 
                 //if tour service not checked, hide tour settings
                 if (!$('input[name="tf-services[]"][value="tour"]').is(':checked')) {
                     $('.tf-tour-setup-wizard').hide();
+                    $('.tf-add-new-tour').hide();
                 } else {
                     $('.tf-tour-setup-wizard').show();
+                    $('.tf-add-new-tour').show();
                 }
 
                 //if apartment service not checked, hide apartment settings
                 if (!$('input[name="tf-services[]"][value="apartment"]').is(':checked')) {
                     $('.tf-apartment-setup-wizard').hide();
+                    $('.tf-add-new-apartment').hide();
                 } else {
                     $('.tf-apartment-setup-wizard').show();
+                    $('.tf-add-new-apartment').show();
                 }
             }
 

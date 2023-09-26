@@ -48,7 +48,6 @@ while ( have_posts() ) : the_post();
 	$location = isset( $meta['text_location'] ) ? $meta['text_location'] : '';
 
 	//Social Share
-
 	$share_text = get_the_title();
 	$share_link = get_permalink( $post_id );
 	$disable_share_opt  = ! empty( $meta['t-share'] ) ? $meta['t-share'] : '';

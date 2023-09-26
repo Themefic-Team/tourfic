@@ -74,6 +74,10 @@ while ( have_posts() ) : the_post();
 		$map                    = unserialize( $tf_apartment_map_value );
 	}
 
+	// Map Type
+	$tf_openstreet_map = ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "default";
+	$tf_google_map_key = !empty( tfopt( 'tf-googlemapapi' ) ) ? tfopt( 'tf-googlemapapi' ) : '';
+
 	// Apartment Gallery
 	$gallery = ! empty( $meta['apartment_gallery'] ) ? $meta['apartment_gallery'] : '';
 	if ( $gallery ) {
@@ -206,7 +210,7 @@ while ( have_posts() ) : the_post();
                                                 data-id="<?php echo $post_id ?>"
                                                 data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
 											echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
-										} ?>> Save</i></a>
+										} ?>></i></a>
 									<?php
 								}
 							}
@@ -358,7 +362,7 @@ while ( have_posts() ) : the_post();
                             </div>
 						<?php endif; ?>
 
-						<?php if ( ! empty( tf_data_types( $meta['amenities'] ) ) ) :
+						<?php if ( isset($meta['amenities']) && ! empty( tf_data_types( $meta['amenities'] ) ) ) :
 							$fav_amenities = array();
 							foreach ( tf_data_types( $meta['amenities'] ) as $amenity ) {
 								if ( ! isset( $amenity['favorite'] ) || $amenity['favorite'] !== '1' ) {
@@ -371,25 +375,41 @@ while ( have_posts() ) : the_post();
                             <div class="tf-apartment-amenities-section">
                                 <h2 class="section-heading"><?php ! empty( $meta['amenities_title'] ) ? esc_html_e( $meta['amenities_title'] ) : _e( 'What this place offers', 'tourfic' ); ?></h2>
                                 <div class="tf-apartment-amenities">
-									<?php
-									//10 is the number of amenities to show
-									foreach ( array_slice( $fav_amenities, 0, 10 ) as $amenity ) :
-										$feature = get_term_by( 'id', $amenity['feature'], 'apartment_feature' );
-										$feature_meta = get_term_meta( $amenity['feature'], 'tf_apartment_feature', true );
-										$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-										if ( $f_icon_type == 'icon' ) {
-											$feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';
-										} elseif ( $f_icon_type == 'custom' ) {
-											$feature_icon = '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
-										}
-										?>
-                                        <div class="tf-apt-amenity">
-											<?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . $feature_icon . "</div>" : ""; ?>
-                                            <span><?php echo esc_html( $feature->name ); ?></span>
-                                        </div>
-									<?php endforeach; ?>
+									<?php if ( ! empty( $fav_amenities ) ):
+										foreach ( array_slice( $fav_amenities, 0, 10 ) as $amenity ) :
+											$feature = get_term_by( 'id', $amenity['feature'], 'apartment_feature' );
+											$feature_meta = get_term_meta( $amenity['feature'], 'tf_apartment_feature', true );
+											$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+											if ( $f_icon_type == 'icon' ) {
+												$feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';
+											} elseif ( $f_icon_type == 'custom' ) {
+												$feature_icon = '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
+											}
+											?>
+                                            <div class="tf-apt-amenity">
+												<?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . $feature_icon . "</div>" : ""; ?>
+                                                <span><?php echo esc_html( $feature->name ); ?></span>
+                                            </div>
+										<?php endforeach; ?>
+									<?php else :
+										foreach ( array_slice( tf_data_types( $meta['amenities'] ), 0, 10 ) as $amenity ) :
+											$feature = get_term_by( 'id', $amenity['feature'], 'apartment_feature' );
+											$feature_meta = get_term_meta( $amenity['feature'], 'tf_apartment_feature', true );
+											$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+											if ( $f_icon_type == 'icon' ) {
+												$feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';
+											} elseif ( $f_icon_type == 'custom' ) {
+												$feature_icon = '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
+											}
+											?>
+                                            <div class="tf-apt-amenity">
+												<?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . $feature_icon . "</div>" : ""; ?>
+                                                <span><?php echo esc_html( $feature->name ); ?></span>
+                                            </div>
+										<?php endforeach; ?>
+									<?php endif; ?>
                                 </div>
-								<?php if ( count( $fav_amenities ) > 10 ): ?>
+								<?php if ( count( tf_data_types( $meta['amenities'] ) ) > 10 ): ?>
                                     <div class="tf-apartment-amenities-more">
                                         <a class="tf_button btn-styled tf-modal-btn" data-target="#tf-amenities-modal"><?php _e( 'Show all amenities', 'tourfic' ) ?></a>
                                     </div>
@@ -489,83 +509,108 @@ while ( have_posts() ) : the_post();
             </div>
         </div>
 
-		<?php if ( defined( 'TF_PRO' ) ): ?>
-			<?php if ( ! empty( $map['address'] ) || isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
-                <div id="apartment-map" class="tf-apartment-map-wrapper">
-                    <div class="tf-container">
-                        <div class="tf-row">
-                            <div class="tf-map-content-wrapper <?php echo empty( $map['address'] ) || empty( $meta['surroundings_places'] ) ? 'tf-map-content-full' : ''; ?>">
-								<?php if ( ! empty( $map['address'] ) ): ?>
-                                    <div class="tf-apartment-map">
-                                        <h2 class="section-heading"><?php ! empty( $meta['location_title'] ) ? esc_html_e( $meta['location_title'] ) : _e( 'Your staying location', 'tourfic' ); ?></h2>
-                                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $map["latitude"] ); ?>,<?php echo esc_attr( $map["longitude"] ); ?>&z=15&output=embed"
-                                                width="100%" height="400"
-                                                style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                                    </div>
-								<?php endif; ?>
 
-								<?php if ( isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
-                                    <div class="about-location">
-										<?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
-                                            <h2 class="section-heading"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h2>
-										<?php endif; ?>
-										<?php if ( ! empty( $meta['surroundings_subtitle'] ) ): ?>
-                                            <p class="surroundings_subtitle"><?php echo esc_html( $meta['surroundings_subtitle'] ); ?></p>
-										<?php endif; ?>
+		<?php if ( ! empty( $map['address'] ) || isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
+            <div id="apartment-map" class="tf-apartment-map-wrapper">
+                <div class="tf-container">
+                    <div class="tf-row">
+                        <div class="tf-map-content-wrapper <?php echo empty( $map['address'] ) || empty( $meta['surroundings_places'] ) ? 'tf-map-content-full' : ''; ?> <?php echo !function_exists( 'is_tf_pro' ) ? 'tf-map-content-full' : '' ?>">
+							<?php if ( ! empty( $map['address'] ) ): ?>
+                                <div class="tf-apartment-map">
+                                    <h2 class="section-heading"><?php ! empty( $meta['location_title'] ) ? esc_html_e( $meta['location_title'] ) : _e( 'Your staying location', 'tourfic' ); ?></h2>
 
-                                        <div class="tf-apartment-surronding-wrapper">
-											<?php foreach ( tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
-                                                <div class="tf-apartment-surronding-criteria">
-                                                    <div class="tf-apartment-surronding-criteria-label">
-                                                        <i class="<?php echo esc_attr( $surroundings_place['place_criteria_icon'] ); ?>"></i>
-														<?php echo esc_html( $surroundings_place['place_criteria_label'] ); ?>
-                                                    </div>
+	                                <?php if ( $tf_openstreet_map=="default" && !empty($map["latitude"]) && !empty($map["longitude"]) ) {  ?>
+                                        <div id="apartment-location" style="height: 500px;"></div>
+                                        <script>
+                                            const map = L.map('apartment-location').setView([<?php echo $map["latitude"]; ?>, <?php echo $map["longitude"]; ?>], <?php echo $map["zoom"]; ?>);
 
-													<?php if ( isset( $surroundings_place['places'] ) && ! empty( tf_data_types( $surroundings_place['places'] ) ) ): ?>
-                                                        <ul class="tf-apartment-surronding-places">
-															<?php foreach ( tf_data_types( $surroundings_place['places'] ) as $place ): ?>
-                                                                <li>
-                                                                    <span class="tf-place-name"><?php echo esc_html( $place['place_name'] ) ?></span>
-                                                                    <span class="tf-place-distance"><?php echo esc_html( $place['place_distance'] ) ?></span>
-                                                                </li>
-															<?php endforeach; ?>
-                                                        </ul>
-													<?php endif; ?>
+                                            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                                maxZoom: 20,
+                                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                                            }).addTo(map);
+
+                                            const marker = L.marker([<?php echo $map["latitude"]; ?>, <?php echo $map["longitude"]; ?>], {alt: '<?php echo $map["address"]; ?>'}).addTo(map)
+                                                .bindPopup('<?php echo $map["address"]; ?>');
+                                        </script>
+	                                <?php } elseif( $tf_openstreet_map!="default" && !empty($tf_google_map_key) ){ ?>
+                                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $map["address"] ) ); ?>&output=embed" width="100%" height="600" style="border:0;" allowfullscreen=""
+                                                loading="lazy"></iframe>
+	                                <?php } ?>
+                                </div>
+							<?php endif; ?>
+
+							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && isset( $meta['surroundings_places'] ) && ! empty( tf_data_types( $meta['surroundings_places'] ) ) ): ?>
+                                <div class="about-location">
+									<?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
+                                        <h2 class="section-heading"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h2>
+									<?php endif; ?>
+									<?php if ( ! empty( $meta['surroundings_subtitle'] ) ): ?>
+                                        <p class="surroundings_subtitle"><?php echo esc_html( $meta['surroundings_subtitle'] ); ?></p>
+									<?php endif; ?>
+
+                                    <div class="tf-apartment-surronding-wrapper">
+										<?php foreach ( tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
+                                            <div class="tf-apartment-surronding-criteria">
+                                                <div class="tf-apartment-surronding-criteria-label">
+                                                    <i class="<?php echo esc_attr( $surroundings_place['place_criteria_icon'] ); ?>"></i>
+													<?php echo esc_html( $surroundings_place['place_criteria_label'] ); ?>
                                                 </div>
-											<?php endforeach; ?>
-                                        </div>
+
+												<?php if ( isset( $surroundings_place['places'] ) && ! empty( tf_data_types( $surroundings_place['places'] ) ) ): ?>
+                                                    <ul class="tf-apartment-surronding-places">
+														<?php foreach ( tf_data_types( $surroundings_place['places'] ) as $place ): ?>
+                                                            <li>
+                                                                <span class="tf-place-name"><?php echo esc_html( $place['place_name'] ) ?></span>
+                                                                <span class="tf-place-distance"><?php echo esc_html( $place['place_distance'] ) ?></span>
+                                                            </li>
+														<?php endforeach; ?>
+                                                    </ul>
+												<?php endif; ?>
+                                            </div>
+										<?php endforeach; ?>
                                     </div>
-								<?php endif; ?>
-                            </div>
+                                </div>
+							<?php endif; ?>
                         </div>
                     </div>
                 </div>
-			<?php endif; ?>
+            </div>
 		<?php endif; ?>
 
-		<?php if ( isset( $meta['house_rules'] ) && ! empty( tf_data_types( $meta['house_rules'] ) ) ): ?>
+		<?php if ( isset( $meta['house_rules'] ) && ! empty( tf_data_types( $meta['house_rules'] ) ) ):
+			$included_house_rules = array();
+			$not_included_house_rules = array();
+			foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
+				if ( isset( $house_rule['include'] ) && $house_rule['include'] == '1' ) {
+					$included_house_rules[] = $house_rule;
+				} else {
+					$not_included_house_rules[] = $house_rule;
+				}
+			}
+			?>
             <div class="tf-house-rules">
                 <div class="tf-container">
                     <h3 class="section-heading"><?php ! empty( $meta['house_rules_title'] ) ? esc_html_e( $meta['house_rules_title'] ) : _e( 'House Rules', 'tourfic' ); ?></h3>
-                    <div class="tf-house-rules-wrapper">
-                        <ul class="tf-included-house-rules">
-							<?php
-							foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
-								if ( isset( $house_rule['include'] ) && $house_rule['include'] == '1' ) {
-									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $house_rule['title'] ), esc_html( $house_rule['desc'] ) );
+                    <div class="tf-house-rules-wrapper <?php echo empty( $included_house_rules ) || empty( $not_included_house_rules ) ? 'tf-house-rules-full' : ''; ?>">
+						<?php if ( ! empty( $included_house_rules ) ): ?>
+                            <ul class="tf-included-house-rules">
+								<?php
+								foreach ( $included_house_rules as $item ) {
+									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $item['title'] ), esc_html( $item['desc'] ) );
 								}
-							}
-							?>
-                        </ul>
-                        <ul class="tf-not-included-house-rules">
-							<?php
-							foreach ( tf_data_types( $meta['house_rules'] ) as $house_rule ) {
-								if ( ! isset( $house_rule['include'] ) ) {
-									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $house_rule['title'] ), esc_html( $house_rule['desc'] ) );
+								?>
+                            </ul>
+						<?php endif; ?>
+
+						<?php if ( ! empty( $not_included_house_rules ) ): ?>
+                            <ul class="tf-not-included-house-rules">
+								<?php
+								foreach ( $not_included_house_rules as $item ) {
+									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $item['title'] ), esc_html( $item['desc'] ) );
 								}
-							}
-							?>
-                        </ul>
+								?>
+                            </ul>
+						<?php endif; ?>
                     </div>
                 </div>
             </div>
