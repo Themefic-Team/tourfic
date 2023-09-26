@@ -485,6 +485,9 @@
                                             if($hotel_discount_type == "percent") {
                                                 $discount_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $price - ( ( $price / 100 ) * $hotel_discount_amount ), 2 ) ) );
                                                 $discount_price = wc_price($discount_price);
+                                            } else if($hotel_discount_type == "fixed") {
+                                                $discount_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $price - $hotel_discount_amount ), 2 ) );
+                                                $discount_price = wc_price($discount_price);
                                             }
                                             $price = wc_price( $price );
                                         }
