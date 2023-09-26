@@ -421,9 +421,17 @@
                                                
                                                 }
                                             }
+                                            $discount_prices = [];
                                             if ( sizeof( $range_price ) > 1 ) {
+                                                foreach($prices as $value) {
+                                                    if($hotel_discount_type == "percent") {
+                                                        $discount_prices[] = floatval( preg_replace( '/[^\d.]/', '', number_format( $value - ( ( $value / 100 ) * $hotel_discount_amount ), 2 ) ) );
+                                                    } else if( $hotel_discount_type == "fixed") {
+                                                        $discount_prices[] = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $value - $hotel_discount_amount ), 2 ) ) );;
+                                                    }
+                                                }
+                                                $discount_price = $discount_prices ? ( min( $discount_prices ) != max( $discount_prices ) ? wc_format_price_range( min( $discount_prices ), max( $discount_prices ) ) : wc_price( min( $discount_prices ) ) ) : "";
                                                 $price = $prices ? ( min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) ) ) : wc_price( 0 );
-                                                
                                             } else { // Availability Only Price
                                                 $price = ! empty( $range_price[0] ) ? $range_price[0] : 0;
                                                 if($hotel_discount_type == "percent") {
@@ -439,9 +447,25 @@
                                             }
                                         }else{
                                             if ( $pricing_by == '1' ) {
-                                                $price = wc_price( ! empty( $room['price'] ) ? $room['price'] : '0.0' );
+                                                $price = ! empty( $room['price'] ) ? $room['price'] : '0.0';
+                                                if($hotel_discount_type == "percent") {
+                                                    $discount_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $price - ( ( $price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+                                                    $discount_price = wc_price($discount_price);
+                                                }else if($hotel_discount_type == "fixed") {
+                                                    $discount_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $price - $hotel_discount_amount ), 2 ) ) );;
+                                                    $discount_price = wc_price($discount_price);
+                                                }
+                                                $price = wc_price($price);
                                             } else {
-                                                $price = wc_price( ! empty( $room['adult_price'] ) ? $room['adult_price'] : '0.0' );
+                                                $price = ! empty( $room['adult_price'] ) ? $room['adult_price'] : '0.0';
+                                                if($hotel_discount_type == "percent") {
+                                                    $discount_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $price - ( ( $price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+                                                    $discount_price = wc_price($discount_price);
+                                                }else if($hotel_discount_type == "fixed") {
+                                                    $discount_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $price - $hotel_discount_amount ), 2 ) ) );;
+                                                    $discount_price = wc_price($discount_price);
+                                                }
+                                                $price = wc_price($price);
                                             }
                                         }
                                     } else { // Done Single Price
@@ -590,8 +614,16 @@
                                             <div class="tf-price-column">
                                                 <?php
                                                 if ( $pricing_by == '1' ) {
-                                                    ?>
-                                                    <span class="tf-price"><del><?php echo $price; ?></del> <?php echo $discount_price ?></span>
+                                                    if(!empty($discount_price)) {
+                                                        ?>
+                                                        <span class="tf-price"><del><?php echo $price; ?></del> <?php echo $discount_price ?></span>
+                                                        <?php
+                                                    }else {
+                                                        ?>
+                                                        <span class="tf-price"><?php echo $price ?></span>
+                                                        <?php
+                                                    } ?>
+                                                    
                                                     <div class="price-per-night">
                                                         <?php 
                                                         if($multi_by_date){
@@ -602,8 +634,15 @@
                                                     </div>
                                                     <?php
                                                 } else {
-                                                    ?>
-                                                    <span class="tf-price"><?php echo $price; ?></span>
+                                                     if(!empty($discount_price)) {
+                                                        ?>
+                                                        <span class="tf-price"><del><?php echo $price; ?></del> <?php echo $discount_price ?></span>
+                                                        <?php
+                                                    }else {
+                                                        ?>
+                                                        <span class="tf-price"><?php echo $price ?></span>
+                                                        <?php
+                                                    } ?>
                                                     <div class="price-per-night">
                                                         <?php 
                                                         if($multi_by_date){
