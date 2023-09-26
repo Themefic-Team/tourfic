@@ -3,7 +3,7 @@
 <div class="tf-trip-map-wrapper tf-mb-50 tf-template-section" id="tf-tour-map">
     <h2 class="tf-title tf-section-title"><?php echo !empty($meta['map-section-title']) ? esc_html($meta['map-section-title']) : __("Maps","tourfic"); ?></h2>
     <div class="tf-map-area">
-        <?php if ( $tf_openstreet_map=="default" && !empty($location_latitude) && !empty($location_longitude) && empty($tf_google_map_key) ) {  ?>
+        <?php if ( $tf_openstreet_map=="default" && !empty($location_latitude) && !empty($location_longitude) ) {  ?>
             <div id="tour-location"></div>
             <script>
             const map = L.map('tour-location').setView([<?php echo $location_latitude; ?>, <?php echo $location_longitude; ?>], <?php echo $location_zoom; ?>);
