@@ -46,6 +46,17 @@ if ( ! function_exists( 'tf_add_order_submenu' ) ) {
 if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 	function tf_tour_booking_page_callback() {
 
+		if(!empty($_GET['order_id']) && !empty($_GET['action']) && !empty($_GET['book_id'])){
+			/**
+			 * Booking Details showing new template
+			 * @since 2.10.0
+			 */
+			if ( file_exists( TF_INC_PATH . 'booking-details/tour/single-booking-details.php' ) ) {
+				require_once TF_INC_PATH . 'booking-details/tour/single-booking-details.php';
+			} else {
+				tf_file_missing( TF_INC_PATH . 'booking-details/tour/single-booking-details.php' );
+			}
+		}else{
 		/**
 		 * Get current logged in user
 		 */
@@ -143,15 +154,16 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 			 * Booking Data showing new template
 			 * @since 2.9.26
 			 */
-			if ( file_exists( TF_INC_PATH . 'functions/tour-booking-data-template.php' ) ) {
-				require_once TF_INC_PATH . 'functions/tour-booking-data-template.php';
+			if ( file_exists( TF_INC_PATH . 'booking-details/tour/booking-details.php' ) ) {
+				require_once TF_INC_PATH . 'booking-details/tour/booking-details.php';
 			} else {
-				tf_file_missing( TF_INC_PATH . 'functions/tour-booking-data-template.php' );
+				tf_file_missing( TF_INC_PATH . 'booking-details/tour/booking-details.php' );
 			}
 			?>
         </div>
 
 	<?php }
+	}
 }
 
 /**

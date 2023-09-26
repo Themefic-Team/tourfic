@@ -4002,6 +4002,9 @@ Steps
   color: #B54708;
 }
 
+.tf-booking-details-preview {
+  margin-top: 10px;
+}
 .tf-booking-details-preview .tf-details-preview-header .tf-back a {
   color: #003C79;
   font-family: Segoe UI;
@@ -4116,6 +4119,8 @@ Steps
   font-style: normal;
   font-weight: 600;
   line-height: 18px; /* 128.571% */
+  text-align: left;
+  text-transform: capitalize;
 }
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-visitor-grid-box {
   grid-template-columns: 1fr 1fr 1fr;
