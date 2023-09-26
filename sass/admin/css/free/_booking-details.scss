@@ -456,6 +456,9 @@
                 .tf-visitor-grid-box{
                     grid-template-columns: 1fr 1fr 1fr;
                 }
+                .tf-pricing-grid-box{
+                    grid-template-columns: 1fr;
+                }
             }
         }
         .tf-booking-actions{
@@ -528,19 +531,6 @@
                             background: #FFFAEB;
                             color: #B54708;
                         }
-                    }
-                }
-                .tf-checkinout-details{
-                    margin-top: 24px;
-                    p{
-                        margin: 0;
-                        color: #1D2327;
-                        font-family: Segoe UI;
-                        font-size: 14px;
-                        font-style: normal;
-                        font-weight: 400;
-                        line-height: 18px;
-                        margin-bottom: 8px;
                     }
                 }
                 &:first-child{

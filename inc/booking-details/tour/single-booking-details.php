@@ -11,7 +11,6 @@
         <?php 
         global $wpdb;
         $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s AND order_id = %s",sanitize_key( $_GET['book_id'] ), sanitize_key( $_GET['order_id'] ) ) );
-        tf_var_dump($tf_order_details);
         ?>
         <div class="tf-title">
             <h2><?php echo esc_html( get_the_title( $tf_order_details->post_id ) ); ?></h2>
@@ -134,58 +133,58 @@
                 <h4>
                     <?php _e("Pricing details", "tourfic"); ?>
                 </h4>
-                <div class="tf-grid-box">
-
-                    <div class="tf-grid-single">
-                        <div class="tf-single-box">
-                            <table class="table" cellpadding="0" callspacing="0">
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
+                <div class="tf-grid-box tf-pricing-grid-box">
 
                     <div class="tf-grid-single">
                         <div class="tf-single-box">
                             <table class="table">
+                                
                                 <tr>
-                                    <th>Name</th>
+                                    <th><?php _e("Payment method", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td>Jahid Hasan</td>
+                                    <td>
+                                    <?php 
+                                        if ( ! function_exists( 'tf_get_payment_method_full_name' ) ) {
+                                            function tf_get_payment_method_full_name( $sort_name ) {
+                                                $payment_gateways = WC_Payment_Gateways::instance()->get_available_payment_gateways();
+                                
+                                                if ( isset( $payment_gateways[ $sort_name ] ) ) {
+                                                    return $payment_gateways[ $sort_name ]->title;
+                                                } else {
+                                                    return 'Offline Payment';
+                                                }
+                                            }
+                                        }
+                                        $sort_name = $tf_order_details->payment_method;
+                                        echo tf_get_payment_method_full_name( $sort_name );
+                                    ?>
+                                    </td>
                                 </tr>
+                                <?php 
+                                if(!empty($tf_tour_details->tour_extra)){
+                                ?>
                                 <tr>
-                                    <th>Name</th>
+                                    <th><?php _e("Extra", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td>Jahid Hasan</td>
+                                    <td><?php echo esc_html($tf_tour_details->tour_extra); ?></td>
                                 </tr>
+                                <?php } ?>
+                                <?php 
+                                if(!empty($tf_tour_details->total_price)){ ?>
                                 <tr>
-                                    <th>Name</th>
+                                    <th><?php _e("Total", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td>Jahid Hasan</td>
+                                    <td><?php echo wc_price($tf_tour_details->total_price); ?></td>
                                 </tr>
+                                <?php } ?>
+                                <?php 
+                                if(!empty($tf_tour_details->due_price)){ ?>
                                 <tr>
-                                    <th>Name</th>
+                                    <th><?php _e("Due Price", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td>Jahid Hasan</td>
+                                    <td><?php echo wc_price($tf_tour_details->due_price); ?></td>
                                 </tr>
+                                <?php } ?>
                             </table>
                         </div>
                     </div>
@@ -207,118 +206,50 @@
                     </div>
                 </h4>
                 <div class="tf-grid-box tf-visitor-grid-box">
-
+                    <?php 
+                    $tf_visitors_details = json_decode($tf_tour_details->visitor_details);
+                    $traveler_fields = !empty(tfopt('without-payment-field')) ? tf_data_types(tfopt('without-payment-field')) : '';
+                    if(!empty($tf_visitors_details)){
+                        $visitor_count = 1;
+                        foreach($tf_visitors_details as $visitor){
+                    ?>
                     <div class="tf-grid-single">
-                        <h3><?php _e("Visitor 1", "tourfic"); ?></h3>
+                        <h3><?php _e("Visitor ".$visitor_count, "tourfic"); ?></h3>
                         <div class="tf-single-box">
                             <table class="table" cellpadding="0" callspacing="0">
+                                <?php 
+                                if(!empty($traveler_fields)){
+                                    foreach($traveler_fields as $field){
+                                ?>
                                 <tr>
-                                    <th>Name</th>
+                                    <th><?php echo esc_html( $field['reg-field-label'] ); ?></th>
                                     <td>:</td>
-                                    <td>Jahid Hasan</td>
+                                    <td><?php
+                                    $field_key = $field['reg-field-name'];
+                                    echo esc_html( $visitor->$field_key ); ?></td>
                                 </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
+                                <?php } }else{ ?>
+                                    <tr>
+                                        <th><?php _e("Full Name", "tourfic"); ?></th>
+                                        <td>:</td>
+                                        <td><?php echo !empty($visitor->tf_full_name) ? esc_html( $visitor->tf_full_name ) : ''; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th><?php _e("Date of birth", "tourfic"); ?></th>
+                                        <td>:</td>
+                                        <td><?php echo !empty($visitor->tf_dob) ? esc_html( $visitor->tf_dob ) : ''; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th><?php _e("NID", "tourfic"); ?></th>
+                                        <td>:</td>
+                                        <td><?php echo !empty($visitor->tf_nid) ? esc_html( $visitor->tf_nid ) : ''; ?></td>
+                                    </tr>
+                                <?php } ?>
                             </table>
                         </div>
                     </div>
-                    <div class="tf-grid-single">
-                        <h3><?php _e("Visitor 2", "tourfic"); ?></h3>
-                        <div class="tf-single-box">
-                            <table class="table" cellpadding="0" callspacing="0">
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
+                    <?php $visitor_count++; } } ?>
                     
-                    <div class="tf-grid-single">
-                        <h3><?php _e("Visitor 2", "tourfic"); ?></h3>
-                        <div class="tf-single-box">
-                            <table class="table" cellpadding="0" callspacing="0">
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    
-                    <div class="tf-grid-single">
-                        <h3><?php _e("Visitor 2", "tourfic"); ?></h3>
-                        <div class="tf-single-box">
-                            <table class="table" cellpadding="0" callspacing="0">
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
@@ -343,7 +274,7 @@
                 <div class="tf-grid-box">
 
                     <div class="tf-grid-single">
-                        <h3><?php _e("Visitor 1", "tourfic"); ?></h3>
+                        <h3><?php _e("Your voucher", "tourfic"); ?></h3>
                         <div class="tf-single-box">
                             <table class="table" cellpadding="0" callspacing="0">
                                 <tr>
@@ -370,21 +301,16 @@
                         </div>
                     </div>
                     <div class="tf-grid-single">
-                        <h3><?php _e("Visitor 2", "tourfic"); ?></h3>
+                        <h3><?php _e("Others information", "tourfic"); ?></h3>
                         <div class="tf-single-box">
                             <table class="table" cellpadding="0" callspacing="0">
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Checked status</th>
                                     <td>:</td>
-                                    <td>Jahid Hasan</td>
+                                    <td>Checked in</td>
                                 </tr>
                                 <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
+                                    <th>Checked in by</th>
                                     <td>:</td>
                                     <td>Jahid Hasan</td>
                                 </tr>
@@ -429,10 +355,6 @@
                         <li class="checkin"><?php _e("Checked in", "tourfic"); ?></li>
                         <li class="checkout"><?php _e("Not checked in", "tourfic"); ?></li>
                     </ul>
-                </div>
-                <div class="tf-checkinout-details">
-                    <p><?php _e("Checked in:", "tourfic"); ?> Dec 12, 2023</p>
-                    <p><?php _e("Checked by:", "tourfic"); ?> Akanda Hasan</p>
                 </div>
             </div>
 

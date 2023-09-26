@@ -4125,6 +4125,9 @@ Steps
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-visitor-grid-box {
   grid-template-columns: 1fr 1fr 1fr;
 }
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-pricing-grid-box {
+  grid-template-columns: 1fr;
+}
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions {
   width: 268px;
   padding: 24px;
@@ -4198,19 +4201,6 @@ Steps
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-order-status-filter ul li.checkout {
   background: #FFFAEB;
   color: #B54708;
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-checkinout-details {
-  margin-top: 24px;
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-checkinout-details p {
-  margin: 0;
-  color: #1D2327;
-  font-family: Segoe UI;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px;
-  margin-bottom: 8px;
 }
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection:first-child {
   margin-top: 0px;
