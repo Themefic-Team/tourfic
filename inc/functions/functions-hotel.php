@@ -816,8 +816,30 @@ function tf_room_availability_callback() {
 				$room_adult_price = ! empty( $room['adult_price'] ) ? $room['adult_price'] : 0;
 				$room_child_price = ! empty( $room['child_price'] ) ? $room['child_price'] : 0;
 				$total_person     = $adult_number + $child_number;
-				$price            = $pricing_by == '1' ? $room_price : $room_adult_price + $room_child_price;
+				$price 			  = $pricing_by == '1' ? $room_price : $room_adult_price + $room_child_price;
 				$form_check_out   = $form_end;
+
+				// Hotel Room Discount Data
+				$hotel_discount_type = !empty($room["discount_hotel_type"]) ? $room["discount_hotel_type"] : "none";
+				$hotel_discount_amount = !empty($room["discount_hotel_price"]) ? $room["discount_hotel_price"] : '';
+
+				if($pricing_by == 1) {
+					if($hotel_discount_type == "percent") {
+						$d_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $room_price - ( ( $room_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+					}else if($hotel_discount_type == "fixed") {
+						$d_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $room_price - $hotel_discount_amount ), 2 ) ) );
+					}
+				} else {
+					if($hotel_discount_type == "percent") {
+						$d_room_adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $room_adult_price - ( ( $room_adult_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+						$d_room_child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $room_child_price - ( ( $room_child_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+					}else if($hotel_discount_type == "fixed") {
+						$room_adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $room_adult_price - $hotel_discount_amount ), 2 ) ) );
+						$room_child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $room_child_price - $hotel_discount_amount ), 2 ) ) );
+					}
+				}
+
+				$d_price = $pricing_by == '1' ? $d_room_price : $d_room_adult_price + $d_room_child_price;
 
 				// Check availability by date option
 
@@ -933,6 +955,7 @@ function tf_room_availability_callback() {
 					$check_in  = strtotime( $form_start . ' 00:00' );
 					$check_out = strtotime( $form_end . ' 00:00' );
 					$price     = 0;
+					$d_price   = 0;
 					$has_room  = [];
 
 					// extract price from available room options
@@ -953,19 +976,36 @@ function tf_room_availability_callback() {
 							$adult_price     = ! empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $room_adult_price;
 							$child_price     = ! empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $room['child_price'];
 							$price_by_date   = $pricing_by == '1' ? $room_price : ( ( $adult_price * $form_adult ) + ( $child_price * $form_child ) );
-							$price           += $price_by_date;
+							$price 			+= $price_by_date;
 							$number_of_rooms = ! empty( $available_rooms[0]['num-room'] ) ? $available_rooms[0]['num-room'] : $room['num-room'];
 							$has_room[]      = 1;
+
+							if($pricing_by == 1) {
+								if($hotel_discount_type == "percent") {
+									$d_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $room_price - ( ( $room_price / 100 ) * $hotel_discount_amount ), 2 ) ) );;
+								}else if($hotel_discount_type == "fixed") {
+									$d_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $room_price - $hotel_discount_amount ), 2 ) ) );
+								}
+							} else {
+								if($hotel_discount_type == "percent") {
+									$d_adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+									$d_child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $child_price - ( ( $child_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+								}else if($hotel_discount_type == "fixed") {
+									$d_adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $adult_price - $hotel_discount_amount ), 2 ) ) );
+									$d_child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $child_price - $hotel_discount_amount ), 2 ) ) );
+								}
+							}
+							$d_price_by_date = $pricing_by == '1' ? $d_room_price : ( ( $d_adult_price * $form_adult ) + ( $d_child_price * $form_child ) );
+							$d_price += $d_price_by_date;
 
 						} else {
 							$has_room[] = 0;
 						}
-
 					}
 
 					// Check if date is provided and within date range
 					if ( ! in_array( 0, $has_room ) ) {
-						tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit );
+						tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price);
 						if ( $form_total_person <= $total_person ) {
 
 							include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
@@ -983,8 +1023,14 @@ function tf_room_availability_callback() {
 				} else {
 
 					if ( $pricing_by == '1' ) {
+						if($hotel_discount_type == "percent" || $hotel_discount_type == "fixed") {
+							$d_price_by_date = $d_room_price;
+						}
 						$price_by_date = $room_price;
 					} else {
+						if($hotel_discount_type == "percent" || $hotel_discount_type == "fixed") {
+							$d_price_by_date = ( ( $d_room_adult_price * $form_adult ) + ( $d_room_child_price * $form_child ) );
+						}
 						$price_by_date = ( ( $room_adult_price * $form_adult ) + ( $room_child_price * $form_child ) );
 					}
 
@@ -993,8 +1039,9 @@ function tf_room_availability_callback() {
 					}
 
 					$price = $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date * $days;
+					$d_price = $room['price_multi_day'] == '1' ? $d_price_by_date * $days : $d_price_by_date * $days;
 
-					tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit );
+					tf_get_deposit_amount( $room, $price, $deposit_amount, $has_deposit, $d_price );
 
 					/**
 					 * filter hotel room with features
