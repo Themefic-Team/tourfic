@@ -376,6 +376,54 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="tf-filter-selection">
+                <h3><?php _e("Checked in status", "tourfic"); ?></h3>
+                <div class="tf-order-status-filter">
+                    <label>
+                        <span><?php _e("Checked in", "tourfic"); ?></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M5 7.5L10 12.5L15 7.5" stroke="#F0F0F1" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </label>
+                    <ul>
+                        <li class="checkin"><?php _e("Checked in", "tourfic"); ?></li>
+                        <li class="checkout"><?php _e("Not checked in", "tourfic"); ?></li>
+                    </ul>
+                </div>
+                <div class="tf-checkinout-details">
+                    <p><?php _e("Checked in:", "tourfic"); ?> Dec 12, 2023</p>
+                    <p><?php _e("Checked by:", "tourfic"); ?> Akanda Hasan</p>
+                </div>
+            </div>
+
+            <div class="tf-filter-selection">
+                <h3><?php _e("Sent order mail", "tourfic"); ?></h3>
+                <div class="tf-order-status-filter">
+                    <label>
+                        <span><?php _e("Order status", "tourfic"); ?></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M5 7.5L10 12.5L15 7.5" stroke="#F0F0F1" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </label>
+                    <ul>
+                        <li><?php _e("Trash", "tourfic"); ?></li>
+                        <li><?php _e("Processing", "tourfic"); ?></li>
+                        <li><?php _e("On Hold", "tourfic"); ?></li>
+                        <li><?php _e("Complete", "tourfic"); ?></li>
+                        <li><?php _e("Cancelled", "tourfic"); ?></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tf-filter-selection">
+                <div class="tf-refund-btn">
+                    <a href="#">
+                        <?php _e("Refund", "tourfic"); ?>
+                    </a>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
