@@ -145,7 +145,7 @@ if(empty($tf_room_disable_date)){
     </td>
     <td class="reserve tf-t-c">
         <div class="tf-price-column">
-            <span class="tf-price"><?php echo wc_price( $price ); ?></span>
+            <span class="tf-price"><del><?php echo wc_price( $price ); ?></del> <?php echo wc_price( $d_price ); ?></span> <!-- design 1 -->
             <?php 
             if ( $pricing_by == '1' ) { ?>
                 <div class="price-per-night">
@@ -188,7 +188,7 @@ if(empty($tf_room_disable_date)){
             </div>
             <div class="room-submit-wrap">
             <div class="roomselectissue"></div>
-            <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount) ) { ?>
+            <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount) && ($room["deposit_type"] != "none")) { ?>
                 
                 <div class="room-deposit-wrap">
                     <input type="checkbox" id="tf-make-deposit<?php echo $room_id ?>" name="make_deposit" value="<?php echo $room_id ?>">
@@ -386,7 +386,7 @@ if(empty($tf_room_disable_date)){
     </td>
     <td class="pricing">
         <div class="tf-price-column">
-            <span class="tf-price"><?php echo wc_price( $price ); ?></span>
+            <span class="tf-price"><del><?php echo wc_price( $price ); ?></del> <?php echo wc_price( $d_price ); ?></span>
             <?php 
             if ( $pricing_by == '1' ) { ?>
                 <div class="price-per-night">
