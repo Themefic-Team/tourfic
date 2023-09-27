@@ -2149,9 +2149,12 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 
 						<?php
 						if ( ! empty( $room_price ) ):
+							echo __( "From ", "tourfic" );
+							//get the lowest price from all available room price
 							$lowest_price = wc_price( min( $room_price ) );
-							echo __( "From ", "tourfic" ) . $lowest_price;
-							echo __( " (Per Night)", "tourfic" );
+							$highest_price = wc_price( max( $room_price ) );
+							echo "<del>$highest_price</del>";
+							echo " $lowest_price";
 						endif; ?>
 
                     </div>
