@@ -20,6 +20,58 @@
         $('.tf-tour-checkinout-options').select2({
             dropdownCssClass: 'tf-booking-checkinout-filter-modal'
         });
+
+        /**
+         * Visitor Details Popup Open
+         *
+         */
+        $(document).on('click', '.visitor_edit span', function (e) {
+            e.preventDefault();
+            $(".visitor-details-edit-form").show();
+        });
+
+        /**
+         * Visitor Details Popup Close
+         *
+         */
+        $(document).on('click', '.visitor-details-edit-popup .tf-booking-times span', function (e) {
+            e.preventDefault();
+            $(".visitor-details-edit-form").hide();
+        });
+
+        /**
+         * Ajax tour booking
+         *
+         * tf_visitor_details_edit
+         */
+        $(document).on('submit', 'form.visitor-details-edit-popup', function (e) {
+            e.preventDefault();
+            var $this = $(this);
+
+            var formData = new FormData(this);
+            formData.append('action', 'tf_visitor_details_edit');
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (data) {
+                    $('.tf-preloader-box').show();
+                },
+                complete: function (data) {
+                    
+                },
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+        });
+        
     });
 
 })(jQuery);

@@ -197,7 +197,7 @@
             <div class="customers-order-date details-box">
                 <h4>
                     <?php _e("Visitor details", "tourfic"); ?>
-                    <div class="others-button">
+                    <div class="others-button visitor_edit">
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M2.39662 15.0963C2.43491 14.7517 2.45405 14.5794 2.50618 14.4184C2.55243 14.2755 2.61778 14.1396 2.70045 14.0142C2.79363 13.8729 2.91621 13.7503 3.16136 13.5052L14.1666 2.49992C15.0871 1.57945 16.5795 1.57945 17.4999 2.49993C18.4204 3.4204 18.4204 4.91279 17.4999 5.83326L6.49469 16.8385C6.24954 17.0836 6.12696 17.2062 5.98566 17.2994C5.86029 17.3821 5.72433 17.4474 5.58146 17.4937C5.42042 17.5458 5.24813 17.5649 4.90356 17.6032L2.08325 17.9166L2.39662 15.0963Z" stroke="#003C79" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
@@ -468,5 +468,106 @@
             </div>
 
         </div>
+    </div>
+</div>
+<div class="visitor-details-edit-form">
+    <form class="visitor-details-edit-popup">
+        <div class="tf-booking-times">
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="#FCFDFF"/>
+                <path d="M12 11.1111L15.1111 8L16 8.88889L12.8889 12L16 15.1111L15.1111 16L12 12.8889L8.88889 16L8 15.1111L11.1111 12L8 8.88889L8.88889 8L12 11.1111Z" fill="#666D74"/>
+                <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" stroke="#FCFDFF"/>
+                </svg>
+            </span>
+        </div>
+        <div class="visitor-details-popup">
+        <input type="hidden" name="order_id" value="<?php echo $tf_order_details->id; ?>">
+        <?php 
+        for($traveller_in = 1; $traveller_in < $visitor_count; $traveller_in++){ ?>
+            <div class="tf-single-tour-traveller tf-single-travel">
+                <h4><?php _e( 'Traveler '.$traveller_in, 'tourfic' ); ?></h4>
+                <div class="traveller-info">
+                <?php
+                if(empty($traveler_fields)){ ?>
+                <div class="traveller-single-info">
+                    <label for="tf_full_name<?php echo esc_attr($traveller_in); ?>"><?php _e( 'Full Name', 'tourfic' ); ?></label>
+                    <input type="text" name="traveller[<?php echo esc_attr($traveller_in); ?>][tf_full_name]" id="tf_full_name<?php echo esc_attr($traveller_in); ?>" data-required="1" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{'tf_full_name'}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{'tf_full_name'} ) : '' ?>" />
+                    
+                </div>
+                <div class="traveller-single-info">
+                    <label for="tf_dob<?php echo esc_attr($traveller_in); ?>"><?php _e( 'Date of birth', 'tourfic' ); ?></label>
+                    <input type="date" name="traveller[<?php echo esc_attr($traveller_in); ?>][tf_dob]" id="tf_dob<?php echo esc_attr($traveller_in); ?>" data-required="1" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{'tf_dob'}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{'tf_dob'} ) : '' ?>"/>
+                    
+                </div>
+                <div class="traveller-single-info">
+                    <label for="tf_nid<?php echo esc_attr($traveller_in); ?>"><?php _e( 'NID', 'tourfic' ); ?></label>
+                    <input type="text" name="traveller[<?php echo esc_attr($traveller_in); ?>][tf_nid]" id="tf_nid<?php echo esc_attr($traveller_in); ?>" data-required="1" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{'tf_nid'}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{'tf_nid'} ) : '' ?>"/>
+                    
+                </div>
+            <?php
+            }else{
+                foreach($traveler_fields as $field){
+                    if("text"==$field['reg-fields-type'] || "email"==$field['reg-fields-type'] || "date"==$field['reg-fields-type']){
+                        $field_keys = $field['reg-field-name'];
+                        ?>
+                        <div class="traveller-single-info">
+                            <label for="<?php echo $field['reg-field-name'].$traveller_in ?>"><?php echo sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']); ?></label>
+                            <input type="<?php echo $field['reg-fields-type']; ?>" name="traveller[<?php echo $traveller_in; ?>][<?php echo $field['reg-field-name']; ?>]" id="<?php echo $field['reg-field-name'].$traveller_in; ?>" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{$field_keys} ) : '' ?>" />
+                        </div>
+                    <?php
+                    }
+                    if("select"==$field['reg-fields-type'] && !empty($field['reg-options'])){
+                        ?>
+                    <div class="traveller-single-info">
+                        <label for="<?php echo $field['reg-field-name'].$traveller_in ?>">
+                            <?php echo sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']); ?>
+                        </label>
+                        <select id="<?php echo $field['reg-field-name'].$traveller_in ?>" name="traveller[<?php echo $traveller_in; ?>][<?php echo $field['reg-field-name']; ?>]">
+                        <option value=""><?php echo sprintf( __( 'Select One', 'tourfic' )); ?></option>
+                        <?php
+                        foreach($field['reg-options'] as $sfield){
+                            if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){ ?>
+                                <option value="<?php echo $sfield['option-value']; ?>"><?php echo $sfield['option-label']; ?></option>';
+                            <?php
+                            }
+                        }
+                    }
+                    if(("checkbox"==$field['reg-fields-type'] || "radio"==$field['reg-fields-type']) && !empty($field['reg-options'])){
+                    ?>
+                        
+                    <div class="traveller-single-info">
+                    <label for="<?php echo $field['reg-field-name'].$traveller_in ?>">
+                    <?php echo sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']); ?>
+                    </label>
+                        <?php
+                        foreach($field['reg-options'] as $sfield){
+                            if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
+                                ?>
+                                <div class="tf-single-checkbox">
+                                    <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="traveller[<?php echo $traveller_in; ?>][<?php echo $field['reg-field-name']; ?>][]" id="<?php echo $sfield['option-value'].$traveller_in; ?>" value="<?php echo $sfield['option-value']; ?>" />
+                                    <label for="<?php echo $sfield['option-value'].$traveller_in; ?>">
+                                    <?php echo sprintf( __( '%s', 'tourfic' ),$sfield['option-label']); ?>
+                                    </label>
+                                </div>
+                                <?php
+                            }
+                        }
+                    }
+                }
+            }
+            ?>
+            </div>
+            </div>
+        <?php } ?>
+        </div>
+        <div class="details-update-btn">
+            <button type="submit"><?php _e("Update", "tourfic"); ?></button>
+        </div>
+    </form>
+</div>
+<div class="tf-preloader-box">
+    <div class="tf-loader-preview">
+        <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="Loader">
     </div>
 </div>
