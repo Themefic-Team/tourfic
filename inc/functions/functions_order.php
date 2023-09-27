@@ -88,14 +88,14 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 
 				$tf_booking_details_select    = array(
 					'select' => "*",
-					'query'  => "post_type = 'tour' ORDER BY order_id DESC"
+					'query'  => "post_type = 'tour' ORDER BY id DESC"
 				);
 				$tours_tour_booking_result = tourfic_order_table_data( $tf_booking_details_select );
 				$total_rows = !empty(count($tours_tour_booking_result)) ? count($tours_tour_booking_result) : 0;
 				$total_pages = ceil($total_rows / $no_of_booking_per_page);
 				$tf_orders_select    = array(
 					'select' => "*",
-					'query'  => "post_type = 'tour' ORDER BY order_id DESC LIMIT $offset, $no_of_booking_per_page"
+					'query'  => "post_type = 'tour' ORDER BY id DESC LIMIT $offset, $no_of_booking_per_page"
 				);
 				$tours_orders_result = tourfic_order_table_data( $tf_orders_select );
 			} else {

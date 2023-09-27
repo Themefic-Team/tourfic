@@ -45,13 +45,14 @@
                 </h4>
                 <div class="tf-grid-box">
                     <?php
-                    if(!empty(json_decode($tf_order_details->billing_details))){ ?>
+                    $tf_billing_details = json_decode($tf_order_details->billing_details);
+                    if(!empty($tf_billing_details)){ ?>
                     <div class="tf-grid-single">
                         <h3><?php _e("Customer details", "tourfic"); ?></h3>
                         <div class="tf-single-box">
                             <table class="table" cellpadding="0" callspacing="0">
                                 <?php 
-                                foreach(json_decode($tf_order_details->billing_details) as $key=>$customer_info){ ?>
+                                foreach($tf_billing_details as $key=>$customer_info){ ?>
                                 <tr>
                                     <th><?php echo str_replace("_"," ",esc_html( $key )); ?></th>
                                     <td>:</td>
@@ -275,34 +276,115 @@
 
                     <div class="tf-grid-single">
                         <h3><?php _e("Your voucher", "tourfic"); ?></h3>
-                        <div class="tf-single-box">
-                            <table class="table" cellpadding="0" callspacing="0">
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>:</td>
-                                    <td>Jahid Hasan</td>
-                                </tr>
-                            </table>
+                        <div class="tf-single-box tf-voucher-preview">
+                            <?php 
+                            $meta = get_post_meta( $tf_order_details->post_id, 'tf_tours_opt', true );
+                            $tour_ides = !empty($tf_tour_details->unique_id) ? $tf_tour_details->unique_id : '';
+                            // Address
+                            $location = isset( $meta['text_location'] ) ? $meta['text_location'] : '';
+                            if( !empty($meta['location']) && tf_data_types($meta['location'])){
+                                $location = !empty( tf_data_types($meta['location'])['address'] ) ? tf_data_types($meta['location'])['address'] : $location;
+                            }
+                            // Tour Date
+                            $tour_date = $tf_tour_details->tour_date;
+                            if ( $tour_date ) {
+                                list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
+                            }
+                            $tour_duration = !empty($tour_out) ? date('d F, Y', strtotime($tour_in)).' - '. date('d F, Y', strtotime($tour_out)) : date('d F, Y', strtotime($tour_in));
+                            $tour_time = !empty($tf_tour_details->tour_time) ? $tf_tour_details->tour_time : '';
+
+                            // Contact Information
+                            $tour_email    = ! empty( $meta['email'] ) ? $meta['email'] : '';
+                            $tour_phone    = ! empty( $meta['phone'] ) ? $meta['phone'] : '';
+
+                            $width = '120';
+                            $height = '120'; 
+                            $uri = $tour_ides;
+                            $title = get_the_title( $tf_order_details->post_id );
+                            
+                            $tf_qr_watermark = ! empty( tfopt( 'qr_background' ) ) ? tfopt( 'qr_background' ) : TF_ASSETS_APP_URL.'images/ticket-banner.png';
+                            if(!empty($tour_ides)){
+                            ?>
+                            <div class="tf-visitor-vouchers" style="background-image: url(<?php echo esc_url($tf_qr_watermark); ?>);">
+                                <div class="tf-voucher-header">
+                                    <?php
+                                    $tf_qr_logo = ! empty( tfopt( 'qr_logo' ) ) ? tfopt( 'qr_logo' ) : '';
+                                    if(!empty($tf_qr_logo)){ ?>
+                                    <img style="max-width: 140px;" src="<?php echo esc_url($tf_qr_logo); ?>" />
+                                    <?php } 
+                                    $tf_ticket_prefix = ! empty( tfopt( "qr-ticket-prefix" ) ) ? tfopt( "qr-ticket-prefix" ).'-' : "";
+                                    $tf_ticket_title = ! empty( tfopt( "qr-ticket-title" ) ) ? tfopt( "qr-ticket-title" ) : "Booking ID";
+                                    ?>
+                                    <div class="title">
+                                        <h1><?php echo esc_html( $title ); ?></h1>
+                                        <span>
+                                            <?php echo esc_html( $tf_ticket_title ) .': '. esc_html( $tf_ticket_prefix.$tour_ides ); ?>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="tf-voucher-qr-code">
+                                    <div class="time-info">
+                                        <h5><?php _e("Date:", "tourfic"); ?> <b><?php echo esc_html( $tour_duration ); ?></b></h5>
+                                        <?php if(!empty($tour_time)){ ?>
+                                            <h5><?php _e("Time:", "tourfic"); ?> <b style="color: #002043;"><?php echo esc_html( $tour_time ); ?></b></h5>
+                                        <?php } ?>
+                                        <h5><?php _e("Address:", "tourfic"); ?> <b style="color: #002043;"><?php echo esc_html( $location ) ?></b></h5>
+                                    </div>
+                                    <img style="border: 1px solid #ccc;" src="//chart.apis.google.com/chart?cht=qr&chs=<?php echo $width;?>x<?php echo $height; ?>&chl=<?php echo htmlspecialchars($uri); ?>&choe=UTF-8" alt="<?php echo htmlspecialchars( $title ); ?>"/>
+                                </div>
+                                <div class="tf-voucher-billing-info">
+                                    <div class="tf-billing-details">
+                                        <?php 
+                                        $billing_first_name = !empty($tf_billing_details->billing_first_name) ? $tf_billing_details->billing_first_name : '';
+                                        $billing_last_name = !empty($tf_billing_details->billing_last_name) ? $tf_billing_details->billing_last_name : '';
+                                        ?>
+                                        <h5><?php _e("Name:", "tourfic"); ?> <?php echo esc_html( $billing_first_name.' '.$billing_last_name ); ?></h5>
+                                        <h5><?php _e("Price:", "tourfic"); ?> <?php echo wc_price( $tf_tour_details->total_price ) ?></h5>
+                                        <?php if(!empty($tf_tour_details->due_price)){ ?>
+                                        <h5><?php _e("Due Price:", "tourfic"); ?> <?php echo wc_price( $tf_tour_details->due_price ) ?></h5>
+                                        <?php } ?>
+                                        <h5 style="text-transform: uppercase;"><?php _e("Payment Status:", "tourfic"); ?> <?php echo esc_html( $tf_order_details->payment_method ) ?></h5>
+                                        <?php 
+                                        if(!empty($tf_total_adult)){ ?>
+                                            <h5><?php _e("Adult:", "tourfic"); ?> <?php echo esc_html( $tf_total_adult ) ?></h5>
+                                            <?php
+                                        }
+                                        if(!empty($tf_total_children)){ ?>
+                                            <h5><?php _e("Child:", "tourfic"); ?> <?php echo esc_html( $tf_total_children ) ?></h5>
+                                            <?php
+                                        }
+                                        if(!empty($tf_total_infants)){
+                                            ?>
+                                            <h5><?php _e("Infant:", "tourfic"); ?> <?php echo esc_html( $tf_total_infants ) ?></h5>
+                                            <?php
+                                        } ?>
+                                    </div>
+                                    <div class="tf-cta-info">
+                                    <?php
+                                    if(!empty($tour_phone) || !empty($tour_email)){ ?>
+                                        <h4><b><?php _e("Contact Information:", "tourfic"); ?></b></h4>
+                                        <h5><?php _e("For any inquiries or assistance,", "tourfic"); ?></h5>
+                                        <h5><?php _e("Phone:", "tourfic"); ?> <?php echo esc_html( $tour_phone ) ?></h5>
+                                        <h5><?php _e("Email:", "tourfic"); ?> <?php echo esc_html( $tour_email ) ?></h5>
+                                        <?php
+                                    } ?>
+                                    </div>
+                                </div>
+                                <div class="tf-voucher-footer-qoute">
+                                    <?php
+                                    $tf_ticket_qottation = ! empty( tfopt( "qr-ticket-content" ) ) ? tfopt( "qr-ticket-content" ) : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."; ?>
+                                    <p><?php echo esc_html( $tf_ticket_qottation ); ?></p>
+                                </div>
+                            </div>
+                            <div class="tf-preview-btn">
+                                <a href="#"><?php _e("Preview", "tourfic"); ?></a>
+                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="tf-grid-single">
                         <h3><?php _e("Others information", "tourfic"); ?></h3>
-                        <div class="tf-single-box">
+                        <div class="tf-single-box tf-checkin-by">
                             <table class="table" cellpadding="0" callspacing="0">
                                 <tr>
                                     <th>Checked status</th>

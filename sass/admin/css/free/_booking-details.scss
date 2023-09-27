@@ -451,6 +451,150 @@
                                 }
                             }
                         }
+
+                        // QR CODE 
+                        .tf-visitor-vouchers{
+                            padding: 30px;
+                            border: 1px dashed #002043;
+                            background-repeat: repeat;
+                            background-size: cover;
+                            background-position: center;
+                            .tf-voucher-header{
+                                display: flex;
+                                align-items: center;
+                                margin-bottom: 40px;
+                                img{
+                                    margin-right: 25px;
+                                }
+                                .title{
+                                    h1{
+                                        color:#002043;
+                                        font-size: 24px; 
+                                        font-family: Istok Web; 
+                                        line-height: 32px;
+                                        font-weight: 700;
+                                        margin: 0;
+                                    }
+                                    span{
+                                        color:#828C99;
+                                        font-size: 20px; 
+                                        font-family: Istok Web; 
+                                        line-height: 32px;
+                                        font-weight: 700;
+                                        margin: 0;
+                                    }
+                                }
+                            }
+                            .tf-voucher-qr-code{
+                                display: flex;
+                                justify-content: space-between;
+                                .time-info{
+                                    background: #F2F2F2;
+                                    padding: 16px;
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: center;
+                                    h5{
+                                        margin: 0;
+                                        color: #828C99; 
+                                        font-size: 16px; 
+                                        line-height: 28px; 
+                                        font-weight: 400; 
+                                        font-family: Istok Web;
+                                        b{
+                                            color: #002043;
+                                        }
+                                    }
+                                }
+                                img{
+                                    margin-left: 30px;
+                                }
+                            }
+                            .tf-voucher-billing-info{
+                                margin-top: 40px;
+                                display: grid;
+                                grid-template-columns: 2fr 1fr;
+                                gap: 40px;
+                                .tf-billing-details{
+                                    h5{
+                                        color: #828C99; 
+                                        font-size: 16px; 
+                                        line-height: 28px; 
+                                        font-weight: 400; 
+                                        font-family: Istok Web;
+                                        margin: 0;
+                                    }
+                                }
+                                .tf-cta-info{
+                                    h4{
+                                        color: #828C99; 
+                                        font-size: 16px; 
+                                        line-height: 28px; 
+                                        font-weight: 700; 
+                                        font-family: Istok Web;
+                                        margin: 0;
+                                    }
+                                    h5{
+                                        color: #828C99; 
+                                        font-size: 14px; 
+                                        line-height: 28px; 
+                                        font-weight: 400; 
+                                        margin: 0;
+                                        font-family: Istok Web;
+                                    }
+                                }
+                            }
+                            .tf-voucher-footer-qoute{
+                                p{
+                                    color: #828C99; 
+                                    font-size: 11px; 
+                                    font-family: Istok Web;
+                                    line-height: 20px;
+                                }
+                            }
+                        }
+                    }
+                    .tf-checkin-by{
+                        min-height: 220px;
+                    }
+                    .tf-voucher-preview{
+                        background-color: transparent;
+                        position: relative;
+                        max-height: 220px;
+                        overflow: hidden;
+                        object-position: top;
+                        transition: object-position 2s ease-in-out,border-color .3s ease-in-out;
+                        &:hover{
+                            object-position: bottom;
+                        }
+                        .tf-preview-btn{
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            border-radius: 8px;
+                            background: rgba(55, 55, 62, 0.50);
+                            height: 100%;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            z-index: 0;
+                            a{
+                                border-radius: 8px;
+                                border: #F0F0F1;
+                                background: rgba(240, 240, 241, 0.05);
+                                border: 1px solid #F0F0F1;
+                                color: #F0F0F1;
+                                font-family: Segoe UI;
+                                font-size: 16px;
+                                font-style: normal;
+                                font-weight: 600;
+                                line-height: 24px;
+                                text-decoration: none;
+                                padding: 12px 20px;
+                            }
+                        }
                     }
                 }
                 .tf-visitor-grid-box{
