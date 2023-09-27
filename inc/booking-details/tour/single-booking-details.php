@@ -227,7 +227,13 @@
                                     <td>:</td>
                                     <td><?php
                                     $field_key = $field['reg-field-name'];
-                                    echo esc_html( $visitor->$field_key ); ?></td>
+                                    if("array"!=gettype($visitor->$field_key)){
+                                        echo esc_html( $visitor->$field_key );
+                                    }else{
+                                        echo implode(",", $visitor->$field_key );
+                                    }
+                                    ?>
+                                    </td>
                                 </tr>
                                 <?php } }else{ ?>
                                     <tr>
@@ -518,7 +524,8 @@
                     <?php
                     }
                     if("select"==$field['reg-fields-type'] && !empty($field['reg-options'])){
-                        ?>
+                        $field_keys = $field['reg-field-name'];
+                    ?>
                     <div class="traveller-single-info">
                         <label for="<?php echo $field['reg-field-name'].$traveller_in ?>">
                             <?php echo sprintf( __( '%s', 'tourfic' ),$field['reg-field-label']); ?>
@@ -528,12 +535,17 @@
                         <?php
                         foreach($field['reg-options'] as $sfield){
                             if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){ ?>
-                                <option value="<?php echo $sfield['option-value']; ?>"><?php echo $sfield['option-label']; ?></option>';
+                                <option value="<?php echo $sfield['option-value']; ?>" <?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) && $sfield['option-value']==$tf_visitors_details->{$traveller_in}->{$field_keys} ? esc_attr( 'selected' ) : '' ?>><?php echo $sfield['option-label']; ?></option>';
                             <?php
                             }
-                        }
+                        } ?>
+                        </select>
+                    </div>
+                    <?php
                     }
                     if(("checkbox"==$field['reg-fields-type'] || "radio"==$field['reg-fields-type']) && !empty($field['reg-options'])){
+                        $field_keys = $field['reg-field-name'];
+                        $tf_fields_values = !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) ? $tf_visitors_details->{$traveller_in}->{$field_keys} : [''];
                     ?>
                         
                     <div class="traveller-single-info">
@@ -545,14 +557,16 @@
                             if(!empty($sfield['option-label']) && !empty($sfield['option-value'])){
                                 ?>
                                 <div class="tf-single-checkbox">
-                                    <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="traveller[<?php echo $traveller_in; ?>][<?php echo $field['reg-field-name']; ?>][]" id="<?php echo $sfield['option-value'].$traveller_in; ?>" value="<?php echo $sfield['option-value']; ?>" />
+                                    <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="traveller[<?php echo $traveller_in; ?>][<?php echo $field['reg-field-name']; ?>][]" id="<?php echo $sfield['option-value'].$traveller_in; ?>" value="<?php echo $sfield['option-value']; ?>" <?php echo in_array($sfield['option-value'], $tf_fields_values) ? esc_attr( 'checked' ) : ''; ?> />
                                     <label for="<?php echo $sfield['option-value'].$traveller_in; ?>">
                                     <?php echo sprintf( __( '%s', 'tourfic' ),$sfield['option-label']); ?>
                                     </label>
                                 </div>
                                 <?php
                             }
-                        }
+                        } ?>
+                        </div>
+                    <?php
                     }
                 }
             }
