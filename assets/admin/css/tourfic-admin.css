@@ -4122,99 +4122,6 @@ Steps
   text-align: left;
   text-transform: capitalize;
 }
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box .tf-visitor-vouchers {
-  padding: 30px;
-  border: 1px dashed #002043;
-  background-repeat: repeat;
-  background-size: cover;
-  background-position: center;
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box .tf-visitor-vouchers .tf-voucher-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 40px;
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box .tf-visitor-vouchers .tf-voucher-header img {
-  margin-right: 25px;
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box .tf-visitor-vouchers .tf-voucher-header .title h1 {
-  color: #002043;
-  font-size: 24px;
-  font-family: Istok Web;
-  line-height: 32px;
-  font-weight: 700;
-  margin: 0;
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box .tf-visitor-vouchers .tf-voucher-header .title span {
-  color: #828C99;
-  font-size: 20px;
-  font-family: Istok Web;
-  line-height: 32px;
-  font-weight: 700;
-  margin: 0;
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box .tf-visitor-vouchers .tf-voucher-qr-code {
-  display: flex;
-  justify-content: space-between;
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box .tf-visitor-vouchers .tf-voucher-qr-code .time-info {
-  background: #F2F2F2;
-  padding: 16px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box .tf-visitor-vouchers .tf-voucher-qr-code .time-info h5 {
-  margin: 0;
-  color: #828C99;
-  font-size: 16px;
-  line-height: 28px;
-  font-weight: 400;
-  font-family: Istok Web;
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box .tf-visitor-vouchers .tf-voucher-qr-code .time-info h5 b {
-  color: #002043;
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box .tf-visitor-vouchers .tf-voucher-qr-code img {
-  margin-left: 30px;
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box .tf-visitor-vouchers .tf-voucher-billing-info {
-  margin-top: 40px;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 40px;
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box .tf-visitor-vouchers .tf-voucher-billing-info .tf-billing-details h5 {
-  color: #828C99;
-  font-size: 16px;
-  line-height: 28px;
-  font-weight: 400;
-  font-family: Istok Web;
-  margin: 0;
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box .tf-visitor-vouchers .tf-voucher-billing-info .tf-cta-info h4 {
-  color: #828C99;
-  font-size: 16px;
-  line-height: 28px;
-  font-weight: 700;
-  font-family: Istok Web;
-  margin: 0;
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box .tf-visitor-vouchers .tf-voucher-billing-info .tf-cta-info h5 {
-  color: #828C99;
-  font-size: 14px;
-  line-height: 28px;
-  font-weight: 400;
-  margin: 0;
-  font-family: Istok Web;
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-single-box .tf-visitor-vouchers .tf-voucher-footer-qoute p {
-  color: #828C99;
-  font-size: 11px;
-  font-family: Istok Web;
-  line-height: 20px;
-}
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-checkin-by {
   min-height: 220px;
 }
@@ -4480,6 +4387,135 @@ Steps
   text-align: center;
   border: 0px solid;
   cursor: pointer;
+}
+
+.tf-voucher-quick-view-box {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  display: none;
+}
+.tf-voucher-quick-view-box .voucher-quick-view {
+  border-radius: 8px;
+  border: 1px solid #f0f0f1;
+  background: #fff;
+  padding: 8px 20px;
+  position: fixed;
+  left: 50%;
+  top: 25%;
+  z-index: 999;
+  max-width: 700px;
+  margin-left: -350px;
+}
+.tf-voucher-quick-view-box .voucher-quick-view .tf-quick-view-times span {
+  position: absolute;
+  right: -15px;
+  top: -15px;
+  height: 40px;
+  width: 40px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.tf-visitor-vouchers {
+  padding: 30px;
+  border: 1px dashed #002043;
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center;
+}
+.tf-visitor-vouchers .tf-voucher-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.tf-visitor-vouchers .tf-voucher-header img {
+  margin-right: 25px;
+}
+.tf-visitor-vouchers .tf-voucher-header .title h1 {
+  color: #002043;
+  font-size: 24px;
+  font-family: Istok Web;
+  line-height: 32px;
+  font-weight: 700;
+  margin: 0;
+}
+.tf-visitor-vouchers .tf-voucher-header .title span {
+  color: #828C99;
+  font-size: 20px;
+  font-family: Istok Web;
+  line-height: 32px;
+  font-weight: 700;
+  margin: 0;
+}
+.tf-visitor-vouchers .tf-voucher-qr-code {
+  display: flex;
+  justify-content: space-between;
+}
+.tf-visitor-vouchers .tf-voucher-qr-code .time-info {
+  background: #F2F2F2;
+  padding: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.tf-visitor-vouchers .tf-voucher-qr-code .time-info h5 {
+  margin: 0;
+  color: #828C99;
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 400;
+  font-family: Istok Web;
+}
+.tf-visitor-vouchers .tf-voucher-qr-code .time-info h5 b {
+  color: #002043;
+}
+.tf-visitor-vouchers .tf-voucher-qr-code img {
+  margin-left: 30px;
+}
+.tf-visitor-vouchers .tf-voucher-billing-info {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+}
+.tf-visitor-vouchers .tf-voucher-billing-info .tf-billing-details h5 {
+  color: #828C99;
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 400;
+  font-family: Istok Web;
+  margin: 0;
+}
+.tf-visitor-vouchers .tf-voucher-billing-info .tf-cta-info h4 {
+  color: #828C99;
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 700;
+  font-family: Istok Web;
+  margin: 0;
+}
+.tf-visitor-vouchers .tf-voucher-billing-info .tf-cta-info h5 {
+  color: #828C99;
+  font-size: 14px;
+  line-height: 28px;
+  font-weight: 400;
+  margin: 0;
+  font-family: Istok Web;
+}
+.tf-visitor-vouchers .tf-voucher-footer-qoute p {
+  color: #828C99;
+  font-size: 11px;
+  font-family: Istok Web;
+  line-height: 20px;
 }
 
 .tf-preloader-box {

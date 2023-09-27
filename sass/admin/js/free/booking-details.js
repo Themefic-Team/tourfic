@@ -71,6 +71,24 @@
 
             });
         });
+
+        /**
+         * Vouchers Popup Open
+         *
+         */
+        $(document).on('click', '.tf-voucher-preview .tf-preview-btn a', function (e) {
+            e.preventDefault();
+            $(".tf-voucher-quick-view-box").show();
+        });
+
+        /**
+         * Vouchers Popup Close
+         *
+         */
+        $(document).on('click', '.tf-voucher-quick-view-box .tf-quick-view-times span', function (e) {
+            e.preventDefault();
+            $(".tf-voucher-quick-view-box").hide();
+        });
         
     });
 
