@@ -1930,9 +1930,9 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 										$repval_price = $repval['price'];
 										$room_price[] = $repval_price;
 										if($hotel_discount_type == "percent") {
-											$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $b_room_price - ( ( $b_room_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+											$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $repval_price - ( ( $repval_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
 										}else if($hotel_discount_type == "fixed") {
-											$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $b_room_price - $hotel_discount_amount ), 2 ) ) );
+											$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $repval_price - $hotel_discount_amount ), 2 ) ) );
 										}
 										$room_price[] = $dicount_b_room_price;
 
@@ -1954,7 +1954,6 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 						$dicount_adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $adult_price - $hotel_discount_amount ), 2 ) ) );
 						$dicount_child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $child_price - $hotel_discount_amount ), 2 ) ) );
 					}
-					// end
 
 					if ($archive_page_price_settings == "all") {
 						if (!empty($b_room['adult_price'])) {
@@ -2216,7 +2215,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                                                 <!-- Show minimum price @author - Hena -->
                                                 <div class="tf-room-price-area">
 													<?php
-
+													$room_price = array_filter($room_price);
 													if ( ! empty( $room_price ) ):
 														?>
                                                         <div class="tf-room-price">
