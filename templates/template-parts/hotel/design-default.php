@@ -621,7 +621,8 @@
                                                         ?>
                                                         <span class="tf-price"><del><?php echo $price; ?></del> <?php echo $discount_price ?></span>
                                                         <?php
-                                                    }else {
+                                                        $discount_price = "";
+                                                    } else if($hotel_discount_type == "none" || empty($d_price)) {
                                                         ?>
                                                         <span class="tf-price"><?php echo $price ?></span>
                                                         <?php
@@ -641,7 +642,8 @@
                                                         ?>
                                                         <span class="tf-price"><del><?php echo $price; ?></del> <?php echo $discount_price ?></span>
                                                         <?php
-                                                    }else {
+                                                        $discount_price = "";
+                                                    } else if($hotel_discount_type == "none" || empty($d_price)) {
                                                         ?>
                                                         <span class="tf-price"><?php echo $price ?></span>
                                                         <?php

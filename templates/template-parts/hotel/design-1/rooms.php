@@ -276,7 +276,8 @@ foreach ( $rooms as $key => $room ) {
                                     ?>
                                     <span class="tf-price"><del><?php echo $price; ?></del> <?php echo $discount_price; ?></span>
                                     <?php
-                                }else {
+                                    $discount_price = "";
+                                } else if($hotel_discount_type == "none") {
                                     ?>
                                     <span class="tf-price"><?php echo $price; ?></span>
                                     <?php
@@ -296,7 +297,8 @@ foreach ( $rooms as $key => $room ) {
                                     ?>
                                     <span class="tf-price"><del><?php echo $price; ?></del> <?php echo $discount_price; ?></span>
                                     <?php
-                                }else {
+                                    $discount_price = "";
+                                } else if($hotel_discount_type == "none") {
                                     ?>
                                     <span class="tf-price"><?php echo $price; ?></span>
                                     <?php

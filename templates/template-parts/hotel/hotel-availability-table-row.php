@@ -145,8 +145,17 @@ if(empty($tf_room_disable_date)){
     </td>
     <td class="reserve tf-t-c">
         <div class="tf-price-column">
-            <span class="tf-price"><del><?php echo wc_price( $price ); ?></del> <?php echo wc_price( $d_price ); ?></span> <!-- design 1 -->
-            <?php 
+        <?php
+            if(!empty($d_price) && $hotel_discount_type != "none"){
+                ?>
+                <span class="tf-price"><del><?php echo wc_price( $price ); ?></del> <?php echo wc_price( $d_price ); ?></span>
+                <?php
+                $d_price = "";
+            }else if($hotel_discount_type == "none" || empty($d_price)){
+                ?>
+                <span class="tf-price"><?php echo wc_price( $price ); ?></span>
+                <?php
+            } 
             if ( $pricing_by == '1' ) { ?>
                 <div class="price-per-night">
                     <?php 
@@ -386,7 +395,18 @@ if(empty($tf_room_disable_date)){
     </td>
     <td class="pricing">
         <div class="tf-price-column">
-            <span class="tf-price"><del><?php echo wc_price( $price ); ?></del> <?php echo wc_price( $d_price ); ?></span>
+            <?php 
+            if(!empty($d_price)){
+                ?>
+                <span class="tf-price"><del><?php echo wc_price( $price ); ?></del> <?php echo wc_price( $d_price ); ?></span>
+                <?php
+                $d_price = "";
+            }else if($hotel_discount_type == "none" || empty($d_price)) {
+                ?>
+                <span class="tf-price"><?php echo wc_price( $price ); ?></span>
+                <?php
+            }
+            ?>
             <?php 
             if ( $pricing_by == '1' ) { ?>
                 <div class="price-per-night">
