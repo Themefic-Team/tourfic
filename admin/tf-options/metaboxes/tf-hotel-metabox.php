@@ -179,27 +179,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'type'        => 'text',
 							'subtitle'    => __( 'e.g. Superior Queen Room with Two Queen Beds', 'tourfic' ),
 							'label'       => __( 'Room Title', 'tourfic' ),
-							'field_width' => 50,
-						),
-						array(
-							'id'          => 'num-room',
-							'type'        => 'number',
-							'label'       => __( 'Room Availability', 'tourfic' ),
-							'subtitle'    => __( 'Number of rooms available for booking', 'tourfic' ),
-							'field_width' => 50,
-							'attributes'  => array(
-								'min' => '0',
-							),
-						),
-						array(
-							'id'        => '',
-							'type'      => 'switch',
-							'is_pro'    => true,
-							'label'     => __( 'Room Inventory Management', 'tourfic' ),
-							'subtitle'  => __( 'Reduce total number of available rooms once a rooms is booked by a customer', 'tourfic' ),
-							'label_on'  => __( 'Yes', 'tourfic' ),
-							'label_off' => __( 'No', 'tourfic' ),
-							'default'   => false,
+							'field_width' => 100,
 						),
 
 						array(
@@ -410,9 +390,15 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'content' => __( 'iCal Sync', 'tourfic' ),
 						),
 						array(
-							'id'      => 'ical_url',
-							'type'    => 'text',
-							'label'   => __( 'iCal URL', 'tourfic' ),
+							'id'          => 'ical_url',
+							'type'        => 'text',
+							'label'       => __( 'iCal URL', 'tourfic' ),
+							'placeholder' => __( 'https://website.com', 'tourfic' ),
+							'button_text' => __( 'Import', 'tourfic' ),
+							'button_id'   => 'room-ical-import',
+							'attributes'  => array(
+								'class' => 'ical_url_input',
+							),
 						),
 						array(
 							'id'      => 'Availability',
@@ -421,13 +407,39 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'class'   => 'tf-field-class',
 						),
 						array(
+							'id'          => 'num-room',
+							'type'        => 'number',
+							'label'       => __( 'Room Availability', 'tourfic' ),
+							'subtitle'    => __( 'Number of rooms available for booking', 'tourfic' ),
+							'field_width' => 100,
+							'attributes'  => array(
+								'min' => '0',
+							),
+						),
+						array(
+							'id'        => '',
+							'type'      => 'switch',
+							'is_pro'    => true,
+							'label'     => __( 'Room Inventory Management', 'tourfic' ),
+							'subtitle'  => __( 'Reduce total number of available rooms once a rooms is booked by a customer', 'tourfic' ),
+							'label_on'  => __( 'Yes', 'tourfic' ),
+							'label_off' => __( 'No', 'tourfic' ),
+							'default'   => false,
+						),
+						/*array(
 							'id'      => '',
 							'type'    => 'switch',
 							'label'   => __( 'Enable Availability by Date', 'tourfic' ),
 							'is_pro'  => true,
 							'default' => true
-						),
+						),*/
 						array(
+							'id'        => 'availabilityCal',
+							'type'      => 'hotelAvailabilityCal',
+							'label'     => __( 'Availability Calendar', 'tourfic' ),
+							'is_pro'  => true,
+						),
+						/*array(
 							'id'     => '',
 							'class'  => 'repeater-by-date',
 							'type'   => 'repeater',
@@ -502,7 +514,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 								),
 
 							),
-						),
+						),*/
 
 					),
 				)
