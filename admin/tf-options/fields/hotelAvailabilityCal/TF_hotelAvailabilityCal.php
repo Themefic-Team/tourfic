@@ -26,7 +26,6 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
 
 			$room_index = str_replace( array( '[', ']', 'room' ), '', $this->parent_field );
 			$pricing_by = ! empty( $rooms[ $room_index ]['pricing-by'] ) ? $rooms[ $room_index ]['pricing-by'] : '';
-
 			?>
             <div class="calendar-wrapper">
                 <div class='calendar-content'></div>
@@ -42,31 +41,30 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
                         <input readonly="readonly" type="text" name="calendar_check_out" placeholder="<?php echo __( 'Check Out', 'tourfic' ); ?>">
                     </div>
 
-                    <div class="tf-field-text " style="display: <?php echo $pricing_by == '1' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
+                    <div class="tf-field-text tf-price-by-room" style="display: <?php echo $pricing_by == '1' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Price ($)', 'tourfic' ); ?></label>
                         <input type="text" name="calendar_price" placeholder="<?php echo __( 'Price', 'tourfic' ); ?>">
                     </div>
 
-                    <div class="tf-field-text" style="display: <?php echo $pricing_by == '2' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
+                    <div class="tf-field-text tf-price-by-person" style="display: <?php echo $pricing_by == '2' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Adult Price ($)', 'tourfic' ); ?></label>
                         <input type="text" name="calendar_adult_price" placeholder="<?php echo __( 'Adult Price', 'tourfic' ); ?>">
                     </div>
 
-                    <div class="tf-field-text" style="display: <?php echo $pricing_by == '2' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
+                    <div class="tf-field-text tf-price-by-person" style="display: <?php echo $pricing_by == '2' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Child Price ($)', 'tourfic' ); ?></label>
                         <input type="text" name="calendar_child_price" placeholder="<?php echo __( 'Child Price', 'tourfic' ); ?>">
                     </div>
 
                     <div class="tf-field-select" style="width: calc(50% - 5px)">
-                        <label for="calendar_status"><?php echo __( 'Status', 'tourfic' ); ?></label>
+                        <label class="tf-field-label"><?php echo __( 'Status', 'tourfic' ); ?></label>
                         <select name="calendar_status" class="tf-select">
                             <option value="available"><?php echo __( 'Available', 'tourfic' ); ?></option>
                             <option value="unavailable"><?php echo __( 'Unavailble', 'tourfic' ); ?></option>
                         </select>
                     </div>
 
-                    <div class="form-group" style="width: 100%">
-                        <input type="hidden" name="calendar_post_id" value="<?php echo esc_attr( $post->ID ); ?>">
+                    <div style="width: 100%">
                         <input type="submit" id="calendar_submit" class="button button-primary" name="calendar_submit" value="<?php echo __( 'Update', 'tourfic' ); ?>">
                     </div>
 

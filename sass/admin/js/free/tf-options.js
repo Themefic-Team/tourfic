@@ -685,7 +685,18 @@
         }
         tfHotelCalendar();
 
+        $(document).on('change', '.tf_room_pricing_by', function (e) {
+            let room = $(this).closest('.tf-single-repeater-room');
+            let pricing_by = $(this).val();
 
+            if (pricing_by === '1') {
+                room.find('.tf-price-by-room').show();
+                room.find('.tf-price-by-person').hide();
+            } else if(pricing_by === '2') {
+                room.find('.tf-price-by-person').show();
+                room.find('.tf-price-by-room').hide();
+            }
+        });
 
         /*
         * Options WP editor

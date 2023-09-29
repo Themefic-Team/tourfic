@@ -284,7 +284,10 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 								'1' => __( 'Per room', 'tourfic' ),
 								'2' => __( 'Per person (Pro)', 'tourfic' ),
 							),
-							'default' => '1'
+							'default' => '1',
+							'attributes'  => array(
+								'class' => 'tf_room_pricing_by',
+							),
 						),
 						array(
 							'id'         => 'price',
