@@ -557,11 +557,12 @@ if ( ! function_exists( 'tf_tour_search_form_horizontal' ) ) {
 						enableTime: false,
 						mode: "range",
 						altInput: true,
-						altFormat: '<?php echo $tour_date_format_for_users; ?>',
 						dateFormat: "Y/m/d",
+						altFormat: '<?php echo $tour_date_format_for_users; ?>',
 						minDate: "today",
 						onReady: function(selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
 						},
 						onChange: function(selectedDates, dateStr, instance) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -758,6 +759,7 @@ if ( !function_exists('tf_tour_advanced_search_form_horizontal') ) {
                         minDate: "today",
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                         },
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -1684,8 +1686,8 @@ function tf_single_tour_booking_form( $post_id ) {
                         }
                     ],
                     onReady: function (selectedDates, dateStr, instance) {
-                        instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                        instance.element.value = instance.altInput.value
                     },
 
 					<?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
