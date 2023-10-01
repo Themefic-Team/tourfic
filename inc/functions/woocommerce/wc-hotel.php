@@ -16,6 +16,8 @@ add_action( 'wp_ajax_nopriv_tf_hotel_booking', 'tf_hotel_booking_callback' );
  * @throws Exception
  * @since 2.2.0
  */
+
+
 function tf_hotel_booking_callback() {
 
 	// Check nonce security
@@ -26,8 +28,6 @@ function tf_hotel_booking_callback() {
 	// Declaring errors & hotel data array
 	$response     = [];
 	$tf_room_data = [];
-
-
     /**
      * Data from booking form
      * 
@@ -46,7 +46,6 @@ function tf_hotel_booking_callback() {
     $check_out      = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
     $deposit        = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
     $airport_service = isset($_POST['airport_service']) ? sanitize_text_field($_POST['airport_service']) : '';
-
 
 	# Calculate night number
 	if ( $check_in && $check_out ) {
@@ -95,6 +94,32 @@ function tf_hotel_booking_callback() {
 	$pricing_by      = $rooms[ $room_id ]['pricing-by'];
 	$price_multi_day = ! empty( $rooms[ $room_id ]['price_multi_day'] ) ? $rooms[ $room_id ]['price_multi_day'] : false;
 
+	$room_stay_requirements = array( );
+	foreach($rooms as $key => $room) {
+		$room_stay_requirements[] = array (
+			"uid" => !empty($room["unique_id"]) ? $room["unique_id"] : '',
+			'min_stay' => !empty( $room["minimum_stay_requirement"]) ?  $room["minimum_stay_requirement"] : 0, 
+			"max_stay" => !empty($room["maximum_stay_requirement"]) ? $room["maximum_stay_requirement"] : 0
+		);
+	}
+
+	foreach($room_stay_requirements as $min_max_days) {
+		if($day_difference < $min_max_days["min_stay"] && $min_max_days["min_stay"] > 0) {
+			if($min_max_days["uid"] == $unique_id ){
+				if( $min_max_days["max_stay"] == 0) {
+					$response['errors'][] = __( "Your Stay Requirement is Minimum {$min_max_days['min_stay']} Days", 'tourfic' );
+				} else {
+					$response['errors'][] = __( "Your Stay Requirement is Minimum {$min_max_days['min_stay']} Days to Maximum {$min_max_days['max_stay']}", 'tourfic' );
+					
+					
+				}
+			}
+		}else if($day_difference > $min_max_days["max_stay"] && $min_max_days["max_stay"] > 0) {
+			if ($min_max_days["uid"] == $unique_id ){
+				$response['errors'][] = __( "Your Maximum Stay Requirement is {$min_max_days['max_stay']} Days", 'tourfic' );
+			}
+		}
+	}
 
 	/**
 	 * If no errors then process
@@ -185,8 +210,6 @@ function tf_hotel_booking_callback() {
 			}
 
 		}
-
-
 		# Set pricing
 		$tf_room_data['tf_hotel_data']['price_total'] = $price_total;
 
