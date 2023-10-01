@@ -138,14 +138,18 @@
             </td>
             <td>
                 <?php 
-                $order_details = json_decode($tour['order_details']);
-                if( !empty($order_details->is_checkinout) ){
-                    if( empty("in"==$order_details->is_checkinout) ){
-                        echo '<span class="checkinout checkin">Checked in</span>';
+                if( !empty($tour['checkinout']) ){
+                    if( empty("in"==$tour['checkinout']) ){
+                        echo wp_kses_post('<span class="checkinout checkin">Checked in</span>');
                     }
-                    if( empty("out"==$order_details->is_checkinout) ){
-                        echo '<span class="checkinout checkout">Checked out</span>';
+                    if( empty("out"==$tour['checkinout']) ){
+                        echo wp_kses_post('<span class="checkinout checkout">Checked out</span>');
                     }
+                    if( empty("not"==$tour['checkinout']) ){
+                        echo wp_kses_post('<span class="checkinout checkout">Not checked in</span>');
+                    }
+                }else{
+                    echo wp_kses_post('<span class="checkinout checkout">Not checked in</span>');
                 }
                 ?>
             </td>

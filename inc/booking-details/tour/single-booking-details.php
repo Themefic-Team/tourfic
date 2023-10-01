@@ -393,14 +393,35 @@
                         <div class="tf-single-box tf-checkin-by">
                             <table class="table" cellpadding="0" callspacing="0">
                                 <tr>
-                                    <th>Checked status</th>
+                                    <th><?php _e("Checked status", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td>Checked in</td>
+                                    <td>
+                                        <?php 
+                                            if( !empty($tf_order_details->checkinout) ){
+                                                if( "in"==$tf_order_details->checkinout ){
+                                                    _e("Checked in", "tourfic");
+                                                }elseif( "out"==$tf_order_details->checkinout ){
+                                                    _e("Checked Out", "tourfic");
+                                                }elseif( "not"==$tf_order_details->checkinout ){
+                                                    _e("Not checked in", "tourfic");
+                                                }
+                                            }else{
+                                                _e("Not checked in", "tourfic");
+                                            }
+                                        ?>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th>Checked in by</th>
+                                    <th><?php _e("Checked in by", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td>Jahid Hasan</td>
+                                    <td>
+                                        <?php
+                                        if(!empty($tf_order_details->checkinout_by)){
+                                            $tf_checkin_by = get_user_by('id', $tf_order_details->checkinout_by);
+                                            echo !empty($tf_checkin_by->display_name) ? esc_html($tf_checkin_by->display_name) : "";
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
@@ -432,16 +453,31 @@
 
             <div class="tf-filter-selection">
                 <h3><?php _e("Checked in status", "tourfic"); ?></h3>
-                <div class="tf-order-status-filter">
+                <div class="tf-order-status-filter tf-order-checkinout-status">
                     <label>
-                        <span><?php _e("Checked in", "tourfic"); ?></span>
+                        <span>
+                            <?php 
+                                if( !empty($tf_order_details->checkinout) ){
+                                    if( "in"==$tf_order_details->checkinout ){
+                                        _e("Checked in", "tourfic");
+                                    }elseif( "out"==$tf_order_details->checkinout ){
+                                        _e("Checked Out", "tourfic");
+                                    }elseif( "not"==$tf_order_details->checkinout ){
+                                        _e("Not checked in", "tourfic");
+                                    }
+                                }else{
+                                    _e("Not checked in", "tourfic");
+                                }
+                            ?>
+                        </span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M5 7.5L10 12.5L15 7.5" stroke="#F0F0F1" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </label>
                     <ul>
-                        <li class="checkin"><?php _e("Checked in", "tourfic"); ?></li>
-                        <li class="checkout"><?php _e("Not checked in", "tourfic"); ?></li>
+                        <li class="checkin" data-value="in"><?php _e("Checked in", "tourfic"); ?></li>
+                        <li class="checkout" data-value="out"><?php _e("Checked Out", "tourfic"); ?></li>
+                        <li class="checkout" data-value="not"><?php _e("Not checked in", "tourfic"); ?></li>
                     </ul>
                 </div>
             </div>
@@ -488,7 +524,7 @@
             </span>
         </div>
         <div class="visitor-details-popup">
-        <input type="hidden" name="order_id" value="<?php echo $tf_order_details->id; ?>">
+        <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo $tf_order_details->id; ?>">
         <?php 
         for($traveller_in = 1; $traveller_in < $visitor_count; $traveller_in++){ ?>
             <div class="tf-single-tour-traveller tf-single-travel">
