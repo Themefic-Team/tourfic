@@ -354,6 +354,30 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'field_width' => 50,
 						),
 						array(
+							'id'       => 'discount_hotel_type',
+							'type'     => 'select',
+							'label'    => __( 'Discount Type', 'tourfic' ),
+							'subtitle' => __( 'Select Discount Type ( Percentage / Fixed )', 'tourfic' ),
+							'options'  => array(
+								'none'    => __( 'None', 'tourfic' ),
+								'percent' => __( 'Percent', 'tourfic' ),
+								'fixed'   => __( 'Fixed', 'tourfic' ),
+							),
+							'default'  => 'none',
+						),
+						array(
+							'id'         => 'discount_hotel_price',
+							'type'       => 'number',
+							'label'      => __( 'Discount Price', 'tourfic' ),
+							'subtitle'   => __( 'Insert amount only', 'tourfic' ),
+							'attributes' => array(
+								'min' => '0',
+							),
+							'dependency' => array(
+								array( 'discount_hotel_type', '!=', 'none' ),
+							),
+						),
+						array(
 							'id'        => 'price_multi_day',
 							'type'      => 'switch',
 							'label'     => __( 'Multiply Pricing By Night', 'tourfic' ),

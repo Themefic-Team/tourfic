@@ -120,6 +120,9 @@ function tf_hotel_booking_callback() {
 			}
 		}
 	}
+	// Hotel Room Discount Data
+	$hotel_discount_type = !empty($rooms[$room_id]["discount_hotel_type"]) ? $rooms[$room_id]["discount_hotel_type"] : "none";
+	$hotel_discount_amount = !empty($rooms[$room_id]["discount_hotel_price"]) ? $rooms[$room_id]["discount_hotel_price"] : '';
 
 	/**
 	 * If no errors then process
@@ -140,6 +143,22 @@ function tf_hotel_booking_callback() {
 		$tf_room_data['tf_hotel_data']['air_serivicetype']   = $airport_service;
 		$tf_room_data['tf_hotel_data']['air_serivice_avail'] = $meta['airport_service'] ?? null;
 
+		// Discount Calculation and Checking
+
+		$adult_price = !empty($rooms[$room_id]['adult_price']) ? $rooms[$room_id]['adult_price'] : '';
+		$child_price = !empty($rooms[$room_id]['child_price']) ? $rooms[$room_id]['child_price'] : '';
+		$room_price = !empty($rooms[$room_id]['price']) ? $rooms[$room_id]['price'] : '';
+
+
+		if($hotel_discount_type == "percent") {
+			if($pricing_by == 1) {
+				$room_price = floatval( preg_replace( '/[^\d.]/', '',number_format( $room_price - ( ( $room_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+			}
+			if($pricing_by == 2) {
+				$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+				$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $child_price - ( ( $child_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+			}
+		}
 
 		/**
 		 * Calculate Pricing
@@ -167,6 +186,17 @@ function tf_hotel_booking_callback() {
 					$room_price  = ! empty( $available_rooms[0]['price'] ) ? $available_rooms[0]['price'] : $rooms[ $room_id ]['price'];
 					$adult_price = ! empty( $available_rooms ) ? $available_rooms[0]['adult_price'] : $rooms[ $room_id ]['adult_price'];
 					$child_price = ! empty( $available_rooms ) ? $available_rooms[0]['child_price'] : $rooms[ $room_id ]['child_price'];
+
+					if($hotel_discount_type == "percent") {
+						if($pricing_by == 1) {
+							$room_price = floatval( preg_replace( '/[^\d.]/', '',number_format( $room_price - ( ( $room_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+						}
+						if($pricing_by == 2) {
+							$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+							$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $child_price - ( ( $child_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+						}
+					}
+
 					$total_price += $pricing_by == '1' ? $room_price : ( ( $adult_price * $adult ) + ( $child_price * $child ) );
 
 					if ( $pricing_by == '1' ) {
@@ -174,8 +204,8 @@ function tf_hotel_booking_callback() {
 						$tf_room_data['tf_hotel_data']['child'] = $child;
 					}
 					if ( $pricing_by == '2' ) {
-						$tf_room_data['tf_hotel_data']['adult'] = $adult . " × " . strip_tags(wc_price( $available_rooms[0]['adult_price'] ));
-						$tf_room_data['tf_hotel_data']['child'] = $child . " × " . strip_tags(wc_price( $available_rooms[0]['child_price'] ));
+						$tf_room_data['tf_hotel_data']['adult'] = $adult . " × " . strip_tags(wc_price($adult_price ));
+						$tf_room_data['tf_hotel_data']['child'] = $child . " × " . strip_tags(wc_price( $child_price ));
 					}
 
 				};
@@ -186,20 +216,32 @@ function tf_hotel_booking_callback() {
 		} else {
 
             if ( $pricing_by == '1' ) {
-                $total_price = $rooms[$room_id]['price'];
+
+				$total_price = $rooms[$room_id]['price'];
+
+                if($hotel_discount_type == "percent") {
+					$total_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $total_price - ( ( $total_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+				}else if($hotel_discount_type == "fixed") {
+					$total_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $adult_price - $hotel_discount_amount ), 2 ) ) );
+				}
                 
                 $tf_room_data['tf_hotel_data']['adult']                  = $adult;
                 $tf_room_data['tf_hotel_data']['child']                  = $child;
                 $tf_room_data['tf_hotel_data']['children_ages']          = $children_ages;
             } elseif ( $pricing_by == '2' ) {
-                $adult_price = $rooms[$room_id]['adult_price'];
-                $adult_price = $adult_price * $adult;
+				$adult_price = $rooms[$room_id]['adult_price'];
                 $child_price = $rooms[$room_id]['child_price'];
+
+                if ($hotel_discount_type == "percent") {
+					$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+					$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $child_price - ( ( $child_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+				}
+                $adult_price = $adult_price * $adult;
                 $child_price = $child_price * $child;
-                $total_price = $adult_price + $child_price;    
+                $total_price = $adult_price + $child_price;  
                                 
-                $tf_room_data['tf_hotel_data']['adult']          = $adult." × ".strip_tags(wc_price($rooms[$room_id]['adult_price']));
-                $tf_room_data['tf_hotel_data']['child']          = $child." × ".strip_tags(wc_price($rooms[$room_id]['child_price']));
+                $tf_room_data['tf_hotel_data']['adult']          = $adult." × ".strip_tags(wc_price($adult_price));
+                $tf_room_data['tf_hotel_data']['child']          = $child." × ".strip_tags(wc_price($child_price)); 
             }
 
 			# Multiply pricing by night number
@@ -265,7 +307,7 @@ function tf_hotel_booking_callback() {
 				}
 			}
 			if ( "dropoff" == $airport_service ) {
-				$airport_pickup_price                        = ! empty( $meta['airport_dropoff_price'] ) ? $meta['airport_dropoff_price'] : '';
+				$airport_pickup_price = ! empty( $meta['airport_dropoff_price'] ) ? $meta['airport_dropoff_price'] : '';
 				if( !empty($airport_pickup_price) && gettype($airport_pickup_price)=="string" ){
 					$tf_hotel_airport_pickup_price_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
 						return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
