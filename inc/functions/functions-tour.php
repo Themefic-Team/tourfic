@@ -1027,9 +1027,12 @@ function tf_single_tour_booking_form( $post_id ) {
 
                         <!-- Popup Tour Extra -->
 						<?php
+						// $popup_extra_default_text = "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural";
+						$tour_popup_extra_text = function_exists('is_tf_pro') && is_tf_pro() && !empty(tfopt( 'tour_popup_extras_text' )) ? tfopt( 'tour_popup_extras_text' ) : '';
+						$traveler_details_text = function_exists('is_tf_pro') && is_tf_pro() && !empty(tfopt( 'tour_traveler_details_text' )) ? tfopt( 'tour_traveler_details_text' ) : '';
 						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_extras ) { ?>
-                            <div class="tf-booking-content show tf-booking-content-1">
-                                <p><?php echo __( "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural", "tourfic" ); ?></p>
+                            <div class="tf-booking-content show tf-booking-content-1"> 
+								<p><?php echo __( $tour_popup_extra_text, "tourfic" ); ?></p>
                                 <div class="tf-booking-content-extra">
 									<?php
 									if ( ( ! empty( $tour_extras[0]['title'] ) && ! empty( $tour_extras[0]['price'] ) ) || ! empty( $tour_extras[1]['title'] ) && ! empty( $tour_extras[1]['price'] ) ) {
@@ -1067,7 +1070,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
                             <!-- Popup Traveler Info -->
                             <div class="tf-booking-content tf-booking-content-2 <?php echo empty( $tour_extras ) ? esc_attr( 'show' ) : ''; ?>">
-                                <p><?php echo __( "All of your information will be confidential and the reason of this is for your privacy purpose", "tourfic" ); ?></p>
+                                <p><?php echo __( $traveler_details_text, "tourfic" ); ?></p>
                                 <div class="tf-booking-content-traveller">
                                     <div class="tf-traveller-info-box"></div>
                                 </div>
@@ -1078,7 +1081,7 @@ function tf_single_tour_booking_form( $post_id ) {
 
                             <!-- Popup Booking Confirmation -->
                             <div class="tf-booking-content tf-booking-content-3 <?php echo empty( $tour_extras ) && empty( $traveller_info_coll ) ? esc_attr( 'show' ) : ''; ?>">
-                                <p><?php echo __( "All of your information will be confidential and the reason of this is for your privacy purpose", "tourfic" ); ?></p>
+                                <p><?php echo __( $traveler_details_text, "tourfic" ); ?></p>
                                 <div class="tf-booking-content-traveller">
                                     <div class="tf-single-tour-traveller">
                                         <h4><?php echo __( "Billing details", "tourfic" ); ?></h4>
@@ -1838,6 +1841,11 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
     $child_price          = !empty( $meta['child_price'] ) ? $meta['child_price'] : false;
     $infant_price         = !empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
     $tour_archive_page_price_settings = !empty(tfopt('tf-template')["tour_archive_price_minimum_settings"]) ? tfopt('tf-template')["tour_archive_price_minimum_settings"] : 'all';
+
+	echo "<pre>";
+	print_r(tfopt());
+	echo "</pre>";
+	die(); // added by - Sunvi
 
 	if ( ! empty( $check_in_out ) ) {
 		list( $tf_form_start, $tf_form_end ) = explode( ' - ', $check_in_out );
