@@ -266,16 +266,14 @@
                 <h4>
                     <?php _e("Voucher details", "tourfic"); ?>
                     <div class="others-button">
-                        <span>
+                        <?php 
+                        $tf_qr_download_link = !empty($tf_tour_details->unique_id) ? $tf_tour_details->unique_id : '';
+                        ?>
+                        <a href="<?php echo !empty($tf_qr_download_link) ? site_url().'?qr_id='.$tf_qr_download_link : '#'; ?>" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M20.7914 12.6075C21.0355 12.3982 21.1575 12.2936 21.2023 12.1691C21.2415 12.0598 21.2415 11.9403 21.2023 11.831C21.1575 11.7065 21.0355 11.6019 20.7914 11.3926L12.3206 4.13202C11.9004 3.77182 11.6903 3.59172 11.5124 3.58731C11.3578 3.58348 11.2101 3.6514 11.1124 3.77128C11 3.90921 11 4.18595 11 4.73942V9.03468C8.86532 9.40813 6.91159 10.4898 5.45971 12.1139C3.87682 13.8846 3.00123 16.176 3 18.551V19.163C4.04934 17.8989 5.35951 16.8766 6.84076 16.166C8.1467 15.5395 9.55842 15.1684 11 15.0706V19.2607C11 19.8141 11 20.0909 11.1124 20.2288C11.2101 20.3487 11.3578 20.4166 11.5124 20.4128C11.6903 20.4084 11.9004 20.2283 12.3206 19.8681L20.7914 12.6075Z" stroke="#003C79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13 10H18L12 16L6 10H11V3H13V10ZM4 19H20V12H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V12H4V19Z" fill="#003C79"/>
                             </svg>
-                        </span>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M18 7V5.2C18 4.0799 18 3.51984 17.782 3.09202C17.5903 2.71569 17.2843 2.40973 16.908 2.21799C16.4802 2 15.9201 2 14.8 2H9.2C8.0799 2 7.51984 2 7.09202 2.21799C6.71569 2.40973 6.40973 2.71569 6.21799 3.09202C6 3.51984 6 4.0799 6 5.2V7M6 18C5.07003 18 4.60504 18 4.22354 17.8978C3.18827 17.6204 2.37962 16.8117 2.10222 15.7765C2 15.395 2 14.93 2 14V11.8C2 10.1198 2 9.27976 2.32698 8.63803C2.6146 8.07354 3.07354 7.6146 3.63803 7.32698C4.27976 7 5.11984 7 6.8 7H17.2C18.8802 7 19.7202 7 20.362 7.32698C20.9265 7.6146 21.3854 8.07354 21.673 8.63803C22 9.27976 22 10.1198 22 11.8V14C22 14.93 22 15.395 21.8978 15.7765C21.6204 16.8117 20.8117 17.6204 19.7765 17.8978C19.395 18 18.93 18 18 18M15 10.5H18M9.2 22H14.8C15.9201 22 16.4802 22 16.908 21.782C17.2843 21.5903 17.5903 21.2843 17.782 20.908C18 20.4802 18 19.9201 18 18.8V17.2C18 16.0799 18 15.5198 17.782 15.092C17.5903 14.7157 17.2843 14.4097 16.908 14.218C16.4802 14 15.9201 14 14.8 14H9.2C8.0799 14 7.51984 14 7.09202 14.218C6.71569 14.4097 6.40973 14.7157 6.21799 15.092C6 15.5198 6 16.0799 6 17.2V18.8C6 19.9201 6 20.4802 6.21799 20.908C6.40973 21.2843 6.71569 21.5903 7.09202 21.782C7.51984 22 8.07989 22 9.2 22Z" stroke="#003C79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </span>
+                        </a>
                     </div>
                 </h4>
                 <div class="tf-grid-box">
@@ -434,19 +432,38 @@
         <div class="tf-booking-actions">
             <div class="tf-filter-selection">
                 <h3><?php _e("Actions", "tourfic"); ?></h3>
-                <div class="tf-order-status-filter">
+                <div class="tf-order-status-filter tf-order-ostatus">
                     <label>
-                        <span><?php _e("Bulk action", "tourfic"); ?></span>
+                        <span>
+                            <?php 
+                                if( !empty($tf_order_details->ostatus) ){
+                                    if( "trash"==$tf_order_details->ostatus ){
+                                        _e("Trash", "tourfic");
+                                    }elseif( "processing"==$tf_order_details->ostatus ){
+                                        _e("Processing", "tourfic");
+                                    }elseif( "on-hold"==$tf_order_details->ostatus ){
+                                        _e("On Hold", "tourfic");
+                                    }elseif( "completed"==$tf_order_details->ostatus ){
+                                        _e("Complete", "tourfic");
+                                    }elseif( "cancelled"==$tf_order_details->ostatus ){
+                                        _e("Cancelled", "tourfic");
+                                    }
+                                }else{
+                                    _e("Processing", "tourfic");
+                                }
+                            ?>
+                        </span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M5 7.5L10 12.5L15 7.5" stroke="#F0F0F1" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </label>
                     <ul>
-                        <li><?php _e("Trash", "tourfic"); ?></li>
-                        <li><?php _e("Processing", "tourfic"); ?></li>
-                        <li><?php _e("On Hold", "tourfic"); ?></li>
-                        <li><?php _e("Complete", "tourfic"); ?></li>
-                        <li><?php _e("Cancelled", "tourfic"); ?></li>
+                        <li data-value="trash"><?php _e("Trash", "tourfic"); ?></li>
+                        <li data-value="processing"><?php _e("Processing", "tourfic"); ?></li>
+                        <li data-value="on-hold"><?php _e("On Hold", "tourfic"); ?></li>
+                        <li data-value="completed"><?php _e("Complete", "tourfic"); ?></li>
+                        <li data-value="cancelled"><?php _e("Cancelled", "tourfic"); ?></li>
+                        <li data-value="refunded"><?php _e("Refund", "tourfic"); ?></li>
                     </ul>
                 </div>
             </div>
@@ -486,26 +503,15 @@
                 <h3><?php _e("Sent order mail", "tourfic"); ?></h3>
                 <div class="tf-order-status-filter">
                     <label>
-                        <span><?php _e("Order status", "tourfic"); ?></span>
+                        <span><?php _e("Order Mail", "tourfic"); ?></span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M5 7.5L10 12.5L15 7.5" stroke="#F0F0F1" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </label>
                     <ul>
-                        <li><?php _e("Trash", "tourfic"); ?></li>
-                        <li><?php _e("Processing", "tourfic"); ?></li>
-                        <li><?php _e("On Hold", "tourfic"); ?></li>
-                        <li><?php _e("Complete", "tourfic"); ?></li>
-                        <li><?php _e("Cancelled", "tourfic"); ?></li>
+                        <li><?php _e("Customer", "tourfic"); ?></li>
+                        <li><?php _e("Customer + Vendor", "tourfic"); ?></li>
                     </ul>
-                </div>
-            </div>
-
-            <div class="tf-filter-selection">
-                <div class="tf-refund-btn">
-                    <a href="#">
-                        <?php _e("Refund", "tourfic"); ?>
-                    </a>
                 </div>
             </div>
 

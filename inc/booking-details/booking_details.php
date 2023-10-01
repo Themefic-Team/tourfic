@@ -57,3 +57,28 @@ function tf_checkinout_details_edit_function() {
     }
     die();
 }
+
+/**
+ * Ajax Order Status Update
+ *
+ * tf_order_status_edit
+ */
+
+ add_action( 'wp_ajax_tf_order_status_edit', 'tf_order_status_edit_function' );
+ function tf_order_status_edit_function() {
+    // Order Id
+    $tf_order_id = !empty($_POST['order_id']) ? $_POST['order_id'] : "";
+    // status Value
+    $tf_status = !empty($_POST['status']) ? $_POST['status'] : "";
+
+    global $wpdb;
+    $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
+
+    // Order Status Update into Database
+    if(!empty($tf_order)){
+        $wpdb->query(
+        $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET ostatus=%s WHERE id=%s", sanitize_title( $tf_status ), sanitize_key($tf_order_id))
+        );
+    }
+    die();
+ }
