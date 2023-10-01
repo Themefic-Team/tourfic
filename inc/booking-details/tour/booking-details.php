@@ -3,7 +3,7 @@
 
         <div class="tf-filter-options">
             <div class="tf-order-status-filter">
-                <select class="tf-tour-filter-options" name="tours">
+                <select class="tf-tour-filter-options tf-filter-bulk-option" name="tours">
                     <option value=""><?php _e("Bulk action", "tourfic"); ?></option>
                     <option value="trash"><?php _e("Trash", "tourfic"); ?></option>
                     <option value="processing"><?php _e("Processing", "tourfic"); ?></option>
@@ -105,7 +105,7 @@
         <?php foreach($tours_orders_result as $tour){ ?>
         <tr>
             <th class="check-column">
-                <input type="checkbox" value="<?php echo esc_html( $tour['id'] ); ?>">
+                <input type="checkbox" name="order_id[]" value="<?php echo esc_html( $tour['id'] ); ?>">
             </th>
             <td>
                 <?php echo esc_html( $tour['order_id'] ); ?>
@@ -193,7 +193,8 @@
                         <a href="<?php echo esc_url(strtok(home_url($_SERVER['REQUEST_URI']), '?')); ?>?post_type=tf_tours&page=tf_tours_booking&paged=<?php echo $i; ?>"><?php echo $i; ?></a>
                         </li>
                     <?php }} 
-                    if($paged < $total_pages){    
+                    if($paged < $total_pages){
+                        var_dump(home_url($_SERVER['REQUEST_URI']));
                     ?>
                         <li><a href="<?php echo esc_url(strtok(home_url($_SERVER['REQUEST_URI']), '?')); ?>?post_type=tf_tours&page=tf_tours_booking&paged=<?php echo $paged+1; ?>"><?php _e("Next", "tourfic"); ?> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M4.16669 10.0001H15.8334M15.8334 10.0001L10 4.16675M15.8334 10.0001L10 15.8334" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
@@ -204,3 +205,9 @@
         </tr>
     </tfoot>
 </table>
+
+<div class="tf-preloader-box">
+    <div class="tf-loader-preview">
+        <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="Loader">
+    </div>
+</div>

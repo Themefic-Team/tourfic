@@ -157,6 +157,78 @@
             e.preventDefault();
             $(".tf-voucher-quick-view-box").hide();
         });
+
+        // Filter Checkbox Selected
+
+        $("#cb #cb-select-all-1").click(function() {
+            $('input[name="order_id[]"]').each(function() {
+                $(this).prop("checked", true);
+            });
+        });
+
+        /**
+         * Filter Bulk Action
+         *
+         * tf_order_bulk_action_edit
+         */
+        $('.tf-order-status-filter-btn').click(function() {
+            
+            let order_list = [];
+            let bulk_action = $('.tf-filter-bulk-option').val();
+            $('.tf_booking_details_wrap input[name="order_id[]"]:checked').each(function() {
+                order_list.push($(this).val());
+            });
+            
+            if(order_list.length > 0 && bulk_action!==''){
+                $.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_order_bulk_action_edit',
+                        orders: order_list,
+                        status: bulk_action
+                    },
+                    beforeSend: function (data) {
+                        $('.tf-preloader-box').show();
+                    },
+                    complete: function (data) {
+                        
+                    },
+                    success: function (data) {
+                        location.reload();
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    },
+
+                });
+            }
+        });
+
+        /**
+         * Filter Checked Perameter Passing
+         *
+         */
+        $('.tf-tour-checkinout-options').change(function() {
+            
+            let changeValue = $(this).val();
+            if(changeValue!==""){
+                $('.tf-preloader-box').show();
+                let currentURL = window.location.href;
+                let BaseURL = currentURL.split('?')[0];
+                let queryString = currentURL.split('?')[1];
+
+                let currentURLParams= new URLSearchParams(queryString);
+                if (currentURLParams.has("checkinout")) {
+                    currentURLParams.set("checkinout", changeValue);
+                    let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                    window.location.href = updatedUrl;
+                }else{
+                    let updatedUrl = currentURL + "&checkinout=" + changeValue;
+                    window.location.href = updatedUrl;
+                }
+            }
+        });
         
     });
 
