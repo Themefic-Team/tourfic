@@ -16,7 +16,7 @@
         <button class="tf-order-status-filter-btn">
             <?php _e("Apply", "tourfic"); ?>
         </button>
-        <div class="tf-order-filter-reset">
+        <!-- <div class="tf-order-filter-reset">
             <a href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <mask id="mask0_55_2271" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
@@ -26,9 +26,9 @@
                     <path d="M11 20.95C8.98333 20.7 7.3125 19.8208 5.9875 18.3125C4.6625 16.8042 4 15.0333 4 13C4 11.9 4.21667 10.8458 4.65 9.8375C5.08333 8.82917 5.7 7.95 6.5 7.2L7.925 8.625C7.29167 9.19167 6.8125 9.85 6.4875 10.6C6.1625 11.35 6 12.15 6 13C6 14.4667 6.46667 15.7625 7.4 16.8875C8.33333 18.0125 9.53333 18.7 11 18.95V20.95ZM13 20.95V18.95C14.45 18.6833 15.6458 17.9917 16.5875 16.875C17.5292 15.7583 18 14.4667 18 13C18 11.3333 17.4167 9.91667 16.25 8.75C15.0833 7.58333 13.6667 7 12 7H11.925L13.025 8.1L11.625 9.5L8.125 6L11.625 2.5L13.025 3.9L11.925 5H12C14.2333 5 16.125 5.775 17.675 7.325C19.225 8.875 20 10.7667 20 13C20 15.0167 19.3375 16.7792 18.0125 18.2875C16.6875 19.7958 15.0167 20.6833 13 20.95Z" fill="#1D2327"/>
                 </g>
                 </svg>
-                <?php _e("Reset", "tourfic"); ?>
+                <?php //_e("Reset", "tourfic"); ?>
             </a>
-        </div>
+        </div> -->
 
         <div class="tf-filter-options">
             <div class="tf-order-status-filter">
@@ -47,18 +47,32 @@
             <div class="tf-order-status-filter">
                 <select class="tf-tour-checkinout-options" name="tours">
                     <option value=""><?php _e("Checked in status", "tourfic"); ?></option>
-                    <option value="checkin"><?php _e("Checked in", "tourfic"); ?></option>
-                    <option value="checkout"><?php _e("Checked out", "tourfic"); ?></option>
+                    <option value="in" <?php echo !empty($_GET['checkinout']) && "in"==$_GET['checkinout'] ? esc_attr( 'selected' ) : ''; ?>><?php _e("Checked in", "tourfic"); ?></option>
+                    <option value="out" <?php echo !empty($_GET['checkinout']) && "out"==$_GET['checkinout'] ? esc_attr( 'selected' ) : ''; ?>><?php _e("Checked out", "tourfic"); ?></option>
                 </select>
             </div>
         </div>
 
         <div class="tf-filter-options">
             <div class="tf-order-status-filter">
-                <select class="tf-tour-filter-options" name="tours">
+                <select class="tf-tour-filter-options tf-post-id-filter-options" name="tours">
                     <option value=""><?php _e("Tour name", "tourfic"); ?></option>
-                    <option value="AL">Alabama</option>
-                    <option value="WY">Wyoming</option>
+                    <?php 
+                    $tftours_list = array(
+                        'posts_per_page' => - 1,
+                        'post_type'      => 'tf_tours',
+                        'post_status'    => 'publish'
+                    );
+                    $tftours_list_query = new WP_Query( $tftours_list );
+                    if ( $tftours_list_query->have_posts() ):
+                        while ( $tftours_list_query->have_posts() ) : $tftours_list_query->the_post();
+                    ?>
+                    <option value="<?php echo get_the_ID(); ?>"><?php echo get_the_title(); ?></option>
+                    <?php 
+                        endwhile;
+                    endif;
+                    wp_reset_query();
+                    ?>
                 </select>
             </div>
         </div>
@@ -179,24 +193,23 @@
             <th colspan="8">
                 <ul class="tf-booking-details-pagination">
                     <?php if($paged>=2){ ?>
-                        <li><a href="<?php echo esc_url(strtok(home_url($_SERVER['REQUEST_URI']), '?')); ?>?post_type=tf_tours&page=tf_tours_booking&paged=<?php echo $paged-1; ?>"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <li><a href="<?php echo tf_booking_details_pagination( $paged-1 ); ?>"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M15.8333 10.0001H4.16663M4.16663 10.0001L9.99996 15.8334M4.16663 10.0001L9.99996 4.16675" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg><?php _e("Previous", "tourfic"); ?></a></li>
                     <?php } for ($i=1; $i<=$total_pages; $i++) {
                         if ($i == $paged) {  
                     ?>
                         <li class="active">
-                            <a href="<?php echo esc_url(strtok(home_url($_SERVER['REQUEST_URI']), '?')); ?>?post_type=tf_tours&page=tf_tours_booking&paged=<?php echo $i; ?>"><?php echo $i; ?></a>
+                            <a href="<?php echo tf_booking_details_pagination( $i ); ?>"><?php echo $i; ?></a>
                         </li>
                     <?php } else{ ?>
                         <li>
-                        <a href="<?php echo esc_url(strtok(home_url($_SERVER['REQUEST_URI']), '?')); ?>?post_type=tf_tours&page=tf_tours_booking&paged=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        <a href="<?php echo tf_booking_details_pagination( $i ); ?>"><?php echo $i; ?></a>
                         </li>
                     <?php }} 
                     if($paged < $total_pages){
-                        var_dump(home_url($_SERVER['REQUEST_URI']));
                     ?>
-                        <li><a href="<?php echo esc_url(strtok(home_url($_SERVER['REQUEST_URI']), '?')); ?>?post_type=tf_tours&page=tf_tours_booking&paged=<?php echo $paged+1; ?>"><?php _e("Next", "tourfic"); ?> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <li><a href="<?php echo tf_booking_details_pagination( $paged+1 ); ?>"><?php _e("Next", "tourfic"); ?> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M4.16669 10.0001H15.8334M15.8334 10.0001L10 4.16675M15.8334 10.0001L10 15.8334" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg></a></li>
                     <?php } ?>

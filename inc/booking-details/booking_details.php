@@ -115,3 +115,26 @@ function tf_checkinout_details_edit_function() {
     }
     die();
 }
+
+/**
+ * Booking Details Pagination
+ *
+ * tf_booking_details_pagination
+ */
+if ( ! function_exists( 'tf_booking_details_pagination' ) ) {
+    function tf_booking_details_pagination($page){
+        $currentURL = home_url($_SERVER['REQUEST_URI']);
+        $BaseURL = strtok($currentURL, '?');
+        $queryString = isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+        
+        parse_str($queryString, $currentURLParams);
+
+        if (array_key_exists('paged', $currentURLParams)) {
+            $currentURLParams['paged'] = $page;
+            $updatedQuery = http_build_query($currentURLParams);
+            return $updatedUrl = $BaseURL . '?' . $updatedQuery;
+        } else {
+            return $updatedUrl = $currentURL . '&paged=' . $page;
+        }
+    }
+}
