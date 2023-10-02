@@ -944,6 +944,15 @@ function tf_single_tour_booking_form( $post_id ) {
 
 		$tf_tour_selected_template = $tf_tour_selected_check ? $tf_tour_selected_check : 'default';
 	}
+	if ( ! function_exists( 'partial_payment_tag_replacement' ) ) {
+		function partial_payment_tag_replacement( $text, $arr ) {
+			if(!empty($arr)) {
+				$tag = array_keys($arr);
+				$value = array_values($arr);
+			}
+			return str_replace($tag, $value, $text);
+		}
+	}
 	if ( ! function_exists( 'tf_booking_popup' ) ) {
 		function tf_booking_popup( $post_id ) {
 			?>
@@ -1209,14 +1218,21 @@ function tf_single_tour_booking_form( $post_id ) {
                     <!-- Popup Footer Control & Partial Payment -->
                     <div class="tf-booking-pagination">
 					    <?php if ( function_exists('is_tf_pro') && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) && 3!=$tf_booking_by ) {
-						    $tf_deposit_amount =  $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%';
+						    $tf_deposit_amount =  array (
+								"{amount}" => $meta['deposit_type'] == 'fixed' ? wc_price( $meta['deposit_amount'] ) : $meta['deposit_amount']. '%'
+							);
+							$tf_partial_payment_label = !empty(tfopt("deposit-title")) ? tfopt("deposit-title") : 'Pertial payment of {amount} on total';
+							$tf_partial_payment_description = !empty(tfopt("deposit-subtitle")) ? tfopt("deposit-subtitle") : 'You can Partial Payment amount for booking the tour. After booking the tour, you can pay the rest amount after the tour is completed.';
 						    ?>
                             <div class="tf-diposit-switcher">
                                 <label class="switch">
                                     <input type="checkbox" name="deposit" class="diposit-status-switcher">
                                     <span class="switcher round"></span>
                                 </label>
-                                <h4><?php echo sprintf( __( 'Partial payment of %1$s on total', 'tourfic' ), $tf_deposit_amount ); ?></h4>
+                                <h4><?php echo __( partial_payment_tag_replacement($tf_partial_payment_label, $tf_deposit_amount), 'tourfic' ) ?></h4>
+									<i class="fa fa-circle-exclamation tool-i" style="padding-left: 5px; padding-top: 5px" title="<?php echo __($tf_partial_payment_description) ?>"></i>
+									<!-- TODO: Add a tooltip here as like Vendor-->
+								</li>
                             </div>
 					    <?php } ?>
 					    <?php if ( empty($tour_extras) && 3!=$tf_booking_by && empty($traveller_info_coll) ){ ?>

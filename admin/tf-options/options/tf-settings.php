@@ -726,14 +726,14 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'signle_tour_heading',
 					'type'  => 'heading',
-					'label' => __( 'Settings for Partial Payment Popup', 'tourfic' ),
+					'label' => __( 'Settings for Partial Payment', 'tourfic' ),
 				),
 				array(
 					'id'      => '',
 					'type'    => 'text',
-					'label'   => __( 'Title', 'tourfic' ),
+					'label'   => __( 'Label', 'tourfic' ),
 					'is_pro'  => true,
-					'default' => __( 'Do you want to Partial Payment amount for booking the tour?', 'tourfic' ),
+					'default' => __( 'Pertial payment of {amount} on total', 'tourfic' ),
 				),
 				array(
 					'id'      => '',
@@ -743,25 +743,10 @@ TF_Settings::option( 'tf_settings', array(
 					'default' => __( 'You can Partial Payment amount for booking the tour. After booking the tour, you can pay the rest amount after the tour is completed.', 'tourfic' ),
 				),
 				array(
-					'id'      => '',
-					'type'    => 'text',
-					'label'   => __( 'Text before the Price Amount', 'tourfic' ),
-					'is_pro'  => true,
-					'default' => __( 'Amount of Partial Payment on total price', 'tourfic' ),
-				),
-				array(
-					'id'      => '',
-					'type'    => 'text',
-					'label'   => __( 'Text for Button (Full Payment)', 'tourfic' ),
-					'is_pro'  => true,
-					'default' => __( 'Pay full amount', 'tourfic' ),
-				),
-				array(
-					'id'      => '',
-					'type'    => 'text',
-					'label'   => __( 'Text for Button (Partial Payment)', 'tourfic' ),
-					'is_pro'  => true,
-					'default' => __( 'Make a Partial Payment', 'tourfic' ),
+					'id'      => 'notice_shortcode',
+					'type'    => 'notice',
+					'content' => __( 'Use shortcode <code>{amount}</code> to show percentage amount in Label', 'tourfic' ),
+					'is_pro' => true
 				),
 			),
 		),
