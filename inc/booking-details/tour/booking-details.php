@@ -32,7 +32,7 @@
 
         <div class="tf-filter-options">
             <div class="tf-order-status-filter">
-                <select class="tf-tour-filter-options" name="tours">
+                <select class="tf-tour-filter-options tf-order-payment-status" name="tours">
                     <option value=""><?php _e("Payment status", "tourfic"); ?></option>
                     <option value=""><?php _e("Trash", "tourfic"); ?></option>
                     <option value=""><?php _e("Processing", "tourfic"); ?></option>
@@ -67,7 +67,7 @@
                     if ( $tftours_list_query->have_posts() ):
                         while ( $tftours_list_query->have_posts() ) : $tftours_list_query->the_post();
                     ?>
-                    <option value="<?php echo get_the_ID(); ?>"><?php echo get_the_title(); ?></option>
+                    <option value="<?php echo get_the_ID(); ?>" <?php echo !empty($_GET['post']) && get_the_ID()==$_GET['post'] ? esc_attr( 'selected' ) : ''; ?>><?php echo get_the_title(); ?></option>
                     <?php 
                         endwhile;
                     endif;
@@ -196,7 +196,9 @@
                         <li><a href="<?php echo tf_booking_details_pagination( $paged-1 ); ?>"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M15.8333 10.0001H4.16663M4.16663 10.0001L9.99996 15.8334M4.16663 10.0001L9.99996 4.16675" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg><?php _e("Previous", "tourfic"); ?></a></li>
-                    <?php } for ($i=1; $i<=$total_pages; $i++) {
+                    <?php } 
+                    if($total_pages > 1){
+                    for ($i=1; $i<=$total_pages; $i++) {
                         if ($i == $paged) {  
                     ?>
                         <li class="active">
@@ -206,7 +208,7 @@
                         <li>
                         <a href="<?php echo tf_booking_details_pagination( $i ); ?>"><?php echo $i; ?></a>
                         </li>
-                    <?php }} 
+                    <?php } } }
                     if($paged < $total_pages){
                     ?>
                         <li><a href="<?php echo tf_booking_details_pagination( $paged+1 ); ?>"><?php _e("Next", "tourfic"); ?> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

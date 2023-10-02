@@ -13,12 +13,27 @@
             $this.find('label span').text(selected_label);
         });
 
-        // Tour Filter Section
-        $('.tf-tour-filter-options').select2({
-            dropdownCssClass: 'tf-booking-filter-modal'
+        // Pyment Status Section
+        $('.tf-order-payment-status').select2({
+            dropdownCssClass: 'tf-booking-filter-modal',
+            placeholder: "Payment Status",
         });
+        // Bulk Section
+        $('.tf-filter-bulk-option').select2({
+            dropdownCssClass: 'tf-booking-filter-modal',
+            placeholder: "Bulk Action",
+        });
+        // Post Section
+        $('.tf-post-id-filter-options').select2({
+            dropdownCssClass: 'tf-booking-filter-modal',
+            placeholder: "Tour Name",
+            allowClear: true
+        });
+        // Checked Section
         $('.tf-tour-checkinout-options').select2({
-            dropdownCssClass: 'tf-booking-checkinout-filter-modal'
+            dropdownCssClass: 'tf-booking-checkinout-filter-modal',
+            placeholder: "Checked in status",
+            allowClear: true
         });
 
         /**
@@ -210,23 +225,44 @@
          *
          */
         $('.tf-tour-checkinout-options').change(function() {
-            
             let changeValue = $(this).val();
-            if(changeValue!==""){
-                $('.tf-preloader-box').show();
-                let currentURL = window.location.href;
-                let BaseURL = currentURL.split('?')[0];
-                let queryString = currentURL.split('?')[1];
+            $('.tf-preloader-box').show();
+            let currentURL = window.location.href;
+            let BaseURL = currentURL.split('?')[0];
+            let queryString = currentURL.split('?')[1];
 
-                let currentURLParams= new URLSearchParams(queryString);
-                if (currentURLParams.has("checkinout")) {
-                    currentURLParams.set("checkinout", changeValue);
-                    let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                    window.location.href = updatedUrl;
-                }else{
-                    let updatedUrl = currentURL + "&checkinout=" + changeValue;
-                    window.location.href = updatedUrl;
-                }
+            let currentURLParams= new URLSearchParams(queryString);
+            currentURLParams.delete("paged");
+            if (currentURLParams.has("checkinout")) {
+                currentURLParams.set("checkinout", changeValue);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                window.location.href = updatedUrl;
+            }else{
+                let updatedUrl = currentURL + "&checkinout=" + changeValue;
+                window.location.href = updatedUrl;
+            }
+        });
+
+        /**
+         * Filter Post Perameter Passing
+         *
+         */
+        $('.tf-post-id-filter-options').change(function() {
+            let changeValue = $(this).val();
+            $('.tf-preloader-box').show();
+            let currentURL = window.location.href;
+            let BaseURL = currentURL.split('?')[0];
+            let queryString = currentURL.split('?')[1];
+
+            let currentURLParams= new URLSearchParams(queryString);
+            currentURLParams.delete("paged");
+            if (currentURLParams.has("post")) {
+                currentURLParams.set("post", changeValue);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                window.location.href = updatedUrl;
+            }else{
+                let updatedUrl = currentURL + "&post=" + changeValue;
+                window.location.href = updatedUrl;
             }
         });
         

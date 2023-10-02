@@ -87,21 +87,21 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 				$offset = ($paged-1) * $no_of_booking_per_page;
 
 				$checkinout_perms = !empty($_GET['checkinout']) ? $_GET['checkinout'] : '';
-				$tour_perms = !empty($_GET['tour']) ? $_GET['tour'] : '';
-				if(!empty($checkinout_perms) && empty($tour_perms)){
+				$tf_post_perms = !empty($_GET['post']) ? $_GET['post'] : '';
+				if(!empty($checkinout_perms) && empty($tf_post_perms)){
 					$tf_booking_details_select    = array(
 						'select' => "*",
 						'query'  => "post_type = 'tour' AND checkinout = '$checkinout_perms' ORDER BY id DESC"
 					);
-				}elseif(!empty($tour_perms) && empty($checkinout_perms)){
+				}elseif(!empty($tf_post_perms) && empty($checkinout_perms)){
 					$tf_booking_details_select    = array(
 						'select' => "*",
-						'query'  => "post_type = 'tour' AND post_id = '$tour_perms' ORDER BY id DESC"
+						'query'  => "post_type = 'tour' AND post_id = '$tf_post_perms' ORDER BY id DESC"
 					);
-				}elseif(!empty($tour_perms) && !empty($checkinout_perms)){
+				}elseif(!empty($tf_post_perms) && !empty($checkinout_perms)){
 					$tf_booking_details_select    = array(
 						'select' => "*",
-						'query'  => "post_type = 'tour' AND post_id = '$tour_perms' ORDER BY id DESC"
+						'query'  => "post_type = 'tour' AND post_id = '$tf_post_perms' AND checkinout = '$checkinout_perms' ORDER BY id DESC"
 					);
 				}else{
 					$tf_booking_details_select    = array(
@@ -112,10 +112,20 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 				$tours_tour_booking_result = tourfic_order_table_data( $tf_booking_details_select );
 				$total_rows = !empty(count($tours_tour_booking_result)) ? count($tours_tour_booking_result) : 0;
 				$total_pages = ceil($total_rows / $no_of_booking_per_page);
-				if(!empty($checkinout_perms)){
+				if(!empty($checkinout_perms) && empty($tf_post_perms)){
 					$tf_orders_select    = array(
 						'select' => "*",
 						'query'  => "post_type = 'tour' AND checkinout = '$checkinout_perms' ORDER BY id DESC LIMIT $offset, $no_of_booking_per_page"
+					);
+				}elseif(!empty($tf_post_perms) && empty($checkinout_perms)){
+					$tf_orders_select    = array(
+						'select' => "*",
+						'query'  => "post_type = 'tour' AND post_id = '$tf_post_perms' ORDER BY id DESC LIMIT $offset, $no_of_booking_per_page"
+					);
+				}elseif(!empty($tf_post_perms) && !empty($checkinout_perms)){
+					$tf_orders_select    = array(
+						'select' => "*",
+						'query'  => "post_type = 'tour' AND post_id = '$tf_post_perms' AND checkinout = '$checkinout_perms' ORDER BY id DESC LIMIT $offset, $no_of_booking_per_page"
 					);
 				}else{
 					$tf_orders_select    = array(

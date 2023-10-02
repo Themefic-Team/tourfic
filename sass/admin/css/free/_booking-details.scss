@@ -61,6 +61,13 @@
                     min-width: 160px !important;
                 }
                 span.selection{
+                    button.select2-selection__clear{
+                        margin-right: 0px;
+                        padding-top: 0px;
+                    }
+                    span.select2-selection__placeholder{
+                        color: #1d2327;
+                    }
                     span.select2-selection{
                         height: 48px;
                         border: 0px solid;
@@ -73,7 +80,6 @@
                         line-height: 24px;
                         display: flex;
                         align-items: center;
-                        justify-content: space-between;
                         span.select2-selection__arrow{
                             height: 48px;
                         }
@@ -94,6 +100,7 @@
                 font-weight: 600;
                 line-height: 24px;
                 cursor: pointer;
+                margin-right: 16px;
             }
             .tf-order-filter-reset{
                 a{
@@ -308,7 +315,7 @@
     .select2-results{
         ul{
             li{
-                &:nth-child(2){
+                &:first-child{
                     background: #ECFDF3;
                     color: #027A48; 
                 }
