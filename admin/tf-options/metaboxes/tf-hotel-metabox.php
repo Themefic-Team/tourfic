@@ -429,15 +429,15 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'label_off' => __( 'No', 'tourfic' ),
 							'default'   => false,
 						),
-						/*array(
+						array(
 							'id'      => '',
 							'type'    => 'switch',
 							'label'   => __( 'Enable Availability by Date', 'tourfic' ),
 							'is_pro'  => true,
 							'default' => true
-						),*/
+						),
 						array(
-							'id'        => 'availabilityCal',
+							'id'        => '',
 							'type'      => 'hotelAvailabilityCal',
 							'label'     => __( 'Availability Calendar', 'tourfic' ),
 							'is_pro'  => true,
