@@ -3837,10 +3837,20 @@ Steps
   font-weight: 400;
   line-height: 24px; /* 150% */
   background: transparent;
+  -moz-appearance: textfield;
 }
 .tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input:focus {
   outline: none;
   box-shadow: none;
+}
+.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input::-webkit-outer-spin-button, .tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter button {
+  cursor: pointer;
+  background-color: transparent;
+  border: 0px solid;
 }
 .tf_booking_details_wrap .wp-list-table {
   border-radius: 12px;
@@ -3979,6 +3989,17 @@ Steps
 .select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul {
   padding-left: 4px;
   padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: #aaa #eee;
+}
+.select2-dropdown.tf-booking-filter-modal .select2-results ul scrollbar,
+.select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul scrollbar {
+  width: 5px;
+}
+.select2-dropdown.tf-booking-filter-modal .select2-results ul scrollbar-thumb,
+.select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 4px;
 }
 .select2-dropdown.tf-booking-filter-modal .select2-results ul li,
 .select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul li {

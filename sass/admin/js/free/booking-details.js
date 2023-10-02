@@ -16,7 +16,7 @@
         // Pyment Status Section
         $('.tf-order-payment-status').select2({
             dropdownCssClass: 'tf-booking-filter-modal',
-            placeholder: "Payment Status",
+            placeholder: "Order Status",
             allowClear: true
         });
         // Bulk Section
@@ -218,6 +218,34 @@
                     },
 
                 });
+            }
+        });
+
+        /**
+         * Search Filter BY ID boly
+         *
+         * tf-right-search-filter
+         */
+        $(document).on('submit', 'form.tf-right-search-filter', function (e) {
+            e.preventDefault();
+
+            let id = $("#tf-searching-key").val();
+            if(id!==""){
+                $('.tf-preloader-box').show();
+                let currentURL = window.location.href;
+                let BaseURL = currentURL.split('?')[0];
+                let queryString = currentURL.split('?')[1];
+
+                let currentURLParams= new URLSearchParams(queryString);
+                currentURLParams.delete("paged");
+                if (currentURLParams.has("post")) {
+                    currentURLParams.set("post", id);
+                    let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                    window.location.href = updatedUrl;
+                }else{
+                    let updatedUrl = currentURL + "&post=" + id;
+                    window.location.href = updatedUrl;
+                }
             }
         });
 
