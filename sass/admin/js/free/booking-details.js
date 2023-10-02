@@ -17,6 +17,7 @@
         $('.tf-order-payment-status').select2({
             dropdownCssClass: 'tf-booking-filter-modal',
             placeholder: "Payment Status",
+            allowClear: true
         });
         // Bulk Section
         $('.tf-filter-bulk-option').select2({
@@ -262,6 +263,29 @@
                 window.location.href = updatedUrl;
             }else{
                 let updatedUrl = currentURL + "&post=" + changeValue;
+                window.location.href = updatedUrl;
+            }
+        });
+
+        /**
+         * Filter Post Perameter Passing
+         *
+         */
+        $('.tf-order-payment-status').change(function() {
+            let changeValue = $(this).val();
+            $('.tf-preloader-box').show();
+            let currentURL = window.location.href;
+            let BaseURL = currentURL.split('?')[0];
+            let queryString = currentURL.split('?')[1];
+
+            let currentURLParams= new URLSearchParams(queryString);
+            currentURLParams.delete("paged");
+            if (currentURLParams.has("payment")) {
+                currentURLParams.set("payment", changeValue);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                window.location.href = updatedUrl;
+            }else{
+                let updatedUrl = currentURL + "&payment=" + changeValue;
                 window.location.href = updatedUrl;
             }
         });

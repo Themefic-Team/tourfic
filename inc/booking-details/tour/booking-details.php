@@ -34,11 +34,11 @@
             <div class="tf-order-status-filter">
                 <select class="tf-tour-filter-options tf-order-payment-status" name="tours">
                     <option value=""><?php _e("Payment status", "tourfic"); ?></option>
-                    <option value=""><?php _e("Trash", "tourfic"); ?></option>
-                    <option value=""><?php _e("Processing", "tourfic"); ?></option>
-                    <option value=""><?php _e("On Hold", "tourfic"); ?></option>
-                    <option value=""><?php _e("Complete", "tourfic"); ?></option>
-                    <option value=""><?php _e("Cancelled", "tourfic"); ?></option>
+                    <option value="processing" <?php echo !empty($_GET['payment']) && "processing"==$_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php _e("Processing", "tourfic"); ?></option>
+                    <option value="on-hold" <?php echo !empty($_GET['payment']) && "on-hold"==$_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php _e("On Hold", "tourfic"); ?></option>
+                    <option value="completed" <?php echo !empty($_GET['payment']) && "completed"==$_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php _e("Complete", "tourfic"); ?></option>
+                    <option value="cancelled" <?php echo !empty($_GET['payment']) && "cancelled"==$_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php _e("Cancelled", "tourfic"); ?></option>
+                    <option value="refunded" <?php echo !empty($_GET['payment']) && "refunded"==$_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php _e("Refund", "tourfic"); ?></option>
                 </select>
             </div>
         </div>
