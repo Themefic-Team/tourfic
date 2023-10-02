@@ -146,7 +146,9 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				'tourfic-vendor_page_tf_vendor_withdraw',
 				'tf_hotel_page_tf-hotel-backend-booking',
 				'tf_tours_page_tf-tour-backend-booking',
-				'tf_tours_page_tf_tours_booking'
+				'tf_tours_page_tf_tours_booking',
+				'tf_hotel_page_tf_hotel_booking',
+				'tf_apartment_page_tf_apartment_booking'
 			);
 			$tf_options_post_type = array( 'tf_hotel', 'tf_tours', 'tf_apartment' );
 			if ( "tourfic-settings_page_tf_dashboard" == $screen ) {

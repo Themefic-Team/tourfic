@@ -24,12 +24,25 @@
             dropdownCssClass: 'tf-booking-filter-modal',
             placeholder: "Bulk Action",
         });
-        // Post Section
+        // Tour Post Section
         $('.tf-post-id-filter-options').select2({
             dropdownCssClass: 'tf-booking-filter-modal',
             placeholder: "Tour Name",
             allowClear: true
         });
+        // Hotel Post Section
+        $('.tf-hotel-id-filter-options').select2({
+            dropdownCssClass: 'tf-booking-filter-modal',
+            placeholder: "Hotel Name",
+            allowClear: true
+        });
+        // Apartment Post Section
+        $('.tf-apartment-id-filter-options').select2({
+            dropdownCssClass: 'tf-booking-filter-modal',
+            placeholder: "Apartment Name",
+            allowClear: true
+        });
+
         // Checked Section
         $('.tf-tour-checkinout-options').select2({
             dropdownCssClass: 'tf-booking-checkinout-filter-modal',
@@ -276,7 +289,7 @@
          * Filter Post Perameter Passing
          *
          */
-        $('.tf-post-id-filter-options').change(function() {
+        $('.tf-post-id-filter-options, .tf-hotel-id-filter-options, .tf-apartment-id-filter-options').change(function() {
             let changeValue = $(this).val();
             $('.tf-preloader-box').show();
             let currentURL = window.location.href;
