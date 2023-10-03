@@ -25,7 +25,7 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
 			}
 
 			$room_index = str_replace( array( '[', ']', 'room' ), '', $this->parent_field );
-			$unique_id = ! empty( $rooms[ $room_index ]['unique_id'] ) ? $rooms[ $room_index ]['unique_id'] : '';
+			$unique_id  = ! empty( $rooms[ $room_index ]['unique_id'] ) ? $rooms[ $room_index ]['unique_id'] : '';
 			$pricing_by = ! empty( $rooms[ $room_index ]['pricing-by'] ) ? $rooms[ $room_index ]['pricing-by'] : '';
 			?>
             <div class="tf-room-cal-wrap">
@@ -59,7 +59,7 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
 
                     <div class="tf-field-select" style="width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Status', 'tourfic' ); ?></label>
-                        <select name="tf_room__status" class="tf-select">
+                        <select name="tf_room_status" class="tf-select">
                             <option value="available"><?php echo __( 'Available', 'tourfic' ); ?></option>
                             <option value="unavailable"><?php echo __( 'Unavailable', 'tourfic' ); ?></option>
                         </select>
@@ -73,6 +73,7 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
                     </div>
 
                 </div>
+                <input type="hidden" name="<?php echo esc_attr( $this->field_name() ); ?>" id="<?php echo esc_attr( $this->field_name() ); ?>" value='<?php echo $this->value; ?>'/>
             </div>
 			<?php
 		}

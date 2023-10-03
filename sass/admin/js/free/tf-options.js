@@ -515,15 +515,15 @@
                     setCheckInOut(startTime, endTime, self.roomCalData);
                     let priceBy = $(self.container).closest('.tf-single-repeater-room').find('.tf_room_pricing_by').val();
                     if (priceBy === '1') {
-                        if (typeof event.extendedProps.tf_room_price != 'undefined') {
-                            $("[name='tf_room_price']", self.roomCalData).val(event.extendedProps.tf_room_price);
+                        if (typeof event.extendedProps.price != 'undefined') {
+                            $("[name='tf_room_price']", self.roomCalData).val(event.extendedProps.price);
                         }
                     } else {
-                        if (typeof event.extendedProps.tf_room_adult_price != 'undefined') {
-                            $("[name='tf_room_adult_price']", self.roomCalData).val(event.extendedProps.tf_room_adult_price);
+                        if (typeof event.extendedProps.adult_price != 'undefined') {
+                            $("[name='tf_room_adult_price']", self.roomCalData).val(event.extendedProps.adult_price);
                         }
-                        if (typeof event.extendedProps.tf_room_child_price != 'undefined') {
-                            $("[name='tf_room_child_price']", self.roomCalData).val(event.extendedProps.tf_room_child_price);
+                        if (typeof event.extendedProps.child_price != 'undefined') {
+                            $("[name='tf_room_child_price']", self.roomCalData).val(event.extendedProps.child_price);
                         }
                     }
                     if (event.extendedProps.status) {

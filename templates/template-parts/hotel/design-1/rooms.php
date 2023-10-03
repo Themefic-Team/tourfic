@@ -13,7 +13,7 @@ foreach ( $rooms as $key => $room ) {
 <div class="tf-rooms-sections tf-mb-50 tf-template-section">
     <h2 class="section-heading tf-section-title"><?php echo !empty($meta['room-section-title']) ? esc_html($meta['room-section-title']) : __( 'Available Rooms', 'tourfic' ); ?></h2>
     <?php do_action( 'tf_hotel_features_filter', $rm_features, 10 ) ?>
-    
+
     <div class="tf-rooms" id="rooms">
         <!-- Loader Image -->
         <div id="tour_room_details_loader">
@@ -21,7 +21,7 @@ foreach ( $rooms as $key => $room ) {
                 <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
             </div>
         </div>
-        
+
         <!-- Room Table -->
         <table class="tf-availability-table">
             <thead>
@@ -45,12 +45,24 @@ foreach ( $rooms as $key => $room ) {
                     $child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 
                     if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avil_by_date == true ) {
-                        $repeat_by_date = ! empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
-                        if ( $pricing_by == '1' ) {
-                            $prices = wp_list_pluck( $repeat_by_date, 'price' );
-                        } else {
-                            $prices = wp_list_pluck( $repeat_by_date, 'adult_price' );
-                        }
+	                    $avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
+	                    if ($pricing_by == '1') {
+		                    $prices = array();
+
+		                    foreach ($avail_date as $date => $data) {
+			                    if ($data['status'] == 'available') {
+				                    $prices[] = $data['price'];
+			                    }
+		                    }
+	                    } else {
+		                    $prices = array();
+
+		                    foreach ($avail_date as $date => $data) {
+			                    if ($data['status'] == 'available') {
+				                    $prices[] = $data['adult_price'];
+			                    }
+		                    }
+	                    }
                         if ( ! empty( $prices ) ) {
                             $range_price = [];
                             foreach ( $prices as $single ) {
@@ -88,11 +100,11 @@ foreach ( $rooms as $key => $room ) {
                                     }
                                 ?>
 
-                                <?php 
+                                <?php
                                 $room_preview_img = ! empty( $room['room_preview_img'] ) ? $room['room_preview_img'] : '';
                                 if(!empty($room_preview_img)){ ?>
                                 <div class="tf-room-preview-img">
-                                    <?php 
+                                    <?php
                                     if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ){
                                     ?>
                                     <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $key : '' ?>"
@@ -100,7 +112,7 @@ foreach ( $rooms as $key => $room ) {
                                         <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php _e("Room Image","tourfic"); ?>">
                                         <!-- <span><?php //_e("Best Offer", "tourfic"); ?></span> -->
                                     </a>
-                                    <?php 
+                                    <?php
                                     }else{ ?>
                                     <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php _e("Room Image","tourfic"); ?>">
                                     <!-- <span><?php //_e("Best Offer", "tourfic"); ?></span> -->
@@ -110,21 +122,21 @@ foreach ( $rooms as $key => $room ) {
                                 <div class="tf-features-infos" style="<?php echo !empty($room_preview_img) ? 'width: 70%' : ''; ?>">
                                     <div class="tf-room-type">
                                         <div class="tf-room-title">
-                                            <?php 
+                                            <?php
                                             if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_room_details_gall ){
                                             ?>
                                             <h3>
                                                 <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? $room['unique_id'] . $key : '' ?>"
                                                 data-hotel="<?php echo $post_id; ?>"><?php echo esc_html( $room['title'] ); ?></a>
                                             </h3>
-                                            <?php 
+                                            <?php
                                             }else{ ?>
                                             <h3><?php echo esc_html( $room['title'] ); ?></h3>
                                             <?php } ?>
                                         </div>
                                         <div class="bed-facilities">
                                             <p>
-                                            <?php echo substr(wp_strip_all_tags($room['description']), 0, 120). '...'; ?>    
+                                            <?php echo substr(wp_strip_all_tags($room['description']), 0, 120). '...'; ?>
                                             </p>
                                         </div>
                                     </div>
@@ -135,7 +147,7 @@ foreach ( $rooms as $key => $room ) {
                                         <?php if ( $bed ) { ?>
                                             <li><i class="fas fa-bed"></i> <?php echo $bed; ?><?php _e( ' Number of Beds', 'tourfic' ); ?></li>
                                         <?php } ?>
-                                        <?php 
+                                        <?php
                                         if( !empty($room['features']) ){
                                         $tf_room_fec_key = 1;
                                         foreach ( $room['features'] as $feature ) {
@@ -156,7 +168,7 @@ foreach ( $rooms as $key => $room ) {
                                             <?php echo $room_term->name; ?>
                                         </li>
                                         <?php } $tf_room_fec_key++; } } ?>
-                                        <?php 
+                                        <?php
                                         if(!empty($room['features'])){
                                             if(count($room['features']) > 3){
                                                 echo '<span>More....</span>';
@@ -179,7 +191,7 @@ foreach ( $rooms as $key => $room ) {
                                     <?php } ?>
                                 </div>
                             </div>
-                            
+
                         </td>
                         <td class="pax">
                             <div style="text-align:center; width: 100%;"><?php echo __("Pax:", "tourfic"); ?></div>
@@ -203,11 +215,11 @@ foreach ( $rooms as $key => $room ) {
                                         <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
                                     </div>
                                     <div class="tf-top">
-                                        <?php 
+                                        <?php
                                         if(!empty($child_age_limit)){
                                             printf(__('Children Age Limit %s Years', 'tourfic'), $child_age_limit);
                                         }else{
-                                            _e( 'Number of Children', 'tourfic' ); 
+                                            _e( 'Number of Children', 'tourfic' );
                                         }
                                         ?>
                                         <i class="tool-i"></i>
@@ -221,7 +233,7 @@ foreach ( $rooms as $key => $room ) {
                                 ?>
                                 <span class="tf-price"><?php echo $price; ?></span>
                                 <div class="price-per-night">
-                                    <?php 
+                                    <?php
                                     if($multi_by_date){
                                         esc_html_e( 'per night', 'tourfic' );
                                     }else{
@@ -233,7 +245,7 @@ foreach ( $rooms as $key => $room ) {
                                 ?>
                                 <span class="tf-price"><?php echo $price; ?></span>
                                 <div class="price-per-night">
-                                    <?php 
+                                    <?php
                                     if($multi_by_date){
                                         esc_html_e( 'per person/night', 'tourfic' );
                                     }else{
@@ -243,11 +255,11 @@ foreach ( $rooms as $key => $room ) {
                                 <?php
                             }
                             ?>
-                            
+
                             <button class="hotel-room-availability tf-btn-normal btn-secondary" type="submit" style="margin: 0 auto;">
                                 <?php esc_html_e( 'Check Availability', 'tourfic' ); ?>
                             </button>
-                            
+
                         </td>
                     </tr>
                     <?php

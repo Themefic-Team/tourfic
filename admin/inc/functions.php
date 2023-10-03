@@ -248,24 +248,25 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 
 		$room_avail_data = [];
 		for ( $i = $check_in; $i <= $check_out; $i = strtotime( '+1 day', $i ) ) {
-			$tf_room_date                     = date( 'd/m/Y', $i );
+			$tf_room_date                     = date( 'Y/m/d', $i );
 			$tf_room_data                     = [
-				'check_in'             => $i,
-				'check_out'            => $i,
-				'price_by'             => $price_by,
-				'tf_room_price'       => $tf_room_price,
-				'tf_room_adult_price' => $tf_room_adult_price,
-				'tf_room_child_price' => $tf_room_child_price,
-				'status'               => $status
+				'check_in'    => $tf_room_date,
+				'check_out'   => $tf_room_date,
+				'price_by'    => $price_by,
+				'price'       => $tf_room_price,
+				'adult_price' => $tf_room_adult_price,
+				'child_price' => $tf_room_child_price,
+				'status'      => $status
 			];
 			$room_avail_data[ $tf_room_date ] = $tf_room_data;
 		}
 
 		$hotel_avail_data = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
-		if ( isset( $hotel_avail_data['room'][ $room_index ]['availability'] ) && ! empty( $hotel_avail_data['room'][ $room_index ]['availability'] ) ) {
-			$room_avail_data = array_merge( $hotel_avail_data['room'][ $room_index ]['availability'], $room_avail_data );
+		$avail_date       = json_decode( $hotel_avail_data['room'][ $room_index ]['avail_date'], true );
+		if ( isset( $avail_date ) && ! empty( $avail_date ) ) {
+			$room_avail_data = array_merge( $avail_date, $room_avail_data );
 		}
-		$hotel_avail_data['room'][ $room_index ]['availability'] = $room_avail_data;
+		$hotel_avail_data['room'][ $room_index ]['avail_date'] = json_encode( $room_avail_data );
 		update_post_meta( $hotel_id, 'tf_hotels_opt', $hotel_avail_data );
 
 		wp_send_json_success( [
@@ -289,14 +290,19 @@ if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 		$room_index = isset( $_POST['room_index'] ) ? intval( $_POST['room_index'] ) : '';
 
 		$hotel_avail_data = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
-		$room_avail_data  = isset( $hotel_avail_data['room'][ $room_index ]['availability'] ) && ! empty( $hotel_avail_data['room'][ $room_index ]['availability'] ) ? $hotel_avail_data['room'][ $room_index ]['availability'] : [];
-		$room_avail_data  = array_values( $room_avail_data );
-		$room_avail_data  = array_map( function ( $item ) {
-			$item['start'] = date( 'Y-m-d', $item['check_in'] );
-			$item['title'] = $item['price_by'] == '1' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['tf_room_price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['tf_room_adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['tf_room_child_price'] );
+		$room_avail_data  = isset( $hotel_avail_data['room'][ $room_index ]['avail_date'] ) && ! empty( $hotel_avail_data['room'][ $room_index ]['avail_date'] ) ? json_decode( $hotel_avail_data['room'][ $room_index ]['avail_date'], true ) : [];
 
-			return $item;
-		}, $room_avail_data );
+		if ( ! empty( $room_avail_data ) && is_array( $room_avail_data ) ) {
+			$room_avail_data = array_values( $room_avail_data );
+			$room_avail_data = array_map( function ( $item ) {
+				$item['start'] = date( 'Y-m-d', strtotime( $item['check_in'] ) );
+				$item['title'] = $item['price_by'] == '1' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
+
+				return $item;
+			}, $room_avail_data );
+		} else {
+			$room_avail_data = [];
+		}
 
 		echo json_encode( $room_avail_data );
 		die();
