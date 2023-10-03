@@ -352,6 +352,7 @@
 // Booking Details Single Page
 .tf-booking-details-preview{
     margin-top: 10px;
+    margin-right: 20px;
     .tf-details-preview-header{
         .tf-back{
             a{
@@ -395,6 +396,19 @@
                     &:first-child{
                         padding-left: 0px;
                     }
+                    @media #{$max767}{
+                        padding: 0px 5px;
+                    }
+                    @media #{$max640}{
+                        padding: 5px 0;
+                        display: block;
+                    }
+                    &:nth-child(2),
+                    &:nth-child(4){
+                        @media #{$max640}{
+                            display: none;
+                        }
+                    }
                 }
             }
         }
@@ -405,7 +419,13 @@
         align-items: flex-start;
         align-self: stretch;
         gap: 24px;
+        @media #{$max767}{
+            display: flow-root;
+        }
         .tf-booking-details{
+            @media #{$max767}{
+                width: auto;
+            }
             width: calc(100% - 260px);
             .details-box{
                 border-radius: 8px;
@@ -439,6 +459,9 @@
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     gap: 24px;
+                    @media #{$max1200}{
+                        grid-template-columns: 1fr;
+                    }
                     h3{
                         color: #87888B;
                         font-family: Segoe UI;
@@ -482,6 +505,9 @@
                     }
                     .tf-checkin-by{
                         min-height: 220px;
+                        @media #{$max1200}{
+                            min-height: auto;
+                        }
                     }
                     .tf-voucher-preview{
                         background-color: transparent;
@@ -524,9 +550,20 @@
                 }
                 .tf-visitor-grid-box{
                     grid-template-columns: 1fr 1fr 1fr;
+                    @media #{$max1200}{
+                        grid-template-columns: 1fr;
+                    }
                 }
                 .tf-pricing-grid-box{
                     grid-template-columns: 1fr;
+                }
+                .tf-customer-details-boxs{
+                    .tf-single-box{
+                        min-height: 415px;
+                        @media #{$max1200}{
+                            min-height: auto;
+                        }
+                    }
                 }
             }
         }
@@ -536,6 +573,9 @@
             border-radius: 8px;
             background: #FFF;
             margin-top: 24px;
+            @media #{$max767}{
+                width: auto;
+            }
             .tf-filter-selection{
                 margin-top: 45px;
                 h3{
@@ -651,8 +691,8 @@
     .visitor-details-edit-popup{
         border-radius: 8px;
         border: 1px solid #f0f0f1;
-        background: #ededf8;
-        padding: 8px 20px;
+        background: #fff;
+        padding: 8px 0px 8px 20px;
         position: fixed;
         left: 50%;
         top: 25%;
@@ -689,7 +729,7 @@
             }
             .tf-single-tour-traveller{
                 padding-bottom: 16px;
-                padding-right: 1px;
+                padding-right: 20px;
                 h4{
                     color: #333D46;
                     font-family: inherit;
@@ -698,6 +738,7 @@
                     font-weight: 600 !important;
                     line-height: 20px !important;
                     margin: 0px;
+                    margin-bottom: 5px;
                 }
                 .traveller-info{
                     display: grid;
@@ -742,6 +783,7 @@
         }
     }
     .details-update-btn{
+        padding-right: 20px;
         button{
             border-radius: 4px;
             background: #003C7A;
@@ -774,7 +816,7 @@
         border-radius: 8px;
         border: 1px solid #f0f0f1;
         background: #fff;
-        padding: 8px 20px;
+        padding: 20px;
         position: fixed;
         left: 50%;
         top: 25%;

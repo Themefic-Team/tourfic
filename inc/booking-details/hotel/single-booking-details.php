@@ -43,7 +43,7 @@
                 <h4>
                     <?php _e("Booking details", "tourfic"); ?>
                 </h4>
-                <div class="tf-grid-box">
+                <div class="tf-grid-box tf-customer-details-boxs">
                     <?php
                     $tf_billing_details = json_decode($tf_order_details->billing_details);
                     if(!empty($tf_billing_details)){ ?>
