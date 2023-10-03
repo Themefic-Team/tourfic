@@ -1497,16 +1497,16 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	$total_dis_dates = [];
 	$maxadults       = [];
 	$maxchilds       = [];
+
 	if ( ! empty( $rooms ) ):
 		foreach ( $rooms as $key => $room ) {
-			if ( ! empty( $room['repeat_by_date'] ) ) {
-				$disabled_dates = $room['repeat_by_date'];
-				//iterate all the available disabled dates
-				if ( ! empty( $disabled_dates ) ) {
-					foreach ( $disabled_dates as $date ) {
-						$dateArr           = explode( ',', ! empty( $date['disabled_date'] ) ? $date['disabled_date'] : '' );
-						$dateArr           = sprintf( '"%s"', implode( '","', $dateArr ) );
-						$total_dis_dates[] = $dateArr;
+			if ( ! empty( $room['avail_date'] ) ) {
+				$avail_dates = json_decode( $room['avail_date'], true );
+				if ( ! empty( $avail_dates ) ) {
+					foreach ( $avail_dates as $date ) {
+						if($date['status'] === 'unavailable'){
+							$total_dis_dates[] = $date['check_in'];
+						}
 					}
 				}
 			}

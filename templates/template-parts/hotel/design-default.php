@@ -428,12 +428,24 @@
                                     $child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 
                                     if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avil_by_date == true ) {
-                                        $repeat_by_date = ! empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
-                                        if ( $pricing_by == '1' ) {
-                                            $prices = wp_list_pluck( $repeat_by_date, 'price' );
-                                        } else {
-                                            $prices = wp_list_pluck( $repeat_by_date, 'adult_price' );
-                                        }
+	                                    $avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
+	                                    if ($pricing_by == '1') {
+		                                    $prices = array();
+
+		                                    foreach ($avail_date as $date => $data) {
+			                                    if ($data['status'] == 'available') {
+				                                    $prices[] = $data['price'];
+			                                    }
+		                                    }
+	                                    } else {
+		                                    $prices = array();
+
+		                                    foreach ($avail_date as $date => $data) {
+			                                    if ($data['status'] == 'available') {
+				                                    $prices[] = $data['adult_price'];
+			                                    }
+		                                    }
+	                                    }
                                         if ( ! empty( $prices ) ) {
                                             $range_price = [];
                                             foreach ( $prices as $single ) {
