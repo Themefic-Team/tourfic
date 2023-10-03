@@ -591,6 +591,7 @@
             let cal = container.find('.tf-room-cal');
             let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
             let priceBy = container.closest('.tf-single-repeater-room').find('.tf_room_pricing_by').val();
+            let avail_date = container.find('.avail_date');
             data.push({name: 'action', value: 'tf_add_hotel_availability'});
             data.push({name: 'price_by', value: priceBy});
 
@@ -606,6 +607,7 @@
                 success: function (response) {
                     if (typeof response == 'object') {
                         if (response.data.status === true) {
+                            avail_date.val(response.data.avail_date)
                             notyf.success(response.data.message);
                             resetForm(container);
 

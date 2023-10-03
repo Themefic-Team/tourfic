@@ -270,8 +270,9 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 		update_post_meta( $hotel_id, 'tf_hotels_opt', $hotel_avail_data );
 
 		wp_send_json_success( [
-			'status'  => true,
-			'message' => __( 'Availability updated successfully.', 'tourfic' ),
+			'status'     => true,
+			'message'    => __( 'Availability updated successfully.', 'tourfic' ),
+			'avail_date' => json_encode( $room_avail_data ),
 		] );
 
 		die();
@@ -297,6 +298,11 @@ if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 			$room_avail_data = array_map( function ( $item ) {
 				$item['start'] = date( 'Y-m-d', strtotime( $item['check_in'] ) );
 				$item['title'] = $item['price_by'] == '1' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
+
+				if ( $item['status'] == 'unavailable' ) {
+					$item['display'] = 'background';
+					$item['color']   = '#003c79';
+				}
 
 				return $item;
 			}, $room_avail_data );

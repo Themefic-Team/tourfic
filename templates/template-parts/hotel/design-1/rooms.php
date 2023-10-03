@@ -44,7 +44,7 @@ foreach ( $rooms as $key => $room ) {
                     $multi_by_date = ! empty( $room['price_multi_day'] ) ? ! empty( $room['price_multi_day'] ) : false;
                     $child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 
-                    if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avil_by_date == true ) {
+                    if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avil_by_date == '1' ) {
 	                    $avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
 	                    if ($pricing_by == '1') {
 		                    $prices = array();
