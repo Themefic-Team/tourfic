@@ -105,7 +105,9 @@
     </thead>
 
     <tbody>
-        <?php foreach($tours_orders_result as $tour){ ?>
+        <?php 
+        $tf_key = 1;
+        foreach($tours_orders_result as $tour){ ?>
         <tr>
             <th class="check-column">
                 <input type="checkbox" name="order_id[]" value="<?php echo esc_html( $tour['id'] ); ?>">
@@ -175,7 +177,16 @@
                 ?>
             </td>
         </tr>
-        <?php } ?>
+        <?php 
+        if ( !defined( 'TF_PRO' ) && $tf_key == 15) { ?>
+            <tr class="pro-row" style="text-align: center; background-color: #ededf8">
+                <td colspan="8" style="text-align: center;">
+                    <a href="https://tourfic.com/" target="_blank">
+                        <h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;"><?php _e( 'Upgrade to Pro Version to See More', 'tourfic' ); ?></h3>
+                    </a>
+                </td>
+            </tr>
+        <?php } $tf_key++; } ?>
     </tbody>
     <tfoot>
         <tr>

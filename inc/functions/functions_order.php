@@ -126,27 +126,6 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 				$tours_orders_result = tourfic_order_table_data( $tf_orders_select );
 			}
 		}
-		if ( $current_user_role == 'tf_vendor' ) {
-			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-
-				$tf_orders_select    = array(
-					'select'    => "*",
-					'post_type' => "tour",
-					'author'    => $current_user_id,
-					'limit'     => ""
-				);
-				$tours_orders_result = tourfic_vendor_order_table_data( $tf_orders_select );
-
-			} else {
-				$tf_orders_select    = array(
-					'select'    => "*",
-					'post_type' => "tour",
-					'author'    => $current_user_id,
-					'limit'     => "LIMIT 15"
-				);
-				$tours_orders_result = tourfic_vendor_order_table_data( $tf_orders_select );
-			}
-		}
 
 		?>
 
@@ -267,25 +246,6 @@ if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
 						'query'  => "post_type = 'hotel' ORDER BY order_id DESC LIMIT 15"
 					);
 					$hotel_orders_result = tourfic_order_table_data( $tf_orders_select );
-				}
-			}
-			if ( $current_user_role == 'tf_vendor' ) {
-				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-					$tf_orders_select    = array(
-						'select'    => "*",
-						'post_type' => "hotel",
-						'author'    => $current_user_id,
-						'limit'     => ""
-					);
-					$hotel_orders_result = tourfic_vendor_order_table_data( $tf_orders_select );
-				} else {
-					$tf_orders_select    = array(
-						'select'    => "*",
-						'post_type' => "hotel",
-						'author'    => $current_user_id,
-						'limit'     => "LIMIT 15"
-					);
-					$hotel_orders_result = tourfic_vendor_order_table_data( $tf_orders_select );
 				}
 			}
 
@@ -413,25 +373,7 @@ if ( ! function_exists( 'tf_apartment_booking_page_callback' ) ) {
 				$apartment_orders_result = tourfic_order_table_data( $tf_orders_select );
 			}
 		}
-		if ( $current_user_role == 'tf_vendor' ) {
-			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-				$tf_orders_select        = array(
-					'select'    => "*",
-					'post_type' => "apartment",
-					'author'    => $current_user_id,
-					'limit'     => ""
-				);
-				$apartment_orders_result = tourfic_vendor_order_table_data( $tf_orders_select );
-			} else {
-				$tf_orders_select        = array(
-					'select'    => "*",
-					'post_type' => "apartment",
-					'author'    => $current_user_id,
-					'limit'     => "LIMIT 15"
-				);
-				$apartment_orders_result = tourfic_vendor_order_table_data( $tf_orders_select );
-			}
-		}
+		
 		?>
 
 		<div class="wrap tf_booking_details_wrap" style="margin-right: 20px;">

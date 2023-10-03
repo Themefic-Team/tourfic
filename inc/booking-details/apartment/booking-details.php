@@ -35,14 +35,14 @@
                 <select class="tf-tour-filter-options tf-apartment-id-filter-options">
                     <option value=""><?php _e("Apartment name", "tourfic"); ?></option>
                     <?php 
-                    $tf_hotel_list = array(
+                    $tf_apartment_list = array(
                         'posts_per_page' => - 1,
-                        'post_type'      => 'tf_hotel',
+                        'post_type'      => 'tf_apartment',
                         'post_status'    => 'publish'
                     );
-                    $tf_hotel_list_query = new WP_Query( $tf_hotel_list );
-                    if ( $tf_hotel_list_query->have_posts() ):
-                        while ( $tf_hotel_list_query->have_posts() ) : $tf_hotel_list_query->the_post();
+                    $tf_apartment_list_query = new WP_Query( $tf_apartment_list );
+                    if ( $tf_apartment_list_query->have_posts() ):
+                        while ( $tf_apartment_list_query->have_posts() ) : $tf_apartment_list_query->the_post();
                     ?>
                     <option value="<?php echo get_the_ID(); ?>" <?php echo !empty($_GET['post']) && get_the_ID()==$_GET['post'] ? esc_attr( 'selected' ) : ''; ?>><?php echo get_the_title(); ?></option>
                     <?php 
@@ -92,7 +92,9 @@
     </thead>
 
     <tbody>
-        <?php foreach($apartment_orders_result as $apartment){ ?>
+        <?php 
+        $tf_key = 1;
+        foreach($apartment_orders_result as $apartment){ ?>
         <tr>
             <th class="check-column">
                 <input type="checkbox" name="order_id[]" value="<?php echo esc_html( $apartment['id'] ); ?>">
@@ -145,7 +147,16 @@
                 ?>
             </td>
         </tr>
-        <?php } ?>
+        <?php 
+        if ( !defined( 'TF_PRO' ) && $tf_key == 15) { ?>
+            <tr class="pro-row" style="text-align: center; background-color: #ededf8">
+                <td colspan="7" style="text-align: center;">
+                    <a href="https://tourfic.com/" target="_blank">
+                        <h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;"><?php _e( 'Upgrade to Pro Version to See More', 'tourfic' ); ?></h3>
+                    </a>
+                </td>
+            </tr>
+        <?php } $tf_key++; } ?>
     </tbody>
     <tfoot>
         <tr>
