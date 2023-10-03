@@ -3995,11 +3995,12 @@ Steps
 .select2-dropdown.tf-booking-filter-modal .select2-results ul scrollbar,
 .select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul scrollbar {
   width: 5px;
+  border-radius: 10px !important;
 }
 .select2-dropdown.tf-booking-filter-modal .select2-results ul scrollbar-thumb,
 .select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul scrollbar-thumb {
   background-color: #aaa;
-  border-radius: 4px;
+  border-radius: 10px !important;
 }
 .select2-dropdown.tf-booking-filter-modal .select2-results ul li,
 .select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul li {
@@ -4363,10 +4364,9 @@ Steps
   display: none;
 }
 .visitor-details-edit-form .visitor-details-edit-popup {
-  border-radius: 8px;
+  border-radius: 24px;
   border: 1px solid #f0f0f1;
   background: #fff;
-  padding: 8px 0px 8px 20px;
   position: fixed;
   left: 50%;
   top: 25%;
@@ -4374,18 +4374,31 @@ Steps
   max-width: 700px;
   margin-left: -350px;
 }
-.visitor-details-edit-form .visitor-details-edit-popup .tf-booking-times span {
-  position: absolute;
-  right: -15px;
-  top: -15px;
-  height: 40px;
-  width: 40px;
+.visitor-details-edit-form .visitor-details-edit-popup .tf-visitor-details-edit-header {
+  padding: 16px;
+  border-bottom: 0.3px solid #CCCED1;
+  display: flex;
+  justify-content: space-between;
+}
+.visitor-details-edit-form .visitor-details-edit-popup .tf-visitor-details-edit-header h2 {
+  color: #003C79;
+  font-family: Segoe UI;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  margin: 0px;
+}
+.visitor-details-edit-form .visitor-details-edit-popup .tf-visitor-details-edit-header .tf-booking-times span {
+  height: 24px;
+  width: 24px;
   background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border-radius: 50%;
+  border: 0.3px solid #CCCED1;
+  border-radius: 5px;
 }
 .visitor-details-edit-form .visitor-details-edit-popup .visitor-details-popup {
   max-height: 400px;
@@ -4393,6 +4406,7 @@ Steps
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #aaa #eee;
+  padding: 16px;
 }
 .visitor-details-edit-form .visitor-details-edit-popup .visitor-details-popup scrollbar {
   width: 5px;
@@ -4403,10 +4417,9 @@ Steps
 }
 .visitor-details-edit-form .visitor-details-edit-popup .visitor-details-popup .tf-single-tour-traveller {
   padding-bottom: 16px;
-  padding-right: 20px;
 }
 .visitor-details-edit-form .visitor-details-edit-popup .visitor-details-popup .tf-single-tour-traveller h4 {
-  color: #333D46;
+  color: #1D2327;
   font-family: inherit;
   font-size: 16px !important;
   font-style: normal !important;
@@ -4457,7 +4470,7 @@ Steps
   margin: 0;
 }
 .visitor-details-edit-form .details-update-btn {
-  padding-right: 20px;
+  padding: 16px;
 }
 .visitor-details-edit-form .details-update-btn button {
   border-radius: 4px;
@@ -4486,10 +4499,9 @@ Steps
   display: none;
 }
 .tf-voucher-quick-view-box .voucher-quick-view {
-  border-radius: 8px;
+  border-radius: 24px;
   border: 1px solid #f0f0f1;
   background: #fff;
-  padding: 20px;
   position: fixed;
   left: 50%;
   top: 25%;
@@ -4497,18 +4509,31 @@ Steps
   max-width: 700px;
   margin-left: -350px;
 }
-.tf-voucher-quick-view-box .voucher-quick-view .tf-quick-view-times span {
-  position: absolute;
-  right: -15px;
-  top: -15px;
-  height: 40px;
-  width: 40px;
+.tf-voucher-quick-view-box .voucher-quick-view .tf-voucher-details-preview-header {
+  padding: 16px;
+  border-bottom: 0.3px solid #CCCED1;
+  display: flex;
+  justify-content: space-between;
+}
+.tf-voucher-quick-view-box .voucher-quick-view .tf-voucher-details-preview-header h2 {
+  color: #003C79;
+  font-family: Segoe UI;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  margin: 0px;
+}
+.tf-voucher-quick-view-box .voucher-quick-view .tf-voucher-details-preview-header .tf-quick-view-times span {
+  height: 24px;
+  width: 24px;
   background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border-radius: 50%;
+  border: 0.3px solid #CCCED1;
+  border-radius: 5px;
 }
 
 .tf-visitor-vouchers {
@@ -4517,6 +4542,7 @@ Steps
   background-repeat: repeat;
   background-size: cover;
   background-position: center;
+  margin: 16px;
 }
 .tf-visitor-vouchers .tf-voucher-header {
   display: flex;

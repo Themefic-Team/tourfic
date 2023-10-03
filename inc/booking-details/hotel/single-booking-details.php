@@ -305,6 +305,7 @@
                         <path d="M5 7.5L10 12.5L15 7.5" stroke="#F0F0F1" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </label>
+                    <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo $tf_order_details->id; ?>">
                     <ul>
                         <li class="checkin" data-value="in"><?php _e("Checked in", "tourfic"); ?></li>
                         <li class="checkout" data-value="out"><?php _e("Checked Out", "tourfic"); ?></li>

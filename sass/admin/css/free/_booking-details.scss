@@ -305,11 +305,12 @@
             scrollbar-width: thin;
             scrollbar-color: #aaa #eee;
             scrollbar {
-                width: 5px; 
+                width: 5px;
+                border-radius: 10px !important;
             }
             scrollbar-thumb {
                 background-color: #aaa;
-                border-radius: 4px;
+                border-radius: 10px !important;
             }
             li{
                 display: block;
@@ -689,29 +690,41 @@
     top: 0;
     display: none;
     .visitor-details-edit-popup{
-        border-radius: 8px;
+        border-radius: 24px;
         border: 1px solid #f0f0f1;
         background: #fff;
-        padding: 8px 0px 8px 20px;
         position: fixed;
         left: 50%;
         top: 25%;
         z-index: 999;
         max-width: 700px;
         margin-left: -350px;
-        .tf-booking-times{
-            span{
-                position: absolute;
-                right: -15px;
-                top: -15px;
-                height: 40px;
-                width: 40px;
-                background: #fff;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                border-radius: 50%;
+        .tf-visitor-details-edit-header{
+            padding: 16px;
+            border-bottom: 0.3px solid #CCCED1;
+            display: flex;
+            justify-content: space-between;
+            h2{
+                color: #003C79;
+                font-family: Segoe UI;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 24px;
+                margin: 0px;
+            }
+            .tf-booking-times{
+                span{
+                    height: 24px;
+                    width: 24px;
+                    background: #fff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    border: 0.3px solid #CCCED1;
+                    border-radius: 5px;
+                }
             }
         }
         .visitor-details-popup{
@@ -720,6 +733,7 @@
             overflow-y: auto;
             scrollbar-width: thin;
             scrollbar-color: #aaa #eee;
+            padding: 16px;
             scrollbar {
                 width: 5px; 
             }
@@ -729,9 +743,8 @@
             }
             .tf-single-tour-traveller{
                 padding-bottom: 16px;
-                padding-right: 20px;
                 h4{
-                    color: #333D46;
+                    color: #1D2327;
                     font-family: inherit;
                     font-size: 16px !important;
                     font-style: normal !important;
@@ -783,7 +796,7 @@
         }
     }
     .details-update-btn{
-        padding-right: 20px;
+        padding: 16px;
         button{
             border-radius: 4px;
             background: #003C7A;
@@ -813,29 +826,41 @@
     top: 0;
     display: none;
     .voucher-quick-view{
-        border-radius: 8px;
+        border-radius: 24px;
         border: 1px solid #f0f0f1;
         background: #fff;
-        padding: 20px;
         position: fixed;
         left: 50%;
         top: 25%;
         z-index: 999;
         max-width: 700px;
         margin-left: -350px;
-        .tf-quick-view-times{
-            span{
-                position: absolute;
-                right: -15px;
-                top: -15px;
-                height: 40px;
-                width: 40px;
-                background: #fff;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                border-radius: 50%;
+        .tf-voucher-details-preview-header{
+            padding: 16px;
+            border-bottom: 0.3px solid #CCCED1;
+            display: flex;
+            justify-content: space-between;
+            h2{
+                color: #003C79;
+                font-family: Segoe UI;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 24px;
+                margin: 0px;
+            }
+            .tf-quick-view-times{
+                span{
+                    height: 24px;
+                    width: 24px;
+                    background: #fff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    border: 0.3px solid #CCCED1;
+                    border-radius: 5px;
+                }
             }
         }
     }
@@ -846,6 +871,7 @@
     background-repeat: repeat;
     background-size: cover;
     background-position: center;
+    margin: 16px;
     .tf-voucher-header{
         display: flex;
         align-items: center;

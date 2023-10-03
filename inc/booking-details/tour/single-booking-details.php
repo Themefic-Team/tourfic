@@ -167,7 +167,7 @@
                                 <tr>
                                     <th><?php _e("Extra", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo esc_html($tf_tour_details->tour_extra); ?></td>
+                                    <td><?php echo $tf_tour_details->tour_extra; ?></td>
                                 </tr>
                                 <?php } ?>
                                 <?php 
@@ -520,15 +520,21 @@
 </div>
 <div class="visitor-details-edit-form">
     <form class="visitor-details-edit-popup">
-        <div class="tf-booking-times">
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="#FCFDFF"/>
-                <path d="M12 11.1111L15.1111 8L16 8.88889L12.8889 12L16 15.1111L15.1111 16L12 12.8889L8.88889 16L8 15.1111L11.1111 12L8 8.88889L8.88889 8L12 11.1111Z" fill="#666D74"/>
-                <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" stroke="#FCFDFF"/>
-                </svg>
-            </span>
+        <div class="tf-visitor-details-edit-header">
+            <h2>
+                <?php _e("Edit visitor details", "tourfic"); ?>
+            </h2>
+            <div class="tf-booking-times">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="#FCFDFF"/>
+                    <path d="M12 11.1111L15.1111 8L16 8.88889L12.8889 12L16 15.1111L15.1111 16L12 12.8889L8.88889 16L8 15.1111L11.1111 12L8 8.88889L8.88889 8L12 11.1111Z" fill="#666D74"/>
+                    <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" stroke="#FCFDFF"/>
+                    </svg>
+                </span>
+            </div>
         </div>
+        
         <div class="visitor-details-popup">
         <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo $tf_order_details->id; ?>">
         <?php 
@@ -629,15 +635,21 @@ if(!empty($tour_ides)){
 ?>
 <div class="tf-voucher-quick-view-box">
     <div class="voucher-quick-view">
-        <div class="tf-quick-view-times">
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="#FCFDFF"/>
-                <path d="M12 11.1111L15.1111 8L16 8.88889L12.8889 12L16 15.1111L15.1111 16L12 12.8889L8.88889 16L8 15.1111L11.1111 12L8 8.88889L8.88889 8L12 11.1111Z" fill="#666D74"/>
-                <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" stroke="#FCFDFF"/>
-                </svg>
-            </span>
+        <div class="tf-voucher-details-preview-header">
+            <h2>
+                <?php _e("Voucher", "tourfic"); ?>
+            </h2>
+            <div class="tf-quick-view-times">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="#FCFDFF"/>
+                    <path d="M12 11.1111L15.1111 8L16 8.88889L12.8889 12L16 15.1111L15.1111 16L12 12.8889L8.88889 16L8 15.1111L11.1111 12L8 8.88889L8.88889 8L12 11.1111Z" fill="#666D74"/>
+                    <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" stroke="#FCFDFF"/>
+                    </svg>
+                </span>
+            </div>
         </div>
+        
         <div class="tf-visitor-vouchers" style="background-image: url(<?php echo esc_url($tf_qr_watermark); ?>);">
             <div class="tf-voucher-header">
                 <?php
