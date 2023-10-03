@@ -368,7 +368,7 @@ if ( ! function_exists( 'tf_apartment_booking_page_callback' ) ) {
 			} else {
 				$tf_orders_select        = array(
 					'select' => "*",
-					'query'  => "post_type = 'apartment' ORDER BY order_id DESC LIMIT 15"
+					'query'  => "post_type = 'apartment' ORDER BY id DESC LIMIT 15"
 				);
 				$apartment_orders_result = tourfic_order_table_data( $tf_orders_select );
 			}
@@ -548,19 +548,20 @@ if ( ! function_exists( 'tf_get_all_order_id' ) ) {
 * Admin order data new field "checkinout & checkinout_by" added
 * @author Jahid
 */
-
-function tf_admin_table_alter_order_data() {
-    global $wpdb;
-    $order_table_name = $wpdb->prefix . 'tf_order_data';
-    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-    
-    // Check if the 'checkinout' & 'checkinout_by' column exists before attempting to add it
-    if ( !$wpdb->get_var("SHOW COLUMNS FROM $order_table_name LIKE 'checkinout'") &&
-	!$wpdb->get_var("SHOW COLUMNS FROM $order_table_name LIKE 'checkinout_by'") ) {
-        $sql = "ALTER TABLE $order_table_name 
-                ADD COLUMN checkinout varchar(255) NULL,
-                ADD COLUMN checkinout_by varchar(255) NULL";
-        $wpdb->query($sql);
-    }
+if ( ! function_exists( 'tf_admin_table_alter_order_data' ) ) {
+	function tf_admin_table_alter_order_data() {
+		global $wpdb;
+		$order_table_name = $wpdb->prefix . 'tf_order_data';
+		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+		
+		// Check if the 'checkinout' & 'checkinout_by' column exists before attempting to add it
+		if ( !$wpdb->get_var("SHOW COLUMNS FROM $order_table_name LIKE 'checkinout'") &&
+		!$wpdb->get_var("SHOW COLUMNS FROM $order_table_name LIKE 'checkinout_by'") ) {
+			$sql = "ALTER TABLE $order_table_name 
+					ADD COLUMN checkinout varchar(255) NULL,
+					ADD COLUMN checkinout_by varchar(255) NULL";
+			$wpdb->query($sql);
+		}
+	}
 }
 add_action('admin_init', 'tf_admin_table_alter_order_data');
