@@ -8,6 +8,7 @@
                 <?php _e("Back", "tourfic"); ?>
             </a>
         </div>
+        <input type="hidden" id="tf_email_order_id" value="<?php echo !empty($_GET['order_id']) ? esc_html( $_GET['order_id'] ) : ''; ?>">
         <?php 
         global $wpdb;
         $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s AND order_id = %s",sanitize_key( $_GET['book_id'] ), sanitize_key( $_GET['order_id'] ) ) );
@@ -501,16 +502,16 @@
 
             <div class="tf-filter-selection">
                 <h3><?php _e("Sent order mail", "tourfic"); ?></h3>
-                <div class="tf-order-status-filter">
+                <div class="tf-order-status-filter tf-order-email-resend">
                     <label>
-                        <span><?php _e("Order Mail", "tourfic"); ?></span>
+                        <span><?php _e("Resend Order Mail", "tourfic"); ?></span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M5 7.5L10 12.5L15 7.5" stroke="#F0F0F1" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </label>
                     <ul>
-                        <li><?php _e("Customer", "tourfic"); ?></li>
-                        <li><?php _e("Customer + Vendor", "tourfic"); ?></li>
+                        <li data-value="customer"><?php _e("Customer", "tourfic"); ?></li>
+                        <li data-value="vendor"><?php _e("Vendor", "tourfic"); ?></li>
                     </ul>
                 </div>
             </div>

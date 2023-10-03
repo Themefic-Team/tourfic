@@ -35,6 +35,10 @@ class TF_Handle_Emails {
         add_action( 'woocommerce_order_status_cancelled', array( $this, 'send_cancellation_email_pro' ), 10, 1 );
         //Offline Payment send confirmation mail
         add_action( 'tf_offline_payment_booking_confirmation', array( $this,'tf_offline_booking_confirmation_callback'), 10, 2 );
+
+        // Order Email resend confirmation mail
+        add_action( 'wp_ajax_tf_order_status_email_resend', array( $this,'tf_order_status_email_resend_function' ) );
+
     }
 
     /**
@@ -1104,6 +1108,130 @@ class TF_Handle_Emails {
                
         endif;
         
+    }
+
+    /**
+     * Send email when order email resend
+     * @author Jahid
+     * @since 2.10.1
+     *
+     */
+    public function tf_order_status_email_resend_function(){
+        $tf_mail_type = !empty($_POST['status']) ? esc_attr( $_POST['status'] ) : '';
+        $order_id = !empty($_POST['order_id']) ? esc_attr( $_POST['order_id'] ) : '';
+        $db_id = !empty($_POST['id']) ? esc_attr( $_POST['id'] ) : '';
+
+        global $wpdb;
+        $tf_db_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, payment_method FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $db_id ) ) );
+        if(!empty($tf_db_order) && "offline"==$tf_db_order->payment_method){
+
+        }
+
+        if(!empty($tf_db_order) && "offline"!=$tf_db_order->payment_method){
+            if( is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) ) :
+                //get order details
+                $order = wc_get_order( $order_id );
+                //get customer email
+                $order_billing_email    = $order->get_billing_email();
+
+                //email body ended
+                $email_template_settings           = $this::$tf_email_template_settings;
+                
+                $vendor_confirmation_template_id   = !empty( $email_template_settings['vendor_confirmation_email_template'] ) ? $email_template_settings['vendor_confirmation_email_template'] : '';
+                $customer_confirmation_template_id = !empty( $email_template_settings['customer_confirmation_email_template'] ) ? $email_template_settings['customer_confirmation_email_template'] : '';
+            
+
+            
+                if( function_exists( 'is_tf_pro' ) && is_tf_pro() ){
+                    //send vendor confirmation email template
+                    if( ! empty ( $tf_mail_type ) && $tf_mail_type == "vendor" ){
+                        //email settings metabox value
+                        if( ! empty ( $vendor_confirmation_template_id ) ){
+                            //get the mail template content   
+                            $vendor_confirmation_email_template   = get_post( $vendor_confirmation_template_id );
+                            $vendor_confirmation_template_content = !empty( $vendor_confirmation_email_template->post_content ) ? $vendor_confirmation_email_template->post_content : ' ';
+                            $vendor_confirmation_template_content = $this->replace_mail_tags( $vendor_confirmation_template_content, $order_id );
+                            
+                            $meta                    = get_post_meta( $vendor_confirmation_template_id, 'tf_email_templates_metabox', true );
+                            $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
+                            $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
+                            $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic-pro' );;
+                            $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
+                            $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
+                            $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
+                            $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? $meta['email_header_bg'] : array();
+                            $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '#0209af';
+                            //mail headers
+                            $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
+                            $headers  = $charset . "\r\n";
+                            $headers .= "MIME-Version: 1.0" . "\r\n";
+                            $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
+                            $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
+                            $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+                            //email body open
+                            $email_body_open                      = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg );
+                            $email_body_open                      = str_replace( '{booking_id}', $order_id, $email_body_open );
+                            $vendor_confirmation_template_content = $this->replace_mail_tags( $vendor_confirmation_template_content, $order_id );
+                            $email_body_close                     = $this->email_body_close();
+                            $vendor_email_booking_body_full       = $email_body_open . $vendor_confirmation_template_content . $email_body_close;
+                            $vendors_email  = $this->tf_get_vendor_emails( $order_id );
+                            //send mail to vendor
+                            if ( !empty( $vendors_email ) ) {
+                                foreach ( $vendors_email as $key => $vendor_email ) {
+                                //get user role by email
+                                    $user = get_user_by( 'email', $vendor_email );
+                                    $user_role = !empty( $user->roles[0] ) ? $user->roles[0] : '';
+                                    //check if user role is vendor
+                                    if( $user_role == 'tf_vendor' ){
+                                        wp_mail( $vendor_email, $email_subject, $vendor_email_booking_body_full, $headers );
+                                    }
+                                
+                                }
+                            }
+                        }
+                    }
+                }
+                //send customer confirmation email template
+                if( ! empty ( $tf_mail_type ) && $tf_mail_type == "customer" ){
+                    //email settings metabox value
+                    if( ! empty ( $customer_confirmation_template_id ) ){
+                        //echo "hels";
+                        //get the mail template content   
+                        $customer_confirmation_email_template   = get_post( $customer_confirmation_template_id );
+                        $customer_confirmation_template_content = !empty( $customer_confirmation_email_template->post_content ) ? $customer_confirmation_email_template->post_content : $this->get_email_template( 'order_confirmation','', 'customer');
+                        $customer_confirmation_template_content = $this->replace_mail_tags( $customer_confirmation_template_content, $order_id );
+                        $meta                    = get_post_meta( $customer_confirmation_template_id, 'tf_email_templates_metabox', true );
+                        $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
+                        $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
+                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : __( 'Your order received', 'tourfic-pro' );
+                        $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
+                        $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
+                        $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
+                        $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? $meta['email_header_bg'] : array();
+                        $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '#0209af';
+                        //mail headers
+                        $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
+                        $headers  = $charset . "\r\n";
+                        $headers .= "MIME-Version: 1.0" . "\r\n";
+                        $headers .= "From: $email_from_name <$email_from_email>" . "\r\n";
+                        $headers .= "Reply-To: $email_from_name <$email_from_email>" . "\r\n";
+                        $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+                        //email body open
+                        $email_body_open                        = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg);
+                        $email_body_open                        = str_replace( '{booking_id}', $order_id, $email_body_open );
+                        $customer_confirmation_template_content = $this->replace_mail_tags( $customer_confirmation_template_content, $order_id );
+                        $email_body_close                       = $this->email_body_close();
+                        $customer_email_booking_body_full       = $email_body_open . $customer_confirmation_template_content . $email_body_close;
+                        
+                        //send mail to customer
+                        wp_mail( $order_billing_email, $email_subject, $customer_email_booking_body_full, $headers );
+                    }
+                }
+                
+            endif;
+        }
+
+        die();
     }
 
 }

@@ -170,6 +170,42 @@
         });
 
         /**
+         * Ajax Order Status Email Resend
+         *
+         * tf_order_status_email_resend
+         */
+        $('.tf-order-email-resend ul li').click(function() {
+            
+            let selected_value = $(this).attr('data-value');
+            let order_id = $('#tf_email_order_id').val();
+            let db_id = $('.tf_single_order_id').val();
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_order_status_email_resend',
+                    order_id: order_id,
+                    status: selected_value,
+                    id : db_id
+                },
+                beforeSend: function (data) {
+                    $('.tf-preloader-box').show();
+                },
+                complete: function (data) {
+                    
+                },
+                success: function (data) {
+                    
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+        });
+
+        /**
          * Vouchers Popup Open
          *
          */
