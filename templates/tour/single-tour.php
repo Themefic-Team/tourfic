@@ -93,8 +93,9 @@ while ( have_posts() ) : the_post();
 	$author = !empty(get_userdata( get_post()->post_author )) ? get_userdata( get_post()->post_author) : array();
 
 	if ((is_plugin_active("tourfic-vendor/tourfic-vendor.php"))) {
-		if($vendor_contact_info == 0) {
-			if ( in_array( 'tf_vendor', (array) $author->roles ) ) {
+
+		if($vendor_contact_info == 1) {
+			if ( in_array( 'tf_vendor', $author->roles ) ) {
 				$email = !empty(tfopt("multi-vendor-setings")["email"]) ? tfopt("multi-vendor-setings")["email"] : "";
 				$phone = !empty(tfopt("multi-vendor-setings")["phone"]) ? tfopt("multi-vendor-setings")["phone"] : "";
 				$fax = !empty(tfopt("multi-vendor-setings")["fax"]) ? tfopt("multi-vendor-setings")["fax"] : "";

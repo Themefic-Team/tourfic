@@ -1230,9 +1230,10 @@ function tf_single_tour_booking_form( $post_id ) {
                                     <span class="switcher round"></span>
                                 </label>
                                 <h4><?php echo __( partial_payment_tag_replacement($tf_partial_payment_label, $tf_deposit_amount), 'tourfic' ) ?></h4>
-									<i class="fa fa-circle-exclamation tool-i" style="padding-left: 5px; padding-top: 5px" title="<?php echo __($tf_partial_payment_description) ?>"></i>
-									<!-- TODO: Add a tooltip here as like Vendor-->
-								</li>
+								<div class="tooltip-box">
+									<i class="fa fa-circle-exclamation tooltip-title-box" style="padding-left: 5px; padding-top: 5px" title=""></i>
+									<div class="tf-tooltip"><?php echo __($tf_partial_payment_description) ?></div>
+								</div>
                             </div>
 					    <?php } ?>
 					    <?php if ( empty($tour_extras) && 3!=$tf_booking_by && empty($traveller_info_coll) ){ ?>
