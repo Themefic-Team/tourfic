@@ -1,5 +1,17 @@
 (function ($) {
     $(document).ready(function () {
+
+        // Create an instance of Notyf
+        const notyf = new Notyf({
+            ripple: true,
+            duration: 3000,
+            dismissable: true,
+            position: {
+                x: 'right',
+                y: 'bottom',
+            },
+        });
+
         // Select Form
         $('.tf-filter-selection').click(function() {
             $(this).toggleClass('active');
@@ -196,7 +208,8 @@
                     
                 },
                 success: function (data) {
-                    
+                    $('.tf-preloader-box').hide();
+                    notyf.success("Email Sucessfully Resend!");
                 },
                 error: function (data) {
                     console.log(data);
