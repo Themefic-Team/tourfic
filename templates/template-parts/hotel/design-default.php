@@ -478,8 +478,6 @@
                                             <div class="tf-room-type">
                                                 <div class="tf-room-title">
                                                     <?php
-                                                    $availability = ! empty( $room['availability'] ) ? $room['availability'] : [];
-                                                    tf_var_dump($availability);
                                                     $tour_room_details_gall = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
                                                     if ( $tour_room_details_gall ) {
                                                         $tf_room_gallery_ids = explode( ',', $tour_room_details_gall );

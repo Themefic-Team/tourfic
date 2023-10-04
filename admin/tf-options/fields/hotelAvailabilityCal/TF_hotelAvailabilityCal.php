@@ -44,17 +44,17 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
 
                     <div class="tf-field-text tf-price-by-room" style="display: <?php echo $pricing_by == '1' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Price', 'tourfic' ); ?></label>
-                        <input type="text" name="tf_room_price" placeholder="<?php echo __( 'Price', 'tourfic' ); ?>">
+                        <input type="number" name="tf_room_price" placeholder="<?php echo __( 'Price', 'tourfic' ); ?>">
                     </div>
 
                     <div class="tf-field-text tf-price-by-person" style="display: <?php echo $pricing_by == '2' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Adult Price', 'tourfic' ); ?></label>
-                        <input type="text" name="tf_room_adult_price" placeholder="<?php echo __( 'Adult Price', 'tourfic' ); ?>">
+                        <input type="number" name="tf_room_adult_price" placeholder="<?php echo __( 'Adult Price', 'tourfic' ); ?>">
                     </div>
 
                     <div class="tf-field-text tf-price-by-person" style="display: <?php echo $pricing_by == '2' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Child Price', 'tourfic' ); ?></label>
-                        <input type="text" name="tf_room_child_price" placeholder="<?php echo __( 'Child Price', 'tourfic' ); ?>">
+                        <input type="number" name="tf_room_child_price" placeholder="<?php echo __( 'Child Price', 'tourfic' ); ?>">
                     </div>
 
                     <div class="tf-field-select" style="width: calc(50% - 5px)">

@@ -532,9 +532,11 @@
                 },
                 loading: function (isLoading) {
                     if (isLoading) {
-                        $(".overlay", self.container).addClass("open");
+                        $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
+                        $(self.calendar).find('.tf-room-cal').addClass('tf-content-loading');
                     } else {
-                        $(".overlay", self.container).removeClass("open");
+                        $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
+                        $(self.calendar).find('.tf-room-cal').removeClass('tf-content-loading');
                     }
                 },
             };
@@ -571,15 +573,6 @@
                 var $this = $(this);
                 var room = new roomCal(el);
                 room.init();
-
-                $('body').on('calendar.change_month', function (event, value) {
-                    if (room.fullCalendar) {
-                        var date = room.fullCalendar.getDate();
-                        var month = date.format('M');
-                        date = date.add(value - month, 'M');
-                        room.fullCalendar.gotoDate(date.format('YYYY-MM-DD'));
-                    }
-                });
             });
         }
         tfHotelCalendar();

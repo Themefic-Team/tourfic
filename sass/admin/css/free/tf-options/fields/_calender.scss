@@ -1,22 +1,25 @@
-.fc-view-harness{
+.fc-view-harness {
     height: 395px !important;
 }
+
 .fc-direction-ltr .fc-daygrid-event.fc-event-end,
 .fc-direction-rtl .fc-daygrid-event.fc-event-start {
     font-size: 10px;
 }
-//.fc-col-header{
-//    width: 100% !important;
-//}
-//.fc-daygrid-body{
-//    width: 100% !important;
-//}
-//.fc-scrollgrid-sync-table{
-//    width: 100% !important;
-//    height: 368px !important;
-//}
 
-.tf-content-loading{
+.fc .fc-bg-event .fc-event-title {
+    font-size: 10px;
+}
+.fc .fc-daygrid-event {
+    cursor: pointer;
+}
+.tf-room-cal-wrap {
+    table {
+        margin-bottom: 0 !important;
+    }
+}
+
+.tf-content-loading {
     position: relative;
 
     &::before {
