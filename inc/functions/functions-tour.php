@@ -3424,7 +3424,7 @@ function tf_tour_booking_popup_callback() {
 		}
 
 		$response['traveller_summery'] .='<h6>On '.$tour_date .'</h6>
-        <table class="table">
+        <table class="table" style="width: 100%">
             <thead>
                 <tr>
                     <th align="left">'.sprintf( __( 'Traveller', 'tourfic' )).'</th>

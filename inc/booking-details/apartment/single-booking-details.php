@@ -235,16 +235,25 @@
 
             <div class="tf-filter-selection">
                 <h3><?php _e("Sent order mail", "tourfic"); ?></h3>
-                <div class="tf-order-status-filter">
+                <div class="tf-order-status-filter tf-order-email-resend">
                     <label>
-                        <span><?php _e("Order Mail", "tourfic"); ?></span>
+                        <span><?php _e("Resend Order Mail", "tourfic"); ?></span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M5 7.5L10 12.5L15 7.5" stroke="#F0F0F1" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </label>
                     <ul>
-                        <li><?php _e("Customer", "tourfic"); ?></li>
-                        <li><?php _e("Customer + Vendor", "tourfic"); ?></li>
+                        <li data-value="customer"><?php _e("Customer", "tourfic"); ?></li>
+                        <?php 
+                        $tf_vendor_id = get_post_field ('post_author', $tf_order_details->post_id);
+                        //get user role by id
+                        $tf_user = get_user_by( 'id', $tf_vendor_id );
+                        $tf_user_role = !empty( $tf_user->roles[0] ) ? $tf_user->roles[0] : '';
+                        //check if user role is vendor
+                        if( $tf_user_role == 'tf_vendor' ){
+                        ?>
+                            <li data-value="vendor"><?php _e("Vendor", "tourfic"); ?></li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>

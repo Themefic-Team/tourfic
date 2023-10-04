@@ -511,7 +511,16 @@
                     </label>
                     <ul>
                         <li data-value="customer"><?php _e("Customer", "tourfic"); ?></li>
-                        <li data-value="vendor"><?php _e("Vendor", "tourfic"); ?></li>
+                        <?php 
+                        $tf_vendor_id = get_post_field ('post_author', $tf_order_details->post_id);
+                        //get user role by id
+                        $tf_user = get_user_by( 'id', $tf_vendor_id );
+                        $tf_user_role = !empty( $tf_user->roles[0] ) ? $tf_user->roles[0] : '';
+                        //check if user role is vendor
+                        if( $tf_user_role == 'tf_vendor' ){
+                        ?>
+                            <li data-value="vendor"><?php _e("Vendor", "tourfic"); ?></li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
