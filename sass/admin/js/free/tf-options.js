@@ -530,15 +530,6 @@
                         $("[name='tf_room_status'] option[value=" + event.extendedProps.status + "]", self.roomCalData).prop("selected", true);
                     }
                 },
-                loading: function (isLoading) {
-                    if (isLoading) {
-                        $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
-                        $(self.calendar).find('.tf-room-cal').addClass('tf-content-loading');
-                    } else {
-                        $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
-                        $(self.calendar).find('.tf-room-cal').removeClass('tf-content-loading');
-                    }
-                },
             };
             this.init = function () {
                 self.container = jQuery(container);
