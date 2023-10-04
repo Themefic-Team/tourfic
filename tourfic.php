@@ -7,11 +7,11 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.9.28
+ * Version:         2.10.1
  * Tested up to:    6.3
- * WC tested up to: 8.0.2
+ * WC tested up to: 8.1.1
  * Requires PHP:    7.2
- * Elementor tested up to: 3.15.2
+ * Elementor tested up to: 3.16.4
  */
 
 // don't load directly
@@ -59,7 +59,26 @@ if ( ! class_exists( 'Appsero\Client' ) ) {
  * @since 1.0
  */
 if ( ! defined( 'TOURFIC' ) ) {
-	define( 'TOURFIC', '2.9.28' );
+	define( 'TOURFIC', '2.10.1' );
+}
+
+/**
+ * Check if WooCommerce is active, and if it isn't, disable the plugin.
+ *
+ * @since 1.0
+ */
+if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+	add_action( 'admin_notices', 'tf_is_woo' );
+
+	/**
+	 * Ajax install & activate WooCommerce
+	 *
+	 * @since 1.0
+	 * @link https://developer.wordpress.org/reference/functions/wp_ajax_install_plugin/
+	 */
+	add_action( "wp_ajax_tf_ajax_install_plugin", "wp_ajax_install_plugin" );
+
+	return;
 }
 
 /**
@@ -69,6 +88,9 @@ if ( ! defined( 'TOURFIC' ) ) {
  */
 if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
 	function tf_enqueue_main_admin_scripts() {
+
+		//date format
+		$date_format_change  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 
 		// Custom
 		wp_enqueue_style( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css', '', TOURFIC );
@@ -92,6 +114,7 @@ if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
 				'installed'                        => __( 'Installed', 'tourfic' ),
 				'activated'                        => __( 'Activated', 'tourfic' ),
 				'install_failed'                   => __( 'Install failed', 'tourfic' ),
+				'date_format_change_backend' 	   => $date_format_change,
 				'i18n'                             => array(
 					'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
 				)
@@ -100,25 +123,6 @@ if ( ! function_exists( 'tf_enqueue_main_admin_scripts' ) ) {
 	}
 
 	add_action( 'admin_enqueue_scripts', 'tf_enqueue_main_admin_scripts', 9 );
-}
-
-/**
- * Check if WooCommerce is active, and if it isn't, disable the plugin.
- *
- * @since 1.0
- */
-if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
-	add_action( 'admin_notices', 'tf_is_woo' );
-
-	/**
-	 * Ajax install & activate WooCommerce
-	 *
-	 * @since 1.0
-	 * @link https://developer.wordpress.org/reference/functions/wp_ajax_install_plugin/
-	 */
-	add_action( "wp_ajax_tf_ajax_install_plugin", "wp_ajax_install_plugin" );
-
-	return;
 }
 
 // Styles & Scripts

@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
 Tested up to: 6.3
-Stable tag: 2.9.28
+Stable tag: 2.10.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -75,8 +75,42 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 * Dynamic Location Search based on OpenStreetMap on Option Panel  (Pro)
 * Dynamic Location Search based on Google Maps on Option Panel  (Pro)
 
+= 🎉  WordPress Apartment Booking & Management System =
+* Add Unlimited Apartment
+* Apartment Photo Gallery
+* Apartment Set tour as featured
+* Location and Dynamic Location Search ( OpenStreetMap, Google map(Pro) )
+* Apartment Booking Management
+* Booking per night pricing, Minimum Night Stay
+* Apartment Pricing for Adults, Children, and Infant
+* Additional Fee
+* Discount Type( Fixed, Percentage )
+* Apartment Room management 
+* Apartment Highlights section
+* Apartment Amenities section
+* Apartment House Rules section
+* Apartment Frequently Asked Questions
+* Apartment Terms & Conditions
+* Apartment Enquiry Section
+* Apartment Related Apartment
+* Dedicated Customer Review System (See Review section for breakdown)
+* Wishlist for Apartment
+* Apartment Specific Room Person Management( Pro )
+* Apartment Specific Room gallery( Pro ) 
+* Apartment Specific Room Type( Pro ) 
+* Apartment Specific Room Type( Pro )
+* Property Surroundings( Pro )
+
+= 🎉 Backend/Admin booking( Pro ) =
+* Backend/Admin booking for Hotel 
+* Backend/Admin booking for Tour
+
+= 🎉 External Booking( Pro ) =
+* External Booking for Tour
+* External Booking for Hotel
+
 = 🎉  Multi-Vendor Functions (Pro) =
-* Vendors can add unlimited hotels and tours with all the fields (Pro)
+* Vendors can add unlimited hotels, tours, and apartments with all the fields (Pro)
 * Vendors have dedicated order details pages (Pro)
 * Dedicated login and registration system for vendors (Pro)
 * Enable/disable specific vendors (Pro)
@@ -408,6 +442,25 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.10.1 -  26 September 2023 =
+
+- Update: readme.txt
+
+= 2.10.0 -  25 September 2023 =
+
+- Added: Apartment Booking feature.
+- Added: Hotel, Tour, Apartment type Taxonomy.
+- Added: Hotel and tour type filter widget.
+- Added: Hotel and tour Backend/Admin booking add( Pro ).
+- Added: Hotel and tour External Booking( Pro ).
+- Added: Without payment option in the tour( Pro ).
+- Added: Date format settings.
+- Fixed: Settings page saving issue.
+- Fixed: Tour single responsive issue.
+- Fixed: Map issue
+- Improvement: Tour start price hide option added to tourfic settings.
+- Updated: Appsero updated Version 1.2.4
 
 = 2.9.28 -  20 August 2023 =
 
@@ -1024,11 +1077,11 @@ Added: Feature image required hotel and tours
 
 = 1.0.42 - 15/04/2021 =
 
-- WordPress 5.7.1 Compatiblity Check
-- WooCommerce 5.2.1 Compatiblity Check
-- Added Autocomplete on search bar
+- WordPress 5.7.1 Compatibility Check
+- WooCommerce 5.2.1 Compatibility Check
+- Added Autocomplete on the search bar
 - Fixed Search bar responsive issues
-- Fixed Checkin-Checkout Date issue
+- Fixed Checkin-Checkout Date issues
 
 = 1.0.0 - 23/03/2021 =
 

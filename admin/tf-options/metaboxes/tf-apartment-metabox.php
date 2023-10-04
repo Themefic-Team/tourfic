@@ -7,8 +7,12 @@ function tf_apt_amenities_cats() {
 	$all_cats       = [];
 	if ( ! empty( $amenities_cats ) && is_array( $amenities_cats ) ) {
 		foreach ( $amenities_cats as $key => $cat ) {
-			$all_cats[ $key ] = $cat['amenities_cat_name'];
+			$all_cats[ (string) $key ] = $cat['amenities_cat_name'];
 		}
+	}
+
+	if(empty($all_cats)){
+		$all_cats[''] = __( 'Select Category', 'tourfic' );
 	}
 
 	return $all_cats;
@@ -44,6 +48,34 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'default'     => __( 'Hot Deal', 'tourfic' ),
 					'dependency'  => array( 'apartment_as_featured', '==', true ),
 				),
+				array(
+					'id'       => 'tf_single_apartment_layout_opt',
+					'type'     => 'select',
+					'label'    => __( 'Apartment Page Layout', 'tourfic' ),
+					'subtitle' => __( 'Select your Layout logic', 'tourfic' ),
+					'options'  => [
+						'global' => __( 'Global Settings', 'tourfic' ),
+						'single' => __( 'Single Settings', 'tourfic' ),
+					],
+					'default'  => 'global',
+				),
+				array(
+					'id'       => 'tf_single_apartment_template',
+					'type'     => 'imageselect',
+					'label'    => __( 'Single Apartment Page Layout', 'tourfic' ),
+					'multiple' 		=> true,
+					'inline'   		=> true,
+					'options'   	=> array(
+						'default' 			=> array(
+							'title'			=> 'Default',
+							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-apartment.jpg",
+						),
+					),
+					'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+					'dependency'  => [
+						array( 'tf_single_apartment_layout_opt', '==', 'single' )
+					],
+				),
 			)
 		),
 		// location
@@ -51,6 +83,13 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			'title'  => __( 'Location', 'tourfic' ),
 			'icon'   => 'fa-solid fa-location-dot',
 			'fields' => array(
+				array(
+					'id'       => 'location_title',
+					'type'     => 'text',
+					'label'    => __( 'Section Title', 'tourfic' ),
+					'subtitle' => __( 'Enter location section title', 'tourfic' ),
+					'default'  => __( 'Where you’ll be', 'tourfic' ),
+				),
 				array(
 					'id'          => 'address',
 					'type'        => 'textarea',
@@ -96,6 +135,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'     => 'surroundings_places',
 					'type'   => 'repeater',
 					'label'  => __( 'Surroundings Places', 'tourfic' ),
+					'button_title' => __( 'Add New Criteria', 'tourfic' ),
 					'is_pro' => true,
 					'fields' => array(
 						array(
@@ -113,6 +153,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'id'     => 'places',
 							'type'   => 'repeater',
 							'label'  => __( 'Places', 'tourfic' ),
+							'button_title' => __( 'Add New Place', 'tourfic' ),
 							'fields' => array(
 								array(
 									'id'          => 'place_name',
@@ -137,6 +178,12 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			'title'  => __( 'Booking', 'tourfic' ),
 			'icon'   => 'fa-solid fa-calendar-check',
 			'fields' => array(
+				array(
+					'id'    => 'booking_form_title',
+					'type'  => 'text',
+					'label' => __( 'Form Title', 'tourfic' ),
+					'default' => __( 'Book your apartment', 'tourfic' ),
+				),
 				array(
 					'id'          => 'price_per_night',
 					'type'        => 'number',
@@ -248,6 +295,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'    => 'room_details_title',
 					'type'  => 'text',
 					'label' => __( 'Section Title', 'tourfic' ),
+					'default' => __( 'Where you\'ll sleep', 'tourfic' ),
 				),
 				array(
 					'id'           => 'rooms',
@@ -368,6 +416,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'    => 'highlights_title',
 					'type'  => 'text',
 					'label' => __( 'Highlights Title', 'tourfic' ),
+					'default' => __( 'Discover Our Top Features', 'tourfic' ),
 				),
 				array(
 					'id'           => 'highlights',
@@ -402,6 +451,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'    => 'amenities_title',
 					'type'  => 'text',
 					'label' => __( 'Amenities Title', 'tourfic' ),
+					'default' => __( 'What this place offers', 'tourfic' ),
 				),
 				array(
 					'id'           => 'amenities',
@@ -427,6 +477,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'label'       => __( 'Category', 'tourfic' ),
 							'placeholder' => __( 'Select category', 'tourfic' ),
 							'options'     => tf_apt_amenities_cats(),
+							'description' => __( 'Add new category from <a target="_blank" href="'.admin_url('admin.php?page=tf_settings#tab=apartment_single_page').'">Amenities Categories</a>', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
@@ -449,6 +500,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'    => 'house_rules_title',
 					'type'  => 'text',
 					'label' => __( 'House Rules Title', 'tourfic' ),
+					'default' => __( 'House Rules', 'tourfic' ),
 				),
 				array(
 					'id'           => 'house_rules',
@@ -469,7 +521,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 						array(
 							'id'        => 'include',
 							'type'      => 'switch',
-							'label'     => __( 'Include?', 'tourfic' ),
+							'label'     => __( 'Allowed?', 'tourfic' ),
 							'label_on'  => __( 'Yes', 'tourfic' ),
 							'label_off' => __( 'No', 'tourfic' ),
 							'default'   => true,
@@ -492,6 +544,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'    => 'faq_title',
 					'type'  => 'text',
 					'label' => __( 'Section Title', 'tourfic' ),
+					'default' => __( 'Frequently Asked Questions', 'tourfic' ),
 				),
 				array(
 					'id'    => 'faq_desc',
@@ -525,6 +578,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'    => 'terms_title',
 					'type'  => 'text',
 					'label' => __( 'Section Title', 'tourfic' ),
+					'default' => __( 'Terms & Conditions', 'tourfic' ),
 				),
 				array(
 					'id'    => 'terms_and_conditions',
@@ -538,18 +592,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			'title'  => __( 'Settings', 'tourfic' ),
 			'icon'   => 'fa-solid fa-viruses',
 			'fields' => array(
-				//description
-				array(
-					'id'    => 'description',
-					'type'  => 'heading',
-					'label' => __( 'Description', 'tourfic' ),
-				),
-				array(
-					'id'      => 'description_title',
-					'type'    => 'text',
-					'label'   => __( 'Description Title', 'tourfic' ),
-					'default' => __( 'About this place', 'tourfic' ),
-				),
+				//disable options
 				array(
 					'id'      => 'disable_options',
 					'type'    => 'heading',
@@ -579,6 +622,79 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => false,
+				),
+				//description
+				array(
+					'id'    => 'description',
+					'type'  => 'heading',
+					'label' => __( 'Description', 'tourfic' ),
+				),
+				array(
+					'id'      => 'description_title',
+					'type'    => 'text',
+					'label'   => __( 'Description Title', 'tourfic' ),
+					'default' => __( 'About this place', 'tourfic' ),
+				),
+				//review
+				array(
+					'id'      => 'review-sections',
+					'type'    => 'heading',
+					'content' => __( 'Review', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'    => 'review-section-title',
+					'type'  => 'text',
+					'label' => __( 'Reviews Section Title', 'tourfic' ),
+					'default' => "Guest Reviews"
+				),
+				//Related Apartment
+				array(
+					'id'    => 'related',
+					'type'  => 'heading',
+					'label' => __( 'Related Apartment', 'tourfic' ),
+				),
+				array(
+					'id'      => 'related_apartment_title',
+					'type'    => 'text',
+					'label'   => __( 'Related Apartment Title', 'tourfic' ),
+					'default' => __( 'You may also like', 'tourfic' ),
+				),
+				//enquiry
+				array(
+					'id'      => 'enquiry',
+					'type'    => 'heading',
+					'content' => __( 'Enquiry', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'        => 'enquiry-section',
+					'type'      => 'switch',
+					'label'     => __( 'Apartment Enquiry Section', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => true
+				),
+				array(
+					'id'    => 'enquiry-title',
+					'type'  => 'text',
+					'label' => __( 'Apartment Enquiry Title Text', 'tourfic' ),
+					'default' => __('Have a question in mind', 'tourfic'),
+					'dependency' => array( 'enquiry-section', '==', '1' ),
+				),
+				array(
+					'id'    => 'enquiry-content',
+					'type'  => 'text',
+					'label' => __( 'Apartment Enquiry Short Text', 'tourfic' ),
+					'default' => __('Looking for more info? Send a question to the property to find out more.', 'tourfic'),
+					'dependency' => array( 'enquiry-section', '==', '1' ),
+				),
+				array(
+					'id'    => 'enquiry-btn',
+					'type'  => 'text',
+					'label' => __( 'Apartment Enquiry Button Text', 'tourfic' ),
+					'default' => __('Contact Host', 'tourfic'),
+					'dependency' => array( 'enquiry-section', '==', '1' ),
 				),
 			),
 		),

@@ -151,7 +151,8 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				'tf_apartment_page_tf_apartment_booking'
 			);
 			$tf_options_post_type = array( 'tf_hotel', 'tf_tours', 'tf_apartment' );
-			if ( "tourfic-settings_page_tf_dashboard" == $screen ) {
+			$admin_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+			if("tourfic-settings_page_tf_dashboard"==$screen){
 				//Order Data Retrive
 				$tf_old_order_limit = new WC_Order_Query( array(
 					'limit'   => - 1,
@@ -337,7 +338,8 @@ if ( ! class_exists( 'TF_Options' ) ) {
 				'gmaps'             => $tf_google_map,
 				'tf_complete_order' => isset( $tf_complete_orders ) ? $tf_complete_orders : '',
 				'tf_cancel_orders'  => isset( $tf_cancel_orders ) ? $tf_cancel_orders : '',
-				'tf_chart_enable'   => isset( $tf_chart_enable ) ? $tf_chart_enable : ''
+				'tf_chart_enable'   => isset( $tf_chart_enable ) ? $tf_chart_enable : '',
+				'tf_admin_date_format' => $admin_date_format_for_users
 			) );
 		}
 

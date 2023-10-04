@@ -470,19 +470,19 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 
 								foreach ( $order_ids as $order_id ) {
 									# Get Only the completed orders
-									$tf_orders_select = array(
+									$tf_orders_select     = array(
 										'select' => "post_id,order_details",
-										'query' => "post_type = 'hotel' AND ostatus = 'completed' AND order_id = ".$order_id
+										'query'  => "post_type = 'hotel' AND ostatus = 'completed' AND order_id = " . $order_id
 									);
-									$tf_hotel_book_orders = tourfic_order_table_data($tf_orders_select);
+									$tf_hotel_book_orders = tourfic_order_table_data( $tf_orders_select );
 
 									# Get and Loop Over Order Items
 									foreach ( $tf_hotel_book_orders as $item ) {
-										$order_details = json_decode($item['order_details']);
+										$order_details = json_decode( $item['order_details'] );
 										/**
 										 * Order item data
 										 */
-										$ordered_number_of_room = !empty($order_details->room) ? $order_details->room : 0;
+										$ordered_number_of_room = ! empty( $order_details->room ) ? $order_details->room : 0;
 
 										if ( $avil_by_date ) {
 
@@ -594,7 +594,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 				}
 
 				if ( ! $response['fieldErrors'] ) {
-					$room_price      = $this->tf_get_room_total_price( intval( $field['tf_available_hotels'] ), $room_data, $field['tf_hotel_date']['from'], $field['tf_hotel_date']['to'], $field['tf_hotel_rooms_number'], $field['tf_hotel_adults_number'], $field['tf_hotel_children_number'], $field['tf_hotel_service_type'] );
+					$room_price       = $this->tf_get_room_total_price( intval( $field['tf_available_hotels'] ), $room_data, $field['tf_hotel_date']['from'], $field['tf_hotel_date']['to'], intval( $field['tf_hotel_rooms_number'] ), intval( $field['tf_hotel_adults_number'] ), intval( $field['tf_hotel_children_number'] ), $field['tf_hotel_service_type'] );
 					$billing_details  = array(
 						'billing_first_name' => $field['tf_customer_first_name'],
 						'billing_last_name'  => $field['tf_customer_last_name'],
@@ -644,7 +644,7 @@ if ( ! class_exists( 'TF_Hotel_Backend_Booking' ) ) {
 						'billing_details'  => $billing_details,
 						'shipping_details' => $shipping_details,
 						'order_details'    => $order_details,
-						'payment_method'   => 'cod',
+						'payment_method'   => "Booked by " . $field['tf_hotel_booked_by'],
 						'status'           => 'processing',
 						'order_date'       => date( 'Y-m-d H:i:s' ),
 					);

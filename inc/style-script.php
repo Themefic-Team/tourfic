@@ -429,10 +429,14 @@ if( !function_exists( 'tf_hotel_css' ) ){
 			.tf-hotel-design-1 .tf-rooms .tf-features-infos ul li {color: '.$tf_hotel_features.'!important;}
 		'; }
 		if( $tf_hotel_table_color OR $tf_hotel_table_bg_color ) { $output .= '
-			.availability-table thead,
-			.tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table thead {
+			.availability-table thead{
 				color: '.$tf_hotel_table_color.';
 				background: '.$tf_hotel_table_bg_color.';
+			}
+			.tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table thead tr th{
+				background: '.$tf_hotel_table_bg_color.';
+				color: '.$tf_hotel_table_color.';
+				border-radius: 0px;
 			}
 		'; }
 		if( $tf_hotel_table_color ) { $output .= '
@@ -578,32 +582,33 @@ if( !function_exists( 'tf_tour_css' ) ){
 		if( $tf_itin_time_day_txt OR $tf_itin_time_day_bg OR $tf_itin_heading_color OR $tf_itin_text_color OR $tf_itin_bg_color OR $tf_itin_icon_color) { $output .= '
 			.tf-travel-time span,
 			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item .itinerary-day {
-				color: '.$tf_itin_time_day_txt.';
+				color: '.$tf_itin_time_day_txt.' !important;
 			}
 			.tf-travel-time {
 				background: '.$tf_itin_time_day_bg.';
 			}
 			.tf-accordion-head h4, 
 			.tf-accordion-head h4:hover,
-			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item h3 {
+			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item h3,
+			.tf-tour-design-1 .tf-itinerary-wrapper .tf-itinerary-box .tf-single-itinerary-item h4 {
 				color: '.$tf_itin_heading_color.';
 			}
 			.tf-travel-desc,
 			.tf-single-page .tf-itinerary-content-details p {
 				color: '.$tf_itin_text_color.';
 			}
-			#tf-accordion-wrapper .tf-accordion-content, #tf-accordion-wrapper .tf-accordion-head {
+			#tf-accordion-wrapper .tf-accordion-content, #tf-accordion-wrapper .tf-accordion-head, .tf-tour-design-1 .tf-itinerary-wrapper .tf-itinerary-box {
 				background: '.$tf_itin_bg_color.';
 			}
 			#tf-accordion-wrapper .arrow-animate, #tf-accordion-wrapper .arrow {
 				color: '.$tf_itin_icon_color.';
 			}
-			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::before,
-			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item .accordion-checke::before {
-				border: 1px solid '.$tf_itin_icon_color.';
+			.tf-tour-design-1 .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::before,
+			.tf-tour-design-1 .tf-itinerary-wrapper .tf-single-itinerary-item .accordion-checke::before {
+				border: 1px solid '.$tf_itin_icon_color.' !important;
 			}
-			.tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::after {
-				background: '.$tf_itin_icon_color.';
+			.tf-tour-design-1 .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::after {
+				background: '.$tf_itin_icon_color.' !important;
 			}
 		'; }
 
@@ -680,6 +685,7 @@ if ( ! function_exists( 'tf_apartment_css' ) ) {
 				background-color: ' . $form_bg . ';
 				border-color: ' . $form_border_color . ';
 			}
+			#tf-apartment-booking .tf-apartment-form-header .tf-apartment-price-per-night span:not(.woocommerce-Price-amount,.woocommerce-Price-currencySymbol),
 			#tf-apartment-booking .tf-apartment-form-header .tf-apartment-price-per-night span,
 			#tf-apartment-booking .tf-apartment-form-header .tf-single-rating {
 				color: ' . $form_text . ';
@@ -712,13 +718,14 @@ if ( ! function_exists( 'tf_apartment_css' ) ) {
 				color: ' . $host_heading_color . ';
 			}
 			.host-details,
+			.host-details .host-bottom p,
 			.tf-host-rating-wrapper h6{
 				color: ' . $host_text . ';
 			}
 			';
 		}
 
-		wp_add_inline_style( 'tf-apartment-style', $output );
+		wp_add_inline_style( 'tf-app-style', $output );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'tf_apartment_css', 99999 );

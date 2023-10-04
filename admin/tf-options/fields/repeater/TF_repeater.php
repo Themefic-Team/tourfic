@@ -13,20 +13,20 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 	class TF_Repeater extends TF_Fields {
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field);
-		} 
+		}
 		public function render() {
             $label = ( ! empty( $this->field['label'] ) ) ? $this->field['label'] : '';
 			?>
             <div id="tf-repeater-1" class="tf-repeater <?php echo $this->field['id'];?>">
-                <div class="tf-repeater-wrap tf-repeater-wrap-<?php echo $this->field['id'];?>"> 
+                <div class="tf-repeater-wrap tf-repeater-wrap-<?php echo $this->field['id'];?>">
 					<?php if ( ! empty( $this->value ) ):
 						$num = 0;
-						
+
 						if(!is_array($this->value)){
 							$tf_rep_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
 								return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
 							  }, $this->value );
-							  
+
 							$data = unserialize( $tf_rep_value );
 						}else{
 							$data = $this->value;
@@ -37,10 +37,13 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 								if($this->field['id']=="room"){
 									$tf_repater_default_value = $value['title'];
 								}
+                                if($this->field['id']=="amenities"){
+                                    $tf_repater_default_value = __('Amenity', 'tourfic');
+                                }
 							?>
                             <div class="tf-single-repeater tf-single-repeater-<?php echo $this->field['id'];?>">
-							<input type="hidden" name="tf_parent_field" value="<?php echo $this->parent_field; ?>"> 
-							<input type="hidden" name="tf_repeater_count" value="<?php echo $key; ?>"> 
+							<input type="hidden" name="tf_parent_field" value="<?php echo $this->parent_field; ?>">
+							<input type="hidden" name="tf_repeater_count" value="<?php echo $key; ?>">
 							<input type="hidden" name="tf_current_field" value="<?php echo $this->field['id'];?>">
 								<div class="tf-repeater-header">
 									<span class="tf-repeater-icon tf-repeater-icon-collapse">
@@ -51,7 +54,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 										<span class="tf-repeater-icon tf-repeater-icon-move">
 											<i class="fa-solid fa-up-down-left-right"></i>
 										</span>
-										<?php 
+										<?php
 										if(empty($this->field['drag_only']) || !$this->field['drag_only']){
 										?>
 										<span class="tf-repeater-icon tf-repeater-icon-clone" data-repeater-max = "<?php if(isset($this->field['max'])){ echo esc_attr($this->field['max']); }  ?>">
@@ -66,17 +69,17 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
                                 <div class="tf-repeater-content-wrap hide" style="display: none">
 									<?php
 									foreach ( $this->field['fields'] as $re_field ) :
-										
-										if($re_field['type'] == 'editor'){ 
-											$re_field['wp_editor'] = 'wp_editor'; 
+
+										if($re_field['type'] == 'editor'){
+											$re_field['wp_editor'] = 'wp_editor';
 										}
-										if($re_field['type'] == 'select2'){ 
-											$re_field['select2'] = 'select2'; 
+										if($re_field['type'] == 'select2'){
+											$re_field['select2'] = 'select2';
 										}
-										
+
 										if(!empty($this->parent_field)){
 											$parent_field = $this->parent_field.'[' . $this->field['id'] . '][' . $key . ']';
-										}else{ 
+										}else{
 											$parent_field = '[' . $this->field['id'] . '][' . $key . ']';
 										}
 
@@ -93,7 +96,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 										}
 
 										$tf_option = new TF_Options();
-										$tf_option->field( $re_field, $value, $this->settings_id, $parent_field); 
+										$tf_option->field( $re_field, $value, $this->settings_id, $parent_field);
 									endforeach;
 									$num ++;
 									?>
@@ -103,11 +106,11 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
                 </div>
                 <div class=" tf-single-repeater-clone tf-single-repeater-clone-<?php if(isset($this->field['id'])){ echo esc_attr($this->field['id']); }  ?>">
                     <div class="tf-single-repeater tf-single-repeater-<?php echo $this->field['id'];?>">
-					
-					<input type="hidden" name="tf_parent_field" value="<?php if(isset($this->parent_field)){ echo esc_attr($this->parent_field); }  ?>"> 
-					<input type="hidden" name="tf_repeater_count" value="0"> 
+
+					<input type="hidden" name="tf_parent_field" value="<?php if(isset($this->parent_field)){ echo esc_attr($this->parent_field); }  ?>">
+					<input type="hidden" name="tf_repeater_count" value="0">
 					<input type="hidden" name="tf_current_field" value="<?php if(isset($this->field['id'])){ echo esc_attr($this->field['id']); }  ?>">
-					
+
 						<div class="tf-repeater-header">
 							<span class="tf-repeater-icon tf-repeater-icon-collapse">
 								<i class="fa-solid fa-angle-up"></i> 
@@ -117,7 +120,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 								<span class="tf-repeater-icon tf-repeater-icon-move">
 									<i class="fa-solid fa-up-down-left-right"></i>
 								</span>
-								<?php 
+								<?php
 								if(empty($this->field['drag_only']) || !$this->field['drag_only']){
 								?>
 								<span class="tf-repeater-icon tf-repeater-icon-clone" data-repeater-max = "<?php if(isset($this->field['max'])){ echo esc_attr($this->field['max']); }  ?>">
@@ -134,9 +137,9 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 							<?php foreach ( $this->field['fields'] as $key => $re_field ) {
 								if(!empty($this->parent_field)){
 									$parent = $this->parent_field.'[' . $this->field['id'] . '][00]';
-								}else{ 
+								}else{
 									$parent    = '[' . $this->field['id'] . '][00]';
-								} 
+								}
 								$id        = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['id'] . '][00]' . '[' . $re_field['id'] . ']' : $this->field['id'] . '[00]' . '[' . $re_field['id'] . ']';
 								$default = isset( $re_field['default'] ) ? $re_field['default'] : '';
                                 $value     = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : $default;
@@ -145,24 +148,24 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 									$value = sanitize_title(str_replace(' ', '_', strtolower($value)));
 								}
 								$tf_option = new TF_Options();
-								$tf_option->field( $re_field, $value, '_____' . $this->settings_id, $parent ); 
+								$tf_option->field( $re_field, $value, '_____' . $this->settings_id, $parent );
 							} ?>
                         </div>
                     </div>
 
                 </div>
-				<?php 
+				<?php
 				if(empty($this->field['drag_only']) || !$this->field['drag_only']){
 				?>
                 <div class="tf-repeater-add tf-repeater-add-<?php if(isset($this->field['id'])){ echo esc_attr($this->field['id']); }  ?>">
 				
 					<span data-repeater-id = "<?php if(isset($this->field['id'])){ echo esc_attr($this->field['id']); }  ?>" data-repeater-max = "<?php if(isset($this->field['max'])){ echo esc_attr($this->field['max']); }  ?>" class="tf-repeater-icon tf-repeater-icon-add tf-repeater-add-<?php if(isset($this->field['id'])){ echo esc_attr($this->field['id']); }  ?>">
-						<?php 
+						<?php
 							if(isset($this->field['button_title']) && !empty($this->field['button_title'])){
 								echo  $this->field['button_title'];
 							}else{
 								echo '<i class="fa-solid fa-plus"></i>';
-							} 
+							}
 						?>
 						
 					</span>

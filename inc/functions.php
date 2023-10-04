@@ -464,10 +464,14 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 	// Get post type
 	$post_type   = $_GET['type'] ?? '';
 	$place_title = '';
+	$date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 
 	if ( ! empty( $post_type ) ) {
 
-		$place_input_id    = $post_type == 'tf_hotel' ? 'tf-location' : ( $post_type == 'tf_apartment' ? 'tf-apartment-location' : 'tf-destination' );
+		$place_input_id    = $post_type == 'tf_hotel' ? 'tf-location' : 'tf-destination';
+		if($post_type == 'tf_apartment'){
+			$place_input_id = 'tf-apartment-location';
+		}
 		$place_placeholder = ( $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ) ? __( 'Enter Location', 'tourfic' ) : __( 'Enter Destination', 'tourfic' );
 
 		$place_key   = 'place';
@@ -714,13 +718,17 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                 $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
                     enableTime: false,
                     minDate: "today",
+					altInput: true,
+					altFormat: '<?php echo $date_format_for_users; ?>',
                     mode: "range",
                     dateFormat: "Y/m/d",
                     onReady: function (selectedDates, dateStr, instance) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                     },
                     onChange: function (selectedDates, dateStr, instance) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                     },
                     defaultDate: <?php echo json_encode( explode( '-', $date ) ) ?>,
                 });
@@ -741,8 +749,12 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
  * Archive Sidebar Search Form
  */
 function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_name = '', $taxonomy_slug = '' ) {
-	$place      = $post_type == 'tf_hotel' ? 'tf-location' : ( $post_type == 'tf_apartment' ? 'tf-apartment-location' : 'tf-destination' );
-	$place_text = ( $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ) ? __( 'Enter Location', 'tourfic' ) : __( 'Enter Destination', 'tourfic' );
+	$place      = $post_type == 'tf_hotel' ? 'tf-location' : 'tf-destination';
+	if($post_type == 'tf_apartment'){
+		$place = 'tf-apartment-location';
+	}
+	$place_text = $post_type == 'tf_hotel' ? __( 'Enter Location', 'tourfic' ) : __( 'Enter Destination', 'tourfic' );
+	$date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 
 	$tf_plugin_installed = get_option( 'tourfic_template_installed' );
 	if ( ! empty( $tf_plugin_installed ) ) {
@@ -929,8 +941,11 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
                     minDate: "today",
                     mode: "range",
                     dateFormat: "Y/m/d",
+					altInput: true,
+					altFormat: '<?php echo $date_format_for_users; ?>',
                     onChange: function (selectedDates, dateStr, instance) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                     },
                 });
 

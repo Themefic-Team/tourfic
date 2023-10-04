@@ -282,6 +282,9 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 		// Check-in & out date
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
 
+		// date format for appartments
+		$date_format_change_appartments  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+
 		?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
 
@@ -437,12 +440,16 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                         enableTime: false,
                         mode: "range",
                         dateFormat: "Y/m/d",
+						altInput: true,
+						altFormat: '<?php echo $date_format_change_appartments; ?>',
                         minDate: "today",
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                         },
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                         },
                         defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
                     });
@@ -471,6 +478,9 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$discount        = ! empty( $meta['discount'] ) ? $meta['discount'] : 0;
 		$booked_dates    = tf_apartment_booked_days( get_the_ID() );
 
+		// date format for apartment
+		$date_format_change_appartments  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+
 		if ( defined( 'TF_PRO' ) ) {
 			$additional_fees = ! empty( $meta['additional_fees'] ) ? $meta['additional_fees'] : array();
 		} else {
@@ -487,7 +497,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 
         <!-- Start Booking widget -->
         <form id="tf-apartment-booking" class="tf-apartment-side-booking" method="get" autocomplete="off">
-            <h4><?php _e( 'Book your Apartment', 'tourfic' ) ?></h4>
+            <h4><?php ! empty( $meta['booking_form_title'] ) ? _e( $meta['booking_form_title'] ) : _e( 'Book your Apartment', 'tourfic' ); ?></h4>
             <div class="tf-apartment-form-header">
                 <h3 class="tf-apartment-price-per-night">
                     <span class="tf-apartment-base-price"><?php echo wc_price( $price_per_night ) ?></span>
@@ -535,8 +545,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                             <div class="acr-label"><?php _e( 'Adults', 'tourfic' ); ?></div>
                                             <div class="acr-select">
                                                 <div class="acr-dec">-</div>
-                                                <input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1' ?>"
-                                                       max="<?php echo esc_attr( $max_adults ); ?>"/>
+                                                <input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1' ?>"/>
                                                 <div class="acr-inc">+</div>
                                             </div>
                                         </div>
@@ -544,8 +553,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                             <div class="acr-label"><?php _e( 'Children', 'tourfic' ); ?></div>
                                             <div class="acr-select">
                                                 <div class="acr-dec">-</div>
-                                                <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0' ?>"
-                                                       max="<?php echo esc_attr( $max_children ); ?>"/>
+                                                <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0' ?>"/>
                                                 <div class="acr-inc">+</div>
                                             </div>
                                         </div>
@@ -553,8 +561,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                             <div class="acr-label"><?php _e( 'Infant', 'tourfic' ); ?></div>
                                             <div class="acr-select">
                                                 <div class="acr-dec">-</div>
-                                                <input type="number" name="infant" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0' ?>"
-                                                       max="<?php echo esc_attr( $max_infants ); ?>"/>
+                                                <input type="number" name="infant" id="infant" min="0" value="<?php echo ! empty( $infant ) ? $infant : '0' ?>"/>
                                                 <div class="acr-inc">+</div>
                                             </div>
                                         </div>
@@ -688,11 +695,12 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 var discount_html = '<?php echo wc_price( 0 ); ?>';
                                 if (discount > 0) {
                                     $('.apartment-discount-wrap').show();
-                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', (total_price * discount / 100).toFixed(2));
 
 									<?php if ( $discount_type == 'percent' ): ?>
+                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', (total_price * discount / 100).toFixed(2));
                                     total_price = total_price - (total_price * discount / 100);
 									<?php else: ?>
+                                    discount_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', discount.toFixed(2));
                                     total_price = total_price - discount;
 									<?php endif; ?>
                                 }
@@ -734,14 +742,18 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         enableTime: false,
                         mode: "range",
                         minDate: "today",
+						altInput: true,
+						altFormat: '<?php echo $date_format_change_appartments; ?>',
                         dateFormat: "Y/m/d",
                         defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                             bookingCalculation(selectedDates);
                         },
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                             bookingCalculation(selectedDates);
                         },
                         disable: [
@@ -947,6 +959,18 @@ if ( ! function_exists( 'tf_filter_apartment_by_date' ) ) {
 				$check_in_stt  = strtotime( $checkInOutDate[0] . ' +1 day' );
 				$check_out_stt = strtotime( $checkInOutDate[1] );
 				$days          = ( ( $check_out_stt - $check_in_stt ) / ( 60 * 60 * 24 ) ) + 1;
+
+				$tfperiod = new DatePeriod(
+					new DateTime( $checkInOutDate[0] . ' 00:00' ),
+					new DateInterval( 'P1D' ),
+					new DateTime( $checkInOutDate[1] . ' 23:59' )
+				);
+
+				$avail_searching_date = [];
+				foreach ( $tfperiod as $date ) {
+					$avail_searching_date[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+				}
+
 				//skip apartment if min stay is grater than selected days
 				if ( ! empty( $meta['min_stay'] ) && intval( $meta['min_stay'] ) <= $days && $meta['min_stay'] != 0 ) {
 					if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
@@ -957,48 +981,191 @@ if ( ! function_exists( 'tf_filter_apartment_by_date' ) ) {
 									if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
 										if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 											if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
-												$has_apartment = true;
+												$tf_booked_dates = [];
+												if(!empty($booked_dates)){
+													foreach ( $booked_dates as $booked_date ) {
+														$booked_from = $booked_date['check_in'];
+														$booked_to   = $booked_date['check_out'];
+			
+														$tfbookedperiod = new DatePeriod(
+															new DateTime( $booked_from . ' 00:00' ),
+															new DateInterval( 'P1D' ),
+															new DateTime( $booked_to . ' 23:59' )
+														);
+										
+														foreach ( $tfbookedperiod as $date ) {
+															$tf_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+														}
+													}
+													foreach($avail_searching_date as $searching){
+														if (array_key_exists($searching, $tf_booked_dates)) {
+															$has_apartment = false;
+															break;
+														}else{
+															$has_apartment = true;
+														}
+													}
+												}else{
+													$has_apartment = true;
+												}
 											}
 										} else {
-											$has_apartment = true;
+											$tf_booked_dates = [];
+											if(!empty($booked_dates)){
+												foreach ( $booked_dates as $booked_date ) {
+													$booked_from = $booked_date['check_in'];
+													$booked_to   = $booked_date['check_out'];
+		
+													$tfbookedperiod = new DatePeriod(
+														new DateTime( $booked_from . ' 00:00' ),
+														new DateInterval( 'P1D' ),
+														new DateTime( $booked_to . ' 23:59' )
+													);
+									
+													foreach ( $tfbookedperiod as $date ) {
+														$tf_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+													}
+												}
+												foreach($avail_searching_date as $searching){
+													if (array_key_exists($searching, $tf_booked_dates)) {
+														$has_apartment = false;
+														break;
+													}else{
+														$has_apartment = true;
+													}
+												}
+											}else{
+												$has_apartment = true;
+											}
 										}
 									}
 								} else {
 									if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 										if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
-											$has_apartment = true;
+											$tf_booked_dates = [];
+											if(!empty($booked_dates)){
+												foreach ( $booked_dates as $booked_date ) {
+													$booked_from = $booked_date['check_in'];
+													$booked_to   = $booked_date['check_out'];
+		
+													$tfbookedperiod = new DatePeriod(
+														new DateTime( $booked_from . ' 00:00' ),
+														new DateInterval( 'P1D' ),
+														new DateTime( $booked_to . ' 23:59' )
+													);
+									
+													foreach ( $tfbookedperiod as $date ) {
+														$tf_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+													}
+												}
+												foreach($avail_searching_date as $searching){
+													if (array_key_exists($searching, $tf_booked_dates)) {
+														$has_apartment = false;
+														break;
+													}else{
+														$has_apartment = true;
+													}
+												}
+											}else{
+												$has_apartment = true;
+											}
 										}
 									} else {
-										$has_apartment = true;
+										$tf_booked_dates = [];
+										if(!empty($booked_dates)){
+											foreach ( $booked_dates as $booked_date ) {
+												$booked_from = $booked_date['check_in'];
+												$booked_to   = $booked_date['check_out'];
+	
+												$tfbookedperiod = new DatePeriod(
+													new DateTime( $booked_from . ' 00:00' ),
+													new DateInterval( 'P1D' ),
+													new DateTime( $booked_to . ' 23:59' )
+												);
+								
+												foreach ( $tfbookedperiod as $date ) {
+													$tf_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+												}
+											}
+											foreach($avail_searching_date as $searching){
+												if (array_key_exists($searching, $tf_booked_dates)) {
+													$has_apartment = false;
+													break;
+												}else{
+													$has_apartment = true;
+												}
+											}
+										}else{
+											$has_apartment = true;
+										}
 									}
 								}
 							}
 						} else {
 							if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 								if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
-									$has_apartment = true;
+									$tf_booked_dates = [];
+									if(!empty($booked_dates)){
+										foreach ( $booked_dates as $booked_date ) {
+											$booked_from = $booked_date['check_in'];
+											$booked_to   = $booked_date['check_out'];
+
+											$tfbookedperiod = new DatePeriod(
+												new DateTime( $booked_from . ' 00:00' ),
+												new DateInterval( 'P1D' ),
+												new DateTime( $booked_to . ' 23:59' )
+											);
+							
+											foreach ( $tfbookedperiod as $date ) {
+												$tf_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+											}
+										}
+										foreach($avail_searching_date as $searching){
+											if (array_key_exists($searching, $tf_booked_dates)) {
+												$has_apartment = false;
+												break;
+											}else{
+												$has_apartment = true;
+											}
+										}
+									}else{
+										$has_apartment = true;
+									}
+
 								}
 							} else {
-								$has_apartment = true;
+								$tf_booked_dates = [];
+								if(!empty($booked_dates)){
+									foreach ( $booked_dates as $booked_date ) {
+										$booked_from = $booked_date['check_in'];
+										$booked_to   = $booked_date['check_out'];
+
+										$tfbookedperiod = new DatePeriod(
+											new DateTime( $booked_from . ' 00:00' ),
+											new DateInterval( 'P1D' ),
+											new DateTime( $booked_to . ' 23:59' )
+										);
+						
+										foreach ( $tfbookedperiod as $date ) {
+											$tf_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+										}
+									}
+									foreach($avail_searching_date as $searching){
+										if (array_key_exists($searching, $tf_booked_dates)) {
+											$has_apartment = false;
+											break;
+										}else{
+											$has_apartment = true;
+										}
+									}
+								}else{
+									$has_apartment = true;
+								}
 							}
 						}
 					}
 				}
 
-				// foreach ( $booked_dates as $booked_date ) {
-				// 	$booked_from = strtotime( $booked_date['check_in'] );
-				// 	$booked_to   = strtotime( $booked_date['check_out'] );
-
-				// 	if ( $check_in_stt >= $booked_from && $check_in_stt <= $booked_to ) {
-				// 		$has_apartment = true;
-				// 	}
-				// 	if ( $check_out_stt >= $booked_from && $check_out_stt <= $booked_to ) {
-				// 		$has_apartment = true;
-				// 	}
-				// 	if ( $check_in_stt <= $booked_from && $check_out_stt >= $booked_to ) {
-				// 		$has_apartment = true;
-				// 	}
-				// }
 			}
 		}
 
@@ -1251,108 +1418,107 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 		?>
         <div class="tf-hotel-quick-view" style="display: flex">
 			<?php
-			$meta  = get_post_meta( sanitize_text_field( $_POST['post_id'] ), 'tf_apartment_opt', true );
-			$rooms = ! empty( $meta['rooms'] ) ? $meta['rooms'] : '';
+			$meta = get_post_meta( sanitize_text_field( $_POST['post_id'] ), 'tf_apartment_opt', true );
 
-			foreach ( tf_data_types($meta['rooms'] ) as $key => $room ) :
+			foreach ( tf_data_types( $meta['rooms'] ) as $key => $room ) :
 				if ( $key == sanitize_text_field( $_POST['id'] ) ):
 					$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 					?>
                     <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
-						<?php
-						if ( $tf_room_gallery ) {
+						<?php if ( ! empty( $tf_room_gallery ) ) :
 							$tf_room_gallery_ids = explode( ',', $tf_room_gallery );
-						}
-						?>
+							?>
 
-                        <div class="tf-details-qc-slider tf-details-qc-slider-single">
-							<?php
-							if ( ! empty( $tf_room_gallery_ids ) ) {
-								foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
-									?>
-                                    <div class="tf-details-qcs">
-										<?php
-										$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
-										echo '<img src="' . $image_url . '" alt="">';
+                            <div class="tf-details-qc-slider tf-details-qc-slider-single">
+								<?php
+								if ( ! empty( $tf_room_gallery_ids ) ) {
+									foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
 										?>
-                                    </div>
-								<?php }
-							} ?>
-                        </div>
-                        <div class="tf-details-qc-slider tf-details-qc-slider-nav">
-							<?php
-							if ( ! empty( $tf_room_gallery_ids ) ) {
-								foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
-									?>
-                                    <div class="tf-details-qcs">
-										<?php
-										$image_url = wp_get_attachment_url( $gallery_item_id, 'thumbnail' );
-										echo '<img src="' . $image_url . '" alt="">';
+                                        <div class="tf-details-qcs">
+											<?php
+											$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+											echo '<img src="' . $image_url . '" alt="">';
+											?>
+                                        </div>
+									<?php }
+								} ?>
+                            </div>
+                            <div class="tf-details-qc-slider tf-details-qc-slider-nav">
+								<?php
+								if ( ! empty( $tf_room_gallery_ids ) ) {
+									foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
 										?>
-                                    </div>
-								<?php }
-							} ?>
-                        </div>
+                                        <div class="tf-details-qcs">
+											<?php
+											$image_url = wp_get_attachment_url( $gallery_item_id, 'thumbnail' );
+											echo '<img src="' . $image_url . '" alt="">';
+											?>
+                                        </div>
+									<?php }
+								} ?>
+                            </div>
 
-                        <script>
-                            jQuery('.tf-details-qc-slider-single').slick({
-                                slidesToShow: 1,
-                                slidesToScroll: 1,
-                                arrows: true,
-                                fade: false,
-                                adaptiveHeight: true,
-                                infinite: true,
-                                useTransform: true,
-                                speed: 400,
-                                cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
-                            });
-
-                            jQuery('.tf-details-qc-slider-nav')
-                                .on('init', function (event, slick) {
-                                    jQuery('.tf-details-qc-slider-nav .slick-slide.slick-current').addClass('is-active');
-                                })
-                                .slick({
-                                    slidesToShow: 7,
-                                    slidesToScroll: 7,
-                                    dots: false,
-                                    focusOnSelect: false,
-                                    infinite: false,
-                                    responsive: [{
-                                        breakpoint: 1024,
-                                        settings: {
-                                            slidesToShow: 5,
-                                            slidesToScroll: 5,
-                                        }
-                                    }, {
-                                        breakpoint: 640,
-                                        settings: {
-                                            slidesToShow: 4,
-                                            slidesToScroll: 4,
-                                        }
-                                    }, {
-                                        breakpoint: 420,
-                                        settings: {
-                                            slidesToShow: 3,
-                                            slidesToScroll: 3,
-                                        }
-                                    }]
+                            <script>
+                                jQuery('.tf-details-qc-slider-single').slick({
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                    arrows: true,
+                                    fade: false,
+                                    adaptiveHeight: true,
+                                    infinite: true,
+                                    useTransform: true,
+                                    speed: 400,
+                                    cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
                                 });
 
-                            jQuery('.tf-details-qc-slider-single').on('afterChange', function (event, slick, currentSlide) {
-                                jQuery('.tf-details-qc-slider-nav').slick('slickGoTo', currentSlide);
-                                var currrentNavSlideElem = '.tf-details-qc-slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
-                                jQuery('.tf-details-qc-slider-nav .slick-slide.is-active').removeClass('is-active');
-                                jQuery(currrentNavSlideElem).addClass('is-active');
-                            });
+                                jQuery('.tf-details-qc-slider-nav')
+                                    .on('init', function (event, slick) {
+                                        jQuery('.tf-details-qc-slider-nav .slick-slide.slick-current').addClass('is-active');
+                                    })
+                                    .slick({
+                                        slidesToShow: 7,
+                                        slidesToScroll: 7,
+                                        dots: false,
+                                        focusOnSelect: false,
+                                        infinite: false,
+                                        responsive: [{
+                                            breakpoint: 1024,
+                                            settings: {
+                                                slidesToShow: 5,
+                                                slidesToScroll: 5,
+                                            }
+                                        }, {
+                                            breakpoint: 640,
+                                            settings: {
+                                                slidesToShow: 4,
+                                                slidesToScroll: 4,
+                                            }
+                                        }, {
+                                            breakpoint: 420,
+                                            settings: {
+                                                slidesToShow: 3,
+                                                slidesToScroll: 3,
+                                            }
+                                        }]
+                                    });
 
-                            jQuery('.tf-details-qc-slider-nav').on('click', '.slick-slide', function (event) {
-                                event.preventDefault();
-                                var goToSingleSlide = jQuery(this).data('slick-index');
+                                jQuery('.tf-details-qc-slider-single').on('afterChange', function (event, slick, currentSlide) {
+                                    jQuery('.tf-details-qc-slider-nav').slick('slickGoTo', currentSlide);
+                                    var currrentNavSlideElem = '.tf-details-qc-slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
+                                    jQuery('.tf-details-qc-slider-nav .slick-slide.is-active').removeClass('is-active');
+                                    jQuery(currrentNavSlideElem).addClass('is-active');
+                                });
 
-                                jQuery('.tf-details-qc-slider-single').slick('slickGoTo', goToSingleSlide);
-                            });
-                        </script>
+                                jQuery('.tf-details-qc-slider-nav').on('click', '.slick-slide', function (event) {
+                                    event.preventDefault();
+                                    var goToSingleSlide = jQuery(this).data('slick-index');
 
+                                    jQuery('.tf-details-qc-slider-single').slick('slickGoTo', goToSingleSlide);
+                                });
+                            </script>
+						<?php else : ?>
+                            <img src="<?php echo esc_url( $room['thumbnail'] ) ?>" alt="room-thumbnail">
+						<?php endif; ?>
                     </div>
                     <div class="tf-hotel-details-info" style="width:440px; padding-left: 35px;max-height: 470px;padding-top: 25px; overflow-y: auto;">
 						<?php
@@ -1450,11 +1616,11 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
 if ( ! function_exists( 'tf_apartment_feature_assign_taxonomies' ) ) {
 	add_action( 'wp_after_insert_post', 'tf_apartment_feature_assign_taxonomies', 100, 3 );
 	function tf_apartment_feature_assign_taxonomies( $post_id, $post, $old_status ) {
-        if ( 'tf_apartment' !== $post->post_type ) {
-            return;
-        }
+		if ( 'tf_apartment' !== $post->post_type ) {
+			return;
+		}
 		$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
-		if ( ! empty( tf_data_types( $meta['amenities'] ) ) ) {
+		if ( isset( $meta['amenities'] ) && ! empty( tf_data_types( $meta['amenities'] ) ) ) {
 			$apartment_features = array();
 			foreach ( tf_data_types( $meta['amenities'] ) as $amenity ) {
 				$apartment_features[] = intval( $amenity['feature'] );

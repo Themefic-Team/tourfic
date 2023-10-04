@@ -13,7 +13,7 @@ TF_Settings::option( 'tf_settings', array(
 	'icon'     => $menu_icon,
 	'position' => 25,
 	'sections' => array(
-		'general'            => array(
+		'general'               => array(
 			'title'  => __( 'General', 'tourfic' ),
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
@@ -23,22 +23,37 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Disable Services', 'tourfic' ),
 					'subtitle' => __( 'Disable or hide the services you don\'t need by ticking the checkbox', 'tourfic' ),
 					'options'  => array(
-						'hotel' => __( 'Hotels', 'tourfic' ),
-						'tour'  => __( 'Tours', 'tourfic' ),
+						'hotel'     => __( 'Hotels', 'tourfic' ),
+						'tour'      => __( 'Tours', 'tourfic' ),
 						'apartment' => __( 'Apartment', 'tourfic' ),
 					),
 				),
 				array(
+					'id'       => 'tf-date-format-for-users',
+					'type'     => 'select',
+					'label'    => __( 'Select Date Format', 'tourfic' ),
+					'subtitle' => __( 'Select a format, that will show when a user selct date', 'tourfic' ),
+					'options'  => array(
+						'Y/m/d'  => __( 'YYYY/MM/DD', 'tourfic' ),
+						'Y-m-d' => __( 'YYYY-MM-DD', 'tourfic' ),
+						'd-m-Y'  => __( 'DD-MM-YYYY', 'tourfic' ),
+						'm/d/Y'  => __( 'DD/MM/YYYY', 'tourfic' ),
+						'Y.m.d'  => __( 'YYYY.MM.DD', 'tourfic' ),
+						'd.m.Y'  => __( 'DD.MM.YYYY', 'tourfic' ),
+					),
+					'default'    => 'Y/m/d',
+				),
+				array(
 					'id'       => 'template_heading',
 					'type'     => 'heading',
-					'label'  => __( 'Template Settings', 'tourfic' ),
+					'label'    => __( 'Template Settings', 'tourfic' ),
 					'subtitle' => __( 'You can able to change your hotel & tour template. Currently, we only allow 2 template.', 'tourfic' ),
 				),
 				array(
-					'id'     => 'tf-template',
-					'type'   => 'tab',
-					'label'  => 'Hotel & Tour',
-					'tabs'   => array(
+					'id'    => 'tf-template',
+					'type'  => 'tab',
+					'label' => 'Hotel, Tour & Apartment Template',
+					'tabs'  => array(
 						array(
 							'id'     => 'hotel_template',
 							'title'  => __( 'Hotel', 'tourfic' ),
@@ -54,83 +69,83 @@ TF_Settings::option( 'tf_settings', array(
 									'id'       => 'single-hotel',
 									'type'     => 'imageselect',
 									'label'    => __( 'Select Single Template', 'tourfic' ),
-									'multiple' 		=> true,
-									'inline'   		=> true,
-									'options'   	=> array(
-										'design-1' 				=> array(
-											'title'			=> 'Design 1',
-											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design1-hotel.jpg",
+									'multiple' => true,
+									'inline'   => true,
+									'options'  => array(
+										'design-1' => array(
+											'title' => 'Design 1',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design1-hotel.jpg",
 										),
-										'default' 			=> array(
-											'title'			=> 'Defult',
-											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-hotel.jpg",
+										'default'  => array(
+											'title' => 'Defult',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-hotel.jpg",
 										),
 									),
-									'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+									'default'  => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
 								),
 								array(
-									'id'       => 'single-hotel-layout',
-									'class'    => 'disable-sortable',
-									'type'     => 'repeater',
-									'drag_only' => true,
-									'label'    => __( 'Single Hotel Template Sections', 'tourfic' ),
-									'subtitle' => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'id'         => 'single-hotel-layout',
+									'class'      => 'disable-sortable',
+									'type'       => 'repeater',
+									'drag_only'  => true,
+									'label'      => __( 'Single Hotel Template Sections', 'tourfic' ),
+									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-hotel', '==', 'design-1' ),
-									'fields'   => array(
+									'fields'     => array(
 										array(
-											'id'    => 'hotel-section',
-											'class' => 'tf-section-name-hidden',
-											'type'  => 'text',
-											'label' => __( 'Section Name', 'tourfic' ),
-											'attributes'  => array(
+											'id'         => 'hotel-section',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Name', 'tourfic' ),
+											'attributes' => array(
 												'readonly' => 'readonly',
 											),
 										),
 										array(
-											'id'    => 'hotel-section-slug',
-											'class' => 'tf-section-name-hidden',
-											'type'  => 'text',
-											'label' => __( 'Section Slug', 'tourfic' ),
-											'attributes'  => array(
+											'id'         => 'hotel-section-slug',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Slug', 'tourfic' ),
+											'attributes' => array(
 												'readonly' => 'readonly',
 											),
 										),
 										array(
-											'id'    => 'hotel-section-status',
-											'type'  => 'switch',
-											'label' => __( 'Section Status', 'tourfic' ),
+											'id'       => 'hotel-section-status',
+											'type'     => 'switch',
+											'label'    => __( 'Section Status', 'tourfic' ),
 											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
 										),
 									),
-									'default'  => array(
+									'default'    => array(
 										array(
-											'hotel-section' => __( 'Description', 'tourfic' ),
-											'hotel-section-slug' => __( 'description', 'tourfic' ),
+											'hotel-section'        => __( 'Description', 'tourfic' ),
+											'hotel-section-slug'   => __( 'description', 'tourfic' ),
 											'hotel-section-status' => true,
 										),
 										array(
-											'hotel-section' => __( 'Features', 'tourfic' ),
-											'hotel-section-slug' => __( 'features', 'tourfic' ),
+											'hotel-section'        => __( 'Features', 'tourfic' ),
+											'hotel-section-slug'   => __( 'features', 'tourfic' ),
 											'hotel-section-status' => true,
 										),
 										array(
-											'hotel-section' => __( 'Room', 'tourfic' ),
-											'hotel-section-slug' => __( 'rooms', 'tourfic' ),
+											'hotel-section'        => __( 'Room', 'tourfic' ),
+											'hotel-section-slug'   => __( 'rooms', 'tourfic' ),
 											'hotel-section-status' => true,
 										),
 										array(
-											'hotel-section' => __( 'FAQ', 'tourfic' ),
-											'hotel-section-slug' => __( 'faq', 'tourfic' ),
+											'hotel-section'        => __( 'FAQ', 'tourfic' ),
+											'hotel-section-slug'   => __( 'faq', 'tourfic' ),
 											'hotel-section-status' => true,
 										),
 										array(
-											'hotel-section' => __( 'Review', 'tourfic' ),
-											'hotel-section-slug' => __( 'review', 'tourfic' ),
+											'hotel-section'        => __( 'Review', 'tourfic' ),
+											'hotel-section-slug'   => __( 'review', 'tourfic' ),
 											'hotel-section-status' => true,
 										),
 										array(
-											'hotel-section' => __( 'Trams & Condition', 'tourfic' ),
-											'hotel-section-slug' => __( 'trams-condition', 'tourfic' ),
+											'hotel-section'        => __( 'Terms & Conditions', 'tourfic' ),
+											'hotel-section-slug'   => __( 'trams-condition', 'tourfic' ),
 											'hotel-section-status' => true,
 										),
 									)
@@ -145,31 +160,42 @@ TF_Settings::option( 'tf_settings', array(
 									'id'       => 'hotel-archive',
 									'type'     => 'imageselect',
 									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
-									'multiple' 		=> true,
-									'inline'   		=> true,
-									'options'   	=> array(
-										'design-1' 				=> array(
-											'title'			=> 'Design 1',
-											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/hotel-archive-design1.jpg",
+									'multiple' => true,
+									'inline'   => true,
+									'options'  => array(
+										'design-1' => array(
+											'title' => 'Design 1',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design1.jpg",
 										),
-										'default' 			=> array(
-											'title'			=> 'Defult',
-											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/hotel-archive-default.jpg",
+										'default'  => array(
+											'title' => 'Defult',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-default.jpg",
 										),
 									),
-									'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+									'default'  => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
 								),
 								array(
-									'id'       => 'hotel_archive_view',
-									'type'     => 'select',
-									'label'    => __( 'Archive Layout', 'tourfic' ),
-									'options'  => array(
-										'list'   => __( 'List', 'tourfic' ),
-										'grid'   => __( 'Grid', 'tourfic' ),
+									'id'         => 'hotel_archive_view',
+									'type'       => 'select',
+									'label'      => __( 'Archive Layout', 'tourfic' ),
+									'options'    => array(
+										'list' => __( 'List', 'tourfic' ),
+										'grid' => __( 'Grid', 'tourfic' ),
 									),
 									'default'    => 'List',
 									'dependency' => array( 'hotel-archive', '==', 'design-1' ),
 								),
+								array(
+									'id'       => 'hotel_archive_price_minimum_settings',
+									'type'     => 'select',
+									'label'    => __( 'Select Minimum Price to Show?', 'tourfic' ),
+									'options'  => array(
+										'all'   => __( 'All', 'tourfic' ),
+										'adult'   => __( 'Adult', 'tourfic' ),
+										'child'   => __( 'Child', 'tourfic' ),
+									),
+									'default'    => 'All',
+								), 
 								array(
 									'id'      => 'hotel_archive_notice',
 									'type'    => 'notice',
@@ -177,7 +203,6 @@ TF_Settings::option( 'tf_settings', array(
 								),
 							),
 						),
-
 						array(
 							'id'     => 'tour_template',
 							'title'  => __( 'Tour', 'tourfic' ),
@@ -192,108 +217,108 @@ TF_Settings::option( 'tf_settings', array(
 									'id'       => 'single-tour',
 									'type'     => 'imageselect',
 									'label'    => __( 'Select Single Template', 'tourfic' ),
-									'multiple' 		=> true,
-									'inline'   		=> true,
-									'options'   	=> array(
-										'design-1' 				=> array(
-											'title'			=> 'Design 1',
-											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design1-tour.jpg",
+									'multiple' => true,
+									'inline'   => true,
+									'options'  => array(
+										'design-1' => array(
+											'title' => 'Design 1',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design1-tour.jpg",
 										),
-										'default' 			=> array(
-											'title'			=> 'Defult',
-											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-tour.jpg",
+										'default'  => array(
+											'title' => 'Defult',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-tour.jpg",
 										),
 									),
-									'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+									'default'  => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
 								),
 								array(
-									'id'       => 'single-tour-layout',
-									'class'    => 'disable-sortable',
-									'type'     => 'repeater',
-									'drag_only' => true,
-									'label'    => __( 'Single Tour Template Sections', 'tourfic' ),
-									'subtitle' => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'id'         => 'single-tour-layout',
+									'class'      => 'disable-sortable',
+									'type'       => 'repeater',
+									'drag_only'  => true,
+									'label'      => __( 'Single Tour Template Sections', 'tourfic' ),
+									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-tour', '==', 'design-1' ),
-									'fields'   => array(
+									'fields'     => array(
 										array(
-											'id'    => 'tour-section',
-											'class' => 'tf-section-name-hidden',
-											'type'  => 'text',
-											'label' => __( 'Section Name', 'tourfic' ),
-											'attributes'  => array(
+											'id'         => 'tour-section',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Name', 'tourfic' ),
+											'attributes' => array(
 												'readonly' => 'readonly',
 											),
 										),
 										array(
-											'id'    => 'tour-section-slug',
-											'class' => 'tf-section-name-hidden',
-											'type'  => 'text',
-											'label' => __( 'Section Slug', 'tourfic' ),
-											'attributes'  => array(
+											'id'         => 'tour-section-slug',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Slug', 'tourfic' ),
+											'attributes' => array(
 												'readonly' => 'readonly',
 											),
 										),
 										array(
-											'id'    => 'tour-section-status',
-											'type'  => 'switch',
-											'label' => __( 'Section Status', 'tourfic' ),
+											'id'       => 'tour-section-status',
+											'type'     => 'switch',
+											'label'    => __( 'Section Status', 'tourfic' ),
 											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
 										),
 									),
-									'default'  => array(
+									'default'    => array(
 										array(
-											'tour-section' => __( 'Gallery', 'tourfic' ),
-											'tour-section-slug' => __( 'gallery', 'tourfic' ),
+											'tour-section'        => __( 'Gallery', 'tourfic' ),
+											'tour-section-slug'   => __( 'gallery', 'tourfic' ),
 											'tour-section-status' => true,
 										),
 										array(
-											'tour-section' => __( 'Price', 'tourfic' ),
-											'tour-section-slug' => __( 'price', 'tourfic' ),
+											'tour-section'        => __( 'Price', 'tourfic' ),
+											'tour-section-slug'   => __( 'price', 'tourfic' ),
 											'tour-section-status' => true,
 										),
 										array(
-											'tour-section' => __( 'Description', 'tourfic' ),
-											'tour-section-slug' => __( 'description', 'tourfic' ),
+											'tour-section'        => __( 'Description', 'tourfic' ),
+											'tour-section-slug'   => __( 'description', 'tourfic' ),
 											'tour-section-status' => true,
 										),
 										array(
-											'tour-section' => __( 'Information', 'tourfic' ),
-											'tour-section-slug' => __( 'information', 'tourfic' ),
+											'tour-section'        => __( 'Information', 'tourfic' ),
+											'tour-section-slug'   => __( 'information', 'tourfic' ),
 											'tour-section-status' => true,
 										),
 										array(
-											'tour-section' => __( 'Highlights', 'tourfic' ),
-											'tour-section-slug' => __( 'highlights', 'tourfic' ),
+											'tour-section'        => __( 'Highlights', 'tourfic' ),
+											'tour-section-slug'   => __( 'highlights', 'tourfic' ),
 											'tour-section-status' => true,
 										),
 										array(
-											'tour-section' => __( 'Include Exclude', 'tourfic' ),
-											'tour-section-slug' => __( 'include-exclude', 'tourfic' ),
+											'tour-section'        => __( 'Include Exclude', 'tourfic' ),
+											'tour-section-slug'   => __( 'include-exclude', 'tourfic' ),
 											'tour-section-status' => true,
 										),
 										array(
-											'tour-section' => __( 'Itinerary', 'tourfic' ),
-											'tour-section-slug' => __( 'itinerary', 'tourfic' ),
+											'tour-section'        => __( 'Itinerary', 'tourfic' ),
+											'tour-section-slug'   => __( 'itinerary', 'tourfic' ),
 											'tour-section-status' => true,
 										),
 										array(
-											'tour-section' => __( 'Map', 'tourfic' ),
-											'tour-section-slug' => __( 'map', 'tourfic' ),
+											'tour-section'        => __( 'Map', 'tourfic' ),
+											'tour-section-slug'   => __( 'map', 'tourfic' ),
 											'tour-section-status' => true,
 										),
 										array(
-											'tour-section' => __( 'FAQ', 'tourfic' ),
-											'tour-section-slug' => __( 'faq', 'tourfic' ),
+											'tour-section'        => __( 'FAQ', 'tourfic' ),
+											'tour-section-slug'   => __( 'faq', 'tourfic' ),
 											'tour-section-status' => true,
 										),
 										array(
-											'tour-section' => __( 'Trams & Condition', 'tourfic' ),
-											'tour-section-slug' => __( 'trams-condition', 'tourfic' ),
+											'tour-section'        => __( 'Terms & Conditions', 'tourfic' ),
+											'tour-section-slug'   => __( 'trams-condition', 'tourfic' ),
 											'tour-section-status' => true,
 										),
 										array(
-											'tour-section' => __( 'Review', 'tourfic' ),
-											'tour-section-slug' => __( 'review', 'tourfic' ),
+											'tour-section'        => __( 'Review', 'tourfic' ),
+											'tour-section-slug'   => __( 'review', 'tourfic' ),
 											'tour-section-status' => true,
 										),
 									)
@@ -308,33 +333,96 @@ TF_Settings::option( 'tf_settings', array(
 									'id'       => 'tour-archive',
 									'type'     => 'imageselect',
 									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
-									'multiple' 		=> true,
-									'inline'   		=> true,
-									'options'   	=> array(
-										'design-1' 				=> array(
-											'title'			=> 'Design 1',
-											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/tour-archive-design-1.jpg",
+									'multiple' => true,
+									'inline'   => true,
+									'options'  => array(
+										'design-1' => array(
+											'title' => 'Design 1',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-design-1.jpg",
 										),
-										'default' 			=> array(
-											'title'			=> 'Defult',
-											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/tour-archive-default.jpg",
+										'default'  => array(
+											'title' => 'Defult',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-default.jpg",
 										),
 									),
-									'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+									'default'  => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
 								),
 								array(
-									'id'       => 'tour_archive_view',
-									'type'     => 'select',
-									'label'    => __( 'Archive Layout', 'tourfic' ),
-									'options'  => array(
-										'list'   => __( 'List', 'tourfic' ),
-										'grid'   => __( 'Grid', 'tourfic' ),
+									'id'         => 'tour_archive_view',
+									'type'       => 'select',
+									'label'      => __( 'Archive Layout', 'tourfic' ),
+									'options'    => array(
+										'list' => __( 'List', 'tourfic' ),
+										'grid' => __( 'Grid', 'tourfic' ),
 									),
 									'default'    => 'List',
 									'dependency' => array( 'tour-archive', '==', 'design-1' ),
 								),
 								array(
+									'id'       => 'tour_archive_price_minimum_settings',
+									'type'     => 'select',
+									'label'    => __( 'Select Minimum Price to Show?', 'tourfic' ),
+									'options'  => array(
+										'all'   => __( 'All', 'tourfic' ),
+										'adult'   => __( 'Adult', 'tourfic' ),
+										'child'   => __( 'Child', 'tourfic' ),
+									),
+									'default'    => 'All',
+								),
+								array(
 									'id'      => 'tour_archive_notice',
+									'type'    => 'notice',
+									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
+								),
+							),
+						),
+						array(
+							'id'     => 'apartment_template',
+							'title'  => __( 'Apartment', 'tourfic' ),
+							'icon'   => 'fa fa-gear',
+							'fields' => array(
+								array(
+									'id'      => 'apartment-title',
+									'type'    => 'heading',
+									'content' => __( 'Apartment Single Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'single-apartment',
+									'type'     => 'imageselect',
+									'label'    => __( 'Select Single Template', 'tourfic' ),
+									'multiple' => true,
+									'inline'   => true,
+									'options'  => array(
+										'default'  => array(
+											'title' => 'Default',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-apartment.jpg",
+										),
+									),
+									'default'  => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+								),
+								array(
+									'id'      => 'apartment-title',
+									'type'    => 'heading',
+									'content' => __( 'Apartment Archive & Search Result Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'apartment-archive',
+									'type'     => 'imageselect',
+									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
+									'multiple' => true,
+									'inline'   => true,
+									'options'  => array(
+										'default'  => array(
+											'title' => 'Default',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/apartment-archive-default.jpg",
+										),
+									),
+									'default'  => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+								),
+								array(
+									'id'      => 'apartment_archive_notice',
 									'type'    => 'notice',
 									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
 								),
@@ -344,12 +432,12 @@ TF_Settings::option( 'tf_settings', array(
 				)
 			),
 		),
-		'hotel_option'       => array(
+		'hotel_option'          => array(
 			'title'  => __( 'Hotel Options', 'tourfic' ),
 			'icon'   => 'fas fa-hotel',
 			'fields' => array(),
 		),
-		'single_page'   => array(
+		'single_page'           => array(
 			'title'  => __( 'Single Page', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
@@ -378,13 +466,13 @@ TF_Settings::option( 'tf_settings', array(
 					'default'   => false
 				),
 				array(
-					'id'       => 'feature-filter',
-					'type'     => 'switch',
-					'label'    => __( 'Filter By Feature', 'tourfic' ),
+					'id'        => 'feature-filter',
+					'type'      => 'switch',
+					'label'     => __( 'Filter By Feature', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'default'  => true,
-					'is_pro'   => true
+					'default'   => true,
+					'is_pro'    => true
 				),
 				array(
 					'id'     => 'h-enquiry-email',
@@ -394,7 +482,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		'room_config'        => array(
+		'room_config'           => array(
 			'title'  => __( 'Room Config', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
@@ -425,7 +513,7 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		// Hotel service Popup
-		'payment_popup'      => array(
+		'payment_popup'         => array(
 			'title'  => __( 'Popup Settings', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
@@ -477,14 +565,14 @@ TF_Settings::option( 'tf_settings', array(
 				),
 
 				array(
-					'id' => 'amenities_cats',
-					'type' => 'repeater',
-					'label' => __( 'Amenities Categories', 'tourfic' ),
+					'id'           => 'amenities_cats',
+					'type'         => 'repeater',
+					'label'        => __( 'Amenities Categories', 'tourfic' ),
 					'button_title' => __( 'Add New', 'tourfic' ),
-					'fields' => array(
+					'fields'       => array(
 						array(
-							'id' => 'amenities_cat_name',
-							'type' => 'text',
+							'id'    => 'amenities_cat_name',
+							'type'  => 'text',
 							'label' => __( 'Category Name', 'tourfic' ),
 						),
 					),
@@ -520,12 +608,12 @@ TF_Settings::option( 'tf_settings', array(
 		),
 
 		// Tour Options
-		'tour'	 => array(
+		'tour'                  => array(
 			'title'  => __( 'Tour Options', 'tourfic' ),
 			'icon'   => 'fas fa-umbrella-beach',
 			'fields' => array(),
 		),
-		'single_tour'        => array(
+		'single_tour'           => array(
 			'title'  => __( 'Single Page', 'tourfic' ),
 			'parent' => 'tour',
 			'icon'   => 'fa fa-cog',
@@ -564,14 +652,14 @@ TF_Settings::option( 'tf_settings', array(
 					'type'     => 'text',
 					'label'    => __( 'Related Tour Title', 'tourfic' ),
 					'subtitle' => __( 'This Title will show on single tour, Related tour Section as Section Title.', 'tourfic' ),
-					'default' => __( 'You might also like', 'tourfic' ),
+					'default'  => __( 'You might also like', 'tourfic' ),
 				),
 				array(
 					'id'       => 'rt-description',
 					'type'     => 'text',
 					'label'    => __( 'Related Tour Description', 'tourfic' ),
 					'subtitle' => __( 'This Description will show on single tour, Related tour Section as Section Description.', 'tourfic' ),
-					'default' => __( 'Travel is my life. Since 1999, I have been traveling around the world nonstop. If you also love travel, you are in the right place!', 'tourfic' ),
+					'default'  => __( 'Travel is my life. Since 1999, I have been traveling around the world nonstop. If you also love travel, you are in the right place!', 'tourfic' ),
 				),
 				array(
 					'id'      => 'rt-display',
@@ -618,11 +706,19 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'If you enable this option, all tours whose status is Published and Expired will be displayed', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
+				),
+				array(
+					'id'        => 't-hide-start-price',
+					'type'      => 'switch',
+					'label'     => __( 'Hide Start Price', 'tourfic' ),
+					'subtitle'  => __( 'If you enable this option, then the start price will be hidden from the tour list.', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
 				)
 			),
 		),
 		// Partial Payment Popup
-		'tour_payment_popup' => array(
+		'tour_payment_popup'    => array(
 			'title'  => __( 'Partial Payment', 'tourfic' ),
 			'parent' => 'tour',
 			'icon'   => 'fa fa-cog',
@@ -670,7 +766,7 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		// Itinerary Settings
-		'tour_itinerary'     => array(
+		'tour_itinerary'        => array(
 			'title'  => __( 'Itinerary Settings', 'tourfic' ),
 			'parent' => 'tour',
 			'icon'   => 'fa fa-cog',
@@ -936,32 +1032,32 @@ TF_Settings::option( 'tf_settings', array(
 					),
 				),
 				array(
-					'id'         => '',
-					'type'       => 'switch',
-					'label'      => __( 'Enable Itinerary Map', 'tourfic' ),
-					'label_on'   => __( 'Yes', 'tourfic' ),
-					'label_off'  => __( 'No', 'tourfic' ),
-					'is_pro'     => true,
-					'field_width'     => 50,
+					'id'          => '',
+					'type'        => 'switch',
+					'label'       => __( 'Enable Itinerary Map', 'tourfic' ),
+					'label_on'    => __( 'Yes', 'tourfic' ),
+					'label_off'   => __( 'No', 'tourfic' ),
+					'is_pro'      => true,
+					'field_width' => 50,
 				),
 				array(
-					'id'       => '',
-					'type'     => 'select',
-					'label'    => __( 'Travel Mode', 'tourfic' ),
-					'options'  => array(
+					'id'          => '',
+					'type'        => 'select',
+					'label'       => __( 'Travel Mode', 'tourfic' ),
+					'options'     => array(
 						'DRIVING'   => __( 'Driving', 'tourfic' ),
 						'WALKING'   => __( 'Walking', 'tourfic' ),
 						'BICYCLING' => __( 'Bycycling', 'tourfic' ),
 					),
-					'default'    => 'driving',
-					'is_pro'     => true,
-					'field_width'     => 50,
+					'default'     => 'driving',
+					'is_pro'      => true,
+					'field_width' => 50,
 				),
 
 			),
 		),
 		// Without Payment Popup
-		'without_payment_book' => array(
+		'without_payment_book'  => array(
 			'title'  => __( 'Without Payment', 'tourfic' ),
 			'parent' => 'tour',
 			'icon'   => 'fa fa-cog',
@@ -975,35 +1071,40 @@ TF_Settings::option( 'tf_settings', array(
 					'id'        => 'disable_traveller_info',
 					'type'      => 'switch',
 					'label'     => __( 'Enable Traveler Info', 'tourfic' ),
-					'subtitle' => __( 'Disable this option, if you want to hide traveler info.', 'tourfic' ),
+					'subtitle'  => __( 'Enable this option, if you want to add traveler info.', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'default'   => true,
-					'is_pro'       => true
+					'is_pro'    => true
 				),
 				array(
 					'id'    => 'custom_fields_heading',
 					'type'  => 'heading',
 					'label' => __( 'Settings for Traveler Info Fields', 'tourfic' ),
+					'dependency' => array(
+						array( 'disable_traveller_info', '==', 'true' ),
+					),
 				),
 				array(
-					'id'       => 'without-payment-field',
-					'class'    => 'disable-sortable',
-					'type'     => 'repeater',
+					'id'           => 'without-payment-field',
+					'class'        => 'disable-sortable',
+					'type'         => 'repeater',
 					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'    => __( 'Fields for Traveler Info', 'tourfic' ),
-					'subtitle' => __( 'Custom fields allowed', 'tourfic' ),
+					'label'        => __( 'Fields for Traveler Info', 'tourfic' ),
+					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
 					'is_pro'       => true,
-					'fields'   => array(
+					'dependency' => array(
+						array( 'disable_traveller_info', '==', 'true' ),
+					),
+					'fields'       => array(
 						array(
 							'id'    => 'reg-field-label',
 							'type'  => 'text',
 							'label' => __( 'Label', 'tourfic' ),
 						),
 						array(
-							'id'    => 'reg-field-name',
-							'type'  => 'text',
-							'label' => __( 'Name', 'tourfic' ),
+							'id'       => 'reg-field-name',
+							'type'     => 'text',
+							'label'    => __( 'Name', 'tourfic' ),
 							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
 							'validate' => 'no_space_no_special',
 						),
@@ -1012,74 +1113,74 @@ TF_Settings::option( 'tf_settings', array(
 							'type'    => 'select',
 							'label'   => __( 'Field Type', 'tourfic' ),
 							'options' => array(
-								'text' => __( 'Text', 'tourfic' ),
-								'email' => __( 'Email', 'tourfic' ),
-								'date' => __( 'Date', 'tourfic' ),
-								'radio' => __( 'Radio', 'tourfic' ),
+								'text'     => __( 'Text', 'tourfic' ),
+								'email'    => __( 'Email', 'tourfic' ),
+								'date'     => __( 'Date', 'tourfic' ),
+								'radio'    => __( 'Radio', 'tourfic' ),
 								'checkbox' => __( 'Checkbox', 'tourfic' ),
-								'select' => __( 'Select', 'tourfic' ),
+								'select'   => __( 'Select', 'tourfic' ),
 							),
 						),
 						array(
-							'id'     => 'reg-options',
-							'type'   => 'repeater',
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
 							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'  => __( 'Option Label', 'tourfic' ),
-							'dependency' => array(
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
 								array( 'reg-fields-type', '==', 'radio' ),
 							),
-							'fields' => array(
+							'fields'       => array(
 								array(
-									'label'   => __( 'Field Label', 'tourfic' ),
-									'id'      => 'option-label',
-									'type'    => 'text',
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
 								),
 								array(
-									'label'   => __( 'Field Value', 'tourfic' ),
-									'id'      => 'option-value',
-									'type'    => 'text',
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
 								),
 							),
 						),
 						array(
-							'id'     => 'reg-options',
-							'type'   => 'repeater',
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
 							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'  => __( 'Option Label', 'tourfic' ),
-							'dependency' => array(
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
 								array( 'reg-fields-type', '==', 'select' ),
 							),
-							'fields' => array(
+							'fields'       => array(
 								array(
-									'label'   => __( 'Field Label', 'tourfic' ),
-									'id'      => 'option-label',
-									'type'    => 'text',
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
 								),
 								array(
-									'label'   => __( 'Field Value', 'tourfic' ),
-									'id'      => 'option-value',
-									'type'    => 'text',
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
 								),
 							),
 						),
 						array(
-							'id'     => 'reg-options',
-							'type'   => 'repeater',
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
 							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'  => __( 'Option Label', 'tourfic' ),
-							'dependency' => array(
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
 								array( 'reg-fields-type', '==', 'checkbox' ),
 							),
-							'fields' => array(
+							'fields'       => array(
 								array(
-									'label'   => __( 'Field Label', 'tourfic' ),
-									'id'      => 'option-label',
-									'type'    => 'text',
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
 								),
 								array(
-									'label'   => __( 'Field Value', 'tourfic' ),
-									'id'      => 'option-value',
-									'type'    => 'text',
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
 								),
 							),
 						),
@@ -1088,131 +1189,131 @@ TF_Settings::option( 'tf_settings', array(
 							'type'  => 'switch',
 							'label' => __( 'Required Field ?', 'tourfic' ),
 						),
-	
+
 					),
-					'default' => array(
+					'default'      => array(
 						array(
-							'reg-field-label' => __( 'Full Name', 'tourfic' ),
-							'reg-field-name' => __( 'tf_full_name', 'tourfic' ),
-							'reg-fields-type' => 'text',
+							'reg-field-label'    => __( 'Full Name', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_full_name', 'tourfic' ),
+							'reg-fields-type'    => 'text',
 							'reg-field-required' => true,
 						),
 						array(
-							'reg-field-label' => __( 'Date of birth', 'tourfic' ),
-							'reg-field-name' => __( 'tf_dob', 'tourfic' ),
-							'reg-fields-type' => 'date',
+							'reg-field-label'    => __( 'Date of birth', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_dob', 'tourfic' ),
+							'reg-fields-type'    => 'date',
 							'reg-field-required' => true,
 						),
 						array(
-							'reg-field-label' => __( 'NID', 'tourfic' ),
-							'reg-field-name' => __( 'tf_nid', 'tourfic' ),
-							'reg-fields-type' => 'text',
+							'reg-field-label'    => __( 'NID', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_nid', 'tourfic' ),
+							'reg-fields-type'    => 'text',
 							'reg-field-required' => true,
 						)
 					),
 				),
 				array(
-					'id'    => 'confirmation_fields_heading',
-					'type'  => 'heading',
-					'label' => __( 'Settings for Booking Confirmation Fields', 'tourfic' ),
+					'id'       => 'confirmation_fields_heading',
+					'type'     => 'heading',
+					'label'    => __( 'Settings for Booking Confirmation Fields', 'tourfic' ),
 					'subtitle' => __( 'Booking Confirmation Fields works for without payment.', 'tourfic' ),
 				),
 				array(
-					'id'       => 'book-confirm-field',
-					'class'    => 'disable-sortable',
-					'type'     => 'repeater',
+					'id'           => 'book-confirm-field',
+					'class'        => 'disable-sortable',
+					'type'         => 'repeater',
 					'button_title' => __( 'Add New', 'tourfic' ),
-					'label'    => __( 'Fields for Booking Confirmation', 'tourfic' ),
-					'subtitle' => __( 'Custom fields allowed', 'tourfic' ),
+					'label'        => __( 'Fields for Booking Confirmation', 'tourfic' ),
+					'subtitle'     => __( 'Custom fields allowed', 'tourfic' ),
 					'is_pro'       => true,
-					'fields'   => array(
+					'fields'       => array(
 						array(
 							'id'    => 'reg-field-label',
 							'type'  => 'text',
 							'label' => __( 'Label', 'tourfic' ),
 						),
 						array(
-							'id'    => 'reg-field-name',
-							'type'  => 'text',
-							'label' => __( 'Name', 'tourfic' ),
+							'id'       => 'reg-field-name',
+							'type'     => 'text',
+							'label'    => __( 'Name', 'tourfic' ),
 							'subtitle' => __( 'Space Not allowed (Ex: tf_name)', 'tourfic' ),
 							'validate' => 'no_space_no_special',
-							'class' => 'tf_hidden_fields'
+							'class'    => 'tf_hidden_fields'
 						),
 						array(
 							'id'      => 'reg-fields-type',
 							'type'    => 'select',
 							'label'   => __( 'Field Type', 'tourfic' ),
 							'options' => array(
-								'text' => __( 'Text', 'tourfic' ),
-								'email' => __( 'Email', 'tourfic' ),
-								'date' => __( 'Date', 'tourfic' ),
-								'radio' => __( 'Radio', 'tourfic' ),
+								'text'     => __( 'Text', 'tourfic' ),
+								'email'    => __( 'Email', 'tourfic' ),
+								'date'     => __( 'Date', 'tourfic' ),
+								'radio'    => __( 'Radio', 'tourfic' ),
 								'checkbox' => __( 'Checkbox', 'tourfic' ),
-								'select' => __( 'Select', 'tourfic' ),
+								'select'   => __( 'Select', 'tourfic' ),
 							),
-							'class' => 'tf_hidden_fields'
+							'class'   => 'tf_hidden_fields'
 						),
 						array(
-							'id'     => 'reg-options',
-							'type'   => 'repeater',
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
 							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'  => __( 'Option Label', 'tourfic' ),
-							'dependency' => array(
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
 								array( 'reg-fields-type', '==', 'radio' ),
 							),
-							'fields' => array(
+							'fields'       => array(
 								array(
-									'label'   => __( 'Field Label', 'tourfic' ),
-									'id'      => 'option-label',
-									'type'    => 'text',
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
 								),
 								array(
-									'label'   => __( 'Field Value', 'tourfic' ),
-									'id'      => 'option-value',
-									'type'    => 'text',
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
 								),
 							),
 						),
 						array(
-							'id'     => 'reg-options',
-							'type'   => 'repeater',
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
 							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'  => __( 'Option Label', 'tourfic' ),
-							'dependency' => array(
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
 								array( 'reg-fields-type', '==', 'select' ),
 							),
-							'fields' => array(
+							'fields'       => array(
 								array(
-									'label'   => __( 'Field Label', 'tourfic' ),
-									'id'      => 'option-label',
-									'type'    => 'text',
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
 								),
 								array(
-									'label'   => __( 'Field Value', 'tourfic' ),
-									'id'      => 'option-value',
-									'type'    => 'text',
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
 								),
 							),
 						),
 						array(
-							'id'     => 'reg-options',
-							'type'   => 'repeater',
+							'id'           => 'reg-options',
+							'type'         => 'repeater',
 							'button_title' => __( 'Add New Option', 'tourfic' ),
-							'label'  => __( 'Option Label', 'tourfic' ),
-							'dependency' => array(
+							'label'        => __( 'Option Label', 'tourfic' ),
+							'dependency'   => array(
 								array( 'reg-fields-type', '==', 'checkbox' ),
 							),
-							'fields' => array(
+							'fields'       => array(
 								array(
-									'label'   => __( 'Field Label', 'tourfic' ),
-									'id'      => 'option-label',
-									'type'    => 'text',
+									'label' => __( 'Field Label', 'tourfic' ),
+									'id'    => 'option-label',
+									'type'  => 'text',
 								),
 								array(
-									'label'   => __( 'Field Value', 'tourfic' ),
-									'id'      => 'option-value',
-									'type'    => 'text',
+									'label' => __( 'Field Value', 'tourfic' ),
+									'id'    => 'option-value',
+									'type'  => 'text',
 								),
 							),
 						),
@@ -1222,77 +1323,84 @@ TF_Settings::option( 'tf_settings', array(
 							'label' => __( 'Required Field ?', 'tourfic' ),
 							'class' => 'tf_hidden_fields'
 						),
-	
+
 					),
-					'default' => array(
+					'default'      => array(
 						array(
-							'reg-field-label' => __( 'First Name', 'tourfic' ),
-							'reg-field-name' => __( 'tf_first_name', 'tourfic' ),
-							'reg-fields-type' => 'text',
+							'reg-field-label'    => __( 'First Name', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_first_name', 'tourfic' ),
+							'reg-fields-type'    => 'text',
 							'reg-field-required' => true,
 						),
 						array(
-							'reg-field-label' => __( 'Last Name', 'tourfic' ),
-							'reg-field-name' => __( 'tf_last_name', 'tourfic' ),
-							'reg-fields-type' => 'text',
+							'reg-field-label'    => __( 'Last Name', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_last_name', 'tourfic' ),
+							'reg-fields-type'    => 'text',
 							'reg-field-required' => true,
 						),
 						array(
-							'reg-field-label' => __( 'Email', 'tourfic' ),
-							'reg-field-name' => __( 'tf_email', 'tourfic' ),
-							'reg-fields-type' => 'email',
+							'reg-field-label'    => __( 'Email', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_email', 'tourfic' ),
+							'reg-fields-type'    => 'email',
 							'reg-field-required' => true,
 						),
 						array(
-							'reg-field-label' => __( 'Phone', 'tourfic' ),
-							'reg-field-name' => __( 'tf_phone', 'tourfic' ),
-							'reg-fields-type' => 'text',
+							'reg-field-label'    => __( 'Phone', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_phone', 'tourfic' ),
+							'reg-fields-type'    => 'text',
 							'reg-field-required' => true,
 						),
 						array(
-							'reg-field-label' => __( 'Country', 'tourfic' ),
-							'reg-field-name' => __( 'tf_country', 'tourfic' ),
-							'reg-fields-type' => 'text',
+							'reg-field-label'    => __( 'Country', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_country', 'tourfic' ),
+							'reg-fields-type'    => 'text',
 							'reg-field-required' => true,
 						),
 						array(
-							'reg-field-label' => __( 'Street Address', 'tourfic' ),
-							'reg-field-name' => __( 'tf_street_address', 'tourfic' ),
-							'reg-fields-type' => 'text',
+							'reg-field-label'    => __( 'Street Address', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_street_address', 'tourfic' ),
+							'reg-fields-type'    => 'text',
 							'reg-field-required' => true,
 						),
 						array(
-							'reg-field-label' => __( 'Town/City', 'tourfic' ),
-							'reg-field-name' => __( 'tf_town_city', 'tourfic' ),
-							'reg-fields-type' => 'text',
+							'reg-field-label'    => __( 'Town/City', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_town_city', 'tourfic' ),
+							'reg-fields-type'    => 'text',
 							'reg-field-required' => true,
 						),
 						array(
-							'reg-field-label' => __( 'State/Country', 'tourfic' ),
-							'reg-field-name' => __( 'tf_state_country', 'tourfic' ),
-							'reg-fields-type' => 'text',
+							'reg-field-label'    => __( 'State/Country', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_state_country', 'tourfic' ),
+							'reg-fields-type'    => 'text',
 							'reg-field-required' => true,
 						),
 						array(
-							'reg-field-label' => __( 'Postcode/ZIP', 'tourfic' ),
-							'reg-field-name' => __( 'tf_postcode', 'tourfic' ),
-							'reg-fields-type' => 'text',
+							'reg-field-label'    => __( 'Postcode/ZIP', 'tourfic' ),
+							'reg-field-name'     => __( 'tf_postcode', 'tourfic' ),
+							'reg-fields-type'    => 'text',
 							'reg-field-required' => true,
 						),
 					),
 				),
+				array(
+					'id'          => '',
+					'type'        => 'editor',
+					'label'       => __( 'Booking Confirmation Message', 'tourfic' ),
+					'default' 	  => 'Booked Successfully',
+					'is_pro'       => true,
+				),
 			),
 		),
 		//Frontend Dashboard
-		'frontend_dashboard' => array(
+		'frontend_dashboard'    => array(
 			'title'  => __( 'Frontend Dashboard', 'tourfic' ),
 			'icon'   => 'fa-solid fa-gauge-high',
 			'fields' => array(
 				//logo
 				array(
-					'id'    => '',
-					'type'  => 'image',
-					'label' => __( 'Logo', 'tourfic' ),
+					'id'           => '',
+					'type'         => 'image',
+					'label'        => __( 'Logo', 'tourfic' ),
 					'library'      => 'image',
 					'placeholder'  => 'http://',
 					'button_title' => __( 'Add Image', 'tourfic' ),
@@ -1301,9 +1409,9 @@ TF_Settings::option( 'tf_settings', array(
 				),
 				//minified logo
 				array(
-					'id'    => '',
-					'type'  => 'image',
-					'label' => __( 'Minified Logo', 'tourfic' ),
+					'id'           => '',
+					'type'         => 'image',
+					'label'        => __( 'Minified Logo', 'tourfic' ),
 					'library'      => 'image',
 					'placeholder'  => 'http://',
 					'button_title' => __( 'Add Image', 'tourfic' ),
@@ -1312,9 +1420,9 @@ TF_Settings::option( 'tf_settings', array(
 				),
 				//mobile logo
 				array(
-					'id'    => '',
-					'type'  => 'image',
-					'label' => __( 'Mobile Logo', 'tourfic' ),
+					'id'           => '',
+					'type'         => 'image',
+					'label'        => __( 'Mobile Logo', 'tourfic' ),
 					'library'      => 'image',
 					'placeholder'  => 'http://',
 					'button_title' => __( 'Add Image', 'tourfic' ),
@@ -1324,7 +1432,7 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		//user options
-		'user_options'       => array(
+		'user_options'          => array(
 			'title'  => __( 'User Options', 'tourfic' ),
 			'icon'   => 'fas fa-user',
 			'fields' => array(
@@ -1342,7 +1450,7 @@ TF_Settings::option( 'tf_settings', array(
 									'type'     => 'checkbox',
 									'label'    => __( 'Vendor Can Add Post', 'tourfic' ),
 									'subtitle' => __( 'Select the post type that you want to allow vendor to add.', 'tourfic' ),
-									'is_pro'       => true,
+									'is_pro'   => true,
 									'options'  => array(
 										'hotel'     => __( 'Hotel', 'tourfic' ),
 										'tour'      => __( 'Tour', 'tourfic' ),
@@ -1354,7 +1462,7 @@ TF_Settings::option( 'tf_settings', array(
 									'type'     => 'checkbox',
 									'label'    => __( 'Vendor Can Add Taxonomy', 'tourfic' ),
 									'subtitle' => __( 'Select the taxonomy that you want to allow vendor to add.', 'tourfic' ),
-									'is_pro'       => true,
+									'is_pro'   => true,
 									'options'  => array(
 										'hotel_location'     => __( 'Hotel Location', 'tourfic' ),
 										'hotel_feature'      => __( 'Hotel Feature', 'tourfic' ),
@@ -1374,7 +1482,7 @@ TF_Settings::option( 'tf_settings', array(
 									'type'     => 'checkbox',
 									'label'    => __( 'Vendor Can Manage Options', 'tourfic' ),
 									'subtitle' => __( 'Select the options that you want to allow vendor to manage.', 'tourfic' ),
-									'is_pro'       => true,
+									'is_pro'   => true,
 									'options'  => array(
 										'view_hotel_enquiry'     => __( 'View Hotel Enquiry', 'tourfic' ),
 										'view_hotel_booking'     => __( 'View Hotel Booking', 'tourfic' ),
@@ -1398,7 +1506,7 @@ TF_Settings::option( 'tf_settings', array(
 									'type'     => 'checkbox',
 									'label'    => __( 'Manager Can Add Post', 'tourfic' ),
 									'subtitle' => __( 'Select the post type that you want to allow manager to manage.', 'tourfic' ),
-									'is_pro'       => true,
+									'is_pro'   => true,
 									'options'  => array(
 										'hotel'     => __( 'Hotel', 'tourfic' ),
 										'tour'      => __( 'Tour', 'tourfic' ),
@@ -1410,7 +1518,7 @@ TF_Settings::option( 'tf_settings', array(
 									'type'     => 'checkbox',
 									'label'    => __( 'Manager Can Add Taxonomy', 'tourfic' ),
 									'subtitle' => __( 'Select the taxonomy that you want to allow manager to manage.', 'tourfic' ),
-									'is_pro'       => true,
+									'is_pro'   => true,
 									'options'  => array(
 										'hotel_location'     => __( 'Hotel Location', 'tourfic' ),
 										'hotel_feature'      => __( 'Hotel Feature', 'tourfic' ),
@@ -1430,7 +1538,7 @@ TF_Settings::option( 'tf_settings', array(
 									'type'     => 'checkbox',
 									'label'    => __( 'Manager Can Manage Options', 'tourfic' ),
 									'subtitle' => __( 'Select the options that you want to allow manager to manage.', 'tourfic' ),
-									'is_pro'       => true,
+									'is_pro'   => true,
 									'options'  => array(
 										'approve_hotel'          => __( 'Approve Hotel', 'tourfic' ),
 										'add_hotel'              => __( 'Add Hotel', 'tourfic' ),
@@ -1468,7 +1576,7 @@ TF_Settings::option( 'tf_settings', array(
 			)
 		),
 		// Multi Vendor
-		'vendor'             => array(
+		'vendor'                => array(
 			'title'  => __( 'Multi Vendor', 'tourfic' ),
 			'icon'   => 'fa fa-handshake',
 			'fields' => array(
@@ -1482,17 +1590,17 @@ TF_Settings::option( 'tf_settings', array(
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
 								array(
-									'id'    => 'vendor-reg',
-									'type'  => 'switch',
-									'label' => __( 'Enable Vendor Registration', 'tourfic' ),
-									'subtitle' => __('Visitor can register as vendor using the registration form','tourfic'),
+									'id'       => 'vendor-reg',
+									'type'     => 'switch',
+									'label'    => __( 'Enable Vendor Registration', 'tourfic' ),
+									'subtitle' => __( 'Visitor can register as vendor using the registration form', 'tourfic' ),
 									'is_pro'   => true,
 								),
 								array(
-									'id'    => 'user_approval',
-									'type'  => 'switch',
-									'label' => __( 'Automatic Approval', 'tourfic' ),
-									'subtitle' => __('Partner be automatic approval (register account).','tourfic'),
+									'id'       => 'user_approval',
+									'type'     => 'switch',
+									'label'    => __( 'Automatic Approval', 'tourfic' ),
+									'subtitle' => __( 'Partner be automatic approval (register account).', 'tourfic' ),
 									'is_pro'   => true,
 								),
 								/*array(
@@ -1509,17 +1617,17 @@ TF_Settings::option( 'tf_settings', array(
 									'content' => __( 'Use shortcode <code>[tf_registration_form]</code> to show registration form in post/page/widget.', 'tourfic' ),
 								),
 								array(
-									'id'    => 'email-verify',
-									'type'  => 'switch',
-									'label' => __( 'Email Verification', 'tourfic' ),
-									'subtitle' => __('ON: Vendor must verify by email','tourfic'),
+									'id'       => 'email-verify',
+									'type'     => 'switch',
+									'label'    => __( 'Email Verification', 'tourfic' ),
+									'subtitle' => __( 'ON: Vendor must verify by email', 'tourfic' ),
 									'is_pro'   => true,
 								),
 								array(
-									'id'    => 'partner_post',
-									'type'  => 'switch',
-									'label' => __( "Partner's Post Must be Approved by Admin", 'tourfic' ),
-									'subtitle' => __('ON: When partner posts a service, it needs to be approved by administrator ','tourfic'),
+									'id'       => 'partner_post',
+									'type'     => 'switch',
+									'label'    => __( "Partner's Post Must be Approved by Admin", 'tourfic' ),
+									'subtitle' => __( 'ON: When partner posts a service, it needs to be approved by administrator ', 'tourfic' ),
 									'is_pro'   => true,
 								),
 								array(
@@ -1528,13 +1636,14 @@ TF_Settings::option( 'tf_settings', array(
 									'content' => __( 'Use shortcode <code>[tf_login_form]</code> to show login form in post/page/widget.', 'tourfic' ),
 								),
 								array(
-									'id'    => 'partner_commission',
-									'type'  => 'number',
-									'label' => __( 'Commission(%)', 'tourfic' ),
-									'subtitle' => __('Enter commission of partner for admin after each item is booked ','tourfic'),'attributes'  => array(
+									'id'         => 'partner_commission',
+									'type'       => 'number',
+									'label'      => __( 'Commission(%)', 'tourfic' ),
+									'subtitle'   => __( 'Enter commission of partner for admin after each item is booked ', 'tourfic' ),
+									'attributes' => array(
 										'min' => '0',
 									),
-									'is_pro'   => true,
+									'is_pro'     => true,
 								),
 								array(
 									'id'      => 'pabbly-title',
@@ -1546,19 +1655,19 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 'vendor-integrate-pabbly',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Pabbly for New Vendor Registration?', 'tourfic' ),
-									'subtitle' => __( 'You can able to Integrate Pabbly with New Vendor Registration.', 'tourfic' ),
+									'subtitle'  => __( 'You can able to Integrate Pabbly with New Vendor Registration.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
 									'is_pro'    => true,
 								),
 								array(
-									'id'       => 'vendor-integrate-pabbly-webhook',
-									'type'     => 'text',
-									'label'    => __( 'Vendor Registration Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your Vendor Registration Pabbly Web Hook.', 'tourfic' ),
-									'is_pro'   => true,
-									'dependency'  => array(
+									'id'         => 'vendor-integrate-pabbly-webhook',
+									'type'       => 'text',
+									'label'      => __( 'Vendor Registration Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your Vendor Registration Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'     => true,
+									'dependency' => array(
 										array( 'vendor-integrate-pabbly', '==', 'true' ),
 									),
 								),
@@ -1572,19 +1681,19 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 'vendor-integrate-zapier',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Zapier for New Vendor Registration?', 'tourfic' ),
-									'subtitle' => __( 'You can able to Integrate Zapier with New Vendor Registration.', 'tourfic' ),
+									'subtitle'  => __( 'You can able to Integrate Zapier with New Vendor Registration.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
 									'is_pro'    => true,
 								),
 								array(
-									'id'       => 'vendor-integrate-zapier-webhook',
-									'type'     => 'text',
-									'label'    => __( 'Vendor Registration Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your Vendor Registration Zapier Web Hook.', 'tourfic' ),
-									'is_pro'   => true,
-									'dependency'  => array(
+									'id'         => 'vendor-integrate-zapier-webhook',
+									'type'       => 'text',
+									'label'      => __( 'Vendor Registration Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your Vendor Registration Zapier Web Hook.', 'tourfic' ),
+									'is_pro'     => true,
+									'dependency' => array(
 										array( 'vendor-integrate-zapier', '==', 'true' ),
 									),
 								),
@@ -1596,45 +1705,45 @@ TF_Settings::option( 'tf_settings', array(
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
 								array(
-									'id'    => 'vendor-config',
-									'type'  => 'switch',
-									'label' => __( 'Configuration Partner Profile info', 'tourfic' ),
-									'subtitle' => __('Show/hide sections for partner dashboard','tourfic'),
+									'id'       => 'vendor-config',
+									'type'     => 'switch',
+									'label'    => __( 'Configuration Partner Profile info', 'tourfic' ),
+									'subtitle' => __( 'Show/hide sections for partner dashboard', 'tourfic' ),
 									'is_pro'   => true,
 								),
 								array(
-									'id'    => 'vendor-earning',
-									'type'  => 'switch',
-									'label' => __( 'Show total Earning', 'tourfic' ),
-									'subtitle' => __('ON: Display earnings information in accordance with time periods','tourfic'),
+									'id'       => 'vendor-earning',
+									'type'     => 'switch',
+									'label'    => __( 'Show total Earning', 'tourfic' ),
+									'subtitle' => __( 'ON: Display earnings information in accordance with time periods', 'tourfic' ),
 									'is_pro'   => true,
 								),
 								array(
-									'id'    => 'vendor-each-earning',
-									'type'  => 'switch',
-									'label' => __( 'Show each service Earning', 'tourfic' ),
-									'subtitle' => __('ON: Display earnings according to each service','tourfic'),
+									'id'       => 'vendor-each-earning',
+									'type'     => 'switch',
+									'label'    => __( 'Show each service Earning', 'tourfic' ),
+									'subtitle' => __( 'ON: Display earnings according to each service', 'tourfic' ),
 									'is_pro'   => true,
 								),
 								array(
-									'id'    => 'vendor-earning-chart',
-									'type'  => 'switch',
-									'label' => __( 'Show Chart info', 'tourfic' ),
-									'subtitle' => __('ON: Display visual graphs to follow your earnings through each time','tourfic'),
+									'id'       => 'vendor-earning-chart',
+									'type'     => 'switch',
+									'label'    => __( 'Show Chart info', 'tourfic' ),
+									'subtitle' => __( 'ON: Display visual graphs to follow your earnings through each time', 'tourfic' ),
 									'is_pro'   => true,
 								),
 								array(
-									'id'    => 'vendor-booking-history',
-									'type'  => 'switch',
-									'label' => __( 'Show Booking history', 'tourfic' ),
-									'subtitle' => __('ON: Show booking history of partner','tourfic'),
+									'id'       => 'vendor-booking-history',
+									'type'     => 'switch',
+									'label'    => __( 'Show Booking history', 'tourfic' ),
+									'subtitle' => __( 'ON: Show booking history of partner', 'tourfic' ),
 									'is_pro'   => true,
 								),
 								array(
-									'id'    => 'vendor-enquiry-history',
-									'type'  => 'switch',
-									'label' => __( 'Show Enquiry history', 'tourfic' ),
-									'subtitle' => __('ON: Show Enquiry history of partner','tourfic'),
+									'id'       => 'vendor-enquiry-history',
+									'type'     => 'switch',
+									'label'    => __( 'Show Enquiry history', 'tourfic' ),
+									'subtitle' => __( 'ON: Show Enquiry history of partner', 'tourfic' ),
 									'is_pro'   => true,
 								),
 							),
@@ -1645,32 +1754,32 @@ TF_Settings::option( 'tf_settings', array(
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
 								array(
-									'id'    => 'vendor-withdraw',
-									'type'  => 'switch',
-									'label' => __( 'Allow Request Withdrawal', 'tourfic' ),
-									'subtitle' => __('ON: Partner is allowed to withdraw money','tourfic'),
+									'id'       => 'vendor-withdraw',
+									'type'     => 'switch',
+									'label'    => __( 'Allow Request Withdrawal', 'tourfic' ),
+									'subtitle' => __( 'ON: Partner is allowed to withdraw money', 'tourfic' ),
 									'is_pro'   => true,
 								),
 								array(
-									'id'      => 'vendor_min_withdraw',
-									'type'    => 'number',
-									'label' => __( 'Minimum value request when withdrawal', 'tourfic' ),
-									'subtitle' => __('Enter minimum value when a withdrawal is conducted','tourfic'),
-									'attributes'  => array(
+									'id'         => 'vendor_min_withdraw',
+									'type'       => 'number',
+									'label'      => __( 'Minimum value request when withdrawal', 'tourfic' ),
+									'subtitle'   => __( 'Enter minimum value when a withdrawal is conducted', 'tourfic' ),
+									'attributes' => array(
 										'min' => '0',
 									),
-									'is_pro'   => true,
+									'is_pro'     => true,
 								),
 								array(
-									'id'      => 'vendor_withdraw_date',
-									'type'    => 'number',
-									'label' => __( 'Date of sucessful payment in current month', 'tourfic' ),
-									'subtitle' => __('Enter the date monthly payment. Ex: 25','tourfic'),
-									'attributes'  => array(
+									'id'         => 'vendor_withdraw_date',
+									'type'       => 'number',
+									'label'      => __( 'Date of sucessful payment in current month', 'tourfic' ),
+									'subtitle'   => __( 'Enter the date monthly payment. Ex: 25', 'tourfic' ),
+									'attributes' => array(
 										'min' => '1',
 										'max' => '28',
 									),
-									'is_pro'   => true,
+									'is_pro'     => true,
 								),
 							),
 						),
@@ -1679,7 +1788,7 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		// Search Options
-		'search'             => array(
+		'search'                => array(
 			'title'  => __( 'Search', 'tourfic' ),
 			'icon'   => 'fas fa-search',
 			'fields' => array(
@@ -1751,12 +1860,12 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 		// Design Options
-		'design-panel'       => array(
+		'design-panel'          => array(
 			'title'  => __( 'Design Panel', 'tourfic' ),
 			'icon'   => 'fas fa-palette',
 			'fields' => array(),
 		),
-		'global_design'      => array(
+		'global_design'         => array(
 			'title'  => __( 'Global', 'tourfic' ),
 			'parent' => 'design-panel',
 			'icon'   => 'fas fa-cogs',
@@ -1780,7 +1889,7 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle' => __( 'Global Colors of Design 2 related to Tourfic', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
-					'default' => array(
+					'default'  => array(
 						'gcolor' => '#0e3dd8'
 					),
 					'colors'   => array(
@@ -1794,7 +1903,7 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle' => __( 'Global Colors of P, Design 2 related to Tourfic', 'tourfic' ),
 					'multiple' => true,
 					'inline'   => true,
-					'default' => array(
+					'default'  => array(
 						'pgcolor' => '#36383C'
 					),
 					'colors'   => array(
@@ -1812,8 +1921,8 @@ TF_Settings::option( 'tf_settings', array(
 					'type'        => 'select',
 					'label'       => __( 'Global Body Fonts Family', 'tourfic' ),
 					'subtitle'    => __( 'Global Body Fonts Family of Tourfic', 'tourfic' ),
-					'options'  => function_exists( 'tourfic_google_fonts_list' ) ? tourfic_google_fonts_list() : '',
-					'default' => 'Default',
+					'options'     => function_exists( 'tourfic_google_fonts_list' ) ? tourfic_google_fonts_list() : '',
+					'default'     => 'Default',
 					'field_width' => 45,
 				),
 				array(
@@ -1821,8 +1930,8 @@ TF_Settings::option( 'tf_settings', array(
 					'type'        => 'select',
 					'label'       => __( 'Global Heading Fonts Family', 'tourfic' ),
 					'subtitle'    => __( 'Global Heading Fonts Family of Tourfic', 'tourfic' ),
-					'options'  => function_exists( 'tourfic_google_fonts_list' ) ? tourfic_google_fonts_list() : '',
-					'default' => 'Default',
+					'options'     => function_exists( 'tourfic_google_fonts_list' ) ? tourfic_google_fonts_list() : '',
+					'default'     => 'Default',
 					'field_width' => 45,
 				),
 				array(
@@ -1840,7 +1949,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 38
+					'default'     => 38
 				),
 				array(
 					'id'          => 'global-h1-line-height',
@@ -1851,14 +1960,14 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.2
+					'default'     => 1.2
 				),
 				array(
-					'id'       => 'global-h1-weight',
-					'type'     => 'select',
-					'label'    => __( 'Font Weight', 'tourfic' ),
-					'subtitle' => __( 'Font Weight of Tourfic', 'tourfic' ),
-					'options'  => array(
+					'id'          => 'global-h1-weight',
+					'type'        => 'select',
+					'label'       => __( 'Font Weight', 'tourfic' ),
+					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
+					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
 						'300' => __( '300(Light)', 'tourfic' ),
@@ -1869,19 +1978,19 @@ TF_Settings::option( 'tf_settings', array(
 						'800' => __( '800(Extra Bold)', 'tourfic' ),
 						'900' => __( '900(Black)', 'tourfic' ),
 					),
-					'default'  => '500',
+					'default'     => '500',
 					'field_width' => 20,
 				),
 				array(
-					'id'       => 'global-h1-style',
-					'type'     => 'select',
-					'label'    => __( 'Font Style', 'tourfic' ),
-					'subtitle' => __( 'Font Style of Tourfic', 'tourfic' ),
-					'options'  => array(
+					'id'          => 'global-h1-style',
+					'type'        => 'select',
+					'label'       => __( 'Font Style', 'tourfic' ),
+					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
+					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
 					),
-					'default'  => 'normal',
+					'default'     => 'normal',
 					'field_width' => 20,
 				),
 				array(
@@ -1899,7 +2008,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 30
+					'default'     => 30
 				),
 				array(
 					'id'          => 'global-h2-line-height',
@@ -1910,14 +2019,14 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.2
+					'default'     => 1.2
 				),
 				array(
-					'id'       => 'global-h2-weight',
-					'type'     => 'select',
-					'label'    => __( 'Font Weight', 'tourfic' ),
-					'subtitle' => __( 'Font Weight of Tourfic', 'tourfic' ),
-					'options'  => array(
+					'id'          => 'global-h2-weight',
+					'type'        => 'select',
+					'label'       => __( 'Font Weight', 'tourfic' ),
+					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
+					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
 						'300' => __( '300(Light)', 'tourfic' ),
@@ -1928,19 +2037,19 @@ TF_Settings::option( 'tf_settings', array(
 						'800' => __( '800(Extra Bold)', 'tourfic' ),
 						'900' => __( '900(Black)', 'tourfic' ),
 					),
-					'default'  => '500',
+					'default'     => '500',
 					'field_width' => 20,
 				),
 				array(
-					'id'       => 'global-h2-style',
-					'type'     => 'select',
-					'label'    => __( 'Font Style', 'tourfic' ),
-					'subtitle' => __( 'Font Style of Tourfic', 'tourfic' ),
-					'options'  => array(
+					'id'          => 'global-h2-style',
+					'type'        => 'select',
+					'label'       => __( 'Font Style', 'tourfic' ),
+					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
+					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
 					),
-					'default'  => 'normal',
+					'default'     => 'normal',
 					'field_width' => 20,
 				),
 				array(
@@ -1958,7 +2067,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 24
+					'default'     => 24
 				),
 				array(
 					'id'          => 'global-h3-line-height',
@@ -1969,14 +2078,14 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.2
+					'default'     => 1.2
 				),
 				array(
-					'id'       => 'global-h3-weight',
-					'type'     => 'select',
-					'label'    => __( 'Font Weight', 'tourfic' ),
-					'subtitle' => __( 'Font Weight of Tourfic', 'tourfic' ),
-					'options'  => array(
+					'id'          => 'global-h3-weight',
+					'type'        => 'select',
+					'label'       => __( 'Font Weight', 'tourfic' ),
+					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
+					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
 						'300' => __( '300(Light)', 'tourfic' ),
@@ -1987,19 +2096,19 @@ TF_Settings::option( 'tf_settings', array(
 						'800' => __( '800(Extra Bold)', 'tourfic' ),
 						'900' => __( '900(Black)', 'tourfic' ),
 					),
-					'default'  => '500',
+					'default'     => '500',
 					'field_width' => 20,
 				),
 				array(
-					'id'       => 'global-h3-style',
-					'type'     => 'select',
-					'label'    => __( 'Font Style', 'tourfic' ),
-					'subtitle' => __( 'Font Style of Tourfic', 'tourfic' ),
-					'options'  => array(
+					'id'          => 'global-h3-style',
+					'type'        => 'select',
+					'label'       => __( 'Font Style', 'tourfic' ),
+					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
+					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
 					),
-					'default'  => 'normal',
+					'default'     => 'normal',
 					'field_width' => 20,
 				),
 				array(
@@ -2017,7 +2126,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 20
+					'default'     => 20
 				),
 				array(
 					'id'          => 'global-h4-line-height',
@@ -2028,14 +2137,14 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.2
+					'default'     => 1.2
 				),
 				array(
-					'id'       => 'global-h4-weight',
-					'type'     => 'select',
-					'label'    => __( 'Font Weight', 'tourfic' ),
-					'subtitle' => __( 'Font Weight of Tourfic', 'tourfic' ),
-					'options'  => array(
+					'id'          => 'global-h4-weight',
+					'type'        => 'select',
+					'label'       => __( 'Font Weight', 'tourfic' ),
+					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
+					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
 						'300' => __( '300(Light)', 'tourfic' ),
@@ -2046,19 +2155,19 @@ TF_Settings::option( 'tf_settings', array(
 						'800' => __( '800(Extra Bold)', 'tourfic' ),
 						'900' => __( '900(Black)', 'tourfic' ),
 					),
-					'default'  => '500',
+					'default'     => '500',
 					'field_width' => 20,
 				),
 				array(
-					'id'       => 'global-h4-style',
-					'type'     => 'select',
-					'label'    => __( 'Font Style', 'tourfic' ),
-					'subtitle' => __( 'Font Style of Tourfic', 'tourfic' ),
-					'options'  => array(
+					'id'          => 'global-h4-style',
+					'type'        => 'select',
+					'label'       => __( 'Font Style', 'tourfic' ),
+					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
+					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
 					),
-					'default'  => 'normal',
+					'default'     => 'normal',
 					'field_width' => 20,
 				),
 				array(
@@ -2076,7 +2185,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 18
+					'default'     => 18
 				),
 				array(
 					'id'          => 'global-h5-line-height',
@@ -2087,14 +2196,14 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.2
+					'default'     => 1.2
 				),
 				array(
-					'id'       => 'global-h5-weight',
-					'type'     => 'select',
-					'label'    => __( 'Font Weight', 'tourfic' ),
-					'subtitle' => __( 'Font Weight of Tourfic', 'tourfic' ),
-					'options'  => array(
+					'id'          => 'global-h5-weight',
+					'type'        => 'select',
+					'label'       => __( 'Font Weight', 'tourfic' ),
+					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
+					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
 						'300' => __( '300(Light)', 'tourfic' ),
@@ -2105,19 +2214,19 @@ TF_Settings::option( 'tf_settings', array(
 						'800' => __( '800(Extra Bold)', 'tourfic' ),
 						'900' => __( '900(Black)', 'tourfic' ),
 					),
-					'default'  => '500',
+					'default'     => '500',
 					'field_width' => 20,
 				),
 				array(
-					'id'       => 'global-h5-style',
-					'type'     => 'select',
-					'label'    => __( 'Font Style', 'tourfic' ),
-					'subtitle' => __( 'Font Style of Tourfic', 'tourfic' ),
-					'options'  => array(
+					'id'          => 'global-h5-style',
+					'type'        => 'select',
+					'label'       => __( 'Font Style', 'tourfic' ),
+					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
+					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
 					),
-					'default'  => 'normal',
+					'default'     => 'normal',
 					'field_width' => 20,
 				),
 				array(
@@ -2135,7 +2244,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 14
+					'default'     => 14
 				),
 				array(
 					'id'          => 'global-h6-line-height',
@@ -2146,14 +2255,14 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.2
+					'default'     => 1.2
 				),
 				array(
-					'id'       => 'global-h6-weight',
-					'type'     => 'select',
-					'label'    => __( 'Font Weight', 'tourfic' ),
-					'subtitle' => __( 'Font Weight of Tourfic', 'tourfic' ),
-					'options'  => array(
+					'id'          => 'global-h6-weight',
+					'type'        => 'select',
+					'label'       => __( 'Font Weight', 'tourfic' ),
+					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
+					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
 						'300' => __( '300(Light)', 'tourfic' ),
@@ -2164,19 +2273,19 @@ TF_Settings::option( 'tf_settings', array(
 						'800' => __( '800(Extra Bold)', 'tourfic' ),
 						'900' => __( '900(Black)', 'tourfic' ),
 					),
-					'default'  => '500',
+					'default'     => '500',
 					'field_width' => 20,
 				),
 				array(
-					'id'       => 'global-h6-style',
-					'type'     => 'select',
-					'label'    => __( 'Font Style', 'tourfic' ),
-					'subtitle' => __( 'Font Style of Tourfic', 'tourfic' ),
-					'options'  => array(
+					'id'          => 'global-h6-style',
+					'type'        => 'select',
+					'label'       => __( 'Font Style', 'tourfic' ),
+					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
+					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
 					),
-					'default'  => 'normal',
+					'default'     => 'normal',
 					'field_width' => 20,
 				),
 				array(
@@ -2194,7 +2303,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 16
+					'default'     => 16
 				),
 				array(
 					'id'          => 'global-p-line-height',
@@ -2205,14 +2314,14 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 20,
-					'default' => 1.5
+					'default'     => 1.5
 				),
 				array(
-					'id'       => 'global-p-weight',
-					'type'     => 'select',
-					'label'    => __( 'Font Weight', 'tourfic' ),
-					'subtitle' => __( 'Font Weight of Tourfic', 'tourfic' ),
-					'options'  => array(
+					'id'          => 'global-p-weight',
+					'type'        => 'select',
+					'label'       => __( 'Font Weight', 'tourfic' ),
+					'subtitle'    => __( 'Font Weight of Tourfic', 'tourfic' ),
+					'options'     => array(
 						'100' => __( '100(Thin)', 'tourfic' ),
 						'200' => __( '100(Extra Light)', 'tourfic' ),
 						'300' => __( '300(Light)', 'tourfic' ),
@@ -2223,19 +2332,19 @@ TF_Settings::option( 'tf_settings', array(
 						'800' => __( '800(Extra Bold)', 'tourfic' ),
 						'900' => __( '900(Black)', 'tourfic' ),
 					),
-					'default'  => '400',
+					'default'     => '400',
 					'field_width' => 20,
 				),
 				array(
-					'id'       => 'global-p-style',
-					'type'     => 'select',
-					'label'    => __( 'Font Style', 'tourfic' ),
-					'subtitle' => __( 'Font Style of Tourfic', 'tourfic' ),
-					'options'  => array(
+					'id'          => 'global-p-style',
+					'type'        => 'select',
+					'label'       => __( 'Font Style', 'tourfic' ),
+					'subtitle'    => __( 'Font Style of Tourfic', 'tourfic' ),
+					'options'     => array(
 						'normal' => __( 'Normal', 'tourfic' ),
 						'italic' => __( 'Italic', 'tourfic' ),
 					),
-					'default'  => 'normal',
+					'default'     => 'normal',
 					'field_width' => 20,
 				),
 				array(
@@ -2271,7 +2380,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 45,
-					'default' => 14
+					'default'     => 14
 				),
 				array(
 					'id'          => 'button-line-height',
@@ -2282,7 +2391,7 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '1',
 					),
 					'field_width' => 45,
-					'default' => 1.2
+					'default'     => 1.2
 				),
 				array(
 					'id'       => 'tourfic-sidebar-booking',
@@ -2329,7 +2438,7 @@ TF_Settings::option( 'tf_settings', array(
 
 			),
 		),
-		'hotel_design'       => array(
+		'hotel_design'          => array(
 			'title'  => __( 'Hotel', 'tourfic' ),
 			'parent' => 'design-panel',
 			'icon'   => 'fas fa-hotel',
@@ -2414,7 +2523,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		'tour_design'        => array(
+		'tour_design'           => array(
 			'title'  => __( 'Tour', 'tourfic' ),
 			'parent' => 'design-panel',
 			'icon'   => 'fas fa-umbrella-beach',
@@ -2512,39 +2621,6 @@ TF_Settings::option( 'tf_settings', array(
 			'icon'   => 'fa-solid fa-house-chimney',
 			'fields' => array(
 				array(
-					'id'      => 'apartment_design_heading',
-					'type'    => 'heading',
-					'content' => __( 'Apartment Settings', 'tourfic' )
-				),
-				array(
-					'id'       => 'apartment-amenities',
-					'type'     => 'color',
-					'label'    => __( 'Amenities Section', 'tourfic' ),
-					'subtitle' => __( 'Styling of the Amenities', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'amenities_bg'           => __( 'Background', 'tourfic' ),
-						'amenities_border_color' => __( 'Border Color', 'tourfic' ),
-						'amenities_text'         => __( 'Text Color', 'tourfic' ),
-						'amenities_icon'         => __( 'Icon Color', 'tourfic' ),
-					)
-				),
-				array(
-					'id'       => 'apartment-features',
-					'type'     => 'color',
-					'label'    => __( 'Key Features Section', 'tourfic' ),
-					'subtitle' => __( 'Styling of the Key Features', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'features_bg'           => __( 'Background', 'tourfic' ),
-						'features_border_color' => __( 'Border Color', 'tourfic' ),
-						'features_text'         => __( 'Text Color', 'tourfic' ),
-						'features_icon'         => __( 'Icon Color', 'tourfic' ),
-					)
-				),
-				array(
 					'id'      => 'apartment_form_heading',
 					'type'    => 'heading',
 					'content' => __( 'Booking Form Design', 'tourfic' )
@@ -2589,7 +2665,7 @@ TF_Settings::option( 'tf_settings', array(
 		),
 
 		// Miscellaneous Options
-		'miscellaneous'      => array(
+		'miscellaneous'         => array(
 			'title'  => __( 'Miscellaneous', 'tourfic' ),
 			'icon'   => 'fas fa-globe',
 			'fields' => array(),
@@ -2599,7 +2675,7 @@ TF_Settings::option( 'tf_settings', array(
 		 *
 		 * Sub Menu
 		 */
-		'login_register'     => array(
+		'login_register'        => array(
 			'title'  => __( 'Login & Register', 'tourfic' ),
 			'parent' => 'miscellaneous',
 			'icon'   => 'fas fa-user',
@@ -2624,7 +2700,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => __( 'Login Page', 'tourfic' ),
 									'subtitle'   => __( 'Select a page for login', 'tourfic' ),
 									'default'    => get_option( 'tf_login_page_id' ),
-									'is_pro'       => true,
+									'is_pro'     => true,
 								),
 								array(
 									'id'          => '',
@@ -2636,7 +2712,7 @@ TF_Settings::option( 'tf_settings', array(
 										'url'  => __( 'Custom URL', 'tourfic' ),
 									),
 									'field_width' => '50',
-									'is_pro'       => true,
+									'is_pro'      => true,
 								),
 								array(
 									'id'          => '',
@@ -2651,7 +2727,7 @@ TF_Settings::option( 'tf_settings', array(
 									'default'     => get_option( 'tf_dashboard_page_id' ),
 									'field_width' => '50',
 									'dependency'  => array( 'login_redirect_type', '==', 'page' ),
-									'is_pro'       => true,
+									'is_pro'      => true,
 								),
 								array(
 									'id'          => '',
@@ -2661,7 +2737,7 @@ TF_Settings::option( 'tf_settings', array(
 									'default'     => site_url() . '/tf-dashboard',
 									'field_width' => '50',
 									'dependency'  => array( 'login_redirect_type', '==', 'url' ),
-									'is_pro'       => true,
+									'is_pro'      => true,
 								),
 							),
 						),
@@ -2681,7 +2757,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => __( 'Register Page', 'tourfic' ),
 									'subtitle'   => __( 'Select a page for register', 'tourfic' ),
 									'default'    => get_option( 'tf_register_page_id' ),
-									'is_pro'       => true,
+									'is_pro'     => true,
 								),
 								array(
 									'id'          => '',
@@ -2693,7 +2769,7 @@ TF_Settings::option( 'tf_settings', array(
 										'url'  => __( 'Custom URL', 'tourfic' ),
 									),
 									'field_width' => '50',
-									'is_pro'       => true,
+									'is_pro'      => true,
 								),
 								array(
 									'id'          => '',
@@ -2708,7 +2784,7 @@ TF_Settings::option( 'tf_settings', array(
 									'default'     => get_option( 'tf_login_page_id' ),
 									'field_width' => '50',
 									'dependency'  => array( 'register_redirect_type', '==', 'page' ),
-									'is_pro'       => true,
+									'is_pro'      => true,
 								),
 								array(
 									'id'          => '',
@@ -2718,7 +2794,7 @@ TF_Settings::option( 'tf_settings', array(
 									'default'     => site_url() . '/tf-login',
 									'field_width' => '50',
 									'dependency'  => array( 'register_redirect_type', '==', 'url' ),
-									'is_pro'       => true,
+									'is_pro'      => true,
 								),
 							),
 						),
@@ -2733,7 +2809,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => __( 'Allow Google Login', 'tourfic' ),
 									'subtitle' => __( 'ON: Partner is allowed to Google Login', 'tourfic' ),
 									'badge_up' => true,
-									'is_pro'       => true,
+									'is_pro'   => true,
 								),
 								array(
 									'id'         => '',
@@ -2744,7 +2820,7 @@ TF_Settings::option( 'tf_settings', array(
 										array( 'vendor-google-login', '==', true ),
 									),
 									'badge_up'   => true,
-									'is_pro'       => true,
+									'is_pro'     => true,
 								),
 								array(
 									'id'         => '',
@@ -2755,7 +2831,7 @@ TF_Settings::option( 'tf_settings', array(
 										array( 'vendor-google-login', '==', true ),
 									),
 									'badge_up'   => true,
-									'is_pro'       => true,
+									'is_pro'     => true,
 								),
 								array(
 									'id'         => '',
@@ -2766,7 +2842,7 @@ TF_Settings::option( 'tf_settings', array(
 										array( 'vendor-google-login', '==', true ),
 									),
 									'badge_up'   => true,
-									'is_pro'       => true,
+									'is_pro'     => true,
 								),
 							),
 						),
@@ -2897,7 +2973,7 @@ TF_Settings::option( 'tf_settings', array(
 		 *
 		 * Sub Menu
 		 */
-		'map_settings'       => array(
+		'map_settings'          => array(
 			'title'  => __( 'Map Settings', 'tourfic' ),
 			'parent' => 'miscellaneous',
 			'icon'   => 'fas fa-umbrella-beach',
@@ -2934,7 +3010,7 @@ TF_Settings::option( 'tf_settings', array(
 		 *
 		 * Sub Menu
 		 */
-		'wishlist'           => array(
+		'wishlist'              => array(
 			'title'  => __( 'Wishlist', 'tourfic' ),
 			'parent' => 'miscellaneous',
 			'icon'   => 'fas fa-heart',
@@ -3283,7 +3359,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'affiliate_heading',
 					'type'     => 'heading',
-					'label'  => __( 'Affiliate Settings', 'tourfic' ),
+					'label'    => __( 'Affiliate Settings', 'tourfic' ),
 					'subtitle' => __( 'Use these options if you want to show 3rd party data and earn commission from them. Currently, we only allow Booking.com and TravelPayout. Gradually more options would be added.', 'tourfic' ),
 				),
 				array(
@@ -3326,7 +3402,7 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 
-		'emails'    => array(
+		'emails'  => array(
 			'title'  => __( 'Emails', 'tourfic' ),
 			'icon'   => 'fa fa-envelope-o',
 			'fields' => array(
@@ -3341,9 +3417,9 @@ TF_Settings::option( 'tf_settings', array(
 							'fields' => array(
 								//file upload
 								array(
-									'id'      => 'brand_logo',
-									'type'    => 'image',
-									'label'   => __( 'Admin Email Logo', 'tourfic' ),
+									'id'    => 'brand_logo',
+									'type'  => 'image',
+									'label' => __( 'Admin Email Logo', 'tourfic' ),
 								),
 								array(
 									'id'      => 'send_notification',
@@ -3371,9 +3447,9 @@ TF_Settings::option( 'tf_settings', array(
 								),
 								//heading
 								array(
-									'id'      => 'admin_email_heading',
-									'type'    => 'heading',
-									'label'   => __( 'Admin Email Setting', 'tourfic' ),
+									'id'    => 'admin_email_heading',
+									'type'  => 'heading',
+									'label' => __( 'Admin Email Setting', 'tourfic' ),
 								),
 								array(
 									'id'      => 'admin_email_subject',
@@ -3401,14 +3477,14 @@ TF_Settings::option( 'tf_settings', array(
 								),
 								//type color
 								array(
-									'id'      => 'email_heading_bg',
-									'type'    => 'color',
-									'label'   => __( 'Email header background color', 'tourfic' ),
-									'default' => array(
+									'id'       => 'email_heading_bg',
+									'type'     => 'color',
+									'label'    => __( 'Email header background color', 'tourfic' ),
+									'default'  => array(
 										'bg_color' => '#0209AF'
 									),
 									'multiple' => true,
-									'inline' => true,
+									'inline'   => true,
 									'colors'   => array(
 										'bg_color' => __( 'Background Color', 'tourfic' ),
 									)
@@ -3497,11 +3573,11 @@ TF_Settings::option( 'tf_settings', array(
 									'default' => get_bloginfo( 'admin_email' ),
 								),
 								array(
-									'id'      => 'customer_confirm_email_template',
-									'type'    => 'editor',
-									'label'   => __( 'Booking Confirmation Email', 'tourfic' ),
-									'default' => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'customer' ),
-									'description' => __('This template will be sent to customer after booking is confirmed.', 'tourfic'),
+									'id'          => 'customer_confirm_email_template',
+									'type'        => 'editor',
+									'label'       => __( 'Booking Confirmation Email', 'tourfic' ),
+									'default'     => TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'customer' ),
+									'description' => __( 'This template will be sent to customer after booking is confirmed.', 'tourfic' ),
 								),
 							),
 						),
@@ -3540,13 +3616,13 @@ TF_Settings::option( 'tf_settings', array(
 
 					'
 
-					,
+				,
 				),
 			),
 		),
 
 		//QR Code settings
-		'qr_code'    => array(
+		'qr_code' => array(
 			'title'  => __( 'QR Code', 'tourfic' ),
 			'icon'   => 'fa fa-qrcode',
 			'fields' => array(
@@ -3557,15 +3633,15 @@ TF_Settings::option( 'tf_settings', array(
 					'class'   => 'tf-field-class',
 				),
 				array(
-					'id'      => 'qr_logo',
-					'type'    => 'image',
-					'label'   => __( 'Company Logo', 'tourfic' ),
+					'id'     => 'qr_logo',
+					'type'   => 'image',
+					'label'  => __( 'Company Logo', 'tourfic' ),
 					'is_pro' => true,
 				),
 				array(
-					'id'      => 'qr_background',
-					'type'    => 'image',
-					'label'   => __( 'QR Code WaterMark', 'tourfic' ),
+					'id'     => 'qr_background',
+					'type'   => 'image',
+					'label'  => __( 'QR Code WaterMark', 'tourfic' ),
 					'is_pro' => true,
 				),
 				array(
@@ -3573,12 +3649,12 @@ TF_Settings::option( 'tf_settings', array(
 					'type'    => 'text',
 					'label'   => __( 'Voucher Title', 'tourfic' ),
 					'default' => "Voucher ID",
-					'is_pro' => true,
+					'is_pro'  => true,
 				),
 				array(
-					'id'      => 'qr-ticket-prefix',
-					'type'    => 'text',
-					'label'   => __( 'Voucher ID Prefix', 'tourfic' ),
+					'id'     => 'qr-ticket-prefix',
+					'type'   => 'text',
+					'label'  => __( 'Voucher ID Prefix', 'tourfic' ),
 					'is_pro' => true,
 				),
 				array(
@@ -3586,18 +3662,18 @@ TF_Settings::option( 'tf_settings', array(
 					'type'    => 'text',
 					'label'   => __( 'Voucher Policy', 'tourfic' ),
 					'default' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.",
-					'is_pro' => true,
+					'is_pro'  => true,
 				),
 				array(
 					'id'      => 'qr-ticket-verify',
 					'type'    => 'select',
 					'label'   => __( 'QR Code Verification', 'tourfic' ),
 					'options' => array(
-						'1'        => __( '1 Step', 'tourfic' ),
+						'1' => __( '1 Step', 'tourfic' ),
 						'2' => __( '2 Steps', 'tourfic' ),
 					),
 					'default' => '2',
-					'is_pro' => true,
+					'is_pro'  => true,
 				),
 			),
 		),
@@ -3608,14 +3684,14 @@ TF_Settings::option( 'tf_settings', array(
 		 * Main menu
 		 */
 
-		 'integration' => array(
+		'integration' => array(
 			'title'  => __( 'Integration', 'tourfic' ),
 			'icon'   => 'fa fa-plus',
 			'fields' => array(
 				array(
 					'id'       => 'integration_heading',
 					'type'     => 'heading',
-					'label'  => __( 'Pabbly & Zapier Settings', 'tourfic' ),
+					'label'    => __( 'Pabbly & Zapier Settings', 'tourfic' ),
 					'subtitle' => __( 'If you want to integrate your system with other platforms. Currently, we only allow Pabbly and Zapier.', 'tourfic' ),
 				),
 				array(
@@ -3638,19 +3714,19 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 'hotel-integrate-pabbly',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Pabbly for Hotel?', 'tourfic' ),
-									'subtitle' => __( 'You can able to Integrate Pabbly with Hotel create and update.', 'tourfic' ),
+									'subtitle'  => __( 'You can able to Integrate Pabbly with Hotel create and update.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
 									'is_pro'    => true,
 								),
 								array(
-									'id'       => 'hotel-integrate-pabbly-webhook',
-									'type'     => 'text',
-									'label'    => __( 'Hotel Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your Hotel Pabbly Web Hook.', 'tourfic' ),
-									'is_pro'   => true,
-									'dependency'  => array(
+									'id'         => 'hotel-integrate-pabbly-webhook',
+									'type'       => 'text',
+									'label'      => __( 'Hotel Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your Hotel Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'     => true,
+									'dependency' => array(
 										array( 'hotel-integrate-pabbly', '==', 'true' ),
 									),
 								),
@@ -3658,19 +3734,19 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 'h-enquiry-pabbly',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Pabbly for Hotel Enquiry?', 'tourfic' ),
-									'subtitle' => __( 'Integrate Pabbly with Hotel Enquiry Form.', 'tourfic' ),
+									'subtitle'  => __( 'Integrate Pabbly with Hotel Enquiry Form.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
 									'is_pro'    => true
 								),
 								array(
-									'id'       => 'h-enquiry-pabbly-webhook',
-									'type'     => 'text',
-									'label'    => __( 'Hotel Enquiry Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your Hotel Enquiry Pabbly Web Hook.', 'tourfic' ),
-									'is_pro'   => true,
-									'dependency'  => array(
+									'id'         => 'h-enquiry-pabbly-webhook',
+									'type'       => 'text',
+									'label'      => __( 'Hotel Enquiry Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your Hotel Enquiry Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'     => true,
+									'dependency' => array(
 										array( 'h-enquiry-pabbly', '==', 'true' ),
 									),
 								),
@@ -3684,19 +3760,19 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 'tour-integrate-pabbly',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Pabbly for Tour?', 'tourfic' ),
-									'subtitle' => __( 'You can able to Integrate Pabbly with Tour create and update.', 'tourfic' ),
+									'subtitle'  => __( 'You can able to Integrate Pabbly with Tour create and update.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
 									'is_pro'    => true,
 								),
 								array(
-									'id'       => 'tour-integrate-pabbly-webhook',
-									'type'     => 'text',
-									'label'    => __( 'Tour Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your Tour Pabbly Web Hook.', 'tourfic' ),
-									'is_pro'   => true,
-									'dependency'  => array(
+									'id'         => 'tour-integrate-pabbly-webhook',
+									'type'       => 'text',
+									'label'      => __( 'Tour Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your Tour Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'     => true,
+									'dependency' => array(
 										array( 'tour-integrate-pabbly', '==', 'true' ),
 									),
 								),
@@ -3704,19 +3780,19 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 't-enquiry-pabbly',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Pabbly for Tour Enquiry?', 'tourfic' ),
-									'subtitle' => __( 'Integrate Pabbly with Tour Enquiry Form.', 'tourfic' ),
+									'subtitle'  => __( 'Integrate Pabbly with Tour Enquiry Form.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
 									'is_pro'    => true
 								),
 								array(
-									'id'       => 't-enquiry-pabbly-webhook',
-									'type'     => 'text',
-									'label'    => __( 'Tour Enquiry Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your Tour Enquiry Pabbly Web Hook.', 'tourfic' ),
-									'is_pro'   => true,
-									'dependency'  => array(
+									'id'         => 't-enquiry-pabbly-webhook',
+									'type'       => 'text',
+									'label'      => __( 'Tour Enquiry Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your Tour Enquiry Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'     => true,
+									'dependency' => array(
 										array( 't-enquiry-pabbly', '==', 'true' ),
 									),
 								),
@@ -3730,19 +3806,19 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 'apartment-integrate-pabbly',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Pabbly for Apartment?', 'tourfic' ),
-									'subtitle' => __( 'You can able to Integrate Pabbly with Apartment create and update.', 'tourfic' ),
+									'subtitle'  => __( 'You can able to Integrate Pabbly with Apartment create and update.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
 									'is_pro'    => true,
 								),
 								array(
-									'id'       => 'apartment-integrate-pabbly-webhook',
-									'type'     => 'text',
-									'label'    => __( 'Apartment Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your Apartment Pabbly Web Hook.', 'tourfic' ),
-									'is_pro'   => true,
-									'dependency'  => array(
+									'id'         => 'apartment-integrate-pabbly-webhook',
+									'type'       => 'text',
+									'label'      => __( 'Apartment Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your Apartment Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'     => true,
+									'dependency' => array(
 										array( 'apartment-integrate-pabbly', '==', 'true' ),
 									),
 								),
@@ -3750,19 +3826,19 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 'a-enquiry-pabbly',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Pabbly for Apartment Enquiry?', 'tourfic' ),
-									'subtitle' => __( 'Integrate Pabbly with Apartment Enquiry Form.', 'tourfic' ),
+									'subtitle'  => __( 'Integrate Pabbly with Apartment Enquiry Form.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
 									'is_pro'    => true
 								),
 								array(
-									'id'       => 'a-enquiry-pabbly-webhook',
-									'type'     => 'text',
-									'label'    => __( 'Apartment Enquiry Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your Apartment Enquiry Pabbly Web Hook.', 'tourfic' ),
-									'is_pro'   => true,
-									'dependency'  => array(
+									'id'         => 'a-enquiry-pabbly-webhook',
+									'type'       => 'text',
+									'label'      => __( 'Apartment Enquiry Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your Apartment Enquiry Pabbly Web Hook.', 'tourfic' ),
+									'is_pro'     => true,
+									'dependency' => array(
 										array( 'a-enquiry-pabbly', '==', 'true' ),
 									),
 								),
@@ -3776,41 +3852,41 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 'tf-new-order-pabbly',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Pabbly for Booking?', 'tourfic' ),
-									'subtitle' => __( 'Integrate Pabbly with WooCommerce Booking.', 'tourfic' ),
+									'subtitle'  => __( 'Integrate Pabbly with WooCommerce Booking.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
-									'is_pro'   => true,
+									'is_pro'    => true,
 								),
 								array(
-									'id'       => 'tf-new-order-pabbly-webhook',
-									'type'     => 'text',
-									'label'    => __( 'Booking Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your Booking Pabbly Web Hook.', 'tourfic' ),
-									'dependency'  => array(
+									'id'         => 'tf-new-order-pabbly-webhook',
+									'type'       => 'text',
+									'label'      => __( 'Booking Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your Booking Pabbly Web Hook.', 'tourfic' ),
+									'dependency' => array(
 										array( 'tf-new-order-pabbly', '==', 'true' ),
 									),
-									'is_pro'   => true,
+									'is_pro'     => true,
 								),
 								array(
 									'id'        => 'tf-new-customer-pabbly',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Pabbly for New Customer?', 'tourfic' ),
-									'subtitle' => __( 'Integrate Pabbly with WooCommerce New Customer.', 'tourfic' ),
+									'subtitle'  => __( 'Integrate Pabbly with WooCommerce New Customer.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
-									'is_pro'   => true,
+									'is_pro'    => true,
 								),
 								array(
-									'id'       => 'tf-new-customer-pabbly-webhook',
-									'type'     => 'text',
-									'label'    => __( 'New Customer Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your New Customer Pabbly Web Hook.', 'tourfic' ),
-									'dependency'  => array(
+									'id'         => 'tf-new-customer-pabbly-webhook',
+									'type'       => 'text',
+									'label'      => __( 'New Customer Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your New Customer Pabbly Web Hook.', 'tourfic' ),
+									'dependency' => array(
 										array( 'tf-new-customer-pabbly', '==', 'true' ),
 									),
-									'is_pro'   => true,
+									'is_pro'     => true,
 								),
 							),
 						),
@@ -3829,19 +3905,19 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 'hotel-integrate-zapier',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Zapier for Hotel?', 'tourfic' ),
-									'subtitle' => __( 'You can able to Integrate Zapier with Hotel create and update.', 'tourfic' ),
+									'subtitle'  => __( 'You can able to Integrate Zapier with Hotel create and update.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
 									'is_pro'    => true,
 								),
 								array(
-									'id'       => 'hotel-integrate-zapier-webhook',
-									'type'     => 'text',
-									'label'    => __( 'Hotel Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your Hotel Zapier Web Hook.', 'tourfic' ),
-									'is_pro'   => true,
-									'dependency'  => array(
+									'id'         => 'hotel-integrate-zapier-webhook',
+									'type'       => 'text',
+									'label'      => __( 'Hotel Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your Hotel Zapier Web Hook.', 'tourfic' ),
+									'is_pro'     => true,
+									'dependency' => array(
 										array( 'hotel-integrate-zapier', '==', 'true' ),
 									),
 								),
@@ -3849,19 +3925,19 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 'h-enquiry-zapier',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Zapier for Hotel Enquiry?', 'tourfic' ),
-									'subtitle' => __( 'Integrate Zapier with Hotel Enquiry Form.', 'tourfic' ),
+									'subtitle'  => __( 'Integrate Zapier with Hotel Enquiry Form.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
 									'is_pro'    => true
 								),
 								array(
-									'id'       => 'h-enquiry-zapier-webhook',
-									'type'     => 'text',
-									'label'    => __( 'Hotel Enquiry Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your Hotel Enquiry Zapier Web Hook.', 'tourfic' ),
-									'is_pro'   => true,
-									'dependency'  => array(
+									'id'         => 'h-enquiry-zapier-webhook',
+									'type'       => 'text',
+									'label'      => __( 'Hotel Enquiry Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your Hotel Enquiry Zapier Web Hook.', 'tourfic' ),
+									'is_pro'     => true,
+									'dependency' => array(
 										array( 'h-enquiry-zapier', '==', 'true' ),
 									),
 								),
@@ -3875,19 +3951,19 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 'tour-integrate-zapier',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Zapier for Tour?', 'tourfic' ),
-									'subtitle' => __( 'You can able to Integrate Zapier with Tour create and update.', 'tourfic' ),
+									'subtitle'  => __( 'You can able to Integrate Zapier with Tour create and update.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
 									'is_pro'    => true,
 								),
 								array(
-									'id'       => 'tour-integrate-zapier-webhook',
-									'type'     => 'text',
-									'label'    => __( 'Tour Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your Tour Zapier Web Hook.', 'tourfic' ),
-									'is_pro'   => true,
-									'dependency'  => array(
+									'id'         => 'tour-integrate-zapier-webhook',
+									'type'       => 'text',
+									'label'      => __( 'Tour Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your Tour Zapier Web Hook.', 'tourfic' ),
+									'is_pro'     => true,
+									'dependency' => array(
 										array( 'tour-integrate-zapier', '==', 'true' ),
 									),
 								),
@@ -3895,19 +3971,19 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 't-enquiry-zapier',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Zapier for Tour Enquiry?', 'tourfic' ),
-									'subtitle' => __( 'Integrate Zapier with Tour Enquiry Form.', 'tourfic' ),
+									'subtitle'  => __( 'Integrate Zapier with Tour Enquiry Form.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
 									'is_pro'    => true
 								),
 								array(
-									'id'       => 't-enquiry-zapier-webhook',
-									'type'     => 'text',
-									'label'    => __( 'Tour Enquiry Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your Tour Enquiry Zapier Web Hook.', 'tourfic' ),
-									'is_pro'   => true,
-									'dependency'  => array(
+									'id'         => 't-enquiry-zapier-webhook',
+									'type'       => 'text',
+									'label'      => __( 'Tour Enquiry Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your Tour Enquiry Zapier Web Hook.', 'tourfic' ),
+									'is_pro'     => true,
+									'dependency' => array(
 										array( 't-enquiry-zapier', '==', 'true' ),
 									),
 								),
@@ -3921,19 +3997,19 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 'apartment-integrate-zapier',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Zapier for Apartment?', 'tourfic' ),
-									'subtitle' => __( 'You can able to Integrate Zapier with Apartment create and update.', 'tourfic' ),
+									'subtitle'  => __( 'You can able to Integrate Zapier with Apartment create and update.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
 									'is_pro'    => true,
 								),
 								array(
-									'id'       => 'apartment-integrate-zapier-webhook',
-									'type'     => 'text',
-									'label'    => __( 'Apartment Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your Apartment Zapier Web Hook.', 'tourfic' ),
-									'is_pro'   => true,
-									'dependency'  => array(
+									'id'         => 'apartment-integrate-zapier-webhook',
+									'type'       => 'text',
+									'label'      => __( 'Apartment Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your Apartment Zapier Web Hook.', 'tourfic' ),
+									'is_pro'     => true,
+									'dependency' => array(
 										array( 'apartment-integrate-zapier', '==', 'true' ),
 									),
 								),
@@ -3941,19 +4017,19 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 'a-enquiry-zapier',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Zapier for Apartment Enquiry?', 'tourfic' ),
-									'subtitle' => __( 'Integrate Zapier with Apartment Enquiry Form.', 'tourfic' ),
+									'subtitle'  => __( 'Integrate Zapier with Apartment Enquiry Form.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
 									'is_pro'    => true
 								),
 								array(
-									'id'       => 'a-enquiry-zapier-webhook',
-									'type'     => 'text',
-									'label'    => __( 'Apartment Enquiry Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your Apartment Enquiry Zapier Web Hook.', 'tourfic' ),
-									'is_pro'   => true,
-									'dependency'  => array(
+									'id'         => 'a-enquiry-zapier-webhook',
+									'type'       => 'text',
+									'label'      => __( 'Apartment Enquiry Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your Apartment Enquiry Zapier Web Hook.', 'tourfic' ),
+									'is_pro'     => true,
+									'dependency' => array(
 										array( 'a-enquiry-zapier', '==', 'true' ),
 									),
 								),
@@ -3967,41 +4043,41 @@ TF_Settings::option( 'tf_settings', array(
 									'id'        => 'tf-new-order-zapier',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Zapier for Booking?', 'tourfic' ),
-									'subtitle' => __( 'Integrate Zapier with WooCommerce Booking.', 'tourfic' ),
+									'subtitle'  => __( 'Integrate Zapier with WooCommerce Booking.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
-									'is_pro'   => true,
+									'is_pro'    => true,
 								),
 								array(
-									'id'       => 'tf-new-order-zapier-webhook',
-									'type'     => 'text',
-									'label'    => __( 'Booking Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your Booking Zapier Web Hook.', 'tourfic' ),
-									'dependency'  => array(
+									'id'         => 'tf-new-order-zapier-webhook',
+									'type'       => 'text',
+									'label'      => __( 'Booking Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your Booking Zapier Web Hook.', 'tourfic' ),
+									'dependency' => array(
 										array( 'tf-new-order-zapier', '==', 'true' ),
 									),
-									'is_pro'   => true,
+									'is_pro'     => true,
 								),
 								array(
 									'id'        => 'tf-new-customer-zapier',
 									'type'      => 'switch',
 									'label'     => __( 'Enable Zapier for New Customer?', 'tourfic' ),
-									'subtitle' => __( 'Integrate Zapier with WooCommerce New Customer.', 'tourfic' ),
+									'subtitle'  => __( 'Integrate Zapier with WooCommerce New Customer.', 'tourfic' ),
 									'label_on'  => __( 'Yes', 'tourfic' ),
 									'label_off' => __( 'No', 'tourfic' ),
 									'default'   => false,
-									'is_pro'   => true,
+									'is_pro'    => true,
 								),
 								array(
-									'id'       => 'tf-new-customer-zapier-webhook',
-									'type'     => 'text',
-									'label'    => __( 'New Customer Web Hook', 'tourfic' ),
-									'subtitle' => __( 'Enter Here Your New Customer Zapier Web Hook.', 'tourfic' ),
-									'dependency'  => array(
+									'id'         => 'tf-new-customer-zapier-webhook',
+									'type'       => 'text',
+									'label'      => __( 'New Customer Web Hook', 'tourfic' ),
+									'subtitle'   => __( 'Enter Here Your New Customer Zapier Web Hook.', 'tourfic' ),
+									'dependency' => array(
 										array( 'tf-new-customer-zapier', '==', 'true' ),
 									),
-									'is_pro'   => true,
+									'is_pro'     => true,
 								),
 							),
 						),

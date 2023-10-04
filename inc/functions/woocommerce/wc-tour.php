@@ -28,7 +28,6 @@ function tf_tours_booking_function() {
 	$disable_adult_price  = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
 	$disable_child_price  = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
 	$disable_infant_price = ! empty( $meta['disable_infant_price'] ) ? $meta['disable_infant_price'] : false;
-	$tf_disable_payment = ! empty( $meta['disable_payment'] ) ? $meta['disable_payment'] : '';
 
 	/**
 	 * All form data
@@ -50,6 +49,14 @@ function tf_tours_booking_function() {
 
 	// Booking Confirmation Details
 	$tf_confirmation_details = !empty($_POST['booking_confirm']) ? $_POST['booking_confirm'] : "";
+
+	// Booking Type
+	if ( function_exists('is_tf_pro') && is_tf_pro() ){
+		$tf_booking_type = !empty($meta['booking-by']) ? $meta['booking-by'] : 1;
+		$tf_booking_url = !empty($meta['booking-url']) ? esc_url($meta['booking-url']) : '';
+		$tf_booking_query_url = !empty($meta['booking-query']) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
+		$tf_booking_attribute = !empty($meta['booking-attribute']) ? $meta['booking-attribute'] : '';
+	}
 
 	/**
 	 * If fixed is selected but pro is not activated
@@ -546,7 +553,7 @@ function tf_tours_booking_function() {
 	 * Add to cart with custom data
 	 */
 
-	if($tf_disable_payment){
+	if( !empty($tf_booking_type) && 3==$tf_booking_type ){
 
 		$tf_booking_fields = !empty(tfopt( 'book-confirm-field' )) ? tf_data_types(tfopt( 'book-confirm-field' )) : '';
 		if(empty($tf_booking_fields)){
@@ -671,7 +678,7 @@ function tf_tours_booking_function() {
 			'shipping_details' => $shipping_details,
 			'order_details'    => $order_details,
 			'payment_method'   => 'offline',
-			'status'           => 'processing',
+			'status'           => 'completed',
 			'order_date'       => date( 'Y-m-d H:i:s' ),
 		);
 		$response['without_payment'] = 'true';
@@ -746,13 +753,6 @@ function tf_tours_booking_function() {
 				$tf_tours_data['tf_tours_data']['price'] = $deposit_amount;
 			}
 
-			// Booking Type
-			if ( function_exists('is_tf_pro') && is_tf_pro() ){
-				$tf_booking_type = !empty($meta['booking-by']) ? $meta['booking-by'] : 1;
-				$tf_booking_url = !empty($meta['booking-url']) ? esc_url($meta['booking-url']) : '';
-				$tf_booking_query_url = !empty($meta['booking-query']) ? $meta['booking-query'] : '';
-				$tf_booking_attribute = !empty($meta['booking-attribute']) ? $meta['booking-attribute'] : '';
-			}
 			if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 				$external_search_info = array(
 					'{adult}'    => $adults,
