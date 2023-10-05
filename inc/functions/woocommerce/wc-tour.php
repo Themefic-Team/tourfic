@@ -657,6 +657,14 @@ function tf_tours_booking_function() {
 			$without_payment_price     = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
 		}
 
+		if ( is_user_logged_in() ) {
+			$current_user = wp_get_current_user();
+			// get user id
+			$tf_offline_user_id = $current_user->ID;
+		} else {
+			$tf_offline_user_id = 1;
+		}
+
 		$order_details = [
 			'order_by'    => '',
 			'tour_date'   => $tour_date,
@@ -680,6 +688,7 @@ function tf_tours_booking_function() {
 			'shipping_details' => $shipping_details,
 			'order_details'    => $order_details,
 			'payment_method'   => 'offline',
+			'customer_id'	   => $tf_offline_user_id,
 			'status'           => 'completed',
 			'order_date'       => date( 'Y-m-d H:i:s' ),
 		);
