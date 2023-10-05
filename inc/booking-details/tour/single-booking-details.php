@@ -281,8 +281,7 @@
 
                     <div class="tf-grid-single">
                         <h3><?php _e("Your voucher", "tourfic"); ?></h3>
-                        <div class="tf-single-box tf-voucher-preview">
-                            <?php 
+                        <?php 
                             $meta = get_post_meta( $tf_order_details->post_id, 'tf_tours_opt', true );
                             $tour_ides = !empty($tf_tour_details->unique_id) ? $tf_tour_details->unique_id : '';
                             // Address
@@ -309,7 +308,8 @@
                             
                             $tf_qr_watermark = ! empty( tfopt( 'qr_background' ) ) ? tfopt( 'qr_background' ) : TF_ASSETS_APP_URL.'images/ticket-banner.png';
                             if(!empty($tour_ides)){
-                            ?>
+                        ?>
+                        <div class="tf-single-box tf-voucher-preview">
                             <div class="tf-visitor-vouchers" style="background-image: url(<?php echo esc_url($tf_qr_watermark); ?>);">
                                 <div class="tf-voucher-header">
                                     <?php
@@ -384,8 +384,8 @@
                             <div class="tf-preview-btn">
                                 <a href="#"><?php _e("Preview", "tourfic"); ?></a>
                             </div>
-                            <?php } ?>
                         </div>
+                        <?php } ?>
                     </div>
                     <div class="tf-grid-single">
                         <h3><?php _e("Others information", "tourfic"); ?></h3>
