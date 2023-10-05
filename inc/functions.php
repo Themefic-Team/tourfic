@@ -61,6 +61,15 @@ if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-common.php' ) ) {
 }
 
 /**
+ * Booking Details Functions
+ */
+if ( file_exists( TF_INC_PATH . 'booking-details/booking_details.php' ) ) {
+	require_once TF_INC_PATH . 'booking-details/booking_details.php';
+} else {
+	tf_file_missing( TF_INC_PATH . 'booking-details/booking_details.php' );
+}
+
+/**
  * Wishlist Functions
  */
 if ( file_exists( TF_INC_PATH . 'functions/functions-wishlist.php' ) ) {

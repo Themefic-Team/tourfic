@@ -12,7 +12,7 @@ if ( ! function_exists( 'tf_add_enquiry_submenu' ) ) {
 		$current_user = wp_get_current_user();
 		// get user role
 		$current_user_role = ! empty( $current_user->roles[0] ) ? $current_user->roles[0] : '';
-		if ( ! empty( $current_user_role ) && ( $current_user_role == 'administrator' || $current_user_role == 'tf_vendor' ) ) {
+		if ( ! empty( $current_user_role ) && ( $current_user_role == 'administrator' ) ) {
 
 			if ( $current_user_role == 'administrator' ) {
 				// Tour enquiry
@@ -24,18 +24,7 @@ if ( ! function_exists( 'tf_add_enquiry_submenu' ) ) {
 				//Apartment enquiry
 				add_submenu_page( 'edit.php?post_type=tf_apartment', __( 'Apartment Enquiry Details', 'tourfic' ), __( 'Enquiry Details', 'tourfic' ), 'edit_tf_apartments', 'tf_apartment_enquiry', 'tf_apartment_enquiry_page_callback' );
 			}
-			if ( $current_user_role == 'tf_vendor' ) {
-				if ( ! empty( tf_data_types( tfopt( 'multi-vendor-setings' ) )['vendor-enquiry-history'] ) && tf_data_types( tfopt( 'multi-vendor-setings' ) )['vendor-enquiry-history'] == '1' ) {
-					// Tour enquiry
-					add_submenu_page( 'edit.php?post_type=tf_tours', __( 'Tour Enquiry Details', 'tourfic' ), __( 'Enquiry Details', 'tourfic' ), 'edit_tf_tourss', 'tf_tours_enquiry', 'tf_tour_enquiry_page_callback' );
-
-					// Hotel enquiry
-					add_submenu_page( 'edit.php?post_type=tf_hotel', __( 'Hotel Enquiry Details', 'tourfic' ), __( 'Enquiry Details', 'tourfic' ), 'edit_tf_hotels', 'tf_hotel_enquiry', 'tf_hotel_enquiry_page_callback' );
-
-					//Apartment enquiry
-					add_submenu_page( 'edit.php?post_type=tf_apartment', __( 'Apartment Enquiry Details', 'tourfic' ), __( 'Enquiry Details', 'tourfic' ), 'edit_tf_apartments', 'tf_apartment_enquiry', 'tf_apartment_enquiry_page_callback' );
-				}
-			}
+			
 		}
 	}
 
@@ -79,11 +68,7 @@ if ( ! function_exists( 'tf_tour_enquiry_page_callback' ) ) {
 			} elseif ( $current_user_role == 'administrator' ) {
 				$tour_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY id DESC LIMIT 15", 'tf_tours' ), ARRAY_A );
 			}
-			if ( $current_user_role == 'tf_vendor' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-				$tour_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s AND author_id = %d ORDER BY id DESC", 'tf_tours', $current_user_id ), ARRAY_A );
-			} elseif ( $current_user_role == 'tf_vendor' ) {
-				$tour_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s AND author_id = %d ORDER BY id DESC LIMIT 15", 'tf_tours', $current_user_id ), ARRAY_A );
-			}
+			
 			$tour_enquiry_results = new DBTFTable( $tour_enquiry_result );
 			$tour_enquiry_results->prepare_items();
 			$tour_enquiry_results->display();
@@ -129,11 +114,6 @@ if ( ! function_exists( 'tf_hotel_enquiry_page_callback' ) ) {
 				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY id DESC LIMIT 15", 'tf_hotel' ), ARRAY_A );
 			}
 
-			if ( $current_user_role == 'tf_vendor' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s AND author_id = %d ORDER BY id DESC", 'tf_hotel', $current_user_id ), ARRAY_A );
-			} elseif ( $current_user_role == 'tf_vendor' ) {
-				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s AND author_id = %d ORDER BY id DESC LIMIT 15", 'tf_hotel', $current_user_id ), ARRAY_A );
-			}
 			$hotel_enquiry_results = new DBTFTable( $hotel_enquiry_result );
 			$hotel_enquiry_results->prepare_items();
 			$hotel_enquiry_results->display();
@@ -174,11 +154,6 @@ if ( ! function_exists( 'tf_apartment_enquiry_page_callback' ) ) {
 				$apartment_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s ORDER BY id DESC LIMIT 15", 'tf_apartment' ), ARRAY_A );
 			}
 
-			if ( $current_user_role == 'tf_vendor' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-				$apartment_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s AND author_id = %d ORDER BY id DESC", 'tf_apartment', $current_user_id ), ARRAY_A );
-			} elseif ( $current_user_role == 'tf_vendor' ) {
-				$apartment_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE post_type = %s AND author_id = %d ORDER BY id DESC LIMIT 15", 'tf_apartment', $current_user_id ), ARRAY_A );
-			}
 			$apartment_enquiry_results = new DBTFTable( $apartment_enquiry_result );
 			$apartment_enquiry_results->prepare_items();
 			$apartment_enquiry_results->display();
