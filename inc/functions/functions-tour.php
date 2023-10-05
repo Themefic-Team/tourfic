@@ -1859,11 +1859,6 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
     $infant_price         = !empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
     $tour_archive_page_price_settings = !empty(tfopt('tf-template')["tour_archive_price_minimum_settings"]) ? tfopt('tf-template')["tour_archive_price_minimum_settings"] : 'all';
 
-	echo "<pre>";
-	print_r(tfopt());
-	echo "</pre>";
-	die(); // added by - Sunvi
-
 	if ( ! empty( $check_in_out ) ) {
 		list( $tf_form_start, $tf_form_end ) = explode( ' - ', $check_in_out );
 	}
