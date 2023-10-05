@@ -581,6 +581,7 @@ function tf_tours_booking_function() {
 				'tf_postcode'   => sanitize_text_field($tf_confirmation_details['tf_postcode']),
 				'tf_country'    => sanitize_text_field($tf_confirmation_details['tf_country']),
 				'tf_phone'      => sanitize_text_field($tf_confirmation_details['tf_phone']),
+				'tf_email'      => sanitize_email($tf_confirmation_details['tf_email']),
 			);
 		}else{
 			$billing_details = [];
@@ -611,6 +612,7 @@ function tf_tours_booking_function() {
 						$shipping_details[$key] = sanitize_text_field($details);
 					}else if("tf_email"==$key){
 						$billing_details['billing_email'] = sanitize_email($details);
+						$shipping_details[$key] = sanitize_email($details);
 					}else if("tf_phone"==$key){
 						$billing_details['billing_phone'] = sanitize_text_field($details);
 						$shipping_details[$key] = sanitize_text_field($details);
