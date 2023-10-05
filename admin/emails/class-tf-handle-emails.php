@@ -1121,7 +1121,7 @@ class TF_Handle_Emails {
         $db_id = !empty($_POST['id']) ? esc_attr( $_POST['id'] ) : '';
 
         global $wpdb;
-        $tf_db_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, billing_details, order_details, payment_method FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $db_id ) ) );
+        $tf_db_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, billing_details, shipping_details, order_details, payment_method FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $db_id ) ) );
         
         // Offline Order Email
         if(!empty($tf_db_order) && "offline"==$tf_db_order->payment_method){
@@ -1185,8 +1185,9 @@ class TF_Handle_Emails {
                 $booking_details .= '<table style="width: 100%; max-width: 600px; margin-top: 15px; margin-bottom: 15px; border: none;"><tbody><tr><td style="background-color: #f2f9fe; padding: 20px; float: left;"> <h3 style="font-size: 16px; font-weight: bold; color: #0209af; margin: 0;">Billing address</h3>';
                 if(!empty($tf_booking_fields)){
                     foreach($tf_booking_fields as $single){
-                        if(!empty($single['reg-field-label']) && !empty($order_customer_data->$single['reg-field-name'])){
-                            $booking_details .= '<strong>'.$single['reg-field-label'].':</strong> ' . $order_customer_data->$single['reg-field-name'] . '<br>';
+                        $tf_details_field_key = $single['reg-field-name'];
+                        if(!empty($single['reg-field-label']) && !empty($order_customer_data->$tf_details_field_key)){
+                            $booking_details .= '<strong>'.$single['reg-field-label'].':</strong> ' . $order_customer_data->$tf_details_field_key . '<br>';
                         }
                     }
                 }else{
@@ -1347,8 +1348,9 @@ class TF_Handle_Emails {
                 $booking_details .= '<table style="width: 100%; max-width: 600px; margin-top: 15px; margin-bottom: 15px; border: none;"><tbody><tr><td style="background-color: #f2f9fe; padding: 20px; float: left;"> <h3 style="font-size: 16px; font-weight: bold; color: #0209af; margin: 0;">Billing address</h3>';
                 if(!empty($tf_booking_fields)){
                     foreach($tf_booking_fields as $single){
-                        if(!empty($single['reg-field-label']) && !empty($order_customer_data->$single['reg-field-name'])){
-                            $booking_details .= '<strong>'.$single['reg-field-label'].':</strong> ' . $order_customer_data->$single['reg-field-name'] . '<br>';
+                        $tf_details_field_key = $single['reg-field-name'];
+                        if(!empty($single['reg-field-label']) && !empty($order_customer_data->$tf_details_field_key)){
+                            $booking_details .= '<strong>'.$single['reg-field-label'].':</strong> ' . $order_customer_data->$tf_details_field_key . '<br>';
                         }
                     }
                 }else{
