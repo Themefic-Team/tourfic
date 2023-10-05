@@ -223,14 +223,28 @@
                                         ?>
                                     </td>
                                 </tr>
+                                <?php 
+                                $tf_checkinout_by = json_decode($tf_order_details->checkinout_by);
+                                ?>
                                 <tr>
                                     <th><?php _e("Checked in by", "tourfic"); ?></th>
                                     <td>:</td>
                                     <td>
                                         <?php
-                                        if(!empty($tf_order_details->checkinout_by)){
-                                            $tf_checkin_by = get_user_by('id', $tf_order_details->checkinout_by);
+                                        if(!empty($tf_checkinout_by->userid)){
+                                            $tf_checkin_by = get_user_by('id', $tf_checkinout_by->userid);
                                             echo !empty($tf_checkin_by->display_name) ? esc_html($tf_checkin_by->display_name) : "";
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><?php _e("Checked Time", "tourfic"); ?></th>
+                                    <td>:</td>
+                                    <td>
+                                        <?php
+                                        if(!empty($tf_checkinout_by->time)){
+                                            echo !empty($tf_checkinout_by->time) ? esc_html($tf_checkinout_by->time) : "";
                                         }
                                         ?>
                                     </td>

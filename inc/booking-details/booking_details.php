@@ -45,6 +45,10 @@ function tf_checkinout_details_edit_function() {
     $current_user = wp_get_current_user();
     // get user id
     $current_user_id = $current_user->ID;
+    $ft_checkinout_by = array(
+        'userid' => $current_user_id,
+        'time'   => date("d F, Y h:i:s a")
+    );
 
     global $wpdb;
     $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
@@ -52,7 +56,7 @@ function tf_checkinout_details_edit_function() {
     // Checkinout Status Update into Database
     if(!empty($tf_order)){
         $wpdb->query(
-            $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET checkinout=%s, checkinout_by=%s WHERE id=%s", sanitize_title( $tf_checkinout ), sanitize_key( $current_user_id ), sanitize_key($tf_order_id))
+            $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET checkinout=%s, checkinout_by=%s WHERE id=%s", sanitize_title( $tf_checkinout ), json_encode( $ft_checkinout_by ), sanitize_key($tf_order_id))
         );
     }
     die();
