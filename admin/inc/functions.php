@@ -222,7 +222,6 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 		$date_format         = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$hotel_id            = isset( $_POST['hotel_id'] ) && ! empty( $_POST['hotel_id'] ) ? sanitize_text_field( $_POST['hotel_id'] ) : '';
 		$room_index          = isset( $_POST['room_index'] ) ? intval( $_POST['room_index'] ) : '';
-		$unique_id           = isset( $_POST['unique_id'] ) && ! empty( $_POST['unique_id'] ) ? sanitize_text_field( $_POST['unique_id'] ) : '';
 		$check_in            = isset( $_POST['tf_room_check_in'] ) && ! empty( $_POST['tf_room_check_in'] ) ? sanitize_text_field( $_POST['tf_room_check_in'] ) : '';
 		$check_out           = isset( $_POST['tf_room_check_out'] ) && ! empty( $_POST['tf_room_check_out'] ) ? sanitize_text_field( $_POST['tf_room_check_out'] ) : '';
 		$status              = isset( $_POST['tf_room_status'] ) && ! empty( $_POST['tf_room_status'] ) ? sanitize_text_field( $_POST['tf_room_status'] ) : '';
@@ -230,6 +229,7 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 		$tf_room_price       = isset( $_POST['tf_room_price'] ) && ! empty( $_POST['tf_room_price'] ) ? sanitize_text_field( $_POST['tf_room_price'] ) : '';
 		$tf_room_adult_price = isset( $_POST['tf_room_adult_price'] ) && ! empty( $_POST['tf_room_adult_price'] ) ? sanitize_text_field( $_POST['tf_room_adult_price'] ) : '';
 		$tf_room_child_price = isset( $_POST['tf_room_child_price'] ) && ! empty( $_POST['tf_room_child_price'] ) ? sanitize_text_field( $_POST['tf_room_child_price'] ) : '';
+		$avail_date          = isset( $_POST['avail_date'] ) && ! empty( $_POST['avail_date'] ) ? sanitize_text_field( $_POST['avail_date'] ) : '';
 
 		if ( empty( $check_in ) || empty( $check_out ) ) {
 			wp_send_json_error( [
@@ -262,12 +262,19 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 		}
 
 		$hotel_avail_data = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
-		$avail_date       = json_decode( $hotel_avail_data['room'][ $room_index ]['avail_date'], true );
-		if ( isset( $avail_date ) && ! empty( $avail_date ) ) {
-			$room_avail_data = array_merge( $avail_date, $room_avail_data );
+		if ( ! empty( $hotel_avail_data ) ) {
+			$avail_date = json_decode( $hotel_avail_data['room'][ $room_index ]['avail_date'], true );
+			if ( isset( $avail_date ) && ! empty( $avail_date ) ) {
+				$room_avail_data = array_merge( $avail_date, $room_avail_data );
+			}
+			$hotel_avail_data['room'][ $room_index ]['avail_date'] = json_encode( $room_avail_data );
+			update_post_meta( $hotel_id, 'tf_hotels_opt', $hotel_avail_data );
+		} else {
+			$avail_date = json_decode( stripslashes( $avail_date ), true );
+			if ( isset( $avail_date ) && ! empty( $avail_date ) ) {
+				$room_avail_data = array_merge( $avail_date, $room_avail_data );
+			}
 		}
-		$hotel_avail_data['room'][ $room_index ]['avail_date'] = json_encode( $room_avail_data );
-		update_post_meta( $hotel_id, 'tf_hotels_opt', $hotel_avail_data );
 
 		wp_send_json_success( [
 			'status'     => true,
@@ -287,11 +294,17 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
  */
 if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 	function tf_get_hotel_availability() {
+		$new_post   = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
 		$hotel_id   = isset( $_POST['hotel_id'] ) && ! empty( $_POST['hotel_id'] ) ? sanitize_text_field( $_POST['hotel_id'] ) : '';
 		$room_index = isset( $_POST['room_index'] ) ? intval( $_POST['room_index'] ) : '';
+		$avail_date = isset( $_POST['avail_date'] ) && ! empty( $_POST['avail_date'] ) ? sanitize_text_field( $_POST['avail_date'] ) : '';
 
-		$hotel_avail_data = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
-		$room_avail_data  = isset( $hotel_avail_data['room'][ $room_index ]['avail_date'] ) && ! empty( $hotel_avail_data['room'][ $room_index ]['avail_date'] ) ? json_decode( $hotel_avail_data['room'][ $room_index ]['avail_date'], true ) : [];
+		if ( $new_post != 'true' ) {
+			$hotel_avail_data = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
+			$room_avail_data  = isset( $hotel_avail_data['room'][ $room_index ]['avail_date'] ) && ! empty( $hotel_avail_data['room'][ $room_index ]['avail_date'] ) ? json_decode( $hotel_avail_data['room'][ $room_index ]['avail_date'], true ) : [];
+		} else {
+			$room_avail_data = json_decode( stripslashes( $avail_date ), true );
+		}
 
 		if ( ! empty( $room_avail_data ) && is_array( $room_avail_data ) ) {
 			$room_avail_data = array_values( $room_avail_data );

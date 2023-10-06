@@ -25,8 +25,7 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
 			}
 
 			$room_index = str_replace( array( '[', ']', 'room' ), '', $this->parent_field );
-			$unique_id  = ! empty( $rooms[ $room_index ]['unique_id'] ) ? $rooms[ $room_index ]['unique_id'] : '';
-			$pricing_by = ! empty( $rooms[ $room_index ]['pricing-by'] ) ? $rooms[ $room_index ]['pricing-by'] : '';
+			$pricing_by = ! empty( $rooms[ $room_index ]['pricing-by'] ) ? $rooms[ $room_index ]['pricing-by'] : '1';
 			?>
             <div class="tf-room-cal-wrap">
                 <div class='tf-room-cal'></div>
@@ -44,17 +43,17 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
 
                     <div class="tf-field-text tf-price-by-room" style="display: <?php echo $pricing_by == '1' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Price', 'tourfic' ); ?></label>
-                        <input type="number" name="tf_room_price" placeholder="<?php echo __( 'Price', 'tourfic' ); ?>">
+                        <input type="number" min="0" name="tf_room_price" placeholder="<?php echo __( 'Price', 'tourfic' ); ?>">
                     </div>
 
                     <div class="tf-field-text tf-price-by-person" style="display: <?php echo $pricing_by == '2' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Adult Price', 'tourfic' ); ?></label>
-                        <input type="number" name="tf_room_adult_price" placeholder="<?php echo __( 'Adult Price', 'tourfic' ); ?>">
+                        <input type="number" min="0" name="tf_room_adult_price" placeholder="<?php echo __( 'Adult Price', 'tourfic' ); ?>">
                     </div>
 
                     <div class="tf-field-text tf-price-by-person" style="display: <?php echo $pricing_by == '2' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Child Price', 'tourfic' ); ?></label>
-                        <input type="number" name="tf_room_child_price" placeholder="<?php echo __( 'Child Price', 'tourfic' ); ?>">
+                        <input type="number" min="0" name="tf_room_child_price" placeholder="<?php echo __( 'Child Price', 'tourfic' ); ?>">
                     </div>
 
                     <div class="tf-field-select" style="width: calc(50% - 5px)">
@@ -66,10 +65,10 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
                     </div>
 
                     <div style="width: 100%">
-                        <input type="hidden" name="hotel_id" value="<?php echo esc_attr( $post->ID ); ?>">
+                        <input type="hidden" name="new_post" value="<?php echo $this->value ? 'false' : 'true'; ?>">
+                        <input type="hidden" name="hotel_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
                         <input type="hidden" name="room_index" value="<?php echo esc_attr( $room_index ); ?>">
-                        <input type="hidden" name="unique_id" value="<?php echo esc_attr( $unique_id ); ?>">
-                        <button class="tf_room_cal_update button button-primary"><?php echo __( 'Update', 'tourfic' ); ?></button>
+                        <span class="tf_room_cal_update button button-primary"><?php echo __( 'Update', 'tourfic' ); ?></span>
                     </div>
 
                 </div>

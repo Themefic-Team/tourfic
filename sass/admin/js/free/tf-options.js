@@ -473,10 +473,10 @@
                         type: "POST",
                         data: {
                             action: "tf_get_hotel_availability",
+                            new_post: $(self.container).find('[name="new_post"]').val(),
                             hotel_id: $(self.container).find('[name="hotel_id"]').val(),
                             room_index: $(self.container).find('[name="room_index"]').val(),
-                            start: moment(start).unix(),
-                            end: moment(end).unix()
+                            avail_date: $(self.container).find('.avail_date').val(),
                         },
                         beforeSend: function () {
                             $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
@@ -568,16 +568,19 @@
         }
         tfHotelCalendar();
 
-        $('.tf_room_cal_update').on('click', function (event) {
-            event.preventDefault();
+        $(document).on('click', '.tf_room_cal_update', function (e) {
+            e.preventDefault();
+
             let btn = $(this);
             let container = btn.closest('.tf-room-cal-wrap');
+            let containerEl = btn.closest('.tf-room-cal-wrap')[0];
             let cal = container.find('.tf-room-cal');
             let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
             let priceBy = container.closest('.tf-single-repeater-room').find('.tf_room_pricing_by').val();
             let avail_date = container.find('.avail_date');
             data.push({name: 'action', value: 'tf_add_hotel_availability'});
             data.push({name: 'price_by', value: priceBy});
+            data.push({name: 'avail_date', value: avail_date.val()});
 
             $.ajax({
                 url: tf_options.ajax_url,
@@ -595,11 +598,11 @@
                             notyf.success(response.data.message);
                             resetForm(container);
 
-                            // var room = new roomCal(container);
-                            // room.init();
-                            // if (room.fullCalendar) {
-                            //     room.fullCalendar.refetchEvents();
-                            // }
+                            var room = new roomCal(containerEl);
+                            room.init();
+                            if (room.fullCalendar) {
+                                room.fullCalendar.refetchEvents();
+                            }
                         } else {
                             notyf.error(response.data.message);
                         }
@@ -614,7 +617,12 @@
                     container.css({'pointer-events': 'auto', 'opacity': '1'})
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
-                }
+                },
+                complete: function () {
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' });
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
             });
         });
 
