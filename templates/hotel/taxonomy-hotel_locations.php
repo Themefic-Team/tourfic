@@ -13,12 +13,9 @@ $taxonomy_slug = $term->slug;
 $max = '8';
 ?>
 <?php 
-$tf_plugin_installed = get_option('tourfic_template_installed'); 
-if (!empty($tf_plugin_installed)) {
-	$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
-}else{
-	$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'default';
-}
+
+$tf_hotel_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
+
 if( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ) ){
 ?>
 <div class="tf-archive-page tf-template-global tf-archive-design-1">

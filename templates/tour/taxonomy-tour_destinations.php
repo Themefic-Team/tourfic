@@ -14,12 +14,7 @@ $max = '2';
 ?>
 <?php 
 
-$tf_plugin_installed = get_option('tourfic_template_installed'); 
-if (!empty($tf_plugin_installed)) {
-	$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
-}else{
-	$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'default';
-}
+$tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
 
 if( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ) ){
 ?>

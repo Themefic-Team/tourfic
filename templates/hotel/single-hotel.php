@@ -130,22 +130,12 @@ while ( have_posts() ) : the_post();
 
 	$tf_hotel_selected_check = !empty($tf_hotel_single_template) ? $tf_hotel_single_template : $tf_hotel_global_template;
 
-	$tf_plugin_installed = get_option('tourfic_template_installed'); 
-	if (!empty($tf_plugin_installed)) {
-	    $tf_hotel_selected_template = $tf_hotel_selected_check;
-	}else{
-		if("single"==$tf_hotel_layout_conditions){
-			$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'default';
-		}
-		$tf_hotel_global_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['single-hotel'] ) ? tf_data_types(tfopt( 'tf-template' ))['single-hotel'] : 'default';
-
-		$tf_hotel_selected_check = !empty($tf_hotel_single_template) ? $tf_hotel_single_template : $tf_hotel_global_template;
-
-	    $tf_hotel_selected_template = $tf_hotel_selected_check ? $tf_hotel_selected_check : 'default';
-	}
+	$tf_hotel_selected_template = $tf_hotel_selected_check;
 
     if( $tf_hotel_selected_template == "design-1" ){
 		include TF_TEMPLATE_PART_PATH . 'hotel/design-1.php';
+	}elseif( $tf_hotel_selected_template == "design-2" ){
+		include TF_TEMPLATE_PART_PATH . 'hotel/design-2.php';
 	}else{
 		include TF_TEMPLATE_PART_PATH . 'hotel/design-default.php';
 	}
