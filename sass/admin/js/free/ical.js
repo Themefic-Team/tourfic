@@ -16,13 +16,14 @@
         * Check available hotel room from date to date
         * Author @Foysal
         */
-        $(document).on('click', '#room-ical-import', function (e) {
+        $(document).on('click', '.room-ical-import', function (e) {
             e.preventDefault();
 
             let btn = $(this);
             let iCalUrl = btn.closest('.tf-fieldset').find('.ical_url_input').val();
             let postId = $('#post_ID').val();
-            let roomId = btn.closest('.tf-single-repeater').find('.unique-id .tf-fieldset input').val();
+            let roomIndex = btn.data('room-index');
+            let pricingBy = btn.data('pricing-by');
 
             if (iCalUrl === '') {
                 notyf.error('Please enter iCal Url');
@@ -36,15 +37,20 @@
                     action: 'tf_import_ical',
                     ical_url: iCalUrl,
                     post_id: postId,
-                    room_id: roomId,
+                    room_index: roomIndex,
+                    pricing_by: pricingBy,
                 },
                 beforeSend: function (response) {
                     btn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     const obj = JSON.parse(response);
-                    console.log('obj', obj);
 
+                    if (obj.status === 'success') {
+                        notyf.success(obj.message);
+                    } else {
+                        notyf.error(obj.message);
+                    }
                     btn.removeClass('tf-btn-loading');
                 },
                 error: function (response) {

@@ -2428,6 +2428,7 @@ Steps
   display: inline-block;
 }
 
+.tf-field-ical input,
 .tf-field-text input {
   width: 100%;
   padding: 12px 8px 12px 12px;
@@ -2438,35 +2439,44 @@ Steps
   color: #363e4a;
   font-size: 14px;
 }
+.tf-field-ical input:focus,
 .tf-field-text input:focus {
   background: #FFFFFF;
   box-shadow: 0 0 0 2px #2979ff;
   border-radius: 4px;
 }
+.tf-field-ical input::-webkit-input-placeholder,
 .tf-field-text input::-webkit-input-placeholder {
   color: #a6b1bf;
 }
+.tf-field-ical input::-ms-input-placeholder,
 .tf-field-text input::-ms-input-placeholder {
   color: #a6b1bf;
 }
+.tf-field-ical input input:-ms-input-placeholder,
 .tf-field-text input input:-ms-input-placeholder {
   color: #a6b1bf;
 }
+.tf-field-ical input::-moz-placeholder,
 .tf-field-text input::-moz-placeholder {
   opacity: 1;
   color: #a6b1bf;
 }
+.tf-field-ical input:-moz-placeholder,
 .tf-field-text input:-moz-placeholder {
   opacity: 1;
   color: #a6b1bf;
 }
+.tf-field-ical input::placeholder,
 .tf-field-text input::placeholder {
   color: #a6b1bf;
 }
+.tf-field-ical input:read-only,
 .tf-field-text input:read-only {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
   background-color: #ebf2ff;
 }
+.tf-field-ical input:read-only:focus,
 .tf-field-text input:read-only:focus {
   box-shadow: none;
   border: 1px solid #c4cbd4;
@@ -3668,6 +3678,63 @@ Steps
   border-radius: 5px;
 }
 
+.fc-view-harness {
+  height: 395px !important;
+}
+
+.fc-direction-ltr .fc-daygrid-event.fc-event-end,
+.fc-direction-rtl .fc-daygrid-event.fc-event-start {
+  font-size: 10px;
+}
+
+.fc .fc-bg-event .fc-event-title {
+  font-size: 10px;
+}
+
+.fc .fc-daygrid-event {
+  cursor: pointer;
+}
+
+.tf-room-cal-wrap table {
+  margin-bottom: 0 !important;
+}
+
+.tf-content-loading {
+  position: relative;
+}
+.tf-content-loading::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -8px;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #000;
+  border-left-color: transparent;
+  border-radius: 50%;
+  vertical-align: middle;
+  visibility: visible;
+  opacity: 1;
+  z-index: 9;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  -webkit-animation: wd-rotate 450ms infinite linear;
+  animation: wd-rotate 450ms infinite linear;
+}
+
+@-webkit-keyframes wd-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes wd-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
 .tf-backend-tour-booking h1,
 .tf-backend-hotel-booking h1 {
   font-size: 24px;

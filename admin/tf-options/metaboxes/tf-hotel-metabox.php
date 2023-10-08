@@ -393,12 +393,12 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'content' => __( 'iCal Sync', 'tourfic' ),
 						),
 						array(
-							'id'          => 'ical_url',
-							'type'        => 'text',
+							'id'          => '',
+							'type'        => 'ical',
 							'label'       => __( 'iCal URL', 'tourfic' ),
 							'placeholder' => __( 'https://website.com', 'tourfic' ),
 							'button_text' => __( 'Import', 'tourfic' ),
-							'button_id'   => 'room-ical-import',
+							'button_class'   => 'room-ical-import',
 							'attributes'  => array(
 								'class' => 'ical_url_input',
 							),

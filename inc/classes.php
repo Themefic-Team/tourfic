@@ -61,20 +61,3 @@ if(is_admin()){
 		tf_file_missing(TF_INC_PATH . 'backend-booking/TF_Tour_Backend_Booking.php');
 	}
 }
-
-/**
- * TF iCal sync
- * @author Foysal
- */
-if(is_admin()){
-	if ( file_exists( TF_INC_PATH . 'ical/TF_ICal.php' ) ) {
-		require_once TF_INC_PATH . 'ical/TF_ICal.php';
-	} else {
-		tf_file_missing(TF_INC_PATH . 'ical/TF_ICal.php');
-	}
-	if ( file_exists( TF_INC_PATH . 'ical/TF_ICal_Reader.php' ) ) {
-		require_once TF_INC_PATH . 'ical/TF_ICal_Reader.php';
-	} else {
-		tf_file_missing(TF_INC_PATH . 'ical/TF_ICal_Reader.php');
-	}
-}
