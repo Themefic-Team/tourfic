@@ -329,7 +329,8 @@
                 let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
                 window.location.href = updatedUrl;
             }else{
-                let updatedUrl = currentURL + "&checkinout=" + changeValue;
+                currentURLParams.set("checkinout", changeValue);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
                 window.location.href = updatedUrl;
             }
         });
@@ -352,7 +353,8 @@
                 let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
                 window.location.href = updatedUrl;
             }else{
-                let updatedUrl = currentURL + "&post=" + changeValue;
+                currentURLParams.set("post", changeValue);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
                 window.location.href = updatedUrl;
             }
         });
@@ -375,7 +377,8 @@
                 let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
                 window.location.href = updatedUrl;
             }else{
-                let updatedUrl = currentURL + "&payment=" + changeValue;
+                currentURLParams.set("payment", changeValue);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
                 window.location.href = updatedUrl;
             }
         });
