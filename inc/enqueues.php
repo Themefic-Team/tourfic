@@ -189,16 +189,19 @@ if ( ! function_exists( 'tf_enqueue_scripts' ) ) {
 						if ( ! empty( $singleroom['child_price'] ) ) {
 							$tfhotel_min_maxprices[] = $singleroom['child_price'];
 						}
-						if ( ! empty( $singleroom['repeat_by_date'] ) ) {
-							foreach ( $singleroom['repeat_by_date'] as $singleavailroom ) {
-								if ( ! empty( $singleavailroom['price'] ) ) {
-									$tfhotel_min_maxprices[] = $singleavailroom['price'];
-								}
-								if ( ! empty( $singleavailroom['adult_price'] ) ) {
-									$tfhotel_min_maxprices[] = $singleavailroom['adult_price'];
-								}
-								if ( ! empty( $singleavailroom['child_price'] ) ) {
-									$tfhotel_min_maxprices[] = $singleavailroom['child_price'];
+						if ( ! empty( $singleroom['avail_date'] ) ) {
+							$avail_date = json_decode($singleroom['avail_date'], true);
+							if(!empty($avail_date) && is_array($avail_date)) {
+								foreach ( $avail_date as $singleavailroom ) {
+									if ( ! empty( $singleavailroom['price'] ) ) {
+										$tfhotel_min_maxprices[] = $singleavailroom['price'];
+									}
+									if ( ! empty( $singleavailroom['adult_price'] ) ) {
+										$tfhotel_min_maxprices[] = $singleavailroom['adult_price'];
+									}
+									if ( ! empty( $singleavailroom['child_price'] ) ) {
+										$tfhotel_min_maxprices[] = $singleavailroom['child_price'];
+									}
 								}
 							}
 						}
