@@ -2246,8 +2246,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 			// If all the room has custom date range then filter the rooms by date
 
 			// Get custom date range repeater
-			$dates = array_column( $meta, 'repeat_by_date' );
-
+			$dates = array_column( $meta, 'avail_date' );
 			// If no date range return
 			if ( empty( $dates ) ) {
 				return;
@@ -2258,7 +2257,10 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 
 			// Run loop through custom date range repeater and filter out only the dates
 			foreach ( $dates as $date ) {
-				$availability_dates[] = array_column( $date, 'availability' );
+				if ( ! empty( $date ) && gettype( $date ) == "string" ) {
+					$date = json_decode( $date,true );
+					$availability_dates[] = $date;
+				}
 			}
 
 			// Run loop through custom dates & set custom dates on a single array
@@ -2270,7 +2272,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 				// Check if any date range match with search form date range and set them on array
 				if ( ! empty( $period ) ) {
 					foreach ( $period as $date ) {
-						$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
+						$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['check_in'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['check_out'] ) );
 
 					}
 				}
@@ -2279,8 +2281,9 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 				if ( ! in_array( 0, $show_hotel ) ) {
 					if ( ! empty( $filters_rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 						foreach ( $filters_rooms as $room ) {
-							if ( ! empty( $room['repeat_by_date'] ) ) {
-								foreach ( $room['repeat_by_date'] as $repat_date ) {
+							if ( ! empty( $room['avail_date'] ) ) {
+								$avail_date = json_decode( $room['avail_date'],true );
+								foreach ( $avail_date as $repat_date ) {
 									if ( ! empty( $repat_date['adult_price'] ) ) {
 										if ( $startprice <= $repat_date['adult_price'] && $repat_date['adult_price'] <= $endprice ) {
 											$has_hotel = true;
@@ -2326,7 +2329,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 			// If all the room has custom date range then filter the rooms by date
 
 			// Get custom date range repeater
-			$dates = array_column( $meta, 'repeat_by_date' );
+			$dates = array_column( $meta, 'avail_date' );
 
 			// If no date range return
 			if ( empty( $dates ) ) {
@@ -2338,7 +2341,10 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 
 			// Run loop through custom date range repeater and filter out only the dates
 			foreach ( $dates as $date ) {
-				$availability_dates[] = array_column( $date, 'availability' );
+				if ( ! empty( $date ) && gettype( $date ) == "string" ) {
+					$date = json_decode( $date,true );
+					$availability_dates[] = $date;
+				}
 			}
 
 			// Run loop through custom dates & set custom dates on a single array
@@ -2350,7 +2356,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 				// Check if any date range match with search form date range and set them on array
 				if ( ! empty( $period ) ) {
 					foreach ( $period as $date ) {
-						$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
+						$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['check_in'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['check_out'] ) );
 
 					}
 				}
@@ -2359,8 +2365,10 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 				if ( ! in_array( 0, $show_hotel ) ) {
 					if ( ! empty( $filters_rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 						foreach ( $filters_rooms as $room ) {
-							if ( ! empty( $room['repeat_by_date'] ) ) {
-								foreach ( $room['repeat_by_date'] as $repat_date ) {
+							if ( ! empty( $room['avail_date'] ) ) {
+
+								$avail_date = json_decode( $room['avail_date'],true );
+								foreach ( $avail_date as $repat_date ) {
 									if ( ! empty( $repat_date['adult_price'] ) ) {
 										if ( $startprice <= $repat_date['adult_price'] && $repat_date['adult_price'] <= $endprice ) {
 											$has_hotel = true;
