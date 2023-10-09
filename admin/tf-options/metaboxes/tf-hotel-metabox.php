@@ -112,7 +112,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'label'        => __( 'Insert / Create your hotel Place', 'tourfic' ),
 					'button_title' => __( 'Add New Place', 'tourfic' ),
 					'class'        => 'tf-field-class',
-					'max'          => 5,
 					'fields'       => array(
 						array(
 							'id'          => 'place-title',
