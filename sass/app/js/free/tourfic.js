@@ -2545,6 +2545,166 @@
         });
     });
 
+    /*
+    * Template 2 Script Start
+    * @author: Jahid
+    */
+
+    $(document).ready(function () {
+
+        // $.autofilter({
+        //     animation:true,
+        //     duration:300
+        // });
+
+        $(".tf-template-3 #tf_checkin_date").flatpickr({
+            dateFormat: "d M Y",
+            onClose: function(){
+                const date = $('.tf-template-3 #tf_checkin_date').val();
+                const day = date.split(" ")[0] ? date.split(" ")[0] : "00";
+                const month = date.split(" ")[1] ? date.split(" ")[1] : "Mon";
+                // const year = date.split(" ")[2];
+                $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-date").html(day);
+                $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-month span").html(month);
+            }
+        });
+
+        $(".tf-template-3 #tf_checkout_date").flatpickr({
+            dateFormat: "d M Y",
+            onClose: function(){
+                const date = $('.tf-template-3 #tf_checkout_date').val();
+                const day = date.split(" ")[0] ? date.split(" ")[0] : "00";
+                const month = date.split(" ")[1] ? date.split(" ")[1] : "Mon";
+                // const year = date.split(" ")[2];
+                $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-date").html(day);
+                $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-month span").html(month);
+            }
+        });
+
+        $('.tf-template-3 .tf-reviews-slider').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            prevArrow: '<button class="slide-arrow prev-arrow"><img src="./assets/image/arrow-left.png"></button>',
+            nextArrow: '<button class="slide-arrow next-arrow"><img src="./assets/image/arrow-right.png"></button>',
+            responsive: [
+                {
+                  breakpoint: 993,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                  }
+                }
+              ]
+        });
+
+        $(".tf-template-3 .tf-question").click(function(){            
+            $(this).siblings().removeClass("tf-active");
+            $(this).siblings().find('.tf-question-desc').slideUp();
+            $(this).parents(".tf-questions-col").siblings().find('.tf-question').removeClass("tf-active");
+            $(this).parents(".tf-questions-col").siblings().find('.tf-question-desc').slideUp();
+
+            $(this).addClass("tf-active");
+            $(this).find('.tf-question-desc').slideDown();
+        });
+
+        $(".tf-template-3 .tf-hero-hotel.tf-popup-buttons").click(function(){
+            $(".tf-hotel-popup").addClass("tf-show")
+        });
+
+        $(".tf-template-3 .tf-hero-video.tf-popup-buttons").click(function(){
+            $(".tf-video-popup").addClass("tf-show")
+        })
+
+        $(".tf-template-3 .tf-room-gallery.tf-popup-buttons").click(function(){
+            $(".tf-room-popup").addClass("tf-show")
+        })
+        $(".tf-template-3 .tf-popup-close").click(function(){
+            $(".tf-popup-wrapper").removeClass("tf-show")
+        });
+
+
+        function details_Menu_Width(){
+            var detailsMenuSourceDivWidth = $('.tf-details-left').width() - 60;
+            $('.tf-details-menu').css('width', detailsMenuSourceDivWidth);
+        }
+
+        $(window).resize(function(){
+            details_Menu_Width()
+        });
+
+
+        $(window).scroll(function() {    
+            var scroll = $(window).scrollTop();
+            if (scroll >= 420) {
+                $(".tf-template-3 .tf-details-menu").addClass("tf-sticky-menu");                
+                details_Menu_Width()
+            }else{
+              $(".tf-template-3 .tf-details-menu").removeClass("tf-sticky-menu");
+            }
+          }); 
+
+          $('.tf-template-3 .tf-details-menu a').on('click', function() {
+            $(this).addClass('tf-hashlink');
+            $(this).closest('li').siblings().find('a').removeClass('tf-hashlink');
+          });
+
+
+        $('.tf-template-3 .acr-dec').on('click', function() {
+            // Get the input field
+            var input = $(this).siblings('input');
+
+            // Decrement the value of the input field
+            input.val( Number( input.val()) - 1);
+
+            // Make sure the value of the input field is not less than 1
+            if ( Number( input.val()) < 1) {
+                input.val(1);
+            }
+        });
+
+        $('.tf-template-3 .acr-inc').on('click', function() {
+            // Get the input field
+            var input = $(this).siblings('input');
+
+            // Increment the value of the input field
+            input.val( Number( input.val()) + 1 );
+        });
+
+
+        $('.tf-template-3 .acr-inc , .tf-template-3 .acr-dec').on('click', function() {
+        
+            var guest = Number($('input#adults').val()) + Number($('input#children').val()) ;
+            if (guest.toString().length < 2) {
+                guest = '0' + guest;
+            }
+            $('span.tf-guest').html(guest);
+            var room = Number($('input#room').val()) ;
+            if (room.toString().length < 2) {
+                room = '0' + room;
+            }
+            $('span.tf-room').html(room);
+        })
+
+        $(document).mouseup(function(e) 
+        {
+            var container = $(".tf-template-3 .tf_acrselection-wrap");        
+            if (!container.is(e.target) && container.has(e.target).length === 0) 
+            {
+                $(".tf-template-3 .tf-booking-form-guest-and-room .tf_acrselection-wrap").removeClass("tf-show");
+            }
+        });
+        $(".tf-template-3 .tf-booking-form-guest-and-room").click(function(){
+            $(".tf-template-3 .tf-booking-form-guest-and-room .tf_acrselection-wrap").addClass("tf-show");
+        }); 
+        
+    });
+
+    /*
+    * Template 2 Script End
+    * @author: Jahid
+    */
+
 })(jQuery, window);
 
 /**

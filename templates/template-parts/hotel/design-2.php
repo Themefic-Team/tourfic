@@ -1,19 +1,42 @@
 <div class="tf-template-3">
 <!--Hero section start -->
-<div class="tf-hero-section-wrap" style="background-image: url(./assets/image/hero.png);">
+<div class="tf-hero-section-wrap" style="<?php echo !empty(get_the_post_thumbnail_url()) ? 'background-image: url('.esc_url(get_the_post_thumbnail_url()).');' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
     <div class="tf-container">
         <div class="tf-hero-content">
             <div class="tf-wish-and-share">
-                <a class="tf-wishlist">
-                    <img src="./assets/image/Heart.png" alt="">
+                <?php
+                // Wishlist
+                if ( tfopt( 'wl-bt-for' ) && in_array( '2', tfopt( 'wl-bt-for' ) ) ) { 
+                    if ( is_user_logged_in() ) {
+                    if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
+                ?>
+                <a class="tf-icon tf-wishlist-box tf-wishlist">
+                <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
                 </a>
+                <?php } } else{ 
+                if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {    
+                ?>
+                <a class="tf-icon tf-wishlist-box tf-wishlist">
+                <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"
+                                                            data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>"
+                                                            data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
+                            echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
+                        } ?>></i>
+                </a>
+                <?php } } } ?>
+            
                 <a class="tf-share">
-                    <img src="./assets/image/share.png" alt="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M14 4.33203C14 5.4366 13.1046 6.33203 12 6.33203C10.8954 6.33203 10 5.4366 10 4.33203C10 3.22746 10.8954 2.33203 12 2.33203C13.1046 2.33203 14 3.22746 14 4.33203Z" stroke="#FDF9F4" stroke-width="1.5"/>
+                <path d="M6 8C6 9.10457 5.10457 10 4 10C2.89543 10 2 9.10457 2 8C2 6.89543 2.89543 6 4 6C5.10457 6 6 6.89543 6 8Z" stroke="#FDF9F4" stroke-width="1.5"/>
+                <path d="M14 11.6641C14 12.7686 13.1046 13.6641 12 13.6641C10.8954 13.6641 10 12.7686 10 11.6641C10 10.5595 10.8954 9.66406 12 9.66406C13.1046 9.66406 14 10.5595 14 11.6641Z" stroke="#FDF9F4" stroke-width="1.5"/>
+                <path d="M5.81836 7.16371L10.1517 5.16406M5.81836 8.83073L10.1517 10.8304" stroke="#FDF9F4" stroke-width="1.5"/>
+                </svg>
                 </a>
             </div>
             <div class="tf-hero-bottom-area">
                 <div class="tf-head-title">
-                    <h1>Hilton Los Angeles Airport</h1>
+                    <h1><?php echo get_the_title(); ?></h1>
                     <div class="tf-title-meta">
                         <img src="./assets/image/map-icon.svg" alt="" class="tf-map-icon">
                         <a href="#tf-map">Los Angeles, California, USA</a>

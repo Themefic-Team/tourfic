@@ -9020,6 +9020,15 @@ html {
   padding: 0;
   height: 32px;
   width: 32px;
+  border-radius: 100px;
+  background: rgba(181, 142, 83, 0.5);
+  box-shadow: 0px 14px 30px 0px rgba(0, 23, 100, 0.07);
+  text-align: center;
+  line-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area {
   display: flex;
