@@ -279,18 +279,19 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 						array(
 							'id'          => 'minimum_stay_requirement',
 							'type'        => 'number',
-							'label'       => __( 'Minimum Stay Requiremet', 'tourfic' ),
-							'subtitle'    => __( 'The number of days is minimum to stay in this room', 'tourfic' ),
+							'label'       => __( 'Minimum Stay Requirement', 'tourfic' ),
+							'subtitle'    => __( 'Minimum number of nights required to book this room', 'tourfic' ),
 							'attributes'  => array(
 								'min' => '1',
 							),
+							'default'     => '1',
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'maximum_stay_requirement',
 							'type'        => 'number',
-							'label'       => __( 'Maximum Stay Requiremet', 'tourfic' ),
-							'subtitle'    => __( 'The number of days is maximum to stay in this room', 'tourfic' ),
+							'label'       => __( 'Maximum Stay Requirement', 'tourfic' ),
+							'subtitle'    => __( 'Maximum number of nights allowed to book this room', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
