@@ -2633,21 +2633,10 @@
             details_Menu_Width()
         });
 
-
-        $(window).scroll(function() {    
-            var scroll = $(window).scrollTop();
-            if (scroll >= 420) {
-                $(".tf-template-3 .tf-details-menu").addClass("tf-sticky-menu");                
-                details_Menu_Width()
-            }else{
-              $(".tf-template-3 .tf-details-menu").removeClass("tf-sticky-menu");
-            }
-          }); 
-
-          $('.tf-template-3 .tf-details-menu a').on('click', function() {
-            $(this).addClass('tf-hashlink');
-            $(this).closest('li').siblings().find('a').removeClass('tf-hashlink');
-          });
+        $('.tf-template-3 .tf-details-menu a').on('click', function() {
+        $(this).addClass('tf-hashlink');
+        $(this).closest('li').siblings().find('a').removeClass('tf-hashlink');
+        });
 
 
         $('.tf-template-3 .acr-dec').on('click', function() {

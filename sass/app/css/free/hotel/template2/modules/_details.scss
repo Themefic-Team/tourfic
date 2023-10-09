@@ -11,6 +11,10 @@
 				.tf-details-menu { 
                     background: #FCF4E8;
                     padding: 16px 30px;
+                    position: sticky;
+                    top: 0;
+                    left: 0;
+                    z-index: 999;
 					ul { 
                         margin: 0;
                         padding: 0;

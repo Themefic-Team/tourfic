@@ -11,48 +11,74 @@
                     if ( tfopt( 'wl-for' ) && in_array( 'li', tfopt( 'wl-for' ) ) ) {
                 ?>
                 <a class="tf-icon tf-wishlist-box tf-wishlist">
-                <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
+                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
                 </a>
                 <?php } } else{ 
                 if ( tfopt( 'wl-for' ) && in_array( 'lo', tfopt( 'wl-for' ) ) ) {    
                 ?>
                 <a class="tf-icon tf-wishlist-box tf-wishlist">
-                <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"
-                                                            data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>"
-                                                            data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) {
-                            echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"';
-                        } ?>></i>
+                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo wp_create_nonce( "wishlist-nonce" ) ?>" data-id="<?php echo $post_id ?>" data-type="<?php echo $post_type ?>" <?php if ( tfopt( 'wl-page' ) ) { echo 'data-page-title="' . get_the_title( tfopt( 'wl-page' ) ) . '" data-page-url="' . get_permalink( tfopt( 'wl-page' ) ) . '"'; } ?>></i>
                 </a>
                 <?php } } } ?>
             
                 <a class="tf-share">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M14 4.33203C14 5.4366 13.1046 6.33203 12 6.33203C10.8954 6.33203 10 5.4366 10 4.33203C10 3.22746 10.8954 2.33203 12 2.33203C13.1046 2.33203 14 3.22746 14 4.33203Z" stroke="#FDF9F4" stroke-width="1.5"/>
-                <path d="M6 8C6 9.10457 5.10457 10 4 10C2.89543 10 2 9.10457 2 8C2 6.89543 2.89543 6 4 6C5.10457 6 6 6.89543 6 8Z" stroke="#FDF9F4" stroke-width="1.5"/>
-                <path d="M14 11.6641C14 12.7686 13.1046 13.6641 12 13.6641C10.8954 13.6641 10 12.7686 10 11.6641C10 10.5595 10.8954 9.66406 12 9.66406C13.1046 9.66406 14 10.5595 14 11.6641Z" stroke="#FDF9F4" stroke-width="1.5"/>
-                <path d="M5.81836 7.16371L10.1517 5.16406M5.81836 8.83073L10.1517 10.8304" stroke="#FDF9F4" stroke-width="1.5"/>
-                </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M14 4.33203C14 5.4366 13.1046 6.33203 12 6.33203C10.8954 6.33203 10 5.4366 10 4.33203C10 3.22746 10.8954 2.33203 12 2.33203C13.1046 2.33203 14 3.22746 14 4.33203Z" stroke="#FDF9F4" stroke-width="1.5"/>
+                    <path d="M6 8C6 9.10457 5.10457 10 4 10C2.89543 10 2 9.10457 2 8C2 6.89543 2.89543 6 4 6C5.10457 6 6 6.89543 6 8Z" stroke="#FDF9F4" stroke-width="1.5"/>
+                    <path d="M14 11.6641C14 12.7686 13.1046 13.6641 12 13.6641C10.8954 13.6641 10 12.7686 10 11.6641C10 10.5595 10.8954 9.66406 12 9.66406C13.1046 9.66406 14 10.5595 14 11.6641Z" stroke="#FDF9F4" stroke-width="1.5"/>
+                    <path d="M5.81836 7.16371L10.1517 5.16406M5.81836 8.83073L10.1517 10.8304" stroke="#FDF9F4" stroke-width="1.5"/>
+                    </svg>
                 </a>
             </div>
             <div class="tf-hero-bottom-area">
                 <div class="tf-head-title">
                     <h1><?php echo get_the_title(); ?></h1>
                     <div class="tf-title-meta">
-                        <img src="./assets/image/map-icon.svg" alt="" class="tf-map-icon">
-                        <a href="#tf-map">Los Angeles, California, USA</a>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                        <g clip-path="url(#clip0_811_17516)">
+                            <path d="M10 17.9176L14.1248 13.7927C16.4028 11.5147 16.4028 7.82124 14.1248 5.54318C11.8468 3.26512 8.15327 3.26512 5.87521 5.54318C3.59715 7.82124 3.59715 11.5147 5.87521 13.7927L10 17.9176ZM10 20.2746L4.6967 14.9713C1.76777 12.0423 1.76777 7.2936 4.6967 4.36467C7.62563 1.43574 12.3743 1.43574 15.3033 4.36467C18.2323 7.2936 18.2323 12.0423 15.3033 14.9713L10 20.2746ZM10 11.3346C10.9205 11.3346 11.6667 10.5885 11.6667 9.66797C11.6667 8.74749 10.9205 8.0013 10 8.0013C9.0795 8.0013 8.33333 8.74749 8.33333 9.66797C8.33333 10.5885 9.0795 11.3346 10 11.3346ZM10 13.0013C8.15905 13.0013 6.66667 11.5089 6.66667 9.66797C6.66667 7.82702 8.15905 6.33464 10 6.33464C11.8409 6.33464 13.3333 7.82702 13.3333 9.66797C13.3333 11.5089 11.8409 13.0013 10 13.0013Z" fill="#FDF9F4"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_811_17516">
+                            <rect width="20" height="20" fill="white" transform="translate(0 0.5)"/>
+                            </clipPath>
+                        </defs>
+                        </svg>
+                        <a href="#tf-map"><?php echo esc_html( $address ); ?></a>
                     </div>
                 </div>
                 <div class="tf-hero-gallery-videos">
-                    <div class="tf-hero-video tf-popup-buttons" style="background-image: url(./assets/image/video.svg);">
+                    <?php
+                    $hotel_video = ! empty( $meta['video'] ) ? $meta['video'] : '';
+                    if ( !empty($hotel_video) ) { ?>
+                    <div class="tf-hero-video tf-popup-buttons">
                         <a href="#">
-                            <img src="./assets/image/video-icon.svg" alt="">
+                            <svg width="23" height="18" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="content">
+                            <path id="Vector 3570" d="M10.5 5L12.5 5" stroke="#FDF9F4" stroke-width="1.5" stroke-linecap="round"/>
+                            <path id="Rectangle 368" d="M1.5 8C1.5 4.70017 1.5 3.05025 2.52513 2.02513C3.55025 1 5.20017 1 8.5 1H9.5C12.7998 1 14.4497 1 15.4749 2.02513C16.5 3.05025 16.5 4.70017 16.5 8V10C16.5 13.2998 16.5 14.9497 15.4749 15.9749C14.4497 17 12.7998 17 9.5 17H8.5C5.20017 17 3.55025 17 2.52513 15.9749C1.5 14.9497 1.5 13.2998 1.5 10V8Z" stroke="#FDF9F4" stroke-width="1.5"/>
+                            <path id="Rectangle 369" d="M16.5 5.90585L16.6259 5.80196C18.7417 4.05623 19.7996 3.18336 20.6498 3.60482C21.5 4.02628 21.5 5.42355 21.5 8.21808V9.78192C21.5 12.5765 21.5 13.9737 20.6498 14.3952C19.7996 14.8166 18.7417 13.9438 16.6259 12.198L16.5 12.0941" stroke="#FDF9F4" stroke-width="1.5" stroke-linecap="round"/>
+                            </g>
+                            </svg>
                         </a>
                     </div>
-                    <div class="tf-hero-hotel tf-popup-buttons" style="background-image: url(./assets/image/gallery.svg);">
+                    <?php } ?>
+                    <?php 
+                    if ( ! empty( $gallery_ids ) ) {
+                    ?>
+                    <div class="tf-hero-hotel tf-popup-buttons">
                         <a href="#">
-                            <img src="./assets/image/gallery-icon.svg" alt="">
+                            <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="content">
+                            <path id="Rectangle 2111" d="M5.5 16.9745C5.6287 18.2829 5.91956 19.1636 6.57691 19.8209C7.75596 21 9.65362 21 13.4489 21C17.2442 21 19.1419 21 20.3209 19.8209C21.5 18.6419 21.5 16.7442 21.5 12.9489C21.5 9.15362 21.5 7.25596 20.3209 6.07691C19.6636 5.41956 18.7829 5.1287 17.4745 5" stroke="#FDF9F4" stroke-width="1.5"/>
+                            <path id="Rectangle 2109" d="M1.5 9C1.5 5.22876 1.5 3.34315 2.67157 2.17157C3.84315 1 5.72876 1 9.5 1C13.2712 1 15.1569 1 16.3284 2.17157C17.5 3.34315 17.5 5.22876 17.5 9C17.5 12.7712 17.5 14.6569 16.3284 15.8284C15.1569 17 13.2712 17 9.5 17C5.72876 17 3.84315 17 2.67157 15.8284C1.5 14.6569 1.5 12.7712 1.5 9Z" stroke="#FDF9F4" stroke-width="1.5"/>
+                            <path id="Vector" d="M1.5 10.1185C2.11902 10.0398 2.74484 10.001 3.37171 10.0023C6.02365 9.9533 8.61064 10.6763 10.6711 12.0424C12.582 13.3094 13.9247 15.053 14.5 17" stroke="#FDF9F4" stroke-width="1.5" stroke-linejoin="round"/>
+                            <path id="Vector_2" d="M12.4998 6H12.5088" stroke="#FDF9F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                            </svg>
                         </a>
                     </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -1004,28 +1030,21 @@
     <!-- Hotel Policies end -->
 
 
-
-    <!-- Hotel PopUp Starts -->        
+    <?php 
+    if ( ! empty( $gallery_ids ) ) {
+    ?>
+    <!-- Hotel PopUp Starts -->       
     <div class="tf-popup-wrapper tf-hotel-popup">
         <div class="tf-popup-inner">
-            <div class="tf-popup-head">
-                <ul>
-                    <li data-filter>All images</li>
-                    <li data-filter="rooms">Rooms</li>
-                    <li data-filter="common-areas">Common areas</li>
-                    <li data-filter="pool">Pool</li>
-                    <li data-filter="dining">Dining</li>
-                </ul>                    
-            </div>
+            
             <div class="tf-popup-body">
-                <img data-tags="common-areas" src="./assets/image/gallery-image-1.png" alt="" class="tf-popup-image">
-                <img data-tags="rooms,dining" src="./assets/image/gallery-image-2.png" alt="" class="tf-popup-image">
-                <img data-tags="common-areas" src="./assets/image/gallery-image-3.png" alt="" class="tf-popup-image">
-                <img data-tags="rooms" src="./assets/image/gallery-image-4.png" alt="" class="tf-popup-image">
-                <img data-tags="dining" src="./assets/image/gallery-image-5.png" alt="" class="tf-popup-image">
-                <img data-tags="dining,rooms,common-areas" src="./assets/image/gallery-image-6.png" alt="" class="tf-popup-image">
-                <img data-tags="pool" src="./assets/image/gallery-image-7-pool.jpg" alt="" class="tf-popup-image">
-                <img data-tags="pool,rooms" src="./assets/image/gallery-image-8-pool.jpg" alt="" class="tf-popup-image">
+                <?php 
+                    if ( ! empty( $gallery_ids ) ) {
+                    foreach ( $gallery_ids as $key => $gallery_item_id ) {
+                    $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+                ?>
+                <img src="<?php echo esc_url($image_url); ?>" alt="" class="tf-popup-image">
+                <?php } } ?>
             </div>                
             <div class="tf-popup-close">
                 <i class="fa-solid fa-xmark"></i>
@@ -1033,45 +1052,26 @@
         </div>
     </div>
     <!-- Hotel PopUp end -->  
+    <?php } ?>
 
-
+    <?php 
+    if ( !empty($hotel_video) ) { ?>
     <!-- Video PopUp Starts -->        
     <div class="tf-popup-wrapper tf-video-popup">
         <div class="tf-popup-inner">
-            <div class="tf-popup-head">
-                <ul>
-                    <li data-filter>All images</li>
-                    <li data-filter="rooms">Rooms</li>
-                    <li data-filter="common-areas">Common areas</li>
-                    <li data-filter="pool">Pool</li>
-                    <li data-filter="dining">Dining</li>
-                </ul>                    
-            </div>
+            
             <div class="tf-popup-body">                   
-                
-                <div data-tags="common-areas" class="tf-popup-video-item">
-                    <iframe src="https://www.youtube.com/embed/BCuH9jTMK58"></iframe>
-                </div>
-
-                <div data-tags="rooms" class="tf-popup-video-item">
-                    <iframe src="https://www.youtube.com/embed/4K6Sh1tsAW4"></iframe>
-                </div>
-                
-                <div data-tags="dining" class="tf-popup-video-item">
-                    <iframe src="https://www.youtube.com/embed/_dui6BUmMBg"></iframe>
-                </div>
-                
-                <div data-tags="pool" class="tf-popup-video-item">
-                    <iframe src="https://www.youtube.com/embed/k_P1YDYAlss"></iframe>
-                </div>                    
-
+                <div class="tf-popup-video-item">
+                    <iframe src="<?php echo esc_url($hotel_video); ?>"></iframe>
+                </div>                 
             </div>                
             <div class="tf-popup-close">
                 <i class="fa-solid fa-xmark"></i>
             </div>
         </div>
     </div>
-    <!-- Video PopUp end -->  
+    <!-- Video PopUp end --> 
+    <?php } ?>
 
 
     <!-- Room PopUp Starts -->        
