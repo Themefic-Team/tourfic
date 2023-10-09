@@ -91,6 +91,50 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				),
 			),
 		),
+		//Hotel Info
+		'hotel_info' => array(
+			'title'  => __( 'Info', 'tourfic' ),
+			'icon'   => 'fa-solid fa-info-circle',
+			'fields' => array(
+				array(
+					'id'          => 'section-title',
+					'type'        => 'text',
+					'label'       => __( 'Add Section Title', 'tourfic' ),
+					'placeholder' => __( "What's around?", 'tourfic' ),
+					'default' => __( "What's around?", 'tourfic' ),
+					'attributes'  => array(
+						'required' => 'required',
+					),
+				),
+				array(
+					'id'           => 'nearby-places',
+					'type'         => 'repeater',
+					'label'        => __( 'Insert / Create your hotel Place', 'tourfic' ),
+					'button_title' => __( 'Add New Place', 'tourfic' ),
+					'class'        => 'tf-field-class',
+					'max'          => 5,
+					'fields'       => array(
+						array(
+							'id'          => 'place-title',
+							'type'        => 'text',
+							'subtitle'    => __( 'e.g. Rail Station', 'tourfic' ),
+							'label'       => __( 'Name', 'tourfic' ),
+							'field_width' => 50,
+						),
+						array(
+							'id'          => 'place-dist',
+							'type'        => 'text',
+							'label'       => __( 'Place Distance and Unit', 'tourfic' ),
+							'subtitle'    => __( 'Distance of the place from the Hotel with Unit', 'tourfic' ),
+							'field_width' => 50,
+							'attributes'  => array(
+								'min' => '0',
+							),
+						),
+					)
+				),
+			),
+		),
 		// Hotel Details
 		'hotel_details'    => array(
 			'title'  => __( 'Gallery & Video', 'tourfic' ),
