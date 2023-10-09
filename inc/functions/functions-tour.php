@@ -931,19 +931,8 @@ function tf_single_tour_booking_form( $post_id ) {
 
 	$tf_tour_selected_check = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
 
-	$tf_plugin_installed = get_option( 'tourfic_template_installed' );
-	if ( ! empty( $tf_plugin_installed ) ) {
-		$tf_tour_selected_template = $tf_tour_selected_check;
-	} else {
-		if ( "single" == $tf_tour_layout_conditions ) {
-			$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'default';
-		}
-		$tf_tour_global_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-tour'] ) ? tf_data_types( tfopt( 'tf-template' ) )['single-tour'] : 'default';
-
-		$tf_tour_selected_check = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
-
-		$tf_tour_selected_template = $tf_tour_selected_check ? $tf_tour_selected_check : 'default';
-	}
+	$tf_tour_selected_template = $tf_tour_selected_check;
+	
 	if ( ! function_exists( 'partial_payment_tag_replacement' ) ) {
 		function partial_payment_tag_replacement( $text, $arr ) {
 			if(!empty($arr)) {
@@ -2010,12 +1999,9 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
             }
         }
     }
-    $tf_plugin_installed = get_option('tourfic_template_installed'); 
-    if (!empty($tf_plugin_installed)) {
-        $tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
-    }else{
-        $tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'default';
-    }
+    
+    $tf_tour_arc_selected_template = ! empty( tf_data_types(tfopt( 'tf-template' ))['tour-archive'] ) ?  tf_data_types(tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+    
     if( $tf_tour_arc_selected_template=="design-1"){
     ?>
     <div class="tf-item-card tf-flex">
