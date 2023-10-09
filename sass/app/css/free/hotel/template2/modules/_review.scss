@@ -1,0 +1,150 @@
+.tf-reviews-wrapper { 
+    padding-bottom: 42px !important;
+    .tf-section-title{
+        margin: 0 0 .3em 0 !important;
+    }
+	.tf-reviews-slider { 
+
+		.tf-reviews-item { 
+            background: #FDF9F3;
+            margin-right: 48px !important;
+            padding: 24px;
+            display: flex !important;
+            flex-direction: row;
+            gap: 10px;
+			.tf-reviews-avater { 
+                width: 48px;
+
+				img { 
+                    width: 48px;
+                    height: 48px;
+                    object-fit: cover;
+                    border-radius: 50%;
+				}
+			}
+
+			.tf-reviews-text { 
+
+				h3 { 
+                    color: #595349;
+                    font-size: 16px;
+                    font-weight: 600;
+                    line-height: 20.80px;
+                    word-wrap: break-word;
+                    font-family: "Josefin Sans", sans-serif;
+				}
+
+				.tf-reviews-meta { 
+                    color: #A1A1A1;
+                    margin-bottom: 12px;
+                    display: inline-block;
+				}
+
+				p { 
+
+				}
+			}
+		}
+        .slick-list {
+            padding: 32px 0 42px;
+        }
+        button.slide-arrow {
+            position: absolute;
+            bottom: -20px;
+            border: none;
+            background: transparent;
+            font-size: 30px;
+            color: #B58E53;
+        }
+        button.next-arrow {
+            right: calc(50% - 95px);
+        }
+        
+        button.prev-arrow {
+            left: calc(50% - 95px);
+        }
+	}
+}
+
+.tf-questions-wrapper { 
+
+	.tf-questions { 
+        display: flex;
+        gap: 40px;
+        &>div {
+            width: calc(50% - 20px);
+        }
+		.tf-questions-col { 
+
+			.tf-question { 
+                padding: 24px;
+                background: transparent;
+                padding: 0px 24px;
+                transition: 0.3s;
+                display: inline-block;
+                margin-bottom: 16px;                
+                width: -webkit-fill-available;                
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                &>i {
+                    position: absolute;
+                    right: 16px;
+                    top: 8px;
+                    transition: 0.3s;
+                }
+                &.tf-active {
+                    background: #FDF9F3;
+                    padding: 24px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    i {
+                        top: 16px !important;
+                        right: 16px !important;
+                    }
+                }
+
+				h3 { 
+                    color: #595349;
+                    font-size: 16px !important;
+                    font-family: "Josefin Sans", sans-serif;
+                    font-weight: 600;
+                    line-height: 20.80px !important;
+                    margin-bottom: 10px;
+				}
+
+				.tf-question-desc { 
+                    display: none;
+				}
+			}
+		}
+	}
+}
+
+
+
+.tf-policies {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.tf-policy-item {
+    display: flex;
+    gap: 16px;
+}
+
+.tf-policy-title {
+    min-width: 316px;
+}
+
+.tf-policy-item>div {
+    padding: 24px;
+    background-color: #FDF9F3;
+}
+
+.tf-policy-desc {
+    width: -webkit-fill-available;
+}

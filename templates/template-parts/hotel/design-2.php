@@ -1,4 +1,4 @@
-
+<div class="tf-template-3">
 <!--Hero section start -->
 <div class="tf-hero-section-wrap" style="background-image: url(./assets/image/hero.png);">
     <div class="tf-container">
@@ -1120,3 +1120,4 @@
     </div>
 </div>
 <!--Content section end -->
+</div>

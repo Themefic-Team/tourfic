@@ -1,0 +1,90 @@
+.tf-hero-section-wrap {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 56px;
+
+    .tf-container {
+
+        .tf-hero-content {
+            min-height: 566px;
+            margin: 0;
+            padding: 0;
+
+            .tf-wish-and-share {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                margin-top: 210px;
+                display: flex;
+                gap: 16px;
+
+                a {
+                    margin: 0;
+                    padding: 0;
+                    height: 32px;
+                    width: 32px;
+                }
+            }
+
+            .tf-hero-bottom-area {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                padding-bottom: 48px;
+
+                .tf-head-title {
+                    .tf-title-meta {
+                        font-size: 24px;
+                        font-weight: 400;
+                        line-height: 31px;
+                        color: #fff;
+                        display: flex;
+                        align-items: flex-start;
+                        gap: 8px;
+
+                        a {
+                            color: #fff;
+                            text-decoration: none;
+                            font-size: 24px;
+                            font-family: Josefin Sans;
+                            font-weight: 400;
+                            line-height: 31.20px;
+                        }
+                    }
+                }
+
+                .tf-hero-gallery-videos {
+                    display: flex;
+                    gap: 14px;
+
+                    &>div {
+                        height: 80px;
+                        width: 200px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: #30281c9e;
+                        color: #fff;
+                        background-size: cover;
+                        background-position: center;
+                    }
+                    a {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 100%;
+                        width: 100%;
+                        color: #fff;
+                        pointer-events: none;
+
+                        img {
+                            height: 24px;
+                            width: 24px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

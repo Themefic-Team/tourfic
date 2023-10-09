@@ -1,0 +1,89 @@
+.tf-content-wrapper { 
+		.tf-details { 
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+			.tf-details-left { 
+                width: calc(100% - 520px);
+                display: flex;
+                flex-direction: column;
+                gap: 32px;
+				.tf-details-menu { 
+                    background: #FCF4E8;
+                    padding: 16px 30px;
+					ul { 
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+                        display: flex;
+                        gap: 32px;
+                        flex-wrap: wrap;
+						li { 
+                            a{
+                                text-decoration: none;
+                                font-size: 16px;
+                                font-weight: 600;
+                                line-height: 20.80px;
+                                color: #595349;
+                                border-bottom: 2px solid;
+                                padding-bottom: 5px;
+                                display: inline-block;
+                                border-color: transparent;
+                                &.tf-hashlink{
+                                    border-color: #595349;
+                            
+                                }
+                            }
+						}
+					}
+				}
+
+				.tf-overview-wrapper { 
+                    padding: 0 32px;
+					.tf-overview-description { 
+                        padding-bottom: 32px;
+						p { 
+                            margin: 0;
+                            padding: 0;
+						}
+					}
+
+					.tf-overview-popular-facilities { 
+						h3 { 
+                            color: #595349;
+                            font-size: 16px;
+                            font-family: Josefin Sans;
+                            font-weight: 600;
+                            line-height: 20.80px;
+                            margin-bottom: 12px;
+						}
+
+						&>ul { 
+                            margin: 0;
+                            padding: 0;
+                            list-style: none;
+                            display: flex;
+                            flex-direction: row;
+                            flex-wrap: wrap;
+                            gap: 10px 0;
+							li { 
+                                width: 25%;
+							}
+						}
+					}
+				}
+			}
+
+            .tf-details-right {
+                width: 480px;
+            }
+		}
+	}
+
+
+    .tf-details-menu.tf-sticky-menu {
+        position: fixed;
+        top: 175px;
+        box-shadow: 0 0 20px #ddd;
+        z-index: 9;
+    }

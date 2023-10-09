@@ -1,0 +1,109 @@
+.tf-popup-wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999999999;
+    background: rgba(48, 40, 28, 0.3019607843);
+    backdrop-filter: blur(15px);
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.tf-show {
+        visibility: visible;
+        opacity: 1;
+        transform: scale(1);
+        .tf-popup-inner {
+            transform: scale(1);
+
+        }
+    }
+}
+
+.tf-popup-inner {
+    height: 695px;
+    width: 1130px;
+    background: #FCF4E8;
+    padding: 24px;
+    max-height: 80vh;
+    max-width: 80vw;
+    position: relative;
+    transform: scale(0.9);
+    transition: 0.3s;
+
+
+}
+
+.tf-popup-head ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 32px;
+}
+
+.tf-popup-head {
+    margin-bottom: 16px;
+}
+
+.tf-popup-body {
+    width: calc(100% - 8px);
+    height: calc(100% - 32px);
+    overflow: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-right: 8px;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+
+      }
+      
+      /* Track */
+      &::-webkit-scrollbar-track {
+        background: #D6D4D2; 
+
+      }
+       
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: #595349; 
+        border-radius: 50px;
+        overflow: hidden;
+      }
+      
+}
+
+img.tf-popup-image {
+    width: calc(33.33% - 7px);
+    height: fit-content;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.tf-popup-close {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    padding: 6px;
+}
+.tf-popup-close i {
+    color: #595349;
+    font-size: 18px;
+}
+.tf-popup-video-item {
+    width: 100%;
+    height: -webkit-fill-available;
+}
+
+.tf-popup-video-item iframe {
+    width: 100%;
+    height: 100%;
+}

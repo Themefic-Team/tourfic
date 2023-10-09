@@ -1,0 +1,18 @@
+html {
+  scroll-behavior: smooth;
+}
+
+@import './modules/common';
+
+.tf-template-3 {
+  @import './modules/hero';
+  @import './modules/details';
+  @import './modules/available';
+  @import './modules/bookingform';
+  @import './modules/facilities';
+  @import './modules/review';
+  @import './modules/sitebar';
+  @import './modules/popup';
+}
+
+@import './modules/responsive';
