@@ -260,7 +260,12 @@
                         </div>
                     </div>
                 </div>
-                <!-- Single Hotel Body details End -->
+               
+                <?php 
+                if(file_exists(TF_TEMPLATE_PART_PATH . 'hotel/design-1/places.php')) {
+                    include TF_TEMPLATE_PART_PATH . 'hotel/design-1/places.php';
+                }
+                ?>
 
                 <?php 
                 if( !empty(tf_data_types(tfopt( 'tf-template' ))['single-hotel-layout']) ){
