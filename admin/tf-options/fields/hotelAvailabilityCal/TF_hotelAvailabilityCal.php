@@ -33,12 +33,12 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
 
                     <div class="tf-field-text" style="width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Check In', 'tourfic' ); ?></label>
-                        <input readonly="readonly" type="text" name="tf_room_check_in" placeholder="<?php echo __( 'Check In', 'tourfic' ); ?>">
+                        <input readonly="readonly" type="text" class="tf_room_check_in" name="tf_room_check_in" placeholder="<?php echo __( 'Check In', 'tourfic' ); ?>">
                     </div>
 
                     <div class="tf-field-text" style="width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Check Out', 'tourfic' ); ?></label>
-                        <input readonly="readonly" type="text" name="tf_room_check_out" placeholder="<?php echo __( 'Check Out', 'tourfic' ); ?>">
+                        <input readonly="readonly" type="text" class="tf_room_check_out" name="tf_room_check_out" placeholder="<?php echo __( 'Check Out', 'tourfic' ); ?>">
                     </div>
 
                     <div class="tf-field-text tf-price-by-room" style="display: <?php echo $pricing_by == '1' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
