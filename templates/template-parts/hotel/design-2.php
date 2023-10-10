@@ -103,10 +103,7 @@
             <!--Overview Start -->
             <div class="tf-overview-wrapper">
                 <div class="tf-overview-description">
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
-                        live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics,
-                        a large language ocean. A small river named Duden flows by their place and supplies it with the
-                        necessary regelialia. It is a paradisematic country... See more</p>
+                    <?php the_content(); ?>
                 </div>
                 <div class="tf-overview-popular-facilities">
                     <h3>Popular facilities</h3>
@@ -538,8 +535,30 @@
             </div>  
             
             <div class="tf-location tf-single-widgets">
-                <h2 class="tf-section-title">Location</h2>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.2528001631!2d-74.14448723354508!3d40.69763123329699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1696128927921!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <h2 class="tf-section-title"><?php _e("Location", "tourfic"); ?></h2>
+                <?php if ( !defined( 'TF_PRO' ) ) { ?>
+                    <?php 
+                    if( $address && $tf_openstreet_map!="default" && ( empty($address_latitude) || empty($address_longitude) ) ){ ?>
+                        <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <?php } elseif( $address && $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude)) {
+                    ?>
+                        <div id="hotel-location" style="height: 250px"></div>
+                        <script>
+                            const map = L.map('hotel-location').setView([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], <?php echo $address_zoom; ?>);
+
+                            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                maxZoom: 20,
+                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                            }).addTo(map);
+
+                            const marker = L.marker([<?php echo $address_latitude; ?>, <?php echo $address_longitude; ?>], {alt: '<?php echo $address; ?>'}).addTo(map)
+                                .bindPopup('<?php echo $address; ?>');
+                        </script>
+                    <?php }else{ ?>
+                        <iframe src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <?php } ?>
+                <?php } ?>
+                
             </div>   
             
             
