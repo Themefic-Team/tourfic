@@ -287,16 +287,6 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 
 		?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
-
-			<?php if ( $title ): ?>
-                <div class="tf_widget-title"><h2><?php echo esc_html( $title ); ?></h2></div>
-			<?php endif; ?>
-
-			<?php if ( $subtitle ): ?>
-                <div class="tf_widget-subtitle"><?php echo esc_html( $subtitle ); ?></div>
-			<?php endif; ?>
-
-
             <div class="tf_homepage-booking">
                 <div class="tf_destination-wrap">
                     <div class="tf_input-inner">
