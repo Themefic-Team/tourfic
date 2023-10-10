@@ -9509,6 +9509,7 @@ html {
   height: 48px;
   object-fit: cover;
   border-radius: 50%;
+  max-width: none;
 }
 .tf-template-3 .tf-reviews-wrapper .tf-reviews-slider .tf-reviews-item .tf-reviews-text h3 {
   color: #595349;
@@ -9718,11 +9719,49 @@ html {
   font-weight: 700;
   line-height: 24px;
 }
-.tf-template-3 .tf-review-form-wrapper form {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 16px 0;
+.tf-template-3 .tf-review-form-wrapper .tf-review-form-container {
+  width: 100%;
+  min-width: auto !important;
+  background: transparent !important;
+}
+.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-rating-wrapper {
+  grid-template-columns: 1fr !important;
+  margin-bottom: 16px !important;
+}
+.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-rating-wrapper .tf-form-single-rating {
+  display: flow-root;
+}
+.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-rating-wrapper .tf-form-single-rating label {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18.2px;
+  display: block;
+}
+.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-rating-wrapper .tf-form-single-rating .ratings-container {
+  width: auto !important;
+  text-align: left;
+}
+.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit {
+  margin-top: 16px !important;
+}
+.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit input#comment-submit {
+  background-color: #B58E53 !important;
+  color: #fff;
+  width: 100%;
+  font-size: 16px !important;
+  font-weight: 700;
+  line-height: 24px !important;
+  border: none !important;
+  padding: 12px 0 !important;
+  border-radius: 0px !important;
+}
+.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form input, .tf-template-3 .tf-review-form-wrapper .tf-review-form-container form textarea {
+  border: 1px solid #595349;
+  background: transparent;
+  padding: 8px;
+  color: #C1BFBB;
+  font-size: 12px;
+  border-radius: 0px;
 }
 .tf-template-3 .tf-reting-item {
   width: 50%;

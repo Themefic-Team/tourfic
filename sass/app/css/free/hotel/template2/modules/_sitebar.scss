@@ -131,11 +131,53 @@ button.tf-review-open.button, .tf-reting-field button {
     line-height: 24px;
 }
 
-.tf-review-form-wrapper form {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 16px 0;
+.tf-review-form-wrapper{
+    .tf-review-form-container{
+        width: 100%;
+        min-width: auto !important;
+        background: transparent !important;
+        form{
+            .tf-rating-wrapper{
+                grid-template-columns: 1fr !important;
+                margin-bottom: 16px !important;
+                .tf-form-single-rating{
+                    display: flow-root;
+                    label{
+                        font-size: 14px;
+                        font-weight: 600;
+                        line-height: 18.2px;
+                        display: block;
+                    }
+                    .ratings-container{
+                        width: auto !important;
+                        text-align: left;
+                    }
+                }
+            }
+            .tf-review-submit{
+                margin-top: 16px !important;
+                input#comment-submit{
+                    background-color: #B58E53 !important;
+                    color: #fff;
+                    width: 100%;
+                    font-size: 16px !important;
+                    font-weight: 700;
+                    line-height: 24px !important;
+                    border: none !important;
+                    padding: 12px 0 !important;
+                    border-radius: 0px !important;
+                }
+            }
+            input,textarea{
+                border: 1px solid #595349;
+                background: transparent;
+                padding: 8px;
+                color: #C1BFBB;
+                font-size: 12px;
+                border-radius: 0px;
+            }
+        }
+    }
 }
 
 .tf-reting-item {

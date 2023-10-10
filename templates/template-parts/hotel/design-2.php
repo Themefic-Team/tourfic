@@ -563,152 +563,85 @@
             
             
             <div class="tf-location tf-single-widgets">
-                <h2 class="tf-section-title">Overall reviews</h2>
+                <?php
+                global $current_user;
+                // Check if user is logged in
+                $is_user_logged_in = $current_user->exists();
+                $post_id           = $post->ID;
+                // Get settings value
+                $tf_ratings_for = tfopt( 'r-for' ) ?? [ 'li', 'lo' ];
+                $tf_settings_base = ! empty ( tfopt( 'r-base' ) ) ? tfopt( 'r-base' ) : 5;
+                if ( $comments ) {
+                    $tf_overall_rate        = [];
+                    tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
+                    tf_get_review_fields( $fields );
+                ?>
+                <h2 class="tf-section-title"><?php _e("Overall reviews", "tourfic"); ?></h2>
                 <div class="tf-review-data-inner">
                     <div class="tf-review-data">
                         <div class="tf-review-data-average">
-                            <p><span>8.6</span>/10</p>
+                            <p><span>
+                                <?php _e( sprintf( '%.1f', $total_rating ) ); ?>
+                            </span>/<?php echo $tf_settings_base; ?></p>
                         </div>
                         <div class="tf-review-all-info">
-                            <p>Excellent <span>Total 110 reviews</span></p>
+                            <p><?php _e("Excellent", "tourfic"); ?> <span><?php _e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></span></p>
                         </div>
                     </div>
                     <div class="tf-review-data-features">
                         <div class="tf-percent-progress">
+                        <?php 
+                        if ( $tf_overall_rate ) {
+                        foreach ( $tf_overall_rate as $key => $value ) {
+                        if ( empty( $value ) || ! in_array( $key, $fields ) ) {
+                            continue;
+                        }
+                        $value = tf_average_ratings( $value );
+                        ?>
                             <div class="tf-progress-item">                                    
                                 <div class="tf-review-feature-label">
-                                    <p class="feature-label">Staff</p>
-                                    <p class="feature-rating"> 9.5</p>
+                                    <p class="feature-label"><?php esc_html_e( $key, "tourfic" ); ?></p>
+                                    <p class="feature-rating"> <?php echo $value; ?></p>
                                 </div>
                                 <div class="tf-progress-bar">
-                                    <span class="percent-progress" style="width: 95.00%"></span>
+                                    <span class="percent-progress" style="width: <?php echo tf_average_rating_percent( $value, tfopt( 'r-base' ) ); ?>%"></span>
                                 </div>
                             </div>
-                            <div class="tf-progress-item">                                    
-                                <div class="tf-review-feature-label">
-                                    <p class="feature-label">Facilities</p>
-                                    <p class="feature-rating"> 7.5</p>
-                                </div>
-                                <div class="tf-progress-bar">
-                                    <span class="percent-progress" style="width: 75.00%"></span>
-                                </div>
-                            </div>
-                            <div class="tf-progress-item">                                    
-                                <div class="tf-review-feature-label">
-                                    <p class="feature-label">Cleanliness</p>
-                                    <p class="feature-rating"> 9.5</p>
-                                </div>
-                                <div class="tf-progress-bar">
-                                    <span class="percent-progress" style="width: 95.00%"></span>
-                                </div>
-                            </div>
-                            <div class="tf-progress-item">                                    
-                                <div class="tf-review-feature-label">
-                                    <p class="feature-label">Comfort</p>
-                                    <p class="feature-rating"> 6.5</p>
-                                </div>
-                                <div class="tf-progress-bar">
-                                    <span class="percent-progress" style="width: 65.00%"></span>
-                                </div>
-                            </div>
-                            <div class="tf-progress-item">                                    
-                                <div class="tf-review-feature-label">
-                                    <p class="feature-label">Value for money</p>
-                                    <p class="feature-rating"> 8.5</p>
-                                </div>
-                                <div class="tf-progress-bar">
-                                    <span class="percent-progress" style="width: 85.00%"></span>
-                                </div>
-                            </div>
-                                    
+                            <?php } } ?>
+                                   
                         </div>
                     </div>
                 </div>
-                <a class="tf-all-reviews" href="#">See all reviews</a>
-
-                <button class="tf-review-open button">Leave your review</button>
-
+                <a class="tf-all-reviews" href="#"><?php _e("See all reviews", "tourfic"); ?></a>
+                <?php } ?>
+                <button class="tf-review-open button">
+                    <?php _e("Leave your review", "tourfic"); ?>
+                </button>
+                <?php
+                // Review moderation notice
+                echo tf_pending_review_notice( $post_id );
+                ?>
+                <?php
+                if ( ! empty( $tf_ratings_for ) ) {
+                    if ( $is_user_logged_in ) {
+                    if ( in_array( 'li', $tf_ratings_for ) && ! tf_user_has_comments() ) {
+                    ?>
                 <div class="tf-review-form-wrapper" action="">
-                    <h3>Leave your review</h3>
-                    <p>Your email address will not be published. Required fields are marked.</p>
-                    <form action="#">
-                        <div class="tf-reting-item">
-                            <span class="tf-reting-title">Staff</span>
-                            <span class="tf-reting-stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                            </span>
-                        </div>
-                        <div class="tf-reting-item">
-                            <span class="tf-reting-title">Facilities</span>
-                            <span class="tf-reting-stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                            </span>
-                        </div>
-                        <div class="tf-reting-item">
-                            <span class="tf-reting-title">Cleanliness</span>
-                            <span class="tf-reting-stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                            </span>
-                        </div>
-                        <div class="tf-reting-item">
-                            <span class="tf-reting-title">Comfort</span>
-                            <span class="tf-reting-stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                            </span>
-                        </div>
-                        <div class="tf-reting-item">
-                            <span class="tf-reting-title">Service</span>
-                            <span class="tf-reting-stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                            </span>
-                        </div>
-                        <div class="tf-reting-item">
-                            <span class="tf-reting-title">Value for money</span>
-                            <span class="tf-reting-stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                            </span>
-                        </div>
-                        <div class="tf-reting-field">
-                            <span>Description</span>
-                            <textarea name="" id="" cols="30" rows="10"></textarea>
-                        </div>
-                        <div class="tf-reting-field">
-                            <span>Email</span>
-                            <input type="email">
-                        </div>
-                        <div class="tf-reting-field">
-                            <span>Name</span>
-                            <input type="text">
-                        </div>                            
-                        <div class="tf-reting-field">
-                            <button type="submit">Submit</button>
-                        </div>
-                    </form>
+                    <h3><?php _e("Leave your review", "tourfic"); ?></h3>
+                    <p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+                    <?php tf_review_form(); ?>
                 </div>
+                <?php
+		}
+	} else {
+		if ( in_array( 'lo', $tf_ratings_for ) ) {
+			?>
+                <div class="tf-review-form-wrapper" action="">
+                    <h3><?php _e("Leave your review", "tourfic"); ?></h3>
+                    <p><?php _e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+                    <?php tf_review_form(); ?>
+                </div>
+                <?php } } } ?>
             </div>       
         </div>        
     </div>        
@@ -847,66 +780,45 @@
     </div>
     <!--Content facilities end -->
 
-    
+    <?php
+    if ( $comments ) { ?>
     <!-- Hotel reviews Srart -->
     <div class="tf-reviews-wrapper tf-section" id="tf-hotel-reviews">         
-        <h2 class="tf-section-title">Guest reviews</h2> 
-        <p>Total 6 reviews</p>
+        <h2 class="tf-section-title"><?php _e("Guest reviews", "tourfic"); ?></h2> 
+        <p><?php _e("Total", "tourfic"); ?> <?php tf_based_on_text( count( $comments ) ); ?></p>
         <div class="tf-reviews-slider">
-            <div class="tf-reviews-item">
-                <div class="tf-reviews-avater">
-                    <img src="./assets/image/review-avater.png" alt="">
-                </div>
-                <div class="tf-reviews-text">
-                    <h3>8.5 Excellent</h3>
-                    <span class="tf-reviews-meta">Jon doe, July 2023</span>
-                    <p>When I reached hotel I go to reception counter I told to one of receptionist lady that I have a reservation please complete my formalities. She told me wait just.</p>
-                </div>
-            </div>
-            <div class="tf-reviews-item">
-                <div class="tf-reviews-avater">
-                    <img src="./assets/image/review-avater.png" alt="">
-                </div>
-                <div class="tf-reviews-text">
-                    <h3>8.5 Excellent</h3>
-                    <span class="tf-reviews-meta">Jon doe, July 2023</span>
-                    <p>When I reached hotel I go to reception counter I told to one of receptionist lady that I have a reservation please complete my formalities. She told me wait just.</p>
-                </div>
-            </div>
-            <div class="tf-reviews-item">
-                <div class="tf-reviews-avater">
-                    <img src="./assets/image/review-avater.png" alt="">
-                </div>
-                <div class="tf-reviews-text">
-                    <h3>8.5 Excellent</h3>
-                    <span class="tf-reviews-meta">Jon doe, July 2023</span>
-                    <p>When I reached hotel I go to reception counter I told to one of receptionist lady that I have a reservation please complete my formalities. She told me wait just.</p>
-                </div>
-            </div>
-            <div class="tf-reviews-item">
-                <div class="tf-reviews-avater">
-                    <img src="./assets/image/review-avater.png" alt="">
-                </div>
-                <div class="tf-reviews-text">
-                    <h3>8.5 Excellent</h3>
-                    <span class="tf-reviews-meta">Jon doe, July 2023</span>
-                    <p>When I reached hotel I go to reception counter I told to one of receptionist lady that I have a reservation please complete my formalities. She told me wait just.</p>
-                </div>
-            </div>
-            <div class="tf-reviews-item">
-                <div class="tf-reviews-avater">
-                    <img src="./assets/image/review-avater.png" alt="">
-                </div>
-                <div class="tf-reviews-text">
-                    <h3>8.5 Excellent</h3>
-                    <span class="tf-reviews-meta">Jon doe, July 2023</span>
-                    <p>When I reached hotel I go to reception counter I told to one of receptionist lady that I have a reservation please complete my formalities. She told me wait just.</p>
-                </div>
-            </div>
-        </div>
+            <?php
+            foreach ( $comments as $comment ) {
+            // Get rating details
+            $tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+            if ( $tf_overall_rate == false ) {
+                $tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+                $tf_overall_rate = tf_average_ratings( $tf_comment_meta );
+            }
+            $base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+            $c_rating  = tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
 
+            // Comment details
+            $c_avatar      = get_avatar( $comment, '56' );
+            $c_author_name = $comment->comment_author;
+            $c_date        = $comment->comment_date;
+            $c_content     = $comment->comment_content;
+            ?>
+            <div class="tf-reviews-item">
+                <div class="tf-reviews-avater">
+                    <?php echo $c_avatar; ?>
+                </div>
+                <div class="tf-reviews-text">
+                    <h3><?php echo $c_rating; ?></h3>
+                    <span class="tf-reviews-meta"><?php echo $c_author_name; ?>, <?php echo $c_date; ?></span>
+                    <p><?php echo $c_content; ?></p>
+                </div>
+            </div>
+            <?php } ?>
+        </div>
     </div>
     <!--Content reviews end -->
+    <?php } ?>
 
 
     <?php if ( $faqs ): ?>
