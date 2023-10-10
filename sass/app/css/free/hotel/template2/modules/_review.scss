@@ -69,13 +69,10 @@
 .tf-questions-wrapper { 
 
 	.tf-questions { 
-        display: flex;
-        gap: 40px;
-        &>div {
-            width: calc(50% - 20px);
-        }
 		.tf-questions-col { 
-
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
 			.tf-question { 
                 padding: 24px;
                 background: transparent;
@@ -113,6 +110,7 @@
                     font-weight: 600;
                     line-height: 20.80px !important;
                     margin-bottom: 10px;
+                    margin-right: 10px;
 				}
 
 				.tf-question-desc { 

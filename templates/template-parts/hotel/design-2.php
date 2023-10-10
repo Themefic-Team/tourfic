@@ -34,16 +34,7 @@
                 <div class="tf-head-title">
                     <h1><?php echo get_the_title(); ?></h1>
                     <div class="tf-title-meta">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-                        <g clip-path="url(#clip0_811_17516)">
-                            <path d="M10 17.9176L14.1248 13.7927C16.4028 11.5147 16.4028 7.82124 14.1248 5.54318C11.8468 3.26512 8.15327 3.26512 5.87521 5.54318C3.59715 7.82124 3.59715 11.5147 5.87521 13.7927L10 17.9176ZM10 20.2746L4.6967 14.9713C1.76777 12.0423 1.76777 7.2936 4.6967 4.36467C7.62563 1.43574 12.3743 1.43574 15.3033 4.36467C18.2323 7.2936 18.2323 12.0423 15.3033 14.9713L10 20.2746ZM10 11.3346C10.9205 11.3346 11.6667 10.5885 11.6667 9.66797C11.6667 8.74749 10.9205 8.0013 10 8.0013C9.0795 8.0013 8.33333 8.74749 8.33333 9.66797C8.33333 10.5885 9.0795 11.3346 10 11.3346ZM10 13.0013C8.15905 13.0013 6.66667 11.5089 6.66667 9.66797C6.66667 7.82702 8.15905 6.33464 10 6.33464C11.8409 6.33464 13.3333 7.82702 13.3333 9.66797C13.3333 11.5089 11.8409 13.0013 10 13.0013Z" fill="#FDF9F4"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_811_17516">
-                            <rect width="20" height="20" fill="white" transform="translate(0 0.5)"/>
-                            </clipPath>
-                        </defs>
-                        </svg>
+                        <i class="ri-map-pin-line"></i>
                         <a href="#tf-map"><?php echo esc_html( $address ); ?></a>
                     </div>
                 </div>
@@ -899,136 +890,46 @@
     <!--Content reviews end -->
 
 
-    
+    <?php if ( $faqs ): ?>
     <!-- Hotel Questions Srart -->
     <div class="tf-questions-wrapper tf-section" id="tf-hotel-faq">
-        <h2 class="tf-section-title">Questions? We have answers.</h2>            
+        <h2 class="tf-section-title">
+        <?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __( "Faq’s", 'tourfic' ); ?>
+        </h2>            
         <div class="tf-questions">
             <div class="tf-questions-col">
-                <div class="tf-question tf-active">
-                    <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                    <div class="tf-question-desc" style="display: block;">Yes, this property has an outdoor pool. Pool access is from 6:00 AM to 8:00 PM</div>
+                <?php 
+                $faq_key = 1;    
+                foreach ( $faqs as $key => $faq ): ?>
+                <div class="tf-question <?php echo $faq_key==1 ? esc_attr( 'tf-active' ) : ''; ?>">
+                    <h3><?php echo esc_html( $faq['title'] ); ?></h3>
+                    <div class="tf-question-desc" style="<?php echo $faq_key==1 ? esc_attr( 'display: block;' ) : ''; ?>">
+                        <?php echo wp_kses_post( $faq['description'] ); ?>
+                    </div>
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
-                <div class="tf-question">
-                    <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                    <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is from 6:00 AM to 8:00 PM</div>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="tf-question">
-                    <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                    <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is from 6:00 AM to 8:00 PM</div>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="tf-question">
-                    <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                    <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is from 6:00 AM to 8:00 PM</div>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="tf-question">
-                    <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                    <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is from 6:00 AM to 8:00 PM</div>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="tf-question">
-                    <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                    <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is from 6:00 AM to 8:00 PM</div>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
+                <?php $faq_key++; endforeach; ?>
+                
             </div>
-            <div class="tf-questions-col">
-                <div class="tf-question">
-                    <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                    <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is from 6:00 AM to 8:00 PM</div>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="tf-question">
-                    <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                    <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is from 6:00 AM to 8:00 PM</div>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="tf-question">
-                    <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                    <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is from 6:00 AM to 8:00 PM</div>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="tf-question">
-                    <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                    <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is from 6:00 AM to 8:00 PM</div>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="tf-question">
-                    <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                    <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is from 6:00 AM to 8:00 PM</div>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="tf-question">
-                    <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                    <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is from 6:00 AM to 8:00 PM</div>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-            </div>
+            
         </div>
     </div>
 
     <!-- Hotel Questions end -->
+    <?php endif; ?>
 
-
+    <?php if ( $tc ) { ?>
     <!-- Hotel Policies Starts -->        
     <div class="tf-policies-wrapper tf-section" id="tf-hotel-policies">            
-        <h2 class="tf-section-title">Questions? We have answers.</h2>  
+        <h2 class="tf-section-title">
+            <?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : __("Hotel Terms & Conditions","tourfic"); ?>
+        </h2>  
         <div class="tf-policies">
-            <div class="tf-policy-item">
-                <div class="tf-policy-title">Check in</div>
-                <div class="tf-policy-desc">
-                    <p>Check-in from 2:00 PM - anytime <br>Guest are required to show a valid ID card <br>Early check-in is available for a fee</p>
-                </div>
-            </div>
-            <div class="tf-policy-item">
-                <div class="tf-policy-title">Check-out</div>
-                <div class="tf-policy-desc">
-                    <p>Check-out before 12:00 PM</p>
-                    <p>Late check-out can be arranged for an extra charge</p>
-                </div>
-            </div>
-            <div class="tf-policy-item">
-                <div class="tf-policy-title">Children & extra beds</div>
-                <div class="tf-policy-desc">
-                    <p>Rollaway beds are available for $200/night</p>
-                </div>
-            </div>
-            <div class="tf-policy-item">
-                <div class="tf-policy-title">Pool, spa, & gym (if applicable)</div>
-                <div class="tf-policy-desc">
-                    <p>Reservations are required for spa treatments and can be made by contacting the property before arrival at the number on the booking confirmation</p>
-                </div>
-            </div>
-            <div class="tf-policy-item">
-                <div class="tf-policy-title">Pets</div>
-                <div class="tf-policy-desc">
-                    <p>No pets or service animals allowed</p>
-                </div>
-            </div>
-            <div class="tf-policy-item">
-                <div class="tf-policy-title">Age restriction</div>
-                <div class="tf-policy-desc">
-                    <p>There's no age requirement for check-in</p>
-                </div>
-            </div>
-            <div class="tf-policy-item">
-                <div class="tf-policy-title">Payment types</div>
-                <div class="tf-policy-desc">
-                    <img class="tf-payment-card" src="./assets/image/payment1.svg" alt="">
-                    <img class="tf-payment-card" src="./assets/image/payment2.svg" alt="">
-                    <img class="tf-payment-card" src="./assets/image/payment3.svg" alt="">
-                    <img class="tf-payment-card" src="./assets/image/payment4.svg" alt="">
-                    <img class="tf-payment-card" src="./assets/image/payment5.svg" alt="">
-                </div>
-            </div>
+            <?php echo wpautop( $tc ); ?>
         </div>
     </div>
     <!-- Hotel Policies end -->
-
+    <?php } ?>
 
     <?php 
     if ( ! empty( $gallery_ids ) ) {
