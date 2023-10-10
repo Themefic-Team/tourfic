@@ -9636,10 +9636,10 @@ html {
   gap: 53px;
 }
 .tf-template-3 .tf-review-data-average {
-  font-size: 40px;
+  font-size: 40px !important;
   font-family: Josefin Sans;
-  font-weight: 400;
-  line-height: 52px;
+  font-weight: 400 !important;
+  line-height: 52px !important;
   word-wrap: break-word;
 }
 .tf-template-3 .tf-review-data-average span {
