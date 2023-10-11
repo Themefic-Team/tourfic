@@ -403,7 +403,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-apartment.jpg",
 										),
 									),
-									'default'  => 'default',
+									'default'  => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
 								),
 								array(
 									'id'      => 'apartment-title',
@@ -423,7 +423,7 @@ TF_Settings::option( 'tf_settings', array(
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/apartment-archive-default.jpg",
 										),
 									),
-									'default'  => 'default',
+									'default'  => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
 								),
 								array(
 									'id'      => 'apartment_archive_notice',
