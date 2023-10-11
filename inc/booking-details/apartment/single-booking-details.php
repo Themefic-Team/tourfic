@@ -232,6 +232,7 @@
                         <li data-value="cancelled"><?php _e("Cancelled", "tourfic"); ?></li>
                         <li data-value="refunded"><?php _e("Refund", "tourfic"); ?></li>
                     </ul>
+                    <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo $tf_order_details->id; ?>">
                 </div>
             </div>
 
