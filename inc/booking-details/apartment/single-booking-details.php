@@ -27,7 +27,7 @@
                     if("offline"==$tf_order_details->payment_method && empty($tf_booking_by)){
                         echo "Administrator";
                     }else{
-                        echo $tf_booking_by->roles[0];
+                        echo !empty($tf_booking_by->roles[0]) ? $tf_booking_by->roles[0] : 'Administrator';
                     }
                 ?>
                 </span>
