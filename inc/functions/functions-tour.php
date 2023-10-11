@@ -2959,7 +2959,8 @@ function tf_tour_booking_popup_callback() {
 
 			$tf_orders_select    = array(
 				'select' => "post_id,order_details",
-				'query'  => "post_type = 'tour' AND ostatus = 'completed' ORDER BY order_id DESC"
+				'post_type' => 'tour',
+				'query'  => " AND ostatus = 'completed' ORDER BY order_id DESC"
 			);
 			$tf_tour_book_orders = tourfic_order_table_data( $tf_orders_select );
 
@@ -3024,7 +3025,8 @@ function tf_tour_booking_popup_callback() {
 			// Daily Tour Booking Capacity && Tour Order retrive from Tourfic Order Table
 			$tf_orders_select    = array(
 				'select' => "post_id,order_details",
-				'query'  => "post_type = 'tour' AND ostatus = 'completed' ORDER BY order_id DESC"
+				'post_type' => 'tour',
+				'query'  => " AND ostatus = 'completed' ORDER BY order_id DESC"
 			);
 			$tf_tour_book_orders = tourfic_order_table_data( $tf_orders_select );
 
@@ -3194,7 +3196,8 @@ function tf_tour_booking_popup_callback() {
 				// Daily Tour Booking Capacity && tour order retrive form tourfic order table
 				$tf_orders_select    = array(
 					'select' => "post_id,order_details",
-					'query'  => "post_type = 'tour' AND ostatus = 'completed' ORDER BY order_id DESC"
+					'post_type' => 'tour',
+					'query'  => " AND ostatus = 'completed' ORDER BY order_id DESC"
 				);
 				$tf_tour_book_orders = tourfic_order_table_data( $tf_orders_select );
 

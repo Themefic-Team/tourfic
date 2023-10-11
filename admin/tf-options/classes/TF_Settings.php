@@ -11,6 +11,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		public $option_position = null;
 		public $option_sections = array();
 
+		public $pre_tabs;
+		public $pre_fields;
+		public $pre_sections;
+
 		public function __construct( $key, $params = array() ) {
 			$this->option_id       = $key;
 			$this->option_title    = ! empty( $params['title'] ) ? apply_filters( $key . '_title', $params['title'] ) : '';

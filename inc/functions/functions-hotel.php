@@ -938,7 +938,8 @@ function tf_room_availability_callback() {
 					# Get Only the completed orders
 					$tf_orders_select = array(
 						'select' => "post_id,order_details",
-						'query' => "post_type = 'hotel' AND ostatus = 'completed' AND order_id = ".$order_id
+						'post_type' => 'hotel',
+						'query' => " AND ostatus = 'completed' AND order_id = ".$order_id
 					);
 					$tf_hotel_book_orders = tourfic_order_table_data($tf_orders_select);
 

@@ -597,7 +597,7 @@
         <div class="visitor-details-popup">
         <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo $tf_order_details->id; ?>">
         <?php 
-        for($traveller_in = 1; $traveller_in < $tf_total_visitor; $traveller_in++){ ?>
+        for($traveller_in = 1; $traveller_in <= $tf_total_visitor; $traveller_in++){ ?>
             <div class="tf-single-tour-traveller tf-single-travel">
                 <h4><?php _e( 'Traveler '.$traveller_in, 'tourfic' ); ?></h4>
                 <div class="traveller-info">
