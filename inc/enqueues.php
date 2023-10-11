@@ -434,16 +434,28 @@ if ( ! function_exists( 'tf_enqueue_admin_scripts' ) ) {
 }
 
 /**
- * The Plus Addons for Elementor Compatibility
+ * Others Theme & Plugin Compatibility
  * 
  * @since 2.9.27
  */
 
 function tf_dequeue_theplus_script_on_settings_page($screen) {
 
+	// The Plus Addons for Elementor Compatibility
     if ("toplevel_page_tf_settings"==$screen && wp_script_is('theplus-admin-js-pro', 'enqueued')) {
         wp_dequeue_script('theplus-admin-js-pro');
         wp_deregister_script('theplus-admin-js-pro');
+    }
+
+	//The Guido theme WP Listings Directory Compatibility
+	if ("toplevel_page_tf_settings"==$screen && wp_script_is('wp-listings-directory-custom-field', 'enqueued')) {
+        wp_dequeue_script('wp-listings-directory-custom-field');
+        wp_deregister_script('wp-listings-directory-custom-field');
+    }
+	//The Easy Table of Contents Compatibility
+	if ("toplevel_page_tf_settings"==$screen && wp_script_is('cn_toc_admin_script', 'enqueued')) {
+        wp_dequeue_script('cn_toc_admin_script');
+        wp_deregister_script('cn_toc_admin_script');
     }
 
 }
