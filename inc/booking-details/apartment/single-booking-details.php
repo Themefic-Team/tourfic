@@ -100,34 +100,34 @@
                                 <?php 
                                 $book_adult  = !empty( $tf_tour_details->adult ) ? $tf_tour_details->adult : '';
                                 if(!empty($book_adult)){
-                                    list( $tf_total_adult, $tf_adult_string ) = explode( " × ", $book_adult );
+                                    $tf_total_adult = explode( " × ", $book_adult );
                                 } ?>
                                 <tr>
                                     <th><?php _e("Adult", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo !empty($tf_total_adult) ? esc_html($tf_total_adult) : 0; ?></td>
+                                    <td><?php echo !empty($tf_total_adult[0]) ? esc_html($tf_total_adult[0]) : 0; ?></td>
                                 </tr>
                                 
                                 <?php 
                                 $book_children  = !empty( $tf_tour_details->child ) ? $tf_tour_details->child : '';
                                 if(!empty($book_children)){
-                                    list( $tf_total_children, $tf_children_string ) = explode( " × ", $book_children );
+                                    $tf_total_children = explode( " × ", $book_children );
                                 } ?>
                                 <tr>
                                     <th><?php _e("Child", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo !empty($tf_total_children) ? esc_html($tf_total_children) : 0; ?></td>
+                                    <td><?php echo !empty($tf_total_children[0]) ? esc_html($tf_total_children[0]) : 0; ?></td>
                                 </tr>
 
                                 <?php 
                                 $book_infants  = !empty( $tf_tour_details->infants ) ? $tf_tour_details->infants : '';
                                 if(!empty($book_infants)){
-                                    list( $tf_total_infants, $tf_infants_string ) = explode( " × ", $book_infants );
+                                    $tf_total_infants = explode( " × ", $book_infants );
                                 } ?>
                                 <tr>
                                     <th><?php _e("Infant", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo !empty($tf_total_infants) ? esc_html($tf_total_infants) : 0; ?></td>
+                                    <td><?php echo !empty($tf_total_infants[0]) ? esc_html($tf_total_infants[0]) : 0; ?></td>
                                 </tr>
 
                             </table>
@@ -212,6 +212,8 @@
                                         _e("Complete", "tourfic");
                                     }elseif( "cancelled"==$tf_order_details->ostatus ){
                                         _e("Cancelled", "tourfic");
+                                    }elseif( "refunded"==$tf_order_details->ostatus ){
+                                        _e("Refund", "tourfic");
                                     }
                                 }else{
                                     _e("Processing", "tourfic");

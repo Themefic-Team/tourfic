@@ -105,7 +105,8 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 
 				$tf_booking_details_select    = array(
 					'select' => "*",
-					'query'  => "post_type = 'tour' $tf_filter_query ORDER BY id DESC"
+					'post_type' => 'tour',
+					'query'  => " $tf_filter_query ORDER BY id DESC"
 				);
 				
 				$tours_tour_booking_result = tourfic_order_table_data( $tf_booking_details_select );
@@ -114,14 +115,16 @@ if ( ! function_exists( 'tf_tour_booking_page_callback' ) ) {
 				
 				$tf_orders_select    = array(
 					'select' => "*",
-					'query'  => "post_type = 'tour' $tf_filter_query ORDER BY id DESC LIMIT $offset, $no_of_booking_per_page"
+					'post_type' => 'tour',
+					'query'  => " $tf_filter_query ORDER BY id DESC LIMIT $offset, $no_of_booking_per_page"
 				);
 				
 				$tours_orders_result = tourfic_order_table_data( $tf_orders_select );
 			} else {
 				$tf_orders_select    = array(
 					'select' => "*",
-					'query'  => "post_type = 'tour' $tf_filter_query ORDER BY id DESC LIMIT 15"
+					'post_type' => 'tour',
+					'query'  => " $tf_filter_query ORDER BY id DESC LIMIT 15"
 				);
 				$tours_orders_result = tourfic_order_table_data( $tf_orders_select );
 			}
@@ -226,7 +229,8 @@ if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
 
 					$tf_booking_details_select    = array(
 						'select' => "*",
-						'query'  => "post_type = 'hotel' $tf_filter_query ORDER BY id DESC"
+						'post_type' => 'hotel',
+						'query'  => " $tf_filter_query ORDER BY id DESC"
 					);
 					
 					$tf_hotel_booking_result = tourfic_order_table_data( $tf_booking_details_select );
@@ -235,7 +239,8 @@ if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
 					
 					$tf_orders_select    = array(
 						'select' => "*",
-						'query'  => "post_type = 'hotel' $tf_filter_query ORDER BY id DESC LIMIT $offset, $no_of_booking_per_page"
+						'post_type' => 'hotel',
+						'query'  => " $tf_filter_query ORDER BY id DESC LIMIT $offset, $no_of_booking_per_page"
 					);
 					
 					$hotel_orders_result = tourfic_order_table_data( $tf_orders_select );
@@ -243,7 +248,8 @@ if ( ! function_exists( 'tf_hotel_booking_page_callback' ) ) {
 				} else {
 					$tf_orders_select    = array(
 						'select' => "*",
-						'query'  => "post_type = 'hotel' ORDER BY order_id DESC LIMIT 15"
+						'post_type' => 'hotel',
+						'query'  => " ORDER BY order_id DESC LIMIT 15"
 					);
 					$hotel_orders_result = tourfic_order_table_data( $tf_orders_select );
 				}
@@ -351,7 +357,8 @@ if ( ! function_exists( 'tf_apartment_booking_page_callback' ) ) {
 
 				$tf_booking_details_select    = array(
 					'select' => "*",
-					'query'  => "post_type = 'apartment' $tf_filter_query ORDER BY id DESC"
+					'post_type' => 'apartment',
+					'query'  => " $tf_filter_query ORDER BY id DESC"
 				);
 				
 				$tf_hotel_booking_result = tourfic_order_table_data( $tf_booking_details_select );
@@ -360,7 +367,8 @@ if ( ! function_exists( 'tf_apartment_booking_page_callback' ) ) {
 				
 				$tf_orders_select    = array(
 					'select' => "*",
-					'query'  => "post_type = 'apartment' $tf_filter_query ORDER BY id DESC LIMIT $offset, $no_of_booking_per_page"
+					'post_type' => 'apartment',
+					'query'  => " $tf_filter_query ORDER BY id DESC LIMIT $offset, $no_of_booking_per_page"
 				);
 				
 				$apartment_orders_result = tourfic_order_table_data( $tf_orders_select );
@@ -368,7 +376,8 @@ if ( ! function_exists( 'tf_apartment_booking_page_callback' ) ) {
 			} else {
 				$tf_orders_select        = array(
 					'select' => "*",
-					'query'  => "post_type = 'apartment' ORDER BY id DESC LIMIT 15"
+					'post_type' => 'apartment',
+					'query'  => " ORDER BY id DESC LIMIT 15"
 				);
 				$apartment_orders_result = tourfic_order_table_data( $tf_orders_select );
 			}

@@ -91,36 +91,61 @@
                                 </tr>
                                 <?php } ?>
                                 <?php 
+                                $tf_total_visitor = 0;
                                 $book_adult  = !empty( $tf_tour_details->adult ) ? $tf_tour_details->adult : '';
                                 if(!empty($book_adult)){
-                                    list( $tf_total_adult, $tf_adult_string ) = explode( " × ", $book_adult );
+                                    $tf_total_adult = explode( " × ", $book_adult );
                                 } ?>
                                 <tr>
                                     <th><?php _e("Adult", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo !empty($tf_total_adult) ? esc_html($tf_total_adult) : 0; ?></td>
+                                    <td>
+                                        <?php if(!empty($tf_total_adult[0])) {
+                                            echo esc_html($tf_total_adult[0]); 
+                                            $tf_total_visitor += $tf_total_adult[0];
+                                        }else{
+                                            echo esc_html(0);
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                                 
                                 <?php 
                                 $book_children  = !empty( $tf_tour_details->child ) ? $tf_tour_details->child : '';
                                 if(!empty($book_children)){
-                                    list( $tf_total_children, $tf_children_string ) = explode( " × ", $book_children );
+                                    $tf_total_children = explode( " × ", $book_children );
                                 } ?>
                                 <tr>
                                     <th><?php _e("Child", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo !empty($tf_total_children) ? esc_html($tf_total_children) : 0; ?></td>
+                                    <td>
+                                        <?php if(!empty($tf_total_children[0])) {
+                                            echo esc_html($tf_total_children[0]); 
+                                            $tf_total_visitor += $tf_total_children[0];
+                                        }else{
+                                            echo esc_html(0);
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
 
                                 <?php 
                                 $book_infants  = !empty( $tf_tour_details->infants ) ? $tf_tour_details->infants : '';
                                 if(!empty($book_infants)){
-                                    list( $tf_total_infants, $tf_infants_string ) = explode( " × ", $book_infants );
+                                    $tf_total_infants = explode( " × ", $book_infants );
                                 } ?>
                                 <tr>
                                     <th><?php _e("Infant", "tourfic"); ?></th>
                                     <td>:</td>
-                                    <td><?php echo !empty($tf_total_infants) ? esc_html($tf_total_infants) : 0; ?></td>
+                                    <td>
+                                        <?php if(!empty($tf_total_infants[0])) {
+                                            echo esc_html($tf_total_infants[0]); 
+                                            $tf_total_visitor += $tf_total_infants[0];
+                                        }else{
+                                            echo esc_html(0);
+                                        }
+                                        ?>    
+                                    </td>
                                 </tr>
 
                             </table>
@@ -209,7 +234,7 @@
                 </h4>
                 <div class="tf-grid-box tf-visitor-grid-box">
                     <?php 
-                    $tf_visitors_details = json_decode($tf_tour_details->visitor_details);
+                    $tf_visitors_details = !empty($tf_tour_details->visitor_details) ? json_decode($tf_tour_details->visitor_details) : '';
                     $traveler_fields = !empty(tfopt('without-payment-field')) ? tf_data_types(tfopt('without-payment-field')) : '';
                     if(!empty($tf_visitors_details)){
                         $visitor_count = 1;
@@ -294,7 +319,13 @@
                             // Tour Date
                             $tour_date = $tf_tour_details->tour_date;
                             if ( $tour_date ) {
-                                list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
+                                $tour_date_duration = explode( ' - ', $tour_date );
+                                if(!empty($tour_date_duration[0])){
+                                    $tour_in = $tour_date_duration[0];
+                                }
+                                if(!empty($tour_date_duration[1])){
+                                    $tour_out = $tour_date_duration[1];
+                                }
                             }
                             $tour_duration = !empty($tour_out) ? date('d F, Y', strtotime($tour_in)).' - '. date('d F, Y', strtotime($tour_out)) : date('d F, Y', strtotime($tour_in));
                             $tour_time = !empty($tf_tour_details->tour_time) ? $tf_tour_details->tour_time : '';
@@ -352,17 +383,17 @@
                                         <?php } ?>
                                         <h5 style="text-transform: uppercase;"><?php _e("Payment Status:", "tourfic"); ?> <?php echo esc_html( $tf_order_details->payment_method ) ?></h5>
                                         <?php 
-                                        if(!empty($tf_total_adult)){ ?>
-                                            <h5><?php _e("Adult:", "tourfic"); ?> <?php echo esc_html( $tf_total_adult ) ?></h5>
+                                        if(!empty($tf_total_adult[0])){ ?>
+                                            <h5><?php _e("Adult:", "tourfic"); ?> <?php echo esc_html( $tf_total_adult[0] ) ?></h5>
                                             <?php
                                         }
-                                        if(!empty($tf_total_children)){ ?>
-                                            <h5><?php _e("Child:", "tourfic"); ?> <?php echo esc_html( $tf_total_children ) ?></h5>
+                                        if(!empty($tf_total_children[0])){ ?>
+                                            <h5><?php _e("Child:", "tourfic"); ?> <?php echo esc_html( $tf_total_children[0] ) ?></h5>
                                             <?php
                                         }
-                                        if(!empty($tf_total_infants)){
+                                        if(!empty($tf_total_infants[0])){
                                             ?>
-                                            <h5><?php _e("Infant:", "tourfic"); ?> <?php echo esc_html( $tf_total_infants ) ?></h5>
+                                            <h5><?php _e("Infant:", "tourfic"); ?> <?php echo esc_html( $tf_total_infants[0] ) ?></h5>
                                             <?php
                                         } ?>
                                     </div>
@@ -413,7 +444,7 @@
                                     </td>
                                 </tr>
                                 <?php 
-                                $tf_checkinout_by = json_decode($tf_order_details->checkinout_by);
+                                $tf_checkinout_by = !empty($tf_order_details->checkinout_by) ? json_decode($tf_order_details->checkinout_by) : '';
                                 ?>
                                 <tr>
                                     <th><?php _e("Checked in by", "tourfic"); ?></th>
@@ -464,6 +495,8 @@
                                         _e("Complete", "tourfic");
                                     }elseif( "cancelled"==$tf_order_details->ostatus ){
                                         _e("Cancelled", "tourfic");
+                                    }elseif( "refunded"==$tf_order_details->ostatus ){
+                                        _e("Refund", "tourfic");
                                     }
                                 }else{
                                     _e("Processing", "tourfic");
@@ -564,7 +597,7 @@
         <div class="visitor-details-popup">
         <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo $tf_order_details->id; ?>">
         <?php 
-        for($traveller_in = 1; $traveller_in < $visitor_count; $traveller_in++){ ?>
+        for($traveller_in = 1; $traveller_in < $tf_total_visitor; $traveller_in++){ ?>
             <div class="tf-single-tour-traveller tf-single-travel">
                 <h4><?php _e( 'Traveler '.$traveller_in, 'tourfic' ); ?></h4>
                 <div class="traveller-info">
@@ -716,17 +749,17 @@ if(!empty($tour_ides)){
                     <?php } ?>
                     <h5 style="text-transform: uppercase;"><?php _e("Payment Status:", "tourfic"); ?> <?php echo esc_html( $tf_order_details->payment_method ) ?></h5>
                     <?php 
-                    if(!empty($tf_total_adult)){ ?>
-                        <h5><?php _e("Adult:", "tourfic"); ?> <?php echo esc_html( $tf_total_adult ) ?></h5>
+                    if(!empty($tf_total_adult[0])){ ?>
+                        <h5><?php _e("Adult:", "tourfic"); ?> <?php echo esc_html( $tf_total_adult[0] ) ?></h5>
                         <?php
                     }
-                    if(!empty($tf_total_children)){ ?>
-                        <h5><?php _e("Child:", "tourfic"); ?> <?php echo esc_html( $tf_total_children ) ?></h5>
+                    if(!empty($tf_total_children[0])){ ?>
+                        <h5><?php _e("Child:", "tourfic"); ?> <?php echo esc_html( $tf_total_children[0] ) ?></h5>
                         <?php
                     }
-                    if(!empty($tf_total_infants)){
+                    if(!empty($tf_total_infants[0])){
                         ?>
-                        <h5><?php _e("Infant:", "tourfic"); ?> <?php echo esc_html( $tf_total_infants ) ?></h5>
+                        <h5><?php _e("Infant:", "tourfic"); ?> <?php echo esc_html( $tf_total_infants[0] ) ?></h5>
                         <?php
                     } ?>
                 </div>
