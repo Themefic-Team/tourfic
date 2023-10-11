@@ -9066,6 +9066,7 @@ html {
   color: #fff;
   background-size: cover;
   background-position: center;
+  cursor: pointer;
 }
 .tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-hero-gallery-videos a {
   display: flex;
@@ -9488,7 +9489,7 @@ html {
   gap: 10px;
 }
 .tf-template-3 .tf-reviews-wrapper {
-  padding-bottom: 42px !important;
+  padding-bottom: 55px !important;
 }
 .tf-template-3 .tf-reviews-wrapper .tf-section-title {
   margin: 0 0 0.3em 0 !important;
@@ -9529,11 +9530,13 @@ html {
 }
 .tf-template-3 .tf-reviews-wrapper .tf-reviews-slider button.slide-arrow {
   position: absolute;
-  bottom: -20px;
+  bottom: -30px;
   border: none;
   background: transparent;
   font-size: 30px;
   color: #B58E53;
+  padding: 0px;
+  cursor: pointer;
 }
 .tf-template-3 .tf-reviews-wrapper .tf-reviews-slider button.next-arrow {
   right: calc(50% - 95px);
@@ -9759,7 +9762,7 @@ html {
   border: 1px solid #595349;
   background: transparent;
   padding: 8px;
-  color: #C1BFBB;
+  color: #222;
   font-size: 12px;
   border-radius: 0px;
 }
@@ -9862,11 +9865,10 @@ html {
   transform: scale(1);
 }
 .tf-template-3 .tf-popup-inner {
-  height: 695px;
   width: 1130px;
   background: #FCF4E8;
   padding: 24px;
-  max-height: 80vh;
+  max-height: 695px;
   max-width: 80vw;
   position: relative;
   transform: scale(0.9);
@@ -9883,9 +9885,9 @@ html {
 }
 .tf-template-3 .tf-popup-body {
   width: calc(100% - 8px);
-  height: calc(100% - 32px);
+  max-height: 695px;
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -9913,9 +9915,17 @@ html {
 }
 .tf-template-3 .tf-popup-close {
   position: absolute;
-  right: 16px;
-  top: 16px;
+  right: -15px;
+  top: -15px;
   padding: 6px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background: #fcf4e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 .tf-template-3 .tf-popup-close i {
   color: #595349;

@@ -26,11 +26,10 @@
 }
 
 .tf-popup-inner {
-    height: 695px;
     width: 1130px;
     background: #FCF4E8;
     padding: 24px;
-    max-height: 80vh;
+    max-height: 695px;
     max-width: 80vw;
     position: relative;
     transform: scale(0.9);
@@ -52,9 +51,9 @@
 
 .tf-popup-body {
     width: calc(100% - 8px);
-    height: calc(100% - 32px);
+    max-height: 695px;
     overflow: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -63,7 +62,6 @@
 
     &::-webkit-scrollbar {
         width: 8px;
-
       }
       
       /* Track */
@@ -90,9 +88,17 @@ img.tf-popup-image {
 
 .tf-popup-close {
     position: absolute;
-    right: 16px;
-    top: 16px;
+    right: -15px;
+    top: -15px;
     padding: 6px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: #fcf4e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 .tf-popup-close i {
     color: #595349;

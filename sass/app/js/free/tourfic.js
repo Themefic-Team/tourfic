@@ -2585,8 +2585,8 @@
             infinite: true,
             slidesToShow: 3,
             slidesToScroll: 3,
-            prevArrow: '<button class="slide-arrow prev-arrow"><img src="./assets/image/arrow-left.png"></button>',
-            nextArrow: '<button class="slide-arrow next-arrow"><img src="./assets/image/arrow-right.png"></button>',
+            prevArrow: '<button class="slide-arrow prev-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="49" height="24" viewBox="0 0 49 24" fill="none"><path d="M8.32843 11.0009H44.5V13.0009H8.32843L13.6924 18.3648L12.2782 19.779L4.5 12.0009L12.2782 4.22266L13.6924 5.63687L8.32843 11.0009Z" fill="#B58E53"/></svg></button>',
+            nextArrow: '<button class="slide-arrow next-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="49" height="24" viewBox="0 0 49 24" fill="none"><path d="M40.6716 11.0009H4.5V13.0009H40.6716L35.3076 18.3648L36.7218 19.779L44.5 12.0009L36.7218 4.22266L35.3076 5.63687L40.6716 11.0009Z" fill="#B58E53"/></svg></button>',
             responsive: [
                 {
                   breakpoint: 993,

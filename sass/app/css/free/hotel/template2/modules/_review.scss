@@ -1,5 +1,5 @@
 .tf-reviews-wrapper { 
-    padding-bottom: 42px !important;
+    padding-bottom: 55px !important;
     .tf-section-title{
         margin: 0 0 .3em 0 !important;
     }
@@ -51,11 +51,13 @@
         }
         button.slide-arrow {
             position: absolute;
-            bottom: -20px;
+            bottom: -30px;
             border: none;
             background: transparent;
             font-size: 30px;
             color: #B58E53;
+            padding: 0px;
+            cursor: pointer;
         }
         button.next-arrow {
             right: calc(50% - 95px);
