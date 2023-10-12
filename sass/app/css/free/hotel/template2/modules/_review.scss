@@ -72,9 +72,6 @@
 	.tf-questions { 
         display: flex;
         gap: 40px;
-        &>div {
-            width: calc(50% - 20px);
-        }
 		.tf-questions-col { 
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -91,33 +88,29 @@
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
-                &>i {
-                    position: absolute;
-                    right: 16px;
-                    top: 8px;
-                    transition: 0.3s;
-                }
                 &.tf-active {
                     background: #FDF9F3;
                     padding: 24px;
                     display: flex;
                     flex-direction: column;
                     gap: 10px;
-                    i {
-                        top: 16px !important;
-                        right: 16px !important;
-                    }
                 }
-
-				h3 { 
-                    color: #595349;
-                    font-size: 16px !important;
-                    font-family: "Josefin Sans", sans-serif;
-                    font-weight: 600;
-                    line-height: 20.80px !important;
-                    margin-bottom: 10px;
-                    margin-right: 10px;
-				}
+                .tf-faq-head{
+                    h3 { 
+                        color: #595349;
+                        font-size: 16px !important;
+                        font-family: "Josefin Sans", sans-serif;
+                        font-weight: 600;
+                        line-height: 20.80px !important;
+                        margin-bottom: 10px;
+                        margin-right: 10px;
+                        display: flex;
+                        justify-content: space-between;
+                        cursor: pointer;
+                        
+                    }
+                    
+                }
 
 				.tf-question-desc { 
                     display: none;

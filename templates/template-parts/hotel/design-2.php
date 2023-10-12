@@ -905,11 +905,13 @@
                 $faq_key = 1;    
                 foreach ( $faqs as $key => $faq ): ?>
                 <div class="tf-question <?php echo $faq_key==1 ? esc_attr( 'tf-active' ) : ''; ?>">
-                    <h3><?php echo esc_html( $faq['title'] ); ?></h3>
+                    <div class="tf-faq-head">
+                        <h3><?php echo esc_html( $faq['title'] ); ?>
+                        <i class="fa-solid fa-chevron-down"></i></h3>
+                    </div>
                     <div class="tf-question-desc" style="<?php echo $faq_key==1 ? esc_attr( 'display: block;' ) : ''; ?>">
                         <?php echo wp_kses_post( $faq['description'] ); ?>
                     </div>
-                    <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <?php $faq_key++; endforeach; ?>
                 
