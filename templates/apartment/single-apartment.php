@@ -596,7 +596,7 @@ while ( have_posts() ) : the_post();
                             <ul class="tf-included-house-rules">
 								<?php
 								foreach ( $included_house_rules as $item ) {
-									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $item['title'] ), esc_html( $item['desc'] ) );
+									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', wp_kses_post( $item['title'] ), wp_kses_post( $item['desc'] ) );
 								}
 								?>
                             </ul>
@@ -606,7 +606,7 @@ while ( have_posts() ) : the_post();
                             <ul class="tf-not-included-house-rules">
 								<?php
 								foreach ( $not_included_house_rules as $item ) {
-									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', esc_html( $item['title'] ), esc_html( $item['desc'] ) );
+									echo sprintf( '<li><h6>%s</h6> <span>%s</span></li>', wp_kses_post( $item['title'] ), wp_kses_post( $item['desc'] ) );
 								}
 								?>
                             </ul>
