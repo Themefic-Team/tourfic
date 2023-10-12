@@ -76,14 +76,21 @@ function tf_checkinout_details_edit_function() {
     $tf_status = !empty($_POST['status']) ? $_POST['status'] : "";
 
     global $wpdb;
-    $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
+    $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, order_id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
 
     // Order Status Update into Database
     if(!empty($tf_order)){
         $wpdb->query(
         $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET ostatus=%s WHERE id=%s", sanitize_title( $tf_status ), sanitize_key($tf_order_id))
         );
+
+        // Woocommerce status
+        $order = wc_get_order($tf_order->order_id);
+        if (!empty($order)) {
+            $order->update_status( sanitize_key($tf_status), '', true );
+        }
     }
+    
     die();
 }
 
@@ -107,13 +114,19 @@ function tf_checkinout_details_edit_function() {
                 $wpdb->prepare( "DELETE FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $order ) )
             );
         }else{
-            $tf_single_order = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $order ) ) );
+            $tf_single_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, order_id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $order ) ) );
 
             // Order Status Update into Database
             if(!empty($tf_single_order)){
                 $wpdb->query(
                 $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET ostatus=%s WHERE id=%s", sanitize_title( $tf_status ), sanitize_key($order))
                 );
+
+                // Woocommerce status
+                $order = wc_get_order($tf_single_order->order_id);
+                if (!empty($order)) {
+                    $order->update_status( sanitize_key($tf_status), '', true );
+                }
             }
         }
     }
