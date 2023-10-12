@@ -316,10 +316,17 @@
                             <div class="tf-room-gallery tf-popup-buttons" style="background-image: url('./assets/image/room3.png'); ">                                
                                 <img src="./assets/image/gallery-icon.svg" alt="">
                             </div>
+                            <div class="tf-available-room-off tf-mobile">
+                                <span>60% off</span>
+                            </div>
                         </div>
                         <div class="tf-available-room-content">
                             <div class="tf-available-room-content-left">
                                 <h2 class="tf-section-title">Premium Deluxe Twin</h2>
+                                <div class="tf-available-room-price tf-mobile">
+                                    <span class="tf-price-from">From $450</span>
+                                    <span class="tf-price"><span>$250</span>/night</span>
+                                </div>
                                 <ul>
                                     <li><i class="fas fa-ruler-combined"></i> 25 m2sft</li>
                                     <li><i class="fas fa-bed"></i> 2 Number of Beds</li>

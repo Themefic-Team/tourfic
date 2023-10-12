@@ -7,19 +7,16 @@
         margin-bottom: 32px;
         .tf-facility-item {
             width: 25%;
-
             h4 {
                 color: #595349;
                 font-weight: 600;
                 line-height: 20.80px;
                 font-family: "Josefin Sans", sans-serif;
                 margin-bottom: 13px;
-
                 i {
                     margin-right: 6px;
                 }
             }
-
             ul {
                 margin: 0;
                 padding: 0;
@@ -27,7 +24,6 @@
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
-
                 li {}
             }
         }

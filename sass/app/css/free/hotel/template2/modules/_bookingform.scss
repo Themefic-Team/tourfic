@@ -1,8 +1,8 @@
-.tf-booking-form-wrapper { 
+.tf-booking-form-wrapper {
     background: #FAEEDC;
-	.tf-booking-form { 
+    .tf-booking-form {
         display: flex;
-		.tf-booking-form-fields { 
+        .tf-booking-form-fields {
             display: flex;
             width: 78%;
             padding: 24px;
@@ -14,39 +14,38 @@
                 flex-direction: column;
                 align-items: center;
                 position: relative;
+                cursor: pointer;
                 &.tf-booking-form-guest-and-room {
                     width: 36%;
                     padding-left: 70px;
                     align-items: start;
-                    border-right:none;
+                    border-right: none;
                 }
             }
-		}
-        .tf-booking-form-checkout, .tf-booking-form-checkin{
-            input{
+        }
+        .tf-booking-form-checkout,
+        .tf-booking-form-checkin {
+            input {
                 position: absolute;
                 height: 100%;
                 width: 100%;
                 opacity: 0;
             }
         }
-
-        .tf-booking-date { 
+        .tf-booking-date {
             color: #595349;
             font-size: 24px;
             font-weight: 400;
-            line-height: 31.20px;    
-            min-width: 28px;    
+            line-height: 31.20px;
+            min-width: 28px;
             text-align: right;
         }
-        
         span.tf-booking-form-title {
             font-size: 16px;
             font-weight: 600;
             line-height: 20.80px;
             margin-bottom: 6px;
         }
-
         span.tf-booking-month {
             color: #595349;
             font-size: 16px;
@@ -65,7 +64,6 @@
             gap: 5px;
             margin-bottom: 7px;
         }
-        
         .tf-booking-guest-and-room-wrap span {
             font-size: 24px;
             margin-bottom: -3px;
@@ -77,10 +75,9 @@
             display: flex;
             flex-direction: column;
         }
-
-		.tf-booking-form-submit { 
+        .tf-booking-form-submit {
             width: 22%;
-			button { 
+            button {
                 height: 100%;
                 width: 100%;
                 background: #B58E53;
@@ -92,6 +89,79 @@
                 font-weight: 700;
                 line-height: 24px;
                 cursor: pointer;
+            }
+        }
+    }
+}
+.tf-archive-search-form { 
+	.tf-booking-form { 
+		.tf-booking-form-fields { 
+			.tf-booking-form-location { 
+                display: flex;
+                align-items: flex-start !important;
+                padding-left: 16px;
+				.tf-booking-form-title { 
+				}
+				.tf-booking-location-wrap { 
+                    display: flex;
+                    flex-direction: row;
+                    background: #fff;
+                    padding: 0 12px;
+                    max-width: 150px;
+                    margin-right: 40px;
+                    justify-content: flex-start;
+					img { 
+					}
+					#tf-search-location { 
+					}
+                    input{
+                        padding: 9px;
+                        border: none;
+                        outline: none;
+                        width: -webkit-fill-available;
+                    }
+				}
+			}
+			.tf-booking-form-checkin { 
+				.tf-booking-form-title { 
+				}
+				.tf-booking-date-wrap { 
+					.tf-booking-date { 
+					}
+					.tf-booking-month { 
+						span { 
+						}
+						img { 
+						}
+					}
+				}
+				.flatpickr-input { 
+				}
+			}
+			.tf-booking-form-checkout { 
+				.tf-booking-form-title { 
+				}
+				.tf-booking-date-wrap { 
+					.tf-booking-date { 
+					}
+					.tf-booking-month { 
+						span { 
+						}
+						img { 
+						}
+					}
+				}
+				.flatpickr-input { 
+				}
+			}
+			.tf-booking-form-guest-and-room { 
+                padding-left: 40px !important;
+                min-width: 200px;
+				.tf-booking-form-guest-and-room-inner {
+					.tf-booking-guest-and-room-wrap { 
+                        margin-top: 6px;
+					}
+				}
 			}
 		}
 	}
@@ -103,7 +173,6 @@
     visibility: hidden;
     transition: 0.3s;
 }
-
 .tf_acrselection-wrap.tf-show {
     visibility: visible;
     opacity: 1;

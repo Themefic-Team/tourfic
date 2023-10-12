@@ -68,10 +68,13 @@
         }
 	}
 }
-
 .tf-questions-wrapper { 
-
 	.tf-questions { 
+        display: flex;
+        gap: 40px;
+        &>div {
+            width: calc(50% - 20px);
+        }
 		.tf-questions-col { 
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -123,29 +126,24 @@
 		}
 	}
 }
-
-
-
-.tf-policies {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.tf-policy-item {
-    display: flex;
-    gap: 16px;
-}
-
-.tf-policy-title {
-    min-width: 316px;
-}
-
-.tf-policy-item>div {
-    padding: 24px;
-    background-color: #FDF9F3;
-}
-
-.tf-policy-desc {
-    width: -webkit-fill-available;
+.tf-policies-wrapper { 
+	.tf-policies { 
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+		.tf-policy-item { 
+            display: flex;
+            gap: 16px;
+            &>div {
+                padding: 24px;
+                background-color: #FDF9F3;
+            }
+			.tf-policy-title { 
+                min-width: 316px;
+			}
+			.tf-policy-desc { 
+                width: -webkit-fill-available;
+			}
+		}
+	}
 }
