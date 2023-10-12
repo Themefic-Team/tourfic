@@ -21,14 +21,79 @@
                 </a>
                 <?php } } } ?>
             
-                <a class="tf-share">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M14 4.33203C14 5.4366 13.1046 6.33203 12 6.33203C10.8954 6.33203 10 5.4366 10 4.33203C10 3.22746 10.8954 2.33203 12 2.33203C13.1046 2.33203 14 3.22746 14 4.33203Z" stroke="#FDF9F4" stroke-width="1.5"/>
-                    <path d="M6 8C6 9.10457 5.10457 10 4 10C2.89543 10 2 9.10457 2 8C2 6.89543 2.89543 6 4 6C5.10457 6 6 6.89543 6 8Z" stroke="#FDF9F4" stroke-width="1.5"/>
-                    <path d="M14 11.6641C14 12.7686 13.1046 13.6641 12 13.6641C10.8954 13.6641 10 12.7686 10 11.6641C10 10.5595 10.8954 9.66406 12 9.66406C13.1046 9.66406 14 10.5595 14 11.6641Z" stroke="#FDF9F4" stroke-width="1.5"/>
-                    <path d="M5.81836 7.16371L10.1517 5.16406M5.81836 8.83073L10.1517 10.8304" stroke="#FDF9F4" stroke-width="1.5"/>
-                    </svg>
-                </a>
+                
+                <!-- Share Section -->
+                <?php if ( ! $disable_share_opt == '1' ) { ?>
+                <div class="tf-share">
+                    <a href="#dropdown-share-center" class="share-toggle tf-icon tf-social-box"
+                    data-toggle="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M14 4.33203C14 5.4366 13.1046 6.33203 12 6.33203C10.8954 6.33203 10 5.4366 10 4.33203C10 3.22746 10.8954 2.33203 12 2.33203C13.1046 2.33203 14 3.22746 14 4.33203Z" stroke="#FDF9F4" stroke-width="1.5"/>
+                        <path d="M6 8C6 9.10457 5.10457 10 4 10C2.89543 10 2 9.10457 2 8C2 6.89543 2.89543 6 4 6C5.10457 6 6 6.89543 6 8Z" stroke="#FDF9F4" stroke-width="1.5"/>
+                        <path d="M14 11.6641C14 12.7686 13.1046 13.6641 12 13.6641C10.8954 13.6641 10 12.7686 10 11.6641C10 10.5595 10.8954 9.66406 12 9.66406C13.1046 9.66406 14 10.5595 14 11.6641Z" stroke="#FDF9F4" stroke-width="1.5"/>
+                        <path d="M5.81836 7.16371L10.1517 5.16406M5.81836 8.83073L10.1517 10.8304" stroke="#FDF9F4" stroke-width="1.5"/>
+                        </svg>
+                    </a>
+
+                    <div id="dropdown-share-center" class="share-tour-content">
+                        <div class="tf-dropdown-share-content">
+                            <h4><?php _e("Share with friends", "tourfic"); ?></h4>
+                            <ul>
+                                <li>
+                                    <a href="http://www.facebook.com/share.php?u=<?php echo esc_url( $share_link ); ?>"
+                                    class="tf-dropdown-item" target="_blank">
+                                <span class="tf-dropdown-item-content">
+                                    <i class="fab fa-facebook"></i>
+                                </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://twitter.com/share?text=<?php echo esc_attr( $share_text ); ?>&url=<?php echo esc_url( $share_link ); ?>"
+                                    class="tf-dropdown-item" target="_blank">
+                                <span class="tf-dropdown-item-content">
+                                    <i class="fab fa-twitter-square"></i>
+                                </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/cws/share?url=<?php echo esc_url( $share_link ); ?>"
+                                    class="tf-dropdown-item" target="_blank">
+                                <span class="tf-dropdown-item-content">
+                                    <i class="fab fa-linkedin"></i>
+                                </span>
+                                    </a>
+                                </li>
+                                <?php $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' ); ?>
+                                <li>
+                                    <a href="http://pinterest.com/pin/create/button/?url=<?php echo esc_url( $share_link ); ?>&media=<?php echo esc_url( get_the_post_thumbnail_url() ); ?>&description=<?php echo esc_attr( $share_text ); ?>"
+                                    class="tf-dropdown-item" target="_blank">
+                                <span class="tf-dropdown-item-content">
+                                    <i class="fab fa-pinterest"></i>
+                                </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div title="<?php esc_attr_e( 'Share this link', 'tourfic' ); ?>"
+                                        aria-controls="share_link_button">
+                                        <button id="share_link_button" class="tf_button share-center-copy-cta" tabindex="0"
+                                                role="button">
+                                            <i class="fa fa-link" aria-hidden="true"></i>
+                                            
+                                            <span class="tf-button-text share-center-copied-message"><?php esc_html_e( 'Link Copied!', 'tourfic' ); ?></span>
+                                        </button>
+                                        <input type="text" id="share_link_input"
+                                            class="share-center-url share-center-url-input"
+                                            value="<?php echo esc_attr( $share_link ); ?>" readonly style="opacity: 0; width: 0px !important;margin: 0px">
+                                        
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
+                <!-- End Share Section -->
+                
             </div>
             <div class="tf-hero-bottom-area">
                 <div class="tf-head-title">
