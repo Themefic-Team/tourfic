@@ -68,9 +68,9 @@
                 beforeSend: function (data) {
                     notyf.success(tf_admin_params.deleting_room_order_ids);
                 },
-                success: function (data) {
-                    notyf.success(data.data);
-                    location.reload();
+                success: function (response) {
+                    notyf.success(response.data.message);
+                    //location.reload();
                 },
                 error: function (data) {
                     notyf.error(data.data);
