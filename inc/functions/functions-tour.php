@@ -1229,10 +1229,12 @@ function tf_single_tour_booking_form( $post_id ) {
                                     <input type="checkbox" name="deposit" class="diposit-status-switcher">
                                     <span class="switcher round"></span>
                                 </label>
-                                <h4><?php echo __( partial_payment_tag_replacement($tf_partial_payment_label, $tf_deposit_amount), 'tourfic' ) ?></h4>
 								<div class="tooltip-box">
-									<i class="fa fa-circle-exclamation tooltip-title-box" style="padding-left: 5px; padding-top: 5px" title=""></i>
-									<div class="tf-tooltip"><?php echo __($tf_partial_payment_description) ?></div>
+									<h4><?php echo __( partial_payment_tag_replacement($tf_partial_payment_label, $tf_deposit_amount), 'tourfic' ) ?></h4>
+									<div class="tf-info-btn">
+										<i class="fa fa-circle-exclamation tooltip-title-box" style="padding-left: 5px; padding-top: 5px" title=""></i>
+										<div class="tf-tooltip"><?php echo __($tf_partial_payment_description) ?></div>
+									</div>
 								</div>
                             </div>
 					    <?php } ?>
@@ -3523,9 +3525,23 @@ function tf_tour_booking_popup_callback() {
 
 			$response['traveller_info'] .= '</div>
             </div>';
+			$tour_date_format_for_users = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+			function tf_date_format_user($date, $format) {
+				if(!empty($date) && !empty($format)) {
+				   if(str_contains( $date, "-") == true) {
+					   list($first_date, $last_date) = explode(" - ", $date);
+					   $first_date = date($format, strtotime($first_date));
+					   $last_date = date($format, strtotime($last_date));
+					   return "{$first_date} - {$last_date}";
+				   } else {
+					   return date($format, strtotime($date));
+				   }
+				}else {
+					return;
+				}
+		   }
 		}
-
-		$response['traveller_summery'] .= '<h6>On ' . $tour_date . '</h6>
+		$response['traveller_summery'] .= '<h6>On ' . tf_date_format_user($tour_date, $tour_date_format_for_users) . '</h6>
         <table class="table" style="width: 100%">
             <thead>
                 <tr>

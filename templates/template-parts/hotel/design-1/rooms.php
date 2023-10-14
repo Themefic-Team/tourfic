@@ -46,7 +46,7 @@ foreach ( $rooms as $key => $room ) {
 
 	                // Hotel Room Discount Data
 	                $hotel_discount_type = !empty($room["discount_hotel_type"]) ? $room["discount_hotel_type"] : "none";
-	                $hotel_discount_amount = !empty($room["discount_hotel_price"]) ? $room["discount_hotel_price"] : '';
+	                $hotel_discount_amount = !empty($room["discount_hotel_price"]) ? $room["discount_hotel_price"] : 0;
 
 	                if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avil_by_date == '1' ) {
 	                    $avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
@@ -82,7 +82,7 @@ foreach ( $rooms as $key => $room ) {
                                         $discount_prices[] = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $value - $hotel_discount_amount ), 2 ) ) );;
                                     }
                                 }
-                                $discount_price = $discount_prices ? ( min( $discount_prices ) != max( $discount_prices ) ? wc_format_price_range( min( $discount_prices ), max( $discount_prices ) ) : wc_price( min( $discount_prices ) ) ) : "";
+                                $discount_price = !empty($discount_prices) ? ( min( $discount_prices ) != max( $discount_prices ) ? wc_format_price_range( min( $discount_prices ), max( $discount_prices ) ) : wc_price( min( $discount_prices ) ) ) : "";
                                 $price = $prices ? ( min( $prices ) != max( $prices ) ? wc_format_price_range( min( $prices ), max( $prices ) ) : wc_price( min( $prices ) ) ) : wc_price( 0 );
                             } else {
                                 $price = ! empty( $range_price[0] ) ? $range_price[0] : 0;
