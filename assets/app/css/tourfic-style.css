@@ -2971,16 +2971,19 @@ table.tf-table tr:last-child {
   width: 24px;
 }
 
+.tf-field-group.tf_form-inner,
 .tf-field-group {
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
 }
+.tf-field-group.tf_form-inner i,
 .tf-field-group i {
   position: absolute;
   left: 18px;
 }
+.tf-field-group.tf_form-inner .tf-field,
 .tf-field-group .tf-field {
   border: none !important;
   padding: 15px 40px !important;
@@ -2993,11 +2996,14 @@ table.tf-table tr:last-child {
   font-family: inherit;
   background-image: none;
   -moz-appearance: auto !important;
+  height: auto;
 }
+.tf-field-group.tf_form-inner .tf-field:focus,
 .tf-field-group .tf-field:focus {
   outline: none;
   border: none;
 }
+.tf-field-group.tf_form-inner input::placeholder,
 .tf-field-group input::placeholder {
   font-weight: 16px;
   font-size: 14px;

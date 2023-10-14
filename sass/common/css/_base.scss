@@ -104,6 +104,7 @@ table.tf-table {
 }
 
 //Tourfic forms
+.tf-field-group.tf_form-inner,
 .tf-field-group {
     position: relative;
     display: flex;
@@ -125,6 +126,8 @@ table.tf-table {
         font-family: inherit;
         background-image: none;
         -moz-appearance: auto !important;
+        height: auto;
+
         &:focus{
             outline: none;
             border: none;

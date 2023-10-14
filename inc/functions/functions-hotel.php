@@ -2734,7 +2734,7 @@ function tf_remove_room_order_ids() {
 	# Get order id field's name
 	$meta_field = isset( $_POST['meta_field'] ) ? sanitize_text_field( $_POST['meta_field'] ) : '';
 	# Trim room id from order id name
-	$room_id = trim( $meta_field, "tf_hotels_opt[room][][order_id" );
+	$room_id = trim( $meta_field, "tf_hotels_opt[room][][order_id]" );
 	# Get post id
 	$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
 	# Get hotel meta
