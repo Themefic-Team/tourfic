@@ -155,6 +155,115 @@ TF_Settings::option( 'tf_settings', array(
 									)
 								),
 								array(
+									'id'         => 'single-hotel-layout-part-1',
+									'class'      => 'disable-sortable',
+									'type'       => 'repeater',
+									'drag_only'  => true,
+									'label'      => __( 'Single Hotel Template Sections Part 1', 'tourfic' ),
+									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'dependency' => array( 'single-hotel', '==', 'design-2' ),
+									'fields'     => array(
+										array(
+											'id'         => 'hotel-section',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Name', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'         => 'hotel-section-slug',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Slug', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'       => 'hotel-section-status',
+											'type'     => 'switch',
+											'label'    => __( 'Section Status', 'tourfic' ),
+											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
+										),
+									),
+									'default'    => array(
+										array(
+											'hotel-section'        => __( 'Description', 'tourfic' ),
+											'hotel-section-slug'   => __( 'description', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+										array(
+											'hotel-section'        => __( 'Features', 'tourfic' ),
+											'hotel-section-slug'   => __( 'features', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+										array(
+											'hotel-section'        => __( 'Room', 'tourfic' ),
+											'hotel-section-slug'   => __( 'rooms', 'tourfic' ),
+											'hotel-section-status' => true,
+										)
+									)
+								),
+								array(
+									'id'         => 'single-hotel-layout-part-2',
+									'class'      => 'disable-sortable',
+									'type'       => 'repeater',
+									'drag_only'  => true,
+									'label'      => __( 'Single Hotel Template Sections Part 2', 'tourfic' ),
+									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'dependency' => array( 'single-hotel', '==', 'design-2' ),
+									'fields'     => array(
+										array(
+											'id'         => 'hotel-section',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Name', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'         => 'hotel-section-slug',
+											'class'      => 'tf-section-name-hidden',
+											'type'       => 'text',
+											'label'      => __( 'Section Slug', 'tourfic' ),
+											'attributes' => array(
+												'readonly' => 'readonly',
+											),
+										),
+										array(
+											'id'       => 'hotel-section-status',
+											'type'     => 'switch',
+											'label'    => __( 'Section Status', 'tourfic' ),
+											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
+										),
+									),
+									'default'    => array(
+										array(
+											'hotel-section'        => __( 'Facilities', 'tourfic' ),
+											'hotel-section-slug'   => __( 'facilities', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+										array(
+											'hotel-section'        => __( 'Review', 'tourfic' ),
+											'hotel-section-slug'   => __( 'review', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+										array(
+											'hotel-section'        => __( 'FAQ', 'tourfic' ),
+											'hotel-section-slug'   => __( 'faq', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+										array(
+											'hotel-section'        => __( 'Terms & Conditions', 'tourfic' ),
+											'hotel-section-slug'   => __( 'trams-condition', 'tourfic' ),
+											'hotel-section-status' => true,
+										),
+									)
+								),
+								array(
 									'id'      => 'hotel-title',
 									'type'    => 'heading',
 									'content' => __( 'Hotel Archive & Search Result Page', 'tourfic' ),
