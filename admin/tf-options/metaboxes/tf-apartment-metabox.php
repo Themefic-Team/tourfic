@@ -11,7 +11,7 @@ function tf_apt_amenities_cats() {
 		}
 	}
 
-	if(empty($all_cats)){
+	if ( empty( $all_cats ) ) {
 		$all_cats[''] = __( 'Select Category', 'tourfic' );
 	}
 
@@ -60,19 +60,19 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'default'  => 'global',
 				),
 				array(
-					'id'       => 'tf_single_apartment_template',
-					'type'     => 'imageselect',
-					'label'    => __( 'Single Apartment Page Layout', 'tourfic' ),
-					'multiple' 		=> true,
-					'inline'   		=> true,
-					'options'   	=> array(
-						'default' 			=> array(
-							'title'			=> 'Default',
-							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-apartment.jpg",
+					'id'         => 'tf_single_apartment_template',
+					'type'       => 'imageselect',
+					'label'      => __( 'Single Apartment Page Layout', 'tourfic' ),
+					'multiple'   => true,
+					'inline'     => true,
+					'options'    => array(
+						'default' => array(
+							'title' => 'Default',
+							'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-apartment.jpg",
 						),
 					),
-					'default'   	=> function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
-					'dependency'  => [
+					'default'    => function_exists( 'tourfic_template_settings' ) ? tourfic_template_settings() : '',
+					'dependency' => [
 						array( 'tf_single_apartment_layout_opt', '==', 'single' )
 					],
 				),
@@ -132,12 +132,12 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'is_pro'   => true,
 				),
 				array(
-					'id'     => 'surroundings_places',
-					'type'   => 'repeater',
-					'label'  => __( 'Surroundings Places', 'tourfic' ),
+					'id'           => 'surroundings_places',
+					'type'         => 'repeater',
+					'label'        => __( 'Surroundings Places', 'tourfic' ),
 					'button_title' => __( 'Add New Criteria', 'tourfic' ),
-					'is_pro' => true,
-					'fields' => array(
+					'is_pro'       => true,
+					'fields'       => array(
 						array(
 							'id'          => 'place_criteria_label',
 							'type'        => 'text',
@@ -150,11 +150,11 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'label' => __( 'Criteria Icon', 'tourfic' ),
 						),
 						array(
-							'id'     => 'places',
-							'type'   => 'repeater',
-							'label'  => __( 'Places', 'tourfic' ),
+							'id'           => 'places',
+							'type'         => 'repeater',
+							'label'        => __( 'Places', 'tourfic' ),
 							'button_title' => __( 'Add New Place', 'tourfic' ),
-							'fields' => array(
+							'fields'       => array(
 								array(
 									'id'          => 'place_name',
 									'type'        => 'text',
@@ -179,26 +179,65 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 			'icon'   => 'fa-solid fa-calendar-check',
 			'fields' => array(
 				array(
-					'id'    => 'booking_form_title',
-					'type'  => 'text',
-					'label' => __( 'Form Title', 'tourfic' ),
+					'id'      => 'booking_form_title',
+					'type'    => 'text',
+					'label'   => __( 'Form Title', 'tourfic' ),
 					'default' => __( 'Book your apartment', 'tourfic' ),
 				),
 				array(
-					'id'          => 'price_per_night',
-					'type'        => 'number',
-					'label'       => __( 'Price Per Night', 'tourfic' ),
-					'subtitle'    => __( 'Enter price per night', 'tourfic' ),
-					'field_width' => 50,
-					'attributes'  => array( 'min' => 0 )
+					'id'         => 'pricing_type',
+					'type'       => 'select',
+					'label'      => __( 'Pricing Type', 'tourfic' ),
+					'subtitle'   => __( 'Select pricing type', 'tourfic' ),
+					'options'    => array(
+						'per_night'  => __( 'Per Night', 'tourfic' ),
+						'per_person' => __( 'Per Person', 'tourfic' ),
+					),
+					'attributes' => array(
+						'class' => 'tf_apt_pricing_type',
+					),
 				),
 				array(
-					'id'          => 'min_stay',
+					'id'         => 'price_per_night',
+					'type'       => 'number',
+					'label'      => __( 'Price Per Night', 'tourfic' ),
+					'subtitle'   => __( 'Enter price per night', 'tourfic' ),
+					'attributes' => array( 'min' => 0 ),
+					'dependency' => array( 'pricing_type', '==', 'per_night' ),
+				),
+				array(
+					'id'          => 'adult_price',
 					'type'        => 'number',
-					'label'       => __( 'Minimum Night Stay', 'tourfic' ),
-					'subtitle'    => __( 'Enter minimum night stay', 'tourfic' ),
-					'field_width' => 50,
-					'attributes'  => array( 'min' => 0 )
+					'label'       => __( 'Adult Price', 'tourfic' ),
+					'subtitle'    => __( 'Enter adult price', 'tourfic' ),
+					'field_width' => 33.33,
+					'attributes'  => array( 'min' => 0 ),
+					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
+				),
+				array(
+					'id'          => 'child_price',
+					'type'        => 'number',
+					'label'       => __( 'Child Price', 'tourfic' ),
+					'subtitle'    => __( 'Enter child price', 'tourfic' ),
+					'field_width' => 33.33,
+					'attributes'  => array( 'min' => 0 ),
+					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
+				),
+				array(
+					'id'          => 'infant_price',
+					'type'        => 'number',
+					'label'       => __( 'Infant Price', 'tourfic' ),
+					'subtitle'    => __( 'Enter infant price', 'tourfic' ),
+					'field_width' => 33.33,
+					'attributes'  => array( 'min' => 0 ),
+					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
+				),
+				array(
+					'id'         => 'min_stay',
+					'type'       => 'number',
+					'label'      => __( 'Minimum Night Stay', 'tourfic' ),
+					'subtitle'   => __( 'Enter minimum night stay', 'tourfic' ),
+					'attributes' => array( 'min' => 1 )
 				),
 				array(
 					'id'          => 'max_adults',
@@ -289,7 +328,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'        => 'text',
 					'label'       => __( 'External URL', 'tourfic' ),
 					'placeholder' => __( 'https://website.com', 'tourfic' ),
-					'is_pro'  => true
+					'is_pro'      => true
 				),
 				array(
 					'id'        => '',
@@ -298,14 +337,14 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'subtitle'  => __( 'If attribute allow, You can able to add custom Attribute', 'tourfic' ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
-					'is_pro'  => true
+					'is_pro'    => true
 				),
 				array(
 					'id'          => '',
 					'type'        => 'textarea',
 					'label'       => __( 'Query Attribute', 'tourfic' ),
 					'placeholder' => __( 'adult={adult}&child={child}&infant={infant}', 'tourfic' ),
-					'is_pro'  => true
+					'is_pro'      => true
 				),
 				array(
 					'id'      => 'booking-notice',
@@ -333,15 +372,55 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				),*/
 			),
 		),
+		'availability'    => array(
+			'title'  => __( 'Availability', 'tourfic' ),
+			'icon'   => 'fa-solid fa-calendar-alt',
+			'fields' => array(
+				array(
+					'id'      => 'Availability',
+					'type'    => 'heading',
+					'content' => __( 'Availability', 'tourfic' ),
+				),
+				array(
+					'id'      => '',
+					'type'    => 'switch',
+					'label'   => __( 'Enable Availability by Date', 'tourfic' ),
+					'is_pro'  => true,
+					'default' => true
+				),
+				array(
+					'id'        => '',
+					'type'      => 'hotelAvailabilityCal',
+					'label'     => __( 'Availability Calendar', 'tourfic' ),
+					'is_pro'  => true,
+				),
+				array(
+					'id'      => 'ical',
+					'type'    => 'heading',
+					'content' => __( 'iCal Sync', 'tourfic' ),
+				),
+				array(
+					'id'          => '',
+					'type'        => 'ical',
+					'label'       => __( 'iCal URL', 'tourfic' ),
+					'placeholder' => __( 'https://website.com', 'tourfic' ),
+					'button_text' => __( 'Import', 'tourfic' ),
+					'button_class'   => 'room-ical-import',
+					'attributes'  => array(
+						'class' => 'ical_url_input',
+					),
+				),
+			),
+		),
 		//Room Management
 		'room_management' => array(
 			'title'  => __( 'Room Management', 'tourfic' ),
 			'icon'   => 'fa-solid fa-bed',
 			'fields' => array(
 				array(
-					'id'    => 'room_details_title',
-					'type'  => 'text',
-					'label' => __( 'Section Title', 'tourfic' ),
+					'id'      => 'room_details_title',
+					'type'    => 'text',
+					'label'   => __( 'Section Title', 'tourfic' ),
 					'default' => __( 'Where you\'ll sleep', 'tourfic' ),
 				),
 				array(
@@ -460,9 +539,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label' => __( 'Highlights', 'tourfic' ),
 				),
 				array(
-					'id'    => 'highlights_title',
-					'type'  => 'text',
-					'label' => __( 'Highlights Title', 'tourfic' ),
+					'id'      => 'highlights_title',
+					'type'    => 'text',
+					'label'   => __( 'Highlights Title', 'tourfic' ),
 					'default' => __( 'Discover Our Top Features', 'tourfic' ),
 				),
 				array(
@@ -495,9 +574,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label' => __( 'Amenities', 'tourfic' ),
 				),
 				array(
-					'id'    => 'amenities_title',
-					'type'  => 'text',
-					'label' => __( 'Amenities Title', 'tourfic' ),
+					'id'      => 'amenities_title',
+					'type'    => 'text',
+					'label'   => __( 'Amenities Title', 'tourfic' ),
 					'default' => __( 'What this place offers', 'tourfic' ),
 				),
 				array(
@@ -524,7 +603,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'label'       => __( 'Category', 'tourfic' ),
 							'placeholder' => __( 'Select category', 'tourfic' ),
 							'options'     => tf_apt_amenities_cats(),
-							'description' => __( 'Add new category from <a target="_blank" href="'.admin_url('admin.php?page=tf_settings#tab=apartment_single_page').'">Amenities Categories</a>', 'tourfic' ),
+							'description' => __( 'Add new category from <a target="_blank" href="' . admin_url( 'admin.php?page=tf_settings#tab=apartment_single_page' ) . '">Amenities Categories</a>', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
@@ -544,9 +623,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label' => __( 'House Rules', 'tourfic' ),
 				),
 				array(
-					'id'    => 'house_rules_title',
-					'type'  => 'text',
-					'label' => __( 'House Rules Title', 'tourfic' ),
+					'id'      => 'house_rules_title',
+					'type'    => 'text',
+					'label'   => __( 'House Rules Title', 'tourfic' ),
 					'default' => __( 'House Rules', 'tourfic' ),
 				),
 				array(
@@ -588,9 +667,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label' => __( 'Frequently Asked Questions', 'tourfic' ),
 				),
 				array(
-					'id'    => 'faq_title',
-					'type'  => 'text',
-					'label' => __( 'Section Title', 'tourfic' ),
+					'id'      => 'faq_title',
+					'type'    => 'text',
+					'label'   => __( 'Section Title', 'tourfic' ),
 					'default' => __( 'Frequently Asked Questions', 'tourfic' ),
 				),
 				array(
@@ -622,9 +701,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label' => __( 'Terms & Conditions', 'tourfic' ),
 				),
 				array(
-					'id'    => 'terms_title',
-					'type'  => 'text',
-					'label' => __( 'Section Title', 'tourfic' ),
+					'id'      => 'terms_title',
+					'type'    => 'text',
+					'label'   => __( 'Section Title', 'tourfic' ),
 					'default' => __( 'Terms & Conditions', 'tourfic' ),
 				),
 				array(
@@ -690,9 +769,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'class'   => 'tf-field-class',
 				),
 				array(
-					'id'    => 'review-section-title',
-					'type'  => 'text',
-					'label' => __( 'Reviews Section Title', 'tourfic' ),
+					'id'      => 'review-section-title',
+					'type'    => 'text',
+					'label'   => __( 'Reviews Section Title', 'tourfic' ),
 					'default' => "Guest Reviews"
 				),
 				//Related Apartment
@@ -723,24 +802,24 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'default'   => true
 				),
 				array(
-					'id'    => 'enquiry-title',
-					'type'  => 'text',
-					'label' => __( 'Apartment Enquiry Title Text', 'tourfic' ),
-					'default' => __('Have a question in mind', 'tourfic'),
+					'id'         => 'enquiry-title',
+					'type'       => 'text',
+					'label'      => __( 'Apartment Enquiry Title Text', 'tourfic' ),
+					'default'    => __( 'Have a question in mind', 'tourfic' ),
 					'dependency' => array( 'enquiry-section', '==', '1' ),
 				),
 				array(
-					'id'    => 'enquiry-content',
-					'type'  => 'text',
-					'label' => __( 'Apartment Enquiry Short Text', 'tourfic' ),
-					'default' => __('Looking for more info? Send a question to the property to find out more.', 'tourfic'),
+					'id'         => 'enquiry-content',
+					'type'       => 'text',
+					'label'      => __( 'Apartment Enquiry Short Text', 'tourfic' ),
+					'default'    => __( 'Looking for more info? Send a question to the property to find out more.', 'tourfic' ),
 					'dependency' => array( 'enquiry-section', '==', '1' ),
 				),
 				array(
-					'id'    => 'enquiry-btn',
-					'type'  => 'text',
-					'label' => __( 'Apartment Enquiry Button Text', 'tourfic' ),
-					'default' => __('Contact Host', 'tourfic'),
+					'id'         => 'enquiry-btn',
+					'type'       => 'text',
+					'label'      => __( 'Apartment Enquiry Button Text', 'tourfic' ),
+					'default'    => __( 'Contact Host', 'tourfic' ),
 					'dependency' => array( 'enquiry-section', '==', '1' ),
 				),
 			),
