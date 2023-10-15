@@ -790,20 +790,20 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 									'subtitle' => __('Select Months you want to Repeat the Tour', 'tourfic'),
 									'class' => 'tf-months-checkbox',
 									'options' => array(
-										'january' => __("January", "tourfic"),
-										'february' => __("February", "tourfic"),
-										'march' => __("March", "tourfic"),
-										'april' => __("April", "tourfic"),
-										'may' => __("May", "tourfic"),
-										'june' => __("June", "tourfic"),
-										'july' => __("July", "tourfic"),
-										'august' => __("August", "tourfic"),
-										'september' => __("September", "tourfic"),
-										'october' => __("October", "tourfic"),
-										'november' => __("November", "tourfic"),
-										'december' => __("December", "tourfic")
+										'01' => __('January', 'tourfic'),
+										'02' => __('February', 'tourfic'),
+										'03' => __('March', 'tourfic'),
+										'04' => __('April', 'tourfic'),
+										'05' => __('May', 'tourfic'),
+										'06' => __('June', 'tourfic'),
+										'07' => __('July', 'tourfic'),
+										'08' => __('August', 'tourfic'),
+										'09' => __('September', 'tourfic'),
+										'10' => __('October', 'tourfic'),
+										'11' => __('November', 'tourfic'),
+										'12' => __('December', 'tourfic')
 									),
-									'default' => 'january',
+									// 'default' => date('m'),
 									'inline' => 1,
 									"dependency" => array(
 										array("tf-repeat-months-switch", "==", 'true')
