@@ -9418,7 +9418,7 @@ html {
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-purchase-summery {
   font-size: 12px;
 }
-.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content button {
+.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.availability {
   color: #FDF9F3;
   font-size: 16px;
   font-family: "Josefin Sans", sans-serif;
@@ -9428,6 +9428,8 @@ html {
   min-width: 166px;
   border: none;
   padding: 12px 32px;
+  display: inline-block;
+  text-decoration: none;
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room-off {
   padding: 4px 12px;

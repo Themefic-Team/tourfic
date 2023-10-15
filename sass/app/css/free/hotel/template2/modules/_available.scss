@@ -178,7 +178,7 @@
             .tf-available-room-purchase-summery {
                 font-size: 12px;
             }
-            button {
+            a.availability {
                 color: #FDF9F3;
                 font-size: 16px;
                 font-family: "Josefin Sans", sans-serif;
@@ -188,6 +188,8 @@
                 min-width: 166px;
                 border: none;
                 padding: 12px 32px;
+                display: inline-block;
+                text-decoration: none;
             }
         }
     }
