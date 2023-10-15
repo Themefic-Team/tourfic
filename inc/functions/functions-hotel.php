@@ -1686,22 +1686,22 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	<form id="tf-single-hotel-avail" class="tf-booking-form">
 		<div class="tf-booking-form-fields">
 			<div class="tf-booking-form-checkin">
-				<span class="tf-booking-form-title">Check in</span>
+				<span class="tf-booking-form-title"><?php _e("Check in", "tourfic"); ?></span>
 				<div class="tf-booking-date-wrap">
 					<span class="tf-booking-date">00</span>
 					<span class="tf-booking-month">
-						<span>Mon</span>
+						<span><?php _e("Month", "tourfic"); ?></span>
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</span>
 				</div>
 				<input id="tf_checkin_date" type="text">
 			</div>
 			<div class="tf-booking-form-checkout">
-				<span class="tf-booking-form-title">Check out</span>
+				<span class="tf-booking-form-title"><?php _e("Check out", "tourfic"); ?></span>
 				<div class="tf-booking-date-wrap">
 					<span class="tf-booking-date">00</span>
 					<span class="tf-booking-month">
-						<span>Mon</span>
+						<span><?php _e("Month", "tourfic"); ?></span>
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</span>
 				</div>
@@ -1711,7 +1711,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 				<div class="tf-booking-form-guest-and-room-inner">
 					<span class="tf-booking-form-title">Guests & rooms</span>
 					<div class="tf-booking-guest-and-room-wrap">
-						<span class="tf-guest">01</span> guest <span class="tf-room">01</span> Rooms
+						<span class="tf-guest">01</span> guest
 					</div>
 					<div class="tf-booking-person-count">
 						<span>3 adults 1 children</span>
@@ -1726,7 +1726,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 							<div class="acr-label">Adults</div>
 							<div class="acr-select">
 								<div class="acr-dec">-</div>
-								<input type="number" name="adults" id="adults" min="1" value="1">
+								<input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>">
 								<div class="acr-inc">+</div>
 							</div>
 						</div>
@@ -1734,15 +1734,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 							<div class="acr-label">Children</div>
 							<div class="acr-select">
 								<div class="acr-dec">-</div>
-								<input type="number" name="children" id="children" min="0" value="0">
-								<div class="acr-inc">+</div>
-							</div>
-						</div>
-						<div class="tf_acrselection">
-							<div class="acr-label">Rooms</div>
-							<div class="acr-select">
-								<div class="acr-dec">-</div>
-								<input type="number" name="room" id="room" min="1" value="1">
+								<input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
 								<div class="acr-inc">+</div>
 							</div>
 						</div>
@@ -1751,6 +1743,12 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 			</div>
 		</div>
 		<div class="tf-booking-form-submit">
+			<?php
+			$ptype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
+			?>
+			<input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type"/>
+			<input type="hidden" name="post_id" value="<?php echo get_the_ID(); ?>"/>
+			<input type="hidden" name="children_ages" value="<?php echo $children_ages; ?>"/>
 			<button type="submit" class="tf-submit">Check <br>availability</button>
 		</div>
 	</form>
