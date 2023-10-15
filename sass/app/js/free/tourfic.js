@@ -1311,14 +1311,15 @@
             the text field element and an array of possible autocompleted values:*/
 
             // Executes when some one click in the search form location
-            inp.addEventListener("click", function () {
+            inp.addEventListener("focus", function () {
                 if (this.value == '' || !this.value) {
-                    a = document.createElement("DIV");
+                    // alert("Working....")
+                   let a = document.createElement("DIV");
                     a.setAttribute("id", this.id + "autocomplete-list");
-                    a.setAttribute("class", "autocomplete-items");
+                    a.classList.add("autocomplete-items")
                     this.parentNode.appendChild(a);
                     for(const [key, value] of Object.entries(arr)) {
-                        b = document.createElement("DIV");
+                      let  b = document.createElement("DIV");
                         b.innerHTML = value;
                         b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'>`;
                         b.addEventListener("click", function (e) {
@@ -1334,7 +1335,7 @@
 
             var currentFocus;
             /*execute a function when someone writes in the text field:*/
-            inp.addEventListener("input", function (e) {
+            inp.addEventListener("keyup", function (e) {
                 var a, b, i, val = this.value;
                 /*close any already open lists of autocompleted values*/
                 closeAllLists();
@@ -1451,7 +1452,10 @@
 
             /*execute a function when someone clicks in the document:*/
             document.addEventListener("click", function (e) {
-                closeAllLists(e.target);
+                // closeAllLists(e.target);
+                if(e.target.id == "content" || e.target.id == "") {
+                    closeAllLists(e.target);
+                }
             });
         }
 
