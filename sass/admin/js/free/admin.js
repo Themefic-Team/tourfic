@@ -70,7 +70,7 @@
                 },
                 success: function (response) {
                     notyf.success(response.data.message);
-                    //location.reload();
+                    location.reload();
                 },
                 error: function (data) {
                     notyf.error(data.data);
