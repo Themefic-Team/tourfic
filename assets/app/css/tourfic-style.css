@@ -9367,6 +9367,9 @@ html {
   align-items: center;
   color: #595349;
 }
+.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-cancellation-refundable-text span svg {
+  margin-left: 8px;
+}
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-cancellation-refundable-text i {
   font-size: 10px;
   border: 1px solid;
@@ -9671,6 +9674,7 @@ html {
   visibility: visible;
   opacity: 1;
   top: 100%;
+  display: block !important;
 }
 .tf-template-3 .tf-facilities-wrapper .tf-facilities {
   display: flex;

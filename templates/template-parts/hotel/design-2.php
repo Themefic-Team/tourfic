@@ -220,77 +220,7 @@
 
             <!--Booking form start -->
             <div id="availability" class="tf-booking-form-wrapper">
-                <form action="" class="tf-booking-form">
-                    <div class="tf-booking-form-fields">
-                        <div class="tf-booking-form-checkin">
-                            <span class="tf-booking-form-title">Check in</span>
-                            <div class="tf-booking-date-wrap">
-                                <span class="tf-booking-date">00</span>
-                                <span class="tf-booking-month">
-                                    <span>Mon</span>
-                                    <img src="./assets/image/select-arrow-dark.svg" alt="">
-                                </span>
-                            </div>
-                            <input id="tf_checkin_date" type="text">
-                        </div>
-                        <div class="tf-booking-form-checkout">
-                            <span class="tf-booking-form-title">Check out</span>
-                            <div class="tf-booking-date-wrap">
-                                <span class="tf-booking-date">00</span>
-                                <span class="tf-booking-month">
-                                    <span>Mon</span>
-                                    <img src="./assets/image/select-arrow-dark.svg" alt="">
-                                </span>
-                            </div>
-                            <input id="tf_checkout_date" type="text">
-                        </div>
-                        <div class="tf-booking-form-guest-and-room">
-                            <div class="tf-booking-form-guest-and-room-inner">
-                                <span class="tf-booking-form-title">Guests & rooms</span>
-                                <div class="tf-booking-guest-and-room-wrap">
-                                    <span class="tf-guest">01</span> guest <span class="tf-room">01</span> Rooms
-                                </div>
-                                <div class="tf-booking-person-count">
-                                    <span>3 adults 1 children</span>
-                                    <img src="./assets/image/select-arrow-dark.svg" alt="">
-                                </div>
-                            </div>
-
-                            
-                            <div class="tf_acrselection-wrap">
-                                <div class="tf_acrselection-inner">
-                                    <div class="tf_acrselection">
-                                        <div class="acr-label">Adults</div>
-                                        <div class="acr-select">
-                                            <div class="acr-dec">-</div>
-                                            <input type="number" name="adults" id="adults" min="1" value="1">
-                                            <div class="acr-inc">+</div>
-                                        </div>
-                                    </div>
-                                    <div class="tf_acrselection">
-                                        <div class="acr-label">Children</div>
-                                        <div class="acr-select">
-                                            <div class="acr-dec">-</div>
-                                            <input type="number" name="children" id="children" min="0" value="0">
-                                            <div class="acr-inc">+</div>
-                                        </div>
-                                    </div>
-                                    <div class="tf_acrselection">
-                                        <div class="acr-label">Rooms</div>
-                                        <div class="acr-select">
-                                            <div class="acr-dec">-</div>
-                                            <input type="number" name="room" id="room" min="1" value="1">
-                                            <div class="acr-inc">+</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tf-booking-form-submit">
-                        <button>Check <br>availability</button>
-                    </div>
-                </form>
+                <?php tf_hotel_sidebar_booking_form(); ?>
             </div>
             <!-- Booking form end -->
 
