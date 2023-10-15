@@ -2,10 +2,10 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-if( ! class_exists( 'TF_Shortcodes' )){
-    class TF_Shortcodes{
+if ( ! class_exists( 'TF_Shortcodes' ) ) {
+	class TF_Shortcodes {
 
-        private static $instance = null;
+		private static $instance = null;
 
 		/**
 		 * Singleton instance
@@ -18,25 +18,24 @@ if( ! class_exists( 'TF_Shortcodes' )){
 
 			return self::$instance;
 		}
-        
-        /**
-         * All shortcode generator callback function
-         * @author Abu Hena
-         * @since 2.9.5
-         */
-        public static function tf_shortcode_callback()
-        {
-            echo '<div class="tf-setting-dashboard">';
-            //dashboard-header-include
-            echo tf_dashboard_header();
-            ?>
+
+		/**
+		 * All shortcode generator callback function
+		 * @author Abu Hena
+		 * @since 2.9.5
+		 */
+		public static function tf_shortcode_callback() {
+			echo '<div class="tf-setting-dashboard">';
+			//dashboard-header-include
+			echo tf_dashboard_header();
+			?>
             <div class="tf-shortcode-generator-section">
                 <div class="tf-shortcode-generators">
                     <!--Tours Shortcodes section-->
                     <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label">
                             <div class="tf-labels">
-                                <label><?php echo __( 'Tours','tourfic' );?></label>
+                                <label><?php echo __( 'Tours', 'tourfic' ); ?></label>
                                 <p><?php echo __( 'Display tours in specific location', 'tourfic' ); ?></p>
                             </div>
                             <div class="tf-shortcode-btn tf-generate-tour">
@@ -58,7 +57,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Tour Count', 'tourfic' ) ?></h3>
-                                            <input type="number" value="5" data-count="count" class="post-count tf-setting-field">                                                
+                                            <input type="number" value="5" data-count="count" class="post-count tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -66,10 +65,10 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Tour Destination', 'tourfic' ) ?></h3>
-                                            <?php
-                                            //Dynamic Taxonomy dropdown list
-                                            tf_terms_dropdown( 'tour_destination','destinations','tf-setting-field tf-select-field',true );
-                                            ?>
+											<?php
+											//Dynamic Taxonomy dropdown list
+											tf_terms_dropdown( 'tour_destination', 'destinations', 'tf-setting-field tf-select-field', true );
+											?>
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
@@ -84,14 +83,14 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
-                                    <div class="tf-generate-tour">
-                                        <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
-                                    </div>
+                                        <div class="tf-generate-tour">
+                                            <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly />
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-category"></span>
                                         </button>
@@ -104,7 +103,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                     <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label">
                             <div class="tf-labels">
-                                <label><?php echo __( 'Hotels','tourfic' );?></label>
+                                <label><?php echo __( 'Hotels', 'tourfic' ); ?></label>
                                 <p><?php echo __( 'Display Hotels in specific location', 'tourfic' ); ?></p>
                             </div>
                             <div class="tf-shortcode-btn tf-generate-tour">
@@ -126,7 +125,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Hotel Count', 'tourfic' ) ?></h3>
-                                            <input type="number" value="5" data-count="count" class="post-count tf-setting-field">                                                
+                                            <input type="number" value="5" data-count="count" class="post-count tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -134,10 +133,10 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Hotel location', 'tourfic' ) ?></h3>
-                                            <?php
-                                            //Dynamic Taxonomy dropdown list
-                                            tf_terms_dropdown( 'hotel_location','locations','tf-setting-field tf-select-field',true );
-                                            ?>
+											<?php
+											//Dynamic Taxonomy dropdown list
+											tf_terms_dropdown( 'hotel_location', 'locations', 'tf-setting-field tf-select-field', true );
+											?>
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
@@ -152,14 +151,14 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
-                                    <div class="tf-generate-tour">
-                                        <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
-                                    </div>
+                                        <div class="tf-generate-tour">
+                                            <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly />
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-category"></span>
                                         </button>
@@ -173,7 +172,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                     <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label">
                             <div class="tf-labels">
-                                <label><?php echo __( 'Hotel Location','tourfic' );?></label>
+                                <label><?php echo __( 'Hotel Location', 'tourfic' ); ?></label>
                                 <p><?php echo __( 'Display hotel locations', 'tourfic' ); ?></p>
                             </div>
                             <div class="tf-shortcode-btn tf-generate-tour">
@@ -203,7 +202,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                                 <option value="orderby='rand'"><?php _e( 'Rand', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
-                                    </div>                                   
+                                    </div>
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
@@ -218,18 +217,18 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Location limit', 'tourfic' ) ?></h3>
-                                            <input type="number" value="-1" data-count="limit" class="post-count tf-setting-field">                                                
+                                            <input type="number" value="-1" data-count="limit" class="post-count tf-setting-field">
                                         </div>
-                                    </div>                             
+                                    </div>
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Choose Locations', 'tourfic' ) ?></h3>
-                                            <?php
-                                            //Dynamic Taxonomy dropdown list
-                                            tf_terms_dropdown( 'hotel_location','ids','tf-setting-field tf-select-field',true );
-                                            ?>
+											<?php
+											//Dynamic Taxonomy dropdown list
+											tf_terms_dropdown( 'hotel_location', 'ids', 'tf-setting-field tf-select-field', true );
+											?>
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
@@ -244,14 +243,14 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
-                                    <div class="tf-generate-tour">
-                                        <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
-                                    </div>
+                                        <div class="tf-generate-tour">
+                                            <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly />
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-category"></span>
                                         </button>
@@ -264,7 +263,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                     <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label">
                             <div class="tf-labels">
-                                <label><?php echo __( 'Tour Destination','tourfic' );?></label>
+                                <label><?php echo __( 'Tour Destination', 'tourfic' ); ?></label>
                                 <p><?php echo __( 'Display tour destinations', 'tourfic' ); ?></p>
                             </div>
                             <div class="tf-shortcode-btn tf-generate-tour">
@@ -294,7 +293,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                                 <option value="orderby='rand'"><?php _e( 'Rand', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
-                                    </div>                                   
+                                    </div>
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
@@ -309,18 +308,18 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Destination limit', 'tourfic' ) ?></h3>
-                                            <input type="number" value="-1" data-count="limit" class="post-count tf-setting-field">                                                
+                                            <input type="number" value="-1" data-count="limit" class="post-count tf-setting-field">
                                         </div>
-                                    </div>                             
+                                    </div>
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Choose Destination', 'tourfic' ) ?></h3>
-                                            <?php
-                                            //Dynamic Taxonomy dropdown list
-                                            tf_terms_dropdown( 'tour_destination','ids','tf-setting-field tf-select-field',true );
-                                            ?>
+											<?php
+											//Dynamic Taxonomy dropdown list
+											tf_terms_dropdown( 'tour_destination', 'ids', 'tf-setting-field tf-select-field', true );
+											?>
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
@@ -335,14 +334,14 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
-                                    <div class="tf-generate-tour">
-                                        <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
-                                    </div>
+                                        <div class="tf-generate-tour">
+                                            <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly />
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-category"></span>
                                         </button>
@@ -351,11 +350,11 @@ if( ! class_exists( 'TF_Shortcodes' )){
                             </div>
                         </div>
                     </div>
-                      <!--Recent hotels Shortcodes section-->
-                      <div class="tf-shortcode-generator-single">
+                    <!--Recent hotels Shortcodes section-->
+                    <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label">
                             <div class="tf-labels">
-                                <label><?php echo __( 'Recent hotels','tourfic' );?></label>
+                                <label><?php echo __( 'Recent hotels', 'tourfic' ); ?></label>
                                 <p><?php echo __( 'Display recent hotels', 'tourfic' ); ?></p>
                             </div>
                             <div class="tf-shortcode-btn tf-generate-tour">
@@ -385,7 +384,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                                 <option value="orderby='rand'"><?php _e( 'Rand', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
-                                    </div>                                   
+                                    </div>
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
@@ -400,28 +399,28 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Hotel limit', 'tourfic' ) ?></h3>
-                                            <input type="number" value="-1" data-count="count" class="post-count tf-setting-field">                                                
+                                            <input type="number" value="-1" data-count="count" class="post-count tf-setting-field">
                                         </div>
-                                    </div>                             
+                                    </div>
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Slides to show', 'tourfic' ) ?></h3>
-                                            <input type="number" value="5" data-count="slidestoshow" class="post-count tf-setting-field">                                                
+                                            <input type="number" value="5" data-count="slidestoshow" class="post-count tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
-                                    <div class="tf-generate-tour">
-                                        <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
-                                    </div>
+                                        <div class="tf-generate-tour">
+                                            <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly />
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-category"></span>
                                         </button>
@@ -434,7 +433,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                     <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label">
                             <div class="tf-labels">
-                                <label><?php echo __( 'Recent Tours','tourfic' );?></label>
+                                <label><?php echo __( 'Recent Tours', 'tourfic' ); ?></label>
                                 <p><?php echo __( 'Display recent tours', 'tourfic' ); ?></p>
                             </div>
                             <div class="tf-shortcode-btn tf-generate-tour">
@@ -464,7 +463,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                                 <option value="orderby='rand'"><?php _e( 'Rand', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
-                                    </div>                                   
+                                    </div>
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
@@ -479,28 +478,28 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Tour limit', 'tourfic' ) ?></h3>
-                                            <input type="number" value="-1" data-count="count" class="post-count tf-setting-field">                                                
+                                            <input type="number" value="-1" data-count="count" class="post-count tf-setting-field">
                                         </div>
-                                    </div>                             
+                                    </div>
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Slides to show', 'tourfic' ) ?></h3>
-                                            <input type="number" value="5" data-count="slidestoshow" class="post-count tf-setting-field">                                                
+                                            <input type="number" value="5" data-count="slidestoshow" class="post-count tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
-                                    <div class="tf-generate-tour">
-                                        <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
-                                    </div>
+                                        <div class="tf-generate-tour">
+                                            <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly />
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-category"></span>
                                         </button>
@@ -514,7 +513,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                     <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label">
                             <div class="tf-labels">
-                                <label><?php echo __( 'Search Form','tourfic' );?></label>
+                                <label><?php echo __( 'Search Form', 'tourfic' ); ?></label>
                                 <p><?php echo __( 'Display Search Form', 'tourfic' ); ?></p>
                             </div>
                             <div class="tf-shortcode-btn tf-generate-tour">
@@ -540,9 +539,9 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                                 <option value="style='default'"><?php _e( 'Default', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
-                                    </div>                             
+                                    </div>
                                 </div>
-                                <div class="tf-sg-row">                                    
+                                <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Type', 'tourfic' ) ?></h3>
@@ -555,7 +554,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                                 <option value="type='tp-flight'"><?php _e( 'Travel Payout Flights', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
-                                    </div>      
+                                    </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Fullwidth', 'tourfic' ) ?></h3>
@@ -564,15 +563,15 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                                 <option value="fullwidth='false'"><?php _e( 'No', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Classes', 'tourfic' ) ?></h3>
-                                            <input type="text" value="" data-count="classes" placeholder="Input classes with space" class="post-count tf-setting-field">                                                
+                                            <input type="text" value="" data-count="classes" placeholder="Input classes with space" class="post-count tf-setting-field">
                                         </div>
-                                    </div>                                         
+                                    </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Advanced', 'tourfic' ) ?></h3>
@@ -581,18 +580,18 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                                 <option value="advanced='enabled'"><?php _e( 'Enabled', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
-                                    </div>      
+                                    </div>
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
-                                    <div class="tf-generate-tour">
-                                        <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
-                                    </div>
+                                        <div class="tf-generate-tour">
+                                            <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly />
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-category"></span>
                                         </button>
@@ -606,7 +605,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                     <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label">
                             <div class="tf-labels">
-                                <label><?php echo __( 'Reviews','tourfic' );?></label>
+                                <label><?php echo __( 'Reviews', 'tourfic' ); ?></label>
                                 <p><?php echo __( 'Display reviews', 'tourfic' ); ?></p>
                             </div>
                             <div class="tf-shortcode-btn tf-generate-tour">
@@ -633,28 +632,28 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                                 <option value="type=tf_tours"><?php _e( 'Tours', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
-                                    </div>                                                                  
+                                    </div>
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Total Post Number', 'tourfic' ) ?></h3>
-                                            <input type="number" value="10" data-count="number" class="post-count tf-setting-field">                                                
+                                            <input type="number" value="10" data-count="number" class="post-count tf-setting-field">
                                         </div>
-                                    </div>  
+                                    </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Sliders To Show', 'tourfic' ) ?></h3>
-                                            <input type="number" value="3" data-count="count" class="post-count tf-setting-field">                                                
+                                            <input type="number" value="3" data-count="count" class="post-count tf-setting-field">
                                         </div>
-                                    </div>                                                                  
-                                </div>  
-                                    
+                                    </div>
+                                </div>
+
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Speed', 'tourfic' ) ?></h3>
-                                            <input type="number" value="200" data-count="speed" class="post-count tf-setting-field">                                                
+                                            <input type="number" value="200" data-count="speed" class="post-count tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
@@ -667,45 +666,45 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="tf-sg-row">
-                                        <div class="tf-col-lg-6">
-                                            <div class="tf-sg-field-wrap">
-                                                <h3><?php echo __( 'Dots', 'tourfic' ) ?></h3>
-                                                <select class="tf-select-field tf-setting-field">
-                                                    <option value="dots='true'"><?php _e( 'Yes', 'tourfic' ); ?></option>
-                                                    <option value="dots='false'"><?php _e( 'No', 'tourfic' ); ?></option>
-                                                </select>
-                                            </div>
-                                        </div>     
-                                        <div class="tf-col-lg-6">
-                                            <div class="tf-sg-field-wrap">
-                                                <h3><?php echo __( 'Autoplay', 'tourfic' ) ?></h3>
-                                                <select class="tf-select-field tf-setting-field">
-                                                    <option value="autoplay='true'"><?php _e( 'Yes', 'tourfic' ); ?></option>
-                                                    <option value="autoplay='false'"><?php _e( 'No', 'tourfic' ); ?></option>
-                                                </select>
-                                            </div>
-                                        </div>          
-                                        <div class="tf-col-lg-6">
-                                            <div class="tf-sg-field-wrap">
-                                                <h3><?php echo __( 'Infinite', 'tourfic' ) ?></h3>
-                                                <select class="tf-select-field tf-setting-field">
-                                                    <option value="infinite='true'"><?php _e( 'Yes', 'tourfic' ); ?></option>
-                                                    <option value="infinite='false'"><?php _e( 'No', 'tourfic' ); ?></option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
-                                    <div class="tf-generate-tour">
-                                        <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Dots', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="dots='true'"><?php _e( 'Yes', 'tourfic' ); ?></option>
+                                                <option value="dots='false'"><?php _e( 'No', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
                                     </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Autoplay', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="autoplay='true'"><?php _e( 'Yes', 'tourfic' ); ?></option>
+                                                <option value="autoplay='false'"><?php _e( 'No', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-sg-field-wrap">
+                                            <h3><?php echo __( 'Infinite', 'tourfic' ) ?></h3>
+                                            <select class="tf-select-field tf-setting-field">
+                                                <option value="infinite='true'"><?php _e( 'Yes', 'tourfic' ); ?></option>
+                                                <option value="infinite='false'"><?php _e( 'No', 'tourfic' ); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf-sg-row">
+                                    <div class="tf-col-lg-6">
+                                        <div class="tf-generate-tour">
+                                            <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly />
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-category"></span>
                                         </button>
@@ -719,7 +718,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                     <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label">
                             <div class="tf-labels">
-                                <label><?php echo __( 'Recent blog','tourfic' );?></label>
+                                <label><?php echo __( 'Recent blog', 'tourfic' ); ?></label>
                                 <p><?php echo __( 'Display Recent Blogs in specific location', 'tourfic' ); ?></p>
                             </div>
                             <div class="tf-shortcode-btn tf-generate-tour">
@@ -741,7 +740,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Blog Count', 'tourfic' ) ?></h3>
-                                            <input type="number" value="5" data-count="count" class="post-count tf-setting-field">                                                
+                                            <input type="number" value="5" data-count="count" class="post-count tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -749,10 +748,10 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Categories', 'tourfic' ) ?></h3>
-                                            <?php
-                                            //Dynamic Taxonomy dropdown list
-                                            tf_terms_dropdown( 'category','cats','tf-setting-field tf-select-field',true );
-                                            ?>
+											<?php
+											//Dynamic Taxonomy dropdown list
+											tf_terms_dropdown( 'category', 'cats', 'tf-setting-field tf-select-field', true );
+											?>
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
@@ -767,14 +766,14 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
-                                    <div class="tf-generate-tour">
-                                        <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
-                                    </div>
+                                        <div class="tf-generate-tour">
+                                            <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly />
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-category"></span>
                                         </button>
@@ -788,7 +787,7 @@ if( ! class_exists( 'TF_Shortcodes' )){
                     <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label">
                             <div class="tf-labels">
-                                <label><?php echo __( 'Vendor Hotels & Tours','tourfic' );?></label>
+                                <label><?php echo __( 'Vendor Hotels & Tours', 'tourfic' ); ?></label>
                                 <p><?php echo __( 'Display Hotels & Tours in specific Vendor', 'tourfic' ); ?></p>
                             </div>
                             <div class="tf-shortcode-btn tf-generate-tour">
@@ -816,46 +815,46 @@ if( ! class_exists( 'TF_Shortcodes' )){
                                             </select>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="tf-sg-row">
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Number of Posts', 'tourfic' ) ?></h3>
-                                            <input type="number" value="4" data-count="count" class="post-count tf-setting-field">                     
+                                            <input type="number" value="4" data-count="count" class="post-count tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo __( 'Vendor Name', 'tourfic' ) ?></h3>
-                                            <?php 
-                                            $tf_vendor_query_lists = get_users( array( 'role__in' => array( 'tf_vendor', 'administrator' ) ) );
-                                            if(!empty($tf_vendor_query_lists)){
-                                            ?>
-                                            <select class="tf-select-field tf-setting-field">
-                                                <?php 
-                                                foreach($tf_vendor_query_lists as $single){ ?>
-                                                <option value="vendor='<?php echo $single->user_nicename; ?>' vendor_id='<?php echo $single->ID; ?>' "><?php echo $single->user_nicename; ?></option>
-                                                <?php } ?>
-                                            </select>
-                                            <?php }else{
-                                                echo __( 'Not Found', 'tourfic' );
-                                            }
-                                            ?>
+											<?php
+											$tf_vendor_query_lists = get_users( array( 'role__in' => array( 'tf_vendor', 'administrator' ) ) );
+											if ( ! empty( $tf_vendor_query_lists ) ) {
+												?>
+                                                <select class="tf-select-field tf-setting-field">
+													<?php
+													foreach ( $tf_vendor_query_lists as $single ) { ?>
+                                                        <option value="vendor='<?php echo $single->user_nicename; ?>' vendor_id='<?php echo $single->ID; ?>' "><?php echo $single->user_nicename; ?></option>
+													<?php } ?>
+                                                </select>
+											<?php } else {
+												echo __( 'Not Found', 'tourfic' );
+											}
+											?>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tf-sg-row">
-                                    
+
                                     <div class="tf-col-lg-6">
-                                    <div class="tf-generate-tour">
-                                        <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
-                                    </div>
+                                        <div class="tf-generate-tour">
+                                            <button class="tf-btn"><?php echo __( 'Generate', 'tourfic' ); ?></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_vendor_post]" readonly />
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_vendor_post]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-category"></span>
                                         </button>
@@ -868,9 +867,9 @@ if( ! class_exists( 'TF_Shortcodes' )){
 
                 </div>
             </div>
-            <?php
-        }
+			<?php
+		}
 
-    }
+	}
 }
 TF_Shortcodes::instance();

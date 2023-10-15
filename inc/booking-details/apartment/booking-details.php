@@ -101,7 +101,9 @@
                     <input type="checkbox" name="order_id[]" value="<?php echo esc_html( $apartment['id'] ); ?>">
                 </th>
                 <td>
-                    <?php echo esc_html( $apartment['order_id'] ); ?>
+                    <a href="<?php echo admin_url(); ?>edit.php?post_type=tf_apartment&amp;page=tf_apartment_booking&amp;order_id=<?php echo esc_attr($apartment['order_id']); ?>&amp;book_id=<?php echo esc_attr($apartment['id']); ?>&amp;action=preview" class="tf_booking_details_view">
+                        <?php echo esc_html( $apartment['order_id'] ); ?>
+                    </a>
                 </td>
                 <td>
                     <?php echo get_the_title($apartment['post_id']); ?>
@@ -154,12 +156,12 @@
             <tr>
                 <th colspan="8">
                     <ul class="tf-booking-details-pagination">
-                        <?php if($paged>=2){ ?>
+                        <?php if(!empty($paged) && $paged>=2){ ?>
                             <li><a href="<?php echo tf_booking_details_pagination( $paged-1 ); ?>"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M15.8333 10.0001H4.16663M4.16663 10.0001L9.99996 15.8334M4.16663 10.0001L9.99996 4.16675" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg><?php _e("Previous", "tourfic"); ?></a></li>
                         <?php } 
-                        if($total_pages > 1){
+                        if(!empty($total_pages) && $total_pages > 1){
                         for ($i=1; $i<=$total_pages; $i++) {
                             if ($i == $paged) {  
                         ?>
@@ -171,7 +173,7 @@
                             <a href="<?php echo tf_booking_details_pagination( $i ); ?>"><?php echo $i; ?></a>
                             </li>
                         <?php } } }
-                        if($paged < $total_pages){
+                        if(!empty($total_pages) && !empty($paged) && $paged < $total_pages){
                         ?>
                             <li><a href="<?php echo tf_booking_details_pagination( $paged+1 ); ?>"><?php _e("Next", "tourfic"); ?> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M4.16669 10.0001H15.8334M15.8334 10.0001L10 4.16675M15.8334 10.0001L10 15.8334" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>

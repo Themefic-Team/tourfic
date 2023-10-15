@@ -128,6 +128,7 @@
                 line-height: 24px;
                 cursor: pointer;
                 margin-right: 16px;
+                height: 48px;
                 @media #{$max991}{
                     margin: 0px;
                 }
@@ -243,6 +244,10 @@
                         background-color: #fff;
                         border-bottom: 1px solid #F0F0F1;
                         text-align: left;
+                        a{
+                            text-decoration: none;
+                            color: #1D2327;
+                        }
                         span{
                             color: #87888B;
                             font-family: Segoe UI;

@@ -2971,16 +2971,19 @@ table.tf-table tr:last-child {
   width: 24px;
 }
 
+.tf-field-group.tf_form-inner,
 .tf-field-group {
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
 }
+.tf-field-group.tf_form-inner i,
 .tf-field-group i {
   position: absolute;
   left: 18px;
 }
+.tf-field-group.tf_form-inner .tf-field,
 .tf-field-group .tf-field {
   border: none !important;
   padding: 15px 40px !important;
@@ -2993,11 +2996,14 @@ table.tf-table tr:last-child {
   font-family: inherit;
   background-image: none;
   -moz-appearance: auto !important;
+  height: auto;
 }
+.tf-field-group.tf_form-inner .tf-field:focus,
 .tf-field-group .tf-field:focus {
   outline: none;
   border: none;
 }
+.tf-field-group.tf_form-inner input::placeholder,
 .tf-field-group input::placeholder {
   font-weight: 16px;
   font-size: 14px;
@@ -5066,6 +5072,8 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher {
   padding-bottom: 16px;
+  display: flex;
+  align-items: center;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher h4,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher h4 {
@@ -5080,13 +5088,22 @@ div#tf-contact-info {
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box {
-  position: relative;
-  bottom: 30px;
-  left: 285px;
+  top: 11px;
+  display: flex;
+  padding-left: 10px;
 }
-.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tf-tooltip,
-.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tf-tooltip {
-  right: 83%;
+.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn,
+.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn {
+  width: 40px;
+  text-align: center;
+  position: relative;
+}
+.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn i,
+.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn i {
+  padding: 0px !important;
+}
+.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn .tf-tooltip,
+.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn .tf-tooltip {
   padding: 10px 10px;
   color: #FFFFFF;
   background-color: #333333;
@@ -5104,11 +5121,17 @@ div#tf-contact-info {
   text-align: center;
   line-height: 17px;
   width: 220px;
-  margin-left: 0;
-  bottom: 45px;
+  position: absolute;
+  left: 50%;
+  margin-left: -110px;
+  bottom: 30px;
 }
-.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box:hover .tf-tooltip,
-.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box:hover .tf-tooltip {
+.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn .tooltip-title-box,
+.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn .tooltip-title-box {
+  margin-top: 3px;
+}
+.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tooltip-title-box:hover + .tf-tooltip,
+.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tooltip-title-box:hover + .tf-tooltip {
   visibility: visible;
   opacity: 1;
 }

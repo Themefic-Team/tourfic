@@ -547,13 +547,13 @@
         };
 
         function setCheckInOut(check_in, check_out, roomCalData) {
-            $('[name="tf_room_check_in"]', roomCalData).val(check_in);
-            $('[name="tf_room_check_out"]', roomCalData).val(check_out);
+            $('.tf_room_check_in', roomCalData).val(check_in);
+            $('.tf_room_check_out', roomCalData).val(check_out);
         }
 
         function resetForm(roomCalData) {
-            $('[name="tf_room_check_in"]', roomCalData).val('');
-            $('[name="tf_room_check_out"]', roomCalData).val('');
+            $('.tf_room_check_in', roomCalData).val('');
+            $('.tf_room_check_out', roomCalData).val('');
             $('[name="tf_room_price"]', roomCalData).val('');
             $('[name="tf_room_adult_price"]', roomCalData).val('');
             $('[name="tf_room_child_price"]', roomCalData).val('');
@@ -564,6 +564,26 @@
                 var $this = $(this);
                 var room = new roomCal(el);
                 room.init();
+
+                let checkIn = $(el).find('[name="tf_room_check_in"]').flatpickr({
+                    dateFormat: 'Y-m-d',
+                    minDate: 'today',
+                    altInput: true,
+                    altFormat: tf_options.tf_admin_date_format,
+                    onChange: function (selectedDates, dateStr, instance) {
+                        checkOut.set('minDate', dateStr);
+                    }
+                });
+
+                let checkOut = $(el).find('[name="tf_room_check_out"]').flatpickr({
+                    dateFormat: 'Y-m-d',
+                    minDate: 'today',
+                    altInput: true,
+                    altFormat: tf_options.tf_admin_date_format,
+                    onChange: function (selectedDates, dateStr, instance) {
+                        checkIn.set('maxDate', dateStr);
+                    }
+                });
             });
         }
         tfHotelCalendar();

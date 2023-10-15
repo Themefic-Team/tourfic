@@ -45,6 +45,12 @@
                         //select the first option
                         select2.val(select2.find('option:eq(1)').val()).trigger('change');
                         $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    },
+                    complete: function (response) {
+                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');
                     }
                 });
             }
@@ -95,6 +101,12 @@
                         });
 
                         $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    },
+                    complete: function (response) {
+                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');
                     }
                 });
             }
@@ -136,6 +148,12 @@
                         $('[name="tf_hotel_adults_number"]').val(response.data.adults).attr('max', response.data.adults * response.data.rooms);
                         $('[name="tf_hotel_children_number"]').val(response.data.children).attr('max', response.data.children * response.data.rooms);
 
+                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    },
+                    complete: function (response) {
                         $('#tf-backend-hotel-book-btn').removeAttr('disabled');
                     }
                 });
@@ -220,7 +238,12 @@
                     }
                     btn.removeClass('tf-btn-loading');
                 },
-
+                error: function (response) {
+                    console.log(response);
+                },
+                complete: function (response) {
+                    btn.removeClass('tf-btn-loading');
+                }
             })
 
         });

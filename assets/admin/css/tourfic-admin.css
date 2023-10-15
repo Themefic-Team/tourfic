@@ -3921,6 +3921,7 @@ Steps
   line-height: 24px;
   cursor: pointer;
   margin-right: 16px;
+  height: 48px;
 }
 @media only screen and (max-width: 991.98px) {
   .tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-order-status-filter-btn {
@@ -4033,6 +4034,10 @@ Steps
   background-color: #fff;
   border-bottom: 1px solid #F0F0F1;
   text-align: left;
+}
+.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th a, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td a {
+  text-decoration: none;
+  color: #1D2327;
 }
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th span, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td span {
   color: #87888B;
