@@ -283,7 +283,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
 
 		// date format for appartments
-		$date_format_change_appartments  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+		$date_format_change_appartments = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 		?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
@@ -430,8 +430,8 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                         enableTime: false,
                         mode: "range",
                         dateFormat: "Y/m/d",
-						altInput: true,
-						altFormat: '<?php echo $date_format_change_appartments; ?>',
+                        altInput: true,
+                        altFormat: '<?php echo $date_format_change_appartments; ?>',
                         minDate: "today",
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -439,7 +439,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                         },
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                         },
                         defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
                     });
@@ -463,15 +463,19 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$max_adults      = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
 		$max_children    = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
 		$max_infants     = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
+		$pricing_type    = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 0;
 		$price_per_night = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
+		$adult_price     = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
+		$child_price     = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
+		$infant_price    = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
 		$discount_type   = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 		$discount        = ! empty( $meta['discount'] ) ? $meta['discount'] : 0;
 		$booked_dates    = tf_apartment_booked_days( get_the_ID() );
 
 		// date format for apartment
-		$date_format_change_appartments  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+		$date_format_change_appartments = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
-		if ( defined( 'TF_PRO' ) ) {
+		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 			$additional_fees = ! empty( $meta['additional_fees'] ) ? $meta['additional_fees'] : array();
 		} else {
 			$additional_fee_label = ! empty( $meta['additional_fee_label'] ) ? $meta['additional_fee_label'] : '';
@@ -490,8 +494,8 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
             <h4><?php ! empty( $meta['booking_form_title'] ) ? _e( $meta['booking_form_title'] ) : _e( 'Book your Apartment', 'tourfic' ); ?></h4>
             <div class="tf-apartment-form-header">
                 <h3 class="tf-apartment-price-per-night">
-                    <span class="tf-apartment-base-price"><?php echo wc_price( $price_per_night ) ?></span>
-                    <span><?php _e( '/per night', 'tourfic' ) ?></span>
+                    <span class="tf-apartment-base-price"><?php echo $pricing_type === 'per_night' ? wc_price( $price_per_night ) : wc_price( $adult_price ); ?></span>
+                    <span><?php echo $pricing_type === 'per_night' ? __( '/per night', 'tourfic' ) : __( '/per person', 'tourfic' ); ?></span>
                 </h3>
 				<?php if ( $comments && ! $disable_review_sec == '1' ): ?>
                     <div class="tf-top-review">
@@ -579,18 +583,18 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                     <span class="days-total-price tf-price-list-price"></span>
                 </li>
 
-				<?php if ( ! defined( 'TF_PRO' ) && ! empty( $additional_fee_label ) && ! empty( $additional_fee ) ): ?>
-                    <li class="additional-fee-wrap" style="display: none">
-                        <span class="additional-fee-label tf-price-list-label"><?php echo $additional_fee_label; ?></span>
-                        <span class="additional-fee tf-price-list-price"></span>
-                    </li>
-				<?php elseif ( defined( 'TF_PRO' ) ): ?>
+				<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
 					<?php foreach ( $additional_fees as $key => $additional_fee ) : ?>
                         <li class="additional-fee-wrap" style="display: none">
                             <span class="additional-fee-label tf-price-list-label"><?php echo $additional_fee['additional_fee_label']; ?></span>
                             <span class="additional-fee-<?php echo esc_attr( $key ) ?> tf-price-list-price"></span>
                         </li>
 					<?php endforeach; ?>
+				<?php elseif ( ! empty( $additional_fee_label ) && ! empty( $additional_fee ) ): ?>
+                    <li class="additional-fee-wrap" style="display: none">
+                        <span class="additional-fee-label tf-price-list-label"><?php echo $additional_fee_label; ?></span>
+                        <span class="additional-fee tf-price-list-price"></span>
+                    </li>
 				<?php endif; ?>
 
 				<?php if ( ! empty( $discount ) ): ?>
@@ -636,7 +640,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 let totalPerson = parseInt($('.tf_acrselection #adults').val()) + parseInt($('.tf_acrselection #children').val()) + parseInt($('.tf_acrselection #infant').val());
 
                                 //additional fee
-								<?php if ( defined( 'TF_PRO' ) ): ?>
+								<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
 								<?php foreach ($additional_fees as $key => $item) : ?>
                                 let additional_fee_<?php echo $key ?> = <?php echo $item['additional_fee']; ?>;
                                 let additional_fee_html_<?php echo $key ?> = '<?php echo wc_price( 0 ); ?>';
@@ -732,13 +736,13 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         enableTime: false,
                         mode: "range",
                         minDate: "today",
-						altInput: true,
-						altFormat: '<?php echo $date_format_change_appartments; ?>',
+                        altInput: true,
+                        altFormat: '<?php echo $date_format_change_appartments; ?>',
                         dateFormat: "Y/m/d",
                         defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                             bookingCalculation(selectedDates);
                         },
                         onChange: function (selectedDates, dateStr, instance) {
@@ -972,59 +976,59 @@ if ( ! function_exists( 'tf_filter_apartment_by_date' ) ) {
 										if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 											if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
 												$tf_booked_dates = [];
-												if(!empty($booked_dates)){
+												if ( ! empty( $booked_dates ) ) {
 													foreach ( $booked_dates as $booked_date ) {
 														$booked_from = $booked_date['check_in'];
 														$booked_to   = $booked_date['check_out'];
-			
+
 														$tfbookedperiod = new DatePeriod(
 															new DateTime( $booked_from . ' 00:00' ),
 															new DateInterval( 'P1D' ),
 															new DateTime( $booked_to . ' 23:59' )
 														);
-										
+
 														foreach ( $tfbookedperiod as $date ) {
 															$tf_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
 														}
 													}
-													foreach($avail_searching_date as $searching){
-														if (array_key_exists($searching, $tf_booked_dates)) {
+													foreach ( $avail_searching_date as $searching ) {
+														if ( array_key_exists( $searching, $tf_booked_dates ) ) {
 															$has_apartment = false;
 															break;
-														}else{
+														} else {
 															$has_apartment = true;
 														}
 													}
-												}else{
+												} else {
 													$has_apartment = true;
 												}
 											}
 										} else {
 											$tf_booked_dates = [];
-											if(!empty($booked_dates)){
+											if ( ! empty( $booked_dates ) ) {
 												foreach ( $booked_dates as $booked_date ) {
 													$booked_from = $booked_date['check_in'];
 													$booked_to   = $booked_date['check_out'];
-		
+
 													$tfbookedperiod = new DatePeriod(
 														new DateTime( $booked_from . ' 00:00' ),
 														new DateInterval( 'P1D' ),
 														new DateTime( $booked_to . ' 23:59' )
 													);
-									
+
 													foreach ( $tfbookedperiod as $date ) {
 														$tf_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
 													}
 												}
-												foreach($avail_searching_date as $searching){
-													if (array_key_exists($searching, $tf_booked_dates)) {
+												foreach ( $avail_searching_date as $searching ) {
+													if ( array_key_exists( $searching, $tf_booked_dates ) ) {
 														$has_apartment = false;
 														break;
-													}else{
+													} else {
 														$has_apartment = true;
 													}
 												}
-											}else{
+											} else {
 												$has_apartment = true;
 											}
 										}
@@ -1033,59 +1037,59 @@ if ( ! function_exists( 'tf_filter_apartment_by_date' ) ) {
 									if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 										if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
 											$tf_booked_dates = [];
-											if(!empty($booked_dates)){
+											if ( ! empty( $booked_dates ) ) {
 												foreach ( $booked_dates as $booked_date ) {
 													$booked_from = $booked_date['check_in'];
 													$booked_to   = $booked_date['check_out'];
-		
+
 													$tfbookedperiod = new DatePeriod(
 														new DateTime( $booked_from . ' 00:00' ),
 														new DateInterval( 'P1D' ),
 														new DateTime( $booked_to . ' 23:59' )
 													);
-									
+
 													foreach ( $tfbookedperiod as $date ) {
 														$tf_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
 													}
 												}
-												foreach($avail_searching_date as $searching){
-													if (array_key_exists($searching, $tf_booked_dates)) {
+												foreach ( $avail_searching_date as $searching ) {
+													if ( array_key_exists( $searching, $tf_booked_dates ) ) {
 														$has_apartment = false;
 														break;
-													}else{
+													} else {
 														$has_apartment = true;
 													}
 												}
-											}else{
+											} else {
 												$has_apartment = true;
 											}
 										}
 									} else {
 										$tf_booked_dates = [];
-										if(!empty($booked_dates)){
+										if ( ! empty( $booked_dates ) ) {
 											foreach ( $booked_dates as $booked_date ) {
 												$booked_from = $booked_date['check_in'];
 												$booked_to   = $booked_date['check_out'];
-	
+
 												$tfbookedperiod = new DatePeriod(
 													new DateTime( $booked_from . ' 00:00' ),
 													new DateInterval( 'P1D' ),
 													new DateTime( $booked_to . ' 23:59' )
 												);
-								
+
 												foreach ( $tfbookedperiod as $date ) {
 													$tf_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
 												}
 											}
-											foreach($avail_searching_date as $searching){
-												if (array_key_exists($searching, $tf_booked_dates)) {
+											foreach ( $avail_searching_date as $searching ) {
+												if ( array_key_exists( $searching, $tf_booked_dates ) ) {
 													$has_apartment = false;
 													break;
-												}else{
+												} else {
 													$has_apartment = true;
 												}
 											}
-										}else{
+										} else {
 											$has_apartment = true;
 										}
 									}
@@ -1095,7 +1099,7 @@ if ( ! function_exists( 'tf_filter_apartment_by_date' ) ) {
 							if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 								if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
 									$tf_booked_dates = [];
-									if(!empty($booked_dates)){
+									if ( ! empty( $booked_dates ) ) {
 										foreach ( $booked_dates as $booked_date ) {
 											$booked_from = $booked_date['check_in'];
 											$booked_to   = $booked_date['check_out'];
@@ -1105,27 +1109,27 @@ if ( ! function_exists( 'tf_filter_apartment_by_date' ) ) {
 												new DateInterval( 'P1D' ),
 												new DateTime( $booked_to . ' 23:59' )
 											);
-							
+
 											foreach ( $tfbookedperiod as $date ) {
 												$tf_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
 											}
 										}
-										foreach($avail_searching_date as $searching){
-											if (array_key_exists($searching, $tf_booked_dates)) {
+										foreach ( $avail_searching_date as $searching ) {
+											if ( array_key_exists( $searching, $tf_booked_dates ) ) {
 												$has_apartment = false;
 												break;
-											}else{
+											} else {
 												$has_apartment = true;
 											}
 										}
-									}else{
+									} else {
 										$has_apartment = true;
 									}
 
 								}
 							} else {
 								$tf_booked_dates = [];
-								if(!empty($booked_dates)){
+								if ( ! empty( $booked_dates ) ) {
 									foreach ( $booked_dates as $booked_date ) {
 										$booked_from = $booked_date['check_in'];
 										$booked_to   = $booked_date['check_out'];
@@ -1135,20 +1139,20 @@ if ( ! function_exists( 'tf_filter_apartment_by_date' ) ) {
 											new DateInterval( 'P1D' ),
 											new DateTime( $booked_to . ' 23:59' )
 										);
-						
+
 										foreach ( $tfbookedperiod as $date ) {
 											$tf_booked_dates[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
 										}
 									}
-									foreach($avail_searching_date as $searching){
-										if (array_key_exists($searching, $tf_booked_dates)) {
+									foreach ( $avail_searching_date as $searching ) {
+										if ( array_key_exists( $searching, $tf_booked_dates ) ) {
 											$has_apartment = false;
 											break;
-										}else{
+										} else {
 											$has_apartment = true;
 										}
 									}
-								}else{
+								} else {
 									$has_apartment = true;
 								}
 							}
@@ -1507,7 +1511,7 @@ if ( ! function_exists( 'tf_apartment_room_quick_view' ) ) {
                                 });
                             </script>
 						<?php else : ?>
-                            <img src="<?php echo esc_url( $room['thumbnail'] ) ?>" alt="room-thumbnail">
+                        <img src="<?php echo esc_url( $room['thumbnail'] ) ?>" alt="room-thumbnail">
 						<?php endif; ?>
                     </div>
                     <div class="tf-hotel-details-info" style="width:440px; padding-left: 35px;max-height: 470px;padding-top: 25px; overflow-y: auto;">

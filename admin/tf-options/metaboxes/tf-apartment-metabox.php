@@ -191,7 +191,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'subtitle'   => __( 'Select pricing type', 'tourfic' ),
 					'options'    => array(
 						'per_night'  => __( 'Per Night', 'tourfic' ),
-						'per_person' => __( 'Per Person', 'tourfic' ),
+						'per_person' => __( 'Per Person (pro)', 'tourfic' ),
 					),
 					'attributes' => array(
 						'class' => 'tf_apt_pricing_type',
@@ -206,7 +206,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'dependency' => array( 'pricing_type', '==', 'per_night' ),
 				),
 				array(
-					'id'          => 'adult_price',
+					'id'          => '',
 					'type'        => 'number',
 					'label'       => __( 'Adult Price', 'tourfic' ),
 					'subtitle'    => __( 'Enter adult price', 'tourfic' ),
@@ -215,7 +215,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
 				),
 				array(
-					'id'          => 'child_price',
+					'id'          => '',
 					'type'        => 'number',
 					'label'       => __( 'Child Price', 'tourfic' ),
 					'subtitle'    => __( 'Enter child price', 'tourfic' ),
@@ -224,7 +224,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'dependency'  => array( 'pricing_type', '==', 'per_person' ),
 				),
 				array(
-					'id'          => 'infant_price',
+					'id'          => '',
 					'type'        => 'number',
 					'label'       => __( 'Infant Price', 'tourfic' ),
 					'subtitle'    => __( 'Enter infant price', 'tourfic' ),
