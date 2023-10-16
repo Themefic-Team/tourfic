@@ -9418,7 +9418,6 @@ html {
   height: 37px;
   width: 70px;
   padding: 8px 20px 8px 13px;
-  background-image: url(http://127.0.0.1:5500/assets/image/select-arrow-dark.svg);
   background-size: 10px;
   background-position: 80% 49%;
   text-align: center;
@@ -9428,7 +9427,13 @@ html {
 }
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-purchase-summery {
   font-size: 12px;
+  display: flex;
 }
+.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-purchase-summery .price-per-night {
+  margin-left: 5px;
+}
+.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content button,
+.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.tf_air_service,
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.availability {
   color: #FDF9F3;
   font-size: 16px;
