@@ -232,12 +232,17 @@
                         <img src="./assets/image/filter.png" alt="">
                     </div>
                 </div>
-
+                
                 <!--Available rooms start -->
                 <div class="tf-available-rooms tf-rooms" id="rooms">
-                    
+                <!-- Loader Image -->
+                <div id="tour_room_details_loader">
+                    <div id="tour-room-details-loader-img">
+                        <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                    </div>
+                </div>
                 <?php if ( $rooms ) : ?>
-                <?php foreach ( $rooms as $key => $room ) {
+                <?php foreach ( $rooms as $room_id => $room ) {
                 $enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
                 if ( $enable == '1' ) {
                     $footage      = ! empty( $room['footage'] ) ? $room['footage'] : '';
@@ -368,7 +373,7 @@
                                 </div>
                                 <?php } ?>
                                 <?php if(2==$gallery_limit){ ?>                     
-                                <div class="tf-room-gallery tf-popup-buttons tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="background-image: url('<?php echo esc_url( $image_url ); ?>'); ">                                
+                                <div class="tf-room-gallery tf-popup-buttons tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $post_id; ?>" style="background-image: url('<?php echo esc_url( $image_url ); ?>'); ">                                
                                 <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g id="content">
                                     <path id="Rectangle 2111" d="M5.5 16.9745C5.6287 18.2829 5.91956 19.1636 6.57691 19.8209C7.75596 21 9.65362 21 13.4489 21C17.2442 21 19.1419 21 20.3209 19.8209C21.5 18.6419 21.5 16.7442 21.5 12.9489C21.5 9.15362 21.5 7.25596 20.3209 6.07691C19.6636 5.41956 18.7829 5.1287 17.4745 5" stroke="#FDF9F4" stroke-width="1.5"></path>
@@ -400,7 +405,7 @@
                                     <?php if ( $child_number ) { ?>
                                         <li><i class="fas fa-baby"></i><?php echo $child_number; ?><?php _e( ' Children', 'tourfic' ); ?></li>
                                     <?php } ?>
-                                    <li><a href="#" class="tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>"><?php _e("View room details", "tourfic"); ?></a></li>
+                                    <li><a href="#" class="tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $post_id; ?>"><?php _e("View room details", "tourfic"); ?></a></li>
                                     
                                 </ul>
                                 <h4><?php _e("Other benefits", "tourfic"); ?></h4>
@@ -431,7 +436,7 @@
                                     if(count($room['features']) >= 6){
                                     ?>
                                     
-                                    <li><a href="#" class="tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>"><?php _e("See all benefits", "tourfic"); ?></a></li>
+                                    <li><a href="#" class="tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $post_id; ?>"><?php _e("See all benefits", "tourfic"); ?></a></li>
                                     <?php
                                     }
                                 }
@@ -944,58 +949,7 @@
 
     <!-- Room PopUp Starts -->        
     <div class="tf-popup-wrapper tf-room-popup">
-        <div class="tf-popup-inner">
-            
-            <div class="tf-popup-body">
-                <div class="tf-popup-left">
-                    <img data-tags="common-areas" src="./assets/image/gallery-image-1.png" alt="" class="tf-popup-image">
-                    <img data-tags="rooms,dining" src="./assets/image/gallery-image-2.png" alt="" class="tf-popup-image">
-                    <img data-tags="common-areas" src="./assets/image/gallery-image-3.png" alt="" class="tf-popup-image">
-                    <img data-tags="rooms" src="./assets/image/gallery-image-4.png" alt="" class="tf-popup-image">
-                    <img data-tags="dining" src="./assets/image/gallery-image-5.png" alt="" class="tf-popup-image">
-                    <img data-tags="dining,rooms,common-areas" src="./assets/image/gallery-image-6.png" alt="" class="tf-popup-image">
-                    <img data-tags="pool" src="./assets/image/gallery-image-7-pool.jpg" alt="" class="tf-popup-image">
-                    <img data-tags="pool,rooms" src="./assets/image/gallery-image-8-pool.jpg" alt="" class="tf-popup-image">
-                </div>
-                <div class="tf-popup-right">
-                    <h4 class="tf-popup-info-title">Room details</h4>
-                    <ul>
-                        <li><i class="fas fa-ruler-combined"></i> 25 m2sft</li>
-                        <li><i class="fas fa-bed"></i> 2 Number of Beds</li>
-                        <li><i class="fab fa-creative-commons-zero"></i> Breakfast Included </li>
-                        <li><i class="fas fa-road"></i> Carpeted </li>
-                        <li><i class="fas fa-road"></i> Carpeted </li>
-                        <li><i class="fas fa-tshirt"></i> Clothes rack </li>
-                        <li><i class="fas fa-bed"></i> Double Bed </li>
-                        <li><a href="#">View room details</a></li>                            
-                    </ul> 
-                    <a class="tf-all-benefits" href="#">All benefits</a>   
-                    <h4 class="tf-popup-info-title"><i class="fa-solid fa-bed"></i> Bedroom</h4>
-                    <ul>
-                        <li>Linens</li>
-                        <li>Wardrobe or closet</li>
-                        <li>Air conditioning (climate-controlled)</li>
-                        <li>Blackout drapes/curtains </li>
-                        <li>Carpeted </li>
-                        <li>Down comforter</li>
-                        <li>Free cots/infant beds</li>                          
-                    </ul> 
-                    <h4 class="tf-popup-info-title"><i class="fa-solid fa-cookie-bite"></i> Food and drink</h4>
-                    <ul>
-                        <li>Linens</li>
-                        <li>Wardrobe or closet</li>
-                        <li>Air conditioning (climate-controlled)</li>
-                        <li>Blackout drapes/curtains </li>
-                        <li>Carpeted </li>
-                        <li>Down comforter</li>
-                        <li>Free cots/infant beds</li>                          
-                    </ul> 
-                </div>
-            </div>                
-            <div class="tf-popup-close">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
-        </div>
+        
     </div>
     <!-- Room PopUp end --> 
 

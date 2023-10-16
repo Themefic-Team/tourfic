@@ -2592,10 +2592,7 @@
             $(".tf-video-popup").addClass("tf-show")
         })
 
-        $(".tf-template-3 .tf-room-gallery.tf-popup-buttons").click(function(){
-            $(".tf-room-popup").addClass("tf-show")
-        })
-        $(".tf-template-3 .tf-popup-close").click(function(){
+        $(document).on('click', '.tf-template-3 .tf-popup-close', function () {
             $(".tf-popup-wrapper").removeClass("tf-show")
         });
 

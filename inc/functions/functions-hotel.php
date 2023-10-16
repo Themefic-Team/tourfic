@@ -3149,8 +3149,86 @@ function tf_hotel_quickview_callback() {
 		?>
     </div>
 	<?php
-	}
+	} if( $tf_hotel_selected_template == "design-2" ){ 
+		foreach ( $rooms as $key => $room ) :
+		
+		$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
+		if ( $enable == '1' && $room['unique_id'] . $key == $_POST['uniqid_id'] ) :
+			$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
+			$child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 
+			$footage      = ! empty( $room['footage'] ) ? $room['footage'] : '';
+			$bed          = ! empty( $room['bed'] ) ? $room['bed'] : '';
+			$adult_number = ! empty( $room['adult'] ) ? $room['adult'] : '0';
+			$child_number = ! empty( $room['child'] ) ? $room['child'] : '0';
+			
+			if ( $tf_room_gallery ) {
+				$tf_room_gallery_ids = explode( ',', $tf_room_gallery );
+			}
+		?>
+		<div class="tf-popup-inner">
+            
+            <div class="tf-popup-body">
+                <div class="tf-popup-left">
+					<?php 
+						if ( ! empty( $tf_room_gallery_ids ) ) {
+						foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
+						$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+					?>
+                    <img src="<?php echo esc_url($image_url); ?>" alt="<?php _e("Room Image","tourfic"); ?>" class="tf-popup-image">
+					<?php } } ?>
+                </div>
+                <div class="tf-popup-right">
+                    <h4 class="tf-popup-info-title">Room details</h4>
+                    <ul>
+						<?php if ( $footage ) { ?>
+							<li><i class="fas fa-ruler-combined"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
+						<?php } ?>
+						<?php if ( $bed ) { ?>
+							<li><i class="fas fa-bed"></i> <?php echo $bed; ?><?php _e( ' Number of Beds', 'tourfic' ); ?></li>
+						<?php } ?>
+						<?php if ( $adult_number ) { ?>
+							<li><i class="fas fa-male"></i><i
+							class="fas fa-female"></i> <?php echo $adult_number; ?><?php _e( ' Adults', 'tourfic' ); ?></li>
+						<?php } ?>
+						<?php if ( $child_number ) { ?>
+							<li><i class="fas fa-baby"></i><?php echo $child_number; ?><?php _e( ' Children', 'tourfic' ); ?></li>
+						<?php } ?>                        
+                    </ul> 
+					  
+                    <h4 class="tf-popup-info-title">Other benefits</h4>
+                    <ul>
+						<?php 
+						if( !empty($room['features']) ){
+						foreach ( $room['features'] as $feature ) {
+						$room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
+						if ( ! empty( $room_f_meta ) ) {
+							$room_icon_type = ! empty( $room_f_meta['icon-type'] ) ? $room_f_meta['icon-type'] : '';
+						}
+						if ( ! empty( $room_icon_type ) && $room_icon_type == 'fa' && !empty($room_f_meta['icon-fa']) ) {
+							$room_feature_icon = '<i class="' . $room_f_meta['icon-fa'] . '"></i>';
+						} elseif ( ! empty( $room_icon_type ) && $room_icon_type == 'c' && ! empty( $room_f_meta['icon-c'] )) {
+							$room_feature_icon = '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />';
+						}
+
+						$room_term = get_term( $feature ); ?>
+						<li>
+							<?php echo ! empty( $room_feature_icon ) ? $room_feature_icon : ''; ?>
+							<?php echo $room_term->name; ?>
+						</li>
+						<?php } } ?>
+						                       
+                    </ul>
+                </div>
+            </div>                
+            <div class="tf-popup-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+	<?php
+	endif;
+	endforeach;
+	}
 	wp_die();
 }
 

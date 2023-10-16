@@ -54,6 +54,7 @@
                 data: data,
                 success: function (response) {
                     $(".tf-room-popup").html(response);
+                    $(".tf-room-popup").addClass("tf-show")
                     $("#tour_room_details_loader").hide();
                     
                 }
