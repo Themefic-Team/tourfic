@@ -2587,11 +2587,7 @@
         $(".tf-template-3 .tf-hero-hotel.tf-popup-buttons").click(function(){
             $(".tf-hotel-popup").addClass("tf-show")
         });
-
-        $(".tf-template-3 .tf-hero-video.tf-popup-buttons").click(function(){
-            $(".tf-video-popup").addClass("tf-show")
-        })
-
+        
         $(document).on('click', '.tf-template-3 .tf-popup-close', function () {
             $(".tf-popup-wrapper").removeClass("tf-show")
         });

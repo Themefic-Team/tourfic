@@ -108,7 +108,7 @@
                     $hotel_video = ! empty( $meta['video'] ) ? $meta['video'] : '';
                     if ( !empty($hotel_video) ) { ?>
                     <div class="tf-hero-video tf-popup-buttons">
-                        <a href="#">
+                        <a class="tf-tour-video" id="featured-video" href="<?php echo esc_url($hotel_video); ?>" data-fancybox="tour-video" >
                             <svg width="23" height="18" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="content">
                             <path id="Vector 3570" d="M10.5 5L12.5 5" stroke="#FDF9F4" stroke-width="1.5" stroke-linecap="round"/>
@@ -925,25 +925,6 @@
         </div>
     </div>
     <!-- Hotel PopUp end -->  
-    <?php } ?>
-
-    <?php 
-    if ( !empty($hotel_video) ) { ?>
-    <!-- Video PopUp Starts -->        
-    <div class="tf-popup-wrapper tf-video-popup">
-        <div class="tf-popup-inner">
-            
-            <div class="tf-popup-body">                   
-                <div class="tf-popup-video-item">
-                    <iframe src="<?php echo esc_url($hotel_video); ?>"></iframe>
-                </div>                 
-            </div>                
-            <div class="tf-popup-close">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
-        </div>
-    </div>
-    <!-- Video PopUp end --> 
     <?php } ?>
 
 
