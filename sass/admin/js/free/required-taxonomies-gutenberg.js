@@ -1,5 +1,7 @@
 const {select, dispatch} = wp.data;
 
+//required taxonomies
+
 function TfPrePublishCheck() {
     let lockPost = false;
     tf_admin_params.error = false;
@@ -34,6 +36,7 @@ function TfPrePublishCheck() {
     } else {
         dispatch('core/editor').unlockPostSaving();
     }
+
 }
 
 TfPrePublishCheck();

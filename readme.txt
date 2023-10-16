@@ -1,9 +1,9 @@
-=== Tourfic - Ultimate Hotel & Travel Booking WordPress Plugin | WooCommerce Booking ===
+=== Tourfic – Ultimate Hotel Booking & Travel Booking WordPress Plugin | WooCommerce Booking ===
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, codexa, hasanet
 Tags: tour-booking, tour-operator, travel, travel-booking, tour, travel-agency, hotel-booking, reservation, hotel, apartments, villa, hostel, wp-travel-engine, wp-travel, wp-hotel-booking, wp-tour-plugin, booking.com, agoda.com, airbnb, travel-itinerary, woocommerce-accommodation-bookings
 Requires at least: 5.4
-Tested up to: 6.2
-Stable tag: 2.9.17
+Tested up to: 6.3
+Stable tag: 2.10.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -75,8 +75,42 @@ This All-in-One Travel Booking WordPress plugin consists of almost all the basic
 * Dynamic Location Search based on OpenStreetMap on Option Panel  (Pro)
 * Dynamic Location Search based on Google Maps on Option Panel  (Pro)
 
+= 🎉  WordPress Apartment Booking & Management System =
+* Add Unlimited Apartment
+* Apartment Photo Gallery
+* Apartment Set tour as featured
+* Location and Dynamic Location Search ( OpenStreetMap, Google map(Pro) )
+* Apartment Booking Management
+* Booking per night pricing, Minimum Night Stay
+* Apartment Pricing for Adults, Children, and Infant
+* Additional Fee
+* Discount Type( Fixed, Percentage )
+* Apartment Room management 
+* Apartment Highlights section
+* Apartment Amenities section
+* Apartment House Rules section
+* Apartment Frequently Asked Questions
+* Apartment Terms & Conditions
+* Apartment Enquiry Section
+* Apartment Related Apartment
+* Dedicated Customer Review System (See Review section for breakdown)
+* Wishlist for Apartment
+* Apartment Specific Room Person Management( Pro )
+* Apartment Specific Room gallery( Pro ) 
+* Apartment Specific Room Type( Pro ) 
+* Apartment Specific Room Type( Pro )
+* Property Surroundings( Pro )
+
+= 🎉 Backend/Admin booking( Pro ) =
+* Backend/Admin booking for Hotel 
+* Backend/Admin booking for Tour
+
+= 🎉 External Booking( Pro ) =
+* External Booking for Tour
+* External Booking for Hotel
+
 = 🎉  Multi-Vendor Functions (Pro) =
-* Vendors can add unlimited hotels and tours with all the fields (Pro)
+* Vendors can add unlimited hotels, tours, and apartments with all the fields (Pro)
 * Vendors have dedicated order details pages (Pro)
 * Dedicated login and registration system for vendors (Pro)
 * Enable/disable specific vendors (Pro)
@@ -224,7 +258,7 @@ Tourfic has a lot of built-in Shortcodes to make your life easy.
 <hr>
 
 <h4>Tour Destinations Shortcode:</h4>
-<p>Show tour destinations with thumbnail and hotel count.</p>
+<p>Show tour destinations with thumbnails and hotel count.</p>
 <pre>[tour_destinations]</pre>
 <strong>Attributes:</strong>
 <ul>
@@ -408,6 +442,122 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 20. Our Support Channels
 
 == Changelog ==
+
+= 2.10.1 -  26 September 2023 =
+
+- Update: readme.txt
+
+= 2.10.0 -  25 September 2023 =
+
+- Added: Apartment Booking feature.
+- Added: Hotel, Tour, Apartment type Taxonomy.
+- Added: Hotel and tour type filter widget.
+- Added: Hotel and tour Backend/Admin booking add( Pro ).
+- Added: Hotel and tour External Booking( Pro ).
+- Added: Without payment option in the tour( Pro ).
+- Added: Date format settings.
+- Fixed: Settings page saving issue.
+- Fixed: Tour single responsive issue.
+- Fixed: Map issue
+- Improvement: Tour start price hide option added to tourfic settings.
+- Updated: Appsero updated Version 1.2.4
+
+= 2.9.28 -  20 August 2023 =
+
+- Fixed: Vendor login issue ( Pro )
+- Fixed: Vendor page setup ( Pro )
+- Updated: Remix library
+- Fixed: Compatible with "The Plus Addons for Elementor"
+
+= 2.9.27 -  17 August 2023 =
+
+- Fixed: Hotel disabled date issue 
+- Fixed: Compatible with "Smash Balloon Instagram Feed"
+
+= 2.9.26 -  14 August 2023 =
+
+- Added: Frontend Dashboard for admin, vendor, and manager
+- Added: Vendor management for admin and manager in Frontend Dashboard
+- Added: Login & Register settings added in tourfic settings
+- Added: Manager role add
+- Added: User role permission add
+- Fixed: Custom vendor registration fields name issue fix
+- Fixed: Email verification url issue fix
+- Fixed: Email verification broken layout issue fix
+- Fixed: Issue with disabled date
+- Fixed: Featured Hotel & Tour badge issue fix
+- Fixed: Design issue fix
+- Fixed: Tab issue in settings panel fixing
+- Fixed: Vendor earning fix in the vendor list
+- Fixed: Vendor payout float price issue fix
+- Update: Login & Register settings moved to tourfic settings
+- Update: Remix icon update
+- Improved: Login & Register page design update
+- Improved: Login & Register page create automatically
+- Improved: Hotel & Tour Rest API enable
+
+= 2.9.25 -  10 August 2023 =
+
+- Compatibility check with WordPress 6.3
+- Compatibility check with WooCommerce 8.0.1
+- Compatibility check with Elementor 3.15.2
+
+= 2.9.24 -  04 August 2023 =
+
+* Improvement: Preloader updated
+* Improvement: Booking form background added
+* Fixed: Color picker source issue fixed
+* Compatibility: Elementor 3.15.1
+
+= 2.9.23 -  23 July 2023 =
+
+* Fixed: Map issue for tour itinerary 
+* Compatibility: WooCommerce 7.9.0
+* Compatibility: Elementor 3.14.1
+
+= 2.9.22 -  20 July 2023 =
+
+* Added: Openstreetmap added to frontend
+* Added: New template section dynamic
+* Fixed: Body Google Fonts Issue
+* Fixed: Per Day booking price
+
+= 2.9.21 -  22 June 2023 =
+
+* Removed: Default Data 
+* Improved: Design
+
+= 2.9.20 -  20 June 2023 =
+
+* Added: Hotel single page new template
+* Added: Hotel Archive page new template
+* Added: Hotel Search page new template
+* Added: Tour single page new template
+* Added: Tour Archive page new template
+* Added: Tour Search page new template
+* Added: Tour Inventory 
+* Added: Dynamic pricing in tour extra
+* Checked: WooCommerce compatibility check 
+* Checked: Elementor compatibility check 
+
+= 2.9.19 -  07 June 2023 =
+
+* Added: Booking details export ( Pro )
+* Added: Enquiry details export ( Pro )
+* Added: Pre Build Email template set to default ( Pro )
+* Added: Tour QR Code Integration (Pro)
+* Fixed: Archive page pagination issue (Free)
+* Fixed: Email sending issue fixed ( Free and Pro )
+
+= 2.9.18 -  24 May 2023 =
+
+* Added: Email Templates for Admin ( Pro )
+* Added: Email Templates for Vendors ( Pro )
+* Added: Email Templates for Customers ( Pro )
+* Fixed: Vendor Commission issue
+* Compatibility: WordPress 6.2.2
+* Compatibility: WooCommerce 7.7.0
+* Compatibility: Elementor 3.13.3
 
 = 2.9.17 -  09 May 2023 =
 
@@ -777,7 +927,7 @@ Added: Feature image required hotel and tours
 * Fixed: Hotel booking calendar minimum date set to today date
 * Fixed: Tour and hotel permalink structure
 * Fixed: Tour and hotel's terms and conditions auto paragraph issue
-* Fixed: Compatible issue with Twenty Twenty Two theme
+* Fixed: Compatible issue with Twenty Twenty-Two theme
 * Fixed: PHP variable error while booking through WooCommerce
 * Removed: Hotel gallery thumbnails
 
@@ -836,7 +986,7 @@ Added: Feature image required hotel and tours
 = 2.0.1 - 7/1/2022 =
 
 * Updated Preview URL
-* WordPress 5.8.3 Compatiblity Check
+* WordPress 5.8.3 Compatibility Check
 * Fixed a Div Bug
 
 = 2.0.0 - 4/1/2022 =
@@ -846,7 +996,7 @@ Added: Feature image required hotel and tours
 * Added Tour Booking
 * Added tour in the search box
 * Modified Searchbox shortcode
-* Fixed Hotel single page layout
+* Fixed Hotel single-page layout
 
 = 1.7.3 - 18/12/2021 =
 
@@ -870,7 +1020,7 @@ Added: Feature image required hotel and tours
 = 1.1.6 - 15/08/2021 =
 
 - Compress file size
-- Optimized redux framwork
+- Optimized redux framework
 - Elementor Pro conflict issue fixed
 
 = 1.1.5 - 15/08/2021 =
@@ -879,15 +1029,15 @@ Added: Feature image required hotel and tours
 
 = 1.1.4 - 23/07/2021 =
 
-- WordPress 5.8 Compatiblity Check
-- WooCommerce 5.5.1 Compatiblity Check
+- WordPress 5.8 Compatibility Check
+- WooCommerce 5.5.1 Compatibility Check
 
 = 1.1.3 - 27/06/2021 =
 
-- Elementor compatibilty check
-- Elementor tour slider extention added
-- Elementor destination extention added
-- Elementor search extention added
+- Elementor compatibility check
+- Elementor tour slider extension added
+- Elementor destination extension added
+- Elementor search extension added
 
 = 1.1.2 - 27/06/2021 =
 
@@ -898,15 +1048,15 @@ Added: Feature image required hotel and tours
 = 1.1.1 - 16/06/2021 =
 
 - Lightbox issue Fixed on Single Tour Gallery
-- Elementor Compatiblity Check
+- Elementor Compatibility Check
 - Slick Slider Margin Issue Fixed on Single Tour Gallery
-- Astra theme Compatiblity Check
+- Astra theme Compatibility Check
 
 
 = 1.1.0 - 15/06/2021 =
 
 - Added Lightbox on Single Tour Gallery
-- WooCommerce 5.4.1 Compatiblity Check
+- WooCommerce 5.4.1 Compatibility Check
 
 = 1.0.46 - 27/04/2021 =
 
@@ -927,11 +1077,11 @@ Added: Feature image required hotel and tours
 
 = 1.0.42 - 15/04/2021 =
 
-- WordPress 5.7.1 Compatiblity Check
-- WooCommerce 5.2.1 Compatiblity Check
-- Added Autocomplete on search bar
+- WordPress 5.7.1 Compatibility Check
+- WooCommerce 5.2.1 Compatibility Check
+- Added Autocomplete on the search bar
 - Fixed Search bar responsive issues
-- Fixed Checkin-Checkout Date issue
+- Fixed Checkin-Checkout Date issues
 
 = 1.0.0 - 23/03/2021 =
 
@@ -939,6 +1089,6 @@ Added: Feature image required hotel and tours
 
 == Upgrade Notice ==
 
-= 2.9.5 =
+= 2.9.20 =
 
-This is an important & critical release. Please make sure you BACKUP your website before updating. You need to update the plugin to get next level updates & features of Tourfic. After you update the plugin, please go to "Tourfic Settings" and click the "Save Button". You can then go ahead and start editing.As a complete revamp of assets  has been done in this version so please BACKUP your both database and old version of Tourfic.
+This is an important & critical release. Please make sure you BACKUP your website before updating. You need to update the plugin to get next-level updates & features of Tourfic. You can then go ahead and start editing. We releasing a new template for tours and hotel single-page, archive pages. You might face some adjustment issues in your existing single and archive page designs. Please go to the settings panel and adjust your font family, font size, line height, and color after the update. 

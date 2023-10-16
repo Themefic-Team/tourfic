@@ -185,7 +185,7 @@ Custom Modal
 Ajax Loader
 */
 .tf-btn-loading {
-  padding-right: 40px;
+  padding-right: 40px !important;
   position: relative;
 }
 
@@ -281,6 +281,90 @@ Fontawesome
   height: 400px;
 }
 
+/* admin switcher */
+.tf-booking-status-swt .tf-booking-status {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+.tf-booking-status-swt .tf-booking-status span {
+  font-weight: 700;
+  font-size: 15px;
+}
+.tf-booking-status-swt .tf-booking-status .switch {
+  margin-left: 15px;
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 20px;
+}
+.tf-booking-status-swt .tf-booking-status .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.tf-booking-status-swt .tf-booking-status .switcher.round {
+  border-radius: 20px;
+}
+.tf-booking-status-swt .tf-booking-status .switcher {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+}
+
+.tf-booking-status-swt .switcher.round::before {
+  border-radius: 50%;
+}
+
+.tf-booking-status-swt .switcher::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 2px;
+  bottom: 1px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.tf-booking-status-swt input:checked + .switcher {
+  background-color: #002C66;
+}
+
+.tf-booking-status-swt input:checked + .switcher::before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+#tf-booking-status-loader {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+}
+#tf-booking-status-loader img {
+  width: 120px;
+}
+
+#tf-booking-status-loader.show {
+  visibility: visible;
+  opacity: 1;
+}
+
 .tf-post-states {
   display: inline-block;
   font-size: 11px;
@@ -352,6 +436,10 @@ Fontawesome
   display: none;
 }
 .room-repeater .tf-order_id {
+  display: none;
+}
+
+.tf-section-name-hidden {
   display: none;
 }
 
@@ -1062,6 +1150,20 @@ Steps
     transform: rotate(360deg);
   }
 }
+.tf-setup-step-container .tf-template-step .tf-hotel-setup-wizard ul,
+.tf-setup-step-container .tf-template-step .tf-tour-setup-wizard ul {
+  margin-bottom: 0px;
+}
+.tf-setup-step-container .tf-template-step .tf-hotel-setup-wizard .tf-field-imageselect .tf-image-checkbox img,
+.tf-setup-step-container .tf-template-step .tf-tour-setup-wizard .tf-field-imageselect .tf-image-checkbox img {
+  width: 200px;
+  height: 140px;
+}
+.tf-setup-step-container .tf-template-step .tf-hotel-setup-wizard .tf-field-imageselect .tf-image-checkbox > input:checked + img,
+.tf-setup-step-container .tf-template-step .tf-tour-setup-wizard .tf-field-imageselect .tf-image-checkbox > input:checked + img {
+  border-color: #5D5DFF;
+  border-radius: 5px;
+}
 
 @media only screen and (max-width: 991.98px) {
   #tf_tours_opt .tf-admin-meta-box {
@@ -1391,7 +1493,7 @@ Steps
   background-color: transparent;
   padding: 30px 100px;
   border-radius: 10px;
-  margin: 40px 40px 40px 20px;
+  margin: 40px 20px 40px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1447,7 +1549,7 @@ Steps
   width: 100%;
 }
 .tf-setting-dashboard .tf-setting-performace-section {
-  margin: 40px 40px 40px 20px;
+  margin: 40px 20px 40px 0;
   position: relative;
 }
 .tf-setting-dashboard .tf-setting-performace-section h2 {
@@ -1473,11 +1575,11 @@ Steps
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 15px;
-  width: 21%;
+  width: 16.5%;
 }
-@media only screen and (max-width: 1366px) {
+@media only screen and (max-width: 1650px) {
   .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid {
-    width: 20%;
+    padding: 12px;
   }
 }
 @media only screen and (max-width: 1199.98px) {
@@ -1499,12 +1601,21 @@ Steps
   border-radius: 50%;
   flex-shrink: 0;
 }
+.tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-icon img {
+  width: 100%;
+}
+@media only screen and (max-width: 1650px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-icon {
+    width: 42px;
+    height: 42px;
+  }
+}
 .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content {
   padding-left: 25px;
 }
-@media only screen and (max-width: 1366px) {
+@media only screen and (max-width: 1650px) {
   .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content {
-    padding-left: 15px;
+    padding-left: 10px;
   }
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content p {
@@ -1513,12 +1624,22 @@ Steps
   color: #222;
   margin: 0 0 10px;
 }
+@media only screen and (max-width: 1650px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content p {
+    font-size: 14px;
+  }
+}
 .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content h3 {
   margin: 0;
   font-size: 30px;
   font-weight: 700;
   color: #000;
   line-height: 0.8;
+}
+@media only screen and (max-width: 1650px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content h3 {
+    font-size: 24px;
+  }
 }
 .tf-setting-dashboard .tf-setting-performace-section #tf-report-loader {
   position: absolute;
@@ -1556,6 +1677,7 @@ Steps
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-month-filter {
   margin-bottom: 15px;
+  display: inline-block;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-month-filter span {
   display: block;
@@ -1576,7 +1698,7 @@ Steps
 .tf-settings-help-center .tf-help-center-banner {
   background-color: #fff;
   border-radius: 10px;
-  margin: 40px 40px 40px 20px;
+  margin: 40px 20px 40px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1639,7 +1761,7 @@ Steps
   position: relative;
 }
 .tf-settings-help-center .tf-support-document {
-  margin: 40px 40px 40px 20px;
+  margin: 40px 20px 40px 0;
   display: flex;
   justify-content: space-between;
 }
@@ -2050,6 +2172,9 @@ Steps
   font-size: 14px;
   margin-top: 10px;
 }
+.tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-tab-content > .tf-field.tf-field-heading {
+  border-radius: 0px;
+}
 .tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-tab-content > .tf-field.tf-field-color {
   background-color: transparent;
   padding: 0px;
@@ -2305,6 +2430,10 @@ Steps
   padding: 12px 0;
 }
 
+.tf-inline-list {
+  display: inline-block;
+}
+
 .tf-field-text input {
   width: 100%;
   padding: 12px 8px 12px 12px;
@@ -2340,6 +2469,14 @@ Steps
 .tf-field-text input::placeholder {
   color: #a6b1bf;
 }
+.tf-field-text input:read-only {
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  background-color: #ebf2ff;
+}
+.tf-field-text input:read-only:focus {
+  box-shadow: none;
+  border: 1px solid #c4cbd4;
+}
 
 .tf-field-textarea textarea {
   width: 100% !important;
@@ -2360,6 +2497,7 @@ Steps
 
 .tf-field-select select.tf-select {
   width: 100%;
+  max-width: 100%;
   padding: 12px 8px 12px 12px;
   border: 1px solid #c4cbd4;
   background-color: #f5f8ff;
@@ -3512,6 +3650,86 @@ textarea.tf-exp-imp-field {
 
 a.tf-import-btn, a.tf-export-btn {
   margin: 14px 0px !important;
+}
+.tf-image-radio-group {
+  display: flex;
+  align-items: initial;
+}
+.tf-image-radio-group li {
+  display: inline-block;
+  margin-right: 20px;
+  cursor: n-resize;
+  border-radius: 5px;
+}
+.tf-image-radio-group li .tf-image-checkbox img {
+  width: 240px;
+  object-fit: cover;
+  object-position: top;
+  height: 180px;
+  transition: object-position 2s ease-in-out, border-color 0.3s ease-in-out;
+}
+.tf-image-radio-group li .tf-image-checkbox img:hover {
+  object-position: bottom;
+}
+.tf-image-radio-group li .tf-image-checkbox > input {
+  display: none;
+}
+.tf-image-radio-group li .tf-image-checkbox > img {
+  cursor: pointer;
+  border: 3px solid transparent;
+}
+.tf-image-radio-group li .tf-image-checkbox > input:checked + img {
+  border-color: #607085;
+  border-radius: 5px;
+}
+
+.tf-backend-tour-booking h1,
+.tf-backend-hotel-booking h1 {
+  font-size: 24px;
+  line-height: 28px;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+
+.tf-backend-booking-card-wrap {
+  background: #fff;
+  margin-right: 20px;
+  border-radius: 6px;
+  margin-bottom: 30px;
+}
+.tf-backend-booking-card-wrap h3.tf-backend-booking-card-title {
+  margin: 0;
+  padding: 15px 24px;
+  background-color: #003c7a;
+  color: #fff;
+  border-radius: 6px 6px 0 0;
+}
+
+.tf-booking-fields-wrapper {
+  padding: 10px 24px 20px;
+}
+.tf-booking-fields-wrapper .tf-booking-fields {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.tf-booking-fields-wrapper .tf-booking-fields .tf-fieldset .error-input {
+  border-color: #b30000;
+}
+.tf-booking-fields-wrapper .tf-booking-fields .tf-fieldset .text-danger {
+  color: #b30000;
+}
+
+.tf-backend-booking-footer {
+  margin-right: 20px;
+  text-align: right;
 }
 
 /*# sourceMappingURL=tourfic-admin.css.map */

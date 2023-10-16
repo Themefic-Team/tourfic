@@ -6,24 +6,32 @@ defined( 'ABSPATH' ) || exit;
  * Require some taxonomies
  *
  * hotel_location, tour_destination
+ *
+ * @since 1.0.0
  */
 function tf_required_taxonomies( $hook ) {
 	if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ) ) ) {
 		return;
 	}
+
 	global $post_type;
 
 	$tf_is_gutenberg_active = tf_is_gutenberg_active();
 
 	$default_post_types = array(
-		'tf_hotel' => array(
+		'tf_hotel'     => array(
 			'hotel_location' => array(
 				'message' => __( 'Please select a location before publishing this hotel', 'tourfic' )
 			)
 		),
-		'tf_tours' => array(
+		'tf_tours'     => array(
 			'tour_destination' => array(
 				'message' => __( 'Please select a destination before publishing this tour', 'tourfic' )
+			)
+		),
+		'tf_apartment' => array(
+			'apartment_location' => array(
+				'message' => __( 'Please select a location before publishing this apartment', 'tourfic' )
 			)
 		)
 	);
@@ -92,25 +100,27 @@ function tf_required_taxonomies( $hook ) {
 	}
 
 	wp_localize_script( 'tf-admin', 'tf_admin_params', array(
-			'taxonomies'                   => $post_types[ $post_type ],
-			'error'                        => false,
-			'tf_nonce'                     => wp_create_nonce( 'updates' ),
-			'ajax_url'                     => admin_url( 'admin-ajax.php' ),
-			'deleting_old_review_fields'   => __( 'Deleting old review fields...', 'tourfic' ),
-			'deleting_room_order_ids'      => __( 'Deleting order ids...', 'tourfic' ),
-			'tour_location_required'       => __( 'Tour Location is a required field!', 'tourfic' ),
-			'hotel_location_required'      => __( 'Hotel Location is a required field!', 'tourfic' ),
-			'tour_feature_image_required'  => __( 'Tour image is a required!', 'tourfic' ),
-			'hotel_feature_image_required' => __( 'Hotel image is a required!', 'tourfic' ),
-			'installing'                   => __( 'Installing...', 'tourfic' ),
-			'activating'                   => __( 'Activating...', 'tourfic' ),
-			'installed'                    => __( 'Installed', 'tourfic' ),
-			'activated'                    => __( 'Activated', 'tourfic' ),
-			'install_failed'               => __( 'Install failed', 'tourfic' ),
-			'i18n'                         => array(
-				'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
-			)
-		) );
+		'taxonomies'                       => $post_types[ $post_type ],
+		'error'                            => false,
+		'tf_nonce'                         => wp_create_nonce( 'updates' ),
+		'ajax_url'                         => admin_url( 'admin-ajax.php' ),
+		'deleting_old_review_fields'       => __( 'Deleting old review fields...', 'tourfic' ),
+		'deleting_room_order_ids'          => __( 'Deleting order ids...', 'tourfic' ),
+		'tour_location_required'           => __( 'Tour Location is a required field!', 'tourfic' ),
+		'hotel_location_required'          => __( 'Hotel Location is a required field!', 'tourfic' ),
+		'apartment_location_required'      => __( 'Apartment Location is a required field!', 'tourfic' ),
+		'tour_feature_image_required'      => __( 'Tour image is a required!', 'tourfic' ),
+		'hotel_feature_image_required'     => __( 'Hotel image is a required!', 'tourfic' ),
+		'apartment_feature_image_required' => __( 'Apartment image is a required!', 'tourfic' ),
+		'installing'                       => __( 'Installing...', 'tourfic' ),
+		'activating'                       => __( 'Activating...', 'tourfic' ),
+		'installed'                        => __( 'Installed', 'tourfic' ),
+		'activated'                        => __( 'Activated', 'tourfic' ),
+		'install_failed'                   => __( 'Install failed', 'tourfic' ),
+		'i18n'                             => array(
+			'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
+		)
+	) );
 
 }
 
@@ -163,7 +173,7 @@ function tf_dashboard_header() {
         </div>
         <div class="other-document">
             <svg width="26" height="25" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg"
-                 style="color: #003c79;background: ;">
+                 style="color: #003c79;">
                 <path d="M19.2106 0H6.57897C2.7895 0 0.263184 2.52632 0.263184 6.31579V13.8947C0.263184 17.6842 2.7895 20.2105 6.57897 20.2105V22.9011C6.57897 23.9116 7.70318 24.5179 8.53687 23.9495L14.1579 20.2105H19.2106C23 20.2105 25.5263 17.6842 25.5263 13.8947V6.31579C25.5263 2.52632 23 0 19.2106 0ZM12.8948 15.3726C12.3642 15.3726 11.9474 14.9432 11.9474 14.4253C11.9474 13.9074 12.3642 13.4779 12.8948 13.4779C13.4253 13.4779 13.8421 13.9074 13.8421 14.4253C13.8421 14.9432 13.4253 15.3726 12.8948 15.3726ZM14.4863 10.1305C13.9937 10.4589 13.8421 10.6737 13.8421 11.0274V11.2926C13.8421 11.8105 13.4127 12.24 12.8948 12.24C12.3769 12.24 11.9474 11.8105 11.9474 11.2926V11.0274C11.9474 9.56211 13.0211 8.84211 13.4253 8.56421C13.8927 8.24842 14.0442 8.03368 14.0442 7.70526C14.0442 7.07368 13.5263 6.55579 12.8948 6.55579C12.2632 6.55579 11.7453 7.07368 11.7453 7.70526C11.7453 8.22316 11.3158 8.65263 10.7979 8.65263C10.28 8.65263 9.85055 8.22316 9.85055 7.70526C9.85055 6.02526 11.2148 4.66105 12.8948 4.66105C14.5748 4.66105 15.939 6.02526 15.939 7.70526C15.939 9.14526 14.8779 9.86526 14.4863 10.1305Z"
                       fill="#003c79"></path>
             </svg>
@@ -202,5 +212,3 @@ function tf_dashboard_header() {
     <!-- deshboard-top-section -->
 	<?php
 }
-
-?>

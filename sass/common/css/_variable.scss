@@ -221,3 +221,49 @@ $max575: "only screen and (max-width: 575.98px)";
 $max480: "only screen and (max-width: 480px)";
 $max375: "only screen and (max-width: 375px)";
 $max320: "only screen and (max-width: 320px)";
+
+
+// Template Responsive
+$tfmax360: "only screen and (min-width: 320px) and (max-width:360px)";
+$tfmax767: "only screen and (max-width: 767.98px)";
+$tfmax991: "only screen and (min-width: 767.99px) and (max-width: 991px)"; // 767 to 991
+
+// Templates Variables
+//Fonts
+$font-primary: 'Jost', sans-serif;
+$font-secondary: 'Ubuntu', sans-serif;
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+$font-size-large: 30px;
+$font-size-medium: 24px;
+$font-size-normal: 16px;
+$font-size-small: 14px;
+$font-size-xs: 12px;
+
+
+//colors
+$color-primary: #686E7A;
+$color-theme: #0E3DD8;
+$color-theme-light: #E3E7F2;
+$color-gray-light: #F3F7FA;
+$color-black: #060D1C;
+$color-black-light: #060D1C;
+$color-bdr: #E3E6F0;
+$color-bg-light: #ECF2FF;
+$color-hover-normal: #deddeb;
+$color-hover-primary: #0e2e96;
+$color-hover-secondary: #bbc4dd;
+
+//Spacing
+$tf-space-4: 4px;
+$tf-space-8: 8px;
+$tf-space-12: 12px;
+$tf-space-16: 16px;
+$tf-space-24: 24px;
+$tf-space-30: 30px;
+
+//Border
+$tf-brds-default: 5px;
+$box-shadow-primary: 0px 13px 30px #E0E8EE;

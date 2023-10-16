@@ -1,0 +1,207 @@
+.tf-reg-wrap {
+    width: 536px;
+    max-width: 100%;
+    background: #F7F9FC;
+    box-shadow: 0px 4px 40px rgba(24, 49, 83, 0.02);
+    border-radius: 16px;
+    padding: 56px;
+    margin: 0 auto;
+
+    @media #{$max575} {
+        padding: 30px;
+    }
+
+    h3{
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 38px;
+        color: #002043;
+    }
+
+    .fancybox-close-small {
+        background: transparent !important;
+        color: #333 !important;
+    }
+
+    .tf-reg-response {
+        font-size: 16px;
+        font-weight: normal;
+        line-height: 1;
+
+        .tf_errors {
+            background: #b30000;
+            margin: 0 0 5px 0;
+            padding: 7px 10px 7px 10px;
+            border-radius: 2px;
+            color: #fff;
+
+            &:last-child{
+                margin-bottom: 15px;
+            }
+        }
+
+        .tf_success {
+            background: #008000;
+            margin: 0 0 5px 0;
+            padding: 7px 10px 7px 10px;
+            border-radius: 2px;
+            color: #fff;
+            line-height: 22px;
+
+
+            &:last-child{
+                margin-bottom: 15px;
+            }
+        }
+    }
+
+    .tf-login-response {
+        font-size: 16px;
+        font-weight: normal;
+        line-height: 1;
+        margin: 0 0 20px 0;
+
+        .tf_errors {
+            background: #b30000;
+            margin: 0 0 5px 0;
+            padding: 7px 10px 7px 10px;
+            border-radius: 2px;
+            color: #fff;
+        }
+
+        .tf_success {
+            background: #008000;
+            margin: 0 0 5px 0;
+            padding: 7px 10px 7px 10px;
+            border-radius: 2px;
+            color: #fff;
+        }
+    }
+
+    .tf-reg-field {
+        margin: 0 0 25px 0;
+        padding: 0;
+
+        label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #828C99;
+            display: block;
+            padding: 0 0 0 0;
+            margin: 0 0 5px 0;
+            line-height: 1;
+        }
+
+        .tf-radio {
+            label {
+                margin: 0 20px 0 5px;
+                line-height: 18px;
+                font-weight: normal;
+            }
+
+            display: flex;
+        }
+
+        select,
+        textarea,
+        input {
+            outline: none;
+            background: #F2F4F5;
+            border: 1px solid #828C99;
+            box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+            border-radius: 8px;
+            line-height: 1;
+            vertical-align: middle;
+            padding: 14px 14px;
+            margin: 0;
+            width: 100%;
+
+            &.error-input{
+                border-color: #b30000;
+            }
+        }
+
+        textarea{
+            height: 150px;
+        }
+
+        input[type="radio"] {
+            width: 19px;
+            min-width: 19px;
+            height: 19px;
+            line-height: 19px;
+            border-radius: 50%;
+            border: 1px solid #c8e2fc;
+            outline: none;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"] {
+            width: 19px;
+            min-width: 19px;
+            height: 19px;
+            line-height: 19px;
+            border-radius: 2px;
+            border: 1px solid #c8e2fc;
+            outline: none;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .text-danger{
+            color: #b30000;
+        }
+    }
+
+    .tf-submit {
+        border: 1px solid #003162;
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+        color: #fff;
+        cursor: pointer;
+        text-decoration: none;
+        background: #003162;
+        padding: 10px 18px;
+        @include transition();
+
+        &:hover {
+            background: #0054a8;
+        }
+        &.tf-btn-loading{
+            padding-right: 40px;
+        }
+    }
+
+    .tf-register-form-footer{
+        @include flexbox();
+        @include justify-content(center);
+        margin-top: 20px;
+        color: #828C99;
+
+        a{
+            font-weight: 600;
+            color: #002043;
+            text-decoration: none;
+            margin-left: 5px;
+            
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.tf-verification-msg {
+    margin: 50px auto;
+    text-align: center;
+    border: 1px solid #f2f2f2;
+    width: 800px;
+    border-radius: 3px;
+    padding: 10px 0 10px 0;
+    background: #f2f2f2;
+    font-size: 20px;
+    color: #333;
+    box-shadow: 0px 0px 2px 0px rgb(0 0 0 / 45%);
+}

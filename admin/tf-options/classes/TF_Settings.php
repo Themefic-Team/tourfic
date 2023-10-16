@@ -275,7 +275,26 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								</h3>
 							</div>
 						</div>
-						
+
+                        <div class="tf-single-performance-grid">
+                            <div class="tf-single-performance-icon">
+                                <img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-apartment.png" alt="total apartment">
+                            </div>
+                            <div class="tf-single-performance-content">
+                                <p><?php _e("Total Apartments","tourfic"); ?></p>
+                                <h3>
+									<?php
+									$tf_total_apartments = array(
+										'post_type'      => 'tf_apartment',
+										'post_status'    => 'publish',
+										'posts_per_page' => - 1
+									);
+									echo count( get_posts ($tf_total_apartments ) );
+									?>
+                                </h3>
+                            </div>
+                        </div>
+
 						<div class="tf-single-performance-grid">
 							<div class="tf-single-performance-icon">
 							<img src="<?php echo TF_ASSETS_APP_URL; ?>images/tf-booking-online.png" alt="total Booking">
@@ -322,23 +341,37 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					</div>
 					<div class="tf-report-filter">
 						<h2><?php _e("Reports","tourfic"); ?></h2>
-						<div class="tf-month-filter">
-							<span><?php _e("Month","tourfic"); ?></span>
-							<select name="tf-month-report" id="tf-month-report">
-								<option value=""><?php _e("Select Month","tourfic"); ?></option>
-								<option value="1"><?php _e("January","tourfic"); ?></option>
-								<option value="2"><?php _e("February","tourfic"); ?></option>
-								<option value="3"><?php _e("March","tourfic"); ?></option>
-								<option value="4"><?php _e("April","tourfic"); ?></option>
-								<option value="5"><?php _e("May","tourfic"); ?></option>
-								<option value="6"><?php _e("June","tourfic"); ?></option>
-								<option value="7"><?php _e("July","tourfic"); ?></option>
-								<option value="8"><?php _e("August","tourfic"); ?></option>
-								<option value="9"><?php _e("September","tourfic"); ?></option>
-								<option value="10"><?php _e("October","tourfic"); ?></option>
-								<option value="11"><?php _e("November","tourfic"); ?></option>
-								<option value="12"><?php _e("December","tourfic"); ?></option>
-							</select>
+						<div class="tf-dates-filter">
+							<div class="tf-month-filter">
+								<span><?php _e("Year","tourfic"); ?></span>
+								<select name="tf-year-report" id="tf-year-report">
+									<option value="23"><?php _e("2023","tourfic"); ?></option>
+									<option value="22"><?php _e("2022","tourfic"); ?></option>
+									<option value="21"><?php _e("2021","tourfic"); ?></option>
+									<option value="20"><?php _e("2020","tourfic"); ?></option>
+									<option value="19"><?php _e("2019","tourfic"); ?></option>
+									<option value="18"><?php _e("2018","tourfic"); ?></option>
+									<option value="17"><?php _e("2017","tourfic"); ?></option>
+								</select>
+							</div>
+							<div class="tf-month-filter">
+								<span><?php _e("Month","tourfic"); ?></span>
+								<select name="tf-month-report" id="tf-month-report">
+									<option value=""><?php _e("Select Month","tourfic"); ?></option>
+									<option value="1"><?php _e("January","tourfic"); ?></option>
+									<option value="2"><?php _e("February","tourfic"); ?></option>
+									<option value="3"><?php _e("March","tourfic"); ?></option>
+									<option value="4"><?php _e("April","tourfic"); ?></option>
+									<option value="5"><?php _e("May","tourfic"); ?></option>
+									<option value="6"><?php _e("June","tourfic"); ?></option>
+									<option value="7"><?php _e("July","tourfic"); ?></option>
+									<option value="8"><?php _e("August","tourfic"); ?></option>
+									<option value="9"><?php _e("September","tourfic"); ?></option>
+									<option value="10"><?php _e("October","tourfic"); ?></option>
+									<option value="11"><?php _e("November","tourfic"); ?></option>
+									<option value="12"><?php _e("December","tourfic"); ?></option>
+								</select>
+							</div>
 						</div>
 					</div>
 					<div class="tf-order-report">
@@ -629,7 +662,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
                 <div class="tf-option-wrapper tf-setting-wrapper">
                     <form method="post" action="" class="tf-option-form <?php echo esc_attr($ajax_save_class) ?>" enctype="multipart/form-data">
-
                         <!-- Body -->
                         <div class="tf-option">
                             <div class="tf-admin-tab tf-option-nav">
@@ -698,9 +730,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									</div>
                             </div>
                         </div>
-
-                        
-
 						<?php wp_nonce_field( 'tf_option_nonce_action', 'tf_option_nonce' ); ?>
                     </form>
                 </div>
@@ -737,8 +766,40 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						foreach ( $section['fields'] as $field ) {
 
 							if ( ! empty( $field['id'] ) ) {
-								$data = isset( $option_request[ $field['id'] ] ) ? $option_request[ $field['id'] ] : '';
+
 								$fieldClass = 'TF_' . $field['type'];
+
+                                if($fieldClass == 'TF_tab'){
+	                                $data = isset( $option_request[ $field['id'] ] ) ? $option_request[ $field['id'] ] : '';
+	                                foreach ( $field['tabs'] as $tab ) {
+		                                foreach ( $tab['fields'] as $tab_fields ) {
+                                            if($tab_fields['type'] == 'repeater') {
+	                                            foreach ( $tab_fields['fields'] as $key => $tab_field ) {
+		                                            if ( isset( $tab_field['validate'] ) && $tab_field['validate'] == 'no_space_no_special' ) {
+                                                        $sanitize_data_array = [];
+														if(!empty($data[$tab_fields['id']])){
+															foreach ( $data[$tab_fields['id']] as $_key=> $datum ) {
+																//unique id 3 digit
+																$unique_id = substr(uniqid(), -3);
+																$sanitize_data = sanitize_title(str_replace(' ', '_', strtolower($datum[$tab_field['id']])));
+																if(in_array($sanitize_data, $sanitize_data_array)){
+																	$sanitize_data = $sanitize_data . '_' . $unique_id;
+																} else {
+																	$sanitize_data_array[] = $sanitize_data;
+																}
+
+																$data[$tab_fields['id']][$_key][$tab_field['id']] = $sanitize_data;
+															}
+														}
+		                                            }
+	                                            }
+                                            }
+                                        }
+                                    }
+                                } else {
+	                                $data = isset( $option_request[ $field['id'] ] ) ? $option_request[ $field['id'] ] : '';
+                                }
+
 								if($fieldClass != 'TF_file'){
 									$data       = $fieldClass == 'TF_repeater' || $fieldClass == 'TF_map'  || $fieldClass == 'TF_color' ? serialize( $data ) : $data;
 								}
@@ -771,6 +832,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			}
 
 			if ( ! empty( $tf_option_value ) ) {
+//                tf_var_dump($tf_option_value);
+//                die();
 				update_option( $this->option_id, $tf_option_value );
 			} else {
 				delete_option( $this->option_id );
