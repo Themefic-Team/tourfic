@@ -476,7 +476,7 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
             }
             ?>
             </div>
-            <div class="tf-available-room-select room-submit-wrap">
+            <div class="tf-available-room-select">
                 <span><?php _e("Select your Room", "tourfic"); ?></span>
                 <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg);">
                     <?php
@@ -485,7 +485,6 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                         }
                     ?>
                 </select>
-                <div class="roomselectissue"></div>
             </div>   
             <div class="tf-available-room-purchase-summery">
             <?php
@@ -532,8 +531,10 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
             $tour_hotel_service_type = !empty($meta['airport_service_type']) ? $meta['airport_service_type'] : '';
             if(function_exists('is_tf_pro') && is_tf_pro() && !empty($tour_hotel_service_avail) && !empty($tour_hotel_service_type) && ($room_book_by!=2 || empty($room_book_url))){
             ?>
-            <a class="tf_air_service" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'Continue', 'tourfic' );?></a>
-            
+            <div class="room-submit-wrap">
+                <div class="roomselectissue"></div>
+                <a class="tf_air_service" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'Continue', 'tourfic' );?></a>
+            </div>
             
             <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1" data-id="<?php echo $room_id ?>">
                 <div class="tf-hotel-services">

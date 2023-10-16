@@ -9432,6 +9432,9 @@ html {
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-purchase-summery .price-per-night {
   margin-left: 5px;
 }
+.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .roomselectissue {
+  text-align: right !important;
+}
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content button,
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.tf_air_service,
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.availability {
