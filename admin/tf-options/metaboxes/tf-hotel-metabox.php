@@ -447,6 +447,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'placeholder' => __( 'https://website.com', 'tourfic' ),
 							'button_text' => __( 'Import', 'tourfic' ),
 							'button_class'   => 'room-ical-import',
+							'is_pro'  => true,
 							'attributes'  => array(
 								'class' => 'ical_url_input',
 							),

@@ -390,7 +390,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				),
 				array(
 					'id'        => '',
-					'type'      => 'hotelAvailabilityCal',
+					'type'      => 'aptAvailabilityCal',
 					'label'     => __( 'Availability Calendar', 'tourfic' ),
 					'is_pro'  => true,
 				),
@@ -405,7 +405,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'       => __( 'iCal URL', 'tourfic' ),
 					'placeholder' => __( 'https://website.com', 'tourfic' ),
 					'button_text' => __( 'Import', 'tourfic' ),
-					'button_class'   => 'room-ical-import',
+					'button_class'   => 'apt-ical-import',
+					'is_pro'  => true,
 					'attributes'  => array(
 						'class' => 'ical_url_input',
 					),
