@@ -2557,30 +2557,6 @@
         //     duration:300
         // });
 
-        $(".tf-template-3 #tf_checkin_date").flatpickr({
-            dateFormat: "d M Y",
-            onClose: function(){
-                const date = $('.tf-template-3 #tf_checkin_date').val();
-                const day = date.split(" ")[0] ? date.split(" ")[0] : "00";
-                const month = date.split(" ")[1] ? date.split(" ")[1] : "Mon";
-                // const year = date.split(" ")[2];
-                $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-date").html(day);
-                $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-month span").html(month);
-            }
-        });
-
-        $(".tf-template-3 #tf_checkout_date").flatpickr({
-            dateFormat: "d M Y",
-            onClose: function(){
-                const date = $('.tf-template-3 #tf_checkout_date').val();
-                const day = date.split(" ")[0] ? date.split(" ")[0] : "00";
-                const month = date.split(" ")[1] ? date.split(" ")[1] : "Mon";
-                // const year = date.split(" ")[2];
-                $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-date").html(day);
-                $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-month span").html(month);
-            }
-        });
-
         $('.tf-template-3 .tf-reviews-slider').slick({
             infinite: true,
             slidesToShow: 3,
@@ -2636,28 +2612,6 @@
         $('.tf-template-3 .tf-details-menu a').on('click', function() {
         $(this).addClass('tf-hashlink');
         $(this).closest('li').siblings().find('a').removeClass('tf-hashlink');
-        });
-
-
-        $('.tf-template-3 .acr-dec').on('click', function() {
-            // Get the input field
-            var input = $(this).siblings('input');
-
-            // Decrement the value of the input field
-            input.val( Number( input.val()) - 1);
-
-            // Make sure the value of the input field is not less than 1
-            if ( Number( input.val()) < 1) {
-                input.val(1);
-            }
-        });
-
-        $('.tf-template-3 .acr-inc').on('click', function() {
-            // Get the input field
-            var input = $(this).siblings('input');
-
-            // Increment the value of the input field
-            input.val( Number( input.val()) + 1 );
         });
 
 

@@ -1683,7 +1683,8 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	<?php }
 	elseif ( $tf_hotel_selected_template == "design-2" ) { ?>
 
-	<form id="tf-single-hotel-avail" class="tf-booking-form">
+	<form id="tf-single-hotel-avail" class="tf-booking-form" method="get" autocomplete="off">
+	<?php wp_nonce_field( 'check_room_avail_nonce', 'tf_room_avail_nonce' ); ?>
 		<div class="tf-booking-form-fields">
 			<div class="tf-booking-form-checkin">
 				<span class="tf-booking-form-title"><?php _e("Check in", "tourfic"); ?></span>
@@ -1694,7 +1695,6 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</span>
 				</div>
-				<input id="tf_checkin_date" type="text">
 			</div>
 			<div class="tf-booking-form-checkout">
 				<span class="tf-booking-form-title"><?php _e("Check out", "tourfic"); ?></span>
@@ -1705,16 +1705,14 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</span>
 				</div>
-				<input id="tf_checkout_date" type="text">
+				<input type="text" name="check-in-out-date" class="tf-check-in-out-date" onkeypress="return false;"
+                                   placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
 			</div>
 			<div class="tf-booking-form-guest-and-room">
 				<div class="tf-booking-form-guest-and-room-inner">
-					<span class="tf-booking-form-title">Guests & rooms</span>
+					<span class="tf-booking-form-title"><?php _e("Guests", "tourfic"); ?></span>
 					<div class="tf-booking-guest-and-room-wrap">
 						<span class="tf-guest">01</span> guest
-					</div>
-					<div class="tf-booking-person-count">
-						<span>3 adults 1 children</span>
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</div>
 				</div>
@@ -1752,6 +1750,51 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 			<button type="submit" class="tf-submit">Check <br>availability</button>
 		</div>
 	</form>
+
+	<script>
+		(function ($) {
+			$(document).ready(function () {
+				$(".tf-template-3 .tf-booking-date-wrap").click(function(){
+					$(".tf-check-in-out-date").click();
+				});
+				$(".tf-check-in-out-date").flatpickr({
+					enableTime: false,
+					mode: "range",
+					dateFormat: "Y/m/d",
+					minDate: "today",
+					onReady: function (selectedDates, dateStr, instance) {
+						instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+						dateSetToFields(selectedDates, instance);
+					},
+					onChange: function (selectedDates, dateStr, instance) {
+						instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+						dateSetToFields(selectedDates, instance);
+					},
+					defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+				});
+
+				function dateSetToFields(selectedDates, instance) {
+					if (selectedDates.length === 2) {
+						const monthNames = [
+							"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+							"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+						];
+						if(selectedDates[0]){
+							const startDate = selectedDates[0];
+							$(".tf-template-3 .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
+							$(".tf-template-3 .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()+1]);
+						}
+						if(selectedDates[1]){
+							const endDate = selectedDates[1];
+							$(".tf-template-3 .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
+							$(".tf-template-3 .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()+1]);
+						}
+					}
+				}
+
+			});
+		})(jQuery);
+	</script>
 
 	<?php } else { ?>
         <!-- Start Booking widget -->

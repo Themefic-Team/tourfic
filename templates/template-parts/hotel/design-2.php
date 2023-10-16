@@ -234,7 +234,7 @@
                 </div>
 
                 <!--Available rooms start -->
-                <div class="tf-available-rooms">
+                <div class="tf-available-rooms tf-rooms" id="rooms">
                     
                 <?php if ( $rooms ) : ?>
                 <?php foreach ( $rooms as $key => $room ) {
