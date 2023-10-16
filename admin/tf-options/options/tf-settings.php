@@ -37,7 +37,7 @@ TF_Settings::option( 'tf_settings', array(
 						'Y/m/d'  => __( 'YYYY/MM/DD', 'tourfic' ),
 						'Y-m-d' => __( 'YYYY-MM-DD', 'tourfic' ),
 						'd-m-Y'  => __( 'DD-MM-YYYY', 'tourfic' ),
-						'm/d/Y'  => __( 'DD/MM/YYYY', 'tourfic' ),
+						'd/m/Y'  => __( 'DD/MM/YYYY', 'tourfic' ),
 						'Y.m.d'  => __( 'YYYY.MM.DD', 'tourfic' ),
 						'd.m.Y'  => __( 'DD.MM.YYYY', 'tourfic' ),
 					),
