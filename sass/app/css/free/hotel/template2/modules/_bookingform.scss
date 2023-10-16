@@ -39,6 +39,7 @@
             line-height: 31.20px;
             min-width: 28px;
             text-align: right;
+            margin-right: 5px;
         }
         span.tf-booking-form-title {
             font-size: 16px;
@@ -57,16 +58,14 @@
             display: flex;
             gap: 6px;
         }
-        .tf-booking-guest-and-room-wrap {
-            color: #595349;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-bottom: 7px;
+        .tf_label-row{
+            span#tf-required{
+                font-size: 12px;
+                color: red;
+            }
         }
-        .tf-booking-guest-and-room-wrap span {
-            font-size: 24px;
-            margin-bottom: -3px;
+        .tf-booking-guest-and-room-wrap {
+            display: flex;
         }
         .tf-booking-person-count span {
             margin-right: 12px;
@@ -80,7 +79,7 @@
             button {
                 height: 100%;
                 width: 100%;
-                background: #B58E53;
+                background: #B58E53 !important;
                 border: 0;
                 outline: none;
                 color: #FDF9F3;

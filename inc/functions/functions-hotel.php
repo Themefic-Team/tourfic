@@ -1689,31 +1689,37 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 			<div class="tf-booking-form-checkin">
 				<span class="tf-booking-form-title"><?php _e("Check in", "tourfic"); ?></span>
 				<div class="tf-booking-date-wrap">
-					<span class="tf-booking-date">00</span>
+					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
 						<span><?php _e("Month", "tourfic"); ?></span>
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</span>
+				</div>
+				<div class="tf_booking-dates">
+					<div class="tf_label-row"></div>
 				</div>
 			</div>
 			<div class="tf-booking-form-checkout">
 				<span class="tf-booking-form-title"><?php _e("Check out", "tourfic"); ?></span>
 				<div class="tf-booking-date-wrap">
-					<span class="tf-booking-date">00</span>
+					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
 					<span class="tf-booking-month">
 						<span><?php _e("Month", "tourfic"); ?></span>
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</span>
 				</div>
-				<input type="text" name="check-in-out-date" class="tf-check-in-out-date" onkeypress="return false;"
-                                   placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
+				<input type="text" name="check-in-out-date" class="tf-check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
+
 			</div>
 			<div class="tf-booking-form-guest-and-room">
 				<div class="tf-booking-form-guest-and-room-inner">
 					<span class="tf-booking-form-title"><?php _e("Guests", "tourfic"); ?></span>
 					<div class="tf-booking-guest-and-room-wrap">
-						<span class="tf-guest">01</span> guest
-						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+						<span class="tf-guest tf-booking-date"><?php _e("01", "tourfic"); ?></span> 
+						<span class="tf-booking-month">
+							<span><?php _e("Guest", "tourfic"); ?></span>
+							<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+						</span>
 					</div>
 				</div>
 
@@ -1721,7 +1727,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 				<div class="tf_acrselection-wrap">
 					<div class="tf_acrselection-inner">
 						<div class="tf_acrselection">
-							<div class="acr-label">Adults</div>
+							<div class="acr-label"><?php _e("Adults", "tourfic"); ?></div>
 							<div class="acr-select">
 								<div class="acr-dec">-</div>
 								<input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>">
@@ -1729,7 +1735,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 							</div>
 						</div>
 						<div class="tf_acrselection">
-							<div class="acr-label">Children</div>
+							<div class="acr-label"><?php _e("Children", "tourfic"); ?></div>
 							<div class="acr-select">
 								<div class="acr-dec">-</div>
 								<input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
@@ -1747,7 +1753,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 			<input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type"/>
 			<input type="hidden" name="post_id" value="<?php echo get_the_ID(); ?>"/>
 			<input type="hidden" name="children_ages" value="<?php echo $children_ages; ?>"/>
-			<button type="submit" class="tf-submit">Check <br>availability</button>
+			<button type="submit" class="btn-primary tf-submit">Check <br>availability</button>
 		</div>
 	</form>
 

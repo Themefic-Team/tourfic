@@ -9584,6 +9584,7 @@ html {
   line-height: 31.2px;
   min-width: 28px;
   text-align: right;
+  margin-right: 5px;
 }
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form span.tf-booking-form-title {
   font-size: 16px;
@@ -9602,16 +9603,12 @@ html {
   display: flex;
   gap: 6px;
 }
-.tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-guest-and-room-wrap {
-  color: #595349;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-bottom: 7px;
+.tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf_label-row span#tf-required {
+  font-size: 12px;
+  color: red;
 }
-.tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-guest-and-room-wrap span {
-  font-size: 24px;
-  margin-bottom: -3px;
+.tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-guest-and-room-wrap {
+  display: flex;
 }
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-person-count span {
   margin-right: 12px;
@@ -9626,7 +9623,7 @@ html {
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-submit button {
   height: 100%;
   width: 100%;
-  background: #B58E53;
+  background: #B58E53 !important;
   border: 0;
   outline: none;
   color: #FDF9F3;
