@@ -803,11 +803,6 @@ function tf_single_tour_booking_form( $post_id ) {
 	$fixed_tour_repeat_month = 0;
 	// $fixed_tour_repeat_months = ($fixed_tour_repeat_month == 1) && !empty()
 
-	// echo "<pre>";
-	// print_r($fixed_tour_repeat_month);
-	// echo "</pre>";
-	// die(); // added by - Sunvi
-
 	// Same Day Booking
 	$disable_same_day = ! empty( $meta['disable_same_day'] ) ? $meta['disable_same_day'] : '';
 	if ( $tour_type == 'fixed' ) {
@@ -861,19 +856,45 @@ function tf_single_tour_booking_form( $post_id ) {
 
 	}
 
-	function fixed_tour_month_changer($date, $months) {
-		if(!empty($months) && !empty($date)) {
-			preg_match('/(\d{4})\/(\d{2})\/(\d{2})/', $date, $matches);
+	function fixed_tour_month_changer($dep_date, $ret_date,  $months) {
+		if(!empty($months) && !empty($dep_date) && !empty($ret_date) ) {
+			preg_match('/(\d{4})\/(\d{2})\/(\d{2})/', $dep_date, $d_matches);
+			preg_match('/(\d{4})\/(\d{2})\/(\d{2})/', $ret_date, $r_matches);
 
-			$new_months[] = $matches[0];
+			$new_months[] = array(
+				"departure" => $d_matches[0],
+				"return" => $r_matches[0]
+			);
 
 			foreach($months as $month) {
-				$matches[2] = $month;
-				$new_months[] = sprintf("%s/%s/%s", $matches[1], $matches[2], $matches[3]);
+				$current_month = date('m');
+				if($month <= $current_month) {
+					$d_year = $d_matches[1] + 1;
+					$r_year = $r_matches[1] + 1;
+				} else {
+					$d_year = $d_matches[1];
+					$r_year = $r_matches[1];
+				}
+				$d_matches[2] = $month;
+				$r_matches[2] = $month;
+				$new_months[] = array (
+					"departure" => sprintf("%s/%s/%s", $d_year, $d_matches[2], $d_matches[3]),
+					"return" => sprintf("%s/%s/%s", $r_year, $r_matches[2], $r_matches[3])
+				);
 			}
 			return $new_months;
 		} else return array();
 	}
+
+	$changed_dates = fixed_tour_month_changer($departure_date, $return_date, $fixed_tour_repeat_months);
+	// foreach($changed_dates as )
+
+
+	
+	// echo "<pre>";
+	// print_r($changed_dates);
+	// echo "</pre>";
+	// die(); // added by - Sunvi
 
 	$disable_adult_price  = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
 	$disable_child_price  = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
@@ -1728,20 +1749,34 @@ function tf_single_tour_booking_form( $post_id ) {
 						// Flatpickt locale for translation
 						tf_flatpickr_locale();
 
-						if ($tour_type && $tour_type == 'fixed') { ?>
-
-                    mode: "range",
-                    defaultDate: ["<?php echo $departure_date; ?>", "<?php echo $return_date; ?>"],
-                    enable: [
-                        {
-                            from: "<?php echo $departure_date; ?>",
-                            to: "<?php echo $return_date; ?>"
-                        }
-                    ],
-                    onReady: function (selectedDates, dateStr, instance) {
-						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                        instance.element.value = instance.altInput.value
-                    },
+						if ($tour_type && $tour_type == 'fixed') { 
+							?>
+						mode: "range",
+						defaultDate: ["<?php echo $departure_date; ?>", "<?php echo $return_date; ?>"],
+						
+						<?php if($is_fixed_tour_repeat == 0) { ?>
+							enable: [
+								{
+									from: "<?php echo $departure_date; ?>",
+									to: "<?php echo $return_date; ?>"
+								}
+							],
+						<?php } else { 
+							$changed_dates = fixed_tour_month_changer($departure_date, $return_date, $fixed_tour_repeat_months);
+						?>
+							enable: [
+								<?php foreach($changed_dates as $c_date) { ?>
+								{
+									from: "<?php echo $c_date["departure"]; ?>",
+									to: "<?php echo $c_date["return"]; ?>"
+								},
+								<?php }; ?>
+							],
+						<?php }?>
+						onReady: function (selectedDates, dateStr, instance) {
+							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+							instance.element.value = instance.altInput.value
+						},
 
 						<?php } elseif ($tour_type && $tour_type == 'continuous'){ ?>
 
