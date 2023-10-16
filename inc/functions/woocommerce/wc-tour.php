@@ -44,6 +44,7 @@ function tf_tours_booking_function() {
 	$tour_time    = isset( $_POST['check-in-time'] ) ? sanitize_text_field( $_POST['check-in-time'] ) : null;
 	$make_deposit = ! empty( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
 
+
 	// Visitor Details
 	$tf_visitor_details = !empty($_POST['traveller']) ? $_POST['traveller'] : "";
 
@@ -86,14 +87,42 @@ function tf_tours_booking_function() {
 			$min_people = ! empty( $tf_tour_fixed_date['min_seat'] ) ? $tf_tour_fixed_date['min_seat'] : '';
 			$max_people = ! empty( $tf_tour_fixed_date['max_seat'] ) ? $tf_tour_fixed_date['max_seat'] : '';
 			$tf_tour_booking_limit = ! empty( $tf_tour_fixed_date['max_capacity'] ) ? $tf_tour_fixed_date['max_capacity'] : 0;
+			$is_fixed_tour_repeat = !empty($tf_tour_fixed_avail["tf-repeat-months-switch"]) ? $tf_tour_fixed_avail["tf-repeat-months-switch"] : 0;
+			$fixed_tour_repeat_months = ($is_fixed_tour_repeat && !empty($tf_tour_fixed_avail["tf-repeat-months-checkbox"])) ? $tf_tour_fixed_avail["tf-repeat-months-checkbox"] : array();
 		}else{
 			$start_date = ! empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
 			$end_date   = ! empty( $meta['fixed_availability']['date']['to'] ) ? $meta['fixed_availability']['date']['to'] : '';
 			$min_people = ! empty( $meta['fixed_availability']['min_seat'] ) ? $meta['fixed_availability']['min_seat'] : '';
 			$max_people = ! empty( $meta['fixed_availability']['max_seat'] ) ? $meta['fixed_availability']['max_seat'] : '';
 			$tf_tour_booking_limit = ! empty( $meta['fixed_availability']['max_capacity'] ) ? $meta['fixed_availability']['max_capacity'] : 0; 
+			$is_fixed_tour_repeat = !empty($meta["fixed_availability"]["tf-repeat-months-switch"]) ? $meta["fixed_availability"]["tf-repeat-months-switch"] : 0;
+			$fixed_tour_repeat_months = ($is_fixed_tour_repeat && !empty($meta["fixed_availability"]["tf-repeat-months-checkbox"])) ? $meta["fixed_availability"]["tf-repeat-months-checkbox"] : array();
 		}
 
+		function fixed_tour_month_changer($dep_date) {
+			if(!empty($dep_date)) {
+				if(str_contains($dep_date, " - ")) {
+					$dates = explode(" - ", $dep_date);
+					foreach($dates as $date) {
+						$new_dates[] = date("Y/m/d", strtotime($date));
+					}
+				}
+				return $new_dates;
+			}
+		}
+
+		if($is_fixed_tour_repeat == 1) {
+			$new_dates = fixed_tour_month_changer($_POST['check-in-out-date'] );
+		}
+		$start_date = $$new_dates[0];
+		$end_date = $new_dates[1];
+
+		echo "<pre>";
+		print_r($start_date);
+		echo "</pre>";
+		die(); // added by - Sunvi
+
+		// FIXME: Should be fixed this issue
 
 		// Fixed tour maximum capacity limit
 	
