@@ -799,6 +799,15 @@ function tf_single_tour_booking_form( $post_id ) {
 	// Date format for Users Oputput
 	$tour_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
 
+	// Repeat fixed tour by month
+	$fixed_tour_repeat_month = 0;
+	// $fixed_tour_repeat_months = ($fixed_tour_repeat_month == 1) && !empty()
+
+	// echo "<pre>";
+	// print_r($fixed_tour_repeat_month);
+	// echo "</pre>";
+	// die(); // added by - Sunvi
+
 	// Same Day Booking
 	$disable_same_day = ! empty( $meta['disable_same_day'] ) ? $meta['disable_same_day'] : '';
 	if ( $tour_type == 'fixed' ) {
@@ -811,11 +820,15 @@ function tf_single_tour_booking_form( $post_id ) {
 			$return_date         = ! empty( $tf_tour_fixed_date['date']['to'] ) ? $tf_tour_fixed_date['date']['to'] : '';
 			$min_people          = ! empty( $tf_tour_fixed_date['min_seat'] ) ? $tf_tour_fixed_date['min_seat'] : '';
 			$max_people          = ! empty( $tf_tour_fixed_date['max_seat'] ) ? $tf_tour_fixed_date['max_seat'] : '';
+			$is_fixed_tour_repeat = !empty($tf_tour_fixed_avail["tf-repeat-months-switch"]) ? $tf_tour_fixed_avail["tf-repeat-months-switch"] : 0;
+			$fixed_tour_repeat_months = ($is_fixed_tour_repeat && !empty($tf_tour_fixed_avail["tf-repeat-months-checkbox"])) ? $tf_tour_fixed_avail["tf-repeat-months-checkbox"] : array();
 		} else {
 			$departure_date = ! empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
 			$return_date    = ! empty( $meta['fixed_availability']['date']['to'] ) ? $meta['fixed_availability']['date']['to'] : '';
 			$min_people     = ! empty( $meta['fixed_availability']['min_seat'] ) ? $meta['fixed_availability']['min_seat'] : '';
 			$max_people     = ! empty( $meta['fixed_availability']['max_seat'] ) ? $meta['fixed_availability']['max_seat'] : '';
+			$is_fixed_tour_repeat = !empty($meta["fixed_availability"]["tf-repeat-months-switch"]) ? $meta["fixed_availability"]["tf-repeat-months-switch"] : 0;
+			$fixed_tour_repeat_months = ($is_fixed_tour_repeat && !empty($meta["fixed_availability"]["tf-repeat-months-checkbox"])) ? $meta["fixed_availability"]["tf-repeat-months-checkbox"] : array();
 		}
 
 	} elseif ( $tour_type == 'continuous' ) {
@@ -846,6 +859,20 @@ function tf_single_tour_booking_form( $post_id ) {
 
 		}
 
+	}
+
+	function fixed_tour_month_changer($date, $months) {
+		if(!empty($months) && !empty($date)) {
+			preg_match('/(\d{4})\/(\d{2})\/(\d{2})/', $date, $matches);
+
+			$new_months[] = $matches[0];
+
+			foreach($months as $month) {
+				$matches[2] = $month;
+				$new_months[] = sprintf("%s/%s/%s", $matches[1], $matches[2], $matches[3]);
+			}
+			return $new_months;
+		} else return array();
 	}
 
 	$disable_adult_price  = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
@@ -1691,6 +1718,7 @@ function tf_single_tour_booking_form( $post_id ) {
                         } else timeSelectDiv.hide();
                     }
 
+					// Here --- 1
                     $("#check-in-out-date").flatpickr({
                         enableTime: false,
                         dateFormat: "Y/m/d",
