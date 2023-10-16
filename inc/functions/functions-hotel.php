@@ -794,7 +794,7 @@ function tf_room_availability_callback() {
 			<th class="description" colspan="3"><?php _e( 'Room Details', 'tourfic' ); ?></th>
 		</tr>
 	</thead>
-	<?php }else{ ?>
+	<?php } elseif($tf_hotel_selected_template_check == "default"){ ?>
     <table class="availability-table">
     <thead>
     <tr>
@@ -2842,29 +2842,31 @@ function tf_remove_room_order_ids() {
  */
 
 function tf_hotel_quickview_callback() {
+
+	$meta = get_post_meta( $_POST['post_id'], 'tf_hotels_opt', true );
+
+	// Single Template Style
+	$tf_hotel_layout_conditions = ! empty( $meta['tf_single_hotel_layout_opt'] ) ? $meta['tf_single_hotel_layout_opt'] : 'global';
+	if ( "single" == $tf_hotel_layout_conditions ) {
+		$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
+	}
+	$tf_hotel_global_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-hotel'] ) ? tf_data_types( tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
+
+	$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
+
+	$tf_hotel_selected_template = $tf_hotel_selected_check;
+
+	$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
+	if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
+		$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+			return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+		}, $rooms );
+		$rooms                = unserialize( $tf_hotel_rooms_value );
+	}
+	if( $tf_hotel_selected_template == "design-1" || $tf_hotel_selected_template == "default" ){
 	?>
-    <div class="tf-hotel-quick-view" style="display: flex">
+	<div class="tf-hotel-quick-view" style="display: flex">
 		<?php
-		$meta = get_post_meta( $_POST['post_id'], 'tf_hotels_opt', true );
-
-		// Single Template Style
-		$tf_hotel_layout_conditions = ! empty( $meta['tf_single_hotel_layout_opt'] ) ? $meta['tf_single_hotel_layout_opt'] : 'global';
-		if ( "single" == $tf_hotel_layout_conditions ) {
-			$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
-		}
-		$tf_hotel_global_template = ! empty( tf_data_types( tfopt( 'tf-template' ) )['single-hotel'] ) ? tf_data_types( tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
-
-		$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
-
-		$tf_hotel_selected_template = $tf_hotel_selected_check;
-
-		$rooms = ! empty( $meta['room'] ) ? $meta['room'] : '';
-		if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
-			$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-				return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-			}, $rooms );
-			$rooms                = unserialize( $tf_hotel_rooms_value );
-		}
 		foreach ( $rooms as $key => $room ) :
 			$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
 			if ( $enable == '1' && $room['unique_id'] . $key == $_POST['uniqid_id'] ) :
@@ -3147,6 +3149,8 @@ function tf_hotel_quickview_callback() {
 		?>
     </div>
 	<?php
+	}
+
 	wp_die();
 }
 

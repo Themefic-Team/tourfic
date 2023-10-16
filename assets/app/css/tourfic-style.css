@@ -9260,6 +9260,15 @@ html {
   flex-direction: column;
   gap: 32px;
 }
+.tf-template-3 .tf-available-rooms-wrapper .tf-available-rooms .tf-room-table.hotel-room-wrap {
+  overflow: unset;
+}
+.tf-template-3 .tf-available-rooms-wrapper .tf-available-rooms .tf-room-table.hotel-room-wrap .tf-available-room {
+  margin-bottom: 32px;
+}
+.tf-template-3 .tf-available-rooms-wrapper .tf-available-rooms .tf-room-table.hotel-room-wrap .tf-available-room:last-child {
+  margin-bottom: 0px;
+}
 .tf-template-3 .tf-available-rooms-wrapper .tf-available-room {
   background: #FDF9F3;
   display: flex;

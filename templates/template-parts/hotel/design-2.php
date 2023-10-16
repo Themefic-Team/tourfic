@@ -368,7 +368,7 @@
                                 </div>
                                 <?php } ?>
                                 <?php if(2==$gallery_limit){ ?>                     
-                                <div class="tf-room-gallery tf-popup-buttons" style="background-image: url('<?php echo esc_url( $image_url ); ?>'); ">                                
+                                <div class="tf-room-gallery tf-popup-buttons tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="background-image: url('<?php echo esc_url( $image_url ); ?>'); ">                                
                                 <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g id="content">
                                     <path id="Rectangle 2111" d="M5.5 16.9745C5.6287 18.2829 5.91956 19.1636 6.57691 19.8209C7.75596 21 9.65362 21 13.4489 21C17.2442 21 19.1419 21 20.3209 19.8209C21.5 18.6419 21.5 16.7442 21.5 12.9489C21.5 9.15362 21.5 7.25596 20.3209 6.07691C19.6636 5.41956 18.7829 5.1287 17.4745 5" stroke="#FDF9F4" stroke-width="1.5"></path>
@@ -400,7 +400,7 @@
                                     <?php if ( $child_number ) { ?>
                                         <li><i class="fas fa-baby"></i><?php echo $child_number; ?><?php _e( ' Children', 'tourfic' ); ?></li>
                                     <?php } ?>
-                                    <li><a href="#"><?php _e("View room details", "tourfic"); ?></a></li>
+                                    <li><a href="#" class="tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>"><?php _e("View room details", "tourfic"); ?></a></li>
                                     
                                 </ul>
                                 <h4><?php _e("Other benefits", "tourfic"); ?></h4>
@@ -431,7 +431,7 @@
                                     if(count($room['features']) >= 6){
                                     ?>
                                     
-                                    <li><a href="#"><?php _e("See all benefits", "tourfic"); ?></a></li>
+                                    <li><a href="#" class="tf-room-detail-popup" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'].$room_id : '' ?>" data-hotel="<?php echo $form_post_id; ?>"><?php _e("See all benefits", "tourfic"); ?></a></li>
                                     <?php
                                     }
                                 }
@@ -945,15 +945,7 @@
     <!-- Room PopUp Starts -->        
     <div class="tf-popup-wrapper tf-room-popup">
         <div class="tf-popup-inner">
-            <div class="tf-popup-head">
-                <ul>
-                    <li data-filter>All images</li>
-                    <li data-filter="rooms">Rooms</li>
-                    <li data-filter="common-areas">Common areas</li>
-                    <li data-filter="pool">Pool</li>
-                    <li data-filter="dining">Dining</li>
-                </ul>                    
-            </div>
+            
             <div class="tf-popup-body">
                 <div class="tf-popup-left">
                     <img data-tags="common-areas" src="./assets/image/gallery-image-1.png" alt="" class="tf-popup-image">
