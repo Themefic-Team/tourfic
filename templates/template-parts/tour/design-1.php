@@ -507,7 +507,7 @@
 								<?php
 								while ( $tours->have_posts() ) {
 									$tours->the_post();
-
+                                    if(!empty($selected_ids)){
                                     foreach($selected_ids as $selected_id) {
                                         if($selected_id != $post_id) {
                                             $selected_design_post_id = $selected_id;
@@ -553,7 +553,7 @@
                                                 </div>
                                             </div>
 								        <?php } ?>
-								    <?php } ?>
+								    <?php } } ?>
                                     <?php break; ?>
 								<?php } ?>
                             </div>

@@ -24,6 +24,7 @@
             let postId = $('#post_ID').val();
             let roomIndex = btn.data('room-index');
             let pricingBy = btn.data('pricing-by');
+            let avail_date = btn.closest('.tf-single-repeater-room').find('.avail_date');
 
             if (iCalUrl === '') {
                 notyf.error('Please enter iCal Url');
@@ -44,12 +45,11 @@
                     btn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
-                    const obj = JSON.parse(response);
-
-                    if (obj.status === 'success') {
-                        notyf.success(obj.message);
+                    if (response.data.status === true) {
+                        notyf.success(response.data.message);
+                        avail_date.val(response.data.avail_date);
                     } else {
-                        notyf.error(obj.message);
+                        notyf.error(response.data.message);
                     }
                     btn.removeClass('tf-btn-loading');
                 },
