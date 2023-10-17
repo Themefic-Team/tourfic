@@ -96,35 +96,28 @@ function tf_tours_booking_function() {
 			$max_people = ! empty( $meta['fixed_availability']['max_seat'] ) ? $meta['fixed_availability']['max_seat'] : '';
 			$tf_tour_booking_limit = ! empty( $meta['fixed_availability']['max_capacity'] ) ? $meta['fixed_availability']['max_capacity'] : 0; 
 			$is_fixed_tour_repeat = !empty($meta["fixed_availability"]["tf-repeat-months-switch"]) ? $meta["fixed_availability"]["tf-repeat-months-switch"] : 0;
-			$fixed_tour_repeat_months = ($is_fixed_tour_repeat && !empty($meta["fixed_availability"]["tf-repeat-months-checkbox"])) ? $meta["fixed_availability"]["tf-repeat-months-checkbox"] : array();
+			//$fixed_tour_repeat_months = ($is_fixed_tour_repeat && !empty($meta["fixed_availability"]["tf-repeat-months-checkbox"])) ? $meta["fixed_availability"]["tf-repeat-months-checkbox"] : array();
 		}
 
-		function fixed_tour_month_changer($dep_date) {
-			if(!empty($dep_date)) {
-				if(str_contains($dep_date, " - ")) {
-					$dates = explode(" - ", $dep_date);
-					foreach($dates as $date) {
-						$new_dates[] = date("Y/m/d", strtotime($date));
+		if(!function_exists("fixed_tour_month_changer")) {
+			function fixed_date_format_changer($dep_date) {
+				if(!empty($dep_date)) {
+					if(str_contains($dep_date, " - ")) {
+						$dates = explode(" - ", $dep_date);
+						foreach($dates as $date) {
+							$new_dates[] = date("Y/m/d", strtotime($date));
+						}
 					}
+					return $new_dates;
 				}
-				return $new_dates;
 			}
 		}
 
 		if($is_fixed_tour_repeat == 1) {
-			$new_dates = fixed_tour_month_changer($_POST['check-in-out-date'] );
+			$new_dates = fixed_date_format_changer($_POST['check-in-out-date'] );
+			$start_date = $new_dates[0];
+			$end_date = $new_dates[1];
 		}
-		$start_date = $$new_dates[0];
-		$end_date = $new_dates[1];
-
-		echo "<pre>";
-		print_r($start_date);
-		echo "</pre>";
-		die(); // added by - Sunvi
-
-		// FIXME: Should be fixed this issue
-
-		// Fixed tour maximum capacity limit
 	
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($start_date) && !empty($end_date) ) {
 			
