@@ -630,21 +630,35 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 var adult_price = <?php echo $adult_price; ?>;
                                 var child_price = <?php echo $child_price; ?>;
                                 var infant_price = <?php echo $infant_price; ?>;
-
-                                if (pricing_type === 'per_night') {
-                                    var total_price = price_per_night * days;
-                                } else {
-                                    var total_price = (adult_price * $('#adults').val()) + (child_price * $('#children').val()) + (infant_price * $('#infant').val());
-                                }
                                 var wc_price_per_night = '<?php echo wc_price( $price_per_night ); ?>';
-                                var total_price = price_per_night * days;
-                                var total_days_price_html = '<?php echo wc_price( 0 ); ?>';
-                                if (total_price > 0) {
-                                    $('.total-days-price-wrap').show();
-                                    total_days_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
+
+                                if(pricing_type === 'per_night') {
+                                    var total_price = price_per_night * days;
+                                    var total_days_price_html = '<?php echo wc_price( 0 ); ?>';
+                                    if (total_price > 0) {
+                                        $('.total-days-price-wrap').show();
+                                        total_days_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
+                                    }
+                                    $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
+                                    $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
+                                } else {
+                                    var total_price = ((adult_price * $('#adults').val()) + (child_price * $('#children').val()) + (infant_price * $('#infant').val())) * days;
+                                    var total_days_price_html = '<?php echo wc_price( 0 ); ?>';
+                                    if (total_price > 0) {
+                                        $('.total-days-price-wrap').show();
+                                        total_days_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
+                                    }
+                                    $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
+                                    $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
                                 }
-                                $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
-                                $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
+                                //var total_price = price_per_night * days;
+                                //var total_days_price_html = '<?php //echo wc_price( 0 ); ?>//';
+                                //if (total_price > 0) {
+                                //    $('.total-days-price-wrap').show();
+                                //    total_days_price_html = '<?php //echo wc_price( 0 ); ?>//'.replace('0.00', total_price.toFixed(2));
+                                //}
+                                //$('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php //_e( 'nights', 'tourfic' ); ?>//');
+                                //$('.total-days-price-wrap .days-total-price').html(total_days_price_html);
 
                                 let totalPerson = parseInt($('.tf_acrselection #adults').val()) + parseInt($('.tf_acrselection #children').val()) + parseInt($('.tf_acrselection #infant').val());
 
