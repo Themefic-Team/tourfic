@@ -237,6 +237,9 @@ if ( file_exists( TF_ADMIN_PATH . 'emails/class-tf-handle-emails.php' ) ) {
 function tf_is_woo() {
 	if ( current_user_can( 'activate_plugins' ) ) {
 		if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
+			$download_url = 'https://downloads.wordpress.org/plugin/' . 'woocommerce' . '.latest-stable.zip';
+
+			#TODO: Try to fix it nicely
 			?>
 
             <div id="message" class="error">
@@ -253,7 +256,6 @@ function tf_is_woo() {
                 <p><a href="<?php echo get_admin_url(); ?>plugins.php?_wpnonce=<?php echo wp_create_nonce( 'activate-plugin_woocommerce/woocommerce.php' ); ?>&action=activate&plugin=woocommerce/woocommerce.php"
                       class="button activate-now button-primary"><?php _e( 'Activate', 'tourfic' ); ?></a></p>
             </div>
-
 			<?php
 		} elseif ( version_compare( get_option( 'woocommerce_db_version' ), '2.5', '<' ) ) {
 			?>
