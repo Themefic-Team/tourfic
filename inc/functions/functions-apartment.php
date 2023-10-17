@@ -463,7 +463,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$max_adults      = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
 		$max_children    = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
 		$max_infants     = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
-		$pricing_type    = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 0;
+		$pricing_type    = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
 		$price_per_night = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
 		$adult_price     = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
 		$child_price     = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
@@ -619,13 +619,23 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                     let minStay = <?php echo $min_stay ?>;
 
                     const bookingCalculation = (selectedDates) => {
-						<?php if ( ! empty( $price_per_night ) ): ?>
+						<?php if ( ( $pricing_type === 'per_night' && ! empty( $price_per_night ) ) || ( $pricing_type === 'per_person' && ! empty( $adult_price ) ) ): ?>
                         //calculate total days
                         if (selectedDates[0] && selectedDates[1]) {
                             var diff = Math.abs(selectedDates[1] - selectedDates[0]);
                             var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
                             if (days > 0) {
+                                var pricing_type = <?php echo $pricing_type; ?>;
                                 var price_per_night = <?php echo $price_per_night; ?>;
+                                var adult_price = <?php echo $adult_price; ?>;
+                                var child_price = <?php echo $child_price; ?>;
+                                var infant_price = <?php echo $infant_price; ?>;
+
+                                if (pricing_type === 'per_night') {
+                                    var total_price = price_per_night * days;
+                                } else {
+                                    var total_price = (adult_price * $('#adults').val()) + (child_price * $('#children').val()) + (infant_price * $('#infant').val());
+                                }
                                 var wc_price_per_night = '<?php echo wc_price( $price_per_night ); ?>';
                                 var total_price = price_per_night * days;
                                 var total_days_price_html = '<?php echo wc_price( 0 ); ?>';
@@ -635,7 +645,6 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 }
                                 $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
                                 $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
-
 
                                 let totalPerson = parseInt($('.tf_acrselection #adults').val()) + parseInt($('.tf_acrselection #children').val()) + parseInt($('.tf_acrselection #infant').val());
 
