@@ -165,7 +165,7 @@ add_action( 'admin_footer', 'tf_admin_footer' );
  */
 function tf_dashboard_header() {
 	?>
-    <!-- deshboard-top-section -->
+    <!-- dashboard-top-section -->
     <div class="tf-setting-top-bar">
         <div class="version">
             <img src="<?php echo TF_ASSETS_APP_URL; ?>images/tourfic-logo.webp" alt="logo">
@@ -209,6 +209,6 @@ function tf_dashboard_header() {
             </div>
         </div>
     </div>
-    <!-- deshboard-top-section -->
+    <!-- dashboard-top-section -->
 	<?php
 }

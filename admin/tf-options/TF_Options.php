@@ -330,13 +330,18 @@ if ( ! class_exists( 'TF_Options' ) ) {
 
 			$tf_google_map = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( tfopt( 'google-page-option' ) ) ? tfopt( 'google-page-option' ) : "false";
 			wp_localize_script( 'tf-admin', 'tf_options', array(
-				'ajax_url'          => admin_url( 'admin-ajax.php' ),
-				'nonce'             => wp_create_nonce( 'tf_options_nonce' ),
-				'gmaps'             => $tf_google_map,
-				'tf_complete_order' => isset( $tf_complete_orders ) ? $tf_complete_orders : '',
-				'tf_cancel_orders'  => isset( $tf_cancel_orders ) ? $tf_cancel_orders : '',
-				'tf_chart_enable'   => isset( $tf_chart_enable ) ? $tf_chart_enable : '',
-				'tf_admin_date_format' => $admin_date_format_for_users
+				'ajax_url'             => admin_url( 'admin-ajax.php' ),
+				'nonce'                => wp_create_nonce( 'tf_options_nonce' ),
+				'gmaps'                => $tf_google_map,
+				'tf_complete_order'    => isset( $tf_complete_orders ) ? $tf_complete_orders : '',
+				'tf_cancel_orders'     => isset( $tf_cancel_orders ) ? $tf_cancel_orders : '',
+				'tf_chart_enable'      => isset( $tf_chart_enable ) ? $tf_chart_enable : '',
+				'tf_admin_date_format' => $admin_date_format_for_users,
+				'tf_export_import_msg' => array(
+					'imported'       => __( 'Imported successfully!', 'tourfic' ),
+					'import_confirm' => __( 'Are you sure you want to import this data?', 'tourfic' ),
+					'import_empty'   => __( 'Import Data cannot be empty!', 'tourfic' ),
+				)
 			) );
 		}
 

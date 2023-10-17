@@ -10,6 +10,9 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		public $option_icon = null;
 		public $option_position = null;
 		public $option_sections = array();
+		public $pre_tabs;
+		public $pre_fields;
+		public $pre_sections;
 
 		public function __construct( $key, $params = array() ) {
 			$this->option_id       = $key;
@@ -379,7 +382,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					</div>
 				</div>
 
-				<!-- deshboar-performance-section -->
+				<!-- dashboard-performance-section -->
 
 				</div>
 			</div>
@@ -395,7 +398,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		?>
 		<div class="tf-setting-dashboard">
 
-			<!-- deshboard-header-include -->
+			<!-- dashboard-header-include -->
 			<?php echo tf_dashboard_header(); ?>
 
 			<div class="tf-settings-help-center">
@@ -571,7 +574,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		?>
 		<div class="tf-setting-dashboard">
 
-			<!-- deshboard-header-include -->
+			<!-- dashboard-header-include -->
 			<?php echo tf_dashboard_header(); ?>
 			
 			<div class="tf-setting-license">
