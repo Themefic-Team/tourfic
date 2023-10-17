@@ -280,6 +280,10 @@ TF_Settings::option( 'tf_settings', array(
 											'title' => 'Design 1',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design1.jpg",
 										),
+										'design-2' => array(
+											'title' => 'Design 2',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design2.jpg",
+										),
 										'default'  => array(
 											'title' => 'Defult',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-default.jpg",
