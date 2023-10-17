@@ -2260,6 +2260,102 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                 </div>
             </div>
         </div>
+	<?php }
+	elseif ( $tf_hotel_arc_selected_template == "design-2" ) {
+	?>
+	<div class="tf-available-room">
+		<div class="tf-available-room-gallery">                       
+			<div class="tf-room-gallery">
+					<?php
+					if ( has_post_thumbnail() ) {
+						the_post_thumbnail( 'full' );
+					} else {
+						echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+					}
+					?>
+			</div>                                                                           
+			<div class="tf-room-gallery tf-popup-buttons" style="background-image: url('./assets/image/room3.png'); ">
+				<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<g id="content">
+				<path id="Rectangle 2111" d="M5.5 16.9745C5.6287 18.2829 5.91956 19.1636 6.57691 19.8209C7.75596 21 9.65362 21 13.4489 21C17.2442 21 19.1419 21 20.3209 19.8209C21.5 18.6419 21.5 16.7442 21.5 12.9489C21.5 9.15362 21.5 7.25596 20.3209 6.07691C19.6636 5.41956 18.7829 5.1287 17.4745 5" stroke="#FDF9F4" stroke-width="1.5"></path>
+				<path id="Rectangle 2109" d="M1.5 9C1.5 5.22876 1.5 3.34315 2.67157 2.17157C3.84315 1 5.72876 1 9.5 1C13.2712 1 15.1569 1 16.3284 2.17157C17.5 3.34315 17.5 5.22876 17.5 9C17.5 12.7712 17.5 14.6569 16.3284 15.8284C15.1569 17 13.2712 17 9.5 17C5.72876 17 3.84315 17 2.67157 15.8284C1.5 14.6569 1.5 12.7712 1.5 9Z" stroke="#FDF9F4" stroke-width="1.5"></path>
+				<path id="Vector" d="M1.5 10.1185C2.11902 10.0398 2.74484 10.001 3.37171 10.0023C6.02365 9.9533 8.61064 10.6763 10.6711 12.0424C12.582 13.3094 13.9247 15.053 14.5 17" stroke="#FDF9F4" stroke-width="1.5" stroke-linejoin="round"></path>
+				<path id="Vector_2" d="M12.4998 6H12.5088" stroke="#FDF9F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+				</g>
+				</svg>
+			</div>
+			<div class="tf-available-labels">
+				<span class="tf-available-labels-populer">Populer</span>
+				<span class="tf-available-labels-featured">Featured</span>
+				<span class="tf-available-labels-visited">Most visited</span>
+			</div>  
+			<div class="tf-available-ratings">
+				<span class="tf-available-rating-number">4.5</span>
+				<i class="fa-solid fa-star"></i>
+			</div>  
+		</div>
+		<div class="tf-available-room-content">
+			<div class="tf-available-room-content-left">
+				<div class="tf-section-title-and-location">
+					<h2 class="tf-section-title"><?php the_title(); ?></h2>
+					<?php
+					if ( ! empty( $address ) ) {
+					?>
+					<div class="tf-title-location">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+						<g clip-path="url(#clip0_754_13936)">
+							<path d="M10 17.9156L14.1248 13.7908C16.4028 11.5128 16.4028 7.81928 14.1248 5.54122C11.8468 3.26317 8.15327 3.26317 5.87521 5.54122C3.59715 7.81928 3.59715 11.5128 5.87521 13.7908L10 17.9156ZM10 20.2726L4.6967 14.9693C1.76777 12.0403 1.76777 7.29165 4.6967 4.36272C7.62563 1.43378 12.3743 1.43378 15.3033 4.36272C18.2323 7.29165 18.2323 12.0403 15.3033 14.9693L10 20.2726ZM10 11.3327C10.9205 11.3327 11.6667 10.5865 11.6667 9.66602C11.6667 8.74554 10.9205 7.99935 10 7.99935C9.0795 7.99935 8.33333 8.74554 8.33333 9.66602C8.33333 10.5865 9.0795 11.3327 10 11.3327ZM10 12.9993C8.15905 12.9993 6.66667 11.5069 6.66667 9.66602C6.66667 7.82507 8.15905 6.33268 10 6.33268C11.8409 6.33268 13.3333 7.82507 13.3333 9.66602C13.3333 11.5069 11.8409 12.9993 10 12.9993Z" fill="#99948D"/>
+						</g>
+						<defs>
+							<clipPath id="clip0_754_13936">
+							<rect width="20" height="20" fill="white" transform="translate(0 0.5)"/>
+							</clipPath>
+						</defs>
+						</svg>
+						<span><?php echo esc_html( $address ); ?></span>
+					</div>
+					<?php } ?>
+				</div>
+				<div class="tf-mobile tf-pricing-info">
+					<div class="tf-available-room-off">
+						<span>60% off</span>
+					</div>
+					<div class="tf-available-room-price">
+						<span class="tf-price-from">From $450</span>
+						<span class="tf-price"><span>$250</span>/night</span>
+					</div>
+				</div>
+				<ul>
+					<li><i class="fas fa-ruler-combined"></i> 25 m2sft</li>
+					<li><i class="fas fa-bed"></i> 2 Number of Beds</li>
+					<li><i class="fab fa-creative-commons-zero"></i> Breakfast Included </li>
+					<li><i class="fas fa-road"></i> Carpeted </li>
+					<li><i class="fas fa-road"></i> Carpeted </li>
+					<li><i class="fas fa-tshirt"></i> Clothes rack </li>
+					<li><i class="fas fa-bed"></i> Double Bed </li>
+					<li><a href="#">See all benefits</a></li>
+					
+				</ul>
+			</div>
+			<div class="tf-available-room-content-right">
+				<div class="tf-cancellation-refundable-text">
+					<span>Free cancellation <i class="fa-solid fa-info"></i></span>
+					<span>Free refundable <i class="fa-solid fa-info"></i></span>
+				</div>
+				<div class="tf-available-room-off">
+					<span>60% off</span>
+				</div>
+				<div class="tf-available-room-price">
+					<span class="tf-price-from">From $450</span>
+					<span class="tf-price"><span>$250</span>/night</span>
+				</div> 
+				<div class="tf-available-room-purchase-summery">
+					<span>Total $450 for 3 nights, 1 room</span>
+				</div>                            
+				<a href="<?php echo esc_url( $url ); ?>"><?php _e("See available rooms", "tourfic"); ?></a>
+			</div>
+		</div>
+	</div>
 	<?php } else { ?>
         <div class="single-tour-wrap <?php echo $featured ? esc_attr( 'tf-featured' ) : '' ?>">
             <div class="single-tour-inner">
