@@ -1939,16 +1939,13 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					if ( ! empty( $b_room['price'] ) ) {
 						$b_room_price = $b_room['price'];
 						$room_price[] = $b_room_price;
+						$dicount_b_room_price = 0;
 						if ( $hotel_discount_type == "percent" ) {
-							if ( ! empty( $dicount_b_room_price ) ) {
-								$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $b_room_price - ( ( $b_room_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
-							}
+							$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $b_room_price - ( ( $b_room_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
 						} else if ( $hotel_discount_type == "fixed" ) {
-							if ( ! empty( $discount_b_room_price ) ) {
-								$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $b_room_price - $hotel_discount_amount ), 2 ) ) );
-							}
+							$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $b_room_price - $hotel_discount_amount ), 2 ) ) );
 						}
-						if ( ! empty( $discount_b_room_price ) ) {
+						if($dicount_b_room_price != 0) {
 							$room_price[] = $dicount_b_room_price;
 						}
 					}
@@ -1982,6 +1979,11 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							}
 						}
 					}
+					// echo "<pre>";
+					// // print_r(floatval( preg_replace( '/[^\d.]/', '', number_format( $b_room_price - ( ( $b_room_price / 100 ) * $hotel_discount_amount ), 2 ) ) ));
+					// print_r($room_price);
+					// echo "</pre>";
+					// die(); // added by - Sunvi
 				}
 			} else if ( $pricing_by == 2 ) {
 				if ( empty( $check_in_out ) ) {
@@ -2178,7 +2180,6 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                 </div>
                 <div class="tf-post-footer tf-flex tf-flex-align-center tf-flex-space-bttn tf-mt-16">
                     <div class="tf-pricing">
-
 						<?php
 						if ( ! empty( $room_price ) ):
 							echo __( "From ", "tourfic" );
@@ -2188,7 +2189,6 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							echo "<del>$highest_price</del>";
 							echo " $lowest_price";
 						endif; ?>
-
                     </div>
                     <div class="tf-booking-bttns">
                         <a class="tf-btn-normal btn-secondary" href="<?php echo esc_url( $url ); ?>"><?php _e( "View Details", "tourfic" ); ?></a>
@@ -2292,7 +2292,6 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 															echo "<del>$highest_price</del>";
 															echo " $lowest_price"
 															?>
-
                                                         </div>
 													<?php endif; ?>
                                                 </div>
