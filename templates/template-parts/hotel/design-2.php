@@ -170,6 +170,11 @@
                 <div class="tf-overview-description">
                     <?php the_content(); ?>
                 </div>
+            </div>
+            <!--Overview End -->
+            
+            <!--Popular Features -->
+            <div class="tf-overview-wrapper">
                 <div class="tf-overview-popular-facilities">
                     <h3><?php _e("Popular facilities", "tourfic"); ?></h3>
                     <ul>
@@ -190,7 +195,7 @@
                     </ul>
                 </div>
             </div>
-            <!--Overview End -->
+            <!--Popular Features -->
 
             <!--Booking form start -->
             <div id="availability" class="tf-booking-form-wrapper">
@@ -659,7 +664,24 @@
         </div>        
     </div>        
     <!-- Hotel details End -->
-
+    
+    <?php 
+        if( !empty(tf_data_types(tfopt( 'tf-template' ))['single-hotel-layout']) ){
+            foreach(tf_data_types(tfopt( 'tf-template' ))['single-hotel-layout'] as $section){
+                if( !empty($section['hotel-section-status']) && $section['hotel-section-status']=="1" && !empty($section['hotel-section-slug']) ){
+                    include TF_TEMPLATE_PART_PATH . 'hotel/design-1/'.$section['hotel-section-slug'].'.php';
+                }
+            }
+        }else{
+            include TF_TEMPLATE_PART_PATH . 'hotel/design-1/description.php';
+            include TF_TEMPLATE_PART_PATH . 'hotel/design-1/features.php';
+            include TF_TEMPLATE_PART_PATH . 'hotel/design-1/rooms.php';
+            include TF_TEMPLATE_PART_PATH . 'hotel/design-1/faq.php';
+            include TF_TEMPLATE_PART_PATH . 'hotel/design-1/review.php';
+            include TF_TEMPLATE_PART_PATH . 'hotel/design-1/trams-condition.php';
+        }
+        ?>
+        
     <!-- Hotel facilities Srart -->
     <div class="tf-facilities-wrapper" id="tf-hotel-facilities">              
         <h2 class="tf-section-title">Property facilities</h2>                
