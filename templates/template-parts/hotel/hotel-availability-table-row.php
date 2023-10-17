@@ -520,12 +520,21 @@ elseif( $tf_hotel_selected_template_check == "design-2" ){
                 </div>
             <?php }?>
 
-            <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount)) { ?>
-                <span class="tf-price tf-deposit-amount-<?php echo $room_id ?>" style="display: none;"><?php echo wc_price( $deposit_amount ); ?></span>
-                <div class="price-per-night tf-deposit-amount-<?php echo $room_id ?> " style="display: none;"><?php _e('Need to be deposited', 'tourfic') ?></div>
-            <?php } ?>
             </div> 
-            
+            <div class="tf-deposit-content">
+                <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount)) { ?>
+                    <span class="tf-price tf-deposit-amount-<?php echo $room_id ?>" style="display: none;"><?php echo wc_price( $deposit_amount ); ?></span>
+                    <div class="price-per-night tf-deposit-amount-<?php echo $room_id ?> " style="display: none;"><?php _e('Need to be deposited', 'tourfic') ?></div>
+                <?php } ?>
+
+                <?php if (function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true &&  !empty($deposit_amount) && ($room["deposit_type"] != "none")) { ?>
+                    
+                    <div class="room-deposit-wrap">
+                        <input type="checkbox" id="tf-make-deposit<?php echo $room_id ?>" name="make_deposit" value="<?php echo $room_id ?>">
+                        <label for="tf-make-deposit<?php echo $room_id ?>"><?php _e("I'll make a Partial Payment", "tourfic") ?></label><br>
+                    </div>
+                <?php } ?>
+            </div>
             <?php 
             $tour_hotel_service_avail = !empty($meta['airport_service']) ? $meta['airport_service'] : '';
             $tour_hotel_service_type = !empty($meta['airport_service_type']) ? $meta['airport_service_type'] : '';
