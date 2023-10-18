@@ -2278,7 +2278,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					}
 					?>
 			</div>                                                                           
-			<div class="tf-room-gallery tf-popup-buttons" style="background-image: url('./assets/image/room3.png'); ">
+			<div data-id="<?php echo get_the_ID(); ?>" class="tf-room-gallery tf-popup-buttons tf-hotel-room-popup">
 				<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g id="content">
 				<path id="Rectangle 2111" d="M5.5 16.9745C5.6287 18.2829 5.91956 19.1636 6.57691 19.8209C7.75596 21 9.65362 21 13.4489 21C17.2442 21 19.1419 21 20.3209 19.8209C21.5 18.6419 21.5 16.7442 21.5 12.9489C21.5 9.15362 21.5 7.25596 20.3209 6.07691C19.6636 5.41956 18.7829 5.1287 17.4745 5" stroke="#FDF9F4" stroke-width="1.5"></path>
@@ -2289,8 +2289,10 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 				</svg>
 			</div>
 			<div class="tf-available-labels">
-				<span class="tf-available-labels-populer">Populer</span>
-				<span class="tf-available-labels-featured">Featured</span>
+				<span class="tf-available-labels-populer"><?php _e("Populer", "tourfic"); ?></span>
+				<?php if ( $featured ): ?>
+				<span class="tf-available-labels-featured"><?php _e("Featured", "tourfic"); ?></span>
+				<?php endif; ?>
 			</div>  
 			<div class="tf-available-ratings">
 				<?php tf_archive_single_rating(); ?>
@@ -2305,16 +2307,18 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					if ( ! empty( $address ) ) {
 					?>
 					<div class="tf-title-location">
-						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-						<g clip-path="url(#clip0_754_13936)">
-							<path d="M10 17.9156L14.1248 13.7908C16.4028 11.5128 16.4028 7.81928 14.1248 5.54122C11.8468 3.26317 8.15327 3.26317 5.87521 5.54122C3.59715 7.81928 3.59715 11.5128 5.87521 13.7908L10 17.9156ZM10 20.2726L4.6967 14.9693C1.76777 12.0403 1.76777 7.29165 4.6967 4.36272C7.62563 1.43378 12.3743 1.43378 15.3033 4.36272C18.2323 7.29165 18.2323 12.0403 15.3033 14.9693L10 20.2726ZM10 11.3327C10.9205 11.3327 11.6667 10.5865 11.6667 9.66602C11.6667 8.74554 10.9205 7.99935 10 7.99935C9.0795 7.99935 8.33333 8.74554 8.33333 9.66602C8.33333 10.5865 9.0795 11.3327 10 11.3327ZM10 12.9993C8.15905 12.9993 6.66667 11.5069 6.66667 9.66602C6.66667 7.82507 8.15905 6.33268 10 6.33268C11.8409 6.33268 13.3333 7.82507 13.3333 9.66602C13.3333 11.5069 11.8409 12.9993 10 12.9993Z" fill="#99948D"/>
-						</g>
-						<defs>
-							<clipPath id="clip0_754_13936">
-							<rect width="20" height="20" fill="white" transform="translate(0 0.5)"/>
-							</clipPath>
-						</defs>
-						</svg>
+						<div class="location-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+							<g clip-path="url(#clip0_754_13936)">
+								<path d="M10 17.9156L14.1248 13.7908C16.4028 11.5128 16.4028 7.81928 14.1248 5.54122C11.8468 3.26317 8.15327 3.26317 5.87521 5.54122C3.59715 7.81928 3.59715 11.5128 5.87521 13.7908L10 17.9156ZM10 20.2726L4.6967 14.9693C1.76777 12.0403 1.76777 7.29165 4.6967 4.36272C7.62563 1.43378 12.3743 1.43378 15.3033 4.36272C18.2323 7.29165 18.2323 12.0403 15.3033 14.9693L10 20.2726ZM10 11.3327C10.9205 11.3327 11.6667 10.5865 11.6667 9.66602C11.6667 8.74554 10.9205 7.99935 10 7.99935C9.0795 7.99935 8.33333 8.74554 8.33333 9.66602C8.33333 10.5865 9.0795 11.3327 10 11.3327ZM10 12.9993C8.15905 12.9993 6.66667 11.5069 6.66667 9.66602C6.66667 7.82507 8.15905 6.33268 10 6.33268C11.8409 6.33268 13.3333 7.82507 13.3333 9.66602C13.3333 11.5069 11.8409 12.9993 10 12.9993Z" fill="#99948D"/>
+							</g>
+							<defs>
+								<clipPath id="clip0_754_13936">
+								<rect width="20" height="20" fill="white" transform="translate(0 0.5)"/>
+								</clipPath>
+							</defs>
+							</svg>
+						</div>
 						<span><?php echo esc_html( $address ); ?></span>
 					</div>
 					<?php } ?>
@@ -3310,7 +3314,7 @@ function tf_hotel_quickview_callback() {
 					<?php } } ?>
                 </div>
                 <div class="tf-popup-right">
-                    <h4 class="tf-popup-info-title">Room details</h4>
+                    <h4 class="tf-popup-info-title"><?php _e("Room details", "tourfic"); ?></h4>
                     <ul>
 						<?php if ( $footage ) { ?>
 							<li><i class="fas fa-ruler-combined"></i> <?php echo $footage; ?><?php _e( 'sft', 'tourfic' ); ?></li>
@@ -3327,7 +3331,7 @@ function tf_hotel_quickview_callback() {
 						<?php } ?>                        
                     </ul> 
 					  
-                    <h4 class="tf-popup-info-title">Other benefits</h4>
+                    <h4 class="tf-popup-info-title"><?php _e("Other benefits", "tourfic"); ?></h4>
                     <ul>
 						<?php 
 						if( !empty($room['features']) ){
@@ -3365,6 +3369,28 @@ function tf_hotel_quickview_callback() {
 
 add_action( 'wp_ajax_tf_tour_details_qv', 'tf_hotel_quickview_callback' );
 add_action( 'wp_ajax_nopriv_tf_tour_details_qv', 'tf_hotel_quickview_callback' );
+
+/**
+ * Ajax hotel Archive Hotel Gallery quick view
+ * @author Jahid
+ */
+
+function tf_hotel_archive_popup_qv_callback(){
+	$meta = get_post_meta( $_POST['post_id'], 'tf_hotels_opt', true );
+	$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
+	if ( $gallery ) {
+		$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+	}
+	if ( ! empty( $gallery_ids ) ) {
+	foreach ( $gallery_ids as $key => $gallery_item_id ) {
+	$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+	?>
+		<img src="<?php echo esc_url($image_url); ?>" alt="" class="tf-popup-image">
+	<?php } }
+	wp_die();
+}
+add_action( 'wp_ajax_tf_hotel_archive_popup_qv', 'tf_hotel_archive_popup_qv_callback' );
+add_action( 'wp_ajax_nopriv_tf_hotel_archive_popup_qv', 'tf_hotel_archive_popup_qv_callback' );
 
 #################################
 # WooCommerce integration       #

@@ -19,7 +19,10 @@
 
     <!--Content section end -->
     <div class="tf-content-wrapper">
-        
+        <?php
+            do_action( 'tf_before_container' );
+            $post_count = $GLOBALS['wp_query']->post_count;
+        ?>
         <div class="tf-container">
         
             <!-- Hotel details Srart -->
@@ -108,18 +111,25 @@
                 <!-- Booking form end -->                    
 
 
-                <div class="tf-details-left">
-
+                <div class="tf-details-left tf-result-previews">
+                    
                     <!--Available rooms start -->
                     <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
                         <div class="tf-archive-available-rooms-head tf-available-rooms-head">
-                            <h2 class="">Total 45 hotels available </h2>
+                            <h2 class=""><?php _e("Total", "tourfic"); ?> <?php echo $post_count; ?> <?php _e("hotels available", "tourfic"); ?></h2>
                             <div class="tf-filter">
-                                <span>Best match</span>
+                                <span><?php _e("Best match", "tourfic"); ?></span>
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
                         </div>
-
+                        
+                        <!-- Loader Image -->
+                        <div id="tour_room_details_loader">
+                            <div id="tour-room-details-loader-img">
+                                <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+                            </div>
+                        </div>
+                        
                         <!--Available rooms start -->
                         <div class="tf-archive-available-rooms tf-available-rooms">
 
@@ -409,5 +419,19 @@
         </div>
     </div>
     <!--Content section end -->
- 
+
+    
+    <!-- Hotel PopUp Starts -->       
+    <div class="tf-popup-wrapper tf-hotel-popup">
+        <div class="tf-popup-inner">
+            <div class="tf-popup-body">
+                
+            </div>                
+            <div class="tf-popup-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </div>
+    <!-- Hotel PopUp end -->  
+
 </div>

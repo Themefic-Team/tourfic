@@ -2634,6 +2634,32 @@
             $(".tf-template-3 .tf-booking-form-guest-and-room .tf_acrselection-wrap").addClass("tf-show");
         }); 
         
+        /**
+         * Design 2 Archive Hotel Room Gallery Popup
+         *
+         */
+        $(document).on('click', '.tf-hotel-room-popup', function (e) {
+            e.preventDefault();
+            $("#tour_room_details_loader").show();
+            var post_id = $(this).attr("data-id");
+            var data = {
+                action: 'tf_hotel_archive_popup_qv',
+                post_id: post_id
+            };
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: data,
+                success: function (response) {
+                    $(".tf-popup-body").html(response);
+                    $(".tf-hotel-popup").addClass("tf-show")
+                    $("#tour_room_details_loader").hide();
+                    
+                }
+
+            });
+        });
     });
 
     /*
