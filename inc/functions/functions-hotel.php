@@ -2181,12 +2181,10 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
                 <div class="tf-post-footer tf-flex tf-flex-align-center tf-flex-space-bttn tf-mt-16">
                     <div class="tf-pricing">
 						<?php
+						$room_price = array_filter( $room_price );
 						if ( ! empty( $room_price ) ):
 							echo __( "From ", "tourfic" );
-							//get the lowest price from all available room price
 							$lowest_price  = wc_price( min( $room_price ) );
-							$highest_price = wc_price( max( $room_price ) );
-							echo "<del>$highest_price</del>";
 							echo " $lowest_price";
 						endif; ?>
                     </div>
@@ -2288,8 +2286,6 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 															echo __( "From ", "tourfic" );
 															//get the lowest price from all available room price
 															$lowest_price  = wc_price( min( $room_price ) );
-															$highest_price = wc_price( max( $room_price ) );
-															echo "<del>$highest_price</del>";
 															echo " $lowest_price"
 															?>
                                                         </div>
