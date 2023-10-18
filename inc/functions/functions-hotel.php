@@ -2021,13 +2021,17 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	 * @author - Hena
 	 */
 	$room_price = [];
+	$discount_amount = [];
 	if ( ! empty( $b_rooms ) ):
 		foreach ( $b_rooms as $b_room ) {
 			
 			//hotel room discount data
 			$hotel_discount_type = !empty($b_room["discount_hotel_type"]) ? $b_room["discount_hotel_type"] : "none";
 			$hotel_discount_amount = !empty($b_room["discount_hotel_price"]) ? $b_room["discount_hotel_price"] : '';
-			
+			if($hotel_discount_type!="none" && !empty($hotel_discount_amount)){
+				$discount_amount[] = $hotel_discount_amount;
+			}
+
 			//room price
 			$pricing_by = ! empty( $b_room['pricing-by'] ) ? $b_room['pricing-by'] : 1;
 			if ( $pricing_by == 1 ) {
@@ -2317,41 +2321,73 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					<?php } ?>
 				</div>
 				<div class="tf-mobile tf-pricing-info">
-					<div class="tf-available-room-off">
-						<span>60% off</span>
-					</div>
+					<?php if ( ! empty( $discount_amount ) ){ ?>
+						<div class="tf-available-room-off">
+							<span>
+								<?php echo min( $discount_amount ); ?>% <?php _e( "Off ", "tourfic" ); ?>
+							</span>
+						</div>
+					<?php } ?>
 					<div class="tf-available-room-price">
-						<span class="tf-price-from">From $450</span>
-						<span class="tf-price"><span>$250</span>/night</span>
+						<span class="tf-price-from">
+						<?php
+						if ( ! empty( $room_price ) ):
+							echo __( "From ", "tourfic" );
+							//get the lowest price from all available room price
+							$lowest_price = wc_price( min( $room_price ) );
+							echo " $lowest_price";
+						endif; ?>
+						</span>
 					</div>
 				</div>
+				<?php if ( $features ) { ?>
 				<ul>
-					<li><i class="fas fa-ruler-combined"></i> 25 m2sft</li>
-					<li><i class="fas fa-bed"></i> 2 Number of Beds</li>
-					<li><i class="fab fa-creative-commons-zero"></i> Breakfast Included </li>
-					<li><i class="fas fa-road"></i> Carpeted </li>
-					<li><i class="fas fa-road"></i> Carpeted </li>
-					<li><i class="fas fa-tshirt"></i> Clothes rack </li>
-					<li><i class="fas fa-bed"></i> Double Bed </li>
-					<li><a href="#">See all benefits</a></li>
-					
+				<?php foreach ( $features as $tfkey => $feature ) {
+				$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
+				if ( ! empty( $feature_meta ) ) {
+					$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+				}
+				if ( ! empty( $f_icon_type ) && $f_icon_type == 'fa' ) {
+					$feature_icon = ! empty( $feature_meta['icon-fa'] ) ? '<i class="' . $feature_meta['icon-fa'] . '"></i>' : '';
+				} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
+					$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
+				}
+				if ( $tfkey < 8 ) {
+				?>
+					<li>
+					<?php
+					if ( ! empty( $feature_icon ) ) {
+						echo $feature_icon;
+					} ?>
+					<?php echo $feature->name; ?>
+					</li>
+				<?php } } ?>
 				</ul>
+				<?php } ?>
 			</div>
 			<div class="tf-available-room-content-right">
 				<div class="tf-cancellation-refundable-text">
 					<span>Free cancellation <i class="fa-solid fa-info"></i></span>
 					<span>Free refundable <i class="fa-solid fa-info"></i></span>
 				</div>
-				<div class="tf-available-room-off">
-					<span>60% off</span>
-				</div>
+				<?php if ( ! empty( $discount_amount ) ){ ?>
+					<div class="tf-available-room-off">
+						<span>
+							<?php echo min( $discount_amount ); ?>% <?php _e( "Off ", "tourfic" ); ?>
+						</span>
+					</div>
+				<?php } ?>
 				<div class="tf-available-room-price">
-					<span class="tf-price-from">From $450</span>
-					<span class="tf-price"><span>$250</span>/night</span>
-				</div> 
-				<div class="tf-available-room-purchase-summery">
-					<span>Total $450 for 3 nights, 1 room</span>
-				</div>                            
+					<span class="tf-price-from">
+						<?php
+						if ( ! empty( $room_price ) ):
+							echo __( "From ", "tourfic" );
+							//get the lowest price from all available room price
+							$lowest_price = wc_price( min( $room_price ) );
+							echo " $lowest_price";
+						endif; ?>
+					</span>
+				</div>                       
 				<a href="<?php echo esc_url( $url ); ?>"><?php _e("See available rooms", "tourfic"); ?></a>
 			</div>
 		</div>

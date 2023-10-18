@@ -10074,6 +10074,125 @@ html {
   line-height: 20.8px;
   text-decoration: none;
 }
+.tf-template-3 .tf-filter-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-title {
+  display: flex;
+  justify-content: space-between;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-title .tf-section-title {
+  margin: 0 !important;
+  padding: 0;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-title button {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  border: none;
+  background: unset;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item h4 {
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  font-family: "Josefin Sans", sans-serif;
+  color: #595349;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item label.tf-filter-location {
+  display: flex;
+  background: #fff;
+  padding: 12px;
+  gap: 6px;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item label.tf-filter-location input {
+  width: -webkit-fill-available;
+  border: none;
+  outline: none;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item.tf-filter-rating i {
+  color: #FFC700;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item .tf-filter-pricing-range input.al-range-slider__input {
+  display: none;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item .tf-filter-pricing-range .al-range-slider__track {
+  box-shadow: none;
+  background: #D6D4D2;
+  height: 8px;
+  margin: 10px 0 40px 0;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item .tf-filter-pricing-range .al-range-slider__bar {
+  border: none;
+  box-shadow: none;
+  background: #99948D;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item .tf-filter-pricing-range .al-range-slider__knob {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  border: 1.5px solid #595349;
+  background: #FDF9F3;
+  box-shadow: none;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item .tf-filter-pricing-range .al-range-slider__knob:hover {
+  border-color: none;
+  box-shadow: none;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item .tf-filter-pricing-range .al-range-slider__tooltip {
+  background: none;
+  border-radius: none;
+  bottom: -150%;
+  box-shadow: none;
+  font-size: 16px;
+  padding: 0;
+  color: #595349;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item .tf-filter-pricing-range .al-range-slider {
+  padding: 0;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item ul li input {
+  padding: 0;
+  height: initial;
+  width: initial;
+  margin-bottom: 0;
+  display: none;
+  cursor: pointer;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item ul li input:checked + label:before {
+  background: #B58E53;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item ul li label {
+  position: relative;
+  cursor: pointer;
+  color: #99948D;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item ul li label:before {
+  content: "";
+  background-color: transparent;
+  display: inline-block;
+  border-radius: 2px;
+  border: 0.794px solid #917242;
+  background: #FDF9F3;
+  height: 12px;
+  width: 12px;
+  margin-right: 8px;
+}
+.tf-template-3 .tf-filter-wrapper .tf-filter-list-item ul li a.tf-filter-list-see-less {
+  color: #595349;
+  text-decoration: none;
+}
 .tf-template-3 .tf-popup-wrapper {
   position: fixed;
   left: 0;
