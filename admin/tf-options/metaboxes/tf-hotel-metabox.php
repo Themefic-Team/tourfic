@@ -155,6 +155,12 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 								'min' => '0',
 							),
 						),
+						array(
+							'id'       => 'place-icon',
+							'type'     => 'icon',
+							'label'    => __( 'Place Item Icon', 'tourfic' ),
+							'subtitle' => __( 'Choose an appropriate icon', 'tourfic' ),
+						),
 					)
 				), // nearby places end
 
