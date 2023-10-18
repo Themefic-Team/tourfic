@@ -309,10 +309,11 @@ a.slick-slide-item-link {
         font-size: 22px !important;
     }
     ul {
-        list-style-type: none;
-        padding-left: 0;
+        padding-left: 5px;
         font-size: 15px; 
+        margin: 0;
         li {
+            list-style-type: none;
             display: flex;
             justify-content: space-between;
             padding: 8px 0;
