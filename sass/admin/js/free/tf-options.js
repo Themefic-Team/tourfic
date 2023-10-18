@@ -1677,7 +1677,7 @@ var frame, gframe;
             var textareaValue = $('textarea[name="tf_export_option"]').val();
     
             // Create a blob with the textarea value
-            var blob = new cd([textareaValue], { type: 'text/json' });
+            var blob = new Blob([textareaValue], { type: 'text/plain' });
     
             // Create a temporary URL for the blob
             var url = window.URL.createObjectURL(blob);
@@ -1685,7 +1685,7 @@ var frame, gframe;
             // Create a temporary link element
             var link          = document.createElement('a');
                 link.href     = url;
-                link.download = 'tf-settings-export.json';
+                link.download = 'tf-settings-export.txt';
     
             // Programmatically click the link to initiate the file download
             link.click();

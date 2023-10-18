@@ -8,9 +8,12 @@ defined( 'ABSPATH' ) || exit;
 add_action( 'wp_ajax_tf_import', 'tf_import_callback' );
 function tf_import_callback(){
 
-    $imported_data = $_POST['tf_import_option'];
-    update_option( 'tf_settings', json_decode( $imported_data, true ) );
-    wp_send_json_success('Import completed successfully.');
+    $imported_data = stripslashes( $_POST['tf_import_option'] );
+    $imported_data = unserialize( $imported_data );
+    //$imported_data = serialize( $imported_data );
+    update_option( 'tf_settings', $imported_data );
+    wp_send_json_success($imported_data);
+    //echo $imported_data;
     die();
 }
 
