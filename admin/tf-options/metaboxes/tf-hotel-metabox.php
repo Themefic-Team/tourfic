@@ -5,6 +5,24 @@ $badge_up     = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Up
 $badge_pro    = '<div class="tf-csf-badge"><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 $badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Upcoming", "tourfic" ) . '</span><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 
+if(!function_exists('tf_hotel_amenities_categories')) {
+	function tf_hotel_amenities_categories() {
+		$amenities_cats = ! empty( tf_data_types( tfopt( 'hotel_amenities_cats' ) ) ) ? tf_data_types( tfopt( 'hotel_amenities_cats' ) ) : '';
+		$all_cats       = [];
+		if ( ! empty( $amenities_cats ) && is_array( $amenities_cats ) ) {
+			foreach ( $amenities_cats as $key => $cat ) {
+				$all_cats[ (string) $key ] = $cat['hotel_amenities_cat_name'];
+			}
+		}
+	
+		if(empty($all_cats)){
+			$all_cats[''] = __( 'Select Category', 'tourfic' );
+		}
+	
+		return $all_cats;
+	}
+}
+
 TF_Metabox::metabox( 'tf_hotels_opt', array(
 	'title'     => 'Hotel Settings',
 	'post_type' => 'tf_hotel',
@@ -93,9 +111,16 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 		),
 		//Hotel Info
 		'hotel_info' => array(
-			'title'  => __( 'Info', 'tourfic' ),
+			'title'  => __( 'Information\'s', 'tourfic' ),
 			'icon'   => 'fa-solid fa-info-circle',
 			'fields' => array(
+				// nearby Places
+				array(
+					'id'      => 'nearby-places-heading',
+					'type'    => 'heading',
+					'content' => __( 'Nearby Places', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
 				array(
 					'id'          => 'section-title',
 					'type'        => 'text',
@@ -131,7 +156,62 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							),
 						),
 					)
+				), // nearby places end
+
+				// Amenities
+				array(
+					'id'      => 'amenities-heading',
+					'type'    => 'heading',
+					'content' => __( 'Hotel Aminites', 'tourfic' ),
+					'class'   => 'tf-field-class',
 				),
+				array(
+					'id'          => 'amenities-section-title',
+					'type'        => 'text',
+					'label'       => __( 'Amenities Title', 'tourfic' ),
+					'placeholder' => __( "What this place offers", 'tourfic' ),
+					'default' => __( "What this place offers", 'tourfic' ),
+					'attributes'  => array(
+						'required' => 'required',
+					),
+				),
+				array(
+					'id'           => 'hotel-amenities',
+					'type'         => 'repeater',
+					'label'        => __( 'Insert / Create Hotel Amenities', 'tourfic' ),
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'class'        => 'tf-field-class',
+					'fields'       => array(
+						array(
+							'id'          => 'amenities-feature',
+							'type'        => 'select2',
+							'label'       => __( 'Amenities Feature', 'tourfic' ),
+							'placeholder' => __( 'Select amenities feature', 'tourfic' ),
+							'options'     => 'terms',
+							'query_args'  => array(
+								'taxonomy'   => 'hotel_feature',
+								'hide_empty' => false,
+							),
+							'field_width' => 50,
+						),
+						array(
+							'id'          => 'amenities-category',
+							'type'        => 'select2',
+							'label'       => __( 'Amenities Category', 'tourfic' ),
+							'placeholder' => __( 'Select amenities category', 'tourfic' ),
+							'options'     => tf_hotel_amenities_categories(),
+							'description' => __( 'Add new category from <a target="_blank" href="'.admin_url('admin.php?page=tf_settings#tab=single_page').'">Amenities Categories</a>', 'tourfic' ),
+							'field_width' => 50,
+						),
+						array(
+							'id'        => 'favorite',
+							'type'      => 'switch',
+							'label'     => __( 'Mark as Favorite', 'tourfic' ),
+							'label_on'  => __( 'Yes', 'tourfic' ),
+							'label_off' => __( 'No', 'tourfic' ),
+						),
+					)
+				), // Amenities end
 			),
 		),
 		// Hotel Details
