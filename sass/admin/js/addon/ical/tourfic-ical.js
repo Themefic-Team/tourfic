@@ -33,7 +33,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tf_ical_params.ajax_url,
                 data: {
                     action: 'tf_import_ical',
                     ical_url: iCalUrl,
@@ -56,6 +56,9 @@
                 error: function (response) {
                     btn.removeClass('tf-btn-loading');
                     console.log('error', response);
+                },
+                complete: function (response) {
+                    btn.removeClass('tf-btn-loading');
                 }
             })
 

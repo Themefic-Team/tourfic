@@ -450,6 +450,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'attributes'  => array(
 								'class' => 'ical_url_input',
 							),
+							'is_pro'      => true
 						),
 						array(
 							'id'      => 'Availability',
