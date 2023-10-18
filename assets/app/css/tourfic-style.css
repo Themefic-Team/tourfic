@@ -9231,6 +9231,99 @@ html {
   padding: 32px;
   width: 416px;
 }
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget {
+  background-color: transparent;
+  border: 0px solid;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-widget-title {
+  padding: 0px;
+  height: auto;
+  background: transparent;
+  border: 0px solid;
+  border-radius: 8px 8px 0px 0px;
+  pointer-events: none;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-widget-title h4 {
+  margin-bottom: 12px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 1.5 !important;
+  color: #595349 !important;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-widget-title i {
+  display: none;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-filter {
+  padding: 0;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-filter ul li {
+  margin-left: 0px;
+  padding-left: 0px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+  color: #99948D;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-filter ul li label {
+  padding-left: 35px;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-filter ul li label .checkmark {
+  border-radius: 4px;
+  border: 1px solid #917242;
+  background: #FDF9F3;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-filter ul li label .checkmark::after {
+  top: 2px;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-filter ul li label input:checked ~ .checkmark {
+  background-color: #B58E53 !important;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-filter a.see-more.btn-link,
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-filter a.see-less.btn-link {
+  text-align: left;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-filter a.see-more.btn-link span,
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .tf-filter a.see-less.btn-link span {
+  margin-left: 10px;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .al-range-slider__track {
+  background: #D6D4D2;
+  height: 10px;
+  box-shadow: none !important;
+  margin: 30px 0px 10px 0px;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .al-range-slider_dark {
+  padding: 0px !important;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .al-range-slider_dark .al-range-slider__bar {
+  background: #99948D !important;
+  box-shadow: none !important;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .al-range-slider__knob {
+  background: #FDF9F3 !important;
+  height: 15px;
+  width: 15px;
+  box-shadow: none !important;
+  border: 3px solid #99948D !important;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .al-range-slider__knob:first-child span {
+  left: 10px !important;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .al-range-slider__tooltip {
+  background: #99948D !important;
+  border-radius: 5px;
+  box-shadow: none;
+  padding: 3px 10px;
+  color: #fff !important;
+  font-size: 13px !important;
+  margin-bottom: 0px !important;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right .tf_widget .al-range-slider__input.js-al-range-slider__input {
+  display: none !important;
+}
 .tf-template-3 .tf-details-menu.tf-sticky-menu {
   position: fixed;
   top: 175px;
@@ -9686,7 +9779,7 @@ html {
   padding: 9px;
   border: none;
   outline: none;
-  width: -webkit-fill-available;
+  width: 100%;
 }
 .tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-guest-and-room {
   padding-left: 40px !important;
