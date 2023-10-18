@@ -32,7 +32,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'tf-date-format-for-users',
 					'type'     => 'select',
 					'label'    => __( 'Select Date Format', 'tourfic' ),
-					'subtitle' => __( 'Select a format, that will show when a user selct date', 'tourfic' ),
+					'subtitle' => __( 'Select a format, that will show when a user select date', 'tourfic' ),
 					'options'  => array(
 						'Y/m/d'  => __( 'YYYY/MM/DD', 'tourfic' ),
 						'Y-m-d' => __( 'YYYY-MM-DD', 'tourfic' ),

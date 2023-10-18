@@ -3526,20 +3526,22 @@ function tf_tour_booking_popup_callback() {
 			$response['traveller_info'] .= '</div>
             </div>';
 			$tour_date_format_for_users = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
-			function tf_date_format_user($date, $format) {
-				if(!empty($date) && !empty($format)) {
-				   if(str_contains( $date, "-") == true) {
-					   list($first_date, $last_date) = explode(" - ", $date);
-					   $first_date = date($format, strtotime($first_date));
-					   $last_date = date($format, strtotime($last_date));
-					   return "{$first_date} - {$last_date}";
-				   } else {
-					   return date($format, strtotime($date));
-				   }
-				}else {
-					return;
-				}
-		   }
+			if ( ! function_exists( 'tf_date_format_user' ) ) {
+				function tf_date_format_user($date, $format) {
+					if(!empty($date) && !empty($format)) {
+					if(str_contains( $date, "-") == true) {
+						list($first_date, $last_date) = explode(" - ", $date);
+						$first_date = date($format, strtotime($first_date));
+						$last_date = date($format, strtotime($last_date));
+						return "{$first_date} - {$last_date}";
+					} else {
+						return date($format, strtotime($date));
+					}
+					}else {
+						return;
+					}
+			}
+			}
 		}
 		$response['traveller_summery'] .= '<h6>On ' . tf_date_format_user($tour_date, $tour_date_format_for_users) . '</h6>
         <table class="table" style="width: 100%">
