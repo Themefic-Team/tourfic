@@ -158,25 +158,7 @@
                                 <img src="./assets/image/search-lg.svg" alt="">
                                 <input type="text">
                             </label>
-                        </div>  
-                        
-                        <div class="tf-filter-list-item">
-                            <h4>Payment type</h4>
-                            <ul>
-                                <li>
-                                    <input type="checkbox" name="" id="">
-                                    <label for="asd">Fully refundable</label>                                        
-                                </li>
-                                <li>
-                                    <input type="checkbox" name="" id="">
-                                    <label for="asd">Reserve now, pay later</label>                                        
-                                </li>
-                                <li>
-                                    <input type="checkbox" name="" id="">
-                                    <label for="asd">Free cancelation</label>                                        
-                                </li>
-                            </ul>
-                        </div>                            
+                        </div>                         
                         
                         <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
                         <div id="tf__booking_sidebar">

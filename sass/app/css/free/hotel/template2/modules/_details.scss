@@ -140,6 +140,12 @@
                         text-align: left;
                         text-decoration: none;
                         text-transform: capitalize;
+                        color: #595349;
+                        font-family: Josefin Sans;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 130%; /* 20.8px */
                         span{
                             margin-left: 10px;
                         }
@@ -161,8 +167,8 @@
                 }
                 .al-range-slider__knob {
                     background: #FDF9F3 !important;
-                    height: 15px;
-                    width: 15px;
+                    height: 24px;
+                    width: 24px;
                     box-shadow: none !important;
                     border: 3px solid #99948D !important;
                     &:first-child {
