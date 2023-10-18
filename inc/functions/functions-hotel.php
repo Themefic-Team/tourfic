@@ -1949,6 +1949,11 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
         }, $b_rooms );
         $b_rooms = unserialize( $tf_hotel_b_rooms_value );
     }
+	// Gallery Image
+	$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
+	if ( $gallery ) {
+		$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+	}
 
 	// Archive Page Minimum Price
     $archive_page_price_settings = !empty(tfopt('tf-template')["hotel_archive_price_minimum_settings"]) ? tfopt('tf-template')["hotel_archive_price_minimum_settings"] : 'all';
@@ -2277,7 +2282,9 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 						echo '<img src="' . TF_ASSETS_APP_URL . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 					}
 					?>
-			</div>                                                                           
+			</div>
+			<?php 
+			if( !empty($gallery_ids) ){ ?>                                                                     
 			<div data-id="<?php echo get_the_ID(); ?>" class="tf-room-gallery tf-popup-buttons tf-hotel-room-popup">
 				<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g id="content">
@@ -2288,6 +2295,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 				</g>
 				</svg>
 			</div>
+			<?php } ?>
 			<div class="tf-available-labels">
 				<span class="tf-available-labels-populer"><?php _e("Populer", "tourfic"); ?></span>
 				<?php if ( $featured ): ?>
