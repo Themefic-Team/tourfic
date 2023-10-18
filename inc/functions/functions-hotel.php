@@ -2291,10 +2291,9 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 			<div class="tf-available-labels">
 				<span class="tf-available-labels-populer">Populer</span>
 				<span class="tf-available-labels-featured">Featured</span>
-				<span class="tf-available-labels-visited">Most visited</span>
 			</div>  
 			<div class="tf-available-ratings">
-				<span class="tf-available-rating-number">4.5</span>
+				<?php tf_archive_single_rating(); ?>
 				<i class="fa-solid fa-star"></i>
 			</div>  
 		</div>
@@ -2388,7 +2387,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 						endif; ?>
 					</span>
 				</div>                       
-				<a href="<?php echo esc_url( $url ); ?>"><?php _e("See available rooms", "tourfic"); ?></a>
+				<a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php _e("See available rooms", "tourfic"); ?></a>
 			</div>
 		</div>
 	</div>

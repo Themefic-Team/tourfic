@@ -9567,6 +9567,17 @@ html {
 .tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right button {
   padding: 12px 20px;
 }
+.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel {
+  color: #FDF9F3;
+  font-size: 16px;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  line-height: 24px;
+  background: #B58E53;
+  min-width: 166px;
+  padding: 12px 20px;
+  text-decoration: none;
+}
 .tf-template-3 .tf-booking-form-wrapper {
   background: #FAEEDC;
 }
