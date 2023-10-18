@@ -31,14 +31,20 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
                 <div class='tf-room-cal'></div>
                 <div class="tf-room-cal-field" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
 
-                    <div class="tf-field-text" style="width: calc(50% - 5px)">
+                    <div class="tf-field-date" style="width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Check In', 'tourfic' ); ?></label>
-                        <input readonly="readonly" type="text" class="tf_room_check_in" name="tf_room_check_in" placeholder="<?php echo __( 'Check In', 'tourfic' ); ?>">
+                        <div class="tf-fieldset" style="margin-top: 0;">
+                            <input readonly="readonly" type="text" class="tf_room_check_in" name="tf_room_check_in" placeholder="<?php echo __( 'Check In', 'tourfic' ); ?>">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
                     </div>
 
-                    <div class="tf-field-text" style="width: calc(50% - 5px)">
+                    <div class="tf-field-date" style="width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Check Out', 'tourfic' ); ?></label>
-                        <input readonly="readonly" type="text" class="tf_room_check_out" name="tf_room_check_out" placeholder="<?php echo __( 'Check Out', 'tourfic' ); ?>">
+                        <div class="tf-fieldset" style="margin-top: 0;">
+                            <input readonly="readonly" type="text" class="tf_room_check_out" name="tf_room_check_out" placeholder="<?php echo __( 'Check Out', 'tourfic' ); ?>">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
                     </div>
 
                     <div class="tf-field-text tf-price-by-room" style="display: <?php echo $pricing_by == '1' ? 'block' : 'none' ?>; width: calc(50% - 5px)">

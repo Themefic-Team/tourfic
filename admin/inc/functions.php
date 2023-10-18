@@ -237,6 +237,12 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 				'message' => __( 'Please select check in and check out date.', 'tourfic' )
 			] );
 		}
+
+        if($date_format == 'Y.m.d' || $date_format == 'd.m.Y'){
+            $check_in = date("Y-m-d", strtotime(str_replace(".", "-", $check_in)));
+            $check_out = date("Y-m-d", strtotime(str_replace(".", "-", $check_out)));
+        }
+
 		$check_in  = strtotime( $check_in );
 		$check_out = strtotime( $check_out );
 		if ( $check_in > $check_out ) {
@@ -280,6 +286,8 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 			'status'     => true,
 			'message'    => __( 'Availability updated successfully.', 'tourfic' ),
 			'avail_date' => json_encode( $room_avail_data ),
+            'check_in' => $check_in,
+            'check_out' => $check_out,
 		] );
 
 		die();
