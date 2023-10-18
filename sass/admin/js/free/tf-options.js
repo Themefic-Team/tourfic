@@ -1693,8 +1693,6 @@ var frame, gframe;
             // Clean up the temporary URL
             window.URL.revokeObjectURL(url);
         });
-    });
-    
+    });    
 
 })(jQuery);
-

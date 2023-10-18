@@ -10,12 +10,7 @@ function tf_import_callback(){
 
     $imported_data = stripslashes( $_POST['tf_import_option'] );
     $imported_data = unserialize( $imported_data );
-    //$imported_data = serialize( $imported_data );
     update_option( 'tf_settings', $imported_data );
     wp_send_json_success($imported_data);
-    //echo $imported_data;
     die();
 }
-
-
-
