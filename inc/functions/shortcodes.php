@@ -858,6 +858,161 @@ function tf_search_result_shortcode( $atts, $content = null ) {
                 </div>
             </div>
         </div>
+	<?php 
+	}
+	elseif ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-2" ) || ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-2" ) ) { ?>
+		
+		
+		<div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
+			<div class="tf-archive-available-rooms-head tf-available-rooms-head tf-total-results">
+				<h2 class=""><?php _e("Total", "tourfic"); ?> <span><?php echo $total_posts; ?></span> <?php _e("hotels available", "tourfic"); ?></h2>
+				<div class="tf-filter">
+					<span><?php _e("Best match", "tourfic"); ?></span>
+					<i class="fa-solid fa-chevron-down"></i>
+				</div>
+			</div>
+			
+			<!-- Loader Image -->
+			<div id="tour_room_details_loader">
+				<div id="tour-room-details-loader-img">
+					<img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
+				</div>
+			</div>
+			
+			<!--Available rooms start -->
+			<div class="tf-archive-available-rooms tf-available-rooms archive_ajax_result">
+
+			<?php
+			if ( $loop->have_posts() ) {
+				$not_found = [];
+				while ( $loop->have_posts() ) {
+					$loop->the_post();
+
+					if ( $post_type == 'tf_hotel' ) {
+
+						if ( empty( $check_in_out ) ) {
+							tf_filter_hotel_without_date( $period, $not_found, $data );
+						} else {
+							tf_filter_hotel_by_date( $period, $not_found, $data );
+						}
+
+					} else {
+
+						if ( empty( $check_in_out ) ) {
+							/**
+							 * Check if minimum and maximum people limit matches with the search query
+							 */
+							$total_person = intval( $adults ) + intval( $child );
+							$meta         = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
+
+							//skip the tour if the search form total people exceeds the maximum number of people in tour
+							if ( ! empty( $meta['cont_max_people'] ) && $meta['cont_max_people'] < $total_person && $meta['cont_max_people'] != 0 ) {
+								$total_posts --;
+								continue;
+							}
+
+							//skip the tour if the search form total people less than the maximum number of people in tour
+							if ( ! empty( $meta['cont_min_people'] ) && $meta['cont_min_people'] > $total_person && $meta['cont_min_people'] != 0 ) {
+								$total_posts --;
+								continue;
+							}
+							tf_filter_tour_by_without_date( $period, $total_posts, $not_found, $data );
+						} else {
+							tf_filter_tour_by_date( $period, $total_posts, $not_found, $data );
+						}
+					}
+
+				}
+				$tf_total_results = 0;
+				$tf_total_filters = [];
+				foreach ( $not_found as $not ) {
+					if ( $not['found'] != 1 ) {
+						$tf_total_results   = $tf_total_results + 1;
+						$tf_total_filters[] = $not['post_id'];
+					}
+				}
+				if ( empty( $tf_total_filters ) ) {
+					echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+				}
+				$post_per_page = tfopt( 'posts_per_page' ) ? tfopt( 'posts_per_page' ) : 10;
+				// Main Query args
+				$filter_args = array(
+					'post_type'      => $post_type,
+					'post_status'    => 'publish',
+					'posts_per_page' => $post_per_page,
+					'paged'          => $paged,
+				);
+
+
+				$total_filtered_results = count( $tf_total_filters );
+				$current_page           = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+				$offset                 = ( $current_page - 1 ) * $post_per_page;
+				$displayed_results      = array_slice( $tf_total_filters, $offset, $post_per_page );
+				if ( ! empty( $displayed_results ) ) {
+					$filter_args = array(
+						'post_type'      => $post_type,
+						'post_status'    => 'publish',
+						'posts_per_page' => $post_per_page,
+						'post__in'       => $displayed_results,
+					);
+
+					$result_query = new WP_Query( $filter_args );
+					if ( $result_query->have_posts() ) {
+						while ( $result_query->have_posts() ) {
+							$result_query->the_post();
+
+							if ( $post_type == 'tf_hotel' ) {
+
+								if ( ! empty( $data ) ) {
+									if ( isset( $data[4] ) && isset( $data[5] ) ) {
+										[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
+										tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
+									} else {
+										[ $adults, $child, $room, $check_in_out ] = $data;
+										tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
+									}
+								} else {
+									tf_hotel_archive_single_item();
+								}
+
+							} else {
+								if ( ! empty( $data ) ) {
+									if ( isset( $data[3] ) && isset( $data[4] ) ) {
+										[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
+										tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+									} else {
+										[ $adults, $child, $check_in_out ] = $data;
+										tf_tour_archive_single_item( $adults, $child, $check_in_out );
+									}
+								} else {
+									tf_tour_archive_single_item();
+								}
+							}
+
+						}
+					}
+					$total_pages = ceil( $total_filtered_results / $post_per_page );
+					echo "<div class='tf_posts_navigation tf_posts_page_navigation'>";
+					echo paginate_links( array(
+						'total'   => $total_pages,
+						'current' => $current_page
+					) );
+					echo "</div>";
+				}
+
+			} else {
+				echo '<div class="tf-nothing-found" data-post-count="0">' . __( 'Nothing Found!', 'tourfic' ) . '</div>';
+			}
+			echo "<span hidden=hidden class='tf-posts-count'>";
+			echo ! empty( $tf_total_results ) ? $tf_total_results : 0;
+			echo "</span>";
+			?>
+				
+			</div>
+			<!-- Available rooms end -->
+
+		</div>
+		
 	<?php } else { ?>
         <div class="tf_search_result">
             <div class="tf-action-top">

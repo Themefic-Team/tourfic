@@ -131,5 +131,19 @@
                 }
             }
         }
+        .tf-archive-hero-content {
+            display: flex;
+            justify-content: flex-end;
+            .tf-head-title {
+                margin: 0 0 38px 0;
+                display: flex;
+                align-items: center;
+                gap: 32px;
+            }
+            .tf-title-meta {
+                font-size: 24px;
+                line-height: 1.3;
+            }
+        }
     }
 }

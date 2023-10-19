@@ -30,51 +30,14 @@
                 <!-- Booking form Start -->
                 <div class="tf-archive-search-form tf-booking-form-wrapper">
                     <form action="<?php echo tf_booking_search_action(); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
-                        <?php tf_archive_sidebar_search_form('tf_hotel'); ?>
+                        <?php tf_search_result_sidebar_form( 'archive' ); ?>
                     </form>
                 </div>
                 <!-- Booking form end -->                    
 
 
                 <div class="tf-details-left tf-result-previews">
-                    
-                    <!--Available rooms start -->
-                    <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
-                        <div class="tf-archive-available-rooms-head tf-available-rooms-head tf-total-results">
-                            <h2 class=""><?php _e("Total", "tourfic"); ?> <span><?php echo $post_count; ?></span> <?php _e("hotels available", "tourfic"); ?></h2>
-                            <div class="tf-filter">
-                                <span><?php _e("Best match", "tourfic"); ?></span>
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                        </div>
-                        
-                        <!-- Loader Image -->
-                        <div id="tour_room_details_loader">
-                            <div id="tour-room-details-loader-img">
-                                <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="">
-                            </div>
-                        </div>
-                        
-                        <!--Available rooms start -->
-                        <div class="tf-archive-available-rooms tf-available-rooms archive_ajax_result">
-
-                            <?php
-                            if ( have_posts() ) {
-                                while ( have_posts() ) {
-                                    the_post();
-                                    tf_hotel_archive_single_item();
-                                }
-                            } else {
-                                echo '<div class="tf-nothing-found" data-post-count="0" >' .__("No Tours Found!", "tourfic"). '</div>';
-                            }
-                            ?>
-                            
-                        </div>
-                        <!-- Available rooms end -->
-
-                    </div>
-                    <!-- Available rooms end -->
-
+                    <?php echo do_shortcode("[tf_search_result]"); ?>
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets tf-archive-right">
                     <div class="tf-filter-wrapper">
@@ -82,16 +45,14 @@
                             <h2 class="tf-section-title"><?php _e("Filter", "tourfic"); ?></h2>
                             <button><?php _e("Reset", "tourfic"); ?></button>
                         </div>   
-                        <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
-                        <div id="tf__booking_sidebar">
-                            <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
-                        </div>
-                        <?php } ?>
-        
-                    </div> 
+                        <?php //tf_search_result_sidebar_form( 'archive' ); ?>
 
-                    
-    
+                        <?php if ( is_active_sidebar( 'tf_search_result' ) ) { ?>
+                            <div id="tf__booking_sidebar">
+                                <?php dynamic_sidebar( 'tf_search_result' ); ?>
+                            </div>
+                        <?php } ?>
+                    </div>
                 </div>        
             </div>        
             <!-- Hotel details End -->

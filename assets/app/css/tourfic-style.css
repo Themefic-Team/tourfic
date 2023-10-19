@@ -9146,6 +9146,20 @@ html {
   height: 24px;
   width: 24px;
 }
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-archive-hero-content {
+  display: flex;
+  justify-content: flex-end;
+}
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-archive-hero-content .tf-head-title {
+  margin: 0 0 38px 0;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.tf-template-3 .tf-hero-section-wrap .tf-container .tf-archive-hero-content .tf-title-meta {
+  font-size: 24px;
+  line-height: 1.3;
+}
 .tf-template-3 .tf-content-wrapper .tf-details {
   display: flex;
   justify-content: space-between;
@@ -9696,13 +9710,13 @@ html {
   flex-direction: column;
   align-items: center;
   position: relative;
-  cursor: pointer;
 }
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields > div.tf-booking-form-guest-and-room {
   width: 36%;
   padding-left: 70px;
   align-items: start;
   border-right: none;
+  cursor: pointer;
 }
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkout input,
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin input {
@@ -9736,6 +9750,7 @@ html {
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-date-wrap {
   display: flex;
   gap: 6px;
+  cursor: pointer;
 }
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf_label-row span#tf-required {
   font-size: 12px;
