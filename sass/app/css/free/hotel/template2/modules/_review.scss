@@ -68,58 +68,6 @@
         }
 	}
 }
-// .tf-questions-wrapper { 
-// 	.tf-questions { 
-//         display: flex;
-//         gap: 40px;
-// 		.tf-questions-col { 
-//             display: grid;
-//             grid-template-columns: 1fr 1fr;
-//             gap: 20px;
-// 			.tf-question { 
-//                 padding: 24px;
-//                 background: transparent;
-//                 padding: 0px 24px;
-//                 transition: 0.3s;
-//                 display: inline-block;
-//                 margin-bottom: 16px;                
-//                 width: -webkit-fill-available;                
-//                 position: relative;
-//                 display: flex;
-//                 flex-direction: column;
-//                 gap: 10px;
-//                 &.tf-active {
-//                     background: #FDF9F3;
-//                     padding: 24px;
-//                     display: flex;
-//                     flex-direction: column;
-//                     gap: 10px;
-//                 }
-//                 .tf-faq-head{
-//                     h3 { 
-//                         color: #595349;
-//                         font-size: 16px !important;
-//                         font-family: "Josefin Sans", sans-serif;
-//                         font-weight: 600;
-//                         line-height: 20.80px !important;
-//                         margin-bottom: 10px;
-//                         margin-right: 10px;
-//                         display: flex;
-//                         justify-content: space-between;
-//                         cursor: pointer;
-                        
-//                     }
-                    
-//                 }
-
-// 				.tf-question-desc { 
-//                     display: none;
-// 				}
-// 			}
-// 		}
-// 	}
-// }
-
 .tf-questions-wrapper { 
 	.tf-questions { 
         display: grid;
@@ -132,9 +80,8 @@
                 background: transparent;
                 padding: 0px 24px;
                 transition: 0.3s;
-                display: inline-block;
-                margin-bottom: 16px;                
-                width: 100%;                
+                display: block;
+                margin-bottom: 16px;       
                 position: relative;
                 cursor: pointer;
                 &>i {
@@ -155,14 +102,19 @@
                         right: 16px !important;
                     }
                 }
-				h3 { 
-                    color: #595349;
-                    font-size: 16px;
-                    font-family: "Josefin Sans", sans-serif;
-                    font-weight: 600;
-                    line-height: 20.80px;
-                    margin-bottom: 10px;
-				}
+				.tf-faq-head{
+                    h3 { 
+                        color: #595349;
+                        font-size: 16px !important;
+                        font-family: "Josefin Sans", sans-serif;
+                        font-weight: 600;
+                        line-height: 20.80px !important;
+                        margin-bottom: 10px;
+                        display: flex;
+                        justify-content: space-between;
+                        cursor: pointer;
+                    }
+                }
 				.tf-question-desc { 
                     display: none;
 				}

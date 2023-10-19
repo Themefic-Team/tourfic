@@ -5,26 +5,9 @@
     <?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __( "Faq’s", 'tourfic' ); ?>
     </h2>            
     <div class="tf-questions">
-        <!-- <div class="tf-questions-col">
-            <?php 
-            $faq_key = 1;    
-            foreach ( $faqs as $key => $faq ): ?>
-            <div class="tf-question <?php echo $faq_key==1 ? esc_attr( 'tf-active' ) : ''; ?>">
-                <div class="tf-faq-head">
-                    <h3><?php echo esc_html( $faq['title'] ); ?>
-                    <i class="fa-solid fa-chevron-down"></i></h3>
-                </div>
-                <div class="tf-question-desc" style="<?php echo $faq_key==1 ? esc_attr( 'display: block;' ) : ''; ?>">
-                    <?php echo wp_kses_post( $faq['description'] ); ?>
-                </div>
-            </div>
-            <?php $faq_key++; endforeach; ?>
-            
-        </div> -->
         
         <?php 
         $faqs_itemsPerColumn = ceil(count($faqs) / 2);
-
         ?>
         <div class="tf-questions-col">
             <?php 
@@ -52,7 +35,6 @@
                 <div class="tf-question-desc">
                 <?php echo wp_kses_post( $faqs[$i]['description'] ); ?>
                 </div>
-                <i class="fa-solid fa-chevron-down"></i>
             </div>
             <?php } ?>
             

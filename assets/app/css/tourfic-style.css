@@ -9901,9 +9901,8 @@ html {
   background: transparent;
   padding: 0px 24px;
   transition: 0.3s;
-  display: inline-block;
+  display: block;
   margin-bottom: 16px;
-  width: 100%;
   position: relative;
   cursor: pointer;
 }
@@ -9925,13 +9924,16 @@ html {
   top: 16px !important;
   right: 16px !important;
 }
-.tf-template-3 .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question h3 {
+.tf-template-3 .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question .tf-faq-head h3 {
   color: #595349;
-  font-size: 16px;
+  font-size: 16px !important;
   font-family: "Josefin Sans", sans-serif;
   font-weight: 600;
-  line-height: 20.8px;
+  line-height: 20.8px !important;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
 }
 .tf-template-3 .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question .tf-question-desc {
   display: none;
