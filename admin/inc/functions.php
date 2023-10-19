@@ -221,6 +221,7 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 	function tf_add_hotel_availability() {
 		$date_format         = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$hotel_id            = isset( $_POST['hotel_id'] ) && ! empty( $_POST['hotel_id'] ) ? sanitize_text_field( $_POST['hotel_id'] ) : '';
+		$new_post            = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? $_POST['new_post'] : '';
 		$room_index          = isset( $_POST['room_index'] ) ? intval( $_POST['room_index'] ) : '';
 		$check_in            = isset( $_POST['tf_room_check_in'] ) && ! empty( $_POST['tf_room_check_in'] ) ? sanitize_text_field( $_POST['tf_room_check_in'] ) : '';
 		$check_out           = isset( $_POST['tf_room_check_out'] ) && ! empty( $_POST['tf_room_check_out'] ) ? sanitize_text_field( $_POST['tf_room_check_out'] ) : '';
@@ -238,10 +239,10 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 			] );
 		}
 
-        if($date_format == 'Y.m.d' || $date_format == 'd.m.Y'){
-            $check_in = date("Y-m-d", strtotime(str_replace(".", "-", $check_in)));
-            $check_out = date("Y-m-d", strtotime(str_replace(".", "-", $check_out)));
-        }
+		if ( $date_format == 'Y.m.d' || $date_format == 'd.m.Y' ) {
+			$check_in  = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
+			$check_out = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
+		}
 
 		$check_in  = strtotime( $check_in );
 		$check_out = strtotime( $check_out );
@@ -268,7 +269,7 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 		}
 
 		$hotel_avail_data = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
-		if ( ! empty( $hotel_avail_data ) ) {
+		if ( $new_post != 'true' ) {
 			$avail_date = json_decode( $hotel_avail_data['room'][ $room_index ]['avail_date'], true );
 			if ( isset( $avail_date ) && ! empty( $avail_date ) ) {
 				$room_avail_data = array_merge( $avail_date, $room_avail_data );
@@ -286,8 +287,8 @@ if ( ! function_exists( 'tf_add_hotel_availability' ) ) {
 			'status'     => true,
 			'message'    => __( 'Availability updated successfully.', 'tourfic' ),
 			'avail_date' => json_encode( $room_avail_data ),
-            'check_in' => $check_in,
-            'check_out' => $check_out,
+			'check_in'   => $check_in,
+			'check_out'  => $check_out,
 		] );
 
 		die();
@@ -318,7 +319,8 @@ if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 			$room_avail_data = array_values( $room_avail_data );
 			$room_avail_data = array_map( function ( $item ) {
 				$item['start'] = date( 'Y-m-d', strtotime( $item['check_in'] ) );
-				$item['title'] = $item['price_by'] == '1' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
+//				$item['title'] = $item['price_by'] == '1' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
+				$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) . '<br>' . __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
 
 				if ( $item['status'] == 'unavailable' ) {
 					$item['display'] = 'background';
@@ -337,4 +339,3 @@ if ( ! function_exists( 'tf_get_hotel_availability' ) ) {
 
 	add_action( 'wp_ajax_tf_get_hotel_availability', 'tf_get_hotel_availability' );
 }
-
