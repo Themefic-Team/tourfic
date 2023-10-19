@@ -659,6 +659,20 @@
             }
         });
 
+        // Switcher Value Changed
+        $(document).on("change", ".tf-switch", function (e) {
+            var $this = $(this);
+            if (this.checked) {
+                var value = $this.val(1);
+            } else {
+                var value = $this.val('');
+            }
+
+            if($this.hasClass('tf_room_availability_by_date')){
+                tfHotelCalendar();
+            }
+        });
+
         /*
         * Options WP editor
         * @author: Sydur
@@ -1202,18 +1216,6 @@ var frame, gframe;
         // Texonomy submit event
         $('#addtag > .submit #submit').click(function () {
             $(".tf-fieldset-media-preview").html("");
-        });
-
-        // Switcher Value Changed
-        $(document).on("change", ".tf-switch", function (e) {
-            var $this = $(this);
-            if (this.checked) {
-                var $this = $(this);
-                var value = $this.val(1);
-            } else {
-                var $this = $(this);
-                var value = $this.val('');
-            }
         });
 
         if (tf_options.gmaps != "googlemap") {

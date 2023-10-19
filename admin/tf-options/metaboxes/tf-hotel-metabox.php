@@ -483,13 +483,17 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'type'    => 'switch',
 							'label'   => __( 'Enable Availability by Date', 'tourfic' ),
 							'is_pro'  => true,
-							'default' => true
+							'default' => true,
+							'attributes'  => array(
+								'class' => 'tf_room_availability_by_date',
+							),
 						),
 						array(
 							'id'        => '',
 							'type'      => 'hotelAvailabilityCal',
 							'label'     => __( 'Availability Calendar', 'tourfic' ),
 							'is_pro'  => true,
+							'dependency' => array( 'avil_by_date', '!=', 'false' ),
 						),
 					),
 				)
