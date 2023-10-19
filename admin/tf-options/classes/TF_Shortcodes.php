@@ -34,7 +34,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
 
                     <!--Tours Shortcodes section-->
                     <div class="tf-shortcode-generator-single">
-                        <div class="tf-shortcode-generator-label">
+                        <div class="tf-shortcode-generator-label shortcode-section-heading">
                             <h2>Shortcode for Tours</h2>
                         </div>
                     </div>
@@ -280,7 +280,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
 
                     <!--Hotels Shortcodes section-->
                     <div class="tf-shortcode-generator-single">
-                        <div class="tf-shortcode-generator-label">
+                        <div class="tf-shortcode-generator-label shortcode-section-heading">
                             <h2>Shortcode for Hotels</h2>
                         </div>
                     </div>
@@ -526,7 +526,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                     
                     <!--Apartments Shortcodes section-->
                     <div class="tf-shortcode-generator-single">
-                        <div class="tf-shortcode-generator-label">
+                        <div class="tf-shortcode-generator-label shortcode-section-heading">
                             <h2>Shortcode for Apartments</h2>
                         </div>
                     </div>
@@ -772,7 +772,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
 
                      <!-- Vendor shortcode Section -->
                      <div class="tf-shortcode-generator-single">
-                        <div class="tf-shortcode-generator-label">
+                        <div class="tf-shortcode-generator-label shortcode-section-heading">
                             <h2>Shortcodes for Vendors</h2>
                         </div>
                     </div>
@@ -860,8 +860,8 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
 
                     <!-- common shortcode Section -->
                     <div class="tf-shortcode-generator-single">
-                        <div class="tf-shortcode-generator-label">
-                            <h2>Common Shortcodes</h2>
+                        <div class="tf-shortcode-generator-label shortcode-section-heading">
+                            <h2>Other Shortcodes</h2>
                         </div>
                     </div>
 

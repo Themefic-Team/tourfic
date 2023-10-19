@@ -2227,6 +2227,10 @@ Steps
   color: #838790;
   font-weight: 400;
 }
+.tf-shortcode-generator-section .tf-shortcode-generators .shortcode-section-heading {
+  padding: 5px 30px;
+  border-bottom: 3px solid #003c79;
+}
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-shortcode-btn button {
   font-size: 1rem;
   line-height: 20px;
