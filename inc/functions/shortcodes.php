@@ -1538,7 +1538,6 @@ function tf_apartments_grid_slider( $atts, $content = null ) {
 		'posts_per_page' => $count,
 	);
 
-
 	if ( ! empty( $locations ) ) {
 		$locations         = explode( ',', $locations );
 		$args['tax_query'] = array(
