@@ -30,77 +30,7 @@
                 <!-- Booking form Start -->
                 <div class="tf-archive-search-form tf-booking-form-wrapper">
                     <form action="" class="tf-booking-form">
-                        <div class="tf-booking-form-fields">
-                            <div class="tf-booking-form-location">
-                                <span class="tf-booking-form-title">Location</span>
-                                <label for="tf-search-location" class="tf-booking-location-wrap">
-                                    <img src="./assets/image/location-icon.svg" alt="">
-                                    <input type="text" id="tf-search-location" placeholder="Los angeles">
-                                </label>
-                            </div>
-                            <div class="tf-booking-form-checkin">
-                                <span class="tf-booking-form-title"><?php _e("Check in", "tourfic"); ?></span>
-                                <div class="tf-booking-date-wrap">
-                                    <span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
-                                    <span class="tf-booking-month">
-                                        <span><?php _e("Month", "tourfic"); ?></span>
-                                        <img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
-                                    </span>
-                                </div>
-                                <div class="tf_booking-dates">
-                                    <div class="tf_label-row"></div>
-                                </div>
-                            </div>
-                            <div class="tf-booking-form-checkout">
-                                <span class="tf-booking-form-title"><?php _e("Check out", "tourfic"); ?></span>
-                                <div class="tf-booking-date-wrap">
-                                    <span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
-                                    <span class="tf-booking-month">
-                                        <span><?php _e("Month", "tourfic"); ?></span>
-                                        <img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
-                                    </span>
-                                </div>
-                                <input type="text" name="check-in-out-date" class="tf-check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
-
-                            </div>
-                            <div class="tf-booking-form-guest-and-room">
-                                <div class="tf-booking-form-guest-and-room-inner">
-                                    <span class="tf-booking-form-title"><?php _e("Guests", "tourfic"); ?></span>
-                                    <div class="tf-booking-guest-and-room-wrap">
-                                        <span class="tf-guest tf-booking-date"><?php _e("01", "tourfic"); ?></span> 
-                                        <span class="tf-booking-month">
-                                            <span><?php _e("Guest", "tourfic"); ?></span>
-                                            <img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
-                                        </span>
-                                    </div>
-                                </div>
-
-                                
-                                <div class="tf_acrselection-wrap">
-                                    <div class="tf_acrselection-inner">
-                                        <div class="tf_acrselection">
-                                            <div class="acr-label"><?php _e("Adults", "tourfic"); ?></div>
-                                            <div class="acr-select">
-                                                <div class="acr-dec">-</div>
-                                                <input type="number" name="adults" id="adults" min="1" value="<?php echo ! empty( $adults ) ? $adults : '1'; ?>">
-                                                <div class="acr-inc">+</div>
-                                            </div>
-                                        </div>
-                                        <div class="tf_acrselection">
-                                            <div class="acr-label"><?php _e("Children", "tourfic"); ?></div>
-                                            <div class="acr-select">
-                                                <div class="acr-dec">-</div>
-                                                <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? $child : '0'; ?>">
-                                                <div class="acr-inc">+</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tf-booking-form-submit">
-                            <button>Check <br>availability</button>
-                        </div>
+                        <?php tf_archive_sidebar_search_form('tf_hotel'); ?>
                     </form>
                 </div>
                 <!-- Booking form end -->                    

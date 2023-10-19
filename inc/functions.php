@@ -821,6 +821,119 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
                 </div>
             </form>
         </div>
+		<script>
+			(function ($) {
+				$(document).ready(function () {
+
+					$(".tf-hotel-side-booking #check-in-out-date").flatpickr({
+						enableTime: false,
+						minDate: "today",
+						mode: "range",
+						dateFormat: "Y/m/d",
+						altInput: true,
+						altFormat: '<?php echo $date_format_for_users; ?>',
+						onChange: function (selectedDates, dateStr, instance) {
+							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+						},
+					});
+
+				});
+			})(jQuery);
+		</script>
+
+		<?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
+        <div id="tf__booking_sidebar">
+			<?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
+        </div>
+		<?php } ?>
+
+	<?php
+	}
+	elseif ( ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-2" ) || ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-2" ) || ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template == "design-2" ) || ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template == "design-2" ) ) { ?>
+		<div class="tf-booking-form-fields">
+			<div class="tf-booking-form-location">
+				<span class="tf-booking-form-title"><?php _e("Location", "tourfic"); ?></span>
+				<label for="tf-search-location" class="tf-booking-location-wrap">
+					<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+					<path d="M8.5 13.9317L11.7998 10.6318C13.6223 8.80943 13.6223 5.85464 11.7998 4.0322C9.9774 2.20975 7.02261 2.20975 5.20017 4.0322C3.37772 5.85464 3.37772 8.80943 5.20017 10.6318L8.5 13.9317ZM8.5 15.8173L4.25736 11.5747C1.91421 9.2315 1.91421 5.43254 4.25736 3.08939C6.60051 0.746245 10.3995 0.746245 12.7427 3.08939C15.0858 5.43254 15.0858 9.2315 12.7427 11.5747L8.5 15.8173ZM8.5 8.66536C9.2364 8.66536 9.83333 8.06843 9.83333 7.33203C9.83333 6.59565 9.2364 5.9987 8.5 5.9987C7.7636 5.9987 7.16667 6.59565 7.16667 7.33203C7.16667 8.06843 7.7636 8.66536 8.5 8.66536ZM8.5 9.9987C7.02724 9.9987 5.83333 8.80476 5.83333 7.33203C5.83333 5.85927 7.02724 4.66536 8.5 4.66536C9.97273 4.66536 11.1667 5.85927 11.1667 7.33203C11.1667 8.80476 9.97273 9.9987 8.5 9.9987Z" fill="#595349"/>
+					</svg>
+					
+					<input type="text" required="" id="<?php echo $place; ?>" class="tf-field" placeholder="<?php echo $place_text; ?>" value="<?php echo ! empty( $taxonomy_name ) ? $taxonomy_name : ''; ?>">
+                    <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? $taxonomy_slug : ''; ?>"/>
+				</label>
+			</div>
+			<div class="tf-booking-form-checkin">
+				<span class="tf-booking-form-title"><?php _e("Check in", "tourfic"); ?></span>
+				<div class="tf-booking-date-wrap">
+					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
+					<span class="tf-booking-month">
+						<span><?php _e("Month", "tourfic"); ?></span>
+						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+					</span>
+				</div>
+				<div class="tf_booking-dates">
+					<div class="tf_label-row"></div>
+				</div>
+			</div>
+			<div class="tf-booking-form-checkout">
+				<span class="tf-booking-form-title"><?php _e("Check out", "tourfic"); ?></span>
+				<div class="tf-booking-date-wrap">
+					<span class="tf-booking-date"><?php _e("00", "tourfic"); ?></span>
+					<span class="tf-booking-month">
+						<span><?php _e("Month", "tourfic"); ?></span>
+						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+					</span>
+				</div>
+				<input type="text" name="check-in-out-date" class="tf-check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
+
+			</div>
+			<div class="tf-booking-form-guest-and-room">
+				<div class="tf-booking-form-guest-and-room-inner">
+					<span class="tf-booking-form-title"><?php _e("Guests & rooms", "tourfic"); ?></span>
+					<div class="tf-booking-guest-and-room-wrap tf-archive-guest-info">
+						<span class="tf-guest">01</span> <?php _e("guest", "tourfic"); ?> <span class="tf-room">01</span> <?php _e("Rooms", "tourfic"); ?>
+					</div>
+					<div class="tf-arrow-icons">
+						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+					</div>
+				</div>
+
+				
+				<div class="tf_acrselection-wrap">
+					<div class="tf_acrselection-inner">
+						<div class="tf_acrselection">
+							<div class="acr-label"><?php _e("Adults", "tourfic"); ?></div>
+							<div class="acr-select">
+								<div class="acr-dec">-</div>
+								<input type="number" name="adults" id="adults" min="1" value="1">
+								<div class="acr-inc">+</div>
+							</div>
+						</div>
+						<div class="tf_acrselection">
+							<div class="acr-label"><?php _e("Children", "tourfic"); ?></div>
+							<div class="acr-select">
+								<div class="acr-dec">-</div>
+								<input type="number" name="childrens" id="children" min="0" value="0">
+								<div class="acr-inc">+</div>
+							</div>
+						</div>
+						<div class="tf_acrselection">
+							<div class="acr-label"><?php _e("Rooms", "tourfic"); ?></div>
+							<div class="acr-select">
+								<div class="acr-dec">-</div>
+								<input type="number" name="room" id="room" min="1" value="1">
+								<div class="acr-inc">+</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tf-booking-form-submit">
+			<input type="hidden" name="type" value="<?php echo $post_type; ?>" class="tf-post-type"/>
+            <button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
+		</div>
 	<?php } else { ?>
         <form class="tf_archive_search_result tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
               action="<?php echo tf_booking_search_action(); ?>">
@@ -920,34 +1033,34 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
             </div>
 
         </form>
-	<?php } ?>
-    <script>
-        (function ($) {
-            $(document).ready(function () {
+		<script>
+			(function ($) {
+				$(document).ready(function () {
 
-                $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
-                    enableTime: false,
-                    minDate: "today",
-                    mode: "range",
-                    dateFormat: "Y/m/d",
-					altInput: true,
-					altFormat: '<?php echo $date_format_for_users; ?>',
-                    onChange: function (selectedDates, dateStr, instance) {
-                        instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                    },
-                });
+					$(".tf-hotel-side-booking #check-in-out-date").flatpickr({
+						enableTime: false,
+						minDate: "today",
+						mode: "range",
+						dateFormat: "Y/m/d",
+						altInput: true,
+						altFormat: '<?php echo $date_format_for_users; ?>',
+						onChange: function (selectedDates, dateStr, instance) {
+							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+						},
+					});
 
-            });
-        })(jQuery);
-    </script>
+				});
+			})(jQuery);
+		</script>
 
-	<?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
+		<?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
         <div id="tf__booking_sidebar">
 			<?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
         </div>
-		<?php
-	}
+		<?php } ?>
+	<?php } ?>
+<?php
 }
 
 /**

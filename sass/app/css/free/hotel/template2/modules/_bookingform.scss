@@ -83,10 +83,10 @@
                 border: 0;
                 outline: none;
                 color: #FDF9F3;
-                font-size: 16px;
+                font-size: 16px !important;
                 font-family: Josefin Sans;
                 font-weight: 700;
-                line-height: 24px;
+                line-height: 24px !important;
                 cursor: pointer;
             }
         }
@@ -98,26 +98,39 @@
 			.tf-booking-form-location { 
                 display: flex;
                 align-items: flex-start !important;
-                padding-left: 16px;
-				.tf-booking-form-title { 
-				}
+                padding-right: 40px;
+                
 				.tf-booking-location-wrap { 
                     display: flex;
                     flex-direction: row;
                     background: #fff;
                     padding: 0 12px;
                     max-width: 150px;
-                    margin-right: 40px;
-                    justify-content: flex-start;
-					img { 
-					}
-					#tf-search-location { 
-					}
+                    align-items: center;
+					position: relative;
                     input{
                         padding: 9px;
                         border: none;
                         outline: none;
                         width: 100%;
+                    }
+
+                    #tf-locationautocomplete-list{
+                        position: absolute;
+                        left: 0;
+                        top: 100%;
+                        width: 100%;
+                        background: #fff;
+                        z-index: 999;
+                        border: 1px solid #d4d4d4;
+                        div{
+                            padding: 10px;
+                            cursor: pointer;
+                            background-color: #fff;
+                            border-bottom: 1px solid #d4d4d4;
+                            color: #444;
+                            display: block;
+                        }
                     }
 				}
 			}
@@ -157,9 +170,33 @@
                 padding-left: 40px !important;
                 min-width: 200px;
 				.tf-booking-form-guest-and-room-inner {
-					.tf-booking-guest-and-room-wrap { 
+					.tf-booking-guest-and-room-wrap.tf-archive-guest-info { 
                         margin-top: 6px;
+                        color: #595349;
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -webkit-box-align: center;
+                        -ms-flex-align: center;
+                        align-items: center;
+                        gap: 5px;
+                        span{
+                            font-size: 24px;
+                            margin-bottom: -3px;
+                            color: #595349;
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex;
+                            -webkit-box-align: center;
+                            -ms-flex-align: center;
+                            align-items: center;
+                            gap: 5px;
+                        }
 					}
+                    .tf-arrow-icons{
+                        text-align: right;
+                        margin-top: -10px;
+                    }
 				}
 			}
 		}
