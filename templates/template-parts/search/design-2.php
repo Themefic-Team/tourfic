@@ -6,9 +6,9 @@
         <div class="tf-container">
             <div class="tf-hero-content tf-archive-hero-content">
                 <div class="tf-head-title">
-                    <h1>Los Angeles</h1>
+                    <h1><?php echo !empty($_GET['place-name']) ? esc_html( $_GET['place-name'] ) : '' ?></h1>
                     <div class="tf-title-meta">
-                        <p>(2 room, 18 aug,2023 - 20 aug,2023)</p>
+                        <p>( <?php echo !empty($_GET['room']) ? esc_html( $_GET['room'] ) : '0' ?> <?php _e("room", "tourfic"); ?>, <?php echo !empty($_GET['check-in-out-date']) ? esc_html( $_GET['check-in-out-date'] ) : '' ?> )</p>
                     </div>
                 </div>
             </div>

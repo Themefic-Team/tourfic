@@ -639,7 +639,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</span>
 				</div>
-				<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . $check_in_out . '"' : '' ?> required>
+				<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php _e( 'Select Date', 'tourfic' ); ?>" value="<?php echo $date ?>" required>
 
 			</div>
 			<div class="tf-booking-form-guest-and-room">
@@ -711,7 +711,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							dateSetToFields(selectedDates, instance);
 						},
-						defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+						defaultDate: <?php echo json_encode( explode( '-', $date ) ) ?>,
 					});
 
 					function dateSetToFields(selectedDates, instance) {
