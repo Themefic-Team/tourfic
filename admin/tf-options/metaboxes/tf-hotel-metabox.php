@@ -493,7 +493,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'type'      => 'hotelAvailabilityCal',
 							'label'     => __( 'Availability Calendar', 'tourfic' ),
 							'is_pro'  => true,
-							'dependency' => array( 'avil_by_date', '!=', 'false' ),
+//							'dependency' => array( 'avil_by_date', '!=', 'false' ),
 						),
 					),
 				)

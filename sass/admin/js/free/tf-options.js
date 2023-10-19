@@ -668,9 +668,9 @@
                 var value = $this.val('');
             }
 
-            if($this.hasClass('tf_room_availability_by_date')){
-                tfHotelCalendar();
-            }
+            // if($this.hasClass('tf_room_availability_by_date')){
+            //     tfHotelCalendar();
+            // }
         });
 
         /*
