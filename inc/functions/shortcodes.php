@@ -209,8 +209,9 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 									$room_price[] = $room['price'];
 								}
 								if ( ! empty( $room['avil_by_date'] ) && $room['avil_by_date'] == "1" ) {
-									if ( ! empty( $room['repeat_by_date'] ) ) {
-										foreach ( $room['repeat_by_date'] as $repval ) {
+									if ( ! empty( $room['avail_date'] ) ) {
+                                        $avail_dates = json_decode($room['avail_date'], true);
+										foreach ( $avail_dates as $repval ) {
 											if ( ! empty( $repval['price'] ) ) {
 												$room_price[] = $repval['price'];
 											}
@@ -225,8 +226,9 @@ function tf_recent_hotel_shortcode( $atts, $content = null ) {
 									$room_price[] = $room['child_price'];
 								}
 								if ( ! empty( $room['avil_by_date'] ) && $room['avil_by_date'] == "1" ) {
-									if ( ! empty( $room['repeat_by_date'] ) ) {
-										foreach ( $room['repeat_by_date'] as $repval ) {
+									if ( ! empty( $room['avail_date'] ) ) {
+										$avail_dates = json_decode($room['avail_date'], true);
+										foreach ( $avail_dates as $repval ) {
 											if ( ! empty( $repval['adult_price'] ) ) {
 												$room_price[] = $repval['adult_price'];
 											}
@@ -1385,8 +1387,9 @@ function tf_hotels_grid_slider( $atts, $content = null ) {
 									$room_price[] = $room['price'];
 								}
 								if ( ! empty( $room['avil_by_date'] ) && $room['avil_by_date'] == "1" ) {
-									if ( ! empty( $room['repeat_by_date'] ) ) {
-										foreach ( $room['repeat_by_date'] as $repval ) {
+									if ( ! empty( $room['avail_date'] ) ) {
+										$avail_dates = json_decode($room['avail_date'], true);
+										foreach ( $avail_dates as $repval ) {
 											if ( ! empty( $repval['price'] ) ) {
 												$room_price[] = $repval['price'];
 											}
@@ -1401,8 +1404,9 @@ function tf_hotels_grid_slider( $atts, $content = null ) {
 									$room_price[] = $room['child_price'];
 								}
 								if ( ! empty( $room['avil_by_date'] ) && $room['avil_by_date'] == "1" ) {
-									if ( ! empty( $room['repeat_by_date'] ) ) {
-										foreach ( $room['repeat_by_date'] as $repval ) {
+									if ( ! empty( $room['avail_date'] ) ) {
+										$avail_dates = json_decode($room['avail_date'], true);
+										foreach ( $avail_dates as $repval ) {
 											if ( ! empty( $repval['adult_price'] ) ) {
 												$room_price[] = $repval['adult_price'];
 											}

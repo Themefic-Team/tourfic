@@ -88,7 +88,7 @@ function tf_hotel_booking_callback() {
     }
 	$avail_by_date = ! empty( $rooms[ $room_id ]['avil_by_date'] ) && $rooms[ $room_id ]['avil_by_date'];
 	if ( $avail_by_date ) {
-		$repeat_by_date = ! empty( $rooms[ $room_id ]['repeat_by_date'] ) ? $rooms[ $room_id ]['repeat_by_date'] : [];
+		$avail_date = ! empty( $rooms[ $room_id ]['avail_date'] ) ? json_decode($rooms[ $room_id ]['avail_date'], true) : [];
 	}
 	$room_name       = $rooms[ $room_id ]['title'];
 	$pricing_by      = $rooms[ $room_id ]['pricing-by'];
@@ -175,9 +175,9 @@ function tf_hotel_booking_callback() {
 			$total_price = 0;
 			foreach ( $period as $date ) {
 
-				$available_rooms = array_values( array_filter( $repeat_by_date, function ( $date_availability ) use ( $date ) {
-					$date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
-					$date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
+				$available_rooms = array_values( array_filter( $avail_date, function ( $date_availability ) use ( $date ) {
+					$date_availability_from = strtotime( $date_availability['check_in'] . ' 00:00' );
+					$date_availability_to   = strtotime( $date_availability['check_out'] . ' 23:59' );
 
 					return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
 				} ) );

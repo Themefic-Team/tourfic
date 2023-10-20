@@ -363,12 +363,12 @@ function tf_hotel_airport_service_callback() {
 
 		$avail_by_date = ! empty( $rooms[ $room_id ]['avil_by_date'] ) && $rooms[ $room_id ]['avil_by_date'];
 		if ( $avail_by_date ) {
-			$repeat_by_date = ! empty( $rooms[ $room_id ]['repeat_by_date'] ) ? $rooms[ $room_id ]['repeat_by_date'] : [];
+			$avail_date = ! empty( $rooms[ $room_id ]['avail_date'] ) ? json_decode($rooms[ $room_id ]['avail_date'], true) : [];
 		}
 
 		$pricing_by      = $rooms[ $room_id ]['pricing-by'];
 		$price_multi_day = ! empty( $rooms[ $room_id ]['price_multi_day'] ) ? $rooms[ $room_id ]['price_multi_day'] : false;
-		
+
 		// Hotel Discout Data
 		$hotel_discount_type = !empty($rooms[$room_id]["discount_hotel_type"]) ? $rooms[$room_id]["discount_hotel_type"] : "none";
 		$hotel_discount_amount = !empty($rooms[$room_id]["discount_hotel_price"]) ? $rooms[$room_id]["discount_hotel_price"] : '';
@@ -388,9 +388,9 @@ function tf_hotel_airport_service_callback() {
 			$total_price = 0;
 			foreach ( $period as $date ) {
 
-				$available_rooms = array_values( array_filter( $repeat_by_date, function ( $date_availability ) use ( $date ) {
-					$date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
-					$date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
+				$available_rooms = array_values( array_filter( $avail_date, function ( $date_availability ) use ( $date ) {
+					$date_availability_from = strtotime( $date_availability['check_in'] . ' 00:00' );
+					$date_availability_to   = strtotime( $date_availability['check_out'] . ' 23:59' );
 
 					return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
 				} ) );
@@ -451,7 +451,7 @@ function tf_hotel_airport_service_callback() {
 			if ( ! empty( $day_difference ) && $price_multi_day == true ) {
 				$price_total = $total_price * $room_selected * $day_difference;
 			} else {
-				$price_total = $total_price * ($room_selected * $day_difference+1);
+				$price_total = $total_price * ( $room_selected * $day_difference + 1 );
 			}
 
 		}
@@ -899,7 +899,7 @@ function tf_room_availability_callback() {
 				$number_orders      = '0';
 				$avil_by_date       = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : false;      // Room Available by date enabled or  not ?
 				if ( $avil_by_date ) {
-					$repeat_by_date = ! empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
+					$avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
 				}
 
 				if ( ! empty( $order_ids ) && function_exists( 'is_tf_pro' ) && is_tf_pro() && $reduce_num_room == true ) {
@@ -910,7 +910,7 @@ function tf_room_availability_callback() {
 						$order_date_ranges = array();
 
 						$backend_date_ranges = array();
-						foreach ( $repeat_by_date as $single_date_range ) {
+						foreach ( $avail_date as $single_date_range ) {
 
 							array_push( $backend_date_ranges, array( strtotime( $single_date_range["availability"]["from"] ), strtotime( $single_date_range["availability"]["to"] ) ) );
 
@@ -979,13 +979,15 @@ function tf_room_availability_callback() {
 					// extract price from available room options
 					foreach ( $period as $date ) {
 
-						$available_rooms = array_values( array_filter( $repeat_by_date, function ( $date_availability ) use ( $date ) {
+                        $available_rooms = array_values( array_filter( $avail_date, function ( $date_availability ) use ( $date ) {
+                            if( $date_availability['status'] == 'available' ){
+                                $date_availability_from = strtotime( $date_availability['check_in'] . ' 00:00' );
+                                $date_availability_to   = strtotime( $date_availability['check_out'] . ' 23:59' );
 
-							$date_availability_from = strtotime( $date_availability['availability']['from'] . ' 00:00' );
-							$date_availability_to   = strtotime( $date_availability['availability']['to'] . ' 23:59' );
-
-							return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
-
+							    return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
+                            } else {
+                                return false;
+                            }
 						} ) );
 
 						if ( is_iterable( $available_rooms ) && count( $available_rooms ) >= 1 ) {
@@ -1165,7 +1167,7 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
 
 		// date format for users output
-		$hotel_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+		$hotel_date_format_for_users = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 		?>
         <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
@@ -1263,15 +1265,15 @@ if ( ! function_exists( 'tf_hotel_search_form_horizontal' ) ) {
                         enableTime: false,
                         mode: "range",
                         dateFormat: "Y/m/d",
-						altInput: true,
-						altFormat: '<?php echo $hotel_date_format_for_users; ?>',
+                        altInput: true,
+                        altFormat: '<?php echo $hotel_date_format_for_users; ?>',
                         minDate: "today",
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                         },
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                         },
                         defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
                     });
@@ -1308,7 +1310,7 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
 
 		// date format setting
-		$hotel_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+		$hotel_date_format_for_users = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		?>
         <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
             <div class="tf_homepage-booking">
@@ -1499,14 +1501,14 @@ if ( ! function_exists( 'tf_hotel_advanced_search_form_horizontal' ) ) {
                         mode: "range",
                         dateFormat: "Y/m/d",
                         minDate: "today",
-						altInput: true,
-						altFormat: '<?php echo $hotel_date_format_for_users; ?>',
+                        altInput: true,
+                        altFormat: '<?php echo $hotel_date_format_for_users; ?>',
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                         },
                         onChange: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-							instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                         },
                         defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
                     });
@@ -1539,7 +1541,7 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	$features = ! empty( $_GET['features'] ) ? sanitize_text_field( $_GET['features'] ) : '';
 
 	// date format for users output
-	$hotel_date_format_for_users  = !empty(tfopt( "tf-date-format-for-users")) ? tfopt( "tf-date-format-for-users") : "Y/m/d";
+	$hotel_date_format_for_users = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 
 	/**
@@ -1560,16 +1562,16 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 	$total_dis_dates = [];
 	$maxadults       = [];
 	$maxchilds       = [];
+
 	if ( ! empty( $rooms ) ):
 		foreach ( $rooms as $key => $room ) {
-			if ( ! empty( $room['repeat_by_date'] ) ) {
-				$disabled_dates = $room['repeat_by_date'];
-				//iterate all the available disabled dates
-				if ( ! empty( $disabled_dates ) ) {
-					foreach ( $disabled_dates as $date ) {
-						$dateArr           = explode( ',', ! empty( $date['disabled_date'] ) ? $date['disabled_date'] : '' );
-						$dateArr           = sprintf( '"%s"', implode( '","', $dateArr ) );
-						$total_dis_dates[] = $dateArr;
+			if ( ! empty( $room['avail_date'] ) ) {
+				$avail_dates = json_decode( $room['avail_date'], true );
+				if ( ! empty( $avail_dates ) ) {
+					foreach ( $avail_dates as $date ) {
+						if($date['status'] === 'unavailable'){
+							$total_dis_dates[] = $date['check_in'];
+						}
 					}
 				}
 			}
@@ -1886,16 +1888,16 @@ function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
                     enableTime: false,
                     mode: "range",
                     minDate: "today",
-					altInput: true,
-					altFormat: '<?php echo $hotel_date_format_for_users; ?>',
+                    altInput: true,
+                    altFormat: '<?php echo $hotel_date_format_for_users; ?>',
                     dateFormat: "Y/m/d",
                     onReady: function (selectedDates, dateStr, instance) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                        instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                     },
                     onChange: function (selectedDates, dateStr, instance) {
                         instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-						instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                        instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                     },
                     defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
 					<?php
@@ -1956,7 +1958,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	}
 
 	// Archive Page Minimum Price
-    $archive_page_price_settings = !empty(tfopt('tf-template')["hotel_archive_price_minimum_settings"]) ? tfopt('tf-template')["hotel_archive_price_minimum_settings"] : 'all';
+	$archive_page_price_settings = ! empty( tfopt( 'tf-template' )["hotel_archive_price_minimum_settings"] ) ? tfopt( 'tf-template' )["hotel_archive_price_minimum_settings"] : 'all';
 
 	// Featured
 	$featured = ! empty( $meta['featured'] ) ? $meta['featured'] : '';
@@ -2029,7 +2031,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 	$discount_amount = [];
 	if ( ! empty( $b_rooms ) ):
 		foreach ( $b_rooms as $b_room ) {
-			
+
 			//hotel room discount data
 			$hotel_discount_type = !empty($b_room["discount_hotel_type"]) ? $b_room["discount_hotel_type"] : "none";
 			$hotel_discount_amount = !empty($b_room["discount_hotel_price"]) ? $b_room["discount_hotel_price"] : '';
@@ -2053,15 +2055,16 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					}
 				} else {
 					if ( ! empty( $b_room['avil_by_date'] ) && $b_room['avil_by_date'] == "1" ) {
-						if ( ! empty( $b_room['repeat_by_date'] ) ) {
-							foreach ( $b_room['repeat_by_date'] as $repval ) {
+						$avail_date = json_decode( $b_room['avail_date'], true );
+
+						if ( ! empty( $avail_date ) ) {
+							foreach ( $avail_date as $repval ) {
 								//Initial matching date array
 								$show_hotel = [];
-								$dates      = $repval['availability'];
 								// Check if any date range match with search form date range and set them on array
 								if ( ! empty( $period ) ) {
 									foreach ( $period as $date ) {
-										$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
+										$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $repval['check_in'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $repval['check_out'] ) );
 									}
 								}
 								if ( ! in_array( 0, $show_hotel ) ) {
@@ -2118,19 +2121,19 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 					}
 				} else {
 					if ( ! empty( $b_room['avil_by_date'] ) && $b_room['avil_by_date'] == "1" ) {
-						if ( ! empty( $b_room['repeat_by_date'] ) ) {
-							foreach ( $b_room['repeat_by_date'] as $repval ) {
+						$avail_date = json_decode( $b_room['avail_date'], true );
+						if ( ! empty( $avail_date ) ) {
+							foreach ( $avail_date as $repval ) {
 								//Initial matching date array
 								$show_hotel = [];
-								$dates      = $repval['availability'];
 								// Check if any date range match with search form date range and set them on array
 								if ( ! empty( $period ) ) {
 									foreach ( $period as $date ) {
-										$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
+										$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $repval['check_in'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $repval['check_out'] ) );
 									}
 								}
 								if ( ! in_array( 0, $show_hotel ) ) {
-									
+
 									// discount calculation - start
 									$adult_price = $repval['adult_price'];
 									$child_price = $repval['child_price'];
@@ -2509,7 +2512,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 															echo "<del>$highest_price</del>";
 															echo " $lowest_price"
 															?>
-															
+
                                                         </div>
 													<?php endif; ?>
                                                 </div>
@@ -2628,8 +2631,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 			// If all the room has custom date range then filter the rooms by date
 
 			// Get custom date range repeater
-			$dates = array_column( $meta, 'repeat_by_date' );
-
+			$dates = array_column( $meta, 'avail_date' );
 			// If no date range return
 			if ( empty( $dates ) ) {
 				return;
@@ -2640,7 +2642,10 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 
 			// Run loop through custom date range repeater and filter out only the dates
 			foreach ( $dates as $date ) {
-				$availability_dates[] = array_column( $date, 'availability' );
+				if ( ! empty( $date ) && gettype( $date ) == "string" ) {
+					$date = json_decode( $date,true );
+					$availability_dates[] = $date;
+				}
 			}
 
 			// Run loop through custom dates & set custom dates on a single array
@@ -2652,7 +2657,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 				// Check if any date range match with search form date range and set them on array
 				if ( ! empty( $period ) ) {
 					foreach ( $period as $date ) {
-						$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
+						$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['check_in'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['check_out'] ) );
 
 					}
 				}
@@ -2661,8 +2666,9 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 				if ( ! in_array( 0, $show_hotel ) ) {
 					if ( ! empty( $filters_rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 						foreach ( $filters_rooms as $room ) {
-							if ( ! empty( $room['repeat_by_date'] ) ) {
-								foreach ( $room['repeat_by_date'] as $repat_date ) {
+							if ( ! empty( $room['avail_date'] ) ) {
+								$avail_date = json_decode( $room['avail_date'],true );
+								foreach ( $avail_date as $repat_date ) {
 									if ( ! empty( $repat_date['adult_price'] ) ) {
 										if ( $startprice <= $repat_date['adult_price'] && $repat_date['adult_price'] <= $endprice ) {
 											$has_hotel = true;
@@ -2708,7 +2714,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 			// If all the room has custom date range then filter the rooms by date
 
 			// Get custom date range repeater
-			$dates = array_column( $meta, 'repeat_by_date' );
+			$dates = array_column( $meta, 'avail_date' );
 
 			// If no date range return
 			if ( empty( $dates ) ) {
@@ -2720,7 +2726,10 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 
 			// Run loop through custom date range repeater and filter out only the dates
 			foreach ( $dates as $date ) {
-				$availability_dates[] = array_column( $date, 'availability' );
+				if ( ! empty( $date ) && gettype( $date ) == "string" ) {
+					$date = json_decode( $date,true );
+					$availability_dates[] = $date;
+				}
 			}
 
 			// Run loop through custom dates & set custom dates on a single array
@@ -2732,7 +2741,7 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 				// Check if any date range match with search form date range and set them on array
 				if ( ! empty( $period ) ) {
 					foreach ( $period as $date ) {
-						$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
+						$show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['check_in'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['check_out'] ) );
 
 					}
 				}
@@ -2741,8 +2750,10 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
 				if ( ! in_array( 0, $show_hotel ) ) {
 					if ( ! empty( $filters_rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 						foreach ( $filters_rooms as $room ) {
-							if ( ! empty( $room['repeat_by_date'] ) ) {
-								foreach ( $room['repeat_by_date'] as $repat_date ) {
+							if ( ! empty( $room['avail_date'] ) ) {
+
+								$avail_date = json_decode( $room['avail_date'],true );
+								foreach ( $avail_date as $repat_date ) {
 									if ( ! empty( $repat_date['adult_price'] ) ) {
 										if ( $startprice <= $repat_date['adult_price'] && $repat_date['adult_price'] <= $endprice ) {
 											$has_hotel = true;
@@ -3272,28 +3283,28 @@ function tf_hotel_quickview_callback() {
                                         </div>
                                     </div>
 
-							<?php }
-							if ( $child_number ) { ?>
-                                <div class="tf-tooltip tf-d-ib">
-                                    <div class="room-detail-icon">
-                                        <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
-                                        <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
+								<?php }
+								if ( $child_number ) { ?>
+                                    <div class="tf-tooltip tf-d-ib">
+                                        <div class="room-detail-icon">
+                                            <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
+                                            <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
+                                        </div>
+                                        <div class="tf-top">
+											<?php
+											if ( ! empty( $child_age_limit ) ) {
+												printf( __( 'Children Age Limit %s Years', 'tourfic' ), $child_age_limit );
+											} else {
+												_e( 'Number of Children', 'tourfic' );
+											}
+											?>
+                                            <i class="tool-i"></i>
+                                        </div>
                                     </div>
-                                    <div class="tf-top">
-										<?php
-										if(!empty($child_age_limit)){
-											printf(__('Children Age Limit %s Years', 'tourfic'), $child_age_limit);
-										}else{
-											_e( 'Number of Children', 'tourfic' );
-										}
-										?>
-                                        <i class="tool-i"></i>
-                                    </div>
-                                </div>
-							<?php } ?>
-                        </div>
+								<?php } ?>
+                            </div>
 
-                    </div>
+                        </div>
 					<?php } ?>
                 </div>
 			<?php
@@ -3548,44 +3559,6 @@ if ( ! function_exists( 'tf_hotel_total_room_adult_child' ) ) {
 				'child' => $total_child,
 			);
 		}
-	}
-}
-
-
-/*
- * Hotel room matched by date
- * @return boolean
- * @since 2.8.7
- * @author Mehedi Foysal
- */
-if ( ! function_exists( 'tf_hotel_room_matched_by_date' ) ) {
-	function tf_hotel_room_matched_by_date( $rooms, $check_in, $check_out ) {
-		$room_date_match = array();
-		if ( ! empty( $check_in ) && ! empty( $check_out ) ) {
-			foreach ( $rooms as $_room ) {
-				$enable = ! empty( $_room['enable'] ) ? $_room['enable'] : '';
-				if ( $enable == '1' ) {
-					$avil_by_date = ! empty( $_room['avil_by_date'] ) ? $_room['avil_by_date'] : '';
-					if ( $avil_by_date == '1' && ! empty( $_room['repeat_by_date'] ) ) {
-						foreach ( $_room['repeat_by_date'] as $date ) {
-							$from = ! empty( $date['availability']['from'] ) ? strtotime( $date['availability']['from'] ) : '';
-							$to   = ! empty( $date['availability']['to'] ) ? strtotime( $date['availability']['to'] ) : '';
-							if ( $from <= $check_in && $to >= $check_out ) {
-								$room_date_match[] = 'matched';
-							} else {
-								$room_date_match[] = 'not matched';
-							}
-						}
-					} else {
-						$room_date_match[] = 'matched';
-					}
-				}
-			}
-		} else {
-			$room_date_match[] = 'matched';
-		}
-
-		return in_array( 'matched', $room_date_match );
 	}
 }
 

@@ -564,7 +564,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'  => 'heading',
 					'label' => __( 'Single Hotel Settings', 'tourfic' ),
 				),
-
 				array(
 					'id'        => 'h-review',
 					'type'      => 'switch',
@@ -596,6 +595,19 @@ TF_Settings::option( 'tf_settings', array(
 					'type'   => 'text',
 					'label'  => __( 'Enquiry Email', 'tourfic' ),
 					'is_pro' => true,
+				),
+				array(
+					'id'           => 'hotel_amenities_cats',
+					'type'         => 'repeater',
+					'label'        => __( 'Amenities Categories', 'tourfic' ),
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'fields'       => array(
+						array(
+							'id'    => 'hotel_amenities_cat_name',
+							'type'  => 'text',
+							'label' => __( 'Category Name', 'tourfic' ),
+						),
+					),
 				),
 			),
 		),

@@ -5,6 +5,24 @@ $badge_up     = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Up
 $badge_pro    = '<div class="tf-csf-badge"><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 $badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Upcoming", "tourfic" ) . '</span><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 
+if(!function_exists('tf_hotel_amenities_categories')) {
+	function tf_hotel_amenities_categories() {
+		$amenities_cats = ! empty( tf_data_types( tfopt( 'hotel_amenities_cats' ) ) ) ? tf_data_types( tfopt( 'hotel_amenities_cats' ) ) : '';
+		$all_cats       = [];
+		if ( ! empty( $amenities_cats ) && is_array( $amenities_cats ) ) {
+			foreach ( $amenities_cats as $key => $cat ) {
+				$all_cats[ (string) $key ] = $cat['hotel_amenities_cat_name'];
+			}
+		}
+	
+		if(empty($all_cats)){
+			$all_cats[''] = __( 'Select Category', 'tourfic' );
+		}
+	
+		return $all_cats;
+	}
+}
+
 TF_Metabox::metabox( 'tf_hotels_opt', array(
 	'title'     => 'Hotel Settings',
 	'post_type' => 'tf_hotel',
@@ -95,6 +113,117 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				),
 			),
 		),
+		//Hotel Info
+		'hotel_info' => array(
+			'title'  => __( 'Information\'s', 'tourfic' ),
+			'icon'   => 'fa-solid fa-info-circle',
+			'fields' => array(
+				// nearby Places
+				array(
+					'id'      => 'nearby-places-heading',
+					'type'    => 'heading',
+					'content' => __( 'Nearby Places', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'          => 'section-title',
+					'type'        => 'text',
+					'label'       => __( 'Add Section Title', 'tourfic' ),
+					'placeholder' => __( "What's around?", 'tourfic' ),
+					'default' => __( "What's around?", 'tourfic' ),
+					'attributes'  => array(
+						'required' => 'required',
+					),
+				),
+				array(
+					'id'           => 'nearby-places',
+					'type'         => 'repeater',
+					'label'        => __( 'Insert / Create your hotel Place', 'tourfic' ),
+					'button_title' => __( 'Add New Place', 'tourfic' ),
+					'class'        => 'tf-field-class',
+					'fields'       => array(
+						array(
+							'id'          => 'place-title',
+							'type'        => 'text',
+							'subtitle'    => __( 'e.g. Rail Station', 'tourfic' ),
+							'label'       => __( 'Name', 'tourfic' ),
+							'field_width' => 50,
+						),
+						array(
+							'id'          => 'place-dist',
+							'type'        => 'text',
+							'label'       => __( 'Place Distance and Unit', 'tourfic' ),
+							'subtitle'    => __( 'Distance of the place from the Hotel with Unit', 'tourfic' ),
+							'field_width' => 50,
+							'attributes'  => array(
+								'min' => '0',
+							),
+						),
+						array(
+							'id'       => 'place-icon',
+							'type'     => 'icon',
+							'label'    => __( 'Place Item Icon', 'tourfic' ),
+							'subtitle' => __( 'Choose an appropriate icon', 'tourfic' ),
+						),
+					)
+				), // nearby places end
+
+				// Amenities
+				array(
+					'id'      => 'amenities-heading',
+					'type'    => 'heading',
+					'content' => __( 'Hotel Aminites', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'          => 'amenities-section-title',
+					'type'        => 'text',
+					'label'       => __( 'Amenities Title', 'tourfic' ),
+					'placeholder' => __( "What this place offers", 'tourfic' ),
+					'default' => __( "What this place offers", 'tourfic' ),
+					'attributes'  => array(
+						'required' => 'required',
+					),
+				),
+				array(
+					'id'           => 'hotel-amenities',
+					'type'         => 'repeater',
+					'label'        => __( 'Insert / Create Hotel Amenities', 'tourfic' ),
+					'button_title' => __( 'Add New', 'tourfic' ),
+					'class'        => 'tf-field-class',
+					'fields'       => array(
+						array(
+							'id'          => 'amenities-feature',
+							'type'        => 'select2',
+							'label'       => __( 'Amenities Feature', 'tourfic' ),
+							'placeholder' => __( 'Select amenities feature', 'tourfic' ),
+							'options'     => 'terms',
+							'query_args'  => array(
+								'taxonomy'   => 'hotel_feature',
+								'hide_empty' => false,
+							),
+							'field_width' => 50,
+						),
+						array(
+							'id'          => 'amenities-category',
+							'type'        => 'select2',
+							'label'       => __( 'Amenities Category', 'tourfic' ),
+							'placeholder' => __( 'Select amenities category', 'tourfic' ),
+							'options'     => tf_hotel_amenities_categories(),
+							'description' => __( 'Add new category from <a target="_blank" href="'.admin_url('admin.php?page=tf_settings#tab=single_page').'">Amenities Categories</a>', 'tourfic' ),
+							'field_width' => 50,
+						),
+						array(
+							'id'        => 'favorite',
+							'type'      => 'switch',
+							'label'     => __( 'Mark as Favorite', 'tourfic' ),
+							'label_on'  => __( 'Yes', 'tourfic' ),
+							'label_off' => __( 'No', 'tourfic' ),
+						),
+					)
+				), // Amenities end
+			),
+		),
 		// Hotel Details
 		'hotel_details'    => array(
 			'title'  => __( 'Gallery & Video', 'tourfic' ),
@@ -183,27 +312,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'type'        => 'text',
 							'subtitle'    => __( 'e.g. Superior Queen Room with Two Queen Beds', 'tourfic' ),
 							'label'       => __( 'Room Title', 'tourfic' ),
-							'field_width' => 50,
-						),
-						array(
-							'id'          => 'num-room',
-							'type'        => 'number',
-							'label'       => __( 'Room Availability', 'tourfic' ),
-							'subtitle'    => __( 'Number of rooms available for booking', 'tourfic' ),
-							'field_width' => 50,
-							'attributes'  => array(
-								'min' => '0',
-							),
-						),
-						array(
-							'id'        => '',
-							'type'      => 'switch',
-							'is_pro'    => true,
-							'label'     => __( 'Room Inventory Management', 'tourfic' ),
-							'subtitle'  => __( 'Reduce total number of available rooms once a rooms is booked by a customer', 'tourfic' ),
-							'label_on'  => __( 'Yes', 'tourfic' ),
-							'label_off' => __( 'No', 'tourfic' ),
-							'default'   => false,
+							'field_width' => 100,
 						),
 
 						array(
@@ -303,18 +412,19 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 						array(
 							'id'          => 'minimum_stay_requirement',
 							'type'        => 'number',
-							'label'       => __( 'Minimum Stay Requiremet', 'tourfic' ),
-							'subtitle'    => __( 'The number of days is minimum to stay in this room', 'tourfic' ),
+							'label'       => __( 'Minimum Stay Requirement', 'tourfic' ),
+							'subtitle'    => __( 'Minimum number of nights required to book this room', 'tourfic' ),
 							'attributes'  => array(
 								'min' => '1',
 							),
+							'default'     => '1',
 							'field_width' => 50,
 						),
 						array(
 							'id'          => 'maximum_stay_requirement',
 							'type'        => 'number',
-							'label'       => __( 'Maximum Stay Requiremet', 'tourfic' ),
-							'subtitle'    => __( 'The number of days is maximum to stay in this room', 'tourfic' ),
+							'label'       => __( 'Maximum Stay Requirement', 'tourfic' ),
+							'subtitle'    => __( 'Maximum number of nights allowed to book this room', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
@@ -331,7 +441,10 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 								'1' => __( 'Per room', 'tourfic' ),
 								'2' => __( 'Per person (Pro)', 'tourfic' ),
 							),
-							'default' => '1'
+							'default' => '1',
+							'attributes'  => array(
+								'class' => 'tf_room_pricing_by',
+							),
 						),
 						array(
 							'id'         => 'price',
@@ -456,10 +569,46 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'default' => false,
 						),
 						array(
+							'id'      => 'ical',
+							'type'    => 'heading',
+							'content' => __( 'iCal Sync', 'tourfic' ),
+						),
+						array(
+							'id'          => '',
+							'type'        => 'ical',
+							'label'       => __( 'iCal URL', 'tourfic' ),
+							'placeholder' => __( 'https://website.com', 'tourfic' ),
+							'button_text' => __( 'Import', 'tourfic' ),
+							'button_class'   => 'room-ical-import',
+							'attributes'  => array(
+								'class' => 'ical_url_input',
+							),
+						),
+						array(
 							'id'      => 'Availability',
 							'type'    => 'heading',
 							'content' => __( 'Availability', 'tourfic' ),
 							'class'   => 'tf-field-class',
+						),
+						array(
+							'id'          => 'num-room',
+							'type'        => 'number',
+							'label'       => __( 'Room Availability', 'tourfic' ),
+							'subtitle'    => __( 'Number of rooms available for booking', 'tourfic' ),
+							'field_width' => 100,
+							'attributes'  => array(
+								'min' => '0',
+							),
+						),
+						array(
+							'id'        => '',
+							'type'      => 'switch',
+							'is_pro'    => true,
+							'label'     => __( 'Room Inventory Management', 'tourfic' ),
+							'subtitle'  => __( 'Reduce total number of available rooms once a rooms is booked by a customer', 'tourfic' ),
+							'label_on'  => __( 'Yes', 'tourfic' ),
+							'label_off' => __( 'No', 'tourfic' ),
+							'default'   => false,
 						),
 						array(
 							'id'      => '',
@@ -469,82 +618,11 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'default' => true
 						),
 						array(
-							'id'     => '',
-							'class'  => 'repeater-by-date',
-							'type'   => 'repeater',
-							'title'  => __( 'By Date', 'tourfic' ),
-							'is_pro' => true,
-							'fields' => array(
-								array(
-									'id'          => '',
-									'type'        => 'date',
-									'label'       => __( 'Date Range', 'tourfic' ),
-									'subtitle'    => __( 'Select availablity date range', 'tourfic' ),
-									'placeholder' => __( '', 'tourfic' ),
-									'class'       => 'tf-field-class',
-									'format'      => 'Y/m/d',
-									'range'       => true,
-									'label_from'  => 'Start Date',
-									'label_to'    => 'End Date',
-									'multiple'    => true,
-									'is_pro'      => true,
-								),
-								array(
-									'id'       => '',
-									'type'     => 'number',
-									'label'    => __( 'Number of Rooms', 'tourfic' ),
-									'subtitle' => __( 'Number of available rooms for booking on this date range', 'tourfic' ),
-									'is_pro'   => true,
-								),
-
-								//Disable specific dates within this date range
-								array(
-									'id'         => '',
-									'type'       => 'date',
-									'label'      => __( 'Disable Specific Dates', 'tourfic' ),
-									'is_pro'     => true,
-									'format'     => 'Y/m/d',
-									'label_from' => __( 'Start Date','tourfic'),
-									'label_to'   => __('End Date','tourfic'),
-									'multiple'   => true,
-									'attributes' => array(
-										'autocomplete' => 'off',
-									),
-								),
-
-								array(
-									'id'       => '',
-									'type'     => 'text',
-									'label'    => __( 'Pricing', 'tourfic' ),
-									'subtitle' => __( 'The price of room per one night', 'tourfic' ),
-									'is_pro'   => true,
-								),
-
-								array(
-									'id'         => '',
-									'type'       => 'text',
-									'label'      => __( 'Adult Pricing', 'tourfic' ),
-									'subtitle'   => __( 'The price of room per one night', 'tourfic' ),
-									'is_pro'     => true,
-									'dependency' => array(
-										array( 'pricing-by', '==', '2' ),
-									),
-								),
-
-								array(
-									'id'         => '',
-									'type'       => 'text',
-									'title'      => __( 'Children Pricing', 'tourfic' ),
-									'subtitle'   => __( 'The price of room per one night', 'tourfic' ),
-									'is_pro'     => true,
-									'dependency' => array(
-										array( 'pricing-by', '==', '2' ),
-									),
-								),
-
-							),
+							'id'        => '',
+							'type'      => 'hotelAvailabilityCal',
+							'label'     => __( 'Availability Calendar', 'tourfic' ),
+							'is_pro'  => true,
 						),
-
 					),
 				)
 			),

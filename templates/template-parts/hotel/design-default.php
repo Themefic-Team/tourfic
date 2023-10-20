@@ -265,6 +265,32 @@
                             </div>
                         </div>
                     <?php } ?>
+                     <div class="desc-wrap">
+                         <?php the_content(); ?>
+                    </div>
+                     <!-- Start features -->
+                    <?php if ( $features ) { ?>
+                        <div class="tf_features">
+                            <h3 class="section-heading"><?php echo !empty($meta['popular-section-title']) ? esc_html($meta['popular-section-title']) : __("Popular Features","tourfic"); ?></h3>
+                            <div class="tf-feature-list">
+                                <?php foreach ( $features as $feature ) {
+                                    $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
+                                    $f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+                                    if ( $f_icon_type == 'fa' ) {
+                                        $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
+                                    } elseif ( $f_icon_type == 'c' ) {
+                                        $feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
+                                    } ?>
+
+                                    <div class="single-feature-box">
+                                        <?php echo $feature_icon ?? ''; ?>
+                                        <span class="feature-list-title"><?php echo $feature->name; ?></span>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <!-- End features -->
                 </div>
                 <div class="hero-right">
                     <?php if ( !defined( 'TF_PRO' ) && ( $address ) ) { ?>
@@ -335,46 +361,35 @@
                     <?php } ?>
                     <div class="hero-booking">
                         <?php tf_hotel_sidebar_booking_form(); ?>
-                    </div>
+                    </div> 
+                    <?php 
+                    $places_section_title = !empty($meta["section-title"]) ? $meta["section-title"] : "What's around?";
+                    $places_meta = !empty($meta["nearby-places"]) ? $meta["nearby-places"] : array();
+                    ?>
+                    <div class="nearby-container"> <!-- nearby places - start -->
+                        <div class="nearby-container-inner">
+                            <h3 class="section-heading"><?php echo __($places_section_title, 'tourfic'); ?></h3>
+                            <ul>
+                                <?php foreach($places_meta as $place) { 
+                                    $place_icon = '<i class="' . $place['place-icon'] . '"></i>';
+                                    ?>
+                                    <li>
+                                        <span>
+                                            <?php echo $place_icon; ?> <?php echo $place["place-title"]; ?>
+                                        </span>
+                                        <span>
+                                            <?php echo $place["place-dist"]; ?>
+                                        </span>
+                                    </li>
+                                <?php }; ?>
+                            </ul>
+                        </div>
+                    </div> <!-- nearby places - end -->
                 </div>
             </div>
         </div>
     </div>
     <!-- Hero End -->
-
-    <!-- Start description -->
-    <div class="description-section sp-50">
-        <div class="tf-container">
-            <div class="desc-wrap">
-                <?php the_content(); ?>
-            </div>
-            <!-- Start features -->
-            <?php if ( $features ) { ?>
-                <div class="tf_features">
-                    <h3 class="section-heading"><?php echo !empty($meta['popular-section-title']) ? esc_html($meta['popular-section-title']) : __("Popular Features","tourfic"); ?></h3>
-                    <div class="tf-feature-list">
-                        <?php foreach ( $features as $feature ) {
-                            $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
-                            $f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-                            if ( $f_icon_type == 'fa' ) {
-                                $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
-                            } elseif ( $f_icon_type == 'c' ) {
-                                $feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
-                            } ?>
-
-                            <div class="single-feature-box">
-                                <?php echo $feature_icon ?? ''; ?>
-                                <span class="feature-list-title"><?php echo $feature->name; ?></span>
-                            </div>
-                        <?php } ?>
-                    </div>
-                </div>
-            <?php } ?>
-            <!-- End features -->
-        </div>
-    </div>
-    <!-- End description -->
-
     <div class="tf-container">
         <div class="tf-divider"></div>
     </div>
@@ -432,12 +447,24 @@
                                     $hotel_discount_amount = !empty($room["discount_hotel_price"]) ? $room["discount_hotel_price"] : '';
 
                                     if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avil_by_date == true ) {
-                                        $repeat_by_date = ! empty( $room['repeat_by_date'] ) ? $room['repeat_by_date'] : [];
-                                        if ( $pricing_by == '1' ) {
-                                            $prices = wp_list_pluck( $repeat_by_date, 'price' );
-                                        } else {
-                                            $prices = wp_list_pluck( $repeat_by_date, 'adult_price' );
-                                        }
+	                                    $avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
+	                                    if ($pricing_by == '1') {
+		                                    $prices = array();
+
+		                                    foreach ($avail_date as $date => $data) {
+			                                    if ($data['status'] == 'available') {
+				                                    $prices[] = $data['price'];
+			                                    }
+		                                    }
+	                                    } else {
+		                                    $prices = array();
+
+		                                    foreach ($avail_date as $date => $data) {
+			                                    if ($data['status'] == 'available') {
+				                                    $prices[] = $data['adult_price'];
+			                                    }
+		                                    }
+	                                    }
                                         if ( ! empty( $prices ) ) {
                                             $range_price = [];
                                             foreach ( $prices as $single ) {

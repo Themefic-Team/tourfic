@@ -1,14 +1,15 @@
-<?php 
+<?php
 $total_dis_dates = [];
-if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $room['repeat_by_date'] ) ) {
-    $disabled_dates = $room['repeat_by_date'];
-    //iterate all the available disabled dates
-    if ( ! empty( $disabled_dates ) ) {
-        foreach ( $disabled_dates as $date ) {
-            $dateArr           = explode( ', ', !empty($date['disabled_date']) ? $date['disabled_date'] : '' );
-            $total_dis_dates = array_merge($total_dis_dates, $dateArr);
-        }
-    }
+if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $room['avail_date'] ) ) {
+	$avail_dates = json_decode( $room['avail_date'], true );
+	//iterate all the available disabled dates
+	if ( ! empty( $avail_dates ) ) {
+		foreach ( $avail_dates as $date ) {
+			if($date['status'] === 'unavailable'){
+                $total_dis_dates[] = $date['check_in'];
+            }
+		}
+	}
 }
 $tf_room_disable_date = array_intersect($avail_durationdate, $total_dis_dates);
 $room_book_by = ! empty( $room['booking-by'] ) ? $room['booking-by'] : 1;
