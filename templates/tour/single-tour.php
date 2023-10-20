@@ -194,6 +194,8 @@ while ( have_posts() ) : the_post();
 
 	if( $tf_tour_selected_template == "design-1" ){
 		include TF_TEMPLATE_PART_PATH . 'tour/design-1.php';
+	}elseif( $tf_tour_selected_template == "design-2" ){
+		include TF_TEMPLATE_PART_PATH . 'tour/design-2.php';
 	}else{
 		include TF_TEMPLATE_PART_PATH . 'tour/design-default.php';
 	}

@@ -341,6 +341,10 @@ TF_Settings::option( 'tf_settings', array(
 											'title' => 'Design 1',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design1-tour.jpg",
 										),
+										'design-2' => array(
+											'title' => 'Design 2',
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design2-tour.jpg",
+										),
 										'default'  => array(
 											'title' => 'Defult',
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-tour.jpg",
