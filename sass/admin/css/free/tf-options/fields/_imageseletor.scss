@@ -1,6 +1,7 @@
 .tf-image-radio-group {
     display: flex;
     align-items: initial;
+    flex-wrap: wrap;
 
     li {
         display: inline-block;

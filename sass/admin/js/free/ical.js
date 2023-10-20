@@ -11,6 +11,7 @@
                 y: 'bottom',
             },
         });
+        
 
         /*
         * Check available hotel room from date to date

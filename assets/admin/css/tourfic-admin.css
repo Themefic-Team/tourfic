@@ -3649,6 +3649,7 @@ Steps
 .tf-image-radio-group {
   display: flex;
   align-items: initial;
+  flex-wrap: wrap;
 }
 .tf-image-radio-group li {
   display: inline-block;
