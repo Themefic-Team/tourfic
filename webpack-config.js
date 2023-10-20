@@ -4,8 +4,9 @@ const entryPoints = {};
 
 const freeAppJs = glob.sync('./sass/app/js/free/*.js');
 const freeAdminJs = glob.sync('./sass/admin/js/free/*.js');
-const addonAdminJs = glob.sync('./sass/admin/js/addon/*.js');
-const AddonAppJs = glob.sync('./sass/app/js/addon/*.js');
+const vendorAdminJs = glob.sync('./sass/admin/js/addon/vendor/*.js');
+const vendorAppJs = glob.sync('./sass/app/js/addon/vendor/*.js');
+const iCalAdminJs = glob.sync('./sass/admin/js/addon/ical/*.js');
 const proAppJs = glob.sync('./sass/app/js/pro/*.js');
 const proAdminJs = ['./sass/admin/js/pro/locationpicker.jquery.js','./sass/admin/js/pro/locationpicker-custom.js','./sass/admin/js/pro/admin.js'];
 
@@ -17,9 +18,12 @@ entryPoints['tourfic/assets/admin/js/tourfic-admin-scripts.min'] = freeAdminJs;
 entryPoints['tourfic-pro/assets/app/js/tourfic-pro'] = proAppJs;
 entryPoints['tourfic-pro/assets/admin/js/tourfic-pro-admin'] = proAdminJs;
 
-//tourfic addon
-entryPoints['tourfic-vendor/admin/assets/js/tourfic-vendor-scripts.min'] = addonAdminJs;
-entryPoints['tourfic-vendor/public/assets/js/tourfic-vendor'] = AddonAppJs;
+//tourfic vendor addon
+entryPoints['tourfic-vendor/admin/assets/js/tourfic-vendor-scripts.min'] = vendorAdminJs;
+entryPoints['tourfic-vendor/public/assets/js/tourfic-vendor'] = vendorAppJs;
+
+//tourfic ical addon
+entryPoints['tourfic-ical/assets/admin/js/tourfic-ical.min'] = iCalAdminJs;
 
 //scss entry points
 // const appScss = glob.sync('./sass/app/css/tourfic.scss');

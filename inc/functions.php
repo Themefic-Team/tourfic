@@ -992,8 +992,8 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 		<script>
 			(function ($) {
 				$(document).ready(function () {
-
-					$(".tf-hotel-side-booking #check-in-out-date").flatpickr({
+					$(document).on("focus",".tf-hotel-side-booking #check-in-out-date", function(e) {
+						let calander = flatpickr( this, {
 						enableTime: false,
 						minDate: "today",
 						mode: "range",
@@ -1006,6 +1006,9 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 						},
 					});
 
+					// open flatpickr on focus
+					calander.open();
+					})
 				});
 			})(jQuery);
 		</script>
@@ -1246,11 +1249,12 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
             </div>
 
         </form>
+
 		<script>
 			(function ($) {
 				$(document).ready(function () {
-
-					$(".tf-hotel-side-booking #check-in-out-date").flatpickr({
+					$(document).on("focus",".tf-hotel-side-booking #check-in-out-date", function(e) {
+						let calander = flatpickr( this, {
 						enableTime: false,
 						minDate: "today",
 						mode: "range",
@@ -1263,6 +1267,9 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 						},
 					});
 
+					// open flatpickr on focus
+					calander.open();
+					})
 				});
 			})(jQuery);
 		</script>
@@ -2404,9 +2411,10 @@ function tf_update_email_template_default_content() {
 if ( ! function_exists( 'tourfic_order_table_data' ) ) {
 	function tourfic_order_table_data($query){
 		global $wpdb;
+		$query_type = $query['post_type'];
 		$query_select = $query['select'];
 		$query_where = $query['query'];
-		$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE $query_where" ), ARRAY_A );
+		$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s $query_where", $query_type ), ARRAY_A );
 		return $tf_tour_book_orders;
 	}
 }

@@ -240,7 +240,7 @@
 
         $("#cb #cb-select-all-1").click(function() {
             $('input[name="order_id[]"]').each(function() {
-                $(this).prop("checked", true);
+                $(this).prop("checked", !$(this).prop("checked"));
             });
         });
 
