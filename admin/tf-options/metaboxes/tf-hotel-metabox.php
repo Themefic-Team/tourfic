@@ -179,8 +179,8 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'          => 'facilities-section-title',
 					'type'        => 'text',
 					'label'       => __( 'Facilities Title', 'tourfic' ),
-					'placeholder' => __( "What this place offers", 'tourfic' ),
-					'default' => __( "What this place offers", 'tourfic' ),
+					'placeholder' => __( "Property facilities", 'tourfic' ),
+					'default' => __( "Property facilities", 'tourfic' ),
 					'attributes'  => array(
 						'required' => 'required',
 					),
