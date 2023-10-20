@@ -183,29 +183,24 @@
 
         </div>
         <div class="tf-details-right tf-sitebar-widgets">
+            <?php if( !empty($meta['nearby-places']) ){ ?>
             <div class="tf-whats-around tf-single-widgets">
-                <h2 class="tf-section-title">What’s around?</h2>
+                <h2 class="tf-section-title"><?php echo !empty($meta['section-title']) ? esc_html($meta['section-title']) : esc_html("What’s around?"); ?></h2>
                 <ul>
+                    <?php foreach($meta['nearby-places'] as $place){ ?>
                     <li>
-                        <span><i class="fa-solid fa-umbrella-beach"></i> Patenga sea beach</span>
-                        <span>5 km in drive</span>
+                        <span>
+                        <?php if( !empty( $place['place-icon'] )){ ?>
+                            <i class="<?php echo esc_attr($place['place-icon']); ?>"></i>
+                        <?php } ?> 
+                        <?php echo !empty( $place['place-title'] ) ? esc_html($place['place-title']) : ''; ?>
+                        </span>
+                        <span><?php echo !empty( $place['place-dist'] ) ? esc_html($place['place-dist']) : ''; ?></span>
                     </li>
-                    <li>
-                        <span><i class="fa-solid fa-mosque"></i> Al aksha mosque</span>
-                        <span>10 min walking</span>
-                    </li>
-                    
-                    <li>
-                        <span><i class="fa-solid fa-plane-up"></i> Singapore airport</span>
-                        <span>2 km in drive</span>
-                    </li>
-                    
-                    <li>
-                        <span><i class="fa-solid fa-shop"></i> Jamuna future park</span>
-                        <span>3 km in drive</span>
-                    </li>
+                    <?php } ?>
                 </ul>
-            </div>  
+            </div>
+            <?php } ?>
             
             <div class="tf-location tf-single-widgets">
                 <h2 class="tf-section-title"><?php _e("Location", "tourfic"); ?></h2>
