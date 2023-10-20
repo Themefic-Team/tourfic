@@ -597,13 +597,13 @@ TF_Settings::option( 'tf_settings', array(
 					'is_pro' => true,
 				),
 				array(
-					'id'           => 'hotel_amenities_cats',
+					'id'           => 'hotel_facilities_cats',
 					'type'         => 'repeater',
-					'label'        => __( 'Amenities Categories', 'tourfic' ),
+					'label'        => __( 'Facilities Categories', 'tourfic' ),
 					'button_title' => __( 'Add New', 'tourfic' ),
 					'fields'       => array(
 						array(
-							'id'    => 'hotel_amenities_cat_name',
+							'id'    => 'hotel_facilities_cat_name',
 							'type'  => 'text',
 							'label' => __( 'Category Name', 'tourfic' ),
 						),

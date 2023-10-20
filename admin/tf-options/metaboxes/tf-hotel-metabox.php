@@ -5,13 +5,13 @@ $badge_up     = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Up
 $badge_pro    = '<div class="tf-csf-badge"><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 $badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Upcoming", "tourfic" ) . '</span><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 
-if(!function_exists('tf_hotel_amenities_categories')) {
-	function tf_hotel_amenities_categories() {
-		$amenities_cats = ! empty( tf_data_types( tfopt( 'hotel_amenities_cats' ) ) ) ? tf_data_types( tfopt( 'hotel_amenities_cats' ) ) : '';
+if(!function_exists('tf_hotel_facilities_categories')) {
+	function tf_hotel_facilities_categories() {
+		$facilities_cats = ! empty( tf_data_types( tfopt( 'hotel_facilities_cats' ) ) ) ? tf_data_types( tfopt( 'hotel_facilities_cats' ) ) : '';
 		$all_cats       = [];
-		if ( ! empty( $amenities_cats ) && is_array( $amenities_cats ) ) {
-			foreach ( $amenities_cats as $key => $cat ) {
-				$all_cats[ (string) $key ] = $cat['hotel_amenities_cat_name'];
+		if ( ! empty( $facilities_cats ) && is_array( $facilities_cats ) ) {
+			foreach ( $facilities_cats as $key => $cat ) {
+				$all_cats[ (string) $key ] = $cat['hotel_facilities_cat_name'];
 			}
 		}
 	
@@ -168,17 +168,17 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					)
 				), // nearby places end
 
-				// Amenities
+				// facilities
 				array(
-					'id'      => 'amenities-heading',
+					'id'      => 'facilities-heading',
 					'type'    => 'heading',
-					'content' => __( 'Hotel Aminites', 'tourfic' ),
+					'content' => __( 'Hotel Facilities', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
-					'id'          => 'amenities-section-title',
+					'id'          => 'facilities-section-title',
 					'type'        => 'text',
-					'label'       => __( 'Amenities Title', 'tourfic' ),
+					'label'       => __( 'Facilities Title', 'tourfic' ),
 					'placeholder' => __( "What this place offers", 'tourfic' ),
 					'default' => __( "What this place offers", 'tourfic' ),
 					'attributes'  => array(
@@ -186,17 +186,17 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					),
 				),
 				array(
-					'id'           => 'hotel-amenities',
+					'id'           => 'hotel-facilities',
 					'type'         => 'repeater',
-					'label'        => __( 'Insert / Create Hotel Amenities', 'tourfic' ),
+					'label'        => __( 'Insert / Create Hotel Facilities', 'tourfic' ),
 					'button_title' => __( 'Add New', 'tourfic' ),
 					'class'        => 'tf-field-class',
 					'fields'       => array(
 						array(
-							'id'          => 'amenities-feature',
+							'id'          => 'facilities-feature',
 							'type'        => 'select2',
-							'label'       => __( 'Amenities Feature', 'tourfic' ),
-							'placeholder' => __( 'Select amenities feature', 'tourfic' ),
+							'label'       => __( 'Facilities Feature', 'tourfic' ),
+							'placeholder' => __( 'Select facilities feature', 'tourfic' ),
 							'options'     => 'terms',
 							'query_args'  => array(
 								'taxonomy'   => 'hotel_feature',
@@ -205,12 +205,12 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'field_width' => 50,
 						),
 						array(
-							'id'          => 'amenities-category',
+							'id'          => 'facilities-category',
 							'type'        => 'select2',
-							'label'       => __( 'Amenities Category', 'tourfic' ),
-							'placeholder' => __( 'Select amenities category', 'tourfic' ),
-							'options'     => tf_hotel_amenities_categories(),
-							'description' => __( 'Add new category from <a target="_blank" href="'.admin_url('admin.php?page=tf_settings#tab=single_page').'">Amenities Categories</a>', 'tourfic' ),
+							'label'       => __( 'Facilities Category', 'tourfic' ),
+							'placeholder' => __( 'Select facilities category', 'tourfic' ),
+							'options'     => tf_hotel_facilities_categories(),
+							'description' => __( 'Add new category from <a target="_blank" href="'.admin_url('admin.php?page=tf_settings#tab=single_page').'">Facilities Categories</a>', 'tourfic' ),
 							'field_width' => 50,
 						),
 						array(
@@ -221,7 +221,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'label_off' => __( 'No', 'tourfic' ),
 						),
 					)
-				), // Amenities end
+				), // facilities end
 			),
 		),
 		// Hotel Details
