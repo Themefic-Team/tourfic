@@ -236,15 +236,14 @@
                             </svg>
                         </span>
                     </div>
+                    <?php 
+                    if(!empty($hotel_discount_type) && !empty($hotel_discount_amount) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type )){ ?>
                     <div class="tf-available-room-off">
-                        <?php 
-                        if(!empty($hotel_discount_type) && !empty($hotel_discount_amount) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type )){ ?>
                         <span>
                             <?php echo ("percent" == $hotel_discount_type) ? esc_html($hotel_discount_amount).'% off' : wc_price($hotel_discount_amount). 'off'; ?>
                         </span>
-
-                        <?php } ?>
                     </div>
+                    <?php } ?>
                     <div class="tf-available-room-price">
 
                     <?php

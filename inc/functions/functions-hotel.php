@@ -2087,11 +2087,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 							}
 						}
 					}
-					// echo "<pre>";
-					// // print_r(floatval( preg_replace( '/[^\d.]/', '', number_format( $b_room_price - ( ( $b_room_price / 100 ) * $hotel_discount_amount ), 2 ) ) ));
-					// print_r($room_price);
-					// echo "</pre>";
-					// die(); // added by - Sunvi
+					
 				}
 			} else if ( $pricing_by == 2 ) {
 				if ( empty( $check_in_out ) ) {

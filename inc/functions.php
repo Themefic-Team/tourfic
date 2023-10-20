@@ -1125,7 +1125,10 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
 							instance.element.value = dateStr.replace(/[a-z]+/g, '-');
 							dateSetToFields(selectedDates, instance);
 						},
+						<?php 
+						if(!empty($check_in_out)){ ?>
 						defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
+						<?php } ?>
 					});
 
 					function dateSetToFields(selectedDates, instance) {
