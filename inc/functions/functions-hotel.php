@@ -2085,6 +2085,18 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 									}
 								}
 							}
+						}else{
+							$b_room_price = $b_room['price'];
+							$room_price[] = $b_room_price;
+							$dicount_b_room_price = 0;
+							if ( $hotel_discount_type == "percent" ) {
+								$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $b_room_price - ( ( $b_room_price / 100 ) * $hotel_discount_amount ), 2 ) ) );
+							} else if ( $hotel_discount_type == "fixed" ) {
+								$dicount_b_room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $b_room_price - $hotel_discount_amount ), 2 ) ) );
+							}
+							if($dicount_b_room_price != 0) {
+								$room_price[] = $dicount_b_room_price;
+							}
 						}
 					}
 					
@@ -2192,6 +2204,48 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 											}
 										}
 									}
+								}
+							}
+						}
+					}else{
+						$adult_price = $b_room['adult_price'];
+						$child_price = $b_room['child_price'];
+						// discount calculation - start
+						if ( $hotel_discount_type == "percent" ) {
+							$dicount_adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
+							$dicount_child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $child_price - ( ( $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
+						} else if ( $hotel_discount_type == "fixed" ) {
+							$dicount_adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $adult_price - (int) $hotel_discount_amount ), 2 ) ) );
+							$dicount_child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $child_price - (int) $hotel_discount_amount ), 2 ) ) );
+						}
+
+						if ( $archive_page_price_settings == "all" ) {
+							if ( ! empty( $b_room['adult_price'] ) ) {
+								$room_price[] = $b_room['adult_price'];
+								if ( ! empty( $dicount_adult_price ) ) {
+									$room_price[] = $dicount_adult_price;
+								}
+							}
+							if ( ! empty( $b_room['child_price'] ) ) {
+								$room_price[] = $b_room['child_price'];
+								if ( ! empty( $dicount_child_price ) ) {
+									$room_price[] = $dicount_child_price;
+								}
+							}
+						}
+						if ( $archive_page_price_settings == "adult" ) {
+							if ( ! empty( $b_room['adult_price'] ) ) {
+								$room_price[] = $b_room['adult_price'];
+								if ( ! empty( $dicount_adult_price ) ) {
+									$room_price[] = $dicount_adult_price;
+								}
+							}
+						}
+						if ( $archive_page_price_settings == "child" ) {
+							if ( ! empty( $b_room['child_price'] ) ) {
+								$room_price[] = $b_room['child_price'];
+								if ( ! empty( $dicount_child_price ) ) {
+									$room_price[] = $dicount_child_price;
 								}
 							}
 						}
