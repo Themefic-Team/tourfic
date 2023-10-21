@@ -9921,7 +9921,8 @@ html {
   outline: none;
   width: 100%;
 }
-.tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list {
+.tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list,
+.tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list {
   position: absolute;
   left: 0;
   top: 100%;
@@ -9930,7 +9931,8 @@ html {
   z-index: 999;
   border: 1px solid #d4d4d4;
 }
-.tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list div {
+.tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list div,
+.tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list div {
   padding: 10px;
   cursor: pointer;
   background-color: #fff;
