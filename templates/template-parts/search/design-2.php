@@ -7,9 +7,18 @@
             <div class="tf-hero-content tf-archive-hero-content">
                 <div class="tf-head-title">
                     <h1><?php echo !empty($_GET['place-name']) ? esc_html( $_GET['place-name'] ) : '' ?></h1>
+                    <?php if( !empty($_GET['type']) && "tf_tours"==$_GET['type'] ){ 
+                    $tf_adults = !empty($_GET['adults']) ? $_GET['adults'] : 0;
+                    $tf_children = !empty($_GET['children']) ? $_GET['children'] : 0;
+                    ?>
+                        <div class="tf-title-meta">
+                            <p>( <?php echo esc_html( $tf_adults + $tf_children ); ?> <?php _e("Guest", "tourfic"); ?>, <?php echo !empty($_GET['check-in-out-date']) ? esc_html( $_GET['check-in-out-date'] ) : '' ?> )</p>
+                        </div>
+                    <?php } if( !empty($_GET['type']) && "tf_hotel"==$_GET['type'] ){ ?>
                     <div class="tf-title-meta">
                         <p>( <?php echo !empty($_GET['room']) ? esc_html( $_GET['room'] ) : '0' ?> <?php _e("room", "tourfic"); ?>, <?php echo !empty($_GET['check-in-out-date']) ? esc_html( $_GET['check-in-out-date'] ) : '' ?> )</p>
                     </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
