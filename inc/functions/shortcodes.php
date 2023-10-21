@@ -866,8 +866,13 @@ function tf_search_result_shortcode( $atts, $content = null ) {
 		
 		
 		<div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
-			<div class="tf-archive-available-rooms-head tf-available-rooms-head tf-total-results">
-				<h2 class=""><?php _e("Total", "tourfic"); ?> <span><?php echo $total_posts; ?></span> <?php _e("hotels available", "tourfic"); ?></h2>
+			<div class="tf-archive-available-rooms-head tf-available-rooms-head">
+				<?php if($post_type == "tf_hotel"){ ?>
+				<h2 class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $total_posts; ?></span> <?php _e("hotels available", "tourfic"); ?></h2>
+				<?php } ?>
+				<?php if($post_type == "tf_tours"){ ?>
+				<h2 class="tf-total-results"><?php _e("Total", "tourfic"); ?> <span><?php echo $total_posts; ?></span> <?php _e("tours available", "tourfic"); ?></h2>
+				<?php } ?>
 				<div class="tf-filter">
 					<span><?php _e("Best match", "tourfic"); ?></span>
 					<i class="fa-solid fa-chevron-down"></i>

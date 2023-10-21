@@ -643,6 +643,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 
 			</div>
 			<div class="tf-booking-form-guest-and-room">
+				<?php if ( $post_type == 'tf_hotel' ) { ?>
 				<div class="tf-booking-form-guest-and-room-inner">
 					<span class="tf-booking-form-title"><?php _e("Guests & rooms", "tourfic"); ?></span>
 					<div class="tf-booking-guest-and-room-wrap tf-archive-guest-info">
@@ -652,8 +653,21 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 						<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
 					</div>
 				</div>
+				<?php } if ( $post_type == 'tf_tours' ) { ?>
+				<div class="tf-booking-form-guest-and-room-inner">
+					<span class="tf-booking-form-title"><?php _e("Guests", "tourfic"); ?></span>
+					<div class="tf-booking-guest-and-room-wrap">
+						<span class="tf-guest tf-booking-date">
+							0<?php echo $adult+$children ?>						
+						</span> 
+						<span class="tf-booking-month">
+							<span><?php _e("Guest", "tourfic"); ?></span>
+							<img src="<?php echo TF_ASSETS_APP_URL ?>images/select-arrow-dark.svg" alt="">
+						</span>
+					</div>
+				</div>
+				<?php } ?>
 
-				
 				<div class="tf_acrselection-wrap">
 					<div class="tf_acrselection-inner">
 						<div class="tf_acrselection">
@@ -672,6 +686,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 								<div class="acr-inc">+</div>
 							</div>
 						</div>
+						<?php if ( $post_type == 'tf_hotel' ) { ?>
 						<div class="tf_acrselection">
 							<div class="acr-label"><?php _e("Rooms", "tourfic"); ?></div>
 							<div class="acr-select">
@@ -680,6 +695,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
 								<div class="acr-inc">+</div>
 							</div>
 						</div>
+						<?php } ?>
 					</div>
 				</div>
 			</div>

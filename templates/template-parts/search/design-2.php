@@ -44,8 +44,7 @@
                         <div class="tf-filter-title">
                             <h2 class="tf-section-title"><?php _e("Filter", "tourfic"); ?></h2>
                             <button><?php _e("Reset", "tourfic"); ?></button>
-                        </div>   
-                        <?php //tf_search_result_sidebar_form( 'archive' ); ?>
+                        </div>
 
                         <?php if ( is_active_sidebar( 'tf_search_result' ) ) { ?>
                             <div id="tf__booking_sidebar">
