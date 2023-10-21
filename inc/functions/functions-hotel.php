@@ -2363,7 +2363,7 @@ function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $c
 			</div>
 			<?php 
 			if( !empty($gallery_ids) ){ ?>                                                                     
-			<div data-id="<?php echo get_the_ID(); ?>" class="tf-room-gallery tf-popup-buttons tf-hotel-room-popup">
+			<div data-id="<?php echo get_the_ID(); ?>" data-type="tf_hotel" class="tf-room-gallery tf-popup-buttons tf-hotel-room-popup">
 				<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g id="content">
 				<path id="Rectangle 2111" d="M5.5 16.9745C5.6287 18.2829 5.91956 19.1636 6.57691 19.8209C7.75596 21 9.65362 21 13.4489 21C17.2442 21 19.1419 21 20.3209 19.8209C21.5 18.6419 21.5 16.7442 21.5 12.9489C21.5 9.15362 21.5 7.25596 20.3209 6.07691C19.6636 5.41956 18.7829 5.1287 17.4745 5" stroke="#FDF9F4" stroke-width="1.5"></path>
@@ -3479,11 +3479,22 @@ add_action( 'wp_ajax_nopriv_tf_tour_details_qv', 'tf_hotel_quickview_callback' )
  */
 
 function tf_hotel_archive_popup_qv_callback(){
-	$meta = get_post_meta( $_POST['post_id'], 'tf_hotels_opt', true );
-	$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
-	if ( $gallery ) {
-		$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+	if( !empty($_POST['post_type']) && "tf_hotel"==$_POST['post_type']){
+		$meta = get_post_meta( $_POST['post_id'], 'tf_hotels_opt', true );
+		$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
+		if ( $gallery ) {
+			$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+		}
 	}
+
+	if( !empty($_POST['post_type']) && "tf_tours"==$_POST['post_type']){
+		$meta = get_post_meta( $_POST['post_id'], 'tf_tours_opt', true );
+		$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : '';
+		if ( $gallery ) {
+			$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+		}
+	}
+
 	if ( ! empty( $gallery_ids ) ) {
 	foreach ( $gallery_ids as $key => $gallery_item_id ) {
 	$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );

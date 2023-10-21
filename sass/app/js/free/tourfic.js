@@ -2639,16 +2639,18 @@
         }); 
         
         /**
-         * Design 2 Archive Hotel Room Gallery Popup
+         * Design 2 Archive Hotel Room Gallery & Archive Tour Gallery Popup
          *
          */
         $(document).on('click', '.tf-hotel-room-popup', function (e) {
             e.preventDefault();
             $("#tour_room_details_loader").show();
             var post_id = $(this).attr("data-id");
+            var post_type = $(this).attr("data-type");
             var data = {
                 action: 'tf_hotel_archive_popup_qv',
-                post_id: post_id
+                post_id: post_id,
+                post_type: post_type
             };
 
             $.ajax({
