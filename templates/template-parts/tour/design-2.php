@@ -798,91 +798,53 @@
             <!--Content reviews end -->
 
 
-
+            <?php if ( $faqs ): ?>
             <!-- Hotel Questions Srart -->
             <div class="tf-questions-wrapper tf-section" id="tf-hotel-faq">
-                <h2 class="tf-section-title">Questions? We have answers.</h2>
+                <h2 class="tf-section-title">
+                <?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : __( "Faq’s", 'tourfic' ); ?>
+                </h2>            
                 <div class="tf-questions">
+                    
+                    <?php 
+                    $faqs_itemsPerColumn = ceil(count($faqs) / 2);
+                    ?>
                     <div class="tf-questions-col">
-                        <div class="tf-question tf-active">
-                            <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                            <div class="tf-question-desc" style="display: block;">Yes, this property has an outdoor
-                                pool. Pool access is from 6:00 AM to 8:00 PM</div>
-                            <i class="fa-solid fa-chevron-down"></i>
+                        <?php 
+                        for ($i = 0; $i < $faqs_itemsPerColumn; $i++) { ?>
+                        <div class="tf-question <?php echo $i==0 ? esc_attr( 'tf-active' ) : ''; ?>">
+                            <div class="tf-faq-head">
+                                <h3><?php echo esc_html( $faqs[$i]['title'] ); ?>
+                                <i class="fa-solid fa-chevron-down"></i></h3>
+                            </div>
+                            <div class="tf-question-desc" style="<?php echo $i==0 ? esc_attr( 'display: block;' ) : ''; ?>">
+                            <?php echo wp_kses_post( $faqs[$i]['desc'] ); ?>
+                            </div>
                         </div>
-                        <div class="tf-question">
-                            <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                            <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is
-                                from 6:00 AM to 8:00 PM</div>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                        <div class="tf-question">
-                            <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                            <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is
-                                from 6:00 AM to 8:00 PM</div>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                        <div class="tf-question">
-                            <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                            <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is
-                                from 6:00 AM to 8:00 PM</div>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                        <div class="tf-question">
-                            <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                            <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is
-                                from 6:00 AM to 8:00 PM</div>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                        <div class="tf-question">
-                            <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                            <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is
-                                from 6:00 AM to 8:00 PM</div>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </div>
+                        <?php } ?>
+                        
                     </div>
                     <div class="tf-questions-col">
+                        <?php 
+                        for ($i = $faqs_itemsPerColumn; $i < count($faqs); $i++) { ?>
                         <div class="tf-question">
-                            <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                            <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is
-                                from 6:00 AM to 8:00 PM</div>
-                            <i class="fa-solid fa-chevron-down"></i>
+                            <div class="tf-faq-head">
+                                <h3><?php echo esc_html( $faqs[$i]['title'] ); ?>
+                                <i class="fa-solid fa-chevron-down"></i></h3>
+                            </div>
+                            <div class="tf-question-desc">
+                            <?php echo wp_kses_post( $faqs[$i]['desc'] ); ?>
+                            </div>
                         </div>
-                        <div class="tf-question">
-                            <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                            <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is
-                                from 6:00 AM to 8:00 PM</div>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                        <div class="tf-question">
-                            <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                            <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is
-                                from 6:00 AM to 8:00 PM</div>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                        <div class="tf-question">
-                            <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                            <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is
-                                from 6:00 AM to 8:00 PM</div>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                        <div class="tf-question">
-                            <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                            <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is
-                                from 6:00 AM to 8:00 PM</div>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-                        <div class="tf-question">
-                            <h3>Does Centara Grand at Central Plaza Ladprao Bangkok have a pool?</h3>
-                            <div class="tf-question-desc">Yes, this property has an outdoor pool. Pool access is
-                                from 6:00 AM to 8:00 PM</div>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </div>
+                        <?php } ?>
+                        
                     </div>
                 </div>
             </div>
 
             <!-- Hotel Questions end -->
+            <?php endif; ?>
+            
 
 
             <!-- Hotel Policies Starts -->
