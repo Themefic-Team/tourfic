@@ -2084,7 +2084,7 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
     </div>
 	<?php 
 	}
-	if( $tf_tour_arc_selected_template=="design-2"){ ?>
+	elseif( $tf_tour_arc_selected_template=="design-2"){ ?>
 	<div class="tf-available-room">
 		<div class="tf-available-room-gallery">                       
 			<div class="tf-room-gallery">
