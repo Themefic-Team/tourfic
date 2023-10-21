@@ -1,0 +1,27 @@
+.tf-include-exclude-wrapper {
+    .tf-include-exclude-innter {
+        display: flex;
+        gap: 40px;
+        &>div {
+            display: flex;
+            gap: 16px;
+            width: 50%;
+        }
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 0;
+            padding: 0;
+            li {
+                display: flex;
+                gap: 16px;
+                img {
+                    width: 16px;
+                    height: 16px;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
+}

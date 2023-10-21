@@ -9328,6 +9328,62 @@ html {
 .tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-popular-facilities > ul li {
   width: 25%;
 }
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper {
+  display: flex;
+  gap: 24px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block {
+  width: calc(25% - 66px);
+  padding: 24px;
+  display: flex;
+  gap: 16px;
+  background: #FCF4E8;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block i {
+  font-size: 24px;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block .tf-feature-block-details h5 {
+  color: #595349;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper {
+  display: flex;
+  gap: 24px;
+  padding: 16px 0;
+  background: #FCF4E8;
+  margin-bottom: 16px;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .tf-highlights-icon img {
+  width: 230px;
+  height: 230px;
+  object-fit: contain;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .ft-highlights-details ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .ft-highlights-details ul li {
+  position: relative;
+  padding-left: 30px;
+}
+.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .ft-highlights-details ul li:after {
+  content: "";
+  background: url(../image/./highlights-icon.svg);
+  height: 16px;
+  width: 16px;
+  position: ABSOLUTE;
+  left: 0;
+  top: 0;
+}
 .tf-template-3 .tf-content-wrapper .tf-details .tf-details-right {
   width: 480px;
 }
@@ -9987,6 +10043,95 @@ html {
   top: 100%;
   display: block !important;
 }
+.tf-template-3 .tf-search-date-wrapper {
+  background: #FAEEDC;
+  padding: 24px;
+}
+.tf-template-3 .tf-search-date-wrapper .tf-booking-date-wrap {
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  padding: 0 12px;
+  max-width: 150px;
+  margin-right: 40px;
+  justify-content: flex-start;
+  padding: 16px !important;
+  width: inherit;
+  max-width: unset !important;
+  margin: 0 !important;
+}
+.tf-template-3 .tf-search-date-wrapper .tf-booking-date-wrap input {
+  padding: 9px;
+  border: none;
+  outline: none;
+  width: -webkit-fill-available;
+}
+.tf-template-3 .tf-search-date-wrapper .tf-booking-date-wrap input {
+  padding: 0 9px;
+}
+.tf-template-3 .tf-search-date-wrapper .acr-dec,
+.tf-template-3 .tf-search-date-wrapper .acr-inc {
+  background: transparent;
+  border: none;
+  font-size: 31px;
+  font-weight: 400;
+  color: #595349;
+}
+.tf-template-3 .tf-search-date-wrapper .acr-select input[type=number] {
+  width: 35px !important;
+  height: 46px;
+  border: 1px solid !important;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  color: #999 !important;
+  text-align: center;
+  padding-left: 14px !important;
+  padding-right: -1px !important;
+  border-radius: 20px;
+  background: #FCF4E8 !important;
+}
+.tf-template-3 .tf-search-date-wrapper form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.tf-template-3 .tf-search-date-wrapper h2 {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.tf-template-3 .tf-search-date-wrapper .tf_acrselection-wrap {
+  position: unset;
+  visibility: unset;
+  opacity: unset;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.tf-template-3 .tf-search-date-wrapper .acr-label {
+  color: #595349;
+  font-family: Josefin Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 140%;
+}
+.tf-template-3 .tf-search-date-wrapper .acr-label span {
+  color: #99948D;
+  font-family: Josefin Sans;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  display: block;
+}
+.tf-template-3 .tf-search-date-wrapper span.tf-search-date-info {
+  color: #595349;
+  font-size: 32px;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+  line-height: 1;
+}
 .tf-template-3 .tf-facilities-wrapper .tf-facilities {
   display: flex;
   flex-direction: row;
@@ -10136,6 +10281,251 @@ html {
 }
 .tf-template-3 .tf-policies-wrapper .tf-policies .tf-policy-item .tf-policy-desc {
   width: -webkit-fill-available;
+}
+.tf-template-3 .tf-include-exclude-wrapper .tf-include-exclude-innter {
+  display: flex;
+  gap: 40px;
+}
+.tf-template-3 .tf-include-exclude-wrapper .tf-include-exclude-innter > div {
+  display: flex;
+  gap: 16px;
+  width: 50%;
+}
+.tf-template-3 .tf-include-exclude-wrapper .tf-include-exclude-innter ul {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+.tf-template-3 .tf-include-exclude-wrapper .tf-include-exclude-innter ul li {
+  display: flex;
+  gap: 16px;
+}
+.tf-template-3 .tf-include-exclude-wrapper .tf-include-exclude-innter ul li img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+.tf-template-3 .tf-itinerary-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.tf-template-3 .tf-itinerary-wrapper .section-title {
+  display: flex;
+  justify-content: space-between;
+}
+.tf-template-3 .tf-itinerary-wrapper .section-title button {
+  display: flex;
+  flex-direction: row;
+  color: #595349;
+  font-size: 16px;
+  font-family: Josefin Sans;
+  font-weight: 700;
+  line-height: 24px;
+  word-wrap: break-word;
+  border: none;
+  background: #FAEEDC;
+  min-width: 211px;
+  height: fit-content;
+  padding: 12px;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+.tf-template-3 .tf-itinerary-wrapper .section-title button img {
+  width: 16px;
+  height: 16px;
+}
+.tf-template-3 .tf-itinerary-wrapper .tf-single-itinerary {
+  background: #FCF4E8;
+  padding: 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-title h4 {
+  color: #595349;
+  font-size: 20px;
+  font-family: Josefin Sans;
+  font-weight: 400;
+  line-height: 26px;
+  word-wrap: break-word;
+}
+.tf-template-3 .tf-itinerary-wrapper span.tf-itinerary-time {
+  padding: 8px 16px;
+  background: #FAEEDC;
+  margin-right: 16px;
+}
+.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-content {
+  display: flex;
+  gap: 32px;
+}
+.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-content-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: calc(100% - 320px);
+}
+.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-content-details ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px 10px;
+}
+.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-content-details ul li {
+  width: calc(50% - 5px);
+}
+.tf-template-3 .tf-itinerary-wrapper .section-title h2 {
+  margin: 0;
+}
+.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-content-images {
+  height: fit-content;
+  width: 320px;
+}
+.tf-template-3 .tf-itinerary-wrapper .tf-single-itinerary.active .tf-itinerary-content {
+  display: flex !important;
+}
+.tf-template-3 .tf-itinerary-wrapper .tf-single-itinerary.active {
+  padding-bottom: 32px !important;
+}
+.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-map iframe {
+  width: 100%;
+}
+.tf-template-3 .tf-itinerary-wrapper .tf-single-itinerary.active .tf-itinerary-title i {
+  transform: rotate(180deg);
+}
+.tf-template-3 .cld-main {
+  width: fit-content;
+  background: #FCF4E8;
+  padding: 32px;
+}
+.tf-template-3 .cld-datetime {
+  width: 100% !important;
+  min-width: 100%;
+  background: #FAEEDC;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 16px 0;
+  align-items: center;
+}
+.tf-template-3 .cld-datetime .today {
+  margin: unset;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: 7px;
+  color: #595349;
+}
+.tf-template-3 .cld-datetime > div {
+  width: initial;
+  position: unset !important;
+}
+.tf-template-3 .cld-nav {
+  background: #B58E53;
+  padding: 6px 11px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tf-template-3 .cld-nav svg {
+  height: 10px;
+  width: 10px;
+  fill: #fff;
+}
+.tf-template-3 li.cld-day {
+  background: #FDF9F3;
+  padding: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+.tf-template-3 ul.cld-days {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+  color: #D6D4D2;
+  /* Body/P1 */
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+}
+.tf-template-3 span.cld-title {
+  position: unset !important;
+  border: unset;
+  margin: unset;
+  padding: unset;
+  text-decoration: underline !important;
+  white-space: normal;
+  font-size: inherit;
+  color: inherit !important;
+  display: inline-block !important;
+  justify-content: flex-start;
+  margin-top: 6px;
+}
+.tf-template-3 span.cld-title a {
+  text-decoration: unset !important;
+  color: inherit;
+  font-weight: normal;
+  font-size: 16px;
+  font-weight: 700;
+}
+.tf-template-3 p.cld-number {
+  border: none !important;
+  font-size: 16px;
+}
+.tf-template-3 .cld-title::before {
+  display: none;
+}
+.tf-template-3 .cld-number.eventday:hover {
+  background: transparent;
+}
+.tf-template-3 li.cld-day.currMonth {
+  color: #99948D;
+}
+.tf-template-3 .cld-day.nextMonth, .tf-template-3 .cld-day.prevMonth {
+  opacity: unset;
+}
+.tf-template-3 li.cld-day.currMonth a {
+  color: #B58E53;
+  pointer-events: none;
+}
+.tf-template-3 li.cld-label {
+  color: #595349;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+  text-align: left;
+}
+.tf-template-3 ul.cld-labels {
+  text-align: left;
+  margin: 0;
+  padding: 16px 0;
+  display: flex;
+  gap: 16px;
+}
+.tf-template-3 ul.cld-days {
+  margin-top: 0;
+  padding: 0 !important;
+}
+.tf-template-3 li.cld-day {
+  width: calc(14.2857142857% - 46px);
+}
+.tf-template-3 .cld-day.today .cld-number {
+  background: transparent;
+  color: inherit;
 }
 .tf-template-3 .tf-whats-around ul {
   margin: 0;

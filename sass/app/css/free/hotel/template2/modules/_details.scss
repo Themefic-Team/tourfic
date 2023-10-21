@@ -76,6 +76,68 @@
                         }
                     }
                 }
+                .tf-features-block-wrapper {
+                    display: flex;
+                    gap: 24px;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    margin-bottom: 32px;
+                    .tf-feature-block {
+                        width: calc(25% - 66px);
+                        padding: 24px;
+                        display: flex;
+                        gap: 16px;
+                        background: #FCF4E8;
+                        i {
+                            font-size: 24px;
+                        }
+                        .tf-feature-block-details {
+                            h5 {
+                                color: #595349;
+                                font-size: 20px;
+                                font-style: normal;
+                                font-weight: 700;
+                                line-height: 1.3;
+                            }
+                        }
+                    }
+                }
+                .tf-highlights-wrapper { 
+                    display: flex;
+                    gap: 24px;
+                    padding: 16px 0;
+                    background: #FCF4E8;
+                    margin-bottom: 16px;
+                    .tf-highlights-icon { 
+                        img { 
+                            width: 230px;
+                            height: 230px;
+                            object-fit: contain;
+                        }
+                    }
+                    .ft-highlights-details { 
+                        ul { 
+                            margin: 0;
+                            padding: 0;
+                            display: flex;
+                            gap: 16px;
+                            flex-direction: column;
+                            li { 
+                                position: relative;
+                                padding-left: 30px;
+                                &:after{
+                                    content: "";
+                                    background: url(../image/./highlights-icon.svg);
+                                    height: 16px;
+                                    width: 16px;
+                                    position: ABSOLUTE;
+                                    left: 0;
+                                    top: 0;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         .tf-details-right {

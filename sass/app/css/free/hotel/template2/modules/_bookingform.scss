@@ -217,3 +217,105 @@
     top: 100%;
     display: block !important;
 }
+
+.tf-search-date-wrapper {
+
+    background: #FAEEDC;
+    padding: 24px;
+
+    .tf-booking-date-wrap {
+        display: flex;
+        flex-direction: row;
+        background: #fff;
+        padding: 0 12px;
+        max-width: 150px;
+        margin-right: 40px;
+        justify-content: flex-start;
+        padding: 16px !important;
+        width: inherit;
+        max-width: unset !important;
+        margin: 0 !important;
+
+        input {
+            padding: 9px;
+            border: none;
+            outline: none;
+            width: -webkit-fill-available;
+        }
+    }
+
+    .tf-booking-date-wrap input {
+        padding: 0 9px;
+    }
+
+    .acr-dec,
+    .acr-inc {
+        background: transparent;
+        border: none;
+        font-size: 31px;
+        font-weight: 400;
+        color: #595349;
+    }
+
+    .acr-select input[type=number] {
+        width: 35px !important;
+        height: 46px;
+        border: 1px solid !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        color: #999 !important;
+        text-align: center;
+        padding-left: 14px !important;
+        padding-right: -1px !important;
+        border-radius: 20px;
+        background: #FCF4E8 !important;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    h2 {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .tf_acrselection-wrap {
+        position: unset;
+        visibility: unset;
+        opacity: unset;
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .acr-label {
+        color: #595349;
+        font-family: Josefin Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 140%;
+    }
+
+    .acr-label span {
+        color: #99948D;
+        font-family: Josefin Sans;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        display: block;
+    }
+
+    span.tf-search-date-info {
+        color: #595349;
+        font-size: 32px;
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 700;
+        line-height: 1;
+    }
+}

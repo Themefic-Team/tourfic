@@ -11,8 +11,14 @@ html {
   @import './modules/bookingform';
   @import './modules/facilities';
   @import './modules/review';
+  // Single Tour page
+  @import './modules/include';
+  @import './modules/itinerary';
+  @import './modules/calander';
+  //SIngle Tour Page
   @import './modules/sitebar';
   @import './modules/popup';
+  // @import './modules/footer';
 }
 
 @import './modules/responsive';
