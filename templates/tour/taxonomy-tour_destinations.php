@@ -33,8 +33,6 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
 <?php } elseif( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-2" ){ ?>
 
 <div class="tf-template-3">
-
-
     <!--Hero section start -->
     <div class="tf-hero-section-wrap" style="background: rgba(48, 40, 28, 0.30);">
         <div class="tf-container">
@@ -46,7 +44,6 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
         </div>
     </div>
     <!--Hero section End -->
-
 
     <!--Content section end -->
     <div class="tf-content-wrapper">
@@ -62,11 +59,8 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
                 </div>
                 <!-- Booking form end -->                    
 
-
                 <div class="tf-details-left tf-result-previews">
-                    
 					<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
-
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets tf-archive-right">
                     <div class="tf-filter-wrapper">
@@ -79,7 +73,6 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
                             <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
                         </div>
                         <?php } ?>
-        
                     </div> 
                 </div>        
             </div>        
@@ -88,7 +81,6 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
         </div>
     </div>
     <!--Content section end -->
-
     
     <!-- Hotel PopUp Starts -->       
     <div class="tf-popup-wrapper tf-hotel-popup">
@@ -102,7 +94,6 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
         </div>
     </div>
     <!-- Hotel PopUp end -->  
-
 </div>
 
 <?php } else{ ?>
