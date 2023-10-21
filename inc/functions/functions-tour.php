@@ -2168,7 +2168,15 @@ function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out =
 				</div>
 				
 				<ul>
-						
+					<?php if(!empty($group_size)){ ?>
+					<li>
+						<i class="ri-team-line"></i> <?php _e("Max", "tourfic"); ?> <?php echo esc_html($group_size); ?> <?php _e("people", "tourfic"); ?>
+					</li>
+					<?php } if(!empty($tour_duration)){ ?>
+					<li>
+						<i class="ri-history-fill"></i> <?php echo esc_html($tour_duration); ?> <?php _e("days", "tourfic"); ?>
+					</li>
+					<?php } ?>
 				<?php 
 				if ( $features ) {
 				foreach ( $features as $tfkey => $feature ) {
