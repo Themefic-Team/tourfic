@@ -5,6 +5,10 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'TF_Settings' ) ) {
 	class TF_Settings {
 
+		public $pre_tabs = '';
+		public $pre_fields = '';
+		public $pre_sections = '';
+
 		public $option_id = null;
 		public $option_title = null;
 		public $option_icon = null;
