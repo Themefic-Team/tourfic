@@ -1068,7 +1068,7 @@ function tf_room_availability_callback() {
 					}
 
 					if(!$multi_by_date_ck){
-						$days = $days+1;
+						$days = $days;
 					}
 
 					$price = $room['price_multi_day'] == '1' ? $price_by_date * $days : $price_by_date * $days;
