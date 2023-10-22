@@ -781,8 +781,8 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                     <div class="tf-shortcode-generator-single">
                         <div class="tf-shortcode-generator-label">
                             <div class="tf-labels">
-                                <label><?php echo __( 'Vendor Hotels & Tours', 'tourfic' ); ?></label>
-                                <p><?php echo __( 'Display Hotels & Tours in specific Vendor', 'tourfic' ); ?></p>
+                                <label><?php echo __( 'Vendor Hotels, Tours & Apartments', 'tourfic' ); ?></label>
+                                <p><?php echo __( 'Display Hotels, Tours & Apartments in specific Vendor', 'tourfic' ); ?></p>
                             </div>
                             <div class="tf-shortcode-btn tf-generate-tour">
                                 <button><?php echo __( 'Generate Shortcode', 'tourfic' ); ?></button>
@@ -806,6 +806,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             <select class="tf-select-field tf-setting-field">
                                                 <option value="type='tf_hotel'"><?php _e( 'Hotel', 'tourfic' ); ?></option>
                                                 <option value="type='tf_tours'"><?php _e( 'Tour', 'tourfic' ); ?></option>
+                                                <option value="type='tf_apartment'"><?php _e( 'Apartment', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -905,6 +906,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                                 <option value="type='all'"><?php _e( 'All', 'tourfic' ); ?></option>
                                                 <option value="type='hotel'"><?php _e( 'Hotel', 'tourfic' ); ?></option>
                                                 <option value="type='tour'"><?php _e( 'Tour', 'tourfic' ); ?></option>
+                                                <option value="type='apartment'"><?php _e( 'Apartment', 'tourfic' ); ?></option>
                                                 <option value="type='booking'"><?php _e( 'Booking', 'tourfic' ); ?></option>
                                                 <option value="type='tp-hotel'"><?php _e( 'Travel Payout Hotels', 'tourfic' ); ?></option>
                                                 <option value="type='tp-flight'"><?php _e( 'Travel Payout Flights', 'tourfic' ); ?></option>
@@ -986,6 +988,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             <select class="tf-select-field tf-setting-field">
                                                 <option value="type=tf_hotel"><?php _e( 'Hotel', 'tourfic' ); ?></option>
                                                 <option value="type=tf_tours"><?php _e( 'Tours', 'tourfic' ); ?></option>
+                                                <option value="type=tf_apartment"><?php _e( 'Apartment', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -1106,7 +1109,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                             <h3><?php echo __( 'Categories', 'tourfic' ) ?></h3>
 											<?php
 											//Dynamic Taxonomy dropdown list
-											tf_terms_dropdown( 'category', 'cats', 'tf-setting-field tf-select-field', true );
+											tf_terms_dropdown( 'category', 'cats', 'tf-setting-field tf-select-field tf-select-two', true );
 											?>
                                         </div>
                                     </div>
