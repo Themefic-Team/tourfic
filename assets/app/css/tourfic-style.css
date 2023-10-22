@@ -8252,6 +8252,9 @@ div#tf-contact-info {
   font-size: 12px;
   font-weight: 400;
 }
+.tf-search-results-list .tf-item-card .tf-item-details .tf-post-footer .tf-pricing del {
+  font-size: 20px;
+}
 .tf-search-results-list .tf-item-card .tf-item-details .tf-post-footer .tf-pricing span {
   font-size: 20px;
   color: #0E3DD8;

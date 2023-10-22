@@ -516,18 +516,18 @@
                     }
                     setRoomCheckInOut(startTime, endTime, self.roomCalData);
                     let priceBy = $(self.container).closest('.tf-single-repeater-room').find('.tf_room_pricing_by').val();
-                    if (priceBy === '1') {
-                        if (typeof event.extendedProps.price != 'undefined') {
-                            $("[name='tf_room_price']", self.roomCalData).val(event.extendedProps.price);
-                        }
-                    } else {
-                        if (typeof event.extendedProps.adult_price != 'undefined') {
-                            $("[name='tf_room_adult_price']", self.roomCalData).val(event.extendedProps.adult_price);
-                        }
-                        if (typeof event.extendedProps.child_price != 'undefined') {
-                            $("[name='tf_room_child_price']", self.roomCalData).val(event.extendedProps.child_price);
-                        }
+                    //if (priceBy === '1') {
+                    if (typeof event.extendedProps.price != 'undefined') {
+                        $("[name='tf_room_price']", self.roomCalData).val(event.extendedProps.price);
                     }
+                    //} else {
+                    if (typeof event.extendedProps.adult_price != 'undefined') {
+                        $("[name='tf_room_adult_price']", self.roomCalData).val(event.extendedProps.adult_price);
+                    }
+                    if (typeof event.extendedProps.child_price != 'undefined') {
+                        $("[name='tf_room_child_price']", self.roomCalData).val(event.extendedProps.child_price);
+                    }
+                    //}
                     if (event.extendedProps.status) {
                         $("[name='tf_room_status'] option[value=" + event.extendedProps.status + "]", self.roomCalData).prop("selected", true);
                     }
@@ -641,14 +641,14 @@
                     btn.removeClass('tf-btn-loading');
                 },
                 complete: function () {
-                    container.css({ 'pointer-events': 'auto', 'opacity': '1' });
+                    container.css({'pointer-events': 'auto', 'opacity': '1'});
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
             });
         });
 
-        $(document).on('change', '.tf_room_pricing_by', function (e) {
+        /*$(document).on('change', '.tf_room_pricing_by', function (e) {
             let room = $(this).closest('.tf-single-repeater-room');
             let pricing_by = $(this).val();
 
@@ -658,6 +658,20 @@
             } else if (pricing_by === '2') {
                 room.find('.tf-price-by-person').show();
                 room.find('.tf-price-by-room').hide();
+            }
+        });*/
+
+        // Switcher Value Changed
+        $(document).on("change", ".tf-switch", function (e) {
+            var $this = $(this);
+            if (this.checked) {
+                var value = $this.val(1);
+            } else {
+                var value = $this.val('');
+            }
+
+            if ($this.hasClass('tf_room_availability_by_date')) {
+                tfHotelCalendar();
             }
         });
 
@@ -1435,18 +1449,6 @@ var frame, gframe;
         // Texonomy submit event
         $('#addtag > .submit #submit').click(function () {
             $(".tf-fieldset-media-preview").html("");
-        });
-
-        // Switcher Value Changed
-        $(document).on("change", ".tf-switch", function (e) {
-            var $this = $(this);
-            if (this.checked) {
-                var $this = $(this);
-                var value = $this.val(1);
-            } else {
-                var $this = $(this);
-                var value = $this.val('');
-            }
         });
 
         if (tf_options.gmaps != "googlemap") {

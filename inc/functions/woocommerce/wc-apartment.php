@@ -28,7 +28,11 @@ function tf_apartment_booking_callback() {
 	$max_adults      = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
 	$max_children    = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
 	$max_infants     = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
+	$pricing_type    = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
 	$price_per_night = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
+	$adult_price     = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
+	$child_price     = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
+	$infant_price    = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
 	$discount_type   = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 	$discount        = ! empty( $meta['discount'] ) ? $meta['discount'] : 0;
 
@@ -97,9 +101,13 @@ function tf_apartment_booking_callback() {
 		// Calculate price
 		$total_price = 0;
 		if ( $days > 0 ) {
-			$total_price = $price_per_night * $days;
+			if ( $pricing_type == 'per_night' ) {
+				$total_price = $price_per_night * $days;
+			} else {
+				$total_price = ( ( $adult_price * $adults ) + ( $child_price * $children ) + ( $infant_price * $infant ) ) * $days;
+			}
 
-			if ( defined( 'TF_PRO' ) ) {
+			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 				foreach ( $additional_fees as $key => $item ) {
 					if ( $item['fee_type'] == 'per_night' ) {
 						$total_price += $item['additional_fee'] * $days;
@@ -125,7 +133,8 @@ function tf_apartment_booking_callback() {
 				$total_price = $total_price - $discount;
 			}
 
-			$tf_apartment_data['tf_apartment_data']['total_price'] = $total_price;
+			$tf_apartment_data['tf_apartment_data']['pricing_type'] = $pricing_type;
+			$tf_apartment_data['tf_apartment_data']['total_price']  = $total_price;
 		}
 
 		if ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) ) {

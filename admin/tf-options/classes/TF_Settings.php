@@ -836,8 +836,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			}
 
 			if ( ! empty( $tf_option_value ) ) {
-//                tf_var_dump($tf_option_value);
-//                die();
 				update_option( $this->option_id, $tf_option_value );
 			} else {
 				delete_option( $this->option_id );

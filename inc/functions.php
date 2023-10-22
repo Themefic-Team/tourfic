@@ -935,8 +935,8 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
     <script>
         (function ($) {
             $(document).ready(function () {
-
-                $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
+				$(document).on("focus",".tf-hotel-side-booking #check-in-out-date", function(e) {
+					let calander = flatpickr( this, {
                     enableTime: false,
                     minDate: "today",
                     mode: "range",
@@ -949,6 +949,9 @@ function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_n
                     },
                 });
 
+				// open flatpickr on focus
+				calander.open();
+				})
             });
         })(jQuery);
     </script>

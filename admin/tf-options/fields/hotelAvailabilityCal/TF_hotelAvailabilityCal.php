@@ -31,27 +31,33 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
                 <div class='tf-room-cal'></div>
                 <div class="tf-room-cal-field" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
 
-                    <div class="tf-field-text" style="width: calc(50% - 5px)">
+                    <div class="tf-field-date" style="width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Check In', 'tourfic' ); ?></label>
-                        <input readonly="readonly" type="text" class="tf_room_check_in" name="tf_room_check_in" placeholder="<?php echo __( 'Check In', 'tourfic' ); ?>">
+                        <div class="tf-fieldset" style="margin-top: 0;">
+                            <input readonly="readonly" type="text" class="tf_room_check_in" name="tf_room_check_in" placeholder="<?php echo __( 'Check In', 'tourfic' ); ?>">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
                     </div>
 
-                    <div class="tf-field-text" style="width: calc(50% - 5px)">
+                    <div class="tf-field-date" style="width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Check Out', 'tourfic' ); ?></label>
-                        <input readonly="readonly" type="text" class="tf_room_check_out" name="tf_room_check_out" placeholder="<?php echo __( 'Check Out', 'tourfic' ); ?>">
+                        <div class="tf-fieldset" style="margin-top: 0;">
+                            <input readonly="readonly" type="text" class="tf_room_check_out" name="tf_room_check_out" placeholder="<?php echo __( 'Check Out', 'tourfic' ); ?>">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
                     </div>
 
-                    <div class="tf-field-text tf-price-by-room" style="display: <?php echo $pricing_by == '1' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
+                    <div class="tf-field-text tf-price-by-room" style="width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Price', 'tourfic' ); ?></label>
                         <input type="number" min="0" name="tf_room_price" placeholder="<?php echo __( 'Price', 'tourfic' ); ?>">
                     </div>
 
-                    <div class="tf-field-text tf-price-by-person" style="display: <?php echo $pricing_by == '2' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
+                    <div class="tf-field-text tf-price-by-person" style="width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Adult Price', 'tourfic' ); ?></label>
                         <input type="number" min="0" name="tf_room_adult_price" placeholder="<?php echo __( 'Adult Price', 'tourfic' ); ?>">
                     </div>
 
-                    <div class="tf-field-text tf-price-by-person" style="display: <?php echo $pricing_by == '2' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
+                    <div class="tf-field-text tf-price-by-person" style="width: calc(50% - 5px)">
                         <label class="tf-field-label"><?php echo __( 'Child Price', 'tourfic' ); ?></label>
                         <input type="number" min="0" name="tf_room_child_price" placeholder="<?php echo __( 'Child Price', 'tourfic' ); ?>">
                     </div>
@@ -68,7 +74,7 @@ if ( ! class_exists( 'TF_hotelAvailabilityCal' ) ) {
                         <input type="hidden" name="new_post" value="<?php echo $this->value ? 'false' : 'true'; ?>">
                         <input type="hidden" name="hotel_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
                         <input type="hidden" name="room_index" value="<?php echo esc_attr( $room_index ); ?>">
-                        <span class="tf_room_cal_update button button-primary button-large"><?php echo __( 'Update', 'tourfic' ); ?></span>
+                        <span class="tf_room_cal_update button button-primary button-large"><?php echo __( 'Save Calendar', 'tourfic' ); ?></span>
                     </div>
 
                 </div>
