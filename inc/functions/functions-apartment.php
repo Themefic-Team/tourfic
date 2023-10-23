@@ -271,19 +271,11 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 		if ( isset( $_GET ) ) {
 			$_GET = array_map( 'stripslashes_deep', $_GET );
 		}
-		// location
-		$location = ! empty( $_GET['place'] ) ? sanitize_text_field( $_GET['place'] ) : '';
-		// Adults
-		$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
-		// children
-		$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
-		// room
-		$room = ! empty( $_GET['room'] ) ? sanitize_text_field( $_GET['room'] ) : '';
 		// Check-in & out date
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
 
-		// date format for appartments
-		$date_format_change_appartments = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+		// date format for apartments
+		$date_format_change_apartments = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 		?>
         <form class="tf_booking-widget <?php esc_attr_e( $classes ); ?>" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo tf_booking_search_action(); ?>">
@@ -431,7 +423,7 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
                         mode: "range",
                         dateFormat: "Y/m/d",
                         altInput: true,
-                        altFormat: '<?php echo $date_format_change_appartments; ?>',
+                        altFormat: '<?php echo $date_format_change_apartments; ?>',
                         minDate: "today",
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
@@ -458,22 +450,24 @@ if ( ! function_exists( 'tf_apartment_search_form_horizontal' ) ) {
 if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 	function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
 
-		$meta            = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
-		$min_stay        = ! empty( $meta['min_stay'] ) ? $meta['min_stay'] : 1;
-		$max_adults      = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
-		$max_children    = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
-		$max_infants     = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
-		$pricing_type    = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
-		$price_per_night = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
-		$adult_price     = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
-		$child_price     = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
-		$infant_price    = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
-		$discount_type   = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
-		$discount        = ! empty( $meta['discount'] ) ? $meta['discount'] : 0;
-		$booked_dates    = tf_apartment_booked_days( get_the_ID() );
+		$meta                = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+		$min_stay            = ! empty( $meta['min_stay'] ) ? $meta['min_stay'] : 1;
+		$max_adults          = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
+		$max_children        = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
+		$max_infants         = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
+		$pricing_type        = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
+		$price_per_night     = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
+		$adult_price         = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
+		$child_price         = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
+		$infant_price        = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
+		$discount_type       = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+		$discount            = ! empty( $meta['discount'] ) ? $meta['discount'] : 0;
+		$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
+		$apt_availability    = ! empty( $meta['apt_availability'] ) ? $meta['apt_availability'] : '';
+		$booked_dates        = tf_apartment_booked_days( get_the_ID() );
 
 		// date format for apartment
-		$date_format_change_appartments = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+		$date_format_change_apartments = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 			$additional_fees = ! empty( $meta['additional_fees'] ) ? $meta['additional_fees'] : array();
@@ -487,6 +481,19 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 		$child        = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
 		$infant       = ! empty( $_GET['infant'] ) ? sanitize_text_field( $_GET['infant'] ) : '';
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? $_GET['check-in-out-date'] : '';
+
+		$apt_disable_dates = [];
+		if ( $enable_availability === '1' && ! empty( $apt_availability ) ) {
+			$apt_availability_arr = json_decode( $apt_availability, true );
+			//iterate all the available disabled dates
+			if ( ! empty( $apt_availability_arr ) && is_array( $apt_availability_arr ) ) {
+				foreach ( $apt_availability_arr as $date ) {
+					if ( $date['status'] === 'unavailable' ) {
+						$apt_disable_dates[] = $date['check_in'];
+					}
+				}
+			}
+		}
 		?>
 
         <!-- Start Booking widget -->
@@ -630,28 +637,65 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 var adult_price = <?php echo $adult_price; ?>;
                                 var child_price = <?php echo $child_price; ?>;
                                 var infant_price = <?php echo $infant_price; ?>;
+                                var enable_availability = '<?php echo $enable_availability; ?>';
+                                var apt_availability = '<?php echo $apt_availability; ?>';
+                                apt_availability = JSON.parse(apt_availability);
 
-                                if (pricing_type === 'per_night') {
-                                    var total_price = price_per_night * days;
-                                    var total_days_price_html = '<?php echo wc_price( 0 ); ?>';
-                                    var wc_price_per_night = '<?php echo wc_price( $price_per_night ); ?>';
-                                    if (total_price > 0) {
-                                        $('.total-days-price-wrap').show();
-                                        total_days_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
+                                if (enable_availability !== '1') {
+                                    if (pricing_type === 'per_night') {
+                                        var total_price = price_per_night * days;
+                                        var total_days_price_html = '<?php echo wc_price( 0 ); ?>';
+                                        var wc_price_per_night = '<?php echo wc_price( $price_per_night ); ?>';
+                                        if (total_price > 0) {
+                                            $('.total-days-price-wrap').show();
+                                            total_days_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
+                                        }
+                                        $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
+                                        $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
+                                    } else {
+                                        let totalPersonPrice = (adult_price * $('#adults').val()) + (child_price * $('#children').val()) + (infant_price * $('#infant').val());
+                                        var total_price = totalPersonPrice * days;
+                                        var total_days_price_html = '<?php echo wc_price( 0 ); ?>';
+                                        var wc_price_per_person = '<?php echo wc_price( 0 ); ?>'.replace('0.00', totalPersonPrice.toFixed(2));
+                                        if (total_price > 0) {
+                                            $('.total-days-price-wrap').show();
+                                            total_days_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
+                                        }
+                                        $('.total-days-price-wrap .total-days').html(wc_price_per_person + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
+                                        $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
                                     }
-                                    $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
-                                    $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
                                 } else {
-                                    let totalPersonPrice = (adult_price * $('#adults').val()) + (child_price * $('#children').val()) + (infant_price * $('#infant').val());
-                                    var total_price = totalPersonPrice * days;
-                                    var total_days_price_html = '<?php echo wc_price( 0 ); ?>';
-                                    var wc_price_per_person = '<?php echo wc_price( 0 ); ?>'.replace('0.00', totalPersonPrice.toFixed(2));
+                                    var total_price = 0;
+                                    var total_price_html = '<?php echo wc_price( 0 ); ?>';
+                                    var checkInDate = new Date(selectedDates[0]);
+                                    var checkOutDate = new Date(selectedDates[1]);
+
+                                    for (var date in apt_availability) {
+                                        let d = new Date(date);
+
+                                        if (d.getTime() >= checkInDate.getTime() && d.getTime() <= checkOutDate.getTime()) {
+
+                                            if (d.getTime() !== checkInDate.getTime()) {
+                                                var availabilityData = apt_availability[date];
+                                                var pricing_type = availabilityData.pricing_type;
+                                                var price = parseFloat(availabilityData.price);
+
+                                                if (pricing_type === 'per_night' && price > 0) {
+                                                    total_price += price;
+                                                } else if (pricing_type === 'per_person') {
+                                                    var totalPersonPrice = (parseFloat(availabilityData.adult_price) * $('#adults').val()) + (parseFloat(availabilityData.child_price) * $('#children').val()) + (parseFloat(availabilityData.infant_price) * $('#infant').val());
+                                                    total_price += totalPersonPrice;
+                                                }
+                                            }
+                                        }
+                                    }
+
                                     if (total_price > 0) {
                                         $('.total-days-price-wrap').show();
-                                        total_days_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
+                                        total_price_html = '<?php echo wc_price( 0 ); ?>'.replace('0.00', total_price.toFixed(2));
                                     }
-                                    $('.total-days-price-wrap .total-days').html(wc_price_per_person + ' x ' + days + ' <?php _e( 'nights', 'tourfic' ); ?>');
-                                    $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
+                                    $('.total-days-price-wrap .total-days').html(days + ' <?php _e( 'nights', 'tourfic' ); ?>');
+                                    $('.total-days-price-wrap .days-total-price').html(total_price_html);
                                 }
 
                                 let totalPerson = parseInt($('.tf_acrselection #adults').val()) + parseInt($('.tf_acrselection #children').val()) + parseInt($('.tf_acrselection #infant').val());
@@ -700,6 +744,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                                 $('.additional-fee-wrap .additional-fee').html(additional_fee_html);
 								<?php endif; ?>
 								<?php endif; ?>
+                                //end additional fee
 
                                 //discount
                                 var discount = <?php echo $discount; ?>;
@@ -716,6 +761,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
 									<?php endif; ?>
                                 }
                                 $('.apartment-discount-wrap .apartment-discount').html('-' + discount_html);
+                                //end discount
 
                                 //total price
                                 var total_price_html = '<?php echo wc_price( 0 ); ?>';
@@ -736,6 +782,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         if (selectedDates[0] && selectedDates[1] && minStay > 0) {
                             var diff = Math.abs(selectedDates[1] - selectedDates[0]);
                             var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
                             if (days < minStay) {
                                 $('.tf-submit').attr('disabled', 'disabled');
                                 $('.tf-submit').addClass('disabled');
@@ -754,7 +801,7 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                         mode: "range",
                         minDate: "today",
                         altInput: true,
-                        altFormat: '<?php echo $date_format_change_appartments; ?>',
+                        altFormat: '<?php echo $date_format_change_apartments; ?>',
                         dateFormat: "Y/m/d",
                         defaultDate: <?php echo json_encode( explode( '-', $check_in_out ) ) ?>,
                         onReady: function (selectedDates, dateStr, instance) {
@@ -772,6 +819,12 @@ if ( ! function_exists( 'tf_apartment_single_booking_form' ) ) {
                             {
                                 from: "<?php echo $booked_date['check_in']; ?>",
                                 to: "<?php echo $booked_date['check_out']; ?>"
+                            },
+							<?php endforeach; ?>
+							<?php foreach ( $apt_disable_dates as $apt_disable_date ) : ?>
+                            {
+                                from: "<?php echo $apt_disable_date; ?>",
+                                to: "<?php echo $apt_disable_date; ?>"
                             },
 							<?php endforeach; ?>
                         ],
@@ -1363,10 +1416,24 @@ if ( ! function_exists( 'get_apartment_min_max_price' ) ) {
 		if ( $apartment_query->have_posts() ) {
 			while ( $apartment_query->have_posts() ) {
 				$apartment_query->the_post();
-				$meta         = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
-				$pricing_type = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
-				$adult_price  = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
-				if ( ! empty( $meta ) ) {
+				$meta                = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+				$pricing_type        = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
+				$adult_price         = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
+				$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
+				if ( $enable_availability === '1' ) {
+					$apt_availability = ! empty( $meta['apt_availability'] ) ? json_decode( $meta['apt_availability'], true ) : [];
+
+					if ( ! empty( $apt_availability ) && is_array( $apt_availability ) ) {
+						foreach ( $apt_availability as $single_avail ) {
+							if ( $pricing_type === 'per_night' ) {
+								$min_max_price[] = ! empty( $single_avail['price'] ) ? intval( $single_avail['price'] ) : 0;
+							} else {
+								$min_max_price[] = ! empty( $single_avail['adult_price'] ) ? intval( $single_avail['adult_price'] ) : 0;
+							}
+						}
+					}
+
+				} else {
 					$min_max_price[] = $pricing_type === 'per_night' && ! empty( $meta['price_per_night'] ) ? intval( $meta['price_per_night'] ) : intval( $adult_price );
 				}
 			}

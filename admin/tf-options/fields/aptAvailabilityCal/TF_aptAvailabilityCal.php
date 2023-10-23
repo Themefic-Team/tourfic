@@ -63,7 +63,7 @@ if ( ! class_exists( 'TF_aptAvailabilityCal' ) ) {
                     <div style="width: 100%">
                         <input type="hidden" name="new_post" value="<?php echo $this->value ? 'false' : 'true'; ?>">
                         <input type="hidden" name="apartment_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
-                        <span class="tf_apt_cal_update button button-primary button-large"><?php echo __( 'Update', 'tourfic' ); ?></span>
+                        <span class="tf_apt_cal_update button button-primary button-large"><?php echo __( 'Save Calendar', 'tourfic' ); ?></span>
                     </div>
 
                 </div>

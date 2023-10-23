@@ -346,6 +346,7 @@ if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 	function tf_add_apartment_availability() {
 		$date_format         = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$apartment_id        = isset( $_POST['apartment_id'] ) && ! empty( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
+		$new_post            = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? $_POST['new_post'] : '';
 		$check_in            = isset( $_POST['tf_apt_check_in'] ) && ! empty( $_POST['tf_apt_check_in'] ) ? sanitize_text_field( $_POST['tf_apt_check_in'] ) : '';
 		$check_out           = isset( $_POST['tf_apt_check_out'] ) && ! empty( $_POST['tf_apt_check_out'] ) ? sanitize_text_field( $_POST['tf_apt_check_out'] ) : '';
 		$status              = isset( $_POST['tf_apt_status'] ) && ! empty( $_POST['tf_apt_status'] ) ? sanitize_text_field( $_POST['tf_apt_status'] ) : '';
@@ -362,6 +363,12 @@ if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 				'message' => __( 'Please select check in and check out date.', 'tourfic' )
 			] );
 		}
+
+		if ( $date_format == 'Y.m.d' || $date_format == 'd.m.Y' ) {
+			$check_in  = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_in ) ) );
+			$check_out = date( "Y-m-d", strtotime( str_replace( ".", "-", $check_out ) ) );
+		}
+
 		$check_in  = strtotime( $check_in );
 		$check_out = strtotime( $check_out );
 		if ( $check_in > $check_out ) {
@@ -388,7 +395,7 @@ if ( ! function_exists( 'tf_add_apartment_availability' ) ) {
 		}
 
 		$apartment_data = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
-		if ( ! empty( $apartment_data ) ) {
+		if ( $new_post != 'true' ) {
 			$apt_availability = json_decode( $apartment_data['apt_availability'], true );
 			if ( isset( $apt_availability ) && ! empty( $apt_availability ) ) {
 				$apt_availability_data = array_merge( $apt_availability, $apt_availability_data );
