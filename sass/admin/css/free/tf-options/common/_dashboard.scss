@@ -908,6 +908,20 @@
                     height: auto;
                 }
 
+                span.select2-container {
+                    width: 100% !important;
+
+                    span.select2-selection {
+                        height: 42px;
+                    }
+                }
+
+                .select2-search__field {
+                    // padding-top: 5px;
+                    margin: 10px;
+                    font-size: 14px;
+                }
+
                 .tf-setting-field {
                     width: 100%;
                     box-shadow: none;

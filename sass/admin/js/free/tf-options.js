@@ -431,12 +431,9 @@
             tfSelect2Int($this);
         });
 
-        $('select.tf-shortcode-select2').each(function() {
-            var $this = $(this)
-            $this.on('click', function() {
-                console.log("clicking...")
-            })
-            tfSelect2Int($this)
+        $('select.tf-shortcode-select2').each(function(e) {
+            let $this = $(this);
+            tfSelect2Int($this);
         })
 
         /*

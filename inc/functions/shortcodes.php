@@ -1538,8 +1538,20 @@ function tf_apartments_grid_slider( $atts, $content = null ) {
 		'posts_per_page' => $count,
 	);
 
+	echo "<pre>";
+		print_r($atts);
+		echo "</pre>";
+
 	if ( ! empty( $locations ) ) {
-		$locations         = explode( ',', $locations );
+		if($locations === 'all') {
+			$locations = get_terms( 'apartment_location', array(
+				'hide_empty' => 0,
+				'fields' => 'ids'
+			) );
+		} else {
+			$locations = explode( ',', $locations );
+		}
+
 		$args['tax_query'] = array(
 			'relation' => 'AND',
 			array(
@@ -1549,12 +1561,13 @@ function tf_apartments_grid_slider( $atts, $content = null ) {
 			)
 		);
 	}
+
 	ob_start();
 
 	if ( $style == 'slider' ) {
 		$slider_activate = 'tf-slider-activated';
 	} else {
-		$slider_activate = 'tf-apartment-grid';
+		$slider_activate = 'tf-hotel-grid';
 	}
 	$apartment_loop = new WP_Query( $args );
 	?>
@@ -1643,8 +1656,8 @@ function tf_recent_apartment_shortcode( $atts, $content = null ) {
 	$args = array(
 		'post_type'      => 'tf_apartment',
 		'post_status'    => 'publish',
-		'orderby'        => 'date',
-		'order'          => 'DESC',
+		'orderby'        => !empty($atts['orderby']) ? $atts['orderby'] : 'date',
+		'order'          => !empty($atts["order"]) ? $atts["order"] : "DESC",
 		'posts_per_page' => $count,
 	);
 

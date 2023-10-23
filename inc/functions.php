@@ -1932,7 +1932,7 @@ function tf_month_chart_filter_callback() {
  * @since 2.9.4
  */
 if ( ! function_exists( 'tf_terms_dropdown' ) ) {
-	function tf_terms_dropdown( $term, $attribute, $class, $multiple = false ) {
+	function tf_terms_dropdown( $term, $attribute, $id, $class, $multiple = false ) {
 
 		//get the terms
 		$terms = get_terms( array(
@@ -1949,7 +1949,7 @@ if ( ! function_exists( 'tf_terms_dropdown' ) ) {
 		$select = '';
 		//output the select field
 		if ( ! empty( $terms ) && is_array( $terms ) ) {
-			$select .= '<select id="shortcode-select2" data-term="' . $attribute . '" name="' . $term . '" class="tf-select2 ' . $class . '" ' . $multiple . '>';
+			$select .= '<select data-placeholder=" Select from Dropdown" id="' . $id . '" data-term="' . $attribute . '" name="' . $term . '" class="tf-shortcode-select2 ' . $class . '" ' . $multiple . '>';
 			$select .= '<option value="\'all\'">' . __( 'All', 'tourfic' ) . '</option>';
 			foreach ( $terms as $term ) {
 				$select .= '<option value="' . $term->term_id . '">' . $term->name . '</option>';
