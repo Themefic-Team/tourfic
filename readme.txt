@@ -451,7 +451,7 @@ Yes, We provide full support on the WordPress.org forums. You can also post ques
 - Fixed: Partial payment popup label and description for tours.
 - Added: Global and custom settings option for Tour Itinerary Builder.
 - Added: The option to hide contact information for vendors’ front end and itinerary.
-- Added: Automatic location suggestions on the tour archive page.
+- Added: Automatic location suggestions on all Search Pages
 - Fixed: Selected related tour issues.
 - Revamped: Totel, tour, and apartment booking details.
 - Revamped: The hotel room availability repeater to a calendar(Pro).
